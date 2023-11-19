@@ -350,3 +350,5 @@ namespace cubos::core
                                         const void* value);
     };
 } // namespace cubos::core
+
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::Logger::Level);

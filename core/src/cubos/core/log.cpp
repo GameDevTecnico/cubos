@@ -5,8 +5,22 @@
 
 #include <cubos/core/data/ser/debug.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/traits/enum.hpp>
 
 using cubos::core::Logger;
+using cubos::core::reflection::EnumTrait;
+
+CUBOS_REFLECT_EXTERNAL_IMPL(Logger::Level)
+{
+    return Type::create("cubos::core::Logger::Level")
+        .with(EnumTrait{}
+                  .withVariant<Logger::Level::Trace>("Trace")
+                  .withVariant<Logger::Level::Debug>("Debug")
+                  .withVariant<Logger::Level::Info>("Info")
+                  .withVariant<Logger::Level::Warn>("Warn")
+                  .withVariant<Logger::Level::Error>("Error")
+                  .withVariant<Logger::Level::Critical>("Critical"));
+}
 
 namespace
 {
@@ -27,28 +41,16 @@ static State& state()
     return state;
 }
 
-/// @brief Returns a string representing the given log level.
-/// @param level Log level.
-/// @return String representation.
-static const char* levelString(Logger::Level level)
+/// @brief Converts the given string to lower case.
+/// @param string String.
+/// @return Lower case string.
+static std::string toLower(std::string string)
 {
-    switch (level)
+    for (auto& chr : string)
     {
-    case Logger::Level::Trace:
-        return "trace";
-    case Logger::Level::Debug:
-        return "debug";
-    case Logger::Level::Info:
-        return "info";
-    case Logger::Level::Warn:
-        return "warn";
-    case Logger::Level::Error:
-        return "error";
-    case Logger::Level::Critical:
-        return "critical";
-    default:
-        return "unknown";
+        chr = static_cast<char>(std::tolower(static_cast<int>(chr)));
     }
+    return string;
 }
 
 static constexpr const char* ColorResetCode = "\033[m";
@@ -150,7 +152,7 @@ void Logger::write(Level level, Location location, std::string message)
 
     // Print the message to stderr.
     memory::Stream::stdErr.printf("{}[{}] [{}] {}: {}{}\n", levelColor(level), timestamp.string(), location.string(),
-                                  levelString(level), message, ColorResetCode);
+                                  toLower(EnumTrait::toString(level)), message, ColorResetCode);
 
     // Store the log entry.
     state().entries.emplace_back(Entry{
