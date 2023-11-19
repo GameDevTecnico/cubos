@@ -36,3 +36,19 @@ void testStringConversion(std::initializer_list<std::pair<T, std::string>> corre
         CHECK_FALSE(trait.from(&result, string));
     }
 }
+
+/// @brief Checks if a type's StringConversionTrait works as expected for a const type.
+/// @tparam T Type.
+/// @param expected Expected string representations for each given value.
+template <typename T>
+void testConstStringConversion(std::initializer_list<std::pair<T, std::string>> expected)
+{
+    const Type& type = reflect<T>();
+    REQUIRE(type.has<StringConversionTrait>());
+    const StringConversionTrait& trait = type.get<StringConversionTrait>();
+
+    for (const auto& [value, string] : expected)
+    {
+        CHECK(trait.into(&value) == string);
+    }
+}
