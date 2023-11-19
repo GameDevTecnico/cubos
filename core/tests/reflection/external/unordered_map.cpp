@@ -16,7 +16,7 @@ static void test(const char* name, std::unordered_map<K, V> map, K insertedKey, 
 
 TEST_CASE("reflection::reflect<std::unordered_map<K, V>>()")
 {
-    test<int32_t, int32_t>("std::unordered_map<int32_t, int32_t>", {{1, 2}, {2, 4}}, 3, 6);
+    test<int, int>("std::unordered_map<int, int>", {{1, 2}, {2, 4}}, 3, 6);
     test<char, std::unordered_map<char, bool>>("std::unordered_map<char, std::unordered_map<char, bool>>",
                                                {
                                                    {'H', {{'i', true}, {'o', false}}},

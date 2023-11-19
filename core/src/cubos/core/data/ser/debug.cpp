@@ -25,22 +25,27 @@ DebugSerializer::DebugSerializer(memory::Stream& stream)
     : mStream(stream)
 {
     AUTO_HOOK(bool, mStream.print(value ? "true" : "false"));
+
     AUTO_HOOK(char, {
         mStream.put('\'');
         mStream.put(value);
         mStream.put('\'');
     });
-    AUTO_HOOK(int8_t, mStream.print(value));
-    AUTO_HOOK(int16_t, mStream.print(value));
-    AUTO_HOOK(int32_t, mStream.print(value));
-    AUTO_HOOK(int64_t, mStream.print(value));
-    AUTO_HOOK(uint8_t, mStream.print(value));
-    AUTO_HOOK(uint16_t, mStream.print(value));
-    AUTO_HOOK(uint32_t, mStream.print(value));
-    AUTO_HOOK(uint64_t, mStream.print(value));
+
+    AUTO_HOOK(signed char, mStream.print(value));
+    AUTO_HOOK(short, mStream.print(value));
+    AUTO_HOOK(int, mStream.print(value));
+    AUTO_HOOK(long, mStream.print(value));
+    AUTO_HOOK(long long, mStream.print(value));
+
+    AUTO_HOOK(unsigned char, mStream.print(value));
+    AUTO_HOOK(unsigned short, mStream.print(value));
+    AUTO_HOOK(unsigned int, mStream.print(value));
+    AUTO_HOOK(unsigned long, mStream.print(value));
+    AUTO_HOOK(unsigned long long, mStream.print(value));
+
     AUTO_HOOK(float, mStream.print(value));
     AUTO_HOOK(double, mStream.print(value));
-    AUTO_HOOK(std::string, mStream.printf("\"{}\"", value));
 }
 
 void DebugSerializer::pretty(bool pretty)
