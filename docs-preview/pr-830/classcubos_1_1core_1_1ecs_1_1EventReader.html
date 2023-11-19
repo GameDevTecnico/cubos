@@ -103,7 +103,7 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad88aae794edea0cc3067484ce03e3190" class="m-doc">read</a>(</span><span class="m-doc-wrap">) -&gt; std::optional&lt;std::reference_wrapper&lt;const T&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3486b263c3389c0dfb57b64c10874d3b" class="m-doc">read</a>(</span><span class="m-doc-wrap">) -&gt; const T*</span>
             </dt>
             <dd>Returns a reference to current event, and advances.</dd>
             <dt>
@@ -144,19 +144,19 @@
             </table>
 <p>Uses the given <code>index</code> to know which events it has already read. Increments it whenever it reads an event.</p>
           </div></section>
-          <section class="m-doc-details" id="ad88aae794edea0cc3067484ce03e3190"><div>
+          <section class="m-doc-details" id="a3486b263c3389c0dfb57b64c10874d3b"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, unsigned int M&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::optional&lt;std::reference_wrapper&lt;const T&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />EventReader&lt;T, M&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad88aae794edea0cc3067484ce03e3190" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">const T* cubos::<wbr />core::<wbr />ecs::<wbr />EventReader&lt;T, M&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3486b263c3389c0dfb57b64c10874d3b" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Returns a reference to current event, and advances.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Reference to current event, or <code>std::nullopt</code> if there are no more events.</td>
+                  <td>Pointer to current event, or null if there are no more events.</td>
                 </tr>
               </tfoot>
             </table>
