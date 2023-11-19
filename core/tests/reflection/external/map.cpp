@@ -16,7 +16,7 @@ static void test(const char* name, std::map<K, V> map, K insertedKey, V inserted
 
 TEST_CASE("reflection::reflect<std::map<K, V>>()")
 {
-    test<int32_t, int32_t>("std::map<int32_t, int32_t>", {{1, 2}, {2, 4}}, 3, 6);
+    test<int, int>("std::map<int, int>", {{1, 2}, {2, 4}}, 3, 6);
     test<char, std::map<char, bool>>("std::map<char, std::map<char, bool>>",
                                      {
                                          {'H', {{'i', true}, {'o', false}}},

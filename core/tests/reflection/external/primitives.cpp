@@ -15,15 +15,21 @@ static void test(const char* name, T value)
 TEST_CASE("reflection::reflect<(primitives)>()")
 {
     test<bool>("bool", true);
+
     test<char>("char", 'A');
-    test<int8_t>("int8_t", INT8_MAX);
-    test<int16_t>("int16_t", INT16_MIN);
-    test<int32_t>("int32_t", INT32_MAX);
-    test<int64_t>("int64_t", INT64_MIN);
-    test<uint8_t>("uint8_t", UINT8_MAX);
-    test<uint16_t>("uint16_t", UINT16_MAX);
-    test<uint32_t>("uint32_t", UINT32_MAX);
-    test<uint64_t>("uint64_t", UINT64_MAX);
+
+    test<signed char>("signed char", INT8_MAX);
+    test<short>("short", INT16_MIN);
+    test<int>("int", INT16_MAX);
+    test<long>("long", INT32_MIN);
+    test<long long>("long long", INT64_MAX);
+
+    test<unsigned char>("unsigned char", UINT8_MAX);
+    test<unsigned short>("unsigned short", UINT16_MAX);
+    test<unsigned int>("unsigned int", UINT16_MAX);
+    test<unsigned long>("unsigned long", UINT32_MAX);
+    test<unsigned long long>("unsigned long long", UINT64_MAX);
+
     test<float>("float", 3.14159F);
     test<double>("double", 0.123456789);
 }

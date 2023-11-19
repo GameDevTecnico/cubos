@@ -2,21 +2,27 @@
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
 
-#define AUTO_IMPL(type, name)                                                                                          \
+#define AUTO_IMPL(type)                                                                                                \
     CUBOS_REFLECT_EXTERNAL_IMPL(type)                                                                                  \
     {                                                                                                                  \
-        return Type::create(name).with(ConstructibleTrait::typed<type>().withBasicConstructors().build());             \
+        return Type::create(#type).with(ConstructibleTrait::typed<type>().withBasicConstructors().build());            \
     }
 
-AUTO_IMPL(bool, "bool")
-AUTO_IMPL(char, "char")
-AUTO_IMPL(int8_t, "int8_t")
-AUTO_IMPL(int16_t, "int16_t")
-AUTO_IMPL(int32_t, "int32_t")
-AUTO_IMPL(int64_t, "int64_t")
-AUTO_IMPL(uint8_t, "uint8_t")
-AUTO_IMPL(uint16_t, "uint16_t")
-AUTO_IMPL(uint32_t, "uint32_t")
-AUTO_IMPL(uint64_t, "uint64_t")
-AUTO_IMPL(float, "float")
-AUTO_IMPL(double, "double")
+AUTO_IMPL(bool)
+
+AUTO_IMPL(char)
+
+AUTO_IMPL(signed char)
+AUTO_IMPL(short)
+AUTO_IMPL(int)
+AUTO_IMPL(long)
+AUTO_IMPL(long long)
+
+AUTO_IMPL(unsigned char)
+AUTO_IMPL(unsigned short)
+AUTO_IMPL(unsigned int)
+AUTO_IMPL(unsigned long)
+AUTO_IMPL(unsigned long long)
+
+AUTO_IMPL(float)
+AUTO_IMPL(double)

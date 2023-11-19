@@ -16,7 +16,7 @@ static void test(const char* name, std::vector<T> vec, T inserted)
 
 TEST_CASE("reflection::reflect<std::vector<T>>()")
 {
-    test<int32_t>("std::vector<int32_t>", {5, 4, 1}, 1);
+    test<int>("std::vector<int>", {5, 4, 1}, 1);
     test<std::vector<std::vector<char>>>("std::vector<std::vector<std::vector<char>>>", {{{'H'}, {'e'}}, {{'y', '!'}}},
                                          {{'o'}});
 }

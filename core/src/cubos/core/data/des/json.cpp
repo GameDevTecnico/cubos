@@ -71,17 +71,21 @@ JSONDeserializer::JSONDeserializer()
 
         throw std::invalid_argument{s};
     });
-    AUTO_HOOK(int8_t, std::stol);
-    AUTO_HOOK(int16_t, std::stol);
-    AUTO_HOOK(int32_t, std::stol);
-    AUTO_HOOK(int64_t, std::stoll);
-    AUTO_HOOK(uint8_t, std::stoul);
-    AUTO_HOOK(uint16_t, std::stoul);
-    AUTO_HOOK(uint32_t, std::stoul);
-    AUTO_HOOK(uint64_t, std::stoull);
-    AUTO_HOOK(float, std::stoull);
-    AUTO_HOOK(double, std::stoull);
-    AUTO_HOOK(std::string, [](const std::string& s) { return s; });
+
+    AUTO_HOOK(signed char, std::stol);
+    AUTO_HOOK(short, std::stol);
+    AUTO_HOOK(int, std::stol);
+    AUTO_HOOK(long, std::stol);
+    AUTO_HOOK(long long, std::stoll);
+
+    AUTO_HOOK(unsigned char, std::stoul);
+    AUTO_HOOK(unsigned short, std::stoul);
+    AUTO_HOOK(unsigned int, std::stoul);
+    AUTO_HOOK(unsigned long, std::stoul);
+    AUTO_HOOK(unsigned long long, std::stoull);
+
+    AUTO_HOOK(float, std::stof);
+    AUTO_HOOK(double, std::stod);
 }
 
 void JSONDeserializer::feed(nlohmann::json json)
