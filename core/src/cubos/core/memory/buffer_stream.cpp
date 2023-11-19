@@ -88,6 +88,11 @@ const void* BufferStream::getBuffer() const
     return mBuffer;
 }
 
+std::string BufferStream::string() const
+{
+    return std::string{static_cast<const char*>(mBuffer), mPosition};
+}
+
 std::size_t BufferStream::read(void* data, std::size_t size)
 {
     std::size_t bytesRemaining = mSize - mPosition;
