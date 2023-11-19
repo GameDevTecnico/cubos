@@ -51,7 +51,7 @@
         <p>Exposing an enumeration with variants.</p>
 <p><a name="md_reflection_traits_enum_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/reflection/traits/enum">here</a>.</p></aside><p>In this example, we&#x27;ll explore how to expose an enumeration along with its variants using <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait</a>.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
 
-<span class="k">enum</span><span class="w"> </span><span class="nc">Color</span>
+<span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Color</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">Red</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Green</span><span class="p">,</span>
@@ -80,8 +80,7 @@
 <span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&quot;Blue&quot;</span><span class="p">));</span>
 <span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="o">!</span><span class="n">variants</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&quot;White&quot;</span><span class="p">));</span>
 
-<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Red</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Red</span><span class="p">;</span>
 <span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;Red&quot;</span><span class="p">).</span><span class="n">test</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">));</span>
 
 <span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Green</span><span class="p">;</span>
