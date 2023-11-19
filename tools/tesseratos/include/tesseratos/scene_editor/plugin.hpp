@@ -22,6 +22,7 @@ namespace tesseratos
     /// - @ref scene-plugin
     /// - @ref tesseratos-asset-explorer-plugin
     /// - @ref tesseratos-entity-selector-plugin
+    /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
