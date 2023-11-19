@@ -3,6 +3,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/system/dispatcher.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include "utils.hpp"
 

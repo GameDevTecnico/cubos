@@ -1,6 +1,8 @@
 #include <unordered_map>
 
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/glm.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -21,9 +23,8 @@ VoxelGrid::VoxelGrid(const glm::uvec3& size)
 {
     if (size.x < 1 || size.y < 1 || size.z < 1)
     {
-        CUBOS_WARN("Grid size must be at least 1 in each dimension: was ({}, {}, {}), defaulting to (1, 1, 1).", size.x,
-                   size.y, size.z);
         mSize = {1, 1, 1};
+        CUBOS_WARN("Grid size must be at least 1 in each dimension: was {}, defaulting to {}", size, mSize);
     }
     else
     {
@@ -38,15 +39,13 @@ VoxelGrid::VoxelGrid(const glm::uvec3& size, const std::vector<uint16_t>& indice
 {
     if (size.x < 1 || size.y < 1 || size.z < 1)
     {
-        CUBOS_WARN("Grid size must be at least 1 in each dimension: was ({}, {}, {}), defaulting to (1, 1, 1).", size.x,
-                   size.y, size.z);
         mSize = {1, 1, 1};
+        CUBOS_WARN("Grid size must be at least 1 in each dimension: was {}, defaulting to {}", size, mSize);
     }
     else if (indices.size() !=
              static_cast<std::size_t>(size.x) * static_cast<std::size_t>(size.y) * static_cast<std::size_t>(size.z))
     {
-        CUBOS_WARN("Grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.", size.x, size.y, size.z,
-                   indices.size());
+        CUBOS_WARN("Grid size and indices size mismatch: was {}, indices size is {}", size, indices.size());
         mSize = {1, 1, 1};
     }
     else
@@ -170,8 +169,8 @@ void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelGrid& 
 
     if (grid.mSize.x * grid.mSize.y * grid.mSize.z != static_cast<unsigned int>(grid.mIndices.size()))
     {
-        CUBOS_WARN("Grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.", grid.mSize.x,
-                   grid.mSize.y, grid.mSize.z, grid.mIndices.size());
+        CUBOS_WARN("Grid size and indices size mismatch: was {}, indices size is {}.", grid.mSize,
+                   grid.mIndices.size());
         grid.mSize = {1, 1, 1};
         grid.mIndices.clear();
         grid.mIndices.resize(1, 0);

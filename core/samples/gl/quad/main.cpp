@@ -10,7 +10,6 @@ using namespace cubos::core;
 
 int main()
 {
-    initializeLogger();
     auto window = io::openWindow();
     auto& renderDevice = window->renderDevice();
 

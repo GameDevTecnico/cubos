@@ -12,6 +12,8 @@
 #include <cubos/core/ecs/entity/manager.hpp>
 #include <cubos/core/ecs/resource/manager.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/external/string_view.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 namespace cubos::core::ecs

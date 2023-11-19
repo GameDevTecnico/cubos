@@ -1,5 +1,6 @@
 #include <cubos/core/data/ser/serializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::data::Serializer;

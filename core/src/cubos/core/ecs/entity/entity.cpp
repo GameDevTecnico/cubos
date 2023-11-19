@@ -4,6 +4,7 @@
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>

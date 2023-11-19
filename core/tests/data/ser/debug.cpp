@@ -70,7 +70,7 @@ TEST_CASE("data::DebugSerializer")
     AUTO_TEST(double, 1.F, "1.0000", true);
     AUTO_TEST(std::string, "Hello, world!", "\"Hello, world!\"", true);
     AUTO_TEST(uuids::uuid, *uuids::uuid::from_string("f7063cd4-de44-47b5-b0a9-f0e7a558c9e5"),
-              "f7063cd4-de44-47b5-b0a9-f0e7a558c9e5", true);
+              "\"f7063cd4-de44-47b5-b0a9-f0e7a558c9e5\"", true);
 
     std::map<std::string, bool> map{{"false", false}, {"true", true}};
     AUTO_TEST_SPLIT(decltype(map), map, "{\"false\": false, \"true\": true}",

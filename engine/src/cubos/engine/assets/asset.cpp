@@ -1,6 +1,8 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/external/string_view.hpp>
 #include <cubos/core/reflection/external/uuid.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>

@@ -3,6 +3,7 @@
 #include <cubos/core/data/fs/archive.hpp>
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string_view.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::data;

@@ -9,8 +9,6 @@ using namespace cubos::core::memory;
 
 int main()
 {
-    cubos::core::initializeLogger();
-
     struct MyEvent
     {
         enum Mask
@@ -40,8 +38,8 @@ int main()
     while (true)
     {
         auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MouseEvent>(pipe, index);
-        auto it = mouseReader.read();
-        if (it == std::nullopt)
+        const auto* it = mouseReader.read();
+        if (it == nullptr)
         {
             break;
         }
@@ -53,8 +51,8 @@ int main()
     index = 0;
     auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MouseEvent>(pipe, index);
     Stream::stdOut.printf("\n\n### mouse events:");
-    auto x = mouseReader.read(); // already read one event, the loop will only loop once
-    Stream::stdOut.printf("{} , ", x->get().data);
+    const auto* x = mouseReader.read(); // already read one event, the loop will only loop once
+    Stream::stdOut.printf("{} , ", x->data);
     for (const auto& it : mouseReader)
     {
         Stream::stdOut.printf(" {} , ", it.data); // 6

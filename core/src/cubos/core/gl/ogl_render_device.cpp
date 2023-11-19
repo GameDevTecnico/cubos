@@ -3,10 +3,13 @@
 #include <list>
 #include <string>
 #include <utility>
+#include <vector>
 
 #include <glad/gl.h>
 
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include "ogl_render_device.hpp"
 
@@ -1697,7 +1700,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        CUBOS_ERROR("Unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
         return nullptr;
     }
 
@@ -1738,7 +1741,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        CUBOS_ERROR("Unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
         return nullptr;
     }
 
@@ -1782,7 +1785,7 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        CUBOS_ERROR("Unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
         return nullptr;
     }
 
@@ -1841,7 +1844,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        CUBOS_ERROR("Unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
         return nullptr;
     }
 
@@ -1885,7 +1888,7 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        CUBOS_ERROR("Unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
         return nullptr;
     }
 
@@ -1943,7 +1946,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        CUBOS_ERROR("Unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
         return nullptr;
     }
 

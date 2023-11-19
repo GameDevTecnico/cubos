@@ -2,6 +2,7 @@
 
 #include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/input/axis.hpp>
 

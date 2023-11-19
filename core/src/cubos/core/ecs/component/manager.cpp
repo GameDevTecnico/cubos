@@ -1,5 +1,7 @@
 #include <cubos/core/ecs/component/manager.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using namespace cubos::core;

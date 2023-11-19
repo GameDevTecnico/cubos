@@ -1,4 +1,7 @@
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 #include <cubos/engine/input/input.hpp>
 

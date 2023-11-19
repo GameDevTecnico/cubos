@@ -1,7 +1,11 @@
+#include <cstring>
+
 #include <cubos/core/data/fs/file_stream.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/standard_stream.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 using cubos::core::data::StandardArchive;
 using cubos::core::memory::Stream;

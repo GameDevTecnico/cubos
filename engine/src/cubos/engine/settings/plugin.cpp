@@ -1,6 +1,7 @@
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
 #include <cubos/core/data/old/json_deserializer.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 #include <cubos/engine/settings/plugin.hpp>
 

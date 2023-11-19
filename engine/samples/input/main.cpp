@@ -1,11 +1,10 @@
-#include <cubos/core/data/old/debug_serializer.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/input/bindings.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 
-using cubos::core::data::old::Debug;
 using cubos::core::io::Window;
 
 using namespace cubos::engine;
@@ -214,7 +213,7 @@ static void init(Read<Assets> assets, Write<Input> input)
 {
     auto bindings = assets->read<InputBindings>(BindingsAsset);
     input->bind(*bindings);
-    CUBOS_INFO("Loaded bindings: {}", Debug(input->bindings().at(0)));
+    CUBOS_INFO("Loaded bindings: {}", input->bindings().at(0));
 }
 /// [Loading the bindings]
 

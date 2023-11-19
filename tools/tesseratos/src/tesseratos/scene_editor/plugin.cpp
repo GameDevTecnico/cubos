@@ -4,8 +4,8 @@
 #include <imgui.h>
 #include <misc/cpp/imgui_stdlib.h>
 
-#include <cubos/core/data/old/debug_serializer.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -16,8 +16,6 @@
 #include <tesseratos/asset_explorer/plugin.hpp>
 #include <tesseratos/entity_selector/plugin.hpp>
 #include <tesseratos/scene_editor/plugin.hpp>
-
-using cubos::core::data::old::Debug;
 
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
@@ -100,7 +98,7 @@ static void checkAssetEventSystem(cubos::core::ecs::EventReader<AssetSelectedEve
     {
         if (assets->type(event.asset).is<Scene>())
         {
-            CUBOS_INFO("Opening scene {}", Debug(event.asset));
+            CUBOS_INFO("Opening scene {}", event.asset);
             openScene(event.asset, commands, *assets, *scene);
         }
     }

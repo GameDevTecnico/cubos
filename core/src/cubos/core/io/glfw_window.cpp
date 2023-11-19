@@ -3,6 +3,8 @@
 #include <glad/gl.h>
 
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include "../gl/ogl_render_device.hpp"
 

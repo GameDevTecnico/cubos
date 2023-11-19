@@ -2,6 +2,7 @@
 
 #include <cubos/core/ecs/system/commands.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 #include <cubos/engine/cubos.hpp>
 
@@ -119,8 +120,6 @@ Cubos::Cubos()
 Cubos::Cubos(int argc, char** argv)
 {
     std::vector<std::string> arguments(argv + 1, argv + argc);
-
-    core::initializeLogger();
 
     this->addResource<DeltaTime>(0.0F);
     this->addResource<ShouldQuit>(true);

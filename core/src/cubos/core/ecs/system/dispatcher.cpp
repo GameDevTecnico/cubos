@@ -1,6 +1,8 @@
 #include <algorithm>
+#include <iterator>
 
 #include <cubos/core/ecs/system/dispatcher.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 using namespace cubos::core::ecs;
 

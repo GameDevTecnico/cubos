@@ -1,6 +1,7 @@
 #include <cubos/core/data/des/json.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_value.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
@@ -116,7 +117,8 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
         const auto& trait = type.get<StringConversionTrait>();
         if (!trait.from(value, mIterator.value()))
         {
-            CUBOS_WARN("String '{}' is not a valid string representation of '{}'", mIterator.value(), type.name());
+            CUBOS_WARN("String '{}' is not a valid string representation of '{}'",
+                       static_cast<std::string>(mIterator.value()), type.name());
             return false;
         }
 

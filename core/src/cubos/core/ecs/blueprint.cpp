@@ -1,6 +1,7 @@
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>

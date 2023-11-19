@@ -181,7 +181,7 @@ void mySystem(ecs::Write<DeltaTime> dt, ecs::Read<MyResource> res)
 
 int main()
 {
-    initializeLogger();
+    Logger::level(Logger::Level::Critical);
     ecs::World world;
     world.registerResource<DeltaTime>(DeltaTime{1.0F});
     world.registerResource<MyResource>(MyResource{0});

@@ -5,6 +5,7 @@
 
 #include "../utils.hpp"
 
+using cubos::core::Logger;
 using cubos::core::data::EmbeddedArchive;
 using cubos::core::data::File;
 using cubos::core::memory::SeekOrigin;
@@ -32,7 +33,7 @@ static const EmbeddedArchive::Data MultipleData = {MultipleEntries,
 
 TEST_CASE("data::EmbeddedArchive")
 {
-    cubos::core::disableLogging();
+    Logger::level(Logger::Level::Critical);
 
     // Must use static since there are multiple subcases.
     static bool registered = false;

@@ -246,8 +246,8 @@ namespace cubos::core::reflection
         /// @brief Output structure for the iterator.
         struct Entry
         {
-            const void* key; ///< Key.
-            void* value;     ///< Value.
+            const void* key{nullptr}; ///< Key.
+            void* value{nullptr};     ///< Value.
         };
 
         ~Iterator();
@@ -309,8 +309,8 @@ namespace cubos::core::reflection
         /// @brief Output structure for the iterator.
         struct Entry
         {
-            const void* key;   ///< Key.
-            const void* value; ///< Value.
+            const void* key{nullptr};   ///< Key.
+            const void* value{nullptr}; ///< Value.
         };
 
         ~Iterator();

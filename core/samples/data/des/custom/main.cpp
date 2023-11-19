@@ -1,5 +1,6 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/stream.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 using cubos::core::memory::Stream;
 

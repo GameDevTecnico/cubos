@@ -1,4 +1,6 @@
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 /// [Printing any array]
 #include <cubos/core/reflection/traits/array.hpp>
@@ -42,7 +44,7 @@ void printArray(const T& array)
 /// [Typed wrapper]
 
 /// [Usage]
-#include <cubos/core/reflection/external/primitives.hpp>
+// You must also include <cubos/core/reflection/external/primitives.hpp> :)
 #include <cubos/core/reflection/external/vector.hpp>
 
 int main()

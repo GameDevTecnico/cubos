@@ -1,9 +1,12 @@
 #include <array>
 #include <cctype>
+#include <cmath>
+#include <cstring>
 
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/standard_stream.hpp>
 #include <cubos/core/memory/stream.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 using namespace cubos::core::memory;
 
