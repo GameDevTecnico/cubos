@@ -1,4 +1,5 @@
 #include <tesseratos/asset_explorer/plugin.hpp>
+#include <tesseratos/console/plugin.hpp>
 #include <tesseratos/debug_camera/plugin.hpp>
 #include <tesseratos/entity_inspector/plugin.hpp>
 #include <tesseratos/plugin.hpp>
@@ -16,4 +17,5 @@ void tesseratos::plugin(cubos::engine::Cubos& cubos)
     cubos.addPlugin(assetExplorerPlugin);
     cubos.addPlugin(debugCameraPlugin);
     cubos.addPlugin(settingsInspectorPlugin);
+    cubos.addPlugin(consolePlugin);
 }
