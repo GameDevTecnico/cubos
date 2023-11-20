@@ -3,6 +3,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
+#include <implot.h>
 
 #include <cubos/core/io/cursor.hpp>
 #include <cubos/core/log.hpp>
@@ -279,6 +280,7 @@ void cubos::engine::imguiInitialize(io::Window window, float dpiScale)
     // Initialize ImGui
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+    ImPlot::CreateContext();
     ImGui::StyleColorsDark();
 
     ImGuiIO& io = ImGui::GetIO();
@@ -365,6 +367,7 @@ void cubos::engine::imguiTerminate()
     IM_DELETE(bd);
     io.BackendPlatformUserData = nullptr;
 
+    ImPlot::DestroyContext();
     ImGui::DestroyContext();
 }
 
