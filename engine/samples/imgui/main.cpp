@@ -11,6 +11,7 @@
 #include <cubos/core/reflection/external/vector.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/nullable.hpp>
 
 #include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
@@ -18,6 +19,7 @@
 /// [Including plugin headers]
 
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
 
@@ -41,7 +43,15 @@ CUBOS_REFLECT_IMPL(Person)
                                            .withField("name", &Person::name)
                                            .withField("age", &Person::age)
                                            .withField("weight", &Person::weight)
-                                           .withField("dead", &Person::dead));
+                                           .withField("dead", &Person::dead))
+                                           .with(NullableTrait{[](const void* instance) {
+                                const auto* person = static_cast<const Person*>(instance);
+                                return person->dead == true;
+                            },
+                            [](void* instance) {
+                                auto* person = static_cast<Person*>(instance);
+                                person->dead = true;
+                            }});
 }
 
 struct DummyResource

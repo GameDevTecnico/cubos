@@ -7,20 +7,27 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
+#include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 
 #include <cubos/engine/imgui/data_inspector.hpp>
 
 using cubos::core::memory::AnyValue;
 using cubos::core::reflection::ArrayTrait;
+using cubos::core::reflection::ConstructibleTrait;
 using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
 
 using namespace cubos::engine;
+
+/// @brief Displays a menu where the user can "set" the data to null (if it has NullableTrait)
+static bool nullifyMenu(const Type& type, void* value);
 
 void DataInspector::show(const std::string& name, const core::reflection::Type& type, const void* value)
 {
@@ -36,6 +43,45 @@ bool DataInspector::inspect(const std::string& name, const Type& type, void* val
 {
     ImGui::TableNextRow();
     bool changed = false;
+
+    if (type.has<NullableTrait>())
+    {
+        const auto& trait = type.get<NullableTrait>();
+        if (trait.isNull(value))
+        {
+            showKnown(name, type, nullptr);
+            if (!readOnly)
+            {
+                ImGui::SameLine();
+                ImGui::BeginDisabled(!type.has<ConstructibleTrait>());
+
+                bool reset = ImGui::Button("Reset");
+                if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+                {
+                    if (!type.has<ConstructibleTrait>())
+                    {
+                        ImGui::SetTooltip("Type does not have ConstructibleTrait");
+                    }
+                    else
+                    {
+                        ImGui::SetTooltip("Construct new data");
+                    }
+                }
+
+                if (reset)
+                {
+                    const auto& constructible = type.get<ConstructibleTrait>();
+                    constructible.defaultConstruct(value);
+                    changed = true;
+                }
+
+                ImGui::EndDisabled();
+            }
+
+            return changed;
+        }
+    }
+
     if (type.has<ArrayTrait>())
     {
         withStructured(name, type, [&]() {
@@ -244,6 +290,11 @@ bool DataInspector::inspect(const std::string& name, const Type& type, void* val
         }
     }
 
+    if (!readOnly)
+    {
+        changed |= nullifyMenu(type, value);
+    }
+
     return changed;
 }
 
@@ -256,6 +307,10 @@ bool DataInspector::inspect(const std::string& name, const Type& type, void* val
 
 std::string DataInspector::stringKnown(const void* value, const Type& type)
 {
+    if (value == nullptr)
+    {
+        return {"null"};
+    }
     RETURN_FORMAT_STRING_IF_TYPE(int8_t)
     RETURN_FORMAT_STRING_IF_TYPE(int8_t)
     RETURN_FORMAT_STRING_IF_TYPE(int32_t)
@@ -381,4 +436,29 @@ bool DataInspector::editKnown(const std::string& name, const Type& type, void* v
     ImGui::PopID();
 
     return modified;
+}
+
+static bool nullifyMenu(const Type& type, void* value)
+{
+    bool changed = false;
+
+    if (type.has<NullableTrait>())
+    {
+        const auto& trait = type.get<NullableTrait>();
+        if (!trait.isNull(value))
+        {
+            if (ImGui::BeginPopupContextItem())
+            {
+                if (ImGui::Button("Nullify"))
+                {
+                    trait.setToNull(value);
+                    changed = true;
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
+            }
+        }
+    }
+
+    return changed;
 }
