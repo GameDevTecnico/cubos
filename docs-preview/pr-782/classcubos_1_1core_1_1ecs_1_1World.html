@@ -126,17 +126,6 @@
             </dt>
             <dd>Creates a components view for the given entity.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a667f99a521ce4c7953fc515029176e8a" class="m-doc">pack</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context = nullptr) const -&gt; <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a></span>
-            </dt>
-            <dd>Creates a package from the components of an entity.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a91fb6419eeb0ce56f0e0a0e8adf82688" class="m-doc">unpack</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
-              const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a>&amp; package,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context = nullptr) -&gt; bool</span>
-            </dt>
-            <dd>Unpacks components specified in a package into an entity.</dd>
-            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac4761becf40ee204c210d8243a7ac1a8" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a></span>
             </dt>
             <dd>Returns an iterator which points to the first entity of the world.</dd>
@@ -374,68 +363,6 @@
               </tfoot>
             </table>
 <p>The given <code>entity</code> must be <a href="classcubos_1_1core_1_1ecs_1_1World.html#a8df2e215fe9c352958a41542c371df27" class="m-doc">alive</a>.</p>
-          </div></section>
-          <section class="m-doc-details" id="a667f99a521ce4c7953fc515029176e8a"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a667f99a521ce4c7953fc515029176e8a" class="m-doc-self">pack</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context = nullptr) const</span></span>
-            </h3>
-            <p>Creates a package from the components of an entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">entity</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
-                </tr>
-                <tr>
-                  <td>context</td>
-                  <td>Optional context for serializing the components.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Package containing the components of the entity.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a91fb6419eeb0ce56f0e0a0e8adf82688"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a91fb6419eeb0ce56f0e0a0e8adf82688" class="m-doc-self">unpack</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
-              const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a>&amp; package,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context = nullptr)</span></span>
-            </h3>
-            <p>Unpacks components specified in a package into an entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">entity</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
-                </tr>
-                <tr>
-                  <td>package</td>
-                  <td>Package to unpack.</td>
-                </tr>
-                <tr>
-                  <td>context</td>
-                  <td>Optional context for deserializing the components.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether the package was unpacked successfully.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Removes any components that are already present in the entity.</p>
           </div></section>
           <section class="m-doc-details" id="ac4761becf40ee204c210d8243a7ac1a8"><div>
             <h3>
