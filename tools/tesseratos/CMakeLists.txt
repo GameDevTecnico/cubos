@@ -15,6 +15,7 @@ set(TESSERATOS_SOURCE
     "src/tesseratos/debug_camera/plugin.cpp"
     "src/tesseratos/voxel_palette_editor/plugin.cpp"
     "src/tesseratos/toolbox/plugin.cpp"
+    "src/tesseratos/metrics_panel/plugin.cpp"
 )
 
 add_library(tesseratos ${TESSERATOS_SOURCE})
