@@ -9,6 +9,7 @@
 
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
+
 using cubos::engine::Cubos;
 using cubos::engine::DeltaTime;
 
@@ -22,7 +23,7 @@ namespace
         float fps = 0.0F;
         float maxFps = 0.0F;
         float avgFps;
-        // FPSGraph related
+        // FPS Graph related
         std::vector<float> timeHistory;
         std::vector<float> fpsHistory;
         const float timeSample = -5.0F;
@@ -37,13 +38,15 @@ static void showMetricsSystem(Read<DeltaTime> deltaTime, Write<Metrics> metrics)
     metrics->timeElapsed += deltaTime->value;
     metrics->fps = 1 / deltaTime->value;
 
-    for (unsigned int i = 0; i < metrics->timeHistory.size(); i++)
+    for (std::size_t i = 0; i < metrics->timeHistory.size(); ++i)
     {
         metrics->timeHistory[i] -= deltaTime->value;
         if (metrics->timeHistory[i] <= metrics->timeSample)
         {
-            metrics->timeHistory.erase(metrics->timeHistory.begin() + i);
-            metrics->fpsHistory.erase(metrics->fpsHistory.begin() + i);
+            metrics->timeHistory.erase(metrics->timeHistory.begin() +
+                                       static_cast<std::vector<float>::difference_type>(i));
+            metrics->fpsHistory.erase(metrics->fpsHistory.begin() +
+                                      static_cast<std::vector<float>::difference_type>(i));
         }
     }
 
@@ -63,7 +66,6 @@ static void showMetricsSystem(Read<DeltaTime> deltaTime, Write<Metrics> metrics)
         ImPlot::SetNextFillStyle(ImVec4(0, 0, 0, -1), 0.0F);
         ImPlot::PlotLine("FPS Graph", metrics->timeHistory.data(), metrics->fpsHistory.data(),
                          static_cast<int>(metrics->timeHistory.size()), ImPlotFlags_CanvasOnly | ImPlotFlags_NoInputs);
-        // This dont work return inf and -inf respectivl; Actuallly it might work
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 0.0F, 1.0F), "Max: %.2f",
                            *std::max_element(metrics->fpsHistory.begin(), metrics->fpsHistory.end()));
         ImGui::TextColored(ImVec4(1.0F, 1.0F, 0.0F, 1.0F), "Avg: %.2f",
