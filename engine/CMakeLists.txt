@@ -97,8 +97,16 @@ add_library(imgui STATIC
     "lib/imgui/misc/cpp/imgui_stdlib.cpp"
 )
 
+add_library(implot STATIC
+    "lib/implot/implot.cpp"
+    "lib/implot/implot_items.cpp"
+    "lib/implot/implot_demo.cpp"
+)
+
 target_include_directories(imgui PUBLIC "lib/imgui" "lib/imgui/misc/cpp/imgui_stdlib.hpp")
-target_link_libraries(cubos-engine PUBLIC imgui)
+target_include_directories(implot PUBLIC "lib/implot")
+target_link_libraries(implot PUBLIC imgui)
+target_link_libraries(cubos-engine PUBLIC implot)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(cubos-engine PUBLIC -Wno-attributes)

@@ -25,3 +25,6 @@
 [submodule "core/lib/glad"]
 	path = core/lib/glad
 	url = https://github.com/Dav1dde/glad.git
+[submodule "engine/lib/implot"]
+	path = engine/lib/implot
+	url = https://github.com/epezent/implot.git
