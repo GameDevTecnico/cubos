@@ -14,6 +14,12 @@ World::World(std::size_t initialCapacity)
     // Edu: BAH!
 }
 
+void World::registerComponent(const reflection::Type& type)
+{
+    CUBOS_TRACE("Registered component '{}'", type.name());
+    mComponentManager.registerType(type);
+}
+
 Entity World::create()
 {
     Entity::Mask mask{};
