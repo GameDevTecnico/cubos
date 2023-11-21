@@ -9,6 +9,7 @@
 
 #include <cubos/core/ecs/component/storage.hpp>
 #include <cubos/core/memory/type_map.hpp>
+#include <cubos/core/reflection/type_registry.hpp>
 
 namespace cubos::core::ecs
 {
@@ -23,6 +24,10 @@ namespace cubos::core::ecs
         /// @brief Registers a new component type with the component manager.
         /// @param type Type of the component.
         void registerType(const reflection::Type& type);
+
+        /// @brief Gets the components registered with the component manager.
+        /// @return Component types.
+        reflection::TypeRegistry registry() const;
 
         /// @brief Gets the identifier of a registered component type.
         /// @param type Component type.
