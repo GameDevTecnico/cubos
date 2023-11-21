@@ -1,7 +1,6 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
 
 #include "utils.hpp"
@@ -10,7 +9,6 @@ using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
-using cubos::core::ecs::Registry;
 using cubos::core::ecs::World;
 
 TEST_CASE("ecs::Blueprint")

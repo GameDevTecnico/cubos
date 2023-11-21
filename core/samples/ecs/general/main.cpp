@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/ecs/system/system.hpp>
@@ -59,70 +58,6 @@ CUBOS_REFLECT_IMPL(Parent)
 {
     return Type::create("Parent").with(ConstructibleTrait::typed<Parent>().withMoveConstructor().build());
 }
-
-namespace cubos::core::data::old
-{
-    void serialize(Serializer& /*unused*/, const Player& /*unused*/, const char* /*unused*/)
-    {
-        // Do nothing.
-    }
-
-    void deserialize(Deserializer& /*unused*/, Player& /*unused*/)
-    {
-        // Do nothing.
-    }
-
-    void serialize(Serializer& ser, const Position& position, const char* name)
-    {
-        ser.beginObject(name);
-        ser.write(position.x, "x");
-        ser.write(position.y, "y");
-        ser.write(position.z, "z");
-        ser.endObject();
-    }
-
-    void deserialize(Deserializer& des, Position& position)
-    {
-        des.beginObject();
-        des.read(position.x);
-        des.read(position.y);
-        des.read(position.z);
-        des.endObject();
-    }
-
-    void serialize(Serializer& ser, const Velocity& velocity, const char* name)
-    {
-        ser.beginObject(name);
-        ser.write(velocity.x, "x");
-        ser.write(velocity.y, "y");
-        ser.write(velocity.z, "z");
-        ser.endObject();
-    }
-
-    void deserialize(Deserializer& des, Velocity& velocity)
-    {
-        des.beginObject();
-        des.read(velocity.x);
-        des.read(velocity.y);
-        des.read(velocity.z);
-        des.endObject();
-    }
-
-    void serialize(Serializer& ser, const Parent& parent, const char* name)
-    {
-        ser.write(parent.entity, name);
-    }
-
-    void deserialize(Deserializer& des, Parent& parent)
-    {
-        des.read(parent.entity);
-    }
-} // namespace cubos::core::data::old
-
-CUBOS_REGISTER_COMPONENT(Player)
-CUBOS_REGISTER_COMPONENT(Position)
-CUBOS_REGISTER_COMPONENT(Velocity)
-CUBOS_REGISTER_COMPONENT(Parent)
 
 void spawner(ecs::Commands cmds)
 {
