@@ -10,6 +10,7 @@ add_executable(
 
     reflection/reflect.cpp
     reflection/type.cpp
+    reflection/type_registry.cpp
     reflection/traits/constructible.cpp
     reflection/traits/fields.cpp
     reflection/traits/nullable.cpp

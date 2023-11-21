@@ -32,6 +32,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/memory/any_vector.cpp"
 
     "src/cubos/core/reflection/type.cpp"
+    "src/cubos/core/reflection/type_registry.cpp"
     "src/cubos/core/reflection/traits/constructible.cpp"
     "src/cubos/core/reflection/traits/fields.cpp"
     "src/cubos/core/reflection/traits/array.cpp"
