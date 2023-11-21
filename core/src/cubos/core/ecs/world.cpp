@@ -1,4 +1,3 @@
-#include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
