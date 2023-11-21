@@ -44,6 +44,7 @@ TEST_CASE("reflection::Type")
     {
         auto& anotherType = Type::create("Bar");
         REQUIRE(anotherType != type);
+        Type::destroy(anotherType);
     }
 
     Type::destroy(type);

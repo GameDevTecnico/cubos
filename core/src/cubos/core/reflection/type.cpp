@@ -65,7 +65,7 @@ bool Type::operator==(const Type& other) const
         return true;
     }
 
-    CUBOS_ASSERT(this->mName != other.mName, "Two types cannot be created with the same");
+    CUBOS_ASSERT(this->mName != other.mName, "Two types should never have the same name");
     return false;
 }
 
