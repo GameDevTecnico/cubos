@@ -69,6 +69,10 @@
             </dt>
             <dd>Registers the given type.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af67caaef10d48fe85bdf3250c59b9726" class="m-doc">insert</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">TypeRegistry</a>&amp; other)</span>
+            </dt>
+            <dd>Calls insert for each type in the given type registry.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">Reflectable</a> T&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#ae7892912e89dba1a6ad7ca52fd507029" class="m-doc">insert</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -94,6 +98,14 @@
               <span class="m-doc-wrap-bumper">auto <a href="#ab2bbebf8d815e7b14fc50ae1a7ccb4e2" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
             <dd>Returns the number of registered types.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad7cb57fb90394e10f528ca45bb9d21ee" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html#a2ba30d6577eec36be95854420dcda828" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Gets an iterator to the beginning of the registry.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af494a6047187558a9e9807f5313ed513" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html#a2ba30d6577eec36be95854420dcda828" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Gets an iterator to the end of the registry.</dd>
           </dl>
         </section>
         <section>
@@ -115,6 +127,23 @@
               </tbody>
             </table>
 <p>Does nothing if the type is already registered. Aborts if a different type with the same name is already registered.</p>
+          </div></section>
+          <section class="m-doc-details" id="af67caaef10d48fe85bdf3250c59b9726"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af67caaef10d48fe85bdf3250c59b9726" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">TypeRegistry</a>&amp; other)</span></span>
+            </h3>
+            <p>Calls insert for each type in the given type registry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a> registry to copy types from.</td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
           <section class="m-doc-details" id="ae7892912e89dba1a6ad7ca52fd507029"><div>
             <h3>
@@ -236,6 +265,34 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Number of registered types.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad7cb57fb90394e10f528ca45bb9d21ee"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html#a2ba30d6577eec36be95854420dcda828" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad7cb57fb90394e10f528ca45bb9d21ee" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets an iterator to the beginning of the registry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af494a6047187558a9e9807f5313ed513"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html#a2ba30d6577eec36be95854420dcda828" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af494a6047187558a9e9807f5313ed513" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets an iterator to the end of the registry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
                 </tr>
               </tfoot>
             </table>
