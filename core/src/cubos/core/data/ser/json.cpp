@@ -16,20 +16,34 @@ using cubos::core::reflection::Type;
 
 using cubos::core::reflection::reflect;
 
+// Create hooks for primitive types.
 JSONSerializer::JSONSerializer()
 {
+    // Boolean type.
     AUTO_HOOK(bool);
+
+    // Char type (distinct from `signed char` and `unsigned char`).
     AUTO_HOOK(char);
-    AUTO_HOOK(int8_t);
-    AUTO_HOOK(int16_t);
-    AUTO_HOOK(int32_t);
-    AUTO_HOOK(int64_t);
-    AUTO_HOOK(uint8_t);
-    AUTO_HOOK(uint16_t);
-    AUTO_HOOK(uint32_t);
-    AUTO_HOOK(uint64_t);
+
+    // Signed integer types.
+    AUTO_HOOK(signed char);
+    AUTO_HOOK(short);
+    AUTO_HOOK(int);
+    AUTO_HOOK(long);
+    AUTO_HOOK(long long);
+
+    // Unsigned integer types.
+    AUTO_HOOK(unsigned char);
+    AUTO_HOOK(unsigned short);
+    AUTO_HOOK(unsigned int);
+    AUTO_HOOK(unsigned long);
+    AUTO_HOOK(unsigned long long);
+
+    // Floating point types.
     AUTO_HOOK(float);
     AUTO_HOOK(double);
+
+    // String
     AUTO_HOOK(std::string);
 }
 
