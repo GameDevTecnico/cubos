@@ -12,7 +12,7 @@ namespace cubos::engine
 {
     /// @brief Component which defines the mass of a particle.
     /// @ingroup physics-plugin
-    struct [[cubos::component("cubos/physics_mass", VecStorage)]] PhysicsMass
+    struct PhysicsMass
     {
         CUBOS_REFLECT;
 

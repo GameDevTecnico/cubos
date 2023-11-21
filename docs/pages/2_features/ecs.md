@@ -88,13 +88,17 @@ In **CUBOS.** there are no game objects. Instead, we would define two
 components and a `DeltaTime` resource:
 
 ```cpp
-struct [[cubos::component("position")]] Position
+struct Position
 {
+    CUBOS_REFLECT;
+
     glm::vec3 vec = { 0.0f, 0.0f, 0.0f };
 };
 
-struct [[cubos::component("velocity")]] Velocity
+struct Velocity
 {
+    CUBOS_REFLECT;
+
     glm::vec3 vec = { 0.0f, 0.0f, 0.0f };
 };
 

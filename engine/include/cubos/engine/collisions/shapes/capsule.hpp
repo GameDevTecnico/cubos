@@ -11,7 +11,7 @@ namespace cubos::engine
 {
     /// @brief Component which adds a capsule collision shape to an entity, used with a @ref Collider component.
     /// @ingroup collisions-plugin
-    struct [[cubos::component("cubos/capsule_collision_shape", VecStorage)]] CapsuleCollisionShape
+    struct CapsuleCollisionShape
     {
         CUBOS_REFLECT;
 

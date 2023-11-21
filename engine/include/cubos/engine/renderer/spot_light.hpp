@@ -14,7 +14,7 @@ namespace cubos::engine
     /// @note Should be used with @ref LocalToWorld.
     /// @todo In what direction does the spot light point for an identity transform?
     /// @ingroup renderer-plugin
-    struct [[cubos::component("cubos/spot_light", VecStorage)]] SpotLight
+    struct SpotLight
     {
         CUBOS_REFLECT;
 

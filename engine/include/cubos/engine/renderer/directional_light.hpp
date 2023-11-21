@@ -14,7 +14,7 @@ namespace cubos::engine
     /// @note Should be used with @ref LocalToWorld.
     /// @todo In what direction does the light point for an identity transform?
     /// @ingroup renderer-plugin
-    struct [[cubos::component("cubos/directional_light", VecStorage)]] DirectionalLight
+    struct DirectionalLight
     {
         CUBOS_REFLECT;
 

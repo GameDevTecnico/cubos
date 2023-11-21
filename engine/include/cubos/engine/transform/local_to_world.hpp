@@ -21,7 +21,7 @@ namespace cubos::engine
     /// @sa Rotation Applies a rotation to this matrix.
     /// @sa Scale Applies a scaling to this matrix.
     /// @ingroup transform-plugin
-    struct [[cubos::component("cubos/local_to_world", VecStorage)]] LocalToWorld
+    struct LocalToWorld
     {
         CUBOS_REFLECT;
 

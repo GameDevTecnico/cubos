@@ -12,7 +12,7 @@ namespace cubos::engine
 {
     /// @brief Component which holds the corrections accumulated from the constraints solving.
     /// @ingroup physics-plugin
-    struct [[cubos::component("cubos/accumulated_correction", VecStorage)]] AccumulatedCorrection
+    struct AccumulatedCorrection
     {
         CUBOS_REFLECT;
 
