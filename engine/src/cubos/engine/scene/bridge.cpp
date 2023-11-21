@@ -70,7 +70,7 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
             return false;
         }
 
-        entity = scene.blueprint.bimap().atLeft(name);
+        entity = scene.blueprint.bimap().atRight(name);
         return true;
     });
 
@@ -132,7 +132,7 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
                 return false;
             }
 
-            auto entity = scene.blueprint.bimap().atLeft(entityName);
+            auto entity = scene.blueprint.bimap().atRight(entityName);
 
             for (const auto& [componentName, componentJSON] : entityJSON.items())
             {

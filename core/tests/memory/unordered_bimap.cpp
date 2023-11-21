@@ -22,8 +22,8 @@ TEST_CASE("memory::UnorderedBimap")
         CHECK(bimap.contains(1, 'a'));
         CHECK(bimap.containsLeft(1));
         CHECK(bimap.containsRight('a'));
-        CHECK(bimap.atLeft('a') == 1);
-        CHECK(bimap.atRight(1) == 'a');
+        CHECK(bimap.atRight('a') == 1);
+        CHECK(bimap.atLeft(1) == 'a');
 
         CHECK(bimap.begin() != bimap.end());
         CHECK(bimap.begin()->first == 1);
@@ -35,10 +35,10 @@ TEST_CASE("memory::UnorderedBimap")
         CHECK(bimap.size() == 2);
         CHECK(bimap.contains(1, 'a'));
         CHECK(bimap.contains(2, 'b'));
-        CHECK(bimap.atRight(1) == 'a');
-        CHECK(bimap.atRight(2) == 'b');
-        CHECK(bimap.atLeft('a') == 1);
-        CHECK(bimap.atLeft('b') == 2);
+        CHECK(bimap.atLeft(1) == 'a');
+        CHECK(bimap.atLeft(2) == 'b');
+        CHECK(bimap.atRight('a') == 1);
+        CHECK(bimap.atRight('b') == 2);
 
         bimap.insert(1, 'b');
 
@@ -46,8 +46,8 @@ TEST_CASE("memory::UnorderedBimap")
         CHECK(bimap.contains(1, 'b'));
         CHECK_FALSE(bimap.contains(1, 'a'));
         CHECK_FALSE(bimap.contains(2, 'b'));
-        CHECK(bimap.atRight(1) == 'b');
-        CHECK(bimap.atLeft('b') == 1);
+        CHECK(bimap.atLeft(1) == 'b');
+        CHECK(bimap.atRight('b') == 1);
 
         SUBCASE("remove left")
         {
