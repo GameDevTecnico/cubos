@@ -5,6 +5,7 @@
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::reflection::Type;
+using cubos::core::reflection::TypeRegistry;
 
 using namespace cubos::core::ecs;
 
@@ -15,6 +16,16 @@ void ComponentManager::registerType(const Type& type)
         mTypeToIds.insert(type, static_cast<uint32_t>(mStorages.size()) + 1); // Component ids start at 1.
         mStorages.emplace_back(type);
     }
+}
+
+TypeRegistry ComponentManager::registry() const
+{
+    TypeRegistry registry{};
+    for (const auto& [type, _] : mTypeToIds)
+    {
+        registry.insert(*type);
+    }
+    return registry;
 }
 
 uint32_t ComponentManager::id(const Type& type) const

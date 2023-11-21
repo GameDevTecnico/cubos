@@ -41,6 +41,11 @@ bool World::isAlive(Entity entity) const
     return mEntityManager.isAlive(entity);
 }
 
+reflection::TypeRegistry World::components() const
+{
+    return mComponentManager.registry();
+}
+
 World::Components World::components(Entity entity)
 {
     return Components{*this, entity};

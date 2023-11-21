@@ -16,6 +16,7 @@
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/reflection/type_registry.hpp>
 
 namespace cubos::core::ecs
 {
@@ -91,6 +92,10 @@ namespace cubos::core::ecs
         /// @param entity Entity.
         /// @return Whether the entity is alive.
         bool isAlive(Entity entity) const;
+
+        /// @brief Returns a type registry which contains all registered component types.
+        /// @return Component type registry.
+        reflection::TypeRegistry components() const;
 
         /// @brief Creates a components view for the given entity.
         ///
