@@ -16,8 +16,9 @@ glm::ivec2 delta = {0, 0};
 glm::vec3 direction = {1.0f, 0.0f, 1.0f};
 int counter = 0;
 
-static void updateSimpleController(Query<Read<SimpleController>, Write<Position>> entities, Read<DeltaTime> deltaTime)
+static void updateSimpleController(Query<Read<SimpleController>, Write<Position>> entities, Read<DeltaTime> deltaTime, Write<Window> window)
 {
+    CUBOS_INFO("Mouse Pos x: {}", Debug((*window)->getMousePosition()));
     for(auto [entity, controller, position] : entities)
     {
         position->vec.y += controller->verticalAxis * deltaTime->value * controller->speed;
@@ -93,7 +94,6 @@ static void lockMouseSystem(Write<Window> window)
 {
     (*window)->mouseState(MouseState::Locked);
     lastMousePos = (*window)->getMousePosition();
-    CUBOS_INFO("Mouse Pos x: {}, y: {}", lastMousePos.x, lastMousePos.y);
 }
 
 void updateFreeVertical(float vertical, cubos::core::ecs::Write<cubos::engine::FreeController> controller)
