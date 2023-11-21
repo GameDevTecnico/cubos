@@ -53,10 +53,16 @@ namespace cubos::core::ecs
         void registerResource(TArgs... args);
 
         /// @brief Registers a component type.
-        /// @note Should be called before other operations, aside from @ref registerResource().
+        /// @param type Component type.
+        void registerComponent(const reflection::Type& type);
+
+        /// @brief Registers a component type.
         /// @tparam T Component type.
-        template <typename T>
-        void registerComponent();
+        template <reflection::Reflectable T>
+        void registerComponent()
+        {
+            this->registerComponent(reflection::reflect<T>());
+        }
 
         /// @brief Locks a resource for reading and returns it.
         /// @tparam T Resource type.
@@ -374,13 +380,6 @@ namespace cubos::core::ecs
     {
         CUBOS_TRACE("Registered resource '{}'", typeid(T).name());
         mResourceManager.add<T>(args...);
-    }
-
-    template <typename T>
-    void World::registerComponent()
-    {
-        CUBOS_TRACE("Registered component '{}'", reflection::reflect<T>().name());
-        mComponentManager.registerType(reflection::reflect<T>());
     }
 
     template <typename T>
