@@ -43,17 +43,27 @@ TEST_CASE("data::JSONSerializer")
     JSONSerializer ser{};
     auto json = ser.output();
 
-    // Primitive types
+    // Boolean type.
     AUTO_TEST(bool, true, "true");
+
+    // Char type (distinct from `signed char` and `unsigned char`).
     AUTO_TEST(char, 'a', "97");
-    AUTO_TEST(int8_t, -128, "-128");
-    AUTO_TEST(int16_t, -32768, "-32768");
-    AUTO_TEST(int32_t, -2147483648, "-2147483648");
-    AUTO_TEST(int64_t, -9223372036854775807, "-9223372036854775807");
-    AUTO_TEST(uint8_t, 255, "255");
-    AUTO_TEST(uint16_t, 65535, "65535");
-    AUTO_TEST(uint32_t, 4294967295, "4294967295");
-    AUTO_TEST(uint64_t, 18446744073709551615ULL, "18446744073709551615");
+
+    // Signed integer types.
+    AUTO_TEST(signed char, -128, "-128");
+    AUTO_TEST(short, -32768, "-32768");
+    AUTO_TEST(int, -2147483648, "-2147483648");
+    AUTO_TEST(long, -2147483648L, "-2147483648");
+    AUTO_TEST(long long, -9223372036854775807LL, "-9223372036854775807");
+
+    // Unsigned integer types.
+    AUTO_TEST(unsigned char, 255, "255");
+    AUTO_TEST(unsigned short, 65535, "65535");
+    AUTO_TEST(unsigned int, 4294967295, "4294967295");
+    AUTO_TEST(unsigned long, 4294967295UL, "4294967295");
+    AUTO_TEST(unsigned long long, 18446744073709551615ULL, "18446744073709551615");
+
+    // Floating point types.
     AUTO_TEST(float, 1.5F, "1.5");
     AUTO_TEST(double, 1.00000000000005, "1.00000000000005");
 
