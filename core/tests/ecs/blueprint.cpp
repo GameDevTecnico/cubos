@@ -36,7 +36,7 @@ TEST_CASE("ecs::Blueprint")
         blueprint.add(foo, IntegerComponent{0});
 
         // Searching for an entity with the same name should return the same identifier
-        CHECK(blueprint.bimap().atLeft("foo") == foo);
+        CHECK(blueprint.bimap().atRight("foo") == foo);
 
         blueprint.clear();
     }
@@ -84,7 +84,7 @@ TEST_CASE("ecs::Blueprint")
         merged.merge("sub", blueprint);
 
         // Then the new blueprint has the correct entities.
-        CHECK(merged.bimap().atLeft("foo") == foo);
+        CHECK(merged.bimap().atRight("foo") == foo);
         CHECK(merged.bimap().containsRight("sub.bar"));
         CHECK(merged.bimap().containsRight("sub.baz"));
 

@@ -108,7 +108,7 @@ namespace cubos::core::memory
         /// @note Aborts if the left value isn't stored.
         /// @param left Left value.
         /// @return Right value.
-        const R& atRight(const L& left) const
+        const R& atLeft(const L& left) const
         {
             return mLeftToRight.at(left);
         }
@@ -117,7 +117,7 @@ namespace cubos::core::memory
         /// @note Aborts if the right value isn't stored.
         /// @param right Right value.
         /// @return Left value.
-        const L& atLeft(const R& right) const
+        const L& atRight(const R& right) const
         {
             return mRightToLeft.at(right);
         }
