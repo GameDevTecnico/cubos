@@ -9,7 +9,7 @@
 #include "../utils.hpp"
 
 /// A component which stores a single integer.
-struct [[cubos::component("integer")]] IntegerComponent
+struct IntegerComponent
 {
     CUBOS_REFLECT;
 
@@ -17,7 +17,7 @@ struct [[cubos::component("integer")]] IntegerComponent
 };
 
 /// A component which references another entity.
-struct [[cubos::component("parent")]] ParentComponent
+struct ParentComponent
 {
     CUBOS_REFLECT;
 
@@ -25,21 +25,21 @@ struct [[cubos::component("parent")]] ParentComponent
 };
 
 /// A component used to test if components are destructed properly.
-struct [[cubos::component("detect_destructor")]] DetectDestructorComponent
+struct DetectDestructorComponent
 {
     CUBOS_REFLECT;
 
-    [[cubos::ignore]] DetectDestructor detect;
+    DetectDestructor detect;
 };
 
-struct [[cubos::component("entity_array")]] EntityArrayComponent
+struct EntityArrayComponent
 {
     CUBOS_REFLECT;
 
     std::vector<cubos::core::ecs::Entity> vec;
 };
 
-struct [[cubos::component("entity_dictionary")]] EntityDictionaryComponent
+struct EntityDictionaryComponent
 {
     CUBOS_REFLECT;
 

@@ -11,7 +11,7 @@ namespace cubos::engine
     /// @brief Component which assigns a uniform scale to an entity.
     /// @sa LocalToWorld Holds the resulting transform matrix.
     /// @ingroup transform-plugin
-    struct [[cubos::component("cubos/scale", VecStorage)]] Scale
+    struct Scale
     {
         CUBOS_REFLECT;
 

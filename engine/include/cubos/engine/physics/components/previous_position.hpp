@@ -13,7 +13,7 @@ namespace cubos::engine
     /// @brief Component which holds the previous position of the entity.
     /// Used for the integrator on the update velocity step.
     /// @ingroup physics-plugin
-    struct [[cubos::component("cubos/previous_position", VecStorage)]] PreviousPosition
+    struct PreviousPosition
     {
         CUBOS_REFLECT;
 

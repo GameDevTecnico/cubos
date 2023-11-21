@@ -11,7 +11,7 @@ namespace cubos::engine
     /// @brief Component which defines parameters of a camera used to render the world.
     /// @note Should be used with @ref LocalToWorld.
     /// @ingroup renderer-plugin
-    struct [[cubos::component("cubos/camera", VecStorage)]] Camera
+    struct Camera
     {
         CUBOS_REFLECT;
 

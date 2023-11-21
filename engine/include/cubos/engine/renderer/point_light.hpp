@@ -13,7 +13,7 @@ namespace cubos::engine
     /// @brief Component which makes an entity behave like a point light.
     /// @note Should be used with @ref LocalToWorld.
     /// @ingroup renderer-plugin
-    struct [[cubos::component("cubos/point_light", VecStorage)]] PointLight
+    struct PointLight
     {
         CUBOS_REFLECT;
 

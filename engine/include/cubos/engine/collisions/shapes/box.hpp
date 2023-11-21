@@ -11,7 +11,7 @@ namespace cubos::engine
 {
     /// @brief Component which adds a box collision shape to an entity, used with a @ref Collider component.
     /// @ingroup collisions-plugin
-    struct [[cubos::component("cubos/box_collision_shape", VecStorage)]] BoxCollisionShape
+    struct BoxCollisionShape
     {
         CUBOS_REFLECT;
 

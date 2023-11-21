@@ -13,7 +13,7 @@ namespace cubos::engine
 {
     /// @brief Component which adds a collider to an entity.
     /// @ingroup collisions-plugin
-    struct [[cubos::component("cubos/collider", VecStorage)]] Collider
+    struct Collider
     {
         CUBOS_REFLECT;
 

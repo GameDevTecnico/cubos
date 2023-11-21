@@ -13,7 +13,7 @@ namespace cubos::engine
     /// @brief Component which assigns a position to an entity.
     /// @sa LocalToWorld Holds the resulting transform matrix.
     /// @ingroup transform-plugin
-    struct [[cubos::component("cubos/position", VecStorage)]] Position
+    struct Position
     {
         CUBOS_REFLECT;
 
