@@ -13,6 +13,7 @@ TEST_CASE("reflection::Type")
     CHECK_FALSE(registry.contains("int"));
     CHECK_FALSE(registry.contains<int>());
     CHECK(registry.size() == 0);
+    CHECK(registry.begin() == registry.end());
 
     SUBCASE("single insert")
     {
@@ -20,10 +21,27 @@ TEST_CASE("reflection::Type")
         CHECK(registry.size() == 1);
     }
 
+    SUBCASE("single insert other registry")
+    {
+        TypeRegistry other{};
+        other.insert<int>();
+        registry.insert(other);
+        CHECK(registry.size() == 1);
+    }
+
     SUBCASE("double insert")
     {
         registry.insert<int>();
         registry.insert<int>();
+        CHECK(registry.size() == 1);
+    }
+
+    SUBCASE("double insert other registry")
+    {
+        TypeRegistry other{};
+        other.insert<int>();
+        registry.insert(other);
+        registry.insert(other);
         CHECK(registry.size() == 1);
     }
 
@@ -35,6 +53,13 @@ TEST_CASE("reflection::Type")
         registry.insert<float>();
         registry.insert<double>();
         CHECK(registry.size() == 5);
+    }
+
+    if (registry.size() == 1)
+    {
+        CHECK(registry.begin() != registry.end());
+        CHECK(++registry.begin() == registry.end());
+        CHECK(registry.begin()->first->is<int>());
     }
 
     REQUIRE(registry.contains("int"));

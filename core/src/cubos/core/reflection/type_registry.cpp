@@ -16,6 +16,14 @@ void TypeRegistry::insert(const Type& type)
     mTypes.insert(&type, type.name());
 }
 
+void TypeRegistry::insert(const TypeRegistry& other)
+{
+    for (const auto& [type, _] : other)
+    {
+        this->insert(*type);
+    }
+}
+
 bool TypeRegistry::contains(const Type& type) const
 {
     return mTypes.containsLeft(&type);
@@ -34,4 +42,14 @@ const Type& TypeRegistry::at(const std::string& name) const
 std::size_t TypeRegistry::size() const
 {
     return mTypes.size();
+}
+
+auto TypeRegistry::begin() const -> Iterator
+{
+    return mTypes.begin();
+}
+
+auto TypeRegistry::end() const -> Iterator
+{
+    return mTypes.end();
 }
