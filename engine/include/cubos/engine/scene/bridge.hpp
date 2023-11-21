@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/reflection/type_registry.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
 #include <cubos/engine/scene/scene.hpp>
@@ -47,14 +47,18 @@ namespace cubos::engine
     {
     public:
         /// @brief Constructs a bridge.
-        ///
-        SceneBridge()
-            : FileBridge(core::reflection::reflect<Scene>())
-        {
-        }
+        /// @param components Component type registry.
+        SceneBridge(core::reflection::TypeRegistry components);
+
+        /// @brief Returns the type registry used to deserialize components.
+        /// @return Component type registry.
+        core::reflection::TypeRegistry& components();
 
     protected:
         bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
         bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
+
+    private:
+        core::reflection::TypeRegistry mComponents;
     };
 } // namespace cubos::engine
