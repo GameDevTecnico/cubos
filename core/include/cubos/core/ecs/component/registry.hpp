@@ -10,7 +10,6 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/ecs/component/storage.hpp>
 #include <cubos/core/memory/type_map.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -36,16 +35,10 @@ namespace cubos::core::ecs
         /// @return Whether the instantiation was successful.
         static bool create(std::string_view name, data::old::Deserializer& des, Blueprint& blueprint, Entity id);
 
-        /// @brief Instantiates a component storage for the given component type.
-        /// @param type Type of the component.
-        /// @return Smart pointer to the storage, or nullptr if the component type was not found.
-        static std::unique_ptr<IStorage> createStorage(const reflection::Type& type);
-
         /// @brief Registers a new component type.
         /// @tparam T Component type to register.
-        /// @tparam S Storage type to use for the component.
         /// @param name Name of the component.
-        template <typename T, typename S>
+        template <typename T>
         static void add();
 
         /// @brief Gets the type index of a component type.
@@ -61,9 +54,6 @@ namespace cubos::core::ecs
 
             /// Function for creating the component from a deserializer.
             bool (*componentCreator)(data::old::Deserializer&, Blueprint&, Entity);
-
-            /// Function for creating the storage for the component.
-            std::unique_ptr<IStorage> (*storageCreator)();
         };
 
         /// @return Global entry registry, indexed by type.
@@ -75,34 +65,25 @@ namespace cubos::core::ecs
 
     // Implementation.
 
-    template <typename T, typename S>
+    template <typename T>
     inline void Registry::add()
     {
-        static_assert(std::is_base_of_v<Storage<T>, S>, "Component storage for T must be derived from Storage<T>");
-
         auto& byType = Registry::entriesByType();
         auto& byNames = Registry::entriesByName();
 
-        auto entry = std::make_shared<Entry>(Entry{
-            .type = &reflection::reflect<T>(),
-            .componentCreator =
-                [](data::old::Deserializer& des, Blueprint& blueprint, Entity id) {
-                    T comp;
-                    des.read(comp);
-                    if (des.failed())
-                    {
-                        return false;
-                    }
+        auto entry = std::make_shared<Entry>(
+            Entry{.type = &reflection::reflect<T>(),
+                  .componentCreator = [](data::old::Deserializer& des, Blueprint& blueprint, Entity id) {
+                      T comp;
+                      des.read(comp);
+                      if (des.failed())
+                      {
+                          return false;
+                      }
 
-                    blueprint.add(id, std::move(comp));
-                    return true;
-                },
-            .storageCreator =
-                []() {
-                    auto storage = std::make_unique<S>();
-                    return std::unique_ptr<IStorage>(storage.release());
-                },
-        });
+                      blueprint.add(id, std::move(comp));
+                      return true;
+                  }});
 
         byType.insert<T>(entry);
         byNames[entry->type->name()] = entry;
@@ -115,7 +96,7 @@ namespace cubos::core::ecs
 /// unit (think of it as a .cpp file) in the executable, otherwise the component type may not be
 /// registered. E.g.: keeping it hidden in a .cpp file on a library may not work.
 /// @ingroup core-ecs-component
-#define CUBOS_REGISTER_COMPONENT(type, storageType)                                                                    \
+#define CUBOS_REGISTER_COMPONENT(type)                                                                                 \
     namespace cubos::core::ecs::impl                                                                                   \
     {                                                                                                                  \
         class ComponentRegister##type                                                                                  \
@@ -123,7 +104,7 @@ namespace cubos::core::ecs
         private:                                                                                                       \
             static inline bool registerType()                                                                          \
             {                                                                                                          \
-                ::cubos::core::ecs::Registry::add<type, storageType>();                                                \
+                ::cubos::core::ecs::Registry::add<type>();                                                             \
                 return true;                                                                                           \
             }                                                                                                          \
                                                                                                                        \

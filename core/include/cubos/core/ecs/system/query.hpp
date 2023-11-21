@@ -22,7 +22,7 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs-system
     struct QueryInfo
     {
-        std::unordered_set<std::type_index> read;    ///< Componenst read.
+        std::unordered_set<std::type_index> read;    ///< Components read.
         std::unordered_set<std::type_index> written; ///< Components written.
     };
 
@@ -43,49 +43,65 @@ namespace cubos::core::ecs
         template <typename Component>
         struct QueryFetcher<Write<Component>>
         {
-            using Type = WriteStorage<Component>;
+            struct Type
+            {
+                Storage& storage;
+            };
+
             using InnerType = Component;
 
             constexpr static bool IsOptional = false;
             static void add(QueryInfo& info);
-            static Type fetch(const World& world);
-            static Write<Component> arg(const World& world, Type& lock, Entity entity);
+            static Type fetch(World& world);
+            static Write<Component> arg(const World& world, Type& fetched, Entity entity);
         };
 
         template <typename Component>
         struct QueryFetcher<Read<Component>>
         {
-            using Type = ReadStorage<Component>;
+            struct Type
+            {
+                const Storage& storage;
+            };
+
             using InnerType = Component;
 
             constexpr static bool IsOptional = false;
             static void add(QueryInfo& info);
-            static Type fetch(const World& world);
-            static Read<Component> arg(const World& world, Type& lock, Entity entity);
+            static Type fetch(World& world);
+            static Read<Component> arg(const World& world, Type& fetched, Entity entity);
         };
 
         template <typename Component>
         struct QueryFetcher<OptWrite<Component>>
         {
-            using Type = WriteStorage<Component>;
+            struct Type
+            {
+                Storage& storage;
+            };
+
             using InnerType = Component;
 
             constexpr static bool IsOptional = true;
             static void add(QueryInfo& info);
-            static Type fetch(const World& world);
-            static OptWrite<Component> arg(const World& world, Type& lock, Entity entity);
+            static Type fetch(World& world);
+            static OptWrite<Component> arg(const World& world, Type& fetched, Entity entity);
         };
 
         template <typename Component>
         struct QueryFetcher<OptRead<Component>>
         {
-            using Type = ReadStorage<Component>;
+            struct Type
+            {
+                const Storage& storage;
+            };
+
             using InnerType = Component;
 
             constexpr static bool IsOptional = true;
             static void add(QueryInfo& info);
-            static Type fetch(const World& world);
-            static OptRead<Component> arg(const World& world, Type& lock, Entity entity);
+            static Type fetch(World& world);
+            static OptRead<Component> arg(const World& world, Type& fetched, Entity entity);
         };
     } // namespace impl
 
@@ -137,7 +153,7 @@ namespace cubos::core::ecs
 
         /// @brief Constructs a query over the given world.
         /// @param world World to query.
-        Query(const World& world);
+        Query(World& world);
 
         /// @brief Gets an iterator to the first entity which matches the query.
         /// @return Iterator.
@@ -159,9 +175,9 @@ namespace cubos::core::ecs
     private:
         friend World;
 
-        const World& mWorld; ///< World to query.
-        Fetched mFetched;    ///< Fetched data.
-        Entity::Mask mMask;  ///< Mask of the components to query.
+        World& mWorld;      ///< World to query.
+        Fetched mFetched;   ///< Fetched data.
+        Entity::Mask mMask; ///< Mask of the components to query.
     };
 
     // Implementation.
@@ -169,7 +185,6 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     std::tuple<Entity, ComponentTypes...> Query<ComponentTypes...>::Iterator::operator*() const
     {
-
         // Convert the fetched data into the desired query reference types.
         return std::forward_as_tuple(
             *mIt, impl::QueryFetcher<ComponentTypes>::arg(
@@ -205,16 +220,17 @@ namespace cubos::core::ecs
     }
 
     template <typename... ComponentTypes>
-    Query<ComponentTypes...>::Query(const World& world)
+    Query<ComponentTypes...>::Query(World& world)
         : mWorld(world)
         , mFetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
     {
         // We must turn the type from Read<T> and similar to T before getting the ID.
-        std::size_t ids[] = {0,
-                             (impl::QueryFetcher<ComponentTypes>::IsOptional
-                                  ? SIZE_MAX
-                                  : mWorld.mComponentManager
-                                        .template getID<typename impl::QueryFetcher<ComponentTypes>::InnerType>())...};
+        std::size_t ids[] = {
+            0, (impl::QueryFetcher<ComponentTypes>::IsOptional
+                    ? SIZE_MAX
+                    : static_cast<std::size_t>(
+                          mWorld.mComponentManager
+                              .template id<typename impl::QueryFetcher<ComponentTypes>::InnerType>()))...};
         mMask.reset();
         for (std::size_t id : ids)
         {
@@ -252,15 +268,15 @@ namespace cubos::core::ecs
     }
 
     template <typename Component>
-    typename impl::QueryFetcher<Write<Component>>::Type impl::QueryFetcher<Write<Component>>::fetch(const World& world)
+    typename impl::QueryFetcher<Write<Component>>::Type impl::QueryFetcher<Write<Component>>::fetch(World& world)
     {
-        return world.mComponentManager.write<Component>();
+        return {world.mComponentManager.storage(world.mComponentManager.id(reflection::reflect<Component>()))};
     }
 
     template <typename Component>
-    Write<Component> impl::QueryFetcher<Write<Component>>::arg(const World& /*unused*/, Type& lock, Entity entity)
+    Write<Component> impl::QueryFetcher<Write<Component>>::arg(const World& /*unused*/, Type& fetched, Entity entity)
     {
-        return {*static_cast<Component*>(lock.get().get(entity.index))};
+        return {*static_cast<Component*>(fetched.storage.get(entity.index))};
     }
 
     template <typename Component>
@@ -270,15 +286,15 @@ namespace cubos::core::ecs
     }
 
     template <typename Component>
-    typename impl::QueryFetcher<Read<Component>>::Type impl::QueryFetcher<Read<Component>>::fetch(const World& world)
+    typename impl::QueryFetcher<Read<Component>>::Type impl::QueryFetcher<Read<Component>>::fetch(World& world)
     {
-        return world.mComponentManager.read<Component>();
+        return {world.mComponentManager.storage(world.mComponentManager.id(reflection::reflect<Component>()))};
     }
 
     template <typename Component>
-    Read<Component> impl::QueryFetcher<Read<Component>>::arg(const World& /*unused*/, Type& lock, Entity entity)
+    Read<Component> impl::QueryFetcher<Read<Component>>::arg(const World& /*unused*/, Type& fetched, Entity entity)
     {
-        return {*static_cast<const Component*>(lock.get().get(entity.index))};
+        return {*static_cast<const Component*>(fetched.storage.get(entity.index))};
     }
 
     template <typename Component>
@@ -288,18 +304,17 @@ namespace cubos::core::ecs
     }
 
     template <typename Component>
-    typename impl::QueryFetcher<OptWrite<Component>>::Type impl::QueryFetcher<OptWrite<Component>>::fetch(
-        const World& world)
+    typename impl::QueryFetcher<OptWrite<Component>>::Type impl::QueryFetcher<OptWrite<Component>>::fetch(World& world)
     {
-        return world.mComponentManager.write<Component>();
+        return {world.mComponentManager.storage(world.mComponentManager.id(reflection::reflect<Component>()))};
     }
 
     template <typename Component>
-    OptWrite<Component> impl::QueryFetcher<OptWrite<Component>>::arg(const World& world, Type& lock, Entity entity)
+    OptWrite<Component> impl::QueryFetcher<OptWrite<Component>>::arg(const World& world, Type& fetched, Entity entity)
     {
         if (world.components(entity).has<Component>())
         {
-            return {static_cast<Component*>(lock.get().get(entity.index))};
+            return {static_cast<Component*>(fetched.storage.get(entity.index))};
         }
 
         return {nullptr};
@@ -312,18 +327,17 @@ namespace cubos::core::ecs
     }
 
     template <typename Component>
-    typename impl::QueryFetcher<OptRead<Component>>::Type impl::QueryFetcher<OptRead<Component>>::fetch(
-        const World& world)
+    typename impl::QueryFetcher<OptRead<Component>>::Type impl::QueryFetcher<OptRead<Component>>::fetch(World& world)
     {
-        return world.mComponentManager.read<Component>();
+        return {world.mComponentManager.storage(world.mComponentManager.id(reflection::reflect<Component>()))};
     }
 
     template <typename Component>
-    OptRead<Component> impl::QueryFetcher<OptRead<Component>>::arg(const World& world, Type& lock, Entity entity)
+    OptRead<Component> impl::QueryFetcher<OptRead<Component>>::arg(const World& world, Type& fetched, Entity entity)
     {
         if (world.components(entity).has<Component>())
         {
-            return {static_cast<const Component*>(lock.get().get(entity.index))};
+            return {static_cast<const Component*>(fetched.storage.get(entity.index))};
         }
 
         return {nullptr};

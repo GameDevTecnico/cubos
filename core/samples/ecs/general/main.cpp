@@ -1,10 +1,7 @@
 #include <iostream>
 
 #include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/ecs/component/map_storage.hpp>
-#include <cubos/core/ecs/component/null_storage.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
-#include <cubos/core/ecs/component/vec_storage.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/ecs/system/system.hpp>
@@ -122,10 +119,10 @@ namespace cubos::core::data::old
     }
 } // namespace cubos::core::data::old
 
-CUBOS_REGISTER_COMPONENT(Player, ecs::NullStorage<Player>)
-CUBOS_REGISTER_COMPONENT(Position, ecs::VecStorage<Position>)
-CUBOS_REGISTER_COMPONENT(Velocity, ecs::MapStorage<Velocity>)
-CUBOS_REGISTER_COMPONENT(Parent, ecs::VecStorage<Parent>)
+CUBOS_REGISTER_COMPONENT(Player)
+CUBOS_REGISTER_COMPONENT(Position)
+CUBOS_REGISTER_COMPONENT(Velocity)
+CUBOS_REGISTER_COMPONENT(Parent)
 
 void spawner(ecs::Commands cmds)
 {

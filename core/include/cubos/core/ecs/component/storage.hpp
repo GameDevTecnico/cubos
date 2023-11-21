@@ -4,49 +4,50 @@
 
 #pragma once
 
-#include <cubos/core/ecs/entity/manager.hpp>
+#include <cstdint>
+
+#include <cubos/core/memory/any_vector.hpp>
 
 namespace cubos::core::ecs
 {
-    /// @brief Abstract parent class for all storages.
-    ///
-    /// Necessary to provide a type-erased interface for erasing and packaging/unpackaging
-    /// components.
-    ///
+    /// @brief Stores the components of a given type.
     /// @ingroup core-ecs-component
-    class IStorage
+    class Storage final
     {
     public:
-        virtual ~IStorage() = default;
+        /// @brief Constructs.
+        /// @param type Component type.
+        Storage(const reflection::Type& type);
+
+        /// @brief Move constructs.
+        /// @param other Moved storage.
+        Storage(Storage&& other) noexcept = default;
 
         /// @brief Inserts a value into the storage.
         /// @param index Index where to insert the value.
         /// @param value Value to be moved.
-        virtual void insert(uint32_t index, void* value) = 0;
+        void insert(uint32_t index, void* value);
 
         /// @brief Remove a value from the storage.
         /// @param index Index of the value to be removed.
-        virtual void erase(uint32_t index) = 0;
+        void erase(uint32_t index);
 
         /// @brief Gets a value from the storage.
         /// @param index Index of the value to be retrieved.
         /// @return Pointer to the value.
-        virtual void* get(uint32_t index) = 0;
+        void* get(uint32_t index);
 
         /// @brief Gets a value from the storage.
         /// @param index Index of the value to be retrieved.
         /// @return Pointer to the value.
-        virtual const void* get(uint32_t index) const = 0;
-    };
+        const void* get(uint32_t index) const;
 
-    /// @brief Abstract container for a component type @p T.
-    /// @tparam T Component type.
-    /// @ingroup core-ecs-component
-    template <typename T>
-    class Storage : public IStorage
-    {
-    public:
-        /// @brief Component type.
-        using Type = T;
+        /// @brief Gets the component type stored in the storage.
+        /// @return Component type.
+        const reflection::Type& type() const;
+
+    private:
+        memory::AnyVector mData;
+        const reflection::ConstructibleTrait* mConstructibleTrait{nullptr};
     };
 } // namespace cubos::core::ecs

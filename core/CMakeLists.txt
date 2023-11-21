@@ -85,6 +85,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/entity/entity.cpp"
     "src/cubos/core/ecs/entity/hash.cpp"
     "src/cubos/core/ecs/entity/manager.cpp"
+    "src/cubos/core/ecs/component/storage.cpp"
     "src/cubos/core/ecs/component/registry.cpp"
     "src/cubos/core/ecs/component/manager.cpp"
     "src/cubos/core/ecs/system/system.cpp"
