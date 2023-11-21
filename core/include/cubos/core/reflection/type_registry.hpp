@@ -16,6 +16,8 @@ namespace cubos::core::reflection
     class TypeRegistry final
     {
     public:
+        using Iterator = typename memory::UnorderedBimap<const Type*, std::string>::Iterator;
+
         /// @brief Registers the given type.
         ///
         /// Does nothing if the type is already registered.
@@ -23,6 +25,10 @@ namespace cubos::core::reflection
         ///
         /// @param type Type to register.
         void insert(const Type& type);
+
+        /// @brief Calls insert for each type in the given type registry.
+        /// @param other Type registry to copy types from.
+        void insert(const TypeRegistry& other);
 
         /// @copydoc insert(const Type&)
         /// @tparam T Type to register.
@@ -61,6 +67,14 @@ namespace cubos::core::reflection
         /// @brief Returns the number of registered types.
         /// @return Number of registered types.
         std::size_t size() const;
+
+        /// @brief Gets an iterator to the beginning of the registry.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Gets an iterator to the end of the registry.
+        /// @return Iterator.
+        Iterator end() const;
 
     private:
         memory::UnorderedBimap<const Type*, std::string> mTypes{};
