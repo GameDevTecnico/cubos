@@ -308,8 +308,8 @@ namespace cubos::core::ecs
                     mBuffers.insert<ComponentTypes>({});
                 }
 
-                std::size_t componentID = mWorld.mComponentManager.getID<ComponentTypes>();
-                mask.set(componentID);
+                auto componentID = mWorld.mComponentManager.id<ComponentTypes>();
+                mask.set(static_cast<std::size_t>(componentID));
                 mBuffers.at<ComponentTypes>().components.erase(entity);
                 mBuffers.at<ComponentTypes>().components.emplace(
                     entity, memory::AnyValue::moveConstruct(reflection::reflect<ComponentTypes>(), &components));
@@ -326,8 +326,8 @@ namespace cubos::core::ecs
 
         (
             [&]() {
-                std::size_t componentID = mWorld.mComponentManager.getID<ComponentTypes>();
-                mask.set(componentID);
+                auto componentID = mWorld.mComponentManager.id<ComponentTypes>();
+                mask.set(static_cast<std::size_t>(componentID));
             }(),
             ...);
     }
@@ -349,8 +349,8 @@ namespace cubos::core::ecs
                     mBuffers.insert<ComponentTypes>({});
                 }
 
-                std::size_t componentID = mWorld.mComponentManager.getID<ComponentTypes>();
-                mask.set(componentID);
+                auto componentID = mWorld.mComponentManager.id<ComponentTypes>();
+                mask.set(static_cast<std::size_t>(componentID));
                 mBuffers.at<ComponentTypes>().components.erase(entity);
                 mBuffers.at<ComponentTypes>().components.emplace(
                     entity, memory::AnyValue::moveConstruct(reflection::reflect<ComponentTypes>(), &components));

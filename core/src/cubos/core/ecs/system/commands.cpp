@@ -74,8 +74,8 @@ void CommandBuffer::add(Entity entity, const reflection::Type& type, void* compo
         mBuffers.insert(type, {});
     }
 
-    std::size_t componentID = mWorld.mComponentManager.getID(type);
-    mask.set(componentID);
+    auto componentID = mWorld.mComponentManager.id(type);
+    mask.set(static_cast<std::size_t>(componentID));
     mBuffers.at(type).components.erase(entity);
     mBuffers.at(type).components.emplace(entity, memory::AnyValue::moveConstruct(type, component));
 }
@@ -107,11 +107,11 @@ void CommandBuffer::commit()
     // 1. Components are removed.
     for (auto& [entity, removed] : mRemoved)
     {
-        for (std::size_t componentId = 1; componentId <= CUBOS_CORE_ECS_MAX_COMPONENTS; ++componentId)
+        for (uint32_t componentId = 1; componentId <= CUBOS_CORE_ECS_MAX_COMPONENTS; ++componentId)
         {
             if (removed.test(componentId))
             {
-                mWorld.mComponentManager.remove(entity.index, componentId);
+                mWorld.mComponentManager.erase(entity.index, componentId);
             }
         }
     }
@@ -119,7 +119,7 @@ void CommandBuffer::commit()
     // 2. Entities are destroyed.
     for (auto entity : mDestroyed)
     {
-        mWorld.mComponentManager.removeAll(entity.index);
+        mWorld.mComponentManager.erase(entity.index);
         mWorld.mEntityManager.destroy(entity);
     }
 
@@ -182,7 +182,7 @@ void CommandBuffer::Buffer::move(Entity entity, ComponentManager& manager)
     auto it = this->components.find(entity);
     if (it != this->components.end())
     {
-        manager.add(entity.index, it->second.type(), it->second.get());
+        manager.insert(entity.index, manager.id(it->second.type()), it->second.get());
         this->components.erase(it);
     }
 }

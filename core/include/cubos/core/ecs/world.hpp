@@ -318,7 +318,7 @@ namespace cubos::core::ecs
 
     private:
         World::Components& mComponents;
-        std::size_t mId{1};
+        uint32_t mId{1};
         mutable Component mComponent;
     };
 
@@ -363,7 +363,7 @@ namespace cubos::core::ecs
 
     private:
         const World::ConstComponents& mComponents;
-        std::size_t mId{1};
+        uint32_t mId{1};
         mutable Component mComponent;
     };
 
@@ -380,7 +380,7 @@ namespace cubos::core::ecs
     void World::registerComponent()
     {
         CUBOS_TRACE("Registered component '{}'", reflection::reflect<T>().name());
-        mComponentManager.registerComponent<T>();
+        mComponentManager.registerType(reflection::reflect<T>());
     }
 
     template <typename T>

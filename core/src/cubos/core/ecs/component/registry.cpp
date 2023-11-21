@@ -14,17 +14,6 @@ bool Registry::create(std::string_view name, data::old::Deserializer& des, Bluep
     return false;
 }
 
-std::unique_ptr<IStorage> Registry::createStorage(const reflection::Type& type)
-{
-    auto& creators = Registry::entriesByType();
-    if (creators.contains(type))
-    {
-        return creators.at(type)->storageCreator();
-    }
-
-    return nullptr;
-}
-
 const reflection::Type* Registry::type(std::string_view name)
 {
     auto& entries = Registry::entriesByName();

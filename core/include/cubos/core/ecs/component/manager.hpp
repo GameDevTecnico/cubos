@@ -4,73 +4,14 @@
 
 #pragma once
 
-#include <cstddef>
 #include <cstdint>
-#include <memory>
-#include <mutex>
-#include <optional>
-#include <shared_mutex>
-#include <typeindex>
+#include <vector>
 
 #include <cubos/core/ecs/component/storage.hpp>
 #include <cubos/core/memory/type_map.hpp>
 
 namespace cubos::core::ecs
 {
-    /// @brief Utility struct used to reference a storage of component type @p T for reading.
-    /// @tparam T Component type.
-    /// @ingroup core-ecs-component
-    template <typename T>
-    class ReadStorage
-    {
-    public:
-        /// @brief Move constructor.
-        /// @param other Other instance to move from.
-        ReadStorage(ReadStorage&& other) noexcept;
-
-        /// @brief Gets the underlying storage reference.
-        /// @return Underlying storage reference.
-        const Storage<T>& get() const;
-
-    private:
-        friend class ComponentManager;
-
-        /// @brief Constructs.
-        /// @param storage  Storage to reference.
-        /// @param lock Read lock to hold.
-        ReadStorage(const Storage<T>& storage, std::shared_lock<std::shared_mutex>&& lock);
-
-        const Storage<T>& mStorage;
-        std::shared_lock<std::shared_mutex> mLock;
-    };
-
-    /// @brief Utility struct used to reference a storage of component type @p T for writing.
-    /// @tparam T Component type.
-    /// @ingroup core-ecs-component
-    template <typename T>
-    class WriteStorage
-    {
-    public:
-        /// @brief Move constructor.
-        /// @param other Other instance to move from.
-        WriteStorage(WriteStorage&& other) noexcept;
-
-        /// @brief Gets the underlying storage reference.
-        /// @return Underlying storage reference.
-        Storage<T>& get() const;
-
-    private:
-        friend class ComponentManager;
-
-        /// @brief Constructs.
-        /// @param storage Storage to reference.
-        /// @param lock Write lock to hold.
-        WriteStorage(Storage<T>& storage, std::unique_lock<std::shared_mutex>&& lock);
-
-        Storage<T>& mStorage;
-        std::unique_lock<std::shared_mutex> mLock;
-    };
-
     /// @brief Holds and manages components.
     ///
     /// Used internally by @ref World.
@@ -80,182 +21,53 @@ namespace cubos::core::ecs
     {
     public:
         /// @brief Registers a new component type with the component manager.
-        ///
-        /// Must be called before any component of this type is used in any way.
-        ///
-        /// @tparam T Type of the component.
-        template <typename T>
-        void registerComponent();
-
-        /// @brief Registers a new component type with the component manager.
-        ///
-        /// Must be called before any component of this type is used in any way.
-        ///
         /// @param type Type of the component.
-        void registerComponent(const reflection::Type& type);
+        void registerType(const reflection::Type& type);
 
         /// @brief Gets the identifier of a registered component type.
         /// @param type Component type.
         /// @return Component identifier.
-        std::size_t getID(const reflection::Type& type) const;
+        uint32_t id(const reflection::Type& type) const;
 
         /// @brief Gets the identifier of a registered component type.
         /// @tparam T Component type.
         /// @return Component identifier.
-        template <typename T>
-        std::size_t getID() const;
+        template <reflection::Reflectable T>
+        uint32_t id() const
+        {
+            return this->id(reflection::reflect<T>());
+        }
 
         /// @brief Gets the type of a component from its identifier.
         /// @param id Component identifier.
         /// @return Component type index.
-        const reflection::Type& getType(std::size_t id) const;
-
-        //// @brief Locks a storage for reading and returns it.
-        /// @tparam T Component type.
-        /// @return Storage lock.
-        template <typename T>
-        ReadStorage<T> read() const;
-
-        //// @brief Locks a storage for writing and returns it.
-        /// @tparam T Component type.
-        /// @return Storage lock.
-        template <typename T>
-        WriteStorage<T> write() const;
+        const reflection::Type& type(uint32_t id) const;
 
         /// @brief Adds a component to an entity.
-        /// @param id Entity index.
-        /// @param type Component type.
+        /// @param index Entity index.
+        /// @param id Component identifier.
         /// @param value Component value to move.
-        void add(uint32_t id, const reflection::Type& type, void* value);
-
-        /// @brief Adds a component to an entity.
-        /// @tparam T Component type.
-        /// @param id Entity index.
-        /// @param value Initial component value.
-        template <typename T>
-        void add(uint32_t id, T value);
+        void insert(uint32_t index, uint32_t id, void* value);
 
         /// @brief Removes a component from an entity.
-        /// @tparam T Component type.
-        /// @param id Entity index.
-        template <typename T>
-        void remove(uint32_t id);
-
-        /// @brief Removes a component from an entity.
-        /// @param id Entity index.
-        /// @param componentId Component identifier.
-        void remove(uint32_t id, std::size_t componentId);
+        /// @param index Entity index.
+        /// @param id Component identifier.
+        void erase(uint32_t index, uint32_t id);
 
         /// @brief Removes all components from an entity.
-        /// @param id Entity index.
-        void removeAll(uint32_t id);
+        /// @param index Entity index.
+        void erase(uint32_t index);
 
         /// @brief Gets the storage of the given component type.
-        /// @param id Component type identifier.
+        /// @param id Component identifier.
         /// @return Component storage.
-        IStorage* storage(std::size_t id);
+        Storage& storage(uint32_t id);
 
-        /// @copydoc storage(std::size_t)
-        const IStorage* storage(std::size_t id) const;
+        /// @copydoc storage(uint32_t)
+        const Storage& storage(uint32_t id) const;
 
     private:
-        struct Entry
-        {
-            Entry(std::unique_ptr<IStorage> storage);
-
-            std::unique_ptr<IStorage> storage;        ///< Generic component storage.
-            std::unique_ptr<std::shared_mutex> mutex; ///< Read/write lock for the storage.
-        };
-
-        memory::TypeMap<std::size_t> mTypeToIds; ///< Maps component types to component IDs.
-        std::vector<Entry> mEntries;             ///< Registered component storages.
+        memory::TypeMap<uint32_t> mTypeToIds; ///< Maps component types to component IDs.
+        std::vector<Storage> mStorages;       ///< Registered component storages.
     };
-
-    // Implementation.
-
-    template <typename T>
-    ReadStorage<T>::ReadStorage(ReadStorage&& other) noexcept
-        : mStorage(other.mStorage)
-        , mLock(std::move(other.mLock))
-    {
-        // Do nothing.
-    }
-
-    template <typename T>
-    const Storage<T>& ReadStorage<T>::get() const
-    {
-        return mStorage;
-    }
-
-    template <typename T>
-    ReadStorage<T>::ReadStorage(const Storage<T>& storage, std::shared_lock<std::shared_mutex>&& lock)
-        : mStorage(storage)
-        , mLock(std::move(lock))
-    {
-        // Do nothing.
-    }
-
-    template <typename T>
-    WriteStorage<T>::WriteStorage(WriteStorage&& other) noexcept
-        : mStorage(other.mStorage)
-        , mLock(std::move(other.mLock))
-    {
-        // Do nothing.
-    }
-
-    template <typename T>
-    Storage<T>& WriteStorage<T>::get() const
-    {
-        return mStorage;
-    }
-
-    template <typename T>
-    WriteStorage<T>::WriteStorage(Storage<T>& storage, std::unique_lock<std::shared_mutex>&& lock)
-        : mStorage(storage)
-        , mLock(std::move(lock))
-    {
-        // Do nothing.
-    }
-
-    template <typename T>
-    void ComponentManager::registerComponent()
-    {
-        this->registerComponent(reflection::reflect<T>());
-    }
-
-    template <typename T>
-    std::size_t ComponentManager::getID() const
-    {
-        return this->getID(reflection::reflect<T>());
-    }
-
-    template <typename T>
-    ReadStorage<T> ComponentManager::read() const
-    {
-        const std::size_t componentId = this->getID<T>();
-        return ReadStorage<T>(*static_cast<const Storage<T>*>(mEntries[componentId - 1].storage.get()),
-                              std::shared_lock<std::shared_mutex>(*mEntries[componentId - 1].mutex));
-    }
-
-    template <typename T>
-    WriteStorage<T> ComponentManager::write() const
-    {
-        const std::size_t componentId = this->getID<T>();
-        return WriteStorage<T>(*static_cast<Storage<T>*>(mEntries[componentId - 1].storage.get()),
-                               std::unique_lock<std::shared_mutex>(*mEntries[componentId - 1].mutex));
-    }
-
-    template <typename T>
-    void ComponentManager::add(uint32_t id, T value)
-    {
-        this->add(id, reflection::reflect<T>(), &value);
-    }
-
-    template <typename T>
-    void ComponentManager::remove(uint32_t id)
-    {
-        const std::size_t componentId = this->getID<T>();
-        auto storage = static_cast<Storage<T>*>(mEntries[componentId - 1].storage.get());
-        storage->erase(id);
-    }
 } // namespace cubos::core::ecs

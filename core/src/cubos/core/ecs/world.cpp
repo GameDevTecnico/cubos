@@ -26,7 +26,7 @@ Entity World::create()
 void World::destroy(Entity entity)
 {
     mEntityManager.destroy(entity);
-    mComponentManager.removeAll(entity.index);
+    mComponentManager.erase(entity.index);
     CUBOS_DEBUG("Destroyed entity {}", entity);
 }
 
@@ -64,15 +64,15 @@ World::Components::Components(World& world, Entity entity)
 
 bool World::Components::has(const reflection::Type& type) const
 {
-    std::size_t componentId = mWorld.mComponentManager.getID(type);
-    return mWorld.mEntityManager.getMask(mEntity).test(componentId);
+    auto componentId = mWorld.mComponentManager.id(type);
+    return mWorld.mEntityManager.getMask(mEntity).test(static_cast<std::size_t>(componentId));
 }
 
 void* World::Components::get(const reflection::Type& type)
 {
     CUBOS_ASSERT(this->has(type));
-    std::size_t componentId = mWorld.mComponentManager.getID(type);
-    return mWorld.mComponentManager.storage(componentId)->get(mEntity.index);
+    auto componentId = mWorld.mComponentManager.id(type);
+    return mWorld.mComponentManager.storage(componentId).get(mEntity.index);
 }
 
 auto World::Components::begin() -> Iterator
@@ -87,11 +87,11 @@ auto World::Components::end() -> Iterator
 
 auto World::Components::add(const reflection::Type& type, void* value) -> Components&
 {
-    std::size_t componentId = mWorld.mComponentManager.getID(type);
+    auto componentId = mWorld.mComponentManager.id(type);
     auto mask = mWorld.mEntityManager.getMask(mEntity);
-    mask.set(componentId);
+    mask.set(static_cast<std::size_t>(componentId));
     mWorld.mEntityManager.setMask(mEntity, mask);
-    mWorld.mComponentManager.add(mEntity.index, type, value);
+    mWorld.mComponentManager.insert(mEntity.index, componentId, value);
 
     CUBOS_DEBUG("Added component {} to entity {}", type.name(), mEntity, mEntity);
     return *this;
@@ -99,11 +99,11 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
 
 auto World::Components::remove(const reflection::Type& type) -> Components&
 {
-    std::size_t componentId = mWorld.mComponentManager.getID(type);
+    auto componentId = mWorld.mComponentManager.id(type);
     auto mask = mWorld.mEntityManager.getMask(mEntity);
-    mask.set(componentId, false);
+    mask.set(static_cast<std::size_t>(componentId), false);
     mWorld.mEntityManager.setMask(mEntity, mask);
-    mWorld.mComponentManager.remove(mEntity.index, componentId);
+    mWorld.mComponentManager.erase(mEntity.index, componentId);
 
     CUBOS_DEBUG("Removed component {} from entity {}", type.name(), mEntity);
     return *this;
@@ -118,15 +118,15 @@ World::ConstComponents::ConstComponents(const World& world, Entity entity)
 
 bool World::ConstComponents::has(const reflection::Type& type) const
 {
-    std::size_t componentId = mWorld.mComponentManager.getID(type);
-    return mWorld.mEntityManager.getMask(mEntity).test(componentId);
+    auto componentId = mWorld.mComponentManager.id(type);
+    return mWorld.mEntityManager.getMask(mEntity).test(static_cast<std::size_t>(componentId));
 }
 
 const void* World::ConstComponents::get(const reflection::Type& type) const
 {
     CUBOS_ASSERT(this->has(type));
-    std::size_t componentId = mWorld.mComponentManager.getID(type);
-    return mWorld.mComponentManager.storage(componentId)->get(mEntity.index);
+    auto componentId = mWorld.mComponentManager.id(type);
+    return mWorld.mComponentManager.storage(componentId).get(mEntity.index);
 }
 
 auto World::ConstComponents::begin() const -> Iterator
@@ -146,10 +146,10 @@ World::Components::Iterator::Iterator(Components& components, bool end)
 
     if (end)
     {
-        mId = mask.size();
+        mId = static_cast<uint32_t>(mask.size());
     }
 
-    while (mId < mask.size() && !mask.test(mId))
+    while (static_cast<std::size_t>(mId) < mask.size() && !mask.test(static_cast<std::size_t>(mId)))
     {
         mId += 1;
     }
@@ -163,8 +163,8 @@ bool World::Components::Iterator::operator==(const Iterator& other) const
 auto World::Components::Iterator::operator*() const -> const Component&
 {
     const auto& mask = mComponents.mWorld.mEntityManager.getMask(mComponents.mEntity);
-    CUBOS_ASSERT(mId < mask.size(), "Iterator is out of bounds");
-    mComponent.type = &mComponents.mWorld.mComponentManager.getType(mId);
+    CUBOS_ASSERT(static_cast<std::size_t>(mId) < mask.size(), "Iterator is out of bounds");
+    mComponent.type = &mComponents.mWorld.mComponentManager.type(mId);
     mComponent.value = mComponents.get(*mComponent.type);
     return mComponent;
 }
@@ -193,10 +193,10 @@ World::ConstComponents::Iterator::Iterator(const ConstComponents& components, bo
 
     if (end)
     {
-        mId = mask.size();
+        mId = static_cast<uint32_t>(mask.size());
     }
 
-    while (mId < mask.size() && !mask.test(mId))
+    while (static_cast<std::size_t>(mId) < mask.size() && !mask.test(static_cast<std::size_t>(mId)))
     {
         mId += 1;
     }
@@ -210,8 +210,8 @@ bool World::ConstComponents::Iterator::operator==(const Iterator& other) const
 auto World::ConstComponents::Iterator::operator*() const -> const Component&
 {
     const auto& mask = mComponents.mWorld.mEntityManager.getMask(mComponents.mEntity);
-    CUBOS_ASSERT(mId < mask.size(), "Iterator is out of bounds");
-    mComponent.type = &mComponents.mWorld.mComponentManager.getType(mId);
+    CUBOS_ASSERT(static_cast<std::size_t>(mId) < mask.size(), "Iterator is out of bounds");
+    mComponent.type = &mComponents.mWorld.mComponentManager.type(mId);
     mComponent.value = mComponents.get(*mComponent.type);
     return mComponent;
 }
