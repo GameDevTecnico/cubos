@@ -238,6 +238,27 @@ MouseState GLFWWindow::mouseState() const
 #endif
 }
 
+glm::ivec2 GLFWWindow::getMousePosition()
+{
+#ifdef WITH_GLFW
+    double xpos = 0;
+    double ypos = 0;
+    glfwGetCursorPos(mHandle, &xpos, &ypos);
+    return glm::ivec2{xpos, ypos};
+#else
+    UNSUPPORTED();
+#endif
+}
+
+void GLFWWindow::setMousePosition(const glm::ivec2 pos)
+{
+#ifdef WITH_GLFW
+    glfwSetCursorPos(mHandle, (double)pos.x, (double)pos.y);
+#else
+    UNSUPPORTED();
+#endif
+}
+
 std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
 {
 #ifdef WITH_GLFW

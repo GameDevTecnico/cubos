@@ -28,7 +28,8 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/transform/scale.cpp"
 
     "src/cubos/engine/utils/free_camera_controller/plugin.cpp"
-    "src/cubos/engine/utils/free_camera_controller/free_camera_controller.cpp"
+    "src/cubos/engine/utils/free_camera_controller/simple_controller.cpp"
+    "src/cubos/engine/utils/free_camera_controller/free_controller.cpp"
     
     "src/cubos/engine/assets/plugin.cpp"
     "src/cubos/engine/assets/assets.cpp"
