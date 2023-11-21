@@ -1,6 +1,5 @@
 #include <cubos/core/data/des/json.hpp>
 #include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
@@ -14,11 +13,22 @@
 using cubos::core::data::JSONDeserializer;
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::Entity;
-using cubos::core::ecs::Registry;
 using cubos::core::memory::AnyValue;
 using cubos::core::memory::Stream;
+using cubos::core::reflection::TypeRegistry;
 
 using namespace cubos::engine;
+
+SceneBridge::SceneBridge(TypeRegistry components)
+    : FileBridge(core::reflection::reflect<Scene>())
+    , mComponents{std::move(components)}
+{
+}
+
+TypeRegistry& SceneBridge::components()
+{
+    return mComponents;
+}
 
 bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
 {
@@ -136,14 +146,13 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
 
             for (const auto& [componentName, componentJSON] : entityJSON.items())
             {
-                const auto* type = Registry::type(componentName);
-                if (type == nullptr)
+                if (!mComponents.contains(componentName))
                 {
-                    CUBOS_ERROR("No such component type '{}'", componentName);
+                    CUBOS_ERROR("No such component type '{}' registered on the scene bridge", componentName);
                     return false;
                 }
 
-                auto component = AnyValue::defaultConstruct(*type);
+                auto component = AnyValue::defaultConstruct(mComponents.at(componentName));
                 des.feed(componentJSON);
                 if (!des.read(component.type(), component.get()))
                 {
