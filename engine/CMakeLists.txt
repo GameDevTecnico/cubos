@@ -1,8 +1,6 @@
 # engine/CMakeLists.txt
 # Cubos engine build configuration
 
-include(QuadradosGenerate)
-
 option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
 option(BUILD_ENGINE_TESTS "Build cubos engine tests?" OFF)
 
@@ -102,9 +100,6 @@ target_link_libraries(cubos-engine PUBLIC imgui)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(cubos-engine PUBLIC -Wno-attributes)
 endif()
-
-# Generate component headers
-quadrados_generate(cubos-engine ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Add engine tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS)

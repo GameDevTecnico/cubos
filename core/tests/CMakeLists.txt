@@ -1,8 +1,6 @@
 # core/tests/CMakeLists.txt
 # Core tests build configuration
 
-include(QuadradosGenerate)
-
 add_executable(
     cubos-core-tests
     main.cpp
@@ -40,7 +38,6 @@ add_executable(
     memory/unordered_bimap.cpp
 
     ecs/utils.cpp
-    ecs/registry.cpp
     ecs/world.cpp
     ecs/query.cpp
     ecs/blueprint.cpp
@@ -55,6 +52,5 @@ add_executable(
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
 cubos_common_target_options(cubos-core-tests)
-quadrados_generate(cubos-core-tests ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_test(NAME cubos-core-tests COMMAND cubos-core-tests)

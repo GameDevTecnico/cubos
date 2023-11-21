@@ -1,8 +1,6 @@
 # engine/samples/CMakeLists.txt
 # Engine samples build configuration
 
-include(QuadradosGenerate)
-
 # Macro used to reduce the boilerplate code
 macro(make_sample)
     set(options COMPONENTS ASSETS)
@@ -30,14 +28,10 @@ macro(make_sample)
     if(MAKE_SAMPLE_ASSETS)
         target_compile_definitions(${target} PUBLIC SAMPLE_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}/assets")
     endif()
-
-    if(MAKE_SAMPLE_COMPONENTS)
-        quadrados_generate(${target} "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}")
-    endif()
 endmacro()
 
 # Add samples
-make_sample(DIR "hello-cubos" COMPONENTS)
+make_sample(DIR "hello-cubos")
 make_sample(DIR "settings")
 make_sample(DIR "events")
 make_sample(DIR "input" ASSETS)
@@ -47,7 +41,7 @@ make_sample(DIR "assets/saving" ASSETS)
 make_sample(DIR "renderer")
 make_sample(DIR "imgui")
 make_sample(DIR "collisions")
-make_sample(DIR "scene" COMPONENTS ASSETS)
+make_sample(DIR "scene" ASSETS)
 make_sample(DIR "voxels" ASSETS)
 make_sample(DIR "gizmos")
-make_sample(DIR "physics" COMPONENTS ASSETS)
+make_sample(DIR "physics" ASSETS)

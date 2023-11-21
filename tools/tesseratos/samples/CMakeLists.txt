@@ -1,8 +1,6 @@
 # tesseratos/samples/CMakeLists.txt
 # Tesseratos samples build configuration
 
-include(QuadradosGenerate)
-
 # Macro used to reduce the boilerplate code
 macro(make_sample)
     set(options COMPONENTS ASSETS)
@@ -30,11 +28,7 @@ macro(make_sample)
     if(MAKE_SAMPLE_ASSETS)
         target_compile_definitions(${target} PUBLIC SAMPLE_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}/assets")
     endif()
-
-    if(MAKE_SAMPLE_COMPONENTS)
-        quadrados_generate(${target} "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}")
-    endif()
 endmacro()
 
 # Add samples
-make_sample(DIR "main" COMPONENTS ASSETS)
+make_sample(DIR "main" ASSETS)
