@@ -162,6 +162,18 @@ glm::ivec2 GLFWWindow::framebufferSize() const
 #endif
 }
 
+float GLFWWindow::contentScale() const
+{
+#ifdef WITH_GLFW
+    float xscale, yscale;
+    glfwGetWindowContentScale(mHandle, &xscale, &yscale);
+    // xscale and yscale should be the same, so only return one
+    return xscale;
+#else
+    UNSUPPORTED();
+#endif
+}
+
 bool GLFWWindow::shouldClose() const
 {
 #ifdef WITH_GLFW

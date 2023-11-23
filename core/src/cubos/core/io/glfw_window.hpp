@@ -29,6 +29,7 @@ namespace cubos::core::io
         gl::RenderDevice& renderDevice() const override;
         glm::ivec2 size() const override;
         glm::ivec2 framebufferSize() const override;
+        float contentScale() const override;
         bool shouldClose() const override;
         double time() const override;
         void mouseState(MouseState state) override;

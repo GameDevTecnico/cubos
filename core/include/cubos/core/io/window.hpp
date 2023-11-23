@@ -186,6 +186,10 @@ namespace cubos::core::io
         /// @return Window framebuffer size, in pixels.
         virtual glm::ivec2 framebufferSize() const = 0;
 
+        /// @brief Gets the window content scale, commonly known as "DPI scale".
+        /// @return Ratio between the current DPI and the platform's default DPI.
+        virtual float contentScale() const = 0;
+
         /// @brief Checks whether the window should close.
         /// @return Whether the window should close.
         virtual bool shouldClose() const = 0;

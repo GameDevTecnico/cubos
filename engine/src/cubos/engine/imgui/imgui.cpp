@@ -321,6 +321,14 @@ void cubos::engine::imguiInitialize(io::Window window)
 
     bd->time = window->time();
 
+    // DPI scaling
+    float dpiScale = window->contentScale();
+    ImGui::GetStyle().ScaleAllSizes(dpiScale);
+    ImFontConfig font_cfg;
+    // Default font size is 13; scale that
+    font_cfg.SizePixels = 13.0f * dpiScale;
+    io.Fonts->AddFontDefault(&font_cfg);
+
     createDeviceObjects();
 
     CUBOS_INFO("Initialized UI");
