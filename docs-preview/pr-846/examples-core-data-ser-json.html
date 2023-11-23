@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::data namespace | CUBOS. Docs</title>
+  <title>Examples &raquo; Core &raquo; Data &raquo; Serialization &raquo; JSON Serializer | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,70 +46,28 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>data <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="examples.html">Examples</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core.html">Core</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core-data.html">Data</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core-data-ser.html">Serialization</a> &raquo;</span>
+          JSON Serializer
         </h1>
-        <p><a href="group__core-data.html" class="m-doc">Data</a> module.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#nested-classes">Classes</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>
-            </dt>
-            <dd>Base class for deserializers, which defines the interface for deserializing arbitrary data using its reflection metadata.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" class="m-doc">JSONDeserializer</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> implementation which allows reading data from a JSON object.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>
-            </dt>
-            <dd>Interface for a bridge between the CUBOS. virtual file system and the real world.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" class="m-doc">EmbeddedArchive</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads data embedded in the application. Meant to be used with the <code>quadrados embed</code> tool.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>
-            </dt>
-            <dd>Represents a file in the virtual file system of the engine.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1data_1_1FileStream.html" class="m-doc">FileStream</a>
-            </dt>
-            <dd>Wrapper around an implementation-specific file stream which keeps the file alive and does some sanity checks.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a>
-            </dt>
-            <dd>Singleton which represents the virtual file system of the engine.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1StandardArchive.html" class="m-doc">StandardArchive</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads and writes from/into the OS file system using the standard library.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1DebugSerializer.html" class="m-doc">DebugSerializer</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> implementation which prints the given data to a stream in a human-readable format not meant to be parsed.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html" class="m-doc">JSONSerializer</a>
-            </dt>
-            <dd>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class for serializing to JSON.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>
-            </dt>
-            <dd>Base class for serializers, which defines the interface for serializing arbitrary data using its reflection metadata.</dd>
-          </dl>
-        </section>
+        <p>Implementing <a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html" class="m-doc">JSONSerializer</a>.</p>
+<p><a name="md_data_ser_json_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/data/ser/json">here</a>.</p></aside><p>You&#x27;ll need to include <a href="core_2include_2cubos_2core_2data_2ser_2json_8hpp.html" class="m-doc">core/<wbr />data/<wbr />ser/<wbr />json.hpp</a>. For simplicity, in this sample we&#x27;ll use the following aliases:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/data/ser/serializer.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">data</span><span class="o">::</span><span class="n">Serializer</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span></pre><p>Using the JSON serializer is as simple as calling <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a4baab0fc3ce1b9c40bd33a4e9081c43e" class="m-doc">JSONSerializer::<wbr />write</a> on the data we want to serialize.</p><p>In this case, we&#x27;ll be serializing a <code>std::vector&lt;std::vector&lt;std::vector&lt;glm::ivec3&gt;&gt;&gt;</code>, which is a nested array of objects with three <code>int32_t</code> fields.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;glm/vec3.hpp&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/external/glm.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/external/vector.hpp&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">glm</span><span class="o">::</span><span class="n">ivec3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="p">{{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">}};</span>
+
+<span class="w">    </span><span class="n">MySerializer</span><span class="w"> </span><span class="n">ser</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">ser</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span>
+<span class="p">}</span></pre><p>This should output:</p><pre class="m-code"><span class="c1">// [{x: 1, y: 2, z: 3, }, {x: 4, y: 5, z: 6, }, ]</span></pre>
       </div>
     </div>
   </div>
