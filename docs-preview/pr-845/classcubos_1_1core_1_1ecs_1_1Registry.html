@@ -74,12 +74,8 @@
             </dt>
             <dd>Instantiates a component with the given name from a deserializer into a blueprint.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#ae76f6918fb913f554a01e96c5556e852" class="m-doc">createStorage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; std::unique_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>&gt;</span>
-            </dt>
-            <dd>Instantiates a component storage for the given component type.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T, typename S&gt;</div>
-              <span class="m-doc-wrap-bumper">static void <a href="#ac48847a026d412e2d866737c57721ad9" class="m-doc">add</a>(</span><span class="m-doc-wrap">)</span>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">static void <a href="#a3b63cce8ecf656bb09c35b45bef9ce9f" class="m-doc">add</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Registers a new component type.</dd>
             <dt>
@@ -137,35 +133,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae76f6918fb913f554a01e96c5556e852"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">static std::unique_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae76f6918fb913f554a01e96c5556e852" class="m-doc-self">createStorage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
-            </h3>
-            <p>Instantiates a component storage for the given component type.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">type</td>
-                  <td>Type of the component.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Smart pointer to the storage, or nullptr if the component type was not found.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ac48847a026d412e2d866737c57721ad9"><div>
+          <section class="m-doc-details" id="a3b63cce8ecf656bb09c35b45bef9ce9f"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename T, typename S&gt;
+                template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac48847a026d412e2d866737c57721ad9" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b63cce8ecf656bb09c35b45bef9ce9f" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Registers a new component type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -176,10 +149,6 @@
                 <tr>
                   <td style="width: 1%">T</td>
                   <td>Component type to register.</td>
-                </tr>
-                <tr>
-                  <td>S</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> type to use for the component.</td>
                 </tr>
               </tbody>
             </table>

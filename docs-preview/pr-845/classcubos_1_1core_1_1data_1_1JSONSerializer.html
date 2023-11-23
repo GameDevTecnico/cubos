@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::WriteStorage class | CUBOS. Docs</title>
+  <title>cubos::core::data::JSONSerializer class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,90 +46,105 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2ecs_2component_2manager_8hpp.html">&lt;core/ecs/component/manager.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>WriteStorage <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>JSONSerializer <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2data_2ser_2json_8hpp.html">&lt;core/data/ser/json.hpp&gt;</a></div>
         </h1>
-        <p>Utility struct used to reference a storage of component type <code>T</code> for writing.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Component type.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class for serializing to JSON.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>
+            </dt>
+            <dd>Base class for serializers, which defines the interface for serializing arbitrary data using its reflection metadata.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aef6738ec0f0998205adc8b7cd117162b" class="m-doc">WriteStorage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html" class="m-doc">WriteStorage</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            <dt id="aa6bb829fcf8a2d74d68127f8fdeca562">
+              <span class="m-doc-wrap-bumper"><a href="#aa6bb829fcf8a2d74d68127f8fdeca562" class="m-doc-self">JSONSerializer</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Move constructor.</dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abfa17f045ce816cd53fd924a34a5badb" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&lt;T&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a688b395227bd7b2e24e7fd10b99c1baf" class="m-doc">output</a>(</span><span class="m-doc-wrap">) -&gt; nlohmann::json</span>
             </dt>
-            <dd>Gets the underlying storage reference.</dd>
+            <dd>Outputs the serialized JSON. <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a4baab0fc3ce1b9c40bd33a4e9081c43e" class="m-doc">write</a> must be called before this.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afde65c88c3b73f2dbd92b76eab78d0c2" class="m-doc">decompose</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              const void* value) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Called for each type with no hook defined.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aef6738ec0f0998205adc8b7cd117162b"><div>
+          <section class="m-doc-details" id="a688b395227bd7b2e24e7fd10b99c1baf"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />WriteStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef6738ec0f0998205adc8b7cd117162b" class="m-doc-self">WriteStorage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html" class="m-doc">WriteStorage</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper">nlohmann::json cubos::<wbr />core::<wbr />data::<wbr />JSONSerializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a688b395227bd7b2e24e7fd10b99c1baf" class="m-doc-self">output</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Move constructor.</p>
+            <p>Outputs the serialized JSON. <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a4baab0fc3ce1b9c40bd33a4e9081c43e" class="m-doc">write</a> must be called before this.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>JSON.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afde65c88c3b73f2dbd92b76eab78d0c2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />JSONSerializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afde65c88c3b73f2dbd92b76eab78d0c2" class="m-doc-self">decompose</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              const void* value) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Called for each type with no hook defined.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">other</td>
-                  <td>Other instance to move from.</td>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
                 </tr>
               </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="abfa17f045ce816cd53fd924a34a5badb"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&lt;T&gt;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />WriteStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abfa17f045ce816cd53fd924a34a5badb" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Gets the underlying storage reference.</p>
-            <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Underlying storage reference.</td>
+                  <th>Returns</th>
+                  <td>Whether the value was successfully serialized.</td>
                 </tr>
               </tfoot>
             </table>
+<p>Should recurse by calling <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a4baab0fc3ce1b9c40bd33a4e9081c43e" class="m-doc">write()</a> again as appropriate.</p>
           </div></section>
         </section>
       </div>
