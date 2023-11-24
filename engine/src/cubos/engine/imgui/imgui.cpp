@@ -274,7 +274,7 @@ void main()
     bd->ibSize = 0;
 }
 
-void cubos::engine::imguiInitialize(io::Window window)
+void cubos::engine::imguiInitialize(io::Window window, float dpiScale)
 {
     // Initialize ImGui
     IMGUI_CHECKVERSION();
@@ -322,7 +322,12 @@ void cubos::engine::imguiInitialize(io::Window window)
     bd->time = window->time();
 
     // DPI scaling
-    float dpiScale = window->contentScale();
+    if (dpiScale < 1.0f)
+    {
+        // Smaller sizes are possible but may cause crashes.
+        // Anything <= 0.0f is invalid.
+        dpiScale = 1.0f;
+    }
     ImGui::GetStyle().ScaleAllSizes(dpiScale);
     ImFontConfig font_cfg;
     // Default font size is 13; scale that

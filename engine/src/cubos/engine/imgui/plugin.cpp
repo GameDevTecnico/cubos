@@ -1,6 +1,7 @@
 #include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 #include "imgui.hpp"
@@ -10,9 +11,10 @@ using cubos::core::io::WindowEvent;
 
 using namespace cubos::engine;
 
-static void init(Read<Window> window)
+static void init(Read<Window> window, Write<Settings> settings)
 {
-    imguiInitialize(*window);
+    float dpiScale = static_cast<float>(settings->getDouble("imgui.scale", (*window)->contentScale()));
+    imguiInitialize(*window, dpiScale);
 }
 
 static void begin(EventReader<WindowEvent> events)
