@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::VecStorage class | CUBOS. Docs</title>
+  <title>cubos::core::data::JSONDeserializer class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,22 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="vec__storage_8hpp.html">&lt;core/ecs/component/vec_storage.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>VecStorage <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>JSONDeserializer <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2data_2des_2json_8hpp.html">&lt;core/data/des/json.hpp&gt;</a></div>
         </h1>
-        <p><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Component type.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> implementation which allows reading data from a JSON object.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -69,141 +57,98 @@
               Reference
               <ul>
                 <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+<p>Before deserializing any data, a JSON object must be fed to the deserializer.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage&lt;T&gt;</a>
+              class <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>
             </dt>
-            <dd>Abstract container for a component type <code>T</code>.</dd>
+            <dd>Base class for deserializers, which defines the interface for deserializing arbitrary data using its reflection metadata.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="ab4f9d55b390e475487e3b86f2a5bd92d">
+              <span class="m-doc-wrap-bumper"><a href="#ab4f9d55b390e475487e3b86f2a5bd92d" class="m-doc-self">JSONDeserializer</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a1968cfd209f641a6aa783e5b9cf643e3" class="m-doc">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
-              void* value) <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a224a199d9696e1c9ce99eea75f3c58b9" class="m-doc">feed</a>(</span><span class="m-doc-wrap">nlohmann::json json)</span>
             </dt>
-            <dd>Inserts a value into the storage.</dd>
+            <dd>Feeds a JSON object to be deserialized.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#acaf94a56b430ed35721c1c6d00e68439" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint32_t index) -&gt; void* <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7442d5b9602c2ebcb5ea2db311b80be3" class="m-doc">decompose</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Gets a value from the storage.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adea01e440e9d2baac1bb8e7d6ec0ac1d" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; const void* <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Gets a value from the storage.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af93b4b90264fe3dc5780c9f19c1dd7f4" class="m-doc">erase</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Remove a value from the storage.</dd>
+            <dd>Called for each type with no hook defined.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a1968cfd209f641a6aa783e5b9cf643e3"><div>
+          <section class="m-doc-details" id="a224a199d9696e1c9ce99eea75f3c58b9"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />VecStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1968cfd209f641a6aa783e5b9cf643e3" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
-              void* value) <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />JSONDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a224a199d9696e1c9ce99eea75f3c58b9" class="m-doc-self">feed</a>(</span><span class="m-doc-wrap">nlohmann::json json)</span></span>
             </h3>
-            <p>Inserts a value into the storage.</p>
+            <p>Feeds a JSON object to be deserialized.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">index</td>
-                  <td>Index where to insert the value.</td>
+                  <td style="width: 1%">json</td>
+                  <td>JSON object.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7442d5b9602c2ebcb5ea2db311b80be3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />JSONDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7442d5b9602c2ebcb5ea2db311b80be3" class="m-doc-self">decompose</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Called for each type with no hook defined.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>Value to be moved.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="acaf94a56b430ed35721c1c6d00e68439"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />ecs::<wbr />VecStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acaf94a56b430ed35721c1c6d00e68439" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Gets a value from the storage.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">index</td>
-                  <td>Index of the value to be retrieved.</td>
+                  <td>Value.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Pointer to the value.</td>
+                  <td>Whether the value was successfully deserialized.</td>
                 </tr>
               </tfoot>
             </table>
-          </div></section>
-          <section class="m-doc-details" id="adea01e440e9d2baac1bb8e7d6ec0ac1d"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />ecs::<wbr />VecStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adea01e440e9d2baac1bb8e7d6ec0ac1d" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint32_t index) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Gets a value from the storage.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">index</td>
-                  <td>Index of the value to be retrieved.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Pointer to the value.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="af93b4b90264fe3dc5780c9f19c1dd7f4"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />VecStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af93b4b90264fe3dc5780c9f19c1dd7f4" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Remove a value from the storage.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">index</td>
-                  <td>Index of the value to be removed.</td>
-                </tr>
-              </tbody>
-            </table>
+<p>Should recurse by calling <a href="classcubos_1_1core_1_1data_1_1Deserializer.html#a07318d89b59805e5b14e780df349654b" class="m-doc">read()</a> again as appropriate.</p>
           </div></section>
         </section>
       </div>

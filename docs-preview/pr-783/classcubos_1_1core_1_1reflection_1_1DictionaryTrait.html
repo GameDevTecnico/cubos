@@ -71,12 +71,12 @@
               using <a href="#a47f7998f3782763f8ed01a890e4b1f42" class="m-doc-self">Length</a> = std::size_t(*)(const void*instance)
             </dt>
             <dd>Function pointer to get the length of a dictionary instance.</dd>
-            <dt>
-              using <a href="#afaccef4fff6157fae95303a42936d648" class="m-doc">Begin</a> = void*(*)(uintptr_t instance, bool writeable)
+            <dt id="afaccef4fff6157fae95303a42936d648">
+              using <a href="#afaccef4fff6157fae95303a42936d648" class="m-doc-self">Begin</a> = void*(*)(uintptr_t instance, bool writeable)
             </dt>
             <dd>Function pointer to get an iterator to the first key-value pair of a dictionary instance.</dd>
-            <dt>
-              using <a href="#a743f8eaaf04229a83f36b40f99fea8b0" class="m-doc">Find</a> = void*(*)(uintptr_t instance, const void*key, bool writeable)
+            <dt id="a743f8eaaf04229a83f36b40f99fea8b0">
+              using <a href="#a743f8eaaf04229a83f36b40f99fea8b0" class="m-doc-self">Find</a> = void*(*)(uintptr_t instance, const void*key, bool writeable)
             </dt>
             <dd>Function pointer to get an iterator to a value in an dictionary instance.</dd>
             <dt id="a3c838c07a4d32ffc5b3100287160ca57">
@@ -182,23 +182,6 @@
             </dt>
             <dd>Returns a view of the given dictionary instance.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Typedef documentation</h2>
-          <section class="m-doc-details" id="afaccef4fff6157fae95303a42936d648"><div>
-            <h3>
-              using cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /><a href="#afaccef4fff6157fae95303a42936d648" class="m-doc-self">Begin</a> = void*(*)(uintptr_t instance, bool writeable)
-            </h3>
-            <p>Function pointer to get an iterator to the first key-value pair of a dictionary instance.</p>
-<aside class="m-note m-info"><h4>Note</h4><p><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a0688dcabe1eddaba5b26ee4faecb1237" class="m-doc">Stop</a> should be called on the returned iterator when it is no longer needed.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a743f8eaaf04229a83f36b40f99fea8b0"><div>
-            <h3>
-              using cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /><a href="#a743f8eaaf04229a83f36b40f99fea8b0" class="m-doc-self">Find</a> = void*(*)(uintptr_t instance, const void*key, bool writeable)
-            </h3>
-            <p>Function pointer to get an iterator to a value in an dictionary instance.</p>
-<aside class="m-note m-info"><h4>Note</h4><p><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a0688dcabe1eddaba5b26ee4faecb1237" class="m-doc">Stop</a> should be called on the returned iterator when it is no longer needed.</p></aside>
-          </div></section>
         </section>
         <section>
           <h2>Function documentation</h2>

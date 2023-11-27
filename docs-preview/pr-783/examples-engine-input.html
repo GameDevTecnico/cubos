@@ -59,26 +59,59 @@
             ],
             &quot;gamepad&quot;: [
                 &quot;RBumper&quot;
-            ]
+            ],
+            &quot;mouse&quot;: []
         },
         &quot;x-or-z&quot;: {
             &quot;keys&quot;: [
                 &quot;x&quot;,
                 &quot;z&quot;
             ],
-            &quot;gamepad&quot;: []
+            &quot;gamepad&quot;: [],
+            &quot;mouse&quot;: []
         },
         &quot;shift-space&quot;: {
             &quot;keys&quot;: [
                 &quot;S-Space&quot;
             ],
-            &quot;gamepad&quot;: []
+            &quot;gamepad&quot;: [],
+            &quot;mouse&quot;: []
         },
         &quot;ctrl-shift-space&quot;: {
             &quot;keys&quot;: [
                 &quot;C-S-Space&quot;
             ],
-            &quot;gamepad&quot;: []
+            &quot;gamepad&quot;: [],
+            &quot;mouse&quot;: []
+        },
+        &quot;left-mb&quot;: {
+            &quot;keys&quot;: [],
+            &quot;gamepad&quot;: [],
+            &quot;mouse&quot;: [
+                &quot;Left&quot;
+            ]
+        },
+        &quot;right-mb&quot;: {
+            &quot;keys&quot;: [],
+            &quot;gamepad&quot;: [],
+            &quot;mouse&quot;: [
+                &quot;Right&quot;
+            ]
+        },
+        &quot;middle-mb&quot;: {
+            &quot;keys&quot;: [],
+            &quot;gamepad&quot;: [],
+            &quot;mouse&quot;: [
+                &quot;Middle&quot;
+            ]
+        },
+        &quot;extra-mb&quot;: {
+            &quot;keys&quot;: [],
+            &quot;gamepad&quot;: [],
+            &quot;mouse&quot;: [
+                &quot;Extra1&quot;,
+                &quot;Extra2&quot;
+            ]
         }
     },
     &quot;axes&quot;: {
@@ -130,7 +163,7 @@
 <span class="p">{</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">bindings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assets</span><span class="o">-&gt;</span><span class="n">read</span><span class="o">&lt;</span><span class="n">InputBindings</span><span class="o">&gt;</span><span class="p">(</span><span class="n">BindingsAsset</span><span class="p">);</span>
 <span class="w">    </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">bind</span><span class="p">(</span><span class="o">*</span><span class="n">bindings</span><span class="p">);</span>
-<span class="w">    </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Loaded bindings: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Debug</span><span class="p">(</span><span class="n">input</span><span class="o">-&gt;</span><span class="n">bindings</span><span class="p">().</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Loaded bindings: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">bindings</span><span class="p">().</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
 <span class="p">}</span></pre><p>Getting the input is done through the <a href="classcubos_1_1engine_1_1Input.html" class="m-doc">cubos::<wbr />engine::<wbr />Input</a> resource. What this sample does is show in order, a series of prompt to showcase the different functionalities of the Input plugin. For this, it keeps a <code>state</code> integer that indicates the current prompt. Whenever the action <code>next-showcase</code> is triggered, it advances to the next prompt. However, as the plugin currently does not have events, we have to manually check whether the key has just been pressed, is being pressed continuously, or was just released.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">Read</span><span class="o">&lt;</span><span class="n">Input</span><span class="o">&gt;</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">Read</span><span class="o">&lt;</span><span class="n">Window</span><span class="o">&gt;</span><span class="w"> </span><span class="n">window</span><span class="p">,</span><span class="w"> </span><span class="n">Write</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">Write</span><span class="o">&lt;</span><span class="n">ShouldQuit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shouldQuit</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// FIXME: This is an hack to have one-shot actions while we don&#39;t have input events.</span>
@@ -223,7 +256,32 @@
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Unbound&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span></pre><p>If, for any reason, you want to read an input that is not defined in the Bindings asset, you cannot use the Input plugin for it. Instead, you will have to call the Window::pressed function.</p>
+<span class="p">}</span></pre><p>If, for any reason, you want to read an input that is not defined in the Bindings asset, you cannot use the Input plugin for it. Instead, you will have to call the Window::pressed function.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">showcaseMouseButtons</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Input</span><span class="o">&amp;</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&amp;</span><span class="w"> </span><span class="n">explained</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">explained</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_WARN</span><span class="p">(</span><span class="s">&quot;This showcase will print the name of a mouse button when it is pressed. Press Enter to advance to &quot;</span>
+<span class="w">                   </span><span class="s">&quot;the next showcase.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">explained</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">pressed</span><span class="p">(</span><span class="s">&quot;left-mb&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Left&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">pressed</span><span class="p">(</span><span class="s">&quot;right-mb&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Right&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">pressed</span><span class="p">(</span><span class="s">&quot;middle-mb&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Middle&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">pressed</span><span class="p">(</span><span class="s">&quot;extra-mb&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Extra1 or Extra2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></pre><p>Reading mouse buttons is also supported, just bind them to an action, and then call <a href="classcubos_1_1engine_1_1Input.html#a10c7543ffde9d8d2dbac868e266849e6" class="m-doc">Input::<wbr />pressed</a> as usual. To check which strings map to which buttons, you check the <code>mouseButtonToString</code> function implementation on <a href="https://github.com/GameDevTecnico/cubos/blob/main/core/src/cubos/core/io/window.cpp">this file</a>.</p>
       </div>
     </div>
   </div>

@@ -50,6 +50,151 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2include_2tesseratos_2toolbox_2plugin_8hpp.html">&lt;tesseratos/toolbox/plugin.hpp&gt;</a></div>
         </h1>
         <p>Resource which manages other tools windows.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7245f4ce3e16a4d8623c7518052e450f" class="m-doc">isOpen</a>(</span><span class="m-doc-wrap">std::string toolName) -&gt; bool</span>
+            </dt>
+            <dd>When called for the first time for a given name stores a new boolean for it, by default set to false.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4c531b73b15950d23e22e43f25fef37e" class="m-doc">open</a>(</span><span class="m-doc-wrap">std::string toolName)</span>
+            </dt>
+            <dd>Opens a tool.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#acb49c5c3f5738588a94c001121e149f9" class="m-doc">close</a>(</span><span class="m-doc-wrap">std::string toolName)</span>
+            </dt>
+            <dd>Closes a tool.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a6b101996e588a6ae733bd63b33080da9" class="m-doc">doClick</a>(</span><span class="m-doc-wrap">std::string toolName)</span>
+            </dt>
+            <dd>Sets the boolean of a tool to its logical opposite state.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a199f4b90ab5b548a6cf4ec8ac8434318" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; auto</span>
+            </dt>
+            <dd>Returns the beggining of the ToolsMap.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac25d1b2d7dbb2fe0f5773bb248ea9358" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; auto</span>
+            </dt>
+            <dd>Returns the end of the ToolsMap.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a7245f4ce3e16a4d8623c7518052e450f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7245f4ce3e16a4d8623c7518052e450f" class="m-doc-self">isOpen</a>(</span><span class="m-doc-wrap">std::string toolName)</span></span>
+            </h3>
+            <p>When called for the first time for a given name stores a new boolean for it, by default set to false.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">toolName</td>
+                  <td>The tools name</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Tools associated boolean.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4c531b73b15950d23e22e43f25fef37e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c531b73b15950d23e22e43f25fef37e" class="m-doc-self">open</a>(</span><span class="m-doc-wrap">std::string toolName)</span></span>
+            </h3>
+            <p>Opens a tool.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">toolName</td>
+                  <td>The tools name</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acb49c5c3f5738588a94c001121e149f9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acb49c5c3f5738588a94c001121e149f9" class="m-doc-self">close</a>(</span><span class="m-doc-wrap">std::string toolName)</span></span>
+            </h3>
+            <p>Closes a tool.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">toolName</td>
+                  <td>The tools name</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6b101996e588a6ae733bd63b33080da9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b101996e588a6ae733bd63b33080da9" class="m-doc-self">doClick</a>(</span><span class="m-doc-wrap">std::string toolName)</span></span>
+            </h3>
+            <p>Sets the boolean of a tool to its logical opposite state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">toolName</td>
+                  <td>The tools name</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a199f4b90ab5b548a6cf4ec8ac8434318"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a199f4b90ab5b548a6cf4ec8ac8434318" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the beggining of the ToolsMap.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>begginng of the map</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac25d1b2d7dbb2fe0f5773bb248ea9358"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac25d1b2d7dbb2fe0f5773bb248ea9358" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the end of the ToolsMap.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>end of the map</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>
