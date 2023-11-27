@@ -322,17 +322,17 @@ void cubos::engine::imguiInitialize(io::Window window, float dpiScale)
     bd->time = window->time();
 
     // DPI scaling
-    if (dpiScale < 1.0f)
+    if (dpiScale < 1.0F)
     {
         // Smaller sizes are possible but may cause crashes.
         // Anything <= 0.0f is invalid.
-        dpiScale = 1.0f;
+        dpiScale = 1.0F;
     }
     ImGui::GetStyle().ScaleAllSizes(dpiScale);
-    ImFontConfig font_cfg;
+    ImFontConfig fontCfg;
     // Default font size is 13; scale that
-    font_cfg.SizePixels = 13.0f * dpiScale;
-    io.Fonts->AddFontDefault(&font_cfg);
+    fontCfg.SizePixels = 13.0F * dpiScale;
+    io.Fonts->AddFontDefault(&fontCfg);
 
     createDeviceObjects();
 

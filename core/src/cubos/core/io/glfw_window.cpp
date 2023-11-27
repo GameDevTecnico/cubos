@@ -165,7 +165,8 @@ glm::ivec2 GLFWWindow::framebufferSize() const
 float GLFWWindow::contentScale() const
 {
 #ifdef WITH_GLFW
-    float xscale, yscale;
+    float xscale;
+    float yscale;
     glfwGetWindowContentScale(mHandle, &xscale, &yscale);
     // xscale and yscale should be the same, so only return one
     return xscale;
