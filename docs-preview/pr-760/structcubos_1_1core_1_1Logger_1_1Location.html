@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/imgui/serialization.hpp file | CUBOS. Docs</title>
+  <title>cubos::core::Logger::Location struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,56 +46,64 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_459dda10180a6131eb62bc74e02d0b6e.html">imgui</a>/</span>serialization.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1Logger.html">Logger</a>::<wbr/></span>Location <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="log_8hpp.html">&lt;core/log.hpp&gt;</a></div>
         </h1>
-        <p>Functions for showing and editing serializable objects in the UI.</p>
+        <p>Identifies a location in the code.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
-            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4ca77a48d132719ee9c635f6fa24972a" class="m-doc">string</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd>Returns a string representation for the location.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gaad8284c8ccc70830a282436f748249ce" class="m-doc">imguiShowPackage</a>(</span><span class="m-doc-wrap">const core::data::old::Package&amp; pkg,
-              const std::string&amp; name)</span>
+            <dt id="a37e5b768067458d609475e5e08e6247a">
+              std::string <a href="#a37e5b768067458d609475e5e08e6247a" class="m-doc-self">function</a>
             </dt>
-            <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga87aecc746c1b4f20e517d7c133164e46" class="m-doc">imguiEditPackage</a>(</span><span class="m-doc-wrap">core::data::old::Package&amp; pkg,
-              const std::string&amp; name) -&gt; bool</span>
+            <dd>Function name.</dd>
+            <dt id="a85fba28468fce8abd2e010c7f5cecef2">
+              std::string <a href="#a85fba28468fce8abd2e010c7f5cecef2" class="m-doc-self">file</a>
             </dt>
-            <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#ga83b794c814a456d3783f3500d4995362" class="m-doc">imguiShow</a>(</span><span class="m-doc-wrap">const T&amp; object,
-              const std::string&amp; name)</span>
+            <dd>File name.</dd>
+            <dt id="ad466837e2d371d96c287273a137847b2">
+              int <a href="#ad466837e2d371d96c287273a137847b2" class="m-doc-self">line</a>
             </dt>
-            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga8ae098030e5492587b5e53e49194ec75" class="m-doc">imguiEdit</a>(</span><span class="m-doc-wrap">T&amp; object,
-              const std::string&amp; name) -&gt; bool</span>
-            </dt>
-            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dd>Line number.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a4ca77a48d132719ee9c635f6fa24972a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />Logger::<wbr />Location::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ca77a48d132719ee9c635f6fa24972a" class="m-doc-self">string</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns a string representation for the location.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
