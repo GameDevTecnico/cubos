@@ -14,6 +14,7 @@ namespace tesseratos
     /// @defgroup tesseratos-toolbox-plugin Toolbox
     /// @ingroup tesseratos
     /// @brief Adds a resource used to keep track of whether each tool is open or not.
+    ///
     /// ## Resources
     /// - @ref Toolbox
     ///
@@ -25,32 +26,32 @@ namespace tesseratos
     class Toolbox final
     {
     public:
-        /// @brief When called for the first time for a given name stores a new boolean for it, by default set to false.
-        /// @param toolName The tools name
-        ///@return Tools associated boolean.
-        bool isOpen(std::string toolName);
+        /// @brief Checks if the tool with the given name is open.
+        /// @param toolName Tool name.
+        ///@return Whether the tool is open.
+        bool isOpen(const std::string& toolName);
 
-        /// @brief Opens a tool
-        /// @param toolName The tools name
-        void open(std::string toolName);
+        /// @brief Opens a tool.
+        /// @param toolName Tool name.
+        void open(const std::string& toolName);
 
-        /// @brief Closes a tool
-        /// @param toolName The tools name
-        void close(std::string toolName);
+        /// @brief Closes a tool.
+        /// @param toolName Tool name.
+        void close(const std::string& toolName);
 
-        /// @brief Sets the boolean of a tool to its logical opposite state
-        /// @param toolName The tools name
-        void doClick(std::string toolName);
+        /// @brief If the given tool is open, closes it. Otherwise, opens it.
+        /// @param toolName Tool name.
+        void toggle(const std::string& toolName);
 
-        /// @brief Returns the beggining of the ToolsMap
-        /// @return begginng of the map
+        /// @brief Returns the beggining of the map with known tools.
+        /// @return Begginng of the map.
         auto begin() const
         {
             return mToolsMap.begin();
         }
 
-        /// @brief Returns the end of the ToolsMap
-        /// @return end of the map
+        /// @brief Returns the end of the map with known tools.
+        /// @return End of the map.
         auto end() const
         {
             return mToolsMap.end();

@@ -12,7 +12,7 @@ using cubos::engine::Cubos;
 
 using namespace tesseratos;
 
-bool Toolbox::isOpen(std::string toolName)
+bool Toolbox::isOpen(const std::string& toolName)
 {
     if (mToolsMap.contains(toolName))
     {
@@ -22,17 +22,17 @@ bool Toolbox::isOpen(std::string toolName)
     return false;
 }
 
-void Toolbox::open(std::string toolName)
+void Toolbox::open(const std::string& toolName)
 {
     mToolsMap[toolName] = true;
 }
 
-void Toolbox::close(std::string toolName)
+void Toolbox::close(const std::string& toolName)
 {
     mToolsMap[toolName] = false;
 }
 
-void Toolbox::doClick(std::string toolName)
+void Toolbox::toggle(const std::string& toolName)
 {
     mToolsMap[toolName] = !mToolsMap[toolName];
 }
@@ -46,7 +46,7 @@ static void showToolbox(Write<Toolbox> toolbox)
         bool check = open;
         if (ImGui::Checkbox(data(tool), &check))
         {
-            toolbox->doClick(tool);
+            toolbox->toggle(tool);
         }
     }
 
