@@ -63,7 +63,7 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Internally, <a href="classcubos_1_1core_1_1ecs_1_1World.html#a23d21a46e982a60f3ac0f875abccb0d8" class="m-doc">components</a> are stored in abstract containers called <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&#x27;s.</p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p>Internally, <a href="classcubos_1_1core_1_1ecs_1_1World.html#a70a50648e00205826b4e7993ff104601" class="m-doc">components</a> are stored in abstract containers called <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&#x27;s.</p></aside>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -91,7 +91,11 @@
             </dt>
             <dd>Registers and inserts a new resource type.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#ac34f10a86cd28c14b9eeb9ac87f4cc4b" class="m-doc">registerComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
+            </dt>
+            <dd>Registers a component type.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#a2d4eb893c802cd8f7145cb9c2de3ac89" class="m-doc">registerComponent</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Registers a component type.</dd>
@@ -117,6 +121,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a8df2e215fe9c352958a41542c371df27" class="m-doc">isAlive</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
             </dt>
             <dd>Checks if an entity is still alive.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a70a50648e00205826b4e7993ff104601" class="m-doc">components</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a></span>
+            </dt>
+            <dd>Returns a type registry which contains all registered component types.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a23d21a46e982a60f3ac0f875abccb0d8" class="m-doc">components</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World_1_1Components.html" class="m-doc">Components</a></span>
             </dt>
@@ -188,10 +196,27 @@
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Should be called before other operations, aside from <a href="classcubos_1_1core_1_1ecs_1_1World.html#a2d4eb893c802cd8f7145cb9c2de3ac89" class="m-doc">registerComponent()</a>.</p></aside>
           </div></section>
+          <section class="m-doc-details" id="ac34f10a86cd28c14b9eeb9ac87f4cc4b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac34f10a86cd28c14b9eeb9ac87f4cc4b" class="m-doc-self">registerComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Registers a component type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a2d4eb893c802cd8f7145cb9c2de3ac89"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename T&gt;
+                template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d4eb893c802cd8f7145cb9c2de3ac89" class="m-doc-self">registerComponent</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
@@ -207,7 +232,6 @@
                 </tr>
               </tbody>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p>Should be called before other operations, aside from <a href="classcubos_1_1core_1_1ecs_1_1World.html#a9dfa30af4b1d6efd94790c62683ec5de" class="m-doc">registerResource()</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a3e519642d0c3862bf07bdfe9111a4656"><div>
             <h3>
@@ -312,6 +336,20 @@
                 <tr>
                   <th>Returns</th>
                   <td>Whether the entity is alive.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a70a50648e00205826b4e7993ff104601"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a70a50648e00205826b4e7993ff104601" class="m-doc-self">components</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns a type registry which contains all registered component types.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Component type registry.</td>
                 </tr>
               </tfoot>
             </table>

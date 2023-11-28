@@ -58,7 +58,6 @@
               <ul>
                 <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
@@ -70,8 +69,6 @@
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager</a> and related types.</dd>
             <dt>file <a href="reflection_8hpp.html" class="m-doc">reflection.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1ComponentTypeBuilder.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />ComponentTypeBuilder</a>.</dd>
-            <dt>file <a href="registry_8hpp.html" class="m-doc">registry.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Registry.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Registry</a> and registration macro.</dd>
             <dt>file <a href="storage_8hpp.html" class="m-doc">storage.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Storage</a> and related types.</dd>
           </dl>
@@ -84,34 +81,10 @@
             </dt>
             <dd>Holds and manages components.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Registry.html" class="m-doc">cubos::core::ecs::Registry</a>
-            </dt>
-            <dd>Singleton which holds a global registry for all component types.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">cubos::core::ecs::Storage</a>
             </dt>
             <dd>Stores the components of a given type.</dd>
           </dl>
-        </section>
-        <section id="define-members">
-          <h2><a href="#define-members">Defines</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="#ga01b539d0984d9fb1cc3a9fb17874446c" class="m-doc">CUBOS_REGISTER_COMPONENT</a>(</span><span class="m-doc-wrap">type)</span>
-            </dt>
-            <dd>Macro used to register a component type as an alternative to calling <a href="classcubos_1_1core_1_1ecs_1_1Registry.html#a3b63cce8ecf656bb09c35b45bef9ce9f" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr />add()</a> manually.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Define documentation</h2>
-          <section class="m-doc-details" id="ga01b539d0984d9fb1cc3a9fb17874446c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">#define <a href="#ga01b539d0984d9fb1cc3a9fb17874446c" class="m-doc-self">CUBOS_REGISTER_COMPONENT</a>(</span><span class="m-doc-wrap">type)</span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="registry_8hpp.html">&lt;core/ecs/component/registry.hpp&gt;</a></div>
-            </h3>
-            <p>Macro used to register a component type as an alternative to calling <a href="classcubos_1_1core_1_1ecs_1_1Registry.html#a3b63cce8ecf656bb09c35b45bef9ce9f" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr />add()</a> manually.</p>
-<aside class="m-note m-danger"><h4>Warning</h4><p>Care must be taken to ensure that this macro is included from at least one translation unit (think of it as a .cpp file) in the executable, otherwise the component type may not be registered. E.g.: keeping it hidden in a .cpp file on a library may not work.</p></aside>
-          </div></section>
         </section>
       </div>
     </div>
