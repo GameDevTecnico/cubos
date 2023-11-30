@@ -91,6 +91,10 @@
             </dt>
             <dd>Gets the window framebuffer size, which may differ from the window size.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a5d74ae691e3250025fc827c3ef75fa" class="m-doc">contentScale</a>(</span><span class="m-doc-wrap">) const -&gt; float <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the window content scale, commonly known as &quot;DPI scale&quot;.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a6c0c4d300917b46aed46a95046a12f97" class="m-doc">shouldClose</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Checks whether the window should close.</dd>
@@ -218,6 +222,20 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Window framebuffer size, in pixels.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6a5d74ae691e3250025fc827c3ef75fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a5d74ae691e3250025fc827c3ef75fa" class="m-doc-self">contentScale</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the window content scale, commonly known as &quot;DPI scale&quot;.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Ratio between the current DPI and the platform&#x27;s default DPI.</td>
                 </tr>
               </tfoot>
             </table>
