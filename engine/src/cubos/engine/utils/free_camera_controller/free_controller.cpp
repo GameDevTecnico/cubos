@@ -7,11 +7,6 @@
 CUBOS_REFLECT_IMPL(cubos::engine::FreeController)
 {
     return core::ecs::ComponentTypeBuilder<FreeController>("cubos::engine::FreeController")
-        .withField("speed", &FreeController::speed)
-        .withField("sens", &FreeController::sens)
-        .withField("verticalAxis", &FreeController::verticalAxis)
-        .withField("horizontalXAxis", &FreeController::horizontalXAxis)
-        .withField("horizontalZAxis", &FreeController::horizontalZAxis)
         .withField("phi", &FreeController::phi)
         .withField("theta", &FreeController::theta)
         .build();
