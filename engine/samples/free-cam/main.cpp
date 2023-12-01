@@ -77,7 +77,7 @@ static void spawnCamerasSystem(Commands commands, Write<ActiveCameras> camera)
     camera->entities[0] =
         commands.create()
             .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-            .add(Position{{-6.0F, 1.0F, -6.0F}})
+            .add(Position{{0.0F, 1.0F, -6.0F}})
             .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{1.0F, 0.0F, 1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})
             .add(FreeController{})
             .entity();

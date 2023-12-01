@@ -11,14 +11,8 @@ using cubos::core::ecs::EventReader;
 using cubos::engine::DeltaTime;
 using cubos::core::data::old::Debug;
 
-glm::ivec2 lastMousePos;
-glm::ivec2 delta = {0, 0};
-glm::vec3 direction = {1.0f, 0.0f, 1.0f};
-int counter = 0;
-
-static void updateSimpleController(Query<Read<SimpleController>, Write<Position>> entities, Read<DeltaTime> deltaTime, Write<Window> window)
+static void updateSimpleController(Query<Read<SimpleController>, Write<Position>> entities, Read<DeltaTime> deltaTime)
 {
-    CUBOS_INFO("Mouse Pos x: {}", Debug((*window)->getMousePosition()));
     for(auto [entity, controller, position] : entities)
     {
         position->vec.y += controller->verticalAxis * deltaTime->value * controller->speed;
@@ -31,69 +25,62 @@ static void updateSimpleController(Query<Read<SimpleController>, Write<Position>
     }
 }
 
-static void updateFreeController(Query<Read<FreeController>, Write<Position>, Write<Rotation>> entities)
+static void moveFreeController(glm::vec3& direction, Write<Position> position, Read<FreeController> controller, Read<DeltaTime> deltaTime)
 {
+        position->vec.y += controller->verticalAxis * deltaTime->value * controller->speed;
+
+        position->vec.x += direction.x * controller->horizontalXAxis * deltaTime->value * controller->speed;
+        position->vec.z += direction.z * controller->horizontalXAxis * deltaTime->value * controller->speed;
+        position->vec.y += direction.y * controller->horizontalXAxis * deltaTime->value * controller->speed;
+
+        position->vec.z += direction.x * controller->horizontalZAxis * deltaTime->value * controller->speed;
+        position->vec.x -= direction.z * controller->horizontalZAxis * deltaTime->value * controller->speed;
+}
+
+static void updateFreeController(Query<Read<FreeController>, Write<Position>, Write<Rotation>> entities, Read<DeltaTime> deltaTime)
+{
+    glm::vec3 direction;
     for(auto [entity, controller, position, rotation] : entities)
     {
-        if (delta != glm::ivec2{0, 0})
-        {
-            delta = glm::ivec2{0, 0};
-            direction.x = glm::sin(glm::radians(controller->phi)) * glm::sin(glm::radians(controller->theta));
-            direction.y = glm::cos(glm::radians(controller->phi));
-            direction.z = glm::sin(glm::radians(controller->phi)) * glm::cos(glm::radians(controller->theta));
-        }
+        direction.x = glm::cos(glm::radians(controller->phi)) * glm::sin(glm::radians(controller->theta));
+        direction.y = glm::sin(glm::radians(controller->phi));
+        direction.z = glm::cos(glm::radians(controller->phi)) * glm::cos(glm::radians(controller->theta));
 
-        rotation->quat = glm::quatLookAt(glm::normalize(direction), glm::vec3{0.0F, 1.0F, 0.0F});
+        direction = glm::normalize(direction);
+
+        moveFreeController(direction, position, controller, deltaTime);
+
+        rotation->quat = glm::quatLookAt(direction, glm::vec3{0.0F, 1.0F, 0.0F});
     }
 }
 
-static void processMouseMotion(EventReader<WindowEvent> windowEvent)
+static void processMouseMotion(EventReader<WindowEvent> windowEvent, Query<Write<FreeController>> entities, Read<DeltaTime> deltaTime)
 {
+    glm::ivec2 delta;
     for(const auto& event : windowEvent)
     {
-        if(std::holds_alternative<MouseMoveEvent>(event))
+        for (auto [entity, controller] : entities)
         {
-            delta = std::get<MouseMoveEvent>(event).position - lastMousePos;
-            lastMousePos = std::get<MouseMoveEvent>(event).position;
+            if(std::holds_alternative<MouseMoveEvent>(event))
+            {
+                delta = std::get<MouseMoveEvent>(event).position - controller->lastMousePos;
+                controller->lastMousePos = std::get<MouseMoveEvent>(event).position;
+                controller->phi -= delta.y * deltaTime->value * controller->sens;
+                controller->theta -= delta.x * deltaTime->value * controller->sens;
+                controller->phi = std::clamp(controller->phi, -90.0f, 90.0f);
+                delta = glm::ivec2{0, 0};
+            }
         }
     }
 }
 
-static void processDelta(Query<Write<FreeController>> entities, Read<DeltaTime> deltaTime)
-{
-    if (delta.x > 0)
-    {
-        for (auto [entity, controller] : entities)
-        {
-            controller->phi +=  deltaTime->value * controller->sens;
-        }
-    } else if (delta.x < 0)
-    {
-        for (auto [entity, controller] : entities)
-        {
-            controller->phi -= deltaTime->value * controller->sens;
-        }
-    }
-
-    if (delta.y > 0)
-    {
-        for (auto [entity, controller] : entities)
-        {
-            controller->theta += deltaTime->value * controller->sens;
-        }
-    } else if (delta.y < 0)
-    {
-        for (auto [entity, controller] : entities)
-        {
-            controller->theta -= deltaTime->value * controller->sens;
-        }
-    }
-}
-
-static void lockMouseSystem(Write<Window> window)
+static void lockMouseSystem(Write<Window> window, Query<Write<FreeController>> entities)
 {
     (*window)->mouseState(MouseState::Locked);
-    lastMousePos = (*window)->getMousePosition();
+    for (auto [entity, controller] : entities)
+    {
+        controller->lastMousePos = (*window)->getMousePosition();
+    }
 }
 
 void updateFreeVertical(float vertical, cubos::core::ecs::Write<cubos::engine::FreeController> controller)
@@ -137,6 +124,5 @@ void cubos::engine::freeCameraControllerPlugin(Cubos& cubos)
 
     cubos.system(updateSimpleController);
     cubos.system(processMouseMotion);
-    cubos.system(processDelta);
     cubos.system(updateFreeController);
 }
