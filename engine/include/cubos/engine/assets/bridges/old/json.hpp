@@ -11,7 +11,7 @@
 
 #include <cubos/engine/assets/bridges/file.hpp>
 
-namespace cubos::engine
+namespace cubos::engine::old
 {
     /// @brief Bridge for loading and saving assets which are serialized to and from a JSON file.
     ///
