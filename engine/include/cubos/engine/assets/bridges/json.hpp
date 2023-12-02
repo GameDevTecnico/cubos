@@ -4,14 +4,14 @@
 
 #pragma once
 
-#include <cubos/core/data/old/json_deserializer.hpp>
-#include <cubos/core/data/old/json_serializer.hpp>
+#include <cubos/core/data/des/json.hpp>
+#include <cubos/core/data/ser/json.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
 
-namespace cubos::engine::old
+namespace cubos::engine
 {
     /// @brief Bridge for loading and saving assets which are serialized to and from a JSON file.
     ///
@@ -26,13 +26,8 @@ namespace cubos::engine::old
     {
     public:
         /// @brief Constructs a bridge.
-        ///
-        /// If the @p indentation level is set to -1, all whitespace is removed.
-        ///
-        /// @param indentation Indentation level to use when saving the JSON file.
-        JSONBridge(int indentation = 4)
+        JSONBridge()
             : FileBridge(core::reflection::reflect<T>())
-            , mIndentation{indentation}
         {
         }
 
@@ -40,9 +35,13 @@ namespace cubos::engine::old
         bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override
         {
             // Dump the file stream into a string and initialize a JSON deserializer with it.
-            std::string json{};
-            stream.readUntil(json, nullptr);
-            core::data::old::JSONDeserializer deserializer{json};
+            std::string jsonStr;
+            stream.readUntil(jsonStr, nullptr);
+            core::data::JSONDeserializer deserializer{};
+
+            // New JSONDeserializer() receives a JSON object to deserialize from
+            nlohmann::json json = nlohmann::json::parse(jsonStr);
+            deserializer.feed(json);
 
             // Deserialize the asset and store it in the asset manager.
             T data{};
@@ -60,7 +59,7 @@ namespace cubos::engine::old
         bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override
         {
             // Initialize a JSON serializer with the file stream.
-            core::data::old::JSONSerializer serializer{stream, mIndentation};
+            core::data::JSONSerializer serializer{};
 
             // Read the asset from the asset manager and serialize it to the file stream.
             auto data = assets.read<T>(handle);
@@ -71,10 +70,10 @@ namespace cubos::engine::old
                 return false;
             }
 
+            // new JSONSerializer() does not receive a stream to write to, need to write to it manually
+            auto jsonStr = serializer.output().dump();
+            stream.write(jsonStr.begin(), jsonStr.size());
             return true;
         }
-
-    private:
-        int mIndentation;
     };
-} // namespace cubos::engine::old
+} // namespace cubos::engine
