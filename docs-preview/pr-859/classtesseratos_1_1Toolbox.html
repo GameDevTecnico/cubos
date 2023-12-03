@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::VecStorage class | CUBOS. Docs</title>
+  <title>tesseratos::Toolbox class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,163 +46,152 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="vec__storage_8hpp.html">&lt;core/ecs/component/vec_storage.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>VecStorage <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacetesseratos.html">tesseratos</a>::<wbr/></span>Toolbox <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2include_2tesseratos_2toolbox_2plugin_8hpp.html">&lt;tesseratos/toolbox/plugin.hpp&gt;</a></div>
         </h1>
-        <p><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Component type.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Resource which manages other tools windows.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage&lt;T&gt;</a>
-            </dt>
-            <dd>Abstract container for a component type <code>T</code>.</dd>
-          </dl>
-        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a1968cfd209f641a6aa783e5b9cf643e3" class="m-doc">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
-              void* value) <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a64927eff63f998333b3c967cdc8068ec" class="m-doc">isOpen</a>(</span><span class="m-doc-wrap">const std::string&amp; toolName) -&gt; bool</span>
             </dt>
-            <dd>Inserts a value into the storage.</dd>
+            <dd>Checks if the tool with the given name is open.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#acaf94a56b430ed35721c1c6d00e68439" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint32_t index) -&gt; void* <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a9d143ba22402db1740f2243dfcb3fed4" class="m-doc">open</a>(</span><span class="m-doc-wrap">const std::string&amp; toolName)</span>
             </dt>
-            <dd>Gets a value from the storage.</dd>
+            <dd>Opens a tool.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adea01e440e9d2baac1bb8e7d6ec0ac1d" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; const void* <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a6425b18da0e49ec5e46d215bd122b2d1" class="m-doc">close</a>(</span><span class="m-doc-wrap">const std::string&amp; toolName)</span>
             </dt>
-            <dd>Gets a value from the storage.</dd>
+            <dd>Closes a tool.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af93b4b90264fe3dc5780c9f19c1dd7f4" class="m-doc">erase</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a4c9ae34ce3fddf005cd358f555c95657" class="m-doc">toggle</a>(</span><span class="m-doc-wrap">const std::string&amp; toolName)</span>
             </dt>
-            <dd>Remove a value from the storage.</dd>
+            <dd>If the given tool is open, closes it. Otherwise, opens it.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a199f4b90ab5b548a6cf4ec8ac8434318" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; auto</span>
+            </dt>
+            <dd>Returns the beggining of the map with known tools.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac25d1b2d7dbb2fe0f5773bb248ea9358" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; auto</span>
+            </dt>
+            <dd>Returns the end of the map with known tools.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a1968cfd209f641a6aa783e5b9cf643e3"><div>
+          <section class="m-doc-details" id="a64927eff63f998333b3c967cdc8068ec"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />VecStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1968cfd209f641a6aa783e5b9cf643e3" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
-              void* value) <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a64927eff63f998333b3c967cdc8068ec" class="m-doc-self">isOpen</a>(</span><span class="m-doc-wrap">const std::string&amp; toolName)</span></span>
             </h3>
-            <p>Inserts a value into the storage.</p>
+            <p>Checks if the tool with the given name is open.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">index</td>
-                  <td>Index where to insert the value.</td>
-                </tr>
-                <tr>
-                  <td>value</td>
-                  <td>Value to be moved.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="acaf94a56b430ed35721c1c6d00e68439"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />ecs::<wbr />VecStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acaf94a56b430ed35721c1c6d00e68439" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Gets a value from the storage.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">index</td>
-                  <td>Index of the value to be retrieved.</td>
+                  <td style="width: 1%">toolName</td>
+                  <td>Tool name.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Pointer to the value.</td>
+                  <td>Whether the tool is open.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="adea01e440e9d2baac1bb8e7d6ec0ac1d"><div>
+          <section class="m-doc-details" id="a9d143ba22402db1740f2243dfcb3fed4"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />ecs::<wbr />VecStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adea01e440e9d2baac1bb8e7d6ec0ac1d" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint32_t index) const <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper">void tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d143ba22402db1740f2243dfcb3fed4" class="m-doc-self">open</a>(</span><span class="m-doc-wrap">const std::string&amp; toolName)</span></span>
             </h3>
-            <p>Gets a value from the storage.</p>
+            <p>Opens a tool.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">index</td>
-                  <td>Index of the value to be retrieved.</td>
+                  <td style="width: 1%">toolName</td>
+                  <td>Tool name.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6425b18da0e49ec5e46d215bd122b2d1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6425b18da0e49ec5e46d215bd122b2d1" class="m-doc-self">close</a>(</span><span class="m-doc-wrap">const std::string&amp; toolName)</span></span>
+            </h3>
+            <p>Closes a tool.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">toolName</td>
+                  <td>Tool name.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4c9ae34ce3fddf005cd358f555c95657"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c9ae34ce3fddf005cd358f555c95657" class="m-doc-self">toggle</a>(</span><span class="m-doc-wrap">const std::string&amp; toolName)</span></span>
+            </h3>
+            <p>If the given tool is open, closes it. Otherwise, opens it.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">toolName</td>
+                  <td>Tool name.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a199f4b90ab5b548a6cf4ec8ac8434318"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a199f4b90ab5b548a6cf4ec8ac8434318" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the beggining of the map with known tools.</p>
+            <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
-                  <th>Returns</th>
-                  <td>Pointer to the value.</td>
+                  <th style="width: 1%">Returns</th>
+                  <td>Begginng of the map.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af93b4b90264fe3dc5780c9f19c1dd7f4"><div>
+          <section class="m-doc-details" id="ac25d1b2d7dbb2fe0f5773bb248ea9358"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />VecStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af93b4b90264fe3dc5780c9f19c1dd7f4" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper">auto tesseratos::<wbr />Toolbox::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac25d1b2d7dbb2fe0f5773bb248ea9358" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Remove a value from the storage.</p>
+            <p>Returns the end of the map with known tools.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
+              <tfoot>
                 <tr>
-                  <td style="width: 1%">index</td>
-                  <td>Index of the value to be removed.</td>
+                  <th style="width: 1%">Returns</th>
+                  <td>End of the map.</td>
                 </tr>
-              </tbody>
+              </tfoot>
             </table>
           </div></section>
         </section>

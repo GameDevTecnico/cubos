@@ -153,9 +153,6 @@
                         </ul>
                       </li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a> <span class="m-doc">System argument which allows the system to send events of type <code>T</code> to other systems.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a> <span class="m-doc">Abstract parent class for all storages.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1MapStorage.html" class="m-doc">MapStorage</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses an <code>std::unordered_map</code>.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1NullStorage.html" class="m-doc">NullStorage</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that doesn&#x27;t keep any data, made for zero-sized components.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">OptRead</a> <span class="m-doc">System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">OptWrite</a> <span class="m-doc">System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</span></li>
                       <li class="m-doc-collapsible collapsed">
@@ -167,27 +164,18 @@
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1QueryInfo.html" class="m-doc">QueryInfo</a> <span class="m-doc">Describes a query.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read</a> <span class="m-doc">System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a> <span class="m-doc">Utility struct used to reference a resource of type <code>T</code> for reading.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html" class="m-doc">ReadStorage</a> <span class="m-doc">Utility struct used to reference a storage of component type <code>T</code> for reading.</span></li>
-                      <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1Registry.html" class="m-doc">Registry</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Singleton which holds a global registry for all component types.</span>
-                        <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Registry_1_1Entry.html" class="m-doc">Entry</a> <span class="m-doc"><a href="structcubos_1_1core_1_1ecs_1_1Registry_1_1Entry.html" class="m-doc">Entry</a> in the component registry.</span></li>
-                        </ul>
-                      </li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">ResourceManager</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Holds and manages resources.</span>
                         <ul class="m-doc">
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1ResourceManager_1_1Resource.html" class="m-doc">Resource</a> <span class="m-doc">Data specific to a resource.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> <span class="m-doc">Abstract container for a component type <code>T</code>.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the components of a given type.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a> <span class="m-doc">Describes a system.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" class="m-doc">SystemWrapper</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Wrapper for a system of type <code>F</code>.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html" class="m-doc">VecStorage</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> <span class="m-doc">Holds entities, their components and resources.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write</a> <span class="m-doc">System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a> <span class="m-doc">Utility struct used to reference a resource of type <code>T</code> for writing.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html" class="m-doc">WriteStorage</a> <span class="m-doc">Utility struct used to reference a storage of component type <code>T</code> for writing.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
@@ -323,6 +311,7 @@
                           <li>struct <a href="structcubos_1_1core_1_1reflection_1_1Type_1_1Trait.html" class="m-doc">Trait</a> <span class="m-doc">Trait entry in the type.</span></li>
                         </ul>
                       </li>
+                      <li>class <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">TypeRegistry</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores a set of types which can be accessed by name.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
@@ -449,6 +438,7 @@
             <ul class="m-doc">
               <li>struct <a href="structtesseratos_1_1AssetSelectedEvent.html" class="m-doc">AssetSelectedEvent</a> <span class="m-doc">Event sent when an asset is selected.</span></li>
               <li>struct <a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> <span class="m-doc">Resource which identifies the currently selected entity.</span></li>
+              <li>class <a href="classtesseratos_1_1Toolbox.html" class="m-doc">Toolbox</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Resource which manages other tools windows.</span></li>
             </ul>
           </li>
         </ul>
