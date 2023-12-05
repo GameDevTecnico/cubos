@@ -87,6 +87,7 @@
                       <li>class <a href="classcubos_1_1core_1_1data_1_1FileStream.html" class="m-doc">FileStream</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Wrapper around an implementation-specific file stream which keeps the file alive and does some sanity checks.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Singleton which represents the virtual file system of the engine.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" class="m-doc">JSONDeserializer</a> <span class="m-doc"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> implementation which allows reading data from a JSON object.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html" class="m-doc">JSONSerializer</a> <span class="m-doc">Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class for serializing to JSON.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> <span class="m-doc">Base class for serializers, which defines the interface for serializing arbitrary data using its reflection metadata.</span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1data_1_1StandardArchive.html" class="m-doc">StandardArchive</a> <span class="m-doc"><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads and writes from/into the OS file system using the standard library.</span>
@@ -158,9 +159,6 @@
                         </ul>
                       </li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a> <span class="m-doc">System argument which allows the system to send events of type <code>T</code> to other systems.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a> <span class="m-doc">Abstract parent class for all storages.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1MapStorage.html" class="m-doc">MapStorage</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses an <code>std::unordered_map</code>.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1NullStorage.html" class="m-doc">NullStorage</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that doesn&#x27;t keep any data, made for zero-sized components.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">OptRead</a> <span class="m-doc">System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">OptWrite</a> <span class="m-doc">System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</span></li>
                       <li class="m-doc-collapsible collapsed">
@@ -172,27 +170,27 @@
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1QueryInfo.html" class="m-doc">QueryInfo</a> <span class="m-doc">Describes a query.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read</a> <span class="m-doc">System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a> <span class="m-doc">Utility struct used to reference a resource of type <code>T</code> for reading.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html" class="m-doc">ReadStorage</a> <span class="m-doc">Utility struct used to reference a storage of component type <code>T</code> for reading.</span></li>
                       <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1Registry.html" class="m-doc">Registry</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Singleton which holds a global registry for all component types.</span>
+                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1RelationTable.html" class="m-doc">RelationTable</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">A table which stores relations. Allows for quick insertion, deletion and iteration.</span>
                         <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Registry_1_1Entry.html" class="m-doc">Entry</a> <span class="m-doc"><a href="structcubos_1_1core_1_1ecs_1_1Registry_1_1Entry.html" class="m-doc">Entry</a> in the component registry.</span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1RelationTable_1_1Link.html" class="m-doc">Link</a> <span class="m-doc"><a href="structcubos_1_1core_1_1ecs_1_1RelationTable_1_1Link.html" class="m-doc">Link</a> for <a href="structcubos_1_1core_1_1ecs_1_1RelationTable_1_1List.html" class="m-doc">List</a>.</span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1RelationTable_1_1List.html" class="m-doc">List</a> <span class="m-doc"><a href="structcubos_1_1core_1_1ecs_1_1RelationTable_1_1List.html" class="m-doc">List</a> of rows with the same from/to index.</span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1RelationTable_1_1Row.html" class="m-doc">Row</a> <span class="m-doc">Stores metadata for the relations.</span></li>
                         </ul>
                       </li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1RelationTypeBuilder.html" class="m-doc">RelationTypeBuilder</a> <span class="m-doc">Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent relation types.</span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">ResourceManager</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Holds and manages resources.</span>
                         <ul class="m-doc">
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1ResourceManager_1_1Resource.html" class="m-doc">Resource</a> <span class="m-doc">Data specific to a resource.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> <span class="m-doc">Abstract container for a component type <code>T</code>.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the components of a given type.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a> <span class="m-doc">Describes a system.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" class="m-doc">SystemWrapper</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Wrapper for a system of type <code>F</code>.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html" class="m-doc">VecStorage</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> <span class="m-doc">Holds entities, their components and resources.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write</a> <span class="m-doc">System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a> <span class="m-doc">Utility struct used to reference a resource of type <code>T</code> for writing.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html" class="m-doc">WriteStorage</a> <span class="m-doc">Utility struct used to reference a storage of component type <code>T</code> for writing.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
@@ -312,6 +310,7 @@
                         </ul>
                       </li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html" class="m-doc">DictionaryTrait</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Exposes dictionary-like functionality of a type.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a> <span class="m-doc">Provides enumeration functionality to an enumerated type.</span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a> <span class="m-doc">Describes the fields of a reflected type.</span>
                         <ul class="m-doc">
@@ -327,6 +326,15 @@
                           <li>struct <a href="structcubos_1_1core_1_1reflection_1_1Type_1_1Trait.html" class="m-doc">Trait</a> <span class="m-doc">Trait entry in the type.</span></li>
                         </ul>
                       </li>
+                      <li>class <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">TypeRegistry</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores a set of types which can be accessed by name.</span></li>
+                    </ul>
+                  </li>
+                  <li class="m-doc-collapsible collapsed">
+                    <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1Logger.html" class="m-doc">Logger</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Singleton which holds the logging state.</span>
+                    <ul class="m-doc">
+                      <li>struct <a href="structcubos_1_1core_1_1Logger_1_1Entry.html" class="m-doc">Entry</a> <span class="m-doc">Data created by a call to log.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1Logger_1_1Location.html" class="m-doc">Location</a> <span class="m-doc">Identifies a location in the code.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a> <span class="m-doc">A timestamp used to identify when a logging message was written.</span></li>
                     </ul>
                   </li>
                   <li>class <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">ThreadPool</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Manages a pool of threads, to which tasks can be submitted.</span></li>
@@ -427,6 +435,7 @@
                   <li>struct <a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a> <span class="m-doc">Resouce which holds the amount of substeps for the physics update.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a> <span class="m-doc">Used to chain configurations related to systems.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a> <span class="m-doc">Used to chain configurations related to tags.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a> <span class="m-doc">Component which defines parameters of a viewport, the actual screen space that will be used by the camera it is attached to. Useful for having multiple camera views shown on screen.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Represents a voxel object using a 3D grid.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">VoxelMaterial</a> <span class="m-doc">Describes a voxel material.</span></li>
                   <li class="m-doc-collapsible collapsed">
@@ -445,6 +454,7 @@
             <ul class="m-doc">
               <li>struct <a href="structtesseratos_1_1AssetSelectedEvent.html" class="m-doc">AssetSelectedEvent</a> <span class="m-doc">Event sent when an asset is selected.</span></li>
               <li>struct <a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> <span class="m-doc">Resource which identifies the currently selected entity.</span></li>
+              <li>class <a href="classtesseratos_1_1Toolbox.html" class="m-doc">Toolbox</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Resource which manages other tools windows.</span></li>
             </ul>
           </li>
         </ul>

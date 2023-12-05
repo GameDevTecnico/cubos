@@ -64,13 +64,17 @@
 <span class="k">private</span><span class="o">:</span>
 <span class="w">    </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">position</span><span class="p">;</span>
 <span class="w">    </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">velocity</span><span class="p">;</span>
-<span class="p">}</span></pre><p>In <strong>CUBOS.</strong> there are no game objects. Instead, we would define two components and a <code>DeltaTime</code> resource:</p><pre class="m-code"><span class="k">struct</span><span class="w"> </span><span class="p">[[</span><span class="n">cubos</span><span class="o">::</span><span class="n">component</span><span class="p">(</span><span class="s">&quot;position&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="n">Position</span>
+<span class="p">}</span></pre><p>In <strong>CUBOS.</strong> there are no game objects. Instead, we would define two components and a <code>DeltaTime</code> resource:</p><pre class="m-code"><span class="k">struct</span><span class="w"> </span><span class="nc">Position</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
+
 <span class="w">    </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="w"> </span><span class="p">};</span>
 <span class="p">};</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="p">[[</span><span class="n">cubos</span><span class="o">::</span><span class="n">component</span><span class="p">(</span><span class="s">&quot;velocity&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="n">Velocity</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Velocity</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
+
 <span class="w">    </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="w"> </span><span class="p">};</span>
 <span class="p">};</span>
 
