@@ -102,6 +102,10 @@
               <span class="m-doc-wrap-bumper">void <a href="#aab7d751cc75d24e9d545cc86cef85646" class="m-doc">pop</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Removes the last element from the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a49e6e9e0c3000729b5fa836e3f082eab" class="m-doc">swapErase</a>(</span><span class="m-doc-wrap">std::size_t index)</span>
+            </dt>
+            <dd>Removes the element at the given index from the vector, moving the last element to its place if it isn&#x27;t the last element.</dd>
             <dt id="a5ad818e13818cce38fd46d9843a3d947">
               <span class="m-doc-wrap-bumper">void <a href="#a5ad818e13818cce38fd46d9843a3d947" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -217,6 +221,24 @@
             </h3>
             <p>Removes the last element from the vector.</p>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if the vector is empty.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a49e6e9e0c3000729b5fa836e3f082eab"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a49e6e9e0c3000729b5fa836e3f082eab" class="m-doc-self">swapErase</a>(</span><span class="m-doc-wrap">std::size_t index)</span></span>
+            </h3>
+            <p>Removes the element at the given index from the vector, moving the last element to its place if it isn&#x27;t the last element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>index</code> is out of bounds.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a71c8a345c8bf7d70999d375df0a832dc"><div>
             <h3>
