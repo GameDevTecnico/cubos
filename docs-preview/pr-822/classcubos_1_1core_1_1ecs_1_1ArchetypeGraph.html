@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::Archetypes class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::ArchetypeGraph class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Archetypes <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="archetypes_8hpp.html">&lt;core/ecs/entity/archetypes.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>ArchetypeGraph <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="archetype__graph_8hpp.html">&lt;core/ecs/entity/archetype_graph.hpp&gt;</a></div>
         </h1>
-        <p>Holds the archetypes of a world in a graph.</p>
+        <p>Stores which dense column types each archetype holds and the edges which connect them.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -63,11 +63,12 @@
             </li>
           </ul>
         </nav>
+<p>These edges are bidirectional and indicate the addition or removal of column types, depending on the direction being taken. Neighboring archetypes (which have only one differing column type) are not always connected by an edge, as they are only generated the first time the traversal is done between those two archetypes.</p><p>In practice, this means that the first time a component is added to an entity of a given archetype, even if the target archetype already exists, a slow lookup must first be made. We cache the result of the lookup as a new edge, such that the next time the same component type is added, we just traverse the edge to find the target archetype&#x27;s id.</p>
         <section id="pub-static-attribs">
           <h2><a href="#pub-static-attribs">Public static variables</a></h2>
           <dl class="m-doc">
-            <dt id="acecfe8fbede9f1228704a977df3e5df7">
-              static <a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> <a href="#acecfe8fbede9f1228704a977df3e5df7" class="m-doc-self">Empty</a> <span class="m-label m-flat m-primary">constexpr</span>
+            <dt id="ad019ce0834e6957b9d93d16fae2275af">
+              static <a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> <a href="#ad019ce0834e6957b9d93d16fae2275af" class="m-doc-self">Empty</a> <span class="m-label m-flat m-primary">constexpr</span>
             </dt>
             <dd>Empty archetype.</dd>
           </dl>
@@ -75,8 +76,8 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a12696e0312c025cc4dc0ba586a287065">
-              <span class="m-doc-wrap-bumper"><a href="#a12696e0312c025cc4dc0ba586a287065" class="m-doc-self">Archetypes</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="affa7e6703af1b00faf85e477bb449ae7">
+              <span class="m-doc-wrap-bumper"><a href="#affa7e6703af1b00faf85e477bb449ae7" class="m-doc-self">ArchetypeGraph</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Constructs.</dd>
           </dl>
@@ -85,22 +86,22 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7b9e30703b8aee428176b56dd980f136" class="m-doc">contains</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> archetype,
+              <span class="m-doc-wrap-bumper">auto <a href="#ad2a1da8a31180aba526b7677f6099776" class="m-doc">contains</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> archetype,
               <a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id) const -&gt; bool</span>
             </dt>
             <dd>Checks if the given <code>archetype</code> contains the column type with the given <code>id</code>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a46fa2997d450854851ca71c789bec854" class="m-doc">with</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> source,
+              <span class="m-doc-wrap-bumper">auto <a href="#aafc50da6e2ee263f29fc429c58eff91e" class="m-doc">with</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> source,
               <a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id) -&gt; <a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a></span>
             </dt>
             <dd>Returns an archetype with same identifiers as the given <code>source</code> archetype, but with an extra column type with the given <code>id</code>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac7544c6986f689dad328f0fe3e723ada" class="m-doc">without</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> source,
+              <span class="m-doc-wrap-bumper">auto <a href="#a82cff58460cb842d01437a49664f38f6" class="m-doc">without</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> source,
               <a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id) -&gt; <a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a></span>
             </dt>
             <dd>Returns an archetype with same identifiers as the given <code>source</code> archetype, except for the column type with the given <code>id</code>, which is excluded.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af4b5b9f74a48c8a178b603ec89ee72a8" class="m-doc">collect</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> archetype,
+              <span class="m-doc-wrap-bumper">auto <a href="#aee804004f2241c7e1ded24367e549e9c" class="m-doc">collect</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> archetype,
               std::unordered_set&lt;<a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a>&gt;&amp; supersets,
               std::size_t seen = 0) -&gt; std::size_t</span>
             </dt>
@@ -109,9 +110,9 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a7b9e30703b8aee428176b56dd980f136"><div>
+          <section class="m-doc-details" id="ad2a1da8a31180aba526b7677f6099776"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Archetypes::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7b9e30703b8aee428176b56dd980f136" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> archetype,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />ArchetypeGraph::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad2a1da8a31180aba526b7677f6099776" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> archetype,
               <a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id) const</span></span>
             </h3>
             <p>Checks if the given <code>archetype</code> contains the column type with the given <code>id</code>.</p>
@@ -137,9 +138,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a46fa2997d450854851ca71c789bec854"><div>
+          <section class="m-doc-details" id="aafc50da6e2ee263f29fc429c58eff91e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />Archetypes::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a46fa2997d450854851ca71c789bec854" class="m-doc-self">with</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> source,
+              <span class="m-doc-wrap-bumper"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />ArchetypeGraph::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafc50da6e2ee263f29fc429c58eff91e" class="m-doc-self">with</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> source,
               <a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id)</span></span>
             </h3>
             <p>Returns an archetype with same identifiers as the given <code>source</code> archetype, but with an extra column type with the given <code>id</code>.</p>
@@ -166,9 +167,9 @@
             </table>
 <p>The column type with the given <code>id</code> must not already be present in <code>source</code>.</p>
           </div></section>
-          <section class="m-doc-details" id="ac7544c6986f689dad328f0fe3e723ada"><div>
+          <section class="m-doc-details" id="a82cff58460cb842d01437a49664f38f6"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />Archetypes::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac7544c6986f689dad328f0fe3e723ada" class="m-doc-self">without</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> source,
+              <span class="m-doc-wrap-bumper"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />ArchetypeGraph::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a82cff58460cb842d01437a49664f38f6" class="m-doc-self">without</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> source,
               <a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id)</span></span>
             </h3>
             <p>Returns an archetype with same identifiers as the given <code>source</code> archetype, except for the column type with the given <code>id</code>, which is excluded.</p>
@@ -195,9 +196,9 @@
             </table>
 <p>The given column type with the given <code>id</code> must be present in <code>source</code>.</p>
           </div></section>
-          <section class="m-doc-details" id="af4b5b9f74a48c8a178b603ec89ee72a8"><div>
+          <section class="m-doc-details" id="aee804004f2241c7e1ded24367e549e9c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />Archetypes::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af4b5b9f74a48c8a178b603ec89ee72a8" class="m-doc-self">collect</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> archetype,
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />ArchetypeGraph::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee804004f2241c7e1ded24367e549e9c" class="m-doc-self">collect</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> archetype,
               std::unordered_set&lt;<a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a>&gt;&amp; supersets,
               std::size_t seen = 0)</span></span>
             </h3>
