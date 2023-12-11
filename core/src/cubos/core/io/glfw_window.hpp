@@ -35,7 +35,7 @@ namespace cubos::core::io
         void mouseState(MouseState state) override;
         MouseState mouseState() const override;
         glm::ivec2 getMousePosition() override;
-        void setMousePosition(const glm::ivec2 pos) override;
+        void setMousePosition(glm::ivec2 pos) override;
         std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) override;
         void cursor(std::shared_ptr<Cursor> cursor) override;
         void clipboard(const std::string& text) override;
