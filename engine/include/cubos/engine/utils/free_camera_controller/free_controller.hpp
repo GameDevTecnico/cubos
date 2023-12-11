@@ -21,7 +21,7 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         /// @brief The speed at which the camera moves.
-        float speed = 3.0f;
+        float speed = 3.0F;
 
         /// @brief The sensivitiy at which the camera rotates.
         float sens = 5.0f;
