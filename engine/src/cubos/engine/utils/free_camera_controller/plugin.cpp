@@ -79,7 +79,7 @@ static void processMouseMotion(EventReader<WindowEvent> windowEvent, Query<Write
                 controller->lastMousePos = std::get<MouseMoveEvent>(event).position;
                 controller->phi -= delta.y * deltaTime->value * controller->sens;
                 controller->theta -= delta.x * deltaTime->value * controller->sens;
-                controller->phi = std::clamp(controller->phi, -90.0f, 90.0f);
+                controller->phi = std::clamp(controller->phi, -90.0f, 90.0F);
                 delta = glm::ivec2{0, 0};
             }
         }
