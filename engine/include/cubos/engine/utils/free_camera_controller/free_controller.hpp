@@ -24,7 +24,7 @@ namespace cubos::engine
         float speed = 3.0F;
 
         /// @brief The sensivitiy at which the camera rotates.
-        float sens = 5.0f;
+        float sens = 5.0F;
 
         /// @brief The axis of the axe to move the camera vertically.
         float verticalAxis = 0.0f;
