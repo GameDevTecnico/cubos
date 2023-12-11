@@ -3,11 +3,9 @@
 #include <cubos/engine/renderer/camera.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/renderer/point_light.hpp> // 4
+#include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/utils/free_camera_controller/plugin.hpp>
 #include <cubos/engine/voxels/grid.hpp>
-
-using cubos::core::ecs::Commands;
-using cubos::core::ecs::Write;
 
 using namespace cubos::engine;
 
@@ -46,7 +44,7 @@ static void spawnCamerasSystem(Commands commands, Write<ActiveCameras> camera)
             .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
             .add(Position{{0.0F, 1.0F, -6.0F}})
             .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{1.0F, 0.0F, 1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})
-            .add(SimpleController{})
+            .add(FreeController{})
             .entity();
 }
 
