@@ -33,7 +33,7 @@ namespace cubos::engine
 
         /// @brief The inclination and azimuth of the camera roation.
         float phi = 0.0F;
-        float theta = 0.0f;
+        float theta = 0.0F;
 
         glm::ivec2 lastMousePos;
     };
