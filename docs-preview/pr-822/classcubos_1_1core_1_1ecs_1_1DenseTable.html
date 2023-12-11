@@ -79,7 +79,7 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a0ea73367c9a232c4505d1e1d9ee02d9b" class="m-doc">addColumn</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id,
+              <span class="m-doc-wrap-bumper">void <a href="#a0ea73367c9a232c4505d1e1d9ee02d9b" class="m-doc">addColumn</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
             </dt>
             <dd>Adds a new column to the table.</dd>
@@ -90,7 +90,12 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a49d5bbeff7fd8e253a93276cea2f15fe" class="m-doc">swapErase</a>(</span><span class="m-doc-wrap">uint32_t index)</span>
             </dt>
-            <dd>Removes an entity from the table. If the entity isn&#x27;t the last one in the table, the last entity will be moved to the position of the removed entity. The data columns will be updated accordingly.</dd>
+            <dd>Removes an entity from the table.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa62da278d6c4650dc5c651b67d44fc80" class="m-doc">swapMove</a>(</span><span class="m-doc-wrap">uint32_t index,
+              <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>&amp; other)</span>
+            </dt>
+            <dd>Moves an entity from this table into another table, effectively calling <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html#ac0e07ac7a4f0f986718f29799161679a" class="m-doc">pushBack()</a> on the other table, and <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html#a49d5bbeff7fd8e253a93276cea2f15fe" class="m-doc">swapErase()</a> on this one.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aeb0530c2008e04fade87365ce7989b6c" class="m-doc">row</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; std::size_t</span>
             </dt>
@@ -104,7 +109,11 @@
             </dt>
             <dd>Gets the number of rows in the table.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af7292c41cdfff633869fc95a500f3047" class="m-doc">column</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id) -&gt; <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af7292c41cdfff633869fc95a500f3047" class="m-doc">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) -&gt; <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp;</span>
+            </dt>
+            <dd>Gets a reference to the column with the given <code>id</code>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1e5bdb2be2178fa23cf68fa42c3e5d4a" class="m-doc">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const -&gt; const <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp;</span>
             </dt>
             <dd>Gets a reference to the column with the given <code>id</code>.</dd>
           </dl>
@@ -113,7 +122,7 @@
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a0ea73367c9a232c4505d1e1d9ee02d9b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ea73367c9a232c4505d1e1d9ee02d9b" class="m-doc-self">addColumn</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ea73367c9a232c4505d1e1d9ee02d9b" class="m-doc-self">addColumn</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
             </h3>
             <p>Adds a new column to the table.</p>
@@ -150,13 +159,13 @@
                 </tr>
               </tbody>
             </table>
-<aside class="m-note m-danger"><h4>Warning</h4><p>The table will be temporarily left in an invalid state, and the caller must manually call insert() for each data column before the table can be used again.</p></aside>
+<aside class="m-note m-danger"><h4>Warning</h4><p>The table will be temporarily left in an invalid state, and the caller must manually push data to each column before the table can be used again.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a49d5bbeff7fd8e253a93276cea2f15fe"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a49d5bbeff7fd8e253a93276cea2f15fe" class="m-doc-self">swapErase</a>(</span><span class="m-doc-wrap">uint32_t index)</span></span>
             </h3>
-            <p>Removes an entity from the table. If the entity isn&#x27;t the last one in the table, the last entity will be moved to the position of the removed entity. The data columns will be updated accordingly.</p>
+            <p>Removes an entity from the table.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -168,6 +177,30 @@
                 </tr>
               </tbody>
             </table>
+<p>If the entity isn&#x27;t the last one in the table, the last entity will be moved to the position of the removed entity. The data columns will be updated accordingly.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa62da278d6c4650dc5c651b67d44fc80"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa62da278d6c4650dc5c651b67d44fc80" class="m-doc-self">swapMove</a>(</span><span class="m-doc-wrap">uint32_t index,
+              <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>&amp; other)</span></span>
+            </h3>
+            <p>Moves an entity from this table into another table, effectively calling <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html#ac0e07ac7a4f0f986718f29799161679a" class="m-doc">pushBack()</a> on the other table, and <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html#a49d5bbeff7fd8e253a93276cea2f15fe" class="m-doc">swapErase()</a> on this one.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                  <td>Destination table.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>While data columns common to both tables will be updated by this function, any data columns unique to the other table will be left in an invalid state, and the caller must manually push data to each column before the destination table can be used again.</p></aside>
           </div></section>
           <section class="m-doc-details" id="aeb0530c2008e04fade87365ce7989b6c"><div>
             <h3>
@@ -231,7 +264,31 @@
           </div></section>
           <section class="m-doc-details" id="af7292c41cdfff633869fc95a500f3047"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af7292c41cdfff633869fc95a500f3047" class="m-doc-self">column</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs-table.html#ga416206425097538c1cb0d83a7a06dfbe" class="m-doc">DenseColumnId</a> id)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af7292c41cdfff633869fc95a500f3047" class="m-doc-self">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id)</span></span>
+            </h3>
+            <p>Gets a reference to the column with the given <code>id</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Column identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Column reference.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the column does not exist in the table.</p>
+          </div></section>
+          <section class="m-doc-details" id="a1e5bdb2be2178fa23cf68fa42c3e5d4a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1e5bdb2be2178fa23cf68fa42c3e5d4a" class="m-doc-self">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const</span></span>
             </h3>
             <p>Gets a reference to the column with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
