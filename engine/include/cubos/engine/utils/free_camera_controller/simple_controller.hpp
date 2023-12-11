@@ -24,7 +24,7 @@ namespace cubos::engine
         float speed = 1.0F;
 
         /// @brief The axis of the axe to move the camera vertically.
-        float verticalAxis = 0.0f;
+        float verticalAxis = 0.0F;
         float horizontalZAxis = 0.0f;
         float horizontalXAxis = 0.0f;
     };
