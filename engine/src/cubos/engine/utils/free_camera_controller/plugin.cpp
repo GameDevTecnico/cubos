@@ -3,10 +3,6 @@
 using namespace cubos::engine;
 using namespace cubos::core::io;
 
-using cubos::core::ecs::EventReader;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 using cubos::engine::DeltaTime;
 
 static void init(Write<Input> input)

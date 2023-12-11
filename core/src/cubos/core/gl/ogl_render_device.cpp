@@ -1232,8 +1232,8 @@ OGLRenderDevice::OGLRenderDevice()
 {
     // Set the debug message callback
     // TODO: disable this on release for performance reasons (?)
-    //glEnable(GL_DEBUG_OUTPUT);
-    //glDebugMessageCallback(messageCallback, nullptr);
+    // glEnable(GL_DEBUG_OUTPUT);
+    // glDebugMessageCallback(messageCallback, nullptr);
 
     // Create default states
     mDefaultRS = OGLRenderDevice::createRasterState({});

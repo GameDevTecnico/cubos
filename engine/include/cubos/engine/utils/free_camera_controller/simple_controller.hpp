@@ -4,12 +4,13 @@
 
 #pragma once
 
-#include <cubos/engine/cubos.hpp>
+#include <string>
+
+#include <glm/vec3.hpp>
 
 #include <cubos/core/reflection/reflect.hpp>
 
-#include <glm/vec3.hpp>
-#include <string>
+#include <cubos/engine/cubos.hpp>
 
 namespace cubos::engine
 {
