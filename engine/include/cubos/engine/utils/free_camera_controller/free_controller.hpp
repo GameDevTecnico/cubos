@@ -29,7 +29,7 @@ namespace cubos::engine
         /// @brief The axis of the axe to move the camera vertically.
         float verticalAxis = 0.0F;
         float horizontalZAxis = 0.0F;
-        float horizontalXAxis = 0.0f;
+        float horizontalXAxis = 0.0F;
 
         /// @brief The inclination and azimuth of the camera roation.
         float phi = 0.0f;
