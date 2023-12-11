@@ -212,7 +212,7 @@ namespace cubos::core::io
 
         /// @brief Sets the position of the mouse cursor.
         /// @param position New position of the mouse cursor, in screen coordinates.
-        virtual void setMousePosition(const glm::ivec2 position) = 0;
+        virtual void setMousePosition(glm::ivec2 position) = 0;
 
         /// @brief Creates a new cursor with a standard shape.
         /// @todo Custom cursors should also be supported.
