@@ -1,19 +1,32 @@
 #include <cubos/engine/utils/free_camera_controller/plugin.hpp>
-#include <cubos/core/data/old/debug_serializer.hpp>
 
 using namespace cubos::engine;
 using namespace cubos::core::io;
 
+using cubos::core::ecs::EventReader;
 using cubos::core::ecs::Query;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
-using cubos::core::ecs::EventReader;
 using cubos::engine::DeltaTime;
-using cubos::core::data::old::Debug;
+
+static void init(Write<Input> input)
+{
+    InputBindings bindings;
+    bindings.axes()["free-horizontal-x"] = InputAxis{{{Key::W, Modifiers::None}, {Key::Up, Modifiers::None}},
+                                                     {{Key::S, Modifiers::None}, {Key::Down, Modifiers::None}},
+                                                     {}};
+    bindings.axes()["free-horizontal-z"] = InputAxis{{{Key::D, Modifiers::None}, {Key::Right, Modifiers::None}},
+                                                     {{Key::A, Modifiers::None}, {Key::Left, Modifiers::None}},
+                                                     {}};
+    bindings.axes()["free-vertical"] =
+        InputAxis{{{Key::Space, Modifiers::None}}, {{Key::LControl, Modifiers::None}}, {}};
+
+    input->bind(bindings);
+}
 
 static void updateSimpleController(Query<Read<SimpleController>, Write<Position>> entities, Read<DeltaTime> deltaTime)
 {
-    for(auto [entity, controller, position] : entities)
+    for (auto [entity, controller, position] : entities)
     {
         position->vec.y += controller->verticalAxis * deltaTime->value * controller->speed;
 
@@ -25,22 +38,24 @@ static void updateSimpleController(Query<Read<SimpleController>, Write<Position>
     }
 }
 
-static void moveFreeController(glm::vec3& direction, Write<Position> position, Read<FreeController> controller, Read<DeltaTime> deltaTime)
+static void moveFreeController(glm::vec3& direction, Write<Position> position, Read<FreeController> controller,
+                               Read<DeltaTime> deltaTime)
 {
-        position->vec.y += controller->verticalAxis * deltaTime->value * controller->speed;
+    position->vec.y += controller->verticalAxis * deltaTime->value * controller->speed;
 
-        position->vec.x += direction.x * controller->horizontalXAxis * deltaTime->value * controller->speed;
-        position->vec.z += direction.z * controller->horizontalXAxis * deltaTime->value * controller->speed;
-        position->vec.y += direction.y * controller->horizontalXAxis * deltaTime->value * controller->speed;
+    position->vec.x += direction.x * controller->horizontalXAxis * deltaTime->value * controller->speed;
+    position->vec.z += direction.z * controller->horizontalXAxis * deltaTime->value * controller->speed;
+    position->vec.y += direction.y * controller->horizontalXAxis * deltaTime->value * controller->speed;
 
-        position->vec.z += direction.x * controller->horizontalZAxis * deltaTime->value * controller->speed;
-        position->vec.x -= direction.z * controller->horizontalZAxis * deltaTime->value * controller->speed;
+    position->vec.z += direction.x * controller->horizontalZAxis * deltaTime->value * controller->speed;
+    position->vec.x -= direction.z * controller->horizontalZAxis * deltaTime->value * controller->speed;
 }
 
-static void updateFreeController(Query<Read<FreeController>, Write<Position>, Write<Rotation>> entities, Read<DeltaTime> deltaTime)
+static void updateFreeController(Query<Read<FreeController>, Write<Position>, Write<Rotation>> entities,
+                                 Read<DeltaTime> deltaTime)
 {
     glm::vec3 direction;
-    for(auto [entity, controller, position, rotation] : entities)
+    for (auto [entity, controller, position, rotation] : entities)
     {
         direction.x = glm::cos(glm::radians(controller->phi)) * glm::sin(glm::radians(controller->theta));
         direction.y = glm::sin(glm::radians(controller->phi));
@@ -54,14 +69,15 @@ static void updateFreeController(Query<Read<FreeController>, Write<Position>, Wr
     }
 }
 
-static void processMouseMotion(EventReader<WindowEvent> windowEvent, Query<Write<FreeController>> entities, Read<DeltaTime> deltaTime)
+static void processMouseMotion(EventReader<WindowEvent> windowEvent, Query<Write<FreeController>> entities,
+                               Read<DeltaTime> deltaTime)
 {
     glm::ivec2 delta;
-    for(const auto& event : windowEvent)
+    for (const auto& event : windowEvent)
     {
         for (auto [entity, controller] : entities)
         {
-            if(std::holds_alternative<MouseMoveEvent>(event))
+            if (std::holds_alternative<MouseMoveEvent>(event))
             {
                 delta = std::get<MouseMoveEvent>(event).position - controller->lastMousePos;
                 controller->lastMousePos = std::get<MouseMoveEvent>(event).position;
@@ -83,45 +99,28 @@ static void lockMouseSystem(Write<Window> window, Query<Write<FreeController>> e
     }
 }
 
-void updateFreeVertical(float vertical, cubos::core::ecs::Write<cubos::engine::FreeController> controller)
+static void getAxes(Read<Input> input, Query<Write<FreeController>> entities)
 {
-    controller->verticalAxis = vertical;
-}
-
-void updateFreeHorizontalX(float horizontalX, cubos::core::ecs::Write<cubos::engine::FreeController> controller)
-{
-    controller->horizontalXAxis = horizontalX;
-}
-
-void updateFreeHorizontalZ(float horizontalZ, cubos::core::ecs::Write<cubos::engine::FreeController> controller)
-{
-    controller->horizontalZAxis = horizontalZ;
-}
-
-void updateSimpleVertical(float vertical, cubos::core::ecs::Write<cubos::engine::SimpleController> controller)
-{
-    controller->verticalAxis = vertical;
-}
-
-void updateSimpleHorizontalX(float horizontalX, cubos::core::ecs::Write<cubos::engine::SimpleController> controller)
-{
-    controller->horizontalXAxis = horizontalX;
-}
-
-void updateSimpleHorizontalZ(float horizontalZ, cubos::core::ecs::Write<cubos::engine::SimpleController> controller)
-{
-    controller->horizontalZAxis = horizontalZ;
+    for (auto [entity, controller] : entities)
+    {
+        controller->verticalAxis = input->axis("free-vertical");
+        controller->horizontalXAxis = input->axis("free-horizontal-x");
+        controller->horizontalZAxis = input->axis("free-horizontal-z");
+    }
 }
 
 void cubos::engine::freeCameraControllerPlugin(Cubos& cubos)
 {
+    cubos.addPlugin(inputPlugin);
     cubos.addPlugin(windowPlugin);
 
     cubos.addComponent<SimpleController>();
     cubos.addComponent<FreeController>();
 
     cubos.startupSystem(lockMouseSystem).after("cubos.window.init");
+    cubos.startupSystem(init).tagged("cubos.input");
 
+    cubos.system(getAxes);
     cubos.system(updateSimpleController);
     cubos.system(processMouseMotion);
     cubos.system(updateFreeController);
