@@ -32,7 +32,7 @@ namespace cubos::engine
         float horizontalXAxis = 0.0F;
 
         /// @brief The inclination and azimuth of the camera roation.
-        float phi = 0.0f;
+        float phi = 0.0F;
         float theta = 0.0f;
 
         glm::ivec2 lastMousePos;
