@@ -16,7 +16,7 @@ namespace cubos::engine
 {
     /// @brief Component which moves the camera.
     /// @ingroup free-camera-controller-plugin
-    struct [[cubos::component("cubos/simple_controller")]] SimpleController
+    struct SimpleController
     {
         CUBOS_REFLECT;
 
