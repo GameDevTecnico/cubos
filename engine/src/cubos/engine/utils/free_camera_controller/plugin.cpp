@@ -77,8 +77,8 @@ static void processMouseMotion(EventReader<WindowEvent> windowEvent, Query<Write
             {
                 delta = std::get<MouseMoveEvent>(event).position - controller->lastMousePos;
                 controller->lastMousePos = std::get<MouseMoveEvent>(event).position;
-                controller->phi -= delta.y * deltaTime->value * controller->sens;
-                controller->theta -= delta.x * deltaTime->value * controller->sens;
+                controller->phi -= static_cast<float>(delta.y) * deltaTime->value * controller->sens;
+                controller->theta -= static_cast<float>(delta.x) * deltaTime->value * controller->sens;
                 controller->phi = std::clamp(controller->phi, -90.0F, 90.0F);
                 delta = glm::ivec2{0, 0};
             }
