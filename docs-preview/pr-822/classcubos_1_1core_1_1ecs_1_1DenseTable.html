@@ -116,6 +116,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a1e5bdb2be2178fa23cf68fa42c3e5d4a" class="m-doc">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const -&gt; const <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp;</span>
             </dt>
             <dd>Gets a reference to the column with the given <code>id</code>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a095e315cafb8f5d4dd56cf20b3728054" class="m-doc">contains</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if the table has a column with the given <code>id</code>.</dd>
           </dl>
         </section>
         <section>
@@ -309,6 +313,29 @@
               </tfoot>
             </table>
 <p>Aborts if the column does not exist in the table.</p>
+          </div></section>
+          <section class="m-doc-details" id="a095e315cafb8f5d4dd56cf20b3728054"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a095e315cafb8f5d4dd56cf20b3728054" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const</span></span>
+            </h3>
+            <p>Checks if the table has a column with the given <code>id</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Column identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the table contains the given column.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
       </div>

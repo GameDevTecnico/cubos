@@ -88,6 +88,14 @@
             </dt>
             <dd>Returns the types registry of the world.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a60b56980a193cb6d7795d2583ab63981" class="m-doc">tables</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp;</span>
+            </dt>
+            <dd>Returns the tables of the world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aefcad27243ce7243d637ad431f871c04" class="m-doc">tables</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp;</span>
+            </dt>
+            <dd>Returns the tables of the world.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a3e519642d0c3862bf07bdfe9111a4656" class="m-doc">read</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&lt;T&gt;</span>
             </dt>
@@ -113,6 +121,10 @@
               <span class="m-doc-wrap-bumper">void <a href="#a37a304f4a486f692e862b8585b79fa61" class="m-doc">destroy</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
             </dt>
             <dd>Destroys an entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a863e854d3ab84b93402f493ec887d611" class="m-doc">generation</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; uint32_t</span>
+            </dt>
+            <dd>Gets the generation of the entity with the given index.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8df2e215fe9c352958a41542c371df27" class="m-doc">isAlive</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
             </dt>
@@ -224,6 +236,34 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a> registry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a60b56980a193cb6d7795d2583ab63981"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60b56980a193cb6d7795d2583ab63981" class="m-doc-self">tables</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the tables of the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aefcad27243ce7243d637ad431f871c04"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aefcad27243ce7243d637ad431f871c04" class="m-doc-self">tables</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the tables of the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>.</td>
                 </tr>
               </tfoot>
             </table>
@@ -350,6 +390,29 @@
               </tbody>
             </table>
 <p>If an entity has already been destroyed, this function does nothing.</p>
+          </div></section>
+          <section class="m-doc-details" id="a863e854d3ab84b93402f493ec887d611"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint32_t cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a863e854d3ab84b93402f493ec887d611" class="m-doc-self">generation</a>(</span><span class="m-doc-wrap">uint32_t index) const</span></span>
+            </h3>
+            <p>Gets the generation of the entity with the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> generation.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
           <section class="m-doc-details" id="a8df2e215fe9c352958a41542c371df27"><div>
             <h3>
