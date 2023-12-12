@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/system/ directory | CUBOS. Docs</title>
+  <title>cubos::core::ecs::ArchetypeId struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,42 +46,79 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span>system<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>ArchetypeId <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="archetype__id_8hpp.html">&lt;core/ecs/entity/archetype_id.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__core-ecs-system.html" class="m-doc">System</a> directory.</p>
+        <p>Identifies an archetype.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#subdirs">Directories</a></li>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="subdirs">
-          <h2><a href="#subdirs">Directories</a></h2>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
           <dl class="m-doc">
-            <dt>directory <a href="dir_27c6717ecde74b69d41c3436d8bbd6c7.html" class="m-doc">event</a>/</dt>
-            <dd>Event system arguments directory.</dd>
+            <dt id="a7c6a39e02098afef8fe6aea3611b6369">
+              static const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> <a href="#a7c6a39e02098afef8fe6aea3611b6369" class="m-doc-self">Empty</a>
+            </dt>
+            <dd>Empty archetype identifier.</dd>
+            <dt id="aed0401c715a283d0f075483ea73ac62a">
+              static const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> <a href="#aed0401c715a283d0f075483ea73ac62a" class="m-doc-self">Invalid</a>
+            </dt>
+            <dd>Invalid archetype identifier.</dd>
           </dl>
         </section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="accessors_8hpp.html" class="m-doc">accessors.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Read</a> and related types.</dd>
-            <dt>file <a href="commands_8hpp.html" class="m-doc">commands.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Commands</a>.</dd>
-            <dt>file <a href="dispatcher_8hpp.html" class="m-doc">dispatcher.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher</a>.</dd>
-            <dt>file <a href="query_8hpp.html" class="m-doc">query.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Query</a> and related types.</dd>
-            <dt>file <a href="system_8hpp.html" class="m-doc">system.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />SystemWrapper</a> and related types.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b03dadc245569c0f3f32f9b94444e05" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>&amp; other) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Compares two archetype identifiers for equality.</dd>
           </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="aa17a75ff4f007d1058ee8110eb93a439">
+              std::size_t <a href="#aa17a75ff4f007d1058ee8110eb93a439" class="m-doc-self">inner</a>
+            </dt>
+            <dd>Archetype identifier.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a3b03dadc245569c0f3f32f9b94444e05"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />ArchetypeId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b03dadc245569c0f3f32f9b94444e05" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>&amp; other) const <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Compares two archetype identifiers for equality.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other archetype identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the two archetype identifiers are equal.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

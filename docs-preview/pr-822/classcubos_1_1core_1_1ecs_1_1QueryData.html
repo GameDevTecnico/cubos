@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::BlueprintBuilder class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::QueryData class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,143 +46,136 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>BlueprintBuilder <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="commands_8hpp.html">&lt;core/ecs/system/commands.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="data_8hpp.html">&lt;core/ecs/query/data.hpp&gt;</a></div>
+          <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>QueryData <span class="m-thin">class</span>
         </h1>
-        <p>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</p>
+        <p>Holds the data necessary to execute a query.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">Ts</td>
+              <td>Argument types of the query.</td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+<p>The argument types of the query specify exactly what data will be accessed during iteration. For example, the query might have been constructed with properties such that a given column must be present on the entity. That doesn&#x27;t mean that the data will actually end up being accessed.</p><p>If an argument type is present which requires a certain column to be present, then that column is automatically added to the query properties, if it isn&#x27;t there already.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a24e33d5b430e4977495494e6f6fbc401" class="m-doc">QueryData</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1QueryProperties.html" class="m-doc">QueryProperties</a> properties)</span>
+            </dt>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad19b1233944928dd3838dabb99151092" class="m-doc">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a4b2fd5d749722877dc4e132726a6a974" class="m-doc">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>&amp; graph)</span>
             </dt>
-            <dd>Gets an entity of the spawned blueprint.</dd>
+            <dd>Fetches any new matching archetypes that have been added since the last call to this function.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename ComponentType&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a028314b3160c4683cac692dc0d6f11bf" class="m-doc">get</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; ComponentType&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac6c22ae9a7496d60f6edbb873b90b921" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
-            <dd>Gets a reference to a component of an entity of the spawned blueprint.</dd>
+            <dd>Returns an iterator pointing to the first query match.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a75522a0d155585e1790926b9586b428c" class="m-doc">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
-              ComponentTypes &amp;&amp; ... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5fcba6fc85c67d3244ddbeb5710e858e" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
-            <dd>Adds components to the blueprint.</dd>
+            <dd>Returns an out of bounds iterator representing the end of the query matches.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad19b1233944928dd3838dabb99151092"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad19b1233944928dd3838dabb99151092" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
-            </h3>
-            <p>Gets an entity of the spawned blueprint.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">name</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Aborts if the name does not match any entity of the blueprint.</p>
-          </div></section>
-          <section class="m-doc-details" id="a028314b3160c4683cac692dc0d6f11bf"><div>
+          <section class="m-doc-details" id="a24e33d5b430e4977495494e6f6fbc401"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename ComponentType&gt;
+                template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper">ComponentType&amp; cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a028314b3160c4683cac692dc0d6f11bf" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a24e33d5b430e4977495494e6f6fbc401" class="m-doc-self">QueryData</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1QueryProperties.html" class="m-doc">QueryProperties</a> properties)</span></span>
             </h3>
-            <p>Gets a reference to a component of an entity of the spawned blueprint.</p>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentType</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>name</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
+                  <td style="width: 1%">properties</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> properties.</td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Reference to the component.</td>
-                </tr>
-              </tfoot>
             </table>
-<p>Aborts if <code>name</code> does not match any entity of the blueprint.</p>
           </div></section>
-          <section class="m-doc-details" id="a75522a0d155585e1790926b9586b428c"><div>
+          <section class="m-doc-details" id="a4b2fd5d749722877dc4e132726a6a974"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
+                template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a75522a0d155585e1790926b9586b428c" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
-              ComponentTypes &amp;&amp; ... components)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b2fd5d749722877dc4e132726a6a974" class="m-doc-self">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>&amp; graph)</span></span>
             </h3>
-            <p>Adds components to the blueprint.</p>
+            <p>Fetches any new matching archetypes that have been added since the last call to this function.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentTypes</td>
-                  <td>Component types.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>name</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
-                </tr>
-                <tr>
-                  <td>components</td>
-                  <td>Components to add.</td>
+                  <td style="width: 1%">graph</td>
+                  <td>Archetype graph.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac6c22ae9a7496d60f6edbb873b90b921"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac6c22ae9a7496d60f6edbb873b90b921" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns an iterator pointing to the first query match.</p>
+            <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
-                  <th>Returns</th>
-                  <td>Reference to this builder, for chaining.</td>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Aborts if <code>name</code> does not match any entity of the blueprint.</p>
+          </div></section>
+          <section class="m-doc-details" id="a5fcba6fc85c67d3244ddbeb5710e858e"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5fcba6fc85c67d3244ddbeb5710e858e" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns an out of bounds iterator representing the end of the query matches.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
       </div>

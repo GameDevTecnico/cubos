@@ -57,7 +57,6 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#typedef-members">Typedefs</a></li>
               </ul>
             </li>
           </ul>
@@ -77,6 +76,10 @@
             </dt>
             <dd>Collection of entities and their respective components.</dd>
             <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>
+            </dt>
+            <dd>Stores commands to execute them later.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">ComponentManager</a>
             </dt>
             <dd>Holds and manages components.</dd>
@@ -94,6 +97,10 @@
             </dt>
             <dd>Stores which dense column types each archetype holds and the edges which connect them.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>
+            </dt>
+            <dd>Identifies an archetype.</dd>
+            <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>
             </dt>
             <dd>Identifies an entity.</dd>
@@ -109,6 +116,25 @@
               class <a href="classcubos_1_1core_1_1ecs_1_1EntityPool.html" class="m-doc">EntityPool</a>
             </dt>
             <dd>Manages the creation and destruction of entity identifiers, as well as storing their archetype identifiers.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryProperties.html" class="m-doc">QueryProperties</a>
+            </dt>
+            <dd>Describes a query and what entities it should match.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>
+            </dt>
+            <dd>Holds the data necessary to execute a query.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>
+            </dt>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html" class="m-doc">QueryFetcher</a>
+            </dt>
+            <dd>Type meant to be specialized which implements for each argument type the necessary logic to extract it from the tables.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1RelationTypeBuilder.html" class="m-doc">RelationTypeBuilder</a>
@@ -153,21 +179,9 @@
             </dt>
             <dd>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>
-            </dt>
-            <dd>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>
-            </dt>
-            <dd>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>
             </dt>
             <dd>System argument used to write ECS commands and execute them at a later time.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>
-            </dt>
-            <dd>Stores commands to execute them later.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a>
             </dt>
@@ -219,6 +233,10 @@
             </dt>
             <dd>Stores the dense data associated to entities of a given archetype.</dd>
             <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>
+            </dt>
+            <dd>Stores the tables of a given world.</dd>
+            <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>
             </dt>
             <dd>Identifies a data type registered in the world.</dd>
@@ -230,15 +248,6 @@
               class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>
             </dt>
             <dd>Holds entities, their components and resources.</dd>
-          </dl>
-        </section>
-        <section id="typedef-members">
-          <h2><a href="#typedef-members">Typedefs</a></h2>
-          <dl class="m-doc">
-            <dt>
-              using <a href="group__core-ecs-entity.html#gaa44e111023ccba6b5ce99aa4e18f6296" class="m-doc">ArchetypeId</a> = std::size_t
-            </dt>
-            <dd>Identifies an archetype.</dd>
           </dl>
         </section>
       </div>

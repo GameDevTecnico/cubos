@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::EntityBuilder class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::QueryFetcher class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,115 +46,122 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>EntityBuilder <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="commands_8hpp.html">&lt;core/ecs/system/commands.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="fetcher_8hpp.html">&lt;core/ecs/query/fetcher.hpp&gt;</a></div>
+          <div class="m-doc-template">template&lt;typename T&gt;</div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>QueryFetcher <span class="m-thin">class</span>
         </h1>
-        <p>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</p>
+        <p>Type meant to be specialized which implements for each argument type the necessary logic to extract it from the tables.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">T</td>
+              <td>Argument type.</td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a094dc46d9cf245106902051c03e67ea8" class="m-doc">QueryFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types)</span>
+            </dt>
+            <dd>Called when a query is constructed for the first time.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af1fc68488cf14b02551faf2b5a92718b" class="m-doc">entity</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a6d34bb6e5184fb4b7bf8a4acc84d9b66" class="m-doc">prepare</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp; tables,
+              <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype)</span>
             </dt>
-            <dd>Gets the entity this builder is editing.</dd>
+            <dd>Called when iteration starts for the given archetype. Always called before <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a19370851fea41b06ec8e079366c3e318" class="m-doc">fetch()</a>, which may be called multiple times after this.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename ComponentType&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#af52f2363762456e827731085a080f4b9" class="m-doc">get</a>(</span><span class="m-doc-wrap">) -&gt; ComponentType&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a19370851fea41b06ec8e079366c3e318" class="m-doc">fetch</a>(</span><span class="m-doc-wrap">std::size_t row) -&gt; T</span>
             </dt>
-            <dd>Gets a reference to a component of the entity.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad548efe8ef32fc8f6f95c0c7c8b51ad8" class="m-doc">add</a>(</span><span class="m-doc-wrap">ComponentTypes &amp;&amp; ... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>&amp;</span>
-            </dt>
-            <dd>Adds components to the entity.</dd>
+            <dd>Called to get the actual desired data for a specific entity. Always called after <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a6d34bb6e5184fb4b7bf8a4acc84d9b66" class="m-doc">prepare()</a> has been called at least once.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="af1fc68488cf14b02551faf2b5a92718b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1fc68488cf14b02551faf2b5a92718b" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Gets the entity this builder is editing.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="af52f2363762456e827731085a080f4b9"><div>
+          <section class="m-doc-details" id="a094dc46d9cf245106902051c03e67ea8"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename ComponentType&gt;
+                template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">ComponentType&amp; cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af52f2363762456e827731085a080f4b9" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a094dc46d9cf245106902051c03e67ea8" class="m-doc-self">QueryFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types)</span></span>
             </h3>
-            <p>Gets a reference to a component of the entity.</p>
+            <p>Called when a query is constructed for the first time.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentType</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Reference to the component.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ad548efe8ef32fc8f6f95c0c7c8b51ad8"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad548efe8ef32fc8f6f95c0c7c8b51ad8" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">ComponentTypes &amp;&amp; ... components)</span></span>
-            </h3>
-            <p>Adds components to the entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentTypes</td>
-                  <td>Component types.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>components</td>
-                  <td>Components to add.</td>
+                  <td style="width: 1%">types</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> types.</td>
                 </tr>
               </tbody>
-              <tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6d34bb6e5184fb4b7bf8a4acc84d9b66"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6d34bb6e5184fb4b7bf8a4acc84d9b66" class="m-doc-self">prepare</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp; tables,
+              <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype)</span></span>
+            </h3>
+            <p>Called when iteration starts for the given archetype. Always called before <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a19370851fea41b06ec8e079366c3e318" class="m-doc">fetch()</a>, which may be called multiple times after this.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
-                  <th>Returns</th>
-                  <td>Reference to this builder, for chaining.</td>
+                  <td style="width: 1%">tables</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> tables.</td>
                 </tr>
-              </tfoot>
+                <tr>
+                  <td>archetype</td>
+                  <td>Archetype identifier.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a19370851fea41b06ec8e079366c3e318"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19370851fea41b06ec8e079366c3e318" class="m-doc-self">fetch</a>(</span><span class="m-doc-wrap">std::size_t row)</span></span>
+            </h3>
+            <p>Called to get the actual desired data for a specific entity. Always called after <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a6d34bb6e5184fb4b7bf8a4acc84d9b66" class="m-doc">prepare()</a> has been called at least once.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">row</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>&#x27;s row in its archetype&#x27;s dense table.</td>
+                </tr>
+              </tbody>
             </table>
           </div></section>
         </section>
