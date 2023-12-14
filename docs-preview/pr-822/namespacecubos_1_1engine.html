@@ -482,18 +482,7 @@
               using cubos::<wbr />engine::<wbr /><a href="#a306c379fd24b3dcc1990b06cdb386244" class="m-doc-self">Query</a> = <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">core::<wbr />ecs::<wbr />Query</a>&lt;ComponentTypes...&gt;
             </h3>
             <p>System argument which holds the result of a query over all entities in world which match the given arguments.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentTypes</td>
-                  <td>Component accessor types to be queried.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Read</span><span class="o">&lt;</span><span class="n">Velocity</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">OptWrite</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">OptRead</span><span class="o">&lt;</span><span class="n">Scale</span><span class="o">&gt;&gt;</span></pre><p>This query will return all entities with a <code><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a></code> and <code>Velocity</code> component. Accessors to <code><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a></code> and <code><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a></code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, Read/OptRead should be used.</p>
+<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&amp;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Scale</span><span class="o">&amp;&gt;&gt;</span></pre><p>This query will return all entities with a <code><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a></code> and <code>Velocity</code> component. Accessors to <code><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a></code> and <code><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a></code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, <code>const</code> should be used.</p>
           </div></section>
           <section class="m-doc-details" id="a34019c3c344f309409d8b0abc510002d"><div>
             <h3>

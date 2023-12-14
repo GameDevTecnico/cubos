@@ -85,6 +85,14 @@
               <span class="m-doc-wrap-bumper"><a href="#acfba6f8191eb7ab3c5696a37cff5a4a7" class="m-doc">Opt</a>(</span><span class="m-doc-wrap">T value)</span>
             </dt>
             <dd>Constructs with a value.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ae8ab03fcd38e992cc7d91ef460868d17" class="m-doc">Opt</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; other)</span>
+            </dt>
+            <dd>Copy constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a45b825b789c1c08d4d05ca4dd3a8f579" class="m-doc">operator bool</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Checks if the optional contains a value.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -98,10 +106,6 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a7e6824424f984ef32c0b821c3080d43a" class="m-doc">value</a>(</span><span class="m-doc-wrap">) -&gt; T&amp;</span>
             </dt>
             <dd>Gets the underlying value.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af6ffe437fdc16180f41f7908bed0b2ca" class="m-doc">operator bool</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
-            </dt>
-            <dd>Checks if the optional contains a value.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a44ab4e78a274df937fd33d6e1a9ce6a6" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) -&gt; T&amp;</span>
             </dt>
@@ -132,6 +136,43 @@
                   <td>Value.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8ab03fcd38e992cc7d91ef460868d17"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8ab03fcd38e992cc7d91ef460868d17" class="m-doc-self">Opt</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; other)</span></span>
+            </h3>
+            <p>Copy constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other optional.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a45b825b789c1c08d4d05ca4dd3a8f579"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45b825b789c1c08d4d05ca4dd3a8f579" class="m-doc-self">operator bool</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Checks if the optional contains a value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the optional contains a value.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a795ceedae25e8c2602e030b17476135a"><div>
@@ -168,23 +209,6 @@
               </tfoot>
             </table>
 <p>Aborts if there&#x27;s no value.</p>
-          </div></section>
-          <section class="m-doc-details" id="af6ffe437fdc16180f41f7908bed0b2ca"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af6ffe437fdc16180f41f7908bed0b2ca" class="m-doc-self">operator bool</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Checks if the optional contains a value.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Whether the optional contains a value.</td>
-                </tr>
-              </tfoot>
-            </table>
           </div></section>
           <section class="m-doc-details" id="a44ab4e78a274df937fd33d6e1a9ce6a6"><div>
             <h3>
