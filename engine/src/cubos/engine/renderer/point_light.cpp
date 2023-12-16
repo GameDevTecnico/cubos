@@ -1,4 +1,4 @@
-#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
@@ -6,7 +6,7 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::PointLight)
 {
-    return core::ecs::ComponentTypeBuilder<PointLight>("cubos::engine::PointLight")
+    return core::ecs::TypeBuilder<PointLight>("cubos::engine::PointLight")
         .withField("color", &PointLight::color)
         .withField("range", &PointLight::range)
         .withField("intensity", &PointLight::intensity)

@@ -1,6 +1,6 @@
 /// @file
-/// @brief Class @ref cubos::core::ecs::RelationTypeBuilder.
-/// @ingroup core-ecs-relation
+/// @brief Class @ref cubos::core::ecs::TypeBuilder.
+/// @ingroup core-ecs
 
 #pragma once
 
@@ -10,38 +10,39 @@
 
 namespace cubos::core::ecs
 {
-    /// @brief Builder for @ref reflection::Type objects which represent relation types.
+    /// @brief Builder for @ref reflection::Type objects which represent ECS types.
     ///
-    /// Used to reduce the amount of boilerplate code required to define a relation type.
+    /// Used to reduce the amount of boilerplate code required to define a ECS types.
     /// Automatically adds the @ref reflection::ConstructibleTrait and @ref reflection::FieldsTrait.
     /// The type @p T must be default-constructible, copy-constructible and move-constructible.
     ///
     /// @tparam T Relation type.
+    /// @ingroup core-ecs
     template <typename T>
-    class RelationTypeBuilder
+    class TypeBuilder
     {
     public:
         /// @brief Constructs.
-        /// @param name Relation type name, including namespace.
-        RelationTypeBuilder(std::string name)
+        /// @param name Type name, including namespace.
+        TypeBuilder(std::string name)
             : mType(reflection::Type::create(std::move(name)))
         {
             mType.with(reflection::ConstructibleTrait::typed<T>().withBasicConstructors().build());
         }
 
-        /// @brief Adds a field to the relation type.
+        /// @brief Adds a field to the type.
         /// @tparam F Field type.
         /// @param name Field name.
         /// @param pointer Field pointer.
         /// @return Builder.
         template <typename F>
-        RelationTypeBuilder&& withField(std::string name, F T::*pointer) &&
+        TypeBuilder&& withField(std::string name, F T::*pointer) &&
         {
             mFields.addField(std::move(name), pointer);
             return std::move(*this);
         }
 
-        /// @brief Builds the relation type.
+        /// @brief Builds the type.
         /// @return Relation type.
         reflection::Type& build() &&
         {

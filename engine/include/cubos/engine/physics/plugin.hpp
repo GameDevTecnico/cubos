@@ -8,7 +8,7 @@
 #pragma once
 
 /// [Component Refl]
-#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 

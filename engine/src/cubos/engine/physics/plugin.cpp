@@ -12,14 +12,14 @@ using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(AccumulatedCorrection)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<AccumulatedCorrection>("cubos::engine::AccumulatedCorrection")
+    return cubos::core::ecs::TypeBuilder<AccumulatedCorrection>("cubos::engine::AccumulatedCorrection")
         .withField("vec", &AccumulatedCorrection::vec)
         .build();
 }
 
 CUBOS_REFLECT_IMPL(PhysicsMass)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<PhysicsMass>("cubos::engine::PhysicsMass")
+    return cubos::core::ecs::TypeBuilder<PhysicsMass>("cubos::engine::PhysicsMass")
         .withField("mass", &PhysicsMass::mass)
         .withField("inverseMass", &PhysicsMass::inverseMass)
         .build();
@@ -27,7 +27,7 @@ CUBOS_REFLECT_IMPL(PhysicsMass)
 
 CUBOS_REFLECT_IMPL(PhysicsVelocity)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<PhysicsVelocity>("cubos::engine::PhysicsVelocity")
+    return cubos::core::ecs::TypeBuilder<PhysicsVelocity>("cubos::engine::PhysicsVelocity")
         .withField("velocity", &PhysicsVelocity::velocity)
         .withField("force", &PhysicsVelocity::force)
         .withField("impulse", &PhysicsVelocity::impulse)
@@ -36,7 +36,7 @@ CUBOS_REFLECT_IMPL(PhysicsVelocity)
 
 CUBOS_REFLECT_IMPL(PreviousPosition)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<PreviousPosition>("cubos::engine::PreviousPosition")
+    return cubos::core::ecs::TypeBuilder<PreviousPosition>("cubos::engine::PreviousPosition")
         .withField("vec", &PreviousPosition::vec)
         .build();
 }
