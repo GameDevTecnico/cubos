@@ -46,6 +46,28 @@ struct EntityDictionaryComponent
     std::unordered_map<int, cubos::core::ecs::Entity> map;
 };
 
+// A relation which doesn't store anything.
+struct EmptyRelation
+{
+    CUBOS_REFLECT;
+};
+
+// A relation which stores a single integer.
+struct IntegerRelation
+{
+    CUBOS_REFLECT;
+
+    int value;
+};
+
+// A relation which can be used to test if destructors are called correctly.
+struct DetectDestructorRelation
+{
+    CUBOS_REFLECT;
+
+    DetectDestructor detect;
+};
+
 /// Adds the utility components to a world.
 inline void setupWorld(cubos::core::ecs::World& world)
 {

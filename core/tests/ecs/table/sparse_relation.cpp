@@ -4,11 +4,11 @@
 
 #include <doctest/doctest.h>
 
-#include <cubos/core/ecs/relation/table.hpp>
+#include <cubos/core/ecs/table/sparse_relation.hpp>
 
-#include "utils.hpp"
+#include "../utils.hpp"
 
-using cubos::core::ecs::RelationTable;
+using cubos::core::ecs::SparseRelationTable;
 using cubos::core::reflection::reflect;
 
 template <typename V>
@@ -24,12 +24,12 @@ static std::map<std::pair<uint32_t, uint32_t>, uintptr_t> collectRelations(const
     return map;
 }
 
-TEST_CASE("ecs::RelationTable") // NOLINT(readability-function-size)
+TEST_CASE("ecs::SparseRelationTable") // NOLINT(readability-function-size)
 {
     SUBCASE("zero-sized relation type")
     {
         EmptyRelation empty{}; // Doesn't store anything, thus can be reused.
-        RelationTable table{reflect<EmptyRelation>()};
+        SparseRelationTable table{reflect<EmptyRelation>()};
         REQUIRE(table.size() == 0);
 
         REQUIRE_FALSE(table.insert(0, 1, &empty));
@@ -96,7 +96,7 @@ TEST_CASE("ecs::RelationTable") // NOLINT(readability-function-size)
         DetectDestructorRelation detector3{{&flag3}};
 
         {
-            RelationTable table{reflect<DetectDestructorRelation>()};
+            SparseRelationTable table{reflect<DetectDestructorRelation>()};
             REQUIRE(table.size() == 0);
 
             table.insert(1000, 2000, &detector1);
@@ -160,7 +160,7 @@ TEST_CASE("ecs::RelationTable") // NOLINT(readability-function-size)
         constexpr std::size_t ListSize = 100;
         constexpr std::size_t ListCount = 10;
 
-        RelationTable table{reflect<IntegerRelation>()};
+        SparseRelationTable table{reflect<IntegerRelation>()};
         REQUIRE(table.size() == 0);
 
         for (uint32_t i = 1; i <= static_cast<uint32_t>(ListCount); ++i)

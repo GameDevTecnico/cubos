@@ -45,11 +45,10 @@ add_executable(
     ecs/commands.cpp
     ecs/system.cpp
     ecs/dispatcher.cpp
-    ecs/relation/utils.cpp
-    ecs/relation/table.cpp
 
     ecs/types.cpp
     ecs/table/dense.cpp
+    ecs/table/sparse_relation.cpp
     ecs/entity/archetype_graph.cpp
     ecs/entity/pool.cpp
     ecs/query/data.cpp

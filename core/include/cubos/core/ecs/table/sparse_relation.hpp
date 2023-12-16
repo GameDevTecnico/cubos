@@ -1,5 +1,5 @@
 /// @file
-/// @brief Class @ref cubos::core::ecs::RelationTable.
+/// @brief Class @ref cubos::core::ecs::SparseRelationTable.
 /// @ingroup core-ecs-relation
 
 #include <cstddef>
@@ -31,7 +31,7 @@ namespace cubos::core::ecs
     /// These linked lists are essential to provide fast query times, as instead of having to
     /// iterate over the entire table and filter for entity, we only need to follow the linked
     /// list chain.
-    class RelationTable final
+    class SparseRelationTable final
     {
     public:
         /// @brief Used to iterate over the relations in a table.
@@ -44,7 +44,7 @@ namespace cubos::core::ecs
         /// @note @p relationType must have @ref reflection::ConstructibleTrait and be move
         /// constructible.
         /// @param relationType Relation type.
-        RelationTable(const reflection::Type& relationType);
+        SparseRelationTable(const reflection::Type& relationType);
 
         /// @brief Adds a relation between the given indices. If it already exists, overwrites it.
         /// @param from From index.
@@ -147,7 +147,7 @@ namespace cubos::core::ecs
         std::unordered_map<uint64_t, uint32_t> mPairRows;
     };
 
-    class RelationTable::Iterator final
+    class SparseRelationTable::Iterator final
     {
     public:
         /// @brief Output structure for the iterator.
@@ -161,7 +161,7 @@ namespace cubos::core::ecs
         /// @brief Constructs.
         /// @param table Table.
         /// @param row Row.
-        Iterator(const RelationTable& table, uint32_t row);
+        Iterator(const SparseRelationTable& table, uint32_t row);
 
         /// @brief Copy constructs.
         /// @param other Other iterator.
@@ -188,12 +188,12 @@ namespace cubos::core::ecs
         Iterator& operator++();
 
     private:
-        const RelationTable& mTable;
+        const SparseRelationTable& mTable;
         uint32_t mRow;
         mutable Output mOutput;
     };
 
-    class RelationTable::View final
+    class SparseRelationTable::View final
     {
     public:
         /// @brief Used to iterate over the relations in a view.
@@ -202,7 +202,7 @@ namespace cubos::core::ecs
         /// @brief Constructs.
         /// @param index Index being iterated over.
         /// @param isFrom Is the index a from index? If false, its a to index.
-        View(const RelationTable& table, uint32_t index, bool isFrom);
+        View(const SparseRelationTable& table, uint32_t index, bool isFrom);
 
         /// @brief Gets an iterator to the first relation of the view.
         /// @return Iterator.
@@ -213,12 +213,12 @@ namespace cubos::core::ecs
         Iterator end() const;
 
     private:
-        const RelationTable& mTable;
+        const SparseRelationTable& mTable;
         uint32_t mIndex;
         bool mIsFrom;
     };
 
-    class RelationTable::View::Iterator final
+    class SparseRelationTable::View::Iterator final
     {
     public:
         /// @brief Output structure for the iterator.
@@ -233,7 +233,7 @@ namespace cubos::core::ecs
         /// @param table Table.
         /// @param row Row.
         /// @param isFrom Are we iterating over the same from index? If false, iterates over to.
-        Iterator(const RelationTable& table, uint32_t row, bool isFrom);
+        Iterator(const SparseRelationTable& table, uint32_t row, bool isFrom);
 
         /// @brief Copy constructs.
         /// @param other Other iterator.
@@ -260,7 +260,7 @@ namespace cubos::core::ecs
         Iterator& operator++();
 
     private:
-        const RelationTable& mTable;
+        const SparseRelationTable& mTable;
         uint32_t mRow;
         bool mIsFrom;
         mutable Output mOutput;
