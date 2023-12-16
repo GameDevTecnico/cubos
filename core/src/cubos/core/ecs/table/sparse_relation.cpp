@@ -1,9 +1,9 @@
-#include <cubos/core/ecs/relation/table.hpp>
+#include <cubos/core/ecs/table/sparse_relation.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
 
-using cubos::core::ecs::RelationTable;
+using cubos::core::ecs::SparseRelationTable;
 
 /// @brief Creates a single integer which uniquely identifies the relation with the given indices.
 /// @param from From index.
@@ -14,18 +14,18 @@ static uint64_t pairId(uint32_t from, uint32_t to)
     return static_cast<uint64_t>(from) | (static_cast<uint64_t>(to) << 32);
 }
 
-RelationTable::RelationTable(const reflection::Type& relationType)
+SparseRelationTable::SparseRelationTable(const reflection::Type& relationType)
     : mRelations{relationType}
 {
     mConstructibleTrait = &relationType.get<reflection::ConstructibleTrait>();
 }
 
-std::size_t RelationTable::size() const
+std::size_t SparseRelationTable::size() const
 {
     return mRelations.size();
 }
 
-bool RelationTable::insert(uint32_t from, uint32_t to, void* value)
+bool SparseRelationTable::insert(uint32_t from, uint32_t to, void* value)
 {
     // Single integer which contains both indices.
     auto pair = pairId(from, to);
@@ -55,7 +55,7 @@ bool RelationTable::insert(uint32_t from, uint32_t to, void* value)
     return false;
 }
 
-bool RelationTable::erase(uint32_t from, uint32_t to)
+bool SparseRelationTable::erase(uint32_t from, uint32_t to)
 {
     // Single integer which contains both indices.
     auto it = mPairRows.find(pairId(from, to));
@@ -90,7 +90,7 @@ bool RelationTable::erase(uint32_t from, uint32_t to)
     return true;
 }
 
-std::size_t RelationTable::eraseFrom(uint32_t from)
+std::size_t SparseRelationTable::eraseFrom(uint32_t from)
 {
     std::size_t count = 0;
 
@@ -104,7 +104,7 @@ std::size_t RelationTable::eraseFrom(uint32_t from)
     return count;
 }
 
-std::size_t RelationTable::eraseTo(uint32_t to)
+std::size_t SparseRelationTable::eraseTo(uint32_t to)
 {
     std::size_t count = 0;
 
@@ -118,12 +118,12 @@ std::size_t RelationTable::eraseTo(uint32_t to)
     return count;
 }
 
-bool RelationTable::contains(uint32_t from, uint32_t to) const
+bool SparseRelationTable::contains(uint32_t from, uint32_t to) const
 {
     return mPairRows.contains(pairId(from, to));
 }
 
-uintptr_t RelationTable::at(uint32_t from, uint32_t to) const
+uintptr_t SparseRelationTable::at(uint32_t from, uint32_t to) const
 {
     if (auto it = mPairRows.find(pairId(from, to)); it != mPairRows.end())
     {
@@ -133,27 +133,27 @@ uintptr_t RelationTable::at(uint32_t from, uint32_t to) const
     return 0;
 }
 
-auto RelationTable::begin() const -> Iterator
+auto SparseRelationTable::begin() const -> Iterator
 {
     return Iterator{*this, 0};
 }
 
-auto RelationTable::end() const -> Iterator
+auto SparseRelationTable::end() const -> Iterator
 {
     return Iterator{*this, static_cast<uint32_t>(mRows.size())};
 }
 
-auto RelationTable::viewFrom(uint32_t from) const -> View
+auto SparseRelationTable::viewFrom(uint32_t from) const -> View
 {
     return View{*this, from, true};
 }
 
-auto RelationTable::viewTo(uint32_t to) const -> View
+auto SparseRelationTable::viewTo(uint32_t to) const -> View
 {
     return View{*this, to, false};
 }
 
-void RelationTable::appendLink(uint32_t index)
+void SparseRelationTable::appendLink(uint32_t index)
 {
     auto& row = mRows[index];
 
@@ -184,7 +184,7 @@ void RelationTable::appendLink(uint32_t index)
     }
 }
 
-void RelationTable::eraseLink(uint32_t index)
+void SparseRelationTable::eraseLink(uint32_t index)
 {
     auto& row = mRows[index];
 
@@ -249,7 +249,7 @@ void RelationTable::eraseLink(uint32_t index)
     }
 }
 
-void RelationTable::updateLink(uint32_t index)
+void SparseRelationTable::updateLink(uint32_t index)
 {
     auto& row = mRows[index];
 
@@ -302,18 +302,18 @@ void RelationTable::updateLink(uint32_t index)
     }
 }
 
-RelationTable::Iterator::Iterator(const RelationTable& table, uint32_t row)
+SparseRelationTable::Iterator::Iterator(const SparseRelationTable& table, uint32_t row)
     : mTable{table}
     , mRow{row}
 {
 }
 
-bool RelationTable::Iterator::operator==(const Iterator& other) const
+bool SparseRelationTable::Iterator::operator==(const Iterator& other) const
 {
     return &mTable == &other.mTable && mRow == other.mRow;
 }
 
-auto RelationTable::Iterator::operator*() const -> const Output&
+auto SparseRelationTable::Iterator::operator*() const -> const Output&
 {
     CUBOS_ASSERT(static_cast<std::size_t>(mRow) < mTable.mRows.size(), "Iterator out of bounds");
     mOutput.from = mTable.mRows[mRow].from;
@@ -322,26 +322,26 @@ auto RelationTable::Iterator::operator*() const -> const Output&
     return mOutput;
 }
 
-auto RelationTable::Iterator::operator->() const -> const Output*
+auto SparseRelationTable::Iterator::operator->() const -> const Output*
 {
     return &this->operator*();
 }
 
-auto RelationTable::Iterator::operator++() -> Iterator&
+auto SparseRelationTable::Iterator::operator++() -> Iterator&
 {
     CUBOS_ASSERT(static_cast<std::size_t>(mRow) < mTable.mRows.size(), "Iterator out of bounds");
     ++mRow;
     return *this;
 }
 
-RelationTable::View::View(const RelationTable& table, uint32_t index, bool isFrom)
+SparseRelationTable::View::View(const SparseRelationTable& table, uint32_t index, bool isFrom)
     : mTable{table}
     , mIndex{index}
     , mIsFrom{isFrom}
 {
 }
 
-auto RelationTable::View::begin() const -> Iterator
+auto SparseRelationTable::View::begin() const -> Iterator
 {
     auto row = UINT32_MAX;
 
@@ -363,24 +363,24 @@ auto RelationTable::View::begin() const -> Iterator
     return Iterator{mTable, row, mIsFrom};
 }
 
-auto RelationTable::View::end() const -> Iterator
+auto SparseRelationTable::View::end() const -> Iterator
 {
     return Iterator{mTable, UINT32_MAX, mIsFrom};
 }
 
-RelationTable::View::Iterator::Iterator(const RelationTable& table, uint32_t row, bool isFrom)
+SparseRelationTable::View::Iterator::Iterator(const SparseRelationTable& table, uint32_t row, bool isFrom)
     : mTable{table}
     , mRow{row}
     , mIsFrom{isFrom}
 {
 }
 
-bool RelationTable::View::Iterator::operator==(const Iterator& other) const
+bool SparseRelationTable::View::Iterator::operator==(const Iterator& other) const
 {
     return &mTable == &other.mTable && mRow == other.mRow && mIsFrom == other.mIsFrom;
 }
 
-auto RelationTable::View::Iterator::operator*() const -> const Output&
+auto SparseRelationTable::View::Iterator::operator*() const -> const Output&
 {
     CUBOS_ASSERT(static_cast<std::size_t>(mRow) < mTable.mRows.size(), "Iterator out of bounds");
     mOutput.from = mTable.mRows[mRow].from;
@@ -389,12 +389,12 @@ auto RelationTable::View::Iterator::operator*() const -> const Output&
     return mOutput;
 }
 
-auto RelationTable::View::Iterator::operator->() const -> const Output*
+auto SparseRelationTable::View::Iterator::operator->() const -> const Output*
 {
     return &this->operator*();
 }
 
-auto RelationTable::View::Iterator::operator++() -> Iterator&
+auto SparseRelationTable::View::Iterator::operator++() -> Iterator&
 {
     CUBOS_ASSERT(static_cast<std::size_t>(mRow) < mTable.mRows.size(), "Iterator out of bounds");
     mRow = mIsFrom ? mTable.mRows[mRow].fromLink.next : mTable.mRows[mRow].toLink.next;
