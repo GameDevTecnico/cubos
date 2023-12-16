@@ -11,12 +11,12 @@ using cubos::engine::Cubos;
 using namespace cubos::engine;
 
 /// [Component Refl]
-#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
 CUBOS_REFLECT_IMPL(Num)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<Num>("Num").withField("value", &Num::value).build();
+    return cubos::core::ecs::TypeBuilder<Num>("Num").withField("value", &Num::value).build();
 }
 /// [Component Refl]
 

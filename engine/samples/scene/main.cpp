@@ -12,17 +12,17 @@ using cubos::core::ecs::World;
 using namespace cubos::engine;
 
 /// [Component Refl]
-#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
 CUBOS_REFLECT_IMPL(Num)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<Num>("Num").withField("value", &Num::value).build();
+    return cubos::core::ecs::TypeBuilder<Num>("Num").withField("value", &Num::value).build();
 }
 
 CUBOS_REFLECT_IMPL(Parent)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<Parent>("Parent").withField("entity", &Parent::entity).build();
+    return cubos::core::ecs::TypeBuilder<Parent>("Parent").withField("entity", &Parent::entity).build();
 }
 /// [Component Refl]
 

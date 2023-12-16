@@ -2,7 +2,7 @@
 
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/command_buffer.hpp>
-#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>
@@ -42,12 +42,12 @@ struct Parent
 
 CUBOS_REFLECT_IMPL(Player)
 {
-    return ecs::ComponentTypeBuilder<Player>("Player").build();
+    return ecs::TypeBuilder<Player>("Player").build();
 }
 
 CUBOS_REFLECT_IMPL(Position)
 {
-    return ecs::ComponentTypeBuilder<Position>("Position")
+    return ecs::TypeBuilder<Position>("Position")
         .withField("x", &Position::x)
         .withField("y", &Position::y)
         .withField("z", &Position::z)
@@ -56,7 +56,7 @@ CUBOS_REFLECT_IMPL(Position)
 
 CUBOS_REFLECT_IMPL(Velocity)
 {
-    return ecs::ComponentTypeBuilder<Velocity>("Velocity")
+    return ecs::TypeBuilder<Velocity>("Velocity")
         .withField("x", &Velocity::x)
         .withField("y", &Velocity::y)
         .withField("z", &Velocity::z)
@@ -65,7 +65,7 @@ CUBOS_REFLECT_IMPL(Velocity)
 
 CUBOS_REFLECT_IMPL(Parent)
 {
-    return ecs::ComponentTypeBuilder<Parent>("Parent").withField("entity", &Parent::entity).build();
+    return ecs::TypeBuilder<Parent>("Parent").withField("entity", &Parent::entity).build();
 }
 
 void spawner(ecs::Commands cmds)

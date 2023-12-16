@@ -1,4 +1,4 @@
-#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/ecs/system/query.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 
@@ -23,7 +23,7 @@ using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(RenderableGrid)
 {
-    return core::ecs::ComponentTypeBuilder<RenderableGrid>("cubos::engine::RenderableGrid")
+    return core::ecs::TypeBuilder<RenderableGrid>("cubos::engine::RenderableGrid")
         .withField("asset", &RenderableGrid::asset)
         .withField("offset", &RenderableGrid::offset)
         .build();
