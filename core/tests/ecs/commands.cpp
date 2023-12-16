@@ -1,5 +1,6 @@
 #include <doctest/doctest.h>
 
+#include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
 
 #include "utils.hpp"
@@ -48,15 +49,5 @@ TEST_CASE("ecs::Commands")
         CHECK_FALSE(world.components(foo).has<ParentComponent>());
         cmdBuffer.commit();
         CHECK(world.components(foo).has<ParentComponent>());
-    }
-
-    SUBCASE("abort creation of entities")
-    {
-        auto entity = cmds.create().entity();
-        CHECK_FALSE(world.isAlive(entity));
-        cmdBuffer.abort();
-        CHECK_FALSE(world.isAlive(entity));
-        cmdBuffer.commit();
-        CHECK_FALSE(world.isAlive(entity));
     }
 }

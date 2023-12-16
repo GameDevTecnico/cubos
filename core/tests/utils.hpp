@@ -76,6 +76,11 @@ public:
     {
     }
 
+    DetectDestructor(const DetectDestructor& other)
+        : mDestructed(other.mDestructed)
+    {
+    }
+
     DetectDestructor(DetectDestructor&& other)
         : mDestructed(other.mDestructed)
     {

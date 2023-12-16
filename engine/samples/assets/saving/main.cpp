@@ -47,30 +47,30 @@ void cubos::core::data::old::deserialize<IntegerAsset>(Deserializer& des, Intege
 }
 
 /// [Setting]
-static void configSystem(Write<Settings> settings)
+static void configSystem(Settings& settings)
 {
     // If we want to save assets, we must set this to false.
-    settings->setBool("assets.io.readOnly", false);
+    settings.setBool("assets.io.readOnly", false);
     /// [Setting]
 
-    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
-static void bridgeSystem(Write<Assets> assets)
+static void bridgeSystem(Assets& assets)
 {
-    assets->registerBridge(".int", std::make_unique<JSONBridge<IntegerAsset>>());
+    assets.registerBridge(".int", std::make_unique<JSONBridge<IntegerAsset>>());
 }
 
 /// [Create a new asset]
-static void saveSystem(Write<Assets> assets)
+static void saveSystem(Assets& assets)
 {
     // Create a new asset (with a random UUID).
-    auto handle = assets->create(IntegerAsset{1337});
+    auto handle = assets.create(IntegerAsset{1337});
     /// [Create a new asset]
 
     /// [Save the asset]
-    assets->writeMeta(handle)->set("path", "/assets/sample/sample.int");
-    assets->save(handle);
+    assets.writeMeta(handle)->set("path", "/assets/sample/sample.int");
+    assets.save(handle);
     /// [Save the asset]
 
     // Wait for input before exiting.

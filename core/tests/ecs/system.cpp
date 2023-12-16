@@ -3,6 +3,7 @@
 
 #include <doctest/doctest.h>
 
+#include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
@@ -12,11 +13,9 @@ using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
 using cubos::core::ecs::SystemInfo;
 using cubos::core::ecs::SystemWrapper;
 using cubos::core::ecs::World;
-using cubos::core::ecs::Write;
 
 TEST_CASE("ecs::SystemInfo")
 {
@@ -198,11 +197,11 @@ static void accessNothing()
 {
 }
 
-static void accessResources(Read<int> /*unused*/, Write<double> /*unused*/, Read<float> /*unused*/)
+static void accessResources(const int& /*unused*/, double& /*unused*/, const float& /*unused*/)
 {
 }
 
-static void accessComponents(Query<Read<int>, Write<double>> /*unused*/, Query<Read<int>, Read<float>> /*unused*/)
+static void accessComponents(Query<const int&, double&> /*unused*/, Query<const int&, const float&> /*unused*/)
 {
 }
 
@@ -210,11 +209,11 @@ static void accessCommands(Commands /*unused*/)
 {
 }
 
-static void accessWriteWorld(Write<World> /*unused*/)
+static void accessWriteWorld(World& /*unused*/)
 {
 }
 
-static void accessReadWorld(Read<World> /*unused*/)
+static void accessReadWorld(const World& /*unused*/)
 {
 }
 
@@ -245,8 +244,6 @@ TEST_CASE("ecs::SystemWrapper")
         SUBCASE("System accesses resources")
         {
             auto info = SystemWrapper(accessResources).info();
-            CHECK(info.componentsRead.empty());
-            CHECK(info.componentsWritten.empty());
             CHECK(info.resourcesRead.size() == 2);
             CHECK(info.resourcesWritten.size() == 1);
             CHECK(info.resourcesRead.contains(typeid(int)));
@@ -259,11 +256,6 @@ TEST_CASE("ecs::SystemWrapper")
         SUBCASE("System accesses components")
         {
             auto info = SystemWrapper(accessComponents).info();
-            CHECK(info.componentsRead.size() == 2);
-            CHECK(info.componentsWritten.size() == 1);
-            CHECK(info.componentsRead.contains(typeid(int)));
-            CHECK(info.componentsRead.contains(typeid(float)));
-            CHECK(info.componentsWritten.contains(typeid(double)));
             CHECK(info.resourcesRead.empty());
             CHECK(info.resourcesWritten.empty());
             CHECK_FALSE(info.usesCommands);
@@ -273,8 +265,6 @@ TEST_CASE("ecs::SystemWrapper")
         SUBCASE("System accesses commands")
         {
             auto info = SystemWrapper(accessCommands).info();
-            CHECK(info.componentsRead.empty());
-            CHECK(info.componentsWritten.empty());
             CHECK(info.resourcesRead.empty());
             CHECK(info.resourcesWritten.empty());
             CHECK(info.usesCommands);
@@ -295,8 +285,6 @@ TEST_CASE("ecs::SystemWrapper")
                 info = SystemWrapper(accessWriteWorld).info();
             }
 
-            CHECK(info.componentsRead.empty());
-            CHECK(info.componentsWritten.empty());
             CHECK(info.resourcesRead.empty());
             CHECK(info.resourcesWritten.empty());
             CHECK_FALSE(info.usesCommands);
@@ -312,9 +300,9 @@ TEST_CASE("ecs::SystemWrapper")
         SUBCASE("Systems read and write to a resource")
         {
             world.registerResource<int>(0);
-            runSystem(world, cmdBuf, [](Read<int> res) { CHECK(*res == 0); });
-            runSystem(world, cmdBuf, [](Write<int> res) { *res = 1; });
-            runSystem(world, cmdBuf, [](Read<int> res) { CHECK(*res == 1); });
+            runSystem(world, cmdBuf, [](const int& res) { CHECK(res == 0); });
+            runSystem(world, cmdBuf, [](int& res) { res = 1; });
+            runSystem(world, cmdBuf, [](const int& res) { CHECK(res == 1); });
         }
 
         SUBCASE("Systems spawn an entity and read/write from/to its component")
@@ -324,28 +312,28 @@ TEST_CASE("ecs::SystemWrapper")
             // Spawn entity with no components.
             Entity ent;
             runSystem(world, cmdBuf, [&](Commands cmd) { ent = cmd.create().entity(); });
-            runSystem(world, cmdBuf, [&](Query<Write<IntegerComponent>> q) { CHECK_FALSE(q[ent].has_value()); });
+            runSystem(world, cmdBuf, [&](Query<IntegerComponent&> q) { CHECK_FALSE(q.at(ent).contains()); });
 
             // Add component.
             runSystem(world, cmdBuf, [&](Commands cmd) { cmd.add(ent, IntegerComponent{0}); });
 
             // Commands have not been committed yet, so the component should not be readable.
-            runSystem(world, cmdBuf, [&](Query<Write<IntegerComponent>> q) { CHECK_FALSE(q[ent].has_value()); });
+            runSystem(world, cmdBuf, [&](Query<IntegerComponent&> q) { CHECK_FALSE(q.at(ent).contains()); });
 
             cmdBuf.commit();
 
             // Write to it.
-            runSystem(world, cmdBuf, [&](Query<Write<IntegerComponent>> q) {
-                REQUIRE(q[ent].has_value());
-                auto [comp] = *q[ent];
-                CHECK(comp->value == 0);
-                comp->value = 1;
+            runSystem(world, cmdBuf, [&](Query<IntegerComponent&> q) {
+                REQUIRE(q.at(ent).contains());
+                auto [comp] = *q.at(ent);
+                CHECK(comp.value == 0);
+                comp.value = 1;
             });
 
             // Read from it.
-            runSystem(world, cmdBuf, [&](Query<Read<IntegerComponent>> query) {
-                auto [comp] = *query[ent];
-                CHECK(comp->value == 1);
+            runSystem(world, cmdBuf, [&](Query<const IntegerComponent&> query) {
+                auto [comp] = *query.at(ent);
+                CHECK(comp.value == 1);
             });
         }
     }

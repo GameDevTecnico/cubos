@@ -11,10 +11,10 @@ using cubos::core::io::WindowEvent;
 
 using namespace cubos::engine;
 
-static void init(Read<Window> window, Write<Settings> settings)
+static void init(const Window& window, Settings& settings)
 {
-    float dpiScale = static_cast<float>(settings->getDouble("imgui.scale", (*window)->contentScale()));
-    imguiInitialize(*window, dpiScale);
+    float dpiScale = static_cast<float>(settings.getDouble("imgui.scale", window->contentScale()));
+    imguiInitialize(window, dpiScale);
 }
 
 static void begin(EventReader<WindowEvent> events)

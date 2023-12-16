@@ -8,8 +8,6 @@
 #include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::EventWriter;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 
 using cubos::engine::AnyAsset;
 using cubos::engine::Assets;
@@ -113,32 +111,32 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
     return iter;
 }
 
-static void showAssets(Read<Assets> assets, Write<Settings> settings, Write<Toolbox> toolbox,
+static void showAssets(const Assets& assets, Settings& settings, Toolbox& toolbox,
                        EventWriter<AssetSelectedEvent> events)
 {
-    if (!toolbox->isOpen("Asset Explorer"))
+    if (!toolbox.isOpen("Asset Explorer"))
     {
         return;
     }
 
     ImGui::Begin("Asset Explorer");
 
-    std::string folder = settings->getString("assets.io.path", "");
+    std::string folder = settings.getString("assets.io.path", "");
 
     folder.erase(0, folder.rfind('/'));
 
     std::vector<AnyAsset> assetsVector;
-    for (auto const& a : assets->listAll())
+    for (auto const& a : assets.listAll())
     {
-        if (assets->readMeta(a)->get("path").has_value())
+        if (assets.readMeta(a)->get("path").has_value())
         {
             assetsVector.push_back(a);
         }
     }
     std::sort(assetsVector.begin(), assetsVector.end(),
-              [assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, *assets); });
+              [&assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, assets); });
 
-    showFolder((*assets), folder, assetsVector.begin(), assetsVector.end(), events);
+    showFolder(assets, folder, assetsVector.begin(), assetsVector.end(), events);
 
     ImGui::End();
 }

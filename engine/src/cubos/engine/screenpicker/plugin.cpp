@@ -11,25 +11,25 @@ using cubos::core::io::WindowEvent;
 
 using namespace cubos::engine;
 
-static void processResize(Write<ScreenPicker> screenPicker, EventReader<WindowEvent> windowEvent)
+static void processResize(ScreenPicker& screenPicker, EventReader<WindowEvent> windowEvent)
 {
     for (const auto& event : windowEvent)
     {
         if (std::holds_alternative<ResizeEvent>(event))
         {
-            screenPicker->resizeTexture(std::get<ResizeEvent>(event).size);
+            screenPicker.resizeTexture(std::get<ResizeEvent>(event).size);
         }
     }
 }
 
-static void clearTexture(Write<ScreenPicker> screenPicker)
+static void clearTexture(ScreenPicker& screenPicker)
 {
-    screenPicker->clearTexture();
+    screenPicker.clearTexture();
 }
 
-static void initScreenPickerSystem(Write<ScreenPicker> screenPicker, Read<Window> window)
+static void initScreenPickerSystem(ScreenPicker& screenPicker, const Window& window)
 {
-    screenPicker->init(&(*window)->renderDevice(), (*window)->framebufferSize());
+    screenPicker.init(&window->renderDevice(), window->framebufferSize());
 }
 
 void cubos::engine::screenPickerPlugin(Cubos& cubos)

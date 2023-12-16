@@ -93,9 +93,105 @@ TEST_CASE("memory::AnyVector")
             }
         }
 
+        SUBCASE("swap erase until empty")
+        {
+            std::vector<std::size_t> indices{};
+            for (std::size_t i = 0; i < Size; ++i)
+            {
+                indices.push_back(i);
+            }
+
+            while (!vec.empty())
+            {
+                auto index = indices[0];
+
+                CHECK_FALSE(destroyed[index]);
+                vec.swapErase(0);
+                CHECK(destroyed[index]);
+
+                indices[0] = indices.back();
+                indices.pop_back();
+            }
+        }
+
+        SUBCASE("swap move until empty")
+        {
+            std::vector<std::size_t> indices{};
+            auto* detector = static_cast<DetectDestructor*>(operator new(sizeof(DetectDestructor)));
+
+            for (std::size_t i = 0; i < Size; ++i)
+            {
+                indices.push_back(i);
+            }
+
+            while (!vec.empty())
+            {
+
+                auto index = indices[0];
+
+                CHECK_FALSE(destroyed[index]);
+                vec.swapMove(0, detector);
+                CHECK_FALSE(destroyed[index]);
+                detector->~DetectDestructor();
+                CHECK(destroyed[index]);
+
+                indices[0] = indices.back();
+                indices.pop_back();
+            }
+
+            operator delete(detector);
+        }
+
         SUBCASE("clear")
         {
             vec.clear();
+        }
+
+        SUBCASE("set to default")
+        {
+            for (std::size_t i = 0; i < Size; ++i)
+            {
+                CHECK_FALSE(destroyed[i]);
+                vec.setDefault(i);
+                CHECK(destroyed[i]);
+            }
+
+            vec.clear();
+        }
+
+        SUBCASE("set to copy")
+        {
+            bool flag = false;
+            DetectDestructor detector{&flag};
+
+            for (std::size_t i = 0; i < Size; ++i)
+            {
+                CHECK_FALSE(destroyed[i]);
+                vec.setCopy(i, &detector);
+                CHECK(destroyed[i]);
+            }
+
+            CHECK_FALSE(flag);
+            vec.clear();
+            CHECK(flag);
+        }
+
+        SUBCASE("set to move")
+        {
+            bool flag = false;
+
+            for (std::size_t i = 0; i < Size; ++i)
+            {
+                DetectDestructor detector{&flag};
+
+                CHECK_FALSE(destroyed[i]);
+                vec.setMove(i, &detector);
+                CHECK(destroyed[i]);
+            }
+
+            CHECK_FALSE(flag);
+            vec.clear();
+            CHECK(flag);
         }
 
         for (const auto& i : destroyed)

@@ -47,22 +47,22 @@ static void sayWorldSystem()
 /// [Hello World]
 
 /// [Entity Spawn]
-static void spawnEntitiesSystem(Commands cmds, Write<Pop> pop)
+static void spawnEntitiesSystem(Commands cmds, Pop& pop)
 {
     for (int i = 0; i < 10; i++)
     {
-        cmds.create(Num{i});
-        pop->count += 1;
+        cmds.create().add(Num{i});
+        pop.count += 1;
     }
 }
 /// [Entity Spawn]
 
 /// [Entity Print]
-static void checkEntitiesSystem(Query<Read<Num>> query, Read<Pop> pop)
+static void checkEntitiesSystem(Query<const Num&> query, const Pop& pop)
 {
-    for (auto [entity, num] : query)
+    for (auto [num] : query)
     {
-        CUBOS_INFO("Entity '{}' of '{}'", num->value, pop->count);
+        CUBOS_INFO("Entity '{}' of '{}'", num.value, pop.count);
     }
 }
 /// [Entity Print]

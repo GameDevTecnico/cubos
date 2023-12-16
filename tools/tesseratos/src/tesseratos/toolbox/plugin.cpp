@@ -5,9 +5,7 @@
 #include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::EventWriter;
-using cubos::core::ecs::Write;
 
-using cubos::core::ecs::Write;
 using cubos::engine::Cubos;
 
 using namespace tesseratos;
@@ -37,16 +35,16 @@ void Toolbox::toggle(const std::string& toolName)
     mToolsMap[toolName] = !mToolsMap[toolName];
 }
 
-static void showToolbox(Write<Toolbox> toolbox)
+static void showToolbox(Toolbox& toolbox)
 {
     ImGui::Begin("Toolbox");
 
-    for (const auto& [tool, open] : *toolbox)
+    for (const auto& [tool, open] : toolbox)
     {
         bool check = open;
         if (ImGui::Checkbox(data(tool), &check))
         {
-            toolbox->toggle(tool);
+            toolbox.toggle(tool);
         }
     }
 

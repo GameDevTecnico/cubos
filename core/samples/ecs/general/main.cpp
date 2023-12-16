@@ -1,11 +1,12 @@
 #include <iostream>
 
 #include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/ecs/system/commands.hpp>
+#include <cubos/core/ecs/command_buffer.hpp>
+#include <cubos/core/ecs/component/reflection.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>
-#include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using namespace cubos::core;
@@ -41,31 +42,35 @@ struct Parent
 
 CUBOS_REFLECT_IMPL(Player)
 {
-    return Type::create("Player").with(ConstructibleTrait::typed<Player>().withMoveConstructor().build());
+    return ecs::ComponentTypeBuilder<Player>("Player").build();
 }
 
 CUBOS_REFLECT_IMPL(Position)
 {
-    return Type::create("Position").with(ConstructibleTrait::typed<Position>().withMoveConstructor().build());
+    return ecs::ComponentTypeBuilder<Position>("Position")
+        .withField("x", &Position::x)
+        .withField("y", &Position::y)
+        .withField("z", &Position::z)
+        .build();
 }
 
 CUBOS_REFLECT_IMPL(Velocity)
 {
-    return Type::create("Velocity").with(ConstructibleTrait::typed<Velocity>().withMoveConstructor().build());
+    return ecs::ComponentTypeBuilder<Velocity>("Velocity")
+        .withField("x", &Velocity::x)
+        .withField("y", &Velocity::y)
+        .withField("z", &Velocity::z)
+        .build();
 }
 
 CUBOS_REFLECT_IMPL(Parent)
 {
-    return Type::create("Parent").with(ConstructibleTrait::typed<Parent>().withMoveConstructor().build());
+    return ecs::ComponentTypeBuilder<Parent>("Parent").withField("entity", &Parent::entity).build();
 }
 
 void spawner(ecs::Commands cmds)
 {
-    cmds.create().add<Position>({0, 5, 1}).add(Velocity{0, 3, 1}, Player{});
-
-    cmds.create<Position, Player>({0, 8, 7}, {});
-    cmds.create(Position{0, 15, 7}, Velocity{0, 4, 1});
-    cmds.create(Position{0, 12, 7}, Velocity{0, 5, 1});
+    cmds.create().add(Position{0, 5, 1}).add(Velocity{0, 3, 1}).add(Player{});
 
     ecs::Blueprint epicBlueprint{};
     auto main = epicBlueprint.create("main");
@@ -88,27 +93,27 @@ struct MyResource
     int val;
 };
 
-void printPositions(ecs::Query<ecs::Write<Position>, ecs::Read<Velocity>> query)
+void printPositions(ecs::Query<Position&, const Velocity&> query)
 {
     std::cout << "positions w/velocity:" << std::endl;
-    for (auto [entity, position, velocity] : query)
+    for (auto [position, velocity] : query)
     {
-        std::cout << position->x << ' ' << position->y << ' ' << position->z << std::endl;
+        std::cout << position.x << ' ' << position.y << ' ' << position.z << std::endl;
     }
 }
 
-void printPlayerPosition(ecs::Query<ecs::Read<Player>, ecs::Write<Position>> query)
+void printPlayerPosition(ecs::Query<const Player&, Position&> query)
 {
     std::cout << "player positions:" << std::endl;
-    for (auto [entity, player, position] : query)
+    for (auto [player, position] : query)
     {
-        std::cout << position->x << ' ' << position->y << ' ' << position->z << std::endl;
+        std::cout << position.x << ' ' << position.y << ' ' << position.z << std::endl;
     }
 }
 
-void mySystem(ecs::Write<DeltaTime> dt, ecs::Read<MyResource> res)
+void mySystem(DeltaTime& dt, const MyResource& res)
 {
-    std::cout << "mySystem: " << dt->dt << " " << res->val << std::endl;
+    std::cout << "mySystem: " << dt.dt << " " << res.val << std::endl;
 }
 
 int main()
@@ -145,9 +150,8 @@ int main()
     dispatcher.addTag("PreProcess");
     dispatcher.tagSetBeforeTag("Main");
     dispatcher.tagSetBeforeTag("Transform");
-    dispatcher.addSystem([](ecs::Read<DeltaTime> dt, ecs::Write<MyResource> res) {
-        std::cout << "lambda: " << dt->dt << " " << res->val << std::endl;
-    });
+    dispatcher.addSystem(
+        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; });
     dispatcher.systemAddTag("PreProcess");
 
     dispatcher.compileChain();

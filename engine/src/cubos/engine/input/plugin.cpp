@@ -10,21 +10,21 @@ using cubos::core::io::WindowEvent;
 
 using namespace cubos::engine;
 
-static void bridge(Write<Assets> assets)
+static void bridge(Assets& assets)
 {
-    assets->registerBridge(".bind", std::make_unique<JSONBridge<InputBindings>>());
+    assets.registerBridge(".bind", std::make_unique<JSONBridge<InputBindings>>());
 }
 
-static void update(Read<Window> window, Write<Input> input, EventReader<WindowEvent> events)
+static void update(const Window& window, Input& input, EventReader<WindowEvent> events)
 {
-    input->updateMouse();
+    input.updateMouse();
 
     for (auto event : events)
     {
-        std::visit([window, &input](auto e) { input->handle(*window, e); }, event);
+        std::visit([window, &input](auto e) { input.handle(window, e); }, event);
     }
 
-    input->pollGamepads(*window);
+    input.pollGamepads(window);
 }
 
 void cubos::engine::inputPlugin(Cubos& cubos)

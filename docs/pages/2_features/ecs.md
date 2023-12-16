@@ -113,15 +113,15 @@ functions whose arguments are of certain types, which you can read more about
 in the @ref core-ecs "ECS module page".
 
 To access a resource, we use the `Read` and `Write` arguments. In this case, we
-won't be modifying the delta time, so we will use `Read<DeltaTime>`. To access
+won't be modifying the delta time, so we will use `const DeltaTime&`. To access
 entities and their components, we use the `Query` argument. In this case we
 we want to access all entities with both positions and velocities, and modify
-their positions, so we will use `Query<Write<Position>, Read<Velocity>>`.
+their positions, so we will use `Query<Position&, const Velocity&>`.
 
 ```cpp
 void velocitySystem(
-    Read<DeltaTime> dt,
-    Query<Write<Position>, Read<Velocity>> query)
+    const DeltaTime& dt,
+    Query<Position&, const Velocity&> query)
 {
     for (auto [entity, position, velocity] : query)
     {
@@ -165,7 +165,7 @@ world.destroy(entity);
 ```
 
 If necessary, you can access the world in a system through the arguments
-`Read<World>` or `Write<World>`. However, this is not recommended, since it
+`const World&` or `World&`. However, this is not recommended, since it
 becomes impossible for the dispatcher to know what the system is accessing, and
 thus it cannot parallelize it.
 
@@ -179,7 +179,7 @@ and then destroy themselves. We can implement this with a system like this:
 ```cpp
 void spawnerSystem(
     Commands commands,
-    Query<Read<Spawner>, Read<Position>> spawners)
+    Query<const Spawner&, const Position&> spawners)
 {
     for (auto [entity, spawner, position] : spawners)
     {

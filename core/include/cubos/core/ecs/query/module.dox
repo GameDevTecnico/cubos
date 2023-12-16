@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref core-ecs-query directory.
+
+namespace cubos::core::ecs
+{
+    /// @defgroup core-ecs-query Query
+    /// @ingroup core-ecs
+    /// @brief Defines the query functionality of the ECS.
+}

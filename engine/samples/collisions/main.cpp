@@ -31,20 +31,20 @@ struct State
     glm::vec3 bRotationAxis;
 };
 
-static void settings(Write<Settings> settings)
+static void settings(Settings& settings)
 {
-    settings->setBool("assets.io.enabled", false);
+    settings.setBool("assets.io.enabled", false);
 }
 
-static void init(Commands commands, Write<Input> input, Write<ActiveCameras> camera)
+static void init(Commands commands, Input& input, ActiveCameras& camera)
 {
     // Add procedural asset for detecting a reset action on a space key press.
     auto bindings = InputBindings{};
     bindings.actions()["reset"].keys().emplace_back(Key::Space, Modifiers::None);
-    input->bind(bindings);
+    input.bind(bindings);
 
     // Spawn the camera.
-    camera->entities[0] =
+    camera.entities[0] =
         commands.create()
             .add(Camera{.fovY = 60.0, .zNear = 0.1F, .zFar = 100.0F})
             .add(LocalToWorld{})
@@ -53,81 +53,81 @@ static void init(Commands commands, Write<Input> input, Write<ActiveCameras> cam
             .entity();
 }
 
-static void addColliders(Write<State> state, Commands commands)
+static void addColliders(State& state, Commands commands)
 {
-    state->a = commands.create()
-                   .add(Collider{})
-                   .add(CapsuleCollisionShape{{0.5F, 1.0F}})
-                   .add(LocalToWorld{})
-                   .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
-                   .add(Rotation{})
-                   .entity();
-    state->aRotationAxis = glm::sphericalRand(1.0F);
+    state.a = commands.create()
+                  .add(Collider{})
+                  .add(CapsuleCollisionShape{{0.5F, 1.0F}})
+                  .add(LocalToWorld{})
+                  .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
+                  .add(Rotation{})
+                  .entity();
+    state.aRotationAxis = glm::sphericalRand(1.0F);
 
-    state->b = commands.create()
-                   .add(Collider{})
-                   .add(BoxCollisionShape{})
-                   .add(LocalToWorld{})
-                   .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
-                   .add(Rotation{})
-                   .entity();
-    state->bRotationAxis = glm::sphericalRand(1.0F);
+    state.b = commands.create()
+                  .add(Collider{})
+                  .add(BoxCollisionShape{})
+                  .add(LocalToWorld{})
+                  .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
+                  .add(Rotation{})
+                  .entity();
+    state.bRotationAxis = glm::sphericalRand(1.0F);
 }
 
-static void updateTransform(Write<State> state, Read<Input> input, Query<Write<Position>, Write<Rotation>> query)
+static void updateTransform(State& state, const Input& input, Query<Position&, Rotation&> query)
 {
-    auto [aPos, aRot] = query[state->a].value();
-    auto [bPos, bRot] = query[state->b].value();
+    auto [aPos, aRot] = *query.at(state.a);
+    auto [bPos, bRot] = *query.at(state.b);
 
-    if (state->collided)
+    if (state.collided)
     {
-        if (input->pressed("reset"))
+        if (input.pressed("reset"))
         {
-            state->collided = false;
+            state.collided = false;
 
-            aPos->vec = glm::vec3{0.0F, 0.0F, -2.0F};
-            aRot->quat = glm::quat{1.0F, 0.0F, 0.0F, 0.0F};
-            state->aRotationAxis = glm::sphericalRand(1.0F);
+            aPos.vec = glm::vec3{0.0F, 0.0F, -2.0F};
+            aRot.quat = glm::quat{1.0F, 0.0F, 0.0F, 0.0F};
+            state.aRotationAxis = glm::sphericalRand(1.0F);
 
-            bPos->vec = glm::vec3{0.0F, 0.0F, 2.0F};
-            bRot->quat = glm::quat{1.0F, 0.0F, 0.0F, 0.0F};
-            state->bRotationAxis = glm::sphericalRand(1.0F);
+            bPos.vec = glm::vec3{0.0F, 0.0F, 2.0F};
+            bRot.quat = glm::quat{1.0F, 0.0F, 0.0F, 0.0F};
+            state.bRotationAxis = glm::sphericalRand(1.0F);
         }
         return;
     }
 
-    aRot->quat = glm::rotate(aRot->quat, 0.01F, state->aRotationAxis);
-    aPos->vec += glm::vec3{0.0F, 0.0F, 0.01F};
+    aRot.quat = glm::rotate(aRot.quat, 0.01F, state.aRotationAxis);
+    aPos.vec += glm::vec3{0.0F, 0.0F, 0.01F};
 
-    bRot->quat = glm::rotate(bRot->quat, 0.01F, state->bRotationAxis);
-    bPos->vec += glm::vec3{0.0F, 0.0F, -0.01F};
+    bRot.quat = glm::rotate(bRot.quat, 0.01F, state.bRotationAxis);
+    bPos.vec += glm::vec3{0.0F, 0.0F, -0.01F};
 }
 
-static void updateCollided(Query<Read<Collider>> query, Write<State> state, Read<BroadPhaseCandidates> candidates)
+static void updateCollided(Query<Entity, const Collider&> query, State& state, const BroadPhaseCandidates& candidates)
 {
     for (auto [entity, collider] : query)
     {
         for (const auto& [collider1, collider2] :
-             candidates->candidates(BroadPhaseCandidates::CollisionType::BoxCapsule))
+             candidates.candidates(BroadPhaseCandidates::CollisionType::BoxCapsule))
         {
             if (collider1 == entity || collider2 == entity)
             {
-                state->collided = true;
+                state.collided = true;
                 break;
             }
         }
     }
 }
 
-static void render(Query<Read<LocalToWorld>, Read<Collider>> query)
+static void render(Query<const LocalToWorld&, const Collider&> query)
 {
-    for (auto [entity, localToWorld, collider] : query)
+    for (auto [localToWorld, collider] : query)
     {
         cubos::core::gl::Debug::drawWireBox(
-            collider->localAABB.box(),
-            glm::translate(localToWorld->mat * collider->transform, collider->localAABB.center()));
-        cubos::core::gl::Debug::drawWireBox(collider->worldAABB.box(),
-                                            glm::translate(glm::mat4{1.0}, collider->worldAABB.center()),
+            collider.localAABB.box(),
+            glm::translate(localToWorld.mat * collider.transform, collider.localAABB.center()));
+        cubos::core::gl::Debug::drawWireBox(collider.worldAABB.box(),
+                                            glm::translate(glm::mat4{1.0}, collider.worldAABB.center()),
                                             glm::vec3{1.0, 0.0, 0.0});
     }
 }

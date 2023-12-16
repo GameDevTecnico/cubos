@@ -40,6 +40,11 @@ namespace cubos::core::memory
         /// @param capacity Minimum capacity.
         void reserve(std::size_t capacity);
 
+        /// @brief Pushes an uninitialized element to the back of the vector.
+        /// @warning Care must be taken to ensure that the constructor of the element is called before it is used or
+        /// before the vector is destroyed, as the destructor will be called on it.
+        void pushUninit();
+
         /// @brief Pushes a new default-constructed element to the back of the vector.
         /// @note Aborts if @ref elementType() is not default-constructible.
         void pushDefault();
@@ -53,9 +58,39 @@ namespace cubos::core::memory
         /// @param element Element to move.
         void pushMove(void* value);
 
+        /// @brief Overwrites the element at the given index with a new default-constructed element.
+        /// @note Aborts if @ref elementType() is not default-constructible.
+        /// @param index Element index.
+        void setDefault(std::size_t index);
+
+        /// @brief Overwrites the element at the given index with a new copy-constructed element.
+        /// @note Aborts if @ref elementType() is not copy-constructible.
+        /// @param index Element index.
+        /// @param element Element to copy.
+        void setCopy(std::size_t index, const void* value);
+
+        /// @brief Overwrites the element at the given index with a new move-constructed element.
+        /// @note Aborts if @ref elementType() is not move-constructible.
+        /// @param index Element index.
+        /// @param element Element to move.
+        void setMove(std::size_t index, void* value);
+
         /// @brief Removes the last element from the vector.
         /// @note Aborts if the vector is empty.
         void pop();
+
+        /// @brief Removes the element at the given index from the vector, moving the last element
+        /// to its place if it isn't the last element.
+        /// @note Aborts if @p index is out of bounds.
+        /// @param index Element index.
+        void swapErase(std::size_t index);
+
+        /// @brief Moves the element at the given index from the vector into the given address, moving
+        /// the last element to its place if it isn't the last element.
+        /// @note Aborts if @p index is out of bounds.
+        /// @param index Element index.
+        /// @param destination Address to move the element to.
+        void swapMove(std::size_t index, void* destination);
 
         /// @brief Removes all elements from the vector.
         void clear();

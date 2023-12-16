@@ -2,6 +2,7 @@
 
 #include <doctest/doctest.h>
 
+#include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
@@ -10,31 +11,30 @@
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Dispatcher;
 using cubos::core::ecs::World;
-using cubos::core::ecs::Write;
 
 /// System which pushes N to the order vector.
 /// @tparam N
 template <int N>
-static void pushToOrder(Write<std::vector<int>> order)
+static void pushToOrder(std::vector<int>& order)
 {
-    order->push_back(N);
+    order.push_back(N);
 }
 
 /// Condition which pushes N to the order vector and always fails.
 /// @tparam N
 template <int N>
-static bool pushToOrderAndFail(Write<std::vector<int>> order)
+static bool pushToOrderAndFail(std::vector<int>& order)
 {
-    order->push_back(N);
+    order.push_back(N);
     return false;
 }
 
 /// Condition which pushes N to the order vector and always succeeds.
 /// @tparam N
 template <int N>
-static bool pushToOrderAndSucceed(Write<std::vector<int>> order)
+static bool pushToOrderAndSucceed(std::vector<int>& order)
 {
-    order->push_back(N);
+    order.push_back(N);
     return true;
 }
 

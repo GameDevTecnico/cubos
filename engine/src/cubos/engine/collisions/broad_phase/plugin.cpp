@@ -12,32 +12,32 @@
 using namespace cubos::engine;
 
 /// @brief Tracks all new colliders.
-static void trackNewCollidersSystem(Query<Read<Collider>> query, Write<BroadPhaseSweepAndPrune> sweepAndPrune)
+static void trackNewCollidersSystem(Query<Entity, const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune)
 {
     for (auto [entity, collider] : query)
     {
-        if (collider->fresh == 0)
+        if (collider.fresh == 0)
         {
-            sweepAndPrune->addEntity(entity);
+            sweepAndPrune.addEntity(entity);
         }
     }
 }
 
 /// @brief Updates the AABBs of all colliders.
-static void updateAABBsSystem(Query<Read<LocalToWorld>, Write<Collider>> query)
+static void updateAABBsSystem(Query<const LocalToWorld&, Collider&> query)
 {
-    for (auto [entity, localToWorld, collider] : query)
+    for (auto [localToWorld, collider] : query)
     {
         // Get the 4 points of the collider.
         glm::vec3 corners[4];
-        collider->localAABB.box().corners4(corners);
+        collider.localAABB.box().corners4(corners);
 
         // Pack the 3 points of the collider into a matrix.
         auto points = glm::mat4{glm::vec4{corners[0], 1.0F}, glm::vec4{corners[1], 1.0F}, glm::vec4{corners[2], 1.0F},
                                 glm::vec4{corners[3], 1.0F}};
 
         // Transforms collider space to world space.
-        auto transform = localToWorld->mat * collider->transform;
+        auto transform = localToWorld.mat * collider.transform;
 
         // Only want scale and rotation, extract translation and remove it.
         auto translation = glm::vec3{transform[3]};
@@ -52,57 +52,57 @@ static void updateAABBsSystem(Query<Read<LocalToWorld>, Write<Collider>> query)
         max = glm::max(max, glm::abs(rotatedCorners[3]));
 
         // Add the collider's margin.
-        max += glm::vec3{collider->margin};
+        max += glm::vec3{collider.margin};
 
         // Set the AABB.
-        collider->worldAABB.min(translation - max);
-        collider->worldAABB.max(translation + max);
+        collider.worldAABB.min(translation - max);
+        collider.worldAABB.max(translation + max);
     };
 }
 
 /// @brief Updates the sweep markers of all colliders.
-static void updateMarkersSystem(Query<Read<Collider>> query, Write<BroadPhaseSweepAndPrune> sweepAndPrune)
+static void updateMarkersSystem(Query<const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune)
 {
     // TODO: This is parallelizable.
     for (glm::length_t axis = 0; axis < 3; axis++)
     {
         // TODO: Should use insert sort to leverage spatial coherence.
-        std::sort(sweepAndPrune->markersPerAxis[axis].begin(), sweepAndPrune->markersPerAxis[axis].end(),
+        std::sort(sweepAndPrune.markersPerAxis[axis].begin(), sweepAndPrune.markersPerAxis[axis].end(),
                   [axis, &query](const BroadPhaseSweepAndPrune::SweepMarker& a,
                                  const BroadPhaseSweepAndPrune::SweepMarker& b) {
-                      auto [aCollider] = query[a.entity].value();
-                      auto [bCollider] = query[b.entity].value();
-                      auto aPos = a.isMin ? aCollider->worldAABB.min() : aCollider->worldAABB.max();
-                      auto bPos = b.isMin ? bCollider->worldAABB.min() : bCollider->worldAABB.max();
+                      auto [aCollider] = *query.at(a.entity);
+                      auto [bCollider] = *query.at(b.entity);
+                      auto aPos = a.isMin ? aCollider.worldAABB.min() : aCollider.worldAABB.max();
+                      auto bPos = b.isMin ? bCollider.worldAABB.min() : bCollider.worldAABB.max();
                       return aPos[axis] < bPos[axis];
                   });
     }
 }
 
 /// @brief Performs a sweep of all colliders.
-static void sweepSystem(Write<BroadPhaseSweepAndPrune> sweepAndPrune)
+static void sweepSystem(BroadPhaseSweepAndPrune& sweepAndPrune)
 {
     // TODO: This is parallelizable.
     for (glm::length_t axis = 0; axis < 3; axis++)
     {
-        CUBOS_ASSERT(sweepAndPrune->activePerAxis[axis].empty(), "Last sweep entered an entity but never exited");
+        CUBOS_ASSERT(sweepAndPrune.activePerAxis[axis].empty(), "Last sweep entered an entity but never exited");
 
-        sweepAndPrune->sweepOverlapMaps[axis].clear();
+        sweepAndPrune.sweepOverlapMaps[axis].clear();
 
-        for (auto& marker : sweepAndPrune->markersPerAxis[axis])
+        for (auto& marker : sweepAndPrune.markersPerAxis[axis])
         {
             if (marker.isMin)
             {
-                for (const auto& other : sweepAndPrune->activePerAxis[axis])
+                for (const auto& other : sweepAndPrune.activePerAxis[axis])
                 {
-                    sweepAndPrune->sweepOverlapMaps[axis][marker.entity].push_back(other);
+                    sweepAndPrune.sweepOverlapMaps[axis][marker.entity].push_back(other);
                 }
 
-                sweepAndPrune->activePerAxis[axis].insert(marker.entity);
+                sweepAndPrune.activePerAxis[axis].insert(marker.entity);
             }
             else
             {
-                sweepAndPrune->activePerAxis[axis].erase(marker.entity);
+                sweepAndPrune.activePerAxis[axis].erase(marker.entity);
             }
         }
     }
@@ -127,19 +127,20 @@ BroadPhaseCandidates::CollisionType getCollisionType(bool box, bool capsule)
 ///
 /// @details
 /// TODO: This query is disgusting. We need a way to find if a component is present without reading it.
-static void findPairsSystem(Query<OptRead<BoxCollisionShape>, OptRead<CapsuleCollisionShape>, Read<Collider>> query,
-                            Read<BroadPhaseSweepAndPrune> sweepAndPrune, Write<BroadPhaseCandidates> candidates)
+static void findPairsSystem(
+    Query<Entity, Opt<const BoxCollisionShape&>, Opt<const CapsuleCollisionShape&>, const Collider&> query,
+    const BroadPhaseSweepAndPrune& sweepAndPrune, BroadPhaseCandidates& candidates)
 {
-    candidates->clearCandidates();
+    candidates.clearCandidates();
 
     for (glm::length_t axis = 0; axis < 3; axis++)
     {
-        for (const auto& [entity, overlaps] : sweepAndPrune->sweepOverlapMaps[axis])
+        for (const auto& [entity, overlaps] : sweepAndPrune.sweepOverlapMaps[axis])
         {
-            auto [box, capsule, collider] = query[entity].value();
+            auto [_entity, box, capsule, collider] = *query.at(entity);
             for (const auto& other : overlaps)
             {
-                auto [otherBox, otherCapsule, otherCollider] = query[other].value();
+                auto [_other, otherBox, otherCapsule, otherCollider] = *query.at(other);
 
                 // TODO: Should this be inside the if statement?
                 auto type = getCollisionType(box || otherBox, capsule || otherCapsule);
@@ -147,24 +148,24 @@ static void findPairsSystem(Query<OptRead<BoxCollisionShape>, OptRead<CapsuleCol
                 switch (axis)
                 {
                 case 0: // X
-                    if (collider->worldAABB.overlapsY(otherCollider->worldAABB) &&
-                        collider->worldAABB.overlapsZ(otherCollider->worldAABB))
+                    if (collider.worldAABB.overlapsY(otherCollider.worldAABB) &&
+                        collider.worldAABB.overlapsZ(otherCollider.worldAABB))
                     {
-                        candidates->addCandidate(type, {entity, other});
+                        candidates.addCandidate(type, {entity, other});
                     }
                     break;
                 case 1: // Y
-                    if (collider->worldAABB.overlapsX(otherCollider->worldAABB) &&
-                        collider->worldAABB.overlapsZ(otherCollider->worldAABB))
+                    if (collider.worldAABB.overlapsX(otherCollider.worldAABB) &&
+                        collider.worldAABB.overlapsZ(otherCollider.worldAABB))
                     {
-                        candidates->addCandidate(type, {entity, other});
+                        candidates.addCandidate(type, {entity, other});
                     }
                     break;
                 case 2: // Z
-                    if (collider->worldAABB.overlapsX(otherCollider->worldAABB) &&
-                        collider->worldAABB.overlapsY(otherCollider->worldAABB))
+                    if (collider.worldAABB.overlapsX(otherCollider.worldAABB) &&
+                        collider.worldAABB.overlapsY(otherCollider.worldAABB))
                     {
-                        candidates->addCandidate(type, {entity, other});
+                        candidates.addCandidate(type, {entity, other});
                     }
                     break;
                 }

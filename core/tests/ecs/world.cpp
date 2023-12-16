@@ -20,17 +20,10 @@ TEST_CASE("ecs::World")
         // Null identifiers should never be alive.
         CHECK_FALSE(world.isAlive({}));
 
-        // The world should be empty.
-        CHECK(world.begin() == world.end());
-
         // Create an entity.
         auto foo = world.create();
         CHECK_FALSE(foo.isNull());
         CHECK(world.isAlive(foo));
-
-        // It should be the first entity in the world (and last).
-        CHECK(*world.begin() == foo);
-        CHECK(++world.begin() == world.end());
 
         // It shouldn't have any components.
         auto components = world.components(foo);
@@ -41,9 +34,6 @@ TEST_CASE("ecs::World")
         // Remove the entity.
         world.destroy(foo);
         CHECK_FALSE(world.isAlive(foo));
-
-        // The world should be empty again.
-        CHECK(world.begin() == world.end());
     }
 
     SUBCASE("add and remove components")

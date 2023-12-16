@@ -94,7 +94,7 @@ static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, BaseR
 }
 
 static std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>> getWorldInfo(
-    Query<Read<LocalToWorld>, Read<Camera>>& query, const ActiveCameras& activeCameras, const glm::ivec2& screenSize)
+    Query<const LocalToWorld&, const Camera&>& query, const ActiveCameras& activeCameras, const glm::ivec2& screenSize)
 {
     int cameraCount = 0;
 
@@ -120,13 +120,13 @@ static std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>> getWorldInfo(
             continue;
         }
 
-        if (auto components = query[activeCameras.entities[i]])
+        if (auto components = query.at(activeCameras.entities[i]))
         {
-            auto [localToWorld, camera] = *components;
-            auto v = glm::inverse(localToWorld->mat);
-            auto p = glm::perspective(glm::radians(camera->fovY),
+            auto& [localToWorld, camera] = *components;
+            auto v = glm::inverse(localToWorld.mat);
+            auto p = glm::perspective(glm::radians(camera.fovY),
                                       float(viewports[usedCount].size.x) / float(viewports[usedCount].size.y),
-                                      camera->zNear, camera->zFar);
+                                      camera.zNear, camera.zFar);
 
             output.emplace_back(p * v, viewports[usedCount]);
             usedCount += 1;
@@ -185,50 +185,49 @@ static std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>> getScreenInfo(c
     return {pair};
 }
 
-static void drawGizmosSystem(Write<Gizmos> gizmos, Write<GizmosRenderer> gizmosRenderer,
-                             Read<ActiveCameras> activeCameras, Read<Window> window, Read<DeltaTime> deltaTime,
-                             Query<Read<LocalToWorld>, Read<Camera>> query)
+static void drawGizmosSystem(Gizmos& gizmos, GizmosRenderer& gizmosRenderer, const ActiveCameras& activeCameras,
+                             const Window& window, const DeltaTime& deltaTime,
+                             Query<const LocalToWorld&, const Camera&> query)
 {
-    auto screenSize = (*window)->framebufferSize();
+    auto screenSize = window->framebufferSize();
 
-    gizmosRenderer->renderDevice->setShaderPipeline(gizmosRenderer->drawPipeline);
-    gizmosRenderer->renderDevice->clearColor(0, 0, 0, 0);
-    gizmosRenderer->renderDevice->setDepthStencilState(gizmosRenderer->doDepthCheckStencilState);
-    gizmosRenderer->renderDevice->clearDepth(1.0F);
+    gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.drawPipeline);
+    gizmosRenderer.renderDevice->clearColor(0, 0, 0, 0);
+    gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);
+    gizmosRenderer.renderDevice->clearDepth(1.0F);
 
-    gizmosRenderer->renderDevice->setFramebuffer(gizmosRenderer->idFramebuffer);
-    gizmosRenderer->renderDevice->clearColor(0, 0, 0, 0);
-    gizmosRenderer->renderDevice->clearDepth(1.0F);
+    gizmosRenderer.renderDevice->setFramebuffer(gizmosRenderer.idFramebuffer);
+    gizmosRenderer.renderDevice->clearColor(0, 0, 0, 0);
+    gizmosRenderer.renderDevice->clearDepth(1.0F);
 
-    auto worldInfo = getWorldInfo(query, *activeCameras, screenSize);
-    iterateGizmos(gizmos->worldGizmos, worldInfo, *gizmosRenderer, *deltaTime);
+    auto worldInfo = getWorldInfo(query, activeCameras, screenSize);
+    iterateGizmos(gizmos.worldGizmos, worldInfo, gizmosRenderer, deltaTime);
 
-    gizmosRenderer->renderDevice->setDepthStencilState(gizmosRenderer->noDepthCheckStencilState);
-    auto viewInfo = getViewInfo(*activeCameras, screenSize);
-    iterateGizmos(gizmos->viewGizmos, viewInfo, *gizmosRenderer, *deltaTime);
+    gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.noDepthCheckStencilState);
+    auto viewInfo = getViewInfo(activeCameras, screenSize);
+    iterateGizmos(gizmos.viewGizmos, viewInfo, gizmosRenderer, deltaTime);
 
     auto screenInfo = getScreenInfo(screenSize);
-    iterateGizmos(gizmos->screenGizmos, screenInfo, *gizmosRenderer, *deltaTime);
+    iterateGizmos(gizmos.screenGizmos, screenInfo, gizmosRenderer, deltaTime);
 }
 
-static void processInput(Write<GizmosRenderer> gizmosRenderer, Write<Gizmos> gizmos,
-                         EventReader<WindowEvent> windowEvent)
+static void processInput(GizmosRenderer& gizmosRenderer, Gizmos& gizmos, EventReader<WindowEvent> windowEvent)
 {
     bool locking = false;
     for (const auto& event : windowEvent)
     {
         if (std::holds_alternative<MouseMoveEvent>(event))
         {
-            gizmosRenderer->lastMousePosition = std::get<MouseMoveEvent>(event).position;
+            gizmosRenderer.lastMousePosition = std::get<MouseMoveEvent>(event).position;
         }
         else if (std::holds_alternative<MouseButtonEvent>(event))
         {
             if (std::get<MouseButtonEvent>(event).button == cubos::core::io::MouseButton::Left)
             {
-                gizmosRenderer->mousePressed = std::get<MouseButtonEvent>(event).pressed;
+                gizmosRenderer.mousePressed = std::get<MouseButtonEvent>(event).pressed;
                 if (!std::get<MouseButtonEvent>(event).pressed)
                 {
-                    gizmos->releaseLocked();
+                    gizmos.releaseLocked();
                 }
                 else
                 {
@@ -238,47 +237,47 @@ static void processInput(Write<GizmosRenderer> gizmosRenderer, Write<Gizmos> giz
         }
         else if (std::holds_alternative<ResizeEvent>(event))
         {
-            gizmosRenderer->resizeTexture(std::get<ResizeEvent>(event).size);
+            gizmosRenderer.resizeTexture(std::get<ResizeEvent>(event).size);
         }
     }
 
     auto* texBuffer =
-        new uint16_t[(std::size_t)gizmosRenderer->textureSize.x * (std::size_t)gizmosRenderer->textureSize.y * 2U];
+        new uint16_t[(std::size_t)gizmosRenderer.textureSize.x * (std::size_t)gizmosRenderer.textureSize.y * 2U];
 
-    gizmosRenderer->idTexture->read(texBuffer);
+    gizmosRenderer.idTexture->read(texBuffer);
 
-    int mouseX = gizmosRenderer->lastMousePosition.x;
-    int mouseY = gizmosRenderer->textureSize.y - gizmosRenderer->lastMousePosition.y - 1;
+    int mouseX = gizmosRenderer.lastMousePosition.x;
+    int mouseY = gizmosRenderer.textureSize.y - gizmosRenderer.lastMousePosition.y - 1;
 
-    if (mouseX >= gizmosRenderer->textureSize.x || mouseX < 0)
+    if (mouseX >= gizmosRenderer.textureSize.x || mouseX < 0)
     {
         delete[] texBuffer;
         return;
     }
-    if (mouseY >= gizmosRenderer->textureSize.y || mouseY < 0)
+    if (mouseY >= gizmosRenderer.textureSize.y || mouseY < 0)
     {
         delete[] texBuffer;
         return;
     }
 
-    uint16_t r = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2U];
-    uint16_t g = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2U + 1U];
+    uint16_t r = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer.textureSize.x + mouseX) * 2U];
+    uint16_t g = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer.textureSize.x + mouseX) * 2U + 1U];
 
     uint32_t id = (static_cast<uint32_t>(r) << 16U) | g;
 
-    gizmos->handleInput(id, gizmosRenderer->mousePressed);
+    gizmos.handleInput(id, gizmosRenderer.mousePressed);
 
     if (locking)
     {
-        gizmos->setLocked(id);
+        gizmos.setLocked(id);
     }
 
     delete[] texBuffer;
 }
 
-static void initGizmosSystem(Write<GizmosRenderer> gizmosRenderer, Read<Window> window)
+static void initGizmosSystem(GizmosRenderer& gizmosRenderer, const Window& window)
 {
-    gizmosRenderer->init(&(*window)->renderDevice(), (*window)->framebufferSize());
+    gizmosRenderer.init(&window->renderDevice(), window->framebufferSize());
 }
 
 void cubos::engine::gizmosPlugin(Cubos& cubos)

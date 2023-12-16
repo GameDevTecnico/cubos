@@ -9,5 +9,5 @@ using cubos::core::reflection::Type;
 CUBOS_REFLECT_IMPL(DetectDestructor)
 {
     return Type::create("DetectDestructor")
-        .with(ConstructibleTrait::typed<DetectDestructor>().withDefaultConstructor().withMoveConstructor().build());
+        .with(ConstructibleTrait::typed<DetectDestructor>().withBasicConstructors().build());
 }

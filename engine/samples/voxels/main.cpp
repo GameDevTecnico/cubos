@@ -12,24 +12,24 @@ static const Asset<VoxelGrid> CarAsset = AnyAsset("059c16e7-a439-44c7-9bdc-6e069
 static const Asset<VoxelPalette> PaletteAsset = AnyAsset("1aa5e234-28cb-4386-99b4-39386b0fc215");
 /// [Get handles to assets]
 
-static void settingsSystem(Write<Settings> settings)
+static void settingsSystem(Settings& settings)
 {
-    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
 /// [Load and set palette]
-static void setPaletteSystem(Read<Assets> assets, Write<Renderer> renderer)
+static void setPaletteSystem(const Assets& assets, Renderer& renderer)
 {
     // Read the palette's data and pass it to the renderer.
-    auto palette = assets->read(PaletteAsset);
-    (*renderer)->setPalette(*palette);
+    auto palette = assets.read(PaletteAsset);
+    renderer->setPalette(*palette);
 }
 /// [Load and set palette]
 
-static void spawnCameraSystem(Commands cmds, Write<ActiveCameras> activeCameras)
+static void spawnCameraSystem(Commands cmds, ActiveCameras& activeCameras)
 {
     // Spawn the camera entity.
-    activeCameras->entities[0] =
+    activeCameras.entities[0] =
         cmds.create()
             .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
             .add(Position{{50.0F, 50.0F, 50.0F}})
@@ -47,10 +47,10 @@ static void spawnLightSystem(Commands cmds)
 }
 
 /// [Spawn car system]
-static void spawnCarSystem(Commands cmds, Read<Assets> assets)
+static void spawnCarSystem(Commands cmds, const Assets& assets)
 {
     // Calculate the necessary offset to center the model on (0, 0, 0).
-    auto car = assets->read(CarAsset);
+    auto car = assets.read(CarAsset);
     glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
 
     // Create the car entity

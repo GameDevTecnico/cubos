@@ -69,16 +69,16 @@ struct DummyResource
 /// [Creating a dummy resource]
 
 /// [DataInspector window example]
-static void exampleDataInspectorSystem(Write<DataInspector> inspector, Write<DummyResource> data)
+static void exampleDataInspectorSystem(DataInspector& inspector, DummyResource& data)
 {
     ImGui::Begin("Data Inspector");
     ImGui::BeginTable("id1", 2);
 
-    inspector->show("data->integer", data->integer);
-    inspector->edit("data->person", data->person);
-    inspector->edit("data->persons", data->persons);
-    inspector->edit("data->vec", data->vec);
-    inspector->edit("data->map", data->map);
+    inspector.show("data.integer", data.integer);
+    inspector.edit("data.person", data.person);
+    inspector.edit("data.persons", data.persons);
+    inspector.edit("data.vec", data.vec);
+    inspector.edit("data.map", data.map);
 
     ImGui::EndTable();
     ImGui::End();

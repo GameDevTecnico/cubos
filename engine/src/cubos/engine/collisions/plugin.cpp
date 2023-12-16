@@ -14,57 +14,57 @@
 using namespace cubos::engine;
 
 /// @brief Setups new box colliders.
-static void setupNewBoxesSystem(Query<Read<BoxCollisionShape>, Write<Collider>> query)
+static void setupNewBoxesSystem(Query<const BoxCollisionShape&, Collider&> query)
 {
-    for (auto [entity, shape, collider] : query)
+    for (auto [shape, collider] : query)
     {
-        if (collider->fresh < 1)
+        if (collider.fresh < 1)
         {
-            collider->fresh++;
+            collider.fresh++;
         }
 
-        if (collider->fresh == 0)
+        if (collider.fresh == 0)
         {
-            shape->box.diag(collider->localAABB.diag);
+            shape.box.diag(collider.localAABB.diag);
 
-            collider->margin = 0.04F;
+            collider.margin = 0.04F;
         }
     }
 }
 
 /// @brief Setups new capsule colliders.
-static void setupNewCapsulesSystem(Query<Read<CapsuleCollisionShape>, Write<Collider>> query)
+static void setupNewCapsulesSystem(Query<const CapsuleCollisionShape&, Collider&> query)
 {
-    for (auto [entity, shape, collider] : query)
+    for (auto [shape, collider] : query)
     {
-        if (collider->fresh < 1)
+        if (collider.fresh < 1)
         {
-            collider->fresh++;
+            collider.fresh++;
         }
 
-        if (collider->fresh == 0)
+        if (collider.fresh == 0)
         {
-            collider->localAABB = shape->capsule.aabb();
+            collider.localAABB = shape.capsule.aabb();
 
-            collider->margin = 0.0F;
+            collider.margin = 0.0F;
         }
     }
 }
 
 /// TODO: This is a temporary system should be removed once narrow phase is implemented.
-static void emitCollisionEventSystem(Query<Read<Collider>> query, Read<BroadPhaseCandidates> candidates,
+static void emitCollisionEventSystem(Query<const Collider&> query, const BroadPhaseCandidates& candidates,
                                      EventWriter<CollisionEvent> events)
 {
-    for (const auto& [ent1, ent2] : candidates->candidates(BroadPhaseCandidates::CollisionType::BoxBox))
+    for (const auto& [ent1, ent2] : candidates.candidates(BroadPhaseCandidates::CollisionType::BoxBox))
     {
-        auto [collider1] = query[ent1].value();
-        auto [collider2] = query[ent2].value();
+        auto [collider1] = *query.at(ent1);
+        auto [collider2] = *query.at(ent2);
 
-        auto c1 = collider1->worldAABB.center();
-        auto b1 = collider1->worldAABB.box();
+        auto c1 = collider1.worldAABB.center();
+        auto b1 = collider1.worldAABB.box();
 
-        auto c2 = collider2->worldAABB.center();
-        auto b2 = collider2->worldAABB.box();
+        auto c2 = collider2.worldAABB.center();
+        auto b2 = collider2.worldAABB.box();
 
         auto d = c2 - c1;
         auto p = (b2.halfSize + b1.halfSize) - glm::abs(d);

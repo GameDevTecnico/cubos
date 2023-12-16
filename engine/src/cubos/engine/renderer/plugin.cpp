@@ -29,93 +29,92 @@ CUBOS_REFLECT_IMPL(RenderableGrid)
         .build();
 }
 
-static void init(Write<Renderer> renderer, Read<Window> window, Write<Settings> settings)
+static void init(Renderer& renderer, const Window& window, Settings& settings)
 {
-    auto& renderDevice = (*window)->renderDevice();
-    *renderer = std::make_shared<DeferredRenderer>(renderDevice, (*window)->framebufferSize(), *settings);
+    auto& renderDevice = window->renderDevice();
+    renderer = std::make_shared<DeferredRenderer>(renderDevice, window->framebufferSize(), settings);
 
-    if (settings->getBool("cubos.renderer.bloom.enabled", false))
+    if (settings.getBool("cubos.renderer.bloom.enabled", false))
     {
-        (*renderer)->pps().addPass<PostProcessingBloom>();
+        renderer->pps().addPass<PostProcessingBloom>();
     }
 }
 
-static void resize(Write<Renderer> renderer, EventReader<WindowEvent> evs)
+static void resize(Renderer& renderer, EventReader<WindowEvent> evs)
 {
     for (const auto& ev : evs)
     {
         if (const auto* resizeEv = std::get_if<ResizeEvent>(&ev))
         {
-            (*renderer)->resize(resizeEv->size);
+            renderer->resize(resizeEv->size);
         }
     }
 }
 
-static void frameGrids(Read<Assets> assets, Write<Renderer> renderer, Write<RendererFrame> frame,
-                       Query<Write<RenderableGrid>, Read<LocalToWorld>> query)
+static void frameGrids(const Assets& assets, Renderer& renderer, RendererFrame& frame,
+                       Query<RenderableGrid&, const LocalToWorld&> query)
 {
-    for (auto [entity, grid, localToWorld] : query)
+    for (auto [grid, localToWorld] : query)
     {
-        if (grid->handle == nullptr || assets->update(grid->asset))
+        if (grid.handle == nullptr || assets.update(grid.asset))
         {
             // If the grid wasn't already uploaded, we need to upload it now.
-            grid->asset = assets->load(grid->asset);
-            auto gridRead = assets->read(grid->asset);
-            grid->handle = (*renderer)->upload(gridRead.get());
+            grid.asset = assets.load(grid.asset);
+            auto gridRead = assets.read(grid.asset);
+            grid.handle = renderer->upload(gridRead.get());
         }
 
-        frame->draw(grid->handle, localToWorld->mat * glm::translate(glm::mat4(1.0F), grid->offset));
+        frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset));
     }
 }
 
-static void frameSpotLights(Write<RendererFrame> frame, Query<Read<SpotLight>, Read<LocalToWorld>> query)
+static void frameSpotLights(RendererFrame& frame, Query<const SpotLight&, const LocalToWorld&> query)
 {
-    for (auto [entity, light, localToWorld] : query)
+    for (auto [light, localToWorld] : query)
     {
-        frame->light(localToWorld->mat, *light);
+        frame.light(localToWorld.mat, light);
     }
 }
 
-static void frameDirectionalLights(Write<RendererFrame> frame, Query<Read<DirectionalLight>, Read<LocalToWorld>> query)
+static void frameDirectionalLights(RendererFrame& frame, Query<const DirectionalLight&, const LocalToWorld&> query)
 {
-    for (auto [entity, light, localToWorld] : query)
+    for (auto [light, localToWorld] : query)
     {
-        frame->light(localToWorld->mat, *light);
+        frame.light(localToWorld.mat, light);
     }
 }
 
-static void framePointLights(Write<RendererFrame> frame, Query<Read<PointLight>, Read<LocalToWorld>> query)
+static void framePointLights(RendererFrame& frame, Query<const PointLight&, const LocalToWorld&> query)
 {
-    for (auto [entity, light, localToWorld] : query)
+    for (auto [light, localToWorld] : query)
     {
-        frame->light(localToWorld->mat, *light);
+        frame.light(localToWorld.mat, light);
     }
 }
 
-static void frameEnvironment(Write<RendererFrame> frame, Read<RendererEnvironment> env)
+static void frameEnvironment(RendererFrame& frame, const RendererEnvironment& env)
 {
-    frame->ambient(env->ambient);
-    frame->skyGradient(env->skyGradient[0], env->skyGradient[1]);
+    frame.ambient(env.ambient);
+    frame.skyGradient(env.skyGradient[0], env.skyGradient[1]);
 }
 
-static void checkPaletteUpdateSystem(Write<Assets> assets, Write<Renderer> renderer,
-                                     Write<ActiveVoxelPalette> activePalette)
+static void checkPaletteUpdateSystem(Assets& assets, Renderer& renderer, ActiveVoxelPalette& activePalette)
 {
-    if (activePalette->asset.isNull())
+    if (activePalette.asset.isNull())
     {
         return;
     }
 
-    if (assets->update(activePalette->asset) || activePalette->prev != activePalette->asset)
+    if (assets.update(activePalette.asset) || activePalette.prev != activePalette.asset)
     {
-        auto paletteRead = assets->read(activePalette->asset);
-        (*renderer)->setPalette(*paletteRead);
-        activePalette->prev = activePalette->asset;
+        auto paletteRead = assets.read(activePalette.asset);
+        renderer->setPalette(*paletteRead);
+        activePalette.prev = activePalette.asset;
     }
 }
 
-static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
-                 Query<Read<LocalToWorld>, Read<Camera>, OptRead<Viewport>> query)
+static void draw(Renderer& renderer, const ActiveCameras& activeCameras, RendererFrame& frame,
+                 Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query)
 {
     Camera cameras[4]{};
     glm::mat4 views[4]{};
@@ -125,17 +124,17 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
 
     for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
     {
-        if (activeCameras->entities[i].isNull())
+        if (activeCameras.entities[i].isNull())
         {
             continue;
         }
 
-        if (auto components = query[activeCameras->entities[i]])
+        if (auto components = query.at(activeCameras.entities[i]))
         {
             auto [localToWorld, camera, viewport] = *components;
-            cameras[cameraCount].fovY = camera->fovY;
-            cameras[cameraCount].zNear = camera->zNear;
-            cameras[cameraCount].zFar = camera->zFar;
+            cameras[cameraCount].fovY = camera.fovY;
+            cameras[cameraCount].zNear = camera.zNear;
+            cameras[cameraCount].zFar = camera.zFar;
             if (viewport)
             {
                 viewports[i].position = viewport->position;
@@ -144,9 +143,9 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
             else
             {
                 viewports[i].position = {0, 0};
-                viewports[i].size = (*renderer)->size();
+                viewports[i].size = renderer->size();
             }
-            views[cameraCount] = glm::inverse(localToWorld->mat);
+            views[cameraCount] = glm::inverse(localToWorld.mat);
             cameraCount += 1;
         }
     }
@@ -158,10 +157,10 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
 
     for (int i = 0; i < cameraCount; ++i)
     {
-        (*renderer)->render(views[i], viewports[i], cameras[i], *frame);
+        renderer->render(views[i], viewports[i], cameras[i], frame);
     }
 
-    frame->clear();
+    frame.clear();
 }
 
 void cubos::engine::rendererPlugin(Cubos& cubos)

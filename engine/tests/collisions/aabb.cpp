@@ -22,7 +22,7 @@ static void setup(Commands commands)
 }
 
 template <typename C>
-void testAddMissingAABBs(Query<Read<C>, OptRead<ColliderAABB>> query)
+void testAddMissingAABBs(Query<const C&, const ColliderAABB&> query)
 {
     for (auto [entity, collider, aabb] : query)
     {

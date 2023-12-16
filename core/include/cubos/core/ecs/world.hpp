@@ -6,11 +6,14 @@
 
 #include <cassert>
 #include <cstddef>
-#include <unordered_map>
 
 #include <cubos/core/ecs/component/manager.hpp>
+#include <cubos/core/ecs/entity/archetype_graph.hpp>
 #include <cubos/core/ecs/entity/manager.hpp>
+#include <cubos/core/ecs/entity/pool.hpp>
 #include <cubos/core/ecs/resource/manager.hpp>
+#include <cubos/core/ecs/table/tables.hpp>
+#include <cubos/core/ecs/types.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
@@ -20,30 +23,17 @@
 
 namespace cubos::core::ecs
 {
-    namespace impl
-    {
-        template <typename T>
-        struct QueryFetcher;
-    }
-
     /// @brief Holds entities, their components and resources.
     /// @see Internally, components are stored in abstract containers called @ref Storage's.
     /// @ingroup core-ecs
     class World
     {
     public:
-        /// @brief Used to iterate over all entities in a world.
-        using Iterator = EntityManager::Iterator;
-
         /// @brief Used to access the components in an entity.
         class Components;
 
         /// @brief Used to immutably access the components in an entity.
         class ConstComponents;
-
-        /// @brief Constructs with the given @p initialCapacity.
-        /// @param initialCapacity How many entities to reserve space for.
-        World(std::size_t initialCapacity = 1024);
 
         /// @brief Registers and inserts a new resource type.
         /// @note Should be called before other operations, aside from @ref registerComponent().
@@ -65,6 +55,27 @@ namespace cubos::core::ecs
             this->registerComponent(reflection::reflect<T>());
         }
 
+        /// @brief Returns the types registry of the world.
+        /// @return Types registry.
+        Types& types();
+
+        /// @copydoc types()
+        const Types& types() const;
+
+        /// @brief Returns the tables of the world.
+        /// @return Tables.
+        Tables& tables();
+
+        /// @copydoc tables()
+        const Tables& tables() const;
+
+        /// @brief Returns the archetype graph of the world.
+        /// @return Archetype graph.
+        ArchetypeGraph& archetypeGraph();
+
+        /// @copydoc archetypeGraph()
+        const ArchetypeGraph& archetypeGraph() const;
+
         /// @brief Locks a resource for reading and returns it.
         /// @tparam T Resource type.
         /// @return Resource lock.
@@ -78,8 +89,23 @@ namespace cubos::core::ecs
         WriteResource<T> write() const;
 
         /// @brief Creates a new entity.
-        /// @return Entity.
+        /// @return Entity identifier.
         Entity create();
+
+        /// @brief Creates a new entity with the given identifier.
+        ///
+        /// Aborts if the entity already exists.
+        ///
+        /// @param entity Entity identifier.
+        /// @return Entity.
+        void createAt(Entity entity);
+
+        /// @brief Reserves an entity identifier, without actually creating an entity.
+        ///
+        /// The entity can be later created with a call to @ref createAt().
+        ///
+        /// @return Entity identifier.
+        Entity reserve();
 
         /// @brief Destroys an entity.
         ///
@@ -88,14 +114,20 @@ namespace cubos::core::ecs
         /// @param entity Entity identifier.
         void destroy(Entity entity);
 
+        /// @brief Gets the generation of the entity with the given index.
+        /// @param index Entity index.
+        /// @return Entity generation.
+        uint32_t generation(uint32_t index) const;
+
+        /// @brief Gets the archetype of the given entity.
+        /// @param entity Entity.
+        /// @return Archetype identifier.
+        ArchetypeId archetype(Entity entity) const;
+
         /// @brief Checks if an entity is still alive.
         /// @param entity Entity.
         /// @return Whether the entity is alive.
         bool isAlive(Entity entity) const;
-
-        /// @brief Returns a type registry which contains all registered component types.
-        /// @return Component type registry.
-        reflection::TypeRegistry components() const;
 
         /// @brief Creates a components view for the given entity.
         ///
@@ -108,24 +140,17 @@ namespace cubos::core::ecs
         /// @copydoc components(Entity)
         ConstComponents components(Entity entity) const;
 
-        /// @brief Returns an iterator which points to the first entity of the world.
-        /// @return Iterator.
-        Iterator begin() const;
-
-        /// @brief Returns an iterator which points to the end of the world.
-        /// @return Iterator.
-        Iterator end() const;
-
     private:
         template <typename... ComponentTypes>
         friend class Query;
-        template <typename T>
-        friend struct impl::QueryFetcher;
         friend class CommandBuffer;
 
+        Types mTypes;
+        EntityPool mEntityPool;
+        ArchetypeGraph mArchetypeGraph;
+        Tables mTables;
+
         ResourceManager mResourceManager;
-        EntityManager mEntityManager;
-        ComponentManager mComponentManager;
     };
 
     class World::Components final
@@ -329,7 +354,7 @@ namespace cubos::core::ecs
 
     private:
         World::Components& mComponents;
-        uint32_t mId{1};
+        DataTypeId mId;
         mutable Component mComponent;
     };
 
@@ -374,7 +399,7 @@ namespace cubos::core::ecs
 
     private:
         const World::ConstComponents& mComponents;
-        uint32_t mId{1};
+        DataTypeId mId;
         mutable Component mComponent;
     };
 

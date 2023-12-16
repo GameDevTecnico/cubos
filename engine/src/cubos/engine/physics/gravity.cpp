@@ -6,19 +6,19 @@
 
 using namespace cubos::engine;
 
-static void applyGravitySystem(Query<Write<PhysicsVelocity>, Read<PhysicsMass>> query, Read<Gravity> gravity)
+static void applyGravitySystem(Query<PhysicsVelocity&, const PhysicsMass&> query, const Gravity& gravity)
 {
-    for (auto [entity, velocity, mass] : query)
+    for (auto [velocity, mass] : query)
     {
-        if (mass->inverseMass <= 0.0F)
+        if (mass.inverseMass <= 0.0F)
         {
             return;
         }
 
         // Apply gravity force
-        glm::vec3 gravitationForce = mass->mass * gravity->value;
+        glm::vec3 gravitationForce = mass.mass * gravity.value;
 
-        velocity->force += gravitationForce;
+        velocity.force += gravitationForce;
     }
 }
 

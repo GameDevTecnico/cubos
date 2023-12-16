@@ -33,11 +33,11 @@ namespace cubos::core::ecs
     ///   Commands.
     ///
     /// ## System argument types
-    /// - @ref Read "Read<R>" - used to read resource data of type @p R.
-    /// - @ref Write "Write<R>" - used to write resource data of type @p R.
-    /// - @ref Read "Read<World>" - used to read the world directly (not recommended, ruins
+    /// - `const R&` - used to read resource data of type @p R.
+    /// - `R&` - used to write resource data of type @p R.
+    /// - `const World&` - used to read the world directly (not recommended, ruins
     ///   parallelism, prefer @ref Commands).
-    /// - @ref Write "Write<World>" - used to write the world directly (not recommended, ruins
+    /// - @ref Write "World&" - used to write the world directly (not recommended, ruins
     ///   parallelism, prefer @ref Commands).
     /// - @ref Commands - used to queue entities to be created, destroyed and other operations.
     /// - @ref EventReader "EventReader<E>" - reads events of type @p E sent from other systems.
@@ -45,10 +45,8 @@ namespace cubos::core::ecs
     /// - @ref Query "Query<Args...>" - queries the world for entities which match its arguments.
     ///
     /// ## Query argument types
-    /// - @ref Read "Read<C>" - matches entities with the component @p C, read-only access.
-    /// - @ref Write "Write<C>" - matches entities with the component @p C, write access.
-    /// - @ref OptRead "OptRead<C>" - matches all entities, read-only access when the component
-    ///   @p C is present.
-    /// - @ref OptWrite "OptWrite<C>" - matches all entities, write access when the component
-    ///   @p C is present.
+    /// - `const C&` - matches entities with the component @p C, read-only access.
+    /// - `C&` - matches entities with the component @p C, write access.
+    /// - `Opt<const C&>" - matches all entities, read-only access when the component @p C is present.
+    /// - `Opt<C&>` - matches all entities, write access when the component @p C is present.
 }

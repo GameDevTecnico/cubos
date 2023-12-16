@@ -69,43 +69,65 @@ void AnyVector::reserve(std::size_t capacity)
     mCapacity = capacity;
 }
 
-void AnyVector::pushDefault()
+void AnyVector::pushUninit()
 {
-    CUBOS_ASSERT(mConstructibleTrait->hasDefaultConstruct(), "Type must be default-constructible");
-
     if (mSize == mCapacity)
     {
         this->reserve(mCapacity == 0 ? 1 : mCapacity * 2);
     }
 
-    mConstructibleTrait->defaultConstruct(static_cast<char*>(mData) + mStride * mSize);
     ++mSize;
+}
+
+void AnyVector::pushDefault()
+{
+    CUBOS_ASSERT(mConstructibleTrait->hasDefaultConstruct(), "Type must be default-constructible");
+
+    this->pushUninit();
+    mConstructibleTrait->defaultConstruct(static_cast<char*>(mData) + mStride * (mSize - 1));
 }
 
 void AnyVector::pushCopy(const void* value)
 {
     CUBOS_ASSERT(mConstructibleTrait->hasCopyConstruct(), "Type must be copy-constructible");
 
-    if (mSize == mCapacity)
-    {
-        this->reserve(mCapacity == 0 ? 1 : mCapacity * 2);
-    }
-
-    mConstructibleTrait->copyConstruct(static_cast<char*>(mData) + mStride * mSize, value);
-    ++mSize;
+    this->pushUninit();
+    mConstructibleTrait->copyConstruct(static_cast<char*>(mData) + mStride * (mSize - 1), value);
 }
 
 void AnyVector::pushMove(void* value)
 {
     CUBOS_ASSERT(mConstructibleTrait->hasMoveConstruct(), "Type must be move-constructible");
 
-    if (mSize == mCapacity)
-    {
-        this->reserve(mCapacity == 0 ? 1 : mCapacity * 2);
-    }
+    this->pushUninit();
+    mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + mStride * (mSize - 1), value);
+}
 
-    mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + mStride * mSize, value);
-    ++mSize;
+void AnyVector::setDefault(std::size_t index)
+{
+    CUBOS_ASSERT(mConstructibleTrait->hasDefaultConstruct(), "Type must be default-constructible");
+    CUBOS_ASSERT(index < mSize, "Index must be less than size");
+
+    mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * index);
+    mConstructibleTrait->defaultConstruct(static_cast<char*>(mData) + mStride * index);
+}
+
+void AnyVector::setCopy(std::size_t index, const void* value)
+{
+    CUBOS_ASSERT(mConstructibleTrait->hasCopyConstruct(), "Type must be copy-constructible");
+    CUBOS_ASSERT(index < mSize, "Index must be less than size");
+
+    mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * index);
+    mConstructibleTrait->copyConstruct(static_cast<char*>(mData) + mStride * index, value);
+}
+
+void AnyVector::setMove(std::size_t index, void* value)
+{
+    CUBOS_ASSERT(mConstructibleTrait->hasMoveConstruct(), "Type must be move-constructible");
+    CUBOS_ASSERT(index < mSize, "Index must be less than size");
+
+    mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * index);
+    mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + mStride * index, value);
 }
 
 void AnyVector::pop()
@@ -114,6 +136,39 @@ void AnyVector::pop()
 
     --mSize;
     mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * mSize);
+}
+
+void AnyVector::swapErase(std::size_t index)
+{
+    CUBOS_ASSERT(index < mSize, "Index must be less than size");
+
+    mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * index);
+
+    if (index + 1 != mSize)
+    {
+        // If the element isn't the last one, we move the last element to its place.
+        mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + mStride * index,
+                                           static_cast<char*>(mData) + mStride * (mSize - 1));
+    }
+
+    this->pop();
+}
+
+void AnyVector::swapMove(std::size_t index, void* destination)
+{
+    CUBOS_ASSERT(index < mSize, "Index must be less than size");
+
+    mConstructibleTrait->moveConstruct(destination, static_cast<char*>(mData) + mStride * index);
+    mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * index);
+
+    if (index + 1 != mSize)
+    {
+        // If the element isn't the last one, we move the last element to its place.
+        mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + mStride * index,
+                                           static_cast<char*>(mData) + mStride * (mSize - 1));
+    }
+
+    this->pop();
 }
 
 void AnyVector::clear()

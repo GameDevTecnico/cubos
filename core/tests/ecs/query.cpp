@@ -4,39 +4,27 @@
 
 #include "utils.hpp"
 
-using cubos::core::ecs::Entity;
-using cubos::core::ecs::OptRead;
-using cubos::core::ecs::OptWrite;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::World;
-using cubos::core::ecs::Write;
+using namespace cubos::core::ecs;
 
-/// Counts the number of entities which match the given query.
-/// @tparam Args The component types to query for.
-/// @param query The query to use.
-template <typename... Args>
+template <typename... Ts>
 static std::size_t queryCount(World& world)
 {
-    auto query = Query<Args...>(world);
+    QueryData<Ts...> query{world, {}};
+
     std::size_t counter = 0;
-    for (auto entity : query)
+    for (const auto match : query)
     {
-        (void)entity;
+        (void)match;
         counter += 1;
     }
     return counter;
 }
 
-/// Returns the result of the given query for a single entity, assuming that the query matches the
-/// given entity.
-/// @tparam Args The component types to query for.
-/// @param world The world to query in.
-/// @param entity The entity to query for.
-template <typename Access, typename... Args>
-static Access queryOne(World& world, Entity entity)
+template <typename... Ts>
+static Opt<std::tuple<Ts...>> queryOne(World& world, Entity entity)
 {
-    return std::get<Access>(*Query<Access, Args...>(world)[entity]);
+    QueryData<Ts...> query{world, {}};
+    return query.at(entity);
 }
 
 TEST_CASE("ecs::Query")
@@ -59,37 +47,26 @@ TEST_CASE("ecs::Query")
     world.components(foo).add(ParentComponent{});
 
     // Check if direct access to entities works.
-    CHECK(Query<>(world)[empty].has_value());
-    CHECK_FALSE(Query<Read<IntegerComponent>>(world)[empty].has_value());
-    CHECK_FALSE(Query<Read<IntegerComponent>, Write<ParentComponent>>(world)[int0].has_value());
-    CHECK(queryOne<Read<IntegerComponent>>(world, int0)->value == 0);
-    CHECK(queryOne<Read<IntegerComponent>>(world, int1)->value == 1);
+    CHECK(queryOne<>(world, empty).contains());
+    CHECK_FALSE(queryOne<const IntegerComponent&>(world, empty).contains());
+    CHECK_FALSE(queryOne<const IntegerComponent&, ParentComponent&>(world, empty).contains());
+    CHECK_FALSE(queryOne<const IntegerComponent&, ParentComponent&>(world, int0).contains());
+    CHECK(std::get<0>(*queryOne<const IntegerComponent&>(world, int0)).value == 0);
+    CHECK(std::get<0>(*queryOne<const IntegerComponent&>(world, int1)).value == 1);
 
     // Check if direct access with optional components works.
-    CHECK(queryOne<Read<IntegerComponent>, OptRead<ParentComponent>>(world, int0)->value == 0);
-    CHECK_FALSE(queryOne<OptRead<ParentComponent>>(world, int0));
+    CHECK(std::get<0>(*queryOne<IntegerComponent&, Opt<ParentComponent&>>(world, int0)).value == 0);
+    CHECK_FALSE(std::get<1>(*queryOne<IntegerComponent&, Opt<ParentComponent&>>(world, int0)).contains());
+    CHECK(std::get<1>(*queryOne<IntegerComponent&, Opt<ParentComponent&>>(world, int1)).contains());
 
     // Check if the queries count the correct number of entities.
     CHECK(queryCount<>(world) == 6);
-    CHECK(queryCount<Read<IntegerComponent>>(world) == 4);
-    CHECK(queryCount<Write<ParentComponent>>(world) == 3);
-    CHECK(queryCount<Write<IntegerComponent>, Read<ParentComponent>>(world) == 2);
+    CHECK(queryCount<const IntegerComponent&>(world) == 4);
+    CHECK(queryCount<ParentComponent&>(world) == 3);
+    CHECK(queryCount<IntegerComponent&, const ParentComponent&>(world) == 2);
 
     // Check if optional components are handled correctly.
-    CHECK(queryCount<OptRead<IntegerComponent>, OptWrite<ParentComponent>>(world) == 6);
-    CHECK(queryCount<OptWrite<IntegerComponent>, Read<ParentComponent>>(world) == 3);
-    CHECK(queryCount<Write<IntegerComponent>, OptRead<ParentComponent>>(world) == 4);
-
-    // Check if QueryInfo objects correctly report the components being queried.
-    auto info = Query<Write<IntegerComponent>, Read<ParentComponent>, OptWrite<DetectDestructorComponent>>::info();
-    CHECK(info.read.size() == 1);
-    CHECK(info.read.contains(typeid(ParentComponent)));
-    CHECK(info.written.size() == 2);
-    CHECK(info.written.contains(typeid(IntegerComponent)));
-    CHECK(info.written.contains(typeid(DetectDestructorComponent)));
-
-    // If no components are specified, the info should be empty.
-    info = Query<>::info();
-    CHECK(info.read.empty());
-    CHECK(info.written.empty());
+    CHECK(queryCount<Opt<const IntegerComponent&>, Opt<ParentComponent&>>(world) == 6);
+    CHECK(queryCount<Opt<IntegerComponent&>, const ParentComponent&>(world) == 3);
+    CHECK(queryCount<IntegerComponent&, Opt<const ParentComponent&>>(world) == 4);
 }
