@@ -2,8 +2,9 @@
 
 using namespace cubos::engine;
 
-static void autoLocalToWorld(Commands cmds,
-                             Query<OptRead<LocalToWorld>, OptRead<Position>, OptRead<Rotation>, OptRead<Scale>> query)
+static void autoLocalToWorld(
+    Commands cmds,
+    Query<Entity, Opt<const LocalToWorld&>, Opt<const Position&>, Opt<const Rotation&>, Opt<const Scale&>> query)
 {
     for (auto [entity, localToWorld, position, rotation, scale] : query)
     {
@@ -14,24 +15,25 @@ static void autoLocalToWorld(Commands cmds,
     }
 }
 
-static void applyTransform(Query<Write<LocalToWorld>, OptRead<Position>, OptRead<Rotation>, OptRead<Scale>> query)
+static void applyTransform(
+    Query<Entity, LocalToWorld&, Opt<const Position&>, Opt<const Rotation&>, Opt<const Scale&>> query)
 {
     for (auto [entity, localToWorld, position, rotation, scale] : query)
     {
-        localToWorld->mat = glm::mat4(1.0F);
+        localToWorld.mat = glm::mat4(1.0F);
         if (position)
         {
-            localToWorld->mat = glm::translate(localToWorld->mat, position->vec);
+            localToWorld.mat = glm::translate(localToWorld.mat, position->vec);
         }
 
         if (rotation)
         {
-            localToWorld->mat *= glm::toMat4(rotation->quat);
+            localToWorld.mat *= glm::toMat4(rotation->quat);
         }
 
         if (scale)
         {
-            localToWorld->mat = glm::scale(localToWorld->mat, glm::vec3(scale->factor));
+            localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(scale->factor));
         }
     }
 }

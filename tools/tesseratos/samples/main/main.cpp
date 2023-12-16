@@ -5,7 +5,6 @@
 #include <tesseratos/plugin.hpp>
 
 using cubos::core::ecs::Commands;
-using cubos::core::ecs::Write;
 
 using cubos::engine::ActiveCameras;
 using cubos::engine::Camera;
@@ -15,21 +14,20 @@ using cubos::engine::Position;
 using cubos::engine::Rotation;
 using cubos::engine::Settings;
 
-static void settingsSystem(Write<Settings> settings)
+static void settingsSystem(Settings& settings)
 {
-    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
-    settings->setBool("assets.io.readOnly", false);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings.setBool("assets.io.readOnly", false);
 }
 
-static void setCameraSystem(Write<ActiveCameras> camera, Commands cmds)
+static void setCameraSystem(ActiveCameras& camera, Commands cmds)
 {
-    camera->entities[0] =
-        cmds.create()
-            .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
-            .add(LocalToWorld{})
-            .add(Position{{10.0F, 10.0F, 0.0F}})
-            .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-            .entity();
+    camera.entities[0] = cmds.create()
+                             .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
+                             .add(LocalToWorld{})
+                             .add(Position{{10.0F, 10.0F, 0.0F}})
+                             .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+                             .entity();
     cmds.create().add(LocalToWorld{}).add(Position{{3.0F, 3.0F, 0.0F}}).entity();
 }
 

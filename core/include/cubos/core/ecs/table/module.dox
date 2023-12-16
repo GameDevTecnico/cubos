@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref core-ecs-table directory.
+
+namespace cubos::core::ecs
+{
+    /// @defgroup core-ecs-table Table
+    /// @ingroup core-ecs
+    /// @brief Contains various table-like data structures which storage data associated to entities.
+}

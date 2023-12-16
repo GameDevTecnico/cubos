@@ -44,8 +44,8 @@ static void setViewportCameras(glm::ivec2 position, glm::ivec2 size, int count, 
     }
 }
 
-static void splitViewportSystem(Commands commands, Write<Renderer> renderer, Read<ActiveCameras> activeCameras,
-                                Query<Read<LocalToWorld>, Write<Camera>, OptWrite<Viewport>> query)
+static void splitViewportSystem(Commands commands, Renderer& renderer, const ActiveCameras& activeCameras,
+                                Query<const LocalToWorld&, Camera&, Opt<Viewport&>> query)
 {
     glm::ivec2 positions[4];
     glm::ivec2 sizes[4];
@@ -53,32 +53,32 @@ static void splitViewportSystem(Commands commands, Write<Renderer> renderer, Rea
 
     for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
     {
-        if (activeCameras->entities[i].isNull())
+        if (activeCameras.entities[i].isNull())
         {
             continue;
         }
 
-        if (auto components = query[activeCameras->entities[i]])
+        if (query.at(activeCameras.entities[i]).contains())
         {
             cameraCount += 1;
         }
     }
 
-    setViewportCameras({0, 0}, (*renderer)->size(), cameraCount, positions, sizes);
+    setViewportCameras({0, 0}, renderer->size(), cameraCount, positions, sizes);
 
     for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
     {
-        if (activeCameras->entities[i].isNull())
+        if (activeCameras.entities[i].isNull())
         {
             continue;
         }
 
-        if (auto components = query[activeCameras->entities[i]])
+        if (auto components = query.at(activeCameras.entities[i]))
         {
-            auto [localToWorld, camera, viewport] = *components;
+            auto& [localToWorld, camera, viewport] = *components;
             if (!viewport)
             {
-                commands.add(activeCameras->entities[i],
+                commands.add(activeCameras.entities[i],
                              Viewport{.position = glm::ivec2{positions[i][0], positions[i][1]},
                                       .size = glm::ivec2{sizes[i][0], sizes[i][1]}});
             }

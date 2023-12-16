@@ -11,9 +11,7 @@
 #include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::Entity;
-using cubos::core::ecs::Read;
 using cubos::core::ecs::World;
-using cubos::core::ecs::Write;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
 
@@ -22,9 +20,9 @@ using cubos::engine::DataInspector;
 
 using namespace tesseratos;
 
-static void inspectEntity(Write<World> world)
+static void inspectEntity(World& world)
 {
-    if (!world->write<Toolbox>().get().isOpen("Entity Inspector"))
+    if (!world.write<Toolbox>().get().isOpen("Entity Inspector"))
     {
         return;
     }
@@ -32,17 +30,17 @@ static void inspectEntity(Write<World> world)
     ImGui::Begin("Entity Inspector");
     if (!ImGui::IsWindowCollapsed())
     {
-        auto selection = world->read<EntitySelector>().get().selection;
+        auto selection = world.read<EntitySelector>().get().selection;
 
-        if (!selection.isNull() && world->isAlive(selection))
+        if (!selection.isNull() && world.isAlive(selection))
         {
             ImGui::Text("Entity %d selected", selection.index);
             ImGui::BeginTable("showEntity", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
-            auto dataInspector = world->write<DataInspector>();
+            auto dataInspector = world.write<DataInspector>();
 
             ImGui::TableNextRow();
 
-            for (auto [type, value] : world->components(selection))
+            for (auto [type, value] : world.components(selection))
             {
                 if (dataInspector.get().edit(type->name(), *type, value))
                 {

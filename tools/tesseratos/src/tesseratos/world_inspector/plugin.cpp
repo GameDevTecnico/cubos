@@ -6,28 +6,28 @@
 #include <tesseratos/toolbox/plugin.hpp>
 #include <tesseratos/world_inspector/plugin.hpp>
 
-using cubos::core::ecs::Read;
+using cubos::core::ecs::Entity;
+using cubos::core::ecs::Query;
 using cubos::core::ecs::World;
-using cubos::core::ecs::Write;
 
 using cubos::engine::Cubos;
 
 using namespace tesseratos;
 
-static void inspectWorld(Write<World> world)
+static void inspectWorld(World& world, Query<Entity> query)
 {
-    if (!(world->write<Toolbox>().get().isOpen("World Inspector")))
+    if (!(world.write<Toolbox>().get().isOpen("World Inspector")))
     {
         return;
     }
 
-    auto selector = world->write<EntitySelector>();
+    auto selector = world.write<EntitySelector>();
 
     ImGui::Begin("World Inspector");
     if (!ImGui::IsWindowCollapsed())
     {
         int n = 0;
-        for (auto entity : *world)
+        for (auto [entity] : query)
         {
             ImGui::PushID(n);
 

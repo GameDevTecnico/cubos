@@ -47,16 +47,16 @@ public:
 };
 /// [TextBridge::saveToFile]
 
-static void configSystem(Write<Settings> settings)
+static void configSystem(Settings& settings)
 {
-    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
 /// [Registering the bridge]
-static void bridgeSystem(Write<Assets> assets)
+static void bridgeSystem(Assets& assets)
 {
     // Add a custom bridge to load .txt files.
-    assets->registerBridge(".txt", std::make_unique<TextBridge>());
+    assets.registerBridge(".txt", std::make_unique<TextBridge>());
 }
 /// [Registering the bridge]
 
@@ -64,10 +64,10 @@ static void bridgeSystem(Write<Assets> assets)
 // Assets are identified through UUIDs which are defined in their .meta files.
 static const Asset<std::string> SampleAsset = AnyAsset("6f42ae5a-59d1-5df3-8720-83b8df6dd536");
 
-static void loadSystem(Read<Assets> assets)
+static void loadSystem(const Assets& assets)
 {
     // Access the text asset - will be loaded automatically.
-    auto text = assets->read(SampleAsset);
+    auto text = assets.read(SampleAsset);
     Stream::stdOut.print(*text);
 }
 /// [Loading the asset]

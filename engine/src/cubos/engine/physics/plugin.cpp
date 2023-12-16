@@ -41,81 +41,81 @@ CUBOS_REFLECT_IMPL(PreviousPosition)
         .build();
 }
 
-static void increaseAccumulator(Write<PhysicsAccumulator> accumulator, Read<DeltaTime> deltaTime)
+static void increaseAccumulator(PhysicsAccumulator& accumulator, const DeltaTime& deltaTime)
 {
-    accumulator->value += deltaTime->value;
+    accumulator.value += deltaTime.value;
 }
 
-static void decreaseAccumulator(Write<PhysicsAccumulator> accumulator, Read<FixedDeltaTime> fixedDeltaTime)
+static void decreaseAccumulator(PhysicsAccumulator& accumulator, const FixedDeltaTime& fixedDeltaTime)
 {
-    accumulator->value -= fixedDeltaTime->value;
+    accumulator.value -= fixedDeltaTime.value;
 }
 
-static bool simulatePhysicsStep(Write<PhysicsAccumulator> accumulator, Read<FixedDeltaTime> fixedDeltaTime)
+static bool simulatePhysicsStep(PhysicsAccumulator& accumulator, const FixedDeltaTime& fixedDeltaTime)
 {
-    return accumulator->value >= fixedDeltaTime->value;
+    return accumulator.value >= fixedDeltaTime.value;
 }
 
-static void integratePositionSystem(
-    Query<Write<Position>, Write<PreviousPosition>, Write<PhysicsVelocity>, Read<PhysicsMass>> query,
-    Read<Damping> damping, Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
+static void integratePositionSystem(Query<Position&, PreviousPosition&, PhysicsVelocity&, const PhysicsMass&> query,
+                                    const Damping& damping, const FixedDeltaTime& fixedDeltaTime,
+                                    const Substeps& substeps)
 {
-    float subDeltaTime = fixedDeltaTime->value / (float)substeps->value;
+    float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
-    for (auto [entity, position, prevPosition, velocity, mass] : query)
+    for (auto [position, prevPosition, velocity, mass] : query)
     {
-        prevPosition->vec = position->vec;
+        prevPosition.vec = position.vec;
 
-        if (mass->inverseMass <= 0.0F)
+        if (mass.inverseMass <= 0.0F)
         {
             return;
         }
 
         // Apply damping
-        velocity->velocity *= glm::pow(damping->value, subDeltaTime);
+        velocity.velocity *= glm::pow(damping.value, subDeltaTime);
 
         // Apply external forces
-        glm::vec3 deltaLinearVelocity = velocity->force * mass->inverseMass * subDeltaTime;
+        glm::vec3 deltaLinearVelocity = velocity.force * mass.inverseMass * subDeltaTime;
 
-        velocity->velocity += deltaLinearVelocity;
-        position->vec += velocity->velocity * subDeltaTime;
+        velocity.velocity += deltaLinearVelocity;
+        position.vec += velocity.velocity * subDeltaTime;
     }
 }
 
-static void applyCorrectionSystem(Query<Write<Position>, Write<AccumulatedCorrection>> query)
+static void applyCorrectionSystem(Query<Position&, AccumulatedCorrection&> query)
 {
-    for (auto [entity, position, correction] : query)
+    for (auto [position, correction] : query)
     {
-        position->vec += correction->vec;
-        correction->vec = glm::vec3(0, 0, 0);
+        position.vec += correction.vec;
+        correction.vec = glm::vec3(0, 0, 0);
     }
 }
 
-static void updateVelocitySystem(Query<Read<Position>, Read<PreviousPosition>, Write<PhysicsVelocity>> query,
-                                 Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
+static void updateVelocitySystem(Query<const Position&, const PreviousPosition&, PhysicsVelocity&> query,
+                                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps)
 {
-    float subDeltaTime = fixedDeltaTime->value / (float)substeps->value;
+    float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
-    for (auto [entity, position, prevPosition, velocity] : query)
+    for (auto [position, prevPosition, velocity] : query)
     {
-        velocity->velocity = (position->vec - prevPosition->vec) / subDeltaTime;
+        velocity.velocity = (position.vec - prevPosition.vec) / subDeltaTime;
     }
 }
 
-static void applyImpulseSystem(Query<Write<PhysicsVelocity>, Read<PhysicsMass>> query)
+static void applyImpulseSystem(Query<PhysicsVelocity&, const PhysicsMass&> query)
 {
-    for (auto [entity, velocity, mass] : query)
+    for (auto [velocity, mass] : query)
     {
-        velocity->velocity += velocity->impulse * mass->inverseMass;
+        velocity.velocity += velocity.impulse * mass.inverseMass;
     }
 }
 
-static void clearForcesSystem(Query<Write<PhysicsVelocity>> query)
+static void clearForcesSystem(Query<PhysicsVelocity&> query)
 {
-    for (auto [entity, velocity] : query)
+    for (auto [velocity] : query)
     {
-        velocity->force = glm::vec3(0, 0, 0);
-        velocity->impulse = glm::vec3(0, 0, 0);
+        velocity.force = glm::vec3(0, 0, 0);
+        velocity.impulse = glm::vec3(0, 0, 0);
     }
 }
 

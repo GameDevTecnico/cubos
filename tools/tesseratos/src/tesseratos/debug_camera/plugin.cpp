@@ -11,8 +11,6 @@
 
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 
 using cubos::engine::ActiveCameras;
 using cubos::engine::Camera;
@@ -27,38 +25,37 @@ struct DebugCameraInfo
     Entity ent;     // debug camera entity
 };
 
-static void createDebugCameraSystem(Commands commands, Write<DebugCameraInfo> debugCamera)
+static void createDebugCameraSystem(Commands commands, DebugCameraInfo& debugCamera)
 {
-    debugCamera->ent = commands.create().add(Camera{}).add(Position{{}}).entity();
+    debugCamera.ent = commands.create().add(Camera{}).add(Position{{}}).entity();
 }
 
-static void changeToDebugCameraSystem(Write<ActiveCameras> camera, Write<Toolbox> toolbox,
-                                      Write<DebugCameraInfo> debugCamera)
+static void changeToDebugCameraSystem(ActiveCameras& camera, Toolbox& toolbox, DebugCameraInfo& debugCamera)
 {
-    if (!toolbox->isOpen("Debug Camera"))
+    if (!toolbox.isOpen("Debug Camera"))
     {
         return;
     }
 
     ImGui::Begin("Debug Camera");
 
-    ImGui::Text("Current camera: %s", debugCamera->ent == camera->entities[0] ? "Debug" : "Game");
+    ImGui::Text("Current camera: %s", debugCamera.ent == camera.entities[0] ? "Debug" : "Game");
     ImGui::Text("Key to change: F12");
 
     if (ImGui::Button("Change camera") || ImGui::IsKeyPressed(ImGuiKey_F12))
     {
         CUBOS_DEBUG("Changed camera ...");
-        if (debugCamera->ent == camera->entities[0])
+        if (debugCamera.ent == camera.entities[0])
         {
-            std::copy(std::begin(debugCamera->copy), std::end(debugCamera->copy), camera->entities);
+            std::copy(std::begin(debugCamera.copy), std::end(debugCamera.copy), camera.entities);
         }
         else
         {
-            std::copy(std::begin(camera->entities), std::end(camera->entities), debugCamera->copy);
-            camera->entities[0] = debugCamera->ent;
-            camera->entities[1] = Entity();
-            camera->entities[2] = Entity();
-            camera->entities[3] = Entity();
+            std::copy(std::begin(camera.entities), std::end(camera.entities), debugCamera.copy);
+            camera.entities[0] = debugCamera.ent;
+            camera.entities[1] = Entity();
+            camera.entities[2] = Entity();
+            camera.entities[3] = Entity();
         }
     }
 

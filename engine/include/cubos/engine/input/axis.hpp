@@ -75,6 +75,6 @@ namespace cubos::engine
         std::vector<std::pair<core::io::Key, core::io::Modifiers>> mNegative;
         std::vector<core::io::GamepadAxis> mGamepadAxes;
 
-        float mValue; ///< Not serialized.
+        float mValue{0.0F}; ///< Not serialized.
     };
 } // namespace cubos::engine

@@ -64,16 +64,16 @@ static Settings loadFromFile(std::string_view path)
     return settings;
 }
 
-static void startup(Read<Arguments> args, Write<Settings> settings)
+static void startup(const Arguments& args, Settings& settings)
 {
     // First, load settings from the command line arguments.
-    Settings argsSettings = loadFromArguments(*args);
-    settings->merge(argsSettings);
+    Settings argsSettings = loadFromArguments(args);
+    settings.merge(argsSettings);
 
     // Then load settings from the file, and override it with the command line arguments.
-    Settings fileSettings = loadFromFile(settings->getString("settings.path", "settings.json"));
+    Settings fileSettings = loadFromFile(settings.getString("settings.path", "settings.json"));
     fileSettings.merge(argsSettings);
-    settings->merge(fileSettings);
+    settings.merge(fileSettings);
 }
 
 void cubos::engine::settingsPlugin(Cubos& cubos)

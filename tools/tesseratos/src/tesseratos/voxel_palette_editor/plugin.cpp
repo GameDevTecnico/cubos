@@ -12,8 +12,6 @@
 #include <tesseratos/voxel_palette_editor/plugin.hpp>
 
 using cubos::core::ecs::EventReader;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 
 using cubos::engine::ActiveVoxelPalette;
 using cubos::engine::Asset;
@@ -32,11 +30,11 @@ struct SelectedPaletteInfo
     Asset<VoxelPalette> next;
 };
 
-static void savePaletteUiGuard(Write<Assets> assets, Write<SelectedPaletteInfo> selectedPalette)
+static void savePaletteUiGuard(Assets& assets, SelectedPaletteInfo& selectedPalette)
 {
     // The popup only shows when we've already opened a palette and want to show another one.
     // Thus if we haven't set the next asset variable we can just stop here.
-    if (selectedPalette->next.isNull())
+    if (selectedPalette.next.isNull())
     {
         return;
     }
@@ -53,9 +51,9 @@ static void savePaletteUiGuard(Write<Assets> assets, Write<SelectedPaletteInfo> 
 
         if (ImGui::Button("Yes", ImVec2(80, 0)))
         {
-            CUBOS_INFO("Saving palette asset {} modificaations", selectedPalette->next);
-            assets->store(selectedPalette->asset, selectedPalette->paletteCopy);
-            assets->save(selectedPalette->asset);
+            CUBOS_INFO("Saving palette asset {} modificaations", selectedPalette.next);
+            assets.store(selectedPalette.asset, selectedPalette.paletteCopy);
+            assets.save(selectedPalette.asset);
             optionSelected = true;
         }
 
@@ -64,7 +62,7 @@ static void savePaletteUiGuard(Write<Assets> assets, Write<SelectedPaletteInfo> 
 
         if (ImGui::Button("No", ImVec2(80, 0)))
         {
-            CUBOS_DEBUG("Discarding palette asset {} modifications", selectedPalette->next);
+            CUBOS_DEBUG("Discarding palette asset {} modifications", selectedPalette.next);
             optionSelected = true;
         }
 
@@ -77,9 +75,9 @@ static void savePaletteUiGuard(Write<Assets> assets, Write<SelectedPaletteInfo> 
 
         if (optionSelected)
         {
-            selectedPalette->asset = assets->load(selectedPalette->next);
-            selectedPalette->paletteCopy = assets->read(selectedPalette->asset).get();
-            selectedPalette->modified = false;
+            selectedPalette.asset = assets.load(selectedPalette.next);
+            selectedPalette.paletteCopy = assets.read(selectedPalette.asset).get();
+            selectedPalette.modified = false;
             ImGui::CloseCurrentPopup();
         }
 
@@ -87,24 +85,24 @@ static void savePaletteUiGuard(Write<Assets> assets, Write<SelectedPaletteInfo> 
     }
 }
 
-static void checkAssetEventSystem(EventReader<AssetSelectedEvent> reader, Write<Assets> assets,
-                                  Write<SelectedPaletteInfo> selectedPalette)
+static void checkAssetEventSystem(EventReader<AssetSelectedEvent> reader, Assets& assets,
+                                  SelectedPaletteInfo& selectedPalette)
 {
     for (const auto& event : reader)
     {
-        if (assets->type(event.asset).is<VoxelPalette>())
+        if (assets.type(event.asset).is<VoxelPalette>())
         {
             CUBOS_INFO("Opening palette asset {}", event.asset);
-            if (!selectedPalette->asset.isNull() && selectedPalette->modified)
+            if (!selectedPalette.asset.isNull() && selectedPalette.modified)
             {
                 CUBOS_DEBUG("Opening save palette UI guard");
                 ImGui::OpenPopup("Save Palette?");
-                selectedPalette->next = event.asset;
+                selectedPalette.next = event.asset;
             }
             else
             {
-                selectedPalette->asset = assets->load(event.asset);
-                selectedPalette->paletteCopy = assets->read(selectedPalette->asset).get();
+                selectedPalette.asset = assets.load(event.asset);
+                selectedPalette.paletteCopy = assets.read(selectedPalette.asset).get();
             }
         }
     }
@@ -113,15 +111,15 @@ static void checkAssetEventSystem(EventReader<AssetSelectedEvent> reader, Write<
     savePaletteUiGuard(assets, selectedPalette);
 }
 
-static void voxelPaletteEditorSystem(Write<Assets> assets, Write<SelectedPaletteInfo> selectedPalette,
-                                     Write<ActiveVoxelPalette> activePalette, Write<Toolbox> toolbox)
+static void voxelPaletteEditorSystem(Assets& assets, SelectedPaletteInfo& selectedPalette,
+                                     ActiveVoxelPalette& activePalette, Toolbox& toolbox)
 {
-    if (!toolbox->isOpen("Palette Editor"))
+    if (!toolbox.isOpen("Palette Editor"))
     {
         return;
     }
 
-    if (assets->status(selectedPalette->asset) != Assets::Status::Loaded)
+    if (assets.status(selectedPalette.asset) != Assets::Status::Loaded)
     {
         return;
     }
@@ -131,10 +129,10 @@ static void voxelPaletteEditorSystem(Write<Assets> assets, Write<SelectedPalette
     bool wasMaterialModified = false;
     std::pair<uint16_t, VoxelMaterial> modifiedMaterial;
 
-    for (uint16_t i = 0; i < selectedPalette->paletteCopy.size(); ++i)
+    for (uint16_t i = 0; i < selectedPalette.paletteCopy.size(); ++i)
     {
         const uint16_t materialIndex = i + 1;
-        auto& material = (VoxelMaterial&)selectedPalette->paletteCopy.get(materialIndex);
+        auto& material = (VoxelMaterial&)selectedPalette.paletteCopy.get(materialIndex);
 
         std::string label = "Material " + std::to_string(materialIndex);
         if (ImGui::ColorEdit4(label.c_str(), &material.color.r))
@@ -149,35 +147,35 @@ static void voxelPaletteEditorSystem(Write<Assets> assets, Write<SelectedPalette
     {
         CUBOS_DEBUG("Storing as new asset because palette was modified");
         auto [idx, material] = modifiedMaterial;
-        selectedPalette->paletteCopy.set(idx, material);
-        selectedPalette->modified = true;
+        selectedPalette.paletteCopy.set(idx, material);
+        selectedPalette.modified = true;
     }
 
     // Add material / Make Active / Save
 
-    if (ImGui::Button("Add Material") || selectedPalette->paletteCopy.size() == 0)
+    if (ImGui::Button("Add Material") || selectedPalette.paletteCopy.size() == 0)
     {
-        selectedPalette->paletteCopy.push(VoxelMaterial{{1.0F, 0.0F, 1.0F, 1.0F}});
-        selectedPalette->modified = true;
+        selectedPalette.paletteCopy.push(VoxelMaterial{{1.0F, 0.0F, 1.0F, 1.0F}});
+        selectedPalette.modified = true;
     }
 
     ImGui::SameLine();
 
     if (ImGui::Button("Make Active"))
     {
-        activePalette->asset = selectedPalette->asset;
+        activePalette.asset = selectedPalette.asset;
     }
 
     ImGui::SameLine();
 
     if (ImGui::Button("Save"))
     {
-        assets->store(selectedPalette->asset, selectedPalette->paletteCopy);
-        assets->save(selectedPalette->asset);
-        selectedPalette->modified = false;
+        assets.store(selectedPalette.asset, selectedPalette.paletteCopy);
+        assets.save(selectedPalette.asset);
+        selectedPalette.modified = false;
     }
 
-    if (activePalette->asset == selectedPalette->asset)
+    if (activePalette.asset == selectedPalette.asset)
     {
         ImGui::TextColored({0, 255, 0, 255}, "This is your current active palette!");
     }

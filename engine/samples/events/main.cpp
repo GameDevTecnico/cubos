@@ -29,19 +29,19 @@ static void firstSystem(EventReader<MyEvent> reader)
 /// [Event reader system]
 
 /// [Event writer system]
-static void secondSystem(EventWriter<MyEvent> writer, Write<State> state, Write<ShouldQuit> quit)
+static void secondSystem(EventWriter<MyEvent> writer, State& state, ShouldQuit& quit)
 {
-    state->step += 1;
-    if (state->step == 1) // Write 1 2 3 on first run.
+    state.step += 1;
+    if (state.step == 1) // Write 1 2 3 on first run.
     {
         writer.push({1});
         writer.push({2});
         writer.push({3});
         CUBOS_INFO("B wrote 1 2 3");
     }
-    else if (state->step == 2)
+    else if (state.step == 2)
     {
-        quit->value = true; // Stop the loop.
+        quit.value = true; // Stop the loop.
         writer.push({4});
         writer.push({5});
         writer.push({6});
@@ -75,7 +75,7 @@ int main()
     cubos.addEvent<MyEvent>();
     /// [Adding event]
 
-    cubos.startupSystem([](Write<ShouldQuit> quit) { quit->value = false; });
+    cubos.startupSystem([](ShouldQuit& quit) { quit.value = false; });
 
     /// [Adding systems]
     cubos.system(firstSystem).tagged("A").before("B");

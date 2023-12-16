@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iterator>
 
+#include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 

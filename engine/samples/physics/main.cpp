@@ -19,22 +19,22 @@ struct MaxTime
     float current = 0.0F;
 };
 
-static void settingsSystem(Write<Settings> settings)
+static void settingsSystem(Settings& settings)
 {
-    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
-static void setPaletteSystem(Read<Assets> assets, Write<Renderer> renderer)
+static void setPaletteSystem(const Assets& assets, Renderer& renderer)
 {
     // Read the palette's data and pass it to the renderer.
-    auto palette = assets->read(PaletteAsset);
-    (*renderer)->setPalette(*palette);
+    auto palette = assets.read(PaletteAsset);
+    renderer->setPalette(*palette);
 }
 
-static void spawnCameraSystem(Commands cmds, Write<ActiveCameras> activeCameras)
+static void spawnCameraSystem(Commands cmds, ActiveCameras& activeCameras)
 {
     // Spawn the camera entity.
-    activeCameras->entities[0] =
+    activeCameras.entities[0] =
         cmds.create()
             .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
             .add(Position{{50.0F, 50.0F, 50.0F}})
@@ -50,10 +50,10 @@ static void spawnLightSystem(Commands cmds)
         .add(Rotation{glm::quat(glm::vec3(glm::radians(45.0F), glm::radians(45.0F), 0))});
 }
 
-static void spawnCarSystem(Commands cmds, Read<Assets> assets)
+static void spawnCarSystem(Commands cmds, const Assets& assets)
 {
     // Calculate the necessary offset to center the model on (0, 0, 0).
-    auto car = assets->read(CarAsset);
+    auto car = assets.read(CarAsset);
     glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
 
     // Create the car entity
@@ -68,18 +68,18 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
         .add(LocalToWorld{});
 }
 
-static void pushCarSystem(Query<Write<PhysicsVelocity>> query, Write<MaxTime> time, Read<DeltaTime> deltaTime)
+static void pushCarSystem(Query<PhysicsVelocity&> query, MaxTime& time, const DeltaTime& deltaTime)
 {
-    for (auto [entity, velocity] : query)
+    for (auto [velocity] : query)
     {
-        if (time->current < time->max)
+        if (time.current < time.max)
         {
-            if (time->current == 0.0F)
+            if (time.current == 0.0F)
             {
-                velocity->impulse += glm::vec3(0.0F, 5000.0F, 0.0F);
+                velocity.impulse += glm::vec3(0.0F, 5000.0F, 0.0F);
             }
-            velocity->force += glm::vec3(0.0F, 0.0F, -5000.0F);
-            time->current += deltaTime->value;
+            velocity.force += glm::vec3(0.0F, 0.0F, -5000.0F);
+            time.current += deltaTime.value;
         }
     }
 }

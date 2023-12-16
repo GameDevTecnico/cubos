@@ -48,6 +48,12 @@ add_executable(
     ecs/relation/utils.cpp
     ecs/relation/table.cpp
 
+    ecs/types.cpp
+    ecs/table/dense.cpp
+    ecs/entity/archetype_graph.cpp
+    ecs/entity/pool.cpp
+    ecs/query/data.cpp
+
     geom/box.cpp
     geom/capsule.cpp
 )

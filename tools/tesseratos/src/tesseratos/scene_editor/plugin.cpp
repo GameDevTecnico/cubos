@@ -20,8 +20,6 @@
 
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 
 using cubos::engine::Asset;
 using cubos::engine::Assets;
@@ -93,14 +91,14 @@ static void openScene(const Asset<Scene>& sceneToSpawn, Commands& commands, cons
 }
 
 static void checkAssetEventSystem(cubos::core::ecs::EventReader<AssetSelectedEvent> reader, Commands commands,
-                                  Read<Assets> assets, Write<SceneInfo> scene)
+                                  const Assets& assets, SceneInfo& scene)
 {
     for (const auto& event : reader)
     {
-        if (assets->type(event.asset).is<Scene>())
+        if (assets.type(event.asset).is<Scene>())
         {
             CUBOS_INFO("Opening scene {}", event.asset);
-            openScene(event.asset, commands, *assets, *scene);
+            openScene(event.asset, commands, assets, scene);
         }
     }
 }
@@ -248,16 +246,15 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
     ImGui::PopID();
 }
 
-static void sceneEditorSystem(Commands cmds, Write<SceneInfo> scene, Write<EntitySelector> selector,
-                              Write<Toolbox> toolbox)
+static void sceneEditorSystem(Commands cmds, SceneInfo& scene, EntitySelector& selector, Toolbox& toolbox)
 {
-    if (!toolbox->isOpen("Scene Editor"))
+    if (!toolbox.isOpen("Scene Editor"))
     {
         return;
     }
 
     ImGui::Begin("Scene Editor");
-    showSceneHierarchy(*scene, cmds, *selector, 0);
+    showSceneHierarchy(scene, cmds, selector, 0);
     ImGui::End();
 }
 

@@ -52,24 +52,24 @@ void cubos::core::data::old::deserialize<Strings>(Deserializer& des, Strings& ob
 }
 /// [Serialization definition]
 
-static void configSystem(Write<Settings> settings)
+static void configSystem(Settings& settings)
 {
-    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
 /// [Register bridge]
-static void bridgeSystem(Write<Assets> assets)
+static void bridgeSystem(Assets& assets)
 {
-    assets->registerBridge(".strings", std::make_unique<JSONBridge<Strings>>());
+    assets.registerBridge(".strings", std::make_unique<JSONBridge<Strings>>());
 }
 /// [Register bridge]
 
 /// [Loading the asset]
 static const Asset<Strings> SampleAsset = AnyAsset("6f42ae5a-59d1-5df3-8720-83b8df6dd536");
 
-static void loadSystem(Write<Assets> assets)
+static void loadSystem(Assets& assets)
 {
-    auto read = assets->read(SampleAsset);
+    auto read = assets.read(SampleAsset);
     for (const auto& str : read->strings)
     {
         Stream::stdOut.printf("String: {}\n", str);

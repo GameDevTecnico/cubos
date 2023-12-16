@@ -30,33 +30,33 @@ CUBOS_REFLECT_IMPL(Parent)
 static const Asset<Scene> SceneAsset = AnyAsset("f0d86ba8-5f34-440f-a180-d9d12c8e8b91");
 /// [Setting the asset]
 
-static void settings(Write<Settings> settings)
+static void settings(Settings& settings)
 {
-    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
 /// [Spawning the scene]
-static void spawnScene(Commands commands, Read<Assets> assets)
+static void spawnScene(Commands commands, const Assets& assets)
 {
-    auto sceneRead = assets->read(SceneAsset);
+    auto sceneRead = assets.read(SceneAsset);
     commands.spawn(sceneRead->blueprint);
 }
 /// [Spawning the scene]
 
 /// [Displaying the scene]
-static void printStuff(Read<World> world)
+static void printStuff(const World& world, Query<Entity> query)
 {
     using cubos::core::data::DebugSerializer;
     using cubos::core::memory::Stream;
 
     DebugSerializer ser{Stream::stdOut};
 
-    for (auto entity : *world)
+    for (auto [entity] : query)
     {
         Stream::stdOut.printf("Entity ");
         ser.write(entity);
         Stream::stdOut.put('\n');
-        for (auto [type, value] : world->components(entity))
+        for (auto [type, value] : world.components(entity))
         {
             Stream::stdOut.printf("- {}: ", type->name());
             ser.write(*type, value);

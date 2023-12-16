@@ -11,8 +11,6 @@
 #include <tesseratos/settings_inspector/plugin.hpp>
 #include <tesseratos/toolbox/plugin.hpp>
 
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 using cubos::core::reflection::reflect;
 
 using cubos::engine::Cubos;
@@ -21,9 +19,9 @@ using cubos::engine::Settings;
 
 using namespace tesseratos;
 
-static void inspector(Write<Settings> settings, Write<DataInspector> inspector, Write<Toolbox> toolbox)
+static void inspector(Settings& settings, DataInspector& inspector, Toolbox& toolbox)
 {
-    if (!toolbox->isOpen("Settings Inspector"))
+    if (!toolbox.isOpen("Settings Inspector"))
     {
         return;
     }
@@ -31,7 +29,7 @@ static void inspector(Write<Settings> settings, Write<DataInspector> inspector, 
     ImGui::Begin("Settings Inspector");
     if (!ImGui::IsWindowCollapsed())
     {
-        auto& map = settings->getValues();
+        auto& map = settings.getValues();
         if (map.empty())
         {
             ImGui::Text("No settings found.");
@@ -39,7 +37,7 @@ static void inspector(Write<Settings> settings, Write<DataInspector> inspector, 
         else
         {
             ImGui::BeginTable("split", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
-            inspector->edit("Settings", map);
+            inspector.edit("Settings", map);
             ImGui::EndTable();
         }
     }

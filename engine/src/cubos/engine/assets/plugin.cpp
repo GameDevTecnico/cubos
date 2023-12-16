@@ -9,26 +9,26 @@ using cubos::core::data::StandardArchive;
 
 using namespace cubos::engine;
 
-static void init(Write<Assets> assets, Write<Settings> settings)
+static void init(Assets& assets, Settings& settings)
 {
     // Get the relevant settings.
-    if (settings->getBool("assets.io.enabled", true))
+    if (settings.getBool("assets.io.enabled", true))
     {
-        std::filesystem::path path = settings->getString("assets.io.path", "assets");
-        bool readOnly = settings->getBool("assets.io.readOnly", true);
+        std::filesystem::path path = settings.getString("assets.io.path", "assets");
+        bool readOnly = settings.getBool("assets.io.readOnly", true);
 
         // Create a standard archive for the assets directory and mount it.
         FileSystem::mount("/assets", std::make_unique<StandardArchive>(path, true, readOnly));
 
         // Load the meta files on the assets directory.
-        assets->loadMeta("/assets");
+        assets.loadMeta("/assets");
     }
 }
 
-static void cleanup(Write<Assets> assets)
+static void cleanup(Assets& assets)
 {
     // TODO: maybe don't do this every frame?
-    assets->cleanup();
+    assets.cleanup();
 }
 
 void cubos::engine::assetsPlugin(Cubos& cubos)

@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/blueprint.hpp>
+#include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
 
 #include "utils.hpp"
@@ -123,8 +124,9 @@ TEST_CASE("ecs::Blueprint")
         auto spawned = cmds.spawn(blueprint);
         auto spawned0 = spawned.entity("0");
         auto spawned1 = spawned.entity("1");
-        auto& array = spawned.get<EntityArrayComponent>("0");
+        cmdBuffer.commit();
 
+        auto& array = world.components(spawned0).get<EntityArrayComponent>();
         CHECK(array.vec.size() == 2);
         CHECK(array.vec[0] == spawned0);
         CHECK(array.vec[1] == spawned1);
@@ -141,8 +143,9 @@ TEST_CASE("ecs::Blueprint")
         auto spawned = cmds.spawn(blueprint);
         auto spawned0 = spawned.entity("0");
         auto spawned1 = spawned.entity("1");
-        auto& dict = spawned.get<EntityDictionaryComponent>("0");
+        cmdBuffer.commit();
 
+        auto& dict = world.components(spawned0).get<EntityDictionaryComponent>();
         CHECK(dict.map.size() == 2);
         REQUIRE(dict.map.contains('0'));
         REQUIRE(dict.map.contains('1'));

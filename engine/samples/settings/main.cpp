@@ -6,9 +6,9 @@
 using namespace cubos::engine;
 
 /// [System]
-static void checkSettings(Write<Settings> settings)
+static void checkSettings(Settings& settings)
 {
-    CUBOS_INFO("{}", settings->getString("greeting", "Hello!"));
+    CUBOS_INFO("{}", settings.getString("greeting", "Hello!"));
 }
 /// [System]
 
