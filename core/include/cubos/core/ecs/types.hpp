@@ -34,6 +34,10 @@ namespace cubos::core::ecs
         /// @param type Component type.
         void addComponent(const reflection::Type& type);
 
+        /// @brief Registers a relation type.
+        /// @param type Relation type.
+        void addRelation(const reflection::Type& type);
+
         /// @brief Gets the identifier of a data type.
         ///
         /// Aborts if the data type is not registered.
@@ -60,22 +64,39 @@ namespace cubos::core::ecs
         /// @return Whether the data type is registered.
         bool contains(const std::string& name) const;
 
-        /// @brief Checks which kind of data type a given identifier refers to.
+        /// @brief Checks if the given data type is a component.
         /// @param id Data type identifier.
         /// @return Whether the identifier refers to a component.
         bool isComponent(DataTypeId id) const;
+
+        /// @brief Checks if the given data type is a relation.
+        /// @param id Data type identifier.
+        /// @return Whether the identifier refers to a relation.
+        bool isRelation(DataTypeId id) const;
 
         /// @brief Gets a type registry with only the component types.
         /// @return Component type registry.
         reflection::TypeRegistry components() const;
 
     private:
+        /// @brief Possible data type kinds.
+        enum class Kind
+        {
+            Component,
+            Relation
+        };
+
         /// @brief Describes a data type.
         struct Entry
         {
             const reflection::Type* type; ///< Data type.
-            bool isComponent;             ///< Whether the data type is a component.
+            Kind kind;                    ///< Data type kind.
         };
+
+        /// @brief Registers a new data type.
+        /// @param type Data type.
+        /// @param kind Data type kind.
+        void add(const reflection::Type& type, Kind kind);
 
         memory::TypeMap<DataTypeId> mTypes;                 ///< Maps data types to their identifiers.
         std::unordered_map<std::string, DataTypeId> mNames; ///< Maps data type names to their identifiers.
