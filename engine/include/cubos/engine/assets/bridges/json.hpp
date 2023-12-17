@@ -46,11 +46,6 @@ namespace cubos::engine
             // Deserialize the asset and store it in the asset manager.
             T data{};
             deserializer.read(data);
-            if (deserializer.failed())
-            {
-                CUBOS_ERROR("Could not deserialize asset from JSON file");
-                return false;
-            }
 
             assets.store(handle, std::move(data));
             return true;
@@ -63,16 +58,11 @@ namespace cubos::engine
 
             // Read the asset from the asset manager and serialize it to the file stream.
             auto data = assets.read<T>(handle);
-            serializer.write(*data, nullptr); // JSON serializer does not use names.
-            if (serializer.failed())
-            {
-                CUBOS_ERROR("Could not serialize asset to JSON file");
-                return false;
-            }
+            serializer.write(*data);
 
             // new JSONSerializer() does not receive a stream to write to, need to write to it manually
             auto jsonStr = serializer.output().dump();
-            stream.write(jsonStr.begin(), jsonStr.size());
+            stream.print(jsonStr);
             return true;
         }
     };

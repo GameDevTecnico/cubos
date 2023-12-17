@@ -4,7 +4,7 @@
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>
 
-#include <cubos/engine/assets/bridges/json.hpp>
+#include <cubos/engine/assets/bridges/old/json.hpp>
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 
@@ -58,7 +58,7 @@ static void configSystem(Settings& settings)
 
 static void bridgeSystem(Assets& assets)
 {
-    assets.registerBridge(".int", std::make_unique<JSONBridge<IntegerAsset>>());
+    assets.registerBridge(".int", std::make_unique<old::JSONBridge<IntegerAsset>>());
 }
 
 /// [Create a new asset]
