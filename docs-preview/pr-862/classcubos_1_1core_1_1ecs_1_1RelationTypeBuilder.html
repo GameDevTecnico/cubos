@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::ComponentTypeBuilder class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::RelationTypeBuilder class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,11 +46,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="component_2reflection_8hpp.html">&lt;core/ecs/component/reflection.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="relation_2reflection_8hpp.html">&lt;core/ecs/relation/reflection.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>ComponentTypeBuilder <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>RelationTypeBuilder <span class="m-thin">class</span>
         </h1>
-        <p>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent component types.</p>
+        <p>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent relation types.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -58,7 +58,7 @@
           <tbody>
             <tr>
               <td style="width: 1%">T</td>
-              <td>Component type.</td>
+              <td>Relation type.</td>
             </tr>
           </tbody>
         </table>
@@ -74,12 +74,12 @@
             </li>
           </ul>
         </nav>
-<p>Used to reduce the amount of boilerplate code required to define a component type. Automatically adds the <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">reflection::<wbr />ConstructibleTrait</a> and <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">reflection::<wbr />FieldsTrait</a>. The type <code>T</code> must be default-constructible, copy-constructible and move-constructible.</p>
+<p>Used to reduce the amount of boilerplate code required to define a relation type. Automatically adds the <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">reflection::<wbr />ConstructibleTrait</a> and <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">reflection::<wbr />FieldsTrait</a>. The type <code>T</code> must be default-constructible, copy-constructible and move-constructible.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ad05d906765a66ad81293567a7d3e6a42" class="m-doc">ComponentTypeBuilder</a>(</span><span class="m-doc-wrap">std::string name)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a4a9c03d31cf54ff5ea58382119504364" class="m-doc">RelationTypeBuilder</a>(</span><span class="m-doc-wrap">std::string name)</span>
             </dt>
             <dd>Constructs.</dd>
           </dl>
@@ -89,24 +89,24 @@
           <dl class="m-doc">
             <dt>
               <div class="m-doc-template">template&lt;typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a188ac4f5cfa112139abb0f1dd2523a85" class="m-doc">withField</a>(</span><span class="m-doc-wrap">std::string name,
-              F T::* pointer) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1ComponentTypeBuilder.html" class="m-doc">ComponentTypeBuilder</a>&amp;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0b5ebcf888df32276ee2f352e90b3fc4" class="m-doc">withField</a>(</span><span class="m-doc-wrap">std::string name,
+              F T::* pointer) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1RelationTypeBuilder.html" class="m-doc">RelationTypeBuilder</a>&amp;&amp;</span>
             </dt>
-            <dd>Adds a field to the component type.</dd>
+            <dd>Adds a field to the relation type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab73109faa5fc54142e681ce1a322d09a" class="m-doc">build</a>(</span><span class="m-doc-wrap">) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad743a4274661bacaf4d7b98ec35b74e7" class="m-doc">build</a>(</span><span class="m-doc-wrap">) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
             </dt>
-            <dd>Builds the component type.</dd>
+            <dd>Builds the relation type.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad05d906765a66ad81293567a7d3e6a42"><div>
+          <section class="m-doc-details" id="a4a9c03d31cf54ff5ea58382119504364"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />ComponentTypeBuilder&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad05d906765a66ad81293567a7d3e6a42" class="m-doc-self">ComponentTypeBuilder</a>(</span><span class="m-doc-wrap">std::string name)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />RelationTypeBuilder&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4a9c03d31cf54ff5ea58382119504364" class="m-doc-self">RelationTypeBuilder</a>(</span><span class="m-doc-wrap">std::string name)</span></span>
             </h3>
             <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -116,21 +116,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>Component type name, including namespace.</td>
+                  <td>Relation type name, including namespace.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a188ac4f5cfa112139abb0f1dd2523a85"><div>
+          <section class="m-doc-details" id="a0b5ebcf888df32276ee2f352e90b3fc4"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
                 template&lt;typename F&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1ComponentTypeBuilder.html" class="m-doc">ComponentTypeBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentTypeBuilder&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a188ac4f5cfa112139abb0f1dd2523a85" class="m-doc-self">withField</a>(</span><span class="m-doc-wrap">std::string name,
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1RelationTypeBuilder.html" class="m-doc">RelationTypeBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />RelationTypeBuilder&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b5ebcf888df32276ee2f352e90b3fc4" class="m-doc-self">withField</a>(</span><span class="m-doc-wrap">std::string name,
               F T::* pointer) &amp;&amp;</span></span>
             </h3>
-            <p>Adds a field to the component type.</p>
+            <p>Adds a field to the relation type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -162,19 +162,19 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab73109faa5fc54142e681ce1a322d09a"><div>
+          <section class="m-doc-details" id="ad743a4274661bacaf4d7b98ec35b74e7"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentTypeBuilder&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab73109faa5fc54142e681ce1a322d09a" class="m-doc-self">build</a>(</span><span class="m-doc-wrap">) &amp;&amp;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />RelationTypeBuilder&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad743a4274661bacaf4d7b98ec35b74e7" class="m-doc-self">build</a>(</span><span class="m-doc-wrap">) &amp;&amp;</span></span>
             </h3>
-            <p>Builds the component type.</p>
+            <p>Builds the relation type.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Component type.</td>
+                  <td>Relation type.</td>
                 </tr>
               </tfoot>
             </table>
