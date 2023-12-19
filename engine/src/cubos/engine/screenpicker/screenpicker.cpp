@@ -19,8 +19,7 @@ void ScreenPicker::resizeTexture(glm::ivec2 size)
 
 void ScreenPicker::clearTexture()
 {
-    auto* texBuffer =
-        new uint16_t[(std::size_t)textureSize.x * (std::size_t)textureSize.y * 2U];
+    auto* texBuffer = new uint16_t[(std::size_t)textureSize.x * (std::size_t)textureSize.y * 2U];
 
     std::fill(texBuffer, texBuffer + (std::size_t)textureSize.x * (std::size_t)textureSize.y * 2U, UINT16_MAX);
 
@@ -36,8 +35,7 @@ Framebuffer ScreenPicker::framebuffer()
 
 uint32_t ScreenPicker::at(int x, int y) const
 {
-    auto* texBuffer =
-        new uint16_t[(std::size_t)textureSize.x * (std::size_t)textureSize.y * 2U];
+    auto* texBuffer = new uint16_t[(std::size_t)textureSize.x * (std::size_t)textureSize.y * 2U];
 
     idTexture->read(texBuffer);
 
