@@ -80,6 +80,9 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/renderer/viewport.cpp"
 
     "src/cubos/engine/splitscreen/plugin.cpp"
+
+    "src/cubos/engine/screenpicker/plugin.cpp"
+    "src/cubos/engine/screenpicker/screenpicker.cpp"
 )
 
 # Create cubos engine
