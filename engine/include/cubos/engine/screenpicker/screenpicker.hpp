@@ -43,10 +43,10 @@ namespace cubos::engine
         glm::uvec2 size() const;
 
     private:
-        cubos::core::gl::RenderDevice* renderDevice; ///< Active render device.
-        core::gl::Framebuffer idFramebuffer;         ///< Framebuffer used to draw to the picking texture.
-        core::gl::Texture2D idTexture; ///< Picking texture, stores entity/gizmo ids for each pixel on the screen.
-        glm::ivec2 textureSize;        ///< Size of the picking texture in pixels.
+        cubos::core::gl::RenderDevice* mRenderDevice; ///< Active render device.
+        core::gl::Framebuffer mIdFramebuffer;         ///< Framebuffer used to draw to the picking texture.
+        core::gl::Texture2D mIdTexture; ///< Picking texture, stores entity/gizmo ids for each pixel on the screen.
+        glm::ivec2 mTextureSize;        ///< Size of the picking texture in pixels.
 
         /// @brief Creates the picking texture with a specified size.
         /// @param size Size of the picking texture in pixels.
