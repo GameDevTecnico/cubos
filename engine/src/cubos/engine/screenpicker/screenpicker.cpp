@@ -25,7 +25,7 @@ void ScreenPicker::clearTexture()
     // Since the texture is in RG16UInt format, it's filled with UINT16_MAX instead (two values make up an identifier)
     std::fill(texBuffer, texBuffer + (std::size_t)mTextureSize.x * (std::size_t)mTextureSize.y * 2U, UINT16_MAX);
 
-    mIdTexture->update(0, 0, mTextureSize.x, mTextureSize.y, texBuffer);
+    mIdTexture->update(0, 0, (std::size_t)mTextureSize.x, (std::size_t)mTextureSize.y, texBuffer);
 
     delete[] texBuffer;
 }
