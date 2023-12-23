@@ -1,6 +1,6 @@
 /// @file
-/// @brief Component @ref cubos::engine::Position.
-/// @ingroup transform-plugin
+/// @brief Component @ref cubos::engine::FreeCameraController.
+/// @ingroup free-camera-controller-plugin
 
 #pragma once
 
@@ -10,20 +10,19 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
-#include <cubos/engine/cubos.hpp>
 
 namespace cubos::engine
 {
     /// @brief Component which moves the camera.
     /// @ingroup free-camera-controller-plugin
-    struct FreeController
+    struct FreeCameraController
     {
         CUBOS_REFLECT;
 
-        /// @brief The speed at which the camera moves.
+        /// @brief Speed at which the camera moves.
         float speed = 3.0F;
 
-        /// @brief The sensivitiy at which the camera rotates.
+        /// @brief Sensitivity of the camera rotation, i.e,, how fast the camera rotates.
         float sens = 5.0F;
 
         /// @brief The axis of the axe to move the camera vertically.
@@ -31,8 +30,10 @@ namespace cubos::engine
         float horizontalZAxis = 0.0F;
         float horizontalXAxis = 0.0F;
 
-        /// @brief The inclination and azimuth of the camera roation.
+        /// @brief Inclination of the camera.
         float phi = 0.0F;
+        
+        /// @brief Azimuth of the camera.
         float theta = 0.0F;
 
         glm::ivec2 lastMousePos;
