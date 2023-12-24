@@ -22,7 +22,7 @@ namespace cubos::engine
     /// - `cubos.screenpicker.init` - the ScreenPicker resource is initialized, after `cubos.window.init`
     ///
     /// ## Tags
-    /// - `cubos.screenpicker.clear` - the picking texture is cleared, before `cubos.renderer.draw`
+    /// - `cubos.screenpicker.clear` - the picking texture is cleared
     /// - `cubos.screenpicker.resize` - window resize events are handled and the ScreenPicker texture is resized, after
     /// `cubos.window.poll` and before `cubos.screenpicker.clear`.
     ///
