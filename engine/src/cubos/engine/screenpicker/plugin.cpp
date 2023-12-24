@@ -40,7 +40,7 @@ void cubos::engine::screenPickerPlugin(Cubos& cubos)
 
     cubos.startupSystem(initScreenPickerSystem).tagged("cubos.screenpicker.init").after("cubos.window.init");
 
-    cubos.system(clearTexture).tagged("cubos.screenpicker.clear").before("cubos.renderer.draw");
+    cubos.system(clearTexture).tagged("cubos.screenpicker.clear");
     cubos.system(processResize)
         .tagged("cubos.screenpicker.resize")
         .after("cubos.window.poll")
