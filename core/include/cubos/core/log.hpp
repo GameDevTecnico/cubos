@@ -338,6 +338,27 @@ namespace cubos::core
         /// @return Whether an entry was red.
         static bool read(std::size_t& cursor, Entry& entry);
 
+        /// @brief Clears the logs.
+        static void clear();
+
+        // Function to get the trace count
+        static std::size_t traceCount();
+
+        // Function to get the debug count
+        static std::size_t debugCount();
+
+        // Function to get the info count
+        static std::size_t infoCount();
+
+        // Function to get the warn count
+        static std::size_t warnCount();
+
+        // Function to get the error count
+        static std::size_t errorCount();
+
+        // Function to get the critical count
+        static std::size_t criticalCount();
+
     private:
         /// @brief Writes the given format string to the given stream, with a single argument type.
         /// Stops if a second argument is found, and returns a pointer to its location.
