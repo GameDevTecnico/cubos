@@ -54,7 +54,6 @@ static void updateFreeController(Read<Input> input,
         direction.y = glm::sin(glm::radians(controller->phi));
         direction.z = glm::cos(glm::radians(controller->phi)) * glm::cos(glm::radians(controller->theta));
 
-        printf("%f %f %f\n", direction.x, direction.y, direction.z);
         direction = glm::normalize(direction);
 
         moveFreeController(input, direction, position, controller, deltaTime);
