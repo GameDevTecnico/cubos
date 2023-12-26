@@ -20,34 +20,31 @@ static void init(Write<Input> input)
     input->bind(bindings);
 }
 
-static void updateSimpleController(Query<Read<SimpleController>, Write<Position>> entities, Read<DeltaTime> deltaTime)
+static void getInitRotation(Query<Write<FreeCameraController>, Read<Rotation>> entities)
 {
-    for (auto [entity, controller, position] : entities)
+    for (auto [entity, controller, rotation] : entities)
     {
-        position->vec.y += controller->verticalAxis * deltaTime->value * controller->speed;
-
-        position->vec.x += controller->horizontalXAxis * deltaTime->value * controller->speed;
-        position->vec.z += controller->horizontalXAxis * deltaTime->value * controller->speed;
-
-        position->vec.z += controller->horizontalZAxis * deltaTime->value * controller->speed;
-        position->vec.x -= controller->horizontalZAxis * deltaTime->value * controller->speed;
+        glm::vec3 fw_vector = rotation->quat * glm::vec3(0.0F, 0.0F, -1.0F);
+        controller->phi = glm::degrees(glm::asin(fw_vector.y));
+        controller->theta = glm::degrees(glm::atan(fw_vector.x, fw_vector.z));
     }
 }
 
-static void moveFreeController(glm::vec3& direction, Write<Position> position, Read<FreeController> controller,
-                               Read<DeltaTime> deltaTime)
+static void moveFreeController(Read<Input> input, glm::vec3& direction, Write<Position> position,
+                               Read<FreeCameraController> controller, Read<DeltaTime> deltaTime)
 {
-    position->vec.y += controller->verticalAxis * deltaTime->value * controller->speed;
+    position->vec.y += input->axis("free-vertical") * deltaTime->value * controller->speed;
 
-    position->vec.x += direction.x * controller->horizontalXAxis * deltaTime->value * controller->speed;
-    position->vec.z += direction.z * controller->horizontalXAxis * deltaTime->value * controller->speed;
-    position->vec.y += direction.y * controller->horizontalXAxis * deltaTime->value * controller->speed;
+    position->vec.x += direction.x * input->axis("free-horizontal-x") * deltaTime->value * controller->speed;
+    position->vec.z += direction.z * input->axis("free-horizontal-x") * deltaTime->value * controller->speed;
+    position->vec.y += direction.y * input->axis("free-horizontal-x") * deltaTime->value * controller->speed;
 
-    position->vec.z += direction.x * controller->horizontalZAxis * deltaTime->value * controller->speed;
-    position->vec.x -= direction.z * controller->horizontalZAxis * deltaTime->value * controller->speed;
+    position->vec.z += direction.x * input->axis("free-horizontal-z") * deltaTime->value * controller->speed;
+    position->vec.x -= direction.z * input->axis("free-horizontal-z") * deltaTime->value * controller->speed;
 }
 
-static void updateFreeController(Query<Read<FreeController>, Write<Position>, Write<Rotation>> entities,
+static void updateFreeController(Read<Input> input,
+                                 Query<Read<FreeCameraController>, Write<Position>, Write<Rotation>> entities,
                                  Read<DeltaTime> deltaTime)
 {
     glm::vec3 direction;
@@ -57,15 +54,16 @@ static void updateFreeController(Query<Read<FreeController>, Write<Position>, Wr
         direction.y = glm::sin(glm::radians(controller->phi));
         direction.z = glm::cos(glm::radians(controller->phi)) * glm::cos(glm::radians(controller->theta));
 
+        printf("%f %f %f\n", direction.x, direction.y, direction.z);
         direction = glm::normalize(direction);
 
-        moveFreeController(direction, position, controller, deltaTime);
+        moveFreeController(input, direction, position, controller, deltaTime);
 
         rotation->quat = glm::quatLookAt(direction, glm::vec3{0.0F, 1.0F, 0.0F});
     }
 }
 
-static void processMouseMotion(EventReader<WindowEvent> windowEvent, Query<Write<FreeController>> entities,
+static void processMouseMotion(EventReader<WindowEvent> windowEvent, Query<Write<FreeCameraController>> entities,
                                Read<DeltaTime> deltaTime)
 {
     glm::ivec2 delta;
@@ -86,7 +84,7 @@ static void processMouseMotion(EventReader<WindowEvent> windowEvent, Query<Write
     }
 }
 
-static void lockMouseSystem(Write<Window> window, Query<Write<FreeController>> entities)
+static void lockMouseSystem(Write<Window> window, Query<Write<FreeCameraController>> entities)
 {
     (*window)->mouseState(MouseState::Locked);
     for (auto [entity, controller] : entities)
@@ -95,29 +93,17 @@ static void lockMouseSystem(Write<Window> window, Query<Write<FreeController>> e
     }
 }
 
-static void getAxes(Read<Input> input, Query<Write<FreeController>> entities)
-{
-    for (auto [entity, controller] : entities)
-    {
-        controller->verticalAxis = input->axis("free-vertical");
-        controller->horizontalXAxis = input->axis("free-horizontal-x");
-        controller->horizontalZAxis = input->axis("free-horizontal-z");
-    }
-}
-
 void cubos::engine::freeCameraControllerPlugin(Cubos& cubos)
 {
     cubos.addPlugin(inputPlugin);
     cubos.addPlugin(windowPlugin);
 
-    cubos.addComponent<SimpleController>();
-    cubos.addComponent<FreeController>();
+    cubos.addComponent<FreeCameraController>();
 
     cubos.startupSystem(lockMouseSystem).after("cubos.window.init");
     cubos.startupSystem(init).tagged("cubos.input");
+    cubos.startupSystem(getInitRotation);
 
-    cubos.system(getAxes);
-    cubos.system(updateSimpleController);
     cubos.system(processMouseMotion);
     cubos.system(updateFreeController);
 }
