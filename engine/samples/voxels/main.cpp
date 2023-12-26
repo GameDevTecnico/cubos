@@ -5,7 +5,6 @@
 #include <cubos/engine/utils/free_camera_controller/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
-
 using namespace cubos::engine;
 
 /// [Get handles to assets]
