@@ -24,9 +24,9 @@ static void getInitRotation(Query<Write<FreeCameraController>, Read<Rotation>> e
 {
     for (auto [entity, controller, rotation] : entities)
     {
-        glm::vec3 fw_vector = rotation->quat * glm::vec3(0.0F, 0.0F, -1.0F);
-        controller->phi = glm::degrees(glm::asin(fw_vector.y));
-        controller->theta = glm::degrees(glm::atan(fw_vector.x, fw_vector.z));
+        glm::vec3 fwVector = rotation->quat * glm::vec3(0.0F, 0.0F, -1.0F);
+        controller->phi = glm::degrees(glm::asin(fwVector.y));
+        controller->theta = glm::degrees(glm::atan(fwVector.x, fwVector.z));
     }
 }
 
