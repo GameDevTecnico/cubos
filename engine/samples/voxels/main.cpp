@@ -2,7 +2,9 @@
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/utils/free_camera_controller/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
+
 
 using namespace cubos::engine;
 
@@ -33,6 +35,7 @@ static void spawnCameraSystem(Commands cmds, Write<ActiveCameras> activeCameras)
             .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
             .add(Position{{50.0F, 50.0F, 50.0F}})
             .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{-1.0F, -1.0F, -1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})
+            .add(FreeCameraController{})
             .entity();
 }
 
@@ -64,6 +67,7 @@ int main(int argc, char** argv)
     /// [Adding the plugin]
     cubos.addPlugin(voxelsPlugin);
     /// [Adding the plugin]
+    cubos.addPlugin(freeCameraControllerPlugin);
 
     cubos.startupSystem(settingsSystem).tagged("cubos.settings");
     cubos.startupSystem(spawnCameraSystem);

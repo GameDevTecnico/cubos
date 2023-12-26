@@ -14,8 +14,7 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/transform/position.hpp>
 #include <cubos/engine/transform/rotation.hpp>
-#include <cubos/engine/utils/free_camera_controller/free_controller.hpp>
-#include <cubos/engine/utils/free_camera_controller/simple_controller.hpp>
+#include <cubos/engine/utils/free_camera_controller/controller.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 namespace cubos::engine
