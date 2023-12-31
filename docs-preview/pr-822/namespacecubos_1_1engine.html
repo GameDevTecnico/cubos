@@ -287,6 +287,10 @@
             </dt>
             <dd><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> equivalent to ECS blueprints - a bundle of entities and their components.</dd>
             <dt>
+              class <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a>
+            </dt>
+            <dd>Resource which provides a texture to store entity/gizmo ids, for selection with a mouse.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a>
             </dt>
             <dd>Stores settings as key-value pairs and provides methods to retrieve them.</dd>
@@ -306,6 +310,10 @@
               struct <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a>
             </dt>
             <dd>Component which assigns a uniform scale to an entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FreeCameraController.html" class="m-doc">FreeCameraController</a>
+            </dt>
+            <dd>Component which moves the camera.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>
             </dt>
@@ -436,6 +444,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__screenpicker-plugin.html#ga3c3bfdf1aed02142faa45f9bca87c3f3" class="m-doc">screenPickerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__settings-plugin.html#gaa142415680fcc11723573d9d91315ff8" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -445,6 +457,10 @@
             <dd>Plugin entry function.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__transform-plugin.html#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -548,6 +564,27 @@
               </tbody>
             </table>
 <aside class="m-note m-default"><h4>See also</h4><p>Systems can read sent events using <a href="namespacecubos_1_1engine.html#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a>.</p></aside>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a1f34045821152dc97988b63c424faaa3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc-self">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2utils_2free__camera__controller_2plugin_8hpp.html">&lt;engine/utils/free_camera_controller/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class</td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
         </section>
       </div>
