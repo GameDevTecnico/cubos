@@ -2,9 +2,9 @@
 
 using namespace cubos::engine;
 
-void RendererFrame::draw(RendererGrid grid, glm::mat4 modelMat)
+void RendererFrame::draw(RendererGrid grid, glm::mat4 modelMat, uint32_t entityIndex)
 {
-    mDrawCmds.push_back(DrawCmd{std::move(grid), modelMat});
+    mDrawCmds.push_back(DrawCmd{std::move(grid), modelMat, entityIndex});
 }
 
 void RendererFrame::ambient(const glm::vec3& color)

@@ -131,6 +131,45 @@ void main()
 }
 )glsl";
 
+/// The vertex shader of the screen picking pass pipeline.
+static const char* pickingPassVs = R"glsl(
+#version 330 core
+
+in uvec3 position;
+in vec3 normal;
+in uint material;
+
+uniform MVP
+{
+    mat4 M;
+    mat4 V;
+    mat4 P;
+};
+
+void main()
+{
+    vec4 worldPosition = M * vec4(position, 1.0);
+    vec4 viewPosition = V * worldPosition;
+
+    gl_Position = P * viewPosition;
+}
+)glsl";
+
+// The pixel shader of the screen picking pass pipeline.
+static const char* pickingPassPs = R"glsl(
+#version 330 core
+
+uniform uint entityIndex;
+
+out uvec2 idOutput;
+
+void main()
+{
+    idOutput.r = (entityIndex >> 16U);
+    idOutput.g = (entityIndex & 65535U);
+}
+)glsl";
+
 /// The vertex shader of the lighting pass pipeline.
 static const char* lightingPassVs = R"glsl(
 #version 330 core
@@ -424,6 +463,12 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
     // Create the MVP constant buffer.
     mVpBuffer = renderDevice.createConstantBuffer(sizeof(MVP), nullptr, Usage::Dynamic);
 
+    // Create the screen picking pipeline.
+    auto pickingVS = mRenderDevice.createShaderStage(Stage::Vertex, pickingPassVs);
+    auto pickingPS = mRenderDevice.createShaderStage(Stage::Pixel, pickingPassPs);
+    mPickingPipeline = mRenderDevice.createShaderPipeline(pickingVS, pickingPS);
+    mPickingIndexBp = mPickingPipeline->getBindingPoint("entityIndex");
+
     // Create the lighting pipeline.
     auto lightingVS = mRenderDevice.createShaderStage(Stage::Vertex, lightingPassVs);
     auto lightingPS = mRenderDevice.createShaderStage(Stage::Pixel, lightingPassPs);
@@ -609,7 +654,7 @@ void DeferredRenderer::onResize(glm::uvec2 size)
 }
 
 void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport, const Camera& camera,
-                                const RendererFrame& frame, Framebuffer target)
+                                const RendererFrame& frame, Framebuffer target, core::gl::Framebuffer pickingBuffer)
 {
     // Steps:
     // 1. Prepare the MVP matrix.
@@ -621,6 +666,7 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
     //   3. For each draw command:
     //     1. Update the MVP constant buffer with the model matrix.
     //     2. Draw the geometry.
+    //     3. Draw the entity identifiers to the entity picking framebuffer.
     // 5. Lighting pass:
     //   1. Set the lighting pass state.
     //   2. Draw the screen quad.
@@ -726,6 +772,18 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
 
         // 4.3.2. Draw the geometry.
         auto grid = std::static_pointer_cast<DeferredGrid>(drawCmd.grid);
+        mRenderDevice.setVertexArray(grid->va);
+        mRenderDevice.setIndexBuffer(grid->ib);
+        mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
+
+        // 4.3.3. Draw the entity identifiers to the entity picking framebuffer.
+        mRenderDevice.setFramebuffer(pickingBuffer);
+        mRenderDevice.setRasterState(mGeometryRasterState);
+        mRenderDevice.setBlendState(mGeometryBlendState);
+        mRenderDevice.setDepthStencilState(mGeometryDepthStencilState);
+        mRenderDevice.setShaderPipeline(mPickingPipeline);
+        mPickingIndexBp->setConstant(drawCmd.entityIndex);
+        mPickingPipeline->getBindingPoint("MVP")->bind(mVpBuffer);
         mRenderDevice.setVertexArray(grid->va);
         mRenderDevice.setIndexBuffer(grid->ib);
         mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
