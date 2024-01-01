@@ -37,6 +37,7 @@ Framebuffer ScreenPicker::framebuffer()
 
 uint32_t ScreenPicker::at(int x, int y) const
 {
+    y = mTextureSize.y - y - 1;
     auto* texBuffer = new uint16_t[(std::size_t)mTextureSize.x * (std::size_t)mTextureSize.y * 2U];
 
     mIdTexture->read(texBuffer);

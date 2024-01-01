@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
+#include <cubos/engine/screenpicker/screenpicker.hpp>
 
 namespace cubos::engine
 {

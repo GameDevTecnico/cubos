@@ -11,6 +11,7 @@
 #include <cubos/engine/renderer/pps/bloom.hpp>
 #include <cubos/engine/renderer/spot_light.hpp>
 #include <cubos/engine/renderer/viewport.hpp>
+#include <cubos/engine/screenpicker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -52,9 +53,9 @@ static void resize(Renderer& renderer, EventReader<WindowEvent> evs)
 }
 
 static void frameGrids(const Assets& assets, Renderer& renderer, RendererFrame& frame,
-                       Query<RenderableGrid&, const LocalToWorld&> query)
+                       Query<const Entity&, RenderableGrid&, const LocalToWorld&> query)
 {
-    for (auto [grid, localToWorld] : query)
+    for (auto [entity, grid, localToWorld] : query)
     {
         if (grid.handle == nullptr || assets.update(grid.asset))
         {
@@ -64,7 +65,7 @@ static void frameGrids(const Assets& assets, Renderer& renderer, RendererFrame& 
             grid.handle = renderer->upload(gridRead.get());
         }
 
-        frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset));
+        frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset), entity.index);
     }
 }
 
@@ -114,7 +115,7 @@ static void checkPaletteUpdateSystem(Assets& assets, Renderer& renderer, ActiveV
 }
 
 static void draw(Renderer& renderer, const ActiveCameras& activeCameras, RendererFrame& frame,
-                 Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query)
+                 Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query, ScreenPicker& screenPicker)
 {
     Camera cameras[4]{};
     glm::mat4 views[4]{};
@@ -157,7 +158,7 @@ static void draw(Renderer& renderer, const ActiveCameras& activeCameras, Rendere
 
     for (int i = 0; i < cameraCount; ++i)
     {
-        renderer->render(views[i], viewports[i], cameras[i], frame);
+        renderer->render(views[i], viewports[i], cameras[i], frame, screenPicker.framebuffer());
     }
 
     frame.clear();
@@ -168,6 +169,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.addPlugin(transformPlugin);
     cubos.addPlugin(windowPlugin);
     cubos.addPlugin(assetsPlugin);
+    cubos.addPlugin(screenPickerPlugin);
 
     cubos.addResource<RendererFrame>();
     cubos.addResource<Renderer>();
@@ -193,6 +195,6 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.system(framePointLights).tagged("cubos.renderer.frame");
     cubos.system(frameEnvironment).tagged("cubos.renderer.frame");
     cubos.system(checkPaletteUpdateSystem).tagged("cubos.renderer.frame");
-    cubos.system(draw).tagged("cubos.renderer.draw");
+    cubos.system(draw).tagged("cubos.renderer.draw").after("cubos.screenpicker.clear");
     cubos.system(resize).after("cubos.window.poll").before("cubos.renderer.draw");
 }
