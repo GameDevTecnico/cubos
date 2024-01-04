@@ -207,6 +207,7 @@ static void drawGizmosSystem(Write<Gizmos> gizmos, Write<GizmosRenderer> gizmosR
 static void processInput(Write<GizmosRenderer> gizmosRenderer, Write<Gizmos> gizmos,
                          EventReader<WindowEvent> windowEvent)
 {
+    bool locking = false;
     for (const auto& event : windowEvent)
     {
         if (std::holds_alternative<MouseMoveEvent>(event))
@@ -218,6 +219,14 @@ static void processInput(Write<GizmosRenderer> gizmosRenderer, Write<Gizmos> giz
             if (std::get<MouseButtonEvent>(event).button == cubos::core::io::MouseButton::Left)
             {
                 gizmosRenderer->mousePressed = std::get<MouseButtonEvent>(event).pressed;
+                if (!std::get<MouseButtonEvent>(event).pressed)
+                {
+                    gizmos->releaseLocked();
+                }
+                else
+                {
+                    locking = true;
+                }
             }
         }
         else if (std::holds_alternative<ResizeEvent>(event))
@@ -234,12 +243,28 @@ static void processInput(Write<GizmosRenderer> gizmosRenderer, Write<Gizmos> giz
     int mouseX = gizmosRenderer->lastMousePosition.x;
     int mouseY = gizmosRenderer->textureSize.y - gizmosRenderer->lastMousePosition.y - 1;
 
+    if (mouseX >= gizmosRenderer->textureSize.x || mouseX < 0)
+    {
+        delete[] texBuffer;
+        return;
+    }
+    if (mouseY >= gizmosRenderer->textureSize.y || mouseY < 0)
+    {
+        delete[] texBuffer;
+        return;
+    }
+
     uint16_t r = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2U];
     uint16_t g = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2U + 1U];
 
     uint32_t id = (static_cast<uint32_t>(r) << 16U) | g;
 
     gizmos->handleInput(id, gizmosRenderer->mousePressed);
+
+    if (locking)
+    {
+        gizmos->setLocked(id);
+    }
 
     delete[] texBuffer;
 }

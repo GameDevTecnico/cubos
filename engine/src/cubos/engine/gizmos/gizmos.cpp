@@ -29,6 +29,22 @@ void Gizmos::handleInput(uint32_t hovered, bool pressed)
     mPressed = pressed;
 }
 
+void Gizmos::setLocked(uint32_t locked)
+{
+    mLocked = true;
+    mIdInteractionLocked = locked;
+}
+
+void Gizmos::releaseLocked()
+{
+    mLocked = false;
+}
+
+bool Gizmos::locked(const std::string& id) const
+{
+    return mLocked && mHasher(id) == mIdInteractionLocked;
+}
+
 bool Gizmos::pressed(const std::string& id) const
 {
     return mPressed && mHasher(id) == mIdInteraction && mIdInteraction != 0;
