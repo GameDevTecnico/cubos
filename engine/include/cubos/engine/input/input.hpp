@@ -85,6 +85,26 @@ namespace cubos::engine
         /// @param event Mouse button event.
         void handle(const core::io::Window& window, const core::io::MouseButtonEvent& event);
 
+        /// @brief Handle a mouse movement event.
+        /// @param window Window that received the event.
+        /// @param event Mouse movement event.
+        void handle(const core::io::Window& window, const core::io::MouseMoveEvent& event);
+
+        /// @brief Resets the previous mouse position to equal the current.
+        void updateMouse();
+
+        /// @brief Gets the mouse position in screen space.
+        /// @return Mouse position.
+        glm::ivec2 mousePosition() const;
+
+        /// @brief Gets the mouse position in the previous frame in screen space.
+        /// @return Mouse position in the previous frame.
+        glm::ivec2 previousMousePosition() const;
+
+        /// @brief Gets displacement of the mouse during the last frame, in screen space.
+        /// @return Mouse displacement.
+        glm::ivec2 mouseDelta() const;
+
         /// @brief Handle all other events - discards them.
         ///
         /// This is method exists so that `std::visit` can be used with @ref core::io::WindowEvent
@@ -130,5 +150,8 @@ namespace cubos::engine
         std::unordered_map<GamepadButton, std::vector<BindingIndex>> mBoundGamepadActions;
         std::unordered_map<GamepadAxis, std::vector<BindingIndex>> mBoundGamepadAxes;
         std::unordered_map<MouseButton, std::vector<BindingIndex>> mBoundMouseActions;
+
+        glm::ivec2 mMousePosition = {0, 0};
+        glm::ivec2 mPreviousMousePosition = {0, 0};
     };
 } // namespace cubos::engine
