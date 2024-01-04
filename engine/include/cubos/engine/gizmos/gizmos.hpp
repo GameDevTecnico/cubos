@@ -72,8 +72,8 @@ namespace cubos::engine
         /// @param id Identifier of the gizmo.
         /// @param origin Point from which the arrow starts.
         /// @param direction Direction of the arrow.
-        /// @param girth Width of the cylinder part of the arrow.
-        /// @param width Width of the base of the cone at the tip of the arrow.
+        /// @param girth Radius of the cylinder part of the arrow.
+        /// @param width Radius of the base of the cone at the tip of the arrow.
         /// @param ratio Point of the arrow at which the cylinder ends and the cone begins.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
@@ -96,6 +96,11 @@ namespace cubos::engine
         /// @return Whether the gizmo was pressed.
         bool pressed(const std::string& id) const;
 
+        /// @brief Checks whether the left mouse button was pressed over a gizmo.
+        /// @param id Identifier of the gizmo.
+        /// @return Whether the gizmo was pressed.
+        bool locked(const std::string& id) const;
+
         /// @brief Checks whether the mouse cursor is over a gizmo.
         /// @param id Identifier of the gizmo.
         /// @return Whether the mouse button is over a gizmo.
@@ -105,6 +110,16 @@ namespace cubos::engine
         /// @param id Gizmo being interacted with.
         /// @param pressed Whether the mouse left button is pressed.
         void handleInput(uint32_t hovered, bool pressed);
+
+        /// @brief Registers gizmo interaction. Called automatically by an internal system.
+        /// @param id Gizmo being interacted with.
+        /// @param pressed Whether the mouse left button is pressed.
+        void setLocked(uint32_t locked);
+
+        /// @brief Registers gizmo interaction. Called automatically by an internal system.
+        /// @param id Gizmo being interacted with.
+        /// @param pressed Whether the mouse left button is pressed.
+        void releaseLocked();
 
         /// @brief Class that describes a type of gizmo
         class Gizmo
@@ -153,6 +168,9 @@ namespace cubos::engine
 
         uint32_t mIdInteraction; ///< Interaction target gizmo.
         bool mPressed;           ///< Whether the mouse has been pressed.
+
+        uint32_t mIdInteractionLocked; ///< Interaction target gizmo.
+        bool mLocked;                  ///< Whether the mouse has been pressed.
     };
 
 } // namespace cubos::engine
