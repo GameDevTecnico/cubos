@@ -2,6 +2,7 @@
 #include <glm/gtx/intersect.hpp>
 
 #include <cubos/engine/gizmos/plugin.hpp>
+#include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -16,21 +17,18 @@ using cubos::core::ecs::Query;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::World;
 using cubos::core::ecs::Write;
-using cubos::core::io::MouseMoveEvent;
 using cubos::core::io::Window;
-using cubos::core::io::WindowEvent;
 
 using cubos::engine::ActiveCameras;
 using cubos::engine::Camera;
 using cubos::engine::Cubos;
 using cubos::engine::Gizmos;
+using cubos::engine::Input;
 using cubos::engine::Position;
 using cubos::engine::Rotation;
 using cubos::engine::Scale;
 
 using namespace tesseratos;
-
-glm::ivec2 lastMousePos;
 
 glm::vec3 intersectLinePlane(glm::vec3 linePoint, glm::vec3 lineVector, glm::vec3 planePoint, glm::vec3 planeNormal)
 {
@@ -62,16 +60,17 @@ glm::vec3 mouseWorldCoordinates(glm::ivec2 windowSize, glm::ivec2 mousePos, glm:
 }
 
 void checkMovement(Position& position, glm::vec3 transformVector, glm::vec3 transformNormal, glm::ivec2 windowSize,
-                   glm::ivec2 mousePos, const glm::mat4& pv, glm::vec3 cameraPosition)
+                   const Input& input, const glm::mat4& pv, glm::vec3 cameraPosition)
 {
-    auto mousePosWorld = mouseWorldCoordinates(windowSize, mousePos, position.vec, transformNormal, cameraPosition, pv);
-    auto oldMousePosWorld =
-        mouseWorldCoordinates(windowSize, lastMousePos, position.vec, transformNormal, cameraPosition, pv);
+    auto mousePosWorld =
+        mouseWorldCoordinates(windowSize, input.mousePosition(), position.vec, transformNormal, cameraPosition, pv);
+    auto oldMousePosWorld = mouseWorldCoordinates(windowSize, input.previousMousePosition(), position.vec,
+                                                  transformNormal, cameraPosition, pv);
     position.vec += (mousePosWorld - oldMousePosWorld) * transformVector;
 }
 
-void drawTransformGizmo(World& world, Entity cameraEntity, Gizmos& gizmos, EventReader<WindowEvent>& windowEvent,
-                        Position& position, const Camera& camera, const Window& window)
+void drawTransformGizmo(World& world, Gizmos& gizmos, const Input& input, const Camera& camera, const Window& window,
+                        Entity cameraEntity, Position& position)
 {
     auto cameraPosition = glm::vec3(0.0F);
     if (world.components(cameraEntity).has<Position>())
@@ -103,46 +102,37 @@ void drawTransformGizmo(World& world, Entity cameraEntity, Gizmos& gizmos, Event
     glm::vec3 xzColor = {1, 0, 1};
     glm::vec3 yzColor = {0, 1, 1};
 
-    glm::ivec2 newMousePos = lastMousePos;
-    for (const auto& event : windowEvent)
-    {
-        if (std::holds_alternative<MouseMoveEvent>(event))
-        {
-            newMousePos = std::get<MouseMoveEvent>(event).position;
-        }
-    }
-
     // Axis movement
     if (gizmos.locked("transform_gizmo.x"))
     {
-        checkMovement(position, {1, 0, 0}, {0, 1, 0}, window->size(), newMousePos, pv, cameraPosition);
+        checkMovement(position, {1, 0, 0}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
         xColor = {1, 1, 0};
     }
     if (gizmos.locked("transform_gizmo.y"))
     {
-        checkMovement(position, {0, 1, 0}, {1, 0, 0}, window->size(), newMousePos, pv, cameraPosition);
+        checkMovement(position, {0, 1, 0}, {1, 0, 0}, window->size(), input, pv, cameraPosition);
         yColor = {1, 1, 0};
     }
     if (gizmos.locked("transform_gizmo.z"))
     {
-        checkMovement(position, {0, 0, 1}, {0, 1, 0}, window->size(), newMousePos, pv, cameraPosition);
+        checkMovement(position, {0, 0, 1}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
         zColor = {1, 1, 0};
     }
 
     // Planar movement
     if (gizmos.locked("transform_gizmo.xy"))
     {
-        checkMovement(position, {1, 1, 0}, {0, 0, 1}, window->size(), newMousePos, pv, cameraPosition);
+        checkMovement(position, {1, 1, 0}, {0, 0, 1}, window->size(), input, pv, cameraPosition);
         xyColor = {1, 1, 1};
     }
     if (gizmos.locked("transform_gizmo.xz"))
     {
-        checkMovement(position, {1, 0, 1}, {0, 1, 0}, window->size(), newMousePos, pv, cameraPosition);
+        checkMovement(position, {1, 0, 1}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
         xzColor = {1, 1, 1};
     }
     if (gizmos.locked("transform_gizmo.yz"))
     {
-        checkMovement(position, {0, 1, 1}, {1, 0, 0}, window->size(), newMousePos, pv, cameraPosition);
+        checkMovement(position, {0, 1, 1}, {1, 0, 0}, window->size(), input, pv, cameraPosition);
         yzColor = {1, 1, 1};
     }
 
@@ -165,17 +155,16 @@ void drawTransformGizmo(World& world, Entity cameraEntity, Gizmos& gizmos, Event
     gizmos.drawArrow("transform_gizmo.y", position.vec + glm::vec3{0, 0.03F, 0}, {0, 1, 0}, 0.03F, 0.07F, 0.7F);
     gizmos.color(zColor);
     gizmos.drawArrow("transform_gizmo.z", position.vec + glm::vec3{0, 0, 0.03F}, {0, 0, 1}, 0.03F, 0.07F, 0.7F);
-
-    lastMousePos = newMousePos;
 }
 
-static void gizmoSystem(Write<World> world, EventReader<WindowEvent> windowEvent)
+static void gizmoSystem(Write<World> world)
 {
     const EntitySelector& entitySelector = world->read<EntitySelector>().get();
     const ActiveCameras& activeCameras = world->read<ActiveCameras>().get();
     const Window& window = world->read<Window>().get();
 
     Gizmos& gizmos = world->write<Gizmos>().get();
+    const Input& input = world->read<Input>().get();
 
     if (entitySelector.selection.isNull())
     {
@@ -194,7 +183,7 @@ static void gizmoSystem(Write<World> world, EventReader<WindowEvent> windowEvent
 
     auto& position = world->components(entitySelector.selection).get<Position>();
 
-    drawTransformGizmo(*world, activeCameras.entities[0], gizmos, windowEvent, position, camera, window);
+    drawTransformGizmo(*world, gizmos, input, camera, window, activeCameras.entities[0], position);
 }
 
 void tesseratos::transformGizmoPlugin(Cubos& cubos)
@@ -202,6 +191,7 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
     cubos.addPlugin(entitySelectorPlugin);
     cubos.addPlugin(cubos::engine::transformPlugin);
     cubos.addPlugin(cubos::engine::gizmosPlugin);
+    cubos.addPlugin(cubos::engine::inputPlugin);
 
     cubos.system(gizmoSystem).tagged("cubos.imgui");
 }

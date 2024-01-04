@@ -11,6 +11,7 @@ using cubos::core::io::GamepadState;
 using cubos::core::io::KeyEvent;
 using cubos::core::io::MouseButton;
 using cubos::core::io::MouseButtonEvent;
+using cubos::core::io::MouseMoveEvent;
 using cubos::core::io::Window;
 using namespace cubos::engine;
 
@@ -304,6 +305,31 @@ void Input::handle(const Window& window, const MouseButtonEvent& event)
 {
     mPressedMouseButtons[event.button] = event.pressed;
     this->handleActions(window, mBoundMouseActions[event.button]);
+}
+
+void Input::handle(const Window& /*unused*/, const MouseMoveEvent& event)
+{
+    mMousePosition = event.position;
+}
+
+void Input::updateMouse()
+{
+    mPreviousMousePosition = mMousePosition;
+}
+
+glm::ivec2 Input::mousePosition() const
+{
+    return mMousePosition;
+}
+
+glm::ivec2 Input::previousMousePosition() const
+{
+    return mPreviousMousePosition;
+}
+
+glm::ivec2 Input::mouseDelta() const
+{
+    return mMousePosition - mPreviousMousePosition;
 }
 
 void Input::pollGamepads(const Window& window)

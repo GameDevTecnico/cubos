@@ -17,6 +17,8 @@ static void bridge(Write<Assets> assets)
 
 static void update(Read<Window> window, Write<Input> input, EventReader<WindowEvent> events)
 {
+    input->updateMouse();
+
     for (auto event : events)
     {
         std::visit([window, &input](auto e) { input->handle(*window, e); }, event);
