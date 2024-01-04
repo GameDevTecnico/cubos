@@ -15,6 +15,9 @@ void GizmosRenderer::initIdTexture(glm::ivec2 size)
 
     idTexture = renderDevice->createTexture2D(texDesc);
 
+    texDesc.format = TextureFormat::Depth16;
+    mDepthTexture = renderDevice->createTexture2D(texDesc);
+
     FramebufferDesc frameDesc;
     frameDesc.targetCount = 1;
 
@@ -22,6 +25,7 @@ void GizmosRenderer::initIdTexture(glm::ivec2 size)
     target.setTexture2DTarget(idTexture);
 
     frameDesc.targets[0] = target;
+    frameDesc.depthStencil.setTexture2DTarget(mDepthTexture);
 
     idFramebuffer = renderDevice->createFramebuffer(frameDesc);
 

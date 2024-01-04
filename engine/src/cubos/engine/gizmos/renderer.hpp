@@ -45,6 +45,8 @@ namespace cubos::engine
         bool mousePressed;            ///< Whether or not the mouse left button is pressed.
 
     private:
+        cubos::core::gl::Texture2D mDepthTexture;
+
         void initIdTexture(glm::ivec2 size);
 
         void initIdPipeline();
