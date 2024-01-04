@@ -34,11 +34,12 @@ glm::ivec2 lastMousePos;
 
 glm::vec3 intersectLinePlane(glm::vec3 linePoint, glm::vec3 lineVector, glm::vec3 planePoint, glm::vec3 planeNormal)
 {
-    if (float distance; glm::intersectRayPlane(linePoint, lineVector, planePoint, planeNormal, distance))
+    float distance;
+    if (glm::intersectRayPlane(linePoint, lineVector, planePoint, planeNormal, distance))
     {
         return linePoint + lineVector * distance;
     }
-    else if (glm::intersectRayPlane(linePoint, -lineVector, planePoint, planeNormal, distance))
+    if (glm::intersectRayPlane(linePoint, -lineVector, planePoint, planeNormal, distance))
     {
         return linePoint - lineVector * distance;
     }
@@ -47,10 +48,10 @@ glm::vec3 intersectLinePlane(glm::vec3 linePoint, glm::vec3 lineVector, glm::vec
 
 glm::vec3 mouseWorldDirection(glm::ivec2 windowSize, glm::ivec2 mousePos, const glm::mat4& pv)
 {
-    float mouseX = (float)mousePos.x / ((float)windowSize.x * 0.5f) - 1.0f;
-    float mouseY = (float)mousePos.y / ((float)windowSize.y * 0.5f) - 1.0f;
+    float mouseX = (float)mousePos.x / ((float)windowSize.x * 0.5F) - 1.0F;
+    float mouseY = (float)mousePos.y / ((float)windowSize.y * 0.5F) - 1.0F;
 
-    return glm::normalize(glm::vec3(glm::inverse(pv) * glm::vec4(mouseX, -mouseY, 1.0f, 1.0f)));
+    return glm::normalize(glm::vec3(glm::inverse(pv) * glm::vec4(mouseX, -mouseY, 1.0F, 1.0F)));
 }
 
 glm::vec3 mouseWorldCoordinates(glm::ivec2 windowSize, glm::ivec2 mousePos, glm::vec3 transformPosition,
@@ -159,11 +160,11 @@ void drawTransformGizmo(World& world, Entity cameraEntity, Gizmos& gizmos, Event
     gizmos.drawBox("", position.vec + glm::vec3{0.03F, 0.03F, 0.03F}, position.vec - glm::vec3{0.03F, 0.03F, 0.03F});
 
     gizmos.color(xColor);
-    gizmos.drawArrow("transform_gizmo.x", position.vec + glm::vec3{0.03f, 0, 0}, {1, 0, 0}, 0.03F, 0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.x", position.vec + glm::vec3{0.03F, 0, 0}, {1, 0, 0}, 0.03F, 0.07F, 0.7F);
     gizmos.color(yColor);
-    gizmos.drawArrow("transform_gizmo.y", position.vec + glm::vec3{0, 0.03f, 0}, {0, 1, 0}, 0.03F, 0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.y", position.vec + glm::vec3{0, 0.03F, 0}, {0, 1, 0}, 0.03F, 0.07F, 0.7F);
     gizmos.color(zColor);
-    gizmos.drawArrow("transform_gizmo.z", position.vec + glm::vec3{0, 0, 0.03f}, {0, 0, 1}, 0.03F, 0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.z", position.vec + glm::vec3{0, 0, 0.03F}, {0, 0, 1}, 0.03F, 0.07F, 0.7F);
 
     lastMousePos = newMousePos;
 }
@@ -191,7 +192,7 @@ static void gizmoSystem(Write<World> world, EventReader<WindowEvent> windowEvent
 
     const Camera& camera = world->components(activeCameras.entities[0]).get<Camera>();
 
-    Position& position = world->components(entitySelector.selection).get<Position>();
+    auto& position = world->components(entitySelector.selection).get<Position>();
 
     drawTransformGizmo(*world, activeCameras.entities[0], gizmos, windowEvent, position, camera, window);
 }

@@ -190,13 +190,26 @@ static void drawGizmosSystem(Write<Gizmos> gizmos, Write<GizmosRenderer> gizmosR
                              Query<Read<LocalToWorld>, Read<Camera>> query)
 {
     auto screenSize = (*window)->framebufferSize();
+    gizmosRenderer->renderDevice->setShaderPipeline(gizmosRenderer->drawPipeline);
+    gizmosRenderer->renderDevice->clearColor(0, 0, 0, 0);
+
+    cubos::core::gl::DepthStencilStateDesc dss;
+    dss.depth.enabled = true;
+    dss.depth.writeEnabled = true;
+    gizmosRenderer->renderDevice->setDepthStencilState(gizmosRenderer->renderDevice->createDepthStencilState(dss));
+
+    gizmosRenderer->renderDevice->clearDepth(1.0F);
 
     gizmosRenderer->renderDevice->setFramebuffer(gizmosRenderer->idFramebuffer);
     gizmosRenderer->renderDevice->clearColor(0, 0, 0, 0);
+    gizmosRenderer->renderDevice->clearDepth(1.0F);
 
     auto worldInfo = getWorldInfo(query, *activeCameras, screenSize);
     iterateGizmos(gizmos->worldGizmos, worldInfo, *gizmosRenderer, *deltaTime);
 
+    dss.depth.enabled = false;
+    dss.depth.writeEnabled = false;
+    gizmosRenderer->renderDevice->setDepthStencilState(gizmosRenderer->renderDevice->createDepthStencilState(dss));
     auto viewInfo = getViewInfo(*activeCameras, screenSize);
     iterateGizmos(gizmos->viewGizmos, viewInfo, *gizmosRenderer, *deltaTime);
 
