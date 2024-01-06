@@ -13,6 +13,7 @@
 
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::EventReader;
+using cubos::core::ecs::OptRead;
 using cubos::core::ecs::Query;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::World;
@@ -69,29 +70,35 @@ void checkMovement(Position& position, glm::vec3 transformVector, glm::vec3 tran
     position.vec += (mousePosWorld - oldMousePosWorld) * transformVector;
 }
 
-void drawTransformGizmo(World& world, Gizmos& gizmos, const Input& input, const Camera& camera, const Window& window,
-                        Entity cameraEntity, Position& position)
+void drawTransformGizmo(Query<Read<Camera>, OptRead<Rotation>, OptRead<Scale>> cameraQuery,
+                        Query<Write<Position>> positionQuery, Gizmos& gizmos, const Input& input, const Window& window,
+                        Entity cameraEntity, Entity selectedEntity)
 {
+    auto [camera, rotation, scale] = *cameraQuery[cameraEntity];
+
+    auto [position] = *positionQuery[selectedEntity];
+
     auto cameraPosition = glm::vec3(0.0F);
-    if (world.components(cameraEntity).has<Position>())
+    if (positionQuery[cameraEntity])
     {
-        cameraPosition = world.components(cameraEntity).get<Position>().vec;
+        auto [cameraPositionComponent] = *positionQuery[cameraEntity];
+        cameraPosition = cameraPositionComponent->vec;
     }
 
     auto pv = glm::mat4(1.0F);
-    if (world.components(cameraEntity).has<Rotation>())
+    if (rotation)
     {
-        pv *= glm::toMat4(world.components(cameraEntity).get<Rotation>().quat);
+        pv *= glm::toMat4(rotation->quat);
     }
 
-    if (world.components(cameraEntity).has<Scale>())
+    if (scale)
     {
-        pv = glm::scale(pv, glm::vec3(world.components(cameraEntity).get<Scale>().factor));
+        pv = glm::scale(pv, glm::vec3(scale->factor));
     }
     pv = glm::inverse(pv);
 
-    pv = glm::perspective(glm::radians(camera.fovY), (float)window->size().x / (float)window->size().y, camera.zNear,
-                          camera.zFar) *
+    pv = glm::perspective(glm::radians(camera->fovY), (float)window->size().x / (float)window->size().y, camera->zNear,
+                          camera->zFar) *
          pv;
 
     glm::vec3 xColor = {1, 0, 0};
@@ -105,85 +112,81 @@ void drawTransformGizmo(World& world, Gizmos& gizmos, const Input& input, const 
     // Axis movement
     if (gizmos.locked("transform_gizmo.x"))
     {
-        checkMovement(position, {1, 0, 0}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
+        checkMovement(*position, {1, 0, 0}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
         xColor = {1, 1, 0};
     }
     if (gizmos.locked("transform_gizmo.y"))
     {
-        checkMovement(position, {0, 1, 0}, {1, 0, 0}, window->size(), input, pv, cameraPosition);
+        checkMovement(*position, {0, 1, 0}, {1, 0, 0}, window->size(), input, pv, cameraPosition);
         yColor = {1, 1, 0};
     }
     if (gizmos.locked("transform_gizmo.z"))
     {
-        checkMovement(position, {0, 0, 1}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
+        checkMovement(*position, {0, 0, 1}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
         zColor = {1, 1, 0};
     }
 
     // Planar movement
     if (gizmos.locked("transform_gizmo.xy"))
     {
-        checkMovement(position, {1, 1, 0}, {0, 0, 1}, window->size(), input, pv, cameraPosition);
+        checkMovement(*position, {1, 1, 0}, {0, 0, 1}, window->size(), input, pv, cameraPosition);
         xyColor = {1, 1, 1};
     }
     if (gizmos.locked("transform_gizmo.xz"))
     {
-        checkMovement(position, {1, 0, 1}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
+        checkMovement(*position, {1, 0, 1}, {0, 1, 0}, window->size(), input, pv, cameraPosition);
         xzColor = {1, 1, 1};
     }
     if (gizmos.locked("transform_gizmo.yz"))
     {
-        checkMovement(position, {0, 1, 1}, {1, 0, 0}, window->size(), input, pv, cameraPosition);
+        checkMovement(*position, {0, 1, 1}, {1, 0, 0}, window->size(), input, pv, cameraPosition);
         yzColor = {1, 1, 1};
     }
 
     gizmos.color(xyColor);
-    gizmos.drawBox("transform_gizmo.xy", position.vec - glm::vec3{0, 0, 0.015F},
-                   position.vec + glm::vec3{0.25F, 0.25F, 0.015F});
+    gizmos.drawBox("transform_gizmo.xy", position->vec - glm::vec3{0, 0, 0.015F},
+                   position->vec + glm::vec3{0.25F, 0.25F, 0.015F});
     gizmos.color(xzColor);
-    gizmos.drawBox("transform_gizmo.xz", position.vec - glm::vec3{0, 0.015F, 0},
-                   position.vec + glm::vec3{0.25F, 0.015F, 0.25F});
+    gizmos.drawBox("transform_gizmo.xz", position->vec - glm::vec3{0, 0.015F, 0},
+                   position->vec + glm::vec3{0.25F, 0.015F, 0.25F});
     gizmos.color(yzColor);
-    gizmos.drawBox("transform_gizmo.yz", position.vec - glm::vec3{0.015F, 0, 0},
-                   position.vec + glm::vec3{0.015F, 0.25F, 0.25F});
+    gizmos.drawBox("transform_gizmo.yz", position->vec - glm::vec3{0.015F, 0, 0},
+                   position->vec + glm::vec3{0.015F, 0.25F, 0.25F});
 
     gizmos.color({0.7F, 0.7F, 0.7F});
-    gizmos.drawBox("", position.vec + glm::vec3{0.03F, 0.03F, 0.03F}, position.vec - glm::vec3{0.03F, 0.03F, 0.03F});
+    gizmos.drawBox("", position->vec + glm::vec3{0.03F, 0.03F, 0.03F}, position->vec - glm::vec3{0.03F, 0.03F, 0.03F});
 
     gizmos.color(xColor);
-    gizmos.drawArrow("transform_gizmo.x", position.vec + glm::vec3{0.03F, 0, 0}, {1, 0, 0}, 0.03F, 0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.x", position->vec + glm::vec3{0.03F, 0, 0}, {1, 0, 0}, 0.03F, 0.07F, 0.7F);
     gizmos.color(yColor);
-    gizmos.drawArrow("transform_gizmo.y", position.vec + glm::vec3{0, 0.03F, 0}, {0, 1, 0}, 0.03F, 0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.y", position->vec + glm::vec3{0, 0.03F, 0}, {0, 1, 0}, 0.03F, 0.07F, 0.7F);
     gizmos.color(zColor);
-    gizmos.drawArrow("transform_gizmo.z", position.vec + glm::vec3{0, 0, 0.03F}, {0, 0, 1}, 0.03F, 0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.z", position->vec + glm::vec3{0, 0, 0.03F}, {0, 0, 1}, 0.03F, 0.07F, 0.7F);
 }
 
-static void gizmoSystem(Write<World> world)
+static void gizmoSystem(Read<EntitySelector> entitySelector, Read<ActiveCameras> activeCameras, Read<Window> window,
+                        Read<Input> input, Write<Gizmos> gizmos, Query<Write<Position>> positionQuery,
+                        Query<Read<Camera>, OptRead<Rotation>, OptRead<Scale>> cameraQuery)
 {
-    const EntitySelector& entitySelector = world->read<EntitySelector>().get();
-    const ActiveCameras& activeCameras = world->read<ActiveCameras>().get();
-    const Window& window = world->read<Window>().get();
-
-    Gizmos& gizmos = world->write<Gizmos>().get();
-    const Input& input = world->read<Input>().get();
-
-    if (entitySelector.selection.isNull())
+    if (entitySelector->selection.isNull())
     {
         return;
     }
-    if (activeCameras.entities[0] == entitySelector.selection)
+    if (activeCameras->entities[0] == entitySelector->selection)
     {
         return;
     }
-    if (!world->components(entitySelector.selection).has<Position>())
+    if (!positionQuery[entitySelector->selection])
+    {
+        return;
+    }
+    if (!cameraQuery[activeCameras->entities[0]])
     {
         return;
     }
 
-    const Camera& camera = world->components(activeCameras.entities[0]).get<Camera>();
-
-    auto& position = world->components(entitySelector.selection).get<Position>();
-
-    drawTransformGizmo(*world, gizmos, input, camera, window, activeCameras.entities[0], position);
+    drawTransformGizmo(cameraQuery, positionQuery, *gizmos, *input, *window, activeCameras->entities[0],
+                       entitySelector->selection);
 }
 
 void tesseratos::transformGizmoPlugin(Cubos& cubos)
