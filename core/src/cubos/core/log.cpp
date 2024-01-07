@@ -30,6 +30,14 @@ namespace
         std::mutex mutex;
         Logger::Level level = Logger::Level::Debug;
         std::vector<Logger::Entry> entries;
+
+        // Counters for each log level
+        std::size_t traceCount = 0;
+        std::size_t debugCount = 0;
+        std::size_t infoCount = 0;
+        std::size_t warnCount = 0;
+        std::size_t errorCount = 0;
+        std::size_t criticalCount = 0;
     };
 } // namespace
 
@@ -144,6 +152,31 @@ void Logger::write(Level level, Location location, std::string message)
 
     std::lock_guard<std::mutex> guard{state().mutex};
 
+    // Increment the corresponding counter
+    switch (level)
+    {
+    case Level::Trace:
+        state().traceCount++;
+        break;
+    case Level::Debug:
+        state().debugCount++;
+        break;
+    case Level::Info:
+        state().infoCount++;
+        break;
+    case Level::Warn:
+        state().warnCount++;
+        break;
+    case Level::Error:
+        state().errorCount++;
+        break;
+    case Level::Critical:
+        state().criticalCount++;
+        break;
+    default:
+        break;
+    }
+
     if (static_cast<int>(state().level) > static_cast<int>(level))
     {
         // If the log level is higher than the message level, then just ignore it.
@@ -175,6 +208,54 @@ bool Logger::read(std::size_t& cursor, Entry& entry)
     entry = state().entries[cursor];
     cursor += 1;
     return true;
+}
+
+void Logger::clear()
+{
+    std::lock_guard<std::mutex> guard{state().mutex};
+    state().entries.clear();
+    state().traceCount = 0;
+    state().debugCount = 0;
+    state().infoCount = 0;
+    state().warnCount = 0;
+    state().errorCount = 0;
+    state().criticalCount = 0;
+}
+
+std::size_t Logger::traceCount()
+{
+    std::lock_guard<std::mutex> guard{state().mutex};
+    return state().traceCount;
+}
+
+std::size_t Logger::debugCount()
+{
+    std::lock_guard<std::mutex> guard{state().mutex};
+    return state().debugCount;
+}
+
+std::size_t Logger::infoCount()
+{
+    std::lock_guard<std::mutex> guard{state().mutex};
+    return state().infoCount;
+}
+
+std::size_t Logger::warnCount()
+{
+    std::lock_guard<std::mutex> guard{state().mutex};
+    return state().warnCount;
+}
+
+std::size_t Logger::errorCount()
+{
+    std::lock_guard<std::mutex> guard{state().mutex};
+    return state().errorCount;
+}
+
+std::size_t Logger::criticalCount()
+{
+    std::lock_guard<std::mutex> guard{state().mutex};
+    return state().criticalCount;
 }
 
 const char* Logger::streamFormat(memory::Stream& stream, const char* format, const reflection::Type& type,

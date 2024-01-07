@@ -1,4 +1,5 @@
 #include <tesseratos/asset_explorer/plugin.hpp>
+#include <tesseratos/console/plugin.hpp>
 #include <tesseratos/debug_camera/plugin.hpp>
 #include <tesseratos/entity_inspector/plugin.hpp>
 #include <tesseratos/metrics_panel/plugin.hpp>
