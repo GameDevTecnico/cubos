@@ -1,5 +1,5 @@
 /// @file
-/// @brief Component @ref cubos::engine::PhysicsMass.
+/// @brief Component @ref cubos::engine::Mass.
 /// @ingroup physics-plugin
 
 #pragma once
@@ -12,7 +12,7 @@ namespace cubos::engine
 {
     /// @brief Component which defines the mass of a particle.
     /// @ingroup physics-plugin
-    struct PhysicsMass
+    struct Mass
     {
         CUBOS_REFLECT;
 

@@ -69,7 +69,7 @@ int main(int argc, char** argv)
                 .add(Velocity{.velocity = {0.0F, 0.0F, 0.0F}})
                 .add(Force{})
                 .add(Impulse{})
-                .add(PhysicsMass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
+                .add(Mass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
                 .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{});
         });

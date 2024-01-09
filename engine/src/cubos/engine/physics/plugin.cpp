@@ -15,11 +15,11 @@ CUBOS_REFLECT_IMPL(AccumulatedCorrection)
         .build();
 }
 
-CUBOS_REFLECT_IMPL(PhysicsMass)
+CUBOS_REFLECT_IMPL(Mass)
 {
-    return cubos::core::ecs::TypeBuilder<PhysicsMass>("cubos::engine::PhysicsMass")
-        .withField("mass", &PhysicsMass::mass)
-        .withField("inverseMass", &PhysicsMass::inverseMass)
+    return cubos::core::ecs::TypeBuilder<Mass>("cubos::engine::Mass")
+        .withField("mass", &Mass::mass)
+        .withField("inverseMass", &Mass::inverseMass)
         .build();
 }
 
@@ -66,7 +66,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.addComponent<Velocity>();
     cubos.addComponent<Force>();
     cubos.addComponent<Impulse>();
-    cubos.addComponent<PhysicsMass>();
+    cubos.addComponent<Mass>();
     cubos.addComponent<AccumulatedCorrection>();
     cubos.addComponent<PreviousPosition>();
 
@@ -86,7 +86,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .after("cubos.physics.apply_forces")
         .before("cubos.physics.simulation.substeps.integrate")
         .onlyIf(simulatePhysicsStep)
-        .call([](Query<Velocity&, const Impulse&, const PhysicsMass&> query) {
+        .call([](Query<Velocity&, const Impulse&, const Mass&> query) {
             for (auto [velocity, impulse, mass] : query)
             {
                 velocity.velocity += impulse.getImpulse() * mass.inverseMass;
@@ -97,7 +97,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .tagged("cubos.physics.simulation.substeps.integrate")
         .after("cubos.physics.simulation.prepare")
         .onlyIf(simulatePhysicsStep)
-        .call([](Query<Position&, PreviousPosition&, Velocity&, const Force&, const PhysicsMass&> query,
+        .call([](Query<Position&, PreviousPosition&, Velocity&, const Force&, const Mass&> query,
                  const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
