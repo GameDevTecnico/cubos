@@ -6,7 +6,7 @@
 
 #include <cubos/engine/physics/components/force.hpp>
 #include <cubos/engine/physics/components/impulse.hpp>
-#include <cubos/engine/physics/components/physics_mass.hpp>
+#include <cubos/engine/physics/components/mass.hpp>
 #include <cubos/engine/physics/components/velocity.hpp>
 #include <cubos/engine/physics/resources/gravity.hpp>
 #include <cubos/engine/prelude.hpp>
