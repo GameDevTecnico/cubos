@@ -1,5 +1,5 @@
 /// @file
-/// @brief Component @ref cubos::engine::PhysicsVelocity.
+/// @brief Component @ref cubos::engine::Velocity.
 /// @ingroup physics-plugin
 
 #pragma once
@@ -13,12 +13,10 @@ namespace cubos::engine
     /// @brief Component which holds velocity and forces applied on a particle.
     /// @note Should be used with @ref PhysicsMass and @ref Position.
     /// @ingroup physics-plugin
-    struct PhysicsVelocity
+    struct Velocity
     {
         CUBOS_REFLECT;
 
         glm::vec3 velocity;
-        glm::vec3 force;
-        glm::vec3 impulse;
     };
 } // namespace cubos::engine
