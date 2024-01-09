@@ -23,12 +23,22 @@ CUBOS_REFLECT_IMPL(PhysicsMass)
         .build();
 }
 
-CUBOS_REFLECT_IMPL(PhysicsVelocity)
+CUBOS_REFLECT_IMPL(Velocity)
 {
-    return cubos::core::ecs::TypeBuilder<PhysicsVelocity>("cubos::engine::PhysicsVelocity")
-        .withField("velocity", &PhysicsVelocity::velocity)
-        .withField("force", &PhysicsVelocity::force)
-        .withField("impulse", &PhysicsVelocity::impulse)
+    return cubos::core::ecs::TypeBuilder<Velocity>("cubos::engine::Velocity")
+        .withField("velocity", &Velocity::velocity)
+        .build();
+}
+
+CUBOS_REFLECT_IMPL(Force)
+{
+    return cubos::core::ecs::TypeBuilder<Force>("cubos::engine::Force").withField("mForce", &Force::mForce).build();
+}
+
+CUBOS_REFLECT_IMPL(Impulse)
+{
+    return cubos::core::ecs::TypeBuilder<Impulse>("cubos::engine::Impulse")
+        .withField("mImpulse", &Impulse::mImpulse)
         .build();
 }
 
@@ -53,7 +63,9 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.addResource<PhysicsAccumulator>();
     cubos.addResource<Damping>();
 
-    cubos.addComponent<PhysicsVelocity>();
+    cubos.addComponent<Velocity>();
+    cubos.addComponent<Force>();
+    cubos.addComponent<Impulse>();
     cubos.addComponent<PhysicsMass>();
     cubos.addComponent<AccumulatedCorrection>();
     cubos.addComponent<PreviousPosition>();
@@ -74,10 +86,10 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .after("cubos.physics.apply_forces")
         .before("cubos.physics.simulation.substeps.integrate")
         .onlyIf(simulatePhysicsStep)
-        .call([](Query<PhysicsVelocity&, const PhysicsMass&> query) {
-            for (auto [velocity, mass] : query)
+        .call([](Query<Velocity&, const Impulse&, const PhysicsMass&> query) {
+            for (auto [velocity, impulse, mass] : query)
             {
-                velocity.velocity += velocity.impulse * mass.inverseMass;
+                velocity.velocity += impulse.getImpulse() * mass.inverseMass;
             }
         });
 
@@ -85,11 +97,11 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .tagged("cubos.physics.simulation.substeps.integrate")
         .after("cubos.physics.simulation.prepare")
         .onlyIf(simulatePhysicsStep)
-        .call([](Query<Position&, PreviousPosition&, PhysicsVelocity&, const PhysicsMass&> query,
+        .call([](Query<Position&, PreviousPosition&, Velocity&, const Force&, const PhysicsMass&> query,
                  const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
-            for (auto [position, prevPosition, velocity, mass] : query)
+            for (auto [position, prevPosition, velocity, force, mass] : query)
             {
                 prevPosition.vec = position.vec;
 
@@ -102,7 +114,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 velocity.velocity *= glm::pow(damping.value, subDeltaTime);
 
                 // Apply external forces
-                glm::vec3 deltaLinearVelocity = velocity.force * mass.inverseMass * subDeltaTime;
+                glm::vec3 deltaLinearVelocity = force.getForce() * mass.inverseMass * subDeltaTime;
 
                 velocity.velocity += deltaLinearVelocity;
                 position.vec += velocity.velocity * subDeltaTime;
@@ -125,8 +137,8 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .tagged("cubos.physics.simulation.substeps.update_velocity")
         .after("cubos.physics.simulation.substeps.correct_position")
         .onlyIf(simulatePhysicsStep)
-        .call([](Query<const Position&, const PreviousPosition&, PhysicsVelocity&> query,
-                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
+        .call([](Query<const Position&, const PreviousPosition&, Velocity&> query, const FixedDeltaTime& fixedDeltaTime,
+                 const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
             for (auto [position, prevPosition, velocity] : query)
@@ -139,11 +151,21 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .tagged("cubos.physics.simulation.clear_forces")
         .after("cubos.physics.simulation.substeps.update_velocity")
         .onlyIf(simulatePhysicsStep)
-        .call([](Query<PhysicsVelocity&> query) {
-            for (auto [velocity] : query)
+        .call([](Query<Force&> query) {
+            for (auto [force] : query)
             {
-                velocity.force = glm::vec3(0, 0, 0);
-                velocity.impulse = glm::vec3(0, 0, 0);
+                force.clearForce();
+            }
+        });
+
+    cubos.system("clear impulses")
+        .tagged("cubos.physics.simulation.clear_forces")
+        .after("cubos.physics.simulation.substeps.update_velocity")
+        .onlyIf(simulatePhysicsStep)
+        .call([](Query<Impulse&> query) {
+            for (auto [impulse] : query)
+            {
+                impulse.clearImpulse();
             }
         });
 

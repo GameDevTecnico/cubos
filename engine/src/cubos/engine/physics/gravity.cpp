@@ -10,8 +10,8 @@ void cubos::engine::gravityPlugin(Cubos& cubos)
 
     cubos.system("apply gravity")
         .tagged("cubos.physics.apply_forces")
-        .call([](Query<PhysicsVelocity&, const PhysicsMass&> query, const Gravity& gravity) {
-            for (auto [velocity, mass] : query)
+        .call([](Query<Velocity&, Force&, const PhysicsMass&> query, const Gravity& gravity) {
+            for (auto [velocity, force, mass] : query)
             {
                 if (mass.inverseMass <= 0.0F)
                 {
@@ -21,7 +21,7 @@ void cubos::engine::gravityPlugin(Cubos& cubos)
                 // Apply gravity force
                 glm::vec3 gravitationForce = mass.mass * gravity.value;
 
-                velocity.force += gravitationForce;
+                force.addForce(gravitationForce);
             }
         });
 }

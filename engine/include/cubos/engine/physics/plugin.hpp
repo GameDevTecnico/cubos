@@ -13,9 +13,11 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
+#include <cubos/engine/physics/components/force.hpp>
+#include <cubos/engine/physics/components/impulse.hpp>
 #include <cubos/engine/physics/components/physics_mass.hpp>
-#include <cubos/engine/physics/components/physics_velocity.hpp>
 #include <cubos/engine/physics/components/previous_position.hpp>
+#include <cubos/engine/physics/components/velocity.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
 #include <cubos/engine/physics/resources/fixed_delta_time.hpp>
@@ -37,7 +39,9 @@ namespace cubos::engine
     /// - @ref Substeps - holds the amount of substeps for the physics update.
     ///
     /// ## Components
-    /// - @ref PhysicsVelocity - holds the information for moving an object straight.
+    /// - @ref Velocity - holds the information for moving an object straight.
+    /// - @ref Force - holds forces applied on a particle.
+    /// - @ref Impulse - holds impulses applied on a particle.
     /// - @ref PhysicsMass - holds the mass of an object.
     /// - @ref PreviousPosition - holds the previous position of the entity in a substep.
     /// - @ref AccumulatedCorrection - holds the corrections accumulated from the constraints solving.

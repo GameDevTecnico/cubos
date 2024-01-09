@@ -66,8 +66,9 @@ int main(int argc, char** argv)
                 .add(RenderableGrid{CarAsset, offset})
                 .add(Position{{0.0F, 0.0F, 0.0F}})
                 .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
-                .add(PhysicsVelocity{
-                    .velocity = {0.0F, 0.0F, 0.0F}, .force = {0.0F, 0.0F, 0.0F}, .impulse = {0.0F, 0.0F, 0.0F}})
+                .add(Velocity{.velocity = {0.0F, 0.0F, 0.0F}})
+                .add(Force{})
+                .add(Impulse{})
                 .add(PhysicsMass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
                 .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{});
@@ -75,16 +76,16 @@ int main(int argc, char** argv)
 
     cubos.system("push the car")
         .tagged("cubos.physics.apply_forces")
-        .call([](Query<PhysicsVelocity&> query, MaxTime& time, const DeltaTime& deltaTime) {
-            for (auto [velocity] : query)
+        .call([](Query<Velocity&, Force&, Impulse&> query, MaxTime& time, const DeltaTime& deltaTime) {
+            for (auto [velocity, force, impulse] : query)
             {
                 if (time.current < time.max)
                 {
                     if (time.current == 0.0F)
                     {
-                        velocity.impulse += glm::vec3(0.0F, 5000.0F, 0.0F);
+                        impulse.addImpulse(glm::vec3(0.0F, 5000.0F, 0.0F));
                     }
-                    velocity.force += glm::vec3(0.0F, 0.0F, -5000.0F);
+                    force.addForce(glm::vec3(0.0F, 0.0F, -5000.0F));
                     time.current += deltaTime.value;
                 }
             }
