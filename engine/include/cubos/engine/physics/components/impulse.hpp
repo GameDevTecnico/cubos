@@ -15,10 +15,9 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct Impulse
     {
-    public:
         CUBOS_REFLECT;
 
-        const glm::vec3 getImpulse() const
+        glm::vec3 getImpulse() const
         {
             return mImpulse;
         }
@@ -30,7 +29,7 @@ namespace cubos::engine
 
         void clearImpulse()
         {
-            mImpulse = {0.0f, 0.0f, 0.0f};
+            mImpulse = {0.0F, 0.0F, 0.0F};
         }
 
     private:

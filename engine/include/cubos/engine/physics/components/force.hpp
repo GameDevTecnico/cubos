@@ -15,10 +15,9 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct Force
     {
-    public:
         CUBOS_REFLECT;
 
-        const glm::vec3 getForce() const
+        glm::vec3 getForce() const
         {
             return mForce;
         }
@@ -30,7 +29,7 @@ namespace cubos::engine
 
         void clearForce()
         {
-            mForce = {0.0f, 0.0f, 0.0f};
+            mForce = {0.0F, 0.0F, 0.0F};
         }
 
     private:
