@@ -31,7 +31,8 @@ using cubos::engine::Scale;
 
 using namespace tesseratos;
 
-glm::vec3 intersectLinePlane(glm::vec3 linePoint, glm::vec3 lineVector, glm::vec3 planePoint, glm::vec3 planeNormal)
+static glm::vec3 intersectLinePlane(glm::vec3 linePoint, glm::vec3 lineVector, glm::vec3 planePoint,
+                                    glm::vec3 planeNormal)
 {
     float distance;
     if (glm::intersectRayPlane(linePoint, lineVector, planePoint, planeNormal, distance))
@@ -45,7 +46,7 @@ glm::vec3 intersectLinePlane(glm::vec3 linePoint, glm::vec3 lineVector, glm::vec
     return {0, 0, 0};
 }
 
-glm::vec3 mouseWorldDirection(glm::ivec2 windowSize, glm::ivec2 mousePos, const glm::mat4& pv)
+static glm::vec3 mouseWorldDirection(glm::ivec2 windowSize, glm::ivec2 mousePos, const glm::mat4& pv)
 {
     float mouseX = (float)mousePos.x / ((float)windowSize.x * 0.5F) - 1.0F;
     float mouseY = (float)mousePos.y / ((float)windowSize.y * 0.5F) - 1.0F;
@@ -53,15 +54,15 @@ glm::vec3 mouseWorldDirection(glm::ivec2 windowSize, glm::ivec2 mousePos, const 
     return glm::normalize(glm::vec3(glm::inverse(pv) * glm::vec4(mouseX, -mouseY, 1.0F, 1.0F)));
 }
 
-glm::vec3 mouseWorldCoordinates(glm::ivec2 windowSize, glm::ivec2 mousePos, glm::vec3 transformPosition,
-                                glm::vec3 transformNormal, glm::vec3 cameraPosition, const glm::mat4& pv)
+static glm::vec3 mouseWorldCoordinates(glm::ivec2 windowSize, glm::ivec2 mousePos, glm::vec3 transformPosition,
+                                       glm::vec3 transformNormal, glm::vec3 cameraPosition, const glm::mat4& pv)
 {
     auto dir = mouseWorldDirection(windowSize, mousePos, pv);
     return intersectLinePlane(cameraPosition, dir, transformPosition, transformNormal);
 }
 
-void checkMovement(Position& position, glm::vec3 transformVector, glm::vec3 transformNormal, glm::ivec2 windowSize,
-                   const Input& input, const glm::mat4& pv, glm::vec3 cameraPosition)
+static void checkMovement(Position& position, glm::vec3 transformVector, glm::vec3 transformNormal,
+                          glm::ivec2 windowSize, const Input& input, const glm::mat4& pv, glm::vec3 cameraPosition)
 {
     auto mousePosWorld =
         mouseWorldCoordinates(windowSize, input.mousePosition(), position.vec, transformNormal, cameraPosition, pv);
@@ -70,9 +71,9 @@ void checkMovement(Position& position, glm::vec3 transformVector, glm::vec3 tran
     position.vec += (mousePosWorld - oldMousePosWorld) * transformVector;
 }
 
-void drawTransformGizmo(Query<Read<Camera>, OptRead<Rotation>, OptRead<Scale>> cameraQuery,
-                        Query<Write<Position>> positionQuery, Gizmos& gizmos, const Input& input, const Window& window,
-                        Entity cameraEntity, Entity selectedEntity)
+static void drawTransformGizmo(Query<Read<Camera>, OptRead<Rotation>, OptRead<Scale>> cameraQuery,
+                               Query<Write<Position>> positionQuery, Gizmos& gizmos, const Input& input,
+                               const Window& window, Entity cameraEntity, Entity selectedEntity)
 {
     auto [camera, rotation, scale] = *cameraQuery[cameraEntity];
 

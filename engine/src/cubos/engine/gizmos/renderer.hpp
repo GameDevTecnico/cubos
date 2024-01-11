@@ -33,6 +33,9 @@ namespace cubos::engine
         cubos::core::gl::Texture2D idTexture; ///< Texture holding the ids of the gizmo that was drawn to each pixel.
         cubos::core::gl::Framebuffer idFramebuffer; ///< Buffer holding the id texture.
 
+        cubos::core::gl::DepthStencilState doDepthCheckStencilState; ///< Stencil State that performs depth checks.
+        cubos::core::gl::DepthStencilState noDepthCheckStencilState; ///< Stencil State that ignores depth checks.
+
         /// @brief Sets up the render device to be used.
         /// @param renderDevice the current Render device being used.
         void init(cubos::core::gl::RenderDevice* currentRenderDevice, glm::ivec2 size);

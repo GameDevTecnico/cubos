@@ -105,6 +105,14 @@ void GizmosRenderer::init(RenderDevice* currentRenderDevice, glm::ivec2 size)
 {
     renderDevice = currentRenderDevice;
 
+    cubos::core::gl::DepthStencilStateDesc dss;
+    dss.depth.enabled = true;
+    dss.depth.writeEnabled = true;
+    doDepthCheckStencilState = renderDevice->createDepthStencilState(dss);
+    dss.depth.enabled = false;
+    dss.depth.writeEnabled = false;
+    noDepthCheckStencilState = renderDevice->createDepthStencilState(dss);
+
     initIdTexture(size);
 
     initDrawPipeline();
