@@ -68,6 +68,18 @@ namespace cubos::engine
                          glm::vec3 secondBaseCenter, float secondBaseRadius, float lifespan = 0.0F,
                          Space space = Space::World);
 
+        /// @brief Draws a ring gizmo.
+        /// @param id Identifier of the gizmo.
+        /// @param firstBasePosition Center of one of the bases.
+        /// @param secondBasePosition Center of the second base.
+        /// @param outerRadius Radius of one of the ring.
+        /// @param innerRadius Radius of the of the hole.
+        /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
+        /// frame.
+        /// @param space Space to draw the gizmo in.
+        void drawRing(const std::string& id, glm::vec3 firstBasePosition, glm::vec3 secondBasePosition,
+                      float outerRadius, float innerRadius, float lifespan = 0.0F, Space space = Space::World);
+
         /// @brief Draws an arrow gizmo.
         /// @param id Identifier of the gizmo.
         /// @param origin Point from which the arrow starts.

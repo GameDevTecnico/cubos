@@ -9,6 +9,7 @@
 #include "types/box.hpp"
 #include "types/cut_cone.hpp"
 #include "types/line.hpp"
+#include "types/ring.hpp"
 
 using cubos::engine::DeltaTime;
 using cubos::engine::Gizmos;
@@ -124,6 +125,14 @@ void Gizmos::drawCutCone(const std::string& id, glm::vec3 firstBaseCenter, float
 {
     push(std::make_shared<CutConeGizmo>((uint32_t)mHasher(id), firstBaseCenter, firstBaseRadius, secondBaseCenter,
                                         secondBaseRadius, mColor, lifespan),
+         space);
+}
+
+void Gizmos::drawRing(const std::string& id, glm::vec3 firstBasePosition, glm::vec3 secondBasePosition,
+                      float outerRadius, float innerRadius, float lifespan, Space space)
+{
+    push(std::make_shared<RingGizmo>((uint32_t)mHasher(id), firstBasePosition, secondBasePosition, outerRadius,
+                                     innerRadius, mColor, lifespan),
          space);
 }
 
