@@ -11,6 +11,7 @@ namespace cubos::engine
     {
     public:
         static constexpr int CutConeVertsPerBase = 16; ///< Number of vertexes in each face of a cut cone gizmo.
+        static constexpr int RingSections = 32;        ///< Number of traversal sections (i.e. quads) in a ring gizmo.
 
         cubos::core::gl::ShaderPipeline drawPipeline; ///< Shader pipeline to be used when drawing gizmos.
         cubos::core::gl::ShaderPipeline idPipeline;   ///< Shader pipeline to be used when drawing gizmos.
@@ -28,6 +29,7 @@ namespace cubos::engine
         Primitive linePrimitive;    ///< GL line information.
         Primitive boxPrimitive;     ///< GL box information.
         Primitive cutConePrimitive; ///< GL cut cone information.
+        Primitive ringPrimitive;    ///< GL ring information.
 
         glm::ivec2 textureSize;               ///< Size of the id texture.
         cubos::core::gl::Texture2D idTexture; ///< Texture holding the ids of the gizmo that was drawn to each pixel.
@@ -58,5 +60,6 @@ namespace cubos::engine
         void initLinePrimitive();
         void initBoxPrimitive();
         void initCutConePrimitive();
+        void initRingPrimitive();
     };
 } // namespace cubos::engine

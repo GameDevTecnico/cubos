@@ -121,6 +121,7 @@ void GizmosRenderer::init(RenderDevice* currentRenderDevice, glm::ivec2 size)
     initLinePrimitive();
     initBoxPrimitive();
     initCutConePrimitive();
+    initRingPrimitive();
 }
 
 void GizmosRenderer::initLinePrimitive()
@@ -236,4 +237,105 @@ void GizmosRenderer::initCutConePrimitive()
     }
 
     cutConePrimitive.ib = renderDevice->createIndexBuffer(sizeof(indices), indices, IndexFormat::UInt, Usage::Static);
+}
+
+void GizmosRenderer::initRingPrimitive()
+{
+    ringPrimitive.vaDesc.elementCount = 1;
+    ringPrimitive.vaDesc.elements[0].name = "position";
+    ringPrimitive.vaDesc.elements[0].type = Type::Float;
+    ringPrimitive.vaDesc.elements[0].size = 3;
+    ringPrimitive.vaDesc.elements[0].buffer.index = 0;
+    ringPrimitive.vaDesc.elements[0].buffer.offset = 0;
+    ringPrimitive.vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
+    ringPrimitive.vaDesc.shaderPipeline = drawPipeline;
+
+    float verts[RingSections * 12];
+
+    renderDevice->setShaderPipeline(drawPipeline);
+    ringPrimitive.vb = renderDevice->createVertexBuffer(sizeof(verts), verts, Usage::Dynamic);
+    ringPrimitive.vaDesc.buffers[0] = ringPrimitive.vb;
+    ringPrimitive.va = renderDevice->createVertexArray(ringPrimitive.vaDesc);
+
+    unsigned int indices[3 * 8 * RingSections];
+
+    int iIndex = 0;
+    // Sides
+    for (unsigned int i = 0; i < (RingSections - 1) * 2; i += 2)
+    {
+        // TOP
+        indices[iIndex++] = i;
+        indices[iIndex++] = i + 1;
+        indices[iIndex++] = i + 3;
+
+        indices[iIndex++] = i;
+        indices[iIndex++] = i + 3;
+        indices[iIndex++] = i + 2;
+
+        // BOTTOM
+        indices[iIndex++] = i + (RingSections * 2);
+        indices[iIndex++] = i + (RingSections * 2) + 1;
+        indices[iIndex++] = i + (RingSections * 2) + 3;
+
+        indices[iIndex++] = i + (RingSections * 2);
+        indices[iIndex++] = i + (RingSections * 2) + 3;
+        indices[iIndex++] = i + (RingSections * 2) + 2;
+
+        // INNER
+        indices[iIndex++] = i + 1;
+        indices[iIndex++] = i + (RingSections * 2) + 1;
+        indices[iIndex++] = i + (RingSections * 2) + 3;
+
+        indices[iIndex++] = i + 1;
+        indices[iIndex++] = i + (RingSections * 2) + 3;
+        indices[iIndex++] = i + 3;
+
+        // OUTTER
+        indices[iIndex++] = i;
+        indices[iIndex++] = i + (RingSections * 2) + 2;
+        indices[iIndex++] = i + 2;
+
+        indices[iIndex++] = i;
+        indices[iIndex++] = i + (RingSections * 2);
+        indices[iIndex++] = i + (RingSections * 2) + 2;
+    }
+
+    // Last Side Faces
+    // TOP
+    indices[iIndex++] = ((RingSections - 1) * 2);
+    indices[iIndex++] = ((RingSections - 1) * 2) + 1;
+    indices[iIndex++] = 1;
+
+    indices[iIndex++] = ((RingSections - 1) * 2);
+    indices[iIndex++] = 1;
+    indices[iIndex++] = 0;
+
+    // BOTTOM
+    indices[iIndex++] = ((RingSections - 1) * 2) + (RingSections * 2);
+    indices[iIndex++] = ((RingSections - 1) * 2) + (RingSections * 2) + 1;
+    indices[iIndex++] = (RingSections * 2) + 1;
+
+    indices[iIndex++] = ((RingSections - 1) * 2) + (RingSections * 2);
+    indices[iIndex++] = (RingSections * 2) + 1;
+    indices[iIndex++] = (RingSections * 2);
+
+    // INNER
+    indices[iIndex++] = ((RingSections - 1) * 2) + 1;
+    indices[iIndex++] = ((RingSections - 1) * 2) + (RingSections * 2) + 1;
+    indices[iIndex++] = (RingSections * 2) + 1;
+
+    indices[iIndex++] = ((RingSections - 1) * 2) + 1;
+    indices[iIndex++] = (RingSections * 2) + 1;
+    indices[iIndex++] = 1;
+
+    // OUTTER
+    indices[iIndex++] = ((RingSections - 1) * 2);
+    indices[iIndex++] = (RingSections * 2);
+    indices[iIndex++] = 0;
+
+    indices[iIndex++] = ((RingSections - 1) * 2);
+    indices[iIndex++] = ((RingSections - 1) * 2) + (RingSections * 2);
+    indices[iIndex++] = (RingSections * 2) + 0;
+
+    ringPrimitive.ib = renderDevice->createIndexBuffer(sizeof(indices), indices, IndexFormat::UInt, Usage::Static);
 }
