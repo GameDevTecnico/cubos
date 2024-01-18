@@ -39,13 +39,27 @@ namespace cubos::engine
             stream.readUntil(jsonStr, nullptr);
             core::data::JSONDeserializer deserializer{};
 
-            // New JSONDeserializer() receives a JSON object to deserialize from
-            nlohmann::json json = nlohmann::json::parse(jsonStr);
+            // JSONDeserializer() receives a JSON object to deserialize from
+            nlohmann::json json{};
+
+            try
+            {
+                json = nlohmann::json::parse(jsonStr);
+            }
+            catch (nlohmann::json::parse_error& e)
+            {
+                CUBOS_ERROR("{}", e.what());
+                return false;
+            }
             deserializer.feed(json);
 
             // Deserialize the asset and store it in the asset manager.
             T data{};
-            deserializer.read(data);
+            if (deserializer.read(data))
+            {
+                CUBOS_ERROR("Could not deserialize asset from JSON file");
+                return false;
+            }
 
             assets.store(handle, std::move(data));
             return true;
@@ -58,7 +72,11 @@ namespace cubos::engine
 
             // Read the asset from the asset manager and serialize it to the file stream.
             auto data = assets.read<T>(handle);
-            serializer.write(*data);
+            if (serializer.write(*data))
+            {
+                CUBOS_ERROR("Could not serialize asset to JSON file");
+                return false;
+            }
 
             // new JSONSerializer() does not receive a stream to write to, need to write to it manually
             auto jsonStr = serializer.output().dump();
