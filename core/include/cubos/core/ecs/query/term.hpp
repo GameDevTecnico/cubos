@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include <cubos/core/ecs/types.hpp>
 
 namespace cubos::core::ecs
@@ -75,5 +77,28 @@ namespace cubos::core::ecs
         /// @param types Types registry.
         /// @return Whether it's a component term.
         bool isComponent(const Types& types) const;
+
+        /// @brief Merges a vector of terms with another, joining pairs of them if possible.
+        ///
+        /// This function is mainly used to merge terms specified manually for a query with terms obtained from its
+        /// argument types. For example, if we have a query of the form `Query<A&, A&>`, we will obtain the terms
+        /// `makeWithComponent(A, -1)` and `makeWithComponent(A, -1)`. Those term would be passed into @p other.
+        /// If we passed to @p base the terms `makeWithComponent(A, 0)` and `makeWithComponent(A, 1)`, then, the base
+        /// wouldn't be modified, and the @p other vector would have its targets updated so that it matches the @p base.
+        ///
+        /// Any targets found set to -1 will be set to the current default target. The default target is initially 0,
+        /// and always changes to the last seen non -1 target. If a relation term has one of the targets undefined, the
+        /// default target is incremented.
+        ///
+        /// Another example would be to have an empty base vector, and the query `Query<A&, B&>`. The @p other vector
+        /// would be `{makeWithComponent(A, -1), makeWithComponent(B, -1)}`, and the returned vector would be
+        /// `{makeWithComponent(A, 0), makeWithComponent(B, 0)}`.
+        ///
+        /// @param types Type registry.
+        /// @param baseTerms Base vector of terms.
+        /// @param[inout] otherTerms Vector of terms to merge into the base. Targets will be modified, if set to -1.
+        /// @return Result of merging the two vectors.
+        static std::vector<QueryTerm> resolve(const Types& types, const std::vector<QueryTerm>& baseTerms,
+                                              std::vector<QueryTerm>& otherTerms);
     };
 } // namespace cubos::core::ecs
