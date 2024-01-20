@@ -2,6 +2,8 @@
 /// @brief Class @ref cubos::core::ecs::QueryData.
 /// @ingroup core-ecs-query
 
+#pragma once
+
 #include <tuple>
 
 #include <cubos/core/ecs/query/fetcher.hpp>
