@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::BlueprintBuilder class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::DenseColumnId struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,143 +46,158 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>BlueprintBuilder <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="commands_8hpp.html">&lt;core/ecs/system/commands.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>DenseColumnId <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="column_8hpp.html">&lt;core/ecs/table/column.hpp&gt;</a></div>
         </h1>
-        <p>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</p>
+        <p>Identifies a dense data column type.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a84acdd0330e969c44f658a492c9eef3a">
+              static const <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> <a href="#a84acdd0330e969c44f658a492c9eef3a" class="m-doc-self">Invalid</a>
+            </dt>
+            <dd>Invalid column type identifier.</dd>
+          </dl>
+        </section>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a3df9df66862d436e963b20a2c0264c3b" class="m-doc">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a></span>
+            </dt>
+            <dd>Creates a column type identifier from a data type identifier.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a98977f752e72400be1675cccc1c5eddf" class="m-doc">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id,
+              uint32_t index) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a></span>
+            </dt>
+            <dd>Creates a column type identifier from a data type identifier and an index.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad19b1233944928dd3838dabb99151092" class="m-doc">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a902cdea3e473b593cb61eb30c6ffb579" class="m-doc">dataType</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a></span>
             </dt>
-            <dd>Gets an entity of the spawned blueprint.</dd>
+            <dd>Returns the data type identifier of this column type.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename ComponentType&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a028314b3160c4683cac692dc0d6f11bf" class="m-doc">get</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; ComponentType&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a14eb95bd5970e92faf0afccdd07a62d5" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a>&amp; other) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
-            <dd>Gets a reference to a component of an entity of the spawned blueprint.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a75522a0d155585e1790926b9586b428c" class="m-doc">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
-              ComponentTypes &amp;&amp; ... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>&amp;</span>
+            <dd>Compares two column type identifiers for equality.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="ad6e6048c7949529eac52178b336e7ccf">
+              uint64_t <a href="#ad6e6048c7949529eac52178b336e7ccf" class="m-doc-self">inner</a>
             </dt>
-            <dd>Adds components to the blueprint.</dd>
+            <dd>Column type identifier.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad19b1233944928dd3838dabb99151092"><div>
+          <section class="m-doc-details" id="a3df9df66862d436e963b20a2c0264c3b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad19b1233944928dd3838dabb99151092" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> cubos::<wbr />core::<wbr />ecs::<wbr />DenseColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3df9df66862d436e963b20a2c0264c3b" class="m-doc-self">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id)</span></span>
             </h3>
-            <p>Gets an entity of the spawned blueprint.</p>
+            <p>Creates a column type identifier from a data type identifier.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">name</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
+                  <td style="width: 1%">id</td>
+                  <td>Data type identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                  <td>Column type identifier.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Aborts if the name does not match any entity of the blueprint.</p>
           </div></section>
-          <section class="m-doc-details" id="a028314b3160c4683cac692dc0d6f11bf"><div>
+          <section class="m-doc-details" id="a98977f752e72400be1675cccc1c5eddf"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename ComponentType&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">ComponentType&amp; cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a028314b3160c4683cac692dc0d6f11bf" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> cubos::<wbr />core::<wbr />ecs::<wbr />DenseColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a98977f752e72400be1675cccc1c5eddf" class="m-doc-self">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id,
+              uint32_t index)</span></span>
             </h3>
-            <p>Gets a reference to a component of an entity of the spawned blueprint.</p>
+            <p>Creates a column type identifier from a data type identifier and an index.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentType</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>name</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
+                  <td style="width: 1%">id</td>
+                  <td>Data type identifier.</td>
+                </tr>
+                <tr>
+                  <td>index</td>
+                  <td>Index.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Reference to the component.</td>
+                  <td>Column type identifier.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Aborts if <code>name</code> does not match any entity of the blueprint.</p>
           </div></section>
-          <section class="m-doc-details" id="a75522a0d155585e1790926b9586b428c"><div>
+          <section class="m-doc-details" id="a902cdea3e473b593cb61eb30c6ffb579"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a75522a0d155585e1790926b9586b428c" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
-              ComponentTypes &amp;&amp; ... components)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />DenseColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a902cdea3e473b593cb61eb30c6ffb579" class="m-doc-self">dataType</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Adds components to the blueprint.</p>
+            <p>Returns the data type identifier of this column type.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
+              <tfoot>
                 <tr>
-                  <td style="width: 1%">ComponentTypes</td>
-                  <td>Component types.</td>
+                  <th style="width: 1%">Returns</th>
+                  <td>Data type identifier.</td>
                 </tr>
-              </tbody>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a14eb95bd5970e92faf0afccdd07a62d5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />DenseColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a14eb95bd5970e92faf0afccdd07a62d5" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a>&amp; other) const <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Compares two column type identifiers for equality.</p>
+            <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>name</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
-                </tr>
-                <tr>
-                  <td>components</td>
-                  <td>Components to add.</td>
+                  <td style="width: 1%">other</td>
+                  <td>Other column type identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Reference to this builder, for chaining.</td>
+                  <td>Whether the two column type identifiers are equal.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Aborts if <code>name</code> does not match any entity of the blueprint.</p>
           </div></section>
         </section>
       </div>

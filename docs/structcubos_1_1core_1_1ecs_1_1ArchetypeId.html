@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::EntityBuilder class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::ArchetypeId struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,113 +46,75 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>EntityBuilder <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="commands_8hpp.html">&lt;core/ecs/system/commands.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>ArchetypeId <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="archetype__id_8hpp.html">&lt;core/ecs/entity/archetype_id.hpp&gt;</a></div>
         </h1>
-        <p>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</p>
+        <p>Identifies an archetype.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a7c6a39e02098afef8fe6aea3611b6369">
+              static const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> <a href="#a7c6a39e02098afef8fe6aea3611b6369" class="m-doc-self">Empty</a>
+            </dt>
+            <dd>Empty archetype identifier.</dd>
+            <dt id="aed0401c715a283d0f075483ea73ac62a">
+              static const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> <a href="#aed0401c715a283d0f075483ea73ac62a" class="m-doc-self">Invalid</a>
+            </dt>
+            <dd>Invalid archetype identifier.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af1fc68488cf14b02551faf2b5a92718b" class="m-doc">entity</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b03dadc245569c0f3f32f9b94444e05" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>&amp; other) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
-            <dd>Gets the entity this builder is editing.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename ComponentType&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#af52f2363762456e827731085a080f4b9" class="m-doc">get</a>(</span><span class="m-doc-wrap">) -&gt; ComponentType&amp;</span>
+            <dd>Compares two archetype identifiers for equality.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="aa17a75ff4f007d1058ee8110eb93a439">
+              std::size_t <a href="#aa17a75ff4f007d1058ee8110eb93a439" class="m-doc-self">inner</a>
             </dt>
-            <dd>Gets a reference to a component of the entity.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad548efe8ef32fc8f6f95c0c7c8b51ad8" class="m-doc">add</a>(</span><span class="m-doc-wrap">ComponentTypes &amp;&amp; ... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>&amp;</span>
-            </dt>
-            <dd>Adds components to the entity.</dd>
+            <dd>Archetype identifier.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="af1fc68488cf14b02551faf2b5a92718b"><div>
+          <section class="m-doc-details" id="a3b03dadc245569c0f3f32f9b94444e05"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1fc68488cf14b02551faf2b5a92718b" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />ArchetypeId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b03dadc245569c0f3f32f9b94444e05" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>&amp; other) const <span class="m-label m-info">defaulted</span></span></span>
             </h3>
-            <p>Gets the entity this builder is editing.</p>
+            <p>Compares two archetype identifiers for equality.</p>
             <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="af52f2363762456e827731085a080f4b9"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename ComponentType&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">ComponentType&amp; cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af52f2363762456e827731085a080f4b9" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Gets a reference to a component of the entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentType</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Reference to the component.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ad548efe8ef32fc8f6f95c0c7c8b51ad8"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad548efe8ef32fc8f6f95c0c7c8b51ad8" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">ComponentTypes &amp;&amp; ... components)</span></span>
-            </h3>
-            <p>Adds components to the entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentTypes</td>
-                  <td>Component types.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>components</td>
-                  <td>Components to add.</td>
+                  <td style="width: 1%">other</td>
+                  <td>Other archetype identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Reference to this builder, for chaining.</td>
+                  <td>Whether the two archetype identifiers are equal.</td>
                 </tr>
               </tfoot>
             </table>

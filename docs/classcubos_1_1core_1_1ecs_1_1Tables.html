@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::Query class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::Tables class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,22 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="query_8hpp.html">&lt;core/ecs/system/query.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Query <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Tables <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tables_8hpp.html">&lt;core/ecs/table/tables.hpp&gt;</a></div>
         </h1>
-        <p>System argument which holds the result of a query over all entities in world which match the given arguments.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">Ts</td>
-              <td>Argument types.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Stores the tables of a given world.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -74,12 +62,11 @@
             </li>
           </ul>
         </nav>
-<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&amp;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Scale</span><span class="o">&amp;&gt;&gt;</span></pre><p>This query will return all entities with a <code>Position</code> and <code>Velocity</code> component. Accessors to <code>Rotation</code> and <code>Scale</code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, <code>const</code> should be used.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ae5674dc1a7344236c3fb55c037f57e55" class="m-doc">Query</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;&amp; data)</span>
+            <dt id="a30a98225c370615671e8825d2544199f">
+              <span class="m-doc-wrap-bumper"><a href="#a30a98225c370615671e8825d2544199f" class="m-doc-self">Tables</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Constructs.</dd>
           </dl>
@@ -88,100 +75,131 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1c1939dc0f31116c569337116df344d9" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query.html#a9a8dfa0089da33d00a27e51d4f2130e4" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a54da75e93e3a5c684264d65eb8605878" class="m-doc">contains</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype) const -&gt; bool</span>
             </dt>
-            <dd>Returns an iterator pointing to the first query match.</dd>
+            <dd>Checks if the given archetype has a dense table.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aad89c4ec9c11579c5af0d6ac60c6db05" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query.html#a9a8dfa0089da33d00a27e51d4f2130e4" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a11e3e4474f93dd23cc6de71cf0c739ea" class="m-doc">dense</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype,
+              <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>&amp; graph,
+              <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>&amp;</span>
             </dt>
-            <dd>Returns an out of bounds iterator representing the end of the query matches.</dd>
+            <dd>Returns a reference to the dense table of the given archetype.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ace8ecfc0b95cb8d12e5beadec0988542" class="m-doc">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af083d119beb540397cd118755ab2a89d" class="m-doc">dense</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>&amp;</span>
             </dt>
-            <dd>Accesses the match for the given entity, if there is one.</dd>
+            <dd>Returns a reference to the dense table of the given archetype.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9e19723c3f40b2516626e897d77a0bdc" class="m-doc">dense</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>&amp;</span>
+            </dt>
+            <dd>Returns a reference to the dense table of the given archetype.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ae5674dc1a7344236c3fb55c037f57e55"><div>
+          <section class="m-doc-details" id="a54da75e93e3a5c684264d65eb8605878"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5674dc1a7344236c3fb55c037f57e55" class="m-doc-self">Query</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;&amp; data)</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Tables::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a54da75e93e3a5c684264d65eb8605878" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype) const</span></span>
             </h3>
-            <p>Constructs.</p>
+            <p>Checks if the given archetype has a dense table.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">data</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> data.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1c1939dc0f31116c569337116df344d9"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query.html#a9a8dfa0089da33d00a27e51d4f2130e4" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c1939dc0f31116c569337116df344d9" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Returns an iterator pointing to the first query match.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Iterator.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aad89c4ec9c11579c5af0d6ac60c6db05"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query.html#a9a8dfa0089da33d00a27e51d4f2130e4" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aad89c4ec9c11579c5af0d6ac60c6db05" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Returns an out of bounds iterator representing the end of the query matches.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Iterator.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ace8ecfc0b95cb8d12e5beadec0988542"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ace8ecfc0b95cb8d12e5beadec0988542" class="m-doc-self">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
-            </h3>
-            <p>Accesses the match for the given entity, if there is one.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">entity</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                  <td style="width: 1%">archetype</td>
+                  <td>Archetype identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Requested components, or nothing if the entity does not match the query.</td>
+                  <td>WHether it contains a table or not.</td>
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a11e3e4474f93dd23cc6de71cf0c739ea"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Tables::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a11e3e4474f93dd23cc6de71cf0c739ea" class="m-doc-self">dense</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype,
+              <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>&amp; graph,
+              <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types)</span></span>
+            </h3>
+            <p>Returns a reference to the dense table of the given archetype.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">archetype</td>
+                  <td>Archetype identifier.</td>
+                </tr>
+                <tr>
+                  <td>graph</td>
+                  <td>Archetype graph used to initialize the table, if necessary.</td>
+                </tr>
+                <tr>
+                  <td>types</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to table.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Creates the table if it doesn&#x27;t exist already.</p>
+          </div></section>
+          <section class="m-doc-details" id="af083d119beb540397cd118755ab2a89d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Tables::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af083d119beb540397cd118755ab2a89d" class="m-doc-self">dense</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype)</span></span>
+            </h3>
+            <p>Returns a reference to the dense table of the given archetype.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">archetype</td>
+                  <td>Archetype identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to table.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the table doesn&#x27;t exist.</p>
+          </div></section>
+          <section class="m-doc-details" id="a9e19723c3f40b2516626e897d77a0bdc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Tables::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9e19723c3f40b2516626e897d77a0bdc" class="m-doc-self">dense</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype) const</span></span>
+            </h3>
+            <p>Returns a reference to the dense table of the given archetype.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">archetype</td>
+                  <td>Archetype identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to table.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the table doesn&#x27;t exist.</p>
           </div></section>
         </section>
       </div>

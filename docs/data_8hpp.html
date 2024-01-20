@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::Write class | CUBOS. Docs</title>
+  <title>core/ecs/query/data.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,113 +46,41 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="accessors_8hpp.html">&lt;core/ecs/system/accessors.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Write <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_26a5878ebb5e9988b6ffa6f152301254.html">query</a>/</span>data.hpp <span class="m-thin">file</span>
         </h1>
-        <p>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Resource or component type.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />QueryData</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Can be used as a pointer with both the <code>-&gt;</code> and <code>*</code> operators.</p>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aff8846e5d9e835838a68c4c2f06146fb" class="m-doc">Write</a>(</span><span class="m-doc-wrap">T&amp; ref)</span>
-            </dt>
-            <dd>Creates a new write argument.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
+            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
           </dl>
         </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#acce20ad90089be53a4c69e5e18c89fd9" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) -&gt; T*</span>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">cubos::core::ecs::QueryData</a>
             </dt>
-            <dd>Accesses the resource or component.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1252b015c27a3e18e5d299ed0c046356" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) -&gt; T&amp;</span>
-            </dt>
-            <dd>Accesses the resource or component.</dd>
+            <dd>Holds the data necessary to execute a query.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aff8846e5d9e835838a68c4c2f06146fb"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Write&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff8846e5d9e835838a68c4c2f06146fb" class="m-doc-self">Write</a>(</span><span class="m-doc-wrap">T&amp; ref)</span></span>
-            </h3>
-            <p>Creates a new write argument.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ref</td>
-                  <td>Reference to the resource or component.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="acce20ad90089be53a4c69e5e18c89fd9"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T* cubos::<wbr />core::<wbr />ecs::<wbr />Write&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acce20ad90089be53a4c69e5e18c89fd9" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Accesses the resource or component.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Pointer to the resource or component.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1252b015c27a3e18e5d299ed0c046356"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Write&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1252b015c27a3e18e5d299ed0c046356" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Accesses the resource or component.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Reference to the resource or component.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

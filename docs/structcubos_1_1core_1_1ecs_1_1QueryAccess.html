@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::OptWrite class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::QueryAccess struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,130 +46,73 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="accessors_8hpp.html">&lt;core/ecs/system/accessors.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>OptWrite <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>QueryAccess <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="access_8hpp.html">&lt;core/ecs/query/access.hpp&gt;</a></div>
         </h1>
-        <p>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Resource or component type.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Describes the types of data a query accesses.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>While the <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write</a> demands that the resource or component exists, this argument does not. Can be used as a pointer with both the <code>-&gt;</code> and <code>*</code> operators.</p>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a33384fe49b79ff82fa5921ed8e12d39e" class="m-doc">OptWrite</a>(</span><span class="m-doc-wrap">T* ptr)</span>
-            </dt>
-            <dd>Creates a new optional write argument. <code>ptr</code> should be null if the resource or component does not exist.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a128860143c1bbe88c837998e2fe22db0" class="m-doc">operator bool</a>(</span><span class="m-doc-wrap">) const</span>
-            </dt>
-            <dd>Checks if the resource or component exists.</dd>
-          </dl>
-        </section>
+<p>Used to determine if systems conflict with each other.</p>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a08f84594143968a27e47bed88e05dc36" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) -&gt; T*</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ab745151f59632ebf244dd04b1f41afb6" class="m-doc">insert</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id)</span>
             </dt>
-            <dd>Accesses the resource or component, aborting if it does not exist.</dd>
+            <dd>Adds a type identifier to the set of types the query accesses.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1795a492db82b54c9a287918b761412e" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) -&gt; T&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#adcfefb7339367d77b3f644c50d01a172" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a>&amp; other) const -&gt; bool</span>
             </dt>
-            <dd>Accesses the resource or component, aborting if it does not exist.</dd>
+            <dd>Checks if this access patterns intersect with the given ones.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a33384fe49b79ff82fa5921ed8e12d39e"><div>
+          <section class="m-doc-details" id="ab745151f59632ebf244dd04b1f41afb6"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />OptWrite&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a33384fe49b79ff82fa5921ed8e12d39e" class="m-doc-self">OptWrite</a>(</span><span class="m-doc-wrap">T* ptr)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryAccess::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab745151f59632ebf244dd04b1f41afb6" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id)</span></span>
             </h3>
-            <p>Creates a new optional write argument. <code>ptr</code> should be null if the resource or component does not exist.</p>
+            <p>Adds a type identifier to the set of types the query accesses.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">ptr</td>
-                  <td>Pointer to the resource or component.</td>
+                  <td style="width: 1%">id</td>
+                  <td>Type identifier.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a128860143c1bbe88c837998e2fe22db0"><div>
+          <section class="m-doc-details" id="adcfefb7339367d77b3f644c50d01a172"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />OptWrite&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a128860143c1bbe88c837998e2fe22db0" class="m-doc-self">operator bool</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />QueryAccess::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adcfefb7339367d77b3f644c50d01a172" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a>&amp; other) const</span></span>
             </h3>
-            <p>Checks if the resource or component exists.</p>
+            <p>Checks if this access patterns intersect with the given ones.</p>
             <table class="m-table m-fullwidth m-flat">
-              <tfoot>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Whether the resource or component exists.</td>
+                  <td style="width: 1%">other</td>
+                  <td>Other query access patterns.</td>
                 </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a08f84594143968a27e47bed88e05dc36"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T* cubos::<wbr />core::<wbr />ecs::<wbr />OptWrite&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a08f84594143968a27e47bed88e05dc36" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Accesses the resource or component, aborting if it does not exist.</p>
-            <table class="m-table m-fullwidth m-flat">
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Reference to the resource or component.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1795a492db82b54c9a287918b761412e"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />OptWrite&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1795a492db82b54c9a287918b761412e" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Accesses the resource or component, aborting if it does not exist.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Reference to the resource or component.</td>
+                  <th>Returns</th>
+                  <td>Whether they intersect.</td>
                 </tr>
               </tfoot>
             </table>

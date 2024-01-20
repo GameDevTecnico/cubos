@@ -375,24 +375,9 @@
             <dd>System argument used to write ECS commands and execute them at a later time.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              using <a href="#afc45a8320fa746e5e073949a9d1879f1" class="m-doc">Read</a> = <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">core::<wbr />ecs::<wbr />Read</a>&lt;T&gt;
+              using <a href="#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc">Opt</a> = <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">core::<wbr />ecs::<wbr />Opt</a>&lt;T&gt;
             </dt>
-            <dd>System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              using <a href="#a8b407fac79da178bfcfce9f40e6b4f4b" class="m-doc">Write</a> = <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">core::<wbr />ecs::<wbr />Write</a>&lt;T&gt;
-            </dt>
-            <dd>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              using <a href="#ae46bc4f9168d783e30a500ca2d2fbc5e" class="m-doc">OptRead</a> = <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">core::<wbr />ecs::<wbr />OptRead</a>&lt;T&gt;
-            </dt>
-            <dd>System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              using <a href="#a0d0135e5325c2a47ee27d830a7fd5eba" class="m-doc">OptWrite</a> = <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">core::<wbr />ecs::<wbr />OptWrite</a>&lt;T&gt;
-            </dt>
-            <dd>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</dd>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
               using <a href="#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a> = <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">core::<wbr />ecs::<wbr />EventReader</a>&lt;T, M&gt;
@@ -498,18 +483,7 @@
               using cubos::<wbr />engine::<wbr /><a href="#a306c379fd24b3dcc1990b06cdb386244" class="m-doc-self">Query</a> = <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">core::<wbr />ecs::<wbr />Query</a>&lt;ComponentTypes...&gt;
             </h3>
             <p>System argument which holds the result of a query over all entities in world which match the given arguments.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ComponentTypes</td>
-                  <td>Component accessor types to be queried.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Read</span><span class="o">&lt;</span><span class="n">Velocity</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">OptWrite</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">OptRead</span><span class="o">&lt;</span><span class="n">Scale</span><span class="o">&gt;&gt;</span></pre><p>This query will return all entities with a <code><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a></code> and <code>Velocity</code> component. Accessors to <code><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a></code> and <code><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a></code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, Read/OptRead should be used.</p>
+<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&amp;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Scale</span><span class="o">&amp;&gt;&gt;</span></pre><p>This query will return all entities with a <code><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a></code> and <code>Velocity</code> component. Accessors to <code><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a></code> and <code><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a></code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, <code>const</code> should be used.</p>
           </div></section>
           <section class="m-doc-details" id="a34019c3c344f309409d8b0abc510002d"><div>
             <h3>
@@ -525,14 +499,14 @@
             <p>System argument used to write ECS commands and execute them at a later time.</p>
 <p>Internally wraps a reference to a CommandBuffer object.</p>
           </div></section>
-          <section class="m-doc-details" id="afc45a8320fa746e5e073949a9d1879f1"><div>
+          <section class="m-doc-details" id="ad0f59a49870122ca4b9ea925be1929b3"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              using cubos::<wbr />engine::<wbr /><a href="#afc45a8320fa746e5e073949a9d1879f1" class="m-doc-self">Read</a> = <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">core::<wbr />ecs::<wbr />Read</a>&lt;T&gt;
+              using cubos::<wbr />engine::<wbr /><a href="#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc-self">Opt</a> = <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">core::<wbr />ecs::<wbr />Opt</a>&lt;T&gt;
             </h3>
-            <p>System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</p>
+            <p>Wrapper for reference types to indicate that the given argument type is optional in a query.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -540,74 +514,10 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>Resource or component type.</td>
+                  <td>Argument type.</td>
                 </tr>
               </tbody>
             </table>
-<p>Can be used as a pointer with both the <code>-&gt;</code> and <code>*</code> operators.</p>
-          </div></section>
-          <section class="m-doc-details" id="a8b407fac79da178bfcfce9f40e6b4f4b"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              using cubos::<wbr />engine::<wbr /><a href="#a8b407fac79da178bfcfce9f40e6b4f4b" class="m-doc-self">Write</a> = <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">core::<wbr />ecs::<wbr />Write</a>&lt;T&gt;
-            </h3>
-            <p>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Resource or component type.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Can be used as a pointer with both the <code>-&gt;</code> and <code>*</code> operators.</p>
-          </div></section>
-          <section class="m-doc-details" id="ae46bc4f9168d783e30a500ca2d2fbc5e"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              using cubos::<wbr />engine::<wbr /><a href="#ae46bc4f9168d783e30a500ca2d2fbc5e" class="m-doc-self">OptRead</a> = <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">core::<wbr />ecs::<wbr />OptRead</a>&lt;T&gt;
-            </h3>
-            <p>System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Resource or component type.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>While the <a href="namespacecubos_1_1engine.html#afc45a8320fa746e5e073949a9d1879f1" class="m-doc">Read</a> demands that the resource or component exists, this argument does not. Can be used as a pointer with both the <code>-&gt;</code> and <code>*</code> operators.</p>
-          </div></section>
-          <section class="m-doc-details" id="a0d0135e5325c2a47ee27d830a7fd5eba"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              using cubos::<wbr />engine::<wbr /><a href="#a0d0135e5325c2a47ee27d830a7fd5eba" class="m-doc-self">OptWrite</a> = <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">core::<wbr />ecs::<wbr />OptWrite</a>&lt;T&gt;
-            </h3>
-            <p>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Resource or component type.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>While the <a href="namespacecubos_1_1engine.html#a8b407fac79da178bfcfce9f40e6b4f4b" class="m-doc">Write</a> demands that the resource or component exists, this argument does not. Can be used as a pointer with both the <code>-&gt;</code> and <code>*</code> operators.</p>
           </div></section>
           <section class="m-doc-details" id="aa962f62de69af44f93726b63b90295e0"><div>
             <h3>
