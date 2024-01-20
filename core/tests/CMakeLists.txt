@@ -53,6 +53,7 @@ add_executable(
     ecs/entity/archetype_graph.cpp
     ecs/entity/pool.cpp
     ecs/query/data.cpp
+    ecs/query/term.cpp
 
     geom/box.cpp
     geom/capsule.cpp

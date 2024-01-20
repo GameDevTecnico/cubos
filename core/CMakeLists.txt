@@ -98,6 +98,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/system/dispatcher.cpp"
     "src/cubos/core/ecs/system/commands.cpp"
     "src/cubos/core/ecs/system/query.cpp"
+    "src/cubos/core/ecs/query/term.cpp"
     "src/cubos/core/ecs/query/access.cpp"
     "src/cubos/core/ecs/query/data.cpp"
     "src/cubos/core/ecs/query/fetcher.cpp"
