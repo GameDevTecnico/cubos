@@ -104,6 +104,12 @@ namespace cubos::core::ecs
     class QueryFilter::View::Iterator
     {
     public:
+        /// @brief Output structure of the iterator.
+        struct Match
+        {
+            Entity entities[MaxTargetCount];
+        };
+
         /// @brief Constructs.
         /// @param view Query filter view.
         /// @param end Whether the iterator should point to the end of the matches.
@@ -117,6 +123,16 @@ namespace cubos::core::ecs
         /// @param other Other iterator.
         /// @return Whether the iterators point to the same match.
         bool operator==(const Iterator& other) const;
+
+        /// @brief Accesses the match referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Match.
+        const Match& operator*() const;
+
+        /// @brief Accesses the match referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Match.
+        const Match* operator->() const;
 
         /// @brief Advances the iterator.
         /// @note Aborts if out of bounds.
@@ -136,6 +152,7 @@ namespace cubos::core::ecs
         void findArchetype();
 
         View& mView;
+        mutable Match mMatch;
 
         /// @brief Archetype of each target.
         ArchetypeId mTargetArchetypes[MaxTargetCount];
