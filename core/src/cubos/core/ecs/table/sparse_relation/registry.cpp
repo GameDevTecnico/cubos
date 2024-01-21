@@ -1,0 +1,63 @@
+#include <cubos/core/ecs/table/sparse_relation/registry.hpp>
+#include <cubos/core/log.hpp>
+
+using cubos::core::ecs::SparseRelationTable;
+using cubos::core::ecs::SparseRelationTableRegistry;
+
+SparseRelationTableRegistry::~SparseRelationTableRegistry()
+{
+    delete mEmptyTypeIndex;
+}
+
+SparseRelationTableRegistry::SparseRelationTableRegistry()
+{
+    // A pointer was used here to avoid moving the entire TypeIndex definition inside the registry class.
+    // This way we can forward declare it.
+    mEmptyTypeIndex = new TypeIndex();
+}
+
+bool SparseRelationTableRegistry::contains(SparseRelationTableId id) const
+{
+    return mTables.contains(id);
+}
+
+SparseRelationTable& SparseRelationTableRegistry::create(SparseRelationTableId id, Types& types)
+{
+    if (!mTables.contains(id))
+    {
+        mTables.emplace(std::piecewise_construct, std::forward_as_tuple(id),
+                        std::forward_as_tuple(types.type(id.dataType)));
+        mTypeIndices[id.dataType.inner].insert(id);
+    }
+
+    return mTables.at(id);
+}
+
+SparseRelationTable& SparseRelationTableRegistry::at(SparseRelationTableId id)
+{
+    CUBOS_ASSERT(mTables.contains(id), "No such sparse relation table");
+    return mTables.at(id);
+}
+
+const SparseRelationTable& SparseRelationTableRegistry::at(SparseRelationTableId id) const
+{
+    CUBOS_ASSERT(mTables.contains(id), "No such sparse relation table");
+    return mTables.at(id);
+}
+
+const SparseRelationTableRegistry::TypeIndex& SparseRelationTableRegistry::type(DataTypeId type) const
+{
+    auto it = mTypeIndices.find(type.inner);
+    if (it == mTypeIndices.end())
+    {
+        return *mEmptyTypeIndex;
+    }
+
+    return it->second;
+}
+
+void SparseRelationTableRegistry::TypeIndex::insert(SparseRelationTableId id)
+{
+    mSparseRelationTableIdsByFrom[id.from].emplace_back(id);
+    mSparseRelationTableIdsByTo[id.to].emplace_back(id);
+}

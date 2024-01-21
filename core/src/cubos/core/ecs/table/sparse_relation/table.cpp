@@ -1,4 +1,4 @@
-#include <cubos/core/ecs/table/sparse_relation.hpp>
+#include <cubos/core/ecs/table/sparse_relation/table.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
@@ -123,14 +123,19 @@ bool SparseRelationTable::contains(uint32_t from, uint32_t to) const
     return mPairRows.contains(pairId(from, to));
 }
 
-uintptr_t SparseRelationTable::at(uint32_t from, uint32_t to) const
+std::size_t SparseRelationTable::row(uint32_t from, uint32_t to) const
 {
-    if (auto it = mPairRows.find(pairId(from, to)); it != mPairRows.end())
-    {
-        return reinterpret_cast<uintptr_t>(mRelations.at(it->second));
-    }
+    return static_cast<std::size_t>(mPairRows.at(pairId(from, to)));
+}
 
-    return 0;
+void* SparseRelationTable::at(std::size_t row)
+{
+    return mRelations.at(row);
+}
+
+const void* SparseRelationTable::at(std::size_t row) const
+{
+    return mRelations.at(row);
 }
 
 auto SparseRelationTable::begin() const -> Iterator

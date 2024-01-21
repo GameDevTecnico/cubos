@@ -1,10 +1,10 @@
-#include <cubos/core/ecs/table/dense.hpp>
+#include <cubos/core/ecs/table/dense/table.hpp>
 #include <cubos/core/log.hpp>
 
 using cubos::core::ecs::DenseTable;
 using cubos::core::memory::AnyVector;
 
-void DenseTable::addColumn(DenseColumnId id, const reflection::Type& type)
+void DenseTable::addColumn(ColumnId id, const reflection::Type& type)
 {
     CUBOS_ASSERT(mEntities.empty());
     mColumns.emplace(id.inner, type);
@@ -98,21 +98,21 @@ std::size_t DenseTable::size() const
     return mEntities.size();
 }
 
-AnyVector& DenseTable::column(DenseColumnId id)
+AnyVector& DenseTable::column(ColumnId id)
 {
     auto it = mColumns.find(id.inner);
     CUBOS_ASSERT(it != mColumns.end(), "Column doesn't exist in table");
     return it->second;
 }
 
-const AnyVector& DenseTable::column(DenseColumnId id) const
+const AnyVector& DenseTable::column(ColumnId id) const
 {
     auto it = mColumns.find(id.inner);
     CUBOS_ASSERT(it != mColumns.end(), "Column doesn't exist in table");
     return it->second;
 }
 
-bool DenseTable::contains(DenseColumnId id) const
+bool DenseTable::contains(ColumnId id) const
 {
     return mColumns.contains(id.inner);
 }

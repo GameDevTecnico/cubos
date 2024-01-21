@@ -1,11 +1,11 @@
 #include <doctest/doctest.h>
 
-#include <cubos/core/ecs/table/dense.hpp>
+#include <cubos/core/ecs/table/dense/table.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include "../utils.hpp"
+#include "../../utils.hpp"
 
-using cubos::core::ecs::DenseColumnId;
+using cubos::core::ecs::ColumnId;
 using cubos::core::ecs::DenseTable;
 using cubos::core::reflection::reflect;
 

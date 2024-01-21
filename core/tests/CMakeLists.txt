@@ -47,8 +47,8 @@ add_executable(
     ecs/dispatcher.cpp
 
     ecs/types.cpp
-    ecs/table/dense.cpp
-    ecs/table/sparse_relation.cpp
+    ecs/table/dense/table.cpp
+    ecs/table/sparse_relation/table.cpp
     ecs/entity/archetype_graph.cpp
     ecs/entity/pool.cpp
     ecs/query/data.cpp

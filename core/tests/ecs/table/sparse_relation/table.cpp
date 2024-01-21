@@ -4,9 +4,9 @@
 
 #include <doctest/doctest.h>
 
-#include <cubos/core/ecs/table/sparse_relation.hpp>
+#include <cubos/core/ecs/table/sparse_relation/table.hpp>
 
-#include "../utils.hpp"
+#include "../../utils.hpp"
 
 using cubos::core::ecs::SparseRelationTable;
 using cubos::core::reflection::reflect;
