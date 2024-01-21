@@ -18,31 +18,41 @@ TEST_CASE("ecs::QueryTerm")
 
     SUBCASE("make*")
     {
-        auto term = QueryTerm::makeEntity(1);
-        CHECK(term.isEntity());
-        CHECK(term.type == DataTypeId::Invalid);
-        CHECK(term.entity.target == 1);
+        auto term1 = QueryTerm::makeEntity(1);
+        CHECK(term1.isEntity());
+        CHECK(term1.type == DataTypeId::Invalid);
+        CHECK(term1.entity.target == 1);
+        CHECK(term1.compare(types, term1));
 
-        term = QueryTerm::makeWithComponent(integerComponent, 1);
-        CHECK(term.isComponent(types));
-        CHECK(term.type == integerComponent);
-        CHECK(term.component.target == 1);
-        CHECK_FALSE(term.component.without);
-        CHECK_FALSE(term.component.optional);
+        auto term2 = QueryTerm::makeWithComponent(integerComponent, 1);
+        CHECK(term2.isComponent(types));
+        CHECK(term2.type == integerComponent);
+        CHECK(term2.component.target == 1);
+        CHECK_FALSE(term2.component.without);
+        CHECK_FALSE(term2.component.optional);
+        CHECK(term2.compare(types, term2));
+        CHECK_FALSE(term2.compare(types, term1));
 
-        term = QueryTerm::makeWithoutComponent(integerComponent, 1);
-        CHECK(term.isComponent(types));
-        CHECK(term.type == integerComponent);
-        CHECK(term.component.target == 1);
-        CHECK(term.component.without);
-        CHECK_FALSE(term.component.optional);
+        auto term3 = QueryTerm::makeWithoutComponent(integerComponent, 1);
+        CHECK(term3.isComponent(types));
+        CHECK(term3.type == integerComponent);
+        CHECK(term3.component.target == 1);
+        CHECK(term3.component.without);
+        CHECK_FALSE(term3.component.optional);
+        CHECK(term3.compare(types, term3));
+        CHECK_FALSE(term3.compare(types, term2));
+        CHECK_FALSE(term3.compare(types, term1));
 
-        term = QueryTerm::makeOptComponent(integerComponent, 1);
-        CHECK(term.isComponent(types));
-        CHECK(term.type == integerComponent);
-        CHECK(term.component.target == 1);
-        CHECK_FALSE(term.component.without);
-        CHECK(term.component.optional);
+        auto term4 = QueryTerm::makeOptComponent(integerComponent, 1);
+        CHECK(term4.isComponent(types));
+        CHECK(term4.type == integerComponent);
+        CHECK(term4.component.target == 1);
+        CHECK_FALSE(term4.component.without);
+        CHECK(term4.component.optional);
+        CHECK(term4.compare(types, term4));
+        CHECK_FALSE(term4.compare(types, term3));
+        CHECK_FALSE(term4.compare(types, term2));
+        CHECK_FALSE(term4.compare(types, term1));
     }
 
     SUBCASE("empty resolve")

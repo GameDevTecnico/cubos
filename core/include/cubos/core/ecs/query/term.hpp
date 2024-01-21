@@ -78,6 +78,12 @@ namespace cubos::core::ecs
         /// @return Whether it's a component term.
         bool isComponent(const Types& types) const;
 
+        /// @brief Compares two terms.
+        /// @param types Types registry.
+        /// @param other Other term.
+        /// @return Whether they're equal.
+        bool compare(const Types& types, const QueryTerm& other) const;
+
         /// @brief Merges a vector of terms with another, joining pairs of them if possible.
         ///
         /// This function is mainly used to merge terms specified manually for a query with terms obtained from its

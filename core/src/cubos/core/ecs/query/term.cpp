@@ -45,6 +45,28 @@ bool QueryTerm::isComponent(const Types& types) const
     return type != DataTypeId::Invalid && types.isComponent(type);
 }
 
+bool QueryTerm::compare(const Types& types, const QueryTerm& other) const
+{
+    if (type != other.type)
+    {
+        return false;
+    }
+
+    if (this->isEntity())
+    {
+        return entity.target == other.entity.target;
+    }
+    else if (this->isComponent(types))
+    {
+        return component.target == other.component.target && component.without == other.component.without &&
+               component.optional == other.component.optional;
+    }
+    else
+    {
+        CUBOS_UNREACHABLE();
+    }
+}
+
 std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<QueryTerm>& baseTerms,
                                           std::vector<QueryTerm>& otherTerms)
 {
