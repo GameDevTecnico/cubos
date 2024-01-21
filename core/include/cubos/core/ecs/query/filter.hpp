@@ -43,7 +43,12 @@ namespace cubos::core::ecs
         void update();
 
         /// @brief Returns a view which can be used to iterate over the matches.
+        /// @return View.
         View view();
+
+        /// @brief Gets the number of targets.
+        /// @return Target count.
+        int targetCount() const;
 
     private:
         /// @brief Holds the necessary data for each target.
@@ -79,6 +84,14 @@ namespace cubos::core::ecs
         /// @param filter Query filter.
         View(QueryFilter& filter);
 
+        /// @brief Copy constructs.
+        /// @param view Other view.
+        View(const View& view) = default;
+
+        /// @brief Copy assigns.
+        /// @param view Other view.
+        View& operator=(const View& view);
+
         /// @brief Returns a new view equal to this one but with the given target pinned to the given entity.
         ///
         /// Effectively this filters out all matches where the given target isn't the given entity.
@@ -107,6 +120,7 @@ namespace cubos::core::ecs
         /// @brief Output structure of the iterator.
         struct Match
         {
+            /// @brief Entities for each target.
             Entity entities[MaxTargetCount];
         };
 

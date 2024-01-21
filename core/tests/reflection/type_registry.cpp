@@ -6,7 +6,7 @@
 
 using cubos::core::reflection::TypeRegistry;
 
-TEST_CASE("reflection::Type")
+TEST_CASE("reflection::TypeRegistry")
 {
     TypeRegistry registry{};
 

@@ -104,7 +104,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/query/filter.cpp"
     "src/cubos/core/ecs/query/fetcher.cpp"
     "src/cubos/core/ecs/query/opt.cpp"
-    "src/cubos/core/ecs/query/properties.cpp"
     "src/cubos/core/ecs/relation/reflection.cpp"
     "src/cubos/core/ecs/relation/table.cpp"
     "src/cubos/core/ecs/blueprint.cpp"

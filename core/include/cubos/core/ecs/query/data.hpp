@@ -5,9 +5,10 @@
 #pragma once
 
 #include <tuple>
+#include <utility>
 
 #include <cubos/core/ecs/query/fetcher.hpp>
-#include <cubos/core/ecs/query/properties.hpp>
+#include <cubos/core/ecs/query/filter.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
@@ -28,96 +29,89 @@ namespace cubos::core::ecs
     class QueryData
     {
     public:
-        /// @brief Used to iterate over the query matches.
-        class Iterator;
+        /// @brief Can be iterated to view the query matches.
+        class View;
+
+        ~QueryData()
+        {
+            delete mFetchers;
+            delete mFilter;
+        }
 
         /// @brief Constructs.
-        /// @param properties Query properties.
-        QueryData(World& world, QueryProperties properties)
+        /// @param world World being queried.
+        /// @param extraTerms Extra query terms.
+        QueryData(World& world, const std::vector<QueryTerm>& extraTerms)
             : mWorld{world}
-            , mQueryFetchers{QueryFetcher<Ts>(world)...}
-            , mProperties{std::move(properties)}
         {
-            // Analyze the access patterns of each query argument.
-            std::apply([this](auto&&... fetchers) { (fetchers.analyze(mAccess), ...); }, mQueryFetchers);
-
-            // Add missing column requirements from the query arguments.
-            for (auto dataTypeInner : mAccess.dataTypes)
+            for (int i = 0; i < QueryFilter::MaxTargetCount; ++i)
             {
-                DataTypeId dataType{dataTypeInner};
-                bool missing = true;
+                mPreparedArchetypes[i] = ArchetypeId::Invalid;
+            }
 
-                for (auto columnId : mProperties.withColumns)
+            // Extract terms from the query argument types.
+            std::vector<QueryTerm> argumentTerms = {QueryFetcher<Ts>::term(world)...};
+
+            // Resolve them with the received extra terms.
+            auto terms = QueryTerm::resolve(world.types(), extraTerms, argumentTerms);
+
+            // Initialize the filter.
+            mFilter = new QueryFilter(world, terms);
+
+            // Initialize the fetchers.
+            int i = 0;
+            auto getTerm = [&]() { return argumentTerms[i++]; };
+            mFetchers = new std::tuple<QueryFetcher<Ts>...>{QueryFetcher<Ts>(world, getTerm())...};
+            (void)getTerm; // Necessary to silence unused warning in case Ts is empty.
+
+            // Find the cursor for each fetcher.
+            for (std::size_t argI = 0; argI < argumentTerms.size(); ++argI)
+            {
+                // Find the actual index of the term in the resolved vector.
+                std::size_t termI;
+                for (termI = 0; termI < terms.size(); ++termI)
                 {
-                    if (columnId.dataType() == dataType)
+                    if (terms[termI].compare(world.types(), argumentTerms[termI]))
                     {
-                        missing = false;
                         break;
                     }
                 }
 
-                if (missing)
-                {
-                    mProperties.withColumns.emplace_back(DenseColumnId::make(dataType));
-                }
-            }
+                CUBOS_ASSERT(termI < terms.size(),
+                             "QueryTerm::resolve should put the argument term somewhere in the resulting terms vector");
 
-            // Find the archetype which contains only the required components.
-            for (auto columnId : mProperties.withColumns)
-            {
-                CUBOS_ASSERT(!mWorld.archetypeGraph().contains(mBaseArchetype, columnId),
-                             "Query properties must not have duplicate column ids");
-                mBaseArchetype = mWorld.archetypeGraph().with(mBaseArchetype, columnId);
+                mFetcherCursors.emplace_back(mFilter->cursorIndex(termI));
             }
-
-            this->update();
         }
 
         /// @brief Move constructs.
         /// @param other Other query data.
-        QueryData(QueryData&& other) noexcept = default;
+        QueryData(QueryData&& other)
+            : mWorld{other.mWorld}
+            , mFilter{other.mFilter}
+            , mFetchers{other.mFetchers}
+            , mFetcherCursors{other.mFetcherCursors}
+        {
+            for (int i = 0; i < QueryFilter::MaxTargetCount; ++i)
+            {
+                mPreparedArchetypes[i] = other.mPreparedArchetypes[i];
+            }
+
+            other.mFilter = nullptr;
+            other.mFetchers = nullptr;
+        }
 
         /// @brief Fetches any new matching archetypes that have been added since the last call to this function.
         void update()
         {
-            // Collect all archetypes which have at least the required columns.
-            std::vector<ArchetypeId> newArchetypes;
-            mSeenArchetypes = mWorld.archetypeGraph().collect(mBaseArchetype, newArchetypes, mSeenArchetypes);
-            mArchetypes.reserve(mArchetypes.size() + newArchetypes.size());
-
-            // Filter out archetypes which have any of the excluded columns.
-            for (auto archetype : newArchetypes)
-            {
-                bool matches = true;
-
-                for (auto columnId : mProperties.withoutColumns)
-                {
-                    if (mWorld.archetypeGraph().contains(archetype, columnId))
-                    {
-                        matches = false;
-                        break;
-                    }
-                }
-
-                if (matches)
-                {
-                    mArchetypes.emplace_back(archetype);
-                }
-            }
+            mFilter->update();
         }
 
-        /// @brief Returns an iterator pointing to the first query match.
-        /// @return Iterator.
-        Iterator begin()
+        /// @brief Returns a view which can be used to iterate over the matches.
+        /// @return View.
+        View view()
         {
-            return {*this, 0, 0};
-        }
-
-        /// @brief Returns an out of bounds iterator representing the end of the query matches.
-        /// @return Iterator.
-        Iterator end()
-        {
-            return {*this, mArchetypes.size(), 0};
+            return {*this, mFilter->view()};
         }
 
         /// @brief Accesses the match for the given entity, if there is one.
@@ -125,63 +119,109 @@ namespace cubos::core::ecs
         /// @return Requested components, or nothing if the entity does not match the query.
         Opt<std::tuple<Ts...>> at(Entity entity)
         {
-            // Get the archetype of the entity.
-            auto archetype = mWorld.archetype(entity);
+            auto view = this->view().pin(0, entity);
 
-            // Check if it matches the query at all.
-            bool matches = false;
-            for (auto matchArchetype : mArchetypes)
-            {
-                if (matchArchetype == archetype)
-                {
-                    matches = true;
-                    break;
-                }
-            }
-
-            if (!matches)
+            if (view.begin() == view.end())
             {
                 return {};
             }
 
-            // If it matches, just fetch the components.
-            this->prepare(archetype);
-            auto row = mWorld.tables().dense(archetype).row(entity.index);
-            return std::apply([row](auto&&... fetchers) { return std::tuple<Ts...>(fetchers.fetch(row)...); },
-                              mQueryFetchers);
+            return *view.begin();
         }
 
     private:
-        /// @brief If necessary, prepares for iteration over the given archetype.
-        void prepare(ArchetypeId archetype)
+        /// @brief If necessary, prepares the fetchers for iteration over the given archetypes.
+        /// @param archetypes Target archetypes.
+        void prepare(const ArchetypeId* archetypes)
         {
-            if (mPreparedArchetype != archetype)
+            // Check if anything changed at all, and if any of the archetypes is empty.
+            bool changed = false;
+            bool empty = false;
+            for (int target = 0; target < mFilter->targetCount(); ++target)
             {
-                mPreparedArchetype = archetype;
-
-                // Only prepare the fetchers if the archetype actually contains anything.
-                if (mWorld.tables().contains(archetype))
+                if (mPreparedArchetypes[target] != archetypes[target])
                 {
-                    std::apply([archetype](auto&&... fetchers) { (fetchers.prepare(archetype), ...); }, mQueryFetchers);
+                    mPreparedArchetypes[target] = archetypes[target];
+                    changed = true;
                 }
+
+                if (!mWorld.tables().contains(archetypes[target]))
+                {
+                    empty = true;
+                }
+            }
+
+            if (changed && !empty)
+            {
+                std::apply([archetypes](auto&&... fetchers) { (fetchers.prepare(archetypes), ...); }, *mFetchers);
             }
         }
 
         World& mWorld;
+        QueryFilter* mFilter;
 
-        ArchetypeId mBaseArchetype{ArchetypeId::Empty};
-        std::vector<ArchetypeId> mArchetypes;
-        std::size_t mSeenArchetypes{0};
-
-        std::tuple<QueryFetcher<Ts>...> mQueryFetchers;
-        ArchetypeId mPreparedArchetype{ArchetypeId::Invalid};
-
-        QueryAccess mAccess;
-        QueryProperties mProperties;
+        std::tuple<QueryFetcher<Ts>...>* mFetchers;
+        std::vector<size_t> mFetcherCursors;
+        ArchetypeId mPreparedArchetypes[QueryFilter::MaxTargetCount];
     };
 
     template <typename... Ts>
-    class QueryData<Ts...>::Iterator
+    class QueryData<Ts...>::View
+    {
+    public:
+        /// @brief Used to iterate over the query matches.
+        class Iterator;
+
+        /// @brief Constructs.
+        /// @param data Query data.
+        /// @param view Query filter view.
+        View(QueryData& data, QueryFilter::View view)
+            : mData{data}
+            , mView{view}
+        {
+        }
+
+        /// @brief Returns a new view equal to this one but with the given target pinned to the given entity.
+        ///
+        /// Effectively this filters out all matches where the given target isn't the given entity.
+        ///
+        /// @param target Target index.
+        /// @param entity Entity.
+        /// @return View.
+        View pin(int target, Entity entity) &&
+        {
+            mView = std::move(mView).pin(target, entity);
+            return *this;
+        }
+
+        /// @brief Returns an iterator pointing to the first query match.
+        /// @return Iterator.
+        Iterator begin()
+        {
+            return {mData, mView.begin()};
+        }
+
+        /// @brief Returns an out of bounds iterator representing the end of the query matches.
+        /// @return Iterator.
+        Iterator end()
+        {
+            return {mData, mView.end()};
+        }
+
+        /// @brief Gets a reference to the underlying query data.
+        /// @return Query data.
+        QueryData& data()
+        {
+            return mData;
+        }
+
+    private:
+        QueryData& mData;
+        QueryFilter::View mView;
+    };
+
+    template <typename... Ts>
+    class QueryData<Ts...>::View::Iterator
     {
     public:
         /// @brief Output structure of the iterator.
@@ -189,14 +229,11 @@ namespace cubos::core::ecs
 
         /// @brief Constructs.
         /// @param data Query data.
-        /// @param archetypeIndex Archetype index.
-        /// @param row Archetype's dense table row.
-        Iterator(QueryData& data, std::size_t archetypeIndex, std::size_t row)
+        /// @param iterator Query filter iterator.
+        Iterator(QueryData& data, QueryFilter::View::Iterator iterator)
             : mData{data}
-            , mArchetypeIndex{archetypeIndex}
-            , mRow{row}
+            , mIterator{iterator}
         {
-            this->findArchetype();
         }
 
         /// @brief Copy constructs.
@@ -208,7 +245,7 @@ namespace cubos::core::ecs
         /// @return Whether the iterators point to the same match.
         bool operator==(const Iterator& other) const
         {
-            return &mData == &other.mData && mArchetypeIndex == other.mArchetypeIndex && mRow == other.mRow;
+            return &mData == &other.mData && mIterator == other.mIterator;
         }
 
         /// @brief Accesses the match referenced by this iterator.
@@ -216,11 +253,17 @@ namespace cubos::core::ecs
         /// @return Match.
         Match operator*() const
         {
-            CUBOS_ASSERT(mArchetypeIndex < mData.mArchetypes.size(), "Iterator out of bounds");
+            mData.prepare(mIterator.targetArchetypes());
+            auto* cursorRows = mIterator.cursorRows();
 
-            mData.prepare(mData.mArchetypes[mArchetypeIndex]);
-            return std::apply([this](auto&&... fetchers) { return std::tuple<Ts...>(fetchers.fetch(mRow)...); },
-                              mData.mQueryFetchers);
+            int i = 0;
+            auto fetch = [&]<typename T>(QueryFetcher<T>& fetcher) -> T {
+                return fetcher.fetch(cursorRows[mData.mFetcherCursors[i++]]);
+            };
+
+            return std::apply(
+                [&fetch](auto&&... fetchers) { return std::tuple<Ts...>(fetch.template operator()<Ts>(fetchers)...); },
+                *mData.mFetchers);
         }
 
         /// @brief Advances the iterator.
@@ -228,28 +271,12 @@ namespace cubos::core::ecs
         /// @return Reference to this.
         Iterator& operator++()
         {
-            CUBOS_ASSERT(mArchetypeIndex < mData.mArchetypes.size(), "Iterator out of bounds");
-
-            ++mRow;
-            this->findArchetype();
+            ++mIterator;
             return *this;
         }
 
     private:
-        /// @brief Advances the iterator's archetype until a non-empty one is found.
-        void findArchetype()
-        {
-            while (mArchetypeIndex < mData.mArchetypes.size() &&
-                   (!mData.mWorld.tables().contains(mData.mArchetypes[mArchetypeIndex]) ||
-                    mRow >= mData.mWorld.tables().dense(mData.mArchetypes[mArchetypeIndex]).size()))
-            {
-                ++mArchetypeIndex;
-                mRow = 0;
-            }
-        }
-
         QueryData& mData;
-        std::size_t mArchetypeIndex;
-        std::size_t mRow;
+        QueryFilter::View::Iterator mIterator;
     };
 } // namespace cubos::core::ecs

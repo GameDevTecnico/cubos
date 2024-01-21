@@ -12,7 +12,7 @@ static std::size_t queryCount(World& world)
     QueryData<Ts...> query{world, {}};
 
     std::size_t counter = 0;
-    for (const auto match : query)
+    for (const auto match : query.view())
     {
         (void)match;
         counter += 1;
