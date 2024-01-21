@@ -26,14 +26,12 @@ namespace cubos::core::ecs
 
         /// @brief Removes an entity from the world.
         /// @param index Entity index to remove.
-        /// @return Archetype identifier of the removed entity.
-        ArchetypeId destroy(uint32_t index);
+        void destroy(uint32_t index);
 
         /// @brief Changes the archetype identifier of an entity.
         /// @param index Entity index.
         /// @param archetype New archetype identifier.
-        /// @return Old archetype identifier.
-        ArchetypeId archetype(uint32_t index, ArchetypeId archetype);
+        void archetype(uint32_t index, ArchetypeId archetype);
 
         /// @brief Gets the archetype identifier of an entity.
         /// @param index Entity index.

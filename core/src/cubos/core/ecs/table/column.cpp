@@ -19,3 +19,8 @@ DataTypeId ColumnId::dataType() const
 {
     return DataTypeId{.inner = static_cast<uint32_t>(inner >> 32)};
 }
+
+uint32_t ColumnId::index() const
+{
+    return static_cast<uint32_t>(inner);
+}

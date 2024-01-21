@@ -84,9 +84,23 @@ namespace cubos::core::ecs
             return counter;
         }
 
+        /// @brief Gets an iterator to the start of the type indices of this registry.
+        /// @return Iterator.
+        auto begin() const
+        {
+            return mTypeIndices.cbegin();
+        }
+
+        /// @brief Gets an iterator to the end of the type indices of this registry.
+        /// @return Iterator.
+        auto end() const
+        {
+            return mTypeIndices.cend();
+        }
+
     private:
         std::unordered_map<SparseRelationTableId, SparseRelationTable, SparseRelationTableIdHash> mTables;
-        std::unordered_map<std::size_t, TypeIndex> mTypeIndices;
+        std::unordered_map<DataTypeId, TypeIndex, DataTypeIdHash> mTypeIndices;
         std::vector<SparseRelationTableId> mIds;
         TypeIndex* mEmptyTypeIndex; ///< Used as a placeholder when a type hasn't been registered yet.
     };

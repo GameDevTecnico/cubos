@@ -89,7 +89,7 @@ namespace cubos::core::ecs
 
         void prepare(const ArchetypeId* targetArchetypes)
         {
-            mTable = &mWorld.tables().dense(targetArchetypes[mTarget]);
+            mTable = &mWorld.tables().dense().at(targetArchetypes[mTarget]);
         }
 
         Entity fetch(std::size_t row)
@@ -111,7 +111,7 @@ namespace cubos::core::ecs
     public:
         QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
-            , mColumnId{DenseColumnId::make(world.types().id(reflection::reflect<T>()))}
+            , mColumnId{ColumnId::make(world.types().id(reflection::reflect<T>()))}
             , mTarget{term.component.target}
         {
         }
@@ -127,7 +127,7 @@ namespace cubos::core::ecs
 
         void prepare(const ArchetypeId* targetArchetypes)
         {
-            mColumn = &mWorld.tables().dense(targetArchetypes[mTarget]).column(mColumnId);
+            mColumn = &mWorld.tables().dense().at(targetArchetypes[mTarget]).column(mColumnId);
         }
 
         T& fetch(std::size_t row)
@@ -137,7 +137,7 @@ namespace cubos::core::ecs
 
     private:
         World& mWorld;
-        DenseColumnId mColumnId;
+        ColumnId mColumnId;
         memory::AnyVector* mColumn{nullptr};
         int mTarget;
     };
@@ -148,7 +148,7 @@ namespace cubos::core::ecs
     public:
         QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
-            , mColumnId{DenseColumnId::make(world.types().id(reflection::reflect<T>()))}
+            , mColumnId{ColumnId::make(world.types().id(reflection::reflect<T>()))}
             , mTarget{term.component.target}
         {
         }
@@ -164,7 +164,7 @@ namespace cubos::core::ecs
 
         void prepare(const ArchetypeId* targetArchetypes)
         {
-            mColumn = &mWorld.tables().dense(targetArchetypes[mTarget]).column(mColumnId);
+            mColumn = &mWorld.tables().dense().at(targetArchetypes[mTarget]).column(mColumnId);
         }
 
         const T& fetch(std::size_t row)
@@ -174,7 +174,7 @@ namespace cubos::core::ecs
 
     private:
         World& mWorld;
-        DenseColumnId mColumnId;
+        ColumnId mColumnId;
         memory::AnyVector* mColumn{nullptr};
         int mTarget;
     };
@@ -185,7 +185,7 @@ namespace cubos::core::ecs
     public:
         QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
-            , mColumnId{DenseColumnId::make(world.types().id(reflection::reflect<T>()))}
+            , mColumnId{ColumnId::make(world.types().id(reflection::reflect<T>()))}
             , mTarget{term.component.target}
         {
         }
@@ -201,9 +201,9 @@ namespace cubos::core::ecs
 
         void prepare(const ArchetypeId* targetArchetypes)
         {
-            if (mWorld.tables().dense(targetArchetypes[mTarget]).contains(mColumnId))
+            if (mWorld.tables().dense().at(targetArchetypes[mTarget]).contains(mColumnId))
             {
-                mColumn = &mWorld.tables().dense(targetArchetypes[mTarget]).column(mColumnId);
+                mColumn = &mWorld.tables().dense().at(targetArchetypes[mTarget]).column(mColumnId);
             }
             else
             {
@@ -223,7 +223,7 @@ namespace cubos::core::ecs
 
     private:
         World& mWorld;
-        DenseColumnId mColumnId;
+        ColumnId mColumnId;
         memory::AnyVector* mColumn{nullptr};
         int mTarget;
     };
@@ -234,7 +234,7 @@ namespace cubos::core::ecs
     public:
         QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
-            , mColumnId{DenseColumnId::make(world.types().id(reflection::reflect<T>()))}
+            , mColumnId{ColumnId::make(world.types().id(reflection::reflect<T>()))}
             , mTarget{term.component.target}
         {
         }
@@ -251,9 +251,9 @@ namespace cubos::core::ecs
 
         void prepare(const ArchetypeId* targetArchetypes)
         {
-            if (mWorld.tables().dense(targetArchetypes[mTarget]).contains(mColumnId))
+            if (mWorld.tables().dense().at(targetArchetypes[mTarget]).contains(mColumnId))
             {
-                mColumn = &mWorld.tables().dense(targetArchetypes[mTarget]).column(mColumnId);
+                mColumn = &mWorld.tables().dense().at(targetArchetypes[mTarget]).column(mColumnId);
             }
             else
             {
@@ -273,7 +273,7 @@ namespace cubos::core::ecs
 
     private:
         World& mWorld;
-        DenseColumnId mColumnId;
+        ColumnId mColumnId;
         memory::AnyVector* mColumn{nullptr};
         int mTarget;
     };

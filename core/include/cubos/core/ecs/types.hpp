@@ -26,6 +26,12 @@ namespace cubos::core::ecs
         bool operator==(const DataTypeId& other) const = default;
     };
 
+    /// @brief Hash functor for @ref DataTypeId.
+    struct DataTypeIdHash
+    {
+        std::size_t operator()(const DataTypeId& id) const;
+    };
+
     /// @brief Registry of all data types used in an ECS world.
     class Types final
     {

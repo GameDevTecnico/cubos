@@ -80,7 +80,7 @@ namespace cubos::core::ecs
         /// @brief Gets the row of the relation with the given indices.
         /// @param from From index.
         /// @param to To index.
-        /// @return Row of the data, or 0 if there's no such relation.
+        /// @return Row of the data.
         std::size_t row(uint32_t from, uint32_t to) const;
 
         /// @brief Get the relation at the given row.

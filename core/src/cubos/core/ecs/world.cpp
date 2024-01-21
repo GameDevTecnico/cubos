@@ -13,6 +13,12 @@ void World::registerComponent(const reflection::Type& type)
     mTypes.addComponent(type);
 }
 
+void World::registerRelation(const reflection::Type& type)
+{
+    CUBOS_TRACE("Registered relation '{}'", type.name());
+    mTypes.addRelation(type);
+}
+
 Entity World::create()
 {
     auto entity = this->reserve();
@@ -26,11 +32,11 @@ void World::createAt(Entity entity)
     CUBOS_ASSERT(mEntityPool.contains(entity), "Entity is not reserved");
 
     // Set the archetype of the entity and check if it wasn't already set before.
-    auto oldArchetype = mEntityPool.archetype(entity.index, ArchetypeId::Empty);
-    CUBOS_ASSERT(oldArchetype == ArchetypeId::Invalid, "Entity has already been created");
+    CUBOS_ASSERT(mEntityPool.archetype(entity.index) == ArchetypeId::Invalid, "Entity has already been created");
+    mEntityPool.archetype(entity.index, ArchetypeId::Empty);
 
     // Push the entity to the archetype's table.
-    mTables.dense(ArchetypeId::Empty).pushBack(entity.index);
+    mTables.dense().at(ArchetypeId::Empty).pushBack(entity.index);
     CUBOS_DEBUG("Created entity {}", entity);
 }
 
@@ -47,8 +53,33 @@ void World::destroy(Entity entity)
         return;
     }
 
-    auto archetype = mEntityPool.destroy(entity.index);
-    mTables.dense(archetype).swapErase(entity.index);
+    auto archetype = mEntityPool.archetype(entity.index);
+    mEntityPool.destroy(entity.index);
+    mTables.dense().at(archetype).swapErase(entity.index);
+
+    for (const auto& [_, index] : mTables.sparseRelation())
+    {
+        // For each table where the entity's archetype is the 'from' archetype.
+        if (index.from().contains(archetype))
+        {
+            for (const auto& table : index.from().at(archetype))
+            {
+                // Erase all occurrences of the entity in the 'from' column.
+                mTables.sparseRelation().at(table).eraseFrom(entity.index);
+            }
+        }
+
+        // For each table where the entity's archetype is the 'to' archetype.
+        if (index.to().contains(archetype))
+        {
+            for (const auto& table : index.to().at(archetype))
+            {
+                // Erase all occurrences of the entity in the 'to' column.
+                mTables.sparseRelation().at(table).eraseTo(entity.index);
+            }
+        }
+    }
+
     CUBOS_DEBUG("Destroyed entity {}", entity);
 }
 
@@ -107,6 +138,63 @@ World::ConstComponents World::components(Entity entity) const
     return ConstComponents{*this, entity};
 }
 
+void World::relate(Entity from, Entity to, const reflection::Type& type, void* value)
+{
+    CUBOS_ASSERT(this->isAlive(from));
+    CUBOS_ASSERT(this->isAlive(to));
+
+    auto dataType = mTypes.id(type);
+    CUBOS_ASSERT(mTypes.isRelation(dataType));
+
+    // Create a sparse relation table identifier from the archetypes of both entities.
+    auto fromArchetype = mEntityPool.archetype(from.index);
+    auto toArchetype = mEntityPool.archetype(to.index);
+    auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype};
+
+    // Get or create the table and insert a new row.
+    auto& table = mTables.sparseRelation().create(tableId, mTypes);
+    table.insert(from.index, to.index, value);
+}
+
+void World::unrelate(Entity from, Entity to, const reflection::Type& type)
+{
+    CUBOS_ASSERT(this->isAlive(from));
+    CUBOS_ASSERT(this->isAlive(to));
+
+    auto dataType = mTypes.id(type);
+    CUBOS_ASSERT(mTypes.isRelation(dataType));
+
+    auto fromArchetype = mEntityPool.archetype(from.index);
+    auto toArchetype = mEntityPool.archetype(to.index);
+    auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype};
+
+    if (mTables.sparseRelation().contains(tableId))
+    {
+        auto& table = mTables.sparseRelation().at(tableId);
+        table.erase(from.index, to.index);
+    }
+}
+
+bool World::related(Entity from, Entity to, const reflection::Type& type) const
+{
+    CUBOS_ASSERT(this->isAlive(from));
+    CUBOS_ASSERT(this->isAlive(to));
+
+    auto dataType = mTypes.id(type);
+    CUBOS_ASSERT(mTypes.isRelation(dataType));
+
+    auto fromArchetype = mEntityPool.archetype(from.index);
+    auto toArchetype = mEntityPool.archetype(to.index);
+    auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype};
+
+    if (!mTables.sparseRelation().contains(tableId))
+    {
+        return false;
+    }
+
+    return mTables.sparseRelation().at(tableId).contains(from.index, to.index);
+}
+
 World::Components::Components(World& world, Entity entity)
     : mWorld{world}
     , mEntity{entity}
@@ -117,15 +205,15 @@ World::Components::Components(World& world, Entity entity)
 bool World::Components::has(const reflection::Type& type) const
 {
     auto archetype = mWorld.mEntityPool.archetype(mEntity.index);
-    auto columnId = DenseColumnId::make(mWorld.mTypes.id(type));
+    auto columnId = ColumnId::make(mWorld.mTypes.id(type));
     return mWorld.mArchetypeGraph.contains(archetype, columnId);
 }
 
 void* World::Components::get(const reflection::Type& type)
 {
     auto archetype = mWorld.mEntityPool.archetype(mEntity.index);
-    auto& table = mWorld.mTables.dense(archetype);
-    auto columnId = DenseColumnId::make(mWorld.mTypes.id(type));
+    auto& table = mWorld.mTables.dense().at(archetype);
+    auto columnId = ColumnId::make(mWorld.mTypes.id(type));
     return table.column(columnId).at(table.row(mEntity.index));
 }
 
@@ -143,10 +231,10 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
 {
     auto typeId = mWorld.mTypes.id(type);
     CUBOS_ASSERT(mWorld.mTypes.isComponent(typeId), "Type '{}' is not registered as a component", type.name());
-    auto columnId = DenseColumnId::make(typeId);
+    auto columnId = ColumnId::make(typeId);
 
     auto oldArchetype = mWorld.mEntityPool.archetype(mEntity.index);
-    auto& oldTable = mWorld.mTables.dense(oldArchetype);
+    auto& oldTable = mWorld.mTables.dense().at(oldArchetype);
 
     // If the old archetype already contains this component type, then we only need to overwrite
     // its existing entry in the table.
@@ -161,11 +249,14 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
     mWorld.mEntityPool.archetype(mEntity.index, newArchetype);
 
     // Get the table of the new archetype, which we may have to create.
-    auto& newTable = mWorld.mTables.dense(newArchetype, mWorld.mArchetypeGraph, mWorld.mTypes);
+    auto& newTable = mWorld.mTables.dense().create(newArchetype, mWorld.mArchetypeGraph, mWorld.mTypes);
 
     // Move the entity from the old table to the new one and add the new component.
     oldTable.swapMove(mEntity.index, newTable);
     newTable.column(columnId).pushMove(value);
+
+    // For each sparse relation table the entity is on, move its relations to the new corresponding one.
+    // TODO
 
     CUBOS_DEBUG("Added component {} to entity {}", type.name(), mEntity, mEntity);
     return *this;
@@ -175,7 +266,7 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
 {
     auto typeId = mWorld.mTypes.id(type);
     CUBOS_ASSERT(mWorld.mTypes.isComponent(typeId), "Type '{}' is not registered as a component", type.name());
-    auto columnId = DenseColumnId::make(typeId);
+    auto columnId = ColumnId::make(typeId);
 
     // If the old archetype doesn't contain this component type, then we don't do anything.
     auto oldArchetype = mWorld.mEntityPool.archetype(mEntity.index);
@@ -184,17 +275,20 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
         return *this;
     }
 
-    auto& oldTable = mWorld.mTables.dense(oldArchetype);
+    auto& oldTable = mWorld.mTables.dense().at(oldArchetype);
 
     // Otherwise, we'll need to move the entity to a new archetype.
     auto newArchetype = mWorld.mArchetypeGraph.without(oldArchetype, columnId);
     mWorld.mEntityPool.archetype(mEntity.index, newArchetype);
 
     // Get the table of the new archetype, which we may have to create.
-    auto& newTable = mWorld.mTables.dense(newArchetype, mWorld.mArchetypeGraph, mWorld.mTypes);
+    auto& newTable = mWorld.mTables.dense().create(newArchetype, mWorld.mArchetypeGraph, mWorld.mTypes);
 
     // Move the entity from the old table to the new one.
     oldTable.swapMove(mEntity.index, newTable);
+
+    // For each sparse relation table the entity is on, move its relations to the new corresponding one.
+    // TODO
 
     CUBOS_DEBUG("Removed component {} from entity {}", type.name(), mEntity);
     return *this;
@@ -210,15 +304,15 @@ World::ConstComponents::ConstComponents(const World& world, Entity entity)
 bool World::ConstComponents::has(const reflection::Type& type) const
 {
     auto archetype = mWorld.mEntityPool.archetype(mEntity.index);
-    auto columnId = DenseColumnId::make(mWorld.mTypes.id(type));
+    auto columnId = ColumnId::make(mWorld.mTypes.id(type));
     return mWorld.mArchetypeGraph.contains(archetype, columnId);
 }
 
 const void* World::ConstComponents::get(const reflection::Type& type) const
 {
     auto archetype = mWorld.mEntityPool.archetype(mEntity.index);
-    const auto& table = mWorld.mTables.dense(archetype);
-    auto columnId = DenseColumnId::make(mWorld.mTypes.id(type));
+    const auto& table = mWorld.mTables.dense().at(archetype);
+    auto columnId = ColumnId::make(mWorld.mTypes.id(type));
     return table.column(columnId).at(table.row(mEntity.index));
 }
 
@@ -273,7 +367,7 @@ auto World::Components::Iterator::operator++() -> Iterator&
 {
     CUBOS_ASSERT(mId != DataTypeId::Invalid, "Iterator is out of bounds");
     auto archetype = mComponents.mWorld.mEntityPool.archetype(mComponents.mEntity.index);
-    auto column = mComponents.mWorld.mArchetypeGraph.next(archetype, DenseColumnId::make(mId));
+    auto column = mComponents.mWorld.mArchetypeGraph.next(archetype, ColumnId::make(mId));
     while (column.dataType() != DataTypeId::Invalid && !mComponents.mWorld.mTypes.isComponent(column.dataType()))
     {
         column = mComponents.mWorld.mArchetypeGraph.next(archetype, column);
@@ -323,7 +417,7 @@ auto World::ConstComponents::Iterator::operator++() -> Iterator&
 {
     CUBOS_ASSERT(mId != DataTypeId::Invalid, "Iterator is out of bounds");
     auto archetype = mComponents.mWorld.mEntityPool.archetype(mComponents.mEntity.index);
-    auto column = mComponents.mWorld.mArchetypeGraph.next(archetype, DenseColumnId::make(mId));
+    auto column = mComponents.mWorld.mArchetypeGraph.next(archetype, ColumnId::make(mId));
     while (column.dataType() != DataTypeId::Invalid && !mComponents.mWorld.mTypes.isComponent(column.dataType()))
     {
         column = mComponents.mWorld.mArchetypeGraph.next(archetype, column);

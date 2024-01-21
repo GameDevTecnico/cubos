@@ -175,7 +175,7 @@ QueryFilter::View::Iterator::Iterator(View& view, bool end)
                     if (mView.mFilter.mTargets[0].archetypes[i] == archetype)
                     {
                         mArchetypeIndex = i;
-                        mCursorRows[target] = mView.mFilter.mWorld.tables().dense(archetype).row(pin.index);
+                        mCursorRows[target] = mView.mFilter.mWorld.tables().dense().at(archetype).row(pin.index);
                         break;
                     }
                 }
@@ -214,7 +214,7 @@ auto QueryFilter::View::Iterator::operator*() const -> const Match&
 
     for (int i = 0; i < mView.mFilter.mTargetCount; ++i)
     {
-        mMatch.entities[i].index = world.tables().dense(mTargetArchetypes[i]).entity(mCursorRows[i]);
+        mMatch.entities[i].index = world.tables().dense().at(mTargetArchetypes[i]).entity(mCursorRows[i]);
         mMatch.entities[i].generation = world.generation(mMatch.entities[i].index);
     }
 
@@ -262,8 +262,8 @@ void QueryFilter::View::Iterator::findArchetype()
     auto& world = mView.mFilter.mWorld;
     auto& archetypes = mView.mFilter.mTargets[0].archetypes;
     while (mArchetypeIndex < archetypes.size() &&
-           (!world.tables().contains(archetypes[mArchetypeIndex]) ||
-            mCursorRows[0] >= world.tables().dense(archetypes[mArchetypeIndex]).size()))
+           (!world.tables().dense().contains(archetypes[mArchetypeIndex]) ||
+            mCursorRows[0] >= world.tables().dense().at(archetypes[mArchetypeIndex]).size()))
     {
         ++mArchetypeIndex;
         mCursorRows[0] = 0;

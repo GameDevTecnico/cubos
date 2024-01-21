@@ -36,7 +36,7 @@ namespace cubos::core::ecs
         class ConstComponents;
 
         /// @brief Registers and inserts a new resource type.
-        /// @note Should be called before other operations, aside from @ref registerComponent().
+        /// @note Should be called before other non-registering operations.
         /// @tparam T Resource type.
         /// @tparam TArgs Types of the arguments of the constructor of the resource.
         /// @param args Arguments of the constructor of the resource.
@@ -48,11 +48,24 @@ namespace cubos::core::ecs
         void registerComponent(const reflection::Type& type);
 
         /// @brief Registers a component type.
+        /// @note Should be called before other non-registering operations.
         /// @tparam T Component type.
         template <reflection::Reflectable T>
         void registerComponent()
         {
             this->registerComponent(reflection::reflect<T>());
+        }
+
+        /// @brief Registers a relation type.
+        /// @param type Relation type.
+        void registerRelation(const reflection::Type& type);
+
+        /// @brief Registers a relation type.
+        /// @tparam T Relation type.
+        template <reflection::Reflectable T>
+        void registerRelation()
+        {
+            this->registerRelation(reflection::reflect<T>());
         }
 
         /// @brief Returns the types registry of the world.
@@ -139,6 +152,64 @@ namespace cubos::core::ecs
 
         /// @copydoc components(Entity)
         ConstComponents components(Entity entity) const;
+
+        /// @brief Inserts a relation between the two given entities.
+        ///
+        /// If the relation already exists, it is overwritten.
+        ///
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param type Relation type.
+        /// @param value Relation value to move.
+        void relate(Entity from, Entity to, const reflection::Type& type, void* value);
+
+        /// @brief Inserts a relation between the two given entities.
+        ///
+        /// If the relation already exists, it is overwritten.
+        ///
+        /// @tparam T Relation type.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param value Relation value.
+        template <reflection::Reflectable T>
+        void relate(Entity from, Entity to, T value)
+        {
+            this->relate(from, to, reflection::reflect<T>(), &value);
+        }
+
+        /// @brief Removes the relation, if there's any, between the two given entities.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param type Relation type.
+        void unrelate(Entity from, Entity to, const reflection::Type& type);
+
+        /// @brief Removes the relation, if there's any, between the two given entities.
+        /// @tparam T Relation type.
+        /// @param from From entity.
+        /// @param to To entity.
+        template <reflection::Reflectable T>
+        void unrelate(Entity from, Entity to)
+        {
+            this->unrelate(from, to, reflection::reflect<T>());
+        }
+
+        /// @brief Checks if there's a relation of the given type between the two given entities.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param type Relation type.
+        /// @return Whether the relation exists.
+        bool related(Entity from, Entity to, const reflection::Type& type) const;
+
+        /// @brief Checks if there's a relation of the given type between the two given entities.
+        /// @tparam T Relation type.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @return Whether the relation exists.
+        template <typename T>
+        bool related(Entity from, Entity to) const
+        {
+            return this->related(from, to, reflection::reflect<T>());
+        }
 
     private:
         template <typename... ComponentTypes>
