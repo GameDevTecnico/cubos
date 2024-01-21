@@ -46,7 +46,7 @@ QueryFilter::QueryFilter(World& world, const std::vector<QueryTerm>& terms)
         }
 
         auto& baseArchetype = mTargets[term.component.target].baseArchetype;
-        auto columnId = DenseColumnId::make(term.type);
+        auto columnId = ColumnId::make(term.type);
 
         if (!world.archetypeGraph().contains(baseArchetype, columnId))
         {
@@ -87,7 +87,7 @@ void QueryFilter::update()
                     continue;
                 }
 
-                auto columnId = DenseColumnId::make(term.type);
+                auto columnId = ColumnId::make(term.type);
                 if (mWorld.archetypeGraph().contains(archetype, columnId))
                 {
                     matches = false;

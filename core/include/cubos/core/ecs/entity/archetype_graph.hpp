@@ -13,7 +13,7 @@
 
 namespace cubos::core::ecs
 {
-    /// @brief Stores which dense column types each archetype holds and the edges which connect them.
+    /// @brief Stores which column types each archetype holds and the edges which connect them.
     ///
     /// These edges are bidirectional and indicate the addition or removal of column types, depending on the direction
     /// being taken. Neighboring archetypes (which have only one differing column type) are not always connected by an
@@ -35,7 +35,7 @@ namespace cubos::core::ecs
         /// @param archetype Archetype.
         /// @param id Column type identifier.
         /// @return Whether the archetype contains the column type.
-        bool contains(ArchetypeId archetype, DenseColumnId id) const;
+        bool contains(ArchetypeId archetype, ColumnId id) const;
 
         /// @brief Returns an archetype with same identifiers as the given @p source archetype, but
         /// with an extra column type with the given @p id.
@@ -45,7 +45,7 @@ namespace cubos::core::ecs
         /// @param source Source archetype.
         /// @param id Extra column type identifier.
         /// @return Target archetype.
-        ArchetypeId with(ArchetypeId source, DenseColumnId id);
+        ArchetypeId with(ArchetypeId source, ColumnId id);
 
         /// @brief Returns an archetype with same identifiers as the given @p source archetype,
         /// except for the column type with the given @p id, which is excluded.
@@ -55,18 +55,18 @@ namespace cubos::core::ecs
         /// @param source Source archetype.
         /// @param id Excluded column type identifier.
         /// @return Target archetype.
-        ArchetypeId without(ArchetypeId source, DenseColumnId id);
+        ArchetypeId without(ArchetypeId source, ColumnId id);
 
         /// @brief Returns the first column type in the set of column types held by the given @p archetype.
         /// @param archetype Archetype.
-        /// @return First column type, or @ref DenseColumnId::Invalid if the archetype is @ref Empty.
-        DenseColumnId first(ArchetypeId archetype) const;
+        /// @return First column type, or @ref ColumnId::Invalid if the archetype is @ref Empty.
+        ColumnId first(ArchetypeId archetype) const;
 
         /// @brief Returns the next column type in the set of column types held by the given @p archetype.
         /// @param archetype Archetype.
         /// @param id Current column type.
-        /// @return Next column type, or @ref DenseColumnId::Invalid if there is no next column type.
-        DenseColumnId next(ArchetypeId archetype, DenseColumnId id) const;
+        /// @return Next column type, or @ref ColumnId::Invalid if there is no next column type.
+        ColumnId next(ArchetypeId archetype, ColumnId id) const;
 
         /// @brief Collects all of the archetypes which are supersets of the given archetype.
         ///

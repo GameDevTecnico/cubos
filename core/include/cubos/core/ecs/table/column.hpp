@@ -12,24 +12,24 @@
 
 namespace cubos::core::ecs
 {
-    /// @brief Identifies a dense data column type.
+    /// @brief Identifies a data column type.
     /// @ingroup core-ecs-table
-    struct DenseColumnId
+    struct ColumnId
     {
         uint64_t inner; ///< Column type identifier.
 
-        static const DenseColumnId Invalid; ///< Invalid column type identifier.
+        static const ColumnId Invalid; ///< Invalid column type identifier.
 
         /// @brief Creates a column type identifier from a data type identifier.
         /// @param id Data type identifier.
         /// @return Column type identifier.
-        static DenseColumnId make(DataTypeId id);
+        static ColumnId make(DataTypeId id);
 
         /// @brief Creates a column type identifier from a data type identifier and an index.
         /// @param id Data type identifier.
         /// @param index Index.
         /// @return Column type identifier.
-        static DenseColumnId make(DataTypeId id, uint32_t index);
+        static ColumnId make(DataTypeId id, uint32_t index);
 
         /// @brief Returns the data type identifier of this column type.
         /// @return Data type identifier.
@@ -38,6 +38,6 @@ namespace cubos::core::ecs
         /// @brief Compares two column type identifiers for equality.
         /// @param other Other column type identifier.
         /// @return Whether the two column type identifiers are equal.
-        bool operator==(const DenseColumnId& other) const = default;
+        bool operator==(const ColumnId& other) const = default;
     };
 } // namespace cubos::core::ecs

@@ -27,8 +27,8 @@ TEST_CASE("ecs::QueryFilter")
     world.components(e4P).add(ParentComponent{e1});
 
     auto a = ArchetypeId::Empty;
-    auto aI = world.archetypeGraph().with(a, DenseColumnId::make(integerComponent));
-    auto aP = world.archetypeGraph().with(a, DenseColumnId::make(parentComponent));
+    auto aI = world.archetypeGraph().with(a, ColumnId::make(integerComponent));
+    auto aP = world.archetypeGraph().with(a, ColumnId::make(parentComponent));
 
     SUBCASE("with a single target")
     {

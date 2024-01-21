@@ -4,7 +4,7 @@
 
 using cubos::core::ecs::ArchetypeGraph;
 using cubos::core::ecs::ArchetypeId;
-using cubos::core::ecs::DenseColumnId;
+using cubos::core::ecs::ColumnId;
 
 TEST_CASE("ecs::ArchetypeGraph")
 {
@@ -12,8 +12,8 @@ TEST_CASE("ecs::ArchetypeGraph")
     std::vector<ArchetypeId> allWith0{};
     std::size_t seenWith0 = 0;
 
-    DenseColumnId col0{.inner = 0};
-    DenseColumnId col1{.inner = 1};
+    ColumnId col0{.inner = 0};
+    ColumnId col1{.inner = 1};
 
     REQUIRE_FALSE(graph.contains(ArchetypeId::Empty, col0));
     REQUIRE_FALSE(graph.contains(ArchetypeId::Empty, col1));

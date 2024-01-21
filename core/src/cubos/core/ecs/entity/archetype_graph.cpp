@@ -3,7 +3,7 @@
 
 using cubos::core::ecs::ArchetypeGraph;
 using cubos::core::ecs::ArchetypeId;
-using cubos::core::ecs::DenseColumnId;
+using cubos::core::ecs::ColumnId;
 
 static bool isSuperset(const std::unordered_set<uint64_t>& superset, const std::unordered_set<uint64_t>& set)
 {
@@ -23,13 +23,13 @@ ArchetypeGraph::ArchetypeGraph()
     mNodes.emplace_back();
 }
 
-bool ArchetypeGraph::contains(ArchetypeId archetype, DenseColumnId id) const
+bool ArchetypeGraph::contains(ArchetypeId archetype, ColumnId id) const
 {
     CUBOS_ASSERT(mNodes.size() > archetype.inner);
     return mNodes[archetype.inner].ids.contains(id.inner);
 }
 
-ArchetypeId ArchetypeGraph::with(ArchetypeId source, DenseColumnId id)
+ArchetypeId ArchetypeGraph::with(ArchetypeId source, ColumnId id)
 {
     CUBOS_ASSERT(mNodes.size() > source.inner);
     CUBOS_ASSERT(!mNodes[source.inner].ids.contains(id.inner));
@@ -65,7 +65,7 @@ ArchetypeId ArchetypeGraph::with(ArchetypeId source, DenseColumnId id)
     return {.inner = archetype};
 }
 
-ArchetypeId ArchetypeGraph::without(ArchetypeId source, DenseColumnId id)
+ArchetypeId ArchetypeGraph::without(ArchetypeId source, ColumnId id)
 {
     CUBOS_ASSERT(mNodes.size() > source.inner);
     CUBOS_ASSERT(mNodes[source.inner].ids.contains(id.inner));
@@ -101,17 +101,17 @@ ArchetypeId ArchetypeGraph::without(ArchetypeId source, DenseColumnId id)
     return {.inner = archetype};
 }
 
-DenseColumnId ArchetypeGraph::first(ArchetypeId archetype) const
+ColumnId ArchetypeGraph::first(ArchetypeId archetype) const
 {
     if (mNodes[archetype.inner].ids.empty())
     {
-        return DenseColumnId::Invalid;
+        return ColumnId::Invalid;
     }
 
-    return DenseColumnId{.inner = *mNodes[archetype.inner].ids.begin()};
+    return ColumnId{.inner = *mNodes[archetype.inner].ids.begin()};
 }
 
-DenseColumnId ArchetypeGraph::next(ArchetypeId archetype, DenseColumnId id) const
+ColumnId ArchetypeGraph::next(ArchetypeId archetype, ColumnId id) const
 {
     auto it = mNodes[archetype.inner].ids.find(id.inner);
     CUBOS_ASSERT(it != mNodes[archetype.inner].ids.end(), "Archetype does not contain column type");
@@ -120,7 +120,7 @@ DenseColumnId ArchetypeGraph::next(ArchetypeId archetype, DenseColumnId id) cons
 
     if (it == mNodes[archetype.inner].ids.end())
     {
-        return DenseColumnId::Invalid;
+        return ColumnId::Invalid;
     }
 
     return {.inner = *it};

@@ -1,22 +1,21 @@
 #include <cubos/core/ecs/table/column.hpp>
 
+using cubos::core::ecs::ColumnId;
 using cubos::core::ecs::DataTypeId;
-using cubos::core::ecs::DenseColumnId;
 
-const DenseColumnId DenseColumnId::Invalid = {.inner = UINT64_MAX};
+const ColumnId ColumnId::Invalid = {.inner = UINT64_MAX};
 
-DenseColumnId DenseColumnId::make(DataTypeId id)
+ColumnId ColumnId::make(DataTypeId id)
 {
-    return DenseColumnId{.inner =
-                             static_cast<uint64_t>(id.inner) << 32 | static_cast<uint64_t>(DataTypeId::Invalid.inner)};
+    return ColumnId{.inner = static_cast<uint64_t>(id.inner) << 32 | static_cast<uint64_t>(DataTypeId::Invalid.inner)};
 }
 
-DenseColumnId DenseColumnId::make(DataTypeId id, uint32_t index)
+ColumnId ColumnId::make(DataTypeId id, uint32_t index)
 {
-    return DenseColumnId{.inner = static_cast<uint64_t>(id.inner) << 32 | static_cast<uint64_t>(index)};
+    return ColumnId{.inner = static_cast<uint64_t>(id.inner) << 32 | static_cast<uint64_t>(index)};
 }
 
-DataTypeId DenseColumnId::dataType() const
+DataTypeId ColumnId::dataType() const
 {
     return DataTypeId{.inner = static_cast<uint32_t>(inner >> 32)};
 }
