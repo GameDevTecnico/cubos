@@ -4,10 +4,8 @@
 
 #pragma once
 
-#include <unordered_map>
-
-#include <cubos/core/ecs/entity/archetype_graph.hpp>
-#include <cubos/core/ecs/table/dense.hpp>
+#include <cubos/core/ecs/table/dense/registry.hpp>
+#include <cubos/core/ecs/table/sparse_relation/registry.hpp>
 
 namespace cubos::core::ecs
 {
@@ -16,36 +14,22 @@ namespace cubos::core::ecs
     class Tables final
     {
     public:
-        /// @brief Constructs.
-        Tables();
+        /// @brief Gets a reference to the dense table registry.
+        /// @return Reference to dense table registry.
+        DenseTableRegistry& dense();
 
-        /// @brief Checks if the given archetype has a dense table.
-        /// @param archetype Archetype identifier.
-        /// @return WHether it contains a table or not.
-        bool contains(ArchetypeId archetype) const;
+        /// @copydoc dense()
+        const DenseTableRegistry& dense() const;
 
-        /// @brief Returns a reference to the dense table of the given archetype.
-        ///
-        /// Creates the table if it doesn't exist already.
-        ///
-        /// @param archetype Archetype identifier.
-        /// @param graph Archetype graph used to initialize the table, if necessary.
-        /// @param typew Type registry used to initialize the table, if necessary.
-        /// @return Reference to table.
-        DenseTable& dense(ArchetypeId archetype, ArchetypeGraph& graph, Types& types);
+        /// @brief Gets a reference to the sparse relation table registry.
+        /// @return Reference to sparse relation table registry.
+        SparseRelationTableRegistry& sparseRelation();
 
-        /// @brief Returns a reference to the dense table of the given archetype.
-        ///
-        /// Aborts if the table doesn't exist.
-        ///
-        /// @param archetype Archetype identifier.
-        /// @return Reference to table.
-        DenseTable& dense(ArchetypeId archetype);
-
-        /// @copydoc dense(ArchetypeId)
-        const DenseTable& dense(ArchetypeId archetype) const;
+        /// @copydoc sparseRelation()
+        const SparseRelationTableRegistry& sparseRelation() const;
 
     private:
-        std::unordered_map<std::size_t, DenseTable> mDenseTables;
+        DenseTableRegistry mDense;
+        SparseRelationTableRegistry mSparseRelation;
     };
 } // namespace cubos::core::ecs

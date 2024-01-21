@@ -1,5 +1,6 @@
 #include <cubos/core/ecs/types.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::ecs::DataTypeId;

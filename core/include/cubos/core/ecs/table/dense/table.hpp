@@ -29,7 +29,7 @@ namespace cubos::core::ecs
         ///
         /// @param id Column type identifier.
         /// @param type Column data type.
-        void addColumn(DenseColumnId id, const reflection::Type& type);
+        void addColumn(ColumnId id, const reflection::Type& type);
 
         /// @brief Inserts a new entity to the end of the table.
         /// @warning The table will be temporarily left in an invalid state, and the caller must manually push data to
@@ -74,15 +74,15 @@ namespace cubos::core::ecs
         ///
         /// @param id Column identifier.
         /// @return Column reference.
-        memory::AnyVector& column(DenseColumnId id);
+        memory::AnyVector& column(ColumnId id);
 
-        /// @copydoc column(DenseColumnId)
-        const memory::AnyVector& column(DenseColumnId id) const;
+        /// @copydoc column(ColumnId)
+        const memory::AnyVector& column(ColumnId id) const;
 
         /// @brief Checks if the table has a column with the given @p id.
         /// @param id Column identifier.
         /// @return Whether the table contains the given column.
-        bool contains(DenseColumnId id) const;
+        bool contains(ColumnId id) const;
 
     private:
         std::vector<uint32_t> mEntities;

@@ -2,6 +2,8 @@
 /// @brief Class @ref cubos::core::ecs::SparseRelationTable.
 /// @ingroup core-ecs-relation
 
+#pragma once
+
 #include <cstddef>
 #include <cstdint>
 #include <unordered_map>
@@ -75,11 +77,20 @@ namespace cubos::core::ecs
         /// @return Whether the relation exists.
         bool contains(uint32_t from, uint32_t to) const;
 
-        /// @brief Gets a pointer to the data of the relation with the given indices.
+        /// @brief Gets the row of the relation with the given indices.
         /// @param from From index.
         /// @param to To index.
-        /// @return Address of the data, or 0 if there's no such relation.
-        uintptr_t at(uint32_t from, uint32_t to) const;
+        /// @return Row of the data, or 0 if there's no such relation.
+        std::size_t row(uint32_t from, uint32_t to) const;
+
+        /// @brief Get the relation at the given row.
+        /// @note Aborts if @p row is out of bounds.
+        /// @param row Row of the relation to get.
+        /// @return Pointer to the relation.
+        void* at(std::size_t row);
+
+        /// @copydoc at(std::size_t)
+        const void* at(std::size_t row) const;
 
         /// @brief Gets an iterator to the first relation of the table.
         /// @return Iterator.
