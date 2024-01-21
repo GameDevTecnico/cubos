@@ -54,6 +54,22 @@ namespace cubos::core::ecs
         /// @param type Component type.
         void remove(Entity entity, const reflection::Type& type);
 
+        /// @brief Inserts a relation between the two given entities.
+        ///
+        /// If the relation already exists, it is overwritten.
+        ///
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param type Relation type.
+        /// @param value Relation value to move.
+        void relate(Entity from, Entity to, const reflection::Type& type, void* value);
+
+        /// @brief Removes the relation, if there's any, between the two given entities.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param type Relation type.
+        void unrelate(Entity from, Entity to, const reflection::Type& type);
+
         /// @brief Pushes a command.
         /// @param command Command function.
         void push(memory::Function<void(World&)> command);

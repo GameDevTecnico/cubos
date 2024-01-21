@@ -40,6 +40,18 @@ Commands& Commands::remove(Entity entity, const reflection::Type& type)
     return *this;
 }
 
+Commands& Commands::relate(Entity from, Entity to, const reflection::Type& type, void* value)
+{
+    mBuffer.relate(from, to, type, value);
+    return *this;
+}
+
+Commands& Commands::unrelate(Entity from, Entity to, const reflection::Type& type)
+{
+    mBuffer.unrelate(from, to, type);
+    return *this;
+}
+
 Commands::EntityBuilder::EntityBuilder(CommandBuffer& buffer, Entity entity)
     : mBuffer(buffer)
     , mEntity(entity)
