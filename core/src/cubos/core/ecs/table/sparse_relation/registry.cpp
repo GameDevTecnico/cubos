@@ -27,7 +27,7 @@ SparseRelationTable& SparseRelationTableRegistry::create(SparseRelationTableId i
     {
         mTables.emplace(std::piecewise_construct, std::forward_as_tuple(id),
                         std::forward_as_tuple(types.type(id.dataType)));
-        mTypeIndices[id.dataType.inner].insert(id);
+        mTypeIndices[id.dataType].insert(id);
     }
 
     return mTables.at(id);
@@ -47,7 +47,7 @@ const SparseRelationTable& SparseRelationTableRegistry::at(SparseRelationTableId
 
 const SparseRelationTableRegistry::TypeIndex& SparseRelationTableRegistry::type(DataTypeId type) const
 {
-    auto it = mTypeIndices.find(type.inner);
+    auto it = mTypeIndices.find(type);
     if (it == mTypeIndices.end())
     {
         return *mEmptyTypeIndex;

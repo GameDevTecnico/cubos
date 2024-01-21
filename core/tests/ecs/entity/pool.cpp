@@ -22,7 +22,7 @@ TEST_CASE("ecs::EntityPool")
     REQUIRE(pool.archetype(e2.index).inner == 2);
     REQUIRE(pool.generation(e2.index) == e2.generation);
 
-    REQUIRE(pool.destroy(e1.index).inner == 1);
+    pool.destroy(e1.index);
     REQUIRE_FALSE(pool.contains(e1));
     REQUIRE(pool.contains(e2));
     auto e3 = pool.create({.inner = 3});
@@ -33,6 +33,6 @@ TEST_CASE("ecs::EntityPool")
     REQUIRE(pool.generation(e3.index) == e3.generation);
     REQUIRE_FALSE(pool.contains(e1));
 
-    REQUIRE(pool.archetype(e3.index, {.inner = 1}).inner == 3);
+    pool.archetype(e3.index, {.inner = 1});
     REQUIRE(pool.archetype(e3.index).inner == 1);
 }

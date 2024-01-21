@@ -22,18 +22,15 @@ Entity EntityPool::create(ArchetypeId archetype)
     return {index, mEntries[index].generation};
 }
 
-ArchetypeId EntityPool::destroy(uint32_t index)
+void EntityPool::destroy(uint32_t index)
 {
     mEntries[index].generation += 1;
     mFree.push(index);
-    return mEntries[index].archetype;
 }
 
-ArchetypeId EntityPool::archetype(uint32_t index, ArchetypeId archetype)
+void EntityPool::archetype(uint32_t index, ArchetypeId archetype)
 {
-    auto old = mEntries[index].archetype;
     mEntries[index].archetype = archetype;
-    return old;
 }
 
 ArchetypeId EntityPool::archetype(uint32_t index) const

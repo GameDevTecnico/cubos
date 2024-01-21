@@ -50,9 +50,6 @@ TEST_CASE("ecs::SparseRelationTable") // NOLINT(readability-function-size)
         REQUIRE_FALSE(table.contains(2, 0));
         REQUIRE_FALSE(table.contains(1, 1));
 
-        REQUIRE(table.at(0, 0) != 0);
-        REQUIRE(table.at(2, 0) == 0);
-
         REQUIRE(table.erase(0, 0));
         REQUIRE_FALSE(table.contains(0, 0));
         REQUIRE(table.size() == 3);

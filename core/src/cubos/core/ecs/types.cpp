@@ -4,11 +4,17 @@
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::ecs::DataTypeId;
+using cubos::core::ecs::DataTypeIdHash;
 using cubos::core::ecs::Types;
 using cubos::core::reflection::Type;
 using cubos::core::reflection::TypeRegistry;
 
 const DataTypeId DataTypeId::Invalid = {.inner = UINT32_MAX};
+
+std::size_t DataTypeIdHash::operator()(const DataTypeId& id) const
+{
+    return id.inner;
+}
 
 void Types::addComponent(const reflection::Type& type)
 {

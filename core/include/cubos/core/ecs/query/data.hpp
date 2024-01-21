@@ -145,7 +145,7 @@ namespace cubos::core::ecs
                     changed = true;
                 }
 
-                if (!mWorld.tables().contains(archetypes[target]))
+                if (!mWorld.tables().dense().contains(archetypes[target]))
                 {
                     empty = true;
                 }

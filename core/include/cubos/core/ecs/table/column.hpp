@@ -35,6 +35,10 @@ namespace cubos::core::ecs
         /// @return Data type identifier.
         DataTypeId dataType() const;
 
+        /// @brief Returns the index of this column type.
+        /// @return Index.
+        uint32_t index() const;
+
         /// @brief Compares two column type identifiers for equality.
         /// @param other Other column type identifier.
         /// @return Whether the two column type identifiers are equal.
