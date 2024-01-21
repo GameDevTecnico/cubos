@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::Query class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::QueryFilter class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,40 +46,42 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="query_8hpp.html">&lt;core/ecs/system/query.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Query <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>QueryFilter <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="filter_8hpp.html">&lt;core/ecs/query/filter.hpp&gt;</a></div>
         </h1>
-        <p>System argument which holds the result of a query over all entities in world which match the given arguments.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">Ts</td>
-              <td>Argument types.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Used to find matches for the given query terms. Essentially contains the non-templated part of the query logic.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&amp;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Scale</span><span class="o">&amp;&gt;&gt;</span></pre><p>This query will return all entities with a <code>Position</code> and <code>Velocity</code> component. Accessors to <code>Rotation</code> and <code>Scale</code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, <code>const</code> should be used.</p>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a4c9dda4ac9c50e44ebe7f16f7bb0098a">
+              static int <a href="#a4c9dda4ac9c50e44ebe7f16f7bb0098a" class="m-doc-self">MaxTargetCount</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd>Maximum number of targets per match allowed in a single query.</dd>
+            <dt id="ad158cda50288f80e7fc2972e0542f0a8">
+              static int <a href="#ad158cda50288f80e7fc2972e0542f0a8" class="m-doc-self">MaxCursorCount</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd>Maximum number of cursors per query.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ae5674dc1a7344236c3fb55c037f57e55" class="m-doc">Query</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;&amp; data)</span>
+              <span class="m-doc-wrap-bumper"><a href="#abef09c27322b1513a44ebcadeeba6ba6" class="m-doc">QueryFilter</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; terms)</span>
             </dt>
             <dd>Constructs.</dd>
           </dl>
@@ -88,27 +90,29 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1c1939dc0f31116c569337116df344d9" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query.html#af1f7496cd6d49810626e626cb3921f43" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5df438b066c3ede4c5ca94d715f87871" class="m-doc">cursorIndex</a>(</span><span class="m-doc-wrap">std::size_t termIndex) const -&gt; std::size_t</span>
             </dt>
-            <dd>Returns an iterator pointing to the first query match.</dd>
+            <dd>Gets the cursor index for the given term index.</dd>
+            <dt id="a44fc9bae5c12333fec32f0b202cc4787">
+              <span class="m-doc-wrap-bumper">void <a href="#a44fc9bae5c12333fec32f0b202cc4787" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Fetches any new matching archetypes that have been added since the last call to this function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aad89c4ec9c11579c5af0d6ac60c6db05" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query.html#af1f7496cd6d49810626e626cb3921f43" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4bcfbcff3efb79b5e7b4ba52f5d8cca4" class="m-doc">view</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter_1_1View.html" class="m-doc">View</a></span>
             </dt>
-            <dd>Returns an out of bounds iterator representing the end of the query matches.</dd>
+            <dd>Returns a view which can be used to iterate over the matches.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ace8ecfc0b95cb8d12e5beadec0988542" class="m-doc">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae61f09a5fd04701c8e1222200e7100dd" class="m-doc">targetCount</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
             </dt>
-            <dd>Accesses the match for the given entity, if there is one.</dd>
+            <dd>Gets the number of targets.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ae5674dc1a7344236c3fb55c037f57e55"><div>
+          <section class="m-doc-details" id="abef09c27322b1513a44ebcadeeba6ba6"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5674dc1a7344236c3fb55c037f57e55" class="m-doc-self">Query</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;&amp; data)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abef09c27322b1513a44ebcadeeba6ba6" class="m-doc-self">QueryFilter</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; terms)</span></span>
             </h3>
             <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -117,68 +121,63 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">data</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> data.</td>
+                  <td style="width: 1%">world</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> being queried.</td>
+                </tr>
+                <tr>
+                  <td>terms</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> terms.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a1c1939dc0f31116c569337116df344d9"><div>
+          <section class="m-doc-details" id="a5df438b066c3ede4c5ca94d715f87871"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query.html#af1f7496cd6d49810626e626cb3921f43" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c1939dc0f31116c569337116df344d9" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5df438b066c3ede4c5ca94d715f87871" class="m-doc-self">cursorIndex</a>(</span><span class="m-doc-wrap">std::size_t termIndex) const</span></span>
             </h3>
-            <p>Returns an iterator pointing to the first query match.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Iterator.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aad89c4ec9c11579c5af0d6ac60c6db05"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query.html#af1f7496cd6d49810626e626cb3921f43" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aad89c4ec9c11579c5af0d6ac60c6db05" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Returns an out of bounds iterator representing the end of the query matches.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Iterator.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ace8ecfc0b95cb8d12e5beadec0988542"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ace8ecfc0b95cb8d12e5beadec0988542" class="m-doc-self">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
-            </h3>
-            <p>Accesses the match for the given entity, if there is one.</p>
+            <p>Gets the cursor index for the given term index.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">entity</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                  <td style="width: 1%">termIndex</td>
+                  <td>Term index.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Requested components, or nothing if the entity does not match the query.</td>
+                  <td>Cursor index.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4bcfbcff3efb79b5e7b4ba52f5d8cca4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4bcfbcff3efb79b5e7b4ba52f5d8cca4" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns a view which can be used to iterate over the matches.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter_1_1View.html" class="m-doc">View</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae61f09a5fd04701c8e1222200e7100dd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae61f09a5fd04701c8e1222200e7100dd" class="m-doc-self">targetCount</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the number of targets.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Target.html" class="m-doc">Target</a> count.</td>
                 </tr>
               </tfoot>
             </table>

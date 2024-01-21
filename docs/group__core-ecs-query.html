@@ -71,10 +71,12 @@
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />QueryData</a>.</dd>
             <dt>file <a href="fetcher_8hpp.html" class="m-doc">fetcher.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher</a>.</dd>
+            <dt>file <a href="filter_8hpp.html" class="m-doc">filter.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter</a>.</dd>
             <dt>file <a href="opt_8hpp.html" class="m-doc">opt.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Opt</a>.</dd>
-            <dt>file <a href="properties_8hpp.html" class="m-doc">properties.hpp</a></dt>
-            <dd>Class <a href="structcubos_1_1core_1_1ecs_1_1QueryProperties.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />QueryProperties</a>.</dd>
+            <dt>file <a href="term_8hpp.html" class="m-doc">term.hpp</a></dt>
+            <dd>Struct <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />QueryTerm</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -95,10 +97,18 @@
             </dt>
             <dd>Type meant to be specialized which implements for each argument type the necessary logic to extract it from the tables.</dd>
             <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html" class="m-doc">cubos::core::ecs::QueryFilter</a>
+            </dt>
+            <dd>Used to find matches for the given query terms. Essentially contains the non-templated part of the query logic.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">cubos::core::ecs::Opt</a>
             </dt>
             <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">cubos::core::ecs::QueryTerm</a>
+            </dt>
+            <dd>Describes a term in a query.</dd>
           </dl>
         </section>
       </div>
