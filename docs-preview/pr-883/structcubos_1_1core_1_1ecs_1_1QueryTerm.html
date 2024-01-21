@@ -56,6 +56,7 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
@@ -63,7 +64,20 @@
             </li>
           </ul>
         </nav>
-<p>Terms are the building blocks used to build queries. Each term adds some restriction to what the query will match. There are three kinds of terms:</p><ul><li>Component terms, which allow filtering match entities by those which have or don&#x27;t have a given component.</li><li>Relation terms, which allow filtering match entities by some relation between them.</li><li><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> terms, which don&#x27;t filter the results but allow accessing one of the matched entities.</li></ul>
+<p>Terms are the building blocks used to build queries. Each term adds some restriction to what the query will match. There are three kinds of terms:</p><ul><li><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> terms, which allow filtering match entities by those which have or don&#x27;t have a given component.</li><li>Relation terms, which allow filtering match entities by some relation between them.</li><li><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Entity.html" class="m-doc">Entity</a> terms, which don&#x27;t filter the results but allow accessing one of the matched entities.</li></ul>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a>
+            </dt>
+            <dd>Stores component term data.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Entity.html" class="m-doc">Entity</a>
+            </dt>
+            <dd>Stores entity term data.</dd>
+          </dl>
+        </section>
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
@@ -119,26 +133,14 @@
               <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> <a href="#affbc8c6c6d5d5ccf0ae8b0ed288ecfc6" class="m-doc">type</a>
             </dt>
             <dd>Type of the data matched by the term.</dd>
-            <dt id="a00075128e1d56baff68f54c9d2ae9447">
-              int <a href="#a00075128e1d56baff68f54c9d2ae9447" class="m-doc-self">target</a>
+            <dt id="ad6ad3548e62ce181b9f851df479ddb91">
+              <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Entity.html" class="m-doc">Entity</a> <a href="#ad6ad3548e62ce181b9f851df479ddb91" class="m-doc-self">entity</a>
             </dt>
-            <dd>Index of the target accessed by this term.</dd>
-            <dt id="a3f316b101ba99b923b34ba878dd6f57a">
-              struct cubos::core::ecs::QueryTerm::@2::@4 <a href="#a3f316b101ba99b923b34ba878dd6f57a" class="m-doc-self">entity</a>
+            <dd><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Entity.html" class="m-doc">Entity</a> term data.</dd>
+            <dt id="ab1a0c1bd09b3bb8d47e34100a908a70e">
+              <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> <a href="#ab1a0c1bd09b3bb8d47e34100a908a70e" class="m-doc-self">component</a>
             </dt>
-            <dd><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> term data.</dd>
-            <dt id="a1545c9ed49895a10790b9e3277174416">
-              bool <a href="#a1545c9ed49895a10790b9e3277174416" class="m-doc-self">without</a>
-            </dt>
-            <dd>If true, requires the target to not have the component.</dd>
-            <dt id="a84a79afae5bf9bb7290ffaf94f061b30">
-              bool <a href="#a84a79afae5bf9bb7290ffaf94f061b30" class="m-doc-self">optional</a>
-            </dt>
-            <dd>If true, the term accesses the component but does not require it to be present.</dd>
-            <dt id="acec4a4e12964b078d8d1c2bb9e7037c5">
-              struct cubos::core::ecs::QueryTerm::@2::@5 <a href="#acec4a4e12964b078d8d1c2bb9e7037c5" class="m-doc-self">component</a>
-            </dt>
-            <dd>Component term data.</dd>
+            <dd><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> term data.</dd>
           </dl>
         </section>
         <section>
@@ -161,7 +163,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> term.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Entity.html" class="m-doc">Entity</a> term.</td>
                 </tr>
               </tfoot>
             </table>
@@ -179,7 +181,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">type</td>
-                  <td>Component type.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> type.</td>
                 </tr>
                 <tr>
                   <td>target</td>
@@ -189,7 +191,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Component term.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> term.</td>
                 </tr>
               </tfoot>
             </table>
@@ -208,7 +210,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">type</td>
-                  <td>Component type.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> type.</td>
                 </tr>
                 <tr>
                   <td>target</td>
@@ -218,7 +220,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Component term.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> term.</td>
                 </tr>
               </tfoot>
             </table>
@@ -237,7 +239,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">type</td>
-                  <td>Component type.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> type.</td>
                 </tr>
                 <tr>
                   <td>target</td>
@@ -247,7 +249,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Component term.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> term.</td>
                 </tr>
               </tfoot>
             </table>
