@@ -190,6 +190,25 @@ bool QueryFilter::View::Iterator::operator==(const Iterator& other) const
     return true;
 }
 
+auto QueryFilter::View::Iterator::operator*() const -> const Match&
+{
+    CUBOS_ASSERT(mArchetypeIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");
+    auto& world = mView.mFilter.mWorld;
+
+    for (int i = 0; i < mView.mFilter.mTargetCount; ++i)
+    {
+        mMatch.entities[i].index = world.tables().dense(mTargetArchetypes[i]).entity(mCursorRows[i]);
+        mMatch.entities[i].generation = world.generation(mMatch.entities[i].index);
+    }
+
+    return mMatch;
+}
+
+auto QueryFilter::View::Iterator::operator->() const -> const Match*
+{
+    return &this->operator*();
+}
+
 auto QueryFilter::View::Iterator::operator++() -> Iterator&
 {
     CUBOS_ASSERT(mArchetypeIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");

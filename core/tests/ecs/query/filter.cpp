@@ -54,15 +54,19 @@ TEST_CASE("ecs::QueryFilter")
                 auto it = view.begin();
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == a);
+                REQUIRE(it->entities[0] == e1);
                 ++it;
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == aI);
+                REQUIRE(it->entities[0] == e2I);
                 ++it;
                 REQUIRE(it.cursorRows()[0] == 1);
                 REQUIRE(it.targetArchetypes()[0] == aI);
+                REQUIRE(it->entities[0] == e3I);
                 ++it;
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == aP);
+                REQUIRE(it->entities[0] == e4P);
                 ++it;
                 REQUIRE(it == view.end());
             }
@@ -73,6 +77,7 @@ TEST_CASE("ecs::QueryFilter")
                 auto it = view.begin();
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == a);
+                REQUIRE(it->entities[0] == e1);
                 ++it;
                 REQUIRE(it == view.end());
             }
@@ -83,6 +88,7 @@ TEST_CASE("ecs::QueryFilter")
                 auto it = view.begin();
                 REQUIRE(it.cursorRows()[0] == 1);
                 REQUIRE(it.targetArchetypes()[0] == aI);
+                REQUIRE(it->entities[0] == e3I);
                 ++it;
                 REQUIRE(it == view.end());
             }
@@ -93,6 +99,7 @@ TEST_CASE("ecs::QueryFilter")
                 auto it = view.begin();
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == aP);
+                REQUIRE(it->entities[0] == e4P);
                 ++it;
                 REQUIRE(it == view.end());
             }
@@ -108,9 +115,11 @@ TEST_CASE("ecs::QueryFilter")
                 auto it = view.begin();
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == aI);
+                REQUIRE(it->entities[0] == e2I);
                 ++it;
                 REQUIRE(it.cursorRows()[0] == 1);
                 REQUIRE(it.targetArchetypes()[0] == aI);
+                REQUIRE(it->entities[0] == e3I);
                 ++it;
                 REQUIRE(it == view.end());
             }
@@ -121,6 +130,7 @@ TEST_CASE("ecs::QueryFilter")
                 auto it = view.begin();
                 REQUIRE(it.cursorRows()[0] == 1);
                 REQUIRE(it.targetArchetypes()[0] == aI);
+                REQUIRE(it->entities[0] == e3I);
                 ++it;
                 REQUIRE(it == view.end());
             }
@@ -142,9 +152,11 @@ TEST_CASE("ecs::QueryFilter")
                 auto it = view.begin();
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == a);
+                REQUIRE(it->entities[0] == e1);
                 ++it;
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == aP);
+                REQUIRE(it->entities[0] == e4P);
                 ++it;
                 REQUIRE(it == view.end());
             }
@@ -161,6 +173,7 @@ TEST_CASE("ecs::QueryFilter")
                 auto it = view.begin();
                 REQUIRE(it.cursorRows()[0] == 0);
                 REQUIRE(it.targetArchetypes()[0] == aP);
+                REQUIRE(it->entities[0] == e4P);
                 ++it;
                 REQUIRE(it == view.end());
             }
