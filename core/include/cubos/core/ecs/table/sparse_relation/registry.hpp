@@ -23,7 +23,34 @@ namespace cubos::core::ecs
         SparseRelationTableRegistry();
 
         /// @brief Stores the ids of tables of a given type.
-        class TypeIndex;
+        class TypeIndex
+        {
+        public:
+            /// @brief Inserts a new table identifier into the index.
+            /// @param id Table identifier.
+            void insert(SparseRelationTableId id);
+
+            /// @brief Returns a reference to a map which maps archetypes to the tables where it is the 'from'
+            /// archetype.
+            /// @return Map from archetypes to vectors of table identifiers.
+            const auto& from() const
+            {
+                return mSparseRelationTableIdsByFrom;
+            }
+
+            /// @brief Returns a reference to a map which maps archetypes to the tables where it is the 'to' archetype.
+            /// @return Map from archetypes to vectors of table identifiers.
+            const auto& to() const
+            {
+                return mSparseRelationTableIdsByTo;
+            }
+
+        private:
+            std::unordered_map<ArchetypeId, std::vector<SparseRelationTableId>, ArchetypeIdHash>
+                mSparseRelationTableIdsByFrom;
+            std::unordered_map<ArchetypeId, std::vector<SparseRelationTableId>, ArchetypeIdHash>
+                mSparseRelationTableIdsByTo;
+        };
 
         /// @brief Checks if there's a table with the given identifier.
         /// @param id Identifier.
@@ -103,33 +130,5 @@ namespace cubos::core::ecs
         std::unordered_map<DataTypeId, TypeIndex, DataTypeIdHash> mTypeIndices;
         std::vector<SparseRelationTableId> mIds;
         TypeIndex* mEmptyTypeIndex; ///< Used as a placeholder when a type hasn't been registered yet.
-    };
-
-    class SparseRelationTableRegistry::TypeIndex
-    {
-    public:
-        /// @brief Inserts a new table identifier into the index.
-        /// @param id Table identifier.
-        void insert(SparseRelationTableId id);
-
-        /// @brief Returns a reference to a map which maps archetypes to the tables where it is the 'from' archetype.
-        /// @return Map from archetypes to vectors of table identifiers.
-        const auto& from() const
-        {
-            return mSparseRelationTableIdsByFrom;
-        }
-
-        /// @brief Returns a reference to a map which maps archetypes to the tables where it is the 'to' archetype.
-        /// @return Map from archetypes to vectors of table identifiers.
-        const auto& to() const
-        {
-            return mSparseRelationTableIdsByTo;
-        }
-
-    private:
-        std::unordered_map<ArchetypeId, std::vector<SparseRelationTableId>, ArchetypeIdHash>
-            mSparseRelationTableIdsByFrom;
-        std::unordered_map<ArchetypeId, std::vector<SparseRelationTableId>, ArchetypeIdHash>
-            mSparseRelationTableIdsByTo;
     };
 } // namespace cubos::core::ecs
