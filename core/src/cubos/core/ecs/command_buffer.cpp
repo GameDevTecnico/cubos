@@ -59,6 +59,22 @@ void CommandBuffer::remove(Entity entity, const reflection::Type& type)
     mCommands.emplace_back([entity, &type](World& world) { world.components(entity).remove(type); });
 }
 
+void CommandBuffer::relate(Entity from, Entity to, const reflection::Type& type, void* value)
+{
+    std::lock_guard<std::mutex> lock(mMutex);
+
+    mCommands.emplace_back([from, to, value = memory::AnyValue::moveConstruct(type, value)](World& world) mutable {
+        world.relate(from, to, value.type(), value.get());
+    });
+}
+
+void CommandBuffer::unrelate(Entity from, Entity to, const reflection::Type& type)
+{
+    std::lock_guard<std::mutex> lock(mMutex);
+
+    mCommands.emplace_back([from, to, &type](World& world) { world.unrelate(from, to, type); });
+}
+
 void CommandBuffer::push(memory::Function<void(World&)> command)
 {
     std::lock_guard<std::mutex> lock(mMutex);

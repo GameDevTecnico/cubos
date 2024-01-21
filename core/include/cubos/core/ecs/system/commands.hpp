@@ -82,6 +82,50 @@ namespace cubos::core::ecs
             return this->remove(entity, reflection::reflect<T>());
         }
 
+        /// @brief Inserts a relation between the two given entities.
+        ///
+        /// If the relation already exists, it is overwritten.
+        ///
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param type Relation type.
+        /// @param value Relation value to move.
+        /// @return Commands.
+        Commands& relate(Entity from, Entity to, const reflection::Type& type, void* value);
+
+        /// @brief Inserts a relation between the two given entities.
+        ///
+        /// If the relation already exists, it is overwritten.
+        ///
+        /// @tparam T Relation type.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param value Relation value.
+        /// @return Commands.
+        template <reflection::Reflectable T>
+        Commands& relate(Entity from, Entity to, T value)
+        {
+            return this->relate(from, to, reflection::reflect<T>(), &value);
+        }
+
+        /// @brief Removes the relation, if there's any, between the two given entities.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param type Relation type.
+        /// @return Commands.
+        Commands& unrelate(Entity from, Entity to, const reflection::Type& type);
+
+        /// @brief Removes the relation, if there's any, between the two given entities.
+        /// @tparam T Relation type.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @return Commands.
+        template <reflection::Reflectable T>
+        Commands& unrelate(Entity from, Entity to)
+        {
+            return this->unrelate(from, to, reflection::reflect<T>());
+        }
+
     private:
         CommandBuffer& mBuffer; ///< Command buffer to write to.
     };
