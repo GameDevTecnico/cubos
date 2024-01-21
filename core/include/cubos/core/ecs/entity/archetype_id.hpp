@@ -22,4 +22,10 @@ namespace cubos::core::ecs
         /// @return Whether the two archetype identifiers are equal.
         bool operator==(const ArchetypeId& other) const = default;
     };
+
+    /// @brief Hash functor for @ref ArchetypeId.
+    struct ArchetypeIdHash
+    {
+        std::size_t operator()(const ArchetypeId& id) const;
+    };
 } // namespace cubos::core::ecs
