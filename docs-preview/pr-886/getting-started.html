@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Getting started | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Getting started
+        </h1>
+        <p>How to download, build and run the engine and where to go from there.</p>
+<p><a name="md_docs_pages_1_getting_started_main"></a></p><section id="autotoc_md0"><h2><a href="#autotoc_md0">Building the engine from source</a></h2><aside class="m-note m-info"><h4>Note</h4><p>This guide assumes you&#x27;re familiar with the basics of git.</p></aside><section id="autotoc_md1"><h3><a href="#autotoc_md1">Getting the code</a></h3><p>The <strong>CUBOS.</strong> source code is <a href="https://github.com/GameDevTecnico/cubos">hosted on GitHub</a>, so the easiest and only way to get the code right now is to clone the repository with git.</p></section><section id="autotoc_md2"><h3><a href="#autotoc_md2">Dependencies</a></h3><p>The following dependencies are used to compile <strong>CUBOS.</strong>:</p><table class="m-table"><thead><tr><th>Name</th><th>Importance</th><th>Submodule Path</th><th>Installed Separately</th><th>Version*</th></tr></thead><tbody><tr><td><a href="https://cmake.org/">CMake</a></td><td>Essential</td><td>-</td><td>Yes</td><td>-</td></tr><tr><td><a href="https://github.com/Dav1dde/glad">glad</a></td><td>Essential</td><td><code>core/lib/glad</code></td><td>No</td><td>2.0.4</td></tr><tr><td><a href="https://github.com/glfw/glfw">glfw</a></td><td>Essential</td><td><code>core/lib/glfw</code></td><td>Optionally</td><td>3.3.8</td></tr><tr><td><a href="https://github.com/g-truc/glm">glm</a></td><td>Essential</td><td><code>core/lib/glm</code></td><td>Optionally</td><td>0.9.9.8</td></tr><tr><td><a href="https://github.com/mariusbancila/stduuid">stduuid</a></td><td>Essential</td><td><code>core/lib/stduuid</code></td><td>No</td><td>1.2.3</td></tr><tr><td><a href="https://github.com/doctest/doctest">doctest</a></td><td>Required for tests</td><td><code>core/lib/doctest</code></td><td>Optionally</td><td>2.4.11</td></tr><tr><td><a href="https://github.com/ocornut/imgui">imgui</a></td><td>Required for imgui plugin</td><td><code>engine/lib/imgui</code></td><td>No</td><td>1.89.9</td></tr><tr><td><a href="https://github.com/nlohmann/json">json</a></td><td>Essential</td><td><code>core/lib/json</code></td><td>No</td><td>3.11.2</td></tr></tbody></table><p>*versions tested in CI and installed by submodules, others might work</p><p>Dependencies marked as <em>Essential</em> are required to compile the engine. If they are installed separately, you must first install them manually. If they&#x27;re not, it means they come as submodules and you can install them with the engine by cloning the whole repository with the <code>--recursive</code> flag. If you&#x27;ve already cloned the repository, you can install them by running the following command from the root directory of the repository:</p><pre class="m-code">git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive</pre></section><section id="autotoc_md3"><h3><a href="#autotoc_md3">Formatting</a></h3><p>To contribute you must ensure your code is correctly formatted. Install <code>clang-format</code> and run the following command to enable a pre-commit hook which formats your changes automatically:</p><pre class="m-code">git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>include.path<span class="w"> </span>../.gitconfig</pre></section><section id="autotoc_md4"><h3><a href="#autotoc_md4">Compiling</a></h3><p>If you chose to install some dependencies separately, you must pass the corresponding <code>-D</code> flag to CMake. For example, if you installed GLFW, GLM and CMake separately you would pass the following flags to CMake:</p><pre class="m-code">cmake<span class="w"> </span>-H.<span class="w"> </span>-Bbuild<span class="w"> </span>-DGLFW_USE_SUBMODULE<span class="o">=</span>OFF<span class="w"> </span>-DGLM_USE_SUBMODULE<span class="o">=</span>OFF</pre><p>If you are using submodules, you can simply run the following command from the root directory of the repository:</p><pre class="m-code">cmake<span class="w"> </span>-H.<span class="w"> </span>-Bbuild</pre><p>The following is a list of all the options available to configure the engine:</p><table class="m-table"><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><code>WITH_GLFW</code></td><td>Use GLFW? (Required for now)</td></tr><tr><td><code>WITH_OPENGL</code></td><td>Use OpenGL? (Required for now)</td></tr><tr><td><code>GLFW_USE_SUBMODULE</code></td><td>Compile glfw from source?</td></tr><tr><td><code>GLM_USE_SUBMODULE</code></td><td>Compile glm from source?</td></tr><tr><td><code>DOCTEST_USE_SUBMODULE</code></td><td>Compile doctest from source?</td></tr><tr><td><code>BUILD_CORE_SAMPLES</code></td><td>Build <strong>CUBOS.</strong> <code>core</code> samples?</td></tr><tr><td><code>BUILD_CORE_TESTS</code></td><td>Build <strong>CUBOS.</strong> <code>core</code> tests?</td></tr><tr><td><code>BUILD_ENGINE_SAMPLES</code></td><td>Build <strong>CUBOS.</strong> <code>engine</code> samples?</td></tr><tr><td><code>BUILD_ENGINE_TESTS</code></td><td>Build <strong>CUBOS.</strong> <code>engine</code> tests?</td></tr><tr><td><code>BUILD_DOCUMENTATION</code></td><td>Build the documentation?</td></tr><tr><td><code>ENABLE_COVERAGE</code></td><td>Enable code coverage? (GCC only)</td></tr><tr><td><code>FIX_CLANG_TIDY_ERRORS</code></td><td>Fix clang-tidy errors automatically?</td></tr></tbody></table></section></section><section id="autotoc_md5"><h2><a href="#autotoc_md5">Running the examples and tests</a></h2><section id="autotoc_md6"><h3><a href="#autotoc_md6">Examples</a></h3><p>Both the <code>core</code> and the <code>engine</code> contain examples which you can run to check if things are running correctly. To build them, you must enable the <code>BUILD_CORE_SAMPLES</code> and/or <code>BUILD_ENGINE_SAMPLES</code> options.</p></section><section id="autotoc_md7"><h3><a href="#autotoc_md7">Testing</a></h3><p><strong>CUBOS.</strong> uses <em>doctest</em> for unit testing the engine. To build them, you must enable the <code>BUILD_CORE_TESTS</code> and/or <code>BUILD_ENGINE_TESTS</code> options.</p></section></section><section id="autotoc_md8"><h2><a href="#autotoc_md8">Whats next?</a></h2><p>We recommend you start by reading the <a href="features.html" class="m-doc">feature guide</a>, which introduces you to important concepts and features of the engine, such as what is an ECS and how it is used in <strong>CUBOS.</strong>.</p><p>The <a href="examples.html" class="m-doc">examples page</a> is also a good place to go if you want to see how specific parts of the engine are used in practice.</p></section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
