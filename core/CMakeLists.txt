@@ -101,6 +101,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/query/term.cpp"
     "src/cubos/core/ecs/query/access.cpp"
     "src/cubos/core/ecs/query/data.cpp"
+    "src/cubos/core/ecs/query/filter.cpp"
     "src/cubos/core/ecs/query/fetcher.cpp"
     "src/cubos/core/ecs/query/opt.cpp"
     "src/cubos/core/ecs/query/properties.cpp"
