@@ -2,6 +2,8 @@
 /// @brief Class @ref cubos::core::ecs::QueryFetcher.
 /// @ingroup core-ecs-query
 
+#pragma once
+
 #include <cubos/core/ecs/query/opt.hpp>
 #include <cubos/core/ecs/query/term.hpp>
 #include <cubos/core/ecs/world.hpp>
