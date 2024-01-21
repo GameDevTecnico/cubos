@@ -113,12 +113,12 @@ QueryFilter::View::View(QueryFilter& filter)
 {
 }
 
-auto QueryFilter::View::pin(int target, Entity entity) && -> View&&
+auto QueryFilter::View::pin(int target, Entity entity) && -> View
 {
     CUBOS_ASSERT(target < mFilter.mTargetCount, "No such target {} in query", target);
     CUBOS_ASSERT(mPins[target].isNull(), "Target {} was already pinned", target);
     mPins[target] = entity;
-    return std::move(*this);
+    return *this;
 }
 
 auto QueryFilter::View::begin() -> Iterator

@@ -9,6 +9,7 @@ using cubos::core::reflection::reflect;
 
 using namespace cubos::core::ecs;
 
+// NOLINTBEGIN(readability-function-size)
 TEST_CASE("ecs::QueryFilter")
 {
     World world{};
@@ -32,11 +33,11 @@ TEST_CASE("ecs::QueryFilter")
     SUBCASE("with a single target")
     {
         std::vector<QueryTerm> terms{};
-        bool no_terms = false;
+        bool noTerms = false;
 
         SUBCASE("no terms")
         {
-            no_terms = true;
+            noTerms = true;
         }
 
         SUBCASE("optional integer")
@@ -44,7 +45,7 @@ TEST_CASE("ecs::QueryFilter")
             terms = {QueryTerm::makeOptComponent(integerComponent, 0)};
         }
 
-        if (no_terms || !terms.empty())
+        if (noTerms || !terms.empty())
         {
             QueryFilter filter{world, terms};
 
@@ -199,3 +200,4 @@ TEST_CASE("ecs::QueryFilter")
         }
     }
 }
+// NOLINTEND(readability-function-size)
