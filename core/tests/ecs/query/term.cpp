@@ -8,6 +8,7 @@ using cubos::core::reflection::reflect;
 
 using namespace cubos::core::ecs;
 
+// NOLINTBEGIN(readability-function-size)
 TEST_CASE("ecs::QueryTerm")
 {
     Types types{};
@@ -173,3 +174,4 @@ TEST_CASE("ecs::QueryTerm")
         REQUIRE(otherTerms[3].entity.target == 1);
     }
 }
+// NOLINTEND(readability-function-size)

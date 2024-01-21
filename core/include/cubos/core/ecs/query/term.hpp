@@ -21,6 +21,20 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs-query
     struct QueryTerm
     {
+        /// @brief Stores entity term data.
+        struct Entity
+        {
+            int target; ///< Index of the target accessed by this term.
+        };
+
+        /// @brief Stores component term data.
+        struct Component
+        {
+            int target;    ///< Index of the target accessed by this term.
+            bool without;  ///< If true, requires the target to not have the component.
+            bool optional; ///< If true, the term accesses the component but does not require it to be present.
+        };
+
         /// @brief Type of the data matched by the term.
         ///
         /// If this is set to @ref DataTypeId::Invalid, then the term is an entity term.
@@ -28,19 +42,8 @@ namespace cubos::core::ecs
         DataTypeId type;
 
         union {
-            /// @brief Entity term data.
-            struct
-            {
-                int target; ///< Index of the target accessed by this term.
-            } entity;
-
-            /// @brief Component term data.
-            struct
-            {
-                int target;    ///< Index of the target accessed by this term.
-                bool without;  ///< If true, requires the target to not have the component.
-                bool optional; ///< If true, the term accesses the component but does not require it to be present.
-            } component;
+            Entity entity;       ///< Entity term data.
+            Component component; ///< Component term data.
         };
 
         /// @brief Returns a new entity term for the given target.

@@ -56,15 +56,14 @@ bool QueryTerm::compare(const Types& types, const QueryTerm& other) const
     {
         return entity.target == other.entity.target;
     }
-    else if (this->isComponent(types))
+
+    if (this->isComponent(types))
     {
         return component.target == other.component.target && component.without == other.component.without &&
                component.optional == other.component.optional;
     }
-    else
-    {
-        CUBOS_UNREACHABLE();
-    }
+
+    CUBOS_UNREACHABLE();
 }
 
 std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<QueryTerm>& baseTerms,
@@ -102,7 +101,8 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
                     ++otherTermIt;
                     break;
                 }
-                else if (baseTerm.isComponent(types) && baseTerm.component.without == otherTerm.component.without)
+
+                if (baseTerm.isComponent(types) && baseTerm.component.without == otherTerm.component.without)
                 {
                     CUBOS_ASSERT(otherTerm.component.target == -1); // See comment at the beginning of the function.
 
