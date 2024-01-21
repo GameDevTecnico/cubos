@@ -68,17 +68,28 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#af2cab561857a9fd890aeeda074acb9b5" class="m-doc">term</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a></span>
+            </dt>
+            <dd>Creates a query term with unspecified targets for the argument type.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a5900d1e9a0a160b3a5f6872b43a46020" class="m-doc">QueryFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a7699b5a83ba8d175c6892db56c97883f" class="m-doc">QueryFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&amp; term)</span>
             </dt>
             <dd>Called when a query is constructed for the first time.</dd>
           </dl>
@@ -87,27 +98,50 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a6a27f862a071c35725abbd7f9dd575cb" class="m-doc">analyze</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a>&amp; access)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a24c5cd5d1d772a1e233cef160e9c8fd9" class="m-doc">prepare</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>* targetArchetypes)</span>
             </dt>
-            <dd>Called to predict the access patterns of this argument type.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ac6777b716b3648f3ff62eeb1b4186de3" class="m-doc">prepare</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype)</span>
-            </dt>
-            <dd>Called when iteration starts for the given archetype. Always called before <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a19370851fea41b06ec8e079366c3e318" class="m-doc">fetch()</a>, which may be called multiple times after this.</dd>
+            <dd>Called when iteration starts for the given archetypes. Always called before <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a19370851fea41b06ec8e079366c3e318" class="m-doc">fetch()</a>, which may be called multiple times after this.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a19370851fea41b06ec8e079366c3e318" class="m-doc">fetch</a>(</span><span class="m-doc-wrap">std::size_t row) -&gt; T</span>
             </dt>
-            <dd>Called to get the actual desired data for a specific entity. Always called after <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#ac6777b716b3648f3ff62eeb1b4186de3" class="m-doc">prepare()</a> has been called at least once.</dd>
+            <dd>Called to get the actual desired data for a specific match. Always called after <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a24c5cd5d1d772a1e233cef160e9c8fd9" class="m-doc">prepare()</a> has been called at least once.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a5900d1e9a0a160b3a5f6872b43a46020"><div>
+          <section class="m-doc-details" id="af2cab561857a9fd890aeeda074acb9b5"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5900d1e9a0a160b3a5f6872b43a46020" class="m-doc-self">QueryFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world)</span></span>
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af2cab561857a9fd890aeeda074acb9b5" class="m-doc-self">term</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world)</span></span>
+            </h3>
+            <p>Creates a query term with unspecified targets for the argument type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> being queried.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Term information.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7699b5a83ba8d175c6892db56c97883f"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7699b5a83ba8d175c6892db56c97883f" class="m-doc-self">QueryFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&amp; term)</span></span>
             </h3>
             <p>Called when a query is constructed for the first time.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -119,45 +153,29 @@
                   <td style="width: 1%">world</td>
                   <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> being queried.</td>
                 </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a6a27f862a071c35725abbd7f9dd575cb"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a27f862a071c35725abbd7f9dd575cb" class="m-doc-self">analyze</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a>&amp; access)</span></span>
-            </h3>
-            <p>Called to predict the access patterns of this argument type.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
                 <tr>
-                  <td style="width: 1%">access&nbsp;<span class="m-label m-flat m-warning">out</span></td>
-                  <td>Access patterns.</td>
+                  <td>term</td>
+                  <td>Term corresponding to the argument being fetched, with specified targets.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac6777b716b3648f3ff62eeb1b4186de3"><div>
+          <section class="m-doc-details" id="a24c5cd5d1d772a1e233cef160e9c8fd9"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac6777b716b3648f3ff62eeb1b4186de3" class="m-doc-self">prepare</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a24c5cd5d1d772a1e233cef160e9c8fd9" class="m-doc-self">prepare</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>* targetArchetypes)</span></span>
             </h3>
-            <p>Called when iteration starts for the given archetype. Always called before <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a19370851fea41b06ec8e079366c3e318" class="m-doc">fetch()</a>, which may be called multiple times after this.</p>
+            <p>Called when iteration starts for the given archetypes. Always called before <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a19370851fea41b06ec8e079366c3e318" class="m-doc">fetch()</a>, which may be called multiple times after this.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">archetype</td>
-                  <td>Archetype identifier.</td>
+                  <td style="width: 1%">targetArchetypes</td>
+                  <td>Pointer to array with the archetype identifiers for the targets.</td>
                 </tr>
               </tbody>
             </table>
@@ -169,7 +187,7 @@
               </div>
               <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />ecs::<wbr />QueryFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19370851fea41b06ec8e079366c3e318" class="m-doc-self">fetch</a>(</span><span class="m-doc-wrap">std::size_t row)</span></span>
             </h3>
-            <p>Called to get the actual desired data for a specific entity. Always called after <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#ac6777b716b3648f3ff62eeb1b4186de3" class="m-doc">prepare()</a> has been called at least once.</p>
+            <p>Called to get the actual desired data for a specific match. Always called after <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html#a24c5cd5d1d772a1e233cef160e9c8fd9" class="m-doc">prepare()</a> has been called at least once.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -177,7 +195,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">row</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>&#x27;s row in its archetype&#x27;s dense table.</td>
+                  <td>Row to fetch.</td>
                 </tr>
               </tbody>
             </table>

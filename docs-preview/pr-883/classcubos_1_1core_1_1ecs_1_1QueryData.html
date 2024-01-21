@@ -79,12 +79,12 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#abb22a5168d83099789e8b26790cecfcb" class="m-doc">QueryData</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="structcubos_1_1core_1_1ecs_1_1QueryProperties.html" class="m-doc">QueryProperties</a> properties)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a2b37336b1387ff959c7d3e7d9e6565c1" class="m-doc">QueryData</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; extraTerms)</span>
             </dt>
             <dd>Constructs.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#afbec572db2896262d8ba8a370cf559da" class="m-doc">QueryData</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&amp;&amp; other) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#adb2fc8b929ac8092c988303fc5153aa9" class="m-doc">QueryData</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&amp;&amp; other)</span>
             </dt>
             <dd>Move constructs.</dd>
           </dl>
@@ -97,13 +97,9 @@
             </dt>
             <dd>Fetches any new matching archetypes that have been added since the last call to this function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac6c22ae9a7496d60f6edbb873b90b921" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#afc9f479ab1f633208632b8c8892712e8" class="m-doc">view</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1View.html" class="m-doc">View</a></span>
             </dt>
-            <dd>Returns an iterator pointing to the first query match.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5fcba6fc85c67d3244ddbeb5710e858e" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a></span>
-            </dt>
-            <dd>Returns an out of bounds iterator representing the end of the query matches.</dd>
+            <dd>Returns a view which can be used to iterate over the matches.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a34a2d7c4358d4fd406cd3594fac61f53" class="m-doc">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
             </dt>
@@ -112,13 +108,13 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="abb22a5168d83099789e8b26790cecfcb"><div>
+          <section class="m-doc-details" id="a2b37336b1387ff959c7d3e7d9e6565c1"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abb22a5168d83099789e8b26790cecfcb" class="m-doc-self">QueryData</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="structcubos_1_1core_1_1ecs_1_1QueryProperties.html" class="m-doc">QueryProperties</a> properties)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b37336b1387ff959c7d3e7d9e6565c1" class="m-doc-self">QueryData</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; extraTerms)</span></span>
             </h3>
             <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -128,21 +124,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">world</td>
-                  <td></td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> being queried.</td>
                 </tr>
                 <tr>
-                  <td>properties</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> properties.</td>
+                  <td>extraTerms</td>
+                  <td>Extra query terms.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="afbec572db2896262d8ba8a370cf559da"><div>
+          <section class="m-doc-details" id="adb2fc8b929ac8092c988303fc5153aa9"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afbec572db2896262d8ba8a370cf559da" class="m-doc-self">QueryData</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&amp;&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adb2fc8b929ac8092c988303fc5153aa9" class="m-doc-self">QueryData</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&amp;&amp; other)</span></span>
             </h3>
             <p>Move constructs.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -157,36 +153,19 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac6c22ae9a7496d60f6edbb873b90b921"><div>
+          <section class="m-doc-details" id="afc9f479ab1f633208632b8c8892712e8"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac6c22ae9a7496d60f6edbb873b90b921" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc9f479ab1f633208632b8c8892712e8" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Returns an iterator pointing to the first query match.</p>
+            <p>Returns a view which can be used to iterate over the matches.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a5fcba6fc85c67d3244ddbeb5710e858e"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5fcba6fc85c67d3244ddbeb5710e858e" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Returns an out of bounds iterator representing the end of the query matches.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1QueryData_1_1View.html" class="m-doc">View</a>.</td>
                 </tr>
               </tfoot>
             </table>
