@@ -44,9 +44,9 @@ namespace cubos::core::ecs
         QueryData(World& world, const std::vector<QueryTerm>& extraTerms)
             : mWorld{world}
         {
-            for (int i = 0; i < QueryFilter::MaxTargetCount; ++i)
+            for (auto& archetype : mPreparedArchetypes)
             {
-                mPreparedArchetypes[i] = ArchetypeId::Invalid;
+                archetype = ArchetypeId::Invalid;
             }
 
             // Extract terms from the query argument types.
@@ -59,7 +59,7 @@ namespace cubos::core::ecs
             mFilter = new QueryFilter(world, terms);
 
             // Initialize the fetchers.
-            int i = 0;
+            std::size_t i = 0;
             auto getTerm = [&]() { return argumentTerms[i++]; };
             mFetchers = new std::tuple<QueryFetcher<Ts>...>{QueryFetcher<Ts>(world, getTerm())...};
             (void)getTerm; // Necessary to silence unused warning in case Ts is empty.
@@ -86,11 +86,11 @@ namespace cubos::core::ecs
 
         /// @brief Move constructs.
         /// @param other Other query data.
-        QueryData(QueryData&& other)
+        QueryData(QueryData&& other) noexcept
             : mWorld{other.mWorld}
             , mFilter{other.mFilter}
             , mFetchers{other.mFetchers}
-            , mFetcherCursors{other.mFetcherCursors}
+            , mFetcherCursors{std::move(other.mFetcherCursors)}
         {
             for (int i = 0; i < QueryFilter::MaxTargetCount; ++i)
             {
@@ -254,9 +254,9 @@ namespace cubos::core::ecs
         Match operator*() const
         {
             mData.prepare(mIterator.targetArchetypes());
-            auto* cursorRows = mIterator.cursorRows();
+            const auto* cursorRows = mIterator.cursorRows();
 
-            int i = 0;
+            std::size_t i = 0;
             auto fetch = [&]<typename T>(QueryFetcher<T>& fetcher) -> T {
                 return fetcher.fetch(cursorRows[mData.mFetcherCursors[i++]]);
             };

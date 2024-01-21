@@ -59,6 +59,6 @@ namespace cubos::core::ecs
         }
 
     private:
-        QueryData<Ts...>::View mView;
+        typename QueryData<Ts...>::View mView;
     };
 } // namespace cubos::core::ecs
