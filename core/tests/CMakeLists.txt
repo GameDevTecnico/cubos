@@ -54,6 +54,7 @@ add_executable(
     ecs/entity/pool.cpp
     ecs/query/data.cpp
     ecs/query/term.cpp
+    ecs/query/filter.cpp
 
     geom/box.cpp
     geom/capsule.cpp
