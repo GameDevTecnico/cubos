@@ -113,6 +113,32 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a495d9efaa75b9352829e9723532ad8f5" class="m-doc">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
             </dt>
             <dd>Removes a component from an entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a96c064f9a509018cce5efc821dd8a2a6" class="m-doc">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
+            </dt>
+            <dd>Inserts a relation between the two given entities.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6c8fc658e34eb62d1ada1fb63a2ff98b" class="m-doc">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              T value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
+            </dt>
+            <dd>Inserts a relation between the two given entities.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a56d02f53cf7a32c6d4ccd65acc83c0cf" class="m-doc">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
+            </dt>
+            <dd>Removes the relation, if there&#x27;s any, between the two given entities.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a31a707c8b452680976e5d691a4657a63" class="m-doc">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
+            </dt>
+            <dd>Removes the relation, if there&#x27;s any, between the two given entities.</dd>
           </dl>
         </section>
         <section>
@@ -314,6 +340,164 @@
                 <tr>
                   <td>entity</td>
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a96c064f9a509018cce5efc821dd8a2a6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a96c064f9a509018cce5efc821dd8a2a6" class="m-doc-self">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
+            </h3>
+            <p>Inserts a relation between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Relation value to move.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the relation already exists, it is overwritten.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6c8fc658e34eb62d1ada1fb63a2ff98b"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c8fc658e34eb62d1ada1fb63a2ff98b" class="m-doc-self">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              T value)</span></span>
+            </h3>
+            <p>Inserts a relation between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Relation value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the relation already exists, it is overwritten.</p>
+          </div></section>
+          <section class="m-doc-details" id="a56d02f53cf7a32c6d4ccd65acc83c0cf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56d02f53cf7a32c6d4ccd65acc83c0cf" class="m-doc-self">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Removes the relation, if there&#x27;s any, between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a31a707c8b452680976e5d691a4657a63"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a31a707c8b452680976e5d691a4657a63" class="m-doc-self">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to)</span></span>
+            </h3>
+            <p>Removes the relation, if there&#x27;s any, between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
                 </tr>
               </tbody>
               <tfoot>
