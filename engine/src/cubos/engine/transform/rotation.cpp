@@ -5,7 +5,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::Rotation)
 {
-    return core::ecs::TypeBuilder<Rotation>("cubos::engine::Rotation")
-        .withField("quat", &Rotation::quat)
-        .build();
+    return core::ecs::TypeBuilder<Rotation>("cubos::engine::Rotation").withField("quat", &Rotation::quat).build();
 }
