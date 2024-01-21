@@ -2,8 +2,8 @@
 /// @brief Class @ref cubos::core::ecs::QueryFetcher.
 /// @ingroup core-ecs-query
 
-#include <cubos/core/ecs/query/access.hpp>
 #include <cubos/core/ecs/query/opt.hpp>
+#include <cubos/core/ecs/query/term.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
@@ -18,38 +18,43 @@ namespace cubos::core::ecs
     public:
         /// @brief Called when a query is constructed for the first time.
         /// @param world World being queried.
-        QueryFetcher(World& world)
+        /// @param term Term corresponding to the argument being fetched, with specified targets.
+        QueryFetcher(World& world, const QueryTerm& term)
         {
             (void)world;
+            (void)term;
 
             // This should never be instantiated. This constructor is only defined for documentation purposes.
             static_assert(sizeof(T) == 0, "Invalid query argument type");
         }
 
-        /// @brief Called to predict the access patterns of this argument type.
-        /// @param[out] access Access patterns.
-        void analyze(QueryAccess& access)
+        /// @brief Creates a query term with unspecified targets for the argument type.
+        /// @param world World being queried.
+        /// @return Term information.
+        static QueryTerm term(World& world)
         {
-            (void)access;
+            (void)world;
 
             // This should never be instantiated. This method is only defined for documentation purposes.
             static_assert(AlwaysFalse<T>, "Invalid query argument type");
+
+            CUBOS_UNREACHABLE();
         }
 
-        /// @brief Called when iteration starts for the given archetype. Always called before @ref fetch(), which
+        /// @brief Called when iteration starts for the given archetypes. Always called before @ref fetch(), which
         /// may be called multiple times after this.
-        /// @param archetype Archetype identifier.
-        void prepare(ArchetypeId archetype)
+        /// @param targetArchetypes Pointer to array with the archetype identifiers for the targets.
+        void prepare(const ArchetypeId* targetArchetypes)
         {
-            (void)archetype;
+            (void)targetArchetypes;
 
             // This should never be instantiated. This method is only defined for documentation purposes.
             static_assert(AlwaysFalse<T>, "Invalid query argument type");
         }
 
-        /// @brief Called to get the actual desired data for a specific entity. Always called after @ref prepare() has
+        /// @brief Called to get the actual desired data for a specific match. Always called after @ref prepare() has
         /// been called at least once.
-        /// @param row Entity's row in its archetype's dense table.
+        /// @param row Row to fetch.
         T fetch(std::size_t row)
         {
             (void)row;
@@ -69,18 +74,20 @@ namespace cubos::core::ecs
     class QueryFetcher<Entity>
     {
     public:
-        QueryFetcher(World& world)
+        QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
+            , mTarget{term.entity.target}
         {
         }
 
-        void analyze(QueryAccess& /*access*/)
+        static QueryTerm term(World& /*world*/)
         {
+            return QueryTerm::makeEntity(-1);
         }
 
-        void prepare(ArchetypeId archetype)
+        void prepare(const ArchetypeId* targetArchetypes)
         {
-            mTable = &mWorld.tables().dense(archetype);
+            mTable = &mWorld.tables().dense(targetArchetypes[mTarget]);
         }
 
         Entity fetch(std::size_t row)
@@ -93,26 +100,32 @@ namespace cubos::core::ecs
     private:
         World& mWorld;
         DenseTable* mTable{nullptr};
+        int mTarget;
     };
 
     template <reflection::Reflectable T>
     class QueryFetcher<T&>
     {
     public:
-        QueryFetcher(World& world)
+        QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
             , mColumnId{DenseColumnId::make(world.types().id(reflection::reflect<T>()))}
+            , mTarget{term.component.target}
         {
         }
 
-        void analyze(QueryAccess& access)
+        static QueryTerm term(World& world)
         {
-            access.insert(mColumnId.dataType());
+            auto type = world.types().id(reflection::reflect<T>());
+
+            CUBOS_ASSERT(world.types().isComponent(type), "Query arguments of the form T& must be components");
+
+            return QueryTerm::makeWithComponent(type, -1);
         }
 
-        void prepare(ArchetypeId archetype)
+        void prepare(const ArchetypeId* targetArchetypes)
         {
-            mColumn = &mWorld.tables().dense(archetype).column(mColumnId);
+            mColumn = &mWorld.tables().dense(targetArchetypes[mTarget]).column(mColumnId);
         }
 
         T& fetch(std::size_t row)
@@ -124,26 +137,32 @@ namespace cubos::core::ecs
         World& mWorld;
         DenseColumnId mColumnId;
         memory::AnyVector* mColumn{nullptr};
+        int mTarget;
     };
 
     template <reflection::Reflectable T>
     class QueryFetcher<const T&>
     {
     public:
-        QueryFetcher(World& world)
+        QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
             , mColumnId{DenseColumnId::make(world.types().id(reflection::reflect<T>()))}
+            , mTarget{term.component.target}
         {
         }
 
-        void analyze(QueryAccess& access)
+        static QueryTerm term(World& world)
         {
-            access.insert(mColumnId.dataType());
+            auto type = world.types().id(reflection::reflect<T>());
+
+            CUBOS_ASSERT(world.types().isComponent(type), "Query arguments of the form const T& must be components");
+
+            return QueryTerm::makeWithComponent(type, -1);
         }
 
-        void prepare(ArchetypeId archetype)
+        void prepare(const ArchetypeId* targetArchetypes)
         {
-            mColumn = &mWorld.tables().dense(archetype).column(mColumnId);
+            mColumn = &mWorld.tables().dense(targetArchetypes[mTarget]).column(mColumnId);
         }
 
         const T& fetch(std::size_t row)
@@ -155,27 +174,34 @@ namespace cubos::core::ecs
         World& mWorld;
         DenseColumnId mColumnId;
         memory::AnyVector* mColumn{nullptr};
+        int mTarget;
     };
 
     template <reflection::Reflectable T>
     class QueryFetcher<Opt<T&>>
     {
     public:
-        QueryFetcher(World& world)
+        QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
             , mColumnId{DenseColumnId::make(world.types().id(reflection::reflect<T>()))}
+            , mTarget{term.component.target}
         {
         }
 
-        void analyze(QueryAccess& /*access*/)
+        static QueryTerm term(World& world)
         {
+            auto type = world.types().id(reflection::reflect<T>());
+
+            CUBOS_ASSERT(world.types().isComponent(type), "Query arguments of the form Opt<T&> must be components");
+
+            return QueryTerm::makeOptComponent(type, -1);
         }
 
-        void prepare(ArchetypeId archetype)
+        void prepare(const ArchetypeId* targetArchetypes)
         {
-            if (mWorld.tables().dense(archetype).contains(mColumnId))
+            if (mWorld.tables().dense(targetArchetypes[mTarget]).contains(mColumnId))
             {
-                mColumn = &mWorld.tables().dense(archetype).column(mColumnId);
+                mColumn = &mWorld.tables().dense(targetArchetypes[mTarget]).column(mColumnId);
             }
             else
             {
@@ -197,27 +223,35 @@ namespace cubos::core::ecs
         World& mWorld;
         DenseColumnId mColumnId;
         memory::AnyVector* mColumn{nullptr};
+        int mTarget;
     };
 
     template <reflection::Reflectable T>
     class QueryFetcher<Opt<const T&>>
     {
     public:
-        QueryFetcher(World& world)
+        QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
             , mColumnId{DenseColumnId::make(world.types().id(reflection::reflect<T>()))}
+            , mTarget{term.component.target}
         {
         }
 
-        void analyze(QueryAccess& /*access*/)
+        static QueryTerm term(World& world)
         {
+            auto type = world.types().id(reflection::reflect<T>());
+
+            CUBOS_ASSERT(world.types().isComponent(type),
+                         "Query arguments of the form Opt<const T&> must be components");
+
+            return QueryTerm::makeOptComponent(type, -1);
         }
 
-        void prepare(ArchetypeId archetype)
+        void prepare(const ArchetypeId* targetArchetypes)
         {
-            if (mWorld.tables().dense(archetype).contains(mColumnId))
+            if (mWorld.tables().dense(targetArchetypes[mTarget]).contains(mColumnId))
             {
-                mColumn = &mWorld.tables().dense(archetype).column(mColumnId);
+                mColumn = &mWorld.tables().dense(targetArchetypes[mTarget]).column(mColumnId);
             }
             else
             {
@@ -239,5 +273,6 @@ namespace cubos::core::ecs
         World& mWorld;
         DenseColumnId mColumnId;
         memory::AnyVector* mColumn{nullptr};
+        int mTarget;
     };
 } // namespace cubos::core::ecs

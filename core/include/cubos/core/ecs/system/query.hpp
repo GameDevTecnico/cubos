@@ -27,12 +27,12 @@ namespace cubos::core::ecs
     class Query
     {
     public:
-        using Iterator = typename QueryData<Ts...>::Iterator;
+        using Iterator = typename QueryData<Ts...>::View::Iterator;
 
         /// @brief Constructs.
         /// @param data Query data.
         Query(QueryData<Ts...>& data)
-            : mData{data}
+            : mView{data.view()}
         {
         }
 
@@ -40,14 +40,14 @@ namespace cubos::core::ecs
         /// @return Iterator.
         Iterator begin()
         {
-            return mData.begin();
+            return mView.begin();
         }
 
         /// @brief Returns an out of bounds iterator representing the end of the query matches.
         /// @return Iterator.
         Iterator end()
         {
-            return mData.end();
+            return mView.end();
         }
 
         /// @brief Accesses the match for the given entity, if there is one.
@@ -55,10 +55,10 @@ namespace cubos::core::ecs
         /// @return Requested components, or nothing if the entity does not match the query.
         Opt<std::tuple<Ts...>> at(Entity entity)
         {
-            return mData.at(entity);
+            return mView.data().at(entity);
         }
 
     private:
-        QueryData<Ts...>& mData;
+        QueryData<Ts...>::View mView;
     };
 } // namespace cubos::core::ecs

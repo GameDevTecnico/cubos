@@ -6,21 +6,12 @@ bool SystemInfo::valid() const
 {
     if (this->usesWorld)
     {
-        return !this->usesCommands && this->resourcesRead.empty() && this->resourcesWritten.empty() &&
-               this->componentsRead.empty() && this->componentsWritten.empty();
+        return !this->usesCommands && this->resourcesRead.empty() && this->resourcesWritten.empty();
     }
 
     for (const auto& rsc : this->resourcesRead)
     {
         if (this->resourcesWritten.contains(rsc))
-        {
-            return false;
-        }
-    }
-
-    for (const auto& comp : this->componentsRead)
-    {
-        if (this->componentsWritten.contains(comp))
         {
             return false;
         }
@@ -44,25 +35,9 @@ bool SystemInfo::compatible(const SystemInfo& other) const
         }
     }
 
-    for (const auto& comp : this->componentsRead)
-    {
-        if (other.componentsWritten.contains(comp))
-        {
-            return false;
-        }
-    }
-
     for (const auto& rsc : this->resourcesWritten)
     {
         if (other.resourcesRead.contains(rsc) || other.resourcesWritten.contains(rsc))
-        {
-            return false;
-        }
-    }
-
-    for (const auto& comp : this->componentsWritten)
-    {
-        if (other.componentsRead.contains(comp) || other.componentsWritten.contains(comp))
         {
             return false;
         }

@@ -28,19 +28,6 @@ TEST_CASE("ecs::SystemInfo")
         {
         }
 
-        SUBCASE("A reads two components")
-        {
-            infoA.componentsRead.insert(typeid(int));
-            infoA.componentsRead.insert(typeid(double));
-        }
-
-        SUBCASE("A writes two components and reads another")
-        {
-            infoA.componentsWritten.insert(typeid(int));
-            infoA.componentsWritten.insert(typeid(double));
-            infoA.componentsRead.insert(typeid(float));
-        }
-
         SUBCASE("A reads two resources")
         {
             infoA.resourcesRead.insert(typeid(int));
@@ -69,28 +56,10 @@ TEST_CASE("ecs::SystemInfo")
 
     SUBCASE("A is invalid")
     {
-        SUBCASE("A reads and writes to the same component")
-        {
-            infoA.componentsRead.insert(typeid(int));
-            infoA.componentsWritten.insert(typeid(int));
-        }
-
         SUBCASE("A reads and writes to the same resource")
         {
             infoA.resourcesRead.insert(typeid(int));
             infoA.resourcesWritten.insert(typeid(int));
-        }
-
-        SUBCASE("A uses the world directly and reads a component")
-        {
-            infoA.usesWorld = true;
-            infoA.componentsRead.insert(typeid(int));
-        }
-
-        SUBCASE("A uses the world directly and writes a component")
-        {
-            infoA.usesWorld = true;
-            infoA.componentsWritten.insert(typeid(int));
         }
 
         SUBCASE("A uses the world directly and reads a resource")
@@ -120,18 +89,6 @@ TEST_CASE("ecs::SystemInfo")
         {
         }
 
-        SUBCASE("both read the same component")
-        {
-            infoA.componentsRead.insert(typeid(int));
-            infoB.componentsRead.insert(typeid(int));
-        }
-
-        SUBCASE("both write to different components")
-        {
-            infoA.componentsWritten.insert(typeid(double));
-            infoB.componentsWritten.insert(typeid(float));
-        }
-
         SUBCASE("both read the same resource")
         {
             infoA.resourcesRead.insert(typeid(int));
@@ -156,18 +113,6 @@ TEST_CASE("ecs::SystemInfo")
 
     SUBCASE("A and B are incompatible")
     {
-        SUBCASE("both write to the same component")
-        {
-            infoA.componentsWritten.insert(typeid(int));
-            infoB.componentsWritten.insert(typeid(int));
-        }
-
-        SUBCASE("one reads and the other writes to the same component")
-        {
-            infoA.componentsRead.insert(typeid(int));
-            infoB.componentsWritten.insert(typeid(int));
-        }
-
         SUBCASE("both write to the same resource")
         {
             infoA.resourcesWritten.insert(typeid(int));
@@ -233,8 +178,6 @@ TEST_CASE("ecs::SystemWrapper")
         SUBCASE("System does not access anything")
         {
             auto info = SystemWrapper(accessNothing).info();
-            CHECK(info.componentsRead.empty());
-            CHECK(info.componentsWritten.empty());
             CHECK(info.resourcesRead.empty());
             CHECK(info.resourcesWritten.empty());
             CHECK_FALSE(info.usesCommands);

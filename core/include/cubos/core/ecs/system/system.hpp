@@ -38,12 +38,6 @@ namespace cubos::core::ecs
         /// @brief Set of resources the system writes.
         std::unordered_set<std::type_index> resourcesWritten;
 
-        /// @brief Set of components the system reads.
-        std::unordered_set<std::type_index> componentsRead;
-
-        /// @brief Set of components the system writes.
-        std::unordered_set<std::type_index> componentsWritten;
-
         /// @brief Checks if this system is valid.
         ///
         /// A system may be invalid, if, for example, it both reads and writes the same resource.

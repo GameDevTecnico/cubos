@@ -108,9 +108,26 @@ auto QueryFilter::view() -> View
     return {*this};
 }
 
+int QueryFilter::targetCount() const
+{
+    return mTargetCount;
+}
+
 QueryFilter::View::View(QueryFilter& filter)
     : mFilter{filter}
 {
+}
+
+auto QueryFilter::View::operator=(const View& view) -> View&
+{
+    CUBOS_ASSERT(&mFilter == &view.mFilter);
+
+    for (int target = 0; target < view.mFilter.mTargetCount; ++target)
+    {
+        mPins[target] = view.mPins[target];
+    }
+
+    return *this;
 }
 
 auto QueryFilter::View::pin(int target, Entity entity) && -> View
@@ -230,11 +247,13 @@ auto QueryFilter::View::Iterator::operator++() -> Iterator&
 
 const ArchetypeId* QueryFilter::View::Iterator::targetArchetypes() const
 {
+    CUBOS_ASSERT(mArchetypeIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");
     return mTargetArchetypes;
 }
 
 const std::size_t* QueryFilter::View::Iterator::cursorRows() const
 {
+    CUBOS_ASSERT(mArchetypeIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");
     return mCursorRows;
 }
 

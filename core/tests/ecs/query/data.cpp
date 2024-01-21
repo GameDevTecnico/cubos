@@ -14,7 +14,9 @@ TEST_CASE("ecs::QueryData")
 
     // Create a query which matches all entities.
     QueryData<Entity> query{world, {}};
-    REQUIRE(query.begin() == query.end());
+    auto view = query.view();
+
+    REQUIRE(view.begin() == view.end());
 
     // Create a few entities.
     auto e1 = world.create();
@@ -25,9 +27,9 @@ TEST_CASE("ecs::QueryData")
 
     // After updating the query, it should match all entities.
     query.update();
-    REQUIRE(query.begin() != query.end());
+    REQUIRE(view.begin() != view.end());
     std::unordered_set<Entity, EntityHash> entities{e1, e2I, e2P};
-    for (auto [entity] : query)
+    for (auto [entity] : view)
     {
         REQUIRE(entities.contains(entity));
         entities.erase(entity);
