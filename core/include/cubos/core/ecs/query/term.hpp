@@ -130,5 +130,11 @@ namespace cubos::core::ecs
         /// @return Result of merging the two vectors.
         static std::vector<QueryTerm> resolve(const Types& types, const std::vector<QueryTerm>& baseTerms,
                                               std::vector<QueryTerm>& otherTerms);
+
+        /// @brief Gets a string representation of vector of query terms.
+        /// @param types Type registry.
+        /// @param terms Vector of terms.
+        /// @return String representation.
+        static std::string toString(const Types& types, const std::vector<QueryTerm>& terms);
     };
 } // namespace cubos::core::ecs
