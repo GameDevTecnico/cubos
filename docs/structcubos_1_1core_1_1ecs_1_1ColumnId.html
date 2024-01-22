@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::DenseColumnId struct | CUBOS. Docs</title>
+  <title>cubos::core::ecs::ColumnId struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>DenseColumnId <span class="m-thin">struct</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>ColumnId <span class="m-thin">struct</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="column_8hpp.html">&lt;core/ecs/table/column.hpp&gt;</a></div>
         </h1>
-        <p>Identifies a dense data column type.</p>
+        <p>Identifies a data column type.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -67,8 +67,8 @@
         <section id="pub-static-attribs">
           <h2><a href="#pub-static-attribs">Public static variables</a></h2>
           <dl class="m-doc">
-            <dt id="a84acdd0330e969c44f658a492c9eef3a">
-              static const <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> <a href="#a84acdd0330e969c44f658a492c9eef3a" class="m-doc-self">Invalid</a>
+            <dt id="abaf79b2a97473cebbb9819ab2f3c0de9">
+              static const <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> <a href="#abaf79b2a97473cebbb9819ab2f3c0de9" class="m-doc-self">Invalid</a>
             </dt>
             <dd>Invalid column type identifier.</dd>
           </dl>
@@ -77,12 +77,12 @@
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a3df9df66862d436e963b20a2c0264c3b" class="m-doc">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a></span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#aaea3ead6c5a3838779b3c427402bbc5a" class="m-doc">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a></span>
             </dt>
             <dd>Creates a column type identifier from a data type identifier.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a98977f752e72400be1675cccc1c5eddf" class="m-doc">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id,
-              uint32_t index) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a></span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#af9c412e6f24e6487a77780e91abbd0f2" class="m-doc">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id,
+              uint32_t index) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a></span>
             </dt>
             <dd>Creates a column type identifier from a data type identifier and an index.</dd>
           </dl>
@@ -91,11 +91,15 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a902cdea3e473b593cb61eb30c6ffb579" class="m-doc">dataType</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6490be08e7c6e84175a53e81a9968d87" class="m-doc">dataType</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a></span>
             </dt>
             <dd>Returns the data type identifier of this column type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a14eb95bd5970e92faf0afccdd07a62d5" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a>&amp; other) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa7899332982432c283164d594422ba2b" class="m-doc">index</a>(</span><span class="m-doc-wrap">) const -&gt; uint32_t</span>
+            </dt>
+            <dd>Returns the index of this column type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8d13f576ceef5f2c82eeb00913c8fa55" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a>&amp; other) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Compares two column type identifiers for equality.</dd>
           </dl>
@@ -103,17 +107,17 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="ad6e6048c7949529eac52178b336e7ccf">
-              uint64_t <a href="#ad6e6048c7949529eac52178b336e7ccf" class="m-doc-self">inner</a>
+            <dt id="a122e94d5306234deb5986216401e2460">
+              uint64_t <a href="#a122e94d5306234deb5986216401e2460" class="m-doc-self">inner</a>
             </dt>
             <dd>Column type identifier.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a3df9df66862d436e963b20a2c0264c3b"><div>
+          <section class="m-doc-details" id="aaea3ead6c5a3838779b3c427402bbc5a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> cubos::<wbr />core::<wbr />ecs::<wbr />DenseColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3df9df66862d436e963b20a2c0264c3b" class="m-doc-self">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id)</span></span>
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> cubos::<wbr />core::<wbr />ecs::<wbr />ColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaea3ead6c5a3838779b3c427402bbc5a" class="m-doc-self">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id)</span></span>
             </h3>
             <p>Creates a column type identifier from a data type identifier.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -134,9 +138,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a98977f752e72400be1675cccc1c5eddf"><div>
+          <section class="m-doc-details" id="af9c412e6f24e6487a77780e91abbd0f2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> cubos::<wbr />core::<wbr />ecs::<wbr />DenseColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a98977f752e72400be1675cccc1c5eddf" class="m-doc-self">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id,
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> cubos::<wbr />core::<wbr />ecs::<wbr />ColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9c412e6f24e6487a77780e91abbd0f2" class="m-doc-self">make</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id,
               uint32_t index)</span></span>
             </h3>
             <p>Creates a column type identifier from a data type identifier and an index.</p>
@@ -162,9 +166,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a902cdea3e473b593cb61eb30c6ffb579"><div>
+          <section class="m-doc-details" id="a6490be08e7c6e84175a53e81a9968d87"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />DenseColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a902cdea3e473b593cb61eb30c6ffb579" class="m-doc-self">dataType</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />ColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6490be08e7c6e84175a53e81a9968d87" class="m-doc-self">dataType</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Returns the data type identifier of this column type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -176,9 +180,23 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a14eb95bd5970e92faf0afccdd07a62d5"><div>
+          <section class="m-doc-details" id="aa7899332982432c283164d594422ba2b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />DenseColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a14eb95bd5970e92faf0afccdd07a62d5" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a>&amp; other) const <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper">uint32_t cubos::<wbr />core::<wbr />ecs::<wbr />ColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa7899332982432c283164d594422ba2b" class="m-doc-self">index</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the index of this column type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Index.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8d13f576ceef5f2c82eeb00913c8fa55"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />ColumnId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d13f576ceef5f2c82eeb00913c8fa55" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a>&amp; other) const <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Compares two column type identifiers for equality.</p>
             <table class="m-table m-fullwidth m-flat">

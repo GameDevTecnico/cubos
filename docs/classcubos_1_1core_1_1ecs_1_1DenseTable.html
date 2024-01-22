@@ -47,7 +47,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>DenseTable <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="dense_8hpp.html">&lt;core/ecs/table/dense.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="dense_2table_8hpp.html">&lt;core/ecs/table/dense/table.hpp&gt;</a></div>
         </h1>
         <p>Stores the dense data associated to entities of a given archetype.</p>
         <nav class="m-block m-default">
@@ -79,7 +79,7 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a0ea73367c9a232c4505d1e1d9ee02d9b" class="m-doc">addColumn</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id,
+              <span class="m-doc-wrap-bumper">void <a href="#a6f07702703bffa50342e5e09ddc717a9" class="m-doc">addColumn</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> id,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
             </dt>
             <dd>Adds a new column to the table.</dd>
@@ -109,24 +109,24 @@
             </dt>
             <dd>Gets the number of rows in the table.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af7292c41cdfff633869fc95a500f3047" class="m-doc">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) -&gt; <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a783467446ebb76d908bcfd3d4ac359eb" class="m-doc">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> id) -&gt; <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp;</span>
             </dt>
             <dd>Gets a reference to the column with the given <code>id</code>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1e5bdb2be2178fa23cf68fa42c3e5d4a" class="m-doc">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const -&gt; const <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af255c7be4ff893ec65aecdccafd5fdba" class="m-doc">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> id) const -&gt; const <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp;</span>
             </dt>
             <dd>Gets a reference to the column with the given <code>id</code>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a095e315cafb8f5d4dd56cf20b3728054" class="m-doc">contains</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa58e3b78b7533834cc8855a676eb86ad" class="m-doc">contains</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> id) const -&gt; bool</span>
             </dt>
             <dd>Checks if the table has a column with the given <code>id</code>.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a0ea73367c9a232c4505d1e1d9ee02d9b"><div>
+          <section class="m-doc-details" id="a6f07702703bffa50342e5e09ddc717a9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ea73367c9a232c4505d1e1d9ee02d9b" class="m-doc-self">addColumn</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6f07702703bffa50342e5e09ddc717a9" class="m-doc-self">addColumn</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> id,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
             </h3>
             <p>Adds a new column to the table.</p>
@@ -266,9 +266,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af7292c41cdfff633869fc95a500f3047"><div>
+          <section class="m-doc-details" id="a783467446ebb76d908bcfd3d4ac359eb"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af7292c41cdfff633869fc95a500f3047" class="m-doc-self">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a783467446ebb76d908bcfd3d4ac359eb" class="m-doc-self">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> id)</span></span>
             </h3>
             <p>Gets a reference to the column with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -290,9 +290,9 @@
             </table>
 <p>Aborts if the column does not exist in the table.</p>
           </div></section>
-          <section class="m-doc-details" id="a1e5bdb2be2178fa23cf68fa42c3e5d4a"><div>
+          <section class="m-doc-details" id="af255c7be4ff893ec65aecdccafd5fdba"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1e5bdb2be2178fa23cf68fa42c3e5d4a" class="m-doc-self">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">memory::<wbr />AnyVector</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af255c7be4ff893ec65aecdccafd5fdba" class="m-doc-self">column</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> id) const</span></span>
             </h3>
             <p>Gets a reference to the column with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -314,9 +314,9 @@
             </table>
 <p>Aborts if the column does not exist in the table.</p>
           </div></section>
-          <section class="m-doc-details" id="a095e315cafb8f5d4dd56cf20b3728054"><div>
+          <section class="m-doc-details" id="aa58e3b78b7533834cc8855a676eb86ad"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a095e315cafb8f5d4dd56cf20b3728054" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a> id) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />DenseTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa58e3b78b7533834cc8855a676eb86ad" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> id) const</span></span>
             </h3>
             <p>Checks if the table has a column with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">

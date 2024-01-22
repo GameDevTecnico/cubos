@@ -84,22 +84,21 @@
             </dt>
             <dd>Holds and manages components.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ComponentTypeBuilder.html" class="m-doc">ComponentTypeBuilder</a>
-            </dt>
-            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent component types.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>
             </dt>
             <dd>Stores the components of a given type.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>
             </dt>
-            <dd>Stores which dense column types each archetype holds and the edges which connect them.</dd>
+            <dd>Stores which column types each archetype holds and the edges which connect them.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>
             </dt>
             <dd>Identifies an archetype.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeIdHash.html" class="m-doc">ArchetypeIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>
             </dt>
@@ -145,13 +144,9 @@
             <dd>Describes a term in a query.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1RelationTypeBuilder.html" class="m-doc">RelationTypeBuilder</a>
+              class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">TypeBuilder</a>
             </dt>
-            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent relation types.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1RelationTable.html" class="m-doc">RelationTable</a>
-            </dt>
-            <dd>A table which stores relations. Allows for quick insertion, deletion and iteration.</dd>
+            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent ECS types.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>
@@ -209,13 +204,33 @@
             </dt>
             <dd>Wrapper for a system of type <code>F</code>.</dd>
             <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1DenseColumnId.html" class="m-doc">DenseColumnId</a>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a>
             </dt>
-            <dd>Identifies a dense data column type.</dd>
+            <dd>Identifies a data column type.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1DenseTableRegistry.html" class="m-doc">DenseTableRegistry</a>
+            </dt>
+            <dd>Stores the dense tables of a given world.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>
             </dt>
             <dd>Stores the dense data associated to entities of a given archetype.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableId.html" class="m-doc">SparseRelationTableId</a>
+            </dt>
+            <dd>Identifies a sparse relation table.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableIdHash.html" class="m-doc">SparseRelationTableIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableId.html" class="m-doc">SparseRelationTableId</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTableRegistry.html" class="m-doc">SparseRelationTableRegistry</a>
+            </dt>
+            <dd>Stores all of the sparse relation tables.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>
+            </dt>
+            <dd>A table which stores relations. Allows for quick insertion, deletion and iteration.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>
             </dt>
@@ -224,6 +239,10 @@
               struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>
             </dt>
             <dd>Identifies a data type registered in the world.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">DataTypeIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>
             </dt>
