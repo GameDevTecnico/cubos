@@ -65,10 +65,8 @@
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="accessors_8hpp.html" class="m-doc">accessors.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Read</a> and related types.</dd>
             <dt>file <a href="commands_8hpp.html" class="m-doc">commands.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Commands</a> and related types.</dd>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Commands</a>.</dd>
             <dt>file <a href="dispatcher_8hpp.html" class="m-doc">dispatcher.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher</a>.</dd>
             <dt>file <a href="pipe_8hpp.html" class="m-doc">pipe.hpp</a></dt>
@@ -78,7 +76,7 @@
             <dt>file <a href="writer_8hpp.html" class="m-doc">writer.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EventWriter</a>.</dd>
             <dt>file <a href="query_8hpp.html" class="m-doc">query.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Query</a> and related types.</dd>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Query</a>.</dd>
             <dt>file <a href="system_8hpp.html" class="m-doc">system.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />SystemWrapper</a> and related types.</dd>
           </dl>
@@ -87,41 +85,9 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">cubos::core::ecs::Read</a>
-            </dt>
-            <dd>System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">cubos::core::ecs::Write</a>
-            </dt>
-            <dd>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">cubos::core::ecs::OptRead</a>
-            </dt>
-            <dd>System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">cubos::core::ecs::OptWrite</a>
-            </dt>
-            <dd>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">cubos::core::ecs::EntityBuilder</a>
-            </dt>
-            <dd>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">cubos::core::ecs::BlueprintBuilder</a>
-            </dt>
-            <dd>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">cubos::core::ecs::Commands</a>
             </dt>
             <dd>System argument used to write ECS commands and execute them at a later time.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">cubos::core::ecs::CommandBuffer</a>
-            </dt>
-            <dd>Stores commands to execute them later.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::core::ecs::Dispatcher</a>
             </dt>
@@ -142,11 +108,7 @@
             </dt>
             <dd>System argument which allows the system to send events of type <code>T</code> to other systems.</dd>
             <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryInfo.html" class="m-doc">cubos::core::ecs::QueryInfo</a>
-            </dt>
-            <dd>Describes a query.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::core::ecs::Query</a>
             </dt>
             <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
