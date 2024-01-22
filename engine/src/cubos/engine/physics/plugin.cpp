@@ -26,7 +26,7 @@ CUBOS_REFLECT_IMPL(Mass)
 CUBOS_REFLECT_IMPL(Velocity)
 {
     return cubos::core::ecs::TypeBuilder<Velocity>("cubos::engine::Velocity")
-        .withField("velocity", &Velocity::velocity)
+        .withField("velocity", &Velocity::vec)
         .build();
 }
 
@@ -89,7 +89,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .call([](Query<Velocity&, const Impulse&, const Mass&> query) {
             for (auto [velocity, impulse, mass] : query)
             {
-                velocity.velocity += impulse.getImpulse() * mass.inverseMass;
+                velocity.vec += impulse.vec() * mass.inverseMass;
             }
         });
 
@@ -111,13 +111,13 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 }
 
                 // Apply damping
-                velocity.velocity *= glm::pow(damping.value, subDeltaTime);
+                velocity.vec *= glm::pow(damping.value, subDeltaTime);
 
                 // Apply external forces
-                glm::vec3 deltaLinearVelocity = force.getForce() * mass.inverseMass * subDeltaTime;
+                glm::vec3 deltaLinearVelocity = force.vec() * mass.inverseMass * subDeltaTime;
 
-                velocity.velocity += deltaLinearVelocity;
-                position.vec += velocity.velocity * subDeltaTime;
+                velocity.vec += deltaLinearVelocity;
+                position.vec += velocity.vec * subDeltaTime;
             }
         });
 
@@ -143,7 +143,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
 
             for (auto [position, prevPosition, velocity] : query)
             {
-                velocity.velocity = (position.vec - prevPosition.vec) / subDeltaTime;
+                velocity.vec = (position.vec - prevPosition.vec) / subDeltaTime;
             }
         });
 
@@ -154,7 +154,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .call([](Query<Force&> query) {
             for (auto [force] : query)
             {
-                force.clearForce();
+                force.clear();
             }
         });
 
@@ -165,7 +165,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .call([](Query<Impulse&> query) {
             for (auto [impulse] : query)
             {
-                impulse.clearImpulse();
+                impulse.clear();
             }
         });
 
