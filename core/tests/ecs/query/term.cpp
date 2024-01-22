@@ -149,7 +149,7 @@ TEST_CASE("ecs::QueryTerm")
     SUBCASE("resolve with both types of terms")
     {
         // Equivalent to having Query<Opt<IntegerComponent&>, Entity, IntegerComponent&, Entity>, with the manual terms
-        // below.
+        // Integer(0), Integer(1)
         std::vector<QueryTerm> otherTerms = {
             QueryTerm::makeOptComponent(integerComponent, -1),
             QueryTerm::makeEntity(-1),
@@ -187,7 +187,7 @@ TEST_CASE("ecs::QueryTerm")
         REQUIRE(otherTerms[3].entity.target == 1);
     }
 
-    SUBCASE("resolve with relation terms")
+    SUBCASE("resolve with relations but without base terms")
     {
         // Equivalent to having Query<Entity, EmptyRelation&, Entity, EmptyRelation& Entity> with no manual terms.
         std::vector<QueryTerm> otherTerms = {
@@ -224,6 +224,38 @@ TEST_CASE("ecs::QueryTerm")
         REQUIRE(otherTerms[3].relation.fromTarget == 1);
         REQUIRE(otherTerms[3].relation.toTarget == 2);
         REQUIRE(otherTerms[4].entity.target == 2);
+    }
+
+    SUBCASE("resolve with relation but with base terms")
+    {
+        // Equivalent to having Query<Entity, Entity> with the manual terms Entity(0), EmptyRelation(0, 1), Entity(1).
+        std::vector<QueryTerm> otherTerms = {
+            QueryTerm::makeEntity(-1),
+            QueryTerm::makeEntity(-1),
+        };
+        auto result = QueryTerm::resolve(types,
+                                         {
+                                             QueryTerm::makeEntity(0),
+                                             QueryTerm::makeRelation(emptyRelation, 0, 1),
+                                             QueryTerm::makeEntity(1),
+                                         },
+                                         otherTerms);
+
+        REQUIRE(result.size() == 3);
+
+        REQUIRE(result[0].isEntity());
+        REQUIRE(result[0].entity.target == 0);
+
+        REQUIRE(result[1].isRelation(types));
+        REQUIRE(result[1].relation.fromTarget == 0);
+        REQUIRE(result[1].relation.toTarget == 1);
+
+        REQUIRE(result[2].isEntity());
+        REQUIRE(result[2].entity.target == 1);
+
+        REQUIRE(otherTerms.size() == 2);
+        REQUIRE(otherTerms[0].entity.target == 0);
+        REQUIRE(otherTerms[1].entity.target == 1);
     }
 }
 // NOLINTEND(readability-function-size)
