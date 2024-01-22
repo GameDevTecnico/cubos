@@ -1,5 +1,6 @@
 #include <cubos/core/ecs/query/term.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using cubos::core::ecs::QueryTerm;
 
@@ -269,4 +270,46 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
     }
 
     return terms;
+}
+
+std::string QueryTerm::toString(const Types& types, const std::vector<QueryTerm>& terms)
+{
+    std::string result = "";
+
+    for (const auto& term : terms)
+    {
+        if (!result.empty())
+        {
+            result += ", ";
+        }
+
+        if (term.isEntity())
+        {
+            result += "Entity(" + std::to_string(term.entity.target) + ")";
+        }
+        else if (term.isComponent(types))
+        {
+            if (term.component.optional)
+            {
+                result += '?';
+            }
+            else if (term.component.without)
+            {
+                result += '!';
+            }
+
+            result += types.type(term.type).name() + "(" + std::to_string(term.component.target) + ")";
+        }
+        else if (term.isRelation(types))
+        {
+            result += types.type(term.type).name() + "(" + std::to_string(term.relation.fromTarget) + ", " +
+                      std::to_string(term.relation.toTarget) + ")";
+        }
+        else
+        {
+            CUBOS_UNREACHABLE();
+        }
+    }
+
+    return result;
 }
