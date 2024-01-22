@@ -98,91 +98,105 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
     auto otherTermIt = otherTerms.begin();
     for (auto baseTerm : baseTerms)
     {
-        // Iterate over the remaining other terms until one with the same type is found.
-        for (; otherTermIt != otherTerms.end(); ++otherTermIt)
+        // Check if any of the remaining other terms has the same type as the base term.
+        auto it = otherTermIt;
+        for (; it != otherTerms.end(); ++it)
         {
-            auto& otherTerm = *otherTermIt;
-
-            // The 'other' term has the same type as the 'base' term, we can treat them as one.
-            if (baseTerm.type == otherTerm.type)
+            if (baseTerm.type == it->type)
             {
-                // Merge data from the other term into the base term.
-                if (baseTerm.isEntity())
+                break;
+            }
+        }
+
+        // If the base term is a negative component, its impossible to merge it with any other term.
+        if (baseTerm.isComponent(types) && baseTerm.component.without)
+        {
+            it = otherTerms.end();
+        }
+
+        // If there is a matching term, merge it with the base term.
+        if (it != otherTerms.end())
+        {
+            // Add all the other terms until the matching term to the result.
+            for (; otherTermIt != it; ++otherTermIt)
+            {
+                auto& otherTerm = *otherTermIt;
+
+                // Change the other term's target to the default, as it was unspecified.
+                if (otherTerm.isEntity())
                 {
                     CUBOS_ASSERT(otherTerm.entity.target == -1); // See comment at the beginning of the function.
-
-                    if (baseTerm.entity.target == -1)
-                    {
-                        baseTerm.entity.target = defaultTarget;
-                    }
-
-                    otherTerm.entity.target = baseTerm.entity.target;
-                    ++otherTermIt;
-                    break;
+                    otherTerm.entity.target = defaultTarget;
                 }
-
-                if (baseTerm.isComponent(types) && baseTerm.component.without == otherTerm.component.without)
+                else if (otherTerm.isComponent(types))
                 {
                     CUBOS_ASSERT(otherTerm.component.target == -1); // See comment at the beginning of the function.
-
-                    if (baseTerm.entity.target == -1)
-                    {
-                        baseTerm.entity.target = defaultTarget;
-                    }
-
-                    baseTerm.component.optional = otherTerm.component.optional;
-                    otherTerm.entity.target = baseTerm.entity.target;
-                    ++otherTermIt;
-                    break;
+                    otherTerm.component.target = defaultTarget;
                 }
-
-                if (baseTerm.isRelation(types))
+                else if (otherTerm.isRelation(types))
                 {
                     CUBOS_ASSERT(otherTerm.relation.fromTarget == -1 &&
                                  otherTerm.relation.toTarget == -1); // See comment at the beginning of the function.
-
-                    if (baseTerm.relation.fromTarget == -1)
-                    {
-                        baseTerm.relation.fromTarget = defaultTarget;
-                    }
-
-                    if (baseTerm.relation.toTarget == -1)
-                    {
-                        baseTerm.relation.toTarget = ++defaultTarget;
-                    }
-
-                    otherTerm.relation.fromTarget = baseTerm.relation.fromTarget;
-                    otherTerm.relation.toTarget = baseTerm.relation.toTarget;
-                    ++otherTermIt;
-                    break;
+                    otherTerm.relation.fromTarget = defaultTarget;
+                    otherTerm.relation.toTarget = ++defaultTarget;
                 }
+                else
+                {
+                    CUBOS_UNREACHABLE();
+                }
+
+                // Add it to the result.
+                terms.emplace_back(otherTerm);
             }
 
-            // Change the other term's target to the default, as it was unspecified.
-            if (otherTerm.isEntity())
+            auto& otherTerm = *otherTermIt;
+            ++otherTermIt;
+
+            // Merge data from the other term into the base term.
+            if (baseTerm.isEntity())
             {
                 CUBOS_ASSERT(otherTerm.entity.target == -1); // See comment at the beginning of the function.
-                otherTerm.entity.target = defaultTarget;
+
+                if (baseTerm.entity.target == -1)
+                {
+                    baseTerm.entity.target = defaultTarget;
+                }
+
+                otherTerm.entity.target = baseTerm.entity.target;
             }
-            else if (otherTerm.isComponent(types))
+            else if (baseTerm.isComponent(types))
             {
                 CUBOS_ASSERT(otherTerm.component.target == -1); // See comment at the beginning of the function.
-                otherTerm.component.target = defaultTarget;
+
+                // Code above should ensure terms never match if they have different without values.
+                CUBOS_ASSERT(baseTerm.component.without == otherTerm.component.without);
+
+                if (baseTerm.entity.target == -1)
+                {
+                    baseTerm.entity.target = defaultTarget;
+                }
+
+                baseTerm.component.optional = otherTerm.component.optional;
+                otherTerm.entity.target = baseTerm.entity.target;
             }
-            else if (otherTerm.isRelation(types))
+            else if (baseTerm.isRelation(types))
             {
                 CUBOS_ASSERT(otherTerm.relation.fromTarget == -1 &&
                              otherTerm.relation.toTarget == -1); // See comment at the beginning of the function.
-                otherTerm.relation.fromTarget = defaultTarget;
-                otherTerm.relation.toTarget = ++defaultTarget;
-            }
-            else
-            {
-                CUBOS_UNREACHABLE();
-            }
 
-            // Add it to the result.
-            terms.emplace_back(otherTerm);
+                if (baseTerm.relation.fromTarget == -1)
+                {
+                    baseTerm.relation.fromTarget = defaultTarget;
+                }
+
+                if (baseTerm.relation.toTarget == -1)
+                {
+                    baseTerm.relation.toTarget = ++defaultTarget;
+                }
+
+                otherTerm.relation.fromTarget = baseTerm.relation.fromTarget;
+                otherTerm.relation.toTarget = baseTerm.relation.toTarget;
+            }
         }
 
         // Update either the defaultTarget or the term's target, depending on it being specified.
