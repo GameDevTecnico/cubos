@@ -17,17 +17,17 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        glm::vec3 getForce() const
+        glm::vec3 vec() const
         {
             return mForce;
         }
 
-        void addForce(glm::vec3 force)
+        void add(glm::vec3 force)
         {
             mForce += force;
         }
 
-        void clearForce()
+        void clear()
         {
             mForce = {0.0F, 0.0F, 0.0F};
         }

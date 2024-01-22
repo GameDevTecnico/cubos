@@ -17,17 +17,17 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        glm::vec3 getImpulse() const
+        glm::vec3 vec() const
         {
             return mImpulse;
         }
 
-        void addImpulse(glm::vec3 impulse)
+        void add(glm::vec3 impulse)
         {
             mImpulse += impulse;
         }
 
-        void clearImpulse()
+        void clear()
         {
             mImpulse = {0.0F, 0.0F, 0.0F};
         }

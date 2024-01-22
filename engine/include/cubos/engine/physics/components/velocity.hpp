@@ -17,6 +17,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        glm::vec3 velocity;
+        glm::vec3 vec;
     };
 } // namespace cubos::engine

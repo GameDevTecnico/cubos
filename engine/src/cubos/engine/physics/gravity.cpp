@@ -21,7 +21,7 @@ void cubos::engine::gravityPlugin(Cubos& cubos)
                 // Apply gravity force
                 glm::vec3 gravitationForce = mass.mass * gravity.value;
 
-                force.addForce(gravitationForce);
+                force.add(gravitationForce);
             }
         });
 }
