@@ -35,6 +35,14 @@ QueryTerm QueryTerm::makeOptComponent(DataTypeId type, int target)
     };
 }
 
+QueryTerm QueryTerm::makeRelation(DataTypeId type, int fromTarget, int toTarget)
+{
+    return {
+        .type = type,
+        .relation = {.fromTarget = fromTarget, .toTarget = toTarget},
+    };
+}
+
 bool QueryTerm::isEntity() const
 {
     return type == DataTypeId::Invalid;
@@ -43,6 +51,11 @@ bool QueryTerm::isEntity() const
 bool QueryTerm::isComponent(const Types& types) const
 {
     return type != DataTypeId::Invalid && types.isComponent(type);
+}
+
+bool QueryTerm::isRelation(const Types& types) const
+{
+    return type != DataTypeId::Invalid && types.isRelation(type);
 }
 
 bool QueryTerm::compare(const Types& types, const QueryTerm& other) const
@@ -61,6 +74,11 @@ bool QueryTerm::compare(const Types& types, const QueryTerm& other) const
     {
         return component.target == other.component.target && component.without == other.component.without &&
                component.optional == other.component.optional;
+    }
+
+    if (this->isRelation(types))
+    {
+        return relation.fromTarget == other.relation.fromTarget && relation.toTarget == other.relation.toTarget;
     }
 
     CUBOS_UNREACHABLE();
@@ -116,6 +134,27 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
                     ++otherTermIt;
                     break;
                 }
+
+                if (baseTerm.isRelation(types))
+                {
+                    CUBOS_ASSERT(otherTerm.relation.fromTarget == -1 &&
+                                 otherTerm.relation.toTarget == -1); // See comment at the beginning of the function.
+
+                    if (baseTerm.relation.fromTarget == -1)
+                    {
+                        baseTerm.relation.fromTarget = defaultTarget;
+                    }
+
+                    if (baseTerm.relation.toTarget == -1)
+                    {
+                        baseTerm.relation.toTarget = ++defaultTarget;
+                    }
+
+                    otherTerm.relation.fromTarget = baseTerm.relation.fromTarget;
+                    otherTerm.relation.toTarget = baseTerm.relation.toTarget;
+                    ++otherTermIt;
+                    break;
+                }
             }
 
             // Change the other term's target to the default, as it was unspecified.
@@ -128,6 +167,13 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
             {
                 CUBOS_ASSERT(otherTerm.component.target == -1); // See comment at the beginning of the function.
                 otherTerm.component.target = defaultTarget;
+            }
+            else if (otherTerm.isRelation(types))
+            {
+                CUBOS_ASSERT(otherTerm.relation.fromTarget == -1 &&
+                             otherTerm.relation.toTarget == -1); // See comment at the beginning of the function.
+                otherTerm.relation.fromTarget = defaultTarget;
+                otherTerm.relation.toTarget = ++defaultTarget;
             }
             else
             {
@@ -161,6 +207,26 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
                 defaultTarget = baseTerm.component.target;
             }
         }
+        else if (baseTerm.isRelation(types))
+        {
+            if (baseTerm.relation.fromTarget == -1)
+            {
+                baseTerm.relation.fromTarget = defaultTarget;
+            }
+            else
+            {
+                defaultTarget = baseTerm.relation.fromTarget;
+            }
+
+            if (baseTerm.relation.toTarget == -1)
+            {
+                baseTerm.relation.toTarget = ++defaultTarget;
+            }
+            else
+            {
+                defaultTarget = baseTerm.relation.toTarget;
+            }
+        }
         else
         {
             CUBOS_UNREACHABLE();
@@ -185,6 +251,13 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
         {
             CUBOS_ASSERT(otherTerm.component.target == -1); // See comment at the beginning of the function.
             otherTerm.component.target = defaultTarget;
+        }
+        else if (otherTerm.isRelation(types))
+        {
+            CUBOS_ASSERT(otherTerm.relation.fromTarget == -1 &&
+                         otherTerm.relation.toTarget == -1); // See comment at the beginning of the function.
+            otherTerm.relation.fromTarget = defaultTarget;
+            otherTerm.relation.toTarget = ++defaultTarget;
         }
         else
         {

@@ -35,6 +35,13 @@ namespace cubos::core::ecs
             bool optional; ///< If true, the term accesses the component but does not require it to be present.
         };
 
+        /// @brief Stores relation term data.
+        struct Relation
+        {
+            int fromTarget; ///< Index of the 'from' target accessed by this term.
+            int toTarget;   ///< Index of the 'to' target accessed by this term.
+        };
+
         /// @brief Type of the data matched by the term.
         ///
         /// If this is set to @ref DataTypeId::Invalid, then the term is an entity term.
@@ -44,6 +51,7 @@ namespace cubos::core::ecs
         union {
             Entity entity;       ///< Entity term data.
             Component component; ///< Component term data.
+            Relation relation;   ///< Relation term data.
         };
 
         /// @brief Returns a new entity term for the given target.
@@ -72,6 +80,14 @@ namespace cubos::core::ecs
         /// @return Component term.
         static QueryTerm makeOptComponent(DataTypeId type, int target);
 
+        /// @brief Returns a new relation term for the given relation and targets.
+        /// @warning Undefined behaviour will occur if @p type isn't registered as a relation.
+        /// @param type Relation type.
+        /// @param fromTarget Index of the target which must have the 'from' side of the relation.
+        /// @param toTarget Index of the target which must have the 'to' side of the relation.
+        /// @return Relation term.
+        static QueryTerm makeRelation(DataTypeId type, int fromTarget, int toTarget);
+
         /// @brief Checks if the term is an entity term.
         /// @return Whether it's an entity term.
         bool isEntity() const;
@@ -80,6 +96,11 @@ namespace cubos::core::ecs
         /// @param types Types registry.
         /// @return Whether it's a component term.
         bool isComponent(const Types& types) const;
+
+        /// @brief Checks if the term is a relation term.
+        /// @param types Types registry.
+        /// @return Whether it's a relation term.
+        bool isRelation(const Types& types) const;
 
         /// @brief Compares two terms.
         /// @param types Types registry.
