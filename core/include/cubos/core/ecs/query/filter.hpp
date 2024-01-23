@@ -68,6 +68,9 @@ namespace cubos::core::ecs
         /// @brief Holds the necessary data for each link.
         struct Link
         {
+            /// @brief Relation data type.
+            DataTypeId dataType;
+
             /// @brief From target index.
             int fromTarget;
 
