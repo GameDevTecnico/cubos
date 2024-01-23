@@ -76,4 +76,7 @@ inline void setupWorld(cubos::core::ecs::World& world)
     world.registerComponent<DetectDestructorComponent>();
     world.registerComponent<EntityArrayComponent>();
     world.registerComponent<EntityDictionaryComponent>();
+    world.registerRelation<EmptyRelation>();
+    world.registerRelation<IntegerRelation>();
+    world.registerRelation<DetectDestructorRelation>();
 }
