@@ -57,6 +57,14 @@ CUBOS_REFLECT_IMPL(IntegerRelation)
         .build();
 }
 
+CUBOS_REFLECT_IMPL(SymmetricRelation)
+{
+    return cubos::core::ecs::TypeBuilder<SymmetricRelation>("SymmetricRelation")
+        .withField("value", &SymmetricRelation::value)
+        .symmetric()
+        .build();
+}
+
 CUBOS_REFLECT_IMPL(DetectDestructorRelation)
 {
     using namespace cubos::core::reflection;

@@ -10,6 +10,13 @@
 
 namespace cubos::core::ecs
 {
+    /// @brief Trait used to identify symmetric relations.
+    ///
+    /// Symmetric relations are relations where the order of the entities does not matter.
+    struct SymmetricTrait
+    {
+    };
+
     /// @brief Builder for @ref reflection::Type objects which represent ECS types.
     ///
     /// Used to reduce the amount of boilerplate code required to define a ECS types.
@@ -28,6 +35,14 @@ namespace cubos::core::ecs
             : mType(reflection::Type::create(std::move(name)))
         {
             mType.with(reflection::ConstructibleTrait::typed<T>().withBasicConstructors().build());
+        }
+
+        /// @brief Makes the type symmetric. Only used by relation types.
+        /// @return Builder.
+        TypeBuilder&& symmetric() &&
+        {
+            mType.with(SymmetricTrait{});
+            return std::move(*this);
         }
 
         /// @brief Adds a field to the type.

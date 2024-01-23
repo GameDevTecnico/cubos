@@ -60,6 +60,14 @@ struct IntegerRelation
     int value;
 };
 
+// A symmetric relation which stores a single integer.
+struct SymmetricRelation
+{
+    CUBOS_REFLECT;
+
+    int value;
+};
+
 // A relation which can be used to test if destructors are called correctly.
 struct DetectDestructorRelation
 {
@@ -78,5 +86,6 @@ inline void setupWorld(cubos::core::ecs::World& world)
     world.registerComponent<EntityDictionaryComponent>();
     world.registerRelation<EmptyRelation>();
     world.registerRelation<IntegerRelation>();
+    world.registerRelation<SymmetricRelation>();
     world.registerRelation<DetectDestructorRelation>();
 }
