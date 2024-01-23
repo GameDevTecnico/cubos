@@ -1,7 +1,7 @@
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/ecs/types.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
-#include <cubos/core/reflection/type.hpp>
 
 using cubos::core::ecs::DataTypeId;
 using cubos::core::ecs::DataTypeIdHash;
@@ -34,7 +34,7 @@ void Types::add(const reflection::Type& type, Kind kind)
     auto inserted = mNames.emplace(type.name(), id).second;
     CUBOS_ASSERT(inserted, "A different type with the same name {} was already registered", type.name());
     mTypes.insert(type, id);
-    mEntries.push_back({.type = &type, .kind = kind});
+    mEntries.push_back({.type = &type, .kind = kind, .isSymmetric = type.has<SymmetricTrait>()});
 }
 
 DataTypeId Types::id(const reflection::Type& type) const
@@ -67,6 +67,11 @@ bool Types::isComponent(DataTypeId id) const
 bool Types::isRelation(DataTypeId id) const
 {
     return mEntries[id.inner].kind == Kind::Relation;
+}
+
+bool Types::isSymmetricRelation(DataTypeId id) const
+{
+    return mEntries[id.inner].kind == Kind::Relation && mEntries[id.inner].isSymmetric;
 }
 
 TypeRegistry Types::components() const
