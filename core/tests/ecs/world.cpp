@@ -133,4 +133,80 @@ TEST_CASE("ecs::World")
 
         CHECK(destroyed);
     }
+
+    SUBCASE("add and remove relations")
+    {
+        // Create three entities.
+        auto foo = world.create();
+        auto bar = world.create();
+        auto baz = world.create();
+
+        bool fooBarFlag = false;
+        bool barBazFlag = false;
+        bool fooBazFlag = false;
+        bool fooFooFlag = false;
+
+        // Relate foo to bar.
+        REQUIRE_FALSE(world.related<DetectDestructorRelation>(foo, bar));
+        world.relate(foo, bar, DetectDestructorRelation{{&fooBarFlag}});
+        REQUIRE(world.related<DetectDestructorRelation>(foo, bar));
+
+        // Relate bar to baz.
+        REQUIRE_FALSE(world.related<DetectDestructorRelation>(bar, baz));
+        world.relate(bar, baz, DetectDestructorRelation{{&barBazFlag}});
+        REQUIRE(world.related<DetectDestructorRelation>(bar, baz));
+
+        // Relate foo to baz.
+        REQUIRE_FALSE(world.related<DetectDestructorRelation>(foo, baz));
+        world.relate(foo, baz, DetectDestructorRelation{{&fooBazFlag}});
+        REQUIRE(world.related<DetectDestructorRelation>(foo, baz));
+
+        // Relate foo to foo.
+        REQUIRE_FALSE(world.related<DetectDestructorRelation>(foo, foo));
+        world.relate(foo, foo, DetectDestructorRelation{{&fooFooFlag}});
+        REQUIRE(world.related<DetectDestructorRelation>(foo, foo));
+
+        // Nothing should have been destroyed yet.
+        CHECK_FALSE(fooBarFlag);
+        CHECK_FALSE(barBazFlag);
+        CHECK_FALSE(fooBazFlag);
+        CHECK_FALSE(fooFooFlag);
+
+        // Remove the relation between foo and bar and add it again.
+        world.unrelate<DetectDestructorRelation>(foo, bar);
+        CHECK(fooBarFlag);
+        CHECK_FALSE(barBazFlag);
+        CHECK_FALSE(fooBazFlag);
+        CHECK_FALSE(fooFooFlag);
+        fooBarFlag = false;
+        world.relate(foo, bar, DetectDestructorRelation{{&fooBarFlag}});
+
+        // Destroy bar.
+        world.destroy(bar);
+        CHECK(fooBarFlag);
+        CHECK(barBazFlag);
+        CHECK_FALSE(fooBazFlag);
+        CHECK_FALSE(fooFooFlag);
+
+        // Destroy foo.
+        world.destroy(foo);
+        CHECK(fooBazFlag);
+        CHECK(fooFooFlag);
+    }
+
+    SUBCASE("relations are correctly destructed when the world is destroyed")
+    {
+        bool destroyed = false;
+
+        // Create a world with an entity and a relation and immediately destroy it.
+        {
+            World world{};
+            setupWorld(world);
+            auto foo = world.create();
+            world.relate(foo, foo, DetectDestructorRelation{{&destroyed}});
+            CHECK_FALSE(destroyed);
+        }
+
+        CHECK(destroyed);
+    }
 }

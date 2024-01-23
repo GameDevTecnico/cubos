@@ -144,7 +144,7 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
     CUBOS_ASSERT(this->isAlive(to));
 
     auto dataType = mTypes.id(type);
-    CUBOS_ASSERT(mTypes.isRelation(dataType));
+    CUBOS_ASSERT(mTypes.isRelation(dataType), "Type {} is not registered as a relation", type.name());
 
     // Create a sparse relation table identifier from the archetypes of both entities.
     auto fromArchetype = mEntityPool.archetype(from.index);
@@ -230,7 +230,7 @@ auto World::Components::end() -> Iterator
 auto World::Components::add(const reflection::Type& type, void* value) -> Components&
 {
     auto typeId = mWorld.mTypes.id(type);
-    CUBOS_ASSERT(mWorld.mTypes.isComponent(typeId), "Type '{}' is not registered as a component", type.name());
+    CUBOS_ASSERT(mWorld.mTypes.isComponent(typeId), "Type {} is not registered as a component", type.name());
     auto columnId = ColumnId::make(typeId);
 
     auto oldArchetype = mWorld.mEntityPool.archetype(mEntity.index);
@@ -265,7 +265,7 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
 auto World::Components::remove(const reflection::Type& type) -> Components&
 {
     auto typeId = mWorld.mTypes.id(type);
-    CUBOS_ASSERT(mWorld.mTypes.isComponent(typeId), "Type '{}' is not registered as a component", type.name());
+    CUBOS_ASSERT(mWorld.mTypes.isComponent(typeId), "Type {} is not registered as a component", type.name());
     auto columnId = ColumnId::make(typeId);
 
     // If the old archetype doesn't contain this component type, then we don't do anything.

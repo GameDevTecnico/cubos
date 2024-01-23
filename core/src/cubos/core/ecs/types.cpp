@@ -39,11 +39,13 @@ void Types::add(const reflection::Type& type, Kind kind)
 
 DataTypeId Types::id(const reflection::Type& type) const
 {
+    CUBOS_ASSERT(mTypes.contains(type), "Type {} not registered", type.name());
     return mTypes.at(type);
 }
 
 DataTypeId Types::id(const std::string& name) const
 {
+    CUBOS_ASSERT(mNames.contains(name), "Type {} not registered", name);
     return mNames.at(name);
 }
 
