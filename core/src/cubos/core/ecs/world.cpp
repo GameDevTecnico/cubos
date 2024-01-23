@@ -146,6 +146,16 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
     auto dataType = mTypes.id(type);
     CUBOS_ASSERT(mTypes.isRelation(dataType), "Type {} is not registered as a relation", type.name());
 
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
+        // the one with the lowest index.
+        if (from.index > to.index)
+        {
+            std::swap(from, to);
+        }
+    }
+
     // Create a sparse relation table identifier from the archetypes of both entities.
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
@@ -162,7 +172,17 @@ void World::unrelate(Entity from, Entity to, const reflection::Type& type)
     CUBOS_ASSERT(this->isAlive(to));
 
     auto dataType = mTypes.id(type);
-    CUBOS_ASSERT(mTypes.isRelation(dataType));
+    CUBOS_ASSERT(mTypes.isRelation(dataType), "Type {} is not registered as a relation", type.name());
+
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
+        // the one with the lowest index.
+        if (from.index > to.index)
+        {
+            std::swap(from, to);
+        }
+    }
 
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
@@ -182,6 +202,16 @@ bool World::related(Entity from, Entity to, const reflection::Type& type) const
 
     auto dataType = mTypes.id(type);
     CUBOS_ASSERT(mTypes.isRelation(dataType));
+
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
+        // the one with the lowest index.
+        if (from.index > to.index)
+        {
+            std::swap(from, to);
+        }
+    }
 
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
