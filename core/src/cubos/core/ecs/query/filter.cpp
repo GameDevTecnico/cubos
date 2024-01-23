@@ -55,6 +55,7 @@ QueryFilter::QueryFilter(World& world, const std::vector<QueryTerm>& terms)
         {
             CUBOS_ASSERT(mLinkCount < MaxLinkCount, "Currently only {} links are supported", MaxLinkCount);
             mTermCursors.emplace_back(mTargetCount + mLinkCount);
+            mLinks[mLinkCount].dataType = term.type;
             mLinks[mLinkCount].fromTarget = term.relation.fromTarget;
             mLinks[mLinkCount].toTarget = term.relation.toTarget;
             ++mLinkCount;
@@ -146,6 +147,11 @@ void QueryFilter::update()
         // Collect all tables which match any of the target archetypes.
         link.seenCount =
             mWorld.tables().sparseRelation().collect(link.tables, link.seenCount, [&](SparseRelationTableId id) {
+                if (id.dataType != link.dataType)
+                {
+                    return false;
+                }
+
                 // The from archetype must be one of the from target archetypes.
                 bool found = false;
                 for (const auto& archetype : mTargets[link.fromTarget].archetypes)
