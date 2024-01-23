@@ -138,6 +138,13 @@ const void* SparseRelationTable::at(std::size_t row) const
     return mRelations.at(row);
 }
 
+void SparseRelationTable::indices(std::size_t row, uint32_t& from, uint32_t& to) const
+{
+    auto& data = mRows[row];
+    from = data.from;
+    to = data.to;
+}
+
 auto SparseRelationTable::begin() const -> Iterator
 {
     return Iterator{*this, 0};

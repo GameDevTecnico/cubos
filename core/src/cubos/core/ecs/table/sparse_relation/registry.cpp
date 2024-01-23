@@ -28,6 +28,7 @@ SparseRelationTable& SparseRelationTableRegistry::create(SparseRelationTableId i
         mTables.emplace(std::piecewise_construct, std::forward_as_tuple(id),
                         std::forward_as_tuple(types.type(id.dataType)));
         mTypeIndices[id.dataType].insert(id);
+        mIds.emplace_back(id);
     }
 
     return mTables.at(id);
