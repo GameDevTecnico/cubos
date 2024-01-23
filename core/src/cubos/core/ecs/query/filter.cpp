@@ -115,8 +115,9 @@ void QueryFilter::update()
 
             for (const auto& term : mTerms)
             {
-                // Filter out non 'without component' terms.
-                if (!term.isComponent(mWorld.types()) || !term.component.without)
+                // Filter out non 'without component' terms and terms with different targets.
+                if (!term.isComponent(mWorld.types()) || !term.component.without ||
+                    term.component.target != targetIndex)
                 {
                     continue;
                 }
@@ -397,6 +398,7 @@ void QueryFilter::View::Iterator::advance()
                    mCursorRows[filter.mTargetCount] >= world.tables().sparseRelation().at(link.tables[mIndex]).size())
             {
                 ++mIndex;
+                mCursorRows[filter.mTargetCount] = 0;
             }
         }
         else if (mView.mPins[link.fromTarget].isNull())
@@ -480,7 +482,8 @@ void QueryFilter::View::Iterator::advance()
 
                 // Find the index of the table which matches the pinned entities.
                 mIndex = 0;
-                while (link.tables[mIndex].from != fromArchetype || link.tables[mIndex].to != toArchetype)
+                while (mIndex < link.tables.size() &&
+                       (link.tables[mIndex].from != fromArchetype || link.tables[mIndex].to != toArchetype))
                 {
                     ++mIndex;
                 }
