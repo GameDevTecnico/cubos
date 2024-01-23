@@ -71,6 +71,9 @@ namespace cubos::core::ecs
             /// @brief Relation data type.
             DataTypeId dataType;
 
+            /// @brief Whether the link is symmetric.
+            bool isSymmetric;
+
             /// @brief From target index.
             int fromTarget;
 
@@ -80,8 +83,23 @@ namespace cubos::core::ecs
             /// @brief Tables which match the link, found through calls to @ref update().
             std::vector<SparseRelationTableId> tables;
 
+            /// @brief Tables which match the reverse link, found through calls to @ref update().
+            ///
+            /// Only filled if @ref isSymmetric is true.
+            std::vector<SparseRelationTableId> reverseTables;
+
+            /// @brief Whether each of the tables in @ref reverseTables is already in @ref tables.
+            ///
+            /// Only filled if @ref isSymmetric is true.
+            std::vector<bool> reverseTablesSeen;
+
             /// @brief How many tables have already been seen through @ref SparseRelationTableRegistry::collect.
             std::size_t seenCount{0};
+
+            /// @brief Gets the nth table in the link, as if the reverseTables vector was appended to the end of the
+            /// tables vector.
+            /// @param index Table index.
+            SparseRelationTableId table(std::size_t index) const;
         };
 
         World& mWorld;

@@ -93,19 +93,15 @@ namespace cubos::core::ecs
         /// @param index Entity index.
         void erase(ArchetypeId archetype, uint32_t index);
 
-        /// @brief Collects new tables which match the given filter.
-        /// @param[out] tables Vector to insert the table identifiers into.
+        /// @brief Calls the given function for each new table.
         /// @param counter Counter previously returned by this function. Zero should be used for the first call.
-        /// @param filter Function which receives a table identifier and returns a boolean.
+        /// @param func Function which receives a table identifier.
         /// @return Counter to be passed to this function in a future call.
-        std::size_t collect(std::vector<SparseRelationTableId>& tables, std::size_t counter, auto filter)
+        std::size_t forEach(std::size_t counter, auto func)
         {
             for (; counter < mIds.size(); ++counter)
             {
-                if (filter(mIds[counter]))
-                {
-                    tables.emplace_back(mIds[counter]);
-                }
+                func(mIds[counter]);
             }
 
             return counter;
