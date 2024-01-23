@@ -2,6 +2,7 @@
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 using cubos::core::ecs::ArchetypeId;
 using cubos::core::ecs::QueryFilter;
@@ -10,18 +11,23 @@ QueryFilter::QueryFilter(World& world, const std::vector<QueryTerm>& terms)
     : mWorld{world}
     , mTerms{terms}
 {
+    CUBOS_DEBUG("Creating query filter with the following terms: {}", QueryTerm::toString(world.types(), terms));
+
     // Count how many targets we have.
     for (const auto& term : terms)
     {
         if (term.isEntity())
         {
             mTargetCount = std::max(mTargetCount, term.entity.target + 1);
-            mTermCursors.emplace_back(term.entity.target);
         }
         else if (term.isComponent(world.types()))
         {
             mTargetCount = std::max(mTargetCount, term.component.target + 1);
-            mTermCursors.emplace_back(term.component.target);
+        }
+        else if (term.isRelation(world.types()))
+        {
+            mTargetCount = std::max(mTargetCount, term.relation.fromTarget + 1);
+            mTargetCount = std::max(mTargetCount, term.relation.toTarget + 1);
         }
         else
         {
@@ -33,8 +39,31 @@ QueryFilter::QueryFilter(World& world, const std::vector<QueryTerm>& terms)
     CUBOS_ASSERT(mTargetCount <= MaxTargetCount, "Currently only targets from 0 to {} are supported",
                  MaxTargetCount - 1);
 
-    // Right now the number of cursors always matches the number of targets.
-    mCursorCount = mTargetCount;
+    // Assign a cursor to each term. The first mTargetCount cursors are used for the targets. The rest are used for
+    // relations and are assigned in the order they appear in the terms.
+    for (const auto& term : terms)
+    {
+        if (term.isEntity())
+        {
+            mTermCursors.emplace_back(term.entity.target);
+        }
+        else if (term.isComponent(world.types()))
+        {
+            mTermCursors.emplace_back(term.component.target);
+        }
+        else if (term.isRelation(world.types()))
+        {
+            CUBOS_ASSERT(mLinkCount < MaxLinkCount, "Currently only {} links are supported", MaxLinkCount);
+            mTermCursors.emplace_back(mTargetCount + mLinkCount);
+            mLinks[mLinkCount].fromTarget = term.relation.fromTarget;
+            mLinks[mLinkCount].toTarget = term.relation.toTarget;
+            ++mLinkCount;
+        }
+        else
+        {
+            CUBOS_UNREACHABLE();
+        }
+    }
 
     // Find the base archetypes for each target.
     for (const auto& term : terms)
@@ -101,6 +130,44 @@ void QueryFilter::update()
             }
         }
     }
+
+    // We must check this only after updating the archetypes list, otherwise we might miss some new tables which match
+    // new archetypes.
+    for (int linkIndex = 0; linkIndex < mLinkCount; ++linkIndex)
+    {
+        auto& link = mLinks[linkIndex];
+
+        // Collect all tables which match any of the target archetypes.
+        link.seenCount =
+            mWorld.tables().sparseRelation().collect(link.tables, link.seenCount, [&](SparseRelationTableId id) {
+                // The from archetype must be one of the from target archetypes.
+                bool found = false;
+                for (const auto& archetype : mTargets[link.fromTarget].archetypes)
+                {
+                    if (id.from == archetype)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    return false;
+                }
+
+                // The to archetype must be one of the to target archetypes.
+                for (const auto& archetype : mTargets[link.toTarget].archetypes)
+                {
+                    if (id.to == archetype)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+    }
 }
 
 auto QueryFilter::view() -> View
@@ -151,12 +218,15 @@ auto QueryFilter::View::end() -> Iterator
 QueryFilter::View::Iterator::Iterator(View& view, bool end)
     : mView{view}
 {
-    mArchetypeIndex = 0;
-    mCursorRows[0] = 0;
+    mIndex = 0;
+    for (int i = 0; i < mView.mFilter.mTargetCount + mView.mFilter.mLinkCount; ++i)
+    {
+        mCursorRows[i] = 0;
+    }
 
     if (end)
     {
-        mArchetypeIndex = mView.mFilter.mTargets[0].archetypes.size();
+        mIndex = this->endIndex();
     }
     else
     {
@@ -166,15 +236,22 @@ QueryFilter::View::Iterator::Iterator(View& view, bool end)
             auto pin = mView.mPins[target];
             if (!pin.isNull())
             {
-                mArchetypeIndex = mView.mFilter.mTargets[0].archetypes.size();
+                if (target == 0 && mView.mFilter.mLinkCount == 0)
+                {
+                    mIndex = mView.mFilter.mTargets[target].archetypes.size();
+                }
 
                 // Find archetype index.
                 auto archetype = mView.mFilter.mWorld.archetype(pin);
-                for (std::size_t i = 0; i < mView.mFilter.mTargets[0].archetypes.size(); ++i)
+                for (std::size_t i = 0; i < mView.mFilter.mTargets[target].archetypes.size(); ++i)
                 {
-                    if (mView.mFilter.mTargets[0].archetypes[i] == archetype)
+                    if (mView.mFilter.mTargets[target].archetypes[i] == archetype)
                     {
-                        mArchetypeIndex = i;
+                        if (target == 0 && mView.mFilter.mLinkCount == 0)
+                        {
+                            mIndex = i;
+                        }
+
                         mCursorRows[target] = mView.mFilter.mWorld.tables().dense().at(archetype).row(pin.index);
                         break;
                     }
@@ -188,15 +265,12 @@ QueryFilter::View::Iterator::Iterator(View& view, bool end)
 
 bool QueryFilter::View::Iterator::operator==(const Iterator& other) const
 {
-    for (int target = 0; target < mView.mFilter.mTargetCount; ++target)
+    if (&mView != &other.mView || mIndex != other.mIndex)
     {
-        if (mTargetArchetypes[target] != other.mTargetArchetypes[target])
-        {
-            return false;
-        }
+        return false;
     }
 
-    for (int cursor = 0; cursor < mView.mFilter.mCursorCount; ++cursor)
+    for (int cursor = 0; cursor < mView.mFilter.mTargetCount + mView.mFilter.mLinkCount; ++cursor)
     {
         if (mCursorRows[cursor] != other.mCursorRows[cursor])
         {
@@ -209,7 +283,15 @@ bool QueryFilter::View::Iterator::operator==(const Iterator& other) const
 
 auto QueryFilter::View::Iterator::operator*() const -> const Match&
 {
-    CUBOS_ASSERT(mArchetypeIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");
+    if (mView.mFilter.mLinkCount > 0)
+    {
+        CUBOS_ASSERT(mIndex < mView.mFilter.mLinks[0].tables.size(), "Iterator out of bounds");
+    }
+    else
+    {
+        CUBOS_ASSERT(mIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");
+    }
+
     auto& world = mView.mFilter.mWorld;
 
     for (int i = 0; i < mView.mFilter.mTargetCount; ++i)
@@ -228,17 +310,25 @@ auto QueryFilter::View::Iterator::operator->() const -> const Match*
 
 auto QueryFilter::View::Iterator::operator++() -> Iterator&
 {
-    CUBOS_ASSERT(mArchetypeIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");
+    CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
 
-    if (mView.mPins[0].isNull())
+    if (mView.mFilter.mLinkCount > 0)
     {
-        ++mCursorRows[0];
+        // TODO: handle pins here
+        ++mCursorRows[mView.mFilter.mTargetCount];
     }
     else
     {
-        // Move iterator to the end.
-        mArchetypeIndex = mView.mFilter.mTargets[0].archetypes.size();
-        mCursorRows[0] = 0;
+        if (mView.mPins[0].isNull())
+        {
+            ++mCursorRows[0];
+        }
+        else
+        {
+            // Move iterator to the end.
+            mIndex = this->endIndex();
+            mCursorRows[0] = 0;
+        }
     }
 
     this->findArchetype();
@@ -247,34 +337,79 @@ auto QueryFilter::View::Iterator::operator++() -> Iterator&
 
 const ArchetypeId* QueryFilter::View::Iterator::targetArchetypes() const
 {
-    CUBOS_ASSERT(mArchetypeIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");
+    CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
     return mTargetArchetypes;
 }
 
 const std::size_t* QueryFilter::View::Iterator::cursorRows() const
 {
-    CUBOS_ASSERT(mArchetypeIndex < mView.mFilter.mTargets[0].archetypes.size(), "Iterator out of bounds");
+    CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
     return mCursorRows;
+}
+
+bool QueryFilter::View::Iterator::valid() const
+{
+    return mIndex < this->endIndex();
 }
 
 void QueryFilter::View::Iterator::findArchetype()
 {
-    auto& world = mView.mFilter.mWorld;
-    auto& archetypes = mView.mFilter.mTargets[0].archetypes;
-    while (mArchetypeIndex < archetypes.size() &&
-           (!world.tables().dense().contains(archetypes[mArchetypeIndex]) ||
-            mCursorRows[0] >= world.tables().dense().at(archetypes[mArchetypeIndex]).size()))
-    {
-        ++mArchetypeIndex;
-        mCursorRows[0] = 0;
-    }
+    auto& filter = mView.mFilter;
+    auto& world = filter.mWorld;
 
-    if (mArchetypeIndex < archetypes.size())
+    if (filter.mLinkCount > 0)
     {
-        mTargetArchetypes[0] = archetypes[mArchetypeIndex];
+        auto& tables = filter.mLinks[0].tables;
+        while (mIndex < tables.size() &&
+               mCursorRows[filter.mTargetCount] >= world.tables().sparseRelation().at(tables[mIndex]).size())
+        {
+            ++mIndex;
+
+            for (int i = 0; i < filter.mTargetCount + filter.mLinkCount; ++i)
+            {
+                mCursorRows[i] = 0;
+            }
+        }
+
+        if (mIndex < tables.size())
+        {
+            mTargetArchetypes[filter.mLinks[0].fromTarget] = tables[mIndex].from;
+            mTargetArchetypes[filter.mLinks[0].toTarget] = tables[mIndex].to;
+
+            // Get the entity indices of the current row.
+            uint32_t fromIndex = UINT32_MAX, toIndex = UINT32_MAX;
+            world.tables()
+                .sparseRelation()
+                .at(tables[mIndex])
+                .indices(mCursorRows[filter.mTargetCount], fromIndex, toIndex);
+
+            mCursorRows[filter.mLinks[0].fromTarget] = world.tables().dense().at(tables[mIndex].from).row(fromIndex);
+            mCursorRows[filter.mLinks[0].toTarget] = world.tables().dense().at(tables[mIndex].to).row(toIndex);
+        }
     }
     else
     {
-        mTargetArchetypes[0] = ArchetypeId::Invalid;
+        auto& archetypes = mView.mFilter.mTargets[0].archetypes;
+        while (mIndex < archetypes.size() && (!world.tables().dense().contains(archetypes[mIndex]) ||
+                                              mCursorRows[0] >= world.tables().dense().at(archetypes[mIndex]).size()))
+        {
+            ++mIndex;
+            mCursorRows[0] = 0;
+        }
+
+        if (mIndex < archetypes.size())
+        {
+            mTargetArchetypes[0] = archetypes[mIndex];
+        }
     }
+}
+
+std::size_t QueryFilter::View::Iterator::endIndex() const
+{
+    if (mView.mFilter.mLinkCount > 0)
+    {
+        return mView.mFilter.mLinks[0].tables.size();
+    }
+
+    return mView.mFilter.mTargets[0].archetypes.size();
 }

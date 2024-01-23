@@ -9,6 +9,7 @@
 #include <cubos/core/ecs/entity/archetype_id.hpp>
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/query/term.hpp>
+#include <cubos/core/ecs/table/sparse_relation/id.hpp>
 
 namespace cubos::core::ecs
 {
@@ -21,10 +22,10 @@ namespace cubos::core::ecs
     {
     public:
         /// @brief Maximum number of targets per match allowed in a single query.
-        static constexpr int MaxTargetCount = 1;
+        static constexpr int MaxTargetCount = 2;
 
-        /// @brief Maximum number of cursors per query.
-        static constexpr int MaxCursorCount = MaxTargetCount;
+        /// @brief Maximum number of links per query.
+        static constexpr int MaxLinkCount = 1;
 
         /// @brief Can be iterated to view the query matches.
         class View;
@@ -64,14 +65,31 @@ namespace cubos::core::ecs
             std::size_t seenCount{0};
         };
 
+        /// @brief Holds the necessary data for each link.
+        struct Link
+        {
+            /// @brief From target index.
+            int fromTarget;
+
+            /// @brief To target index.
+            int toTarget;
+
+            /// @brief Tables which match the link, found through calls to @ref update().
+            std::vector<SparseRelationTableId> tables;
+
+            /// @brief How many tables have already been seen through @ref SparseRelationTableRegistry::collect.
+            std::size_t seenCount{0};
+        };
+
         World& mWorld;
 
         std::vector<QueryTerm> mTerms;
         std::vector<std::size_t> mTermCursors;
-        int mCursorCount{1};
 
         Target mTargets[MaxTargetCount];
         int mTargetCount{1};
+        Link mLinks[MaxLinkCount];
+        int mLinkCount{0};
     };
 
     class QueryFilter::View
@@ -161,9 +179,17 @@ namespace cubos::core::ecs
         /// @return Cursor row number array.
         const std::size_t* cursorRows() const;
 
+        /// @brief Checks if the iterator is out of bounds.
+        /// @return Whether the iterator is valid.
+        bool valid() const;
+
     private:
         /// @brief Advances the iterator's archetype until a non-empty one is found.
         void findArchetype();
+
+        /// @brief Gets the index value which represents the end of the iteration.
+        /// @return End index.
+        std::size_t endIndex() const;
 
         View& mView;
         mutable Match mMatch;
@@ -171,10 +197,16 @@ namespace cubos::core::ecs
         /// @brief Archetype of each target.
         ArchetypeId mTargetArchetypes[MaxTargetCount];
 
-        /// @brief Index of the currently selected archetype.
-        std::size_t mArchetypeIndex;
+        /// @brief Index of the currently selected archetype or sparse relation table.
+        ///
+        /// We distinguish between them through the mLinkCount variable. If it's 0, we're iterating over archetypes.
+        /// Otherwise, we're iterating over sparse relation tables.
+        std::size_t mIndex;
 
-        /// @brief Row number of each cursor. The first mTargetCount cursors represent the targets.
-        std::size_t mCursorRows[MaxCursorCount];
+        /// @brief Row number of each cursor.
+        ///
+        /// The first mTargetCount cursors represent the targets.
+        /// The remaining mLinkCount cursors represent the links.
+        std::size_t mCursorRows[MaxTargetCount + MaxLinkCount];
     };
 } // namespace cubos::core::ecs

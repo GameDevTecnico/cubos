@@ -58,22 +58,43 @@ namespace cubos::core::ecs
             // Initialize the filter.
             mFilter = new QueryFilter(world, terms);
 
-            // Initialize the fetchers.
-            std::size_t i = 0;
-            auto getTerm = [&]() { return argumentTerms[i++]; };
-            mFetchers = new std::tuple<QueryFetcher<Ts>...>{QueryFetcher<Ts>(world, getTerm())...};
-            (void)getTerm; // Necessary to silence unused warning in case Ts is empty.
+            // Initialize the fetchers with a templated functor which receives a sequence of indices (at compile time)
+            // and initializes each fetcher for the argument term with the corresponding index.
+            auto initFetchers = [&]<std::size_t... Is>(std::index_sequence<Is...>)
+            {
+                return new std::tuple<QueryFetcher<Ts>...>(QueryFetcher<Ts>(world, argumentTerms[Is])...);
+            };
+
+            // Call the above functor with a sequence of indices from 0 to the number of fetchers.
+            mFetchers = initFetchers(std::index_sequence_for<Ts...>{});
 
             // Find the cursor for each fetcher.
             for (std::size_t argI = 0; argI < argumentTerms.size(); ++argI)
             {
+                // First check how many argument terms are equal to the current argument term.
+                // We will have to skip that many resolved terms later.
+                std::size_t skipCount = 0;
+                for (std::size_t i = 0; i < argI; ++i)
+                {
+                    if (argumentTerms[i].compare(world.types(), argumentTerms[argI]))
+                    {
+                        ++skipCount;
+                    }
+                }
+
                 // Find the actual index of the term in the resolved vector.
                 std::size_t termI;
                 for (termI = 0; termI < terms.size(); ++termI)
                 {
-                    if (terms[termI].compare(world.types(), argumentTerms[termI]))
+                    if (terms[termI].compare(world.types(), argumentTerms[argI]))
                     {
-                        break;
+                        // We need to skip the terms respective to earlier equal terms.
+                        if (skipCount == 0)
+                        {
+                            break;
+                        }
+
+                        --skipCount;
                     }
                 }
 
@@ -119,6 +140,8 @@ namespace cubos::core::ecs
         /// @return Requested components, or nothing if the entity does not match the query.
         Opt<std::tuple<Ts...>> at(Entity entity)
         {
+            CUBOS_ASSERT(mFilter->targetCount() == 1);
+
             auto view = this->view().pin(0, entity);
 
             if (view.begin() == view.end())
@@ -256,14 +279,17 @@ namespace cubos::core::ecs
             mData.prepare(mIterator.targetArchetypes());
             const auto* cursorRows = mIterator.cursorRows();
 
-            std::size_t i = 0;
-            auto fetch = [&]<typename T>(QueryFetcher<T>& fetcher) -> T {
-                return fetcher.fetch(cursorRows[mData.mFetcherCursors[i++]]);
+            // Templated functor which receives a sequence of indices (at compile time) and fetches the corresponding
+            // data from the tuple of fetchers with each index.
+            auto fetchAll = [&]<std::size_t... Is>(std::index_sequence<Is...>)
+            {
+                return std::tuple<Ts...>(
+                    std::get<Is>(*mData.mFetchers).fetch(cursorRows[mData.mFetcherCursors[Is]])...);
             };
 
-            return std::apply(
-                [&fetch](auto&&... fetchers) { return std::tuple<Ts...>(fetch.template operator()<Ts>(fetchers)...); },
-                *mData.mFetchers);
+            // Call the above functor with a sequence of indices from 0 to the number of fetchers.
+            // This will expand to a call to fetch() for each fetcher.
+            return fetchAll(std::index_sequence_for<Ts...>{});
         }
 
         /// @brief Advances the iterator.

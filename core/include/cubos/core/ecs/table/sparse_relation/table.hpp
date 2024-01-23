@@ -92,6 +92,13 @@ namespace cubos::core::ecs
         /// @copydoc at(std::size_t)
         const void* at(std::size_t row) const;
 
+        /// @brief Get the entity indices at the given row.
+        /// @note Aborts if @p row is out of bounds.
+        /// @param row Row to get.
+        /// @param[out] from From index.
+        /// @param[out] to To index.
+        void indices(std::size_t row, uint32_t& from, uint32_t& to) const;
+
         /// @brief Gets an iterator to the first relation of the table.
         /// @return Iterator.
         Iterator begin() const;
