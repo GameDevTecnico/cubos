@@ -2,6 +2,7 @@
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 
 using cubos::core::ecs::Entity;
@@ -14,11 +15,12 @@ using cubos::core::reflection::reflect;
 struct ChildOf
 {
     CUBOS_REFLECT;
+    bool adopted = false;
 };
 
 CUBOS_REFLECT_IMPL(ChildOf)
 {
-    return TypeBuilder<ChildOf>("ChildOf").build();
+    return TypeBuilder<ChildOf>("ChildOf").withField("adopted", &ChildOf::adopted).build();
 }
 
 struct Name
@@ -51,21 +53,74 @@ int main()
     auto eve = world.create();
     world.components(eve).add(Name{"Eve"});
 
-    world.relate(alice, charlie, ChildOf{});
-    world.relate(bob, charlie, ChildOf{});
-    world.relate(charlie, eve, ChildOf{});
-    world.relate(diego, eve, ChildOf{});
+    world.relate(alice, charlie, ChildOf{false});
+    world.relate(bob, charlie, ChildOf{true});
+    world.relate(charlie, eve, ChildOf{true});
+    world.relate(diego, eve, ChildOf{false});
 
-    QueryData<const Name&, const Name&> query{world,
-                                    {
-                                        QueryTerm::makeWithComponent(nameComponent, 0),
-                                        QueryTerm::makeRelation(childOfRelation, 0, 1),
-                                        QueryTerm::makeWithComponent(nameComponent, 1),
-                                    }};
+    QueryData<const Name&, const Name&> nameQuery{world,
+                                                  {
+                                                      QueryTerm::makeWithComponent(nameComponent, 0),
+                                                      QueryTerm::makeRelation(childOfRelation, 0, 1),
+                                                      QueryTerm::makeWithComponent(nameComponent, 1),
+                                                  }};
 
     CUBOS_INFO("Query over all relations:");
-    for (auto [child, parent] : query.view())
+    for (auto [child, parent] : nameQuery.view())
     {
         CUBOS_INFO("{} is a child of {}", child, parent);
+    }
+
+    CUBOS_INFO("Query over all parents of Charlie:");
+    for (auto [child, parent] : nameQuery.view().pin(0, charlie))
+    {
+        CUBOS_ASSERT(child.name == "Charlie");
+        CUBOS_INFO("{} is a parent of Charlie", parent);
+    }
+
+    CUBOS_INFO("Query over all children of Charlie:");
+    for (auto [child, parent] : nameQuery.view().pin(1, charlie))
+    {
+        CUBOS_ASSERT(parent.name == "Charlie");
+        CUBOS_INFO("{} is a child of Charlie", child);
+    }
+
+    QueryData<const ChildOf&> relationQuery{world, {}};
+    CUBOS_INFO("Is Charlie Eve's parent?");
+    if (auto result = relationQuery.at(eve, charlie))
+    {
+        auto& [childOf] = *result;
+        CUBOS_INFO("Yes. Is she adopted?");
+        if (childOf.adopted)
+        {
+            CUBOS_INFO("Yes.");
+        }
+        else
+        {
+            CUBOS_INFO("No.");
+        }
+    }
+    else
+    {
+        CUBOS_INFO("No.");
+    }
+
+    CUBOS_INFO("Is Charlie Eve's child?");
+    if (auto result = relationQuery.at(charlie, eve))
+    {
+        auto& [childOf] = *result;
+        CUBOS_INFO("Yes. Is he adopted?");
+        if (childOf.adopted)
+        {
+            CUBOS_INFO("Yes.");
+        }
+        else
+        {
+            CUBOS_INFO("No.");
+        }
+    }
+    else
+    {
+        CUBOS_INFO("No.");
     }
 }

@@ -125,7 +125,12 @@ bool SparseRelationTable::contains(uint32_t from, uint32_t to) const
 
 std::size_t SparseRelationTable::row(uint32_t from, uint32_t to) const
 {
-    return static_cast<std::size_t>(mPairRows.at(pairId(from, to)));
+    if (auto it = mPairRows.find(pairId(from, to)); it != mPairRows.end())
+    {
+        return it->second;
+    }
+
+    return this->size();
 }
 
 void* SparseRelationTable::at(std::size_t row)
@@ -140,9 +145,40 @@ const void* SparseRelationTable::at(std::size_t row) const
 
 void SparseRelationTable::indices(std::size_t row, uint32_t& from, uint32_t& to) const
 {
-    auto& data = mRows[row];
-    from = data.from;
-    to = data.to;
+    from = mRows[row].from;
+    to = mRows[row].to;
+}
+
+std::size_t SparseRelationTable::firstFrom(uint32_t index) const
+{
+    if (auto it = mFromRows.find(index); it != mFromRows.end())
+    {
+        return it->second.first;
+    }
+
+    return this->size();
+}
+
+std::size_t SparseRelationTable::firstTo(uint32_t index) const
+{
+    if (auto it = mToRows.find(index); it != mToRows.end())
+    {
+        return it->second.first;
+    }
+
+    return this->size();
+}
+
+std::size_t SparseRelationTable::nextFrom(std::size_t row) const
+{
+    auto next = mRows[row].fromLink.next;
+    return next == UINT32_MAX ? this->size() : static_cast<std::size_t>(next);
+}
+
+std::size_t SparseRelationTable::nextTo(std::size_t row) const
+{
+    auto next = mRows[row].toLink.next;
+    return next == UINT32_MAX ? this->size() : static_cast<std::size_t>(next);
 }
 
 auto SparseRelationTable::begin() const -> Iterator

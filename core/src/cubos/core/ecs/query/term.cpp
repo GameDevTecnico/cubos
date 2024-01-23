@@ -288,7 +288,7 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
 
 std::string QueryTerm::toString(const Types& types, const std::vector<QueryTerm>& terms)
 {
-    std::string result = "";
+    std::string result;
 
     for (const auto& term : terms)
     {

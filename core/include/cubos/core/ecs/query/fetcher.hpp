@@ -111,35 +111,71 @@ namespace cubos::core::ecs
     public:
         QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
-            , mColumnId{ColumnId::make(world.types().id(reflection::reflect<T>()))}
-            , mTarget{term.component.target}
+            , mDataType{world.types().id(reflection::reflect<T>())}
+            , mIsComponent{world.types().isComponent(mDataType)}
         {
+            if (mIsComponent)
+            {
+                mTargets[0] = term.component.target;
+            }
+            else
+            {
+                mTargets[0] = term.relation.fromTarget;
+                mTargets[1] = term.relation.toTarget;
+            }
         }
 
         static QueryTerm term(World& world)
         {
             auto type = world.types().id(reflection::reflect<T>());
 
-            CUBOS_ASSERT(world.types().isComponent(type), "Query arguments of the form T& must be components");
+            if (world.types().isComponent(type))
+            {
+                return QueryTerm::makeWithComponent(type, -1);
+            }
 
-            return QueryTerm::makeWithComponent(type, -1);
+            if (world.types().isRelation(type))
+            {
+                return QueryTerm::makeRelation(type, -1, -1);
+            }
+
+            CUBOS_FAIL("Query arguments of the form T& must be components or relations");
         }
 
         void prepare(const ArchetypeId* targetArchetypes)
         {
-            mColumn = &mWorld.tables().dense().at(targetArchetypes[mTarget]).column(mColumnId);
+            if (mIsComponent)
+            {
+                auto id = ColumnId::make(mDataType);
+                mColumn = &mWorld.tables().dense().at(targetArchetypes[mTargets[0]]).column(id);
+            }
+            else
+            {
+                mSparseRelationTable = &mWorld.tables().sparseRelation().at({
+                    mDataType,
+                    targetArchetypes[mTargets[0]],
+                    targetArchetypes[mTargets[1]],
+                });
+            }
         }
 
         T& fetch(std::size_t row)
         {
-            return *static_cast<T*>(mColumn->at(row));
+            if (mColumn != nullptr)
+            {
+                return *static_cast<T*>(mColumn->at(row));
+            }
+
+            return *static_cast<T*>(mSparseRelationTable->at(row));
         }
 
     private:
         World& mWorld;
-        ColumnId mColumnId;
+        DataTypeId mDataType;
         memory::AnyVector* mColumn{nullptr};
-        int mTarget;
+        SparseRelationTable* mSparseRelationTable{nullptr};
+        int mTargets[2];
+        bool mIsComponent;
     };
 
     template <reflection::Reflectable T>
@@ -148,35 +184,71 @@ namespace cubos::core::ecs
     public:
         QueryFetcher(World& world, const QueryTerm& term)
             : mWorld{world}
-            , mColumnId{ColumnId::make(world.types().id(reflection::reflect<T>()))}
-            , mTarget{term.component.target}
+            , mDataType{world.types().id(reflection::reflect<T>())}
+            , mIsComponent{world.types().isComponent(mDataType)}
         {
+            if (mIsComponent)
+            {
+                mTargets[0] = term.component.target;
+            }
+            else
+            {
+                mTargets[0] = term.relation.fromTarget;
+                mTargets[1] = term.relation.toTarget;
+            }
         }
 
         static QueryTerm term(World& world)
         {
             auto type = world.types().id(reflection::reflect<T>());
 
-            CUBOS_ASSERT(world.types().isComponent(type), "Query arguments of the form const T& must be components");
+            if (world.types().isComponent(type))
+            {
+                return QueryTerm::makeWithComponent(type, -1);
+            }
 
-            return QueryTerm::makeWithComponent(type, -1);
+            if (world.types().isRelation(type))
+            {
+                return QueryTerm::makeRelation(type, -1, -1);
+            }
+
+            CUBOS_FAIL("Query arguments of the form const T& must be components or relations");
         }
 
         void prepare(const ArchetypeId* targetArchetypes)
         {
-            mColumn = &mWorld.tables().dense().at(targetArchetypes[mTarget]).column(mColumnId);
+            if (mIsComponent)
+            {
+                auto id = ColumnId::make(mDataType);
+                mColumn = &mWorld.tables().dense().at(targetArchetypes[mTargets[0]]).column(id);
+            }
+            else
+            {
+                mSparseRelationTable = &mWorld.tables().sparseRelation().at({
+                    mDataType,
+                    targetArchetypes[mTargets[0]],
+                    targetArchetypes[mTargets[1]],
+                });
+            }
         }
 
         const T& fetch(std::size_t row)
         {
-            return *static_cast<const T*>(mColumn->at(row));
+            if (mColumn != nullptr)
+            {
+                return *static_cast<const T*>(mColumn->at(row));
+            }
+
+            return *static_cast<const T*>(mSparseRelationTable->at(row));
         }
 
     private:
         World& mWorld;
-        ColumnId mColumnId;
+        DataTypeId mDataType;
         memory::AnyVector* mColumn{nullptr};
-        int mTarget;
+        SparseRelationTable* mSparseRelationTable{nullptr};
+        int mTargets[2];
+        bool mIsComponent;
     };
 
     template <reflection::Reflectable T>

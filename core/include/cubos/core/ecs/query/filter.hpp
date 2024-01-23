@@ -184,8 +184,8 @@ namespace cubos::core::ecs
         bool valid() const;
 
     private:
-        /// @brief Advances the iterator's archetype until a non-empty one is found.
-        void findArchetype();
+        /// @brief Advances the iterator to the next valid match. Wraps around.
+        void advance();
 
         /// @brief Gets the index value which represents the end of the iteration.
         /// @return End index.
