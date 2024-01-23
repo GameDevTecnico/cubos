@@ -137,12 +137,30 @@ namespace cubos::core::ecs
 
         /// @brief Accesses the match for the given entity, if there is one.
         /// @param entity Entity.
-        /// @return Requested components, or nothing if the entity does not match the query.
+        /// @return Requested data, or nothing if the entity does not match the query.
         Opt<std::tuple<Ts...>> at(Entity entity)
         {
             CUBOS_ASSERT(mFilter->targetCount() == 1);
 
             auto view = this->view().pin(0, entity);
+
+            if (view.begin() == view.end())
+            {
+                return {};
+            }
+
+            return *view.begin();
+        }
+
+        /// @brief Accesses the match for the given entities, if there is one.
+        /// @param firstEntity Entity for the first target.
+        /// @param secondEntity Entity for the second target.
+        /// @return Requested data, or nothing if the entities do not match the query.
+        Opt<std::tuple<Ts...>> at(Entity firstEntity, Entity secondEntity)
+        {
+            CUBOS_ASSERT(mFilter->targetCount() == 2);
+
+            auto view = this->view().pin(0, firstEntity).pin(1, secondEntity);
 
             if (view.begin() == view.end())
             {

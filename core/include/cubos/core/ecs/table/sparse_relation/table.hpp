@@ -77,7 +77,8 @@ namespace cubos::core::ecs
         /// @return Whether the relation exists.
         bool contains(uint32_t from, uint32_t to) const;
 
-        /// @brief Gets the row of the relation with the given indices.
+        /// @brief Gets the row of the relation with the given indices, or @ref size() if there is
+        /// none.
         /// @param from From index.
         /// @param to To index.
         /// @return Row of the data.
@@ -98,6 +99,26 @@ namespace cubos::core::ecs
         /// @param[out] from From index.
         /// @param[out] to To index.
         void indices(std::size_t row, uint32_t& from, uint32_t& to) const;
+
+        /// @brief Gets the first row with the given from index, or @ref size() if there is none.
+        /// @param index From index.
+        /// @return First row with the given from index.
+        std::size_t firstFrom(uint32_t index) const;
+
+        /// @brief Gets the first row with the given to index, or @ref size() if there is none.
+        /// @param index To index.
+        /// @return First row with the given to index.
+        std::size_t firstTo(uint32_t index) const;
+
+        /// @brief Gets the next row with the same from index, or @ref size() if there is none.
+        /// @param row Row to get the next from.
+        /// @return Next row with the same from index.
+        std::size_t nextFrom(std::size_t row) const;
+
+        /// @brief Gets the next row with the same to index, or @ref size() if there is none.
+        /// @param row Row to get the next to.
+        /// @return Next row with the same to index.
+        std::size_t nextTo(std::size_t row) const;
 
         /// @brief Gets an iterator to the first relation of the table.
         /// @return Iterator.

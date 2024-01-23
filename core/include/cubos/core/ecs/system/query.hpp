@@ -58,6 +58,15 @@ namespace cubos::core::ecs
             return mView.data().at(entity);
         }
 
+        /// @brief Accesses the match for the given entities, if there is one.
+        /// @param firstEntity Entity for the first target.
+        /// @param secondEntity Entity for the second target.
+        /// @return Requested data, or nothing if the entities do not match the query.
+        Opt<std::tuple<Ts...>> at(Entity firstEntity, Entity secondEntity)
+        {
+            return mView.data().at(firstEntity, secondEntity);
+        }
+
     private:
         typename QueryData<Ts...>::View mView;
     };
