@@ -65,6 +65,7 @@ static void frameGrids(const Assets& assets, Renderer& renderer, RendererFrame& 
             grid.handle = renderer->upload(gridRead.get());
         }
 
+        CUBOS_ASSERT(entity.index < (1 << 31), "Entity index must be lower than 2^31");
         frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset), entity.index);
     }
 }
