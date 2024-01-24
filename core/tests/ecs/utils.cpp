@@ -65,6 +65,14 @@ CUBOS_REFLECT_IMPL(SymmetricRelation)
         .build();
 }
 
+CUBOS_REFLECT_IMPL(TreeRelation)
+{
+    return cubos::core::ecs::TypeBuilder<TreeRelation>("TreeRelation")
+        .withField("value", &TreeRelation::value)
+        .tree()
+        .build();
+}
+
 CUBOS_REFLECT_IMPL(DetectDestructorRelation)
 {
     using namespace cubos::core::reflection;

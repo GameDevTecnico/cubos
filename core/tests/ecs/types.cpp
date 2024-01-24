@@ -29,4 +29,15 @@ TEST_CASE("ecs::Types")
     REQUIRE_FALSE(types.isComponent({.inner = 1}));
     REQUIRE(types.isRelation({.inner = 1}));
     REQUIRE(types.isSymmetricRelation({.inner = 1}));
+    REQUIRE_FALSE(types.isTreeRelation({.inner = 1}));
+
+    types.addRelation(reflect<TreeRelation>());
+    REQUIRE(types.contains("TreeRelation"));
+    REQUIRE(types.id("TreeRelation").inner == 2);
+    REQUIRE(types.id(reflect<TreeRelation>()).inner == 2);
+    REQUIRE(types.type({.inner = 2}).is<TreeRelation>());
+    REQUIRE_FALSE(types.isComponent({.inner = 2}));
+    REQUIRE(types.isRelation({.inner = 2}));
+    REQUIRE(types.isTreeRelation({.inner = 2}));
+    REQUIRE_FALSE(types.isSymmetricRelation({.inner = 2}));
 }

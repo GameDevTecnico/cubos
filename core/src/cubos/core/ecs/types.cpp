@@ -34,7 +34,14 @@ void Types::add(const reflection::Type& type, Kind kind)
     auto inserted = mNames.emplace(type.name(), id).second;
     CUBOS_ASSERT(inserted, "A different type with the same name {} was already registered", type.name());
     mTypes.insert(type, id);
-    mEntries.push_back({.type = &type, .kind = kind, .isSymmetric = type.has<SymmetricTrait>()});
+    mEntries.push_back({
+        .type = &type,
+        .kind = kind,
+        .isSymmetric = type.has<SymmetricTrait>(),
+        .isTree = type.has<TreeTrait>(),
+    });
+
+    CUBOS_ASSERT(!mEntries.back().isTree || !mEntries.back().isSymmetric, "Symmetric tree relations are not supported");
 }
 
 DataTypeId Types::id(const reflection::Type& type) const
@@ -72,6 +79,11 @@ bool Types::isRelation(DataTypeId id) const
 bool Types::isSymmetricRelation(DataTypeId id) const
 {
     return mEntries[id.inner].kind == Kind::Relation && mEntries[id.inner].isSymmetric;
+}
+
+bool Types::isTreeRelation(DataTypeId id) const
+{
+    return mEntries[id.inner].kind == Kind::Relation && mEntries[id.inner].isTree;
 }
 
 TypeRegistry Types::components() const
