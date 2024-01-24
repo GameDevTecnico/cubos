@@ -64,7 +64,7 @@
             </li>
           </ul>
         </nav>
-<p>Terms are the building blocks used to build queries. Each term adds some restriction to what the query will match. There are three kinds of terms:</p><ul><li><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> terms, which allow filtering match entities by those which have or don&#x27;t have a given component.</li><li>Relation terms, which allow filtering match entities by some relation between them.</li><li><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Entity.html" class="m-doc">Entity</a> terms, which don&#x27;t filter the results but allow accessing one of the matched entities.</li></ul>
+<p>Terms are the building blocks used to build queries. Each term adds some restriction to what the query will match. There are three kinds of terms:</p><ul><li><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> terms, which allow filtering match entities by those which have or don&#x27;t have a given component.</li><li><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Relation.html" class="m-doc">Relation</a> terms, which allow filtering match entities by some relation between them.</li><li><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Entity.html" class="m-doc">Entity</a> terms, which don&#x27;t filter the results but allow accessing one of the matched entities.</li></ul>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -76,6 +76,10 @@
               struct <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Entity.html" class="m-doc">Entity</a>
             </dt>
             <dd>Stores entity term data.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Relation.html" class="m-doc">Relation</a>
+            </dt>
+            <dd>Stores relation term data.</dd>
           </dl>
         </section>
         <section id="pub-static-methods">
@@ -101,11 +105,22 @@
             </dt>
             <dd>Returns a new optional component term for the given component and target.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a1bab509e97c71b154100a0e01045201e" class="m-doc">makeRelation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> type,
+              int fromTarget,
+              int toTarget) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a></span>
+            </dt>
+            <dd>Returns a new relation term for the given relation and targets.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a161779e1a80c9fc3c5d1c521f77bf139" class="m-doc">resolve</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types,
               const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; baseTerms,
               std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; otherTerms) -&gt; std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;</span>
             </dt>
             <dd>Merges a vector of terms with another, joining pairs of them if possible.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a17f560270ba3b35b9a21e0a648dd0a6c" class="m-doc">toString</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; terms) -&gt; std::string</span>
+            </dt>
+            <dd>Gets a string representation of vector of query terms.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -119,6 +134,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a8d3e0a63ffae0044128f6d9199589178" class="m-doc">isComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types) const -&gt; bool</span>
             </dt>
             <dd>Checks if the term is a component term.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af48b47cc95467dee0d63a4f7b92f7a28" class="m-doc">isRelation</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if the term is a relation term.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aa3a1944ab245e16437b6cba364c9df00" class="m-doc">compare</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types,
               const <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&amp; other) const -&gt; bool</span>
@@ -141,6 +160,10 @@
               <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> <a href="#ab1a0c1bd09b3bb8d47e34100a908a70e" class="m-doc-self">component</a>
             </dt>
             <dd><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Component.html" class="m-doc">Component</a> term data.</dd>
+            <dt id="a39cafa401f43a16befc56dbb13064086">
+              <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Relation.html" class="m-doc">Relation</a> <a href="#a39cafa401f43a16befc56dbb13064086" class="m-doc-self">relation</a>
+            </dt>
+            <dd><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Relation.html" class="m-doc">Relation</a> term data.</dd>
           </dl>
         </section>
         <section>
@@ -255,6 +278,40 @@
             </table>
 <aside class="m-note m-danger"><h4>Warning</h4><p>Undefined behaviour will occur if <code>type</code> isn&#x27;t registered as a component.</p></aside>
           </div></section>
+          <section class="m-doc-details" id="a1bab509e97c71b154100a0e01045201e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryTerm::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1bab509e97c71b154100a0e01045201e" class="m-doc-self">makeRelation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> type,
+              int fromTarget,
+              int toTarget)</span></span>
+            </h3>
+            <p>Returns a new relation term for the given relation and targets.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Relation.html" class="m-doc">Relation</a> type.</td>
+                </tr>
+                <tr>
+                  <td>fromTarget</td>
+                  <td>Index of the target which must have the &#x27;from&#x27; side of the relation.</td>
+                </tr>
+                <tr>
+                  <td>toTarget</td>
+                  <td>Index of the target which must have the &#x27;to&#x27; side of the relation.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm_1_1Relation.html" class="m-doc">Relation</a> term.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>Undefined behaviour will occur if <code>type</code> isn&#x27;t registered as a relation.</p></aside>
+          </div></section>
           <section class="m-doc-details" id="a161779e1a80c9fc3c5d1c521f77bf139"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt; cubos::<wbr />core::<wbr />ecs::<wbr />QueryTerm::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a161779e1a80c9fc3c5d1c521f77bf139" class="m-doc-self">resolve</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types,
@@ -289,6 +346,34 @@
             </table>
 <p>This function is mainly used to merge terms specified manually for a query with terms obtained from its argument types. For example, if we have a query of the form <code><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>&lt;A&amp;, A&amp;&gt;</code>, we will obtain the terms <code>makeWithComponent(A, -1)</code> and <code>makeWithComponent(A, -1)</code>. Those term would be passed into <code>other</code>. If we passed to <code>base</code> the terms <code>makeWithComponent(A, 0)</code> and <code>makeWithComponent(A, 1)</code>, then, the base wouldn&#x27;t be modified, and the <code>other</code> vector would have its targets updated so that it matches the <code>base</code>.</p><p>Any targets found set to -1 will be set to the current default target. The default target is initially 0, and always changes to the last seen non -1 target. If a relation term has one of the targets undefined, the default target is incremented.</p><p>Another example would be to have an empty base vector, and the query <code><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>&lt;A&amp;, B&amp;&gt;</code>. The <code>other</code> vector would be <code>{makeWithComponent(A, -1), makeWithComponent(B, -1)}</code>, and the returned vector would be <code>{makeWithComponent(A, 0), makeWithComponent(B, 0)}</code>.</p>
           </div></section>
+          <section class="m-doc-details" id="a17f560270ba3b35b9a21e0a648dd0a6c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static std::string cubos::<wbr />core::<wbr />ecs::<wbr />QueryTerm::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a17f560270ba3b35b9a21e0a648dd0a6c" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; terms)</span></span>
+            </h3>
+            <p>Gets a string representation of vector of query terms.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">types</td>
+                  <td>Type registry.</td>
+                </tr>
+                <tr>
+                  <td>terms</td>
+                  <td>Vector of terms.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a228af241fee263a7124cc7c16b8ab2b9"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />QueryTerm::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a228af241fee263a7124cc7c16b8ab2b9" class="m-doc-self">isEntity</a>(</span><span class="m-doc-wrap">) const</span></span>
@@ -322,6 +407,29 @@
                 <tr>
                   <th>Returns</th>
                   <td>Whether it&#x27;s a component term.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af48b47cc95467dee0d63a4f7b92f7a28"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />QueryTerm::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af48b47cc95467dee0d63a4f7b92f7a28" class="m-doc-self">isRelation</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; types) const</span></span>
+            </h3>
+            <p>Checks if the term is a relation term.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">types</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a> registry.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether it&#x27;s a relation term.</td>
                 </tr>
               </tfoot>
             </table>
