@@ -209,4 +209,37 @@ TEST_CASE("ecs::World")
 
         CHECK(destroyed);
     }
+
+    SUBCASE("relations are moved correctly between archetypes")
+    {
+        bool destroyed = false;
+        auto foo = world.create();
+        auto bar = world.create();
+
+        // Add a relation between foo and bar.
+        REQUIRE_FALSE(world.related<DetectDestructorRelation>(foo, bar));
+        world.relate(foo, bar, DetectDestructorRelation{{&destroyed}});
+        REQUIRE(world.related<DetectDestructorRelation>(foo, bar));
+        REQUIRE_FALSE(destroyed);
+
+        // Change the archetype of foo. The entities should still be related.
+        world.components(foo).add(IntegerComponent{0});
+        REQUIRE(world.related<DetectDestructorRelation>(foo, bar));
+        REQUIRE_FALSE(destroyed);
+
+        // Change the archetype of bar. The entities should still be related.
+        world.components(bar).add(IntegerComponent{0});
+        REQUIRE(world.related<DetectDestructorRelation>(foo, bar));
+        REQUIRE_FALSE(destroyed);
+
+        // Change the archetypes once again.
+        world.components(foo).remove<IntegerComponent>();
+        world.components(bar).remove<IntegerComponent>();
+        REQUIRE(world.related<DetectDestructorRelation>(foo, bar));
+        REQUIRE_FALSE(destroyed);
+
+        // Destroy foo. The relation should be destroyed.
+        world.destroy(foo);
+        REQUIRE(destroyed);
+    }
 }
