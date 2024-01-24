@@ -256,7 +256,34 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
     newTable.column(columnId).pushMove(value);
 
     // For each sparse relation table the entity is on, move its relations to the new corresponding one.
-    // TODO
+    for (const auto& [_, index] : mWorld.mTables.sparseRelation())
+    {
+        // For each table where the entity's archetype is the 'from' archetype.
+        if (index.from().contains(oldArchetype))
+        {
+            for (const auto& oldTableId : index.from().at(oldArchetype))
+            {
+                // Move all occurrences of the entity in the 'from' column to the new table.
+                auto newTableId = oldTableId;
+                newTableId.from = newArchetype;
+                auto& newTable = mWorld.mTables.sparseRelation().create(newTableId, mWorld.mTypes);
+                mWorld.mTables.sparseRelation().at(oldTableId).moveFrom(mEntity.index, newTable);
+            }
+        }
+
+        // For each table where the entity's archetype is the 'to' archetype.
+        if (index.to().contains(oldArchetype))
+        {
+            for (const auto& oldTableId : index.to().at(oldArchetype))
+            {
+                // Move all occurrences of the entity in the 'to' column to the new table.
+                auto newTableId = oldTableId;
+                newTableId.to = newArchetype;
+                auto& newTable = mWorld.mTables.sparseRelation().create(newTableId, mWorld.mTypes);
+                mWorld.mTables.sparseRelation().at(oldTableId).moveTo(mEntity.index, newTable);
+            }
+        }
+    }
 
     CUBOS_DEBUG("Added component {} to entity {}", type.name(), mEntity, mEntity);
     return *this;
@@ -288,7 +315,34 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
     oldTable.swapMove(mEntity.index, newTable);
 
     // For each sparse relation table the entity is on, move its relations to the new corresponding one.
-    // TODO
+    for (const auto& [_, index] : mWorld.mTables.sparseRelation())
+    {
+        // For each table where the entity's archetype is the 'from' archetype.
+        if (index.from().contains(oldArchetype))
+        {
+            for (const auto& oldTableId : index.from().at(oldArchetype))
+            {
+                // Move all occurrences of the entity in the 'from' column to the new table.
+                auto newTableId = oldTableId;
+                newTableId.from = newArchetype;
+                auto& newTable = mWorld.mTables.sparseRelation().create(newTableId, mWorld.mTypes);
+                mWorld.mTables.sparseRelation().at(oldTableId).moveFrom(mEntity.index, newTable);
+            }
+        }
+
+        // For each table where the entity's archetype is the 'to' archetype.
+        if (index.to().contains(oldArchetype))
+        {
+            for (const auto& oldTableId : index.to().at(oldArchetype))
+            {
+                // Move all occurrences of the entity in the 'to' column to the new table.
+                auto newTableId = oldTableId;
+                newTableId.to = newArchetype;
+                auto& newTable = mWorld.mTables.sparseRelation().create(newTableId, mWorld.mTypes);
+                mWorld.mTables.sparseRelation().at(oldTableId).moveTo(mEntity.index, newTable);
+            }
+        }
+    }
 
     CUBOS_DEBUG("Removed component {} from entity {}", type.name(), mEntity);
     return *this;
