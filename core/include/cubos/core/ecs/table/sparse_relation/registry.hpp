@@ -45,11 +45,19 @@ namespace cubos::core::ecs
                 return mSparseRelationTableIdsByTo;
             }
 
+            /// @brief Returns the maximum depth of the tables in this index.
+            /// @return Maximum depth.
+            int maxDepth() const
+            {
+                return mMaxDepth;
+            }
+
         private:
             std::unordered_map<ArchetypeId, std::vector<SparseRelationTableId>, ArchetypeIdHash>
                 mSparseRelationTableIdsByFrom;
             std::unordered_map<ArchetypeId, std::vector<SparseRelationTableId>, ArchetypeIdHash>
                 mSparseRelationTableIdsByTo;
+            int mMaxDepth{0};
         };
 
         /// @brief Checks if there's a table with the given identifier.

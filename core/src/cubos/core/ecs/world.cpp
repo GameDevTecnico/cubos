@@ -163,12 +163,30 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
 
     if (mTypes.isTreeRelation(dataType))
     {
-        // If the relation is tree-like, then there can only be one outgoing relation from the 'from'
-        // entity. We need to check if there is already a relation and erase it if there is one.
-
         // TODO: this is a bit expensive at the moment, since we have to iterate over all tables with
-        // the same from archetype. We should keep an index to find the table directly.
+        // the same from archetype. Maybe we should keep an index to find the tables directly from the entities.
         auto& fromTables = mTables.sparseRelation().type(dataType).from();
+
+        // If the relation is tree-like, then we need to find the depth of the 'to' entity in the tree,
+        // to figure out which table to insert this relation into.
+        if (fromTables.contains(toArchetype))
+        {
+            for (auto otherTableId : fromTables.at(toArchetype))
+            {
+                // Check if the 'to' entity is on this table.
+                auto& table = mTables.sparseRelation().at(otherTableId);
+                auto row = table.firstFrom(to.index);
+                if (row != table.size())
+                {
+                    // It is, so the depth of the new relation is one more than the depth of the 'to' entity.
+                    tableId.depth = otherTableId.depth + 1;
+                    break;
+                }
+            }
+        }
+
+        // There can only be one outgoing relation from the 'from' entity, so we also need to erase
+        // any existing relation, if there is one.
         if (fromTables.contains(fromArchetype))
         {
             for (auto tableId : fromTables.at(fromArchetype))
@@ -186,6 +204,9 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
                 }
             }
         }
+
+        // We need to update the depth of the incoming relation.
+        this->propagateDepth(from.index, dataType, tableId.depth + 1);
     }
 
     // Get or create the table and insert a new row.
@@ -213,12 +234,26 @@ void World::unrelate(Entity from, Entity to, const reflection::Type& type)
 
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
-    auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype};
 
-    if (mTables.sparseRelation().contains(tableId))
+    // Search for the table with the right depth which contains the relation.
+    for (int depth = 0, maxDepth = mTables.sparseRelation().type(dataType).maxDepth(); depth <= maxDepth; ++depth)
     {
-        auto& table = mTables.sparseRelation().at(tableId);
-        table.erase(from.index, to.index);
+        auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype, depth};
+        if (mTables.sparseRelation().contains(tableId))
+        {
+            auto& table = mTables.sparseRelation().at(tableId);
+            if (table.erase(from.index, to.index))
+            {
+                if (mTypes.isTreeRelation(dataType))
+                {
+                    // If the relation is tree-like, then we are changing the depth of the 'from' entity to 0.
+                    // We must update any incoming relations to the 'from' entity to reflect this.
+                    this->propagateDepth(from.index, dataType, 0);
+                }
+
+                break;
+            }
+        }
     }
 }
 
@@ -242,14 +277,62 @@ bool World::related(Entity from, Entity to, const reflection::Type& type) const
 
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
-    auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype};
 
-    if (!mTables.sparseRelation().contains(tableId))
+    // Check if there's a table with the given archetypes and any depth which contains the relation.
+    for (int depth = 0, maxDepth = mTables.sparseRelation().type(dataType).maxDepth(); depth <= maxDepth; ++depth)
     {
-        return false;
+        auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype, depth};
+        if (mTables.sparseRelation().contains(tableId) &&
+            mTables.sparseRelation().at(tableId).contains(from.index, to.index))
+        {
+            return true;
+        }
     }
 
-    return mTables.sparseRelation().at(tableId).contains(from.index, to.index);
+    return false;
+}
+
+void World::propagateDepth(uint32_t index, DataTypeId dataType, int depth)
+{
+    auto archetype = mEntityPool.archetype(index);
+    auto& toTables = mTables.sparseRelation().type(dataType).to();
+    if (toTables.contains(archetype))
+    {
+        // Collect all tables which contain relations which have the entity as the 'to' entity.
+        std::vector<SparseRelationTableId> tables{};
+        for (const auto& tableId : toTables.at(archetype))
+        {
+            auto& table = mTables.sparseRelation().at(tableId);
+            auto row = table.firstTo(index);
+            if (row != table.size())
+            {
+                tables.push_back(tableId);
+            }
+        }
+
+        // Iterate over these tables and move all relations with the entity to the new table.
+        for (const auto& tableId : tables)
+        {
+            // Why would we ever call this function without actually changing the depth?
+            CUBOS_ASSERT(tableId.depth != depth);
+
+            // Before moving the relations, recurse into the 'from' entities as their depth will change.
+            auto& table = mTables.sparseRelation().at(tableId);
+            for (auto row = table.firstTo(index); row != table.size(); row = table.nextTo(row))
+            {
+                // Get the 'from' entity and recurse.
+                uint32_t fromIndex, toIndex;
+                table.indices(row, fromIndex, toIndex);
+                this->propagateDepth(fromIndex, dataType, depth + 1);
+            }
+
+            // Move all incoming relations to the new table.
+            auto newTableId = tableId;
+            newTableId.depth = depth;
+            auto& newTable = mTables.sparseRelation().create(newTableId, mTypes);
+            table.moveTo(index, newTable);
+        }
+    }
 }
 
 World::Components::Components(World& world, Entity entity)

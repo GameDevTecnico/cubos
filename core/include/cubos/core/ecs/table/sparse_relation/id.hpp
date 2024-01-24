@@ -21,12 +21,14 @@ namespace cubos::core::ecs
         DataTypeId dataType;
         ArchetypeId from;
         ArchetypeId to;
+        int depth;
 
         /// @brief Constructs.
         /// @param dataType Relation data type.
         /// @param from From archetype identifier.
         /// @param to To archetype identifier.
-        SparseRelationTableId(DataTypeId dataType, ArchetypeId from, ArchetypeId to);
+        /// @param depth Depth of the relation. Used in tree relations, always 0 for others.
+        SparseRelationTableId(DataTypeId dataType, ArchetypeId from, ArchetypeId to, int depth = 0);
 
         /// @brief Compares with another identifier.
         /// @param other Identifier.

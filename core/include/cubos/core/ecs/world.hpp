@@ -212,9 +212,11 @@ namespace cubos::core::ecs
         }
 
     private:
-        template <typename... ComponentTypes>
-        friend class Query;
-        friend class CommandBuffer;
+        /// @brief Called when an entity's depth changes. Propagates the change to incoming relations.
+        /// @param index To entity index.
+        /// @param dataType Tree relation data type.
+        /// @param depth New depth.
+        void propagateDepth(uint32_t index, DataTypeId dataType, int depth);
 
         Types mTypes;
         EntityPool mEntityPool;
