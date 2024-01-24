@@ -91,9 +91,19 @@
             </dt>
             <dd>Removes all relations from the given index.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af8227fa17b7a094316b2ed39e7126527" class="m-doc">moveFrom</a>(</span><span class="m-doc-wrap">uint32_t from,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other) -&gt; std::size_t</span>
+            </dt>
+            <dd>Moves all relations with the given from index to another table.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af3fe2b03306c7f8366001aa2a0018ff6" class="m-doc">eraseTo</a>(</span><span class="m-doc-wrap">uint32_t to) -&gt; std::size_t</span>
             </dt>
             <dd>Removes all relations to the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a980d63d6c4c566628008d5943322ca14" class="m-doc">moveTo</a>(</span><span class="m-doc-wrap">uint32_t to,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other) -&gt; std::size_t</span>
+            </dt>
+            <dd>Moves all relations with the given to index to another table.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aba71a230e5bedda22fa4bda39e6fc6ab" class="m-doc">contains</a>(</span><span class="m-doc-wrap">uint32_t from,
               uint32_t to) const -&gt; bool</span>
@@ -260,6 +270,34 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="af8227fa17b7a094316b2ed39e7126527"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8227fa17b7a094316b2ed39e7126527" class="m-doc-self">moveFrom</a>(</span><span class="m-doc-wrap">uint32_t from,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other)</span></span>
+            </h3>
+            <p>Moves all relations with the given from index to another table.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From index.</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                  <td>Other table. Must have the same relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>How many relations were erased.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="af3fe2b03306c7f8366001aa2a0018ff6"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3fe2b03306c7f8366001aa2a0018ff6" class="m-doc-self">eraseTo</a>(</span><span class="m-doc-wrap">uint32_t to)</span></span>
@@ -278,7 +316,35 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>How many relations were erased.</td>
+                  <td>How many relations were moved.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a980d63d6c4c566628008d5943322ca14"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a980d63d6c4c566628008d5943322ca14" class="m-doc-self">moveTo</a>(</span><span class="m-doc-wrap">uint32_t to,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other)</span></span>
+            </h3>
+            <p>Moves all relations with the given to index to another table.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">to</td>
+                  <td>To index index.</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                  <td>Other table. Must have the same relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>How many relations were moved.</td>
                 </tr>
               </tfoot>
             </table>
