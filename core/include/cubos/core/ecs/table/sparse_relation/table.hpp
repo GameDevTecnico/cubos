@@ -66,10 +66,22 @@ namespace cubos::core::ecs
         /// @return How many relations were erased.
         std::size_t eraseFrom(uint32_t from);
 
+        /// @brief Moves all relations with the given from index to another table.
+        /// @param from From index.
+        /// @param other Other table. Must have the same relation type.
+        /// @return How many relations were erased.
+        std::size_t moveFrom(uint32_t from, SparseRelationTable& other);
+
         /// @brief Removes all relations to the given index.
         /// @param to To index.
-        /// @return How many relations were erased.
+        /// @return How many relations were moved.
         std::size_t eraseTo(uint32_t to);
+
+        /// @brief Moves all relations with the given to index to another table.
+        /// @param to To index index.
+        /// @param other Other table. Must have the same relation type.
+        /// @return How many relations were moved.
+        std::size_t moveTo(uint32_t to, SparseRelationTable& other);
 
         /// @brief Checks whether the given relation exists between the given indices.
         /// @param from From index.
