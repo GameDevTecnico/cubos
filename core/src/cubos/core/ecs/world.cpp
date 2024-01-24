@@ -161,6 +161,33 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
     auto toArchetype = mEntityPool.archetype(to.index);
     auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype};
 
+    if (mTypes.isTreeRelation(dataType))
+    {
+        // If the relation is tree-like, then there can only be one outgoing relation from the 'from'
+        // entity. We need to check if there is already a relation and erase it if there is one.
+
+        // TODO: this is a bit expensive at the moment, since we have to iterate over all tables with
+        // the same from archetype. We should keep an index to find the table directly.
+        auto& fromTables = mTables.sparseRelation().type(dataType).from();
+        if (fromTables.contains(fromArchetype))
+        {
+            for (auto tableId : fromTables.at(fromArchetype))
+            {
+                // Check if the 'from' entity is on this table.
+                auto& table = mTables.sparseRelation().at(tableId);
+                auto row = table.firstFrom(from.index);
+                if (row != table.size())
+                {
+                    // If it is, then call unrelate() to erase the relation.
+                    uint32_t fromIndex, toIndex;
+                    table.indices(row, fromIndex, toIndex);
+                    this->unrelate(from, Entity{toIndex, this->generation(toIndex)}, type);
+                    break;
+                }
+            }
+        }
+    }
+
     // Get or create the table and insert a new row.
     auto& table = mTables.sparseRelation().create(tableId, mTypes);
     table.insert(from.index, to.index, value);

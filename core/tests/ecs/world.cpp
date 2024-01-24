@@ -194,6 +194,23 @@ TEST_CASE("ecs::World")
         CHECK(fooFooFlag);
     }
 
+    SUBCASE("an entity can have at most one outgoing tree relation")
+    {
+        // Create three entities.
+        auto foo = world.create();
+        auto bar = world.create();
+        auto baz = world.create();
+
+        // Set up a tree relation from foo to bar.
+        world.relate(foo, bar, TreeRelation{});
+        CHECK(world.related<TreeRelation>(foo, bar));
+
+        // Set up a tree relation from foo to baz. This should overwrite the previous one.
+        world.relate(foo, baz, TreeRelation{});
+        CHECK_FALSE(world.related<TreeRelation>(foo, bar));
+        CHECK(world.related<TreeRelation>(foo, baz));
+    }
+
     SUBCASE("relations are correctly destructed when the world is destroyed")
     {
         bool destroyed = false;
