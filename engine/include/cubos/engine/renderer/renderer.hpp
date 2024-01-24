@@ -94,10 +94,11 @@ namespace cubos::engine
         /// @param camera Camera to use.
         /// @param frame Frame to draw.
         /// @param pickingBuffer Screen picking framebuffer.
+        /// @param enableScreenPicking Whether to draw to the screen picking buffer.
         /// @param usePostProcessing Whether to use post processing.
         /// @param target Target framebuffer to draw to.
         void render(const glm::mat4& view, const Viewport& viewport, const engine::Camera& camera,
-                    const RendererFrame& frame, const core::gl::Framebuffer& pickingBuffer,
+                    const RendererFrame& frame, const core::gl::Framebuffer& pickingBuffer, bool enableScreenPicking,
                     bool usePostProcessing = true, const core::gl::Framebuffer& target = nullptr);
 
         /// @brief Gets a reference to the post processing manager.
@@ -126,9 +127,10 @@ namespace cubos::engine
         /// @param frame Frame to draw.
         /// @param target Target framebuffer.
         /// @param pickingBuffer Screen picking framebuffer.
+        /// @param enableScreenPicking Whether to draw to the screen picking buffer.
         virtual void onRender(const glm::mat4& view, const Viewport& viewport, const Camera& camera,
                               const RendererFrame& frame, core::gl::Framebuffer target,
-                              core::gl::Framebuffer pickingBuffer) = 0;
+                              core::gl::Framebuffer pickingBuffer, bool enableScreenPicking) = 0;
 
     private:
         /// @brief Called when the internal texture used for post processing needs to be resized.

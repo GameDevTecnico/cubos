@@ -116,7 +116,8 @@ static void checkPaletteUpdateSystem(Assets& assets, Renderer& renderer, ActiveV
 }
 
 static void draw(Renderer& renderer, const ActiveCameras& activeCameras, RendererFrame& frame,
-                 Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query, ScreenPicker& screenPicker)
+                 Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query, ScreenPicker& screenPicker,
+                 Settings& settings)
 {
     Camera cameras[4]{};
     glm::mat4 views[4]{};
@@ -159,7 +160,8 @@ static void draw(Renderer& renderer, const ActiveCameras& activeCameras, Rendere
 
     for (int i = 0; i < cameraCount; ++i)
     {
-        renderer->render(views[i], viewports[i], cameras[i], frame, screenPicker.framebuffer());
+        renderer->render(views[i], viewports[i], cameras[i], frame, screenPicker.framebuffer(),
+                         settings.getBool("cubos.renderer.screenpicking.enabled", true));
     }
 
     frame.clear();
