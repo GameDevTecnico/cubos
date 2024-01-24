@@ -658,7 +658,8 @@ void DeferredRenderer::onResize(glm::uvec2 size)
 }
 
 void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport, const Camera& camera,
-                                const RendererFrame& frame, Framebuffer target, core::gl::Framebuffer pickingBuffer)
+                                const RendererFrame& frame, Framebuffer target, core::gl::Framebuffer pickingBuffer,
+                                bool enableScreenPicking)
 {
     // Steps:
     // 1. Prepare the MVP matrix.
@@ -786,29 +787,32 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
         mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
     }
 
-    // 5. Picking pass:
-    // 5.1. Set the picking pass state.
-    mRenderDevice.setFramebuffer(pickingBuffer);
-    mRenderDevice.setRasterState(mPickingRasterState);
-    mRenderDevice.setBlendState(mPickingBlendState);
-    mRenderDevice.setDepthStencilState(mPickingDepthStencilState);
-    mRenderDevice.setShaderPipeline(mPickingPipeline);
-    mPickingMVpBp->bind(mVpBuffer);
-
-    // 5.2. For each draw command:
-    for (const auto& drawCmd : frame.drawCmds())
+    if (enableScreenPicking)
     {
-        // 5.2.1. Update the MVP constant buffer with the model matrix.
-        mvp.m = drawCmd.modelMat;
-        memcpy(mVpBuffer->map(), &mvp, sizeof(MVP));
-        mVpBuffer->unmap();
+        // 5. Picking pass:
+        // 5.1. Set the picking pass state.
+        mRenderDevice.setFramebuffer(pickingBuffer);
+        mRenderDevice.setRasterState(mPickingRasterState);
+        mRenderDevice.setBlendState(mPickingBlendState);
+        mRenderDevice.setDepthStencilState(mPickingDepthStencilState);
+        mRenderDevice.setShaderPipeline(mPickingPipeline);
+        mPickingMVpBp->bind(mVpBuffer);
 
-        // 5.2.2. Draw the entity identifiers to the entity picking framebuffer.
-        auto grid = std::static_pointer_cast<DeferredGrid>(drawCmd.grid);
-        mPickingIndexBp->setConstant(drawCmd.entityIndex);
-        mRenderDevice.setVertexArray(grid->va);
-        mRenderDevice.setIndexBuffer(grid->ib);
-        mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
+        // 5.2. For each draw command:
+        for (const auto& drawCmd : frame.drawCmds())
+        {
+            // 5.2.1. Update the MVP constant buffer with the model matrix.
+            mvp.m = drawCmd.modelMat;
+            memcpy(mVpBuffer->map(), &mvp, sizeof(MVP));
+            mVpBuffer->unmap();
+
+            // 5.2.2. Draw the entity identifiers to the entity picking framebuffer.
+            auto grid = std::static_pointer_cast<DeferredGrid>(drawCmd.grid);
+            mPickingIndexBp->setConstant(drawCmd.entityIndex);
+            mRenderDevice.setVertexArray(grid->va);
+            mRenderDevice.setIndexBuffer(grid->ib);
+            mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
+        }
     }
 
     // 6. SSAO pass.

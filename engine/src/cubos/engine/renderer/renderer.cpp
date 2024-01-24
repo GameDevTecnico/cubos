@@ -26,17 +26,17 @@ glm::uvec2 BaseRenderer::size() const
 
 void BaseRenderer::render(const glm::mat4& view, const Viewport& viewport, const engine::Camera& camera,
                           const RendererFrame& frame, const core::gl::Framebuffer& pickingBuffer,
-                          bool usePostProcessing, const core::gl::Framebuffer& target)
+                          bool enableScreenPicking, bool usePostProcessing, const core::gl::Framebuffer& target)
 {
     if (usePostProcessing && mPpsManager.passCount() > 0)
     {
-        this->onRender(view, viewport, camera, frame, mFramebuffer, pickingBuffer);
+        this->onRender(view, viewport, camera, frame, mFramebuffer, pickingBuffer, enableScreenPicking);
         mPpsManager.provideInput(PostProcessingInput::Lighting, mTexture);
         mPpsManager.execute(target);
     }
     else
     {
-        this->onRender(view, viewport, camera, frame, target, pickingBuffer);
+        this->onRender(view, viewport, camera, frame, target, pickingBuffer, enableScreenPicking);
     }
 }
 
