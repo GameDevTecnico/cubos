@@ -161,6 +161,16 @@ namespace cubos::engine
         template <typename C>
         Cubos& addComponent();
 
+        /// @brief Adds a new relation type to the engine.
+        /// @tparam C Type of the relation.
+        /// @return Reference to this object, for chaining.
+        template <typename R>
+        Cubos& addRelation()
+        {
+            mWorld.registerRelation<R>();
+            return *this;
+        }
+
         /// @brief Adds a new event type to the engine.
         /// @tparam E Type of the event.
         /// @return Reference to this object, for chaining.
