@@ -74,6 +74,9 @@ namespace cubos::core::ecs
             /// @brief Whether the link is symmetric.
             bool isSymmetric;
 
+            /// @brief Link traversal type.
+            Traversal traversal;
+
             /// @brief From target index.
             int fromTarget;
 
