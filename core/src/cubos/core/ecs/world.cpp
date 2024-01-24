@@ -165,7 +165,7 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
     {
         // TODO: this is a bit expensive at the moment, since we have to iterate over all tables with
         // the same from archetype. Maybe we should keep an index to find the tables directly from the entities.
-        auto& fromTables = mTables.sparseRelation().type(dataType).from();
+        const auto& fromTables = mTables.sparseRelation().type(dataType).from();
 
         // If the relation is tree-like, then we need to find the depth of the 'to' entity in the tree,
         // to figure out which table to insert this relation into.
@@ -295,7 +295,7 @@ bool World::related(Entity from, Entity to, const reflection::Type& type) const
 void World::propagateDepth(uint32_t index, DataTypeId dataType, int depth)
 {
     auto archetype = mEntityPool.archetype(index);
-    auto& toTables = mTables.sparseRelation().type(dataType).to();
+    const auto& toTables = mTables.sparseRelation().type(dataType).to();
     if (toTables.contains(archetype))
     {
         // Collect all tables which contain relations which have the entity as the 'to' entity.
@@ -321,7 +321,8 @@ void World::propagateDepth(uint32_t index, DataTypeId dataType, int depth)
             for (auto row = table.firstTo(index); row != table.size(); row = table.nextTo(row))
             {
                 // Get the 'from' entity and recurse.
-                uint32_t fromIndex, toIndex;
+                uint32_t fromIndex;
+                uint32_t toIndex;
                 table.indices(row, fromIndex, toIndex);
                 this->propagateDepth(fromIndex, dataType, depth + 1);
             }
