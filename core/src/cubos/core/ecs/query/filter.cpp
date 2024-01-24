@@ -57,8 +57,12 @@ QueryFilter::QueryFilter(World& world, const std::vector<QueryTerm>& terms)
             mTermCursors.emplace_back(mTargetCount + mLinkCount);
             mLinks[mLinkCount].dataType = term.type;
             mLinks[mLinkCount].isSymmetric = world.types().isSymmetricRelation(term.type);
+            mLinks[mLinkCount].traversal = term.relation.traversal;
             mLinks[mLinkCount].fromTarget = term.relation.fromTarget;
             mLinks[mLinkCount].toTarget = term.relation.toTarget;
+            if (world.types().isTreeRelation(term.type))
+            {
+            }
             ++mLinkCount;
         }
         else
@@ -144,6 +148,7 @@ void QueryFilter::update()
     for (int linkIndex = 0; linkIndex < mLinkCount; ++linkIndex)
     {
         auto& link = mLinks[linkIndex];
+        auto prevSeenCount = link.seenCount;
 
         // Collect all tables which match any of the target archetypes.
         link.seenCount = mWorld.tables().sparseRelation().forEach(link.seenCount, [&](SparseRelationTableId id) {
@@ -222,6 +227,24 @@ void QueryFilter::update()
         if (!link.isSymmetric)
         {
             CUBOS_ASSERT(link.reverseTables.empty());
+        }
+
+        if (prevSeenCount != link.seenCount)
+        {
+            if (link.traversal == Traversal::Up)
+            {
+                CUBOS_ASSERT(!link.isSymmetric);
+                std::sort(
+                    link.tables.begin(), link.tables.end(),
+                    [](const SparseRelationTableId& a, const SparseRelationTableId& b) { return a.depth > b.depth; });
+            }
+            else if (link.traversal == Traversal::Down)
+            {
+                CUBOS_ASSERT(!link.isSymmetric);
+                std::sort(
+                    link.tables.begin(), link.tables.end(),
+                    [](const SparseRelationTableId& a, const SparseRelationTableId& b) { return a.depth < b.depth; });
+            }
         }
     }
 }

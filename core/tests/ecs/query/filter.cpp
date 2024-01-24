@@ -18,6 +18,7 @@ TEST_CASE("ecs::QueryFilter")
     auto parentComponent = world.types().id(reflect<ParentComponent>());
     auto emptyRelation = world.types().id(reflect<EmptyRelation>());
     auto symmetricRelation = world.types().id(reflect<SymmetricRelation>());
+    auto treeRelation = world.types().id(reflect<TreeRelation>());
 
     // Create some entities.
     auto e1 = world.create();
@@ -36,6 +37,10 @@ TEST_CASE("ecs::QueryFilter")
 
     world.relate(e1, e1, SymmetricRelation{});
     world.relate(e4P, e2I, SymmetricRelation{});
+
+    world.relate(e1, e2I, TreeRelation{});
+    world.relate(e2I, e4P, TreeRelation{});
+    world.relate(e3I, e4P, TreeRelation{});
 
     auto a = ArchetypeId::Empty;
     auto aI = world.archetypeGraph().with(a, ColumnId::make(integerComponent));
@@ -211,7 +216,7 @@ TEST_CASE("ecs::QueryFilter")
         }
     }
 
-    SUBCASE("with two targets and a single non-symmetric relation")
+    SUBCASE("with two targets and a single normal relation")
     {
         SUBCASE("unfiltered relation")
         {
@@ -1159,6 +1164,173 @@ TEST_CASE("ecs::QueryFilter")
                 {
                     auto view = filter.view().pin(0, e4P).pin(1, e2I);
                     REQUIRE(view.begin() == view.end());
+                }
+            }
+        }
+    }
+
+    SUBCASE("with two targets and a single tree relation")
+    {
+        SUBCASE("bottom to top traversal")
+        {
+            QueryFilter filter{world, {QueryTerm::makeRelation(treeRelation, 0, 1, Traversal::Up)}};
+
+            SUBCASE("no pins")
+            {
+                auto view = filter.view();
+                auto it = view.begin();
+                REQUIRE(it->entities[0] == e1);
+                REQUIRE(it->entities[1] == e2I);
+                ++it;
+                REQUIRE(it->entities[0] == e2I);
+                REQUIRE(it->entities[1] == e4P);
+                ++it;
+                REQUIRE(it->entities[0] == e3I);
+                REQUIRE(it->entities[1] == e4P);
+                ++it;
+                REQUIRE(it == view.end());
+            }
+
+            SUBCASE("first target pinned")
+            {
+                SUBCASE("on e1")
+                {
+                    auto view = filter.view().pin(0, e1);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e1);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e2I")
+                {
+                    auto view = filter.view().pin(0, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e4P);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e4P")
+                {
+                    auto view = filter.view().pin(0, e4P);
+                    REQUIRE(view.begin() == view.end());
+                }
+            }
+
+            SUBCASE("second target pinned")
+            {
+                SUBCASE("on e1")
+                {
+                    auto view = filter.view().pin(1, e1);
+                    REQUIRE(view.begin() == view.end());
+                }
+
+                SUBCASE("on e2I")
+                {
+                    auto view = filter.view().pin(1, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e1);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e4P")
+                {
+                    auto view = filter.view().pin(1, e4P);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e4P);
+                    ++it;
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e4P);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+            }
+        }
+
+        SUBCASE("top to bottom traversal")
+        {
+            QueryFilter filter{world, {QueryTerm::makeRelation(treeRelation, 0, 1, Traversal::Down)}};
+
+            SUBCASE("no pins")
+            {
+                auto view = filter.view();
+                auto it = view.begin();
+                REQUIRE(it->entities[0] == e2I);
+                REQUIRE(it->entities[1] == e4P);
+                ++it;
+                REQUIRE(it->entities[0] == e3I);
+                REQUIRE(it->entities[1] == e4P);
+                ++it;
+                REQUIRE(it->entities[0] == e1);
+                REQUIRE(it->entities[1] == e2I);
+                ++it;
+                REQUIRE(it == view.end());
+            }
+
+            SUBCASE("first target pinned")
+            {
+                SUBCASE("on e1")
+                {
+                    auto view = filter.view().pin(0, e1);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e1);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e2I")
+                {
+                    auto view = filter.view().pin(0, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e4P);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e4P")
+                {
+                    auto view = filter.view().pin(0, e4P);
+                    REQUIRE(view.begin() == view.end());
+                }
+            }
+
+            SUBCASE("second target pinned")
+            {
+                SUBCASE("on e1")
+                {
+                    auto view = filter.view().pin(1, e1);
+                    REQUIRE(view.begin() == view.end());
+                }
+
+                SUBCASE("on e2I")
+                {
+                    auto view = filter.view().pin(1, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e1);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e4P")
+                {
+                    auto view = filter.view().pin(1, e4P);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e4P);
+                    ++it;
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e4P);
+                    ++it;
+                    REQUIRE(it == view.end());
                 }
             }
         }
