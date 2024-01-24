@@ -445,14 +445,17 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
     rasterStateDesc.cullFace = Face::Back;
     rasterStateDesc.cullEnabled = true;
     mGeometryRasterState = mRenderDevice.createRasterState(rasterStateDesc);
+    mPickingRasterState = mRenderDevice.createRasterState(rasterStateDesc);
 
     BlendStateDesc blendStateDesc;
     mGeometryBlendState = mRenderDevice.createBlendState(blendStateDesc);
+    mPickingBlendState = mRenderDevice.createBlendState(blendStateDesc);
 
     DepthStencilStateDesc depthStencilStateDesc;
     depthStencilStateDesc.depth.enabled = true;
     depthStencilStateDesc.depth.writeEnabled = true;
     mGeometryDepthStencilState = mRenderDevice.createDepthStencilState(depthStencilStateDesc);
+    mPickingDepthStencilState = mRenderDevice.createDepthStencilState(depthStencilStateDesc);
 
     // Create the geometry pipeline.
     auto geometryVS = mRenderDevice.createShaderStage(Stage::Vertex, geometryPassVs);
@@ -467,6 +470,7 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
     auto pickingVS = mRenderDevice.createShaderStage(Stage::Vertex, pickingPassVs);
     auto pickingPS = mRenderDevice.createShaderStage(Stage::Pixel, pickingPassPs);
     mPickingPipeline = mRenderDevice.createShaderPipeline(pickingVS, pickingPS);
+    mPickingMVpBp = mPickingPipeline->getBindingPoint("MVP");
     mPickingIndexBp = mPickingPipeline->getBindingPoint("entityIndex");
 
     // Create the lighting pipeline.
@@ -666,8 +670,13 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
     //   3. For each draw command:
     //     1. Update the MVP constant buffer with the model matrix.
     //     2. Draw the geometry.
-    //     3. Draw the entity identifiers to the entity picking framebuffer.
-    // 5. Lighting pass:
+    // 5. Picking pass:
+    //   1. Set the picking pass state.
+    //   2. For each draw command:
+    //     1. Update the MVP constant buffer with the model matrix.
+    //     2. Draw the entity identifiers to the entity picking framebuffer.
+    // 6. SSAO pass
+    // 7. Lighting pass:
     //   1. Set the lighting pass state.
     //   2. Draw the screen quad.
 
@@ -775,24 +784,37 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
         mRenderDevice.setVertexArray(grid->va);
         mRenderDevice.setIndexBuffer(grid->ib);
         mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
+    }
 
-        // 4.3.3. Draw the entity identifiers to the entity picking framebuffer.
-        mRenderDevice.setFramebuffer(pickingBuffer);
-        mRenderDevice.setRasterState(mGeometryRasterState);
-        mRenderDevice.setBlendState(mGeometryBlendState);
-        mRenderDevice.setDepthStencilState(mGeometryDepthStencilState);
-        mRenderDevice.setShaderPipeline(mPickingPipeline);
+    // 5. Picking pass:
+    // 5.1. Set the picking pass state.
+    mRenderDevice.setFramebuffer(pickingBuffer);
+    mRenderDevice.setRasterState(mPickingRasterState);
+    mRenderDevice.setBlendState(mPickingBlendState);
+    mRenderDevice.setDepthStencilState(mPickingDepthStencilState);
+    mRenderDevice.setShaderPipeline(mPickingPipeline);
+    mPickingMVpBp->bind(mVpBuffer);
+
+    // 5.2. For each draw command:
+    for (const auto& drawCmd : frame.drawCmds())
+    {
+        // 5.2.1. Update the MVP constant buffer with the model matrix.
+        mvp.m = drawCmd.modelMat;
+        memcpy(mVpBuffer->map(), &mvp, sizeof(MVP));
+        mVpBuffer->unmap();
+
+        // 5.2.2. Draw the entity identifiers to the entity picking framebuffer.
+        auto grid = std::static_pointer_cast<DeferredGrid>(drawCmd.grid);
         mPickingIndexBp->setConstant(drawCmd.entityIndex);
-        mPickingPipeline->getBindingPoint("MVP")->bind(mVpBuffer);
         mRenderDevice.setVertexArray(grid->va);
         mRenderDevice.setIndexBuffer(grid->ib);
         mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
     }
 
-    // 5. SSAO pass.
+    // 6. SSAO pass.
     if (mSsaoEnabled)
     {
-        // 5.1. Set the SSAO pass state.
+        // 6.1. Set the SSAO pass state.
         mRenderDevice.setFramebuffer(mSsaoFb);
         mRenderDevice.setRasterState(nullptr);
         mRenderDevice.setBlendState(nullptr);
@@ -818,14 +840,14 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
         mRenderDevice.setVertexArray(mScreenQuadVa);
         mRenderDevice.drawTriangles(0, 6);
 
-        // 5.2. Set the SSAO blur pass state.
+        // 6.2. Set the SSAO blur pass state.
         mRenderDevice.setShaderPipeline(mSsaoBlurPipeline);
         mSsaoBlurTexBp->bind(mSsaoTex);
         mRenderDevice.drawTriangles(0, 6);
     }
 
-    // 6. Lighting pass.
-    // 6.1. Set the lighting pass state.
+    // 7. Lighting pass.
+    // 7.1. Set the lighting pass state.
     mRenderDevice.setFramebuffer(target);
     mRenderDevice.setRasterState(nullptr);
     mRenderDevice.setBlendState(nullptr);
@@ -855,7 +877,7 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
     mInvVBp->setConstant(glm::inverse(mvp.v));
     mInvPBp->setConstant(glm::inverse(mvp.p));
 
-    // 6.3. Draw the screen quad.
+    // 7.3. Draw the screen quad.
     mRenderDevice.setVertexArray(mScreenQuadVa);
     mRenderDevice.drawTriangles(0, 6);
 

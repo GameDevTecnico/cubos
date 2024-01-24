@@ -75,7 +75,11 @@ namespace cubos::engine
         // Screen picking pipeline
 
         core::gl::ShaderPipeline mPickingPipeline;
+        core::gl::ShaderBindingPoint mPickingMVpBp;
         core::gl::ShaderBindingPoint mPickingIndexBp;
+        core::gl::RasterState mPickingRasterState;
+        core::gl::BlendState mPickingBlendState;
+        core::gl::DepthStencilState mPickingDepthStencilState;
 
         // Lighting pass pipeline.
 
