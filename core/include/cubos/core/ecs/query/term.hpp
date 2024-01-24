@@ -10,6 +10,14 @@
 
 namespace cubos::core::ecs
 {
+    /// @brief Possible traversal types for tree relation terms.
+    enum class Traversal
+    {
+        Random, ///< Default traversal order. No specific ordering is required.
+        Down,   ///< Starts in the topmost entity and traverses down the relation.
+        Up,     ///< Starts in the bottommost entity and traverses up the relation.
+    };
+
     /// @brief Describes a term in a query.
     ///
     /// Terms are the building blocks used to build queries. Each term adds some restriction to what the query will
@@ -38,8 +46,9 @@ namespace cubos::core::ecs
         /// @brief Stores relation term data.
         struct Relation
         {
-            int fromTarget; ///< Index of the 'from' target accessed by this term.
-            int toTarget;   ///< Index of the 'to' target accessed by this term.
+            int fromTarget;      ///< Index of the 'from' target accessed by this term.
+            int toTarget;        ///< Index of the 'to' target accessed by this term.
+            Traversal traversal; ///< Traversal order for the relation.
         };
 
         /// @brief Type of the data matched by the term.
@@ -85,8 +94,10 @@ namespace cubos::core::ecs
         /// @param type Relation type.
         /// @param fromTarget Index of the target which must have the 'from' side of the relation.
         /// @param toTarget Index of the target which must have the 'to' side of the relation.
+        /// @param traversal Traversal order for the relation.
         /// @return Relation term.
-        static QueryTerm makeRelation(DataTypeId type, int fromTarget, int toTarget);
+        static QueryTerm makeRelation(DataTypeId type, int fromTarget, int toTarget,
+                                      Traversal traversal = Traversal::Random);
 
         /// @brief Checks if the term is an entity term.
         /// @return Whether it's an entity term.

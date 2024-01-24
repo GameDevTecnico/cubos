@@ -36,11 +36,11 @@ QueryTerm QueryTerm::makeOptComponent(DataTypeId type, int target)
     };
 }
 
-QueryTerm QueryTerm::makeRelation(DataTypeId type, int fromTarget, int toTarget)
+QueryTerm QueryTerm::makeRelation(DataTypeId type, int fromTarget, int toTarget, Traversal traversal)
 {
     return {
         .type = type,
-        .relation = {.fromTarget = fromTarget, .toTarget = toTarget},
+        .relation = {.fromTarget = fromTarget, .toTarget = toTarget, .traversal = traversal},
     };
 }
 
@@ -79,7 +79,8 @@ bool QueryTerm::compare(const Types& types, const QueryTerm& other) const
 
     if (this->isRelation(types))
     {
-        return relation.fromTarget == other.relation.fromTarget && relation.toTarget == other.relation.toTarget;
+        return relation.fromTarget == other.relation.fromTarget && relation.toTarget == other.relation.toTarget &&
+               relation.traversal == other.relation.traversal;
     }
 
     CUBOS_UNREACHABLE();
@@ -89,7 +90,7 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
                                           std::vector<QueryTerm>& otherTerms)
 {
     // This code assumes otherTerms comes from the query argument types, and thus, all of its targets
-    // should be unspecified (-1).
+    // should be unspecified (-1) and other options should have their default values.
 
     std::vector<QueryTerm> terms{};
     int defaultTarget = 0;
@@ -166,7 +167,8 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
             }
             else if (baseTerm.isComponent(types))
             {
-                CUBOS_ASSERT(otherTerm.component.target == -1); // See comment at the beginning of the function.
+                CUBOS_ASSERT(otherTerm.component.target == -1 &&
+                             !otherTerm.component.without); // See comment at the beginning of the function.
 
                 // Code above should ensure terms never match if they have different without values.
                 CUBOS_ASSERT(baseTerm.component.without == otherTerm.component.without);
@@ -181,8 +183,9 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
             }
             else if (baseTerm.isRelation(types))
             {
-                CUBOS_ASSERT(otherTerm.relation.fromTarget == -1 &&
-                             otherTerm.relation.toTarget == -1); // See comment at the beginning of the function.
+                CUBOS_ASSERT(otherTerm.relation.fromTarget == -1 && otherTerm.relation.toTarget == -1 &&
+                             otherTerm.relation.traversal ==
+                                 Traversal::Random); // See comment at the beginning of the function.
 
                 if (baseTerm.relation.fromTarget == -1)
                 {
@@ -196,6 +199,7 @@ std::vector<QueryTerm> QueryTerm::resolve(const Types& types, const std::vector<
 
                 otherTerm.relation.fromTarget = baseTerm.relation.fromTarget;
                 otherTerm.relation.toTarget = baseTerm.relation.toTarget;
+                otherTerm.relation.traversal = baseTerm.relation.traversal;
             }
         }
 
