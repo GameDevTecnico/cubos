@@ -117,11 +117,10 @@
             </dt>
             <dd>Removes all relations of an entity.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a95e8fa4943727489d91fa0d73a88115d" class="m-doc">collect</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableId.html" class="m-doc">SparseRelationTableId</a>&gt;&amp; tables,
-              std::size_t counter,
-              auto filter) -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa358be746390f6f1b52f617f97099e91" class="m-doc">forEach</a>(</span><span class="m-doc-wrap">std::size_t counter,
+              auto func) -&gt; std::size_t</span>
             </dt>
-            <dd>Collects new tables which match the given filter.</dd>
+            <dd>Calls the given function for each new table.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#afe0b74f480dfd9590518decff6413f35" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; auto</span>
             </dt>
@@ -306,29 +305,24 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a95e8fa4943727489d91fa0d73a88115d"><div>
+          <section class="m-doc-details" id="aa358be746390f6f1b52f617f97099e91"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTableRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a95e8fa4943727489d91fa0d73a88115d" class="m-doc-self">collect</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableId.html" class="m-doc">SparseRelationTableId</a>&gt;&amp; tables,
-              std::size_t counter,
-              auto filter)</span></span>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTableRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa358be746390f6f1b52f617f97099e91" class="m-doc-self">forEach</a>(</span><span class="m-doc-wrap">std::size_t counter,
+              auto func)</span></span>
             </h3>
-            <p>Collects new tables which match the given filter.</p>
+            <p>Calls the given function for each new table.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">tables&nbsp;<span class="m-label m-flat m-warning">out</span></td>
-                  <td>Vector to insert the table identifiers into.</td>
-                </tr>
-                <tr>
-                  <td>counter</td>
+                  <td style="width: 1%">counter</td>
                   <td>Counter previously returned by this function. Zero should be used for the first call.</td>
                 </tr>
                 <tr>
-                  <td>filter</td>
-                  <td>Function which receives a table identifier and returns a boolean.</td>
+                  <td>func</td>
+                  <td>Function which receives a table identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
