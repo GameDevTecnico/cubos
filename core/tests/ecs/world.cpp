@@ -11,6 +11,7 @@ using cubos::core::ecs::SparseRelationTableId;
 using cubos::core::ecs::World;
 using cubos::core::reflection::reflect;
 
+// NOLINTBEGIN(readability-function-size)
 TEST_CASE("ecs::World")
 {
     World world{};
@@ -337,3 +338,4 @@ TEST_CASE("ecs::World")
         REQUIRE(destroyed);
     }
 }
+// NOLINTEND(readability-function-size)
