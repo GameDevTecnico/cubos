@@ -62,11 +62,25 @@ TEST_CASE("ecs::QueryTerm")
         CHECK(term5.type == emptyRelation);
         CHECK(term5.relation.fromTarget == 1);
         CHECK(term5.relation.toTarget == 2);
+        CHECK(term5.relation.traversal == Traversal::Random);
         CHECK(term5.compare(types, term5));
         CHECK_FALSE(term5.compare(types, term4));
         CHECK_FALSE(term5.compare(types, term3));
         CHECK_FALSE(term5.compare(types, term2));
         CHECK_FALSE(term5.compare(types, term1));
+
+        auto term6 = QueryTerm::makeRelation(emptyRelation, 2, 1, Traversal::Down);
+        CHECK(term6.isRelation(types));
+        CHECK(term6.type == emptyRelation);
+        CHECK(term6.relation.fromTarget == 2);
+        CHECK(term6.relation.toTarget == 1);
+        CHECK(term6.relation.traversal == Traversal::Down);
+        CHECK(term6.compare(types, term6));
+        CHECK_FALSE(term6.compare(types, term5));
+        CHECK_FALSE(term6.compare(types, term4));
+        CHECK_FALSE(term6.compare(types, term3));
+        CHECK_FALSE(term6.compare(types, term2));
+        CHECK_FALSE(term6.compare(types, term1));
     }
 
     SUBCASE("empty resolve")
@@ -205,6 +219,7 @@ TEST_CASE("ecs::QueryTerm")
         REQUIRE(result[1].isRelation(types));
         REQUIRE(result[1].relation.fromTarget == 0);
         REQUIRE(result[1].relation.toTarget == 1);
+        REQUIRE(result[1].relation.traversal == Traversal::Random);
 
         REQUIRE(result[2].isEntity());
         REQUIRE(result[2].entity.target == 1);
@@ -212,6 +227,7 @@ TEST_CASE("ecs::QueryTerm")
         REQUIRE(result[3].isRelation(types));
         REQUIRE(result[3].relation.fromTarget == 1);
         REQUIRE(result[3].relation.toTarget == 2);
+        REQUIRE(result[3].relation.traversal == Traversal::Random);
 
         REQUIRE(result[4].isEntity());
         REQUIRE(result[4].entity.target == 2);
@@ -220,9 +236,11 @@ TEST_CASE("ecs::QueryTerm")
         REQUIRE(otherTerms[0].entity.target == 0);
         REQUIRE(otherTerms[1].relation.fromTarget == 0);
         REQUIRE(otherTerms[1].relation.toTarget == 1);
+        REQUIRE(otherTerms[1].relation.traversal == Traversal::Random);
         REQUIRE(otherTerms[2].entity.target == 1);
         REQUIRE(otherTerms[3].relation.fromTarget == 1);
         REQUIRE(otherTerms[3].relation.toTarget == 2);
+        REQUIRE(otherTerms[3].relation.traversal == Traversal::Random);
         REQUIRE(otherTerms[4].entity.target == 2);
     }
 
@@ -249,6 +267,7 @@ TEST_CASE("ecs::QueryTerm")
         REQUIRE(result[1].isRelation(types));
         REQUIRE(result[1].relation.fromTarget == 0);
         REQUIRE(result[1].relation.toTarget == 1);
+        REQUIRE(result[1].relation.traversal == Traversal::Random);
 
         REQUIRE(result[2].isEntity());
         REQUIRE(result[2].entity.target == 1);
@@ -256,6 +275,43 @@ TEST_CASE("ecs::QueryTerm")
         REQUIRE(otherTerms.size() == 2);
         REQUIRE(otherTerms[0].entity.target == 0);
         REQUIRE(otherTerms[1].entity.target == 1);
+    }
+
+    SUBCASE("resolve with relation with specific traversal")
+    {
+        // Equivalent to having Query<Entity, Entity> with the manual terms Entity(0), EmptyRelation(0, 1), Entity(1).
+        std::vector<QueryTerm> otherTerms = {
+            QueryTerm::makeEntity(-1),
+            QueryTerm::makeRelation(emptyRelation, -1, -1),
+            QueryTerm::makeEntity(-1),
+        };
+        auto result = QueryTerm::resolve(types,
+                                         {
+                                             QueryTerm::makeEntity(1),
+                                             QueryTerm::makeRelation(emptyRelation, 1, 0, Traversal::Up),
+                                             QueryTerm::makeEntity(0),
+                                         },
+                                         otherTerms);
+
+        REQUIRE(result.size() == 3);
+
+        REQUIRE(result[0].isEntity());
+        REQUIRE(result[0].entity.target == 1);
+
+        REQUIRE(result[1].isRelation(types));
+        REQUIRE(result[1].relation.fromTarget == 1);
+        REQUIRE(result[1].relation.toTarget == 0);
+        REQUIRE(result[1].relation.traversal == Traversal::Up);
+
+        REQUIRE(result[2].isEntity());
+        REQUIRE(result[2].entity.target == 0);
+
+        REQUIRE(otherTerms.size() == 3);
+        REQUIRE(otherTerms[0].entity.target == 1);
+        REQUIRE(otherTerms[1].relation.fromTarget == 1);
+        REQUIRE(otherTerms[1].relation.toTarget == 0);
+        REQUIRE(otherTerms[1].relation.traversal == Traversal::Up);
+        REQUIRE(otherTerms[2].entity.target == 0);
     }
 }
 // NOLINTEND(readability-function-size)
