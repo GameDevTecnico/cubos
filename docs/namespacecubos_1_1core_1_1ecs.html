@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
               </ul>
             </li>
           </ul>
@@ -146,6 +147,10 @@
               struct <a href="structcubos_1_1core_1_1ecs_1_1SymmetricTrait.html" class="m-doc">SymmetricTrait</a>
             </dt>
             <dd>Trait used to identify symmetric relations.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1TreeTrait.html" class="m-doc">TreeTrait</a>
+            </dt>
+            <dd>Trait used to identify tree relations.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">TypeBuilder</a>
@@ -256,6 +261,50 @@
             </dt>
             <dd>Holds entities, their components and resources.</dd>
           </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> { </span><span class="m-doc-wrap"><a href="#ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23" class="m-doc">Random</a>,
+              <a href="#ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53" class="m-doc">Down</a>,
+              <a href="#ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa" class="m-doc">Up</a> }</span>
+            </dt>
+            <dd>Possible traversal types for tree relation terms.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="ab7ac3d0b627b68d4303a38fcef673b82"><div>
+            <h3>
+              enum class cubos::<wbr />core::<wbr />ecs::<wbr /><a href="#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc-self">Traversal</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="term_8hpp.html">&lt;core/ecs/query/term.hpp&gt;</a></div>
+            </h3>
+            <p>Possible traversal types for tree relation terms.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23">Random</a></td>
+                  <td>
+                  <p>Default traversal order. No specific ordering is required.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53">Down</a></td>
+                  <td>
+                  <p>Starts in the topmost entity and traverses down the relation.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa">Up</a></td>
+                  <td>
+                  <p>Starts in the bottommost entity and traverses up the relation.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

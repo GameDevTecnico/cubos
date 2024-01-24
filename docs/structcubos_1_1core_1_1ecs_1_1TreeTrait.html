@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::QueryTerm::Relation struct | CUBOS. Docs</title>
+  <title>cubos::core::ecs::TreeTrait struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,38 +46,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html">QueryTerm</a>::<wbr/></span>Relation <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="term_8hpp.html">&lt;core/ecs/query/term.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>TreeTrait <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="reflection_8hpp.html">&lt;core/ecs/reflection.hpp&gt;</a></div>
         </h1>
-        <p>Stores relation term data.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a4d98098f0d584265d76b3c36f18fc932">
-              int <a href="#a4d98098f0d584265d76b3c36f18fc932" class="m-doc-self">fromTarget</a>
-            </dt>
-            <dd>Index of the &#x27;from&#x27; target accessed by this term.</dd>
-            <dt id="a8122c648ab224b82a6e1d3beed98ae23">
-              int <a href="#a8122c648ab224b82a6e1d3beed98ae23" class="m-doc-self">toTarget</a>
-            </dt>
-            <dd>Index of the &#x27;to&#x27; target accessed by this term.</dd>
-            <dt id="ab4ee5d855baddcb48127c794b51041af">
-              <a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> <a href="#ab4ee5d855baddcb48127c794b51041af" class="m-doc-self">traversal</a>
-            </dt>
-            <dd>Traversal order for the relation.</dd>
-          </dl>
-        </section>
+        <p>Trait used to identify tree relations.</p>
+<p>Tree relations are relations which form trees. Each entity must have at most one target entity for a given tree relation type. These can be used to represent parent-child relationships.</p>
       </div>
     </div>
   </div>
