@@ -17,6 +17,14 @@ namespace cubos::core::ecs
     {
     };
 
+    /// @brief Trait used to identify tree relations.
+    ///
+    /// Tree relations are relations which form trees. Each entity must have at most one target entity for a given tree
+    /// relation type. These can be used to represent parent-child relationships.
+    struct TreeTrait
+    {
+    };
+
     /// @brief Builder for @ref reflection::Type objects which represent ECS types.
     ///
     /// Used to reduce the amount of boilerplate code required to define a ECS types.
@@ -42,6 +50,14 @@ namespace cubos::core::ecs
         TypeBuilder&& symmetric() &&
         {
             mType.with(SymmetricTrait{});
+            return std::move(*this);
+        }
+
+        /// @brief Makes the type a tree relation. Only used by relation types.
+        /// @return Builder.
+        TypeBuilder&& tree() &&
+        {
+            mType.with(TreeTrait{});
             return std::move(*this);
         }
 

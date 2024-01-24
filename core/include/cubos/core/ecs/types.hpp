@@ -85,6 +85,11 @@ namespace cubos::core::ecs
         /// @return Whether the identifier refers to a symmetric relation.
         bool isSymmetricRelation(DataTypeId id) const;
 
+        /// @brief Checks if the given data type is a tree relation.
+        /// @param id Data type identifier.
+        /// @return Whether the identifier refers to a tree relation.
+        bool isTreeRelation(DataTypeId id) const;
+
         /// @brief Gets a type registry with only the component types.
         /// @return Component type registry.
         reflection::TypeRegistry components() const;
@@ -103,6 +108,7 @@ namespace cubos::core::ecs
             const reflection::Type* type; ///< Data type.
             Kind kind;                    ///< Data type kind.
             bool isSymmetric;             ///< Whether the relation is symmetric (ignored for components).
+            bool isTree;                  ///< Whether the relation forms trees (ignored for components).
         };
 
         /// @brief Registers a new data type.

@@ -68,6 +68,14 @@ struct SymmetricRelation
     int value;
 };
 
+// A tree relation which stores a single integer.
+struct TreeRelation
+{
+    CUBOS_REFLECT;
+
+    int value;
+};
+
 // A relation which can be used to test if destructors are called correctly.
 struct DetectDestructorRelation
 {
@@ -87,5 +95,6 @@ inline void setupWorld(cubos::core::ecs::World& world)
     world.registerRelation<EmptyRelation>();
     world.registerRelation<IntegerRelation>();
     world.registerRelation<SymmetricRelation>();
+    world.registerRelation<TreeRelation>();
     world.registerRelation<DetectDestructorRelation>();
 }
