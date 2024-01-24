@@ -53,7 +53,7 @@ static void resize(Renderer& renderer, EventReader<WindowEvent> evs)
 }
 
 static void frameGrids(const Assets& assets, Renderer& renderer, RendererFrame& frame,
-                       Query<const Entity&, RenderableGrid&, const LocalToWorld&> query)
+                       Query<Entity, RenderableGrid&, const LocalToWorld&> query)
 {
     for (auto [entity, grid, localToWorld] : query)
     {
