@@ -61,4 +61,5 @@ void SparseRelationTableRegistry::TypeIndex::insert(SparseRelationTableId id)
 {
     mSparseRelationTableIdsByFrom[id.from].emplace_back(id);
     mSparseRelationTableIdsByTo[id.to].emplace_back(id);
+    mMaxDepth = mMaxDepth < id.depth ? id.depth : mMaxDepth;
 }

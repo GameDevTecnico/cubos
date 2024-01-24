@@ -5,8 +5,11 @@
 
 #include "utils.hpp"
 
+using cubos::core::ecs::ArchetypeId;
 using cubos::core::ecs::Entity;
+using cubos::core::ecs::SparseRelationTableId;
 using cubos::core::ecs::World;
+using cubos::core::reflection::reflect;
 
 TEST_CASE("ecs::World")
 {
@@ -209,6 +212,80 @@ TEST_CASE("ecs::World")
         world.relate(foo, baz, TreeRelation{});
         CHECK_FALSE(world.related<TreeRelation>(foo, bar));
         CHECK(world.related<TreeRelation>(foo, baz));
+    }
+
+    SUBCASE("tree relation depth is managed correctly")
+    {
+        auto treeRelation = world.types().id(reflect<TreeRelation>());
+        SparseRelationTableId tableId = {treeRelation, ArchetypeId::Empty, ArchetypeId::Empty, 0};
+
+        // Create four entities.
+        auto foo = world.create();
+        auto bar = world.create();
+        auto baz = world.create();
+        auto qux = world.create();
+
+        // Set up a tree relation from foo to bar.
+        world.relate(foo, bar, TreeRelation{});
+        REQUIRE(world.tables().sparseRelation().contains(tableId));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.related<TreeRelation>(foo, bar));
+
+        // Set up a tree relation from bar to baz.
+        world.relate(bar, baz, TreeRelation{});
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        tableId.depth = 1;
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.related<TreeRelation>(foo, bar));
+        REQUIRE(world.related<TreeRelation>(bar, baz));
+
+        // Set up a tree relation from baz to qux.
+        world.relate(baz, qux, TreeRelation{});
+        tableId.depth = 0;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(baz.index, qux.index));
+        tableId.depth = 1;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        tableId.depth = 2;
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.related<TreeRelation>(foo, bar));
+        REQUIRE(world.related<TreeRelation>(bar, baz));
+        REQUIRE(world.related<TreeRelation>(baz, qux));
+
+        // Remove the relation from bar to baz.
+        world.unrelate<TreeRelation>(bar, baz);
+        tableId.depth = 0;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(baz.index, qux.index));
+        tableId.depth = 1;
+        REQUIRE(world.tables().sparseRelation().at(tableId).size() == 0);
+        tableId.depth = 2;
+        REQUIRE(world.tables().sparseRelation().at(tableId).size() == 0);
+        REQUIRE_FALSE(world.related<TreeRelation>(bar, baz));
+
+        // Add back the relation from bar to baz.
+        world.relate(bar, baz, TreeRelation{});
+        tableId.depth = 0;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(baz.index, qux.index));
+        tableId.depth = 1;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        tableId.depth = 2;
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+
+        // Remove the relation from baz to qux.
+        world.unrelate<TreeRelation>(baz, qux);
+        tableId.depth = 0;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(baz.index, qux.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        tableId.depth = 1;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
     }
 
     SUBCASE("relations are correctly destructed when the world is destroyed")
