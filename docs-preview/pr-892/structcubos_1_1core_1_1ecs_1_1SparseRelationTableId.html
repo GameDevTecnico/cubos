@@ -66,9 +66,10 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a0f5c9e83c8b17b59ce6c6ffea554a573" class="m-doc">SparseRelationTableId</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> dataType,
+              <span class="m-doc-wrap-bumper"><a href="#a2b02d09aaa007e3045c60fe0e654f446" class="m-doc">SparseRelationTableId</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> dataType,
               <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> from,
-              <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> to)</span>
+              <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> to,
+              int depth = 0)</span>
             </dt>
             <dd>Constructs.</dd>
           </dl>
@@ -84,11 +85,12 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a0f5c9e83c8b17b59ce6c6ffea554a573"><div>
+          <section class="m-doc-details" id="a2b02d09aaa007e3045c60fe0e654f446"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTableId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f5c9e83c8b17b59ce6c6ffea554a573" class="m-doc-self">SparseRelationTableId</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> dataType,
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTableId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b02d09aaa007e3045c60fe0e654f446" class="m-doc-self">SparseRelationTableId</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> dataType,
               <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> from,
-              <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> to)</span></span>
+              <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> to,
+              int depth = 0)</span></span>
             </h3>
             <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -107,6 +109,10 @@
                 <tr>
                   <td>to</td>
                   <td>To archetype identifier.</td>
+                </tr>
+                <tr>
+                  <td>depth</td>
+                  <td>Depth of the relation. Used in tree relations, always 0 for others.</td>
                 </tr>
               </tbody>
             </table>
