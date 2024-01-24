@@ -104,6 +104,22 @@ std::size_t SparseRelationTable::eraseFrom(uint32_t from)
     return count;
 }
 
+std::size_t SparseRelationTable::moveFrom(uint32_t from, SparseRelationTable& other)
+{
+    std::size_t count = 0;
+
+    while (mFromRows.contains(from))
+    {
+        auto rowIndex = mFromRows.at(from).first;
+        auto& row = mRows[rowIndex];
+        other.insert(row.from, row.to, this->at(rowIndex));
+        this->erase(row.from, row.to);
+        count += 1;
+    }
+
+    return count;
+}
+
 std::size_t SparseRelationTable::eraseTo(uint32_t to)
 {
     std::size_t count = 0;
@@ -111,6 +127,22 @@ std::size_t SparseRelationTable::eraseTo(uint32_t to)
     while (mToRows.contains(to))
     {
         auto& row = mRows[mToRows.at(to).first];
+        this->erase(row.from, row.to);
+        count += 1;
+    }
+
+    return count;
+}
+
+std::size_t SparseRelationTable::moveTo(uint32_t to, SparseRelationTable& other)
+{
+    std::size_t count = 0;
+
+    while (mToRows.contains(to))
+    {
+        auto rowIndex = mToRows.at(to).first;
+        auto& row = mRows[rowIndex];
+        other.insert(row.from, row.to, this->at(rowIndex));
         this->erase(row.from, row.to);
         count += 1;
     }

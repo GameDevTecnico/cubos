@@ -264,4 +264,46 @@ TEST_CASE("ecs::SparseRelationTable") // NOLINT(readability-function-size)
             }
         }
     }
+
+    SUBCASE("moving from one table to another")
+    {
+        bool flag1 = false;
+        bool flag2 = false;
+        DetectDestructorRelation detector1{{&flag1}};
+        DetectDestructorRelation detector2{{&flag2}};
+
+        SparseRelationTable srcTable{reflect<DetectDestructorRelation>()};
+        SparseRelationTable dstTable{reflect<DetectDestructorRelation>()};
+
+        // Insert two relations into the source table.
+        REQUIRE_FALSE(srcTable.insert(1, 2, &detector1));
+        REQUIRE_FALSE(srcTable.insert(2, 1, &detector2));
+        REQUIRE(srcTable.contains(1, 2));
+        REQUIRE(srcTable.contains(2, 1));
+
+        // Move the relations with from index 1 to the destination table.
+        REQUIRE(srcTable.moveFrom(1, dstTable));
+        REQUIRE_FALSE(flag1);
+        REQUIRE_FALSE(flag2);
+        REQUIRE_FALSE(srcTable.contains(1, 2));
+        REQUIRE(srcTable.contains(2, 1));
+        REQUIRE(dstTable.contains(1, 2));
+        REQUIRE_FALSE(dstTable.contains(2, 1));
+
+        // Move the relations with to index 1 to the destination table.
+        REQUIRE(srcTable.moveTo(1, dstTable));
+        REQUIRE_FALSE(flag1);
+        REQUIRE_FALSE(flag2);
+        REQUIRE_FALSE(srcTable.contains(1, 2));
+        REQUIRE_FALSE(srcTable.contains(2, 1));
+        REQUIRE(dstTable.contains(1, 2));
+        REQUIRE(dstTable.contains(2, 1));
+
+        // Erase both relations.
+        REQUIRE(dstTable.erase(1, 2));
+        REQUIRE(flag1);
+        REQUIRE_FALSE(flag2);
+        REQUIRE(dstTable.erase(2, 1));
+        REQUIRE(flag2);
+    }
 }
