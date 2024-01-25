@@ -255,6 +255,9 @@ TEST_CASE("ecs::SystemWrapper")
             // Spawn entity with no components.
             Entity ent;
             runSystem(world, cmdBuf, [&](Commands cmd) { ent = cmd.create().entity(); });
+            cmdBuf.commit();
+
+            // Check that the entity has no components.
             runSystem(world, cmdBuf, [&](Query<IntegerComponent&> q) { CHECK_FALSE(q.at(ent).contains()); });
 
             // Add component.

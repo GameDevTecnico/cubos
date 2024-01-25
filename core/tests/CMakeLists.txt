@@ -46,6 +46,8 @@ add_executable(
     ecs/system.cpp
     ecs/dispatcher.cpp
 
+    ecs/utils/expected.cpp
+    ecs/utils/action.cpp
     ecs/types.cpp
     ecs/table/dense/table.cpp
     ecs/table/sparse_relation/table.cpp
@@ -54,6 +56,7 @@ add_executable(
     ecs/query/data.cpp
     ecs/query/term.cpp
     ecs/query/filter.cpp
+    ecs/stress.cpp
 
     geom/box.cpp
     geom/capsule.cpp
