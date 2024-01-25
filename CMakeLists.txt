@@ -8,8 +8,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 set(CMAKE_CXX_STANDARD 20)
 
-# Should clang-tidy errors be automatically fixed?
 option(FIX_CLANG_TIDY_ERRORS "Automatically fix clang-tidy errors" OFF)
+option(DOCTEST_USE_SUBMODULE "Compile doctest from source?" ON)
 
 # Enable coverage reports
 option(ENABLE_COVERAGE "Generate coverage report" OFF)
@@ -98,6 +98,14 @@ function(cubos_common_target_options target)
         endif()
     endif()
 endfunction()
+
+# Add doctest as a submodule if it is not installed
+
+if (DOCTEST_USE_SUBMODULE)
+    add_subdirectory(lib/doctest)
+else ()
+    find_package(doctest REQUIRED)
+endif ()
 
 add_subdirectory(core)
 add_subdirectory(tools)
