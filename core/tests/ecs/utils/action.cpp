@@ -192,24 +192,6 @@ RelateAction::RelateAction(Entity from, Entity to, const Type& type, int value)
 
 Action* RelateAction::random(ExpectedWorld& expected)
 {
-    if (expected.aliveEntities.empty())
-    {
-        return nullptr;
-    }
-
-    auto it = expected.aliveEntities.begin();
-    std::advance(it, randomIndex(expected.aliveEntities.size()));
-    const auto& from = it->first;
-
-    if (expected.aliveEntities.empty())
-    {
-        return nullptr;
-    }
-
-    auto toIt = expected.aliveEntities.begin();
-    std::advance(toIt, randomIndex(expected.aliveEntities.size()));
-    const auto& to = toIt->first;
-
     if (expected.relationTypes.empty())
     {
         return nullptr;
@@ -218,6 +200,33 @@ Action* RelateAction::random(ExpectedWorld& expected)
     auto typeIt = expected.relationTypes.begin();
     std::advance(typeIt, randomIndex(expected.relationTypes.size()));
     const auto* type = *typeIt;
+
+    if (expected.aliveEntities.size() < 2)
+    {
+        return nullptr;
+    }
+
+    Entity from;
+    Entity to;
+
+    do
+    {
+        auto it = expected.aliveEntities.begin();
+        std::advance(it, randomIndex(expected.aliveEntities.size()));
+        from = it->first;
+
+        if (expected.aliveEntities.empty())
+        {
+            return nullptr;
+        }
+
+        auto toIt = expected.aliveEntities.begin();
+        std::advance(toIt, randomIndex(expected.aliveEntities.size()));
+        to = toIt->first;
+
+        // We want to avoid creating cycles in tree relations, so we only accept relations where the 'from' entity has a
+        // lower index than the 'to' entity.
+    } while (from.index >= to.index && type->has<TreeTrait>());
 
     return new RelateAction(from, to, *type, rand());
 }
@@ -233,6 +242,17 @@ void RelateAction::test(World& world, ExpectedWorld& expected)
 {
     ExpectedInteger relation{mValue};
     world.relate(mFrom, mTo, mType, &relation);
+
+    if (mType.has<TreeTrait>())
+    {
+        // Then we overwrite any previous outgoing relations.
+        for (auto [to, value] : expected.aliveEntities[mFrom].outgoing[&mType])
+        {
+            expected.aliveEntities[to].incoming[&mType].erase(mFrom);
+        }
+
+        expected.aliveEntities[mFrom].outgoing[&mType].clear();
+    }
 
     if (mType.has<SymmetricTrait>())
     {

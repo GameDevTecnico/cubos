@@ -42,10 +42,9 @@ namespace test::ecs
         ~ExpectedWorld();
 
         const Type& registerComponent(std::string name);
-
         const Type& registerRelation(std::string name);
-
         const Type& registerSymmetricRelation(std::string name);
+        const Type& registerTreeRelation(std::string name);
 
         // Checks if the given world types match the expected types.
         void testTypes(World& world);

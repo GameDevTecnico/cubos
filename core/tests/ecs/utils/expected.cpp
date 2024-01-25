@@ -10,6 +10,7 @@
 using cubos::core::ecs::QueryFilter;
 using cubos::core::ecs::QueryTerm;
 using cubos::core::ecs::SymmetricTrait;
+using cubos::core::ecs::TreeTrait;
 
 using namespace test::ecs;
 
@@ -51,6 +52,13 @@ const Type& ExpectedWorld::registerRelation(std::string name)
 const Type& ExpectedWorld::registerSymmetricRelation(std::string name)
 {
     auto& type = ExpectedInteger::createType(std::move(name)).with(SymmetricTrait{});
+    relationTypes.insert(&type);
+    return type;
+}
+
+const Type& ExpectedWorld::registerTreeRelation(std::string name)
+{
+    auto& type = ExpectedInteger::createType(std::move(name)).with(TreeTrait{});
     relationTypes.insert(&type);
     return type;
 }
