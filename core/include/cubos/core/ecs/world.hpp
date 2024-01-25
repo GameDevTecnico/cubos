@@ -211,6 +211,40 @@ namespace cubos::core::ecs
             return this->related(from, to, reflection::reflect<T>());
         }
 
+        /// @brief Gets a pointer to the relation value between the two given entities.
+        ///
+        /// The relation must @ref related() "exist".
+        ///
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @param type Relation type.
+        /// @return Pointer to relation value.
+        void* relation(Entity from, Entity to, const reflection::Type& type);
+
+        /// @copydoc relation(Entity, Entity, const reflection::Type&)
+        const void* relation(Entity from, Entity to, const reflection::Type& type) const;
+
+        /// @brief Gets a reference to the relation value between the two given entities.
+        ///
+        /// The relation must @ref related() "exist".
+        ///
+        /// @tparam T Relation type.
+        /// @param from From entity.
+        /// @param to To entity.
+        /// @return Reference to relation value.
+        template <typename T>
+        T& relation(Entity from, Entity to)
+        {
+            return *static_cast<T*>(this->relation(from, to, reflection::reflect<T>()));
+        }
+
+        /// @copydoc relation(Entity, Entity)
+        template <typename T>
+        const T& relation(Entity from, Entity to) const
+        {
+            return *static_cast<const T*>(this->relation(from, to, reflection::reflect<T>()));
+        }
+
     private:
         /// @brief Called when an entity's depth changes. Propagates the change to incoming relations.
         /// @param index To entity index.

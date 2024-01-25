@@ -292,6 +292,78 @@ bool World::related(Entity from, Entity to, const reflection::Type& type) const
     return false;
 }
 
+void* World::relation(Entity from, Entity to, const reflection::Type& type)
+{
+    CUBOS_ASSERT(this->isAlive(from));
+    CUBOS_ASSERT(this->isAlive(to));
+
+    auto dataType = mTypes.id(type);
+    CUBOS_ASSERT(mTypes.isRelation(dataType));
+
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
+        // the one with the lowest index.
+        if (from.index > to.index)
+        {
+            std::swap(from, to);
+        }
+    }
+
+    auto fromArchetype = mEntityPool.archetype(from.index);
+    auto toArchetype = mEntityPool.archetype(to.index);
+
+    // Check if there's a table with the given archetypes and any depth which contains the relation.
+    for (int depth = 0, maxDepth = mTables.sparseRelation().type(dataType).maxDepth(); depth <= maxDepth; ++depth)
+    {
+        auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype, depth};
+        if (mTables.sparseRelation().contains(tableId) &&
+            mTables.sparseRelation().at(tableId).contains(from.index, to.index))
+        {
+            auto row = mTables.sparseRelation().at(tableId).row(from.index, to.index);
+            return mTables.sparseRelation().at(tableId).at(row);
+        }
+    }
+
+    CUBOS_FAIL("No such relation {} from {} to {}", type.name(), from, to);
+}
+
+const void* World::relation(Entity from, Entity to, const reflection::Type& type) const
+{
+    CUBOS_ASSERT(this->isAlive(from));
+    CUBOS_ASSERT(this->isAlive(to));
+
+    auto dataType = mTypes.id(type);
+    CUBOS_ASSERT(mTypes.isRelation(dataType));
+
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
+        // the one with the lowest index.
+        if (from.index > to.index)
+        {
+            std::swap(from, to);
+        }
+    }
+
+    auto fromArchetype = mEntityPool.archetype(from.index);
+    auto toArchetype = mEntityPool.archetype(to.index);
+
+    // Check if there's a table with the given archetypes and any depth which contains the relation.
+    for (int depth = 0, maxDepth = mTables.sparseRelation().type(dataType).maxDepth(); depth <= maxDepth; ++depth)
+    {
+        auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype, depth};
+        if (mTables.sparseRelation().contains(tableId) &&
+            mTables.sparseRelation().at(tableId).contains(from.index, to.index))
+        {
+            auto row = mTables.sparseRelation().at(tableId).row(from.index, to.index);
+            return mTables.sparseRelation().at(tableId).at(row);
+        }
+    }
+
+    CUBOS_FAIL("No such relation {} from {} to {}", type.name(), from, to);
+}
+
 void World::propagateDepth(uint32_t index, DataTypeId dataType, int depth)
 {
     auto archetype = mEntityPool.archetype(index);
