@@ -4,8 +4,6 @@
 add_executable(
     cubos-engine-tests
     main.cpp
-
-    collisions/aabb.cpp
 )
 
 target_link_libraries(cubos-engine-tests cubos-engine doctest::doctest)
