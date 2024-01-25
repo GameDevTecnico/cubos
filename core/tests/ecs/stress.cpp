@@ -43,6 +43,7 @@ TEST_CASE("ecs::* stress test")
     world.registerComponent(expected.registerComponent("cF"));
     world.registerRelation(expected.registerRelation("rA"));
     world.registerRelation(expected.registerSymmetricRelation("rB"));
+    world.registerRelation(expected.registerTreeRelation("rC"));
     expected.testTypes(world);
 
     // Execute random actions.
