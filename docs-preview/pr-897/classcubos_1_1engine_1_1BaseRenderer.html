@@ -119,12 +119,11 @@
             </dt>
             <dd>Gets the current size of the renderer&#x27;s framebuffers.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aeea6695e7a8036f60b216a3c679a8c0d" class="m-doc">render</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              <span class="m-doc-wrap-bumper">void <a href="#a825be18857ab3e3570fdb6fed0dac3aa" class="m-doc">render</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
               const <a href="structcubos_1_1engine_1_1BaseRenderer_1_1Viewport.html" class="m-doc">Viewport</a>&amp; viewport,
               const <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">engine::<wbr />Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
-              const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; pickingBuffer,
-              bool enableScreenPicking,
+              const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; pickingBuffer = nullptr,
               bool usePostProcessing = true,
               const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span>
             </dt>
@@ -143,15 +142,14 @@
             </dt>
             <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#ab971efbbea34754a2753e9a2a14a8873" class="m-doc">resize()</a> is called.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a7ce14a17f252339ebad2e4ae2c7ae4f2" class="m-doc">onRender</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              <span class="m-doc-wrap-bumper">void <a href="#a89faa7f59eba209ee8830cc7f8499edb" class="m-doc">onRender</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
               const <a href="structcubos_1_1engine_1_1BaseRenderer_1_1Viewport.html" class="m-doc">Viewport</a>&amp; viewport,
               const <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
               <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target,
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> pickingBuffer,
-              bool enableScreenPicking) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> pickingBuffer) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#aeea6695e7a8036f60b216a3c679a8c0d" class="m-doc">render()</a> is called, before applying post processing effects.</dd>
+            <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a825be18857ab3e3570fdb6fed0dac3aa" class="m-doc">render()</a> is called, before applying post processing effects.</dd>
           </dl>
         </section>
         <section id="pro-attribs">
@@ -259,14 +257,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aeea6695e7a8036f60b216a3c679a8c0d"><div>
+          <section class="m-doc-details" id="a825be18857ab3e3570fdb6fed0dac3aa"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeea6695e7a8036f60b216a3c679a8c0d" class="m-doc-self">render</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a825be18857ab3e3570fdb6fed0dac3aa" class="m-doc-self">render</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
               const <a href="structcubos_1_1engine_1_1BaseRenderer_1_1Viewport.html" class="m-doc">Viewport</a>&amp; viewport,
               const <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">engine::<wbr />Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
-              const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; pickingBuffer,
-              bool enableScreenPicking,
+              const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; pickingBuffer = nullptr,
               bool usePostProcessing = true,
               const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span></span>
             </h3>
@@ -295,10 +292,6 @@
                 <tr>
                   <td>pickingBuffer</td>
                   <td>Screen picking framebuffer.</td>
-                </tr>
-                <tr>
-                  <td>enableScreenPicking</td>
-                  <td>Whether to draw to the screen picking buffer.</td>
                 </tr>
                 <tr>
                   <td>usePostProcessing</td>
@@ -343,17 +336,16 @@
             </table>
 <p>Renderer implementations should override this function to resize their framebuffers.</p>
           </div></section>
-          <section class="m-doc-details" id="a7ce14a17f252339ebad2e4ae2c7ae4f2"><div>
+          <section class="m-doc-details" id="a89faa7f59eba209ee8830cc7f8499edb"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7ce14a17f252339ebad2e4ae2c7ae4f2" class="m-doc-self">onRender</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a89faa7f59eba209ee8830cc7f8499edb" class="m-doc-self">onRender</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
               const <a href="structcubos_1_1engine_1_1BaseRenderer_1_1Viewport.html" class="m-doc">Viewport</a>&amp; viewport,
               const <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
               <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target,
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> pickingBuffer,
-              bool enableScreenPicking) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> pickingBuffer) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-            <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#aeea6695e7a8036f60b216a3c679a8c0d" class="m-doc">render()</a> is called, before applying post processing effects.</p>
+            <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a825be18857ab3e3570fdb6fed0dac3aa" class="m-doc">render()</a> is called, before applying post processing effects.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -382,10 +374,6 @@
                 <tr>
                   <td>pickingBuffer</td>
                   <td>Screen picking framebuffer.</td>
-                </tr>
-                <tr>
-                  <td>enableScreenPicking</td>
-                  <td>Whether to draw to the screen picking buffer.</td>
                 </tr>
               </tbody>
             </table>
