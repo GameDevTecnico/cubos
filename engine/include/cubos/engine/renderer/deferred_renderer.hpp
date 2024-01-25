@@ -48,8 +48,7 @@ namespace cubos::engine
 
         void onResize(glm::uvec2 size) override;
         void onRender(const glm::mat4& view, const Viewport& viewport, const Camera& camera, const RendererFrame& frame,
-                      core::gl::Framebuffer target, core::gl::Framebuffer pickingBuffer,
-                      bool enableScreenPicking) override;
+                      core::gl::Framebuffer target, core::gl::Framebuffer pickingBuffer) override;
 
     private:
         void createSSAOTextures();

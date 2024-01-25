@@ -658,8 +658,7 @@ void DeferredRenderer::onResize(glm::uvec2 size)
 }
 
 void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport, const Camera& camera,
-                                const RendererFrame& frame, Framebuffer target, core::gl::Framebuffer pickingBuffer,
-                                bool enableScreenPicking)
+                                const RendererFrame& frame, Framebuffer target, core::gl::Framebuffer pickingBuffer)
 {
     // Steps:
     // 1. Prepare the MVP matrix.
@@ -787,7 +786,7 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
         mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
     }
 
-    if (enableScreenPicking)
+    if (pickingBuffer)
     {
         // 5. Picking pass:
         // 5.1. Set the picking pass state.

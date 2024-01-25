@@ -123,6 +123,8 @@ static void draw(Renderer& renderer, const ActiveCameras& activeCameras, Rendere
     glm::mat4 views[4]{};
     BaseRenderer::Viewport viewports[4]{};
 
+    bool screenPickingEnabled = settings.getBool("cubos.renderer.screenpicking.enabled", true);
+
     int cameraCount = 0;
 
     for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
@@ -160,8 +162,8 @@ static void draw(Renderer& renderer, const ActiveCameras& activeCameras, Rendere
 
     for (int i = 0; i < cameraCount; ++i)
     {
-        renderer->render(views[i], viewports[i], cameras[i], frame, screenPicker.framebuffer(),
-                         settings.getBool("cubos.renderer.screenpicking.enabled", true));
+        renderer->render(views[i], viewports[i], cameras[i], frame,
+                         screenPickingEnabled ? screenPicker.framebuffer() : nullptr);
     }
 
     frame.clear();
