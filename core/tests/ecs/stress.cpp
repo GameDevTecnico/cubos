@@ -31,6 +31,8 @@ static Action* randomAction(ExpectedWorld& expected)
 // NOLINTBEGIN(readability-function-size)
 TEST_CASE("ecs::* stress test")
 {
+    srand(1337);
+
     ExpectedWorld expected{};
     World world{};
 
