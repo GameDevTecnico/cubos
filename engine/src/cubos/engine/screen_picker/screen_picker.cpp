@@ -1,6 +1,6 @@
 #include <cubos/core/gl/render_device.hpp>
 
-#include <cubos/engine/screenpicker/screenpicker.hpp>
+#include <cubos/engine/screen_picker/screen_picker.hpp>
 
 using cubos::engine::ScreenPicker;
 

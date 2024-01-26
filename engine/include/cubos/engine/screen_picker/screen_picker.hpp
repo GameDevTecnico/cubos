@@ -1,6 +1,6 @@
 /// @file
 /// @brief Resource @ref cubos::engine::ScreenPicker.
-/// @ingroup screenpicker-plugin
+/// @ingroup screen-picker-plugin
 
 #pragma once
 
@@ -12,7 +12,7 @@ namespace cubos::engine
 {
     /// @brief Resource which provides a texture to store entity/gizmo ids, for selection with a mouse.
     ///
-    /// @ingroup screenpicker-plugin
+    /// @ingroup screen-picker-plugin
     class ScreenPicker final
     {
     public:

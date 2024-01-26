@@ -84,8 +84,8 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/cubos/engine/splitscreen/plugin.cpp"
 
-	"src/cubos/engine/screenpicker/plugin.cpp"
-	"src/cubos/engine/screenpicker/screenpicker.cpp"
+	"src/cubos/engine/screen_picker/plugin.cpp"
+	"src/cubos/engine/screen_picker/screen_picker.cpp"
 )
 
 # Create cubos engine
