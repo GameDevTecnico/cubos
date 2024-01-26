@@ -1,8 +1,8 @@
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/cubos.hpp>
-#include <cubos/engine/screenpicker/plugin.hpp>
-#include <cubos/engine/screenpicker/screenpicker.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
+#include <cubos/engine/screen_picker/screen_picker.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 using cubos::core::io::ResizeEvent;
@@ -38,11 +38,11 @@ void cubos::engine::screenPickerPlugin(Cubos& cubos)
 
     cubos.addResource<ScreenPicker>();
 
-    cubos.startupSystem(initScreenPickerSystem).tagged("cubos.screenpicker.init").after("cubos.window.init");
+    cubos.startupSystem(initScreenPickerSystem).tagged("cubos.screenPicker.init").after("cubos.window.init");
 
-    cubos.system(clearTexture).tagged("cubos.screenpicker.clear");
+    cubos.system(clearTexture).tagged("cubos.screenPicker.clear");
     cubos.system(processResize)
-        .tagged("cubos.screenpicker.resize")
+        .tagged("cubos.screenPicker.resize")
         .after("cubos.window.poll")
-        .before("cubos.screenpicker.clear");
+        .before("cubos.screenPicker.clear");
 }

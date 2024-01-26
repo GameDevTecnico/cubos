@@ -11,7 +11,7 @@
 #include <cubos/engine/renderer/pps/bloom.hpp>
 #include <cubos/engine/renderer/spot_light.hpp>
 #include <cubos/engine/renderer/viewport.hpp>
-#include <cubos/engine/screenpicker/plugin.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -123,7 +123,7 @@ static void draw(Renderer& renderer, const ActiveCameras& activeCameras, Rendere
     glm::mat4 views[4]{};
     BaseRenderer::Viewport viewports[4]{};
 
-    bool screenPickingEnabled = settings.getBool("cubos.renderer.screenpicking.enabled", true);
+    bool screenPickingEnabled = settings.getBool("cubos.renderer.screenPicking.enabled", true);
 
     int cameraCount = 0;
 
@@ -200,6 +200,6 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.system(framePointLights).tagged("cubos.renderer.frame");
     cubos.system(frameEnvironment).tagged("cubos.renderer.frame");
     cubos.system(checkPaletteUpdateSystem).tagged("cubos.renderer.frame");
-    cubos.system(draw).tagged("cubos.renderer.draw").after("cubos.screenpicker.clear");
+    cubos.system(draw).tagged("cubos.renderer.draw").after("cubos.screenPicker.clear");
     cubos.system(resize).after("cubos.window.poll").before("cubos.renderer.draw");
 }
