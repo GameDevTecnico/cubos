@@ -89,12 +89,12 @@ void GizmosRenderer::initIdPipeline()
 
             uniform uint gizmo;
             
-            out uvec2 output;
+            out uvec2 idOutput;
 
             void main()
             {
-                output.r = (gizmo >> 16U);
-                output.g = (gizmo & 65535U);
+                idOutput.r = (gizmo >> 16U);
+                idOutput.g = (gizmo & 65535U);
             }
         )");
 
