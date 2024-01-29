@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::TagBuilder class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::SystemBuilder class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>TagBuilder <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="cubos_8hpp.html">&lt;engine/cubos.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemBuilder <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="cubos_8hpp.html">&lt;core/ecs/cubos.hpp&gt;</a></div>
         </h1>
-        <p>Used to chain configurations related to tags.</p>
+        <p>Used to chain configurations related to systems.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -66,7 +66,7 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ad4d9dfcf34a1e7e45530c9e21f27449b" class="m-doc">TagBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">core::<wbr />ecs::<wbr />Dispatcher</a>&amp; dispatcher,
+              <span class="m-doc-wrap-bumper"><a href="#ae083128bebbd15517a34447a6ef70bc3" class="m-doc">SystemBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">core::<wbr />ecs::<wbr />Dispatcher</a>&amp; dispatcher,
               std::vector&lt;std::string&gt;&amp; tags)</span>
             </dt>
             <dd>Construct.</dd>
@@ -76,25 +76,29 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a82faaca675e37ba793a9cbd09fcce3c8" class="m-doc">before</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae161645cea86d1f03714f9d97ec3cb82" class="m-doc">tagged</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
             </dt>
-            <dd>Sets the current tag to be executed before another tag.</dd>
+            <dd>Sets the current system&#x27;s tag.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abf6f6a074f98531e2d561485b627ded8" class="m-doc">after</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4ea6b63242f2da2a0f555ddb4b763825" class="m-doc">before</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
             </dt>
-            <dd>Sets the current tag to be executed after another tag.</dd>
+            <dd>Sets the current system to be executed before another tag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa215d97d7327c4fa26ae92bf6a11d350" class="m-doc">after</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
+            </dt>
+            <dd>Sets the current system to be executed after another tag.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#af3ad8b198d222922b4feb87cb68d6b78" class="m-doc">runIf</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aba010dd0acb4afcfbac3277bbf76d6cf" class="m-doc">runIf</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
             </dt>
-            <dd>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</dd>
+            <dd>Adds a condition to the current system. If this condition returns false, the system will not be executed. For a system to run, all conditions must return true.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad4d9dfcf34a1e7e45530c9e21f27449b"><div>
+          <section class="m-doc-details" id="ae083128bebbd15517a34447a6ef70bc3"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad4d9dfcf34a1e7e45530c9e21f27449b" class="m-doc-self">TagBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">core::<wbr />ecs::<wbr />Dispatcher</a>&amp; dispatcher,
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae083128bebbd15517a34447a6ef70bc3" class="m-doc-self">SystemBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">core::<wbr />ecs::<wbr />Dispatcher</a>&amp; dispatcher,
               std::vector&lt;std::string&gt;&amp; tags)</span></span>
             </h3>
             <p>Construct.</p>
@@ -105,11 +109,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">dispatcher</td>
-                  <td>Dispatcher being configured</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a> being configured.</td>
                 </tr>
                 <tr>
                   <td>tags</td>
                   <td>Vector which stores the tags for this dispatcher.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae161645cea86d1f03714f9d97ec3cb82"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae161645cea86d1f03714f9d97ec3cb82" class="m-doc-self">tagged</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+            </h3>
+            <p>Sets the current system&#x27;s tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td>Tag to be set.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -120,11 +141,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a82faaca675e37ba793a9cbd09fcce3c8"><div>
+          <section class="m-doc-details" id="a4ea6b63242f2da2a0f555ddb4b763825"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />engine::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a82faaca675e37ba793a9cbd09fcce3c8" class="m-doc-self">before</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ea6b63242f2da2a0f555ddb4b763825" class="m-doc-self">before</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
-            <p>Sets the current tag to be executed before another tag.</p>
+            <p>Sets the current system to be executed before another tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -143,11 +164,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="abf6f6a074f98531e2d561485b627ded8"><div>
+          <section class="m-doc-details" id="aa215d97d7327c4fa26ae92bf6a11d350"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />engine::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf6f6a074f98531e2d561485b627ded8" class="m-doc-self">after</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa215d97d7327c4fa26ae92bf6a11d350" class="m-doc-self">after</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
-            <p>Sets the current tag to be executed after another tag.</p>
+            <p>Sets the current system to be executed after another tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -166,22 +187,31 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af3ad8b198d222922b4feb87cb68d6b78"><div>
+          <section class="m-doc-details" id="aba010dd0acb4afcfbac3277bbf76d6cf"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename F&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />engine::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3ad8b198d222922b4feb87cb68d6b78" class="m-doc-self">runIf</a>(</span><span class="m-doc-wrap">F func)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba010dd0acb4afcfbac3277bbf76d6cf" class="m-doc-self">runIf</a>(</span><span class="m-doc-wrap">F func)</span></span>
             </h3>
-            <p>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</p>
+            <p>Adds a condition to the current system. If this condition returns false, the system will not be executed. For a system to run, all conditions must return true.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">F</td>
+                  <td>Condition system type.</td>
+                </tr>
+              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">func</td>
-                  <td>Condition function.</td>
+                  <td>func</td>
+                  <td>Condition system.</td>
                 </tr>
               </tbody>
               <tfoot>

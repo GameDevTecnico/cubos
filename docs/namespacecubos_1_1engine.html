@@ -131,30 +131,6 @@
             </dt>
             <dd>Component which adds a capsule collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1DeltaTime.html" class="m-doc">DeltaTime</a>
-            </dt>
-            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1ShouldQuit.html" class="m-doc">ShouldQuit</a>
-            </dt>
-            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1Arguments.html" class="m-doc">Arguments</a>
-            </dt>
-            <dd>Resource which stores the command-line arguments.</dd>
-            <dt>
-              class <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>
-            </dt>
-            <dd>Used to chain configurations related to tags.</dd>
-            <dt>
-              class <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>
-            </dt>
-            <dd>Used to chain configurations related to systems.</dd>
-            <dt>
-              class <a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>
-            </dt>
-            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
-            <dt>
               class <a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a>
             </dt>
             <dd>Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.</dd>
@@ -360,6 +336,22 @@
               using <a href="group__assets-plugin.html#ga3befb4912d95d097c98bc627a8e7cf97" class="m-doc">AssetWrite</a> = <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">core::<wbr />memory::<wbr />WriteGuard</a>&lt;T, std::unique_lock&lt;std::shared_mutex&gt;&gt;
             </dt>
             <dd>Read-write guard for an asset&#x27;s data.</dd>
+            <dt id="afa0b202a1b9f7ddf7c42db16c8dbb7ba">
+              using <a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc-self">Cubos</a> = <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">core::<wbr />ecs::<wbr />Cubos</a>
+            </dt>
+            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              using <a href="#a426547b7a41f84591b3fd8d967bc5435" class="m-doc">DeltaTime</a> = <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html" class="m-doc">core::<wbr />ecs::<wbr />DeltaTime</a>
+            </dt>
+            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
+            <dt>
+              using <a href="#a0a4fcc97e34218f81162d4e3fb61a8df" class="m-doc">ShouldQuit</a> = <a href="structcubos_1_1core_1_1ecs_1_1ShouldQuit.html" class="m-doc">core::<wbr />ecs::<wbr />ShouldQuit</a>
+            </dt>
+            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
+            <dt>
+              using <a href="#a1f8d4a63dca935415d2191391be6c2dd" class="m-doc">Arguments</a> = <a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">core::<wbr />ecs::<wbr />Arguments</a>
+            </dt>
+            <dd>Resource which stores the command-line arguments.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
               using <a href="#a306c379fd24b3dcc1990b06cdb386244" class="m-doc">Query</a> = <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">core::<wbr />ecs::<wbr />Query</a>&lt;ComponentTypes...&gt;
@@ -402,35 +394,35 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__assets-plugin.html#gad4b3f1b0d0d3fa8c8951129860b5f0d1" class="m-doc">assetsPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__assets-plugin.html#gad4b3f1b0d0d3fa8c8951129860b5f0d1" class="m-doc">assetsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__collisions-plugin.html#ga9a5e69018500e5d53b1e3d61bb7985bf" class="m-doc">collisionsPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__collisions-plugin.html#ga9a5e69018500e5d53b1e3d61bb7985bf" class="m-doc">collisionsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__gizmos-plugin.html#ga43aa8cb4de4e0a7c28172f737a3f45e7" class="m-doc">gizmosPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__gizmos-plugin.html#ga43aa8cb4de4e0a7c28172f737a3f45e7" class="m-doc">gizmosPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gae657719db6afb7e3b4afd5484789b194" class="m-doc">imguiPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gae657719db6afb7e3b4afd5484789b194" class="m-doc">imguiPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__input-plugin.html#gaee09a9325400e0d7d9b5034779b672e9" class="m-doc">inputPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__input-plugin.html#gaee09a9325400e0d7d9b5034779b672e9" class="m-doc">inputPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__physics-plugin.html#ga007d2fbda4c9e539aa45f5f888163b4f" class="m-doc">physicsPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__physics-plugin.html#ga007d2fbda4c9e539aa45f5f888163b4f" class="m-doc">physicsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__physics-gravity-plugin.html#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc">gravityPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__physics-gravity-plugin.html#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc">gravityPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__renderer-plugin.html#ga5e2f1e278c0da877790b407a535d665b" class="m-doc">rendererPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__renderer-plugin.html#ga5e2f1e278c0da877790b407a535d665b" class="m-doc">rendererPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -440,41 +432,62 @@
             </dt>
             <dd>Triangulates a grid of voxels into an indexed mesh.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__scene-plugin.html#gab02d0813f14d8d47fdfb623243e88624" class="m-doc">scenePlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__scene-plugin.html#gab02d0813f14d8d47fdfb623243e88624" class="m-doc">scenePlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__screen-picker-plugin.html#ga3c3bfdf1aed02142faa45f9bca87c3f3" class="m-doc">screenPickerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__screen-picker-plugin.html#ga3c3bfdf1aed02142faa45f9bca87c3f3" class="m-doc">screenPickerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__settings-plugin.html#gaa142415680fcc11723573d9d91315ff8" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__settings-plugin.html#gaa142415680fcc11723573d9d91315ff8" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__splitscreen-plugin.html#ga13165c903146c4935776d928ca17deac" class="m-doc">splitscreenPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__splitscreen-plugin.html#ga13165c903146c4935776d928ca17deac" class="m-doc">splitscreenPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__transform-plugin.html#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__transform-plugin.html#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__voxels-plugin.html#ga28ac4bdff8a483ddd93ae45a16ba1f00" class="m-doc">voxelsPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__voxels-plugin.html#ga28ac4bdff8a483ddd93ae45a16ba1f00" class="m-doc">voxelsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__window-plugin.html#gadc9a1652e325fc1d1b29eb9467e8995e" class="m-doc">windowPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__window-plugin.html#gadc9a1652e325fc1d1b29eb9467e8995e" class="m-doc">windowPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="a426547b7a41f84591b3fd8d967bc5435"><div>
+            <h3>
+              using cubos::<wbr />engine::<wbr /><a href="#a426547b7a41f84591b3fd8d967bc5435" class="m-doc-self">DeltaTime</a> = <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html" class="m-doc">core::<wbr />ecs::<wbr />DeltaTime</a>
+            </h3>
+            <p>Resource which stores the time since the last iteration of the main loop started.</p>
+<p>This resource is added and updated by the <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> class.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0a4fcc97e34218f81162d4e3fb61a8df"><div>
+            <h3>
+              using cubos::<wbr />engine::<wbr /><a href="#a0a4fcc97e34218f81162d4e3fb61a8df" class="m-doc-self">ShouldQuit</a> = <a href="structcubos_1_1core_1_1ecs_1_1ShouldQuit.html" class="m-doc">core::<wbr />ecs::<wbr />ShouldQuit</a>
+            </h3>
+            <p>Resource used as a flag to indicate whether the main loop should stop running.</p>
+<p>This resource is added by the <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> class, initially set to true.</p>
+          </div></section>
+          <section class="m-doc-details" id="a1f8d4a63dca935415d2191391be6c2dd"><div>
+            <h3>
+              using cubos::<wbr />engine::<wbr /><a href="#a1f8d4a63dca935415d2191391be6c2dd" class="m-doc-self">Arguments</a> = <a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">core::<wbr />ecs::<wbr />Arguments</a>
+            </h3>
+            <p>Resource which stores the command-line arguments.</p>
+<p>This resource is added by the <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> class.</p>
+          </div></section>
           <section class="m-doc-details" id="a306c379fd24b3dcc1990b06cdb386244"><div>
             <h3>
               <div class="m-doc-template">
@@ -570,7 +583,7 @@
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a1f34045821152dc97988b63c424faaa3"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc-self">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc-self">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2utils_2free__camera__controller_2plugin_8hpp.html">&lt;engine/utils/free_camera_controller/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
