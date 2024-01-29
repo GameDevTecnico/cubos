@@ -6,7 +6,7 @@
 
 #include <cubos/core/gl/render_device.hpp>
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
 {

@@ -19,11 +19,11 @@ An application which just prints `"Hello World!"` and which does absolutely
 nothing else - not even open a window - would look like this:
 
 ```cpp
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 #include <iostream>
 
-using Cubos = cubos::engine::Cubos;
+using cubos::engine::Cubos;
 
 void helloWorld()
 {
@@ -56,11 +56,11 @@ If we were to put the hello world functionality on a plugin, the previous
 example would look like this:
 
 ```cpp
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 #include <iostream>
 
-using Cubos = cubos::engine::Cubos;
+using cubos::engine::Cubos;
 
 void helloWorld()
 {

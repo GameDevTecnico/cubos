@@ -2,7 +2,7 @@
 #include <cubos/core/ecs/system/event/writer.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 using namespace cubos::engine;
 

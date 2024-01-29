@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 /// @brief @ref tesseratos module.
 namespace tesseratos

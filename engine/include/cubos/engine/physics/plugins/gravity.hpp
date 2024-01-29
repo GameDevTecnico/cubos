@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <cubos/engine/cubos.hpp>
 #include <cubos/engine/physics/components/physics_mass.hpp>
 #include <cubos/engine/physics/components/physics_velocity.hpp>
 #include <cubos/engine/physics/resources/gravity.hpp>
+#include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
 {

@@ -12,7 +12,6 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include <cubos/engine/cubos.hpp>
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/components/physics_mass.hpp>
 #include <cubos/engine/physics/components/physics_velocity.hpp>
@@ -21,6 +20,7 @@
 #include <cubos/engine/physics/resources/damping.hpp>
 #include <cubos/engine/physics/resources/fixed_delta_time.hpp>
 #include <cubos/engine/physics/resources/substeps.hpp>
+#include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
 {

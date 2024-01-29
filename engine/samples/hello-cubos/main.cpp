@@ -3,7 +3,7 @@
 /// [Include Components]
 
 /// [Include]
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 using cubos::engine::Cubos;
 /// [Include]

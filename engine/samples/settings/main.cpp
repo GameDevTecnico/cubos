@@ -1,6 +1,6 @@
 #include <cubos/core/reflection/external/string.hpp>
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 
 using namespace cubos::engine;
