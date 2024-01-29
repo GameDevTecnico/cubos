@@ -36,6 +36,7 @@ systems, since they have clearly defined dependencies.
 ### Our implementation
 
 **CUBOS.** ECS contains the following concepts:
+- **Cubos** - used to configure and run an ECS world and systems.
 - **World** - the main object that holds all of the ECS state.
 - **Entities** - represent objects in the game world (e.g. a car, a player, a 
   tree).
@@ -46,13 +47,6 @@ systems, since they have clearly defined dependencies.
   "DeltaTime", @ref cubos::engine::Input "Input").
 - **Systems** - functions which operate on resources and entities' components.
   This is where the logic is implemented.
-- **Dispatcher** - decides when each system is called and knows which systems
-  are independent from each other so they can be called at the same time
-  (parallel computing).
-
-On the engine side, the @ref cubos::core::ecs::Dispatcher "Dispatcher" is not
-exposed. Instead, the @ref cubos::engine::Cubos "Cubos" class is used to
-add systems and specify when they should be called.
 
 One important thing to note is that in an ECS the data is completely
 decoupled from the logic. What this means is that entities and components
@@ -139,8 +133,8 @@ their velocities and the delta time.
 
 Before components and resources are used in a World, they must be registered
 on it. This should be done once, at the start of the program. For example,
-using the **CUBOS.** @ref cubos::engine::Cubos "main class", for the previous
-example we would write:
+using the **CUBOS.** @ref cubos::core::ecs::Cubos "main class", for the
+previous example we would write:
 
 ```cpp
 cubos.addComponent<Position>();
@@ -166,8 +160,8 @@ world.destroy(entity);
 
 If necessary, you can access the world in a system through the arguments
 `const World&` or `World&`. However, this is not recommended, since it
-becomes impossible for the dispatcher to know what the system is accessing, and
-thus it cannot parallelize it.
+becomes impossible to know what the system is accessing, and thus we cannot
+parallelize it.
 
 Instead, you should use the @ref cubos::core::ecs::Commands "Commands"
 argument. Through it you can queue operations to be executed at a later time,
