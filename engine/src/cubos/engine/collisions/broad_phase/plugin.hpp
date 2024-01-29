@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/collisions/broad_phase/potentially_colliding_with.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -15,8 +16,10 @@ namespace cubos::engine
     /// @ingroup engine
     /// @brief Adds broad-phase collision detection to @b CUBOS.
     ///
+    /// ## Relations
+    /// - @ref PotentiallyCollidingWith - relates two entities that may be colliding
+    ///
     /// ## Resources
-    /// - @ref BroadPhaseCandidates - stores broad phase collision data.
     /// - @ref BroadPhaseSweepAndPrune - stores sweep and prune markers.
 
     /// @brief Plugin entry function.
