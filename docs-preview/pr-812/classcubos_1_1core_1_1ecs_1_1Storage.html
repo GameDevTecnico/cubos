@@ -46,105 +46,103 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="storage_8hpp.html">&lt;core/ecs/component/storage.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Storage <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Storage <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="storage_8hpp.html">&lt;core/ecs/component/storage.hpp&gt;</a></div>
         </h1>
-        <p>Abstract container for a component type <code>T</code>.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Component type.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Stores the components of a given type.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#derived-classes">Derived classes</a></li>
-                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>
+              <span class="m-doc-wrap-bumper"><a href="#a445391732d4dfd592c266e4dcb41fe6e" class="m-doc">Storage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
             </dt>
-            <dd>Abstract parent class for all storages.</dd>
-          </dl>
-        </section>
-        <section id="derived-classes">
-          <h2><a href="#derived-classes">Derived classes</a></h2>
-          <dl class="m-doc">
+            <dd>Constructs.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1MapStorage.html" class="m-doc">MapStorage</a>
+              <span class="m-doc-wrap-bumper"><a href="#aa60cc24a47ea164a90abcc0b4d9dac91" class="m-doc">Storage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&amp;&amp; other) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses an <code>std::unordered_map</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1NullStorage.html" class="m-doc">NullStorage</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that doesn&#x27;t keep any data, made for zero-sized components.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html" class="m-doc">VecStorage</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</dd>
-          </dl>
-        </section>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="adc042ac2af8c717fa923f8cf0af04d81">
-              using <a href="#adc042ac2af8c717fa923f8cf0af04d81" class="m-doc-self">Type</a> = T
-            </dt>
-            <dd>Component type.</dd>
+            <dd>Move constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a17d5a90d31fc9339498c5136382fd994" class="m-doc">pack</a>(</span><span class="m-doc-wrap">uint32_t index,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) const -&gt; <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a> <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#af0c026609e1c0ac701d3d25ebc0cd07c" class="m-doc">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
+              void* value)</span>
             </dt>
-            <dd>Packages a value. If the value doesn&#x27;t exist, undefined behavior will occur.</dd>
+            <dd>Inserts a value into the storage.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#acaa85324df4b366fd7fb5922e24e32e9" class="m-doc">unpack</a>(</span><span class="m-doc-wrap">uint32_t index,
-              const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a>&amp; package,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#ad643fdec329dd77917e7e801561f0190" class="m-doc">erase</a>(</span><span class="m-doc-wrap">uint32_t index)</span>
             </dt>
-            <dd>Unpackages a value.</dd>
+            <dd>Remove a value from the storage.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aebf238bff0fe563f8da2e0bc4b6d424a" class="m-doc">type</a>(</span><span class="m-doc-wrap">) const -&gt; std::type_index <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac7258510069bcc9fc3e3c212037b6e75" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint32_t index) -&gt; void*</span>
             </dt>
-            <dd>Gets the type the components being stored here.</dd>
+            <dd>Gets a value from the storage.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a85c20544c9e0d1497f903ea4d5183ec2" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; const void*</span>
+            </dt>
+            <dd>Gets a value from the storage.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a23641fc24ea46a1de01b64069e3ec031" class="m-doc">type</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
+            </dt>
+            <dd>Gets the component type stored in the storage.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a17d5a90d31fc9339498c5136382fd994"><div>
+          <section class="m-doc-details" id="a445391732d4dfd592c266e4dcb41fe6e"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a> cubos::<wbr />core::<wbr />ecs::<wbr />Storage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a17d5a90d31fc9339498c5136382fd994" class="m-doc-self">pack</a>(</span><span class="m-doc-wrap">uint32_t index,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) const <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Storage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a445391732d4dfd592c266e4dcb41fe6e" class="m-doc-self">Storage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
             </h3>
-            <p>Packages a value. If the value doesn&#x27;t exist, undefined behavior will occur.</p>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa60cc24a47ea164a90abcc0b4d9dac91"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Storage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa60cc24a47ea164a90abcc0b4d9dac91" class="m-doc-self">Storage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&amp;&amp; other) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Moved storage.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af0c026609e1c0ac701d3d25ebc0cd07c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Storage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af0c026609e1c0ac701d3d25ebc0cd07c" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
+              void* value)</span></span>
+            </h3>
+            <p>Inserts a value into the storage.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -152,31 +150,20 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>Index of the value to package.</td>
+                  <td>Index where to insert the value.</td>
                 </tr>
                 <tr>
-                  <td>context</td>
-                  <td>Optional context used for serialization.</td>
+                  <td>value</td>
+                  <td>Value to be moved.</td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Packaged value.</td>
-                </tr>
-              </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="acaa85324df4b366fd7fb5922e24e32e9"><div>
+          <section class="m-doc-details" id="ad643fdec329dd77917e7e801561f0190"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Storage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acaa85324df4b366fd7fb5922e24e32e9" class="m-doc-self">unpack</a>(</span><span class="m-doc-wrap">uint32_t index,
-              const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a>&amp; package,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Storage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad643fdec329dd77917e7e801561f0190" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">uint32_t index)</span></span>
             </h3>
-            <p>Unpackages a value.</p>
+            <p>Remove a value from the storage.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -184,33 +171,62 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>Index of the value to unpackage.</td>
+                  <td>Index of the value to be removed.</td>
                 </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac7258510069bcc9fc3e3c212037b6e75"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />ecs::<wbr />Storage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac7258510069bcc9fc3e3c212037b6e75" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint32_t index)</span></span>
+            </h3>
+            <p>Gets a value from the storage.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
-                  <td>package</td>
-                  <td>Package to unpackage.</td>
-                </tr>
-                <tr>
-                  <td>context</td>
-                  <td>Optional context used for deserialization.</td>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the value to be retrieved.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the unpackaging was successful.</td>
+                  <td>Pointer to the value.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aebf238bff0fe563f8da2e0bc4b6d424a"><div>
+          <section class="m-doc-details" id="a85c20544c9e0d1497f903ea4d5183ec2"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">std::type_index cubos::<wbr />core::<wbr />ecs::<wbr />Storage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aebf238bff0fe563f8da2e0bc4b6d424a" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />ecs::<wbr />Storage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85c20544c9e0d1497f903ea4d5183ec2" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint32_t index) const</span></span>
             </h3>
-            <p>Gets the type the components being stored here.</p>
+            <p>Gets a value from the storage.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the value to be retrieved.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a23641fc24ea46a1de01b64069e3ec031"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Storage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23641fc24ea46a1de01b64069e3ec031" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the component type stored in the storage.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>

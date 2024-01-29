@@ -56,7 +56,7 @@
               Reference
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
@@ -71,26 +71,30 @@
             <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core.html#gab23801234b8ff1ec70506039c7dc453a" class="m-doc">initializeLogger</a>(</span><span class="m-doc-wrap">)</span>
+              class <a href="classcubos_1_1core_1_1Logger.html" class="m-doc">cubos::core::Logger</a>
             </dt>
-            <dd>Must be called before any logging is done.</dd>
+            <dd>Singleton which holds the logging state.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core.html#ga0f297b68d596e1ddbe1d2cfea349197c" class="m-doc">disableLogging</a>(</span><span class="m-doc-wrap">)</span>
+              struct <a href="structcubos_1_1core_1_1Logger_1_1Location.html" class="m-doc">cubos::core::Logger::Location</a>
             </dt>
-            <dd>Disables all logging except for critical errors.</dd>
+            <dd>Identifies a location in the code.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">cubos::core::Logger::Timestamp</a>
+            </dt>
+            <dd>A timestamp used to identify when a logging message was written.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1Logger_1_1Entry.html" class="m-doc">cubos::core::Logger::Entry</a>
+            </dt>
+            <dd>Data created by a call to log.</dd>
           </dl>
         </section>
         <section id="define-members">
           <h2><a href="#define-members">Defines</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#gab30a9342864743fe7f08c2eba1a796bf" class="m-doc">CUBOS_LOG_LEVEL</a></span>
-            </dt>
-            <dd>Log level to compile in.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga2a7abf5148c7e9b2ee89f6abd095df6e" class="m-doc">CUBOS_LOG_LEVEL_TRACE</a></span>
             </dt>
@@ -120,6 +124,10 @@
             </dt>
             <dd>Off log level, disables all logging.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#gab30a9342864743fe7f08c2eba1a796bf" class="m-doc">CUBOS_LOG_LEVEL</a></span>
+            </dt>
+            <dd>Log level to compile in.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga1650d294b3772237b3e8f70ed29959c5" class="m-doc">CUBOS_TRACE</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Used for logging very verbose information.</dd>
@@ -144,6 +152,11 @@
             </dt>
             <dd>Used for logging unrecoverable errors.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#gaee324546677ce2aabba558ed6d7e3e88" class="m-doc">CUBOS_LOG</a>(</span><span class="m-doc-wrap">level,
+              ...)</span>
+            </dt>
+            <dd>Used for logging messages.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga134dfbf1cece1d0b52e7031022f9de34" class="m-doc">CUBOS_FAIL</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Aborts a program, optionally printing a critical error message.</dd>
@@ -151,6 +164,10 @@
               <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga557fc5b27b4fb8b7c0921e57704f0de6" class="m-doc">CUBOS_UNREACHABLE</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Marks a code path as supposedly unreachable. Aborts the program when reached.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga817422d20f1aa67a06c2b6578cbe1a7d" class="m-doc">CUBOS_TODO</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Marks a code path as unfinished. Aborts the program when reached.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga05d4ae5d43da9aa0aade1eb82e9abca3" class="m-doc">CUBOS_ASSERT</a>(</span><span class="m-doc-wrap">cond,
               ...)</span>

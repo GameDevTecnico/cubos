@@ -48,7 +48,7 @@
         <h1>
           <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_1849b6590c20a7c40f18c0337f505edf.html">system</a>/</span>query.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Query</a> and related types.</p>
+        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Query</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,7 +61,6 @@
             </li>
           </ul>
         </nav>
-<p>This file is a bit scary, but it&#x27;s not as bad as it looks. It&#x27;s mostly template specializations to handle the different types of arguments a query can take.</p>
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
@@ -71,31 +70,16 @@
             <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
             <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs_1_1impl.html" class="m-doc">cubos::core::ecs::impl</a></dt>
-            <dd>Contains functions used internally by the implementation of the ECS.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryInfo.html" class="m-doc">cubos::core::ecs::QueryInfo</a>
-            </dt>
-            <dd>Describes a query.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html" class="m-doc">cubos::core::ecs::impl::QueryFetcher</a>
-            </dt>
-            <dd>Fetches the requested data from a world.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::core::ecs::Query</a>
             </dt>
             <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html" class="m-doc">cubos::core::ecs::Query::Iterator</a>
-            </dt>
-            <dd>Used to iterate over the results of a query.</dd>
           </dl>
         </section>
       </div>

@@ -91,6 +91,10 @@
             </dt>
             <dd>Gets the window framebuffer size, which may differ from the window size.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a5d74ae691e3250025fc827c3ef75fa" class="m-doc">contentScale</a>(</span><span class="m-doc-wrap">) const -&gt; float <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the window content scale, commonly known as &quot;DPI scale&quot;.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a6c0c4d300917b46aed46a95046a12f97" class="m-doc">shouldClose</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Checks whether the window should close.</dd>
@@ -106,6 +110,14 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a3bc40a4a2e7a26b3251da5b3765b99d4" class="m-doc">mouseState</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-io.html#ga6a91085b03d6b96ddf36b0ba9a9ae78b" class="m-doc">MouseState</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Gets the mouse state when the window is focused.</dd>
+            <dt id="a4447d8b196cff9c7a8d97fd8c71a0fd4">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4447d8b196cff9c7a8d97fd8c71a0fd4" class="m-doc-self">getMousePosition</a>(</span><span class="m-doc-wrap">) -&gt; glm::ivec2 <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the position of the mouse cursor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a014571cb896d121b3efdd7bbf04f76db" class="m-doc">setMousePosition</a>(</span><span class="m-doc-wrap">glm::ivec2 position) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Sets the position of the mouse cursor.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a6b0be3b0dbd5bf83aa881df8e5e8986c" class="m-doc">createCursor</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24" class="m-doc">Cursor::<wbr />Standard</a> standard) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">Cursor</a>&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -222,6 +234,20 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a6a5d74ae691e3250025fc827c3ef75fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a5d74ae691e3250025fc827c3ef75fa" class="m-doc-self">contentScale</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the window content scale, commonly known as &quot;DPI scale&quot;.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Ratio between the current DPI and the platform&#x27;s default DPI.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a6c0c4d300917b46aed46a95046a12f97"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c0c4d300917b46aed46a95046a12f97" class="m-doc-self">shouldClose</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
@@ -279,6 +305,23 @@
                   <td>Mouse state when the window is focused.</td>
                 </tr>
               </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a014571cb896d121b3efdd7bbf04f76db"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a014571cb896d121b3efdd7bbf04f76db" class="m-doc-self">setMousePosition</a>(</span><span class="m-doc-wrap">glm::ivec2 position) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Sets the position of the mouse cursor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">position</td>
+                  <td>New position of the mouse cursor, in screen coordinates.</td>
+                </tr>
+              </tbody>
             </table>
           </div></section>
           <section class="m-doc-details" id="a6b0be3b0dbd5bf83aa881df8e5e8986c"><div>

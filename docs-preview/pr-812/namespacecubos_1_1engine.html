@@ -275,6 +275,10 @@
             </dt>
             <dd>Represents a voxel vertex.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a>
+            </dt>
+            <dd>Component which defines parameters of a viewport, the actual screen space that will be used by the camera it is attached to. Useful for having multiple camera views shown on screen.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1SceneBridge.html" class="m-doc">SceneBridge</a>
             </dt>
             <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets.</dd>
@@ -282,6 +286,10 @@
               struct <a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>
             </dt>
             <dd><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> equivalent to ECS blueprints - a bundle of entities and their components.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a>
+            </dt>
+            <dd>Resource which provides a texture to store entity/gizmo ids, for selection with a mouse.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a>
             </dt>
@@ -302,6 +310,10 @@
               struct <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a>
             </dt>
             <dd>Component which assigns a uniform scale to an entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FreeCameraController.html" class="m-doc">FreeCameraController</a>
+            </dt>
+            <dd>Component which moves the camera.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>
             </dt>
@@ -348,6 +360,34 @@
               using <a href="group__assets-plugin.html#ga3befb4912d95d097c98bc627a8e7cf97" class="m-doc">AssetWrite</a> = <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">core::<wbr />memory::<wbr />WriteGuard</a>&lt;T, std::unique_lock&lt;std::shared_mutex&gt;&gt;
             </dt>
             <dd>Read-write guard for an asset&#x27;s data.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
+              using <a href="#a306c379fd24b3dcc1990b06cdb386244" class="m-doc">Query</a> = <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">core::<wbr />ecs::<wbr />Query</a>&lt;ComponentTypes...&gt;
+            </dt>
+            <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
+            <dt>
+              using <a href="#a34019c3c344f309409d8b0abc510002d" class="m-doc">Entity</a> = <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>
+            </dt>
+            <dd>Identifies an entity.</dd>
+            <dt>
+              using <a href="#a736c6baa44b5c42048f897283a5ef1b1" class="m-doc">Commands</a> = <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">core::<wbr />ecs::<wbr />Commands</a>
+            </dt>
+            <dd>System argument used to write ECS commands and execute them at a later time.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc">Opt</a> = <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">core::<wbr />ecs::<wbr />Opt</a>&lt;T&gt;
+            </dt>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
+              using <a href="#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a> = <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">core::<wbr />ecs::<wbr />EventReader</a>&lt;T, M&gt;
+            </dt>
+            <dd>System arguments used to read events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="#a7ef542827dad012c740982fed224e341" class="m-doc">EventWriter</a> = <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">core::<wbr />ecs::<wbr />EventWriter</a>&lt;T&gt;
+            </dt>
+            <dd>System argument which allows the system to send events of type <code>T</code> to other systems.</dd>
             <dt>
               using <a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> = std::shared_ptr&lt;<a href="classcubos_1_1engine_1_1impl_1_1RendererGrid.html" class="m-doc">impl::<wbr />RendererGrid</a>&gt;
             </dt>
@@ -404,11 +444,23 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__screen-picker-plugin.html#ga3c3bfdf1aed02142faa45f9bca87c3f3" class="m-doc">screenPickerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__settings-plugin.html#gaa142415680fcc11723573d9d91315ff8" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__splitscreen-plugin.html#ga13165c903146c4935776d928ca17deac" class="m-doc">splitscreenPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__transform-plugin.html#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -420,6 +472,120 @@
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="a306c379fd24b3dcc1990b06cdb386244"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... ComponentTypes&gt;
+              </div>
+              using cubos::<wbr />engine::<wbr /><a href="#a306c379fd24b3dcc1990b06cdb386244" class="m-doc-self">Query</a> = <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">core::<wbr />ecs::<wbr />Query</a>&lt;ComponentTypes...&gt;
+            </h3>
+            <p>System argument which holds the result of a query over all entities in world which match the given arguments.</p>
+<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&amp;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Scale</span><span class="o">&amp;&gt;&gt;</span></pre><p>This query will return all entities with a <code><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a></code> and <code>Velocity</code> component. Accessors to <code><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a></code> and <code><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a></code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, <code>const</code> should be used.</p>
+          </div></section>
+          <section class="m-doc-details" id="a34019c3c344f309409d8b0abc510002d"><div>
+            <h3>
+              using cubos::<wbr />engine::<wbr /><a href="#a34019c3c344f309409d8b0abc510002d" class="m-doc-self">Entity</a> = <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>
+            </h3>
+            <p>Identifies an entity.</p>
+<p>When serializing/deserializing, if there&#x27;s a data::old::SerializationMap&lt;Entity, std::string, EntityHash&gt; in the context, it will be used to (de)serialize strings representing the entities. Otherwise, the identifiers will be (de)serialized as objects with two fields: their index and their generation.</p>
+          </div></section>
+          <section class="m-doc-details" id="a736c6baa44b5c42048f897283a5ef1b1"><div>
+            <h3>
+              using cubos::<wbr />engine::<wbr /><a href="#a736c6baa44b5c42048f897283a5ef1b1" class="m-doc-self">Commands</a> = <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">core::<wbr />ecs::<wbr />Commands</a>
+            </h3>
+            <p>System argument used to write ECS commands and execute them at a later time.</p>
+<p>Internally wraps a reference to a CommandBuffer object.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad0f59a49870122ca4b9ea925be1929b3"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              using cubos::<wbr />engine::<wbr /><a href="#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc-self">Opt</a> = <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">core::<wbr />ecs::<wbr />Opt</a>&lt;T&gt;
+            </h3>
+            <p>Wrapper for reference types to indicate that the given argument type is optional in a query.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Argument type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa962f62de69af44f93726b63b90295e0"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;
+              </div>
+              using cubos::<wbr />engine::<wbr /><a href="#aa962f62de69af44f93726b63b90295e0" class="m-doc-self">EventReader</a> = <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">core::<wbr />ecs::<wbr />EventReader</a>&lt;T, M&gt;
+            </h3>
+            <p>System arguments used to read events of type <code>T</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Event.</td>
+                </tr>
+                <tr>
+                  <td>M</td>
+                  <td>Filter mask.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Filtering the received events by their mask is also possible via the parameter <code>M</code>. By default, the reader will read all events sent.</p><aside class="m-note m-default"><h4>See also</h4><p>Systems can send events using <a href="namespacecubos_1_1engine.html#a7ef542827dad012c740982fed224e341" class="m-doc">EventWriter</a>.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a7ef542827dad012c740982fed224e341"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              using cubos::<wbr />engine::<wbr /><a href="#a7ef542827dad012c740982fed224e341" class="m-doc-self">EventWriter</a> = <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">core::<wbr />ecs::<wbr />EventWriter</a>&lt;T&gt;
+            </h3>
+            <p>System argument which allows the system to send events of type <code>T</code> to other systems.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p>Systems can read sent events using <a href="namespacecubos_1_1engine.html#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a>.</p></aside>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a1f34045821152dc97988b63c424faaa3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc-self">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2utils_2free__camera__controller_2plugin_8hpp.html">&lt;engine/utils/free_camera_controller/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

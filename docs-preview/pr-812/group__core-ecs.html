@@ -65,7 +65,7 @@
             </li>
           </ul>
         </nav>
-<p>This module is arguably the heart of the engine, as it provides a means to organize and manage the data and logic of both the engine and games built with it. It is, as of now, a bit of a mess. Most of the exposed types are internal to the documentation, and thus it can get hard to navigate (TODO #377).</p><aside class="m-note m-info"><h4>Note</h4><p>Check out the <a href="features-ecs.html" class="m-doc">ECS feature guide</a> for an in-depth explanation of what an ECS is and how it can be used.</p></aside><section id="autotoc_md46"><h3><a href="#autotoc_md46">Data types</a></h3><ul><li><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> - stores entities, components and resources, can be queried.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a> - stores and dispatches systems in the right order.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a> - bundle of entities and components which can be spawned using <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>.</li></ul></section><section id="autotoc_md47"><h3><a href="#autotoc_md47">System argument types</a></h3><ul><li><a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read&lt;R&gt;</a> - used to read resource data of type <code>R</code>.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write&lt;R&gt;</a> - used to write resource data of type <code>R</code>.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read&lt;World&gt;</a> - used to read the world directly (not recommended, ruins parallelism, prefer <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>).</li><li><a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write&lt;World&gt;</a> - used to write the world directly (not recommended, ruins parallelism, prefer <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>).</li><li><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> - used to queue entities to be created, destroyed and other operations.</li><li><a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader&lt;E&gt;</a> - reads events of type <code>E</code> sent from other systems.</li><li><a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter&lt;E&gt;</a> - sends events of type <code>E</code> to other systems.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query&lt;Args...&gt;</a> - queries the world for entities which match its arguments.</li></ul></section><section id="autotoc_md48"><h3><a href="#autotoc_md48">Query argument types</a></h3><ul><li><a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read&lt;C&gt;</a> - matches entities with the component <code>C</code>, read-only access.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write&lt;C&gt;</a> - matches entities with the component <code>C</code>, write access.</li><li><a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">OptRead&lt;C&gt;</a> - matches all entities, read-only access when the component <code>C</code> is present.</li><li><a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">OptWrite&lt;C&gt;</a> - matches all entities, write access when the component <code>C</code> is present.</li></ul></section>
+<p>This module is arguably the heart of the engine, as it provides a means to organize and manage the data and logic of both the engine and games built with it. It is, as of now, a bit of a mess. Most of the exposed types are internal to the documentation, and thus it can get hard to navigate (TODO #377).</p><aside class="m-note m-info"><h4>Note</h4><p>Check out the <a href="features-ecs.html" class="m-doc">ECS feature guide</a> for an in-depth explanation of what an ECS is and how it can be used.</p></aside><section id="autotoc_md46"><h3><a href="#autotoc_md46">Data types</a></h3><ul><li><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> - stores entities, components and resources, can be queried.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a> - stores and dispatches systems in the right order.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a> - bundle of entities and components which can be spawned using <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>.</li></ul></section><section id="autotoc_md47"><h3><a href="#autotoc_md47">System argument types</a></h3><ul><li><code>const R&amp;</code> - used to read resource data of type <code>R</code>.</li><li><code>R&amp;</code> - used to write resource data of type <code>R</code>.</li><li><code>const <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp;</code> - used to read the world directly (not recommended, ruins parallelism, prefer <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>).</li><li>World&amp; - used to write the world directly (not recommended, ruins parallelism, prefer <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>).</li><li><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> - used to queue entities to be created, destroyed and other operations.</li><li><a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader&lt;E&gt;</a> - reads events of type <code>E</code> sent from other systems.</li><li><a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter&lt;E&gt;</a> - sends events of type <code>E</code> to other systems.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query&lt;Args...&gt;</a> - queries the world for entities which match its arguments.</li></ul></section><section id="autotoc_md48"><h3><a href="#autotoc_md48">Query argument types</a></h3><ul><li><code>const C&amp;</code> - matches entities with the component <code>C</code>, read-only access.</li><li><code>C&amp;</code> - matches entities with the component <code>C</code>, write access.</li><li><code><a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;const C&amp;&gt;&quot; - matches all entities, read-only access when the component <code>C</code> is present. -</code>Opt&lt;C&amp;&gt;` - matches all entities, write access when the component <code>C</code> is present.</li></ul></section>
         <section id="groups">
           <h2><a href="#groups">Modules</a></h2>
           <dl class="m-doc">
@@ -73,10 +73,14 @@
             <dd>Component part of the ECS.</dd>
             <dt>module <a href="group__core-ecs-entity.html" class="m-doc">Entity</a></dt>
             <dd><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> part of the ECS.</dd>
+            <dt>module <a href="group__core-ecs-query.html" class="m-doc">Query</a></dt>
+            <dd>Defines the query functionality of the ECS.</dd>
             <dt>module <a href="group__core-ecs-resource.html" class="m-doc">Resource</a></dt>
             <dd>Resource part of the ECS.</dd>
             <dt>module <a href="group__core-ecs-system.html" class="m-doc">System</a></dt>
             <dd>System part of the ECS.</dd>
+            <dt>module <a href="group__core-ecs-table.html" class="m-doc">Table</a></dt>
+            <dd>Contains various table-like data structures which storage data associated to entities.</dd>
           </dl>
         </section>
         <section id="files">
@@ -84,6 +88,12 @@
           <dl class="m-doc">
             <dt>file <a href="blueprint_8hpp.html" class="m-doc">blueprint.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint</a>.</dd>
+            <dt>file <a href="command__buffer_8hpp.html" class="m-doc">command_buffer.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />CommandBuffer</a>.</dd>
+            <dt>file <a href="reflection_8hpp.html" class="m-doc">reflection.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />TypeBuilder</a>.</dd>
+            <dt>file <a href="types_8hpp.html" class="m-doc">types.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Types</a>.</dd>
             <dt>file <a href="world_8hpp.html" class="m-doc">world.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />World</a>.</dd>
           </dl>
@@ -95,6 +105,15 @@
               class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::core::ecs::Blueprint</a>
             </dt>
             <dd>Collection of entities and their respective components.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">cubos::core::ecs::CommandBuffer</a>
+            </dt>
+            <dd>Stores commands to execute them later.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">cubos::core::ecs::TypeBuilder</a>
+            </dt>
+            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent ECS types.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">cubos::core::ecs::World</a>
             </dt>

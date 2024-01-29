@@ -66,112 +66,56 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#ad1b12e21479d8bce946a86896e0fa7c9" class="m-doc">registerComponent</a>(</span><span class="m-doc-wrap">)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#aefa6bc5ee5fff3edfdc5302ba807ee3b" class="m-doc">registerType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
             </dt>
             <dd>Registers a new component type with the component manager.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a0a632f68e5a1ea98b6327859aaa40a0c" class="m-doc">registerComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a681e735ac4c5804c821bde515008bb7a" class="m-doc">registry</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a></span>
             </dt>
-            <dd>Registers a new component type with the component manager.</dd>
+            <dd>Gets the components registered with the component manager.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6c7f418fe50e1b9e84ce38b5a53481fd" class="m-doc">getID</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const -&gt; std::size_t</span>
-            </dt>
-            <dd>Gets the identifier of a registered component type.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad0d179e7971bba4e0a06d992f0df983b" class="m-doc">getID</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aed076aa56c0974f2c03abddb32e02a8c" class="m-doc">id</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const -&gt; uint32_t</span>
             </dt>
             <dd>Gets the identifier of a registered component type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a401d4e2c498dea038c4707d7224cf12a" class="m-doc">getType</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab91c43f2cc961a681daa4bcffde6824b" class="m-doc">id</a>(</span><span class="m-doc-wrap">) const -&gt; uint32_t</span>
+            </dt>
+            <dd>Gets the identifier of a registered component type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa257753a609b3076356c3db5465c7f83" class="m-doc">type</a>(</span><span class="m-doc-wrap">uint32_t id) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
             </dt>
             <dd>Gets the type of a component from its identifier.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5dfa3773c2a434bd4f7cecc7f462957a" class="m-doc">read</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html" class="m-doc">ReadStorage</a>&lt;T&gt;</span>
-            </dt>
-            <dd>Locks a storage for reading and returns it.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab4559f910c0155e5cab39552021595e6" class="m-doc">write</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html" class="m-doc">WriteStorage</a>&lt;T&gt;</span>
-            </dt>
-            <dd>Locks a storage for writing and returns it.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ad16a84402411d69e8c83109ee73a3769" class="m-doc">add</a>(</span><span class="m-doc-wrap">uint32_t id,
-              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              <span class="m-doc-wrap-bumper">void <a href="#af7a5ddabbcb1bf7359c4a1df01bd2da4" class="m-doc">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
+              uint32_t id,
               void* value)</span>
             </dt>
             <dd>Adds a component to an entity.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a946ee2092dd29f7764044089c4bd0fa5" class="m-doc">add</a>(</span><span class="m-doc-wrap">uint32_t id,
-              T value)</span>
-            </dt>
-            <dd>Adds a component to an entity.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a821ef4d04bdaeebafc76f72922617e74" class="m-doc">remove</a>(</span><span class="m-doc-wrap">uint32_t id)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a8d51190bcf28ba9288e41713eb5dc805" class="m-doc">erase</a>(</span><span class="m-doc-wrap">uint32_t index,
+              uint32_t id)</span>
             </dt>
             <dd>Removes a component from an entity.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ae4a27bee8f48abd07475d2cbf2a2be28" class="m-doc">remove</a>(</span><span class="m-doc-wrap">uint32_t id,
-              std::size_t componentId)</span>
-            </dt>
-            <dd>Removes a component from an entity.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aa9ecfd727c12af23adadc52f21d1bafd" class="m-doc">removeAll</a>(</span><span class="m-doc-wrap">uint32_t id)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a6890364faf61ac4b005c62185f6981fe" class="m-doc">erase</a>(</span><span class="m-doc-wrap">uint32_t index)</span>
             </dt>
             <dd>Removes all components from an entity.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a86ef74de8b61d5c9925369e17c922e7e" class="m-doc">storage</a>(</span><span class="m-doc-wrap">std::size_t id) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>*</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a747b75a47ed8c419b3ea9d47229e369e" class="m-doc">storage</a>(</span><span class="m-doc-wrap">uint32_t id) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&amp;</span>
             </dt>
             <dd>Gets the storage of the given component type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a68d399123342e8118e7dfdf17d3983ae" class="m-doc">storage</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>*</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af9ded216430a7d16bcec5a5b07548bb2" class="m-doc">storage</a>(</span><span class="m-doc-wrap">uint32_t id) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&amp;</span>
             </dt>
             <dd>Gets the storage of the given component type.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aec76669ca8023a902cad70274225182a" class="m-doc">pack</a>(</span><span class="m-doc-wrap">uint32_t id,
-              std::size_t componentId,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) const -&gt; <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a></span>
-            </dt>
-            <dd>Creates a package from a component of an entity.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0564af9ef9f87da70b6e976eff74f04d" class="m-doc">unpack</a>(</span><span class="m-doc-wrap">uint32_t id,
-              std::size_t componentId,
-              const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a>&amp; package,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) -&gt; bool</span>
-            </dt>
-            <dd>Inserts a component into an entity, by unpacking a package.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad1b12e21479d8bce946a86896e0fa7c9"><div>
+          <section class="m-doc-details" id="aefa6bc5ee5fff3edfdc5302ba807ee3b"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad1b12e21479d8bce946a86896e0fa7c9" class="m-doc-self">registerComponent</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Registers a new component type with the component manager.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Type of the component.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Must be called before any component of this type is used in any way.</p>
-          </div></section>
-          <section class="m-doc-details" id="a0a632f68e5a1ea98b6327859aaa40a0c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a632f68e5a1ea98b6327859aaa40a0c" class="m-doc-self">registerComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aefa6bc5ee5fff3edfdc5302ba807ee3b" class="m-doc-self">registerType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
             </h3>
             <p>Registers a new component type with the component manager.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -185,11 +129,24 @@
                 </tr>
               </tbody>
             </table>
-<p>Must be called before any component of this type is used in any way.</p>
           </div></section>
-          <section class="m-doc-details" id="a6c7f418fe50e1b9e84ce38b5a53481fd"><div>
+          <section class="m-doc-details" id="a681e735ac4c5804c821bde515008bb7a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c7f418fe50e1b9e84ce38b5a53481fd" class="m-doc-self">getID</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a> cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a681e735ac4c5804c821bde515008bb7a" class="m-doc-self">registry</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the components registered with the component manager.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Component types.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aed076aa56c0974f2c03abddb32e02a8c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint32_t cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aed076aa56c0974f2c03abddb32e02a8c" class="m-doc-self">id</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const</span></span>
             </h3>
             <p>Gets the identifier of a registered component type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -210,12 +167,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad0d179e7971bba4e0a06d992f0df983b"><div>
+          <section class="m-doc-details" id="ab91c43f2cc961a681daa4bcffde6824b"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename T&gt;
+                template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0d179e7971bba4e0a06d992f0df983b" class="m-doc-self">getID</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">uint32_t cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab91c43f2cc961a681daa4bcffde6824b" class="m-doc-self">id</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the identifier of a registered component type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -236,9 +193,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a401d4e2c498dea038c4707d7224cf12a"><div>
+          <section class="m-doc-details" id="aa257753a609b3076356c3db5465c7f83"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a401d4e2c498dea038c4707d7224cf12a" class="m-doc-self">getType</a>(</span><span class="m-doc-wrap">std::size_t id) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa257753a609b3076356c3db5465c7f83" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">uint32_t id) const</span></span>
             </h3>
             <p>Gets the type of a component from its identifier.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -259,62 +216,10 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a5dfa3773c2a434bd4f7cecc7f462957a"><div>
+          <section class="m-doc-details" id="af7a5ddabbcb1bf7359c4a1df01bd2da4"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html" class="m-doc">ReadStorage</a>&lt;T&gt; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5dfa3773c2a434bd4f7cecc7f462957a" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Locks a storage for reading and returns it.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> lock.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ab4559f910c0155e5cab39552021595e6"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html" class="m-doc">WriteStorage</a>&lt;T&gt; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab4559f910c0155e5cab39552021595e6" class="m-doc-self">write</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Locks a storage for writing and returns it.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> lock.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ad16a84402411d69e8c83109ee73a3769"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad16a84402411d69e8c83109ee73a3769" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">uint32_t id,
-              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af7a5ddabbcb1bf7359c4a1df01bd2da4" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
+              uint32_t id,
               void* value)</span></span>
             </h3>
             <p>Adds a component to an entity.</p>
@@ -324,12 +229,12 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">id</td>
+                  <td style="width: 1%">index</td>
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
                 </tr>
                 <tr>
-                  <td>type</td>
-                  <td>Component type.</td>
+                  <td>id</td>
+                  <td>Component identifier.</td>
                 </tr>
                 <tr>
                   <td>value</td>
@@ -338,73 +243,10 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a946ee2092dd29f7764044089c4bd0fa5"><div>
+          <section class="m-doc-details" id="a8d51190bcf28ba9288e41713eb5dc805"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a946ee2092dd29f7764044089c4bd0fa5" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">uint32_t id,
-              T value)</span></span>
-            </h3>
-            <p>Adds a component to an entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>id</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
-                </tr>
-                <tr>
-                  <td>value</td>
-                  <td>Initial component value.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a821ef4d04bdaeebafc76f72922617e74"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a821ef4d04bdaeebafc76f72922617e74" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap">uint32_t id)</span></span>
-            </h3>
-            <p>Removes a component from an entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>id</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ae4a27bee8f48abd07475d2cbf2a2be28"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae4a27bee8f48abd07475d2cbf2a2be28" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap">uint32_t id,
-              std::size_t componentId)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d51190bcf28ba9288e41713eb5dc805" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">uint32_t index,
+              uint32_t id)</span></span>
             </h3>
             <p>Removes a component from an entity.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -413,19 +255,19 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">id</td>
+                  <td style="width: 1%">index</td>
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
                 </tr>
                 <tr>
-                  <td>componentId</td>
+                  <td>id</td>
                   <td>Component identifier.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aa9ecfd727c12af23adadc52f21d1bafd"><div>
+          <section class="m-doc-details" id="a6890364faf61ac4b005c62185f6981fe"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa9ecfd727c12af23adadc52f21d1bafd" class="m-doc-self">removeAll</a>(</span><span class="m-doc-wrap">uint32_t id)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6890364faf61ac4b005c62185f6981fe" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">uint32_t index)</span></span>
             </h3>
             <p>Removes all components from an entity.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -434,15 +276,15 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">id</td>
+                  <td style="width: 1%">index</td>
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a86ef74de8b61d5c9925369e17c922e7e"><div>
+          <section class="m-doc-details" id="a747b75a47ed8c419b3ea9d47229e369e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>* cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a86ef74de8b61d5c9925369e17c922e7e" class="m-doc-self">storage</a>(</span><span class="m-doc-wrap">std::size_t id)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a747b75a47ed8c419b3ea9d47229e369e" class="m-doc-self">storage</a>(</span><span class="m-doc-wrap">uint32_t id)</span></span>
             </h3>
             <p>Gets the storage of the given component type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -452,7 +294,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">id</td>
-                  <td>Component type identifier.</td>
+                  <td>Component identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -463,9 +305,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a68d399123342e8118e7dfdf17d3983ae"><div>
+          <section class="m-doc-details" id="af9ded216430a7d16bcec5a5b07548bb2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>* cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68d399123342e8118e7dfdf17d3983ae" class="m-doc-self">storage</a>(</span><span class="m-doc-wrap">std::size_t id) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9ded216430a7d16bcec5a5b07548bb2" class="m-doc-self">storage</a>(</span><span class="m-doc-wrap">uint32_t id) const</span></span>
             </h3>
             <p>Gets the storage of the given component type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -475,84 +317,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">id</td>
-                  <td>Component type identifier.</td>
+                  <td>Component identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
                   <td>Component storage.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aec76669ca8023a902cad70274225182a"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a> cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aec76669ca8023a902cad70274225182a" class="m-doc-self">pack</a>(</span><span class="m-doc-wrap">uint32_t id,
-              std::size_t componentId,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) const</span></span>
-            </h3>
-            <p>Creates a package from a component of an entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">id</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
-                </tr>
-                <tr>
-                  <td>componentId</td>
-                  <td>Component identifier.</td>
-                </tr>
-                <tr>
-                  <td>context</td>
-                  <td>Optional context to use for serialization.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Package containing the component.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a0564af9ef9f87da70b6e976eff74f04d"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0564af9ef9f87da70b6e976eff74f04d" class="m-doc-self">unpack</a>(</span><span class="m-doc-wrap">uint32_t id,
-              std::size_t componentId,
-              const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a>&amp; package,
-              <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context)</span></span>
-            </h3>
-            <p>Inserts a component into an entity, by unpacking a package.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">id</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
-                </tr>
-                <tr>
-                  <td>componentId</td>
-                  <td>Component identifier.</td>
-                </tr>
-                <tr>
-                  <td>package</td>
-                  <td>Package to unpack.</td>
-                </tr>
-                <tr>
-                  <td>context</td>
-                  <td>Optional context to use for deserialization.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether the unpacking was successful.</td>
                 </tr>
               </tfoot>
             </table>
