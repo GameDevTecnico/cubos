@@ -9,11 +9,11 @@ familiar with the concepts of components, resources and systems.
 
 ## Configuring the engine
 
-Plugins are a feature of the @ref cubos::engine::Cubos class. This class is the
-main thing you'll be interacting with when developing a game with **CUBOS.**.
-It is used to configure the engine and run the game loop. Through it, you can
-register new components, resources and configure systems to be run on specific
-conditions.
+Plugins are a feature of the @ref cubos::core::ecs::Cubos class. This class is
+the main thing you'll be interacting with when developing a game with
+**CUBOS.**. It is used to configure the engine and run the game loop. Through
+it, you can register new components, resources and configure systems to be run
+on specific conditions.
 
 An application which just prints `"Hello World!"` and which does absolutely
 nothing else - not even open a window - would look like this:
