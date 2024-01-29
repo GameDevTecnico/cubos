@@ -106,13 +106,14 @@
             </dt>
             <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#ab971efbbea34754a2753e9a2a14a8873" class="m-doc">resize()</a> is called.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a48992fd307b3fb29da8601f23c827924" class="m-doc">onRender</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              <span class="m-doc-wrap-bumper">void <a href="#ad0de5d92da710a09a55fb661fe60b3a9" class="m-doc">onRender</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
               const <a href="structcubos_1_1engine_1_1BaseRenderer_1_1Viewport.html" class="m-doc">Viewport</a>&amp; viewport,
               const <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-flat m-warning">override</span></span>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target,
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> pickingBuffer) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#ab901a18ac49e364c51c32288b99d3b55" class="m-doc">render()</a> is called, before applying post processing effects.</dd>
+            <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a825be18857ab3e3570fdb6fed0dac3aa" class="m-doc">render()</a> is called, before applying post processing effects.</dd>
           </dl>
         </section>
         <section>
@@ -202,15 +203,16 @@
             </table>
 <p>Renderer implementations should override this function to resize their framebuffers.</p>
           </div></section>
-          <section class="m-doc-details" id="a48992fd307b3fb29da8601f23c827924"><div>
+          <section class="m-doc-details" id="ad0de5d92da710a09a55fb661fe60b3a9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DeferredRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a48992fd307b3fb29da8601f23c827924" class="m-doc-self">onRender</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DeferredRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0de5d92da710a09a55fb661fe60b3a9" class="m-doc-self">onRender</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
               const <a href="structcubos_1_1engine_1_1BaseRenderer_1_1Viewport.html" class="m-doc">Viewport</a>&amp; viewport,
               const <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target,
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> pickingBuffer) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-            <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#ab901a18ac49e364c51c32288b99d3b55" class="m-doc">render()</a> is called, before applying post processing effects.</p>
+            <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a825be18857ab3e3570fdb6fed0dac3aa" class="m-doc">render()</a> is called, before applying post processing effects.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -235,6 +237,10 @@
                 <tr>
                   <td>target</td>
                   <td>Target framebuffer.</td>
+                </tr>
+                <tr>
+                  <td>pickingBuffer</td>
+                  <td>Screen picking framebuffer.</td>
                 </tr>
               </tbody>
             </table>
