@@ -1,7 +1,5 @@
-
 #include "plugin.hpp"
 
-#include <cubos/engine/collisions/broad_phase/candidates.hpp>
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
@@ -108,42 +106,18 @@ static void sweepSystem(BroadPhaseSweepAndPrune& sweepAndPrune)
     }
 }
 
-BroadPhaseCandidates::CollisionType getCollisionType(bool box, bool capsule)
-{
-    if (box && capsule)
-    {
-        return BroadPhaseCandidates::CollisionType::BoxCapsule;
-    }
-
-    if (box)
-    {
-        return BroadPhaseCandidates::CollisionType::BoxBox;
-    }
-
-    return BroadPhaseCandidates::CollisionType::CapsuleCapsule;
-}
-
 /// @brief Finds all pairs of colliders which may be colliding.
-///
-/// @details
-/// TODO: This query is disgusting. We need a way to find if a component is present without reading it.
-static void findPairsSystem(
-    Query<Entity, Opt<const BoxCollisionShape&>, Opt<const CapsuleCollisionShape&>, const Collider&> query,
-    const BroadPhaseSweepAndPrune& sweepAndPrune, BroadPhaseCandidates& candidates)
+static void findPairsSystem(Commands cmds, Query<Entity, const Collider&> query,
+                            const BroadPhaseSweepAndPrune& sweepAndPrune)
 {
-    candidates.clearCandidates();
-
     for (glm::length_t axis = 0; axis < 3; axis++)
     {
         for (const auto& [entity, overlaps] : sweepAndPrune.sweepOverlapMaps[axis])
         {
-            auto [_entity, box, capsule, collider] = *query.at(entity);
+            auto [_entity, collider] = *query.at(entity);
             for (const auto& other : overlaps)
             {
-                auto [_other, otherBox, otherCapsule, otherCollider] = *query.at(other);
-
-                // TODO: Should this be inside the if statement?
-                auto type = getCollisionType(box || otherBox, capsule || otherCapsule);
+                auto [_other, otherCollider] = *query.at(other);
 
                 switch (axis)
                 {
@@ -151,21 +125,21 @@ static void findPairsSystem(
                     if (collider.worldAABB.overlapsY(otherCollider.worldAABB) &&
                         collider.worldAABB.overlapsZ(otherCollider.worldAABB))
                     {
-                        candidates.addCandidate(type, {entity, other});
+                        cmds.relate(entity, other, PotentiallyCollidingWith{});
                     }
                     break;
                 case 1: // Y
                     if (collider.worldAABB.overlapsX(otherCollider.worldAABB) &&
                         collider.worldAABB.overlapsZ(otherCollider.worldAABB))
                     {
-                        candidates.addCandidate(type, {entity, other});
+                        cmds.relate(entity, other, PotentiallyCollidingWith{});
                     }
                     break;
                 case 2: // Z
                     if (collider.worldAABB.overlapsX(otherCollider.worldAABB) &&
                         collider.worldAABB.overlapsY(otherCollider.worldAABB))
                     {
-                        candidates.addCandidate(type, {entity, other});
+                        cmds.relate(entity, other, PotentiallyCollidingWith{});
                     }
                     break;
                 }
@@ -174,10 +148,19 @@ static void findPairsSystem(
     }
 }
 
+/// @brief Removes all pairs of entities found to be potentially colliding.
+static void cleanPotentiallyCollidingPairs(Commands cmds, Query<Entity, PotentiallyCollidingWith&, Entity> query)
+{
+    for (auto [entity, collidingWith, other] : query)
+    {
+        cmds.unrelate<PotentiallyCollidingWith>(entity, other);
+    }
+}
+
 void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
 {
-    cubos.addResource<BroadPhaseCandidates>();
     cubos.addResource<BroadPhaseSweepAndPrune>();
+    cubos.addRelation<PotentiallyCollidingWith>();
 
     cubos.system(trackNewCollidersSystem).tagged("cubos.collisions.aabb.setup");
 
@@ -189,5 +172,8 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
 
     cubos.system(updateMarkersSystem).tagged("cubos.collisions.broad.markers").after("cubos.collisions.aabb.update");
     cubos.system(sweepSystem).tagged("cubos.collisions.broad.sweep").after("cubos.collisions.broad.markers");
+    cubos.system(cleanPotentiallyCollidingPairs)
+        .tagged("cubos.collisions.broad.clean")
+        .before("cubos.collisions.broad");
     cubos.system(findPairsSystem).tagged("cubos.collisions.broad").after("cubos.collisions.broad.sweep");
 }
