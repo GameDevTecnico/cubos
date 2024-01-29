@@ -113,6 +113,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/world.cpp"
     "src/cubos/core/ecs/command_buffer.cpp"
     "src/cubos/core/ecs/types.cpp"
+    "src/cubos/core/ecs/cubos.cpp"
 
     "src/cubos/core/geom/box.cpp"
     "src/cubos/core/geom/capsule.cpp"

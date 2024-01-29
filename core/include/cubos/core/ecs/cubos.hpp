@@ -12,15 +12,13 @@
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>
 
-#include <cubos/engine/prelude.hpp>
-
-namespace cubos::engine
+namespace cubos::core::ecs
 {
     /// @brief Resource which stores the time since the last iteration of the main loop started.
     ///
     /// This resource is added and updated by the @ref Cubos class.
     ///
-    /// @ingroup engine
+    /// @ingroup core-ecs
     struct DeltaTime
     {
         DeltaTime(float value);
@@ -32,7 +30,7 @@ namespace cubos::engine
     ///
     /// This resource is added by the @ref Cubos class, initially set to true.
     ///
-    /// @ingroup engine
+    /// @ingroup core-ecs
     struct ShouldQuit
     {
         ShouldQuit(bool value);
@@ -44,7 +42,7 @@ namespace cubos::engine
     ///
     /// This resource is added by the @ref Cubos class.
     ///
-    /// @ingroup engine
+    /// @ingroup core-ecs
     struct Arguments
     {
         Arguments(std::vector<std::string> value);
@@ -53,7 +51,7 @@ namespace cubos::engine
     };
 
     /// @brief Used to chain configurations related to tags.
-    /// @ingroup engine
+    /// @ingroup core-ecs
     class TagBuilder
     {
     public:
@@ -87,7 +85,7 @@ namespace cubos::engine
     };
 
     /// @brief Used to chain configurations related to systems
-    /// @ingroup engine
+    /// @ingroup core-ecs
     class SystemBuilder
     {
     public:
@@ -126,7 +124,7 @@ namespace cubos::engine
 
     /// @brief Represents the engine itself, and exposes the interface with which the game
     /// developer interacts with. Ties up all the different parts of the engine together.
-    /// @ingroup engine
+    /// @ingroup core-ecs
     class Cubos final
     {
     public:
@@ -269,4 +267,4 @@ namespace cubos::engine
         mStartupDispatcher.addSystem(func);
         return {mStartupDispatcher, mMainTags};
     }
-} // namespace cubos::engine
+} // namespace cubos::core::ecs

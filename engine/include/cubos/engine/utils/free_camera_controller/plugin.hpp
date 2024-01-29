@@ -9,9 +9,9 @@
 
 #include <cubos/core/ecs/system/event/reader.hpp>
 
-#include <cubos/engine/cubos.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/prelude.hpp>
 #include <cubos/engine/transform/position.hpp>
 #include <cubos/engine/transform/rotation.hpp>
 #include <cubos/engine/utils/free_camera_controller/controller.hpp>

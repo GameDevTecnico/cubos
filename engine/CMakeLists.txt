@@ -9,7 +9,6 @@ message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
 
 # Set engine source files
 set(CUBOS_ENGINE_SOURCE
-	"src/cubos/engine/cubos.cpp"
 	"src/cubos/engine/prelude.cpp"
 
 	"src/cubos/engine/settings/plugin.cpp"

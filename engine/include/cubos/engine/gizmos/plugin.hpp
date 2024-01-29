@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <cubos/engine/cubos.hpp>
 #include <cubos/engine/gizmos/gizmos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
 {

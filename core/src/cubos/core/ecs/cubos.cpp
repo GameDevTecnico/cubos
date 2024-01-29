@@ -1,12 +1,16 @@
 #include <utility>
 
 #include <cubos/core/ecs/command_buffer.hpp>
+#include <cubos/core/ecs/cubos.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 
-#include <cubos/engine/cubos.hpp>
-
-using namespace cubos::engine;
+using cubos::core::ecs::Arguments;
+using cubos::core::ecs::Cubos;
+using cubos::core::ecs::DeltaTime;
+using cubos::core::ecs::ShouldQuit;
+using cubos::core::ecs::SystemBuilder;
+using cubos::core::ecs::TagBuilder;
 
 DeltaTime::DeltaTime(float value)
     : value(value)

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cubos/core/ecs/cubos.hpp>
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/system/event/reader.hpp>
 #include <cubos/core/ecs/system/event/writer.hpp>
@@ -8,6 +9,18 @@
 
 namespace cubos::engine
 {
+    /// @copydoc cubos::core::ecs::Cubos
+    using Cubos = core::ecs::Cubos;
+
+    /// @copydoc cubos::core::ecs::DeltaTime
+    using DeltaTime = core::ecs::DeltaTime;
+
+    /// @copydoc cubos::core::ecs::ShouldQuit
+    using ShouldQuit = core::ecs::ShouldQuit;
+
+    /// @copydoc cubos::core::ecs::Arguments
+    using Arguments = core::ecs::Arguments;
+
     /// @copydoc cubos::core::ecs::Query
     template <typename... ComponentTypes>
     using Query = core::ecs::Query<ComponentTypes...>;

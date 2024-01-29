@@ -9,7 +9,7 @@
 
 #include <cubos/core/ecs/entity/entity.hpp>
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 namespace tesseratos
 {

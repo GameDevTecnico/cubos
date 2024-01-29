@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 #include <cubos/engine/screen_picker/screen_picker.hpp>
 
 namespace cubos::engine

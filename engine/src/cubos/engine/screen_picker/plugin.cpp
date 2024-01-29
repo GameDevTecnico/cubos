@@ -1,6 +1,6 @@
 #include <cubos/core/io/window.hpp>
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/screen_picker/screen_picker.hpp>
 #include <cubos/engine/window/plugin.hpp>

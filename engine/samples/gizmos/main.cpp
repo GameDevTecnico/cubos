@@ -1,5 +1,5 @@
-#include <cubos/engine/cubos.hpp>
 #include <cubos/engine/gizmos/plugin.hpp>
+#include <cubos/engine/prelude.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>

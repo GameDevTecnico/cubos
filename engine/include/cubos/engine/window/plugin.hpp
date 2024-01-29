@@ -9,7 +9,7 @@
 
 #include <cubos/core/io/window.hpp>
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
 {
