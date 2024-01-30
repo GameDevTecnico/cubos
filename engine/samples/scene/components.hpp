@@ -10,9 +10,14 @@ struct Num
     int value;
 };
 
-struct Parent
+struct OwnedBy
+{
+    CUBOS_REFLECT;
+};
+
+struct DistanceTo
 {
     CUBOS_REFLECT;
 
-    cubos::core::ecs::Entity entity;
+    int value;
 };

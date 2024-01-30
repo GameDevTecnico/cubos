@@ -20,9 +20,17 @@ CUBOS_REFLECT_IMPL(Num)
     return cubos::core::ecs::TypeBuilder<Num>("Num").withField("value", &Num::value).build();
 }
 
-CUBOS_REFLECT_IMPL(Parent)
+CUBOS_REFLECT_IMPL(OwnedBy)
 {
-    return cubos::core::ecs::TypeBuilder<Parent>("Parent").withField("entity", &Parent::entity).build();
+    return cubos::core::ecs::TypeBuilder<OwnedBy>("OwnedBy").tree().build();
+}
+
+CUBOS_REFLECT_IMPL(DistanceTo)
+{
+    return cubos::core::ecs::TypeBuilder<DistanceTo>("DistanceTo")
+        .symmetric()
+        .withField("value", &DistanceTo::value)
+        .build();
 }
 /// [Component Refl]
 
@@ -44,25 +52,33 @@ static void spawnScene(Commands commands, const Assets& assets)
 /// [Spawning the scene]
 
 /// [Displaying the scene]
-static void printStuff(const World& world, Query<Entity> query)
+static void printStuff(Query<Entity, const Num&> numQuery, Query<const OwnedBy&, Entity> ownedByQuery,
+                       Query<const DistanceTo&, Entity> distanceToQuery)
 {
     using cubos::core::data::DebugSerializer;
     using cubos::core::memory::Stream;
 
     DebugSerializer ser{Stream::stdOut};
 
-    for (auto [entity] : query)
+    for (auto [entity, num] : numQuery)
     {
-        Stream::stdOut.printf("Entity ");
+        Stream::stdOut.print("Entity ");
         ser.write(entity);
-        Stream::stdOut.put('\n');
-        for (auto [type, value] : world.components(entity))
+        Stream::stdOut.printf(":\n- Num = {}\n", num.value);
+
+        for (auto [distanceTo, what] : distanceToQuery.pin(0, entity))
         {
-            Stream::stdOut.printf("- {}: ", type->name());
-            ser.write(*type, value);
-            Stream::stdOut.put('\n');
+            Stream::stdOut.print("- DistanceTo(");
+            ser.write(what);
+            Stream::stdOut.printf(") = {}\n", distanceTo.value);
         }
-        Stream::stdOut.put('\n');
+
+        for (auto [ownedBy, owner] : ownedByQuery.pin(0, entity))
+        {
+            Stream::stdOut.print("- OwnedBy(");
+            ser.write(owner);
+            Stream::stdOut.print(")\n");
+        }
     }
 }
 /// [Displaying the scene]
@@ -76,7 +92,8 @@ int main(int argc, char** argv)
     /// [Adding the plugin]
 
     cubos.addComponent<Num>();
-    cubos.addComponent<Parent>();
+    cubos.addRelation<OwnedBy>();
+    cubos.addRelation<DistanceTo>();
 
     cubos.startupSystem(settings).tagged("cubos.settings");
 
