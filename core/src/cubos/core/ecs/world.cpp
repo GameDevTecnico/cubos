@@ -212,6 +212,7 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
     // Get or create the table and insert a new row.
     auto& table = mTables.sparseRelation().create(tableId, mTypes);
     table.insert(from.index, to.index, value);
+    CUBOS_DEBUG("Added relation {} from entity {} to entity {}", type.name(), from, to);
 }
 
 void World::unrelate(Entity from, Entity to, const reflection::Type& type)
@@ -244,6 +245,8 @@ void World::unrelate(Entity from, Entity to, const reflection::Type& type)
             auto& table = mTables.sparseRelation().at(tableId);
             if (table.erase(from.index, to.index))
             {
+                CUBOS_DEBUG("Removed relation {} from entity {} to entity {}", type.name(), from, to);
+
                 if (mTypes.isTreeRelation(dataType))
                 {
                     // If the relation is tree-like, then we are changing the depth of the 'from' entity to 0.
