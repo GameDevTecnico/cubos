@@ -8,10 +8,14 @@
       "Num": 0
     },
     "sub1.root": {
-      "Parent": "main"
+      "OwnedBy": "main",
+      "DistanceTo": {
+        "entity": "sub2.root",
+        "value": 5
+      }
     },
     "sub2.root": {
-      "Parent": "main"
+      "OwnedBy": "main"
     }
   }
 }

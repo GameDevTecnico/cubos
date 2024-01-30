@@ -6,7 +6,7 @@
     },
     "child": {
       "Num": 2,
-      "Parent": "root"
+      "OwnedBy": "root"
     }
   }
 }
