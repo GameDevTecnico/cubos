@@ -19,9 +19,10 @@ using cubos::core::reflection::TypeRegistry;
 
 using namespace cubos::engine;
 
-SceneBridge::SceneBridge(TypeRegistry components)
+SceneBridge::SceneBridge(TypeRegistry components, TypeRegistry relations)
     : FileBridge(core::reflection::reflect<Scene>())
     , mComponents{std::move(components)}
+    , mRelations{std::move(relations)}
 {
 }
 
@@ -138,30 +139,102 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
         {
             if (!entityJSON.is_object())
             {
-                CUBOS_ERROR("Expected entity '{}' to be a JSON object, found {}", entityName, entitiesJSON.type_name());
+                CUBOS_ERROR("Expected entity {} to be a JSON object, found {}", entityName, entitiesJSON.type_name());
                 return false;
             }
 
             auto entity = scene.blueprint.bimap().atRight(entityName);
 
-            for (const auto& [componentName, componentJSON] : entityJSON.items())
+            for (const auto& [typeName, dataJSON] : entityJSON.items())
             {
-                if (!mComponents.contains(componentName))
+                if (mComponents.contains(typeName))
                 {
-                    CUBOS_ERROR("No such component type '{}' registered on the scene bridge", componentName);
+                    // Create the component with the default value.
+                    auto component = AnyValue::defaultConstruct(mComponents.at(typeName));
+
+                    // Then change any values using the associated JSON.
+                    des.feed(dataJSON);
+                    if (!des.read(component.type(), component.get()))
+                    {
+                        CUBOS_ERROR("Could not deserialize component of type {} of entity {}", typeName, entityName);
+                        return false;
+                    }
+
+                    // And finally, add it to the blueprint.
+                    scene.blueprint.add(entity, core::memory::move(component));
+                }
+                else if (mRelations.contains(typeName))
+                {
+                    // Create the relation with the default value.
+                    auto relation = AnyValue::defaultConstruct(mRelations.at(typeName));
+
+                    std::string toName;
+                    if (dataJSON.is_string())
+                    {
+                        // If the user only specified a string, then the relation will keep the default value and the
+                        // string represents the 'to' entity.
+                        toName = dataJSON;
+                    }
+                    else if (dataJSON.is_object())
+                    {
+                        // If the user specified an object, then it must contain an "entity" key, whose value
+                        // represents the 'to' entity.
+                        if (!dataJSON.contains("entity") || !dataJSON.at("entity").is_string())
+                        {
+                            CUBOS_ERROR("Could not deserialize relation of type {} from entity {}: expected JSON "
+                                        "object to contain key \"entity\" with a string value",
+                                        typeName, entityName, dataJSON.type_name());
+                            return false;
+                        }
+                        toName = dataJSON.at("entity");
+
+                        // If the value is specified, then deserialize the relation from it.
+                        if (dataJSON.contains("value"))
+                        {
+                            des.feed(dataJSON.at("value"));
+                            if (!des.read(relation.type(), relation.get()))
+                            {
+                                CUBOS_ERROR("Could not deserialize relation of type {} from entity {} to {}", typeName,
+                                            entityName, toName);
+                                return false;
+                            }
+                        }
+
+                        // Check if there extra unused fields in the object.
+                        for (const auto& [key, unusedJSON] : dataJSON.items())
+                        {
+                            if (key != "entity" && key != "value")
+                            {
+                                CUBOS_ERROR("Could not deserialize relation of type {} from entity {} to entity {}: "
+                                            "expected \"entity\" or \"value\", found {}",
+                                            typeName, entityName, toName, key);
+                                return false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        CUBOS_ERROR("Could not deserialize relation of type {} from entity {}: expected JSON object "
+                                    "but found {}",
+                                    typeName, entityName, dataJSON.type_name());
+                        return false;
+                    }
+
+                    if (!scene.blueprint.bimap().containsRight(toName))
+                    {
+                        CUBOS_ERROR("Could not deserialize relation of type {} from entity {} to {}: no such entity {}",
+                                    typeName, entityName, toName, toName);
+                        return false;
+                    }
+
+                    auto toEntity = scene.blueprint.bimap().atRight(toName);
+                    scene.blueprint.relate(entity, toEntity, std::move(relation));
+                }
+                else
+                {
+                    CUBOS_ERROR("No such component or relation type {} registered on the scene bridge", typeName);
                     return false;
                 }
-
-                auto component = AnyValue::defaultConstruct(mComponents.at(componentName));
-                des.feed(componentJSON);
-                if (!des.read(component.type(), component.get()))
-                {
-                    CUBOS_ERROR("Could not deserialize component of type '{}' of entity '{}'", componentName,
-                                entityName);
-                    return false;
-                }
-
-                scene.blueprint.add(entity, core::memory::move(component));
             }
         }
     }

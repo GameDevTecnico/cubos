@@ -13,7 +13,8 @@ static void bridge(World& world)
 
     // Add the bridge to load .cubos files.
     TypeRegistry types{};
-    assets.get().registerBridge(".cubos", std::make_unique<SceneBridge>(world.types().components()));
+    assets.get().registerBridge(".cubos",
+                                std::make_unique<SceneBridge>(world.types().components(), world.types().relations()));
 }
 
 void cubos::engine::scenePlugin(Cubos& cubos)

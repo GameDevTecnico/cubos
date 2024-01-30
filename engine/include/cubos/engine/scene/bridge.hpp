@@ -48,11 +48,16 @@ namespace cubos::engine
     public:
         /// @brief Constructs a bridge.
         /// @param components Component type registry.
-        SceneBridge(core::reflection::TypeRegistry components);
+        /// @param relations Relation type registry.
+        SceneBridge(core::reflection::TypeRegistry components, core::reflection::TypeRegistry relations);
 
         /// @brief Returns the type registry used to deserialize components.
         /// @return Component type registry.
         core::reflection::TypeRegistry& components();
+
+        /// @brief Returns the type registry used to deserialize relations.
+        /// @return Relations type registry.
+        core::reflection::TypeRegistry& relations();
 
     protected:
         bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
@@ -60,5 +65,6 @@ namespace cubos::engine
 
     private:
         core::reflection::TypeRegistry mComponents;
+        core::reflection::TypeRegistry mRelations;
     };
 } // namespace cubos::engine
