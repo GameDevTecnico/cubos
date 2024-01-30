@@ -37,11 +37,9 @@ namespace cubos::engine
             // Dump the file stream into a string and initialize a JSON deserializer with it.
             std::string jsonStr;
             stream.readUntil(jsonStr, nullptr);
-            core::data::JSONDeserializer deserializer{};
 
-            // JSONDeserializer() receives a JSON object to deserialize from
+            // Parse JSON from the string.
             nlohmann::json json{};
-
             try
             {
                 json = nlohmann::json::parse(jsonStr);
@@ -51,6 +49,9 @@ namespace cubos::engine
                 CUBOS_ERROR("{}", e.what());
                 return false;
             }
+
+            // Feed the parsed JSON to a JSON deserializer.
+            core::data::JSONDeserializer deserializer{};
             deserializer.feed(json);
 
             // Deserialize the asset and store it in the asset manager.
@@ -78,7 +79,6 @@ namespace cubos::engine
                 return false;
             }
 
-            // new JSONSerializer() does not receive a stream to write to, need to write to it manually
             auto jsonStr = serializer.output().dump();
             stream.print(jsonStr);
             return true;
