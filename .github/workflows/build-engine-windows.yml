@@ -23,6 +23,11 @@ jobs:
       with:
         submodules: recursive
         
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
     - name: Install dependencies
       run: |
         choco install ccache --version ${{ env.CCACHE_VERSION }}
