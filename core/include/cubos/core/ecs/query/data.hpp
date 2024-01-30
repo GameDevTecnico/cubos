@@ -222,6 +222,10 @@ namespace cubos::core::ecs
         {
         }
 
+        /// @brief Copy constructs.
+        /// @param view Other view.
+        View(const View& view) = default;
+
         /// @brief Returns a new view equal to this one but with the given target pinned to the given entity.
         ///
         /// Effectively this filters out all matches where the given target isn't the given entity.
@@ -229,10 +233,9 @@ namespace cubos::core::ecs
         /// @param target Target index.
         /// @param entity Entity.
         /// @return View.
-        View pin(int target, Entity entity) &&
+        View pin(int target, Entity entity)
         {
-            mView = std::move(mView).pin(target, entity);
-            return *this;
+            return {mData, mView.pin(target, entity)};
         }
 
         /// @brief Returns an iterator pointing to the first query match.

@@ -458,7 +458,7 @@ namespace cubos::core::ecs
     Query<Ts...> impl::SystemFetcher<Query<Ts...>>::fetch(World& /*unused*/, CommandBuffer& /*unused*/, State& state)
     {
         state.update();
-        return Query<Ts...>(state);
+        return Query<Ts...>(state.view());
     }
 
     template <typename... ComponentTypes>
