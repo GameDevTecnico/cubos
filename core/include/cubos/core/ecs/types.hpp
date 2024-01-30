@@ -94,6 +94,10 @@ namespace cubos::core::ecs
         /// @return Component type registry.
         reflection::TypeRegistry components() const;
 
+        /// @brief Gets a type registry with only the relation types.
+        /// @return Relation type registry.
+        reflection::TypeRegistry relations() const;
+
     private:
         /// @brief Possible data type kinds.
         enum class Kind
