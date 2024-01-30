@@ -30,9 +30,9 @@ namespace cubos::core::ecs
         using Iterator = typename QueryData<Ts...>::View::Iterator;
 
         /// @brief Constructs.
-        /// @param data Query data.
-        Query(QueryData<Ts...>& data)
-            : mView{data.view()}
+        /// @param data Query data view.
+        Query(typename QueryData<Ts...>::View view)
+            : mView{view}
         {
         }
 
@@ -48,6 +48,18 @@ namespace cubos::core::ecs
         Iterator end()
         {
             return mView.end();
+        }
+
+        /// @brief Returns a new query equal to this one but with the given target pinned to the given entity.
+        ///
+        /// Effectively this filters out all matches where the given target isn't the given entity.
+        ///
+        /// @param target Target index.
+        /// @param entity Entity.
+        /// @return Query.
+        Query pin(int target, Entity entity)
+        {
+            return {mView.pin(target, entity)};
         }
 
         /// @brief Accesses the match for the given entity, if there is one.

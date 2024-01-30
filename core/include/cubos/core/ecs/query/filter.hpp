@@ -141,7 +141,7 @@ namespace cubos::core::ecs
         /// @param target Target index.
         /// @param entity Entity.
         /// @return View.
-        View pin(int target, Entity entity) &&;
+        View pin(int target, Entity entity);
 
         /// @brief Returns an iterator pointing to the first query match.
         /// @return Iterator.

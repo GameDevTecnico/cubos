@@ -286,13 +286,19 @@ auto QueryFilter::View::operator=(const View& view) -> View&
     return *this;
 }
 
-auto QueryFilter::View::pin(int target, Entity entity) && -> View
+auto QueryFilter::View::pin(int target, Entity entity) -> View
 {
     CUBOS_ASSERT(target < mFilter.mTargetCount, "No such target {} in query", target);
     CUBOS_ASSERT(mPins[target].isNull(), "Target {} was already pinned", target);
     CUBOS_ASSERT(mFilter.mWorld.isAlive(entity), "Entity {} is not alive", entity);
-    mPins[target] = entity;
-    return *this;
+
+    View view{mFilter};
+    for (int i = 0; i < mFilter.mTargetCount; ++i)
+    {
+        view.mPins[i] = mPins[i];
+    }
+    view.mPins[target] = entity;
+    return view;
 }
 
 auto QueryFilter::View::begin() -> Iterator
