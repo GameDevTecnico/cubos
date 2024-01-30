@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
               </ul>
             </li>
           </ul>
@@ -74,20 +75,55 @@
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>
             </dt>
-            <dd>Collection of entities and their respective components.</dd>
+            <dd>Collection of entities and their respective components and relations.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>
+            </dt>
+            <dd>Stores commands to execute them later.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">ComponentManager</a>
             </dt>
             <dd>Holds and manages components.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ComponentTypeBuilder.html" class="m-doc">ComponentTypeBuilder</a>
-            </dt>
-            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent component types.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>
             </dt>
             <dd>Stores the components of a given type.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html" class="m-doc">DeltaTime</a>
+            </dt>
+            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ShouldQuit.html" class="m-doc">ShouldQuit</a>
+            </dt>
+            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">Arguments</a>
+            </dt>
+            <dd>Resource which stores the command-line arguments.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>
+            </dt>
+            <dd>Used to chain configurations related to tags.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>
+            </dt>
+            <dd>Used to chain configurations related to systems.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>
+            </dt>
+            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>
+            </dt>
+            <dd>Stores which column types each archetype holds and the edges which connect them.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>
+            </dt>
+            <dd>Identifies an archetype.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeIdHash.html" class="m-doc">ArchetypeIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>
             </dt>
@@ -101,14 +137,49 @@
             </dt>
             <dd>Internal type which holds and manages entities and their component masks.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1RelationTypeBuilder.html" class="m-doc">RelationTypeBuilder</a>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EntityPool.html" class="m-doc">EntityPool</a>
             </dt>
-            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent relation types.</dd>
+            <dd>Manages the creation and destruction of entity identifiers, as well as storing their archetype identifiers.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1RelationTable.html" class="m-doc">RelationTable</a>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a>
             </dt>
-            <dd>A table which stores relations. Allows for quick insertion, deletion and iteration.</dd>
+            <dd>Describes the types of data a query accesses.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>
+            </dt>
+            <dd>Holds the data necessary to execute a query.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html" class="m-doc">QueryFetcher</a>
+            </dt>
+            <dd>Type meant to be specialized which implements for each argument type the necessary logic to extract it from the tables.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html" class="m-doc">QueryFilter</a>
+            </dt>
+            <dd>Used to find matches for the given query terms. Essentially contains the non-templated part of the query logic.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>
+            </dt>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>
+            </dt>
+            <dd>Describes a term in a query.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SymmetricTrait.html" class="m-doc">SymmetricTrait</a>
+            </dt>
+            <dd>Trait used to identify symmetric relations.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1TreeTrait.html" class="m-doc">TreeTrait</a>
+            </dt>
+            <dd>Trait used to identify tree relations.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">TypeBuilder</a>
+            </dt>
+            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent ECS types.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>
@@ -124,41 +195,9 @@
             </dt>
             <dd>Holds and manages resources.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read</a>
-            </dt>
-            <dd>System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write</a>
-            </dt>
-            <dd>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">OptRead</a>
-            </dt>
-            <dd>System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">OptWrite</a>
-            </dt>
-            <dd>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>
-            </dt>
-            <dd>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>
-            </dt>
-            <dd>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>
             </dt>
             <dd>System argument used to write ECS commands and execute them at a later time.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>
-            </dt>
-            <dd>Stores commands to execute them later.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a>
             </dt>
@@ -179,11 +218,7 @@
             </dt>
             <dd>System argument which allows the system to send events of type <code>T</code> to other systems.</dd>
             <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryInfo.html" class="m-doc">QueryInfo</a>
-            </dt>
-            <dd>Describes a query.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>
             </dt>
             <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
@@ -202,10 +237,98 @@
             </dt>
             <dd>Wrapper for a system of type <code>F</code>.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a>
+            </dt>
+            <dd>Identifies a data column type.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1DenseTableRegistry.html" class="m-doc">DenseTableRegistry</a>
+            </dt>
+            <dd>Stores the dense tables of a given world.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>
+            </dt>
+            <dd>Stores the dense data associated to entities of a given archetype.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableId.html" class="m-doc">SparseRelationTableId</a>
+            </dt>
+            <dd>Identifies a sparse relation table.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableIdHash.html" class="m-doc">SparseRelationTableIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableId.html" class="m-doc">SparseRelationTableId</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTableRegistry.html" class="m-doc">SparseRelationTableRegistry</a>
+            </dt>
+            <dd>Stores all of the sparse relation tables.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>
+            </dt>
+            <dd>A table which stores relations. Allows for quick insertion, deletion and iteration.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>
+            </dt>
+            <dd>Stores the tables of a given world.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>
+            </dt>
+            <dd>Identifies a data type registered in the world.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">DataTypeIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>
+            </dt>
+            <dd>Registry of all data types used in an ECS world.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>
             </dt>
             <dd>Holds entities, their components and resources.</dd>
           </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> { </span><span class="m-doc-wrap"><a href="#ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23" class="m-doc">Random</a>,
+              <a href="#ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53" class="m-doc">Down</a>,
+              <a href="#ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa" class="m-doc">Up</a> }</span>
+            </dt>
+            <dd>Possible traversal types for tree relation terms.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="ab7ac3d0b627b68d4303a38fcef673b82"><div>
+            <h3>
+              enum class cubos::<wbr />core::<wbr />ecs::<wbr /><a href="#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc-self">Traversal</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="term_8hpp.html">&lt;core/ecs/query/term.hpp&gt;</a></div>
+            </h3>
+            <p>Possible traversal types for tree relation terms.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23">Random</a></td>
+                  <td>
+                  <p>Default traversal order. No specific ordering is required.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53">Down</a></td>
+                  <td>
+                  <p>Starts in the topmost entity and traverses down the relation.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa">Up</a></td>
+                  <td>
+                  <p>Starts in the bottommost entity and traverses up the relation.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

@@ -56,32 +56,12 @@
             <li>
               Reference
               <ul>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Internally, <a href="classcubos_1_1core_1_1ecs_1_1World.html#a70a50648e00205826b4e7993ff104601" class="m-doc">components</a> are stored in abstract containers called <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&#x27;s.</p></aside>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="abee128f126b1ed6d66fe78399185a0f3">
-              using <a href="#abee128f126b1ed6d66fe78399185a0f3" class="m-doc-self">Iterator</a> = <a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">EntityManager::<wbr />Iterator</a>
-            </dt>
-            <dd>Used to iterate over all entities in a world.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a83965d035f8c09f9b5ea59a4d4155c7c" class="m-doc">World</a>(</span><span class="m-doc-wrap">std::size_t initialCapacity = 1024)</span>
-            </dt>
-            <dd>Constructs with the given <code>initialCapacity</code>.</dd>
-          </dl>
-        </section>
+<aside class="m-note m-default"><h4>See also</h4><p>Internally, <a href="classcubos_1_1core_1_1ecs_1_1World.html#a23d21a46e982a60f3ac0f875abccb0d8" class="m-doc">components</a> are stored in abstract containers called <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&#x27;s.</p></aside>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -100,6 +80,39 @@
             </dt>
             <dd>Registers a component type.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa1b89f88e33d76537e164af0d3589c05" class="m-doc">registerRelation</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
+            </dt>
+            <dd>Registers a relation type.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#ac8b47181e77a1778e070bcbce4b7fd3a" class="m-doc">registerRelation</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Registers a relation type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab08f42ec77bdd4027c53650867695456" class="m-doc">types</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp;</span>
+            </dt>
+            <dd>Returns the types registry of the world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a59b6d04f98ff8569cf30fc2e16181cf2" class="m-doc">types</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp;</span>
+            </dt>
+            <dd>Returns the types registry of the world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a60b56980a193cb6d7795d2583ab63981" class="m-doc">tables</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp;</span>
+            </dt>
+            <dd>Returns the tables of the world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aefcad27243ce7243d637ad431f871c04" class="m-doc">tables</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp;</span>
+            </dt>
+            <dd>Returns the tables of the world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a131ae85933bc39d45787ca824a556001" class="m-doc">archetypeGraph</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>&amp;</span>
+            </dt>
+            <dd>Returns the archetype graph of the world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a80353a42830d7fb9388a29a3316de251" class="m-doc">archetypeGraph</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>&amp;</span>
+            </dt>
+            <dd>Returns the archetype graph of the world.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a3e519642d0c3862bf07bdfe9111a4656" class="m-doc">read</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&lt;T&gt;</span>
             </dt>
@@ -114,17 +127,29 @@
             </dt>
             <dd>Creates a new entity.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0c29f77a780d3420843c2fc289d18076" class="m-doc">createAt</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
+            </dt>
+            <dd>Creates a new entity with the given identifier.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a434683f630574ac284235cc78836e41d" class="m-doc">reserve</a>(</span><span class="m-doc-wrap">) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
+            </dt>
+            <dd>Reserves an entity identifier, without actually creating an entity.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a37a304f4a486f692e862b8585b79fa61" class="m-doc">destroy</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
             </dt>
             <dd>Destroys an entity.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a863e854d3ab84b93402f493ec887d611" class="m-doc">generation</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; uint32_t</span>
+            </dt>
+            <dd>Gets the generation of the entity with the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a27fee17c7491ca6353dafb827dfa5ce7" class="m-doc">archetype</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a></span>
+            </dt>
+            <dd>Gets the archetype of the given entity.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8df2e215fe9c352958a41542c371df27" class="m-doc">isAlive</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
             </dt>
             <dd>Checks if an entity is still alive.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a70a50648e00205826b4e7993ff104601" class="m-doc">components</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a></span>
-            </dt>
-            <dd>Returns a type registry which contains all registered component types.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a23d21a46e982a60f3ac0f875abccb0d8" class="m-doc">components</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World_1_1Components.html" class="m-doc">Components</a></span>
             </dt>
@@ -134,34 +159,71 @@
             </dt>
             <dd>Creates a components view for the given entity.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac4761becf40ee204c210d8243a7ac1a8" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">void <a href="#adb03790c809616907e573f310e560709" class="m-doc">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span>
             </dt>
-            <dd>Returns an iterator which points to the first entity of the world.</dd>
+            <dd>Inserts a relation between the two given entities.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab96c7b5a7966043fd88d9e1f795fcba4" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a></span>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#a1f43ab3dd0b7fbd7d56ad8a3264e95ae" class="m-doc">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              T value)</span>
             </dt>
-            <dd>Returns an iterator which points to the end of the world.</dd>
+            <dd>Inserts a relation between the two given entities.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a6637045fd73f33143cc6f3a9a50e5a8d" class="m-doc">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
+            </dt>
+            <dd>Removes the relation, if there&#x27;s any, between the two given entities.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#a3d674afe0f5b52b1873eff49b60f96fd" class="m-doc">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to)</span>
+            </dt>
+            <dd>Removes the relation, if there&#x27;s any, between the two given entities.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">related</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if there&#x27;s a relation of the given type between the two given entities.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad18253a714e55db3b4172cd3f636fd0c" class="m-doc">related</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if there&#x27;s a relation of the given type between the two given entities.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b579235297c82f984a478f25ae27737" class="m-doc">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; void*</span>
+            </dt>
+            <dd>Gets a pointer to the relation value between the two given entities.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6f6971bf52fb5af3fda82ba059236369" class="m-doc">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const -&gt; const void*</span>
+            </dt>
+            <dd>Gets a pointer to the relation value between the two given entities.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a63b6dc0ad3e7ff9787bbac2909dd601a" class="m-doc">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) -&gt; T&amp;</span>
+            </dt>
+            <dd>Gets a reference to the relation value between the two given entities.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad1cb7d3000ee9eee43184cfa8cd95d7a" class="m-doc">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) const -&gt; const T&amp;</span>
+            </dt>
+            <dd>Gets a reference to the relation value between the two given entities.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a83965d035f8c09f9b5ea59a4d4155c7c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a83965d035f8c09f9b5ea59a4d4155c7c" class="m-doc-self">World</a>(</span><span class="m-doc-wrap">std::size_t initialCapacity = 1024)</span></span>
-            </h3>
-            <p>Constructs with the given <code>initialCapacity</code>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">initialCapacity</td>
-                  <td>How many entities to reserve space for.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
           <section class="m-doc-details" id="a9dfa30af4b1d6efd94790c62683ec5de"><div>
             <h3>
               <div class="m-doc-template">
@@ -181,7 +243,7 @@
                 </tr>
                 <tr>
                   <td>TArgs</td>
-                  <td>Types of the arguments of the constructor of the resource.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a> of the arguments of the constructor of the resource.</td>
                 </tr>
               </tbody>
               <thead>
@@ -190,11 +252,11 @@
               <tbody>
                 <tr>
                   <td>args</td>
-                  <td>Arguments of the constructor of the resource.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">Arguments</a> of the constructor of the resource.</td>
                 </tr>
               </tbody>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p>Should be called before other operations, aside from <a href="classcubos_1_1core_1_1ecs_1_1World.html#a2d4eb893c802cd8f7145cb9c2de3ac89" class="m-doc">registerComponent()</a>.</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p>Should be called before other non-registering operations.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ac34f10a86cd28c14b9eeb9ac87f4cc4b"><div>
             <h3>
@@ -231,6 +293,128 @@
                   <td>Component type.</td>
                 </tr>
               </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Should be called before other non-registering operations.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aa1b89f88e33d76537e164af0d3589c05"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa1b89f88e33d76537e164af0d3589c05" class="m-doc-self">registerRelation</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Registers a relation type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac8b47181e77a1778e070bcbce4b7fd3a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8b47181e77a1778e070bcbce4b7fd3a" class="m-doc-self">registerRelation</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Registers a relation type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab08f42ec77bdd4027c53650867695456"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab08f42ec77bdd4027c53650867695456" class="m-doc-self">types</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the types registry of the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a> registry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a59b6d04f98ff8569cf30fc2e16181cf2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59b6d04f98ff8569cf30fc2e16181cf2" class="m-doc-self">types</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the types registry of the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a> registry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a60b56980a193cb6d7795d2583ab63981"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60b56980a193cb6d7795d2583ab63981" class="m-doc-self">tables</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the tables of the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aefcad27243ce7243d637ad431f871c04"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aefcad27243ce7243d637ad431f871c04" class="m-doc-self">tables</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the tables of the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a131ae85933bc39d45787ca824a556001"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a131ae85933bc39d45787ca824a556001" class="m-doc-self">archetypeGraph</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the archetype graph of the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Archetype graph.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a80353a42830d7fb9388a29a3316de251"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80353a42830d7fb9388a29a3316de251" class="m-doc-self">archetypeGraph</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the archetype graph of the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Archetype graph.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a3e519642d0c3862bf07bdfe9111a4656"><div>
@@ -294,10 +478,49 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0c29f77a780d3420843c2fc289d18076"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c29f77a780d3420843c2fc289d18076" class="m-doc-self">createAt</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+            </h3>
+            <p>Creates a new entity with the given identifier.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
                 </tr>
               </tfoot>
             </table>
+<p>Aborts if the entity already exists.</p>
+          </div></section>
+          <section class="m-doc-details" id="a434683f630574ac284235cc78836e41d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a434683f630574ac284235cc78836e41d" class="m-doc-self">reserve</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Reserves an entity identifier, without actually creating an entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The entity can be later created with a call to <a href="classcubos_1_1core_1_1ecs_1_1World.html#a0c29f77a780d3420843c2fc289d18076" class="m-doc">createAt()</a>.</p>
           </div></section>
           <section class="m-doc-details" id="a37a304f4a486f692e862b8585b79fa61"><div>
             <h3>
@@ -316,6 +539,52 @@
               </tbody>
             </table>
 <p>If an entity has already been destroyed, this function does nothing.</p>
+          </div></section>
+          <section class="m-doc-details" id="a863e854d3ab84b93402f493ec887d611"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint32_t cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a863e854d3ab84b93402f493ec887d611" class="m-doc-self">generation</a>(</span><span class="m-doc-wrap">uint32_t index) const</span></span>
+            </h3>
+            <p>Gets the generation of the entity with the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> generation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a27fee17c7491ca6353dafb827dfa5ce7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a27fee17c7491ca6353dafb827dfa5ce7" class="m-doc-self">archetype</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
+            </h3>
+            <p>Gets the archetype of the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Archetype identifier.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
           <section class="m-doc-details" id="a8df2e215fe9c352958a41542c371df27"><div>
             <h3>
@@ -336,20 +605,6 @@
                 <tr>
                   <th>Returns</th>
                   <td>Whether the entity is alive.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a70a50648e00205826b4e7993ff104601"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a70a50648e00205826b4e7993ff104601" class="m-doc-self">components</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Returns a type registry which contains all registered component types.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Component type registry.</td>
                 </tr>
               </tfoot>
             </table>
@@ -402,33 +657,362 @@
             </table>
 <p>The given <code>entity</code> must be <a href="classcubos_1_1core_1_1ecs_1_1World.html#a8df2e215fe9c352958a41542c371df27" class="m-doc">alive</a>.</p>
           </div></section>
-          <section class="m-doc-details" id="ac4761becf40ee204c210d8243a7ac1a8"><div>
+          <section class="m-doc-details" id="adb03790c809616907e573f310e560709"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac4761becf40ee204c210d8243a7ac1a8" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adb03790c809616907e573f310e560709" class="m-doc-self">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
             </h3>
-            <p>Returns an iterator which points to the first entity of the world.</p>
+            <p>Inserts a relation between the two given entities.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Relation value to move.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>If the relation already exists, it is overwritten.</p>
+          </div></section>
+          <section class="m-doc-details" id="a1f43ab3dd0b7fbd7d56ad8a3264e95ae"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f43ab3dd0b7fbd7d56ad8a3264e95ae" class="m-doc-self">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              T value)</span></span>
+            </h3>
+            <p>Inserts a relation between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Relation value.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>If the relation already exists, it is overwritten.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6637045fd73f33143cc6f3a9a50e5a8d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6637045fd73f33143cc6f3a9a50e5a8d" class="m-doc-self">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Removes the relation, if there&#x27;s any, between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3d674afe0f5b52b1873eff49b60f96fd"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">reflection::<wbr />Reflectable</a> T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d674afe0f5b52b1873eff49b60f96fd" class="m-doc-self">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to)</span></span>
+            </h3>
+            <p>Removes the relation, if there&#x27;s any, between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a409e6c2f96e1ca77e1177280e73460fd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc-self">related</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const</span></span>
+            </h3>
+            <p>Checks if there&#x27;s a relation of the given type between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Iterator.</td>
+                  <th>Returns</th>
+                  <td>Whether the relation exists.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab96c7b5a7966043fd88d9e1f795fcba4"><div>
+          <section class="m-doc-details" id="ad18253a714e55db3b4172cd3f636fd0c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab96c7b5a7966043fd88d9e1f795fcba4" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad18253a714e55db3b4172cd3f636fd0c" class="m-doc-self">related</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) const</span></span>
             </h3>
-            <p>Returns an iterator which points to the end of the world.</p>
+            <p>Checks if there&#x27;s a relation of the given type between the two given entities.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Iterator.</td>
+                  <th>Returns</th>
+                  <td>Whether the relation exists.</td>
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a3b579235297c82f984a478f25ae27737"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b579235297c82f984a478f25ae27737" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Gets a pointer to the relation value between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to relation value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The relation must <a href="classcubos_1_1core_1_1ecs_1_1World.html#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">exist</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6f6971bf52fb5af3fda82ba059236369"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6f6971bf52fb5af3fda82ba059236369" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const</span></span>
+            </h3>
+            <p>Gets a pointer to the relation value between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to relation value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The relation must <a href="classcubos_1_1core_1_1ecs_1_1World.html#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">exist</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a63b6dc0ad3e7ff9787bbac2909dd601a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a63b6dc0ad3e7ff9787bbac2909dd601a" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to)</span></span>
+            </h3>
+            <p>Gets a reference to the relation value between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to relation value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The relation must <a href="classcubos_1_1core_1_1ecs_1_1World.html#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">exist</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad1cb7d3000ee9eee43184cfa8cd95d7a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad1cb7d3000ee9eee43184cfa8cd95d7a" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) const</span></span>
+            </h3>
+            <p>Gets a reference to the relation value between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to relation value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The relation must <a href="classcubos_1_1core_1_1ecs_1_1World.html#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">exist</a>.</p>
           </div></section>
         </section>
       </div>
