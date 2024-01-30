@@ -98,3 +98,16 @@ TypeRegistry Types::components() const
     }
     return registry;
 }
+
+TypeRegistry Types::relations() const
+{
+    TypeRegistry registry{};
+    for (const auto& entry : mEntries)
+    {
+        if (entry.kind == Kind::Relation)
+        {
+            registry.insert(*entry.type);
+        }
+    }
+    return registry;
+}
