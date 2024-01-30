@@ -78,8 +78,8 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ae5674dc1a7344236c3fb55c037f57e55" class="m-doc">Query</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;&amp; data)</span>
+            <dt id="a8bb3e23e8e28bc804bcbed18c545b598">
+              <span class="m-doc-wrap-bumper"><a href="#a8bb3e23e8e28bc804bcbed18c545b598" class="m-doc-self">Query</a>(</span><span class="m-doc-wrap">typename <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;::View view)</span>
             </dt>
             <dd>Constructs.</dd>
           </dl>
@@ -96,6 +96,11 @@
             </dt>
             <dd>Returns an out of bounds iterator representing the end of the query matches.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa112d0599e3c7d463d946e2367c62f0a" class="m-doc">pin</a>(</span><span class="m-doc-wrap">int target,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a></span>
+            </dt>
+            <dd>Returns a new query equal to this one but with the given target pinned to the given entity.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ace8ecfc0b95cb8d12e5beadec0988542" class="m-doc">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
             </dt>
             <dd>Accesses the match for the given entity, if there is one.</dd>
@@ -108,26 +113,6 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ae5674dc1a7344236c3fb55c037f57e55"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Ts&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5674dc1a7344236c3fb55c037f57e55" class="m-doc-self">Query</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;&amp; data)</span></span>
-            </h3>
-            <p>Constructs.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">data</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> data.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
           <section class="m-doc-details" id="a1c1939dc0f31116c569337116df344d9"><div>
             <h3>
               <div class="m-doc-template">
@@ -161,6 +146,38 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="aa112d0599e3c7d463d946e2367c62f0a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa112d0599e3c7d463d946e2367c62f0a" class="m-doc-self">pin</a>(</span><span class="m-doc-wrap">int target,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+            </h3>
+            <p>Returns a new query equal to this one but with the given target pinned to the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Target index.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Effectively this filters out all matches where the given target isn&#x27;t the given entity.</p>
           </div></section>
           <section class="m-doc-details" id="ace8ecfc0b95cb8d12e5beadec0988542"><div>
             <h3>
