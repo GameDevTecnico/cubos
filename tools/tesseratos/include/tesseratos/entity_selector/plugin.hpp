@@ -34,6 +34,7 @@ namespace tesseratos
     /// `cubos.renderer.draw`
     ///
     /// ## Dependencies
+    /// - @ref imgui-plugin
     /// - @ref screen-picker-plugin
     /// - @ref window-plugin
 

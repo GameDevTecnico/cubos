@@ -1,3 +1,6 @@
+#include <imgui.h>
+
+#include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -19,6 +22,7 @@ using namespace tesseratos;
 
 void tesseratos::entitySelectorPlugin(Cubos& cubos)
 {
+    cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(cubos::engine::screenPickerPlugin);
     cubos.addPlugin(cubos::engine::windowPlugin);
 
@@ -39,6 +43,12 @@ void tesseratos::entitySelectorPlugin(Cubos& cubos)
                  EventReader<WindowEvent> windowEvent) {
             for (const auto& event : windowEvent)
             {
+                if (ImGui::GetIO().WantCaptureMouse)
+                {
+                    // Consume event but don't do anything
+                    continue;
+                }
+
                 if (std::holds_alternative<MouseMoveEvent>(event))
                 {
                     entitySelector.lastMousePosition = std::get<MouseMoveEvent>(event).position;
