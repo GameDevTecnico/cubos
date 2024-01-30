@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cubos/core/ecs/entity/entity.hpp>
+#include <cubos/core/gl/render_device.hpp>
 
 #include <cubos/engine/prelude.hpp>
 
@@ -25,13 +26,22 @@ namespace tesseratos
     /// ## Resources
     /// - @ref EntitySelector - identifies the currently selected entity.
     ///
+    /// ## Startup tags
+    /// - `cubos.entitySelector.init` - the EntitySelector resource is initialized
+    ///
+    /// ## Tags
+    /// - `cubos.entitySelector.input` - entity selection is handled, after `cubos.window.poll` and
+    /// `cubos.renderer.draw`
+    ///
     /// ## Dependencies
-    /// - @ref tesseratos-toolbox-plugin
+    /// - @ref screen-picker-plugin
+    /// - @ref window-plugin
 
     /// @brief Resource which identifies the currently selected entity.
     struct EntitySelector
     {
         cubos::core::ecs::Entity selection; ///< Selected entity, or `null` if none.
+        glm::ivec2 lastMousePosition;       ///< Cursor position.
     };
 
     /// @brief Plugin entry function.
