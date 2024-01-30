@@ -38,6 +38,7 @@ add_executable(
     memory/unordered_bimap.cpp
 
     ecs/utils.cpp
+    ecs/cubos.cpp
     ecs/world.cpp
     ecs/query.cpp
     ecs/blueprint.cpp
