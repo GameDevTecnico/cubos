@@ -15,12 +15,12 @@
 
 namespace cubos::core::ecs
 {
-    /// @brief Collection of entities and their respective components.
+    /// @brief Collection of entities and their respective components and relations.
     ///
     /// Blueprints are in a way the 'Prefab' of @b CUBOS. They act as a tiny @ref World which can
     /// then be spawned into an actual @ref World, as many times as needed.
     ///
-    /// When a blueprint is spawned, all of its components are scanned using the @ref
+    /// When a blueprint is spawned, all of its components and relations are scanned using the @ref
     /// core-reflection system for any references to other entities in the blueprint. These
     /// references are then replaced with the actual spawned entities. This has the side effect
     /// that if you do not expose an @ref Entity field to the @ref core-reflection system, it will
@@ -41,6 +41,13 @@ namespace cubos::core::ecs
         /// @param entity Entity.
         /// @param component Component.
         using Add = void (*)(void* userData, Entity entity, memory::AnyValue component);
+
+        /// @brief Function used by @ref instantiate to add relations to entities.
+        /// @param userData User data passed into @ref instantiate.
+        /// @param fromEntity From entity.
+        /// @param toEntity To entity.
+        /// @param relation Relation.
+        using Relate = void (*)(void* userData, Entity fromEntity, Entity toEntity, memory::AnyValue relation);
 
         /// @brief Constructs.
         Blueprint();
@@ -75,6 +82,23 @@ namespace cubos::core::ecs
              ...);
         }
 
+        /// @brief Adds a relation between two entities. Overwrites the existing relation, if there's any.
+        /// @param fromEntity From entity.
+        /// @param toEntity To entity.
+        /// @param relation Relation to move.
+        void relate(Entity fromEntity, Entity toEntity, memory::AnyValue relation);
+
+        /// @brief Adds a relation between two entities. Overwrites the existing relation, if there's any.
+        /// @tparam T Relation type.
+        /// @param fromEntity From entity.
+        /// @param toEntity To entity.
+        /// @param relation Relation to move.
+        template <reflection::Reflectable T>
+        void relate(Entity fromEntity, Entity toEntity, T relation)
+        {
+            this->relate(fromEntity, toEntity, memory::AnyValue::moveConstruct(reflection::reflect<T>(), &relation));
+        }
+
         /// @brief Merges another blueprint into this one.
         ///
         /// Entities in the other blueprint will have their names prefixed with the specified
@@ -95,30 +119,44 @@ namespace cubos::core::ecs
         /// @param userData User data to pass into the functions.
         /// @param create Function used to create entities.
         /// @param add Function used to add components to entities.
-        void instantiate(void* userData, Create create, Add add) const;
+        /// @param relate Function used to add relations to entities.
+        void instantiate(void* userData, Create create, Add add, Relate relate) const;
 
         /// @brief Instantiates the blueprint by calling the given functors.
         /// @tparam C Create functor type.
         /// @tparam A Add functor type.
+        /// @tparam R Relate functor type.
         /// @param create Functor used to create entities.
         /// @param add Functor used to add components to entities.
-        template <typename C, typename A>
-        void instantiate(C create, A add) const
+        /// @param relate Functor used to add relations to entities.
+        template <typename C, typename A, typename R>
+        void instantiate(C create, A add, R relate) const
         {
-            auto functors = std::make_pair(create, add);
+            struct Functors
+            {
+                C create;
+                A add;
+                R relate;
+            };
+
+            Functors functors{create, add, relate};
 
             Create createFunc = [](void* userData, std::string name) -> Entity {
-                return static_cast<decltype(functors)*>(userData)->first(name);
+                return static_cast<Functors*>(userData)->create(name);
             };
 
             Add addFunc = [](void* userData, Entity entity, memory::AnyValue component) {
-                return static_cast<decltype(functors)*>(userData)->second(entity, std::move(component));
+                return static_cast<Functors*>(userData)->add(entity, std::move(component));
+            };
+
+            Relate relateFunc = [](void* userData, Entity fromEntity, Entity toEntity, memory::AnyValue relation) {
+                return static_cast<Functors*>(userData)->relate(fromEntity, toEntity, std::move(relation));
             };
 
             // We pass the functors pair using the userData argument. We could use std::function
             // here and pass them directly, but that would mean unnecessary heap allocations and an
             // extra large include on the header.
-            this->instantiate(&functors, createFunc, addFunc);
+            this->instantiate(&functors, createFunc, addFunc, relateFunc);
         }
 
         /// @brief Checks if the given name is a valid entity name.
@@ -129,10 +167,16 @@ namespace cubos::core::ecs
         static bool validEntityName(const std::string& name);
 
     private:
+        template <typename T>
+        using EntityMap = std::unordered_map<Entity, T, EntityHash>;
+
         /// @brief Maps entities to their names.
         memory::UnorderedBimap<Entity, std::string, EntityHash> mBimap;
 
         /// @brief Maps component types to maps of entities to the component values.
-        memory::TypeMap<std::unordered_map<Entity, memory::AnyValue, EntityHash>> mComponents;
+        memory::TypeMap<EntityMap<memory::AnyValue>> mComponents;
+
+        /// @brief Maps component types to maps of entities to maps of entities to the relation values.
+        memory::TypeMap<EntityMap<EntityMap<memory::AnyValue>>> mRelations;
     };
 } // namespace cubos::core::ecs

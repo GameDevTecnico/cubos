@@ -44,11 +44,20 @@ TEST_CASE("ecs::Blueprint")
     // return a null identifier.
     CHECK_FALSE(blueprint.bimap().containsRight("foo"));
 
-    // Create two entities on the blueprint.
+    // Create three entities on the blueprint.
     auto bar = blueprint.create("bar");
     auto baz = blueprint.create("baz");
+    auto qux = blueprint.create("qux");
     blueprint.add(baz, IntegerComponent{2});
     blueprint.add(baz, ParentComponent{bar});
+
+    // Add some relations between the entities.
+    blueprint.relate(bar, baz, EmptyRelation{});
+    blueprint.relate(baz, bar, EmptyRelation{});
+    blueprint.relate(bar, baz, SymmetricRelation{.value = 1});
+    blueprint.relate(baz, bar, SymmetricRelation{.value = 2}); // Should overwrite the relation above.
+    blueprint.relate(bar, baz, TreeRelation{.value = 1});
+    blueprint.relate(bar, qux, TreeRelation{.value = 2}); // Should overwrite the relation above.
 
     SUBCASE("spawn the blueprint")
     {
@@ -56,11 +65,13 @@ TEST_CASE("ecs::Blueprint")
         auto spawned = cmds.spawn(blueprint);
         auto spawnedBar = spawned.entity("bar");
         auto spawnedBaz = spawned.entity("baz");
+        auto spawnedQux = spawned.entity("qux");
         cmdBuffer.commit();
 
         // Check if the spawned entities have the right components.
         auto barComponents = world.components(spawnedBar);
         auto bazComponents = world.components(spawnedBaz);
+        auto quxComponents = world.components(spawnedQux);
 
         // "bar" has no components.
         CHECK(barComponents.begin() == barComponents.end());
@@ -70,6 +81,22 @@ TEST_CASE("ecs::Blueprint")
         REQUIRE(bazComponents.has<IntegerComponent>());
         CHECK(bazComponents.get<ParentComponent>().id == spawnedBar);
         CHECK(bazComponents.get<IntegerComponent>().value == 2);
+
+        // "qux" has no components.
+        CHECK(quxComponents.begin() == quxComponents.end());
+
+        // EmptyRelation's were added correctly.
+        CHECK(world.related<EmptyRelation>(spawnedBar, spawnedBaz));
+        CHECK(world.related<EmptyRelation>(spawnedBaz, spawnedBar));
+
+        // The symmetric relation was added correctly.
+        REQUIRE(world.related<SymmetricRelation>(spawnedBar, spawnedBaz));
+        CHECK(world.relation<SymmetricRelation>(spawnedBar, spawnedBaz).value == 2);
+
+        // The tree relation was added correctly.
+        CHECK_FALSE(world.related<TreeRelation>(spawnedBar, spawnedBaz));
+        REQUIRE(world.related<TreeRelation>(spawnedBar, spawnedQux));
+        CHECK(world.relation<TreeRelation>(spawnedBar, spawnedQux).value == 2);
     }
 
     SUBCASE("merge one blueprint into another blueprint and then spawn it")
@@ -78,6 +105,7 @@ TEST_CASE("ecs::Blueprint")
         Blueprint merged{};
         auto foo = merged.create("foo");
         merged.add(foo, IntegerComponent{1});
+        merged.relate(foo, foo, EmptyRelation{});
 
         // Merge the original blueprint into the new one.
         merged.merge("sub", blueprint);
@@ -102,6 +130,9 @@ TEST_CASE("ecs::Blueprint")
         // "foo" has an IntegerComponent with value = 1.
         REQUIRE(fooComponents.has<IntegerComponent>());
         CHECK(fooComponents.get<IntegerComponent>().value == 1);
+
+        // "foo" is related with "foo" by EmptyRelation
+        CHECK(world.related<EmptyRelation>(spawnedFoo, spawnedFoo));
 
         // "bar" has no components.
         CHECK(barComponents.begin() == barComponents.end());

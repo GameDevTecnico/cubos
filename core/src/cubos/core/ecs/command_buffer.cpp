@@ -38,7 +38,10 @@ std::unordered_map<std::string, Entity> CommandBuffer::spawn(const Blueprint& bl
             nameToEntity.emplace(name, entity);
             return entity;
         },
-        [&](Entity entity, memory::AnyValue component) { this->add(entity, component.type(), component.get()); });
+        [&](Entity entity, memory::AnyValue component) { this->add(entity, component.type(), component.get()); },
+        [&](Entity fromEntity, Entity toEntity, memory::AnyValue relation) {
+            this->relate(fromEntity, toEntity, relation.type(), relation.get());
+        });
 
     return nameToEntity;
 }

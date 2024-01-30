@@ -1,4 +1,5 @@
 #include <cubos/core/ecs/blueprint.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
@@ -47,6 +48,36 @@ void Blueprint::add(Entity entity, AnyValue component)
     mComponents.at(component.type()).emplace(entity, std::move(component));
 }
 
+void Blueprint::relate(Entity fromEntity, Entity toEntity, AnyValue relation)
+{
+    CUBOS_ASSERT(relation.type().get<ConstructibleTrait>().hasCopyConstruct(),
+                 "Blueprint relations must be copy constructible, but '{}' isn't", relation.type().name());
+
+    // Sanity check to catch errors where the user passes an entity which doesn't belong to this blueprint.
+    // We can't make sure it never happens, but we might as well catch some of the possible cases.
+    CUBOS_ASSERT(mBimap.containsLeft(fromEntity), "Entity wasn't created with this blueprint");
+    CUBOS_ASSERT(mBimap.containsLeft(toEntity), "Entity wasn't created with this blueprint");
+
+    if (relation.type().has<SymmetricTrait>() && fromEntity.index > toEntity.index)
+    {
+        // If the relation is symmetric, we always store the pair with the first index lower than the second.
+        std::swap(fromEntity, toEntity);
+    }
+
+    if (!mRelations.contains(relation.type()))
+    {
+        mRelations.insert(relation.type(), {});
+    }
+
+    if (relation.type().has<TreeTrait>())
+    {
+        // If the relation is a tree relation, then we want to erase any previous outgoing relation from the entity.
+        mRelations.at(relation.type()).erase(fromEntity);
+    }
+
+    mRelations.at(relation.type())[fromEntity].insert_or_assign(toEntity, std::move(relation));
+}
+
 void Blueprint::merge(const std::string& prefix, const Blueprint& other)
 {
     other.instantiate(
@@ -60,13 +91,17 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
             mBimap.insert(entity, std::move(name));
             return entity;
         },
-        [&](Entity entity, AnyValue component) { this->add(entity, std::move(component)); });
+        [&](Entity entity, AnyValue component) { this->add(entity, std::move(component)); },
+        [&](Entity fromEntity, Entity toEntity, AnyValue relation) {
+            this->relate(fromEntity, toEntity, std::move(relation));
+        });
 }
 
 void Blueprint::clear()
 {
     mBimap.clear();
     mComponents.clear();
+    mRelations.clear();
 }
 
 const UnorderedBimap<Entity, std::string, EntityHash>& Blueprint::bimap() const
@@ -84,9 +119,8 @@ static void convertToInstancedEntities(const std::unordered_map<Entity, Entity, 
         auto& entity = *static_cast<Entity*>(value);
         if (!entity.isNull())
         {
-            CUBOS_ASSERT(
-                toInstanced.contains(entity),
-                "Entities stored in components must either be null or reference valid entities on their blueprints");
+            CUBOS_ASSERT(toInstanced.contains(entity), "Entities stored in components/relations must either be null or "
+                                                       "reference valid entities on their blueprints");
             entity = toInstanced.at(entity);
         }
     }
@@ -119,7 +153,7 @@ static void convertToInstancedEntities(const std::unordered_map<Entity, Entity, 
     }
 }
 
-void Blueprint::instantiate(void* userData, Create create, Add add) const
+void Blueprint::instantiate(void* userData, Create create, Add add, Relate relate) const
 {
     // Instantiate our entities and create a map from them to their instanced counterparts.
     std::unordered_map<Entity, Entity, EntityHash> thisToInstance{};
@@ -139,6 +173,20 @@ void Blueprint::instantiate(void* userData, Create create, Add add) const
             auto copied = AnyValue::copyConstruct(component.type(), component.get());
             convertToInstancedEntities(thisToInstance, copied.type(), copied.get());
             add(userData, thisToInstance.at(entity), std::move(copied));
+        }
+    }
+
+    // Do the same but for relations.
+    for (const auto& [type, relations] : mRelations)
+    {
+        for (const auto& [fromEntity, outgoing] : relations)
+        {
+            for (const auto& [toEntity, relation] : outgoing)
+            {
+                auto copied = AnyValue::copyConstruct(relation.type(), relation.get());
+                convertToInstancedEntities(thisToInstance, copied.type(), copied.get());
+                relate(userData, thisToInstance.at(fromEntity), thisToInstance.at(toEntity), std::move(copied));
+            }
         }
     }
 }
