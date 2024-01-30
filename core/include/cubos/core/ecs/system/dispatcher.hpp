@@ -80,10 +80,8 @@ namespace cubos::core::ecs
         void tagAddCondition(F func);
 
         /// @brief Adds a system, and sets it as the current system for further configuration.
-        /// @tparam F System type.
         /// @param func System to add.
-        template <typename F>
-        void addSystem(F func);
+        void addSystem(std::shared_ptr<AnySystemWrapper<void>> func);
 
         /// @brief Sets the tag for the current system.
         /// @param tag Tag to run under.
@@ -98,10 +96,8 @@ namespace cubos::core::ecs
         void systemSetBeforeTag(const std::string& tag);
 
         /// @brief Adds a condition to the current system.
-        /// @tparam F Condition type.
         /// @param func Condition.
-        template <typename F>
-        void systemAddCondition(F func);
+        void systemAddCondition(std::shared_ptr<AnySystemWrapper<bool>> func);
 
         /// @brief Compiles the call chain. Required before @ref callSystems() can be called.
         ///
@@ -171,11 +167,10 @@ namespace cubos::core::ecs
         void handleTagInheritance(std::shared_ptr<SystemSettings>& settings);
 
         /// @brief Assign a condition a bit in the condition bitset, and returns that assigned bit.
-        /// @ŧparam F Condition type.
         /// @param func Condition to assign a bit for.
         /// @return Assigned bit.
-        template <typename F>
-        std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> assignConditionBit(F func);
+        std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> assignConditionBit(
+            std::shared_ptr<AnySystemWrapper<bool>> func);
 
         // Variables for holding information before call chain is compiled.
 
@@ -202,51 +197,34 @@ namespace cubos::core::ecs
         mTagSettings[mCurrTag]->conditions |= bit;
     }
 
-    template <typename F>
-    void Dispatcher::addSystem(F func)
+    inline void Dispatcher::addSystem(std::shared_ptr<AnySystemWrapper<void>> func)
     {
         // Wrap the system and put it in the pending queue
-        auto* system = new System{nullptr, std::make_shared<SystemWrapper<F>>(func), {}};
+        auto* system = new System{nullptr, func, {}};
         mPendingSystems.push_back(system);
         mCurrSystem = mPendingSystems.back();
     }
 
-    template <typename F>
-    void Dispatcher::systemAddCondition(F func)
+    inline void Dispatcher::systemAddCondition(std::shared_ptr<AnySystemWrapper<bool>> func)
     {
         ENSURE_CURR_SYSTEM();
         ENSURE_SYSTEM_SETTINGS(mCurrSystem);
-        auto bit = assignConditionBit(func);
+        auto bit = assignConditionBit(std::move(func));
         mCurrSystem->settings->conditions |= bit;
     }
 
-    template <typename F>
-    std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> Dispatcher::assignConditionBit(F func)
+    inline std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> Dispatcher::assignConditionBit(
+        std::shared_ptr<AnySystemWrapper<bool>> func)
     {
-        // Check if this condition already exists
-        auto it = std::find_if(mConditions.begin(), mConditions.end(),
-                               [&func](const std::shared_ptr<AnySystemWrapper<bool>>& condition) {
-                                   auto wrapper = dynamic_cast<SystemWrapper<F>*>(condition.get());
-                                   if (wrapper == nullptr)
-                                   {
-                                       return false;
-                                   }
-                                   return wrapper->mSystem == func;
-                               });
-        if (it != mConditions.end())
-        {
-            // If it does, return the set bit
-            return std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>(1)
-                   << static_cast<std::size_t>(it - mConditions.begin());
-        }
         // If we already reached the condition limit, exit
         if (mConditions.size() >= CUBOS_CORE_DISPATCHER_MAX_CONDITIONS)
         {
             CUBOS_ERROR("Condition limit ({}) was reached!", CUBOS_CORE_DISPATCHER_MAX_CONDITIONS);
             abort();
         }
+
         // Otherwise, add it to the conditions list
-        mConditions.push_back(std::make_shared<SystemWrapper<F>>(func));
+        mConditions.push_back(func);
         // And return the bit it has
         return std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>(1) << (mConditions.size() - 1);
     }

@@ -53,39 +53,6 @@ SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std:
 {
 }
 
-SystemBuilder& SystemBuilder::tagged(const std::string& tag)
-{
-    if (std::find(mTags.begin(), mTags.end(), tag) != mTags.end())
-    {
-        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
-                   tag);
-    }
-    mDispatcher.systemAddTag(tag);
-    return *this;
-}
-
-SystemBuilder& SystemBuilder::before(const std::string& tag)
-{
-    if (std::find(mTags.begin(), mTags.end(), tag) != mTags.end())
-    {
-        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
-                   tag);
-    }
-    mDispatcher.systemSetBeforeTag(tag);
-    return *this;
-}
-
-SystemBuilder& SystemBuilder::after(const std::string& tag)
-{
-    if (std::find(mTags.begin(), mTags.end(), tag) != mTags.end())
-    {
-        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
-                   tag);
-    }
-    mDispatcher.systemSetAfterTag(tag);
-    return *this;
-}
-
 Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 {
     if (!mPlugins.contains(func))
@@ -114,6 +81,67 @@ TagBuilder Cubos::startupTag(const std::string& tag)
     TagBuilder builder(mStartupDispatcher, mStartupTags);
 
     return builder;
+}
+
+auto Cubos::system(std::string name) -> SystemBuilder
+{
+    return {mMainDispatcher, std::move(name)};
+}
+
+auto Cubos::startupSystem(std::string name) -> SystemBuilder
+{
+    return {mStartupDispatcher, std::move(name)};
+}
+
+Cubos::SystemBuilder::SystemBuilder(Dispatcher& dispatcher, std::string name)
+    : mDispatcher{dispatcher}
+    , mName{std::move(name)}
+{
+}
+
+auto Cubos::SystemBuilder::tagged(const std::string& tag) && -> SystemBuilder&&
+{
+    mTagged.insert(tag);
+    return std::move(*this);
+}
+
+auto Cubos::SystemBuilder::before(const std::string& tag) && -> SystemBuilder&&
+{
+    mBefore.insert(tag);
+    return std::move(*this);
+}
+
+auto Cubos::SystemBuilder::after(const std::string& tag) && -> SystemBuilder&&
+{
+    mAfter.insert(tag);
+    return std::move(*this);
+}
+
+void Cubos::SystemBuilder::finish(std::shared_ptr<AnySystemWrapper<void>> system)
+{
+    mDispatcher.addSystem(std::move(system));
+
+    if (mCondition != nullptr)
+    {
+        mDispatcher.systemAddCondition(mCondition);
+    }
+
+    for (const auto& tag : mTagged)
+    {
+        mDispatcher.systemAddTag(tag);
+    }
+
+    for (const auto& tag : mBefore)
+    {
+        mDispatcher.systemSetBeforeTag(tag);
+    }
+
+    for (const auto& tag : mAfter)
+    {
+        mDispatcher.systemSetAfterTag(tag);
+    }
+
+    CUBOS_DEBUG("Added system {}", mName);
 }
 
 Cubos::Cubos()

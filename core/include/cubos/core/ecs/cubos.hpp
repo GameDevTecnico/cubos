@@ -94,29 +94,6 @@ namespace cubos::core::ecs
         /// @param tags Vector which stores the tags for this dispatcher.
         SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
 
-        /// @brief Sets the current system's tag.
-        /// @param tag Tag to be set.
-        /// @return Reference to this object, for chaining.
-        SystemBuilder& tagged(const std::string& tag);
-
-        /// @brief Sets the current system to be executed before another tag.
-        /// @param tag Tag to be executed before.
-        /// @return Reference to this object, for chaining.
-        SystemBuilder& before(const std::string& tag);
-
-        /// @brief Sets the current system to be executed after another tag.
-        /// @param tag Tag to be executed after.
-        /// @return Reference to this object, for chaining.
-        SystemBuilder& after(const std::string& tag);
-
-        /// @brief Adds a condition to the current system. If this condition returns false, the
-        /// system will not be executed. For a system to run, all conditions must return true.
-        /// @tparam F Condition system type.
-        /// @param func Condition system.
-        /// @return Reference to this object, for chaining.
-        template <typename F>
-        SystemBuilder& runIf(F func);
-
     private:
         core::ecs::Dispatcher& mDispatcher;
         std::vector<std::string>& mTags;
@@ -128,6 +105,9 @@ namespace cubos::core::ecs
     class Cubos final
     {
     public:
+        /// @brief Used to create new systems.
+        class SystemBuilder;
+
         ~Cubos() = default;
 
         /// @brief Constructs an empty application without arguments.
@@ -185,21 +165,15 @@ namespace cubos::core::ecs
         /// @return @ref TagBuilder used to configure the tag.
         TagBuilder startupTag(const std::string& tag);
 
-        /// @brief Adds a new system to the engine, which will be executed at every iteration of
-        /// the main loop.
-        /// @tparam F Type of the system function.
-        /// @param func System function.
-        /// @return @ref SystemBuilder used to configure the system.
-        template <typename F>
-        SystemBuilder system(F func);
+        /// @brief Returns a new builder used to add a system to the engine.
+        /// @param name System debug name.
+        /// @return Builder used to configure the system.
+        SystemBuilder system(std::string name);
 
-        /// @brief Adds a new startup system to the engine, which will be executed only once,
-        /// before the main loop starts.
-        /// @tparam F Type of the system function.
-        /// @param func System function.
-        /// @return @ref SystemBuilder used to configure the system.
-        template <typename F>
-        SystemBuilder startupSystem(F func);
+        /// @brief Returns a new builder used to add a startup system to the engine.
+        /// @param name System debug name.
+        /// @return Builder used to configure the system.
+        SystemBuilder startupSystem(std::string name);
 
         /// @brief Runs the engine.
         ///
@@ -216,19 +190,68 @@ namespace cubos::core::ecs
         std::vector<std::string> mStartupTags;
     };
 
+    class Cubos::SystemBuilder
+    {
+    public:
+        /// @brief Constructs.
+        /// @param dispatcher Dispatcher to add the system to.
+        /// @param name Debug name.
+        SystemBuilder(Dispatcher& dispatcher, std::string name);
+
+        /// @brief Adds a tag to the system.
+        /// @param tag Tag.
+        /// @return Builder.
+        SystemBuilder&& tagged(const std::string& tag) &&;
+
+        /// @brief Forces this system to only run after all systems with the given tag have finished.
+        /// @param tag Tag.
+        /// @return Builder.
+        SystemBuilder&& before(const std::string& tag) &&;
+
+        /// @brief Forces all systems with the given tag to run only after this system has finished.
+        /// @param tag Tag.
+        /// @return Builder.
+        SystemBuilder&& after(const std::string& tag) &&;
+
+        /// @brief Makes the system only run if the given condition evaluates to true.
+        ///
+        /// The condition runs immediately before the system runs, and is basically just like a normal system, but which
+        /// returns a boolean instead of void.
+        ///
+        /// @param function Condition function.
+        /// @return Builder.
+        SystemBuilder&& onlyIf(auto function) &&
+        {
+            mCondition = std::make_shared<SystemWrapper<decltype(function)>>(function);
+            return std::move(*this);
+        }
+
+        /// @brief Finishes building the system with the given function.
+        /// @param function System function.
+        void call(auto function) &&
+        {
+            this->finish(std::make_shared<SystemWrapper<decltype(function)>>(function));
+        }
+
+    private:
+        /// @brief Finishes building the system with the given system body.
+        /// @param system System wrapper.
+        void finish(std::shared_ptr<AnySystemWrapper<void>> system);
+
+        Dispatcher& mDispatcher;
+        std::string mName;
+        std::shared_ptr<AnySystemWrapper<bool>> mCondition{nullptr};
+        std::unordered_set<std::string> mTagged;
+        std::unordered_set<std::string> mBefore;
+        std::unordered_set<std::string> mAfter;
+    };
+
     // Implementation.
 
     template <typename F>
     TagBuilder& TagBuilder::runIf(F func)
     {
         mDispatcher.tagAddCondition(func);
-        return *this;
-    }
-
-    template <typename F>
-    SystemBuilder& SystemBuilder::runIf(F func)
-    {
-        mDispatcher.systemAddCondition(func);
         return *this;
     }
 
@@ -252,19 +275,5 @@ namespace cubos::core::ecs
         // The user could register this manually, but using this method is more convenient.
         mWorld.registerResource<core::ecs::EventPipe<E>>();
         return *this;
-    }
-
-    template <typename F>
-    SystemBuilder Cubos::system(F func)
-    {
-        mMainDispatcher.addSystem(func);
-        return {mMainDispatcher, mStartupTags};
-    }
-
-    template <typename F>
-    SystemBuilder Cubos::startupSystem(F func)
-    {
-        mStartupDispatcher.addSystem(func);
-        return {mStartupDispatcher, mMainTags};
     }
 } // namespace cubos::core::ecs
