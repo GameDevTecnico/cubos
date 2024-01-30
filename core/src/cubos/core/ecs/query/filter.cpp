@@ -172,7 +172,8 @@ void QueryFilter::update()
                         break;
                     }
                 }
-                else if (link.isSymmetric && id.to == archetype)
+
+                if (link.isSymmetric && id.to == archetype)
                 {
                     reverseCandidate = true;
 
@@ -210,7 +211,8 @@ void QueryFilter::update()
                         return;
                     }
                 }
-                else if (id.from == archetype && !reverseFound)
+
+                if (id.from == archetype && !reverseFound)
                 {
                     reverseFound = true;
                     link.reverseTables.emplace_back(id);
@@ -620,6 +622,12 @@ void QueryFilter::View::Iterator::advance()
                     ++mIndex;
                 }
 
+                if (fromArchetype == toArchetype && fromEntity.index > toEntity.index)
+                {
+                    // We have to search for the table in the reversed tables list.
+                    mIndex = link.tables.size();
+                }
+
                 if (mIndex == link.tables.size())
                 {
                     // Try the reverse tables.
@@ -685,9 +693,17 @@ void QueryFilter::View::Iterator::advance()
                 .at(link.table(mIndex))
                 .indices(mCursorRows[filter.mTargetCount], fromIndex, toIndex);
 
-            // Get the rows of the entities in their respective dense tables.
-            mCursorRows[link.fromTarget] = world.tables().dense().at(link.table(mIndex).to).row(toIndex);
-            mCursorRows[link.toTarget] = world.tables().dense().at(link.table(mIndex).from).row(fromIndex);
+            if (link.table(mIndex).from == link.table(mIndex).to && fromIndex == toIndex)
+            {
+                // We have already visited these relations on the non-reversed tables.
+                this->advance();
+            }
+            else
+            {
+                // Get the rows of the entities in their respective dense tables.
+                mCursorRows[link.fromTarget] = world.tables().dense().at(link.table(mIndex).to).row(toIndex);
+                mCursorRows[link.toTarget] = world.tables().dense().at(link.table(mIndex).from).row(fromIndex);
+            }
         }
         else
         {
