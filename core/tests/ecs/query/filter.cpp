@@ -36,6 +36,7 @@ TEST_CASE("ecs::QueryFilter")
     world.relate(e4P, e3I, EmptyRelation{});
 
     world.relate(e1, e1, SymmetricRelation{});
+    world.relate(e2I, e3I, SymmetricRelation{});
     world.relate(e4P, e2I, SymmetricRelation{});
 
     world.relate(e1, e2I, TreeRelation{});
@@ -845,6 +846,9 @@ TEST_CASE("ecs::QueryFilter")
                 REQUIRE(it->entities[1] == e1);
                 ++it;
                 REQUIRE(it->entities[0] == e2I);
+                REQUIRE(it->entities[1] == e3I);
+                ++it;
+                REQUIRE(it->entities[0] == e2I);
                 REQUIRE(it->entities[1] == e4P);
                 ++it;
                 REQUIRE(it == view.end());
@@ -866,6 +870,9 @@ TEST_CASE("ecs::QueryFilter")
                 {
                     auto view = filter.view().pin(0, e2I);
                     auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e3I);
+                    ++it;
                     REQUIRE(it->entities[0] == e2I);
                     REQUIRE(it->entities[1] == e4P);
                     ++it;
@@ -899,6 +906,9 @@ TEST_CASE("ecs::QueryFilter")
                 {
                     auto view = filter.view().pin(1, e2I);
                     auto it = view.begin();
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
                     REQUIRE(it->entities[0] == e4P);
                     REQUIRE(it->entities[1] == e2I);
                     ++it;
@@ -943,6 +953,26 @@ TEST_CASE("ecs::QueryFilter")
                     auto view = filter.view().pin(0, e4P).pin(1, e2I);
                     auto it = view.begin();
                     REQUIRE(it->entities[0] == e4P);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e2I and e3I")
+                {
+                    auto view = filter.view().pin(0, e2I).pin(1, e3I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e3I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e3I and e2I")
+                {
+                    auto view = filter.view().pin(0, e3I).pin(1, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e3I);
                     REQUIRE(it->entities[1] == e2I);
                     ++it;
                     REQUIRE(it == view.end());
