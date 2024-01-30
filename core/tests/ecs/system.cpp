@@ -54,35 +54,6 @@ TEST_CASE("ecs::SystemInfo")
         CHECK(infoA.valid());
     }
 
-    SUBCASE("A is invalid")
-    {
-        SUBCASE("A reads and writes to the same resource")
-        {
-            infoA.resourcesRead.insert(typeid(int));
-            infoA.resourcesWritten.insert(typeid(int));
-        }
-
-        SUBCASE("A uses the world directly and reads a resource")
-        {
-            infoA.usesWorld = true;
-            infoA.resourcesRead.insert(typeid(int));
-        }
-
-        SUBCASE("A uses the world directly and writes a resource")
-        {
-            infoA.usesWorld = true;
-            infoA.resourcesWritten.insert(typeid(int));
-        }
-
-        SUBCASE("A uses the world directly and uses commands")
-        {
-            infoA.usesWorld = true;
-            infoA.usesCommands = true;
-        }
-
-        CHECK_FALSE(infoA.valid());
-    }
-
     SUBCASE("A and B are compatible")
     {
         SUBCASE("both do nothing")

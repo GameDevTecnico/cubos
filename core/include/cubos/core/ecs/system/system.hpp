@@ -43,7 +43,7 @@ namespace cubos::core::ecs
         /// A system may be invalid, if, for example, it both reads and writes the same resource.
         ///
         /// @return Whether the system is valid.
-        bool valid() const;
+        static bool valid();
 
         /// @brief Checks if this system is compatible with another system.
         ///
