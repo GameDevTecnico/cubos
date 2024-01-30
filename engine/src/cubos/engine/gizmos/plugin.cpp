@@ -275,7 +275,6 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
             auto screenSize = window->framebufferSize();
 
             gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.drawPipeline);
-            gizmosRenderer.renderDevice->clearColor(0, 0, 0, 0);
             gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);
             gizmosRenderer.renderDevice->clearDepth(1.0F);
 
