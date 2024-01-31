@@ -206,6 +206,20 @@
         }                                                                                                              \
     } while (false)
 
+/// @brief Asserts that an implication is true, aborting the program if it is not.
+/// @param cond Implication condition.
+/// @param cons Implication consequence.
+/// @param ... Optional format string and arguments.
+#define CUBOS_ASSERT_IMP(cond, cons, ...)                                                                              \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        if ((cond) && !(cons))                                                                                         \
+        {                                                                                                              \
+            CUBOS_CRITICAL("Assertion " #cond " => " #cons " failed");                                                 \
+            CUBOS_FAIL(__VA_ARGS__);                                                                                   \
+        }                                                                                                              \
+    } while (false)
+
 /// @def CUBOS_DEBUG_ASSERT
 /// @brief In debug builds asserts that a condition is true, aborting the program if it is not.
 /// @param cond Condition to assert.
