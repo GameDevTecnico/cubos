@@ -56,7 +56,10 @@ namespace cubos::core::ecs
             // Fill the access set with the query argument types.
             for (const auto& term : argumentTerms)
             {
-                mAccesses.insert(term.type);
+                if (!term.isEntity())
+                {
+                    mAccesses.insert(term.type);
+                }
             }
 
             // Resolve them with the received extra terms.
@@ -117,6 +120,7 @@ namespace cubos::core::ecs
         QueryData(QueryData&& other) noexcept
             : mWorld{other.mWorld}
             , mFilter{other.mFilter}
+            , mAccesses{std::move(other.mAccesses)}
             , mFetchers{other.mFetchers}
             , mFetcherCursors{std::move(other.mFetcherCursors)}
         {

@@ -1,7 +1,5 @@
 #include <glm/glm.hpp>
 
-#include <cubos/core/ecs/system/query.hpp>
-
 #include <cubos/engine/physics/plugins/gravity.hpp>
 
 using namespace cubos::engine;

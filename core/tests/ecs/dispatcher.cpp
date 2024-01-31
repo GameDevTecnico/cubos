@@ -10,7 +10,7 @@
 
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Dispatcher;
-using cubos::core::ecs::SystemWrapper;
+using cubos::core::ecs::System;
 using cubos::core::ecs::World;
 
 /// System which pushes N to the order vector.
@@ -56,20 +56,21 @@ static void assertOrder(World& world, std::vector<int> values)
 /// @param dispatcher The dispatcher to call.
 /// @param world The world to call the systems on.
 /// @param cmdBuffer The command buffer to call the systems on.
-static void singleDispatch(Dispatcher& dispatcher, World& world, CommandBuffer& cmdBuffer)
+static void singleDispatch(Dispatcher& dispatcher, CommandBuffer& cmdBuffer)
 {
     dispatcher.compileChain();
-    dispatcher.callSystems(world, cmdBuffer);
+    dispatcher.callSystems(cmdBuffer);
 }
 
 TEST_CASE("ecs::Dispatcher")
 {
     World world{};
     CommandBuffer cmdBuffer{world};
-    Dispatcher dispatcher{};
+    Dispatcher dispatcher{world};
     world.registerResource<std::vector<int>>();
 
-    auto wrapSystem = [](auto f) { return std::make_shared<SystemWrapper<decltype(f)>>(f); };
+    auto wrapSystem = [&](auto f) { return System<void>::make(world, f); };
+    auto wrapCondition = [&](auto f) { return System<bool>::make(world, f); };
 
     SUBCASE("systems run in the reverse order they were added")
     {
@@ -106,7 +107,7 @@ TEST_CASE("ecs::Dispatcher")
             dispatcher.tagSetBeforeTag("2"); // "3" runs before "2"
         }
 
-        singleDispatch(dispatcher, world, cmdBuffer);
+        singleDispatch(dispatcher, cmdBuffer);
         assertOrder(world, {3, 2, 1});
     }
 
@@ -144,15 +145,15 @@ TEST_CASE("ecs::Dispatcher")
             dispatcher.tagSetBeforeTag("2"); // Repeat
         }
 
-        singleDispatch(dispatcher, world, cmdBuffer);
+        singleDispatch(dispatcher, cmdBuffer);
         assertOrder(world, {1, 3, 2});
     }
 
     SUBCASE("systems run when all of their conditions are fulfilled")
     {
         dispatcher.addSystem(wrapSystem(pushToOrder<1>));
-        dispatcher.systemAddCondition(wrapSystem(pushToOrderAndSucceed<2>));
-        dispatcher.systemAddCondition(wrapSystem(pushToOrderAndSucceed<3>));
+        dispatcher.systemAddCondition(wrapCondition(pushToOrderAndSucceed<2>));
+        dispatcher.systemAddCondition(wrapCondition(pushToOrderAndSucceed<3>));
         dispatcher.addSystem(wrapSystem(pushToOrder<4>));
         dispatcher.systemAddTag("4");
         dispatcher.addSystem(wrapSystem(pushToOrder<5>));
@@ -162,14 +163,14 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.tagInheritTag("45");
         dispatcher.addTag("5");
         dispatcher.tagInheritTag("45");
-        dispatcher.tagAddCondition(wrapSystem(pushToOrderAndSucceed<6>)); // "45" only runs when "6" succeeds
+        dispatcher.tagAddCondition(wrapCondition(pushToOrderAndSucceed<6>)); // "45" only runs when "6" succeeds
 
         // By default, systems run in the reverse order they were added.
         // Conditions run in the order they were added.
         // Since 5 was the last system added, it runs first, after its condition, 6.
         // Then 4 runs, since its condition, 6, succeeded.
         // Then 1 must run after its conditions, 2 and 3, succeed.
-        singleDispatch(dispatcher, world, cmdBuffer);
+        singleDispatch(dispatcher, cmdBuffer);
         assertOrder(world, {6, 5, 4, 2, 3, 1});
     }
 
@@ -177,9 +178,9 @@ TEST_CASE("ecs::Dispatcher")
     {
         dispatcher.addSystem(wrapSystem(pushToOrder<1>));
         dispatcher.systemAddTag("1");
-        dispatcher.systemAddCondition(wrapSystem(pushToOrderAndSucceed<2>));
-        dispatcher.systemAddCondition(wrapSystem(pushToOrderAndFail<3>));
-        dispatcher.systemAddCondition(wrapSystem(pushToOrderAndSucceed<4>));
+        dispatcher.systemAddCondition(wrapCondition(pushToOrderAndSucceed<2>));
+        dispatcher.systemAddCondition(wrapCondition(pushToOrderAndFail<3>));
+        dispatcher.systemAddCondition(wrapCondition(pushToOrderAndSucceed<4>));
         dispatcher.addSystem(wrapSystem(pushToOrder<5>));
         dispatcher.systemAddTag("5");
 
@@ -189,9 +190,9 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.tagInheritTag("7");
         dispatcher.tagInheritTag("7"); // Repeat
         dispatcher.addTag("7");
-        dispatcher.tagAddCondition(wrapSystem(pushToOrderAndSucceed<8>));
-        dispatcher.tagAddCondition(wrapSystem(pushToOrderAndFail<9>));
-        dispatcher.tagAddCondition(wrapSystem(pushToOrderAndFail<10>));
+        dispatcher.tagAddCondition(wrapCondition(pushToOrderAndSucceed<8>));
+        dispatcher.tagAddCondition(wrapCondition(pushToOrderAndFail<9>));
+        dispatcher.tagAddCondition(wrapCondition(pushToOrderAndFail<10>));
 
         dispatcher.addSystem(wrapSystem(pushToOrder<11>));
         dispatcher.systemSetAfterTag("1");
@@ -199,7 +200,7 @@ TEST_CASE("ecs::Dispatcher")
         // First, 5 tries to run, but its condition 9 fails. The condition 10 is not checked.
         // Then, 1 tries to run, but its condition 3 fails. The condition 4 is not checked.
         // Then, 11 runs, since it has no conditions, and must run after 1 succeeds/is skipped.
-        singleDispatch(dispatcher, world, cmdBuffer);
+        singleDispatch(dispatcher, cmdBuffer);
         assertOrder(world, {8, 9, 2, 3, 11});
     }
 
@@ -217,7 +218,7 @@ TEST_CASE("ecs::Dispatcher")
         // tag "a" runs before tag "b".
         // 3 is tagged with "b".
         // Therefore, 1 must run before 3.
-        singleDispatch(dispatcher, world, cmdBuffer);
+        singleDispatch(dispatcher, cmdBuffer);
         assertOrder(world, {1, 3});
     }
 }

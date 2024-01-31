@@ -2,7 +2,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <cubos/core/ecs/system/event/reader.hpp>
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/gizmos/plugin.hpp>

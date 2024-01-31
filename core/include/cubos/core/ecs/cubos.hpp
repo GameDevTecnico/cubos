@@ -7,8 +7,8 @@
 #include <set>
 #include <string>
 
+#include <cubos/core/ecs/system/arguments/event/pipe.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
-#include <cubos/core/ecs/system/event/pipe.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>
 
@@ -56,10 +56,11 @@ namespace cubos::core::ecs
     {
     public:
         /// @brief Construct.
-        /// @param dispatcher Dispatcher being configured
+        /// @param world World.
+        /// @param dispatcher Dispatcher being configured.
         /// @param tags Vector which stores the tags for this dispatcher.
         /// @return Reference to this object, for chaining.
-        TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
+        TagBuilder(World& world, core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
 
         /// @brief Sets the current tag to be executed before another tag.
         /// @param tag Tag to be executed before.
@@ -80,6 +81,7 @@ namespace cubos::core::ecs
         TagBuilder& runIf(F func);
 
     private:
+        World& mWorld;
         core::ecs::Dispatcher& mDispatcher;
         std::vector<std::string>& mTags;
     };
@@ -167,9 +169,9 @@ namespace cubos::core::ecs
         void run();
 
     private:
-        core::ecs::Dispatcher mMainDispatcher;
-        core::ecs::Dispatcher mStartupDispatcher;
         core::ecs::World mWorld;
+        core::ecs::Dispatcher mStartupDispatcher;
+        core::ecs::Dispatcher mMainDispatcher;
         std::set<void (*)(Cubos&)> mPlugins;
         std::vector<std::string> mMainTags;
         std::vector<std::string> mStartupTags;
@@ -179,9 +181,10 @@ namespace cubos::core::ecs
     {
     public:
         /// @brief Constructs.
+        /// @param world World.
         /// @param dispatcher Dispatcher to add the system to.
         /// @param name Debug name.
-        SystemBuilder(Dispatcher& dispatcher, std::string name);
+        SystemBuilder(World& world, Dispatcher& dispatcher, std::string name);
 
         /// @brief Adds a tag to the system.
         /// @param tag Tag.
@@ -207,7 +210,8 @@ namespace cubos::core::ecs
         /// @return Builder.
         SystemBuilder&& onlyIf(auto function) &&
         {
-            mCondition = std::make_shared<SystemWrapper<decltype(function)>>(function);
+            CUBOS_ASSERT(!mCondition.contains(), "Only one condition can be set per system");
+            mCondition.replace(System<bool>::make(mWorld, std::move(function), {}));
             return std::move(*this);
         }
 
@@ -215,17 +219,18 @@ namespace cubos::core::ecs
         /// @param function System function.
         void call(auto function) &&
         {
-            this->finish(std::make_shared<SystemWrapper<decltype(function)>>(function));
+            this->finish(System<void>::make(mWorld, std::move(function), {}));
         }
 
     private:
         /// @brief Finishes building the system with the given system body.
         /// @param system System wrapper.
-        void finish(std::shared_ptr<AnySystemWrapper<void>> system);
+        void finish(System<void> system);
 
+        World& mWorld;
         Dispatcher& mDispatcher;
         std::string mName;
-        std::shared_ptr<AnySystemWrapper<bool>> mCondition{nullptr};
+        Opt<System<bool>> mCondition;
         std::unordered_set<std::string> mTagged;
         std::unordered_set<std::string> mBefore;
         std::unordered_set<std::string> mAfter;
@@ -236,7 +241,7 @@ namespace cubos::core::ecs
     template <typename F>
     TagBuilder& TagBuilder::runIf(F func)
     {
-        mDispatcher.tagAddCondition(std::make_shared<SystemWrapper<decltype(func)>>(func));
+        mDispatcher.tagAddCondition(System<bool>::make(mWorld, std::move(func), {}));
         return *this;
     }
 

@@ -1,12 +1,13 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::Commands.
-/// @ingroup core-ecs-system
+/// @ingroup core-ecs-system-arguments
 
 #pragma once
 
 #include <unordered_map>
 
 #include <cubos/core/ecs/entity/entity.hpp>
+#include <cubos/core/ecs/system/fetcher.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::ecs
@@ -18,7 +19,7 @@ namespace cubos::core::ecs
     ///
     /// Internally wraps a reference to a CommandBuffer object.
     ///
-    /// @ingroup core-ecs-system
+    /// @ingroup core-ecs-system-arguments
     class Commands final
     {
     public:
@@ -206,5 +207,25 @@ namespace cubos::core::ecs
     private:
         CommandBuffer& mBuffer;
         std::unordered_map<std::string, Entity> mNameToEntity;
+    };
+
+    template <>
+    class SystemFetcher<Commands>
+    {
+    public:
+        static inline constexpr bool ConsumesOptions = false;
+
+        SystemFetcher(World& /*world*/, const SystemOptions& /*options*/)
+        {
+        }
+
+        void analyze(SystemAccess& /*access*/) const
+        {
+        }
+
+        Commands fetch(CommandBuffer& cmdBuffer)
+        {
+            return {cmdBuffer};
+        }
     };
 } // namespace cubos::core::ecs

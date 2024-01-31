@@ -1,5 +1,3 @@
-#include <cubos/core/ecs/system/query.hpp>
-
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/renderer/directional_light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>

@@ -49,6 +49,17 @@ namespace cubos::core::ecs
             }
         }
 
+        /// @brief Moves the given value into the optional, destroying any previously stored value.
+        void replace(T value)
+        {
+            if (mContains)
+            {
+                mValue.~T();
+            }
+
+            new (&mValue) T(memory::move(value));
+        }
+
         /// @brief Checks if the optional contains a value.
         /// @return Whether the optional contains a value.
         bool contains() const

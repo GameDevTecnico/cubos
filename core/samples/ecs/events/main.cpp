@@ -1,6 +1,6 @@
-#include <cubos/core/ecs/system/event/pipe.hpp>
-#include <cubos/core/ecs/system/event/reader.hpp>
-#include <cubos/core/ecs/system/event/writer.hpp>
+#include <cubos/core/ecs/system/arguments/event/pipe.hpp>
+#include <cubos/core/ecs/system/arguments/event/reader.hpp>
+#include <cubos/core/ecs/system/arguments/event/writer.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/stream.hpp>
 
