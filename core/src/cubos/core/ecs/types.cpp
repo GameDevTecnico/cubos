@@ -61,6 +61,11 @@ const Type& Types::type(DataTypeId id) const
     return *mEntries[id.inner].type;
 }
 
+bool Types::contains(const Type& type) const
+{
+    return mTypes.contains(type);
+}
+
 bool Types::contains(const std::string& name) const
 {
     return mNames.contains(name);

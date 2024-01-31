@@ -14,6 +14,7 @@ TEST_CASE("ecs::Types")
     Types types{};
     REQUIRE_FALSE(types.contains("int"));
     types.addComponent(reflect<int>());
+    REQUIRE(types.contains(reflect<int>()));
     REQUIRE(types.contains("int"));
     REQUIRE(types.id("int").inner == 0);
     REQUIRE(types.id(reflect<int>()).inner == 0);
@@ -22,6 +23,7 @@ TEST_CASE("ecs::Types")
     REQUIRE_FALSE(types.isRelation({.inner = 0}));
 
     types.addRelation(reflect<SymmetricRelation>());
+    REQUIRE(types.contains(reflect<SymmetricRelation>()));
     REQUIRE(types.contains("SymmetricRelation"));
     REQUIRE(types.id("SymmetricRelation").inner == 1);
     REQUIRE(types.id(reflect<SymmetricRelation>()).inner == 1);
@@ -32,6 +34,7 @@ TEST_CASE("ecs::Types")
     REQUIRE_FALSE(types.isTreeRelation({.inner = 1}));
 
     types.addRelation(reflect<TreeRelation>());
+    REQUIRE(types.contains(reflect<TreeRelation>()));
     REQUIRE(types.contains("TreeRelation"));
     REQUIRE(types.id("TreeRelation").inner == 2);
     REQUIRE(types.id(reflect<TreeRelation>()).inner == 2);
