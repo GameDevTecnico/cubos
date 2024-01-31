@@ -9,7 +9,6 @@ using cubos::core::ecs::Arguments;
 using cubos::core::ecs::Cubos;
 using cubos::core::ecs::DeltaTime;
 using cubos::core::ecs::ShouldQuit;
-using cubos::core::ecs::SystemBuilder;
 using cubos::core::ecs::TagBuilder;
 
 DeltaTime::DeltaTime(float value)
@@ -45,12 +44,6 @@ TagBuilder& TagBuilder::after(const std::string& tag)
     mTags.push_back(tag);
     mDispatcher.tagSetAfterTag(tag);
     return *this;
-}
-
-SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
-    : mDispatcher(dispatcher)
-    , mTags(tags)
-{
 }
 
 Cubos& Cubos::addPlugin(void (*func)(Cubos&))
