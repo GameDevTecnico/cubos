@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; ScreenPicker module | CUBOS. Docs</title>
+  <title>engine/assets/bridges/old/json.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,74 +46,39 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          ScreenPicker <span class="m-thin">module</span></h1>
-        <p>Used to select entities and gizmos by clicking them.</p>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_0835e003fa277f66ce5cf543d578f6a2.html">assets</a>/</span><span class="m-breadcrumb"><a href="dir_bd9be39c2ccf4132268583193b02b48c.html">bridges</a>/</span><span class="m-breadcrumb"><a href="dir_ee9baf6e3ed4c25bf532948ca1ee20ef.html">old</a>/</span>json.hpp <span class="m-thin">file</span>
+        </h1>
+        <p>Class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />JSONBridge</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md89">Resources</a></li>
-            <li><a href="#autotoc_md90">Startup tags</a></li>
-            <li><a href="#autotoc_md91">Tags</a></li>
-            <li><a href="#autotoc_md92">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md89"><h3><a href="#autotoc_md89">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> - provides a texture to store entity and gizmo ids.</li></ul></section><section id="autotoc_md90"><h3><a href="#autotoc_md90">Startup tags</a></h3><ul><li><code>cubos.screenpicker.init</code> - the <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> resource is initialized, after <code>cubos.window.init</code></li></ul></section><section id="autotoc_md91"><h3><a href="#autotoc_md91">Tags</a></h3><ul><li><code>cubos.screenpicker.clear</code> - the picking texture is cleared</li><li><code>cubos.screenpicker.resize</code> - window resize events are handled and the <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> texture is resized, after <code>cubos.window.poll</code> and before <code>cubos.screenpicker.clear</code>.</li></ul></section><section id="autotoc_md92"><h3><a href="#autotoc_md92">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="engine_2include_2cubos_2engine_2screenpicker_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="screenpicker_8hpp.html" class="m-doc">screenpicker.hpp</a></dt>
-            <dd>Resource <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">cubos::<wbr />engine::<wbr />ScreenPicker</a>.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">cubos::engine::ScreenPicker</a>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1engine_1_1old_1_1JSONBridge.html" class="m-doc">cubos::engine::old::JSONBridge</a>
             </dt>
-            <dd>Resource which provides a texture to store entity/gizmo ids, for selection with a mouse.</dd>
+            <dd>Bridge for loading and saving assets which are serialized to and from a JSON file.</dd>
           </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga3c3bfdf1aed02142faa45f9bca87c3f3" class="m-doc">screenPickerPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga3c3bfdf1aed02142faa45f9bca87c3f3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3c3bfdf1aed02142faa45f9bca87c3f3" class="m-doc-self">screenPickerPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2screenpicker_2plugin_8hpp.html">&lt;engine/screenpicker/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

@@ -81,13 +81,11 @@
             </dt>
             <dd>Makes the current tag run before the given tag.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a5698906e8294827bf572b07692ae1eb7" class="m-doc">tagAddCondition</a>(</span><span class="m-doc-wrap">F func)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a841ee1085023e54b44e9b2976f71db06" class="m-doc">tagAddCondition</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;bool&gt;&gt; func)</span>
             </dt>
             <dd>Adds a condition to the current tag.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a8dd6a3c5853b7f8f526be0eef779692a" class="m-doc">addSystem</a>(</span><span class="m-doc-wrap">F func)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a518623e4e8bfc4a483d9259f9f8bdb01" class="m-doc">addSystem</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;void&gt;&gt; func)</span>
             </dt>
             <dd>Adds a system, and sets it as the current system for further configuration.</dd>
             <dt>
@@ -103,8 +101,7 @@
             </dt>
             <dd>Sets the current system to run before the tag.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a7f4fd5101153c4a5f7fffa4668a1facd" class="m-doc">systemAddCondition</a>(</span><span class="m-doc-wrap">F func)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a89b4905977b15fd59bfa6bdf84a2fa1e" class="m-doc">systemAddCondition</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;bool&gt;&gt; func)</span>
             </dt>
             <dd>Adds a condition to the current system.</dd>
             <dt>
@@ -188,59 +185,35 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a5698906e8294827bf572b07692ae1eb7"><div>
+          <section class="m-doc-details" id="a841ee1085023e54b44e9b2976f71db06"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename F&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5698906e8294827bf572b07692ae1eb7" class="m-doc-self">tagAddCondition</a>(</span><span class="m-doc-wrap">F func)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a841ee1085023e54b44e9b2976f71db06" class="m-doc-self">tagAddCondition</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;bool&gt;&gt; func)</span></span>
             </h3>
             <p>Adds a condition to the current tag.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">F</td>
-                  <td>Condition type.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>func</td>
+                  <td style="width: 1%">func</td>
                   <td>Condition to add.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8dd6a3c5853b7f8f526be0eef779692a"><div>
+          <section class="m-doc-details" id="a518623e4e8bfc4a483d9259f9f8bdb01"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename F&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8dd6a3c5853b7f8f526be0eef779692a" class="m-doc-self">addSystem</a>(</span><span class="m-doc-wrap">F func)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a518623e4e8bfc4a483d9259f9f8bdb01" class="m-doc-self">addSystem</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;void&gt;&gt; func)</span></span>
             </h3>
             <p>Adds a system, and sets it as the current system for further configuration.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">F</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">System</a> type.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>func</td>
+                  <td style="width: 1%">func</td>
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">System</a> to add.</td>
                 </tr>
               </tbody>
@@ -297,30 +270,18 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a7f4fd5101153c4a5f7fffa4668a1facd"><div>
+          <section class="m-doc-details" id="a89b4905977b15fd59bfa6bdf84a2fa1e"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename F&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f4fd5101153c4a5f7fffa4668a1facd" class="m-doc-self">systemAddCondition</a>(</span><span class="m-doc-wrap">F func)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a89b4905977b15fd59bfa6bdf84a2fa1e" class="m-doc-self">systemAddCondition</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;bool&gt;&gt; func)</span></span>
             </h3>
             <p>Adds a condition to the current system.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">F</td>
-                  <td>Condition type.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>func</td>
+                  <td style="width: 1%">func</td>
                   <td>Condition.</td>
                 </tr>
               </tbody>

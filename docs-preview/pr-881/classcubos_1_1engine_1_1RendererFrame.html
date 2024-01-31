@@ -76,8 +76,9 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a977873c74e57bc45144df235ea0da850" class="m-doc">draw</a>(</span><span class="m-doc-wrap"><a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> grid,
-              glm::mat4 modelMat)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a98cfd9502bd14005ddf6b7d89fc09144" class="m-doc">draw</a>(</span><span class="m-doc-wrap"><a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> grid,
+              glm::mat4 modelMat,
+              uint32_t entityIndex)</span>
             </dt>
             <dd>Submits a draw command.</dd>
             <dt>
@@ -136,10 +137,11 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a977873c74e57bc45144df235ea0da850"><div>
+          <section class="m-doc-details" id="a98cfd9502bd14005ddf6b7d89fc09144"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a977873c74e57bc45144df235ea0da850" class="m-doc-self">draw</a>(</span><span class="m-doc-wrap"><a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> grid,
-              glm::mat4 modelMat)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a98cfd9502bd14005ddf6b7d89fc09144" class="m-doc-self">draw</a>(</span><span class="m-doc-wrap"><a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> grid,
+              glm::mat4 modelMat,
+              uint32_t entityIndex)</span></span>
             </h3>
             <p>Submits a draw command.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -154,6 +156,10 @@
                 <tr>
                   <td>modelMat</td>
                   <td>Model matrix of the grid, used for applying transformations.</td>
+                </tr>
+                <tr>
+                  <td>entityIndex</td>
+                  <td>Identifier of the entity being drawn.</td>
                 </tr>
               </tbody>
             </table>
