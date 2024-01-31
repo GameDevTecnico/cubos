@@ -1,7 +1,5 @@
 #include <glm/glm.hpp>
 
-#include <cubos/core/ecs/system/query.hpp>
-
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>

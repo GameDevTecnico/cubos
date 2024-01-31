@@ -1,7 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/command_buffer.hpp>
-#include <cubos/core/ecs/system/commands.hpp>
+#include <cubos/core/ecs/system/arguments/commands.hpp>
 
 #include "utils.hpp"
 

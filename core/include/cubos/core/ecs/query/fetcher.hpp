@@ -27,7 +27,7 @@ namespace cubos::core::ecs
             (void)term;
 
             // This should never be instantiated. This constructor is only defined for documentation purposes.
-            static_assert(sizeof(T) == 0, "Invalid query argument type");
+            static_assert(AlwaysFalse<T>, "Invalid query argument type");
         }
 
         /// @brief Creates a query term with unspecified targets for the argument type.

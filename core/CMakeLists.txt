@@ -104,8 +104,10 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/system/system.cpp"
     "src/cubos/core/ecs/system/options.cpp"
     "src/cubos/core/ecs/system/dispatcher.cpp"
-    "src/cubos/core/ecs/system/commands.cpp"
-    "src/cubos/core/ecs/system/query.cpp"
+    "src/cubos/core/ecs/system/arguments/commands.cpp"
+    "src/cubos/core/ecs/system/arguments/query.cpp"
+    "src/cubos/core/ecs/system/arguments/resources.cpp"
+    "src/cubos/core/ecs/system/arguments/world.cpp"
 
     "src/cubos/core/ecs/query/term.cpp"
     "src/cubos/core/ecs/query/data.cpp"

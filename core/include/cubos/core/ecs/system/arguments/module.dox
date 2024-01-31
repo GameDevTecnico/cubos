@@ -1,0 +1,12 @@
+/// @dir
+/// @brief @ref core-ecs-system-arguments directory.
+
+/// @dir events
+/// @brief Event arguments.
+
+namespace cubos::core::ecs
+{
+    /// @defgroup core-ecs-system-arguments System arguments
+    /// @ingroup core-ecs-system
+    /// @brief Contains types and fetcher specializations for system argument types.
+}

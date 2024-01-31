@@ -1,5 +1,4 @@
 #include <cubos/core/ecs/reflection.hpp>
-#include <cubos/core/ecs/system/query.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>

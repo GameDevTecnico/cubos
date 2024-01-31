@@ -24,6 +24,11 @@ Dispatcher::~Dispatcher()
     }
 }
 
+Dispatcher::Dispatcher(World& world)
+    : mWorld{world}
+{
+}
+
 void Dispatcher::addTag(const std::string& tag)
 {
     ENSURE_TAG_SETTINGS(tag);
@@ -228,25 +233,8 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
     return false;
 }
 
-void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
+void Dispatcher::callSystems(CommandBuffer& cmds)
 {
-    // If the systems haven't been prepared yet, do so now.
-    // We can't multi-thread this as the systems require exclusive access to the world to prepare.
-    if (!mPrepared)
-    {
-        for (auto& system : mSystems)
-        {
-            system->system->prepare(world);
-        }
-
-        for (auto& condition : mConditions)
-        {
-            condition->prepare(world);
-        }
-
-        mPrepared = true;
-    }
-
     // Clear conditions bitmasks
     mRunConditions.reset();
     mRetConditions.reset();
@@ -268,7 +256,7 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
                     if (!mRunConditions.test(i))
                     {
                         mRunConditions.set(i);
-                        if (mConditions[i]->call(world, cmds))
+                        if (mConditions[i].run(cmds))
                         {
                             mRetConditions.set(i);
                         }
@@ -288,7 +276,7 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 
         if (canRun)
         {
-            system->system->call(world, cmds);
+            system->system.run(cmds);
         }
 
         // TODO: Check synchronization concerns when this gets multithreaded

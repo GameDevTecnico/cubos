@@ -2,9 +2,6 @@
 
 #include <cubos/core/ecs/cubos.hpp>
 #include <cubos/core/ecs/entity/entity.hpp>
-#include <cubos/core/ecs/system/event/reader.hpp>
-#include <cubos/core/ecs/system/event/writer.hpp>
-#include <cubos/core/ecs/system/query.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 
 namespace cubos::engine

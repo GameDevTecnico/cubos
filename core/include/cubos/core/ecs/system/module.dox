@@ -1,9 +1,6 @@
 /// @dir
 /// @brief @ref core-ecs-system directory.
 
-/// @dir event
-/// @brief Event system arguments directory.
-
 namespace cubos::core::ecs
 {
     /// @defgroup core-ecs-system System

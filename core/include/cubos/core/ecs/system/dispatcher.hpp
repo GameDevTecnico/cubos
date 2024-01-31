@@ -57,6 +57,10 @@ namespace cubos::core::ecs
     public:
         ~Dispatcher();
 
+        /// @brief Constructs.
+        /// @param world World.
+        Dispatcher(World& world);
+
         /// @brief Adds a tag, and sets it as the current tag for further settings.
         /// @param tag Tag to add.
         void addTag(const std::string& tag);
@@ -74,12 +78,13 @@ namespace cubos::core::ecs
         void tagSetBeforeTag(const std::string& tag);
 
         /// @brief Adds a condition to the current tag.
-        /// @param func Condition to add.
-        void tagAddCondition(std::shared_ptr<AnySystemWrapper<bool>> func);
+        /// @tparam F Condition type.
+        /// @param condition Condition to add.
+        void tagAddCondition(ecs::System<bool> condition);
 
         /// @brief Adds a system, and sets it as the current system for further configuration.
-        /// @param func System to add.
-        void addSystem(std::shared_ptr<AnySystemWrapper<void>> func);
+        /// @param system System to add.
+        void addSystem(ecs::System<void> system);
 
         /// @brief Sets the tag for the current system.
         /// @param tag Tag to run under.
@@ -94,8 +99,8 @@ namespace cubos::core::ecs
         void systemSetBeforeTag(const std::string& tag);
 
         /// @brief Adds a condition to the current system.
-        /// @param func Condition.
-        void systemAddCondition(std::shared_ptr<AnySystemWrapper<bool>> func);
+        /// @param condition Condition.
+        void systemAddCondition(ecs::System<bool> condition);
 
         /// @brief Compiles the call chain. Required before @ref callSystems() can be called.
         ///
@@ -104,9 +109,8 @@ namespace cubos::core::ecs
 
         /// @brief Calls all systems in the compiled call chain. @ref compileChain() must be called
         /// prior to this.
-        /// @param world World to call the systems in.
         /// @param cmds Command buffer.
-        void callSystems(World& world, CommandBuffer& cmds);
+        void callSystems(CommandBuffer& cmds);
 
     private:
         struct Dependency;
@@ -135,7 +139,7 @@ namespace cubos::core::ecs
         struct System
         {
             std::shared_ptr<SystemSettings> settings;
-            std::shared_ptr<AnySystemWrapper<void>> system;
+            ecs::System<void> system;
             std::unordered_set<std::string> tags;
         };
 
@@ -165,16 +169,15 @@ namespace cubos::core::ecs
         void handleTagInheritance(std::shared_ptr<SystemSettings>& settings);
 
         /// @brief Assign a condition a bit in the condition bitset, and returns that assigned bit.
-        /// @param func Condition to assign a bit for.
+        /// @param condition Condition to assign a bit for.
         /// @return Assigned bit.
-        std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> assignConditionBit(
-            std::shared_ptr<AnySystemWrapper<bool>> func);
+        std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> assignConditionBit(ecs::System<bool> condition);
 
         // Variables for holding information before call chain is compiled.
 
         std::vector<System*> mPendingSystems;                                ///< All systems.
         std::map<std::string, std::shared_ptr<SystemSettings>> mTagSettings; ///< All tags.
-        std::vector<std::shared_ptr<AnySystemWrapper<bool>>> mConditions;    ///< All conditions.
+        std::vector<ecs::System<bool>> mConditions;                          ///< All conditions.
         std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>
             mRunConditions; ///< Bitset of conditions that run in this iteration.
         std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> mRetConditions; ///< Bitset of conditions return values.
@@ -184,34 +187,32 @@ namespace cubos::core::ecs
         // Variables for holding information after call chain is compiled.
 
         std::vector<System*> mSystems; ///< Compiled order of running systems.
-        bool mPrepared = false;        ///< Whether the systems are prepared for execution.
+        World& mWorld;
     };
 
-    inline void Dispatcher::tagAddCondition(std::shared_ptr<AnySystemWrapper<bool>> func)
+    inline void Dispatcher::tagAddCondition(ecs::System<bool> condition)
     {
         ENSURE_CURR_TAG();
-        auto bit = assignConditionBit(std::move(func));
+        auto bit = assignConditionBit(std::move(condition));
         mTagSettings[mCurrTag]->conditions |= bit;
     }
 
-    inline void Dispatcher::addSystem(std::shared_ptr<AnySystemWrapper<void>> func)
+    inline void Dispatcher::addSystem(ecs::System<void> system)
     {
         // Wrap the system and put it in the pending queue
-        auto* system = new System{nullptr, std::move(func), {}};
-        mPendingSystems.push_back(system);
+        mPendingSystems.push_back(new System{nullptr, std::move(system), {}});
         mCurrSystem = mPendingSystems.back();
     }
 
-    inline void Dispatcher::systemAddCondition(std::shared_ptr<AnySystemWrapper<bool>> func)
+    inline void Dispatcher::systemAddCondition(ecs::System<bool> condition)
     {
         ENSURE_CURR_SYSTEM();
         ENSURE_SYSTEM_SETTINGS(mCurrSystem);
-        auto bit = assignConditionBit(std::move(func));
+        auto bit = assignConditionBit(std::move(condition));
         mCurrSystem->settings->conditions |= bit;
     }
 
-    inline std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> Dispatcher::assignConditionBit(
-        std::shared_ptr<AnySystemWrapper<bool>> func)
+    inline std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> Dispatcher::assignConditionBit(ecs::System<bool> condition)
     {
         // If we already reached the condition limit, exit
         if (mConditions.size() >= CUBOS_CORE_DISPATCHER_MAX_CONDITIONS)
@@ -221,7 +222,7 @@ namespace cubos::core::ecs
         }
 
         // Otherwise, add it to the conditions list
-        mConditions.push_back(func);
+        mConditions.push_back(std::move(condition));
         // And return the bit it has
         return std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>(1) << (mConditions.size() - 1);
     }
