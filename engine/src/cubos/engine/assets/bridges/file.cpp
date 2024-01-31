@@ -54,6 +54,9 @@ bool FileBridge::save(const Assets& assets, const AnyAsset& handle)
         return false;
     }
 
+    // Close stream, ensuring everything is flushed to the file.
+    stream = nullptr;
+
     /// @todo This can be done simpler with #737.
     if (!FileSystem::copy(swpPath, path))
     {
