@@ -8,25 +8,6 @@
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 
-using namespace cubos::engine;
-
-static void bridge(Assets& assets)
-{
-    assets.registerBridge(".bind", std::make_unique<JSONBridge<InputBindings>>());
-}
-
-static void update(const Window& window, Input& input, EventReader<WindowEvent> events)
-{
-    input.updateMouse();
-
-    for (auto event : events)
-    {
-        std::visit([window, &input](auto e) { input.handle(window, e); }, event);
-    }
-
-    input.pollGamepads(window);
-}
-
 void cubos::engine::inputPlugin(Cubos& cubos)
 {
     cubos.addPlugin(assetsPlugin);
@@ -34,6 +15,21 @@ void cubos::engine::inputPlugin(Cubos& cubos)
 
     cubos.addResource<Input>();
 
-    cubos.startupSystem(bridge).tagged("cubos.assets.bridge");
-    cubos.system(update).tagged("cubos.input.update").after("cubos.window.poll");
+    cubos.startupSystem("setup InputBindings asset bridge").tagged("cubos.assets.bridge").call([](Assets& assets) {
+        assets.registerBridge(".bind", std::make_unique<JSONBridge<InputBindings>>());
+    });
+
+    cubos.system("handle WindowEvents for Input")
+        .tagged("cubos.input.update")
+        .after("cubos.window.poll")
+        .call([](const Window& window, Input& input, EventReader<WindowEvent> events) {
+            input.updateMouse();
+
+            for (auto event : events)
+            {
+                std::visit([window, &input](auto e) { input.handle(window, e); }, event);
+            }
+
+            input.pollGamepads(window);
+        });
 }

@@ -251,7 +251,7 @@ namespace cubos::core::ecs
     template <typename F>
     TagBuilder& TagBuilder::runIf(F func)
     {
-        mDispatcher.tagAddCondition(func);
+        mDispatcher.tagAddCondition(std::make_shared<SystemWrapper<decltype(func)>>(func));
         return *this;
     }
 

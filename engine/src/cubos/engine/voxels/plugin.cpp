@@ -4,18 +4,15 @@
 #include <cubos/engine/voxels/palette.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
-using namespace cubos::engine;
-
-static void bridges(Assets& assets)
-{
-    // Add the bridges to load .grd and .pal files.
-    assets.registerBridge(".grd", std::make_unique<BinaryBridge<VoxelGrid>>());
-    assets.registerBridge(".pal", std::make_unique<BinaryBridge<VoxelPalette>>());
-}
-
 void cubos::engine::voxelsPlugin(Cubos& cubos)
 {
     cubos.addPlugin(assetsPlugin);
 
-    cubos.startupSystem(bridges).tagged("cubos.assets.bridge");
+    cubos.startupSystem("setup VoxelGrid and VoxelPalette asset bridges")
+        .tagged("cubos.assets.bridge")
+        .call([](Assets& assets) {
+            // Add the bridges to load .grd and .pal files.
+            assets.registerBridge(".grd", std::make_unique<BinaryBridge<VoxelGrid>>());
+            assets.registerBridge(".pal", std::make_unique<BinaryBridge<VoxelPalette>>());
+        });
 }

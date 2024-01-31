@@ -9,34 +9,6 @@
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 
-using namespace cubos::engine;
-
-static void init(const Window& window, Settings& settings)
-{
-    float dpiScale = static_cast<float>(settings.getDouble("imgui.scale", window->contentScale()));
-    imguiInitialize(window, dpiScale);
-}
-
-static void begin(EventReader<WindowEvent> events)
-{
-    // Pass window events to ImGui.
-    // TODO: handleEvent returns a bool indicating if the event was handled or not.
-    //       This will be used to stop propagating the event to other systems when
-    //       the mouse is over an ImGui window.
-    //       Not sure how we will propagate that information to other systems yet.
-    for (auto event : events)
-    {
-        imguiHandleEvent(event);
-    }
-
-    imguiBeginFrame();
-}
-
-static void end()
-{
-    imguiEndFrame();
-}
-
 void cubos::engine::imguiPlugin(Cubos& cubos)
 {
     cubos.addPlugin(windowPlugin);
@@ -49,7 +21,26 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
     cubos.tag("cubos.imgui.end").before("cubos.window.render").after("cubos.imgui.begin");
     cubos.tag("cubos.imgui").after("cubos.imgui.begin").before("cubos.imgui.end");
 
-    cubos.startupSystem(init).tagged("cubos.imgui.init");
-    cubos.system(begin).tagged("cubos.imgui.begin");
-    cubos.system(end).tagged("cubos.imgui.end");
+    cubos.startupSystem("initialize ImGui")
+        .tagged("cubos.imgui.init")
+        .call([](const Window& window, Settings& settings) {
+            float dpiScale = static_cast<float>(settings.getDouble("imgui.scale", window->contentScale()));
+            imguiInitialize(window, dpiScale);
+        });
+
+    cubos.system("begin ImGui frame").tagged("cubos.imgui.begin").call([](EventReader<WindowEvent> events) {
+        // Pass window events to ImGui.
+        // TODO: handleEvent returns a bool indicating if the event was handled or not.
+        //       This will be used to stop propagating the event to other systems when
+        //       the mouse is over an ImGui window.
+        //       Not sure how we will propagate that information to other systems yet.
+        for (auto event : events)
+        {
+            imguiHandleEvent(event);
+        }
+
+        imguiBeginFrame();
+    });
+
+    cubos.system("end ImGui frame").tagged("cubos.imgui.end").call([]() { imguiEndFrame(); });
 }
