@@ -62,6 +62,119 @@
             </tr>
           </tbody>
         </table>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a1980969a6b6c644e222b3bb2c372d890">
+              static bool <a href="#a1980969a6b6c644e222b3bb2c372d890" class="m-doc-self">ConsumesOptions</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd>Indicates whether this argument type consumes system options.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aa1ff80f1c2f67efeb02e5b7a4b19561c" class="m-doc">SystemFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a>&amp; options)</span>
+            </dt>
+            <dd>Called when a system is constructed for the first time.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a566abe2156d2898e356dda05fec6b8c4" class="m-doc">analyze</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; access) const</span>
+            </dt>
+            <dd>Called to determine the access patterns of the argument.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a31c74f7b8fb6dd529a8942bfe2238575" class="m-doc">fetch</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmdBuffer) -&gt; T</span>
+            </dt>
+            <dd>Called each system run to fetch the data from the world.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa1ff80f1c2f67efeb02e5b7a4b19561c"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa1ff80f1c2f67efeb02e5b7a4b19561c" class="m-doc-self">SystemFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a>&amp; options)</span></span>
+            </h3>
+            <p>Called when a system is constructed for the first time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to extract data from.</td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td>Argument options.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a566abe2156d2898e356dda05fec6b8c4"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a566abe2156d2898e356dda05fec6b8c4" class="m-doc-self">analyze</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; access) const</span></span>
+            </h3>
+            <p>Called to determine the access patterns of the argument.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">access&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Access patterns to add info to.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a31c74f7b8fb6dd529a8942bfe2238575"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a31c74f7b8fb6dd529a8942bfe2238575" class="m-doc-self">fetch</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmdBuffer)</span></span>
+            </h3>
+            <p>Called each system run to fetch the data from the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cmdBuffer</td>
+                  <td>Command buffer.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>
