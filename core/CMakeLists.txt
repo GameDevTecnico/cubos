@@ -88,6 +88,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/entity/archetype_graph.cpp"
     "src/cubos/core/ecs/entity/archetype_id.cpp"
     "src/cubos/core/ecs/entity/pool.cpp"
+
     "src/cubos/core/ecs/table/column.cpp"
     "src/cubos/core/ecs/table/dense/table.cpp"
     "src/cubos/core/ecs/table/dense/registry.cpp"
@@ -95,18 +96,23 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/table/sparse_relation/table.cpp"
     "src/cubos/core/ecs/table/sparse_relation/registry.cpp"
     "src/cubos/core/ecs/table/tables.cpp"
+
     "src/cubos/core/ecs/component/storage.cpp"
     "src/cubos/core/ecs/component/manager.cpp"
+
+    "src/cubos/core/ecs/system/access.cpp"
     "src/cubos/core/ecs/system/system.cpp"
     "src/cubos/core/ecs/system/dispatcher.cpp"
     "src/cubos/core/ecs/system/commands.cpp"
     "src/cubos/core/ecs/system/query.cpp"
+
     "src/cubos/core/ecs/query/term.cpp"
     "src/cubos/core/ecs/query/access.cpp"
     "src/cubos/core/ecs/query/data.cpp"
     "src/cubos/core/ecs/query/filter.cpp"
     "src/cubos/core/ecs/query/fetcher.cpp"
     "src/cubos/core/ecs/query/opt.cpp"
+
     "src/cubos/core/ecs/reflection.cpp"
     "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
