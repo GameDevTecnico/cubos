@@ -56,7 +56,7 @@ namespace cubos::engine
 
             // Deserialize the asset and store it in the asset manager.
             T data{};
-            if (deserializer.read(data))
+            if (!deserializer.read(data))
             {
                 CUBOS_ERROR("Could not deserialize asset from JSON file");
                 return false;
@@ -73,7 +73,7 @@ namespace cubos::engine
 
             // Read the asset from the asset manager and serialize it to the file stream.
             auto data = assets.read<T>(handle);
-            if (serializer.write(*data))
+            if (!serializer.write(*data))
             {
                 CUBOS_ERROR("Could not serialize asset to JSON file");
                 return false;
