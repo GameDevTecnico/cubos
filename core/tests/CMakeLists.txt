@@ -57,6 +57,7 @@ add_executable(
     ecs/query/data.cpp
     ecs/query/term.cpp
     ecs/query/filter.cpp
+    ecs/system/access.cpp
     ecs/stress.cpp
 
     geom/box.cpp
