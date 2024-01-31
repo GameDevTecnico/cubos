@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include <cubos/core/ecs/system/event/reader.hpp>
-
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/prelude.hpp>

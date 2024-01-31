@@ -1,10 +1,13 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::Query.
-/// @ingroup core-ecs-system
+/// @ingroup core-ecs-system-arguments
 
 #pragma once
 
 #include <cubos/core/ecs/query/data.hpp>
+#include <cubos/core/ecs/system/access.hpp>
+#include <cubos/core/ecs/system/fetcher.hpp>
+#include <cubos/core/ecs/system/options.hpp>
 
 namespace cubos::core::ecs
 {
@@ -22,7 +25,7 @@ namespace cubos::core::ecs
     /// not present in the entity. Whenever mutability is not needed, `const` should be used.
     ///
     /// @tparam Ts Argument types.
-    /// @ingroup core-ecs-system
+    /// @ingroup core-ecs-system-arguments
     template <typename... Ts>
     class Query
     {
@@ -81,5 +84,34 @@ namespace cubos::core::ecs
 
     private:
         typename QueryData<Ts...>::View mView;
+    };
+
+    template <typename... Ts>
+    class SystemFetcher<Query<Ts...>>
+    {
+    public:
+        static inline constexpr bool ConsumesOptions = true;
+
+        SystemFetcher(World& world, const SystemOptions& options)
+            : mData{world, options.queryTerms}
+        {
+        }
+
+        void analyze(SystemAccess& access) const
+        {
+            for (const auto& id : mData.accesses())
+            {
+                access.dataTypes.insert(id);
+            }
+        }
+
+        Query<Ts...> fetch(CommandBuffer& /*cmdBuffer*/)
+        {
+            mData.update();
+            return {mData.view()};
+        }
+
+    private:
+        QueryData<Ts...> mData;
     };
 } // namespace cubos::core::ecs

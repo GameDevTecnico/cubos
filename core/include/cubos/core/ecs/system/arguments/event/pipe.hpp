@@ -1,6 +1,6 @@
 /// @file
 /// @brief Resource @ref cubos::core::ecs::EventPipe.
-/// @ingroup core-ecs-system
+/// @ingroup core-ecs-system-arguments
 
 #pragma once
 
@@ -15,7 +15,7 @@ namespace cubos::core::ecs
     /// @brief Resource which stores events of type @p T.
     /// @note This resource is meant to be used through @ref EventReader and @ref EventWriter.
     /// @tparam T Event type.
-    /// @ingroup core-ecs-system
+    /// @ingroup core-ecs-system-arguments
     template <typename T>
     class EventPipe
     {

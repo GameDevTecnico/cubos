@@ -1,8 +1,5 @@
 #include "broad_phase/plugin.hpp"
 
-#include <cubos/core/ecs/system/event/writer.hpp>
-#include <cubos/core/ecs/system/query.hpp>
-
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/collision_event.hpp>
 #include <cubos/engine/collisions/plugin.hpp>

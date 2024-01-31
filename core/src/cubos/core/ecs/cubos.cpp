@@ -26,8 +26,9 @@ Arguments::Arguments(std::vector<std::string> value)
 {
 }
 
-TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
-    : mDispatcher(dispatcher)
+TagBuilder::TagBuilder(World& world, core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
+    : mWorld(world)
+    , mDispatcher(dispatcher)
     , mTags(tags)
 {
 }
@@ -63,7 +64,7 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 TagBuilder Cubos::tag(const std::string& tag)
 {
     mMainDispatcher.addTag(tag);
-    TagBuilder builder(mMainDispatcher, mMainTags);
+    TagBuilder builder(mWorld, mMainDispatcher, mMainTags);
 
     return builder;
 }
@@ -71,23 +72,24 @@ TagBuilder Cubos::tag(const std::string& tag)
 TagBuilder Cubos::startupTag(const std::string& tag)
 {
     mStartupDispatcher.addTag(tag);
-    TagBuilder builder(mStartupDispatcher, mStartupTags);
+    TagBuilder builder(mWorld, mStartupDispatcher, mStartupTags);
 
     return builder;
 }
 
 auto Cubos::system(std::string name) -> SystemBuilder
 {
-    return {mMainDispatcher, std::move(name)};
+    return {mWorld, mMainDispatcher, std::move(name)};
 }
 
 auto Cubos::startupSystem(std::string name) -> SystemBuilder
 {
-    return {mStartupDispatcher, std::move(name)};
+    return {mWorld, mStartupDispatcher, std::move(name)};
 }
 
-Cubos::SystemBuilder::SystemBuilder(Dispatcher& dispatcher, std::string name)
-    : mDispatcher{dispatcher}
+Cubos::SystemBuilder::SystemBuilder(World& world, Dispatcher& dispatcher, std::string name)
+    : mWorld{world}
+    , mDispatcher{dispatcher}
     , mName{std::move(name)}
 {
 }
@@ -110,13 +112,13 @@ auto Cubos::SystemBuilder::after(const std::string& tag) && -> SystemBuilder&&
     return std::move(*this);
 }
 
-void Cubos::SystemBuilder::finish(std::shared_ptr<AnySystemWrapper<void>> system)
+void Cubos::SystemBuilder::finish(System<void> system)
 {
     mDispatcher.addSystem(std::move(system));
 
-    if (mCondition != nullptr)
+    if (mCondition)
     {
-        mDispatcher.systemAddCondition(mCondition);
+        mDispatcher.systemAddCondition(std::move(mCondition.value()));
     }
 
     for (const auto& tag : mTagged)
@@ -143,6 +145,9 @@ Cubos::Cubos()
 }
 
 Cubos::Cubos(int argc, char** argv)
+    : mWorld{}
+    , mStartupDispatcher{mWorld}
+    , mMainDispatcher{mWorld}
 {
     std::vector<std::string> arguments(argv + 1, argv + argc);
 
@@ -163,13 +168,13 @@ void Cubos::run()
 
     cubos::core::ecs::CommandBuffer cmds(mWorld);
 
-    mStartupDispatcher.callSystems(mWorld, cmds);
+    mStartupDispatcher.callSystems(cmds);
 
     auto currentTime = std::chrono::steady_clock::now();
     auto previousTime = std::chrono::steady_clock::now();
     do
     {
-        mMainDispatcher.callSystems(mWorld, cmds);
+        mMainDispatcher.callSystems(cmds);
         currentTime = std::chrono::steady_clock::now();
         mWorld.write<DeltaTime>().get().value = std::chrono::duration<float>(currentTime - previousTime).count();
         previousTime = currentTime;

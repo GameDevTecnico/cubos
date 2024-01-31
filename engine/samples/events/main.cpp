@@ -1,5 +1,3 @@
-#include <cubos/core/ecs/system/event/reader.hpp>
-#include <cubos/core/ecs/system/event/writer.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/prelude.hpp>

@@ -4,7 +4,6 @@
 #include <imgui.h>
 #include <misc/cpp/imgui_stdlib.h>
 
-#include <cubos/core/ecs/system/commands.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 #include <cubos/core/reflection/type.hpp>

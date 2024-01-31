@@ -13,244 +13,99 @@ using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::Query;
-using cubos::core::ecs::SystemInfo;
-using cubos::core::ecs::SystemWrapper;
+using cubos::core::ecs::System;
 using cubos::core::ecs::World;
 
-TEST_CASE("ecs::SystemInfo")
-{
-    SystemInfo infoA{};
-    SystemInfo infoB{};
-
-    SUBCASE("A is valid")
-    {
-        SUBCASE("A does nothing")
-        {
-        }
-
-        SUBCASE("A reads two resources")
-        {
-            infoA.resourcesRead.insert(typeid(int));
-            infoA.resourcesRead.insert(typeid(double));
-        }
-
-        SUBCASE("A writes two resources and reads another")
-        {
-            infoA.resourcesWritten.insert(typeid(int));
-            infoA.resourcesWritten.insert(typeid(double));
-            infoA.resourcesRead.insert(typeid(float));
-        }
-
-        SUBCASE("A uses commands")
-        {
-            infoA.usesCommands = true;
-        }
-
-        SUBCASE("A uses the world directly")
-        {
-            infoA.usesWorld = true;
-        }
-
-        CHECK(infoA.valid());
-    }
-
-    SUBCASE("A and B are compatible")
-    {
-        SUBCASE("both do nothing")
-        {
-        }
-
-        SUBCASE("both read the same resource")
-        {
-            infoA.resourcesRead.insert(typeid(int));
-            infoB.resourcesRead.insert(typeid(int));
-        }
-
-        SUBCASE("both write to different resources")
-        {
-            infoA.resourcesWritten.insert(typeid(double));
-            infoB.resourcesWritten.insert(typeid(float));
-        }
-
-        SUBCASE("both use commands")
-        {
-            infoA.usesCommands = true;
-            infoB.usesCommands = true;
-        }
-
-        CHECK(infoA.compatible(infoB));
-        CHECK(infoB.compatible(infoA));
-    }
-
-    SUBCASE("A and B are incompatible")
-    {
-        SUBCASE("both write to the same resource")
-        {
-            infoA.resourcesWritten.insert(typeid(int));
-            infoB.resourcesWritten.insert(typeid(int));
-        }
-
-        SUBCASE("one reads and the other writes to the same resource")
-        {
-            infoA.resourcesRead.insert(typeid(int));
-            infoB.resourcesWritten.insert(typeid(int));
-        }
-
-        SUBCASE("one accesses the world directly")
-        {
-            infoA.usesWorld = true;
-        }
-
-        CHECK_FALSE(infoA.compatible(infoB));
-        CHECK_FALSE(infoB.compatible(infoA));
-    }
-}
-
-// Some system functions which do nothing, used to test if the wrapper extracts the correct system
-// information.
-
-static void accessNothing()
-{
-}
-
-static void accessResources(const int& /*unused*/, double& /*unused*/, const float& /*unused*/)
-{
-}
-
-static void accessComponents(Query<const int&, double&> /*unused*/, Query<const int&, const float&> /*unused*/)
-{
-}
-
-static void accessCommands(Commands /*unused*/)
-{
-}
-
-static void accessWriteWorld(World& /*unused*/)
-{
-}
-
-static void accessReadWorld(const World& /*unused*/)
-{
-}
-
 /// Utility used to run a system function with the given world.
-template <typename F>
-static void runSystem(World& world, CommandBuffer& cmdBuf, F f)
+template <typename T>
+static T runSystem(World& world, CommandBuffer& cmdBuf, auto f)
 {
-    SystemWrapper<F> wrapper{f};
-    wrapper.prepare(world);
-    wrapper.call(world, cmdBuf);
+    return System<T>::make(world, f, {}).run(cmdBuf);
 }
 
-TEST_CASE("ecs::SystemWrapper")
+TEST_CASE("ecs::System")
 {
-    SUBCASE("Wrapper extracts the system information correctly")
+    World world{};
+    CommandBuffer cmdBuf{world};
+
+    world.registerResource<int>(0);
+    world.registerComponent<bool>();
+    auto boolId = world.types().id("bool");
+
+    SUBCASE("extracted access patterns are correct")
     {
-        SUBCASE("System does not access anything")
+        SUBCASE("no arguments")
         {
-            auto info = SystemWrapper(accessNothing).info();
-            CHECK(info.resourcesRead.empty());
-            CHECK(info.resourcesWritten.empty());
-            CHECK_FALSE(info.usesCommands);
-            CHECK_FALSE(info.usesWorld);
+            auto system = System<void>::make(world, []() {});
+            CHECK_FALSE(system.access().usesWorld);
+            CHECK(system.access().dataTypes.empty());
         }
 
-        SUBCASE("System accesses resources")
+        SUBCASE("world")
         {
-            auto info = SystemWrapper(accessResources).info();
-            CHECK(info.resourcesRead.size() == 2);
-            CHECK(info.resourcesWritten.size() == 1);
-            CHECK(info.resourcesRead.contains(typeid(int)));
-            CHECK(info.resourcesRead.contains(typeid(float)));
-            CHECK(info.resourcesWritten.contains(typeid(double)));
-            CHECK_FALSE(info.usesCommands);
-            CHECK_FALSE(info.usesWorld);
+            auto system = System<void>::make(world, [](World&) {});
+            CHECK(system.access().usesWorld);
+            CHECK(system.access().dataTypes.empty());
         }
 
-        SUBCASE("System accesses components")
+        SUBCASE("const world")
         {
-            auto info = SystemWrapper(accessComponents).info();
-            CHECK(info.resourcesRead.empty());
-            CHECK(info.resourcesWritten.empty());
-            CHECK_FALSE(info.usesCommands);
-            CHECK_FALSE(info.usesWorld);
+            auto system = System<void>::make(world, [](const World&) {});
+            CHECK(system.access().usesWorld);
+            CHECK(system.access().dataTypes.empty());
         }
 
-        SUBCASE("System accesses commands")
+        SUBCASE("query")
         {
-            auto info = SystemWrapper(accessCommands).info();
-            CHECK(info.resourcesRead.empty());
-            CHECK(info.resourcesWritten.empty());
-            CHECK(info.usesCommands);
-            CHECK_FALSE(info.usesWorld);
-        }
-
-        SUBCASE("System accesses the world directly")
-        {
-            SystemInfo info{};
-
-            SUBCASE("System reads the world")
-            {
-                info = SystemWrapper(accessReadWorld).info();
-            }
-
-            SUBCASE("System writes to the world")
-            {
-                info = SystemWrapper(accessWriteWorld).info();
-            }
-
-            CHECK(info.resourcesRead.empty());
-            CHECK(info.resourcesWritten.empty());
-            CHECK_FALSE(info.usesCommands);
-            CHECK(info.usesWorld);
+            auto system = System<void>::make(world, [](Query<bool&>) {});
+            CHECK_FALSE(system.access().usesWorld);
+            CHECK(system.access().dataTypes.contains(boolId));
+            CHECK(system.access().dataTypes.size() == 1);
         }
     }
 
-    SUBCASE("Wrapper calls the system correctly")
+    SUBCASE("system runs correctly")
     {
-        World world{};
-        CommandBuffer cmdBuf{world};
-
-        SUBCASE("Systems read and write to a resource")
+        SUBCASE("read and write to a resource")
         {
-            world.registerResource<int>(0);
-            runSystem(world, cmdBuf, [](const int& res) { CHECK(res == 0); });
-            runSystem(world, cmdBuf, [](int& res) { res = 1; });
-            runSystem(world, cmdBuf, [](const int& res) { CHECK(res == 1); });
+            runSystem<void>(world, cmdBuf, [](const int& res) { CHECK(res == 0); });
+            runSystem<void>(world, cmdBuf, [](int& res) { res = 1; });
+            runSystem<void>(world, cmdBuf, [](const int& res) { CHECK(res == 1); });
+
+            int ret = runSystem<int>(world, cmdBuf, [](const int& res) { return res; });
+            CHECK(ret == 1);
         }
 
-        SUBCASE("Systems spawn an entity and read/write from/to its component")
+        SUBCASE("spawn entity and then access it")
         {
-            setupWorld(world);
-
             // Spawn entity with no components.
             Entity ent;
-            runSystem(world, cmdBuf, [&](Commands cmd) { ent = cmd.create().entity(); });
+            runSystem<void>(world, cmdBuf, [&](Commands cmd) { ent = cmd.create().entity(); });
             cmdBuf.commit();
 
             // Check that the entity has no components.
-            runSystem(world, cmdBuf, [&](Query<IntegerComponent&> q) { CHECK_FALSE(q.at(ent).contains()); });
+            runSystem<void>(world, cmdBuf, [&](Query<bool&> q) { CHECK_FALSE(q.at(ent).contains()); });
 
             // Add component.
-            runSystem(world, cmdBuf, [&](Commands cmd) { cmd.add(ent, IntegerComponent{0}); });
+            runSystem<void>(world, cmdBuf, [&](Commands cmd) { cmd.add(ent, false); });
 
             // Commands have not been committed yet, so the component should not be readable.
-            runSystem(world, cmdBuf, [&](Query<IntegerComponent&> q) { CHECK_FALSE(q.at(ent).contains()); });
+            runSystem<void>(world, cmdBuf, [&](Query<bool&> q) { CHECK_FALSE(q.at(ent).contains()); });
 
             cmdBuf.commit();
 
             // Write to it.
-            runSystem(world, cmdBuf, [&](Query<IntegerComponent&> q) {
+            runSystem<void>(world, cmdBuf, [&](Query<bool&> q) {
                 REQUIRE(q.at(ent).contains());
                 auto [comp] = *q.at(ent);
-                CHECK(comp.value == 0);
-                comp.value = 1;
+                CHECK_FALSE(comp);
+                comp = true;
             });
 
             // Read from it.
-            runSystem(world, cmdBuf, [&](Query<const IntegerComponent&> query) {
+            runSystem<void>(world, cmdBuf, [&](Query<const bool&> query) {
                 auto [comp] = *query.at(ent);
-                CHECK(comp.value == 1);
+                CHECK(comp);
             });
         }
     }

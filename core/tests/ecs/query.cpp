@@ -1,6 +1,6 @@
 #include <doctest/doctest.h>
 
-#include <cubos/core/ecs/system/query.hpp>
+#include <cubos/core/ecs/system/arguments/query.hpp>
 
 #include "utils.hpp"
 

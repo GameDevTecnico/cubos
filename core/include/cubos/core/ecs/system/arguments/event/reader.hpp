@@ -1,10 +1,12 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::EventReader.
-/// @ingroup core-ecs-system
+/// @ingroup core-ecs-system-arguments
 
 #pragma once
 
-#include <cubos/core/ecs/system/event/pipe.hpp>
+#include <cubos/core/ecs/system/arguments/event/pipe.hpp>
+#include <cubos/core/ecs/system/fetcher.hpp>
+#include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
 
 namespace cubos::core::ecs
@@ -17,7 +19,7 @@ namespace cubos::core::ecs
     /// @see Systems can send events using @ref EventWriter.
     /// @tparam T Event.
     /// @tparam M Filter mask.
-    /// @ingroup core-ecs-system
+    /// @ingroup core-ecs-system-arguments
     template <typename T, unsigned int M = DEFAULT_FILTER_MASK>
     class EventReader
     {
@@ -149,4 +151,31 @@ namespace cubos::core::ecs
     {
         return mEnd == other.mEnd;
     }
+
+    template <typename T>
+    class SystemFetcher<EventReader<T>>
+    {
+    public:
+        static inline constexpr bool ConsumesOptions = false;
+
+        SystemFetcher(World& world, const SystemOptions& /*options*/)
+            : mPipe{world.read<EventPipe<T>>().get()}
+        {
+        }
+
+        void analyze(SystemAccess& /*access*/) const
+        {
+            // FIXME: when we add resources to the world type registry, we should the event type id to the access
+            // object.
+        }
+
+        EventReader<T> fetch(CommandBuffer& /*cmdBuffer*/)
+        {
+            return {mPipe, mIndex};
+        }
+
+    private:
+        const EventPipe<T>& mPipe;
+        std::size_t mIndex{0};
+    };
 } // namespace cubos::core::ecs
