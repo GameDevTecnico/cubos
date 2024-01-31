@@ -164,59 +164,6 @@ static void showcaseMouseButtons(const Input& input, bool& explained)
 }
 /// [Showcase Mouse Buttons]
 
-/// [Checking Type of Press]
-static void update(const Input& input, const Window& window, State& state, ShouldQuit& shouldQuit)
-{
-    // FIXME: This is an hack to have one-shot actions while we don't have input events.
-    if (input.pressed("next-showcase"))
-    {
-        state.nextPressed = true;
-    }
-    else if (state.nextPressed)
-    {
-        state.nextPressed = false;
-        state.explained = false;
-        state.showcase++;
-    }
-    /// [Checking Type of Press]
-
-    switch (state.showcase)
-    {
-    case 0:
-        return explain(state.explained);
-    case 1:
-        return showcaseXZ(input, state.explained);
-    case 2:
-        return showcaseModifiers(input, state.explained);
-    case 3:
-        return showcaseMultipleModifiers(input, state.explained);
-    case 4:
-        return showcaseAxis(input, state.explained);
-    case 5:
-        return showcaseModifierAxis(input, state.explained);
-    case 6:
-        return showcaseUnbound(window, state.explained);
-    case 7:
-        return showcaseMouseButtons(input, state.explained);
-    default:
-        shouldQuit.value = true;
-    }
-}
-
-/// [Loading the bindings]
-static void config(Settings& settings)
-{
-    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
-}
-
-static void init(const Assets& assets, Input& input)
-{
-    auto bindings = assets.read<InputBindings>(BindingsAsset);
-    input.bind(*bindings);
-    CUBOS_INFO("Loaded bindings: {}", input.bindings().at(0));
-}
-/// [Loading the bindings]
-
 int main()
 {
     auto cubos = Cubos();
@@ -227,12 +174,59 @@ int main()
 
     cubos.addResource<State>();
 
-    /// [Systems to load bindings]
-    cubos.startupSystem(config).tagged("cubos.settings");
-    cubos.startupSystem(init).tagged("cubos.assets");
-    /// [Systems to load bindings]
+    cubos.startupSystem("configure Assets").tagged("cubos.settings").call([](Settings& settings) {
+        settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    });
 
-    cubos.system(update).after("cubos.input.update");
+    /// [Loading the bindings]
+    cubos.startupSystem("load and set the Input Bindings")
+        .tagged("cubos.assets")
+        .call([](const Assets& assets, Input& input) {
+            auto bindings = assets.read<InputBindings>(BindingsAsset);
+            input.bind(*bindings);
+            CUBOS_INFO("Loaded bindings: {}", input.bindings().at(0));
+        });
+    /// [Loading the bindings]
+
+    /// [Checking Type of Press]
+    cubos.system("detect input")
+        .after("cubos.input.update")
+        .call([](const Input& input, const Window& window, State& state, ShouldQuit& shouldQuit) {
+            // FIXME: This is an hack to have one-shot actions while we don't have input events.
+            if (input.pressed("next-showcase"))
+            {
+                state.nextPressed = true;
+            }
+            else if (state.nextPressed)
+            {
+                state.nextPressed = false;
+                state.explained = false;
+                state.showcase++;
+            }
+            /// [Checking Type of Press]
+
+            switch (state.showcase)
+            {
+            case 0:
+                return explain(state.explained);
+            case 1:
+                return showcaseXZ(input, state.explained);
+            case 2:
+                return showcaseModifiers(input, state.explained);
+            case 3:
+                return showcaseMultipleModifiers(input, state.explained);
+            case 4:
+                return showcaseAxis(input, state.explained);
+            case 5:
+                return showcaseModifierAxis(input, state.explained);
+            case 6:
+                return showcaseUnbound(window, state.explained);
+            case 7:
+                return showcaseMouseButtons(input, state.explained);
+            default:
+                shouldQuit.value = true;
+            }
+        });
 
     cubos.run();
     return 0;

@@ -27,8 +27,4 @@ Now, we can create an entity with our car asset.
 
 @snippet voxels/main.cpp Spawn car system
 
-Finally, we just add these systems. 
-
-@snippet voxels/main.cpp Adding systems
-
 And voilá, you now have a car floating in space.

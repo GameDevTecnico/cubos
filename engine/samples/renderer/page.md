@@ -12,12 +12,17 @@ configured with a simple scene, lighting and split-screen rendering.
 The plugin function is included from the @ref engine/renderer/plugin.hpp header.
 You may need to include other headers, depending on what you want to access.
 
+In this sample we also use the split-screen plugin which automatically sets the viewport of each camera to achieve split-screen.
+
 @snippet renderer/main.cpp Adding the plugin
 
 The first thing we're going to worry about is setting the
 @ref cubos::engine::VoxelPalette "VoxelPalette" the renderer will use. This palette
 would usually be loaded from a file, but for this example we'll just create it
 manually.
+
+Since this system accesses the @ref cubos::engine::Renderer "Renderer" resource, which is only
+initialized on the tag `cubos.renderer.init`, we should specify that it must run after it.
 
 @snippet renderer/main.cpp Setting the palette
 
@@ -40,10 +45,3 @@ Lastly, without a camera, we won't be able to see anything. Cameras can be set
 using the @ref cubos::engine::ActiveCameras "ActiveCameras" resource.
 
 @snippet renderer/main.cpp Spawn the cameras
-
-Then, its just a matter of adding these systems to the engine. The only one
-which requires special attention is the `setPaletteSystem`. This system
-accesses the @ref cubos::engine::Renderer "Renderer" resource, which is only
-initialized on the tag `cubos.renderer.init`.
-
-@snippet renderer/main.cpp Adding the systems

@@ -55,7 +55,7 @@ In this case, we'll run this system at startup, since we want to spawn it a sing
 Since it's a startup system, we'll have to tag it with `cubos.assets` to make sure it runs only after the scene bridge has been registered.
 On a real game, you could have, for example, a scene for an enemy which you spawn multiple times, instead of just once at startup.
 
-@snippet scene/main.cpp Adding the system
+@snippet scene/main.cpp Printing the scene
 
 This sample also contains a system which prints the components and relations of the spawned entities.
 If you run it, it should give you a list that has:

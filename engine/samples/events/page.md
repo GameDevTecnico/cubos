@@ -13,15 +13,11 @@ Firstly, we need to create and register the event we want to emit. Here, our eve
 
 To receive these events, we can make a simple system which takes the @ref cubos::core::ecs::EventReader "EventReader" system argument and iterates through all the events it has. This will be the layout of all our reader systems (A, C, D).
 
-@snippet events/main.cpp Event reader system
+@snippet events/main.cpp Event reader systems
 
 Now, to emit these events, we will use the @ref cubos::core::ecs::EventWriter "EventWriter" system argument. This system will emit 3 events on the first frame and another 3 on the second frame. By setting the value of the @ref cubos::engine::ShouldQuit "ShouldQuit" resource to true on the second frame, the engine stops before reaching the third frame. 
 
 @snippet events/main.cpp Event writer system
-
-Lastly, let's set the order we want these system to execute in.
-
-@snippet events/main.cpp Adding systems
 
 These are the expected results with this order.
 

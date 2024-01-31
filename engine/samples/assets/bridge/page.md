@@ -57,5 +57,3 @@ startup phase. Systems which add bridges should be tagged with
 `cubos.assets.bridge` so that they run before any assets are loaded.
 Similarly, startup systems which load assets should be tagged with
 `cubos.assets` so that they run after all bridges have been registered.
-
-@snippet assets/bridge/main.cpp Configuration
