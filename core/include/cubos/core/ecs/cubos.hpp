@@ -84,21 +84,6 @@ namespace cubos::core::ecs
         std::vector<std::string>& mTags;
     };
 
-    /// @brief Used to chain configurations related to systems
-    /// @ingroup core-ecs
-    class SystemBuilder
-    {
-    public:
-        /// @brief Construct.
-        /// @param dispatcher Dispatcher being configured.
-        /// @param tags Vector which stores the tags for this dispatcher.
-        SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
-
-    private:
-        core::ecs::Dispatcher& mDispatcher;
-        std::vector<std::string>& mTags;
-    };
-
     /// @brief Represents the engine itself, and exposes the interface with which the game
     /// developer interacts with. Ties up all the different parts of the engine together.
     /// @ingroup core-ecs
