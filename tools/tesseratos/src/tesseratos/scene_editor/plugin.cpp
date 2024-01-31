@@ -2,6 +2,7 @@
 #include <vector>
 
 #include <imgui.h>
+// #include <imgui_internal.h>
 #include <misc/cpp/imgui_stdlib.h>
 
 #include <cubos/core/reflection/external/string.hpp>
@@ -106,7 +107,8 @@ static int entityNameFilter(ImGuiInputTextCallbackData* data)
 static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entities, SceneInfo& scene,
                               EntitySelector& selector, Commands& cmds, int hierarchyDepth)
 {
-    // Add entity to current scene (needs to be root, not a sub scene)
+    ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(255, 255, 255));
+    //  Add entity to current scene (needs to be root, not a sub scene)
     if (hierarchyDepth == 0 && ImGui::Button("Add Entity"))
     {
         std::string entityName = scene.name + "_entity_" + std::to_string(scene.entities.size() + 1);
@@ -117,50 +119,92 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
     std::vector<std::size_t> entitiesToRemove;
     for (std::size_t i = 0; i < entities.size(); i++)
     {
+        bool removed = false;
         auto name = entities[i].first;
         auto handle = entities[i].second;
-        ImGui::PushID(&entities[i]);
-
-        if (hierarchyDepth == 0)
+        bool selected = selector.selection == handle;
+        std::string buff = name;
+        std::string id = "##" + name;
+        // Gives the selected entity a different color (bright green)
+        if (selected)
         {
-            std::string buff = name;
-
-            ImGui::InputText("", &name, ImGuiInputTextFlags_CallbackCharFilter, entityNameFilter);
-
-            if (name != buff)
-            {
-                entities[i].first = buff;
-            }
+            ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(149, 252, 75));
         }
         else
         {
-            ImGui::BulletText("%s", name.c_str());
+            ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(255, 255, 255));
         }
 
-        ImGui::Spacing();
-        if (ImGui::Button("Select"))
+        ImGui::PushID(&entities[i]);
+        ImGui::Selectable(name.c_str(), false, 0);
+        if (ImGui::IsItemHovered())
         {
-            CUBOS_INFO("Selected entity {}", name);
-            selector.selection = handle;
+            if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+            {
+                // popup menu to change entity name
+                ImGui::OpenPopup("Name Menu");
+            }
+            else if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+            {
+                CUBOS_INFO("Selected entity {}", name);
+                selector.selection = handle;
+            }
+
+            if (ImGui::IsMouseClicked(ImGuiMouseButton_Right))
+            {
+                // popup menu to delete entity
+                ImGui::OpenPopup(id.c_str());
+            }
         }
-        if (hierarchyDepth == 0)
+
+        if (ImGui::BeginPopup("Name Menu"))
         {
-            ImGui::SameLine();
-            if (ImGui::Button("Remove"))
+            ImGui::PushID("nameChange");
+            ImGui::InputText("", &buff, ImGuiInputTextFlags_CallbackCharFilter, entityNameFilter);
+            // set cursor immediately in the box without having to click in it
+            ImGui::SetKeyboardFocusHere(-1);
+
+            if (ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_Enter)))
+            {
+                ImGui::CloseCurrentPopup();
+                if (name != buff && !buff.empty())
+                {
+                    entities[i].first = buff;
+                }
+            }
+            ImGui::PopID();
+            ImGui::EndPopup();
+        }
+        if (ImGui::BeginPopup(id.c_str()))
+        {
+            if (ImGui::Button("Remove Entity"))
             {
                 entitiesToRemove.push_back(i);
                 CUBOS_INFO("Removing entity '{}' from scene '{}'", name, scene.name);
                 cmds.destroy(handle);
+                ImGui::EndPopup();
+                removed = true;
+                ImGui::PopID();
+            }
+            if (!removed)
+            {
+                ImGui::EndPopup();
             }
         }
 
-        ImGui::PopID();
+        if (!removed)
+        {
+            ImGui::PopID();
+        }
+
+        ImGui::PopStyleColor(1);
     }
 
     for (const auto& i : entitiesToRemove)
     {
         entities.erase(entities.begin() + static_cast<std::ptrdiff_t>(i));
     }
+    ImGui::PopStyleColor(1);
 }
 
 // Recursively draws the scene hierarchy and allows the user to remove scenes
@@ -168,40 +212,84 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
 {
     ImGui::PushID(&scene);
 
-    // Root node scene
-    bool nodeOpen = ImGui::TreeNode(&scene, "%s", scene.name.c_str());
-    scene.isExpanded = nodeOpen;
+    bool nodeOpen;
+    bool isTree = false;
 
-    // Remove scene
-    if (hierarchyDepth == 1)
+    ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(149, 252, 255));
+    // Root node scene
+    if (hierarchyDepth == 0)
     {
-        ImGui::SameLine();
-        ImGui::PushID(&scene.shouldBeRemoved);
-        if (ImGui::Button("Remove Scene"))
+        nodeOpen = true;
+        scene.isExpanded = nodeOpen;
+    }
+    else
+    {
+        // If the scene has no entities or subscenes, it's not a TreeNode
+        if (scene.scenes.size() == 0 && scene.entities.size() == 0)
         {
-            scene.shouldBeRemoved = true;
+            // non TreeNode scenes have the identation of a TreeNode
+            ImGui::Indent(8.0f);
+            ImGui::Selectable(scene.name.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+            nodeOpen = true;
+            ImGui::Unindent(8.0f);
         }
-        ImGui::PopID();
+        else
+        {
+            nodeOpen = ImGui::TreeNode(&scene, "%s", scene.name.c_str());
+            scene.isExpanded = nodeOpen;
+            isTree = true;
+        }
     }
 
-    if (nodeOpen)
+    if (hierarchyDepth == 1)
     {
-        if (hierarchyDepth == 1)
+
+        if (ImGui::IsItemHovered())
+        {
+            if (ImGui::IsMouseClicked(ImGuiMouseButton_Right))
+            {
+                ImGui::OpenPopup("Scene Menu");
+            }
+            else if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+            {
+                ImGui::OpenPopup("Name Menu");
+            }
+        }
+        if (ImGui::BeginPopup("Scene Menu"))
+        {
+            if (ImGui::Button("Remove Scene"))
+            {
+                scene.shouldBeRemoved = true;
+            }
+            ImGui::EndPopup();
+        }
+        if (ImGui::BeginPopup("Name Menu"))
         {
             std::string buff = scene.name;
             ImGui::PushID("nameChange");
             ImGui::InputText("", &buff, ImGuiInputTextFlags_CallbackCharFilter, entityNameFilter);
-            ImGui::PopID();
-
-            if (scene.name != buff)
+            // set cursor immediately in the box without having to click in it
+            ImGui::SetKeyboardFocusHere(-1);
+            if (ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_Enter)))
             {
-                scene.name = buff;
+                if (scene.name != buff && !buff.empty())
+                {
+                    scene.name = buff;
+                }
+                ImGui::CloseCurrentPopup();
             }
+            ImGui::PopID();
+            ImGui::EndPopup();
         }
+    }
 
+    if (nodeOpen)
+    {
         // Add entity to current scene (needs to be root, not a sub scene)
+        showSceneEntities(scene.entities, scene, selector, cmds, hierarchyDepth);
         if (hierarchyDepth == 0)
         {
+            ImGui::Separator();
             if (ImGui::Button("Add Scene"))
             {
                 std::string sceneName = scene.name + "_scene_" + std::to_string(scene.scenes.size() + 1);
@@ -209,9 +297,7 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
                 newSubscene->name = sceneName;
                 scene.scenes.emplace_back(sceneName, std::move(newSubscene));
             }
-            ImGui::SameLine();
         }
-        showSceneEntities(scene.entities, scene, selector, cmds, hierarchyDepth);
 
         std::vector<std::size_t> sceneToRemove;
         for (std::size_t i = 0; i < scene.scenes.size(); i++)
@@ -229,9 +315,13 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
         {
             scene.scenes.erase(scene.scenes.begin() + static_cast<std::ptrdiff_t>(i));
         }
-        ImGui::TreePop();
-    }
 
+        if (hierarchyDepth != 0 && isTree)
+        {
+            ImGui::TreePop();
+        }
+    }
+    ImGui::PopStyleColor(1);
     ImGui::PopID();
 }
 
