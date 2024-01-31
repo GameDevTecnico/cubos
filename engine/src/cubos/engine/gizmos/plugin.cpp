@@ -185,101 +185,6 @@ static std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>> getScreenInfo(c
     return {pair};
 }
 
-static void drawGizmosSystem(Gizmos& gizmos, GizmosRenderer& gizmosRenderer, const ActiveCameras& activeCameras,
-                             const Window& window, const DeltaTime& deltaTime,
-                             Query<const LocalToWorld&, const Camera&> query)
-{
-    auto screenSize = window->framebufferSize();
-
-    gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.drawPipeline);
-    gizmosRenderer.renderDevice->clearColor(0, 0, 0, 0);
-    gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);
-    gizmosRenderer.renderDevice->clearDepth(1.0F);
-
-    gizmosRenderer.renderDevice->setFramebuffer(gizmosRenderer.idFramebuffer);
-    gizmosRenderer.renderDevice->clearColor(0, 0, 0, 0);
-    gizmosRenderer.renderDevice->clearDepth(1.0F);
-
-    auto worldInfo = getWorldInfo(query, activeCameras, screenSize);
-    iterateGizmos(gizmos.worldGizmos, worldInfo, gizmosRenderer, deltaTime);
-
-    gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.noDepthCheckStencilState);
-    auto viewInfo = getViewInfo(activeCameras, screenSize);
-    iterateGizmos(gizmos.viewGizmos, viewInfo, gizmosRenderer, deltaTime);
-
-    auto screenInfo = getScreenInfo(screenSize);
-    iterateGizmos(gizmos.screenGizmos, screenInfo, gizmosRenderer, deltaTime);
-}
-
-static void processInput(GizmosRenderer& gizmosRenderer, Gizmos& gizmos, EventReader<WindowEvent> windowEvent)
-{
-    bool locking = false;
-    for (const auto& event : windowEvent)
-    {
-        if (std::holds_alternative<MouseMoveEvent>(event))
-        {
-            gizmosRenderer.lastMousePosition = std::get<MouseMoveEvent>(event).position;
-        }
-        else if (std::holds_alternative<MouseButtonEvent>(event))
-        {
-            if (std::get<MouseButtonEvent>(event).button == cubos::core::io::MouseButton::Left)
-            {
-                gizmosRenderer.mousePressed = std::get<MouseButtonEvent>(event).pressed;
-                if (!std::get<MouseButtonEvent>(event).pressed)
-                {
-                    gizmos.releaseLocked();
-                }
-                else
-                {
-                    locking = true;
-                }
-            }
-        }
-        else if (std::holds_alternative<ResizeEvent>(event))
-        {
-            gizmosRenderer.resizeTexture(std::get<ResizeEvent>(event).size);
-        }
-    }
-
-    auto* texBuffer =
-        new uint16_t[(std::size_t)gizmosRenderer.textureSize.x * (std::size_t)gizmosRenderer.textureSize.y * 2U];
-
-    gizmosRenderer.idTexture->read(texBuffer);
-
-    int mouseX = gizmosRenderer.lastMousePosition.x;
-    int mouseY = gizmosRenderer.textureSize.y - gizmosRenderer.lastMousePosition.y - 1;
-
-    if (mouseX >= gizmosRenderer.textureSize.x || mouseX < 0)
-    {
-        delete[] texBuffer;
-        return;
-    }
-    if (mouseY >= gizmosRenderer.textureSize.y || mouseY < 0)
-    {
-        delete[] texBuffer;
-        return;
-    }
-
-    uint16_t r = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer.textureSize.x + mouseX) * 2U];
-    uint16_t g = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer.textureSize.x + mouseX) * 2U + 1U];
-
-    uint32_t id = (static_cast<uint32_t>(r) << 16U) | g;
-
-    gizmos.handleInput(id, gizmosRenderer.mousePressed);
-
-    if (locking)
-    {
-        gizmos.setLocked(id);
-    }
-
-    delete[] texBuffer;
-}
-
-static void initGizmosSystem(GizmosRenderer& gizmosRenderer, const Window& window)
-{
-    gizmosRenderer.init(&window->renderDevice(), window->framebufferSize());
-}
-
 void cubos::engine::gizmosPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::windowPlugin);
@@ -287,11 +192,105 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
     cubos.addResource<Gizmos>();
     cubos.addResource<GizmosRenderer>();
 
-    cubos.startupSystem(initGizmosSystem).tagged("cubos.gizmos.init").after("cubos.window.init");
+    cubos.startupSystem("initialize GizmosRenderer")
+        .tagged("cubos.gizmos.init")
+        .after("cubos.window.init")
+        .call([](GizmosRenderer& gizmosRenderer, const Window& window) {
+            gizmosRenderer.init(&window->renderDevice(), window->framebufferSize());
+        });
 
-    cubos.system(processInput).tagged("cubos.gizmos.input").after("cubos.window.poll").before("cubos.gizmos.draw");
-    cubos.system(drawGizmosSystem)
+    cubos.system("process gizmos input")
+        .tagged("cubos.gizmos.input")
+        .after("cubos.window.poll")
+        .before("cubos.gizmos.draw")
+        .call([](GizmosRenderer& gizmosRenderer, Gizmos& gizmos, EventReader<WindowEvent> windowEvent) {
+            bool locking = false;
+            for (const auto& event : windowEvent)
+            {
+                if (std::holds_alternative<MouseMoveEvent>(event))
+                {
+                    gizmosRenderer.lastMousePosition = std::get<MouseMoveEvent>(event).position;
+                }
+                else if (std::holds_alternative<MouseButtonEvent>(event))
+                {
+                    if (std::get<MouseButtonEvent>(event).button == cubos::core::io::MouseButton::Left)
+                    {
+                        gizmosRenderer.mousePressed = std::get<MouseButtonEvent>(event).pressed;
+                        if (!std::get<MouseButtonEvent>(event).pressed)
+                        {
+                            gizmos.releaseLocked();
+                        }
+                        else
+                        {
+                            locking = true;
+                        }
+                    }
+                }
+                else if (std::holds_alternative<ResizeEvent>(event))
+                {
+                    gizmosRenderer.resizeTexture(std::get<ResizeEvent>(event).size);
+                }
+            }
+
+            auto* texBuffer = new uint16_t[(std::size_t)gizmosRenderer.textureSize.x *
+                                           (std::size_t)gizmosRenderer.textureSize.y * 2U];
+
+            gizmosRenderer.idTexture->read(texBuffer);
+
+            int mouseX = gizmosRenderer.lastMousePosition.x;
+            int mouseY = gizmosRenderer.textureSize.y - gizmosRenderer.lastMousePosition.y - 1;
+
+            if (mouseX >= gizmosRenderer.textureSize.x || mouseX < 0)
+            {
+                delete[] texBuffer;
+                return;
+            }
+            if (mouseY >= gizmosRenderer.textureSize.y || mouseY < 0)
+            {
+                delete[] texBuffer;
+                return;
+            }
+
+            uint16_t r = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer.textureSize.x + mouseX) * 2U];
+            uint16_t g = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer.textureSize.x + mouseX) * 2U + 1U];
+
+            uint32_t id = (static_cast<uint32_t>(r) << 16U) | g;
+
+            gizmos.handleInput(id, gizmosRenderer.mousePressed);
+
+            if (locking)
+            {
+                gizmos.setLocked(id);
+            }
+
+            delete[] texBuffer;
+        });
+
+    cubos.system("draw gizmos")
         .tagged("cubos.gizmos.draw")
         .after("cubos.renderer.draw")
-        .before("cubos.window.render");
+        .before("cubos.window.render")
+        .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, const ActiveCameras& activeCameras,
+                 const Window& window, const DeltaTime& deltaTime, Query<const LocalToWorld&, const Camera&> query) {
+            auto screenSize = window->framebufferSize();
+
+            gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.drawPipeline);
+            gizmosRenderer.renderDevice->clearColor(0, 0, 0, 0);
+            gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);
+            gizmosRenderer.renderDevice->clearDepth(1.0F);
+
+            gizmosRenderer.renderDevice->setFramebuffer(gizmosRenderer.idFramebuffer);
+            gizmosRenderer.renderDevice->clearColor(0, 0, 0, 0);
+            gizmosRenderer.renderDevice->clearDepth(1.0F);
+
+            auto worldInfo = getWorldInfo(query, activeCameras, screenSize);
+            iterateGizmos(gizmos.worldGizmos, worldInfo, gizmosRenderer, deltaTime);
+
+            gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.noDepthCheckStencilState);
+            auto viewInfo = getViewInfo(activeCameras, screenSize);
+            iterateGizmos(gizmos.viewGizmos, viewInfo, gizmosRenderer, deltaTime);
+
+            auto screenInfo = getScreenInfo(screenSize);
+            iterateGizmos(gizmos.screenGizmos, screenInfo, gizmosRenderer, deltaTime);
+        });
 }

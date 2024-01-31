@@ -44,56 +44,55 @@ static void setViewportCameras(glm::ivec2 position, glm::ivec2 size, int count, 
     }
 }
 
-static void splitViewportSystem(Commands commands, Renderer& renderer, const ActiveCameras& activeCameras,
-                                Query<const LocalToWorld&, Camera&, Opt<Viewport&>> query)
-{
-    glm::ivec2 positions[4];
-    glm::ivec2 sizes[4];
-    int cameraCount = 0;
-
-    for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
-    {
-        if (activeCameras.entities[i].isNull())
-        {
-            continue;
-        }
-
-        if (query.at(activeCameras.entities[i]).contains())
-        {
-            cameraCount += 1;
-        }
-    }
-
-    setViewportCameras({0, 0}, renderer->size(), cameraCount, positions, sizes);
-
-    for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
-    {
-        if (activeCameras.entities[i].isNull())
-        {
-            continue;
-        }
-
-        if (auto components = query.at(activeCameras.entities[i]))
-        {
-            auto& [localToWorld, camera, viewport] = *components;
-            if (!viewport)
-            {
-                commands.add(activeCameras.entities[i],
-                             Viewport{.position = glm::ivec2{positions[i][0], positions[i][1]},
-                                      .size = glm::ivec2{sizes[i][0], sizes[i][1]}});
-            }
-            else
-            {
-                viewport->position[0] = positions[i][0];
-                viewport->position[1] = positions[i][1];
-                viewport->size[0] = sizes[i][0];
-                viewport->size[1] = positions[i][1];
-            }
-        }
-    }
-}
-
 void cubos::engine::splitscreenPlugin(Cubos& cubos)
 {
-    cubos.system(splitViewportSystem).tagged("cubos.renderer.frame");
+    cubos.system("split screen for each Viewport")
+        .tagged("cubos.renderer.frame")
+        .call([](Commands commands, Renderer& renderer, const ActiveCameras& activeCameras,
+                 Query<const LocalToWorld&, Camera&, Opt<Viewport&>> query) {
+            glm::ivec2 positions[4];
+            glm::ivec2 sizes[4];
+            int cameraCount = 0;
+
+            for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
+            {
+                if (activeCameras.entities[i].isNull())
+                {
+                    continue;
+                }
+
+                if (query.at(activeCameras.entities[i]).contains())
+                {
+                    cameraCount += 1;
+                }
+            }
+
+            setViewportCameras({0, 0}, renderer->size(), cameraCount, positions, sizes);
+
+            for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
+            {
+                if (activeCameras.entities[i].isNull())
+                {
+                    continue;
+                }
+
+                if (auto components = query.at(activeCameras.entities[i]))
+                {
+                    auto& [localToWorld, camera, viewport] = *components;
+                    if (!viewport)
+                    {
+                        commands.add(activeCameras.entities[i],
+                                     Viewport{.position = glm::ivec2{positions[i][0], positions[i][1]},
+                                              .size = glm::ivec2{sizes[i][0], sizes[i][1]}});
+                    }
+                    else
+                    {
+                        viewport->position[0] = positions[i][0];
+                        viewport->position[1] = positions[i][1];
+                        viewport->size[0] = sizes[i][0];
+                        viewport->size[1] = positions[i][1];
+                    }
+                }
+            }
+        });
 }

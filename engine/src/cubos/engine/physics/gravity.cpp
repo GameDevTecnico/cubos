@@ -6,25 +6,24 @@
 
 using namespace cubos::engine;
 
-static void applyGravitySystem(Query<PhysicsVelocity&, const PhysicsMass&> query, const Gravity& gravity)
-{
-    for (auto [velocity, mass] : query)
-    {
-        if (mass.inverseMass <= 0.0F)
-        {
-            return;
-        }
-
-        // Apply gravity force
-        glm::vec3 gravitationForce = mass.mass * gravity.value;
-
-        velocity.force += gravitationForce;
-    }
-}
-
 void cubos::engine::gravityPlugin(Cubos& cubos)
 {
     cubos.addResource<Gravity>();
 
-    cubos.system(applyGravitySystem).tagged("cubos.physics.apply_forces");
+    cubos.system("apply gravity")
+        .tagged("cubos.physics.apply_forces")
+        .call([](Query<PhysicsVelocity&, const PhysicsMass&> query, const Gravity& gravity) {
+            for (auto [velocity, mass] : query)
+            {
+                if (mass.inverseMass <= 0.0F)
+                {
+                    return;
+                }
+
+                // Apply gravity force
+                glm::vec3 gravitationForce = mass.mass * gravity.value;
+
+                velocity.force += gravitationForce;
+            }
+        });
 }

@@ -74,10 +74,8 @@ namespace cubos::core::ecs
         void tagSetBeforeTag(const std::string& tag);
 
         /// @brief Adds a condition to the current tag.
-        /// @tparam F Condition type.
         /// @param func Condition to add.
-        template <typename F>
-        void tagAddCondition(F func);
+        void tagAddCondition(std::shared_ptr<AnySystemWrapper<bool>> func);
 
         /// @brief Adds a system, and sets it as the current system for further configuration.
         /// @param func System to add.
@@ -189,11 +187,10 @@ namespace cubos::core::ecs
         bool mPrepared = false;        ///< Whether the systems are prepared for execution.
     };
 
-    template <typename F>
-    void Dispatcher::tagAddCondition(F func)
+    inline void Dispatcher::tagAddCondition(std::shared_ptr<AnySystemWrapper<bool>> func)
     {
         ENSURE_CURR_TAG();
-        auto bit = assignConditionBit(func);
+        auto bit = assignConditionBit(std::move(func));
         mTagSettings[mCurrTag]->conditions |= bit;
     }
 

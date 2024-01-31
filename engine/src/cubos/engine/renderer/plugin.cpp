@@ -19,8 +19,7 @@
 using cubos::core::io::ResizeEvent;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
-
-using namespace cubos::engine;
+using cubos::engine::RenderableGrid;
 
 CUBOS_REFLECT_IMPL(RenderableGrid)
 {
@@ -28,145 +27,6 @@ CUBOS_REFLECT_IMPL(RenderableGrid)
         .withField("asset", &RenderableGrid::asset)
         .withField("offset", &RenderableGrid::offset)
         .build();
-}
-
-static void init(Renderer& renderer, const Window& window, Settings& settings)
-{
-    auto& renderDevice = window->renderDevice();
-    renderer = std::make_shared<DeferredRenderer>(renderDevice, window->framebufferSize(), settings);
-
-    if (settings.getBool("cubos.renderer.bloom.enabled", false))
-    {
-        renderer->pps().addPass<PostProcessingBloom>();
-    }
-}
-
-static void resize(Renderer& renderer, EventReader<WindowEvent> evs)
-{
-    for (const auto& ev : evs)
-    {
-        if (const auto* resizeEv = std::get_if<ResizeEvent>(&ev))
-        {
-            renderer->resize(resizeEv->size);
-        }
-    }
-}
-
-static void frameGrids(const Assets& assets, Renderer& renderer, RendererFrame& frame,
-                       Query<Entity, RenderableGrid&, const LocalToWorld&> query)
-{
-    for (auto [entity, grid, localToWorld] : query)
-    {
-        if (grid.handle == nullptr || assets.update(grid.asset))
-        {
-            // If the grid wasn't already uploaded, we need to upload it now.
-            grid.asset = assets.load(grid.asset);
-            auto gridRead = assets.read(grid.asset);
-            grid.handle = renderer->upload(gridRead.get());
-        }
-
-        CUBOS_ASSERT(entity.index < static_cast<uint32_t>(1 << 31), "Entity index must be lower than 2^31");
-        frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset), entity.index);
-    }
-}
-
-static void frameSpotLights(RendererFrame& frame, Query<const SpotLight&, const LocalToWorld&> query)
-{
-    for (auto [light, localToWorld] : query)
-    {
-        frame.light(localToWorld.mat, light);
-    }
-}
-
-static void frameDirectionalLights(RendererFrame& frame, Query<const DirectionalLight&, const LocalToWorld&> query)
-{
-    for (auto [light, localToWorld] : query)
-    {
-        frame.light(localToWorld.mat, light);
-    }
-}
-
-static void framePointLights(RendererFrame& frame, Query<const PointLight&, const LocalToWorld&> query)
-{
-    for (auto [light, localToWorld] : query)
-    {
-        frame.light(localToWorld.mat, light);
-    }
-}
-
-static void frameEnvironment(RendererFrame& frame, const RendererEnvironment& env)
-{
-    frame.ambient(env.ambient);
-    frame.skyGradient(env.skyGradient[0], env.skyGradient[1]);
-}
-
-static void checkPaletteUpdateSystem(Assets& assets, Renderer& renderer, ActiveVoxelPalette& activePalette)
-{
-    if (activePalette.asset.isNull())
-    {
-        return;
-    }
-
-    if (assets.update(activePalette.asset) || activePalette.prev != activePalette.asset)
-    {
-        auto paletteRead = assets.read(activePalette.asset);
-        renderer->setPalette(*paletteRead);
-        activePalette.prev = activePalette.asset;
-    }
-}
-
-static void draw(Renderer& renderer, const ActiveCameras& activeCameras, RendererFrame& frame,
-                 Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query, ScreenPicker& screenPicker,
-                 Settings& settings)
-{
-    Camera cameras[4]{};
-    glm::mat4 views[4]{};
-    BaseRenderer::Viewport viewports[4]{};
-
-    bool screenPickingEnabled = settings.getBool("cubos.renderer.screenPicking.enabled", true);
-
-    int cameraCount = 0;
-
-    for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
-    {
-        if (activeCameras.entities[i].isNull())
-        {
-            continue;
-        }
-
-        if (auto components = query.at(activeCameras.entities[i]))
-        {
-            auto [localToWorld, camera, viewport] = *components;
-            cameras[cameraCount].fovY = camera.fovY;
-            cameras[cameraCount].zNear = camera.zNear;
-            cameras[cameraCount].zFar = camera.zFar;
-            if (viewport)
-            {
-                viewports[i].position = viewport->position;
-                viewports[i].size = viewport->size;
-            }
-            else
-            {
-                viewports[i].position = {0, 0};
-                viewports[i].size = renderer->size();
-            }
-            views[cameraCount] = glm::inverse(localToWorld.mat);
-            cameraCount += 1;
-        }
-    }
-
-    if (cameraCount == 0)
-    {
-        CUBOS_WARN("No active camera set - renderer skipping frame");
-    }
-
-    for (int i = 0; i < cameraCount; ++i)
-    {
-        renderer->render(views[i], viewports[i], cameras[i], frame,
-                         screenPickingEnabled ? screenPicker.framebuffer() : nullptr);
-    }
-
-    frame.clear();
 }
 
 void cubos::engine::rendererPlugin(Cubos& cubos)
@@ -193,13 +53,153 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.tag("cubos.renderer.frame").after("cubos.transform.update");
     cubos.tag("cubos.renderer.draw").after("cubos.renderer.frame").before("cubos.window.render");
 
-    cubos.startupSystem(init).tagged("cubos.renderer.init");
-    cubos.system(frameGrids).tagged("cubos.renderer.frame");
-    cubos.system(frameSpotLights).tagged("cubos.renderer.frame");
-    cubos.system(frameDirectionalLights).tagged("cubos.renderer.frame");
-    cubos.system(framePointLights).tagged("cubos.renderer.frame");
-    cubos.system(frameEnvironment).tagged("cubos.renderer.frame");
-    cubos.system(checkPaletteUpdateSystem).tagged("cubos.renderer.frame");
-    cubos.system(draw).tagged("cubos.renderer.draw").after("cubos.screenPicker.clear");
-    cubos.system(resize).after("cubos.window.poll").before("cubos.renderer.draw");
+    cubos.startupSystem("initialize Renderer")
+        .tagged("cubos.renderer.init")
+        .call([](Renderer& renderer, const Window& window, Settings& settings) {
+            auto& renderDevice = window->renderDevice();
+            renderer = std::make_shared<DeferredRenderer>(renderDevice, window->framebufferSize(), settings);
+
+            if (settings.getBool("cubos.renderer.bloom.enabled", false))
+            {
+                renderer->pps().addPass<PostProcessingBloom>();
+            }
+        });
+
+    cubos.system("add grids to Frame")
+        .tagged("cubos.renderer.frame")
+        .call([](const Assets& assets, Renderer& renderer, RendererFrame& frame,
+                 Query<Entity, RenderableGrid&, const LocalToWorld&> query) {
+            for (auto [entity, grid, localToWorld] : query)
+            {
+                if (grid.handle == nullptr || assets.update(grid.asset))
+                {
+                    // If the grid wasn't already uploaded, we need to upload it now.
+                    grid.asset = assets.load(grid.asset);
+                    auto gridRead = assets.read(grid.asset);
+                    grid.handle = renderer->upload(gridRead.get());
+                }
+
+                CUBOS_ASSERT(entity.index < static_cast<uint32_t>(1 << 31), "Entity index must be lower than 2^31");
+                frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset), entity.index);
+            }
+        });
+
+    cubos.system("add spot lights to Frame")
+        .tagged("cubos.renderer.frame")
+        .call([](RendererFrame& frame, Query<const SpotLight&, const LocalToWorld&> query) {
+            for (auto [light, localToWorld] : query)
+            {
+                frame.light(localToWorld.mat, light);
+            }
+        });
+
+    cubos.system("add directional lights to Frame")
+        .tagged("cubos.renderer.frame")
+        .call([](RendererFrame& frame, Query<const DirectionalLight&, const LocalToWorld&> query) {
+            for (auto [light, localToWorld] : query)
+            {
+                frame.light(localToWorld.mat, light);
+            }
+        });
+
+    cubos.system("add point lights to Frame")
+        .tagged("cubos.renderer.frame")
+        .call([](RendererFrame& frame, Query<const PointLight&, const LocalToWorld&> query) {
+            for (auto [light, localToWorld] : query)
+            {
+                frame.light(localToWorld.mat, light);
+            }
+        });
+
+    cubos.system("set Frame environment")
+        .tagged("cubos.renderer.frame")
+        .call([](RendererFrame& frame, const RendererEnvironment& env) {
+            frame.ambient(env.ambient);
+            frame.skyGradient(env.skyGradient[0], env.skyGradient[1]);
+        });
+
+    cubos.system("update Palette if changed")
+        .tagged("cubos.renderer.frame")
+        .call([](Assets& assets, Renderer& renderer, ActiveVoxelPalette& activePalette) {
+            if (activePalette.asset.isNull())
+            {
+                return;
+            }
+
+            if (assets.update(activePalette.asset) || activePalette.prev != activePalette.asset)
+            {
+                auto paletteRead = assets.read(activePalette.asset);
+                renderer->setPalette(*paletteRead);
+                activePalette.prev = activePalette.asset;
+            }
+        });
+
+    cubos.system("draw Frame")
+        .tagged("cubos.renderer.draw")
+        .after("cubos.screenPicker.clear")
+        .call([](Renderer& renderer, const ActiveCameras& activeCameras, RendererFrame& frame,
+                 Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query, ScreenPicker& screenPicker,
+                 Settings& settings) {
+            Camera cameras[4]{};
+            glm::mat4 views[4]{};
+            BaseRenderer::Viewport viewports[4]{};
+
+            bool screenPickingEnabled = settings.getBool("cubos.renderer.screenPicking.enabled", true);
+
+            int cameraCount = 0;
+
+            for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
+            {
+                if (activeCameras.entities[i].isNull())
+                {
+                    continue;
+                }
+
+                if (auto components = query.at(activeCameras.entities[i]))
+                {
+                    auto [localToWorld, camera, viewport] = *components;
+                    cameras[cameraCount].fovY = camera.fovY;
+                    cameras[cameraCount].zNear = camera.zNear;
+                    cameras[cameraCount].zFar = camera.zFar;
+                    if (viewport)
+                    {
+                        viewports[i].position = viewport->position;
+                        viewports[i].size = viewport->size;
+                    }
+                    else
+                    {
+                        viewports[i].position = {0, 0};
+                        viewports[i].size = renderer->size();
+                    }
+                    views[cameraCount] = glm::inverse(localToWorld.mat);
+                    cameraCount += 1;
+                }
+            }
+
+            if (cameraCount == 0)
+            {
+                CUBOS_WARN("No active camera set - renderer skipping frame");
+            }
+
+            for (int i = 0; i < cameraCount; ++i)
+            {
+                renderer->render(views[i], viewports[i], cameras[i], frame,
+                                 screenPickingEnabled ? screenPicker.framebuffer() : nullptr);
+            }
+
+            frame.clear();
+        });
+
+    cubos.system("update Renderer on resize")
+        .after("cubos.window.poll")
+        .before("cubos.renderer.draw")
+        .call([](Renderer& renderer, EventReader<WindowEvent> evs) {
+            for (const auto& ev : evs)
+            {
+                if (const auto* resizeEv = std::get_if<ResizeEvent>(&ev))
+                {
+                    renderer->resize(resizeEv->size);
+                }
+            }
+        });
 }

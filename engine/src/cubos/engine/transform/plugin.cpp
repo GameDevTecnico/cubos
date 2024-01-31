@@ -1,43 +1,5 @@
 #include <cubos/engine/transform/plugin.hpp>
 
-using namespace cubos::engine;
-
-static void autoLocalToWorld(
-    Commands cmds,
-    Query<Entity, Opt<const LocalToWorld&>, Opt<const Position&>, Opt<const Rotation&>, Opt<const Scale&>> query)
-{
-    for (auto [entity, localToWorld, position, rotation, scale] : query)
-    {
-        if (!localToWorld && (position || rotation || scale))
-        {
-            cmds.add(entity, LocalToWorld{});
-        }
-    }
-}
-
-static void applyTransform(
-    Query<Entity, LocalToWorld&, Opt<const Position&>, Opt<const Rotation&>, Opt<const Scale&>> query)
-{
-    for (auto [entity, localToWorld, position, rotation, scale] : query)
-    {
-        localToWorld.mat = glm::mat4(1.0F);
-        if (position)
-        {
-            localToWorld.mat = glm::translate(localToWorld.mat, position->vec);
-        }
-
-        if (rotation)
-        {
-            localToWorld.mat *= glm::toMat4(rotation->quat);
-        }
-
-        if (scale)
-        {
-            localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(scale->factor));
-        }
-    }
-}
-
 void cubos::engine::transformPlugin(Cubos& cubos)
 {
     cubos.addComponent<Position>();
@@ -45,6 +7,40 @@ void cubos::engine::transformPlugin(Cubos& cubos)
     cubos.addComponent<Scale>();
     cubos.addComponent<LocalToWorld>();
 
-    cubos.system(autoLocalToWorld).before("cubos.transform.update");
-    cubos.system(applyTransform).tagged("cubos.transform.update");
+    cubos.system("add LocalToWorld where needed")
+        .before("cubos.transform.update")
+        .call([](Commands cmds,
+                 Query<Entity, Opt<const LocalToWorld&>, Opt<const Position&>, Opt<const Rotation&>, Opt<const Scale&>>
+                     query) {
+            for (auto [entity, localToWorld, position, rotation, scale] : query)
+            {
+                if (!localToWorld && (position || rotation || scale))
+                {
+                    cmds.add(entity, LocalToWorld{});
+                }
+            }
+        });
+
+    cubos.system("update LocalToWorld")
+        .tagged("cubos.transform.update")
+        .call([](Query<Entity, LocalToWorld&, Opt<const Position&>, Opt<const Rotation&>, Opt<const Scale&>> query) {
+            for (auto [entity, localToWorld, position, rotation, scale] : query)
+            {
+                localToWorld.mat = glm::mat4(1.0F);
+                if (position)
+                {
+                    localToWorld.mat = glm::translate(localToWorld.mat, position->vec);
+                }
+
+                if (rotation)
+                {
+                    localToWorld.mat *= glm::toMat4(rotation->quat);
+                }
+
+                if (scale)
+                {
+                    localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(scale->factor));
+                }
+            }
+        });
 }

@@ -7,173 +7,163 @@
 
 #include "sweep_and_prune.hpp"
 
-using namespace cubos::engine;
-
-/// @brief Tracks all new colliders.
-static void trackNewCollidersSystem(Query<Entity, const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune)
-{
-    for (auto [entity, collider] : query)
-    {
-        if (collider.fresh == 0)
-        {
-            sweepAndPrune.addEntity(entity);
-        }
-    }
-}
-
-/// @brief Updates the AABBs of all colliders.
-static void updateAABBsSystem(Query<const LocalToWorld&, Collider&> query)
-{
-    for (auto [localToWorld, collider] : query)
-    {
-        // Get the 4 points of the collider.
-        glm::vec3 corners[4];
-        collider.localAABB.box().corners4(corners);
-
-        // Pack the 3 points of the collider into a matrix.
-        auto points = glm::mat4{glm::vec4{corners[0], 1.0F}, glm::vec4{corners[1], 1.0F}, glm::vec4{corners[2], 1.0F},
-                                glm::vec4{corners[3], 1.0F}};
-
-        // Transforms collider space to world space.
-        auto transform = localToWorld.mat * collider.transform;
-
-        // Only want scale and rotation, extract translation and remove it.
-        auto translation = glm::vec3{transform[3]};
-        transform[3] = glm::vec4{0.0F, 0.0F, 0.0F, 1.0F};
-
-        // Rotate and scale corners.
-        auto rotatedCorners = glm::mat4x3{transform * points};
-
-        // Get the max of the rotated corners.
-        auto max = glm::max(glm::abs(rotatedCorners[0]), glm::abs(rotatedCorners[1]));
-        max = glm::max(max, glm::abs(rotatedCorners[2]));
-        max = glm::max(max, glm::abs(rotatedCorners[3]));
-
-        // Add the collider's margin.
-        max += glm::vec3{collider.margin};
-
-        // Set the AABB.
-        collider.worldAABB.min(translation - max);
-        collider.worldAABB.max(translation + max);
-    };
-}
-
-/// @brief Updates the sweep markers of all colliders.
-static void updateMarkersSystem(Query<const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune)
-{
-    // TODO: This is parallelizable.
-    for (glm::length_t axis = 0; axis < 3; axis++)
-    {
-        // TODO: Should use insert sort to leverage spatial coherence.
-        std::sort(sweepAndPrune.markersPerAxis[axis].begin(), sweepAndPrune.markersPerAxis[axis].end(),
-                  [axis, &query](const BroadPhaseSweepAndPrune::SweepMarker& a,
-                                 const BroadPhaseSweepAndPrune::SweepMarker& b) {
-                      auto [aCollider] = *query.at(a.entity);
-                      auto [bCollider] = *query.at(b.entity);
-                      auto aPos = a.isMin ? aCollider.worldAABB.min() : aCollider.worldAABB.max();
-                      auto bPos = b.isMin ? bCollider.worldAABB.min() : bCollider.worldAABB.max();
-                      return aPos[axis] < bPos[axis];
-                  });
-    }
-}
-
-/// @brief Performs a sweep of all colliders.
-static void sweepSystem(BroadPhaseSweepAndPrune& sweepAndPrune)
-{
-    // TODO: This is parallelizable.
-    for (glm::length_t axis = 0; axis < 3; axis++)
-    {
-        CUBOS_ASSERT(sweepAndPrune.activePerAxis[axis].empty(), "Last sweep entered an entity but never exited");
-
-        sweepAndPrune.sweepOverlapMaps[axis].clear();
-
-        for (auto& marker : sweepAndPrune.markersPerAxis[axis])
-        {
-            if (marker.isMin)
-            {
-                for (const auto& other : sweepAndPrune.activePerAxis[axis])
-                {
-                    sweepAndPrune.sweepOverlapMaps[axis][marker.entity].push_back(other);
-                }
-
-                sweepAndPrune.activePerAxis[axis].insert(marker.entity);
-            }
-            else
-            {
-                sweepAndPrune.activePerAxis[axis].erase(marker.entity);
-            }
-        }
-    }
-}
-
-/// @brief Finds all pairs of colliders which may be colliding.
-static void findPairsSystem(Commands cmds, Query<Entity, const Collider&> query,
-                            const BroadPhaseSweepAndPrune& sweepAndPrune)
-{
-    for (glm::length_t axis = 0; axis < 3; axis++)
-    {
-        for (const auto& [entity, overlaps] : sweepAndPrune.sweepOverlapMaps[axis])
-        {
-            auto [_entity, collider] = *query.at(entity);
-            for (const auto& other : overlaps)
-            {
-                auto [_other, otherCollider] = *query.at(other);
-
-                switch (axis)
-                {
-                case 0: // X
-                    if (collider.worldAABB.overlapsY(otherCollider.worldAABB) &&
-                        collider.worldAABB.overlapsZ(otherCollider.worldAABB))
-                    {
-                        cmds.relate(entity, other, PotentiallyCollidingWith{});
-                    }
-                    break;
-                case 1: // Y
-                    if (collider.worldAABB.overlapsX(otherCollider.worldAABB) &&
-                        collider.worldAABB.overlapsZ(otherCollider.worldAABB))
-                    {
-                        cmds.relate(entity, other, PotentiallyCollidingWith{});
-                    }
-                    break;
-                case 2: // Z
-                    if (collider.worldAABB.overlapsX(otherCollider.worldAABB) &&
-                        collider.worldAABB.overlapsY(otherCollider.worldAABB))
-                    {
-                        cmds.relate(entity, other, PotentiallyCollidingWith{});
-                    }
-                    break;
-                }
-            }
-        }
-    }
-}
-
-/// @brief Removes all pairs of entities found to be potentially colliding.
-static void cleanPotentiallyCollidingPairs(Commands cmds, Query<Entity, PotentiallyCollidingWith&, Entity> query)
-{
-    for (auto [entity, collidingWith, other] : query)
-    {
-        cmds.unrelate<PotentiallyCollidingWith>(entity, other);
-    }
-}
-
 void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
 {
     cubos.addResource<BroadPhaseSweepAndPrune>();
     cubos.addRelation<PotentiallyCollidingWith>();
 
-    cubos.system(trackNewCollidersSystem).tagged("cubos.collisions.aabb.setup");
+    cubos.system("detect new colliders")
+        .tagged("cubos.collisions.aabb.setup")
+        .call([](Query<Entity, const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
+            for (auto [entity, collider] : query)
+            {
+                if (collider.fresh == 0)
+                {
+                    sweepAndPrune.addEntity(entity);
+                }
+            }
+        });
 
-    cubos.system(updateAABBsSystem)
+    cubos.system("update collider AABBs")
         .tagged("cubos.collisions.aabb.update")
         .after("cubos.collisions.setup")
         .after("cubos.collisions.aabb.setup")
-        .after("cubos.transform.update");
+        .after("cubos.transform.update")
+        .call([](Query<const LocalToWorld&, Collider&> query) {
+            for (auto [localToWorld, collider] : query)
+            {
+                // Get the 4 points of the collider.
+                glm::vec3 corners[4];
+                collider.localAABB.box().corners4(corners);
 
-    cubos.system(updateMarkersSystem).tagged("cubos.collisions.broad.markers").after("cubos.collisions.aabb.update");
-    cubos.system(sweepSystem).tagged("cubos.collisions.broad.sweep").after("cubos.collisions.broad.markers");
-    cubos.system(cleanPotentiallyCollidingPairs)
+                // Pack the 3 points of the collider into a matrix.
+                auto points = glm::mat4{glm::vec4{corners[0], 1.0F}, glm::vec4{corners[1], 1.0F},
+                                        glm::vec4{corners[2], 1.0F}, glm::vec4{corners[3], 1.0F}};
+
+                // Transforms collider space to world space.
+                auto transform = localToWorld.mat * collider.transform;
+
+                // Only want scale and rotation, extract translation and remove it.
+                auto translation = glm::vec3{transform[3]};
+                transform[3] = glm::vec4{0.0F, 0.0F, 0.0F, 1.0F};
+
+                // Rotate and scale corners.
+                auto rotatedCorners = glm::mat4x3{transform * points};
+
+                // Get the max of the rotated corners.
+                auto max = glm::max(glm::abs(rotatedCorners[0]), glm::abs(rotatedCorners[1]));
+                max = glm::max(max, glm::abs(rotatedCorners[2]));
+                max = glm::max(max, glm::abs(rotatedCorners[3]));
+
+                // Add the collider's margin.
+                max += glm::vec3{collider.margin};
+
+                // Set the AABB.
+                collider.worldAABB.min(translation - max);
+                collider.worldAABB.max(translation + max);
+            };
+        });
+
+    cubos.system("update sweep and prune markers")
+        .tagged("cubos.collisions.broad.markers")
+        .after("cubos.collisions.aabb.update")
+        .call([](Query<const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
+            // TODO: This is parallelizable.
+            for (glm::length_t axis = 0; axis < 3; axis++)
+            {
+                // TODO: Should use insert sort to leverage spatial coherence.
+                std::sort(sweepAndPrune.markersPerAxis[axis].begin(), sweepAndPrune.markersPerAxis[axis].end(),
+                          [axis, &query](const BroadPhaseSweepAndPrune::SweepMarker& a,
+                                         const BroadPhaseSweepAndPrune::SweepMarker& b) {
+                              auto [aCollider] = *query.at(a.entity);
+                              auto [bCollider] = *query.at(b.entity);
+                              auto aPos = a.isMin ? aCollider.worldAABB.min() : aCollider.worldAABB.max();
+                              auto bPos = b.isMin ? bCollider.worldAABB.min() : bCollider.worldAABB.max();
+                              return aPos[axis] < bPos[axis];
+                          });
+            }
+        });
+
+    cubos.system("collisions sweep")
+        .tagged("cubos.collisions.broad.sweep")
+        .after("cubos.collisions.broad.markers")
+        .call([](BroadPhaseSweepAndPrune& sweepAndPrune) {
+            // TODO: This is parallelizable.
+            for (glm::length_t axis = 0; axis < 3; axis++)
+            {
+                CUBOS_ASSERT(sweepAndPrune.activePerAxis[axis].empty(),
+                             "Last sweep entered an entity but never exited");
+
+                sweepAndPrune.sweepOverlapMaps[axis].clear();
+
+                for (auto& marker : sweepAndPrune.markersPerAxis[axis])
+                {
+                    if (marker.isMin)
+                    {
+                        for (const auto& other : sweepAndPrune.activePerAxis[axis])
+                        {
+                            sweepAndPrune.sweepOverlapMaps[axis][marker.entity].push_back(other);
+                        }
+
+                        sweepAndPrune.activePerAxis[axis].insert(marker.entity);
+                    }
+                    else
+                    {
+                        sweepAndPrune.activePerAxis[axis].erase(marker.entity);
+                    }
+                }
+            }
+        });
+
+    cubos.system("clean PotentiallyCollidingWith relations")
         .tagged("cubos.collisions.broad.clean")
-        .before("cubos.collisions.broad");
-    cubos.system(findPairsSystem).tagged("cubos.collisions.broad").after("cubos.collisions.broad.sweep");
+        .before("cubos.collisions.broad")
+        .call([](Commands cmds, Query<Entity, PotentiallyCollidingWith&, Entity> query) {
+            for (auto [entity, collidingWith, other] : query)
+            {
+                cmds.unrelate<PotentiallyCollidingWith>(entity, other);
+            }
+        });
+
+    cubos.system("create PotentiallyCollidingWith relations")
+        .tagged("cubos.collisions.broad")
+        .after("cubos.collisions.broad.sweep")
+        .call([](Commands cmds, Query<Entity, const Collider&> query, const BroadPhaseSweepAndPrune& sweepAndPrune) {
+            for (glm::length_t axis = 0; axis < 3; axis++)
+            {
+                for (const auto& [entity, overlaps] : sweepAndPrune.sweepOverlapMaps[axis])
+                {
+                    auto [_entity, collider] = *query.at(entity);
+                    for (const auto& other : overlaps)
+                    {
+                        auto [_other, otherCollider] = *query.at(other);
+
+                        switch (axis)
+                        {
+                        case 0: // X
+                            if (collider.worldAABB.overlapsY(otherCollider.worldAABB) &&
+                                collider.worldAABB.overlapsZ(otherCollider.worldAABB))
+                            {
+                                cmds.relate(entity, other, PotentiallyCollidingWith{});
+                            }
+                            break;
+                        case 1: // Y
+                            if (collider.worldAABB.overlapsX(otherCollider.worldAABB) &&
+                                collider.worldAABB.overlapsZ(otherCollider.worldAABB))
+                            {
+                                cmds.relate(entity, other, PotentiallyCollidingWith{});
+                            }
+                            break;
+                        case 2: // Z
+                            if (collider.worldAABB.overlapsX(otherCollider.worldAABB) &&
+                                collider.worldAABB.overlapsY(otherCollider.worldAABB))
+                            {
+                                cmds.relate(entity, other, PotentiallyCollidingWith{});
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        });
 }
