@@ -112,6 +112,16 @@
             </dt>
             <dd>Draws a cut cone gizmo.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a281623faeebdf8edf8116dce2ea7fc3c" class="m-doc">drawRing</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 firstBasePosition,
+              glm::vec3 secondBasePosition,
+              float outerRadius,
+              float innerRadius,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a ring gizmo.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a5ef3589cc7ba835a23edaba6205f4724" class="m-doc">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 origin,
               glm::vec3 direction,
@@ -334,6 +344,53 @@
                 <tr>
                   <td>secondBaseRadius</td>
                   <td>Radius of the second base.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a281623faeebdf8edf8116dce2ea7fc3c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a281623faeebdf8edf8116dce2ea7fc3c" class="m-doc-self">drawRing</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 firstBasePosition,
+              glm::vec3 secondBasePosition,
+              float outerRadius,
+              float innerRadius,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a ring gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>firstBasePosition</td>
+                  <td>Center of one of the bases.</td>
+                </tr>
+                <tr>
+                  <td>secondBasePosition</td>
+                  <td>Center of the second base.</td>
+                </tr>
+                <tr>
+                  <td>outerRadius</td>
+                  <td>Radius of one of the ring.</td>
+                </tr>
+                <tr>
+                  <td>innerRadius</td>
+                  <td>Radius of the of the hole.</td>
                 </tr>
                 <tr>
                   <td>lifespan</td>
