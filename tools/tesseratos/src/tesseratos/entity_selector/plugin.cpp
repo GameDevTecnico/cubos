@@ -35,7 +35,7 @@ void tesseratos::entitySelectorPlugin(Cubos& cubos)
             entitySelector.lastMousePosition = glm::ivec2{0, 0};
         });
 
-    cubos.system("process window input")
+    cubos.system("process window input for EntitySelector")
         .tagged("cubos.entitySelector.input")
         .after("cubos.window.poll")
         .after("cubos.renderer.draw")
