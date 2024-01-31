@@ -82,6 +82,18 @@ namespace cubos::core::ecs
             return mView.data().at(firstEntity, secondEntity);
         }
 
+        /// @brief Returns the first match of the query, if there's any.
+        /// @return Requested data, or nothing if there are no matches.
+        Opt<std::tuple<Ts...>> first()
+        {
+            auto it = this->begin();
+            if (it == this->end())
+            {
+                return {};
+            }
+            return *it;
+        }
+
     private:
         typename QueryData<Ts...>::View mView;
     };
