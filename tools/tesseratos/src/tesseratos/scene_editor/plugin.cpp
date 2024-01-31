@@ -28,16 +28,19 @@ using cubos::engine::Scene;
 
 using namespace tesseratos;
 
-/// @brief Resource used to store Scene(s) information
-struct SceneInfo
+namespace
 {
-    bool isExpanded{false};
-    bool isSelected{false};
-    bool shouldBeRemoved{false};
-    std::string name;
-    std::vector<std::pair<std::string, Entity>> entities;
-    std::vector<std::pair<std::string, std::unique_ptr<SceneInfo>>> scenes;
-};
+    // Resource used to store Scene(s) information
+    struct SceneInfo
+    {
+        bool isExpanded{false};
+        bool isSelected{false};
+        bool shouldBeRemoved{false};
+        std::string name;
+        std::vector<std::pair<std::string, Entity>> entities;
+        std::vector<std::pair<std::string, std::unique_ptr<SceneInfo>>> scenes;
+    };
+} // namespace
 
 static void closeScene(Commands& commands, SceneInfo& scene)
 {
@@ -90,20 +93,7 @@ static void openScene(const Asset<Scene>& sceneToSpawn, Commands& commands, cons
     }
 }
 
-static void checkAssetEventSystem(cubos::core::ecs::EventReader<AssetSelectedEvent> reader, Commands commands,
-                                  const Assets& assets, SceneInfo& scene)
-{
-    for (const auto& event : reader)
-    {
-        if (assets.type(event.asset).is<Scene>())
-        {
-            CUBOS_INFO("Opening scene {}", event.asset);
-            openScene(event.asset, commands, assets, scene);
-        }
-    }
-}
-
-/// @brief Used to check if input entity names are valid.
+// Used to check if input entity names are valid.
 static int entityNameFilter(ImGuiInputTextCallbackData* data)
 {
     if (data->EventChar == '.')
@@ -113,7 +103,7 @@ static int entityNameFilter(ImGuiInputTextCallbackData* data)
     return 0;
 }
 
-/// @brief Shows the entities within a scene and allows the user to select, add more or remove them.
+// Shows the entities within a scene and allows the user to select, add more or remove them.
 static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entities, SceneInfo& scene,
                               EntitySelector& selector, Commands& cmds, int hierarchyDepth)
 {
@@ -174,12 +164,12 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
     }
 }
 
-/// @brief recursively draws the scene hierarchy and allows the user to remove scenes
+// Recursively draws the scene hierarchy and allows the user to remove scenes
 static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector& selector, int hierarchyDepth)
 {
     ImGui::PushID(&scene);
 
-    /// Root node scene
+    // Root node scene
     bool nodeOpen = ImGui::TreeNode(&scene, "%s", scene.name.c_str());
     scene.isExpanded = nodeOpen;
 
@@ -246,18 +236,6 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
     ImGui::PopID();
 }
 
-static void sceneEditorSystem(Commands cmds, SceneInfo& scene, EntitySelector& selector, Toolbox& toolbox)
-{
-    if (!toolbox.isOpen("Scene Editor"))
-    {
-        return;
-    }
-
-    ImGui::Begin("Scene Editor");
-    showSceneHierarchy(scene, cmds, selector, 0);
-    ImGui::End();
-}
-
 void tesseratos::sceneEditorPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::scenePlugin);
@@ -268,6 +246,29 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
 
     cubos.addResource<SceneInfo>();
 
-    cubos.system(checkAssetEventSystem);
-    cubos.system(sceneEditorSystem).tagged("cubos.imgui");
+    cubos.system("open Scene Editor on asset selection")
+        .call([](cubos::core::ecs::EventReader<AssetSelectedEvent> reader, Commands commands, const Assets& assets,
+                 SceneInfo& scene) {
+            for (const auto& event : reader)
+            {
+                if (assets.type(event.asset).is<Scene>())
+                {
+                    CUBOS_INFO("Opening scene {}", event.asset);
+                    openScene(event.asset, commands, assets, scene);
+                }
+            }
+        });
+
+    cubos.system("show Scene Editor UI")
+        .tagged("cubos.imgui")
+        .call([](Commands cmds, SceneInfo& scene, EntitySelector& selector, Toolbox& toolbox) {
+            if (!toolbox.isOpen("Scene Editor"))
+            {
+                return;
+            }
+
+            ImGui::Begin("Scene Editor");
+            showSceneHierarchy(scene, cmds, selector, 0);
+            ImGui::End();
+        });
 }

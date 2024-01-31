@@ -111,36 +111,6 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
     return iter;
 }
 
-static void showAssets(const Assets& assets, Settings& settings, Toolbox& toolbox,
-                       EventWriter<AssetSelectedEvent> events)
-{
-    if (!toolbox.isOpen("Asset Explorer"))
-    {
-        return;
-    }
-
-    ImGui::Begin("Asset Explorer");
-
-    std::string folder = settings.getString("assets.io.path", "");
-
-    folder.erase(0, folder.rfind('/'));
-
-    std::vector<AnyAsset> assetsVector;
-    for (auto const& a : assets.listAll())
-    {
-        if (assets.readMeta(a)->get("path").has_value())
-        {
-            assetsVector.push_back(a);
-        }
-    }
-    std::sort(assetsVector.begin(), assetsVector.end(),
-              [&assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, assets); });
-
-    showFolder(assets, folder, assetsVector.begin(), assetsVector.end(), events);
-
-    ImGui::End();
-}
-
 void tesseratos::assetExplorerPlugin(Cubos& cubos)
 {
     cubos.addEvent<AssetSelectedEvent>();
@@ -148,5 +118,34 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
     cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(cubos::engine::assetsPlugin);
     cubos.addPlugin(toolboxPlugin);
-    cubos.system(showAssets).tagged("cubos.imgui");
+
+    cubos.system("show Asset Explorer UI")
+        .tagged("cubos.imgui")
+        .call([](const Assets& assets, Settings& settings, Toolbox& toolbox, EventWriter<AssetSelectedEvent> events) {
+            if (!toolbox.isOpen("Asset Explorer"))
+            {
+                return;
+            }
+
+            ImGui::Begin("Asset Explorer");
+
+            std::string folder = settings.getString("assets.io.path", "");
+
+            folder.erase(0, folder.rfind('/'));
+
+            std::vector<AnyAsset> assetsVector;
+            for (auto const& a : assets.listAll())
+            {
+                if (assets.readMeta(a)->get("path").has_value())
+                {
+                    assetsVector.push_back(a);
+                }
+            }
+            std::sort(assetsVector.begin(), assetsVector.end(),
+                      [&assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, assets); });
+
+            showFolder(assets, folder, assetsVector.begin(), assetsVector.end(), events);
+
+            ImGui::End();
+        });
 }
