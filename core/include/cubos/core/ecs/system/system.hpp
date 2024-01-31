@@ -40,13 +40,13 @@ namespace cubos::core::ecs
         /// @param options Options for the system arguments.
         static System make(World& world, auto function, const std::vector<SystemOptions>& options = {})
         {
-            using Function = SystemTraits<decltype(function)>::Function;
+            using Function = typename SystemTraits<decltype(function)>::Function;
             return {std::make_unique<Function>(world, std::move(function), options)};
         }
 
         /// @brief Move constructs.
         /// @param system Other system.
-        System(System&& system) = default;
+        System(System&& system) noexcept = default;
 
         /// @brief Runs the system.
         /// @param cmdBuffer Command buffer.
@@ -70,7 +70,7 @@ namespace cubos::core::ecs
         /// @brief Specific class for the stored system function type with specific arguments.
         /// @tparam As Argument types.
         template <typename F, typename... As>
-        class SystemFunction;
+        class SystemFunction; // NOLINT(cppcoreguidelines-virtual-class-destructor)
 
         /// @brief Used to get a @ref SystemFunction from any functional type.
         /// @tparam F Original function type.
@@ -116,12 +116,15 @@ namespace cubos::core::ecs
         SystemAccess mAccess;
     };
 
+    // The warning being disabled seems to be an error in clang-tidy, as described in
+    // https://github.com/llvm/llvm-project/issues/51759
+    // NOLINTBEGIN(cppcoreguidelines-virtual-class-destructor)
     template <typename T>
     template <typename F, typename... As>
     class System<T>::SystemFunction : public AnySystemFunction
     {
     public:
-        virtual ~SystemFunction() final
+        ~SystemFunction() override
         {
             delete mFetchers;
         }
@@ -182,6 +185,7 @@ namespace cubos::core::ecs
         F mFunction;
         std::tuple<SystemFetcher<As>...>* mFetchers;
     };
+    // NOLINTEND(cppcoreguidelines-virtual-class-destructor)
 
     template <typename T>
     template <typename F, typename... As>

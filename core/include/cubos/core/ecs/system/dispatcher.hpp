@@ -57,10 +57,6 @@ namespace cubos::core::ecs
     public:
         ~Dispatcher();
 
-        /// @brief Constructs.
-        /// @param world World.
-        Dispatcher(World& world);
-
         /// @brief Adds a tag, and sets it as the current tag for further settings.
         /// @param tag Tag to add.
         void addTag(const std::string& tag);
@@ -187,7 +183,6 @@ namespace cubos::core::ecs
         // Variables for holding information after call chain is compiled.
 
         std::vector<System*> mSystems; ///< Compiled order of running systems.
-        World& mWorld;
     };
 
     inline void Dispatcher::tagAddCondition(ecs::System<bool> condition)

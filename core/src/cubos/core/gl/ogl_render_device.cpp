@@ -1232,7 +1232,7 @@ OGLRenderDevice::OGLRenderDevice()
 {
     // Set the debug message callback
     // TODO: disable this on release for performance reasons (?)
-    if (getProperty(Property::ComputeSupported))
+    if (this->OGLRenderDevice::getProperty(Property::ComputeSupported) != 0)
     {
         glEnable(GL_DEBUG_OUTPUT);
         glDebugMessageCallback(messageCallback, nullptr);

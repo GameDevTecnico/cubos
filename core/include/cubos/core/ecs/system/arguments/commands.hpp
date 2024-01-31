@@ -223,7 +223,7 @@ namespace cubos::core::ecs
         {
         }
 
-        Commands fetch(CommandBuffer& cmdBuffer)
+        static Commands fetch(CommandBuffer& cmdBuffer)
         {
             return {cmdBuffer};
         }

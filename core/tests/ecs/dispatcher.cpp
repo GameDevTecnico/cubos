@@ -66,7 +66,7 @@ TEST_CASE("ecs::Dispatcher")
 {
     World world{};
     CommandBuffer cmdBuffer{world};
-    Dispatcher dispatcher{world};
+    Dispatcher dispatcher{};
     world.registerResource<std::vector<int>>();
 
     auto wrapSystem = [&](auto f) { return System<void>::make(world, f); };

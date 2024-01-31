@@ -197,7 +197,8 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
                 if (row != table.size())
                 {
                     // If it is, then call unrelate() to erase the relation.
-                    uint32_t fromIndex, toIndex;
+                    uint32_t fromIndex;
+                    uint32_t toIndex;
                     table.indices(row, fromIndex, toIndex);
                     this->unrelate(from, Entity{toIndex, this->generation(toIndex)}, type);
                     break;
