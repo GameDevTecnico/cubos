@@ -112,6 +112,117 @@ auto Cubos::SystemBuilder::after(const std::string& tag) && -> SystemBuilder&&
     return std::move(*this);
 }
 
+auto Cubos::SystemBuilder::entity(int target) && -> SystemBuilder&&
+{
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeEntity(target));
+    return std::move(*this);
+}
+
+auto Cubos::SystemBuilder::with(const reflection::Type& type, int target) && -> SystemBuilder&&
+{
+    CUBOS_ASSERT(mWorld.types().contains(type), "No such component type {} was registered", type.name());
+    auto dataTypeId = mWorld.types().id(type);
+    CUBOS_ASSERT(mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeWithComponent(dataTypeId, target));
+    return std::move(*this);
+}
+
+auto Cubos::SystemBuilder::without(const reflection::Type& type, int target) && -> SystemBuilder&&
+{
+    CUBOS_ASSERT(mWorld.types().contains(type), "No such component type {} was registered", type.name());
+    auto dataTypeId = mWorld.types().id(type);
+    CUBOS_ASSERT(mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeWithoutComponent(dataTypeId, target));
+    return std::move(*this);
+}
+
+auto Cubos::SystemBuilder::related(const reflection::Type& type, int fromTarget, int toTarget) && -> SystemBuilder&&
+{
+    return std::move(*this).related(type, Traversal::Random, fromTarget, toTarget);
+}
+
+auto Cubos::SystemBuilder::related(const reflection::Type& type, Traversal traversal, int fromTarget,
+                                   int toTarget) && -> SystemBuilder&&
+{
+    CUBOS_ASSERT(mWorld.types().contains(type), "No such relation type {} was registered", type.name());
+    auto dataTypeId = mWorld.types().id(type);
+    CUBOS_ASSERT(mWorld.types().isRelation(dataTypeId), "Type {} isn't registered as a relation", type.name());
+
+    CUBOS_ASSERT_IMP(traversal != Traversal::Random, mWorld.types().isTreeRelation(dataTypeId),
+                     "Directed traversal can only be used for tree relations, and {} isn't registered as one",
+                     type.name());
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (fromTarget == -1)
+    {
+        fromTarget = mDefaultTarget;
+    }
+
+    if (toTarget == -1)
+    {
+        toTarget = fromTarget + 1;
+    }
+
+    mDefaultTarget = toTarget;
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeRelation(dataTypeId, fromTarget, toTarget, traversal));
+    return std::move(*this);
+}
+
+auto Cubos::SystemBuilder::other() && -> SystemBuilder&&
+{
+    mDefaultTarget = 0;
+    mOptions.emplace_back();
+    return std::move(*this);
+}
+
 void Cubos::SystemBuilder::finish(System<void> system)
 {
     mDispatcher.addSystem(std::move(system));

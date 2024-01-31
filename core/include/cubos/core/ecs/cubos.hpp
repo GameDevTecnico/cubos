@@ -201,6 +201,75 @@ namespace cubos::core::ecs
         /// @return Builder.
         SystemBuilder&& after(const std::string& tag) &&;
 
+        /// @brief Forces the next entity query argument to have the given target.
+        /// @param target Target index. By default, the last specified target or 0.
+        /// @return Builder.
+        SystemBuilder&& entity(int target = -1) &&;
+
+        /// @brief Forces the given target of the next query argument to have the following component.
+        /// @param type Component type.
+        /// @param target Target index. By default, the last specified target or 0.
+        /// @return Builder.
+        SystemBuilder&& with(const reflection::Type& type, int target = -1) &&;
+
+        /// @copydoc with(const reflection::Type&, int)
+        /// @tparam T Component type.
+        template <reflection::Reflectable T>
+        SystemBuilder&& with(int target = -1) &&
+        {
+            return std::move(*this).with(reflection::reflect<T>(), target);
+        }
+
+        /// @brief Forces the given target of the next query argument to not have the following component.
+        /// @param type Component type.
+        /// @param target Target. By default, the last specified target or 0.
+        /// @return Builder.
+        SystemBuilder&& without(const reflection::Type& type, int target = -1) &&;
+
+        /// @copydoc without(const reflection::Type&, int)
+        /// @tparam T Component type.
+        template <reflection::Reflectable T>
+        SystemBuilder&& without(int target = -1) &&
+        {
+            return std::move(*this).without(reflection::reflect<T>(), target);
+        }
+
+        /// @brief Forces the given targets of the next query argument to be related with the given relation.
+        /// @param type Relation type.
+        /// @param fromTarget From target index. By default, the last specified target or 0.
+        /// @param toTarget From target index. By default, @p fromTarget + 1.
+        /// @return Builder.
+        SystemBuilder&& related(const reflection::Type& type, int fromTarget = -1, int toTarget = -1) &&;
+
+        /// @copydoc related(const reflection::Type&, int, int)
+        /// @tparam T Relation type.
+        template <reflection::Reflectable T>
+        SystemBuilder&& related(int fromTarget = -1, int toTarget = -1) &&
+        {
+            return std::move(*this).related(reflection::reflect<T>(), fromTarget, toTarget);
+        }
+
+        /// @brief Forces the given targets of the next query argument to be related with the given tree relation.
+        /// @param type Relation type.
+        /// @param traversal Tree traversal direction.
+        /// @param fromTarget From target index. By default, the last specified target or 0.
+        /// @param toTarget From target index. By default, @p fromTarget + 1.
+        /// @return Builder.
+        SystemBuilder&& related(const reflection::Type& type, Traversal traversal, int fromTarget = -1,
+                                int toTarget = -1) &&;
+
+        /// @copydoc related(const reflection::Type&, Traversal, int, int)
+        /// @tparam T Relation type.
+        template <reflection::Reflectable T>
+        SystemBuilder&& related(Traversal traversal, int fromTarget = -1, int toTarget = -1) &&
+        {
+            return std::move(*this).related(reflection::reflect<T>(), traversal, fromTarget, toTarget);
+        }
+
+        /// @brief Makes the following argument options relative to the next argument.
+        /// @return Builder.
+        SystemBuilder&& other() &&;
+
         /// @brief Makes the system only run if the given condition evaluates to true.
         ///
         /// The condition runs immediately before the system runs, and is basically just like a normal system, but which
@@ -219,7 +288,7 @@ namespace cubos::core::ecs
         /// @param function System function.
         void call(auto function) &&
         {
-            this->finish(System<void>::make(mWorld, std::move(function), {}));
+            this->finish(System<void>::make(mWorld, std::move(function), mOptions));
         }
 
     private:
@@ -234,6 +303,8 @@ namespace cubos::core::ecs
         std::unordered_set<std::string> mTagged;
         std::unordered_set<std::string> mBefore;
         std::unordered_set<std::string> mAfter;
+        std::vector<SystemOptions> mOptions;
+        int mDefaultTarget{0};
     };
 
     // Implementation.
