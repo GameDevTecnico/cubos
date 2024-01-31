@@ -111,7 +111,7 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
     //  Add entity to current scene (needs to be root, not a sub scene)
     if (hierarchyDepth == 0 && ImGui::Button("Add Entity"))
     {
-        std::string entityName = scene.name + "_entity_" + std::to_string(scene.entities.size() + 1);
+        std::string entityName = scene.name + "unnamed" + std::to_string(scene.entities.size() + 1);
         entities.emplace_back(entityName, cmds.create().entity());
     }
 
@@ -139,7 +139,7 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
         ImGui::Selectable(name.c_str(), false, 0);
         if (ImGui::IsItemHovered())
         {
-            if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+            if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) && hierarchyDepth == 0)
             {
                 // popup menu to change entity name
                 ImGui::OpenPopup("Name Menu");
@@ -292,7 +292,7 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
             ImGui::Separator();
             if (ImGui::Button("Add Scene"))
             {
-                std::string sceneName = scene.name + "_scene_" + std::to_string(scene.scenes.size() + 1);
+                std::string sceneName = scene.name + "scene" + std::to_string(scene.scenes.size() + 1);
                 auto newSubscene = std::make_unique<SceneInfo>();
                 newSubscene->name = sceneName;
                 scene.scenes.emplace_back(sceneName, std::move(newSubscene));
