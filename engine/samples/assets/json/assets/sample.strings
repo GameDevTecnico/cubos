@@ -1,6 +1,4 @@
-{
-    "strings": [
-        "Hello",
-        "World"
-    ]
-}
+[
+    "Hello",
+    "World"
+]
