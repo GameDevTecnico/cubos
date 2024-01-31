@@ -286,7 +286,8 @@ bool Assets::update(AnyAsset& handle) const
         handle.mVersion = assetEntry->version;
         return true;
     }
-    else if (assetEntry->version > handle.getVersion())
+
+    if (assetEntry->version > handle.getVersion())
     {
         handle.mVersion = assetEntry->version;
         return true;

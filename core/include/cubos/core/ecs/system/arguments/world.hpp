@@ -20,7 +20,7 @@ namespace cubos::core::ecs
         {
         }
 
-        void analyze(SystemAccess& access) const
+        static void analyze(SystemAccess& access)
         {
             access.usesWorld = true;
         }
@@ -45,7 +45,7 @@ namespace cubos::core::ecs
         {
         }
 
-        void analyze(SystemAccess& access) const
+        static void analyze(SystemAccess& access)
         {
             access.usesWorld = true;
         }

@@ -24,11 +24,6 @@ Dispatcher::~Dispatcher()
     }
 }
 
-Dispatcher::Dispatcher(World& world)
-    : mWorld{world}
-{
-}
-
 void Dispatcher::addTag(const std::string& tag)
 {
     ENSURE_TAG_SETTINGS(tag);

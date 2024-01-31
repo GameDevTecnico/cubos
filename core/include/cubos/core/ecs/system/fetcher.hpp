@@ -8,8 +8,8 @@ namespace cubos::core::ecs
 {
     class World;
     class CommandBuffer;
-    class SystemOptions;
-    class SystemAccess;
+    struct SystemOptions;
+    struct SystemAccess;
 
     /// @brief Type meant to be specialized which implements for each argument type the necessary logic to extract it
     /// from the world.
@@ -18,6 +18,7 @@ namespace cubos::core::ecs
     template <typename T>
     class SystemFetcher
     {
+    public:
         /// @brief Indicates whether this argument type consumes system options.
         static inline constexpr bool ConsumesOptions = false;
 
@@ -37,6 +38,8 @@ namespace cubos::core::ecs
         /// @param[out] access Access patterns to add info to.
         void analyze(SystemAccess& access) const
         {
+            (void)access;
+
             // This should never be instantiated. This method is only defined for documentation purposes.
             static_assert(AlwaysFalse<T>, "Invalid system argument type");
         }
@@ -45,6 +48,8 @@ namespace cubos::core::ecs
         /// @param cmdBuffer Command buffer.
         T fetch(CommandBuffer& cmdBuffer)
         {
+            (void)cmdBuffer;
+
             // This should never be instantiated. This method is only defined for documentation purposes.
             static_assert(AlwaysFalse<T>, "Invalid system argument type");
         }

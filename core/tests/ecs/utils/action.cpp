@@ -444,7 +444,7 @@ void SingleTargetQueryAction::test(World& world, ExpectedWorld& expected)
     for (const auto& [entity, expectedEntity] : expected.aliveEntities)
     {
         bool shouldMatch = true;
-        for (auto* type : mWith)
+        for (const auto* type : mWith)
         {
             if (!expectedEntity.components.contains(type))
             {
@@ -452,7 +452,7 @@ void SingleTargetQueryAction::test(World& world, ExpectedWorld& expected)
                 break;
             }
         }
-        for (auto* type : mWithout)
+        for (const auto* type : mWithout)
         {
             if (expectedEntity.components.contains(type))
             {
@@ -739,7 +739,7 @@ void SingleRelationQueryAction::test(World& world, ExpectedWorld& expected)
                 }
             }
 
-            for (auto* type : mWithoutB)
+            for (const auto* type : mWithoutB)
             {
                 if (toExpectedEntity.components.contains(type))
                 {

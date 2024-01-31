@@ -256,9 +256,6 @@ Cubos::Cubos()
 }
 
 Cubos::Cubos(int argc, char** argv)
-    : mWorld{}
-    , mStartupDispatcher{mWorld}
-    , mMainDispatcher{mWorld}
 {
     std::vector<std::string> arguments(argv + 1, argv + argc);
 
