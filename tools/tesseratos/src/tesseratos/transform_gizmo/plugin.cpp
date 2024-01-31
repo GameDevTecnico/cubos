@@ -163,31 +163,6 @@ static void drawTransformGizmo(Query<const Camera&, Opt<const Rotation&>, Opt<co
     gizmos.drawArrow("transform_gizmo.z", position.vec + glm::vec3{0, 0, 0.03F}, {0, 0, 1}, 0.03F, 0.07F, 0.7F);
 }
 
-static void gizmoSystem(const EntitySelector& entitySelector, const ActiveCameras& activeCameras, const Window& window,
-                        const Input& input, Gizmos& gizmos, Query<Position&> positionQuery,
-                        Query<const Camera&, Opt<const Rotation&>, Opt<const Scale&>> cameraQuery)
-{
-    if (entitySelector.selection.isNull())
-    {
-        return;
-    }
-    if (activeCameras.entities[0] == entitySelector.selection)
-    {
-        return;
-    }
-    if (!positionQuery.at(entitySelector.selection))
-    {
-        return;
-    }
-    if (!cameraQuery.at(activeCameras.entities[0]))
-    {
-        return;
-    }
-
-    drawTransformGizmo(cameraQuery, positionQuery, gizmos, input, window, activeCameras.entities[0],
-                       entitySelector.selection);
-}
-
 void tesseratos::transformGizmoPlugin(Cubos& cubos)
 {
     cubos.addPlugin(entitySelectorPlugin);
@@ -195,5 +170,29 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
     cubos.addPlugin(cubos::engine::gizmosPlugin);
     cubos.addPlugin(cubos::engine::inputPlugin);
 
-    cubos.system(gizmoSystem).tagged("cubos.imgui");
+    cubos.system("draw Transform Gizmo")
+        .tagged("cubos.imgui")
+        .call([](const EntitySelector& entitySelector, const ActiveCameras& activeCameras, const Window& window,
+                 const Input& input, Gizmos& gizmos, Query<Position&> positionQuery,
+                 Query<const Camera&, Opt<const Rotation&>, Opt<const Scale&>> cameraQuery) {
+            if (entitySelector.selection.isNull())
+            {
+                return;
+            }
+            if (activeCameras.entities[0] == entitySelector.selection)
+            {
+                return;
+            }
+            if (!positionQuery.at(entitySelector.selection))
+            {
+                return;
+            }
+            if (!cameraQuery.at(activeCameras.entities[0]))
+            {
+                return;
+            }
+
+            drawTransformGizmo(cameraQuery, positionQuery, gizmos, input, window, activeCameras.entities[0],
+                               entitySelector.selection);
+        });
 }

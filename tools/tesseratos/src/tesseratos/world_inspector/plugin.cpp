@@ -12,44 +12,39 @@ using cubos::core::ecs::World;
 
 using cubos::engine::Cubos;
 
-using namespace tesseratos;
-
-static void inspectWorld(World& world, Query<Entity> query)
-{
-    if (!(world.write<Toolbox>().get().isOpen("World Inspector")))
-    {
-        return;
-    }
-
-    auto selector = world.write<EntitySelector>();
-
-    ImGui::Begin("World Inspector");
-    if (!ImGui::IsWindowCollapsed())
-    {
-        int n = 0;
-        for (auto [entity] : query)
-        {
-            ImGui::PushID(n);
-
-            ImGui::BulletText("%s", std::to_string(entity.index).c_str());
-
-            ImGui::SameLine();
-            if (ImGui::Button("Select"))
-            {
-                selector.get().selection = entity;
-            }
-
-            n++;
-            ImGui::PopID();
-        }
-    }
-    ImGui::End();
-}
-
 void tesseratos::worldInspectorPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(toolboxPlugin);
     cubos.addPlugin(entitySelectorPlugin);
-    cubos.system(inspectWorld).tagged("cubos.imgui");
+    cubos.system("show World Inspector UI").tagged("cubos.imgui").call([](World& world, Query<Entity> query) {
+        if (!(world.write<Toolbox>().get().isOpen("World Inspector")))
+        {
+            return;
+        }
+
+        auto selector = world.write<EntitySelector>();
+
+        ImGui::Begin("World Inspector");
+        if (!ImGui::IsWindowCollapsed())
+        {
+            int n = 0;
+            for (auto [entity] : query)
+            {
+                ImGui::PushID(n);
+
+                ImGui::BulletText("%s", std::to_string(entity.index).c_str());
+
+                ImGui::SameLine();
+                if (ImGui::Button("Select"))
+                {
+                    selector.get().selection = entity;
+                }
+
+                n++;
+                ImGui::PopID();
+            }
+        }
+        ImGui::End();
+    });
 }
