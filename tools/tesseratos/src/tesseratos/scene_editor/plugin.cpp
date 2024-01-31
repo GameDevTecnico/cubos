@@ -2,7 +2,6 @@
 #include <vector>
 
 #include <imgui.h>
-// #include <imgui_internal.h>
 #include <misc/cpp/imgui_stdlib.h>
 
 #include <cubos/core/reflection/external/string.hpp>
@@ -150,7 +149,7 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
                 selector.selection = handle;
             }
 
-            if (ImGui::IsMouseClicked(ImGuiMouseButton_Right))
+            if (ImGui::IsMouseClicked(ImGuiMouseButton_Right) && hierarchyDepth == 0)
             {
                 // popup menu to delete entity
                 ImGui::OpenPopup(id.c_str());
@@ -225,13 +224,13 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
     else
     {
         // If the scene has no entities or subscenes, it's not a TreeNode
-        if (scene.scenes.size() == 0 && scene.entities.size() == 0)
+        if (scene.scenes.empty() && scene.entities.empty())
         {
             // non TreeNode scenes have the identation of a TreeNode
-            ImGui::Indent(8.0f);
+            ImGui::Indent(8.0F);
             ImGui::Selectable(scene.name.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
             nodeOpen = true;
-            ImGui::Unindent(8.0f);
+            ImGui::Unindent(8.0F);
         }
         else
         {
