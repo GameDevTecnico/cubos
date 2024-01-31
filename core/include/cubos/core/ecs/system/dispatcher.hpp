@@ -197,7 +197,7 @@ namespace cubos::core::ecs
     inline void Dispatcher::addSystem(std::shared_ptr<AnySystemWrapper<void>> func)
     {
         // Wrap the system and put it in the pending queue
-        auto* system = new System{nullptr, func, {}};
+        auto* system = new System{nullptr, std::move(func), {}};
         mPendingSystems.push_back(system);
         mCurrSystem = mPendingSystems.back();
     }
