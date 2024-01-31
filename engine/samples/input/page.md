@@ -35,9 +35,7 @@ For the purposes of this sample we can simply use an hardcoded reference to the 
 
 @snippet input/main.cpp Setting the Bindings
 
-To utilize the bindings, loading them is essential. This can be accomplished by establishing two startup systems: one to configure the `assets.io.path` path and the other to read from the asset and establish the required bindings.
-
-@snippet input/main.cpp Systems to load bindings
+To utilize the bindings, loading them is essential. This can be accomplished by establishing a startup systems which reads from the asset and sets the required bindings.
 
 @snippet input/main.cpp Loading the bindings
 
@@ -54,7 +52,7 @@ This avoids the state advancing more than once if the user presses it for more t
 
 Now let's see each of the prompt, to understand the full breadth of the plugin's functionalities.
 
-@note All the functions henceforth are not systems, they are mere functions called by the `update` system, which passes the `Input` resource to them.
+@note All the functions henceforth are not systems, they are mere functions called by the system above, which passes the `Input` resource to them.
 
 @snippet input/main.cpp Showcase Action Press
 

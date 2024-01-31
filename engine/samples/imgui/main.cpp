@@ -68,34 +68,6 @@ struct DummyResource
 };
 /// [Creating a dummy resource]
 
-/// [DataInspector window example]
-static void exampleDataInspectorSystem(DataInspector& inspector, DummyResource& data)
-{
-    ImGui::Begin("Data Inspector");
-    ImGui::BeginTable("id1", 2);
-
-    inspector.show("data.integer", data.integer);
-    inspector.edit("data.person", data.person);
-    inspector.edit("data.persons", data.persons);
-    inspector.edit("data.vec", data.vec);
-    inspector.edit("data.map", data.map);
-
-    ImGui::EndTable();
-    ImGui::End();
-}
-/// [DataInspector window example]
-
-/// [ImGui window example]
-static void exampleWindowSystem()
-{
-    ImGui::Begin("Dear ImGui + CUBOS.");
-    ImGui::Text("Hello world!");
-    ImGui::End();
-
-    ImGui::ShowDemoWindow();
-}
-/// [ImGui window example]
-
 int main()
 {
     Cubos cubos{};
@@ -104,11 +76,17 @@ int main()
     cubos.addPlugin(imguiPlugin);
     /// [Adding the plugin]
 
-    /// [Adding the system]
-    cubos.system(exampleWindowSystem).tagged("cubos.imgui");
-    /// [Adding the system]
+    /// [ImGui Demo]
+    cubos.system("show ImGui demo").tagged("cubos.imgui").call([]() {
+        ImGui::Begin("Dear ImGui + CUBOS.");
+        ImGui::Text("Hello world!");
+        ImGui::End();
 
-    /// [Filling the dummy resource 1]
+        ImGui::ShowDemoWindow();
+    });
+    /// [ImGui Demo]
+
+    /// [Filling the dummy resource]
     cubos.addResource<DummyResource>(
         DummyResource{.integer = 1337,
                       .person = Person{"roby", 1337, 666.5F, false},
@@ -120,11 +98,25 @@ int main()
                           {3, 6},
                           {4, 8},
                       }});
-    /// [Filling the dummy resource 1]
+    /// [Filling the dummy resource]
 
-    /// [Adding the system and a dummy resource with data]
-    cubos.system(exampleDataInspectorSystem).tagged("cubos.imgui");
-    /// [Adding the system and a dummy resource with data]
+    /// [DataInspector window example]
+    cubos.system("data inspector example")
+        .tagged("cubos.imgui")
+        .call([](DataInspector& inspector, DummyResource& data) {
+            ImGui::Begin("Data Inspector");
+            ImGui::BeginTable("id1", 2);
+
+            inspector.show("data.integer", data.integer);
+            inspector.edit("data.person", data.person);
+            inspector.edit("data.persons", data.persons);
+            inspector.edit("data.vec", data.vec);
+            inspector.edit("data.map", data.map);
+
+            ImGui::EndTable();
+            ImGui::End();
+        });
+    /// [DataInspector window example]
 
     cubos.run();
 }

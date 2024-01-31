@@ -47,42 +47,33 @@ public:
 };
 /// [TextBridge::saveToFile]
 
-static void configSystem(Settings& settings)
-{
-    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
-}
-
-/// [Registering the bridge]
-static void bridgeSystem(Assets& assets)
-{
-    // Add a custom bridge to load .txt files.
-    assets.registerBridge(".txt", std::make_unique<TextBridge>());
-}
-/// [Registering the bridge]
-
-/// [Loading the asset]
-// Assets are identified through UUIDs which are defined in their .meta files.
-static const Asset<std::string> SampleAsset = AnyAsset("6f42ae5a-59d1-5df3-8720-83b8df6dd536");
-
-static void loadSystem(const Assets& assets)
-{
-    // Access the text asset - will be loaded automatically.
-    auto text = assets.read(SampleAsset);
-    Stream::stdOut.print(*text);
-}
-/// [Loading the asset]
-
 int main()
 {
     auto cubos = Cubos();
 
-    /// [Configuration]
     cubos.addPlugin(assetsPlugin);
-    cubos.startupSystem(bridgeSystem).tagged("cubos.assets.bridge");
-    cubos.startupSystem(loadSystem).tagged("cubos.assets");
-    /// [Configuration]
 
-    cubos.startupSystem(configSystem).tagged("cubos.settings");
+    cubos.startupSystem("configure Assets plugin").tagged("cubos.settings").call([](Settings& settings) {
+        settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    });
+
+    /// [Registering the bridge]
+    cubos.startupSystem("setup bridge to load .txt files").tagged("cubos.assets.bridge").call([](Assets& assets) {
+        assets.registerBridge(".txt", std::make_unique<TextBridge>());
+    });
+    /// [Registering the bridge]
+
+    /// [Loading the asset]
+    // Assets are identified through UUIDs which are defined in their .meta files.
+    static const Asset<std::string> SampleAsset = AnyAsset("6f42ae5a-59d1-5df3-8720-83b8df6dd536");
+
+    cubos.startupSystem("access .txt asset").tagged("cubos.assets").call([](const Assets& assets) {
+        // Access the text asset - will be loaded automatically.
+        auto text = assets.read(SampleAsset);
+        Stream::stdOut.print(*text);
+    });
+    /// [Loading the asset]
+
     cubos.run();
     return 0;
 }

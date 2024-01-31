@@ -18,54 +18,6 @@ struct State
     int step;
 };
 
-/// [Event reader system]
-static void firstSystem(EventReader<MyEvent> reader)
-{
-    for (const auto& event : reader)
-    {
-        CUBOS_INFO("A read {}", event.value);
-    }
-}
-/// [Event reader system]
-
-/// [Event writer system]
-static void secondSystem(EventWriter<MyEvent> writer, State& state, ShouldQuit& quit)
-{
-    state.step += 1;
-    if (state.step == 1) // Write 1 2 3 on first run.
-    {
-        writer.push({1});
-        writer.push({2});
-        writer.push({3});
-        CUBOS_INFO("B wrote 1 2 3");
-    }
-    else if (state.step == 2)
-    {
-        quit.value = true; // Stop the loop.
-        writer.push({4});
-        writer.push({5});
-        writer.push({6});
-        CUBOS_INFO("B wrote 4 5 6");
-    }
-}
-/// [Event writer system]
-
-static void thirdSystem(EventReader<MyEvent> reader)
-{
-    for (const auto& event : reader)
-    {
-        CUBOS_INFO("C read {}", event.value);
-    }
-}
-
-static void fourthSystem(EventReader<MyEvent> reader)
-{
-    for (const auto& event : reader)
-    {
-        CUBOS_INFO("D read {}", event.value);
-    }
-}
-
 int main()
 {
     cubos::engine::Cubos cubos;
@@ -75,14 +27,51 @@ int main()
     cubos.addEvent<MyEvent>();
     /// [Adding event]
 
-    cubos.startupSystem([](ShouldQuit& quit) { quit.value = false; });
+    cubos.startupSystem("set ShouldQuit to false").call([](ShouldQuit& quit) { quit.value = false; });
 
-    /// [Adding systems]
-    cubos.system(firstSystem).tagged("A").before("B");
-    cubos.system(secondSystem).tagged("B");
-    cubos.system(thirdSystem).tagged("C").after("B");
-    cubos.system(fourthSystem).tagged("D").after("C");
-    /// [Adding systems]
+    /// [Event reader systems]
+    cubos.system("A").before("b").call([](EventReader<MyEvent> reader) {
+        for (const auto& event : reader)
+        {
+            CUBOS_INFO("A read {}", event.value);
+        }
+    });
+
+    cubos.system("C").tagged("c").after("b").call([](EventReader<MyEvent> reader) {
+        for (const auto& event : reader)
+        {
+            CUBOS_INFO("C read {}", event.value);
+        }
+    });
+
+    cubos.system("D").after("c").call([](EventReader<MyEvent> reader) {
+        for (const auto& event : reader)
+        {
+            CUBOS_INFO("D read {}", event.value);
+        }
+    });
+    /// [Event reader system]
+
+    /// [Event writer system]
+    cubos.system("B").tagged("b").call([](EventWriter<MyEvent> writer, State& state, ShouldQuit& quit) {
+        state.step += 1;
+        if (state.step == 1) // Write 1 2 3 on first run.
+        {
+            writer.push({1});
+            writer.push({2});
+            writer.push({3});
+            CUBOS_INFO("B wrote 1 2 3");
+        }
+        else if (state.step == 2)
+        {
+            quit.value = true; // Stop the loop.
+            writer.push({4});
+            writer.push({5});
+            writer.push({6});
+            CUBOS_INFO("B wrote 4 5 6");
+        }
+    });
+    /// [Event writer system]
 
     /// [Expected results]
     // Should print:

@@ -1,24 +1,25 @@
-/// [Include Components]
-#include "components.hpp"
-/// [Include Components]
-
 /// [Include]
 #include <cubos/engine/prelude.hpp>
 
-using cubos::engine::Cubos;
+using namespace cubos::engine;
 /// [Include]
 
-using namespace cubos::engine;
-
-/// [Component Refl]
+/// [Component Decl]
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+
+struct Num
+{
+    CUBOS_REFLECT;
+
+    int value;
+};
 
 CUBOS_REFLECT_IMPL(Num)
 {
     return cubos::core::ecs::TypeBuilder<Num>("Num").withField("value", &Num::value).build();
 }
-/// [Component Refl]
+/// [Component Decl]
 
 /// [Resource Decl]
 struct Pop
@@ -27,64 +28,24 @@ struct Pop
 };
 /// [Resource Decl]
 
-/// [Hello Cubos]
-static void sayHelloCubosSystem()
-{
-    CUBOS_INFO("Hello CUBOS");
-}
-/// [Hello Cubos]
-
-/// [Hello World]
-static void sayHelloSystem()
-{
-    CUBOS_INFO("Hello");
-}
-
-static void sayWorldSystem()
-{
-    CUBOS_INFO("World");
-}
-/// [Hello World]
-
-/// [Entity Spawn]
-static void spawnEntitiesSystem(Commands cmds, Pop& pop)
-{
-    for (int i = 0; i < 10; i++)
-    {
-        cmds.create().add(Num{i});
-        pop.count += 1;
-    }
-}
-/// [Entity Spawn]
-
-/// [Entity Print]
-static void checkEntitiesSystem(Query<const Num&> query, const Pop& pop)
-{
-    for (auto [num] : query)
-    {
-        CUBOS_INFO("Entity '{}' of '{}'", num.value, pop.count);
-    }
-}
-/// [Entity Print]
-
 /// [Engine]
 int main()
 {
     Cubos cubos{};
     /// [Engine]
 
+    /// [Hello CUBOS]
+    cubos.startupSystem("say Hello CUBOS").call([]() { CUBOS_INFO("Hello CUBOS"); });
+    /// [Hello CUBOS]
+
+    /// [Hello World]
+    cubos.system("say Hello").tagged("helloTag").call([]() { CUBOS_INFO("Hello"); });
+    cubos.system("say World").tagged("worldTag").call([]() { CUBOS_INFO("World"); });
+    /// [Hello World]
+
     /// [Tags]
     cubos.tag("helloTag").before("worldTag");
     /// [Tags]
-
-    /// [Set Startup]
-    cubos.startupSystem(sayHelloCubosSystem);
-    /// [Set Startup]
-
-    /// [Set Systems]
-    cubos.system(sayHelloSystem).tagged("helloTag");
-    cubos.system(sayWorldSystem).tagged("worldTag");
-    /// [Set Systems]
 
     /// [Component Add]
     cubos.addComponent<Num>();
@@ -94,11 +55,24 @@ int main()
     cubos.addResource<Pop>();
     /// [Resource Add]
 
-    /// [Entity System]
-    cubos.startupSystem(spawnEntitiesSystem);
+    /// [Entity Spawn]
+    cubos.startupSystem("spawn entities").call([](Commands cmds, Pop& pop) {
+        for (int i = 0; i < 10; i++)
+        {
+            cmds.create().add(Num{i});
+            pop.count += 1;
+        }
+    });
+    /// [Entity Spawn]
 
-    cubos.system(checkEntitiesSystem);
-    /// [Entity System]
+    /// [Entity Print]
+    cubos.system("check entities").call([](Query<const Num&> query, const Pop& pop) {
+        for (auto [num] : query)
+        {
+            CUBOS_INFO("Entity '{}' of '{}'", num.value, pop.count);
+        }
+    });
+    /// [Entity Print]
 
     /// [Run]
     cubos.run();

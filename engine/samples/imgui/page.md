@@ -16,13 +16,11 @@ Then, make sure to add the plugin.
 
 @snippet imgui/main.cpp Adding the plugin
 
-Once the ImGui plugin is added, you can create systems to display ImGui windows and widgets. Here's an example of how to create an ImGui window.
+Once the ImGui plugin is added, you can create systems to display ImGui windows and widgets. Here's a system which opens an ImGui window, and its demo.
 
-@snippet imgui/main.cpp ImGui window example
+@snippet imgui/main.cpp ImGui Demo
 
 Ensure that you add your system with the `cubos.imgui` tag; otherwise, the ImGui elements from that system won't be be visible.
-
-@snippet imgui/main.cpp Adding the system
 
 Pretty simple right? You're now equipped to craft and utilize ImGui's functions to design your cool user interface.
 
@@ -34,9 +32,9 @@ To start off, we'll need to have some sort of dummy data shared across our appli
 
 @snippet imgui/main.cpp Creating a dummy resource
 
-@snippet imgui/main.cpp Filling the dummy resource 1
+@snippet imgui/main.cpp Filling the dummy resource
 
-Well now, using the @ref cubos::engine::DataInspector is pretty easy, all you have to do is, obviously, access the resource on your system, and use the functions `DataInspector::edit` and `DataInspector::edit`.
+Well now, using the @ref cubos::engine::DataInspector is pretty easy, all you have to do is access the resource on your system, and use the functions `DataInspector::edit` and `DataInspector::edit`.
 
 @snippet imgui/main.cpp DataInspector window example
 

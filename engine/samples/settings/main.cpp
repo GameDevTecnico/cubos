@@ -5,19 +5,17 @@
 
 using namespace cubos::engine;
 
-/// [System]
-static void checkSettings(Settings& settings)
-{
-    CUBOS_INFO("{}", settings.getString("greeting", "Hello!"));
-}
-/// [System]
-
 /// [Run]
 int main(int argc, char** argv)
 {
     Cubos cubos{argc, argv};
+
     cubos.addPlugin(settingsPlugin);
-    cubos.startupSystem(checkSettings).after("cubos.settings");
+
+    cubos.startupSystem("print setting value").after("cubos.settings").call([](Settings& settings) {
+        CUBOS_INFO("{}", settings.getString("greeting", "Hello!"));
+    });
+
     cubos.run();
 }
 /// [Run]
