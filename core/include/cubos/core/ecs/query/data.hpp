@@ -5,6 +5,7 @@
 #pragma once
 
 #include <tuple>
+#include <unordered_set>
 #include <utility>
 
 #include <cubos/core/ecs/query/fetcher.hpp>
@@ -51,6 +52,12 @@ namespace cubos::core::ecs
 
             // Extract terms from the query argument types.
             std::vector<QueryTerm> argumentTerms = {QueryFetcher<Ts>::term(world)...};
+
+            // Fill the access set with the query argument types.
+            for (const auto& term : argumentTerms)
+            {
+                mAccesses.insert(term.type);
+            }
 
             // Resolve them with the received extra terms.
             auto terms = QueryTerm::resolve(world.types(), extraTerms, argumentTerms);
@@ -120,6 +127,13 @@ namespace cubos::core::ecs
 
             other.mFilter = nullptr;
             other.mFetchers = nullptr;
+        }
+
+        /// @brief Gets a set with the data types accessed by this query.
+        /// @return Data type set.
+        const std::unordered_set<DataTypeId, DataTypeIdHash>& accesses() const
+        {
+            return mAccesses;
         }
 
         /// @brief Fetches any new matching archetypes that have been added since the last call to this function.
@@ -201,6 +215,7 @@ namespace cubos::core::ecs
         World& mWorld;
         QueryFilter* mFilter;
 
+        std::unordered_set<DataTypeId, DataTypeIdHash> mAccesses;
         std::tuple<QueryFetcher<Ts>...>* mFetchers;
         std::vector<size_t> mFetcherCursors;
         ArchetypeId mPreparedArchetypes[QueryFilter::MaxTargetCount];
