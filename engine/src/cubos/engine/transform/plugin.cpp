@@ -1,5 +1,7 @@
 #include <cubos/engine/transform/plugin.hpp>
 
+using cubos::core::ecs::Traversal;
+
 void cubos::engine::transformPlugin(Cubos& cubos)
 {
     cubos.addComponent<Position>();
@@ -91,28 +93,39 @@ void cubos::engine::transformPlugin(Cubos& cubos)
             }
         });
 
-    cubos.tag("cubos.transform.missing").before("cubos.transform.update");
+    cubos.tag("cubos.transform.missing").before("cubos.transform.update.relative");
 
-    cubos.system("update LocalToWorld")
-        .tagged("cubos.transform.update")
-        .call([](Query<Entity, LocalToWorld&, Opt<const Position&>, Opt<const Rotation&>, Opt<const Scale&>> query) {
-            for (auto [entity, localToWorld, position, rotation, scale] : query)
+    cubos.system("update relative transform matrix")
+        .tagged("cubos.transform.update.relative")
+        .before("cubos.transform.update")
+        .call([](Query<LocalToWorld&, Opt<LocalToParent&>, const Position&, const Rotation&, const Scale&> query) {
+            for (auto [localToWorld, localToParent, position, rotation, scale] : query)
             {
-                localToWorld.mat = glm::mat4(1.0F);
-                if (position)
-                {
-                    localToWorld.mat = glm::translate(localToWorld.mat, position->vec);
-                }
+                auto mat = glm::scale(glm::translate(localToWorld.mat, position.vec) * glm::toMat4(rotation.quat),
+                                      glm::vec3(scale.factor));
 
-                if (rotation)
+                if (localToParent)
                 {
-                    localToWorld.mat *= glm::toMat4(rotation->quat);
+                    localToParent->mat = mat;
                 }
+                else
+                {
+                    // No parent, so transform is relative to the world
+                    localToWorld.mat = mat;
+                }
+            }
+        });
 
-                if (scale)
-                {
-                    localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(scale->factor));
-                }
+    cubos.system("update LocalToWorlds of children")
+        .tagged("cubos.transform.update")
+        .with<LocalToWorld>()
+        .with<LocalToParent>()
+        .related<ChildOf>(Traversal::Down)
+        .with<LocalToWorld>()
+        .call([](Query<LocalToWorld&, const LocalToParent&, const LocalToWorld&> query) {
+            for (auto [localToWorld, localToParent, parentLocalToWorld] : query)
+            {
+                localToWorld.mat = parentLocalToWorld.mat * localToParent.mat;
             }
         });
 }

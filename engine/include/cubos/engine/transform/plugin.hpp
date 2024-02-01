@@ -44,8 +44,10 @@ namespace cubos::engine
     /// Position, @ref Rotation or @ref Scale components.
     /// - `cubos.transform.missing` - the @ref Position, @ref Rotation, @ref Scale and possibly @ref LocalToParent
     /// components are added to entities with @ref LocalToWorld components.
+    /// - `cubos.transform.update.relative` - the @ref LocalToWorld or @ref LocalToParent components are updated with
+    /// the information from the @ref Position, @ref Rotation and @ref Scale components.
     /// - `cubos.transform.update` - the @ref LocalToWorld components are updated with the information from the @ref
-    /// Position, @ref Rotation and @ref Scale components.
+    /// LocalToParent component and the @ref LocalToWorld components of the parent.
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
