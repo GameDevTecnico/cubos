@@ -41,9 +41,7 @@ void tesseratos::settingsInspectorPlugin(Cubos& cubos)
                 }
                 else
                 {
-                    ImGui::BeginTable("split", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
-                    inspector.edit("Settings", map);
-                    ImGui::EndTable();
+                    inspector.edit(map);
                 }
             }
             ImGui::End();

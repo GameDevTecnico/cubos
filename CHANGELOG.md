@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Metrics panel plugin, which only shows FPS statistics for now (#275).
 - Parent-child hierarchies to the transform plugin, at last (#334).
 - New trait type for handling bit masks.
+- Buttons to add/remove components through the entity inspector (#906).
 
 ### Changed
 
