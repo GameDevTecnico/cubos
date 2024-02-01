@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/component/manager.hpp file | CUBOS. Docs</title>
+  <title>cubos::core::ecs::SystemAccess struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,40 +46,70 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_649da4752b4164834ba68d7c258c03a8.html">component</a>/</span>manager.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemAccess <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="access_8hpp.html">&lt;core/ecs/system/access.hpp&gt;</a></div>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager</a> and related types.</p>
+        <p>Describes the types of data a system accesses.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
-          <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+<p>Used to determine if systems conflict with each other.</p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">cubos::core::ecs::ComponentManager</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#acd72d369d2a5e49ecdacaf72cb6fa91a" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; other) const -&gt; bool</span>
             </dt>
-            <dd>Holds and manages components.</dd>
+            <dd>Checks if this access patterns intersect with the given ones.</dd>
           </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a64d23e8126fa70bbfaee9e840f0ada13">
+              bool <a href="#a64d23e8126fa70bbfaee9e840f0ada13" class="m-doc-self">usesWorld</a>
+            </dt>
+            <dd>Whether the system accesses the world directly.</dd>
+            <dt id="aeefbab2dc921792dbd48375873545003">
+              std::unordered_set&lt;<a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>, <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">DataTypeIdHash</a>&gt; <a href="#aeefbab2dc921792dbd48375873545003" class="m-doc-self">dataTypes</a>
+            </dt>
+            <dd>Set of data types accessed by the system.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="acd72d369d2a5e49ecdacaf72cb6fa91a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SystemAccess::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acd72d369d2a5e49ecdacaf72cb6fa91a" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; other) const</span></span>
+            </h3>
+            <p>Checks if this access patterns intersect with the given ones.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other system access patterns.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether they intersect.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

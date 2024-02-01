@@ -81,14 +81,6 @@
             </dt>
             <dd>Stores commands to execute them later.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">ComponentManager</a>
-            </dt>
-            <dd>Holds and manages components.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>
-            </dt>
-            <dd>Stores the components of a given type.</dd>
-            <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html" class="m-doc">DeltaTime</a>
             </dt>
             <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
@@ -129,17 +121,9 @@
             </dt>
             <dd>Used to hash <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> objects.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager.html" class="m-doc">EntityManager</a>
-            </dt>
-            <dd>Internal type which holds and manages entities and their component masks.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1EntityPool.html" class="m-doc">EntityPool</a>
             </dt>
             <dd>Manages the creation and destruction of entity identifiers, as well as storing their archetype identifiers.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a>
-            </dt>
-            <dd>Describes the types of data a query accesses.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>
@@ -191,13 +175,13 @@
             </dt>
             <dd>Holds and manages resources.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>
+            </dt>
+            <dd>Describes the types of data a system accesses.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>
             </dt>
-            <dd>System argument used to write ECS commands and execute them at a later time.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a>
-            </dt>
-            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to write ECS commands and execute them at a later time.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">EventPipe</a>
@@ -207,31 +191,35 @@
               <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a>
             </dt>
-            <dd>System arguments used to read events of type <code>T</code>.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> arguments used to read events of type <code>T</code>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a>
             </dt>
-            <dd>System argument which allows the system to send events of type <code>T</code> to other systems.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which allows the system to send events of type <code>T</code> to other systems.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>
             </dt>
-            <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which holds the result of a query over all entities in world which match the given arguments.</dd>
             <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a>
             </dt>
-            <dd>Describes a system.</dd>
+            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename R&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SystemFetcher.html" class="m-doc">SystemFetcher</a>
             </dt>
-            <dd>Base class for system wrappers.</dd>
+            <dd>Type meant to be specialized which implements for each argument type the necessary logic to extract it from the world.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename F&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" class="m-doc">SystemWrapper</a>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a>
             </dt>
-            <dd>Wrapper for a system of type <code>F</code>.</dd>
+            <dd>Contains extra options for a specific system argument.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>
+            </dt>
+            <dd>Holds a system with a return type <code>T</code>.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a>
             </dt>
