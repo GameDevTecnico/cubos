@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <cubos/core/reflection/reflect.hpp>
+
 #ifdef WITH_GLFW
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -43,3 +45,5 @@ namespace cubos::core::io
 #endif
     };
 } // namespace cubos::core::io
+
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Cursor::Standard);
