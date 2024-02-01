@@ -57,7 +57,7 @@ void tesseratos::entitySelectorPlugin(Cubos& cubos)
                 {
                     if (std::get<MouseButtonEvent>(event).button == cubos::core::io::MouseButton::Left)
                     {
-                        if (!std::get<MouseButtonEvent>(event).pressed)
+                        if (std::get<MouseButtonEvent>(event).pressed)
                         {
                             uint32_t entityId =
                                 screenPicker.at(entitySelector.lastMousePosition.x, entitySelector.lastMousePosition.y);
@@ -66,7 +66,7 @@ void tesseratos::entitySelectorPlugin(Cubos& cubos)
                             {
                                 entitySelector.selection = Entity{};
                             }
-                            else
+                            else if (entityId < static_cast<uint32_t>(1 << 31))
                             {
                                 entitySelector.selection = Entity{entityId, world.generation(entityId)};
                             }
