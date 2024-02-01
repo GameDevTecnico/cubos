@@ -6,6 +6,7 @@ void cubos::engine::transformPlugin(Cubos& cubos)
     cubos.addComponent<Rotation>();
     cubos.addComponent<Scale>();
     cubos.addComponent<LocalToWorld>();
+    cubos.addRelation<ChildOf>();
 
     cubos.system("add LocalToWorld where needed")
         .before("cubos.transform.update")
