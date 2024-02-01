@@ -60,12 +60,26 @@ CUBOS_REFLECT_IMPL(Person)
 
 struct DummyResource
 {
+    CUBOS_REFLECT;
+
     int integer;
     Person person;
     std::vector<Person> persons;
     std::vector<int32_t> vec;
     std::map<int32_t, int32_t> map;
 };
+
+CUBOS_REFLECT_IMPL(DummyResource)
+{
+    return Type::create("DummyResource")
+        .with(FieldsTrait()
+                  .withField("integer", &DummyResource::integer)
+                  .withField("person", &DummyResource::person)
+                  .withField("persons", &DummyResource::persons)
+                  .withField("vec", &DummyResource::vec)
+                  .withField("v", &DummyResource::map))
+        .with(ConstructibleTrait::typed<Person>().withDefaultConstructor().build());
+}
 /// [Creating a dummy resource]
 
 int main()
@@ -105,15 +119,7 @@ int main()
         .tagged("cubos.imgui")
         .call([](DataInspector& inspector, DummyResource& data) {
             ImGui::Begin("Data Inspector");
-            ImGui::BeginTable("id1", 2);
-
-            inspector.show("data.integer", data.integer);
-            inspector.edit("data.person", data.person);
-            inspector.edit("data.persons", data.persons);
-            inspector.edit("data.vec", data.vec);
-            inspector.edit("data.map", data.map);
-
-            ImGui::EndTable();
+            inspector.edit(data);
             ImGui::End();
         });
     /// [DataInspector window example]

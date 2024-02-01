@@ -16,41 +16,34 @@ namespace cubos::engine
     {
     public:
         /// @brief Displays a reflectable value on the UI.
-        /// @note This should always be called inside a `ImGui::BeginTable(..., 2)` and `ImGui::EndTable()`.
-        /// @param name Value name.
         /// @param type Value type.
         /// @param value Pointer to value.
-        void show(const std::string& name, const core::reflection::Type& type, const void* value);
+        void show(const core::reflection::Type& type, const void* value);
 
         /// @brief Displays a reflectable value on the UI and allows modifying it.
-        /// @note This should always be called inside a `ImGui::BeginTable(..., 2)` and `ImGui::EndTable()`.
-        /// @param name Value name.
         /// @param type Value type.
         /// @param value Pointer to value.
         /// @return Whether the object was modified.
-        bool edit(const std::string& name, const core::reflection::Type& type, void* value);
+        bool edit(const core::reflection::Type& type, void* value);
 
         /// @copybrief show
-        /// @note This should always be called inside a `ImGui::BeginTable(..., 2)` and `ImGui::EndTable()`.
         /// @tparam T Value type.
         /// @param name Value name.
         /// @param value Pointer to value.
         template <typename T>
-        void show(const std::string& name, const T& value)
+        void show(const T& value)
         {
-            this->show(name, core::reflection::reflect<T>(), &value);
+            this->show(core::reflection::reflect<T>(), &value);
         }
 
         /// @copybrief edit
-        /// @note This should always be called inside a `ImGui::BeginTable(..., 2)` and `ImGui::EndTable()`.
         /// @tparam T Value type.
-        /// @param name Value name.
         /// @param value Pointer to value.
         /// @return Whether the object was modified.
         template <typename T>
-        bool edit(const std::string& name, T& value)
+        bool edit(T& value)
         {
-            return this->edit(name, core::reflection::reflect<T>(), &value);
+            return this->edit(core::reflection::reflect<T>(), &value);
         }
 
     private:

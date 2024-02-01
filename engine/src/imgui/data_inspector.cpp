@@ -29,14 +29,19 @@ using namespace cubos::engine;
 /// @brief Displays a menu where the user can "set" the data to null (if it has NullableTrait)
 static bool nullifyMenu(const Type& type, void* value);
 
-void DataInspector::show(const std::string& name, const core::reflection::Type& type, const void* value)
+void DataInspector::show(const core::reflection::Type& type, const void* value)
 {
-    this->inspect(name, type, const_cast<void*>(value), true);
+    ImGui::BeginTable("inspector", 2);
+    this->inspect("", type, const_cast<void*>(value), true);
+    ImGui::EndTable();
 }
 
-bool DataInspector::edit(const std::string& name, const core::reflection::Type& type, void* value)
+bool DataInspector::edit(const core::reflection::Type& type, void* value)
 {
-    return this->inspect(name, type, value, false);
+    ImGui::BeginTable("inspector", 2);
+    auto changed = this->inspect("", type, value, false);
+    ImGui::EndTable();
+    return changed;
 }
 
 bool DataInspector::inspect(const std::string& name, const Type& type, void* value, bool readOnly)
@@ -336,13 +341,17 @@ std::string DataInspector::stringKnown(const void* value, const Type& type)
 
 void DataInspector::showKnown(const std::string& name, const Type& type, const void* value)
 {
-    ImGui::TableSetColumnIndex(0);
-    ImGui::AlignTextToFramePadding();
-    ImGui::TreeNodeEx(name.c_str(),
-                      ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Bullet);
-    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+
+    if (!name.empty())
     {
-        ImGui::SetTooltip("%s", type.name().c_str());
+        ImGui::TableSetColumnIndex(0);
+        ImGui::AlignTextToFramePadding();
+        ImGui::TreeNodeEx(name.c_str(),
+                          ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Bullet);
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+        {
+            ImGui::SetTooltip("%s", type.name().c_str());
+        }
     }
 
     std::string str = stringKnown(value, type);
@@ -352,18 +361,25 @@ void DataInspector::showKnown(const std::string& name, const Type& type, const v
 
 void DataInspector::withStructured(const std::string& name, const Type& type, auto fn)
 {
-    ImGui::TableSetColumnIndex(0);
-    ImGui::AlignTextToFramePadding();
-    bool nodeOpen = ImGui::TreeNode(name.c_str());
-    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+    if (!name.empty())
     {
-        ImGui::SetTooltip("%s", type.name().c_str());
-    }
+        ImGui::TableSetColumnIndex(0);
+        ImGui::AlignTextToFramePadding();
+        bool nodeOpen = ImGui::TreeNode(name.c_str());
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+        {
+            ImGui::SetTooltip("%s", type.name().c_str());
+        }
 
-    if (nodeOpen)
+        if (nodeOpen)
+        {
+            fn();
+            ImGui::TreePop();
+        }
+    }
+    else
     {
         fn();
-        ImGui::TreePop();
     }
 }
 
@@ -381,13 +397,16 @@ void DataInspector::withStructured(const std::string& name, const Type& type, au
 
 bool DataInspector::editKnown(const std::string& name, const Type& type, void* value)
 {
-    ImGui::TableSetColumnIndex(0);
-    ImGui::AlignTextToFramePadding();
-    ImGui::TreeNodeEx(name.c_str(),
-                      ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Bullet);
-    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+    if (!name.empty())
     {
-        ImGui::SetTooltip("%s", type.name().c_str());
+        ImGui::TableSetColumnIndex(0);
+        ImGui::AlignTextToFramePadding();
+        ImGui::TreeNodeEx(name.c_str(),
+                          ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Bullet);
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+        {
+            ImGui::SetTooltip("%s", type.name().c_str());
+        }
     }
 
     ImGui::PushID("editKnown");
