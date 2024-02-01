@@ -58,6 +58,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/collisions/broad_phase/plugin.cpp"
 	"src/collisions/broad_phase/sweep_and_prune.cpp"
 	"src/collisions/broad_phase/potentially_colliding_with.cpp"
+	"src/collisions/narrow_phase/plugin.cpp"
+	"src/collisions/narrow_phase/colliding_with.cpp"
 
 	"src/physics/plugin.cpp"
 	"src/physics/gravity.cpp"

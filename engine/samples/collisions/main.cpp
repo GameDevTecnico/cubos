@@ -6,6 +6,7 @@
 
 #include <cubos/engine/collisions/broad_phase/potentially_colliding_with.hpp>
 #include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/narrow_phase/colliding_with.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
@@ -66,7 +67,7 @@ int main()
     cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
         state.a = commands.create()
                       .add(Collider{})
-                      .add(CapsuleCollisionShape{{0.5F, 1.0F}})
+                      .add(BoxCollisionShape{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
@@ -116,7 +117,7 @@ int main()
     cubos.system("check collisions")
         .tagged("updated")
         .after("cubos.collisions.broad")
-        .call([](Query<Entity, PotentiallyCollidingWith&, Entity> query, State& state) {
+        .call([](Query<Entity, CollidingWith&, Entity> query, State& state) {
             for (auto [ent1, colliding, ent2] : query)
             {
                 if ((ent1 == state.a && ent2 == state.b) || (ent1 == state.b && ent2 == state.a))
