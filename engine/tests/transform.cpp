@@ -106,8 +106,8 @@ TEST_CASE("cubos::engine::transformPlugin")
         cubos.startupSystem("create parent and child entities with Position, Rotation and Scale")
             .call([](Commands cmds) {
                 auto child = cmds.create().add(Position{{1.0F, 0.0F, 0.0F}}).entity();
-                auto parent = cmds.create().add(Position{{2.0F, 0.0F, 0.0F}}).entity();
-                auto grandparent = cmds.create().add(Position{{3.0F, 0.0F, 0.0F}}).entity();
+                auto parent = cmds.create().add(Position{{3.0F, 0.0F, 0.0F}}).entity();
+                auto grandparent = cmds.create().add(Position{{5.0F, 0.0F, 0.0F}}).entity();
 
                 cmds.relate(child, parent, ChildOf{});
                 cmds.relate(parent, grandparent, ChildOf{});
@@ -121,7 +121,7 @@ TEST_CASE("cubos::engine::transformPlugin")
                     if (position.vec.x == doctest::Approx(1.0F))
                     {
                         auto point = localToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-                        CHECK(point.x == doctest::Approx(6.0F));
+                        CHECK(point.x == doctest::Approx(9.0F));
                         CHECK(point.y == doctest::Approx(0.0F));
                         CHECK(point.z == doctest::Approx(0.0F));
                         CHECK(point.w == doctest::Approx(1.0F));
@@ -133,25 +133,25 @@ TEST_CASE("cubos::engine::transformPlugin")
                         CHECK(point.z == doctest::Approx(0.0F));
                         CHECK(point.w == doctest::Approx(1.0F));
                     }
-                    else if (position.vec.x == doctest::Approx(2.0F))
+                    else if (position.vec.x == doctest::Approx(3.0F))
                     {
                         auto point = localToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-                        CHECK(point.x == doctest::Approx(5.0F));
+                        CHECK(point.x == doctest::Approx(8.0F));
                         CHECK(point.y == doctest::Approx(0.0F));
                         CHECK(point.z == doctest::Approx(0.0F));
                         CHECK(point.w == doctest::Approx(1.0F));
 
                         REQUIRE(localToParent);
                         point = localToParent->mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-                        CHECK(point.x == doctest::Approx(2.0F));
+                        CHECK(point.x == doctest::Approx(3.0F));
                         CHECK(point.y == doctest::Approx(0.0F));
                         CHECK(point.z == doctest::Approx(0.0F));
                         CHECK(point.w == doctest::Approx(1.0F));
                     }
-                    else if (position.vec.x == doctest::Approx(3.0F))
+                    else if (position.vec.x == doctest::Approx(5.0F))
                     {
                         auto point = localToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-                        CHECK(point.x == doctest::Approx(3.0F));
+                        CHECK(point.x == doctest::Approx(5.0F));
                         CHECK(point.y == doctest::Approx(0.0F));
                         CHECK(point.z == doctest::Approx(0.0F));
                         CHECK(point.w == doctest::Approx(1.0F));
