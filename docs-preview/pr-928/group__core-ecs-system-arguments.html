@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/entity/manager.hpp file | CUBOS. Docs</title>
+  <title>Core &raquo; ECS &raquo; System &raquo; System arguments module | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,43 +46,69 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_3764e76d8ec4e739fc24b5bb90adc3af.html">entity</a>/</span>manager.hpp <span class="m-thin">file</span>
-        </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager</a>.</p>
+          <span class="m-breadcrumb"><a href="group__core.html">Core</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__core-ecs.html">ECS</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__core-ecs-system.html">System</a> &raquo;</span>
+          System arguments <span class="m-thin">module</span></h1>
+        <p>Contains types and fetcher specializations for system argument types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
+            <dt>file <a href="commands_8hpp.html" class="m-doc">commands.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Commands</a>.</dd>
+            <dt>file <a href="pipe_8hpp.html" class="m-doc">pipe.hpp</a></dt>
+            <dd>Resource <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe</a>.</dd>
+            <dt>file <a href="reader_8hpp.html" class="m-doc">reader.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EventReader</a>.</dd>
+            <dt>file <a href="writer_8hpp.html" class="m-doc">writer.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EventWriter</a>.</dd>
+            <dt>file <a href="query_8hpp.html" class="m-doc">query.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Query</a>.</dd>
+            <dt>file <a href="resources_8hpp.html" class="m-doc">resources.hpp</a></dt>
+            <dd>Resource system argument specializations.</dd>
+            <dt>file <a href="system_2arguments_2world_8hpp.html" class="m-doc">world.hpp</a></dt>
+            <dd>World system argument specializations.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager.html" class="m-doc">cubos::core::ecs::EntityManager</a>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">cubos::core::ecs::Commands</a>
             </dt>
-            <dd>Internal type which holds and manages entities and their component masks.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to write ECS commands and execute them at a later time.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">cubos::core::ecs::EntityManager::Iterator</a>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">cubos::core::ecs::EventPipe</a>
             </dt>
-            <dd>Used to iterate over all entities in a manager with a certain component mask.</dd>
+            <dd>Resource which stores events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">cubos::core::ecs::EventReader</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> arguments used to read events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">cubos::core::ecs::EventWriter</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which allows the system to send events of type <code>T</code> to other systems.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::core::ecs::Query</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which holds the result of a query over all entities in world which match the given arguments.</dd>
           </dl>
         </section>
       </div>

@@ -71,7 +71,7 @@
             <dt>module <a href="group__core-data.html" class="m-doc">Data</a></dt>
             <dd>Provides filesystem and serialization utilities.</dd>
             <dt>module <a href="group__core-ecs.html" class="m-doc">ECS</a></dt>
-            <dd>Entity Component System library.</dd>
+            <dd>Entity Component <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> library.</dd>
             <dt>module <a href="group__core-geom.html" class="m-doc">Geometry</a></dt>
             <dd>Provides geometry utilities.</dd>
             <dt>module <a href="group__core-gl.html" class="m-doc">Graphics</a></dt>
@@ -187,6 +187,12 @@
               ...)</span>
             </dt>
             <dd>Asserts that a condition is true, aborting the program if it is not.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#gaf13ab8923b051abcc334b9f32453d02b" class="m-doc">CUBOS_ASSERT_IMP</a>(</span><span class="m-doc-wrap">cond,
+              cons,
+              ...)</span>
+            </dt>
+            <dd>Asserts that an implication is true, aborting the program if it is not.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="#ga604b5aae9d864dfd7b5afebbc914f696" class="m-doc">CUBOS_DEBUG_ASSERT</a>(</span><span class="m-doc-wrap">cond,
               ...)</span>
@@ -467,6 +473,34 @@
                 <tr>
                   <td style="width: 1%">cond</td>
                   <td>Condition to assert.</td>
+                </tr>
+                <tr>
+                  <td>...</td>
+                  <td>Optional format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gaf13ab8923b051abcc334b9f32453d02b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#gaf13ab8923b051abcc334b9f32453d02b" class="m-doc-self">CUBOS_ASSERT_IMP</a>(</span><span class="m-doc-wrap">cond,
+              cons,
+              ...)</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="log_8hpp.html">&lt;core/log.hpp&gt;</a></div>
+            </h3>
+            <p>Asserts that an implication is true, aborting the program if it is not.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cond</td>
+                  <td>Implication condition.</td>
+                </tr>
+                <tr>
+                  <td>cons</td>
+                  <td>Implication consequence.</td>
                 </tr>
                 <tr>
                   <td>...</td>
