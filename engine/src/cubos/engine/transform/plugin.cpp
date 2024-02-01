@@ -101,18 +101,9 @@ void cubos::engine::transformPlugin(Cubos& cubos)
         .call([](Query<LocalToWorld&, Opt<LocalToParent&>, const Position&, const Rotation&, const Scale&> query) {
             for (auto [localToWorld, localToParent, position, rotation, scale] : query)
             {
-                auto mat = glm::scale(glm::translate(localToWorld.mat, position.vec) * glm::toMat4(rotation.quat),
-                                      glm::vec3(scale.factor));
-
-                if (localToParent)
-                {
-                    localToParent->mat = mat;
-                }
-                else
-                {
-                    // No parent, so transform is relative to the world
-                    localToWorld.mat = mat;
-                }
+                auto& mat = localToParent ? localToParent->mat : localToWorld.mat;
+                mat = glm::scale(glm::translate(glm::mat4(1.0F), position.vec) * glm::toMat4(rotation.quat),
+                                 glm::vec3(scale.factor));
             }
         });
 
