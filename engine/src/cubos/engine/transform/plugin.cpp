@@ -11,7 +11,6 @@ void cubos::engine::transformPlugin(Cubos& cubos)
 
     cubos.system("add LocalToWorld to entities with Position")
         .tagged("cubos.transform.missing.local_to_world")
-        .before("cubos.transform.missing")
         .without<LocalToWorld>()
         .with<Position>()
         .call([](Commands cmds, Query<Entity> query) {
@@ -23,7 +22,6 @@ void cubos::engine::transformPlugin(Cubos& cubos)
 
     cubos.system("add LocalToWorld to entities with Rotation")
         .tagged("cubos.transform.missing.local_to_world")
-        .before("cubos.transform.missing")
         .without<LocalToWorld>()
         .with<Rotation>()
         .call([](Commands cmds, Query<Entity> query) {
@@ -35,7 +33,6 @@ void cubos::engine::transformPlugin(Cubos& cubos)
 
     cubos.system("add LocalToWorld to entities with Scale")
         .tagged("cubos.transform.missing.local_to_world")
-        .before("cubos.transform.missing")
         .without<LocalToWorld>()
         .with<Scale>()
         .call([](Commands cmds, Query<Entity> query) {
@@ -45,9 +42,10 @@ void cubos::engine::transformPlugin(Cubos& cubos)
             }
         });
 
+    cubos.tag("cubos.transform.missing.local_to_world").before("cubos.transform.missing");
+
     cubos.system("add Position to entities with LocalToWorld")
         .tagged("cubos.transform.missing")
-        .before("cubos.transform.update")
         .without<Position>()
         .with<LocalToWorld>()
         .call([](Commands cmds, Query<Entity> query) {
@@ -59,7 +57,6 @@ void cubos::engine::transformPlugin(Cubos& cubos)
 
     cubos.system("add Rotation to entities with LocalToWorld")
         .tagged("cubos.transform.missing")
-        .before("cubos.transform.update")
         .without<Rotation>()
         .with<LocalToWorld>()
         .call([](Commands cmds, Query<Entity> query) {
@@ -71,7 +68,6 @@ void cubos::engine::transformPlugin(Cubos& cubos)
 
     cubos.system("add Scale to entities with LocalToWorld")
         .tagged("cubos.transform.missing")
-        .before("cubos.transform.update")
         .without<Scale>()
         .with<LocalToWorld>()
         .call([](Commands cmds, Query<Entity> query) {
@@ -80,6 +76,8 @@ void cubos::engine::transformPlugin(Cubos& cubos)
                 cmds.add(e, Scale{});
             }
         });
+
+    cubos.tag("cubos.transform.missing").before("cubos.transform.update");
 
     cubos.system("update LocalToWorld")
         .tagged("cubos.transform.update")
