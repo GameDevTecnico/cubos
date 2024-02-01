@@ -20,15 +20,16 @@ namespace cubos::engine
     /// @ingroup engine
     /// @brief Adds transform components which assign positions, rotations and scaling to entities.
     ///
-    /// This plugin operates on entities with a @ref LocalToWorld component and any combination of
-    /// the @ref Position, @ref Rotation and @ref Scale components. For example, if you have an
-    /// entity which doesn't need rotation, but has a position and a scale, you do not need to add
-    /// the @ref Rotation component, and its transform will still be updated.
+    /// This plugin operates on entities with @ref LocalToWorld and  @ref LocalToParent components, and any combination
+    /// of the @ref Position, @ref Rotation and @ref Scale components. For example, if you have an entity which doesn't
+    /// need rotation, but has a position and a scale, you do not need to add the @ref Rotation component, and its
+    /// transform will still be updated.
     ///
     /// @note Any entity with either a @ref Position, @ref Rotation or @ref Scale component
     /// automatically gets a @ref LocalToWorld component.
     ///
     /// ## Components
+    /// - @ref LocalToParent - holds the local to parent transform matrix.
     /// - @ref LocalToWorld - holds the local to world transform matrix.
     /// - @ref Position - holds the position of an entity.
     /// - @ref Rotation - holds the rotation of an entity.

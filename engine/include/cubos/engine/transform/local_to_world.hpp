@@ -13,13 +13,11 @@ namespace cubos::engine
     /// @brief Component which stores the transformation matrix of an entity, from local to world
     /// space.
     ///
-    /// @note This component is written to by the @ref transform-plugin "transform plugin", and
-    /// it only makes sense to modify it manually if its not accompanied by the other transform
-    /// components.
+    /// @note This component is written to by the @ref transform-plugin "transform plugin", thus it never makes sense to
+    /// write to it manually.
     ///
-    /// @sa Position Applies a translation to this matrix.
-    /// @sa Rotation Applies a rotation to this matrix.
-    /// @sa Scale Applies a scaling to this matrix.
+    /// @sa The value is calculated from the @ref LocalToParent component and the parent's @ref LocalToWorld, if there's
+    /// any.
     /// @ingroup transform-plugin
     struct LocalToWorld
     {
