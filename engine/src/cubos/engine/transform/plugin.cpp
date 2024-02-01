@@ -77,6 +77,20 @@ void cubos::engine::transformPlugin(Cubos& cubos)
             }
         });
 
+    cubos.system("add LocalToParent to entities with LocalToWord and ChildOf other entity with LocalToWorld")
+        .tagged("cubos.transform.missing")
+        .entity()
+        .without<LocalToParent>()
+        .with<LocalToWorld>()
+        .related<ChildOf>()
+        .with<LocalToWorld>()
+        .call([](Commands cmds, Query<Entity> query) {
+            for (auto [e] : query)
+            {
+                cmds.add(e, LocalToParent{});
+            }
+        });
+
     cubos.tag("cubos.transform.missing").before("cubos.transform.update");
 
     cubos.system("update LocalToWorld")
