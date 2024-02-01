@@ -8,8 +8,8 @@
 #include <unordered_set>
 #include <vector>
 
+#include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
-#include <cubos/core/ecs/entity/manager.hpp>
 
 #include <cubos/engine/prelude.hpp>
 
