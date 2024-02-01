@@ -84,7 +84,6 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/ecs/entity/entity.cpp"
     "src/cubos/core/ecs/entity/hash.cpp"
-    "src/cubos/core/ecs/entity/manager.cpp"
     "src/cubos/core/ecs/entity/archetype_graph.cpp"
     "src/cubos/core/ecs/entity/archetype_id.cpp"
     "src/cubos/core/ecs/entity/pool.cpp"
@@ -96,9 +95,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/table/sparse_relation/table.cpp"
     "src/cubos/core/ecs/table/sparse_relation/registry.cpp"
     "src/cubos/core/ecs/table/tables.cpp"
-
-    "src/cubos/core/ecs/component/storage.cpp"
-    "src/cubos/core/ecs/component/manager.cpp"
 
     "src/cubos/core/ecs/system/access.cpp"
     "src/cubos/core/ecs/system/system.cpp"
