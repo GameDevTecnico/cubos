@@ -168,13 +168,15 @@ namespace cubos::engine
         std::vector<std::shared_ptr<Gizmo>> viewGizmos;   ///< Queued gizmos to be drawn in viewport space.
         std::vector<std::shared_ptr<Gizmo>> screenGizmos; ///< Queued gizmos to be drawn in screen space.
 
+        bool mLocking; ///< Whether the mouse has just now been pressed.
+
     private:
         /// @brief Adds a gizmo into the corresponding vector.
         /// @param gizmo Gizmo to be added.
         /// @param space Space in which the gizmo will be drawn.
         void push(const std::shared_ptr<Gizmo>& gizmo, const Space& space);
 
-        std::hash<std::string> mHasher; ///< Hash function to convert string ids into integers.
+        static uint32_t mHasher(const std::string& id); ///< Hash function to convert string ids into integers.
 
         glm::vec3 mColor; ///< Currently set color.
 

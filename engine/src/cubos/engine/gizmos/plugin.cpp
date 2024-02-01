@@ -6,6 +6,7 @@
 
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -23,7 +24,7 @@ using namespace cubos::engine;
 
 static void iterateGizmos(std::vector<std::shared_ptr<Gizmos::Gizmo>>& gizmosVector,
                           const std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>>& cameras,
-                          GizmosRenderer& gizmosRenderer, const DeltaTime& deltaTime)
+                          GizmosRenderer& gizmosRenderer, ScreenPicker& screenPicker, const DeltaTime& deltaTime)
 {
     std::vector<std::size_t> toRemove;
 
@@ -42,7 +43,7 @@ static void iterateGizmos(std::vector<std::shared_ptr<Gizmos::Gizmo>>& gizmosVec
 
             // Id
             gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.idPipeline);
-            gizmosRenderer.renderDevice->setFramebuffer(gizmosRenderer.idFramebuffer);
+            gizmosRenderer.renderDevice->setFramebuffer(screenPicker.framebuffer());
 
             gizmosRenderer.idPipeline->getBindingPoint("gizmo")->setConstant(gizmo.id);
 
@@ -186,6 +187,7 @@ static std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>> getScreenInfo(c
 
 void cubos::engine::gizmosPlugin(Cubos& cubos)
 {
+    cubos.addPlugin(cubos::engine::screenPickerPlugin);
     cubos.addPlugin(cubos::engine::windowPlugin);
 
     cubos.addResource<Gizmos>();
@@ -194,16 +196,15 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
     cubos.startupSystem("initialize GizmosRenderer")
         .tagged("cubos.gizmos.init")
         .after("cubos.window.init")
-        .call([](GizmosRenderer& gizmosRenderer, const Window& window) {
-            gizmosRenderer.init(&window->renderDevice(), window->framebufferSize());
-        });
+        .call(
+            [](GizmosRenderer& gizmosRenderer, const Window& window) { gizmosRenderer.init(&window->renderDevice()); });
 
     cubos.system("process gizmos input")
         .tagged("cubos.gizmos.input")
         .after("cubos.window.poll")
         .before("cubos.gizmos.draw")
         .call([](GizmosRenderer& gizmosRenderer, Gizmos& gizmos, EventReader<WindowEvent> windowEvent) {
-            bool locking = false;
+            gizmos.mLocking = false;
             for (const auto& event : windowEvent)
             {
                 if (std::holds_alternative<MouseMoveEvent>(event))
@@ -221,74 +222,56 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                         }
                         else
                         {
-                            locking = true;
+                            gizmos.mLocking = true;
                         }
                     }
                 }
-                else if (std::holds_alternative<ResizeEvent>(event))
-                {
-                    gizmosRenderer.resizeTexture(std::get<ResizeEvent>(event).size);
-                }
             }
-
-            auto* texBuffer = new uint16_t[(std::size_t)gizmosRenderer.textureSize.x *
-                                           (std::size_t)gizmosRenderer.textureSize.y * 2U];
-
-            gizmosRenderer.idTexture->read(texBuffer);
-
-            int mouseX = gizmosRenderer.lastMousePosition.x;
-            int mouseY = gizmosRenderer.textureSize.y - gizmosRenderer.lastMousePosition.y - 1;
-
-            if (mouseX >= gizmosRenderer.textureSize.x || mouseX < 0)
-            {
-                delete[] texBuffer;
-                return;
-            }
-            if (mouseY >= gizmosRenderer.textureSize.y || mouseY < 0)
-            {
-                delete[] texBuffer;
-                return;
-            }
-
-            uint16_t r = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer.textureSize.x + mouseX) * 2U];
-            uint16_t g = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer.textureSize.x + mouseX) * 2U + 1U];
-
-            uint32_t id = (static_cast<uint32_t>(r) << 16U) | g;
-
-            gizmos.handleInput(id, gizmosRenderer.mousePressed);
-
-            if (locking)
-            {
-                gizmos.setLocked(id);
-            }
-
-            delete[] texBuffer;
         });
 
     cubos.system("draw gizmos")
         .tagged("cubos.gizmos.draw")
         .after("cubos.renderer.draw")
         .before("cubos.window.render")
-        .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, const ActiveCameras& activeCameras,
-                 const Window& window, const DeltaTime& deltaTime, Query<const LocalToWorld&, const Camera&> query) {
+        .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, ScreenPicker& screenPicker,
+                 const ActiveCameras& activeCameras, const Window& window, const DeltaTime& deltaTime,
+                 Query<const LocalToWorld&, const Camera&> query) {
             auto screenSize = window->framebufferSize();
 
             gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.drawPipeline);
             gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);
             gizmosRenderer.renderDevice->clearDepth(1.0F);
 
-            gizmosRenderer.renderDevice->setFramebuffer(gizmosRenderer.idFramebuffer);
-            gizmosRenderer.renderDevice->clearColor(0, 0, 0, 0);
-            gizmosRenderer.renderDevice->clearDepth(1.0F);
-
             auto worldInfo = getWorldInfo(query, activeCameras, screenSize);
-            iterateGizmos(gizmos.worldGizmos, worldInfo, gizmosRenderer, deltaTime);
+            iterateGizmos(gizmos.worldGizmos, worldInfo, gizmosRenderer, screenPicker, deltaTime);
 
             gizmosRenderer.renderDevice->setDepthStencilState(gizmosRenderer.noDepthCheckStencilState);
             auto viewInfo = getViewInfo(activeCameras, screenSize);
-            iterateGizmos(gizmos.viewGizmos, viewInfo, gizmosRenderer, deltaTime);
+            iterateGizmos(gizmos.viewGizmos, viewInfo, gizmosRenderer, screenPicker, deltaTime);
 
             auto screenInfo = getScreenInfo(screenSize);
-            iterateGizmos(gizmos.screenGizmos, screenInfo, gizmosRenderer, deltaTime);
+            iterateGizmos(gizmos.screenGizmos, screenInfo, gizmosRenderer, screenPicker, deltaTime);
+        });
+
+    cubos.system("do gizmos screen picking")
+        .tagged("cubos.gizmos.pick")
+        .after("cubos.gizmos.draw")
+        .call([](GizmosRenderer& gizmosRenderer, Gizmos& gizmos, const ScreenPicker& screenPicker) {
+            int mouseX = gizmosRenderer.lastMousePosition.x;
+            int mouseY = gizmosRenderer.lastMousePosition.y;
+
+            uint32_t id = screenPicker.at(mouseX, mouseY);
+            if (id < static_cast<uint32_t>(1 << 31))
+            {
+                // Not a gizmo, treat it like empty space
+                id = UINT32_MAX;
+            }
+
+            gizmos.handleInput(id, gizmosRenderer.mousePressed);
+
+            if (gizmos.mLocking)
+            {
+                gizmos.setLocked(id);
+            }
         });
 }

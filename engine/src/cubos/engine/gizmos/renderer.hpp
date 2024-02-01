@@ -31,28 +31,18 @@ namespace cubos::engine
         Primitive cutConePrimitive; ///< GL cut cone information.
         Primitive ringPrimitive;    ///< GL ring information.
 
-        glm::ivec2 textureSize;               ///< Size of the id texture.
-        cubos::core::gl::Texture2D idTexture; ///< Texture holding the ids of the gizmo that was drawn to each pixel.
-        cubos::core::gl::Framebuffer idFramebuffer; ///< Buffer holding the id texture.
-
         cubos::core::gl::DepthStencilState doDepthCheckStencilState; ///< Stencil State that performs depth checks.
         cubos::core::gl::DepthStencilState noDepthCheckStencilState; ///< Stencil State that ignores depth checks.
 
         /// @brief Sets up the render device to be used.
         /// @param renderDevice the current Render device being used.
-        void init(cubos::core::gl::RenderDevice* currentRenderDevice, glm::ivec2 size);
-
-        /// @brief Resizes the id texture.
-        /// @param size New size of the texture.
-        void resizeTexture(glm::ivec2 size);
+        void init(cubos::core::gl::RenderDevice* currentRenderDevice);
 
         glm::ivec2 lastMousePosition; ///< Cursor position.
         bool mousePressed;            ///< Whether or not the mouse left button is pressed.
 
     private:
         cubos::core::gl::Texture2D mDepthTexture;
-
-        void initIdTexture(glm::ivec2 size);
 
         void initIdPipeline();
         void initDrawPipeline();

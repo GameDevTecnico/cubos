@@ -5,33 +5,6 @@ using cubos::engine::GizmosRenderer;
 
 using namespace cubos::core::gl;
 
-void GizmosRenderer::initIdTexture(glm::ivec2 size)
-{
-    Texture2DDesc texDesc;
-    texDesc.width = (std::size_t)size.x;
-    texDesc.height = (std::size_t)size.y;
-    texDesc.usage = Usage::Dynamic;
-    texDesc.format = TextureFormat::RG16UInt;
-
-    idTexture = renderDevice->createTexture2D(texDesc);
-
-    texDesc.format = TextureFormat::Depth16;
-    mDepthTexture = renderDevice->createTexture2D(texDesc);
-
-    FramebufferDesc frameDesc;
-    frameDesc.targetCount = 1;
-
-    FramebufferDesc::FramebufferTarget target;
-    target.setTexture2DTarget(idTexture);
-
-    frameDesc.targets[0] = target;
-    frameDesc.depthStencil.setTexture2DTarget(mDepthTexture);
-
-    idFramebuffer = renderDevice->createFramebuffer(frameDesc);
-
-    textureSize = size;
-}
-
 void GizmosRenderer::initDrawPipeline()
 {
     auto vs = renderDevice->createShaderStage(Stage::Vertex, R"(
@@ -101,7 +74,7 @@ void GizmosRenderer::initIdPipeline()
     idPipeline = renderDevice->createShaderPipeline(vs, ps);
 }
 
-void GizmosRenderer::init(RenderDevice* currentRenderDevice, glm::ivec2 size)
+void GizmosRenderer::init(RenderDevice* currentRenderDevice)
 {
     renderDevice = currentRenderDevice;
 
@@ -112,8 +85,6 @@ void GizmosRenderer::init(RenderDevice* currentRenderDevice, glm::ivec2 size)
     dss.depth.enabled = false;
     dss.depth.writeEnabled = false;
     noDepthCheckStencilState = renderDevice->createDepthStencilState(dss);
-
-    initIdTexture(size);
 
     initDrawPipeline();
     initIdPipeline();
@@ -140,11 +111,6 @@ void GizmosRenderer::initLinePrimitive()
     linePrimitive.vb = renderDevice->createVertexBuffer(sizeof(verts), verts, Usage::Dynamic);
     linePrimitive.vaDesc.buffers[0] = linePrimitive.vb;
     linePrimitive.va = renderDevice->createVertexArray(linePrimitive.vaDesc);
-}
-
-void GizmosRenderer::resizeTexture(glm::ivec2 size)
-{
-    initIdTexture(size);
 }
 
 void GizmosRenderer::initBoxPrimitive()
