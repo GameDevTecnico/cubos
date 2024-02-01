@@ -16,10 +16,6 @@ using cubos::core::memory::UnorderedBimap;
 using cubos::core::reflection::ConstructibleTrait;
 using cubos::core::reflection::Type;
 
-Blueprint::Blueprint() = default;
-
-Blueprint::Blueprint(Blueprint&& other) noexcept = default;
-
 Entity Blueprint::create(std::string name)
 {
     CUBOS_ASSERT(!mBimap.containsRight(name), "An entity with the name '{}' already exists on the blueprint", name);

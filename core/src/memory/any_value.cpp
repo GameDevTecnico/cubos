@@ -46,6 +46,16 @@ AnyValue::AnyValue(AnyValue&& other) noexcept
     other.mValue = nullptr;
 }
 
+AnyValue::AnyValue(const AnyValue& other) noexcept
+    : AnyValue{*other.mType}
+{
+    CUBOS_ASSERT(mType->has<ConstructibleTrait>(), "Type must be constructible");
+    const auto& trait = mType->get<ConstructibleTrait>();
+    CUBOS_ASSERT(trait.hasCopyConstruct(), "Type must be copy constructible");
+
+    trait.copyConstruct(get(), other.get());
+}
+
 AnyValue AnyValue::defaultConstruct(const Type& type) noexcept
 {
     CUBOS_ASSERT(type.has<ConstructibleTrait>(), "Type must be constructible");
