@@ -15,6 +15,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        float factor; ///< Uniform scale factor of the entity.
+        float factor{1.0F}; ///< Uniform scale factor of the entity.
     };
 } // namespace cubos::engine
