@@ -83,6 +83,14 @@ void Gizmos::push(const std::shared_ptr<Gizmo>& gizmo, const Space& space)
     }
 }
 
+uint32_t Gizmos::mHasher(const std::string& id)
+{
+    uint32_t hash = static_cast<uint32_t>(std::hash<std::string>{}(id));
+    // Set 32nd bit to distinguish from entities
+    hash |= static_cast<uint32_t>(1 << 31);
+    return hash;
+}
+
 void Gizmos::drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan, Space space)
 {
     push(std::make_shared<LineGizmo>((uint32_t)mHasher(id), from, to, mColor, lifespan), space);

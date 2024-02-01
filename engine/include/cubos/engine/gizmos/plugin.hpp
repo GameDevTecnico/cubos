@@ -27,8 +27,11 @@ namespace cubos::engine
     ///   before `cubos.gizmos.draw`.
     /// - `cubos.gizmos.draw` - queued gizmos are rendered to the window, after `cubos.renderer.draw` and
     ///   before `cubos.window.render`.
+    /// - `cubos.gizmos.pick` - the ScreenPicker resource is accessed to detect gizmos at mouse coordinates, after
+    /// `cubos.gizmos.draw`
     ///
     /// ## Dependencies
+    /// - @ref screen-picker-plugin
     /// - @ref window-plugin
 
     /// @brief Plugin entry function.

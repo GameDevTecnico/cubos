@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Switch to new system syntax (#896).
 - Bump `glad` from `d08b1aa` to `73eaae0`.
 - Bump `json` from `v3.11.2` to `v3.11.3`.
+- Change Gizmo plugin to use the Screen picker plugin (#870).
 
 ### Deprecated
 
