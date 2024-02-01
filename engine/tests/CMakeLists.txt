@@ -4,6 +4,7 @@
 add_executable(
     cubos-engine-tests
     main.cpp
+    transform.cpp
 )
 
 target_link_libraries(cubos-engine-tests cubos-engine doctest::doctest)
