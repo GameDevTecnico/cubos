@@ -12,6 +12,7 @@
 
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
+using cubos::core::memory::AnyValue;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
 
@@ -24,39 +25,63 @@ void tesseratos::entityInspectorPlugin(Cubos& cubos)
     cubos.addPlugin(entitySelectorPlugin);
     cubos.addPlugin(toolboxPlugin);
 
-    cubos.system("show Entity Inspector UI").tagged("cubos.imgui").call([](World& world) {
-        if (!world.write<Toolbox>().get().isOpen("Entity Inspector"))
-        {
-            return;
-        }
-
-        ImGui::Begin("Entity Inspector");
-        if (!ImGui::IsWindowCollapsed())
-        {
-            auto selection = world.read<EntitySelector>().get().selection;
-
-            if (!selection.isNull() && world.isAlive(selection))
+    cubos.system("show Entity Inspector UI")
+        .tagged("cubos.imgui")
+        .call([](World& world, Toolbox& toolbox, const EntitySelector& entitySelector, DataInspector& dataInspector) {
+            if (!toolbox.isOpen("Entity Inspector"))
             {
-                ImGui::Text("Entity %d selected", selection.index);
-                ImGui::BeginTable("showEntity", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
-                auto dataInspector = world.write<DataInspector>();
+                return;
+            }
 
-                ImGui::TableNextRow();
-
-                for (auto [type, value] : world.components(selection))
+            ImGui::Begin("Entity Inspector");
+            if (!ImGui::IsWindowCollapsed())
+            {
+                if (!entitySelector.selection.isNull() && world.isAlive(entitySelector.selection))
                 {
-                    if (dataInspector.get().edit(type->name(), *type, value))
+                    ImGui::Text("Entity %d selected", entitySelector.selection.index);
+                    ImGui::Separator();
+
+                    if (ImGui::Button("Add Component"))
                     {
-                        // ...
+                        ImGui::OpenPopup("Select Component Type");
+                    }
+
+                    if (ImGui::BeginPopup("Select Component Type"))
+                    {
+                        for (auto [type, name] : world.types().components())
+                        {
+                            if (ImGui::Button(name.c_str()))
+                            {
+                                auto value = AnyValue::defaultConstruct(*type);
+                                world.components(entitySelector.selection).add(value.type(), value.get());
+                                ImGui::CloseCurrentPopup();
+                            }
+                        }
+
+                        ImGui::EndPopup();
+                    }
+
+                    const Type* removed = nullptr;
+                    for (auto [type, value] : world.components(entitySelector.selection))
+                    {
+                        ImGui::SeparatorText(type->name().c_str());
+                        dataInspector.edit(*type, value);
+                        if (ImGui::Button("Remove Component"))
+                        {
+                            removed = type;
+                        }
+                    }
+
+                    if (removed != nullptr)
+                    {
+                        world.components(entitySelector.selection).remove(*removed);
                     }
                 }
-                ImGui::EndTable();
+                else
+                {
+                    ImGui::Text("No entity selected");
+                }
             }
-            else
-            {
-                ImGui::Text("No entity selected");
-            }
-        }
-        ImGui::End();
-    });
+            ImGui::End();
+        });
 }
