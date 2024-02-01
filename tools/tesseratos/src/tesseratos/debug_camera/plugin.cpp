@@ -31,6 +31,8 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
     cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(toolboxPlugin);
 
+    cubos.addResource<DebugCameraInfo>();
+
     cubos.startupSystem("create Debug Camera").call([](Commands commands, DebugCameraInfo& debugCamera) {
         debugCamera.ent = commands.create().add(Camera{}).add(Position{{}}).entity();
     });
@@ -67,6 +69,4 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
 
             ImGui::End();
         });
-
-    cubos.addResource<DebugCameraInfo>();
 }
