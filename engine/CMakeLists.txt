@@ -21,6 +21,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/cubos/engine/imgui/data_inspector.cpp"
 
 	"src/cubos/engine/transform/plugin.cpp"
+	"src/cubos/engine/transform/child_of.cpp"
 	"src/cubos/engine/transform/local_to_world.cpp"
 	"src/cubos/engine/transform/position.cpp"
 	"src/cubos/engine/transform/rotation.cpp"

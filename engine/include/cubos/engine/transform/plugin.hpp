@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cubos/engine/prelude.hpp>
+#include <cubos/engine/transform/child_of.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/position.hpp>
 #include <cubos/engine/transform/rotation.hpp>
@@ -32,6 +33,9 @@ namespace cubos::engine
     /// - @ref Position - holds the position of an entity.
     /// - @ref Rotation - holds the rotation of an entity.
     /// - @ref Scale - holds the scaling of an entity.
+    ///
+    /// ## Relations
+    /// - @ref ChildOf - tree like relation which indicates an entity is a child of another.
     ///
     /// ## Tags
     /// - `cubos.transform.update` - the @ref LocalToWorld components are updated with the
