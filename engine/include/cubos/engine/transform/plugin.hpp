@@ -42,8 +42,8 @@ namespace cubos::engine
     /// ## Tags
     /// - `cubos.transform.missing.local_to_world` - the @ref LocalToWorld components are added to entities with @ref
     /// Position, @ref Rotation or @ref Scale components.
-    /// - `cubos.transform.missing` - the @ref Position, @ref Rotation and @ref Scale components are added to entities
-    /// with @ref LocalToWorld components.
+    /// - `cubos.transform.missing` - the @ref Position, @ref Rotation, @ref Scale and possibly @ref LocalToParent
+    /// components are added to entities with @ref LocalToWorld components.
     /// - `cubos.transform.update` - the @ref LocalToWorld components are updated with the information from the @ref
     /// Position, @ref Rotation and @ref Scale components.
 
