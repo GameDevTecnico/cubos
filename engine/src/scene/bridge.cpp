@@ -1,5 +1,6 @@
 #include <cubos/core/data/des/json.hpp>
 #include <cubos/core/data/fs/file_system.hpp>
+#include <cubos/core/data/ser/json.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
@@ -11,6 +12,7 @@
 #include <cubos/engine/scene/scene.hpp>
 
 using cubos::core::data::JSONDeserializer;
+using cubos::core::data::JSONSerializer;
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::Entity;
 using cubos::core::memory::AnyValue;
@@ -244,12 +246,40 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
     return true;
 }
 
-bool SceneBridge::saveToFile(const Assets& /*assets*/, const AnyAsset& /*handle*/, Stream& /*stream*/)
+bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
 {
-    // TODO: figure out how to do this.
-    // One of the problems is finding out exactly what was overriden in sub-scenes.
-    // One way to solve it would be to have a way to compare entities between blueprints, maybe
-    // with a hash?
-    CUBOS_CRITICAL("SceneBridge::save not implemented");
-    return false;
+    auto scene = assets.read<Scene>(handle);
+    JSONSerializer ser{};
+    auto json = nlohmann::json::object();
+
+    auto importJson = nlohmann::json::object();
+    for (const auto& [name, subHandle] : scene->imports)
+    {
+        importJson.emplace(name.c_str(), uuids::to_string(subHandle.getId()));
+    }
+    json.push_back({"imports", importJson});
+
+    auto entitiesJson = nlohmann::json::object();
+    for (const auto& [entity, name] : scene->blueprint.GetEntities())
+    {
+        if (name.find(".") == std::string::npos)
+        {
+            auto entityJson = nlohmann::json::object();
+            for (auto& [type, components] : scene->blueprint.GetComponents())
+            {
+                if (!components.contains(entity))
+                {
+                    continue;
+                }
+                ser.write(components[entity].type(), components[entity].get());
+                entityJson.emplace(type->name().c_str(), ser.output());
+            }
+
+            entitiesJson.emplace(name.c_str(), entityJson);
+        }
+    }
+    json.push_back({"entities", entitiesJson});
+
+    stream.print(json.dump(2));
+    return true;
 }

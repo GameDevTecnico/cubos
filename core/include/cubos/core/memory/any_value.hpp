@@ -25,6 +25,10 @@ namespace cubos::core::memory
         /// @param other Value.
         AnyValue(AnyValue&& other) noexcept;
 
+        /// @brief Copy constructs.
+        /// @param other Value.
+        AnyValue(const AnyValue& other) noexcept;
+
         /// @brief Move assignment.
         /// @param other Value.
         AnyValue& operator=(AnyValue&& other) noexcept;

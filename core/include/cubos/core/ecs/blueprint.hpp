@@ -49,13 +49,6 @@ namespace cubos::core::ecs
         /// @param relation Relation.
         using Relate = void (*)(void* userData, Entity fromEntity, Entity toEntity, memory::AnyValue relation);
 
-        /// @brief Constructs.
-        Blueprint();
-
-        /// @brief Move constructs.
-        /// @param other Blueprint to move from.
-        Blueprint(Blueprint&& other) noexcept;
-
         /// @brief Creates a new entity in the blueprint and returns it.
         ///
         /// An entity with the same name must not exist. The name must be @ref validEntityName
@@ -166,10 +159,23 @@ namespace cubos::core::ecs
         /// @return Whether the name is valid.
         static bool validEntityName(const std::string& name);
 
-    private:
         template <typename T>
         using EntityMap = std::unordered_map<Entity, T, EntityHash>;
 
+        memory::UnorderedBimap<Entity, std::string, EntityHash> GetEntities() const
+        {
+            return mBimap;
+        }
+        memory::TypeMap<EntityMap<memory::AnyValue>> GetComponents() const
+        {
+            return mComponents;
+        }
+        memory::TypeMap<EntityMap<EntityMap<memory::AnyValue>>> GetRelations() const
+        {
+            return mRelations;
+        }
+
+    private:
         /// @brief Maps entities to their names.
         memory::UnorderedBimap<Entity, std::string, EntityHash> mBimap;
 
