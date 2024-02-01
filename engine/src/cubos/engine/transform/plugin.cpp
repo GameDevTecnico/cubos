@@ -9,17 +9,75 @@ void cubos::engine::transformPlugin(Cubos& cubos)
     cubos.addComponent<LocalToParent>();
     cubos.addRelation<ChildOf>();
 
-    cubos.system("add LocalToWorld where needed")
-        .before("cubos.transform.update")
-        .call([](Commands cmds,
-                 Query<Entity, Opt<const LocalToWorld&>, Opt<const Position&>, Opt<const Rotation&>, Opt<const Scale&>>
-                     query) {
-            for (auto [entity, localToWorld, position, rotation, scale] : query)
+    cubos.system("add LocalToWorld to entities with Position")
+        .tagged("cubos.transform.missing.local_to_world")
+        .before("cubos.transform.missing")
+        .without<LocalToWorld>()
+        .with<Position>()
+        .call([](Commands cmds, Query<Entity> query) {
+            for (auto [e] : query)
             {
-                if (!localToWorld && (position || rotation || scale))
-                {
-                    cmds.add(entity, LocalToWorld{});
-                }
+                cmds.add(e, LocalToWorld{});
+            }
+        });
+
+    cubos.system("add LocalToWorld to entities with Rotation")
+        .tagged("cubos.transform.missing.local_to_world")
+        .before("cubos.transform.missing")
+        .without<LocalToWorld>()
+        .with<Rotation>()
+        .call([](Commands cmds, Query<Entity> query) {
+            for (auto [e] : query)
+            {
+                cmds.add(e, LocalToWorld{});
+            }
+        });
+
+    cubos.system("add LocalToWorld to entities with Scale")
+        .tagged("cubos.transform.missing.local_to_world")
+        .before("cubos.transform.missing")
+        .without<LocalToWorld>()
+        .with<Scale>()
+        .call([](Commands cmds, Query<Entity> query) {
+            for (auto [e] : query)
+            {
+                cmds.add(e, LocalToWorld{});
+            }
+        });
+
+    cubos.system("add Position to entities with LocalToWorld")
+        .tagged("cubos.transform.missing")
+        .before("cubos.transform.update")
+        .without<Position>()
+        .with<LocalToWorld>()
+        .call([](Commands cmds, Query<Entity> query) {
+            for (auto [e] : query)
+            {
+                cmds.add(e, Position{});
+            }
+        });
+
+    cubos.system("add Rotation to entities with LocalToWorld")
+        .tagged("cubos.transform.missing")
+        .before("cubos.transform.update")
+        .without<Rotation>()
+        .with<LocalToWorld>()
+        .call([](Commands cmds, Query<Entity> query) {
+            for (auto [e] : query)
+            {
+                cmds.add(e, Rotation{});
+            }
+        });
+
+    cubos.system("add Scale to entities with LocalToWorld")
+        .tagged("cubos.transform.missing")
+        .before("cubos.transform.update")
+        .without<Scale>()
+        .with<LocalToWorld>()
+        .call([](Commands cmds, Query<Entity> query) {
+            for (auto [e] : query)
+            {
+                cmds.add(e, Scale{});
             }
         });
 

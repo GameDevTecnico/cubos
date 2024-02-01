@@ -9,6 +9,7 @@
 
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/transform/child_of.hpp>
+#include <cubos/engine/transform/local_to_parent.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/position.hpp>
 #include <cubos/engine/transform/rotation.hpp>
@@ -39,8 +40,12 @@ namespace cubos::engine
     /// - @ref ChildOf - tree like relation which indicates an entity is a child of another.
     ///
     /// ## Tags
-    /// - `cubos.transform.update` - the @ref LocalToWorld components are updated with the
-    ///    information from the @ref Position, @ref Rotation and @ref Scale components.
+    /// - `cubos.transform.missing.local_to_world` - the @ref LocalToWorld components are added to entities with @ref
+    /// Position, @ref Rotation or @ref Scale components.
+    /// - `cubos.transform.missing` - the @ref Position, @ref Rotation and @ref Scale components are added to entities
+    /// with @ref LocalToWorld components.
+    /// - `cubos.transform.update` - the @ref LocalToWorld components are updated with the information from the @ref
+    /// Position, @ref Rotation and @ref Scale components.
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
