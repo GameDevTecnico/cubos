@@ -36,7 +36,8 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
     cubos.addResource<DebugCameraInfo>();
 
     cubos.startupSystem("create Debug Camera").call([](Commands commands, DebugCameraInfo& debugCamera) {
-        debugCamera.ent = commands.create().add(Camera{}).add(Position{{}}).add(cubos::engine::FreeCameraController{}).entity();
+        debugCamera.ent =
+            commands.create().add(Camera{}).add(Position{{}}).add(cubos::engine::FreeCameraController{}).entity();
     });
 
     cubos.system("show Debug Camera UI")
