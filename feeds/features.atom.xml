@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>CUBOS.</title><link href="https://gamedevtecnico.github.io/cubos/" rel="alternate"></link><link href="https://gamedevtecnico.github.io/cubos/feeds/all.atom.xml" rel="self"></link><id>https://gamedevtecnico.github.io/cubos/</id><updated>2024-01-31T16:30:00+00:00</updated><entry><title>Hello Relations</title><link href="https://gamedevtecnico.github.io/cubos/hello-relations.html" rel="alternate"></link><published>2024-01-31T16:30:00+00:00</published><updated>2024-01-31T16:30:00+00:00</updated><author><name>Ricardo Antunes</name></author><id>tag:gamedevtecnico.github.io,2024-01-31:/cubos/hello-relations.html</id><summary type="html">&lt;p&gt;Adding entity relations to our ECS&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CUBOS. - Features</title><link href="https://gamedevtecnico.github.io/cubos/" rel="alternate"></link><link href="https://gamedevtecnico.github.io/cubos/feeds/features.atom.xml" rel="self"></link><id>https://gamedevtecnico.github.io/cubos/</id><updated>2024-01-31T16:30:00+00:00</updated><entry><title>Hello Relations</title><link href="https://gamedevtecnico.github.io/cubos/hello-relations.html" rel="alternate"></link><published>2024-01-31T16:30:00+00:00</published><updated>2024-01-31T16:30:00+00:00</updated><author><name>Ricardo Antunes</name></author><id>tag:gamedevtecnico.github.io,2024-01-31:/cubos/hello-relations.html</id><summary type="html">&lt;p&gt;Adding entity relations to our ECS&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Hello! This past month I've been tinkering with the &lt;em&gt;ECS&lt;/em&gt;, which arguably is the core foundation of CUBOS.
 We structure all of our engine code around it. You can learn more about the concept in our &lt;a href="https://gamedevtecnico.github.io/cubos/docs/features-ecs.html"&gt;ECS guide&lt;/a&gt;!&lt;/p&gt;
 &lt;section id="the-problem"&gt;
@@ -254,18 +254,4 @@ But these are not essential features, and can be added later on.&lt;/p&gt;
 &lt;p&gt;With this out of the way, my focus will now shift to the renderer plugin. I've been wanting to tackle ray tracing for a while now, and I think it's time to give it a shot.
 We'll also be working on a new demo soon, so stay tuned for that!&lt;/p&gt;
 &lt;/section&gt;
-</content><category term="Features"></category><category term="Core"></category><category term="ECS"></category></entry><entry><title>Hello World</title><link href="https://gamedevtecnico.github.io/cubos/hello-world.html" rel="alternate"></link><published>2023-11-10T10:06:00+00:00</published><updated>2023-11-10T10:06:00+00:00</updated><author><name>CUBOS. Team</name></author><id>tag:gamedevtecnico.github.io,2023-11-10:/cubos/hello-world.html</id><summary type="html">&lt;p&gt;This is CUBOS!&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Hello everyone, and welcome to the very first post of the CUBOS engine blog. This is where we'll be posting updates and information about CUBOS.
-Let's start today by talking about what CUBOS is!&lt;/p&gt;
-&lt;p&gt;CUBOS is an open-source game engine with two core features: everything is made out of voxels, and the engine is built on an entity component system.
-You can find the &lt;a href="https://github.com/GameDevTecnico/cubos"&gt;source right here&lt;/a&gt;.
-Up to this point, our work has built a powerful core and an array of plugins that give CUBOS a lot of the necessary functionalities to make a complete game.
-We have also been working on a suite of tools called Tesseratos that you can plug into any game you're making with CUBOS. to help with development.
-It provides, among other things, editors for scenes, entities, palette.&lt;/p&gt;
-&lt;p&gt;So, what are we working on?&lt;/p&gt;
-&lt;p&gt;Right now, our current goal is to have an engine that can feasibly be used in game jams.
-This means building some important engine plugins that we are missing, such as the physics plugin, and to create more tools to allow swift development, like a transform gizmo so you can move objects around with your mouse.&lt;/p&gt;
-&lt;p&gt;Thank you for your interest in our engine.
-Come with us, as we keep you updated on the developments, adventures and trials CUBOS goes through.&lt;/p&gt;
-&lt;p&gt;See you soon!&lt;/p&gt;
-</content><category term="Meta"></category></entry></feed>
+</content><category term="Features"></category><category term="Core"></category><category term="ECS"></category></entry></feed>
