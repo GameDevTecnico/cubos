@@ -8,3 +8,4 @@ Include a summary of the changes here.
 - [ ] Evaluate impact on the documentation.
 - [ ] Ensure test coverage.
 - [ ] Write new samples.
+- [ ] Add entry to the changelog's unreleased section.
