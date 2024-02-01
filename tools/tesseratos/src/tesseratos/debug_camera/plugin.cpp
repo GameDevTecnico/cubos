@@ -5,6 +5,7 @@
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/utils/free_camera_controller/plugin.hpp>
 
 #include <tesseratos/debug_camera/plugin.hpp>
 #include <tesseratos/toolbox/plugin.hpp>
@@ -30,11 +31,12 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(toolboxPlugin);
+    cubos.addPlugin(cubos::engine::freeCameraControllerPlugin);
 
     cubos.addResource<DebugCameraInfo>();
 
     cubos.startupSystem("create Debug Camera").call([](Commands commands, DebugCameraInfo& debugCamera) {
-        debugCamera.ent = commands.create().add(Camera{}).add(Position{{}}).entity();
+        debugCamera.ent = commands.create().add(Camera{}).add(Position{{}}).add(cubos::engine::FreeCameraController{}).entity();
     });
 
     cubos.system("show Debug Camera UI")
