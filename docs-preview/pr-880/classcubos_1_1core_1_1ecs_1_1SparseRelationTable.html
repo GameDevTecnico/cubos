@@ -91,9 +91,19 @@
             </dt>
             <dd>Removes all relations from the given index.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af8227fa17b7a094316b2ed39e7126527" class="m-doc">moveFrom</a>(</span><span class="m-doc-wrap">uint32_t from,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other) -&gt; std::size_t</span>
+            </dt>
+            <dd>Moves all relations with the given from index to another table.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af3fe2b03306c7f8366001aa2a0018ff6" class="m-doc">eraseTo</a>(</span><span class="m-doc-wrap">uint32_t to) -&gt; std::size_t</span>
             </dt>
             <dd>Removes all relations to the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a980d63d6c4c566628008d5943322ca14" class="m-doc">moveTo</a>(</span><span class="m-doc-wrap">uint32_t to,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other) -&gt; std::size_t</span>
+            </dt>
+            <dd>Moves all relations with the given to index to another table.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aba71a230e5bedda22fa4bda39e6fc6ab" class="m-doc">contains</a>(</span><span class="m-doc-wrap">uint32_t from,
               uint32_t to) const -&gt; bool</span>
@@ -103,7 +113,7 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a863ece5c1934e3c56636bdefd9dcd580" class="m-doc">row</a>(</span><span class="m-doc-wrap">uint32_t from,
               uint32_t to) const -&gt; std::size_t</span>
             </dt>
-            <dd>Gets the row of the relation with the given indices.</dd>
+            <dd>Gets the row of the relation with the given indices, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af06be559783488d43c05d9aed99abc25" class="m-doc">at</a>(</span><span class="m-doc-wrap">std::size_t row) -&gt; void*</span>
             </dt>
@@ -112,6 +122,28 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a500967c793b30a9cf75ee5fbe465df10" class="m-doc">at</a>(</span><span class="m-doc-wrap">std::size_t row) const -&gt; const void*</span>
             </dt>
             <dd>Get the relation at the given row.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a059c1e36f0eab1ff220aabe16e1f48f5" class="m-doc">indices</a>(</span><span class="m-doc-wrap">std::size_t row,
+              uint32_t&amp; from,
+              uint32_t&amp; to) const</span>
+            </dt>
+            <dd>Get the entity indices at the given row.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a88129d3a95f09f15ef3b728c10fb9761" class="m-doc">firstFrom</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Gets the first row with the given from index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aad5a8216b4fc7d8a1dd01bd869469431" class="m-doc">firstTo</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Gets the first row with the given to index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae05e06bc98a573d5ed20178e38e50777" class="m-doc">nextFrom</a>(</span><span class="m-doc-wrap">std::size_t row) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Gets the next row with the same from index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a613c56fbe837c7419a0a9e63129e813d" class="m-doc">nextTo</a>(</span><span class="m-doc-wrap">std::size_t row) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Gets the next row with the same to index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab207f33a67184565190d1122fb38ffb5" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
@@ -238,6 +270,34 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="af8227fa17b7a094316b2ed39e7126527"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8227fa17b7a094316b2ed39e7126527" class="m-doc-self">moveFrom</a>(</span><span class="m-doc-wrap">uint32_t from,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other)</span></span>
+            </h3>
+            <p>Moves all relations with the given from index to another table.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From index.</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                  <td>Other table. Must have the same relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>How many relations were erased.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="af3fe2b03306c7f8366001aa2a0018ff6"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3fe2b03306c7f8366001aa2a0018ff6" class="m-doc-self">eraseTo</a>(</span><span class="m-doc-wrap">uint32_t to)</span></span>
@@ -256,7 +316,35 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>How many relations were erased.</td>
+                  <td>How many relations were moved.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a980d63d6c4c566628008d5943322ca14"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a980d63d6c4c566628008d5943322ca14" class="m-doc-self">moveTo</a>(</span><span class="m-doc-wrap">uint32_t to,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other)</span></span>
+            </h3>
+            <p>Moves all relations with the given to index to another table.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">to</td>
+                  <td>To index index.</td>
+                </tr>
+                <tr>
+                  <td>other</td>
+                  <td>Other table. Must have the same relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>How many relations were moved.</td>
                 </tr>
               </tfoot>
             </table>
@@ -294,7 +382,7 @@
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a863ece5c1934e3c56636bdefd9dcd580" class="m-doc-self">row</a>(</span><span class="m-doc-wrap">uint32_t from,
               uint32_t to) const</span></span>
             </h3>
-            <p>Gets the row of the relation with the given indices.</p>
+            <p>Gets the row of the relation with the given indices, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -364,6 +452,126 @@
               </tfoot>
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>row</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a059c1e36f0eab1ff220aabe16e1f48f5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a059c1e36f0eab1ff220aabe16e1f48f5" class="m-doc-self">indices</a>(</span><span class="m-doc-wrap">std::size_t row,
+              uint32_t&amp; from,
+              uint32_t&amp; to) const</span></span>
+            </h3>
+            <p>Get the entity indices at the given row.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">row</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Row.html" class="m-doc">Row</a> to get.</td>
+                </tr>
+                <tr>
+                  <td>from&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>From index.</td>
+                </tr>
+                <tr>
+                  <td>to&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>To index.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>row</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a88129d3a95f09f15ef3b728c10fb9761"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88129d3a95f09f15ef3b728c10fb9761" class="m-doc-self">firstFrom</a>(</span><span class="m-doc-wrap">uint32_t index) const</span></span>
+            </h3>
+            <p>Gets the first row with the given from index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>From index.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>First row with the given from index.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aad5a8216b4fc7d8a1dd01bd869469431"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aad5a8216b4fc7d8a1dd01bd869469431" class="m-doc-self">firstTo</a>(</span><span class="m-doc-wrap">uint32_t index) const</span></span>
+            </h3>
+            <p>Gets the first row with the given to index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>To index.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>First row with the given to index.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae05e06bc98a573d5ed20178e38e50777"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae05e06bc98a573d5ed20178e38e50777" class="m-doc-self">nextFrom</a>(</span><span class="m-doc-wrap">std::size_t row) const</span></span>
+            </h3>
+            <p>Gets the next row with the same from index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">row</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Row.html" class="m-doc">Row</a> to get the next from.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Next row with the same from index.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a613c56fbe837c7419a0a9e63129e813d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a613c56fbe837c7419a0a9e63129e813d" class="m-doc-self">nextTo</a>(</span><span class="m-doc-wrap">std::size_t row) const</span></span>
+            </h3>
+            <p>Gets the next row with the same to index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">row</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Row.html" class="m-doc">Row</a> to get the next to.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Next row with the same to index.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
           <section class="m-doc-details" id="ab207f33a67184565190d1122fb38ffb5"><div>
             <h3>

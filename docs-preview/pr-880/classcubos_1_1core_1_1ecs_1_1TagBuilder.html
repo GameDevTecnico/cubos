@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::AnySystemWrapper class | CUBOS. Docs</title>
+  <title>cubos::core::ecs::TagBuilder class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,22 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_8hpp.html">&lt;core/ecs/system/system.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename R&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>AnySystemWrapper <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>TagBuilder <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="cubos_8hpp.html">&lt;core/ecs/cubos.hpp&gt;</a></div>
         </h1>
-        <p>Base class for system wrappers.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">R</td>
-              <td>Return type of the wrapped system.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Used to chain configurations related to tags.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -78,59 +66,40 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a1d8bd9661e88eafd66c3ea544953ad35" class="m-doc">AnySystemWrapper</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp;&amp; info)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a38a5bb91e0b3bbe86af23587469f9310" class="m-doc">TagBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">core::<wbr />ecs::<wbr />Dispatcher</a>&amp; dispatcher,
+              std::vector&lt;std::string&gt;&amp; tags)</span>
             </dt>
-            <dd>Constructs.</dd>
+            <dd>Construct.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a5c655c3d2468ad11eeb901aca44efb26" class="m-doc">prepare</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3c3dabce03dfe31aa30f00d034f7964c" class="m-doc">before</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
-            <dd>Prepares the system for being executed on the given world.</dd>
+            <dd>Sets the current tag to be executed before another tag.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aeefc3c9edb71ac0369e17791c159ac1d" class="m-doc">call</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commands) -&gt; R <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac39df564c8b2b41dc64e5afc74074d02" class="m-doc">after</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
-            <dd>Calls the wrapped system with parameters taken from the given <code>world</code>.</dd>
+            <dd>Sets the current tag to be executed after another tag.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afeaf4d02e4b839599e1d5683ff44cdda" class="m-doc">info</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp;</span>
+              <div class="m-doc-template">template&lt;typename F&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5f5205b3f0454e0315cc01fc012408c0" class="m-doc">runIf</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
-            <dd>Gets information about the requirements of the system.</dd>
+            <dd>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a1d8bd9661e88eafd66c3ea544953ad35"><div>
+          <section class="m-doc-details" id="a38a5bb91e0b3bbe86af23587469f9310"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename R&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />AnySystemWrapper&lt;R&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d8bd9661e88eafd66c3ea544953ad35" class="m-doc-self">AnySystemWrapper</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp;&amp; info)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38a5bb91e0b3bbe86af23587469f9310" class="m-doc-self">TagBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">core::<wbr />ecs::<wbr />Dispatcher</a>&amp; dispatcher,
+              std::vector&lt;std::string&gt;&amp; tags)</span></span>
             </h3>
-            <p>Constructs.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">info</td>
-                  <td>Information about the wrapped system.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a5c655c3d2468ad11eeb901aca44efb26"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename R&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />AnySystemWrapper&lt;R&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5c655c3d2468ad11eeb901aca44efb26" class="m-doc-self">prepare</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Prepares the system for being executed on the given world.</p>
+            <p>Construct.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -138,57 +107,93 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">world</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to prepare the system for.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Requires exclusive access to the world and must be called before calling the system.</p>
-          </div></section>
-          <section class="m-doc-details" id="aeefc3c9edb71ac0369e17791c159ac1d"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename R&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">R cubos::<wbr />core::<wbr />ecs::<wbr />AnySystemWrapper&lt;R&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeefc3c9edb71ac0369e17791c159ac1d" class="m-doc-self">call</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commands) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Calls the wrapped system with parameters taken from the given <code>world</code>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">world</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> used by the system.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>.</td>
                 </tr>
                 <tr>
-                  <td>commands</td>
-                  <td>Buffer where commands can be submitted to.</td>
+                  <td>dispatcher</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a> being configured.</td>
+                </tr>
+                <tr>
+                  <td>tags</td>
+                  <td>Vector which stores the tags for this dispatcher.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Return value of the system.</td>
+                  <td>Reference to this object, for chaining.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Can only be called after calling <a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a5c655c3d2468ad11eeb901aca44efb26" class="m-doc">prepare()</a> on the same <code>world</code>.</p>
           </div></section>
-          <section class="m-doc-details" id="afeaf4d02e4b839599e1d5683ff44cdda"><div>
+          <section class="m-doc-details" id="a3c3dabce03dfe31aa30f00d034f7964c"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename R&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />AnySystemWrapper&lt;R&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afeaf4d02e4b839599e1d5683ff44cdda" class="m-doc-self">info</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3c3dabce03dfe31aa30f00d034f7964c" class="m-doc-self">before</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
-            <p>Gets information about the requirements of the system.</p>
+            <p>Sets the current tag to be executed before another tag.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td>Tag to be executed before.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Information about the system.</td>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac39df564c8b2b41dc64e5afc74074d02"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac39df564c8b2b41dc64e5afc74074d02" class="m-doc-self">after</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+            </h3>
+            <p>Sets the current tag to be executed after another tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td>Tag to be executed after.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5f5205b3f0454e0315cc01fc012408c0"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename F&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5f5205b3f0454e0315cc01fc012408c0" class="m-doc-self">runIf</a>(</span><span class="m-doc-wrap">F func)</span></span>
+            </h3>
+            <p>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Condition function.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
                 </tr>
               </tfoot>
             </table>

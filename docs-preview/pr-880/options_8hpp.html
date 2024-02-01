@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::SystemInfo struct | CUBOS. Docs</title>
+  <title>core/ecs/system/options.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,97 +46,40 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemInfo <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_8hpp.html">&lt;core/ecs/system/system.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_1849b6590c20a7c40f18c0337f505edf.html">system</a>/</span>options.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Describes a system.</p>
+        <p>Struct <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />SystemOptions</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a804c5ac349872cff1c6b58cc5cc49ba3" class="m-doc">valid</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
-            </dt>
-            <dd>Checks if this system is valid.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a05714b34c0c00bdce62301f97ea831dc" class="m-doc">compatible</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; other) const -&gt; bool</span>
-            </dt>
-            <dd>Checks if this system is compatible with another system.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
+            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
           </dl>
         </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
-            <dt id="ad91a46336fc587a201e66abce7fecfd1">
-              bool <a href="#ad91a46336fc587a201e66abce7fecfd1" class="m-doc-self">usesCommands</a>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">cubos::core::ecs::SystemOptions</a>
             </dt>
-            <dd>Whether the system uses commands or not.</dd>
-            <dt id="ae79212b873a5a1ae535432ea635142ca">
-              bool <a href="#ae79212b873a5a1ae535432ea635142ca" class="m-doc-self">usesWorld</a>
-            </dt>
-            <dd>Whether the system uses the world directly.</dd>
-            <dt id="a1e9f6205413590bf8f58b5ffa6843634">
-              std::unordered_set&lt;std::type_index&gt; <a href="#a1e9f6205413590bf8f58b5ffa6843634" class="m-doc-self">resourcesRead</a>
-            </dt>
-            <dd>Set of resources the system reads.</dd>
-            <dt id="a0360aa1a99f951dc4ac5a69a222649a2">
-              std::unordered_set&lt;std::type_index&gt; <a href="#a0360aa1a99f951dc4ac5a69a222649a2" class="m-doc-self">resourcesWritten</a>
-            </dt>
-            <dd>Set of resources the system writes.</dd>
+            <dd>Contains extra options for a specific system argument.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a804c5ac349872cff1c6b58cc5cc49ba3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SystemInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a804c5ac349872cff1c6b58cc5cc49ba3" class="m-doc-self">valid</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Checks if this system is valid.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Whether the system is valid.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>A system may be invalid, if, for example, it both reads and writes the same resource.</p>
-          </div></section>
-          <section class="m-doc-details" id="a05714b34c0c00bdce62301f97ea831dc"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SystemInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a05714b34c0c00bdce62301f97ea831dc" class="m-doc-self">compatible</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; other) const</span></span>
-            </h3>
-            <p>Checks if this system is compatible with another system.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>Other system.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether the systems are compatible.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Two systems are compatible if they can be executed in parallel. This means that they must not, for example, write to the same resource or component.</p>
-          </div></section>
         </section>
       </div>
     </div>

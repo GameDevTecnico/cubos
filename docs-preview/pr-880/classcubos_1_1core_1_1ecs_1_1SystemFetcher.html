@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::QueryAccess struct | CUBOS. Docs</title>
+  <title>cubos::core::ecs::SystemFetcher class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,75 +46,132 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>QueryAccess <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="access_8hpp.html">&lt;core/ecs/query/access.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_2fetcher_8hpp.html">&lt;core/ecs/system/fetcher.hpp&gt;</a></div>
+          <div class="m-doc-template">template&lt;typename T&gt;</div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemFetcher <span class="m-thin">class</span>
         </h1>
-        <p>Describes the types of data a query accesses.</p>
+        <p>Type meant to be specialized which implements for each argument type the necessary logic to extract it from the world.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">T</td>
+              <td>Argument type.</td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Used to determine if systems conflict with each other.</p>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a1980969a6b6c644e222b3bb2c372d890">
+              static bool <a href="#a1980969a6b6c644e222b3bb2c372d890" class="m-doc-self">ConsumesOptions</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd>Indicates whether this argument type consumes system options.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aa1ff80f1c2f67efeb02e5b7a4b19561c" class="m-doc">SystemFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a>&amp; options)</span>
+            </dt>
+            <dd>Called when a system is constructed for the first time.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ab745151f59632ebf244dd04b1f41afb6" class="m-doc">insert</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a566abe2156d2898e356dda05fec6b8c4" class="m-doc">analyze</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; access) const</span>
             </dt>
-            <dd>Adds a type identifier to the set of types the query accesses.</dd>
+            <dd>Called to determine the access patterns of the argument.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adcfefb7339367d77b3f644c50d01a172" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a>&amp; other) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a31c74f7b8fb6dd529a8942bfe2238575" class="m-doc">fetch</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmdBuffer) -&gt; T</span>
             </dt>
-            <dd>Checks if this access patterns intersect with the given ones.</dd>
+            <dd>Called each system run to fetch the data from the world.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ab745151f59632ebf244dd04b1f41afb6"><div>
+          <section class="m-doc-details" id="aa1ff80f1c2f67efeb02e5b7a4b19561c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryAccess::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab745151f59632ebf244dd04b1f41afb6" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id)</span></span>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa1ff80f1c2f67efeb02e5b7a4b19561c" class="m-doc-self">SystemFetcher</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              const <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a>&amp; options)</span></span>
             </h3>
-            <p>Adds a type identifier to the set of types the query accesses.</p>
+            <p>Called when a system is constructed for the first time.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">id</td>
-                  <td>Type identifier.</td>
+                  <td style="width: 1%">world</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to extract data from.</td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td>Argument options.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="adcfefb7339367d77b3f644c50d01a172"><div>
+          <section class="m-doc-details" id="a566abe2156d2898e356dda05fec6b8c4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />QueryAccess::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adcfefb7339367d77b3f644c50d01a172" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a>&amp; other) const</span></span>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a566abe2156d2898e356dda05fec6b8c4" class="m-doc-self">analyze</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; access) const</span></span>
             </h3>
-            <p>Checks if this access patterns intersect with the given ones.</p>
+            <p>Called to determine the access patterns of the argument.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">other</td>
-                  <td>Other query access patterns.</td>
+                  <td style="width: 1%">access&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Access patterns to add info to.</td>
                 </tr>
               </tbody>
-              <tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a31c74f7b8fb6dd529a8942bfe2238575"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a31c74f7b8fb6dd529a8942bfe2238575" class="m-doc-self">fetch</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmdBuffer)</span></span>
+            </h3>
+            <p>Called each system run to fetch the data from the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
-                  <th>Returns</th>
-                  <td>Whether they intersect.</td>
+                  <td style="width: 1%">cmdBuffer</td>
+                  <td>Command buffer.</td>
                 </tr>
-              </tfoot>
+              </tbody>
             </table>
           </div></section>
         </section>

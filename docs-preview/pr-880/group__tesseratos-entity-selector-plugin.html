@@ -53,7 +53,9 @@
           <h3>Contents</h3>
           <ul>
             <li><a href="#autotoc_md113">Resources</a></li>
-            <li><a href="#autotoc_md114">Dependencies</a></li>
+            <li><a href="#autotoc_md114">Startup tags</a></li>
+            <li><a href="#autotoc_md115">Tags</a></li>
+            <li><a href="#autotoc_md116">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -63,7 +65,7 @@
             </li>
           </ul>
         </nav>
-<p>This plugins exists to reduce coupling between plugins. For example, a plugin which allows selecting entities through a ImGui window only needs to depend on this plugin, instead of having to know about all the plugins which care about it. The same applies in the other direction.</p><section id="autotoc_md113"><h3><a href="#autotoc_md113">Resources</a></h3><ul><li><a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> - identifies the currently selected entity.</li></ul></section><section id="autotoc_md114"><h3><a href="#autotoc_md114">Dependencies</a></h3><ul><li><a href="group__tesseratos-toolbox-plugin.html" class="m-doc">Toolbox</a></li></ul></section>
+<p>This plugins exists to reduce coupling between plugins. For example, a plugin which allows selecting entities through a ImGui window only needs to depend on this plugin, instead of having to know about all the plugins which care about it. The same applies in the other direction.</p><section id="autotoc_md113"><h3><a href="#autotoc_md113">Resources</a></h3><ul><li><a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> - identifies the currently selected entity.</li></ul></section><section id="autotoc_md114"><h3><a href="#autotoc_md114">Startup tags</a></h3><ul><li><code>cubos.entitySelector.init</code> - the <a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> resource is initialized</li></ul></section><section id="autotoc_md115"><h3><a href="#autotoc_md115">Tags</a></h3><ul><li><code>cubos.entitySelector.input</code> - entity selection is handled, after <code>cubos.window.poll</code> and <code>cubos.renderer.draw</code></li></ul></section><section id="autotoc_md116"><h3><a href="#autotoc_md116">Dependencies</a></h3><ul><li><a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></li><li><a href="group__screen-picker-plugin.html" class="m-doc">ScreenPicker</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -75,7 +77,7 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gab3beb47ff453dbd64fb0786652490859" class="m-doc">entitySelectorPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#gab3beb47ff453dbd64fb0786652490859" class="m-doc">entitySelectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
@@ -84,7 +86,7 @@
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="gab3beb47ff453dbd64fb0786652490859"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gab3beb47ff453dbd64fb0786652490859" class="m-doc-self">entitySelectorPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span></span>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gab3beb47ff453dbd64fb0786652490859" class="m-doc-self">entitySelectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2include_2tesseratos_2entity__selector_2plugin_8hpp.html">&lt;tesseratos/entity_selector/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>

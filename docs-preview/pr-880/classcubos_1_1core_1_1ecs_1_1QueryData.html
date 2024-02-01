@@ -92,6 +92,10 @@
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4c075b5e0e50574cf34ec5c4c613e198" class="m-doc">accesses</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_set&lt;<a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>, <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">DataTypeIdHash</a>&gt;&amp;</span>
+            </dt>
+            <dd>Gets a set with the data types accessed by this query.</dd>
             <dt id="a83d6b2dea5bba22da35833291ea5c109">
               <span class="m-doc-wrap-bumper">void <a href="#a83d6b2dea5bba22da35833291ea5c109" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -104,6 +108,11 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a34a2d7c4358d4fd406cd3594fac61f53" class="m-doc">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
             </dt>
             <dd>Accesses the match for the given entity, if there is one.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af0559b5f3d0784e564d28a1658ccf071" class="m-doc">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> firstEntity,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> secondEntity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
+            </dt>
+            <dd>Accesses the match for the given entities, if there is one.</dd>
           </dl>
         </section>
         <section>
@@ -153,6 +162,23 @@
               </tbody>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a4c075b5e0e50574cf34ec5c4c613e198"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const std::unordered_set&lt;<a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>, <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">DataTypeIdHash</a>&gt;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c075b5e0e50574cf34ec5c4c613e198" class="m-doc-self">accesses</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets a set with the data types accessed by this query.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Data type set.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="afc9f479ab1f633208632b8c8892712e8"><div>
             <h3>
               <div class="m-doc-template">
@@ -191,7 +217,38 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Requested components, or nothing if the entity does not match the query.</td>
+                  <td>Requested data, or nothing if the entity does not match the query.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af0559b5f3d0784e564d28a1658ccf071"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />QueryData&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af0559b5f3d0784e564d28a1658ccf071" class="m-doc-self">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> firstEntity,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> secondEntity)</span></span>
+            </h3>
+            <p>Accesses the match for the given entities, if there is one.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">firstEntity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> for the first target.</td>
+                </tr>
+                <tr>
+                  <td>secondEntity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> for the second target.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Requested data, or nothing if the entities do not match the query.</td>
                 </tr>
               </tfoot>
             </table>

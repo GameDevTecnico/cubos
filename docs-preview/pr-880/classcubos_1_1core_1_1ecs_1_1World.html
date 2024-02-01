@@ -61,7 +61,7 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Internally, <a href="classcubos_1_1core_1_1ecs_1_1World.html#a23d21a46e982a60f3ac0f875abccb0d8" class="m-doc">components</a> are stored in abstract containers called <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&#x27;s.</p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p>Internally, <a href="classcubos_1_1core_1_1ecs_1_1World.html#a23d21a46e982a60f3ac0f875abccb0d8" class="m-doc">components</a> are stored in abstract containers called Storage&#x27;s.</p></aside>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -196,6 +196,30 @@
               <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) const -&gt; bool</span>
             </dt>
             <dd>Checks if there&#x27;s a relation of the given type between the two given entities.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b579235297c82f984a478f25ae27737" class="m-doc">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; void*</span>
+            </dt>
+            <dd>Gets a pointer to the relation value between the two given entities.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6f6971bf52fb5af3fda82ba059236369" class="m-doc">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const -&gt; const void*</span>
+            </dt>
+            <dd>Gets a pointer to the relation value between the two given entities.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a63b6dc0ad3e7ff9787bbac2909dd601a" class="m-doc">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) -&gt; T&amp;</span>
+            </dt>
+            <dd>Gets a reference to the relation value between the two given entities.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad1cb7d3000ee9eee43184cfa8cd95d7a" class="m-doc">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) const -&gt; const T&amp;</span>
+            </dt>
+            <dd>Gets a reference to the relation value between the two given entities.</dd>
           </dl>
         </section>
         <section>
@@ -228,7 +252,7 @@
               <tbody>
                 <tr>
                   <td>args</td>
-                  <td>Arguments of the constructor of the resource.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">Arguments</a> of the constructor of the resource.</td>
                 </tr>
               </tbody>
             </table>
@@ -839,6 +863,156 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a3b579235297c82f984a478f25ae27737"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b579235297c82f984a478f25ae27737" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Gets a pointer to the relation value between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to relation value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The relation must <a href="classcubos_1_1core_1_1ecs_1_1World.html#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">exist</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6f6971bf52fb5af3fda82ba059236369"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6f6971bf52fb5af3fda82ba059236369" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const</span></span>
+            </h3>
+            <p>Gets a pointer to the relation value between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to relation value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The relation must <a href="classcubos_1_1core_1_1ecs_1_1World.html#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">exist</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a63b6dc0ad3e7ff9787bbac2909dd601a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a63b6dc0ad3e7ff9787bbac2909dd601a" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to)</span></span>
+            </h3>
+            <p>Gets a reference to the relation value between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to relation value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The relation must <a href="classcubos_1_1core_1_1ecs_1_1World.html#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">exist</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad1cb7d3000ee9eee43184cfa8cd95d7a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad1cb7d3000ee9eee43184cfa8cd95d7a" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) const</span></span>
+            </h3>
+            <p>Gets a reference to the relation value between the two given entities.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>from</td>
+                  <td>From entity.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>To entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to relation value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The relation must <a href="classcubos_1_1core_1_1ecs_1_1World.html#a409e6c2f96e1ca77e1177280e73460fd" class="m-doc">exist</a>.</p>
           </div></section>
         </section>
       </div>
