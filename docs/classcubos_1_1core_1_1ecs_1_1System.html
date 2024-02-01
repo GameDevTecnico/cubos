@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::impl::SystemFetcher struct | CUBOS. Docs</title>
+  <title>cubos::core::ecs::System class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -48,9 +48,9 @@
         <h1>
           <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_8hpp.html">&lt;core/ecs/system/system.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs_1_1impl.html">impl</a>::<wbr/></span>SystemFetcher <span class="m-thin">struct</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>System <span class="m-thin">class</span>
         </h1>
-        <p>Fetches the requested data from a world.</p>
+        <p>Holds a system with a return type <code>T</code>.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -58,7 +58,7 @@
           <tbody>
             <tr>
               <td style="width: 1%">T</td>
-              <td>System argument type.</td>
+              <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> return type.</td>
             </tr>
           </tbody>
         </table>
@@ -68,74 +68,58 @@
             <li>
               Reference
               <ul>
-                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="afa7e52cefccc3181d3374d0a6f851221">
-              using <a href="#afa7e52cefccc3181d3374d0a6f851221" class="m-doc-self">Type</a> = char
-            </dt>
-            <dd>Type of the fetched data.</dd>
-          </dl>
-        </section>
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static void <a href="#a78db17ccc2f13c1cb1813e4ec406cd43" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; info)</span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a9983f846600cfe958fbef76f8ac63c26" class="m-doc">make</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              auto function,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a>&gt;&amp; options = {}) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a></span>
             </dt>
-            <dd>Adds the argument <code>T</code> to the given <code>info</code>.</dd>
+            <dd>Creates a new system for the given world with the given function and options.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a73b333f7c3d2d62d9aac47caef9608db" class="m-doc">prepare</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html#ae8a503fb2c9217f0eccf00bf143a2579" class="m-doc">State</a></span>
+              <span class="m-doc-wrap-bumper"><a href="#abf5d26910e0ac4158398656b8a704807" class="m-doc">System</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&amp;&amp; system) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Prepares the argument for being executed on the given <code>world</code>.</dd>
+            <dd>Move constructs.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#ac312938d7836e8a4337cee8f4db83c48" class="m-doc">fetch</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commands,
-              <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html#ae8a503fb2c9217f0eccf00bf143a2579" class="m-doc">State</a>&amp; state) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html#afa7e52cefccc3181d3374d0a6f851221" class="m-doc">Type</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6c61b81c8cc4af5386b7d64c43aad799" class="m-doc">run</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmdBuffer) -&gt; T</span>
             </dt>
-            <dd>Fetches the data from the given <code>world</code>.</dd>
+            <dd>Runs the system.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a939874ff69eaf0aa5a685225e95b1de5" class="m-doc">arg</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html#afa7e52cefccc3181d3374d0a6f851221" class="m-doc">Type</a>&amp;&amp; fetched) -&gt; T</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae294cee1956a9b8554b86726dcc0c89c" class="m-doc">access</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp;</span>
             </dt>
-            <dd>Converts the fetched data into the actual desired argument.</dd>
+            <dd>Gets a reference to the access patterns of the system.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a78db17ccc2f13c1cb1813e4ec406cd43"><div>
+          <section class="m-doc-details" id="a9983f846600cfe958fbef76f8ac63c26"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />ecs::<wbr />impl::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a78db17ccc2f13c1cb1813e4ec406cd43" class="m-doc-self">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; info)</span></span>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> cubos::<wbr />core::<wbr />ecs::<wbr />System&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9983f846600cfe958fbef76f8ac63c26" class="m-doc-self">make</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              auto function,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a>&gt;&amp; options = {})</span></span>
             </h3>
-            <p>Adds the argument <code>T</code> to the given <code>info</code>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">info&nbsp;<span class="m-label m-flat m-warning">out</span></td>
-                  <td>System information.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a73b333f7c3d2d62d9aac47caef9608db"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html#ae8a503fb2c9217f0eccf00bf143a2579" class="m-doc">State</a> cubos::<wbr />core::<wbr />ecs::<wbr />impl::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73b333f7c3d2d62d9aac47caef9608db" class="m-doc-self">prepare</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world)</span></span>
-            </h3>
-            <p>Prepares the argument for being executed on the given <code>world</code>.</p>
+            <p>Creates a new system for the given world with the given function and options.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -143,75 +127,79 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">world</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to prepare the argument for.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> the system will access.</td>
+                </tr>
+                <tr>
+                  <td>function</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> function, which should return <code>T</code>.</td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td>Options for the system arguments.</td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>State of the argument.</td>
-                </tr>
-              </tfoot>
             </table>
+<p>The first option is applied to the first argument which requests it, and the same for subsequent options. If there are more options than arguments which request them, aborts. Otherwise, if there are more arguments requesting options than supplied options, the remaining arguments are assigned default-value options.</p>
           </div></section>
-          <section class="m-doc-details" id="ac312938d7836e8a4337cee8f4db83c48"><div>
+          <section class="m-doc-details" id="abf5d26910e0ac4158398656b8a704807"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html#afa7e52cefccc3181d3374d0a6f851221" class="m-doc">Type</a> cubos::<wbr />core::<wbr />ecs::<wbr />impl::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac312938d7836e8a4337cee8f4db83c48" class="m-doc-self">fetch</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commands,
-              <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html#ae8a503fb2c9217f0eccf00bf143a2579" class="m-doc">State</a>&amp; state)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />System&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf5d26910e0ac4158398656b8a704807" class="m-doc-self">System</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&amp;&amp; system) <span class="m-label m-info">defaulted</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Fetches the data from the given <code>world</code>.</p>
+            <p>Move constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">world</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to fetch the data from.</td>
-                </tr>
-                <tr>
-                  <td>commands</td>
-                  <td>Buffer where commands can be submitted to.</td>
-                </tr>
-                <tr>
-                  <td>state</td>
-                  <td>State of the argument.</td>
+                  <td style="width: 1%">system</td>
+                  <td>Other system.</td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Fetched data.</td>
-                </tr>
-              </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a939874ff69eaf0aa5a685225e95b1de5"><div>
+          <section class="m-doc-details" id="a6c61b81c8cc4af5386b7d64c43aad799"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">static T cubos::<wbr />core::<wbr />ecs::<wbr />impl::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a939874ff69eaf0aa5a685225e95b1de5" class="m-doc-self">arg</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html#afa7e52cefccc3181d3374d0a6f851221" class="m-doc">Type</a>&amp;&amp; fetched)</span></span>
+              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />ecs::<wbr />System&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c61b81c8cc4af5386b7d64c43aad799" class="m-doc-self">run</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmdBuffer)</span></span>
             </h3>
-            <p>Converts the fetched data into the actual desired argument.</p>
+            <p>Runs the system.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">fetched</td>
-                  <td>Fetched data.</td>
+                  <td style="width: 1%">cmdBuffer</td>
+                  <td>Command buffer.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Actual argument.</td>
+                  <td>Return value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae294cee1956a9b8554b86726dcc0c89c"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />System&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae294cee1956a9b8554b86726dcc0c89c" class="m-doc-self">access</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets a reference to the access patterns of the system.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Access patterns.</td>
                 </tr>
               </tfoot>
             </table>

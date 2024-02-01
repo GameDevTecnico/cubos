@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::SystemInfo struct | CUBOS. Docs</title>
+  <title>Core &raquo; ECS &raquo; System &raquo; System arguments module | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,103 +46,70 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemInfo <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_8hpp.html">&lt;core/ecs/system/system.hpp&gt;</a></div>
-        </h1>
-        <p>Describes a system.</p>
+          <span class="m-breadcrumb"><a href="group__core.html">Core</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__core-ecs.html">ECS</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__core-ecs-system.html">System</a> &raquo;</span>
+          System arguments <span class="m-thin">module</span></h1>
+        <p>Contains types and fetcher specializations for system argument types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-static-methods">Public static functions</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-static-methods">
-          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
+          <dl class="m-doc">
+            <dt>file <a href="commands_8hpp.html" class="m-doc">commands.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Commands</a>.</dd>
+            <dt>file <a href="pipe_8hpp.html" class="m-doc">pipe.hpp</a></dt>
+            <dd>Resource <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe</a>.</dd>
+            <dt>file <a href="reader_8hpp.html" class="m-doc">reader.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EventReader</a>.</dd>
+            <dt>file <a href="writer_8hpp.html" class="m-doc">writer.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EventWriter</a>.</dd>
+            <dt>file <a href="query_8hpp.html" class="m-doc">query.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Query</a>.</dd>
+            <dt>file <a href="resources_8hpp.html" class="m-doc">resources.hpp</a></dt>
+            <dd>Resource system argument specializations.</dd>
+            <dt>file <a href="system_2arguments_2world_8hpp.html" class="m-doc">world.hpp</a></dt>
+            <dd>World system argument specializations.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a36393ec100afd3cd8d3c1632e590caf2" class="m-doc">valid</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">cubos::core::ecs::Commands</a>
             </dt>
-            <dd>Checks if this system is valid.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to write ECS commands and execute them at a later time.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a05714b34c0c00bdce62301f97ea831dc" class="m-doc">compatible</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; other) const -&gt; bool</span>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">cubos::core::ecs::EventPipe</a>
             </dt>
-            <dd>Checks if this system is compatible with another system.</dd>
+            <dd>Resource which stores events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">cubos::core::ecs::EventReader</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> arguments used to read events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">cubos::core::ecs::EventWriter</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which allows the system to send events of type <code>T</code> to other systems.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">cubos::core::ecs::Query</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which holds the result of a query over all entities in world which match the given arguments.</dd>
           </dl>
-        </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="ad91a46336fc587a201e66abce7fecfd1">
-              bool <a href="#ad91a46336fc587a201e66abce7fecfd1" class="m-doc-self">usesCommands</a>
-            </dt>
-            <dd>Whether the system uses commands or not.</dd>
-            <dt id="ae79212b873a5a1ae535432ea635142ca">
-              bool <a href="#ae79212b873a5a1ae535432ea635142ca" class="m-doc-self">usesWorld</a>
-            </dt>
-            <dd>Whether the system uses the world directly.</dd>
-            <dt id="a1e9f6205413590bf8f58b5ffa6843634">
-              std::unordered_set&lt;std::type_index&gt; <a href="#a1e9f6205413590bf8f58b5ffa6843634" class="m-doc-self">resourcesRead</a>
-            </dt>
-            <dd>Set of resources the system reads.</dd>
-            <dt id="a0360aa1a99f951dc4ac5a69a222649a2">
-              std::unordered_set&lt;std::type_index&gt; <a href="#a0360aa1a99f951dc4ac5a69a222649a2" class="m-doc-self">resourcesWritten</a>
-            </dt>
-            <dd>Set of resources the system writes.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a36393ec100afd3cd8d3c1632e590caf2"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />ecs::<wbr />SystemInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a36393ec100afd3cd8d3c1632e590caf2" class="m-doc-self">valid</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Checks if this system is valid.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Whether the system is valid.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>A system may be invalid, if, for example, it both reads and writes the same resource.</p>
-          </div></section>
-          <section class="m-doc-details" id="a05714b34c0c00bdce62301f97ea831dc"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SystemInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a05714b34c0c00bdce62301f97ea831dc" class="m-doc-self">compatible</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; other) const</span></span>
-            </h3>
-            <p>Checks if this system is compatible with another system.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>Other system.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether the systems are compatible.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Two systems are compatible if they can be executed in parallel. This means that they must not, for example, write to the same resource or component.</p>
-          </div></section>
         </section>
       </div>
     </div>

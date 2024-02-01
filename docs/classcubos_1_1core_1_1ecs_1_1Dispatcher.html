@@ -81,11 +81,11 @@
             </dt>
             <dd>Makes the current tag run before the given tag.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a841ee1085023e54b44e9b2976f71db06" class="m-doc">tagAddCondition</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;bool&gt;&gt; func)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a73674240a0312f477923d18cac0e0edb" class="m-doc">tagAddCondition</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;bool&gt; condition)</span>
             </dt>
             <dd>Adds a condition to the current tag.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a518623e4e8bfc4a483d9259f9f8bdb01" class="m-doc">addSystem</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;void&gt;&gt; func)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a4c899e81d143a9b6758eda41d450fa84" class="m-doc">addSystem</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;void&gt; system)</span>
             </dt>
             <dd>Adds a system, and sets it as the current system for further configuration.</dd>
             <dt>
@@ -101,16 +101,15 @@
             </dt>
             <dd>Sets the current system to run before the tag.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a89b4905977b15fd59bfa6bdf84a2fa1e" class="m-doc">systemAddCondition</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;bool&gt;&gt; func)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ad4d05d090cb063cadd36a78de6f5bfa5" class="m-doc">systemAddCondition</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;bool&gt; condition)</span>
             </dt>
             <dd>Adds a condition to the current system.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a0a892298f420498324f6af0ded49e2b2" class="m-doc">compileChain</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Compiles the call chain. Required before <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#af609121dc12f26ae53cf4e7fc853cd1f" class="m-doc">callSystems()</a> can be called.</dd>
+            <dd>Compiles the call chain. Required before <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a735d7d39e6411f49022da5fbef99cf34" class="m-doc">callSystems()</a> can be called.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af609121dc12f26ae53cf4e7fc853cd1f" class="m-doc">callSystems</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmds)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a735d7d39e6411f49022da5fbef99cf34" class="m-doc">callSystems</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmds)</span>
             </dt>
             <dd>Calls all systems in the compiled call chain. <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a0a892298f420498324f6af0ded49e2b2" class="m-doc">compileChain()</a> must be called prior to this.</dd>
           </dl>
@@ -185,9 +184,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a841ee1085023e54b44e9b2976f71db06"><div>
+          <section class="m-doc-details" id="a73674240a0312f477923d18cac0e0edb"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a841ee1085023e54b44e9b2976f71db06" class="m-doc-self">tagAddCondition</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;bool&gt;&gt; func)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73674240a0312f477923d18cac0e0edb" class="m-doc-self">tagAddCondition</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;bool&gt; condition)</span></span>
             </h3>
             <p>Adds a condition to the current tag.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -196,15 +195,15 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">func</td>
+                  <td style="width: 1%">condition</td>
                   <td>Condition to add.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a518623e4e8bfc4a483d9259f9f8bdb01"><div>
+          <section class="m-doc-details" id="a4c899e81d143a9b6758eda41d450fa84"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a518623e4e8bfc4a483d9259f9f8bdb01" class="m-doc-self">addSystem</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;void&gt;&gt; func)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c899e81d143a9b6758eda41d450fa84" class="m-doc-self">addSystem</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;void&gt; system)</span></span>
             </h3>
             <p>Adds a system, and sets it as the current system for further configuration.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -213,7 +212,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">func</td>
+                  <td style="width: 1%">system</td>
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">System</a> to add.</td>
                 </tr>
               </tbody>
@@ -270,9 +269,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a89b4905977b15fd59bfa6bdf84a2fa1e"><div>
+          <section class="m-doc-details" id="ad4d05d090cb063cadd36a78de6f5bfa5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a89b4905977b15fd59bfa6bdf84a2fa1e" class="m-doc-self">systemAddCondition</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>&lt;bool&gt;&gt; func)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad4d05d090cb063cadd36a78de6f5bfa5" class="m-doc-self">systemAddCondition</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;bool&gt; condition)</span></span>
             </h3>
             <p>Adds a condition to the current system.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -281,7 +280,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">func</td>
+                  <td style="width: 1%">condition</td>
                   <td>Condition.</td>
                 </tr>
               </tbody>
@@ -291,13 +290,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a892298f420498324f6af0ded49e2b2" class="m-doc-self">compileChain</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Compiles the call chain. Required before <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#af609121dc12f26ae53cf4e7fc853cd1f" class="m-doc">callSystems()</a> can be called.</p>
+            <p>Compiles the call chain. Required before <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a735d7d39e6411f49022da5fbef99cf34" class="m-doc">callSystems()</a> can be called.</p>
 <p>Takes all pending systems and determines their execution order.</p>
           </div></section>
-          <section class="m-doc-details" id="af609121dc12f26ae53cf4e7fc853cd1f"><div>
+          <section class="m-doc-details" id="a735d7d39e6411f49022da5fbef99cf34"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af609121dc12f26ae53cf4e7fc853cd1f" class="m-doc-self">callSystems</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmds)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a735d7d39e6411f49022da5fbef99cf34" class="m-doc-self">callSystems</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmds)</span></span>
             </h3>
             <p>Calls all systems in the compiled call chain. <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a0a892298f420498324f6af0ded49e2b2" class="m-doc">compileChain()</a> must be called prior to this.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -306,11 +304,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">world</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to call the systems in.</td>
-                </tr>
-                <tr>
-                  <td>cmds</td>
+                  <td style="width: 1%">cmds</td>
                   <td>Command buffer.</td>
                 </tr>
               </tbody>

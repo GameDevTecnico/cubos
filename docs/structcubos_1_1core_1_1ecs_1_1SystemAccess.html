@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::impl::Index struct | CUBOS. Docs</title>
+  <title>cubos::core::ecs::SystemAccess struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,27 +46,71 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_8hpp.html">&lt;core/ecs/system/system.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;class T, class Tuple&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs_1_1impl.html">impl</a>::<wbr/></span>Index <span class="m-thin">struct</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemAccess <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="access_8hpp.html">&lt;core/ecs/system/access.hpp&gt;</a></div>
         </h1>
-        <p>Used to get the index of a type in a tuple.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Type to get the index of.</td>
-            </tr>
-            <tr>
-              <td>Tuple</td>
-              <td>Tuple to search in.</td>
-            </tr>
-          </tbody>
-        </table>
-<p>Had to use this instead of std::apply due to a bug in MSVC :( Taken from <a href="https://stackoverflow.com/questions/18063451">https:/<wbr />/<wbr />stackoverflow.com/<wbr />questions/<wbr />18063451</a>.</p>
+        <p>Describes the types of data a system accesses.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>Used to determine if systems conflict with each other.</p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acd72d369d2a5e49ecdacaf72cb6fa91a" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; other) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if this access patterns intersect with the given ones.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a64d23e8126fa70bbfaee9e840f0ada13">
+              bool <a href="#a64d23e8126fa70bbfaee9e840f0ada13" class="m-doc-self">usesWorld</a>
+            </dt>
+            <dd>Whether the system accesses the world directly.</dd>
+            <dt id="aeefbab2dc921792dbd48375873545003">
+              std::unordered_set&lt;<a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>, <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">DataTypeIdHash</a>&gt; <a href="#aeefbab2dc921792dbd48375873545003" class="m-doc-self">dataTypes</a>
+            </dt>
+            <dd>Set of data types accessed by the system.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="acd72d369d2a5e49ecdacaf72cb6fa91a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SystemAccess::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acd72d369d2a5e49ecdacaf72cb6fa91a" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>&amp; other) const</span></span>
+            </h3>
+            <p>Checks if this access patterns intersect with the given ones.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other system access patterns.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether they intersect.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>
