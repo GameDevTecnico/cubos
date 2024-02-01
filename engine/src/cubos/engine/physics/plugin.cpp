@@ -56,8 +56,6 @@ static bool simulatePhysicsStep(PhysicsAccumulator& accumulator, const FixedDelt
 
 void cubos::engine::physicsPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(gravityPlugin);
-
     cubos.addResource<FixedDeltaTime>();
     cubos.addResource<Substeps>();
     cubos.addResource<PhysicsAccumulator>();
@@ -69,6 +67,8 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.addComponent<Mass>();
     cubos.addComponent<AccumulatedCorrection>();
     cubos.addComponent<PreviousPosition>();
+
+    cubos.addPlugin(gravityPlugin);
 
     // executed every frame
     cubos.system("increase fixed-step accumulator")
