@@ -6,6 +6,8 @@
 
 #include <string>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 namespace cubos::core::io
 {
     /// @brief Gamepad buttons.
@@ -100,3 +102,6 @@ namespace cubos::core::io
     /// @ingroup core-io
     GamepadAxis stringToGamepadAxis(const std::string& str);
 } // namespace cubos::core::io
+
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::GamepadButton);
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::GamepadAxis);
