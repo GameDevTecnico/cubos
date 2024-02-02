@@ -5,7 +5,6 @@ on:
     branches: [ main ]
 
 env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
 
 jobs:
@@ -20,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install xorg-dev libglu1-mesa-dev doxygen
+        sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11 doxygen
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -36,7 +35,6 @@ jobs:
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_DOCUMENTATION=ON
 
     - name: Build
-      # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target generate-docs
 
     - name: Deploy
