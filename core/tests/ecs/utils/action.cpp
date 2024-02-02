@@ -15,6 +15,27 @@ using cubos::core::ecs::TreeTrait;
 
 using namespace test::ecs;
 
+static std::string constructor(Entity entity)
+{
+    return "{" + std::to_string(entity.index) + ", " + std::to_string(entity.generation) + "}";
+}
+
+static std::string constructor(const Type& type)
+{
+    return "world.types().type(world.types().id(\"" + type.name() + "\"))";
+}
+
+static std::string constructor(const std::unordered_set<const Type*>& types)
+{
+    std::string result = "{";
+    for (const auto* type : types)
+    {
+        result += "&" + ::constructor(*type) + ", ";
+    }
+    result += "}";
+    return result;
+}
+
 static std::size_t randomIndex(std::size_t size)
 {
     if (size == 0)
@@ -30,9 +51,9 @@ Action* CreateAction::random(ExpectedWorld& /*expected*/)
     return new CreateAction();
 }
 
-std::string CreateAction::description() const
+std::string CreateAction::constructor() const
 {
-    return "Create";
+    return "CreateAction{}";
 }
 
 void CreateAction::test(World& world, ExpectedWorld& expected)
@@ -65,9 +86,9 @@ Action* DestroyAction::random(ExpectedWorld& expected)
     return new DestroyAction(it->first);
 }
 
-std::string DestroyAction::description() const
+std::string DestroyAction::constructor() const
 {
-    return "Destroy(" + std::to_string(mEntity.index) + "#" + std::to_string(mEntity.generation) + ")";
+    return "DestroyAction{" + ::constructor(mEntity) + "}";
 }
 
 void DestroyAction::test(World& world, ExpectedWorld& expected)
@@ -126,10 +147,9 @@ Action* AddAction::random(ExpectedWorld& expected)
     return new AddAction(entity, *type, rand());
 }
 
-std::string AddAction::description() const
+std::string AddAction::constructor() const
 {
-    return "Add(" + std::to_string(mEntity.index) + "#" + std::to_string(mEntity.generation) + ", " + mType.name() +
-           ", " + std::to_string(mValue) + ")";
+    return "AddAction{" + ::constructor(mEntity) + ", " + ::constructor(mType) + ", " + std::to_string(mValue) + "}";
 }
 
 void AddAction::test(World& world, ExpectedWorld& expected)
@@ -169,10 +189,9 @@ Action* RemoveAction::random(ExpectedWorld& expected)
     return new RemoveAction(entity, *type);
 }
 
-std::string RemoveAction::description() const
+std::string RemoveAction::constructor() const
 {
-    return "Remove(" + std::to_string(mEntity.index) + "#" + std::to_string(mEntity.generation) + ", " + mType.name() +
-           ")";
+    return "RemoveAction{" + ::constructor(mEntity) + ", " + ::constructor(mType) + "}";
 }
 
 void RemoveAction::test(World& world, ExpectedWorld& expected)
@@ -231,11 +250,10 @@ Action* RelateAction::random(ExpectedWorld& expected)
     return new RelateAction(from, to, *type, rand());
 }
 
-std::string RelateAction::description() const
+std::string RelateAction::constructor() const
 {
-    return "Relate(" + std::to_string(mFrom.index) + "#" + std::to_string(mFrom.generation) + ", " +
-           std::to_string(mTo.index) + "#" + std::to_string(mTo.generation) + ", " + mType.name() + ", " +
-           std::to_string(mValue) + ")";
+    return "RelateAction{" + ::constructor(mFrom) + ", " + ::constructor(mTo) + ", " + ::constructor(mType) + ", " +
+           std::to_string(mValue) + "}";
 }
 
 void RelateAction::test(World& world, ExpectedWorld& expected)
@@ -306,10 +324,9 @@ Action* UnrelateAction::random(ExpectedWorld& expected)
     return new UnrelateAction(from, to, *type);
 }
 
-std::string UnrelateAction::description() const
+std::string UnrelateAction::constructor() const
 {
-    return "Unrelate(" + std::to_string(mFrom.index) + "#" + std::to_string(mFrom.generation) + ", " +
-           std::to_string(mTo.index) + "#" + std::to_string(mTo.generation) + ", " + mType.name() + ")";
+    return "UnrelateAction{"  + ::constructor(mFrom) + ", " + ::constructor(mTo) + ", " + ::constructor(mType) + "}";
 }
 
 void UnrelateAction::test(World& world, ExpectedWorld& expected)
@@ -382,34 +399,10 @@ Action* SingleTargetQueryAction::random(ExpectedWorld& expected)
     return new SingleTargetQueryAction(with, without, optional);
 }
 
-std::string SingleTargetQueryAction::description() const
+std::string SingleTargetQueryAction::constructor() const
 {
-    std::string result = "SingleTargetQuery(With(";
-    bool first = true;
-    for (const auto* type : mWith)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "), Without(";
-    first = true;
-    for (const auto* type : mWithout)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "), Optional(";
-    first = true;
-    for (const auto* type : mOptional)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "))";
-    return result;
+    return "SingleTargetQueryAction{" + ::constructor(mWith) + ", " + ::constructor(mWithout) + ", " +
+           ::constructor(mOptional) + "}";
 }
 
 void SingleTargetQueryAction::test(World& world, ExpectedWorld& expected)
@@ -592,59 +585,11 @@ Action* SingleRelationQueryAction::random(ExpectedWorld& expected)
     return new SingleRelationQueryAction(*type, withA, withoutA, optionalA, withB, withoutB, optionalB);
 }
 
-std::string SingleRelationQueryAction::description() const
+std::string SingleRelationQueryAction::constructor() const
 {
-    std::string result = "SingleRelationQueryAction(With(";
-    bool first = true;
-    for (const auto* type : mWithA)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "), Without(";
-    first = true;
-    for (const auto* type : mWithoutA)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "), Optional(";
-    first = true;
-    for (const auto* type : mOptionalA)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "), Relation(" + mRelation.name() + "), With(";
-
-    first = true;
-    for (const auto* type : mWithB)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "), Without(";
-    first = true;
-    for (const auto* type : mWithoutB)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "), Optional(";
-    first = true;
-    for (const auto* type : mOptionalB)
-    {
-        result += (first ? "" : ", ") + type->name();
-        first = false;
-    }
-
-    result += "))";
-    return result;
+    return "SingleRelationQueryAction{" + ::constructor(mRelation) + ", " + ::constructor(mWithA) + ", " +
+           ::constructor(mWithoutA) + ", " + ::constructor(mOptionalA) + ", " + ::constructor(mWithB) + ", " +
+           ::constructor(mWithoutB) + ", " + ::constructor(mOptionalB) + "}";
 }
 
 void SingleRelationQueryAction::test(World& world, ExpectedWorld& expected)

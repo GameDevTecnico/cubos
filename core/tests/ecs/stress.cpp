@@ -49,17 +49,17 @@ TEST_CASE("ecs::* stress test")
     expected.testTypes(world);
 
     // Execute random actions.
-    std::string descriptions;
+    std::string code;
     for (int i = 0; i < 1000; ++i)
     {
         auto* action = randomAction(expected);
-        descriptions += action->description() + '\n';
-        INFO(descriptions);
+        code += action->constructor() + ".test(world, expected);\n";
+        INFO(code);
         action->test(world, expected);
         delete action;
     }
 
-    INFO(descriptions);
+    INFO(code);
     expected.testEntities(world);
 }
 // NOLINTEND(readability-function-size)

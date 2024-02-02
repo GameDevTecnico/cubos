@@ -10,8 +10,8 @@ namespace test::ecs
     public:
         virtual ~Action() = default;
 
-        // Returns a string describing the action.
-        virtual std::string description() const = 0;
+        // Returns a string with the code used to construct the action.
+        virtual std::string constructor() const = 0;
 
         // Runs the test on the given world, possibly modifying it.
         virtual void test(World& world, ExpectedWorld& expected) = 0;
@@ -22,7 +22,7 @@ namespace test::ecs
     {
     public:
         static Action* random(ExpectedWorld& expected);
-        std::string description() const override;
+        std::string constructor() const override;
         virtual void test(World& world, ExpectedWorld& expected) override;
     };
 
@@ -33,7 +33,7 @@ namespace test::ecs
         DestroyAction(Entity entity);
 
         static Action* random(ExpectedWorld& expected);
-        std::string description() const override;
+        std::string constructor() const override;
         virtual void test(World& world, ExpectedWorld& expected) override;
 
     private:
@@ -47,7 +47,7 @@ namespace test::ecs
         AddAction(Entity entity, const Type& type, int value);
 
         static Action* random(ExpectedWorld& expected);
-        std::string description() const override;
+        std::string constructor() const override;
         virtual void test(World& world, ExpectedWorld& expected) override;
 
     private:
@@ -63,7 +63,7 @@ namespace test::ecs
         RemoveAction(Entity entity, const Type& type);
 
         static Action* random(ExpectedWorld& expected);
-        std::string description() const override;
+        std::string constructor() const override;
         virtual void test(World& world, ExpectedWorld& expected) override;
 
     private:
@@ -78,7 +78,7 @@ namespace test::ecs
         RelateAction(Entity from, Entity to, const Type& type, int value);
 
         static Action* random(ExpectedWorld& expected);
-        std::string description() const override;
+        std::string constructor() const override;
         virtual void test(World& world, ExpectedWorld& expected) override;
 
     private:
@@ -95,7 +95,7 @@ namespace test::ecs
         UnrelateAction(Entity from, Entity to, const Type& type);
 
         static Action* random(ExpectedWorld& expected);
-        std::string description() const override;
+        std::string constructor() const override;
         virtual void test(World& world, ExpectedWorld& expected) override;
 
     private:
@@ -112,7 +112,7 @@ namespace test::ecs
                                 std::unordered_set<const Type*> optional);
 
         static Action* random(ExpectedWorld& expected);
-        std::string description() const override;
+        std::string constructor() const override;
         virtual void test(World& world, ExpectedWorld& expected) override;
 
     private:
@@ -131,7 +131,7 @@ namespace test::ecs
                                   std::unordered_set<const Type*> optionalB);
 
         static Action* random(ExpectedWorld& expected);
-        std::string description() const override;
+        std::string constructor() const override;
         virtual void test(World& world, ExpectedWorld& expected) override;
 
     private:
