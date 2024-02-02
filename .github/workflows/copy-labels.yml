@@ -1,3 +1,5 @@
+name: 🏷️ Copy Labels
+
 on: [pull_request]
 
 jobs:
