@@ -6,6 +6,8 @@
 
 #include <string>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 namespace cubos::core::io
 {
     /// @brief Keyboard key codes enum.
@@ -173,3 +175,6 @@ namespace cubos::core::io
     /// @ingroup core-io
     Key stringToKey(const std::string& str);
 } // namespace cubos::core::io
+
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Key);
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Modifiers);
