@@ -19,7 +19,7 @@ CUBOS_REFLECT_IMPL(cubos::core::geom::Intersect)
 void getAxes(const Box& box, const glm::mat4& localToWorld, glm::vec3 axes[])
 {
     glm::vec3 normals[6];
-    box.normals(normals);
+    cubos::core::geom::Box::normals(normals);
 
     for (int i = 0; i < 6; i++)
     {
@@ -51,15 +51,19 @@ glm::vec2 project(const Box& box, glm::vec3 axis, const glm::mat4& localToWorld)
 
 bool overlap(glm::vec2 p1, glm::vec2 p2)
 {
-    if (((p1.x < p2.x) && (p2.x < p1.y) && (p1.y < p2.y)) || ((p2.x < p1.x) && (p1.x < p2.y) && (p2.y < p1.y)))
+    if ((p1.x < p2.x) && (p2.x < p1.y) && (p1.y < p2.y))
     {
         return true;
     }
-    else if ((p1.x < p2.x) && (p2.y < p1.y))
+    if ((p2.x < p1.x) && (p1.x < p2.y) && (p2.y < p1.y))
     {
         return true;
     }
-    else if ((p2.x < p1.x) && (p1.y < p2.y))
+    if ((p1.x < p2.x) && (p2.y < p1.y))
+    {
+        return true;
+    }
+    if ((p2.x < p1.x) && (p1.y < p2.y))
     {
         return true;
     }
@@ -74,10 +78,7 @@ float getOverlap(glm::vec2 p1, glm::vec2 p2)
         {
             return glm::abs(p2.y - p1.x);
         }
-        else // (p1.y < p2.y)
-        {
-            return glm::abs(p1.y - p1.x);
-        }
+        return glm::abs(p1.y - p1.x);
     }
     else if (p1.x < p2.x)
     {
@@ -85,10 +86,7 @@ float getOverlap(glm::vec2 p1, glm::vec2 p2)
         {
             return glm::abs(p1.y - p2.x);
         }
-        else // (p2.y < p1.y)
-        {
-            return glm::abs(p2.y - p2.x);
-        }
+        return glm::abs(p2.y - p2.x);
     }
     return 0.0F;
 }
@@ -111,17 +109,14 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
             // then we can guarantee that the shapes do not overlap
             return false;
         }
-        else
+        // get the overlap
+        float o = getOverlap(p1, p2);
+        // check for minimum
+        if (o < intersect.penetration)
         {
-            // get the overlap
-            float o = getOverlap(p1, p2);
-            // check for minimum
-            if (o < intersect.penetration)
-            {
-                // then set this one as the smallest
-                intersect.penetration = o;
-                intersect.normal = axis;
-            }
+            // then set this one as the smallest
+            intersect.penetration = o;
+            intersect.normal = axis;
         }
     }
 
@@ -135,17 +130,15 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
             // then we can guarantee that the shapes do not overlap
             return false;
         }
-        else
+
+        // get the overlap
+        float o = getOverlap(p1, p2);
+        // check for minimum
+        if (o < intersect.penetration)
         {
-            // get the overlap
-            float o = getOverlap(p1, p2);
-            // check for minimum
-            if (o < intersect.penetration)
-            {
-                // then set this one as the smallest
-                intersect.penetration = o;
-                intersect.normal = -axis;
-            }
+            // then set this one as the smallest
+            intersect.penetration = o;
+            intersect.normal = -axis;
         }
     }
 
