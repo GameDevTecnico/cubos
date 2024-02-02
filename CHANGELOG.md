@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Also track test coverage of engine (#941)
 - Start using reflection on most of the ECS (#462).
 - Change the ECS to be archetype-based (#819)
 - Move the Cubos class to the core (#900).
