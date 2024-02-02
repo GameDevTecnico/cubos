@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Parent-child hierarchies to the transform plugin, at last (#334).
 - New trait type for handling bit masks.
 - Buttons to add/remove components through the entity inspector (#906).
+- Narrow-phase collision detection plugin (#524).
 
 ### Changed
 
