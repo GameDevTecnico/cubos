@@ -16,7 +16,7 @@ CUBOS_REFLECT_IMPL(cubos::core::geom::Intersect)
         .build();
 }
 
-void getAxes(const Box& box, const glm::mat4& localToWorld, glm::vec3 axes[])
+void getAxes(const glm::mat4& localToWorld, glm::vec3 axes[])
 {
     glm::vec3 normals[6];
     cubos::core::geom::Box::normals(normals);
@@ -63,11 +63,7 @@ bool overlap(glm::vec2 p1, glm::vec2 p2)
     {
         return true;
     }
-    if ((p2.x < p1.x) && (p1.y < p2.y))
-    {
-        return true;
-    }
-    return false;
+    return (p2.x < p1.x) && (p1.y < p2.y);
 }
 
 float getOverlap(glm::vec2 p1, glm::vec2 p2)
@@ -80,7 +76,7 @@ float getOverlap(glm::vec2 p1, glm::vec2 p2)
         }
         return glm::abs(p1.y - p1.x);
     }
-    else if (p1.x < p2.x)
+    if (p1.x < p2.x)
     {
         if (p1.y < p2.y)
         {
@@ -96,8 +92,8 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
 {
     static glm::vec3 axes1[6];
     static glm::vec3 axes2[6];
-    getAxes(box1, localToWorld1, axes1);
-    getAxes(box2, localToWorld2, axes2);
+    getAxes(localToWorld1, axes1);
+    getAxes(localToWorld2, axes2);
 
     for (glm::vec3 axis : axes1)
     {
