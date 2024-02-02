@@ -18,14 +18,26 @@ if(ENABLE_COVERAGE)
     append_coverage_compiler_flags()
 
     setup_target_for_coverage_lcov(
-        NAME coverage
+        NAME coverage-core
         EXECUTABLE core/tests/cubos-core-tests
         DEPENDENCIES cubos-core-tests
 
-        EXCLUDE "core/lib/*" "core/tests/*" "tools/quadrados" "*-components.cpp"
+        EXCLUDE "core/lib/*" "core/tests/*" "engine/*" "lib/*" "tools/*" "*-components.cpp"
 
         LCOV_ARGS "--no-external"
     )
+
+    setup_target_for_coverage_lcov(
+        NAME coverage-engine
+        EXECUTABLE engine/tests/cubos-engine-tests
+        DEPENDENCIES cubos-engine-tests
+
+        EXCLUDE "engine/lib/*" "engine/tests/*" "core/*" "lib/*" "tools/*" "*-components.cpp"
+
+        LCOV_ARGS "--no-external"
+    )
+
+    add_custom_target(coverage DEPENDS coverage-core coverage-engine)
 endif()
 
 # Enable CCache
