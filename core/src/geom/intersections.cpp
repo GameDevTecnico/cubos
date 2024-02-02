@@ -7,93 +7,27 @@
 
 using namespace cubos::core::geom;
 
-CUBOS_REFLECT_IMPL(cubos::core::geom::CollisionInfo)
+CUBOS_REFLECT_IMPL(cubos::core::geom::Intersect)
 {
-    return core::ecs::TypeBuilder<CollisionInfo>("cubos::engine::CollisionInfo")
-        .withField("collided", &CollisionInfo::collided)
-        .withField("penetration", &CollisionInfo::penetration)
-        .withField("position", &CollisionInfo::position)
-        .withField("normal", &CollisionInfo::normal)
+    return core::ecs::TypeBuilder<Intersect>("cubos::engine::CollisionInfo")
+        .withField("penetration", &Intersect::penetration)
+        .withField("position", &Intersect::position)
+        .withField("normal", &Intersect::normal)
         .build();
 }
 
-CollisionInfo cubos::core::geom::BoxBoxIntersection(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
-                                                    const glm::mat4& localToWorld2)
-{
-    CollisionInfo collision = CollisionInfo{
-        .collided = false, .penetration = 0.0F, .position = {0.0F, 0.0F, 0.0F}, .normal = {0.0F, 0.0F, 0.0F}};
-
-    std::vector<glm::vec3> axes1 = getAxes(box1, localToWorld1);
-    std::vector<glm::vec3> axes2 = getAxes(box2, localToWorld2);
-
-    for (glm::vec3 axis : axes1)
-    {
-        glm::vec2 p1 = project(box1, axis, localToWorld1);
-        glm::vec2 p2 = project(box2, axis, localToWorld2);
-
-        if (!overlap(p1, p2))
-        {
-            // then we can guarantee that the shapes do not overlap
-            return collision;
-        }
-        else
-        {
-            // get the overlap
-            float o = getOverlap(p1, p2);
-            // check for minimum
-            if (o < collision.penetration)
-            {
-                // then set this one as the smallest
-                collision.penetration = o;
-                collision.normal = axis;
-            }
-        }
-    }
-
-    for (glm::vec3 axis : axes2)
-    {
-        glm::vec2 p1 = project(box1, axis, localToWorld1);
-        glm::vec2 p2 = project(box2, axis, localToWorld2);
-
-        if (!overlap(p1, p2))
-        {
-            // then we can guarantee that the shapes do not overlap
-            return collision;
-        }
-        else
-        {
-            // get the overlap
-            float o = getOverlap(p1, p2);
-            // check for minimum
-            if (o < collision.penetration)
-            {
-                // then set this one as the smallest
-                collision.penetration = o;
-                collision.normal = -axis;
-            }
-        }
-    }
-
-    collision.collided = true;
-    return collision;
-}
-
-std::vector<glm::vec3> cubos::core::geom::getAxes(const Box& box, const glm::mat4& localToWorld)
+void getAxes(const Box& box, const glm::mat4& localToWorld, glm::vec3 axes[])
 {
     glm::vec3 normals[6];
     box.normals(normals);
 
-    std::vector<glm::vec3> axes = {};
-    for (glm::vec3 normal : normals)
+    for (int i = 0; i < 6; i++)
     {
-        axes.push_back(glm::normalize(localToWorld * glm::vec4(normal, 0.0F)));
-        // cubos::core::gl::Debug::drawLine(glm::vec3(localToWorld.mat[3]),
-        //                                  glm::normalize(localToWorld.mat * glm::vec4(normal, 0.0F)), true);
+        axes[i] = glm::normalize(localToWorld * glm::vec4(normals[i], 0.0F));
     }
-    return axes;
 }
 
-glm::vec2 cubos::core::geom::project(const Box& box, glm::vec3 axis, const glm::mat4& localToWorld)
+glm::vec2 project(const Box& box, glm::vec3 axis, const glm::mat4& localToWorld)
 {
     glm::vec3 corners[8];
     box.corners(corners);
@@ -102,11 +36,7 @@ glm::vec2 cubos::core::geom::project(const Box& box, glm::vec3 axis, const glm::
     double max = min;
     for (int i = 1; i < 8; i++)
     {
-        // NOTE: the axis must be normalized to get accurate projections
         double p = glm::dot(axis, glm::vec3(localToWorld * glm::vec4(corners[i], 1.0F)));
-        // cubos::core::gl::Debug::drawLine(glm::vec3(localToWorld.mat[3]), localToWorld.mat *
-        // glm::vec4(corners[i], 1.0F),
-        //                                  false, glm::vec3(0.0F, 1.0F, 0.0F));
         if (p < min)
         {
             min = p;
@@ -116,26 +46,28 @@ glm::vec2 cubos::core::geom::project(const Box& box, glm::vec3 axis, const glm::
             max = p;
         }
     }
-    // CUBOS_DEBUG("mix max {} {}", min, max);
     return glm::vec2{min, max};
 }
 
-bool cubos::core::geom::overlap(glm::vec2 p1, glm::vec2 p2)
+bool overlap(glm::vec2 p1, glm::vec2 p2)
 {
-    if (((p1.x < p2.x) && (p2.x < p1.y)) || ((p1.x < p2.y) && (p2.y < p1.y))) // missing case where p2 contains p1
+    if (((p1.x < p2.x) && (p2.x < p1.y) && (p1.y < p2.y)) || ((p2.x < p1.x) && (p1.x < p2.y) && (p2.y < p1.y)))
     {
         return true;
     }
-    else if (((p2.x < p1.x) && (p1.x < p2.y)) || ((p2.x < p1.y) && (p1.y < p2.y)))
+    else if ((p1.x < p2.x) && (p2.y < p1.y))
+    {
+        return true;
+    }
+    else if ((p2.x < p1.x) && (p1.y < p2.y))
     {
         return true;
     }
     return false;
 }
 
-float cubos::core::geom::getOverlap(glm::vec2 p1, glm::vec2 p2)
+float getOverlap(glm::vec2 p1, glm::vec2 p2)
 {
-    // float overlap = 0.0F;
     if (p2.x < p1.x)
     {
         if (p2.y < p1.y)
@@ -159,4 +91,63 @@ float cubos::core::geom::getOverlap(glm::vec2 p1, glm::vec2 p2)
         }
     }
     return 0.0F;
+}
+
+bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
+                                   const glm::mat4& localToWorld2, Intersect& intersect)
+{
+    static glm::vec3 axes1[6];
+    static glm::vec3 axes2[6];
+    getAxes(box1, localToWorld1, axes1);
+    getAxes(box2, localToWorld2, axes2);
+
+    for (glm::vec3 axis : axes1)
+    {
+        glm::vec2 p1 = project(box1, axis, localToWorld1);
+        glm::vec2 p2 = project(box2, axis, localToWorld2);
+
+        if (!overlap(p1, p2))
+        {
+            // then we can guarantee that the shapes do not overlap
+            return false;
+        }
+        else
+        {
+            // get the overlap
+            float o = getOverlap(p1, p2);
+            // check for minimum
+            if (o < intersect.penetration)
+            {
+                // then set this one as the smallest
+                intersect.penetration = o;
+                intersect.normal = axis;
+            }
+        }
+    }
+
+    for (glm::vec3 axis : axes2)
+    {
+        glm::vec2 p1 = project(box1, axis, localToWorld1);
+        glm::vec2 p2 = project(box2, axis, localToWorld2);
+
+        if (!overlap(p1, p2))
+        {
+            // then we can guarantee that the shapes do not overlap
+            return false;
+        }
+        else
+        {
+            // get the overlap
+            float o = getOverlap(p1, p2);
+            // check for minimum
+            if (o < intersect.penetration)
+            {
+                // then set this one as the smallest
+                intersect.penetration = o;
+                intersect.normal = -axis;
+            }
+        }
+    }
+
+    return true;
 }

@@ -13,27 +13,23 @@
 
 namespace cubos::core::geom
 {
-    /// @brief Contains info regarding a collision.
+    /// @brief Contains info regarding an intersection between shapes.
     /// @ingroup core-geom
-    struct CollisionInfo
+    struct Intersect
     {
         CUBOS_REFLECT;
 
-        bool collided;      ///< If there was a collision
         float penetration;  ///< Penetration depth of the collision.
         glm::vec3 position; ///< Position of contact on the surface of the entity.
         glm::vec3 normal;   ///< Normal of contact on the surface of the entity.
     };
 
-    CollisionInfo BoxBoxIntersection(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
-                                     const glm::mat4& localToWorld2);
-
-    std::vector<glm::vec3> getAxes(const Box& box, const glm::mat4& localToWorld);
-
-    glm::vec2 project(const Box& box, glm::vec3 axis, const glm::mat4& localToWorld);
-
-    bool overlap(glm::vec2 p1, glm::vec2 p2);
-
-    float getOverlap(glm::vec2 p1, glm::vec2 p2);
+    /// @brief Computes the intersection between two box shapes.
+    /// @param box1 Box shape of the first entity.
+    /// @param localToWorld1 Local to world matrix of the first entity.
+    /// @param box2 Box shape of the second entity.
+    /// @param localToWorld2 Local to world matrix of the second entity.
+    bool intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2, const glm::mat4& localToWorld2,
+                    Intersect& intersect);
 
 } // namespace cubos::core::geom
