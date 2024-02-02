@@ -3,9 +3,11 @@
 #include <cubos/core/data/ser/json.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/comparison.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/unordered_map.hpp>
+#include <cubos/core/reflection/type_registry.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
 #include <cubos/engine/scene/bridge.hpp>
@@ -165,67 +167,26 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
                     // And finally, add it to the blueprint.
                     scene.blueprint.add(entity, core::memory::move(component));
                 }
-                else if (mRelations.contains(typeName))
+                else if (typeName.find("@") != std::string::npos &&
+                         mRelations.contains(typeName.substr(0, typeName.find("@"))))
                 {
                     // Create the relation with the default value.
-                    auto relation = AnyValue::defaultConstruct(mRelations.at(typeName));
+                    std::string relationName = typeName.substr(0, typeName.find("@"));
+                    std::string toName = typeName.substr(typeName.find("@") + 1);
 
-                    std::string toName;
-                    if (dataJSON.is_string())
-                    {
-                        // If the user only specified a string, then the relation will keep the default value and the
-                        // string represents the 'to' entity.
-                        toName = dataJSON;
-                    }
-                    else if (dataJSON.is_object())
-                    {
-                        // If the user specified an object, then it must contain an "entity" key, whose value
-                        // represents the 'to' entity.
-                        if (!dataJSON.contains("entity") || !dataJSON.at("entity").is_string())
-                        {
-                            CUBOS_ERROR("Could not deserialize relation of type {} from entity {}: expected JSON "
-                                        "object to contain key \"entity\" with a string value",
-                                        typeName, entityName, dataJSON.type_name());
-                            return false;
-                        }
-                        toName = dataJSON.at("entity");
+                    auto relation = AnyValue::defaultConstruct(mRelations.at(relationName));
 
-                        // If the value is specified, then deserialize the relation from it.
-                        if (dataJSON.contains("value"))
-                        {
-                            des.feed(dataJSON.at("value"));
-                            if (!des.read(relation.type(), relation.get()))
-                            {
-                                CUBOS_ERROR("Could not deserialize relation of type {} from entity {} to {}", typeName,
-                                            entityName, toName);
-                                return false;
-                            }
-                        }
-
-                        // Check if there extra unused fields in the object.
-                        for (const auto& [key, unusedJSON] : dataJSON.items())
-                        {
-                            if (key != "entity" && key != "value")
-                            {
-                                CUBOS_ERROR("Could not deserialize relation of type {} from entity {} to entity {}: "
-                                            "expected \"entity\" or \"value\", found {}",
-                                            typeName, entityName, toName, key);
-                                return false;
-                            }
-                        }
-                    }
-                    else
+                    des.feed(dataJSON);
+                    if (!des.read(relation.type(), relation.get()))
                     {
-                        CUBOS_ERROR("Could not deserialize relation of type {} from entity {}: expected JSON object "
-                                    "but found {}",
-                                    typeName, entityName, dataJSON.type_name());
+                        CUBOS_ERROR("Could not deserialize component of type {} of entity {}", typeName, entityName);
                         return false;
                     }
 
                     if (!scene.blueprint.bimap().containsRight(toName))
                     {
                         CUBOS_ERROR("Could not deserialize relation of type {} from entity {} to {}: no such entity {}",
-                                    typeName, entityName, toName, toName);
+                                    relationName, entityName, toName, toName);
                         return false;
                     }
 
@@ -244,6 +205,65 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
     // Finally, write the scene to the asset.
     assets.store(handle, std::move(scene));
     return true;
+}
+
+std::tuple<std::string, const Asset<Scene>&> GetOriginalComponentData(
+    const Assets& assets, const Asset<Scene>& sceneAsset, const std::string& entityPath,
+    const cubos::core::reflection::Type& componentType)
+{
+    auto scene = assets.read<Scene>(sceneAsset);
+    if (entityPath.find(".") == std::string::npos)
+    {
+        auto entity = scene->blueprint.GetEntities().atRight(entityPath);
+        if (auto components = scene->blueprint.GetComponents().at(componentType); !components.contains(entity))
+        {
+            return {nullptr, sceneAsset};
+        }
+        return {entityPath, sceneAsset};
+    }
+    else
+    {
+        std::string subScenePath = entityPath.substr(0, entityPath.find("."));
+        auto newPath = entityPath.substr(entityPath.find(".") + 1);
+        return GetOriginalComponentData(assets, scene->imports.at(subScenePath), newPath, componentType);
+    }
+}
+
+std::tuple<std::string, std::string, const Asset<Scene>&> GetOriginalRelationData(
+    const Assets& assets, const Asset<Scene>& sceneAsset, const std::string& entityPath, const std::string& otherPath,
+    const cubos::core::reflection::Type& relationType)
+{
+    auto scene = assets.read<Scene>(sceneAsset);
+    if (entityPath.find(".") == std::string::npos)
+    {
+        auto entity = scene->blueprint.GetEntities().atRight(entityPath);
+        auto other = scene->blueprint.GetEntities().atRight(otherPath);
+        if (!scene->blueprint.GetRelations().contains(relationType))
+        {
+            return {"", "", sceneAsset};
+        }
+        auto relations = scene->blueprint.GetRelations().at(relationType);
+        if (!relations.contains(entity))
+        {
+            return {"", "", sceneAsset};
+        }
+        if (!relations[entity].contains(other))
+        {
+            return {"", "", sceneAsset};
+        }
+        return {entityPath, otherPath, sceneAsset};
+    }
+    else
+    {
+        if (otherPath.find(".") == std::string::npos)
+        {
+            return {"", "", sceneAsset};
+        }
+        std::string subScenePath = entityPath.substr(0, entityPath.find("."));
+        auto newPath = entityPath.substr(entityPath.find(".") + 1);
+        auto newOtherPath = otherPath.substr(otherPath.find(".") + 1);
+        return GetOriginalRelationData(assets, scene->imports.at(subScenePath), newPath, newOtherPath, relationType);
+    }
 }
 
 bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
@@ -274,8 +294,82 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 ser.write(components[entity].type(), components[entity].get());
                 entityJson.emplace(type->name().c_str(), ser.output());
             }
+            for (auto& [type, relations] : scene->blueprint.GetRelations())
+            {
+                if (!relations.contains(entity))
+                {
+                    continue;
+                }
+                for (auto& [other, relation] : relations[entity])
+                {
+                    ser.write(relation.type(), relation.get());
+                    entityJson.emplace((type->name() + "@" + scene->blueprint.GetEntities().atLeft(other)).c_str(),
+                                       ser.output());
+                }
+            }
 
             entitiesJson.emplace(name.c_str(), entityJson);
+        }
+        else
+        {
+            bool dirty = false;
+            auto entityJson = nlohmann::json::object();
+            for (auto& [type, components] : scene->blueprint.GetComponents())
+            {
+                if (!components.contains(entity))
+                {
+                    continue;
+                }
+                auto [entityName, subHandle] = GetOriginalComponentData(assets, handle, name, *type);
+                if (!entityName.empty())
+                {
+                    auto subScene = assets.read<Scene>(subHandle);
+                    if (cubos::core::reflection::compare(*type, components[entity].get(),
+                                                         subScene->blueprint.GetComponents()
+                                                             .at(*type)
+                                                             .at(subScene->blueprint.GetEntities().atRight(entityName))
+                                                             .get()))
+                    {
+                        continue;
+                    }
+                }
+                dirty = true;
+                ser.write(components[entity].type(), components[entity].get());
+                entityJson.emplace(type->name().c_str(), ser.output());
+            }
+            for (auto& [type, relations] : scene->blueprint.GetRelations())
+            {
+                if (!relations.contains(entity))
+                {
+                    continue;
+                }
+                for (auto& [other, relation] : relations[entity])
+                {
+                    auto [entityName, otherName, subHandle] = GetOriginalRelationData(
+                        assets, handle, name, scene->blueprint.GetEntities().atLeft(other), *type);
+                    if (!entityName.empty())
+                    {
+                        if (auto subScene = assets.read<Scene>(subHandle); cubos::core::reflection::compare(
+                                *type, relation.get(),
+                                subScene->blueprint.GetRelations()
+                                    .at(*type)
+                                    .at(subScene->blueprint.GetEntities().atRight(entityName))
+                                    .at(subScene->blueprint.GetEntities().atRight(otherName))
+                                    .get()))
+                        {
+                            continue;
+                        }
+                    }
+                    dirty = true;
+                    ser.write(relation.type(), relation.get());
+                    entityJson.emplace((type->name() + "@" + scene->blueprint.GetEntities().atLeft(other)).c_str(),
+                                       ser.output());
+                }
+            }
+            if (dirty)
+            {
+                entitiesJson.emplace(name.c_str(), entityJson);
+            }
         }
     }
     json.push_back({"entities", entitiesJson});
