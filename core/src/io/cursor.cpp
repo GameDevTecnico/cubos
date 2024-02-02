@@ -3,6 +3,7 @@
 #include <cubos/core/reflection/type.hpp>
 
 using namespace cubos::core;
+
 using cubos::core::io::Cursor;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::Type;
