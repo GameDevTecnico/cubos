@@ -8,7 +8,7 @@
 
 using namespace cubos::engine;
 
-// detect collisions
+/// @brief Finds all pairs of colliders which are colliding.
 static void findCollidingPairsSystem(
     Commands cmds, Query<Entity, const LocalToWorld&, const BoxCollisionShape&, PotentiallyCollidingWith&, Entity,
                          const LocalToWorld&, const BoxCollisionShape&>
@@ -16,10 +16,12 @@ static void findCollidingPairsSystem(
 {
     for (auto [ent1, localToWorld1, boxShape1, potentiallyCollidingWith, ent2, localToWorld2, boxShape2] : query)
     {
-        cubos::core::geom::CollisionInfo collision =
-            cubos::core::geom::BoxBoxIntersection(boxShape1.box, localToWorld1.mat, boxShape2.box, localToWorld2.mat);
+        cubos::core::geom::Intersect intersectionInfo{};
 
-        if (!collision.collided)
+        bool intersects = cubos::core::geom::intersects(boxShape1.box, localToWorld1.mat, boxShape2.box,
+                                                        localToWorld2.mat, intersectionInfo);
+
+        if (!intersects)
         {
             continue;
         }
@@ -27,9 +29,9 @@ static void findCollidingPairsSystem(
         cmds.relate(ent1, ent2,
                     CollidingWith{.entity = ent1,
                                   .other = ent2,
-                                  .penetration = collision.penetration,
+                                  .penetration = intersectionInfo.penetration,
                                   .position = {0.0F, 0.0F, 0.0F},
-                                  .normal = collision.normal});
+                                  .normal = intersectionInfo.normal});
     }
 }
 
