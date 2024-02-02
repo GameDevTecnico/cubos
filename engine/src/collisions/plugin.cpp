@@ -7,17 +7,21 @@
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
+#include "narrow_phase/plugin.hpp"
+
 void cubos::engine::collisionsPlugin(Cubos& cubos)
 {
     cubos.addPlugin(transformPlugin);
-
-    cubos.addPlugin(broadPhaseCollisionsPlugin);
 
     cubos.addEvent<CollisionEvent>();
 
     cubos.addComponent<Collider>();
     cubos.addComponent<BoxCollisionShape>();
     cubos.addComponent<CapsuleCollisionShape>();
+
+    // Add sub-plugins
+    cubos.addPlugin(broadPhaseCollisionsPlugin);
+    cubos.addPlugin(narrowPhaseCollisionsPlugin);
 
     cubos.system("setup new boxes")
         .tagged("cubos.collisions.setup")
