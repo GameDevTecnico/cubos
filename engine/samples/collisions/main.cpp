@@ -107,16 +107,16 @@ int main()
                 return;
             }
 
-            aRot.quat = glm::rotate(aRot.quat, 0.01F, state.aRotationAxis);
-            aPos.vec += glm::vec3{0.0F, 0.0F, 0.01F};
+            aRot.quat = glm::rotate(aRot.quat, 0.001F, state.aRotationAxis);
+            aPos.vec += glm::vec3{0.0F, 0.0F, 0.001F};
 
-            bRot.quat = glm::rotate(bRot.quat, 0.01F, state.bRotationAxis);
-            bPos.vec += glm::vec3{0.0F, 0.0F, -0.01F};
+            bRot.quat = glm::rotate(bRot.quat, 0.001F, state.bRotationAxis);
+            bPos.vec += glm::vec3{0.0F, 0.0F, -0.001F};
         });
 
     cubos.system("check collisions")
         .tagged("updated")
-        .after("cubos.collisions.broad")
+        .after("cubos.collisions.narrow")
         .call([](Query<Entity, CollidingWith&, Entity> query, State& state) {
             for (auto [ent1, colliding, ent2] : query)
             {
