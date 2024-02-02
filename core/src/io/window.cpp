@@ -1,12 +1,21 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/io/window.hpp>
+#include <cubos/core/reflection/traits/enum.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include "glfw_window.hpp"
 
 using namespace cubos::core::io;
+
 using cubos::core::data::old::Deserializer;
 using cubos::core::data::old::Serializer;
+
+using cubos::core::io::MouseAxis;
+using cubos::core::io::MouseButton;
+using cubos::core::io::MouseState;
+using cubos::core::reflection::EnumTrait;
+using cubos::core::reflection::Type;
 
 Window cubos::core::io::openWindow(const std::string& title, const glm::ivec2& size)
 {
@@ -89,4 +98,33 @@ std::optional<WindowEvent> BaseWindow::pollEvent()
     WindowEvent event = mEvents.front();
     mEvents.pop_front();
     return event;
+}
+
+CUBOS_REFLECT_EXTERNAL_IMPL(MouseButton)
+{
+    return Type::create("MouseButton")
+        .with(EnumTrait{}
+                  .withVariant<MouseButton::Invalid>("Invalid")
+
+                  .withVariant<MouseButton::Left>("Left")
+                  .withVariant<MouseButton::Right>("Right")
+                  .withVariant<MouseButton::Middle>("Middle")
+                  .withVariant<MouseButton::Extra1>("Extra1")
+                  .withVariant<MouseButton::Extra2>("Extra2"));
+}
+
+CUBOS_REFLECT_EXTERNAL_IMPL(MouseAxis)
+{
+    return Type::create("MouseAxis")
+        .with(EnumTrait{}.withVariant<MouseAxis::X>("X").withVariant<MouseAxis::Y>("Y").withVariant<MouseAxis::Scroll>(
+            "Scroll"));
+}
+
+CUBOS_REFLECT_EXTERNAL_IMPL(MouseState)
+{
+    return Type::create("MouseState")
+        .with(EnumTrait{}
+                  .withVariant<MouseState::Default>("Default")
+                  .withVariant<MouseState::Locked>("Locked")
+                  .withVariant<MouseState::Hidden>("Hidden"));
 }

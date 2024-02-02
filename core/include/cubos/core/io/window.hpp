@@ -15,6 +15,7 @@
 #include <cubos/core/io/cursor.hpp>
 #include <cubos/core/io/gamepad.hpp>
 #include <cubos/core/io/keyboard.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::gl
 {
@@ -258,3 +259,7 @@ namespace cubos::core::io
         std::deque<WindowEvent> mEvents;
     };
 } // namespace cubos::core::io
+
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseButton);
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseAxis);
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseState);
