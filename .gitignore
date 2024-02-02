@@ -402,3 +402,5 @@ imgui.ini
 # direnv - maybe .envrc is ok if 'use flake' doesn't break non nixos machines
 /.envrc
 /.direnv
+
+.DS_store
