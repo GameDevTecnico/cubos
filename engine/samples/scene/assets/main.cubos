@@ -1,21 +1,22 @@
 {
-  "imports": {
-    "sub1": "cd007ba2-ee0d-44fd-bf36-85c829dbe66f",
-    "sub2": "cd007ba2-ee0d-44fd-bf36-85c829dbe66f"
-  },
-  "entities": {
-    "main": {
-      "Num": 0
-    },
-    "sub1.root": {
-      "OwnedBy": "main",
-      "DistanceTo": {
-        "entity": "sub2.root",
-        "value": 5
-      }
-    },
-    "sub2.root": {
-      "OwnedBy": "main"
-    }
-  }
+	"entities": {
+		"main": {
+			"Num": 0
+		},
+		"notmain": {
+			"Num": 120,
+			"OwnedBy@main": {}
+		},
+		"sub1.root": {
+			"DistanceTo@sub2.root": 5,
+			"OwnedBy@main": {}
+		},
+		"sub2.root": {
+			"OwnedBy@main": {}
+		}
+	},
+	"imports": {
+		"sub1": "cd007ba2-ee0d-44fd-bf36-85c829dbe66f",
+		"sub2": "cd007ba2-ee0d-44fd-bf36-85c829dbe66f"
+	}
 }

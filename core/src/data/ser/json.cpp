@@ -94,6 +94,18 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
 
     if (type.has<FieldsTrait>())
     {
+        if (type.get<FieldsTrait>().size() == 1)
+        {
+            // If there's a single field, read it directly.
+            if (!this->write(type.get<FieldsTrait>().begin()->type(),
+                             type.get<FieldsTrait>().view(value).begin()->value))
+            {
+                CUBOS_WARN("Couldn't deserialize wrapped field '{}'", type.get<FieldsTrait>().begin()->name());
+                return false;
+            }
+
+            return true;
+        }
         auto jsonObj = nlohmann::json::object();
 
         for (const auto& [field, fieldValue] : type.get<FieldsTrait>().view(value))

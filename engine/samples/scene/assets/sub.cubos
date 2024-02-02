@@ -1,12 +1,12 @@
 {
-  "imports": {},
-  "entities": {
-    "root": {
-      "Num": 1
-    },
-    "child": {
-      "Num": 2,
-      "OwnedBy": "root"
-    }
-  }
+	"imports": {},
+	"entities": {
+		"root": {
+			"Num": 1
+		},
+		"child": {
+			"Num": 2,
+			"OwnedBy@root": {}
+		}
+	}
 }
