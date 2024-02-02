@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install xorg-dev libglu1-mesa-dev doxygen
+        sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11 doxygen
 
     - name: Set up Python
       uses: actions/setup-python@v5
