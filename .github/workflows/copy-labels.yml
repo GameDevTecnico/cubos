@@ -1,6 +1,8 @@
 name: 🏷️ Copy Labels
 
-on: [pull_request]
+on:
+  pull_request:
+    branches: [ main ]
 
 jobs:
   copy-labels:

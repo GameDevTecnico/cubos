@@ -2,11 +2,7 @@ name: 📖 Deploy Documentation Previews
 
 on:
   pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - closed
+    branches: [ main ]
 
 env:
   BUILD_TYPE: Release
