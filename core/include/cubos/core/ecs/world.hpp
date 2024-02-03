@@ -7,6 +7,7 @@
 #include <cassert>
 #include <cstddef>
 
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/entity/archetype_graph.hpp>
 #include <cubos/core/ecs/entity/pool.hpp>
 #include <cubos/core/ecs/resource/manager.hpp>
@@ -27,6 +28,11 @@ namespace cubos::core::ecs
     class World
     {
     public:
+        /// @brief World constructor.
+        World() {
+            this->registerComponent<Name>();
+        }
+
         /// @brief Used to access the components in an entity.
         class Components;
 
