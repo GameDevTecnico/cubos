@@ -2,6 +2,7 @@
 
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/command_buffer.hpp>
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/system/arguments/commands.hpp>
 
 #include "utils.hpp"
@@ -10,6 +11,7 @@ using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
+using cubos::core::ecs::Name;
 using cubos::core::ecs::World;
 
 TEST_CASE("ecs::Blueprint")
@@ -182,5 +184,29 @@ TEST_CASE("ecs::Blueprint")
         REQUIRE(dict.map.contains('1'));
         CHECK(dict.map.at('0') == spawned0);
         CHECK(dict.map.at('1') == spawned1);
+    }
+
+    SUBCASE("check if entities from spawned blueprint have the right components")
+    {
+        Blueprint blueprint{};
+        auto entity0 = blueprint.create("0");
+        auto entity1 = blueprint.create("1");
+        blueprint.add(entity0, IntegerComponent{0});
+        blueprint.add(entity1, IntegerComponent{1});
+
+        // Spawn the blueprint into the world and get the identifiers of the spawned entities.
+        auto spawned = cmds.spawn(blueprint);
+        auto spawned0 = spawned.entity("0");
+        auto spawned1 = spawned.entity("1");
+        cmdBuffer.commit();
+
+        auto components0 = world.components(spawned0);
+        auto components1 = world.components(spawned1);
+        REQUIRE(components0.has<IntegerComponent>());
+        REQUIRE(components1.has<IntegerComponent>());
+        REQUIRE(components0.has<Name>());
+        REQUIRE(components1.has<Name>());
+        CHECK(components0.get<IntegerComponent>().value == 0);
+        CHECK(components1.get<IntegerComponent>().value == 1);
     }
 }
