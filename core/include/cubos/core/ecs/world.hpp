@@ -7,9 +7,9 @@
 #include <cassert>
 #include <cstddef>
 
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/entity/archetype_graph.hpp>
 #include <cubos/core/ecs/entity/pool.hpp>
-#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/resource/manager.hpp>
 #include <cubos/core/ecs/table/tables.hpp>
 #include <cubos/core/ecs/types.hpp>
@@ -29,8 +29,7 @@ namespace cubos::core::ecs
     {
     public:
         /// @brief World constructor.
-        World()
-        {
+        World() {
             this->registerComponent<Name>();
         }
 
