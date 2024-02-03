@@ -1,7 +1,9 @@
 #include <cubos/core/ecs/blueprint.hpp>
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>
@@ -11,9 +13,11 @@
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::EntityHash;
+using cubos::core::ecs::Name;
 using cubos::core::memory::AnyValue;
 using cubos::core::memory::UnorderedBimap;
 using cubos::core::reflection::ConstructibleTrait;
+using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
 
 Entity Blueprint::create(std::string name)
@@ -155,6 +159,8 @@ void Blueprint::instantiate(void* userData, Create create, Add add, Relate relat
     std::unordered_map<Entity, Entity, EntityHash> thisToInstance{};
     for (const auto& [entity, name] : mBimap)
     {
+        Name nameComponent{name};
+        add(userData, entity, AnyValue::moveConstruct(reflect<Name>(), (void*)&nameComponent));
         thisToInstance.emplace(entity, create(userData, name));
     }
 
