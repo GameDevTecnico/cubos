@@ -355,7 +355,7 @@ void GLFWWindow::modifiers(Modifiers modifiers)
 
 bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const
 {
-#ifdef WITH_GLFW
+#if defined(WITH_GLFW) && !defined(__EMSCRIPTEN__)
     GLFWgamepadstate glfwState;
     if (glfwGetGamepadState(gamepad, &glfwState) == GLFW_FALSE)
     {
@@ -392,6 +392,8 @@ bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const
 
     return true;
 #else
+    (void)gamepad;
+    (void)state;
     UNSUPPORTED();
 #endif
 }

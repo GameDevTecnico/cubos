@@ -47,8 +47,8 @@ uint32_t ScreenPicker::at(int x, int y) const
 
     mIdTexture->read(texBuffer);
 
-    uint16_t r = texBuffer[(ptrdiff_t)(y * mTextureSize.x + x) * 2U];
-    uint16_t g = texBuffer[(ptrdiff_t)(y * mTextureSize.x + x) * 2U + 1U];
+    uint16_t r = texBuffer[(unsigned long)(y * mTextureSize.x + x) * 2U];
+    uint16_t g = texBuffer[(unsigned long)(y * mTextureSize.x + x) * 2U + 1U];
 
     uint32_t id = (static_cast<uint32_t>(r) << 16U) | g;
 

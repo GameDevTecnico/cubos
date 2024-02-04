@@ -1,0 +1,6 @@
+[
+    {
+        "name": "Emscripten",
+        "toolchainFile": "cmake/Emscripten.cmake"
+    }
+]
