@@ -159,8 +159,6 @@ void Blueprint::instantiate(void* userData, Create create, Add add, Relate relat
     std::unordered_map<Entity, Entity, EntityHash> thisToInstance{};
     for (const auto& [entity, name] : mBimap)
     {
-        Name nameComponent{name};
-        add(userData, entity, AnyValue::moveConstruct(reflect<Name>(), (void*)&nameComponent));
         thisToInstance.emplace(entity, create(userData, name));
         Name nameComponent{name};
         add(userData, thisToInstance.at(entity), AnyValue::moveConstruct(reflect<Name>(), (void*)&nameComponent));
