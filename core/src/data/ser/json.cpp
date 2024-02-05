@@ -96,7 +96,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
     {
         if (type.get<FieldsTrait>().size() == 1)
         {
-            // If there's a single field, read it directly.
+            // If there's a single field, write it directly.
             if (!this->write(type.get<FieldsTrait>().begin()->type(),
                              type.get<FieldsTrait>().view(value).begin()->value))
             {
