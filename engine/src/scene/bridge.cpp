@@ -214,8 +214,8 @@ std::tuple<std::string, const Asset<Scene>&> GetOriginalComponentData(
     auto scene = assets.read<Scene>(sceneAsset);
     if (entityPath.find(".") == std::string::npos)
     {
-        auto entity = scene->blueprint.GetEntities().atRight(entityPath);
-        if (auto components = scene->blueprint.GetComponents().at(componentType); !components.contains(entity))
+        auto entity = scene->blueprint.entities().atRight(entityPath);
+        if (auto components = scene->blueprint.components().at(componentType); !components.contains(entity))
         {
             return {nullptr, sceneAsset};
         }
@@ -236,13 +236,13 @@ std::tuple<std::string, std::string, const Asset<Scene>&> GetOriginalRelationDat
     auto scene = assets.read<Scene>(sceneAsset);
     if (entityPath.find(".") == std::string::npos)
     {
-        auto entity = scene->blueprint.GetEntities().atRight(entityPath);
-        auto other = scene->blueprint.GetEntities().atRight(otherPath);
-        if (!scene->blueprint.GetRelations().contains(relationType))
+        auto entity = scene->blueprint.entities().atRight(entityPath);
+        auto other = scene->blueprint.entities().atRight(otherPath);
+        if (!scene->blueprint.relations().contains(relationType))
         {
             return {"", "", sceneAsset};
         }
-        auto relations = scene->blueprint.GetRelations().at(relationType);
+        auto relations = scene->blueprint.relations().at(relationType);
         if (!relations.contains(entity))
         {
             return {"", "", sceneAsset};
@@ -280,12 +280,12 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
     json.push_back({"imports", importJson});
 
     auto entitiesJson = nlohmann::json::object();
-    for (const auto& [entity, name] : scene->blueprint.GetEntities())
+    for (const auto& [entity, name] : scene->blueprint.entities())
     {
         if (name.find(".") == std::string::npos)
         {
             auto entityJson = nlohmann::json::object();
-            for (auto& [type, components] : scene->blueprint.GetComponents())
+            for (auto& [type, components] : scene->blueprint.components())
             {
                 if (!components.contains(entity))
                 {
@@ -294,7 +294,7 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 ser.write(components[entity].type(), components[entity].get());
                 entityJson.emplace(type->name().c_str(), ser.output());
             }
-            for (auto& [type, relations] : scene->blueprint.GetRelations())
+            for (auto& [type, relations] : scene->blueprint.relations())
             {
                 if (!relations.contains(entity))
                 {
@@ -303,7 +303,7 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 for (auto& [other, relation] : relations[entity])
                 {
                     ser.write(relation.type(), relation.get());
-                    entityJson.emplace((type->name() + "@" + scene->blueprint.GetEntities().atLeft(other)).c_str(),
+                    entityJson.emplace((type->name() + "@" + scene->blueprint.entities().atLeft(other)).c_str(),
                                        ser.output());
                 }
             }
@@ -314,7 +314,7 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
         {
             bool dirty = false;
             auto entityJson = nlohmann::json::object();
-            for (auto& [type, components] : scene->blueprint.GetComponents())
+            for (auto& [type, components] : scene->blueprint.components())
             {
                 if (!components.contains(entity))
                 {
@@ -325,9 +325,9 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 {
                     auto subScene = assets.read<Scene>(subHandle);
                     if (cubos::core::reflection::compare(*type, components[entity].get(),
-                                                         subScene->blueprint.GetComponents()
+                                                         subScene->blueprint.components()
                                                              .at(*type)
-                                                             .at(subScene->blueprint.GetEntities().atRight(entityName))
+                                                             .at(subScene->blueprint.entities().atRight(entityName))
                                                              .get()))
                     {
                         continue;
@@ -337,7 +337,7 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 ser.write(components[entity].type(), components[entity].get());
                 entityJson.emplace(type->name().c_str(), ser.output());
             }
-            for (auto& [type, relations] : scene->blueprint.GetRelations())
+            for (auto& [type, relations] : scene->blueprint.relations())
             {
                 if (!relations.contains(entity))
                 {
@@ -345,24 +345,24 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 }
                 for (auto& [other, relation] : relations[entity])
                 {
-                    auto [entityName, otherName, subHandle] = GetOriginalRelationData(
-                        assets, handle, name, scene->blueprint.GetEntities().atLeft(other), *type);
+                    auto [entityName, otherName, subHandle] =
+                        GetOriginalRelationData(assets, handle, name, scene->blueprint.entities().atLeft(other), *type);
                     if (!entityName.empty())
                     {
-                        if (auto subScene = assets.read<Scene>(subHandle); cubos::core::reflection::compare(
-                                *type, relation.get(),
-                                subScene->blueprint.GetRelations()
-                                    .at(*type)
-                                    .at(subScene->blueprint.GetEntities().atRight(entityName))
-                                    .at(subScene->blueprint.GetEntities().atRight(otherName))
-                                    .get()))
+                        if (auto subScene = assets.read<Scene>(subHandle);
+                            cubos::core::reflection::compare(*type, relation.get(),
+                                                             subScene->blueprint.relations()
+                                                                 .at(*type)
+                                                                 .at(subScene->blueprint.entities().atRight(entityName))
+                                                                 .at(subScene->blueprint.entities().atRight(otherName))
+                                                                 .get()))
                         {
                             continue;
                         }
                     }
                     dirty = true;
                     ser.write(relation.type(), relation.get());
-                    entityJson.emplace((type->name() + "@" + scene->blueprint.GetEntities().atLeft(other)).c_str(),
+                    entityJson.emplace((type->name() + "@" + scene->blueprint.entities().atLeft(other)).c_str(),
                                        ser.output());
                 }
             }

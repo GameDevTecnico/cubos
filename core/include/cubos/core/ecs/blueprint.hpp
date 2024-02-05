@@ -162,15 +162,24 @@ namespace cubos::core::ecs
         template <typename T>
         using EntityMap = std::unordered_map<Entity, T, EntityHash>;
 
-        memory::UnorderedBimap<Entity, std::string, EntityHash> GetEntities() const
+        /// @brief Gets the map relating entities to their name
+        /// @return Bimap relating entities and names
+        memory::UnorderedBimap<Entity, std::string, EntityHash> entities() const
         {
             return mBimap;
         }
-        memory::TypeMap<EntityMap<memory::AnyValue>> GetComponents() const
+
+        /// @brief Gets the map relating types of components to maps of entities to the component values.
+        /// @return TypeMap of an EntityMap to component values
+        memory::TypeMap<EntityMap<memory::AnyValue>> components() const
         {
             return mComponents;
         }
-        memory::TypeMap<EntityMap<EntityMap<memory::AnyValue>>> GetRelations() const
+
+        /// @brief Gets the map relating types of relations to maps of entities to maps of entities to the component
+        /// values.
+        /// @return TypeMap of an EntityMap to another EntityMap to component values
+        memory::TypeMap<EntityMap<EntityMap<memory::AnyValue>>> relations() const
         {
             return mRelations;
         }
