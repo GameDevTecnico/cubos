@@ -167,12 +167,12 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
                     // And finally, add it to the blueprint.
                     scene.blueprint.add(entity, core::memory::move(component));
                 }
-                else if (typeName.find("@") != std::string::npos &&
-                         mRelations.contains(typeName.substr(0, typeName.find("@"))))
+                else if (typeName.find('@') != std::string::npos &&
+                         mRelations.contains(typeName.substr(0, typeName.find('@'))))
                 {
                     // Create the relation with the default value.
-                    std::string relationName = typeName.substr(0, typeName.find("@"));
-                    std::string toName = typeName.substr(typeName.find("@") + 1);
+                    std::string relationName = typeName.substr(0, typeName.find('@'));
+                    std::string toName = typeName.substr(typeName.find('@') + 1);
 
                     auto relation = AnyValue::defaultConstruct(mRelations.at(relationName));
 
@@ -207,12 +207,12 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
     return true;
 }
 
-std::tuple<std::string, const Asset<Scene>&> GetOriginalComponentData(
-    const Assets& assets, const Asset<Scene>& sceneAsset, const std::string& entityPath,
-    const cubos::core::reflection::Type& componentType)
+std::tuple<std::string, const Asset<Scene>&> originalComponentData(const Assets& assets, const Asset<Scene>& sceneAsset,
+                                                                   const std::string& entityPath,
+                                                                   const cubos::core::reflection::Type& componentType)
 {
     auto scene = assets.read<Scene>(sceneAsset);
-    if (entityPath.find(".") == std::string::npos)
+    if (entityPath.find('.') == std::string::npos)
     {
         auto entity = scene->blueprint.entities().atRight(entityPath);
         if (auto components = scene->blueprint.components().at(componentType); !components.contains(entity))
@@ -221,20 +221,18 @@ std::tuple<std::string, const Asset<Scene>&> GetOriginalComponentData(
         }
         return {entityPath, sceneAsset};
     }
-    else
-    {
-        std::string subScenePath = entityPath.substr(0, entityPath.find("."));
-        auto newPath = entityPath.substr(entityPath.find(".") + 1);
-        return GetOriginalComponentData(assets, scene->imports.at(subScenePath), newPath, componentType);
-    }
+
+    std::string subScenePath = entityPath.substr(0, entityPath.find('.'));
+    auto newPath = entityPath.substr(entityPath.find('.') + 1);
+    return originalComponentData(assets, scene->imports.at(subScenePath), newPath, componentType);
 }
 
-std::tuple<std::string, std::string, const Asset<Scene>&> GetOriginalRelationData(
+std::tuple<std::string, std::string, const Asset<Scene>&> originalRelationData(
     const Assets& assets, const Asset<Scene>& sceneAsset, const std::string& entityPath, const std::string& otherPath,
     const cubos::core::reflection::Type& relationType)
 {
     auto scene = assets.read<Scene>(sceneAsset);
-    if (entityPath.find(".") == std::string::npos)
+    if (entityPath.find('.') == std::string::npos)
     {
         auto entity = scene->blueprint.entities().atRight(entityPath);
         auto other = scene->blueprint.entities().atRight(otherPath);
@@ -253,17 +251,14 @@ std::tuple<std::string, std::string, const Asset<Scene>&> GetOriginalRelationDat
         }
         return {entityPath, otherPath, sceneAsset};
     }
-    else
+    if (otherPath.find('.') == std::string::npos)
     {
-        if (otherPath.find(".") == std::string::npos)
-        {
-            return {"", "", sceneAsset};
-        }
-        std::string subScenePath = entityPath.substr(0, entityPath.find("."));
-        auto newPath = entityPath.substr(entityPath.find(".") + 1);
-        auto newOtherPath = otherPath.substr(otherPath.find(".") + 1);
-        return GetOriginalRelationData(assets, scene->imports.at(subScenePath), newPath, newOtherPath, relationType);
+        return {"", "", sceneAsset};
     }
+    std::string subScenePath = entityPath.substr(0, entityPath.find('.'));
+    auto newPath = entityPath.substr(entityPath.find('.') + 1);
+    auto newOtherPath = otherPath.substr(otherPath.find('.') + 1);
+    return originalRelationData(assets, scene->imports.at(subScenePath), newPath, newOtherPath, relationType);
 }
 
 bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
@@ -282,7 +277,7 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
     auto entitiesJson = nlohmann::json::object();
     for (const auto& [entity, name] : scene->blueprint.entities())
     {
-        if (name.find(".") == std::string::npos)
+        if (name.find('.') == std::string::npos)
         {
             auto entityJson = nlohmann::json::object();
             for (auto& [type, components] : scene->blueprint.components())
@@ -320,7 +315,7 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 {
                     continue;
                 }
-                auto [entityName, subHandle] = GetOriginalComponentData(assets, handle, name, *type);
+                auto [entityName, subHandle] = originalComponentData(assets, handle, name, *type);
                 if (!entityName.empty())
                 {
                     auto subScene = assets.read<Scene>(subHandle);
@@ -346,7 +341,7 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 for (auto& [other, relation] : relations[entity])
                 {
                     auto [entityName, otherName, subHandle] =
-                        GetOriginalRelationData(assets, handle, name, scene->blueprint.entities().atLeft(other), *type);
+                        originalRelationData(assets, handle, name, scene->blueprint.entities().atLeft(other), *type);
                     if (!entityName.empty())
                     {
                         if (auto subScene = assets.read<Scene>(subHandle);

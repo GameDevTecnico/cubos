@@ -32,9 +32,9 @@ CUBOS_REFLECT_IMPL(FieldsObject)
 
 TEST_CASE("reflection::compare")
 {
-    const auto fo = FieldsObject(1, 0.3f);
-    const auto foEqual = FieldsObject(1, 0.3f);
-    const auto foDifferent = FieldsObject(2, 0.3f);
+    const auto fo = FieldsObject{1, 0.3F};
+    const auto foEqual = FieldsObject{1, 0.3F};
+    const auto foDifferent = FieldsObject{2, 0.3F};
     CHECK(compare(fo.reflect(), (void*)&fo, (void*)&foEqual));
     CHECK_FALSE(compare(fo.reflect(), (void*)&fo, (void*)&foDifferent));
 
