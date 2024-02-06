@@ -31,8 +31,8 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
             {
                 cubos::core::geom::Intersect intersectionInfo{};
 
-                bool intersects = cubos::core::geom::intersects(boxShape1.box, localToWorld1.mat, boxShape2.box,
-                                                                localToWorld2.mat, intersectionInfo);
+                bool intersects = cubos::core::geom::intersects(ent1, boxShape1.box, localToWorld1.mat, ent2,
+                                                                boxShape2.box, localToWorld2.mat, intersectionInfo);
 
                 if (!intersects)
                 {
@@ -40,8 +40,7 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 }
 
                 cmds.relate(ent1, ent2,
-                            CollidingWith{.entity = ent1,
-                                          .other = ent2,
+                            CollidingWith{.entity = intersectionInfo.entity,
                                           .penetration = intersectionInfo.penetration,
                                           .position = {0.0F, 0.0F, 0.0F},
                                           .normal = intersectionInfo.normal});
