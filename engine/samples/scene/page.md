@@ -18,7 +18,7 @@ Scene files are JSON files with the extension `.cubos`. They must have two field
 The `entities` field is an object where each field identifies and describes the components and relations of an entity.
 In this scene we have two entities, `root` and `child`.
 `root` has a single component, `Num`, with a value of 1.
-`child` too has a component `Num`, but also has a relation `OwnedBy` with `root` as target.
+`child` too has a component `Num`, but also has a relation `OwnedBy` with `root` as target, indicated by the character `@`.
 In this sample, `Num` is used so we can later identify the entities.
 
 @note Make sure these component names match the ones in your application and that they have been registered with @ref cubos::engine::Cubos "Cubos".
@@ -32,7 +32,7 @@ It then imports the very same scene again, but this time with the name `sub2` in
 This effectively instantiates the entities of the previous scene twice in this new scene, each with their names prefixed with either `sub1.` or `sub2.`
 
 Also take a look at the `DistanceTo` relation: it is a symmetric relation, so it doesn't make a different whether wwe put it in `sub.root` or `sub2.root`.
-Since `DistanceTo` is a relation which holds data, instead of only specifying the target, as we do with `OwnedBy`, we write a JSON object with two keys, `"entity"` and `"value"`.
+Since `DistanceTo` is a relation which holds data, instead of only specifying the target, as we do with `OwnedBy`, we write a JSON object with a key, `"value"`.
 
 Under `entities`, we can override the entities in the sub-scenes to edit components or add new ones.
 For example, by referencing `sub1.root` we are making local changes to the `root` entity of that instance of the subscene.
