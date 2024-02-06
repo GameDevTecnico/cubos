@@ -18,10 +18,10 @@ CUBOS_REFLECT_IMPL(cubos::core::geom::Intersect)
 
 void getAxes(const glm::mat4& localToWorld, glm::vec3 axes[])
 {
-    glm::vec3 normals[6];
+    glm::vec3 normals[3];
     cubos::core::geom::Box::normals(normals);
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 3; i++)
     {
         axes[i] = glm::normalize(localToWorld * glm::vec4(normals[i], 0.0F));
     }
@@ -63,7 +63,11 @@ bool overlap(glm::vec2 p1, glm::vec2 p2)
     {
         return true;
     }
-    return (p2.x < p1.x) && (p1.y < p2.y);
+    if ((p2.x < p1.x) && (p1.y < p2.y))
+    {
+        return true;
+    }
+    return (p2.x == p1.x) && (p1.y == p2.y);
 }
 
 float getOverlap(glm::vec2 p1, glm::vec2 p2)
@@ -84,19 +88,25 @@ float getOverlap(glm::vec2 p1, glm::vec2 p2)
         }
         return glm::abs(p2.y - p2.x);
     }
-    return 0.0F;
+    // TODO: change this
+    return 110.0F;
 }
 
-bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
-                                   const glm::mat4& localToWorld2, Intersect& intersect)
+bool cubos::core::geom::intersects(const cubos::core::ecs::Entity& ent1, const Box& box1,
+                                   const glm::mat4& localToWorld1, const cubos::core::ecs::Entity& ent2,
+                                   const Box& box2, const glm::mat4& localToWorld2, Intersect& intersect)
 {
-    static glm::vec3 axes1[6];
-    static glm::vec3 axes2[6];
+    static glm::vec3 axes1[3];
+    static glm::vec3 axes2[3];
     getAxes(localToWorld1, axes1);
     getAxes(localToWorld2, axes2);
 
+    // TODO: change this
+    intersect.penetration = 100.0F;
+
     for (glm::vec3 axis : axes1)
     {
+
         glm::vec2 p1 = project(box1, axis, localToWorld1);
         glm::vec2 p2 = project(box2, axis, localToWorld2);
 
@@ -108,11 +118,12 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
         // get the overlap
         float o = getOverlap(p1, p2);
         // check for minimum
-        if (o < intersect.penetration)
+        if (o < intersect.penetration) // do this but with threshold otherwise this thing sucks
         {
             // then set this one as the smallest
             intersect.penetration = o;
             intersect.normal = axis;
+            intersect.entity = ent1;
         }
     }
 
@@ -135,6 +146,7 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
             // then set this one as the smallest
             intersect.penetration = o;
             intersect.normal = -axis;
+            intersect.entity = ent2;
         }
     }
 
