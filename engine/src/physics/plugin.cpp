@@ -1,6 +1,7 @@
 #include <glm/glm.hpp>
 
 #include <cubos/engine/physics/plugin.hpp>
+#include <cubos/engine/physics/solver/solver.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
@@ -69,6 +70,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.addComponent<PreviousPosition>();
 
     cubos.addPlugin(gravityPlugin);
+    cubos.addPlugin(solverPlugin);
 
     // executed every frame
     cubos.system("increase fixed-step accumulator")
@@ -107,7 +109,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
 
                 if (mass.inverseMass <= 0.0F)
                 {
-                    return;
+                    continue;
                 }
 
                 // Apply damping
@@ -125,10 +127,14 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         .tagged("cubos.physics.simulation.substeps.correct_position")
         .after("cubos.physics.simulation.substeps.integrate")
         .onlyIf(simulatePhysicsStep)
-        .call([](Query<Position&, AccumulatedCorrection&> query) {
-            for (auto [position, correction] : query)
+        .call([](Query<Position&, AccumulatedCorrection&, Mass&> query) {
+            for (auto [position, correction, mass] : query)
             {
-                position.vec += correction.vec;
+                if (mass.inverseMass <= 0.0F)
+                {
+                    continue;
+                }
+                position.vec += correction.vec; // lagrange * correction * inverseMass
                 correction.vec = glm::vec3(0, 0, 0);
             }
         });

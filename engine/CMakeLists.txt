@@ -63,6 +63,7 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/physics/plugin.cpp"
 	"src/physics/gravity.cpp"
+	"src/physics/solver.cpp"
 
 	"src/input/plugin.cpp"
 	"src/input/input.cpp"
