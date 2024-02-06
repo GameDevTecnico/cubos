@@ -10,6 +10,7 @@
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -36,6 +37,7 @@ int main()
     auto cubos = Cubos();
 
     cubos.addPlugin(collisionsPlugin);
+    cubos.addPlugin(physicsPlugin);
     cubos.addPlugin(rendererPlugin);
     cubos.addPlugin(inputPlugin);
 
@@ -63,13 +65,19 @@ int main()
                 .entity();
     });
 
-    cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
+    cubos.startupSystem("create colliders").call([](State& state, Commands commands, Gravity& gravity) {
         state.a = commands.create()
                       .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
+                      .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
+                      .add(Velocity{.vec = {0.0F, 0.0F, 1.0F}})
+                      .add(Force{})
+                      .add(Impulse{})
+                      .add(Mass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
+                      .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                       .entity();
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
@@ -79,15 +87,23 @@ int main()
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
+                      .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
+                      .add(Velocity{.vec = {0.0F, 0.0F, -1.0F}})
+                      .add(Force{})
+                      .add(Impulse{})
+                      .add(Mass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
+                      .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                       .entity();
         state.bRotationAxis = glm::sphericalRand(1.0F);
+
+        gravity.value = glm::vec3{0.0F, 0.0F, 0.0F};
     });
 
     cubos.system("move colliders")
         .before("cubos.transform.update")
-        .call([](State& state, const Input& input, Query<Position&, Rotation&> query) {
-            auto [aPos, aRot] = *query.at(state.a);
-            auto [bPos, bRot] = *query.at(state.b);
+        .call([](State& state, const Input& input, Query<Position&, Rotation&, Velocity&> query) {
+            auto [aPos, aRot, aVel] = *query.at(state.a);
+            auto [bPos, bRot, bVel] = *query.at(state.b);
 
             if (state.collided)
             {
@@ -97,20 +113,24 @@ int main()
 
                     aPos.vec = glm::vec3{0.0F, 0.0F, -2.0F};
                     aRot.quat = glm::quat{1.0F, 0.0F, 0.0F, 0.0F};
+                    aVel.vec = glm::vec3{0.0F, 0.0F, 1.0F};
                     state.aRotationAxis = glm::sphericalRand(1.0F);
 
                     bPos.vec = glm::vec3{0.0F, 0.0F, 2.0F};
                     bRot.quat = glm::quat{1.0F, 0.0F, 0.0F, 0.0F};
+                    bVel.vec = glm::vec3{0.0F, 0.0F, -1.0F};
                     state.bRotationAxis = glm::sphericalRand(1.0F);
                 }
-                return;
+                // return;
             }
 
             aRot.quat = glm::rotate(aRot.quat, 0.001F, state.aRotationAxis);
-            aPos.vec += glm::vec3{0.0F, 0.0F, 0.001F};
+            //  aPos.vec += glm::vec3{0.0F, 0.0F, 0.01F};
+            aVel.vec += glm::vec3{0.0F, 0.0F, 0.01F};
 
             bRot.quat = glm::rotate(bRot.quat, 0.001F, state.bRotationAxis);
-            bPos.vec += glm::vec3{0.0F, 0.0F, -0.001F};
+            //  bPos.vec += glm::vec3{0.0F, 0.0F, -0.01F};
+            bVel.vec -= glm::vec3{0.0F, 0.0F, 0.01F};
         });
 
     cubos.system("check collisions")
