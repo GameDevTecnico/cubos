@@ -100,7 +100,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
             if (!this->write(type.get<FieldsTrait>().begin()->type(),
                              type.get<FieldsTrait>().view(value).begin()->value))
             {
-                CUBOS_WARN("Couldn't deserialize wrapped field '{}'", type.get<FieldsTrait>().begin()->name());
+                CUBOS_WARN("Couldn't serialize wrapped field '{}'", type.get<FieldsTrait>().begin()->name());
                 return false;
             }
 

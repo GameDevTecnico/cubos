@@ -87,6 +87,5 @@ bool cubos::core::reflection::compare(const Type& type, void* a, void* b)
         return trait.into(a) == trait.into(b);
     }
 
-    CUBOS_CRITICAL("Type cannot be compared!");
-    return true;
+    CUBOS_FAIL("Type cannot be compared!");
 }
