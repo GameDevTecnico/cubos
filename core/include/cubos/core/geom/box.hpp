@@ -53,14 +53,11 @@ namespace cubos::core::geom
             corners[7] = {halfSize.x, -halfSize.y, -halfSize.z};
         }
 
-        static void normals(glm::vec3 normals[6])
+        static void normals(glm::vec3 normals[3])
         {
             normals[0] = {0.0F, 1.0F, 0.0F};
             normals[1] = {0.0F, 0.0F, 1.0F};
-            normals[2] = {-1.0F, 0.0F, 0.0F};
-            normals[3] = {0.0F, -1.0F, 0.0F};
-            normals[4] = {1.0F, 0.0F, 0.0F};
-            normals[5] = {0.0F, 0.0F, -1.0F};
+            normals[2] = {1.0F, 0.0F, 0.0F};
         }
     };
 } // namespace cubos::core::geom
