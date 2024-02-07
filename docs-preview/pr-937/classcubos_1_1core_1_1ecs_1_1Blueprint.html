@@ -58,7 +58,6 @@
               <ul>
                 <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-static-methods">Public static functions</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
@@ -89,19 +88,6 @@
               <span class="m-doc-wrap-bumper">static auto <a href="#a4c2cb5bd1bdac49429e24772dc4d99a8" class="m-doc">validEntityName</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; bool</span>
             </dt>
             <dd>Checks if the given name is a valid entity name.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt id="ab5e7c4a154c4902f5248582592e05f09">
-              <span class="m-doc-wrap-bumper"><a href="#ab5e7c4a154c4902f5248582592e05f09" class="m-doc-self">Blueprint</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Constructs.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a210250c3c18dc3871fef009935330fc9" class="m-doc">Blueprint</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Move constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -162,6 +148,18 @@
               R relate) const</span>
             </dt>
             <dd>Instantiates the blueprint by calling the given functors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a261211b5113951e7f8547d2968c4b5e8" class="m-doc">entities</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1UnorderedBimap.html" class="m-doc">memory::<wbr />UnorderedBimap</a>&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, std::string, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt;</span>
+            </dt>
+            <dd>Gets the map relating entities to their name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8de885ad9b31f422766f40943ab5731" class="m-doc">components</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;</span>
+            </dt>
+            <dd>Gets the map relating types of components to maps of entities to the component values.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af01608c90e4775dfe20342679fdece85" class="m-doc">relations</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;&gt;</span>
+            </dt>
+            <dd>Gets the map relating types of relations to maps of entities to maps of entities to the component values.</dd>
           </dl>
         </section>
         <section>
@@ -180,23 +178,6 @@
               </tfoot>
             </table>
 <p><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> names must contain only lowercase alphanumerical characters and hyphens.</p>
-          </div></section>
-          <section class="m-doc-details" id="a210250c3c18dc3871fef009935330fc9"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a210250c3c18dc3871fef009935330fc9" class="m-doc-self">Blueprint</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Move constructs.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a> to move from.</td>
-                </tr>
-              </tbody>
-            </table>
           </div></section>
           <section class="m-doc-details" id="a36e3ccd2ee5454aa210494590eea1678"><div>
             <h3>
@@ -458,6 +439,48 @@
                   <td>Functor used to add relations to entities.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a261211b5113951e7f8547d2968c4b5e8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1UnorderedBimap.html" class="m-doc">memory::<wbr />UnorderedBimap</a>&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, std::string, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a261211b5113951e7f8547d2968c4b5e8" class="m-doc-self">entities</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the map relating entities to their name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Bimap relating entities and names</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8de885ad9b31f422766f40943ab5731"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8de885ad9b31f422766f40943ab5731" class="m-doc-self">components</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the map relating types of components to maps of entities to the component values.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>TypeMap of an EntityMap to component values</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af01608c90e4775dfe20342679fdece85"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af01608c90e4775dfe20342679fdece85" class="m-doc-self">relations</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the map relating types of relations to maps of entities to maps of entities to the component values.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>TypeMap of an EntityMap to another EntityMap to component values</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
         </section>
