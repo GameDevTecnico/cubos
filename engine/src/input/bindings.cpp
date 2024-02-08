@@ -1,4 +1,5 @@
 #include <cubos/core/reflection/type.hpp>
+
 #include <cubos/engine/input/bindings.hpp>
 
 using cubos::core::io::Key;
