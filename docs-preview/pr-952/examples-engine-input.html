@@ -53,69 +53,9 @@
         <p>Using the <a href="group__input-plugin.html" class="m-doc">Input</a> plugin.</p>
 <p><a name="md_input_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/input">here</a>.</p></aside><p>This example shows how the scene-input plugin can be used to handle user input.</p><p>The plugin function is included from the <a href="engine_2include_2cubos_2engine_2input_2plugin_8hpp.html" class="m-doc">engine/<wbr />input/<wbr />plugin.hpp</a> header.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addPlugin</span><span class="p">(</span><span class="n">inputPlugin</span><span class="p">);</span></pre><p>The Input plugin requires a <a href="classcubos_1_1engine_1_1InputBindings.html" class="m-doc">InputBindings</a> asset to be set. Let&#x27;s take a look at the file the sample uses.</p><pre class="m-code">{
     &quot;actions&quot;: {
-        &quot;next-showcase&quot;: {
-            &quot;keys&quot;: [
-                &quot;Return&quot;
-            ],
-            &quot;gamepad&quot;: [
-                &quot;RBumper&quot;
-            ],
-            &quot;mouse&quot;: []
-        },
-        &quot;x-or-z&quot;: {
-            &quot;keys&quot;: [
-                &quot;x&quot;,
-                &quot;z&quot;
-            ],
-            &quot;gamepad&quot;: [],
-            &quot;mouse&quot;: []
-        },
-        &quot;shift-space&quot;: {
-            &quot;keys&quot;: [
-                &quot;S-Space&quot;
-            ],
-            &quot;gamepad&quot;: [],
-            &quot;mouse&quot;: []
-        },
-        &quot;ctrl-shift-space&quot;: {
-            &quot;keys&quot;: [
-                &quot;C-S-Space&quot;
-            ],
-            &quot;gamepad&quot;: [],
-            &quot;mouse&quot;: []
-        },
-        &quot;left-mb&quot;: {
-            &quot;keys&quot;: [],
-            &quot;gamepad&quot;: [],
-            &quot;mouse&quot;: [
-                &quot;Left&quot;
-            ]
-        },
-        &quot;right-mb&quot;: {
-            &quot;keys&quot;: [],
-            &quot;gamepad&quot;: [],
-            &quot;mouse&quot;: [
-                &quot;Right&quot;
-            ]
-        },
-        &quot;middle-mb&quot;: {
-            &quot;keys&quot;: [],
-            &quot;gamepad&quot;: [],
-            &quot;mouse&quot;: [
-                &quot;Middle&quot;
-            ]
-        },
-        &quot;extra-mb&quot;: {
-            &quot;keys&quot;: [],
-            &quot;gamepad&quot;: [],
-            &quot;mouse&quot;: [
-                &quot;Extra1&quot;,
-                &quot;Extra2&quot;
-            ]
-        }
     },
     &quot;axes&quot;: {
-        &quot;vertical&quot;: {
+        &quot;free-horizontal-x&quot;: {
             &quot;pos&quot;: [
                 &quot;w&quot;,
                 &quot;Up&quot;
@@ -128,7 +68,7 @@
                 &quot;LY&quot;
             ]
         },
-        &quot;horizontal&quot;: {
+        &quot;free-horizontal-z&quot;: {
             &quot;pos&quot;: [
                 &quot;d&quot;,
                 &quot;Right&quot;
@@ -141,14 +81,12 @@
                 &quot;LX&quot;
             ]
         },
-        &quot;shift-vertical&quot;: {
+        &quot;free-vertical&quot;: {
             &quot;pos&quot;: [
-                &quot;S-w&quot;,
-                &quot;S-Up&quot;
+                &quot;Space&quot;
             ],
             &quot;neg&quot;: [
-                &quot;S-s&quot;,
-                &quot;S-Down&quot;
+                &quot;S-Space&quot;
             ],
             &quot;gamepad&quot;: []
         }
