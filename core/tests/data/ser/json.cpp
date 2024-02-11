@@ -9,9 +9,11 @@
 #include <cubos/core/reflection/external/uuid.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
 #include <cubos/core/reflection/traits/constructible_utils.hpp>
+#include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 
 using cubos::core::data::JSONSerializer;
+using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::Type;
 
@@ -36,7 +38,21 @@ namespace
         float b;
         std::string c;
     };
+
+    enum class Color
+    {
+        Red,
+        Green,
+        Blue
+    };
 } // namespace
+
+CUBOS_REFLECT_EXTERNAL_DECL(Color);
+CUBOS_REFLECT_EXTERNAL_IMPL(Color)
+{
+    return Type::create("Color").with(
+        EnumTrait{}.withVariant<Color::Red>("Red").withVariant<Color::Green>("Green").withVariant<Color::Blue>("Blue"));
+}
 
 TEST_CASE("data::JSONSerializer")
 {
@@ -69,6 +85,11 @@ TEST_CASE("data::JSONSerializer")
 
     // String
     AUTO_TEST(std::string, "Hello, world!", "\"Hello, world!\"");
+
+    // Enum.
+    AUTO_TEST(Color, Color::Red, "\"Red\"");
+    AUTO_TEST(Color, Color::Green, "\"Green\"");
+    AUTO_TEST(Color, Color::Blue, "\"Blue\"");
 
     // UUID
     AUTO_TEST(uuids::uuid, *uuids::uuid::from_string("f7063cd4-de44-47b5-b0a9-f0e7a558c9e5"),
