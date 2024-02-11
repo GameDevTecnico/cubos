@@ -50,7 +50,7 @@ std::optional<WindowEvent> BaseWindow::pollEvent()
 
 CUBOS_REFLECT_EXTERNAL_IMPL(MouseButton)
 {
-    return Type::create("MouseButton")
+    return Type::create("cubos::core::io::MouseButton")
         .with(EnumTrait{}
                   .withVariant<MouseButton::Invalid>("Invalid")
 
@@ -63,14 +63,14 @@ CUBOS_REFLECT_EXTERNAL_IMPL(MouseButton)
 
 CUBOS_REFLECT_EXTERNAL_IMPL(MouseAxis)
 {
-    return Type::create("MouseAxis")
+    return Type::create("cubos::core::io::MouseAxis")
         .with(EnumTrait{}.withVariant<MouseAxis::X>("X").withVariant<MouseAxis::Y>("Y").withVariant<MouseAxis::Scroll>(
             "Scroll"));
 }
 
 CUBOS_REFLECT_EXTERNAL_IMPL(MouseState)
 {
-    return Type::create("MouseState")
+    return Type::create("cubos::core::io::MouseState")
         .with(EnumTrait{}
                   .withVariant<MouseState::Default>("Default")
                   .withVariant<MouseState::Locked>("Locked")
