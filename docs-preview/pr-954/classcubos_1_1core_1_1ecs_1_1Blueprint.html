@@ -122,9 +122,8 @@
             </dt>
             <dd>Adds a relation between two entities. Overwrites the existing relation, if there&#x27;s any.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a8ac9595b66215c5e889f69fd3f7b2f97" class="m-doc">merge</a>(</span><span class="m-doc-wrap">const std::string&amp; prefix,
-              const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; other,
-              bool withName)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ae30d4f27b1469007d621cc339e379c2b" class="m-doc">merge</a>(</span><span class="m-doc-wrap">const std::string&amp; prefix,
+              const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; other)</span>
             </dt>
             <dd>Merges another blueprint into this one.</dd>
             <dt id="a98b440b50553018db544d6ce8c7bea6a">
@@ -328,11 +327,10 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8ac9595b66215c5e889f69fd3f7b2f97"><div>
+          <section class="m-doc-details" id="ae30d4f27b1469007d621cc339e379c2b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8ac9595b66215c5e889f69fd3f7b2f97" class="m-doc-self">merge</a>(</span><span class="m-doc-wrap">const std::string&amp; prefix,
-              const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; other,
-              bool withName)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae30d4f27b1469007d621cc339e379c2b" class="m-doc-self">merge</a>(</span><span class="m-doc-wrap">const std::string&amp; prefix,
+              const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; other)</span></span>
             </h3>
             <p>Merges another blueprint into this one.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -347,10 +345,6 @@
                 <tr>
                   <td>other</td>
                   <td><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a> to merge.</td>
-                </tr>
-                <tr>
-                  <td>withName</td>
-                  <td>Whether to use the entity names from the other blueprint.</td>
                 </tr>
               </tbody>
             </table>
@@ -402,7 +396,7 @@
                 </tr>
                 <tr>
                   <td>withName</td>
-                  <td>Whether to use the entity names from the blueprint.</td>
+                  <td>Whether to add the &#x27;<a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">Name</a>&#x27; component to instantiated entities.</td>
                 </tr>
               </tbody>
             </table>
