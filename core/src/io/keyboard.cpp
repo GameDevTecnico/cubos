@@ -1,6 +1,10 @@
 #include <cubos/core/io/keyboard.hpp>
+#include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/mask.hpp>
+#include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::io::Key;
@@ -8,6 +12,8 @@ using cubos::core::io::KeyWithModifiers;
 using cubos::core::io::Modifiers;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::MaskTrait;
+using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
 
 CUBOS_REFLECT_EXTERNAL_IMPL(Key)
@@ -121,17 +127,62 @@ CUBOS_REFLECT_EXTERNAL_IMPL(Key)
 CUBOS_REFLECT_EXTERNAL_IMPL(Modifiers)
 {
     return Type::create("cubos::core::io::Modifiers")
-        .with(EnumTrait{}
-                  .withVariant<Modifiers::None>("None")
-                  .withVariant<Modifiers::Control>("Control")
-                  .withVariant<Modifiers::Shift>("Shift")
-                  .withVariant<Modifiers::Alt>("Alt")
-                  .withVariant<Modifiers::System>("System"));
+        .with(MaskTrait{}
+                  .withBit<Modifiers::Control>("Control")
+                  .withBit<Modifiers::Shift>("Shift")
+                  .withBit<Modifiers::Alt>("Alt")
+                  .withBit<Modifiers::System>("System"));
 }
 
 CUBOS_REFLECT_IMPL(KeyWithModifiers)
 {
     return Type::create("cubos::core::io::KeyWithModifiers")
+        .with(StringConversionTrait{[](const void* instance) {
+                                        const auto* keyWithMods = static_cast<const KeyWithModifiers*>(instance);
+                                        const auto& modsMask = reflection::reflect<Modifiers>().get<MaskTrait>();
+
+                                        std::string string;
+                                        for (const auto& bit : modsMask.view(&keyWithMods->modifiers))
+                                        {
+                                            string += bit.name() + '-';
+                                        }
+                                        string += EnumTrait::toString(keyWithMods->key);
+                                        return string;
+                                    },
+                                    [](void* instance, const std::string& string) {
+                                        auto* keyWithMods = static_cast<KeyWithModifiers*>(instance);
+                                        const auto& modsMask = reflection::reflect<Modifiers>().get<MaskTrait>();
+
+                                        keyWithMods->modifiers = Modifiers::None;
+                                        std::size_t cursor = 0;
+                                        for (;;)
+                                        {
+                                            auto nextCursor = string.find_first_of('-', cursor + 1);
+                                            if (nextCursor == std::string::npos)
+                                            {
+                                                break;
+                                            }
+                                            nextCursor += 1;
+
+                                            auto modifier = string.substr(cursor, nextCursor - cursor - 1);
+                                            if (!modsMask.contains(modifier))
+                                            {
+                                                CUBOS_WARN("No such keyboard modifier {}", modifier);
+                                                return false;
+                                            }
+
+                                            modsMask.at(modifier).set(&keyWithMods->modifiers);
+                                            cursor = nextCursor;
+                                        }
+
+                                        if (!EnumTrait::fromString(keyWithMods->key, string.substr(cursor)))
+                                        {
+                                            CUBOS_WARN("No such keyboard key code {}", string.substr(cursor));
+                                            return false;
+                                        }
+
+                                        return true;
+                                    }})
         .with(FieldsTrait{}
                   .withField("key", &KeyWithModifiers::key)
                   .withField("modifiers", &KeyWithModifiers::modifiers));

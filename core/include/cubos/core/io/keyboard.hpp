@@ -139,6 +139,11 @@ namespace cubos::core::io
         Modifiers modifiers;
     };
 
+    inline Modifiers operator~(Modifiers mods)
+    {
+        return static_cast<Modifiers>(~static_cast<int>(mods));
+    }
+
     inline Modifiers operator|(Modifiers lhs, Modifiers rhs)
     {
         return static_cast<Modifiers>(static_cast<int>(lhs) | static_cast<int>(rhs));
