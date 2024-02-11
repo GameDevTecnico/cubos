@@ -28,8 +28,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/transform/rotation.cpp"
 	"src/transform/scale.cpp"
 
-	"src/utils/free_camera_controller/plugin.cpp"
-	"src/utils/free_camera_controller/controller.cpp"
+	"src/utils/free_camera/plugin.cpp"
+	"src/utils/free_camera/controller.cpp"
 
 	"src/assets/plugin.cpp"
 	"src/assets/assets.cpp"

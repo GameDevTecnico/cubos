@@ -2,7 +2,6 @@
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
-#include <cubos/engine/utils/free_camera_controller/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
 using namespace cubos::engine;
@@ -20,7 +19,6 @@ int main(int argc, char** argv)
     /// [Adding the plugin]
     cubos.addPlugin(voxelsPlugin);
     /// [Adding the plugin]
-    cubos.addPlugin(freeCameraControllerPlugin);
 
     cubos.startupSystem("configure Assets").tagged("cubos.settings").call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
@@ -33,7 +31,6 @@ int main(int argc, char** argv)
                                         .add(Position{{50.0F, 50.0F, 50.0F}})
                                         .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{-1.0F, -1.0F, -1.0F}),
                                                                       glm::vec3{0.0F, 1.0F, 0.0F})})
-                                        .add(FreeCameraController{})
                                         .entity();
     });
 
