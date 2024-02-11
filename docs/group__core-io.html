@@ -89,6 +89,10 @@
             </dt>
             <dd>Holds the state of a gamepad.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">cubos::core::io::KeyWithModifiers</a>
+            </dt>
+            <dd>Keyboard key code and modifier flags.</dd>
+            <dt>
               struct <a href="structcubos_1_1core_1_1io_1_1KeyEvent.html" class="m-doc">cubos::core::io::KeyEvent</a>
             </dt>
             <dd>Event sent when a key is pressed or released.</dd>
@@ -327,22 +331,6 @@
             </dt>
             <dd>Convert a string to a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#gaba975a725a92abf473fef4a82277fd90" class="m-doc">modifiersToString</a>(</span><span class="m-doc-wrap">Modifiers modifiers) -&gt; std::string</span>
-            </dt>
-            <dd>Converts a <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> enum to a string.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#gabc0d19fb4c86595a83c2ab5e6bdd86fc" class="m-doc">stringToModifiers</a>(</span><span class="m-doc-wrap">const std::string&amp; str) -&gt; Modifiers</span>
-            </dt>
-            <dd>Converts a string to a <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> enum.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga6977e2dca03628b7b7d62c7c3ed8d461" class="m-doc">keyToString</a>(</span><span class="m-doc-wrap">Key key) -&gt; std::string</span>
-            </dt>
-            <dd>Converts a <a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">Key</a> enum to a string.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga03f44de43c5a5cff009349d2ec7c53f9" class="m-doc">stringToKey</a>(</span><span class="m-doc-wrap">const std::string&amp; str) -&gt; Key</span>
-            </dt>
-            <dd>Convert a string to a <a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">Key</a> enum.</dd>
-            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ga0a287109f9cb78ff1c95f91aca05ee2f" class="m-doc">openWindow</a>(</span><span class="m-doc-wrap">const std::string&amp; title = &quot;CUBOS.&quot;,
               const glm::ivec2&amp; size = {800, 600}) -&gt; Window</span>
             </dt>
@@ -580,102 +568,6 @@
                 <tr>
                   <th>Returns</th>
                   <td>Axis.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="gaba975a725a92abf473fef4a82277fd90"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::string </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaba975a725a92abf473fef4a82277fd90" class="m-doc-self">modifiersToString</a>(</span><span class="m-doc-wrap">Modifiers modifiers)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="keyboard_8hpp.html">&lt;core/io/keyboard.hpp&gt;</a></div>
-            </h3>
-            <p>Converts a <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> enum to a string.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">modifiers</td>
-                  <td>Modifiers.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>String representation.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="gabc0d19fb4c86595a83c2ab5e6bdd86fc"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">Modifiers </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gabc0d19fb4c86595a83c2ab5e6bdd86fc" class="m-doc-self">stringToModifiers</a>(</span><span class="m-doc-wrap">const std::string&amp; str)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="keyboard_8hpp.html">&lt;core/io/keyboard.hpp&gt;</a></div>
-            </h3>
-            <p>Converts a string to a <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> enum.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">str</td>
-                  <td>String to convert.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Modifiers.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ga6977e2dca03628b7b7d62c7c3ed8d461"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::string </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga6977e2dca03628b7b7d62c7c3ed8d461" class="m-doc-self">keyToString</a>(</span><span class="m-doc-wrap">Key key)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="keyboard_8hpp.html">&lt;core/io/keyboard.hpp&gt;</a></div>
-            </h3>
-            <p>Converts a <a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">Key</a> enum to a string.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">key</td>
-                  <td>Key to convert.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>String representation.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ga03f44de43c5a5cff009349d2ec7c53f9"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">Key </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga03f44de43c5a5cff009349d2ec7c53f9" class="m-doc-self">stringToKey</a>(</span><span class="m-doc-wrap">const std::string&amp; str)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="keyboard_8hpp.html">&lt;core/io/keyboard.hpp&gt;</a></div>
-            </h3>
-            <p>Convert a string to a <a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">Key</a> enum.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">str</td>
-                  <td>The string to convert.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Key.</td>
                 </tr>
               </tfoot>
             </table>
