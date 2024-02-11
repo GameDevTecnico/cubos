@@ -134,7 +134,7 @@ namespace cubos::engine
             bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 
-        static bool anyPressed(const core::io::Window& window, const std::vector<std::pair<Key, Modifiers>>& keys);
+        static bool anyPressed(const core::io::Window& window, const std::vector<core::io::KeyWithModifiers>& keys);
         bool anyPressed(int player, const std::vector<GamepadButton>& buttons) const;
         bool anyPressed(const std::vector<MouseButton>& buttons);
         void handleActions(const core::io::Window& window, const std::vector<BindingIndex>& boundActions);

@@ -20,14 +20,14 @@ An `action` is an input that only has two states: pressed or not pressed.
 This would be most keys on a keyboard.
 An `axe` is an input that has a numeric value.
 For example, the joysticks on a controller can go from -1 to 1, depending on how much they are tilt in which direction.
-Using `axes` can also be useful for keys with symetric behaviour.
-For example, in this sample, `w` sets the `vertical` axe to 1, while `s` sets it to -1.
+Using `axes` can also be useful for keys with symmetric behaviour.
+For example, in this sample, `W` sets the `vertical` axe to 1, while `S` sets it to -1.
 
 To define an action or an axe, you simply have to add it to the respective list, giving it a name.
 The very first action in the file is called `next-showcase`.
 Then, if it's an action, you simply have to define which keys trigger it.
 You can also define key combinations by using a `-`.
-To check which strings map to which keys, you check the `keyToString` function implementation on [this file](https://github.com/GameDevTecnico/cubos/blob/main/core/src/cubos/core/io/keyboard.cpp). 
+To check which strings map to which keys, you check the names of the variants of the enums `Key` and `Modifier` on [this file](https://github.com/GameDevTecnico/cubos/blob/main/core/include/cubos/core/io/keyboard.hpp). 
 
 Now that we have our bindings file, let's get our application to do something with it.
 The first thing we're going to need is a reference to the bindings asset. 
@@ -60,7 +60,7 @@ Finding out whether the user is pressing a key is checked by a simple call to @r
 
 @snippet input/main.cpp Showcase Modifier
 
-Getting modified input (such as with a `CTRL` or a `SHIFT` hold) is no different from getting non-modified input, just make sure the binding for it is defined in the Bindings asset.
+Getting modified input (such as with a `Control` or a `Shift` hold) is no different from getting non-modified input, just make sure the binding for it is defined in the Bindings asset.
 
 @snippet input/main.cpp Showcase Multi Modifier
 
@@ -82,4 +82,4 @@ Instead, you will have to call the @ref cubos::core::io::Window::pressed "Window
 
 @snippet input/main.cpp Showcase Mouse Buttons
 
-Reading mouse buttons is also supported, just bind them to an action, and then call @ref cubos::engine::Input::pressed "Input::pressed" as usual. To check which strings map to which buttons, you check the `mouseButtonToString` function implementation on [this file](https://github.com/GameDevTecnico/cubos/blob/main/core/src/cubos/core/io/window.cpp).
+Reading mouse buttons is also supported, just bind them to an action, and then call @ref cubos::engine::Input::pressed "Input::pressed" as usual. To check which strings map to which buttons, you check the names of the variants of the enum `MouseButton` on [this file](https://github.com/GameDevTecnico/cubos/blob/main/core/include/cubos/core/io/window.hpp).

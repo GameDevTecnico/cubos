@@ -4,58 +4,43 @@
             "keys": [
                 "Return"
             ],
-            "gamepad": [
+            "gamepadButtons": [
                 "RBumper"
-            ],
-            "mouse": []
+            ]
         },
         "x-or-z": {
             "keys": [
-                "x",
-                "z"
-            ],
-            "gamepad": [],
-            "mouse": []
+                "X",
+                "Z"
+            ]
         },
         "shift-space": {
             "keys": [
-                "S-Space"
-            ],
-            "gamepad": [],
-            "mouse": []
+                "Shift-Space"
+            ]
         },
         "ctrl-shift-space": {
             "keys": [
-                "C-S-Space"
-            ],
-            "gamepad": [],
-            "mouse": []
+                "Control-Shift-Space"
+            ]
         },
         "left-mb": {
-            "keys": [],
-            "gamepad": [],
-            "mouse": [
+            "mouseButtons": [
                 "Left"
             ]
         },
         "right-mb": {
-            "keys": [],
-            "gamepad": [],
-            "mouse": [
+            "mouseButtons": [
                 "Right"
             ]
         },
         "middle-mb": {
-            "keys": [],
-            "gamepad": [],
-            "mouse": [
+            "mouseButtons": [
                 "Middle"
             ]
         },
         "extra-mb": {
-            "keys": [],
-            "gamepad": [],
-            "mouse": [
+            "mouseButtons": [
                 "Extra1",
                 "Extra2"
             ]
@@ -63,41 +48,41 @@
     },
     "axes": {
         "vertical": {
-            "pos": [
-                "w",
+            "positive": [
+                "W",
                 "Up"
             ],
-            "neg": [
-                "s",
+            "negative": [
+                "S",
                 "Down"
             ],
-            "gamepad": [
+            "gamepadAxes": [
                 "LY"
             ]
         },
         "horizontal": {
-            "pos": [
-                "d",
+            "positive": [
+                "D",
                 "Right"
             ],
-            "neg": [
-                "a",
+            "negative": [
+                "A",
                 "Left"
             ],
-            "gamepad": [
+            "gamepadAxes": [
                 "LX"
             ]
         },
         "shift-vertical": {
-            "pos": [
-                "S-w",
-                "S-Up"
+            "positive": [
+                "Shift-W",
+                "Shift-Up"
             ],
-            "neg": [
-                "S-s",
-                "S-Down"
+            "negative": [
+                "Shift-S",
+                "Shift-Down"
             ],
-            "gamepad": []
+            "gamepadAxes": []
         }
     }
 }
