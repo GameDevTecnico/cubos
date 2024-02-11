@@ -6,6 +6,8 @@
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
 
+#include "../broad_phase/potentially_colliding_with.hpp"
+
 void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
 {
     cubos.addRelation<CollidingWith>();

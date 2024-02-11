@@ -2,8 +2,6 @@
 /// @brief Component @ref cubos::engine::CollidingWith.
 /// @ingroup collisions-plugin
 
-// FIXME: This should be private, but it's used in the sample.
-
 #pragma once
 
 #include <glm/vec3.hpp>

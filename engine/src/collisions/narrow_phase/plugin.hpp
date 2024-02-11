@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <cubos/engine/collisions/broad_phase/potentially_colliding_with.hpp>
 #include <cubos/engine/collisions/narrow_phase/colliding_with.hpp>
 #include <cubos/engine/prelude.hpp>
 
