@@ -159,17 +159,25 @@
             </dt>
             <dd>Component which holds the corrections accumulated from the constraints solving.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">PhysicsMass</a>
+              struct <a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a>
+            </dt>
+            <dd>Component which holds forces applied on a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a>
+            </dt>
+            <dd>Component which holds impulses applied on a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a>
             </dt>
             <dd>Component which defines the mass of a particle.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">PhysicsVelocity</a>
-            </dt>
-            <dd>Component which holds velocity and forces applied on a particle.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a>
             </dt>
             <dd>Component which holds the previous position of the entity. Used for the integrator on the update velocity step.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a>
+            </dt>
+            <dd>Component which holds velocity and forces applied on a particle.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a>
             </dt>
@@ -270,6 +278,14 @@
               class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a>
             </dt>
             <dd>Stores settings as key-value pairs and provides methods to retrieve them.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a>
+            </dt>
+            <dd>Tree relation which indicates the &#x27;from&#x27; entity is a child of the &#x27;to&#x27; entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a>
+            </dt>
+            <dd>Component which stores the transformation matrix of an entity, from local to parent space.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a>
             </dt>
@@ -452,7 +468,7 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__free-camera-plugin.html#ga56048beedb26811cb07dfca88b5cd0e3" class="m-doc">freeCameraPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -496,7 +512,7 @@
               using cubos::<wbr />engine::<wbr /><a href="#a306c379fd24b3dcc1990b06cdb386244" class="m-doc-self">Query</a> = <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">core::<wbr />ecs::<wbr />Query</a>&lt;ComponentTypes...&gt;
             </h3>
             <p>System argument which holds the result of a query over all entities in world which match the given arguments.</p>
-<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&amp;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Scale</span><span class="o">&amp;&gt;&gt;</span></pre><p>This query will return all entities with a <code><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a></code> and <code>Velocity</code> component. Accessors to <code><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a></code> and <code><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a></code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, <code>const</code> should be used.</p>
+<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&amp;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Scale</span><span class="o">&amp;&gt;&gt;</span></pre><p>This query will return all entities with a <code><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a></code> and <code><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a></code> component. Accessors to <code><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a></code> and <code><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a></code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, <code>const</code> should be used.</p>
           </div></section>
           <section class="m-doc-details" id="a34019c3c344f309409d8b0abc510002d"><div>
             <h3>
@@ -577,27 +593,6 @@
               </tbody>
             </table>
 <aside class="m-note m-default"><h4>See also</h4><p>Systems can read sent events using <a href="namespacecubos_1_1engine.html#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a>.</p></aside>
-          </div></section>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a1f34045821152dc97988b63c424faaa3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f34045821152dc97988b63c424faaa3" class="m-doc-self">freeCameraControllerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2utils_2free__camera__controller_2plugin_8hpp.html">&lt;engine/utils/free_camera_controller/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
-                </tr>
-              </tbody>
-            </table>
           </div></section>
         </section>
       </div>

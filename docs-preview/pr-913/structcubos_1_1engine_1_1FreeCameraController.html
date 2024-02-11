@@ -47,7 +47,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>FreeCameraController <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="controller_8hpp.html">&lt;engine/utils/free_camera_controller/controller.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="controller_8hpp.html">&lt;engine/utils/free_camera/controller.hpp&gt;</a></div>
         </h1>
         <p>Component which moves the camera.</p>
         <nav class="m-block m-default">
@@ -64,6 +64,22 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
+            <dt id="aad83b1a151ac84ae413c4f2652e94ccd">
+              bool <a href="#aad83b1a151ac84ae413c4f2652e94ccd" class="m-doc-self">enabled</a>
+            </dt>
+            <dd>Whether the controller is enabled. Mouse is only captured when enabled.</dd>
+            <dt id="a141de08794f22fe06d71900777ccdeb0">
+              std::string <a href="#a141de08794f22fe06d71900777ccdeb0" class="m-doc-self">lateral</a>
+            </dt>
+            <dd>Action used to move the camera laterally (positive is right).</dd>
+            <dt id="a6bc03943038aad16c46dd0aaf666f98a">
+              std::string <a href="#a6bc03943038aad16c46dd0aaf666f98a" class="m-doc-self">vertical</a>
+            </dt>
+            <dd>Action used to move the camera vertically (positive is up).</dd>
+            <dt id="afa31446f651e727fd2191afa5433d798">
+              std::string <a href="#afa31446f651e727fd2191afa5433d798" class="m-doc-self">longitudinal</a>
+            </dt>
+            <dd>Action used to move the camera longitudinally (positive is forward).</dd>
             <dt id="ac03ca02812805a7412aa91148e41c567">
               float <a href="#ac03ca02812805a7412aa91148e41c567" class="m-doc-self">speed</a>
             </dt>

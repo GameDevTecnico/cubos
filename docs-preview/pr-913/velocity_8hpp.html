@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::impl::Index struct | CUBOS. Docs</title>
+  <title>engine/physics/components/velocity.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,27 +46,39 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_8hpp.html">&lt;core/ecs/system/system.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;class T, class Tuple&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs_1_1impl.html">impl</a>::<wbr/></span>Index <span class="m-thin">struct</span>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_fc8110eaf6ef50e82d21b749d50a1849.html">physics</a>/</span><span class="m-breadcrumb"><a href="dir_f217c5a882bd6e1a95f0ad79836f8bfc.html">components</a>/</span>velocity.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Used to get the index of a type in a tuple.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Type to get the index of.</td>
-            </tr>
-            <tr>
-              <td>Tuple</td>
-              <td>Tuple to search in.</td>
-            </tr>
-          </tbody>
-        </table>
-<p>Had to use this instead of std::apply due to a bug in MSVC :( Taken from <a href="https://stackoverflow.com/questions/18063451">https:/<wbr />/<wbr />stackoverflow.com/<wbr />questions/<wbr />18063451</a>.</p>
+        <p>Component <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">cubos::<wbr />engine::<wbr />Velocity</a>.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">cubos::engine::Velocity</a>
+            </dt>
+            <dd>Component which holds velocity and forces applied on a particle.</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>

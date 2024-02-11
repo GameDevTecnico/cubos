@@ -85,6 +85,10 @@
             </dt>
             <dd>Gets a data type from its identifier.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0abfb0fd286aefc70f2a2f1f2ef2d5e2" class="m-doc">contains</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if a data type is registered.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a9f53d1e2f7a914608a4d703d801bbeb8" class="m-doc">contains</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; bool</span>
             </dt>
             <dd>Checks if a data type is registered.</dd>
@@ -108,6 +112,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#abd5cd5bedc309f9a003e650a37397561" class="m-doc">components</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a></span>
             </dt>
             <dd>Gets a type registry with only the component types.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abe5b0297f143b294627c99a7f555348c" class="m-doc">relations</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a></span>
+            </dt>
+            <dd>Gets a type registry with only the relation types.</dd>
           </dl>
         </section>
         <section>
@@ -213,6 +221,20 @@
                 <tr>
                   <th>Returns</th>
                   <td>Data type.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0abfb0fd286aefc70f2a2f1f2ef2d5e2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Types::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0abfb0fd286aefc70f2a2f1f2ef2d5e2" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const</span></span>
+            </h3>
+            <p>Checks if a data type is registered.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the data type is registered.</td>
                 </tr>
               </tfoot>
             </table>
@@ -342,6 +364,20 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Component type registry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abe5b0297f143b294627c99a7f555348c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a> cubos::<wbr />core::<wbr />ecs::<wbr />Types::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abe5b0297f143b294627c99a7f555348c" class="m-doc-self">relations</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets a type registry with only the relation types.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Relation type registry.</td>
                 </tr>
               </tfoot>
             </table>

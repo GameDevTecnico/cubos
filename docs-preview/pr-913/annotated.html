@@ -100,15 +100,7 @@
                   <li class="m-doc-collapsible collapsed">
                     <a href="#" onclick="return toggle(this)">namespace</a> <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">ecs</a> <span class="m-doc"><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</span>
                     <ul class="m-doc">
-                      <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">namespace</a> <a href="namespacecubos_1_1core_1_1ecs_1_1impl.html" class="m-doc">impl</a> <span class="m-doc">Contains functions used internally by the implementation of the ECS.</span>
-                        <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1Index.html" class="m-doc">Index</a> <span class="m-doc">Used to get the index of a type in a tuple.</span></li>
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html" class="m-doc">SystemFetcher</a> <span class="m-doc">Fetches the requested data from a world.</span></li>
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits.html" class="m-doc">SystemTraits</a> <span class="m-doc">Template magic used to inspect the arguments of a system.</span></li>
-                        </ul>
-                      </li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a> <span class="m-doc">Base class for system wrappers.</span></li>
+                      <li>namespace <a href="namespacecubos_1_1core_1_1ecs_1_1impl.html" class="m-doc">impl</a> <span class="m-doc">Contains functions used internally by the implementation of the ECS.</span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a> <span class="m-doc">Stores which column types each archetype holds and the edges which connect them.</span>
                         <ul class="m-doc">
@@ -121,8 +113,7 @@
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Collection of entities and their respective components and relations.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> <span class="m-doc">Identifies a data column type.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores commands to execute them later.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">System argument used to write ECS commands and execute them at a later time.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">ComponentManager</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Holds and manages components.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to write ECS commands and execute them at a later time.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> <span class="m-doc">Identifies a data type registered in the world.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">DataTypeIdHash</a> <span class="m-doc">Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>.</span></li>
@@ -134,20 +125,12 @@
                         <ul class="m-doc">
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1Dependency.html" class="m-doc">Dependency</a> <span class="m-doc">Internal class to specify system dependencies.</span></li>
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1DFSNode.html" class="m-doc">DFSNode</a> <span class="m-doc">Internal class used to implement a DFS algorithm for call chain compilation.</span></li>
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1Group.html" class="m-doc">Group</a> <span class="m-doc">Internal class to specify system groups.</span></li>
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">System</a> <span class="m-doc">Internal class to handle tag settings.</span></li>
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1SystemSettings.html" class="m-doc">SystemSettings</a> <span class="m-doc">Internal class with settings pertaining to system/tag execution.</span></li>
                         </ul>
                       </li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> <span class="m-doc">Identifies an entity.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a> <span class="m-doc">Used to hash <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> objects.</span></li>
-                      <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1EntityManager.html" class="m-doc">EntityManager</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Internal type which holds and manages entities and their component masks.</span>
-                        <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1EntityManager_1_1EntityData.html" class="m-doc">EntityData</a> <span class="m-doc">Internal data struct containing the state of an entity.</span></li>
-                          <li>class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a> <span class="m-doc">Used to iterate over all entities in a manager with a certain component mask.</span></li>
-                        </ul>
-                      </li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1EntityPool.html" class="m-doc">EntityPool</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Manages the creation and destruction of entity identifiers, as well as storing their archetype identifiers.</span>
                         <ul class="m-doc">
@@ -161,16 +144,14 @@
                         </ul>
                       </li>
                       <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a> <span class="m-doc">System arguments used to read events of type <code>T</code>.</span>
+                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> arguments used to read events of type <code>T</code>.</span>
                         <ul class="m-doc">
                           <li>class <a href="classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html" class="m-doc">Iterator</a> <span class="m-doc">Used to iterate over events received by a reader.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a> <span class="m-doc">System argument which allows the system to send events of type <code>T</code> to other systems.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1GroupBuilder.html" class="m-doc">GroupBuilder</a> <span class="m-doc">Used to make groups of tags.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which allows the system to send events of type <code>T</code> to other systems.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a> <span class="m-doc">Wrapper for reference types to indicate that the given argument type is optional in a query.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> <span class="m-doc">System argument which holds the result of a query over all entities in world which match the given arguments.</span></li>
-                      <li>struct <a href="structcubos_1_1core_1_1ecs_1_1QueryAccess.html" class="m-doc">QueryAccess</a> <span class="m-doc">Describes the types of data a query accesses.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which holds the result of a query over all entities in world which match the given arguments.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a> <span class="m-doc">Holds the data necessary to execute a query.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html" class="m-doc">QueryFetcher</a> <span class="m-doc">Type meant to be specialized which implements for each argument type the necessary logic to extract it from the tables.</span></li>
                       <li class="m-doc-collapsible collapsed">
@@ -212,11 +193,17 @@
                           <li>class <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTableRegistry_1_1TypeIndex.html" class="m-doc">TypeIndex</a> <span class="m-doc">Stores the ids of tables of a given type.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the components of a given type.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SymmetricTrait.html" class="m-doc">SymmetricTrait</a> <span class="m-doc">Trait used to identify symmetric relations.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a> <span class="m-doc">Used to chain configurations related to systems.</span></li>
-                      <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a> <span class="m-doc">Describes a system.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" class="m-doc">SystemWrapper</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Wrapper for a system of type <code>F</code>.</span></li>
+                      <li class="m-doc-collapsible collapsed">
+                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> <span class="m-doc">Holds a system with a return type <code>T</code>.</span>
+                        <ul class="m-doc">
+                          <li>class <a href="classcubos_1_1core_1_1ecs_1_1System_1_1SystemFunction.html" class="m-doc">SystemFunction</a> <span class="m-doc">Specific class for the stored system function type with specific arguments.</span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1System_1_1SystemTraits.html" class="m-doc">SystemTraits</a> <span class="m-doc">Used to get a <a href="classcubos_1_1core_1_1ecs_1_1System_1_1SystemFunction.html" class="m-doc">SystemFunction</a> from any functional type.</span></li>
+                        </ul>
+                      </li>
+                      <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a> <span class="m-doc">Describes the types of data a system accesses.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1SystemFetcher.html" class="m-doc">SystemFetcher</a> <span class="m-doc">Type meant to be specialized which implements for each argument type the necessary logic to extract it from the world.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a> <span class="m-doc">Contains extra options for a specific system argument.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the tables of a given world.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> <span class="m-doc">Used to chain configurations related to tags.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1ecs_1_1TreeTrait.html" class="m-doc">TreeTrait</a> <span class="m-doc">Trait used to identify tree relations.</span></li>
@@ -312,6 +299,7 @@
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1GamepadConnectionEvent.html" class="m-doc">GamepadConnectionEvent</a> <span class="m-doc">Event sent when a gamepad is connected or disconnected.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">GamepadState</a> <span class="m-doc">Holds the state of a gamepad.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1KeyEvent.html" class="m-doc">KeyEvent</a> <span class="m-doc">Event sent when a key is pressed or released.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">KeyWithModifiers</a> <span class="m-doc">Keyboard key code and modifier flags.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1ModifiersEvent.html" class="m-doc">ModifiersEvent</a> <span class="m-doc">Event sent when the modifiers change.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1MouseButtonEvent.html" class="m-doc">MouseButtonEvent</a> <span class="m-doc">Event sent when a mouse button state changes.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1MouseMoveEvent.html" class="m-doc">MouseMoveEvent</a> <span class="m-doc">Event sent when the mouse cursor moves.</span></li>
@@ -355,6 +343,7 @@
                           <li>class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOfImpl.html" class="m-doc">AddressOfImpl</a> <span class="m-doc">Implementation of <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a> for a pointer to member.</span></li>
                         </ul>
                       </li>
+                      <li>class <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html" class="m-doc">MaskTrait</a> <span class="m-doc">Provides mask functionality to an enum mask type.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1NullableTrait.html" class="m-doc">NullableTrait</a> <span class="m-doc">Used to manipulate values of null-representable types.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">Reflect</a> <span class="m-doc">Defines the reflection function for the given type <code>T</code>.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1StringConversionTrait.html" class="m-doc">StringConversionTrait</a> <span class="m-doc">Stores functions for converting a type to and from a string.</span></li>
@@ -416,6 +405,7 @@
                   <li>struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> <span class="m-doc">Component which adds a box collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> <span class="m-doc">Component which defines parameters of a camera used to render the world.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> <span class="m-doc">Component which adds a capsule collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a> <span class="m-doc">Tree relation which indicates the &#x27;from&#x27; entity is a child of the &#x27;to&#x27; entity.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> <span class="m-doc">Component which adds a collider to an entity.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CollisionEvent.html" class="m-doc">CollisionEvent</a> <span class="m-doc">Represents a collision event.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> <span class="m-doc">Resource which holds the damping value for integration.</span></li>
@@ -424,6 +414,7 @@
                   <li>struct <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a> <span class="m-doc">Component which makes an entity behave like a directional light.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a> <span class="m-doc">Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> <span class="m-doc">Resource which holds the value of the fixed delta for the physics update.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a> <span class="m-doc">Component which holds forces applied on a particle.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1FreeCameraController.html" class="m-doc">FreeCameraController</a> <span class="m-doc">Component which moves the camera.</span></li>
                   <li class="m-doc-collapsible collapsed">
                     <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.</span>
@@ -432,14 +423,15 @@
                     </ul>
                   </li>
                   <li>struct <a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">Gravity</a> <span class="m-doc">Resource which holds the global value of gravity.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a> <span class="m-doc">Component which holds impulses applied on a particle.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Resource which stores the input bindings for multiple players.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the state of a single input action, such as &quot;jump&quot; or &quot;attack&quot;.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1InputAxis.html" class="m-doc">InputAxis</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the state of a single input axis, such as &quot;move forward&quot; or &quot;move right&quot;.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1InputBindings.html" class="m-doc">InputBindings</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the input bindings for a single player.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">JSONBridge</a> <span class="m-doc">Bridge for loading and saving assets which are serialized to and from a JSON file.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> <span class="m-doc">Component which stores the transformation matrix of an entity, from local to parent space.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> <span class="m-doc">Component which stores the transformation matrix of an entity, from local to world space.</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">PhysicsMass</a> <span class="m-doc">Component which defines the mass of a particle.</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">PhysicsVelocity</a> <span class="m-doc">Component which holds velocity and forces applied on a particle.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> <span class="m-doc">Component which defines the mass of a particle.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a> <span class="m-doc">Component which makes an entity behave like a point light.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> <span class="m-doc">Component which assigns a position to an entity.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1PostProcessingBloom.html" class="m-doc">PostProcessingBloom</a> <span class="m-doc">A post processing pass that adds a &quot;bloom&quot; effect to any bright objects in the scene.</span></li>
@@ -464,6 +456,7 @@
                   <li>class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores settings as key-value pairs and provides methods to retrieve them.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a> <span class="m-doc">Component which makes an entity emit a spot light.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a> <span class="m-doc">Resource which holds the amount of substeps for the physics update.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a> <span class="m-doc">Component which holds velocity and forces applied on a particle.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a> <span class="m-doc">Component which defines parameters of a viewport, the actual screen space that will be used by the camera it is attached to. Useful for having multiple camera views shown on screen.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Represents a voxel object using a 3D grid.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">VoxelMaterial</a> <span class="m-doc">Describes a voxel material.</span></li>
