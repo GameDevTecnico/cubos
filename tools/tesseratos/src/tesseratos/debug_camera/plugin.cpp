@@ -1,14 +1,18 @@
 #include <imgui.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/input/input.hpp>
+#include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/renderer/environment.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/transform/plugin.hpp>
-#include <cubos/engine/utils/free_camera_controller/plugin.hpp>
+#include <cubos/engine/utils/free_camera/plugin.hpp>
 
 #include <tesseratos/debug_camera/plugin.hpp>
 #include <tesseratos/toolbox/plugin.hpp>
+
+using namespace cubos::core::io;
 
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
@@ -16,7 +20,10 @@ using cubos::core::ecs::Entity;
 using cubos::engine::ActiveCameras;
 using cubos::engine::Camera;
 using cubos::engine::Cubos;
+using cubos::engine::FreeCameraController;
+using cubos::engine::Input;
 using cubos::engine::Position;
+using cubos::engine::Query;
 
 namespace
 {
@@ -24,6 +31,7 @@ namespace
     {
         Entity copy[4]; // copy old camera entities to re-apply them in the next camera change
         Entity ent;     // debug camera entity
+        bool justChanged = false;
     };
 } // namespace
 
@@ -31,14 +39,42 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(toolboxPlugin);
-    cubos.addPlugin(cubos::engine::freeCameraControllerPlugin);
+    cubos.addPlugin(cubos::engine::freeCameraPlugin);
 
     cubos.addResource<DebugCameraInfo>();
 
-    cubos.startupSystem("create Debug Camera").call([](Commands commands, DebugCameraInfo& debugCamera) {
-        debugCamera.ent =
-            commands.create().add(Camera{}).add(Position{{}}).add(cubos::engine::FreeCameraController{}).entity();
-    });
+    cubos.startupSystem("create Debug Camera")
+        .tagged("cubos.input")
+        .after("cubos.fcc.init")
+        .call([](Commands commands, DebugCameraInfo& debugCamera) {
+            debugCamera.ent = commands.create()
+                                  .add(Camera{})
+                                  .add(Position{{}})
+                                  .add(FreeCameraController{
+                                      .enabled = false,
+                                      .lateral = "debug-move-lateral",
+                                      .vertical = "debug-move-vertical",
+                                      .longitudinal = "debug-move-longitudinal",
+                                  })
+                                  .entity();
+        });
+
+    cubos.system("toggle Debug Camera")
+        .call([](Input& input, DebugCameraInfo& info, Query<FreeCameraController&> entities) {
+            if (auto match = entities.at(info.ent))
+            {
+                auto [controller] = *match;
+                if (!input.pressed("debug-camera-toggle"))
+                {
+                    info.justChanged = false;
+                }
+                else if (!info.justChanged)
+                {
+                    info.justChanged = true;
+                    controller.enabled = !controller.enabled;
+                }
+            }
+        });
 
     cubos.system("show Debug Camera UI")
         .tagged("cubos.imgui")
