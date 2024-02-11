@@ -1,0 +1,35 @@
+{
+    "actions": {
+        "debug-camera-toggle": {
+            "keys": [
+                "LControl"
+            ]
+        }
+    },
+    "axes": {
+        "debug-move-lateral": {
+            "positive": [
+                "D"
+            ],
+            "negative": [
+                "A"
+            ]
+        },
+        "debug-move-vertical": {
+            "positive": [
+                "E"
+            ],
+            "negative": [
+                "Q"
+            ]
+        },
+        "debug-move-longitudinal": {
+            "positive": [
+                "W"
+            ],
+            "negative": [
+                "S"
+            ]
+        }
+    }
+}
