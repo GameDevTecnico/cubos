@@ -1,3 +1,4 @@
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -6,6 +7,11 @@
 
 using namespace cubos::core;
 using namespace cubos::core::ecs;
+
+World::World()
+{
+    this->registerComponent<Name>();
+}
 
 void World::registerComponent(const reflection::Type& type)
 {

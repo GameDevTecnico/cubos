@@ -22,9 +22,9 @@ void Commands::destroy(Entity entity)
     mBuffer.destroy(entity);
 }
 
-Commands::BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
+Commands::BlueprintBuilder Commands::spawn(const Blueprint& blueprint, bool withName)
 {
-    auto nameToEntity = mBuffer.spawn(blueprint);
+    auto nameToEntity = mBuffer.spawn(blueprint, withName);
     return {mBuffer, std::move(nameToEntity)};
 }
 
