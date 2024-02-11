@@ -14,6 +14,7 @@ add_executable(
 	reflection/traits/fields.cpp
 	reflection/traits/nullable.cpp
 	reflection/traits/enum.cpp
+	reflection/traits/mask.cpp
 	reflection/external/primitives.cpp
 	reflection/external/cstring.cpp
 	reflection/external/string.cpp
