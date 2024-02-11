@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::reflection::EnumTrait.
+/// @ingroup core-reflection
+
 #pragma once
 
 #include <cstdint>
