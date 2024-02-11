@@ -70,6 +70,12 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
                  Query<Entity, RenderableGrid&, const LocalToWorld&> query) {
             for (auto [entity, grid, localToWorld] : query)
             {
+                if (grid.asset.isNull())
+                {
+                    // If a grid has no asset, we can't draw it.
+                    continue;
+                }
+
                 if (grid.handle == nullptr || assets.update(grid.asset))
                 {
                     // If the grid wasn't already uploaded, we need to upload it now.
