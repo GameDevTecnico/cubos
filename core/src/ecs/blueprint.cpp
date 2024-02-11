@@ -94,7 +94,8 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
         [&](Entity entity, AnyValue component) { this->add(entity, std::move(component)); },
         [&](Entity fromEntity, Entity toEntity, AnyValue relation) {
             this->relate(fromEntity, toEntity, std::move(relation));
-        });
+        },
+        false);
 }
 
 void Blueprint::clear()
@@ -153,15 +154,19 @@ static void convertToInstancedEntities(const std::unordered_map<Entity, Entity, 
     }
 }
 
-void Blueprint::instantiate(void* userData, Create create, Add add, Relate relate) const
+void Blueprint::instantiate(void* userData, Create create, Add add, Relate relate, bool withName) const
 {
     // Instantiate our entities and create a map from them to their instanced counterparts.
     std::unordered_map<Entity, Entity, EntityHash> thisToInstance{};
     for (const auto& [entity, name] : mBimap)
     {
         thisToInstance.emplace(entity, create(userData, name));
-        Name nameComponent{name};
-        add(userData, thisToInstance.at(entity), AnyValue::moveConstruct(reflect<Name>(), (void*)&nameComponent));
+
+        if (withName)
+        {
+            Name nameComponent{name};
+            add(userData, thisToInstance.at(entity), AnyValue::moveConstruct(reflect<Name>(), (void*)&nameComponent));
+        }
     }
 
     // Add copies of our components to their instantiated entities. Since the components themselves

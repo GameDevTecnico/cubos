@@ -40,8 +40,9 @@ namespace cubos::core::ecs
 
         /// @brief Spawns a blueprint into the world.
         /// @param blueprint Blueprint to spawn.
+        /// @param withName Whether to use the entity names from the blueprint.
         /// @return Map of entity names to their identifiers.
-        std::unordered_map<std::string, Entity> spawn(const Blueprint& blueprint);
+        std::unordered_map<std::string, Entity> spawn(const Blueprint& blueprint, bool withName = true);
 
         /// @brief Adds a component to an entity.
         /// @param entity Entity identifier.

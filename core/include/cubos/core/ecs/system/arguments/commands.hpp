@@ -46,8 +46,9 @@ namespace cubos::core::ecs
 
         /// @brief Spawns a blueprint into the world.
         /// @param blueprint Blueprint to spawn.
+        /// @param withName Whether to use the entity names from the blueprint.
         /// @return Blueprint builder.
-        BlueprintBuilder spawn(const Blueprint& blueprint);
+        BlueprintBuilder spawn(const Blueprint& blueprint, bool withName = true);
 
         /// @brief Adds a component to an entity.
         /// @param entity Entity identifier.

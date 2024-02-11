@@ -64,7 +64,7 @@ TEST_CASE("ecs::Blueprint")
     SUBCASE("spawn the blueprint")
     {
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(blueprint);
+        auto spawned = cmds.spawn(blueprint, false);
         auto spawnedBar = spawned.entity("bar");
         auto spawnedBaz = spawned.entity("baz");
         auto spawnedQux = spawned.entity("qux");
@@ -118,7 +118,7 @@ TEST_CASE("ecs::Blueprint")
         CHECK(merged.bimap().containsRight("sub.baz"));
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(merged);
+        auto spawned = cmds.spawn(merged, false);
         auto spawnedFoo = spawned.entity("foo");
         auto spawnedBar = spawned.entity("sub.bar");
         auto spawnedBaz = spawned.entity("sub.baz");
@@ -154,7 +154,7 @@ TEST_CASE("ecs::Blueprint")
         blueprint.add(entity0, EntityArrayComponent{{entity0, entity1}});
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(blueprint);
+        auto spawned = cmds.spawn(blueprint, false);
         auto spawned0 = spawned.entity("0");
         auto spawned1 = spawned.entity("1");
         cmdBuffer.commit();
@@ -173,7 +173,7 @@ TEST_CASE("ecs::Blueprint")
         blueprint.add(entity0, EntityDictionaryComponent{{{'0', entity0}, {'1', entity1}}});
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(blueprint);
+        auto spawned = cmds.spawn(blueprint, false);
         auto spawned0 = spawned.entity("0");
         auto spawned1 = spawned.entity("1");
         cmdBuffer.commit();
@@ -195,7 +195,7 @@ TEST_CASE("ecs::Blueprint")
         blueprint.add(entity1, IntegerComponent{1});
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(blueprint);
+        auto spawned = cmds.spawn(blueprint, true);
         auto spawned0 = spawned.entity("0");
         auto spawned1 = spawned.entity("1");
         cmdBuffer.commit();
@@ -206,6 +206,8 @@ TEST_CASE("ecs::Blueprint")
         REQUIRE(components1.has<IntegerComponent>());
         REQUIRE(components0.has<Name>());
         REQUIRE(components1.has<Name>());
+        CHECK(components0.get<Name>().value == "0");
+        CHECK(components1.get<Name>().value == "1");
         CHECK(components0.get<IntegerComponent>().value == 0);
         CHECK(components1.get<IntegerComponent>().value == 1);
     }
