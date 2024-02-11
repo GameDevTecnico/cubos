@@ -19,6 +19,18 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
+        /// @brief Whether the controller is enabled. Mouse is only captured when enabled.
+        bool enabled = true;
+
+        /// @brief Action used to move the camera laterally (positive is right).
+        std::string lateral = "move-lateral";
+
+        /// @brief Action used to move the camera vertically (positive is up).
+        std::string vertical = "move-vertical";
+
+        /// @brief Action used to move the camera longitudinally (positive is forward).
+        std::string longitudinal = "move-longitudinal";
+
         /// @brief Speed at which the camera moves.
         float speed = 6.0F;
 
@@ -30,7 +42,5 @@ namespace cubos::engine
 
         /// @brief Azimuth of the camera.
         float theta = 0.0F;
-
-        glm::ivec2 lastMousePos;
     };
 } // namespace cubos::engine
