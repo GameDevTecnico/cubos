@@ -230,6 +230,13 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
             return true;
         }
 
+        if (!mIterator->is_object())
+        {
+            CUBOS_WARN("Type {} must be deserialized from a JSON object, not a {}", type.name(),
+                       mIterator->type_name());
+            return false;
+        }
+
         for (auto it = mIterator->begin(), end = mIterator->end(); it != end; ++it)
         {
             const auto* field = trait.field(it.key());
