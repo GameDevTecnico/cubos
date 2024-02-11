@@ -160,30 +160,6 @@ namespace cubos::core::io
         lhs = lhs & rhs;
         return lhs;
     }
-
-    /// @brief Converts a @ref Modifiers enum to a string.
-    /// @param modifiers Modifiers.
-    /// @return String representation.
-    /// @ingroup core-io
-    std::string modifiersToString(Modifiers modifiers);
-
-    /// @brief Converts a string to a @ref Modifiers enum.
-    /// @param str String to convert.
-    /// @return Modifiers.
-    /// @ingroup core-io
-    Modifiers stringToModifiers(const std::string& str);
-
-    /// @brief Converts a @ref Key enum to a string.
-    /// @param key Key to convert.
-    /// @return String representation.
-    /// @ingroup core-io
-    std::string keyToString(Key key);
-
-    /// @brief Convert a string to a @ref Key enum.
-    /// @param str The string to convert.
-    /// @return Key.
-    /// @ingroup core-io
-    Key stringToKey(const std::string& str);
 } // namespace cubos::core::io
 
 CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Key);
