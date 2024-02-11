@@ -41,6 +41,7 @@ set(CUBOS_CORE_SOURCE
 	"src/reflection/traits/string_conversion.cpp"
 	"src/reflection/traits/nullable.cpp"
 	"src/reflection/traits/enum.cpp"
+	"src/reflection/traits/mask.cpp"
 	"src/reflection/external/primitives.cpp"
 	"src/reflection/external/cstring.cpp"
 	"src/reflection/external/string.cpp"
