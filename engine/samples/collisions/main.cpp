@@ -48,7 +48,7 @@ int main()
     cubos.startupSystem("setup input").call([](Input& input) {
         // Add procedural asset for detecting a reset action on a space key press.
         auto bindings = InputBindings{};
-        bindings.actions()["reset"].keys().emplace_back(Key::Space, Modifiers::None);
+        bindings.actions()["reset"].keys().push_back({Key::Space, Modifiers::None});
         input.bind(bindings);
     });
 

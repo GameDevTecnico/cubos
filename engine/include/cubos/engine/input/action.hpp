@@ -9,6 +9,7 @@
 #include <cubos/core/io/gamepad.hpp>
 #include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/io/window.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -20,6 +21,8 @@ namespace cubos::engine
     class InputAction final
     {
     public:
+        CUBOS_REFLECT;
+
         ~InputAction() = default;
 
         /// @brief Constructs without any bindings.
@@ -29,8 +32,7 @@ namespace cubos::engine
         /// @param keys Key bindings.
         /// @param gamepadButtons Gamepad button bindings.
         /// @param mouseButtons Mouse button bindings.
-        InputAction(std::vector<std::pair<core::io::Key, core::io::Modifiers>> keys,
-                    std::vector<core::io::GamepadButton> gamepadButtons,
+        InputAction(std::vector<core::io::KeyWithModifiers> keys, std::vector<core::io::GamepadButton> gamepadButtons,
                     std::vector<core::io::MouseButton> mouseButtons)
             : mKeys(std::move(keys))
             , mGamepadButtons(std::move(gamepadButtons))
@@ -40,11 +42,11 @@ namespace cubos::engine
 
         /// @brief Gets the key bindings.
         /// @return Vector of keys.
-        const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& keys() const;
+        const std::vector<core::io::KeyWithModifiers>& keys() const;
 
         /// @brief Gets the key bindings.
         /// @return Vector of keys.
-        std::vector<std::pair<core::io::Key, core::io::Modifiers>>& keys();
+        std::vector<core::io::KeyWithModifiers>& keys();
 
         /// @brief Gets the gamepad button bindings.
         /// @return Vector of buttons.
@@ -71,7 +73,7 @@ namespace cubos::engine
         void pressed(bool pressed);
 
     private:
-        std::vector<std::pair<core::io::Key, core::io::Modifiers>> mKeys;
+        std::vector<core::io::KeyWithModifiers> mKeys;
         std::vector<core::io::GamepadButton> mGamepadButtons;
         std::vector<core::io::MouseButton> mMouseButtons;
 

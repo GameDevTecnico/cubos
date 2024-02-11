@@ -1,18 +1,17 @@
+#include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/external/unordered_map.hpp>
+#include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/input/bindings.hpp>
 
-using cubos::core::io::Key;
-using cubos::core::io::keyToString;
-using cubos::core::io::Modifiers;
-using cubos::core::io::modifiersToString;
-using cubos::core::io::stringToKey;
-using cubos::core::io::stringToModifiers;
 using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(cubos::engine::InputBindings)
 {
-    return core::reflection::Type::create("cubos::engine::InputBindings");
+    using namespace cubos::core::reflection;
+    return Type::create("cubos::engine::InputBindings")
+        .with(FieldsTrait{}.withField("actions", &InputBindings::mActions).withField("axes", &InputBindings::mAxes));
 }
 
 const std::unordered_map<std::string, InputAction>& InputBindings::actions() const

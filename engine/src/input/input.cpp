@@ -28,9 +28,9 @@ void Input::clear(int player)
 {
     for (const auto& action : mPlayerBindings[player].actions())
     {
-        for (const auto& key : action.second.keys())
+        for (const auto& keyWithMods : action.second.keys())
         {
-            std::erase_if(mBoundActions[key.first], [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundActions[keyWithMods.key], [player](const auto& idx) { return idx.player == player; });
         }
 
         for (const auto& button : action.second.gamepadButtons())
@@ -48,12 +48,12 @@ void Input::clear(int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            std::erase_if(mBoundAxes[pos.first], [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundAxes[pos.key], [player](const auto& idx) { return idx.player == player; });
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            std::erase_if(mBoundAxes[neg.first], [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundAxes[neg.key], [player](const auto& idx) { return idx.player == player; });
         }
 
         for (const auto& gamepadAxis : axis.second.gamepadAxes())
@@ -72,9 +72,9 @@ void Input::bind(const InputBindings& bindings, int player)
 
     for (const auto& action : bindings.actions())
     {
-        for (const auto& key : action.second.keys())
+        for (const auto& keyWithMods : action.second.keys())
         {
-            mBoundActions[key.first].push_back(BindingIndex{action.first, player});
+            mBoundActions[keyWithMods.key].push_back(BindingIndex{action.first, player});
         }
 
         for (const auto& button : action.second.gamepadButtons())
@@ -92,12 +92,12 @@ void Input::bind(const InputBindings& bindings, int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            mBoundAxes[pos.first].push_back(BindingIndex{axis.first, player, false});
+            mBoundAxes[pos.key].push_back(BindingIndex{axis.first, player, false});
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            mBoundAxes[neg.first].push_back(BindingIndex{axis.first, player, true});
+            mBoundAxes[neg.key].push_back(BindingIndex{axis.first, player, true});
         }
 
         for (const auto& gamepadAxis : axis.second.gamepadAxes())
@@ -172,14 +172,14 @@ float Input::axis(const char* axisName, int player) const
     return aIt->second.value();
 }
 
-bool Input::anyPressed(const Window& window, const std::vector<std::pair<Key, Modifiers>>& keys)
+bool Input::anyPressed(const Window& window, const std::vector<core::io::KeyWithModifiers>& keys)
 {
-    for (const auto& key : keys)
+    for (const auto& keyWithMods : keys)
     {
         // window->pressed() returns true when more modifiers than the specified are active, so we need to check that
         // the modifiers are exactly the same as the ones specified in the binding.
 
-        if (window->pressed(key.first, key.second) && window->modifiers() == key.second)
+        if (window->pressed(keyWithMods.key, keyWithMods.modifiers) && window->modifiers() == keyWithMods.modifiers)
         {
             return true;
         }

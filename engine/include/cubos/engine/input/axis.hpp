@@ -8,6 +8,7 @@
 
 #include <cubos/core/io/gamepad.hpp>
 #include <cubos/core/io/keyboard.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -20,6 +21,8 @@ namespace cubos::engine
     class InputAxis final
     {
     public:
+        CUBOS_REFLECT;
+
         ~InputAxis() = default;
 
         /// @brief Constructs without any bindings.
@@ -29,8 +32,7 @@ namespace cubos::engine
         /// @param positive Positive key bindings.
         /// @param negative Negative key bindings.
         /// @param gamepadAxes Gamepad axis bindings.
-        InputAxis(std::vector<std::pair<core::io::Key, core::io::Modifiers>> positive,
-                  std::vector<std::pair<core::io::Key, core::io::Modifiers>> negative,
+        InputAxis(std::vector<core::io::KeyWithModifiers> positive, std::vector<core::io::KeyWithModifiers> negative,
                   std::vector<core::io::GamepadAxis> gamepadAxes)
             : mPositive(std::move(positive))
             , mNegative(std::move(negative))
@@ -40,11 +42,11 @@ namespace cubos::engine
 
         /// @brief Gets the positive key bindings.
         /// @return Vector of positive keys.
-        const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& positive() const;
+        const std::vector<core::io::KeyWithModifiers>& positive() const;
 
         /// @brief Gets the negative key bindings.
         /// @return Vector of negative keys.
-        const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& negative() const;
+        const std::vector<core::io::KeyWithModifiers>& negative() const;
 
         /// @brief Gets the gamepad axis bindings.
         /// @return Vector of gamepad axes.
@@ -52,11 +54,11 @@ namespace cubos::engine
 
         /// @brief Gets the positive key bindings.
         /// @return Vector of positive keys.
-        std::vector<std::pair<core::io::Key, core::io::Modifiers>>& positive();
+        std::vector<core::io::KeyWithModifiers>& positive();
 
         /// @brief Gets the negative key bindings.
         /// @return Vector of negative keys.
-        std::vector<std::pair<core::io::Key, core::io::Modifiers>>& negative();
+        std::vector<core::io::KeyWithModifiers>& negative();
 
         /// @brief Gets the gamepad axis bindings.
         /// @return Vector of gamepad axes.
@@ -71,8 +73,8 @@ namespace cubos::engine
         void value(float value);
 
     private:
-        std::vector<std::pair<core::io::Key, core::io::Modifiers>> mPositive;
-        std::vector<std::pair<core::io::Key, core::io::Modifiers>> mNegative;
+        std::vector<core::io::KeyWithModifiers> mPositive;
+        std::vector<core::io::KeyWithModifiers> mNegative;
         std::vector<core::io::GamepadAxis> mGamepadAxes;
 
         float mValue{0.0F}; ///< Not serialized.
