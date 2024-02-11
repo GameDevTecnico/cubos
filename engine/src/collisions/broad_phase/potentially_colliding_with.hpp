@@ -2,8 +2,6 @@
 /// @brief Component @ref cubos::engine::PotentiallyCollidingWith.
 /// @ingroup collisions-plugin
 
-// FIXME: This should be private, but it's used in the sample.
-
 #pragma once
 
 #include <cubos/core/reflection/reflect.hpp>

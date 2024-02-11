@@ -7,8 +7,9 @@
 
 #pragma once
 
-#include <cubos/engine/collisions/broad_phase/potentially_colliding_with.hpp>
 #include <cubos/engine/prelude.hpp>
+
+#include "potentially_colliding_with.hpp"
 
 namespace cubos::engine
 {
