@@ -91,6 +91,10 @@
             </dt>
             <dd>Describes the fields of a reflected type.</dd>
             <dt>
+              class <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html" class="m-doc">MaskTrait</a>
+            </dt>
+            <dd>Provides mask functionality to an enum mask type.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1reflection_1_1NullableTrait.html" class="m-doc">NullableTrait</a>
             </dt>
             <dd>Used to manipulate values of null-representable types.</dd>
@@ -112,6 +116,12 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a645ee487b474e83ad9bc20b6d895ed50" class="m-doc">compare</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
+              void* a,
+              void* b) -&gt; bool</span>
+            </dt>
+            <dd>Compares two instances of the same type.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
             </dt>
@@ -132,6 +142,44 @@
             </dt>
             <dd>Checks whether the given type <code>T</code> is reflectable.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a645ee487b474e83ad9bc20b6d895ed50"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a645ee487b474e83ad9bc20b6d895ed50" class="m-doc-self">compare</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
+              void* a,
+              void* b)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="comparison_8hpp.html">&lt;core/reflection/comparison.hpp&gt;</a></div>
+            </h3>
+            <p>Compares two instances of the same type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>The type of the data being compared</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>One of the instances.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The other instance.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the values are equal, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>If the type has no comparable trait, this function will abort.</p></aside>
+          </div></section>
         </section>
         <section>
           <h2>Variable documentation</h2>
