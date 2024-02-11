@@ -1,3 +1,5 @@
+#include <limits>
+
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/geom/intersections.hpp>
 #include <cubos/core/gl/debug.hpp>
@@ -5,21 +7,23 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
+static const float THRESHOLD = static_cast<float>(1.0e-5);
+
 using namespace cubos::core::geom;
 
-CUBOS_REFLECT_IMPL(cubos::core::geom::Intersect)
+CUBOS_REFLECT_IMPL(cubos::core::geom::Intersection)
 {
-    return core::ecs::TypeBuilder<Intersect>("cubos::engine::CollisionInfo")
-        .withField("penetration", &Intersect::penetration)
-        .withField("position", &Intersect::position)
-        .withField("normal", &Intersect::normal)
+    return core::ecs::TypeBuilder<Intersection>("cubos::engine::Intersection")
+        .withField("penetration", &Intersection::penetration)
+        .withField("position", &Intersection::position)
+        .withField("normal", &Intersection::normal)
         .build();
 }
 
-void getAxes(const glm::mat4& localToWorld, glm::vec3 axes[])
+static void getAxes(const glm::mat4& localToWorld, glm::vec3 axes[])
 {
     glm::vec3 normals[3];
-    cubos::core::geom::Box::normals(normals);
+    Box::normals(normals);
 
     for (int i = 0; i < 3; i++)
     {
@@ -27,7 +31,7 @@ void getAxes(const glm::mat4& localToWorld, glm::vec3 axes[])
     }
 }
 
-glm::vec2 project(const Box& box, glm::vec3 axis, const glm::mat4& localToWorld)
+static glm::vec2 project(const Box& box, glm::vec3 axis, const glm::mat4& localToWorld)
 {
     glm::vec3 corners[8];
     box.corners(corners);
@@ -49,7 +53,7 @@ glm::vec2 project(const Box& box, glm::vec3 axis, const glm::mat4& localToWorld)
     return glm::vec2{min, max};
 }
 
-bool overlap(glm::vec2 p1, glm::vec2 p2)
+static bool overlap(glm::vec2 p1, glm::vec2 p2)
 {
     if ((p1.x < p2.x) && (p2.x < p1.y) && (p1.y < p2.y))
     {
@@ -67,10 +71,10 @@ bool overlap(glm::vec2 p1, glm::vec2 p2)
     {
         return true;
     }
-    return (p2.x == p1.x) && (p1.y == p2.y);
+    return (glm::abs(p2.x - p1.x) < THRESHOLD) && (glm::abs(p1.y - p2.y) < THRESHOLD); // add threshold
 }
 
-float getOverlap(glm::vec2 p1, glm::vec2 p2)
+static float getOverlap(glm::vec2 p1, glm::vec2 p2)
 {
     if (p2.x < p1.x)
     {
@@ -88,25 +92,24 @@ float getOverlap(glm::vec2 p1, glm::vec2 p2)
         }
         return glm::abs(p2.y - p2.x);
     }
-    // TODO: change this
-    return 110.0F;
+    return std::numeric_limits<double>::infinity();
 }
 
-bool cubos::core::geom::intersects(const cubos::core::ecs::Entity& ent1, const Box& box1,
-                                   const glm::mat4& localToWorld1, const cubos::core::ecs::Entity& ent2,
-                                   const Box& box2, const glm::mat4& localToWorld2, Intersect& intersect)
+bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
+                                   const glm::mat4& localToWorld2, Intersection& intersect)
 {
     static glm::vec3 axes1[3];
     static glm::vec3 axes2[3];
     getAxes(localToWorld1, axes1);
     getAxes(localToWorld2, axes2);
 
-    // TODO: change this
-    intersect.penetration = 100.0F;
+    intersect.penetration = std::numeric_limits<double>::infinity();
+
+    // Vector from the first entity's center of mass to the second
+    glm::vec3 direction = glm::normalize(glm::vec3(localToWorld2[3]) - glm::vec3(localToWorld1[3]));
 
     for (glm::vec3 axis : axes1)
     {
-
         glm::vec2 p1 = project(box1, axis, localToWorld1);
         glm::vec2 p2 = project(box2, axis, localToWorld2);
 
@@ -118,12 +121,11 @@ bool cubos::core::geom::intersects(const cubos::core::ecs::Entity& ent1, const B
         // get the overlap
         float o = getOverlap(p1, p2);
         // check for minimum
-        if (o < intersect.penetration) // do this but with threshold otherwise this thing sucks
+        if (o < intersect.penetration)
         {
             // then set this one as the smallest
             intersect.penetration = o;
-            intersect.normal = axis;
-            intersect.entity = ent1;
+            intersect.normal = glm::dot(direction, axis) < 0 ? -axis : axis;
         }
     }
 
@@ -145,9 +147,13 @@ bool cubos::core::geom::intersects(const cubos::core::ecs::Entity& ent1, const B
         {
             // then set this one as the smallest
             intersect.penetration = o;
-            intersect.normal = -axis;
-            intersect.entity = ent2;
+            intersect.normal = glm::dot(direction, axis) < 0 ? -axis : axis;
         }
+    }
+
+    if (intersect.penetration == std::numeric_limits<double>::infinity())
+    {
+        intersect.penetration = 0.0F;
     }
 
     return true;
