@@ -1,7 +1,21 @@
 #include <cubos/core/data/ser/json.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/traits/array.hpp>
+#include <cubos/core/reflection/traits/dictionary.hpp>
+#include <cubos/core/reflection/traits/enum.hpp>
+#include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/string_conversion.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using cubos::core::data::JSONSerializer;
+using cubos::core::reflection::ArrayTrait;
+using cubos::core::reflection::DictionaryTrait;
+using cubos::core::reflection::EnumTrait;
+using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::reflect;
+using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
 
 // Macro used to reduce code duplication for primitive type hooks.
@@ -10,11 +24,6 @@ using cubos::core::reflection::Type;
         mJSON = value;                                                                                                 \
         return true;                                                                                                   \
     })
-
-#include <cubos/core/reflection/external/primitives.hpp>
-#include <cubos/core/reflection/external/string.hpp>
-
-using cubos::core::reflection::reflect;
 
 // Create hooks for primitive types.
 JSONSerializer::JSONSerializer()
@@ -52,17 +61,6 @@ nlohmann::json JSONSerializer::output()
     return mJSON;
 }
 
-#include <cubos/core/reflection/traits/array.hpp>
-#include <cubos/core/reflection/traits/dictionary.hpp>
-#include <cubos/core/reflection/traits/fields.hpp>
-#include <cubos/core/reflection/traits/string_conversion.hpp>
-#include <cubos/core/reflection/type.hpp>
-
-using cubos::core::reflection::ArrayTrait;
-using cubos::core::reflection::DictionaryTrait;
-using cubos::core::reflection::FieldsTrait;
-using cubos::core::reflection::StringConversionTrait;
-
 bool JSONSerializer::decompose(const Type& type, const void* value)
 {
     if (type.has<ArrayTrait>())
@@ -89,6 +87,13 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
     {
         const auto& trait = type.get<StringConversionTrait>();
         mJSON = trait.into(value);
+        return true;
+    }
+
+    if (type.has<EnumTrait>())
+    {
+        const auto& trait = type.get<EnumTrait>();
+        mJSON = trait.variant(value).name();
         return true;
     }
 

@@ -10,6 +10,7 @@
 #include <cubos/core/reflection/external/uuid.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
 #include <cubos/core/reflection/traits/constructible_utils.hpp>
+#include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 
 #include "../utils.hpp"
@@ -17,6 +18,7 @@
 using cubos::core::Logger;
 using cubos::core::data::JSONDeserializer;
 using cubos::core::reflection::autoConstructibleTrait;
+using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::Type;
 
@@ -59,7 +61,21 @@ namespace
 
         bool inner;
     };
+
+    enum class Color
+    {
+        Red,
+        Green,
+        Blue
+    };
 } // namespace
+
+CUBOS_REFLECT_EXTERNAL_DECL(Color);
+CUBOS_REFLECT_EXTERNAL_IMPL(Color)
+{
+    return Type::create("Color").with(
+        EnumTrait{}.withVariant<Color::Red>("Red").withVariant<Color::Green>("Green").withVariant<Color::Blue>("Blue"));
+}
 
 #define AUTO_EXISTING(json, initial, expected)                                                                         \
     {                                                                                                                  \
@@ -108,12 +124,16 @@ TEST_CASE("data::JSONDeserializer")
     AUTO_SUCCESS("Hello, world!", std::string{"Hello, world!"});
     AUTO_SUCCESS("f7063cd4-de44-47b5-b0a9-f0e7a558c9e5",
                  *uuids::uuid::from_string("f7063cd4-de44-47b5-b0a9-f0e7a558c9e5"));
+    AUTO_SUCCESS("Red", Color::Red);
+    AUTO_SUCCESS("Green", Color::Green);
+    AUTO_SUCCESS("Blue", Color::Blue);
 
     AUTO_FAILURE("true", bool);
     AUTO_FAILURE("-120", int8_t);
     AUTO_FAILURE(1.5F, std::string);
     AUTO_FAILURE("?", uuids::uuid);
     AUTO_FAILURE("?", Empty);
+    AUTO_FAILURE("White", Color);
 
     AUTO_EXISTING((Json::object({})), (std::map<std::string, bool>{{"true", true}}), (std::map<std::string, bool>{}));
     AUTO_SUCCESS((Json::object({})), (std::map<std::string, bool>{}));
