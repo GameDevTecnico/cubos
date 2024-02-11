@@ -1,12 +1,13 @@
 #include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
+#include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>
 
-using namespace cubos::core;
-
 using cubos::core::io::Key;
+using cubos::core::io::KeyWithModifiers;
 using cubos::core::io::Modifiers;
 using cubos::core::reflection::EnumTrait;
+using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::Type;
 
 CUBOS_REFLECT_EXTERNAL_IMPL(Key)
@@ -125,4 +126,12 @@ CUBOS_REFLECT_EXTERNAL_IMPL(Modifiers)
                   .withVariant<Modifiers::Shift>("Shift")
                   .withVariant<Modifiers::Alt>("Alt")
                   .withVariant<Modifiers::System>("System"));
+}
+
+CUBOS_REFLECT_IMPL(KeyWithModifiers)
+{
+    return Type::create("cubos::core::io::KeyWithModifiers")
+        .with(FieldsTrait{}
+                  .withField("key", &KeyWithModifiers::key)
+                  .withField("modifiers", &KeyWithModifiers::modifiers));
 }

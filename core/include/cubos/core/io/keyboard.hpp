@@ -129,6 +129,16 @@ namespace cubos::core::io
         System = 8,
     };
 
+    /// @brief Keyboard key code and modifier flags.
+    /// @ingroup core-io
+    struct KeyWithModifiers
+    {
+        CUBOS_REFLECT;
+
+        Key key;
+        Modifiers modifiers;
+    };
+
     inline Modifiers operator|(Modifiers lhs, Modifiers rhs)
     {
         return static_cast<Modifiers>(static_cast<int>(lhs) | static_cast<int>(rhs));
