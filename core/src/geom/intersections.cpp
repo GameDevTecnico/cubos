@@ -77,6 +77,32 @@ static float getOverlap(glm::vec2 p1, glm::vec2 p2)
     return std::numeric_limits<float>::infinity();
 }
 
+static bool intersectsOnAxis(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
+                             const glm::mat4& localToWorld2, glm::vec3& axis, glm::vec3& direction,
+                             Intersection& intersect)
+{
+    glm::vec2 p1 = project(box1, axis, localToWorld1);
+    glm::vec2 p2 = project(box2, axis, localToWorld2);
+
+    if (!overlap(p1, p2))
+    {
+        // then we can guarantee that the shapes do not overlap
+        return false;
+    }
+
+    // get the overlap
+    float o = getOverlap(p1, p2);
+    // check for minimum
+    if (o < intersect.penetration)
+    {
+        // then set this one as the smallest
+        intersect.penetration = o;
+        intersect.normal = glm::dot(direction, axis) < 0.0F ? -axis : axis;
+    }
+
+    return true;
+}
+
 bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
                                    const glm::mat4& localToWorld2, Intersection& intersect)
 {
@@ -93,45 +119,17 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
 
     for (glm::vec3 axis : faceAxes1)
     {
-        glm::vec2 p1 = project(box1, axis, localToWorld1);
-        glm::vec2 p2 = project(box2, axis, localToWorld2);
-
-        if (!overlap(p1, p2))
+        if (!intersectsOnAxis(box1, localToWorld1, box2, localToWorld2, axis, direction, intersect))
         {
-            // then we can guarantee that the shapes do not overlap
             return false;
-        }
-
-        // get the overlap
-        float o = getOverlap(p1, p2);
-        // check for minimum
-        if (o < intersect.penetration)
-        {
-            // then set this one as the smallest
-            intersect.penetration = o;
-            intersect.normal = glm::dot(direction, axis) < 0 ? -axis : axis;
         }
     }
 
     for (glm::vec3 axis : faceAxes2)
     {
-        glm::vec2 p1 = project(box1, axis, localToWorld1);
-        glm::vec2 p2 = project(box2, axis, localToWorld2);
-
-        if (!overlap(p1, p2))
+        if (!intersectsOnAxis(box1, localToWorld1, box2, localToWorld2, axis, direction, intersect))
         {
-            // then we can guarantee that the shapes do not overlap
             return false;
-        }
-
-        // get the overlap
-        float o = getOverlap(p1, p2);
-        // check for minimum
-        if (o < intersect.penetration)
-        {
-            // then set this one as the smallest
-            intersect.penetration = o;
-            intersect.normal = glm::dot(direction, axis) < 0 ? -axis : axis;
         }
     }
 
@@ -146,31 +144,17 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
             }
             edgeAxis = glm::normalize(edgeAxis);
 
-            glm::vec2 p1 = project(box1, edgeAxis, localToWorld1);
-            glm::vec2 p2 = project(box2, edgeAxis, localToWorld2);
-
-            if (!overlap(p1, p2))
+            if (!intersectsOnAxis(box1, localToWorld1, box2, localToWorld2, edgeAxis, direction, intersect))
             {
-                // then we can guarantee that the shapes do not overlap
                 return false;
-            }
-
-            // get the overlap
-            float o = getOverlap(p1, p2);
-            // check for minimum
-            if (o < intersect.penetration)
-            {
-                // then set this one as the smallest
-                intersect.penetration = o;
-                intersect.normal = glm::dot(direction, edgeAxis) < 0 ? -edgeAxis : edgeAxis;
             }
         }
     }
 
-    // Case where all projections where equal so the value was never set
+    // Case where all projections were equal so the value was never set
     if (intersect.penetration == std::numeric_limits<float>::infinity())
     {
-        intersect.penetration = 0.0F;
+        return false;
     }
 
     return true;
