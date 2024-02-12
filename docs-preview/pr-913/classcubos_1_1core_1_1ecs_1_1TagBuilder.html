@@ -87,7 +87,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7799fa95297a00059f3f807b4cabbe97" class="m-doc">tagged</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
-            <dd>Makes the current tag inherit from given tag.</dd>
+            <dd>Tags all systems on this tag with the given tag.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename F&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a5f5205b3f0454e0315cc01fc012408c0" class="m-doc">runIf</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
@@ -97,7 +97,7 @@
               <div class="m-doc-template">template&lt;typename F&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a5674690d16b16c9e77d03cf942151770" class="m-doc">repeatWhile</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
-            <dd>Adds a repeat condition to the current tag, also making it a group.</dd>
+            <dd>Makes all systems within the tag repeat as a group until the given condition evaluates to false.</dd>
           </dl>
         </section>
         <section>
@@ -185,7 +185,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7799fa95297a00059f3f807b4cabbe97" class="m-doc-self">tagged</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
-            <p>Makes the current tag inherit from given tag.</p>
+            <p>Tags all systems on this tag with the given tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -237,7 +237,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5674690d16b16c9e77d03cf942151770" class="m-doc-self">repeatWhile</a>(</span><span class="m-doc-wrap">F func)</span></span>
             </h3>
-            <p>Adds a repeat condition to the current tag, also making it a group.</p>
+            <p>Makes all systems within the tag repeat as a group until the given condition evaluates to false.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
