@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::PotentiallyCollidingWith struct | CUBOS. Docs</title>
+  <title>cubos::core::geom::Intersection struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,38 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>PotentiallyCollidingWith <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="potentially__colliding__with_8hpp.html">&lt;engine/collisions/broad_phase/potentially_colliding_with.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1geom.html">geom</a>::<wbr/></span>Intersection <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="intersections_8hpp.html">&lt;core/geom/intersections.hpp&gt;</a></div>
         </h1>
-        <p>Component which represents a potential collisions.</p>
+        <p>Contains info regarding an intersection between shapes.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a0fe5b08612cc2b94f057a94cf357c6d5">
+              float <a href="#a0fe5b08612cc2b94f057a94cf357c6d5" class="m-doc-self">penetration</a>
+            </dt>
+            <dd>Penetration depth of the collision.</dd>
+            <dt id="a157548a9b6f2fec69a840aacc4ebd09d">
+              glm::vec3 <a href="#a157548a9b6f2fec69a840aacc4ebd09d" class="m-doc-self">position</a>
+            </dt>
+            <dd>Position of contact on the surface of the entity.</dd>
+            <dt id="aaf397519406decb4f8d289bdef318076">
+              glm::vec3 <a href="#aaf397519406decb4f8d289bdef318076" class="m-doc-self">normal</a>
+            </dt>
+            <dd>Normal of contact on the surface of the entity.</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>

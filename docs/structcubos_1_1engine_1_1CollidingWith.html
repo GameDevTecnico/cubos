@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/collisions/broad_phase/potentially_colliding_with.hpp file | CUBOS. Docs</title>
+  <title>cubos::engine::CollidingWith struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,37 +46,40 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_db86702e1371d7558db3699dd3786a14.html">collisions</a>/</span><span class="m-breadcrumb"><a href="dir_6e3f4c3139d5f8b4a400c5df04d1a451.html">broad_phase</a>/</span>potentially_colliding_with.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>CollidingWith <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="colliding__with_8hpp.html">&lt;engine/collisions/narrow_phase/colliding_with.hpp&gt;</a></div>
         </h1>
-        <p>Component <a href="structcubos_1_1engine_1_1PotentiallyCollidingWith.html" class="m-doc">cubos::<wbr />engine::<wbr />PotentiallyCollidingWith</a>.</p>
+        <p>Component which represents a collision.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
-            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1PotentiallyCollidingWith.html" class="m-doc">cubos::engine::PotentiallyCollidingWith</a>
+            <dt id="a8d5fde6e826f8df36c4a4e87ede3cf0b">
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a> <a href="#a8d5fde6e826f8df36c4a4e87ede3cf0b" class="m-doc-self">entity</a>
             </dt>
-            <dd>Component which represents a potential collisions.</dd>
+            <dd>Entity to which the normal is relative to.</dd>
+            <dt id="a5e7fc99c2565a2d158b14877ad1e3f51">
+              float <a href="#a5e7fc99c2565a2d158b14877ad1e3f51" class="m-doc-self">penetration</a>
+            </dt>
+            <dd>Penetration depth of the collision.</dd>
+            <dt id="a5aad1a0e6a0d218f37345f7513e49898">
+              glm::vec3 <a href="#a5aad1a0e6a0d218f37345f7513e49898" class="m-doc-self">position</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> of contact on the surface of the entity.</dd>
+            <dt id="a5efd20144e1b1a4e6f2c28ec858bad34">
+              glm::vec3 <a href="#a5efd20144e1b1a4e6f2c28ec858bad34" class="m-doc-self">normal</a>
+            </dt>
+            <dd>Normal of contact on the surface of the entity.</dd>
           </dl>
         </section>
       </div>
