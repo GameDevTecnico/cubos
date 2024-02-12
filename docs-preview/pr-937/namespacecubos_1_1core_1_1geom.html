@@ -77,7 +77,7 @@
             </dt>
             <dd>Represents a capsule or sphere shape.</dd>
             <dt>
-              struct <a href="structcubos_1_1core_1_1geom_1_1Intersect.html" class="m-doc">Intersect</a>
+              struct <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a>
             </dt>
             <dd>Contains info regarding an intersection between shapes.</dd>
           </dl>
@@ -86,28 +86,24 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a73a322b3303b5721e28a15104367c34a" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a>&amp; ent1,
-              const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box1,
+              <span class="m-doc-wrap-bumper">auto <a href="#aca8569b7896d33564c3dad679324fd2c" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box1,
               const glm::mat4&amp; localToWorld1,
-              const <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a>&amp; ent2,
               const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box2,
               const glm::mat4&amp; localToWorld2,
-              <a href="structcubos_1_1core_1_1geom_1_1Intersect.html" class="m-doc">Intersect</a>&amp; intersect) -&gt; bool</span>
+              <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a>&amp; intersect) -&gt; bool</span>
             </dt>
             <dd>Computes the intersection between two box shapes.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a73a322b3303b5721e28a15104367c34a"><div>
+          <section class="m-doc-details" id="aca8569b7896d33564c3dad679324fd2c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73a322b3303b5721e28a15104367c34a" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a>&amp; ent1,
-              const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box1,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aca8569b7896d33564c3dad679324fd2c" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box1,
               const glm::mat4&amp; localToWorld1,
-              const <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a>&amp; ent2,
               const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box2,
               const glm::mat4&amp; localToWorld2,
-              <a href="structcubos_1_1core_1_1geom_1_1Intersect.html" class="m-doc">Intersect</a>&amp; intersect)</span></span>
+              <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a>&amp; intersect)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="intersections_8hpp.html">&lt;core/geom/intersections.hpp&gt;</a></div>
             </h3>
             <p>Computes the intersection between two box shapes.</p>
@@ -117,20 +113,12 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">ent1</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>box1</td>
+                  <td style="width: 1%">box1</td>
                   <td><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a> shape of the first entity.</td>
                 </tr>
                 <tr>
                   <td>localToWorld1</td>
                   <td>Local to world matrix of the first entity.</td>
-                </tr>
-                <tr>
-                  <td>ent2</td>
-                  <td></td>
                 </tr>
                 <tr>
                   <td>box2</td>

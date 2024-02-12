@@ -88,7 +88,8 @@
             </dt>
             <dd>Destroys an entity.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0c75cfde6373904798ba117b9627cd5f" class="m-doc">spawn</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab21595883fc5237b145b2503f940fc09" class="m-doc">spawn</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint,
+              bool withName = true) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a></span>
             </dt>
             <dd>Spawns a blueprint into the world.</dd>
             <dt>
@@ -191,9 +192,10 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a0c75cfde6373904798ba117b9627cd5f"><div>
+          <section class="m-doc-details" id="ab21595883fc5237b145b2503f940fc09"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c75cfde6373904798ba117b9627cd5f" class="m-doc-self">spawn</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab21595883fc5237b145b2503f940fc09" class="m-doc-self">spawn</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint,
+              bool withName = true)</span></span>
             </h3>
             <p>Spawns a blueprint into the world.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -204,6 +206,10 @@
                 <tr>
                   <td style="width: 1%">blueprint</td>
                   <td><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a> to spawn.</td>
+                </tr>
+                <tr>
+                  <td>withName</td>
+                  <td>Whether to use the entity names from the blueprint.</td>
                 </tr>
               </tbody>
               <tfoot>
