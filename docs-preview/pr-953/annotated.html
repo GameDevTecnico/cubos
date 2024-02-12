@@ -150,6 +150,7 @@
                         </ul>
                       </li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which allows the system to send events of type <code>T</code> to other systems.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">Name</a> <span class="m-doc">Component which stores the name of an entity.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a> <span class="m-doc">Wrapper for reference types to indicate that the given argument type is optional in a query.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which holds the result of a query over all entities in world which match the given arguments.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a> <span class="m-doc">Holds the data necessary to execute a query.</span></li>
@@ -224,7 +225,7 @@
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a> <span class="m-doc">Represents an axis-aligned bounding box.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a> <span class="m-doc">Represents a box shape.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">Capsule</a> <span class="m-doc">Represents a capsule or sphere shape.</span></li>
-                      <li>struct <a href="structcubos_1_1core_1_1geom_1_1Intersect.html" class="m-doc">Intersect</a> <span class="m-doc">Contains info regarding an intersection between shapes.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a> <span class="m-doc">Contains info regarding an intersection between shapes.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
@@ -300,6 +301,7 @@
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1GamepadConnectionEvent.html" class="m-doc">GamepadConnectionEvent</a> <span class="m-doc">Event sent when a gamepad is connected or disconnected.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">GamepadState</a> <span class="m-doc">Holds the state of a gamepad.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1KeyEvent.html" class="m-doc">KeyEvent</a> <span class="m-doc">Event sent when a key is pressed or released.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">KeyWithModifiers</a> <span class="m-doc">Keyboard key code and modifier flags.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1ModifiersEvent.html" class="m-doc">ModifiersEvent</a> <span class="m-doc">Event sent when the modifiers change.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1MouseButtonEvent.html" class="m-doc">MouseButtonEvent</a> <span class="m-doc">Event sent when a mouse button state changes.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1io_1_1MouseMoveEvent.html" class="m-doc">MouseMoveEvent</a> <span class="m-doc">Event sent when the mouse cursor moves.</span></li>
@@ -343,6 +345,7 @@
                           <li>class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOfImpl.html" class="m-doc">AddressOfImpl</a> <span class="m-doc">Implementation of <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a> for a pointer to member.</span></li>
                         </ul>
                       </li>
+                      <li>class <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html" class="m-doc">MaskTrait</a> <span class="m-doc">Provides mask functionality to an enum mask type.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1NullableTrait.html" class="m-doc">NullableTrait</a> <span class="m-doc">Used to manipulate values of null-representable types.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">Reflect</a> <span class="m-doc">Defines the reflection function for the given type <code>T</code>.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1StringConversionTrait.html" class="m-doc">StringConversionTrait</a> <span class="m-doc">Stores functions for converting a type to and from a string.</span></li>
@@ -438,7 +441,6 @@
                   <li>class <a href="classcubos_1_1engine_1_1PostProcessingCopy.html" class="m-doc">PostProcessingCopy</a> <span class="m-doc">A simple post processing pass that copies the input texture to the output.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1PostProcessingManager.html" class="m-doc">PostProcessingManager</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Responsible for managing the post processing passes.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1PostProcessingPass.html" class="m-doc">PostProcessingPass</a> <span class="m-doc">A generic post processing pass.</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1PotentiallyCollidingWith.html" class="m-doc">PotentiallyCollidingWith</a> <span class="m-doc">Component which represents a potential collisions.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a> <span class="m-doc">Component which holds the previous position of the entity. Used for the integrator on the update velocity step.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1RenderableGrid.html" class="m-doc">RenderableGrid</a> <span class="m-doc">Component which makes a voxel grid be rendered by the renderer plugin.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1RendererEnvironment.html" class="m-doc">RendererEnvironment</a> <span class="m-doc">Resource which stores the renderer&#x27;s ambient light and sky colors.</span></li>
