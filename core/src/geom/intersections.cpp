@@ -7,8 +7,6 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-static const float THRESHOLD = static_cast<float>(1.0e-5);
-
 using namespace cubos::core::geom;
 
 CUBOS_REFLECT_IMPL(cubos::core::geom::Intersection)
@@ -55,23 +53,7 @@ static glm::vec2 project(const Box& box, glm::vec3 axis, const glm::mat4& localT
 
 static bool overlap(glm::vec2 p1, glm::vec2 p2)
 {
-    if ((p1.x < p2.x) && (p2.x < p1.y) && (p1.y < p2.y))
-    {
-        return true;
-    }
-    if ((p2.x < p1.x) && (p1.x < p2.y) && (p2.y < p1.y))
-    {
-        return true;
-    }
-    if ((p1.x < p2.x) && (p2.y < p1.y))
-    {
-        return true;
-    }
-    if ((p2.x < p1.x) && (p1.y < p2.y))
-    {
-        return true;
-    }
-    return (glm::abs(p2.x - p1.x) < THRESHOLD) && (glm::abs(p1.y - p2.y) < THRESHOLD); // add threshold
+    return p1.y >= p2.x && p2.y >= p1.x;
 }
 
 static float getOverlap(glm::vec2 p1, glm::vec2 p2)
@@ -92,44 +74,24 @@ static float getOverlap(glm::vec2 p1, glm::vec2 p2)
         }
         return glm::abs(p2.y - p2.x);
     }
-    return std::numeric_limits<double>::infinity();
+    return std::numeric_limits<float>::infinity();
 }
 
 bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
                                    const glm::mat4& localToWorld2, Intersection& intersect)
 {
-    static glm::vec3 axes1[3];
-    static glm::vec3 axes2[3];
-    getAxes(localToWorld1, axes1);
-    getAxes(localToWorld2, axes2);
+    glm::vec3 faceAxes1[3];
+    glm::vec3 faceAxes2[3];
+    getAxes(localToWorld1, faceAxes1);
+    getAxes(localToWorld2, faceAxes2);
 
-    intersect.penetration = std::numeric_limits<double>::infinity();
+    // Start the penetration at the highest possible value
+    intersect.penetration = std::numeric_limits<float>::infinity();
 
     // Vector from the first entity's center of mass to the second
     glm::vec3 direction = glm::normalize(glm::vec3(localToWorld2[3]) - glm::vec3(localToWorld1[3]));
 
-    for (glm::vec3 axis : axes1)
-    {
-        glm::vec2 p1 = project(box1, axis, localToWorld1);
-        glm::vec2 p2 = project(box2, axis, localToWorld2);
-
-        if (!overlap(p1, p2))
-        {
-            // then we can guarantee that the shapes do not overlap
-            return false;
-        }
-        // get the overlap
-        float o = getOverlap(p1, p2);
-        // check for minimum
-        if (o < intersect.penetration)
-        {
-            // then set this one as the smallest
-            intersect.penetration = o;
-            intersect.normal = glm::dot(direction, axis) < 0 ? -axis : axis;
-        }
-    }
-
-    for (glm::vec3 axis : axes2)
+    for (glm::vec3 axis : faceAxes1)
     {
         glm::vec2 p1 = project(box1, axis, localToWorld1);
         glm::vec2 p2 = project(box2, axis, localToWorld2);
@@ -151,7 +113,62 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
         }
     }
 
-    if (intersect.penetration == std::numeric_limits<double>::infinity())
+    for (glm::vec3 axis : faceAxes2)
+    {
+        glm::vec2 p1 = project(box1, axis, localToWorld1);
+        glm::vec2 p2 = project(box2, axis, localToWorld2);
+
+        if (!overlap(p1, p2))
+        {
+            // then we can guarantee that the shapes do not overlap
+            return false;
+        }
+
+        // get the overlap
+        float o = getOverlap(p1, p2);
+        // check for minimum
+        if (o < intersect.penetration)
+        {
+            // then set this one as the smallest
+            intersect.penetration = o;
+            intersect.normal = glm::dot(direction, axis) < 0 ? -axis : axis;
+        }
+    }
+
+    for (glm::vec3 axis1 : faceAxes1)
+    {
+        for (glm::vec3 axis2 : faceAxes2)
+        {
+            glm::vec3 edgeAxis = glm::cross(axis1, axis2);
+            if (glm::all(glm::equal(edgeAxis, glm::vec3(0.0F, 0.0F, 0.0F))))
+            {
+                continue;
+            }
+            edgeAxis = glm::normalize(edgeAxis);
+
+            glm::vec2 p1 = project(box1, edgeAxis, localToWorld1);
+            glm::vec2 p2 = project(box2, edgeAxis, localToWorld2);
+
+            if (!overlap(p1, p2))
+            {
+                // then we can guarantee that the shapes do not overlap
+                return false;
+            }
+
+            // get the overlap
+            float o = getOverlap(p1, p2);
+            // check for minimum
+            if (o < intersect.penetration)
+            {
+                // then set this one as the smallest
+                intersect.penetration = o;
+                intersect.normal = glm::dot(direction, edgeAxis) < 0 ? -edgeAxis : edgeAxis;
+            }
+        }
+    }
+
+    // Case where all projections where equal so the value was never set
+    if (intersect.penetration == std::numeric_limits<float>::infinity())
     {
         intersect.penetration = 0.0F;
     }
