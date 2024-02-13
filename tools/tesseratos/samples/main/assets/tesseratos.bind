@@ -2,7 +2,7 @@
     "actions": {
         "debug-camera-toggle": {
             "keys": [
-                "LControl"
+                "R"
             ]
         }
     },
