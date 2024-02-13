@@ -272,11 +272,11 @@ bool DataInspector::inspect(const std::string& name, const Type& type, void* val
         auto str = stringConversion.into(value);
         if (readOnly)
         {
-            showKnown(name, type, static_cast<void*>(&str));
+            showKnown(name, core::reflection::reflect<decltype(str)>(), static_cast<void*>(&str));
         }
         else
         {
-            changed |= editKnown(name, type, static_cast<void*>(&str));
+            changed |= editKnown(name, core::reflection::reflect<decltype(str)>(), static_cast<void*>(&str));
             if (changed)
             {
                 stringConversion.from(value, str);
