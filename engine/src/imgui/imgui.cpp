@@ -577,10 +577,10 @@ static bool handle(const io::TextEvent& event)
 static bool handle(const io::ModifiersEvent& event)
 {
     ImGuiIO& io = ImGui::GetIO();
-    io.KeyCtrl = (event.modifiers & io::Modifiers::Control) != io::Modifiers::None;
-    io.KeyShift = (event.modifiers & io::Modifiers::Shift) != io::Modifiers::None;
-    io.KeyAlt = (event.modifiers & io::Modifiers::Alt) != io::Modifiers::None;
-    io.KeySuper = (event.modifiers & io::Modifiers::System) != io::Modifiers::None;
+    io.AddKeyEvent(ImGuiKey_ModCtrl, (event.modifiers & io::Modifiers::Control) != io::Modifiers::None);
+    io.AddKeyEvent(ImGuiKey_ModShift, (event.modifiers & io::Modifiers::Shift) != io::Modifiers::None);
+    io.AddKeyEvent(ImGuiKey_ModAlt, (event.modifiers & io::Modifiers::Alt) != io::Modifiers::None);
+    io.AddKeyEvent(ImGuiKey_ModSuper, (event.modifiers & io::Modifiers::System) != io::Modifiers::None);
     return io.WantCaptureKeyboard;
 }
 
