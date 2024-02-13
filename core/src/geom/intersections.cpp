@@ -7,6 +7,8 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
+static const float MaxDifference = static_cast<float>(1.0e-7);
+
 using namespace cubos::core::geom;
 
 CUBOS_REFLECT_IMPL(cubos::core::geom::Intersection)
@@ -53,28 +55,21 @@ static glm::vec2 project(const Box& box, glm::vec3 axis, const glm::mat4& localT
 
 static bool overlap(glm::vec2 p1, glm::vec2 p2)
 {
-    return p1.y >= p2.x && p2.y >= p1.x;
+    return p1.y > p2.x && p2.y > p1.x;
 }
 
 static float getOverlap(glm::vec2 p1, glm::vec2 p2)
 {
-    if (p2.x < p1.x)
+    float o = glm::min(p1.y, p2.y) - glm::max(p1.x, p2.x);
+
+    float l = p1.x - p2.x;
+    float r = p1.y - p2.y;
+    if (l * r < 0.0F) // is contained
     {
-        if (p2.y < p1.y)
-        {
-            return glm::abs(p2.y - p1.x);
-        }
-        return glm::abs(p1.y - p1.x);
+        o += glm::min(glm::abs(l), glm::abs(r));
     }
-    if (p1.x < p2.x)
-    {
-        if (p1.y < p2.y)
-        {
-            return glm::abs(p1.y - p2.x);
-        }
-        return glm::abs(p2.y - p2.x);
-    }
-    return std::numeric_limits<float>::infinity();
+
+    return o;
 }
 
 static bool intersectsOnAxis(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
@@ -138,7 +133,7 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
         for (glm::vec3 axis2 : faceAxes2)
         {
             glm::vec3 edgeAxis = glm::cross(axis1, axis2);
-            if (glm::all(glm::equal(edgeAxis, glm::vec3(0.0F, 0.0F, 0.0F))))
+            if (glm::all(glm::equal(edgeAxis, glm::vec3(0.0F, 0.0F, 0.0F), MaxDifference)))
             {
                 continue;
             }
@@ -149,12 +144,6 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
                 return false;
             }
         }
-    }
-
-    // Case where all projections were equal so the value was never set
-    if (intersect.penetration == std::numeric_limits<float>::infinity())
-    {
-        return false;
     }
 
     return true;
