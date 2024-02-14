@@ -36,9 +36,10 @@ void tesseratos::entityInspectorPlugin(Cubos& cubos)
             ImGui::Begin("Entity Inspector");
             if (!ImGui::IsWindowCollapsed())
             {
-                if (!entitySelector.selection.isNull() && world.isAlive(entitySelector.selection))
+                auto entity = entitySelector.selection;
+                if (!entity.isNull() && world.isAlive(entity))
                 {
-                    ImGui::Text("Entity %d selected", entitySelector.selection.index);
+                    ImGui::Text("Entity %d#%d selected", entity.index, entity.generation);
                     ImGui::Separator();
 
                     if (ImGui::Button("Add Component"))
@@ -53,7 +54,7 @@ void tesseratos::entityInspectorPlugin(Cubos& cubos)
                             if (ImGui::Button(name.c_str()))
                             {
                                 auto value = AnyValue::defaultConstruct(*type);
-                                world.components(entitySelector.selection).add(value.type(), value.get());
+                                world.components(entity).add(value.type(), value.get());
                                 ImGui::CloseCurrentPopup();
                             }
                         }
@@ -62,7 +63,7 @@ void tesseratos::entityInspectorPlugin(Cubos& cubos)
                     }
 
                     const Type* removed = nullptr;
-                    for (auto [type, value] : world.components(entitySelector.selection))
+                    for (auto [type, value] : world.components(entity))
                     {
                         ImGui::SeparatorText(type->name().c_str());
                         dataInspector.edit(*type, value);
@@ -74,7 +75,7 @@ void tesseratos::entityInspectorPlugin(Cubos& cubos)
 
                     if (removed != nullptr)
                     {
-                        world.components(entitySelector.selection).remove(*removed);
+                        world.components(entity).remove(*removed);
                     }
                 }
                 else
