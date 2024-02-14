@@ -34,6 +34,7 @@ void Blueprint::add(Entity entity, AnyValue component)
 {
     CUBOS_ASSERT(component.type().get<ConstructibleTrait>().hasCopyConstruct(),
                  "Blueprint components must be copy constructible, but '{}' isn't", component.type().name());
+    CUBOS_ASSERT(!component.type().has<EphemeralTrait>(), "Ephemeral components should not be stored in blueprints");
 
     // Sanity check to catch errors where the user passes an entity which doesn't belong to this blueprint.
     // We can't make sure it never happens, but we might as well catch some of the possible cases.
@@ -52,6 +53,7 @@ void Blueprint::relate(Entity fromEntity, Entity toEntity, AnyValue relation)
 {
     CUBOS_ASSERT(relation.type().get<ConstructibleTrait>().hasCopyConstruct(),
                  "Blueprint relations must be copy constructible, but '{}' isn't", relation.type().name());
+    CUBOS_ASSERT(!relation.type().has<EphemeralTrait>(), "Ephemeral relations should not be stored in blueprints");
 
     // Sanity check to catch errors where the user passes an entity which doesn't belong to this blueprint.
     // We can't make sure it never happens, but we might as well catch some of the possible cases.
