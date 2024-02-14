@@ -1,4 +1,5 @@
 #include <memory>
+#include <unordered_map>
 #include <vector>
 
 #include <imgui.h>
@@ -17,12 +18,15 @@
 #include <tesseratos/scene_editor/plugin.hpp>
 #include <tesseratos/toolbox/plugin.hpp>
 
-using cubos::core::ecs::Commands;
-using cubos::core::ecs::Entity;
+using cubos::core::ecs::Blueprint;
+using cubos::core::ecs::World;
+using cubos::core::memory::AnyValue;
 
 using cubos::engine::Asset;
 using cubos::engine::Assets;
+using cubos::engine::Commands;
 using cubos::engine::Cubos;
+using cubos::engine::Entity;
 using cubos::engine::Scene;
 
 using namespace tesseratos;
@@ -33,11 +37,18 @@ namespace
     struct SceneInfo
     {
         bool isExpanded{false};
-        bool isSelected{false};
         bool shouldBeRemoved{false};
         std::string name;
         std::vector<std::pair<std::string, Entity>> entities;
         std::vector<std::pair<std::string, std::unique_ptr<SceneInfo>>> scenes;
+    };
+
+    // Resource which stores the editor state.
+    struct State
+    {
+        Asset<Scene> asset{nullptr};
+        SceneInfo root;
+        std::unordered_map<std::string, Asset<Scene>> imports;
     };
 } // namespace
 
@@ -81,14 +92,14 @@ static void placeEntity(const std::string& name, Entity handle, SceneInfo& scene
     }
 }
 
-static void openScene(const Asset<Scene>& sceneToSpawn, Commands& commands, const Assets& assets, SceneInfo& scene)
+static void openScene(const Asset<Scene>& sceneToSpawn, Commands& commands, const Assets& assets, State& state)
 {
-    closeScene(commands, scene);
-    auto sceneRead = assets.read(sceneToSpawn);
-    auto builder = commands.spawn(sceneRead->blueprint);
-    for (const auto& [entity, name] : sceneRead->blueprint.bimap())
+    const auto& scene = *assets.read(sceneToSpawn);
+    state.imports = scene.imports;
+    auto builder = commands.spawn(scene.blueprint);
+    for (const auto& [entity, name] : scene.blueprint.bimap())
     {
-        placeEntity(name, builder.entity(name), scene);
+        placeEntity(name, builder.entity(name), state.root);
     }
 }
 
@@ -291,6 +302,7 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
             ImGui::Separator();
             if (ImGui::Button("Add Scene"))
             {
+                // TODO: actually add a sub scene - should add new scene to state.imports
                 std::string sceneName = scene.name + "scene" + std::to_string(scene.scenes.size() + 1);
                 auto newSubscene = std::make_unique<SceneInfo>();
                 newSubscene->name = sceneName;
@@ -312,6 +324,7 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
         }
         for (const auto& i : sceneToRemove)
         {
+            // TODO: remove sub-scene from state.imports
             scene.scenes.erase(scene.scenes.begin() + static_cast<std::ptrdiff_t>(i));
         }
 
@@ -324,6 +337,38 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
     ImGui::PopID();
 }
 
+static Blueprint intoBlueprint(const World& world, const SceneInfo& info)
+{
+    Blueprint blueprint{};
+
+    // Add matching entities from the world into the blueprint.
+    for (const auto& [name, worldEnt] : info.entities)
+    {
+        auto blueprintEnt = blueprint.create(name);
+        for (auto [type, value] : world.components(worldEnt))
+        {
+            blueprint.add(blueprintEnt, AnyValue::copyConstruct(*type, value));
+        }
+    }
+
+    // Merge sub-scene blueprints into it.
+    for (const auto& [name, subInfo] : info.scenes)
+    {
+        blueprint.merge(name, intoBlueprint(world, *subInfo));
+    }
+
+    return blueprint;
+}
+
+static void saveScene(const World& world, Assets& assets, State& state)
+{
+    Scene scene{};
+    scene.blueprint = intoBlueprint(world, state.root);
+    scene.imports = state.imports;
+    assets.store(state.asset, std::move(scene));
+    assets.save(state.asset);
+}
+
 void tesseratos::sceneEditorPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::scenePlugin);
@@ -332,31 +377,63 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
     cubos.addPlugin(assetExplorerPlugin);
     cubos.addPlugin(toolboxPlugin);
 
-    cubos.addResource<SceneInfo>();
+    cubos.addResource<State>();
 
     cubos.system("open Scene Editor on asset selection")
         .call([](cubos::core::ecs::EventReader<AssetSelectedEvent> reader, Commands commands, const Assets& assets,
-                 SceneInfo& scene) {
+                 State& state, Toolbox& toolbox) {
             for (const auto& event : reader)
             {
                 if (assets.type(event.asset).is<Scene>())
                 {
+                    toolbox.open("Scene Editor");
+
                     CUBOS_INFO("Opening scene {}", event.asset);
-                    openScene(event.asset, commands, assets, scene);
+                    closeScene(commands, state.root);
+                    state.asset = event.asset;
+                    openScene(state.asset, commands, assets, state);
                 }
             }
         });
 
     cubos.system("show Scene Editor UI")
         .tagged("cubos.imgui")
-        .call([](Commands cmds, SceneInfo& scene, EntitySelector& selector, Toolbox& toolbox) {
+        .call([](const World& world, Assets& assets, Commands cmds, State& state, EntitySelector& selector,
+                 Toolbox& toolbox) {
             if (!toolbox.isOpen("Scene Editor"))
             {
                 return;
             }
 
             ImGui::Begin("Scene Editor");
-            showSceneHierarchy(scene, cmds, selector, 0);
+            if (state.asset == nullptr)
+            {
+                ImGui::Text("No scene opened");
+            }
+            else
+            {
+                auto id = uuids::to_string(state.asset.getId());
+                ImGui::Text("Editing scene %s", id.c_str());
+
+                if (ImGui::Button("Save"))
+                {
+                    saveScene(world, assets, state);
+                }
+
+                ImGui::SameLine();
+
+                if (ImGui::Button("Close"))
+                {
+                    state.asset = Asset<Scene>{};
+                    closeScene(cmds, state.root);
+                }
+                else
+                {
+                    ImGui::Separator();
+                    showSceneHierarchy(state.root, cmds, selector, 0);
+                }
+            }
+
             ImGui::End();
         });
 }
