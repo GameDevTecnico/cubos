@@ -64,8 +64,9 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
         });
 
     cubos.system("toggle Debug Camera")
-        .call([](Input& input, DebugCameraInfo& info, Query<FreeCameraController&> entities) {
-            if (auto match = entities.at(info.ent))
+        .call([](Input& input, DebugCameraInfo& info, Query<FreeCameraController&> entities,
+                 const ActiveCameras& cameras) {
+            if (auto match = entities.at(info.ent); match && cameras.entities[0] == info.ent)
             {
                 auto [controller] = *match;
                 if (!input.pressed("debug-camera-toggle"))
@@ -112,4 +113,12 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
 
             ImGui::End();
         });
+
+    cubos.system("fallback to Debug Camera").call([](ActiveCameras& cameras, DebugCameraInfo& debugCamera) {
+        if (cameras.entities[0].isNull())
+        {
+            std::copy(std::begin(cameras.entities), std::end(cameras.entities), debugCamera.copy);
+            cameras.entities[0] = debugCamera.ent;
+        }
+    });
 }
