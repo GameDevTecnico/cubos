@@ -319,7 +319,7 @@ void cubos::engine::imguiInitialize(io::Window window, float dpiScale)
 
     io.SetClipboardTextFn = setClipboardText;
     io.GetClipboardTextFn = getClipboardText;
-    io.ClipboardUserData = (void*)&window;
+    io.ClipboardUserData = static_cast<void*>(bd);
 
     bd->time = window->time();
 
