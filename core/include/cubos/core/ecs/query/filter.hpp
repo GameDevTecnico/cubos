@@ -154,6 +154,7 @@ namespace cubos::core::ecs
     private:
         QueryFilter& mFilter;
         Entity mPins[MaxTargetCount];
+        bool mDead{false};
     };
 
     class QueryFilter::View::Iterator
