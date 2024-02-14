@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Buttons to add/remove components through the entity inspector (#906).
 - Narrow-phase collision detection plugin (#524).
 - Ephemeral trait, used to indicate that relations and components shouldn't be persisted.
+- Collider gizmos plugin, used to view collision shapes.
 
 ### Changed
 
