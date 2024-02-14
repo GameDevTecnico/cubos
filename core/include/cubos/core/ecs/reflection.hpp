@@ -25,6 +25,11 @@ namespace cubos::core::ecs
     {
     };
 
+    /// @brief Trait used to identify types which are ephemeral and should not be persisted.
+    struct EphemeralTrait
+    {
+    };
+
     /// @brief Builder for @ref reflection::Type objects which represent ECS types.
     ///
     /// Used to reduce the amount of boilerplate code required to define a ECS types.
@@ -58,6 +63,14 @@ namespace cubos::core::ecs
         TypeBuilder&& tree() &&
         {
             mType.with(TreeTrait{});
+            return std::move(*this);
+        }
+
+        /// @brief Makes the type ephemeral.
+        /// @return Builder.
+        TypeBuilder&& ephemeral() &&
+        {
+            mType.with(EphemeralTrait{});
             return std::move(*this);
         }
 
