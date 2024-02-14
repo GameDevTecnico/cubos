@@ -1,5 +1,7 @@
 #include <imgui.h>
 
+#include <cubos/core/ecs/name.hpp>
+
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
@@ -14,12 +16,13 @@
 
 using namespace cubos::core::io;
 
-using cubos::core::ecs::Commands;
-using cubos::core::ecs::Entity;
+using cubos::core::ecs::Name;
 
 using cubos::engine::ActiveCameras;
 using cubos::engine::Camera;
+using cubos::engine::Commands;
 using cubos::engine::Cubos;
+using cubos::engine::Entity;
 using cubos::engine::FreeCameraController;
 using cubos::engine::Input;
 using cubos::engine::Position;
@@ -48,6 +51,7 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
         .after("cubos.fcc.init")
         .call([](Commands commands, DebugCameraInfo& debugCamera) {
             debugCamera.ent = commands.create()
+                                  .add(Name{"debug-camera"})
                                   .add(Camera{})
                                   .add(Position{{}})
                                   .add(FreeCameraController{
