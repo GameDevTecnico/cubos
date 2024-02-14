@@ -207,27 +207,31 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
     return true;
 }
 
-std::tuple<std::string, const Asset<Scene>&> originalComponentData(const Assets& assets, const Asset<Scene>& sceneAsset,
-                                                                   const std::string& entityPath,
-                                                                   const cubos::core::reflection::Type& componentType)
+static std::tuple<std::string, const Asset<Scene>&> originalComponentData(
+    const Assets& assets, const Asset<Scene>& sceneAsset, const std::string& entityPath,
+    const cubos::core::reflection::Type& componentType)
 {
     auto scene = assets.read<Scene>(sceneAsset);
     if (entityPath.find('.') == std::string::npos)
     {
         auto entity = scene->blueprint.entities().atRight(entityPath);
-        if (auto components = scene->blueprint.components().at(componentType); !components.contains(entity))
+
+        if (scene->blueprint.components().contains(componentType) &&
+            scene->blueprint.components().at(componentType).contains(entity))
         {
-            return {nullptr, sceneAsset};
+            return {entityPath, sceneAsset};
         }
-        return {entityPath, sceneAsset};
+
+        return {{}, sceneAsset};
     }
 
-    std::string subScenePath = entityPath.substr(0, entityPath.find('.'));
+    auto subScenePath = entityPath.substr(0, entityPath.find('.'));
     auto newPath = entityPath.substr(entityPath.find('.') + 1);
+    CUBOS_ASSERT(scene->imports.contains(subScenePath));
     return originalComponentData(assets, scene->imports.at(subScenePath), newPath, componentType);
 }
 
-std::tuple<std::string, std::string, const Asset<Scene>&> originalRelationData(
+static std::tuple<std::string, std::string, const Asset<Scene>&> originalRelationData(
     const Assets& assets, const Asset<Scene>& sceneAsset, const std::string& entityPath, const std::string& otherPath,
     const cubos::core::reflection::Type& relationType)
 {
