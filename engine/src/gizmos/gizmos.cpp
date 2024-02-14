@@ -103,29 +103,40 @@ void Gizmos::drawBox(const std::string& id, glm::vec3 corner, glm::vec3 opposite
 
 void Gizmos::drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan, Space space)
 {
-    // Front
-    drawLine(id, corner, glm::vec3{oppositeCorner[0], corner[1], corner[2]}, lifespan, space);
-    drawLine(id, corner, glm::vec3{corner[0], oppositeCorner[1], corner[2]}, lifespan, space);
-    drawLine(id, glm::vec3{oppositeCorner[0], oppositeCorner[1], corner[2]},
-             glm::vec3{corner[0], oppositeCorner[1], corner[2]}, lifespan, space);
-    drawLine(id, glm::vec3{oppositeCorner[0], oppositeCorner[1], corner[2]},
-             glm::vec3{oppositeCorner[0], corner[1], corner[2]}, lifespan, space);
+    auto size = oppositeCorner - corner;
+    auto center = corner + size * 0.5F;
+    auto transform = glm::scale(glm::translate(glm::mat4{1.0F}, center), size);
+    this->drawWireBox(id, transform, lifespan, space);
+}
 
-    // Back
-    drawLine(id, oppositeCorner, glm::vec3{corner[0], oppositeCorner[1], oppositeCorner[2]}, lifespan, space);
-    drawLine(id, oppositeCorner, glm::vec3{oppositeCorner[0], corner[1], oppositeCorner[2]}, lifespan, space);
-    drawLine(id, glm::vec3{corner[0], corner[1], oppositeCorner[2]},
-             glm::vec3{corner[0], oppositeCorner[1], oppositeCorner[2]}, lifespan, space);
-    drawLine(id, glm::vec3{corner[0], corner[1], oppositeCorner[2]},
-             glm::vec3{oppositeCorner[0], corner[1], oppositeCorner[2]}, lifespan, space);
+void Gizmos::drawWireBox(const std::string& id, const glm::mat4& transform, float lifespan, Space space)
+{
+    glm::vec3 corners[8] = {
+        {-0.5F, -0.5F, -0.5F}, {0.5F, -0.5F, -0.5F}, {0.5F, 0.5F, -0.5F}, {-0.5F, 0.5F, -0.5F},
+        {-0.5F, -0.5F, 0.5F},  {0.5F, -0.5F, 0.5F},  {0.5F, 0.5F, 0.5F},  {-0.5F, 0.5F, 0.5F},
+    };
 
-    // Sides
-    drawLine(id, corner, glm::vec3{corner[0], corner[1], oppositeCorner[2]}, lifespan, space);
-    drawLine(id, glm::vec3{corner[0], oppositeCorner[1], corner[2]},
-             glm::vec3{corner[0], oppositeCorner[1], oppositeCorner[2]}, lifespan, space);
-    drawLine(id, glm::vec3{oppositeCorner[0], corner[1], corner[2]},
-             glm::vec3{oppositeCorner[0], corner[1], oppositeCorner[2]}, lifespan, space);
-    drawLine(id, glm::vec3{oppositeCorner[0], oppositeCorner[1], corner[2]}, oppositeCorner, lifespan, space);
+    // Transform corners.
+    for (auto& corner : corners)
+    {
+        corner = glm::vec3{transform * glm::vec4{corner, 1.0F}};
+    }
+
+    // Draw edges.
+    drawLine(id, corners[0], corners[1], lifespan, space);
+    drawLine(id, corners[1], corners[2], lifespan, space);
+    drawLine(id, corners[2], corners[3], lifespan, space);
+    drawLine(id, corners[3], corners[0], lifespan, space);
+
+    drawLine(id, corners[4], corners[5], lifespan, space);
+    drawLine(id, corners[5], corners[6], lifespan, space);
+    drawLine(id, corners[6], corners[7], lifespan, space);
+    drawLine(id, corners[7], corners[4], lifespan, space);
+
+    drawLine(id, corners[0], corners[4], lifespan, space);
+    drawLine(id, corners[1], corners[5], lifespan, space);
+    drawLine(id, corners[2], corners[6], lifespan, space);
+    drawLine(id, corners[3], corners[7], lifespan, space);
 }
 
 void Gizmos::drawCutCone(const std::string& id, glm::vec3 firstBaseCenter, float firstBaseRadius,
