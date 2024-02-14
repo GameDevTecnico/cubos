@@ -6,6 +6,7 @@
 CUBOS_REFLECT_IMPL(cubos::engine::LocalToParent)
 {
     return core::ecs::TypeBuilder<LocalToParent>("cubos::engine::LocalToParent")
+        .ephemeral()
         .withField("mat", &LocalToParent::mat)
         .build();
 }

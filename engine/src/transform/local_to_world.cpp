@@ -6,6 +6,7 @@
 CUBOS_REFLECT_IMPL(cubos::engine::LocalToWorld)
 {
     return core::ecs::TypeBuilder<LocalToWorld>("cubos::engine::LocalToWorld")
+        .ephemeral()
         .withField("mat", &LocalToWorld::mat)
         .build();
 }
