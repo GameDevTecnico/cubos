@@ -79,13 +79,21 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
             return false;
         }
 
-        if (!scene.blueprint.bimap().containsRight(name))
+        if (name == "null")
         {
-            CUBOS_ERROR("Could not deserialize entity from name, no such entity '{}' in scene", name);
-            return false;
+            entity = {};
+        }
+        else
+        {
+            if (!scene.blueprint.bimap().containsRight(name))
+            {
+                CUBOS_ERROR("Could not deserialize entity from name, no such entity {} in scene", name);
+                return false;
+            }
+
+            entity = scene.blueprint.bimap().atRight(name);
         }
 
-        entity = scene.blueprint.bimap().atRight(name);
         return true;
     });
 
@@ -269,6 +277,15 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
 {
     auto scene = assets.read<Scene>(handle);
     JSONSerializer ser{};
+    ser.hook<Entity>([&ser, &scene](const Entity& entity) {
+        if (entity.isNull())
+        {
+            return ser.write<const char*>("null");
+        }
+
+        return ser.write(scene->blueprint.entities().atLeft(entity));
+    });
+
     auto json = nlohmann::json::object();
 
     auto importJson = nlohmann::json::object();
