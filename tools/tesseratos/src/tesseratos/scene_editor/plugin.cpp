@@ -5,9 +5,8 @@
 #include <imgui.h>
 #include <misc/cpp/imgui_stdlib.h>
 
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/string.hpp>
-#include <cubos/core/reflection/reflect.hpp>
-#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
@@ -19,6 +18,7 @@
 #include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::Blueprint;
+using cubos::core::ecs::EphemeralTrait;
 using cubos::core::ecs::World;
 using cubos::core::memory::AnyValue;
 
@@ -347,7 +347,10 @@ static Blueprint intoBlueprint(const World& world, const SceneInfo& info)
         auto blueprintEnt = blueprint.create(name);
         for (auto [type, value] : world.components(worldEnt))
         {
-            blueprint.add(blueprintEnt, AnyValue::copyConstruct(*type, value));
+            if (!type->has<EphemeralTrait>())
+            {
+                blueprint.add(blueprintEnt, AnyValue::copyConstruct(*type, value));
+            }
         }
     }
 
