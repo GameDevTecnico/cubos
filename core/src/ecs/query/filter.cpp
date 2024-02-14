@@ -292,9 +292,17 @@ auto QueryFilter::View::pin(int target, Entity entity) -> View
 {
     CUBOS_ASSERT(target < mFilter.mTargetCount, "No such target {} in query", target);
     CUBOS_ASSERT(mPins[target].isNull(), "Target {} was already pinned", target);
-    CUBOS_ASSERT(mFilter.mWorld.isAlive(entity), "Entity {} is not alive", entity);
 
     View view{mFilter};
+
+    // If the entity is dead, set the view as dead, to guarantee that the iterator will not return any matches.
+    view.mDead = mDead;
+    if (!mFilter.mWorld.isAlive(entity))
+    {
+        view.mDead = true;
+    }
+
+    // Pass the pins from the current view to the new view.
     for (int i = 0; i < mFilter.mTargetCount; ++i)
     {
         view.mPins[i] = mPins[i];
@@ -305,7 +313,7 @@ auto QueryFilter::View::pin(int target, Entity entity) -> View
 
 auto QueryFilter::View::begin() -> Iterator
 {
-    return {*this, false};
+    return {*this, mDead};
 }
 
 auto QueryFilter::View::end() -> Iterator
