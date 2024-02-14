@@ -76,7 +76,7 @@ static void placeEntity(const std::string& name, Entity handle, SceneInfo& scene
     }
     else
     {
-        auto subsceneName = name.substr(0, split - 1);
+        auto subsceneName = name.substr(0, split);
         for (auto& [sname, subscene] : scene.scenes)
         {
             if (sname == subsceneName)
