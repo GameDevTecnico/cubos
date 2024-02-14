@@ -40,16 +40,5 @@ int main(int argc, char** argv)
             input.bind(*bindings);
         });
 
-    cubos.startupSystem("create a Camera").call([](ActiveCameras& camera, Commands cmds) {
-        camera.entities[0] =
-            cmds.create()
-                .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
-                .add(LocalToWorld{})
-                .add(Position{{10.0F, 10.0F, 0.0F}})
-                .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-                .entity();
-        cmds.create().add(LocalToWorld{}).add(Position{{3.0F, 3.0F, 0.0F}}).entity();
-    });
-
     cubos.run();
 }
