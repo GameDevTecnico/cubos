@@ -219,7 +219,7 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
     // Get or create the table and insert a new row.
     auto& table = mTables.sparseRelation().create(tableId, mTypes);
     table.insert(from.index, to.index, value);
-    CUBOS_DEBUG("Added relation {} from entity {} to entity {}", type.name(), from, to);
+    CUBOS_TRACE("Added relation {} from entity {} to entity {}", type.name(), from, to);
 }
 
 void World::unrelate(Entity from, Entity to, const reflection::Type& type)
@@ -252,7 +252,7 @@ void World::unrelate(Entity from, Entity to, const reflection::Type& type)
             auto& table = mTables.sparseRelation().at(tableId);
             if (table.erase(from.index, to.index))
             {
-                CUBOS_DEBUG("Removed relation {} from entity {} to entity {}", type.name(), from, to);
+                CUBOS_TRACE("Removed relation {} from entity {} to entity {}", type.name(), from, to);
 
                 if (mTypes.isTreeRelation(dataType))
                 {
@@ -508,7 +508,7 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
         }
     }
 
-    CUBOS_DEBUG("Added component {} to entity {}", type.name(), mEntity, mEntity);
+    CUBOS_TRACE("Added component {} to entity {}", type.name(), mEntity, mEntity);
     return *this;
 }
 
@@ -567,7 +567,7 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
         }
     }
 
-    CUBOS_DEBUG("Removed component {} from entity {}", type.name(), mEntity);
+    CUBOS_TRACE("Removed component {} from entity {}", type.name(), mEntity);
     return *this;
 }
 
