@@ -103,6 +103,15 @@ namespace cubos::engine
         void drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F,
                          Space space = Space::World);
 
+        /// @brief Draws a wireframe box gizmo.
+        /// @param id Identifier of the gizmo.
+        /// @param transform Transformation matrix to apply to a unit-sized box centered at the origin.
+        /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
+        /// frame.
+        /// @param space Space to draw the gizmo in.
+        void drawWireBox(const std::string& id, const glm::mat4& transform, float lifespan = 0.0F,
+                         Space space = Space::World);
+
         /// @brief Checks whether the left mouse button was pressed over a gizmo.
         /// @param id Identifier of the gizmo.
         /// @return Whether the gizmo was pressed.
