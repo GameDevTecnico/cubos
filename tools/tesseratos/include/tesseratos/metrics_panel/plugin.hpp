@@ -17,6 +17,7 @@ namespace tesseratos
     ///
     /// ## Dependencies
     /// - @ref imgui-plugin
+    /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
