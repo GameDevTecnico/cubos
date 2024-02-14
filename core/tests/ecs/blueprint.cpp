@@ -25,9 +25,11 @@ TEST_CASE("ecs::Blueprint")
     // Check if entity name validity is correct
     CHECK(blueprint.validEntityName("foo"));
     CHECK(blueprint.validEntityName("foo-bar"));
+    CHECK(blueprint.validEntityName("null1"));
     CHECK_FALSE(blueprint.validEntityName("Foo"));
     CHECK_FALSE(blueprint.validEntityName("foo bar"));
     CHECK_FALSE(blueprint.validEntityName("foo.bar"));
+    CHECK_FALSE(blueprint.validEntityName("null"));
 
     SUBCASE("create an entity and clear the blueprint immediately")
     {

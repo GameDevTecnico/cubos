@@ -212,5 +212,5 @@ bool Blueprint::validEntityName(const std::string& name)
         }
     }
 
-    return true;
+    return name != "null";
 }
