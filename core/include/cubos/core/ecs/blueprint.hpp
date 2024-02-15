@@ -15,6 +15,14 @@
 
 namespace cubos::core::ecs
 {
+    /// @brief Converts entities in a value to their respective new entities. If an entity is not found in the map, it
+    /// is left unchanged.
+    /// @param map Map of old entities to new entities.
+    /// @param type Value type.
+    /// @param value Value.
+    void convertEntities(const std::unordered_map<Entity, Entity, EntityHash>& map, const reflection::Type& type,
+                         void* value);
+
     /// @brief Collection of entities and their respective components and relations.
     ///
     /// Blueprints are in a way the 'Prefab' of @b CUBOS. They act as a tiny @ref World which can

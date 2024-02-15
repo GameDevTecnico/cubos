@@ -18,6 +18,8 @@
 #include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::Blueprint;
+using cubos::core::ecs::convertEntities;
+using cubos::core::ecs::EntityHash;
 using cubos::core::ecs::EphemeralTrait;
 using cubos::core::ecs::World;
 using cubos::core::memory::AnyValue;
@@ -337,27 +339,36 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
     ImGui::PopID();
 }
 
-static Blueprint intoBlueprint(const World& world, const SceneInfo& info)
+static Blueprint intoBlueprint(std::unordered_map<Entity, Entity, EntityHash>& worldToBlueprint, const World& world,
+                               const SceneInfo& info)
 {
     Blueprint blueprint{};
-
-    // Add matching entities from the world into the blueprint.
-    for (const auto& [name, worldEnt] : info.entities)
-    {
-        auto blueprintEnt = blueprint.create(name);
-        for (auto [type, value] : world.components(worldEnt))
-        {
-            if (!type->has<EphemeralTrait>())
-            {
-                blueprint.add(blueprintEnt, AnyValue::copyConstruct(*type, value));
-            }
-        }
-    }
 
     // Merge sub-scene blueprints into it.
     for (const auto& [name, subInfo] : info.scenes)
     {
-        blueprint.merge(name, intoBlueprint(world, *subInfo));
+        blueprint.merge(name, intoBlueprint(worldToBlueprint, world, *subInfo));
+    }
+
+    // Add entities from the world into the blueprint.
+    for (const auto& [name, entity] : info.entities)
+    {
+        worldToBlueprint.emplace(entity, blueprint.create(name));
+    }
+
+    // Add components from the world into the blueprint.
+    for (const auto& [name, worldEnt] : info.entities)
+    {
+        auto blueprintEnt = blueprint.bimap().atRight(name);
+        for (auto [type, value] : world.components(worldEnt))
+        {
+            if (!type->has<EphemeralTrait>())
+            {
+                auto component = AnyValue::copyConstruct(*type, value);
+                convertEntities(worldToBlueprint, component.type(), component.get());
+                blueprint.add(blueprintEnt, std::move(component));
+            }
+        }
     }
 
     return blueprint;
@@ -365,8 +376,9 @@ static Blueprint intoBlueprint(const World& world, const SceneInfo& info)
 
 static void saveScene(const World& world, Assets& assets, State& state)
 {
+    std::unordered_map<Entity, Entity, EntityHash> worldToBlueprint{};
     Scene scene{};
-    scene.blueprint = intoBlueprint(world, state.root);
+    scene.blueprint = intoBlueprint(worldToBlueprint, world, state.root);
     scene.imports = state.imports;
     assets.store(state.asset, std::move(scene));
     assets.save(state.asset);
