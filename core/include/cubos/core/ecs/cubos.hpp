@@ -21,9 +21,8 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs
     struct DeltaTime
     {
-        DeltaTime(float value);
-
-        float value; ///< Time in seconds.
+        float value{0.0F};      ///< Time in seconds.
+        float multiplier{1.0F}; ///< Multiplier which will be used when updating the value field.
     };
 
     /// @brief Resource used as a flag to indicate whether the main loop should stop running.
@@ -33,9 +32,7 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs
     struct ShouldQuit
     {
-        ShouldQuit(bool value);
-
-        bool value; ///< Whether the main loop should stop running.
+        bool value{true}; ///< Whether the main loop should stop running.
     };
 
     /// @brief Resource which stores the command-line arguments.
@@ -45,8 +42,6 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs
     struct Arguments
     {
-        Arguments(std::vector<std::string> value);
-
         const std::vector<std::string> value; ///< Command-line arguments.
     };
 

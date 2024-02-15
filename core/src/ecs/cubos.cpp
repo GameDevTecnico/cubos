@@ -11,21 +11,6 @@ using cubos::core::ecs::DeltaTime;
 using cubos::core::ecs::ShouldQuit;
 using cubos::core::ecs::TagBuilder;
 
-DeltaTime::DeltaTime(float value)
-    : value(value)
-{
-}
-
-ShouldQuit::ShouldQuit(bool value)
-    : value(value)
-{
-}
-
-Arguments::Arguments(std::vector<std::string> value)
-    : value(std::move(value))
-{
-}
-
 TagBuilder::TagBuilder(World& world, core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
     : mWorld(world)
     , mDispatcher(dispatcher)
@@ -265,9 +250,9 @@ Cubos::Cubos(int argc, char** argv)
 {
     std::vector<std::string> arguments(argv + 1, argv + argc);
 
-    this->addResource<DeltaTime>(0.0F);
-    this->addResource<ShouldQuit>(true);
-    this->addResource<Arguments>(arguments);
+    this->addResource<DeltaTime>();
+    this->addResource<ShouldQuit>();
+    this->addResource<Arguments>(Arguments{.value = arguments});
 }
 
 void Cubos::run()
@@ -290,7 +275,9 @@ void Cubos::run()
     {
         mMainDispatcher.callSystems(cmds);
         currentTime = std::chrono::steady_clock::now();
-        mWorld.write<DeltaTime>().get().value = std::chrono::duration<float>(currentTime - previousTime).count();
+
+        auto& dt = mWorld.write<DeltaTime>().get();
+        dt.value = std::chrono::duration<float>(currentTime - previousTime).count() * dt.multiplier;
         previousTime = currentTime;
     } while (!mWorld.read<ShouldQuit>().get().value);
 }
