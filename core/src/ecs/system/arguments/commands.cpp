@@ -79,7 +79,7 @@ Commands::BlueprintBuilder::BlueprintBuilder(CommandBuffer& buffer,
 
 Entity Commands::BlueprintBuilder::entity(const std::string& name) const
 {
-    CUBOS_ASSERT(mNameToEntity.contains(name), "No such entity '{}' in blueprint", name);
+    CUBOS_ASSERT(mNameToEntity.contains(name), "No such entity {} in blueprint", name);
     return mNameToEntity.at(name);
 }
 

@@ -57,13 +57,13 @@ int main()
 
     for (const auto& v : variants)
     {
-        CUBOS_INFO("Variant '{}'", v.name());
+        CUBOS_INFO("Variant {}", v.name());
     }
 
-    CUBOS_INFO("'{}'", EnumTrait::toString(Color::Red)); // should print Red
+    CUBOS_INFO("{}", EnumTrait::toString(Color::Red)); // should print Red
     Color buf;
     CUBOS_ASSERT(EnumTrait::fromString(buf, "Green"));
-    CUBOS_INFO("'{}'", EnumTrait::toString(buf)); // should print Green
+    CUBOS_INFO("{}", EnumTrait::toString(buf)); // should print Green
 
     return 0;
 }

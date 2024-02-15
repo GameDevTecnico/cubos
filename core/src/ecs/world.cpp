@@ -15,13 +15,13 @@ World::World()
 
 void World::registerComponent(const reflection::Type& type)
 {
-    CUBOS_TRACE("Registered component '{}'", type.name());
+    CUBOS_TRACE("Registered component {}", type.name());
     mTypes.addComponent(type);
 }
 
 void World::registerRelation(const reflection::Type& type)
 {
-    CUBOS_TRACE("Registered relation '{}'", type.name());
+    CUBOS_TRACE("Registered relation {}", type.name());
     mTypes.addRelation(type);
 }
 

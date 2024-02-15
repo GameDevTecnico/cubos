@@ -516,7 +516,7 @@ namespace cubos::core::ecs
     template <typename T, typename... TArgs>
     void World::registerResource(TArgs... args)
     {
-        CUBOS_TRACE("Registered resource '{}'", typeid(T).name());
+        CUBOS_TRACE("Registered resource {}", typeid(T).name());
         mResourceManager.add<T>(args...);
     }
 

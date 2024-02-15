@@ -118,5 +118,5 @@ AnyValue::AnyValue(const Type& type) noexcept
     const auto& trait = type.get<ConstructibleTrait>();
     mValue = operator new(trait.size(), static_cast<std::align_val_t>(trait.alignment()), std::nothrow);
 
-    CUBOS_ASSERT(mValue != nullptr, "Could not allocate memory for value of type '{}'", type.name());
+    CUBOS_ASSERT(mValue != nullptr, "Could not allocate memory for value of type {}", type.name());
 }

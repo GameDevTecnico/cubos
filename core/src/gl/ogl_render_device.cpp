@@ -2165,7 +2165,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
         if (loc == -1)
         {
             glDeleteVertexArrays(1, &id);
-            CUBOS_ERROR("Could not find vertex element with name '{}'", desc.elements[i].name);
+            CUBOS_ERROR("Could not find vertex element with name {}", desc.elements[i].name);
             return nullptr;
         }
 

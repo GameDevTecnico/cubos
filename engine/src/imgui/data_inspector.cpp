@@ -335,7 +335,7 @@ std::string DataInspector::stringKnown(const void* value, const Type& type)
         return mTextBuffer;
     }
 
-    CUBOS_ERROR("Expected value with primitive type, found unsupported type '{}'", type.name());
+    CUBOS_ERROR("Expected value with primitive type, found unsupported type {}", type.name());
     return {"???"};
 }
 

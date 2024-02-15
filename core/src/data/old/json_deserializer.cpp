@@ -20,7 +20,7 @@ using namespace cubos::core::data::old;
             }                                                                                                          \
             catch (nlohmann::json::exception & e)                                                                      \
             {                                                                                                          \
-                CUBOS_ERROR("Caught JSON exception '{}'", e.what());                                                   \
+                CUBOS_ERROR("Caught JSON exception {}", e.what());                                                     \
                 mFailBit = true;                                                                                       \
             }                                                                                                          \
         }                                                                                                              \

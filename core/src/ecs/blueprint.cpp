@@ -63,8 +63,8 @@ void cubos::core::ecs::convertEntities(const std::unordered_map<Entity, Entity, 
 
 Entity Blueprint::create(std::string name)
 {
-    CUBOS_ASSERT(!mBimap.containsRight(name), "An entity with the name '{}' already exists on the blueprint", name);
-    CUBOS_ASSERT(validEntityName(name), "Blueprint entity name '{}' is invalid, read the docs", name);
+    CUBOS_ASSERT(!mBimap.containsRight(name), "An entity with the name {} already exists on the blueprint", name);
+    CUBOS_ASSERT(validEntityName(name), "Blueprint entity name {} is invalid, read the docs", name);
 
     Entity entity{static_cast<uint32_t>(mBimap.size()), 0};
     mBimap.insert(entity, std::move(name));
@@ -74,7 +74,7 @@ Entity Blueprint::create(std::string name)
 void Blueprint::add(Entity entity, AnyValue component)
 {
     CUBOS_ASSERT(component.type().get<ConstructibleTrait>().hasCopyConstruct(),
-                 "Blueprint components must be copy constructible, but '{}' isn't", component.type().name());
+                 "Blueprint components must be copy constructible, but {} isn't", component.type().name());
     CUBOS_ASSERT(!component.type().has<EphemeralTrait>(), "Ephemeral components should not be stored in blueprints");
 
     // Sanity check to catch errors where the user passes an entity which doesn't belong to this blueprint.
@@ -93,7 +93,7 @@ void Blueprint::add(Entity entity, AnyValue component)
 void Blueprint::relate(Entity fromEntity, Entity toEntity, AnyValue relation)
 {
     CUBOS_ASSERT(relation.type().get<ConstructibleTrait>().hasCopyConstruct(),
-                 "Blueprint relations must be copy constructible, but '{}' isn't", relation.type().name());
+                 "Blueprint relations must be copy constructible, but {} isn't", relation.type().name());
     CUBOS_ASSERT(!relation.type().has<EphemeralTrait>(), "Ephemeral relations should not be stored in blueprints");
 
     // Sanity check to catch errors where the user passes an entity which doesn't belong to this blueprint.
@@ -128,7 +128,7 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
             name = prefix + '.' + name;
 
             CUBOS_ASSERT(!mBimap.containsRight(name),
-                         "A blueprint with the prefix '{}' was already merged to the blueprint", prefix);
+                         "A blueprint with the prefix {} was already merged to the blueprint", prefix);
 
             Entity entity{static_cast<uint32_t>(mBimap.size()), 0};
             mBimap.insert(entity, std::move(name));

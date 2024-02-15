@@ -38,7 +38,7 @@ void Dispatcher::tagInheritTag(const std::string& tag)
     if (std::find(mTagSettings[mCurrTag]->inherits.begin(), mTagSettings[mCurrTag]->inherits.end(), tag) !=
         mTagSettings[mCurrTag]->inherits.end())
     {
-        CUBOS_INFO("Tag already inherits from '{}'", tag);
+        CUBOS_INFO("Tag already inherits from {}", tag);
     }
     mTagSettings[mCurrTag]->inherits.push_back(tag);
     mCurrGroup = mMainStep->findGroup(tag);

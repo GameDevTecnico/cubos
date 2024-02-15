@@ -34,7 +34,7 @@ static bool validateRelativePath(std::string_view path)
         remPath = remPath.substr(i + 1);
     }
 
-    CUBOS_ERROR("Invalid relative path '{}': cannot have leading, trailing or consecutive slashes", path);
+    CUBOS_ERROR("Invalid relative path {}: cannot have leading, trailing or consecutive slashes", path);
     return false;
 }
 
@@ -73,7 +73,7 @@ bool File::mount(std::string_view path, std::unique_ptr<Archive> archive)
 {
     if (!validateRelativePath(path))
     {
-        CUBOS_ERROR("Could not mount archive at '{}' relative to '{}': invalid relative path", path, mPath);
+        CUBOS_ERROR("Could not mount archive at {} relative to {}: invalid relative path", path, mPath);
         return false;
     }
 
@@ -82,7 +82,7 @@ bool File::mount(std::string_view path, std::unique_ptr<Archive> archive)
 
     if (mArchive != nullptr)
     {
-        CUBOS_ERROR("Could not mount archive at '{}/{}': '{}' is already part of an archive", mPath, path, mPath);
+        CUBOS_ERROR("Could not mount archive at {}/{}: {} is already part of an archive", mPath, path, mPath);
         return false;
     }
 
@@ -94,7 +94,7 @@ bool File::mount(std::string_view path, std::unique_ptr<Archive> archive)
     if (childName.empty())
     {
         // Since the path could not start with a slash, this means that the path is empty.
-        CUBOS_ERROR("Could not mount archive at '{}': file already exists", mPath);
+        CUBOS_ERROR("Could not mount archive at {}: file already exists", mPath);
         return false;
     }
 
@@ -121,7 +121,7 @@ bool File::mount(std::string_view path, std::unique_ptr<Archive> archive)
     file->addArchive();
     file->mSibling = this->mChild;
     this->mChild = file;
-    CUBOS_INFO("Mounted archive at '{}/{}'", mPath, childName);
+    CUBOS_INFO("Mounted archive at {}/{}", mPath, childName);
     return true;
 }
 
@@ -146,7 +146,7 @@ bool File::unmount(std::string_view path)
     auto file = this->find(path);
     if (file == nullptr)
     {
-        CUBOS_ERROR("Could not unmount archive at '{}/{}': no such file", mPath, path);
+        CUBOS_ERROR("Could not unmount archive at {}/{}: no such file", mPath, path);
         return false;
     }
 
@@ -156,7 +156,7 @@ bool File::unmount(std::string_view path)
     if (file->mArchive == nullptr)
     {
         file->mMutex.unlock();
-        CUBOS_ERROR("Could not unmount archive at '{}/{}': file does not belong to an archive", mPath, path);
+        CUBOS_ERROR("Could not unmount archive at {}/{}: file does not belong to an archive", mPath, path);
         return false;
     }
 
@@ -164,7 +164,7 @@ bool File::unmount(std::string_view path)
     if (file->mId != 1)
     {
         file->mMutex.unlock();
-        CUBOS_ERROR("Could not unmount archive at '{}/{}': file is not the root of its archive", mPath, path);
+        CUBOS_ERROR("Could not unmount archive at {}/{}: file is not the root of its archive", mPath, path);
         return false;
     }
 
@@ -190,7 +190,7 @@ bool File::unmount(std::string_view path)
 
     file->mMutex.unlock();
 
-    CUBOS_INFO("Unmounted archive at '{}/{}'", mPath, path);
+    CUBOS_INFO("Unmounted archive at {}/{}", mPath, path);
     return true;
 }
 
@@ -215,7 +215,7 @@ File::Handle File::find(std::string_view path)
 {
     if (!validateRelativePath(path))
     {
-        CUBOS_ERROR("Could not find file at '{}' relative to '{}': invalid relative path", path, mPath);
+        CUBOS_ERROR("Could not find file at {} relative to {}: invalid relative path", path, mPath);
         return nullptr;
     }
 
@@ -227,7 +227,7 @@ File::Handle File::find(std::string_view path)
 
     if (!mDirectory)
     {
-        CUBOS_ERROR("Could not find file at '{}/{}': '{}' is not a directory", mPath, path, mPath);
+        CUBOS_ERROR("Could not find file at {}/{}: {} is not a directory", mPath, path, mPath);
         return nullptr;
     }
 
@@ -246,7 +246,7 @@ File::Handle File::find(std::string_view path)
         return child->find(pathRem);
     }
 
-    CUBOS_TRACE("Could not find file at '{}/{}': no such file '{}/{}'", mPath, path, mPath, childName);
+    CUBOS_TRACE("Could not find file at {}/{}: no such file {}/{}", mPath, path, mPath, childName);
     return nullptr;
 }
 
@@ -254,7 +254,7 @@ File::Handle File::create(std::string_view path, bool directory)
 {
     if (!validateRelativePath(path))
     {
-        CUBOS_ERROR("Could not create file at '{}' relative to '{}': invalid relative path", path, mPath);
+        CUBOS_ERROR("Could not create file at {} relative to {}: invalid relative path", path, mPath);
         return nullptr;
     }
 
@@ -264,7 +264,7 @@ File::Handle File::create(std::string_view path, bool directory)
         // Make sure the file has the expected type.
         if (mDirectory != directory)
         {
-            CUBOS_ERROR("Could not create file at '{}/{}': file already exists, but is not a {}", mPath, path,
+            CUBOS_ERROR("Could not create file at {}/{}: file already exists, but is not a {}", mPath, path,
                         directory ? "directory" : "regular file");
             return nullptr;
         }
@@ -274,7 +274,7 @@ File::Handle File::create(std::string_view path, bool directory)
 
     if (!mDirectory)
     {
-        CUBOS_ERROR("Could not create file at '{}/{}': '{}' is not a directory", mPath, path, mPath);
+        CUBOS_ERROR("Could not create file at {}/{}: {} is not a directory", mPath, path, mPath);
         return nullptr;
     }
 
@@ -293,15 +293,14 @@ File::Handle File::create(std::string_view path, bool directory)
         // Check if the directory is mounted on an archive.
         if (mArchive == nullptr)
         {
-            CUBOS_ERROR("Could not create file at '{}/{}': parent directory is not on an archive", mPath, childName);
+            CUBOS_ERROR("Could not create file at {}/{}: parent directory is not on an archive", mPath, childName);
             return nullptr;
         }
 
         // Check if the archive is read-only.
         if (mArchive->readOnly())
         {
-            CUBOS_ERROR("Could not create file at '{}/{}': parent directory is on a read-only archive", mPath,
-                        childName);
+            CUBOS_ERROR("Could not create file at {}/{}: parent directory is on a read-only archive", mPath, childName);
             return nullptr;
         }
 
@@ -313,14 +312,14 @@ File::Handle File::create(std::string_view path, bool directory)
         std::size_t id = mArchive->create(mId, childName, childDirectory);
         if (id == 0)
         {
-            CUBOS_ERROR("Could not create file at '{}/{}': internal archive error", mPath, childName);
+            CUBOS_ERROR("Could not create file at {}/{}: internal archive error", mPath, childName);
             return nullptr;
         }
 
         // Add the file to this directory.
         child = std::shared_ptr<File>(new File(this->shared_from_this(), mArchive, id));
         this->addChild(child);
-        CUBOS_TRACE("Created {} '{}'", childDirectory ? "directory" : "file", child->mPath);
+        CUBOS_TRACE("Created {} {}", childDirectory ? "directory" : "file", child->mPath);
     }
 
     return child->create(pathRem, directory);
@@ -339,19 +338,19 @@ bool File::destroy()
 
     if (mArchive == nullptr)
     {
-        CUBOS_ERROR("Could not destroy file '{}': file not on an archive", mPath);
+        CUBOS_ERROR("Could not destroy file {}: file not on an archive", mPath);
         return false;
     }
 
     if (mArchive->readOnly())
     {
-        CUBOS_ERROR("Could not destroy file '{}': file is on a read-only archive", mPath);
+        CUBOS_ERROR("Could not destroy file {}: file is on a read-only archive", mPath);
         return false;
     }
 
     if (mId == 1)
     {
-        CUBOS_ERROR("Could not destroy file '{}': file is the root of an archive - did you want to use File::unmount?",
+        CUBOS_ERROR("Could not destroy file {}: file is the root of an archive - did you want to use File::unmount?",
                     mPath);
         return false;
     }
@@ -370,7 +369,7 @@ bool File::destroy()
     mParent->removeChild(this->shared_from_this());
     mParent = nullptr;
 
-    CUBOS_TRACE("Marked file '{}' for destruction", mPath);
+    CUBOS_TRACE("Marked file {} for destruction", mPath);
     return true;
 }
 
@@ -407,7 +406,7 @@ std::unique_ptr<memory::Stream> File::open(OpenMode mode)
 
     if (mArchive->readOnly() && mode != OpenMode::Read)
     {
-        CUBOS_ERROR("Could not open file '{}' for writing: file is on a read-only archive", mPath);
+        CUBOS_ERROR("Could not open file {} for writing: file is on a read-only archive", mPath);
         return nullptr;
     }
 
@@ -500,7 +499,7 @@ File::~File()
     {
         if (!mArchive->destroy(mId))
         {
-            CUBOS_ERROR("Could not destroy file '{}': internal archive error", mPath);
+            CUBOS_ERROR("Could not destroy file {}: internal archive error", mPath);
         }
     }
 }

@@ -258,7 +258,7 @@ Package& Package::field(const std::string& name)
         }
     }
 
-    CUBOS_CRITICAL("No field '{}' in package", name);
+    CUBOS_CRITICAL("No field {} in package", name);
     abort();
 }
 

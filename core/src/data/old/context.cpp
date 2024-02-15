@@ -40,7 +40,7 @@ void* Context::getAny(std::type_index type) const
     auto* res = this->tryGetAny(type);
     if (res == nullptr)
     {
-        CUBOS_CRITICAL("Type '{}' requested in serialization context, but not present", type.name());
+        CUBOS_CRITICAL("Type {} requested in serialization context, but not present", type.name());
         abort();
     }
 
