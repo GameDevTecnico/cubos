@@ -58,6 +58,7 @@
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -289,6 +290,17 @@
             <dd>Possible traversal types for tree relation terms.</dd>
           </dl>
         </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2fd36a82365d207f5b95b2f52780d490" class="m-doc">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt;&amp; map,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span>
+            </dt>
+            <dd>Converts entities in a value to their respective new entities. If an entity is not found in the map, it is left unchanged.</dd>
+          </dl>
+        </section>
         <section>
           <h2>Enum documentation</h2>
           <section class="m-doc-details" id="ab7ac3d0b627b68d4303a38fcef673b82"><div>
@@ -317,6 +329,37 @@
                   <td>
                   <p>Starts in the bottommost entity and traverses up the relation.</p>
                   </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a2fd36a82365d207f5b95b2f52780d490"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2fd36a82365d207f5b95b2f52780d490" class="m-doc-self">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt;&amp; map,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="blueprint_8hpp.html">&lt;core/ecs/blueprint.hpp&gt;</a></div>
+            </h3>
+            <p>Converts entities in a value to their respective new entities. If an entity is not found in the map, it is left unchanged.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">map</td>
+                  <td>Map of old entities to new entities.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Value type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
                 </tr>
               </tbody>
             </table>
