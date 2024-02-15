@@ -359,7 +359,7 @@ void Stream::parse(uint64_t& value, std::size_t base)
         {
             if (c - '0' >= static_cast<char>(base))
             {
-                CUBOS_WARN("'{}' is not a base {} digit, defaulting to 0", c, base);
+                CUBOS_WARN("{} is not a base {} digit, defaulting to 0", c, base);
                 value = 0;
                 return;
             }

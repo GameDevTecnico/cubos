@@ -69,7 +69,7 @@ int main()
     cubos.system("check entities").call([](Query<const Num&> query, const Pop& pop) {
         for (auto [num] : query)
         {
-            CUBOS_INFO("Entity '{}' of '{}'", num.value, pop.count);
+            CUBOS_INFO("Entity {} of {}", num.value, pop.count);
         }
     });
     /// [Entity Print]

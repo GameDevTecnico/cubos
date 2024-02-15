@@ -33,12 +33,12 @@ using cubos::core::reflection::Type;
             }                                                                                                          \
             catch (std::invalid_argument&)                                                                             \
             {                                                                                                          \
-                CUBOS_WARN("Cannot deserialize '{}' from JSON key {}: invalid string", #T, mIterator.key());           \
+                CUBOS_WARN("Cannot deserialize {} from JSON key {}: invalid string", #T, mIterator.key());             \
                 return false;                                                                                          \
             }                                                                                                          \
             catch (std::out_of_range&)                                                                                 \
             {                                                                                                          \
-                CUBOS_WARN("Cannot deserialize '{}' from JSON key {}: out of range", #T, mIterator.key());             \
+                CUBOS_WARN("Cannot deserialize {} from JSON key {}: out of range", #T, mIterator.key());               \
                 return false;                                                                                          \
             }                                                                                                          \
         }                                                                                                              \
@@ -50,7 +50,7 @@ using cubos::core::reflection::Type;
             }                                                                                                          \
             catch (nlohmann::json::exception&)                                                                         \
             {                                                                                                          \
-                CUBOS_WARN("Cannot deserialize '{}' from a JSON {}", #T, mIterator->type_name());                      \
+                CUBOS_WARN("Cannot deserialize {} from a JSON {}", #T, mIterator->type_name());                        \
                 return false;                                                                                          \
             }                                                                                                          \
         }                                                                                                              \
@@ -104,14 +104,14 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
         if (!type.has<StringConversionTrait>())
         {
             // JSON doesn't support structured keys, as JSON keys are just strings
-            CUBOS_WARN("Type '{}' cannot be deserialized from a dictionary key - try defining a hook", type.name());
+            CUBOS_WARN("Type {} cannot be deserialized from a dictionary key - try defining a hook", type.name());
             return false;
         }
 
         const auto& trait = type.get<StringConversionTrait>();
         if (!trait.from(value, mIterator.key()))
         {
-            CUBOS_WARN("Key '{}' is not a valid string representation of '{}'", mIterator.key(), type.name());
+            CUBOS_WARN("Key {} is not a valid string representation of {}", mIterator.key(), type.name());
             return false;
         }
 
@@ -123,7 +123,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
         const auto& trait = type.get<StringConversionTrait>();
         if (!trait.from(value, mIterator.value()))
         {
-            CUBOS_WARN("String '{}' is not a valid string representation of '{}'",
+            CUBOS_WARN("String {} is not a valid string representation of {}",
                        static_cast<std::string>(mIterator.value()), type.name());
             return false;
         }
@@ -136,7 +136,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
         const auto& trait = type.get<EnumTrait>();
         if (!trait.contains(mIterator.value()))
         {
-            CUBOS_WARN("{} is not a valid enum variant of '{}'", static_cast<std::string>(mIterator.value()),
+            CUBOS_WARN("{} is not a valid enum variant of {}", static_cast<std::string>(mIterator.value()),
                        type.name());
             return false;
         }
@@ -154,7 +154,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
         {
             if (!trait.hasErase())
             {
-                CUBOS_WARN("Dictionary type '{}' must be empty to be deserialized as it doesn't support erase",
+                CUBOS_WARN("Dictionary type {} must be empty to be deserialized as it doesn't support erase",
                            type.name());
                 return false;
             }
@@ -164,7 +164,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
 
         if (!trait.keyType().has<ConstructibleTrait>())
         {
-            CUBOS_WARN("Dictionary type '{}' cannot be deserialized because its key type '{}' isn't constructible",
+            CUBOS_WARN("Dictionary type {} cannot be deserialized because its key type {} isn't constructible",
                        type.name(), trait.keyType().name());
             return false;
         }
@@ -176,7 +176,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
             mIsKey = true;
             if (!this->read(key.type(), key.get()))
             {
-                CUBOS_WARN("Couldn't deserialize dictionary key '{}'", it.key());
+                CUBOS_WARN("Couldn't deserialize dictionary key {}", it.key());
                 return false;
             }
 
@@ -188,7 +188,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
             mIsKey = false;
             if (!this->read(trait.valueType(), entry->value))
             {
-                CUBOS_WARN("Couldn't deserialize dictionary value with key '{}'", it.key());
+                CUBOS_WARN("Couldn't deserialize dictionary value with key {}", it.key());
                 return false;
             }
         }
@@ -205,9 +205,8 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
         {
             if (!trait.hasResize())
             {
-                CUBOS_WARN(
-                    "Array type '{}' isn't resizable and the JSON array size ({}) doesn't match the its size ({})",
-                    type.name(), mIterator->size(), view.length());
+                CUBOS_WARN("Array type {} isn't resizable and the JSON array size ({}) doesn't match the its size ({})",
+                           type.name(), mIterator->size(), view.length());
                 return false;
             }
 
@@ -239,7 +238,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
             // If there's a single field, read it directly.
             if (!this->read(trait.begin()->type(), view.begin()->value))
             {
-                CUBOS_WARN("Couldn't deserialize wrapped field '{}'", trait.begin()->name());
+                CUBOS_WARN("Couldn't deserialize wrapped field {}", trait.begin()->name());
                 return false;
             }
 
@@ -258,7 +257,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
             const auto* field = trait.field(it.key());
             if (field == nullptr)
             {
-                CUBOS_WARN("Type '{}' has no such field '{}'", type.name(), it.key());
+                CUBOS_WARN("Type {} has no such field {}", type.name(), it.key());
                 return false;
             }
 
@@ -266,7 +265,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
             mIsKey = false;
             if (!this->read(field->type(), view.get(*field)))
             {
-                CUBOS_WARN("Couldn't deserialize field '{}'", it.key());
+                CUBOS_WARN("Couldn't deserialize field {}", it.key());
                 return false;
             }
         }
@@ -274,6 +273,6 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
         return true;
     }
 
-    CUBOS_WARN("Cannot deserialize type '{}' from a JSON {}", type.name(), mIterator->type_name());
+    CUBOS_WARN("Cannot deserialize type {} from a JSON {}", type.name(), mIterator->type_name());
     return false;
 }

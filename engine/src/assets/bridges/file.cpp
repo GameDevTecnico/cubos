@@ -15,13 +15,13 @@ bool FileBridge::load(Assets& assets, const AnyAsset& handle)
     auto stream = FileSystem::open(path, File::OpenMode::Read);
     if (stream == nullptr)
     {
-        CUBOS_ERROR("Could not open file '{}'", path);
+        CUBOS_ERROR("Could not open file {}", path);
         return false;
     }
 
     if (!this->loadFromFile(assets, handle, *stream))
     {
-        CUBOS_ERROR("Could not load asset from file '{}'", path);
+        CUBOS_ERROR("Could not load asset from file {}", path);
         return false;
     }
 
@@ -37,14 +37,14 @@ bool FileBridge::save(const Assets& assets, const AnyAsset& handle)
 
     if (swpFile == nullptr)
     {
-        CUBOS_ERROR("Could not create swap file '{}'", swpPath);
+        CUBOS_ERROR("Could not create swap file {}", swpPath);
         return false;
     }
 
     auto stream = swpFile->open(File::OpenMode::Write);
     if (stream == nullptr)
     {
-        CUBOS_ERROR("Could not open swap file '{}'", swpPath);
+        CUBOS_ERROR("Could not open swap file {}", swpPath);
         return false;
     }
 

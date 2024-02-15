@@ -11,13 +11,13 @@ bool Deserializer::read(const reflection::Type& type, void* value)
     {
         if (!it->second(value))
         {
-            CUBOS_WARN("Deserialization hook for type '{}' failed", type.name());
+            CUBOS_WARN("Deserialization hook for type {} failed", type.name());
             return false;
         }
     }
     else if (!this->decompose(type, value))
     {
-        CUBOS_WARN("Deserialization decomposition for type '{}' failed", type.name());
+        CUBOS_WARN("Deserialization decomposition for type {} failed", type.name());
         return false;
     }
 
@@ -28,7 +28,7 @@ void Deserializer::hook(const reflection::Type& type, Hook hook)
 {
     if (auto it = mHooks.find(&type); it != mHooks.end())
     {
-        CUBOS_WARN("Hook for type '{}' already exists, overwriting", type.name());
+        CUBOS_WARN("Hook for type {} already exists, overwriting", type.name());
         mHooks.erase(it);
     }
 

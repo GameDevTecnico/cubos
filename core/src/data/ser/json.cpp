@@ -105,7 +105,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
             if (!this->write(type.get<FieldsTrait>().begin()->type(),
                              type.get<FieldsTrait>().view(value).begin()->value))
             {
-                CUBOS_WARN("Couldn't serialize wrapped field '{}'", type.get<FieldsTrait>().begin()->name());
+                CUBOS_WARN("Couldn't serialize wrapped field {}", type.get<FieldsTrait>().begin()->name());
                 return false;
             }
 
@@ -117,7 +117,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
         {
             if (!this->write(field->type(), fieldValue))
             {
-                CUBOS_WARN("Could not serialize field '{}'", field->name());
+                CUBOS_WARN("Could not serialize field {}", field->name());
                 return false;
             }
             jsonObj[field->name()] = mJSON;
@@ -157,6 +157,6 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
         return true;
     }
 
-    CUBOS_WARN("Cannot decompose '{}'", type.name());
+    CUBOS_WARN("Cannot decompose {}", type.name());
     return false;
 }

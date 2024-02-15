@@ -192,7 +192,7 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
             if (ImGui::Button("Remove Entity"))
             {
                 entitiesToRemove.push_back(i);
-                CUBOS_INFO("Removing entity '{}' from scene '{}'", name, scene.name);
+                CUBOS_INFO("Removing entity {} from scene {}", name, scene.name);
                 cmds.destroy(handle);
                 ImGui::EndPopup();
                 removed = true;

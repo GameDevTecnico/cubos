@@ -47,7 +47,7 @@ int main()
     /// [Iterating over fields]
     for (const auto& field : fields)
     {
-        CUBOS_INFO("Field '{}' of type '{}'", field.name(), field.type().name());
+        CUBOS_INFO("Field {} of type {}", field.name(), field.type().name());
     }
     /// [Iterating over fields]
 
@@ -66,15 +66,15 @@ int main()
     {
         if (field->type().is<int32_t>())
         {
-            CUBOS_INFO("Field '{}': {}", field->name(), *static_cast<int32_t*>(value));
+            CUBOS_INFO("Field {}: {}", field->name(), *static_cast<int32_t*>(value));
         }
         else if (field->type().is<float>())
         {
-            CUBOS_INFO("Field '{}': {}", field->name(), *static_cast<float*>(value));
+            CUBOS_INFO("Field {}: {}", field->name(), *static_cast<float*>(value));
         }
         else
         {
-            CUBOS_INFO("Field '{}': unsupported type '{}'", field->name(), field->type().name());
+            CUBOS_INFO("Field {}: unsupported type {}", field->name(), field->type().name());
         }
     }
     /// [Iterating over fields with data]

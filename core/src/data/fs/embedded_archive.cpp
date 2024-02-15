@@ -11,7 +11,7 @@ EmbeddedArchive::EmbeddedArchive(const std::string& name)
 {
     auto& registry = EmbeddedArchive::registry();
     auto it = registry.find(name);
-    CUBOS_ASSERT(it != registry.end(), "No embedded archive with name '{}' found", name);
+    CUBOS_ASSERT(it != registry.end(), "No embedded archive with name {} found", name);
     mData = &it->second;
 }
 
@@ -24,7 +24,7 @@ std::map<std::string, const EmbeddedArchive::Data&>& EmbeddedArchive::registry()
 void EmbeddedArchive::registerData(const std::string& name, const Data& data)
 {
     auto& registry = EmbeddedArchive::registry();
-    CUBOS_ASSERT(registry.find(name) == registry.end(), "Embedded archive with name '{}' already registered", name);
+    CUBOS_ASSERT(registry.find(name) == registry.end(), "Embedded archive with name {} already registered", name);
     registry.emplace(name, data);
 }
 

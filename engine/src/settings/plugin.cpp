@@ -29,7 +29,7 @@ static Settings loadFromArguments(const Arguments& args)
         auto settingValue = arg.substr(token + 1);
         if (settingValue.empty())
         {
-            CUBOS_ERROR("Setting '{}' must have value", settingName);
+            CUBOS_ERROR("Setting {} must have value", settingName);
             break;
         }
 

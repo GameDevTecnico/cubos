@@ -93,7 +93,7 @@ void FieldsTrait::addField(const Type& type, std::string name, AddressOf* addres
 {
     for (auto* field = mFirstField; field != nullptr; field = field->mNext)
     {
-        CUBOS_ASSERT(field->mName != name, "Field '{}' already exists", name);
+        CUBOS_ASSERT(field->mName != name, "Field {} already exists", name);
     }
 
     auto* field = new Field(type, std::move(name), addressOf);
@@ -125,7 +125,7 @@ const FieldsTrait::Field* FieldsTrait::field(const std::string& name) const
         }
     }
 
-    CUBOS_DEBUG("No such field '{}'", name);
+    CUBOS_DEBUG("No such field {}", name);
     return nullptr;
 }
 

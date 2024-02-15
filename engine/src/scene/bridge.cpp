@@ -65,7 +65,7 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
     {
         if (name != "imports" && name != "entities")
         {
-            CUBOS_ERROR("Expected 'imports' or 'entities', found '{}'", name);
+            CUBOS_ERROR("Expected 'imports' or 'entities', found {}", name);
             return false;
         }
     }
@@ -131,13 +131,13 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
                 // find it, the user did something wrong.
                 if (entityName.find('.') != std::string::npos)
                 {
-                    CUBOS_ERROR("No such entity '{}' was imported", entityName);
+                    CUBOS_ERROR("No such entity {} was imported", entityName);
                     return false;
                 }
 
                 if (!Blueprint::validEntityName(entityName))
                 {
-                    CUBOS_ERROR("Invalid entity name '{}'", entityName);
+                    CUBOS_ERROR("Invalid entity name {}", entityName);
                     return false;
                 }
 

@@ -65,7 +65,7 @@ void cubos::core::data::old::deserialize<Entity>(Deserializer& des, Entity& obj)
         }
         else
         {
-            CUBOS_WARN("No such entity '{}'", name);
+            CUBOS_WARN("No such entity {}", name);
             des.fail();
         }
     }

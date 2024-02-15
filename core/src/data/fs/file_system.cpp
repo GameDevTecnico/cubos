@@ -18,7 +18,7 @@ bool FileSystem::mount(std::string_view path, std::unique_ptr<Archive> archive)
 {
     if (!path.starts_with('/'))
     {
-        CUBOS_ERROR("Could not mount archive at '{}': path must be absolute", path);
+        CUBOS_ERROR("Could not mount archive at {}: path must be absolute", path);
         return false;
     }
 
@@ -30,7 +30,7 @@ bool FileSystem::unmount(std::string_view path)
 {
     if (!path.starts_with('/'))
     {
-        CUBOS_ERROR("Could not mount archive at '{}': path must be absolute", path);
+        CUBOS_ERROR("Could not mount archive at {}: path must be absolute", path);
         return false;
     }
 
@@ -42,7 +42,7 @@ File::Handle FileSystem::find(std::string_view path)
 {
     if (!path.starts_with('/'))
     {
-        CUBOS_ERROR("Could not find file at '{}': path must be absolute", path);
+        CUBOS_ERROR("Could not find file at {}: path must be absolute", path);
         return nullptr;
     }
 
@@ -54,7 +54,7 @@ File::Handle FileSystem::create(std::string_view path, bool directory)
 {
     if (!path.starts_with('/'))
     {
-        CUBOS_ERROR("Could not create file at '{}': path must be absolute", path);
+        CUBOS_ERROR("Could not create file at {}: path must be absolute", path);
         return nullptr;
     }
 
@@ -66,7 +66,7 @@ bool FileSystem::destroy(std::string_view path)
 {
     if (!path.starts_with('/'))
     {
-        CUBOS_ERROR("Could not destroy file at '{}': path must be absolute", path);
+        CUBOS_ERROR("Could not destroy file at {}: path must be absolute", path);
         return false;
     }
 
@@ -84,7 +84,7 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
 {
     if (!path.starts_with('/'))
     {
-        CUBOS_ERROR("Could not open file at '{}': path must be absolute", path);
+        CUBOS_ERROR("Could not open file at {}: path must be absolute", path);
         return nullptr;
     }
 
@@ -97,7 +97,7 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
             return file->open(mode);
         }
 
-        CUBOS_ERROR("Could not open file for reading at path '{}': the file does not exist", path);
+        CUBOS_ERROR("Could not open file for reading at path {}: the file does not exist", path);
         return nullptr;
     }
 
@@ -106,7 +106,7 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
         return file->open(mode);
     }
 
-    CUBOS_ERROR("Could not open file for writing at path '{}': the file could not be created", path);
+    CUBOS_ERROR("Could not open file for writing at path {}: the file could not be created", path);
     return nullptr;
 }
 
@@ -116,7 +116,7 @@ bool FileSystem::copy(std::string_view sourcePath, std::string_view destinationP
 
     if (srcStream == nullptr)
     {
-        CUBOS_ERROR("Could not open source file '{}' for copying", sourcePath);
+        CUBOS_ERROR("Could not open source file {} for copying", sourcePath);
         return false;
     }
 
@@ -124,7 +124,7 @@ bool FileSystem::copy(std::string_view sourcePath, std::string_view destinationP
 
     if (dstFile == nullptr)
     {
-        CUBOS_ERROR("Could not create destination file '{}' for copying", destinationPath);
+        CUBOS_ERROR("Could not create destination file {} for copying", destinationPath);
         return false;
     }
 
@@ -132,7 +132,7 @@ bool FileSystem::copy(std::string_view sourcePath, std::string_view destinationP
 
     if (dstStream == nullptr)
     {
-        CUBOS_ERROR("Could not open destination file '{}' for copying", destinationPath);
+        CUBOS_ERROR("Could not open destination file {} for copying", destinationPath);
         return false;
     }
 

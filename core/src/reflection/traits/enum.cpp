@@ -26,7 +26,7 @@ void EnumTrait::addVariant(std::string name, Tester tester, Setter setter)
 {
     for (auto* variant = mFirstVariant; variant != nullptr; variant = variant->mNext)
     {
-        CUBOS_ASSERT(variant->mName != name, "Enum variant '{}' already exists", name);
+        CUBOS_ASSERT(variant->mName != name, "Enum variant {} already exists", name);
     }
 
     auto* variant = new Variant(std::move(name), tester, setter);
@@ -69,7 +69,7 @@ const EnumTrait::Variant& EnumTrait::at(const std::string& name) const
             return *variant;
         }
     }
-    CUBOS_FAIL("Variant with name '{}' does not exist", name);
+    CUBOS_FAIL("Variant with name {} does not exist", name);
 }
 
 const EnumTrait::Variant& EnumTrait::variant(const void* value) const

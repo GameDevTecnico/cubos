@@ -56,13 +56,13 @@ void Assets::registerBridge(const std::string& extension, std::shared_ptr<AssetB
 
     if (mBridges.contains(extension))
     {
-        CUBOS_ERROR("Can't register asset bridge: extension '{}' already registered", extension);
+        CUBOS_ERROR("Can't register asset bridge: extension {} already registered", extension);
         return;
     }
 
     mBridges.emplace(extension, std::move(bridge));
 
-    CUBOS_TRACE("Registered asset bridge for extension '{}'", extension);
+    CUBOS_TRACE("Registered asset bridge for extension {}", extension);
 }
 
 void Assets::cleanup()
@@ -88,7 +88,7 @@ void Assets::loadMeta(std::string_view path)
     auto file = core::data::FileSystem::find(path);
     if (file == nullptr)
     {
-        CUBOS_ERROR("Couldn't load asset metadata: file '{}' not found", path);
+        CUBOS_ERROR("Couldn't load asset metadata: file {} not found", path);
         return;
     }
 
@@ -103,7 +103,7 @@ void Assets::loadMeta(std::string_view path)
     }
     else if (file->name().ends_with(".meta"))
     {
-        CUBOS_DEBUG("Loading asset metadata from '{}'", path);
+        CUBOS_DEBUG("Loading asset metadata from {}", path);
 
         // Read the file contents into a string.
         std::string contents;
@@ -118,14 +118,14 @@ void Assets::loadMeta(std::string_view path)
         des.read(meta);
         if (des.failed())
         {
-            CUBOS_ERROR("Couldn't load asset metadata: JSON deserialization failed for file '{}'", path);
+            CUBOS_ERROR("Couldn't load asset metadata: JSON deserialization failed for file {}", path);
             return;
         }
 
         // Check if the metadata has a path field, which is always ignored.
         if (meta.get("path").has_value())
         {
-            CUBOS_WARN("Asset metadata at '{}' has a path field, which is always ignored, since it is derived from the "
+            CUBOS_WARN("Asset metadata at {} has a path field, which is always ignored, since it is derived from the "
                        "file path",
                        path);
         }
@@ -143,7 +143,7 @@ void Assets::loadMeta(std::string_view path)
         // If the UUID is invalid, generate a new random one.
         if (id.is_nil())
         {
-            CUBOS_WARN("Asset metadata at '{}' has an unspecified/invalid UUID, generating a random one", path);
+            CUBOS_WARN("Asset metadata at {} has an unspecified/invalid UUID, generating a random one", path);
             id = uuids::uuid_random_generator(mRandom.value())();
         }
 
@@ -161,7 +161,7 @@ void Assets::loadMeta(std::string_view path)
             this->invalidate(handle, false);
         }
 
-        CUBOS_DEBUG("Loaded asset {} metadata from '{}'", handle, path);
+        CUBOS_DEBUG("Loaded asset {} metadata from {}", handle, path);
     }
 }
 
@@ -593,7 +593,7 @@ void Assets::loader()
 
         if (!task.bridge->load(*this, task.handle))
         {
-            CUBOS_ERROR("Failed to load asset '{}'", task.handle);
+            CUBOS_ERROR("Failed to load asset {}", task.handle);
 
             auto assetEntry = this->entry(task.handle);
             CUBOS_ASSERT(assetEntry != nullptr, "This should never happen");

@@ -29,7 +29,7 @@ StandardArchive::StandardArchive(const std::filesystem::path& osPath, bool isDir
     {
         if (readOnly)
         {
-            CUBOS_ERROR("File/directory '{}' does not exist on the host file system", osPath.string());
+            CUBOS_ERROR("File/directory {} does not exist on the host file system", osPath.string());
             return;
         }
 
@@ -40,7 +40,7 @@ StandardArchive::StandardArchive(const std::filesystem::path& osPath, bool isDir
             if (!std::filesystem::create_directory(osPath, err))
             {
                 CUBOS_ERROR("std::filesystem::create_directory() failed: {}", err.message());
-                CUBOS_ERROR("Could not create root directory '{}' on the host file system", osPath.string());
+                CUBOS_ERROR("Could not create root directory {} on the host file system", osPath.string());
                 return;
             }
         }
@@ -52,7 +52,7 @@ StandardArchive::StandardArchive(const std::filesystem::path& osPath, bool isDir
             if (file == nullptr)
             {
                 CUBOS_ERROR("fopen() failed: {}", strerror(errno));
-                CUBOS_ERROR("Could not create root file '{}' on the host file system", path);
+                CUBOS_ERROR("Could not create root file {} on the host file system", path);
                 return;
             }
             fclose(file);
@@ -64,7 +64,7 @@ StandardArchive::StandardArchive(const std::filesystem::path& osPath, bool isDir
     {
         if (!isDirectory)
         {
-            CUBOS_ERROR("Expected regular file at '{}' on the host file system, found a directory", osPath.string());
+            CUBOS_ERROR("Expected regular file at {} on the host file system, found a directory", osPath.string());
             return;
         }
 
@@ -77,7 +77,7 @@ StandardArchive::StandardArchive(const std::filesystem::path& osPath, bool isDir
     {
         if (isDirectory)
         {
-            CUBOS_ERROR("Expected directory at '{}' on the host file system, found a regular file", osPath.string());
+            CUBOS_ERROR("Expected directory at {} on the host file system, found a regular file", osPath.string());
             return;
         }
 

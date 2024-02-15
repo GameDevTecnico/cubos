@@ -83,7 +83,7 @@ bool MySerializer::decompose(const Type& type, const void* value)
         return true;
     }
 
-    CUBOS_WARN("Cannot decompose '{}'", type.name());
+    CUBOS_WARN("Cannot decompose {}", type.name());
     return false;
 }
 /// [Decomposing types with fields]
