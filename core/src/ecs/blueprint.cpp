@@ -20,6 +20,47 @@ using cubos::core::reflection::ConstructibleTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
 
+void cubos::core::ecs::convertEntities(const std::unordered_map<Entity, Entity, EntityHash>& map, const Type& type,
+                                       void* value)
+{
+    using namespace cubos::core::reflection;
+
+    if (type.is<Entity>())
+    {
+        auto& entity = *static_cast<Entity*>(value);
+        if (!entity.isNull() && map.contains(entity))
+        {
+            entity = map.at(entity);
+        }
+    }
+    else if (type.has<DictionaryTrait>())
+    {
+        const auto& trait = type.get<DictionaryTrait>();
+        CUBOS_ASSERT(!trait.keyType().is<Entity>(), "Dictionaries using entities as keys are not supported");
+
+        for (auto [entryKey, entryValue] : trait.view(value))
+        {
+            convertEntities(map, trait.valueType(), entryValue);
+        }
+    }
+    else if (type.has<ArrayTrait>())
+    {
+        const auto& trait = type.get<ArrayTrait>();
+        for (auto* element : trait.view(value))
+        {
+            convertEntities(map, trait.elementType(), element);
+        }
+    }
+    else if (type.has<FieldsTrait>())
+    {
+        const auto& trait = type.get<FieldsTrait>();
+        for (auto [field, fieldValue] : trait.view(value))
+        {
+            convertEntities(map, field->type(), fieldValue);
+        }
+    }
+}
+
 Entity Blueprint::create(std::string name)
 {
     CUBOS_ASSERT(!mBimap.containsRight(name), "An entity with the name '{}' already exists on the blueprint", name);
@@ -112,50 +153,6 @@ const UnorderedBimap<Entity, std::string, EntityHash>& Blueprint::bimap() const
     return mBimap;
 }
 
-static void convertToInstancedEntities(const std::unordered_map<Entity, Entity, EntityHash>& toInstanced,
-                                       const Type& type, void* value)
-{
-    using namespace cubos::core::reflection;
-
-    if (type.is<Entity>())
-    {
-        auto& entity = *static_cast<Entity*>(value);
-        if (!entity.isNull())
-        {
-            CUBOS_ASSERT(toInstanced.contains(entity), "Entities stored in components/relations must either be null or "
-                                                       "reference valid entities on their blueprints");
-            entity = toInstanced.at(entity);
-        }
-    }
-    else if (type.has<DictionaryTrait>())
-    {
-        const auto& trait = type.get<DictionaryTrait>();
-        CUBOS_ASSERT(!trait.keyType().is<Entity>(),
-                     "Dictionaries using entities as keys are not supported on blueprint components");
-
-        for (auto [entryKey, entryValue] : trait.view(value))
-        {
-            convertToInstancedEntities(toInstanced, trait.valueType(), entryValue);
-        }
-    }
-    else if (type.has<ArrayTrait>())
-    {
-        const auto& trait = type.get<ArrayTrait>();
-        for (auto* element : trait.view(value))
-        {
-            convertToInstancedEntities(toInstanced, trait.elementType(), element);
-        }
-    }
-    else if (type.has<FieldsTrait>())
-    {
-        const auto& trait = type.get<FieldsTrait>();
-        for (auto [field, fieldValue] : trait.view(value))
-        {
-            convertToInstancedEntities(toInstanced, field->type(), fieldValue);
-        }
-    }
-}
-
 void Blueprint::instantiate(void* userData, Create create, Add add, Relate relate, bool withName) const
 {
     // Instantiate our entities and create a map from them to their instanced counterparts.
@@ -180,7 +177,7 @@ void Blueprint::instantiate(void* userData, Create create, Add add, Relate relat
         for (const auto& [entity, component] : components)
         {
             auto copied = AnyValue::copyConstruct(component.type(), component.get());
-            convertToInstancedEntities(thisToInstance, copied.type(), copied.get());
+            convertEntities(thisToInstance, copied.type(), copied.get());
             add(userData, thisToInstance.at(entity), std::move(copied));
         }
     }
@@ -193,7 +190,7 @@ void Blueprint::instantiate(void* userData, Create create, Add add, Relate relat
             for (const auto& [toEntity, relation] : outgoing)
             {
                 auto copied = AnyValue::copyConstruct(relation.type(), relation.get());
-                convertToInstancedEntities(thisToInstance, copied.type(), copied.get());
+                convertEntities(thisToInstance, copied.type(), copied.get());
                 relate(userData, thisToInstance.at(fromEntity), thisToInstance.at(toEntity), std::move(copied));
             }
         }
