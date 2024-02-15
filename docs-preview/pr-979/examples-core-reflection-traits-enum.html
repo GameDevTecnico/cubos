@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enum Trait | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Enum Trait
+        </h1>
+        <p>Exposing an enumeration with variants.</p>
+<p><a name="md_reflection_traits_enum_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/reflection/traits/enum">here</a>.</p></aside><p>In this example, we&#x27;ll explore how to expose an enumeration along with its variants using <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait</a>.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
+
+<span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Color</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Red</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Green</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Blue</span>
+<span class="p">};</span></pre><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/traits/enum.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/type.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">EnumTrait</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span>
+<span class="n">CUBOS_REFLECT_EXTERNAL_IMPL</span><span class="p">(</span><span class="n">Color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Color&quot;</span><span class="p">).</span><span class="n">with</span><span class="p">(</span>
+<span class="w">        </span><span class="n">EnumTrait</span><span class="p">{}.</span><span class="n">withVariant</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">::</span><span class="n">Red</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Red&quot;</span><span class="p">).</span><span class="n">withVariant</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">::</span><span class="n">Green</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Green&quot;</span><span class="p">).</span><span class="n">withVariant</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">::</span><span class="n">Blue</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Blue&quot;</span><span class="p">));</span>
+<span class="p">}</span></pre><p>This section includes the necessary headers for reflection and defines the reflection for the <code>Color</code> enumeration.</p><p>Output:</p><pre class="m-code"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">reflect</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">colorType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reflect</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">colorType</span><span class="p">.</span><span class="n">has</span><span class="o">&lt;</span><span class="n">EnumTrait</span><span class="o">&gt;</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">variants</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colorType</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">EnumTrait</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&quot;Red&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&quot;Green&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&quot;Blue&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="o">!</span><span class="n">variants</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&quot;White&quot;</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Red</span><span class="p">;</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;Red&quot;</span><span class="p">).</span><span class="n">test</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Green</span><span class="p">;</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;Green&quot;</span><span class="p">).</span><span class="n">test</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">Blue</span><span class="p">;</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;Blue&quot;</span><span class="p">).</span><span class="n">test</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">));</span>
+<span class="w">    </span><span class="n">variants</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;Red&quot;</span><span class="p">).</span><span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;Red&quot;</span><span class="p">).</span><span class="n">test</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">));</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">&quot;Red&quot;</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Red&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">variants</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">variants</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Variant {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">name</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">EnumTrait</span><span class="o">::</span><span class="n">toString</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Red</span><span class="p">));</span><span class="w"> </span><span class="c1">// should print Red</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">buf</span><span class="p">;</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">EnumTrait</span><span class="o">::</span><span class="n">fromString</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Green&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">EnumTrait</span><span class="o">::</span><span class="n">toString</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span><span class="w"> </span><span class="c1">// should print Green</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></pre><pre class="m-code"><span class="p">[</span><span class="mi">2023-11-19</span><span class="w"> </span><span class="mi">13</span><span class="o">:</span><span class="mi">09</span><span class="o">:</span><span class="mf">36.117</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">info</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">main</span><span class="p">.</span><span class="n">cpp</span><span class="o">:</span><span class="mi">59</span><span class="p">]</span><span class="w"> </span><span class="n">Variant</span><span class="w"> </span><span class="err">&#39;</span><span class="n">Red</span><span class="err">&#39;</span>
+<span class="p">[</span><span class="mi">2023-11-19</span><span class="w"> </span><span class="mi">13</span><span class="o">:</span><span class="mi">09</span><span class="o">:</span><span class="mf">36.118</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">info</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">main</span><span class="p">.</span><span class="n">cpp</span><span class="o">:</span><span class="mi">59</span><span class="p">]</span><span class="w"> </span><span class="n">Variant</span><span class="w"> </span><span class="err">&#39;</span><span class="n">Green</span><span class="err">&#39;</span>
+<span class="p">[</span><span class="mi">2023-11-19</span><span class="w"> </span><span class="mi">13</span><span class="o">:</span><span class="mi">09</span><span class="o">:</span><span class="mf">36.119</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">info</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">main</span><span class="p">.</span><span class="n">cpp</span><span class="o">:</span><span class="mi">59</span><span class="p">]</span><span class="w"> </span><span class="n">Variant</span><span class="w"> </span><span class="err">&#39;</span><span class="n">Blue</span><span class="err">&#39;</span>
+<span class="p">[</span><span class="mi">2023-11-19</span><span class="w"> </span><span class="mi">13</span><span class="o">:</span><span class="mi">09</span><span class="o">:</span><span class="mf">36.119</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">info</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">main</span><span class="p">.</span><span class="n">cpp</span><span class="o">:</span><span class="mi">62</span><span class="p">]</span><span class="w"> </span><span class="err">&#39;</span><span class="n">Red</span><span class="err">&#39;</span>
+<span class="p">[</span><span class="mi">2023-11-19</span><span class="w"> </span><span class="mi">13</span><span class="o">:</span><span class="mi">09</span><span class="o">:</span><span class="mf">36.119</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">info</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">main</span><span class="p">.</span><span class="n">cpp</span><span class="o">:</span><span class="mi">65</span><span class="p">]</span><span class="w"> </span><span class="err">&#39;</span><span class="n">Green</span><span class="err">&#39;</span></pre>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
