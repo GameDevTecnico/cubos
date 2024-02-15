@@ -75,11 +75,17 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
                 std::sort(sweepAndPrune.markersPerAxis[axis].begin(), sweepAndPrune.markersPerAxis[axis].end(),
                           [axis, &query](const BroadPhaseSweepAndPrune::SweepMarker& a,
                                          const BroadPhaseSweepAndPrune::SweepMarker& b) {
-                              auto [aCollider] = *query.at(a.entity);
-                              auto [bCollider] = *query.at(b.entity);
-                              auto aPos = a.isMin ? aCollider.worldAABB.min() : aCollider.worldAABB.max();
-                              auto bPos = b.isMin ? bCollider.worldAABB.min() : bCollider.worldAABB.max();
-                              return aPos[axis] < bPos[axis];
+                              auto aMatch = query.at(a.entity);
+                              auto bMatch = query.at(b.entity);
+                              if (aMatch && bMatch)
+                              {
+                                  auto [aCollider] = *aMatch;
+                                  auto [bCollider] = *bMatch;
+                                  auto aPos = a.isMin ? aCollider.worldAABB.min() : aCollider.worldAABB.max();
+                                  auto bPos = b.isMin ? bCollider.worldAABB.min() : bCollider.worldAABB.max();
+                                  return aPos[axis] < bPos[axis];
+                              }
+                              return true;
                           });
             }
         });
@@ -91,9 +97,7 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
             // TODO: This is parallelizable.
             for (glm::length_t axis = 0; axis < 3; axis++)
             {
-                CUBOS_ASSERT(sweepAndPrune.activePerAxis[axis].empty(),
-                             "Last sweep entered an entity but never exited");
-
+                sweepAndPrune.activePerAxis[axis].clear();
                 sweepAndPrune.sweepOverlapMaps[axis].clear();
 
                 for (auto& marker : sweepAndPrune.markersPerAxis[axis])
@@ -128,15 +132,26 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
     cubos.system("create PotentiallyCollidingWith relations")
         .tagged("cubos.collisions.broad")
         .after("cubos.collisions.broad.sweep")
-        .call([](Commands cmds, Query<Entity, const Collider&> query, const BroadPhaseSweepAndPrune& sweepAndPrune) {
+        .call([](Commands cmds, Query<const Collider&> query, const BroadPhaseSweepAndPrune& sweepAndPrune) {
             for (glm::length_t axis = 0; axis < 3; axis++)
             {
                 for (const auto& [entity, overlaps] : sweepAndPrune.sweepOverlapMaps[axis])
                 {
-                    auto [_entity, collider] = *query.at(entity);
+                    auto match = query.at(entity);
+                    if (!match)
+                    {
+                        continue;
+                    }
+                    auto [collider] = *match;
+
                     for (const auto& other : overlaps)
                     {
-                        auto [_other, otherCollider] = *query.at(other);
+                        auto otherMatch = query.at(other);
+                        if (!otherMatch)
+                        {
+                            continue;
+                        }
+                        auto [otherCollider] = *otherMatch;
 
                         switch (axis)
                         {
