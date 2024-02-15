@@ -81,16 +81,12 @@ void cubos::engine::splitscreenPlugin(Cubos& cubos)
                     auto& [localToWorld, camera, viewport] = *components;
                     if (!viewport)
                     {
-                        commands.add(activeCameras.entities[i],
-                                     Viewport{.position = glm::ivec2{positions[i][0], positions[i][1]},
-                                              .size = glm::ivec2{sizes[i][0], sizes[i][1]}});
+                        commands.add(activeCameras.entities[i], Viewport{.position = positions[i], .size = sizes[i]});
                     }
                     else
                     {
-                        viewport->position[0] = positions[i][0];
-                        viewport->position[1] = positions[i][1];
-                        viewport->size[0] = sizes[i][0];
-                        viewport->size[1] = positions[i][1];
+                        viewport->position = positions[i];
+                        viewport->size = sizes[i];
                     }
                 }
             }
