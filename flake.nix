@@ -22,7 +22,16 @@
             clang-tools
 
             # = docs =
-            doxygen
+            (doxygen.overrideAttrs {
+              version = "1.8.20";
+              src = fetchFromGitHub {
+                owner = "doxygen";
+                repo = "doxygen";
+                rev = "Release_1_8_20";
+                sha256 = "sha256-MBe8fmDb35MS9C6XzbpoX3ZhivvxVg3KITIDFEfckJ0=";
+              };
+            })
+
             (python3.withPackages (ps: [
               ps.jinja2
               ps.pygments
