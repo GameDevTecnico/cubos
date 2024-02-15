@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::engine::Gizmos class | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Gizmos <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gizmos_8hpp.html">&lt;engine/gizmos/gizmos.hpp&gt;</a></div>
+        </h1>
+        <p>Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Gizmos_1_1Gizmo.html" class="m-doc">Gizmo</a>
+            </dt>
+            <dd>Class that describes a type of gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> { </span><span class="m-doc-wrap"><a href="#a8f819feb4924675391190173bd5a8926ad4bc2a5576b40e4ab5ac7618340a5962" class="m-doc">World</a>,
+              <a href="#a8f819feb4924675391190173bd5a8926a54c8415b30d08c97a914944356075d78" class="m-doc">View</a>,
+              <a href="#a8f819feb4924675391190173bd5a8926a1316b03e4373d207cdb90c3b49854423" class="m-doc">Screen</a> }</span>
+            </dt>
+            <dd>Space to draw a gizmo in.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae9336f0fd56ee97de830e2e04cf15ff0" class="m-doc">color</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; color)</span>
+            </dt>
+            <dd>Sets the color to be used when drawing any subsequent gizmos.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af61cbe2539da6b57bcd6441fe289b668" class="m-doc">drawLine</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 from,
+              glm::vec3 to,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a line gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae7c7a4a3939984ebcb7ea4186f7fd3f1" class="m-doc">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 corner,
+              glm::vec3 oppositeCorner,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a filled box gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a03a812de0d4c1e9f5948ea710a7f46c7" class="m-doc">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 firstBaseCenter,
+              float firstBaseRadius,
+              glm::vec3 secondBaseCenter,
+              float secondBaseRadius,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a cut cone gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a281623faeebdf8edf8116dce2ea7fc3c" class="m-doc">drawRing</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 firstBasePosition,
+              glm::vec3 secondBasePosition,
+              float outerRadius,
+              float innerRadius,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a ring gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5ef3589cc7ba835a23edaba6205f4724" class="m-doc">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 origin,
+              glm::vec3 direction,
+              float girth,
+              float width,
+              float ratio = 0.F,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws an arrow gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2b7a537716c68f405c250c652d9126ae" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 corner,
+              glm::vec3 oppositeCorner,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a wireframe box gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2221426ed07cdc1a463afeb966446e64" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              const glm::mat4&amp; transform,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a wireframe box gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a54bad0deb0994ee564a076c78decc9aa" class="m-doc">pressed</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const -&gt; bool</span>
+            </dt>
+            <dd>Checks whether the left mouse button was pressed over a gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac755deabfc107a792d8a2be0dbd4893f" class="m-doc">locked</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const -&gt; bool</span>
+            </dt>
+            <dd>Checks whether the left mouse button was pressed over a gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a68a21cd9b1a49069dd7458ba17e89b97" class="m-doc">hovered</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const -&gt; bool</span>
+            </dt>
+            <dd>Checks whether the mouse cursor is over a gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2543e1a6bcdbf2f76c3ac30b8835945e" class="m-doc">handleInput</a>(</span><span class="m-doc-wrap">uint32_t hovered,
+              bool pressed)</span>
+            </dt>
+            <dd>Registers gizmo interaction. Called automatically by an internal system.</dd>
+            <dt id="ae72d2a23b51736d2a92aa3ba381381ff">
+              <span class="m-doc-wrap-bumper">void <a href="#ae72d2a23b51736d2a92aa3ba381381ff" class="m-doc-self">setLocked</a>(</span><span class="m-doc-wrap">uint32_t locked)</span>
+            </dt>
+            <dd>Registers gizmo interaction. Called automatically by an internal system.</dd>
+            <dt id="a042fc10a3154612b1959b6817ae4defa">
+              <span class="m-doc-wrap-bumper">void <a href="#a042fc10a3154612b1959b6817ae4defa" class="m-doc-self">releaseLocked</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Registers gizmo interaction. Called automatically by an internal system.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a797efc65bbaefe0db8686eb5a1fcc9ef">
+              std::vector&lt;std::shared_ptr&lt;<a href="classcubos_1_1engine_1_1Gizmos_1_1Gizmo.html" class="m-doc">Gizmo</a>&gt;&gt; <a href="#a797efc65bbaefe0db8686eb5a1fcc9ef" class="m-doc-self">worldGizmos</a>
+            </dt>
+            <dd>Queued gizmos to be drawn in world space.</dd>
+            <dt id="af687812bfe103577e396cfe782b1bc49">
+              std::vector&lt;std::shared_ptr&lt;<a href="classcubos_1_1engine_1_1Gizmos_1_1Gizmo.html" class="m-doc">Gizmo</a>&gt;&gt; <a href="#af687812bfe103577e396cfe782b1bc49" class="m-doc-self">viewGizmos</a>
+            </dt>
+            <dd>Queued gizmos to be drawn in viewport space.</dd>
+            <dt id="af4e9f69a05af38c545964dc9755dc39c">
+              std::vector&lt;std::shared_ptr&lt;<a href="classcubos_1_1engine_1_1Gizmos_1_1Gizmo.html" class="m-doc">Gizmo</a>&gt;&gt; <a href="#af4e9f69a05af38c545964dc9755dc39c" class="m-doc-self">screenGizmos</a>
+            </dt>
+            <dd>Queued gizmos to be drawn in screen space.</dd>
+            <dt id="a1725b5a352fc943c5666fd47e584aab8">
+              bool <a href="#a1725b5a352fc943c5666fd47e584aab8" class="m-doc-self">mLocking</a>
+            </dt>
+            <dd>Whether the mouse has just now been pressed.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a8f819feb4924675391190173bd5a8926"><div>
+            <h3>
+              enum cubos::<wbr />engine::<wbr />Gizmos::<wbr /><a href="#a8f819feb4924675391190173bd5a8926" class="m-doc-self">Space</a>
+            </h3>
+            <p>Space to draw a gizmo in.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a8f819feb4924675391190173bd5a8926ad4bc2a5576b40e4ab5ac7618340a5962" class="m-doc-self" id="a8f819feb4924675391190173bd5a8926ad4bc2a5576b40e4ab5ac7618340a5962">World</a></td>
+                  <td>
+                  <p>Draw gizmo in the game world.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a8f819feb4924675391190173bd5a8926a54c8415b30d08c97a914944356075d78" class="m-doc-self" id="a8f819feb4924675391190173bd5a8926a54c8415b30d08c97a914944356075d78">View</a></td>
+                  <td>
+                  <p>Draw gizmo in every camera&#x27;s viewport.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a8f819feb4924675391190173bd5a8926a1316b03e4373d207cdb90c3b49854423" class="m-doc-self" id="a8f819feb4924675391190173bd5a8926a1316b03e4373d207cdb90c3b49854423">Screen</a></td>
+                  <td>
+                  <p>Draw gizmo in the screen.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ae9336f0fd56ee97de830e2e04cf15ff0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae9336f0fd56ee97de830e2e04cf15ff0" class="m-doc-self">color</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; color)</span></span>
+            </h3>
+            <p>Sets the color to be used when drawing any subsequent gizmos.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">color</td>
+                  <td>Color to be used.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af61cbe2539da6b57bcd6441fe289b668"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af61cbe2539da6b57bcd6441fe289b668" class="m-doc-self">drawLine</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 from,
+              glm::vec3 to,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a line gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>from</td>
+                  <td>One of the ends of the line to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>The other end of the line to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae7c7a4a3939984ebcb7ea4186f7fd3f1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae7c7a4a3939984ebcb7ea4186f7fd3f1" class="m-doc-self">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 corner,
+              glm::vec3 oppositeCorner,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a filled box gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>corner</td>
+                  <td>One of the corners of the box to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>oppositeCorner</td>
+                  <td>The opposite corner of the box to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a03a812de0d4c1e9f5948ea710a7f46c7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a03a812de0d4c1e9f5948ea710a7f46c7" class="m-doc-self">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 firstBaseCenter,
+              float firstBaseRadius,
+              glm::vec3 secondBaseCenter,
+              float secondBaseRadius,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a cut cone gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>firstBaseCenter</td>
+                  <td>Center of one of the bases.</td>
+                </tr>
+                <tr>
+                  <td>firstBaseRadius</td>
+                  <td>Radius of one of the bases.</td>
+                </tr>
+                <tr>
+                  <td>secondBaseCenter</td>
+                  <td>Center of the second base.</td>
+                </tr>
+                <tr>
+                  <td>secondBaseRadius</td>
+                  <td>Radius of the second base.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a281623faeebdf8edf8116dce2ea7fc3c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a281623faeebdf8edf8116dce2ea7fc3c" class="m-doc-self">drawRing</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 firstBasePosition,
+              glm::vec3 secondBasePosition,
+              float outerRadius,
+              float innerRadius,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a ring gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>firstBasePosition</td>
+                  <td>Center of one of the bases.</td>
+                </tr>
+                <tr>
+                  <td>secondBasePosition</td>
+                  <td>Center of the second base.</td>
+                </tr>
+                <tr>
+                  <td>outerRadius</td>
+                  <td>Radius of one of the ring.</td>
+                </tr>
+                <tr>
+                  <td>innerRadius</td>
+                  <td>Radius of the of the hole.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5ef3589cc7ba835a23edaba6205f4724"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ef3589cc7ba835a23edaba6205f4724" class="m-doc-self">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 origin,
+              glm::vec3 direction,
+              float girth,
+              float width,
+              float ratio = 0.F,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws an arrow gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>origin</td>
+                  <td>Point from which the arrow starts.</td>
+                </tr>
+                <tr>
+                  <td>direction</td>
+                  <td>Direction of the arrow.</td>
+                </tr>
+                <tr>
+                  <td>girth</td>
+                  <td>Radius of the cylinder part of the arrow.</td>
+                </tr>
+                <tr>
+                  <td>width</td>
+                  <td>Radius of the base of the cone at the tip of the arrow.</td>
+                </tr>
+                <tr>
+                  <td>ratio</td>
+                  <td>Point of the arrow at which the cylinder ends and the cone begins.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2b7a537716c68f405c250c652d9126ae"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b7a537716c68f405c250c652d9126ae" class="m-doc-self">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 corner,
+              glm::vec3 oppositeCorner,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a wireframe box gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>corner</td>
+                  <td>One of the corners of the box to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>oppositeCorner</td>
+                  <td>The opposite corner of the box to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2221426ed07cdc1a463afeb966446e64"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2221426ed07cdc1a463afeb966446e64" class="m-doc-self">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              const glm::mat4&amp; transform,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a wireframe box gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>transform</td>
+                  <td>Transformation matrix to apply to a unit-sized box centered at the origin.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a54bad0deb0994ee564a076c78decc9aa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a54bad0deb0994ee564a076c78decc9aa" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const</span></span>
+            </h3>
+            <p>Checks whether the left mouse button was pressed over a gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the gizmo was pressed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac755deabfc107a792d8a2be0dbd4893f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac755deabfc107a792d8a2be0dbd4893f" class="m-doc-self">locked</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const</span></span>
+            </h3>
+            <p>Checks whether the left mouse button was pressed over a gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the gizmo was pressed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a68a21cd9b1a49069dd7458ba17e89b97"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68a21cd9b1a49069dd7458ba17e89b97" class="m-doc-self">hovered</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const</span></span>
+            </h3>
+            <p>Checks whether the mouse cursor is over a gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the mouse button is over a gizmo.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2543e1a6bcdbf2f76c3ac30b8835945e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2543e1a6bcdbf2f76c3ac30b8835945e" class="m-doc-self">handleInput</a>(</span><span class="m-doc-wrap">uint32_t hovered,
+              bool pressed)</span></span>
+            </h3>
+            <p>Registers gizmo interaction. Called automatically by an internal system.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">hovered</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>pressed</td>
+                  <td>Whether the mouse left button is pressed.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
