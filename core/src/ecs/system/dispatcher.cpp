@@ -28,6 +28,7 @@ void Dispatcher::addTag(const std::string& tag)
 {
     ENSURE_TAG_SETTINGS(tag);
     mCurrTag = tag;
+    mCurrGroup = mMainStep;
 }
 
 void Dispatcher::tagInheritTag(const std::string& tag)
@@ -40,6 +41,11 @@ void Dispatcher::tagInheritTag(const std::string& tag)
         CUBOS_INFO("Tag already inherits from '{}'", tag);
     }
     mTagSettings[mCurrTag]->inherits.push_back(tag);
+    mCurrGroup = mMainStep->findGroup(tag);
+    if (mCurrGroup == nullptr)
+    {
+        mCurrGroup = mMainStep;
+    }
 }
 
 void Dispatcher::tagSetAfterTag(const std::string& tag)
@@ -62,11 +68,30 @@ void Dispatcher::tagSetBeforeTag(const std::string& tag)
     mTagSettings[tag]->after.tag.push_back(mCurrTag);
 }
 
+void Dispatcher::groupAddGroup()
+{
+    mCurrGroup = mCurrGroup->addGroupStep(mCurrTag, mCurrGroup);
+}
+
 void Dispatcher::systemAddTag(const std::string& tag)
 {
+    CUBOS_ASSERT(tag != "main", "Systems cannot be tagged main");
     ENSURE_CURR_SYSTEM();
     ENSURE_TAG_SETTINGS(tag);
     mCurrSystem->tags.insert(tag);
+    std::shared_ptr<GroupStep> group = mMainStep->findGroup(tag);
+    if (group != nullptr)
+    {
+        mCurrSystem->groupTag = tag;
+        mCurrGroup = group;
+    }
+}
+
+void Dispatcher::systemAddGroup(const std::string& grouptag)
+{
+    ENSURE_CURR_SYSTEM();
+    CUBOS_ASSERT(mCurrSystem->groupTag == "main", "Systems can only be tagged with at most one repeating tag");
+    mCurrSystem->groupTag = grouptag;
 }
 
 void Dispatcher::systemSetAfterTag(const std::string& tag)
@@ -220,12 +245,108 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
         node.m = DFSNode::BLACK;
         if (node.s != nullptr)
         {
-            mSystems.push_back(node.s);
+            mMainStep->queueSystem(node.s->groupTag, node.s);
         }
         return false;
     }
     }
     return false;
+}
+
+void Dispatcher::SystemStep::call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+                                  std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
+                                  std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions)
+{
+    bool canRun = true;
+    if (mSystem->settings != nullptr)
+    {
+        auto conditionsMask = mSystem->settings->conditions;
+        std::size_t i = 0;
+        while (conditionsMask.any())
+        {
+            if (conditionsMask.test(0))
+            {
+                // We have a condition, check if it has run already
+
+                if (!runConditions.test(i))
+                {
+                    runConditions.set(i);
+                    if (conditions[i].run(cmds))
+                    {
+                        retConditions.set(i);
+                    }
+                }
+                // Check if the condition returned true
+                if (!retConditions.test(i))
+                {
+                    canRun = false;
+                    break;
+                }
+            }
+
+            i += 1;
+            conditionsMask >>= 1;
+        }
+    }
+
+    if (canRun)
+    {
+        mSystem->system.run(cmds);
+    }
+
+    // TODO: Check synchronization concerns when this gets multithreaded
+    cmds.commit();
+}
+
+void Dispatcher::GroupStep::call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+                                 std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
+                                 std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions)
+{
+    bool canRun = true;
+    while (canRun)
+    {
+        auto conditionsMask = this->conditions;
+        std::size_t i = 0;
+        while (conditionsMask.any())
+        {
+            if (conditionsMask.test(0))
+            {
+                // We have a condition, check if it has run already
+                if (!runConditions.test(i))
+                {
+                    runConditions.set(i);
+                }
+                if ((conditions[i]).run(cmds))
+                {
+                    retConditions.set(i);
+                }
+                else
+                {
+                    retConditions.reset(i);
+                }
+                // Check if the condition returned true
+                if (!retConditions.test(i))
+                {
+                    canRun = false;
+                    break;
+                }
+            }
+
+            i += 1;
+            conditionsMask >>= 1;
+        }
+        if (canRun)
+        {
+            for (auto& step : mSteps)
+            {
+                step->call(cmds, conditions, runConditions, retConditions);
+            }
+        }
+        if (groupTag == "main")
+        {
+            canRun = false;
+        }
+    }
 }
 
 void Dispatcher::callSystems(CommandBuffer& cmds)
@@ -234,47 +355,5 @@ void Dispatcher::callSystems(CommandBuffer& cmds)
     mRunConditions.reset();
     mRetConditions.reset();
 
-    for (auto& system : mSystems)
-    {
-        // Query for conditions
-        bool canRun = true;
-
-        if (system->settings != nullptr)
-        {
-            auto conditionsMask = system->settings->conditions;
-            std::size_t i = 0;
-            while (conditionsMask.any())
-            {
-                if (conditionsMask.test(0))
-                {
-                    // We have a condition, check if it has run already
-                    if (!mRunConditions.test(i))
-                    {
-                        mRunConditions.set(i);
-                        if (mConditions[i].run(cmds))
-                        {
-                            mRetConditions.set(i);
-                        }
-                    }
-                    // Check if the condition returned true
-                    if (!mRetConditions.test(i))
-                    {
-                        canRun = false;
-                        break;
-                    }
-                }
-
-                i += 1;
-                conditionsMask >>= 1;
-            }
-        }
-
-        if (canRun)
-        {
-            system->system.run(cmds);
-        }
-
-        // TODO: Check synchronization concerns when this gets multithreaded
-        cmds.commit();
-    }
+    mMainStep->call(cmds, mConditions, mRunConditions, mRetConditions);
 }

@@ -72,6 +72,11 @@ namespace cubos::core::ecs
         /// @return Reference to this object, for chaining.
         TagBuilder& after(const std::string& tag);
 
+        /// @brief Tags all systems on this tag with the given tag.
+        /// @param tag Tag to be inherited from.
+        /// @return Reference to this object, for chaining.
+        TagBuilder& tagged(const std::string& tag);
+
         /// @brief Adds a condition to the current tag. If this condition returns false, systems
         /// with this tag will not be executed. For the tagged systems to run, all conditions must
         /// return true.
@@ -79,6 +84,12 @@ namespace cubos::core::ecs
         /// @return Reference to this object, for chaining.
         template <typename F>
         TagBuilder& runIf(F func);
+
+        /// @brief Makes all systems within the tag repeat as a group until the given condition evaluates to false.
+        /// @param func Condition function.
+        /// @return Reference to this object, for chaining.
+        template <typename F>
+        TagBuilder& repeatWhile(F func);
 
     private:
         World& mWorld;
@@ -313,6 +324,13 @@ namespace cubos::core::ecs
     TagBuilder& TagBuilder::runIf(F func)
     {
         mDispatcher.tagAddCondition(System<bool>::make(mWorld, std::move(func), {}));
+        return *this;
+    }
+
+    template <typename F>
+    TagBuilder& TagBuilder::repeatWhile(F func)
+    {
+        mDispatcher.tagRepeatWhile(System<bool>::make(mWorld, std::move(func), {}));
         return *this;
     }
 

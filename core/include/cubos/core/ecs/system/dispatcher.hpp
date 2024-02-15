@@ -78,6 +78,13 @@ namespace cubos::core::ecs
         /// @param condition Condition to add.
         void tagAddCondition(ecs::System<bool> condition);
 
+        /// @brief Adds a repeat condition to the current tag.
+        /// @param func Condition to add.
+        void tagRepeatWhile(ecs::System<bool> condition);
+
+        /// @brief Adds a (sub)group to the current group.
+        void groupAddGroup();
+
         /// @brief Adds a system, and sets it as the current system for further configuration.
         /// @param system System to add.
         void addSystem(ecs::System<void> system);
@@ -85,6 +92,10 @@ namespace cubos::core::ecs
         /// @brief Sets the tag for the current system.
         /// @param tag Tag to run under.
         void systemAddTag(const std::string& tag);
+
+        /// @brief Links a system to a certain group.
+        /// @param grouptag Tag of the group.
+        void systemAddGroup(const std::string& grouptag);
 
         /// @brief Sets the current system to run after the tag.
         /// @param tag Tag to run after.
@@ -108,7 +119,6 @@ namespace cubos::core::ecs
         /// @param cmds Command buffer.
         void callSystems(CommandBuffer& cmds);
 
-    private:
         struct Dependency;
         struct SystemSettings;
         struct System;
@@ -137,8 +147,125 @@ namespace cubos::core::ecs
             std::shared_ptr<SystemSettings> settings;
             ecs::System<void> system;
             std::unordered_set<std::string> tags;
+            std::string groupTag = "main";
         };
 
+        class Step
+        {
+        public:
+            virtual ~Step() = default;
+            virtual void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+                              std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
+                              std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) = 0;
+        };
+
+        class SystemStep : public Step
+        {
+        public:
+            SystemStep(System* system)
+                : mSystem(system)
+            {
+            }
+            void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+                      std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
+                      std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) override;
+
+            System* getSystem()
+            {
+                return mSystem;
+            }
+
+        private:
+            System* mSystem;
+        };
+
+        class GroupStep : public Step, public std::enable_shared_from_this<Step>
+        {
+        public:
+            GroupStep(std::string grouptag, std::shared_ptr<GroupStep> parentStep)
+                : groupTag(std::move(grouptag))
+                , mParentStep(std::move(parentStep))
+            {
+            }
+            void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+                      std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
+                      std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) override;
+
+            void addSystemStep(System* system)
+            {
+                mSteps.insert(mSteps.begin(), std::make_shared<SystemStep>(system));
+            }
+
+            std::shared_ptr<GroupStep> addGroupStep(const std::string& grouptag,
+                                                    const std::shared_ptr<GroupStep>& parent)
+            {
+                std::shared_ptr<GroupStep> newStep = std::make_shared<GroupStep>(grouptag, parent);
+                mSteps.insert(mSteps.begin(), newStep);
+                return std::dynamic_pointer_cast<GroupStep>(mSteps[0]);
+            }
+
+            void moveToFront(const std::shared_ptr<Step>& step)
+            {
+                auto it = std::find(mSteps.begin(), mSteps.end(), step);
+                if (it != mSteps.end())
+                {
+                    std::rotate(mSteps.begin(), it, it + 1);
+                }
+            }
+
+            std::shared_ptr<GroupStep> findGroup(const std::string& tag)
+            {
+                if (tag == groupTag)
+                {
+                    return std::dynamic_pointer_cast<GroupStep>(shared_from_this());
+                }
+
+                for (const auto& step : this->mSteps)
+                {
+                    if (auto groupStepPtr = std::dynamic_pointer_cast<GroupStep>(step))
+                    {
+                        return groupStepPtr->findGroup(tag);
+                    }
+                }
+
+                return nullptr;
+            }
+
+            void queueSystem(const std::string& grouptag, System* system)
+            {
+                if (grouptag == this->groupTag)
+                {
+                    addSystemStep(system);
+
+                    if (this->groupTag != "main")
+                    {
+                        this->mParentStep->moveToFront(shared_from_this());
+                    }
+                    return;
+                }
+
+                for (const auto& step : this->mSteps)
+                {
+                    if (auto groupStepPtr = std::dynamic_pointer_cast<GroupStep>(step))
+                    {
+                        groupStepPtr->queueSystem(grouptag, system);
+                    }
+                }
+            }
+
+            const std::string& getGroupTag()
+            {
+                return groupTag;
+            }
+            std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> conditions;
+
+        private:
+            const std::string groupTag;
+            std::shared_ptr<GroupStep> mParentStep;
+            std::vector<std::shared_ptr<Step>> mSteps;
+        };
+
+    private:
         /// @brief Internal class used to implement a DFS algorithm for call chain compilation
         struct DFSNode
         {
@@ -183,6 +310,8 @@ namespace cubos::core::ecs
         // Variables for holding information after call chain is compiled.
 
         std::vector<System*> mSystems; ///< Compiled order of running systems.
+        std::shared_ptr<GroupStep> mMainStep = std::make_shared<GroupStep>("main", nullptr);
+        std::shared_ptr<GroupStep> mCurrGroup = mMainStep;
     };
 
     inline void Dispatcher::tagAddCondition(ecs::System<bool> condition)
@@ -190,6 +319,14 @@ namespace cubos::core::ecs
         ENSURE_CURR_TAG();
         auto bit = assignConditionBit(std::move(condition));
         mTagSettings[mCurrTag]->conditions |= bit;
+    }
+
+    inline void Dispatcher::tagRepeatWhile(ecs::System<bool> condition)
+    {
+        ENSURE_CURR_TAG();
+        groupAddGroup();
+        auto bit = assignConditionBit(std::move(condition));
+        mCurrGroup->conditions |= bit;
     }
 
     inline void Dispatcher::addSystem(ecs::System<void> system)
