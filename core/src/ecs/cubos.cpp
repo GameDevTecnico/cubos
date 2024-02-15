@@ -47,6 +47,12 @@ TagBuilder& TagBuilder::after(const std::string& tag)
     return *this;
 }
 
+TagBuilder& TagBuilder::tagged(const std::string& tag)
+{
+    mDispatcher.tagInheritTag(tag);
+    return *this;
+}
+
 Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 {
     if (!mPlugins.contains(func))

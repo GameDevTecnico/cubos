@@ -39,6 +39,17 @@ static bool pushToOrderAndSucceed(std::vector<int>& order)
     return true;
 }
 
+static bool succeed2Times(int& counter)
+{
+    counter++;
+    if (counter == 4)
+    {
+        counter++;
+        return false;
+    }
+    return counter <= 8;
+}
+
 /// Asserts that the order vector contains the given values in order.
 /// @param world The world the order vector is in.
 /// @param values The values to check for.
@@ -68,6 +79,7 @@ TEST_CASE("ecs::Dispatcher")
     CommandBuffer cmdBuffer{world};
     Dispatcher dispatcher{};
     world.registerResource<std::vector<int>>();
+    world.registerResource<int>();
 
     auto wrapSystem = [&](auto f) { return System<void>::make(world, f); };
     auto wrapCondition = [&](auto f) { return System<bool>::make(world, f); };
@@ -220,5 +232,96 @@ TEST_CASE("ecs::Dispatcher")
         // Therefore, 1 must run before 3.
         singleDispatch(dispatcher, cmdBuffer);
         assertOrder(world, {1, 3});
+    }
+
+    SUBCASE("repeat while")
+    {
+        dispatcher.addTag("repeat");
+        dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
+        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.systemAddGroup("repeat");
+
+        singleDispatch(dispatcher, cmdBuffer);
+        assertOrder(world, {1, 1, 1});
+    }
+
+    SUBCASE("repeat while inside repeat while")
+    {
+        dispatcher.addTag("principal");
+        dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
+
+        dispatcher.addTag("subtag");
+        dispatcher.tagInheritTag("principal");
+        dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.systemAddTag("principal");
+        dispatcher.systemAddTag("first");
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+        dispatcher.systemAddTag("subtag");
+        dispatcher.systemSetAfterTag("first");
+        dispatcher.systemSetBeforeTag("last");
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+        dispatcher.systemAddTag("subtag");
+        dispatcher.systemAddTag("last");
+
+        singleDispatch(dispatcher, cmdBuffer);
+        assertOrder(world, {1, 2, 3, 2, 3, 1, 2, 3, 2, 3});
+    }
+
+    SUBCASE("repeat while inside repeat while with condition in every system")
+    {
+        dispatcher.addTag("principal");
+        dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
+        dispatcher.tagAddCondition(wrapCondition(pushToOrderAndSucceed<5>));
+
+        dispatcher.addTag("subtag");
+        dispatcher.tagInheritTag("principal");
+        dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.systemAddTag("principal");
+        dispatcher.systemAddTag("first");
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+        dispatcher.systemAddTag("subtag");
+        dispatcher.systemSetAfterTag("first");
+        dispatcher.systemSetBeforeTag("last");
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+        dispatcher.systemAddTag("subtag");
+        dispatcher.systemAddTag("last");
+
+        singleDispatch(dispatcher, cmdBuffer);
+        assertOrder(world, {5, 1, 2, 3, 2, 3, 1, 2, 3, 2, 3});
+    }
+
+    SUBCASE("repeat while inside repeat while with condition in inner group")
+    {
+        dispatcher.addTag("principal");
+        dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
+
+        dispatcher.addTag("subtag");
+        dispatcher.tagInheritTag("principal");
+        dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
+        dispatcher.tagAddCondition(wrapCondition(pushToOrderAndSucceed<5>));
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.systemAddTag("principal");
+        dispatcher.systemAddTag("first");
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+        dispatcher.systemAddTag("subtag");
+        dispatcher.systemSetAfterTag("first");
+        dispatcher.systemSetBeforeTag("last");
+
+        dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+        dispatcher.systemAddTag("subtag");
+        dispatcher.systemAddTag("last");
+
+        singleDispatch(dispatcher, cmdBuffer);
+        assertOrder(world, {1, 5, 2, 3, 2, 3, 1, 2, 3, 2, 3});
     }
 }
