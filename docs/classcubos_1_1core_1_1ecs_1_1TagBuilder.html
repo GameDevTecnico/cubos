@@ -85,10 +85,19 @@
             </dt>
             <dd>Sets the current tag to be executed after another tag.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7799fa95297a00059f3f807b4cabbe97" class="m-doc">tagged</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
+            </dt>
+            <dd>Tags all systems on this tag with the given tag.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename F&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a5f5205b3f0454e0315cc01fc012408c0" class="m-doc">runIf</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
             <dd>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename F&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5674690d16b16c9e77d03cf942151770" class="m-doc">repeatWhile</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
+            </dt>
+            <dd>Makes all systems within the tag repeat as a group until the given condition evaluates to false.</dd>
           </dl>
         </section>
         <section>
@@ -172,6 +181,29 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a7799fa95297a00059f3f807b4cabbe97"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7799fa95297a00059f3f807b4cabbe97" class="m-doc-self">tagged</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+            </h3>
+            <p>Tags all systems on this tag with the given tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td>Tag to be inherited from.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a5f5205b3f0454e0315cc01fc012408c0"><div>
             <h3>
               <div class="m-doc-template">
@@ -180,6 +212,32 @@
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5f5205b3f0454e0315cc01fc012408c0" class="m-doc-self">runIf</a>(</span><span class="m-doc-wrap">F func)</span></span>
             </h3>
             <p>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Condition function.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5674690d16b16c9e77d03cf942151770"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename F&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5674690d16b16c9e77d03cf942151770" class="m-doc-self">repeatWhile</a>(</span><span class="m-doc-wrap">F func)</span></span>
+            </h3>
+            <p>Makes all systems within the tag repeat as a group until the given condition evaluates to false.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
