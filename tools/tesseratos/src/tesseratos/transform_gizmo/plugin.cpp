@@ -171,6 +171,7 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
     cubos.addPlugin(cubos::engine::inputPlugin);
 
     cubos.system("draw Transform Gizmo")
+        .after("cubos.transform.update")
         .tagged("cubos.imgui")
         .call([](const EntitySelector& entitySelector, const ActiveCameras& activeCameras, const Window& window,
                  const Input& input, Gizmos& gizmos, Query<Position&> positionQuery,
