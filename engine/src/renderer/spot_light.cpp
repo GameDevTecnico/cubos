@@ -11,5 +11,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::SpotLight)
         .withField("intensity", &SpotLight::intensity)
         .withField("range", &SpotLight::range)
         .withField("spotAngle", &SpotLight::spotAngle)
+        .withField("innerSpotAngle", &SpotLight::innerSpotAngle)
         .build();
 }

@@ -63,5 +63,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Crash when using OpenGL < 4.3 (#740).
 - Crash when a renderable grid has a null asset (#956).
 - Bug where other PRs doc previews are deleted when you merge a single PR (#563).
+- Fix spotlight transform and cutoff math.
 
 [unreleased]: https://github.com/GameDevTecnico/cubos/commits/main/

@@ -707,12 +707,15 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
             break;
         }
 
+        auto direction = glm::normalize(glm::vec3(transform * glm::vec4(0.0F, 0.0F, 1.0F, 0.0F)));
         lightData.spotLights[lightData.numSpotLights].position = transform * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-        lightData.spotLights[lightData.numSpotLights].rotation = glm::toMat4(glm::quat_cast(transform));
+        lightData.spotLights[lightData.numSpotLights].rotation =
+            glm::toMat4(glm::quatLookAt(direction, {0.0F, 1.0F, 0.0F}));
         lightData.spotLights[lightData.numSpotLights].color = glm::vec4(light.color, 1.0F);
         lightData.spotLights[lightData.numSpotLights].intensity = light.intensity;
         lightData.spotLights[lightData.numSpotLights].range = light.range;
-        lightData.spotLights[lightData.numSpotLights].spotCutoff = glm::cos(light.spotAngle);
+        lightData.spotLights[lightData.numSpotLights].spotCutoff = glm::cos(glm::radians(light.spotAngle));
+        lightData.spotLights[lightData.numSpotLights].innerSpotCutoff = glm::cos(glm::radians(light.innerSpotAngle));
         lightData.numSpotLights += 1;
     }
 

@@ -22,5 +22,6 @@ namespace cubos::engine
         float intensity = 1.0F;               ///< Intensity of the light.
         float range = 5.0F;                   ///< Range of the light.
         float spotAngle = 60.0F;              ///< Angle of the spot light in degrees.
+        float innerSpotAngle = 30.0F;         ///< Angle of the spot light in degrees.
     };
 } // namespace cubos::engine
