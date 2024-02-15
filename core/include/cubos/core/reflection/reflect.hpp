@@ -70,6 +70,7 @@ namespace cubos::core::reflection
         return type;
     }
 
+    /// @cond See #765
     /// @brief Checks whether the given type @p T is reflectable.
     /// @tparam T %Type to check.
     template <typename T>
@@ -77,6 +78,7 @@ namespace cubos::core::reflection
     {
         reflect<T>();
     };
+    /// @endcond
 } // namespace cubos::core::reflection
 
 /// @brief Helper macro used to pass arguments with commas to other macros, wrapped in parentheses.
