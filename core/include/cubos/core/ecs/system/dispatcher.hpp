@@ -74,12 +74,11 @@ namespace cubos::core::ecs
         void tagSetBeforeTag(const std::string& tag);
 
         /// @brief Adds a condition to the current tag.
-        /// @tparam F Condition type.
         /// @param condition Condition to add.
         void tagAddCondition(ecs::System<bool> condition);
 
         /// @brief Adds a repeat condition to the current tag.
-        /// @param func Condition to add.
+        /// @param condition Condition to add.
         void tagRepeatWhile(ecs::System<bool> condition);
 
         /// @brief Adds a (sub)group to the current group.

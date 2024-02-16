@@ -21,8 +21,8 @@ namespace cubos::core::reflection
         using SetToNull = void (*)(void* instance);
 
         /// @brief Constructs.
-        /// @param into IsNull.
-        /// @param from SetToNull.
+        /// @param isNull IsNull.
+        /// @param setToNull SetToNull.
         NullableTrait(IsNull isNull, SetToNull setToNull);
 
         /// @brief Checks if the given value represents null.

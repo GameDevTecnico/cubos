@@ -39,22 +39,12 @@ namespace cubos::core::ecs
     {
     public:
         /// @brief Function used by @ref instantiate to create entities.
-        /// @param userData User data passed into @ref instantiate.
-        /// @param name Entity name.
-        /// @return Instantiated entity.
         using Create = Entity (*)(void* userData, std::string name);
 
         /// @brief Function used by @ref instantiate to add components to entities.
-        /// @param userData User data passed into @ref instantiate.
-        /// @param entity Entity.
-        /// @param component Component.
         using Add = void (*)(void* userData, Entity entity, memory::AnyValue component);
 
         /// @brief Function used by @ref instantiate to add relations to entities.
-        /// @param userData User data passed into @ref instantiate.
-        /// @param fromEntity From entity.
-        /// @param toEntity To entity.
-        /// @param relation Relation.
         using Relate = void (*)(void* userData, Entity fromEntity, Entity toEntity, memory::AnyValue relation);
 
         /// @brief Creates a new entity in the blueprint and returns it.

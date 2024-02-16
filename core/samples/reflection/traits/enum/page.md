@@ -16,7 +16,7 @@ Output:
 
 @snippet reflection/traits/enum/main.cpp Using the type
 
-```
+```txt
 [2023-11-19 13:09:36.117] [info] [main.cpp:59] Variant 'Red'
 [2023-11-19 13:09:36.118] [info] [main.cpp:59] Variant 'Green'
 [2023-11-19 13:09:36.119] [info] [main.cpp:59] Variant 'Blue'

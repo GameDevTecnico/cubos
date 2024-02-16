@@ -127,19 +127,16 @@ namespace cubos::engine
         /// @return Whether the mouse button is over a gizmo.
         bool hovered(const std::string& id) const;
 
-        /// @brief Registers gizmo interaction. Called automatically by an internal system.
-        /// @param id Gizmo being interacted with.
+        /// @brief Notifies that a given gizmo is being hovered. Called automatically by an internal system.
+        /// @param hovered Gizmo being hovered.
         /// @param pressed Whether the mouse left button is pressed.
         void handleInput(uint32_t hovered, bool pressed);
 
-        /// @brief Registers gizmo interaction. Called automatically by an internal system.
-        /// @param id Gizmo being interacted with.
-        /// @param pressed Whether the mouse left button is pressed.
+        /// @brief Notifies that a given gizmo is locked.
+        /// @param locked Gizmo being locked.
         void setLocked(uint32_t locked);
 
-        /// @brief Registers gizmo interaction. Called automatically by an internal system.
-        /// @param id Gizmo being interacted with.
-        /// @param pressed Whether the mouse left button is pressed.
+        /// @brief Notifies that the previously locked gizmo is no longer locked.
         void releaseLocked();
 
         /// @brief Class that describes a type of gizmo

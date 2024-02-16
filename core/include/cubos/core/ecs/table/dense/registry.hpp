@@ -31,7 +31,7 @@ namespace cubos::core::ecs
         ///
         /// @param archetype Archetype identifier.
         /// @param graph Archetype graph used to initialize the table, if necessary.
-        /// @param type Type registry used to initialize the table, if necessary.
+        /// @param types Type registry used to initialize the table, if necessary.
         /// @return Reference to table.
         DenseTable& create(ArchetypeId archetype, ArchetypeGraph& graph, Types& types);
 
