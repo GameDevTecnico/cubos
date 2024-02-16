@@ -2,7 +2,7 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include <cubos/engine/collisions/narrow_phase/colliding_with.hpp>
+#include <cubos/engine/collisions/colliding_with.hpp>
 
 CUBOS_REFLECT_IMPL(cubos::engine::CollidingWith)
 {

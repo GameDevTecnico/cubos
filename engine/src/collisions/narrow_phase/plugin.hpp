@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <cubos/engine/collisions/narrow_phase/colliding_with.hpp>
+#include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine

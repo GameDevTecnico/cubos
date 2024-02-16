@@ -5,7 +5,7 @@
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/collisions/collider.hpp>
-#include <cubos/engine/collisions/narrow_phase/colliding_with.hpp>
+#include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
