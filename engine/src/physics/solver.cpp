@@ -1,6 +1,6 @@
 #include <glm/glm.hpp>
 
-#include <cubos/engine/collisions/narrow_phase/colliding_with.hpp>
+#include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/solver/solver.hpp>
 
