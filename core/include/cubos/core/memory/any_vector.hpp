@@ -51,11 +51,11 @@ namespace cubos::core::memory
 
         /// @brief Pushes a new copy-constructed element to the back of the vector.
         /// @note Aborts if @ref elementType() is not copy-constructible.
-        /// @param element Element to copy.
+        /// @param value Element to copy.
         void pushCopy(const void* value);
 
         /// @brief Pushes a new move-constructed element to the back of the vector.
-        /// @param element Element to move.
+        /// @param value Element to move.
         void pushMove(void* value);
 
         /// @brief Overwrites the element at the given index with a new default-constructed element.
@@ -66,13 +66,13 @@ namespace cubos::core::memory
         /// @brief Overwrites the element at the given index with a new copy-constructed element.
         /// @note Aborts if @ref elementType() is not copy-constructible.
         /// @param index Element index.
-        /// @param element Element to copy.
+        /// @param value Element to copy.
         void setCopy(std::size_t index, const void* value);
 
         /// @brief Overwrites the element at the given index with a new move-constructed element.
         /// @note Aborts if @ref elementType() is not move-constructible.
         /// @param index Element index.
-        /// @param element Element to move.
+        /// @param value Element to move.
         void setMove(std::size_t index, void* value);
 
         /// @brief Removes the last element from the vector.

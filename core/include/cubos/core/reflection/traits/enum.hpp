@@ -50,7 +50,7 @@ namespace cubos::core::reflection
 
         /// @brief Converts a string to a value of a specified type.
         /// @param[in,out] value Variable to store the converted value.
-        /// @param string String to be converted to the specified value type.
+        /// @param str String to be converted to the specified value type.
         /// @return Whether the conversion was successful, false otherwise.
         template <typename T>
         static bool fromString(T& value, const std::string& str)

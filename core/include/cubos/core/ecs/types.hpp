@@ -66,7 +66,7 @@ namespace cubos::core::ecs
         const reflection::Type& type(DataTypeId id) const;
 
         /// @brief Checks if a data type is registered.
-        /// @param name Data type.
+        /// @param type Data type.
         /// @return Whether the data type is registered.
         bool contains(const reflection::Type& type) const;
 

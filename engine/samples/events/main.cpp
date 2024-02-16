@@ -48,7 +48,7 @@ int main()
             CUBOS_INFO("D read {}", event.value);
         }
     });
-    /// [Event reader system]
+    /// [Event reader systems]
 
     /// [Event writer system]
     cubos.system("B").tagged("b").call([](EventWriter<MyEvent> writer, State& state, ShouldQuit& quit) {

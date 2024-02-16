@@ -70,7 +70,7 @@ namespace cubos::core::ecs
         /// Creates the table if it doesn't exist already.
         ///
         /// @param id Identifier.
-        /// @param type Type registry used to initialize the table, if necessary.
+        /// @param types Type registry used to initialize the table, if necessary.
         /// @return Reference to table.
         SparseRelationTable& create(SparseRelationTableId id, Types& types);
 

@@ -208,7 +208,7 @@ namespace cubos::core::io
         virtual MouseState mouseState() const = 0;
 
         /// @brief Gets the position of the mouse cursor.
-        /// @param position Position of the mouse cursor, in screen coordinates.
+        /// @return Position of the mouse cursor, in screen coordinates.
         virtual glm::ivec2 getMousePosition() = 0;
 
         /// @brief Sets the position of the mouse cursor.

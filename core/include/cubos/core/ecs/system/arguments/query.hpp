@@ -33,7 +33,7 @@ namespace cubos::core::ecs
         using Iterator = typename QueryData<Ts...>::View::Iterator;
 
         /// @brief Constructs.
-        /// @param data Query data view.
+        /// @param view Query data view.
         Query(typename QueryData<Ts...>::View view)
             : mView{view}
         {

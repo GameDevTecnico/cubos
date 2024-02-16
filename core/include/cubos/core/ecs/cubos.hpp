@@ -133,7 +133,7 @@ namespace cubos::core::ecs
         Cubos& addComponent();
 
         /// @brief Adds a new relation type to the engine.
-        /// @tparam C Type of the relation.
+        /// @tparam R Type of the relation.
         /// @return Reference to this object, for chaining.
         template <typename R>
         Cubos& addRelation()

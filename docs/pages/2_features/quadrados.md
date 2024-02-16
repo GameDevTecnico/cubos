@@ -85,7 +85,7 @@ $ quadrados convert car2.qb -p main.pal -g car2.grd
 
 If this fails, you may see the error message:
 
-```
+```txt
 Failed to convert grid 0 from its palette to the palette chosen.
 ```
 

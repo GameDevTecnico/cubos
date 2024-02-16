@@ -28,7 +28,6 @@ namespace cubos::engine
 
         /// @copybrief show
         /// @tparam T Value type.
-        /// @param name Value name.
         /// @param value Pointer to value.
         template <typename T>
         void show(const T& value)
