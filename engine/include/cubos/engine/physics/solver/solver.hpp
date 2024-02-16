@@ -15,9 +15,6 @@ namespace cubos::engine
     /// @defgroup physics-solver-plugin Solver
     /// @ingroup physics-plugin
     /// @brief Adds solver for constraints.
-    ///
-    /// ## Resources
-    ///
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class

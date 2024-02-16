@@ -121,15 +121,12 @@ int main()
                     bVel.vec = glm::vec3{0.0F, 0.0F, -1.0F};
                     state.bRotationAxis = glm::sphericalRand(1.0F);
                 }
-                // return;
             }
 
             aRot.quat = glm::rotate(aRot.quat, 0.001F, state.aRotationAxis);
-            //  aPos.vec += glm::vec3{0.0F, 0.0F, 0.01F};
             aVel.vec += glm::vec3{0.0F, 0.0F, 0.01F};
 
             bRot.quat = glm::rotate(bRot.quat, 0.001F, state.bRotationAxis);
-            //  bPos.vec += glm::vec3{0.0F, 0.0F, -0.01F};
             bVel.vec -= glm::vec3{0.0F, 0.0F, 0.01F};
         });
 
