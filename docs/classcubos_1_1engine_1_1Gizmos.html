@@ -163,15 +163,15 @@
               <span class="m-doc-wrap-bumper">void <a href="#a2543e1a6bcdbf2f76c3ac30b8835945e" class="m-doc">handleInput</a>(</span><span class="m-doc-wrap">uint32_t hovered,
               bool pressed)</span>
             </dt>
-            <dd>Registers gizmo interaction. Called automatically by an internal system.</dd>
-            <dt id="ae72d2a23b51736d2a92aa3ba381381ff">
-              <span class="m-doc-wrap-bumper">void <a href="#ae72d2a23b51736d2a92aa3ba381381ff" class="m-doc-self">setLocked</a>(</span><span class="m-doc-wrap">uint32_t locked)</span>
+            <dd>Notifies that a given gizmo is being hovered. Called automatically by an internal system.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae72d2a23b51736d2a92aa3ba381381ff" class="m-doc">setLocked</a>(</span><span class="m-doc-wrap">uint32_t locked)</span>
             </dt>
-            <dd>Registers gizmo interaction. Called automatically by an internal system.</dd>
+            <dd>Notifies that a given gizmo is locked.</dd>
             <dt id="a042fc10a3154612b1959b6817ae4defa">
               <span class="m-doc-wrap-bumper">void <a href="#a042fc10a3154612b1959b6817ae4defa" class="m-doc-self">releaseLocked</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Registers gizmo interaction. Called automatically by an internal system.</dd>
+            <dd>Notifies that the previously locked gizmo is no longer locked.</dd>
           </dl>
         </section>
         <section id="pub-attribs">
@@ -609,7 +609,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2543e1a6bcdbf2f76c3ac30b8835945e" class="m-doc-self">handleInput</a>(</span><span class="m-doc-wrap">uint32_t hovered,
               bool pressed)</span></span>
             </h3>
-            <p>Registers gizmo interaction. Called automatically by an internal system.</p>
+            <p>Notifies that a given gizmo is being hovered. Called automatically by an internal system.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -617,11 +617,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">hovered</td>
-                  <td></td>
+                  <td><a href="classcubos_1_1engine_1_1Gizmos_1_1Gizmo.html" class="m-doc">Gizmo</a> being hovered.</td>
                 </tr>
                 <tr>
                   <td>pressed</td>
                   <td>Whether the mouse left button is pressed.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae72d2a23b51736d2a92aa3ba381381ff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae72d2a23b51736d2a92aa3ba381381ff" class="m-doc-self">setLocked</a>(</span><span class="m-doc-wrap">uint32_t locked)</span></span>
+            </h3>
+            <p>Notifies that a given gizmo is locked.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">locked</td>
+                  <td><a href="classcubos_1_1engine_1_1Gizmos_1_1Gizmo.html" class="m-doc">Gizmo</a> being locked.</td>
                 </tr>
               </tbody>
             </table>

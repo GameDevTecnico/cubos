@@ -123,7 +123,7 @@
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="n">CUBOS_WARN</span><span class="p">(</span><span class="s">&quot;Cannot decompose &#39;{}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">.</span><span class="n">name</span><span class="p">());</span>
+<span class="w">    </span><span class="n">CUBOS_WARN</span><span class="p">(</span><span class="s">&quot;Cannot decompose {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">.</span><span class="n">name</span><span class="p">());</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <span class="p">}</span></pre><p>If the type has fields, we&#x27;ll iterate over them and ask the user to enter values for them. Otherwise, we&#x27;ll fail by returning <code>false</code>.</p><p>Using our deserializer is as simple as constructing it and calling <a href="classcubos_1_1core_1_1data_1_1Deserializer.html#a07318d89b59805e5b14e780df349654b" class="m-doc">Deserializer::<wbr />read</a> on the data we want to deserialize.</p><p>In this case, we&#x27;ll be deserializing a <code>std::vector&lt;glm::ivec3&gt;</code>, which is an array of objects with three <code>int32_t</code> fields.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;glm/vec3.hpp&gt;</span>
 
