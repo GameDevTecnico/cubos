@@ -289,6 +289,36 @@ TEST_CASE("ecs::World")
         REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
     }
 
+    SUBCASE("tree relation depth is managed correctly even with destructions")
+    {
+        auto treeRelation = world.types().id(reflect<TreeRelation>());
+        SparseRelationTableId tableId = {treeRelation, ArchetypeId::Empty, ArchetypeId::Empty, 0};
+
+        // Create four entities.
+        auto foo = world.create();
+        auto bar = world.create();
+        auto baz = world.create();
+
+        // Set up a tree relation from foo to bar and from bar to baz.
+        world.relate(foo, bar, TreeRelation{});
+        world.relate(bar, baz, TreeRelation{});
+        tableId.depth = 0;
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        tableId.depth = 1;
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.related<TreeRelation>(foo, bar));
+        REQUIRE(world.related<TreeRelation>(bar, baz));
+
+        // Destroy baz.
+        world.destroy(baz);
+        tableId.depth = 0;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(bar.index, baz.index));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        tableId.depth = 1;
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        REQUIRE(world.related<TreeRelation>(foo, bar));
+    }
+
     SUBCASE("relations are correctly destructed when the world is destroyed")
     {
         bool destroyed = false;
