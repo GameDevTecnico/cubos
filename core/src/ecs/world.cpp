@@ -214,6 +214,12 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
             }
         }
 
+        // Make sure we aren't forming a cycle.
+        CUBOS_ASSERT(
+            !this->isAncestor(to.index, from.index, dataType),
+            "Adding a relation of type {} between {} and {} would create a cycle, which is forbidden in tree relations",
+            type.name(), from, to);
+
         // We need to update the depth of the incoming relation.
         this->propagateDepth(from.index, dataType, tableId.depth + 1);
     }
@@ -502,6 +508,38 @@ void World::moveSparse(Entity entity, ArchetypeId oldArchetype, ArchetypeId newA
             }
         }
     }
+}
+
+bool World::isAncestor(uint32_t index, uint32_t ancestorIndex, DataTypeId dataType) const
+{
+    // If the entity itself is the ancestor, then just return return true.
+    if (index == ancestorIndex)
+    {
+        return true;
+    }
+
+    // Iterate over all sparse relation tables for the relation type with the first entity's archetype as the from
+    // archetype.
+    auto archetype = mEntityPool.archetype(index);
+    const auto& tables = mTables.sparseRelation().type(dataType).from();
+    if (tables.contains(archetype))
+    {
+        for (auto tableId : tables.at(archetype))
+        {
+            // Check if the table actually contains the entity.
+            const auto& table = mTables.sparseRelation().at(tableId);
+            if (auto row = table.firstFrom(index); row != table.size())
+            {
+                // It does, recurse into its parent.
+                uint32_t fromIndex;
+                uint32_t toIndex;
+                table.indices(row, fromIndex, toIndex);
+                return this->isAncestor(toIndex, ancestorIndex, dataType);
+            }
+        }
+    }
+
+    return false;
 }
 
 World::Components::Components(World& world, Entity entity)
