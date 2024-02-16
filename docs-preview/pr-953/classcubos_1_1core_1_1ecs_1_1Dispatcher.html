@@ -56,11 +56,29 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1Dependency.html" class="m-doc">Dependency</a>
+            </dt>
+            <dd>Internal class to specify system dependencies.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">System</a>
+            </dt>
+            <dd>Internal class to handle tag settings.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1SystemSettings.html" class="m-doc">SystemSettings</a>
+            </dt>
+            <dd>Internal class with settings pertaining to system/tag execution.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -85,6 +103,14 @@
             </dt>
             <dd>Adds a condition to the current tag.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2e636bc17dfbe7dc0b62881ae34ae50c" class="m-doc">tagRepeatWhile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;bool&gt; condition)</span>
+            </dt>
+            <dd>Adds a repeat condition to the current tag.</dd>
+            <dt id="a6696d9e0bb634f4c5679e6bae917ea0e">
+              <span class="m-doc-wrap-bumper">void <a href="#a6696d9e0bb634f4c5679e6bae917ea0e" class="m-doc-self">groupAddGroup</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Adds a (sub)group to the current group.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a4c899e81d143a9b6758eda41d450fa84" class="m-doc">addSystem</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;void&gt; system)</span>
             </dt>
             <dd>Adds a system, and sets it as the current system for further configuration.</dd>
@@ -92,6 +118,10 @@
               <span class="m-doc-wrap-bumper">void <a href="#a610639eccf94913d59d4df4f4333069e" class="m-doc">systemAddTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span>
             </dt>
             <dd>Sets the tag for the current system.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a77e22c40e4df9b9de176fede0c19926e" class="m-doc">systemAddGroup</a>(</span><span class="m-doc-wrap">const std::string&amp; grouptag)</span>
+            </dt>
+            <dd>Links a system to a certain group.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a54df9c99920f5340542527fdb18ef569" class="m-doc">systemSetAfterTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span>
             </dt>
@@ -201,6 +231,23 @@
               </tbody>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a2e636bc17dfbe7dc0b62881ae34ae50c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2e636bc17dfbe7dc0b62881ae34ae50c" class="m-doc-self">tagRepeatWhile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;bool&gt; condition)</span></span>
+            </h3>
+            <p>Adds a repeat condition to the current tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">condition</td>
+                  <td>Condition to add.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a4c899e81d143a9b6758eda41d450fa84"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c899e81d143a9b6758eda41d450fa84" class="m-doc-self">addSystem</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;void&gt; system)</span></span>
@@ -231,6 +278,23 @@
                 <tr>
                   <td style="width: 1%">tag</td>
                   <td>Tag to run under.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a77e22c40e4df9b9de176fede0c19926e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77e22c40e4df9b9de176fede0c19926e" class="m-doc-self">systemAddGroup</a>(</span><span class="m-doc-wrap">const std::string&amp; grouptag)</span></span>
+            </h3>
+            <p>Links a system to a certain group.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">grouptag</td>
+                  <td>Tag of the group.</td>
                 </tr>
               </tbody>
             </table>
