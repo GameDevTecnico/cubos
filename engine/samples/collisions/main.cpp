@@ -72,12 +72,7 @@ int main()
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
-                      .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
-                      .add(Velocity{.vec = {0.0F, 0.0F, 1.0F}})
-                      .add(Force{})
-                      .add(Impulse{})
-                      .add(Mass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
-                      .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
+                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 1.0F}})
                       .entity();
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
@@ -87,12 +82,7 @@ int main()
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
-                      .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
-                      .add(Velocity{.vec = {0.0F, 0.0F, -1.0F}})
-                      .add(Force{})
-                      .add(Impulse{})
-                      .add(Mass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
-                      .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
+                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, -1.0F}})
                       .entity();
         state.bRotationAxis = glm::sphericalRand(1.0F);
 
@@ -101,6 +91,7 @@ int main()
 
     cubos.system("move colliders")
         .before("cubos.transform.update")
+        .after("cubos.physics.unpack_bundle")
         .call([](State& state, const Input& input, Query<Position&, Rotation&, Velocity&> query) {
             auto [aPos, aRot, aVel] = *query.at(state.a);
             auto [bPos, bRot, bVel] = *query.at(state.b);

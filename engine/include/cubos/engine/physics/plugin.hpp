@@ -18,6 +18,7 @@
 #include <cubos/engine/physics/components/mass.hpp>
 #include <cubos/engine/physics/components/previous_position.hpp>
 #include <cubos/engine/physics/components/velocity.hpp>
+#include <cubos/engine/physics/physics_bundle.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
 #include <cubos/engine/physics/resources/fixed_delta_time.hpp>
@@ -39,6 +40,7 @@ namespace cubos::engine
     /// - @ref Substeps - holds the amount of substeps for the physics update.
     ///
     /// ## Components
+    /// - @ref PhysicsBundle - bundle that holds the physics information to give to a new entity.
     /// - @ref Velocity - holds the information for moving an object straight.
     /// - @ref Force - holds forces applied on a particle.
     /// - @ref Impulse - holds impulses applied on a particle.

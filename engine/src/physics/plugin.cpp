@@ -50,6 +50,16 @@ CUBOS_REFLECT_IMPL(PreviousPosition)
         .build();
 }
 
+CUBOS_REFLECT_IMPL(PhysicsBundle)
+{
+    return cubos::core::ecs::TypeBuilder<PhysicsBundle>("cubos::engine::PhysicsBundle")
+        .withField("mass", &PhysicsBundle::mass)
+        .withField("velocity", &PhysicsBundle::velocity)
+        .withField("force", &PhysicsBundle::force)
+        .withField("impulse", &PhysicsBundle::impulse)
+        .build();
+}
+
 static bool simulatePhysicsStep(PhysicsAccumulator& accumulator, const FixedDeltaTime& fixedDeltaTime)
 {
     return accumulator.value >= fixedDeltaTime.value;
@@ -68,9 +78,32 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.addComponent<Mass>();
     cubos.addComponent<AccumulatedCorrection>();
     cubos.addComponent<PreviousPosition>();
+    cubos.addComponent<PhysicsBundle>();
 
     cubos.addPlugin(gravityPlugin);
     cubos.addPlugin(solverPlugin);
+
+    // add components to entities created with PhysicsBundle
+    cubos.system("unpack PhysicsBundle's")
+        .tagged("cubos.physics.unpack_bundle")
+        .call([](Commands cmds, Query<Entity, const PhysicsBundle&> query) {
+            for (auto [ent, bundle] : query)
+            {
+                cmds.add(ent, PreviousPosition{});
+                cmds.add(ent, Mass{.mass = bundle.mass, .inverseMass = 1.0F / bundle.mass});
+                cmds.add(ent, Velocity{.vec = bundle.velocity});
+
+                auto force = Force{};
+                force.add(bundle.force);
+                cmds.add(ent, force);
+
+                auto impulse = Impulse{};
+                impulse.add(bundle.impulse);
+                cmds.add(ent, impulse);
+
+                cmds.add(ent, AccumulatedCorrection{});
+            }
+        });
 
     // executed every frame
     cubos.system("increase fixed-step accumulator")
