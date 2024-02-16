@@ -67,12 +67,14 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the examples-engine-physics example for a demonstration of this plugin.</p></aside><section id="autotoc_md76"><h3><a href="#autotoc_md76">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li><li>PhysicsAccumulator - holds the progress to the next integration.</li><li><a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> - holds the damping value for integration.</li><li><a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a> - holds the amount of substeps for the physics update.</li></ul></section><section id="autotoc_md77"><h3><a href="#autotoc_md77">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a> - holds the information for moving an object straight.</li><li><a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a> - holds forces applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a> - holds impulses applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> - holds the mass of an object.</li><li><a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a> - holds the previous position of the entity in a substep.</li><li><a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> - holds the corrections accumulated from the constraints solving.</li></ul></section><section id="autotoc_md78"><h3><a href="#autotoc_md78">Tags</a></h3><ul><li><code>cubos.physics.apply_forces</code></li></ul></section><section id="autotoc_md79"><h3><a href="#autotoc_md79">Dependencies</a></h3><ul><li><a href="group__physics-gravity-plugin.html" class="m-doc">Gravity</a></li></ul></section>
+<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the examples-engine-physics example for a demonstration of this plugin.</p></aside><section id="autotoc_md76"><h3><a href="#autotoc_md76">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li><li>PhysicsAccumulator - holds the progress to the next integration.</li><li><a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> - holds the damping value for integration.</li><li><a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a> - holds the amount of substeps for the physics update.</li></ul></section><section id="autotoc_md77"><h3><a href="#autotoc_md77">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">PhysicsBundle</a> - bundle that holds the physics information to give to a new entity.</li><li><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a> - holds the information for moving an object straight.</li><li><a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a> - holds forces applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a> - holds impulses applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> - holds the mass of an object.</li><li><a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a> - holds the previous position of the entity in a substep.</li><li><a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> - holds the corrections accumulated from the constraints solving.</li></ul></section><section id="autotoc_md78"><h3><a href="#autotoc_md78">Tags</a></h3><ul><li><code>cubos.physics.apply_forces</code></li></ul></section><section id="autotoc_md79"><h3><a href="#autotoc_md79">Dependencies</a></h3><ul><li><a href="group__physics-gravity-plugin.html" class="m-doc">Gravity</a></li></ul></section>
         <section id="groups">
           <h2><a href="#groups">Modules</a></h2>
           <dl class="m-doc">
             <dt>module <a href="group__physics-gravity-plugin.html" class="m-doc">Gravity</a></dt>
             <dd>Adds gravity to particles.</dd>
+            <dt>module <a href="group__physics-solver-plugin.html" class="m-doc">Solver</a></dt>
+            <dd>Adds solver for constraints.</dd>
           </dl>
         </section>
         <section id="files">
@@ -90,6 +92,8 @@
             <dd>Component <a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">cubos::<wbr />engine::<wbr />PreviousPosition</a>.</dd>
             <dt>file <a href="velocity_8hpp.html" class="m-doc">velocity.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">cubos::<wbr />engine::<wbr />Velocity</a>.</dd>
+            <dt>file <a href="physics__bundle_8hpp.html" class="m-doc">physics_bundle.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">cubos::<wbr />engine::<wbr />PhysicsBundle</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2physics_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
             <dt>file <a href="damping_8hpp.html" class="m-doc">damping.hpp</a></dt>
@@ -129,6 +133,10 @@
               struct <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">cubos::engine::Velocity</a>
             </dt>
             <dd>Component which holds velocity and forces applied on a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">cubos::engine::PhysicsBundle</a>
+            </dt>
+            <dd>Component which encapsulates the creation all components required for physics.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">cubos::engine::Damping</a>
             </dt>
