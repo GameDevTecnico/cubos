@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ephemeral trait, used to indicate that relations and components shouldn't be persisted.
 - Collider gizmos plugin, used to view collision shapes.
 - Delta Time multiplier, can be used to adjust simulation speed (#866).
+- Collision Solver plugin (#532)
 
 ### Changed
 
