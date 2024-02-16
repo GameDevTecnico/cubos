@@ -63,7 +63,7 @@ void World::destroy(Entity entity)
     mEntityPool.destroy(entity.index);
     mTables.dense().at(archetype).swapErase(entity.index);
 
-    for (const auto& [_, index] : mTables.sparseRelation())
+    for (const auto& [type, index] : mTables.sparseRelation())
     {
         // For each table where the entity's archetype is the 'from' archetype.
         if (index.from().contains(archetype))
@@ -80,6 +80,21 @@ void World::destroy(Entity entity)
         {
             for (const auto& table : index.to().at(archetype))
             {
+                if (mTypes.isTreeRelation(type))
+                {
+                    // If the relation is tree-like, then we need to update the depth of the corresponding 'from'
+                    // entities.
+                    for (auto row = mTables.sparseRelation().at(table).firstTo(entity.index);
+                         row != mTables.sparseRelation().at(table).size();
+                         row = mTables.sparseRelation().at(table).nextTo(row))
+                    {
+                        uint32_t fromIndex;
+                        uint32_t toIndex;
+                        mTables.sparseRelation().at(table).indices(row, fromIndex, toIndex);
+                        this->propagateDepth(fromIndex, type, 0);
+                    }
+                }
+
                 // Erase all occurrences of the entity in the 'to' column.
                 mTables.sparseRelation().at(table).eraseTo(entity.index);
             }
