@@ -98,8 +98,8 @@
               <span class="m-doc-wrap-bumper">void <a href="#a8658c20373a33c05f6dc0b9b34576399" class="m-doc">pushCopy</a>(</span><span class="m-doc-wrap">const void* value)</span>
             </dt>
             <dd>Pushes a new copy-constructed element to the back of the vector.</dd>
-            <dt id="aafd49aade109794b17c533a93bbb99a1">
-              <span class="m-doc-wrap-bumper">void <a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc-self">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span>
             </dt>
             <dd>Pushes a new move-constructed element to the back of the vector.</dd>
             <dt>
@@ -243,7 +243,35 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8658c20373a33c05f6dc0b9b34576399" class="m-doc-self">pushCopy</a>(</span><span class="m-doc-wrap">const void* value)</span></span>
             </h3>
             <p>Pushes a new copy-constructed element to the back of the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Element to copy.</td>
+                </tr>
+              </tbody>
+            </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not copy-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aafd49aade109794b17c533a93bbb99a1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc-self">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span></span>
+            </h3>
+            <p>Pushes a new move-constructed element to the back of the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Element to move.</td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
           <section class="m-doc-details" id="adbdaba90671bae31f5bdfb604ad312f4"><div>
             <h3>
@@ -280,7 +308,7 @@
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td></td>
+                  <td>Element to copy.</td>
                 </tr>
               </tbody>
             </table>
@@ -303,7 +331,7 @@
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td></td>
+                  <td>Element to move.</td>
                 </tr>
               </tbody>
             </table>
