@@ -259,6 +259,13 @@ namespace cubos::core::ecs
         /// @param newArchetype New archetype.
         void moveSparse(Entity entity, ArchetypeId oldArchetype, ArchetypeId newArchetype);
 
+        /// @brief Used to prevent cycles from forming in tree relations.
+        /// @param index Entity index.
+        /// @param ancestorIndex Ancestor entity index.
+        /// @param dataType Tree relation data type.
+        /// @return Whether @p ancestorIndex is an ancestor of @p index with the given tree relation.
+        bool isAncestor(uint32_t index, uint32_t ancestorIndex, DataTypeId dataType) const;
+
         Types mTypes;
         EntityPool mEntityPool;
         ArchetypeGraph mArchetypeGraph;
