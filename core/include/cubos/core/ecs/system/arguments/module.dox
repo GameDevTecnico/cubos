@@ -6,7 +6,7 @@
 
 namespace cubos::core::ecs
 {
-    /// @defgroup core-ecs-system-arguments System arguments
+    /// @defgroup core-ecs-system-arguments Arguments
     /// @ingroup core-ecs-system
     /// @brief Contains types and fetcher specializations for system argument types.
 }
