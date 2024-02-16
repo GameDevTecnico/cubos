@@ -7,7 +7,7 @@
 This example shows how the @ref renderer-plugin plugin can be used and
 configured with a simple scene, lighting and split-screen rendering.
 
-![](renderer/output.png)
+![](renderer_output.png)
 
 The plugin function is included from the @ref engine/renderer/plugin.hpp header.
 You may need to include other headers, depending on what you want to access.

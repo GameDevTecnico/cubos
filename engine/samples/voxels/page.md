@@ -8,7 +8,7 @@ This example shows the @ref voxels-plugin plugin, which registers asset bridges 
 
 It is very similar to the @ref examples-engine-renderer, differing only in the fact that in this sample the grid and palette are loaded from files.
 
-![](voxels/output.png)
+![](voxels_output.png)
 
 The plugin function is included from the @ref engine/voxels/plugin.hpp header.
 To see the asset, you'll also need to perform a basic configuration of the @ref renderer-plugin plugin like shown in the @ref examples-engine-renderer sample.
