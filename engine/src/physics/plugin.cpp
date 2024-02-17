@@ -102,6 +102,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 cmds.add(ent, impulse);
 
                 cmds.add(ent, AccumulatedCorrection{});
+                cmds.remove<PhysicsBundle>(ent);
             }
         });
 
