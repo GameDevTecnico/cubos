@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.1.0]
+
 ### Added
 
 - This CHANGELOG file! It's time we start keeping track of what we have done.
@@ -68,3 +70,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix spotlight transform and cutoff math.
 
 [unreleased]: https://github.com/GameDevTecnico/cubos/commits/main/
+[v0.1.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.1.0
