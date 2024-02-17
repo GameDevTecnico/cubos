@@ -24,7 +24,7 @@ contains the documentation, guides and examples on how to use the engine.
 
 **CUBOS.** is developed by a small team at
 [GameDev Técnico](https://www.instagram.com/gamedevtecnico/), a student group
-at [Instituto Superior Técnico](https://tecnico.ulisboa.pt/) who make games.
+at [Instituto Superior Técnico](https://tecnico.ulisboa.pt/) who makes games.
 Our goal is to build a game engine from the ground up and have fun doing it.
 
 ### Join us
