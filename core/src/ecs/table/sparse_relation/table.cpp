@@ -104,7 +104,7 @@ std::size_t SparseRelationTable::eraseFrom(uint32_t from)
     return count;
 }
 
-std::size_t SparseRelationTable::moveFrom(uint32_t from, SparseRelationTable& other)
+std::size_t SparseRelationTable::moveFrom(uint32_t from, SparseRelationTable& other, Transformation transformation)
 {
     std::size_t count = 0;
 
@@ -112,7 +112,13 @@ std::size_t SparseRelationTable::moveFrom(uint32_t from, SparseRelationTable& ot
     {
         auto rowIndex = mFromRows.at(from).first;
         auto& row = mRows[rowIndex];
-        other.insert(row.from, row.to, this->at(rowIndex));
+        auto from = row.from;
+        auto to = row.to;
+        if (transformation == Transformation::Swap || (transformation == Transformation::SwapIfGreater && from > to))
+        {
+            std::swap(from, to);
+        }
+        other.insert(from, to, this->at(rowIndex));
         this->erase(row.from, row.to);
         count += 1;
     }
@@ -134,7 +140,7 @@ std::size_t SparseRelationTable::eraseTo(uint32_t to)
     return count;
 }
 
-std::size_t SparseRelationTable::moveTo(uint32_t to, SparseRelationTable& other)
+std::size_t SparseRelationTable::moveTo(uint32_t to, SparseRelationTable& other, Transformation transformation)
 {
     std::size_t count = 0;
 
@@ -142,7 +148,13 @@ std::size_t SparseRelationTable::moveTo(uint32_t to, SparseRelationTable& other)
     {
         auto rowIndex = mToRows.at(to).first;
         auto& row = mRows[rowIndex];
-        other.insert(row.from, row.to, this->at(rowIndex));
+        auto from = row.from;
+        auto to = row.to;
+        if (transformation == Transformation::Swap || (transformation == Transformation::SwapIfGreater && from > to))
+        {
+            std::swap(from, to);
+        }
+        other.insert(from, to, this->at(rowIndex));
         this->erase(row.from, row.to);
         count += 1;
     }

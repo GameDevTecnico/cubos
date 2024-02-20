@@ -253,6 +253,12 @@ namespace cubos::core::ecs
         /// @param depth New depth.
         void propagateDepth(uint32_t index, DataTypeId dataType, int depth);
 
+        /// @brief Moves tables in sparse data for the given entity to the given archetype.
+        /// @param entity Entity.
+        /// @param oldArchetype Old archetype.
+        /// @param newArchetype New archetype.
+        void moveSparse(Entity entity, ArchetypeId oldArchetype, ArchetypeId newArchetype);
+
         Types mTypes;
         EntityPool mEntityPool;
         ArchetypeGraph mArchetypeGraph;
