@@ -176,7 +176,9 @@ void Dispatcher::compileChain()
     // on move operations, just reverse the final list for the same effect.
     std::reverse(mSystems.begin(), mSystems.end());
 
-    CUBOS_INFO("Call chain completed successfully!");
+    CUBOS_DEBUG("Compiled system chain:");
+    mMainStep->debug(0);
+
     mPendingSystems.clear();
     mCurrSystem = nullptr;
     mTagSettings.clear();
@@ -253,6 +255,13 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
     return false;
 }
 
+void Dispatcher::SystemStep::debug(std::size_t depth)
+{
+    std::string indent = std::string(depth * 2, ' ');
+    std::string format = indent + "- system {}";
+    CUBOS_DEBUG(format.c_str(), mSystem->name);
+}
+
 void Dispatcher::SystemStep::call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
                                   std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                                   std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions)
@@ -296,6 +305,17 @@ void Dispatcher::SystemStep::call(CommandBuffer& cmds, std::vector<ecs::System<b
 
     // TODO: Check synchronization concerns when this gets multithreaded
     cmds.commit();
+}
+
+void Dispatcher::GroupStep::debug(std::size_t depth)
+{
+    std::string indent = std::string(depth * 2, ' ');
+    std::string format = indent + "- group {}:";
+    CUBOS_DEBUG(format.c_str(), groupTag);
+    for (auto& step : mSteps)
+    {
+        step->debug(depth + 1);
+    }
 }
 
 void Dispatcher::GroupStep::call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,

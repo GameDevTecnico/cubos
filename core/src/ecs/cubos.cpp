@@ -216,7 +216,8 @@ auto Cubos::SystemBuilder::other() && -> SystemBuilder&&
 
 void Cubos::SystemBuilder::finish(System<void> system)
 {
-    mDispatcher.addSystem(std::move(system));
+    CUBOS_DEBUG("Added system {}", mName);
+    mDispatcher.addSystem(std::move(mName), std::move(system));
 
     if (mCondition)
     {
@@ -237,8 +238,6 @@ void Cubos::SystemBuilder::finish(System<void> system)
     {
         mDispatcher.systemSetAfterTag(tag);
     }
-
-    CUBOS_DEBUG("Added system {}", mName);
 }
 
 Cubos::Cubos()

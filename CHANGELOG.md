@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Log the system order on the dispatcher (#414, **@RiscadoA**).
+
 ## [v0.1.0] - 2024-02-17
 
 ### Added
