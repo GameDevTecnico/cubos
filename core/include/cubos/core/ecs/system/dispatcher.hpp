@@ -85,8 +85,9 @@ namespace cubos::core::ecs
         void groupAddGroup();
 
         /// @brief Adds a system, and sets it as the current system for further configuration.
+        /// @param name System name.
         /// @param system System to add.
-        void addSystem(ecs::System<void> system);
+        void addSystem(std::string name, ecs::System<void> system);
 
         /// @brief Sets the tag for the current system.
         /// @param tag Tag to run under.
@@ -143,6 +144,7 @@ namespace cubos::core::ecs
         /// @brief Internal class to handle tag settings
         struct System
         {
+            std::string name;
             std::shared_ptr<SystemSettings> settings;
             ecs::System<void> system;
             std::unordered_set<std::string> tags;
@@ -153,6 +155,7 @@ namespace cubos::core::ecs
         {
         public:
             virtual ~Step() = default;
+            virtual void debug(std::size_t depth) = 0;
             virtual void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
                               std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                               std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) = 0;
@@ -165,6 +168,8 @@ namespace cubos::core::ecs
                 : mSystem(system)
             {
             }
+
+            void debug(std::size_t depth) override;
             void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
                       std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                       std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) override;
@@ -186,6 +191,8 @@ namespace cubos::core::ecs
                 , mParentStep(std::move(parentStep))
             {
             }
+
+            void debug(std::size_t depth) override;
             void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
                       std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                       std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) override;
@@ -328,10 +335,10 @@ namespace cubos::core::ecs
         mCurrGroup->conditions |= bit;
     }
 
-    inline void Dispatcher::addSystem(ecs::System<void> system)
+    inline void Dispatcher::addSystem(std::string name, ecs::System<void> system)
     {
         // Wrap the system and put it in the pending queue
-        mPendingSystems.push_back(new System{nullptr, std::move(system), {}});
+        mPendingSystems.push_back(new System{std::move(name), nullptr, std::move(system), {}});
         mCurrSystem = mPendingSystems.back();
     }
 

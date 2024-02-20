@@ -88,29 +88,29 @@ TEST_CASE("ecs::Dispatcher")
     {
         SUBCASE("without any constraints")
         {
-            dispatcher.addSystem(wrapSystem(pushToOrder<1>));
-            dispatcher.addSystem(wrapSystem(pushToOrder<2>));
-            dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+            dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
+            dispatcher.addSystem("2", wrapSystem(pushToOrder<2>));
+            dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
         }
 
         SUBCASE("with constraints on the systems")
         {
-            dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+            dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
             dispatcher.systemSetAfterTag("2"); // runs after "2"
-            dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+            dispatcher.addSystem("2", wrapSystem(pushToOrder<2>));
             dispatcher.systemAddTag("2");
             dispatcher.systemSetAfterTag("3"); // runs after "3"
-            dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+            dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
             dispatcher.systemAddTag("3");
         }
 
         SUBCASE("with constraints on the tags")
         {
-            dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+            dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
             dispatcher.systemAddTag("1");
-            dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+            dispatcher.addSystem("2", wrapSystem(pushToOrder<2>));
             dispatcher.systemAddTag("2");
-            dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+            dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
             dispatcher.systemAddTag("3");
 
             dispatcher.addTag("1");
@@ -125,13 +125,13 @@ TEST_CASE("ecs::Dispatcher")
 
     SUBCASE("1 runs first, then 3, and finally 2")
     {
-        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemAddTag("1");
         dispatcher.systemSetBeforeTag("3"); // runs before "3"
-        dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+        dispatcher.addSystem("2", wrapSystem(pushToOrder<2>));
         dispatcher.systemAddTag("2");
         dispatcher.systemSetAfterTag("3"); // runs after "3"
-        dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+        dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
         dispatcher.systemAddTag("3");
 
         SUBCASE("without any superfluous constraints")
@@ -163,12 +163,12 @@ TEST_CASE("ecs::Dispatcher")
 
     SUBCASE("systems run when all of their conditions are fulfilled")
     {
-        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemAddCondition(wrapCondition(pushToOrderAndSucceed<2>));
         dispatcher.systemAddCondition(wrapCondition(pushToOrderAndSucceed<3>));
-        dispatcher.addSystem(wrapSystem(pushToOrder<4>));
+        dispatcher.addSystem("4", wrapSystem(pushToOrder<4>));
         dispatcher.systemAddTag("4");
-        dispatcher.addSystem(wrapSystem(pushToOrder<5>));
+        dispatcher.addSystem("5", wrapSystem(pushToOrder<5>));
         dispatcher.systemAddTag("5");
 
         dispatcher.addTag("4");
@@ -188,12 +188,12 @@ TEST_CASE("ecs::Dispatcher")
 
     SUBCASE("systems do not run when their conditions are not met")
     {
-        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemAddTag("1");
         dispatcher.systemAddCondition(wrapCondition(pushToOrderAndSucceed<2>));
         dispatcher.systemAddCondition(wrapCondition(pushToOrderAndFail<3>));
         dispatcher.systemAddCondition(wrapCondition(pushToOrderAndSucceed<4>));
-        dispatcher.addSystem(wrapSystem(pushToOrder<5>));
+        dispatcher.addSystem("5", wrapSystem(pushToOrder<5>));
         dispatcher.systemAddTag("5");
 
         dispatcher.addTag("5");
@@ -206,7 +206,7 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.tagAddCondition(wrapCondition(pushToOrderAndFail<9>));
         dispatcher.tagAddCondition(wrapCondition(pushToOrderAndFail<10>));
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<11>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<11>));
         dispatcher.systemSetAfterTag("1");
 
         // First, 5 tries to run, but its condition 9 fails. The condition 10 is not checked.
@@ -219,11 +219,11 @@ TEST_CASE("ecs::Dispatcher")
     SUBCASE("constraints are transitive on tags without systems")
     {
         // Tests if #413 has been fixed.
-        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemSetBeforeTag("a");
         dispatcher.addTag("a");
         dispatcher.tagSetBeforeTag("b");
-        dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+        dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
         dispatcher.systemAddTag("b");
 
         // 1 runs before tag "a".
@@ -238,7 +238,7 @@ TEST_CASE("ecs::Dispatcher")
     {
         dispatcher.addTag("repeat");
         dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
-        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemAddGroup("repeat");
 
         singleDispatch(dispatcher, cmdBuffer);
@@ -254,16 +254,16 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.tagInheritTag("principal");
         dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemAddTag("principal");
         dispatcher.systemAddTag("first");
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+        dispatcher.addSystem("2", wrapSystem(pushToOrder<2>));
         dispatcher.systemAddTag("subtag");
         dispatcher.systemSetAfterTag("first");
         dispatcher.systemSetBeforeTag("last");
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+        dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
         dispatcher.systemAddTag("subtag");
         dispatcher.systemAddTag("last");
 
@@ -281,16 +281,16 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.tagInheritTag("principal");
         dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemAddTag("principal");
         dispatcher.systemAddTag("first");
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+        dispatcher.addSystem("2", wrapSystem(pushToOrder<2>));
         dispatcher.systemAddTag("subtag");
         dispatcher.systemSetAfterTag("first");
         dispatcher.systemSetBeforeTag("last");
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+        dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
         dispatcher.systemAddTag("subtag");
         dispatcher.systemAddTag("last");
 
@@ -308,16 +308,16 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.tagRepeatWhile(wrapCondition(succeed2Times));
         dispatcher.tagAddCondition(wrapCondition(pushToOrderAndSucceed<5>));
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<1>));
+        dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemAddTag("principal");
         dispatcher.systemAddTag("first");
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<2>));
+        dispatcher.addSystem("2", wrapSystem(pushToOrder<2>));
         dispatcher.systemAddTag("subtag");
         dispatcher.systemSetAfterTag("first");
         dispatcher.systemSetBeforeTag("last");
 
-        dispatcher.addSystem(wrapSystem(pushToOrder<3>));
+        dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
         dispatcher.systemAddTag("subtag");
         dispatcher.systemAddTag("last");
 
