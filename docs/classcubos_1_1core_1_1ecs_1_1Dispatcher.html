@@ -111,7 +111,8 @@
             </dt>
             <dd>Adds a (sub)group to the current group.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a4c899e81d143a9b6758eda41d450fa84" class="m-doc">addSystem</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;void&gt; system)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a073ff894f3d319856aa8045d5df980d5" class="m-doc">addSystem</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;void&gt; system)</span>
             </dt>
             <dd>Adds a system, and sets it as the current system for further configuration.</dd>
             <dt>
@@ -248,9 +249,10 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a4c899e81d143a9b6758eda41d450fa84"><div>
+          <section class="m-doc-details" id="a073ff894f3d319856aa8045d5df980d5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c899e81d143a9b6758eda41d450fa84" class="m-doc-self">addSystem</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;void&gt; system)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a073ff894f3d319856aa8045d5df980d5" class="m-doc-self">addSystem</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">ecs::<wbr />System</a>&lt;void&gt; system)</span></span>
             </h3>
             <p>Adds a system, and sets it as the current system for further configuration.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -259,7 +261,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">system</td>
+                  <td style="width: 1%">name</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">System</a> name.</td>
+                </tr>
+                <tr>
+                  <td>system</td>
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">System</a> to add.</td>
                 </tr>
               </tbody>
