@@ -267,6 +267,22 @@ TEST_CASE("ecs::SparseRelationTable") // NOLINT(readability-function-size)
 
     SUBCASE("moving from one table to another")
     {
+        auto transformation = SparseRelationTable::Transformation::None;
+
+        SUBCASE("without transformation")
+        {
+        }
+
+        SUBCASE("with swap transformation")
+        {
+            transformation = SparseRelationTable::Transformation::Swap;
+        }
+
+        SUBCASE("with swap if greater transformation")
+        {
+            transformation = SparseRelationTable::Transformation::SwapIfGreater;
+        }
+
         bool flag1 = false;
         bool flag2 = false;
         DetectDestructorRelation detector1{{&flag1}};
@@ -277,33 +293,70 @@ TEST_CASE("ecs::SparseRelationTable") // NOLINT(readability-function-size)
 
         // Insert two relations into the source table.
         REQUIRE_FALSE(srcTable.insert(1, 2, &detector1));
-        REQUIRE_FALSE(srcTable.insert(2, 1, &detector2));
+        REQUIRE_FALSE(srcTable.insert(3, 1, &detector2));
         REQUIRE(srcTable.contains(1, 2));
-        REQUIRE(srcTable.contains(2, 1));
+        REQUIRE(srcTable.contains(3, 1));
 
         // Move the relations with from index 1 to the destination table.
-        REQUIRE(srcTable.moveFrom(1, dstTable));
+        REQUIRE(srcTable.moveFrom(1, dstTable, transformation));
         REQUIRE_FALSE(flag1);
         REQUIRE_FALSE(flag2);
         REQUIRE_FALSE(srcTable.contains(1, 2));
-        REQUIRE(srcTable.contains(2, 1));
-        REQUIRE(dstTable.contains(1, 2));
-        REQUIRE_FALSE(dstTable.contains(2, 1));
+        REQUIRE(srcTable.contains(3, 1));
+
+        if (transformation == SparseRelationTable::Transformation::Swap)
+        {
+            REQUIRE(dstTable.contains(2, 1));
+            REQUIRE_FALSE(dstTable.contains(1, 3));
+        }
+        else
+        {
+            REQUIRE(dstTable.contains(1, 2));
+            REQUIRE_FALSE(dstTable.contains(3, 1));
+        }
 
         // Move the relations with to index 1 to the destination table.
-        REQUIRE(srcTable.moveTo(1, dstTable));
+        REQUIRE(srcTable.moveTo(1, dstTable, transformation));
         REQUIRE_FALSE(flag1);
         REQUIRE_FALSE(flag2);
         REQUIRE_FALSE(srcTable.contains(1, 2));
-        REQUIRE_FALSE(srcTable.contains(2, 1));
-        REQUIRE(dstTable.contains(1, 2));
-        REQUIRE(dstTable.contains(2, 1));
+        REQUIRE_FALSE(srcTable.contains(3, 1));
 
-        // Erase both relations.
-        REQUIRE(dstTable.erase(1, 2));
-        REQUIRE(flag1);
-        REQUIRE_FALSE(flag2);
-        REQUIRE(dstTable.erase(2, 1));
-        REQUIRE(flag2);
+        if (transformation == SparseRelationTable::Transformation::Swap)
+        {
+            REQUIRE(dstTable.contains(2, 1));
+            REQUIRE(dstTable.contains(1, 3));
+
+            // Erase both relations.
+            REQUIRE(dstTable.erase(2, 1));
+            REQUIRE(flag1);
+            REQUIRE_FALSE(flag2);
+            REQUIRE(dstTable.erase(1, 3));
+            REQUIRE(flag2);
+        }
+        else if (transformation == SparseRelationTable::Transformation::SwapIfGreater)
+        {
+            REQUIRE(dstTable.contains(1, 2));
+            REQUIRE(dstTable.contains(1, 3));
+
+            // Erase both relations.
+            REQUIRE(dstTable.erase(1, 2));
+            REQUIRE(flag1);
+            REQUIRE_FALSE(flag2);
+            REQUIRE(dstTable.erase(1, 3));
+            REQUIRE(flag2);
+        }
+        else
+        {
+            REQUIRE(dstTable.contains(1, 2));
+            REQUIRE(dstTable.contains(3, 1));
+
+            // Erase both relations.
+            REQUIRE(dstTable.erase(1, 2));
+            REQUIRE(flag1);
+            REQUIRE_FALSE(flag2);
+            REQUIRE(dstTable.erase(3, 1));
+            REQUIRE(flag2);
+        }
     }
 }

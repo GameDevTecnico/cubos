@@ -152,19 +152,21 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
     auto dataType = mTypes.id(type);
     CUBOS_ASSERT(mTypes.isRelation(dataType), "Type {} is not registered as a relation", type.name());
 
-    if (mTypes.isSymmetricRelation(dataType))
-    {
-        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
-        // the one with the lowest index.
-        if (from.index > to.index)
-        {
-            std::swap(from, to);
-        }
-    }
-
     // Create a sparse relation table identifier from the archetypes of both entities.
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
+
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // Guarantee symmetry invariant.
+        if (fromArchetype.inner > toArchetype.inner ||
+            (fromArchetype.inner == toArchetype.inner && from.index > to.index))
+        {
+            std::swap(from, to);
+            std::swap(fromArchetype, toArchetype);
+        }
+    }
+
     auto tableId = SparseRelationTableId{dataType, fromArchetype, toArchetype};
 
     if (mTypes.isTreeRelation(dataType))
@@ -230,18 +232,19 @@ void World::unrelate(Entity from, Entity to, const reflection::Type& type)
     auto dataType = mTypes.id(type);
     CUBOS_ASSERT(mTypes.isRelation(dataType), "Type {} is not registered as a relation", type.name());
 
-    if (mTypes.isSymmetricRelation(dataType))
-    {
-        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
-        // the one with the lowest index.
-        if (from.index > to.index)
-        {
-            std::swap(from, to);
-        }
-    }
-
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
+
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // Guarantee symmetry invariant.
+        if (fromArchetype.inner > toArchetype.inner ||
+            (fromArchetype.inner == toArchetype.inner && from.index > to.index))
+        {
+            std::swap(from, to);
+            std::swap(fromArchetype, toArchetype);
+        }
+    }
 
     // Search for the table with the right depth which contains the relation.
     for (int depth = 0, maxDepth = mTables.sparseRelation().type(dataType).maxDepth(); depth <= maxDepth; ++depth)
@@ -275,18 +278,19 @@ bool World::related(Entity from, Entity to, const reflection::Type& type) const
     auto dataType = mTypes.id(type);
     CUBOS_ASSERT(mTypes.isRelation(dataType));
 
-    if (mTypes.isSymmetricRelation(dataType))
-    {
-        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
-        // the one with the lowest index.
-        if (from.index > to.index)
-        {
-            std::swap(from, to);
-        }
-    }
-
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
+
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // Guarantee symmetry invariant.
+        if (fromArchetype.inner > toArchetype.inner ||
+            (fromArchetype.inner == toArchetype.inner && from.index > to.index))
+        {
+            std::swap(from, to);
+            std::swap(fromArchetype, toArchetype);
+        }
+    }
 
     // Check if there's a table with the given archetypes and any depth which contains the relation.
     for (int depth = 0, maxDepth = mTables.sparseRelation().type(dataType).maxDepth(); depth <= maxDepth; ++depth)
@@ -310,18 +314,19 @@ void* World::relation(Entity from, Entity to, const reflection::Type& type)
     auto dataType = mTypes.id(type);
     CUBOS_ASSERT(mTypes.isRelation(dataType));
 
-    if (mTypes.isSymmetricRelation(dataType))
-    {
-        // If the relation is symmetric, then we need to make sure that the 'from' entity is always
-        // the one with the lowest index.
-        if (from.index > to.index)
-        {
-            std::swap(from, to);
-        }
-    }
-
     auto fromArchetype = mEntityPool.archetype(from.index);
     auto toArchetype = mEntityPool.archetype(to.index);
+
+    if (mTypes.isSymmetricRelation(dataType))
+    {
+        // Guarantee symmetry invariant.
+        if (fromArchetype.inner > toArchetype.inner ||
+            (fromArchetype.inner == toArchetype.inner && from.index > to.index))
+        {
+            std::swap(from, to);
+            std::swap(fromArchetype, toArchetype);
+        }
+    }
 
     // Check if there's a table with the given archetypes and any depth which contains the relation.
     for (int depth = 0, maxDepth = mTables.sparseRelation().type(dataType).maxDepth(); depth <= maxDepth; ++depth)
@@ -413,7 +418,88 @@ void World::propagateDepth(uint32_t index, DataTypeId dataType, int depth)
             auto newTableId = tableId;
             newTableId.depth = depth;
             auto& newTable = mTables.sparseRelation().create(newTableId, mTypes);
-            table.moveTo(index, newTable);
+            table.moveTo(index, newTable, SparseRelationTable::Transformation::None);
+        }
+    }
+}
+
+void World::moveSparse(Entity entity, ArchetypeId oldArchetype, ArchetypeId newArchetype)
+{
+    // For each sparse relation table the entity is on, move its relations to the new corresponding one.
+    for (const auto& [type, index] : mTables.sparseRelation())
+    {
+        // For each table where the entity's archetype is the 'from' archetype.
+        if (index.from().contains(oldArchetype))
+        {
+            // If the new archetype's index is greater than the old archetype's index, then we may need to flip some
+            // relations.
+            bool swap = mTypes.isSymmetricRelation(type) && newArchetype.inner > oldArchetype.inner;
+
+            auto oldTableIds = index.from().at(oldArchetype);
+            for (const auto& oldTableId : oldTableIds)
+            {
+                auto newTableId = oldTableId;
+                newTableId.from = newArchetype;
+
+                auto transformation = SparseRelationTable::Transformation::None;
+
+                // If the relation is symmetric, we may need to apply some transformations to the relations to keep the
+                // invariant that the 'from' entity's archetype index is always lower than the 'to' entity's archetype
+                // index, or if both entities are in the same archetype, then the 'from' entity's index is lower.
+                if (swap)
+                {
+                    if (newTableId.from.inner == newTableId.to.inner)
+                    {
+                        transformation = SparseRelationTable::Transformation::SwapIfGreater;
+                    }
+                    else if (newTableId.from.inner > newTableId.to.inner)
+                    {
+                        transformation = SparseRelationTable::Transformation::Swap;
+                        std::swap(newTableId.from, newTableId.to);
+                    }
+                }
+
+                // Move all occurrences of the entity in the 'from' column to the new table.
+                auto& newTable = mTables.sparseRelation().create(newTableId, mTypes);
+                mTables.sparseRelation().at(oldTableId).moveFrom(entity.index, newTable, transformation);
+            }
+        }
+
+        // For each table where the entity's archetype is the 'to' archetype.
+        if (index.to().contains(oldArchetype))
+        {
+            // If the new archetype's index is smaller than the old archetype's index, then we may need to flip some
+            // relations.
+            bool swap = mTypes.isSymmetricRelation(type) && newArchetype.inner < oldArchetype.inner;
+
+            auto oldTableIds = index.to().at(oldArchetype);
+            for (const auto& oldTableId : oldTableIds)
+            {
+                auto newTableId = oldTableId;
+                newTableId.to = newArchetype;
+
+                auto transformation = SparseRelationTable::Transformation::None;
+
+                // If the relation is symmetric, we may need to apply some transformations to the relations to keep the
+                // invariant that the 'from' entity's archetype index is always lower than the 'to' entity's archetype
+                // index, or if both entities are in the same archetype, then the 'from' entity's index is lower.
+                if (swap)
+                {
+                    if (newTableId.from.inner == newTableId.to.inner)
+                    {
+                        transformation = SparseRelationTable::Transformation::SwapIfGreater;
+                    }
+                    else if (newTableId.from.inner > newTableId.to.inner)
+                    {
+                        transformation = SparseRelationTable::Transformation::Swap;
+                        std::swap(newTableId.from, newTableId.to);
+                    }
+                }
+
+                // Move all occurrences of the entity in the 'to' column to the new table.
+                auto& newTable = mTables.sparseRelation().create(newTableId, mTypes);
+                mTables.sparseRelation().at(oldTableId).moveTo(entity.index, newTable, transformation);
+            }
         }
     }
 }
@@ -478,35 +564,8 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
     oldTable.swapMove(mEntity.index, newTable);
     newTable.column(columnId).pushMove(value);
 
-    // For each sparse relation table the entity is on, move its relations to the new corresponding one.
-    for (const auto& [_, index] : mWorld.mTables.sparseRelation())
-    {
-        // For each table where the entity's archetype is the 'from' archetype.
-        if (index.from().contains(oldArchetype))
-        {
-            for (const auto& oldTableId : index.from().at(oldArchetype))
-            {
-                // Move all occurrences of the entity in the 'from' column to the new table.
-                auto newTableId = oldTableId;
-                newTableId.from = newArchetype;
-                auto& newTable = mWorld.mTables.sparseRelation().create(newTableId, mWorld.mTypes);
-                mWorld.mTables.sparseRelation().at(oldTableId).moveFrom(mEntity.index, newTable);
-            }
-        }
-
-        // For each table where the entity's archetype is the 'to' archetype.
-        if (index.to().contains(oldArchetype))
-        {
-            for (const auto& oldTableId : index.to().at(oldArchetype))
-            {
-                // Move all occurrences of the entity in the 'to' column to the new table.
-                auto newTableId = oldTableId;
-                newTableId.to = newArchetype;
-                auto& newTable = mWorld.mTables.sparseRelation().create(newTableId, mWorld.mTypes);
-                mWorld.mTables.sparseRelation().at(oldTableId).moveTo(mEntity.index, newTable);
-            }
-        }
-    }
+    // Move sparse data to the new tables.
+    mWorld.moveSparse(mEntity, oldArchetype, newArchetype);
 
     CUBOS_TRACE("Added component {} to entity {}", type.name(), mEntity, mEntity);
     return *this;
@@ -537,35 +596,8 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
     // Move the entity from the old table to the new one.
     oldTable.swapMove(mEntity.index, newTable);
 
-    // For each sparse relation table the entity is on, move its relations to the new corresponding one.
-    for (const auto& [_, index] : mWorld.mTables.sparseRelation())
-    {
-        // For each table where the entity's archetype is the 'from' archetype.
-        if (index.from().contains(oldArchetype))
-        {
-            for (const auto& oldTableId : index.from().at(oldArchetype))
-            {
-                // Move all occurrences of the entity in the 'from' column to the new table.
-                auto newTableId = oldTableId;
-                newTableId.from = newArchetype;
-                auto& newTable = mWorld.mTables.sparseRelation().create(newTableId, mWorld.mTypes);
-                mWorld.mTables.sparseRelation().at(oldTableId).moveFrom(mEntity.index, newTable);
-            }
-        }
-
-        // For each table where the entity's archetype is the 'to' archetype.
-        if (index.to().contains(oldArchetype))
-        {
-            for (const auto& oldTableId : index.to().at(oldArchetype))
-            {
-                // Move all occurrences of the entity in the 'to' column to the new table.
-                auto newTableId = oldTableId;
-                newTableId.to = newArchetype;
-                auto& newTable = mWorld.mTables.sparseRelation().create(newTableId, mWorld.mTypes);
-                mWorld.mTables.sparseRelation().at(oldTableId).moveTo(mEntity.index, newTable);
-            }
-        }
-    }
+    // Move sparse data to the new tables.
+    mWorld.moveSparse(mEntity, oldArchetype, newArchetype);
 
     CUBOS_TRACE("Removed component {} from entity {}", type.name(), mEntity);
     return *this;

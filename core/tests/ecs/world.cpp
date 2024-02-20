@@ -337,5 +337,48 @@ TEST_CASE("ecs::World")
         world.destroy(foo);
         REQUIRE(destroyed);
     }
+
+    SUBCASE("symmetric relation invariant is kept")
+    {
+        auto foo = world.create();
+        auto bar = world.create();
+        REQUIRE(foo.index < bar.index);
+        REQUIRE(world.archetype(foo) == world.archetype(bar));
+
+        // Since foo < bar, and both have the same archetype, the relation should be stored as (foo, bar).
+        world.relate(bar, foo, SymmetricRelation{.value = 1});
+        SparseRelationTableId tableId{world.types().id("SymmetricRelation"), world.archetype(foo),
+                                      world.archetype(bar)};
+        REQUIRE(world.tables().sparseRelation().contains(tableId));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+
+        // If we change the archetype of foo, the relation should now be stored as (bar, foo), if
+        // foo's archetype is now greater than bar's.
+        world.components(foo).add(IntegerComponent{0});
+        REQUIRE(world.archetype(foo).inner > world.archetype(bar).inner);
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(bar.index, foo.index));
+        tableId.from = world.archetype(bar);
+        tableId.to = world.archetype(foo);
+        REQUIRE(world.tables().sparseRelation().contains(tableId));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(bar.index, foo.index));
+
+        // If we move foo back to the original archetype, the relation should be stored as (foo, bar) again.
+        world.components(foo).remove<IntegerComponent>();
+        REQUIRE(world.archetype(foo) == world.archetype(bar));
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(bar.index, foo.index));
+        tableId.from = world.archetype(foo);
+        tableId.to = world.archetype(bar);
+        REQUIRE(world.tables().sparseRelation().contains(tableId));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+
+        // If we change bar's archetype to be greater than foo's, the relation should be still be stored as (foo, bar).
+        world.components(bar).add(IntegerComponent{0});
+        REQUIRE(world.archetype(bar).inner > world.archetype(foo).inner);
+        REQUIRE_FALSE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+        tableId.from = world.archetype(foo);
+        tableId.to = world.archetype(bar);
+        REQUIRE(world.tables().sparseRelation().contains(tableId));
+        REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
+    }
 }
 // NOLINTEND(readability-function-size)
