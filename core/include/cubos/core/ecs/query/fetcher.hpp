@@ -113,6 +113,7 @@ namespace cubos::core::ecs
             : mWorld{world}
             , mDataType{world.types().id(reflection::reflect<T>())}
             , mIsComponent{world.types().isComponent(mDataType)}
+            , mIsSymmetric{world.types().isSymmetricRelation(mDataType)}
         {
             if (mIsComponent)
             {
@@ -151,11 +152,15 @@ namespace cubos::core::ecs
             }
             else
             {
-                mSparseRelationTable = &mWorld.tables().sparseRelation().at({
-                    mDataType,
-                    targetArchetypes[mTargets[0]],
-                    targetArchetypes[mTargets[1]],
-                });
+                auto fromArchetype = targetArchetypes[mTargets[0]];
+                auto toArchetype = targetArchetypes[mTargets[1]];
+
+                if (mIsSymmetric && fromArchetype.inner > toArchetype.inner)
+                {
+                    std::swap(fromArchetype, toArchetype);
+                }
+
+                mSparseRelationTable = &mWorld.tables().sparseRelation().at({mDataType, fromArchetype, toArchetype});
             }
         }
 
@@ -176,6 +181,7 @@ namespace cubos::core::ecs
         SparseRelationTable* mSparseRelationTable{nullptr};
         int mTargets[2];
         bool mIsComponent;
+        bool mIsSymmetric;
     };
 
     template <reflection::Reflectable T>
@@ -186,6 +192,7 @@ namespace cubos::core::ecs
             : mWorld{world}
             , mDataType{world.types().id(reflection::reflect<T>())}
             , mIsComponent{world.types().isComponent(mDataType)}
+            , mIsSymmetric{world.types().isSymmetricRelation(mDataType)}
         {
             if (mIsComponent)
             {
@@ -224,11 +231,15 @@ namespace cubos::core::ecs
             }
             else
             {
-                mSparseRelationTable = &mWorld.tables().sparseRelation().at({
-                    mDataType,
-                    targetArchetypes[mTargets[0]],
-                    targetArchetypes[mTargets[1]],
-                });
+                auto fromArchetype = targetArchetypes[mTargets[0]];
+                auto toArchetype = targetArchetypes[mTargets[1]];
+
+                if (mIsSymmetric && fromArchetype.inner > toArchetype.inner)
+                {
+                    std::swap(fromArchetype, toArchetype);
+                }
+
+                mSparseRelationTable = &mWorld.tables().sparseRelation().at({mDataType, fromArchetype, toArchetype});
             }
         }
 
@@ -249,6 +260,7 @@ namespace cubos::core::ecs
         SparseRelationTable* mSparseRelationTable{nullptr};
         int mTargets[2];
         bool mIsComponent;
+        bool mIsSymmetric;
     };
 
     template <reflection::Reflectable T>

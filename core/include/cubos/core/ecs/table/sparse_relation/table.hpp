@@ -36,6 +36,17 @@ namespace cubos::core::ecs
     class SparseRelationTable final
     {
     public:
+        /// @brief Transformations to apply while moving relations between tables.
+        enum class Transformation
+        {
+            /// @brief Keep the relations as they are.
+            None,
+            /// @brief Flip the 'from' and 'to' indices.
+            Swap,
+            /// @brief Swap if the 'from' index is greater than the 'to' index.
+            SwapIfGreater,
+        };
+
         /// @brief Used to iterate over the relations in a table.
         class Iterator;
 
@@ -69,8 +80,9 @@ namespace cubos::core::ecs
         /// @brief Moves all relations with the given from index to another table.
         /// @param from From index.
         /// @param other Other table. Must have the same relation type.
+        /// @param transformation Transformation to apply to the relations.
         /// @return How many relations were erased.
-        std::size_t moveFrom(uint32_t from, SparseRelationTable& other);
+        std::size_t moveFrom(uint32_t from, SparseRelationTable& other, Transformation transformation);
 
         /// @brief Removes all relations to the given index.
         /// @param to To index.
@@ -80,8 +92,9 @@ namespace cubos::core::ecs
         /// @brief Moves all relations with the given to index to another table.
         /// @param to To index index.
         /// @param other Other table. Must have the same relation type.
+        /// @param transformation Transformation to apply to the relations.
         /// @return How many relations were moved.
-        std::size_t moveTo(uint32_t to, SparseRelationTable& other);
+        std::size_t moveTo(uint32_t to, SparseRelationTable& other, Transformation transformation);
 
         /// @brief Checks whether the given relation exists between the given indices.
         /// @param from From index.
