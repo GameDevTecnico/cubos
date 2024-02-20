@@ -46,6 +46,8 @@ static void setViewportCameras(glm::ivec2 position, glm::ivec2 size, int count, 
 
 void cubos::engine::splitscreenPlugin(Cubos& cubos)
 {
+    cubos.addPlugin(cubos::engine::rendererPlugin);
+
     cubos.system("split screen for each Viewport")
         .tagged("cubos.renderer.frame")
         .call([](Commands commands, Renderer& renderer, const ActiveCameras& activeCameras,

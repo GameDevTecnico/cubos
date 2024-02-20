@@ -187,8 +187,8 @@ static std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>> getScreenInfo(c
 
 void cubos::engine::gizmosPlugin(Cubos& cubos)
 {
+    cubos.addPlugin(cubos::engine::rendererPlugin);
     cubos.addPlugin(cubos::engine::screenPickerPlugin);
-    cubos.addPlugin(cubos::engine::windowPlugin);
 
     cubos.addResource<Gizmos>();
     cubos.addResource<GizmosRenderer>();
