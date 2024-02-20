@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Log the system order on the dispatcher (#414, **@RiscadoA**).
 
+### Fixed
+
+- Crash in multiple samples due to missing plugin dependencies (**@RiscadoA**).
+
 ## [v0.1.0] - 2024-02-17
 
 ### Added

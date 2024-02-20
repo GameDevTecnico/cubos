@@ -1,5 +1,6 @@
 #include <glm/glm.hpp>
 
+#include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/solver.hpp>
 #include <cubos/engine/settings/plugin.hpp>
@@ -80,6 +81,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.addComponent<PreviousPosition>();
     cubos.addComponent<PhysicsBundle>();
 
+    cubos.addPlugin(collisionsPlugin);
     cubos.addPlugin(gravityPlugin);
     cubos.addPlugin(solverPlugin);
 
