@@ -90,6 +90,8 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/screen_picker/plugin.cpp"
 	"src/screen_picker/screen_picker.cpp"
+	
+	"src/fixed_step/plugin.cpp"
 )
 
 # Create cubos engine

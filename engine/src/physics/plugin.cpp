@@ -1,12 +1,11 @@
 #include <glm/glm.hpp>
 
 #include <cubos/engine/collisions/plugin.hpp>
+#include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/solver.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
-
-#include "physics_accumulator.hpp"
 
 using namespace cubos::engine;
 
@@ -61,16 +60,9 @@ CUBOS_REFLECT_IMPL(PhysicsBundle)
         .build();
 }
 
-static bool simulatePhysicsStep(PhysicsAccumulator& accumulator, const FixedDeltaTime& fixedDeltaTime)
-{
-    return accumulator.value >= fixedDeltaTime.value;
-}
-
 void cubos::engine::physicsPlugin(Cubos& cubos)
 {
-    cubos.addResource<FixedDeltaTime>();
     cubos.addResource<Substeps>();
-    cubos.addResource<PhysicsAccumulator>();
     cubos.addResource<Damping>();
 
     cubos.addComponent<Velocity>();
@@ -84,6 +76,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.addPlugin(collisionsPlugin);
     cubos.addPlugin(gravityPlugin);
     cubos.addPlugin(solverPlugin);
+    cubos.addPlugin(fixedStepPlugin);
 
     // add components to entities created with PhysicsBundle
     cubos.system("unpack PhysicsBundle's")
@@ -108,22 +101,13 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
             }
         });
 
-    // executed every frame
-    cubos.system("increase fixed-step accumulator")
-        .tagged("cubos.physics.simulation.prepare")
-        .call(
-            [](PhysicsAccumulator& accumulator, const DeltaTime& deltaTime) { accumulator.value += deltaTime.value; });
-
-    cubos.tag("cubos.physics.apply_forces")
-        .after("cubos.physics.simulation.prepare")
-        .before("cubos.physics.simulation.substeps.integrate")
-        .runIf(simulatePhysicsStep);
+    cubos.tag("cubos.physics.apply_forces").before("cubos.physics.simulation.substeps.integrate");
 
     cubos.system("apply impulses")
         .tagged("cubos.physics.simulation.apply_impulses")
         .after("cubos.physics.apply_forces")
         .before("cubos.physics.simulation.substeps.integrate")
-        .onlyIf(simulatePhysicsStep)
+        .tagged("cubos.fixedStep")
         .call([](Query<Velocity&, const Impulse&, const Mass&> query) {
             for (auto [velocity, impulse, mass] : query)
             {
@@ -133,8 +117,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
 
     cubos.system("integrate position")
         .tagged("cubos.physics.simulation.substeps.integrate")
-        .after("cubos.physics.simulation.prepare")
-        .onlyIf(simulatePhysicsStep)
+        .tagged("cubos.fixedStep")
         .call([](Query<Position&, PreviousPosition&, Velocity&, const Force&, const Mass&> query,
                  const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
@@ -162,7 +145,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.system("apply corrections to positions")
         .tagged("cubos.physics.simulation.substeps.correct_position")
         .after("cubos.physics.simulation.substeps.integrate")
-        .onlyIf(simulatePhysicsStep)
+        .tagged("cubos.fixedStep")
         .call([](Query<Position&, AccumulatedCorrection&, Mass&> query) {
             for (auto [position, correction, mass] : query)
             {
@@ -178,7 +161,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.system("update velocities")
         .tagged("cubos.physics.simulation.substeps.update_velocity")
         .after("cubos.physics.simulation.substeps.correct_position")
-        .onlyIf(simulatePhysicsStep)
+        .tagged("cubos.fixedStep")
         .call([](Query<const Position&, const PreviousPosition&, Velocity&> query, const FixedDeltaTime& fixedDeltaTime,
                  const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
@@ -192,7 +175,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.system("clear forces")
         .tagged("cubos.physics.simulation.clear_forces")
         .after("cubos.physics.simulation.substeps.update_velocity")
-        .onlyIf(simulatePhysicsStep)
+        .tagged("cubos.fixedStep")
         .call([](Query<Force&> query) {
             for (auto [force] : query)
             {
@@ -203,19 +186,11 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.system("clear impulses")
         .tagged("cubos.physics.simulation.clear_forces")
         .after("cubos.physics.simulation.substeps.update_velocity")
-        .onlyIf(simulatePhysicsStep)
+        .tagged("cubos.fixedStep")
         .call([](Query<Impulse&> query) {
             for (auto [impulse] : query)
             {
                 impulse.clear();
             }
-        });
-
-    cubos.system("decrease fixed-step accumulator")
-        .tagged("cubos.physics.simulation.decrease_accumulator")
-        .after("cubos.physics.simulation.clear_forces")
-        .onlyIf(simulatePhysicsStep)
-        .call([](PhysicsAccumulator& accumulator, const FixedDeltaTime& fixedDeltaTime) {
-            accumulator.value -= fixedDeltaTime.value;
         });
 }
