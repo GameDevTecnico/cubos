@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Engine &raquo; Assets module | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          Assets <span class="m-thin">module</span></h1>
+        <p>Adds asset management to <strong>CUBOS</strong>.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li><a href="#autotoc_md53">Settings</a></li>
+            <li><a href="#autotoc_md54">Events</a></li>
+            <li><a href="#autotoc_md55">Resources</a></li>
+            <li><a href="#autotoc_md56">Startup tags</a></li>
+            <li><a href="#autotoc_md57">Tags</a></li>
+            <li><a href="#autotoc_md58">Dependencies</a></li>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<section id="autotoc_md53"><h3><a href="#autotoc_md53">Settings</a></h3><ul><li><code>assets.io.enabled</code> - whether asset I/O should be done (default: <code>true</code>).</li><li><code>assets.io.path</code> - path to the assets directory - will be mounted to <code>/assets/</code> (default: <code>assets/</code>).</li><li><code>assets.io.readOnly</code> - if true, the assets directory will be mounted as read-only (default: <code>true</code>).</li></ul></section><section id="autotoc_md54"><h3><a href="#autotoc_md54">Events</a></h3><ul><li>AssetEvent - (TODO) emitted when an asset is either loaded, modified or unloaded.</li></ul></section><section id="autotoc_md55"><h3><a href="#autotoc_md55">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> - the asset manager, used to access asset data.</li></ul></section><section id="autotoc_md56"><h3><a href="#autotoc_md56">Startup tags</a></h3><ul><li><code>cubos.assets.init</code> - initializes the assets manager and loads the meta files (after <code>cubos.settings</code>).</li><li><code>cubos.assets.bridge</code> - systes which add bridges to the asset manager should be tagged with this.</li><li><code>cubos.assets</code> - startup systems which load assets should be tagged with this.</li></ul></section><section id="autotoc_md57"><h3><a href="#autotoc_md57">Tags</a></h3><ul><li><code>cubos.assets.cleanup</code> - frees any assets no longer in use.</li></ul></section><section id="autotoc_md58"><h3><a href="#autotoc_md58">Dependencies</a></h3><ul><li><a href="group__settings-plugin.html" class="m-doc">Settings</a></li></ul></section>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
+          <dl class="m-doc">
+            <dt>file <a href="asset_8hpp.html" class="m-doc">asset.hpp</a></dt>
+            <dd>Classes <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a> and <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">cubos::<wbr />engine::<wbr />Asset</a>.</dd>
+            <dt>file <a href="assets_8hpp.html" class="m-doc">assets.hpp</a></dt>
+            <dd>Resource <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>.</dd>
+            <dt>file <a href="assets_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />AssetBridge</a>.</dd>
+            <dt>file <a href="binary_8hpp.html" class="m-doc">binary.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1BinaryBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />BinaryBridge</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2assets_2bridges_2file_8hpp.html" class="m-doc">file.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />FileBridge</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2assets_2bridges_2json_8hpp.html" class="m-doc">json.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />JSONBridge</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2assets_2bridges_2old_2json_8hpp.html" class="m-doc">json.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />JSONBridge</a>.</dd>
+            <dt>file <a href="meta_8hpp.html" class="m-doc">meta.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1AssetMeta.html" class="m-doc">cubos::<wbr />engine::<wbr />AssetMeta</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2assets_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::engine::AnyAsset</a>
+            </dt>
+            <dd>Handle to an asset of any type. May either be weak or strong. Weak handles do not guarantee the asset is loaded, while strong handles do.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;core::reflection::Reflectable T&gt;</div>
+              class <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">cubos::engine::Asset</a>
+            </dt>
+            <dd>Handle to an asset of a specific type.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::engine::Assets</a>
+            </dt>
+            <dd>Resource which manages all assets. Responsible for loading and unloading assets, storing them in memory, and providing access to them.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">cubos::engine::AssetBridge</a>
+            </dt>
+            <dd>Bridges are the objects responsible for loading and saving assets from/to disk. They form the bridge between the asset manager and the virtual file system.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1engine_1_1BinaryBridge.html" class="m-doc">cubos::engine::BinaryBridge</a>
+            </dt>
+            <dd>Bridge for loading and saving assets which are serialized to and from a binary file.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">cubos::engine::FileBridge</a>
+            </dt>
+            <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">cubos::engine::JSONBridge</a>
+            </dt>
+            <dd>Bridge for loading and saving assets which are serialized to and from a JSON file.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1engine_1_1old_1_1JSONBridge.html" class="m-doc">cubos::engine::old::JSONBridge</a>
+            </dt>
+            <dd>Bridge for loading and saving assets which are serialized to and from a JSON file.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1AssetMeta.html" class="m-doc">cubos::engine::AssetMeta</a>
+            </dt>
+            <dd>Stores metadata about an asset - the data stored in .meta files. Each asset has a corresponding meta object, which contains load or import parameters.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="#ga7b93d7e0cc9a1705899e577d770eac16" class="m-doc">AssetMetaRead</a> = core::memory::ReadGuard&lt;AssetMeta, std::shared_lock&lt;std::shared_mutex&gt;&gt;
+            </dt>
+            <dd>Read-only guard for an asset&#x27;s metadata.</dd>
+            <dt>
+              using <a href="#ga2483ca387767b2bae7735d3bac3c138b" class="m-doc">AssetMetaWrite</a> = core::memory::WriteGuard&lt;AssetMeta, std::unique_lock&lt;std::shared_mutex&gt;&gt;
+            </dt>
+            <dd>Read-write guard for an asset&#x27;s metadata.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="#gaceca2b8de7d01d914f7d9ce5fffd40a5" class="m-doc">AssetRead</a> = core::memory::ReadGuard&lt;T, std::shared_lock&lt;std::shared_mutex&gt;&gt;
+            </dt>
+            <dd>Read-only guard for an asset&#x27;s data.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="#ga3befb4912d95d097c98bc627a8e7cf97" class="m-doc">AssetWrite</a> = core::memory::WriteGuard&lt;T, std::unique_lock&lt;std::shared_mutex&gt;&gt;
+            </dt>
+            <dd>Read-write guard for an asset&#x27;s data.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#gad4b3f1b0d0d3fa8c8951129860b5f0d1" class="m-doc">assetsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="ga7b93d7e0cc9a1705899e577d770eac16"><div>
+            <h3>
+              using <a href="#ga7b93d7e0cc9a1705899e577d770eac16" class="m-doc-self">AssetMetaRead</a> = core::memory::ReadGuard&lt;AssetMeta, std::shared_lock&lt;std::shared_mutex&gt;&gt;
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="assets_8hpp.html">&lt;engine/assets/assets.hpp&gt;</a></div>
+            </h3>
+            <p>Read-only guard for an asset&#x27;s metadata.</p>
+          </div></section>
+          <section class="m-doc-details" id="ga2483ca387767b2bae7735d3bac3c138b"><div>
+            <h3>
+              using <a href="#ga2483ca387767b2bae7735d3bac3c138b" class="m-doc-self">AssetMetaWrite</a> = core::memory::WriteGuard&lt;AssetMeta, std::unique_lock&lt;std::shared_mutex&gt;&gt;
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="assets_8hpp.html">&lt;engine/assets/assets.hpp&gt;</a></div>
+            </h3>
+            <p>Read-write guard for an asset&#x27;s metadata.</p>
+          </div></section>
+          <section class="m-doc-details" id="gaceca2b8de7d01d914f7d9ce5fffd40a5"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="assets_8hpp.html">&lt;engine/assets/assets.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              using <a href="#gaceca2b8de7d01d914f7d9ce5fffd40a5" class="m-doc-self">AssetRead</a> = core::memory::ReadGuard&lt;T, std::shared_lock&lt;std::shared_mutex&gt;&gt;
+            </h3>
+            <p>Read-only guard for an asset&#x27;s data.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>The type of the data to guard.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga3befb4912d95d097c98bc627a8e7cf97"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="assets_8hpp.html">&lt;engine/assets/assets.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              using <a href="#ga3befb4912d95d097c98bc627a8e7cf97" class="m-doc-self">AssetWrite</a> = core::memory::WriteGuard&lt;T, std::unique_lock&lt;std::shared_mutex&gt;&gt;
+            </h3>
+            <p>Read-write guard for an asset&#x27;s data.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>The type of the data to guard.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="gad4b3f1b0d0d3fa8c8951129860b5f0d1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gad4b3f1b0d0d3fa8c8951129860b5f0d1" class="m-doc-self">assetsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2assets_2plugin_8hpp.html">&lt;engine/assets/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
