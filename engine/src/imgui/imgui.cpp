@@ -377,7 +377,8 @@ void cubos::engine::imguiBeginFrame()
     auto* bd = (ImGuiData*)io.BackendPlatformUserData;
     io.DisplaySize.x = static_cast<float>(bd->window->framebufferSize().x);
     io.DisplaySize.y = static_cast<float>(bd->window->framebufferSize().y);
-    // TODO: handle framebuffer scale
+    io.DisplayFramebufferScale.x = io.DisplaySize.x / static_cast<float>(bd->window->size().x);
+    io.DisplayFramebufferScale.y = io.DisplaySize.y / static_cast<float>(bd->window->size().y);
 
     // Setup time step.
     double time = bd->window->time();
@@ -534,7 +535,8 @@ void cubos::engine::imguiEndFrame(const gl::Framebuffer& target)
 static bool handle(const io::MouseMoveEvent& event)
 {
     ImGuiIO& io = ImGui::GetIO();
-    io.MousePos = ImVec2(static_cast<float>(event.position.x), static_cast<float>(event.position.y));
+    io.MousePos = ImVec2(static_cast<float>(event.position.x) * io.DisplayFramebufferScale.x,
+                         static_cast<float>(event.position.y) * io.DisplayFramebufferScale.y);
     return io.WantCaptureMouse;
 }
 
