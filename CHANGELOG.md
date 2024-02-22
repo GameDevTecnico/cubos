@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Crash in multiple samples due to missing plugin dependencies (**@RiscadoA**).
+- Fixed cursor's offset in tesseratos when on retina displays (#998, **@diogomsmiranda**)
 
 ## [v0.1.0] - 2024-02-17
 
