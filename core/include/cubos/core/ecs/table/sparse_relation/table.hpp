@@ -125,6 +125,18 @@ namespace cubos::core::ecs
         /// @param[out] to To index.
         void indices(std::size_t row, uint32_t& from, uint32_t& to) const;
 
+        /// @brief Get the 'from' entity index at the given row.
+        /// @note Aborts if @p row is out of bounds.
+        /// @param row Row to get.
+        /// @return From index.
+        uint32_t from(std::size_t row) const;
+
+        /// @brief Get the 'to' entity index at the given row.
+        /// @note Aborts if @p row is out of bounds.
+        /// @param row Row to get.
+        /// @return From index.
+        uint32_t to(std::size_t row) const;
+
         /// @brief Gets the first row with the given from index, or @ref size() if there is none.
         /// @param index From index.
         /// @return First row with the given from index.

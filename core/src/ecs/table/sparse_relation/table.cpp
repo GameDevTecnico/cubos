@@ -193,6 +193,16 @@ void SparseRelationTable::indices(std::size_t row, uint32_t& from, uint32_t& to)
     to = mRows[row].to;
 }
 
+uint32_t SparseRelationTable::from(std::size_t row) const
+{
+    return mRows[row].from;
+}
+
+uint32_t SparseRelationTable::to(std::size_t row) const
+{
+    return mRows[row].to;
+}
+
 std::size_t SparseRelationTable::firstFrom(uint32_t index) const
 {
     if (auto it = mFromRows.find(index); it != mFromRows.end())
