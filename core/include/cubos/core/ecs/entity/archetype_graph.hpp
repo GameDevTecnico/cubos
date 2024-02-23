@@ -77,7 +77,7 @@ namespace cubos::core::ecs
         /// @param[out] supersets Set to insert new found archetypes into.
         /// @param seen Maximum previously seen archetype. To be used after the first call to this.
         /// @return Maximum seen archetype.
-        std::size_t collect(ArchetypeId archetype, std::vector<ArchetypeId>& supersets, std::size_t seen = 0);
+        std::size_t collect(ArchetypeId archetype, std::vector<ArchetypeId>& supersets, std::size_t seen = 0) const;
 
     private:
         /// @brief Represents an archetype in the graph.

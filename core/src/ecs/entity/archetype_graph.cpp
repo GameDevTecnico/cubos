@@ -126,7 +126,7 @@ ColumnId ArchetypeGraph::next(ArchetypeId archetype, ColumnId id) const
     return {.inner = *it};
 }
 
-std::size_t ArchetypeGraph::collect(ArchetypeId archetype, std::vector<ArchetypeId>& supersets, std::size_t seen)
+std::size_t ArchetypeGraph::collect(ArchetypeId archetype, std::vector<ArchetypeId>& supersets, std::size_t seen) const
 {
     for (; seen < mNodes.size(); ++seen)
     {
