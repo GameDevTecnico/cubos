@@ -56,6 +56,18 @@ namespace cubos::core::ecs
         ///
         /// Aborts if the data type is not registered.
         ///
+        /// @tparam T Data type.
+        /// @return Data type identifier.
+        template <reflection::Reflectable T>
+        DataTypeId id() const
+        {
+            return this->id(reflection::reflect<T>());
+        }
+
+        /// @brief Gets the identifier of a data type.
+        ///
+        /// Aborts if the data type is not registered.
+        ///
         /// @param name Data type name.
         /// @return Data type identifier.
         DataTypeId id(const std::string& name) const;
