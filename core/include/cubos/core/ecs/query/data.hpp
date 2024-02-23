@@ -124,7 +124,7 @@ namespace cubos::core::ecs
             , mFetchers{other.mFetchers}
             , mFetcherCursors{std::move(other.mFetcherCursors)}
         {
-            for (int i = 0; i < QueryFilter::MaxTargetCount; ++i)
+            for (int i = 0; i < QueryNode::MaxTargetCount; ++i)
             {
                 mPreparedArchetypes[i] = other.mPreparedArchetypes[i];
             }
@@ -222,7 +222,7 @@ namespace cubos::core::ecs
         std::unordered_set<DataTypeId, DataTypeIdHash> mAccesses;
         std::tuple<QueryFetcher<Ts>...>* mFetchers;
         std::vector<size_t> mFetcherCursors;
-        ArchetypeId mPreparedArchetypes[QueryFilter::MaxTargetCount];
+        ArchetypeId mPreparedArchetypes[QueryNode::MaxTargetCount];
     };
 
     template <typename... Ts>

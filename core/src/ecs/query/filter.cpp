@@ -1,4 +1,6 @@
 #include <cubos/core/ecs/query/filter.hpp>
+#include <cubos/core/ecs/query/node/archetype.hpp>
+#include <cubos/core/ecs/query/node/related.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -7,11 +9,18 @@
 using cubos::core::ecs::ArchetypeId;
 using cubos::core::ecs::QueryFilter;
 
+QueryFilter::~QueryFilter()
+{
+    for (int i = 0; i < mNodeCount; ++i)
+    {
+        delete mNodes[i];
+    }
+}
+
 QueryFilter::QueryFilter(World& world, const std::vector<QueryTerm>& terms)
     : mWorld{world}
-    , mTerms{terms}
 {
-    CUBOS_DEBUG("Creating query filter with the following terms: {}", QueryTerm::toString(world.types(), terms));
+    CUBOS_DEBUG("Creating query filter with terms: {}", QueryTerm::toString(world.types(), terms));
 
     // Count how many targets we have.
     for (const auto& term : terms)
@@ -36,11 +45,38 @@ QueryFilter::QueryFilter(World& world, const std::vector<QueryTerm>& terms)
     }
 
     // Make sure we can handle them.
-    CUBOS_ASSERT(mTargetCount <= MaxTargetCount, "Currently only targets from 0 to {} are supported",
-                 MaxTargetCount - 1);
+    CUBOS_ASSERT(mTargetCount <= QueryNode::MaxTargetCount, "Currently only targets from 0 to {} are supported",
+                 QueryNode::MaxTargetCount - 1);
 
-    // Assign a cursor to each term. The first mTargetCount cursors are used for the targets. The rest are used for
-    // relations and are assigned in the order they appear in the terms.
+    // For each target, create a new archetype node.
+    for (int target = 0; target < mTargetCount; ++target)
+    {
+        mNodes[mNodeCount++] = new QueryArchetypeNode(target);
+    }
+
+    // Go through each component term and initialize the respective archetype node.
+    for (const auto& term : terms)
+    {
+        // Filter terms which aren't component terms or which are optional.
+        if (!term.isComponent(world.types()) || term.component.optional)
+        {
+            continue;
+        }
+
+        // Add the respective column restriction.
+        auto& node = *static_cast<QueryArchetypeNode*>(mNodes[term.component.target]);
+        auto columnId = ColumnId::make(term.type);
+        if (term.component.without)
+        {
+            node.without(columnId);
+        }
+        else
+        {
+            node.with(columnId);
+        }
+    }
+
+    // Go through each term and assign a cursor to each of them. Also initialize relation terms.
     for (const auto& term : terms)
     {
         if (term.isEntity())
@@ -53,44 +89,23 @@ QueryFilter::QueryFilter(World& world, const std::vector<QueryTerm>& terms)
         }
         else if (term.isRelation(world.types()))
         {
-            CUBOS_ASSERT(mLinkCount < MaxLinkCount, "Currently only {} links are supported", MaxLinkCount);
-            mTermCursors.emplace_back(mTargetCount + mLinkCount);
-            mLinks[mLinkCount].dataType = term.type;
-            mLinks[mLinkCount].isSymmetric = world.types().isSymmetricRelation(term.type);
-            mLinks[mLinkCount].traversal = term.relation.traversal;
-            mLinks[mLinkCount].fromTarget = term.relation.fromTarget;
-            mLinks[mLinkCount].toTarget = term.relation.toTarget;
-            if (world.types().isTreeRelation(term.type))
-            {
-            }
-            ++mLinkCount;
+            auto cursor = mNodeCount++;
+            CUBOS_ASSERT(cursor < QueryNode::MaxCursorCount, "Only at most {} cursors are supported",
+                         QueryNode::MaxCursorCount);
+            CUBOS_ASSERT(term.relation.fromTarget < mTargetCount, "No such target {}", term.relation.fromTarget);
+            CUBOS_ASSERT(term.relation.toTarget < mTargetCount, "No such target {}", term.relation.toTarget);
+
+            mTermCursors.emplace_back(cursor);
+
+            auto& fromNode = *static_cast<QueryArchetypeNode*>(mNodes[term.relation.fromTarget]);
+            auto& toNode = *static_cast<QueryArchetypeNode*>(mNodes[term.relation.toTarget]);
+            auto includeDuplicates = world.types().isSymmetricRelation(term.type) && !fromNode.equivalent(toNode);
+            mNodes[cursor] = new QueryRelatedNode(cursor, term.type, world.types().isSymmetricRelation(term.type),
+                                                  includeDuplicates, term.relation.traversal, fromNode, toNode);
         }
         else
         {
             CUBOS_UNREACHABLE();
-        }
-    }
-
-    if (mLinkCount == 0)
-    {
-        CUBOS_ASSERT(mTargetCount == 1, "Currently queries with no links must have exactly one target");
-    }
-
-    // Find the base archetypes for each target.
-    for (const auto& term : terms)
-    {
-        // Filter out non 'with component' terms.
-        if (!term.isComponent(world.types()) || term.component.optional || term.component.without)
-        {
-            continue;
-        }
-
-        auto& baseArchetype = mTargets[term.component.target].baseArchetype;
-        auto columnId = ColumnId::make(term.type);
-
-        if (!world.archetypeGraph().contains(baseArchetype, columnId))
-        {
-            baseArchetype = world.archetypeGraph().with(baseArchetype, columnId);
         }
     }
 
@@ -105,149 +120,21 @@ std::size_t QueryFilter::cursorIndex(std::size_t termIndex) const
 
 void QueryFilter::update()
 {
-    for (int targetIndex = 0; targetIndex < mTargetCount; ++targetIndex)
+    // Update the cache of each node.
+    for (int i = 0; i < mNodeCount; ++i)
     {
-        auto& target = mTargets[targetIndex];
-
-        // Collect all archetypes which have at least the required components.
-        std::vector<ArchetypeId> newArchetypes;
-        target.seenCount = mWorld.archetypeGraph().collect(target.baseArchetype, newArchetypes, target.seenCount);
-        target.archetypes.reserve(target.archetypes.size() + newArchetypes.size());
-
-        // Add only the archetypes which do not have any of the excluded components.
-        for (auto archetype : newArchetypes)
-        {
-            bool matches = true;
-
-            for (const auto& term : mTerms)
-            {
-                // Filter out non 'without component' terms and terms with different targets.
-                if (!term.isComponent(mWorld.types()) || !term.component.without ||
-                    term.component.target != targetIndex)
-                {
-                    continue;
-                }
-
-                auto columnId = ColumnId::make(term.type);
-                if (mWorld.archetypeGraph().contains(archetype, columnId))
-                {
-                    matches = false;
-                    break;
-                }
-            }
-
-            if (matches)
-            {
-                target.archetypes.emplace_back(archetype);
-            }
-        }
+        mNodes[i]->update(mWorld);
     }
 
-    // We must check this only after updating the archetypes list, otherwise we might miss some new tables which match
-    // new archetypes.
-    for (int linkIndex = 0; linkIndex < mLinkCount; ++linkIndex)
+    // Sort by nodes by their estimate, such that the nodes with the least matches are processed first.
+    std::sort(mNodes, mNodes + mNodeCount,
+              [](QueryNode* lhs, QueryNode* rhs) { return lhs->estimate() < rhs->estimate(); });
+
+    // Update the pin masks with which each node will run.
+    mNodePins[0] = 0;
+    for (int i = 1; i < mNodeCount; ++i)
     {
-        auto& link = mLinks[linkIndex];
-        auto prevSeenCount = link.seenCount;
-
-        // Collect all tables which match any of the target archetypes.
-        link.seenCount = mWorld.tables().sparseRelation().forEach(link.seenCount, [&](SparseRelationTableId id) {
-            if (id.dataType != link.dataType)
-            {
-                return;
-            }
-
-            // The from archetype must be one of the from target archetypes.
-            // If the link is symmetric, we also check if the to archetype is one of the to from archetypes.
-            bool normalCandidate = false;
-            bool reverseCandidate = false;
-            for (const auto& archetype : mTargets[link.fromTarget].archetypes)
-            {
-                if (id.from == archetype)
-                {
-                    normalCandidate = true;
-
-                    if (!link.isSymmetric || reverseCandidate)
-                    {
-                        break;
-                    }
-                }
-
-                if (link.isSymmetric && id.to == archetype)
-                {
-                    reverseCandidate = true;
-
-                    if (normalCandidate)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            // Early exit if no candidate was found.
-            if (!normalCandidate && !reverseCandidate)
-            {
-                return;
-            }
-
-            // The to archetype must be one of the to target archetypes.
-            // If the link is symmetric, we also check if the from archetype is one of the to target archetypes.
-            bool normalFound = !normalCandidate;
-            bool reverseFound = !reverseCandidate;
-            for (const auto& archetype : mTargets[link.toTarget].archetypes)
-            {
-                if (id.to == archetype && !normalFound)
-                {
-                    normalFound = true;
-                    link.tables.emplace_back(id);
-
-                    if (reverseFound)
-                    {
-                        if (!link.reverseTablesSeen.empty())
-                        {
-                            link.reverseTablesSeen.back() = true;
-                        }
-
-                        return;
-                    }
-                }
-
-                if (id.from == archetype && !reverseFound)
-                {
-                    reverseFound = true;
-                    link.reverseTables.emplace_back(id);
-                    link.reverseTablesSeen.emplace_back(normalCandidate && normalFound);
-
-                    if (normalFound)
-                    {
-                        return;
-                    }
-                }
-            }
-        });
-
-        if (!link.isSymmetric)
-        {
-            CUBOS_ASSERT(link.reverseTables.empty());
-        }
-
-        if (prevSeenCount != link.seenCount)
-        {
-            if (link.traversal == Traversal::Up)
-            {
-                CUBOS_ASSERT(!link.isSymmetric);
-                std::sort(
-                    link.tables.begin(), link.tables.end(),
-                    [](const SparseRelationTableId& a, const SparseRelationTableId& b) { return a.depth > b.depth; });
-            }
-            else if (link.traversal == Traversal::Down)
-            {
-                CUBOS_ASSERT(!link.isSymmetric);
-                std::sort(
-                    link.tables.begin(), link.tables.end(),
-                    [](const SparseRelationTableId& a, const SparseRelationTableId& b) { return a.depth < b.depth; });
-            }
-        }
+        mNodePins[i] = mNodePins[i - 1] | mNodes[i - 1]->pins();
     }
 }
 
@@ -261,19 +148,20 @@ int QueryFilter::targetCount() const
     return mTargetCount;
 }
 
-auto QueryFilter::Link::table(std::size_t index) const -> SparseRelationTableId
-{
-    if (index < tables.size())
-    {
-        return tables[index];
-    }
-
-    return reverseTables[index - tables.size()];
-}
-
-QueryFilter::View::View(QueryFilter& filter)
+QueryFilter::View::View(QueryFilter& filter, QueryNode::TargetMask pinMask)
     : mFilter{filter}
+    , mPinMask{pinMask}
 {
+    for (mIncNode = -1; mIncNode < mFilter.mNodeCount - 1; ++mIncNode)
+    {
+        auto currentPins = mFilter.mNodePins[mIncNode + 1] | mPinMask;
+
+        // If all of the targets of the next node are pinned, then we can break here.
+        if ((mFilter.mNodes[mIncNode + 1]->pins() & currentPins) == mFilter.mNodes[mIncNode + 1]->pins())
+        {
+            break;
+        }
+    }
 }
 
 auto QueryFilter::View::operator=(const View& view) -> View&
@@ -282,8 +170,9 @@ auto QueryFilter::View::operator=(const View& view) -> View&
 
     for (int target = 0; target < view.mFilter.mTargetCount; ++target)
     {
-        mPins[target] = view.mPins[target];
+        mPinEntities[target] = view.mPinEntities[target];
     }
+    mPinMask = view.mPinMask;
 
     return *this;
 }
@@ -291,9 +180,11 @@ auto QueryFilter::View::operator=(const View& view) -> View&
 auto QueryFilter::View::pin(int target, Entity entity) -> View
 {
     CUBOS_ASSERT(target < mFilter.mTargetCount, "No such target {} in query", target);
-    CUBOS_ASSERT(mPins[target].isNull(), "Target {} was already pinned", target);
+    CUBOS_ASSERT(mPinEntities[target].isNull(), "Target {} was already pinned", target);
 
-    View view{mFilter};
+    auto pinMask = mPinMask;
+    pinMask |= 1 << target;
+    View view{mFilter, pinMask};
 
     // If the entity is dead, set the view as dead, to guarantee that the iterator will not return any matches.
     view.mDead = mDead;
@@ -305,9 +196,9 @@ auto QueryFilter::View::pin(int target, Entity entity) -> View
     // Pass the pins from the current view to the new view.
     for (int i = 0; i < mFilter.mTargetCount; ++i)
     {
-        view.mPins[i] = mPins[i];
+        view.mPinEntities[i] = mPinEntities[i];
     }
-    view.mPins[target] = entity;
+    view.mPinEntities[target] = entity;
     return view;
 }
 
@@ -324,30 +215,50 @@ auto QueryFilter::View::end() -> Iterator
 QueryFilter::View::Iterator::Iterator(View& view, bool end)
     : mView{view}
 {
-    // Initially always point to the end.
-    mIndex = this->endIndex();
-    for (int i = 0; i < mView.mFilter.mTargetCount + mView.mFilter.mLinkCount; ++i)
+    if (end)
     {
-        mCursorRows[i] = 0;
+        mNodeIndex = -1;
     }
-
-    // If end is false, then we wrap around to the first match.
-    if (!end)
+    else
     {
-        this->advance();
+        mNodeIndex = 0;
+
+        // For each cursor.
+        for (int i = 0; i < mView.mFilter.mNodeCount; ++i)
+        {
+            auto cursor = mView.mFilter.mNodes[i]->cursor();
+            if (cursor < QueryNode::MaxTargetCount && !mView.mPinEntities[cursor].isNull())
+            {
+                // If the cursor is pinned, then we need to set the target archetype and row.
+                auto ent = mView.mPinEntities[cursor];
+                auto archetype = mView.mFilter.mWorld.archetype(ent);
+                mIterator.targetArchetypes[cursor] = archetype;
+                mIterator.cursorRows[cursor] = mView.mFilter.mWorld.tables().dense().at(archetype).row(ent.index);
+            }
+            else
+            {
+                // Otherwise, we need to set the cursor to an out of bounds value.
+                mIterator.cursorIndex[cursor] = SIZE_MAX;
+                mIterator.cursorRows[cursor] = 0;
+            }
+        }
+
+        // Advance the iterator until it points to the first match.
+        this->next();
     }
 }
 
 bool QueryFilter::View::Iterator::operator==(const Iterator& other) const
 {
-    if (&mView != &other.mView || mIndex != other.mIndex)
+    if (&mView != &other.mView || mNodeIndex != other.mNodeIndex)
     {
         return false;
     }
 
-    for (int cursor = 0; cursor < mView.mFilter.mTargetCount + mView.mFilter.mLinkCount; ++cursor)
+    for (int cursor = 0; cursor <= mNodeIndex; ++cursor)
     {
-        if (mCursorRows[cursor] != other.mCursorRows[cursor])
+        if (mIterator.cursorIndex[cursor] != other.mIterator.cursorIndex[cursor] ||
+            mIterator.cursorRows[cursor] != other.mIterator.cursorRows[cursor])
         {
             return false;
         }
@@ -360,12 +271,14 @@ auto QueryFilter::View::Iterator::operator*() const -> const Match&
 {
     CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
 
-    auto& world = mView.mFilter.mWorld;
+    const auto& world = mView.mFilter.mWorld;
 
-    for (int i = 0; i < mView.mFilter.mTargetCount; ++i)
+    for (int target = 0; target < mView.mFilter.mTargetCount; ++target)
     {
-        mMatch.entities[i].index = world.tables().dense().at(mTargetArchetypes[i]).entity(mCursorRows[i]);
-        mMatch.entities[i].generation = world.generation(mMatch.entities[i].index);
+        auto archetype = mIterator.targetArchetypes[target];
+        auto row = mIterator.cursorRows[target];
+        mMatch.entities[target].index = world.tables().dense().at(archetype).entity(row);
+        mMatch.entities[target].generation = world.generation(mMatch.entities[target].index);
     }
 
     return mMatch;
@@ -379,356 +292,78 @@ auto QueryFilter::View::Iterator::operator->() const -> const Match*
 auto QueryFilter::View::Iterator::operator++() -> Iterator&
 {
     CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
-    this->advance();
+
+    if (mView.mIncNode == -1)
+    {
+        // All targets are pinned, there can't be any more matches.
+        mNodeIndex = -1;
+    }
+    else
+    {
+        this->next();
+    }
+
     return *this;
 }
 
 const ArchetypeId* QueryFilter::View::Iterator::targetArchetypes() const
 {
     CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
-    return mTargetArchetypes;
+    return mIterator.targetArchetypes;
 }
 
 const std::size_t* QueryFilter::View::Iterator::cursorRows() const
 {
     CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
-    return mCursorRows;
+    return mIterator.cursorRows;
 }
 
 bool QueryFilter::View::Iterator::valid() const
 {
-    return mIndex < this->endIndex();
+    return mNodeIndex >= 0;
 }
 
-void QueryFilter::View::Iterator::advance()
+void QueryFilter::View::Iterator::next()
 {
-    auto& filter = mView.mFilter;
-    auto& world = filter.mWorld;
-
-    if (filter.mLinkCount == 0)
+    for (;;)
     {
-        // Basic case where we have no links and a single target.
-        auto& archetypes = filter.mTargets[0].archetypes;
-
-        // Check if the single target is pinned.
-        if (mView.mPins[0].isNull())
+        if (mView.mFilter.mNodes[mNodeIndex]->next(mView.mFilter.mWorld,
+                                                   mView.mFilter.mNodePins[mNodeIndex] | mView.mPinMask, mIterator))
         {
-            // No pins, just advance to the next cached archetype.
-            if (mIndex == archetypes.size())
-            {
-                mIndex = 0; // Wrap around if we reached the end.
-            }
-            else
-            {
-                ++mCursorRows[0]; // Advance to the next row in the current archetype.
-            }
+            // Otherwise, move on to the next node.
+            mNodeIndex += 1;
 
-            // Find the next cached archetype which has a dense table (and thus at least one entity).
-            // If the cursor row is still in bounds of the current archetype, we stay in it.
-            while (mIndex < archetypes.size() &&
-                   (!world.tables().dense().contains(archetypes[mIndex]) ||
-                    mCursorRows[0] >= world.tables().dense().at(archetypes[mIndex]).size()))
+            // If this was the last node and it succeeded, then we've found a new match.
+            if (mNodeIndex == mView.mFilter.mNodeCount)
             {
-                ++mIndex;
-                mCursorRows[0] = 0;
-            }
+                if (mView.mIncNode != -1)
+                {
+                    // Reset the node index to the last iterating node.
+                    mNodeIndex = mView.mIncNode;
+                }
 
-            // Update the target archetype.
-            if (mIndex < archetypes.size())
-            {
-                mTargetArchetypes[0] = archetypes[mIndex];
+                return;
             }
         }
         else
         {
-            mCursorRows[0] = 0;
+            mIterator.cursorIndex[mView.mFilter.mNodes[mNodeIndex]->cursor()] = SIZE_MAX;
+            mIterator.cursorRows[mView.mFilter.mNodes[mNodeIndex]->cursor()] = 0;
 
-            // If it is pinned, we either move the iterator to the pinned entity or to the end.
-            if (mIndex != archetypes.size())
+            // Backtrack to the previous iterating node.
+            if (mNodeIndex > mView.mIncNode)
             {
-                mIndex = archetypes.size();
+                mNodeIndex = mView.mIncNode;
             }
             else
             {
-                // Find the pinned entity's archetype index.
-                auto entity = mView.mPins[0];
-                auto archetype = world.archetype(entity);
-                mIndex = 0;
-                while (mIndex < archetypes.size() && archetypes[mIndex] != archetype)
-                {
-                    ++mIndex;
-                }
+                mNodeIndex -= 1;
+            }
 
-                if (mIndex < archetypes.size())
-                {
-                    mCursorRows[0] = world.tables().dense().at(archetype).row(entity.index);
-                    mTargetArchetypes[0] = archetype;
-                }
+            if (mNodeIndex == -1)
+            {
+                return;
             }
         }
     }
-    else
-    {
-        // We have one link and two targets.
-        auto& link = filter.mLinks[0];
-
-        if (link.tables.empty() && link.reverseTables.empty())
-        {
-            // If no table matches the query, we can't advance.
-            return;
-        }
-
-        // Check if any of the targets is pinned.
-        if (mView.mPins[link.fromTarget].isNull() && mView.mPins[link.toTarget].isNull())
-        {
-            // No pins, just advance to the next cached table.
-            if (mIndex == link.tables.size() + link.reverseTables.size())
-            {
-                mIndex = 0; // Wrap around if we reached the end.
-            }
-            else
-            {
-                ++mCursorRows[filter.mTargetCount]; // Advance to the next row in the current table.
-            }
-
-            // Find the next cached table where our cursor is in bounds, i.e., where there are still rows to iterate
-            // over. If the cursor row is still in bounds of the current table, we stay in it.
-            while (mIndex < link.tables.size() + link.reverseTables.size() &&
-                   (mCursorRows[filter.mTargetCount] >= world.tables().sparseRelation().at(link.table(mIndex)).size() ||
-                    (mIndex >= link.tables.size() && link.reverseTablesSeen[mIndex - link.tables.size()])))
-            {
-                ++mIndex;
-                mCursorRows[filter.mTargetCount] = 0;
-            }
-        }
-        else if (mView.mPins[link.fromTarget].isNull())
-        {
-            auto toEntity = mView.mPins[link.toTarget];
-
-            // The to target is pinned.
-            if (mIndex == link.tables.size() + link.reverseTables.size())
-            {
-                mIndex = 0; // Wrap around if we reached the end.
-                auto& table = world.tables().sparseRelation().at(link.table(mIndex));
-                if (mIndex < link.tables.size())
-                {
-                    mCursorRows[filter.mTargetCount] = table.firstTo(toEntity.index);
-                }
-                else
-                {
-                    mCursorRows[filter.mTargetCount] = table.firstFrom(toEntity.index);
-                }
-            }
-            else
-            {
-                // Find the next row in the relation table which matches the pinned entity.
-                auto& table = world.tables().sparseRelation().at(link.table(mIndex));
-                if (mIndex < link.tables.size())
-                {
-                    mCursorRows[filter.mTargetCount] = table.nextTo(mCursorRows[filter.mTargetCount]);
-                }
-                else
-                {
-                    mCursorRows[filter.mTargetCount] = table.nextFrom(mCursorRows[filter.mTargetCount]);
-                }
-            }
-
-            // Advance to the next cached table as long as the cursor is out of bounds.
-            while (mIndex < link.tables.size() + link.reverseTables.size() &&
-                   mCursorRows[filter.mTargetCount] >= world.tables().sparseRelation().at(link.table(mIndex)).size())
-            {
-                ++mIndex;
-
-                if (mIndex < link.tables.size() + link.reverseTables.size())
-                {
-                    // Jump to the first row which matches the pinned entity.
-                    auto& table = world.tables().sparseRelation().at(link.table(mIndex));
-                    if (mIndex < link.tables.size())
-                    {
-                        mCursorRows[filter.mTargetCount] = table.firstTo(toEntity.index);
-                    }
-                    else
-                    {
-                        mCursorRows[filter.mTargetCount] = table.firstFrom(toEntity.index);
-                    }
-                }
-            }
-        }
-        else if (mView.mPins[link.toTarget].isNull())
-        {
-            auto fromEntity = mView.mPins[link.fromTarget];
-
-            // The from target is pinned.
-            if (mIndex == link.tables.size() + link.reverseTables.size())
-            {
-                mIndex = 0; // Wrap around if we reached the end.
-                auto& table = world.tables().sparseRelation().at(link.table(mIndex));
-                if (mIndex < link.tables.size())
-                {
-                    mCursorRows[filter.mTargetCount] = table.firstFrom(fromEntity.index);
-                }
-                else
-                {
-                    mCursorRows[filter.mTargetCount] = table.firstTo(fromEntity.index);
-                }
-            }
-            else
-            {
-                // Find the next row in the relation table which matches the pinned entity.
-                auto& table = world.tables().sparseRelation().at(link.table(mIndex));
-                if (mIndex < link.tables.size())
-                {
-                    mCursorRows[filter.mTargetCount] = table.nextFrom(mCursorRows[filter.mTargetCount]);
-                }
-                else
-                {
-                    mCursorRows[filter.mTargetCount] = table.nextTo(mCursorRows[filter.mTargetCount]);
-                }
-            }
-
-            // Advance to the next cached table as long as the cursor is out of bounds.
-            while (mIndex < link.tables.size() + link.reverseTables.size() &&
-                   mCursorRows[filter.mTargetCount] >= world.tables().sparseRelation().at(link.table(mIndex)).size())
-            {
-                ++mIndex;
-
-                if (mIndex < link.tables.size() + link.reverseTables.size())
-                {
-                    // Jump to the first row which matches the pinned entity.
-                    auto& table = world.tables().sparseRelation().at(link.table(mIndex));
-                    if (mIndex < link.tables.size())
-                    {
-                        mCursorRows[filter.mTargetCount] = table.firstFrom(fromEntity.index);
-                    }
-                    else
-                    {
-                        mCursorRows[filter.mTargetCount] = table.firstTo(fromEntity.index);
-                    }
-                }
-            }
-        }
-        else
-        {
-            // Both targets are pinned, so we either move the iterator to the pinned entities or to the end.
-            if (mIndex != link.tables.size() + link.reverseTables.size())
-            {
-                mIndex = link.tables.size() + link.reverseTables.size();
-            }
-            else
-            {
-                auto fromEntity = mView.mPins[link.fromTarget];
-                auto toEntity = mView.mPins[link.toTarget];
-
-                auto fromArchetype = world.archetype(fromEntity);
-                auto toArchetype = world.archetype(toEntity);
-
-                // Find the index of the table which matches the pinned entities.
-                mIndex = 0;
-                while (mIndex < link.tables.size() &&
-                       (link.table(mIndex).from != fromArchetype || link.table(mIndex).to != toArchetype))
-                {
-                    ++mIndex;
-                }
-
-                if (fromArchetype == toArchetype && fromEntity.index > toEntity.index)
-                {
-                    // We have to search for the table in the reversed tables list.
-                    mIndex = link.tables.size();
-                }
-
-                if (mIndex == link.tables.size())
-                {
-                    // Try the reverse tables.
-                    while (mIndex < link.tables.size() + link.reverseTables.size() &&
-                           (link.table(mIndex).from != toArchetype || link.table(mIndex).to != fromArchetype))
-                    {
-                        ++mIndex;
-                    }
-                }
-
-                if (mIndex < link.tables.size() + link.reverseTables.size())
-                {
-                    // Find the row of the pinned entities in the table.
-                    auto& table = world.tables().sparseRelation().at(link.table(mIndex));
-
-                    if (mIndex < link.tables.size())
-                    {
-                        mCursorRows[filter.mTargetCount] = table.row(fromEntity.index, toEntity.index);
-                    }
-                    else
-                    {
-                        mCursorRows[filter.mTargetCount] = table.row(toEntity.index, fromEntity.index);
-                    }
-
-                    if (mCursorRows[filter.mTargetCount] == table.size())
-                    {
-                        // Turns out the entities are not related after all.
-                        mIndex = link.tables.size() + link.reverseTables.size();
-                    }
-                }
-            }
-        }
-
-        // Update the target archetypes.
-        if (mIndex < link.tables.size())
-        {
-            mTargetArchetypes[link.fromTarget] = link.table(mIndex).from;
-            mTargetArchetypes[link.toTarget] = link.table(mIndex).to;
-
-            // Get the entity indices of the current row.
-            uint32_t fromIndex = UINT32_MAX;
-            uint32_t toIndex = UINT32_MAX;
-            world.tables()
-                .sparseRelation()
-                .at(link.table(mIndex))
-                .indices(mCursorRows[filter.mTargetCount], fromIndex, toIndex);
-
-            // Get the rows of the entities in their respective dense tables.
-            mCursorRows[link.fromTarget] = world.tables().dense().at(link.table(mIndex).from).row(fromIndex);
-            mCursorRows[link.toTarget] = world.tables().dense().at(link.table(mIndex).to).row(toIndex);
-        }
-        else if (mIndex < link.tables.size() + link.reverseTables.size())
-        {
-            // We're iterating over the reverse tables.
-            mTargetArchetypes[link.fromTarget] = link.table(mIndex).to;
-            mTargetArchetypes[link.toTarget] = link.table(mIndex).from;
-
-            // Get the entity indices of the current row.
-            uint32_t fromIndex = UINT32_MAX;
-            uint32_t toIndex = UINT32_MAX;
-            world.tables()
-                .sparseRelation()
-                .at(link.table(mIndex))
-                .indices(mCursorRows[filter.mTargetCount], fromIndex, toIndex);
-
-            if (link.table(mIndex).from == link.table(mIndex).to && fromIndex == toIndex)
-            {
-                // We have already visited these relations on the non-reversed tables.
-                this->advance();
-            }
-            else
-            {
-                // Get the rows of the entities in their respective dense tables.
-                mCursorRows[link.fromTarget] = world.tables().dense().at(link.table(mIndex).to).row(toIndex);
-                mCursorRows[link.toTarget] = world.tables().dense().at(link.table(mIndex).from).row(fromIndex);
-            }
-        }
-        else
-        {
-            mCursorRows[filter.mTargetCount] = 0;
-            mCursorRows[link.fromTarget] = 0;
-            mCursorRows[link.toTarget] = 0;
-        }
-    }
-}
-
-std::size_t QueryFilter::View::Iterator::endIndex() const
-{
-    if (mView.mFilter.mLinkCount == 0)
-    {
-        return mView.mFilter.mTargets[0].archetypes.size();
-    }
-
-    auto& link = mView.mFilter.mLinks[0];
-    return link.tables.size() + link.reverseTables.size();
 }

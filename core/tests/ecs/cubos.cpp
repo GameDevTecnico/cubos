@@ -125,9 +125,9 @@ TEST_CASE("ecs::Cubos")
             .entity()
             .call([](Query<Entity, Entity> up, Query<Entity, Entity> down) {
                 auto upIt = up.begin();
-                CHECK(upIt != up.end());
+                REQUIRE(upIt != up.end());
                 auto downIt = down.begin();
-                CHECK(downIt != down.end());
+                REQUIRE(downIt != down.end());
 
                 // upFrom1 = e1
                 // upTo1 = e2
@@ -144,9 +144,9 @@ TEST_CASE("ecs::Cubos")
                 CHECK(upFrom1 != downTo1);
 
                 ++upIt;
-                CHECK(upIt != up.end());
+                REQUIRE(upIt != up.end());
                 ++downIt;
-                CHECK(downIt != down.end());
+                REQUIRE(downIt != down.end());
 
                 // upFrom2 = e2
                 // upTo2 = e3

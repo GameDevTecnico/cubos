@@ -326,7 +326,7 @@ Action* UnrelateAction::random(ExpectedWorld& expected)
 
 std::string UnrelateAction::constructor() const
 {
-    return "UnrelateAction{"  + ::constructor(mFrom) + ", " + ::constructor(mTo) + ", " + ::constructor(mType) + "}";
+    return "UnrelateAction{" + ::constructor(mFrom) + ", " + ::constructor(mTo) + ", " + ::constructor(mType) + "}";
 }
 
 void UnrelateAction::test(World& world, ExpectedWorld& expected)
@@ -628,6 +628,34 @@ void SingleRelationQueryAction::test(World& world, ExpectedWorld& expected)
         auto dataTypeId = world.types().id(*type);
         terms.emplace_back(QueryTerm::makeOptComponent(dataTypeId, 1));
     }
+
+    bool excludeDuplicates = mWithA.size() == mWithB.size() && mWithoutA.size() == mWithoutB.size() &&
+                             mOptionalA.size() == mOptionalB.size();
+    for (const auto* type : mWithA)
+    {
+        if (mWithB.contains(type))
+        {
+            excludeDuplicates = false;
+            break;
+        }
+    }
+    for (const auto* type : mWithoutA)
+    {
+        if (mWithoutB.contains(type))
+        {
+            excludeDuplicates = false;
+            break;
+        }
+    }
+    for (const auto* type : mOptionalA)
+    {
+        if (mOptionalB.contains(type))
+        {
+            excludeDuplicates = false;
+            break;
+        }
+    }
+
     QueryFilter filter{world, terms};
 
     // Get all entities matched by the query.
@@ -635,14 +663,20 @@ void SingleRelationQueryAction::test(World& world, ExpectedWorld& expected)
     for (auto match : filter.view())
     {
         auto range = entities.equal_range(match.entities[0]);
-        for (auto it = range.first; it != range.second; ++it)
+
+        if (excludeDuplicates)
         {
-            // Multiple matches for the same pair of entities should not exist.
-            REQUIRE(it->second != match.entities[1]);
+            for (auto it = range.first; it != range.second; ++it)
+            {
+                // Multiple matches for the same pair of entities should not exist.
+                REQUIRE(it->second != match.entities[1]);
+            }
         }
 
         entities.insert({match.entities[0], match.entities[1]});
     }
+
+    std::unordered_multimap<Entity, Entity, EntityHash> alreadyMatched{};
 
     // Check if all entities which should be matched are matched.
     for (auto& [entity, expectedEntity] : expected.aliveEntities)
@@ -693,6 +727,26 @@ void SingleRelationQueryAction::test(World& world, ExpectedWorld& expected)
                 }
             }
 
+            // If the relation is symmetric, we must make sure that we didn't already match the relation in the
+            // opposite direction.
+            if (mRelation.has<SymmetricTrait>())
+            {
+                auto range = alreadyMatched.equal_range(toEntity);
+                for (auto it = range.first; it != range.second; ++it)
+                {
+                    if (it->second == entity)
+                    {
+                        matches = false;
+                        break;
+                    }
+                }
+
+                if (matches)
+                {
+                    alreadyMatched.insert({entity, toEntity});
+                }
+            }
+
             if (matches)
             {
                 auto range = entities.equal_range(entity);
@@ -705,9 +759,40 @@ void SingleRelationQueryAction::test(World& world, ExpectedWorld& expected)
                     }
                 }
 
+                if (it == range.second && mRelation.has<SymmetricTrait>())
+                {
+                    range = entities.equal_range(toEntity);
+                    it = range.first;
+                    for (; it != range.second; ++it)
+                    {
+                        if (it->second == entity)
+                        {
+                            break;
+                        }
+                    }
+                }
+
                 // Make sure that the matched relation actually exists.
                 REQUIRE(it != range.second);
                 entities.erase(it);
+
+                if (entity == toEntity && !excludeDuplicates && mRelation.has<SymmetricTrait>())
+                {
+                    // Then it should have been matched twice.
+                    range = entities.equal_range(entity);
+                    it = range.first;
+                    for (; it != range.second; ++it)
+                    {
+                        if (it->second == toEntity)
+                        {
+                            break;
+                        }
+                    }
+
+                    // Make sure that the matched relation actually exists.
+                    REQUIRE(it != range.second);
+                    entities.erase(it);
+                }
             }
         }
     }

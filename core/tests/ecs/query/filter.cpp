@@ -995,6 +995,9 @@ TEST_CASE("ecs::QueryFilter")
                 REQUIRE(it->entities[0] == e1);
                 REQUIRE(it->entities[1] == e1);
                 ++it;
+                REQUIRE(it->entities[0] == e1);
+                REQUIRE(it->entities[1] == e1);
+                ++it;
                 REQUIRE(it->entities[0] == e4P);
                 REQUIRE(it->entities[1] == e2I);
                 ++it;
@@ -1007,6 +1010,9 @@ TEST_CASE("ecs::QueryFilter")
                 {
                     auto view = filter.view().pin(0, e1);
                     auto it = view.begin();
+                    REQUIRE(it->entities[0] == e1);
+                    REQUIRE(it->entities[1] == e1);
+                    ++it;
                     REQUIRE(it->entities[0] == e1);
                     REQUIRE(it->entities[1] == e1);
                     ++it;
@@ -1036,6 +1042,9 @@ TEST_CASE("ecs::QueryFilter")
                 {
                     auto view = filter.view().pin(1, e1);
                     auto it = view.begin();
+                    REQUIRE(it->entities[0] == e1);
+                    REQUIRE(it->entities[1] == e1);
+                    ++it;
                     REQUIRE(it->entities[0] == e1);
                     REQUIRE(it->entities[1] == e1);
                     ++it;
@@ -1107,6 +1116,9 @@ TEST_CASE("ecs::QueryFilter")
                 REQUIRE(it->entities[0] == e2I);
                 REQUIRE(it->entities[1] == e4P);
                 ++it;
+                REQUIRE(it->entities[0] == e1);
+                REQUIRE(it->entities[1] == e1);
+                ++it;
                 REQUIRE(it == view.end());
             }
 
@@ -1116,6 +1128,9 @@ TEST_CASE("ecs::QueryFilter")
                 {
                     auto view = filter.view().pin(0, e1);
                     auto it = view.begin();
+                    REQUIRE(it->entities[0] == e1);
+                    REQUIRE(it->entities[1] == e1);
+                    ++it;
                     REQUIRE(it->entities[0] == e1);
                     REQUIRE(it->entities[1] == e1);
                     ++it;
@@ -1145,6 +1160,9 @@ TEST_CASE("ecs::QueryFilter")
                 {
                     auto view = filter.view().pin(1, e1);
                     auto it = view.begin();
+                    REQUIRE(it->entities[0] == e1);
+                    REQUIRE(it->entities[1] == e1);
+                    ++it;
                     REQUIRE(it->entities[0] == e1);
                     REQUIRE(it->entities[1] == e1);
                     ++it;
@@ -1194,6 +1212,187 @@ TEST_CASE("ecs::QueryFilter")
                 {
                     auto view = filter.view().pin(0, e4P).pin(1, e2I);
                     REQUIRE(view.begin() == view.end());
+                }
+            }
+        }
+
+        SUBCASE("relation with integers on both terms")
+        {
+            QueryFilter filter{world,
+                               {
+                                   QueryTerm::makeWithComponent(integerComponent, 0),
+                                   QueryTerm::makeRelation(symmetricRelation, 0, 1),
+                                   QueryTerm::makeWithComponent(integerComponent, 1),
+                               }};
+
+            SUBCASE("no pins")
+            {
+                auto view = filter.view();
+                auto it = view.begin();
+                REQUIRE(it->entities[0] == e2I);
+                REQUIRE(it->entities[1] == e3I);
+                ++it;
+                REQUIRE(it == view.end());
+            }
+
+            SUBCASE("first target pinned")
+            {
+                SUBCASE("on e2I")
+                {
+                    auto view = filter.view().pin(0, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e3I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e3I")
+                {
+                    auto view = filter.view().pin(0, e3I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+            }
+
+            SUBCASE("second target pinned")
+            {
+                SUBCASE("on e2I")
+                {
+                    auto view = filter.view().pin(1, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e3I")
+                {
+                    auto view = filter.view().pin(1, e3I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e3I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+            }
+
+            SUBCASE("both targets pinned")
+            {
+                SUBCASE("e2I and e3I")
+                {
+                    auto view = filter.view().pin(0, e2I).pin(1, e3I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e3I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("e3I and e2I")
+                {
+                    auto view = filter.view().pin(0, e3I).pin(1, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+            }
+        }
+
+        SUBCASE("relation with integers on the first term, without parent on second term")
+        {
+            QueryFilter filter{world,
+                               {
+                                   QueryTerm::makeWithComponent(integerComponent, 0),
+                                   QueryTerm::makeRelation(symmetricRelation, 0, 1),
+                                   QueryTerm::makeWithoutComponent(parentComponent, 1),
+                               }};
+
+            SUBCASE("no pins")
+            {
+                auto view = filter.view();
+                auto it = view.begin();
+                REQUIRE(it->entities[0] == e2I);
+                REQUIRE(it->entities[1] == e3I);
+                ++it;
+                REQUIRE(it->entities[0] == e3I);
+                REQUIRE(it->entities[1] == e2I);
+                ++it;
+                REQUIRE(it == view.end());
+            }
+
+            SUBCASE("first target pinned")
+            {
+                SUBCASE("on e2I")
+                {
+                    auto view = filter.view().pin(0, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e3I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e3I")
+                {
+                    auto view = filter.view().pin(0, e3I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+            }
+
+            SUBCASE("second target pinned")
+            {
+                SUBCASE("on e2I")
+                {
+                    auto view = filter.view().pin(1, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("on e3I")
+                {
+                    auto view = filter.view().pin(1, e3I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e3I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+            }
+
+            SUBCASE("both targets pinned")
+            {
+                SUBCASE("e2I and e3I")
+                {
+                    auto view = filter.view().pin(0, e2I).pin(1, e3I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e2I);
+                    REQUIRE(it->entities[1] == e3I);
+                    ++it;
+                    REQUIRE(it == view.end());
+                }
+
+                SUBCASE("e3I and e2I")
+                {
+                    auto view = filter.view().pin(0, e3I).pin(1, e2I);
+                    auto it = view.begin();
+                    REQUIRE(it->entities[0] == e3I);
+                    REQUIRE(it->entities[1] == e2I);
+                    ++it;
+                    REQUIRE(it == view.end());
                 }
             }
         }
