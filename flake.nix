@@ -12,6 +12,8 @@
       in
       {
         devShell = pkgs.mkShell {
+          hardeningDisable = [ "all" ];
+
           packages = with pkgs; [
             # = build tools =
             cmake
