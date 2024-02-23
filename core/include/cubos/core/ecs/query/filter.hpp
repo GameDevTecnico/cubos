@@ -8,27 +8,21 @@
 
 #include <cubos/core/ecs/entity/archetype_id.hpp>
 #include <cubos/core/ecs/entity/entity.hpp>
+#include <cubos/core/ecs/query/node/node.hpp>
 #include <cubos/core/ecs/query/term.hpp>
-#include <cubos/core/ecs/table/sparse_relation/id.hpp>
 
 namespace cubos::core::ecs
 {
-    class World;
-
     /// @brief Used to find matches for the given query terms. Essentially contains the non-templated part of the query
     /// logic.
     /// @ingroup core-ecs-query
     class QueryFilter
     {
     public:
-        /// @brief Maximum number of targets per match allowed in a single query.
-        static constexpr int MaxTargetCount = 2;
-
-        /// @brief Maximum number of links per query.
-        static constexpr int MaxLinkCount = 1;
-
         /// @brief Can be iterated to view the query matches.
         class View;
+
+        ~QueryFilter();
 
         /// @brief Constructs.
         /// @param world World being queried.
@@ -52,68 +46,24 @@ namespace cubos::core::ecs
         int targetCount() const;
 
     private:
-        /// @brief Holds the necessary data for each target.
-        struct Target
-        {
-            /// @brief Archetype which holds only the required components for this target.
-            ArchetypeId baseArchetype{ArchetypeId::Empty};
-
-            /// @brief Archetypes which match the target, found through calls to @ref update().
-            std::vector<ArchetypeId> archetypes;
-
-            /// @brief How many archetypes have already been seen through @ref ArchetypeGraph::collect.
-            std::size_t seenCount{0};
-        };
-
-        /// @brief Holds the necessary data for each link.
-        struct Link
-        {
-            /// @brief Relation data type.
-            DataTypeId dataType;
-
-            /// @brief Whether the link is symmetric.
-            bool isSymmetric;
-
-            /// @brief Link traversal type.
-            Traversal traversal;
-
-            /// @brief From target index.
-            int fromTarget;
-
-            /// @brief To target index.
-            int toTarget;
-
-            /// @brief Tables which match the link, found through calls to @ref update().
-            std::vector<SparseRelationTableId> tables;
-
-            /// @brief Tables which match the reverse link, found through calls to @ref update().
-            ///
-            /// Only filled if @ref isSymmetric is true.
-            std::vector<SparseRelationTableId> reverseTables;
-
-            /// @brief Whether each of the tables in @ref reverseTables is already in @ref tables.
-            ///
-            /// Only filled if @ref isSymmetric is true.
-            std::vector<bool> reverseTablesSeen;
-
-            /// @brief How many tables have already been seen through @ref SparseRelationTableRegistry::collect.
-            std::size_t seenCount{0};
-
-            /// @brief Gets the nth table in the link, as if the reverseTables vector was appended to the end of the
-            /// tables vector.
-            /// @param index Table index.
-            SparseRelationTableId table(std::size_t index) const;
-        };
-
         World& mWorld;
 
-        std::vector<QueryTerm> mTerms;
+        /// @brief Cursors fo each of the received terms.
         std::vector<std::size_t> mTermCursors;
 
-        Target mTargets[MaxTargetCount];
+        /// @brief Number of targets we have, limited to @ref QueryNode::MaxTargetCount.
         int mTargetCount{1};
-        Link mLinks[MaxLinkCount];
-        int mLinkCount{0};
+
+        /// @brief Number of nodes we have, limited to @ref QueryNode::MaxCursorCount.
+        int mNodeCount{0};
+
+        /// @brief Nodes for each cursor. Order is not guaranteed and may change between calls to @ref update.
+        QueryNode* mNodes[QueryNode::MaxCursorCount];
+
+        /// @brief Mask with the targets which are already pinned by previous nodes when the respective node is called.
+        ///
+        /// Kept in sync with @ref mNodes by @ref update.
+        QueryNode::TargetMask mNodePins[QueryNode::MaxCursorCount];
     };
 
     class QueryFilter::View
@@ -124,7 +74,8 @@ namespace cubos::core::ecs
 
         /// @brief Constructs.
         /// @param filter Query filter.
-        View(QueryFilter& filter);
+        /// @param pinMask Mask with the targets which are pinned.
+        View(QueryFilter& filter, QueryNode::TargetMask pinMask = 0);
 
         /// @brief Copy constructs.
         /// @param view Other view.
@@ -153,7 +104,17 @@ namespace cubos::core::ecs
 
     private:
         QueryFilter& mFilter;
-        Entity mPins[MaxTargetCount];
+
+        /// @brief Entity handles for each of the pinned targets.
+        Entity mPinEntities[QueryNode::MaxTargetCount];
+
+        /// @brief Mask with the targets which are pinned.
+        QueryNode::TargetMask mPinMask{0};
+
+        /// @brief Node whose cursor which should be incremented to advance, or -1 if all targets are pinned.
+        int mIncNode{-1};
+
+        /// @brief Whether one of the pinned entities is dead. Causes the view to always be empty.
         bool mDead{false};
     };
 
@@ -164,7 +125,7 @@ namespace cubos::core::ecs
         struct Match
         {
             /// @brief Entities for each target.
-            Entity entities[MaxTargetCount];
+            Entity entities[QueryNode::MaxTargetCount];
         };
 
         /// @brief Constructs.
@@ -209,29 +170,13 @@ namespace cubos::core::ecs
         bool valid() const;
 
     private:
-        /// @brief Advances the iterator to the next valid match. Wraps around.
-        void advance();
-
-        /// @brief Gets the index value which represents the end of the iteration.
-        /// @return End index.
-        std::size_t endIndex() const;
+        /// @brief Advances the iterator, if necessary, until a match a found.
+        void next();
 
         View& mView;
         mutable Match mMatch;
 
-        /// @brief Archetype of each target.
-        ArchetypeId mTargetArchetypes[MaxTargetCount];
-
-        /// @brief Index of the currently selected archetype or sparse relation table.
-        ///
-        /// We distinguish between them through the mLinkCount variable. If it's 0, we're iterating over archetypes.
-        /// Otherwise, we're iterating over sparse relation tables.
-        std::size_t mIndex;
-
-        /// @brief Row number of each cursor.
-        ///
-        /// The first mTargetCount cursors represent the targets.
-        /// The remaining mLinkCount cursors represent the links.
-        std::size_t mCursorRows[MaxTargetCount + MaxLinkCount];
+        int mNodeIndex{0};
+        QueryNode::Iterator mIterator;
     };
 } // namespace cubos::core::ecs

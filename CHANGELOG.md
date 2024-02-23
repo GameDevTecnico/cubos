@@ -10,12 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Log the system order on the dispatcher (#414, **@RiscadoA**).
+- Support for queries with multiple relation terms (#929, **@RiscadoA**).
+- Support for queries with more than one unrelated targets (#930, **@RiscadoA**).
 - Fixed Time Step plugin (#989, **@joaomanita**).
 
 ### Fixed
 
 - Crash in multiple samples due to missing plugin dependencies (**@RiscadoA**).
-- Fixed cursor's offset in tesseratos when on retina displays (#998, **@diogomsmiranda**)
+- Cursor offset in tesseratos when on retina displays (#998, **@diogomsmiranda**).
+- Random failures in the ECS stress test (#948, **@RiscadoA**).
 
 ## [v0.1.0] - 2024-02-17
 
