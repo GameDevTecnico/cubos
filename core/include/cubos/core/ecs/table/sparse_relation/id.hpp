@@ -18,10 +18,13 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs-table
     struct SparseRelationTableId
     {
-        DataTypeId dataType;
-        ArchetypeId from;
-        ArchetypeId to;
-        int depth;
+        DataTypeId dataType{DataTypeId::Invalid};
+        ArchetypeId from{ArchetypeId::Invalid};
+        ArchetypeId to{ArchetypeId::Invalid};
+        int depth{0};
+
+        /// @brief Default constructor.
+        SparseRelationTableId() = default;
 
         /// @brief Constructs.
         /// @param dataType Relation data type.
