@@ -459,6 +459,7 @@ void World::moveSparse(Entity entity, ArchetypeId oldArchetype, ArchetypeId newA
             auto oldTableIds = index.from().at(oldArchetype);
             for (const auto& oldTableId : oldTableIds)
             {
+                auto& oldTable = mTables.sparseRelation().at(oldTableId);
                 auto newTableId = oldTableId;
                 newTableId.from = newArchetype;
 
@@ -480,9 +481,22 @@ void World::moveSparse(Entity entity, ArchetypeId oldArchetype, ArchetypeId newA
                     }
                 }
 
+                // If the entity is related to itself and we're going to change an archetype, then we should change both
+                // ends of the relation.
+                auto row = oldTable.row(entity.index, entity.index);
+                if (row < oldTable.size())
+                {
+                    auto specialNewTableId = oldTableId;
+                    specialNewTableId.from = newArchetype;
+                    specialNewTableId.to = newArchetype;
+                    auto& specialNewTable = mTables.sparseRelation().create(specialNewTableId, mTypes);
+                    specialNewTable.insert(entity.index, entity.index, oldTable.at(row));
+                    oldTable.erase(entity.index, entity.index);
+                }
+
                 // Move all occurrences of the entity in the 'from' column to the new table.
                 auto& newTable = mTables.sparseRelation().create(newTableId, mTypes);
-                mTables.sparseRelation().at(oldTableId).moveFrom(entity.index, newTable, transformation);
+                oldTable.moveFrom(entity.index, newTable, transformation);
             }
         }
 

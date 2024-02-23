@@ -368,6 +368,29 @@ TEST_CASE("ecs::World")
         REQUIRE(destroyed);
     }
 
+    SUBCASE("symmetric relations from entity to itself are stored correctly")
+    {
+        auto foo = world.create();
+        world.relate(foo, foo, SymmetricRelation{.value = 1});
+        SparseRelationTableId oldTableId{world.types().id("SymmetricRelation"), world.archetype(foo),
+                                         world.archetype(foo)};
+        REQUIRE(world.tables().sparseRelation().contains(oldTableId));
+        REQUIRE(world.tables().sparseRelation().at(oldTableId).contains(foo.index, foo.index));
+
+        // If we change the archetype of foo, the relation should move to the right table.
+        world.components(foo).add(IntegerComponent{0});
+        SparseRelationTableId newTableId{world.types().id("SymmetricRelation"), world.archetype(foo),
+                                         world.archetype(foo)};
+        REQUIRE_FALSE(world.tables().sparseRelation().at(oldTableId).contains(foo.index, foo.index));
+        REQUIRE(world.tables().sparseRelation().contains(newTableId));
+        REQUIRE(world.tables().sparseRelation().at(newTableId).contains(foo.index, foo.index));
+
+        // If we move foo back to the original archetype, the relation should be stored on the original table.
+        world.components(foo).remove<IntegerComponent>();
+        REQUIRE_FALSE(world.tables().sparseRelation().at(newTableId).contains(foo.index, foo.index));
+        REQUIRE(world.tables().sparseRelation().at(oldTableId).contains(foo.index, foo.index));
+    }
+
     SUBCASE("symmetric relation invariant is kept")
     {
         auto foo = world.create();
