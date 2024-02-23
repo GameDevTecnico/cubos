@@ -113,6 +113,9 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/query/filter.cpp"
 	"src/ecs/query/fetcher.cpp"
 	"src/ecs/query/opt.cpp"
+	"src/ecs/query/node/node.cpp"
+	"src/ecs/query/node/archetype.cpp"
+	"src/ecs/query/node/related.cpp"
 
 	"src/ecs/reflection.cpp"
 	"src/ecs/blueprint.cpp"
