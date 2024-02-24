@@ -127,7 +127,7 @@ bool QueryArchetypeNode::next(World& world, TargetMask pins, Iterator& iterator)
 {
     auto cursor = this->cursor();
 
-    if (pins & (1 << cursor))
+    if ((pins & (1 << cursor)) != 0)
     {
         // If the target is already pinned, we're simply validating the current match.
         // We just need to access the current archetype and check if it matches the requirements.

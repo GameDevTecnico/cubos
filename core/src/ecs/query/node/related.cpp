@@ -131,8 +131,8 @@ void QueryRelatedNode::update(World& world)
 
 bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) const
 {
-    bool fromPinned = pins & (1 << mFromNode.target());
-    bool toPinned = pins & (1 << mToNode.target());
+    bool fromPinned = (pins & (1 << mFromNode.target())) != 0;
+    bool toPinned = (pins & (1 << mToNode.target())) != 0;
 
     // Define some utility aliases.
     auto& tableIndex = iterator.cursorIndex[this->cursor()];
@@ -174,7 +174,8 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
 
         return false;
     }
-    else if (fromPinned || toPinned)
+
+    if (fromPinned || toPinned)
     {
         // Only one of the targets is pinned, thus we need to find the next valid match for the free target.
         // Start by getting the cursors of the pinned and unpinned targets.
@@ -212,11 +213,11 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
 
         // Utility function which sets the row to the first valid row of the current table based on the given side.
         auto resetRow = [&]() {
-            row = (fromPinned ^ isReverse) ? table->firstFrom(pinnedIndex) : table->firstTo(pinnedIndex);
+            row = (fromPinned != isReverse) ? table->firstFrom(pinnedIndex) : table->firstTo(pinnedIndex);
         };
 
         // Utility function which advances the row to the next valid row of the current table based on the given side.
-        auto advanceRow = [&]() { row = (fromPinned ^ isReverse) ? table->nextFrom(row) : table->nextTo(row); };
+        auto advanceRow = [&]() { row = (fromPinned != isReverse) ? table->nextFrom(row) : table->nextTo(row); };
 
         // Utility function which checks if the current row stores a relation from an entity to itself.
         auto skipIfIdentityRow = [&]() {
@@ -267,8 +268,8 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
         }
 
         // Update the archetype and cursor of the 'unpinned' target.
-        auto unpinnedArchetype = (fromPinned ^ isReverse) ? tableId.to : tableId.from;
-        uint32_t unpinnedIndex = (fromPinned ^ isReverse) ? table->to(row) : table->from(row);
+        auto unpinnedArchetype = (fromPinned != isReverse) ? tableId.to : tableId.from;
+        uint32_t unpinnedIndex = (fromPinned != isReverse) ? table->to(row) : table->from(row);
         iterator.targetArchetypes[unpinnedCursor] = unpinnedArchetype;
         iterator.cursorRows[unpinnedCursor] = denseTables.at(unpinnedArchetype).row(unpinnedIndex);
         return true;
