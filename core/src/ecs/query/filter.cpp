@@ -223,23 +223,22 @@ QueryFilter::View::Iterator::Iterator(View& view, bool end)
     {
         mNodeIndex = 0;
 
-        // For each cursor.
+        // Reset all cursors.
         for (int i = 0; i < mView.mFilter.mNodeCount; ++i)
         {
-            auto cursor = mView.mFilter.mNodes[i]->cursor();
-            if (cursor < QueryNode::MaxTargetCount && !mView.mPinEntities[cursor].isNull())
+            mIterator.cursorIndex[i] = SIZE_MAX;
+            mIterator.cursorRows[i] = 0;
+        }
+
+        // Initialize cursors for pinned targets.
+        for (int i = 0; i < mView.mFilter.mTargetCount; ++i)
+        {
+            if (!mView.mPinEntities[i].isNull())
             {
-                // If the cursor is pinned, then we need to set the target archetype and row.
-                auto ent = mView.mPinEntities[cursor];
+                auto ent = mView.mPinEntities[i];
                 auto archetype = mView.mFilter.mWorld.archetype(ent);
-                mIterator.targetArchetypes[cursor] = archetype;
-                mIterator.cursorRows[cursor] = mView.mFilter.mWorld.tables().dense().at(archetype).row(ent.index);
-            }
-            else
-            {
-                // Otherwise, we need to set the cursor to an out of bounds value.
-                mIterator.cursorIndex[cursor] = SIZE_MAX;
-                mIterator.cursorRows[cursor] = 0;
+                mIterator.targetArchetypes[i] = archetype;
+                mIterator.cursorRows[i] = mView.mFilter.mWorld.tables().dense().at(archetype).row(ent.index);
             }
         }
 
