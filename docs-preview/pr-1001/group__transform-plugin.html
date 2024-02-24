@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Engine &raquo; Transform module | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          Transform <span class="m-thin">module</span></h1>
+        <p>Adds transform components which assign positions, rotations and scaling to entities.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li><a href="#autotoc_md99">Components</a></li>
+            <li><a href="#autotoc_md100">Relations</a></li>
+            <li><a href="#autotoc_md101">Tags</a></li>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>This plugin operates on entities with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> and <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components, and any combination of the <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components. For example, if you have an entity which doesn&#x27;t need rotation, but has a position and a scale, you do not need to add the <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> component, and its transform will still be updated.</p><aside class="m-note m-info"><h4>Note</h4><p>Any entity with either a <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> or <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> component automatically gets a <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> component.</p></aside><section id="autotoc_md99"><h3><a href="#autotoc_md99">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> - holds the local to parent transform matrix.</li><li><a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> - holds the local to world transform matrix.</li><li><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> - holds the position of an entity.</li><li><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> - holds the rotation of an entity.</li><li><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> - holds the scaling of an entity.</li></ul></section><section id="autotoc_md100"><h3><a href="#autotoc_md100">Relations</a></h3><ul><li><a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a> - tree like relation which indicates an entity is a child of another.</li></ul></section><section id="autotoc_md101"><h3><a href="#autotoc_md101">Tags</a></h3><ul><li><code>cubos.transform.missing.local_to_world</code> - the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are added to entities with <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> or <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</li><li><code>cubos.transform.missing</code> - the <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a>, <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> and possibly <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components are added to entities with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components.</li><li><code>cubos.transform.update.relative</code> - the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> or <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</li><li><code>cubos.transform.update</code> - the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> component and the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components of the parent.</li></ul></section>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
+          <dl class="m-doc">
+            <dt>file <a href="child__of_8hpp.html" class="m-doc">child_of.hpp</a></dt>
+            <dd>Relation <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">cubos::<wbr />engine::<wbr />ChildOf</a>.</dd>
+            <dt>file <a href="local__to__parent_8hpp.html" class="m-doc">local_to_parent.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">cubos::<wbr />engine::<wbr />LocalToParent</a>.</dd>
+            <dt>file <a href="local__to__world_8hpp.html" class="m-doc">local_to_world.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">cubos::<wbr />engine::<wbr />LocalToWorld</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2transform_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
+            <dt>file <a href="position_8hpp.html" class="m-doc">position.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">cubos::<wbr />engine::<wbr />Position</a>.</dd>
+            <dt>file <a href="rotation_8hpp.html" class="m-doc">rotation.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">cubos::<wbr />engine::<wbr />Rotation</a>.</dd>
+            <dt>file <a href="scale_8hpp.html" class="m-doc">scale.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">cubos::<wbr />engine::<wbr />Scale</a>.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">cubos::engine::ChildOf</a>
+            </dt>
+            <dd>Tree relation which indicates the &#x27;from&#x27; entity is a child of the &#x27;to&#x27; entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">cubos::engine::LocalToParent</a>
+            </dt>
+            <dd>Component which stores the transformation matrix of an entity, from local to parent space.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">cubos::engine::LocalToWorld</a>
+            </dt>
+            <dd>Component which stores the transformation matrix of an entity, from local to world space.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">cubos::engine::Position</a>
+            </dt>
+            <dd>Component which assigns a position to an entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">cubos::engine::Rotation</a>
+            </dt>
+            <dd>Component which assigns a rotation to an entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">cubos::engine::Scale</a>
+            </dt>
+            <dd>Component which assigns a uniform scale to an entity.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga2c61d596bb784b0791e87d0fc8197f54"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc-self">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2transform_2plugin_8hpp.html">&lt;engine/transform/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
