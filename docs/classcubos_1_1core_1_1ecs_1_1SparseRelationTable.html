@@ -56,6 +56,7 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
@@ -63,6 +64,17 @@
           </ul>
         </nav>
 <p>Internally, the table is stored simply as a vector of relations and their data. Each row in this table stores:</p><ul><li>the &#x27;from&#x27; entity index;</li><li>the &#x27;to&#x27; entity index;</li><li>the previous and next rows with the same &#x27;from&#x27; index;</li><li>the previous and next rows with the same &#x27;to&#x27; index;</li><li>the relation data itself.</li></ul><p>To make random accesses more efficient, we also store an hashtable which maps entity index pairs to rows. This way, we can quickly check if a relation exists or where it&#x27;s stored.</p><p>Additionally, we store two other hashtables, one which associate &#x27;from&#x27; and &#x27;to&#x27; indices to rows in the table which represent the first and last nodes of linked lists, where each node is a row with the same &#x27;from&#x27; or &#x27;to&#x27; index, depending on the list.</p><p>These linked lists are essential to provide fast query times, as instead of having to iterate over the entire table and filter for entity, we only need to follow the linked list chain.</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ac8097a3234006937f59f4e7f24ca18ce" class="m-doc">Transformation</a> { </span><span class="m-doc-wrap"><a href="#ac8097a3234006937f59f4e7f24ca18cea6adf97f83acf6453d4a6a4b1070f3754" class="m-doc">None</a>,
+              <a href="#ac8097a3234006937f59f4e7f24ca18cea8778f5cc5ee1685fb97ad92e33e63225" class="m-doc">Swap</a>,
+              <a href="#ac8097a3234006937f59f4e7f24ca18cea2e6d340e8627aa512d337faef8fe58a5" class="m-doc">SwapIfGreater</a> }</span>
+            </dt>
+            <dd>Transformations to apply while moving relations between tables.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -91,8 +103,9 @@
             </dt>
             <dd>Removes all relations from the given index.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af8227fa17b7a094316b2ed39e7126527" class="m-doc">moveFrom</a>(</span><span class="m-doc-wrap">uint32_t from,
-              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other) -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a44e0d32a7910ec0e13cca91aefb8fdbd" class="m-doc">moveFrom</a>(</span><span class="m-doc-wrap">uint32_t from,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ac8097a3234006937f59f4e7f24ca18ce" class="m-doc">Transformation</a> transformation) -&gt; std::size_t</span>
             </dt>
             <dd>Moves all relations with the given from index to another table.</dd>
             <dt>
@@ -100,8 +113,9 @@
             </dt>
             <dd>Removes all relations to the given index.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a980d63d6c4c566628008d5943322ca14" class="m-doc">moveTo</a>(</span><span class="m-doc-wrap">uint32_t to,
-              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other) -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac16d8fb081e16922ec63d8f75eaab104" class="m-doc">moveTo</a>(</span><span class="m-doc-wrap">uint32_t to,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ac8097a3234006937f59f4e7f24ca18ce" class="m-doc">Transformation</a> transformation) -&gt; std::size_t</span>
             </dt>
             <dd>Moves all relations with the given to index to another table.</dd>
             <dt>
@@ -128,6 +142,14 @@
               uint32_t&amp; to) const</span>
             </dt>
             <dd>Get the entity indices at the given row.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a38402a8f44ef264be08688a232edb76b" class="m-doc">from</a>(</span><span class="m-doc-wrap">std::size_t row) const -&gt; uint32_t</span>
+            </dt>
+            <dd>Get the &#x27;from&#x27; entity index at the given row.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0aedd7b80cac688ba7142a3d40eeff5b" class="m-doc">to</a>(</span><span class="m-doc-wrap">std::size_t row) const -&gt; uint32_t</span>
+            </dt>
+            <dd>Get the &#x27;to&#x27; entity index at the given row.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a88129d3a95f09f15ef3b728c10fb9761" class="m-doc">firstFrom</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; std::size_t</span>
             </dt>
@@ -165,6 +187,38 @@
             </dt>
             <dd>Returns the number of relations on the table.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="ac8097a3234006937f59f4e7f24ca18ce"><div>
+            <h3>
+              enum class cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /><a href="#ac8097a3234006937f59f4e7f24ca18ce" class="m-doc-self">Transformation</a>
+            </h3>
+            <p>Transformations to apply while moving relations between tables.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#ac8097a3234006937f59f4e7f24ca18cea6adf97f83acf6453d4a6a4b1070f3754" class="m-doc-self" id="ac8097a3234006937f59f4e7f24ca18cea6adf97f83acf6453d4a6a4b1070f3754">None</a></td>
+                  <td>
+                  <p>Keep the relations as they are.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ac8097a3234006937f59f4e7f24ca18cea8778f5cc5ee1685fb97ad92e33e63225" class="m-doc-self" id="ac8097a3234006937f59f4e7f24ca18cea8778f5cc5ee1685fb97ad92e33e63225">Swap</a></td>
+                  <td>
+                  <p>Flip the &#x27;from&#x27; and &#x27;to&#x27; indices.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ac8097a3234006937f59f4e7f24ca18cea2e6d340e8627aa512d337faef8fe58a5" class="m-doc-self" id="ac8097a3234006937f59f4e7f24ca18cea2e6d340e8627aa512d337faef8fe58a5">SwapIfGreater</a></td>
+                  <td>
+                  <p>Swap if the &#x27;from&#x27; index is greater than the &#x27;to&#x27; index.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
         <section>
           <h2>Function documentation</h2>
@@ -270,10 +324,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af8227fa17b7a094316b2ed39e7126527"><div>
+          <section class="m-doc-details" id="a44e0d32a7910ec0e13cca91aefb8fdbd"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8227fa17b7a094316b2ed39e7126527" class="m-doc-self">moveFrom</a>(</span><span class="m-doc-wrap">uint32_t from,
-              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other)</span></span>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a44e0d32a7910ec0e13cca91aefb8fdbd" class="m-doc-self">moveFrom</a>(</span><span class="m-doc-wrap">uint32_t from,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ac8097a3234006937f59f4e7f24ca18ce" class="m-doc">Transformation</a> transformation)</span></span>
             </h3>
             <p>Moves all relations with the given from index to another table.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -288,6 +343,10 @@
                 <tr>
                   <td>other</td>
                   <td>Other table. Must have the same relation type.</td>
+                </tr>
+                <tr>
+                  <td>transformation</td>
+                  <td>Transformation to apply to the relations.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -321,10 +380,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a980d63d6c4c566628008d5943322ca14"><div>
+          <section class="m-doc-details" id="ac16d8fb081e16922ec63d8f75eaab104"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a980d63d6c4c566628008d5943322ca14" class="m-doc-self">moveTo</a>(</span><span class="m-doc-wrap">uint32_t to,
-              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other)</span></span>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac16d8fb081e16922ec63d8f75eaab104" class="m-doc-self">moveTo</a>(</span><span class="m-doc-wrap">uint32_t to,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; other,
+              <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ac8097a3234006937f59f4e7f24ca18ce" class="m-doc">Transformation</a> transformation)</span></span>
             </h3>
             <p>Moves all relations with the given to index to another table.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -339,6 +399,10 @@
                 <tr>
                   <td>other</td>
                   <td>Other table. Must have the same relation type.</td>
+                </tr>
+                <tr>
+                  <td>transformation</td>
+                  <td>Transformation to apply to the relations.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -478,6 +542,54 @@
                   <td>To index.</td>
                 </tr>
               </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>row</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a38402a8f44ef264be08688a232edb76b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint32_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38402a8f44ef264be08688a232edb76b" class="m-doc-self">from</a>(</span><span class="m-doc-wrap">std::size_t row) const</span></span>
+            </h3>
+            <p>Get the &#x27;from&#x27; entity index at the given row.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">row</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Row.html" class="m-doc">Row</a> to get.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>From index.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>row</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a0aedd7b80cac688ba7142a3d40eeff5b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint32_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0aedd7b80cac688ba7142a3d40eeff5b" class="m-doc-self">to</a>(</span><span class="m-doc-wrap">std::size_t row) const</span></span>
+            </h3>
+            <p>Get the &#x27;to&#x27; entity index at the given row.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">row</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Row.html" class="m-doc">Row</a> to get.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>From index.</td>
+                </tr>
+              </tfoot>
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>row</code> is out of bounds.</p></aside>
           </div></section>
