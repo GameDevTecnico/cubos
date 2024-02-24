@@ -15,12 +15,10 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
     cubos.system("detect new colliders")
         .tagged("cubos.collisions.aabb.setup")
         .call([](Query<Entity, const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
+            sweepAndPrune.clearEntities();
             for (auto [entity, collider] : query)
             {
-                if (collider.fresh == 0)
-                {
-                    sweepAndPrune.addEntity(entity);
-                }
+                sweepAndPrune.addEntity(entity);
             }
         });
 
