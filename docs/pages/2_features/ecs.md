@@ -42,6 +42,8 @@ systems, since they have clearly defined dependencies.
   tree).
 - **Components** - data associated with an entity (e.g. @ref
   cubos::engine::Position "Position", @ref cubos::engine::Rotation "Rotation").
+- **Relations** - data associated to a pair of entities (e.g., @ref cubos::engine::ChildOf "ChildOf",
+  @ref cubos::engine::CollidingWith "CollidingWith")
 - **Resources** - singleton-like objects which are stored per world and which
   do not belong to a specific entity (e.g. @ref cubos::engine::DeltaTime
   "DeltaTime", @ref cubos::engine::Input "Input").
@@ -106,22 +108,21 @@ So, where does the `update` logic belong? We put it in a system. Systems are
 functions whose arguments are of certain types, which you can read more about
 in the @ref core-ecs "ECS module page".
 
-To access a resource, we use the `Read` and `Write` arguments. In this case, we
-won't be modifying the delta time, so we will use `const DeltaTime&`. To access
-entities and their components, we use the `Query` argument. In this case we
-we want to access all entities with both positions and velocities, and modify
-their positions, so we will use `Query<Position&, const Velocity&>`.
+To access a resource, simply add a reference to it as an argument. In this case,
+we won't be modifying the delta time, so we will use `const DeltaTime&`. To
+access entities and their components, we use the `Query` argument. In this case
+we we want to access all entities with both positions and velocities, and
+modify their positions, so we will use `Query<Position&, const Velocity&>`.
 
 ```cpp
-void velocitySystem(
-    const DeltaTime& dt,
-    Query<Position&, const Velocity&> query)
-{
-    for (auto [entity, position, velocity] : query)
-    {
-        position->vec += velocity->vec * dt->value;
-    }
-}
+cubos.system("integrate velocity")
+     .call([](const DeltaTime& dt, Query<Position&, const Velocity&> query) 
+     {
+         for (auto [position, velocity] : query)
+         {
+             position->vec += velocity->vec * dt->value;
+         }
+     });
 ```
 
 We can then iterate over all queried entities and update their positions using
@@ -129,32 +130,31 @@ their velocities and the delta time.
 
 ## Going further
 
-### Registering resources and components
+### Registering types
 
-Before components and resources are used in a World, they must be registered
+Before components, relations and resources are used in a World, they must be registered
 on it. This should be done once, at the start of the program. For example,
 using the **CUBOS.** @ref cubos::core::ecs::Cubos "main class", for the
 previous example we would write:
 
 ```cpp
 cubos.addComponent<Position>();
-cubos.addComponent<Velocity>();
+cubos.addRelation<ChildOf>();
 cubos.addResource<DeltaTime>();
 ```
 
-@note If you're working directly with a World, you can use the
-@ref cubos::core::ecs::World::registerComponent() "World::registerComponent()"
-and @ref cubos::core::ecs::World::registerResource()
-"World::registerResource()" methods to achieve the same result.
+@note If you're working directly with a World, you can use methods such as
+@ref cubos::core::ecs::World::registerComponent() "World::registerComponent()" to achieve the same result.
 
 ### Commands
 
 When you have direct access to the World, you can manipulate entities directly:
 
 ```cpp
-auto entity = world.create(Position {}, Velocity {});
-world.removeComponent<Velocity>(entity);
-world.addComponent(entity, Dead {});
+auto entity = world.create();
+world.components(entity).add<Position>();
+world.components(entity).remove<Position>();
+world.components(entity).add<Dead>();
 world.destroy(entity);
 ```
 
@@ -171,25 +171,36 @@ Imagine we want to have spawners which create new entities on their position
 and then destroy themselves. We can implement this with a system like this:
 
 ```cpp
-void spawnerSystem(
-    Commands commands,
-    Query<const Spawner&, const Position&> spawners)
-{
-    for (auto [entity, spawner, position] : spawners)
-    {
-        commands.create(
-            Position { position->vec },
-            Velocity { glm::vec3(0.0f, 0.0f, 1.0f )}
-        );
-        commands.destroy(entity);
-    }
-}
+cubos.system("spawn entities")
+     .call([](Commands commands, Query<Entity, const Spawner&, const Position&> spawners)
+     {
+         for (auto [entity, spawner, position] : spawners)
+         {
+             commands.create()
+                     .add(position)
+                     .add(Velocity{{0.0F, 0.0F, 1.0F}});
+             commands.destroy(entity);
+         }
+     });
 ```
 
 This system iterates over all entities with `Spawner` and `Position`
 components. It creates new entities on their positions with a velocity of
 `(0, 0, 1)`, and then destroys the spawner entity. The entities are only
 actually created and destroyed later on, when the commands are executed.
+
+### Relations
+
+Relations are just like components, but they're much more powerful.
+Instead of being associated to a single entity, they're associated to two entities: the 'from' entity and the 'to' entity.
+There are three types of relations:
+- Default - relations which have a orientation (e.g. from and to have distinct meanings), and which have no restriction on the number.
+- Tree - relations which too have orientation, but with the extra restriction that an entity can only appear in the 'from' side of at least one instance of the relation type. One example is the @ref cubos::engine::ChildOf "ChildOf" relation.
+- Symmetric - relations whose orientation doesn't matter. One example is the @ref cubos::engine::CollidingWith "CollidingWith" relation.
+
+They can be created using either @ref cubos::engine::Commands::relate "Commands::relate()" or the @ref cubos::core::ecs::World::relate "World::relate()" methods. They can also be destroyed using @ref cubos::engine::Commands::unrelate "Commands::unrelate()" or @ref cubos::core::ecs::World::unrelate "World::unrelate()".
+
+Relations can also be queried in systems - read the multiple-target section on the @ref features-queries guide for more information on that.
 
 ### Blueprints
 
@@ -202,9 +213,17 @@ For example, if we wanted to create a blueprint for a motorbike with two
 wheels:
 ```cpp
 auto motorbike = ecs::Blueprint();
-auto body = motorbike.create("body", Position{...}, ...);
-motorbike.create("front_wheel", Parent{body}, ...);
-motorbike.create("back_wheel", Parent{body}, ...);
+
+auto body = motorbike.create("body");
+motorbike.add(body, Position{...});
+
+auto frontWheel = motorbike.create("front_wheel");
+motorbike.add(frontWheel, Position{...});
+motorbike.relate(frontWheel, body, ChildOf{});
+
+auto backWheel = motorbike.create("back_wheel");
+motorbike.add(backWheel, Position{...});
+motorbike.relate(backWheel, body, ChildOf{});
 ```
 
 To spawn the blueprint into the world:
@@ -227,14 +246,14 @@ blueprint for the wheels of the motorbike:
 
 ```cpp
 auto wheel = ecs::Blueprint();
-wheel.create("wheel", ...);
+wheel.create("wheel");
 ```
 
 When creating the motorbike blueprint, we can merge the wheel blueprint into
 it:
 ```cpp
 auto motorbike = ecs::Blueprint();
-auto body = motorbike.create("body", Position{...}, ...);
+auto body = motorbike.create("body", Position{...});
 motorbike.merge("front", wheel);
 motorbike.merge("back", wheel);
 ```
