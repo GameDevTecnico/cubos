@@ -106,11 +106,19 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a45e161dbcb244bc48212511c184906c3" class="m-doc">tag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
             </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the given tag.</dd>
+            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems with the given tag.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a52d9164ec56cc4075f12ed13a1da8e38" class="m-doc">startupTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
             </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the given startup tag.</dd>
+            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems with the given startup tag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7dd9be7047dea97c13dacae2eaabf0fe" class="m-doc">noTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+            </dt>
+            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given tag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a232fe348a15ba1c50064935270c730bd" class="m-doc">noStartupTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+            </dt>
+            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given startup tag.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1a07b2cf799947f70d9239c673557c38" class="m-doc">system</a>(</span><span class="m-doc-wrap">std::string name) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a></span>
             </dt>
@@ -293,7 +301,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45e161dbcb244bc48212511c184906c3" class="m-doc-self">tag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
-            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the given tag.</p>
+            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems with the given tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -301,13 +309,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">tag</td>
-                  <td>Tag to configure.</td>
+                  <td>Tag.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> used to configure the tag.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
                 </tr>
               </tfoot>
             </table>
@@ -316,7 +324,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a52d9164ec56cc4075f12ed13a1da8e38" class="m-doc-self">startupTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
-            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the given startup tag.</p>
+            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems with the given startup tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -324,13 +332,59 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">tag</td>
-                  <td>Tag to configure.</td>
+                  <td>Tag.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> used to configure the tag.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7dd9be7047dea97c13dacae2eaabf0fe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7dd9be7047dea97c13dacae2eaabf0fe" class="m-doc-self">noTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+            </h3>
+            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td>Tag.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a232fe348a15ba1c50064935270c730bd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a232fe348a15ba1c50064935270c730bd" class="m-doc-self">noStartupTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+            </h3>
+            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given startup tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td>Tag.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
                 </tr>
               </tfoot>
             </table>
