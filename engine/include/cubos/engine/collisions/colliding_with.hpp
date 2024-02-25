@@ -1,5 +1,5 @@
 /// @file
-/// @brief Component @ref cubos::engine::CollidingWith.
+/// @brief Relation @ref cubos::engine::CollidingWith.
 /// @ingroup collisions-plugin
 
 #pragma once
@@ -11,7 +11,7 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which represents a collision.
+    /// @brief Relation which represents a collision.
     /// @ingroup collisions-plugin
     struct CollidingWith
     {
