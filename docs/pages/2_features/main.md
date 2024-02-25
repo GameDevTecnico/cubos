@@ -38,6 +38,7 @@ dive into the documentation of each class and function.
 
 - @subpage features-ecs - @copybrief features-ecs
 - @subpage features-plugins - @copybrief features-plugins
+- @subpage features-queries - @copybrief features-queries
 - @subpage features-quadrados - @copybrief features-quadrados
 
 ## What we don't have and where are we going
