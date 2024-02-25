@@ -25,15 +25,12 @@ nothing else - not even open a window - would look like this:
 
 using cubos::engine::Cubos;
 
-void helloWorld()
-{
-    std::cout << "Hello World!" << std::endl;
-}
-
 int main()
 {
     Cubos cubos;
-    cubos.startupSystem(helloWorld);
+    cubos.startupSystem([]() {
+        std::cout << "Hello World!" << std::endl;
+    });
     cubos.run();
 }
 ```
@@ -62,14 +59,11 @@ example would look like this:
 
 using cubos::engine::Cubos;
 
-void helloWorld()
-{
-    std::cout << "Hello World!" << std::endl;
-}
-
 void helloWorldPlugin(Cubos& cubos)
 {
-    cubos.startupSystem(helloWorld);
+    cubos.startupSystem([]() {
+        std::cout << "Hello World!" << std::endl;
+    });
 }
 
 int main()
