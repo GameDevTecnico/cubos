@@ -33,6 +33,20 @@ TEST_CASE("ecs::Cubos")
         CHECK(acc == 30);
     }
 
+    SUBCASE("system conditions are called")
+    {
+        static int acc = 1;
+        CHECK(acc == 1);
+        cubos.startupSystem("mul 2")
+            .onlyIf([]() {
+                acc *= 3;
+                return true;
+            })
+            .call([]() { acc *= 2; });
+        cubos.run();
+        CHECK(acc == 6);
+    }
+
     SUBCASE("single resource")
     {
         cubos.addResource<int>(0);

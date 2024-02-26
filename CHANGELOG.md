@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Crash in multiple samples due to missing plugin dependencies (**@RiscadoA**).
 - Cursor offset in tesseratos when on retina displays (#998, **@diogomsmiranda**).
 - Random failures in the ECS stress test (#948, **@RiscadoA**).
+- System condition being ignored by Cubos (#1032, **@RiscadoA**).
 
 ## [v0.1.0] - 2024-02-17
 
