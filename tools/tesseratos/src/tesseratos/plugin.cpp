@@ -1,6 +1,7 @@
 #include <tesseratos/asset_explorer/plugin.hpp>
 #include <tesseratos/collider_gizmos/plugin.hpp>
 #include <tesseratos/debug_camera/plugin.hpp>
+#include <tesseratos/ecs_statistics/plugin.hpp>
 #include <tesseratos/entity_inspector/plugin.hpp>
 #include <tesseratos/metrics_panel/plugin.hpp>
 #include <tesseratos/play_pause/plugin.hpp>
@@ -24,4 +25,5 @@ void tesseratos::plugin(cubos::engine::Cubos& cubos)
     cubos.addPlugin(transformGizmoPlugin);
     cubos.addPlugin(colliderGizmosPlugin);
     cubos.addPlugin(playPausePlugin);
+    cubos.addPlugin(ecsStatisticsPlugin);
 }

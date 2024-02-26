@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for queries with more than one unrelated targets (#930, **@RiscadoA**).
 - Fixed Time Step plugin (#989, **@joaomanita**).
 - New feature guide focused on queries (#995, **@RiscadoA**).
+- ECS Statistics tesseratos plugin (#1024, **@RiscadoA**).
 
 ### Fixed
 
