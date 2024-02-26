@@ -17,11 +17,6 @@ namespace cubos::core::ecs
     class SparseRelationTableRegistry
     {
     public:
-        ~SparseRelationTableRegistry();
-
-        /// @brief Constructs.
-        SparseRelationTableRegistry();
-
         /// @brief Stores the ids of tables of a given type.
         class TypeIndex
         {
@@ -59,6 +54,14 @@ namespace cubos::core::ecs
                 mSparseRelationTableIdsByTo;
             int mMaxDepth{0};
         };
+
+        /// @brief Used to iterate over type indices in the registry.
+        using Iterator = std::unordered_map<DataTypeId, TypeIndex, DataTypeIdHash>::const_iterator;
+
+        ~SparseRelationTableRegistry();
+
+        /// @brief Constructs.
+        SparseRelationTableRegistry();
 
         /// @brief Checks if there's a table with the given identifier.
         /// @param id Identifier.
@@ -117,14 +120,14 @@ namespace cubos::core::ecs
 
         /// @brief Gets an iterator to the start of the type indices of this registry.
         /// @return Iterator.
-        auto begin() const
+        Iterator begin() const
         {
             return mTypeIndices.cbegin();
         }
 
         /// @brief Gets an iterator to the end of the type indices of this registry.
         /// @return Iterator.
-        auto end() const
+        Iterator end() const
         {
             return mTypeIndices.cend();
         }

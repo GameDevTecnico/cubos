@@ -108,43 +108,38 @@ void ExpectedWorld::testEntity(World& world, Entity entity)
             REQUIRE(expectedEntity.components.find(component.type) != expectedEntity.components.end());
         }
 
-        // Check if all relations are correct.
+        // Make sure that all expected relations are present.
         for (const auto& [relationType, expectedRelations] : expectedEntity.incoming)
         {
-            auto dataTypeId = world.types().id(*relationType);
-            QueryFilter filter{world, {QueryTerm::makeRelation(dataTypeId, 0, 1)}};
-            for (auto match : filter.view().pin(1, entity))
-            {
-                REQUIRE(match.entities[1] == entity);
-                REQUIRE(expectedRelations.contains(match.entities[0]));
-                const auto* data = world.relation(match.entities[0], match.entities[1], *relationType);
-                REQUIRE(static_cast<const ExpectedInteger*>(data)->value == expectedRelations.at(match.entities[0]));
-            }
-
-            // Make sure that all expected relations are present.
             for (const auto& [fromEntity, expectedValue] : expectedRelations)
             {
-                REQUIRE(world.related(fromEntity, entity, *relationType));
+                REQUIRE(world.relationsTo(entity).has(*relationType, fromEntity));
+                const auto* data = world.relationsTo(entity).get(*relationType, fromEntity);
+                REQUIRE(static_cast<const ExpectedInteger*>(data)->value == expectedValue);
             }
         }
 
         for (const auto& [relationType, expectedRelations] : expectedEntity.outgoing)
         {
-            auto dataTypeId = world.types().id(*relationType);
-            QueryFilter filter{world, {QueryTerm::makeRelation(dataTypeId, 0, 1)}};
-            for (auto match : filter.view().pin(0, entity))
-            {
-                REQUIRE(match.entities[0] == entity);
-                REQUIRE(expectedRelations.contains(match.entities[1]));
-                const auto* data = world.relation(match.entities[0], match.entities[1], *relationType);
-                REQUIRE(static_cast<const ExpectedInteger*>(data)->value == expectedRelations.at(match.entities[1]));
-            }
-
-            // Make sure that all expected relations are present.
             for (const auto& [toEntity, expectedValue] : expectedRelations)
             {
-                REQUIRE(world.related(entity, toEntity, *relationType));
+                REQUIRE(world.relationsFrom(entity).has(*relationType, toEntity));
+                const auto* data = world.relationsFrom(entity).get(*relationType, toEntity);
+                REQUIRE(static_cast<const ExpectedInteger*>(data)->value == expectedValue);
             }
+        }
+
+        // Make sure that there are no more relations than expected.
+        for (const auto& [type, data, fromEntity] : world.relationsTo(entity))
+        {
+            REQUIRE(expectedEntity.incoming.find(type) != expectedEntity.incoming.end());
+            REQUIRE(expectedEntity.incoming.at(type).find(fromEntity) != expectedEntity.incoming.at(type).end());
+        }
+
+        for (const auto& [type, data, toEntity] : world.relationsFrom(entity))
+        {
+            REQUIRE(expectedEntity.outgoing.find(type) != expectedEntity.outgoing.end());
+            REQUIRE(expectedEntity.outgoing.at(type).find(toEntity) != expectedEntity.outgoing.at(type).end());
         }
     }
     else

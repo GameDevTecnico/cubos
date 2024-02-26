@@ -159,6 +159,26 @@ World::ConstComponents World::components(Entity entity) const
     return ConstComponents{*this, entity};
 }
 
+World::Relations World::relationsFrom(Entity entity)
+{
+    return Relations{*this, entity, true};
+}
+
+World::ConstRelations World::relationsFrom(Entity entity) const
+{
+    return ConstRelations{*this, entity, true};
+}
+
+World::Relations World::relationsTo(Entity entity)
+{
+    return Relations{*this, entity, false};
+}
+
+World::ConstRelations World::relationsTo(Entity entity) const
+{
+    return ConstRelations{*this, entity, false};
+}
+
 void World::relate(Entity from, Entity to, const reflection::Type& type, void* value)
 {
     CUBOS_ASSERT(this->isAlive(from));
@@ -702,6 +722,62 @@ auto World::ConstComponents::end() const -> Iterator
     return Iterator{*this, true};
 }
 
+World::Relations::Relations(World& world, Entity entity, bool from)
+    : mWorld{world}
+    , mEntity{entity}
+    , mFrom{from}
+{
+    CUBOS_ASSERT(world.isAlive(entity));
+}
+
+bool World::Relations::has(const reflection::Type& type, Entity entity) const
+{
+    return ConstRelations{mWorld, mEntity, mFrom}.has(type, entity);
+}
+
+void* World::Relations::get(const reflection::Type& type, Entity entity)
+{
+    return mWorld.relation(mFrom ? mEntity : entity, mFrom ? entity : mEntity, type);
+}
+
+auto World::Relations::begin() -> Iterator
+{
+    return Iterator{*this, false};
+}
+
+auto World::Relations::end() -> Iterator
+{
+    return Iterator{*this, true};
+}
+
+World::ConstRelations::ConstRelations(const World& world, Entity entity, bool from)
+    : mWorld{world}
+    , mEntity{entity}
+    , mFrom{from}
+{
+    CUBOS_ASSERT(world.isAlive(entity));
+}
+
+bool World::ConstRelations::has(const reflection::Type& type, Entity entity) const
+{
+    return mWorld.related(mFrom ? mEntity : entity, mFrom ? entity : mEntity, type);
+}
+
+const void* World::ConstRelations::get(const reflection::Type& type, Entity entity)
+{
+    return mWorld.relation(mFrom ? mEntity : entity, mFrom ? entity : mEntity, type);
+}
+
+auto World::ConstRelations::begin() -> Iterator
+{
+    return Iterator{*this, false};
+}
+
+auto World::ConstRelations::end() -> Iterator
+{
+    return Iterator{*this, true};
+}
+
 World::Components::Iterator::Iterator(Components& components, bool end)
     : mComponents{components}
 {
@@ -800,4 +876,213 @@ auto World::ConstComponents::Iterator::operator++() -> Iterator&
     }
     mId = column.dataType();
     return *this;
+}
+
+World::Relations::Iterator::Iterator(Relations& relations, bool end)
+    : mRelations{relations}
+    , mIterator{relations.mWorld.mTables.sparseRelation().end()}
+{
+    if (!end)
+    {
+        mIterator = relations.mWorld.mTables.sparseRelation().begin();
+        this->advance();
+    }
+}
+
+bool World::Relations::Iterator::operator==(const Iterator& other) const
+{
+    return mIterator == other.mIterator && mReverse == other.mReverse && mTableIndex == other.mTableIndex &&
+           mRow == other.mRow && mRelations.mEntity == other.mRelations.mEntity &&
+           mRelations.mFrom == other.mRelations.mFrom;
+}
+
+auto World::Relations::Iterator::operator*() const -> const Relation&
+{
+    CUBOS_ASSERT(mIterator != mRelations.mWorld.tables().sparseRelation().end(), "Iterator is out of bounds");
+
+    auto& sparseRelationTables = mRelations.mWorld.mTables.sparseRelation();
+    auto& table = sparseRelationTables.at(mTableId);
+    auto index = (mRelations.mFrom != mReverse) ? table.to(mRow) : table.from(mRow);
+    mRelation.type = &mRelations.mWorld.mTypes.type(mTableId.dataType);
+    mRelation.value = table.at(mRow);
+    mRelation.entity = Entity{index, mRelations.mWorld.generation(index)};
+    return mRelation;
+}
+
+auto World::Relations::Iterator::operator->() const -> const Relation*
+{
+    return &this->operator*();
+}
+
+auto World::Relations::Iterator::operator++() -> Iterator&
+{
+    CUBOS_ASSERT(mIterator != mRelations.mWorld.tables().sparseRelation().end(), "Iterator is out of bounds");
+    this->advance();
+    return *this;
+}
+
+void World::Relations::Iterator::advance()
+{
+    auto archetype = mRelations.mWorld.archetype(mRelations.mEntity);
+
+    auto& registry = mRelations.mWorld.tables().sparseRelation();
+    for (; mIterator != registry.end(); ++mIterator)
+    {
+        auto isSymmetric = mRelations.mWorld.mTypes.isSymmetricRelation(mIterator->first);
+
+        do
+        {
+            auto useFrom = mRelations.mFrom != mReverse;
+
+            const auto& archetypeToTables = useFrom ? mIterator->second.from() : mIterator->second.to();
+            if (!archetypeToTables.contains(archetype))
+            {
+                mReverse = false;
+                break;
+            }
+
+            const auto& tables = archetypeToTables.at(archetype);
+
+            if (mTableIndex > tables.size())
+            {
+                mTableIndex = 0;
+            }
+
+            for (; mTableIndex < tables.size(); ++mTableIndex)
+            {
+                mTableId = tables[mTableIndex];
+                auto& table = registry.at(mTableId);
+
+                if (mRow >= table.size())
+                {
+                    mRow =
+                        useFrom ? table.firstFrom(mRelations.mEntity.index) : table.firstTo(mRelations.mEntity.index);
+                }
+                else
+                {
+                    mRow = useFrom ? table.nextFrom(mRow) : table.nextTo(mRow);
+                }
+
+                if (mRow < table.size())
+                {
+                    // Found a match.
+                    return;
+                }
+
+                mRow = SIZE_MAX;
+            }
+
+            mTableIndex = SIZE_MAX;
+
+            if (isSymmetric)
+            {
+                mReverse = !mReverse;
+            }
+        } while (isSymmetric && mReverse);
+    }
+}
+
+World::ConstRelations::Iterator::Iterator(ConstRelations& relations, bool end)
+    : mRelations{relations}
+    , mIterator{relations.mWorld.mTables.sparseRelation().end()}
+{
+    if (!end)
+    {
+        mIterator = relations.mWorld.mTables.sparseRelation().begin();
+        this->advance();
+    }
+}
+
+bool World::ConstRelations::Iterator::operator==(const Iterator& other) const
+{
+    return mIterator == other.mIterator && mReverse == other.mReverse && mTableIndex == other.mTableIndex &&
+           mRow == other.mRow && mRelations.mEntity == other.mRelations.mEntity &&
+           mRelations.mFrom == other.mRelations.mFrom;
+}
+
+auto World::ConstRelations::Iterator::operator*() const -> const Relation&
+{
+    CUBOS_ASSERT(mIterator != mRelations.mWorld.tables().sparseRelation().end(), "Iterator is out of bounds");
+
+    const auto& sparseRelationTables = mRelations.mWorld.mTables.sparseRelation();
+    const auto& table = sparseRelationTables.at(mTableId);
+    auto index = (mRelations.mFrom != mReverse) ? table.to(mRow) : table.from(mRow);
+    mRelation.type = &mRelations.mWorld.mTypes.type(mTableId.dataType);
+    mRelation.value = table.at(mRow);
+    mRelation.entity = Entity{index, mRelations.mWorld.generation(index)};
+    return mRelation;
+}
+
+auto World::ConstRelations::Iterator::operator->() const -> const Relation*
+{
+    return &this->operator*();
+}
+
+auto World::ConstRelations::Iterator::operator++() -> Iterator&
+{
+    CUBOS_ASSERT(mIterator != mRelations.mWorld.tables().sparseRelation().end(), "Iterator is out of bounds");
+    this->advance();
+    return *this;
+}
+
+void World::ConstRelations::Iterator::advance()
+{
+    auto archetype = mRelations.mWorld.archetype(mRelations.mEntity);
+
+    // TODO: reduce code duplication with the non-const version of this function.
+    const auto& registry = mRelations.mWorld.tables().sparseRelation();
+    for (; mIterator != registry.end(); ++mIterator)
+    {
+        auto isSymmetric = mRelations.mWorld.mTypes.isSymmetricRelation(mIterator->first);
+
+        do
+        {
+            auto useFrom = mRelations.mFrom != mReverse;
+
+            const auto& archetypeToTables = useFrom ? mIterator->second.from() : mIterator->second.to();
+            if (!archetypeToTables.contains(archetype))
+            {
+                mReverse = false;
+                break;
+            }
+
+            const auto& tables = archetypeToTables.at(archetype);
+
+            if (mTableIndex > tables.size())
+            {
+                mTableIndex = 0;
+            }
+
+            for (; mTableIndex < tables.size(); ++mTableIndex)
+            {
+                mTableId = tables[mTableIndex];
+                auto& table = registry.at(mTableId);
+
+                if (mRow >= table.size())
+                {
+                    mRow =
+                        useFrom ? table.firstFrom(mRelations.mEntity.index) : table.firstTo(mRelations.mEntity.index);
+                }
+                else
+                {
+                    mRow = useFrom ? table.nextFrom(mRow) : table.nextTo(mRow);
+                }
+
+                if (mRow < table.size())
+                {
+                    // Found a match.
+                    return;
+                }
+
+                mRow = SIZE_MAX;
+            }
+
+            mTableIndex = SIZE_MAX;
+
+            if (isSymmetric)
+            {
+                mReverse = !mReverse;
+            }
+        } while (isSymmetric && mReverse);
+    }
 }
