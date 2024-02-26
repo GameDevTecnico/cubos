@@ -53,24 +53,34 @@ static bool succeed2Times(int& counter)
 /// Asserts that the order vector contains the given values in order.
 /// @param world The world the order vector is in.
 /// @param values The values to check for.
-static void assertOrder(World& world, std::vector<int> values)
+static void assertOrder(World& world, const std::vector<int>& values)
 {
     auto order = world.read<std::vector<int>>();
-    REQUIRE(order.get().size() == values.size());
-    for (std::size_t i = 0; i < values.size(); ++i)
+    CHECK(order.get().size() == values.size());
+    for (std::size_t i = 0; i < values.size() && i < order.get().size(); ++i)
     {
         CHECK(order.get()[i] == values[i]);
     }
 }
 
 /// Compiles the dispatcher chain and calls the systems.
-/// @param dispatcher The dispatcher to call.
 /// @param world The world to call the systems on.
+/// @param dispatcher The dispatcher to call.
 /// @param cmdBuffer The command buffer to call the systems on.
-static void singleDispatch(Dispatcher& dispatcher, CommandBuffer& cmdBuffer)
+/// @param values The values to check for.
+static void dispatchAndCheck(World& world, Dispatcher& dispatcher, CommandBuffer& cmdBuffer, std::vector<int> values)
 {
     dispatcher.compileChain();
-    dispatcher.callSystems(cmdBuffer);
+
+    // Run the test twice to ensure the dispatcher is stateless.
+    for (int i = 1; i <= 2; ++i)
+    {
+        INFO("Run ", i);
+        world.write<std::vector<int>>().get().clear();
+        world.write<int>().get() = 0;
+        dispatcher.callSystems(cmdBuffer);
+        assertOrder(world, values);
+    }
 }
 
 TEST_CASE("ecs::Dispatcher")
@@ -134,8 +144,7 @@ TEST_CASE("ecs::Dispatcher")
             dispatcher.tagSetAfterTag("3"); // anything without "3" runs after "3"
         }
 
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {3, 2, 1});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {3, 2, 1});
     }
 
     SUBCASE("1 runs first, then 3, and finally 2")
@@ -180,8 +189,7 @@ TEST_CASE("ecs::Dispatcher")
             dispatcher.tagSetBeforeTag("2"); // Repeat
         }
 
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {1, 3, 2});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {1, 3, 2});
     }
 
     SUBCASE("systems run when all of their conditions are fulfilled")
@@ -205,8 +213,7 @@ TEST_CASE("ecs::Dispatcher")
         // Since 5 was the last system added, it runs first, after its condition, 6.
         // Then 4 runs, since its condition, 6, succeeded.
         // Then 1 must run after its conditions, 2 and 3, succeed.
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {6, 5, 4, 2, 3, 1});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {6, 5, 4, 2, 3, 1});
     }
 
     SUBCASE("systems do not run when their conditions are not met")
@@ -235,8 +242,7 @@ TEST_CASE("ecs::Dispatcher")
         // First, 5 tries to run, but its condition 9 fails. The condition 10 is not checked.
         // Then, 1 tries to run, but its condition 3 fails. The condition 4 is not checked.
         // Then, 11 runs, since it has no conditions, and must run after 1 succeeds/is skipped.
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {8, 9, 2, 3, 11});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {8, 9, 2, 3, 11});
     }
 
     SUBCASE("constraints are transitive on tags without systems")
@@ -253,8 +259,7 @@ TEST_CASE("ecs::Dispatcher")
         // tag "a" runs before tag "b".
         // 3 is tagged with "b".
         // Therefore, 1 must run before 3.
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {1, 3});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {1, 3});
     }
 
     SUBCASE("repeat while")
@@ -264,8 +269,7 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
         dispatcher.systemAddGroup("repeat");
 
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {1, 1, 1});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {1, 1, 1});
     }
 
     SUBCASE("repeat while inside repeat while")
@@ -290,8 +294,7 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.systemAddTag("subtag");
         dispatcher.systemAddTag("last");
 
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {1, 2, 3, 2, 3, 1, 2, 3, 2, 3});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {1, 2, 3, 2, 3, 1, 2, 3, 2, 3});
     }
 
     SUBCASE("repeat while inside repeat while with condition in every system")
@@ -317,8 +320,7 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.systemAddTag("subtag");
         dispatcher.systemAddTag("last");
 
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {5, 1, 2, 3, 2, 3, 1, 2, 3, 2, 3});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {5, 1, 2, 3, 2, 3, 1, 2, 3, 2, 3});
     }
 
     SUBCASE("repeat while inside repeat while with condition in inner group")
@@ -344,7 +346,6 @@ TEST_CASE("ecs::Dispatcher")
         dispatcher.systemAddTag("subtag");
         dispatcher.systemAddTag("last");
 
-        singleDispatch(dispatcher, cmdBuffer);
-        assertOrder(world, {1, 5, 2, 3, 2, 3, 1, 2, 3, 2, 3});
+        dispatchAndCheck(world, dispatcher, cmdBuffer, {1, 5, 2, 3, 2, 3, 1, 2, 3, 2, 3});
     }
 }
