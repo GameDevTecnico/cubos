@@ -105,7 +105,7 @@ namespace cubos::core::ecs
         /// @param counter Counter previously returned by this function. Zero should be used for the first call.
         /// @param func Function which receives a table identifier.
         /// @return Counter to be passed to this function in a future call.
-        std::size_t forEach(std::size_t counter, auto func)
+        std::size_t forEach(std::size_t counter, auto func) const
         {
             for (; counter < mIds.size(); ++counter)
             {
