@@ -48,6 +48,10 @@ namespace cubos::core::ecs
         /// @return Whether the entity exists.
         bool contains(Entity entity) const;
 
+        /// @brief Gets the number of alive entities in the pool.
+        /// @return Number of entities.
+        size_t size() const;
+
     private:
         /// @brief Contains the state of an entity.
         struct Entry

@@ -420,6 +420,11 @@ const void* World::relation(Entity from, Entity to, const reflection::Type& type
     CUBOS_FAIL("No such relation {} from {} to {}", type.name(), from, to);
 }
 
+std::size_t World::entityCount() const
+{
+    return mEntityPool.size();
+}
+
 void World::propagateDepth(uint32_t index, DataTypeId dataType, int depth)
 {
     auto archetype = mEntityPool.archetype(index);

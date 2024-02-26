@@ -274,6 +274,10 @@ namespace cubos::core::ecs
             return *static_cast<const T*>(this->relation(from, to, reflection::reflect<T>()));
         }
 
+        /// @brief Gets the number of alive entities.
+        /// @return Number of alive entities.
+        std::size_t entityCount() const;
+
     private:
         /// @brief Called when an entity's depth changes. Propagates the change to incoming relations.
         /// @param index To entity index.
