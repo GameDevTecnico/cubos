@@ -57,6 +57,7 @@ namespace cubos::core::ecs
                 mValue.~T();
             }
 
+            mContains = true;
             new (&mValue) T(memory::move(value));
         }
 
