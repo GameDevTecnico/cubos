@@ -47,3 +47,8 @@ bool EntityPool::contains(Entity entity) const
 {
     return entity.index < mEntries.size() && mEntries[entity.index].generation == entity.generation;
 }
+
+std::size_t EntityPool::size() const
+{
+    return mEntries.size() - mFree.size();
+}
