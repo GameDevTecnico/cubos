@@ -40,12 +40,8 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
 
     cubos.system("show ECS statistics")
         .tagged("cubos.imgui")
-        .call([](Toolbox& toolbox, const World& world, State& state, EntitySelector& selector) {
-            if (!toolbox.isOpen("ECS Statistics"))
-            {
-                return;
-            }
-
+        .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("ECS Statistics"); })
+        .call([](const World& world, State& state, EntitySelector& selector) {
             if (world.isAlive(selector.selection))
             {
                 state.selectedArchetype = world.archetype(selector.selection);
@@ -79,54 +75,56 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
                 ImGui::Checkbox("Show Inactive", &state.showInactiveArchetypes);
                 ImGui::InputText("Filter by Column", state.columnFilter, sizeof(state.columnFilter),
                                  ImGuiInputTextFlags_AutoSelectAll);
-                ImGui::BeginTable("Archetypes", 3,
-                                  ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
-                                      ImGuiTableFlags_Sortable | ImGuiTableFlags_ScrollX);
-                ImGui::TableSetupColumn("ID");
-                ImGui::TableSetupColumn("Size");
-                ImGui::TableSetupColumn("Columns");
-                ImGui::TableHeadersRow();
-                int id = 0;
-                for (const auto& archetype : state.showInactiveArchetypes ? allArchetypes : activeArchetypes)
+                if (ImGui::BeginTable("Archetypes", 3,
+                                      ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
+                                          ImGuiTableFlags_Sortable | ImGuiTableFlags_ScrollX))
                 {
-                    std::string columns{};
-                    for (auto column = world.archetypeGraph().first(archetype); column != ColumnId::Invalid;
-                         column = world.archetypeGraph().next(archetype, column))
+                    ImGui::TableSetupColumn("ID");
+                    ImGui::TableSetupColumn("Size");
+                    ImGui::TableSetupColumn("Columns");
+                    ImGui::TableHeadersRow();
+                    int id = 0;
+                    for (const auto& archetype : state.showInactiveArchetypes ? allArchetypes : activeArchetypes)
                     {
-                        if (!columns.empty())
+                        std::string columns{};
+                        for (auto column = world.archetypeGraph().first(archetype); column != ColumnId::Invalid;
+                             column = world.archetypeGraph().next(archetype, column))
                         {
-                            columns += ", ";
+                            if (!columns.empty())
+                            {
+                                columns += ", ";
+                            }
+                            columns += world.types().type(column.dataType()).name();
                         }
-                        columns += world.types().type(column.dataType()).name();
-                    }
 
-                    if (columns.find(state.columnFilter) == std::string::npos)
-                    {
-                        continue;
-                    }
+                        if (columns.find(state.columnFilter) == std::string::npos)
+                        {
+                            continue;
+                        }
 
-                    ImGui::PushID(id++);
-                    ImGui::TableNextRow();
-                    ImGui::TableNextColumn();
-                    if (ImGui::Button(std::to_string(archetype.inner).c_str()))
-                    {
-                        state.selectedArchetype = archetype;
-                        selector.selection = {};
+                        ImGui::PushID(id++);
+                        ImGui::TableNextRow();
+                        ImGui::TableNextColumn();
+                        if (ImGui::Button(std::to_string(archetype.inner).c_str()))
+                        {
+                            state.selectedArchetype = archetype;
+                            selector.selection = {};
+                        }
+                        ImGui::TableNextColumn();
+                        if (world.tables().dense().contains(archetype))
+                        {
+                            ImGui::Text("%d", static_cast<int>(world.tables().dense().at(archetype).size()));
+                        }
+                        else
+                        {
+                            ImGui::Text("0");
+                        }
+                        ImGui::TableNextColumn();
+                        ImGui::Text("%s", columns.c_str());
+                        ImGui::PopID();
                     }
-                    ImGui::TableNextColumn();
-                    if (world.tables().dense().contains(archetype))
-                    {
-                        ImGui::Text("%d", static_cast<int>(world.tables().dense().at(archetype).size()));
-                    }
-                    else
-                    {
-                        ImGui::Text("0");
-                    }
-                    ImGui::TableNextColumn();
-                    ImGui::Text("%s", columns.c_str());
-                    ImGui::PopID();
+                    ImGui::EndTable();
                 }
-                ImGui::EndTable();
 
                 ImGui::PushID("Selected Archetype");
                 bool continueSelectedArchetype = true;
@@ -157,30 +155,32 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
                             ImGui::TreePop();
                         }
 
-                        ImGui::BeginTable("Selected Archetype", 2,
-                                          ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
-                                              ImGuiTableFlags_BordersOuter);
-                        ImGui::TableSetupColumn("Row");
-                        ImGui::TableSetupColumn("Entity", ImGuiTableColumnFlags_WidthStretch);
-                        ImGui::TableHeadersRow();
-                        for (std::size_t row = 0; row < table.size(); ++row)
+                        if (ImGui::BeginTable("Selected Archetype", 2,
+                                              ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
+                                                  ImGuiTableFlags_BordersOuter))
                         {
-                            ImGui::TableNextRow();
-                            ImGui::TableNextColumn();
-                            ImGui::Text("%d", static_cast<int>(row));
-                            ImGui::TableNextColumn();
-                            Entity entity{table.entity(row), world.generation(table.entity(row))};
-                            auto name = std::to_string(entity.index) + "#" + std::to_string(entity.generation);
-                            if (world.components(entity).has<Name>())
+                            ImGui::TableSetupColumn("Row");
+                            ImGui::TableSetupColumn("Entity", ImGuiTableColumnFlags_WidthStretch);
+                            ImGui::TableHeadersRow();
+                            for (std::size_t row = 0; row < table.size(); ++row)
                             {
-                                name = world.components(entity).get<Name>().value;
+                                ImGui::TableNextRow();
+                                ImGui::TableNextColumn();
+                                ImGui::Text("%d", static_cast<int>(row));
+                                ImGui::TableNextColumn();
+                                Entity entity{table.entity(row), world.generation(table.entity(row))};
+                                auto name = std::to_string(entity.index) + "#" + std::to_string(entity.generation);
+                                if (world.components(entity).has<Name>())
+                                {
+                                    name = world.components(entity).get<Name>().value;
+                                }
+                                if (ImGui::Button(name.c_str()))
+                                {
+                                    selector.selection = entity;
+                                }
                             }
-                            if (ImGui::Button(name.c_str()))
-                            {
-                                selector.selection = entity;
-                            }
+                            ImGui::EndTable();
                         }
-                        ImGui::EndTable();
                     }
 
                     if (!continueSelectedArchetype)
@@ -196,46 +196,48 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
             {
                 const auto& registry = world.tables().sparseRelation();
 
-                ImGui::BeginTable("Sparse Relation Types", 3,
-                                  ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable |
-                                      ImGuiTableFlags_SizingFixedFit);
-                ImGui::TableSetupColumn("Name");
-                ImGui::TableSetupColumn("Active Tables");
-                ImGui::TableSetupColumn("Inactive Tables");
-                ImGui::TableHeadersRow();
-                for (const auto& [dataTypeId, index] : registry)
+                if (ImGui::BeginTable("Sparse Relation Types", 3,
+                                      ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable |
+                                          ImGuiTableFlags_SizingFixedFit))
                 {
-                    int active = 0;
-                    int inactive = 0;
-
-                    for (const auto& [archetype, tables] : index.from())
+                    ImGui::TableSetupColumn("Name");
+                    ImGui::TableSetupColumn("Active Tables");
+                    ImGui::TableSetupColumn("Inactive Tables");
+                    ImGui::TableHeadersRow();
+                    for (const auto& [dataTypeId, index] : registry)
                     {
-                        for (const auto& table : tables)
+                        int active = 0;
+                        int inactive = 0;
+
+                        for (const auto& [archetype, tables] : index.from())
                         {
-                            if (registry.at(table).size() > 0)
+                            for (const auto& table : tables)
                             {
-                                ++active;
-                            }
-                            else
-                            {
-                                ++inactive;
+                                if (registry.at(table).size() > 0)
+                                {
+                                    ++active;
+                                }
+                                else
+                                {
+                                    ++inactive;
+                                }
                             }
                         }
-                    }
 
-                    ImGui::TableNextRow();
-                    ImGui::TableNextColumn();
-                    if (ImGui::Button(world.types().type(dataTypeId).name().c_str()))
-                    {
-                        state.selectedSparseRelationTypeId = dataTypeId;
-                        state.selectedSparseRelationTableId = {};
+                        ImGui::TableNextRow();
+                        ImGui::TableNextColumn();
+                        if (ImGui::Button(world.types().type(dataTypeId).name().c_str()))
+                        {
+                            state.selectedSparseRelationTypeId = dataTypeId;
+                            state.selectedSparseRelationTableId = {};
+                        }
+                        ImGui::TableNextColumn();
+                        ImGui::Text("%d", active);
+                        ImGui::TableNextColumn();
+                        ImGui::Text("%d", inactive);
                     }
-                    ImGui::TableNextColumn();
-                    ImGui::Text("%d", active);
-                    ImGui::TableNextColumn();
-                    ImGui::Text("%d", inactive);
+                    ImGui::EndTable();
                 }
-                ImGui::EndTable();
 
                 ImGui::PushID("Selected Sparse Relation Type");
                 bool continueSelectedSparseRelationType = true;
@@ -268,42 +270,44 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
                     ImGui::Text("Active Table Count: %d", activeTableCount);
                     ImGui::Checkbox("Show Inactive", &state.showInactiveSparseRelationTables);
 
-                    ImGui::BeginTable("Selected Sparse Relation Type Tables", 5,
-                                      ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
-                                          ImGuiTableFlags_BordersOuter);
-                    ImGui::TableSetupColumn("");
-                    ImGui::TableSetupColumn("From Archetype");
-                    ImGui::TableSetupColumn("To Archetype");
-                    ImGui::TableSetupColumn("Depth");
-                    ImGui::TableSetupColumn("Size");
-                    ImGui::TableHeadersRow();
-                    int id = 0;
-                    for (const auto& tableId : tables)
+                    if (ImGui::BeginTable("Selected Sparse Relation Type Tables", 5,
+                                          ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
+                                              ImGuiTableFlags_BordersOuter))
                     {
-                        if (!state.showInactiveSparseRelationTables &&
-                            world.tables().sparseRelation().at(tableId).size() == 0)
+                        ImGui::TableSetupColumn("");
+                        ImGui::TableSetupColumn("From Archetype");
+                        ImGui::TableSetupColumn("To Archetype");
+                        ImGui::TableSetupColumn("Depth");
+                        ImGui::TableSetupColumn("Size");
+                        ImGui::TableHeadersRow();
+                        int id = 0;
+                        for (const auto& tableId : tables)
                         {
-                            continue;
-                        }
+                            if (!state.showInactiveSparseRelationTables &&
+                                world.tables().sparseRelation().at(tableId).size() == 0)
+                            {
+                                continue;
+                            }
 
-                        ImGui::PushID(id++);
-                        ImGui::TableNextRow();
-                        ImGui::TableNextColumn();
-                        if (ImGui::Button("Select"))
-                        {
-                            state.selectedSparseRelationTableId = tableId;
+                            ImGui::PushID(id++);
+                            ImGui::TableNextRow();
+                            ImGui::TableNextColumn();
+                            if (ImGui::Button("Select"))
+                            {
+                                state.selectedSparseRelationTableId = tableId;
+                            }
+                            ImGui::TableNextColumn();
+                            ImGui::Text("%d", static_cast<int>(tableId.from.inner));
+                            ImGui::TableNextColumn();
+                            ImGui::Text("%d", static_cast<int>(tableId.to.inner));
+                            ImGui::TableNextColumn();
+                            ImGui::Text("%d", static_cast<int>(tableId.depth));
+                            ImGui::TableNextColumn();
+                            ImGui::Text("%d", static_cast<int>(world.tables().sparseRelation().at(tableId).size()));
+                            ImGui::PopID();
                         }
-                        ImGui::TableNextColumn();
-                        ImGui::Text("%d", static_cast<int>(tableId.from.inner));
-                        ImGui::TableNextColumn();
-                        ImGui::Text("%d", static_cast<int>(tableId.to.inner));
-                        ImGui::TableNextColumn();
-                        ImGui::Text("%d", static_cast<int>(tableId.depth));
-                        ImGui::TableNextColumn();
-                        ImGui::Text("%d", static_cast<int>(world.tables().sparseRelation().at(tableId).size()));
-                        ImGui::PopID();
+                        ImGui::EndTable();
                     }
-                    ImGui::EndTable();
 
                     if (!continueSelectedSparseRelationType)
                     {
@@ -329,44 +333,46 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
                     ImGui::Text("Depth: %d", state.selectedSparseRelationTableId.depth);
                     ImGui::Text("Size: %d", static_cast<int>(table.size()));
 
-                    ImGui::BeginTable("Selected Sparse Relation Table", 3,
-                                      ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
-                                          ImGuiTableFlags_BordersOuter);
-                    ImGui::TableSetupColumn("Row");
-                    ImGui::TableSetupColumn("From Entity", ImGuiTableColumnFlags_WidthStretch);
-                    ImGui::TableSetupColumn("To Entity", ImGuiTableColumnFlags_WidthStretch);
-                    ImGui::TableHeadersRow();
-                    for (std::size_t row = 0; row < table.size(); ++row)
+                    if (ImGui::BeginTable("Selected Sparse Relation Table", 3,
+                                          ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
+                                              ImGuiTableFlags_BordersOuter))
                     {
-                        ImGui::PushID(static_cast<int>(row));
-                        ImGui::TableNextRow();
-                        ImGui::TableNextColumn();
-                        ImGui::Text("%d", static_cast<int>(row));
-                        ImGui::TableNextColumn();
-                        Entity from{table.from(row), world.generation(table.from(row))};
-                        auto name = std::to_string(from.index) + "#" + std::to_string(from.generation);
-                        if (world.components(from).has<Name>())
+                        ImGui::TableSetupColumn("Row");
+                        ImGui::TableSetupColumn("From Entity", ImGuiTableColumnFlags_WidthStretch);
+                        ImGui::TableSetupColumn("To Entity", ImGuiTableColumnFlags_WidthStretch);
+                        ImGui::TableHeadersRow();
+                        for (std::size_t row = 0; row < table.size(); ++row)
                         {
-                            name = world.components(from).get<Name>().value;
+                            ImGui::PushID(static_cast<int>(row));
+                            ImGui::TableNextRow();
+                            ImGui::TableNextColumn();
+                            ImGui::Text("%d", static_cast<int>(row));
+                            ImGui::TableNextColumn();
+                            Entity from{table.from(row), world.generation(table.from(row))};
+                            auto name = std::to_string(from.index) + "#" + std::to_string(from.generation);
+                            if (world.components(from).has<Name>())
+                            {
+                                name = world.components(from).get<Name>().value;
+                            }
+                            if (ImGui::Button(name.c_str()))
+                            {
+                                selector.selection = from;
+                            }
+                            ImGui::TableNextColumn();
+                            Entity to{table.to(row), world.generation(table.to(row))};
+                            name = std::to_string(to.index) + "#" + std::to_string(to.generation);
+                            if (world.components(to).has<Name>())
+                            {
+                                name = world.components(to).get<Name>().value;
+                            }
+                            if (ImGui::Button(name.c_str()))
+                            {
+                                selector.selection = to;
+                            }
+                            ImGui::PopID();
                         }
-                        if (ImGui::Button(name.c_str()))
-                        {
-                            selector.selection = from;
-                        }
-                        ImGui::TableNextColumn();
-                        Entity to{table.to(row), world.generation(table.to(row))};
-                        name = std::to_string(to.index) + "#" + std::to_string(to.generation);
-                        if (world.components(to).has<Name>())
-                        {
-                            name = world.components(to).get<Name>().value;
-                        }
-                        if (ImGui::Button(name.c_str()))
-                        {
-                            selector.selection = to;
-                        }
-                        ImGui::PopID();
+                        ImGui::EndTable();
                     }
-                    ImGui::EndTable();
 
                     if (!continueSelectedSparseRelationTable)
                     {
