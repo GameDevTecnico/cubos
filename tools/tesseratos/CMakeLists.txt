@@ -19,6 +19,7 @@ set(TESSERATOS_SOURCE
 	"src/tesseratos/metrics_panel/plugin.cpp"
 	"src/tesseratos/collider_gizmos/plugin.cpp"
 	"src/tesseratos/play_pause/plugin.cpp"
+	"src/tesseratos/ecs_statistics/plugin.cpp"
 )
 
 add_library(tesseratos ${TESSERATOS_SOURCE})
