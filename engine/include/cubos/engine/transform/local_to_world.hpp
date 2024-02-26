@@ -28,15 +28,15 @@ namespace cubos::engine
 
         /// @brief Gets global position of the entity.
         /// @return Position vector in world space.
-        glm::vec3 worldPosition();
+        glm::vec3 worldPosition() const;
 
         /// @brief Gets global rotation of the entity.
         /// @return Rotation quaternion in world space.
-        glm::quat worldRotation();
+        glm::quat worldRotation() const;
 
         /// @brief Gets global scale of the entity.
         /// @return Scale value in world space.
-        float worldScale();
+        float worldScale() const;
     };
 
 } // namespace cubos::engine
