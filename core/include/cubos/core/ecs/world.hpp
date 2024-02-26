@@ -36,6 +36,12 @@ namespace cubos::core::ecs
         /// @brief Used to immutably access the components in an entity.
         class ConstComponents;
 
+        /// @brief Used to access the relations of an entity.
+        class Relations;
+
+        /// @brief Used to immutably access the relations of an entity.
+        class ConstRelations;
+
         /// @brief Registers and inserts a new resource type.
         /// @note Should be called before other non-registering operations.
         /// @tparam T Resource type.
@@ -153,6 +159,28 @@ namespace cubos::core::ecs
 
         /// @copydoc components(Entity)
         ConstComponents components(Entity entity) const;
+
+        /// @brief Creates a view for relations coming from the given entity.
+        ///
+        /// The given @p entity must be @ref isAlive "alive".
+        ///
+        /// @param entity From entity.
+        /// @return Relations view.
+        Relations relationsFrom(Entity entity);
+
+        /// @copydoc relationsFrom(Entity)
+        ConstRelations relationsFrom(Entity entity) const;
+
+        /// @brief Creates a view for relations going into the given entity.
+        ///
+        /// The given @p entity must be @ref isAlive "alive".
+        ///
+        /// @param entity To entity.
+        /// @return Relations view.
+        Relations relationsTo(Entity entity);
+
+        /// @copydoc relationsTo(Entity)
+        ConstRelations relationsTo(Entity entity) const;
 
         /// @brief Inserts a relation between the two given entities.
         ///
@@ -434,6 +462,138 @@ namespace cubos::core::ecs
         Entity mEntity;
     };
 
+    class World::Relations final
+    {
+    public:
+        /// @brief Used to iterate over the the relations.
+        class Iterator;
+
+        /// @brief Constructs.
+        /// @param world World.
+        /// @param entity Entity.
+        /// @param from Whether the relations are from or to the entity.
+        Relations(World& world, Entity entity, bool from);
+
+        /// @brief Checks if the entity is related to another entity with the given type.
+        /// @param type Relation type.
+        /// @param entity Entity.
+        /// @return Whether the relation is present.
+        bool has(const reflection::Type& type, Entity entity) const;
+
+        /// @brief Checks if the entity is related to another entity with the given type.
+        /// @tparam T Relation type.
+        /// @param entity Entity.
+        /// @return Whether the relation is present.
+        template <reflection::Reflectable T>
+        bool has(Entity entity) const
+        {
+            return this->has(reflection::reflect<T>(), entity);
+        }
+
+        /// @brief Returns a pointer to the given relation.
+        ///
+        /// The entity must be @ref has(const reflection::Type&, Entity) "related" with the given @p entity and with the
+        /// given @p type.
+        ///
+        /// @param type Relation type.
+        /// @param entity Entity.
+        /// @return Pointer to relation.
+        void* get(const reflection::Type& type, Entity entity);
+
+        /// @brief Returns a pointer to the given relation.
+        ///
+        /// The entity must be @ref has(Entity) "related" with the given @p entity and with the
+        /// given @p type.
+        ///
+        /// @tparam T Relation type.
+        /// @param entity Entity.
+        /// @return Relation.
+        template <reflection::Reflectable T>
+        T& get(Entity entity)
+        {
+            return *static_cast<T*>(this->get(reflection::reflect<T>(), entity));
+        }
+
+        /// @brief Returns an iterator to the first relation.
+        /// @return Iterator.
+        Iterator begin();
+
+        /// @brief Returns an iterator to the entry after the last relation.
+        /// @return Iterator.
+        Iterator end();
+
+    private:
+        World& mWorld;
+        Entity mEntity;
+        bool mFrom;
+    };
+
+    class World::ConstRelations final
+    {
+    public:
+        /// @brief Used to iterate over the the relations.
+        class Iterator;
+
+        /// @brief Constructs.
+        /// @param world World.
+        /// @param entity Entity.
+        /// @param from Whether the relations are from or to the entity.
+        ConstRelations(const World& world, Entity entity, bool from);
+
+        /// @brief Checks if the entity is related to another entity with the given type.
+        /// @param type Relation type.
+        /// @param entity Entity.
+        /// @return Whether the relation is present.
+        bool has(const reflection::Type& type, Entity entity) const;
+
+        /// @brief Checks if the entity is related to another entity with the given type.
+        /// @tparam T Relation type.
+        /// @param entity Entity.
+        /// @return Whether the relation is present.
+        template <reflection::Reflectable T>
+        bool has(Entity entity) const
+        {
+            return this->has(reflection::reflect<T>(), entity);
+        }
+
+        /// @brief Returns a pointer to the given relation.
+        ///
+        /// The entity must be @ref has(const reflection::Type&, Entity) "related" with the given @p entity and with the
+        /// given @p type.
+        ///
+        /// @param type Relation type.
+        /// @param entity Entity.
+        /// @return Pointer to relation.
+        const void* get(const reflection::Type& type, Entity entity);
+
+        /// @brief Returns a pointer to the given relation.
+        ///
+        /// The entity must be @ref has(Entity) "related" with the given @p entity and with the
+        /// given @p type.
+        ///
+        /// @tparam T Relation type.
+        /// @param entity Entity.
+        /// @return Relation.
+        template <reflection::Reflectable T>
+        const T& get(Entity entity)
+        {
+            return *static_cast<const T*>(this->get(reflection::reflect<T>(), entity));
+        }
+
+        /// @brief Returns an iterator to the first relation.
+        /// @return Iterator.
+        Iterator begin();
+
+        /// @brief Returns an iterator to the entry after the last relation.
+        /// @return Iterator.
+        Iterator end();
+
+    private:
+        const World& mWorld;
+        Entity mEntity;
+        bool mFrom;
+    };
+
     class World::Components::Iterator final
     {
     public:
@@ -522,6 +682,112 @@ namespace cubos::core::ecs
         const World::ConstComponents& mComponents;
         DataTypeId mId;
         mutable Component mComponent;
+    };
+
+    class World::Relations::Iterator final
+    {
+    public:
+        /// @brief Output structure for the iterator.
+        struct Relation
+        {
+            const reflection::Type* type; ///< Relation type.
+            void* value;                  ///< Relation value.
+            Entity entity;                ///< Related entity.
+        };
+
+        /// @brief Constructs.
+        /// @param relations Relations view.
+        /// @param end Whether the iterator represents the end or the beginning.
+        Iterator(Relations& relations, bool end);
+
+        /// @brief Copy constructs.
+        /// @param other Other iterator.
+        Iterator(const Iterator& other) = default;
+
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to the same relation.
+        bool operator==(const Iterator& other) const;
+
+        /// @brief Accesses the relation referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Relation& operator*() const;
+
+        /// @brief Accesses the relation referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Relation* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        /// @brief Advances the iterator to the next match.
+        void advance();
+
+        World::Relations& mRelations;
+        SparseRelationTableRegistry::Iterator mIterator;
+        bool mReverse{false};
+        std::size_t mTableIndex{SIZE_MAX};
+        SparseRelationTableId mTableId;
+        std::size_t mRow{SIZE_MAX};
+        mutable Relation mRelation;
+    };
+
+    class World::ConstRelations::Iterator final
+    {
+    public:
+        /// @brief Output structure for the iterator.
+        struct Relation
+        {
+            const reflection::Type* type; ///< Relation type.
+            const void* value;            ///< Relation value.
+            Entity entity;                ///< Related entity.
+        };
+
+        /// @brief Constructs.
+        /// @param relations Relations view.
+        /// @param end Whether the iterator represents the end or the beginning.
+        Iterator(ConstRelations& relations, bool end);
+
+        /// @brief Copy constructs.
+        /// @param other Other iterator.
+        Iterator(const Iterator& other) = default;
+
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to the same relation.
+        bool operator==(const Iterator& other) const;
+
+        /// @brief Accesses the relation referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Relation& operator*() const;
+
+        /// @brief Accesses the relation referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Relation* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        /// @brief Advances the iterator to the next match.
+        void advance();
+
+        World::ConstRelations& mRelations;
+        SparseRelationTableRegistry::Iterator mIterator;
+        bool mReverse{false};
+        std::size_t mTableIndex{SIZE_MAX};
+        SparseRelationTableId mTableId;
+        std::size_t mRow{SIZE_MAX};
+        mutable Relation mRelation;
     };
 
     // Implementation.

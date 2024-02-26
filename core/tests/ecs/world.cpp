@@ -433,5 +433,101 @@ TEST_CASE("ecs::World")
         REQUIRE(world.tables().sparseRelation().contains(tableId));
         REQUIRE(world.tables().sparseRelation().at(tableId).contains(foo.index, bar.index));
     }
+
+    SUBCASE("relation views work correctly")
+    {
+        auto foo = world.create();
+        auto bar = world.create();
+        auto fromFoo = world.relationsFrom(foo);
+        auto toFoo = static_cast<const World&>(world).relationsTo(foo);
+
+        // No relations for now.
+        REQUIRE(fromFoo.begin() == fromFoo.end());
+        REQUIRE(toFoo.begin() == toFoo.end());
+
+        // Add a relation from foo to bar.
+        REQUIRE_FALSE(fromFoo.has<IntegerRelation>(bar));
+        world.relate(foo, bar, IntegerRelation{1});
+        REQUIRE(fromFoo.has<IntegerRelation>(bar));
+        CHECK(fromFoo.get<IntegerRelation>(bar).value == 1);
+
+        {
+            auto it = fromFoo.begin();
+            REQUIRE(it != fromFoo.end());
+            CHECK(it->type->is<IntegerRelation>());
+            CHECK(it->value == &fromFoo.get<IntegerRelation>(bar));
+            CHECK(it->entity == bar);
+            ++it;
+            CHECK(it == fromFoo.end());
+        }
+
+        {
+            auto it = toFoo.begin();
+            CHECK(it == toFoo.end());
+        }
+
+        // Add a relation from foo to itself.
+        REQUIRE_FALSE(fromFoo.has<IntegerRelation>(foo));
+        REQUIRE_FALSE(toFoo.has<IntegerRelation>(foo));
+        world.relate(foo, foo, IntegerRelation{2});
+        REQUIRE(fromFoo.has<IntegerRelation>(foo));
+        REQUIRE(toFoo.has<IntegerRelation>(foo));
+        CHECK(fromFoo.get<IntegerRelation>(foo).value == 2);
+        CHECK(toFoo.get<IntegerRelation>(foo).value == 2);
+
+        {
+            auto it = fromFoo.begin();
+            REQUIRE(it != fromFoo.end());
+            ++it;
+            REQUIRE(it != fromFoo.end());
+            CHECK(it->type->is<IntegerRelation>());
+            CHECK(it->value == &fromFoo.get<IntegerRelation>(foo));
+            CHECK(it->entity == foo);
+            ++it;
+            CHECK(it == fromFoo.end());
+        }
+
+        {
+            auto it = toFoo.begin();
+            REQUIRE(it != toFoo.end());
+            CHECK(it->type->is<IntegerRelation>());
+            CHECK(it->value == &toFoo.get<IntegerRelation>(foo));
+            CHECK(it->entity == foo);
+            ++it;
+            CHECK(it == toFoo.end());
+        }
+
+        // Add a symmetric relation between foo and bar.
+        world.relate(foo, bar, SymmetricRelation{.value = 3});
+        REQUIRE(fromFoo.has<SymmetricRelation>(bar));
+        REQUIRE(fromFoo.get<SymmetricRelation>(bar).value == 3);
+        REQUIRE(toFoo.has<SymmetricRelation>(bar));
+        REQUIRE(toFoo.get<SymmetricRelation>(bar).value == 3);
+        REQUIRE(&fromFoo.get<SymmetricRelation>(bar) == &toFoo.get<SymmetricRelation>(bar));
+
+        for (auto it = fromFoo.begin(); it != fromFoo.end(); ++it)
+        {
+            if (it->type->is<SymmetricRelation>())
+            {
+                CHECK(it->value == &fromFoo.get<SymmetricRelation>(bar));
+                CHECK(it->entity == bar);
+                break;
+            }
+
+            CHECK(it->type->is<IntegerRelation>());
+        }
+
+        for (auto it = toFoo.begin(); it != toFoo.end(); ++it)
+        {
+            if (it->type->is<SymmetricRelation>())
+            {
+                CHECK(it->value == &toFoo.get<SymmetricRelation>(bar));
+                CHECK(it->entity == bar);
+                break;
+            }
+
+            CHECK(it->type->is<IntegerRelation>());
+        }
+    }
 }
 // NOLINTEND(readability-function-size)
