@@ -13,17 +13,17 @@ CUBOS_REFLECT_IMPL(cubos::engine::LocalToWorld)
         .build();
 }
 
-glm::vec3 cubos::engine::LocalToWorld::worldPosition()
+glm::vec3 cubos::engine::LocalToWorld::worldPosition() const
 {
     return mat[3];
 }
 
-glm::quat cubos::engine::LocalToWorld::worldRotation()
+glm::quat cubos::engine::LocalToWorld::worldRotation() const
 {
     return glm::toQuat(glm::mat3(mat) / worldScale());
 }
 
-float cubos::engine::LocalToWorld::worldScale()
+float cubos::engine::LocalToWorld::worldScale() const
 {
     return glm::length(mat[0]);
 }
