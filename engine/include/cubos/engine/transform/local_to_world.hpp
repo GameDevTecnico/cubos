@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <glm/gtc/quaternion.hpp>
 #include <glm/mat4x4.hpp>
 
 #include <cubos/core/reflection/reflect.hpp>
@@ -24,6 +25,18 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         glm::mat4 mat = glm::mat4(1.0F); ///< Local to world space matrix.
+
+        /// @brief Gets global position of the entity.
+        /// @return Position vector in world space.
+        glm::vec3 worldPosition();
+
+        /// @brief Gets global rotation of the entity.
+        /// @return Rotation quaternion in world space.
+        glm::quat worldRotation();
+
+        /// @brief Gets global scale of the entity.
+        /// @return Scale value in world space.
+        float worldScale();
     };
 
 } // namespace cubos::engine
