@@ -169,6 +169,22 @@
             </dt>
             <dd>Creates a components view for the given entity.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4b179b025270b320ad99d1c8b10bcea0" class="m-doc">relationsFrom</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World_1_1Relations.html" class="m-doc">Relations</a></span>
+            </dt>
+            <dd>Creates a view for relations coming from the given entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad09232dcdeb00ccb01cffd7c22ffd4da" class="m-doc">relationsFrom</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World_1_1ConstRelations.html" class="m-doc">ConstRelations</a></span>
+            </dt>
+            <dd>Creates a view for relations coming from the given entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2ba959529e3e3a9b9b8208db3436b9b8" class="m-doc">relationsTo</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World_1_1Relations.html" class="m-doc">Relations</a></span>
+            </dt>
+            <dd>Creates a view for relations going into the given entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a61c0ec02541e11d3cf602724fc00dca8" class="m-doc">relationsTo</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World_1_1ConstRelations.html" class="m-doc">ConstRelations</a></span>
+            </dt>
+            <dd>Creates a view for relations going into the given entity.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#adb03790c809616907e573f310e560709" class="m-doc">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
               <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
@@ -662,6 +678,102 @@
                 <tr>
                   <th>Returns</th>
                   <td><a href="classcubos_1_1core_1_1ecs_1_1World_1_1Components.html" class="m-doc">Components</a> view.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The given <code>entity</code> must be <a href="classcubos_1_1core_1_1ecs_1_1World.html#a8df2e215fe9c352958a41542c371df27" class="m-doc">alive</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a4b179b025270b320ad99d1c8b10bcea0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World_1_1Relations.html" class="m-doc">Relations</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b179b025270b320ad99d1c8b10bcea0" class="m-doc-self">relationsFrom</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+            </h3>
+            <p>Creates a view for relations coming from the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td>From entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World_1_1Relations.html" class="m-doc">Relations</a> view.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The given <code>entity</code> must be <a href="classcubos_1_1core_1_1ecs_1_1World.html#a8df2e215fe9c352958a41542c371df27" class="m-doc">alive</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad09232dcdeb00ccb01cffd7c22ffd4da"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World_1_1ConstRelations.html" class="m-doc">ConstRelations</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad09232dcdeb00ccb01cffd7c22ffd4da" class="m-doc-self">relationsFrom</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
+            </h3>
+            <p>Creates a view for relations coming from the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td>From entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World_1_1Relations.html" class="m-doc">Relations</a> view.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The given <code>entity</code> must be <a href="classcubos_1_1core_1_1ecs_1_1World.html#a8df2e215fe9c352958a41542c371df27" class="m-doc">alive</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2ba959529e3e3a9b9b8208db3436b9b8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World_1_1Relations.html" class="m-doc">Relations</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2ba959529e3e3a9b9b8208db3436b9b8" class="m-doc-self">relationsTo</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+            </h3>
+            <p>Creates a view for relations going into the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td>To entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World_1_1Relations.html" class="m-doc">Relations</a> view.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The given <code>entity</code> must be <a href="classcubos_1_1core_1_1ecs_1_1World.html#a8df2e215fe9c352958a41542c371df27" class="m-doc">alive</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a61c0ec02541e11d3cf602724fc00dca8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World_1_1ConstRelations.html" class="m-doc">ConstRelations</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61c0ec02541e11d3cf602724fc00dca8" class="m-doc-self">relationsTo</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
+            </h3>
+            <p>Creates a view for relations going into the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td>To entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World_1_1Relations.html" class="m-doc">Relations</a> view.</td>
                 </tr>
               </tfoot>
             </table>
