@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Random failures in the ECS stress test (#948, **@RiscadoA**).
 - System condition being ignored by Cubos (#1032, **@RiscadoA**).
 - Wrong tranform gizmo position for entities with parents (#1003, **@DiogoMendonc-a**)
+- Free camera controller angle not being bounded (#1016, **@diogomsmiranda**)
 
 ## [v0.1.0] - 2024-02-17
 
