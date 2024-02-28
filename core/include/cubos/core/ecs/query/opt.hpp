@@ -50,6 +50,7 @@ namespace cubos::core::ecs
         }
 
         /// @brief Moves the given value into the optional, destroying any previously stored value.
+        /// @param value Value.
         void replace(T value)
         {
             if (mContains)
@@ -59,6 +60,16 @@ namespace cubos::core::ecs
 
             mContains = true;
             new (&mValue) T(memory::move(value));
+        }
+
+        /// @brief Destroys the value, if any.
+        void reset()
+        {
+            if (mContains)
+            {
+                mValue.~T();
+                mContains = false;
+            }
         }
 
         /// @brief Checks if the optional contains a value.
