@@ -2,6 +2,7 @@
 
 #include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/cubos.hpp>
+#include <cubos/core/ecs/observer/observers.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 
@@ -36,6 +37,47 @@ TagBuilder& TagBuilder::tagged(const std::string& tag)
 {
     mDispatcher.tagInheritTag(tag);
     return *this;
+}
+
+Cubos::Cubos()
+    : Cubos(1, nullptr)
+{
+}
+
+Cubos::Cubos(int argc, char** argv)
+{
+    std::vector<std::string> arguments(argv + 1, argv + argc);
+
+    this->addResource<DeltaTime>();
+    this->addResource<ShouldQuit>();
+    this->addResource<Arguments>(Arguments{.value = arguments});
+}
+
+void Cubos::run()
+{
+    mPlugins.clear();
+    mMainTags.clear();
+    mStartupTags.clear();
+
+    // Compile execution chain
+    mStartupDispatcher.compileChain();
+    mMainDispatcher.compileChain();
+
+    cubos::core::ecs::CommandBuffer cmds(mWorld);
+
+    mStartupDispatcher.callSystems(cmds);
+
+    auto currentTime = std::chrono::steady_clock::now();
+    auto previousTime = std::chrono::steady_clock::now();
+    do
+    {
+        mMainDispatcher.callSystems(cmds);
+        currentTime = std::chrono::steady_clock::now();
+
+        auto& dt = mWorld.write<DeltaTime>().get();
+        dt.value = std::chrono::duration<float>(currentTime - previousTime).count() * dt.multiplier;
+        previousTime = currentTime;
+    } while (!mWorld.read<ShouldQuit>().get().value);
 }
 
 Cubos& Cubos::addPlugin(void (*func)(Cubos&))
@@ -84,6 +126,11 @@ auto Cubos::system(std::string name) -> SystemBuilder
 auto Cubos::startupSystem(std::string name) -> SystemBuilder
 {
     return {mWorld, mStartupDispatcher, std::move(name)};
+}
+
+auto Cubos::observer(std::string name) -> ObserverBuilder
+{
+    return {mWorld, std::move(name)};
 }
 
 Cubos::SystemBuilder::SystemBuilder(World& world, Dispatcher& dispatcher, std::string name)
@@ -248,43 +295,188 @@ void Cubos::SystemBuilder::finish(System<void> system)
     }
 }
 
-Cubos::Cubos()
-    : Cubos(1, nullptr)
+Cubos::ObserverBuilder::ObserverBuilder(World& world, std::string name)
+    : mWorld{world}
+    , mName{std::move(name)}
 {
 }
 
-Cubos::Cubos(int argc, char** argv)
+auto Cubos::ObserverBuilder::onAdd(const reflection::Type& type, int target) && -> ObserverBuilder&&
 {
-    std::vector<std::string> arguments(argv + 1, argv + argc);
+    CUBOS_ASSERT(mWorld.types().contains(type), "No such component type {} was registered", type.name());
+    auto dataTypeId = mWorld.types().id(type);
+    CUBOS_ASSERT(mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    CUBOS_ASSERT(mColumnId == ColumnId::Invalid, "An observer can only have at most one hook");
 
-    this->addResource<DeltaTime>();
-    this->addResource<ShouldQuit>();
-    this->addResource<Arguments>(Arguments{.value = arguments});
-}
-
-void Cubos::run()
-{
-    mPlugins.clear();
-    mMainTags.clear();
-    mStartupTags.clear();
-
-    // Compile execution chain
-    mStartupDispatcher.compileChain();
-    mMainDispatcher.compileChain();
-
-    cubos::core::ecs::CommandBuffer cmds(mWorld);
-
-    mStartupDispatcher.callSystems(cmds);
-
-    auto currentTime = std::chrono::steady_clock::now();
-    auto previousTime = std::chrono::steady_clock::now();
-    do
+    if (mOptions.empty())
     {
-        mMainDispatcher.callSystems(cmds);
-        currentTime = std::chrono::steady_clock::now();
+        mOptions.emplace_back();
+    }
 
-        auto& dt = mWorld.write<DeltaTime>().get();
-        dt.value = std::chrono::duration<float>(currentTime - previousTime).count() * dt.multiplier;
-        previousTime = currentTime;
-    } while (!mWorld.read<ShouldQuit>().get().value);
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().observedTarget = target;
+    mRemove = false;
+    mColumnId = ColumnId::make(mWorld.types().id(type));
+    return std::move(*this);
+}
+
+auto Cubos::ObserverBuilder::onRemove(const reflection::Type& type, int target) && -> ObserverBuilder&&
+{
+    CUBOS_ASSERT(mWorld.types().contains(type), "No such component type {} was registered", type.name());
+    auto dataTypeId = mWorld.types().id(type);
+    CUBOS_ASSERT(mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    CUBOS_ASSERT(mColumnId == ColumnId::Invalid, "An observer can only have at most one hook");
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().observedTarget = target;
+    mRemove = true;
+    mColumnId = ColumnId::make(mWorld.types().id(type));
+    return std::move(*this);
+}
+
+auto Cubos::ObserverBuilder::entity(int target) && -> ObserverBuilder&&
+{
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeEntity(target));
+    return std::move(*this);
+}
+
+auto Cubos::ObserverBuilder::with(const reflection::Type& type, int target) && -> ObserverBuilder&&
+{
+    CUBOS_ASSERT(mWorld.types().contains(type), "No such component type {} was registered", type.name());
+    auto dataTypeId = mWorld.types().id(type);
+    CUBOS_ASSERT(mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeWithComponent(dataTypeId, target));
+    return std::move(*this);
+}
+
+auto Cubos::ObserverBuilder::without(const reflection::Type& type, int target) && -> ObserverBuilder&&
+{
+    CUBOS_ASSERT(mWorld.types().contains(type), "No such component type {} was registered", type.name());
+    auto dataTypeId = mWorld.types().id(type);
+    CUBOS_ASSERT(mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeWithoutComponent(dataTypeId, target));
+    return std::move(*this);
+}
+
+auto Cubos::ObserverBuilder::related(const reflection::Type& type, int fromTarget, int toTarget) && -> ObserverBuilder&&
+{
+    return std::move(*this).related(type, Traversal::Random, fromTarget, toTarget);
+}
+
+auto Cubos::ObserverBuilder::related(const reflection::Type& type, Traversal traversal, int fromTarget,
+                                     int toTarget) && -> ObserverBuilder&&
+{
+    CUBOS_ASSERT(mWorld.types().contains(type), "No such relation type {} was registered", type.name());
+    auto dataTypeId = mWorld.types().id(type);
+    CUBOS_ASSERT(mWorld.types().isRelation(dataTypeId), "Type {} isn't registered as a relation", type.name());
+
+    CUBOS_ASSERT_IMP(traversal != Traversal::Random, mWorld.types().isTreeRelation(dataTypeId),
+                     "Directed traversal can only be used for tree relations, and {} isn't registered as one",
+                     type.name());
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (fromTarget == -1)
+    {
+        fromTarget = mDefaultTarget;
+    }
+
+    if (toTarget == -1)
+    {
+        toTarget = fromTarget + 1;
+    }
+
+    mDefaultTarget = toTarget;
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeRelation(dataTypeId, fromTarget, toTarget, traversal));
+    return std::move(*this);
+}
+
+auto Cubos::ObserverBuilder::other() && -> ObserverBuilder&&
+{
+    mDefaultTarget = 0;
+    mOptions.emplace_back();
+    return std::move(*this);
+}
+
+void Cubos::ObserverBuilder::finish(System<void> system)
+{
+    CUBOS_ASSERT(mColumnId != ColumnId::Invalid, "You must set at least one hook for the observer");
+    CUBOS_DEBUG("Added observer {}", mName);
+
+    if (mRemove)
+    {
+        mWorld.observers().hookOnRemove(mColumnId, std::move(system));
+    }
+    else
+    {
+        mWorld.observers().hookOnAdd(mColumnId, std::move(system));
+    }
 }

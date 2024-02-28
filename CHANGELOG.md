@@ -13,11 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Negative tags to the dispatcher (#390, **@RiscadoA**).
 - Support for queries with multiple relation terms (#929, **@RiscadoA**).
 - Support for queries with more than one unrelated targets (#930, **@RiscadoA**).
-- Allow iterating over entity relations directly through the World (#1006, **@RiscadoA**). 
+- Allow iterating over entity relations directly through the World (#1006, **@RiscadoA**).
+- Observers, which allow reacting to component addition and removal (#724, **@RiscadoA**).
 - Fixed Time Step plugin (#989, **@joaomanita**).
 - New feature guide focused on queries (#995, **@RiscadoA**).
 - ECS Statistics tesseratos plugin (#1024, **@RiscadoA**).
-- Global position, rotation and scale getters (#1002, **@DiogoMendonc-a**)
+- Global position, rotation and scale getters (#1002, **@DiogoMendonc-a**).
 
 ### Fixed
 
@@ -25,8 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cursor offset in tesseratos when on retina displays (#998, **@diogomsmiranda**).
 - Random failures in the ECS stress test (#948, **@RiscadoA**).
 - System condition being ignored by Cubos (#1032, **@RiscadoA**).
-- Wrong tranform gizmo position for entities with parents (#1003, **@DiogoMendonc-a**)
-- Free camera controller angle not being bounded (#1016, **@diogomsmiranda**)
+- Wrong tranform gizmo position for entities with parents (#1003, **@DiogoMendonc-a**).
+- Free camera controller angle not being bounded (#1016, **@diogomsmiranda**).
 
 ## [v0.1.0] - 2024-02-17
 

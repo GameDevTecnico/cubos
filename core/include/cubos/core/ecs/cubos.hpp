@@ -101,6 +101,9 @@ namespace cubos::core::ecs
         /// @brief Used to create new systems.
         class SystemBuilder;
 
+        /// @brief Used to create new observers.
+        class ObserverBuilder;
+
         ~Cubos() = default;
 
         /// @brief Constructs an empty application without arguments.
@@ -177,6 +180,11 @@ namespace cubos::core::ecs
         /// @param name System debug name.
         /// @return Builder used to configure the system.
         SystemBuilder startupSystem(std::string name);
+
+        /// @brief Returns a new builder used to add an observer to the engine.
+        /// @param name Observer debug name.
+        /// @return Builder used to configure the observer.
+        ObserverBuilder observer(std::string name);
 
         /// @brief Runs the engine.
         ///
@@ -321,6 +329,132 @@ namespace cubos::core::ecs
         std::unordered_set<std::string> mAfter;
         std::vector<SystemOptions> mOptions;
         int mDefaultTarget{0};
+    };
+
+    class Cubos::ObserverBuilder
+    {
+    public:
+        /// @brief Constructs.
+        /// @param world World.
+        /// @param name Debug name.
+        ObserverBuilder(World& world, std::string name);
+
+        /// @brief Triggers the observer whenever the given component is added to an entity.
+        /// @param type Component type.
+        /// @param target Target index. By default, the last specified target or 0.
+        /// @return Builder.
+        ObserverBuilder&& onAdd(const reflection::Type& type, int target = -1) &&;
+
+        /// @copydoc onAdd(const reflection::Type&, int)
+        /// @tparam T Component type.
+        template <reflection::Reflectable T>
+        ObserverBuilder&& onAdd(int target = -1) &&
+        {
+            return std::move(*this).onAdd(reflection::reflect<T>(), target);
+        }
+
+        /// @brief Triggers the observer whenever the given component is removed from an entity, or an entity with it is
+        /// destroyed.
+        /// @param type Component type.
+        /// @param target Target index. By default, the last specified target or 0.
+        /// @return Builder.
+        ObserverBuilder&& onRemove(const reflection::Type& type, int target = -1) &&;
+
+        /// @copydoc onRemove(const reflection::Type&, int)
+        /// @tparam T Component type.
+        template <reflection::Reflectable T>
+        ObserverBuilder&& onRemove(int target = -1) &&
+        {
+            return std::move(*this).onRemove(reflection::reflect<T>(), target);
+        }
+
+        /// @brief Forces the next entity query argument to have the given target.
+        /// @param target Target index. By default, the last specified target or 0.
+        /// @return Builder.
+        ObserverBuilder&& entity(int target = -1) &&;
+
+        /// @brief Forces the given target of the next query argument to have the following component.
+        /// @param type Component type.
+        /// @param target Target index. By default, the last specified target or 0.
+        /// @return Builder.
+        ObserverBuilder&& with(const reflection::Type& type, int target = -1) &&;
+
+        /// @copydoc with(const reflection::Type&, int)
+        /// @tparam T Component type.
+        template <reflection::Reflectable T>
+        ObserverBuilder&& with(int target = -1) &&
+        {
+            return std::move(*this).with(reflection::reflect<T>(), target);
+        }
+
+        /// @brief Forces the given target of the next query argument to not have the following component.
+        /// @param type Component type.
+        /// @param target Target. By default, the last specified target or 0.
+        /// @return Builder.
+        ObserverBuilder&& without(const reflection::Type& type, int target = -1) &&;
+
+        /// @copydoc without(const reflection::Type&, int)
+        /// @tparam T Component type.
+        template <reflection::Reflectable T>
+        ObserverBuilder&& without(int target = -1) &&
+        {
+            return std::move(*this).without(reflection::reflect<T>(), target);
+        }
+
+        /// @brief Forces the given targets of the next query argument to be related with the given relation.
+        /// @param type Relation type.
+        /// @param fromTarget From target index. By default, the last specified target or 0.
+        /// @param toTarget From target index. By default, @p fromTarget + 1.
+        /// @return Builder.
+        ObserverBuilder&& related(const reflection::Type& type, int fromTarget = -1, int toTarget = -1) &&;
+
+        /// @copydoc related(const reflection::Type&, int, int)
+        /// @tparam T Relation type.
+        template <reflection::Reflectable T>
+        ObserverBuilder&& related(int fromTarget = -1, int toTarget = -1) &&
+        {
+            return std::move(*this).related(reflection::reflect<T>(), fromTarget, toTarget);
+        }
+
+        /// @brief Forces the given targets of the next query argument to be related with the given tree relation.
+        /// @param type Relation type.
+        /// @param traversal Tree traversal direction.
+        /// @param fromTarget From target index. By default, the last specified target or 0.
+        /// @param toTarget From target index. By default, @p fromTarget + 1.
+        /// @return Builder.
+        ObserverBuilder&& related(const reflection::Type& type, Traversal traversal, int fromTarget = -1,
+                                  int toTarget = -1) &&;
+
+        /// @copydoc related(const reflection::Type&, Traversal, int, int)
+        /// @tparam T Relation type.
+        template <reflection::Reflectable T>
+        ObserverBuilder&& related(Traversal traversal, int fromTarget = -1, int toTarget = -1) &&
+        {
+            return std::move(*this).related(reflection::reflect<T>(), traversal, fromTarget, toTarget);
+        }
+
+        /// @brief Makes the following argument options relative to the next argument.
+        /// @return Builder.
+        ObserverBuilder&& other() &&;
+
+        /// @brief Finishes building the observer with the given function.
+        /// @param function System function.
+        void call(auto function) &&
+        {
+            this->finish(System<void>::make(mWorld, std::move(function), mOptions));
+        }
+
+    private:
+        /// @brief Finishes building the system with the given system body.
+        /// @param system System wrapper.
+        void finish(System<void> system);
+
+        World& mWorld;
+        std::string mName;
+        std::vector<SystemOptions> mOptions;
+        int mDefaultTarget{0};
+        bool mRemove{false};
+        ColumnId mColumnId{ColumnId::Invalid};
     };
 
     // Implementation.
