@@ -24,3 +24,8 @@ uint32_t ColumnId::index() const
 {
     return static_cast<uint32_t>(inner);
 }
+
+std::size_t cubos::core::ecs::ColumnIdHash::operator()(const ColumnId& columnId) const noexcept
+{
+    return std::hash<uint64_t>{}(columnId.inner);
+}

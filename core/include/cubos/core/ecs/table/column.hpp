@@ -44,4 +44,11 @@ namespace cubos::core::ecs
         /// @return Whether the two column type identifiers are equal.
         bool operator==(const ColumnId& other) const = default;
     };
+
+    /// @brief Used to hash @ref ColumnId objects.
+    /// @ingroup core-ecs-table
+    struct ColumnIdHash
+    {
+        std::size_t operator()(const ColumnId& columnId) const noexcept;
+    };
 } // namespace cubos::core::ecs
