@@ -49,6 +49,7 @@ systems, since they have clearly defined dependencies.
   "DeltaTime", @ref cubos::engine::Input "Input").
 - **Systems** - functions which operate on resources and entities' components.
   This is where the logic is implemented.
+- **Observers** - basically systems which are called immediately after some event is triggered.
 
 One important thing to note is that in an ECS the data is completely
 decoupled from the logic. What this means is that entities and components
@@ -188,6 +189,25 @@ This system iterates over all entities with `Spawner` and `Position`
 components. It creates new entities on their positions with a velocity of
 `(0, 0, 1)`, and then destroys the spawner entity. The entities are only
 actually created and destroyed later on, when the commands are executed.
+
+### Observers
+
+If you find yourself wanting to apply some logic whenever a given component is added or removed, observers are the right tool for you!
+For example, one use case that arises frequently when working with CUBOS, is when you have multiple components that must be added to an entity for it perform some function correctly.
+This is the case for the @ref cubos::engine::Position "Position" component. If the entity doesn't have a @ref cubos::engine::LocalToWorld "LocalToWorld" component, then it's meaningless.
+To solve this, we do something along the lines of:
+
+```cpp
+cubos.observer("add LocalToWorld to positions")
+     .onAdd<Position>()
+     .without<LocalToWorld>()
+     .call([](Commands cmds, Query<Entity> query) {
+        for (auto [ent] : query)
+        {
+            cmds.add(ent, LocalToWorld{});
+        }
+     });
+```
 
 ### Relations
 

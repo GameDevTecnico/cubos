@@ -184,4 +184,106 @@ TEST_CASE("ecs::Cubos")
 
         cubos.run();
     }
+
+    SUBCASE("on addition, observers are triggered correctly")
+    {
+        cubos.addComponent<int>();
+        cubos.addComponent<long>();
+
+        cubos.observer("add longs to ints")
+            .onAdd<int>()
+            .without<long>()
+            .call([](Commands cmds, Query<Entity, const int&> query) {
+                for (auto [ent, val] : query)
+                {
+                    cmds.add<long>(ent, static_cast<long>(val));
+                }
+            });
+
+        cubos.startupSystem("spawn stuff").call([](Commands cmds) {
+            cmds.create().add<int>(1);
+            cmds.create().add<long>(0).add<int>(2);
+        });
+
+        cubos.system("check if the right stuff was added").call([](Query<const long&> query) {
+            for (auto [l] : query)
+            {
+                // Only two possible values.
+                if (l != 0)
+                {
+                    CHECK(l == 1);
+                }
+            }
+        });
+    }
+
+    SUBCASE("on removal, observers are triggered correctly")
+    {
+        cubos.addComponent<int>();
+        cubos.addComponent<long>();
+
+        cubos.observer("create entity with long when an int is removed")
+            .onRemove<int>()
+            .call([](Commands cmds, Query<Entity, const int&> query) {
+                for (auto [ent, val] : query)
+                {
+                    cmds.create().add(static_cast<long>(val));
+                }
+            });
+
+        cubos.startupSystem("spawn and destroy stuff").call([](Commands cmds) {
+            auto ent1 = cmds.create().add<int>(1).entity();
+            cmds.remove<int>(ent1);
+
+            auto ent2 = cmds.create().add<int>(2).entity();
+            cmds.destroy(ent2);
+        });
+
+        cubos.system("check if the right stuff was added").call([](Query<const long&> query) {
+            auto it = query.begin();
+            REQUIRE(it != query.end());
+            auto [l1] = *it;
+            CHECK(l1 == 1);
+            ++it;
+            REQUIRE(it != query.end());
+            auto [l2] = *it;
+            CHECK(l2 == 2);
+            ++it;
+            CHECK(it == query.end());
+        });
+    }
+
+    SUBCASE("observers can be triggered in a chain")
+    {
+        cubos.addComponent<int>();
+        cubos.addComponent<long>();
+        cubos.addComponent<bool>();
+
+        cubos.observer("replace int by long").onAdd<int>().call([](Commands cmds, Query<Entity> query) {
+            for (auto [ent] : query)
+            {
+                cmds.remove<int>(ent);
+                cmds.add<long>(ent, 0);
+            }
+        });
+
+        cubos.observer("replace long by bool").onAdd<long>().call([](Commands cmds, Query<Entity> query) {
+            for (auto [ent] : query)
+            {
+                cmds.remove<long>(ent);
+                cmds.add<bool>(ent, true);
+            }
+        });
+
+        cubos.startupSystem("spawn stuff").call([](Commands cmds) { cmds.create().add<int>(1); });
+
+        cubos.system("check if the right stuff was added").call([](Query<bool&> query) {
+            auto it = query.begin();
+            REQUIRE(it != query.end());
+            auto [b] = *it;
+            CHECK(b);
+            ++it;
+            CHECK(it == query.end());
+        });
+    }
 }
