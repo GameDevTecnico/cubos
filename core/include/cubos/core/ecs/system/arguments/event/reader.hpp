@@ -169,7 +169,7 @@ namespace cubos::core::ecs
             // object.
         }
 
-        EventReader<T> fetch(CommandBuffer& /*cmdBuffer*/)
+        EventReader<T> fetch(const SystemContext& /*ctx*/)
         {
             return {mPipe, mIndex};
         }

@@ -49,11 +49,11 @@ namespace cubos::core::ecs
         System(System&& system) noexcept = default;
 
         /// @brief Runs the system.
-        /// @param cmdBuffer Command buffer.
+        /// @param ctx Context.
         /// @return Return value.
-        T run(CommandBuffer& cmdBuffer)
+        T run(const SystemContext& ctx)
         {
-            return mFunction->call(cmdBuffer);
+            return mFunction->call(ctx);
         }
 
         /// @brief Gets a reference to the access patterns of the system.
@@ -95,9 +95,9 @@ namespace cubos::core::ecs
         virtual ~AnySystemFunction() = default;
 
         /// @brief Calls the system function.
-        /// @param cmdBuffer Command buffer.
+        /// @param ctx Context.
         /// @return Return value.
-        virtual T call(CommandBuffer& cmdBuffer) = 0;
+        virtual T call(const SystemContext& ctx) = 0;
 
         /// @brief Gets a reference to the access patterns of the system.
         /// @return Access patterns.
@@ -176,9 +176,9 @@ namespace cubos::core::ecs
             std::apply([&](auto&&... fetchers) { (fetchers.analyze(this->access()), ...); }, *mFetchers);
         }
 
-        T call(CommandBuffer& cmdBuffer) final
+        T call(const SystemContext& ctx) final
         {
-            return std::apply([&](auto&&... fetchers) { return mFunction(fetchers.fetch(cmdBuffer)...); }, *mFetchers);
+            return std::apply([&](auto&&... fetchers) { return mFunction(fetchers.fetch(ctx)...); }, *mFetchers);
         }
 
     private:

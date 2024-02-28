@@ -55,7 +55,7 @@ namespace cubos::core::ecs
             // object.
         }
 
-        EventWriter<T> fetch(CommandBuffer& /*cmdBuffer*/)
+        EventWriter<T> fetch(const SystemContext& /*ctx*/)
         {
             return {mPipe};
         }

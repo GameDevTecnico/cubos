@@ -117,7 +117,7 @@ namespace cubos::core::ecs
             }
         }
 
-        Query<Ts...> fetch(CommandBuffer& /*cmdBuffer*/)
+        Query<Ts...> fetch(const SystemContext& /*ctx*/)
         {
             mData.update();
             return {mData.view()};

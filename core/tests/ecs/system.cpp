@@ -20,7 +20,7 @@ using cubos::core::ecs::World;
 template <typename T>
 static T runSystem(World& world, CommandBuffer& cmdBuf, auto f)
 {
-    return System<T>::make(world, f, {}).run(cmdBuf);
+    return System<T>::make(world, f, {}).run({cmdBuf});
 }
 
 TEST_CASE("ecs::System")
