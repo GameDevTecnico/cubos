@@ -25,7 +25,7 @@ namespace cubos::core::ecs
             access.usesWorld = true;
         }
 
-        World& fetch(CommandBuffer& /*cmdBuffer*/)
+        World& fetch(const SystemContext& /*ctx*/)
         {
             return mWorld;
         }
@@ -50,7 +50,7 @@ namespace cubos::core::ecs
             access.usesWorld = true;
         }
 
-        const World& fetch(CommandBuffer& /*cmdBuffer*/)
+        const World& fetch(const SystemContext& /*ctx*/)
         {
             return mWorld;
         }

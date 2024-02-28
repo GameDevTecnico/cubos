@@ -25,7 +25,7 @@ namespace cubos::core::ecs
             // FIXME: when we add resources to the world type registry, we should add its type id to the access object.
         }
 
-        T& fetch(CommandBuffer& /*cmdBuffer*/)
+        T& fetch(const SystemContext& /*ctx*/)
         {
             return mResource;
         }
@@ -50,7 +50,7 @@ namespace cubos::core::ecs
             // FIXME: when we add resources to the world type registry, we should add its type id to the access object.
         }
 
-        const T& fetch(CommandBuffer& /*cmdBuffer*/)
+        const T& fetch(const SystemContext& /*ctx*/)
         {
             return mResource;
         }

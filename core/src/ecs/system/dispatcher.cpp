@@ -297,7 +297,7 @@ void Dispatcher::SystemStep::call(CommandBuffer& cmds, std::vector<ecs::System<b
                 if (!runConditions.test(i))
                 {
                     runConditions.set(i);
-                    if (conditions[i].run(cmds))
+                    if (conditions[i].run({cmds}))
                     {
                         retConditions.set(i);
                     }
@@ -317,7 +317,7 @@ void Dispatcher::SystemStep::call(CommandBuffer& cmds, std::vector<ecs::System<b
 
     if (canRun)
     {
-        mSystem->system.run(cmds);
+        mSystem->system.run({cmds});
     }
 
     // TODO: Check synchronization concerns when this gets multithreaded
@@ -353,7 +353,7 @@ void Dispatcher::GroupStep::call(CommandBuffer& cmds, std::vector<ecs::System<bo
                 {
                     runConditions.set(i);
                 }
-                if ((conditions[i]).run(cmds))
+                if ((conditions[i]).run({cmds}))
                 {
                     retConditions.set(i);
                 }

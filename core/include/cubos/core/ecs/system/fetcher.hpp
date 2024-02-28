@@ -4,12 +4,24 @@
 
 #pragma once
 
+#include <cubos/core/ecs/entity/entity.hpp>
+
 namespace cubos::core::ecs
 {
     class World;
     class CommandBuffer;
     struct SystemOptions;
     struct SystemAccess;
+
+    /// @brief Context passed by the system caller to the fetchers.
+    struct SystemContext
+    {
+        /// @brief Command buffer to record commands to.
+        CommandBuffer& cmdBuffer;
+
+        /// @brief Entity which triggered the system, if it's an observer.
+        Entity observedEntity{};
+    };
 
     /// @brief Type meant to be specialized which implements for each argument type the necessary logic to extract it
     /// from the world.
@@ -45,10 +57,10 @@ namespace cubos::core::ecs
         }
 
         /// @brief Called each system run to fetch the data from the world.
-        /// @param cmdBuffer Command buffer.
-        T fetch(CommandBuffer& cmdBuffer)
+        /// @param ctx Context.
+        T fetch(const SystemContext& ctx)
         {
-            (void)cmdBuffer;
+            (void)ctx;
 
             // This should never be instantiated. This method is only defined for documentation purposes.
             static_assert(AlwaysFalse<T>, "Invalid system argument type");

@@ -224,9 +224,9 @@ namespace cubos::core::ecs
         {
         }
 
-        static Commands fetch(CommandBuffer& cmdBuffer)
+        static Commands fetch(const SystemContext& ctx)
         {
-            return {cmdBuffer};
+            return {ctx.cmdBuffer};
         }
     };
 } // namespace cubos::core::ecs
