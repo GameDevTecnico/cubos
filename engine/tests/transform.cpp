@@ -156,7 +156,12 @@ TEST_CASE("cubos::engine::transformPlugin")
                         CHECK(point.z == doctest::Approx(0.0F));
                         CHECK(point.w == doctest::Approx(1.0F));
 
-                        CHECK_FALSE(localToParent);
+                        REQUIRE(localToParent);
+                        point = localToParent->mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+                        CHECK(point.x == doctest::Approx(5.0F));
+                        CHECK(point.y == doctest::Approx(0.0F));
+                        CHECK(point.z == doctest::Approx(0.0F));
+                        CHECK(point.w == doctest::Approx(1.0F));
                     }
                 }
             });
