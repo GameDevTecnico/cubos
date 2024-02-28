@@ -1,6 +1,18 @@
 #include <cubos/engine/transform/plugin.hpp>
 
 using cubos::core::ecs::Traversal;
+using cubos::engine::Commands;
+using cubos::engine::Entity;
+using cubos::engine::Query;
+
+template <typename T>
+void addComponent(Commands cmds, Query<Entity> query)
+{
+    for (auto [e] : query)
+    {
+        cmds.add(e, T{});
+    }
+}
 
 void cubos::engine::transformPlugin(Cubos& cubos)
 {
@@ -11,110 +23,68 @@ void cubos::engine::transformPlugin(Cubos& cubos)
     cubos.addComponent<LocalToParent>();
     cubos.addRelation<ChildOf>();
 
-    cubos.system("add LocalToWorld to entities with Position")
-        .tagged("cubos.transform.missing.local_to_world")
+    cubos.observer("add LocalToWorld when Position is added")
+        .onAdd<Position>()
         .without<LocalToWorld>()
-        .with<Position>()
-        .call([](Commands cmds, Query<Entity> query) {
-            for (auto [e] : query)
-            {
-                cmds.add(e, LocalToWorld{});
-            }
-        });
+        .call(addComponent<LocalToWorld>);
 
-    cubos.system("add LocalToWorld to entities with Rotation")
-        .tagged("cubos.transform.missing.local_to_world")
+    cubos.observer("add LocalToWorld when Rotation is added")
+        .onAdd<Rotation>()
         .without<LocalToWorld>()
-        .with<Rotation>()
-        .call([](Commands cmds, Query<Entity> query) {
-            for (auto [e] : query)
-            {
-                cmds.add(e, LocalToWorld{});
-            }
-        });
+        .call(addComponent<LocalToWorld>);
 
-    cubos.system("add LocalToWorld to entities with Scale")
-        .tagged("cubos.transform.missing.local_to_world")
+    cubos.observer("add LocalToWorld when Scale is added")
+        .onAdd<Scale>()
         .without<LocalToWorld>()
-        .with<Scale>()
-        .call([](Commands cmds, Query<Entity> query) {
-            for (auto [e] : query)
-            {
-                cmds.add(e, LocalToWorld{});
-            }
-        });
+        .call(addComponent<LocalToWorld>);
 
-    cubos.tag("cubos.transform.missing.local_to_world").before("cubos.transform.missing");
-
-    cubos.system("add Position to entities with LocalToWorld")
-        .tagged("cubos.transform.missing")
+    cubos.observer("add Position when LocalToWorld is added")
+        .onAdd<LocalToWorld>()
         .without<Position>()
-        .with<LocalToWorld>()
-        .call([](Commands cmds, Query<Entity> query) {
-            for (auto [e] : query)
-            {
-                cmds.add(e, Position{});
-            }
-        });
+        .call(addComponent<Position>);
 
-    cubos.system("add Rotation to entities with LocalToWorld")
-        .tagged("cubos.transform.missing")
+    cubos.observer("add Rotation when LocalToWorld is added")
+        .onAdd<LocalToWorld>()
         .without<Rotation>()
-        .with<LocalToWorld>()
-        .call([](Commands cmds, Query<Entity> query) {
-            for (auto [e] : query)
-            {
-                cmds.add(e, Rotation{});
-            }
-        });
+        .call(addComponent<Rotation>);
 
-    cubos.system("add Scale to entities with LocalToWorld")
-        .tagged("cubos.transform.missing")
+    cubos.observer("add Scale when LocalToWorld is added")
+        .onAdd<LocalToWorld>()
         .without<Scale>()
-        .with<LocalToWorld>()
-        .call([](Commands cmds, Query<Entity> query) {
-            for (auto [e] : query)
-            {
-                cmds.add(e, Scale{});
-            }
-        });
+        .call(addComponent<Scale>);
 
-    cubos.system("add LocalToParent to entities with LocalToWord and ChildOf other entity with LocalToWorld")
-        .tagged("cubos.transform.missing")
-        .entity()
+    cubos.observer("add LocalToParent to entities with LocalToWorld")
+        .onAdd<LocalToWorld>()
         .without<LocalToParent>()
-        .with<LocalToWorld>()
-        .related<ChildOf>()
-        .with<LocalToWorld>()
-        .call([](Commands cmds, Query<Entity> query) {
-            for (auto [e] : query)
-            {
-                cmds.add(e, LocalToParent{});
-            }
-        });
+        .call(addComponent<LocalToParent>);
 
-    cubos.tag("cubos.transform.missing").before("cubos.transform.update.relative");
-
-    cubos.system("update relative transform matrix")
-        .tagged("cubos.transform.update.relative")
-        .before("cubos.transform.update")
-        .call([](Query<LocalToWorld&, Opt<LocalToParent&>, const Position&, const Rotation&, const Scale&> query) {
-            for (auto [localToWorld, localToParent, position, rotation, scale] : query)
-            {
-                auto& mat = localToParent ? localToParent->mat : localToWorld.mat;
-                mat = glm::scale(glm::translate(glm::mat4(1.0F), position.vec) * glm::toMat4(rotation.quat),
-                                 glm::vec3(scale.factor));
-            }
-        });
-
-    cubos.system("update LocalToWorlds of children")
+    cubos.system("update LocalToParent's")
         .tagged("cubos.transform.update")
+        .before("cubos.transform.update.propagate")
+        .call([](Query<LocalToParent&, const Position&, const Rotation&, const Scale&> query) {
+            for (auto [localToParent, position, rotation, scale] : query)
+            {
+                localToParent.mat =
+                    glm::scale(glm::translate(glm::mat4(1.0F), position.vec) * glm::toMat4(rotation.quat),
+                               glm::vec3(scale.factor));
+            }
+        });
+
+    cubos.system("update LocalToWorld's of children")
+        .tagged("cubos.transform.update")
+        .tagged("cubos.transform.update.propagate")
         .with<LocalToWorld>()
         .with<LocalToParent>()
         .related<ChildOf>(Traversal::Down)
         .with<LocalToWorld>()
-        .call([](Query<LocalToWorld&, const LocalToParent&, const LocalToWorld&> query) {
-            for (auto [localToWorld, localToParent, parentLocalToWorld] : query)
+        .call([](Query<LocalToWorld&, const LocalToParent&, const LocalToWorld&> children,
+                 Query<LocalToWorld&, const LocalToParent&> all) {
+            for (auto [localToWorld, localToParent] : all)
+            {
+                localToWorld.mat = localToParent.mat;
+            }
+
+            for (auto [localToWorld, localToParent, parentLocalToWorld] : children)
             {
                 localToWorld.mat = parentLocalToWorld.mat * localToParent.mat;
             }
