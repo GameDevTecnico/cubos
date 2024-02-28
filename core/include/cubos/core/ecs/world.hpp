@@ -21,12 +21,16 @@
 
 namespace cubos::core::ecs
 {
+    class Observers;
+
     /// @brief Holds entities, their components and resources.
     /// @see Internally, components are stored in abstract containers called @ref Storage's.
     /// @ingroup core-ecs
     class World
     {
     public:
+        ~World();
+
         /// @brief World constructor.
         World();
 
@@ -95,6 +99,13 @@ namespace cubos::core::ecs
 
         /// @copydoc archetypeGraph()
         const ArchetypeGraph& archetypeGraph() const;
+
+        /// @brief Returns the observers of the world.
+        /// @return Observers.
+        Observers& observers();
+
+        /// @copydoc observers()
+        const Observers& observers() const;
 
         /// @brief Locks a resource for reading and returns it.
         /// @tparam T Resource type.
@@ -302,6 +313,7 @@ namespace cubos::core::ecs
         EntityPool mEntityPool;
         ArchetypeGraph mArchetypeGraph;
         Tables mTables;
+        Observers* mObservers;
 
         ResourceManager mResourceManager;
     };

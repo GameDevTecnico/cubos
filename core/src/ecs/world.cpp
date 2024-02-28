@@ -1,4 +1,6 @@
+#include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/name.hpp>
+#include <cubos/core/ecs/observer/observers.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -8,7 +10,13 @@
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
+World::~World()
+{
+    delete mObservers;
+}
+
 World::World()
+    : mObservers{new Observers{}}
 {
     this->registerComponent<Name>();
 }
@@ -60,6 +68,20 @@ void World::destroy(Entity entity)
     }
 
     auto archetype = mEntityPool.archetype(entity.index);
+
+    // For each column, notify the observers.
+    for (auto columnId = mArchetypeGraph.first(archetype); columnId != ColumnId::Invalid;
+         columnId = mArchetypeGraph.next(archetype, columnId))
+    {
+        // Trigger any observers that are interested in this change.
+        CommandBuffer cmdBuffer{*this};
+        if (mObservers->notifyRemove(cmdBuffer, entity, columnId))
+        {
+            cmdBuffer.commit();
+        }
+    }
+
+    // Remove entity from the pool and from its dense table.
     mEntityPool.destroy(entity.index);
     mTables.dense().at(archetype).swapErase(entity.index);
 
@@ -147,6 +169,16 @@ ArchetypeGraph& World::archetypeGraph()
 const ArchetypeGraph& World::archetypeGraph() const
 {
     return mArchetypeGraph;
+}
+
+Observers& World::observers()
+{
+    return *mObservers;
+}
+
+const Observers& World::observers() const
+{
+    return *mObservers;
 }
 
 World::Components World::components(Entity entity)
@@ -660,6 +692,14 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
     mWorld.moveSparse(mEntity, oldArchetype, newArchetype);
 
     CUBOS_TRACE("Added component {} to entity {}", type.name(), mEntity, mEntity);
+
+    // Trigger any observers that are interested in this change.
+    CommandBuffer cmdBuffer{mWorld};
+    if (mWorld.mObservers->notifyAdd(cmdBuffer, mEntity, columnId))
+    {
+        cmdBuffer.commit();
+    }
+
     return *this;
 }
 
@@ -674,6 +714,13 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
     if (!mWorld.mArchetypeGraph.contains(oldArchetype, columnId))
     {
         return *this;
+    }
+
+    // Trigger any observers that are interested in this change.
+    CommandBuffer cmdBuffer{mWorld};
+    if (mWorld.mObservers->notifyRemove(cmdBuffer, mEntity, columnId))
+    {
+        cmdBuffer.commit();
     }
 
     auto& oldTable = mWorld.mTables.dense().at(oldArchetype);
