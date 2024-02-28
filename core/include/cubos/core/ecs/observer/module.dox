@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref core-ecs-observer directory.
+
+namespace cubos::core::ecs
+{
+    /// @defgroup core-ecs-observer Observer
+    /// @ingroup core-ecs
+    /// @brief Observer part of the ECS.
+}

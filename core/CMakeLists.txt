@@ -108,6 +108,9 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/system/arguments/resources.cpp"
 	"src/ecs/system/arguments/world.cpp"
 
+	"src/ecs/observer/id.cpp"
+	"src/ecs/observer/observers.cpp"
+
 	"src/ecs/query/term.cpp"
 	"src/ecs/query/data.cpp"
 	"src/ecs/query/filter.cpp"
