@@ -78,26 +78,25 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.addPlugin(solverPlugin);
     cubos.addPlugin(fixedStepPlugin);
 
-    // add components to entities created with PhysicsBundle
-    cubos.system("unpack PhysicsBundle's")
-        .tagged("cubos.physics.unpack_bundle")
+    cubos.observer("unpack PhysicsBundle's")
+        .onAdd<PhysicsBundle>()
         .call([](Commands cmds, Query<Entity, const PhysicsBundle&> query) {
             for (auto [ent, bundle] : query)
             {
-                cmds.add(ent, PreviousPosition{});
-                cmds.add(ent, Mass{.mass = bundle.mass, .inverseMass = 1.0F / bundle.mass});
-                cmds.add(ent, Velocity{.vec = bundle.velocity});
+                cmds.remove<PhysicsBundle>(ent);
 
                 auto force = Force{};
                 force.add(bundle.force);
-                cmds.add(ent, force);
 
                 auto impulse = Impulse{};
                 impulse.add(bundle.impulse);
-                cmds.add(ent, impulse);
 
+                cmds.add(ent, PreviousPosition{});
+                cmds.add(ent, Mass{.mass = bundle.mass, .inverseMass = 1.0F / bundle.mass});
+                cmds.add(ent, Velocity{.vec = bundle.velocity});
+                cmds.add(ent, force);
+                cmds.add(ent, impulse);
                 cmds.add(ent, AccumulatedCorrection{});
-                cmds.remove<PhysicsBundle>(ent);
             }
         });
 
