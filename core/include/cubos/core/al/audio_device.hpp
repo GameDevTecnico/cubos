@@ -55,6 +55,10 @@ namespace cubos::core::al
         /// @return Audio device, or nullptr on failure.
         static std::shared_ptr<AudioDevice> create(const std::string& specifier = "");
 
+        /// @brief Retrieve the number of available devices. The number of available devices may be zero.
+        /// @return Number of available devices.
+        static int getDeviceCount();
+
         /// @brief Enumerates the available devices.
         /// @param[out] devices Vector to fill with the available devices.
         static void enumerateDevices(std::vector<std::string>& devices);
