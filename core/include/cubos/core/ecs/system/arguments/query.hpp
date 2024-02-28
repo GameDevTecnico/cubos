@@ -106,6 +106,7 @@ namespace cubos::core::ecs
 
         SystemFetcher(World& world, const SystemOptions& options)
             : mData{world, options.queryTerms}
+            , mObservedTarget{options.observedTarget}
         {
         }
 
@@ -117,13 +118,20 @@ namespace cubos::core::ecs
             }
         }
 
-        Query<Ts...> fetch(const SystemContext& /*ctx*/)
+        Query<Ts...> fetch(const SystemContext& ctx)
         {
             mData.update();
+
+            if (mObservedTarget != -1)
+            {
+                return {mData.view().pin(mObservedTarget, ctx.observedEntity)};
+            }
+
             return {mData.view()};
         }
 
     private:
         QueryData<Ts...> mData;
+        int mObservedTarget;
     };
 } // namespace cubos::core::ecs
