@@ -10,8 +10,18 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/memory/function.hpp>
+
 namespace cubos::core::al
 {
+    struct DeviceInfo
+    {
+        const char* name;
+        int maxInputChannels;
+        int maxOutputChannels;
+        double defaultSampleRate;
+    };
+
     namespace impl
     {
         class Buffer;
@@ -43,25 +53,46 @@ namespace cubos::core::al
     class AudioDevice
     {
     public:
+        /// Type alias for a user output callback function.
+        using PortAudioOutputCallbackFn = core::memory::Function<int(void* output, unsigned long frameCount,
+                                                                     unsigned long statusFlags, void* userData)>;
+
         AudioDevice() = default;
         virtual ~AudioDevice() = default;
 
         /// @brief Forbid copy construction.
         AudioDevice(const AudioDevice&) = delete;
 
-        /// @brief Creates an audio device from a given device @p specifier.
-        /// @see enumerateDevices()
-        /// @param specifier Device specifier (empty for default).
+        /// @brief Creates the stream.
+        /// @param callback Supplied function that is responsible for processing and filling input and output buffers.
+        /// @return Whether the stream was successfully created.
+        virtual bool init(PortAudioOutputCallbackFn callback) = 0;
+
+        /// @brief Starts the stream.
+        virtual void start() = 0;
+
+        /// @brief Stops the stream.
+        virtual void stop() = 0;
+
+        /// @brief Creates an audio device from a given device id @p deviceIndex.
+        /// @param deviceIndex Device specifier id (empty for default).
         /// @return Audio device, or nullptr on failure.
-        static std::shared_ptr<AudioDevice> create(const std::string& specifier = "");
+        static std::shared_ptr<AudioDevice> create(int deviceIndex = -1);
 
         /// @brief Retrieve the number of available devices. The number of available devices may be zero.
         /// @return Number of available devices.
-        static int getDeviceCount();
+        static int deviceCount();
 
         /// @brief Enumerates the available devices.
         /// @param[out] devices Vector to fill with the available devices.
-        static void enumerateDevices(std::vector<std::string>& devices);
+        /// @param debug If true, will print the devices using CUBOS_DEBUG.
+        static void enumerateDevices(std::vector<DeviceInfo>& devices, bool debug = false);
+
+        /// @brief Retrieve the device information by its index.
+        static DeviceInfo deviceInfo(int deviceIndex);
+
+        /// @brief Prints device information by its index.
+        static void printDeviceInformation(int deviceIndex);
 
         /// @brief Creates a new audio buffer
         /// @return Handle of the new buffer.

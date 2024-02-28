@@ -1,14 +1,17 @@
 #include "port_audio_device.hpp"
 
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/function.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #ifdef WITH_PORTAUDIO
-#include "../../core/lib/portaudio/include/portaudio.h"
+#include <portaudio.h>
 #endif // WITH_PORTAUDIO
 
-#include <array>
+#define SAMPLE_RATE 44100.0   // How many audio samples to capture every second (44100 Hz is standard)
+#define FRAMES_PER_BUFFER 512 // How many audio samples to send to our callback function for each channel
+#define NUM_CHANNELS 2        // Number of audio channels to capture
 
 #define UNSUPPORTED()                                                                                                  \
     do                                                                                                                 \
@@ -19,7 +22,16 @@
 
 using namespace cubos::core::al;
 
-PortAudioDevice::PortAudioDevice(const std::string& specifier)
+static int paCallback(const void*, void* outputBuffer, unsigned long framesPerBuffer,
+                                const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags flags, void* userData)
+{
+    PortAudioDevice* portAudioDevice = static_cast<PortAudioDevice*>(userData);
+    return portAudioDevice->callback(outputBuffer, framesPerBuffer, flags, userData);
+}
+
+PortAudioDevice::PortAudioDevice(int deviceIndex)
+    : outputDeviceID(deviceIndex)
+    , stream(nullptr)
 {
 #ifdef WITH_PORTAUDIO
     auto err = Pa_Initialize();
@@ -27,40 +39,129 @@ PortAudioDevice::PortAudioDevice(const std::string& specifier)
     {
         CUBOS_FAIL("PortAudio failed to initialize: {}", Pa_GetErrorText(err));
     }
-    (void)specifier;
-    // TODO....
+
+    CUBOS_INFO("PortAudio initialized");
+
+    if (outputDeviceID == -1)
+    {
+        outputDeviceID = Pa_GetDefaultOutputDevice();
+        CUBOS_INFO("PortAudio will use default output device ('{}') :", outputDeviceID);
+        printDeviceInformation(outputDeviceID);
+    }
 #else
-    (void)specifier;
     UNSUPPORTED();
-#endif // WITH_PORTAUDIO
+#endif
 }
 
 PortAudioDevice::~PortAudioDevice()
 {
-#ifdef WITH_PORTAUDIO
+    if (stream)
+    {
+        // FIXME: double stop?»
+        stop();
+        Pa_CloseStream(stream);
+    }
+
     Pa_Terminate();
-#else
-    UNSUPPORTED();
-#endif // WITH_PORTAUDIO
 }
 
-int PortAudioDevice::getDeviceCount()
+bool PortAudioDevice::init(PortAudioOutputCallbackFn callback)
 {
-#ifdef WITH_PORTAUDIO
-    return Pa_GetDeviceCount();
-#else
-    UNSUPPORTED();
-#endif // WITH_PORTAUDIO
+    this->callback = std::move(callback);
+    CUBOS_INFO("Custom output callback function set");
+
+    PaStreamParameters outputParameters;
+    outputParameters.device = outputDeviceID;
+    // FIXME: what should be specified by the user?
+    outputParameters.channelCount = Pa_GetDeviceInfo(outputDeviceID)->maxOutputChannels;
+    outputParameters.sampleFormat = paFloat32;
+    outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputDeviceID)->defaultLowOutputLatency;
+    outputParameters.hostApiSpecificStreamInfo = nullptr;
+
+    CUBOS_INFO("Creating PortAudio stream..");
+    auto err =
+        Pa_OpenStream(&stream, nullptr, &outputParameters, SAMPLE_RATE, FRAMES_PER_BUFFER, paNoFlag, paCallback, this);
+    if (err != paNoError)
+    {
+        CUBOS_ERROR("Could not open PortAudio stream: {}", Pa_GetErrorText(err));
+        return false;
+    }
+
+    return true;
 }
 
-void PortAudioDevice::enumerateDevices(std::vector<std::string>& devices)
+void PortAudioDevice::start()
+{
+    auto err = Pa_StartStream(stream);
+    if (err != paNoError)
+    {
+        CUBOS_ERROR("PortAudio failed to start the stream: {}", Pa_GetErrorText(err));
+    }
+}
+
+void PortAudioDevice::stop()
+{
+    auto err = Pa_StopStream(stream);
+    if (err != paNoError)
+    {
+        CUBOS_ERROR("PortAudio failed to stop the stream: {}", Pa_GetErrorText(err));
+    }
+}
+
+int PortAudioDevice::deviceCount()
+{
+    return Pa_GetDeviceCount();
+}
+
+void PortAudioDevice::enumerateDevices(std::vector<DeviceInfo>& devices, bool debug)
 {
     devices.clear();
-    // TODO: should we store PaDeviceInfos instead of strings?
-    for (int i = 0; i < getDeviceCount(); i++)
+    for (int i = 0; i < deviceCount(); i++)
     {
-        devices.push_back(std::string(Pa_GetDeviceInfo(i)->name));
+        auto deviceInfo = Pa_GetDeviceInfo(i);
+        devices.emplace_back(DeviceInfo{.name = deviceInfo->name,
+                                        .maxInputChannels = deviceInfo->maxInputChannels,
+                                        .maxOutputChannels = deviceInfo->maxOutputChannels,
+                                        .defaultSampleRate = deviceInfo->defaultSampleRate});
+        if (debug)
+        {
+            CUBOS_DEBUG("Device '{}' : '{}'", i, deviceInfo->name);
+        }
     }
+}
+
+DeviceInfo PortAudioDevice::deviceInfo(int deviceIndex)
+{
+    for (int i = 0; i < deviceCount(); i++)
+    {
+        if (i == deviceIndex)
+        {
+            auto deviceInfo = Pa_GetDeviceInfo(i);
+            return DeviceInfo{.name = deviceInfo->name,
+                              .maxInputChannels = deviceInfo->maxInputChannels,
+                              .maxOutputChannels = deviceInfo->maxOutputChannels,
+                              .defaultSampleRate = deviceInfo->defaultSampleRate};
+        }
+    }
+    CUBOS_FAIL("Could not find device");
+}
+
+void PortAudioDevice::printDeviceInformation(int deviceIndex)
+{
+    for (int i = 0; i < deviceCount(); i++)
+    {
+        if (i == deviceIndex)
+        {
+            auto deviceInfo = Pa_GetDeviceInfo(i);
+            CUBOS_INFO("Device '{}':", deviceIndex);
+            CUBOS_INFO("\tname: '{}'", deviceInfo->name);
+            CUBOS_INFO("\tmaxInputChannels: '{}'", deviceInfo->maxInputChannels);
+            CUBOS_INFO("\tmaxOutputChannels: '{}'", deviceInfo->maxOutputChannels);
+            CUBOS_INFO("\tdefaultSampleRate: '{}'", deviceInfo->defaultSampleRate);
+            return;
+        }
+    }
+    CUBOS_FAIL("Could not find device");
 }
 
 Buffer PortAudioDevice::createBuffer()
