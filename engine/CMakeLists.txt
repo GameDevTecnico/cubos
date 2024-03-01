@@ -9,6 +9,7 @@ message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
 
 # Set engine source files
 set(CUBOS_ENGINE_SOURCE
+	"src/api.cpp"
 	"src/prelude.cpp"
 
 	"src/defaults/plugin.cpp"
