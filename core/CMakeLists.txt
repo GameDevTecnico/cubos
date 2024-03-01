@@ -15,9 +15,11 @@ set(CUBOS_CORE_ECS_MAX_COMPONENTS "63" CACHE STRING "The maximum number of compo
 
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
+option(BUILD_CORE_SHARED "Build cubos core as shared library?" ON)
 
 message("# Building core samples: " ${BUILD_CORE_SAMPLES})
 message("# Building core tests: " ${BUILD_CORE_TESTS})
+message("# Building core as shared library: " ${BUILD_CORE_SHARED})
 
 # Set core source files
 set(CUBOS_CORE_SOURCE
@@ -131,7 +133,15 @@ set(CUBOS_CORE_SOURCE
 )
 
 # Create core library
-add_library(cubos-core ${CUBOS_CORE_SOURCE})
+if(BUILD_CORE_SHARED)
+	add_library(cubos-core SHARED ${CUBOS_CORE_SOURCE})
+	target_compile_definitions(cubos-core
+		PRIVATE -DCUBOS_CORE_EXPORT
+		PUBLIC -DCUBOS_CORE_IMPORT
+	)
+else()
+	add_library(cubos-core STATIC ${CUBOS_CORE_SOURCE})
+endif()
 target_include_directories(cubos-core PUBLIC "include")
 target_compile_definitions(cubos-core PUBLIC
 	-DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS}
@@ -143,8 +153,11 @@ if(WITH_OPENGL)
 	set(GLAD_SOUURCES_DIR "lib/glad")
 	add_subdirectory("${GLAD_SOUURCES_DIR}/cmake" glad_cmake SYSTEM)
 	glad_add_library(glad REPRODUCIBLE API gl:core=3.3)
+	if(BUILD_CORE_SHARED)
+		set_property(TARGET glad PROPERTY POSITION_INDEPENDENT_CODE ON)
+	endif()
 	target_link_libraries(cubos-core PRIVATE glad)
-	target_compile_definitions(cubos-core PRIVATE WITH_OPENGL)
+	target_compile_definitions(cubos-core PRIVATE WITH_OPENGL GLAD_GLAPI_EXPORT GLAD_GLAPI_EXPORT_BUILD)
 endif()
 
 if(WITH_GLFW)
