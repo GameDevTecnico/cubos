@@ -79,8 +79,16 @@ namespace cubos::core::ecs
     class CUBOS_CORE_API ResourceManager final
     {
     public:
-        ResourceManager() = default;
         ~ResourceManager();
+
+        /// @brief Constructs.
+        ResourceManager() = default;
+
+        /// @name Forbid copying.
+        /// @{
+        ResourceManager(const ResourceManager&) = delete;
+        ResourceManager& operator=(const ResourceManager&) = delete;
+        /// @}
 
         /// @brief Registers a new resource type in the resource manager.
         ///

@@ -57,6 +57,15 @@ namespace cubos::core::ecs
     public:
         ~Dispatcher();
 
+        /// @brief Constructs.
+        Dispatcher() = default;
+
+        /// @name Forbid copying.
+        /// @{
+        Dispatcher(const Dispatcher&) = delete;
+        Dispatcher& operator=(const Dispatcher&) = delete;
+        /// @}
+
         /// @brief Adds a tag, and sets it as the current tag for further settings.
         /// @param tag Tag to add.
         void addTag(const std::string& tag);

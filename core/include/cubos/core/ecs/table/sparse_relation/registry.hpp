@@ -63,6 +63,12 @@ namespace cubos::core::ecs
         /// @brief Constructs.
         SparseRelationTableRegistry();
 
+        /// @name Forbid any kind of copying.
+        /// @{
+        SparseRelationTableRegistry(const SparseRelationTableRegistry&) = delete;
+        SparseRelationTableRegistry& operator=(const SparseRelationTableRegistry&) = delete;
+        /// @}
+
         /// @brief Checks if there's a table with the given identifier.
         /// @param id Identifier.
         /// @return Whether it contains the table or not.

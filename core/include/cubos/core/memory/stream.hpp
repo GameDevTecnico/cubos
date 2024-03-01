@@ -42,8 +42,11 @@ namespace cubos::core::memory
         /// @brief Move constructs.
         Stream(Stream&&) = default;
 
-        /// @brief Forbid copy construction.
+        /// @name Forbid any kind of copying.
+        /// @{
         Stream(const Stream&) = delete;
+        Stream& operator=(const Stream&) = delete;
+        /// @}
 
         static Stream& stdIn;  ///< Stream wrapper for `stdin`.
         static Stream& stdOut; ///< Stream wrapper for `stdout`.

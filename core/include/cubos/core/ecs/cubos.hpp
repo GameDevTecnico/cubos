@@ -57,6 +57,12 @@ namespace cubos::core::ecs
         /// @return Reference to this object, for chaining.
         TagBuilder(World& world, core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
 
+        /// @name Forbid copying.
+        /// @{
+        TagBuilder(const TagBuilder&) = delete;
+        TagBuilder& operator=(const TagBuilder&) = delete;
+        /// @}
+
         /// @brief Sets the current tag to be executed before another tag.
         /// @param tag Tag to be executed before.
         /// @return Reference to this object, for chaining.
@@ -113,6 +119,12 @@ namespace cubos::core::ecs
         /// @param argc Argument count.
         /// @param argv Argument array.
         Cubos(int argc, char** argv);
+
+        /// @name Forbid copying.
+        /// @{
+        Cubos(const Cubos&) = delete;
+        Cubos& operator=(const Cubos&) = delete;
+        /// @}
 
         /// @brief Adds a new plugin to the engine. If the plugin had already been added, nothing
         /// happens. A plugin is just a function that operates on the Cubos object, further
@@ -209,6 +221,12 @@ namespace cubos::core::ecs
         /// @param dispatcher Dispatcher to add the system to.
         /// @param name Debug name.
         SystemBuilder(World& world, Dispatcher& dispatcher, std::string name);
+
+        /// @name Forbid copying.
+        /// @{
+        SystemBuilder(const SystemBuilder&) = delete;
+        SystemBuilder& operator=(const SystemBuilder&) = delete;
+        /// @}
 
         /// @brief Adds a tag to the system.
         /// @param tag Tag.
@@ -338,6 +356,12 @@ namespace cubos::core::ecs
         /// @param world World.
         /// @param name Debug name.
         ObserverBuilder(World& world, std::string name);
+
+        /// @name Forbid copying.
+        /// @{
+        ObserverBuilder(const ObserverBuilder&) = delete;
+        ObserverBuilder& operator=(const ObserverBuilder&) = delete;
+        /// @}
 
         /// @brief Triggers the observer whenever the given component is added to an entity.
         /// @param type Component type.

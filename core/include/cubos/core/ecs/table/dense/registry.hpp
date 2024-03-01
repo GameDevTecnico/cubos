@@ -20,6 +20,12 @@ namespace cubos::core::ecs
         /// @brief Constructs.
         DenseTableRegistry();
 
+        /// @name Forbid any kind of copying.
+        /// @{
+        DenseTableRegistry(const DenseTableRegistry&) = delete;
+        DenseTableRegistry& operator=(const DenseTableRegistry&) = delete;
+        /// @}
+
         /// @brief Checks if the given archetype has a dense table.
         /// @param archetype Archetype identifier.
         /// @return WHether it contains a table or not.
