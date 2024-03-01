@@ -27,5 +27,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup scene-plugin
-    void scenePlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void scenePlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -19,7 +19,7 @@ namespace cubos::engine
     /// @ref RenderableGrid and @ref PointLight, and add them to the @ref RendererFrame.
     ///
     /// @ingroup renderer-plugin
-    class RendererFrame final
+    class CUBOS_ENGINE_API RendererFrame final
     {
     public:
         CUBOS_REFLECT;

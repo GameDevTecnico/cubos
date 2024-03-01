@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -20,13 +21,13 @@ namespace cubos::engine
     /// - @ref render-target-plugin
 
     /// @brief Recreates the RenderPicker if necessary - for example, due to a render target resize.
-    extern Tag createRenderPickerTag;
+    CUBOS_ENGINE_API extern Tag createRenderPickerTag;
 
     /// @brief Systems which draw to RenderPicker textures should be tagged with this.
-    extern Tag drawToRenderPickerTag;
+    CUBOS_ENGINE_API extern Tag drawToRenderPickerTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup render-picker-plugin
-    void renderPickerPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void renderPickerPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -25,5 +25,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup voxels-plugin
-    void voxelsPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void voxelsPlugin(Cubos& cubos);
 } // namespace cubos::engine

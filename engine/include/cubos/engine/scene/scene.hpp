@@ -20,7 +20,7 @@ namespace cubos::engine
     /// etc.
     ///
     /// @ingroup scene-plugin
-    struct Scene
+    struct CUBOS_ENGINE_API Scene
     {
         CUBOS_REFLECT;
 

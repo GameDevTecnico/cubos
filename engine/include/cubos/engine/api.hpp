@@ -9,6 +9,7 @@
 /// @{
 
 #if defined(_WIN32) || defined(_WIN64)
+#define CUBOS_ENGINE_EXTERN
 #if defined(CUBOS_ENGINE_EXPORT)
 #define CUBOS_ENGINE_API __declspec(dllexport)
 #elif defined(CUBOS_ENGINE_IMPORT)
@@ -17,6 +18,7 @@
 #define CUBOS_ENGINE_API
 #endif
 #else
+#define CUBOS_ENGINE_EXTERN extern
 #define CUBOS_ENGINE_API
 #endif
 

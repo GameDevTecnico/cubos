@@ -59,19 +59,19 @@ namespace cubos::engine
     /// - @ref assets-plugin
 
     /// @brief The renderer is initialized, after @ref windowInitTag.
-    extern Tag rendererInitTag;
+    CUBOS_ENGINE_API extern Tag rendererInitTag;
 
     /// @brief Frame information is collected, after @ref transformUpdateTag.
-    extern Tag rendererFrameTag;
+    CUBOS_ENGINE_API extern Tag rendererFrameTag;
 
     /// @brief Frame is rendered to the window, after @ref rendererFrameTag and
     /// before @ref windowRenderTag.
-    extern Tag rendererDrawTag;
+    CUBOS_ENGINE_API extern Tag rendererDrawTag;
 
     /// @brief Component which makes a voxel grid be rendered by the renderer plugin.
     /// @note Should be used with @ref LocalToWorld.
     /// @ingroup renderer-plugin
-    struct RenderableGrid
+    struct CUBOS_ENGINE_API RenderableGrid
     {
         CUBOS_REFLECT;
 
@@ -82,7 +82,7 @@ namespace cubos::engine
 
     /// @brief Resource which identifies the camera entities to be used by the renderer.
     /// @ingroup renderer-plugin
-    struct ActiveCameras
+    struct CUBOS_ENGINE_API ActiveCameras
     {
         CUBOS_REFLECT;
 
@@ -94,7 +94,7 @@ namespace cubos::engine
 
     /// @brief Resource which holds an asset handle to the currently active palette.
     /// @ingroup renderer-plugin
-    struct ActiveVoxelPalette
+    struct CUBOS_ENGINE_API ActiveVoxelPalette
     {
         CUBOS_REFLECT;
 
@@ -109,5 +109,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup renderer-plugin
-    void rendererPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void rendererPlugin(Cubos& cubos);
 } // namespace cubos::engine

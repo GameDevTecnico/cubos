@@ -11,6 +11,8 @@
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Stores the state of a single input action, such as "jump" or "attack".
@@ -18,7 +20,7 @@ namespace cubos::engine
     /// Can be bound to multiple keys, and will be considered "pressed" if any of them are pressed.
     ///
     /// @ingroup input-plugin
-    class InputAction final
+    class CUBOS_ENGINE_API InputAction final
     {
     public:
         CUBOS_REFLECT;

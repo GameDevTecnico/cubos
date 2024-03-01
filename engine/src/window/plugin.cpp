@@ -9,6 +9,8 @@ using cubos::core::io::openWindow;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 
+template class cubos::core::ecs::EventPipe<WindowEvent>;
+
 void cubos::engine::windowPlugin(Cubos& cubos)
 {
     cubos.depends(settingsPlugin);

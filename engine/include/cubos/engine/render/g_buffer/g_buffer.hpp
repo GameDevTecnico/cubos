@@ -9,11 +9,13 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which stores the GBuffer textures of a render target.
     /// @ingroup render-g-buffer-plugin
-    struct GBuffer
+    struct CUBOS_ENGINE_API GBuffer
     {
         CUBOS_REFLECT;
 

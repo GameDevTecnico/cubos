@@ -8,12 +8,14 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which holds forces applied on a particle.
     /// @note Should be used with @ref Velocity.
     /// @ingroup physics-plugin
-    struct Force
+    struct CUBOS_ENGINE_API Force
     {
         CUBOS_REFLECT;
 

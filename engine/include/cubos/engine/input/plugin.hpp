@@ -32,10 +32,10 @@ namespace cubos::engine
     /// - @ref window-plugin
 
     /// @brief Updates the input state.
-    extern Tag inputUpdateTag;
+    CUBOS_ENGINE_API extern Tag inputUpdateTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup input-plugin
-    void inputPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void inputPlugin(Cubos& cubos);
 } // namespace cubos::engine

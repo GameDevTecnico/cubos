@@ -9,11 +9,13 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which stores the HDR texture of a render target.
     /// @ingroup render-hdr-plugin
-    struct HDR
+    struct CUBOS_ENGINE_API HDR
     {
         CUBOS_REFLECT;
 

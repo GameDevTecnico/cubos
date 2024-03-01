@@ -11,11 +11,13 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which moves the camera.
     /// @ingroup free-camera-controller-plugin
-    struct FreeCameraController
+    struct CUBOS_ENGINE_API FreeCameraController
     {
         CUBOS_REFLECT;
 

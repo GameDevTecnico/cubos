@@ -14,7 +14,7 @@ namespace cubos::engine
 {
     /// @brief Bridge for loading shader assets.
     /// @ingroup render-shader-plugin
-    class ShaderBridge : public FileBridge
+    class CUBOS_ENGINE_API ShaderBridge : public FileBridge
     {
     public:
         /// @brief Constructs a bridge.

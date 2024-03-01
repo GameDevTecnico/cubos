@@ -9,6 +9,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Stores metadata about an asset - the data stored in .meta files.
@@ -20,7 +22,7 @@ namespace cubos::engine
     ///   excluded from the serialization.
     ///
     /// @ingroup assets-plugin
-    class AssetMeta final
+    class CUBOS_ENGINE_API AssetMeta final
     {
     public:
         /// @brief Used as context to exclude parameters from being serialized.

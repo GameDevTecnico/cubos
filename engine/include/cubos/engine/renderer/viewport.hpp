@@ -8,6 +8,8 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which defines parameters of a viewport, the actual screen space
@@ -15,7 +17,7 @@ namespace cubos::engine
     /// shown on screen.
     /// @note Should be used with @ref LocalToWorld.
     /// @ingroup renderer-plugin
-    struct Viewport
+    struct CUBOS_ENGINE_API Viewport
     {
         CUBOS_REFLECT;
 

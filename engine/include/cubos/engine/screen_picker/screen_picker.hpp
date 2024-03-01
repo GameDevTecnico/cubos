@@ -13,7 +13,7 @@ namespace cubos::engine
     /// @brief Resource which provides a texture to store entity/gizmo ids, for selection with a mouse.
     ///
     /// @ingroup screen-picker-plugin
-    class ScreenPicker final
+    class CUBOS_ENGINE_API ScreenPicker final
     {
     public:
         CUBOS_REFLECT;

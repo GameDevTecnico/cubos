@@ -34,16 +34,20 @@ namespace cubos::engine
     /// - @ref settings-plugin
 
     /// @brief Window is opened, runs after @ref settingsTag.
-    extern Tag windowInitTag;
+    CUBOS_ENGINE_API extern Tag windowInitTag;
 
     /// @brief The window is polled for events, sending @ref core::io::WindowEvent's.
-    extern Tag windowPollTag;
+    CUBOS_ENGINE_API extern Tag windowPollTag;
 
     /// @brief The window's back buffers are swapped.
-    extern Tag windowRenderTag;
+    CUBOS_ENGINE_API extern Tag windowRenderTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup window-plugin
-    void windowPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void windowPlugin(Cubos& cubos);
 } // namespace cubos::engine
+
+// We need to declare a specific instantiation of the event pipe for the event to make sure there's only one
+// instance of the type when compiling with shared libraries.
+CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API cubos::core::ecs::EventPipe<cubos::core::io::WindowEvent>;

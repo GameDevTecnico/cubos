@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -21,14 +22,14 @@ namespace cubos::engine
 
     /// @brief Recreates the GBuffer if necessary - for example, due to a render target resize.
     /// @ingroup render-g-buffer-plugin
-    extern Tag createGBufferTag;
+    CUBOS_ENGINE_API extern Tag createGBufferTag;
 
     /// @brief Systems which draw to GBuffer textures should be tagged with this.
     /// @ingroup render-g-buffer-plugin
-    extern Tag drawToGBufferTag;
+    CUBOS_ENGINE_API extern Tag drawToGBufferTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup render-g-buffer-plugin
-    void gBufferPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void gBufferPlugin(Cubos& cubos);
 } // namespace cubos::engine

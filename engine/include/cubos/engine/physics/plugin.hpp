@@ -46,20 +46,20 @@ namespace cubos::engine
     /// ## Dependencies
     /// - @ref physics-gravity-plugin
 
-    extern Tag physicsApplyForcesTag;
+    CUBOS_ENGINE_API extern Tag physicsApplyForcesTag;
 
-    extern Tag physicsSimulationApplyImpulsesTag;
+    CUBOS_ENGINE_API extern Tag physicsSimulationApplyImpulsesTag;
 
-    extern Tag physicsSimulationSubstepsIntegrateTag;
+    CUBOS_ENGINE_API extern Tag physicsSimulationSubstepsIntegrateTag;
 
-    extern Tag physicsSimulationSubstepsCorrectPositionTag;
+    CUBOS_ENGINE_API extern Tag physicsSimulationSubstepsCorrectPositionTag;
 
-    extern Tag physicsSimulationSubstepsUpdateVelocityTag;
+    CUBOS_ENGINE_API extern Tag physicsSimulationSubstepsUpdateVelocityTag;
 
-    extern Tag physicsSimulationClearForcesTag;
+    CUBOS_ENGINE_API extern Tag physicsSimulationClearForcesTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup physics-plugin
-    void physicsPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void physicsPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -7,11 +7,13 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Contains a shader stage created from GLSL code.
     /// @ingroup render-shader-plugin
-    class Shader final
+    class CUBOS_ENGINE_API Shader final
     {
     public:
         CUBOS_REFLECT;

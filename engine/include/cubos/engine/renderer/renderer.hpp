@@ -50,7 +50,7 @@ namespace cubos::engine
     ///
     /// @see PostProcessingManager
     /// @ingroup renderer-plugin
-    class BaseRenderer
+    class CUBOS_ENGINE_API BaseRenderer
     {
     public:
         /// @brief Struct which holds the viewport information for a camera, to be used for drawing.
@@ -147,7 +147,7 @@ namespace cubos::engine
     namespace impl
     {
         /// @brief Represents a grid which was uploaded to the GPU.
-        class RendererGrid
+        class CUBOS_ENGINE_API RendererGrid
         {
         public:
             virtual ~RendererGrid() = default;
