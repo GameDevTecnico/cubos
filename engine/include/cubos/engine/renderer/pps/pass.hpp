@@ -31,8 +31,11 @@ namespace cubos::engine
         /// @param renderDevice Render device to use.
         PostProcessingPass(core::gl::RenderDevice& renderDevice);
 
-        /// @brief Deleted copy constructor.
+        /// @name Forbid any kind of copying.
+        /// @{
         PostProcessingPass(const PostProcessingPass&) = delete;
+        PostProcessingPass& operator=(const PostProcessingPass&) = delete;
+        /// @}
 
         /// @brief Called when the window framebuffer size changes.
         /// @param size New size of the window.

@@ -31,8 +31,14 @@ namespace cubos::core::ecs
     public:
         ~World();
 
-        /// @brief World constructor.
+        /// @brief Constructs.
         World();
+
+        /// @name Forbid copying.
+        /// @{
+        World(const World&) = delete;
+        World& operator=(const World&) = delete;
+        /// @}
 
         /// @brief Used to access the components in an entity.
         class Components;

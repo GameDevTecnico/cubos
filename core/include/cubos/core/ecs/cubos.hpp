@@ -89,6 +89,12 @@ namespace cubos::core::ecs
         /// @param argv Argument array.
         Cubos(int argc, char** argv);
 
+        /// @name Forbid copying.
+        /// @{
+        Cubos(const Cubos&) = delete;
+        Cubos& operator=(const Cubos&) = delete;
+        /// @}
+
         /// @brief Adds a new plugin as a sub-plugin of the current plugin.
         ///
         /// Aborts if the plugin has already been added by this or any other plugin.
@@ -282,6 +288,12 @@ namespace cubos::core::ecs
         /// @param tagId Tag identifier.
         TagBuilder(Cubos& cubos, std::string name, bool isStartup, Planner::TagId tagId);
 
+        /// @name Forbid copying.
+        /// @{
+        TagBuilder(const TagBuilder&) = delete;
+        TagBuilder& operator=(const TagBuilder&) = delete;
+        /// @}
+
         /// @brief Makes all tagged systems run before systems with the given tag.
         /// @param tag Tag.
         /// @return Builder.
@@ -340,6 +352,12 @@ namespace cubos::core::ecs
         /// @param isStartup Whether the system is a startup system.
         /// @param name Debug name.
         SystemBuilder(Cubos& cubos, bool isStartup, std::string name);
+
+        /// @name Forbid copying.
+        /// @{
+        SystemBuilder(const SystemBuilder&) = delete;
+        SystemBuilder& operator=(const SystemBuilder&) = delete;
+        /// @}
 
         /// @brief Adds a tag to the system.
         /// @param tag Tag.
@@ -469,6 +487,12 @@ namespace cubos::core::ecs
         /// @param cubos Cubos.
         /// @param name Debug name.
         ObserverBuilder(Cubos& cubos, std::string name);
+
+        /// @name Forbid copying.
+        /// @{
+        ObserverBuilder(const ObserverBuilder&) = delete;
+        ObserverBuilder& operator=(const ObserverBuilder&) = delete;
+        /// @}
 
         /// @brief Triggers the observer whenever the given component is added to an entity.
         /// @param type Component type.

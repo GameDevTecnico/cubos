@@ -31,11 +31,12 @@ namespace cubos::core::data
         /// @brief Default constructs.
         Serializer() = default;
 
-        /// @brief Forbids copying.
+        /// @name Forbid any kind of copying.
+        /// @brief Deleted as the hooks may contain references to the serializer.
+        /// @{
         Serializer(const Serializer&) = delete;
-
-        /// @brief Forbids copy assignment.
         Serializer& operator=(const Serializer&) = delete;
+        /// @}
 
         /// @brief Function type for serialization hooks.
         using Hook = memory::Function<bool(const void*)>;
