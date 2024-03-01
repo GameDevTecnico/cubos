@@ -52,7 +52,7 @@ namespace cubos::core::ecs
 {
     /// @brief Used to add systems and relations between them and then dispatch them all at once.
     /// @ingroup core-ecs-system
-    class Dispatcher
+    class CUBOS_CORE_API Dispatcher
     {
     public:
         ~Dispatcher();

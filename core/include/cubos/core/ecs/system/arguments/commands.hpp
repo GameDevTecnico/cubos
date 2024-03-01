@@ -20,7 +20,7 @@ namespace cubos::core::ecs
     /// Internally wraps a reference to a CommandBuffer object.
     ///
     /// @ingroup core-ecs-system-arguments
-    class Commands final
+    class CUBOS_CORE_API Commands final
     {
     public:
         /// @brief Allows editing an entity created by a @ref Commands object.
@@ -132,7 +132,7 @@ namespace cubos::core::ecs
         CommandBuffer& mBuffer; ///< Command buffer to write to.
     };
 
-    class Commands::EntityBuilder final
+    class CUBOS_CORE_API Commands::EntityBuilder final
     {
     public:
         /// @brief Constructs.
@@ -165,7 +165,7 @@ namespace cubos::core::ecs
         Entity mEntity;
     };
 
-    class Commands::BlueprintBuilder final
+    class CUBOS_CORE_API Commands::BlueprintBuilder final
     {
     public:
         /// @brief Constructs.

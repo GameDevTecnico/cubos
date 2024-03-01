@@ -19,7 +19,7 @@ namespace cubos::core::data::old
     /// @param des The deserializer to use.
     /// @param obj The object to deserialize.
     template <typename T>
-    void deserialize(Deserializer& des, T& obj);
+    CUBOS_CORE_API void deserialize(Deserializer& des, T& obj);
 
     /// Abstract class for deserializing data in a format-agnostic way.
     /// Each deserializer implementation is responsible for implementing its own primitive
@@ -49,7 +49,7 @@ namespace cubos::core::data::old
     ///     private:
     ///         int32_t a;
     ///     };
-    class Deserializer
+    class CUBOS_CORE_API Deserializer
     {
     public:
         Deserializer();
@@ -195,7 +195,7 @@ namespace cubos::core::data::old
     /// need special handling.
     /// @param des The deserializer.
     /// @param obj The value to deserialize.
-    void deserialize(Deserializer& des, std::vector<bool>::reference obj);
+    CUBOS_CORE_API void deserialize(Deserializer& des, std::vector<bool>::reference obj);
 
     /// Overload for deserializing std::vector.
     /// @tparam T The type of the vector.

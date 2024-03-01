@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/memory/stream.hpp>
 
@@ -7,7 +8,7 @@ namespace cubos::core::data::old
 {
     /// Implementation of the abstract Serializer class for serializing to binary data.
     /// This class allows data to be serialized in both little and big endian formats.
-    class BinarySerializer : public Serializer
+    class CUBOS_CORE_API BinarySerializer : public Serializer
     {
     public:
         /// @param stream The stream to serialize to.

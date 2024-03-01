@@ -27,7 +27,7 @@ namespace cubos::core::ecs
     /// - Entity terms, which don't filter the results but allow accessing one of the matched entities.
     ///
     /// @ingroup core-ecs-query
-    struct QueryTerm
+    struct CUBOS_CORE_API QueryTerm
     {
         /// @brief Stores entity term data.
         struct Entity

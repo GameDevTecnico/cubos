@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <utility>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
 
@@ -75,7 +76,7 @@ namespace cubos::core::ecs
     /// Used internally by @ref World.
     ///
     /// @ingroup core-ecs-resource
-    class ResourceManager final
+    class CUBOS_CORE_API ResourceManager final
     {
     public:
         ResourceManager() = default;

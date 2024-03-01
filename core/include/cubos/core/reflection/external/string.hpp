@@ -6,6 +6,7 @@
 
 #include <string>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
-CUBOS_REFLECT_EXTERNAL_DECL(std::string);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, std::string);

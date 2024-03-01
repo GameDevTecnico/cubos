@@ -11,7 +11,7 @@ namespace cubos::core::ecs
 {
     /// @brief Stores the tables of a given world.
     /// @ingroup core-ecs-table
-    class Tables final
+    class CUBOS_CORE_API Tables final
     {
     public:
         /// @brief Gets a reference to the dense table registry.

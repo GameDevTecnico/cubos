@@ -9,6 +9,8 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/api.hpp>
+
 /// @brief Maximum number of render targets that can be set on a framebuffer.
 /// @todo Make this a compile-time constant instead of a macro.
 /// @ingroup core-gl
@@ -423,7 +425,7 @@ namespace cubos::core::gl
 
     /// @brief Describes a framebuffer.
     /// @ingroup core-gl
-    struct FramebufferDesc
+    struct CUBOS_CORE_API FramebufferDesc
     {
         /// @brief Describes a cube map target.
         struct CubeMapTarget
@@ -460,7 +462,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Describes a framebuffer target.
-        struct FramebufferTarget
+        struct CUBOS_CORE_API FramebufferTarget
         {
             uint32_t mipLevel = 0; ///< Mip level of the target which will be set as a render target.
 
@@ -713,7 +715,7 @@ namespace cubos::core::gl
     ///
     /// @see @ref io::Window is responsible for creating a render device for itself.
     /// @ingroup core-gl
-    class RenderDevice
+    class CUBOS_CORE_API RenderDevice
     {
     public:
         virtual ~RenderDevice() = default;
@@ -949,7 +951,7 @@ namespace cubos::core::gl
     namespace impl
     {
         /// @brief Abstract framebuffer.
-        class Framebuffer
+        class CUBOS_CORE_API Framebuffer
         {
         public:
             virtual ~Framebuffer() = default;
@@ -959,7 +961,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract rasterizer state.
-        class RasterState
+        class CUBOS_CORE_API RasterState
         {
         public:
             virtual ~RasterState() = default;
@@ -969,7 +971,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract depth stencil state.
-        class DepthStencilState
+        class CUBOS_CORE_API DepthStencilState
         {
         public:
             virtual ~DepthStencilState() = default;
@@ -979,7 +981,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract blend state.
-        class BlendState
+        class CUBOS_CORE_API BlendState
         {
         public:
             virtual ~BlendState() = default;
@@ -989,7 +991,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract sampler.
-        class Sampler
+        class CUBOS_CORE_API Sampler
         {
         public:
             virtual ~Sampler() = default;
@@ -999,7 +1001,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract 1D texture.
-        class Texture1D
+        class CUBOS_CORE_API Texture1D
         {
         public:
             virtual ~Texture1D() = default;
@@ -1020,7 +1022,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract 2D texture.
-        class Texture2D
+        class CUBOS_CORE_API Texture2D
         {
         public:
             virtual ~Texture2D() = default;
@@ -1050,7 +1052,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract 2D texture array.
-        class Texture2DArray
+        class CUBOS_CORE_API Texture2DArray
         {
         public:
             virtual ~Texture2DArray() = default;
@@ -1075,7 +1077,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract 3D texture.
-        class Texture3D
+        class CUBOS_CORE_API Texture3D
         {
         public:
             virtual ~Texture3D() = default;
@@ -1101,7 +1103,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract cube map.
-        class CubeMap
+        class CUBOS_CORE_API CubeMap
         {
         public:
             virtual ~CubeMap() = default;
@@ -1126,7 +1128,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract cube map.
-        class CubeMapArray
+        class CUBOS_CORE_API CubeMapArray
         {
         public:
             virtual ~CubeMapArray() = default;
@@ -1152,7 +1154,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract constant buffer.
-        class ConstantBuffer
+        class CUBOS_CORE_API ConstantBuffer
         {
         public:
             virtual ~ConstantBuffer() = default;
@@ -1171,7 +1173,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract index buffer.
-        class IndexBuffer
+        class CUBOS_CORE_API IndexBuffer
         {
         public:
             virtual ~IndexBuffer() = default;
@@ -1189,7 +1191,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract vertex buffer.
-        class VertexBuffer
+        class CUBOS_CORE_API VertexBuffer
         {
         public:
             virtual ~VertexBuffer() = default;
@@ -1208,7 +1210,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract vertex array.
-        class VertexArray
+        class CUBOS_CORE_API VertexArray
         {
         public:
             virtual ~VertexArray() = default;
@@ -1218,7 +1220,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract shader stage.
-        class ShaderStage
+        class CUBOS_CORE_API ShaderStage
         {
         public:
             virtual ~ShaderStage() = default;
@@ -1232,7 +1234,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract shader pipeline.
-        class ShaderPipeline
+        class CUBOS_CORE_API ShaderPipeline
         {
         public:
             virtual ~ShaderPipeline() = default;
@@ -1246,7 +1248,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract shader binding point.
-        class ShaderBindingPoint
+        class CUBOS_CORE_API ShaderBindingPoint
         {
         public:
             virtual ~ShaderBindingPoint() = default;

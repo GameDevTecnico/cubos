@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/geom/aabb.hpp>
@@ -13,7 +14,7 @@ namespace cubos::core::geom
 {
     /// @brief Represents a capsule or sphere shape.
     /// @ingroup core-geom
-    struct Capsule
+    struct CUBOS_CORE_API Capsule
     {
         CUBOS_REFLECT;
 

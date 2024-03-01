@@ -26,7 +26,7 @@ namespace cubos::core::ecs
     /// @brief Holds entities, their components and resources.
     /// @see Internally, components are stored in abstract containers called @ref Storage's.
     /// @ingroup core-ecs
-    class World
+    class CUBOS_CORE_API World
     {
     public:
         ~World();
@@ -318,7 +318,7 @@ namespace cubos::core::ecs
         ResourceManager mResourceManager;
     };
 
-    class World::Components final
+    class CUBOS_CORE_API World::Components final
     {
     public:
         /// @brief Used to iterate over the the components.
@@ -419,7 +419,7 @@ namespace cubos::core::ecs
         Entity mEntity;
     };
 
-    class World::ConstComponents final
+    class CUBOS_CORE_API World::ConstComponents final
     {
     public:
         /// @brief Used to iterate over the the components.
@@ -478,7 +478,7 @@ namespace cubos::core::ecs
         Entity mEntity;
     };
 
-    class World::Relations final
+    class CUBOS_CORE_API World::Relations final
     {
     public:
         /// @brief Used to iterate over the the relations.
@@ -544,7 +544,7 @@ namespace cubos::core::ecs
         bool mFrom;
     };
 
-    class World::ConstRelations final
+    class CUBOS_CORE_API World::ConstRelations final
     {
     public:
         /// @brief Used to iterate over the the relations.
@@ -610,7 +610,7 @@ namespace cubos::core::ecs
         bool mFrom;
     };
 
-    class World::Components::Iterator final
+    class CUBOS_CORE_API World::Components::Iterator final
     {
     public:
         /// @brief Output structure for the iterator.
@@ -655,7 +655,7 @@ namespace cubos::core::ecs
         mutable Component mComponent;
     };
 
-    class World::ConstComponents::Iterator final
+    class CUBOS_CORE_API World::ConstComponents::Iterator final
     {
     public:
         /// @brief Output structure for the iterator.
@@ -700,7 +700,7 @@ namespace cubos::core::ecs
         mutable Component mComponent;
     };
 
-    class World::Relations::Iterator final
+    class CUBOS_CORE_API World::Relations::Iterator final
     {
     public:
         /// @brief Output structure for the iterator.
@@ -753,7 +753,7 @@ namespace cubos::core::ecs
         mutable Relation mRelation;
     };
 
-    class World::ConstRelations::Iterator final
+    class CUBOS_CORE_API World::ConstRelations::Iterator final
     {
     public:
         /// @brief Output structure for the iterator.

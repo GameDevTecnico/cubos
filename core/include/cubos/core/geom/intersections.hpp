@@ -16,7 +16,7 @@ namespace cubos::core::geom
 {
     /// @brief Contains info regarding an intersection between shapes.
     /// @ingroup core-geom
-    struct Intersection
+    struct CUBOS_CORE_API Intersection
     {
         CUBOS_REFLECT;
 
@@ -30,7 +30,7 @@ namespace cubos::core::geom
     /// @param localToWorld1 Local to world matrix of the first entity.
     /// @param box2 Box shape of the second entity.
     /// @param localToWorld2 Local to world matrix of the second entity.
-    bool intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2, const glm::mat4& localToWorld2,
-                    Intersection& intersect);
+    CUBOS_CORE_API bool intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
+                                   const glm::mat4& localToWorld2, Intersection& intersect);
 
 } // namespace cubos::core::geom

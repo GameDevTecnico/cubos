@@ -3,12 +3,14 @@
 #include <typeindex>
 #include <vector>
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::data::old
 {
     /// Stores the context necessary to serialize or deserialize data.
     /// This is done through a type map, which stores an instance for each type added (akin to the
     /// ECS resources).
-    class Context final
+    class CUBOS_CORE_API Context final
     {
     public:
         Context() = default;

@@ -15,7 +15,7 @@ namespace cubos::core::ecs
     /// Used to determine if systems conflict with each other.
     ///
     /// @ingroup core-ecs-system
-    struct SystemAccess
+    struct CUBOS_CORE_API SystemAccess
     {
         /// @brief Whether the system accesses the world directly.
         bool usesWorld{false};

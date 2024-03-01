@@ -9,7 +9,7 @@ namespace cubos::core::data::old
 {
     /// Implementation of the abstract Deserializer class for deserializing from raw binary data.
     /// This class allows data to be deserialized from both little and big endian formats.
-    class BinaryDeserializer : public Deserializer
+    class CUBOS_CORE_API BinaryDeserializer : public Deserializer
     {
     public:
         /// @param stream The stream to deserialize from.

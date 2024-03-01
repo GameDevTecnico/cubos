@@ -18,7 +18,7 @@ namespace cubos::core::data
     ///
     /// @see File
     /// @ingroup core-data-fs
-    class FileSystem final
+    class CUBOS_CORE_API FileSystem final
     {
     public:
         FileSystem() = delete;
