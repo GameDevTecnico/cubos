@@ -1,8 +1,14 @@
+/// @file
+/// @brief Includes commonly used headers and defines aliases for commonly used types.
+/// @ingroup engine
+
 #pragma once
 
 #include <cubos/core/ecs/cubos.hpp>
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/system/system.hpp>
+
+#include <cubos/engine/api.hpp>
 
 namespace cubos::engine
 {
