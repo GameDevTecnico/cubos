@@ -721,8 +721,11 @@ namespace cubos::core::gl
         virtual ~RenderDevice() = default;
         RenderDevice() = default;
 
-        /// @brief Forbid copy construction.
+        /// @name Forbid any kind of copying.
+        /// @{
         RenderDevice(const RenderDevice&) = delete;
+        RenderDevice& operator=(const RenderDevice&) = delete;
+        /// @}
 
         /// @brief Creates a new framebuffer.
         /// @param desc Framebuffer description.
