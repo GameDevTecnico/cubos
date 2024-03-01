@@ -11,7 +11,7 @@ namespace cubos::core::reflection
     /// @brief Used to manipulate values of null-representable types.
     /// @see See @ref examples-core-reflection-traits-nullable for an example of using this trait.
     /// @ingroup core-reflection
-    class NullableTrait
+    class CUBOS_CORE_API NullableTrait
     {
     public:
         /// @brief Function pointer to check if a value represents null.

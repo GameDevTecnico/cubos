@@ -11,7 +11,7 @@ enum class Color
     Blue
 };
 
-CUBOS_REFLECT_EXTERNAL_DECL(Color);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, Color);
 /// [Enum declaration]
 
 /// [Reflection definition]

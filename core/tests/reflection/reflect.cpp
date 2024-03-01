@@ -23,7 +23,7 @@ struct External
 {
 };
 
-CUBOS_REFLECT_EXTERNAL_DECL(External);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, External);
 CUBOS_REFLECT_EXTERNAL_IMPL(External)
 {
     return Type::create("External");

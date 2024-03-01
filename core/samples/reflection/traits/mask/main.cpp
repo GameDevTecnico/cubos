@@ -13,7 +13,7 @@ enum class Permissions
     Execute = 4
 };
 
-CUBOS_REFLECT_EXTERNAL_DECL(Permissions);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, Permissions);
 
 inline Permissions operator~(Permissions p)
 {

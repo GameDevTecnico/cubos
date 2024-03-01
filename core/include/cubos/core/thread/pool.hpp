@@ -11,12 +11,14 @@
 #include <thread>
 #include <vector>
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::thread
 {
     /// @brief Manages a pool of threads, to which tasks can be submitted.
     /// @note Blocks on tasks to finish on destruction.
     /// @ingroup core-thread
-    class ThreadPool final
+    class CUBOS_CORE_API ThreadPool final
     {
     public:
         ~ThreadPool();

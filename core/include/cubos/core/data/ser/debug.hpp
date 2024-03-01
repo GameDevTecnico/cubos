@@ -12,7 +12,7 @@ namespace cubos::core::data
     /// @brief Serializer implementation which prints the given data to a stream in a human-readable
     /// format not meant to be parsed.
     /// @ingroup core-data-ser
-    class DebugSerializer : public Serializer
+    class CUBOS_CORE_API DebugSerializer : public Serializer
     {
     public:
         /// @brief Constructs.

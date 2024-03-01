@@ -35,7 +35,7 @@ namespace cubos::core::data
     /// @see File
     /// @see FileSystem
     /// @ingroup core-data-fs
-    class Archive
+    class CUBOS_CORE_API Archive
     {
     public:
         Archive() = default;

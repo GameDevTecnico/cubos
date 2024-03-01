@@ -16,7 +16,7 @@ namespace cubos::core::ecs
 {
     /// @brief Identifies a sparse relation table.
     /// @ingroup core-ecs-table
-    struct SparseRelationTableId
+    struct CUBOS_CORE_API SparseRelationTableId
     {
         DataTypeId dataType{DataTypeId::Invalid};
         ArchetypeId from{ArchetypeId::Invalid};
@@ -40,7 +40,7 @@ namespace cubos::core::ecs
     };
 
     /// @brief Hash functor for @ref SparseRelationTableId.
-    struct SparseRelationTableIdHash
+    struct CUBOS_CORE_API SparseRelationTableIdHash
     {
         std::size_t operator()(const SparseRelationTableId& id) const;
     };

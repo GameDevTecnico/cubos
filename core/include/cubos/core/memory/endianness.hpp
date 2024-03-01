@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::memory
 {
     /// @brief Swaps the bytes of a value, changing its endianness.

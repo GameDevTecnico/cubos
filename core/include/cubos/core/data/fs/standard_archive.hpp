@@ -20,7 +20,7 @@ namespace cubos::core::data
     /// and FileSystem classes (#263).
     ///
     /// @ingroup core-data-fs
-    class StandardArchive : public Archive
+    class CUBOS_CORE_API StandardArchive : public Archive
     {
     public:
         ~StandardArchive() override = default;

@@ -33,7 +33,7 @@ namespace cubos::core::ecs
     /// These linked lists are essential to provide fast query times, as instead of having to
     /// iterate over the entire table and filter for entity, we only need to follow the linked
     /// list chain.
-    class SparseRelationTable final
+    class CUBOS_CORE_API SparseRelationTable final
     {
     public:
         /// @brief Transformations to apply while moving relations between tables.
@@ -223,7 +223,7 @@ namespace cubos::core::ecs
         std::unordered_map<uint64_t, uint32_t> mPairRows;
     };
 
-    class SparseRelationTable::Iterator final
+    class CUBOS_CORE_API SparseRelationTable::Iterator final
     {
     public:
         /// @brief Output structure for the iterator.
@@ -269,7 +269,7 @@ namespace cubos::core::ecs
         mutable Output mOutput;
     };
 
-    class SparseRelationTable::View final
+    class CUBOS_CORE_API SparseRelationTable::View final
     {
     public:
         /// @brief Used to iterate over the relations in a view.
@@ -294,7 +294,7 @@ namespace cubos::core::ecs
         bool mIsFrom;
     };
 
-    class SparseRelationTable::View::Iterator final
+    class CUBOS_CORE_API SparseRelationTable::View::Iterator final
     {
     public:
         /// @brief Output structure for the iterator.

@@ -138,19 +138,19 @@ namespace cubos::core::io
     /// @param size Window size, in screen coordinates.
     /// @return New window, or nullptr on failure.
     /// @ingroup core-io
-    Window openWindow(const std::string& title = "CUBOS.", const glm::ivec2& size = {800, 600});
+    CUBOS_CORE_API Window openWindow(const std::string& title = "CUBOS.", const glm::ivec2& size = {800, 600});
 
     /// @brief Converts a @ref MouseButton enum to a string.
     /// @param button MouseButton to convert.
     /// @return String representation.
     /// @ingroup core-io
-    std::string mouseButtonToString(MouseButton button);
+    CUBOS_CORE_API std::string mouseButtonToString(MouseButton button);
 
     /// @brief Convert a string to a @ref MouseButton enum.
     /// @param str The string to convert.
     /// @return MouseButton.
     /// @ingroup core-io
-    MouseButton stringToMouseButton(const std::string& str);
+    CUBOS_CORE_API MouseButton stringToMouseButton(const std::string& str);
 
     /// @brief Interface used to wrap low-level window API implementations.
     ///
@@ -158,7 +158,7 @@ namespace cubos::core::io
     /// window.
     ///
     /// @ingroup core-io
-    class BaseWindow
+    class CUBOS_CORE_API BaseWindow
     {
     public:
         BaseWindow();
@@ -260,8 +260,8 @@ namespace cubos::core::io
     };
 } // namespace cubos::core::io
 
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseButton);
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseAxis);
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseState);
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::WindowEvent);
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Window);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::MouseButton);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::MouseAxis);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::MouseState);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::WindowEvent);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::Window);

@@ -14,7 +14,7 @@ namespace cubos::core::reflection
     /// @brief Describes the fields of a reflected type.
     /// @see See @ref examples-core-reflection-traits-fields for an example of using this trait.
     /// @ingroup core-reflection
-    class FieldsTrait
+    class CUBOS_CORE_API FieldsTrait
     {
     public:
         /// @brief Interface for obtaining the address of a field on a given instance.
@@ -111,7 +111,7 @@ namespace cubos::core::reflection
         Field* mLastField{nullptr};
     };
 
-    class FieldsTrait::AddressOf
+    class CUBOS_CORE_API FieldsTrait::AddressOf
     {
     public:
         virtual ~AddressOf() = default;
@@ -142,7 +142,7 @@ namespace cubos::core::reflection
         F O::*mPointer;
     };
 
-    class FieldsTrait::Field final
+    class CUBOS_CORE_API FieldsTrait::Field final
     {
     public:
         ~Field();
@@ -190,7 +190,7 @@ namespace cubos::core::reflection
         Field* mNext{nullptr};
     };
 
-    class FieldsTrait::Iterator final
+    class CUBOS_CORE_API FieldsTrait::Iterator final
     {
     public:
         /// @brief Constructs.
@@ -224,7 +224,7 @@ namespace cubos::core::reflection
         const Field* mField;
     };
 
-    class FieldsTrait::View
+    class CUBOS_CORE_API FieldsTrait::View
     {
     public:
         /// @brief Used to iterate over the fields of an object.
@@ -259,7 +259,7 @@ namespace cubos::core::reflection
         void* mInstance;
     };
 
-    class FieldsTrait::ConstView
+    class CUBOS_CORE_API FieldsTrait::ConstView
     {
     public:
         /// @brief Used to iterate over the fields of an object.
@@ -294,7 +294,7 @@ namespace cubos::core::reflection
         const void* mInstance;
     };
 
-    class FieldsTrait::View::Iterator
+    class CUBOS_CORE_API FieldsTrait::View::Iterator
     {
     public:
         /// @brief Output structure for the iterator.
@@ -344,7 +344,7 @@ namespace cubos::core::reflection
         mutable Output mOutput;
     };
 
-    class FieldsTrait::ConstView::Iterator
+    class CUBOS_CORE_API FieldsTrait::ConstView::Iterator
     {
     public:
         /// @brief Output structure for the iterator.

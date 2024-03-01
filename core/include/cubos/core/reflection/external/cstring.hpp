@@ -6,5 +6,5 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
-CUBOS_REFLECT_EXTERNAL_DECL(const char*);
-CUBOS_REFLECT_EXTERNAL_DECL(char*);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, const char*);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, char*);

@@ -11,7 +11,7 @@ namespace cubos::core::memory
 {
     /// @brief Stores a blob of a given reflected type.
     /// @ingroup core-memory
-    class AnyValue final
+    class CUBOS_CORE_API AnyValue final
     {
     public:
         ~AnyValue();

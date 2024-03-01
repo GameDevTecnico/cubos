@@ -14,7 +14,7 @@ namespace cubos::core::reflection
     /// @brief Exposes dictionary-like functionality of a type.
     /// @see See @ref examples-core-reflection-traits-dictionary for an example of using this trait.
     /// @ingroup core-reflection
-    class DictionaryTrait final
+    class CUBOS_CORE_API DictionaryTrait final
     {
     public:
         /// @brief Provides mutable access to a dictionary.
@@ -143,7 +143,7 @@ namespace cubos::core::reflection
         Erase mErase{nullptr};
     };
 
-    class DictionaryTrait::View
+    class CUBOS_CORE_API DictionaryTrait::View
     {
     public:
         /// @brief Used to iterate over the entries of a dictionary.
@@ -206,7 +206,7 @@ namespace cubos::core::reflection
         void* mInstance;
     };
 
-    class DictionaryTrait::ConstView
+    class CUBOS_CORE_API DictionaryTrait::ConstView
     {
     public:
         /// @brief Used to iterate over the entries of a dictionary.
@@ -240,7 +240,7 @@ namespace cubos::core::reflection
         const void* mInstance;
     };
 
-    class DictionaryTrait::View::Iterator
+    class CUBOS_CORE_API DictionaryTrait::View::Iterator
     {
     public:
         /// @brief Output structure for the iterator.
@@ -303,7 +303,7 @@ namespace cubos::core::reflection
         mutable Entry mEntry;
     };
 
-    class DictionaryTrait::ConstView::Iterator
+    class CUBOS_CORE_API DictionaryTrait::ConstView::Iterator
     {
     public:
         /// @brief Output structure for the iterator.

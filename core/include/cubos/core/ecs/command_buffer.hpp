@@ -28,7 +28,7 @@ namespace cubos::core::ecs
 
     /// @brief Stores commands to execute them later.
     /// @ingroup core-ecs
-    class CommandBuffer final
+    class CUBOS_CORE_API CommandBuffer final
     {
     public:
         /// @brief Constructs.

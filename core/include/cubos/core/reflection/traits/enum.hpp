@@ -15,7 +15,7 @@ namespace cubos::core::reflection
     /// @brief Provides enumeration functionality to an enumerated type.
     /// @see See @ref examples-core-reflection-traits-enum for an example of using this trait.
     /// @ingroup core-reflection
-    class EnumTrait
+    class CUBOS_CORE_API EnumTrait
     {
     public:
         /// @brief Represents an individual variant within the enumerated type.
@@ -123,7 +123,7 @@ namespace cubos::core::reflection
         Variant* mLastVariant{nullptr};
     };
 
-    class EnumTrait::Variant
+    class CUBOS_CORE_API EnumTrait::Variant
     {
     public:
         /// @brief Constructs a variant with a given name, tester function, and setter function.
@@ -159,7 +159,7 @@ namespace cubos::core::reflection
         Setter mSetter;
     };
 
-    class EnumTrait::Iterator final
+    class CUBOS_CORE_API EnumTrait::Iterator final
     {
     public:
         /// @brief Constructs.

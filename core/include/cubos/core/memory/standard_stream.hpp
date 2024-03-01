@@ -12,7 +12,7 @@ namespace cubos::core::memory
 {
     /// @brief Stream implementation which wraps a `libc` file pointer.
     /// @ingroup core-memory
-    class StandardStream : public Stream
+    class CUBOS_CORE_API StandardStream : public Stream
     {
     public:
         ~StandardStream() override;

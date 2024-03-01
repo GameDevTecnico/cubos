@@ -13,7 +13,7 @@ namespace cubos::core::reflection
     /// @brief Stores functions for converting a type to and from a string.
     /// @see See @ref examples-core-reflection-traits-string-conversion for an example of using this trait.
     /// @ingroup core-reflection
-    class StringConversionTrait
+    class CUBOS_CORE_API StringConversionTrait
     {
     public:
         /// @brief Function pointer to convert an instance of the type into a string.

@@ -37,7 +37,7 @@ namespace cubos::core::ecs
 
     /// @brief Stores known systems and conditions.
     /// @ingroup core-ecs-system
-    class SystemRegistry
+    class CUBOS_CORE_API SystemRegistry
     {
     public:
         ~SystemRegistry();

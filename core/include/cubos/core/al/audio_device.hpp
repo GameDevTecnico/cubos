@@ -10,6 +10,8 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::al
 {
     namespace impl
@@ -40,7 +42,7 @@ namespace cubos::core::al
     };
 
     /// @brief Audio device interface used to wrap low-level audio rendering APIs.
-    class AudioDevice
+    class CUBOS_CORE_API AudioDevice
     {
     public:
         AudioDevice() = default;
@@ -85,7 +87,7 @@ namespace cubos::core::al
     namespace impl
     {
         /// @brief Abstract audio buffer.
-        class Buffer
+        class CUBOS_CORE_API Buffer
         {
         public:
             virtual ~Buffer() = default;
@@ -102,7 +104,7 @@ namespace cubos::core::al
         };
 
         /// @brief Abstract audio source.
-        class Source
+        class CUBOS_CORE_API Source
         {
         public:
             virtual ~Source() = default;

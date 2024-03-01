@@ -53,7 +53,7 @@ namespace cubos::core::io
 
     /// @brief Holds the state of a gamepad.
     /// @ingroup core-io
-    struct GamepadState
+    struct CUBOS_CORE_API GamepadState
     {
         /// @brief Which buttons are pressed, indexed by @ref GamepadButton.
         bool buttons[static_cast<int>(GamepadButton::Count)];
@@ -82,26 +82,26 @@ namespace cubos::core::io
     /// @param button Button to convert.
     /// @return String representation.
     /// @ingroup core-io
-    std::string gamepadButtonToString(GamepadButton button);
+    CUBOS_CORE_API std::string gamepadButtonToString(GamepadButton button);
 
     /// @brief Converts a string to a @ref GamepadButton.
     /// @param str String to convert.
     /// @return Button.
     /// @ingroup core-io
-    GamepadButton stringToGamepadButton(const std::string& str);
+    CUBOS_CORE_API GamepadButton stringToGamepadButton(const std::string& str);
 
     /// @brief Convert a @ref GamepadAxis to a string.
     /// @param axis Axis to convert.
     /// @return String representation.
     /// @ingroup core-io
-    std::string gamepadAxisToString(GamepadAxis axis);
+    CUBOS_CORE_API std::string gamepadAxisToString(GamepadAxis axis);
 
     /// @brief Convert a string to a @ref GamepadAxis.
     /// @param str String to convert.
     /// @return Axis.
     /// @ingroup core-io
-    GamepadAxis stringToGamepadAxis(const std::string& str);
+    CUBOS_CORE_API GamepadAxis stringToGamepadAxis(const std::string& str);
 } // namespace cubos::core::io
 
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::GamepadButton);
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::GamepadAxis);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::GamepadButton);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::GamepadAxis);

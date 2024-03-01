@@ -10,7 +10,7 @@ namespace cubos::core::memory
 {
     /// @brief Stream implementation which writes to/reads from a buffer.
     /// @ingroup core-memory
-    class BufferStream : public Stream
+    class CUBOS_CORE_API BufferStream : public Stream
     {
     public:
         ~BufferStream() override;

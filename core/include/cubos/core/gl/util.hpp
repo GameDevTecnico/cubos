@@ -18,5 +18,5 @@ namespace cubos::core::gl
     /// @param renderDevice RenderDevice to be used for generation of the quad.
     /// @param pipeline Pipeline to associate the quad's VertexArray with.
     /// @param[out] va Handle of the quad's VertexArray.
-    void generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va);
+    CUBOS_CORE_API void generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va);
 } // namespace cubos::core::gl

@@ -16,7 +16,7 @@ namespace cubos::core::ecs
 {
     /// @brief Stores and manages all of the observers associated with a world.
     /// @ingroup core-ecs-observer
-    class Observers
+    class CUBOS_CORE_API Observers
     {
     public:
         ~Observers();
