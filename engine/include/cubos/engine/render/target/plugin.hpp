@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -20,10 +21,10 @@ namespace cubos::engine
 
     /// @brief Resizes the Render Target if necessary - for example, due to a window resize.
     /// @ingroup render-target-plugin
-    extern Tag resizeRenderTargetTag;
+    CUBOS_ENGINE_API extern Tag resizeRenderTargetTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup render-target-plugin
-    void renderTargetPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void renderTargetPlugin(Cubos& cubos);
 } // namespace cubos::engine

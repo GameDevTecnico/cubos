@@ -20,7 +20,7 @@ namespace cubos::engine
     /// @brief Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.
     ///
     /// @ingroup gizmos-plugin
-    class Gizmos final
+    class CUBOS_ENGINE_API Gizmos final
     {
     public:
         CUBOS_REFLECT;

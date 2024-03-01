@@ -7,11 +7,13 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which stores the depth texture of a render target.
     /// @ingroup render-depth-plugin
-    struct RenderDepth
+    struct CUBOS_ENGINE_API RenderDepth
     {
         CUBOS_REFLECT;
 

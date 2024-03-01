@@ -36,10 +36,10 @@ namespace cubos::engine
     /// - @ref transform-plugin
 
     /// @brief Initializes new colliders.
-    extern Tag collisionsSetupTag;
+    CUBOS_ENGINE_API extern Tag collisionsSetupTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup collisions-plugin
-    void collisionsPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void collisionsPlugin(Cubos& cubos);
 } // namespace cubos::engine

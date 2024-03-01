@@ -22,5 +22,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup free-camera-plugin
-    void freeCameraPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void freeCameraPlugin(Cubos& cubos);
 } // namespace cubos::engine

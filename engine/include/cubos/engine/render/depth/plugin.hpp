@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -24,14 +25,14 @@ namespace cubos::engine
 
     /// @brief Recreates the RenderDepth texture if necessary - for example, due to a render target resize.
     /// @ingroup render-depth-plugin
-    extern Tag createRenderDepthTag;
+    CUBOS_ENGINE_API extern Tag createRenderDepthTag;
 
     /// @brief Systems which draw to RenderDepth textures should be tagged with this.
     /// @ingroup render-depth-plugin
-    extern Tag drawToRenderDepthTag;
+    CUBOS_ENGINE_API extern Tag drawToRenderDepthTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup render-depth-plugin
-    void renderDepthPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void renderDepthPlugin(Cubos& cubos);
 } // namespace cubos::engine

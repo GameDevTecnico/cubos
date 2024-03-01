@@ -6,11 +6,13 @@
 
 #include <glm/vec3.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which holds the global value of gravity.
     /// @ingroup physics-plugin
-    struct Gravity
+    struct CUBOS_ENGINE_API Gravity
     {
         CUBOS_REFLECT;
 

@@ -25,20 +25,20 @@ namespace cubos::engine
     /// - @ref window-plugin
 
     /// @brief `ImGui` is initialized, after @ref windowInitTag.
-    extern Tag imguiInitTag;
+    CUBOS_ENGINE_API extern Tag imguiInitTag;
 
     /// @brief The ImGui frame begins (after @ref rendererDrawTag).
-    extern Tag imguiBeginTag;
+    CUBOS_ENGINE_API extern Tag imguiBeginTag;
 
     /// @brief The ImGui frame ends (before @ref windowRenderTag).
-    extern Tag imguiEndTag;
+    CUBOS_ENGINE_API extern Tag imguiEndTag;
 
     /// @brief Tag to be used by all systems which call ImGui functions. Runs between @ref imguiBeginTag and @ref
     /// imguiEndTag.
-    extern Tag imguiTag;
+    CUBOS_ENGINE_API extern Tag imguiTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup imgui-plugin
-    void imguiPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void imguiPlugin(Cubos& cubos);
 } // namespace cubos::engine

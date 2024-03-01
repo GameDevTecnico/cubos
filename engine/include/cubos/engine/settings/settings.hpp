@@ -7,11 +7,13 @@
 #include <string>
 #include <unordered_map>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Stores settings as key-value pairs and provides methods to retrieve them.
     /// @ingroup engine
-    class Settings final
+    class CUBOS_ENGINE_API Settings final
     {
     public:
         CUBOS_REFLECT;

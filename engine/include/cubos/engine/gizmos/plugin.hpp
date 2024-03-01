@@ -24,22 +24,22 @@ namespace cubos::engine
     /// - @ref window-plugin
 
     /// @brief Gizmos renderer is initialized, after @ref windowInitTag.
-    extern Tag gizmosInitTag;
+    CUBOS_ENGINE_API extern Tag gizmosInitTag;
 
     /// @brief Gizmos interaction is handled, after @ref WindowPollTag and
     /// before @ref gizmosDrawTag.
-    extern Tag gizmosInputTag;
+    CUBOS_ENGINE_API extern Tag gizmosInputTag;
 
     /// @brief Queued gizmos are rendered to the window, after @ref rendererDrawTag and
     /// before @ref windowRenderTag.
-    extern Tag gizmosDrawTag;
+    CUBOS_ENGINE_API extern Tag gizmosDrawTag;
 
     /// @brief The ScreenPicker resource is accessed to detect gizmos at mouse coordinates, after
     /// @ref gizmosDrawTag.
-    extern Tag gizmosPickTag;
+    CUBOS_ENGINE_API extern Tag gizmosPickTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup gizmos-plugin
-    void gizmosPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void gizmosPlugin(Cubos& cubos);
 } // namespace cubos::engine

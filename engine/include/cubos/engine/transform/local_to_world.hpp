@@ -9,6 +9,8 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which stores the transformation matrix of an entity, from local to world
@@ -20,7 +22,7 @@ namespace cubos::engine
     /// @sa The value is calculated from the @ref LocalToParent component and the parent's @ref LocalToWorld, if there's
     /// any.
     /// @ingroup transform-plugin
-    struct LocalToWorld
+    struct CUBOS_ENGINE_API LocalToWorld
     {
         CUBOS_REFLECT;
 

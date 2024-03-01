@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -21,14 +22,14 @@ namespace cubos::engine
 
     /// @brief Recreates the HDR texture if necessary - for example, due to a render target resize.
     /// @ingroup render-hdr-plugin
-    extern Tag createHDRTag;
+    CUBOS_ENGINE_API extern Tag createHDRTag;
 
     /// @brief Systems which draw to HDR textures should be tagged with this.
     /// @ingroup render-hdr-plugin
-    extern Tag drawToHDRTag;
+    CUBOS_ENGINE_API extern Tag drawToHDRTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup render-hdr-plugin
-    void hdrPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void hdrPlugin(Cubos& cubos);
 } // namespace cubos::engine

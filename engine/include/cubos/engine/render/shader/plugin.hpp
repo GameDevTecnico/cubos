@@ -26,5 +26,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup render-shader-plugin
-    void shaderPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void shaderPlugin(Cubos& cubos);
 } // namespace cubos::engine

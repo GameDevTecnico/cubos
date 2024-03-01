@@ -32,19 +32,19 @@ namespace cubos::engine
     /// - @ref settings-plugin
 
     /// @brief Initializes the assets manager and loads the meta files (after @ref settingsTag).
-    extern Tag assetsInitTag;
+    CUBOS_ENGINE_API extern Tag assetsInitTag;
 
     /// @brief Systems which add bridges to the asset manager should be tagged with this.
-    extern Tag assetsBridgeTag;
+    CUBOS_ENGINE_API extern Tag assetsBridgeTag;
 
     /// @brief Frees any assets no longer in use.
-    extern Tag assetsCleanupTag;
+    CUBOS_ENGINE_API extern Tag assetsCleanupTag;
 
     /// @brief Startup systems which load assets should be tagged with this.
-    extern Tag assetsTag;
+    CUBOS_ENGINE_API extern Tag assetsTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup assets-plugin
-    void assetsPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void assetsPlugin(Cubos& cubos);
 } // namespace cubos::engine

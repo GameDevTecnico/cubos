@@ -45,24 +45,24 @@ namespace cubos::engine
 
     /// @brief The @ref LocalToWorld components are added to entities with @ref
     /// Position, @ref Rotation or @ref Scale components.
-    extern Tag transformMissingLocalTag;
+    CUBOS_ENGINE_API extern Tag transformMissingLocalTag;
 
     /// @brief The @ref Position, @ref Rotation, @ref Scale and possibly @ref LocalToParent
     /// components are added to entities with @ref LocalToWorld components.
-    extern Tag transformMissingTag;
+    CUBOS_ENGINE_API extern Tag transformMissingTag;
 
     /// @brief The @ref LocalToWorld or @ref LocalToParent components are updated with
     /// the information from the @ref Position, @ref Rotation and @ref Scale components.
-    extern Tag transformUpdateRelativeTag;
+    CUBOS_ENGINE_API extern Tag transformUpdateRelativeTag;
 
     /// @brief The @ref LocalToWorld components are updated with the information from the @ref
     /// LocalToParent component and the @ref LocalToWorld components of the parent.
-    extern Tag transformUpdateTag;
+    CUBOS_ENGINE_API extern Tag transformUpdateTag;
 
-    extern Tag transformUpdatePropagateTag;
+    CUBOS_ENGINE_API extern Tag transformUpdatePropagateTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup transform-plugin
-    void transformPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void transformPlugin(Cubos& cubos);
 } // namespace cubos::engine

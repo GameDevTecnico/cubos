@@ -8,11 +8,13 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which holds the corrections accumulated from the constraints solving.
     /// @ingroup physics-plugin
-    struct AccumulatedCorrection
+    struct CUBOS_ENGINE_API AccumulatedCorrection
     {
         CUBOS_REFLECT;
 

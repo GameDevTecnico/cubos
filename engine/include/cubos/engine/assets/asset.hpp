@@ -8,6 +8,8 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     template <typename T>
@@ -21,7 +23,7 @@ namespace cubos::engine
     /// null handles, which are not associated with any asset.
     ///
     /// @ingroup assets-plugin
-    class AnyAsset
+    class CUBOS_ENGINE_API AnyAsset
     {
     public:
         CUBOS_REFLECT;

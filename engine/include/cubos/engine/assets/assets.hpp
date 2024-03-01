@@ -45,7 +45,7 @@ namespace cubos::engine
     ///
     /// Assets are all identified through @ref Asset handles.
     /// @ingroup assets-plugin
-    class Assets final
+    class CUBOS_ENGINE_API Assets final
     {
     public:
         CUBOS_REFLECT;

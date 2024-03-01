@@ -9,11 +9,13 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which provides a texture to store entity/gizmo ids, for selection with a mouse.
     /// @ingroup render-picker-plugin
-    struct RenderPicker
+    struct CUBOS_ENGINE_API RenderPicker
     {
         CUBOS_REFLECT;
 

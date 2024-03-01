@@ -6,11 +6,13 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which holds the value of the fixed delta for the fixedStep plugin.
     /// @ingroup fixed-step-plugin
-    struct FixedDeltaTime
+    struct CUBOS_ENGINE_API FixedDeltaTime
     {
         CUBOS_REFLECT;
 

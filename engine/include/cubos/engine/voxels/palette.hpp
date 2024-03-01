@@ -29,7 +29,7 @@ namespace cubos::engine
     /// integer.
     ///
     /// @ingroup voxels-plugin
-    class VoxelPalette final
+    class CUBOS_ENGINE_API VoxelPalette final
     {
     public:
         /// @brief Used to iterate over materials on the palette.

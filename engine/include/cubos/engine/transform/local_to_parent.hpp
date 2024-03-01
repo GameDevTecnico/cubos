@@ -8,6 +8,8 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which stores the transformation matrix of an entity, from local to parent
@@ -18,7 +20,7 @@ namespace cubos::engine
     ///
     /// @sa @ref Position, @ref Rotation and @ref Scale, which apply transformations to this matrix.
     /// @ingroup transform-plugin
-    struct LocalToParent
+    struct CUBOS_ENGINE_API LocalToParent
     {
         CUBOS_REFLECT;
 

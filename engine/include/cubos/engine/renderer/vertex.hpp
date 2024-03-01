@@ -6,13 +6,15 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     class VoxelGrid;
 
     /// @brief Represents a voxel vertex.
     /// @ingroup renderer-plugin
-    struct VoxelVertex
+    struct CUBOS_ENGINE_API VoxelVertex
     {
         glm::uvec3 position; ///< Position of the vertex.
         glm::vec3 normal;    ///< Normal of the vertex.
@@ -24,5 +26,6 @@ namespace cubos::engine
     /// @param vertices Vertices of the mesh.
     /// @param indices Indices of the mesh.
     /// @ingroup renderer-plugin
-    void triangulate(const VoxelGrid& grid, std::vector<VoxelVertex>& vertices, std::vector<uint32_t>& indices);
+    CUBOS_ENGINE_API void triangulate(const VoxelGrid& grid, std::vector<VoxelVertex>& vertices,
+                                      std::vector<uint32_t>& indices);
 } // namespace cubos::engine

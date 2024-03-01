@@ -8,12 +8,14 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which holds impulses applied on a particle.
     /// @note Should be used with @ref Velocity.
     /// @ingroup physics-plugin
-    struct Impulse
+    struct CUBOS_ENGINE_API Impulse
     {
         CUBOS_REFLECT;
 
