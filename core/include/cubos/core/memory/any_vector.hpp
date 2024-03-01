@@ -6,6 +6,8 @@
 
 #include <cstddef>
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::reflection
 {
     class Type;
@@ -16,7 +18,7 @@ namespace cubos::core::memory
 {
     /// @brief Stores a dynamically sized array of blobs of a given reflected type.
     /// @ingroup core-memory
-    class AnyVector final
+    class CUBOS_CORE_API AnyVector final
     {
     public:
         ~AnyVector();

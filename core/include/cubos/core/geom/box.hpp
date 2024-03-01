@@ -12,7 +12,7 @@ namespace cubos::core::geom
 {
     /// @brief Represents a box shape.
     /// @ingroup core-geom
-    struct Box
+    struct CUBOS_CORE_API Box
     {
         CUBOS_REFLECT;
 

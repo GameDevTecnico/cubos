@@ -12,7 +12,7 @@ namespace cubos::core::geom
 {
     /// @brief Represents an axis-aligned bounding box.
     /// @ingroup core-geom
-    struct AABB
+    struct CUBOS_CORE_API AABB
     {
         /// @brief Diagonal of the AABB.
         glm::vec3 diag[2] = {glm::vec3{-std::numeric_limits<float>::infinity()},

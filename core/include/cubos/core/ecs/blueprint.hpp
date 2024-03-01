@@ -20,8 +20,8 @@ namespace cubos::core::ecs
     /// @param map Map of old entities to new entities.
     /// @param type Value type.
     /// @param value Value.
-    void convertEntities(const std::unordered_map<Entity, Entity, EntityHash>& map, const reflection::Type& type,
-                         void* value);
+    CUBOS_CORE_API void convertEntities(const std::unordered_map<Entity, Entity, EntityHash>& map,
+                                        const reflection::Type& type, void* value);
 
     /// @brief Collection of entities and their respective components and relations.
     ///
@@ -35,7 +35,7 @@ namespace cubos::core::ecs
     /// not be replaced and thus continue referencing the original entity in the blueprint.
     ///
     /// @ingroup core-ecs
-    class Blueprint final
+    class CUBOS_CORE_API Blueprint final
     {
     public:
         /// @brief Function used by @ref instantiate to create entities.

@@ -71,11 +71,11 @@ namespace cubos::core::ecs
     /// ordered, an arbitrary order constraint should be added between them, to ensure that they won't run concurrently.
     ///
     /// @ingroup core-ecs-system
-    class Schedule
+    class CUBOS_CORE_API Schedule
     {
     public:
         /// @brief Identifies a node in the schedule.
-        struct NodeId
+        struct CUBOS_CORE_API NodeId
         {
             std::size_t inner; ///< Node index in the schedule.
 

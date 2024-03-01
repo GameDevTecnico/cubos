@@ -16,7 +16,7 @@ namespace cubos::core::ecs
     /// @brief Manages the creation and destruction of entity identifiers, as well as storing their
     /// archetype identifiers.
     /// @ingroup core-ecs-entity
-    class EntityPool final
+    class CUBOS_CORE_API EntityPool final
     {
     public:
         /// @brief Creates a new entity on the given archetype.

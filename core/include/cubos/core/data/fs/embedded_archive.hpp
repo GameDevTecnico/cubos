@@ -26,7 +26,7 @@ namespace cubos::core::data
     /// an instance of this archive.
     ///
     /// @ingroup core-data-fs
-    class EmbeddedArchive : public Archive
+    class CUBOS_CORE_API EmbeddedArchive : public Archive
     {
     public:
         /// @brief Describes the structure of the embedded data.

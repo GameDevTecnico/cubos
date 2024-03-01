@@ -12,13 +12,13 @@
 namespace cubos::core::ecs
 {
     /// @brief Layer on top of @ref Schedule, used to build them with added abstractions such as tags.
-    class Planner
+    class CUBOS_CORE_API Planner
     {
     public:
         /// @brief Local identifier for tags.
         ///
         /// Differs from the @ref Tag type in that this should only be used internally and can refer to systems.
-        struct TagId
+        struct CUBOS_CORE_API TagId
         {
             std::size_t inner; ///< Tag index.
 

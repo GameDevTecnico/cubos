@@ -9,6 +9,8 @@
 
 #include <cstddef>
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::reflection
 {
     class Type;
@@ -24,8 +26,8 @@ namespace cubos::core::reflection
     /// @param alignment Type alignment in bytes.
     /// @param destructor Type destructor.
     /// @ingroup core-reflection
-    const Type& makeUnnamedType(unsigned long long id, std::size_t size, std::size_t alignment,
-                                void (*destructor)(void*));
+    CUBOS_CORE_API const Type& makeUnnamedType(unsigned long long id, std::size_t size, std::size_t alignment,
+                                               void (*destructor)(void*));
 
     /// @brief Defines the reflection function for the given type @p T.
     ///
@@ -114,6 +116,9 @@ namespace cubos::core::reflection
 /// @ingroup core-reflection
 #define CUBOS_PACK(...) __VA_ARGS__
 
+/// @brief Helper macro with no effect.
+#define CUBOS_EMPTY
+
 /// @brief Declares the static reflection methods.
 ///
 /// @code{.cpp}
@@ -197,10 +202,11 @@ namespace cubos::core::reflection
 /// @endcode
 ///
 /// @see Meant to be used with @ref CUBOS_REFLECT_EXTERNAL_IMPL.
+/// @param api API macro to use. Set to @ref CUBOS_EMPTY if not using an API macro.
 /// @param T Type to reflect.
 /// @ingroup core-reflection
-#define CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(T)                                                                        \
-    struct cubos::core::reflection::Reflect<T>                                                                         \
+#define CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(api, T)                                                                   \
+    struct api cubos::core::reflection::Reflect<T>                                                                     \
     {                                                                                                                  \
         static const ::cubos::core::reflection::Type& get();                                                           \
         static const ::cubos::core::reflection::Type& make();                                                          \
@@ -212,15 +218,16 @@ namespace cubos::core::reflection
 /// // not_my_type_reflection.hpp
 /// #include <cubos/core/reflection/reflect.hpp>
 ///
-/// CUBOS_REFLECT_EXTERNAL_DECL(NotMyType);
+/// CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, NotMyType);
 /// @endcode
 ///
 /// @see Meant to be used with @ref CUBOS_REFLECT_EXTERNAL_IMPL.
+/// @param api API macro to use. Set to @ref CUBOS_EMPTY if not using an API macro.
 /// @param T Type to reflect.
 /// @ingroup core-reflection
-#define CUBOS_REFLECT_EXTERNAL_DECL(T)                                                                                 \
+#define CUBOS_REFLECT_EXTERNAL_DECL(api, T)                                                                            \
     template <>                                                                                                        \
-    CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(T)
+    CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(api, T)
 
 /// @brief Implements a specialization of @ref cubos::core::reflection::Reflect for a type.
 ///
@@ -264,8 +271,7 @@ namespace cubos::core::reflection
 /// @ingroup core-reflection
 #define CUBOS_REFLECT_EXTERNAL_TEMPLATE(args, T)                                                                       \
     template <CUBOS_PACK args>                                                                                         \
-    CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(CUBOS_PACK T);                                                                \
-                                                                                                                       \
+    CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(CUBOS_EMPTY, CUBOS_PACK T);                                                   \
     template <CUBOS_PACK args>                                                                                         \
     const ::cubos::core::reflection::Type& ::cubos::core::reflection::Reflect<CUBOS_PACK T>::get()                     \
     {                                                                                                                  \

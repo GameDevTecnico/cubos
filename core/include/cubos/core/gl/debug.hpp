@@ -18,7 +18,7 @@ namespace cubos::core::gl
     /// @brief Singleton with static methods used to draw primitive objects on screen for debugging
     /// purposes.
     /// @ingroup core-gl
-    class Debug
+    class CUBOS_CORE_API Debug
     {
     public:
         /// @brief Initializes the debug rendering system.

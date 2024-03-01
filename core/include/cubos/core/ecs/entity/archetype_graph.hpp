@@ -25,7 +25,7 @@ namespace cubos::core::ecs
     /// archetype's id.
     ///
     /// @ingroup core-ecs-entity
-    class ArchetypeGraph
+    class CUBOS_CORE_API ArchetypeGraph
     {
     public:
         /// @brief Constructs.

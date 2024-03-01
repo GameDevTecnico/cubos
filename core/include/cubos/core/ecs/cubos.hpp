@@ -22,7 +22,7 @@ namespace cubos::core::ecs
     /// This resource is added and updated by the @ref Cubos class.
     ///
     /// @ingroup core-ecs
-    struct DeltaTime
+    struct CUBOS_CORE_API DeltaTime
     {
         CUBOS_REFLECT;
 
@@ -42,7 +42,7 @@ namespace cubos::core::ecs
     /// This resource is added by the @ref Cubos class, initially set to true.
     ///
     /// @ingroup core-ecs
-    struct ShouldQuit
+    struct CUBOS_CORE_API ShouldQuit
     {
         CUBOS_REFLECT;
 
@@ -54,7 +54,7 @@ namespace cubos::core::ecs
     /// This resource is added by the @ref Cubos class.
     ///
     /// @ingroup core-ecs
-    struct Arguments
+    struct CUBOS_CORE_API Arguments
     {
         CUBOS_REFLECT;
 
@@ -64,7 +64,7 @@ namespace cubos::core::ecs
     /// @brief Represents the engine itself, and exposes the interface with which the game
     /// developer interacts with. Ties up all the different parts of the engine together.
     /// @ingroup core-ecs
-    class Cubos final
+    class CUBOS_CORE_API Cubos final
     {
     public:
         /// @brief Function pointer type representing a plugin.
@@ -272,7 +272,7 @@ namespace cubos::core::ecs
         std::unordered_map<std::string, TagInfo> mTags;
     };
 
-    class Cubos::TagBuilder
+    class CUBOS_CORE_API Cubos::TagBuilder
     {
     public:
         /// @brief Constructs.
@@ -332,7 +332,7 @@ namespace cubos::core::ecs
         Planner::TagId mTagId;
     };
 
-    class Cubos::SystemBuilder
+    class CUBOS_CORE_API Cubos::SystemBuilder
     {
     public:
         /// @brief Constructs.
@@ -462,7 +462,7 @@ namespace cubos::core::ecs
         int mDefaultTarget{0};
     };
 
-    class Cubos::ObserverBuilder
+    class CUBOS_CORE_API Cubos::ObserverBuilder
     {
     public:
         /// @brief Constructs.

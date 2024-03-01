@@ -13,7 +13,7 @@ namespace cubos::core::reflection
     /// @brief Provides mask functionality to an enum mask type.
     /// @see See @ref examples-core-reflection-traits-mask for an example of using this trait.
     /// @ingroup core-reflection
-    class MaskTrait
+    class CUBOS_CORE_API MaskTrait
     {
     public:
         /// @brief Represents a bit within the mask type.
@@ -116,7 +116,7 @@ namespace cubos::core::reflection
         Bit* mLastBit{nullptr};
     };
 
-    class MaskTrait::Bit
+    class CUBOS_CORE_API MaskTrait::Bit
     {
     public:
         /// @brief Constructs.
@@ -158,7 +158,7 @@ namespace cubos::core::reflection
         Clearer mClearer;
     };
 
-    class MaskTrait::Iterator final
+    class CUBOS_CORE_API MaskTrait::Iterator final
     {
     public:
         /// @brief Constructs.
@@ -198,7 +198,7 @@ namespace cubos::core::reflection
         const Bit* mBit;
     };
 
-    class MaskTrait::SetIterator
+    class CUBOS_CORE_API MaskTrait::SetIterator
     {
     public:
         /// @brief Constructs.
@@ -235,7 +235,7 @@ namespace cubos::core::reflection
         const void* mInstance;
     };
 
-    class MaskTrait::View
+    class CUBOS_CORE_API MaskTrait::View
     {
     public:
         /// @brief Constructs.
@@ -291,7 +291,7 @@ namespace cubos::core::reflection
         void* mInstance;
     };
 
-    class MaskTrait::ConstView
+    class CUBOS_CORE_API MaskTrait::ConstView
     {
     public:
         /// @brief Constructs.

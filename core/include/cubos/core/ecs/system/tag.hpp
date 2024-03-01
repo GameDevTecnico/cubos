@@ -6,6 +6,8 @@
 
 #include <string>
 
+#include <cubos/core/api.hpp>
+
 /// @brief Utility used to define tags more easily.
 ///
 /// @code{.cpp}
@@ -25,7 +27,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Represents a tag to be used with the @ref Cubos class.
-    class Tag
+    class CUBOS_CORE_API Tag
     {
     public:
         /// @brief Constructs.

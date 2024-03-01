@@ -11,7 +11,7 @@ namespace cubos::core::geom
 {
     /// @brief Represents a capsule or sphere shape.
     /// @ingroup core-geom
-    struct Capsule
+    struct CUBOS_CORE_API Capsule
     {
         CUBOS_REFLECT;
 

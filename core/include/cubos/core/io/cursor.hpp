@@ -15,7 +15,7 @@ namespace cubos::core::io
 {
     /// @brief Handle for a custom mouse cursor.
     /// @ingroup core-io
-    class Cursor
+    class CUBOS_CORE_API Cursor
     {
     public:
         /// @brief Identifiers for the different standard cursors.
@@ -46,4 +46,4 @@ namespace cubos::core::io
     };
 } // namespace cubos::core::io
 
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Cursor::Standard);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::Cursor::Standard);

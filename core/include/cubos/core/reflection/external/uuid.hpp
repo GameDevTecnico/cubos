@@ -8,4 +8,4 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
-CUBOS_REFLECT_EXTERNAL_DECL(uuids::uuid);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, uuids::uuid);

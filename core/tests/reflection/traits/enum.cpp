@@ -17,7 +17,7 @@ namespace
     };
 } // namespace
 
-CUBOS_REFLECT_EXTERNAL_DECL(Color);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, Color);
 CUBOS_REFLECT_EXTERNAL_IMPL(Color)
 {
     return Type::create("Color").with(

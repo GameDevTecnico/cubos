@@ -11,7 +11,7 @@
 namespace cubos::core::data
 {
     /// @brief Implementation of the abstract Serializer class for serializing to JSON.
-    class JSONSerializer : public Serializer
+    class CUBOS_CORE_API JSONSerializer : public Serializer
     {
     public:
         /// @brief Constructs.

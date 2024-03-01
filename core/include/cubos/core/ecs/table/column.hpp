@@ -14,7 +14,7 @@ namespace cubos::core::ecs
 {
     /// @brief Identifies a data column type.
     /// @ingroup core-ecs-table
-    struct ColumnId
+    struct CUBOS_CORE_API ColumnId
     {
         uint64_t inner; ///< Column type identifier.
 
@@ -47,7 +47,7 @@ namespace cubos::core::ecs
 
     /// @brief Used to hash @ref ColumnId objects.
     /// @ingroup core-ecs-table
-    struct ColumnIdHash
+    struct CUBOS_CORE_API ColumnIdHash
     {
         std::size_t operator()(const ColumnId& columnId) const noexcept;
     };
