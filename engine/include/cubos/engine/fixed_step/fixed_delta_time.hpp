@@ -4,11 +4,13 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which holds the value of the fixed delta for the fixedStep plugin.
     /// @ingroup fixed-step-plugin
-    struct FixedDeltaTime
+    struct CUBOS_ENGINE_API FixedDeltaTime
     {
         float value = 1.0F / 100.0F;
     };

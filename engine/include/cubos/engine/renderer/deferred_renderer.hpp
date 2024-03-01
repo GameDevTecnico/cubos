@@ -27,7 +27,7 @@ namespace cubos::engine
     /// 2. Take the GBuffer textures and calculate the color of the pixels with the lighting applied.
     ///
     /// @ingroup renderer-plugin
-    class DeferredRenderer : public BaseRenderer
+    class CUBOS_ENGINE_API DeferredRenderer : public BaseRenderer
     {
     public:
         ~DeferredRenderer() override;

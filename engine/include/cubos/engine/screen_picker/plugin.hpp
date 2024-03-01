@@ -33,5 +33,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup screen-picker-plugin
-    void screenPickerPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void screenPickerPlugin(Cubos& cubos);
 } // namespace cubos::engine

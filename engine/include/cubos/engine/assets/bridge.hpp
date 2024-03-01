@@ -26,7 +26,7 @@ namespace cubos::engine
     /// than the one that created them.
     ///
     /// @ingroup assets-plugin
-    class AssetBridge
+    class CUBOS_ENGINE_API AssetBridge
     {
     public:
         /// @brief Constructs a bridge.

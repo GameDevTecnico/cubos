@@ -8,6 +8,7 @@
 
 #include <cubos/core/gl/render_device.hpp>
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/renderer/pps/pass.hpp>
 
 namespace cubos::engine
@@ -17,7 +18,7 @@ namespace cubos::engine
     /// This pass is useless and is only used as an example and for testing.
     ///
     /// @ingroup renderer-plugin
-    class PostProcessingCopy : public PostProcessingPass
+    class CUBOS_ENGINE_API PostProcessingCopy : public PostProcessingPass
     {
     public:
         /// @brief Constructs.

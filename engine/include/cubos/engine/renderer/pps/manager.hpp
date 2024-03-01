@@ -11,6 +11,8 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     class PostProcessingPass;
@@ -32,7 +34,7 @@ namespace cubos::engine
     ///
     /// @see PostProcessingPass
     /// @ingroup renderer-plugin
-    class PostProcessingManager final
+    class CUBOS_ENGINE_API PostProcessingManager final
     {
     public:
         /// @brief Constructs.

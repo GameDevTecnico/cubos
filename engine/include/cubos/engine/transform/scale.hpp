@@ -6,12 +6,14 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which assigns a uniform scale to an entity.
     /// @sa LocalToWorld Holds the resulting transform matrix.
     /// @ingroup transform-plugin
-    struct Scale
+    struct CUBOS_ENGINE_API Scale
     {
         CUBOS_REFLECT;
 

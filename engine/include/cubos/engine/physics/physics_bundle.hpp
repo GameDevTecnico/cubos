@@ -8,11 +8,13 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which encapsulates the creation all components required for physics.
     /// @ingroup physics-plugin
-    struct PhysicsBundle
+    struct CUBOS_ENGINE_API PhysicsBundle
     {
         CUBOS_REFLECT;
 

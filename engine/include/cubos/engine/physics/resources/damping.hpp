@@ -4,11 +4,13 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which holds the damping value for integration.
     /// @ingroup physics-plugin
-    struct Damping
+    struct CUBOS_ENGINE_API Damping
     {
         float value = 0.99F;
     };

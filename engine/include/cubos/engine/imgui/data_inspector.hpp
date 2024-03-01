@@ -7,12 +7,14 @@
 #include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/reflection/type.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which allows the user to inspect or modify any reflectable value on the UI.
     /// @see Take a look at the @ref examples-engine-imgui example for a demonstration of this resource.
     /// @ingroup imgui-plugin
-    class DataInspector final
+    class CUBOS_ENGINE_API DataInspector final
     {
     public:
         /// @brief Displays a reflectable value on the UI.

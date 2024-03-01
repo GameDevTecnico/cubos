@@ -12,6 +12,8 @@
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     class VoxelPalette;
@@ -29,7 +31,7 @@ namespace cubos::engine
     /// @brief Represents a voxel object using a 3D grid.
     /// @see Each voxel stores a material index to be used with a @ref VoxelPalette.
     /// @ingroup voxels-plugin
-    class VoxelGrid final
+    class CUBOS_ENGINE_API VoxelGrid final
     {
     public:
         CUBOS_REFLECT;

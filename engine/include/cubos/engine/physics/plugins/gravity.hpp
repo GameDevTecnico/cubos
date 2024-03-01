@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/physics/components/force.hpp>
 #include <cubos/engine/physics/components/impulse.hpp>
 #include <cubos/engine/physics/components/mass.hpp>
@@ -23,5 +24,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup physics-gravity-plugin
-    void gravityPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void gravityPlugin(Cubos& cubos);
 } // namespace cubos::engine

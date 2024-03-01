@@ -40,5 +40,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup collisions-plugin
-    void collisionsPlugin(Cubos& cubos);
+    void CUBOS_ENGINE_API collisionsPlugin(Cubos& cubos);
 } // namespace cubos::engine

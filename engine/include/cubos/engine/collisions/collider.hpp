@@ -9,11 +9,13 @@
 #include <cubos/core/geom/aabb.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which adds a collider to an entity.
     /// @ingroup collisions-plugin
-    struct Collider
+    struct CUBOS_ENGINE_API Collider
     {
         CUBOS_REFLECT;
 

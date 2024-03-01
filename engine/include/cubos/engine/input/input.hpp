@@ -15,7 +15,7 @@ namespace cubos::engine
     /// Its state is updated accordingly as events are received by the @ref input-plugin.
     ///
     /// @ingroup input-plugin
-    class Input final
+    class CUBOS_ENGINE_API Input final
     {
     public:
         /// @brief Alias for @ref core::io::Key.

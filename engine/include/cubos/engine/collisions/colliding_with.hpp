@@ -9,11 +9,13 @@
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Relation which represents a collision.
     /// @ingroup collisions-plugin
-    struct CollidingWith
+    struct CUBOS_ENGINE_API CollidingWith
     {
         CUBOS_REFLECT;
 

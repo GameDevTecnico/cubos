@@ -7,7 +7,6 @@
 
 #pragma once
 
-/// [Component Refl]
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -54,5 +53,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup physics-plugin
-    void physicsPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void physicsPlugin(Cubos& cubos);
 } // namespace cubos::engine

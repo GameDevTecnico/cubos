@@ -18,7 +18,7 @@ namespace cubos::engine
     /// It contains a map of input actions and a map of input axes.
     ///
     /// @ingroup input-plugin
-    class InputBindings final
+    class CUBOS_ENGINE_API InputBindings final
     {
     public:
         CUBOS_REFLECT;

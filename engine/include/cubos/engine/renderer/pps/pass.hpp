@@ -10,6 +10,7 @@
 
 #include <cubos/core/gl/render_device.hpp>
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/renderer/pps/manager.hpp>
 
 namespace cubos::engine
@@ -22,7 +23,7 @@ namespace cubos::engine
     ///
     /// @see PostProcessingManager
     /// @ingroup renderer-plugin
-    class PostProcessingPass
+    class CUBOS_ENGINE_API PostProcessingPass
     {
     public:
         virtual ~PostProcessingPass() = default;

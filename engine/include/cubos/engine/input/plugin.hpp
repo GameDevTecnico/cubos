@@ -37,5 +37,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup input-plugin
-    void inputPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void inputPlugin(Cubos& cubos);
 } // namespace cubos::engine

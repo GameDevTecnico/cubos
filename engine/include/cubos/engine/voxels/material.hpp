@@ -9,11 +9,13 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Describes a voxel material.
     /// @ingroup voxels-plugin
-    struct VoxelMaterial
+    struct CUBOS_ENGINE_API VoxelMaterial
     {
         static const VoxelMaterial Empty; ///< Empty material, used for voxels with index 0.
 

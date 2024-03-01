@@ -69,7 +69,7 @@ namespace cubos::engine
     /// @brief Component which makes a voxel grid be rendered by the renderer plugin.
     /// @note Should be used with @ref LocalToWorld.
     /// @ingroup renderer-plugin
-    struct RenderableGrid
+    struct CUBOS_ENGINE_API RenderableGrid
     {
         CUBOS_REFLECT;
 
@@ -80,7 +80,7 @@ namespace cubos::engine
 
     /// @brief Resource which identifies the camera entities to be used by the renderer.
     /// @ingroup renderer-plugin
-    struct ActiveCameras
+    struct CUBOS_ENGINE_API ActiveCameras
     {
         /// @brief Entities which represent the current active cameras. If more than one is set,
         /// the screen is split. At most, 4 cameras are supported at the same time.
@@ -90,7 +90,7 @@ namespace cubos::engine
 
     /// @brief Resource which holds an asset handle to the currently active palette.
     /// @ingroup renderer-plugin
-    struct ActiveVoxelPalette
+    struct CUBOS_ENGINE_API ActiveVoxelPalette
     {
         /// @brief Asset handle to the currently active palette.
         Asset<VoxelPalette> asset;
@@ -103,5 +103,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup renderer-plugin
-    void rendererPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void rendererPlugin(Cubos& cubos);
 } // namespace cubos::engine

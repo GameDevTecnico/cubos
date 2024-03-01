@@ -8,6 +8,8 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::core::data::old
 {
     class Serializer;
@@ -31,7 +33,7 @@ namespace cubos::engine
     /// - when deserialized, the handle is always a weak handle.
     ///
     /// @ingroup assets-plugin
-    class AnyAsset
+    class CUBOS_ENGINE_API AnyAsset
     {
     public:
         CUBOS_REFLECT;

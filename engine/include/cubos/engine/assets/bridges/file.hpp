@@ -19,7 +19,7 @@ namespace cubos::engine
     /// called with a file stream to load and save the asset from and to, respectively.
     ///
     /// @ingroup assets-plugin
-    class FileBridge : public AssetBridge
+    class CUBOS_ENGINE_API FileBridge : public AssetBridge
     {
     public:
         /// @brief Constructs a bridge.

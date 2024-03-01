@@ -41,5 +41,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup assets-plugin
-    void assetsPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void assetsPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -6,12 +6,14 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which defines parameters of a camera used to render the world.
     /// @note Should be used with @ref LocalToWorld.
     /// @ingroup renderer-plugin
-    struct Camera
+    struct CUBOS_ENGINE_API Camera
     {
         CUBOS_REFLECT;
 

@@ -35,5 +35,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup imgui-plugin
-    void imguiPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void imguiPlugin(Cubos& cubos);
 } // namespace cubos::engine

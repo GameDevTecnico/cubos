@@ -43,7 +43,7 @@ namespace cubos::engine
     /// from the imported scene, while the entity `baz` will be added to the scene.
     ///
     /// @ingroup scene-plugin
-    class SceneBridge : public FileBridge
+    class CUBOS_ENGINE_API SceneBridge : public FileBridge
     {
     public:
         /// @brief Constructs a bridge.

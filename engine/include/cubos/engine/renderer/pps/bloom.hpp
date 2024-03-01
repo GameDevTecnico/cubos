@@ -10,6 +10,7 @@
 
 #include <cubos/core/gl/render_device.hpp>
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/renderer/pps/pass.hpp>
 
 namespace cubos::engine
@@ -20,7 +21,7 @@ namespace cubos::engine
     /// [tutorial](https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom).
     ///
     /// @ingroup renderer-plugin
-    class PostProcessingBloom : public PostProcessingPass
+    class CUBOS_ENGINE_API PostProcessingBloom : public PostProcessingPass
     {
     public:
         /// @brief Constructs with default arguments.

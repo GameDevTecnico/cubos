@@ -10,6 +10,8 @@
 #include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Stores the state of a single input axis, such as "move forward" or "move right".
@@ -18,7 +20,7 @@ namespace cubos::engine
     /// state of its bindings.
     ///
     /// @ingroup input-plugin
-    class InputAxis final
+    class CUBOS_ENGINE_API InputAxis final
     {
     public:
         CUBOS_REFLECT;

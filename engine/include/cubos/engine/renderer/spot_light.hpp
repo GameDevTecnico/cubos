@@ -8,13 +8,15 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which makes an entity emit a spot light.
     /// @note Should be used with @ref LocalToWorld.
     /// @todo In what direction does the spot light point for an identity transform?
     /// @ingroup renderer-plugin
-    struct SpotLight
+    struct CUBOS_ENGINE_API SpotLight
     {
         CUBOS_REFLECT;
 
