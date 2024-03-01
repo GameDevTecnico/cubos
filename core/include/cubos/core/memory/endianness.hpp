@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::memory
 {
     /// @brief Swaps the bytes of a value, changing its endianness.
@@ -17,7 +19,7 @@ namespace cubos::core::memory
     /// @brief Checks if the current platform is little endian.
     /// @return Whether its little endian.
     /// @ingroup core-memory
-    bool isLittleEndian();
+    CUBOS_CORE_API bool isLittleEndian();
 
     /// @brief Converts a value from little endianness to local endianness.
     /// @tparam T Value type.

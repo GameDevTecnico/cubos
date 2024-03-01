@@ -14,11 +14,11 @@ namespace cubos::core::ecs
 {
     /// @brief Stores all of the sparse relation tables.
     /// @ingroup core-ecs-table
-    class SparseRelationTableRegistry
+    class CUBOS_CORE_API SparseRelationTableRegistry
     {
     public:
         /// @brief Stores the ids of tables of a given type.
-        class TypeIndex
+        class CUBOS_CORE_API TypeIndex
         {
         public:
             /// @brief Inserts a new table identifier into the index.

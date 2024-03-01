@@ -13,7 +13,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Node which forces two given targets to be related with a given relation.
-    class QueryRelatedNode final : public QueryNode
+    class CUBOS_CORE_API QueryRelatedNode final : public QueryNode
     {
     public:
         /// @brief Constructs.

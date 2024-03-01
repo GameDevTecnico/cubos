@@ -26,7 +26,7 @@ namespace cubos::core::ecs
     /// @brief Holds entities, their components and resources.
     /// @see Internally, components are stored in abstract containers called @ref Storage's.
     /// @ingroup core-ecs
-    class World
+    class CUBOS_CORE_API World
     {
     public:
         ~World();

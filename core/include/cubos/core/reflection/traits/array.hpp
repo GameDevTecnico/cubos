@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cstdint>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::reflection
@@ -14,7 +15,7 @@ namespace cubos::core::reflection
     /// @brief Exposes array-like functionality of a type.
     /// @see See @ref examples-core-reflection-traits-array for an example of using this trait.
     /// @ingroup core-reflection
-    class ArrayTrait final
+    class CUBOS_CORE_API ArrayTrait final
     {
     public:
         /// @brief Provides mutable access to an array.
@@ -107,7 +108,7 @@ namespace cubos::core::reflection
         Erase mErase{nullptr};
     };
 
-    class ArrayTrait::View final
+    class CUBOS_CORE_API ArrayTrait::View final
     {
     public:
         /// @brief Used to iterate over the elements of an array.
@@ -172,7 +173,7 @@ namespace cubos::core::reflection
         void* mInstance;
     };
 
-    class ArrayTrait::ConstView final
+    class CUBOS_CORE_API ArrayTrait::ConstView final
     {
     public:
         /// @brief Used to iterate over the elements of an array.
@@ -205,7 +206,7 @@ namespace cubos::core::reflection
         const void* mInstance;
     };
 
-    class ArrayTrait::View::Iterator final
+    class CUBOS_CORE_API ArrayTrait::View::Iterator final
     {
     public:
         /// @brief Constructs.
@@ -241,7 +242,7 @@ namespace cubos::core::reflection
         std::size_t mIndex;
     };
 
-    class ArrayTrait::ConstView::Iterator final
+    class CUBOS_CORE_API ArrayTrait::ConstView::Iterator final
     {
     public:
         /// @brief Constructs.

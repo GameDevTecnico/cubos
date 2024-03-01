@@ -9,6 +9,8 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/api.hpp>
+
 /// @brief Maximum number of render targets that can be set on a framebuffer.
 /// @todo Make this a compile-time constant instead of a macro.
 /// @ingroup core-gl
@@ -423,7 +425,7 @@ namespace cubos::core::gl
 
     /// @brief Describes a framebuffer.
     /// @ingroup core-gl
-    struct FramebufferDesc
+    struct CUBOS_CORE_API FramebufferDesc
     {
         /// @brief Describes a cube map target.
         struct CubeMapTarget
@@ -713,7 +715,7 @@ namespace cubos::core::gl
     ///
     /// @see @ref io::Window is responsible for creating a render device for itself.
     /// @ingroup core-gl
-    class RenderDevice
+    class CUBOS_CORE_API RenderDevice
     {
     public:
         virtual ~RenderDevice() = default;

@@ -47,7 +47,7 @@ namespace cubos::core::ecs
 
     /// @brief Used to chain configurations related to tags.
     /// @ingroup core-ecs
-    class TagBuilder
+    class CUBOS_CORE_API TagBuilder
     {
     public:
         /// @brief Construct.
@@ -95,7 +95,7 @@ namespace cubos::core::ecs
     /// @brief Represents the engine itself, and exposes the interface with which the game
     /// developer interacts with. Ties up all the different parts of the engine together.
     /// @ingroup core-ecs
-    class Cubos final
+    class CUBOS_CORE_API Cubos final
     {
     public:
         /// @brief Used to create new systems.
@@ -201,7 +201,7 @@ namespace cubos::core::ecs
         std::vector<std::string> mStartupTags;
     };
 
-    class Cubos::SystemBuilder
+    class CUBOS_CORE_API Cubos::SystemBuilder
     {
     public:
         /// @brief Constructs.
@@ -331,7 +331,7 @@ namespace cubos::core::ecs
         int mDefaultTarget{0};
     };
 
-    class Cubos::ObserverBuilder
+    class CUBOS_CORE_API Cubos::ObserverBuilder
     {
     public:
         /// @brief Constructs.

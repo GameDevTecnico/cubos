@@ -6,6 +6,8 @@
 
 #include <cstddef>
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::ecs
 {
     struct Entity;
@@ -15,7 +17,7 @@ namespace cubos::core::ecs
     /// Can be used to allow @ref Entity objects to be used as keys in an `std::unordered_map`.
     ///
     /// @ingroup core-ecs-entity
-    struct EntityHash
+    struct CUBOS_CORE_API EntityHash
     {
         std::size_t operator()(const Entity& entity) const noexcept;
     };

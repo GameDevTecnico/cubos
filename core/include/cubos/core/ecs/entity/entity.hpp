@@ -7,6 +7,7 @@
 #include <bitset>
 #include <cstdint>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::ecs
@@ -19,7 +20,7 @@ namespace cubos::core::ecs
     /// (de)serialized as objects with two fields: their index and their generation.
     ///
     /// @ingroup core-ecs-entity
-    struct Entity
+    struct CUBOS_CORE_API Entity
     {
         CUBOS_REFLECT;
 

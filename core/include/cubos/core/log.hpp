@@ -240,7 +240,7 @@ namespace cubos::core
 {
     /// @brief Singleton which holds the logging state.
     /// @ingroup core
-    class Logger final
+    class CUBOS_CORE_API Logger final
     {
     public:
         /// @brief Represents a logging level.
@@ -365,4 +365,4 @@ namespace cubos::core
     };
 } // namespace cubos::core
 
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::Logger::Level);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::Logger::Level);

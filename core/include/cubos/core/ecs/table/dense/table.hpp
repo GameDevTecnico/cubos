@@ -14,7 +14,7 @@ namespace cubos::core::ecs
 {
     /// @brief Stores the dense data associated to entities of a given archetype.
     /// @ingroup core-ecs-table
-    class DenseTable final
+    class CUBOS_CORE_API DenseTable final
     {
     public:
         /// @brief Constructs a table without columns.

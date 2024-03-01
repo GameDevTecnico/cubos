@@ -6,6 +6,7 @@
 
 #include <cstddef>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/memory/move.hpp>
 
 namespace cubos::core::reflection
@@ -14,7 +15,7 @@ namespace cubos::core::reflection
     /// @see See @ref examples-core-reflection-traits-constructible for an example of using this
     /// trait.
     /// @ingroup core-reflection
-    class ConstructibleTrait
+    class CUBOS_CORE_API ConstructibleTrait
     {
     public:
         /// @brief Function pointer to the destructor of a type.

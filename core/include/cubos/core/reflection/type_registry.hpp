@@ -6,6 +6,7 @@
 
 #include <string>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/memory/unordered_bimap.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
@@ -13,7 +14,7 @@ namespace cubos::core::reflection
 {
     /// @brief Stores a set of types which can be accessed by name.
     /// @ingroup core-reflection
-    class TypeRegistry final
+    class CUBOS_CORE_API TypeRegistry final
     {
     public:
         using Iterator = typename memory::UnorderedBimap<const Type*, std::string>::Iterator;

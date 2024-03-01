@@ -6,6 +6,8 @@
 
 #include <cstddef>
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::ecs
 {
     /// @brief Identifies an archetype.
@@ -24,7 +26,7 @@ namespace cubos::core::ecs
     };
 
     /// @brief Hash functor for @ref ArchetypeId.
-    struct ArchetypeIdHash
+    struct CUBOS_CORE_API ArchetypeIdHash
     {
         std::size_t operator()(const ArchetypeId& id) const;
     };

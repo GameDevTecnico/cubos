@@ -8,6 +8,7 @@
 #include <mutex>
 #include <string_view>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::data
@@ -32,7 +33,7 @@ namespace cubos::core::data
     /// @see FileSystem
     /// @see Archive
     /// @ingroup core-data-fs
-    class File final : public std::enable_shared_from_this<File>
+    class CUBOS_CORE_API File final : public std::enable_shared_from_this<File>
     {
     public:
         /// @brief Handle to a file in the CUBOS. virtual file system.
