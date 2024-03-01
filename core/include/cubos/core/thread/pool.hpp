@@ -27,11 +27,11 @@ namespace cubos::core::thread
         /// @param numThreads Number of threads to create.
         ThreadPool(std::size_t numThreads);
 
-        /// @brief Forbid copy construction.
+        /// @name Forbid any kind of copying.
+        /// @{
         ThreadPool(const ThreadPool&) = delete;
-
-        /// @brief Forbid move construction.
-        ThreadPool(ThreadPool&&) = delete;
+        ThreadPool& operator=(const ThreadPool&) = delete;
+        /// @}
 
         /// @brief Adds a task to the thread pool. Starts when a thread becomes available.
         /// @param task Task to add.

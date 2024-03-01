@@ -20,8 +20,11 @@ namespace cubos::core::ecs
         /// @brief Constructs a table without columns.
         DenseTable() = default;
 
-        /// @brief Forbid move construction.
-        DenseTable(DenseTable&&) noexcept = delete;
+        /// @name Forbid any kind of copying.
+        /// @{
+        DenseTable(const DenseTable&) = delete;
+        DenseTable& operator=(const DenseTable&) = delete;
+        /// @}
 
         /// @brief Adds a new column to the table.
         ///

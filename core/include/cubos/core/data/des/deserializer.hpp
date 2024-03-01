@@ -31,11 +31,11 @@ namespace cubos::core::data
         /// @brief Constructs.
         Deserializer() = default;
 
-        /// @name Deleted copy and move constructors.
+        /// @name Forbid any kind of copying.
         /// @brief Deleted as the hooks may contain references to the deserializer.
         /// @{
-        Deserializer(Deserializer&&) = delete;
         Deserializer(const Deserializer&) = delete;
+        Deserializer& operator=(const Deserializer&) = delete;
         /// @}
 
         /// @brief Function type for deserialization hooks.

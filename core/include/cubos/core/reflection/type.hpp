@@ -22,8 +22,11 @@ namespace cubos::core::reflection
     class CUBOS_CORE_API Type final
     {
     public:
+        /// @name Forbid any kind of copying.
+        /// @{
         Type(const Type&) = delete;
-        Type(Type&&) = delete;
+        Type& operator=(const Type&) = delete;
+        /// @}
 
         /// @brief Constructs with a type the given name.
         /// @param name Name of the type.

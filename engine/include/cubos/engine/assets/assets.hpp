@@ -64,11 +64,11 @@ namespace cubos::engine
         /// @brief Constructs an empty manager without any bridges or metadata.
         Assets();
 
-        /// @brief Forbid copying.
+        /// @name Forbid any kind of copying.
+        /// @{
         Assets(const Assets&) = delete;
-
-        /// @brief Forbid moving.
-        Assets(Assets&&) = delete;
+        Assets& operator=(const Assets&) = delete;
+        /// @}
 
         /// @brief Registers a new bridge for the given extension.
         ///
