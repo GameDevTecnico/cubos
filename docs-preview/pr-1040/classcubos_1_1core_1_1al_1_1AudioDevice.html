@@ -67,8 +67,8 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="ae435f931176bb346b14fa2cf71c55743">
-              using <a href="#ae435f931176bb346b14fa2cf71c55743" class="m-doc-self">PortAudioOutputCallbackFn</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">core::<wbr />memory::<wbr />Function</a>&lt;int(void*output, unsigned long frameCount, unsigned long statusFlags, void*userData)&gt;
+            <dt id="a2d422024c9ed608bf2a07f835bcd41e1">
+              using <a href="#a2d422024c9ed608bf2a07f835bcd41e1" class="m-doc-self">PortAudioOutputCallbackFn</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">core::<wbr />memory::<wbr />Function</a>&lt;int(void*output, unsigned long frameCount, unsigned long statusFlags)&gt;
             </dt>
             <dd>Type alias for a user output callback function.</dd>
           </dl>
@@ -112,38 +112,17 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0c8fd710e17f4211072d2413f64045df" class="m-doc">init</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1al_1_1AudioDevice.html#ae435f931176bb346b14fa2cf71c55743" class="m-doc">PortAudioOutputCallbackFn</a> callback) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a677685d10b72aaddd08f6ad3a15cba84" class="m-doc">stream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1al_1_1AudioDevice.html#a2d422024c9ed608bf2a07f835bcd41e1" class="m-doc">PortAudioOutputCallbackFn</a> callback) -&gt; <a href="group__core-al.html#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc">Source</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Creates the stream.</dd>
             <dt id="adb63bf169f4fbcd05fd5bb6d1f6b67d8">
               <span class="m-doc-wrap-bumper">void <a href="#adb63bf169f4fbcd05fd5bb6d1f6b67d8" class="m-doc-self">start</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Starts the stream.</dd>
+            <dd>Starts the stream. // fixme: SOURCE responsible.</dd>
             <dt id="a8a33d80b08a8e2605e1e7a86feaefb97">
               <span class="m-doc-wrap-bumper">void <a href="#a8a33d80b08a8e2605e1e7a86feaefb97" class="m-doc-self">stop</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Stops the stream.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa62570280045b495cbc6440e82bdeed3" class="m-doc">createBuffer</a>(</span><span class="m-doc-wrap">) -&gt; <a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Creates a new audio buffer.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3082a10b84fd69d4b1da40c4bc89e730" class="m-doc">createSource</a>(</span><span class="m-doc-wrap">) -&gt; <a href="group__core-al.html#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc">Source</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Creates a new audio source.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a122d8a2077a243c15a1e6f40aa573a78" class="m-doc">setListenerPosition</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; position) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Sets the position of the listener.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a51a8878d7e3c035b61a0f01c771b7bd3" class="m-doc">setListenerOrientation</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; forward,
-              const glm::vec3&amp; up) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Sets the orientation of the listener.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a88d62b0a2c033c7bf7b9d29d26ceb459" class="m-doc">setListenerVelocity</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; velocity) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Sets the velocity of the listener. Used to implement the doppler effect.</dd>
           </dl>
         </section>
         <section>
@@ -207,9 +186,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a0c8fd710e17f4211072d2413f64045df"><div>
+          <section class="m-doc-details" id="a677685d10b72aaddd08f6ad3a15cba84"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c8fd710e17f4211072d2413f64045df" class="m-doc-self">init</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1al_1_1AudioDevice.html#ae435f931176bb346b14fa2cf71c55743" class="m-doc">PortAudioOutputCallbackFn</a> callback) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc">Source</a> cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a677685d10b72aaddd08f6ad3a15cba84" class="m-doc-self">stream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1al_1_1AudioDevice.html#a2d422024c9ed608bf2a07f835bcd41e1" class="m-doc">PortAudioOutputCallbackFn</a> callback) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Creates the stream.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -228,90 +207,6 @@
                   <td>Whether the stream was successfully created.</td>
                 </tr>
               </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aa62570280045b495cbc6440e82bdeed3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa62570280045b495cbc6440e82bdeed3" class="m-doc-self">createBuffer</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Creates a new audio buffer.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Handle of the new buffer.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a3082a10b84fd69d4b1da40c4bc89e730"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc">Source</a> cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3082a10b84fd69d4b1da40c4bc89e730" class="m-doc-self">createSource</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Creates a new audio source.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Handle of the new source.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a122d8a2077a243c15a1e6f40aa573a78"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a122d8a2077a243c15a1e6f40aa573a78" class="m-doc-self">setListenerPosition</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; position) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Sets the position of the listener.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">position</td>
-                  <td>Position.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a51a8878d7e3c035b61a0f01c771b7bd3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51a8878d7e3c035b61a0f01c771b7bd3" class="m-doc-self">setListenerOrientation</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; forward,
-              const glm::vec3&amp; up) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Sets the orientation of the listener.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">forward</td>
-                  <td>Forward direction of the listener.</td>
-                </tr>
-                <tr>
-                  <td>up</td>
-                  <td>Up direction of the listener.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a88d62b0a2c033c7bf7b9d29d26ceb459"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88d62b0a2c033c7bf7b9d29d26ceb459" class="m-doc-self">setListenerVelocity</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; velocity) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Sets the velocity of the listener. Used to implement the doppler effect.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">velocity</td>
-                  <td>Velocity of the listener.</td>
-                </tr>
-              </tbody>
             </table>
           </div></section>
         </section>

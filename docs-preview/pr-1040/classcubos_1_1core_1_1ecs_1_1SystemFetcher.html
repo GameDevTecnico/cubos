@@ -102,7 +102,7 @@
             </dt>
             <dd>Called to determine the access patterns of the argument.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a31c74f7b8fb6dd529a8942bfe2238575" class="m-doc">fetch</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmdBuffer) -&gt; T</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a66f9a4d112f64f3ca0c45af1fb154322" class="m-doc">fetch</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemContext.html" class="m-doc">SystemContext</a>&amp; ctx) -&gt; T</span>
             </dt>
             <dd>Called each system run to fetch the data from the world.</dd>
           </dl>
@@ -154,12 +154,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a31c74f7b8fb6dd529a8942bfe2238575"><div>
+          <section class="m-doc-details" id="a66f9a4d112f64f3ca0c45af1fb154322"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a31c74f7b8fb6dd529a8942bfe2238575" class="m-doc-self">fetch</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; cmdBuffer)</span></span>
+              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a66f9a4d112f64f3ca0c45af1fb154322" class="m-doc-self">fetch</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemContext.html" class="m-doc">SystemContext</a>&amp; ctx)</span></span>
             </h3>
             <p>Called each system run to fetch the data from the world.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -168,8 +168,8 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">cmdBuffer</td>
-                  <td>Command buffer.</td>
+                  <td style="width: 1%">ctx</td>
+                  <td>Context.</td>
                 </tr>
               </tbody>
             </table>

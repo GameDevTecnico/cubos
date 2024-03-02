@@ -98,10 +98,14 @@
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a6b8ce7555ac1c05a1ec26d3bfea8883c">
-              <span class="m-doc-wrap-bumper">void <a href="#a6b8ce7555ac1c05a1ec26d3bfea8883c" class="m-doc-self">replace</a>(</span><span class="m-doc-wrap">T value)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a6b8ce7555ac1c05a1ec26d3bfea8883c" class="m-doc">replace</a>(</span><span class="m-doc-wrap">T value)</span>
             </dt>
             <dd>Moves the given value into the optional, destroying any previously stored value.</dd>
+            <dt id="ae94675819ef193d5c49d0609dc8e4a21">
+              <span class="m-doc-wrap-bumper">void <a href="#ae94675819ef193d5c49d0609dc8e4a21" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destroys the value, if any.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a795ceedae25e8c2602e030b17476135a" class="m-doc">contains</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
@@ -177,6 +181,26 @@
                   <td>Whether the optional contains a value.</td>
                 </tr>
               </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6b8ce7555ac1c05a1ec26d3bfea8883c"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b8ce7555ac1c05a1ec26d3bfea8883c" class="m-doc-self">replace</a>(</span><span class="m-doc-wrap">T value)</span></span>
+            </h3>
+            <p>Moves the given value into the optional, destroying any previously stored value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
             </table>
           </div></section>
           <section class="m-doc-details" id="a795ceedae25e8c2602e030b17476135a"><div>
