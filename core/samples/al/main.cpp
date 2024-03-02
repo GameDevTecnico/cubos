@@ -9,9 +9,9 @@ int main()
     auto audio = cubos::core::al::AudioDevice::create();
 
     std::vector<cubos::core::al::DeviceInfo> devices;
-    audio->enumerateDevices(devices, true);
+    audio->enumerateDevices(devices, true); // always log, remove debug param
 
-    audio->init([](void* outputBuffer, unsigned long framesPerBuffer, unsigned long, void*) -> int {
+    audio->stream([](void* outputBuffer, unsigned long framesPerBuffer, unsigned long) -> int {
         float* out = static_cast<float*>(outputBuffer);
         for (unsigned int i = 0; i < framesPerBuffer; i++)
         {
@@ -19,6 +19,7 @@ int main()
         }
         return 0;
     });
+    //
     audio->start();
 
     std::cout << "press enter to stop the sound";

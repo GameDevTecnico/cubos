@@ -26,12 +26,12 @@ static int paCallback(const void*, void* outputBuffer, unsigned long framesPerBu
                                 const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags flags, void* userData)
 {
     PortAudioDevice* portAudioDevice = static_cast<PortAudioDevice*>(userData);
-    return portAudioDevice->callback(outputBuffer, framesPerBuffer, flags, userData);
+    return portAudioDevice->callback(outputBuffer, framesPerBuffer, flags);
 }
 
 PortAudioDevice::PortAudioDevice(int deviceIndex)
-    : outputDeviceID(deviceIndex)
-    , stream(nullptr)
+    : mOutputDeviceID(deviceIndex)
+    , mStream(nullptr)
 {
 #ifdef WITH_PORTAUDIO
     auto err = Pa_Initialize();
@@ -42,11 +42,11 @@ PortAudioDevice::PortAudioDevice(int deviceIndex)
 
     CUBOS_INFO("PortAudio initialized");
 
-    if (outputDeviceID == -1)
+    if (mOutputDeviceID == -1)
     {
-        outputDeviceID = Pa_GetDefaultOutputDevice();
-        CUBOS_INFO("PortAudio will use default output device ('{}') :", outputDeviceID);
-        printDeviceInformation(outputDeviceID);
+        mOutputDeviceID = Pa_GetDefaultOutputDevice();
+        CUBOS_INFO("PortAudio will use default output device ('{}') :", mOutputDeviceID);
+        printDeviceInformation(mOutputDeviceID);
     }
 #else
     UNSUPPORTED();
@@ -55,44 +55,44 @@ PortAudioDevice::PortAudioDevice(int deviceIndex)
 
 PortAudioDevice::~PortAudioDevice()
 {
-    if (stream)
+    if (mStream)
     {
         // FIXME: double stop?»
         stop();
-        Pa_CloseStream(stream);
+        Pa_CloseStream(mStream);
     }
 
     Pa_Terminate();
 }
 
-bool PortAudioDevice::init(PortAudioOutputCallbackFn callback)
+Source PortAudioDevice::stream(PortAudioOutputCallbackFn callback)
 {
     this->callback = std::move(callback);
     CUBOS_INFO("Custom output callback function set");
 
     PaStreamParameters outputParameters;
-    outputParameters.device = outputDeviceID;
+    outputParameters.device = mOutputDeviceID;
     // FIXME: what should be specified by the user?
-    outputParameters.channelCount = Pa_GetDeviceInfo(outputDeviceID)->maxOutputChannels;
+    outputParameters.channelCount = Pa_GetDeviceInfo(mOutputDeviceID)->maxOutputChannels;
     outputParameters.sampleFormat = paFloat32;
-    outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputDeviceID)->defaultLowOutputLatency;
+    outputParameters.suggestedLatency = Pa_GetDeviceInfo(mOutputDeviceID)->defaultLowOutputLatency;
     outputParameters.hostApiSpecificStreamInfo = nullptr;
 
     CUBOS_INFO("Creating PortAudio stream..");
     auto err =
-        Pa_OpenStream(&stream, nullptr, &outputParameters, SAMPLE_RATE, FRAMES_PER_BUFFER, paNoFlag, paCallback, this);
+        Pa_OpenStream(&mStream, nullptr, &outputParameters, SAMPLE_RATE, FRAMES_PER_BUFFER, paNoFlag, paCallback, this);
     if (err != paNoError)
     {
         CUBOS_ERROR("Could not open PortAudio stream: {}", Pa_GetErrorText(err));
-        return false;
+        return std::make_shared<impl::Source>();
     }
 
-    return true;
+    return std::make_shared<impl::Source>();
 }
 
 void PortAudioDevice::start()
 {
-    auto err = Pa_StartStream(stream);
+    auto err = Pa_StartStream(mStream);
     if (err != paNoError)
     {
         CUBOS_ERROR("PortAudio failed to start the stream: {}", Pa_GetErrorText(err));
@@ -101,7 +101,7 @@ void PortAudioDevice::start()
 
 void PortAudioDevice::stop()
 {
-    auto err = Pa_StopStream(stream);
+    auto err = Pa_StopStream(mStream);
     if (err != paNoError)
     {
         CUBOS_ERROR("PortAudio failed to stop the stream: {}", Pa_GetErrorText(err));
@@ -125,6 +125,7 @@ void PortAudioDevice::enumerateDevices(std::vector<DeviceInfo>& devices, bool de
                                         .defaultSampleRate = deviceInfo->defaultSampleRate});
         if (debug)
         {
+            // TODO: cubos info
             CUBOS_DEBUG("Device '{}' : '{}'", i, deviceInfo->name);
         }
     }
@@ -164,47 +165,9 @@ void PortAudioDevice::printDeviceInformation(int deviceIndex)
     CUBOS_FAIL("Could not find device");
 }
 
-Buffer PortAudioDevice::createBuffer()
-{
 #ifdef WITH_PORTAUDIO
-    CUBOS_TODO();
-#else
-    UNSUPPORTED();
-#endif // WITH_PORTAUDIO
-}
-
-Source PortAudioDevice::createSource()
+class Buffer : public impl::Buffer
 {
-#ifdef WITH_PORTAUDIO
-    CUBOS_TODO();
-#else
-    UNSUPPORTED();
+public:
+};
 #endif // WITH_PORTAUDIO
-}
-
-void PortAudioDevice::setListenerPosition(const glm::vec3&)
-{
-#ifdef WITH_PORTAUDIO
-    CUBOS_TODO();
-#else
-    UNSUPPORTED();
-#endif // WITH_PORTAUDIO
-}
-
-void PortAudioDevice::setListenerOrientation(const glm::vec3&, const glm::vec3&)
-{
-#ifdef WITH_PORTAUDIO
-    CUBOS_TODO();
-#else
-    UNSUPPORTED();
-#endif // WITH_PORTAUDIO
-}
-
-void PortAudioDevice::setListenerVelocity(const glm::vec3&)
-{
-#ifdef WITH_PORTAUDIO
-    CUBOS_TODO();
-#else
-    UNSUPPORTED();
-#endif // WITH_PORTAUDIO
-}

@@ -4,6 +4,9 @@
 
 #include <cubos/core/al/audio_device.hpp>
 
+/// funcao pa criar uma stream? createStream que recebe callback
+/// funcao pa criar uma stream? createStream que recebe buffer
+
 namespace cubos::core::al
 {
     /// Audio device implementation using PortAudio.
@@ -19,7 +22,7 @@ namespace cubos::core::al
         /// @brief Creates the stream.
         /// @param callback Supplied function that is responsible for processing and filling input and output buffers.
         /// @return Whether the stream was successfully created.
-        bool init(PortAudioOutputCallbackFn callback) override;
+        Source stream(PortAudioOutputCallbackFn callback) override;
 
         /// @brief Starts the stream.
         void start() override;
@@ -41,16 +44,10 @@ namespace cubos::core::al
         /// @brief Prints device information by its index.
         static void printDeviceInformation(int deviceIndex);
 
-        Buffer createBuffer() override;
-        Source createSource() override;
-        void setListenerPosition(const glm::vec3& position) override;
-        void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up) override;
-        void setListenerVelocity(const glm::vec3& velocity) override;
-
         PortAudioOutputCallbackFn callback;
 
     private:
-        int outputDeviceID;
-        PaStream* stream;
+        int mOutputDeviceID;
+        PaStream* mStream;
     };
 } // namespace cubos::core::al

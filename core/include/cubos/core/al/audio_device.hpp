@@ -54,8 +54,8 @@ namespace cubos::core::al
     {
     public:
         /// Type alias for a user output callback function.
-        using PortAudioOutputCallbackFn = core::memory::Function<int(void* output, unsigned long frameCount,
-                                                                     unsigned long statusFlags, void* userData)>;
+        using PortAudioOutputCallbackFn =
+            core::memory::Function<int(void* output, unsigned long frameCount, unsigned long statusFlags)>;
 
         AudioDevice() = default;
         virtual ~AudioDevice() = default;
@@ -66,9 +66,11 @@ namespace cubos::core::al
         /// @brief Creates the stream.
         /// @param callback Supplied function that is responsible for processing and filling input and output buffers.
         /// @return Whether the stream was successfully created.
-        virtual bool init(PortAudioOutputCallbackFn callback) = 0;
+        virtual Source stream(PortAudioOutputCallbackFn callback) = 0;
 
-        /// @brief Starts the stream.
+        // TODO:
+
+        /// @brief Starts the stream. // fixme: SOURCE responsible
         virtual void start() = 0;
 
         /// @brief Stops the stream.
@@ -93,27 +95,6 @@ namespace cubos::core::al
 
         /// @brief Prints device information by its index.
         static void printDeviceInformation(int deviceIndex);
-
-        /// @brief Creates a new audio buffer
-        /// @return Handle of the new buffer.
-        virtual Buffer createBuffer() = 0;
-
-        /// @brief Creates a new audio source.
-        /// @return Handle of the new source.
-        virtual Source createSource() = 0;
-
-        /// @brief Sets the position of the listener.
-        /// @param position Position.
-        virtual void setListenerPosition(const glm::vec3& position) = 0;
-
-        /// @brief Sets the orientation of the listener.
-        /// @param forward Forward direction of the listener.
-        /// @param up Up direction of the listener.
-        virtual void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up) = 0;
-
-        /// @brief Sets the velocity of the listener. Used to implement the doppler effect.
-        /// @param velocity Velocity of the listener.
-        virtual void setListenerVelocity(const glm::vec3& velocity) = 0;
     };
 
     /// @brief Namespace to store the abstract types implemented by the audio device implementations.
@@ -136,7 +117,7 @@ namespace cubos::core::al
             Buffer() = default;
         };
 
-        /// @brief Abstract audio source.
+        /// @brief Abstract audio source/stream.
         class Source
         {
         public:
