@@ -8,13 +8,14 @@
 #include <string>
 #include <vector>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/memory/type_map.hpp>
 #include <cubos/core/reflection/type_registry.hpp>
 
 namespace cubos::core::ecs
 {
     /// @brief Identifies a data type registered in the world.
-    struct DataTypeId
+    struct CUBOS_CORE_API DataTypeId
     {
         uint32_t inner; ///< Data type identifier.
 
@@ -27,13 +28,13 @@ namespace cubos::core::ecs
     };
 
     /// @brief Hash functor for @ref DataTypeId.
-    struct DataTypeIdHash
+    struct CUBOS_CORE_API DataTypeIdHash
     {
         std::size_t operator()(const DataTypeId& id) const;
     };
 
     /// @brief Registry of all data types used in an ECS world.
-    class Types final
+    class CUBOS_CORE_API Types final
     {
     public:
         /// @brief Registers a component type.

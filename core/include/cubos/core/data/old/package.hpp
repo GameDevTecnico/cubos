@@ -37,7 +37,7 @@ namespace cubos::core::data::old
     ///     // myDeserializableObject will hold the same data as
     ///     // mySerilizableObject but with the position set to (1, 2, 3).
     ///
-    class Package final
+    class CUBOS_CORE_API Package final
     {
     public:
         /// Used to identify the type of the packaged data.
@@ -260,7 +260,7 @@ namespace cubos::core::data::old
     };
 
     /// Responsible for deserializing packages into types.
-    class Unpackager : public Deserializer
+    class CUBOS_CORE_API Unpackager : public Deserializer
     {
     public:
         /// @param pkg The package to read from.
@@ -310,7 +310,7 @@ namespace cubos::core::data::old
     {
         /// Responsible for serializing types into packages.
         /// Should never be used directly.
-        class Packager : public Serializer
+        class CUBOS_CORE_API Packager : public Serializer
         {
         public:
             // Implement interface methods.

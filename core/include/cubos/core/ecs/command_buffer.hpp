@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/memory/function.hpp>
 
@@ -23,7 +24,7 @@ namespace cubos::core::ecs
 
     /// @brief Stores commands to execute them later.
     /// @ingroup core-ecs
-    class CommandBuffer final
+    class CUBOS_CORE_API CommandBuffer final
     {
     public:
         /// @brief Constructs.

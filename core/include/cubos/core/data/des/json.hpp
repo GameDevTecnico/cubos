@@ -15,7 +15,7 @@ namespace cubos::core::data
     /// Before deserializing any data, a JSON object must be fed to the deserializer.
     ///
     /// @ingroup core-data-des
-    class JSONDeserializer : public Deserializer
+    class CUBOS_CORE_API JSONDeserializer : public Deserializer
     {
     public:
         /// @brief Constructs.

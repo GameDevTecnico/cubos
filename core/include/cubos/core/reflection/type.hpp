@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::reflection
@@ -19,11 +20,14 @@ namespace cubos::core::reflection
     ///
     /// @see This class holds the data returned by the @ref reflect() function.
     /// @ingroup core-reflection
-    class Type final
+    class CUBOS_CORE_API Type final
     {
     public:
+        /// @name Forbid any kind of copying.
+        /// @{
         Type(const Type&) = delete;
-        Type(Type&&) = delete;
+        Type& operator=(const Type&) = delete;
+        /// @}
 
         /// @brief Constructs with a type the given name.
         /// @param name Name of the type.

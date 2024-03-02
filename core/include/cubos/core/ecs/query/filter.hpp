@@ -16,7 +16,7 @@ namespace cubos::core::ecs
     /// @brief Used to find matches for the given query terms. Essentially contains the non-templated part of the query
     /// logic.
     /// @ingroup core-ecs-query
-    class QueryFilter
+    class CUBOS_CORE_API QueryFilter
     {
     public:
         /// @brief Can be iterated to view the query matches.
@@ -66,7 +66,7 @@ namespace cubos::core::ecs
         QueryNode::TargetMask mNodePins[QueryNode::MaxCursorCount];
     };
 
-    class QueryFilter::View
+    class CUBOS_CORE_API QueryFilter::View
     {
     public:
         /// @brief Used to iterate over the query matches.
@@ -118,7 +118,7 @@ namespace cubos::core::ecs
         bool mDead{false};
     };
 
-    class QueryFilter::View::Iterator
+    class CUBOS_CORE_API QueryFilter::View::Iterator
     {
     public:
         /// @brief Output structure of the iterator.

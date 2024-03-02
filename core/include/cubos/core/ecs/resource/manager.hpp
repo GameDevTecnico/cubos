@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <utility>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
 
@@ -75,11 +76,19 @@ namespace cubos::core::ecs
     /// Used internally by @ref World.
     ///
     /// @ingroup core-ecs-resource
-    class ResourceManager final
+    class CUBOS_CORE_API ResourceManager final
     {
     public:
-        ResourceManager() = default;
         ~ResourceManager();
+
+        /// @brief Constructs.
+        ResourceManager() = default;
+
+        /// @name Forbid copying.
+        /// @{
+        ResourceManager(const ResourceManager&) = delete;
+        ResourceManager& operator=(const ResourceManager&) = delete;
+        /// @}
 
         /// @brief Registers a new resource type in the resource manager.
         ///

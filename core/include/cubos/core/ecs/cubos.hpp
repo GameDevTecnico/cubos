@@ -47,7 +47,7 @@ namespace cubos::core::ecs
 
     /// @brief Used to chain configurations related to tags.
     /// @ingroup core-ecs
-    class TagBuilder
+    class CUBOS_CORE_API TagBuilder
     {
     public:
         /// @brief Construct.
@@ -56,6 +56,12 @@ namespace cubos::core::ecs
         /// @param tags Vector which stores the tags for this dispatcher.
         /// @return Reference to this object, for chaining.
         TagBuilder(World& world, core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
+
+        /// @name Forbid copying.
+        /// @{
+        TagBuilder(const TagBuilder&) = delete;
+        TagBuilder& operator=(const TagBuilder&) = delete;
+        /// @}
 
         /// @brief Sets the current tag to be executed before another tag.
         /// @param tag Tag to be executed before.
@@ -95,7 +101,7 @@ namespace cubos::core::ecs
     /// @brief Represents the engine itself, and exposes the interface with which the game
     /// developer interacts with. Ties up all the different parts of the engine together.
     /// @ingroup core-ecs
-    class Cubos final
+    class CUBOS_CORE_API Cubos final
     {
     public:
         /// @brief Used to create new systems.
@@ -113,6 +119,12 @@ namespace cubos::core::ecs
         /// @param argc Argument count.
         /// @param argv Argument array.
         Cubos(int argc, char** argv);
+
+        /// @name Forbid copying.
+        /// @{
+        Cubos(const Cubos&) = delete;
+        Cubos& operator=(const Cubos&) = delete;
+        /// @}
 
         /// @brief Adds a new plugin to the engine. If the plugin had already been added, nothing
         /// happens. A plugin is just a function that operates on the Cubos object, further
@@ -201,7 +213,7 @@ namespace cubos::core::ecs
         std::vector<std::string> mStartupTags;
     };
 
-    class Cubos::SystemBuilder
+    class CUBOS_CORE_API Cubos::SystemBuilder
     {
     public:
         /// @brief Constructs.
@@ -209,6 +221,12 @@ namespace cubos::core::ecs
         /// @param dispatcher Dispatcher to add the system to.
         /// @param name Debug name.
         SystemBuilder(World& world, Dispatcher& dispatcher, std::string name);
+
+        /// @name Forbid copying.
+        /// @{
+        SystemBuilder(const SystemBuilder&) = delete;
+        SystemBuilder& operator=(const SystemBuilder&) = delete;
+        /// @}
 
         /// @brief Adds a tag to the system.
         /// @param tag Tag.
@@ -331,13 +349,19 @@ namespace cubos::core::ecs
         int mDefaultTarget{0};
     };
 
-    class Cubos::ObserverBuilder
+    class CUBOS_CORE_API Cubos::ObserverBuilder
     {
     public:
         /// @brief Constructs.
         /// @param world World.
         /// @param name Debug name.
         ObserverBuilder(World& world, std::string name);
+
+        /// @name Forbid copying.
+        /// @{
+        ObserverBuilder(const ObserverBuilder&) = delete;
+        ObserverBuilder& operator=(const ObserverBuilder&) = delete;
+        /// @}
 
         /// @brief Triggers the observer whenever the given component is added to an entity.
         /// @param type Component type.

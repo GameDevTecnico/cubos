@@ -14,11 +14,17 @@ namespace cubos::core::ecs
 {
     /// @brief Stores the dense tables of a given world.
     /// @ingroup core-ecs-table
-    class DenseTableRegistry final
+    class CUBOS_CORE_API DenseTableRegistry final
     {
     public:
         /// @brief Constructs.
         DenseTableRegistry();
+
+        /// @name Forbid any kind of copying.
+        /// @{
+        DenseTableRegistry(const DenseTableRegistry&) = delete;
+        DenseTableRegistry& operator=(const DenseTableRegistry&) = delete;
+        /// @}
 
         /// @brief Checks if the given archetype has a dense table.
         /// @param archetype Archetype identifier.

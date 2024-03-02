@@ -12,7 +12,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Node which forces a given target to belong to a set of archetypes.
-    class QueryArchetypeNode final : public QueryNode
+    class CUBOS_CORE_API QueryArchetypeNode final : public QueryNode
     {
     public:
         /// @brief Constructs.

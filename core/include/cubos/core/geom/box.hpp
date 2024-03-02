@@ -6,6 +6,7 @@
 
 #include <glm/vec3.hpp>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/reflection/reflect.hpp>
@@ -14,7 +15,7 @@ namespace cubos::core::geom
 {
     /// @brief Represents a box shape.
     /// @ingroup core-geom
-    struct Box
+    struct CUBOS_CORE_API Box
     {
         CUBOS_REFLECT;
 

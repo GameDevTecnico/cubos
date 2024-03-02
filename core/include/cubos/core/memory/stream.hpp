@@ -8,6 +8,8 @@
 #include <cstdint>
 #include <string>
 
+#include <cubos/core/api.hpp>
+
 namespace cubos::core::memory
 {
     /// @brief Stream seek origin.
@@ -29,7 +31,7 @@ namespace cubos::core::memory
     /// files into the executable and not have to worry about the code that reads them.
     ///
     /// @ingroup core-memory
-    class Stream
+    class CUBOS_CORE_API Stream
     {
     public:
         virtual ~Stream() = default;
@@ -40,8 +42,11 @@ namespace cubos::core::memory
         /// @brief Move constructs.
         Stream(Stream&&) = default;
 
-        /// @brief Forbid copy construction.
+        /// @name Forbid any kind of copying.
+        /// @{
         Stream(const Stream&) = delete;
+        Stream& operator=(const Stream&) = delete;
+        /// @}
 
         static Stream& stdIn;  ///< Stream wrapper for `stdin`.
         static Stream& stdOut; ///< Stream wrapper for `stdout`.

@@ -11,9 +11,18 @@ namespace cubos::core::ecs
 {
     /// @brief Stores the tables of a given world.
     /// @ingroup core-ecs-table
-    class Tables final
+    class CUBOS_CORE_API Tables final
     {
     public:
+        /// @brief Constructs.
+        Tables() = default;
+
+        /// @name Forbid any kind of copying.
+        /// @{
+        Tables(const Tables&) = delete;
+        Tables& operator=(const Tables&) = delete;
+        /// @}
+
         /// @brief Gets a reference to the dense table registry.
         /// @return Reference to dense table registry.
         DenseTableRegistry& dense();

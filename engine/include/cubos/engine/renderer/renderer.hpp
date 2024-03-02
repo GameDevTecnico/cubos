@@ -68,8 +68,11 @@ namespace cubos::engine
         /// @param size Size of the window.
         BaseRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
 
-        /// @brief Deleted copy constructor.
+        /// @name Forbid any kind of copying.
+        /// @{
         BaseRenderer(const BaseRenderer&) = delete;
+        BaseRenderer& operator=(const BaseRenderer&) = delete;
+        /// @}
 
         /// @brief Uploads a grid to the GPU and returns an handle which can be used to draw it.
         /// @param grid Grid to upload.

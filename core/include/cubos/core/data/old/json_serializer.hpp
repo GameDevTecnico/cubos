@@ -12,7 +12,7 @@ namespace cubos::core::data::old
     /// Implementation of the abstract Serializer class for serializing to JSON.
     /// Each time a top-level primitive/object/array/dictionary is written, its JSON output is written to the underlying
     /// stream.
-    class JSONSerializer : public Serializer
+    class CUBOS_CORE_API JSONSerializer : public Serializer
     {
     public:
         /// @param stream The stream to serialize to.

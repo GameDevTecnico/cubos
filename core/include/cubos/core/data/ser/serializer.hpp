@@ -6,6 +6,7 @@
 
 #include <unordered_map>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/memory/function.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
@@ -23,10 +24,20 @@ namespace cubos::core::data
     /// at least the primitive types.
     ///
     /// @ingroup core-data-ser
-    class Serializer
+    class CUBOS_CORE_API Serializer
     {
     public:
         virtual ~Serializer() = default;
+
+        /// @brief Default constructs.
+        Serializer() = default;
+
+        /// @name Forbid any kind of copying.
+        /// @brief Deleted as the hooks may contain references to the serializer.
+        /// @{
+        Serializer(const Serializer&) = delete;
+        Serializer& operator=(const Serializer&) = delete;
+        /// @}
 
         /// @brief Function type for serialization hooks.
         using Hook = memory::Function<bool(const void*)>;

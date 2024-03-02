@@ -13,7 +13,7 @@ namespace cubos::core::ecs
     class World;
 
     /// @brief Query filter step, which receives an iterator and advances it until it points to a valid match.
-    class QueryNode
+    class CUBOS_CORE_API QueryNode
     {
     public:
         /// @brief Target mask type.

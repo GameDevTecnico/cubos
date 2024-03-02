@@ -9,7 +9,7 @@
 namespace cubos::core::data::old
 {
     /// Implementation of the abstract Deserializer class for deserializing from JSON.
-    class JSONDeserializer : public Deserializer
+    class CUBOS_CORE_API JSONDeserializer : public Deserializer
     {
     public:
         /// @param src The string to deserialize from. Must correspond to a JSON literal/object/array.

@@ -6,6 +6,7 @@
 
 #include <unordered_map>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/memory/function.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
@@ -23,7 +24,7 @@ namespace cubos::core::data
     /// at least the primitive types.
     ///
     /// @ingroup core-data-des
-    class Deserializer
+    class CUBOS_CORE_API Deserializer
     {
     public:
         virtual ~Deserializer() = default;
@@ -31,11 +32,11 @@ namespace cubos::core::data
         /// @brief Constructs.
         Deserializer() = default;
 
-        /// @name Deleted copy and move constructors.
+        /// @name Forbid any kind of copying.
         /// @brief Deleted as the hooks may contain references to the deserializer.
         /// @{
-        Deserializer(Deserializer&&) = delete;
         Deserializer(const Deserializer&) = delete;
+        Deserializer& operator=(const Deserializer&) = delete;
         /// @}
 
         /// @brief Function type for deserialization hooks.

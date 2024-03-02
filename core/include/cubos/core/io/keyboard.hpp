@@ -6,6 +6,7 @@
 
 #include <string>
 
+#include <cubos/core/api.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::io
@@ -131,7 +132,7 @@ namespace cubos::core::io
 
     /// @brief Keyboard key code and modifier flags.
     /// @ingroup core-io
-    struct KeyWithModifiers
+    struct CUBOS_CORE_API KeyWithModifiers
     {
         CUBOS_REFLECT;
 
@@ -167,5 +168,5 @@ namespace cubos::core::io
     }
 } // namespace cubos::core::io
 
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Key);
-CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Modifiers);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::Key);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::io::Modifiers);

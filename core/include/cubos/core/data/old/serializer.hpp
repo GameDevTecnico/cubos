@@ -19,7 +19,7 @@ namespace cubos::core::data::old
     /// @param obj The object to serialize.
     /// @param name The name of the object.
     template <typename T>
-    void serialize(Serializer& ser, const T& obj, const char* name);
+    CUBOS_CORE_API void serialize(Serializer& ser, const T& obj, const char* name);
 
     /// Abstract class for serializing data in a format-agnostic way.
     /// Each serializer implementation is responsible for implementing its own primitive
@@ -49,7 +49,7 @@ namespace cubos::core::data::old
     ///     private:
     ///         int32_t a;
     ///     };
-    class Serializer
+    class CUBOS_CORE_API Serializer
     {
     public:
         Serializer();
@@ -194,7 +194,7 @@ namespace cubos::core::data::old
     /// @param ser The serializer.
     /// @param obj The value to serialize.
     /// @param name The name of the value (optional).
-    void serialize(Serializer& ser, std::vector<bool>::const_reference obj, const char* name);
+    CUBOS_CORE_API void serialize(Serializer& ser, std::vector<bool>::const_reference obj, const char* name);
 
     /// Overload for serializing char arrays.
     /// Necessary because literal strings are treated as char arrays by the compiler.

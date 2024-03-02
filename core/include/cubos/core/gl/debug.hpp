@@ -18,7 +18,7 @@ namespace cubos::core::gl
     /// @brief Singleton with static methods used to draw primitive objects on screen for debugging
     /// purposes.
     /// @ingroup core-gl
-    class Debug
+    class CUBOS_CORE_API Debug
     {
     public:
         /// @brief Initializes the debug rendering system.
@@ -95,11 +95,14 @@ namespace cubos::core::gl
 
         static gl::RenderDevice* renderDevice;
         static gl::ConstantBuffer mvpBuffer;
-        static gl::ShaderBindingPoint mvpBindingPoint, colorBindingPoint;
+        static gl::ShaderBindingPoint mvpBindingPoint;
+        static gl::ShaderBindingPoint colorBindingPoint;
         static gl::ShaderPipeline pipeline;
 
-        static gl::RasterState fillRasterState, wireframeRasterState;
-        static DebugDrawObject objCube, objSphere;
+        static gl::RasterState fillRasterState;
+        static gl::RasterState wireframeRasterState;
+        static DebugDrawObject objCube;
+        static DebugDrawObject objSphere;
 
         static std::list<DebugDrawRequest> requests;
 
