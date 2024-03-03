@@ -94,6 +94,13 @@ namespace cubos::core::ecs
             return *it;
         }
 
+        /// @brief Returns whether the query is empty.
+        /// @return True if the query is empty, false otherwise.
+        bool empty()
+        {
+            return this->begin() == this->end();
+        }
+
     private:
         typename QueryData<Ts...>::View mView;
     };
