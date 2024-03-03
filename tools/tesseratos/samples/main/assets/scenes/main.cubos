@@ -9,6 +9,68 @@
         "y": 1,
         "z": 1
       }
-    }
+    },
+    "parent": {
+      "cubos::engine::Position": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      }
+    },
+    "child1": {
+      "cubos::engine::Position": {
+        "x": 3,
+        "y": 3,
+        "z": 3
+      },
+      "cubos::engine::ChildOf@parent": {}
+    },
+    "chil2": {
+      "cubos::engine::Position": {
+        "x": 4,
+        "y": 4,
+        "z": 4
+      },
+      "cubos::engine::ChildOf@parent": {}
+    },
+    "chil3": {
+      "cubos::engine::Position": {
+        "x": 5,
+        "y": 5,
+        "z": 5
+      },
+      "cubos::engine::ChildOf@parent": {}
+    },
+    "parent2": {
+      "cubos::engine::Position": {
+        "x": 6,
+        "y": 6,
+        "z": 6
+      }
+    },
+    "child4": {
+      "cubos::engine::Position": {
+        "x": 7,
+        "y": 7,
+        "z": 7
+      },
+      "cubos::engine::ChildOf@parent2": {}
+    },
+    "chil5": {
+      "cubos::engine::Position": {
+        "x": 8,
+        "y": 8,
+        "z": 8
+      },
+      "cubos::engine::ChildOf@parent2": {}
+    },
+    "chil6": {
+      "cubos::engine::Position": {
+        "x": 9,
+        "y": 9,
+        "z": 9
+      },
+      "cubos::engine::ChildOf@parent2": {}
+    } 
   }
 }
