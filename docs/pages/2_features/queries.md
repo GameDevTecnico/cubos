@@ -109,6 +109,20 @@ Notice that this time we include `.entity` and `.with<Health>` on the explicit t
 Terms before `.related` are assigned to the target `0`, the relation is assigned to `0, 1` and the terms after it to `1`.
 We could also set those targets manually, if we wanted to, by simply passing them as arguments to the terms (e.g. `.with<Health>(1)`).
 
+For example, iterating over all pairs of entities could be done through:
+
+```cpp
+cubos.system("for each pair of entities")
+     .entity(0)
+     .entity(1)
+     .call([](Query<Entity, Entity> query) {
+        for (auto [first, second] : query)
+        {
+            // ...
+        }
+     });
+```
+
 ## Tree Traversal
 
 Tree relations form hierarchies, and the query system provides a way to traverse them in specific BFS order, if necessary.
