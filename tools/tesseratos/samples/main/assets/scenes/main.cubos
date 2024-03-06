@@ -17,7 +17,7 @@
         "z": 2
       }
     },
-    "child1": {
+    "child": {
       "cubos::engine::Position": {
         "x": 3,
         "y": 3,
@@ -25,7 +25,7 @@
       },
       "cubos::engine::ChildOf@parent": {}
     },
-    "chil2": {
+    "child1": {
       "cubos::engine::Position": {
         "x": 4,
         "y": 4,
@@ -33,7 +33,7 @@
       },
       "cubos::engine::ChildOf@parent": {}
     },
-    "chil3": {
+    "child2": {
       "cubos::engine::Position": {
         "x": 5,
         "y": 5,
@@ -41,36 +41,44 @@
       },
       "cubos::engine::ChildOf@parent": {}
     },
-    "parent2": {
+    "parent1": {
       "cubos::engine::Position": {
         "x": 6,
         "y": 6,
         "z": 6
       }
     },
-    "child4": {
+    "child3": {
       "cubos::engine::Position": {
         "x": 7,
         "y": 7,
         "z": 7
       },
-      "cubos::engine::ChildOf@parent2": {}
+      "cubos::engine::ChildOf@parent1": {}
     },
-    "chil5": {
+    "parent2": {
       "cubos::engine::Position": {
         "x": 8,
         "y": 8,
         "z": 8
       },
-      "cubos::engine::ChildOf@parent2": {}
+      "cubos::engine::ChildOf@parent1": {}
     },
-    "chil6": {
+    "child4": {
       "cubos::engine::Position": {
         "x": 9,
         "y": 9,
         "z": 9
       },
+      "cubos::engine::ChildOf@parent1": {}
+    },
+    "child5": {
+      "cubos::engine::Position": {
+        "x": 10,
+        "y": 10,
+        "z": 10
+      },
       "cubos::engine::ChildOf@parent2": {}
-    } 
+    }
   }
 }
