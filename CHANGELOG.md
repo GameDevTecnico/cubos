@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New feature guide focused on queries (#995, **@RiscadoA**).
 - ECS Statistics tesseratos plugin (#1024, **@RiscadoA**).
 - Global position, rotation and scale getters (#1002, **@DiogoMendonc-a**).
+- Show childOf hierarchy on the world inspector (#991, **@diogomsmiranda**).
 
 ### Fixed
 
