@@ -14,6 +14,9 @@ namespace tesseratos
     /// @defgroup tesseratos-transform-gizmo-plugin Transform gizmo
     /// @ingroup tesseratos
     /// @brief Add a gizmo that allows changing an entity's position.
+    ///
+    /// ## Settings
+    /// - `"transformGizmo.useLocalAxis"` - whether to use local instead of global axis (default: `true`).
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
