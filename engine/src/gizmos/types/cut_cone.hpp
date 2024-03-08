@@ -47,18 +47,35 @@ namespace cubos::engine
 
             glm::vec3 n = glm::normalize(mPointB - mPointA);
             glm::vec3 p;
-            if (n[0] != n[1])
+
+            if (n[0] != 0 && n[1] != 0)
             {
-                p = {n[1], -n[0], n[2]};
+                p = {-n[1], n[0], 0};
             }
-            else if (n[0] != n[2])
+            else if (n[0] == 0 && n[1] != 0)
             {
-                p = {-n[2], n[1], n[0]};
+                if (n[2] != 0)
+                {
+                    p = {1, 0, -n[1] / n[2]};
+                }
+                else
+                {
+                    p = {1, 0, 0};
+                }
             }
             else
             {
-                p = {n[0], -n[2], n[1]};
+                if (n[2] != 0)
+                {
+                    p = {0, 1, -n[1] / n[2]};
+                }
+                else
+                {
+                    p = {0, 1, 0};
+                }
             }
+
+            p = glm::normalize(p);
 
             glm::vec3 pA = p * mRadiusA;
 
