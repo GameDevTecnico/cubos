@@ -25,6 +25,9 @@ quick overview, this is the place to go. You can also take a look at the
 In the @ref examples "examples page" you can find examples on how to use
 specific parts of the engine.
 
+Consider taking a look at the @ref exercises "exercises page" if you want some
+challenges to help you understand how to work with **CUBOS**.
+
 If you're looking to contribute to the project, make sure you read the 
 @ref contribution "contribution guidelines", which introduces you to the
 project's conventions and code style.
