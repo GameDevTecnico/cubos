@@ -164,8 +164,6 @@ OALAudioDevice::~OALAudioDevice()
     alcMakeContextCurrent(nullptr);
     alcDestroyContext(context);
     alcCloseDevice(device);
-#else
-    UNSUPPORTED();
 #endif // WITH_OPENAL
 }
 

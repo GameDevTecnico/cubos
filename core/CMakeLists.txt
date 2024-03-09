@@ -8,7 +8,7 @@ if(WITH_GLFW)
 	option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
 endif()
 
-option(WITH_OPENAL "With OpenAL?" ON)
+option(WITH_OPENAL "With OpenAL?" OFF)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 
 set(CUBOS_CORE_ECS_MAX_COMPONENTS "63" CACHE STRING "The maximum number of components registered in an ECS world.")
