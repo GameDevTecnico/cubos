@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Physics &raquo; Gravity module | CUBOS. Docs</title>
+  <title>Exercises | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,83 +46,17 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__physics-plugin.html">Physics</a> &raquo;</span>
-          Gravity <span class="m-thin">module</span></h1>
-        <p>Adds gravity to particles.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li><a href="#autotoc_md93">Resources</a></li>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#func-members">Functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<section id="autotoc_md93"><h3><a href="#autotoc_md93">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">Gravity</a> - holds the global value of gravity.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="plugins_2gravity_8hpp.html" class="m-doc">gravity.hpp</a></dt>
-            <dd>Gravity plugin, resource <a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">cubos::<wbr />engine::<wbr />Gravity</a>.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc">gravityPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gae4277a21b693f34dc7a5e15f29976086" class="m-doc">solverPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga3b5a6fa98c210f215a8edebfb7a7b330"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc-self">gravityPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugins_2gravity_8hpp.html">&lt;engine/physics/plugins/gravity.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="gae4277a21b693f34dc7a5e15f29976086"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gae4277a21b693f34dc7a5e15f29976086" class="m-doc-self">solverPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="solver_8hpp.html">&lt;engine/physics/solver/solver.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-        </section>
+          Exercises
+        </h1>
+<p><a name="md_docs_pages_4_exercises_main"></a> This page contains challenges designed to help you start working with <strong>CUBOS</strong>. We recommend that you start by reading the <a href="getting-started.html" class="m-doc">getting started</a> and <a href="features.html" class="m-doc">features</a> guides.</p><section id="autotoc_md40"><h2><a href="#autotoc_md40">Creating a new engine sample</a></h2><p>Before moving on to the actual exercises, lets start by creating your own empty sample, which will be expanded upon the next steps.</p><p>Start by creating a new folder in the <code>engine/samples</code> directory, i.e., <code>engine/samples/my-own-sample</code>. Make sure to add a <code>main.cpp</code> to that folder, with the following base code:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/prelude.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">cubos</span><span class="o">::</span><span class="nn">engine</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">      </span><span class="n">Cubos</span><span class="w"> </span><span class="n">cubos</span><span class="p">{};</span>
+<span class="w">      </span><span class="n">cubos</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span></pre><p>The final step is to add your new sample to the CMake configuration, at <code>engine/samples/CMakeLists.txt</code>. Open that file, and add a new line of the form <code>make_sample(DIR &quot;my-own-sample&quot; ASSETS)</code>.</p><p>If you now reconfigure CMake, you should be able to launch the target <code>engine-sample.my-own-sample</code>. Don&#x27;t worry if nothing shows up yet - in <strong>CUBOS</strong> you only get what you ask for, and in the code above we didn&#x27;t do anything except run an empty application.</p></section><section id="autotoc_md41"><h2><a href="#autotoc_md41">Showing a cube</a></h2><p>Try making your sample open a window and show a simple voxel cube! To do this, you will need to:</p><ol><li>Add the <a href="group__renderer-plugin.html" class="m-doc">Renderer plugin</a>.</li><li>Create a <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>.</li><li>Create a <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>.</li><li>Create a <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a>.</li><li>Create a <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> and add it to <a href="structcubos_1_1engine_1_1ActiveCameras.html" class="m-doc">ActiveCameras</a>.</li></ol><p>You can take inspiration from the <a href="examples-engine-hello-cubos.html" class="m-doc">Hello CUBOS</a> <a href="examples-engine-renderer.html" class="m-doc">Renderer</a> samples.</p></section><section id="autotoc_md42"><h2><a href="#autotoc_md42">Replace the cube by an actual voxel model</a></h2><p>Of course we don&#x27;t expect developers to generate their voxel models through code! Change your sample to show an actual voxel model, created and stored in a <code>.qb</code> file. You can create one using <a href="https://ephtracy.github.io/">MagicaVoxel</a>, or simply download an existing model from the internet.</p><p><strong>CUBOS</strong> doesn&#x27;t handle <code>.qb</code> files directly: it only supports <code>.grd</code>&#x27;s and <code>.pal</code>&#x27;s, our own formats for voxel grids and palettes. You can use <strong>QUADRADOS</strong> to convert a <code>.qb</code> to a <code>.grd</code> and <code>.pal</code>. Check out its <a href="features-quadrados.html" class="m-doc">feature guide</a> for more information.</p><p>Take a look at the <a href="examples-engine-voxels.html" class="m-doc">Voxels</a> sample to figure out how you can load those files into the actual sample.</p></section><section id="autotoc_md43"><h2><a href="#autotoc_md43">Move the voxel model on input</a></h2><p>Make the model you added previously move when some buttons are pressed. You will need to:</p><ol><li>Add the <a href="group__input-plugin.html" class="m-doc">Input plugin</a>.</li><li>Create an input bindings asset.</li><li>Add a system which uses the <a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a> resource to move the model.</li></ol><p>Check out the <a href="examples-engine-input.html" class="m-doc">Input</a> sample for inspiration.</p></section>
       </div>
     </div>
   </div>
