@@ -86,7 +86,8 @@ function(cubos_common_target_options target)
             /wd4996  # Disable warning about deprecated functions
             /wd4458  # Disable warning about shadowing member variables
             /wd4456  # Disable warning about shadowing local variables
-            /wd4335> # Disable warning about Mac file format
+            /wd4335  # Disable warning about Mac file format
+            /wd4702> # Disable warning about unreachable code
             
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
             -Wall
