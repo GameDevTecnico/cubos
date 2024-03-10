@@ -6,8 +6,10 @@
 
 #include <vector>
 
+#include <cubos/core/reflection/type_registry.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/assets/bridges/file.hpp>
 #include <cubos/engine/voxels/material.hpp>
 
 namespace cubos::engine
@@ -104,6 +106,9 @@ namespace cubos::engine
         /// @return Iterator.
         Iterator end();
 
+        bool loadFrom(core::memory::Stream& stream);
+        bool writeTo(core::memory::Stream& stream) const;
+
     private:
         friend void core::data::old::serialize(core::data::old::Serializer& /*serializer*/,
                                                const VoxelPalette& /*palette*/, const char* /*name*/);
@@ -124,5 +129,29 @@ namespace cubos::engine
 
     private:
         std::vector<VoxelMaterial>::iterator mIter;
+    };
+
+    /// @brief Bridge which loads and saves @ref Palette assets.
+    ///
+    /// Palettes are composed by n materials. They're stored as JSON arrays
+    ///
+    /// @ingroup scene-plugin
+    class PaletteBridge : public FileBridge
+    {
+    public:
+        /// @brief Constructs a bridge.
+        /// @param materials VoxelMaterial type registry.
+        PaletteBridge(core::reflection::TypeRegistry materials);
+
+        /// @brief Returns the type registry used to deserialize materials.
+        /// @return VoxelMaterial type registry.
+        core::reflection::TypeRegistry& materials();
+
+    protected:
+        bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
+        bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
+
+    private:
+        core::reflection::TypeRegistry mMaterials;
     };
 } // namespace cubos::engine

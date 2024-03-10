@@ -3,8 +3,12 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/reflection/type_registry.hpp>
 
 #include <cubos/engine/voxels/palette.hpp>
+
+using cubos::core::memory::Stream;
+using cubos::core::reflection::TypeRegistry;
 
 using namespace cubos::engine;
 
@@ -200,4 +204,57 @@ void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelPalett
         palette.mMaterials[index - 1] = mat;
     }
     deserializer.endDictionary();
+}
+
+bool VoxelPalette::loadFrom(Stream& stream)
+{
+    for (;!stream.eof();)
+    {
+        float r, g, b, a;
+        stream.parse(r);
+        stream.parse(g);
+        stream.parse(b);
+        stream.parse(a);
+        mMaterials.push_back({{r,g,b,a}});
+    }
+    return true;
+}
+
+bool VoxelPalette::writeTo(Stream& stream) const
+{
+    for (const auto& material : mMaterials)
+    {
+        stream.print(material.color.r);
+        stream.print(material.color.g);
+        stream.print(material.color.b);
+        stream.print(material.color.a);
+    }
+    return true;
+}
+
+PaletteBridge::PaletteBridge(TypeRegistry materials)
+    : FileBridge(core::reflection::reflect<VoxelPalette>())
+    , mMaterials{std::move(materials)}
+{
+}
+
+TypeRegistry& PaletteBridge::materials()
+{
+    return mMaterials;
+}
+
+bool PaletteBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
+{
+    VoxelPalette palette{};
+    if (palette.loadFrom(stream)) {
+        assets.store(handle, std::move(palette));
+        return true;
+    }
+    return false;
+}
+
+bool PaletteBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
+{
+    auto palette = assets.read<VoxelPalette>(handle);
+    return palette->writeTo(stream);
 }
