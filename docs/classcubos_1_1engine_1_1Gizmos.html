@@ -102,6 +102,13 @@
             </dt>
             <dd>Draws a filled box gizmo.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa027da4dfd3357172cec9f328ad3b4bc" class="m-doc">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              const glm::mat4&amp; transform,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a filled box gizmo.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a03a812de0d4c1e9f5948ea710a7f46c7" class="m-doc">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 firstBaseCenter,
               float firstBaseRadius,
@@ -308,6 +315,38 @@
                 <tr>
                   <td>oppositeCorner</td>
                   <td>The opposite corner of the box to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa027da4dfd3357172cec9f328ad3b4bc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa027da4dfd3357172cec9f328ad3b4bc" class="m-doc-self">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              const glm::mat4&amp; transform,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a filled box gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>transform</td>
+                  <td>Transformation matrix to apply to a unit-sized box centered at the origin.</td>
                 </tr>
                 <tr>
                   <td>lifespan</td>
