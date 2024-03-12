@@ -168,38 +168,55 @@ static void drawPositionGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
         zColor = {1, 1, 0};
     }
 
-    if (!useLocalAxis)
+    // Planar movement
+    if (gizmos.locked("transform_gizmo.position.xy"))
     {
-        // Planar movement
-        if (gizmos.locked("transform_gizmo.position.xy"))
-        {
-            checkPlanarMovement(position, localToWorld.worldPosition(), forwardVector, window->size(), input, pv,
-                                cameraPosition);
-            xyColor = {1, 1, 1};
-        }
-        if (gizmos.locked("transform_gizmo.position.xz"))
-        {
-            checkPlanarMovement(position, localToWorld.worldPosition(), upVector, window->size(), input, pv,
-                                cameraPosition);
-            xzColor = {1, 1, 1};
-        }
-        if (gizmos.locked("transform_gizmo.position.yz"))
-        {
-            checkPlanarMovement(position, localToWorld.worldPosition(), rightVector, window->size(), input, pv,
-                                cameraPosition);
-            yzColor = {1, 1, 1};
-        }
-
-        gizmos.color(xyColor);
-        gizmos.drawBox("transform_gizmo.position.xy", localToWorld.worldPosition() - glm::vec3{0, 0, 0.015F},
-                       localToWorld.worldPosition() + glm::vec3{0.25F, 0.25F, 0.015F});
-        gizmos.color(xzColor);
-        gizmos.drawBox("transform_gizmo.position.xz", localToWorld.worldPosition() - glm::vec3{0, 0.015F, 0},
-                       localToWorld.worldPosition() + glm::vec3{0.25F, 0.015F, 0.25F});
-        gizmos.color(yzColor);
-        gizmos.drawBox("transform_gizmo.position.yz", localToWorld.worldPosition() - glm::vec3{0.015F, 0, 0},
-                       localToWorld.worldPosition() + glm::vec3{0.015F, 0.25F, 0.25F});
+        checkPlanarMovement(position, localToWorld.worldPosition(), forwardVector, window->size(), input, pv,
+                            cameraPosition);
+        xyColor = {1, 1, 1};
     }
+    if (gizmos.locked("transform_gizmo.position.xz"))
+    {
+        checkPlanarMovement(position, localToWorld.worldPosition(), upVector, window->size(), input, pv,
+                            cameraPosition);
+        xzColor = {1, 1, 1};
+    }
+    if (gizmos.locked("transform_gizmo.position.yz"))
+    {
+        checkPlanarMovement(position, localToWorld.worldPosition(), rightVector, window->size(), input, pv,
+                            cameraPosition);
+        yzColor = {1, 1, 1};
+    }
+
+    gizmos.color(xyColor);
+    glm::mat4 transformXY =
+        glm::translate(glm::mat4(1.0F), localToWorld.worldPosition() + (rightVector + upVector) * 0.125F);
+    if (useLocalAxis)
+    {
+        transformXY = transformXY * glm::toMat4(localToWorld.worldRotation());
+    }
+    transformXY = glm::scale(transformXY, glm::vec3(0.25F, 0.25F, 0.015F));
+
+    gizmos.drawBox("transform_gizmo.position.xy", transformXY);
+    gizmos.color(xzColor);
+    glm::mat4 transformXZ =
+        glm::translate(glm::mat4(1.0F), localToWorld.worldPosition() + (rightVector + forwardVector) * 0.125F);
+    if (useLocalAxis)
+    {
+        transformXZ = transformXZ * glm::toMat4(localToWorld.worldRotation());
+    }
+    transformXZ = glm::scale(transformXZ, glm::vec3(0.25F, 0.015F, 0.25F));
+
+    gizmos.drawBox("transform_gizmo.position.xz", transformXZ);
+    gizmos.color(yzColor);
+    glm::mat4 transformYZ =
+        glm::translate(glm::mat4(1.0F), localToWorld.worldPosition() + (upVector + forwardVector) * 0.125F);
+    if (useLocalAxis)
+    {
+        transformYZ = transformYZ * glm::toMat4(localToWorld.worldRotation());
+    }
+    transformYZ = glm::scale(transformYZ, glm::vec3(0.015F, 0.25F, 0.25F));
+    gizmos.drawBox("transform_gizmo.position.yz", transformYZ);
 
     gizmos.color({0.7F, 0.7F, 0.7F});
     gizmos.drawBox("", localToWorld.worldPosition() + glm::vec3{0.03F, 0.03F, 0.03F},
