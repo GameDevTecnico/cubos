@@ -20,7 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ECS Statistics tesseratos plugin (#1024, **@RiscadoA**).
 - Global position, rotation and scale getters (#1002, **@DiogoMendonc-a**).
 - Show childOf hierarchy on the world inspector (#991, **@diogomsmiranda**).
-- Rotation Gizmo (#878, **@DiogoMendonc-a**).
+- Rotation to the Transform Gizmo (#878, **@DiogoMendonc-a**).
+- Rotated box Gizmo (#878, **@DiogoMendonc-a**).
 
 ### Fixed
 
