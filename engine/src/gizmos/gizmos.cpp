@@ -98,7 +98,16 @@ void Gizmos::drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float
 
 void Gizmos::drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan, Space space)
 {
-    push(std::make_shared<BoxGizmo>((uint32_t)mHasher(id), corner, oppositeCorner, mColor, lifespan), space);
+    push(std::make_shared<BoxGizmo>((uint32_t)mHasher(id), corner, oppositeCorner, glm::identity<glm::mat4>(), mColor,
+                                    lifespan),
+         space);
+}
+
+void Gizmos::drawBox(const std::string& id, const glm::mat4& transform, float lifespan, Space space)
+{
+    push(std::make_shared<BoxGizmo>((uint32_t)mHasher(id), glm::vec3{-0.5F, -0.5F, -0.5F}, glm::vec3{0.5F, 0.5F, 0.5F},
+                                    transform, mColor, lifespan),
+         space);
 }
 
 void Gizmos::drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan, Space space)

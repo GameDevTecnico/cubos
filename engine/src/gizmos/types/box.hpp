@@ -13,6 +13,7 @@ namespace cubos::engine
     {
         glm::vec3 mPointA;
         glm::vec3 mPointB;
+        glm::mat4 mTransform;
 
     public:
         /// @brief Constructs.
@@ -21,10 +22,12 @@ namespace cubos::engine
         /// @param oppositeCorner Point at the opposite corner of the box.
         /// @param color Color for the gizmo to be drawn in.
         /// @param lifespan Time the gizmo will remain on screen, in seconds.
-        BoxGizmo(uint32_t id, glm::vec3 corner, glm::vec3 oppositeCorner, const glm::vec3& color, float lifespan)
+        BoxGizmo(uint32_t id, glm::vec3 corner, glm::vec3 oppositeCorner, glm::mat4 transform, const glm::vec3& color,
+                 float lifespan)
             : cubos::engine::Gizmos::Gizmo(id, color, lifespan)
             , mPointA(corner)
             , mPointB(oppositeCorner)
+            , mTransform(transform)
         {
         }
 
@@ -36,14 +39,14 @@ namespace cubos::engine
                   const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
         {
             auto* verts = static_cast<glm::vec3*>(renderer.boxPrimitive.vb->map());
-            verts[0] = {mPointA[0], mPointA[1], mPointA[2]};
-            verts[1] = {mPointB[0], mPointA[1], mPointA[2]};
-            verts[2] = {mPointB[0], mPointA[1], mPointB[2]};
-            verts[3] = {mPointA[0], mPointA[1], mPointB[2]};
-            verts[4] = {mPointA[0], mPointB[1], mPointB[2]};
-            verts[5] = {mPointA[0], mPointB[1], mPointA[2]};
-            verts[6] = {mPointB[0], mPointB[1], mPointA[2]};
-            verts[7] = {mPointB[0], mPointB[1], mPointB[2]};
+            verts[0] = mTransform * glm::vec4{mPointA[0], mPointA[1], mPointA[2], 1.0F};
+            verts[1] = mTransform * glm::vec4{mPointB[0], mPointA[1], mPointA[2], 1.0F};
+            verts[2] = mTransform * glm::vec4{mPointB[0], mPointA[1], mPointB[2], 1.0F};
+            verts[3] = mTransform * glm::vec4{mPointA[0], mPointA[1], mPointB[2], 1.0F};
+            verts[4] = mTransform * glm::vec4{mPointA[0], mPointB[1], mPointB[2], 1.0F};
+            verts[5] = mTransform * glm::vec4{mPointA[0], mPointB[1], mPointA[2], 1.0F};
+            verts[6] = mTransform * glm::vec4{mPointB[0], mPointB[1], mPointA[2], 1.0F};
+            verts[7] = mTransform * glm::vec4{mPointB[0], mPointB[1], mPointB[2], 1.0F};
 
             renderer.boxPrimitive.vb->unmap();
 
