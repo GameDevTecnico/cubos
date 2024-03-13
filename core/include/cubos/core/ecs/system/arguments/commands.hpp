@@ -144,6 +144,11 @@ namespace cubos::core::ecs
         /// @return Entity identifier.
         Entity entity() const;
 
+        /// @brief Adds a @ref Name component to the entity.
+        /// @param name Entity name.
+        /// @return Reference to this builder, for chaining.
+        EntityBuilder& named(std::string name);
+
         /// @brief Adds a component to the entity.
         /// @param type Component type.
         /// @param value Component value.

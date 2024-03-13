@@ -1,5 +1,6 @@
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/command_buffer.hpp>
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/system/arguments/commands.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 
@@ -62,6 +63,11 @@ Commands::EntityBuilder::EntityBuilder(CommandBuffer& buffer, Entity entity)
 Entity Commands::EntityBuilder::entity() const
 {
     return mEntity;
+}
+
+Commands::EntityBuilder& Commands::EntityBuilder::named(std::string name)
+{
+    return this->add(Name{std::move(name)});
 }
 
 Commands::EntityBuilder& Commands::EntityBuilder::add(const reflection::Type& type, void* value)
