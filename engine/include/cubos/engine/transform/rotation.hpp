@@ -18,5 +18,11 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         glm::quat quat = glm::quat(1.0F, 0.0F, 0.0F, 0.0F); ///< Rotation of the entity.
+
+        /// @brief Returns a rotation component looking at the given direction.
+        /// @param direction Direction to look at.
+        /// @param up Up vector.
+        /// @return Rotation component.
+        static Rotation lookingAt(glm::vec3 direction, glm::vec3 up = {0.0F, 1.0F, 0.0F});
     };
 } // namespace cubos::engine
