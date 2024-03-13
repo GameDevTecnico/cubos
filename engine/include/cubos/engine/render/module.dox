@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref render-plugins module.
+
+namespace cubos::engine
+{
+    /// @defgroup render-plugins Render
+    /// @ingroup engine
+    /// @brief Provides plugins for graphics rendering.
+} // namespace cubos::engine
