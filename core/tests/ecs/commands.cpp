@@ -1,12 +1,14 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/command_buffer.hpp>
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/system/arguments/commands.hpp>
 
 #include "utils.hpp"
 
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;
+using cubos::core::ecs::Name;
 using cubos::core::ecs::World;
 
 TEST_CASE("ecs::Commands")
@@ -17,12 +19,13 @@ TEST_CASE("ecs::Commands")
     setupWorld(world);
 
     // Create an entity.
-    auto foo = cmds.create().add(IntegerComponent{0}).entity();
+    auto foo = cmds.create().named("foo").add(IntegerComponent{0}).entity();
     CHECK_FALSE(foo.isNull());
     CHECK_FALSE(world.isAlive(foo)); // Still hasn't been committed.
     cmdBuffer.commit();
     CHECK(world.isAlive(foo)); // Now it has been committed.
     CHECK(world.components(foo).has<IntegerComponent>());
+    CHECK(world.components(foo).has<Name>());
 
     SUBCASE("destroy the entity")
     {
