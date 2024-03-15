@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Wrong tranform gizmo position for entities with parents (#1003, **@DiogoMendonc-a**).
 - Free camera controller angle not being bounded (#1016, **@diogomsmiranda**).
 - Crash when meshing an empty voxel grid (**@RiscadoA**).
+- Double destruction in AnyVector::swapErase (**@RiscadoA**).
 
 ## [v0.1.0] - 2024-02-17
 
