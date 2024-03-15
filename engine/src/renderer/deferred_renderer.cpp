@@ -566,6 +566,13 @@ cubos::engine::RendererGrid DeferredRenderer::upload(const VoxelGrid& grid)
     std::vector<uint32_t> indices;
     triangulate(grid, vertices, indices);
 
+    // Handle the empty grid edge case.
+    if (vertices.empty())
+    {
+        deferredGrid->indexCount = 0;
+        return deferredGrid;
+    }
+
     // Create the vertex array, vertex buffer and index buffer.
     VertexArrayDesc vaDesc;
     vaDesc.elementCount = 3;
@@ -784,9 +791,12 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
 
         // 4.3.2. Draw the geometry.
         auto grid = std::static_pointer_cast<DeferredGrid>(drawCmd.grid);
-        mRenderDevice.setVertexArray(grid->va);
-        mRenderDevice.setIndexBuffer(grid->ib);
-        mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
+        if (grid->indexCount > 0)
+        {
+            mRenderDevice.setVertexArray(grid->va);
+            mRenderDevice.setIndexBuffer(grid->ib);
+            mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
+        }
     }
 
     if (pickingBuffer)
@@ -810,10 +820,13 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
 
             // 5.2.2. Draw the entity identifiers to the entity picking framebuffer.
             auto grid = std::static_pointer_cast<DeferredGrid>(drawCmd.grid);
-            mPickingIndexBp->setConstant(drawCmd.entityIndex);
-            mRenderDevice.setVertexArray(grid->va);
-            mRenderDevice.setIndexBuffer(grid->ib);
-            mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
+            if (grid->indexCount > 0)
+            {
+                mPickingIndexBp->setConstant(drawCmd.entityIndex);
+                mRenderDevice.setVertexArray(grid->va);
+                mRenderDevice.setIndexBuffer(grid->ib);
+                mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
+            }
         }
     }
 
