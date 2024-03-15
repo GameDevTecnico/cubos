@@ -149,9 +149,12 @@ void AnyVector::swapErase(std::size_t index)
         // If the element isn't the last one, we move the last element to its place.
         mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + mStride * index,
                                            static_cast<char*>(mData) + mStride * (mSize - 1));
+        this->pop();
     }
-
-    this->pop();
+    else
+    {
+        --mSize;
+    }
 }
 
 void AnyVector::swapMove(std::size_t index, void* destination)
