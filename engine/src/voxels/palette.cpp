@@ -1,14 +1,15 @@
 #include <cstring>
 
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/endianness.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
-#include <cubos/core/reflection/type_registry.hpp>
 
 #include <cubos/engine/voxels/palette.hpp>
 
+using cubos::core::memory::fromBigEndian;
 using cubos::core::memory::Stream;
-using cubos::core::reflection::TypeRegistry;
+using cubos::core::memory::toBigEndian;
 
 using namespace cubos::engine;
 
@@ -208,14 +209,19 @@ void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelPalett
 
 bool VoxelPalette::loadFrom(Stream& stream)
 {
-    for (;!stream.eof();)
+    while (!stream.eof())
     {
         float r, g, b, a;
-        stream.parse(r);
-        stream.parse(g);
-        stream.parse(b);
-        stream.parse(a);
-        mMaterials.push_back({{r,g,b,a}});
+        stream.read(&r, sizeof(float));
+        stream.read(&g, sizeof(float));
+        stream.read(&b, sizeof(float));
+        stream.read(&a, sizeof(float));
+        r = fromBigEndian(r);
+        g = fromBigEndian(g);
+        b = fromBigEndian(b);
+        a = fromBigEndian(a);
+        printf("(%f,%f,%f,%f)\n", r, g, b, a);
+        mMaterials.push_back({{r, g, b, a}});
     }
     return true;
 }
@@ -224,29 +230,28 @@ bool VoxelPalette::writeTo(Stream& stream) const
 {
     for (const auto& material : mMaterials)
     {
-        stream.print(material.color.r);
-        stream.print(material.color.g);
-        stream.print(material.color.b);
-        stream.print(material.color.a);
+        float r = toBigEndian(material.color.r);
+        float g = toBigEndian(material.color.g);
+        float b = toBigEndian(material.color.b);
+        float a = toBigEndian(material.color.a);
+        stream.write(&r, sizeof(float));
+        stream.write(&g, sizeof(float));
+        stream.write(&b, sizeof(float));
+        stream.write(&a, sizeof(float));
     }
     return true;
 }
 
-PaletteBridge::PaletteBridge(TypeRegistry materials)
+PaletteBridge::PaletteBridge()
     : FileBridge(core::reflection::reflect<VoxelPalette>())
-    , mMaterials{std::move(materials)}
 {
-}
-
-TypeRegistry& PaletteBridge::materials()
-{
-    return mMaterials;
 }
 
 bool PaletteBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
 {
     VoxelPalette palette{};
-    if (palette.loadFrom(stream)) {
+    if (palette.loadFrom(stream))
+    {
         assets.store(handle, std::move(palette));
         return true;
     }
