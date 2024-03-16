@@ -6,7 +6,6 @@
 
 #include <vector>
 
-#include <cubos/core/reflection/type_registry.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
@@ -140,18 +139,10 @@ namespace cubos::engine
     {
     public:
         /// @brief Constructs a bridge.
-        /// @param materials VoxelMaterial type registry.
-        PaletteBridge(core::reflection::TypeRegistry materials);
-
-        /// @brief Returns the type registry used to deserialize materials.
-        /// @return VoxelMaterial type registry.
-        core::reflection::TypeRegistry& materials();
+        PaletteBridge();
 
     protected:
         bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
         bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
-
-    private:
-        core::reflection::TypeRegistry mMaterials;
     };
 } // namespace cubos::engine
