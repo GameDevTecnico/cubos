@@ -190,25 +190,3 @@ bool VoxelPalette::writeTo(Stream& stream) const
     }
     return true;
 }
-
-PaletteBridge::PaletteBridge()
-    : FileBridge(core::reflection::reflect<VoxelPalette>())
-{
-}
-
-bool PaletteBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
-{
-    VoxelPalette palette{};
-    if (palette.loadFrom(stream))
-    {
-        assets.store(handle, std::move(palette));
-        return true;
-    }
-    return false;
-}
-
-bool PaletteBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
-{
-    auto palette = assets.read<VoxelPalette>(handle);
-    return palette->writeTo(stream);
-}
