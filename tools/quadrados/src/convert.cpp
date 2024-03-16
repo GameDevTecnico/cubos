@@ -330,9 +330,7 @@ static bool loadPalette(const fs::path& path, VoxelPalette& palette)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto deserializer = data::old::BinaryDeserializer(stream);
-    deserializer.read(palette);
-    if (deserializer.failed())
+    if (!palette.loadFrom(stream))
     {
         std::cerr << "Failed to deserialize palette." << std::endl;
         return false;
@@ -368,9 +366,7 @@ static bool savePalette(const fs::path& path, const VoxelPalette& palette)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto serializer = data::old::BinarySerializer(stream);
-    serializer.write(palette, nullptr);
-    if (serializer.failed())
+    if (!palette.writeTo(stream))
     {
         std::cerr << "Failed to serialize palette." << std::endl;
         return false;
