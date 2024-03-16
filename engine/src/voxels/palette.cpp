@@ -156,57 +156,6 @@ VoxelPalette::Iterator VoxelPalette::end()
     return {mMaterials.end()};
 }
 
-void cubos::core::data::old::serialize(Serializer& serializer, const VoxelPalette& palette, const char* name)
-{
-    // Count non-empty materials.
-    std::size_t count = 0;
-    for (const auto& material : palette.mMaterials)
-    {
-        if (material.similarity(VoxelMaterial::Empty) < 1.0F)
-        {
-            count++;
-        }
-    }
-
-    serializer.beginDictionary(count, name);
-    for (uint16_t i = 0; i < static_cast<uint16_t>(palette.mMaterials.size()); i++)
-    {
-        if (palette.mMaterials[i].similarity(VoxelMaterial::Empty) < 1.0F)
-        {
-            serializer.write<uint16_t>(i + 1, nullptr);
-            serializer.write(palette.mMaterials[i], nullptr);
-        }
-    }
-    serializer.endDictionary();
-}
-
-void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelPalette& palette)
-{
-    palette.mMaterials.clear();
-
-    VoxelMaterial mat;
-    uint16_t index;
-
-    std::size_t count = deserializer.beginDictionary();
-    for (std::size_t i = 0; i < count; i++)
-    {
-        deserializer.read<uint16_t>(index);
-        deserializer.read(mat);
-
-        if (index == 0)
-        {
-            CUBOS_WARN("Skipping invalid palette material index 0: reserved for empty voxels");
-            continue;
-        }
-        if (index > palette.mMaterials.size())
-        {
-            palette.mMaterials.resize(index, VoxelMaterial::Empty);
-        }
-        palette.mMaterials[index - 1] = mat;
-    }
-    deserializer.endDictionary();
-}
-
 bool VoxelPalette::loadFrom(Stream& stream)
 {
     while (!stream.eof())
