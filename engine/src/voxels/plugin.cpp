@@ -1,7 +1,7 @@
 #include <cubos/engine/assets/bridges/binary.hpp>
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/voxels/grid.hpp>
-#include <cubos/engine/voxels/palette.hpp>
+#include <cubos/engine/voxels/palette_bridge.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
 void cubos::engine::voxelsPlugin(Cubos& cubos)

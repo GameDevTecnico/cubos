@@ -118,20 +118,4 @@ namespace cubos::engine
     private:
         std::vector<VoxelMaterial>::iterator mIter;
     };
-
-    /// @brief Bridge which loads and saves @ref Palette assets.
-    ///
-    /// Palettes are composed by n materials. They're stored as JSON arrays
-    ///
-    /// @ingroup scene-plugin
-    class PaletteBridge : public FileBridge
-    {
-    public:
-        /// @brief Constructs a bridge.
-        PaletteBridge();
-
-    protected:
-        bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
-        bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
-    };
 } // namespace cubos::engine

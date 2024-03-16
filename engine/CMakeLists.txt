@@ -52,6 +52,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/voxels/grid.cpp"
 	"src/voxels/material.cpp"
 	"src/voxels/palette.cpp"
+	"src/voxels/palette_bridge.cpp"
 
 	"src/collisions/plugin.cpp"
 	"src/collisions/interface/plugin.cpp"
