@@ -7,6 +7,7 @@
 #include <cubos/engine/assets/bridges/json.hpp>
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 
 using cubos::core::data::FileSystem;
 using cubos::core::memory::Stream;
@@ -35,7 +36,7 @@ int main()
     cubos.addPlugin(assetsPlugin);
 
     /// [Setting]
-    cubos.startupSystem("configure Assets plugin").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("configure Assets plugin").tagged(settingsTag).call([](Settings& settings) {
         // If we want to save assets, we must set this to false.
         settings.setBool("assets.io.readOnly", false);
         /// [Setting]
@@ -44,11 +45,11 @@ int main()
     });
 
     cubos.startupSystem("setup bridge to load and save .int assets")
-        .tagged("cubos.assets.bridge")
+        .tagged(assetsBridgeTag)
         .call([](Assets& assets) { assets.registerBridge(".int", std::make_unique<JSONBridge<IntegerAsset>>()); });
 
     /// [Create a new asset]
-    cubos.startupSystem("create and save asset").tagged("cubos.assets").call([](Assets& assets) {
+    cubos.startupSystem("create and save asset").tagged(assetsTag).call([](Assets& assets) {
         // Create a new asset (with a random UUID).
         auto handle = assets.create(IntegerAsset{1337});
         /// [Create a new asset]

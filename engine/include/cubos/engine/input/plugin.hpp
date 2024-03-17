@@ -27,12 +27,12 @@ namespace cubos::engine
     /// ## Resources
     /// - @ref Input - stateful input manager, used to query the input state.
     ///
-    /// ## Tags
-    /// - `cubos.input.update` - updates the input state.
-    ///
     /// ## Dependencies
     /// - @ref assets-plugin
     /// - @ref window-plugin
+
+    /// @brief updates the input state.
+    extern Tag inputUpdateTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

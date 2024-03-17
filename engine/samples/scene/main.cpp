@@ -3,6 +3,7 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 
 #include "components.hpp"
@@ -10,6 +11,12 @@
 using cubos::core::ecs::World;
 
 using namespace cubos::engine;
+
+namespace cubos::engine
+{
+    extern Tag spawnTag;
+}
+CUBOS_DEFINE_TAG(cubos::engine::spawnTag);
 
 /// [Component Refl]
 #include <cubos/core/ecs/reflection.hpp>
@@ -50,14 +57,14 @@ int main(int argc, char** argv)
     cubos.addRelation<OwnedBy>();
     cubos.addRelation<DistanceTo>();
 
-    cubos.startupSystem("configure Assets").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
     });
 
     /// [Spawning the scene]
     cubos.startupSystem("spawn the scene")
-        .tagged("spawn")
-        .tagged("cubos.assets")
+        .tagged(spawnTag)
+        .tagged(assetsTag)
         .call([](Commands commands, const Assets& assets) {
             auto sceneRead = assets.read(SceneAsset);
             commands.spawn(sceneRead->blueprint);
@@ -66,7 +73,7 @@ int main(int argc, char** argv)
 
     /// [Printing the scene]
     cubos.startupSystem("print the scene")
-        .after("spawn")
+        .after(spawnTag)
         .call([](Query<Entity, const Num&> numQuery, Query<const OwnedBy&, Entity> ownedByQuery,
                  Query<const DistanceTo&, Entity> distanceToQuery) {
             using cubos::core::data::DebugSerializer;

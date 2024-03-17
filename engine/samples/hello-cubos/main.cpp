@@ -28,6 +28,15 @@ struct Pop
 };
 /// [Resource Decl]
 
+namespace cubos::engine
+{
+    extern Tag helloTag;
+    extern Tag worldTag;
+} // namespace cubos::engine
+
+CUBOS_DEFINE_TAG(cubos::engine::helloTag);
+CUBOS_DEFINE_TAG(cubos::engine::worldTag);
+
 /// [Engine]
 int main()
 {
@@ -39,12 +48,12 @@ int main()
     /// [Hello CUBOS]
 
     /// [Hello World]
-    cubos.system("say Hello").tagged("helloTag").call([]() { CUBOS_INFO("Hello"); });
-    cubos.system("say World").tagged("worldTag").call([]() { CUBOS_INFO("World"); });
+    cubos.system("say Hello").tagged(helloTag).call([]() { CUBOS_INFO("Hello"); });
+    cubos.system("say World").tagged(worldTag).call([]() { CUBOS_INFO("World"); });
     /// [Hello World]
 
     /// [Tags]
-    cubos.tag("helloTag").before("worldTag");
+    cubos.tag(helloTag).before(worldTag);
     /// [Tags]
 
     /// [Component Add]

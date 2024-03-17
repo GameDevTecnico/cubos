@@ -9,7 +9,7 @@ void cubos::engine::scenePlugin(Cubos& cubos)
 {
     cubos.addPlugin(assetsPlugin);
 
-    cubos.startupSystem("setup Scene assets bridge").tagged("cubos.assets.bridge").call([](World& world) {
+    cubos.startupSystem("setup Scene assets bridge").tagged(assetsBridgeTag).call([](World& world) {
         auto assets = world.write<Assets>();
 
         // Add the bridge to load .cubos files.

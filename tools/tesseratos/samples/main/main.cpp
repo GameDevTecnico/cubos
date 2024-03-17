@@ -28,13 +28,13 @@ int main(int argc, char** argv)
     cubos.addPlugin(tesseratos::plugin);
     cubos.addPlugin(cubos::engine::inputPlugin);
 
-    cubos.startupSystem("configure Assets plugin").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("configure Assets plugin").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
         settings.setBool("assets.io.readOnly", false);
     });
 
     cubos.startupSystem("load and set the Input Bindings")
-        .tagged("cubos.assets")
+        .tagged(cubos::engine::assetsTag)
         .call([](const Assets& assets, Input& input) {
             auto bindings = assets.read<InputBindings>(BindingsAsset);
             input.bind(*bindings);

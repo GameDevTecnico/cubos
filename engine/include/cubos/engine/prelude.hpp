@@ -6,6 +6,9 @@
 
 namespace cubos::engine
 {
+    /// @copydoc cubos::core::ecs::Tag
+    using Tag = core::ecs::Tag;
+
     /// @copydoc cubos::core::ecs::Cubos
     using Cubos = core::ecs::Cubos;
 

@@ -34,7 +34,7 @@ TEST_CASE("cubos::engine::transformPlugin")
         }
 
         cubos.system("check if there's a single entity with all of the components")
-            .after("cubos.transform.update")
+            .after(transformUpdateTag)
             .with<Position>()
             .with<Rotation>()
             .with<Scale>()
@@ -54,7 +54,7 @@ TEST_CASE("cubos::engine::transformPlugin")
             });
 
         cubos.system("check if there's a single entity pair with all of the components")
-            .after("cubos.transform.update")
+            .after(transformUpdateTag)
             .with<Position>()
             .with<Rotation>()
             .with<Scale>()
@@ -80,7 +80,7 @@ TEST_CASE("cubos::engine::transformPlugin")
         });
 
         cubos.system("check if there's a single entity pair with all of the components")
-            .after("cubos.transform.update")
+            .after(transformUpdateTag)
             .call([](Query<const LocalToWorld&> query) {
                 REQUIRE(query.first().contains());
                 auto [localToWorld] = *query.first();
@@ -114,7 +114,7 @@ TEST_CASE("cubos::engine::transformPlugin")
             });
 
         cubos.system("check if both entity pairs are correct")
-            .after("cubos.transform.update")
+            .after(transformUpdateTag)
             .call([](Query<const Position&, Opt<const LocalToParent&>, const LocalToWorld&> query) {
                 for (auto [position, localToParent, localToWorld] : query)
                 {

@@ -10,6 +10,7 @@
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/prelude.hpp>
 
+
 namespace cubos::engine
 {
     /// @defgroup narrow-phase-collisions-plugin Narrow-phase Collisions
@@ -18,6 +19,10 @@ namespace cubos::engine
     ///
     /// ## Relations
     /// - @ref CollidingWith - relates two entities that are colliding.
+
+    extern Tag collisionsNarrowCleanTag;
+
+    extern Tag collisionsNarrowTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

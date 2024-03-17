@@ -2,17 +2,23 @@
 
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
+#include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/solver.hpp>
+
+#include "../collisions/narrow_phase/plugin.hpp"
+
+CUBOS_DEFINE_TAG(cubos::engine::physicsSolveTag);
 
 using namespace cubos::engine;
 
 void cubos::engine::solverPlugin(Cubos& cubos)
 {
+
     cubos.system("solve collision")
-        .tagged("cubos.physics.solve")
-        .after("cubos.physics.simulation.substeps.integrate")
-        .after("cubos.collisions.narrow")
-        .before("cubos.physics.simulation.substeps.correct_position")
+        .tagged(physicsSolveTag)
+        .after(physicsSimulationSubstepsIntegrateTag)
+        .after(collisionsNarrowTag)
+        .before(physicsSimulationSubstepsCorrectPositionTag)
         .call([](Query<Entity, AccumulatedCorrection&, const CollidingWith&, Entity, AccumulatedCorrection&> query) {
             for (auto [ent1, correction1, colliding, ent2, correction2] : query)
             {

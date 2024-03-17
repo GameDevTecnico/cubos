@@ -14,9 +14,11 @@
 #pragma once
 
 #include <cubos/engine/prelude.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 
 namespace cubos::engine
 {
+
     /// @defgroup collisions-plugin Collisions
     /// @ingroup engine
     /// @brief Adds collision detection to @b CUBOS.
@@ -30,12 +32,12 @@ namespace cubos::engine
     /// - @ref CollisionEvent - (TODO) emitted when a collision occurs.
     /// - @ref TriggerEvent - (TODO) emitted when a trigger is entered or exited.
     ///
-    /// ## Tags
-    /// - `cubos.collisions.setup` - new colliders are setup.
-    /// - `cubos.collisions.broad` - broad phase candidate pairs are generated.
     ///
     /// ## Dependencies
     /// - @ref transform-plugin
+
+    /// @brief new colliders are setup.
+    extern Tag collisionsSetupTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

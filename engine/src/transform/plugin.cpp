@@ -1,5 +1,11 @@
 #include <cubos/engine/transform/plugin.hpp>
 
+CUBOS_DEFINE_TAG(cubos::engine::transformMissingTag);
+CUBOS_DEFINE_TAG(cubos::engine::transformMissingLocalTag);
+CUBOS_DEFINE_TAG(cubos::engine::transformUpdateRelativeTag);
+CUBOS_DEFINE_TAG(cubos::engine::transformUpdateTag);
+CUBOS_DEFINE_TAG(cubos::engine::transformUpdatePropagateTag);
+
 using cubos::core::ecs::Traversal;
 using cubos::engine::Commands;
 using cubos::engine::Entity;
@@ -59,8 +65,8 @@ void cubos::engine::transformPlugin(Cubos& cubos)
         .call(addComponent<LocalToParent>);
 
     cubos.system("update LocalToParent's")
-        .tagged("cubos.transform.update")
-        .before("cubos.transform.update.propagate")
+        .tagged(transformUpdateTag)
+        .before(transformUpdatePropagateTag)
         .call([](Query<LocalToParent&, const Position&, const Rotation&, const Scale&> query) {
             for (auto [localToParent, position, rotation, scale] : query)
             {
@@ -71,8 +77,8 @@ void cubos::engine::transformPlugin(Cubos& cubos)
         });
 
     cubos.system("update LocalToWorld's of children")
-        .tagged("cubos.transform.update")
-        .tagged("cubos.transform.update.propagate")
+        .tagged(transformUpdateTag)
+        .tagged(transformUpdatePropagateTag)
         .with<LocalToWorld>()
         .with<LocalToParent>()
         .related<ChildOf>(Traversal::Down)

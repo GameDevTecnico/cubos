@@ -39,7 +39,7 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
     cubos.addResource<State>();
 
     cubos.system("show ECS statistics")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::imguiTag)
         .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("ECS Statistics"); })
         .call([](const World& world, State& state, EntitySelector& selector) {
             if (world.isAlive(selector.selection))

@@ -47,8 +47,6 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
     cubos.addResource<DebugCameraInfo>();
 
     cubos.startupSystem("create Debug Camera")
-        .tagged("cubos.input")
-        .after("cubos.fcc.init")
         .call([](Commands commands, DebugCameraInfo& debugCamera) {
             debugCamera.ent = commands.create()
                                   .add(Name{"debug-camera"})
@@ -82,7 +80,7 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
         });
 
     cubos.system("show Debug Camera UI")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::imguiTag)
         .call([](ActiveCameras& camera, Toolbox& toolbox, DebugCameraInfo& debugCamera) {
             if (!toolbox.isOpen("Debug Camera"))
             {

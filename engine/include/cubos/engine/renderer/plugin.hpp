@@ -53,18 +53,20 @@ namespace cubos::engine
     /// - @ref DirectionalLight - emits a directional light.
     /// - @ref PointLight - emits a point light.
     ///
-    /// ## Startup tags
-    /// - `cubos.renderer.init` - the renderer is initialized, after `cubos.window.init`.
-    ///
-    /// ## Tags
-    /// - `cubos.renderer.frame` - frame information is collected, after `cubos.transform.update`.
-    /// - `cubos.renderer.draw` - frame is rendered to the window, after `cubos.renderer.frame` and
-    ///   before `cubos.window.render`.
-    ///
     /// ## Dependencies
     /// - @ref window-plugin
     /// - @ref transform-plugin
     /// - @ref assets-plugin
+
+    /// @brief the renderer is initialized, after `cubos.window.init`.
+    extern Tag rendererInitTag;
+
+    /// @brief frame information is collected, after `cubos.transform.update`.
+    extern Tag rendererFrameTag;
+
+    /// @brief frame is rendered to the window, after `cubos.renderer.frame` and
+    /// before `cubos.window.render`.
+    extern Tag rendererDrawTag;
 
     /// @brief Component which makes a voxel grid be rendered by the renderer plugin.
     /// @note Should be used with @ref LocalToWorld.

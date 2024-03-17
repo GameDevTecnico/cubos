@@ -10,6 +10,7 @@
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
+#include <cubos/engine/imgui/plugin.hpp>
 
 #include <tesseratos/debug_camera/plugin.hpp>
 #include <tesseratos/entity_selector/plugin.hpp>
@@ -302,8 +303,8 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
     cubos.addPlugin(cubos::engine::settingsPlugin);
 
     cubos.system("draw Transform Gizmo")
-        .after("cubos.transform.update")
-        .tagged("cubos.imgui")
+        .after(cubos::engine::transformUpdateTag)
+        .tagged(cubos::engine::imguiTag)
         .call([](const EntitySelector& entitySelector, const ActiveCameras& activeCameras, const Window& window,
                  const Input& input, Settings& settings, Gizmos& gizmos, Query<Position&, LocalToWorld&> positionQuery,
                  Query<Rotation&, LocalToWorld&> rotationQuery, Query<const Camera&, LocalToWorld&> cameraQuery) {

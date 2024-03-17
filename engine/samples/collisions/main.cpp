@@ -13,13 +13,23 @@
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+
+#include "../../src/collisions/narrow_phase/plugin.hpp"
 
 using cubos::core::geom::Box;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;
 
 using namespace cubos::engine;
+
+namespace cubos::engine
+{
+    extern Tag collisionsSampleUpdated;
+
+}
+CUBOS_DEFINE_TAG(cubos::engine::collisionsSampleUpdated)
 
 struct State
 {
@@ -43,7 +53,7 @@ int main()
 
     cubos.addResource<State>();
 
-    cubos.startupSystem("activate assets IO").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("activate assets IO").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setBool("assets.io.enabled", false);
     });
 
@@ -90,8 +100,7 @@ int main()
     });
 
     cubos.system("move colliders")
-        .before("cubos.transform.update")
-        .after("cubos.physics.unpack_bundle")
+        .before(cubos::engine::transformUpdateTag)
         .call([](State& state, const Input& input, Query<Position&, Rotation&, Velocity&> query) {
             auto [aPos, aRot, aVel] = *query.at(state.a);
             auto [bPos, bRot, bVel] = *query.at(state.b);
@@ -122,8 +131,8 @@ int main()
         });
 
     cubos.system("check collisions")
-        .tagged("updated")
-        .after("cubos.collisions.narrow")
+        .tagged(collisionsSampleUpdated)
+        .after(cubos::engine::collisionsNarrowTag)
         .call([](Query<Entity, CollidingWith&, Entity> query, State& state) {
             for (auto [ent1, colliding, ent2] : query)
             {
@@ -134,7 +143,7 @@ int main()
             }
         });
 
-    cubos.system("render").after("updated").call([](Query<const LocalToWorld&, const Collider&> query) {
+    cubos.system("render").after(collisionsSampleUpdated).call([](Query<const LocalToWorld&, const Collider&> query) {
         for (auto [localToWorld, collider] : query)
         {
             cubos::core::gl::Debug::drawWireBox(

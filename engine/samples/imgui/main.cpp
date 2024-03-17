@@ -91,7 +91,7 @@ int main()
     /// [Adding the plugin]
 
     /// [ImGui Demo]
-    cubos.system("show ImGui demo").tagged("cubos.imgui").call([]() {
+    cubos.system("show ImGui demo").tagged(imguiTag).call([]() {
         ImGui::Begin("Dear ImGui + CUBOS.");
         ImGui::Text("Hello world!");
         ImGui::End();
@@ -116,7 +116,7 @@ int main()
 
     /// [DataInspector window example]
     cubos.system("data inspector example")
-        .tagged("cubos.imgui")
+        .tagged(imguiTag)
         .call([](DataInspector& inspector, DummyResource& data) {
             ImGui::Begin("Data Inspector");
             inspector.edit(data);
