@@ -1,6 +1,7 @@
 #include <unordered_map>
 
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/endianness.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
@@ -8,6 +9,10 @@
 
 #include <cubos/engine/voxels/grid.hpp>
 #include <cubos/engine/voxels/palette.hpp>
+
+using cubos::core::memory::fromBigEndian;
+using cubos::core::memory::Stream;
+using cubos::core::memory::toBigEndian;
 
 using namespace cubos::engine;
 
@@ -175,4 +180,42 @@ void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelGrid& 
         grid.mIndices.clear();
         grid.mIndices.resize(1, 0);
     }
+}
+
+bool VoxelGrid::loadFrom(Stream& stream)
+{
+    uint32_t x, y, z;
+    stream.read(&x, sizeof(uint32_t));
+    stream.read(&y, sizeof(uint32_t));
+    stream.read(&z, sizeof(uint32_t));
+    x = fromBigEndian(x);
+    y = fromBigEndian(y);
+    z = fromBigEndian(z);
+    mSize = glm::uvec3(x, y, z);
+
+    while (!stream.eof())
+    {
+        uint16_t idx;
+        stream.read(&idx, sizeof(uint16_t));
+        idx = fromBigEndian(idx);
+        mIndices.push_back(idx);
+    }
+    return true;
+}
+
+bool VoxelGrid::writeTo(Stream& stream) const
+{
+    uint32_t x = toBigEndian(mSize.x);
+    uint32_t y = toBigEndian(mSize.y);
+    uint32_t z = toBigEndian(mSize.z);
+    stream.write(&x, sizeof(uint32_t));
+    stream.write(&y, sizeof(uint32_t));
+    stream.write(&z, sizeof(uint32_t));
+
+    for (const auto& indice : mIndices)
+    {
+        uint16_t idx = toBigEndian(indice);
+        stream.write(&idx, sizeof(uint16_t));
+    }
+    return true;
 }

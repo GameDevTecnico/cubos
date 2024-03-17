@@ -50,6 +50,7 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/voxels/plugin.cpp"
 	"src/voxels/grid.cpp"
+	"src/voxels/grid_bridge.cpp"
 	"src/voxels/material.cpp"
 	"src/voxels/palette.cpp"
 	"src/voxels/palette_bridge.cpp"

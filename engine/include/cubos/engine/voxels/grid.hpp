@@ -12,6 +12,8 @@
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
+#include <cubos/engine/assets/bridges/file.hpp>
+
 namespace cubos::engine
 {
     class VoxelPalette;
@@ -90,6 +92,9 @@ namespace cubos::engine
         /// @param minSimilarity Minimum similarity between two materials to consider them the same.
         /// @return Whether the conversion was successful.
         bool convert(const VoxelPalette& src, const VoxelPalette& dst, float minSimilarity);
+
+        bool loadFrom(core::memory::Stream& stream);
+        bool writeTo(core::memory::Stream& stream) const;
 
     private:
         friend void core::data::old::serialize(core::data::old::Serializer& /*serializer*/, const VoxelGrid& /*grid*/,
