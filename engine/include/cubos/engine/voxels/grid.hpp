@@ -8,8 +8,6 @@
 
 #include <glm/glm.hpp>
 
-#include <cubos/core/data/old/deserializer.hpp>
-#include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
@@ -19,12 +17,6 @@ namespace cubos::engine
     class VoxelPalette;
     class VoxelGrid;
 } // namespace cubos::engine
-
-namespace cubos::core::data::old
-{
-    void serialize(Serializer& serializer, const engine::VoxelGrid& grid, const char* name);
-    void deserialize(Deserializer& deserializer, engine::VoxelGrid& grid);
-} // namespace cubos::core::data::old
 
 namespace cubos::engine
 {
@@ -97,10 +89,6 @@ namespace cubos::engine
         bool writeTo(core::memory::Stream& stream) const;
 
     private:
-        friend void core::data::old::serialize(core::data::old::Serializer& /*serializer*/, const VoxelGrid& /*grid*/,
-                                               const char* /*name*/);
-        friend void core::data::old::deserialize(core::data::old::Deserializer& /*deserializer*/, VoxelGrid& /*grid*/);
-
         glm::uvec3 mSize;               ///< Size of the grid.
         std::vector<uint16_t> mIndices; ///< Indices of the grid.
     };

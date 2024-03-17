@@ -157,31 +157,6 @@ bool VoxelGrid::convert(const VoxelPalette& src, const VoxelPalette& dst, float 
     return true;
 }
 
-void cubos::core::data::old::serialize(Serializer& serializer, const VoxelGrid& grid, const char* name)
-{
-    serializer.beginObject(name);
-    serializer.write(grid.mSize, "size");
-    serializer.write(grid.mIndices, "data");
-    serializer.endObject();
-}
-
-void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelGrid& grid)
-{
-    deserializer.beginObject();
-    deserializer.read(grid.mSize);
-    deserializer.read(grid.mIndices);
-    deserializer.endObject();
-
-    if (grid.mSize.x * grid.mSize.y * grid.mSize.z != static_cast<unsigned int>(grid.mIndices.size()))
-    {
-        CUBOS_WARN("Grid size and indices size mismatch: was {}, indices size is {}.", grid.mSize,
-                   grid.mIndices.size());
-        grid.mSize = {1, 1, 1};
-        grid.mIndices.clear();
-        grid.mIndices.resize(1, 0);
-    }
-}
-
 bool VoxelGrid::loadFrom(Stream& stream)
 {
     uint32_t x, y, z;
