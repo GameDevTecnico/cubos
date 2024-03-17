@@ -10,15 +10,14 @@ namespace cubos::engine
 {
     /// @brief Bridge which loads and saves @ref Grid assets.
     ///
-    /// Grids are composed by their size and their indices.
-    /// They're stored as an array of unsigned integers (first 3 equal the grid size, the remainder the grid indexes)
+    /// Uses the format specified in @ref VoxelGrid::loadFrom and @ref VoxelGrid::writeTo
     ///
-    /// @ingroup scene-plugin
-    class GridBridge : public FileBridge
+    /// @ingroup voxels-plugin
+    class VoxelGridBridge : public FileBridge
     {
     public:
         /// @brief Constructs a bridge.
-        GridBridge();
+        VoxelGridBridge();
 
     protected:
         bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;

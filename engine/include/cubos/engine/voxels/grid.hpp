@@ -10,7 +10,10 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
-#include <cubos/engine/assets/bridges/file.hpp>
+namespace cubos::core::memory
+{
+    class Stream;
+} // namespace cubos::core::memory
 
 namespace cubos::engine
 {
@@ -85,7 +88,23 @@ namespace cubos::engine
         /// @return Whether the conversion was successful.
         bool convert(const VoxelPalette& src, const VoxelPalette& dst, float minSimilarity);
 
+        /// @brief Loads the grid's data from the given stream.
+        ///
+        /// Assumes the data is stored in big-endian (network byte order).
+        /// The first bytes correspond to three uint32_t, which represent the size of the grid (x, y, z).
+        /// The next bytes correspond to `size.x * size.y * size.z` uint16_t, which represent the actual voxel
+        /// materials. The voxel data is indexed by `x + y * size.x + z * size.x * size.y`.
+        ///
+        /// @param stream Stream to read from.
+        /// @return Whether the stream contained valid data.
         bool loadFrom(core::memory::Stream& stream);
+
+        /// @brief Writes the grid's data to the given stream.
+        ///
+        /// Writes in the format specified in @ref loadFrom.
+        ///
+        /// @param stream Stream to write to.
+        /// @return Whether the write was successful.
         bool writeTo(core::memory::Stream& stream) const;
 
     private:

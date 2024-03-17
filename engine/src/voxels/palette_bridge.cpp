@@ -6,12 +6,12 @@ using cubos::engine::VoxelPalette;
 
 using namespace cubos::engine;
 
-PaletteBridge::PaletteBridge()
+VoxelPaletteBridge::VoxelPaletteBridge()
     : FileBridge(core::reflection::reflect<VoxelPalette>())
 {
 }
 
-bool PaletteBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
+bool VoxelPaletteBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
 {
     VoxelPalette palette{};
     if (palette.loadFrom(stream))
@@ -22,7 +22,7 @@ bool PaletteBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream&
     return false;
 }
 
-bool PaletteBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
+bool VoxelPaletteBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
 {
     auto palette = assets.read<VoxelPalette>(handle);
     return palette->writeTo(stream);

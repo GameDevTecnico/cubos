@@ -99,7 +99,23 @@ namespace cubos::engine
         /// @return Iterator.
         Iterator end();
 
+        /// @brief Loads the palette's data from the given stream.
+        ///
+        /// Assumes the data is stored in big-endian (network byte order).
+        /// The first bytes correspond to an uint16_t, which represents the number of materials in the palette.
+        /// The next bytes correspond to `numMaterials * 4` floats (each material is represented by 4 floats (r, g, b,
+        /// a)), which represents the actual palette data.
+        ///
+        /// @param stream Stream to read from.
+        /// @return Whether the stream contained valid data.
         bool loadFrom(core::memory::Stream& stream);
+
+        /// @brief Writes the palette's data to the given stream.
+        ///
+        /// Writes in the format specified in @ref loadFrom.
+        ///
+        /// @param stream Stream to write to.
+        /// @return Whether the write was successful.
         bool writeTo(core::memory::Stream& stream) const;
 
     private:
