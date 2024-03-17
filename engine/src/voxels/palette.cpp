@@ -169,7 +169,6 @@ bool VoxelPalette::loadFrom(Stream& stream)
         g = fromBigEndian(g);
         b = fromBigEndian(b);
         a = fromBigEndian(a);
-        printf("(%f,%f,%f,%f)\n", r, g, b, a);
         mMaterials.push_back({{r, g, b, a}});
     }
     return true;
