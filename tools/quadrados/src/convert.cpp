@@ -387,9 +387,7 @@ static bool saveGrid(const fs::path& path, const VoxelGrid& grid)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto serializer = data::old::BinarySerializer(stream);
-    serializer.write(grid, nullptr);
-    if (serializer.failed())
+    if (!grid.writeTo(stream))
     {
         std::cerr << "Failed to serialize grid." << std::endl;
         return false;
