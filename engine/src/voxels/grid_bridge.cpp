@@ -6,12 +6,12 @@ using cubos::engine::VoxelGrid;
 
 using namespace cubos::engine;
 
-GridBridge::GridBridge()
+VoxelGridBridge::VoxelGridBridge()
     : FileBridge(core::reflection::reflect<VoxelGrid>())
 {
 }
 
-bool GridBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
+bool VoxelGridBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
 {
     VoxelGrid grid{};
     if (grid.loadFrom(stream))
@@ -22,7 +22,7 @@ bool GridBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& st
     return false;
 }
 
-bool GridBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
+bool VoxelGridBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
 {
     auto grid = assets.read<VoxelGrid>(handle);
     return grid->writeTo(stream);

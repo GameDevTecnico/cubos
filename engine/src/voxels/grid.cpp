@@ -159,19 +159,38 @@ bool VoxelGrid::convert(const VoxelPalette& src, const VoxelPalette& dst, float 
 
 bool VoxelGrid::loadFrom(Stream& stream)
 {
-    uint32_t x, y, z;
-    stream.read(&x, sizeof(uint32_t));
-    stream.read(&y, sizeof(uint32_t));
-    stream.read(&z, sizeof(uint32_t));
+    uint32_t x;
+    uint32_t y;
+    uint32_t z;
+    if (stream.read(&x, sizeof(uint32_t)) != sizeof(uint32_t))
+    {
+        CUBOS_ERROR("Failed to load voxel grid, unexpected end of file");
+        return false;
+    }
+    if (stream.read(&y, sizeof(uint32_t)) != sizeof(uint32_t))
+    {
+        CUBOS_ERROR("Failed to load voxel grid, unexpected end of file");
+        return false;
+    }
+    if (stream.read(&z, sizeof(uint32_t)) != sizeof(uint32_t))
+    {
+        CUBOS_ERROR("Failed to load voxel grid, unexpected end of file");
+        return false;
+    }
     x = fromBigEndian(x);
     y = fromBigEndian(y);
     z = fromBigEndian(z);
     mSize = glm::uvec3(x, y, z);
 
-    while (!stream.eof())
+    mIndices.clear();
+    for (uint32_t i = 0; i < x * y * z; i++)
     {
         uint16_t idx;
-        stream.read(&idx, sizeof(uint16_t));
+        if (stream.read(&idx, sizeof(uint16_t)) != sizeof(uint16_t))
+        {
+            CUBOS_ERROR("Failed to load voxel grid, unexpected end of file");
+            return false;
+        }
         idx = fromBigEndian(idx);
         mIndices.push_back(idx);
     }
@@ -183,14 +202,30 @@ bool VoxelGrid::writeTo(Stream& stream) const
     uint32_t x = toBigEndian(mSize.x);
     uint32_t y = toBigEndian(mSize.y);
     uint32_t z = toBigEndian(mSize.z);
-    stream.write(&x, sizeof(uint32_t));
-    stream.write(&y, sizeof(uint32_t));
-    stream.write(&z, sizeof(uint32_t));
+    if (stream.write(&x, sizeof(uint32_t)) != sizeof(uint32_t))
+    {
+        CUBOS_ERROR("Failed to save voxel grid, couldn't write it to stream");
+        return false;
+    }
+    if (stream.write(&y, sizeof(uint32_t)) != sizeof(uint32_t))
+    {
+        CUBOS_ERROR("Failed to save voxel grid, couldn't write it to stream");
+        return false;
+    }
+    if (stream.write(&z, sizeof(uint32_t)) != sizeof(uint32_t))
+    {
+        CUBOS_ERROR("Failed to save voxel grid, couldn't write it to stream");
+        return false;
+    }
 
     for (const auto& indice : mIndices)
     {
         uint16_t idx = toBigEndian(indice);
-        stream.write(&idx, sizeof(uint16_t));
+        if (stream.write(&idx, sizeof(uint16_t)) != sizeof(uint16_t))
+        {
+            CUBOS_ERROR("Failed to save voxel grid, couldn't write it to stream");
+            return false;
+        }
     }
     return true;
 }

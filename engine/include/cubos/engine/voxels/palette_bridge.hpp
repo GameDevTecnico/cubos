@@ -10,15 +10,14 @@ namespace cubos::engine
 {
     /// @brief Bridge which loads and saves @ref Palette assets.
     ///
-    /// Palettes are composed by n materials.
-    /// They're stored as an array of floats (each 4 floats equal a material).
+    /// Uses the format specified in @ref VoxelPalette::loadFrom and @ref VoxelPalette::writeTo
     ///
     /// @ingroup scene-plugin
-    class PaletteBridge : public FileBridge
+    class VoxelPaletteBridge : public FileBridge
     {
     public:
         /// @brief Constructs a bridge.
-        PaletteBridge();
+        VoxelPaletteBridge();
 
     protected:
         bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;

@@ -37,6 +37,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Return direct references to resources instead of guards on World (#922, **@RiscadoA**).
 - Stop using old serialization to load Settings (#1100, **@RiscadoA**).
 
+### Changed
+
+- Palette & Grid saving/loading now use streams instead of serialization (#572, **@Dacops**).
+
 ### Fixed
 
 - Crash in multiple samples due to missing plugin dependencies (**@RiscadoA**).

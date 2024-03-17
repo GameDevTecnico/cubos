@@ -158,13 +158,41 @@ VoxelPalette::Iterator VoxelPalette::end()
 
 bool VoxelPalette::loadFrom(Stream& stream)
 {
-    while (!stream.eof())
+    uint16_t numMaterials;
+    if (stream.read(&numMaterials, sizeof(uint16_t)) != sizeof(uint16_t))
     {
-        float r, g, b, a;
-        stream.read(&r, sizeof(float));
-        stream.read(&g, sizeof(float));
-        stream.read(&b, sizeof(float));
-        stream.read(&a, sizeof(float));
+        CUBOS_ERROR("Failed to load palette, unexpected end of file");
+        return false;
+    }
+    numMaterials = fromBigEndian(numMaterials);
+
+    mMaterials.clear();
+    for (uint16_t i = 0; i < numMaterials; i++)
+    {
+        float r;
+        float g;
+        float b;
+        float a;
+        if (stream.read(&r, sizeof(float)) != sizeof(float))
+        {
+            CUBOS_ERROR("Failed to load palette, unexpected end of file");
+            return false;
+        }
+        if (stream.read(&g, sizeof(float)) != sizeof(float))
+        {
+            CUBOS_ERROR("Failed to load palette, unexpected end of file");
+            return false;
+        }
+        if (stream.read(&b, sizeof(float)) != sizeof(float))
+        {
+            CUBOS_ERROR("Failed to load palette, unexpected end of file");
+            return false;
+        }
+        if (stream.read(&a, sizeof(float)) != sizeof(float))
+        {
+            CUBOS_ERROR("Failed to load palette, unexpected end of file");
+            return false;
+        }
         r = fromBigEndian(r);
         g = fromBigEndian(g);
         b = fromBigEndian(b);
@@ -176,16 +204,40 @@ bool VoxelPalette::loadFrom(Stream& stream)
 
 bool VoxelPalette::writeTo(Stream& stream) const
 {
+    auto numMaterials = static_cast<uint16_t>(mMaterials.size());
+    numMaterials = toBigEndian(numMaterials);
+    if (stream.write(&numMaterials, sizeof(uint16_t)) != sizeof(uint16_t))
+    {
+        CUBOS_ERROR("Failed to save palette, couldn't write it to stream");
+        return false;
+    }
+
     for (const auto& material : mMaterials)
     {
         float r = toBigEndian(material.color.r);
         float g = toBigEndian(material.color.g);
         float b = toBigEndian(material.color.b);
         float a = toBigEndian(material.color.a);
-        stream.write(&r, sizeof(float));
-        stream.write(&g, sizeof(float));
-        stream.write(&b, sizeof(float));
-        stream.write(&a, sizeof(float));
+        if (stream.write(&r, sizeof(float)) != sizeof(float))
+        {
+            CUBOS_ERROR("Failed to save palette, couldn't write it to stream");
+            return false;
+        }
+        if (stream.write(&g, sizeof(float)) != sizeof(float))
+        {
+            CUBOS_ERROR("Failed to save palette, couldn't write it to stream");
+            return false;
+        }
+        if (stream.write(&b, sizeof(float)) != sizeof(float))
+        {
+            CUBOS_ERROR("Failed to save palette, couldn't write it to stream");
+            return false;
+        }
+        if (stream.write(&a, sizeof(float)) != sizeof(float))
+        {
+            CUBOS_ERROR("Failed to save palette, couldn't write it to stream");
+            return false;
+        }
     }
     return true;
 }
