@@ -7,6 +7,13 @@
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
+CUBOS_DEFINE_TAG(cubos::engine::PhysicsApplyForcesTag);
+CUBOS_DEFINE_TAG(cubos::engine::PhysicsSimulationApplyImpulsesTag);
+CUBOS_DEFINE_TAG(cubos::engine::PhysicsSimulationSubstepsIntegrateTag);
+CUBOS_DEFINE_TAG(cubos::engine::PhysicsSimulationSubstepsCorrectPositionTag);
+CUBOS_DEFINE_TAG(cubos::engine::PhysicsSimulationSubstepsUpdateVelocityTag);
+CUBOS_DEFINE_TAG(cubos::engine::PhysicsSimulationClearForcesTag);
+
 using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(AccumulatedCorrection)
@@ -100,13 +107,13 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
             }
         });
 
-    cubos.tag("cubos.physics.apply_forces").before("cubos.physics.simulation.substeps.integrate");
+    cubos.tag(PhysicsApplyForcesTag).before(PhysicsSimulationSubstepsIntegrateTag);
 
     cubos.system("apply impulses")
-        .tagged("cubos.physics.simulation.apply_impulses")
-        .after("cubos.physics.apply_forces")
-        .before("cubos.physics.simulation.substeps.integrate")
-        .tagged("cubos.fixedStep")
+        .tagged(PhysicsSimulationApplyImpulsesTag)
+        .after(PhysicsApplyForcesTag)
+        .before(PhysicsSimulationSubstepsIntegrateTag)
+        .tagged(FixedStepTag)
         .call([](Query<Velocity&, const Impulse&, const Mass&> query) {
             for (auto [velocity, impulse, mass] : query)
             {
@@ -115,8 +122,8 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         });
 
     cubos.system("integrate position")
-        .tagged("cubos.physics.simulation.substeps.integrate")
-        .tagged("cubos.fixedStep")
+        .tagged(PhysicsSimulationSubstepsIntegrateTag)
+        .tagged(FixedStepTag)
         .call([](Query<Position&, PreviousPosition&, Velocity&, const Force&, const Mass&> query,
                  const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
@@ -142,9 +149,9 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         });
 
     cubos.system("apply corrections to positions")
-        .tagged("cubos.physics.simulation.substeps.correct_position")
-        .after("cubos.physics.simulation.substeps.integrate")
-        .tagged("cubos.fixedStep")
+        .tagged(PhysicsSimulationSubstepsCorrectPositionTag)
+        .after(PhysicsSimulationSubstepsIntegrateTag)
+        .tagged(FixedStepTag)
         .call([](Query<Position&, AccumulatedCorrection&, Mass&> query) {
             for (auto [position, correction, mass] : query)
             {
@@ -158,9 +165,9 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         });
 
     cubos.system("update velocities")
-        .tagged("cubos.physics.simulation.substeps.update_velocity")
-        .after("cubos.physics.simulation.substeps.correct_position")
-        .tagged("cubos.fixedStep")
+        .tagged(PhysicsSimulationSubstepsUpdateVelocityTag)
+        .after(PhysicsSimulationSubstepsCorrectPositionTag)
+        .tagged(FixedStepTag)
         .call([](Query<const Position&, const PreviousPosition&, Velocity&> query, const FixedDeltaTime& fixedDeltaTime,
                  const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
@@ -172,9 +179,9 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         });
 
     cubos.system("clear forces")
-        .tagged("cubos.physics.simulation.clear_forces")
-        .after("cubos.physics.simulation.substeps.update_velocity")
-        .tagged("cubos.fixedStep")
+        .tagged(PhysicsSimulationClearForcesTag)
+        .after(PhysicsSimulationSubstepsUpdateVelocityTag)
+        .tagged(FixedStepTag)
         .call([](Query<Force&> query) {
             for (auto [force] : query)
             {
@@ -183,9 +190,9 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
         });
 
     cubos.system("clear impulses")
-        .tagged("cubos.physics.simulation.clear_forces")
-        .after("cubos.physics.simulation.substeps.update_velocity")
-        .tagged("cubos.fixedStep")
+        .tagged(PhysicsSimulationClearForcesTag)
+        .after(PhysicsSimulationSubstepsUpdateVelocityTag)
+        .tagged(FixedStepTag)
         .call([](Query<Impulse&> query) {
             for (auto [impulse] : query)
             {

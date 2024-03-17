@@ -24,7 +24,7 @@ void tesseratos::settingsInspectorPlugin(Cubos& cubos)
     cubos.addPlugin(toolboxPlugin);
 
     cubos.system("show Settings Inspector UI")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::ImguiTag)
         .call([](Settings& settings, DataInspector& inspector, Toolbox& toolbox) {
             if (!toolbox.isOpen("Settings Inspector"))
             {

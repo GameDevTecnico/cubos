@@ -1,6 +1,6 @@
 /// @file
-/// @brief Class @ref cubos::engine::Cubos.
-/// @ingroup engine
+/// @brief Class @ref cubos::core::ecs::Cubos.
+/// @ingroup core-ecs
 
 #pragma once
 
@@ -10,10 +10,12 @@
 #include <cubos/core/ecs/system/arguments/event/pipe.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/ecs/system/system.hpp>
+#include <cubos/core/ecs/tag.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
 {
+
     /// @brief Resource which stores the time since the last iteration of the main loop started.
     ///
     /// This resource is added and updated by the @ref Cubos class.
@@ -60,17 +62,17 @@ namespace cubos::core::ecs
         /// @brief Sets the current tag to be executed before another tag.
         /// @param tag Tag to be executed before.
         /// @return Reference to this object, for chaining.
-        TagBuilder& before(const std::string& tag);
+        TagBuilder& before(const Tag& tag);
 
         /// @brief Sets the current tag to be executed after another tag.
         /// @param tag Tag to be executed after.
         /// @return Reference to this object, for chaining.
-        TagBuilder& after(const std::string& tag);
+        TagBuilder& after(const Tag& tag);
 
         /// @brief Tags all systems on this tag with the given tag.
         /// @param tag Tag to be inherited from.
         /// @return Reference to this object, for chaining.
-        TagBuilder& tagged(const std::string& tag);
+        TagBuilder& tagged(const Tag& tag);
 
         /// @brief Adds a condition to the current tag. If this condition returns false, systems
         /// with this tag will not be executed. For the tagged systems to run, all conditions must
@@ -154,22 +156,22 @@ namespace cubos::core::ecs
         /// @brief Returns a @ref TagBuilder to configure the systems with the given tag.
         /// @param tag Tag.
         /// @return @ref TagBuilder.
-        TagBuilder tag(const std::string& tag);
+        TagBuilder tag(const Tag& tag);
 
         /// @brief Returns a @ref TagBuilder to configure the systems with the given startup tag.
         /// @param tag Tag.
         /// @return @ref TagBuilder.
-        TagBuilder startupTag(const std::string& tag);
+        TagBuilder startupTag(const Tag& tag);
 
         /// @brief Returns a @ref TagBuilder to configure the systems without the given tag.
         /// @param tag Tag.
         /// @return @ref TagBuilder.
-        TagBuilder noTag(const std::string& tag);
+        TagBuilder noTag(const Tag& tag);
 
         /// @brief Returns a @ref TagBuilder to configure the systems without the given startup tag.
         /// @param tag Tag.
         /// @return @ref TagBuilder.
-        TagBuilder noStartupTag(const std::string& tag);
+        TagBuilder noStartupTag(const Tag& tag);
 
         /// @brief Returns a new builder used to add a system to the engine.
         /// @param name System debug name.
@@ -213,17 +215,17 @@ namespace cubos::core::ecs
         /// @brief Adds a tag to the system.
         /// @param tag Tag.
         /// @return Builder.
-        SystemBuilder&& tagged(const std::string& tag) &&;
+        SystemBuilder&& tagged(const Tag& tag) &&;
 
         /// @brief Forces this system to only run after all systems with the given tag have finished.
         /// @param tag Tag.
         /// @return Builder.
-        SystemBuilder&& before(const std::string& tag) &&;
+        SystemBuilder&& before(const Tag& tag) &&;
 
         /// @brief Forces all systems with the given tag to run only after this system has finished.
         /// @param tag Tag.
         /// @return Builder.
-        SystemBuilder&& after(const std::string& tag) &&;
+        SystemBuilder&& after(const Tag& tag) &&;
 
         /// @brief Forces the next entity query argument to have the given target.
         /// @param target Target index. By default, the last specified target or 0.

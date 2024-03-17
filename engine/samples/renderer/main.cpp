@@ -4,6 +4,7 @@
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/splitscreen/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 
 using namespace cubos::engine;
 
@@ -16,14 +17,14 @@ int main()
     cubos.addPlugin(rendererPlugin);
     /// [Adding the plugin]
 
-    cubos.startupSystem("configure Assets").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("configure Assets").tagged(SettingsTag).call([](Settings& settings) {
         // We don't load assets in this sample and we don't even have an assets folder, so we should
         // disable assets IO.
         settings.setBool("assets.io.enabled", false);
     });
 
     /// [Setting the palette]
-    cubos.startupSystem("set the palette").after("cubos.renderer.init").call([](Renderer& renderer) {
+    cubos.startupSystem("set the palette").after(RendererInitTag).call([](Renderer& renderer) {
         // Create a simple palette with 3 materials (red, green and blue).
         renderer->setPalette(VoxelPalette{{
             {{1, 0, 0, 1}},

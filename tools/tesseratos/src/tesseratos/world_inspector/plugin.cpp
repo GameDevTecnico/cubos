@@ -71,7 +71,7 @@ void tesseratos::worldInspectorPlugin(Cubos& cubos)
     cubos.addPlugin(toolboxPlugin);
     cubos.addPlugin(entitySelectorPlugin);
     cubos.system("show World Inspector UI")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::ImguiTag)
         .call([](World& world, Query<Entity, Opt<const Name&>> all,
                  Query<Entity, Opt<const Name&>, const ChildOf&, Entity> query) {
             if (!(world.write<Toolbox>().get().isOpen("World Inspector")))

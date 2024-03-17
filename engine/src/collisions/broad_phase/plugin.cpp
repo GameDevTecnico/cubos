@@ -1,11 +1,20 @@
 #include "plugin.hpp"
 
 #include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 
 #include "sweep_and_prune.hpp"
+
+CUBOS_DEFINE_TAG(cubos::engine::CollisionsAABBSetupTag);
+CUBOS_DEFINE_TAG(cubos::engine::CollisionsAABBUpdateTag);
+CUBOS_DEFINE_TAG(cubos::engine::CollisionsBroadMarkersTag);
+CUBOS_DEFINE_TAG(cubos::engine::CollisionsBroadSweepTag);
+CUBOS_DEFINE_TAG(cubos::engine::CollisionsBroadCleanTag);
+CUBOS_DEFINE_TAG(cubos::engine::CollisionsBroadTag);
 
 void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
 {
@@ -13,7 +22,7 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
     cubos.addRelation<PotentiallyCollidingWith>();
 
     cubos.system("detect new colliders")
-        .tagged("cubos.collisions.aabb.setup")
+        .tagged(CollisionsAABBSetupTag)
         .call([](Query<Entity, const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
             sweepAndPrune.clearEntities();
             for (auto [entity, collider] : query)
@@ -23,10 +32,10 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
         });
 
     cubos.system("update collider AABBs")
-        .tagged("cubos.collisions.aabb.update")
-        .after("cubos.collisions.setup")
-        .after("cubos.collisions.aabb.setup")
-        .after("cubos.transform.update")
+        .tagged(CollisionsAABBUpdateTag)
+        .after(CollisionsSetupTag)
+        .after(CollisionsAABBSetupTag)
+        .after(TransformUpdateTag)
         .call([](Query<const LocalToWorld&, Collider&> query) {
             for (auto [localToWorld, collider] : query)
             {
@@ -63,8 +72,8 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
         });
 
     cubos.system("update sweep and prune markers")
-        .tagged("cubos.collisions.broad.markers")
-        .after("cubos.collisions.aabb.update")
+        .tagged(CollisionsBroadMarkersTag)
+        .after(CollisionsAABBUpdateTag)
         .call([](Query<const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
             // TODO: This is parallelizable.
             for (glm::length_t axis = 0; axis < 3; axis++)
@@ -89,8 +98,8 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
         });
 
     cubos.system("collisions sweep")
-        .tagged("cubos.collisions.broad.sweep")
-        .after("cubos.collisions.broad.markers")
+        .tagged(CollisionsBroadSweepTag)
+        .after(CollisionsBroadMarkersTag)
         .call([](BroadPhaseSweepAndPrune& sweepAndPrune) {
             // TODO: This is parallelizable.
             for (glm::length_t axis = 0; axis < 3; axis++)
@@ -118,8 +127,8 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
         });
 
     cubos.system("clean PotentiallyCollidingWith relations")
-        .tagged("cubos.collisions.broad.clean")
-        .before("cubos.collisions.broad")
+        .tagged(CollisionsBroadCleanTag)
+        .before(CollisionsBroadTag)
         .call([](Commands cmds, Query<Entity, PotentiallyCollidingWith&, Entity> query) {
             for (auto [entity, collidingWith, other] : query)
             {
@@ -128,8 +137,8 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
         });
 
     cubos.system("create PotentiallyCollidingWith relations")
-        .tagged("cubos.collisions.broad")
-        .after("cubos.collisions.broad.sweep")
+        .tagged(CollisionsBroadTag)
+        .after(CollisionsBroadSweepTag)
         .call([](Commands cmds, Query<const Collider&> query, const BroadPhaseSweepAndPrune& sweepAndPrune) {
             for (glm::length_t axis = 0; axis < 3; axis++)
             {

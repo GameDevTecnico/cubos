@@ -1,5 +1,6 @@
 #include <glm/glm.hpp>
 
+#include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
 
 using namespace cubos::engine;
@@ -9,7 +10,7 @@ void cubos::engine::gravityPlugin(Cubos& cubos)
     cubos.addResource<Gravity>();
 
     cubos.system("apply gravity")
-        .tagged("cubos.physics.apply_forces")
+        .tagged(PhysicsApplyForcesTag)
         .call([](Query<Velocity&, Force&, const Mass&> query, const Gravity& gravity) {
             for (auto [velocity, force, mass] : query)
             {

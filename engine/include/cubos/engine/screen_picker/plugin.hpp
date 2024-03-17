@@ -19,16 +19,18 @@ namespace cubos::engine
     /// ## Resources
     /// - @ref ScreenPicker - provides a texture to store entity and gizmo ids.
     ///
-    /// ## Startup tags
-    /// - `cubos.screenPicker.init` - the ScreenPicker resource is initialized, after `cubos.window.init`
-    ///
-    /// ## Tags
-    /// - `cubos.screenPicker.clear` - the picking texture is cleared
-    /// - `cubos.screenPicker.resize` - window resize events are handled and the ScreenPicker texture is resized, after
-    /// `cubos.window.poll` and before `cubos.screenPicker.clear`.
-    ///
     /// ## Dependencies
     /// - @ref window-plugin
+
+    /// @brief the ScreenPicker resource is initialized, after `cubos.window.init`
+    extern Tag ScreenPickerInitTag;
+
+    /// @brief the picking texture is cleared
+    extern Tag ScreenPickerClearTag;
+
+    /// @brief window resize events are handled and the ScreenPicker texture is resized, after
+    /// `cubos.window.poll` and before `cubos.screenPicker.clear`.
+    extern Tag ScreenPickerResizeTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

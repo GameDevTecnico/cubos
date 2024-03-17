@@ -3,6 +3,7 @@
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 
 using namespace cubos::engine;
 
@@ -20,7 +21,7 @@ int main(int argc, char** argv)
     cubos.addPlugin(voxelsPlugin);
     /// [Adding the plugin]
 
-    cubos.startupSystem("configure Assets").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("configure Assets").tagged(SettingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
     });
 
@@ -42,7 +43,7 @@ int main(int argc, char** argv)
 
     /// [Load and set palette]
     cubos.startupSystem("load and set pallete")
-        .after("cubos.renderer.init")
+        .after(RendererInitTag)
         .call([](const Assets& assets, Renderer& renderer) {
             // Read the palette's data and pass it to the renderer.
             auto palette = assets.read(PaletteAsset);
@@ -51,7 +52,7 @@ int main(int argc, char** argv)
     /// [Load and set palette]
 
     /// [Spawn car system]
-    cubos.startupSystem("create a car").tagged("cubos.assets").call([](Commands cmds, const Assets& assets) {
+    cubos.startupSystem("create a car").tagged(AssetsTag).call([](Commands cmds, const Assets& assets) {
         // Calculate the necessary offset to center the model on (0, 0, 0).
         auto car = assets.read(CarAsset);
         glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;

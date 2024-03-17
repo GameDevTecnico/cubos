@@ -6,15 +6,19 @@
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
 
+#include "../broad_phase/plugin.hpp"
 #include "../broad_phase/potentially_colliding_with.hpp"
+
+CUBOS_DEFINE_TAG(cubos::engine::CollisionsNarrowCleanTag);
+CUBOS_DEFINE_TAG(cubos::engine::CollisionsNarrowTag);
 
 void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
 {
     cubos.addRelation<CollidingWith>();
 
     cubos.system("clean colliding pairs")
-        .tagged("cubos.collisions.narrow.clean")
-        .before("cubos.collisions.narrow")
+        .tagged(CollisionsNarrowCleanTag)
+        .before(CollisionsNarrowTag)
         .call([](Commands cmds, Query<Entity, CollidingWith&, Entity> query) {
             for (auto [entity, collidingWith, other] : query)
             {
@@ -23,8 +27,8 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
         });
 
     cubos.system("find colliding pairs")
-        .tagged("cubos.collisions.narrow")
-        .after("cubos.collisions.broad")
+        .tagged(CollisionsNarrowTag)
+        .after(CollisionsBroadTag)
         .call([](Commands cmds, Query<Entity, const LocalToWorld&, const BoxCollisionShape&, PotentiallyCollidingWith&,
                                       Entity, const LocalToWorld&, const BoxCollisionShape&>
                                     query) {

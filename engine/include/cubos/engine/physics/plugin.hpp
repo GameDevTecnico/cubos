@@ -45,11 +45,21 @@ namespace cubos::engine
     /// - @ref PreviousPosition - holds the previous position of the entity in a substep.
     /// - @ref AccumulatedCorrection - holds the corrections accumulated from the constraints solving.
     ///
-    /// ## Tags
-    /// - `cubos.physics.apply_forces`
-    ///
     /// ## Dependencies
     /// - @ref physics-gravity-plugin
+
+    /// @brief `cubos.physics.apply_forces`
+    extern Tag PhysicsApplyForcesTag;
+
+    extern Tag PhysicsSimulationApplyImpulsesTag;
+
+    extern Tag PhysicsSimulationSubstepsIntegrateTag;
+
+    extern Tag PhysicsSimulationSubstepsCorrectPositionTag;
+
+    extern Tag PhysicsSimulationSubstepsUpdateVelocityTag;
+
+    extern Tag PhysicsSimulationClearForcesTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class

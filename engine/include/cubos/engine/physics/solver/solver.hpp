@@ -16,6 +16,8 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     /// @brief Adds solver for constraints.
 
+    extern Tag PhysicsSolveTag;
+
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup physics-gravity-plugin

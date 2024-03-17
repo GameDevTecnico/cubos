@@ -19,23 +19,26 @@ TagBuilder::TagBuilder(World& world, core::ecs::Dispatcher& dispatcher, std::vec
 {
 }
 
-TagBuilder& TagBuilder::before(const std::string& tag)
+TagBuilder& TagBuilder::before(const Tag& tag)
 {
-    mTags.push_back(tag);
-    mDispatcher.tagSetBeforeTag(tag);
+    const std::string tagstr = tag.id();
+    mTags.push_back(tagstr);
+    mDispatcher.tagSetBeforeTag(tagstr);
     return *this;
 }
 
-TagBuilder& TagBuilder::after(const std::string& tag)
+TagBuilder& TagBuilder::after(const Tag& tag)
 {
-    mTags.push_back(tag);
-    mDispatcher.tagSetAfterTag(tag);
+    std::string tagstr = tag.id();
+    mTags.push_back(tagstr);
+    mDispatcher.tagSetAfterTag(tagstr);
     return *this;
 }
 
-TagBuilder& TagBuilder::tagged(const std::string& tag)
+TagBuilder& TagBuilder::tagged(const Tag& tag)
 {
-    mDispatcher.tagInheritTag(tag);
+    std::string tagstr = tag.id();
+    mDispatcher.tagInheritTag(tagstr);
     return *this;
 }
 
@@ -94,27 +97,31 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
     return *this;
 }
 
-TagBuilder Cubos::tag(const std::string& tag)
+TagBuilder Cubos::tag(const Tag& tag)
 {
-    mMainDispatcher.addTag(tag);
+    const std::string tagstr = tag.id();
+    mMainDispatcher.addTag(tagstr);
     return TagBuilder{mWorld, mMainDispatcher, mMainTags};
 }
 
-TagBuilder Cubos::startupTag(const std::string& tag)
+TagBuilder Cubos::startupTag(const Tag& tag)
 {
-    mStartupDispatcher.addTag(tag);
+    const std::string tagstr = tag.id();
+    mStartupDispatcher.addTag(tagstr);
     return TagBuilder{mWorld, mStartupDispatcher, mStartupTags};
 }
 
-TagBuilder Cubos::noTag(const std::string& tag)
+TagBuilder Cubos::noTag(const Tag& tag)
 {
-    mMainDispatcher.addNegativeTag(tag);
+    const std::string tagstr = tag.id();
+    mMainDispatcher.addNegativeTag(tagstr);
     return TagBuilder{mWorld, mMainDispatcher, mMainTags};
 }
 
-TagBuilder Cubos::noStartupTag(const std::string& tag)
+TagBuilder Cubos::noStartupTag(const Tag& tag)
 {
-    mStartupDispatcher.addNegativeTag(tag);
+    const std::string tagstr = tag.id();
+    mStartupDispatcher.addNegativeTag(tagstr);
     return TagBuilder{mWorld, mStartupDispatcher, mStartupTags};
 }
 
@@ -140,21 +147,24 @@ Cubos::SystemBuilder::SystemBuilder(World& world, Dispatcher& dispatcher, std::s
 {
 }
 
-auto Cubos::SystemBuilder::tagged(const std::string& tag) && -> SystemBuilder&&
+auto Cubos::SystemBuilder::tagged(const Tag& tag) && -> SystemBuilder&&
 {
-    mTagged.insert(tag);
+    const std::string tagstr = tag.id();
+    mTagged.insert(tagstr);
     return std::move(*this);
 }
 
-auto Cubos::SystemBuilder::before(const std::string& tag) && -> SystemBuilder&&
+auto Cubos::SystemBuilder::before(const Tag& tag) && -> SystemBuilder&&
 {
-    mBefore.insert(tag);
+    const std::string tagstr = tag.id();
+    mBefore.insert(tagstr);
     return std::move(*this);
 }
 
-auto Cubos::SystemBuilder::after(const std::string& tag) && -> SystemBuilder&&
+auto Cubos::SystemBuilder::after(const Tag& tag) && -> SystemBuilder&&
 {
-    mAfter.insert(tag);
+    const std::string tagstr = tag.id();
+    mAfter.insert(tagstr);
     return std::move(*this);
 }
 

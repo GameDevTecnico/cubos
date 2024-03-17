@@ -10,6 +10,7 @@
 #include <cubos/engine/assets/bridges/json.hpp>
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 
 using cubos::core::data::FileSystem;
 using cubos::core::memory::Stream;
@@ -38,12 +39,12 @@ int main()
 
     cubos.addPlugin(assetsPlugin);
 
-    cubos.startupSystem("configure Assets plugin").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("configure Assets plugin").tagged(SettingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
     });
 
     /// [Register bridge]
-    cubos.startupSystem("setup bridge to load .strings files").tagged("cubos.assets.bridge").call([](Assets& assets) {
+    cubos.startupSystem("setup bridge to load .strings files").tagged(AssetsBridgeTag).call([](Assets& assets) {
         assets.registerBridge(".strings", std::make_unique<JSONBridge<Strings>>());
     });
     /// [Register bridge]
@@ -51,7 +52,7 @@ int main()
     /// [Loading the asset]
     static const Asset<Strings> SampleAsset = AnyAsset("6f42ae5a-59d1-5df3-8720-83b8df6dd536");
 
-    cubos.startupSystem("access .strings asset").tagged("cubos.assets").call([](Assets& assets) {
+    cubos.startupSystem("access .strings asset").tagged(AssetsTag).call([](Assets& assets) {
         auto read = assets.read(SampleAsset);
         for (const auto& str : read->strings)
         {

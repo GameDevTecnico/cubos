@@ -55,5 +55,5 @@ void tesseratos::toolboxPlugin(Cubos& cubos)
 {
     cubos.addResource<Toolbox>();
     cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.system("show Toolbox UI").tagged("cubos.imgui").call(showToolbox);
+    cubos.system("show Toolbox UI").tagged(cubos::engine::ImguiTag).call(showToolbox);
 }

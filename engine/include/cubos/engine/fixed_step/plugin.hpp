@@ -19,8 +19,9 @@ namespace cubos::engine
     /// ## Resources
     /// - @ref FixedDeltaTime - holds the value of the fixed delta for the physics update.
     ///
-    /// ## Tags
-    /// - `cubos.fixedStep`
+
+    /// @brief systems with this tag run at a fixed framerate.
+    extern Tag FixedStepTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class

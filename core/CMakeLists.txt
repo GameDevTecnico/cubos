@@ -121,6 +121,7 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/query/node/related.cpp"
 
 	"src/ecs/reflection.cpp"
+	"src/ecs/tag.cpp"
 	"src/ecs/blueprint.cpp"
     "src/ecs/name.cpp"
 	"src/ecs/world.cpp"

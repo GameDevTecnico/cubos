@@ -26,7 +26,7 @@ void tesseratos::playPausePlugin(Cubos& cubos)
 
     cubos.addResource<State>();
 
-    cubos.system("show Play Pause UI").tagged("cubos.imgui").call([](State& state, Toolbox& toolbox, DeltaTime& dt) {
+    cubos.system("show Play Pause UI").tagged(cubos::engine::ImguiTag).call([](State& state, Toolbox& toolbox, DeltaTime& dt) {
         if (!toolbox.isOpen("Play Pause"))
         {
             return;

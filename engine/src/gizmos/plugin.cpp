@@ -12,6 +12,11 @@
 
 #include "renderer.hpp"
 
+CUBOS_DEFINE_TAG(cubos::engine::GizmosInitTag);
+CUBOS_DEFINE_TAG(cubos::engine::GizmosInputTag);
+CUBOS_DEFINE_TAG(cubos::engine::GizmosDrawTag);
+CUBOS_DEFINE_TAG(cubos::engine::GizmosPickTag);
+
 using cubos::core::gl::Texture2D;
 
 using cubos::core::io::MouseButtonEvent;
@@ -187,6 +192,7 @@ static std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>> getScreenInfo(c
 
 void cubos::engine::gizmosPlugin(Cubos& cubos)
 {
+
     cubos.addPlugin(cubos::engine::rendererPlugin);
     cubos.addPlugin(cubos::engine::screenPickerPlugin);
 
@@ -194,15 +200,15 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
     cubos.addResource<GizmosRenderer>();
 
     cubos.startupSystem("initialize GizmosRenderer")
-        .tagged("cubos.gizmos.init")
-        .after("cubos.window.init")
+        .tagged(GizmosInitTag)
+        .after(WindowInitTag)
         .call(
             [](GizmosRenderer& gizmosRenderer, const Window& window) { gizmosRenderer.init(&window->renderDevice()); });
 
     cubos.system("process gizmos input")
-        .tagged("cubos.gizmos.input")
-        .after("cubos.window.poll")
-        .before("cubos.gizmos.draw")
+        .tagged(GizmosInputTag)
+        .after(WindowPollTag)
+        .before(GizmosDrawTag)
         .call([](GizmosRenderer& gizmosRenderer, Gizmos& gizmos, EventReader<WindowEvent> windowEvent) {
             gizmos.mLocking = false;
             for (const auto& event : windowEvent)
@@ -230,9 +236,9 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
         });
 
     cubos.system("draw gizmos")
-        .tagged("cubos.gizmos.draw")
-        .after("cubos.renderer.draw")
-        .before("cubos.window.render")
+        .tagged(GizmosDrawTag)
+        .after(RendererDrawTag)
+        .before(WindowRenderTag)
         .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, ScreenPicker& screenPicker,
                  const ActiveCameras& activeCameras, const Window& window, const DeltaTime& deltaTime,
                  Query<const LocalToWorld&, const Camera&> query) {
@@ -254,8 +260,8 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
         });
 
     cubos.system("do gizmos screen picking")
-        .tagged("cubos.gizmos.pick")
-        .after("cubos.gizmos.draw")
+        .tagged(GizmosPickTag)
+        .after(GizmosDrawTag)
         .call([](GizmosRenderer& gizmosRenderer, Gizmos& gizmos, const ScreenPicker& screenPicker) {
             int mouseX = gizmosRenderer.lastMousePosition.x;
             int mouseY = gizmosRenderer.lastMousePosition.y;

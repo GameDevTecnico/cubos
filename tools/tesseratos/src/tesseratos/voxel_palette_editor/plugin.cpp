@@ -100,7 +100,7 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
     cubos.addResource<SelectedPaletteInfo>();
 
     cubos.system("open Voxel Palette Editor on asset selection")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::ImguiTag)
         .call([](EventReader<AssetSelectedEvent> reader, Assets& assets, SelectedPaletteInfo& selectedPalette,
                  Toolbox& toolbox) {
             for (const auto& event : reader)
@@ -129,7 +129,7 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
         });
 
     cubos.system("show Voxel Palette Editor UI")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::ImguiTag)
         .call([](Assets& assets, SelectedPaletteInfo& selectedPalette, ActiveVoxelPalette& activePalette,
                  Toolbox& toolbox) {
             if (!toolbox.isOpen("Palette Editor"))

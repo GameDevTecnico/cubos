@@ -27,16 +27,21 @@ namespace cubos::engine
     /// ## Resources
     /// - @ref Assets - the asset manager, used to access asset data.
     ///
-    /// ## Startup tags
-    /// - `cubos.assets.init` - initializes the assets manager and loads the meta files (after `cubos.settings`).
-    /// - `cubos.assets.bridge` - systes which add bridges to the asset manager should be tagged with this.
-    /// - `cubos.assets` - startup systems which load assets should be tagged with this.
-    ///
-    /// ## Tags
-    /// - `cubos.assets.cleanup` - frees any assets no longer in use.
     ///
     /// ## Dependencies
     /// - @ref settings-plugin
+
+    /// @brief initializes the assets manager and loads the meta files (after `cubos.settings`).
+    extern Tag AssetsInitTag;
+
+    /// @brief systes which add bridges to the asset manager should be tagged with this.
+    extern Tag AssetsBridgeTag;
+
+    /// @brief frees any assets no longer in use.s
+    extern Tag AssetsCleanupTag;
+
+    /// @brief startup systems which load assets should be tagged with this.
+    extern Tag AssetsTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

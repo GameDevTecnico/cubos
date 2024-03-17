@@ -4,6 +4,17 @@
 
 using namespace cubos::engine;
 
+namespace cubos::engine
+{
+    extern Tag eventA;
+    extern Tag eventB;
+    extern Tag eventC;
+} // namespace cubos::engine
+
+CUBOS_DEFINE_TAG(cubos::engine::eventA);
+CUBOS_DEFINE_TAG(cubos::engine::eventB);
+CUBOS_DEFINE_TAG(cubos::engine::eventC);
+
 /// [Event struct]
 struct MyEvent
 {
@@ -28,21 +39,21 @@ int main()
     cubos.startupSystem("set ShouldQuit to false").call([](ShouldQuit& quit) { quit.value = false; });
 
     /// [Event reader systems]
-    cubos.system("A").before("b").call([](EventReader<MyEvent> reader) {
+    cubos.system("A").before(eventB).call([](EventReader<MyEvent> reader) {
         for (const auto& event : reader)
         {
             CUBOS_INFO("A read {}", event.value);
         }
     });
 
-    cubos.system("C").tagged("c").after("b").call([](EventReader<MyEvent> reader) {
+    cubos.system("C").tagged(eventC).after(eventB).call([](EventReader<MyEvent> reader) {
         for (const auto& event : reader)
         {
             CUBOS_INFO("C read {}", event.value);
         }
     });
 
-    cubos.system("D").after("c").call([](EventReader<MyEvent> reader) {
+    cubos.system("D").after(eventC).call([](EventReader<MyEvent> reader) {
         for (const auto& event : reader)
         {
             CUBOS_INFO("D read {}", event.value);
@@ -51,7 +62,7 @@ int main()
     /// [Event reader systems]
 
     /// [Event writer system]
-    cubos.system("B").tagged("b").call([](EventWriter<MyEvent> writer, State& state, ShouldQuit& quit) {
+    cubos.system("B").tagged(eventB).call([](EventWriter<MyEvent> writer, State& state, ShouldQuit& quit) {
         state.step += 1;
         if (state.step == 1) // Write 1 2 3 on first run.
         {

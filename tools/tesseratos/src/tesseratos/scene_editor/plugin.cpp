@@ -412,7 +412,7 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
         });
 
     cubos.system("show Scene Editor UI")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::ImguiTag)
         .call([](const World& world, Assets& assets, Commands cmds, State& state, EntitySelector& selector,
                  Toolbox& toolbox) {
             if (!toolbox.isOpen("Scene Editor"))

@@ -120,7 +120,7 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
     cubos.addPlugin(toolboxPlugin);
 
     cubos.system("show Asset Explorer UI")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::ImguiTag)
         .call([](const Assets& assets, Settings& settings, Toolbox& toolbox, EventWriter<AssetSelectedEvent> events) {
             if (!toolbox.isOpen("Asset Explorer"))
             {
