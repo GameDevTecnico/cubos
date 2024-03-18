@@ -96,6 +96,9 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/shader/plugin.cpp"
 	"src/render/shader/shader.cpp"
 	"src/render/shader/bridge.cpp"
+
+	"src/render/g_buffer/plugin.cpp"
+	"src/render/g_buffer/g_buffer.cpp"
 )
 
 # Create cubos engine
