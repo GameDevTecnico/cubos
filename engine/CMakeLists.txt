@@ -112,6 +112,9 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/render/picker/plugin.cpp"
 	"src/render/picker/picker.cpp"
+
+	"src/render/depth/plugin.cpp"
+	"src/render/depth/depth.cpp"
 )
 
 # Create cubos engine
