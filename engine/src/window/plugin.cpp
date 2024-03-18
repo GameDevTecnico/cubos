@@ -11,14 +11,14 @@ using cubos::core::io::WindowEvent;
 
 void cubos::engine::windowPlugin(Cubos& cubos)
 {
+    cubos.depends(settingsPlugin);
 
-    cubos.addPlugin(settingsPlugin);
-
-    cubos.addResource<Window>();
-    cubos.addEvent<WindowEvent>();
+    cubos.resource<Window>();
+    cubos.event<WindowEvent>();
 
     cubos.startupTag(windowInitTag).after(settingsTag);
-    cubos.tag(windowPollTag).before(windowRenderTag);
+    cubos.tag(windowPollTag);
+    cubos.tag(windowRenderTag).after(windowPollTag);
 
     cubos.startupSystem("open Window")
         .tagged(windowInitTag)

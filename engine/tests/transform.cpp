@@ -7,7 +7,7 @@ using namespace cubos::engine;
 TEST_CASE("cubos::engine::transformPlugin")
 {
     Cubos cubos{};
-    cubos.addPlugin(transformPlugin);
+    cubos.plugin(transformPlugin);
 
     SUBCASE("main components are added automatically")
     {

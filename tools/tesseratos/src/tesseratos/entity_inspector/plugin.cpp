@@ -21,9 +21,9 @@ using cubos::engine::DataInspector;
 
 void tesseratos::entityInspectorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(entitySelectorPlugin);
-    cubos.addPlugin(toolboxPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(entitySelectorPlugin);
+    cubos.depends(toolboxPlugin);
 
     cubos.system("show Entity Inspector UI")
         .tagged(cubos::engine::imguiTag)

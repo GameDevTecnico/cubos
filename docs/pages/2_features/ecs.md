@@ -139,9 +139,9 @@ using the **CUBOS.** @ref cubos::core::ecs::Cubos "main class", for the
 previous example we would write:
 
 ```cpp
-cubos.addComponent<Position>();
-cubos.addRelation<ChildOf>();
-cubos.addResource<DeltaTime>();
+cubos.component<Position>();
+cubos.relation<ChildOf>();
+cubos.resource<DeltaTime>();
 ```
 
 @note If you're working directly with a World, you can use methods such as

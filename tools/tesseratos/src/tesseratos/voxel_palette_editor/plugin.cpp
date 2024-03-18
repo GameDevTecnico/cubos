@@ -90,14 +90,14 @@ static void savePaletteUiGuard(Assets& assets, SelectedPaletteInfo& selectedPale
 
 void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::rendererPlugin);
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(cubos::engine::voxelsPlugin);
+    cubos.depends(cubos::engine::rendererPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(cubos::engine::voxelsPlugin);
 
-    cubos.addPlugin(assetExplorerPlugin);
-    cubos.addPlugin(toolboxPlugin);
+    cubos.depends(assetExplorerPlugin);
+    cubos.depends(toolboxPlugin);
 
-    cubos.addResource<SelectedPaletteInfo>();
+    cubos.resource<SelectedPaletteInfo>();
 
     cubos.system("open Voxel Palette Editor on asset selection")
         .tagged(cubos::engine::imguiTag)

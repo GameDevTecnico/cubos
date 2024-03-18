@@ -7,9 +7,9 @@
 #include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
+#include "../interface/plugin.hpp"
 #include "sweep_and_prune.hpp"
 
-CUBOS_DEFINE_TAG(cubos::engine::collisionsAABBSetupTag);
 CUBOS_DEFINE_TAG(cubos::engine::collisionsAABBUpdateTag);
 CUBOS_DEFINE_TAG(cubos::engine::collisionsBroadMarkersTag);
 CUBOS_DEFINE_TAG(cubos::engine::collisionsBroadSweepTag);
@@ -18,23 +18,39 @@ CUBOS_DEFINE_TAG(cubos::engine::collisionsBroadTag);
 
 void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
 {
-    cubos.addResource<BroadPhaseSweepAndPrune>();
-    cubos.addRelation<PotentiallyCollidingWith>();
+    cubos.depends(transformPlugin);
+    cubos.depends(interfaceCollisionsPlugin);
 
-    cubos.system("detect new colliders")
-        .tagged(collisionsAABBSetupTag)
-        .call([](Query<Entity, const Collider&> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
-            sweepAndPrune.clearEntities();
-            for (auto [entity, collider] : query)
+    cubos.relation<PotentiallyCollidingWith>();
+
+    cubos.resource<BroadPhaseSweepAndPrune>();
+
+    cubos.tag(collisionsAABBUpdateTag);
+    cubos.tag(collisionsBroadMarkersTag);
+    cubos.tag(collisionsBroadSweepTag);
+    cubos.tag(collisionsBroadCleanTag);
+    cubos.tag(collisionsBroadTag);
+
+    cubos.observer("add new Colliders to SweepAndPrune")
+        .onAdd<Collider>()
+        .call([](Query<Entity> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
+            for (auto [entity] : query)
             {
                 sweepAndPrune.addEntity(entity);
             }
         });
 
+    cubos.observer("remove old Colliders from SweepAndPrune")
+        .onAdd<Collider>()
+        .call([](Query<Entity> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
+            for (auto [entity] : query)
+            {
+                sweepAndPrune.removeEntity(entity);
+            }
+        });
+
     cubos.system("update collider AABBs")
         .tagged(collisionsAABBUpdateTag)
-        .after(collisionsSetupTag)
-        .after(collisionsAABBSetupTag)
         .after(transformUpdateTag)
         .call([](Query<const LocalToWorld&, Collider&> query) {
             for (auto [localToWorld, collider] : query)

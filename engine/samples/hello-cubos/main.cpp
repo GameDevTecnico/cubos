@@ -47,21 +47,22 @@ int main()
     cubos.startupSystem("say Hello CUBOS").call([]() { CUBOS_INFO("Hello CUBOS"); });
     /// [Hello CUBOS]
 
+    /// [Tags]
+    cubos.tag(helloTag);
+    cubos.tag(worldTag).after(helloTag);
+    /// [Tags]
+
     /// [Hello World]
     cubos.system("say Hello").tagged(helloTag).call([]() { CUBOS_INFO("Hello"); });
     cubos.system("say World").tagged(worldTag).call([]() { CUBOS_INFO("World"); });
     /// [Hello World]
 
-    /// [Tags]
-    cubos.tag(helloTag).before(worldTag);
-    /// [Tags]
-
     /// [Component Add]
-    cubos.addComponent<Num>();
+    cubos.component<Num>();
     /// [Component Add]
 
     /// [Resource Add]
-    cubos.addResource<Pop>();
+    cubos.resource<Pop>();
     /// [Resource Add]
 
     /// [Entity Spawn]

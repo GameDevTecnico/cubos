@@ -32,11 +32,11 @@ namespace
 
 void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(toolboxPlugin);
-    cubos.addPlugin(entitySelectorPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(toolboxPlugin);
+    cubos.depends(entitySelectorPlugin);
 
-    cubos.addResource<State>();
+    cubos.resource<State>();
 
     cubos.system("show ECS statistics")
         .tagged(cubos::engine::imguiTag)

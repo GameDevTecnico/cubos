@@ -68,7 +68,9 @@ static Settings loadFromFile(std::string_view path)
 
 void cubos::engine::settingsPlugin(Cubos& cubos)
 {
-    cubos.addResource<Settings>();
+    cubos.resource<Settings>();
+
+    cubos.tag(settingsTag);
 
     cubos.startupSystem("load Settings from file and arguments")
         .tagged(settingsTag)

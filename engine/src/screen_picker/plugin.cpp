@@ -6,8 +6,8 @@
 #include <cubos/engine/window/plugin.hpp>
 
 CUBOS_DEFINE_TAG(cubos::engine::screenPickerInitTag);
-CUBOS_DEFINE_TAG(cubos::engine::screenPickerClearTag);
 CUBOS_DEFINE_TAG(cubos::engine::screenPickerResizeTag);
+CUBOS_DEFINE_TAG(cubos::engine::screenPickerDrawTag);
 
 using cubos::core::io::ResizeEvent;
 using cubos::core::io::Window;
@@ -15,10 +15,14 @@ using cubos::core::io::WindowEvent;
 
 void cubos::engine::screenPickerPlugin(Cubos& cubos)
 {
+    cubos.depends(windowPlugin);
 
-    cubos.addPlugin(cubos::engine::windowPlugin);
+    cubos.resource<ScreenPicker>();
 
-    cubos.addResource<ScreenPicker>();
+    cubos.startupTag(screenPickerInitTag);
+
+    cubos.tag(screenPickerResizeTag);
+    cubos.tag(screenPickerDrawTag);
 
     cubos.startupSystem("initialize ScreenPicker")
         .tagged(screenPickerInitTag)
@@ -27,14 +31,9 @@ void cubos::engine::screenPickerPlugin(Cubos& cubos)
             screenPicker.init(&window->renderDevice(), window->framebufferSize());
         });
 
-    cubos.system("clear ScreenPicker texture").tagged(screenPickerClearTag).call([](ScreenPicker& screenPicker) {
-        screenPicker.clearTexture();
-    });
-
     cubos.system("update ScreenPicker on resize")
         .tagged(screenPickerResizeTag)
         .after(windowPollTag)
-        .before(screenPickerClearTag)
         .call([](ScreenPicker& screenPicker, EventReader<WindowEvent> windowEvent) {
             for (const auto& event : windowEvent)
             {
@@ -44,4 +43,9 @@ void cubos::engine::screenPickerPlugin(Cubos& cubos)
                 }
             }
         });
+
+    cubos.system("clear ScreenPicker texture")
+        .after(screenPickerResizeTag)
+        .before(screenPickerDrawTag)
+        .call([](ScreenPicker& screenPicker) { screenPicker.clearTexture(); });
 }

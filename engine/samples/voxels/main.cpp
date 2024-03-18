@@ -1,9 +1,11 @@
 #include <cubos/engine/renderer/directional_light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 using namespace cubos::engine;
 
@@ -16,9 +18,15 @@ int main(int argc, char** argv)
 {
     Cubos cubos{argc, argv};
 
-    cubos.addPlugin(rendererPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(windowPlugin);
+    cubos.plugin(transformPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(screenPickerPlugin);
+    cubos.plugin(rendererPlugin);
+
     /// [Adding the plugin]
-    cubos.addPlugin(voxelsPlugin);
+    cubos.plugin(voxelsPlugin);
     /// [Adding the plugin]
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {

@@ -19,9 +19,9 @@ using cubos::engine::Settings;
 
 void tesseratos::settingsInspectorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::settingsPlugin);
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(toolboxPlugin);
+    cubos.depends(cubos::engine::settingsPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(toolboxPlugin);
 
     cubos.system("show Settings Inspector UI")
         .tagged(cubos::engine::imguiTag)

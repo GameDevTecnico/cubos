@@ -6,7 +6,7 @@
 
 void cubos::engine::voxelsPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(assetsPlugin);
+    cubos.depends(assetsPlugin);
 
     cubos.startupSystem("setup VoxelGrid and VoxelPalette asset bridges")
         .tagged(assetsBridgeTag)

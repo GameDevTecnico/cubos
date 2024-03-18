@@ -16,12 +16,12 @@ using cubos::core::io::WindowEvent;
 
 void cubos::engine::imguiPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(windowPlugin);
-    cubos.addPlugin(rendererPlugin);
+    cubos.depends(windowPlugin);
+    cubos.depends(rendererPlugin);
 
-    cubos.addResource<DataInspector>();
+    cubos.resource<DataInspector>();
 
-    cubos.startupTag(imguiInitTag).after(windowPollTag);
+    cubos.startupTag(imguiInitTag).after(windowInitTag);
     cubos.tag(imguiBeginTag).after(rendererDrawTag);
     cubos.tag(imguiEndTag).before(windowRenderTag).after(imguiBeginTag);
     cubos.tag(imguiTag).after(imguiBeginTag).before(imguiEndTag);

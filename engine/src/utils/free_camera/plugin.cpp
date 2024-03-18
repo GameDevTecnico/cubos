@@ -1,4 +1,5 @@
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/transform/position.hpp>
 #include <cubos/engine/transform/rotation.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
@@ -8,10 +9,11 @@ using namespace cubos::core::io;
 
 void cubos::engine::freeCameraPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(inputPlugin);
-    cubos.addPlugin(windowPlugin);
+    cubos.depends(inputPlugin);
+    cubos.depends(windowPlugin);
+    cubos.depends(transformPlugin);
 
-    cubos.addComponent<FreeCameraController>();
+    cubos.component<FreeCameraController>();
 
     cubos.system("rotate FreeCameraController on mouse motion")
         .call([](const Input& input, Window& window, const DeltaTime& deltaTime,

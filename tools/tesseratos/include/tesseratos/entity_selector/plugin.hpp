@@ -26,13 +26,6 @@ namespace tesseratos
     /// ## Resources
     /// - @ref EntitySelector - identifies the currently selected entity.
     ///
-    /// ## Startup tags
-    /// - `cubos.entitySelector.init` - the EntitySelector resource is initialized
-    ///
-    /// ## Tags
-    /// - `cubos.entitySelector.input` - entity selection is handled, after `cubos.window.poll` and
-    /// `cubos.renderer.draw`
-    ///
     /// ## Dependencies
     /// - @ref imgui-plugin
     /// - @ref screen-picker-plugin

@@ -29,9 +29,9 @@ namespace
 
 void tesseratos::metricsPanelPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(toolboxPlugin);
-    cubos.addResource<Metrics>();
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(toolboxPlugin);
+    cubos.resource<Metrics>();
 
     cubos.system("show Metrics UI")
         .tagged(cubos::engine::imguiTag)

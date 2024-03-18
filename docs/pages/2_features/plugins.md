@@ -12,11 +12,11 @@ familiar with the concepts of components, resources and systems.
 Plugins are a feature of the @ref cubos::core::ecs::Cubos class. This class is
 the main thing you'll be interacting with when developing a game with
 **CUBOS.**. It is used to configure the engine and run the game loop. Through
-it, you can register new components, resources and configure systems to be run
-on specific conditions.
+it, you can register new components, relations, resources and configure systems to be run on specific conditions.
 
-An application which just prints `"Hello World!"` and which does absolutely
-nothing else - not even open a window - would look like this:
+Below is an example of an application which:
+1. adds a resource with the string `"Hello World"`.
+2. prints its contents.
 
 ```cpp
 #include <cubos/engine/prelude.hpp>
@@ -25,12 +25,21 @@ nothing else - not even open a window - would look like this:
 
 using cubos::engine::Cubos;
 
+struct Message
+{
+    std::string value; 
+};
+
 int main()
 {
     Cubos cubos;
-    cubos.startupSystem([]() {
-        std::cout << "Hello World!" << std::endl;
+
+    cubos.resource<Message>(Message{"Hello World!"});
+
+    cubos.startupSystem("show message").call([](const Message& msg) {
+        std::cout << msg.value << std::endl;
     });
+
     cubos.run();
 }
 ```
@@ -42,37 +51,66 @@ source file, it would quickly become a mess. Plugins are just functions which
 receive a reference to the @ref cubos::engine::Cubos "Cubos" class. Nothing
 more.
 
-The idiomatic way to use plugins is through the
-@ref cubos::engine::Cubos::addPlugin "Cubos::addPlugin" method. It receives a
-plugin function, and executes it only if it hasn't been executed before. This
-property is useful for solving dependency issues between plugins. For example,
-if `B` and `C` adds `A` and `D` adds `B` and `C`, you would be adding `A`
-twice.
+The idiomatic way to use plugins is through the @ref cubos::engine::Cubos::plugin "Cubos::plugin" and @ref cubos::engine::Cubos::depends "Cubos::depends" methods. The first receives a function to a plugin, and executes it. The second marks the current plugin as depending on the given plugin.
 
-If we were to put the hello world functionality on a plugin, the previous
-example would look like this:
+Lets take the example above and move the functionality to a plugin.
 
 ```cpp
-#include <cubos/engine/prelude.hpp>
-
-#include <iostream>
-
-using cubos::engine::Cubos;
+// ...
 
 void helloWorldPlugin(Cubos& cubos)
 {
-    cubos.startupSystem([]() {
-        std::cout << "Hello World!" << std::endl;
+    cubos.resource<Message>(Message{"Hello World!"});
+
+    cubos.startupSystem("show message").call([](const Message& msg) {
+        std::cout << msg.value << std::endl;
     });
 }
 
 int main()
 {
     Cubos cubos;
-    cubos.addPlugin(helloWorldPlugin);
+
+    cubos.plugin(helloWorldPlugin);
+
     cubos.run();
 }
 ```
+
+Looks good! But lets pretend for a moment that there's a lot of logic necessary to create the message and resource.
+How could we divide this further?
+
+```cpp
+void messagePlugin(Cubos& cubos)
+{
+    cubos.resource<Message>(Message{"Hello World!"});
+}
+
+void showPlugin(Cubos& cubos)
+{
+    cubos.depends(messagePlugin);
+
+    cubos.startupSystem("show message").call([](const Message& msg) {
+        std::cout << msg.value << std::endl;
+    });
+}
+
+int main()
+{
+    Cubos cubos;
+
+    cubos.plugin(messagePlugin);
+    cubos.plugin(showPlugin);
+
+    cubos.run();
+}
+```
+
+Notice that the `showPlugin` marks itself as depending on `messagePlugin`. This is necessary, as we use a resource which is defined in that plugin. Since `showPlugin` depends on `messagePlugin`, we must add it before the `showPlugin`.
+
+The two main rules to be take into account are:
+- plugins may only be added once (through @ref cubos::engine::Cubos::plugin "Cubos::plugin").
+- plugins cannot use tags, resources, components or relations from plugins they didn't add or don't depend on.
 
 ## What plugins are there?
 

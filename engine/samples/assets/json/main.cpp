@@ -37,7 +37,8 @@ int main()
 {
     Cubos cubos{};
 
-    cubos.addPlugin(assetsPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(assetsPlugin);
 
     cubos.startupSystem("configure Assets plugin").tagged(settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);

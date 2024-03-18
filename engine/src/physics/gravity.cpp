@@ -7,7 +7,9 @@ using namespace cubos::engine;
 
 void cubos::engine::gravityPlugin(Cubos& cubos)
 {
-    cubos.addResource<Gravity>();
+    cubos.depends(physicsPlugin);
+
+    cubos.resource<Gravity>();
 
     cubos.system("apply gravity")
         .tagged(physicsApplyForcesTag)

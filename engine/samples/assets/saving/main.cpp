@@ -33,7 +33,8 @@ int main()
 {
     Cubos cubos{};
 
-    cubos.addPlugin(assetsPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(assetsPlugin);
 
     /// [Setting]
     cubos.startupSystem("configure Assets plugin").tagged(settingsTag).call([](Settings& settings) {

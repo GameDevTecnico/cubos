@@ -1,65 +1,41 @@
-#include "broad_phase/plugin.hpp"
+#include "interface/plugin.hpp"
 
 #include <cubos/engine/collisions/collider.hpp>
-#include <cubos/engine/collisions/collision_event.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
+#include "broad_phase/plugin.hpp"
 #include "narrow_phase/plugin.hpp"
-
-CUBOS_DEFINE_TAG(cubos::engine::collisionsSetupTag);
 
 void cubos::engine::collisionsPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(transformPlugin);
+    cubos.depends(transformPlugin);
 
-    cubos.addEvent<CollisionEvent>();
+    cubos.plugin(interfaceCollisionsPlugin);
+    cubos.plugin(broadPhaseCollisionsPlugin);
+    cubos.plugin(narrowPhaseCollisionsPlugin);
 
-    cubos.addComponent<Collider>();
-    cubos.addComponent<BoxCollisionShape>();
-    cubos.addComponent<CapsuleCollisionShape>();
+    auto initializeBoxColliders = [](Query<const BoxCollisionShape&, Collider&> query) {
+        for (auto [shape, collider] : query)
+        {
+            shape.box.diag(collider.localAABB.diag);
+            collider.margin = 0.04F;
+        }
+    };
 
-    // Add sub-plugins
-    cubos.addPlugin(broadPhaseCollisionsPlugin);
-    cubos.addPlugin(narrowPhaseCollisionsPlugin);
+    cubos.observer("setup Box Colliders").onAdd<BoxCollisionShape>().call(initializeBoxColliders);
+    cubos.observer("setup Box Colliders").onAdd<Collider>().call(initializeBoxColliders);
 
-    cubos.system("setup new boxes")
-        .tagged(collisionsSetupTag)
-        .call([](Query<const BoxCollisionShape&, Collider&> query) {
-            for (auto [shape, collider] : query)
-            {
-                if (collider.fresh < 1)
-                {
-                    collider.fresh++;
-                }
+    auto initializeCapsuleColliders = [](Query<const CapsuleCollisionShape&, Collider&> query) {
+        for (auto [shape, collider] : query)
+        {
+            collider.localAABB = shape.capsule.aabb();
+            collider.margin = 0.0F;
+        }
+    };
 
-                if (collider.fresh == 0)
-                {
-                    shape.box.diag(collider.localAABB.diag);
-
-                    collider.margin = 0.04F;
-                }
-            }
-        });
-
-    cubos.system("setup new capsules")
-        .tagged(collisionsSetupTag)
-        .call([](Query<const CapsuleCollisionShape&, Collider&> query) {
-            for (auto [shape, collider] : query)
-            {
-                if (collider.fresh < 1)
-                {
-                    collider.fresh++;
-                }
-
-                if (collider.fresh == 0)
-                {
-                    collider.localAABB = shape.capsule.aabb();
-
-                    collider.margin = 0.0F;
-                }
-            }
-        });
+    cubos.observer("setup Capsule Colliders").onAdd<CapsuleCollisionShape>().call(initializeCapsuleColliders);
+    cubos.observer("setup Capsule Colliders").onAdd<Collider>().call(initializeCapsuleColliders);
 }

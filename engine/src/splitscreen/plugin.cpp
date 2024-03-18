@@ -5,6 +5,7 @@
 #include <cubos/engine/renderer/viewport.hpp>
 #include <cubos/engine/splitscreen/plugin.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 
 using namespace cubos::engine;
 
@@ -46,7 +47,8 @@ static void setViewportCameras(glm::ivec2 position, glm::ivec2 size, int count, 
 
 void cubos::engine::splitscreenPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::rendererPlugin);
+    cubos.depends(transformPlugin);
+    cubos.depends(rendererPlugin);
 
     cubos.system("split screen for each Viewport")
         .tagged(rendererFrameTag)

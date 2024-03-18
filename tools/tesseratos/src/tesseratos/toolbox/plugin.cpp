@@ -53,7 +53,9 @@ static void showToolbox(Toolbox& toolbox)
 
 void tesseratos::toolboxPlugin(Cubos& cubos)
 {
-    cubos.addResource<Toolbox>();
-    cubos.addPlugin(cubos::engine::imguiPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+
+    cubos.resource<Toolbox>();
+
     cubos.system("show Toolbox UI").tagged(cubos::engine::imguiTag).call(showToolbox);
 }

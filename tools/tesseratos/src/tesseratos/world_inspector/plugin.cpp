@@ -5,6 +5,7 @@
 
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/transform/child_of.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 
 #include <tesseratos/entity_selector/plugin.hpp>
 #include <tesseratos/toolbox/plugin.hpp>
@@ -67,9 +68,11 @@ static void show(Entity entity, Query<Entity, Opt<const Name&>, const ChildOf&, 
 
 void tesseratos::worldInspectorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(toolboxPlugin);
-    cubos.addPlugin(entitySelectorPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(cubos::engine::transformPlugin);
+    cubos.depends(toolboxPlugin);
+    cubos.depends(entitySelectorPlugin);
+
     cubos.system("show World Inspector UI")
         .tagged(cubos::engine::imguiTag)
         .call([](World& world, Query<Entity, Opt<const Name&>> all,

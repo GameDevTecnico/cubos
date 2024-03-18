@@ -18,9 +18,11 @@ using cubos::engine::Query;
 
 void tesseratos::colliderGizmosPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::gizmosPlugin);
-    cubos.addPlugin(cubos::engine::collisionsPlugin);
-    cubos.addPlugin(toolboxPlugin);
+    cubos.depends(cubos::engine::gizmosPlugin);
+    cubos.depends(cubos::engine::collisionsPlugin);
+    cubos.depends(cubos::engine::transformPlugin);
+
+    cubos.depends(toolboxPlugin);
 
     cubos.system("draw box collision shape gizmos")
         .after(cubos::engine::transformUpdateTag)

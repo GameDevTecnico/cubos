@@ -1,9 +1,11 @@
+#include <cubos/engine/defaults/plugin.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/utils/free_camera/plugin.hpp>
 
 #include <tesseratos/plugin.hpp>
 
@@ -27,8 +29,9 @@ int main(int argc, char** argv)
 
 {
     Cubos cubos{argc, argv};
-    cubos.addPlugin(tesseratos::plugin);
-    cubos.addPlugin(cubos::engine::inputPlugin);
+    cubos.plugin(cubos::engine::defaultsPlugin);
+    cubos.plugin(cubos::engine::freeCameraPlugin);
+    cubos.plugin(tesseratos::plugin);
 
     cubos.startupSystem("configure Assets plugin").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);

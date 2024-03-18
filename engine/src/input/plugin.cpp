@@ -12,11 +12,12 @@ using cubos::core::io::WindowEvent;
 
 void cubos::engine::inputPlugin(Cubos& cubos)
 {
+    cubos.depends(assetsPlugin);
+    cubos.depends(windowPlugin);
 
-    cubos.addPlugin(cubos::engine::assetsPlugin);
-    cubos.addPlugin(cubos::engine::windowPlugin);
+    cubos.resource<Input>();
 
-    cubos.addResource<Input>();
+    cubos.tag(inputUpdateTag);
 
     cubos.startupSystem("setup InputBindings asset bridge").tagged(assetsBridgeTag).call([](Assets& assets) {
         assets.registerBridge(".bind", std::make_unique<JSONBridge<InputBindings>>());

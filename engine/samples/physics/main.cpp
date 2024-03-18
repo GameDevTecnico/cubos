@@ -1,11 +1,17 @@
+#include <cubos/engine/collisions/plugin.hpp>
+#include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
+#include <cubos/engine/physics/plugins/gravity.hpp>
+#include <cubos/engine/physics/solver/solver.hpp>
 #include <cubos/engine/renderer/directional_light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/transform/position.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 using namespace cubos::engine;
 
@@ -22,11 +28,20 @@ int main(int argc, char** argv)
 {
     Cubos cubos{argc, argv};
 
-    cubos.addResource<MaxTime>();
+    cubos.resource<MaxTime>();
 
-    cubos.addPlugin(rendererPlugin);
-    cubos.addPlugin(voxelsPlugin);
-    cubos.addPlugin(physicsPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(windowPlugin);
+    cubos.plugin(transformPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(screenPickerPlugin);
+    cubos.plugin(rendererPlugin);
+    cubos.plugin(voxelsPlugin);
+    cubos.plugin(fixedStepPlugin);
+    cubos.plugin(collisionsPlugin);
+    cubos.plugin(physicsPlugin);
+    cubos.plugin(solverPlugin);
+    cubos.plugin(gravityPlugin);
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);

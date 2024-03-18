@@ -10,15 +10,15 @@ TEST_CASE("ecs::Cubos")
 {
     Cubos cubos;
 
-    SUBCASE("duplicate plugin")
+    SUBCASE("plugin is added")
     {
         static int count = 0;
         auto plugin = [](Cubos&) { count += 1; };
 
         CHECK(count == 0);
-        cubos.addPlugin(plugin);
+        cubos.plugin(plugin);
         CHECK(count == 1);
-        cubos.addPlugin(plugin);
+        cubos.depends(plugin);
         CHECK(count == 1);
     }
 
@@ -27,6 +27,7 @@ TEST_CASE("ecs::Cubos")
         CUBOS_DEFINE_TAG(middle);
         static int acc = 1;
         CHECK(acc == 1);
+        cubos.startupTag(middle);
         cubos.startupSystem("mul 2").before(middle).call([]() { acc *= 2; });
         cubos.startupSystem("mul 3").tagged(middle).call([]() { acc *= 3; });
         cubos.startupSystem("mul 5").after(middle).call([]() { acc *= 5; });
@@ -52,7 +53,8 @@ TEST_CASE("ecs::Cubos")
     SUBCASE("single resource")
     {
         CUBOS_DEFINE_TAG(tag);
-        cubos.addResource<int>(0);
+        cubos.resource<int>(0);
+        cubos.startupTag(tag);
         cubos.startupSystem("check integer before").before(tag).call([](const int& x) { CHECK(x == 0); });
         cubos.startupSystem("increment integer").tagged(tag).call([](int& x) { x += 1; });
         cubos.startupSystem("check integer after").after(tag).call([](const int& x) { CHECK(x == 1); });
@@ -63,8 +65,11 @@ TEST_CASE("ecs::Cubos")
     {
         CUBOS_DEFINE_TAG(tag);
         CUBOS_DEFINE_TAG(spawn);
-        cubos.addResource<int>(0);
-        cubos.addComponent<int>();
+
+        cubos.resource<int>(0);
+        cubos.component<int>();
+        cubos.startupTag(spawn);
+        cubos.startupTag(tag);
         cubos.startupSystem("spawn stuff").tagged(spawn).call([](Commands cmds) {
             cmds.create().add<int>(1);
             cmds.create().add<int>(2);
@@ -83,8 +88,8 @@ TEST_CASE("ecs::Cubos")
 
     SUBCASE("adding component filters through system options")
     {
-        cubos.addComponent<int>();
-        cubos.addComponent<bool>();
+        cubos.component<int>();
+        cubos.component<bool>();
 
         cubos.startupSystem("spawn stuff").call([](Commands cmds) {
             cmds.create().add<int>(1).add(false);
@@ -122,7 +127,7 @@ TEST_CASE("ecs::Cubos")
 
     SUBCASE("changing traversal direction for tree relations")
     {
-        cubos.addRelation<TreeRelation>();
+        cubos.relation<TreeRelation>();
 
         cubos.startupSystem("spawn stuff").call([](Commands cmds) {
             auto e1 = cmds.create().entity();
@@ -190,8 +195,8 @@ TEST_CASE("ecs::Cubos")
 
     SUBCASE("on addition, observers are triggered correctly")
     {
-        cubos.addComponent<int>();
-        cubos.addComponent<long>();
+        cubos.component<int>();
+        cubos.component<long>();
 
         cubos.observer("add longs to ints")
             .onAdd<int>()
@@ -222,8 +227,8 @@ TEST_CASE("ecs::Cubos")
 
     SUBCASE("on removal, observers are triggered correctly")
     {
-        cubos.addComponent<int>();
-        cubos.addComponent<long>();
+        cubos.component<int>();
+        cubos.component<long>();
 
         cubos.observer("create entity with long when an int is removed")
             .onRemove<int>()
@@ -258,9 +263,9 @@ TEST_CASE("ecs::Cubos")
 
     SUBCASE("observers can be triggered in a chain")
     {
-        cubos.addComponent<int>();
-        cubos.addComponent<long>();
-        cubos.addComponent<bool>();
+        cubos.component<int>();
+        cubos.component<long>();
+        cubos.component<bool>();
 
         cubos.observer("replace int by long").onAdd<int>().call([](Commands cmds, Query<Entity> query) {
             for (auto [ent] : query)

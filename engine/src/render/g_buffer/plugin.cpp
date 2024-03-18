@@ -16,7 +16,7 @@ CUBOS_DEFINE_TAG(cubos::engine::drawToGBufferTag);
 
 void cubos::engine::gBufferPlugin(Cubos& cubos)
 {
-    cubos.addComponent<GBuffer>();
+    cubos.component<GBuffer>();
 
     cubos.tag(createGBufferTag).after(resizeRenderTargetTag);
     cubos.tag(drawToGBufferTag).after(createGBufferTag);

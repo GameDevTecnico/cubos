@@ -34,24 +34,23 @@ CUBOS_REFLECT_IMPL(RenderableGrid)
 
 void cubos::engine::rendererPlugin(Cubos& cubos)
 {
+    cubos.depends(transformPlugin);
+    cubos.depends(windowPlugin);
+    cubos.depends(assetsPlugin);
+    cubos.depends(screenPickerPlugin);
 
-    cubos.addPlugin(transformPlugin);
-    cubos.addPlugin(windowPlugin);
-    cubos.addPlugin(assetsPlugin);
-    cubos.addPlugin(screenPickerPlugin);
+    cubos.resource<RendererFrame>();
+    cubos.resource<Renderer>();
+    cubos.resource<ActiveCameras>();
+    cubos.resource<RendererEnvironment>();
+    cubos.resource<ActiveVoxelPalette>();
 
-    cubos.addResource<RendererFrame>();
-    cubos.addResource<Renderer>();
-    cubos.addResource<ActiveCameras>();
-    cubos.addResource<RendererEnvironment>();
-    cubos.addResource<ActiveVoxelPalette>();
-
-    cubos.addComponent<RenderableGrid>();
-    cubos.addComponent<Camera>();
-    cubos.addComponent<SpotLight>();
-    cubos.addComponent<DirectionalLight>();
-    cubos.addComponent<PointLight>();
-    cubos.addComponent<Viewport>();
+    cubos.component<RenderableGrid>();
+    cubos.component<Camera>();
+    cubos.component<SpotLight>();
+    cubos.component<DirectionalLight>();
+    cubos.component<PointLight>();
+    cubos.component<Viewport>();
 
     cubos.startupTag(rendererInitTag).after(windowInitTag);
     cubos.tag(rendererFrameTag).after(transformUpdateTag);
@@ -146,7 +145,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
 
     cubos.system("draw Frame")
         .tagged(rendererDrawTag)
-        .after(screenPickerClearTag)
+        .tagged(screenPickerDrawTag)
         .call([](Renderer& renderer, const ActiveCameras& activeCameras, RendererFrame& frame,
                  Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query, ScreenPicker& screenPicker,
                  Settings& settings) {

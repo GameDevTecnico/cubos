@@ -113,11 +113,11 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
 
 void tesseratos::assetExplorerPlugin(Cubos& cubos)
 {
-    cubos.addEvent<AssetSelectedEvent>();
+    cubos.event<AssetSelectedEvent>();
 
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(cubos::engine::assetsPlugin);
-    cubos.addPlugin(toolboxPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(cubos::engine::assetsPlugin);
+    cubos.depends(toolboxPlugin);
 
     cubos.system("show Asset Explorer UI")
         .tagged(cubos::engine::imguiTag)

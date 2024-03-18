@@ -386,13 +386,14 @@ static void saveScene(const World& world, Assets& assets, State& state)
 
 void tesseratos::sceneEditorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::scenePlugin);
+    cubos.depends(cubos::engine::scenePlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
 
-    cubos.addPlugin(entitySelectorPlugin);
-    cubos.addPlugin(assetExplorerPlugin);
-    cubos.addPlugin(toolboxPlugin);
+    cubos.depends(entitySelectorPlugin);
+    cubos.depends(assetExplorerPlugin);
+    cubos.depends(toolboxPlugin);
 
-    cubos.addResource<State>();
+    cubos.resource<State>();
 
     cubos.system("open Scene Editor on asset selection")
         .call([](cubos::core::ecs::EventReader<AssetSelectedEvent> reader, Commands commands, const Assets& assets,
