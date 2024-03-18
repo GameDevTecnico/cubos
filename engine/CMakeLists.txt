@@ -11,6 +11,8 @@ message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
 set(CUBOS_ENGINE_SOURCE
 	"src/prelude.cpp"
 
+	"src/defaults/plugin.cpp"
+
 	"src/settings/plugin.cpp"
 	"src/settings/settings.cpp"
 
@@ -52,14 +54,15 @@ set(CUBOS_ENGINE_SOURCE
 	"src/voxels/palette.cpp"
 
 	"src/collisions/plugin.cpp"
-	"src/collisions/collider.cpp"
-	"src/collisions/shapes/box.cpp"
-	"src/collisions/shapes/capsule.cpp"
+	"src/collisions/interface/plugin.cpp"
+	"src/collisions/interface/collider.cpp"
+	"src/collisions/interface/colliding_with.cpp"
+	"src/collisions/interface/shapes/box.cpp"
+	"src/collisions/interface/shapes/capsule.cpp"
 	"src/collisions/broad_phase/plugin.cpp"
 	"src/collisions/broad_phase/sweep_and_prune.cpp"
 	"src/collisions/broad_phase/potentially_colliding_with.cpp"
 	"src/collisions/narrow_phase/plugin.cpp"
-	"src/collisions/narrow_phase/colliding_with.cpp"
 
 	"src/physics/plugin.cpp"
 	"src/physics/gravity.cpp"

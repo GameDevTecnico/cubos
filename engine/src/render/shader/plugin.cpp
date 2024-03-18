@@ -12,8 +12,8 @@ using cubos::engine::ShaderBridge;
 
 void cubos::engine::shaderPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(assetsPlugin);
-    cubos.addPlugin(windowPlugin);
+    cubos.depends(assetsPlugin);
+    cubos.depends(windowPlugin);
 
     cubos.startupSystem("setup Shader asset bridge")
         .tagged(assetsBridgeTag)

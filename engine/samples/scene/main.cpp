@@ -50,12 +50,16 @@ int main(int argc, char** argv)
     Cubos cubos(argc, argv);
 
     /// [Adding the plugin]
-    cubos.addPlugin(scenePlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(scenePlugin);
     /// [Adding the plugin]
 
-    cubos.addComponent<Num>();
-    cubos.addRelation<OwnedBy>();
-    cubos.addRelation<DistanceTo>();
+    cubos.component<Num>();
+    cubos.relation<OwnedBy>();
+    cubos.relation<DistanceTo>();
+
+    cubos.startupTag(spawnTag);
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);

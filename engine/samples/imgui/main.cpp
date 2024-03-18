@@ -16,6 +16,11 @@
 
 #include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
+#include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 /// [Including plugin headers]
 
@@ -87,7 +92,13 @@ int main()
     Cubos cubos{};
 
     /// [Adding the plugin]
-    cubos.addPlugin(imguiPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(windowPlugin);
+    cubos.plugin(transformPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(screenPickerPlugin);
+    cubos.plugin(rendererPlugin);
+    cubos.plugin(imguiPlugin);
     /// [Adding the plugin]
 
     /// [ImGui Demo]
@@ -101,7 +112,7 @@ int main()
     /// [ImGui Demo]
 
     /// [Filling the dummy resource]
-    cubos.addResource<DummyResource>(
+    cubos.resource<DummyResource>(
         DummyResource{.integer = 1337,
                       .person = Person{"roby", 1337, 666.5F, false},
                       .persons{Person{"roby", 1337, 666.5F, false}, Person{"riscado", 123, 321.0F, false}},

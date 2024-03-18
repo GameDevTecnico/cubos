@@ -25,12 +25,12 @@ namespace cubos::engine
     /// @brief The ScreenPicker resource is initialized, after @ref windowInitTag.
     extern Tag screenPickerInitTag;
 
-    /// @brief The picking texture is cleared
-    extern Tag screenPickerClearTag;
-
     /// @brief Window resize events are handled and the ScreenPicker texture is resized, after
     /// @ref windowPollTag and before @ref screenPickerClearTag.
     extern Tag screenPickerResizeTag;
+
+    /// @brief Systems which draw to the screen picker should be tagged with this.
+    extern Tag screenPickerDrawTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

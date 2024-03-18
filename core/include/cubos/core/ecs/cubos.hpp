@@ -4,8 +4,9 @@
 
 #pragma once
 
-#include <set>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
 
 #include <cubos/core/ecs/system/arguments/event/pipe.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
@@ -47,59 +48,18 @@ namespace cubos::core::ecs
         const std::vector<std::string> value; ///< Command-line arguments.
     };
 
-    /// @brief Used to chain configurations related to tags.
-    /// @ingroup core-ecs
-    class TagBuilder
-    {
-    public:
-        /// @brief Construct.
-        /// @param world World.
-        /// @param dispatcher Dispatcher being configured.
-        /// @param tags Vector which stores the tags for this dispatcher.
-        /// @return Reference to this object, for chaining.
-        TagBuilder(World& world, core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
-
-        /// @brief Sets the current tag to be executed before another tag.
-        /// @param tag Tag to be executed before.
-        /// @return Reference to this object, for chaining.
-        TagBuilder& before(const Tag& tag);
-
-        /// @brief Sets the current tag to be executed after another tag.
-        /// @param tag Tag to be executed after.
-        /// @return Reference to this object, for chaining.
-        TagBuilder& after(const Tag& tag);
-
-        /// @brief Tags all systems on this tag with the given tag.
-        /// @param tag Tag to be inherited from.
-        /// @return Reference to this object, for chaining.
-        TagBuilder& tagged(const Tag& tag);
-
-        /// @brief Adds a condition to the current tag. If this condition returns false, systems
-        /// with this tag will not be executed. For the tagged systems to run, all conditions must
-        /// return true.
-        /// @param func Condition function.
-        /// @return Reference to this object, for chaining.
-        template <typename F>
-        TagBuilder& runIf(F func);
-
-        /// @brief Makes all systems within the tag repeat as a group until the given condition evaluates to false.
-        /// @param func Condition function.
-        /// @return Reference to this object, for chaining.
-        template <typename F>
-        TagBuilder& repeatWhile(F func);
-
-    private:
-        World& mWorld;
-        core::ecs::Dispatcher& mDispatcher;
-        std::vector<std::string>& mTags;
-    };
-
     /// @brief Represents the engine itself, and exposes the interface with which the game
     /// developer interacts with. Ties up all the different parts of the engine together.
     /// @ingroup core-ecs
     class Cubos final
     {
     public:
+        /// @brief Function pointer type representing a plugin.
+        using Plugin = void (*)(Cubos&);
+
+        /// @brief Used to create new tags or configure existing ones.
+        class TagBuilder;
+
         /// @brief Used to create new systems.
         class SystemBuilder;
 
@@ -116,49 +76,78 @@ namespace cubos::core::ecs
         /// @param argv Argument array.
         Cubos(int argc, char** argv);
 
-        /// @brief Adds a new plugin to the engine. If the plugin had already been added, nothing
-        /// happens. A plugin is just a function that operates on the Cubos object, further
-        /// configuring it. It is useful for separating the code into modules.
-        /// @param func Entry point of the plugin to add.
-        /// @return Reference to this object, for chaining.
-        Cubos& addPlugin(void (*func)(Cubos&));
+        /// @brief Adds a new plugin as a sub-plugin of the current plugin.
+        ///
+        /// Aborts if the plugin has already been added by this or any other plugin.
+        ///
+        /// @param plugin Plugin.
+        /// @return Cubos.
+        Cubos& plugin(Plugin plugin);
 
-        /// @brief Adds a new resource to the engine.
-        /// @tparam R Type of the resource.
-        /// @tparam TArgs Types of the arguments passed to the resource's constructor.
-        /// @param args Arguments passed to the resource's constructor.
-        /// @return Reference to this object, for chaining.
-        template <typename R, typename... TArgs>
-        Cubos& addResource(TArgs... args);
+        /// @brief Marks the given plugin as a dependency of the current plugin.
+        ///
+        /// Aborts if the plugin hasn't been added by this or any other plugin.
+        ///
+        /// @param plugin Plugin.
+        /// @return Cubos.
+        Cubos& depends(Plugin plugin);
 
-        /// @brief Adds a new component type to the engine.
-        /// @tparam C Type of the component.
-        /// @return Reference to this object, for chaining.
-        template <typename C>
-        Cubos& addComponent();
-
-        /// @brief Adds a new relation type to the engine.
-        /// @tparam R Type of the relation.
-        /// @return Reference to this object, for chaining.
-        template <typename R>
-        Cubos& addRelation()
+        /// @brief Registers a new resource type on the engine.
+        /// @tparam T Type.
+        /// @tparam TArgs Resource constructor argument types.
+        /// @param args Resource constructor arguments.
+        /// @return Cubos.
+        template <typename T, typename... TArgs>
+        Cubos& resource(TArgs... args)
         {
-            mWorld.registerRelation<R>();
+            mWorld.registerResource<T>(args...);
             return *this;
         }
 
-        /// @brief Adds a new event type to the engine.
-        /// @tparam E Type of the event.
-        /// @return Reference to this object, for chaining.
-        template <typename E>
-        Cubos& addEvent();
+        /// @brief Registers a new component type on the engine.
+        /// @param type Type.
+        /// @return Cubos.
+        Cubos& component(const reflection::Type& type);
 
-        /// @brief Returns a @ref TagBuilder to configure the systems with the given tag.
+        /// @brief Registers a new component type on the engine.
+        /// @tparam T Type.
+        /// @return Cubos.
+        template <typename T>
+        Cubos& component()
+        {
+            return this->component(reflection::reflect<T>());
+        }
+
+        /// @brief Registers a new relation type on the engine.
+        /// @param type Type.
+        /// @return Cubos.
+        Cubos& relation(const reflection::Type& type);
+
+        /// @brief Registers a new relation type on the engine.
+        /// @tparam T Type.
+        /// @return Cubos.
+        template <typename T>
+        Cubos& relation()
+        {
+            return this->relation(reflection::reflect<T>());
+        }
+
+        /// @brief Registers a new event type on the engine.
+        /// @tparam T Type.
+        /// @return Reference to this object, for chaining.
+        template <typename T>
+        Cubos& event()
+        {
+            // The user could register this manually, but this is more convenient.
+            return this->resource<EventPipe<T>>();
+        }
+
+        /// @brief Registers a new tag. Returns a builder used to configure tagged systems.
         /// @param tag Tag.
         /// @return @ref TagBuilder.
         TagBuilder tag(const Tag& tag);
 
-        /// @brief Returns a @ref TagBuilder to configure the systems with the given startup tag.
+        /// @brief Registers a new startup tag. Returns a builder used to configure tagged systems.
         /// @param tag Tag.
         /// @return @ref TagBuilder.
         TagBuilder startupTag(const Tag& tag);
@@ -195,22 +184,113 @@ namespace cubos::core::ecs
         void run();
 
     private:
+        /// @brief Stores information regarding a plugin.
+        struct PluginInfo
+        {
+            /// @brief How many plugins depend on this plugin.
+            int dependentCount{0};
+
+            /// @brief Plugins which this plugin depends on.
+            std::unordered_set<Plugin> dependencies;
+
+            /// @brief Plugins which were added by this plugin.
+            std::unordered_set<Plugin> subPlugins;
+        };
+
+        /// @brief Checks if the given type was registered by the current plugin, its dependencies or sub-plugins.
+        /// @param type Type.
+        /// @return Whether the type was registered.
+        bool isRegistered(const reflection::Type& type) const;
+
+        /// @brief Checks if the given tag was registered by the current plugin, its dependencies or sub-plugins.
+        /// @param tag Tag.
+        /// @return Whether the tag was registered.
+        bool isRegistered(const Tag& tag) const;
+
+        /// @brief Checks if the given plugin is a sub-plugin of another.
+        /// @param subPlugin Plugin to check if its a sub-plugin.
+        /// @param basePlugin Plugin which may be the parent plugin.
+        /// @return Whether @p subPlugin is really a sub-plugin of @p plugin.
+        bool isSubPlugin(Plugin subPlugin, Plugin basePlugin) const;
+
+        /// @brief Checks if the given plugin is equal, or included in some form by the given plugin.
+        /// @param plugin Plugin which may be included.
+        /// @param basePlugin Plugin which may include.
+        bool isKnownPlugin(Plugin plugin, Plugin basePlugin) const;
+
         core::ecs::World mWorld;
         core::ecs::Dispatcher mStartupDispatcher;
         core::ecs::Dispatcher mMainDispatcher;
-        std::set<void (*)(Cubos&)> mPlugins;
-        std::vector<std::string> mMainTags;
-        std::vector<std::string> mStartupTags;
+
+        /// @brief Stack with the plugins currently being configured.
+        ///
+        /// The null plugin represents the function which initializes the Cubos class and adds the root plugins.
+        std::vector<Plugin> mPluginStack{nullptr};
+
+        /// @brief Maps installed plugins to their information.
+        std::unordered_map<Plugin, PluginInfo> mInstalledPlugins{{nullptr, {}}};
+
+        /// @brief Maps registered types to the plugin they were registered in.
+        memory::TypeMap<Plugin> mTypeToPlugin;
+
+        /// @brief Maps registered tags to the plugin they were registered in.
+        std::unordered_map<std::string, Plugin> mTagToPlugin;
+    };
+
+    class Cubos::TagBuilder
+    {
+    public:
+        /// @brief Constructs.
+        /// @param cubos Cubos.
+        /// @param dispatcher Dispatcher.
+        TagBuilder(Cubos& cubos, core::ecs::Dispatcher& dispatcher);
+
+        /// @brief Makes all tagged systems run before systems with the given tag.
+        /// @param tag Tag.
+        /// @return Builder.
+        TagBuilder& before(const Tag& tag);
+
+        /// @brief Makes all tagged systems run after systems with the given tag.
+        /// @param tag Tag.
+        /// @return Builder.
+        TagBuilder& after(const Tag& tag);
+
+        /// @brief Tags all tagged systems with the given tag.
+        /// @param tag Tag.
+        /// @return Builder.
+        TagBuilder& tagged(const Tag& tag);
+
+        /// @brief Makes all systems within the tag run only if the given condition evaluates to true.
+        /// @param func Condition system function.
+        /// @return Builder.
+        TagBuilder& runIf(auto func)
+        {
+            mDispatcher.tagAddCondition(System<bool>::make(mCubos.mWorld, std::move(func), {}));
+            return *this;
+        }
+
+        /// @brief Makes all systems within the tag repeat while the given condition evaluates to true.
+        /// @param func Condition system function.
+        /// @return Builder.
+        TagBuilder& repeatWhile(auto func)
+        {
+            mDispatcher.tagRepeatWhile(System<bool>::make(mCubos.mWorld, std::move(func), {}));
+            return *this;
+        }
+
+    private:
+        Cubos& mCubos;
+        core::ecs::Dispatcher& mDispatcher;
     };
 
     class Cubos::SystemBuilder
     {
     public:
         /// @brief Constructs.
-        /// @param world World.
+        /// @param cubos Cubos.
         /// @param dispatcher Dispatcher to add the system to.
         /// @param name Debug name.
-        SystemBuilder(World& world, Dispatcher& dispatcher, std::string name);
+        SystemBuilder(Cubos& cubos, Dispatcher& dispatcher, std::string name);
 
         /// @brief Adds a tag to the system.
         /// @param tag Tag.
@@ -306,7 +386,7 @@ namespace cubos::core::ecs
         SystemBuilder&& onlyIf(auto function) &&
         {
             CUBOS_ASSERT(!mCondition.contains(), "Only one condition can be set per system");
-            mCondition.replace(System<bool>::make(mWorld, std::move(function), {}));
+            mCondition.replace(System<bool>::make(mCubos.mWorld, std::move(function), {}));
             return std::move(*this);
         }
 
@@ -314,7 +394,7 @@ namespace cubos::core::ecs
         /// @param function System function.
         void call(auto function) &&
         {
-            this->finish(System<void>::make(mWorld, std::move(function), mOptions));
+            this->finish(System<void>::make(mCubos.mWorld, std::move(function), mOptions));
         }
 
     private:
@@ -322,7 +402,7 @@ namespace cubos::core::ecs
         /// @param system System wrapper.
         void finish(System<void> system);
 
-        World& mWorld;
+        Cubos& mCubos;
         Dispatcher& mDispatcher;
         std::string mName;
         Opt<System<bool>> mCondition;
@@ -337,9 +417,9 @@ namespace cubos::core::ecs
     {
     public:
         /// @brief Constructs.
-        /// @param world World.
+        /// @param cubos Cubos.
         /// @param name Debug name.
-        ObserverBuilder(World& world, std::string name);
+        ObserverBuilder(Cubos& cubos, std::string name);
 
         /// @brief Triggers the observer whenever the given component is added to an entity.
         /// @param type Component type.
@@ -443,7 +523,7 @@ namespace cubos::core::ecs
         /// @param function System function.
         void call(auto function) &&
         {
-            this->finish(System<void>::make(mWorld, std::move(function), mOptions));
+            this->finish(System<void>::make(mCubos.mWorld, std::move(function), mOptions));
         }
 
     private:
@@ -451,49 +531,11 @@ namespace cubos::core::ecs
         /// @param system System wrapper.
         void finish(System<void> system);
 
-        World& mWorld;
+        Cubos& mCubos;
         std::string mName;
         std::vector<SystemOptions> mOptions;
         int mDefaultTarget{0};
         bool mRemove{false};
         ColumnId mColumnId{ColumnId::Invalid};
     };
-
-    // Implementation.
-
-    template <typename F>
-    TagBuilder& TagBuilder::runIf(F func)
-    {
-        mDispatcher.tagAddCondition(System<bool>::make(mWorld, std::move(func), {}));
-        return *this;
-    }
-
-    template <typename F>
-    TagBuilder& TagBuilder::repeatWhile(F func)
-    {
-        mDispatcher.tagRepeatWhile(System<bool>::make(mWorld, std::move(func), {}));
-        return *this;
-    }
-
-    template <typename R, typename... TArgs>
-    Cubos& Cubos::addResource(TArgs... args)
-    {
-        mWorld.registerResource<R>(args...);
-        return *this;
-    }
-
-    template <typename C>
-    Cubos& Cubos::addComponent()
-    {
-        mWorld.registerComponent<C>();
-        return *this;
-    }
-
-    template <typename E>
-    Cubos& Cubos::addEvent()
-    {
-        // The user could register this manually, but using this method is more convenient.
-        mWorld.registerResource<core::ecs::EventPipe<E>>();
-        return *this;
-    }
 } // namespace cubos::core::ecs

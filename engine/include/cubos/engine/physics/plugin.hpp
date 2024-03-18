@@ -7,7 +7,6 @@
 
 #pragma once
 
-/// [Component Refl]
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -19,7 +18,6 @@
 #include <cubos/engine/physics/components/previous_position.hpp>
 #include <cubos/engine/physics/components/velocity.hpp>
 #include <cubos/engine/physics/physics_bundle.hpp>
-#include <cubos/engine/physics/plugins/gravity.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
 #include <cubos/engine/physics/resources/substeps.hpp>
 #include <cubos/engine/prelude.hpp>

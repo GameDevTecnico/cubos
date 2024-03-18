@@ -39,8 +39,8 @@ To do that we use tags.
 
 @snippet hello-cubos/main.cpp Tags
 
-@ref cubos::engine::Cubos::tag "Cubos::tag" can be used to apply properties to all systems with a given tag, and @ref cubos::engine::TagBuilder::before "before" makes any systems tagged with it come before systems tagged with the one given as parameter.
-There's also an @ref cubos::engine::TagBuilder::after "after" that has the inverse effect.
+@ref cubos::engine::Cubos::tag "Cubos::tag" can be used to apply properties to all systems with a given tag, and @ref cubos::engine::TagBuilder::after "after" makes any systems tagged with it come after systems tagged with the one given as parameter.
+There's also an @ref cubos::engine::TagBuilder::before "before" that has the inverse effect.
 
 @note If we wanted to give these tags to a system running on startup, we'd have to use @ref cubos::engine::Cubos::startupTag "Cubos::startupTag" instead.
 

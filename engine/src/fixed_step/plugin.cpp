@@ -12,12 +12,8 @@ namespace
 
 void cubos::engine::fixedStepPlugin(Cubos& cubos)
 {
-    cubos.addResource<AccumulatedTime>();
-    cubos.addResource<FixedDeltaTime>();
-
-    cubos.system("accumulate time resource").before(fixedStepTag).call([](AccumulatedTime& timer, const DeltaTime& dt) {
-        timer.value += dt.value;
-    });
+    cubos.resource<AccumulatedTime>();
+    cubos.resource<FixedDeltaTime>();
 
     cubos.tag(fixedStepTag).repeatWhile([](AccumulatedTime& timer, const FixedDeltaTime& step) {
         if (timer.value >= step.value)
@@ -26,5 +22,9 @@ void cubos::engine::fixedStepPlugin(Cubos& cubos)
             return true;
         }
         return false;
+    });
+
+    cubos.system("accumulate time resource").before(fixedStepTag).call([](AccumulatedTime& timer, const DeltaTime& dt) {
+        timer.value += dt.value;
     });
 }

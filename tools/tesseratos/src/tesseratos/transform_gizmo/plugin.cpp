@@ -5,7 +5,6 @@
 #include <cubos/core/reflection/external/glm.hpp>
 
 #include <cubos/engine/gizmos/plugin.hpp>
-#include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
@@ -296,15 +295,16 @@ static void drawRotationGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
 
 void tesseratos::transformGizmoPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(entitySelectorPlugin);
-    cubos.addPlugin(cubos::engine::transformPlugin);
-    cubos.addPlugin(cubos::engine::gizmosPlugin);
-    cubos.addPlugin(cubos::engine::inputPlugin);
-    cubos.addPlugin(cubos::engine::settingsPlugin);
+    cubos.depends(cubos::engine::transformPlugin);
+    cubos.depends(cubos::engine::gizmosPlugin);
+    cubos.depends(cubos::engine::inputPlugin);
+    cubos.depends(cubos::engine::settingsPlugin);
+    cubos.depends(cubos::engine::rendererPlugin);
+
+    cubos.depends(entitySelectorPlugin);
 
     cubos.system("draw Transform Gizmo")
         .after(cubos::engine::transformUpdateTag)
-        .tagged(cubos::engine::imguiTag)
         .call([](const EntitySelector& entitySelector, const ActiveCameras& activeCameras, const Window& window,
                  const Input& input, Settings& settings, Gizmos& gizmos, Query<Position&, LocalToWorld&> positionQuery,
                  Query<Rotation&, LocalToWorld&> rotationQuery, Query<const Camera&, LocalToWorld&> cameraQuery) {

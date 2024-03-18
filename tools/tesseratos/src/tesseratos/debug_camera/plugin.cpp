@@ -40,11 +40,11 @@ namespace
 
 void tesseratos::debugCameraPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(toolboxPlugin);
-    cubos.addPlugin(cubos::engine::freeCameraPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(cubos::engine::freeCameraPlugin);
+    cubos.depends(toolboxPlugin);
 
-    cubos.addResource<DebugCameraInfo>();
+    cubos.resource<DebugCameraInfo>();
 
     cubos.startupSystem("create Debug Camera").call([](Commands commands, DebugCameraInfo& debugCamera) {
         debugCamera.ent = commands.create()

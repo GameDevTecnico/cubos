@@ -7,7 +7,7 @@ using cubos::core::reflection::TypeRegistry;
 
 void cubos::engine::scenePlugin(Cubos& cubos)
 {
-    cubos.addPlugin(assetsPlugin);
+    cubos.depends(assetsPlugin);
 
     cubos.startupSystem("setup Scene assets bridge").tagged(assetsBridgeTag).call([](World& world) {
         auto assets = world.write<Assets>();

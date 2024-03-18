@@ -14,13 +14,15 @@ using cubos::core::data::StandardArchive;
 
 void cubos::engine::assetsPlugin(Cubos& cubos)
 {
+    cubos.depends(settingsPlugin);
 
-    cubos.addPlugin(settingsPlugin);
+    cubos.resource<Assets>();
 
-    cubos.addResource<Assets>();
-
+    cubos.startupTag(assetsTag);
     cubos.startupTag(assetsInitTag).after(settingsTag);
     cubos.startupTag(assetsBridgeTag).after(assetsInitTag).before(assetsTag);
+
+    cubos.tag(assetsCleanupTag);
 
     cubos.startupSystem("load asset meta files").tagged(assetsInitTag).call([](Assets& assets, Settings& settings) {
         // Get the relevant settings.

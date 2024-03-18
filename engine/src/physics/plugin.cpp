@@ -69,21 +69,19 @@ CUBOS_REFLECT_IMPL(PhysicsBundle)
 
 void cubos::engine::physicsPlugin(Cubos& cubos)
 {
-    cubos.addResource<Substeps>();
-    cubos.addResource<Damping>();
+    cubos.depends(fixedStepPlugin);
+    cubos.depends(transformPlugin);
 
-    cubos.addComponent<Velocity>();
-    cubos.addComponent<Force>();
-    cubos.addComponent<Impulse>();
-    cubos.addComponent<Mass>();
-    cubos.addComponent<AccumulatedCorrection>();
-    cubos.addComponent<PreviousPosition>();
-    cubos.addComponent<PhysicsBundle>();
+    cubos.resource<Substeps>();
+    cubos.resource<Damping>();
 
-    cubos.addPlugin(collisionsPlugin);
-    cubos.addPlugin(gravityPlugin);
-    cubos.addPlugin(solverPlugin);
-    cubos.addPlugin(fixedStepPlugin);
+    cubos.component<Velocity>();
+    cubos.component<Force>();
+    cubos.component<Impulse>();
+    cubos.component<Mass>();
+    cubos.component<AccumulatedCorrection>();
+    cubos.component<PreviousPosition>();
+    cubos.component<PhysicsBundle>();
 
     cubos.observer("unpack PhysicsBundle's")
         .onAdd<PhysicsBundle>()
@@ -107,7 +105,12 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
             }
         });
 
-    cubos.tag(physicsApplyForcesTag).before(physicsSimulationSubstepsIntegrateTag);
+    cubos.tag(physicsApplyForcesTag);
+    cubos.tag(physicsSimulationApplyImpulsesTag);
+    cubos.tag(physicsSimulationSubstepsIntegrateTag).after(physicsApplyForcesTag);
+    cubos.tag(physicsSimulationSubstepsCorrectPositionTag);
+    cubos.tag(physicsSimulationSubstepsUpdateVelocityTag);
+    cubos.tag(physicsSimulationClearForcesTag);
 
     cubos.system("apply impulses")
         .tagged(physicsSimulationApplyImpulsesTag)

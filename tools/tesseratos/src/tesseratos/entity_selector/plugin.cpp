@@ -23,25 +23,22 @@ using namespace tesseratos;
 
 void tesseratos::entitySelectorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(cubos::engine::screenPickerPlugin);
-    cubos.addPlugin(cubos::engine::windowPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(cubos::engine::screenPickerPlugin);
+    cubos.depends(cubos::engine::windowPlugin);
+    cubos.depends(cubos::engine::rendererPlugin);
 
-    cubos.addResource<EntitySelector>();
+    cubos.resource<EntitySelector>();
 
-    cubos
-        .startupSystem("initialize EntitySelector")
-        //.tagged("cubos.entitySelector.init")
-        .call([](EntitySelector& entitySelector) {
-            entitySelector.selection = Entity{};
-            entitySelector.lastMousePosition = glm::ivec2{0, 0};
-        });
+    cubos.startupSystem("initialize EntitySelector").call([](EntitySelector& entitySelector) {
+        entitySelector.selection = Entity{};
+        entitySelector.lastMousePosition = glm::ivec2{0, 0};
+    });
 
-    cubos
-        .system("process window input for EntitySelector")
-        //.tagged("cubos.entitySelector.input")
+    cubos.system("process window input for EntitySelector")
         .after(cubos::engine::windowPollTag)
         .after(cubos::engine::rendererDrawTag)
+        .after(cubos::engine::screenPickerDrawTag)
         .call([](const ScreenPicker& screenPicker, EntitySelector& entitySelector, const World& world,
                  EventReader<WindowEvent> windowEvent) {
             for (const auto& event : windowEvent)

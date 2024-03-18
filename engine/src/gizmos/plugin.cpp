@@ -192,12 +192,19 @@ static std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>> getScreenInfo(c
 
 void cubos::engine::gizmosPlugin(Cubos& cubos)
 {
+    cubos.depends(windowPlugin);
+    cubos.depends(transformPlugin);
+    cubos.depends(rendererPlugin);
+    cubos.depends(screenPickerPlugin);
 
-    cubos.addPlugin(cubos::engine::rendererPlugin);
-    cubos.addPlugin(cubos::engine::screenPickerPlugin);
+    cubos.resource<Gizmos>();
+    cubos.resource<GizmosRenderer>();
 
-    cubos.addResource<Gizmos>();
-    cubos.addResource<GizmosRenderer>();
+    cubos.startupTag(gizmosInitTag);
+
+    cubos.tag(gizmosInputTag);
+    cubos.tag(gizmosDrawTag);
+    cubos.tag(gizmosPickTag);
 
     cubos.startupSystem("initialize GizmosRenderer")
         .tagged(gizmosInitTag)
@@ -237,6 +244,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
 
     cubos.system("draw gizmos")
         .tagged(gizmosDrawTag)
+        .tagged(screenPickerDrawTag)
         .after(rendererDrawTag)
         .before(windowRenderTag)
         .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, ScreenPicker& screenPicker,
@@ -261,7 +269,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
 
     cubos.system("do gizmos screen picking")
         .tagged(gizmosPickTag)
-        .after(gizmosDrawTag)
+        .after(cubos::engine::screenPickerDrawTag)
         .call([](GizmosRenderer& gizmosRenderer, Gizmos& gizmos, const ScreenPicker& screenPicker) {
             int mouseX = gizmosRenderer.lastMousePosition.x;
             int mouseY = gizmosRenderer.lastMousePosition.y;

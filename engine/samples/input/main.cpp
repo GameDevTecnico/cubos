@@ -5,6 +5,7 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 using cubos::core::io::Window;
 
@@ -170,10 +171,13 @@ int main()
     auto cubos = Cubos();
 
     /// [Adding the plugin]
-    cubos.addPlugin(inputPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(windowPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(inputPlugin);
     /// [Adding the plugin]
 
-    cubos.addResource<State>();
+    cubos.resource<State>();
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);

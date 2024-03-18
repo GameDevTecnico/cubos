@@ -9,12 +9,16 @@
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
+#include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
+#include <cubos/engine/physics/solver/solver.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 #include "../../src/collisions/narrow_phase/plugin.hpp"
 
@@ -24,7 +28,7 @@ using cubos::core::io::Modifiers;
 
 using namespace cubos::engine;
 
-CUBOS_DEFINE_TAG(collisionsSampleUpdated);
+static CUBOS_DEFINE_TAG(collisionsSampleUpdated);
 
 struct State
 {
@@ -41,12 +45,19 @@ int main()
 {
     auto cubos = Cubos();
 
-    cubos.addPlugin(collisionsPlugin);
-    cubos.addPlugin(physicsPlugin);
-    cubos.addPlugin(rendererPlugin);
-    cubos.addPlugin(inputPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(windowPlugin);
+    cubos.plugin(transformPlugin);
+    cubos.plugin(collisionsPlugin);
+    cubos.plugin(fixedStepPlugin);
+    cubos.plugin(physicsPlugin);
+    cubos.plugin(solverPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(screenPickerPlugin);
+    cubos.plugin(rendererPlugin);
+    cubos.plugin(inputPlugin);
 
-    cubos.addResource<State>();
+    cubos.resource<State>();
 
     cubos.startupSystem("activate assets IO").tagged(settingsTag).call([](Settings& settings) {
         settings.setBool("assets.io.enabled", false);
@@ -70,7 +81,7 @@ int main()
                 .entity();
     });
 
-    cubos.startupSystem("create colliders").call([](State& state, Commands commands, Gravity& gravity) {
+    cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
         state.a = commands.create()
                       .add(Collider{})
                       .add(BoxCollisionShape{})
@@ -90,8 +101,6 @@ int main()
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, -1.0F}})
                       .entity();
         state.bRotationAxis = glm::sphericalRand(1.0F);
-
-        gravity.value = glm::vec3{0.0F, 0.0F, 0.0F};
     });
 
     cubos.system("move colliders")
@@ -124,6 +133,8 @@ int main()
             bRot.quat = glm::rotate(bRot.quat, 0.001F, state.bRotationAxis);
             bVel.vec -= glm::vec3{0.0F, 0.0F, 0.01F};
         });
+
+    cubos.tag(collisionsSampleUpdated);
 
     cubos.system("check collisions")
         .tagged(collisionsSampleUpdated)

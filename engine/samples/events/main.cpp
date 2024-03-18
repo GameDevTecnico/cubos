@@ -30,11 +30,14 @@ struct State
 int main()
 {
     cubos::engine::Cubos cubos;
-    cubos.addResource<State>(State{.step = 0});
+    cubos.resource<State>(State{.step = 0});
 
     /// [Adding event]
-    cubos.addEvent<MyEvent>();
+    cubos.event<MyEvent>();
     /// [Adding event]
+
+    cubos.tag(eventB);
+    cubos.tag(eventC);
 
     cubos.startupSystem("set ShouldQuit to false").call([](ShouldQuit& quit) { quit.value = false; });
 

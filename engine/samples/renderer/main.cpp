@@ -1,10 +1,12 @@
 #include <cubos/engine/renderer/environment.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/renderer/point_light.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/splitscreen/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 using namespace cubos::engine;
 
@@ -13,8 +15,13 @@ int main()
     Cubos cubos{};
 
     /// [Adding the plugin]
-    cubos.addPlugin(splitscreenPlugin);
-    cubos.addPlugin(rendererPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(windowPlugin);
+    cubos.plugin(transformPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(screenPickerPlugin);
+    cubos.plugin(rendererPlugin);
+    cubos.plugin(splitscreenPlugin);
     /// [Adding the plugin]
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {

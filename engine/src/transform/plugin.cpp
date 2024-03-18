@@ -22,12 +22,16 @@ void addComponent(Commands cmds, Query<Entity> query)
 
 void cubos::engine::transformPlugin(Cubos& cubos)
 {
-    cubos.addComponent<Position>();
-    cubos.addComponent<Rotation>();
-    cubos.addComponent<Scale>();
-    cubos.addComponent<LocalToWorld>();
-    cubos.addComponent<LocalToParent>();
-    cubos.addRelation<ChildOf>();
+    cubos.component<Position>();
+    cubos.component<Rotation>();
+    cubos.component<Scale>();
+    cubos.component<LocalToWorld>();
+    cubos.component<LocalToParent>();
+
+    cubos.relation<ChildOf>();
+
+    cubos.tag(transformUpdateTag);
+    cubos.tag(transformUpdatePropagateTag);
 
     cubos.observer("add LocalToWorld when Position is added")
         .onAdd<Position>()

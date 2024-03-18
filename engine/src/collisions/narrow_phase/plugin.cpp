@@ -5,16 +5,23 @@
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 
 #include "../broad_phase/plugin.hpp"
 #include "../broad_phase/potentially_colliding_with.hpp"
+#include "../interface/plugin.hpp"
 
 CUBOS_DEFINE_TAG(cubos::engine::collisionsNarrowCleanTag);
 CUBOS_DEFINE_TAG(cubos::engine::collisionsNarrowTag);
 
 void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
 {
-    cubos.addRelation<CollidingWith>();
+    cubos.depends(transformPlugin);
+    cubos.depends(interfaceCollisionsPlugin);
+    cubos.depends(broadPhaseCollisionsPlugin);
+
+    cubos.tag(collisionsNarrowCleanTag);
+    cubos.tag(collisionsNarrowTag);
 
     cubos.system("clean colliding pairs")
         .tagged(collisionsNarrowCleanTag)

@@ -21,10 +21,10 @@ namespace
 
 void tesseratos::playPausePlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addPlugin(toolboxPlugin);
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(toolboxPlugin);
 
-    cubos.addResource<State>();
+    cubos.resource<State>();
 
     cubos.system("show Play Pause UI")
         .tagged(cubos::engine::imguiTag)

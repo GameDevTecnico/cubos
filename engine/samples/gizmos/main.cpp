@@ -1,19 +1,27 @@
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 using namespace cubos::engine;
 
 int main(int argc, char** argv)
 {
-    /// [Adding plugin]
     Cubos cubos{argc, argv};
-    cubos.addPlugin(gizmosPlugin);
+    cubos.plugin(settingsPlugin);
+    cubos.plugin(windowPlugin);
+    cubos.plugin(transformPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(screenPickerPlugin);
+    cubos.plugin(rendererPlugin);
+
     /// [Adding plugin]
-    cubos.addPlugin(rendererPlugin);
+    cubos.plugin(gizmosPlugin);
+    /// [Adding plugin]
 
     cubos.startupSystem("disable Assets IO").tagged(settingsTag).call([](Settings& settings) {
         // We don't load assets in this sample and we don't even have an assets folder, so we should
