@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rotation to the Transform Gizmo (#878, **@DiogoMendonc-a**).
 - Rotated box Gizmo (#878, **@DiogoMendonc-a**).
 - Shader asset and bridge (#1058, **@tomas7770**).
+- GBuffer plugin (#1061, **@RiscadoA**).
 
 ### Changed
 
