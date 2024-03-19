@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tesseratos &raquo; Entity selector module | CUBOS. Docs</title>
+  <title>cubos::core::ecs::Tag class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,60 +46,89 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__tesseratos.html">Tesseratos</a> &raquo;</span>
-          Entity selector <span class="m-thin">module</span></h1>
-        <p>Adds a resource used to select an entity.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Tag <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tag_8hpp.html">&lt;core/ecs/tag.hpp&gt;</a></div>
+        </h1>
+        <p>Represents a tag to be used with the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> class.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md112">Resources</a></li>
-            <li><a href="#autotoc_md113">Startup tags</a></li>
-            <li><a href="#autotoc_md114">Tags</a></li>
-            <li><a href="#autotoc_md115">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>This plugins exists to reduce coupling between plugins. For example, a plugin which allows selecting entities through a ImGui window only needs to depend on this plugin, instead of having to know about all the plugins which care about it. The same applies in the other direction.</p><section id="autotoc_md112"><h3><a href="#autotoc_md112">Resources</a></h3><ul><li><a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> - identifies the currently selected entity.</li></ul></section><section id="autotoc_md113"><h3><a href="#autotoc_md113">Startup tags</a></h3><ul><li><code>cubos.entitySelector.init</code> - the <a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> resource is initialized</li></ul></section><section id="autotoc_md114"><h3><a href="#autotoc_md114">Tags</a></h3><ul><li><code>cubos.entitySelector.input</code> - entity selection is handled, after <code>cubos.window.poll</code> and <code>cubos.renderer.draw</code></li></ul></section><section id="autotoc_md115"><h3><a href="#autotoc_md115">Dependencies</a></h3><ul><li><a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></li><li><a href="group__screen-picker-plugin.html" class="m-doc">ScreenPicker</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="tools_2tesseratos_2include_2tesseratos_2entity__selector_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gab3beb47ff453dbd64fb0786652490859" class="m-doc">entitySelectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a2aaf140251d6a33329bc9a84ec19f09c" class="m-doc">Tag</a>(</span><span class="m-doc-wrap">std::string name)</span>
             </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1ed7c52d01636dee0bb5825e1de33626" class="m-doc">name</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd>Returns the tag&#x27;s name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a15358b0e1db49ecc153206e98cb87243" class="m-doc">id</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd>Returns an unique name for the tag, which is generated from its name and memory address.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gab3beb47ff453dbd64fb0786652490859"><div>
+          <section class="m-doc-details" id="a2aaf140251d6a33329bc9a84ec19f09c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gab3beb47ff453dbd64fb0786652490859" class="m-doc-self">entitySelectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2include_2tesseratos_2entity__selector_2plugin_8hpp.html">&lt;tesseratos/entity_selector/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Tag::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2aaf140251d6a33329bc9a84ec19f09c" class="m-doc-self">Tag</a>(</span><span class="m-doc-wrap">std::string name)</span></span>
             </h3>
-            <p>Plugin entry function.</p>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
+                  <td style="width: 1%">name</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">Name</a>.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1ed7c52d01636dee0bb5825e1de33626"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />ecs::<wbr />Tag::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ed7c52d01636dee0bb5825e1de33626" class="m-doc-self">name</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the tag&#x27;s name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">Name</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a15358b0e1db49ecc153206e98cb87243"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />ecs::<wbr />Tag::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15358b0e1db49ecc153206e98cb87243" class="m-doc-self">id</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns an unique name for the tag, which is generated from its name and memory address.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Unique identifier.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
         </section>

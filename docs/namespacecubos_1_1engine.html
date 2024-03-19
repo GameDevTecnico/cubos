@@ -60,6 +60,7 @@
                 <li><a href="#enum-members">Enums</a></li>
                 <li><a href="#typedef-members">Typedefs</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
@@ -364,6 +365,10 @@
               using <a href="group__assets-plugin.html#ga3befb4912d95d097c98bc627a8e7cf97" class="m-doc">AssetWrite</a> = <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">core::<wbr />memory::<wbr />WriteGuard</a>&lt;T, std::unique_lock&lt;std::shared_mutex&gt;&gt;
             </dt>
             <dd>Read-write guard for an asset&#x27;s data.</dd>
+            <dt id="a47b73d9ba7e1e1d8e047199c0c29bfd1">
+              using <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc-self">Tag</a> = <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">core::<wbr />ecs::<wbr />Tag</a>
+            </dt>
+            <dd>Represents a tag to be used with the <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> class.</dd>
             <dt id="afa0b202a1b9f7ddf7c42db16c8dbb7ba">
               using <a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc-self">Cubos</a> = <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">core::<wbr />ecs::<wbr />Cubos</a>
             </dt>
@@ -505,6 +510,127 @@
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#aa1cae6d3065b62177822a89c3728653f" class="m-doc">assetsInitTag</a>
+            </dt>
+            <dd>Initializes the assets manager and loads the meta files (after <a href="namespacecubos_1_1engine.html#a6e03a95a4f779e3c57a50be4e50e5b03" class="m-doc">settingsTag</a>).</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#aa052496e306622c625099add4f3f8187" class="m-doc">assetsBridgeTag</a>
+            </dt>
+            <dd>Systems which add bridges to the asset manager should be tagged with this.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a8f58158180853ecb4354a8a6c607c250" class="m-doc">assetsCleanupTag</a>
+            </dt>
+            <dd>Frees any assets no longer in use.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#aa0d94ee13e7c7452a7b996434b91b023" class="m-doc">assetsTag</a>
+            </dt>
+            <dd>Startup systems which load assets should be tagged with this.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#aab2a0fdf5d5e5d6eb27d867f1e88a397" class="m-doc">collisionsSetupTag</a>
+            </dt>
+            <dd>Initializes new colliders.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a3b8af730e4c0c9fc076fc18e207f959c" class="m-doc">fixedStepTag</a>
+            </dt>
+            <dd>Systems with this tag run at a fixed framerate.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a6c4ae0c27cba70fd189ba414581865f9" class="m-doc">gizmosInitTag</a>
+            </dt>
+            <dd><a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a> renderer is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a6028aeee0a47a51fbd4468f0df850dc6" class="m-doc">gizmosInputTag</a>
+            </dt>
+            <dd><a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a> interaction is handled, after WindowPollTag and before <a href="namespacecubos_1_1engine.html#ac12cab234a8a2f2036d4d7c2be721456" class="m-doc">gizmosDrawTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#ac12cab234a8a2f2036d4d7c2be721456" class="m-doc">gizmosDrawTag</a>
+            </dt>
+            <dd>Queued gizmos are rendered to the window, after <a href="namespacecubos_1_1engine.html#a73ea3246bccf70d033b30317dce9b752" class="m-doc">rendererDrawTag</a> and before <a href="namespacecubos_1_1engine.html#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc">windowRenderTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#af5abd34eb4ef812eac344d130f3076f3" class="m-doc">gizmosPickTag</a>
+            </dt>
+            <dd>The <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> resource is accessed to detect gizmos at mouse coordinates, after <a href="namespacecubos_1_1engine.html#ac12cab234a8a2f2036d4d7c2be721456" class="m-doc">gizmosDrawTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a30b5f31b2a13442b37d8b5a52ea7d81e" class="m-doc">imguiInitTag</a>
+            </dt>
+            <dd><code>ImGui</code> is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#ac1cd10812e8a57a889d7b0c6a9ca3c8c" class="m-doc">imguiBeginTag</a>
+            </dt>
+            <dd>The ImGui frame begins (after <a href="namespacecubos_1_1engine.html#a73ea3246bccf70d033b30317dce9b752" class="m-doc">rendererDrawTag</a>).</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a51cdab0781f4dbc25a5993386e79d2af" class="m-doc">imguiEndTag</a>
+            </dt>
+            <dd>The ImGui frame ends (before <a href="namespacecubos_1_1engine.html#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc">windowRenderTag</a>).</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#ab47ece18f6af25e3216b0dead28a47ff" class="m-doc">imguiTag</a>
+            </dt>
+            <dd>Tag to be used by all systems which call ImGui functions. Runs between <a href="namespacecubos_1_1engine.html#ac1cd10812e8a57a889d7b0c6a9ca3c8c" class="m-doc">imguiBeginTag</a> and <a href="namespacecubos_1_1engine.html#a51cdab0781f4dbc25a5993386e79d2af" class="m-doc">imguiEndTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a78d0767d5e3117b3cbb9ed8a5d7d57de" class="m-doc">inputUpdateTag</a>
+            </dt>
+            <dd>Updates the input state.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a6da20207dd0fa2d2bdeb2abe27923815" class="m-doc">rendererInitTag</a>
+            </dt>
+            <dd>The renderer is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#ab7741304a9884dd22f58a2e96a475d72" class="m-doc">rendererFrameTag</a>
+            </dt>
+            <dd>Frame information is collected, after <a href="namespacecubos_1_1engine.html#a7da0ce9d21c8b18c2ad9d31d537d8cba" class="m-doc">transformUpdateTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a73ea3246bccf70d033b30317dce9b752" class="m-doc">rendererDrawTag</a>
+            </dt>
+            <dd>Frame is rendered to the window, after <a href="namespacecubos_1_1engine.html#ab7741304a9884dd22f58a2e96a475d72" class="m-doc">rendererFrameTag</a> and before <a href="namespacecubos_1_1engine.html#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc">windowRenderTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#acfe68484cf4ddeac2fc757c3315e9d1a" class="m-doc">screenPickerInitTag</a>
+            </dt>
+            <dd>The <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> resource is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a24b27f0e786bdb184fab4dcc06a3db80" class="m-doc">screenPickerClearTag</a>
+            </dt>
+            <dd>The picking texture is cleared.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a5b68ebc16d267844bbe1afc50208f8f7" class="m-doc">screenPickerResizeTag</a>
+            </dt>
+            <dd>Window resize events are handled and the <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> texture is resized, after <a href="namespacecubos_1_1engine.html#a43c882cad9f3af459e8ecc52d6feff88" class="m-doc">windowPollTag</a> and before <a href="namespacecubos_1_1engine.html#a24b27f0e786bdb184fab4dcc06a3db80" class="m-doc">screenPickerClearTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a6e03a95a4f779e3c57a50be4e50e5b03" class="m-doc">settingsTag</a>
+            </dt>
+            <dd>The settings are loaded, overriding values set previously.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a89a32d0bf9da68220cf1cfa0bb4aa17e" class="m-doc">transformMissingLocalTag</a>
+            </dt>
+            <dd>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are added to entities with <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> or <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a29acddb002f4819ca91b2bc012fabd96" class="m-doc">transformMissingTag</a>
+            </dt>
+            <dd>The <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a>, <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> and possibly <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components are added to entities with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#af71cf613edf4b0cefa6a7b0cd8ace800" class="m-doc">transformUpdateRelativeTag</a>
+            </dt>
+            <dd>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> or <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a7da0ce9d21c8b18c2ad9d31d537d8cba" class="m-doc">transformUpdateTag</a>
+            </dt>
+            <dd>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> component and the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components of the parent.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>
+            </dt>
+            <dd>Window is opened, runs after <a href="namespacecubos_1_1engine.html#a6e03a95a4f779e3c57a50be4e50e5b03" class="m-doc">settingsTag</a>.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a43c882cad9f3af459e8ecc52d6feff88" class="m-doc">windowPollTag</a>
+            </dt>
+            <dd>The window is polled for events, sending <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a>&#x27;s.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc">windowRenderTag</a>
+            </dt>
+            <dd>The window&#x27;s back buffers are swapped.</dd>
+          </dl>
+        </section>
         <section>
           <h2>Typedef documentation</h2>
           <section class="m-doc-details" id="a426547b7a41f84591b3fd8d967bc5435"><div>
@@ -617,6 +743,212 @@
               </tbody>
             </table>
 <aside class="m-note m-default"><h4>See also</h4><p>Systems can read sent events using <a href="namespacecubos_1_1engine.html#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a>.</p></aside>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="aa1cae6d3065b62177822a89c3728653f"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#aa1cae6d3065b62177822a89c3728653f" class="m-doc-self">assetsInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2assets_2plugin_8hpp.html">&lt;engine/assets/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Initializes the assets manager and loads the meta files (after <a href="namespacecubos_1_1engine.html#a6e03a95a4f779e3c57a50be4e50e5b03" class="m-doc">settingsTag</a>).</p>
+          </div></section>
+          <section class="m-doc-details" id="aa052496e306622c625099add4f3f8187"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#aa052496e306622c625099add4f3f8187" class="m-doc-self">assetsBridgeTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2assets_2plugin_8hpp.html">&lt;engine/assets/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Systems which add bridges to the asset manager should be tagged with this.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8f58158180853ecb4354a8a6c607c250"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a8f58158180853ecb4354a8a6c607c250" class="m-doc-self">assetsCleanupTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2assets_2plugin_8hpp.html">&lt;engine/assets/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Frees any assets no longer in use.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa0d94ee13e7c7452a7b996434b91b023"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#aa0d94ee13e7c7452a7b996434b91b023" class="m-doc-self">assetsTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2assets_2plugin_8hpp.html">&lt;engine/assets/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Startup systems which load assets should be tagged with this.</p>
+          </div></section>
+          <section class="m-doc-details" id="aab2a0fdf5d5e5d6eb27d867f1e88a397"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#aab2a0fdf5d5e5d6eb27d867f1e88a397" class="m-doc-self">collisionsSetupTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2collisions_2plugin_8hpp.html">&lt;engine/collisions/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Initializes new colliders.</p>
+          </div></section>
+          <section class="m-doc-details" id="a3b8af730e4c0c9fc076fc18e207f959c"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a3b8af730e4c0c9fc076fc18e207f959c" class="m-doc-self">fixedStepTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html">&lt;engine/fixed_step/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Systems with this tag run at a fixed framerate.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6c4ae0c27cba70fd189ba414581865f9"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a6c4ae0c27cba70fd189ba414581865f9" class="m-doc-self">gizmosInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2gizmos_2plugin_8hpp.html">&lt;engine/gizmos/plugin.hpp&gt;</a></div>
+            </h3>
+            <p><a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a> renderer is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6028aeee0a47a51fbd4468f0df850dc6"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a6028aeee0a47a51fbd4468f0df850dc6" class="m-doc-self">gizmosInputTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2gizmos_2plugin_8hpp.html">&lt;engine/gizmos/plugin.hpp&gt;</a></div>
+            </h3>
+            <p><a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a> interaction is handled, after WindowPollTag and before <a href="namespacecubos_1_1engine.html#ac12cab234a8a2f2036d4d7c2be721456" class="m-doc">gizmosDrawTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac12cab234a8a2f2036d4d7c2be721456"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#ac12cab234a8a2f2036d4d7c2be721456" class="m-doc-self">gizmosDrawTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2gizmos_2plugin_8hpp.html">&lt;engine/gizmos/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Queued gizmos are rendered to the window, after <a href="namespacecubos_1_1engine.html#a73ea3246bccf70d033b30317dce9b752" class="m-doc">rendererDrawTag</a> and before <a href="namespacecubos_1_1engine.html#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc">windowRenderTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="af5abd34eb4ef812eac344d130f3076f3"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#af5abd34eb4ef812eac344d130f3076f3" class="m-doc-self">gizmosPickTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2gizmos_2plugin_8hpp.html">&lt;engine/gizmos/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> resource is accessed to detect gizmos at mouse coordinates, after <a href="namespacecubos_1_1engine.html#ac12cab234a8a2f2036d4d7c2be721456" class="m-doc">gizmosDrawTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a30b5f31b2a13442b37d8b5a52ea7d81e"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a30b5f31b2a13442b37d8b5a52ea7d81e" class="m-doc-self">imguiInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2imgui_2plugin_8hpp.html">&lt;engine/imgui/plugin.hpp&gt;</a></div>
+            </h3>
+            <p><code>ImGui</code> is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac1cd10812e8a57a889d7b0c6a9ca3c8c"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#ac1cd10812e8a57a889d7b0c6a9ca3c8c" class="m-doc-self">imguiBeginTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2imgui_2plugin_8hpp.html">&lt;engine/imgui/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The ImGui frame begins (after <a href="namespacecubos_1_1engine.html#a73ea3246bccf70d033b30317dce9b752" class="m-doc">rendererDrawTag</a>).</p>
+          </div></section>
+          <section class="m-doc-details" id="a51cdab0781f4dbc25a5993386e79d2af"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a51cdab0781f4dbc25a5993386e79d2af" class="m-doc-self">imguiEndTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2imgui_2plugin_8hpp.html">&lt;engine/imgui/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The ImGui frame ends (before <a href="namespacecubos_1_1engine.html#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc">windowRenderTag</a>).</p>
+          </div></section>
+          <section class="m-doc-details" id="ab47ece18f6af25e3216b0dead28a47ff"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#ab47ece18f6af25e3216b0dead28a47ff" class="m-doc-self">imguiTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2imgui_2plugin_8hpp.html">&lt;engine/imgui/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Tag to be used by all systems which call ImGui functions. Runs between <a href="namespacecubos_1_1engine.html#ac1cd10812e8a57a889d7b0c6a9ca3c8c" class="m-doc">imguiBeginTag</a> and <a href="namespacecubos_1_1engine.html#a51cdab0781f4dbc25a5993386e79d2af" class="m-doc">imguiEndTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a78d0767d5e3117b3cbb9ed8a5d7d57de"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a78d0767d5e3117b3cbb9ed8a5d7d57de" class="m-doc-self">inputUpdateTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2input_2plugin_8hpp.html">&lt;engine/input/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Updates the input state.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6da20207dd0fa2d2bdeb2abe27923815"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a6da20207dd0fa2d2bdeb2abe27923815" class="m-doc-self">rendererInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2renderer_2plugin_8hpp.html">&lt;engine/renderer/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The renderer is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab7741304a9884dd22f58a2e96a475d72"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#ab7741304a9884dd22f58a2e96a475d72" class="m-doc-self">rendererFrameTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2renderer_2plugin_8hpp.html">&lt;engine/renderer/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Frame information is collected, after <a href="namespacecubos_1_1engine.html#a7da0ce9d21c8b18c2ad9d31d537d8cba" class="m-doc">transformUpdateTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a73ea3246bccf70d033b30317dce9b752"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a73ea3246bccf70d033b30317dce9b752" class="m-doc-self">rendererDrawTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2renderer_2plugin_8hpp.html">&lt;engine/renderer/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Frame is rendered to the window, after <a href="namespacecubos_1_1engine.html#ab7741304a9884dd22f58a2e96a475d72" class="m-doc">rendererFrameTag</a> and before <a href="namespacecubos_1_1engine.html#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc">windowRenderTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="acfe68484cf4ddeac2fc757c3315e9d1a"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#acfe68484cf4ddeac2fc757c3315e9d1a" class="m-doc-self">screenPickerInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2screen__picker_2plugin_8hpp.html">&lt;engine/screen_picker/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> resource is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a24b27f0e786bdb184fab4dcc06a3db80"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a24b27f0e786bdb184fab4dcc06a3db80" class="m-doc-self">screenPickerClearTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2screen__picker_2plugin_8hpp.html">&lt;engine/screen_picker/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The picking texture is cleared.</p>
+          </div></section>
+          <section class="m-doc-details" id="a5b68ebc16d267844bbe1afc50208f8f7"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a5b68ebc16d267844bbe1afc50208f8f7" class="m-doc-self">screenPickerResizeTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2screen__picker_2plugin_8hpp.html">&lt;engine/screen_picker/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Window resize events are handled and the <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> texture is resized, after <a href="namespacecubos_1_1engine.html#a43c882cad9f3af459e8ecc52d6feff88" class="m-doc">windowPollTag</a> and before <a href="namespacecubos_1_1engine.html#a24b27f0e786bdb184fab4dcc06a3db80" class="m-doc">screenPickerClearTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6e03a95a4f779e3c57a50be4e50e5b03"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a6e03a95a4f779e3c57a50be4e50e5b03" class="m-doc-self">settingsTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2settings_2plugin_8hpp.html">&lt;engine/settings/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The settings are loaded, overriding values set previously.</p>
+          </div></section>
+          <section class="m-doc-details" id="a89a32d0bf9da68220cf1cfa0bb4aa17e"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a89a32d0bf9da68220cf1cfa0bb4aa17e" class="m-doc-self">transformMissingLocalTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2transform_2plugin_8hpp.html">&lt;engine/transform/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are added to entities with <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> or <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</p>
+          </div></section>
+          <section class="m-doc-details" id="a29acddb002f4819ca91b2bc012fabd96"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a29acddb002f4819ca91b2bc012fabd96" class="m-doc-self">transformMissingTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2transform_2plugin_8hpp.html">&lt;engine/transform/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a>, <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> and possibly <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components are added to entities with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components.</p>
+          </div></section>
+          <section class="m-doc-details" id="af71cf613edf4b0cefa6a7b0cd8ace800"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#af71cf613edf4b0cefa6a7b0cd8ace800" class="m-doc-self">transformUpdateRelativeTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2transform_2plugin_8hpp.html">&lt;engine/transform/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> or <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7da0ce9d21c8b18c2ad9d31d537d8cba"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a7da0ce9d21c8b18c2ad9d31d537d8cba" class="m-doc-self">transformUpdateTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2transform_2plugin_8hpp.html">&lt;engine/transform/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> component and the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components of the parent.</p>
+          </div></section>
+          <section class="m-doc-details" id="a03b06d2d4815325af9d77c61dd441e6c"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc-self">windowInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2window_2plugin_8hpp.html">&lt;engine/window/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Window is opened, runs after <a href="namespacecubos_1_1engine.html#a6e03a95a4f779e3c57a50be4e50e5b03" class="m-doc">settingsTag</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a43c882cad9f3af459e8ecc52d6feff88"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a43c882cad9f3af459e8ecc52d6feff88" class="m-doc-self">windowPollTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2window_2plugin_8hpp.html">&lt;engine/window/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The window is polled for events, sending <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a>&#x27;s.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad2f94e031f2b8346edef8a52c10c284b"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc-self">windowRenderTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2window_2plugin_8hpp.html">&lt;engine/window/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>The window&#x27;s back buffers are swapped.</p>
           </div></section>
         </section>
       </div>
