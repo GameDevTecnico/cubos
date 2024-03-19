@@ -31,6 +31,7 @@ set(CUBOS_CORE_SOURCE
 	"src/memory/any_value.cpp"
 	"src/memory/any_vector.cpp"
 
+	"src/reflection/reflect.cpp"
 	"src/reflection/type.cpp"
 	"src/reflection/comparison.cpp"
 	"src/reflection/type_registry.cpp"
