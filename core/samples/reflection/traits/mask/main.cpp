@@ -13,6 +13,8 @@ enum class Permissions
     Execute = 4
 };
 
+CUBOS_REFLECT_EXTERNAL_DECL(Permissions);
+
 inline Permissions operator~(Permissions p)
 {
     return static_cast<Permissions>(~static_cast<int>(p));
@@ -36,7 +38,6 @@ inline Permissions operator&(Permissions a, Permissions b)
 using cubos::core::reflection::MaskTrait;
 using cubos::core::reflection::Type;
 
-template <>
 CUBOS_REFLECT_EXTERNAL_IMPL(Permissions)
 {
     return Type::create("Permissions")

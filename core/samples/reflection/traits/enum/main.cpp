@@ -11,6 +11,7 @@ enum class Color
     Blue
 };
 
+CUBOS_REFLECT_EXTERNAL_DECL(Color);
 /// [Enum declaration]
 
 /// [Reflection definition]
@@ -20,7 +21,6 @@ enum class Color
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::Type;
 
-template <>
 CUBOS_REFLECT_EXTERNAL_IMPL(Color)
 {
     return Type::create("Color").with(

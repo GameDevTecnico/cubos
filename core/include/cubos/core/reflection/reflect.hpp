@@ -24,10 +24,10 @@ namespace cubos::core::reflection
     /// types, to which member functions cannot be added, the second option is necessary.
     ///
     /// Both options can and should be shortened by using the macros:
-    /// - @ref CUBOS_REFLECT - declaring the reflection member function.
-    /// - @ref CUBOS_REFLECT_IMPL - defining the reflection member function.
+    /// - @ref CUBOS_REFLECT - declaring the reflection member functions.
+    /// - @ref CUBOS_REFLECT_IMPL - defining the reflection member functions.
     /// - @ref CUBOS_REFLECT_EXTERNAL_DECL - declaring the reflection specialization.
-    /// - @ref CUBOS_REFLECT_EXTERNAL_IMPL - defining the reflection specialization's function.
+    /// - @ref CUBOS_REFLECT_EXTERNAL_IMPL - defining the reflection specialization's functions.
     ///
     /// @tparam T %Type to reflect.
     /// @ingroup core-reflection
@@ -42,9 +42,9 @@ namespace cubos::core::reflection
         //
         // Refer to the documentation above for more information on how to implement reflection on
         // your type or an external type.
-        static const Type& type()
+        static const Type& get()
         {
-            return T::reflect(); // Read the comment above if you get a compiler error here!
+            return T::reflectGet(); // Read the comment above if you get a compiler error here!
         }
     };
 
@@ -53,21 +53,13 @@ namespace cubos::core::reflection
     /// Fails to compile if the type does not implement reflection, or, in the case of external
     /// types, if its reflection specialization has not been included.
     ///
-    /// Internally, this function stores a static instance of the reflection data for the given
-    /// type. Thus the reflection data is only initialized once, the first time this function is
-    /// called, which means that the returned reference can be safely used as an identifier for the
-    /// type.
-    ///
-    /// The reflection data is obtained by calling the @ref Reflect<T>::type() function.
-    ///
     /// @tparam T %Type to reflect.
     /// @return %Type information.
     /// @ingroup core-reflection
     template <typename T>
     const Type& reflect()
     {
-        static const Type& type = Reflect<T>::type();
-        return type;
+        return Reflect<T>::get();
     }
 
     /// @cond See #765
@@ -98,7 +90,7 @@ namespace cubos::core::reflection
 /// @ingroup core-reflection
 #define CUBOS_PACK(...) __VA_ARGS__
 
-/// @brief Declares a reflection method.
+/// @brief Declares the static reflection methods.
 ///
 /// @code{.cpp}
 /// // my_type.hpp
@@ -106,21 +98,25 @@ namespace cubos::core::reflection
 ///
 /// struct MyType
 /// {
-///     CUBOS_REFLECT; // declares `static const Type& reflect()`
+///     // declares `static const Type& reflectGet()` and `static const Type& reflectMake()`
+///     CUBOS_REFLECT;
 /// };
 /// @endcode
 ///
 /// @see Meant to be used with @ref CUBOS_REFLECT_IMPL.
 /// @ingroup core-reflection
-#define CUBOS_REFLECT static const cubos::core::reflection::Type& reflect()
+#define CUBOS_REFLECT                                                                                                  \
+    static const cubos::core::reflection::Type& reflectGet();                                                          \
+    static const cubos::core::reflection::Type& reflectMake();                                                         \
+    static_assert(true, "") /* Here just to force the user to enter a semicolon */
 
-/// @brief Defines a reflection method.
+/// @brief Defines a reflection method for a non-templated type.
 ///
 /// @code{.cpp}
 /// // my_type.cpp
 /// #include "my_type.hpp"
 ///
-/// CUBOS_REFLECT_IMPL(MyType) // defines `const Type& MyType::reflect()`
+/// CUBOS_REFLECT_IMPL(MyType) // defines `const Type& MyType::reflectGet()` and `const Type& MyType::reflectMake()`.
 /// {
 ///     return /* create your type here */;
 /// }
@@ -129,7 +125,41 @@ namespace cubos::core::reflection
 /// @see Meant to be used with @ref CUBOS_REFLECT.
 /// @param T Type to reflect.
 /// @ingroup core-reflection
-#define CUBOS_REFLECT_IMPL(T) const cubos::core::reflection::Type& T::reflect()
+#define CUBOS_REFLECT_IMPL(T)                                                                                          \
+    const ::cubos::core::reflection::Type& T::reflectGet()                                                             \
+    {                                                                                                                  \
+        static const ::cubos::core::reflection::Type& type = T::reflectMake();                                         \
+        return type;                                                                                                   \
+    }                                                                                                                  \
+                                                                                                                       \
+    const ::cubos::core::reflection::Type& T::reflectMake()
+
+/// @brief Similar to @ref CUBOS_REFLECT_IMPL but tailored to templated types.
+///
+/// @code{.cpp}
+/// // templated_type.cpp
+/// #include "templated_type.hpp"
+///
+/// CUBOS_REFLECT_IMPL((typename T), (TemplatedType<T>))
+/// {
+///     return /* create your type here */;
+/// }
+/// @endcode
+///
+/// @see Meant to be used with @ref CUBOS_REFLECT.
+/// @param args Template arguments.
+/// @param T Type to reflect.
+/// @ingroup core-reflection
+#define CUBOS_REFLECT_TEMPLATE_IMPL(args, T)                                                                           \
+    template <CUBOS_PACK args>                                                                                         \
+    const ::cubos::core::reflection::Type& CUBOS_PACK T::reflectGet()                                                  \
+    {                                                                                                                  \
+        static const ::cubos::core::reflection::Type& type = CUBOS_PACK T::reflectMake();                              \
+        return type;                                                                                                   \
+    }                                                                                                                  \
+                                                                                                                       \
+    template <CUBOS_PACK args>                                                                                         \
+    const ::cubos::core::reflection::Type& CUBOS_PACK T::reflectMake()
 
 /// @brief Declares a specialization of @ref cubos::core::reflection::Reflect for a templated type.
 /// @note Should be preceded by a template declaration.
@@ -148,7 +178,8 @@ namespace cubos::core::reflection
 #define CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(T)                                                                        \
     struct cubos::core::reflection::Reflect<T>                                                                         \
     {                                                                                                                  \
-        static const cubos::core::reflection::Type& type();                                                            \
+        static const ::cubos::core::reflection::Type& get();                                                           \
+        static const ::cubos::core::reflection::Type& make();                                                          \
     }
 
 /// @brief Declares a specialization of @ref cubos::core::reflection::Reflect for a type.
@@ -179,20 +210,18 @@ namespace cubos::core::reflection
 /// }
 /// @endcode
 ///
-/// @code{.cpp}
-/// // templated_type_reflection.hpp
-/// template <typename T>
-/// CUBOS_REFLECT_EXTERNAL_IMPL(TemplatedType<T>)
-/// {
-///     return /* create your type here */;
-/// }
-/// @endcode
-///
 /// @see Meant to be used with either @ref CUBOS_REFLECT_EXTERNAL_DECL or
 /// @ref CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE.
 /// @param T Type to reflect.
 /// @ingroup core-reflection
-#define CUBOS_REFLECT_EXTERNAL_IMPL(T) const cubos::core::reflection::Type& cubos::core::reflection::Reflect<T>::type()
+#define CUBOS_REFLECT_EXTERNAL_IMPL(T)                                                                                 \
+    const ::cubos::core::reflection::Type& ::cubos::core::reflection::Reflect<T>::get()                                \
+    {                                                                                                                  \
+        static const ::cubos::core::reflection::Type& type = Reflect<T>::make();                                       \
+        return type;                                                                                                   \
+    }                                                                                                                  \
+                                                                                                                       \
+    const ::cubos::core::reflection::Type& ::cubos::core::reflection::Reflect<T>::make()
 
 /// @brief Both declares and implements a specialization of @ref cubos::core::reflection::Reflect for a type.
 ///
@@ -212,5 +241,13 @@ namespace cubos::core::reflection
 #define CUBOS_REFLECT_EXTERNAL_TEMPLATE(args, T)                                                                       \
     template <CUBOS_PACK args>                                                                                         \
     CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(CUBOS_PACK T);                                                                \
+                                                                                                                       \
     template <CUBOS_PACK args>                                                                                         \
-    CUBOS_REFLECT_EXTERNAL_IMPL(CUBOS_PACK T)
+    const ::cubos::core::reflection::Type& ::cubos::core::reflection::Reflect<CUBOS_PACK T>::get()                     \
+    {                                                                                                                  \
+        static const ::cubos::core::reflection::Type& type = Reflect<CUBOS_PACK T>::make();                            \
+        return type;                                                                                                   \
+    }                                                                                                                  \
+                                                                                                                       \
+    template <CUBOS_PACK args>                                                                                         \
+    const ::cubos::core::reflection::Type& ::cubos::core::reflection::Reflect<CUBOS_PACK T>::make()
