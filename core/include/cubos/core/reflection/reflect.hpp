@@ -7,14 +7,24 @@
 
 #pragma once
 
+#include <cstddef>
+
 namespace cubos::core::reflection
 {
     class Type;
 
-    /// @brief Creates a new unnamed type with the given identifier. Used as a fallback for types without reflection.
+    /// @brief Creates a new unnamed type with the given identifier. Used as a fallback for non-reflectable C++ types.
+    ///
+    /// The created 'unnamed' type is named from the given identifier, and has a minimal @ref ConstructibleTrait, which
+    /// exposes its identifier, size, alignment and destructor. This means that types without reflection which don't
+    /// expose destructors (e.g., singletons), are not supported by @ref reflect.
+    ///
     /// @param id Unique type identifier.
+    /// @param size Type size in bytes.
+    /// @param alignment Type alignment in bytes.
+    /// @param destructor Type destructor.
     /// @ingroup core-reflection
-    const Type& makeUnnamedType(unsigned long id);
+    const Type& makeUnnamedType(unsigned long id, std::size_t size, std::size_t alignment, void (*destructor)(void*));
 
     /// @brief Defines the reflection function for the given type @p T.
     ///
@@ -63,7 +73,8 @@ namespace cubos::core::reflection
                 // This variable is unused, but since there is one for each type, its address is
                 // guaranteed to be unique for each type. Thus, we use it as an identifier.
                 static const bool Var = false;
-                static const Type& type = makeUnnamedType(reinterpret_cast<unsigned long>(&Var));
+                static const Type& type = makeUnnamedType(reinterpret_cast<unsigned long>(&Var), sizeof(T), alignof(T),
+                                                          [](void* value) { static_cast<T*>(value)->~T(); });
                 return type;
             }
         }
