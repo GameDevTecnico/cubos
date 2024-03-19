@@ -24,7 +24,8 @@ namespace cubos::core::reflection
     /// @param alignment Type alignment in bytes.
     /// @param destructor Type destructor.
     /// @ingroup core-reflection
-    const Type& makeUnnamedType(unsigned long id, std::size_t size, std::size_t alignment, void (*destructor)(void*));
+    const Type& makeUnnamedType(unsigned long long id, std::size_t size, std::size_t alignment,
+                                void (*destructor)(void*));
 
     /// @brief Defines the reflection function for the given type @p T.
     ///
@@ -73,8 +74,9 @@ namespace cubos::core::reflection
                 // This variable is unused, but since there is one for each type, its address is
                 // guaranteed to be unique for each type. Thus, we use it as an identifier.
                 static const bool Var = false;
-                static const Type& type = makeUnnamedType(reinterpret_cast<unsigned long>(&Var), sizeof(T), alignof(T),
-                                                          [](void* value) { static_cast<T*>(value)->~T(); });
+                static const Type& type =
+                    makeUnnamedType(reinterpret_cast<unsigned long long>(&Var), sizeof(T), alignof(T),
+                                    [](void* value) { static_cast<T*>(value)->~T(); });
                 return type;
             }
         }
