@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
@@ -78,8 +79,45 @@
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">cubos::core::ecs::Tag</a>
             </dt>
-            <dd>Class which stores tags and converts them to strings for core to use.</dd>
+            <dd>Represents a tag to be used with the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> class.</dd>
           </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#aed1f6f11f01b6eed305f5eb535c6502c" class="m-doc">CUBOS_DEFINE_TAG</a>(</span><span class="m-doc-wrap">tag)</span>
+            </dt>
+            <dd>Utility used to define tags more easily.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Define documentation</h2>
+          <section class="m-doc-details" id="aed1f6f11f01b6eed305f5eb535c6502c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#aed1f6f11f01b6eed305f5eb535c6502c" class="m-doc-self">CUBOS_DEFINE_TAG</a>(</span><span class="m-doc-wrap">tag)</span>
+            </h3>
+            <p>Utility used to define tags more easily.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td>Tag type.</td>
+                </tr>
+              </tbody>
+            </table>
+<pre class="m-code"><span class="c1">// in file.hpp</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">my</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">ecs</span><span class="o">::</span><span class="n">Tag</span><span class="w"> </span><span class="n">MyTag</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// in file.cpp</span>
+<span class="n">CUBOS_DEFINE_TAG</span><span class="p">(</span><span class="n">my</span><span class="o">::</span><span class="n">MyTag</span><span class="p">);</span></pre>
+          </div></section>
         </section>
       </div>
     </div>

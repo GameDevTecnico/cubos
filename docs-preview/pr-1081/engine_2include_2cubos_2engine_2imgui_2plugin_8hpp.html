@@ -86,19 +86,19 @@
             <dt>
               Tag <a href="namespacecubos_1_1engine.html#a30b5f31b2a13442b37d8b5a52ea7d81e" class="m-doc">imguiInitTag</a>
             </dt>
-            <dd><code>ImGui</code> is initialized, after <code>cubos.window.init</code>.</dd>
+            <dd><code>ImGui</code> is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</dd>
             <dt>
               Tag <a href="namespacecubos_1_1engine.html#ac1cd10812e8a57a889d7b0c6a9ca3c8c" class="m-doc">imguiBeginTag</a>
             </dt>
-            <dd>the ImGui frame begins (after <code>cubos.renderer.draw</code>).</dd>
+            <dd>The ImGui frame begins (after <a href="namespacecubos_1_1engine.html#a73ea3246bccf70d033b30317dce9b752" class="m-doc">rendererDrawTag</a>).</dd>
             <dt>
               Tag <a href="namespacecubos_1_1engine.html#a51cdab0781f4dbc25a5993386e79d2af" class="m-doc">imguiEndTag</a>
             </dt>
-            <dd>the ImGui frame ends (before <code>cubos.window.render</code>).</dd>
+            <dd>The ImGui frame ends (before <a href="namespacecubos_1_1engine.html#ad2f94e031f2b8346edef8a52c10c284b" class="m-doc">windowRenderTag</a>).</dd>
             <dt>
               Tag <a href="namespacecubos_1_1engine.html#ab47ece18f6af25e3216b0dead28a47ff" class="m-doc">imguiTag</a>
             </dt>
-            <dd>runs between the previous two tags.</dd>
+            <dd>Tag to be used by all systems which call ImGui functions. Runs between <a href="namespacecubos_1_1engine.html#ac1cd10812e8a57a889d7b0c6a9ca3c8c" class="m-doc">imguiBeginTag</a> and <a href="namespacecubos_1_1engine.html#a51cdab0781f4dbc25a5993386e79d2af" class="m-doc">imguiEndTag</a>.</dd>
           </dl>
         </section>
       </div>
