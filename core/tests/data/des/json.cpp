@@ -26,10 +26,7 @@ namespace
 {
     struct NonConstructible
     {
-        CUBOS_REFLECT
-        {
-            return Type::create("NonConstructible");
-        }
+        CUBOS_REFLECT;
 
         int operator<=>(const NonConstructible& /*unused*/) const
         {
@@ -39,10 +36,7 @@ namespace
 
     struct Empty
     {
-        CUBOS_REFLECT
-        {
-            return Type::create("Empty").with(autoConstructibleTrait<Empty>());
-        }
+        CUBOS_REFLECT;
 
         int operator<=>(const Empty& /*unused*/) const
         {
@@ -52,10 +46,7 @@ namespace
 
     struct Wrapper
     {
-        CUBOS_REFLECT
-        {
-            return Type::create("Wrapper").with(FieldsTrait{}.withField("inner", &Wrapper::inner));
-        }
+        CUBOS_REFLECT;
 
         bool operator==(const Wrapper& /*unused*/) const = default;
 
@@ -69,6 +60,21 @@ namespace
         Blue
     };
 } // namespace
+
+CUBOS_REFLECT_IMPL(NonConstructible)
+{
+    return Type::create("NonConstructible");
+}
+
+CUBOS_REFLECT_IMPL(Empty)
+{
+    return Type::create("Empty").with(autoConstructibleTrait<Empty>());
+}
+
+CUBOS_REFLECT_IMPL(Wrapper)
+{
+    return Type::create("Wrapper").with(FieldsTrait{}.withField("inner", &Wrapper::inner));
+}
 
 CUBOS_REFLECT_EXTERNAL_DECL(Color);
 CUBOS_REFLECT_EXTERNAL_IMPL(Color)

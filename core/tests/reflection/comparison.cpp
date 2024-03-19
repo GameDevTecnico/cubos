@@ -35,8 +35,8 @@ TEST_CASE("reflection::compare")
     const auto fo = FieldsObject{1, 0.3F};
     const auto foEqual = FieldsObject{1, 0.3F};
     const auto foDifferent = FieldsObject{2, 0.3F};
-    CHECK(compare(fo.reflect(), (void*)&fo, (void*)&foEqual));
-    CHECK_FALSE(compare(fo.reflect(), (void*)&fo, (void*)&foDifferent));
+    CHECK(compare(reflect<FieldsObject>(), (void*)&fo, (void*)&foEqual));
+    CHECK_FALSE(compare(reflect<FieldsObject>(), (void*)&fo, (void*)&foDifferent));
 
     std::vector<std::unordered_map<int, glm::vec3>> vec = {
         std::unordered_map<int, glm::vec3>{{1, {1.2, 2.3, 4.5}}, {2, {1.2, 1.3, 4.5}}, {560, {1.2, 2.3, 4.5}}},

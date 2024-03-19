@@ -22,12 +22,14 @@ namespace
 {
     struct Empty
     {
-        CUBOS_REFLECT
-        {
-            return Type::create("Empty");
-        }
+        CUBOS_REFLECT;
     };
 } // namespace
+
+CUBOS_REFLECT_IMPL(Empty)
+{
+    return Type::create("Empty");
+}
 
 #define AUTO_TEST(type, value, expected, success)                                                                      \
     stream.seek(0, SeekOrigin::Begin);                                                                                 \

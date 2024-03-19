@@ -26,14 +26,8 @@ namespace
 {
     struct ExampleStruct
     {
-        CUBOS_REFLECT
-        {
-            return Type::create("ExampleStruct")
-                .with(FieldsTrait{}
-                          .withField("a", &ExampleStruct::a)
-                          .withField("b", &ExampleStruct::b)
-                          .withField("c", &ExampleStruct::c));
-        }
+        CUBOS_REFLECT;
+
         int a;
         float b;
         std::string c;
@@ -46,6 +40,15 @@ namespace
         Blue
     };
 } // namespace
+
+CUBOS_REFLECT_IMPL(ExampleStruct)
+{
+    return Type::create("ExampleStruct")
+        .with(FieldsTrait{}
+                  .withField("a", &ExampleStruct::a)
+                  .withField("b", &ExampleStruct::b)
+                  .withField("c", &ExampleStruct::c));
+}
 
 CUBOS_REFLECT_EXTERNAL_DECL(Color);
 CUBOS_REFLECT_EXTERNAL_IMPL(Color)

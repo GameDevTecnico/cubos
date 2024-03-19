@@ -33,7 +33,7 @@ namespace
     }
 } // namespace
 
-template <>
+CUBOS_REFLECT_EXTERNAL_DECL(Permissions);
 CUBOS_REFLECT_EXTERNAL_IMPL(Permissions)
 {
     return Type::create("Permissions")

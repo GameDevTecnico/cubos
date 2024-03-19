@@ -9,11 +9,13 @@ using cubos::core::reflection::Type;
 
 struct SimpleType
 {
-    CUBOS_REFLECT
-    {
-        return Type::create("SimpleType");
-    }
+    CUBOS_REFLECT;
 };
+
+CUBOS_REFLECT_IMPL(SimpleType)
+{
+    return Type::create("SimpleType");
+}
 
 struct ObjectType
 {

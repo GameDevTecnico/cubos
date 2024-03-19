@@ -135,10 +135,7 @@ namespace cubos::engine
     class Asset : public AnyAsset
     {
     public:
-        CUBOS_REFLECT
-        {
-            return AnyAsset::makeType("cubos::engine::Asset<" + core::reflection::reflect<T>().name() + ">");
-        }
+        CUBOS_REFLECT;
 
         using AnyAsset::AnyAsset;
 
@@ -180,5 +177,10 @@ namespace cubos::engine
         asset.mVersion = mVersion;
         asset.incRef();
         return asset;
+    }
+
+    CUBOS_REFLECT_TEMPLATE_IMPL((core::reflection::Reflectable T), (Asset<T>))
+    {
+        return AnyAsset::makeType("cubos::engine::Asset<" + core::reflection::reflect<T>().name() + ">");
     }
 } // namespace cubos::engine
