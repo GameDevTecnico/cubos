@@ -66,7 +66,7 @@ namespace cubos::core::ecs
         /// @tparam Ts Component types.
         /// @param entity Entity.
         /// @param components Components to move.
-        template <reflection::Reflectable... Ts>
+        template <typename... Ts>
         void add(Entity entity, Ts... components)
         {
             ([&]() { this->add(entity, memory::AnyValue::moveConstruct(reflection::reflect<Ts>(), &components)); }(),
@@ -84,7 +84,7 @@ namespace cubos::core::ecs
         /// @param fromEntity From entity.
         /// @param toEntity To entity.
         /// @param relation Relation to move.
-        template <reflection::Reflectable T>
+        template <typename T>
         void relate(Entity fromEntity, Entity toEntity, T relation)
         {
             this->relate(fromEntity, toEntity, memory::AnyValue::moveConstruct(reflection::reflect<T>(), &relation));

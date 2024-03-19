@@ -58,7 +58,7 @@ namespace cubos::core::ecs
         ///
         /// @tparam T Data type.
         /// @return Data type identifier.
-        template <reflection::Reflectable T>
+        template <typename T>
         DataTypeId id() const
         {
             return this->id(reflection::reflect<T>());

@@ -32,7 +32,7 @@ namespace cubos::core::reflection
 
         /// @copydoc insert(const Type&)
         /// @tparam T Type to register.
-        template <Reflectable T>
+        template <typename T>
         void insert()
         {
             this->insert(reflect<T>());
@@ -45,7 +45,7 @@ namespace cubos::core::reflection
 
         /// @copydoc contains(const Type&)
         /// @tparam T Type to check.
-        template <Reflectable T>
+        template <typename T>
         bool contains() const
         {
             return this->contains(reflect<T>());

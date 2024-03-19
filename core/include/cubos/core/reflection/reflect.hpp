@@ -82,16 +82,6 @@ namespace cubos::core::reflection
     {
         return Reflect<T>::get();
     }
-
-    /// @cond See #765
-    /// @brief Checks whether the given type @p T is reflectable.
-    /// @tparam T %Type to check.
-    template <typename T>
-    concept Reflectable = requires
-    {
-        reflect<T>();
-    };
-    /// @endcond
 } // namespace cubos::core::reflection
 
 /// @brief Helper macro used to pass arguments with commas to other macros, wrapped in parentheses.
