@@ -28,9 +28,9 @@ namespace cubos::engine
     ///
     /// ## Resources
     /// - @ref Settings - holds the settings.
-    ///
-    /// ## Startup tags
-    /// - `cubos.settings` - the settings are loaded, overriding values set previously.
+
+    /// @brief The settings are loaded, overriding values set previously.
+    extern Tag settingsTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class

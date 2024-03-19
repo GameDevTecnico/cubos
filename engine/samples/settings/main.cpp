@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 
     cubos.addPlugin(settingsPlugin);
 
-    cubos.startupSystem("print setting value").after("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("print setting value").after(settingsTag).call([](Settings& settings) {
         CUBOS_INFO("{}", settings.getString("greeting", "Hello!"));
     });
 

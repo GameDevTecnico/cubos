@@ -10,6 +10,8 @@ using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
 using cubos::core::data::old::JSONDeserializer;
 
+CUBOS_DEFINE_TAG(cubos::engine::settingsTag);
+
 using namespace cubos::engine;
 
 static Settings loadFromArguments(const Arguments& args)
@@ -69,7 +71,7 @@ void cubos::engine::settingsPlugin(Cubos& cubos)
     cubos.addResource<Settings>();
 
     cubos.startupSystem("load Settings from file and arguments")
-        .tagged("cubos.settings")
+        .tagged(settingsTag)
         .call([](const Arguments& args, Settings& settings) {
             // First, load settings from the command line arguments.
             Settings argsSettings = loadFromArguments(args);

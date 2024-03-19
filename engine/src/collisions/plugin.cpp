@@ -9,6 +9,8 @@
 
 #include "narrow_phase/plugin.hpp"
 
+CUBOS_DEFINE_TAG(cubos::engine::collisionsSetupTag);
+
 void cubos::engine::collisionsPlugin(Cubos& cubos)
 {
     cubos.addPlugin(transformPlugin);
@@ -24,7 +26,7 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
     cubos.addPlugin(narrowPhaseCollisionsPlugin);
 
     cubos.system("setup new boxes")
-        .tagged("cubos.collisions.setup")
+        .tagged(collisionsSetupTag)
         .call([](Query<const BoxCollisionShape&, Collider&> query) {
             for (auto [shape, collider] : query)
             {
@@ -43,7 +45,7 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
         });
 
     cubos.system("setup new capsules")
-        .tagged("cubos.collisions.setup")
+        .tagged(collisionsSetupTag)
         .call([](Query<const CapsuleCollisionShape&, Collider&> query) {
             for (auto [shape, collider] : query)
             {

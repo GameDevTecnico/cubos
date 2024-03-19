@@ -1,6 +1,7 @@
 #include <imgui.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -28,17 +29,19 @@ void tesseratos::entitySelectorPlugin(Cubos& cubos)
 
     cubos.addResource<EntitySelector>();
 
-    cubos.startupSystem("initialize EntitySelector")
-        .tagged("cubos.entitySelector.init")
+    cubos
+        .startupSystem("initialize EntitySelector")
+        //.tagged("cubos.entitySelector.init")
         .call([](EntitySelector& entitySelector) {
             entitySelector.selection = Entity{};
             entitySelector.lastMousePosition = glm::ivec2{0, 0};
         });
 
-    cubos.system("process window input for EntitySelector")
-        .tagged("cubos.entitySelector.input")
-        .after("cubos.window.poll")
-        .after("cubos.renderer.draw")
+    cubos
+        .system("process window input for EntitySelector")
+        //.tagged("cubos.entitySelector.input")
+        .after(cubos::engine::windowPollTag)
+        .after(cubos::engine::rendererDrawTag)
         .call([](const ScreenPicker& screenPicker, EntitySelector& entitySelector, const World& world,
                  EventReader<WindowEvent> windowEvent) {
             for (const auto& event : windowEvent)

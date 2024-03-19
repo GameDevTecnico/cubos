@@ -4,36 +4,40 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 
+CUBOS_DEFINE_TAG(cubos::engine::assetsInitTag);
+CUBOS_DEFINE_TAG(cubos::engine::assetsCleanupTag);
+CUBOS_DEFINE_TAG(cubos::engine::assetsBridgeTag);
+CUBOS_DEFINE_TAG(cubos::engine::assetsTag);
+
 using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
 
 void cubos::engine::assetsPlugin(Cubos& cubos)
 {
+
     cubos.addPlugin(settingsPlugin);
 
     cubos.addResource<Assets>();
 
-    cubos.startupTag("cubos.assets.init").after("cubos.settings");
-    cubos.startupTag("cubos.assets.bridge").after("cubos.assets.init").before("cubos.assets");
+    cubos.startupTag(assetsInitTag).after(settingsTag);
+    cubos.startupTag(assetsBridgeTag).after(assetsInitTag).before(assetsTag);
 
-    cubos.startupSystem("load asset meta files")
-        .tagged("cubos.assets.init")
-        .call([](Assets& assets, Settings& settings) {
-            // Get the relevant settings.
-            if (settings.getBool("assets.io.enabled", true))
-            {
-                std::filesystem::path path = settings.getString("assets.io.path", "assets");
-                bool readOnly = settings.getBool("assets.io.readOnly", true);
+    cubos.startupSystem("load asset meta files").tagged(assetsInitTag).call([](Assets& assets, Settings& settings) {
+        // Get the relevant settings.
+        if (settings.getBool("assets.io.enabled", true))
+        {
+            std::filesystem::path path = settings.getString("assets.io.path", "assets");
+            bool readOnly = settings.getBool("assets.io.readOnly", true);
 
-                // Create a standard archive for the assets directory and mount it.
-                FileSystem::mount("/assets", std::make_unique<StandardArchive>(path, true, readOnly));
+            // Create a standard archive for the assets directory and mount it.
+            FileSystem::mount("/assets", std::make_unique<StandardArchive>(path, true, readOnly));
 
-                // Load the meta files on the assets directory.
-                assets.loadMeta("/assets");
-            }
-        });
+            // Load the meta files on the assets directory.
+            assets.loadMeta("/assets");
+        }
+    });
 
-    cubos.system("cleanup unused assets").tagged("cubos.assets.cleanup").call([](Assets& assets) {
+    cubos.system("cleanup unused assets").tagged(assetsCleanupTag).call([](Assets& assets) {
         // TODO: maybe don't do this every frame?
         assets.cleanup();
     });

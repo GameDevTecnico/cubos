@@ -3,6 +3,7 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/input/bindings.hpp>
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 
 using cubos::core::io::Window;
@@ -174,13 +175,13 @@ int main()
 
     cubos.addResource<State>();
 
-    cubos.startupSystem("configure Assets").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
     });
 
     /// [Loading the bindings]
     cubos.startupSystem("load and set the Input Bindings")
-        .tagged("cubos.assets")
+        .tagged(assetsTag)
         .call([](const Assets& assets, Input& input) {
             auto bindings = assets.read<InputBindings>(BindingsAsset);
             input.bind(*bindings);
@@ -190,7 +191,7 @@ int main()
 
     /// [Checking Type of Press]
     cubos.system("detect input")
-        .after("cubos.input.update")
+        .after(inputUpdateTag)
         .call([](const Input& input, const Window& window, State& state, ShouldQuit& shouldQuit) {
             // FIXME: This is an hack to have one-shot actions while we don't have input events.
             if (input.pressed("next-showcase"))

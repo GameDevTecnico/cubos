@@ -19,6 +19,10 @@ namespace cubos::engine
     /// ## Relations
     /// - @ref CollidingWith - relates two entities that are colliding.
 
+    extern Tag collisionsNarrowCleanTag;
+
+    extern Tag collisionsNarrowTag;
+
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup narrow-phase-collisions-plugin

@@ -20,17 +20,22 @@ namespace cubos::engine
     /// ## Resources
     /// - @ref DataInspector - used to inspect/modify objects via UI.
     ///
-    /// ## Startup tags
-    /// - `cubos.imgui.init` - `ImGui` is initialized, after `cubos.window.init`.
-    ///
-    /// ## Tags
-    /// - `cubos.imgui.begin` - the ImGui frame begins (after `cubos.renderer.draw`).
-    /// - `cubos.imgui.end` - the ImGui frame ends (before `cubos.window.render`).
-    /// - `cubos.imgui` - runs between the previous two tags.
-    ///
     /// ## Dependencies
     /// - @ref renderer-plugin
     /// - @ref window-plugin
+
+    /// @brief `ImGui` is initialized, after @ref windowInitTag.
+    extern Tag imguiInitTag;
+
+    /// @brief The ImGui frame begins (after @ref rendererDrawTag).
+    extern Tag imguiBeginTag;
+
+    /// @brief The ImGui frame ends (before @ref windowRenderTag).
+    extern Tag imguiEndTag;
+
+    /// @brief Tag to be used by all systems which call ImGui functions. Runs between @ref imguiBeginTag and @ref
+    /// imguiEndTag.
+    extern Tag imguiTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class

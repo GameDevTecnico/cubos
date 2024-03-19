@@ -24,17 +24,19 @@ TEST_CASE("ecs::Cubos")
 
     SUBCASE("systems are called")
     {
+        CUBOS_DEFINE_TAG(middle);
         static int acc = 1;
         CHECK(acc == 1);
-        cubos.startupSystem("mul 2").before("middle").call([]() { acc *= 2; });
-        cubos.startupSystem("mul 3").tagged("middle").call([]() { acc *= 3; });
-        cubos.startupSystem("mul 5").after("middle").call([]() { acc *= 5; });
+        cubos.startupSystem("mul 2").before(middle).call([]() { acc *= 2; });
+        cubos.startupSystem("mul 3").tagged(middle).call([]() { acc *= 3; });
+        cubos.startupSystem("mul 5").after(middle).call([]() { acc *= 5; });
         cubos.run();
         CHECK(acc == 30);
     }
 
     SUBCASE("system conditions are called")
     {
+        CUBOS_DEFINE_TAG(tag);
         static int acc = 1;
         CHECK(acc == 1);
         cubos.startupSystem("mul 2")
@@ -49,32 +51,33 @@ TEST_CASE("ecs::Cubos")
 
     SUBCASE("single resource")
     {
+        CUBOS_DEFINE_TAG(tag);
         cubos.addResource<int>(0);
-        cubos.startupSystem("check integer before").before("tag").call([](const int& x) { CHECK(x == 0); });
-        cubos.startupSystem("increment integer").tagged("tag").call([](int& x) { x += 1; });
-        cubos.startupSystem("check integer after").after("tag").call([](const int& x) { CHECK(x == 1); });
+        cubos.startupSystem("check integer before").before(tag).call([](const int& x) { CHECK(x == 0); });
+        cubos.startupSystem("increment integer").tagged(tag).call([](int& x) { x += 1; });
+        cubos.startupSystem("check integer after").after(tag).call([](const int& x) { CHECK(x == 1); });
         cubos.run();
     }
 
     SUBCASE("calculate sum of ints")
     {
+        CUBOS_DEFINE_TAG(tag);
+        CUBOS_DEFINE_TAG(spawn);
         cubos.addResource<int>(0);
         cubos.addComponent<int>();
-        cubos.startupSystem("spawn stuff").tagged("spawn").call([](Commands cmds) {
+        cubos.startupSystem("spawn stuff").tagged(spawn).call([](Commands cmds) {
             cmds.create().add<int>(1);
             cmds.create().add<int>(2);
             cmds.create().add<int>(3);
         });
-        cubos.startupSystem("check sum before").after("spawn").before("tag").call([](const int& sum) {
-            CHECK(sum == 0);
-        });
-        cubos.startupSystem("query stuff").tagged("tag").call([](int& sum, Query<const int&> query) {
+        cubos.startupSystem("check sum before").after(spawn).before(tag).call([](const int& sum) { CHECK(sum == 0); });
+        cubos.startupSystem("query stuff").tagged(tag).call([](int& sum, Query<const int&> query) {
             for (auto [x] : query)
             {
                 sum += x;
             }
         });
-        cubos.startupSystem("check sum after").after("tag").call([](const int& sum) { CHECK(sum == 6); });
+        cubos.startupSystem("check sum after").after(tag).call([](const int& sum) { CHECK(sum == 6); });
         cubos.run();
     }
 
