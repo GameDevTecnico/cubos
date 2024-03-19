@@ -9,7 +9,7 @@ Type& Type::create(std::string name)
     return *(new Type(std::move(name)));
 }
 
-Type& Type::unnamed(unsigned long id)
+Type& Type::unnamed(unsigned long long id)
 {
     auto& type = Type::create("unnamed" + std::to_string(id));
     type.mImplemented = false;

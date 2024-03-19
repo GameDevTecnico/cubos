@@ -36,7 +36,7 @@ namespace cubos::core::reflection
         ///
         /// @param id Type identifier.
         /// @return Reference to the type.
-        static Type& unnamed(unsigned long id);
+        static Type& unnamed(unsigned long long id);
 
         /// @brief Destroys the given type.
         /// @param type Type to destroy.
