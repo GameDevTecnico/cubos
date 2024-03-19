@@ -167,6 +167,10 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga19d446d3c7fb047cb7bc53ccc84cdba1" class="m-doc">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long id) -&gt; const Type&amp;</span>
+            </dt>
+            <dd>Creates a new unnamed type with the given identifier. Used as a fallback for types without reflection.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const Type&amp;</span>
             </dt>
@@ -219,6 +223,24 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga19d446d3c7fb047cb7bc53ccc84cdba1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const Type&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga19d446d3c7fb047cb7bc53ccc84cdba1" class="m-doc-self">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long id)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="reflect_8hpp.html">&lt;core/reflection/reflect.hpp&gt;</a></div>
+            </h3>
+            <p>Creates a new unnamed type with the given identifier. Used as a fallback for types without reflection.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Unique type identifier.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="ga8eacce93bfd11e459da56437199fe36f"><div>
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="reflect_8hpp.html">&lt;core/reflection/reflect.hpp&gt;</a></div>
@@ -245,7 +267,7 @@
                 </tr>
               </tfoot>
             </table>
-<p>Fails to compile if the type does not implement reflection, or, in the case of external types, if its reflection specialization has not been included.</p><p>Internally, this function stores a static instance of the reflection data for the given type. Thus the reflection data is only initialized once, the first time this function is called, which means that the returned reference can be safely used as an identifier for the type.</p><p>The reflection data is obtained by calling the <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html#a7506d2bae487f47928bea6a943f79bfe" class="m-doc">Reflect&lt;T&gt;::<wbr />get()</a> function.</p>
+<p>Fails to compile if the type does not implement reflection, or, in the case of external types, if its reflection specialization has not been included.</p>
           </div></section>
           <section class="m-doc-details" id="gaecd81749630d84a2baa8afb81568bb94"><div>
             <h3>
