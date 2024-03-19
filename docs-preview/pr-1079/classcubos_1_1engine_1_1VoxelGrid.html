@@ -119,6 +119,14 @@
               float minSimilarity) -&gt; bool</span>
             </dt>
             <dd>Converts the material indices of this grid from one palette to another.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac9bfb9b9cfee1ba3c848172dd6891aa3" class="m-doc">loadFrom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool</span>
+            </dt>
+            <dd>Loads the grid&#x27;s data from the given stream.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa65476426ec84d6d3eac50e2c03c0d1e" class="m-doc">writeTo</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) const -&gt; bool</span>
+            </dt>
+            <dd>Writes the grid&#x27;s data to the given stream.</dd>
           </dl>
         </section>
         <section>
@@ -312,6 +320,54 @@
               </tfoot>
             </table>
 <p>For each material, it will search for another material in the second palette which is similar enough to the original one. The conversion fails if no matching index is found.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac9bfb9b9cfee1ba3c848172dd6891aa3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />VoxelGrid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac9bfb9b9cfee1ba3c848172dd6891aa3" class="m-doc-self">loadFrom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream)</span></span>
+            </h3>
+            <p>Loads the grid&#x27;s data from the given stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stream</td>
+                  <td>Stream to read from.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the stream contained valid data.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Assumes the data is stored in big-endian (network byte order). The first bytes correspond to three uint32_t, which represent the size of the grid (x, y, z). The next bytes correspond to <code>size.x * size.y * size.z</code> uint16_t, which represent the actual voxel materials. The voxel data is indexed by <code>x + y * size.x + z * size.x * size.y</code>.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa65476426ec84d6d3eac50e2c03c0d1e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />VoxelGrid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa65476426ec84d6d3eac50e2c03c0d1e" class="m-doc-self">writeTo</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) const</span></span>
+            </h3>
+            <p>Writes the grid&#x27;s data to the given stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stream</td>
+                  <td>Stream to write to.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the write was successful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Writes in the format specified in <a href="classcubos_1_1engine_1_1VoxelGrid.html#ac9bfb9b9cfee1ba3c848172dd6891aa3" class="m-doc">loadFrom</a>.</p>
           </div></section>
         </section>
       </div>
