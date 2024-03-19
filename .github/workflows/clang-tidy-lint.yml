@@ -69,6 +69,11 @@ jobs:
           files "($(git diff -U0 --name-only HEAD^ | grep -vP '.*/lib/.*' | paste -s -d\|))" \
           -export-fixes clang-tidy-fixes.yaml || true
 
+    - name: Remove duplicate clang-tidy diagnostics
+      uses: mikefarah/yq@master
+      with:
+        cmd: yq -i '.Diagnostics = (.Diagnostics | unique_by(.DiagnosticMessage))' clang-tidy-fixes.yaml
+
     - name: Run clang-tidy-pr-comments action
       uses: platisd/clang-tidy-pr-comments@master
       with:
