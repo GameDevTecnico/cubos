@@ -1,7 +1,9 @@
 #include <doctest/doctest.h>
 
+#include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
 
+using cubos::core::reflection::ConstructibleTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
 
@@ -61,4 +63,7 @@ TEST_CASE("reflection::reflect")
 
     CHECK_FALSE(reflect<Unreflected>().implemented());
     CHECK(reflect<Unreflected>().is<Unreflected>());
+    CHECK(reflect<Unreflected>().has<ConstructibleTrait>());
+    CHECK(reflect<Unreflected>().get<ConstructibleTrait>().size() == sizeof(Unreflected));
+    CHECK(reflect<Unreflected>().get<ConstructibleTrait>().alignment() == alignof(Unreflected));
 }
