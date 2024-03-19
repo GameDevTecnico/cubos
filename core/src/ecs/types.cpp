@@ -16,6 +16,11 @@ std::size_t DataTypeIdHash::operator()(const DataTypeId& id) const
     return id.inner;
 }
 
+void Types::addResource(const reflection::Type& type)
+{
+    this->add(type, Kind::Resource);
+}
+
 void Types::addComponent(const reflection::Type& type)
 {
     this->add(type, Kind::Component);
@@ -71,6 +76,11 @@ bool Types::contains(const std::string& name) const
     return mNames.contains(name);
 }
 
+bool Types::isResource(DataTypeId id) const
+{
+    return mEntries[id.inner].kind == Kind::Resource;
+}
+
 bool Types::isComponent(DataTypeId id) const
 {
     return mEntries[id.inner].kind == Kind::Component;
@@ -89,6 +99,19 @@ bool Types::isSymmetricRelation(DataTypeId id) const
 bool Types::isTreeRelation(DataTypeId id) const
 {
     return mEntries[id.inner].kind == Kind::Relation && mEntries[id.inner].isTree;
+}
+
+TypeRegistry Types::resources() const
+{
+    TypeRegistry registry{};
+    for (const auto& entry : mEntries)
+    {
+        if (entry.kind == Kind::Resource)
+        {
+            registry.insert(*entry.type);
+        }
+    }
+    return registry;
 }
 
 TypeRegistry Types::components() const

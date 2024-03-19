@@ -36,6 +36,10 @@ namespace cubos::core::ecs
     class Types final
     {
     public:
+        /// @brief Registers a resource type.
+        /// @param type Resource type.
+        void addResource(const reflection::Type& type);
+
         /// @brief Registers a component type.
         /// @param type Component type.
         void addComponent(const reflection::Type& type);
@@ -87,6 +91,11 @@ namespace cubos::core::ecs
         /// @return Whether the data type is registered.
         bool contains(const std::string& name) const;
 
+        /// @brief Checks if the given data type is a resource.
+        /// @param id Data type identifier.
+        /// @return Whether the identifier refers to a resource.
+        bool isResource(DataTypeId id) const;
+
         /// @brief Checks if the given data type is a component.
         /// @param id Data type identifier.
         /// @return Whether the identifier refers to a component.
@@ -107,6 +116,10 @@ namespace cubos::core::ecs
         /// @return Whether the identifier refers to a tree relation.
         bool isTreeRelation(DataTypeId id) const;
 
+        /// @brief Gets a type registry with only the resource types.
+        /// @return Resource type registry.
+        reflection::TypeRegistry resources() const;
+
         /// @brief Gets a type registry with only the component types.
         /// @return Component type registry.
         reflection::TypeRegistry components() const;
@@ -119,6 +132,7 @@ namespace cubos::core::ecs
         /// @brief Possible data type kinds.
         enum class Kind
         {
+            Resource,
             Component,
             Relation
         };
