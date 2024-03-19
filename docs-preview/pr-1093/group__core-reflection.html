@@ -167,9 +167,12 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga19d446d3c7fb047cb7bc53ccc84cdba1" class="m-doc">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long id) -&gt; const Type&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga81846457cb6b2cf711fe528a90be73b1" class="m-doc">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long id,
+              std::size_t size,
+              std::size_t alignment,
+              void(*)(void*) destructor) -&gt; const Type&amp;</span>
             </dt>
-            <dd>Creates a new unnamed type with the given identifier. Used as a fallback for types without reflection.</dd>
+            <dd>Creates a new unnamed type with the given identifier. Used as a fallback for non-reflectable C++ types.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const Type&amp;</span>
@@ -223,12 +226,15 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga19d446d3c7fb047cb7bc53ccc84cdba1"><div>
+          <section class="m-doc-details" id="ga81846457cb6b2cf711fe528a90be73b1"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const Type&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga19d446d3c7fb047cb7bc53ccc84cdba1" class="m-doc-self">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long id)</span></span>
+              <span class="m-doc-wrap-bumper">const Type&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga81846457cb6b2cf711fe528a90be73b1" class="m-doc-self">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long id,
+              std::size_t size,
+              std::size_t alignment,
+              void(*)(void*) destructor)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="reflect_8hpp.html">&lt;core/reflection/reflect.hpp&gt;</a></div>
             </h3>
-            <p>Creates a new unnamed type with the given identifier. Used as a fallback for types without reflection.</p>
+            <p>Creates a new unnamed type with the given identifier. Used as a fallback for non-reflectable C++ types.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -238,8 +244,21 @@
                   <td style="width: 1%">id</td>
                   <td>Unique type identifier.</td>
                 </tr>
+                <tr>
+                  <td>size</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a> size in bytes.</td>
+                </tr>
+                <tr>
+                  <td>alignment</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a> alignment in bytes.</td>
+                </tr>
+                <tr>
+                  <td>destructor</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a> destructor.</td>
+                </tr>
               </tbody>
             </table>
+<p>The created &#x27;unnamed&#x27; type is named from the given identifier, and has a minimal <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>, which exposes its identifier, size, alignment and destructor. This means that types without reflection which don&#x27;t expose destructors (e.g., singletons), are not supported by <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>.</p>
           </div></section>
           <section class="m-doc-details" id="ga8eacce93bfd11e459da56437199fe36f"><div>
             <h3>
