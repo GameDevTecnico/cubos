@@ -71,6 +71,10 @@
             </dt>
             <dd>Constructs with a type the given name.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a180c8f27d4346ffafe0f86dc62c33f88" class="m-doc">unnamed</a>(</span><span class="m-doc-wrap">unsigned long long id) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
+            </dt>
+            <dd>Constructs an unnamed type with the given identifier.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#a118f396adeaf14f6b20b9445ceea084b" class="m-doc">destroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span>
             </dt>
             <dd>Destroys the given type.</dd>
@@ -107,6 +111,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#ad031df6869b1f33df9d2e3da5d5f367e" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; other) const -&gt; bool</span>
             </dt>
             <dd>Equality operator.</dd>
+            <dt id="ac5f43be613989e486717c3352bc50cf9">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac5f43be613989e486717c3352bc50cf9" class="m-doc-self">implemented</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Checks whether the type had reflection implemented for it.</dd>
           </dl>
         </section>
         <section>
@@ -133,6 +141,30 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a180c8f27d4346ffafe0f86dc62c33f88"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />Type::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a180c8f27d4346ffafe0f86dc62c33f88" class="m-doc-self">unnamed</a>(</span><span class="m-doc-wrap">unsigned long long id)</span></span>
+            </h3>
+            <p>Constructs an unnamed type with the given identifier.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a> identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the type.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The type is also marked as not being implemented.</p>
           </div></section>
           <section class="m-doc-details" id="a118f396adeaf14f6b20b9445ceea084b"><div>
             <h3>
