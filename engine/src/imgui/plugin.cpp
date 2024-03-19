@@ -6,6 +6,11 @@
 
 #include "imgui.hpp"
 
+CUBOS_DEFINE_TAG(cubos::engine::imguiInitTag);
+CUBOS_DEFINE_TAG(cubos::engine::imguiBeginTag);
+CUBOS_DEFINE_TAG(cubos::engine::imguiEndTag);
+CUBOS_DEFINE_TAG(cubos::engine::imguiTag);
+
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 
@@ -16,19 +21,17 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
 
     cubos.addResource<DataInspector>();
 
-    cubos.startupTag("cubos.imgui.init").after("cubos.window.init");
-    cubos.tag("cubos.imgui.begin").after("cubos.renderer.draw");
-    cubos.tag("cubos.imgui.end").before("cubos.window.render").after("cubos.imgui.begin");
-    cubos.tag("cubos.imgui").after("cubos.imgui.begin").before("cubos.imgui.end");
+    cubos.startupTag(imguiInitTag).after(windowPollTag);
+    cubos.tag(imguiBeginTag).after(rendererDrawTag);
+    cubos.tag(imguiEndTag).before(windowRenderTag).after(imguiBeginTag);
+    cubos.tag(imguiTag).after(imguiBeginTag).before(imguiEndTag);
 
-    cubos.startupSystem("initialize ImGui")
-        .tagged("cubos.imgui.init")
-        .call([](const Window& window, Settings& settings) {
-            float dpiScale = static_cast<float>(settings.getDouble("imgui.scale", window->contentScale()));
-            imguiInitialize(window, dpiScale);
-        });
+    cubos.startupSystem("initialize ImGui").tagged(imguiInitTag).call([](const Window& window, Settings& settings) {
+        float dpiScale = static_cast<float>(settings.getDouble("imgui.scale", window->contentScale()));
+        imguiInitialize(window, dpiScale);
+    });
 
-    cubos.system("begin ImGui frame").tagged("cubos.imgui.begin").call([](EventReader<WindowEvent> events) {
+    cubos.system("begin ImGui frame").tagged(imguiBeginTag).call([](EventReader<WindowEvent> events) {
         // Pass window events to ImGui.
         // TODO: handleEvent returns a bool indicating if the event was handled or not.
         //       This will be used to stop propagating the event to other systems when
@@ -42,5 +45,5 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
         imguiBeginFrame();
     });
 
-    cubos.system("end ImGui frame").tagged("cubos.imgui.end").call([]() { imguiEndFrame(); });
+    cubos.system("end ImGui frame").tagged(imguiEndTag).call([]() { imguiEndFrame(); });
 }

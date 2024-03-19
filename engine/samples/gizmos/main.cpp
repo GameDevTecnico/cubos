@@ -1,6 +1,7 @@
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
@@ -14,7 +15,7 @@ int main(int argc, char** argv)
     /// [Adding plugin]
     cubos.addPlugin(rendererPlugin);
 
-    cubos.startupSystem("disable Assets IO").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("disable Assets IO").tagged(settingsTag).call([](Settings& settings) {
         // We don't load assets in this sample and we don't even have an assets folder, so we should
         // disable assets IO.
         settings.setBool("assets.io.enabled", false);
@@ -52,14 +53,11 @@ int main(int argc, char** argv)
     });
 
     /// [Start Up System]
-    cubos.startupSystem("draw line at startup")
-        .tagged("sample.init")
-        .after("cubos.gizmos.init")
-        .call([](Gizmos& gizmos) {
-            gizmos.color({1, 0, 1});
-            gizmos.drawArrow("arrow", {0.6F, 0.6F, 0.0F}, {-0.1F, -0.1F, 0.0F}, 0.003F, 0.009F, 0.7F, 10.0F,
-                             Gizmos::Space::Screen);
-        });
+    cubos.startupSystem("draw line at startup").after(gizmosInitTag).call([](Gizmos& gizmos) {
+        gizmos.color({1, 0, 1});
+        gizmos.drawArrow("arrow", {0.6F, 0.6F, 0.0F}, {-0.1F, -0.1F, 0.0F}, 0.003F, 0.009F, 0.7F, 10.0F,
+                         Gizmos::Space::Screen);
+    });
     /// [Start Up System]
 
     /// [System]

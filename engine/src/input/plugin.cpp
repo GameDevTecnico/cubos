@@ -5,23 +5,26 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
+CUBOS_DEFINE_TAG(cubos::engine::inputUpdateTag);
+
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 
 void cubos::engine::inputPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(assetsPlugin);
-    cubos.addPlugin(windowPlugin);
+
+    cubos.addPlugin(cubos::engine::assetsPlugin);
+    cubos.addPlugin(cubos::engine::windowPlugin);
 
     cubos.addResource<Input>();
 
-    cubos.startupSystem("setup InputBindings asset bridge").tagged("cubos.assets.bridge").call([](Assets& assets) {
+    cubos.startupSystem("setup InputBindings asset bridge").tagged(assetsBridgeTag).call([](Assets& assets) {
         assets.registerBridge(".bind", std::make_unique<JSONBridge<InputBindings>>());
     });
 
     cubos.system("handle WindowEvents for Input")
-        .tagged("cubos.input.update")
-        .after("cubos.window.poll")
+        .tagged(inputUpdateTag)
+        .after(windowPollTag)
         .call([](const Window& window, Input& input, EventReader<WindowEvent> events) {
             input.updateMouse();
 

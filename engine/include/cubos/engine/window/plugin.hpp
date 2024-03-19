@@ -30,16 +30,17 @@ namespace cubos::engine
     ///
     /// ## Resources
     /// - @ref core::io::Window - handle to the window.
-    ///
-    /// ## Startup tags
-    /// - `cubos.window.init` - window is opened, runs after `cubos.settings`.
-    ///
-    /// ## Tags
-    /// - `cubos.window.poll` - the window is polled for events, sending @ref core::io::WindowEvent's.
-    /// - `cubos.window.render` - the window's back buffers are swapped.
-    ///
     /// ## Dependencies
     /// - @ref settings-plugin
+
+    /// @brief Window is opened, runs after @ref settingsTag.
+    extern Tag windowInitTag;
+
+    /// @brief The window is polled for events, sending @ref core::io::WindowEvent's.
+    extern Tag windowPollTag;
+
+    /// @brief The window's back buffers are swapped.
+    extern Tag windowRenderTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class

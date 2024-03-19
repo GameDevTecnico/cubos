@@ -23,8 +23,8 @@ void tesseratos::colliderGizmosPlugin(Cubos& cubos)
     cubos.addPlugin(toolboxPlugin);
 
     cubos.system("draw box collision shape gizmos")
-        .after("cubos.transform.update")
-        .before("cubos.gizmos.draw")
+        .after(cubos::engine::transformUpdateTag)
+        .before(cubos::engine::gizmosDrawTag)
         .call([](Toolbox& toolbox, Gizmos& gizmos, const EntitySelector& selector,
                  Query<Entity, const LocalToWorld&, const BoxCollisionShape&> boxes) {
             bool showAll = toolbox.isOpen("All Collider Gizmos");

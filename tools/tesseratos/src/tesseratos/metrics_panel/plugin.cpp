@@ -34,7 +34,7 @@ void tesseratos::metricsPanelPlugin(Cubos& cubos)
     cubos.addResource<Metrics>();
 
     cubos.system("show Metrics UI")
-        .tagged("cubos.imgui")
+        .tagged(cubos::engine::imguiTag)
         .call([](Toolbox& toolbox, const DeltaTime& deltaTime, Metrics& metrics) {
             if (!toolbox.isOpen("Metrics Panel"))
             {

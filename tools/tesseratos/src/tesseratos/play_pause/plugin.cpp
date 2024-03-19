@@ -26,45 +26,47 @@ void tesseratos::playPausePlugin(Cubos& cubos)
 
     cubos.addResource<State>();
 
-    cubos.system("show Play Pause UI").tagged("cubos.imgui").call([](State& state, Toolbox& toolbox, DeltaTime& dt) {
-        if (!toolbox.isOpen("Play Pause"))
-        {
-            return;
-        }
-
-        if (ImGui::Begin("Play Pause"))
-        {
-            if (ImGui::Button("Play"))
+    cubos.system("show Play Pause UI")
+        .tagged(cubos::engine::imguiTag)
+        .call([](State& state, Toolbox& toolbox, DeltaTime& dt) {
+            if (!toolbox.isOpen("Play Pause"))
             {
-                state.paused = false;
+                return;
+            }
+
+            if (ImGui::Begin("Play Pause"))
+            {
+                if (ImGui::Button("Play"))
+                {
+                    state.paused = false;
+                    dt.multiplier = state.multiplier;
+                }
+
+                ImGui::SameLine();
+
+                if (ImGui::Button("Pause"))
+                {
+                    state.paused = true;
+                    dt.multiplier = 0.0;
+                }
+
+                ImGui::SameLine();
+
+                ImGui::Text(state.paused ? "(Paused)" : "(Running)");
+
+                ImGui::SliderFloat("Speed Multiplier", &state.multiplier, 0.0F, 5.0F);
+
+                if (ImGui::Button("Reset"))
+                {
+                    state.multiplier = 1.0F;
+                }
+
+                ImGui::End();
+            }
+
+            if (!state.paused)
+            {
                 dt.multiplier = state.multiplier;
             }
-
-            ImGui::SameLine();
-
-            if (ImGui::Button("Pause"))
-            {
-                state.paused = true;
-                dt.multiplier = 0.0;
-            }
-
-            ImGui::SameLine();
-
-            ImGui::Text(state.paused ? "(Paused)" : "(Running)");
-
-            ImGui::SliderFloat("Speed Multiplier", &state.multiplier, 0.0F, 5.0F);
-
-            if (ImGui::Button("Reset"))
-            {
-                state.multiplier = 1.0F;
-            }
-
-            ImGui::End();
-        }
-
-        if (!state.paused)
-        {
-            dt.multiplier = state.multiplier;
-        }
-    });
+        });
 }

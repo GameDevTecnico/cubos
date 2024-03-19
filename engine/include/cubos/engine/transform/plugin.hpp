@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <cubos/core/ecs/tag.hpp>
+
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/transform/child_of.hpp>
 #include <cubos/engine/transform/local_to_parent.hpp>
@@ -15,6 +17,10 @@
 #include <cubos/engine/transform/rotation.hpp>
 #include <cubos/engine/transform/scale.hpp>
 
+namespace cubos::core::ecs
+{
+
+}
 namespace cubos::engine
 {
     /// @defgroup transform-plugin Transform
@@ -38,16 +44,24 @@ namespace cubos::engine
     ///
     /// ## Relations
     /// - @ref ChildOf - tree like relation which indicates an entity is a child of another.
-    ///
-    /// ## Tags
-    /// - `cubos.transform.missing.local_to_world` - the @ref LocalToWorld components are added to entities with @ref
+
+    /// @brief The @ref LocalToWorld components are added to entities with @ref
     /// Position, @ref Rotation or @ref Scale components.
-    /// - `cubos.transform.missing` - the @ref Position, @ref Rotation, @ref Scale and possibly @ref LocalToParent
+    extern Tag transformMissingLocalTag;
+
+    /// @brief The @ref Position, @ref Rotation, @ref Scale and possibly @ref LocalToParent
     /// components are added to entities with @ref LocalToWorld components.
-    /// - `cubos.transform.update.relative` - the @ref LocalToWorld or @ref LocalToParent components are updated with
+    extern Tag transformMissingTag;
+
+    /// @brief The @ref LocalToWorld or @ref LocalToParent components are updated with
     /// the information from the @ref Position, @ref Rotation and @ref Scale components.
-    /// - `cubos.transform.update` - the @ref LocalToWorld components are updated with the information from the @ref
+    extern Tag transformUpdateRelativeTag;
+
+    /// @brief The @ref LocalToWorld components are updated with the information from the @ref
     /// LocalToParent component and the @ref LocalToWorld components of the parent.
+    extern Tag transformUpdateTag;
+
+    extern Tag transformUpdatePropagateTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class

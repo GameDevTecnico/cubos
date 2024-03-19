@@ -15,6 +15,10 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
+CUBOS_DEFINE_TAG(cubos::engine::rendererInitTag);
+CUBOS_DEFINE_TAG(cubos::engine::rendererFrameTag);
+CUBOS_DEFINE_TAG(cubos::engine::rendererDrawTag);
+
 using cubos::core::io::ResizeEvent;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
@@ -30,6 +34,7 @@ CUBOS_REFLECT_IMPL(RenderableGrid)
 
 void cubos::engine::rendererPlugin(Cubos& cubos)
 {
+
     cubos.addPlugin(transformPlugin);
     cubos.addPlugin(windowPlugin);
     cubos.addPlugin(assetsPlugin);
@@ -48,12 +53,12 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.addComponent<PointLight>();
     cubos.addComponent<Viewport>();
 
-    cubos.startupTag("cubos.renderer.init").after("cubos.window.init");
-    cubos.tag("cubos.renderer.frame").after("cubos.transform.update");
-    cubos.tag("cubos.renderer.draw").after("cubos.renderer.frame").before("cubos.window.render");
+    cubos.startupTag(rendererInitTag).after(windowInitTag);
+    cubos.tag(rendererFrameTag).after(transformUpdateTag);
+    cubos.tag(rendererDrawTag).after(rendererFrameTag).before(windowRenderTag);
 
     cubos.startupSystem("initialize Renderer")
-        .tagged("cubos.renderer.init")
+        .tagged(rendererInitTag)
         .call([](Renderer& renderer, const Window& window, Settings& settings) {
             auto& renderDevice = window->renderDevice();
             renderer = std::make_shared<DeferredRenderer>(renderDevice, window->framebufferSize(), settings);
@@ -65,7 +70,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
         });
 
     cubos.system("add grids to Frame")
-        .tagged("cubos.renderer.frame")
+        .tagged(rendererFrameTag)
         .call([](const Assets& assets, Renderer& renderer, RendererFrame& frame,
                  Query<Entity, RenderableGrid&, const LocalToWorld&> query) {
             for (auto [entity, grid, localToWorld] : query)
@@ -90,7 +95,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
         });
 
     cubos.system("add spot lights to Frame")
-        .tagged("cubos.renderer.frame")
+        .tagged(rendererFrameTag)
         .call([](RendererFrame& frame, Query<const SpotLight&, const LocalToWorld&> query) {
             for (auto [light, localToWorld] : query)
             {
@@ -99,7 +104,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
         });
 
     cubos.system("add directional lights to Frame")
-        .tagged("cubos.renderer.frame")
+        .tagged(rendererFrameTag)
         .call([](RendererFrame& frame, Query<const DirectionalLight&, const LocalToWorld&> query) {
             for (auto [light, localToWorld] : query)
             {
@@ -108,7 +113,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
         });
 
     cubos.system("add point lights to Frame")
-        .tagged("cubos.renderer.frame")
+        .tagged(rendererFrameTag)
         .call([](RendererFrame& frame, Query<const PointLight&, const LocalToWorld&> query) {
             for (auto [light, localToWorld] : query)
             {
@@ -117,14 +122,14 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
         });
 
     cubos.system("set Frame environment")
-        .tagged("cubos.renderer.frame")
+        .tagged(rendererFrameTag)
         .call([](RendererFrame& frame, const RendererEnvironment& env) {
             frame.ambient(env.ambient);
             frame.skyGradient(env.skyGradient[0], env.skyGradient[1]);
         });
 
     cubos.system("update Palette if changed")
-        .tagged("cubos.renderer.frame")
+        .tagged(rendererFrameTag)
         .call([](Assets& assets, Renderer& renderer, ActiveVoxelPalette& activePalette) {
             if (activePalette.asset.isNull())
             {
@@ -140,8 +145,8 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
         });
 
     cubos.system("draw Frame")
-        .tagged("cubos.renderer.draw")
-        .after("cubos.screenPicker.clear")
+        .tagged(rendererDrawTag)
+        .after(screenPickerClearTag)
         .call([](Renderer& renderer, const ActiveCameras& activeCameras, RendererFrame& frame,
                  Query<const LocalToWorld&, const Camera&, Opt<const Viewport&>> query, ScreenPicker& screenPicker,
                  Settings& settings) {
@@ -196,8 +201,8 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
         });
 
     cubos.system("update Renderer on resize")
-        .after("cubos.window.poll")
-        .before("cubos.renderer.draw")
+        .after(windowPollTag)
+        .before(rendererDrawTag)
         .call([](Renderer& renderer, EventReader<WindowEvent> evs) {
             for (const auto& ev : evs)
             {

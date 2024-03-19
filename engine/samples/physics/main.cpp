@@ -1,6 +1,7 @@
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/renderer/directional_light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/transform/position.hpp>
@@ -27,7 +28,7 @@ int main(int argc, char** argv)
     cubos.addPlugin(voxelsPlugin);
     cubos.addPlugin(physicsPlugin);
 
-    cubos.startupSystem("configure Assets").tagged("cubos.settings").call([](Settings& settings) {
+    cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
     });
 
@@ -46,16 +47,14 @@ int main(int argc, char** argv)
             .add(Rotation{glm::quat(glm::vec3(glm::radians(45.0F), glm::radians(45.0F), 0))});
     });
 
-    cubos.startupSystem("load the palette")
-        .after("cubos.renderer.init")
-        .call([](const Assets& assets, Renderer& renderer) {
-            auto palette = assets.read(PaletteAsset);
-            renderer->setPalette(*palette);
-        });
+    cubos.startupSystem("load the palette").after(rendererInitTag).call([](const Assets& assets, Renderer& renderer) {
+        auto palette = assets.read(PaletteAsset);
+        renderer->setPalette(*palette);
+    });
 
     cubos.startupSystem("create a car")
-        .after("cubos.settings")
-        .after("cubos.assets.bridge")
+        .after(settingsTag)
+        .after(assetsBridgeTag)
         .call([](Commands cmds, const Assets& assets) {
             // Calculate the necessary offset to center the model on (0, 0, 0).
             auto car = assets.read(CarAsset);
@@ -75,7 +74,7 @@ int main(int argc, char** argv)
         });
 
     cubos.system("push the car")
-        .tagged("cubos.physics.apply_forces")
+        .tagged(physicsApplyForcesTag)
         .call([](Query<Velocity&, Force&, Impulse&> query, MaxTime& time, const DeltaTime& deltaTime) {
             for (auto [velocity, force, impulse] : query)
             {

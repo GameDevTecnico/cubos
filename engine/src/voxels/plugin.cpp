@@ -9,7 +9,7 @@ void cubos::engine::voxelsPlugin(Cubos& cubos)
     cubos.addPlugin(assetsPlugin);
 
     cubos.startupSystem("setup VoxelGrid and VoxelPalette asset bridges")
-        .tagged("cubos.assets.bridge")
+        .tagged(assetsBridgeTag)
         .call([](Assets& assets) {
             // Add the bridges to load .grd and .pal files.
             assets.registerBridge(".grd", std::make_unique<BinaryBridge<VoxelGrid>>());
