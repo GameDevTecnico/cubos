@@ -72,7 +72,7 @@ jobs:
     - name: Remove duplicate clang-tidy diagnostics
       uses: mikefarah/yq@master
       with:
-        cmd: yq -i '.Diagnostics = (.Diagnostics | unique_by(.DiagnosticMessage))' clang-tidy-fixes.yaml
+        cmd: yq -i 'select(has("Diagnostics")).Diagnostics |= unique_by(.DiagnosticMessage)' clang-tidy-fixes.yaml
 
     - name: Run clang-tidy-pr-comments action
       uses: platisd/clang-tidy-pr-comments@master
