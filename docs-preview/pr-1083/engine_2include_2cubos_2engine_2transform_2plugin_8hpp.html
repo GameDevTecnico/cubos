@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
@@ -66,6 +67,10 @@
           <dl class="m-doc">
             <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
             <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
+            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
             <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
             <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
@@ -77,6 +82,27 @@
               <span class="m-doc-wrap-bumper">void <a href="group__transform-plugin.html#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              Tag <a href="namespacecubos_1_1engine.html#a89a32d0bf9da68220cf1cfa0bb4aa17e" class="m-doc">transformMissingLocalTag</a>
+            </dt>
+            <dd>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are added to entities with <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> or <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</dd>
+            <dt>
+              Tag <a href="namespacecubos_1_1engine.html#a29acddb002f4819ca91b2bc012fabd96" class="m-doc">transformMissingTag</a>
+            </dt>
+            <dd>The <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a>, <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> and possibly <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components are added to entities with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components.</dd>
+            <dt>
+              Tag <a href="namespacecubos_1_1engine.html#af71cf613edf4b0cefa6a7b0cd8ace800" class="m-doc">transformUpdateRelativeTag</a>
+            </dt>
+            <dd>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> or <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</dd>
+            <dt>
+              Tag <a href="namespacecubos_1_1engine.html#a7da0ce9d21c8b18c2ad9d31d537d8cba" class="m-doc">transformUpdateTag</a>
+            </dt>
+            <dd>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> component and the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components of the parent.</dd>
           </dl>
         </section>
       </div>
