@@ -105,7 +105,7 @@ namespace cubos::core::ecs
         int mTarget;
     };
 
-    template <reflection::Reflectable T>
+    template <typename T>
     class QueryFetcher<T&>
     {
     public:
@@ -184,7 +184,7 @@ namespace cubos::core::ecs
         bool mIsSymmetric;
     };
 
-    template <reflection::Reflectable T>
+    template <typename T>
     class QueryFetcher<const T&>
     {
     public:
@@ -263,7 +263,7 @@ namespace cubos::core::ecs
         bool mIsSymmetric;
     };
 
-    template <reflection::Reflectable T>
+    template <typename T>
     class QueryFetcher<Opt<T&>>
     {
     public:
@@ -312,7 +312,7 @@ namespace cubos::core::ecs
         int mTarget;
     };
 
-    template <reflection::Reflectable T>
+    template <typename T>
     class QueryFetcher<Opt<const T&>>
     {
     public:

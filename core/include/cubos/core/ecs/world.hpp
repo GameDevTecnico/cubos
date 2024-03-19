@@ -61,7 +61,7 @@ namespace cubos::core::ecs
         /// @brief Registers a component type.
         /// @note Should be called before other non-registering operations.
         /// @tparam T Component type.
-        template <reflection::Reflectable T>
+        template <typename T>
         void registerComponent()
         {
             this->registerComponent(reflection::reflect<T>());
@@ -73,7 +73,7 @@ namespace cubos::core::ecs
 
         /// @brief Registers a relation type.
         /// @tparam T Relation type.
-        template <reflection::Reflectable T>
+        template <typename T>
         void registerRelation()
         {
             this->registerRelation(reflection::reflect<T>());
@@ -211,7 +211,7 @@ namespace cubos::core::ecs
         /// @param from From entity.
         /// @param to To entity.
         /// @param value Relation value.
-        template <reflection::Reflectable T>
+        template <typename T>
         void relate(Entity from, Entity to, T value)
         {
             this->relate(from, to, reflection::reflect<T>(), &value);
@@ -227,7 +227,7 @@ namespace cubos::core::ecs
         /// @tparam T Relation type.
         /// @param from From entity.
         /// @param to To entity.
-        template <reflection::Reflectable T>
+        template <typename T>
         void unrelate(Entity from, Entity to)
         {
             this->unrelate(from, to, reflection::reflect<T>());
@@ -337,7 +337,7 @@ namespace cubos::core::ecs
         /// @brief Checks if the given component is present.
         /// @tparam T Component type.
         /// @return Whether the component is present.
-        template <reflection::Reflectable T>
+        template <typename T>
         bool has() const
         {
             return this->has(reflection::reflect<T>());
@@ -358,7 +358,7 @@ namespace cubos::core::ecs
         ///
         /// @tparam T Component type.
         /// @return Reference to component.
-        template <reflection::Reflectable T>
+        template <typename T>
         T& get()
         {
             return *static_cast<T*>(this->get(reflection::reflect<T>()));
@@ -388,7 +388,7 @@ namespace cubos::core::ecs
         /// @tparam T Component type.
         /// @param value Component value to move.
         /// @return Reference to this.
-        template <reflection::Reflectable T>
+        template <typename T>
         Components& add(T&& value)
         {
             return this->add(reflection::reflect<T>(), &value);
@@ -408,7 +408,7 @@ namespace cubos::core::ecs
         ///
         /// @tparam T Component type.
         /// @return Reference to this.
-        template <reflection::Reflectable T>
+        template <typename T>
         Components& remove()
         {
             return this->remove(reflection::reflect<T>());
@@ -438,7 +438,7 @@ namespace cubos::core::ecs
         /// @brief Checks if the given component is present.
         /// @tparam T Component type.
         /// @return Whether the component is present.
-        template <reflection::Reflectable T>
+        template <typename T>
         bool has() const
         {
             return this->has(reflection::reflect<T>());
@@ -459,7 +459,7 @@ namespace cubos::core::ecs
         ///
         /// @tparam T Component type.
         /// @return Reference to component.
-        template <reflection::Reflectable T>
+        template <typename T>
         const T& get() const
         {
             return *static_cast<const T*>(this->get(reflection::reflect<T>()));
@@ -500,7 +500,7 @@ namespace cubos::core::ecs
         /// @tparam T Relation type.
         /// @param entity Entity.
         /// @return Whether the relation is present.
-        template <reflection::Reflectable T>
+        template <typename T>
         bool has(Entity entity) const
         {
             return this->has(reflection::reflect<T>(), entity);
@@ -524,7 +524,7 @@ namespace cubos::core::ecs
         /// @tparam T Relation type.
         /// @param entity Entity.
         /// @return Relation.
-        template <reflection::Reflectable T>
+        template <typename T>
         T& get(Entity entity)
         {
             return *static_cast<T*>(this->get(reflection::reflect<T>(), entity));
@@ -566,7 +566,7 @@ namespace cubos::core::ecs
         /// @tparam T Relation type.
         /// @param entity Entity.
         /// @return Whether the relation is present.
-        template <reflection::Reflectable T>
+        template <typename T>
         bool has(Entity entity) const
         {
             return this->has(reflection::reflect<T>(), entity);
@@ -590,7 +590,7 @@ namespace cubos::core::ecs
         /// @tparam T Relation type.
         /// @param entity Entity.
         /// @return Relation.
-        template <reflection::Reflectable T>
+        template <typename T>
         const T& get(Entity entity)
         {
             return *static_cast<const T*>(this->get(reflection::reflect<T>(), entity));

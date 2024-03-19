@@ -30,7 +30,7 @@ namespace cubos::core::memory
         /// @note If an entry already exists, it is replaced.
         /// @tparam K Type.
         /// @param value Value.
-        template <reflection::Reflectable K>
+        template <typename K>
         void insert(V value)
         {
             this->insert(reflection::reflect<K>(), std::move(value));
@@ -47,7 +47,7 @@ namespace cubos::core::memory
         /// @brief Removes the entry associated to the given type.
         /// @tparam K Type.
         /// @return Whether the entry was removed.
-        template <reflection::Reflectable K>
+        template <typename K>
         bool erase()
         {
             return this->erase(reflection::reflect<K>());
@@ -64,7 +64,7 @@ namespace cubos::core::memory
         /// @brief Checks if there's a an entry with the given type.
         /// @tparam K Type.
         /// @return Whether there's an entry with the given type.
-        template <reflection::Reflectable K>
+        template <typename K>
         bool contains() const
         {
             return this->contains(reflection::reflect<K>());
@@ -83,7 +83,7 @@ namespace cubos::core::memory
         /// @note Aborts if @ref contains returns false.
         /// @tparam K Type.
         /// @return Reference to the value.
-        template <reflection::Reflectable K>
+        template <typename K>
         V& at()
         {
             return this->at(reflection::reflect<K>());
@@ -96,7 +96,7 @@ namespace cubos::core::memory
         }
 
         /// @copydoc at()
-        template <reflection::Reflectable K>
+        template <typename K>
         const V& at() const
         {
             return this->at(reflection::reflect<K>());

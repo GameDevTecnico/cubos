@@ -62,7 +62,7 @@ namespace cubos::core::ecs
         /// @param entity Entity identifier.
         /// @param value Component value.
         /// @return Commands.
-        template <reflection::Reflectable T>
+        template <typename T>
         Commands& add(Entity entity, T value)
         {
             return this->add(entity, reflection::reflect<T>(), &value);
@@ -78,7 +78,7 @@ namespace cubos::core::ecs
         /// @tparam T Component type.
         /// @param entity Entity identifier.
         /// @return Commands.
-        template <reflection::Reflectable T>
+        template <typename T>
         Commands& remove(Entity entity)
         {
             return this->remove(entity, reflection::reflect<T>());
@@ -104,7 +104,7 @@ namespace cubos::core::ecs
         /// @param to To entity.
         /// @param value Relation value.
         /// @return Commands.
-        template <reflection::Reflectable T>
+        template <typename T>
         Commands& relate(Entity from, Entity to, T value)
         {
             return this->relate(from, to, reflection::reflect<T>(), &value);
@@ -122,7 +122,7 @@ namespace cubos::core::ecs
         /// @param from From entity.
         /// @param to To entity.
         /// @return Commands.
-        template <reflection::Reflectable T>
+        template <typename T>
         Commands& unrelate(Entity from, Entity to)
         {
             return this->unrelate(from, to, reflection::reflect<T>());
@@ -159,7 +159,7 @@ namespace cubos::core::ecs
         /// @tparam T Component type.
         /// @param value Component value.
         /// @return Reference to this builder, for chaining.
-        template <reflection::Reflectable T>
+        template <typename T>
         EntityBuilder& add(T value)
         {
             return this->add(reflection::reflect<T>(), &value);
@@ -204,7 +204,7 @@ namespace cubos::core::ecs
         /// @param name Entity name.
         /// @param value Component value.
         /// @return Reference to this builder, for chaining.
-        template <reflection::Reflectable T>
+        template <typename T>
         BlueprintBuilder& add(const std::string& name, T value)
         {
             return this->add(name, reflection::reflect<T>(), &value);

@@ -238,7 +238,7 @@ namespace cubos::core::ecs
 
         /// @copydoc with(const reflection::Type&, int)
         /// @tparam T Component type.
-        template <reflection::Reflectable T>
+        template <typename T>
         SystemBuilder&& with(int target = -1) &&
         {
             return std::move(*this).with(reflection::reflect<T>(), target);
@@ -252,7 +252,7 @@ namespace cubos::core::ecs
 
         /// @copydoc without(const reflection::Type&, int)
         /// @tparam T Component type.
-        template <reflection::Reflectable T>
+        template <typename T>
         SystemBuilder&& without(int target = -1) &&
         {
             return std::move(*this).without(reflection::reflect<T>(), target);
@@ -267,7 +267,7 @@ namespace cubos::core::ecs
 
         /// @copydoc related(const reflection::Type&, int, int)
         /// @tparam T Relation type.
-        template <reflection::Reflectable T>
+        template <typename T>
         SystemBuilder&& related(int fromTarget = -1, int toTarget = -1) &&
         {
             return std::move(*this).related(reflection::reflect<T>(), fromTarget, toTarget);
@@ -284,7 +284,7 @@ namespace cubos::core::ecs
 
         /// @copydoc related(const reflection::Type&, Traversal, int, int)
         /// @tparam T Relation type.
-        template <reflection::Reflectable T>
+        template <typename T>
         SystemBuilder&& related(Traversal traversal, int fromTarget = -1, int toTarget = -1) &&
         {
             return std::move(*this).related(reflection::reflect<T>(), traversal, fromTarget, toTarget);
@@ -347,7 +347,7 @@ namespace cubos::core::ecs
 
         /// @copydoc onAdd(const reflection::Type&, int)
         /// @tparam T Component type.
-        template <reflection::Reflectable T>
+        template <typename T>
         ObserverBuilder&& onAdd(int target = -1) &&
         {
             return std::move(*this).onAdd(reflection::reflect<T>(), target);
@@ -362,7 +362,7 @@ namespace cubos::core::ecs
 
         /// @copydoc onRemove(const reflection::Type&, int)
         /// @tparam T Component type.
-        template <reflection::Reflectable T>
+        template <typename T>
         ObserverBuilder&& onRemove(int target = -1) &&
         {
             return std::move(*this).onRemove(reflection::reflect<T>(), target);
@@ -381,7 +381,7 @@ namespace cubos::core::ecs
 
         /// @copydoc with(const reflection::Type&, int)
         /// @tparam T Component type.
-        template <reflection::Reflectable T>
+        template <typename T>
         ObserverBuilder&& with(int target = -1) &&
         {
             return std::move(*this).with(reflection::reflect<T>(), target);
@@ -395,7 +395,7 @@ namespace cubos::core::ecs
 
         /// @copydoc without(const reflection::Type&, int)
         /// @tparam T Component type.
-        template <reflection::Reflectable T>
+        template <typename T>
         ObserverBuilder&& without(int target = -1) &&
         {
             return std::move(*this).without(reflection::reflect<T>(), target);
@@ -410,7 +410,7 @@ namespace cubos::core::ecs
 
         /// @copydoc related(const reflection::Type&, int, int)
         /// @tparam T Relation type.
-        template <reflection::Reflectable T>
+        template <typename T>
         ObserverBuilder&& related(int fromTarget = -1, int toTarget = -1) &&
         {
             return std::move(*this).related(reflection::reflect<T>(), fromTarget, toTarget);
@@ -427,7 +427,7 @@ namespace cubos::core::ecs
 
         /// @copydoc related(const reflection::Type&, Traversal, int, int)
         /// @tparam T Relation type.
-        template <reflection::Reflectable T>
+        template <typename T>
         ObserverBuilder&& related(Traversal traversal, int fromTarget = -1, int toTarget = -1) &&
         {
             return std::move(*this).related(reflection::reflect<T>(), traversal, fromTarget, toTarget);

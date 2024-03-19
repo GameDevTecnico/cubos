@@ -331,7 +331,7 @@ namespace cubos::core
         /// @param location Code location.
         /// @param format Message format string.
         /// @param args Message format arguments.
-        template <reflection::Reflectable... TArgs>
+        template <typename... TArgs>
         static void writeFormat(Level level, Location location, const char* format, TArgs... args)
         {
             memory::BufferStream stream{};

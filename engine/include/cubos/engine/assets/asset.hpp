@@ -16,7 +16,7 @@ namespace cubos::core::data::old
 
 namespace cubos::engine
 {
-    template <core::reflection::Reflectable T>
+    template <typename T>
     class Asset;
 
     /// @brief Handle to an asset of any type. May either be weak or strong.
@@ -98,7 +98,7 @@ namespace cubos::engine
         /// @brief Converts this handle to a handle of a specific type.
         /// @tparam T Type of the asset.
         /// @return Handle to the same asset, but of the specified type.
-        template <core::reflection::Reflectable T>
+        template <typename T>
         inline operator Asset<T>() const;
 
         void serialize(core::data::old::Serializer& ser, const char* name) const;
@@ -131,7 +131,7 @@ namespace cubos::engine
     /// @see AnyAsset
     /// @tparam T Type of the asset.
     /// @ingroup assets-plugin
-    template <core::reflection::Reflectable T>
+    template <typename T>
     class Asset : public AnyAsset
     {
     public:
@@ -167,7 +167,7 @@ namespace cubos::engine
 
     // Implementation.
 
-    template <core::reflection::Reflectable T>
+    template <typename T>
     inline AnyAsset::operator Asset<T>() const
     {
         Asset<T> asset;
@@ -179,7 +179,7 @@ namespace cubos::engine
         return asset;
     }
 
-    CUBOS_REFLECT_TEMPLATE_IMPL((core::reflection::Reflectable T), (Asset<T>))
+    CUBOS_REFLECT_TEMPLATE_IMPL((typename T), (Asset<T>))
     {
         return AnyAsset::makeType("cubos::engine::Asset<" + core::reflection::reflect<T>().name() + ">");
     }
