@@ -200,6 +200,10 @@
             </dt>
             <dd>Resource which holds the amount of substeps for the physics update.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a>
+            </dt>
+            <dd>Component which stores the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures of a render target.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">ShaderBridge</a>
             </dt>
             <dd>Bridge for loading shader assets.</dd>
@@ -207,6 +211,10 @@
               class <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a>
             </dt>
             <dd>Contains a shader stage created from GLSL code.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a>
+            </dt>
+            <dd>Component which represents a render target.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a>
             </dt>
@@ -463,6 +471,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__render-g-buffer-plugin.html#ga8843b5a3be6781183fc144d32041ddd7" class="m-doc">gBufferPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__render-shader-plugin.html#ga2cd0a444573ad64513fe237da12dbe56" class="m-doc">shaderPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -573,6 +585,14 @@
               <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a78d0767d5e3117b3cbb9ed8a5d7d57de" class="m-doc">inputUpdateTag</a>
             </dt>
             <dd>Updates the input state.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a1f9b854c4602d60d4c4248f4f46b7f94" class="m-doc">createGBufferTag</a>
+            </dt>
+            <dd>Recreates the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> if necessary - for example, due to a render target resize.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a418b3124ed31dc2e0efd8b0e557ff177" class="m-doc">drawToGBufferTag</a>
+            </dt>
+            <dd>Systems which draw to <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures should be tagged with this.</dd>
             <dt>
               <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a6da20207dd0fa2d2bdeb2abe27923815" class="m-doc">rendererInitTag</a>
             </dt>
@@ -851,6 +871,20 @@
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2input_2plugin_8hpp.html">&lt;engine/input/plugin.hpp&gt;</a></div>
             </h3>
             <p>Updates the input state.</p>
+          </div></section>
+          <section class="m-doc-details" id="a1f9b854c4602d60d4c4248f4f46b7f94"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a1f9b854c4602d60d4c4248f4f46b7f94" class="m-doc-self">createGBufferTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2g__buffer_2plugin_8hpp.html">&lt;engine/render/g_buffer/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Recreates the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> if necessary - for example, due to a render target resize.</p>
+          </div></section>
+          <section class="m-doc-details" id="a418b3124ed31dc2e0efd8b0e557ff177"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a418b3124ed31dc2e0efd8b0e557ff177" class="m-doc-self">drawToGBufferTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2g__buffer_2plugin_8hpp.html">&lt;engine/render/g_buffer/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Systems which draw to <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures should be tagged with this.</p>
           </div></section>
           <section class="m-doc-details" id="a6da20207dd0fa2d2bdeb2abe27923815"><div>
             <h3>
