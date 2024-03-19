@@ -11,6 +11,11 @@ namespace cubos::core::reflection
 {
     class Type;
 
+    /// @brief Creates a new unnamed type with the given identifier. Used as a fallback for types without reflection.
+    /// @param id Unique type identifier.
+    /// @ingroup core-reflection
+    const Type& makeUnnamedType(unsigned long id);
+
     /// @brief Defines the reflection function for the given type @p T.
     ///
     /// By default, this function calls the static member function `reflect` of the type, which
@@ -44,7 +49,23 @@ namespace cubos::core::reflection
         // your type or an external type.
         static const Type& get()
         {
-            return T::reflectGet(); // Read the comment above if you get a compiler error here!
+            constexpr bool ImplementsReflection = requires()
+            {
+                T::reflectGet();
+            };
+
+            if constexpr (ImplementsReflection)
+            {
+                return T::reflectGet();
+            }
+            else
+            {
+                // This variable is unused, but since there is one for each type, its address is
+                // guaranteed to be unique for each type. Thus, we use it as an identifier.
+                static const bool Var = false;
+                static const Type& type = makeUnnamedType(reinterpret_cast<unsigned long>(&Var));
+                return type;
+            }
         }
     };
 

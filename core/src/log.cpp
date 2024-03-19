@@ -5,6 +5,7 @@
 
 #include <cubos/core/data/ser/debug.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 
 using cubos::core::Logger;
@@ -193,7 +194,17 @@ const char* Logger::streamFormat(memory::Stream& stream, const char* format, con
             }
 
             foundArgument = true;
-            data::DebugSerializer{stream}.write(type, value);
+            if (!type.implemented())
+            {
+                CUBOS_WARN("You tried to print a type ({}) which doesn't implement reflection. Did you forget to "
+                           "include its reflection definition?",
+                           type.name());
+                stream.print("(no reflection)");
+            }
+            else
+            {
+                data::DebugSerializer{stream}.write(type, value);
+            }
             ++format;
         }
         else
