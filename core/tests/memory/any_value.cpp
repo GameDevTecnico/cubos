@@ -13,6 +13,13 @@ TEST_CASE("memory::AnyValue")
 
     SUBCASE("with integers")
     {
+        SUBCASE("customConstruct")
+        {
+            const auto any = AnyValue::customConstruct<int>(1337);
+            CHECK(any.type().is<int>());
+            CHECK(*static_cast<const int*>(any.get()) == 1337);
+        }
+
         SUBCASE("defaultConstruct")
         {
             const auto any = AnyValue::defaultConstruct(reflect<int>());

@@ -4,10 +4,8 @@
 
 #pragma once
 
-namespace cubos::core::reflection
-{
-    class Type;
-} // namespace cubos::core::reflection
+#include <cubos/core/memory/move.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::memory
 {
@@ -32,6 +30,18 @@ namespace cubos::core::memory
         /// @brief Move assignment.
         /// @param other Value.
         AnyValue& operator=(AnyValue&& other) noexcept;
+
+        /// @brief Constructs a value of the given type with the given arguments.
+        /// @tparam T Value type.
+        /// @tparam TArgs Argument types.
+        /// @param args Arguments.
+        template <typename T, typename... TArgs>
+        static AnyValue customConstruct(TArgs&&... args) noexcept
+        {
+            AnyValue any{reflection::reflect<T>()};
+            new (any.mValue) T{forward<TArgs>(args)...};
+            return move(any);
+        }
 
         /// @brief Default constructs a value with the given type.
         /// @note @p type must have @ref reflection::ConstructibleTrait and be default constructible.
