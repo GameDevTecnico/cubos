@@ -4,8 +4,10 @@
 
 #pragma once
 
+#include <string>
+
 #include <cubos/core/memory/any_value.hpp>
-#include <cubos/core/reflection/type.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -15,6 +17,8 @@ namespace cubos::engine
     class DataInspector final
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Displays a reflectable value on the UI.
         /// @param type Value type.
         /// @param value Pointer to value.

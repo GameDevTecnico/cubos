@@ -2,6 +2,7 @@
 #include <imgui.h>
 #include <misc/cpp/imgui_stdlib.h>
 
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -25,6 +26,11 @@ using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(DataInspector)
+{
+    return core::ecs::TypeBuilder<DataInspector>("cubos::engine::DataInspector").build();
+}
 
 /// @brief Displays a menu where the user can "set" the data to null (if it has NullableTrait)
 static bool nullifyMenu(const Type& type, void* value);
