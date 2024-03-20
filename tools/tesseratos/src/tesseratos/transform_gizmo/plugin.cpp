@@ -300,6 +300,7 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::inputPlugin);
     cubos.depends(cubos::engine::settingsPlugin);
     cubos.depends(cubos::engine::rendererPlugin);
+    cubos.depends(cubos::engine::windowPlugin);
 
     cubos.depends(entitySelectorPlugin);
 

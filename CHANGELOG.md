@@ -25,12 +25,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shader asset and bridge (#1058, **@tomas7770**).
 - GBuffer plugin (#1061, **@RiscadoA**).
 - Defaults plugin (#229, **@RiscadoA**).
+- Support for untyped resources (#1057, **@RiscadoA**).
+- Addition and removal of resources through Commands (#325, **@RiscadoA**).
 
 ### Changed
 
 - Make reflection work for all types, even those without reflection implemented (#1092, **@RiscadoA**).
 - Move away from string tags to typed tags (#918, **@joaomanita**).
 - Force plugins to be added only once (#422, **@RiscadoA**).
+- Return direct references to resources instead of guards on World (#922, **@RiscadoA**).
 
 ### Fixed
 

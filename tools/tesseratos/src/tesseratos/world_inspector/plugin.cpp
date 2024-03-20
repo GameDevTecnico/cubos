@@ -11,15 +11,14 @@
 #include <tesseratos/toolbox/plugin.hpp>
 #include <tesseratos/world_inspector/plugin.hpp>
 
-using cubos::core::ecs::Entity;
 using cubos::core::ecs::Name;
-using cubos::core::ecs::Opt;
-using cubos::core::ecs::Query;
 using cubos::core::ecs::World;
-using cubos::core::ecs::WriteResource;
-using cubos::engine::ChildOf;
 
+using cubos::engine::ChildOf;
 using cubos::engine::Cubos;
+using cubos::engine::Entity;
+using cubos::engine::Opt;
+using cubos::engine::Query;
 
 static void show(Entity entity, Query<Entity, Opt<const Name&>, const ChildOf&, Entity> childOf, Opt<const Name&> name,
                  tesseratos::EntitySelector& selector)
@@ -77,12 +76,12 @@ void tesseratos::worldInspectorPlugin(Cubos& cubos)
         .tagged(cubos::engine::imguiTag)
         .call([](World& world, Query<Entity, Opt<const Name&>> all,
                  Query<Entity, Opt<const Name&>, const ChildOf&, Entity> query) {
-            if (!(world.write<Toolbox>().get().isOpen("World Inspector")))
+            if (!(world.resource<Toolbox>().isOpen("World Inspector")))
             {
                 return;
             }
 
-            auto selector = world.write<EntitySelector>();
+            auto& selector = world.resource<EntitySelector>();
 
             ImGui::Begin("World Inspector");
             if (!ImGui::IsWindowCollapsed())
@@ -94,7 +93,7 @@ void tesseratos::worldInspectorPlugin(Cubos& cubos)
                         continue; // Skip all entities with parents
                     }
 
-                    show(entity, query, name, selector.get());
+                    show(entity, query, name, selector);
                 }
             }
             ImGui::End();

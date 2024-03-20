@@ -12,6 +12,16 @@ Commands::Commands(CommandBuffer& buffer)
 {
 }
 
+void Commands::insertResource(memory::AnyValue value)
+{
+    mBuffer.insertResource(memory::move(value));
+}
+
+void Commands::eraseResource(const reflection::Type& type)
+{
+    mBuffer.eraseResource(type);
+}
+
 Commands::EntityBuilder Commands::create()
 {
     auto entity = mBuffer.create();

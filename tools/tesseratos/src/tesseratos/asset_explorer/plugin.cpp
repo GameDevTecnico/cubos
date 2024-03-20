@@ -117,6 +117,7 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
 
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
+    cubos.depends(cubos::engine::settingsPlugin);
     cubos.depends(toolboxPlugin);
 
     cubos.system("show Asset Explorer UI")

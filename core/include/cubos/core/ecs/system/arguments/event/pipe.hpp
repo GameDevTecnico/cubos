@@ -10,6 +10,9 @@
 #include <atomic>
 #include <deque>
 
+#include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/type.hpp>
+
 namespace cubos::core::ecs
 {
     /// @brief Resource which stores events of type @p T.
@@ -20,6 +23,8 @@ namespace cubos::core::ecs
     class EventPipe
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Pushes an event into the event pipe.
         /// @param event Event.
         /// @param mask Mask.
@@ -98,6 +103,12 @@ namespace cubos::core::ecs
 
     // EventPipe implementation.
 
+    CUBOS_REFLECT_TEMPLATE_IMPL((typename T), (EventPipe<T>))
+    {
+        return reflection::Type::create("cubos::core::ecs::EventPipe<" + reflection::reflect<T>().name() + ">")
+            .with(reflection::ConstructibleTrait::typed<EventPipe<T>>().withMoveConstructor().build());
+    }
+
     template <typename T>
     void EventPipe<T>::push(T event, unsigned int mask)
     {
@@ -156,5 +167,4 @@ namespace cubos::core::ecs
             mReaderCount--;
         }
     }
-
 } // namespace cubos::core::ecs

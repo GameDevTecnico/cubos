@@ -4,14 +4,35 @@
 #include <cubos/core/ecs/cubos.hpp>
 #include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/observer/observers.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/external/vector.hpp>
 
 using cubos::core::ecs::Arguments;
 using cubos::core::ecs::Cubos;
 using cubos::core::ecs::DeltaTime;
 using cubos::core::ecs::Name;
 using cubos::core::ecs::ShouldQuit;
+
+CUBOS_REFLECT_IMPL(DeltaTime)
+{
+    return TypeBuilder<DeltaTime>("cubos::core::ecs::DeltaTime")
+        .withField("value", &DeltaTime::value)
+        .withField("multiplier", &DeltaTime::multiplier)
+        .build();
+}
+
+CUBOS_REFLECT_IMPL(ShouldQuit)
+{
+    return TypeBuilder<ShouldQuit>("cubos::core::ecs::ShouldQuit").withField("value", &ShouldQuit::value).build();
+}
+
+CUBOS_REFLECT_IMPL(Arguments)
+{
+    return TypeBuilder<Arguments>("cubos::core::ecs::Arguments").withField("value", &Arguments::value).build();
+}
 
 Cubos::Cubos()
     : Cubos(1, nullptr)
@@ -49,6 +70,21 @@ Cubos& Cubos::depends(Plugin plugin)
     mInstalledPlugins.at(plugin).dependentCount += 1;
     mInstalledPlugins.at(mPluginStack.back()).dependencies.emplace(plugin);
 
+    return *this;
+}
+
+Cubos& Cubos::uninitResource(const reflection::Type& type)
+{
+    CUBOS_ASSERT(!mTypeToPlugin.contains(type), "Resource {} was already registered", type.name());
+    mTypeToPlugin.insert(type, mPluginStack.back());
+    mWorld.registerResource(type);
+    return *this;
+}
+
+Cubos& Cubos::resource(memory::AnyValue value)
+{
+    this->uninitResource(value.type());
+    mWorld.insertResource(std::move(value));
     return *this;
 }
 
@@ -142,16 +178,16 @@ void Cubos::run()
         mMainDispatcher.callSystems(cmds);
         currentTime = std::chrono::steady_clock::now();
 
-        auto& dt = mWorld.write<DeltaTime>().get();
+        auto& dt = mWorld.resource<DeltaTime>();
         dt.value = std::chrono::duration<float>(currentTime - previousTime).count() * dt.multiplier;
         previousTime = currentTime;
-    } while (!mWorld.read<ShouldQuit>().get().value);
+    } while (!mWorld.resource<ShouldQuit>().value);
 }
 
 bool Cubos::isRegistered(const reflection::Type& type) const
 {
     return (mTypeToPlugin.contains(type) && this->isKnownPlugin(mTypeToPlugin.at(type), mPluginStack.back())) ||
-           type.is<Name>();
+           type.is<Name>() || type.is<Arguments>() || type.is<DeltaTime>() || type.is<ShouldQuit>();
 }
 
 bool Cubos::isRegistered(const Tag& tag) const

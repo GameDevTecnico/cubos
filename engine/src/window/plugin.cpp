@@ -13,7 +13,7 @@ void cubos::engine::windowPlugin(Cubos& cubos)
 {
     cubos.depends(settingsPlugin);
 
-    cubos.resource<Window>();
+    cubos.uninitResource<Window>();
     cubos.event<WindowEvent>();
 
     cubos.startupTag(windowInitTag).after(settingsTag);
@@ -22,10 +22,11 @@ void cubos::engine::windowPlugin(Cubos& cubos)
 
     cubos.startupSystem("open Window")
         .tagged(windowInitTag)
-        .call([](Window& window, ShouldQuit& quit, Settings& settings) {
+        .call([](Commands cmds, ShouldQuit& quit, Settings& settings) {
             quit.value = false;
-            window = openWindow(settings.getString("window.title", "CUBOS."),
-                                {settings.getInteger("window.width", 800), settings.getInteger("window.height", 600)});
+            cmds.insertResource(
+                openWindow(settings.getString("window.title", "CUBOS."),
+                           {settings.getInteger("window.width", 800), settings.getInteger("window.height", 600)}));
         });
 
     cubos.system("poll Window events")

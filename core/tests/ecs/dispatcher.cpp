@@ -5,6 +5,7 @@
 #include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/vector.hpp>
 
 #include "utils.hpp"
 
@@ -55,11 +56,11 @@ static bool succeed2Times(int& counter)
 /// @param values The values to check for.
 static void assertOrder(World& world, const std::vector<int>& values)
 {
-    auto order = world.read<std::vector<int>>();
-    CHECK(order.get().size() == values.size());
-    for (std::size_t i = 0; i < values.size() && i < order.get().size(); ++i)
+    auto& order = world.resource<std::vector<int>>();
+    CHECK(order.size() == values.size());
+    for (std::size_t i = 0; i < values.size() && i < order.size(); ++i)
     {
-        CHECK(order.get()[i] == values[i]);
+        CHECK(order[i] == values[i]);
     }
 }
 
@@ -76,8 +77,8 @@ static void dispatchAndCheck(World& world, Dispatcher& dispatcher, CommandBuffer
     for (int i = 1; i <= 2; ++i)
     {
         INFO("Run ", i);
-        world.write<std::vector<int>>().get().clear();
-        world.write<int>().get() = 0;
+        world.resource<std::vector<int>>().clear();
+        world.resource<int>() = 0;
         dispatcher.callSystems(cmdBuffer);
         assertOrder(world, values);
     }
@@ -90,6 +91,8 @@ TEST_CASE("ecs::Dispatcher")
     Dispatcher dispatcher{};
     world.registerResource<std::vector<int>>();
     world.registerResource<int>();
+    world.insertResource(std::vector<int>{});
+    world.insertResource<int>(0);
 
     auto wrapSystem = [&](auto f) { return System<void>::make(world, f); };
     auto wrapCondition = [&](auto f) { return System<bool>::make(world, f); };

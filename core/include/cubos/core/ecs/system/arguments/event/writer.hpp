@@ -45,7 +45,7 @@ namespace cubos::core::ecs
         static inline constexpr bool ConsumesOptions = false;
 
         SystemFetcher(World& world, const SystemOptions& /*options*/)
-            : mPipe{world.write<EventPipe<T>>().get()}
+            : mPipe{world.resource<EventPipe<T>>()}
         {
         }
 

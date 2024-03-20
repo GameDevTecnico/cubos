@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <cubos/core/ecs/query/filter.hpp>
 #include <cubos/core/ecs/query/node/archetype.hpp>
 #include <cubos/core/ecs/query/node/related.hpp>

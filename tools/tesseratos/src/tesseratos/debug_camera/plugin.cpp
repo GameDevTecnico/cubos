@@ -42,6 +42,9 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
 {
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::freeCameraPlugin);
+    cubos.depends(cubos::engine::rendererPlugin);
+    cubos.depends(cubos::engine::inputPlugin);
+
     cubos.depends(toolboxPlugin);
 
     cubos.resource<DebugCameraInfo>();

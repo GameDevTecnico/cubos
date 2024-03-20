@@ -12,6 +12,21 @@ CommandBuffer::CommandBuffer(World& world)
     // Do nothing.
 }
 
+void CommandBuffer::insertResource(memory::AnyValue value)
+{
+    std::lock_guard<std::mutex> lock(mMutex);
+
+    mCommands.emplace_back(
+        [value = memory::move(value)](World& world) mutable { world.insertResource(memory::move(value)); });
+}
+
+void CommandBuffer::eraseResource(const reflection::Type& type)
+{
+    std::lock_guard<std::mutex> lock(mMutex);
+
+    mCommands.emplace_back([&type](World& world) { world.eraseResource(type); });
+}
+
 Entity CommandBuffer::create()
 {
     std::lock_guard<std::mutex> lock(mMutex);

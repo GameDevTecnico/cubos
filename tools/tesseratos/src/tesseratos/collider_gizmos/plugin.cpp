@@ -23,6 +23,7 @@ void tesseratos::colliderGizmosPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::transformPlugin);
 
     cubos.depends(toolboxPlugin);
+    cubos.depends(entitySelectorPlugin);
 
     cubos.system("draw box collision shape gizmos")
         .after(cubos::engine::transformUpdateTag)

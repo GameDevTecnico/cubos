@@ -21,6 +21,12 @@ World::World()
     this->registerComponent<Name>();
 }
 
+void World::registerResource(const reflection::Type& type)
+{
+    CUBOS_TRACE("Registered resource {}", type.name());
+    mTypes.addResource(type);
+}
+
 void World::registerComponent(const reflection::Type& type)
 {
     CUBOS_TRACE("Registered component {}", type.name());
@@ -31,6 +37,38 @@ void World::registerRelation(const reflection::Type& type)
 {
     CUBOS_TRACE("Registered relation {}", type.name());
     mTypes.addRelation(type);
+}
+
+void World::insertResource(memory::AnyValue value)
+{
+    const auto& type = value.type();
+    CUBOS_ASSERT(mTypes.isResource(mTypes.id(type)), "Type {} is not a registered resource", type.name());
+    CUBOS_TRACE("Inserted resource {}", type.name());
+    mResources.insert(type, std::move(value));
+}
+
+bool World::eraseResource(const reflection::Type& type)
+{
+    CUBOS_ASSERT(mTypes.isResource(mTypes.id(type)), "Type {} is not a registered resource", type.name());
+    CUBOS_TRACE("Erased resource {}", type.name());
+    return mResources.erase(type);
+}
+
+bool World::hasResource(const reflection::Type& type) const
+{
+    return mResources.contains(type);
+}
+
+void* World::resource(const reflection::Type& type)
+{
+    CUBOS_ASSERT(mResources.contains(type), "No such resource {}", type.name());
+    return mResources.at(type).get();
+}
+
+const void* World::resource(const reflection::Type& type) const
+{
+    CUBOS_ASSERT(mResources.contains(type), "No such resource {}", type.name());
+    return mResources.at(type).get();
 }
 
 Entity World::create()

@@ -24,6 +24,8 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs
     struct DeltaTime
     {
+        CUBOS_REFLECT;
+
         float value{0.0F};      ///< Time in seconds.
         float multiplier{1.0F}; ///< Multiplier which will be used when updating the value field.
     };
@@ -35,6 +37,8 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs
     struct ShouldQuit
     {
+        CUBOS_REFLECT;
+
         bool value{true}; ///< Whether the main loop should stop running.
     };
 
@@ -45,7 +49,9 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs
     struct Arguments
     {
-        const std::vector<std::string> value; ///< Command-line arguments.
+        CUBOS_REFLECT;
+
+        std::vector<std::string> value; ///< Command-line arguments.
     };
 
     /// @brief Represents the engine itself, and exposes the interface with which the game
@@ -92,24 +98,42 @@ namespace cubos::core::ecs
         /// @return Cubos.
         Cubos& depends(Plugin plugin);
 
-        /// @brief Registers a new resource type on the engine.
-        /// @tparam T Type.
-        /// @tparam TArgs Resource constructor argument types.
-        /// @param args Resource constructor arguments.
+        /// @brief Registers a new resource type, without initializing it.
+        /// @param type Type.
         /// @return Cubos.
-        template <typename T, typename... TArgs>
-        Cubos& resource(TArgs... args)
+        Cubos& uninitResource(const reflection::Type& type);
+
+        /// @brief Registers a new resource type with the given initial value.
+        /// @param value Resource value.
+        /// @return Cubos.
+        Cubos& resource(memory::AnyValue value);
+
+        /// @brief Registers a new resource type, without initializing it.
+        /// @tparam T Type.
+        /// @return Cubos.
+        template <typename T>
+        Cubos& uninitResource()
         {
-            mWorld.registerResource<T>(args...);
-            return *this;
+            return this->uninitResource(reflection::reflect<T>());
         }
 
-        /// @brief Registers a new component type on the engine.
+        /// @brief Registers a new resource type, constructing it with the given arguments.
+        /// @tparam T Type.
+        /// @tparam TArgs Constructor argument types.
+        /// @param args Constructor arguments.
+        /// @return Cubos.
+        template <typename T, typename... TArgs>
+        Cubos& resource(TArgs&&... args)
+        {
+            return this->resource(memory::AnyValue::customConstruct<T>(memory::forward<TArgs>(args)...));
+        }
+
+        /// @brief Registers a new component type.
         /// @param type Type.
         /// @return Cubos.
         Cubos& component(const reflection::Type& type);
 
-        /// @brief Registers a new component type on the engine.
+        /// @brief Registers a new component type.
         /// @tparam T Type.
         /// @return Cubos.
         template <typename T>
@@ -118,12 +142,12 @@ namespace cubos::core::ecs
             return this->component(reflection::reflect<T>());
         }
 
-        /// @brief Registers a new relation type on the engine.
+        /// @brief Registers a new relation type.
         /// @param type Type.
         /// @return Cubos.
         Cubos& relation(const reflection::Type& type);
 
-        /// @brief Registers a new relation type on the engine.
+        /// @brief Registers a new relation type.
         /// @tparam T Type.
         /// @return Cubos.
         template <typename T>
@@ -132,7 +156,7 @@ namespace cubos::core::ecs
             return this->relation(reflection::reflect<T>());
         }
 
-        /// @brief Registers a new event type on the engine.
+        /// @brief Registers a new event type.
         /// @tparam T Type.
         /// @return Reference to this object, for chaining.
         template <typename T>

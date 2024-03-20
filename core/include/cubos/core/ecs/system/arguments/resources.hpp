@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <cubos/core/ecs/system/access.hpp>
 #include <cubos/core/ecs/system/fetcher.hpp>
 #include <cubos/core/ecs/world.hpp>
 
@@ -16,22 +17,22 @@ namespace cubos::core::ecs
         static inline constexpr bool ConsumesOptions = false;
 
         SystemFetcher(World& world, const SystemOptions& /*options*/)
-            : mResource{world.write<T>().get()}
+            : mWorld{world}
         {
         }
 
-        void analyze(SystemAccess& /*access*/) const
+        void analyze(SystemAccess& access) const
         {
-            // FIXME: when we add resources to the world type registry, we should add its type id to the access object.
+            access.dataTypes.insert(mWorld.types().id(reflection::reflect<T>()));
         }
 
         T& fetch(const SystemContext& /*ctx*/)
         {
-            return mResource;
+            return mWorld.resource<T>();
         }
 
     private:
-        T& mResource;
+        World& mWorld;
     };
 
     template <typename T>
@@ -41,21 +42,21 @@ namespace cubos::core::ecs
         static inline constexpr bool ConsumesOptions = false;
 
         SystemFetcher(World& world, const SystemOptions& /*options*/)
-            : mResource{world.read<T>().get()}
+            : mWorld{world}
         {
         }
 
-        void analyze(SystemAccess& /*access*/) const
+        void analyze(SystemAccess& access) const
         {
-            // FIXME: when we add resources to the world type registry, we should add its type id to the access object.
+            access.dataTypes.insert(mWorld.types().id(reflection::reflect<T>()));
         }
 
         const T& fetch(const SystemContext& /*ctx*/)
         {
-            return mResource;
+            return mWorld.resource<T>();
         }
 
     private:
-        const T& mResource;
+        const World& mWorld;
     };
 } // namespace cubos::core::ecs
