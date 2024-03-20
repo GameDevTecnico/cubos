@@ -65,7 +65,6 @@
             </li>
           </ul>
         </nav>
-<p>[Component Refl]</p>
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
@@ -119,10 +118,6 @@
               struct <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">CollidingWith</a>
             </dt>
             <dd>Relation which represents a collision.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1CollisionEvent.html" class="m-doc">CollisionEvent</a>
-            </dt>
-            <dd>Represents a collision event.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a>
             </dt>
@@ -443,6 +438,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__defaults-plugin.html#ga3315cc7f44e3bed970ac9d9f4d477455" class="m-doc">defaultsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__fixed-step-plugin.html#ga2401d3ef5272b2eedecc13ec6cf2198b" class="m-doc">fixedStepPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -610,13 +609,13 @@
             </dt>
             <dd>The <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> resource is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</dd>
             <dt>
-              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a24b27f0e786bdb184fab4dcc06a3db80" class="m-doc">screenPickerClearTag</a>
-            </dt>
-            <dd>The picking texture is cleared.</dd>
-            <dt>
               <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a5b68ebc16d267844bbe1afc50208f8f7" class="m-doc">screenPickerResizeTag</a>
             </dt>
-            <dd>Window resize events are handled and the <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> texture is resized, after <a href="namespacecubos_1_1engine.html#a43c882cad9f3af459e8ecc52d6feff88" class="m-doc">windowPollTag</a> and before <a href="namespacecubos_1_1engine.html#a24b27f0e786bdb184fab4dcc06a3db80" class="m-doc">screenPickerClearTag</a>.</dd>
+            <dd>Window resize events are handled and the <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> texture is resized, after <a href="namespacecubos_1_1engine.html#a43c882cad9f3af459e8ecc52d6feff88" class="m-doc">windowPollTag</a> and before screenPickerClearTag.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#ac6079d9ae2ff18ebc701da5b30798cb1" class="m-doc">screenPickerDrawTag</a>
+            </dt>
+            <dd>Systems which draw to the screen picker should be tagged with this.</dd>
             <dt>
               <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a6e03a95a4f779e3c57a50be4e50e5b03" class="m-doc">settingsTag</a>
             </dt>
@@ -914,19 +913,19 @@
             </h3>
             <p>The <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> resource is initialized, after <a href="namespacecubos_1_1engine.html#a03b06d2d4815325af9d77c61dd441e6c" class="m-doc">windowInitTag</a>.</p>
           </div></section>
-          <section class="m-doc-details" id="a24b27f0e786bdb184fab4dcc06a3db80"><div>
-            <h3>
-              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a24b27f0e786bdb184fab4dcc06a3db80" class="m-doc-self">screenPickerClearTag</a>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2screen__picker_2plugin_8hpp.html">&lt;engine/screen_picker/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>The picking texture is cleared.</p>
-          </div></section>
           <section class="m-doc-details" id="a5b68ebc16d267844bbe1afc50208f8f7"><div>
             <h3>
               <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a5b68ebc16d267844bbe1afc50208f8f7" class="m-doc-self">screenPickerResizeTag</a>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2screen__picker_2plugin_8hpp.html">&lt;engine/screen_picker/plugin.hpp&gt;</a></div>
             </h3>
-            <p>Window resize events are handled and the <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> texture is resized, after <a href="namespacecubos_1_1engine.html#a43c882cad9f3af459e8ecc52d6feff88" class="m-doc">windowPollTag</a> and before <a href="namespacecubos_1_1engine.html#a24b27f0e786bdb184fab4dcc06a3db80" class="m-doc">screenPickerClearTag</a>.</p>
+            <p>Window resize events are handled and the <a href="classcubos_1_1engine_1_1ScreenPicker.html" class="m-doc">ScreenPicker</a> texture is resized, after <a href="namespacecubos_1_1engine.html#a43c882cad9f3af459e8ecc52d6feff88" class="m-doc">windowPollTag</a> and before screenPickerClearTag.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac6079d9ae2ff18ebc701da5b30798cb1"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#ac6079d9ae2ff18ebc701da5b30798cb1" class="m-doc-self">screenPickerDrawTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2screen__picker_2plugin_8hpp.html">&lt;engine/screen_picker/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Systems which draw to the screen picker should be tagged with this.</p>
           </div></section>
           <section class="m-doc-details" id="a6e03a95a4f779e3c57a50be4e50e5b03"><div>
             <h3>

@@ -56,12 +56,22 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="ade50fe71a95629143b202ada4bd6895c">
+              using <a href="#ade50fe71a95629143b202ada4bd6895c" class="m-doc-self">Plugin</a> = void(*)(<a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;)
+            </dt>
+            <dd>Function pointer type representing a plugin.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -80,45 +90,57 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac5fca58cc65baea88133cd06364dc97a" class="m-doc">addPlugin</a>(</span><span class="m-doc-wrap">void(*)(<a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;) func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aafc22d9475e57e5dae937d8e7364c3e2" class="m-doc">plugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#ade50fe71a95629143b202ada4bd6895c" class="m-doc">Plugin</a> plugin) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
-            <dd>Adds a new plugin to the engine. If the plugin had already been added, nothing happens. A plugin is just a function that operates on the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> object, further configuring it. It is useful for separating the code into modules.</dd>
+            <dd>Adds a new plugin as a sub-plugin of the current plugin.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename R, typename... TArgs&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab74390b148ed41a539b4f3274d2bfa19" class="m-doc">addResource</a>(</span><span class="m-doc-wrap">TArgs... args) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a99ef76466a0571a796d133822102bfa6" class="m-doc">depends</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#ade50fe71a95629143b202ada4bd6895c" class="m-doc">Plugin</a> plugin) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
-            <dd>Adds a new resource to the engine.</dd>
+            <dd>Marks the given plugin as a dependency of the current plugin.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename C&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1b91e3bb163b80b97192e9295336a4b1" class="m-doc">addComponent</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+              <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac3e6fe7cd98247ac6051c0119ca24f89" class="m-doc">resource</a>(</span><span class="m-doc-wrap">TArgs... args) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
-            <dd>Adds a new component type to the engine.</dd>
+            <dd>Registers a new resource type on the engine.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename R&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a366604a40e0ccfca49d3fd080770d949" class="m-doc">addRelation</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9578a4ba32aa84d4c51b685a8c582ab4" class="m-doc">component</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
-            <dd>Adds a new relation type to the engine.</dd>
+            <dd>Registers a new component type on the engine.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename E&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a112b15f90fa8227fa19602830b58aa0d" class="m-doc">addEvent</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a85f90c25748aad8146a252a29d09094f" class="m-doc">component</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
-            <dd>Adds a new event type to the engine.</dd>
+            <dd>Registers a new component type on the engine.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a194b5f5be5f32b94ecd9bc5fdd2f610f" class="m-doc">tag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aee4cb2c053267b1d1e04fb6ea2032db4" class="m-doc">relation</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems with the given tag.</dd>
+            <dd>Registers a new relation type on the engine.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a515d4023d30a6d5e182fedb352892978" class="m-doc">startupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aeb31479d29a8df9f3b0ee89f5edd25bb" class="m-doc">relation</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems with the given startup tag.</dd>
+            <dd>Registers a new relation type on the engine.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae77caebd71ce6f08f6cfd7fb2385e1b5" class="m-doc">noTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac2316eac5e727059992ec4a559b62551" class="m-doc">event</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given tag.</dd>
+            <dd>Registers a new event type on the engine.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9678c28e472d66e5766ac164655f31ba" class="m-doc">noStartupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a194b5f5be5f32b94ecd9bc5fdd2f610f" class="m-doc">tag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
             </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given startup tag.</dd>
+            <dd>Registers a new tag. Returns a builder used to configure tagged systems.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a515d4023d30a6d5e182fedb352892978" class="m-doc">startupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+            </dt>
+            <dd>Registers a new startup tag. Returns a builder used to configure tagged systems.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae77caebd71ce6f08f6cfd7fb2385e1b5" class="m-doc">noTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+            </dt>
+            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given tag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9678c28e472d66e5766ac164655f31ba" class="m-doc">noStartupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a></span>
+            </dt>
+            <dd>Returns a <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given startup tag.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1a07b2cf799947f70d9239c673557c38" class="m-doc">system</a>(</span><span class="m-doc-wrap">std::string name) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a></span>
             </dt>
@@ -161,49 +183,74 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac5fca58cc65baea88133cd06364dc97a"><div>
+          <section class="m-doc-details" id="aafc22d9475e57e5dae937d8e7364c3e2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac5fca58cc65baea88133cd06364dc97a" class="m-doc-self">addPlugin</a>(</span><span class="m-doc-wrap">void(*)(<a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;) func)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafc22d9475e57e5dae937d8e7364c3e2" class="m-doc-self">plugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#ade50fe71a95629143b202ada4bd6895c" class="m-doc">Plugin</a> plugin)</span></span>
             </h3>
-            <p>Adds a new plugin to the engine. If the plugin had already been added, nothing happens. A plugin is just a function that operates on the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> object, further configuring it. It is useful for separating the code into modules.</p>
+            <p>Adds a new plugin as a sub-plugin of the current plugin.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">func</td>
-                  <td>Entry point of the plugin to add.</td>
+                  <td style="width: 1%">plugin</td>
+                  <td>Plugin.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Reference to this object, for chaining.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
                 </tr>
               </tfoot>
             </table>
+<p>Aborts if the plugin has already been added by this or any other plugin.</p>
           </div></section>
-          <section class="m-doc-details" id="ab74390b148ed41a539b4f3274d2bfa19"><div>
+          <section class="m-doc-details" id="a99ef76466a0571a796d133822102bfa6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99ef76466a0571a796d133822102bfa6" class="m-doc-self">depends</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#ade50fe71a95629143b202ada4bd6895c" class="m-doc">Plugin</a> plugin)</span></span>
+            </h3>
+            <p>Marks the given plugin as a dependency of the current plugin.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">plugin</td>
+                  <td>Plugin.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the plugin hasn&#x27;t been added by this or any other plugin.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac3e6fe7cd98247ac6051c0119ca24f89"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename... TArgs&gt;
+                template&lt;typename T, typename... TArgs&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab74390b148ed41a539b4f3274d2bfa19" class="m-doc-self">addResource</a>(</span><span class="m-doc-wrap">TArgs... args)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac3e6fe7cd98247ac6051c0119ca24f89" class="m-doc-self">resource</a>(</span><span class="m-doc-wrap">TArgs... args)</span></span>
             </h3>
-            <p>Adds a new resource to the engine.</p>
+            <p>Registers a new resource type on the engine.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">R</td>
-                  <td>Type of the resource.</td>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
                 </tr>
                 <tr>
                   <td>TArgs</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a> of the arguments passed to the resource&#x27;s constructor.</td>
+                  <td>Resource constructor argument types.</td>
                 </tr>
               </tbody>
               <thead>
@@ -212,85 +259,131 @@
               <tbody>
                 <tr>
                   <td>args</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">Arguments</a> passed to the resource&#x27;s constructor.</td>
+                  <td>Resource constructor arguments.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Reference to this object, for chaining.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a1b91e3bb163b80b97192e9295336a4b1"><div>
+          <section class="m-doc-details" id="a9578a4ba32aa84d4c51b685a8c582ab4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9578a4ba32aa84d4c51b685a8c582ab4" class="m-doc-self">component</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Registers a new component type on the engine.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a85f90c25748aad8146a252a29d09094f"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename C&gt;
+                template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b91e3bb163b80b97192e9295336a4b1" class="m-doc-self">addComponent</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85f90c25748aad8146a252a29d09094f" class="m-doc-self">component</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Adds a new component type to the engine.</p>
+            <p>Registers a new component type on the engine.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">C</td>
-                  <td>Type of the component.</td>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Reference to this object, for chaining.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a366604a40e0ccfca49d3fd080770d949"><div>
+          <section class="m-doc-details" id="aee4cb2c053267b1d1e04fb6ea2032db4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee4cb2c053267b1d1e04fb6ea2032db4" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Registers a new relation type on the engine.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aeb31479d29a8df9f3b0ee89f5edd25bb"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R&gt;
+                template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a366604a40e0ccfca49d3fd080770d949" class="m-doc-self">addRelation</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeb31479d29a8df9f3b0ee89f5edd25bb" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Adds a new relation type to the engine.</p>
+            <p>Registers a new relation type on the engine.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">R</td>
-                  <td>Type of the relation.</td>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Reference to this object, for chaining.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a112b15f90fa8227fa19602830b58aa0d"><div>
+          <section class="m-doc-details" id="ac2316eac5e727059992ec4a559b62551"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename E&gt;
+                template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a112b15f90fa8227fa19602830b58aa0d" class="m-doc-self">addEvent</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac2316eac5e727059992ec4a559b62551" class="m-doc-self">event</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Adds a new event type to the engine.</p>
+            <p>Registers a new event type on the engine.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">E</td>
-                  <td>Type of the event.</td>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -303,9 +396,9 @@
           </div></section>
           <section class="m-doc-details" id="a194b5f5be5f32b94ecd9bc5fdd2f610f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a194b5f5be5f32b94ecd9bc5fdd2f610f" class="m-doc-self">tag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a194b5f5be5f32b94ecd9bc5fdd2f610f" class="m-doc-self">tag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
             </h3>
-            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems with the given tag.</p>
+            <p>Registers a new tag. Returns a builder used to configure tagged systems.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -319,16 +412,16 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a515d4023d30a6d5e182fedb352892978"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a515d4023d30a6d5e182fedb352892978" class="m-doc-self">startupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a515d4023d30a6d5e182fedb352892978" class="m-doc-self">startupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
             </h3>
-            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems with the given startup tag.</p>
+            <p>Registers a new startup tag. Returns a builder used to configure tagged systems.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -342,16 +435,16 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="ae77caebd71ce6f08f6cfd7fb2385e1b5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae77caebd71ce6f08f6cfd7fb2385e1b5" class="m-doc-self">noTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae77caebd71ce6f08f6cfd7fb2385e1b5" class="m-doc-self">noTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
             </h3>
-            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given tag.</p>
+            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -365,16 +458,16 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a9678c28e472d66e5766ac164655f31ba"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9678c28e472d66e5766ac164655f31ba" class="m-doc-self">noStartupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9678c28e472d66e5766ac164655f31ba" class="m-doc-self">noStartupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
             </h3>
-            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given startup tag.</p>
+            <p>Returns a <a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a> to configure the systems without the given startup tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -388,7 +481,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos_1_1TagBuilder.html" class="m-doc">TagBuilder</a>.</td>
                 </tr>
               </tfoot>
             </table>
