@@ -49,6 +49,17 @@ void Types::add(const reflection::Type& type, Kind kind)
     CUBOS_ASSERT(!mEntries.back().isTree || !mEntries.back().isSymmetric, "Symmetric tree relations are not supported");
 }
 
+DataTypeId Types::remove(const reflection::Type& type)
+{
+    CUBOS_ASSERT(mTypes.contains(type), "Type {} not registered", type.name());
+
+    auto id = mTypes.at(type);
+    mTypes.erase(type);
+    mNames.erase(type.name());
+    mEntries[id.inner].type = nullptr;
+    return id;
+}
+
 DataTypeId Types::id(const reflection::Type& type) const
 {
     CUBOS_ASSERT(mTypes.contains(type), "Type {} not registered", type.name());
@@ -106,7 +117,7 @@ TypeRegistry Types::resources() const
     TypeRegistry registry{};
     for (const auto& entry : mEntries)
     {
-        if (entry.kind == Kind::Resource)
+        if (entry.kind == Kind::Resource && entry.type != nullptr)
         {
             registry.insert(*entry.type);
         }
@@ -119,7 +130,7 @@ TypeRegistry Types::components() const
     TypeRegistry registry{};
     for (const auto& entry : mEntries)
     {
-        if (entry.kind == Kind::Component)
+        if (entry.kind == Kind::Component && entry.type != nullptr)
         {
             registry.insert(*entry.type);
         }
@@ -132,7 +143,7 @@ TypeRegistry Types::relations() const
     TypeRegistry registry{};
     for (const auto& entry : mEntries)
     {
-        if (entry.kind == Kind::Relation)
+        if (entry.kind == Kind::Relation && entry.type != nullptr)
         {
             registry.insert(*entry.type);
         }

@@ -48,6 +48,11 @@ namespace cubos::core::ecs
         /// @param type Relation type.
         void addRelation(const reflection::Type& type);
 
+        /// @brief Unregisters a data type.
+        /// @param type Data type.
+        /// @return Type identifier.
+        DataTypeId remove(const reflection::Type& type);
+
         /// @brief Gets the identifier of a data type.
         ///
         /// Aborts if the data type is not registered.

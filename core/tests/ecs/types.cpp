@@ -57,4 +57,44 @@ TEST_CASE("ecs::Types")
     REQUIRE(types.isResource({.inner = 3}));
     REQUIRE_FALSE(types.isComponent({.inner = 3}));
     REQUIRE_FALSE(types.isRelation({.inner = 3}));
+
+    auto components = types.components();
+    REQUIRE(components.size() == 1);
+    REQUIRE(components.contains<int>());
+    types.remove(reflect<int>());
+    REQUIRE_FALSE(types.contains(reflect<int>()));
+    REQUIRE_FALSE(types.contains("int"));
+    components = types.components();
+    REQUIRE(components.size() == 0);
+
+    auto relations = types.relations();
+    REQUIRE(relations.size() == 2);
+    REQUIRE(relations.contains<SymmetricRelation>());
+    REQUIRE(relations.contains<TreeRelation>());
+    types.remove(reflect<SymmetricRelation>());
+    REQUIRE_FALSE(types.contains(reflect<SymmetricRelation>()));
+    REQUIRE_FALSE(types.contains("SymmetricRelation"));
+    relations = types.relations();
+    REQUIRE(relations.size() == 1);
+    REQUIRE_FALSE(relations.contains<SymmetricRelation>());
+    REQUIRE(relations.contains<TreeRelation>());
+
+    auto resources = types.resources();
+    REQUIRE(resources.size() == 1);
+    REQUIRE(resources.contains<float>());
+    types.remove(reflect<float>());
+    REQUIRE_FALSE(types.contains(reflect<float>()));
+    REQUIRE_FALSE(types.contains("float"));
+    resources = types.resources();
+    REQUIRE(resources.size() == 0);
+
+    types.addComponent(reflect<int>());
+    REQUIRE(types.contains(reflect<int>()));
+    REQUIRE(types.contains("int"));
+    REQUIRE(types.id("int").inner == 4);
+    REQUIRE(types.id(reflect<int>()).inner == 4);
+    REQUIRE(types.type({.inner = 4}).is<int>());
+    REQUIRE_FALSE(types.isResource({.inner = 4}));
+    REQUIRE(types.isComponent({.inner = 4}));
+    REQUIRE_FALSE(types.isRelation({.inner = 4}));
 }
