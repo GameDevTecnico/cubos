@@ -257,7 +257,12 @@ bool DataInspector::inspect(const std::string& name, const Type& type, void* val
     {
         const auto& trait = type.get<FieldsTrait>();
         auto view = trait.view(value);
-        if (trait.size() == 1)
+        if (trait.size() == 0)
+        {
+            ImGui::TableSetColumnIndex(1);
+            ImGui::TextUnformatted("(no fields)");
+        }
+        else if (trait.size() == 1)
         {
             auto [field, fieldVal] = *view.begin();
             changed |= inspect(name, field->type(), fieldVal, readOnly);
