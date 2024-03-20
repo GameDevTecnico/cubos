@@ -75,8 +75,6 @@
             <dd>Observer part of the ECS.</dd>
             <dt>module <a href="group__core-ecs-query.html" class="m-doc">Query</a></dt>
             <dd>Defines the query functionality of the ECS.</dd>
-            <dt>module <a href="group__core-ecs-resource.html" class="m-doc">Resource</a></dt>
-            <dd>Resource part of the ECS.</dd>
             <dt>module <a href="group__core-ecs-system.html" class="m-doc">System</a></dt>
             <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> part of the ECS.</dd>
             <dt>module <a href="group__core-ecs-table.html" class="m-doc">Table</a></dt>
@@ -90,10 +88,14 @@
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint</a>.</dd>
             <dt>file <a href="command__buffer_8hpp.html" class="m-doc">command_buffer.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />CommandBuffer</a>.</dd>
+            <dt>file <a href="cubos_8hpp.html" class="m-doc">cubos.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Cubos</a>.</dd>
             <dt>file <a href="name_8hpp.html" class="m-doc">name.hpp</a></dt>
             <dd>Class <a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Name</a>.</dd>
             <dt>file <a href="reflection_8hpp.html" class="m-doc">reflection.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />TypeBuilder</a>.</dd>
+            <dt>file <a href="tag_8hpp.html" class="m-doc">tag.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Tag</a>.</dd>
             <dt>file <a href="types_8hpp.html" class="m-doc">types.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Types</a>.</dd>
             <dt>file <a href="world_8hpp.html" class="m-doc">world.hpp</a></dt>
@@ -124,13 +126,21 @@
             </dt>
             <dd>Resource which stores the command-line arguments.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1TagBuilder.html" class="m-doc">cubos::core::ecs::TagBuilder</a>
-            </dt>
-            <dd>Used to chain configurations related to tags.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">cubos::core::ecs::Cubos</a>
             </dt>
             <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SymmetricTrait.html" class="m-doc">cubos::core::ecs::SymmetricTrait</a>
+            </dt>
+            <dd>Trait used to identify symmetric relations.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1TreeTrait.html" class="m-doc">cubos::core::ecs::TreeTrait</a>
+            </dt>
+            <dd>Trait used to identify tree relations.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1EphemeralTrait.html" class="m-doc">cubos::core::ecs::EphemeralTrait</a>
+            </dt>
+            <dd>Trait used to identify types which are ephemeral and should not be persisted.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">cubos::core::ecs::TypeBuilder</a>

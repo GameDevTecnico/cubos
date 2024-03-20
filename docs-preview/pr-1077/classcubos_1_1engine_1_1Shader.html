@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::CollisionEvent struct | CUBOS. Docs</title>
+  <title>cubos::engine::Shader class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,45 +46,73 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>CollisionEvent <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="collision__event_8hpp.html">&lt;engine/collisions/collision_event.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Shader <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="shader_8hpp.html">&lt;engine/render/shader/shader.hpp&gt;</a></div>
         </h1>
-        <p>Represents a collision event.</p>
+        <p>Contains a shader stage created from GLSL code.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a01a74df39592d8e2829921c8a1871b33">
-              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a> <a href="#a01a74df39592d8e2829921c8a1871b33" class="m-doc-self">entity</a>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a102307bd4cf101b4527d7ef84dfb79a9" class="m-doc">Shader</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#gad17a15acf3e99f7a81e6f76b16478f89" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderStage</a> shaderStage)</span>
             </dt>
-            <dd>Entity involved in the collision.</dd>
-            <dt id="a801ca4efb35596adc4ef39c1cb9da2dc">
-              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a> <a href="#a801ca4efb35596adc4ef39c1cb9da2dc" class="m-doc-self">other</a>
-            </dt>
-            <dd>Other entity involved in the collision.</dd>
-            <dt id="a45e2a0b115749e5713974407e64c960c">
-              float <a href="#a45e2a0b115749e5713974407e64c960c" class="m-doc-self">penetration</a>
-            </dt>
-            <dd>Penetration depth of the collision.</dd>
-            <dt id="a3734ef589a324aa3cd736d274e487324">
-              glm::vec3 <a href="#a3734ef589a324aa3cd736d274e487324" class="m-doc-self">position</a>
-            </dt>
-            <dd><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> of contact on the surface of the entity.</dd>
-            <dt id="af59af89ec86a98ce43e230370b3ac48d">
-              glm::vec3 <a href="#af59af89ec86a98ce43e230370b3ac48d" class="m-doc-self">normal</a>
-            </dt>
-            <dd>Normal of contact on the surface of the entity.</dd>
+            <dd>Constructs a shader from code.</dd>
           </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2cead8338f9c1d6de3a3fbe98e6d7805" class="m-doc">shaderStage</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-gl.html#gad17a15acf3e99f7a81e6f76b16478f89" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderStage</a></span>
+            </dt>
+            <dd>Returns the asset&#x27;s shader stage.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a102307bd4cf101b4527d7ef84dfb79a9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />Shader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a102307bd4cf101b4527d7ef84dfb79a9" class="m-doc-self">Shader</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#gad17a15acf3e99f7a81e6f76b16478f89" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderStage</a> shaderStage)</span></span>
+            </h3>
+            <p>Constructs a shader from code.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">shaderStage</td>
+                  <td><a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> stage created from GLSL code.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2cead8338f9c1d6de3a3fbe98e6d7805"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core-gl.html#gad17a15acf3e99f7a81e6f76b16478f89" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderStage</a> cubos::<wbr />engine::<wbr />Shader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2cead8338f9c1d6de3a3fbe98e6d7805" class="m-doc-self">shaderStage</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the asset&#x27;s shader stage.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> stage.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

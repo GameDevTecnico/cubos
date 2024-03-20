@@ -52,12 +52,10 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md94">Settings</a></li>
-            <li><a href="#autotoc_md95">Resources</a></li>
-            <li><a href="#autotoc_md96">Components</a></li>
-            <li><a href="#autotoc_md97">Startup tags</a></li>
-            <li><a href="#autotoc_md98">Tags</a></li>
-            <li><a href="#autotoc_md99">Dependencies</a></li>
+            <li><a href="#autotoc_md87">Settings</a></li>
+            <li><a href="#autotoc_md88">Resources</a></li>
+            <li><a href="#autotoc_md89">Components</a></li>
+            <li><a href="#autotoc_md90">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -70,7 +68,7 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the <a href="examples-engine-renderer.html" class="m-doc">Renderer</a> example for a demonstration of this plugin.</p></aside><p>Renders all entities with the <a href="structcubos_1_1engine_1_1RenderableGrid.html" class="m-doc">RenderableGrid</a> component, using as cameras entities with the <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> component selected by the <a href="structcubos_1_1engine_1_1ActiveCameras.html" class="m-doc">ActiveCameras</a> resource. Lights are rendered using entities with <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a>, <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a> or <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a> components.</p><aside class="m-note m-info"><h4>Note</h4><p>Entities with the above entities will be ignored if they do not possess <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components.</p></aside><p>The rendering environment, such as the ambient lighting and sky color, can be set through the resource <a href="structcubos_1_1engine_1_1RendererEnvironment.html" class="m-doc">RendererEnvironment</a>.</p><section id="autotoc_md94"><h3><a href="#autotoc_md94">Settings</a></h3><ul><li><code>cubos.renderer.ssao.enabled</code> - whether SSAO is enabled.</li><li><code>cubos.renderer.bloom.enabled</code> - whether bloom is enabled.</li></ul></section><section id="autotoc_md95"><h3><a href="#autotoc_md95">Resources</a></h3><ul><li><a href="group__renderer-plugin.html#ga645909e0b9c643b6887ed83a0d0859dc" class="m-doc">Renderer</a> - handle to the renderer.</li><li><a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a> - holds the current frame information.</li><li><a href="structcubos_1_1engine_1_1RendererEnvironment.html" class="m-doc">RendererEnvironment</a> - holds the environment information (ambient light, sky gradient).</li><li><a href="structcubos_1_1engine_1_1ActiveCameras.html" class="m-doc">ActiveCameras</a> - holds the entities which represents the active cameras.</li><li><a href="structcubos_1_1engine_1_1ActiveVoxelPalette.html" class="m-doc">ActiveVoxelPalette</a> - holds an asset handle to the currently active palette.</li></ul></section><section id="autotoc_md96"><h3><a href="#autotoc_md96">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1RenderableGrid.html" class="m-doc">RenderableGrid</a> - a grid to be rendered.</li><li><a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> - holds camera information.</li><li><a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a> - holds viewport information.</li><li><a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a> - emits a spot light.</li><li><a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a> - emits a directional light.</li><li><a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a> - emits a point light.</li></ul></section><section id="autotoc_md97"><h3><a href="#autotoc_md97">Startup tags</a></h3><ul><li><code>cubos.renderer.init</code> - the renderer is initialized, after <code>cubos.window.init</code>.</li></ul></section><section id="autotoc_md98"><h3><a href="#autotoc_md98">Tags</a></h3><ul><li><code>cubos.renderer.frame</code> - frame information is collected, after <code>cubos.transform.update</code>.</li><li><code>cubos.renderer.draw</code> - frame is rendered to the window, after <code>cubos.renderer.frame</code> and before <code>cubos.window.render</code>.</li></ul></section><section id="autotoc_md99"><h3><a href="#autotoc_md99">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li></ul></section>
+<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the <a href="examples-engine-renderer.html" class="m-doc">Renderer</a> example for a demonstration of this plugin.</p></aside><p>Renders all entities with the <a href="structcubos_1_1engine_1_1RenderableGrid.html" class="m-doc">RenderableGrid</a> component, using as cameras entities with the <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> component selected by the <a href="structcubos_1_1engine_1_1ActiveCameras.html" class="m-doc">ActiveCameras</a> resource. Lights are rendered using entities with <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a>, <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a> or <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a> components.</p><aside class="m-note m-info"><h4>Note</h4><p>Entities with the above entities will be ignored if they do not possess <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components.</p></aside><p>The rendering environment, such as the ambient lighting and sky color, can be set through the resource <a href="structcubos_1_1engine_1_1RendererEnvironment.html" class="m-doc">RendererEnvironment</a>.</p><section id="autotoc_md87"><h3><a href="#autotoc_md87">Settings</a></h3><ul><li><code>cubos.renderer.ssao.enabled</code> - whether SSAO is enabled.</li><li><code>cubos.renderer.bloom.enabled</code> - whether bloom is enabled.</li></ul></section><section id="autotoc_md88"><h3><a href="#autotoc_md88">Resources</a></h3><ul><li><a href="group__renderer-plugin.html#ga645909e0b9c643b6887ed83a0d0859dc" class="m-doc">Renderer</a> - handle to the renderer.</li><li><a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a> - holds the current frame information.</li><li><a href="structcubos_1_1engine_1_1RendererEnvironment.html" class="m-doc">RendererEnvironment</a> - holds the environment information (ambient light, sky gradient).</li><li><a href="structcubos_1_1engine_1_1ActiveCameras.html" class="m-doc">ActiveCameras</a> - holds the entities which represents the active cameras.</li><li><a href="structcubos_1_1engine_1_1ActiveVoxelPalette.html" class="m-doc">ActiveVoxelPalette</a> - holds an asset handle to the currently active palette.</li></ul></section><section id="autotoc_md89"><h3><a href="#autotoc_md89">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1RenderableGrid.html" class="m-doc">RenderableGrid</a> - a grid to be rendered.</li><li><a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> - holds camera information.</li><li><a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a> - holds viewport information.</li><li><a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a> - emits a spot light.</li><li><a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a> - emits a directional light.</li><li><a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a> - emits a point light.</li></ul></section><section id="autotoc_md90"><h3><a href="#autotoc_md90">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -92,7 +90,7 @@
             <dd>Post processing pass implementation <a href="classcubos_1_1engine_1_1PostProcessingBloom.html" class="m-doc">cubos::<wbr />engine::<wbr />PostProcessingBloom</a>.</dd>
             <dt>file <a href="copy__pass_8hpp.html" class="m-doc">copy_pass.hpp</a></dt>
             <dd>Post processing pass implementation <a href="classcubos_1_1engine_1_1PostProcessingCopy.html" class="m-doc">cubos::<wbr />engine::<wbr />PostProcessingCopy</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2renderer_2pps_2manager_8hpp.html" class="m-doc">manager.hpp</a></dt>
+            <dt>file <a href="manager_8hpp.html" class="m-doc">manager.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1PostProcessingManager.html" class="m-doc">cubos::<wbr />engine::<wbr />PostProcessingManager</a>.</dd>
             <dt>file <a href="pass_8hpp.html" class="m-doc">pass.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1PostProcessingPass.html" class="m-doc">cubos::<wbr />engine::<wbr />PostProcessingPass</a>.</dd>
@@ -168,7 +166,7 @@
             <dt>
               struct <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">cubos::engine::SpotLight</a>
             </dt>
-            <dd>Component which makes an entity emit a spot light.</dd>
+            <dd>Component which makes an entity emit a spot light in the direction of its forward vector.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1VoxelVertex.html" class="m-doc">cubos::engine::VoxelVertex</a>
             </dt>
@@ -223,7 +221,7 @@
           <section class="m-doc-details" id="gad9a27e05315b6fa51e4b34deadc5e2e4"><div>
             <h3>
               enum class <a href="#gad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc-self">PostProcessingInput</a>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2renderer_2pps_2manager_8hpp.html">&lt;engine/renderer/pps/manager.hpp&gt;</a></div>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="manager_8hpp.html">&lt;engine/renderer/pps/manager.hpp&gt;</a></div>
             </h3>
             <p>Possible renderer outputs which can then be used as input for a post processing pass.</p>
             <table class="m-table m-fullwidth m-flat m-doc">
@@ -238,13 +236,13 @@
                 <tr>
                   <td><a href="#ggad9a27e05315b6fa51e4b34deadc5e2e4a52f5e0bc3859bc5f5e25130b6c7e8881" class="m-doc-self" id="ggad9a27e05315b6fa51e4b34deadc5e2e4a52f5e0bc3859bc5f5e25130b6c7e8881">Position</a></td>
                   <td>
-                  <p>GBuffer texture with the world position of the pixels.</p>
+                  <p><a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> texture with the world position of the pixels.</p>
                   </td>
                 </tr>
                 <tr>
                   <td><a href="#ggad9a27e05315b6fa51e4b34deadc5e2e4a960b44c579bc2f6818d2daaf9e4c16f0" class="m-doc-self" id="ggad9a27e05315b6fa51e4b34deadc5e2e4a960b44c579bc2f6818d2daaf9e4c16f0">Normal</a></td>
                   <td>
-                  <p>GBuffer texture with the world normal of the pixels.</p>
+                  <p><a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> texture with the world normal of the pixels.</p>
                   </td>
                 </tr>
               </tbody>

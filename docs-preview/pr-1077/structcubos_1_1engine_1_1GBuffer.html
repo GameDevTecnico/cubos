@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/resource/manager.hpp file | CUBOS. Docs</title>
+  <title>cubos::engine::GBuffer struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,49 +46,40 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_043da9b7d60f46877cefd90a49e157c3.html">resource</a>/</span>manager.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>GBuffer <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="g__buffer_8hpp.html">&lt;engine/render/g_buffer/g_buffer.hpp&gt;</a></div>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager</a> and related types.</p>
+        <p>Component which stores the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures of a render target.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">cubos::core::ecs::ReadResource</a>
+            <dt id="ac2d2b96357d47e7b819bf873e48d10f8">
+              glm::uvec2 <a href="#ac2d2b96357d47e7b819bf873e48d10f8" class="m-doc-self">size</a>
             </dt>
-            <dd>Utility struct used to reference a resource of type <code>T</code> for reading.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">cubos::core::ecs::WriteResource</a>
+            <dd>Size of the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures, in pixels.</dd>
+            <dt id="a39530e59371a89897e2fa5ff842694ac">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a39530e59371a89897e2fa5ff842694ac" class="m-doc-self">position</a>
             </dt>
-            <dd>Utility struct used to reference a resource of type <code>T</code> for writing.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">cubos::core::ecs::ResourceManager</a>
+            <dd>Stores the position of the objects in the scene.</dd>
+            <dt id="af1718b3f67964cb7302fa5c3b73ec126">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#af1718b3f67964cb7302fa5c3b73ec126" class="m-doc-self">normal</a>
             </dt>
-            <dd>Holds and manages resources.</dd>
+            <dd>Stores the normal of the objects in the scene.</dd>
+            <dt id="a71e8c95363933cfba6e03c228a1ebddd">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a71e8c95363933cfba6e03c228a1ebddd" class="m-doc-self">albedo</a>
+            </dt>
+            <dd>Stores the albedo of the objects in the scene.</dd>
           </dl>
         </section>
       </div>
