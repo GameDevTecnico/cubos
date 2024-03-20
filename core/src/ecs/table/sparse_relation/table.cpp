@@ -20,6 +20,15 @@ SparseRelationTable::SparseRelationTable(const reflection::Type& relationType)
     mConstructibleTrait = &relationType.get<reflection::ConstructibleTrait>();
 }
 
+void SparseRelationTable::clear()
+{
+    mRows.clear();
+    mRelations.clear();
+    mPairRows.clear();
+    mFromRows.clear();
+    mToRows.clear();
+}
+
 std::size_t SparseRelationTable::size() const
 {
     return mRelations.size();
