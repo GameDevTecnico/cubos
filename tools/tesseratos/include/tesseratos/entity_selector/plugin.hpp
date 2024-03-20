@@ -34,6 +34,8 @@ namespace tesseratos
     /// @brief Resource which identifies the currently selected entity.
     struct EntitySelector
     {
+        CUBOS_REFLECT;
+
         cubos::core::ecs::Entity selection; ///< Selected entity, or `null` if none.
         glm::ivec2 lastMousePosition;       ///< Cursor position.
     };

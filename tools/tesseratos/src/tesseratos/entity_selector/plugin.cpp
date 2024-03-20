@@ -1,5 +1,7 @@
 #include <imgui.h>
 
+#include <cubos/core/ecs/reflection.hpp>
+
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
@@ -20,6 +22,13 @@ using cubos::engine::EventReader;
 using cubos::engine::ScreenPicker;
 
 using namespace tesseratos;
+
+CUBOS_REFLECT_IMPL(EntitySelector)
+{
+    return cubos::core::ecs::TypeBuilder<EntitySelector>("tesseratos::EntitySelector")
+        .withField("selection", &EntitySelector::selection)
+        .build();
+}
 
 void tesseratos::entitySelectorPlugin(Cubos& cubos)
 {
