@@ -1,4 +1,5 @@
 #include <cubos/core/io/window.hpp>
+#include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -75,4 +76,15 @@ CUBOS_REFLECT_EXTERNAL_IMPL(MouseState)
                   .withVariant<MouseState::Default>("Default")
                   .withVariant<MouseState::Locked>("Locked")
                   .withVariant<MouseState::Hidden>("Hidden"));
+}
+
+CUBOS_REFLECT_EXTERNAL_IMPL(WindowEvent)
+{
+    return Type::create("cubos::core::io::WindowEvent");
+}
+
+CUBOS_REFLECT_EXTERNAL_IMPL(Window)
+{
+    return Type::create("cubos::core::io::Window")
+        .with(ConstructibleTrait::typed<Window>().withMoveConstructor().build());
 }
