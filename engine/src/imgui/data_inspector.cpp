@@ -341,8 +341,7 @@ std::string DataInspector::stringKnown(const void* value, const Type& type)
         return mTextBuffer;
     }
 
-    CUBOS_ERROR("Expected value with primitive type, found unsupported type {}", type.name());
-    return {"???"};
+    return "(unsupported)";
 }
 
 void DataInspector::showKnown(const std::string& name, const Type& type, const void* value)
@@ -454,8 +453,7 @@ bool DataInspector::editKnown(const std::string& name, const Type& type, void* v
     }
     if (!supported)
     {
-        ImGui::Text("???");
-        CUBOS_ERROR("Type {} is not supported by the Data Inspector.", type.name());
+        ImGui::Text("(unsupported)");
     }
 
     ImGui::PopID();
