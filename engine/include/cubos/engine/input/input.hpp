@@ -18,6 +18,8 @@ namespace cubos::engine
     class Input final
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Alias for @ref core::io::Key.
         using Key = core::io::Key;
 

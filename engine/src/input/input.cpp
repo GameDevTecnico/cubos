@@ -1,3 +1,4 @@
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -13,7 +14,13 @@ using cubos::core::io::MouseButton;
 using cubos::core::io::MouseButtonEvent;
 using cubos::core::io::MouseMoveEvent;
 using cubos::core::io::Window;
+
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(Input)
+{
+    return core::ecs::TypeBuilder<Input>("cubos::engine::Input").build();
+}
 
 void Input::clear()
 {
