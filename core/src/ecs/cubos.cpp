@@ -19,8 +19,8 @@ using cubos::core::ecs::ShouldQuit;
 CUBOS_REFLECT_IMPL(DeltaTime)
 {
     return TypeBuilder<DeltaTime>("cubos::core::ecs::DeltaTime")
-        .withField("value", &DeltaTime::value)
-        .withField("multiplier", &DeltaTime::multiplier)
+        .withField("unscaledValue", &DeltaTime::unscaledValue)
+        .withField("scale", &DeltaTime::scale)
         .build();
 }
 
@@ -179,7 +179,7 @@ void Cubos::run()
         currentTime = std::chrono::steady_clock::now();
 
         auto& dt = mWorld.resource<DeltaTime>();
-        dt.value = std::chrono::duration<float>(currentTime - previousTime).count() * dt.multiplier;
+        dt.unscaledValue = std::chrono::duration<float>(currentTime - previousTime).count();
         previousTime = currentTime;
     } while (!mWorld.resource<ShouldQuit>().value);
 }

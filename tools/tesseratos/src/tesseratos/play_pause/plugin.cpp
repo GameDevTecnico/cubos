@@ -15,7 +15,7 @@ namespace
     struct State
     {
         bool paused{false};
-        float multiplier{1.0F};
+        float scale{1.0F};
     };
 } // namespace
 
@@ -39,7 +39,7 @@ void tesseratos::playPausePlugin(Cubos& cubos)
                 if (ImGui::Button("Play"))
                 {
                     state.paused = false;
-                    dt.multiplier = state.multiplier;
+                    dt.scale = state.scale;
                 }
 
                 ImGui::SameLine();
@@ -47,18 +47,18 @@ void tesseratos::playPausePlugin(Cubos& cubos)
                 if (ImGui::Button("Pause"))
                 {
                     state.paused = true;
-                    dt.multiplier = 0.0;
+                    dt.scale = 0.0;
                 }
 
                 ImGui::SameLine();
 
                 ImGui::Text(state.paused ? "(Paused)" : "(Running)");
 
-                ImGui::SliderFloat("Speed Multiplier", &state.multiplier, 0.0F, 5.0F);
+                ImGui::SliderFloat("Speed Scale", &state.scale, 0.0F, 5.0F);
 
                 if (ImGui::Button("Reset"))
                 {
-                    state.multiplier = 1.0F;
+                    state.scale = 1.0F;
                 }
 
                 ImGui::End();
@@ -66,7 +66,7 @@ void tesseratos::playPausePlugin(Cubos& cubos)
 
             if (!state.paused)
             {
-                dt.multiplier = state.multiplier;
+                dt.scale = state.scale;
             }
         });
 }

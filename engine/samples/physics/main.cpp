@@ -100,7 +100,7 @@ int main(int argc, char** argv)
                         impulse.add(glm::vec3(0.0F, 5000.0F, 0.0F));
                     }
                     force.add(glm::vec3(0.0F, 0.0F, -5000.0F));
-                    time.current += deltaTime.value;
+                    time.current += deltaTime.value();
                 }
             }
         });

@@ -43,12 +43,12 @@ void tesseratos::metricsPanelPlugin(Cubos& cubos)
 
             ImGui::Begin("Metrics Panel");
             // General Metrics
-            metrics.timeElapsed += deltaTime.value;
-            metrics.fps = 1 / deltaTime.value;
+            metrics.timeElapsed += deltaTime.value();
+            metrics.fps = 1 / deltaTime.value();
 
             for (std::size_t i = 0; i < metrics.timeHistory.size(); ++i)
             {
-                metrics.timeHistory[i] -= deltaTime.value;
+                metrics.timeHistory[i] -= deltaTime.value();
                 if (metrics.timeHistory[i] <= metrics.timeSample)
                 {
                     metrics.timeHistory.erase(metrics.timeHistory.begin() +

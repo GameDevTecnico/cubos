@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Defaults plugin (#229, **@RiscadoA**).
 - Support for untyped resources (#1057, **@RiscadoA**).
 - Addition and removal of resources through Commands (#325, **@RiscadoA**).
+- Access to unscaled delta time for utilities like the debug camera (#1020, **@RiscadoA**).
 
 ### Changed
 

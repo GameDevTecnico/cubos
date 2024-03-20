@@ -26,8 +26,15 @@ namespace cubos::core::ecs
     {
         CUBOS_REFLECT;
 
-        float value{0.0F};      ///< Time in seconds.
-        float multiplier{1.0F}; ///< Multiplier which will be used when updating the value field.
+        float unscaledValue{0.0F}; ///< Time in seconds, without any scaling.
+        float scale{1.0F};         ///< Multiplier which will be used in @ref value().
+
+        /// @brief Returns the time in seconds, affected by the @ref scale.
+        /// @return Time in seconds.
+        float value() const
+        {
+            return unscaledValue * scale;
+        }
     };
 
     /// @brief Resource used as a flag to indicate whether the main loop should stop running.
