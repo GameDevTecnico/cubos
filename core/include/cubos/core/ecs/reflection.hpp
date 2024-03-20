@@ -13,6 +13,8 @@ namespace cubos::core::ecs
     /// @brief Trait used to identify symmetric relations.
     ///
     /// Symmetric relations are relations where the order of the entities does not matter.
+    ///
+    /// @ingroup core-ecs
     struct SymmetricTrait
     {
     };
@@ -21,11 +23,14 @@ namespace cubos::core::ecs
     ///
     /// Tree relations are relations which form trees. Each entity must have at most one target entity for a given tree
     /// relation type. These can be used to represent parent-child relationships.
+    ///
+    /// @ingroup core-ecs
     struct TreeTrait
     {
     };
 
     /// @brief Trait used to identify types which are ephemeral and should not be persisted.
+    /// @ingroup core-ecs
     struct EphemeralTrait
     {
     };
