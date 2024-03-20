@@ -67,6 +67,16 @@ CUBOS_REFLECT_IMPL(PhysicsBundle)
         .build();
 }
 
+CUBOS_REFLECT_IMPL(Substeps)
+{
+    return core::ecs::TypeBuilder<Substeps>("cubos::engine::Substeps").build();
+}
+
+CUBOS_REFLECT_IMPL(Damping)
+{
+    return core::ecs::TypeBuilder<Damping>("cubos::engine::Damping").build();
+}
+
 void cubos::engine::physicsPlugin(Cubos& cubos)
 {
     cubos.depends(fixedStepPlugin);
