@@ -1,5 +1,7 @@
 #include <imgui.h>
 
+#include <cubos/core/ecs/reflection.hpp>
+
 #include <cubos/engine/imgui/plugin.hpp>
 
 #include <tesseratos/toolbox/plugin.hpp>
@@ -9,6 +11,11 @@ using cubos::core::ecs::EventWriter;
 using cubos::engine::Cubos;
 
 using namespace tesseratos;
+
+CUBOS_REFLECT_IMPL(Toolbox)
+{
+    return cubos::core::ecs::TypeBuilder<Toolbox>("tesseratos::Toolbox").build();
+}
 
 bool Toolbox::isOpen(const std::string& toolName)
 {
