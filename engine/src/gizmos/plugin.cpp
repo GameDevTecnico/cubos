@@ -55,7 +55,7 @@ static void iterateGizmos(std::vector<std::shared_ptr<Gizmos::Gizmo>>& gizmosVec
             gizmo.draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Id, mvp);
         }
 
-        if (gizmo.decreaseLifespan(deltaTime.value))
+        if (gizmo.decreaseLifespan(deltaTime.value()))
         {
             toRemove.push_back(i);
         }
