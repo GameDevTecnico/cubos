@@ -22,8 +22,7 @@ namespace cubos::engine
     class RendererFrame final
     {
     public:
-        RendererFrame() = default;
-        ~RendererFrame() = default;
+        CUBOS_REFLECT;
 
         /// @brief Data of a single draw command.
         struct DrawCmd

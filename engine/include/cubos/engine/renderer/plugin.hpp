@@ -84,6 +84,8 @@ namespace cubos::engine
     /// @ingroup renderer-plugin
     struct ActiveCameras
     {
+        CUBOS_REFLECT;
+
         /// @brief Entities which represent the current active cameras. If more than one is set,
         /// the screen is split. At most, 4 cameras are supported at the same time.
         /// @note These entities must have @ref Camera @ref LocalToWorld components.
@@ -94,6 +96,8 @@ namespace cubos::engine
     /// @ingroup renderer-plugin
     struct ActiveVoxelPalette
     {
+        CUBOS_REFLECT;
+
         /// @brief Asset handle to the currently active palette.
         Asset<VoxelPalette> asset;
 

@@ -1,6 +1,13 @@
+#include <cubos/core/ecs/reflection.hpp>
+
 #include <cubos/engine/renderer/frame.hpp>
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(RendererFrame)
+{
+    return core::ecs::TypeBuilder<RendererFrame>("cubos::engine::RendererFrame").build();
+}
 
 void RendererFrame::draw(RendererGrid grid, glm::mat4 modelMat, uint32_t entityIndex)
 {

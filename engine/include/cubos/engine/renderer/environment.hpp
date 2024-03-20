@@ -6,12 +6,16 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which stores the renderer's ambient light and sky colors.
     /// @ingroup renderer-plugin
     struct RendererEnvironment
     {
+        CUBOS_REFLECT;
+
         /// @brief Ambient light color.
         glm::vec3 ambient = {0.2F, 0.2F, 0.2F};
 

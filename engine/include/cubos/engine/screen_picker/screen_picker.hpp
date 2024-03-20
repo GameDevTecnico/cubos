@@ -16,6 +16,8 @@ namespace cubos::engine
     class ScreenPicker final
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Initializes ScreenPicker for a render device.
         /// @param currentRenderDevice Current Render device being used.
         /// @param size The size of the window in pixels.

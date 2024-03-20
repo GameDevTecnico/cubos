@@ -154,3 +154,5 @@ namespace cubos::engine
         };
     } // namespace impl
 } // namespace cubos::engine
+
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::engine::Renderer);

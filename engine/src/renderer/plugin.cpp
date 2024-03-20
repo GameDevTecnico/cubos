@@ -22,7 +22,8 @@ CUBOS_DEFINE_TAG(cubos::engine::rendererDrawTag);
 using cubos::core::io::ResizeEvent;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
-using cubos::engine::RenderableGrid;
+
+using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(RenderableGrid)
 {
@@ -32,12 +33,23 @@ CUBOS_REFLECT_IMPL(RenderableGrid)
         .build();
 }
 
+CUBOS_REFLECT_IMPL(ActiveCameras)
+{
+    return core::ecs::TypeBuilder<ActiveCameras>("cubos::engine::ActiveCameras").build();
+}
+
+CUBOS_REFLECT_IMPL(ActiveVoxelPalette)
+{
+    return core::ecs::TypeBuilder<ActiveVoxelPalette>("cubos::engine::ActiveVoxelPalette").build();
+}
+
 void cubos::engine::rendererPlugin(Cubos& cubos)
 {
     cubos.depends(transformPlugin);
     cubos.depends(windowPlugin);
     cubos.depends(assetsPlugin);
     cubos.depends(screenPickerPlugin);
+    cubos.depends(settingsPlugin);
 
     cubos.resource<RendererFrame>();
     cubos.resource<Renderer>();
