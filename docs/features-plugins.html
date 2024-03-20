@@ -60,14 +60,14 @@
 
 <span class="k">struct</span><span class="w"> </span><span class="nc">Message</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">Cubos</span><span class="w"> </span><span class="n">cubos</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">resource</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Message</span><span class="p">{</span><span class="s">&quot;Hello World!&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">resource</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="s">&quot;show message&quot;</span><span class="p">).</span><span class="n">call</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">Message</span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
