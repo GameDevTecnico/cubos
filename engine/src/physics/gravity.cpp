@@ -5,6 +5,11 @@
 
 using namespace cubos::engine;
 
+CUBOS_REFLECT_IMPL(Gravity)
+{
+    return core::ecs::TypeBuilder<Gravity>("cubos::engine::Gravity").build();
+}
+
 void cubos::engine::gravityPlugin(Cubos& cubos)
 {
     cubos.depends(physicsPlugin);

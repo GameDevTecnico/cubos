@@ -10,6 +10,8 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct Substeps
     {
+        CUBOS_REFLECT;
+
         int value = 1;
     };
 } // namespace cubos::engine
