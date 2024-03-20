@@ -56,6 +56,7 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
                               .add(Position{{}})
                               .add(FreeCameraController{
                                   .enabled = false,
+                                  .unscaledDeltaTime = true,
                                   .lateral = "debug-move-lateral",
                                   .vertical = "debug-move-vertical",
                                   .longitudinal = "debug-move-longitudinal",
