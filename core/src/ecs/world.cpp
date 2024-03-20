@@ -39,6 +39,42 @@ void World::registerRelation(const reflection::Type& type)
     mTypes.addRelation(type);
 }
 
+void World::unregister(const reflection::Type& type)
+{
+    auto dataTypeId = mTypes.remove(type);
+    if (mTypes.isResource(dataTypeId))
+    {
+        CUBOS_TRACE("Unregistered resource {}", type.name());
+        mResources.erase(type);
+    }
+    else if (mTypes.isComponent(dataTypeId))
+    {
+        CUBOS_TRACE("Unregistered component {}", type.name());
+        auto columnId = ColumnId::make(dataTypeId);
+
+        // Find all archetypes which contain the column.
+        std::vector<ArchetypeId> archetypes{};
+        mArchetypeGraph.collect(mArchetypeGraph.with(ArchetypeId::Empty, columnId), archetypes);
+
+        // For each of them, remove the component from its entities.
+        for (const auto& archetype : archetypes)
+        {
+            auto& table = mTables.dense().at(archetype);
+            while (table.size() > 0)
+            {
+                auto index = table.entity(0);
+                auto entity = Entity{index, this->generation(index)};
+                this->components(entity).remove(type);
+            }
+        }
+    }
+    else if (mTypes.isRelation(dataTypeId))
+    {
+        CUBOS_TRACE("Unregistered relation {}", type.name());
+        mTables.sparseRelation().erase(dataTypeId);
+    }
+}
+
 void World::insertResource(memory::AnyValue value)
 {
     const auto& type = value.type();
