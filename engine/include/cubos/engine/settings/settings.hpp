@@ -14,8 +14,7 @@ namespace cubos::engine
     class Settings final
     {
     public:
-        Settings() = default;
-        ~Settings() = default;
+        CUBOS_REFLECT;
 
         /// @brief Clears all the settings.
         void clear();
