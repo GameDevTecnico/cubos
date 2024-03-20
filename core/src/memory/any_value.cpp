@@ -2,7 +2,6 @@
 
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_value.hpp>
-#include <cubos/core/memory/move.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
@@ -58,34 +57,22 @@ AnyValue::AnyValue(const AnyValue& other) noexcept
 
 AnyValue AnyValue::defaultConstruct(const Type& type) noexcept
 {
-    CUBOS_ASSERT(type.has<ConstructibleTrait>(), "Type must be constructible");
-    const auto& trait = type.get<ConstructibleTrait>();
-    CUBOS_ASSERT(trait.hasDefaultConstruct(), "Type must be default constructible");
-
     AnyValue any{type};
-    trait.defaultConstruct(any.get());
+    type.get<ConstructibleTrait>().defaultConstruct(any.get());
     return move(any);
 }
 
 AnyValue AnyValue::copyConstruct(const Type& type, const void* value) noexcept
 {
-    CUBOS_ASSERT(type.has<ConstructibleTrait>(), "Type must be constructible");
-    const auto& trait = type.get<ConstructibleTrait>();
-    CUBOS_ASSERT(trait.hasCopyConstruct(), "Type must be copy constructible");
-
     AnyValue any{type};
-    trait.copyConstruct(any.get(), value);
+    type.get<ConstructibleTrait>().copyConstruct(any.get(), value);
     return move(any);
 }
 
 AnyValue AnyValue::moveConstruct(const Type& type, void* value) noexcept
 {
-    CUBOS_ASSERT(type.has<ConstructibleTrait>(), "Type must be constructible");
-    const auto& trait = type.get<ConstructibleTrait>();
-    CUBOS_ASSERT(trait.hasMoveConstruct(), "Type must be move constructible");
-
     AnyValue any{type};
-    trait.moveConstruct(any.get(), value);
+    type.get<ConstructibleTrait>().moveConstruct(any.get(), value);
     return move(any);
 }
 
@@ -115,6 +102,7 @@ bool AnyValue::valid() const
 AnyValue::AnyValue(const Type& type) noexcept
     : mType(&type)
 {
+    CUBOS_ASSERT(type.has<ConstructibleTrait>(), "Type must be constructible");
     const auto& trait = type.get<ConstructibleTrait>();
     mValue = operator new(trait.size(), static_cast<std::align_val_t>(trait.alignment()), std::nothrow);
 
