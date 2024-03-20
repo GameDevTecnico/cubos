@@ -57,6 +57,29 @@ const SparseRelationTableRegistry::TypeIndex& SparseRelationTableRegistry::type(
     return it->second;
 }
 
+void SparseRelationTableRegistry::erase(DataTypeId type)
+{
+    auto it = mTypeIndices.find(type);
+    if (it != mTypeIndices.end())
+    {
+        for (auto [archetype, tables] : it->second.from())
+        {
+            for (auto id : tables)
+            {
+                mTables.at(id).clear();
+            }
+        }
+
+        for (auto [archetype, tables] : it->second.to())
+        {
+            for (auto id : tables)
+            {
+                mTables.at(id).clear();
+            }
+        }
+    }
+}
+
 void SparseRelationTableRegistry::TypeIndex::insert(SparseRelationTableId id)
 {
     mSparseRelationTableIdsByFrom[id.from].emplace_back(id);

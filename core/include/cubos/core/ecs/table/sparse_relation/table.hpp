@@ -59,6 +59,9 @@ namespace cubos::core::ecs
         /// @param relationType Relation type.
         SparseRelationTable(const reflection::Type& relationType);
 
+        /// @brief Removes all relations from the table.
+        void clear();
+
         /// @brief Adds a relation between the given indices. If it already exists, overwrites it.
         /// @param from From index.
         /// @param to To index.
