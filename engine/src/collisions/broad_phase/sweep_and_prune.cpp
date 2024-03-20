@@ -1,8 +1,15 @@
 #include <algorithm>
 
+#include <cubos/core/ecs/reflection.hpp>
+
 #include "sweep_and_prune.hpp"
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(BroadPhaseSweepAndPrune)
+{
+    return core::ecs::TypeBuilder<BroadPhaseSweepAndPrune>("cubos::engine::BroadPhaseSweepAndPrune").build();
+}
 
 void BroadPhaseSweepAndPrune::addEntity(Entity entity)
 {
