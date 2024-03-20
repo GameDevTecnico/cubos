@@ -99,16 +99,9 @@ namespace cubos::core::ecs
         /// @return Type index.
         const TypeIndex& type(DataTypeId type) const;
 
-        /// @brief Moves all relations of an entity from an archetype to another.
-        /// @param source Old archetype.
-        /// @param target New archetype.
-        /// @param index Entity index.
-        void move(ArchetypeId source, ArchetypeId target, uint32_t index);
-
-        /// @brief Removes all relations of an entity.
-        /// @param archetype Entity archetype.
-        /// @param index Entity index.
-        void erase(ArchetypeId archetype, uint32_t index);
+        /// @brief Removes all relations of the given type.
+        /// @param type Type identifier.
+        void erase(DataTypeId type);
 
         /// @brief Calls the given function for each new table.
         /// @param counter Counter previously returned by this function. Zero should be used for the first call.
