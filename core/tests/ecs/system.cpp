@@ -28,8 +28,11 @@ TEST_CASE("ecs::System")
     World world{};
     CommandBuffer cmdBuf{world};
 
-    world.registerResource<int>(0);
+    world.registerResource<int>();
+    world.insertResource<int>(0);
+
     world.registerComponent<bool>();
+
     auto boolId = world.types().id("bool");
 
     SUBCASE("extracted access patterns are correct")

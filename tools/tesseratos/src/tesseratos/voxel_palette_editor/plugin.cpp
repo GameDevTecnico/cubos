@@ -90,6 +90,7 @@ static void savePaletteUiGuard(Assets& assets, SelectedPaletteInfo& selectedPale
 
 void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
 {
+    cubos.depends(cubos::engine::assetsPlugin);
     cubos.depends(cubos::engine::rendererPlugin);
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::voxelsPlugin);

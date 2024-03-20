@@ -1,9 +1,0 @@
-/// @dir
-/// @brief @ref core-ecs-resource directory.
-
-namespace cubos::core::ecs
-{
-    /// @defgroup core-ecs-resource Resource
-    /// @ingroup core-ecs
-    /// @brief Resource part of the ECS.
-}

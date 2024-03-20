@@ -9,10 +9,10 @@
 
 #include <cubos/core/ecs/entity/archetype_graph.hpp>
 #include <cubos/core/ecs/entity/pool.hpp>
-#include <cubos/core/ecs/resource/manager.hpp>
 #include <cubos/core/ecs/table/tables.hpp>
 #include <cubos/core/ecs/types.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
@@ -46,20 +46,23 @@ namespace cubos::core::ecs
         /// @brief Used to immutably access the relations of an entity.
         class ConstRelations;
 
-        /// @brief Registers and inserts a new resource type.
-        /// @note Should be called before other non-registering operations.
+        /// @brief Registers a resource type.
+        /// @param type Resource type.
+        void registerResource(const reflection::Type& type);
+
+        /// @brief Registers a resource type.
         /// @tparam T Resource type.
-        /// @tparam TArgs Types of the arguments of the constructor of the resource.
-        /// @param args Arguments of the constructor of the resource.
-        template <typename T, typename... TArgs>
-        void registerResource(TArgs... args);
+        template <typename T>
+        void registerResource()
+        {
+            this->registerResource(reflection::reflect<T>());
+        }
 
         /// @brief Registers a component type.
         /// @param type Component type.
         void registerComponent(const reflection::Type& type);
 
         /// @brief Registers a component type.
-        /// @note Should be called before other non-registering operations.
         /// @tparam T Component type.
         template <typename T>
         void registerComponent()
@@ -107,17 +110,74 @@ namespace cubos::core::ecs
         /// @copydoc observers()
         const Observers& observers() const;
 
-        /// @brief Locks a resource for reading and returns it.
-        /// @tparam T Resource type.
-        /// @return Resource lock.
-        template <typename T>
-        ReadResource<T> read() const;
+        /// @brief Inserts a new resource into the world.
+        /// @param value Resource value.
+        void insertResource(memory::AnyValue value);
 
-        /// @brief Locks a resource for writing and returns it.
+        /// @brief Inserts a new resource into the world.
         /// @tparam T Resource type.
-        /// @return Resource lock.
+        /// @param value Resource value.
         template <typename T>
-        WriteResource<T> write() const;
+        void insertResource(T value)
+        {
+            this->insertResource(memory::AnyValue::moveConstruct(reflection::reflect<T>(), &value));
+        }
+
+        /// @brief Erases a new resource from the world.
+        /// @param type Resource type.
+        /// @return Whether there was such a resource.
+        bool eraseResource(const reflection::Type& type);
+
+        /// @brief Erases a new resource from the world.
+        /// @tparam T Resource type.
+        /// @return Whether there was such a resource.
+        template <typename T>
+        bool eraseResource()
+        {
+            return this->eraseResource(reflection::reflect<T>());
+        }
+
+        /// @brief Checks if a resource is present.
+        /// @param type Resource type.
+        /// @return Whether the resource is present.
+        bool hasResource(const reflection::Type& type) const;
+
+        /// @brief Checks if a resource is present.
+        /// @tparam T Resource type.
+        /// @return Whether the resource is present.
+        template <typename T>
+        bool hasResource() const
+        {
+            return this->hasResource(reflection::reflect<T>());
+        }
+
+        /// @brief Returns a pointer to a resource.
+        /// @param type Resource type.
+        /// @return Resource.
+        void* resource(const reflection::Type& type);
+
+        /// @brief Returns a reference to a resource.
+        /// @tparam T Resource type.
+        /// @return Resource.
+        template <typename T>
+        T& resource()
+        {
+            return *static_cast<T*>(this->resource(reflection::reflect<T>()));
+        }
+
+        /// @brief Returns a pointer to a resource.
+        /// @param type Resource type.
+        /// @return Resource.
+        const void* resource(const reflection::Type& type) const;
+
+        /// @brief Returns a reference to a resource.
+        /// @tparam T Resource type.
+        /// @return Resource.
+        template <typename T>
+        const T& resource() const
+        {
+            return *static_cast<const T*>(this->resource(reflection::reflect<T>()));
+        }
 
         /// @brief Creates a new entity.
         /// @return Entity identifier.
@@ -314,8 +374,7 @@ namespace cubos::core::ecs
         ArchetypeGraph mArchetypeGraph;
         Tables mTables;
         Observers* mObservers;
-
-        ResourceManager mResourceManager;
+        memory::TypeMap<memory::AnyValue> mResources;
     };
 
     class World::Components final
@@ -805,25 +864,4 @@ namespace cubos::core::ecs
         std::size_t mRow{SIZE_MAX};
         mutable Relation mRelation;
     };
-
-    // Implementation.
-
-    template <typename T, typename... TArgs>
-    void World::registerResource(TArgs... args)
-    {
-        CUBOS_TRACE("Registered resource {}", typeid(T).name());
-        mResourceManager.add<T>(args...);
-    }
-
-    template <typename T>
-    ReadResource<T> World::read() const
-    {
-        return mResourceManager.read<T>();
-    }
-
-    template <typename T>
-    WriteResource<T> World::write() const
-    {
-        return mResourceManager.write<T>();
-    }
 } // namespace cubos::core::ecs

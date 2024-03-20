@@ -101,6 +101,8 @@ struct Velocity
 
 struct DeltaTime
 {
+    CUBOS_REFLECT;
+
     float value = 0.0f;
 };
 ```

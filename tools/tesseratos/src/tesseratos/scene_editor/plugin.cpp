@@ -386,6 +386,7 @@ static void saveScene(const World& world, Assets& assets, State& state)
 
 void tesseratos::sceneEditorPlugin(Cubos& cubos)
 {
+    cubos.depends(cubos::engine::assetsPlugin);
     cubos.depends(cubos::engine::scenePlugin);
     cubos.depends(cubos::engine::imguiPlugin);
 

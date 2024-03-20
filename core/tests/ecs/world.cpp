@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 #include "utils.hpp"
@@ -107,21 +108,27 @@ TEST_CASE("ecs::World")
 
     SUBCASE("read and write resources")
     {
-        // Register some resources.
-        world.registerResource<int>(42);
-        world.registerResource<char>('x');
+        CHECK_FALSE(world.hasResource<int>());
+        world.registerResource<int>();
+        CHECK_FALSE(world.hasResource<int>());
+
+        world.insertResource<int>(42);
+        CHECK(world.hasResource<int>());
+
+        world.registerResource<char>();
+        world.insertResource<char>('x');
 
         // Check if the read values are correct.
-        CHECK(world.read<int>().get() == 42);
-        CHECK(world.read<char>().get() == 'x');
+        CHECK(constWorld.resource<int>() == 42);
+        CHECK(world.resource<char>() == 'x');
 
         // Write new values.
-        world.write<int>().get() = 43;
-        world.write<char>().get() = 'y';
+        world.resource<int>() = 43;
+        world.resource<char>() = 'y';
 
         // Check if the read values are correct.
-        CHECK(world.read<int>().get() == 43);
-        CHECK(world.read<char>().get() == 'y');
+        CHECK(world.resource<int>() == 43);
+        CHECK(constWorld.resource<char>() == 'y');
     }
 
     SUBCASE("resources are correctly destructed when the world is destroyed")
@@ -131,7 +138,8 @@ TEST_CASE("ecs::World")
         // Create a world with a resource and immediately destroy it.
         {
             World world{};
-            world.registerResource<DetectDestructor>(&destroyed);
+            world.registerResource<DetectDestructor>();
+            world.insertResource(DetectDestructor{&destroyed});
             CHECK_FALSE(destroyed);
         }
 

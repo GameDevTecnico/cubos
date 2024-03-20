@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <cubos/core/ecs/query/node/related.hpp>
 #include <cubos/core/ecs/world.hpp>
 

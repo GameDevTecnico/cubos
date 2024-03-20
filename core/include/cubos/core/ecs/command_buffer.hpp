@@ -16,6 +16,11 @@ namespace cubos::core::reflection
     class Type;
 }
 
+namespace cubos::core::memory
+{
+    class AnyValue;
+}
+
 namespace cubos::core::ecs
 {
     class World;
@@ -29,6 +34,14 @@ namespace cubos::core::ecs
         /// @brief Constructs.
         /// @param world World to which the commands will be applied.
         CommandBuffer(World& world);
+
+        /// @brief Inserts a resource into the world.
+        /// @param value Resource value.
+        void insertResource(memory::AnyValue value);
+
+        /// @brief Removes a resource from the world.
+        /// @param type Resource type.
+        void eraseResource(const reflection::Type& type);
 
         /// @brief Creates a new entity.
         /// @return Entity identifier.

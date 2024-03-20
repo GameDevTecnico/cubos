@@ -27,14 +27,14 @@ using cubos::engine::Cubos;
 
 struct Message
 {
-    std::string value; 
+    std::string value = "Hello World!";
 };
 
 int main()
 {
     Cubos cubos;
 
-    cubos.resource<Message>(Message{"Hello World!"});
+    cubos.resource<Message>();
 
     cubos.startupSystem("show message").call([](const Message& msg) {
         std::cout << msg.value << std::endl;

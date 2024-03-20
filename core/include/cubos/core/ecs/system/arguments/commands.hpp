@@ -8,6 +8,7 @@
 
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/system/fetcher.hpp>
+#include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::ecs
@@ -35,6 +36,41 @@ namespace cubos::core::ecs
 
         /// @brief Move constructor.
         Commands(Commands&&) = default;
+
+        /// @brief Inserts a resource into the world.
+        /// @param value Resource value.
+        void insertResource(memory::AnyValue value);
+
+        /// @brief Inserts a resource into the world.
+        /// @tparam T Resource type.
+        /// @param value Resource value.
+        template <typename T>
+        void insertResource(T value)
+        {
+            this->insertResource(memory::AnyValue::moveConstruct(reflection::reflect<T>(), &value));
+        }
+
+        /// @brief Inserts a resource into the world.
+        /// @tparam T Resource type.
+        /// @tparam TArgs Argument types.
+        /// @param args Arguments.
+        template <typename T, typename... TArgs>
+        void insertResource(TArgs&&... args)
+        {
+            this->insertResource(memory::AnyValue::customConstruct<T>(memory::forward<TArgs>(args)...));
+        }
+
+        /// @brief Removes a resource from the world.
+        /// @param type Resource type.
+        void eraseResource(const reflection::Type& type);
+
+        /// @brief Removes a resource from the world.
+        /// @tparam T Resource type.
+        template <typename T>
+        void eraseResource()
+        {
+            this->eraseResource(reflection::reflect<T>());
+        }
 
         /// @brief Creates a new entity.
         /// @return Builder which can be used to modify the created entity.

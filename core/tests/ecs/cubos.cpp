@@ -66,7 +66,7 @@ TEST_CASE("ecs::Cubos")
         CUBOS_DEFINE_TAG(tag);
         CUBOS_DEFINE_TAG(spawn);
 
-        cubos.resource<int>(0);
+        cubos.resource<long>(0);
         cubos.component<int>();
         cubos.startupTag(spawn);
         cubos.startupTag(tag);
@@ -75,14 +75,14 @@ TEST_CASE("ecs::Cubos")
             cmds.create().add<int>(2);
             cmds.create().add<int>(3);
         });
-        cubos.startupSystem("check sum before").after(spawn).before(tag).call([](const int& sum) { CHECK(sum == 0); });
-        cubos.startupSystem("query stuff").tagged(tag).call([](int& sum, Query<const int&> query) {
+        cubos.startupSystem("check sum before").after(spawn).before(tag).call([](const long& sum) { CHECK(sum == 0); });
+        cubos.startupSystem("query stuff").tagged(tag).call([](long& sum, Query<const int&> query) {
             for (auto [x] : query)
             {
-                sum += x;
+                sum += static_cast<long>(x);
             }
         });
-        cubos.startupSystem("check sum after").after(tag).call([](const int& sum) { CHECK(sum == 6); });
+        cubos.startupSystem("check sum after").after(tag).call([](const long& sum) { CHECK(sum == 6); });
         cubos.run();
     }
 

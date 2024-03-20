@@ -24,8 +24,15 @@ CUBOS_REFLECT_IMPL(Num)
 /// [Resource Decl]
 struct Pop
 {
-    int count;
+    CUBOS_REFLECT;
+
+    int count = 0;
 };
+
+CUBOS_REFLECT_IMPL(Pop)
+{
+    return cubos::core::ecs::TypeBuilder<Pop>("Pop").withField("count", &Pop::count).build();
+}
 /// [Resource Decl]
 
 namespace cubos::engine

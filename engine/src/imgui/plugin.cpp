@@ -18,6 +18,7 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
 {
     cubos.depends(windowPlugin);
     cubos.depends(rendererPlugin);
+    cubos.depends(settingsPlugin);
 
     cubos.resource<DataInspector>();
 
