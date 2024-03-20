@@ -1,9 +1,15 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 
 #include <cubos/engine/settings/settings.hpp>
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(Settings)
+{
+    return core::ecs::TypeBuilder<Settings>("cubos::engine::Settings").build();
+}
 
 template <>
 void cubos::core::data::old::serialize<Settings>(Serializer& ser, const Settings& obj, const char* name)
