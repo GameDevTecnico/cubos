@@ -56,24 +56,51 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
 <p>This resource is added and updated by the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> class.</p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a26b727f711dd2359f56fdafc448f0005" class="m-doc">value</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
+            </dt>
+            <dd>Returns the time in seconds, affected by the <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html#a63f39e6a047285eb7fb2ec64c198f853" class="m-doc">scale</a>.</dd>
+          </dl>
+        </section>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="acd39866fed82fc2efdd5d2fd2d8293c2">
-              float <a href="#acd39866fed82fc2efdd5d2fd2d8293c2" class="m-doc-self">value</a>
+            <dt id="a4c270854c86321e9e9e4c880ec4b5af4">
+              float <a href="#a4c270854c86321e9e9e4c880ec4b5af4" class="m-doc-self">unscaledValue</a>
             </dt>
-            <dd>Time in seconds.</dd>
-            <dt id="a50f6447fc338df37602dbd238916023d">
-              float <a href="#a50f6447fc338df37602dbd238916023d" class="m-doc-self">multiplier</a>
+            <dd>Time in seconds, without any scaling.</dd>
+            <dt id="a63f39e6a047285eb7fb2ec64c198f853">
+              float <a href="#a63f39e6a047285eb7fb2ec64c198f853" class="m-doc-self">scale</a>
             </dt>
-            <dd>Multiplier which will be used when updating the value field.</dd>
+            <dd>Multiplier which will be used in <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html#a26b727f711dd2359f56fdafc448f0005" class="m-doc">value()</a>.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a26b727f711dd2359f56fdafc448f0005"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float cubos::<wbr />core::<wbr />ecs::<wbr />DeltaTime::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a26b727f711dd2359f56fdafc448f0005" class="m-doc-self">value</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the time in seconds, affected by the <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html#a63f39e6a047285eb7fb2ec64c198f853" class="m-doc">scale</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Time in seconds.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

@@ -80,6 +80,29 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0f603a2156acc9e68c233a7ae21a043b" class="m-doc">insertResource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a> value)</span>
+            </dt>
+            <dd>Inserts a resource into the world.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#ab922d5add55942d00e65c2aa40e47b98" class="m-doc">insertResource</a>(</span><span class="m-doc-wrap">T value)</span>
+            </dt>
+            <dd>Inserts a resource into the world.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#ae2ddf40e09b1dbbf914cf75cf22e3434" class="m-doc">insertResource</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args)</span>
+            </dt>
+            <dd>Inserts a resource into the world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0f81f25c65928338be07371bc6203583" class="m-doc">eraseResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
+            </dt>
+            <dd>Removes a resource from the world.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#aef3245ec4fa8cecb41ce319d374928c5" class="m-doc">eraseResource</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Removes a resource from the world.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#adfff8c90558b30c4a062d3339fa8a29d" class="m-doc">create</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a></span>
             </dt>
             <dd>Creates a new entity.</dd>
@@ -99,7 +122,7 @@
             </dt>
             <dd>Adds a component to an entity.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;reflection::Reflectable T&gt;</div>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a8f609b3142fd7346213bcee820b3fe49" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               T value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
             </dt>
@@ -110,7 +133,7 @@
             </dt>
             <dd>Removes a component from an entity.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;reflection::Reflectable T&gt;</div>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a495d9efaa75b9352829e9723532ad8f5" class="m-doc">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
             </dt>
             <dd>Removes a component from an entity.</dd>
@@ -122,7 +145,7 @@
             </dt>
             <dd>Inserts a relation between the two given entities.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;reflection::Reflectable T&gt;</div>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a6c8fc658e34eb62d1ada1fb63a2ff98b" class="m-doc">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
               <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
               T value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
@@ -135,7 +158,7 @@
             </dt>
             <dd>Removes the relation, if there&#x27;s any, between the two given entities.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;reflection::Reflectable T&gt;</div>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a31a707c8b452680976e5d691a4657a63" class="m-doc">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
               <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
             </dt>
@@ -157,6 +180,122 @@
                 <tr>
                   <td style="width: 1%">buffer</td>
                   <td>Command buffer to write to.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0f603a2156acc9e68c233a7ae21a043b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f603a2156acc9e68c233a7ae21a043b" class="m-doc-self">insertResource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a> value)</span></span>
+            </h3>
+            <p>Inserts a resource into the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Resource value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab922d5add55942d00e65c2aa40e47b98"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab922d5add55942d00e65c2aa40e47b98" class="m-doc-self">insertResource</a>(</span><span class="m-doc-wrap">T value)</span></span>
+            </h3>
+            <p>Inserts a resource into the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Resource type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Resource value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae2ddf40e09b1dbbf914cf75cf22e3434"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, typename... TArgs&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae2ddf40e09b1dbbf914cf75cf22e3434" class="m-doc-self">insertResource</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args)</span></span>
+            </h3>
+            <p>Inserts a resource into the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Resource type.</td>
+                </tr>
+                <tr>
+                  <td>TArgs</td>
+                  <td>Argument types.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>args</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">Arguments</a>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0f81f25c65928338be07371bc6203583"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f81f25c65928338be07371bc6203583" class="m-doc-self">eraseResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Removes a resource from the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Resource type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aef3245ec4fa8cecb41ce319d374928c5"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef3245ec4fa8cecb41ce319d374928c5" class="m-doc-self">eraseResource</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Removes a resource from the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Resource type.</td>
                 </tr>
               </tbody>
             </table>
@@ -256,7 +395,7 @@
           <section class="m-doc-details" id="a8f609b3142fd7346213bcee820b3fe49"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;reflection::Reflectable T&gt;
+                template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f609b3142fd7346213bcee820b3fe49" class="m-doc-self">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               T value)</span></span>
@@ -324,7 +463,7 @@
           <section class="m-doc-details" id="a495d9efaa75b9352829e9723532ad8f5"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;reflection::Reflectable T&gt;
+                template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a495d9efaa75b9352829e9723532ad8f5" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
             </h3>
@@ -398,7 +537,7 @@
           <section class="m-doc-details" id="a6c8fc658e34eb62d1ada1fb63a2ff98b"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;reflection::Reflectable T&gt;
+                template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c8fc658e34eb62d1ada1fb63a2ff98b" class="m-doc-self">relate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
               <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to,
@@ -477,7 +616,7 @@
           <section class="m-doc-details" id="a31a707c8b452680976e5d691a4657a63"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;reflection::Reflectable T&gt;
+                template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a31a707c8b452680976e5d691a4657a63" class="m-doc-self">unrelate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> from,
               <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to)</span></span>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::ReadResource class | CUBOS. Docs</title>
+  <title>cubos::engine::GBuffer struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,91 +46,41 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2ecs_2resource_2manager_8hpp.html">&lt;core/ecs/resource/manager.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>ReadResource <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>GBuffer <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="g__buffer_8hpp.html">&lt;engine/render/g_buffer/g_buffer.hpp&gt;</a></div>
         </h1>
-        <p>Utility struct used to reference a resource of type <code>T</code> for reading.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Resource type.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Component which stores the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures of a render target.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a772ccaa5c957881549e1470b09a288c6" class="m-doc">ReadResource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            <dt id="ac2d2b96357d47e7b819bf873e48d10f8">
+              glm::uvec2 <a href="#ac2d2b96357d47e7b819bf873e48d10f8" class="m-doc-self">size</a>
             </dt>
-            <dd>Move construct.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1efe032cb34bed18917e15389130facb" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp;</span>
+            <dd>Size of the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures, in pixels.</dd>
+            <dt id="a39530e59371a89897e2fa5ff842694ac">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a39530e59371a89897e2fa5ff842694ac" class="m-doc-self">position</a>
             </dt>
-            <dd>Gets the underlying resource reference.</dd>
+            <dd>Stores the position of the objects in the scene.</dd>
+            <dt id="af1718b3f67964cb7302fa5c3b73ec126">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#af1718b3f67964cb7302fa5c3b73ec126" class="m-doc-self">normal</a>
+            </dt>
+            <dd>Stores the normal of the objects in the scene.</dd>
+            <dt id="a71e8c95363933cfba6e03c228a1ebddd">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a71e8c95363933cfba6e03c228a1ebddd" class="m-doc-self">albedo</a>
+            </dt>
+            <dd>Stores the albedo of the objects in the scene.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a772ccaa5c957881549e1470b09a288c6"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />ReadResource&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a772ccaa5c957881549e1470b09a288c6" class="m-doc-self">ReadResource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Move construct.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>Other resource to move from.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1efe032cb34bed18917e15389130facb"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">const T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />ReadResource&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1efe032cb34bed18917e15389130facb" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Gets the underlying resource reference.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Resource reference.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

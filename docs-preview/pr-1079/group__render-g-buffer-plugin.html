@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/memory/any_value.hpp file | CUBOS. Docs</title>
+  <title>Engine &raquo; Render &raquo; G-Buffer module | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,40 +46,72 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_9bdaf8f561be1ffd03f616379797b70b.html">memory</a>/</span>any_value.hpp <span class="m-thin">file</span>
-        </h1>
-        <p>Class <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />AnyValue</a>.</p>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
+          G-Buffer <span class="m-thin">module</span></h1>
+        <p>Adds and manages <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> components.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
+            <li><a href="#autotoc_md84">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+<section id="autotoc_md84"><h3><a href="#autotoc_md84">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li>render-target-plugin</li></ul></section>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">cubos::core::memory</a></dt>
-            <dd><a href="group__core-memory.html" class="m-doc">Memory</a> module.</dd>
+            <dt>file <a href="g__buffer_8hpp.html" class="m-doc">g_buffer.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">cubos::<wbr />engine::<wbr />GBuffer</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2render_2g__buffer_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">cubos::core::memory::AnyValue</a>
+              struct <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">cubos::engine::GBuffer</a>
             </dt>
-            <dd>Stores a blob of a given reflected type.</dd>
+            <dd>Component which stores the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures of a render target.</dd>
           </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ga8843b5a3be6781183fc144d32041ddd7" class="m-doc">gBufferPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga8843b5a3be6781183fc144d32041ddd7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga8843b5a3be6781183fc144d32041ddd7" class="m-doc-self">gBufferPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2g__buffer_2plugin_8hpp.html">&lt;engine/render/g_buffer/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

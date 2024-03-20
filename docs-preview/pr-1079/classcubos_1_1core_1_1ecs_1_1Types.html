@@ -65,6 +65,10 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9f9f2c527c336990c4ea45c76bc2a308" class="m-doc">addResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
+            </dt>
+            <dd>Registers a resource type.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa225841e58c861782850358d4621b7c2" class="m-doc">addComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
             </dt>
             <dd>Registers a component type.</dd>
@@ -77,7 +81,7 @@
             </dt>
             <dd>Gets the identifier of a data type.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;reflection::Reflectable T&gt;</div>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#ad9ee21fe8e9ca1b4782b9166bcba2a8e" class="m-doc">id</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a></span>
             </dt>
             <dd>Gets the identifier of a data type.</dd>
@@ -98,6 +102,10 @@
             </dt>
             <dd>Checks if a data type is registered.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3a73749c7e2b9dd4d28fbf5944300e9d" class="m-doc">isResource</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if the given data type is a resource.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a13f9b476d395f7529a6a48b44d60d1ee" class="m-doc">isComponent</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id) const -&gt; bool</span>
             </dt>
             <dd>Checks if the given data type is a component.</dd>
@@ -114,6 +122,10 @@
             </dt>
             <dd>Checks if the given data type is a tree relation.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af9598f6255480370942ab5c0e6758d49" class="m-doc">resources</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a></span>
+            </dt>
+            <dd>Gets a type registry with only the resource types.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#abd5cd5bedc309f9a003e650a37397561" class="m-doc">components</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a></span>
             </dt>
             <dd>Gets a type registry with only the component types.</dd>
@@ -125,6 +137,23 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9f9f2c527c336990c4ea45c76bc2a308"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Types::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9f9f2c527c336990c4ea45c76bc2a308" class="m-doc-self">addResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Registers a resource type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Resource type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="aa225841e58c861782850358d4621b7c2"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Types::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa225841e58c861782850358d4621b7c2" class="m-doc-self">addComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
@@ -186,7 +215,7 @@
           <section class="m-doc-details" id="ad9ee21fe8e9ca1b4782b9166bcba2a8e"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;reflection::Reflectable T&gt;
+                template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> cubos::<wbr />core::<wbr />ecs::<wbr />Types::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad9ee21fe8e9ca1b4782b9166bcba2a8e" class="m-doc-self">id</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
@@ -303,6 +332,29 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a3a73749c7e2b9dd4d28fbf5944300e9d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Types::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3a73749c7e2b9dd4d28fbf5944300e9d" class="m-doc-self">isResource</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id) const</span></span>
+            </h3>
+            <p>Checks if the given data type is a resource.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Data type identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the identifier refers to a resource.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a13f9b476d395f7529a6a48b44d60d1ee"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Types::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13f9b476d395f7529a6a48b44d60d1ee" class="m-doc-self">isComponent</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> id) const</span></span>
@@ -391,6 +443,20 @@
                 <tr>
                   <th>Returns</th>
                   <td>Whether the identifier refers to a tree relation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af9598f6255480370942ab5c0e6758d49"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">reflection::<wbr />TypeRegistry</a> cubos::<wbr />core::<wbr />ecs::<wbr />Types::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9598f6255480370942ab5c0e6758d49" class="m-doc-self">resources</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets a type registry with only the resource types.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Resource type registry.</td>
                 </tr>
               </tfoot>
             </table>
