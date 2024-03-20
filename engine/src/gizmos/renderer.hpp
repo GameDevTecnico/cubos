@@ -3,6 +3,7 @@
 #include <string>
 
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -10,6 +11,8 @@ namespace cubos::engine
     class GizmosRenderer final
     {
     public:
+        CUBOS_REFLECT;
+
         static constexpr int CutConeVertsPerBase = 16; ///< Number of vertexes in each face of a cut cone gizmo.
         static constexpr int RingSections = 32;        ///< Number of traversal sections (i.e. quads) in a ring gizmo.
 

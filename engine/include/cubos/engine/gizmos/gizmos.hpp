@@ -23,6 +23,8 @@ namespace cubos::engine
     class Gizmos final
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Space to draw a gizmo in.
         enum Space
         {
@@ -201,5 +203,4 @@ namespace cubos::engine
         uint32_t mIdInteractionLocked; ///< Interaction target gizmo.
         bool mLocked;                  ///< Whether the mouse has been pressed.
     };
-
 } // namespace cubos::engine
