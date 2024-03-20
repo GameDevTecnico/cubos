@@ -77,9 +77,17 @@ static void loadFromJSON(const std::string& prefix, const nlohmann::json& json, 
 
 static Settings loadFromFile(std::string_view path)
 {
-    // Mount the real settings file as `/settings.json`.
-    FileSystem::mount("/settings.json",
-                      std::make_unique<StandardArchive>(path, false /*isDirectory*/, false /*readOnly*/));
+    // If the settings file is not mounted, mount it.
+    if (FileSystem::find("/settings.json") == nullptr)
+    {
+        // Mount the real settings file as `/settings.json`.
+        if (!FileSystem::mount("/settings.json",
+                               std::make_unique<StandardArchive>(path, false /*isDirectory*/, false /*readOnly*/)))
+        {
+            CUBOS_ERROR("Couldn't mount the settings file at {}", path);
+            return {};
+        }
+    }
 
     // Read the contents of the file.
     std::string contents;
