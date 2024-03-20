@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move away from string tags to typed tags (#918, **@joaomanita**).
 - Force plugins to be added only once (#422, **@RiscadoA**).
 - Return direct references to resources instead of guards on World (#922, **@RiscadoA**).
+- Stop using old serialization to load Settings (#1100, **@RiscadoA**).
 
 ### Fixed
 
