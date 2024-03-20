@@ -22,6 +22,9 @@ namespace cubos::engine
         /// @brief Whether the controller is enabled. Mouse is only captured when enabled.
         bool enabled = true;
 
+        /// @brief Whether the controller uses unscaled delta time.
+        bool unscaledDeltaTime = false;
+
         /// @brief Action used to move the camera laterally (positive is right).
         std::string lateral = "move-lateral";
 
