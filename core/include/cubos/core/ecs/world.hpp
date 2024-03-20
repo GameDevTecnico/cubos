@@ -88,6 +88,10 @@ namespace cubos::core::ecs
             this->registerRelation(reflection::reflect<T>());
         }
 
+        /// @brief Unregisters a type.
+        /// @param type Rype
+        void unregister(const reflection::Type& type);
+
         /// @brief Returns the types registry of the world.
         /// @return Types registry.
         Types& types();
