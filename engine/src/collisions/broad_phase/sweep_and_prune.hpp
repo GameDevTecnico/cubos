@@ -19,6 +19,8 @@ namespace cubos::engine
     /// @ingroup broad-phase-collisions-plugin
     struct BroadPhaseSweepAndPrune
     {
+        CUBOS_REFLECT;
+
         /// @brief Marker used for sweep and prune.
         struct SweepMarker
         {
