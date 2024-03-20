@@ -26,6 +26,8 @@ namespace tesseratos
     class Toolbox final
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Checks if the tool with the given name is open.
         /// @param toolName Tool name.
         ///@return Whether the tool is open.
