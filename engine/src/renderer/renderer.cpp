@@ -1,3 +1,6 @@
+#include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/type.hpp>
+
 #include <cubos/engine/renderer/renderer.hpp>
 
 using cubos::core::gl::RenderDevice;
@@ -57,4 +60,10 @@ void BaseRenderer::resizeTex(glm::uvec2 size)
     framebufferDesc.targetCount = 1;
     framebufferDesc.targets[0].setTexture2DTarget(mTexture);
     mFramebuffer = mRenderDevice.createFramebuffer(framebufferDesc);
+}
+
+CUBOS_REFLECT_EXTERNAL_IMPL(cubos::engine::Renderer)
+{
+    return core::reflection::Type::create("cubos::engine::Renderer")
+        .with(core::reflection::ConstructibleTrait::typed<cubos::engine::Renderer>().withMoveConstructor().build());
 }

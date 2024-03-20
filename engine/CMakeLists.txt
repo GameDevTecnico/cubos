@@ -78,6 +78,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/renderer/vertex.cpp"
 	"src/renderer/frame.cpp"
 	"src/renderer/camera.cpp"
+	"src/renderer/environment.cpp"
 	"src/renderer/directional_light.cpp"
 	"src/renderer/point_light.cpp"
 	"src/renderer/spot_light.cpp"

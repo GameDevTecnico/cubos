@@ -1,3 +1,4 @@
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/gl/render_device.hpp>
 
 #include <cubos/engine/screen_picker/screen_picker.hpp>
@@ -5,6 +6,11 @@
 using cubos::engine::ScreenPicker;
 
 using namespace cubos::core::gl;
+
+CUBOS_REFLECT_IMPL(ScreenPicker)
+{
+    return core::ecs::TypeBuilder<ScreenPicker>("cubos::engine::ScreenPicker").build();
+}
 
 void ScreenPicker::init(cubos::core::gl::RenderDevice* currentRenderDevice, glm::ivec2 size)
 {
