@@ -37,17 +37,23 @@ static bool nullifyMenu(const Type& type, void* value);
 
 void DataInspector::show(const core::reflection::Type& type, const void* value)
 {
-    ImGui::BeginTable("inspector", 2);
-    this->inspect("", type, const_cast<void*>(value), true);
-    ImGui::EndTable();
+    if (ImGui::BeginTable("inspector", 2))
+    {
+        this->inspect("", type, const_cast<void*>(value), true);
+        ImGui::EndTable();
+    }
 }
 
 bool DataInspector::edit(const core::reflection::Type& type, void* value)
 {
-    ImGui::BeginTable("inspector", 2);
-    auto changed = this->inspect("", type, value, false);
-    ImGui::EndTable();
-    return changed;
+    if (ImGui::BeginTable("inspector", 2))
+    {
+        auto changed = this->inspect("", type, value, false);
+        ImGui::EndTable();
+        return changed;
+    }
+
+    return false;
 }
 
 bool DataInspector::inspect(const std::string& name, const Type& type, void* value, bool readOnly)
@@ -213,10 +219,12 @@ bool DataInspector::inspect(const std::string& name, const Type& type, void* val
 
                 if (ImGui::BeginPopupModal("DictPopup", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
                 {
-                    ImGui::BeginTable("DictPopupInsert", 2);
-                    inspect("key", trait.keyType(), mKey.get(), readOnly);
-                    inspect("value", trait.valueType(), mValue.get(), readOnly);
-                    ImGui::EndTable();
+                    if (ImGui::BeginTable("DictPopupInsert", 2))
+                    {
+                        inspect("key", trait.keyType(), mKey.get(), readOnly);
+                        inspect("value", trait.valueType(), mValue.get(), readOnly);
+                        ImGui::EndTable();
+                    }
 
                     if (mKeyExists)
                     {
