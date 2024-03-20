@@ -263,3 +263,5 @@ namespace cubos::core::io
 CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseButton);
 CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseAxis);
 CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::MouseState);
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::WindowEvent);
+CUBOS_REFLECT_EXTERNAL_DECL(cubos::core::io::Window);
