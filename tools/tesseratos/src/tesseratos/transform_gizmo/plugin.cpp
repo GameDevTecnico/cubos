@@ -112,7 +112,8 @@ static void checkRotation(Rotation& rotation, glm::vec3 globalPosition, glm::vec
 
 static void drawPositionGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
                               Query<Position&, LocalToWorld&> positionQuery, Gizmos& gizmos, const Input& input,
-                              const Window& window, Entity cameraEntity, Entity selectedEntity, bool useLocalAxis)
+                              const Window& window, Entity cameraEntity, Entity selectedEntity, bool useLocalAxis,
+                              double distance)
 {
     auto [camera, cameraLtw] = *cameraQuery.at(cameraEntity);
 
@@ -188,9 +189,11 @@ static void drawPositionGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
         yzColor = {1, 1, 1};
     }
 
+    auto drawPosition =
+        cameraPosition + glm::normalize(localToWorld.worldPosition() - cameraPosition) * (float)distance;
+
     gizmos.color(xyColor);
-    glm::mat4 transformXY =
-        glm::translate(glm::mat4(1.0F), localToWorld.worldPosition() + (rightVector + upVector) * 0.125F);
+    glm::mat4 transformXY = glm::translate(glm::mat4(1.0F), drawPosition + (rightVector + upVector) * 0.125F);
     if (useLocalAxis)
     {
         transformXY = transformXY * glm::toMat4(localToWorld.worldRotation());
@@ -199,8 +202,7 @@ static void drawPositionGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
 
     gizmos.drawBox("transform_gizmo.position.xy", transformXY);
     gizmos.color(xzColor);
-    glm::mat4 transformXZ =
-        glm::translate(glm::mat4(1.0F), localToWorld.worldPosition() + (rightVector + forwardVector) * 0.125F);
+    glm::mat4 transformXZ = glm::translate(glm::mat4(1.0F), drawPosition + (rightVector + forwardVector) * 0.125F);
     if (useLocalAxis)
     {
         transformXZ = transformXZ * glm::toMat4(localToWorld.worldRotation());
@@ -209,8 +211,7 @@ static void drawPositionGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
 
     gizmos.drawBox("transform_gizmo.position.xz", transformXZ);
     gizmos.color(yzColor);
-    glm::mat4 transformYZ =
-        glm::translate(glm::mat4(1.0F), localToWorld.worldPosition() + (upVector + forwardVector) * 0.125F);
+    glm::mat4 transformYZ = glm::translate(glm::mat4(1.0F), drawPosition + (upVector + forwardVector) * 0.125F);
     if (useLocalAxis)
     {
         transformYZ = transformYZ * glm::toMat4(localToWorld.worldRotation());
@@ -219,23 +220,21 @@ static void drawPositionGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
     gizmos.drawBox("transform_gizmo.position.yz", transformYZ);
 
     gizmos.color({0.7F, 0.7F, 0.7F});
-    gizmos.drawBox("", localToWorld.worldPosition() + glm::vec3{0.03F, 0.03F, 0.03F},
-                   localToWorld.worldPosition() - glm::vec3{0.03F, 0.03F, 0.03F});
+    gizmos.drawBox("", drawPosition + glm::vec3{0.03F, 0.03F, 0.03F}, drawPosition - glm::vec3{0.03F, 0.03F, 0.03F});
 
     gizmos.color(xColor);
-    gizmos.drawArrow("transform_gizmo.position.x", localToWorld.worldPosition() + rightVector * 0.03F, rightVector,
-                     0.03F, 0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.position.x", drawPosition + rightVector * 0.03F, rightVector, 0.03F, 0.07F, 0.7F);
     gizmos.color(yColor);
-    gizmos.drawArrow("transform_gizmo.position.y", localToWorld.worldPosition() + upVector * 0.03F, upVector, 0.03F,
-                     0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.position.y", drawPosition + upVector * 0.03F, upVector, 0.03F, 0.07F, 0.7F);
     gizmos.color(zColor);
-    gizmos.drawArrow("transform_gizmo.position.z", localToWorld.worldPosition() + forwardVector * 0.03F, forwardVector,
-                     0.03F, 0.07F, 0.7F);
+    gizmos.drawArrow("transform_gizmo.position.z", drawPosition + forwardVector * 0.03F, forwardVector, 0.03F, 0.07F,
+                     0.7F);
 }
 
 static void drawRotationGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
                               Query<Rotation&, LocalToWorld&> positionQuery, Gizmos& gizmos, const Input& input,
-                              const Window& window, Entity cameraEntity, Entity selectedEntity, bool useLocalAxis)
+                              const Window& window, Entity cameraEntity, Entity selectedEntity, bool useLocalAxis,
+                              double distance)
 {
     auto [camera, cameraLtw] = *cameraQuery.at(cameraEntity);
 
@@ -282,15 +281,18 @@ static void drawRotationGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
         zColor = {1, 1, 0};
     }
 
+    auto drawPosition =
+        cameraPosition + glm::normalize(localToWorld.worldPosition() - cameraPosition) * (float)distance;
+
     gizmos.color(xColor);
-    gizmos.drawRing("transform_gizmo.rotation.x", localToWorld.worldPosition() + (rightVector * 0.1F),
-                    localToWorld.worldPosition() - (rightVector * 0.01F), 1.4F, 1.25F);
+    gizmos.drawRing("transform_gizmo.rotation.x", drawPosition + (rightVector * 0.1F),
+                    drawPosition - (rightVector * 0.01F), 1.4F, 1.25F);
     gizmos.color(yColor);
-    gizmos.drawRing("transform_gizmo.rotation.y", localToWorld.worldPosition() + (upVector * 0.1F),
-                    localToWorld.worldPosition() - (upVector * 0.01F), 1.4F, 1.25F);
+    gizmos.drawRing("transform_gizmo.rotation.y", drawPosition + (upVector * 0.1F), drawPosition - (upVector * 0.01F),
+                    1.4F, 1.25F);
     gizmos.color(zColor);
-    gizmos.drawRing("transform_gizmo.rotation.z", localToWorld.worldPosition() + (forwardVector * 0.1F),
-                    localToWorld.worldPosition() - (forwardVector * 0.01F), 1.4F, 1.25F);
+    gizmos.drawRing("transform_gizmo.rotation.z", drawPosition + (forwardVector * 0.1F),
+                    drawPosition - (forwardVector * 0.01F), 1.4F, 1.25F);
 }
 
 void tesseratos::transformGizmoPlugin(Cubos& cubos)
@@ -327,10 +329,11 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
             }
 
             bool useLocal = settings.getBool("transformGizmo.useLocalAxis", true);
+            double distance = settings.getDouble("transformGizmo.distanceToCamera", 10.0F);
 
             drawPositionGizmo(cameraQuery, positionQuery, gizmos, input, window, activeCameras.entities[0],
-                              entitySelector.selection, useLocal);
+                              entitySelector.selection, useLocal, distance);
             drawRotationGizmo(cameraQuery, rotationQuery, gizmos, input, window, activeCameras.entities[0],
-                              entitySelector.selection, useLocal);
+                              entitySelector.selection, useLocal, distance);
         });
 }

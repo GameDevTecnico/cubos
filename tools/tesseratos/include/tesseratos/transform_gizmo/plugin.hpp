@@ -17,6 +17,8 @@ namespace tesseratos
     ///
     /// ## Settings
     /// - `"transformGizmo.useLocalAxis"` - whether to use local instead of global axis (default: `true`).
+    /// - `"transformGizmo.distanceToCamera"` - distance at which the gizmo is drawn, the larger the value the smaller
+    /// the gizmo will be (default: `10`).
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
