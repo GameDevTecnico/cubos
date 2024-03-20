@@ -48,6 +48,8 @@ namespace cubos::engine
     class Assets final
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Possible statuses for an asset.
         enum class Status
         {

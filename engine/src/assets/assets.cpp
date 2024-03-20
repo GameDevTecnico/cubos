@@ -6,13 +6,20 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
+#include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
 
+using cubos::core::reflection::ConstructibleTrait;
 using cubos::core::reflection::Type;
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(Assets)
+{
+    return Type::create("cubos::engine::Assets").with(ConstructibleTrait::typed<Assets>().build());
+}
 
 Assets::Assets()
 {
