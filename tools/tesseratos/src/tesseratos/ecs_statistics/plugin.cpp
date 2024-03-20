@@ -2,6 +2,7 @@
 
 #include <cubos/core/ecs/name.hpp>
 
+#include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 
 #include <tesseratos/ecs_statistics/plugin.hpp>
@@ -14,7 +15,9 @@ using cubos::core::ecs::DataTypeId;
 using cubos::core::ecs::Name;
 using cubos::core::ecs::SparseRelationTableId;
 using cubos::core::ecs::World;
+using cubos::core::reflection::Type;
 using cubos::engine::Cubos;
+using cubos::engine::DataInspector;
 using cubos::engine::Entity;
 
 namespace
@@ -27,6 +30,7 @@ namespace
         SparseRelationTableId selectedSparseRelationTableId{};
         bool showInactiveArchetypes{false};
         bool showInactiveSparseRelationTables{false};
+        const Type* selectedResourceType{nullptr};
     };
 } // namespace
 
@@ -41,7 +45,7 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
     cubos.system("show ECS statistics")
         .tagged(cubos::engine::imguiTag)
         .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("ECS Statistics"); })
-        .call([](const World& world, State& state, EntitySelector& selector) {
+        .call([](const World& world, State& state, EntitySelector& selector, DataInspector& inspector) {
             if (world.isAlive(selector.selection))
             {
                 state.selectedArchetype = world.archetype(selector.selection);
@@ -377,6 +381,58 @@ void tesseratos::ecsStatisticsPlugin(Cubos& cubos)
                     if (!continueSelectedSparseRelationTable)
                     {
                         state.selectedSparseRelationTableId = {};
+                    }
+                }
+                ImGui::PopID();
+
+                ImGui::EndTabItem();
+            }
+
+            if (ImGui::BeginTabItem("Resources"))
+            {
+                if (ImGui::BeginTable("Resources", 2,
+                                      ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit |
+                                          ImGuiTableFlags_BordersOuter))
+                {
+                    ImGui::TableSetupColumn("Name");
+                    ImGui::TableSetupColumn("Is Present");
+                    ImGui::TableHeadersRow();
+                    for (const auto& [type, name] : world.types().resources())
+                    {
+                        ImGui::TableNextRow();
+                        ImGui::TableNextColumn();
+                        if (ImGui::Button(name.c_str()))
+                        {
+                            state.selectedResourceType = type;
+                        }
+                        ImGui::TableNextColumn();
+                        ImGui::Text("%s", world.hasResource(*type) ? "true" : "false");
+                    }
+
+                    ImGui::EndTable();
+                }
+
+                ImGui::PushID("Selected Resource");
+                bool continueSelectedResource = true;
+                if (state.selectedResourceType != nullptr &&
+                    ImGui::CollapsingHeader("Selected Resource", &continueSelectedResource,
+                                            ImGuiTreeNodeFlags_DefaultOpen))
+                {
+                    ImGui::Text("Type: %s", state.selectedResourceType->name().c_str());
+                    ImGui::Separator();
+
+                    if (world.hasResource(*state.selectedResourceType))
+                    {
+                        inspector.show(*state.selectedResourceType, world.resource(*state.selectedResourceType));
+                    }
+                    else
+                    {
+                        ImGui::Text("<not present>");
+                    }
+
+                    if (!continueSelectedResource)
+                    {
+                        state.selectedResourceType = nullptr;
                     }
                 }
                 ImGui::PopID();
