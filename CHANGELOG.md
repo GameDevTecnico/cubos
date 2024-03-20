@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Make reflection work for all types, even those without reflection implemented (#1092, **@RiscadoA**).
+- Move away from string tags to typed tags (#918, **@joaomanita**).
 - Force plugins to be added only once (#422, **@RiscadoA**).
 
 ### Fixed
