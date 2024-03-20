@@ -1,9 +1,16 @@
 #include "renderer.hpp"
 #include <string>
 
+#include <cubos/core/ecs/reflection.hpp>
+
 using cubos::engine::GizmosRenderer;
 
 using namespace cubos::core::gl;
+
+CUBOS_REFLECT_IMPL(GizmosRenderer)
+{
+    return core::ecs::TypeBuilder<GizmosRenderer>("cubos::engine::GizmosRenderer").build();
+}
 
 void GizmosRenderer::initDrawPipeline()
 {

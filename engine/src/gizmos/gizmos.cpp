@@ -3,6 +3,8 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtx/transform.hpp>
 
+#include <cubos/core/ecs/reflection.hpp>
+
 #include <cubos/engine/gizmos/gizmos.hpp>
 
 #include "renderer.hpp"
@@ -16,6 +18,11 @@ using cubos::engine::Gizmos;
 using cubos::engine::GizmosRenderer;
 
 using namespace cubos::core::gl;
+
+CUBOS_REFLECT_IMPL(Gizmos)
+{
+    return core::ecs::TypeBuilder<Gizmos>("cubos::engine::Gizmos").build();
+}
 
 Gizmos::Gizmo::Gizmo(uint32_t id, glm::vec3 color, float lifespan)
     : id(id)
