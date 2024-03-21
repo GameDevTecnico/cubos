@@ -111,7 +111,7 @@ int main()
         while (!window->shouldClose())
         {
             auto sz = window->framebufferSize();
-            renderDevice.setViewport(0, 0, sz.x, sz.y);
+            renderDevice.setViewport(0, 0, static_cast<int>(sz.x), static_cast<int>(sz.y));
 
             renderDevice.clearColor(0.894F, 0.592F, 0.141F, 0.0F);
 

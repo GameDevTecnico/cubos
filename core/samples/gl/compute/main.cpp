@@ -122,7 +122,7 @@ int main()
 
             renderDevice.memoryBarrier(gl::MemoryBarriers::TextureAccess);
 
-            renderDevice.setViewport(0, 0, size.x, size.y);
+            renderDevice.setViewport(0, 0, static_cast<int>(size.x), static_cast<int>(size.y));
             renderDevice.setShaderPipeline(drawPp);
             renderDevice.setVertexArray(va);
             renderDevice.setIndexBuffer(ib);
