@@ -18,10 +18,49 @@ void Dispatcher::SystemSettings::copyFrom(const SystemSettings* other)
 
 Dispatcher::~Dispatcher()
 {
-    for (System* system : mSystems)
+}
+
+void Dispatcher::removeTag(const std::string& tag)
+{
+    mTagSettings.erase(tag);
+
+    for (auto& [name, settings] : mTagSettings)
     {
-        delete system;
+        std::erase_if(settings->after.tag, [&](const std::string& t) { return t == tag; });
+        std::erase_if(settings->before.tag, [&](const std::string& t) { return t == tag; });
+        std::erase_if(settings->inherits, [&](const std::string& t) { return t == tag; });
     }
+
+    for (auto& system : mPendingSystems)
+    {
+        std::erase_if(system->tags, [&](const std::string& t) { return t == tag; });
+        std::erase_if(system->settings->after.tag, [&](const std::string& t) { return t == tag; });
+        std::erase_if(system->settings->before.tag, [&](const std::string& t) { return t == tag; });
+        std::erase_if(system->settings->inherits, [&](const std::string& t) { return t == tag; });
+    }
+}
+
+void Dispatcher::removeSystem(SystemId id)
+{
+    auto* system = mPendingSystems[id.inner];
+    mPendingSystems[id.inner] = nullptr;
+
+    for (auto& [name, settings] : mTagSettings)
+    {
+        std::erase_if(settings->after.system, [&](const System* s) { return s == system; });
+        std::erase_if(settings->before.system, [&](const System* s) { return s == system; });
+    }
+
+    for (auto& otherSystem : mPendingSystems)
+    {
+        if (otherSystem != nullptr)
+        {
+            std::erase_if(otherSystem->settings->after.system, [&](const System* s) { return s == system; });
+            std::erase_if(otherSystem->settings->before.system, [&](const System* s) { return s == system; });
+        }
+    }
+
+    delete system;
 }
 
 void Dispatcher::addTag(const std::string& tag)
@@ -85,13 +124,12 @@ void Dispatcher::systemAddTag(const std::string& tag)
 {
     CUBOS_ASSERT(tag != "main", "Systems cannot be tagged main");
     ENSURE_CURR_SYSTEM();
+    ENSURE_SYSTEM_SETTINGS(mCurrSystem);
     ENSURE_TAG_SETTINGS(tag);
-    mCurrSystem->tags.insert(tag);
-    std::shared_ptr<GroupStep> group = mMainStep->findGroup(tag);
-    if (group != nullptr)
+    mCurrSystem->settings->inherits.push_back(tag);
+    if (mMainStep->findGroup(tag) != nullptr)
     {
-        mCurrSystem->groupTag = tag;
-        mCurrGroup = group;
+        this->systemAddGroup(tag);
     }
 }
 
@@ -128,7 +166,7 @@ void Dispatcher::handleTagInheritance(std::shared_ptr<SystemSettings>& settings)
 {
     for (auto& parentTag : settings->inherits)
     {
-        auto& parentSettings = mTagSettings[parentTag];
+        auto& parentSettings = mCompiledTagSettings[parentTag];
         handleTagInheritance(parentSettings);
         settings->copyFrom(parentSettings.get());
     }
@@ -137,8 +175,15 @@ void Dispatcher::handleTagInheritance(std::shared_ptr<SystemSettings>& settings)
 
 void Dispatcher::compileChain()
 {
-    // Implement tag inheritance by copying configs from parent tags
+    mMainStep->clear();
+
+    // Copy all tag settings to a new vector.
     for (auto& [tag, settings] : mTagSettings)
+    {
+    }
+
+    // Implement tag inheritance by copying configs from parent tags
+    for (auto& [tag, settings] : mCompiledTagSettings)
     {
         handleTagInheritance(settings);
     }
@@ -146,6 +191,11 @@ void Dispatcher::compileChain()
     // Implement system tag settings with custom settings
     for (System* system : mPendingSystems)
     {
+        if (system == nullptr)
+        {
+            continue;
+        }
+
         // Add negative tags when the system doesn't have the respective positive tags
         for (auto& [tag, settings] : mTagSettings)
         {
@@ -169,6 +219,11 @@ void Dispatcher::compileChain()
     std::vector<DFSNode> nodes;
     for (System* system : mPendingSystems)
     {
+        if (system == nullptr)
+        {
+            continue;
+        }
+
         nodes.push_back(DFSNode{DFSNode::WHITE, system, "", system->settings});
     }
 
@@ -189,16 +244,26 @@ void Dispatcher::compileChain()
         }
     }
 
-    // The algorithm expects nodes to be added to the head of a list, instead of the back. To save
-    // on move operations, just reverse the final list for the same effect.
-    std::reverse(mSystems.begin(), mSystems.end());
-
     CUBOS_DEBUG("Compiled system chain:");
     mMainStep->debug(0);
 
     mPendingSystems.clear();
     mCurrSystem = nullptr;
     mTagSettings.clear();
+}
+
+void Dispatcher::clear()
+{
+    mPendingSystems.clear();
+    mTagSettings.clear();
+    mConditions.clear();
+    mRunConditions.reset();
+    mRetConditions.reset();
+    mCurrSystem = nullptr;
+    mCurrTag = "";
+
+    mMainStep = std::make_shared<GroupStep>("main", nullptr);
+    mCurrGroup = mMainStep;
 }
 
 bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
@@ -242,22 +307,6 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
                     }
                 }
             }
-
-            // Now visit systems
-            for (System* system : node.settings->before.system)
-            {
-                SystemSettings* settings = system->settings.get();
-                for (auto it = nodes.begin(); it != nodes.end(); it++)
-                {
-                    if (it->settings.get() == settings)
-                    {
-                        if (dfsVisit(*it, nodes))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
         }
 
         // All children nodes were visited; mark this node as complete
@@ -279,7 +328,7 @@ void Dispatcher::SystemStep::debug(std::size_t depth)
     CUBOS_DEBUG(format.c_str(), mSystem->name);
 }
 
-void Dispatcher::SystemStep::call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+void Dispatcher::SystemStep::call(SystemContext& ctx, std::vector<ecs::System<bool>>& conditions,
                                   std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                                   std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions)
 {
@@ -297,7 +346,7 @@ void Dispatcher::SystemStep::call(CommandBuffer& cmds, std::vector<ecs::System<b
                 if (!runConditions.test(i))
                 {
                     runConditions.set(i);
-                    if (conditions[i].run({cmds}))
+                    if (conditions[i].run(ctx))
                     {
                         retConditions.set(i);
                     }
@@ -317,11 +366,11 @@ void Dispatcher::SystemStep::call(CommandBuffer& cmds, std::vector<ecs::System<b
 
     if (canRun)
     {
-        mSystem->system.run({cmds});
+        mSystem->system.run(ctx);
     }
 
     // TODO: Check synchronization concerns when this gets multithreaded
-    cmds.commit();
+    ctx.cmdBuffer.commit();
 }
 
 void Dispatcher::GroupStep::debug(std::size_t depth)
@@ -335,7 +384,7 @@ void Dispatcher::GroupStep::debug(std::size_t depth)
     }
 }
 
-void Dispatcher::GroupStep::call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+void Dispatcher::GroupStep::call(SystemContext& ctx, std::vector<ecs::System<bool>>& conditions,
                                  std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                                  std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions)
 {
@@ -353,7 +402,7 @@ void Dispatcher::GroupStep::call(CommandBuffer& cmds, std::vector<ecs::System<bo
                 {
                     runConditions.set(i);
                 }
-                if ((conditions[i]).run({cmds}))
+                if ((conditions[i]).run(ctx))
                 {
                     retConditions.set(i);
                 }
@@ -376,7 +425,7 @@ void Dispatcher::GroupStep::call(CommandBuffer& cmds, std::vector<ecs::System<bo
         {
             for (auto& step : mSteps)
             {
-                step->call(cmds, conditions, runConditions, retConditions);
+                step->call(ctx, conditions, runConditions, retConditions);
             }
         }
         if (groupTag == "main")
@@ -386,11 +435,11 @@ void Dispatcher::GroupStep::call(CommandBuffer& cmds, std::vector<ecs::System<bo
     }
 }
 
-void Dispatcher::callSystems(CommandBuffer& cmds)
+void Dispatcher::callSystems(SystemContext& ctx)
 {
     // Clear conditions bitmasks
     mRunConditions.reset();
     mRetConditions.reset();
 
-    mMainStep->call(cmds, mConditions, mRunConditions, mRetConditions);
+    mMainStep->call(ctx, mConditions, mRunConditions, mRetConditions);
 }

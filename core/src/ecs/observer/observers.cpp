@@ -21,7 +21,7 @@ bool Observers::notifyAdd(CommandBuffer& commandBuffer, Entity entity, ColumnId 
         auto* observer = mObservers[it->second.inner];
         if (observer != nullptr)
         {
-            observer->run({commandBuffer, entity});
+            observer->run({.cmdBuffer = commandBuffer, .observedEntity = entity});
             triggered = true;
         }
     }
@@ -39,7 +39,7 @@ bool Observers::notifyRemove(CommandBuffer& commandBuffer, Entity entity, Column
         auto* observer = mObservers[it->second.inner];
         if (observer != nullptr)
         {
-            observer->run({commandBuffer, entity});
+            observer->run({.cmdBuffer = commandBuffer, .observedEntity = entity});
             triggered = true;
         }
     }

@@ -12,6 +12,7 @@
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Dispatcher;
 using cubos::core::ecs::System;
+using cubos::core::ecs::SystemContext;
 using cubos::core::ecs::World;
 
 /// System which pushes N to the order vector.
@@ -71,16 +72,22 @@ static void assertOrder(World& world, const std::vector<int>& values)
 /// @param values The values to check for.
 static void dispatchAndCheck(World& world, Dispatcher& dispatcher, CommandBuffer& cmdBuffer, std::vector<int> values)
 {
-    dispatcher.compileChain();
-
-    // Run the test twice to ensure the dispatcher is stateless.
-    for (int i = 1; i <= 2; ++i)
+    // Compile it twice to ensure the same configuration always produces the same result.
+    for (int j = 1; j <= 2; ++j)
     {
-        INFO("Run ", i);
-        world.resource<std::vector<int>>().clear();
-        world.resource<int>() = 0;
-        dispatcher.callSystems(cmdBuffer);
-        assertOrder(world, values);
+        dispatcher.compileChain();
+
+        // Run the test twice to ensure the dispatcher is stateless.
+        for (int i = 1; i <= 2; ++i)
+        {
+            INFO("Run ", i);
+            world.resource<std::vector<int>>().clear();
+            world.resource<int>() = 0;
+
+            SystemContext ctx{.cmdBuffer = cmdBuffer};
+            dispatcher.callSystems(ctx);
+            assertOrder(world, values);
+        }
     }
 }
 

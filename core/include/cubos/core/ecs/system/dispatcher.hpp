@@ -50,12 +50,27 @@
 
 namespace cubos::core::ecs
 {
+    /// @brief Identifies a system added to a @ref Dispatcher.
+    struct SystemId
+    {
+        std::size_t inner; ///< System identifier.
+
+        /// @brief Compares two system identifiers for equality.
+        /// @param other Other system identifier.
+        /// @return Whether the two system identifiers are equal.
+        bool operator==(const SystemId& other) const = default;
+    };
+
     /// @brief Used to add systems and relations between them and then dispatch them all at once.
     /// @ingroup core-ecs-system
     class Dispatcher
     {
     public:
         ~Dispatcher();
+
+        /// @brief Removes all configuration related to the given tag.
+        /// @param tag Tag.
+        void removeTag(const std::string& tag);
 
         /// @brief Adds a tag, and sets it as the current tag for further settings.
         /// @param tag Tag to add.
@@ -91,7 +106,12 @@ namespace cubos::core::ecs
         /// @brief Adds a system, and sets it as the current system for further configuration.
         /// @param name System name.
         /// @param system System to add.
-        void addSystem(std::string name, ecs::System<void> system);
+        /// @return System identifier.
+        SystemId addSystem(std::string name, ecs::System<void> system);
+
+        /// @brief Removes a system.
+        /// @param id System identifier.
+        void removeSystem(SystemId id);
 
         /// @brief Sets the tag for the current system.
         /// @param tag Tag to run under.
@@ -118,10 +138,13 @@ namespace cubos::core::ecs
         /// Takes all pending systems and determines their execution order.
         void compileChain();
 
+        /// @brief Clears the dispatcher, removing all tags and systems.
+        void clear();
+
         /// @brief Calls all systems in the compiled call chain. @ref compileChain() must be called
         /// prior to this.
-        /// @param cmds Command buffer.
-        void callSystems(CommandBuffer& cmds);
+        /// @param ctx System context.
+        void callSystems(SystemContext& ctx);
 
         struct Dependency;
         struct SystemSettings;
@@ -150,6 +173,7 @@ namespace cubos::core::ecs
         {
             std::string name;
             std::shared_ptr<SystemSettings> settings;
+            std::shared_ptr<SystemSettings> compiledSettings;
             ecs::System<void> system;
             std::unordered_set<std::string> tags;
             std::string groupTag = "main";
@@ -160,7 +184,7 @@ namespace cubos::core::ecs
         public:
             virtual ~Step() = default;
             virtual void debug(std::size_t depth) = 0;
-            virtual void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+            virtual void call(SystemContext& ctx, std::vector<ecs::System<bool>>& conditions,
                               std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                               std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) = 0;
         };
@@ -174,7 +198,7 @@ namespace cubos::core::ecs
             }
 
             void debug(std::size_t depth) override;
-            void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+            void call(SystemContext& ctx, std::vector<ecs::System<bool>>& conditions,
                       std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                       std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) override;
 
@@ -197,7 +221,7 @@ namespace cubos::core::ecs
             }
 
             void debug(std::size_t depth) override;
-            void call(CommandBuffer& cmds, std::vector<ecs::System<bool>>& conditions,
+            void call(SystemContext& ctx, std::vector<ecs::System<bool>>& conditions,
                       std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& runConditions,
                       std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>& retConditions) override;
 
@@ -263,6 +287,20 @@ namespace cubos::core::ecs
                 }
             }
 
+            void clear()
+            {
+                std::vector<std::shared_ptr<Step>> newSteps{};
+                for (const auto& step : mSteps)
+                {
+                    if (auto groupStep = std::dynamic_pointer_cast<GroupStep>(step))
+                    {
+                        groupStep->clear();
+                        newSteps.push_back(groupStep);
+                    }
+                }
+                mSteps = newSteps;
+            }
+
             const std::string& getGroupTag()
             {
                 return groupTag;
@@ -308,9 +346,10 @@ namespace cubos::core::ecs
 
         // Variables for holding information before call chain is compiled.
 
-        std::vector<System*> mPendingSystems;                                ///< All systems.
-        std::map<std::string, std::shared_ptr<SystemSettings>> mTagSettings; ///< All tags.
-        std::vector<ecs::System<bool>> mConditions;                          ///< All conditions.
+        std::vector<System*> mPendingSystems;                                        ///< All systems.
+        std::map<std::string, std::shared_ptr<SystemSettings>> mTagSettings;         ///< All tags.
+        std::map<std::string, std::shared_ptr<SystemSettings>> mCompiledTagSettings; ///< Processed tags.
+        std::vector<ecs::System<bool>> mConditions;                                  ///< All conditions.
         std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>
             mRunConditions; ///< Bitset of conditions that run in this iteration.
         std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> mRetConditions; ///< Bitset of conditions return values.
@@ -319,7 +358,6 @@ namespace cubos::core::ecs
 
         // Variables for holding information after call chain is compiled.
 
-        std::vector<System*> mSystems; ///< Compiled order of running systems.
         std::shared_ptr<GroupStep> mMainStep = std::make_shared<GroupStep>("main", nullptr);
         std::shared_ptr<GroupStep> mCurrGroup = mMainStep;
     };
@@ -339,11 +377,12 @@ namespace cubos::core::ecs
         mCurrGroup->conditions |= bit;
     }
 
-    inline void Dispatcher::addSystem(std::string name, ecs::System<void> system)
+    inline SystemId Dispatcher::addSystem(std::string name, ecs::System<void> system)
     {
         // Wrap the system and put it in the pending queue
         mPendingSystems.push_back(new System{std::move(name), nullptr, std::move(system), {}});
         mCurrSystem = mPendingSystems.back();
+        return SystemId{mPendingSystems.size() - 1};
     }
 
     inline void Dispatcher::systemAddCondition(ecs::System<bool> condition)

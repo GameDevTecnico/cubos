@@ -1,0 +1,25 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::PluginQueue.
+/// @ingroup core-ecs
+
+#pragma once
+
+#include <mutex>
+#include <vector>
+
+namespace cubos::core::ecs
+{
+    class Cubos;
+
+    /// @brief Function pointer type representing a plugin.
+    using Plugin = void (*)(Cubos&);
+
+    /// @brief Stores plugin operations to be executed later.
+    /// @ingroup core-ecs
+    struct PluginQueue final
+    {
+        std::vector<Plugin> toAdd;
+        std::vector<Plugin> toRemove;
+        std::mutex mutex;
+    };
+} // namespace cubos::core::ecs
