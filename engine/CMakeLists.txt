@@ -106,6 +106,9 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/render/g_buffer/plugin.cpp"
 	"src/render/g_buffer/g_buffer.cpp"
+
+	"src/render/target/plugin.cpp"
+	"src/render/target/target.cpp"
 )
 
 # Create cubos engine
