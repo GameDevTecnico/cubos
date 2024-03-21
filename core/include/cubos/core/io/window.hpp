@@ -181,11 +181,11 @@ namespace cubos::core::io
 
         /// @brief Gets the window size, which may differ from the framebuffer size.
         /// @return Window size, in screen coordinates.
-        virtual glm::ivec2 size() const = 0;
+        virtual glm::uvec2 size() const = 0;
 
         /// @brief Gets the window framebuffer size, which may differ from the window size.
         /// @return Window framebuffer size, in pixels.
-        virtual glm::ivec2 framebufferSize() const = 0;
+        virtual glm::uvec2 framebufferSize() const = 0;
 
         /// @brief Gets the window content scale, commonly known as "DPI scale".
         /// @return Ratio between the current DPI and the platform's default DPI.

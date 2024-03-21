@@ -27,8 +27,8 @@ namespace cubos::core::io
         void pollEvents() override;
         void swapBuffers() override;
         gl::RenderDevice& renderDevice() const override;
-        glm::ivec2 size() const override;
-        glm::ivec2 framebufferSize() const override;
+        glm::uvec2 size() const override;
+        glm::uvec2 framebufferSize() const override;
         float contentScale() const override;
         bool shouldClose() const override;
         double time() const override;

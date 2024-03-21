@@ -138,7 +138,7 @@ gl::RenderDevice& GLFWWindow::renderDevice() const
 #endif
 }
 
-glm::ivec2 GLFWWindow::size() const
+glm::uvec2 GLFWWindow::size() const
 {
 #ifdef WITH_GLFW
     int width;
@@ -150,7 +150,7 @@ glm::ivec2 GLFWWindow::size() const
 #endif
 }
 
-glm::ivec2 GLFWWindow::framebufferSize() const
+glm::uvec2 GLFWWindow::framebufferSize() const
 {
 #ifdef WITH_GLFW
     int width;
