@@ -27,7 +27,7 @@ int main()
 
         auto sz = window->framebufferSize();
         renderDevice.clearColor(0.0, 0.0, 0.0, 0.0F);
-        renderDevice.setViewport(0, 0, sz.x, sz.y);
+        renderDevice.setViewport(0, 0, static_cast<int>(sz.x), static_cast<int>(sz.y));
 
         auto vp = glm::perspective(glm::radians(70.0F), float(sz.x) / float(sz.y), 0.1F, 1000.0F) *
                   glm::lookAt(glm::vec3{3 * sinf((float)t), 3, 3 * cosf((float)t)}, glm::vec3{0.0F, 0.0F, 0.0F},
