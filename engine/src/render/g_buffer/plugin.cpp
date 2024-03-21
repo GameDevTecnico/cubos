@@ -3,19 +3,23 @@
 
 #include <cubos/engine/render/g_buffer/g_buffer.hpp>
 #include <cubos/engine/render/g_buffer/plugin.hpp>
+#include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/target/target.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 using cubos::core::gl::Texture2DDesc;
 using cubos::core::gl::TextureFormat;
 using cubos::core::gl::Usage;
 using cubos::core::io::Window;
 
-CUBOS_DEFINE_TAG(cubos::engine::resizeRenderTargetTag);
 CUBOS_DEFINE_TAG(cubos::engine::createGBufferTag);
 CUBOS_DEFINE_TAG(cubos::engine::drawToGBufferTag);
 
 void cubos::engine::gBufferPlugin(Cubos& cubos)
 {
+    cubos.depends(windowPlugin);
+    cubos.depends(renderTargetPlugin);
+
     cubos.component<GBuffer>();
 
     cubos.tag(createGBufferTag).after(resizeRenderTargetTag);

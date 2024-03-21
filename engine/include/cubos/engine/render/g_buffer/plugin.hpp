@@ -19,9 +19,6 @@ namespace cubos::engine
     /// - @ref window-plugin
     /// - @ref render-target-plugin
 
-    // TODO move this to render target plugin when that's done
-    extern Tag resizeRenderTargetTag;
-
     /// @brief Recreates the GBuffer if necessary - for example, due to a render target resize.
     extern Tag createGBufferTag;
 
