@@ -61,6 +61,7 @@ add_executable(
 	ecs/query/filter.cpp
 	ecs/system/access.cpp
 	ecs/system/registry.cpp
+	ecs/system/schedule.cpp
 	ecs/observer/observers.cpp
 	ecs/stress.cpp
 

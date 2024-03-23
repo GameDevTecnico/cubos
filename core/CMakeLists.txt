@@ -103,6 +103,7 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/table/tables.cpp"
 
 	"src/ecs/system/access.cpp"
+	"src/ecs/system/schedule.cpp"
 	"src/ecs/system/registry.cpp"
 	"src/ecs/system/system.cpp"
 	"src/ecs/system/options.cpp"
