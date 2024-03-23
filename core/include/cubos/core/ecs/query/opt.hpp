@@ -90,6 +90,17 @@ namespace cubos::core::ecs
             return mValue;
         }
 
+        /// @brief Gets the underlying value.
+        ///
+        /// Aborts if there's no value.
+        ///
+        /// @return Reference to value.
+        const T& value() const
+        {
+            CUBOS_ASSERT(mContains, "Optional does not contain value");
+            return mValue;
+        }
+
         /// @copydoc contains()
         operator bool() const
         {
@@ -106,6 +117,14 @@ namespace cubos::core::ecs
         T* operator->()
         {
             return &this->value();
+        }
+
+        /// @brief Compares with another optional value.
+        /// @param other Other value.
+        /// @return Whether they're equal.
+        bool operator==(const Opt<T>& other) const
+        {
+            return (!mContains && !other.mContains) || (mContains && other.mContains && mValue == other.mValue);
         }
 
     private:
