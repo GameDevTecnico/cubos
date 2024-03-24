@@ -1,4 +1,4 @@
-#include <cubos/core/ecs/tag.hpp>
+#include <cubos/core/ecs/system/tag.hpp>
 
 using cubos::core::ecs::Tag;
 
