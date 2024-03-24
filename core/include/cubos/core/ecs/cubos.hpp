@@ -11,7 +11,7 @@
 #include <cubos/core/ecs/system/arguments/event/pipe.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/ecs/system/system.hpp>
-#include <cubos/core/ecs/tag.hpp>
+#include <cubos/core/ecs/system/tag.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs

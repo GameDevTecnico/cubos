@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include <cubos/core/ecs/tag.hpp>
-
 #include <cubos/engine/prelude.hpp>
 
 #include "potentially_colliding_with.hpp"
