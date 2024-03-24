@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include <cubos/core/ecs/tag.hpp>
-
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/transform/child_of.hpp>
 #include <cubos/engine/transform/local_to_parent.hpp>

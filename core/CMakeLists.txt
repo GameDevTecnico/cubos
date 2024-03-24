@@ -105,6 +105,7 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/system/access.cpp"
 	"src/ecs/system/schedule.cpp"
 	"src/ecs/system/registry.cpp"
+	"src/ecs/system/tag.cpp"
 	"src/ecs/system/system.cpp"
 	"src/ecs/system/options.cpp"
 	"src/ecs/system/dispatcher.cpp"
@@ -126,7 +127,6 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/query/node/related.cpp"
 
 	"src/ecs/reflection.cpp"
-	"src/ecs/tag.cpp"
 	"src/ecs/blueprint.cpp"
     "src/ecs/name.cpp"
 	"src/ecs/world.cpp"
