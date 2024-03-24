@@ -4,12 +4,7 @@
 
 #pragma once
 
-#include <functional>
 #include <memory>
-#include <optional>
-#include <typeindex>
-#include <unordered_set>
-#include <variant>
 
 #include <cubos/core/ecs/system/access.hpp>
 #include <cubos/core/ecs/system/arguments/commands.hpp>
