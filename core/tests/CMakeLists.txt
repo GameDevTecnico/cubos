@@ -62,6 +62,7 @@ add_executable(
 	ecs/system/access.cpp
 	ecs/system/registry.cpp
 	ecs/system/schedule.cpp
+	ecs/system/planner.cpp
 	ecs/observer/observers.cpp
 	ecs/stress.cpp
 
