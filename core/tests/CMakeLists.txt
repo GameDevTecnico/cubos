@@ -65,6 +65,8 @@ add_executable(
 
 	geom/box.cpp
 	geom/capsule.cpp
+
+	thread/task.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
