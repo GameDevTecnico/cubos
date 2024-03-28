@@ -109,6 +109,9 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/render/target/plugin.cpp"
 	"src/render/target/target.cpp"
+
+	"src/render/depth/plugin.cpp"
+	"src/render/depth/depth.cpp"
 )
 
 # Create cubos engine

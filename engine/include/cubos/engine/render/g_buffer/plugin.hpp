@@ -20,9 +20,11 @@ namespace cubos::engine
     /// - @ref render-target-plugin
 
     /// @brief Recreates the GBuffer if necessary - for example, due to a render target resize.
+    /// @ingroup render-g-buffer-plugin
     extern Tag createGBufferTag;
 
     /// @brief Systems which draw to GBuffer textures should be tagged with this.
+    /// @ingroup render-g-buffer-plugin
     extern Tag drawToGBufferTag;
 
     /// @brief Plugin entry function.
