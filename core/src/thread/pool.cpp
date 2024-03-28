@@ -1,4 +1,4 @@
-#include <cubos/core/thread_pool.hpp>
+#include <cubos/core/thread/pool.hpp>
 
 using namespace cubos::core;
 

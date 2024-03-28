@@ -23,7 +23,7 @@ message("# Building core tests: " ${BUILD_CORE_TESTS})
 # Set core source files
 set(CUBOS_CORE_SOURCE
 	"src/log.cpp"
-	"src/thread_pool.cpp"
+	"src/thread/pool.cpp"
 
 	"src/memory/stream.cpp"
 	"src/memory/standard_stream.cpp"
