@@ -32,7 +32,6 @@ TEST_CASE("ecs::Planner")
     auto trueTwice8 = registry.add("trueTwice8", makeCondition(world, pushToOrderAndTrueNTimes<8, 2>));
 
     Planner planner{};
-    bool failed = false;
     std::vector<int> expected{};
 
     SUBCASE("simple systems run in default order")
@@ -58,7 +57,7 @@ TEST_CASE("ecs::Planner")
         auto leaf2 = planner.add(system2);
         planner.add(system3);
 
-        planner.order(leaf1, leaf2);
+        CHECK(planner.order(leaf1, leaf2));
 
         SUBCASE("valid order")
         {
@@ -68,18 +67,25 @@ TEST_CASE("ecs::Planner")
 
             SUBCASE("redundancy")
             {
-                planner.order(leaf1, leaf2);
+                CHECK(planner.order(leaf1, leaf2));
             }
 
             expected = {3, 1, 2};
         }
 
-        SUBCASE("cyclic dependency")
-        {
-            planner.order(leaf2, leaf1);
+        CHECK_FALSE(planner.order(leaf2, leaf1)); // Can't introduce cyclic dependency.
+    }
 
-            failed = true;
-        }
+    SUBCASE("ordering is transitive")
+    {
+        auto leaf1 = planner.add(system1);
+        auto leaf2 = planner.add(system2);
+        auto tag1 = planner.add();
+
+        CHECK(planner.order(leaf1, tag1));
+        CHECK(planner.order(tag1, leaf2));
+
+        expected = {1, 2};
     }
 
     SUBCASE("conditions run with same constraints as their tags")
@@ -88,7 +94,7 @@ TEST_CASE("ecs::Planner")
         auto leaf2 = planner.add(system2);
         planner.add(system3);
 
-        planner.order(leaf1, leaf2);
+        CHECK(planner.order(leaf1, leaf2));
         planner.onlyIf(leaf2, true5);
 
         SUBCASE("single condition")
@@ -117,7 +123,7 @@ TEST_CASE("ecs::Planner")
         auto tag2 = planner.add();
         CHECK(planner.tag(leaf3, tag2));
 
-        planner.order(tag1, tag2);
+        CHECK(planner.order(tag1, tag2));
 
         SUBCASE("no internal ordering")
         {
@@ -126,10 +132,145 @@ TEST_CASE("ecs::Planner")
 
         SUBCASE("with internal ordering")
         {
-            planner.order(leaf1, leaf2);
+            CHECK(planner.order(leaf1, leaf2));
 
             expected = {1, 2, 3};
         }
+    }
+
+    SUBCASE("conditions affect entire tags")
+    {
+        auto leaf1 = planner.add(system1);
+        auto leaf2 = planner.add(system2);
+        auto leaf3 = planner.add(system3);
+
+        auto tag1 = planner.add();
+        auto tag2 = planner.add();
+        auto tag3 = planner.add();
+
+        CHECK(planner.tag(leaf1, tag1));
+        CHECK(planner.tag(leaf2, tag2));
+        CHECK(planner.tag(tag1, tag3));
+        CHECK(planner.tag(tag2, tag3));
+        CHECK(planner.tag(leaf3, tag3));
+
+        SUBCASE("evaluates to true")
+        {
+            planner.onlyIf(tag3, true5);
+
+            expected = {5, 3, 2, 1};
+        }
+
+        SUBCASE("evaluates to false")
+        {
+            planner.onlyIf(tag3, false6);
+
+            expected = {6};
+        }
+    }
+
+    SUBCASE("systems and conditions within nested repeat tags")
+    {
+        auto leaf1 = planner.add(system1);
+        auto leaf2 = planner.add(system2);
+
+        auto tag1 = planner.add();
+        auto tag2 = planner.add();
+
+        planner.onlyIf(leaf2, true5);
+
+        CHECK(planner.tag(leaf1, tag1));
+        CHECK(planner.tag(leaf2, tag2));
+        CHECK(planner.tag(tag2, tag1));
+
+        CHECK(planner.repeatWhile(tag1, trueOnce7));
+        CHECK(planner.repeatWhile(tag2, trueTwice8));
+
+        expected = {7, 8, 1, 5, 2, 8, 5, 2, 8, 7};
+    }
+
+    SUBCASE("two repeating parents are forbidden")
+    {
+        auto tag1 = planner.add();
+        auto tag2 = planner.add();
+        auto tag3 = planner.add();
+
+        CHECK(planner.repeatWhile(tag1, trueOnce7));
+        CHECK_FALSE(planner.repeatWhile(tag1, trueTwice8)); // Can't specify two repeats for same tag.
+
+        SUBCASE("fail in tag")
+        {
+            CHECK(planner.repeatWhile(tag2, trueTwice8));
+            CHECK(planner.tag(tag3, tag1));
+            CHECK_FALSE(planner.tag(tag3, tag2));
+        }
+
+        SUBCASE("fail in repeatWhile")
+        {
+            CHECK(planner.tag(tag3, tag1));
+            CHECK(planner.tag(tag3, tag2));
+            CHECK_FALSE(planner.repeatWhile(tag2, trueTwice8));
+        }
+    }
+
+    SUBCASE("system runs before all other systems through negate")
+    {
+        auto leaf1 = planner.add(system1);
+        planner.add(system2);
+        planner.add(system3);
+
+        CHECK(planner.negate(planner.negate(leaf1)) == leaf1);
+
+        CHECK(planner.order(leaf1, planner.negate(leaf1)));
+
+        // Cycle is detected correctly.
+        CHECK_FALSE(planner.order(planner.negate(leaf1), leaf1));
+
+        expected = {1, 3, 2};
+    }
+
+    SUBCASE("negated tags cannot be set to be repeating, directly or indirectly")
+    {
+        planner.add(system1);
+        auto all = planner.negate(planner.add());
+
+        SUBCASE("directly")
+        {
+            CHECK_FALSE(planner.repeatWhile(all, trueTwice8));
+
+            expected = {1};
+        }
+
+        SUBCASE("indirectly, fail on tag")
+        {
+            auto tag1 = planner.add();
+
+            CHECK(planner.repeatWhile(tag1, trueTwice8));
+            CHECK_FALSE(planner.tag(all, tag1));
+
+            expected = {8, 1, 8, 8};
+        }
+
+        SUBCASE("indirectly, fail on repeatWhile")
+        {
+            auto tag1 = planner.add();
+
+            CHECK(planner.tag(all, tag1));
+            CHECK_FALSE(planner.repeatWhile(tag1, trueTwice8));
+
+            expected = {1};
+        }
+    }
+
+    SUBCASE("tag which refers to all systems")
+    {
+        auto leaf1 = planner.add(system1);
+        planner.add(system2);
+        planner.add(system3);
+        auto all = planner.negate(planner.add());
+
+        CHECK_FALSE(planner.order(all, leaf1)); // Would require leaf1 running before leaf1.
+        CHECK_FALSE(planner.order(leaf1, all)); // Would require leaf1 running after leaf1.
     }
 
     SUBCASE("parent-child cycles are forbidden")
@@ -138,6 +279,7 @@ TEST_CASE("ecs::Planner")
         auto tag2 = planner.add();
         auto tag3 = planner.add();
 
+        CHECK(planner.tag(tag1, tag1)); // Does nothing.
         CHECK(planner.tag(tag1, tag2));
         CHECK(planner.tag(tag2, tag3));
         CHECK_FALSE(planner.tag(tag3, tag1));
@@ -155,18 +297,9 @@ TEST_CASE("ecs::Planner")
 
     // Build a schedule and run it.
     auto schedule = planner.build();
-    if (failed)
-    {
-        REQUIRE_FALSE(schedule);
-    }
-    else
-    {
-        REQUIRE(schedule);
+    schedule.run(registry, context);
 
-        schedule->run(registry, context);
-
-        INFO("Result: ", orderToString(world.resource<std::vector<int>>()));
-        INFO("Expected: ", orderToString(expected));
-        REQUIRE(world.resource<std::vector<int>>() == expected);
-    }
+    INFO("Result: ", orderToString(world.resource<std::vector<int>>()));
+    INFO("Expected: ", orderToString(expected));
+    REQUIRE(world.resource<std::vector<int>>() == expected);
 }

@@ -44,6 +44,11 @@ namespace cubos::core::ecs
         /// @param tagId Tag identifier.
         void remove(TagId tagId);
 
+        /// @brief Gets a tag which contains everything which isn't contained by the given tag.
+        /// @param tagId Tag identifier.
+        /// @return Negated tag identifier.
+        TagId negate(TagId tagId);
+
         /// @brief Makes the given tag a child of the the given tag.
         ///
         /// Essentially makes the child inherit all constraints of the parent. Tags may have multiple parents, but only
@@ -60,9 +65,13 @@ namespace cubos::core::ecs
         bool tag(TagId childId, TagId parentId);
 
         /// @brief Specifies that the given tag must run before another tag.
+        ///
+        /// The operation fails if a cycle would be introduced by the added constraint.
+        ///
         /// @param beforeId Before tag identifier.
         /// @param afterId After tag identifier.
-        void order(TagId beforeId, TagId afterId);
+        /// @return Whether the operation was successful.
+        bool order(TagId beforeId, TagId afterId);
 
         /// @brief Specifies that systems within the given tag should only run if the given condition evaluates to true.
         ///
@@ -73,16 +82,66 @@ namespace cubos::core::ecs
         void onlyIf(TagId tagId, ConditionId conditionId);
 
         /// @brief Specifies that the given tag is a repeating tag. Can only be specified once per tag.
+        ///
+        /// The given tag must not be a negated tag.
+        ///
         /// @param tagId Tag identifier.
         /// @param conditionId Condition identifier.
         /// @return Whether the operation was successful.
         bool repeatWhile(TagId tagId, ConditionId conditionId);
 
         /// @brief Constructs a new schedule from the constraints specified until now.
-        ///
-        /// This operation may fail if a cyclic dependency was specified.
-        ///
-        /// @return Schedule, or nothing on failure.
-        Opt<Schedule> build() const;
+        /// @return Schedule.
+        Schedule build() const;
+
+    private:
+        /// @brief Holds the constraints and data of a tag.
+        struct TagData
+        {
+            /// @brief Whether the tag is a negative tag.
+            bool isNegative{false};
+
+            /// @brief The negated version of the tag, if there's one.
+            Opt<TagId> negatedId{};
+
+            /// @brief System identifier associated to the tag.
+            ///
+            /// Only used by leaf tags.
+            Opt<SystemId> systemId{};
+
+            /// @brief Condition identifiers associated to the tag.
+            std::vector<ConditionId> conditionIds{};
+
+            /// @brief If the tag is a repeat tag, holds its repeat condition.
+            Opt<ConditionId> repeatConditionId{};
+
+            /// @brief Holds the parent repeating tag this tag belongs to, if there's one.
+            Opt<TagId> repeatParentId{};
+
+            /// @brief Depth of the repeat parent + 1, or 0 if it doesn't have one.
+            int depth{0};
+
+            /// @brief Parent tags of this tag.
+            std::vector<TagId> parents{};
+
+            /// @brief Children tags of this tag.
+            std::vector<TagId> children{};
+
+            /// @brief Tags which have ordering constraints which force them to run after this tag.
+            std::vector<TagId> after{};
+        };
+
+        /// @brief Checks if a given tag is inside the given repeating tag, recursively.
+        /// @param tagId Tag identifier.
+        /// @param repeatId Repeating tag identifier.
+        /// @return Whether it is inside.
+        bool repeatsWithin(TagId tagId, TagId repeatId) const;
+
+        /// @brief Checks if making a tag an ancestor of the given tag is valid.
+        /// @param tagId Tag identifier.
+        /// @param ancestorId Ancestor tag identifier.
+        bool isValidAncestor(TagId tagId, TagId ancestorId) const;
+
+        std::vector<TagData> mTags{};
     };
 } // namespace cubos::core::ecs
