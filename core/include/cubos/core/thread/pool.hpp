@@ -1,6 +1,6 @@
 /// @file
-/// @brief Class @ref cubos::core::ThreadPool.
-/// @ingroup core
+/// @brief Class @ref cubos::core::thread::ThreadPool.
+/// @ingroup core-thread
 
 #pragma once
 
@@ -11,11 +11,11 @@
 #include <thread>
 #include <vector>
 
-namespace cubos::core
+namespace cubos::core::thread
 {
     /// @brief Manages a pool of threads, to which tasks can be submitted.
     /// @note Blocks on tasks to finish on destruction.
-    /// @ingroup core
+    /// @ingroup core-thread
     class ThreadPool final
     {
     public:
@@ -49,4 +49,4 @@ namespace cubos::core
         std::atomic<std::size_t> mNumTasks; ///< Number of tasks currently being executed.
         bool mStop;                         ///< Set to true when the thread pool is being destroyed.
     };
-} // namespace cubos::core
+} // namespace cubos::core::thread

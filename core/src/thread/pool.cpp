@@ -1,6 +1,6 @@
-#include <cubos/core/thread_pool.hpp>
+#include <cubos/core/thread/pool.hpp>
 
-using namespace cubos::core;
+using cubos::core::thread::ThreadPool;
 
 ThreadPool::ThreadPool(std::size_t numThreads)
 {
