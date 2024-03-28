@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Core &raquo; ECS &raquo; Resource module | CUBOS. Docs</title>
+  <title>Engine &raquo; Render &raquo; Render Target module | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,47 +46,92 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__core.html">Core</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__core-ecs.html">ECS</a> &raquo;</span>
-          Resource <span class="m-thin">module</span></h1>
-        <p>Resource part of the ECS.</p>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
+          Render Target <span class="m-thin">module</span></h1>
+        <p>Adds and manages <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a> components.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
+            <li><a href="#autotoc_md89">Dependencies</a></li>
             <li>
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+<section id="autotoc_md89"><h3><a href="#autotoc_md89">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="core_2include_2cubos_2core_2ecs_2resource_2manager_8hpp.html" class="m-doc">manager.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager</a> and related types.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
+            <dt>file <a href="target_8hpp.html" class="m-doc">target.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">cubos::<wbr />engine::<wbr />RenderTarget</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">cubos::core::ecs::ReadResource</a>
+              struct <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">cubos::engine::RenderTarget</a>
             </dt>
-            <dd>Utility struct used to reference a resource of type <code>T</code> for reading.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">cubos::core::ecs::WriteResource</a>
-            </dt>
-            <dd>Utility struct used to reference a resource of type <code>T</code> for writing.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">cubos::core::ecs::ResourceManager</a>
-            </dt>
-            <dd>Holds and manages resources.</dd>
+            <dd>Component which represents a render target.</dd>
           </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ga270f214c4b5c9981d9d30bc46abb32a1" class="m-doc">renderTargetPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              Tag <a href="#ga1917300ae40daff9be77f8f89b566cbd" class="m-doc">resizeRenderTargetTag</a>
+            </dt>
+            <dd>Resizes the Render Target if necessary - for example, due to a window resize.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga270f214c4b5c9981d9d30bc46abb32a1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga270f214c4b5c9981d9d30bc46abb32a1" class="m-doc-self">renderTargetPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html">&lt;engine/render/target/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="ga1917300ae40daff9be77f8f89b566cbd"><div>
+            <h3>
+              Tag <a href="#ga1917300ae40daff9be77f8f89b566cbd" class="m-doc-self">resizeRenderTargetTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html">&lt;engine/render/target/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Resizes the Render Target if necessary - for example, due to a window resize.</p>
+          </div></section>
         </section>
       </div>
     </div>

@@ -75,6 +75,14 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad193721bef6784ba971a498b190437a1" class="m-doc">insertResource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a> value)</span>
+            </dt>
+            <dd>Inserts a resource into the world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aeedf34be6a8d324901196e09613da876" class="m-doc">eraseResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
+            </dt>
+            <dd>Removes a resource from the world.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a06d1997de7b0d5ac42db6b5010387225" class="m-doc">create</a>(</span><span class="m-doc-wrap">) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
             <dd>Creates a new entity.</dd>
@@ -136,6 +144,40 @@
                 <tr>
                   <td style="width: 1%">world</td>
                   <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to which the commands will be applied.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad193721bef6784ba971a498b190437a1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />CommandBuffer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad193721bef6784ba971a498b190437a1" class="m-doc-self">insertResource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a> value)</span></span>
+            </h3>
+            <p>Inserts a resource into the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Resource value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aeedf34be6a8d324901196e09613da876"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />CommandBuffer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeedf34be6a8d324901196e09613da876" class="m-doc-self">eraseResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Removes a resource from the world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Resource type.</td>
                 </tr>
               </tbody>
             </table>

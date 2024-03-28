@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/resource/manager.hpp file | CUBOS. Docs</title>
+  <title>core/ecs/tag.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,9 +46,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_043da9b7d60f46877cefd90a49e157c3.html">resource</a>/</span>manager.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span>tag.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager</a> and related types.</p>
+        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Tag</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
@@ -76,20 +77,47 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">cubos::core::ecs::ReadResource</a>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">cubos::core::ecs::Tag</a>
             </dt>
-            <dd>Utility struct used to reference a resource of type <code>T</code> for reading.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">cubos::core::ecs::WriteResource</a>
-            </dt>
-            <dd>Utility struct used to reference a resource of type <code>T</code> for writing.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">cubos::core::ecs::ResourceManager</a>
-            </dt>
-            <dd>Holds and manages resources.</dd>
+            <dd>Represents a tag to be used with the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> class.</dd>
           </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#aed1f6f11f01b6eed305f5eb535c6502c" class="m-doc">CUBOS_DEFINE_TAG</a>(</span><span class="m-doc-wrap">tag)</span>
+            </dt>
+            <dd>Utility used to define tags more easily.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Define documentation</h2>
+          <section class="m-doc-details" id="aed1f6f11f01b6eed305f5eb535c6502c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#aed1f6f11f01b6eed305f5eb535c6502c" class="m-doc-self">CUBOS_DEFINE_TAG</a>(</span><span class="m-doc-wrap">tag)</span>
+            </h3>
+            <p>Utility used to define tags more easily.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td>Tag type.</td>
+                </tr>
+              </tbody>
+            </table>
+<pre class="m-code"><span class="c1">// in file.hpp</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">my</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">ecs</span><span class="o">::</span><span class="n">Tag</span><span class="w"> </span><span class="n">MyTag</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// in file.cpp</span>
+<span class="n">CUBOS_DEFINE_TAG</span><span class="p">(</span><span class="n">my</span><span class="o">::</span><span class="n">MyTag</span><span class="p">);</span></pre>
+          </div></section>
         </section>
       </div>
     </div>

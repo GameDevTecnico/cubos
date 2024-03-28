@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::ResourceManager class | CUBOS. Docs</title>
+  <title>cubos::engine::VoxelPaletteBridge class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,126 +46,123 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>ResourceManager <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2ecs_2resource_2manager_8hpp.html">&lt;core/ecs/resource/manager.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>VoxelPaletteBridge <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="palette__bridge_8hpp.html">&lt;engine/voxels/palette_bridge.hpp&gt;</a></div>
         </h1>
-        <p>Holds and manages resources.</p>
+        <p>Bridge which loads and saves Palette assets.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Used internally by <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>.</p>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
+<p>Uses the format specified in <a href="classcubos_1_1engine_1_1VoxelPalette.html#a68edac47bf64b74a1b6761db4cb88594" class="m-doc">VoxelPalette::<wbr />loadFrom</a> and <a href="classcubos_1_1engine_1_1VoxelPalette.html#a23232e9a3a32ebfa4fdd2d0e0c89f82d" class="m-doc">VoxelPalette::<wbr />writeTo</a></p>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#ac8d506bfe941be786d47c64049151904" class="m-doc">add</a>(</span><span class="m-doc-wrap">TArgs... args)</span>
+              class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a>
             </dt>
-            <dd>Registers a new resource type in the resource manager.</dd>
+            <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a213c24849680ab4dd9aff32983e9f00e">
+              <span class="m-doc-wrap-bumper"><a href="#a213c24849680ab4dd9aff32983e9f00e" class="m-doc-self">VoxelPaletteBridge</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs a bridge.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a300de309c4483045c8e4f09bd842635a" class="m-doc">read</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&lt;T&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a55315a7cb12011ef82d50f39c12ad2f0" class="m-doc">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Locks a resource for reading and returns it.</dd>
+            <dd>Loads an asset from a file stream.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab192004dd34a913f1e6c6e8e883cf1a1" class="m-doc">write</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>&lt;T&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0377ea998c5dcff2f65b18692f98e4e4" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Locks a resource for writing and returns it.</dd>
+            <dd>Saves an asset to a file stream.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ac8d506bfe941be786d47c64049151904"><div>
+          <section class="m-doc-details" id="a55315a7cb12011ef82d50f39c12ad2f0"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T, typename... TArgs&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8d506bfe941be786d47c64049151904" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">TArgs... args)</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />VoxelPaletteBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a55315a7cb12011ef82d50f39c12ad2f0" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-            <p>Registers a new resource type in the resource manager.</p>
+            <p>Loads an asset from a file stream.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1ResourceManager_1_1Resource.html" class="m-doc">Resource</a> type.</td>
-                </tr>
-                <tr>
-                  <td>TArgs</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a> of the arguments of the constructor of the resource.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>args</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">Arguments</a> of the constructor of the resource.</td>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to write into.</td>
                 </tr>
-              </tbody>
-            </table>
-<p>This function is not thread-safe and should be called before any other function.</p>
-          </div></section>
-          <section class="m-doc-details" id="a300de309c4483045c8e4f09bd842635a"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&lt;T&gt; cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a300de309c4483045c8e4f09bd842635a" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Locks a resource for reading and returns it.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
                 <tr>
-                  <td style="width: 1%">T</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1ResourceManager_1_1Resource.html" class="m-doc">Resource</a> type.</td>
+                  <td>handle</td>
+                  <td>Handle of the asset being loaded.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1ResourceManager_1_1Resource.html" class="m-doc">Resource</a> lock.</td>
+                  <td>Whether the asset was successfully loaded.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab192004dd34a913f1e6c6e8e883cf1a1"><div>
+          <section class="m-doc-details" id="a0377ea998c5dcff2f65b18692f98e4e4"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>&lt;T&gt; cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab192004dd34a913f1e6c6e8e883cf1a1" class="m-doc-self">write</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />VoxelPaletteBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0377ea998c5dcff2f65b18692f98e4e4" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-            <p>Locks a resource for writing and returns it.</p>
+            <p>Saves an asset to a file stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
+                <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">T</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1ResourceManager_1_1Resource.html" class="m-doc">Resource</a> type.</td>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to read from.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being saved.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1ResourceManager_1_1Resource.html" class="m-doc">Resource</a> lock.</td>
+                  <td>Whether the asset was successfully saved.</td>
                 </tr>
               </tfoot>
             </table>

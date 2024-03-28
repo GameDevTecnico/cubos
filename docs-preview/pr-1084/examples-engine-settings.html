@@ -55,9 +55,9 @@
 <span class="p">{</span>
 <span class="w">    </span><span class="n">Cubos</span><span class="w"> </span><span class="n">cubos</span><span class="p">{</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addPlugin</span><span class="p">(</span><span class="n">settingsPlugin</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">settingsPlugin</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="s">&quot;print setting value&quot;</span><span class="p">).</span><span class="n">after</span><span class="p">(</span><span class="s">&quot;cubos.settings&quot;</span><span class="p">).</span><span class="n">call</span><span class="p">([](</span><span class="n">Settings</span><span class="o">&amp;</span><span class="w"> </span><span class="n">settings</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="s">&quot;print setting value&quot;</span><span class="p">).</span><span class="n">after</span><span class="p">(</span><span class="n">settingsTag</span><span class="p">).</span><span class="n">call</span><span class="p">([](</span><span class="n">Settings</span><span class="o">&amp;</span><span class="w"> </span><span class="n">settings</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">&quot;greeting&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello!&quot;</span><span class="p">));</span>
 <span class="w">    </span><span class="p">});</span>
 

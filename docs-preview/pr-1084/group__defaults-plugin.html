@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::WriteResource class | CUBOS. Docs</title>
+  <title>Engine &raquo; Defaults module | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,89 +46,55 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2ecs_2resource_2manager_8hpp.html">&lt;core/ecs/resource/manager.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>WriteResource <span class="m-thin">class</span>
-        </h1>
-        <p>Utility struct used to reference a resource of type <code>T</code> for writing.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Resource type.</td>
-            </tr>
-          </tbody>
-        </table>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          Defaults <span class="m-thin">module</span></h1>
+        <p>Adds a series of pre-configured essential plugins to the engine.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ab5a52af24c51b716f1f20b392d01a214" class="m-doc">WriteResource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Move construct.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2defaults_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
           </dl>
         </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a153263e3f4424766ee5c463998bdb38c" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; T&amp;</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ga3315cc7f44e3bed970ac9d9f4d477455" class="m-doc">defaultsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
             </dt>
-            <dd>Gets the underlying resource reference.</dd>
+            <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ab5a52af24c51b716f1f20b392d01a214"><div>
+          <section class="m-doc-details" id="ga3315cc7f44e3bed970ac9d9f4d477455"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />WriteResource&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab5a52af24c51b716f1f20b392d01a214" class="m-doc-self">WriteResource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3315cc7f44e3bed970ac9d9f4d477455" class="m-doc-self">defaultsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2defaults_2plugin_8hpp.html">&lt;engine/defaults/plugin.hpp&gt;</a></div>
             </h3>
-            <p>Move construct.</p>
+            <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">other</td>
-                  <td>Other resource to move from.</td>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class</td>
                 </tr>
               </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a153263e3f4424766ee5c463998bdb38c"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />WriteResource&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a153263e3f4424766ee5c463998bdb38c" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Gets the underlying resource reference.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Resource reference.</td>
-                </tr>
-              </tfoot>
             </table>
           </div></section>
         </section>
