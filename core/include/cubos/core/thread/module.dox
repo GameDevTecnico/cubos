@@ -1,0 +1,13 @@
+/// @dir
+/// @brief @ref core-thread module.
+
+/// @namespace cubos::core::thread
+/// @brief @ref core-thread module.
+/// @ingroup core-thread
+
+namespace cubos::core::thread
+{
+    /// @defgroup core-thread Threading
+    /// @ingroup core
+    /// @brief Provides threading and asynchronous related utilities.
+} // namespace cubos::core::thread
