@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RenderPicker plugin (#1060, **@tomas7770**).
 - RenderDepth plugin (#1082, **@RiscadoA**).
 - Task class, for use in asynchronous code (#1111, **@RiscadoA**).
+- HDR plugin (#1085, **@RiscadoA**).
 
 ### Changed
 
