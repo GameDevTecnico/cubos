@@ -1,10 +1,10 @@
-#include <cubos/core/io/window.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/render/depth/depth.hpp>
 #include <cubos/engine/render/depth/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/target/target.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 using cubos::core::gl::Texture2DDesc;
 using cubos::core::gl::TextureFormat;
@@ -16,6 +16,9 @@ CUBOS_DEFINE_TAG(cubos::engine::drawToRenderDepthTag);
 
 void cubos::engine::renderDepthPlugin(Cubos& cubos)
 {
+    cubos.depends(windowPlugin);
+    cubos.depends(renderTargetPlugin);
+
     cubos.component<RenderDepth>();
 
     cubos.tag(createRenderDepthTag);

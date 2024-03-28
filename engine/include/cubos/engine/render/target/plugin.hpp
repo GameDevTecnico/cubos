@@ -19,6 +19,7 @@ namespace cubos::engine
     /// - @ref window-plugin
 
     /// @brief Resizes the Render Target if necessary - for example, due to a window resize.
+    /// @ingroup render-target-plugin
     extern Tag resizeRenderTargetTag;
 
     /// @brief Plugin entry function.
