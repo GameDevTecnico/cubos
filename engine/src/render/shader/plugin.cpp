@@ -1,6 +1,5 @@
 #include <cubos/core/io/window.hpp>
 
-#include <cubos/engine/assets/bridges/binary.hpp>
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/render/shader/bridge.hpp>
