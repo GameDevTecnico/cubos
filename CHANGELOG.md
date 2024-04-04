@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Addition and removal of resources through Commands (#325, **@RiscadoA**).
 - Access to unscaled delta time for utilities like the debug camera (#1020, **@RiscadoA**).
 - RenderTarget plugin (#1059, **@tomas7770**).
+- RenderPicker plugin (#1060, **@tomas7770**).
 
 ### Changed
 
