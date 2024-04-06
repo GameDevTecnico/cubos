@@ -148,5 +148,7 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
         }
     }
 
+    // Position of collision relative to entity1
+    intersect.position = glm::vec3(localToWorld1[3]) + direction * intersect.penetration;
     return true;
 }

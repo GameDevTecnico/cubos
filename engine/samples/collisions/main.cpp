@@ -9,6 +9,7 @@
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
+#include <cubos/engine/collisions/shapes/voxel.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/gizmos/target.hpp>
@@ -51,11 +52,12 @@ int main()
     cubos.plugin(settingsPlugin);
     cubos.plugin(windowPlugin);
     cubos.plugin(transformPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(collisionsPlugin);
     cubos.plugin(fixedStepPlugin);
     cubos.plugin(collisionsPlugin);
     cubos.plugin(physicsPlugin);
     cubos.plugin(solverPlugin);
-    cubos.plugin(assetsPlugin);
     cubos.plugin(inputPlugin);
     cubos.plugin(renderDefaultsPlugin);
     cubos.plugin(gizmosPlugin);
@@ -84,10 +86,10 @@ int main()
             .add(Rotation::lookingAt({3.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F}));
     });
 
-    cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
+    cubos.startupSystem("create colliders").call([](State& state, Commands commands, Assets& assets) {
         state.a = commands.create()
                       .add(Collider{})
-                      .add(BoxCollisionShape{})
+                      .add(VoxelCollisionShape(assets.create(VoxelGrid{{2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2}})))
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
