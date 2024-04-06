@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Shader module | CUBOS. Docs</title>
+  <title>engine/render/picker/plugin.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,79 +46,52 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
-          Shader <span class="m-thin">module</span></h1>
-        <p>Adds shader assets to <strong>CUBOS</strong>.</p>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_13f5e2b140054f355a8f8a8c95923a6a.html">render</a>/</span><span class="m-breadcrumb"><a href="dir_ddad818fed94430a78a5fc586974a184.html">picker</a>/</span>plugin.hpp <span class="m-thin">file</span>
+        </h1>
+        <p>Plugin entry point.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md87">Bridges</a></li>
-            <li><a href="#autotoc_md88">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md87"><h3><a href="#autotoc_md87">Bridges</a></h3><ul><li><a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">ShaderBridge</a> - registered with the <code>.glsl</code> extension, loads <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> assets.</li></ul></section><section id="autotoc_md88"><h3><a href="#autotoc_md88">Dependencies</a></h3><ul><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="render_2shader_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />ShaderBridge</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2shader_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="shader_8hpp.html" class="m-doc">shader.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">cubos::<wbr />engine::<wbr />Shader</a>.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">cubos::engine::ShaderBridge</a>
-            </dt>
-            <dd>Bridge for loading shader assets.</dd>
-            <dt>
-              class <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">cubos::engine::Shader</a>
-            </dt>
-            <dd>Contains a shader stage created from GLSL code.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga2cd0a444573ad64513fe237da12dbe56" class="m-doc">shaderPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__render-picker-plugin.html#ga5c6dea6155ad14e957b91b84780d202e" class="m-doc">renderPickerPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga2cd0a444573ad64513fe237da12dbe56"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga2cd0a444573ad64513fe237da12dbe56" class="m-doc-self">shaderPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shader_2plugin_8hpp.html">&lt;engine/render/shader/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              Tag <a href="namespacecubos_1_1engine.html#ab0f6529f8e4e82be33db5b6a7070dd31" class="m-doc">createRenderPickerTag</a>
+            </dt>
+            <dd>Recreates the <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> if necessary - for example, due to a render target resize.</dd>
+            <dt>
+              Tag <a href="namespacecubos_1_1engine.html#af2bb41cde503de7eb55da7e2a5f13c52" class="m-doc">drawToRenderPickerTag</a>
+            </dt>
+            <dd>Systems which draw to <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> textures should be tagged with this.</dd>
+          </dl>
         </section>
       </div>
     </div>
