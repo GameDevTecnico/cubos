@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ThreadPool class | CUBOS. Docs</title>
+  <title>core/thread/ directory | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,89 +46,28 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>ThreadPool <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="thread__pool_8hpp.html">&lt;core/thread_pool.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span>thread<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
         </h1>
-        <p>Manages a pool of threads, to which tasks can be submitted.</p>
+        <p><a href="group__core-thread.html" class="m-doc">Threading</a> module.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#files">Files</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-info"><h4>Note</h4><p>Blocks on tasks to finish on destruction.</p></aside>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#afba1f2119157217a7eaf773d8c25ecb8" class="m-doc">ThreadPool</a>(</span><span class="m-doc-wrap">std::size_t numThreads)</span>
-            </dt>
-            <dd>Constructs a pool with <code>numThreads</code>, starting them immediately.</dd>
-            <dt id="a11591c08a50f254ff641fd13361fe3b1">
-              <span class="m-doc-wrap-bumper"><a href="#a11591c08a50f254ff641fd13361fe3b1" class="m-doc-self">ThreadPool</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">ThreadPool</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd>Forbid copy construction.</dd>
-            <dt id="ab8153f4c27040a74e7af6d58161dfd25">
-              <span class="m-doc-wrap-bumper"><a href="#ab8153f4c27040a74e7af6d58161dfd25" class="m-doc-self">ThreadPool</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">ThreadPool</a>&amp;&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd>Forbid move construction.</dd>
+            <dt>file <a href="thread_2pool_8hpp.html" class="m-doc">pool.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1thread_1_1ThreadPool.html" class="m-doc">cubos::<wbr />core::<wbr />thread::<wbr />ThreadPool</a>.</dd>
+            <dt>file <a href="task_8hpp.html" class="m-doc">task.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1thread_1_1Task.html" class="m-doc">cubos::<wbr />core::<wbr />thread::<wbr />Task</a>.</dd>
           </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a482f1476e3f3245036e0e9892c90ea76" class="m-doc">addTask</a>(</span><span class="m-doc-wrap">std::function&lt;void()&gt; task)</span>
-            </dt>
-            <dd>Adds a task to the thread pool. Starts when a thread becomes available.</dd>
-            <dt id="ab91c4e86fb495d286ac0128830d54ad1">
-              <span class="m-doc-wrap-bumper">void <a href="#ab91c4e86fb495d286ac0128830d54ad1" class="m-doc-self">wait</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Blocks until all tasks finish.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="afba1f2119157217a7eaf773d8c25ecb8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ThreadPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afba1f2119157217a7eaf773d8c25ecb8" class="m-doc-self">ThreadPool</a>(</span><span class="m-doc-wrap">std::size_t numThreads)</span></span>
-            </h3>
-            <p>Constructs a pool with <code>numThreads</code>, starting them immediately.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">numThreads</td>
-                  <td>Number of threads to create.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a482f1476e3f3245036e0e9892c90ea76"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ThreadPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a482f1476e3f3245036e0e9892c90ea76" class="m-doc-self">addTask</a>(</span><span class="m-doc-wrap">std::function&lt;void()&gt; task)</span></span>
-            </h3>
-            <p>Adds a task to the thread pool. Starts when a thread becomes available.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">task</td>
-                  <td>Task to add.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
