@@ -277,9 +277,10 @@ namespace cubos::core::ecs
     public:
         /// @brief Constructs.
         /// @param cubos Cubos.
+        /// @param name Tag debug name.
         /// @param isStartup Whether the tag is a startup tag.
         /// @param tagId Tag identifier.
-        TagBuilder(Cubos& cubos, bool isStartup, Planner::TagId tagId);
+        TagBuilder(Cubos& cubos, std::string name, bool isStartup, Planner::TagId tagId);
 
         /// @brief Makes all tagged systems run before systems with the given tag.
         /// @param tag Tag.
@@ -306,8 +307,8 @@ namespace cubos::core::ecs
         /// @return Builder.
         TagBuilder& runIf(auto func)
         {
-            auto conditionId =
-                mCubos.mSystemRegistry.add("#tagOnlyIf", System<bool>::make(mCubos.mWorld, std::move(func), {}));
+            auto conditionId = mCubos.mSystemRegistry.add(mName + "#condition",
+                                                          System<bool>::make(mCubos.mWorld, std::move(func), {}));
             mPlanner.onlyIf(mTagId, conditionId);
             return *this;
         }
@@ -318,7 +319,7 @@ namespace cubos::core::ecs
         TagBuilder& repeatWhile(auto func)
         {
             auto conditionId =
-                mCubos.mSystemRegistry.add("#tagRepeatWhile", System<bool>::make(mCubos.mWorld, std::move(func), {}));
+                mCubos.mSystemRegistry.add(mName, System<bool>::make(mCubos.mWorld, std::move(func), {}));
             CUBOS_ASSERT(mPlanner.repeatWhile(mTagId, conditionId), "Tag was already set to repeating");
             return *this;
         }
@@ -326,6 +327,7 @@ namespace cubos::core::ecs
     private:
         Cubos& mCubos;
         Planner& mPlanner;
+        std::string mName;
         bool mIsStartup;
         Planner::TagId mTagId;
     };

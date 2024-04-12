@@ -118,7 +118,7 @@ Cubos::TagBuilder Cubos::tag(const Tag& tag)
                                 });
     }
 
-    return {*this, false, mTags.at(tag.id()).id};
+    return {*this, tag.name(), false, mTags.at(tag.id()).id};
 }
 
 Cubos::TagBuilder Cubos::startupTag(const Tag& tag)
@@ -135,7 +135,7 @@ Cubos::TagBuilder Cubos::startupTag(const Tag& tag)
                                 });
     }
 
-    return {*this, true, mTags.at(tag.id()).id};
+    return {*this, tag.name(), true, mTags.at(tag.id()).id};
 }
 
 auto Cubos::system(std::string name) -> SystemBuilder
@@ -158,8 +158,11 @@ void Cubos::run()
     // Generate schedules.
     auto startupSchedule = mStartupPlanner.build();
     CUBOS_ASSERT(startupSchedule.contains(), "Couldn't build initial startup schedule");
+    CUBOS_DEBUG("Built startup schedule:\n{}", '\n' + startupSchedule->debug(mSystemRegistry) + '\n');
+
     auto mainSchedule = mMainPlanner.build();
     CUBOS_ASSERT(mainSchedule.contains(), "Couldn't build initial main schedule");
+    CUBOS_DEBUG("Built main schedule:\n{}", '\n' + mainSchedule->debug(mSystemRegistry) + '\n');
 
     CommandBuffer cmdBuffer(mWorld);
     SystemContext ctx{.cmdBuffer = cmdBuffer};
@@ -221,9 +224,10 @@ bool Cubos::isKnownPlugin(Plugin plugin, Plugin basePlugin) const
     return false;
 }
 
-Cubos::TagBuilder::TagBuilder(Cubos& cubos, bool isStartup, Planner::TagId tagId)
+Cubos::TagBuilder::TagBuilder(Cubos& cubos, std::string name, bool isStartup, Planner::TagId tagId)
     : mCubos{cubos}
     , mPlanner{isStartup ? cubos.mStartupPlanner : cubos.mMainPlanner}
+    , mName{std::move(name)}
     , mIsStartup{isStartup}
     , mTagId{tagId}
 {
@@ -233,7 +237,7 @@ Cubos::TagBuilder& Cubos::TagBuilder::before(const Tag& tag)
 {
     CUBOS_ASSERT(mCubos.isRegistered(tag), "Tag {} wasn't registered by the plugin or its dependencies", tag.name());
     CUBOS_ASSERT(mCubos.mTags.at(tag.id()).isStartup == mIsStartup,
-                 "Cannot make tag run before {}, as one is a startup tag and the other isn't", tag.name());
+                 "Cannot make tag {} run before {}, as one is a startup tag and the other isn't", mName, tag.name());
     mPlanner.order(mTagId, mCubos.mTags.at(tag.id()).id);
     return *this;
 }
@@ -242,7 +246,7 @@ Cubos::TagBuilder& Cubos::TagBuilder::after(const Tag& tag)
 {
     CUBOS_ASSERT(mCubos.isRegistered(tag), "Tag {} wasn't registered by the plugin or its dependencies", tag.name());
     CUBOS_ASSERT(mCubos.mTags.at(tag.id()).isStartup == mIsStartup,
-                 "Cannot make tag run after {}, as one is a startup tag and the other isn't", tag.name());
+                 "Cannot make tag {} run after {}, as one is a startup tag and the other isn't", mName, tag.name());
     mPlanner.order(mCubos.mTags.at(tag.id()).id, mTagId);
     return *this;
 }
@@ -251,7 +255,7 @@ Cubos::TagBuilder& Cubos::TagBuilder::tagged(const Tag& tag)
 {
     CUBOS_ASSERT(mCubos.isRegistered(tag), "Tag {} wasn't registered by the plugin or its dependencies", tag.name());
     CUBOS_ASSERT(mCubos.mTags.at(tag.id()).isStartup == mIsStartup,
-                 "Cannot tag with {}, as one is a startup tag and the other isn't", tag.name());
+                 "Cannot tag {} with {}, as one is a startup tag and the other isn't", mName, tag.name());
     CUBOS_ASSERT(mPlanner.tag(mTagId, mCubos.mTags.at(tag.id()).id));
     return *this;
 }
@@ -260,7 +264,7 @@ Cubos::TagBuilder& Cubos::TagBuilder::addTo(const Tag& tag)
 {
     CUBOS_ASSERT(mCubos.isRegistered(tag), "Tag {} wasn't registered by the plugin or its dependencies", tag.name());
     CUBOS_ASSERT(mCubos.mTags.at(tag.id()).isStartup == mIsStartup,
-                 "Cannot add tag {} to tag, as one is a startup tag and the other isn't", tag.name());
+                 "Cannot add tag {} to tag {}, as one is a startup tag and the other isn't", tag.name(), mName);
     CUBOS_ASSERT(mPlanner.tag(mCubos.mTags.at(tag.id()).id, mTagId));
     return *this;
 }

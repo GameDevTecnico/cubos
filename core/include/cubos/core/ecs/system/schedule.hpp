@@ -133,6 +133,16 @@ namespace cubos::core::ecs
         /// @param context Context to run the systems with.
         void run(SystemRegistry& registry, SystemContext& context);
 
+        /// @brief Generates a multi-line string which represents the order in which the nodes will run.
+        ///
+        /// The obtained order is not necessarily the one in which the nodes will run.
+        /// The only guarantee given, is that if an ordering constraint was specified, then this string will reflect it.
+        /// Thus, if a system A appears before a system B, then there isn't a constraint 'B must run before A'.
+        ///
+        /// @param registry Registry containing the systems, used to get the system names.
+        /// @return String.
+        std::string debug(const SystemRegistry& registry) const;
+
     private:
         /// @brief Holds the state of a schedule node.
         struct Node

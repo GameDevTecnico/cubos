@@ -258,6 +258,81 @@ void Schedule::run(SystemRegistry& registry, SystemContext& context, NodeId node
     }
 }
 
+std::string Schedule::debug(const SystemRegistry& registry) const
+{
+    std::vector<std::string> lines{};
+    std::vector<bool> visited(mNodes.size(), false);
+
+    auto visit = [&](NodeId id, int indent, auto& self) {
+        if (visited[id.inner])
+        {
+            return;
+        }
+
+        visited[id.inner] = true;
+
+        // First visit all nodes which can only run after this node finishes.
+        for (auto onFinish : mNodes[id.inner].satisfyOnFinish)
+        {
+            self(onFinish, indent, self);
+        }
+
+        for (auto onTrue : mNodes[id.inner].satisfyOnTrue)
+        {
+            self(onTrue, indent, self);
+        }
+
+        // Add indentation.
+        std::string line{};
+        for (int i = 0; i < indent; ++i)
+        {
+            line += "  ";
+        }
+        line += "- ";
+
+        if (mNodes[id.inner].systemId)
+        {
+            // If the node is a system, simply print the system name.
+            line += registry.name(mNodes[id.inner].systemId.value());
+        }
+        else if (!mNodes[id.inner].isRepeat)
+        {
+            // If the node is a condition, print the condition name and the result.
+            line += registry.name(mNodes[id.inner].conditionId.value());
+        }
+        else
+        {
+            // If the node is a repeat node, visit its parts, and print the condition name.
+            for (auto part : mNodes[id.inner].parts)
+            {
+                self(part, indent + 1, self);
+            }
+
+            line += registry.name(mNodes[id.inner].conditionId.value());
+        }
+
+        lines.push_back(line);
+    };
+
+    for (std::size_t i = 0; i < mNodes.size(); ++i)
+    {
+        visit({i}, 0, visit);
+    }
+
+    // Reverse the lines so that the output is in the correct order.
+    std::string result{};
+    for (int i = static_cast<int>(lines.size()) - 1; i >= 0; --i)
+    {
+        if (!result.empty())
+        {
+            result += '\n';
+        }
+
+        result += lines[static_cast<std::size_t>(i)];
+    }
+    return result;
+}
+
 bool Schedule::ordered(NodeId before, NodeId right) const
 {
     this->matchNodeDepths(before, right);
