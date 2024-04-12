@@ -8,8 +8,10 @@
 
 namespace cubos::core::ecs
 {
+    class Cubos;
     class World;
     class CommandBuffer;
+    struct PluginQueue;
     struct SystemOptions;
     struct SystemAccess;
 
@@ -18,6 +20,9 @@ namespace cubos::core::ecs
     {
         /// @brief Command buffer to record commands to.
         CommandBuffer& cmdBuffer;
+
+        /// @brief Plugin queue to add or remove plugins from.
+        PluginQueue* pluginQueue = nullptr;
 
         /// @brief Entity which triggered the system, if it's an observer.
         Entity observedEntity{};
