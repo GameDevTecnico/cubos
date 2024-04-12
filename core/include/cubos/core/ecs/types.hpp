@@ -50,8 +50,7 @@ namespace cubos::core::ecs
 
         /// @brief Unregisters a data type.
         /// @param type Data type.
-        /// @return Type identifier.
-        DataTypeId remove(const reflection::Type& type);
+        void remove(const reflection::Type& type);
 
         /// @brief Gets the identifier of a data type.
         ///

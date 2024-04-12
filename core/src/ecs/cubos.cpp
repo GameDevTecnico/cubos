@@ -116,6 +116,7 @@ Cubos::TagBuilder Cubos::tag(const Tag& tag)
                                     .id = mMainPlanner.add(),
                                     .plugin = mPluginStack.back(),
                                 });
+        mInstalledPlugins.at(mPluginStack.back()).tags.push_back(mTags.at(tag.id()).id);
     }
 
     return {*this, tag.name(), false, mTags.at(tag.id()).id};
@@ -158,26 +159,65 @@ void Cubos::run()
     // Generate schedules.
     auto startupSchedule = mStartupPlanner.build();
     CUBOS_ASSERT(startupSchedule.contains(), "Couldn't build initial startup schedule");
-    CUBOS_DEBUG("Built startup schedule:\n{}", '\n' + startupSchedule->debug(mSystemRegistry) + '\n');
+    CUBOS_DEBUG("Built base startup schedule:\n{}", '\n' + startupSchedule->debug(mSystemRegistry) + '\n');
+    mStartupPlanner.clear();
 
     auto mainSchedule = mMainPlanner.build();
     CUBOS_ASSERT(mainSchedule.contains(), "Couldn't build initial main schedule");
     CUBOS_DEBUG("Built main schedule:\n{}", '\n' + mainSchedule->debug(mSystemRegistry) + '\n');
 
+    // Prepare system context.
     CommandBuffer cmdBuffer(mWorld);
-    SystemContext ctx{.cmdBuffer = cmdBuffer};
+    PluginQueue pluginQueue{};
+    SystemContext ctx{.cmdBuffer = cmdBuffer, .pluginQueue = &pluginQueue};
 
+    // Run base startup systems.
     startupSchedule->run(mSystemRegistry, ctx);
 
+    // Repeat while the quit flag isn't set.
     auto currentTime = std::chrono::steady_clock::now();
     auto previousTime = std::chrono::steady_clock::now();
     do
     {
-        mainSchedule->run(mSystemRegistry, ctx);
-        currentTime = std::chrono::steady_clock::now();
+        // Remove and add plugins.
+        for (auto plugin : pluginQueue.toRemove)
+        {
+            this->uninstall(plugin);
+        }
+        for (auto plugin : pluginQueue.toAdd)
+        {
+            this->install(plugin);
+        }
 
-        auto& dt = mWorld.resource<DeltaTime>();
-        dt.unscaledValue = std::chrono::duration<float>(currentTime - previousTime).count();
+        // If any plugins were added, recompile the system execution chains, and rerun the startup systems.
+        if (!pluginQueue.toAdd.empty() || !pluginQueue.toRemove.empty())
+        {
+            // Clear the plugin queue.
+            pluginQueue.toRemove.clear();
+            pluginQueue.toAdd.clear();
+
+            // Build new schedules.
+            auto newStartupSchedule = mStartupPlanner.build();
+            CUBOS_ASSERT(newStartupSchedule.contains(), "Couldn't build updated startup schedule");
+            startupSchedule.replace(newStartupSchedule.value());
+            CUBOS_DEBUG("Built new startup schedule:\n{}", '\n' + startupSchedule->debug(mSystemRegistry) + '\n');
+            mStartupPlanner.clear();
+
+            auto newMainSchedule = mMainPlanner.build();
+            CUBOS_ASSERT(newMainSchedule.contains(), "Couldn't build updated main schedule");
+            mainSchedule.replace(newMainSchedule.value());
+            CUBOS_DEBUG("Built new main schedule:\n{}", '\n' + mainSchedule->debug(mSystemRegistry) + '\n');
+
+            // Run the newly installed startup systems.
+            startupSchedule->run(mSystemRegistry, ctx);
+        }
+
+        // Run main systems.
+        mainSchedule->run(mSystemRegistry, ctx);
+
+        // Update delta time.
+        currentTime = std::chrono::steady_clock::now();
+        mWorld.resource<DeltaTime>().unscaledValue = std::chrono::duration<float>(currentTime - previousTime).count();
         previousTime = currentTime;
     } while (!mWorld.resource<ShouldQuit>().value);
 }
@@ -222,6 +262,103 @@ bool Cubos::isKnownPlugin(Plugin plugin, Plugin basePlugin) const
     }
 
     return false;
+}
+
+void Cubos::install(Plugin plugin)
+{
+    this->plugin(plugin);
+
+    CUBOS_INFO("Installed plugin");
+}
+
+void Cubos::uninstall(Plugin plugin)
+{
+    // Check if the plugin is really installed.
+    if (!mInstalledPlugins.contains(plugin))
+    {
+        CUBOS_ERROR("Couldn't uninstall plugin as it wasn't installed");
+        return;
+    }
+
+    // Check if the plugin is still depended on by other plugins.
+    if (mInstalledPlugins.at(plugin).dependentCount > 0)
+    {
+        CUBOS_ERROR("Couldn't uninstall plugin as it's still depended on by other plugins");
+        return;
+    }
+
+    // Get a list of the types registered by the plugin.
+    std::vector<const reflection::Type*> types{};
+    for (const auto& [type, typePlugin] : mTypeToPlugin)
+    {
+        if (typePlugin == plugin)
+        {
+            types.push_back(type);
+        }
+    }
+
+    // Unregister all of the types.
+    for (const auto* type : types)
+    {
+        mTypeToPlugin.erase(*type);
+        mWorld.unregister(*type);
+    }
+
+    // Get a list of the tags registered by the plugin.
+    auto& info = mInstalledPlugins.at(plugin);
+    std::vector<std::string> tags{};
+    for (const auto& [tag, info] : mTags)
+    {
+        if (info.plugin == plugin)
+        {
+            tags.push_back(tag);
+        }
+    }
+
+    // Remove all of the tags.
+    for (const auto& tag : tags)
+    {
+        mTags.erase(tag);
+    }
+
+    // Remove all of the systems, conditions and planner tags.
+    for (const auto& id : info.systems)
+    {
+        mSystemRegistry.remove(id);
+    }
+
+    for (const auto& id : info.conditions)
+    {
+        mSystemRegistry.remove(id);
+    }
+
+    for (const auto& id : info.tags)
+    {
+        mMainPlanner.remove(id);
+    }
+
+    // Remove all of the observers.
+    for (const auto& id : mInstalledPlugins.at(plugin).observers)
+    {
+        mWorld.observers().unhook(id);
+    }
+
+    // Decrease dependent count of all dependencies.
+    for (auto dependency : mInstalledPlugins.at(plugin).dependencies)
+    {
+        mInstalledPlugins.at(dependency).dependentCount -= 1;
+    }
+
+    // Recursively uninstall sub-plugins.
+    for (auto subPlugin : mInstalledPlugins.at(plugin).subPlugins)
+    {
+        this->uninstall(subPlugin);
+    }
+
+    // Remove plugin from the list of installed plugins.
+    mInstalledPlugins.erase(plugin);
+
+    CUBOS_INFO("Uninstalled plugin");
 }
 
 Cubos::TagBuilder::TagBuilder(Cubos& cubos, std::string name, bool isStartup, Planner::TagId tagId)
@@ -438,10 +575,19 @@ void Cubos::SystemBuilder::finish(System<void> system)
     auto systemId = mCubos.mSystemRegistry.add(mName, std::move(system));
     auto leafId = planner.add(mName, systemId);
 
+    auto& pluginInfo = mCubos.mInstalledPlugins.at(mCubos.mPluginStack.back());
+    pluginInfo.systems.push_back(systemId);
+
+    if (!mIsStartup)
+    {
+        pluginInfo.tags.push_back(leafId);
+    }
+
     if (mCondition)
     {
         auto conditionId = mCubos.mSystemRegistry.add(mName + "#condition", std::move(mCondition.value()));
         planner.onlyIf(leafId, conditionId);
+        pluginInfo.conditions.push_back(conditionId);
     }
 
     for (const auto& tag : mTagged)
@@ -643,12 +789,14 @@ void Cubos::ObserverBuilder::finish(System<void> system)
     CUBOS_ASSERT(mColumnId != ColumnId::Invalid, "You must set at least one hook for the observer");
     CUBOS_DEBUG("Added observer {}", mName);
 
+    ObserverId id;
     if (mRemove)
     {
-        mCubos.mWorld.observers().hookOnRemove(mColumnId, std::move(system));
+        id = mCubos.mWorld.observers().hookOnRemove(mColumnId, std::move(system));
     }
     else
     {
-        mCubos.mWorld.observers().hookOnAdd(mColumnId, std::move(system));
+        id = mCubos.mWorld.observers().hookOnAdd(mColumnId, std::move(system));
     }
+    mCubos.mInstalledPlugins.at(mCubos.mPluginStack.back()).observers.push_back(id);
 }

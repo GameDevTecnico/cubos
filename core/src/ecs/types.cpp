@@ -49,7 +49,7 @@ void Types::add(const reflection::Type& type, Kind kind)
     CUBOS_ASSERT(!mEntries.back().isTree || !mEntries.back().isSymmetric, "Symmetric tree relations are not supported");
 }
 
-DataTypeId Types::remove(const reflection::Type& type)
+void Types::remove(const reflection::Type& type)
 {
     CUBOS_ASSERT(mTypes.contains(type), "Type {} not registered", type.name());
 
@@ -57,7 +57,6 @@ DataTypeId Types::remove(const reflection::Type& type)
     mTypes.erase(type);
     mNames.erase(type.name());
     mEntries[id.inner].type = nullptr;
-    return id;
 }
 
 DataTypeId Types::id(const reflection::Type& type) const
