@@ -9,7 +9,7 @@
 #include <unordered_set>
 
 #include <cubos/core/ecs/system/arguments/event/pipe.hpp>
-#include <cubos/core/ecs/system/dispatcher.hpp>
+#include <cubos/core/ecs/system/planner.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/system/tag.hpp>
 #include <cubos/core/ecs/world.hpp>
@@ -183,16 +183,6 @@ namespace cubos::core::ecs
         /// @return @ref TagBuilder.
         TagBuilder startupTag(const Tag& tag);
 
-        /// @brief Returns a @ref TagBuilder to configure the systems without the given tag.
-        /// @param tag Tag.
-        /// @return @ref TagBuilder.
-        TagBuilder noTag(const Tag& tag);
-
-        /// @brief Returns a @ref TagBuilder to configure the systems without the given startup tag.
-        /// @param tag Tag.
-        /// @return @ref TagBuilder.
-        TagBuilder noStartupTag(const Tag& tag);
-
         /// @brief Returns a new builder used to add a system to the engine.
         /// @param name System debug name.
         /// @return Builder used to configure the system.
@@ -228,6 +218,19 @@ namespace cubos::core::ecs
             std::unordered_set<Plugin> subPlugins;
         };
 
+        /// @brief Stores information regarding a tag.
+        struct TagInfo
+        {
+            /// @brief Whether the tag is a startup tag.
+            bool isStartup;
+
+            /// @brief Tag's identifier on its planner.
+            Planner::TagId id;
+
+            /// @brief Plugin which registered the tag.
+            Plugin plugin;
+        };
+
         /// @brief Checks if the given type was registered by the current plugin, its dependencies or sub-plugins.
         /// @param type Type.
         /// @return Whether the type was registered.
@@ -249,9 +252,10 @@ namespace cubos::core::ecs
         /// @param basePlugin Plugin which may include.
         bool isKnownPlugin(Plugin plugin, Plugin basePlugin) const;
 
-        core::ecs::World mWorld;
-        core::ecs::Dispatcher mStartupDispatcher;
-        core::ecs::Dispatcher mMainDispatcher;
+        World mWorld;
+        SystemRegistry mSystemRegistry;
+        Planner mStartupPlanner;
+        Planner mMainPlanner;
 
         /// @brief Stack with the plugins currently being configured.
         ///
@@ -264,8 +268,8 @@ namespace cubos::core::ecs
         /// @brief Maps registered types to the plugin they were registered in.
         memory::TypeMap<Plugin> mTypeToPlugin;
 
-        /// @brief Maps registered tags to the plugin they were registered in.
-        std::unordered_map<std::string, Plugin> mTagToPlugin;
+        /// @brief Maps registered tags to their data.
+        std::unordered_map<std::string, TagInfo> mTags;
     };
 
     class Cubos::TagBuilder
@@ -273,8 +277,9 @@ namespace cubos::core::ecs
     public:
         /// @brief Constructs.
         /// @param cubos Cubos.
-        /// @param dispatcher Dispatcher.
-        TagBuilder(Cubos& cubos, core::ecs::Dispatcher& dispatcher);
+        /// @param isStartup Whether the tag is a startup tag.
+        /// @param tagId Tag identifier.
+        TagBuilder(Cubos& cubos, bool isStartup, Planner::TagId tagId);
 
         /// @brief Makes all tagged systems run before systems with the given tag.
         /// @param tag Tag.
@@ -291,12 +296,19 @@ namespace cubos::core::ecs
         /// @return Builder.
         TagBuilder& tagged(const Tag& tag);
 
+        /// @brief Equivalent to calling @ref tagged on the given tag.
+        /// @param tag Tag.
+        /// @return Builder.
+        TagBuilder& addTo(const Tag& tag);
+
         /// @brief Makes all systems within the tag run only if the given condition evaluates to true.
         /// @param func Condition system function.
         /// @return Builder.
         TagBuilder& runIf(auto func)
         {
-            mDispatcher.tagAddCondition(System<bool>::make(mCubos.mWorld, std::move(func), {}));
+            auto conditionId =
+                mCubos.mSystemRegistry.add("#tagOnlyIf", System<bool>::make(mCubos.mWorld, std::move(func), {}));
+            mPlanner.onlyIf(mTagId, conditionId);
             return *this;
         }
 
@@ -305,13 +317,17 @@ namespace cubos::core::ecs
         /// @return Builder.
         TagBuilder& repeatWhile(auto func)
         {
-            mDispatcher.tagRepeatWhile(System<bool>::make(mCubos.mWorld, std::move(func), {}));
+            auto conditionId =
+                mCubos.mSystemRegistry.add("#tagRepeatWhile", System<bool>::make(mCubos.mWorld, std::move(func), {}));
+            CUBOS_ASSERT(mPlanner.repeatWhile(mTagId, conditionId), "Tag was already set to repeating");
             return *this;
         }
 
     private:
         Cubos& mCubos;
-        core::ecs::Dispatcher& mDispatcher;
+        Planner& mPlanner;
+        bool mIsStartup;
+        Planner::TagId mTagId;
     };
 
     class Cubos::SystemBuilder
@@ -319,9 +335,9 @@ namespace cubos::core::ecs
     public:
         /// @brief Constructs.
         /// @param cubos Cubos.
-        /// @param dispatcher Dispatcher to add the system to.
+        /// @param isStartup Whether the system is a startup system.
         /// @param name Debug name.
-        SystemBuilder(Cubos& cubos, Dispatcher& dispatcher, std::string name);
+        SystemBuilder(Cubos& cubos, bool isStartup, std::string name);
 
         /// @brief Adds a tag to the system.
         /// @param tag Tag.
@@ -434,7 +450,7 @@ namespace cubos::core::ecs
         void finish(System<void> system);
 
         Cubos& mCubos;
-        Dispatcher& mDispatcher;
+        bool mIsStartup;
         std::string mName;
         Opt<System<bool>> mCondition;
         std::unordered_set<std::string> mTagged;

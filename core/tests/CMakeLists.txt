@@ -44,11 +44,8 @@ add_executable(
 	ecs/world.cpp
 	ecs/query.cpp
 	ecs/blueprint.cpp
-
 	ecs/commands.cpp
 	ecs/system.cpp
-	ecs/dispatcher.cpp
-
 	ecs/utils/expected.cpp
 	ecs/utils/action.cpp
 	ecs/types.cpp
