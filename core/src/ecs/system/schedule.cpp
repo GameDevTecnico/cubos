@@ -1,3 +1,4 @@
+#include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/schedule.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
@@ -167,6 +168,7 @@ void Schedule::run(SystemRegistry& registry, SystemContext& context, NodeId node
     {
         // If the node is a system node, then we just run it and increment the satisfaction of dependant nodes.
         registry.system(node.systemId.value()).run(context);
+        context.cmdBuffer.commit();
         this->incrementSatisfaction(node.repeatId);
         this->incrementSatisfaction(node.satisfyOnFinish);
         node.alreadyFinished = true;
@@ -176,6 +178,7 @@ void Schedule::run(SystemRegistry& registry, SystemContext& context, NodeId node
     // Then the node must either be a condition or repeat node. In either case, we must evaluate its associated
     // condition.
     auto result = registry.condition(node.conditionId.value()).run(context);
+    context.cmdBuffer.commit();
 
     if (!node.isRepeat)
     {
@@ -194,19 +197,9 @@ void Schedule::run(SystemRegistry& registry, SystemContext& context, NodeId node
         }
 
         // Otherwise, increment the satisfaction of nodes which depend on the nodes which will be skipped.
-        for (const auto& skippedId : node.satisfyOnTrue)
+        for (auto skippedId : node.satisfyOnTrue)
         {
-            if (node.repeatId != mNodes[skippedId.inner].repeatId)
-            {
-                mNodes[mNodes[skippedId.inner].repeatId->inner].skippedParts += 1;
-            }
-
-            if (mNodes[skippedId.inner].repeatId && mNodes[mNodes[skippedId.inner].repeatId->inner].isRepeating)
-            {
-                this->incrementSatisfaction(mNodes[skippedId.inner].repeatId);
-            }
-
-            this->incrementSatisfaction(mNodes[skippedId.inner].satisfyOnFinish);
+            this->skip(node.repeatId, skippedId);
         }
 
         return;
@@ -310,6 +303,31 @@ void Schedule::matchNodeDepths(NodeId& left, NodeId& right) const
             right = mNodes[right.inner].repeatId.value();
         }
     }
+}
+
+void Schedule::skip(Opt<NodeId> repeatId, NodeId nodeId)
+{
+    auto& node = mNodes[nodeId.inner];
+
+    if (repeatId != node.repeatId)
+    {
+        mNodes[node.repeatId->inner].skippedParts += 1;
+    }
+
+    if (node.repeatId && mNodes[node.repeatId->inner].isRepeating)
+    {
+        this->incrementSatisfaction(node.repeatId);
+    }
+
+    if (node.conditionId.contains())
+    {
+        for (auto skippedId : node.satisfyOnTrue)
+        {
+            this->skip(repeatId, skippedId);
+        }
+    }
+
+    this->incrementSatisfaction(mNodes[nodeId.inner].satisfyOnFinish);
 }
 
 void Schedule::incrementSatisfaction(Opt<NodeId> node)
