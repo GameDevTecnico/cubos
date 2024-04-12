@@ -39,11 +39,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Force plugins to be added only once (#422, **@RiscadoA**).
 - Return direct references to resources instead of guards on World (#922, **@RiscadoA**).
 - Stop using old serialization to load Settings (#1100, **@RiscadoA**).
-- Make transform gizmo screen size indpendent from entity's distance to camera (#1017, **@DiogoMendonc-a**)
-
-### Changed
-
+- Make transform gizmo screen size independent from entity's distance to camera (#1017, **@DiogoMendonc-a**)
 - Palette & Grid saving/loading now use streams instead of serialization (#572, **@Dacops**).
+- Split Dispatcher into Planner and Schedule (#1117, **@RiscadoA**).
 
 ### Fixed
 
