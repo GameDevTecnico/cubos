@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <numeric> //Included for the accumulated/max_element funcs
 
 #include <imgui.h>

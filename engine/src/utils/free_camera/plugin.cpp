@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/transform/position.hpp>
