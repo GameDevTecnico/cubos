@@ -12,7 +12,6 @@ option(WITH_OPENAL "With OpenAL?" OFF)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 
 set(CUBOS_CORE_ECS_MAX_COMPONENTS "63" CACHE STRING "The maximum number of components registered in an ECS world.")
-set(CUBOS_CORE_DISPATCHER_MAX_CONDITIONS "64" CACHE STRING "The maximum number of conditions available for the dispatcher.")
 
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
@@ -109,7 +108,6 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/system/tag.cpp"
 	"src/ecs/system/system.cpp"
 	"src/ecs/system/options.cpp"
-	"src/ecs/system/dispatcher.cpp"
 	"src/ecs/system/arguments/commands.cpp"
 	"src/ecs/system/arguments/query.cpp"
 	"src/ecs/system/arguments/resources.cpp"
@@ -145,7 +143,6 @@ add_library(cubos-core ${CUBOS_CORE_SOURCE})
 target_include_directories(cubos-core PUBLIC "include")
 target_compile_definitions(cubos-core PUBLIC
 	-DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS}
-	-DCUBOS_CORE_DISPATCHER_MAX_CONDITIONS=${CUBOS_CORE_DISPATCHER_MAX_CONDITIONS}
 )
 cubos_common_target_options(cubos-core)
 
