@@ -33,6 +33,9 @@ namespace cubos::core::ecs
             };
         };
 
+        /// @brief Resets the planner to its initial state.
+        void clear();
+
         /// @brief Adds a new unnamed tag to the planner.
         /// @return Tag identifier.
         TagId add();

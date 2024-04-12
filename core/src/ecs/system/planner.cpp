@@ -10,6 +10,11 @@ std::size_t Planner::TagId::Hash::operator()(const TagId& tagId) const
     return tagId.inner;
 }
 
+void Planner::clear()
+{
+    mTags.clear();
+}
+
 auto Planner::add() -> TagId
 {
     return this->add("unnamed" + std::to_string(mTags.size()));
