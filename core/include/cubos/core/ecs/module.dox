@@ -26,12 +26,6 @@ namespace cubos::core::ecs
     /// @note Check out the @ref features-ecs "ECS feature guide" for an in-depth explanation of
     /// what an ECS is and how it can be used.
     ///
-    /// ## Data types
-    /// - @ref World - stores entities, components and resources, can be queried.
-    /// - @ref Dispatcher - stores and dispatches systems in the right order.
-    /// - @ref Blueprint - bundle of entities and components which can be spawned using @ref
-    ///   Commands.
-    ///
     /// ## System argument types
     /// - `const R&` - used to read resource data of type @p R.
     /// - `R&` - used to write resource data of type @p R.
