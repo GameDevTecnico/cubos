@@ -128,7 +128,7 @@ void cubos::engine::settingsPlugin(Cubos& cubos)
 {
     cubos.resource<Settings>();
 
-    cubos.tag(settingsTag);
+    cubos.startupTag(settingsTag);
 
     cubos.startupSystem("load Settings from file and arguments")
         .tagged(settingsTag)
