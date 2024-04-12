@@ -1,72 +1,14 @@
-#include <map>
-#include <vector>
-
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/schedule.hpp>
 
-using namespace cubos::core::ecs;
-
-template <int value>
-static void pushToOrder(std::vector<int>& order)
-{
-    order.push_back(value);
-}
-
-template <int value, bool result>
-static bool pushToOrderAndReturn(std::vector<int>& order)
-{
-    order.push_back(value);
-    return result;
-}
-
-template <int value, int times>
-static bool pushToOrderAndTrueNTimes(std::map<int, int>& state, std::vector<int>& order)
-{
-    state.emplace(value, 0);
-    order.push_back(value);
-
-    if (state.at(value) == times)
-    {
-        state.at(value) = 0;
-        return false;
-    }
-    else
-    {
-        state.at(value) += 1;
-        return true;
-    }
-}
-
-static System<void> makeSystem(World& world, auto system)
-{
-    return System<void>::make(world, std::move(system), {});
-}
-
-static System<bool> makeCondition(World& world, auto condition)
-{
-    return System<bool>::make(world, std::move(condition), {});
-}
+#include "utils.hpp"
 
 static Schedule::NodeId validate(Opt<Schedule::NodeId> nodeId)
 {
     REQUIRE(nodeId.contains());
     return nodeId.value();
-}
-
-static std::string orderToString(const std::vector<int>& order)
-{
-    std::string str;
-    for (const auto& i : order)
-    {
-        if (!str.empty())
-        {
-            str += ' ';
-        }
-        str += std::to_string(i);
-    }
-    return str;
 }
 
 TEST_CASE("ecs::Schedule")
@@ -212,6 +154,45 @@ TEST_CASE("ecs::Schedule")
                 CHECK(schedule.onlyIf(node1, node7));
 
                 expected = {7, 3};
+            }
+        }
+
+        SUBCASE("condition which depends on other condition")
+        {
+            CHECK(schedule.order(node1, node2));
+            CHECK(schedule.order(node2, node3));
+
+            SUBCASE("both return true")
+            {
+                auto node5 = validate(schedule.condition(true5));
+                auto node6 = validate(schedule.condition(true6));
+
+                schedule.onlyIf(node1, node5);
+                schedule.onlyIf(node5, node6);
+
+                expected = {6, 5, 1, 2, 3};
+            }
+
+            SUBCASE("outer returns false")
+            {
+                auto node5 = validate(schedule.condition(true5));
+                auto node7 = validate(schedule.condition(false7));
+
+                schedule.onlyIf(node1, node5);
+                schedule.onlyIf(node5, node7);
+
+                expected = {7, 2, 3};
+            }
+
+            SUBCASE("inner returns false")
+            {
+                auto node5 = validate(schedule.condition(true5));
+                auto node7 = validate(schedule.condition(false7));
+
+                schedule.onlyIf(node1, node7);
+                schedule.onlyIf(node7, node5);
+
+                expected = {5, 7, 2, 3};
             }
         }
 

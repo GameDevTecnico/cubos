@@ -214,6 +214,11 @@ namespace cubos::core::ecs
         /// @param right Second node identifier.
         void matchNodeDepths(NodeId& left, NodeId& right) const;
 
+        /// @brief Increments the satisfaction of nodes which depend on the given node, as it won't run.
+        /// @param repeatId Identifier of the repeat group the condition which failed is in.
+        /// @param nodeId Node identifier.
+        void skip(Opt<NodeId> repeatId, NodeId nodeId);
+
         /// @brief Increments the satisfaction of the given node, if there's one.
         /// @param node Node identifier.
         void incrementSatisfaction(Opt<NodeId> node);
