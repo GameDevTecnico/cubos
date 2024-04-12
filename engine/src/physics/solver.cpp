@@ -2,6 +2,7 @@
 
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
+#include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/solver.hpp>
@@ -14,10 +15,11 @@ using namespace cubos::engine;
 
 void cubos::engine::solverPlugin(Cubos& cubos)
 {
+    cubos.depends(fixedStepPlugin);
     cubos.depends(collisionsPlugin);
     cubos.depends(physicsPlugin);
 
-    cubos.tag(physicsSolveTag);
+    cubos.tag(physicsSolveTag).tagged(fixedStepTag);
 
     cubos.system("solve collision")
         .tagged(physicsSolveTag)
