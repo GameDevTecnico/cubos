@@ -105,6 +105,7 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/system/access.cpp"
 	"src/ecs/system/schedule.cpp"
 	"src/ecs/system/registry.cpp"
+	"src/ecs/system/planner.cpp"
 	"src/ecs/system/tag.cpp"
 	"src/ecs/system/system.cpp"
 	"src/ecs/system/options.cpp"

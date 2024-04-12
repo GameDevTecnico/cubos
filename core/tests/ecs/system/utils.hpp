@@ -1,9 +1,9 @@
 #pragma once
 
-#include <map>
-#include <vector>
-
 #include <cubos/core/ecs/system/system.hpp>
+#include <cubos/core/reflection/external/map.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/vector.hpp>
 
 using namespace cubos::core::ecs;
 
