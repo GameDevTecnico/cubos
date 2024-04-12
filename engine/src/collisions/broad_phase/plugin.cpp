@@ -1,4 +1,5 @@
 #include "plugin.hpp"
+#include <algorithm>
 
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
