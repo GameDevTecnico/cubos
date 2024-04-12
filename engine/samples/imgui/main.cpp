@@ -83,7 +83,7 @@ CUBOS_REFLECT_IMPL(DummyResource)
                   .withField("persons", &DummyResource::persons)
                   .withField("vec", &DummyResource::vec)
                   .withField("v", &DummyResource::map))
-        .with(ConstructibleTrait::typed<Person>().withDefaultConstructor().build());
+        .with(ConstructibleTrait::typed<DummyResource>().withDefaultConstructor().build());
 }
 /// [Creating a dummy resource]
 
