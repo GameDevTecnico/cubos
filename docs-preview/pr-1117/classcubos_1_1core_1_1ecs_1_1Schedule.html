@@ -53,9 +53,9 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md60">Execution</a></li>
-            <li><a href="#autotoc_md61">Constraint Specification</a></li>
-            <li><a href="#autotoc_md62">Concurrency</a></li>
+            <li><a href="#autotoc_md59">Execution</a></li>
+            <li><a href="#autotoc_md60">Constraint Specification</a></li>
+            <li><a href="#autotoc_md61">Concurrency</a></li>
             <li>
               Reference
               <ul>
@@ -65,7 +65,7 @@
             </li>
           </ul>
         </nav>
-<p>In short, the algorithm implemented here is based on a graph of dependencies. There are three types of nodes:</p><ul><li>system nodes.</li><li>condition nodes;</li><li>repeat nodes;</li></ul><p>Additionally, there are three types of constraints which can be applied to the flow:</p><ul><li>ordering constraints, e.g., node 1 runs before node 2 - specified through <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html#a64003d5dcd09c749adc69c5ed675941d" class="m-doc">order</a>.</li><li>only if constraints, e.g., node 1 runs if condition node 2 returns true - specified through <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html#a82965480d0a8dc231d54c43a022e2ccc" class="m-doc">onlyIf</a>.</li><li>repeat constraints, e.g., node 1 is part of repeat node 2 - specified during node creation time.</li></ul><p>For a more in-depth and accurate analysis of the behavior of this class, take a look at its unit tests.</p><section id="autotoc_md60"><h2><a href="#autotoc_md60">Execution</a></h2><p>Each node stores its &#x27;needed satisfaction&#x27;, which represents how many nodes must mark it as &#x27;satisfied&#x27; for it to be illegible to run. During execution, nodes keep the current satisfaction level as state. When that level reaches the level needed to run, the node is pushed to the execution queue.</p><p><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> nodes are the most basic of the node types. When they execute, their respective system is run. All other nodes which have order constraints depending on it have their satisfaction increased.</p><p>Condition nodes which evaluate to true mark all dependents as satisfied. If they evaluate to false, they mark the dependents of the dependents as satisfied, effectively skipping these nodes.</p><p>Repeat nodes are the most complex of the nodes. Each node stores the identifier of the repeat node it belongs to (which may be none). All nodes belonging to one have a base satisfaction level of 1. When the repeat node evaluates to true, this level is increased, allowing their execution to start. Additionally, the repeat node&#x27;s satisfaction is decreased by the number of belonging nodes. When each of those nodes finishes, it increments the satisfaction level of the repeat node. When all nodes are finished, the repeat node runs once again.</p><p>If a repeat node evaluates to false, it marks as satisfied all of its dependents, as only then it has finished.</p><p>The execution stops when the queue is emptied.</p></section><section id="autotoc_md61"><h2><a href="#autotoc_md61">Constraint Specification</a></h2><p>Any two nodes may constrained to run in a given order in relation to each other. If two nodes are part of different repeat nodes, the ordering is applied for their lowest ancestor repeat nodes which have the same parent repeat node. This means, that, if, for example, you have two systems A and B, each part of their own repeat node, if you force A to run before B, then A&#x27;s repeat node will entirely run before B&#x27;s repeat node. This is necessary as the number of times a repeat node executes is unknown - it may vary depending on the condition.</p><p>When only if constraints are applied between a node and a condition, the condition always runs before the system, but the system only runs if the condition evaluates to true. Only if constraints are only allowed when the condition doesn&#x27;t repeat from the point of view of the node. More formally, the condition must be part of the node&#x27;s repeat node or one of its ancestors.</p><p>Any operation which would introduce a cycle fails by returning false and logging an error.</p></section><section id="autotoc_md62"><h2><a href="#autotoc_md62">Concurrency</a></h2><p>This algorithm makes it easy to run systems concurrently. To do this, we just have to distribute the work between threads each time a node is popped from the queue. One thing to keep in mind is that this class by itself doesn&#x27;t solve node conflicts. If two nodes write to the same resource, for example, and if they aren&#x27;t ordered, an arbitrary order constraint should be added between them, to ensure that they won&#x27;t run concurrently.</p></section>
+<p>In short, the algorithm implemented here is based on a graph of dependencies. There are three types of nodes:</p><ul><li>system nodes.</li><li>condition nodes;</li><li>repeat nodes;</li></ul><p>Additionally, there are three types of constraints which can be applied to the flow:</p><ul><li>ordering constraints, e.g., node 1 runs before node 2 - specified through <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html#a64003d5dcd09c749adc69c5ed675941d" class="m-doc">order</a>.</li><li>only if constraints, e.g., node 1 runs if condition node 2 returns true - specified through <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html#a82965480d0a8dc231d54c43a022e2ccc" class="m-doc">onlyIf</a>.</li><li>repeat constraints, e.g., node 1 is part of repeat node 2 - specified during node creation time.</li></ul><p>For a more in-depth and accurate analysis of the behavior of this class, take a look at its unit tests.</p><section id="autotoc_md59"><h2><a href="#autotoc_md59">Execution</a></h2><p>Each node stores its &#x27;needed satisfaction&#x27;, which represents how many nodes must mark it as &#x27;satisfied&#x27; for it to be illegible to run. During execution, nodes keep the current satisfaction level as state. When that level reaches the level needed to run, the node is pushed to the execution queue.</p><p><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> nodes are the most basic of the node types. When they execute, their respective system is run. All other nodes which have order constraints depending on it have their satisfaction increased.</p><p>Condition nodes which evaluate to true mark all dependents as satisfied. If they evaluate to false, they mark the dependents of the dependents as satisfied, effectively skipping these nodes.</p><p>Repeat nodes are the most complex of the nodes. Each node stores the identifier of the repeat node it belongs to (which may be none). All nodes belonging to one have a base satisfaction level of 1. When the repeat node evaluates to true, this level is increased, allowing their execution to start. Additionally, the repeat node&#x27;s satisfaction is decreased by the number of belonging nodes. When each of those nodes finishes, it increments the satisfaction level of the repeat node. When all nodes are finished, the repeat node runs once again.</p><p>If a repeat node evaluates to false, it marks as satisfied all of its dependents, as only then it has finished.</p><p>The execution stops when the queue is emptied.</p></section><section id="autotoc_md60"><h2><a href="#autotoc_md60">Constraint Specification</a></h2><p>Any two nodes may constrained to run in a given order in relation to each other. If two nodes are part of different repeat nodes, the ordering is applied for their lowest ancestor repeat nodes which have the same parent repeat node. This means, that, if, for example, you have two systems A and B, each part of their own repeat node, if you force A to run before B, then A&#x27;s repeat node will entirely run before B&#x27;s repeat node. This is necessary as the number of times a repeat node executes is unknown - it may vary depending on the condition.</p><p>When only if constraints are applied between a node and a condition, the condition always runs before the system, but the system only runs if the condition evaluates to true. Only if constraints are only allowed when the condition doesn&#x27;t repeat from the point of view of the node. More formally, the condition must be part of the node&#x27;s repeat node or one of its ancestors.</p><p>Any operation which would introduce a cycle fails by returning false and logging an error.</p></section><section id="autotoc_md61"><h2><a href="#autotoc_md61">Concurrency</a></h2><p>This algorithm makes it easy to run systems concurrently. To do this, we just have to distribute the work between threads each time a node is popped from the queue. One thing to keep in mind is that this class by itself doesn&#x27;t solve node conflicts. If two nodes write to the same resource, for example, and if they aren&#x27;t ordered, an arbitrary order constraint should be added between them, to ensure that they won&#x27;t run concurrently.</p></section>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -112,6 +112,10 @@
               <a href="structcubos_1_1core_1_1ecs_1_1SystemContext.html" class="m-doc">SystemContext</a>&amp; context)</span>
             </dt>
             <dd>Runs the systems in the schedule.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad7aef7ffc60ac94e6737fc82756388b8" class="m-doc">debug</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">SystemRegistry</a>&amp; registry) const -&gt; std::string</span>
+            </dt>
+            <dd>Generates a multi-line string which represents the order in which the nodes will run.</dd>
           </dl>
         </section>
         <section>
@@ -286,6 +290,30 @@
                 </tr>
               </tbody>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="ad7aef7ffc60ac94e6737fc82756388b8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />ecs::<wbr />Schedule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad7aef7ffc60ac94e6737fc82756388b8" class="m-doc-self">debug</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">SystemRegistry</a>&amp; registry) const</span></span>
+            </h3>
+            <p>Generates a multi-line string which represents the order in which the nodes will run.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">registry</td>
+                  <td>Registry containing the systems, used to get the system names.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The obtained order is not necessarily the one in which the nodes will run. The only guarantee given, is that if an ordering constraint was specified, then this string will reflect it. Thus, if a system A appears before a system B, then there isn&#x27;t a constraint &#x27;B must run before A&#x27;.</p>
           </div></section>
         </section>
       </div>
