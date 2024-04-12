@@ -37,6 +37,7 @@ namespace cubos::core::ecs
     /// - @ref EventReader "EventReader<E>" - reads events of type @p E sent from other systems.
     /// - @ref EventWriter "EventWriter<E>" - sends events of type @p E to other systems.
     /// - @ref Query "Query<Args...>" - queries the world for entities which match its arguments.
+    /// - @ref Plugins - used to add and remove plugins dynamically.
     ///
     /// ## Query argument types
     /// - `const C&` - matches entities with the component @p C, read-only access.

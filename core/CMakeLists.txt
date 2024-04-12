@@ -103,6 +103,7 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/system/system.cpp"
 	"src/ecs/system/options.cpp"
 	"src/ecs/system/arguments/commands.cpp"
+	"src/ecs/system/arguments/plugins.cpp"
 	"src/ecs/system/arguments/query.cpp"
 	"src/ecs/system/arguments/resources.cpp"
 	"src/ecs/system/arguments/world.cpp"
@@ -124,6 +125,7 @@ set(CUBOS_CORE_SOURCE
     "src/ecs/name.cpp"
 	"src/ecs/world.cpp"
 	"src/ecs/command_buffer.cpp"
+	"src/ecs/plugin_queue.cpp"
 	"src/ecs/types.cpp"
 	"src/ecs/cubos.cpp"
 

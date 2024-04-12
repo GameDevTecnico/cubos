@@ -15,6 +15,9 @@ namespace cubos::engine
     /// @copydoc cubos::core::ecs::Tag
     using Tag = core::ecs::Tag;
 
+    /// @copydoc cubos::core::ecs::Plugin
+    using Plugin = core::ecs::Plugin;
+
     /// @copydoc cubos::core::ecs::Cubos
     using Cubos = core::ecs::Cubos;
 
