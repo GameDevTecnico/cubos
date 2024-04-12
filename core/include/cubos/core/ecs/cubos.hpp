@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <cubos/core/ecs/observer/id.hpp>
+#include <cubos/core/ecs/plugin_queue.hpp>
 #include <cubos/core/ecs/system/arguments/event/pipe.hpp>
 #include <cubos/core/ecs/system/planner.hpp>
 #include <cubos/core/ecs/system/system.hpp>
@@ -67,9 +69,6 @@ namespace cubos::core::ecs
     class CUBOS_CORE_API Cubos final
     {
     public:
-        /// @brief Function pointer type representing a plugin.
-        using Plugin = void (*)(Cubos&);
-
         /// @brief Used to create new tags or configure existing ones.
         class TagBuilder;
 
@@ -222,6 +221,18 @@ namespace cubos::core::ecs
 
             /// @brief Plugins which were added by this plugin.
             std::unordered_set<Plugin> subPlugins;
+
+            /// @brief Systems which were added by this plugin.
+            std::vector<SystemId> systems;
+
+            /// @brief Conditions which were added by this plugin.
+            std::vector<ConditionId> conditions;
+
+            /// @brief Main tags which were added by this plugin.
+            std::vector<Planner::TagId> tags;
+
+            /// @brief Observers which were added by this plugin.
+            std::vector<ObserverId> observers;
         };
 
         /// @brief Stores information regarding a tag.
@@ -258,9 +269,21 @@ namespace cubos::core::ecs
         /// @param basePlugin Plugin which may include.
         bool isKnownPlugin(Plugin plugin, Plugin basePlugin) const;
 
+        /// @brief Installs a plugin dynamically.
+        /// @param plugin Plugin.
+        void install(Plugin plugin);
+
+        /// @brief Uninstalls a plugin dynamically.
+        /// @param plugin Plugin.
+        void uninstall(Plugin plugin);
+
         World mWorld;
         SystemRegistry mSystemRegistry;
+
+        /// @brief Planner for systems which run before the main loop starts.
         Planner mStartupPlanner;
+
+        /// @brief Planner for systems which run every frame.
         Planner mMainPlanner;
 
         /// @brief Stack with the plugins currently being configured.

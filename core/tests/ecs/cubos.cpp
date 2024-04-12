@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/cubos.hpp>
+#include <cubos/core/ecs/system/arguments/plugins.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include "utils.hpp"
@@ -294,5 +295,41 @@ TEST_CASE("ecs::Cubos")
             ++it;
             CHECK(it == query.end());
         });
+    }
+
+    SUBCASE("plugin can be installed and removed dynamically")
+    {
+        using cubos::core::reflection::reflect;
+
+        static constexpr auto removedPlugin = [](Cubos& cubos) { cubos.component<long>(); };
+        static constexpr auto dependencyPlugin = [](Cubos&) {};
+        static constexpr auto subPlugin = [](Cubos& cubos) { cubos.component<int>(); };
+        static constexpr auto plugin = [](Cubos& cubos) {
+            cubos.depends(dependencyPlugin);
+            cubos.plugin(subPlugin);
+        };
+
+        cubos.plugin(removedPlugin);
+
+        cubos.startupSystem("add plugins").call([](World& world, Plugins plugins, Commands cmds) {
+            REQUIRE(world.types().contains(reflect<long>()));
+            REQUIRE_FALSE(world.types().contains(reflect<int>()));
+            plugins.add(dependencyPlugin);
+            plugins.add(plugin);
+            plugins.remove(removedPlugin);
+
+            cmds.create().add<long>(0);
+        });
+
+        cubos.system("check if the right stuff changed").call([](World& world, Query<Entity> query) {
+            REQUIRE(world.types().contains(reflect<int>()));
+            REQUIRE_FALSE(world.types().contains(reflect<long>()));
+            REQUIRE(!query.empty());
+            auto [ent] = *query.first();
+            auto components = world.components(ent);
+            REQUIRE(components.begin() == components.end());
+        });
+
+        cubos.run();
     }
 }

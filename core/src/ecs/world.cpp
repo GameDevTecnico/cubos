@@ -41,7 +41,7 @@ void World::registerRelation(const reflection::Type& type)
 
 void World::unregister(const reflection::Type& type)
 {
-    auto dataTypeId = mTypes.remove(type);
+    auto dataTypeId = mTypes.id(type);
     if (mTypes.isResource(dataTypeId))
     {
         CUBOS_TRACE("Unregistered resource {}", type.name());
@@ -73,6 +73,8 @@ void World::unregister(const reflection::Type& type)
         CUBOS_TRACE("Unregistered relation {}", type.name());
         mTables.sparseRelation().erase(dataTypeId);
     }
+
+    mTypes.remove(type);
 }
 
 void World::insertResource(memory::AnyValue value)
