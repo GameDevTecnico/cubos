@@ -214,10 +214,6 @@
             </dt>
             <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which holds the result of a query over all entities in world which match the given arguments.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a>
-            </dt>
-            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
-            <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1SystemContext.html" class="m-doc">SystemContext</a>
             </dt>
             <dd>Context passed by the system caller to the fetchers.</dd>
@@ -231,10 +227,34 @@
             </dt>
             <dd>Contains extra options for a specific system argument.</dd>
             <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Planner.html" class="m-doc">Planner</a>
+            </dt>
+            <dd>Layer on top of <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html" class="m-doc">Schedule</a>, used to build them with added abstractions such as tags.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a>
+            </dt>
+            <dd>Identifies a system.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a>
+            </dt>
+            <dd>Identifies a condition.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">SystemRegistry</a>
+            </dt>
+            <dd>Stores known systems and conditions.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html" class="m-doc">Schedule</a>
+            </dt>
+            <dd>Stores schedule nodes and the restrictions that must be met for them to run.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>
             </dt>
             <dd>Holds a system with a return type <code>T</code>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>
+            </dt>
+            <dd>Represents a tag to be used with the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> class.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a>
             </dt>
@@ -271,10 +291,6 @@
               class <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>
             </dt>
             <dd>Stores the tables of a given world.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>
-            </dt>
-            <dd>Represents a tag to be used with the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> class.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>
             </dt>

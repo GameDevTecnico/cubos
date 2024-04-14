@@ -75,12 +75,16 @@
           <dl class="m-doc">
             <dt>file <a href="access_8hpp.html" class="m-doc">access.hpp</a></dt>
             <dd>Struct <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />SystemAccess</a>.</dd>
-            <dt>file <a href="dispatcher_8hpp.html" class="m-doc">dispatcher.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher</a>.</dd>
             <dt>file <a href="system_2fetcher_8hpp.html" class="m-doc">fetcher.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1SystemFetcher.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />SystemFetcher</a>.</dd>
             <dt>file <a href="options_8hpp.html" class="m-doc">options.hpp</a></dt>
             <dd>Struct <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />SystemOptions</a>.</dd>
+            <dt>file <a href="planner_8hpp.html" class="m-doc">planner.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Planner.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Planner</a>.</dd>
+            <dt>file <a href="system_2registry_8hpp.html" class="m-doc">registry.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry</a>.</dd>
+            <dt>file <a href="schedule_8hpp.html" class="m-doc">schedule.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Schedule</a>.</dd>
             <dt>file <a href="system_8hpp.html" class="m-doc">system.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />System</a>.</dd>
           </dl>
@@ -93,10 +97,6 @@
             </dt>
             <dd>Describes the types of data a system accesses.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::core::ecs::Dispatcher</a>
-            </dt>
-            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
-            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1SystemFetcher.html" class="m-doc">cubos::core::ecs::SystemFetcher</a>
             </dt>
@@ -105,6 +105,22 @@
               struct <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">cubos::core::ecs::SystemOptions</a>
             </dt>
             <dd>Contains extra options for a specific system argument.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">cubos::core::ecs::SystemId</a>
+            </dt>
+            <dd>Identifies a system.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">cubos::core::ecs::ConditionId</a>
+            </dt>
+            <dd>Identifies a condition.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">cubos::core::ecs::SystemRegistry</a>
+            </dt>
+            <dd>Stores known systems and conditions.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html" class="m-doc">cubos::core::ecs::Schedule</a>
+            </dt>
+            <dd>Stores schedule nodes and the restrictions that must be met for them to run.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">cubos::core::ecs::System</a>

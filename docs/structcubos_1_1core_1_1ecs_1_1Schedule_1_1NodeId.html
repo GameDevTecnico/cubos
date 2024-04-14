@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/system/dispatcher.hpp file | CUBOS. Docs</title>
+  <title>cubos::core::ecs::Schedule::NodeId struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,52 +46,65 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_1849b6590c20a7c40f18c0337f505edf.html">system</a>/</span>dispatcher.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1Schedule.html">Schedule</a>::<wbr/></span>NodeId <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="schedule_8hpp.html">&lt;core/ecs/system/schedule.hpp&gt;</a></div>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher</a>.</p>
+        <p>Identifies a node in the schedule.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac2ca1bbdc4c784b707858e9db061d98d" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1Schedule_1_1NodeId.html" class="m-doc">NodeId</a>&amp; other) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Compares two identifiers for equality.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::core::ecs::Dispatcher</a>
+            <dt id="a1c4201f2805a94e79ff602a3c2945e9d">
+              std::size_t <a href="#a1c4201f2805a94e79ff602a3c2945e9d" class="m-doc-self">inner</a>
             </dt>
-            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1Dependency.html" class="m-doc">cubos::core::ecs::Dispatcher::Dependency</a>
-            </dt>
-            <dd>Internal class to specify system dependencies.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1SystemSettings.html" class="m-doc">cubos::core::ecs::Dispatcher::SystemSettings</a>
-            </dt>
-            <dd>Internal class with settings pertaining to system/tag execution.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">cubos::core::ecs::Dispatcher::System</a>
-            </dt>
-            <dd>Internal class to handle tag settings.</dd>
+            <dd><a href="structcubos_1_1core_1_1ecs_1_1Schedule_1_1Node.html" class="m-doc">Node</a> index in the schedule.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ac2ca1bbdc4c784b707858e9db061d98d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Schedule::<wbr />NodeId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac2ca1bbdc4c784b707858e9db061d98d" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1Schedule_1_1NodeId.html" class="m-doc">NodeId</a>&amp; other) const <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Compares two identifiers for equality.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the two identifiers are equal.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
