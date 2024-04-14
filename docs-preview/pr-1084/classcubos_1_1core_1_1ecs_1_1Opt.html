@@ -115,6 +115,10 @@
             </dt>
             <dd>Gets the underlying value.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abc5e7d96067e568e5bf262d1d4651b00" class="m-doc">value</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp;</span>
+            </dt>
+            <dd>Gets the underlying value.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a44ab4e78a274df937fd33d6e1a9ce6a6" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) -&gt; T&amp;</span>
             </dt>
             <dd>Gets the underlying value.</dd>
@@ -122,6 +126,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#adbe6cf1c980bbde24a0a3c014482dd3f" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) -&gt; T*</span>
             </dt>
             <dd>Gets the underlying value.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a81064887752e4eb777ba5e4fc4a5652b" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; other) const -&gt; bool</span>
+            </dt>
+            <dd>Compares with another optional value.</dd>
           </dl>
         </section>
         <section>
@@ -238,6 +246,24 @@
             </table>
 <p>Aborts if there&#x27;s no value.</p>
           </div></section>
+          <section class="m-doc-details" id="abc5e7d96067e568e5bf262d1d4651b00"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc5e7d96067e568e5bf262d1d4651b00" class="m-doc-self">value</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the underlying value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if there&#x27;s no value.</p>
+          </div></section>
           <section class="m-doc-details" id="a44ab4e78a274df937fd33d6e1a9ce6a6"><div>
             <h3>
               <div class="m-doc-template">
@@ -273,6 +299,32 @@
               </tfoot>
             </table>
 <p>Aborts if there&#x27;s no value.</p>
+          </div></section>
+          <section class="m-doc-details" id="a81064887752e4eb777ba5e4fc4a5652b"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a81064887752e4eb777ba5e4fc4a5652b" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; other) const</span></span>
+            </h3>
+            <p>Compares with another optional value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether they&#x27;re equal.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
       </div>

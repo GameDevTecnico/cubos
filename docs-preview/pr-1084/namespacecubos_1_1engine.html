@@ -93,11 +93,6 @@
             </dt>
             <dd>Bridges are the objects responsible for loading and saving assets from/to disk. They form the bridge between the asset manager and the virtual file system.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1engine_1_1BinaryBridge.html" class="m-doc">BinaryBridge</a>
-            </dt>
-            <dd>Bridge for loading and saving assets which are serialized to and from a binary file.</dd>
-            <dt>
               class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a>
             </dt>
             <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
@@ -202,6 +197,10 @@
               struct <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a>
             </dt>
             <dd>Component which stores the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures of a render target.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a>
+            </dt>
+            <dd>Component which provides a texture to store entity/gizmo ids, for selection with a mouse.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">ShaderBridge</a>
             </dt>
@@ -490,6 +489,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__render-picker-plugin.html#ga5c6dea6155ad14e957b91b84780d202e" class="m-doc">renderPickerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__render-shader-plugin.html#ga2cd0a444573ad64513fe237da12dbe56" class="m-doc">shaderPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -620,6 +623,14 @@
               <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-g-buffer-plugin.html#ga418b3124ed31dc2e0efd8b0e557ff177" class="m-doc">drawToGBufferTag</a>
             </dt>
             <dd>Systems which draw to <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures should be tagged with this.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#ab0f6529f8e4e82be33db5b6a7070dd31" class="m-doc">createRenderPickerTag</a>
+            </dt>
+            <dd>Recreates the <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> if necessary - for example, due to a render target resize.</dd>
+            <dt>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#af2bb41cde503de7eb55da7e2a5f13c52" class="m-doc">drawToRenderPickerTag</a>
+            </dt>
+            <dd>Systems which draw to <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> textures should be tagged with this.</dd>
             <dt>
               <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-target-plugin.html#ga1917300ae40daff9be77f8f89b566cbd" class="m-doc">resizeRenderTargetTag</a>
             </dt>
@@ -902,6 +913,20 @@
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2input_2plugin_8hpp.html">&lt;engine/input/plugin.hpp&gt;</a></div>
             </h3>
             <p>Updates the input state.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab0f6529f8e4e82be33db5b6a7070dd31"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#ab0f6529f8e4e82be33db5b6a7070dd31" class="m-doc-self">createRenderPickerTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2picker_2plugin_8hpp.html">&lt;engine/render/picker/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Recreates the <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> if necessary - for example, due to a render target resize.</p>
+          </div></section>
+          <section class="m-doc-details" id="af2bb41cde503de7eb55da7e2a5f13c52"><div>
+            <h3>
+              <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#af2bb41cde503de7eb55da7e2a5f13c52" class="m-doc-self">drawToRenderPickerTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2picker_2plugin_8hpp.html">&lt;engine/render/picker/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Systems which draw to <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> textures should be tagged with this.</p>
           </div></section>
           <section class="m-doc-details" id="a6da20207dd0fa2d2bdeb2abe27923815"><div>
             <h3>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::Dispatcher::SystemSettings struct | CUBOS. Docs</title>
+  <title>cubos::core::ecs::Schedule::NodeId struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,66 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html">Dispatcher</a>::<wbr/></span>SystemSettings <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="dispatcher_8hpp.html">&lt;core/ecs/system/dispatcher.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1Schedule.html">Schedule</a>::<wbr/></span>NodeId <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="schedule_8hpp.html">&lt;core/ecs/system/schedule.hpp&gt;</a></div>
         </h1>
-        <p>Internal class with settings pertaining to system/tag execution.</p>
+        <p>Identifies a node in the schedule.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac2ca1bbdc4c784b707858e9db061d98d" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1Schedule_1_1NodeId.html" class="m-doc">NodeId</a>&amp; other) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Compares two identifiers for equality.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a1c4201f2805a94e79ff602a3c2945e9d">
+              std::size_t <a href="#a1c4201f2805a94e79ff602a3c2945e9d" class="m-doc-self">inner</a>
+            </dt>
+            <dd><a href="structcubos_1_1core_1_1ecs_1_1Schedule_1_1Node.html" class="m-doc">Node</a> index in the schedule.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ac2ca1bbdc4c784b707858e9db061d98d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Schedule::<wbr />NodeId::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac2ca1bbdc4c784b707858e9db061d98d" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1Schedule_1_1NodeId.html" class="m-doc">NodeId</a>&amp; other) const <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Compares two identifiers for equality.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the two identifiers are equal.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/thread_pool.hpp file | CUBOS. Docs</title>
+  <title>cubos::engine::RenderPicker struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,37 +46,36 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span>thread_pool.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>RenderPicker <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="picker_8hpp.html">&lt;engine/render/picker/picker.hpp&gt;</a></div>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">cubos::<wbr />core::<wbr />ThreadPool</a>.</p>
+        <p>Component which provides a texture to store entity/gizmo ids, for selection with a mouse.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">cubos::core::ThreadPool</a>
+            <dt id="a1bb465840d4f152532a3c2284e48bd89">
+              glm::uvec2 <a href="#a1bb465840d4f152532a3c2284e48bd89" class="m-doc-self">size</a>
             </dt>
-            <dd>Manages a pool of threads, to which tasks can be submitted.</dd>
+            <dd>Size of the <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> textures, in pixels.</dd>
+            <dt id="adc912404e1ffd7a1ad3882424c713330">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#adc912404e1ffd7a1ad3882424c713330" class="m-doc-self">backTexture</a>
+            </dt>
+            <dd>Picking back texture, stores entity/gizmo ids for each pixel on the screen. Access to the picker results should be made through this texture, to ensure the CPU doesn&#x27;t wait for the current frame to finish.</dd>
+            <dt id="ac6ed243f78f8e176d961554c16803af0">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#ac6ed243f78f8e176d961554c16803af0" class="m-doc-self">frontTexture</a>
+            </dt>
+            <dd>Picking front texture, stores entity/gizmo ids for each pixel on the screen. This is the texture used by the renderer to write ids. It is automatically swapped with the back texture by the renderPickerPlugin.</dd>
           </dl>
         </section>
       </div>
