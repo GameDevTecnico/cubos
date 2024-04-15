@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/system/dispatcher.hpp file | CUBOS. Docs</title>
+  <title>cubos::core::thread::ThreadPool class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,52 +46,89 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_1849b6590c20a7c40f18c0337f505edf.html">system</a>/</span>dispatcher.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1thread.html">thread</a>::<wbr/></span>ThreadPool <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="thread_2pool_8hpp.html">&lt;core/thread/pool.hpp&gt;</a></div>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Dispatcher</a>.</p>
+        <p>Manages a pool of threads, to which tasks can be submitted.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+<aside class="m-note m-info"><h4>Note</h4><p>Blocks on tasks to finish on destruction.</p></aside>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#abdbaae0ccedf58a93ff81a2ce026e006" class="m-doc">ThreadPool</a>(</span><span class="m-doc-wrap">std::size_t numThreads)</span>
+            </dt>
+            <dd>Constructs a pool with <code>numThreads</code>, starting them immediately.</dd>
+            <dt id="a93afd5f887510ac5989db797ec877fe5">
+              <span class="m-doc-wrap-bumper"><a href="#a93afd5f887510ac5989db797ec877fe5" class="m-doc-self">ThreadPool</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1thread_1_1ThreadPool.html" class="m-doc">ThreadPool</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Forbid copy construction.</dd>
+            <dt id="ae2893e9559fdc7543a371794200bf941">
+              <span class="m-doc-wrap-bumper"><a href="#ae2893e9559fdc7543a371794200bf941" class="m-doc-self">ThreadPool</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1thread_1_1ThreadPool.html" class="m-doc">ThreadPool</a>&amp;&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Forbid move construction.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">cubos::core::ecs::Dispatcher</a>
+              <span class="m-doc-wrap-bumper">void <a href="#aff5817ae36b7fd181f8dc5a194fa5ec2" class="m-doc">addTask</a>(</span><span class="m-doc-wrap">std::function&lt;void()&gt; task)</span>
             </dt>
-            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1Dependency.html" class="m-doc">cubos::core::ecs::Dispatcher::Dependency</a>
+            <dd>Adds a task to the thread pool. Starts when a thread becomes available.</dd>
+            <dt id="a63db14f032659eb4e3909e37dc83b7f4">
+              <span class="m-doc-wrap-bumper">void <a href="#a63db14f032659eb4e3909e37dc83b7f4" class="m-doc-self">wait</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Internal class to specify system dependencies.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1SystemSettings.html" class="m-doc">cubos::core::ecs::Dispatcher::SystemSettings</a>
-            </dt>
-            <dd>Internal class with settings pertaining to system/tag execution.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1ecs_1_1Dispatcher_1_1System.html" class="m-doc">cubos::core::ecs::Dispatcher::System</a>
-            </dt>
-            <dd>Internal class to handle tag settings.</dd>
+            <dd>Blocks until all tasks finish.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="abdbaae0ccedf58a93ff81a2ce026e006"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />thread::<wbr />ThreadPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abdbaae0ccedf58a93ff81a2ce026e006" class="m-doc-self">ThreadPool</a>(</span><span class="m-doc-wrap">std::size_t numThreads)</span></span>
+            </h3>
+            <p>Constructs a pool with <code>numThreads</code>, starting them immediately.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">numThreads</td>
+                  <td>Number of threads to create.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aff5817ae36b7fd181f8dc5a194fa5ec2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />thread::<wbr />ThreadPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff5817ae36b7fd181f8dc5a194fa5ec2" class="m-doc-self">addTask</a>(</span><span class="m-doc-wrap">std::function&lt;void()&gt; task)</span></span>
+            </h3>
+            <p>Adds a task to the thread pool. Starts when a thread becomes available.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">task</td>
+                  <td><a href="classcubos_1_1core_1_1thread_1_1Task.html" class="m-doc">Task</a> to add.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

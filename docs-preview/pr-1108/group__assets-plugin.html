@@ -52,10 +52,10 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md64">Settings</a></li>
-            <li><a href="#autotoc_md65">Events</a></li>
-            <li><a href="#autotoc_md66">Resources</a></li>
-            <li><a href="#autotoc_md67">Dependencies</a></li>
+            <li><a href="#autotoc_md66">Settings</a></li>
+            <li><a href="#autotoc_md67">Events</a></li>
+            <li><a href="#autotoc_md68">Resources</a></li>
+            <li><a href="#autotoc_md69">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -67,7 +67,7 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md64"><h3><a href="#autotoc_md64">Settings</a></h3><ul><li><code>assets.io.enabled</code> - whether asset I/O should be done (default: <code>true</code>).</li><li><code>assets.io.path</code> - path to the assets directory - will be mounted to <code>/assets/</code> (default: <code>assets/</code>).</li><li><code>assets.io.readOnly</code> - if true, the assets directory will be mounted as read-only (default: <code>true</code>).</li></ul></section><section id="autotoc_md65"><h3><a href="#autotoc_md65">Events</a></h3><ul><li>AssetEvent - (TODO) emitted when an asset is either loaded, modified or unloaded.</li></ul></section><section id="autotoc_md66"><h3><a href="#autotoc_md66">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> - the asset manager, used to access asset data.</li></ul></section><section id="autotoc_md67"><h3><a href="#autotoc_md67">Dependencies</a></h3><ul><li><a href="group__settings-plugin.html" class="m-doc">Settings</a></li></ul></section>
+<section id="autotoc_md66"><h3><a href="#autotoc_md66">Settings</a></h3><ul><li><code>assets.io.enabled</code> - whether asset I/O should be done (default: <code>true</code>).</li><li><code>assets.io.path</code> - path to the assets directory - will be mounted to <code>/assets/</code> (default: <code>assets/</code>).</li><li><code>assets.io.readOnly</code> - if true, the assets directory will be mounted as read-only (default: <code>true</code>).</li></ul></section><section id="autotoc_md67"><h3><a href="#autotoc_md67">Events</a></h3><ul><li>AssetEvent - (TODO) emitted when an asset is either loaded, modified or unloaded.</li></ul></section><section id="autotoc_md68"><h3><a href="#autotoc_md68">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> - the asset manager, used to access asset data.</li></ul></section><section id="autotoc_md69"><h3><a href="#autotoc_md69">Dependencies</a></h3><ul><li><a href="group__settings-plugin.html" class="m-doc">Settings</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -77,13 +77,9 @@
             <dd>Resource <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>.</dd>
             <dt>file <a href="assets_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />AssetBridge</a>.</dd>
-            <dt>file <a href="binary_8hpp.html" class="m-doc">binary.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1BinaryBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />BinaryBridge</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2assets_2bridges_2file_8hpp.html" class="m-doc">file.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />FileBridge</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2assets_2bridges_2json_8hpp.html" class="m-doc">json.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />JSONBridge</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2assets_2bridges_2old_2json_8hpp.html" class="m-doc">json.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />JSONBridge</a>.</dd>
             <dt>file <a href="meta_8hpp.html" class="m-doc">meta.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1AssetMeta.html" class="m-doc">cubos::<wbr />engine::<wbr />AssetMeta</a>.</dd>
@@ -112,22 +108,12 @@
             </dt>
             <dd>Bridges are the objects responsible for loading and saving assets from/to disk. They form the bridge between the asset manager and the virtual file system.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1engine_1_1BinaryBridge.html" class="m-doc">cubos::engine::BinaryBridge</a>
-            </dt>
-            <dd>Bridge for loading and saving assets which are serialized to and from a binary file.</dd>
-            <dt>
               class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">cubos::engine::FileBridge</a>
             </dt>
             <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">cubos::engine::JSONBridge</a>
-            </dt>
-            <dd>Bridge for loading and saving assets which are serialized to and from a JSON file.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1engine_1_1old_1_1JSONBridge.html" class="m-doc">cubos::engine::old::JSONBridge</a>
             </dt>
             <dd>Bridge for loading and saving assets which are serialized to and from a JSON file.</dd>
             <dt>
