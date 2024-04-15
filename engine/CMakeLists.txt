@@ -106,28 +106,25 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/shader/plugin.cpp"
 	"src/render/shader/shader.cpp"
 	"src/render/shader/bridge.cpp"
-
 	"src/render/g_buffer/plugin.cpp"
 	"src/render/g_buffer/g_buffer.cpp"
-
 	"src/render/hdr/plugin.cpp"
 	"src/render/hdr/hdr.cpp"
-
 	"src/render/target/plugin.cpp"
 	"src/render/target/target.cpp"
-
 	"src/render/picker/plugin.cpp"
 	"src/render/picker/picker.cpp"
-
 	"src/render/depth/plugin.cpp"
 	"src/render/depth/depth.cpp"
-
 	"src/render/camera/plugin.cpp"
 	"src/render/camera/perspective_camera.cpp"
 	"src/render/camera/draws_to.cpp"
-
 	"src/render/tone_mapping/plugin.cpp"
 	"src/render/tone_mapping/tone_mapping.cpp"
+	"src/render/voxels/plugin.cpp"
+	"src/render/voxels/load.cpp"
+	"src/render/voxels/grid.cpp"
+	"src/render/voxels/palette.cpp"
 )
 
 # Create cubos engine
