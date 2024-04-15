@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Show relations on the Entity Inspector (#907, **@RiscadoA**).
 - Allow adding and removing relations through the Entity Inspector (#1022, **@RiscadoA**).
 - Optional synchronous loading to asset bridges (**@RiscadoA**).
+- Render Voxels plugin (#1119, **@RiscadoA**).
 
 ### Changed
 
