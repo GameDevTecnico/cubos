@@ -5,6 +5,7 @@
 #include <imgui.h>
 #include <misc/cpp/imgui_stdlib.h>
 
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 
@@ -13,6 +14,7 @@
 #include <cubos/engine/scene/plugin.hpp>
 
 #include <tesseratos/asset_explorer/plugin.hpp>
+#include <tesseratos/asset_explorer/popup.hpp>
 #include <tesseratos/entity_selector/plugin.hpp>
 #include <tesseratos/scene_editor/plugin.hpp>
 #include <tesseratos/toolbox/plugin.hpp>
@@ -21,6 +23,7 @@ using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::convertEntities;
 using cubos::core::ecs::EntityHash;
 using cubos::core::ecs::EphemeralTrait;
+using cubos::core::ecs::Name;
 using cubos::core::ecs::World;
 using cubos::core::memory::AnyValue;
 
@@ -42,7 +45,8 @@ namespace
         bool shouldBeRemoved{false};
         std::string name;
         std::vector<std::pair<std::string, Entity>> entities;
-        std::vector<std::pair<std::string, std::unique_ptr<SceneInfo>>> scenes;
+        std::vector<std::unique_ptr<SceneInfo>> scenes;
+        Asset<Scene> asset;
     };
 
     // Resource which stores the editor state.
@@ -62,7 +66,7 @@ static void closeScene(Commands& commands, SceneInfo& scene)
     }
     scene.entities.clear();
 
-    for (auto& [name, subscene] : scene.scenes)
+    for (auto& subscene : scene.scenes)
     {
         closeScene(commands, *subscene);
     }
@@ -79,9 +83,9 @@ static void placeEntity(const std::string& name, Entity handle, SceneInfo& scene
     else
     {
         auto subsceneName = name.substr(0, split);
-        for (auto& [sname, subscene] : scene.scenes)
+        for (auto& subscene : scene.scenes)
         {
-            if (sname == subsceneName)
+            if (subscene->name == subsceneName)
             {
                 placeEntity(name.substr(split + 1), handle, *subscene);
                 return;
@@ -89,7 +93,7 @@ static void placeEntity(const std::string& name, Entity handle, SceneInfo& scene
         }
         auto subScene = std::make_unique<SceneInfo>();
         subScene->name = subsceneName;
-        auto& subSceneHandle = scene.scenes.emplace_back(subsceneName, std::move(subScene)).second;
+        auto& subSceneHandle = scene.scenes.emplace_back(std::move(subScene));
         placeEntity(name.substr(split + 1), handle, *subSceneHandle);
     }
 }
@@ -102,6 +106,16 @@ static void openScene(const Asset<Scene>& sceneToSpawn, Commands& commands, cons
     for (const auto& [entity, name] : scene.blueprint.bimap())
     {
         placeEntity(name, builder.entity(name), state.root);
+    }
+}
+
+static void loadSubScene(const Asset<Scene>& sceneToSpawn, Commands& commands, const Assets& assets, SceneInfo& scene)
+{
+    const auto& sceneData = *assets.read(sceneToSpawn);
+    auto builder = commands.spawn(sceneData.blueprint);
+    for (const auto& [entity, name] : sceneData.blueprint.bimap())
+    {
+        placeEntity(name, builder.entity(name), scene);
     }
 }
 
@@ -219,14 +233,28 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
     ImGui::PopStyleColor(1);
 }
 
+static void updateNameComponent(SceneInfo& scene, Commands& commands)
+{
+    for (const auto& [name, entity] : scene.entities)
+    {
+        auto newName = scene.name + "." + name;
+        commands.add(entity, Name{.value = newName});
+    }
+    for (auto& subscene : scene.scenes)
+    {
+        updateNameComponent(*subscene, commands);
+    }
+}
+
 // Recursively draws the scene hierarchy and allows the user to remove scenes
-static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector& selector, int hierarchyDepth)
+static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector& selector, int hierarchyDepth,
+                               Assets& assets, State& state)
 {
     ImGui::PushID(&scene);
 
     bool nodeOpen;
     bool isTree = false;
-
+    Asset<Scene> bufferasset;
     ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(149, 252, 255));
     // Root node scene
     if (hierarchyDepth == 0)
@@ -286,7 +314,11 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
             {
                 if (scene.name != buff && !buff.empty())
                 {
+                    auto asset = state.imports[scene.name];
+                    state.imports.erase(scene.name);
+                    state.imports.emplace(buff, asset);
                     scene.name = buff;
+                    updateNameComponent(scene, cmds);
                 }
                 ImGui::CloseCurrentPopup();
             }
@@ -298,36 +330,45 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
     if (nodeOpen)
     {
         // Add entity to current scene (needs to be root, not a sub scene)
+
         showSceneEntities(scene.entities, scene, selector, cmds, hierarchyDepth);
         if (hierarchyDepth == 0)
         {
             ImGui::Separator();
             if (ImGui::Button("Add Scene"))
             {
-                // TODO: actually add a sub scene - should add new scene to state.imports
-                std::string sceneName = scene.name + "scene" + std::to_string(scene.scenes.size() + 1);
+                ImGui::OpenPopup("Select a scene");
+            }
+            if (tesseratos::assetSelectionPopup("Select a scene", bufferasset,
+                                                cubos::core::reflection::reflect<Scene>(), assets))
+            {
+                std::string sceneName = std::string(scene.name + "scene" + std::to_string(scene.scenes.size() + 1));
                 auto newSubscene = std::make_unique<SceneInfo>();
+                newSubscene->asset = bufferasset;
                 newSubscene->name = sceneName;
-                scene.scenes.emplace_back(sceneName, std::move(newSubscene));
+                scene.scenes.emplace_back(std::move(newSubscene));
+                state.imports.emplace(sceneName, bufferasset);
+                loadSubScene(bufferasset, cmds, assets, *scene.scenes.back());
+                updateNameComponent(*scene.scenes.back(), cmds);
             }
         }
 
         std::vector<std::size_t> sceneToRemove;
         for (std::size_t i = 0; i < scene.scenes.size(); i++)
         {
-            if (scene.scenes[i].second->shouldBeRemoved)
+            if (scene.scenes[i]->shouldBeRemoved)
             {
                 sceneToRemove.push_back(i);
             }
             else
             {
-                showSceneHierarchy(*scene.scenes[i].second, cmds, selector, hierarchyDepth + 1);
+                showSceneHierarchy(*scene.scenes[i], cmds, selector, hierarchyDepth + 1, assets, state);
             }
         }
         for (const auto& i : sceneToRemove)
         {
-            // TODO: remove sub-scene from state.imports
             scene.scenes.erase(scene.scenes.begin() + static_cast<std::ptrdiff_t>(i));
+            state.imports.erase(scene.scenes[i]->name);
         }
 
         if (hierarchyDepth != 0 && isTree)
@@ -345,9 +386,9 @@ static Blueprint intoBlueprint(std::unordered_map<Entity, Entity, EntityHash>& w
     Blueprint blueprint{};
 
     // Merge sub-scene blueprints into it.
-    for (const auto& [name, subInfo] : info.scenes)
+    for (const auto& subInfo : info.scenes)
     {
-        blueprint.merge(name, intoBlueprint(worldToBlueprint, world, *subInfo));
+        blueprint.merge(subInfo->name, intoBlueprint(worldToBlueprint, world, *subInfo));
     }
 
     // Add entities from the world into the blueprint.
@@ -404,7 +445,6 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
                 if (assets.type(event.asset).is<Scene>())
                 {
                     toolbox.open("Scene Editor");
-
                     CUBOS_INFO("Opening scene {}", event.asset);
                     closeScene(commands, state.root);
                     state.asset = event.asset;
@@ -447,7 +487,7 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
                 else
                 {
                     ImGui::Separator();
-                    showSceneHierarchy(state.root, cmds, selector, 0);
+                    showSceneHierarchy(state.root, cmds, selector, 0, assets, state);
                 }
             }
 
