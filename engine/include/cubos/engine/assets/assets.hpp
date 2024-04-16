@@ -237,6 +237,11 @@ namespace cubos::engine
         /// @return Asset type.
         const core::reflection::Type& type(const AnyAsset& handle) const;
 
+        /// @brief  Checks if the asset has a known type
+        /// @param handle Handle to check the type for.
+        /// @return wheter the asset has a known type
+        bool hasKnownType(const AnyAsset& handle) const;
+
     private:
         /// @brief Represents a known asset - may or may not be loaded.
         struct Entry
@@ -317,8 +322,9 @@ namespace cubos::engine
         /// @brief Gets a pointer to the bridge to be used for loading the asset identified by the
         /// given handle.
         /// @param handle Handle to get the bridge for.
+        /// @param logError Whether to log an error if there's no bridge.
         /// @return Bridge used for the given asset, or nullptr if there's no bridge.
-        std::shared_ptr<AssetBridge> bridge(const AnyAsset& handle) const;
+        std::shared_ptr<AssetBridge> bridge(const AnyAsset& handle, bool logError = true) const;
 
         /// @brief Unloads the given asset. Can be used to force assets to be reloaded.
         /// @param handle Handle to unload.

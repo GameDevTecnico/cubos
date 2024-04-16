@@ -19,6 +19,11 @@ bool tesseratos::assetSelectionPopup(const std::string& title, AnyAsset& selecte
     {
         for (auto const& asset : assets.listAll())
         {
+            if (!assets.hasKnownType(asset))
+            {
+                continue;
+            }
+
             if (&assets.type(asset) == &type)
             {
                 auto path = assets.readMeta(asset)->get("path");

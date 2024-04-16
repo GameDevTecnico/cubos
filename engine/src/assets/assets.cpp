@@ -571,7 +571,7 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
     return it->second;
 }
 
-std::shared_ptr<AssetBridge> Assets::bridge(const AnyAsset& handle) const
+std::shared_ptr<AssetBridge> Assets::bridge(const AnyAsset& handle, bool logError) const
 {
     auto meta = this->readMeta(handle);
     if (auto path = meta->get("path"))
@@ -590,15 +590,17 @@ std::shared_ptr<AssetBridge> Assets::bridge(const AnyAsset& handle) const
             }
         }
 
-        if (best == nullptr)
+        if (best == nullptr && logError)
         {
             CUBOS_ERROR("Cannot find a matching bridge for asset path {}", *path);
         }
 
         return best;
     }
-
-    CUBOS_ERROR("Cannot find a bridge for asset {}: asset does not have a path", handle);
+    if (logError)
+    {
+        CUBOS_ERROR("Cannot find a bridge for asset {}: asset does not have a path", handle);
+    }
     return nullptr;
 }
 
@@ -661,4 +663,20 @@ const Type& Assets::type(const AnyAsset& handle) const
     auto bridge = this->bridge(handle);
     CUBOS_ASSERT(bridge != nullptr, "Could not find asset's type");
     return bridge->assetType();
+}
+
+bool Assets::hasKnownType(const AnyAsset& handle) const
+{
+    auto assetEntry = this->entry(handle);
+    if (assetEntry == nullptr)
+    {
+        return false;
+    }
+
+    if (assetEntry->status == Status::Loaded)
+    {
+        return true;
+    }
+
+    return this->bridge(handle, false) != nullptr;
 }
