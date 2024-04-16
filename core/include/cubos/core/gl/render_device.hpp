@@ -1204,6 +1204,15 @@ namespace cubos::core::gl
             /// @return Pointer to the memory region.
             virtual void* map() = 0;
 
+            /// @brief Maps a region of the vertex buffer to a region in memory. Must be matched with a call to @ref
+            /// unmap().
+            /// @param offset Offset in bytes.
+            /// @param length Length in bytes.
+            /// @param synchronized Whether pending operations on the buffer should be synchronized prior to returning
+            /// from this method.
+            /// @return Pointer to the memory region.
+            virtual void* map(std::size_t offset, std::size_t length, bool synchronized = true) = 0;
+
             /// @brief Unmaps the vertex buffer, updating it with data written to the mapped
             /// region.
             virtual void unmap() = 0;

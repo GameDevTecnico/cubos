@@ -910,6 +910,14 @@ public:
         return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
+    void* map(std::size_t offset, std::size_t length, bool synchronized) override
+    {
+        GLbitfield flags = GL_MAP_WRITE_BIT;
+        flags |= synchronized ? 0 : GL_MAP_UNSYNCHRONIZED_BIT;
+        glBindBuffer(GL_ARRAY_BUFFER, this->id);
+        return glMapBufferRange(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(length), flags);
+    }
+
     void unmap() override
     {
         glUnmapBuffer(GL_ARRAY_BUFFER);
