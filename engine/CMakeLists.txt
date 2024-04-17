@@ -118,6 +118,10 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/render/depth/plugin.cpp"
 	"src/render/depth/depth.cpp"
+
+	"src/render/camera/plugin.cpp"
+	"src/render/camera/perspective_camera.cpp"
+	"src/render/camera/draws_to.cpp"
 )
 
 # Create cubos engine
