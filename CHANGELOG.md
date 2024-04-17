@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RenderDepth plugin (#1082, **@RiscadoA**).
 - Task class, for use in asynchronous code (#1111, **@RiscadoA**).
 - HDR plugin (#1085, **@RiscadoA**).
+- Camera plugin (#1063, **@tomas7770**).
 
 ### Changed
 
