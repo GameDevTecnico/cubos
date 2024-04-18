@@ -39,7 +39,7 @@ namespace cubos::core::memory
         static AnyValue customConstruct(TArgs&&... args) noexcept
         {
             AnyValue any{reflection::reflect<T>()};
-            new (any.mValue) T{forward<TArgs>(args)...};
+            new (any.mValue) T(memory::forward<TArgs>(args)...);
             return move(any);
         }
 
