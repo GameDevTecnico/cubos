@@ -200,18 +200,22 @@ AnyAsset Assets::load(AnyAsset handle) const
             return {};
         }
 
-        // We need to lock this to prevent the asset from being queued twice by a concurrent thread.
-        // We also check if this is being called from the loader thread, in which case we don't need
-        // to queue the asset.
-        std::unique_lock lock(mLoaderMutex);
-        if (assetEntry->status == Assets::Status::Unloaded && std::this_thread::get_id() != mLoaderThread.get_id())
+        // Check if the bridge supports asynchronous loading. If it is, queue the asset for loading.
+        if (bridge->asynchronous())
         {
-            CUBOS_TRACE("Queuing asset {} for loading", handle);
-            assetEntry->status = Assets::Status::Loading;
-            mLoaderQueue.push_back(Task{handle, bridge});
-            mLoaderCond.notify_one();
+            // We need to lock this to prevent the asset from being queued twice by a concurrent thread.
+            // We also check if this is being called from the loader thread, in which case we don't need
+            // to queue the asset.
+            std::unique_lock lock(mLoaderMutex);
+            if (assetEntry->status == Assets::Status::Unloaded && std::this_thread::get_id() != mLoaderThread.get_id())
+            {
+                CUBOS_TRACE("Queuing asset {} for loading", handle);
+                assetEntry->status = Assets::Status::Loading;
+                mLoaderQueue.push_back(Task{handle, bridge});
+                mLoaderCond.notify_one();
+            }
+            lock.unlock();
         }
-        lock.unlock();
     }
 
     // Return a strong handle to the asset.
@@ -423,24 +427,28 @@ void* Assets::access(const AnyAsset& handle, const Type& type, Lock& lock, bool 
     auto assetEntry = this->entry(handle);
     CUBOS_ASSERT(assetEntry != nullptr, "Could not access asset");
 
-    // If this is being called from the loader thread, we should load the asset synchronously.
-    if (std::this_thread::get_id() == mLoaderThread.get_id() && assetEntry->status != Status::Loaded)
+    // If the asset hasn't been loaded yet, and its bridge isn't asynchronous, or we're in the loader thread, then load
+    // it now.
+    if (assetEntry->status != Status::Loaded)
     {
-        CUBOS_DEBUG("Loading asset {} as a dependency", handle);
-
         auto bridge = this->bridge(handle);
         CUBOS_ASSERT(bridge != nullptr, "Could not access asset");
 
-        // Load the asset - the const_cast is okay since the const qualifiers are only used to make
-        // the interface more readable. We need to unlock temporarily to avoid a deadlock, since the
-        // bridge will call back into the asset manager.
-        lock.unlock();
-        if (!bridge->load(const_cast<Assets&>(*this), handle))
+        if (!bridge->asynchronous() || std::this_thread::get_id() == mLoaderThread.get_id())
         {
-            CUBOS_CRITICAL("Could not load asset {}", handle);
-            abort();
+            CUBOS_DEBUG("Loading asset {} as a dependency", handle);
+
+            // Load the asset - the const_cast is okay since the const qualifiers are only used to make
+            // the interface more readable. We need to unlock temporarily to avoid a deadlock, since the
+            // bridge will call back into the asset manager.
+            lock.unlock();
+            if (!bridge->load(const_cast<Assets&>(*this), handle))
+            {
+                CUBOS_CRITICAL("Could not load asset {}", handle);
+                abort();
+            }
+            lock.lock();
         }
-        lock.lock();
     }
 
     // Wait until the asset finishes loading.
