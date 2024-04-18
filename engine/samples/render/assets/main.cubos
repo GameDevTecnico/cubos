@@ -1,0 +1,9 @@
+{
+    "entities": {
+        "render-target": {
+            "cubos::engine::RenderTarget": {},
+            "cubos::engine::HDR": {},
+            "cubos::engine::ToneMapping": {}
+        }
+    }
+}
