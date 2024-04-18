@@ -125,6 +125,9 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/camera/plugin.cpp"
 	"src/render/camera/perspective_camera.cpp"
 	"src/render/camera/draws_to.cpp"
+
+	"src/render/tone_mapping/plugin.cpp"
+	"src/render/tone_mapping/tone_mapping.cpp"
 )
 
 # Create cubos engine

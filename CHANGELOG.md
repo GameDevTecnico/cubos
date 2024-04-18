@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Access to unscaled delta time for utilities like the debug camera (#1020, **@RiscadoA**).
 - RenderTarget plugin (#1059, **@tomas7770**).
 - RenderPicker plugin (#1060, **@tomas7770**).
+- ToneMapping plugin (#1087, **@RiscadoA**).
 - RenderDepth plugin (#1082, **@RiscadoA**).
 - Task class, for use in asynchronous code (#1111, **@RiscadoA**).
 - HDR plugin (#1085, **@RiscadoA**).
