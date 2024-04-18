@@ -50,14 +50,18 @@ namespace cubos::core::ecs
             this->insertResource(memory::AnyValue::moveConstruct(reflection::reflect<T>(), &value));
         }
 
-        /// @brief Inserts a resource into the world.
+        /// @brief Emplaces a resource into the world. Directly constructs the resource in place.
+        ///
+        /// This is useful when the resource doesn't have a move constructor, for example, due to not implementing
+        /// reflection.
+        ///
         /// @tparam T Resource type.
         /// @tparam TArgs Argument types.
         /// @param args Arguments.
         template <typename T, typename... TArgs>
-        void insertResource(TArgs&&... args)
+        void emplaceResource(TArgs&&... args)
         {
-            this->insertResource(memory::AnyValue::customConstruct<T>(memory::forward<TArgs>(args)...));
+            this->insertResource(memory::AnyValue::customConstruct<T, TArgs...>(memory::forward<TArgs>(args)...));
         }
 
         /// @brief Removes a resource from the world.
