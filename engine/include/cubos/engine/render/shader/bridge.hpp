@@ -23,9 +23,11 @@ namespace cubos::engine
     public:
         /// @brief Constructs a bridge.
         /// @param renderDevice Render device used to create the shader.
-        ShaderBridge(core::gl::RenderDevice& renderDevice)
+        /// @param stage Shader stage to create.
+        ShaderBridge(core::gl::RenderDevice& renderDevice, core::gl::Stage stage)
             : FileBridge(cubos::core::reflection::reflect<cubos::engine::Shader>(), /*asynchronous=*/false)
             , mRenderDevice(renderDevice)
+            , mStage(stage)
         {
         }
 
@@ -35,5 +37,6 @@ namespace cubos::engine
 
     private:
         core::gl::RenderDevice& mRenderDevice; ///< Render device used to create the shader.
+        core::gl::Stage mStage;                ///< Shader stage to create.
     };
 } // namespace cubos::engine
