@@ -1,8 +1,8 @@
 #include <utility>
 
+#include <nlohmann/json.hpp>
+
 #include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/data/old/json_deserializer.hpp>
-#include <cubos/core/data/old/json_serializer.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
@@ -119,14 +119,23 @@ void Assets::loadMeta(std::string_view path)
             stream->readUntil(contents, nullptr);
         }
 
-        // Deserialize the asset metadata from the JSON string.
+        // Load the asset metadata from the JSON string.
         auto meta = AssetMeta();
-        auto des = core::data::old::JSONDeserializer(contents);
-        des.read(meta);
-        if (des.failed())
+        nlohmann::json json;
+
+        try
         {
-            CUBOS_ERROR("Couldn't load asset metadata: JSON deserialization failed for file {}", path);
+            json = nlohmann::json::parse(contents);
+        }
+        catch (const nlohmann::json::parse_error&)
+        {
+            CUBOS_ERROR("Couldn't load asset metadata: JSON parse failed for file {}", path);
             return;
+        }
+
+        for (const auto& [key, value] : json.items())
+        {
+            meta.set(key, value.get<std::string>());
         }
 
         // Check if the metadata has a path field, which is always ignored.
@@ -233,9 +242,12 @@ bool Assets::saveMeta(const AnyAsset& handle) const
             return false;
         }
 
-        auto serializer = core::data::old::JSONSerializer(*stream, 4);
-        serializer.context().push(AssetMeta::Exclude{{"path"}}); // Don't save the path field.
-        serializer.write(*meta, nullptr);
+        nlohmann::json json;
+        for (const auto& [key, value] : meta->params())
+        {
+            json[key] = value;
+        }
+        stream->write(json.dump().c_str(), json.dump().size() * sizeof(char));
         return true;
     }
 
@@ -619,7 +631,7 @@ void Assets::loader()
 std::vector<AnyAsset> Assets::listAll() const
 {
     std::vector<AnyAsset> out;
-    for (auto const& [entry, _] : mEntries)
+    for (const auto& [entry, _] : mEntries)
     {
         out.emplace_back(entry);
     }
