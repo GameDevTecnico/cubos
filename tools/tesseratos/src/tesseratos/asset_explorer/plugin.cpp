@@ -66,6 +66,10 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
 {
     std::string displayName = folder;
     displayName.erase(0, displayName.rfind('/'));
+    if (displayName.empty())
+    {
+        displayName = "/";
+    }
 
     ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(149, 252, 75));
     if (ImGui::TreeNode(displayName.c_str()))
@@ -117,22 +121,17 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
 
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
-    cubos.depends(cubos::engine::settingsPlugin);
     cubos.depends(toolboxPlugin);
 
     cubos.system("show Asset Explorer UI")
         .tagged(cubos::engine::imguiTag)
-        .call([](const Assets& assets, Settings& settings, Toolbox& toolbox, EventWriter<AssetSelectedEvent> events) {
+        .call([](const Assets& assets, Toolbox& toolbox, EventWriter<AssetSelectedEvent> events) {
             if (!toolbox.isOpen("Asset Explorer"))
             {
                 return;
             }
 
             ImGui::Begin("Asset Explorer");
-
-            std::string folder = settings.getString("assets.io.path", "");
-
-            folder.erase(0, folder.rfind('/'));
 
             std::vector<AnyAsset> assetsVector;
             for (auto const& a : assets.listAll())
@@ -145,7 +144,7 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
             std::sort(assetsVector.begin(), assetsVector.end(),
                       [&assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, assets); });
 
-            showFolder(assets, folder, assetsVector.begin(), assetsVector.end(), events);
+            showFolder(assets, "", assetsVector.begin(), assetsVector.end(), events);
 
             ImGui::End();
         });
