@@ -139,6 +139,7 @@ else()
 endif()
 target_include_directories(cubos-engine PUBLIC "include")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
+target_compile_definitions(cubos-engine PRIVATE CUBOS_BUILTIN_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
 cubos_common_target_options(cubos-engine)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")

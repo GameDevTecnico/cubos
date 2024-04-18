@@ -37,6 +37,11 @@ void cubos::engine::assetsPlugin(Cubos& cubos)
             // Load the meta files on the assets directory.
             assets.loadMeta("/assets");
         }
+
+        // Create a standard archive for the builtin assets directory and mount it.
+        // Also load the meta files on the builtin assets directory.
+        FileSystem::mount("/builtin", std::make_unique<StandardArchive>(CUBOS_BUILTIN_ASSETS_FOLDER, true, true));
+        assets.loadMeta("/builtin");
     });
 
     cubos.system("cleanup unused assets").tagged(assetsCleanupTag).call([](Assets& assets) {
