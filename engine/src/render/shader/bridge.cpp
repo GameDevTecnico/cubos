@@ -12,33 +12,7 @@ bool ShaderBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& 
     std::string contents;
     stream.readUntil(contents, nullptr);
 
-    // Read shader stage type
-    auto stageTypeString = assets.readMeta(handle)->get("stage");
-    cubos::core::gl::Stage stageType;
-    if (stageTypeString == "Vertex")
-    {
-        stageType = cubos::core::gl::Stage::Vertex;
-    }
-    else if (stageTypeString == "Geometry")
-    {
-        stageType = cubos::core::gl::Stage::Geometry;
-    }
-    else if (stageTypeString == "Pixel")
-    {
-        stageType = cubos::core::gl::Stage::Pixel;
-    }
-    else if (stageTypeString == "Compute")
-    {
-        stageType = cubos::core::gl::Stage::Compute;
-    }
-    else
-    {
-        CUBOS_ERROR("Shader asset metadata must have a 'stage' property set to one of ''Vertex', 'Geometry', 'Pixel' "
-                    "or 'Compute'");
-        return false;
-    }
-
-    cubos::core::gl::ShaderStage shaderStage = mRenderDevice.createShaderStage(stageType, contents.c_str());
+    cubos::core::gl::ShaderStage shaderStage = mRenderDevice.createShaderStage(mStage, contents.c_str());
     if (shaderStage == nullptr)
     {
         CUBOS_ERROR("Shader asset stage creation failed");
