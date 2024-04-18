@@ -13,6 +13,10 @@
 namespace cubos::engine
 {
     /// @brief Bridge for loading shader assets.
+    ///
+    /// Asynchronous loading is disabled for this bridge, as render device calls must be made from the main thread, and
+    /// they're needed to create shaders.
+    ///
     /// @ingroup render-shader-plugin
     class CUBOS_ENGINE_API ShaderBridge : public FileBridge
     {
@@ -20,7 +24,7 @@ namespace cubos::engine
         /// @brief Constructs a bridge.
         /// @param renderDevice Render device used to create the shader.
         ShaderBridge(core::gl::RenderDevice& renderDevice)
-            : FileBridge(cubos::core::reflection::reflect<cubos::engine::Shader>())
+            : FileBridge(cubos::core::reflection::reflect<cubos::engine::Shader>(), /*asynchronous=*/false)
             , mRenderDevice(renderDevice)
         {
         }

@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Plugins system argument, which can be used to dynamically add and remove plugins (#1034, **@RiscadoA**).
 - Show relations on the Entity Inspector (#907, **@RiscadoA**).
 - Allow adding and removing relations through the Entity Inspector (#1022, **@RiscadoA**).
+- Optional synchronous loading to asset bridges (**@RiscadoA**).
 
 ### Changed
 

@@ -32,8 +32,10 @@ namespace cubos::engine
         /// @brief Constructs a bridge.
         ///
         /// @param type Type of assets loaded by the bridge.
-        explicit AssetBridge(const core::reflection::Type& type)
+        /// @param asynchronous Whether the bridge should load assets asynchronously.
+        explicit AssetBridge(const core::reflection::Type& type, bool asynchronous = true)
             : mType(type)
+            , mAsynchronous(asynchronous)
         {
         }
 
@@ -64,7 +66,15 @@ namespace cubos::engine
             return mType;
         }
 
+        /// @brief Whether the bridge should load assets asynchronously.
+        /// @return Whether the bridge should load assets asynchronously.
+        inline bool asynchronous() const
+        {
+            return mAsynchronous;
+        }
+
     private:
-        const core::reflection::Type& mType; ///< Type of assets loaded by the bridge
+        const core::reflection::Type& mType; ///< Type of assets loaded by the bridge.
+        bool mAsynchronous;                  ///< Whether the bridge should load assets asynchronously.
     };
 } // namespace cubos::engine

@@ -25,8 +25,9 @@ namespace cubos::engine
         /// @brief Constructs a bridge.
         ///
         /// @param type Type of assets loaded by the bridge.
-        explicit FileBridge(const core::reflection::Type& type)
-            : AssetBridge(type)
+        /// @param asynchronous Whether the bridge should load assets asynchronously.
+        explicit FileBridge(const core::reflection::Type& type, bool asynchronous = true)
+            : AssetBridge(type, asynchronous)
         {
         }
 
