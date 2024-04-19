@@ -20,6 +20,9 @@ namespace cubos::engine
         /// @brief Size of the depth texture, in pixels.
         glm::uvec2 size = {0, 0};
 
+        /// @brief Whether the depth texture has already been cleared this frame.
+        bool cleared = false;
+
         /// @brief Handle to the actual depth texture.
         core::gl::Texture2D texture{nullptr};
     };

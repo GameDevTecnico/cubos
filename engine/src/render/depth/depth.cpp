@@ -8,5 +8,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::RenderDepth)
 {
     return core::ecs::TypeBuilder<RenderDepth>("cubos::engine::RenderDepth")
         .withField("size", &RenderDepth::size)
+        .withField("cleared", &RenderDepth::cleared)
         .build();
 }

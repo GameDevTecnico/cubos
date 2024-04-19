@@ -8,5 +8,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::RenderPicker)
 {
     return core::ecs::TypeBuilder<RenderPicker>("cubos::engine::RenderPicker")
         .withField("size", &RenderPicker::size)
+        .withField("cleared", &RenderPicker::cleared)
         .build();
 }

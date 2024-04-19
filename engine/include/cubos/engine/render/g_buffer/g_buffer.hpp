@@ -22,6 +22,9 @@ namespace cubos::engine
         /// @brief Size of the GBuffer textures, in pixels.
         glm::uvec2 size = {0, 0};
 
+        /// @brief Whether the GBuffer textures have already been cleared this frame.
+        bool cleared = false;
+
         /// @brief Stores the position of the objects in the scene.
         core::gl::Texture2D position{nullptr};
 

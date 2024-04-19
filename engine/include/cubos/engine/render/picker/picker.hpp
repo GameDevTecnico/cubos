@@ -22,6 +22,9 @@ namespace cubos::engine
         /// @brief Size of the RenderPicker textures, in pixels.
         glm::uvec2 size = {0, 0};
 
+        /// @brief Whether the RenderPicker front texture has already been cleared this frame.
+        bool cleared = false;
+
         /// @brief Picking back texture, stores entity/gizmo ids for each pixel on the screen. Access to the
         /// picker results should be made through this texture, to ensure the CPU doesn't wait for the current frame
         /// to finish.

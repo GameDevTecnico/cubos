@@ -53,6 +53,9 @@ void cubos::engine::gBufferPlugin(Cubos& cubos)
 
                     CUBOS_INFO("Resized GBuffer to {}x{}", gBuffer.size.x, gBuffer.size.y);
                 }
+
+                // New frame, hint that the GBuffer textures need to be cleared.
+                gBuffer.cleared = false;
             }
         });
 }

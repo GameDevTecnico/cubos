@@ -44,6 +44,9 @@ void cubos::engine::renderDepthPlugin(Cubos& cubos)
 
                     CUBOS_INFO("Resized RenderDepth to {}x{}", depth.size.x, depth.size.y);
                 }
+
+                // New frame, hint that the depth texture needs to be cleared.
+                depth.cleared = false;
             }
         });
 }
