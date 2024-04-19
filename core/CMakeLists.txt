@@ -51,15 +51,6 @@ set(CUBOS_CORE_SOURCE
 	"src/reflection/external/uuid.cpp"
 	"src/reflection/external/glm.cpp"
 
-	"src/data/old/serializer.cpp"
-	"src/data/old/deserializer.cpp"
-	"src/data/old/json_serializer.cpp"
-	"src/data/old/json_deserializer.cpp"
-	"src/data/old/binary_serializer.cpp"
-	"src/data/old/binary_deserializer.cpp"
-	"src/data/old/package.cpp"
-	"src/data/old/context.cpp"
-
 	"src/data/fs/file.cpp"
 	"src/data/fs/file_system.cpp"
 	"src/data/fs/standard_archive.cpp"
