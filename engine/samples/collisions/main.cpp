@@ -12,7 +12,7 @@
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
-#include <cubos/engine/physics/solver/solver.hpp>
+#include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
