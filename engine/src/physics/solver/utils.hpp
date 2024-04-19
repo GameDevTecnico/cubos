@@ -12,6 +12,6 @@ namespace cubos::engine
     /// @param numParticles Number of particles participating in the constraint.
     /// @param compliance Constraint's compliance.
     /// @param dt Substep delta time value.
-    float getLagrangeMultiplierUpdate(float c, float lagrange, float inverseMasses[], glm::vec3 gradients[],
+    float getLagrangeMultiplierUpdate(float c, float lagrange, const float inverseMasses[], glm::vec3 gradients[],
                                       int numParticles, float compliance, float dt);
 } // namespace cubos::engine
