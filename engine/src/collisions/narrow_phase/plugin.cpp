@@ -36,27 +36,31 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
     cubos.system("find colliding pairs")
         .tagged(collisionsNarrowTag)
         .after(collisionsBroadTag)
-        .call([](Commands cmds, Query<Entity, const LocalToWorld&, const BoxCollisionShape&, PotentiallyCollidingWith&,
-                                      Entity, const LocalToWorld&, const BoxCollisionShape&>
-                                    query) {
-            for (auto [ent1, localToWorld1, boxShape1, potentiallyCollidingWith, ent2, localToWorld2, boxShape2] :
-                 query)
-            {
-                cubos::core::geom::Intersection intersectionInfo{};
-
-                bool intersects = cubos::core::geom::intersects(boxShape1.box, localToWorld1.mat, boxShape2.box,
-                                                                localToWorld2.mat, intersectionInfo);
-
-                if (!intersects)
+        .call(
+            [](Commands cmds,
+               Query<Entity, const Position&, const LocalToWorld&, const BoxCollisionShape&, PotentiallyCollidingWith&,
+                     Entity, const Position&, const LocalToWorld&, const BoxCollisionShape&>
+                   query) {
+                for (auto [ent1, position1, localToWorld1, boxShape1, potentiallyCollidingWith, ent2, position2,
+                           localToWorld2, boxShape2] : query)
                 {
-                    continue;
-                }
+                    cubos::core::geom::Intersection intersectionInfo{};
 
-                cmds.relate(ent1, ent2,
-                            CollidingWith{.entity = ent1,
-                                          .penetration = intersectionInfo.penetration,
-                                          .position = {0.0F, 0.0F, 0.0F},
-                                          .normal = intersectionInfo.normal});
-            }
-        });
+                    bool intersects = cubos::core::geom::intersects(boxShape1.box, localToWorld1.mat, boxShape2.box,
+                                                                    localToWorld2.mat, intersectionInfo);
+
+                    if (!intersects)
+                    {
+                        continue;
+                    }
+
+                    cmds.relate(ent1, ent2,
+                                CollidingWith{.entity = ent1,
+                                              .entity1OriginalPosition = position1.vec,
+                                              .entity2OriginalPosition = position2.vec,
+                                              .penetration = intersectionInfo.penetration,
+                                              .position = {0.0F, 0.0F, 0.0F},
+                                              .normal = intersectionInfo.normal});
+                }
+            });
 }
