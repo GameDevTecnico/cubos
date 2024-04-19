@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <cubos/core/data/old/deserializer.hpp>
-#include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/geom/aabb.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
@@ -46,22 +44,3 @@ namespace cubos::core::geom
         }
     };
 } // namespace cubos::core::geom
-
-namespace cubos::core::data::old
-{
-    inline void serialize(Serializer& ser, const geom::Capsule& capsule, const char* name)
-    {
-        ser.beginObject(name);
-        ser.write(capsule.radius, "radius");
-        ser.write(capsule.length, "length");
-        ser.endObject();
-    }
-
-    inline void deserialize(Deserializer& des, geom::Capsule& capsule)
-    {
-        des.beginObject();
-        des.read(capsule.radius);
-        des.read(capsule.length);
-        des.endObject();
-    }
-} // namespace cubos::core::data::old

@@ -94,22 +94,3 @@ namespace cubos::core::geom
         }
     };
 } // namespace cubos::core::geom
-
-namespace cubos::core::data::old
-{
-    inline void serialize(Serializer& ser, const core::geom::AABB& aabb, const char* name)
-    {
-        ser.beginObject(name);
-        ser.write(aabb.min(), "min");
-        ser.write(aabb.max(), "max");
-        ser.endObject();
-    }
-
-    inline void deserialize(Deserializer& des, core::geom::AABB& aabb)
-    {
-        des.beginObject();
-        des.read(aabb.diag[0]);
-        des.read(aabb.diag[1]);
-        des.endObject();
-    }
-} // namespace cubos::core::data::old

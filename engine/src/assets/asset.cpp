@@ -1,5 +1,3 @@
-#include <cubos/core/data/old/deserializer.hpp>
-#include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
@@ -144,29 +142,5 @@ void AnyAsset::decRef() const
     if (reflectedId == mId && mRefCount != nullptr)
     {
         static_cast<std::atomic<int>*>(mRefCount)->fetch_sub(1);
-    }
-}
-
-void AnyAsset::serialize(core::data::old::Serializer& ser, const char* name) const
-{
-    ser.write(uuids::to_string(this->getId()), name);
-}
-
-void AnyAsset::deserialize(core::data::old::Deserializer& des)
-{
-    std::string str;
-    des.read(str);
-    if (auto id = uuids::uuid::from_string(str))
-    {
-        this->decRef();
-        reflectedId = id.value();
-        mId = id.value();
-        mRefCount = nullptr;
-        mVersion = -1;
-    }
-    else
-    {
-        CUBOS_ERROR("Could not deserialize asset handle, invalid UUID: \"{}\"", str);
-        des.fail();
     }
 }

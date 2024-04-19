@@ -14,23 +14,3 @@ float VoxelMaterial::similarity(const VoxelMaterial& other) const
 {
     return colorSimilarity(this->color, other.color);
 }
-
-void cubos::core::data::old::serialize(Serializer& serializer, const VoxelMaterial& mat, const char* name)
-{
-    serializer.beginObject(name);
-    serializer.write(mat.color.r, "r");
-    serializer.write(mat.color.g, "g");
-    serializer.write(mat.color.b, "b");
-    serializer.write(mat.color.a, "a");
-    serializer.endObject();
-}
-
-void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelMaterial& mat)
-{
-    deserializer.beginObject();
-    deserializer.read(mat.color.r);
-    deserializer.read(mat.color.g);
-    deserializer.read(mat.color.b);
-    deserializer.read(mat.color.a);
-    deserializer.endObject();
-}

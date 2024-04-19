@@ -8,12 +8,6 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
-namespace cubos::core::data::old
-{
-    class Serializer;
-    class Deserializer;
-} // namespace cubos::core::data::old
-
 namespace cubos::engine
 {
     template <typename T>
@@ -25,10 +19,6 @@ namespace cubos::engine
     /// Assets are identified by their UUID. This is a unique 128-bit number which is
     /// assigned to each asset when it is imported or created. Default constructed handles are
     /// null handles, which are not associated with any asset.
-    ///
-    /// Serialization:
-    /// - can be serialized or deserialized without context, i.e. the UUID is stored directly.
-    /// - when deserialized, the handle is always a weak handle.
     ///
     /// @ingroup assets-plugin
     class AnyAsset
@@ -100,9 +90,6 @@ namespace cubos::engine
         /// @return Handle to the same asset, but of the specified type.
         template <typename T>
         inline operator Asset<T>() const;
-
-        void serialize(core::data::old::Serializer& ser, const char* name) const;
-        void deserialize(core::data::old::Deserializer& des);
 
     protected:
         /// @brief Constructs a type with the given name, constructible trait and UUID field.
