@@ -51,6 +51,9 @@ void cubos::engine::renderPickerPlugin(Cubos& cubos)
 
                 // Swap textures
                 std::swap(renderPicker.backTexture, renderPicker.frontTexture);
+
+                // New frame, hint that the front texture needs to be cleared.
+                renderPicker.cleared = false;
             }
         });
 }
