@@ -247,7 +247,7 @@ bool Assets::saveMeta(const AnyAsset& handle) const
         {
             json[key] = value;
         }
-        stream->write(json.dump().c_str(), json.dump().size() * sizeof(char));
+        stream->print(json.dump(4));
         return true;
     }
 
