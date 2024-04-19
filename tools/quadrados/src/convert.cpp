@@ -3,8 +3,6 @@
 #include <iostream>
 #include <unordered_map>
 
-#include <cubos/core/data/old/binary_deserializer.hpp>
-#include <cubos/core/data/old/binary_serializer.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/endianness.hpp>
 #include <cubos/core/memory/standard_stream.hpp>
@@ -15,7 +13,6 @@
 
 #include "tools.hpp"
 
-namespace data = cubos::core::data;
 namespace memory = cubos::core::memory;
 using namespace cubos::engine;
 

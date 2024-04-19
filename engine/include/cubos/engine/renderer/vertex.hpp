@@ -6,9 +6,6 @@
 
 #include <glm/glm.hpp>
 
-#include <cubos/core/data/old/deserializer.hpp>
-#include <cubos/core/data/old/serializer.hpp>
-
 namespace cubos::engine
 {
     class VoxelGrid;
@@ -29,9 +26,3 @@ namespace cubos::engine
     /// @ingroup renderer-plugin
     void triangulate(const VoxelGrid& grid, std::vector<VoxelVertex>& vertices, std::vector<uint32_t>& indices);
 } // namespace cubos::engine
-
-namespace cubos::core::data::old
-{
-    void serialize(Serializer& serializer, const engine::VoxelVertex& vertex, const char* name);
-    void deserialize(Deserializer& deserializer, engine::VoxelVertex& vertex);
-} // namespace cubos::core::data::old

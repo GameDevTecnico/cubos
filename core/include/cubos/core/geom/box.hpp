@@ -6,8 +6,6 @@
 
 #include <glm/vec3.hpp>
 
-#include <cubos/core/data/old/deserializer.hpp>
-#include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::geom
@@ -61,20 +59,3 @@ namespace cubos::core::geom
         }
     };
 } // namespace cubos::core::geom
-
-namespace cubos::core::data::old
-{
-    inline void serialize(Serializer& ser, const geom::Box& box, const char* name)
-    {
-        ser.beginObject(name);
-        ser.write(box.halfSize, "halfSize");
-        ser.endObject();
-    }
-
-    inline void deserialize(Deserializer& des, geom::Box& box)
-    {
-        des.beginObject();
-        des.read(box.halfSize);
-        des.endObject();
-    }
-} // namespace cubos::core::data::old

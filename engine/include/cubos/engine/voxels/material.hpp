@@ -6,9 +6,6 @@
 
 #include <glm/glm.hpp>
 
-#include <cubos/core/data/old/deserializer.hpp>
-#include <cubos/core/data/old/serializer.hpp>
-
 namespace cubos::engine
 {
     /// @brief Describes a voxel material.
@@ -30,9 +27,3 @@ namespace cubos::engine
         float similarity(const VoxelMaterial& other) const;
     };
 } // namespace cubos::engine
-
-namespace cubos::core::data::old
-{
-    void serialize(Serializer& serializer, const engine::VoxelMaterial& mat, const char* name);
-    void deserialize(Deserializer& deserializer, engine::VoxelMaterial& mat);
-} // namespace cubos::core::data::old
