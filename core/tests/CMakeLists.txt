@@ -31,7 +31,6 @@ add_executable(
 	data/ser/debug.cpp
 	data/ser/json.cpp
 	data/des/json.cpp
-	data/context.cpp
 
 	memory/any_value.cpp
 	memory/any_vector.cpp
