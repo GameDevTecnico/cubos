@@ -44,6 +44,7 @@ namespace cubos::core::gl
         void setShaderPipeline(ShaderPipeline pipeline) override;
         void clearColor(float r, float g, float b, float a) override;
         void clearTargetColor(std::size_t target, float r, float g, float b, float a) override;
+        void clearTargetColor(std::size_t target, int r, int g, int b, int a) override;
         void clearDepth(float depth) override;
         void clearStencil(int stencil) override;
         void drawLines(std::size_t offset, std::size_t count) override;
