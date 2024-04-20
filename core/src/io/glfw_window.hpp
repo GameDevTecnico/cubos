@@ -19,7 +19,7 @@ namespace cubos::core::io
     class GLFWWindow : public BaseWindow
     {
     public:
-        GLFWWindow(const std::string& title, const glm::ivec2& size);
+        GLFWWindow(const std::string& title, const glm::ivec2& size, bool vSync = true);
         ~GLFWWindow() override;
 
         // Interface implementation.

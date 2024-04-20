@@ -24,6 +24,7 @@ namespace cubos::engine
     /// - `window.title` - the window's title (default: `CUBOS.`).
     /// - `window.width` - the window's width (default: `800`).
     /// - `window.height` - the window's height (default: `600`).
+    /// - `window.vSync` - whether vertical synchronization is enabled (default: `true`).
     ///
     /// ## Events
     /// - @ref core::io::WindowEvent - event polled from the window.

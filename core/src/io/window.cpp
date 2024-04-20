@@ -13,9 +13,9 @@ using cubos::core::io::MouseState;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::Type;
 
-Window cubos::core::io::openWindow(const std::string& title, const glm::ivec2& size)
+Window cubos::core::io::openWindow(const std::string& title, const glm::ivec2& size, bool vSync)
 {
-    return std::make_shared<GLFWWindow>(title, size);
+    return std::make_shared<GLFWWindow>(title, size, vSync);
 }
 
 BaseWindow::BaseWindow()

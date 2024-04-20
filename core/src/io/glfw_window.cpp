@@ -41,7 +41,7 @@ static void errorCallback(int errorCode, const char* description)
     CUBOS_ERROR("GLFW Error {}: {}", errorCode, description);
 }
 
-GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
+GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vSync)
 {
 #ifdef WITH_GLFW
     CUBOS_ASSERT(currentWindow == nullptr, "Only one window is supported at the moment");
@@ -77,6 +77,11 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
         abort();
     }
     mRenderDevice = new gl::OGLRenderDevice();
+
+    if (!vSync)
+    {
+        glfwSwapInterval(0);
+    }
 
     // Set input callbacks
     glfwSetWindowUserPointer(mHandle, (void*)this);
