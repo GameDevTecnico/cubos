@@ -845,6 +845,12 @@ public:
         glUnmapBuffer(GL_UNIFORM_BUFFER);
     }
 
+    void fill(const void* data, std::size_t size) override
+    {
+        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, static_cast<GLsizeiptr>(size), data);
+    }
+
     std::shared_ptr<bool> destroyed;
 
     GLuint id;

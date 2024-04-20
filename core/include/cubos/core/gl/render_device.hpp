@@ -1180,6 +1180,11 @@ namespace cubos::core::gl
             /// region.
             virtual void unmap() = 0;
 
+            /// @brief Fills the buffer with the given data.
+            /// @param data Pointer to data.
+            /// @param size Data size in bytes.
+            virtual void fill(const void* data, std::size_t size) = 0;
+
         protected:
             ConstantBuffer() = default;
         };
