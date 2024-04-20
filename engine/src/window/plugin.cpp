@@ -28,7 +28,8 @@ void cubos::engine::windowPlugin(Cubos& cubos)
             quit.value = false;
             cmds.insertResource(
                 openWindow(settings.getString("window.title", "CUBOS."),
-                           {settings.getInteger("window.width", 800), settings.getInteger("window.height", 600)}));
+                           {settings.getInteger("window.width", 800), settings.getInteger("window.height", 600)},
+                           settings.getBool("window.vSync", true)));
         });
 
     cubos.system("poll Window events")
