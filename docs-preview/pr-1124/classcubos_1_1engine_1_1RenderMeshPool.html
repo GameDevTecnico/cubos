@@ -102,7 +102,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1b17924cb6e274b573953fd9a53644f4" class="m-doc">bucketSize</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
-            <dd>Gets the bucket size in faces.</dd>
+            <dd>Gets the bucket size in vertices.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae2bf5e6b9a2503ce338c2b6d9e6663a5" class="m-doc">freeBucketCount</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
@@ -112,18 +112,18 @@
             </dt>
             <dd>Gets the vertex buffer of the pool.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9de0a62a43fc2382915f7ab45e113115" class="m-doc">allocate</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1RenderMeshFace.html" class="m-doc">RenderMeshFace</a>* faces,
+              <span class="m-doc-wrap-bumper">auto <a href="#a2e8ddbb6dc3cf5ad07febf9b210c7139" class="m-doc">allocate</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1RenderMeshVertex.html" class="m-doc">RenderMeshVertex</a>* vertices,
               std::size_t count) -&gt; <a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a></span>
             </dt>
-            <dd>Creates a new bucket, and copies the given faces into it.</dd>
+            <dd>Creates a new bucket, and copies the given vertices into it.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a4dbf0f1000f0c2f3532f6bc0982014ad" class="m-doc">deallocate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a> bucketId)</span>
             </dt>
             <dd>Frees the bucket at the given index, and any other buckets linked to it.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1d45fffb0efb0f210ba1df6251151951" class="m-doc">size</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a> bucketId) const -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a300fc8a19b722b6d67659add23e9c3e1" class="m-doc">vertexCount</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a> bucketId) const -&gt; std::size_t</span>
             </dt>
-            <dd>Gets the size in faces of the given bucket.</dd>
+            <dd>Gets the number of vertices in the given bucket.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#afcd5686873634f95685d34ebda7030a9" class="m-doc">next</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a> bucketId) const -&gt; <a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a></span>
             </dt>
@@ -154,7 +154,7 @@
                 </tr>
                 <tr>
                   <td>bucketSize</td>
-                  <td>Bucket size.</td>
+                  <td>Bucket size (in vertices).</td>
                 </tr>
               </tbody>
             </table>
@@ -177,12 +177,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />RenderMeshPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b17924cb6e274b573953fd9a53644f4" class="m-doc-self">bucketSize</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Gets the bucket size in faces.</p>
+            <p>Gets the bucket size in vertices.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Bucket size in faces.</td>
+                  <td>Bucket size in vertices.</td>
                 </tr>
               </tfoot>
             </table>
@@ -201,24 +201,24 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a9de0a62a43fc2382915f7ab45e113115"><div>
+          <section class="m-doc-details" id="a2e8ddbb6dc3cf5ad07febf9b210c7139"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a> cubos::<wbr />engine::<wbr />RenderMeshPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9de0a62a43fc2382915f7ab45e113115" class="m-doc-self">allocate</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1RenderMeshFace.html" class="m-doc">RenderMeshFace</a>* faces,
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a> cubos::<wbr />engine::<wbr />RenderMeshPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2e8ddbb6dc3cf5ad07febf9b210c7139" class="m-doc-self">allocate</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1RenderMeshVertex.html" class="m-doc">RenderMeshVertex</a>* vertices,
               std::size_t count)</span></span>
             </h3>
-            <p>Creates a new bucket, and copies the given faces into it.</p>
+            <p>Creates a new bucket, and copies the given vertices into it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">faces</td>
-                  <td>Pointer to the faces.</td>
+                  <td style="width: 1%">vertices</td>
+                  <td>Pointer to the vertices.</td>
                 </tr>
                 <tr>
                   <td>count</td>
-                  <td>Number of faces.</td>
+                  <td>Number of vertices.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -247,11 +247,11 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a1d45fffb0efb0f210ba1df6251151951"><div>
+          <section class="m-doc-details" id="a300fc8a19b722b6d67659add23e9c3e1"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />RenderMeshPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d45fffb0efb0f210ba1df6251151951" class="m-doc-self">size</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a> bucketId) const</span></span>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />RenderMeshPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a300fc8a19b722b6d67659add23e9c3e1" class="m-doc-self">vertexCount</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1RenderMeshPool_1_1BucketId.html" class="m-doc">BucketId</a> bucketId) const</span></span>
             </h3>
-            <p>Gets the size in faces of the given bucket.</p>
+            <p>Gets the number of vertices in the given bucket.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
