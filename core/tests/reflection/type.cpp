@@ -9,6 +9,11 @@ TEST_CASE("reflection::Type")
 {
     auto& type = Type::create("Foo");
     CHECK(type.name() == "Foo");
+    CHECK(type.shortName() == "Foo");
+
+    auto& namespacedType = Type::create("cubos::core::reflection::Foo");
+    CHECK(namespacedType.name() == "cubos::core::reflection::Foo");
+    CHECK(namespacedType.shortName() == "Foo");
 
     SUBCASE("without traits")
     {
