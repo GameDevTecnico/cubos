@@ -65,7 +65,7 @@ void tesseratos::entityInspectorPlugin(Cubos& cubos)
                     const Type* removed = nullptr;
                     for (auto [type, value] : world.components(entity))
                     {
-                        ImGui::SeparatorText(type->name().c_str());
+                        ImGui::SeparatorText(type->shortName().c_str());
                         dataInspector.edit(*type, value);
                         if (ImGui::Button("Remove Component"))
                         {
