@@ -34,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Task class, for use in asynchronous code (#1111, **@RiscadoA**).
 - HDR plugin (#1085, **@RiscadoA**).
 - Camera plugin (#1063, **@tomas7770**).
+- Search bar to World Inspector which allows filtering by components (#1105, **@diogomsmiranda**).
+- Allow filtering by entity names in the World Inspector (#1106, **@diogomsmiranda**).
 
 ### Changed
 

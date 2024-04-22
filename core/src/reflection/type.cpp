@@ -95,7 +95,7 @@ Type::~Type()
 }
 
 Type::Type(std::string name)
-    : mName(std::move(name)),
-    mShortName(mName.substr(mName.find_last_of("::") + 1))
+    : mName(std::move(name))
+    , mShortName(mName.substr(mName.find_last_of("::") + 1))
 {
 }
