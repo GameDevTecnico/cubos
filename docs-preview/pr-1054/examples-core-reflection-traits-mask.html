@@ -60,6 +60,8 @@
 <span class="w">    </span><span class="n">Execute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
 <span class="p">};</span>
 
+<span class="n">CUBOS_REFLECT_EXTERNAL_DECL</span><span class="p">(</span><span class="n">CUBOS_EMPTY</span><span class="p">,</span><span class="w"> </span><span class="n">Permissions</span><span class="p">);</span>
+
 <span class="kr">inline</span><span class="w"> </span><span class="n">Permissions</span><span class="w"> </span><span class="k">operator</span><span class="o">~</span><span class="p">(</span><span class="n">Permissions</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Permissions</span><span class="o">&gt;</span><span class="p">(</span><span class="o">~</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
@@ -79,7 +81,6 @@
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">MaskTrait</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span>
 
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span>
 <span class="n">CUBOS_REFLECT_EXTERNAL_IMPL</span><span class="p">(</span><span class="n">Permissions</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Permissions&quot;</span><span class="p">)</span>

@@ -89,6 +89,13 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga7dbabf68e961230d69ce57708421bd26" class="m-doc">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long long id,
+              std::size_t size,
+              std::size_t alignment,
+              void(*)(void*) destructor) -&gt; const Type&amp;</span>
+            </dt>
+            <dd>Creates a new unnamed type with the given identifier. Used as a fallback for non-reflectable C++ types.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const Type&amp;</span>
             </dt>
@@ -109,11 +116,16 @@
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_REFLECT</a></span>
             </dt>
-            <dd>Declares a reflection method.</dd>
+            <dd>Declares the static reflection methods.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gabe4c61ca9774781ef107e74f89494663" class="m-doc">CUBOS_REFLECT_IMPL</a>(</span><span class="m-doc-wrap">T)</span>
             </dt>
-            <dd>Defines a reflection method.</dd>
+            <dd>Defines a reflection method for a non-templated type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga9f6c7a8208509aa84f66d081e2283f95" class="m-doc">CUBOS_REFLECT_TEMPLATE_IMPL</a>(</span><span class="m-doc-wrap">args,
+              T)</span>
+            </dt>
+            <dd>Similar to <a href="group__core-reflection.html#gabe4c61ca9774781ef107e74f89494663" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> but tailored to templated types.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gab24b41a195fdf07a246383d74fd583d7" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE</a>(</span><span class="m-doc-wrap">api,
               T)</span>

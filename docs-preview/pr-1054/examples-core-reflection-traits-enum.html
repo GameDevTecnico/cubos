@@ -56,13 +56,14 @@
 <span class="w">    </span><span class="n">Red</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Green</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Blue</span>
-<span class="p">};</span></pre><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/traits/enum.hpp&gt;</span>
+<span class="p">};</span>
+
+<span class="n">CUBOS_REFLECT_EXTERNAL_DECL</span><span class="p">(</span><span class="n">CUBOS_EMPTY</span><span class="p">,</span><span class="w"> </span><span class="n">Color</span><span class="p">);</span></pre><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/traits/enum.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/type.hpp&gt;</span>
 
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">EnumTrait</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span>
 
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span>
 <span class="n">CUBOS_REFLECT_EXTERNAL_IMPL</span><span class="p">(</span><span class="n">Color</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Color&quot;</span><span class="p">).</span><span class="n">with</span><span class="p">(</span>
