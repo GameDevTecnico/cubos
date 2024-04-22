@@ -46,6 +46,10 @@ namespace cubos::core::reflection
         /// @return Name of the type.
         const std::string& name() const;
 
+        /// @brief Returns the name of the type without any namespaces.
+        /// @return Name of the type without any namespaces.
+        const std::string& shortName() const;
+
         /// @brief Checks if this type represents the type @p T.
         /// @tparam T Type to check.
         /// @return Whether this type represents the type @p T.
@@ -148,6 +152,7 @@ namespace cubos::core::reflection
         };
 
         std::string mName;
+        std::string mShortName;
         bool mImplemented{true};
         std::vector<Trait> mTraits;
     };

@@ -26,6 +26,11 @@ const std::string& Type::name() const
     return mName;
 }
 
+const std::string& Type::shortName() const
+{
+    return mShortName;
+}
+
 Type& Type::with(uintptr_t id, void* trait, void (*deleter)(void*))
 {
     CUBOS_ASSERT(!this->has(id), "Trait already present in type \"{}\"", this->name());
@@ -90,6 +95,7 @@ Type::~Type()
 }
 
 Type::Type(std::string name)
-    : mName(std::move(name))
+    : mName(std::move(name)),
+    mShortName(mName.substr(mName.find_last_of("::") + 1))
 {
 }
