@@ -62,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Crash when meshing an empty voxel grid (**@RiscadoA**).
 - Double destruction in AnyVector::swapErase (**@RiscadoA**).
 - Crash due to DataInspector BeginTable calls being unchecked (#1036, **@RiscadoA**).
+- Segmentation fault when closing window with deferred renderer plugin (#959, **@RiscadoA**).
 
 ## [v0.1.0] - 2024-02-17
 
