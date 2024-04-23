@@ -184,6 +184,13 @@ TEST_CASE("ecs::Planner")
         fails = true;
     }
 
+    SUBCASE("false condition prevents leaf tag from running")
+    {
+        auto leaf1 = planner.add("1", system1);
+        planner.onlyIf(leaf1, false6);
+        expected = {6};
+    }
+
     SUBCASE("conditions run with same constraints as their tags")
     {
         auto leaf1 = planner.add("1", system1);

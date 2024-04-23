@@ -185,6 +185,29 @@ auto Planner::build() const -> Opt<Schedule>
                 }
             }
         }
+
+        // If the tag has any associated conditions, make its nodes depend on them.
+        for (auto conditionNodeId : conditionNodes[i])
+        {
+            for (auto nodeId : allNodes[i])
+            {
+                // Make sure this node isn't a condition node itself.
+                bool shouldAdd = true;
+                for (auto otherConditionNodeId : conditionNodes[i])
+                {
+                    if (nodeId == otherConditionNodeId)
+                    {
+                        shouldAdd = false;
+                        break;
+                    }
+                }
+
+                if (shouldAdd)
+                {
+                    CUBOS_ASSERT(schedule.onlyIf(nodeId, conditionNodeId));
+                }
+            }
+        }
     }
 
     return schedule;
