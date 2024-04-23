@@ -18,6 +18,8 @@ namespace cubos::core::reflection
     class CUBOS_CORE_API EnumTrait
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Represents an individual variant within the enumerated type.
         class Variant;
 

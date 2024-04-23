@@ -1,8 +1,14 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using namespace cubos::core::reflection;
+
+CUBOS_REFLECT_IMPL(FieldsTrait)
+{
+    return Type::create("cubos::core::ecs::FieldsTrait");
+}
 
 FieldsTrait::Field::~Field()
 {

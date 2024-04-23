@@ -14,6 +14,8 @@ namespace cubos::core::reflection
     class CUBOS_CORE_API NullableTrait
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Function pointer to check if a value represents null.
         using IsNull = bool (*)(const void* instance);
 

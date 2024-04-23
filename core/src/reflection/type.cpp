@@ -31,12 +31,12 @@ const std::string& Type::shortName() const
     return mShortName;
 }
 
-Type& Type::with(uintptr_t id, void* trait, void (*deleter)(void*))
+Type& Type::with(const Type& type, void* trait, void (*deleter)(void*))
 {
-    CUBOS_ASSERT(!this->has(id), "Trait already present in type \"{}\"", this->name());
+    CUBOS_ASSERT(!this->has(type), "Trait {} already present in type {}", type.name(), this->name());
 
     mTraits.emplace_back(Trait{
-        .id = id,
+        .type = type,
         .value = trait,
         .deleter = deleter,
     });
@@ -44,11 +44,11 @@ Type& Type::with(uintptr_t id, void* trait, void (*deleter)(void*))
     return *this;
 }
 
-bool Type::has(uintptr_t id) const
+bool Type::has(const Type& type) const
 {
     for (const auto& trait : mTraits)
     {
-        if (trait.id == id)
+        if (trait.type == type)
         {
             return true;
         }
@@ -57,17 +57,17 @@ bool Type::has(uintptr_t id) const
     return false;
 }
 
-const void* Type::get(uintptr_t id) const
+const void* Type::get(const Type& type) const
 {
     for (const auto& trait : mTraits)
     {
-        if (trait.id == id)
+        if (trait.type == type)
         {
             return trait.value;
         }
     }
 
-    CUBOS_FAIL("No such trait in type \"{}\"", this->name());
+    CUBOS_FAIL("No such trait {} in type {}", type.name(), this->name());
 }
 
 bool Type::operator==(const Type& other) const

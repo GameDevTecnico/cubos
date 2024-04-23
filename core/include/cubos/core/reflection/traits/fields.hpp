@@ -17,6 +17,8 @@ namespace cubos::core::reflection
     class CUBOS_CORE_API FieldsTrait
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Interface for obtaining the address of a field on a given instance.
         /// @note We could use std::function and a capturing lambda instead of this interface, but
         /// that would require including the bloated `<functional>` header here, which we want to

@@ -1,8 +1,14 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::Type;
+
+CUBOS_REFLECT_IMPL(DictionaryTrait)
+{
+    return Type::create("cubos::core::ecs::DictionaryTrait");
+}
 
 DictionaryTrait::DictionaryTrait(const Type& keyType, const Type& valueType, Length length, Begin begin, Find find,
                                  Advance advance, Stop stop, Key key, Value value)

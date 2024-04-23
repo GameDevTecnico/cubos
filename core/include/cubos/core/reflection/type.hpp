@@ -72,9 +72,16 @@ namespace cubos::core::reflection
         template <typename T>
         Type& with(T trait)
         {
-            return this->with(Type::id<T>(), new T(std::move(trait)),
+            return this->with(reflect<T>(), new T(std::move(trait)),
                               [](void* trait) { delete static_cast<T*>(trait); });
         }
+
+        /// @brief Adds the given trait to the type.
+        /// @param id Trait type.
+        /// @param trait Allocated trait value.
+        /// @param deleter Used to delete the trait when the type is destroyed.
+        /// @return Reference to this type, for chaining.
+        Type& with(const Type& type, void* trait, void (*deleter)(void*));
 
         /// @brief Returns whether the type has the given trait.
         /// @tparam T %Trait type.
@@ -82,8 +89,13 @@ namespace cubos::core::reflection
         template <typename T>
         bool has() const
         {
-            return this->has(Type::id<T>());
+            return this->has(reflect<T>());
         }
+
+        /// @brief Returns whether the type has the given trait.
+        /// @param id Identifies the type of the trait.
+        /// @return Whether the type has the given trait.
+        bool has(const Type& type) const;
 
         /// @brief Returns the given trait of the type.
         ///
@@ -94,8 +106,16 @@ namespace cubos::core::reflection
         template <typename T>
         const T& get() const
         {
-            return *static_cast<const T*>(this->get(Type::id<T>()));
+            return *static_cast<const T*>(this->get(reflect<T>()));
         }
+
+        /// @brief Returns the given trait of the type.
+        ///
+        /// Aborts if the type does not have the given trait.
+        ///
+        /// @param type Trait type.
+        /// @return Pointer to the trait.
+        const void* get(const Type& type) const;
 
         /// @brief Equality operator.
         /// @param other Type object to compare.
@@ -112,44 +132,10 @@ namespace cubos::core::reflection
         /// @param name Name of the type.
         explicit Type(std::string name);
 
-        /// @brief Adds the given trait to the type.
-        /// @param id Identifies the type of the trait.
-        /// @param trait Allocated trait value.
-        /// @param deleter Used to delete the trait when the type is destroyed.
-        /// @return Reference to this type, for chaining.
-        Type& with(uintptr_t id, void* trait, void (*deleter)(void*));
-
-        /// @brief Returns whether the type has the given trait.
-        /// @param id Identifies the type of the trait.
-        /// @return Whether the type has the given trait.
-        bool has(uintptr_t id) const;
-
-        /// @brief Returns the given trait of the type.
-        ///
-        /// Aborts if the type does not have the given trait.
-        ///
-        /// @param id Identifies the type of the trait.
-        /// @return Pointer to the trait.
-        const void* get(uintptr_t id) const;
-
-        /// @brief Gets an unique identifier for the given trait type.
-        /// @note This function is used as an alternative to `std::type_index`, which would require
-        /// including the `<typeindex>` header.
-        /// @tparam T %Trait type.
-        /// @return Unique identifier for the given trait type.
-        template <typename T>
-        static uintptr_t id()
-        {
-            // This variable is unused, but since there is one for each type, its address is
-            // guaranteed to be unique for each type.
-            static const bool Var = false;
-            return reinterpret_cast<uintptr_t>(&Var);
-        }
-
         /// @brief %Trait entry in the type.
         struct Trait
         {
-            uintptr_t id;           ///< Type identifier.
+            const Type& type;       ///< Trait type.
             void* value;            ///< Value, allocated on the heap.
             void (*deleter)(void*); ///< Deleter function.
         };

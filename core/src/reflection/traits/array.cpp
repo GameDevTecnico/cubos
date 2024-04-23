@@ -1,8 +1,14 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using cubos::core::reflection::ArrayTrait;
 using cubos::core::reflection::Type;
+
+CUBOS_REFLECT_IMPL(ArrayTrait)
+{
+    return Type::create("cubos::core::ecs::ArrayTrait");
+}
 
 ArrayTrait::ArrayTrait(const Type& elementType, Length length, AddressOf addressOf)
     : mElementType(elementType)

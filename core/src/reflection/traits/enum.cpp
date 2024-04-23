@@ -1,8 +1,14 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using cubos::core::reflection::EnumTrait;
+
+CUBOS_REFLECT_IMPL(EnumTrait)
+{
+    return Type::create("cubos::core::ecs::EnumTrait");
+}
 
 EnumTrait::~EnumTrait()
 {

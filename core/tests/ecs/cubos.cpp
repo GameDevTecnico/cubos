@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/cubos.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include "utils.hpp"
 
