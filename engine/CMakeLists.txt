@@ -3,9 +3,11 @@
 
 option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
 option(BUILD_ENGINE_TESTS "Build cubos engine tests?" OFF)
+option(BUILD_ENGINE_SHARED "Build cubos engine as shared library?" ON)
 
 message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
+message("# Building engine as shared library: " ${BUILD_ENGINE_SHARED})
 
 # Set engine source files
 set(CUBOS_ENGINE_SOURCE
@@ -126,34 +128,44 @@ set(CUBOS_ENGINE_SOURCE
 )
 
 # Create cubos engine
-add_library(cubos-engine ${CUBOS_ENGINE_SOURCE})
+if(BUILD_ENGINE_SHARED)
+	add_library(cubos-engine SHARED ${CUBOS_ENGINE_SOURCE})
+	target_compile_definitions(cubos-engine
+		PRIVATE -DCUBOS_ENGINE_EXPORT
+		PUBLIC -DCUBOS_ENGINE_IMPORT
+	)
+else()
+	add_library(cubos-engine STATIC ${CUBOS_ENGINE_SOURCE})
+endif()
 target_include_directories(cubos-engine PUBLIC "include")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
 cubos_common_target_options(cubos-engine)
 
-add_library(imgui STATIC
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+	target_compile_options(cubos-engine PUBLIC -Wno-attributes)
+endif()
+
+# Add ImGui and ImPlot
+set(IMGUI_SOURCES
 	"lib/imgui/imgui.cpp"
 	"lib/imgui/imgui_draw.cpp"
 	"lib/imgui/imgui_tables.cpp"
 	"lib/imgui/imgui_widgets.cpp"
 	"lib/imgui/imgui_demo.cpp"
 	"lib/imgui/misc/cpp/imgui_stdlib.cpp"
-)
 
-add_library(implot STATIC
 	"lib/implot/implot.cpp"
 	"lib/implot/implot_items.cpp"
 	"lib/implot/implot_demo.cpp"
 )
-
-target_include_directories(imgui PUBLIC "lib/imgui" "lib/imgui/misc/cpp/imgui_stdlib.hpp")
-target_include_directories(implot PUBLIC "lib/implot")
-target_link_libraries(implot PUBLIC imgui)
-target_link_libraries(cubos-engine PUBLIC implot)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	target_compile_options(cubos-engine PUBLIC -Wno-attributes)
-endif()
+add_library(imgui STATIC ${IMGUI_SOURCES})
+set_property(TARGET imgui PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_include_directories(imgui PUBLIC
+	"lib/imgui"
+	"lib/imgui/misc/cpp"
+	"lib/implot"
+)
+target_link_libraries(cubos-engine PUBLIC imgui)
 
 # Add engine tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS)

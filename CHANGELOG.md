@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Search bar to World Inspector which allows filtering by components (#1105, **@diogomsmiranda**).
 - Allow filtering by entity names in the World Inspector (#1106, **@diogomsmiranda**).
 - Possibility of building the core library as a shared library (#1052, **@RiscadoA**).
+- Possibility of building the engine library as a shared library (#1053, **@RiscadoA**).
 
 ### Changed
 
