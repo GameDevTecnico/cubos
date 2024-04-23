@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Core &raquo; Input and output module | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="group__core.html">Core</a> &raquo;</span>
+          Input and output <span class="m-thin">module</span></h1>
+        <p>Provides a window API abstraction.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
+          <dl class="m-doc">
+            <dt>file <a href="cursor_8hpp.html" class="m-doc">cursor.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Cursor</a>.</dd>
+            <dt>file <a href="gamepad_8hpp.html" class="m-doc">gamepad.hpp</a></dt>
+            <dd>Struct <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />GamepadState</a> and related enums.</dd>
+            <dt>file <a href="keyboard_8hpp.html" class="m-doc">keyboard.hpp</a></dt>
+            <dd>Enums <a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Key</a> and <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Modifiers</a>.</dd>
+            <dt>file <a href="window_8hpp.html" class="m-doc">window.hpp</a></dt>
+            <dd>Class <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Window</a> and related types.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">cubos::core::io::Cursor</a>
+            </dt>
+            <dd>Handle for a custom mouse cursor.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">cubos::core::io::GamepadState</a>
+            </dt>
+            <dd>Holds the state of a gamepad.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">cubos::core::io::KeyWithModifiers</a>
+            </dt>
+            <dd>Keyboard key code and modifier flags.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1KeyEvent.html" class="m-doc">cubos::core::io::KeyEvent</a>
+            </dt>
+            <dd>Event sent when a key is pressed or released.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1ModifiersEvent.html" class="m-doc">cubos::core::io::ModifiersEvent</a>
+            </dt>
+            <dd>Event sent when the modifiers change.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1MouseButtonEvent.html" class="m-doc">cubos::core::io::MouseButtonEvent</a>
+            </dt>
+            <dd>Event sent when a mouse button state changes.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1MouseMoveEvent.html" class="m-doc">cubos::core::io::MouseMoveEvent</a>
+            </dt>
+            <dd>Event sent when the mouse cursor moves.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1MouseScrollEvent.html" class="m-doc">cubos::core::io::MouseScrollEvent</a>
+            </dt>
+            <dd>Event sent when the mouse wheel is scrolled.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1ResizeEvent.html" class="m-doc">cubos::core::io::ResizeEvent</a>
+            </dt>
+            <dd>Event sent when the window framebuffer is resized.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1TextEvent.html" class="m-doc">cubos::core::io::TextEvent</a>
+            </dt>
+            <dd>Event sent when a unicode character is input.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1GamepadConnectionEvent.html" class="m-doc">cubos::core::io::GamepadConnectionEvent</a>
+            </dt>
+            <dd>Event sent when a gamepad is connected or disconnected.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1io_1_1BaseWindow.html" class="m-doc">cubos::core::io::BaseWindow</a>
+            </dt>
+            <dd>Interface used to wrap low-level window API implementations.</dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a> { </span><span class="m-doc-wrap"><a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> = -1,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a7fc56270e7a70fa81a5935b72eacbe29" class="m-doc">A</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a9d5ed678fe57bcca610140957afab571" class="m-doc">B</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a02129bb861061d1a052c592e2dc6b383" class="m-doc">X</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a57cec4137b614c87cb4e24a3d003a3e0" class="m-doc">Y</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4ac7717d90a009a154865cd2c748b90184" class="m-doc">LBumper</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a953ec0564bc475afbcc3263efa42b708" class="m-doc">RBumper</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a0557fa923dcee4d0f86b1409f5c2167f" class="m-doc">Back</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4aa6122a65eaa676f700ae68d393054a37" class="m-doc">Start</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a6602bbeb2956c035fb4cb5e844a4861b" class="m-doc">Guide</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4aa459ba7fb2f974adf6eba980f35f8d14" class="m-doc">LThumb</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a787cce7d516ae441abe97ffff79b08c8" class="m-doc">RThumb</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a258f49887ef8d14ac268c92b02503aaa" class="m-doc">Up</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a92b09c7c48c520c3c55e497875da437c" class="m-doc">Right</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a08a38277b0309070706f6652eeae9a53" class="m-doc">Down</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a945d5e233cf7d6240f6b783b36a374ff" class="m-doc">Left</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4ae93f994f01c537c4e2f7d8528c3eb5e9" class="m-doc">Count</a> }</span>
+            </dt>
+            <dd>Gamepad buttons.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a> { </span><span class="m-doc-wrap"><a href="#ggaf04965ccbc878e3989398001644ca510a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> = -1,
+              <a href="#ggaf04965ccbc878e3989398001644ca510ab4b6e894569917b9ca2210bae107c888" class="m-doc">LX</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510ac2d75724334cab079503451aab65ba04" class="m-doc">LY</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510af9c24782c24c237d16e79f18e2fa9046" class="m-doc">RX</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510accb21680cb44cbc3715ed8acc0145efe" class="m-doc">RY</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510ac3b28f14adda15541f23ae21582f5e71" class="m-doc">LTrigger</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510a7a1c91b1da9e7c5a1d3b9321e853005a" class="m-doc">RTrigger</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510ae93f994f01c537c4e2f7d8528c3eb5e9" class="m-doc">Count</a> }</span>
+            </dt>
+            <dd>Gamepad axes.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">Key</a> { </span><span class="m-doc-wrap"><a href="#gga4c20baefc9a6688f17f283b5aa272341a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> = -1,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a7fc56270e7a70fa81a5935b72eacbe29" class="m-doc">A</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a9d5ed678fe57bcca610140957afab571" class="m-doc">B</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a0d61f8370cad1d412f80b84d143e1257" class="m-doc">C</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341af623e75af30e62bbd73d6df5b50bb7b5" class="m-doc">D</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a3a3ea00cfc35332cedf6e5e9a32e94da" class="m-doc">E</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a800618943025315f869e4e1f09471012" class="m-doc">F</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341adfcf28d0734569a6a693bc8194de62bf" class="m-doc">G</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ac1d9f50f86825a1a2302ec2449c17196" class="m-doc">H</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341add7536794b63bf90eccfd37f9b147d7f" class="m-doc">I</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341aff44570aca8241914870afbc310cdb85" class="m-doc">J</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341aa5f3c6a11b03839d46af9fb43c97c188" class="m-doc">K</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ad20caec3b48a1eef164cb4ca81ba2587" class="m-doc">L</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a69691c7bdcc3ce6d5d8a1361f22d04ac" class="m-doc">M</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a8d9c307cb7f3c4a32822a51922d1ceaa" class="m-doc">N</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341af186217753c37b9b9f958d906208506e" class="m-doc">O</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a44c29edb103a2872f519ad0c9a0fdaaa" class="m-doc">P</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341af09564c9ca56850d4cd6b3319e541aee" class="m-doc">Q</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ae1e1d3d40573127e9ee0480caf1283d6" class="m-doc">R</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a5dbc98dcc983a70728bd082d1a47546e" class="m-doc">S</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ab9ece18c950afbfa6b0fdbfa4ff731d3" class="m-doc">T</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a4c614360da93c0a041b22e537de151eb" class="m-doc">U</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a5206560a306a2e085a437fd258eb57ce" class="m-doc">V</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a61e9c06ea9a85a5088a499df6458d276" class="m-doc">W</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a02129bb861061d1a052c592e2dc6b383" class="m-doc">X</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a57cec4137b614c87cb4e24a3d003a3e0" class="m-doc">Y</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a21c2e59531c8710156d34a3c30ac81d5" class="m-doc">Z</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a845787798a45b48e825e9b99a338537a" class="m-doc">Num0</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341abacb69a042a9fdc268a672919052d1f2" class="m-doc">Num1</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a72bd76d6e2b68a539c8d1a77b564ed72" class="m-doc">Num2</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341aa3a965b443a13522aa59fbdea31d00ce" class="m-doc">Num3</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ae0af89b5f83c670e4cc584c73c4732ca" class="m-doc">Num4</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a7e89a79bbb017bfcaff80ff820a15d8a" class="m-doc">Num5</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a0581cd1de881a0f697f3b46741fb326b" class="m-doc">Num6</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a4911ceac5c68b5a3f1499d68b27b0938" class="m-doc">Num7</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a894e7d9b7dcced78e8007ba2d38b8dd2" class="m-doc">Num8</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ad7b1dbe22119bc7acf6e4a1afcc06e46" class="m-doc">Num9</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a013ec032d3460d4be4431c6ab1f8f224" class="m-doc">Escape</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a9e6bbb54b2d06e4a49ebcea834724afd" class="m-doc">LControl</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a667d08af6165c1cb6e72970036a9f7d7" class="m-doc">LShift</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341aab527e774a30bf52a69de316727ce4cd" class="m-doc">LAlt</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341afc2ae39512975c67ebe724fecc528d9d" class="m-doc">LSystem</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ab06196a3bdf600db4088d5ac34132d58" class="m-doc">RControl</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a8e707c0a523c7ec2179a6b6821d6eba8" class="m-doc">RShift</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a067967ae88a4f9ad8cf58e1bb88c32d8" class="m-doc">RAlt</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a268cfbdcfc1a2d7ab31962c79b151a7d" class="m-doc">RSystem</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ab61541208db7fa7dba42c85224405911" class="m-doc">Menu</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a17b56a4dc0feb499daf64d6c2bd11fdd" class="m-doc">LBracket</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ac27efa0472cd29bf688de150ce920752" class="m-doc">RBracket</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a787bbf4b07cc43f0ecfca56aa513707c" class="m-doc">SemiColon</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a58be47db9455679e6a44df2eff9c9fa6" class="m-doc">Comma</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a1901606ea069a83dc7beea17881ef95a" class="m-doc">Period</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ac48e929b2b1eabba2ba036884433345e" class="m-doc">Quote</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a358cfe58715d680d9ab09f82e4010cbc" class="m-doc">Slash</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a3ca274eeb43af8abc2e20aaf69003282" class="m-doc">BackSlash</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a77a804418d76dc407383a618b60853ab" class="m-doc">Tilde</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341af5f286e73bda105e538310b3190f75c5" class="m-doc">Equal</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a3663598d5c5858b5a6040b1bbed4f187" class="m-doc">Dash</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ad511f8439ecde36647437fbba67a4394" class="m-doc">Space</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a988fd738de9c6d177440c5dcf69e73ce" class="m-doc">Return</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ae3fb3f3381b848f57f35cb3558733f84" class="m-doc">BackSpace</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a5c6ba25104401c9ee0650230fc6ba413" class="m-doc">Tab</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a9b869c510c75c5827ac82e49d4340927" class="m-doc">PageUp</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341aee3677bcca83ece9384b01e43952bf33" class="m-doc">PageDown</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a87557f11575c0ad78e4e28abedc13b6e" class="m-doc">End</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a8cf04a9734132302f96da8e113e80ce5" class="m-doc">Home</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341aa458be0f08b7e4ff3c0f633c100176c0" class="m-doc">Insert</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341af2a6c498fb90ee345d997f888fce3b18" class="m-doc">Delete</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341aec211f7c20af43e742bf2570c3cb84f9" class="m-doc">Add</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a1d9baf077ee87921f57a8fe42d510b65" class="m-doc">Subtract</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ae257376d913f3b53cbb4a9b19d770648" class="m-doc">Multiply</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a0b914e196182d02615487e9793ecff3d" class="m-doc">Divide</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a945d5e233cf7d6240f6b783b36a374ff" class="m-doc">Left</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a92b09c7c48c520c3c55e497875da437c" class="m-doc">Right</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a258f49887ef8d14ac268c92b02503aaa" class="m-doc">Up</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a08a38277b0309070706f6652eeae9a53" class="m-doc">Down</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a1b1118fbe9aecd479f93d37449578365" class="m-doc">Numpad0</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ac8e841f6b917061dd15aedb19a80cb77" class="m-doc">Numpad1</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341af7303042267ef3576930c1f4cd79348a" class="m-doc">Numpad2</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a5e23a433a108a85788894b705ec11cdd" class="m-doc">Numpad3</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a50b622a0442de23f15effc7fc46f3892" class="m-doc">Numpad4</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a6252c5b171a2982612e31042b953f558" class="m-doc">Numpad5</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a4d9afa3da3cc40661d50a925dd3010ad" class="m-doc">Numpad6</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a4314bbf1a297c4b03a5246a71c9c93b6" class="m-doc">Numpad7</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a8bf3a062ba0e0fa6ef21508d15e7820e" class="m-doc">Numpad8</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a15f7ca721fe2b648a34d498084f70919" class="m-doc">Numpad9</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ae1dffc8709f31a4987c8a88334107e89" class="m-doc">F1</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341afe5c3684dce76cdd9f7f42430868aa74" class="m-doc">F2</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a4b6bf4b531770872d4328ce69bef5627" class="m-doc">F3</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ae7e0e72401a9f2718ed0f39f2861d702" class="m-doc">F4</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a37f438df6a6d5ba4c17ef8ca58562f00" class="m-doc">F5</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a1faf42f2823f184eb2c9f0dffe5d73f2" class="m-doc">F6</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a47489eb597b7db34caa24b1fc78fc839" class="m-doc">F7</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a4787509ad9f9d747a81a30e9dde3d4a7" class="m-doc">F8</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a892a245e287c163080b23db737d3c4c9" class="m-doc">F9</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ab213ce22ca6ad4eda8db82966b9b6e5a" class="m-doc">F10</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a643b0662422d1d0dffa3fca2e2bf28a8" class="m-doc">F11</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ae902674982fc99aa343cdd94da7476c3" class="m-doc">F12</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341a105b296a83f9c105355403f3332af50f" class="m-doc">Pause</a>,
+              <a href="#gga4c20baefc9a6688f17f283b5aa272341ae93f994f01c537c4e2f7d8528c3eb5e9" class="m-doc">Count</a> }</span>
+            </dt>
+            <dd>Keyboard key codes enum.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> { </span><span class="m-doc-wrap"><a href="#ggad9bb6ed019dd984f94ece386e31f4493a6adf97f83acf6453d4a6a4b1070f3754" class="m-doc">None</a> = 0,
+              <a href="#ggad9bb6ed019dd984f94ece386e31f4493aa1595abbb4c3a326636dd178757cd6c1" class="m-doc">Control</a> = 1,
+              <a href="#ggad9bb6ed019dd984f94ece386e31f4493a825a3d98017bab11815ad2817201324c" class="m-doc">Shift</a> = 2,
+              <a href="#ggad9bb6ed019dd984f94ece386e31f4493aa2e92861b757ab878312dd57993d60cf" class="m-doc">Alt</a> = 4,
+              <a href="#ggad9bb6ed019dd984f94ece386e31f4493aa45da96d0bf6575970f2d27af22be28a" class="m-doc">System</a> = 8 }</span>
+            </dt>
+            <dd>Keyboard modifier flags enum.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> { </span><span class="m-doc-wrap"><a href="#gga345e43df7245483a92ed345d78c340d5a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> = -1,
+              <a href="#gga345e43df7245483a92ed345d78c340d5a945d5e233cf7d6240f6b783b36a374ff" class="m-doc">Left</a>,
+              <a href="#gga345e43df7245483a92ed345d78c340d5a92b09c7c48c520c3c55e497875da437c" class="m-doc">Right</a>,
+              <a href="#gga345e43df7245483a92ed345d78c340d5ab1ca34f82e83c52b010f86955f264e05" class="m-doc">Middle</a>,
+              <a href="#gga345e43df7245483a92ed345d78c340d5a113f84d105af2b8016b3896117c9deab" class="m-doc">Extra1</a>,
+              <a href="#gga345e43df7245483a92ed345d78c340d5a83dca46dd08ad782e968d586375715e1" class="m-doc">Extra2</a> }</span>
+            </dt>
+            <dd>Mouse buttons enum.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#gad80efa2cc9794975a6e6e0151494ce26" class="m-doc">MouseAxis</a> { </span><span class="m-doc-wrap"><a href="#ggad80efa2cc9794975a6e6e0151494ce26a02129bb861061d1a052c592e2dc6b383" class="m-doc">X</a>,
+              <a href="#ggad80efa2cc9794975a6e6e0151494ce26a57cec4137b614c87cb4e24a3d003a3e0" class="m-doc">Y</a>,
+              <a href="#ggad80efa2cc9794975a6e6e0151494ce26a105078d294d30c978ca2badf7f376934" class="m-doc">Scroll</a> }</span>
+            </dt>
+            <dd>Mouse axes enums.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ga6a91085b03d6b96ddf36b0ba9a9ae78b" class="m-doc">MouseState</a> { </span><span class="m-doc-wrap"><a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78ba7a1920d61156abc05a60135aefe8bc67" class="m-doc">Default</a>,
+              <a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78bad0f2e5376298c880665077b565ffd7dd" class="m-doc">Locked</a>,
+              <a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78ba7acdf85c69cc3c5305456a293524386e" class="m-doc">Hidden</a> }</span>
+            </dt>
+            <dd>Possible mouse states.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a> = std::variant&lt;KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent, ResizeEvent, TextEvent, GamepadConnectionEvent&gt;
+            </dt>
+            <dd>Variant that can hold any of the window events.</dd>
+            <dt>
+              using <a href="#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">Window</a> = std::shared_ptr&lt;BaseWindow&gt;
+            </dt>
+            <dd>Handle to a window.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga981a1a08072ce509380c627298903c2e" class="m-doc">gamepadButtonToString</a>(</span><span class="m-doc-wrap">GamepadButton button) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::string</span>
+            </dt>
+            <dd>Converts a <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a> enum to a string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#gada3155627832407b6b9044e82c4f3f90" class="m-doc">stringToGamepadButton</a>(</span><span class="m-doc-wrap">const std::string&amp; str) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> GamepadButton</span>
+            </dt>
+            <dd>Converts a string to a <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga663fb6cf059a1c547d2610e12e7e0e30" class="m-doc">gamepadAxisToString</a>(</span><span class="m-doc-wrap">GamepadAxis axis) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::string</span>
+            </dt>
+            <dd>Convert a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a> to a string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga64cfd8043b28ff188dbdee61ce290829" class="m-doc">stringToGamepadAxis</a>(</span><span class="m-doc-wrap">const std::string&amp; str) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> GamepadAxis</span>
+            </dt>
+            <dd>Convert a string to a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga9af207cc62516f4913c9763aeaea8603" class="m-doc">openWindow</a>(</span><span class="m-doc-wrap">const std::string&amp; title = &quot;CUBOS.&quot;,
+              const glm::ivec2&amp; size = {800, 600}) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> Window</span>
+            </dt>
+            <dd>Opens a new window.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#gaf5824ab6cd7b4d997e7515dfb2380405" class="m-doc">mouseButtonToString</a>(</span><span class="m-doc-wrap">MouseButton button) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::string</span>
+            </dt>
+            <dd>Converts a <a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> enum to a string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#gad3b338856e0281eb4944202b7bdcffc3" class="m-doc">stringToMouseButton</a>(</span><span class="m-doc-wrap">const std::string&amp; str) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> MouseButton</span>
+            </dt>
+            <dd>Convert a string to a <a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> enum.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="ga9a6ec8108e1db5d1fd30d85dc39e4be4"><div>
+            <h3>
+              enum class <a href="#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc-self">GamepadButton</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Gamepad buttons.</p>
+          </div></section>
+          <section class="m-doc-details" id="gaf04965ccbc878e3989398001644ca510"><div>
+            <h3>
+              enum class <a href="#gaf04965ccbc878e3989398001644ca510" class="m-doc-self">GamepadAxis</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Gamepad axes.</p>
+          </div></section>
+          <section class="m-doc-details" id="ga4c20baefc9a6688f17f283b5aa272341"><div>
+            <h3>
+              enum class <a href="#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc-self">Key</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="keyboard_8hpp.html">&lt;core/io/keyboard.hpp&gt;</a></div>
+            </h3>
+            <p>Keyboard key codes enum.</p>
+          </div></section>
+          <section class="m-doc-details" id="gad9bb6ed019dd984f94ece386e31f4493"><div>
+            <h3>
+              enum class <a href="#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc-self">Modifiers</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="keyboard_8hpp.html">&lt;core/io/keyboard.hpp&gt;</a></div>
+            </h3>
+            <p>Keyboard modifier flags enum.</p>
+          </div></section>
+          <section class="m-doc-details" id="ga345e43df7245483a92ed345d78c340d5"><div>
+            <h3>
+              enum class <a href="#ga345e43df7245483a92ed345d78c340d5" class="m-doc-self">MouseButton</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+            </h3>
+            <p>Mouse buttons enum.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#gga345e43df7245483a92ed345d78c340d5a4bbb8f967da6d1a610596d7257179c2b" class="m-doc-self" id="gga345e43df7245483a92ed345d78c340d5a4bbb8f967da6d1a610596d7257179c2b">Invalid</a></td>
+                  <td>
+                  <p>Used for unknown mouse buttons.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#gga345e43df7245483a92ed345d78c340d5a945d5e233cf7d6240f6b783b36a374ff" class="m-doc-self" id="gga345e43df7245483a92ed345d78c340d5a945d5e233cf7d6240f6b783b36a374ff">Left</a></td>
+                  <td>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#gga345e43df7245483a92ed345d78c340d5a92b09c7c48c520c3c55e497875da437c" class="m-doc-self" id="gga345e43df7245483a92ed345d78c340d5a92b09c7c48c520c3c55e497875da437c">Right</a></td>
+                  <td>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#gga345e43df7245483a92ed345d78c340d5ab1ca34f82e83c52b010f86955f264e05" class="m-doc-self" id="gga345e43df7245483a92ed345d78c340d5ab1ca34f82e83c52b010f86955f264e05">Middle</a></td>
+                  <td>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#gga345e43df7245483a92ed345d78c340d5a113f84d105af2b8016b3896117c9deab" class="m-doc-self" id="gga345e43df7245483a92ed345d78c340d5a113f84d105af2b8016b3896117c9deab">Extra1</a></td>
+                  <td>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#gga345e43df7245483a92ed345d78c340d5a83dca46dd08ad782e968d586375715e1" class="m-doc-self" id="gga345e43df7245483a92ed345d78c340d5a83dca46dd08ad782e968d586375715e1">Extra2</a></td>
+                  <td>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gad80efa2cc9794975a6e6e0151494ce26"><div>
+            <h3>
+              enum class <a href="#gad80efa2cc9794975a6e6e0151494ce26" class="m-doc-self">MouseAxis</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+            </h3>
+            <p>Mouse axes enums.</p>
+          </div></section>
+          <section class="m-doc-details" id="ga6a91085b03d6b96ddf36b0ba9a9ae78b"><div>
+            <h3>
+              enum class <a href="#ga6a91085b03d6b96ddf36b0ba9a9ae78b" class="m-doc-self">MouseState</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+            </h3>
+            <p>Possible mouse states.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78ba7a1920d61156abc05a60135aefe8bc67" class="m-doc-self" id="gga6a91085b03d6b96ddf36b0ba9a9ae78ba7a1920d61156abc05a60135aefe8bc67">Default</a></td>
+                  <td>
+                  <p>Default mouse state, mouse will function as is specified by the OS.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78bad0f2e5376298c880665077b565ffd7dd" class="m-doc-self" id="gga6a91085b03d6b96ddf36b0ba9a9ae78bad0f2e5376298c880665077b565ffd7dd">Locked</a></td>
+                  <td>
+                  <p>Mouse cursor will be hidden and locked to the center of the window, useful for control schemes that require infinite mouse movement.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78ba7acdf85c69cc3c5305456a293524386e" class="m-doc-self" id="gga6a91085b03d6b96ddf36b0ba9a9ae78ba7acdf85c69cc3c5305456a293524386e">Hidden</a></td>
+                  <td>
+                  <p>Mouse cursor will be hidden when over the window, otherwise functioning in the same way as <a href="group__core-io.html#gga6a91085b03d6b96ddf36b0ba9a9ae78ba7a1920d61156abc05a60135aefe8bc67" class="m-doc">MouseState::<wbr />Default</a>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="ga95a66bffef72bc872aa3bff8d9e5d56c"><div>
+            <h3>
+              using <a href="#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc-self">WindowEvent</a> = std::variant&lt;KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent, ResizeEvent, TextEvent, GamepadConnectionEvent&gt;
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+            </h3>
+            <p>Variant that can hold any of the window events.</p>
+          </div></section>
+          <section class="m-doc-details" id="gabbf049b16e4957c4db19bbe8699da719"><div>
+            <h3>
+              using <a href="#gabbf049b16e4957c4db19bbe8699da719" class="m-doc-self">Window</a> = std::shared_ptr&lt;BaseWindow&gt;
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+            </h3>
+            <p>Handle to a window.</p>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1io_1_1BaseWindow.html" class="m-doc">BaseWindow</a> Interface used to wrap low-level window API implementations.</p></aside>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga981a1a08072ce509380c627298903c2e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::string </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga981a1a08072ce509380c627298903c2e" class="m-doc-self">gamepadButtonToString</a>(</span><span class="m-doc-wrap">GamepadButton button)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Converts a <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a> enum to a string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">button</td>
+                  <td>Button to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gada3155627832407b6b9044e82c4f3f90"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> GamepadButton </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gada3155627832407b6b9044e82c4f3f90" class="m-doc-self">stringToGamepadButton</a>(</span><span class="m-doc-wrap">const std::string&amp; str)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Converts a string to a <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">str</td>
+                  <td>String to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Button.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga663fb6cf059a1c547d2610e12e7e0e30"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::string </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga663fb6cf059a1c547d2610e12e7e0e30" class="m-doc-self">gamepadAxisToString</a>(</span><span class="m-doc-wrap">GamepadAxis axis)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Convert a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a> to a string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">axis</td>
+                  <td>Axis to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga64cfd8043b28ff188dbdee61ce290829"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> GamepadAxis </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga64cfd8043b28ff188dbdee61ce290829" class="m-doc-self">stringToGamepadAxis</a>(</span><span class="m-doc-wrap">const std::string&amp; str)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Convert a string to a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">str</td>
+                  <td>String to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Axis.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga9af207cc62516f4913c9763aeaea8603"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> Window </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga9af207cc62516f4913c9763aeaea8603" class="m-doc-self">openWindow</a>(</span><span class="m-doc-wrap">const std::string&amp; title = &quot;CUBOS.&quot;,
+              const glm::ivec2&amp; size = {800, 600})</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+            </h3>
+            <p>Opens a new window.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">title</td>
+                  <td>Window title.</td>
+                </tr>
+                <tr>
+                  <td>size</td>
+                  <td>Window size, in screen coordinates.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>New window, or nullptr on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gaf5824ab6cd7b4d997e7515dfb2380405"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::string </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaf5824ab6cd7b4d997e7515dfb2380405" class="m-doc-self">mouseButtonToString</a>(</span><span class="m-doc-wrap">MouseButton button)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+            </h3>
+            <p>Converts a <a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> enum to a string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">button</td>
+                  <td>MouseButton to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gad3b338856e0281eb4944202b7bdcffc3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> MouseButton </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gad3b338856e0281eb4944202b7bdcffc3" class="m-doc-self">stringToMouseButton</a>(</span><span class="m-doc-wrap">const std::string&amp; str)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+            </h3>
+            <p>Convert a string to a <a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">str</td>
+                  <td>The string to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>MouseButton.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
