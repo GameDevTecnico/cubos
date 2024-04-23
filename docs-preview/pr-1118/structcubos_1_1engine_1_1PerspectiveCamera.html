@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::World::ConstComponents::Iterator::Component struct | CUBOS. Docs</title>
+  <title>cubos::engine::PerspectiveCamera struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1World.html">World</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1World_1_1ConstComponents.html">ConstComponents</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1World_1_1ConstComponents_1_1Iterator.html">Iterator</a>::<wbr/></span>Component <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="world_8hpp.html">&lt;core/ecs/world.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>PerspectiveCamera <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="perspective__camera_8hpp.html">&lt;engine/render/camera/perspective_camera.hpp&gt;</a></div>
         </h1>
-        <p>Output structure for the iterator.</p>
+        <p>Component which defines parameters of a perspective camera used to render the world.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,17 +61,26 @@
             </li>
           </ul>
         </nav>
+<aside class="m-note m-info"><h4>Note</h4><p>Should be used with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a>.</p></aside>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a60908e5044fbdf2e468d0922d8754b85">
-              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>* <a href="#a60908e5044fbdf2e468d0922d8754b85" class="m-doc-self">type</a>
+            <dt id="ac50f830db1b4666f4ac3b952ca9ce4fc">
+              bool <a href="#ac50f830db1b4666f4ac3b952ca9ce4fc" class="m-doc-self">active</a>
             </dt>
-            <dd><a href="structcubos_1_1core_1_1ecs_1_1World_1_1ConstComponents_1_1Iterator_1_1Component.html" class="m-doc">Component</a> type.</dd>
-            <dt id="a1ebe8aff49c6f54eaa1116c9bfa7629c">
-              const void* <a href="#a1ebe8aff49c6f54eaa1116c9bfa7629c" class="m-doc-self">value</a>
+            <dd>Whether the camera is drawing to a target.</dd>
+            <dt id="a9b57884699e2b3180f2f71bf5ac09f08">
+              float <a href="#a9b57884699e2b3180f2f71bf5ac09f08" class="m-doc-self">fovY</a>
             </dt>
-            <dd><a href="structcubos_1_1core_1_1ecs_1_1World_1_1ConstComponents_1_1Iterator_1_1Component.html" class="m-doc">Component</a> value.</dd>
+            <dd>Vertical field of view in degrees.</dd>
+            <dt id="a0eb12e498a3d0a0635d7ecdfd0fd4cbe">
+              float <a href="#a0eb12e498a3d0a0635d7ecdfd0fd4cbe" class="m-doc-self">zNear</a>
+            </dt>
+            <dd>Near clipping plane.</dd>
+            <dt id="acb9ee58a53430b12b9a63360e9ce6ffc">
+              float <a href="#acb9ee58a53430b12b9a63360e9ce6ffc" class="m-doc-self">zFar</a>
+            </dt>
+            <dd>Far clipping plane.</dd>
           </dl>
         </section>
       </div>

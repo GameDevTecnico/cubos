@@ -53,18 +53,19 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md86">Dependencies</a></li>
+            <li><a href="#autotoc_md88">Dependencies</a></li>
             <li>
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md86"><h3><a href="#autotoc_md86">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li><a href="group__render-target-plugin.html" class="m-doc">Render Target</a></li></ul></section>
+<section id="autotoc_md88"><h3><a href="#autotoc_md88">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li><a href="group__render-target-plugin.html" class="m-doc">Render Target</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -87,16 +88,29 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga8843b5a3be6781183fc144d32041ddd7" class="m-doc">gBufferPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga78c2612c334f0ddf0bd0bc69dec32105" class="m-doc">gBufferPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga32ca60af9825e7b1667e64e9ac5aed4e" class="m-doc">createGBufferTag</a>
+            </dt>
+            <dd>Recreates the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> if necessary - for example, due to a render target resize.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gad46d4e11e327e044dcdd7ed22ad0e117" class="m-doc">drawToGBufferTag</a>
+            </dt>
+            <dd>Systems which draw to <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures should be tagged with this.</dd>
+          </dl>
+        </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga8843b5a3be6781183fc144d32041ddd7"><div>
+          <section class="m-doc-details" id="ga78c2612c334f0ddf0bd0bc69dec32105"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga8843b5a3be6781183fc144d32041ddd7" class="m-doc-self">gBufferPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga78c2612c334f0ddf0bd0bc69dec32105" class="m-doc-self">gBufferPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2g__buffer_2plugin_8hpp.html">&lt;engine/render/g_buffer/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
@@ -111,6 +125,23 @@
                 </tr>
               </tbody>
             </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="ga32ca60af9825e7b1667e64e9ac5aed4e"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga32ca60af9825e7b1667e64e9ac5aed4e" class="m-doc-self">createGBufferTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2g__buffer_2plugin_8hpp.html">&lt;engine/render/g_buffer/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Recreates the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> if necessary - for example, due to a render target resize.</p>
+          </div></section>
+          <section class="m-doc-details" id="gad46d4e11e327e044dcdd7ed22ad0e117"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gad46d4e11e327e044dcdd7ed22ad0e117" class="m-doc-self">drawToGBufferTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2g__buffer_2plugin_8hpp.html">&lt;engine/render/g_buffer/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Systems which draw to <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures should be tagged with this.</p>
           </div></section>
         </section>
       </div>

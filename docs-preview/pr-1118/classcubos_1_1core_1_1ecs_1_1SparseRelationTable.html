@@ -68,6 +68,10 @@
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>
+            </dt>
+            <dd><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a> structure for the iterator.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">enum class <a href="#ac8097a3234006937f59f4e7f24ca18ce" class="m-doc">Transformation</a> { </span><span class="m-doc-wrap"><a href="#ac8097a3234006937f59f4e7f24ca18cea6adf97f83acf6453d4a6a4b1070f3754" class="m-doc">None</a>,
               <a href="#ac8097a3234006937f59f4e7f24ca18cea8778f5cc5ee1685fb97ad92e33e63225" class="m-doc">Swap</a>,
               <a href="#ac8097a3234006937f59f4e7f24ca18cea2e6d340e8627aa512d337faef8fe58a5" class="m-doc">SwapIfGreater</a> }</span>
@@ -82,6 +86,31 @@
               <span class="m-doc-wrap-bumper"><a href="#a389236b82649219cd0f579f5c21f419f" class="m-doc">SparseRelationTable</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; relationType)</span>
             </dt>
             <dd>Constructs with the given relation type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; table,
+              uint32_t row)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a8e90e943e1484c543147fdbd8166b1a9" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Copy constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a2029576b546f49e2d39ecb20e957ae1b" class="m-doc">View</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; table,
+              uint32_t index,
+              bool isFrom)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#af8cd0912ddc2aab6ec6e14de51528de6" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; table,
+              uint32_t row,
+              bool isFrom)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a8e90e943e1484c543147fdbd8166b1a9" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Copy constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -171,25 +200,65 @@
             </dt>
             <dd>Gets the next row with the same to index, or <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size()</a> if there is none.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab207f33a67184565190d1122fb38ffb5" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator.html" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab207f33a67184565190d1122fb38ffb5" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a></span>
             </dt>
             <dd>Gets an iterator to the first relation of the table.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9fed827639159156ed3403decad2509a" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator.html" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9fed827639159156ed3403decad2509a" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a></span>
             </dt>
             <dd>Gets an iterator which represents the end of the table.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5c3154434fee62f1b2b130962abe3fae" class="m-doc">viewFrom</a>(</span><span class="m-doc-wrap">uint32_t from) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1View.html" class="m-doc">View</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5c3154434fee62f1b2b130962abe3fae" class="m-doc">viewFrom</a>(</span><span class="m-doc-wrap">uint32_t from) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#a2029576b546f49e2d39ecb20e957ae1b" class="m-doc">View</a></span>
             </dt>
             <dd>Returns a view of the relations with the given from index.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af1aed35aa49099ad746ca9ebe882a86d" class="m-doc">viewTo</a>(</span><span class="m-doc-wrap">uint32_t to) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1View.html" class="m-doc">View</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af1aed35aa49099ad746ca9ebe882a86d" class="m-doc">viewTo</a>(</span><span class="m-doc-wrap">uint32_t to) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#a2029576b546f49e2d39ecb20e957ae1b" class="m-doc">View</a></span>
             </dt>
             <dd>Returns a view of the relations with the given to index.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ade94e34c2e728f14ad1f31c6283e274d" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
             <dd>Returns the number of relations on the table.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a56c7a5403781ffddab0def3788036f4b" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>&amp; other) const -&gt; bool</span>
+            </dt>
+            <dd>Compares two iterators.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ada2a64357bf11cb48b169759eb30f15a" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>&amp;</span>
+            </dt>
+            <dd>Accesses the relation referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9b8dd12103657822ba3d2453ba51d06e" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>*</span>
+            </dt>
+            <dd>Accesses the relation referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a05fb72f78a6b38fc88de530114b02693" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Advances the iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab207f33a67184565190d1122fb38ffb5" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Gets an iterator to the first relation of the view.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9fed827639159156ed3403decad2509a" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Gets an iterator which represents the end of the view.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a56c7a5403781ffddab0def3788036f4b" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>&amp; other) const -&gt; bool</span>
+            </dt>
+            <dd>Compares two iterators.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ada2a64357bf11cb48b169759eb30f15a" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>&amp;</span>
+            </dt>
+            <dd>Accesses the relation referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9b8dd12103657822ba3d2453ba51d06e" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>*</span>
+            </dt>
+            <dd>Accesses the relation referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a05fb72f78a6b38fc88de530114b02693" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Advances the iterator.</dd>
           </dl>
         </section>
         <section>
@@ -243,6 +312,116 @@
               </tbody>
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p><code>relationType</code> must have <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">reflection::<wbr />ConstructibleTrait</a> and be move constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aa8a4313b334e3c1cf88d68d1479a9db2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; table,
+              uint32_t row)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Table.</td>
+                </tr>
+                <tr>
+                  <td>row</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Row.html" class="m-doc">Row</a>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8e90e943e1484c543147fdbd8166b1a9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e90e943e1484c543147fdbd8166b1a9" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other) <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2029576b546f49e2d39ecb20e957ae1b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2029576b546f49e2d39ecb20e957ae1b" class="m-doc-self">View</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; table,
+              uint32_t index,
+              bool isFrom)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>index</td>
+                  <td>Index being iterated over.</td>
+                </tr>
+                <tr>
+                  <td>isFrom</td>
+                  <td>Is the index a from index? If false, its a to index.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af8cd0912ddc2aab6ec6e14de51528de6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8cd0912ddc2aab6ec6e14de51528de6" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>&amp; table,
+              uint32_t row,
+              bool isFrom)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Table.</td>
+                </tr>
+                <tr>
+                  <td>row</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Row.html" class="m-doc">Row</a>.</td>
+                </tr>
+                <tr>
+                  <td>isFrom</td>
+                  <td>Are we iterating over the same from index? If false, iterates over to.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8e90e943e1484c543147fdbd8166b1a9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e90e943e1484c543147fdbd8166b1a9" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other) <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
           <section class="m-doc-details" id="a1568071740d93fff5876e3523e9771f4"><div>
             <h3>
@@ -691,35 +870,35 @@
           </div></section>
           <section class="m-doc-details" id="ab207f33a67184565190d1122fb38ffb5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab207f33a67184565190d1122fb38ffb5" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab207f33a67184565190d1122fb38ffb5" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets an iterator to the first relation of the table.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                  <td>Iterator.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a9fed827639159156ed3403decad2509a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9fed827639159156ed3403decad2509a" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9fed827639159156ed3403decad2509a" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets an iterator which represents the end of the table.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                  <td>Iterator.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a5c3154434fee62f1b2b130962abe3fae"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5c3154434fee62f1b2b130962abe3fae" class="m-doc-self">viewFrom</a>(</span><span class="m-doc-wrap">uint32_t from) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#a2029576b546f49e2d39ecb20e957ae1b" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5c3154434fee62f1b2b130962abe3fae" class="m-doc-self">viewFrom</a>(</span><span class="m-doc-wrap">uint32_t from) const</span></span>
             </h3>
             <p>Returns a view of the relations with the given from index.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -742,7 +921,7 @@
           </div></section>
           <section class="m-doc-details" id="af1aed35aa49099ad746ca9ebe882a86d"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1aed35aa49099ad746ca9ebe882a86d" class="m-doc-self">viewTo</a>(</span><span class="m-doc-wrap">uint32_t to) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#a2029576b546f49e2d39ecb20e957ae1b" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1aed35aa49099ad746ca9ebe882a86d" class="m-doc-self">viewTo</a>(</span><span class="m-doc-wrap">uint32_t to) const</span></span>
             </h3>
             <p>Returns a view of the relations with the given to index.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -776,6 +955,170 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a56c7a5403781ffddab0def3788036f4b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56c7a5403781ffddab0def3788036f4b" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>&amp; other) const</span></span>
+            </h3>
+            <p>Compares two iterators.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the iterators point to the same relation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ada2a64357bf11cb48b169759eb30f15a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ada2a64357bf11cb48b169759eb30f15a" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the relation referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9b8dd12103657822ba3d2453ba51d06e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>* cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b8dd12103657822ba3d2453ba51d06e" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the relation referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a05fb72f78a6b38fc88de530114b02693"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a05fb72f78a6b38fc88de530114b02693" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Advances the iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to this.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ab207f33a67184565190d1122fb38ffb5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab207f33a67184565190d1122fb38ffb5" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets an iterator to the first relation of the view.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9fed827639159156ed3403decad2509a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9fed827639159156ed3403decad2509a" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets an iterator which represents the end of the view.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a56c7a5403781ffddab0def3788036f4b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56c7a5403781ffddab0def3788036f4b" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>&amp; other) const</span></span>
+            </h3>
+            <p>Compares two iterators.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the iterators point to the same relation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ada2a64357bf11cb48b169759eb30f15a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ada2a64357bf11cb48b169759eb30f15a" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the relation referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9b8dd12103657822ba3d2453ba51d06e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>* cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b8dd12103657822ba3d2453ba51d06e" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the relation referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a05fb72f78a6b38fc88de530114b02693"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html#aa8a4313b334e3c1cf88d68d1479a9db2" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTable::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a05fb72f78a6b38fc88de530114b02693" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Advances the iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to this.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
           </div></section>
         </section>
       </div>

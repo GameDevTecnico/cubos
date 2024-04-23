@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::SparseRelationTable::Iterator::Output struct | CUBOS. Docs</title>
+  <title>engine/prelude.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,36 +46,85 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html">SparseRelationTable</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator.html">Iterator</a>::<wbr/></span>Output <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="sparse__relation_2table_8hpp.html">&lt;core/ecs/table/sparse_relation/table.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span>prelude.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Iterator_1_1Output.html" class="m-doc">Output</a> structure for the iterator.</p>
+        <p>Includes commonly used headers and defines aliases for commonly used types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="ac31bcdbceefc634cdfd875ade0e33623">
-              uint32_t <a href="#ac31bcdbceefc634cdfd875ade0e33623" class="m-doc-self">from</a>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> = core::ecs::Tag
             </dt>
-            <dd>From index.</dd>
-            <dt id="a7833e2fd60adfa3df0a05d01268f25f6">
-              uint32_t <a href="#a7833e2fd60adfa3df0a05d01268f25f6" class="m-doc-self">to</a>
+            <dd>Represents a tag to be used with the <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> class.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a2b3cae287edbca3b8a3e96baecab4146" class="m-doc">Plugin</a> = core::ecs::Plugin
             </dt>
-            <dd>To index.</dd>
-            <dt id="a5cd38a721074d0ffd8f90b4583dfd179">
-              uintptr_t <a href="#a5cd38a721074d0ffd8f90b4583dfd179" class="m-doc-self">value</a>
+            <dd>Function pointer type representing a plugin.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> = core::ecs::Cubos
             </dt>
-            <dd>Address of the relation.</dd>
+            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a426547b7a41f84591b3fd8d967bc5435" class="m-doc">DeltaTime</a> = core::ecs::DeltaTime
+            </dt>
+            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a0a4fcc97e34218f81162d4e3fb61a8df" class="m-doc">ShouldQuit</a> = core::ecs::ShouldQuit
+            </dt>
+            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a1f8d4a63dca935415d2191391be6c2dd" class="m-doc">Arguments</a> = core::ecs::Arguments
+            </dt>
+            <dd>Resource which stores the command-line arguments.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#a306c379fd24b3dcc1990b06cdb386244" class="m-doc">Query</a> = core::ecs::Query&lt;ComponentTypes...&gt;
+            </dt>
+            <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a34019c3c344f309409d8b0abc510002d" class="m-doc">Entity</a> = core::ecs::Entity
+            </dt>
+            <dd>Identifies an entity.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a736c6baa44b5c42048f897283a5ef1b1" class="m-doc">Commands</a> = core::ecs::Commands
+            </dt>
+            <dd>System argument used to write ECS commands and execute them at a later time.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc">Opt</a> = core::ecs::Opt&lt;T&gt;
+            </dt>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a> = core::ecs::EventReader&lt;T, M&gt;
+            </dt>
+            <dd>System arguments used to read events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#a7ef542827dad012c740982fed224e341" class="m-doc">EventWriter</a> = core::ecs::EventWriter&lt;T&gt;
+            </dt>
+            <dd>System argument which allows the system to send events of type <code>T</code> to other systems.</dd>
           </dl>
         </section>
       </div>
