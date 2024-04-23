@@ -58,6 +58,7 @@
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
@@ -134,6 +135,10 @@
             </dt>
             <dd>Stores and manages all of the observers associated with a world.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">PluginQueue</a>
+            </dt>
+            <dd>Stores plugin operations to be executed later.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>
             </dt>
@@ -208,6 +213,10 @@
               class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a>
             </dt>
             <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which allows the system to send events of type <code>T</code> to other systems.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Plugins.html" class="m-doc">Plugins</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to add or remove <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> plugins at runtime.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>
@@ -320,6 +329,15 @@
             <dd>Possible traversal types for tree relation terms.</dd>
           </dl>
         </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> = void(*)(<a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;)
+            </dt>
+            <dd>Function pointer type representing a plugin.</dd>
+          </dl>
+        </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
@@ -362,6 +380,16 @@
                 </tr>
               </tbody>
             </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="a2238d3875336b07640eb86802393f63f"><div>
+            <h3>
+              using cubos::<wbr />core::<wbr />ecs::<wbr /><a href="#a2238d3875336b07640eb86802393f63f" class="m-doc-self">Plugin</a> = void(*)(<a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;)
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugin__queue_8hpp.html">&lt;core/ecs/plugin_queue.hpp&gt;</a></div>
+            </h3>
+            <p>Function pointer type representing a plugin.</p>
           </div></section>
         </section>
         <section>

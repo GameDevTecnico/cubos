@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::ecs::SystemContext struct | CUBOS. Docs</title>
+  <title>cubos::core::ecs::PluginQueue struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,38 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemContext <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_2fetcher_8hpp.html">&lt;core/ecs/system/fetcher.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>PluginQueue <span class="m-thin">struct</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugin__queue_8hpp.html">&lt;core/ecs/plugin_queue.hpp&gt;</a></div>
         </h1>
-        <p>Context passed by the system caller to the fetchers.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a522e0547da9e16252dc75426e44d09cc">
-              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; <a href="#a522e0547da9e16252dc75426e44d09cc" class="m-doc-self">cmdBuffer</a>
-            </dt>
-            <dd>Command buffer to record commands to.</dd>
-            <dt id="ada43ab502851141a6115c35392180ed9">
-              <a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">PluginQueue</a>* <a href="#ada43ab502851141a6115c35392180ed9" class="m-doc-self">pluginQueue</a>
-            </dt>
-            <dd>Plugin queue to add or remove plugins from.</dd>
-            <dt id="a0b0724f26e1e6c2bef208f628ab2e0fe">
-              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> <a href="#a0b0724f26e1e6c2bef208f628ab2e0fe" class="m-doc-self">observedEntity</a>
-            </dt>
-            <dd><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> which triggered the system, if it&#x27;s an observer.</dd>
-          </dl>
-        </section>
+        <p>Stores plugin operations to be executed later.</p>
       </div>
     </div>
   </div>
