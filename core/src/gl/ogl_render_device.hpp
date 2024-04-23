@@ -1,6 +1,10 @@
 #pragma once
 
+#include <condition_variable>
+#include <mutex>
+
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/io/window.hpp>
 
 namespace cubos::core::gl
 {
@@ -9,6 +13,7 @@ namespace cubos::core::gl
     class OGLRenderDevice : public RenderDevice
     {
     public:
+        ~OGLRenderDevice() override;
         OGLRenderDevice();
 
         Framebuffer createFramebuffer(const FramebufferDesc& desc) override;
@@ -55,6 +60,7 @@ namespace cubos::core::gl
     private:
         int mCurrentIndexFormat;
         std::size_t mCurrentIndexSz;
+        std::shared_ptr<bool> mDestroyed{std::make_shared<bool>(false)};
 
         RasterState mDefaultRS;
         DepthStencilState mDefaultDSS;

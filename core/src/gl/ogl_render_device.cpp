@@ -466,15 +466,21 @@ static void blendOpToGL(BlendOp blendOp, GLenum& glBlendOp)
 class OGLFramebuffer : public impl::Framebuffer
 {
 public:
-    OGLFramebuffer(GLuint id)
-        : id(id)
+    OGLFramebuffer(std::shared_ptr<bool> destroyed, GLuint id)
+        : destroyed(destroyed)
+        , id(id)
     {
     }
 
     ~OGLFramebuffer() override
     {
-        glDeleteFramebuffers(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteFramebuffers(1, &this->id);
+        }
     }
+
+    std::shared_ptr<bool> destroyed;
 
     GLuint id;
 };
@@ -482,9 +488,6 @@ public:
 class OGLRasterState : public impl::RasterState
 {
 public:
-    OGLRasterState() = default;
-    ~OGLRasterState() override = default;
-
     GLboolean cullEnabled;
     GLboolean scissorEnabled;
     GLenum frontFace;
@@ -495,9 +498,6 @@ public:
 class OGLDepthStencilState : public impl::DepthStencilState
 {
 public:
-    OGLDepthStencilState() = default;
-    ~OGLDepthStencilState() override = default;
-
     GLboolean depthEnabled;
     GLboolean depthWriteEnabled;
     GLfloat depthNear;
@@ -523,9 +523,6 @@ public:
 class OGLBlendState : public impl::BlendState
 {
 public:
-    OGLBlendState() = default;
-    ~OGLBlendState() override = default;
-
     GLboolean blendEnabled;
     GLenum srcFactor;
     GLenum dstFactor;
@@ -538,15 +535,21 @@ public:
 class OGLSampler : public impl::Sampler
 {
 public:
-    OGLSampler(GLuint id)
-        : id(id)
+    OGLSampler(std::shared_ptr<bool> destroyed, GLuint id)
+        : destroyed(destroyed)
+        , id(id)
     {
     }
 
     ~OGLSampler() override
     {
-        glDeleteSamplers(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteSamplers(1, &this->id);
+        }
     }
+
+    std::shared_ptr<bool> destroyed;
 
     GLuint id;
 };
@@ -554,8 +557,9 @@ public:
 class OGLTexture1D : public impl::Texture1D
 {
 public:
-    OGLTexture1D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id)
+    OGLTexture1D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : destroyed(destroyed)
+        , id(id)
         , internalFormat(internalFormat)
         , format(format)
         , type(type)
@@ -564,7 +568,10 @@ public:
 
     ~OGLTexture1D() override
     {
-        glDeleteTextures(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteTextures(1, &this->id);
+        }
     }
 
     void update(std::size_t x, std::size_t width, const void* data, std::size_t level) override
@@ -580,6 +587,8 @@ public:
         glGenerateMipmap(GL_TEXTURE_1D);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
     GLenum internalFormat;
     GLenum format;
@@ -589,8 +598,9 @@ public:
 class OGLTexture2D : public impl::Texture2D
 {
 public:
-    OGLTexture2D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id)
+    OGLTexture2D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : destroyed(destroyed)
+        , id(id)
         , internalFormat(internalFormat)
         , format(format)
         , type(type)
@@ -599,7 +609,10 @@ public:
 
     ~OGLTexture2D() override
     {
-        glDeleteTextures(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteTextures(1, &this->id);
+        }
     }
 
     void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data,
@@ -622,6 +635,8 @@ public:
         glGenerateMipmap(GL_TEXTURE_2D);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
     GLenum internalFormat;
     GLenum format;
@@ -631,8 +646,9 @@ public:
 class OGLTexture2DArray : public impl::Texture2DArray
 {
 public:
-    OGLTexture2DArray(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id)
+    OGLTexture2DArray(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : destroyed(destroyed)
+        , id(id)
         , internalFormat(internalFormat)
         , format(format)
         , type(type)
@@ -641,7 +657,10 @@ public:
 
     ~OGLTexture2DArray() override
     {
-        glDeleteTextures(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteTextures(1, &this->id);
+        }
     }
 
     void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data,
@@ -659,6 +678,8 @@ public:
         glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
     GLenum internalFormat;
     GLenum format;
@@ -668,8 +689,9 @@ public:
 class OGLTexture3D : public impl::Texture3D
 {
 public:
-    OGLTexture3D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id)
+    OGLTexture3D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : destroyed(destroyed)
+        , id(id)
         , internalFormat(internalFormat)
         , format(format)
         , type(type)
@@ -678,7 +700,10 @@ public:
 
     ~OGLTexture3D() override
     {
-        glDeleteTextures(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteTextures(1, &this->id);
+        }
     }
 
     void update(std::size_t x, std::size_t y, std::size_t z, std::size_t width, std::size_t height, std::size_t depth,
@@ -696,6 +721,8 @@ public:
         glGenerateMipmap(GL_TEXTURE_3D);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
     GLenum internalFormat;
     GLenum format;
@@ -705,8 +732,9 @@ public:
 class OGLCubeMap : public impl::CubeMap
 {
 public:
-    OGLCubeMap(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id)
+    OGLCubeMap(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : destroyed(destroyed)
+        , id(id)
         , internalFormat(internalFormat)
         , format(format)
         , type(type)
@@ -715,7 +743,10 @@ public:
 
     ~OGLCubeMap() override
     {
-        glDeleteTextures(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteTextures(1, &this->id);
+        }
     }
 
     void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data, CubeFace face,
@@ -735,6 +766,8 @@ public:
         glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
     GLenum internalFormat;
     GLenum format;
@@ -744,8 +777,9 @@ public:
 class OGLCubeMapArray : public impl::CubeMapArray
 {
 public:
-    OGLCubeMapArray(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id)
+    OGLCubeMapArray(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : destroyed(destroyed)
+        , id(id)
         , internalFormat(internalFormat)
         , format(format)
         , type(type)
@@ -754,7 +788,10 @@ public:
 
     ~OGLCubeMapArray() override
     {
-        glDeleteTextures(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteTextures(1, &this->id);
+        }
     }
 
     void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data,
@@ -772,6 +809,8 @@ public:
         glGenerateMipmap(GL_TEXTURE_CUBE_MAP_ARRAY);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
     GLenum internalFormat;
     GLenum format;
@@ -781,14 +820,18 @@ public:
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
-    OGLConstantBuffer(GLuint id)
-        : id(id)
+    OGLConstantBuffer(std::shared_ptr<bool> destroyed, GLuint id)
+        : destroyed(destroyed)
+        , id(id)
     {
     }
 
     ~OGLConstantBuffer() override
     {
-        glDeleteBuffers(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteBuffers(1, &this->id);
+        }
     }
 
     void* map() override
@@ -802,14 +845,17 @@ public:
         glUnmapBuffer(GL_UNIFORM_BUFFER);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
 };
 
 class OGLIndexBuffer : public impl::IndexBuffer
 {
 public:
-    OGLIndexBuffer(GLuint id, GLenum format, std::size_t indexSz)
-        : id(id)
+    OGLIndexBuffer(std::shared_ptr<bool> destroyed, GLuint id, GLenum format, std::size_t indexSz)
+        : destroyed(destroyed)
+        , id(id)
         , format(format)
         , indexSz(indexSz)
     {
@@ -817,7 +863,10 @@ public:
 
     ~OGLIndexBuffer() override
     {
-        glDeleteBuffers(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteBuffers(1, &this->id);
+        }
     }
 
     void* map() override
@@ -831,6 +880,8 @@ public:
         glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
     GLenum format;
     std::size_t indexSz;
@@ -839,14 +890,18 @@ public:
 class OGLVertexBuffer : public impl::VertexBuffer
 {
 public:
-    OGLVertexBuffer(GLuint id)
-        : id(id)
+    OGLVertexBuffer(std::shared_ptr<bool> destroyed, GLuint id)
+        : destroyed(destroyed)
+        , id(id)
     {
     }
 
     ~OGLVertexBuffer() override
     {
-        glDeleteBuffers(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteBuffers(1, &this->id);
+        }
     }
 
     void* map() override
@@ -860,14 +915,17 @@ public:
         glUnmapBuffer(GL_ARRAY_BUFFER);
     }
 
+    std::shared_ptr<bool> destroyed;
+
     GLuint id;
 };
 
 class OGLVertexArray : public impl::VertexArray
 {
 public:
-    OGLVertexArray(GLuint id, const VertexBuffer* buffers)
-        : id(id)
+    OGLVertexArray(std::shared_ptr<bool> destroyed, GLuint id, const VertexBuffer* buffers)
+        : destroyed(destroyed)
+        , id(id)
     {
         for (std::size_t i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
         {
@@ -877,8 +935,13 @@ public:
 
     ~OGLVertexArray() override
     {
-        glDeleteVertexArrays(1, &this->id);
+        if (!*destroyed)
+        {
+            glDeleteVertexArrays(1, &this->id);
+        }
     }
+
+    std::shared_ptr<bool> destroyed;
 
     VertexBuffer buffers[CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];
     GLuint id;
@@ -887,21 +950,27 @@ public:
 class OGLShaderStage : public impl::ShaderStage
 {
 public:
-    OGLShaderStage(Stage type, GLuint shader)
-        : type(type)
+    OGLShaderStage(std::shared_ptr<bool> destroyed, Stage type, GLuint shader)
+        : destroyed(destroyed)
+        , type(type)
         , shader(shader)
     {
     }
 
     ~OGLShaderStage() override
     {
-        glDeleteShader(this->shader);
+        if (!*destroyed)
+        {
+            glDeleteShader(this->shader);
+        }
     }
 
     Stage getType() override
     {
         return this->type;
     }
+
+    std::shared_ptr<bool> destroyed;
 
     Stage type;
     GLuint shader;
@@ -1127,8 +1196,9 @@ public:
 class OGLShaderPipeline : public impl::ShaderPipeline
 {
 public:
-    OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program)
-        : vs(std::move(vs))
+    OGLShaderPipeline(std::shared_ptr<bool> destroyed, ShaderStage vs, ShaderStage ps, GLuint program)
+        : destroyed(destroyed)
+        , vs(std::move(vs))
         , ps(std::move(ps))
         , program(program)
     {
@@ -1137,14 +1207,15 @@ public:
         mSsboCount = 0;
     }
 
-    OGLShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
-        : OGLShaderPipeline(std::move(vs), std::move(ps), program)
+    OGLShaderPipeline(std::shared_ptr<bool> destroyed, ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
+        : OGLShaderPipeline(destroyed, std::move(vs), std::move(ps), program)
     {
         this->gs = std::move(gs);
     }
 
-    OGLShaderPipeline(ShaderStage cs, GLuint program)
-        : cs(std::move(cs))
+    OGLShaderPipeline(std::shared_ptr<bool> destroyed, ShaderStage cs, GLuint program)
+        : destroyed(destroyed)
+        , cs(std::move(cs))
         , program(program)
     {
         mTexCount = 0;
@@ -1154,7 +1225,10 @@ public:
 
     ~OGLShaderPipeline() override
     {
-        glDeleteProgram(this->program);
+        if (!*destroyed)
+        {
+            glDeleteProgram(this->program);
+        }
     }
 
     ShaderBindingPoint getBindingPoint(const char* name) override
@@ -1218,6 +1292,8 @@ public:
         return nullptr;
     }
 
+    std::shared_ptr<bool> destroyed;
+
     ShaderStage vs, gs, ps, cs;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
@@ -1227,6 +1303,11 @@ private:
     int mUboCount;
     int mSsboCount;
 };
+
+OGLRenderDevice::~OGLRenderDevice()
+{
+    *mDestroyed = true;
+}
 
 OGLRenderDevice::OGLRenderDevice()
 {
@@ -1446,7 +1527,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLFramebuffer>(id);
+    return std::make_shared<OGLFramebuffer>(mDestroyed, id);
 }
 
 void OGLRenderDevice::setFramebuffer(Framebuffer fb)
@@ -1685,7 +1766,7 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLSampler>(id);
+    return std::make_shared<OGLSampler>(mDestroyed, id);
 }
 
 Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
@@ -1733,7 +1814,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLTexture1D>(id, internalFormat, format, type);
+    return std::make_shared<OGLTexture1D>(mDestroyed, id, internalFormat, format, type);
 }
 
 Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
@@ -1777,7 +1858,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLTexture2D>(id, internalFormat, format, type);
+    return std::make_shared<OGLTexture2D>(mDestroyed, id, internalFormat, format, type);
 }
 
 Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& desc)
@@ -1829,7 +1910,7 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
         return nullptr;
     }
 
-    return std::make_shared<OGLTexture2DArray>(id, internalFormat, format, type);
+    return std::make_shared<OGLTexture2DArray>(mDestroyed, id, internalFormat, format, type);
 }
 
 Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
@@ -1880,7 +1961,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLTexture3D>(id, internalFormat, format, type);
+    return std::make_shared<OGLTexture3D>(mDestroyed, id, internalFormat, format, type);
 }
 
 CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
@@ -1938,7 +2019,7 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLCubeMap>(id, internalFormat, format, type);
+    return std::make_shared<OGLCubeMap>(mDestroyed, id, internalFormat, format, type);
 }
 
 CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
@@ -1993,7 +2074,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLCubeMapArray>(id, internalFormat, format, type);
+    return std::make_shared<OGLCubeMapArray>(mDestroyed, id, internalFormat, format, type);
 }
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(std::size_t size, const void* data, Usage usage)
@@ -2033,7 +2114,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(std::size_t size, const voi
         return nullptr;
     }
 
-    return std::make_shared<OGLConstantBuffer>(id);
+    return std::make_shared<OGLConstantBuffer>(mDestroyed, id);
 }
 
 IndexBuffer OGLRenderDevice::createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage)
@@ -2090,7 +2171,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(std::size_t size, const void* dat
         return nullptr;
     }
 
-    return std::make_shared<OGLIndexBuffer>(id, glFormat, indexSz);
+    return std::make_shared<OGLIndexBuffer>(mDestroyed, id, glFormat, indexSz);
 }
 
 void OGLRenderDevice::setIndexBuffer(IndexBuffer ib)
@@ -2138,7 +2219,7 @@ VertexBuffer OGLRenderDevice::createVertexBuffer(std::size_t size, const void* d
         return nullptr;
     }
 
-    return std::make_shared<OGLVertexBuffer>(id);
+    return std::make_shared<OGLVertexBuffer>(mDestroyed, id);
 }
 
 VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
@@ -2261,7 +2342,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLVertexArray>(id, desc.buffers);
+    return std::make_shared<OGLVertexArray>(mDestroyed, id, desc.buffers);
 }
 
 void OGLRenderDevice::setVertexArray(VertexArray va)
@@ -2317,7 +2398,7 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderStage>(stage, id);
+    return std::make_shared<OGLShaderStage>(mDestroyed, stage, id);
 }
 
 ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage ps)
@@ -2352,7 +2433,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(vsImpl, psImpl, id);
+    return std::make_shared<OGLShaderPipeline>(mDestroyed, vsImpl, psImpl, id);
 }
 
 ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps)
@@ -2389,7 +2470,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(vsImpl, gsImpl, psImpl, id);
+    return std::make_shared<OGLShaderPipeline>(mDestroyed, vsImpl, gsImpl, psImpl, id);
 }
 
 ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage cs)
@@ -2422,7 +2503,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage cs)
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(csImpl, id);
+    return std::make_shared<OGLShaderPipeline>(mDestroyed, csImpl, id);
 }
 
 void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
