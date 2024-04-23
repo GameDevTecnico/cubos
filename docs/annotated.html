@@ -165,7 +165,12 @@
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1QueryArchetypeNode.html" class="m-doc">QueryArchetypeNode</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Node which forces a given target to belong to a set of archetypes.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a> <span class="m-doc">Holds the data necessary to execute a query.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html" class="m-doc">QueryFetcher</a> <span class="m-doc">Type meant to be specialized which implements for each argument type the necessary logic to extract it from the tables.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html" class="m-doc">QueryFilter</a> <span class="m-doc">Used to find matches for the given query terms. Essentially contains the non-templated part of the query logic.</span></li>
+                      <li class="m-doc-collapsible collapsed">
+                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html" class="m-doc">QueryFilter</a> <span class="m-doc">Used to find matches for the given query terms. Essentially contains the non-templated part of the query logic.</span>
+                        <ul class="m-doc">
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Match.html" class="m-doc">Match</a> <span class="m-doc">Output structure of the iterator.</span></li>
+                        </ul>
+                      </li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1QueryNode.html" class="m-doc">QueryNode</a> <span class="m-doc"><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> filter step, which receives an iterator and advances it until it points to a valid match.</span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1QueryRelatedNode.html" class="m-doc">QueryRelatedNode</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Node which forces two given targets to be related with a given relation.</span>
@@ -194,6 +199,7 @@
                         <ul class="m-doc">
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Link.html" class="m-doc">Link</a> <span class="m-doc"><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Link.html" class="m-doc">Link</a> for <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1List.html" class="m-doc">List</a>.</span></li>
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1List.html" class="m-doc">List</a> <span class="m-doc"><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1List.html" class="m-doc">List</a> of rows with the same from/to index.</span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a> <span class="m-doc"><a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Output.html" class="m-doc">Output</a> structure for the iterator.</span></li>
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTable_1_1Row.html" class="m-doc">Row</a> <span class="m-doc">Stores metadata for the relations.</span></li>
                         </ul>
                       </li>
@@ -229,7 +235,13 @@
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Types_1_1Entry.html" class="m-doc">Entry</a> <span class="m-doc">Describes a data type.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> <span class="m-doc">Holds entities, their components and resources.</span></li>
+                      <li class="m-doc-collapsible collapsed">
+                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> <span class="m-doc">Holds entities, their components and resources.</span>
+                        <ul class="m-doc">
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1World_1_1Component.html" class="m-doc">Component</a> <span class="m-doc">Output structure for the iterator.</span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1World_1_1Relation.html" class="m-doc">Relation</a> <span class="m-doc">Output structure for the iterator.</span></li>
+                        </ul>
+                      </li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
@@ -350,12 +362,18 @@
                           <li>class <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait_1_1Builder.html" class="m-doc">Builder</a> <span class="m-doc"><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait_1_1Builder.html" class="m-doc">Builder</a> for <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html" class="m-doc">DictionaryTrait</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Exposes dictionary-like functionality of a type.</span></li>
+                      <li class="m-doc-collapsible collapsed">
+                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html" class="m-doc">DictionaryTrait</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Exposes dictionary-like functionality of a type.</span>
+                        <ul class="m-doc">
+                          <li>struct <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a> <span class="m-doc">Output structure for the iterator.</span></li>
+                        </ul>
+                      </li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a> <span class="m-doc">Provides enumeration functionality to an enumerated type.</span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a> <span class="m-doc">Describes the fields of a reflected type.</span>
                         <ul class="m-doc">
-                          <li>class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOfImpl.html" class="m-doc">AddressOfImpl</a> <span class="m-doc">Implementation of <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a> for a pointer to member.</span></li>
+                          <li>class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOfImpl.html" class="m-doc">AddressOfImpl</a> <span class="m-doc">Implementation of AddressOf for a pointer to member.</span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Output.html" class="m-doc">Output</a> <span class="m-doc"><a href="structcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Output.html" class="m-doc">Output</a> structure for the iterator.</span></li>
                         </ul>
                       </li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html" class="m-doc">MaskTrait</a> <span class="m-doc">Provides mask functionality to an enum mask type.</span></li>
