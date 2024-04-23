@@ -35,8 +35,8 @@ namespace cubos::engine
     /// ## Dependencies
     /// - @ref transform-plugin
 
-    /// @brief Initializes new colliders.
-    CUBOS_ENGINE_API extern Tag collisionsSetupTag;
+    /// @brief Detects collisions and updates colliders.
+    CUBOS_ENGINE_API extern Tag collisionsTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

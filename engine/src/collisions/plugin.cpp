@@ -9,6 +9,8 @@
 #include "broad_phase/plugin.hpp"
 #include "narrow_phase/plugin.hpp"
 
+CUBOS_DEFINE_TAG(cubos::engine::collisionsTag);
+
 void cubos::engine::collisionsPlugin(Cubos& cubos)
 {
     cubos.depends(transformPlugin);
@@ -16,6 +18,8 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
     cubos.plugin(interfaceCollisionsPlugin);
     cubos.plugin(broadPhaseCollisionsPlugin);
     cubos.plugin(narrowPhaseCollisionsPlugin);
+
+    cubos.tag(collisionsTag).addTo(collisionsBroadTag).addTo(collisionsNarrowTag);
 
     auto initializeBoxColliders = [](Query<const BoxCollisionShape&, Collider&> query) {
         for (auto [shape, collider] : query)

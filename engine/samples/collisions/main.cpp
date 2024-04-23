@@ -20,8 +20,6 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
-#include "../../src/collisions/narrow_phase/plugin.hpp"
-
 using cubos::core::geom::Box;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;
@@ -138,7 +136,7 @@ int main()
 
     cubos.system("check collisions")
         .tagged(collisionsSampleUpdated)
-        .after(cubos::engine::collisionsNarrowTag)
+        .after(cubos::engine::collisionsTag)
         .call([](Query<Entity, CollidingWith&, Entity> query, State& state) {
             for (auto [ent1, colliding, ent2] : query)
             {
