@@ -1,5 +1,6 @@
 #include <doctest/doctest.h>
 
+#include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::reflection::reflect;

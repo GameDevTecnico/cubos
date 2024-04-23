@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/system/registry.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 using namespace cubos::core::ecs;
 

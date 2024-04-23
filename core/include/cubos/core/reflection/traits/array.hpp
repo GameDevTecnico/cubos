@@ -17,6 +17,8 @@ namespace cubos::core::reflection
     class CUBOS_CORE_API ArrayTrait final
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Provides mutable access to an array.
         class View;
 

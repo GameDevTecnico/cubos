@@ -16,6 +16,8 @@ namespace cubos::core::reflection
     class CUBOS_CORE_API StringConversionTrait
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Function pointer to convert an instance of the type into a string.
         using Into = std::string (*)(const void* instance);
 

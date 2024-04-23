@@ -16,6 +16,8 @@ namespace cubos::core::reflection
     class CUBOS_CORE_API MaskTrait
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Represents a bit within the mask type.
         class Bit;
 

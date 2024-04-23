@@ -1,8 +1,14 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/mask.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using cubos::core::reflection::MaskTrait;
+
+CUBOS_REFLECT_IMPL(MaskTrait)
+{
+    return Type::create("cubos::core::ecs::MaskTrait");
+}
 
 MaskTrait::~MaskTrait()
 {

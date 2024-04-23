@@ -8,6 +8,7 @@
 
 #include <cubos/core/api.hpp>
 #include <cubos/core/memory/move.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::reflection
 {
@@ -18,6 +19,8 @@ namespace cubos::core::reflection
     class CUBOS_CORE_API ConstructibleTrait
     {
     public:
+        CUBOS_REFLECT;
+
         /// @brief Function pointer to the destructor of a type.
         using Destructor = void (*)(void* instance);
 
