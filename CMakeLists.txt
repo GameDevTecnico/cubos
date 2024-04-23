@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.20.0)
 project(cubos VERSION 0.1.0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -19,7 +20,7 @@ if(ENABLE_COVERAGE)
 
     setup_target_for_coverage_lcov(
         NAME coverage-core
-        EXECUTABLE core/tests/cubos-core-tests
+        EXECUTABLE cubos-core-tests
         DEPENDENCIES cubos-core-tests
 
         EXCLUDE "core/lib/*" "core/tests/*" "engine/*" "lib/*" "tools/*" "*-components.cpp"
@@ -29,7 +30,7 @@ if(ENABLE_COVERAGE)
 
     setup_target_for_coverage_lcov(
         NAME coverage-engine
-        EXECUTABLE engine/tests/cubos-engine-tests
+        EXECUTABLE cubos-engine-tests
         DEPENDENCIES cubos-engine-tests
 
         EXCLUDE "engine/lib/*" "engine/tests/*" "core/*" "lib/*" "tools/*" "*-components.cpp"

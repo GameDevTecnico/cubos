@@ -68,7 +68,7 @@ jobs:
         ccache -s # Print current cache stats
 
     - name: Test Core
-      run: ${{github.workspace}}\build\core\tests\Release\cubos-core-tests.exe
+      run: ${{github.workspace}}\build\Release\cubos-core-tests.exe
       
     - name: Test Engine
-      run: ${{github.workspace}}\build\engine\tests\Release\cubos-engine-tests.exe
+      run: ${{github.workspace}}\build\Release\cubos-engine-tests.exe

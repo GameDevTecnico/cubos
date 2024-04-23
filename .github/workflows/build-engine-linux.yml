@@ -63,9 +63,9 @@ jobs:
         ccache -s # Print current cache stats
 
     - name: Test Core
-      working-directory: ${{github.workspace}}/build/core/tests
+      working-directory: ${{github.workspace}}/build/
       run: ./cubos-core-tests
       
     - name: Test Engine
-      working-directory: ${{github.workspace}}/build/engine/tests
+      working-directory: ${{github.workspace}}/build/
       run: ./cubos-engine-tests
