@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Render Target module | CUBOS. Docs</title>
+  <title>engine/prelude.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,92 +46,82 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
-          Render Target <span class="m-thin">module</span></h1>
-        <p>Adds and manages <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a> components.</p>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span>prelude.hpp <span class="m-thin">file</span>
+        </h1>
+        <p>Includes commonly used headers and defines aliases for commonly used types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md93">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
-                <li><a href="#var-members">Variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md93"><h3><a href="#autotoc_md93">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="target_8hpp.html" class="m-doc">target.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">cubos::<wbr />engine::<wbr />RenderTarget</a>.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">cubos::engine::RenderTarget</a>
-            </dt>
-            <dd>Component which represents a render target.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga8d4ac299817db08f0c15b1f0560bdb3c" class="m-doc">renderTargetPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+              using <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> = core::ecs::Tag
             </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section id="var-members">
-          <h2><a href="#var-members">Variables</a></h2>
-          <dl class="m-doc">
+            <dd>Represents a tag to be used with the <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> class.</dd>
             <dt>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gaba487255e824f57931da2b0a0cb75b91" class="m-doc">resizeRenderTargetTag</a>
+              using <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> = core::ecs::Cubos
             </dt>
-            <dd>Resizes the Render Target if necessary - for example, due to a window resize.</dd>
+            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a426547b7a41f84591b3fd8d967bc5435" class="m-doc">DeltaTime</a> = core::ecs::DeltaTime
+            </dt>
+            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a0a4fcc97e34218f81162d4e3fb61a8df" class="m-doc">ShouldQuit</a> = core::ecs::ShouldQuit
+            </dt>
+            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a1f8d4a63dca935415d2191391be6c2dd" class="m-doc">Arguments</a> = core::ecs::Arguments
+            </dt>
+            <dd>Resource which stores the command-line arguments.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#a306c379fd24b3dcc1990b06cdb386244" class="m-doc">Query</a> = core::ecs::Query&lt;ComponentTypes...&gt;
+            </dt>
+            <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a34019c3c344f309409d8b0abc510002d" class="m-doc">Entity</a> = core::ecs::Entity
+            </dt>
+            <dd>Identifies an entity.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a736c6baa44b5c42048f897283a5ef1b1" class="m-doc">Commands</a> = core::ecs::Commands
+            </dt>
+            <dd>System argument used to write ECS commands and execute them at a later time.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc">Opt</a> = core::ecs::Opt&lt;T&gt;
+            </dt>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a> = core::ecs::EventReader&lt;T, M&gt;
+            </dt>
+            <dd>System arguments used to read events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#a7ef542827dad012c740982fed224e341" class="m-doc">EventWriter</a> = core::ecs::EventWriter&lt;T&gt;
+            </dt>
+            <dd>System argument which allows the system to send events of type <code>T</code> to other systems.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga8d4ac299817db08f0c15b1f0560bdb3c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga8d4ac299817db08f0c15b1f0560bdb3c" class="m-doc-self">renderTargetPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html">&lt;engine/render/target/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-        </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="gaba487255e824f57931da2b0a0cb75b91"><div>
-            <h3>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gaba487255e824f57931da2b0a0cb75b91" class="m-doc-self">resizeRenderTargetTag</a>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html">&lt;engine/render/target/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Resizes the Render Target if necessary - for example, due to a window resize.</p>
-          </div></section>
         </section>
       </div>
     </div>
