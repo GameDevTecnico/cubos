@@ -102,13 +102,27 @@
             </dt>
             <dd>Adds the given trait to the type.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a23495640feebe9b7ce35726fb165d985" class="m-doc">with</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
+              void* trait,
+              void(*)(void*) deleter) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
+            </dt>
+            <dd>Adds the given trait to the type.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a18cf563593854a28f1f22e31d1fec65c" class="m-doc">has</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Returns whether the type has the given trait.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abd02f0371525d7a75b82d54a145a32a3" class="m-doc">has</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type) const -&gt; bool</span>
+            </dt>
+            <dd>Returns whether the type has the given trait.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#ae6bfd0379010788bf695f6e3766330a4" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp;</span>
+            </dt>
+            <dd>Returns the given trait of the type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a59a2f938935fdf2a0749a2f90d44bcee" class="m-doc">get</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type) const -&gt; const void*</span>
             </dt>
             <dd>Returns the given trait of the type.</dd>
             <dt>
@@ -277,6 +291,39 @@
             </table>
 <p>Aborts if the trait is already present in the type.</p>
           </div></section>
+          <section class="m-doc-details" id="a23495640feebe9b7ce35726fb165d985"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />Type::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23495640feebe9b7ce35726fb165d985" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
+              void* trait,
+              void(*)(void*) deleter)</span></span>
+            </h3>
+            <p>Adds the given trait to the type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>trait</td>
+                  <td>Allocated trait value.</td>
+                </tr>
+                <tr>
+                  <td>deleter</td>
+                  <td>Used to delete the trait when the type is destroyed.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this type, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a18cf563593854a28f1f22e31d1fec65c"><div>
             <h3>
               <div class="m-doc-template">
@@ -298,6 +345,20 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
+                  <td>Whether the type has the given trait.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abd02f0371525d7a75b82d54a145a32a3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />Type::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd02f0371525d7a75b82d54a145a32a3" class="m-doc-self">has</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type) const</span></span>
+            </h3>
+            <p>Returns whether the type has the given trait.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
                   <td>Whether the type has the given trait.</td>
                 </tr>
               </tfoot>
@@ -325,6 +386,30 @@
                 <tr>
                   <th>Returns</th>
                   <td>Reference to the trait.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the type does not have the given trait.</p>
+          </div></section>
+          <section class="m-doc-details" id="a59a2f938935fdf2a0749a2f90d44bcee"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />reflection::<wbr />Type::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59a2f938935fdf2a0749a2f90d44bcee" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type) const</span></span>
+            </h3>
+            <p>Returns the given trait of the type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td><a href="structcubos_1_1core_1_1reflection_1_1Type_1_1Trait.html" class="m-doc">Trait</a> type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the trait.</td>
                 </tr>
               </tfoot>
             </table>
