@@ -2,10 +2,13 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
+#include <cubos/engine/render/deferred_shading/plugin.hpp>
 #include <cubos/engine/render/depth/plugin.hpp>
 #include <cubos/engine/render/g_buffer/plugin.hpp>
 #include <cubos/engine/render/g_buffer_rasterizer/plugin.hpp>
 #include <cubos/engine/render/hdr/plugin.hpp>
+#include <cubos/engine/render/lights/environment.hpp>
+#include <cubos/engine/render/lights/plugin.hpp>
 #include <cubos/engine/render/mesh/plugin.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
@@ -44,6 +47,8 @@ int main()
     cubos.plugin(renderVoxelsPlugin);
     cubos.plugin(renderMeshPlugin);
     cubos.plugin(gBufferRasterizerPlugin);
+    cubos.plugin(lightsPlugin);
+    cubos.plugin(deferredShadingPlugin);
     cubos.plugin(toneMappingPlugin);
     /// [Adding the plugins]
 
@@ -54,10 +59,13 @@ int main()
         settings.setBool("window.vSync", false);
     });
 
-    cubos.startupSystem("set the palette and spawn the scene")
+    cubos.startupSystem("set the palette and environment and spawn the scene")
         .tagged(assetsTag)
-        .call([](Commands commands, const Assets& assets, RenderPalette& palette) {
+        .call([](Commands commands, const Assets& assets, RenderPalette& palette, RenderEnvironment& environment) {
             palette.asset = PaletteAsset;
+            environment.ambient = {0.2F, 0.2F, 0.2F};
+            environment.skyGradient[0] = {0.1F, 0.2F, 0.4F};
+            environment.skyGradient[1] = {0.6F, 0.6F, 0.8F};
             commands.spawn(assets.read(SceneAsset)->blueprint);
         });
 
