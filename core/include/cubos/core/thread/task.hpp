@@ -138,8 +138,8 @@ namespace cubos::core::thread
                 T mValue;
             };
 
-            std::mutex mMutex;
-            std::condition_variable mCondition;
+            std::mutex mMutex{};
+            std::condition_variable mCondition{};
 
             // NOLINTBEGIN(modernize-use-equals-default)
             Data()

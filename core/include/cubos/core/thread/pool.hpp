@@ -48,7 +48,7 @@ namespace cubos::core::thread
         std::condition_variable mNewTask;  ///< Notifies threads when new tasks may be available.
         std::condition_variable mTaskDone; ///< Notifies threads when a task has finished executing.
 
-        std::atomic<std::size_t> mNumTasks; ///< Number of tasks currently being executed.
-        bool mStop;                         ///< Set to true when the thread pool is being destroyed.
+        std::size_t mNumTasks; ///< Number of tasks currently being executed.
+        bool mStop;            ///< Set to true when the thread pool is being destroyed.
     };
 } // namespace cubos::core::thread
