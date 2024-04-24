@@ -30,10 +30,10 @@ ThreadPool::ThreadPool(std::size_t numThreads)
                 }
 
                 task();
-                mNumTasks -= 1; // Task has finished executing.
 
-                // Signal that a thread has finished executing a task.
-                mTaskDone.notify_one();
+                std::unique_lock<std::mutex> lock(mMutex);
+                mNumTasks -= 1;         // Task has finished executing.
+                mTaskDone.notify_one(); // Signal that a thread has finished executing a task.
             }
         });
     }
