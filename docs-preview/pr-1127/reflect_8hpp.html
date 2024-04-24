@@ -89,10 +89,10 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga7dbabf68e961230d69ce57708421bd26" class="m-doc">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long long id,
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#gaedeede487ffed5421ea51cec682ebf68" class="m-doc">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long long id,
               std::size_t size,
               std::size_t alignment,
-              void(*)(void*) destructor) -&gt; const Type&amp;</span>
+              void(*)(void*) destructor) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> const Type&amp;</span>
             </dt>
             <dd>Creates a new unnamed type with the given identifier. Used as a fallback for non-reflectable C++ types.</dd>
             <dt>
@@ -109,6 +109,10 @@
               <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gacf5ab7d1a0215259c832827a40d13b17" class="m-doc">CUBOS_PACK</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Helper macro used to pass arguments with commas to other macros, wrapped in parentheses.</dd>
+            <dt id="a0708aa0f83dd368012d716ea5af6315f">
+              <span class="m-doc-wrap-bumper">#define <a href="#a0708aa0f83dd368012d716ea5af6315f" class="m-doc-self">CUBOS_EMPTY</a></span>
+            </dt>
+            <dd>Helper macro with no effect.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_REFLECT</a></span>
             </dt>
@@ -123,11 +127,13 @@
             </dt>
             <dd>Similar to <a href="group__core-reflection.html#gabe4c61ca9774781ef107e74f89494663" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> but tailored to templated types.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga80fc11ac1cde574a17ae424c106737b9" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE</a>(</span><span class="m-doc-wrap">T)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gab24b41a195fdf07a246383d74fd583d7" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE</a>(</span><span class="m-doc-wrap">api,
+              T)</span>
             </dt>
             <dd>Declares a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a templated type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga8754fb03da700e485bbddcd3cfe5990d" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL</a>(</span><span class="m-doc-wrap">T)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga821b6e389136b4c449893edfd8d950fa" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL</a>(</span><span class="m-doc-wrap">api,
+              T)</span>
             </dt>
             <dd>Declares a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a type.</dd>
             <dt>

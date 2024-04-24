@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Render Target module | CUBOS. Docs</title>
+  <title>cubos::core::ecs::Plugins class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,91 +46,98 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
-          Render Target <span class="m-thin">module</span></h1>
-        <p>Adds and manages <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a> components.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Plugins <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugins_8hpp.html">&lt;core/ecs/system/arguments/plugins.hpp&gt;</a></div>
+        </h1>
+        <p><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to add or remove <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> plugins at runtime.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md93">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
-                <li><a href="#var-members">Variables</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md93"><h3><a href="#autotoc_md93">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="target_8hpp.html" class="m-doc">target.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">cubos::<wbr />engine::<wbr />RenderTarget</a>.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">cubos::engine::RenderTarget</a>
+              <span class="m-doc-wrap-bumper"><a href="#a4bc77641f2505bbf035ffaaf2caf8aec" class="m-doc">Plugins</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">PluginQueue</a>* queue)</span>
             </dt>
-            <dd>Component which represents a render target.</dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga8d4ac299817db08f0c15b1f0560bdb3c" class="m-doc">renderTargetPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a538140d7b7cba6a6b6426876791a5d6f" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span>
             </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section id="var-members">
-          <h2><a href="#var-members">Variables</a></h2>
-          <dl class="m-doc">
+            <dd>Adds a plugin to the application. Will be executed on the next frame.</dd>
             <dt>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gaba487255e824f57931da2b0a0cb75b91" class="m-doc">resizeRenderTargetTag</a>
+              <span class="m-doc-wrap-bumper">void <a href="#a11b4e19a7f3567dc808af18b4086d99c" class="m-doc">remove</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span>
             </dt>
-            <dd>Resizes the Render Target if necessary - for example, due to a window resize.</dd>
+            <dd>Removes a plugin from the application. Will be executed on the next frame.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga8d4ac299817db08f0c15b1f0560bdb3c"><div>
+          <section class="m-doc-details" id="a4bc77641f2505bbf035ffaaf2caf8aec"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga8d4ac299817db08f0c15b1f0560bdb3c" class="m-doc-self">renderTargetPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html">&lt;engine/render/target/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Plugins::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4bc77641f2505bbf035ffaaf2caf8aec" class="m-doc-self">Plugins</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">PluginQueue</a>* queue)</span></span>
             </h3>
-            <p>Plugin entry function.</p>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class.</td>
+                  <td style="width: 1%">queue</td>
+                  <td>Plugin queue.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-        </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="gaba487255e824f57931da2b0a0cb75b91"><div>
+          <section class="m-doc-details" id="a538140d7b7cba6a6b6426876791a5d6f"><div>
             <h3>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gaba487255e824f57931da2b0a0cb75b91" class="m-doc-self">resizeRenderTargetTag</a>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2target_2plugin_8hpp.html">&lt;engine/render/target/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Plugins::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a538140d7b7cba6a6b6426876791a5d6f" class="m-doc-self">add</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span></span>
             </h3>
-            <p>Resizes the Render Target if necessary - for example, due to a window resize.</p>
+            <p>Adds a plugin to the application. Will be executed on the next frame.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">plugin</td>
+                  <td>Plugin.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The plugin&#x27;s startup systems will run before the frame begins.</p>
+          </div></section>
+          <section class="m-doc-details" id="a11b4e19a7f3567dc808af18b4086d99c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Plugins::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a11b4e19a7f3567dc808af18b4086d99c" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span></span>
+            </h3>
+            <p>Removes a plugin from the application. Will be executed on the next frame.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">plugin</td>
+                  <td>Plugin.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>This will revert all configuration changes made by the plugin. It won&#x27;t revert any effects caused by the plugin on the world, such as adding or removing entities.</p>
           </div></section>
         </section>
       </div>

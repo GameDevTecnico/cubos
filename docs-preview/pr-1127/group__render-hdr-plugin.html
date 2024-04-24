@@ -73,8 +73,6 @@
             <dd>Component <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">cubos::<wbr />engine::<wbr />HDR</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2render_2hdr_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
-            <dt>file <a href="tone__mapping_8hpp.html" class="m-doc">tone_mapping.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">cubos::<wbr />engine::<wbr />HDR</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -84,17 +82,13 @@
               struct <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">cubos::engine::HDR</a>
             </dt>
             <dd>Component which stores the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture of a render target.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1ToneMapping.html" class="m-doc">cubos::engine::ToneMapping</a>
-            </dt>
-            <dd>Component which stores Tone Mapping configuration for a render target.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gae533abd33f781f196ede3d346706a77a" class="m-doc">hdrPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga7d68d19e4bfa2230f8c56183b874a947" class="m-doc">hdrPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
@@ -103,24 +97,20 @@
           <h2><a href="#var-members">Variables</a></h2>
           <dl class="m-doc">
             <dt>
-              Tag <a href="#gaf070bb1e4e0644eded7805ca0cfef807" class="m-doc">createHDRTag</a>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga837f3281fccb376a20736a99c7212b95" class="m-doc">createHDRTag</a>
             </dt>
             <dd>Recreates the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture if necessary - for example, due to a render target resize.</dd>
             <dt>
-              Tag <a href="#gabdf7a43507d1d83ae25a80123303c358" class="m-doc">drawToHDRTag</a>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gabb8417eaf8c592e85fc5548145e5f8ab" class="m-doc">drawToHDRTag</a>
             </dt>
             <dd>Systems which draw to <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> textures should be tagged with this.</dd>
-            <dt>
-              Tag <a href="#ga1c0b3799103d8c16a5bc3d9a3f6bc821" class="m-doc">toneMappingTag</a>
-            </dt>
-            <dd>Tags the system which does the tone mapping.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gae533abd33f781f196ede3d346706a77a"><div>
+          <section class="m-doc-details" id="ga7d68d19e4bfa2230f8c56183b874a947"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gae533abd33f781f196ede3d346706a77a" class="m-doc-self">hdrPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga7d68d19e4bfa2230f8c56183b874a947" class="m-doc-self">hdrPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2hdr_2plugin_8hpp.html">&lt;engine/render/hdr/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
@@ -139,26 +129,19 @@
         </section>
         <section>
           <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="gaf070bb1e4e0644eded7805ca0cfef807"><div>
+          <section class="m-doc-details" id="ga837f3281fccb376a20736a99c7212b95"><div>
             <h3>
-              Tag <a href="#gaf070bb1e4e0644eded7805ca0cfef807" class="m-doc-self">createHDRTag</a>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga837f3281fccb376a20736a99c7212b95" class="m-doc-self">createHDRTag</a>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2hdr_2plugin_8hpp.html">&lt;engine/render/hdr/plugin.hpp&gt;</a></div>
             </h3>
             <p>Recreates the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture if necessary - for example, due to a render target resize.</p>
           </div></section>
-          <section class="m-doc-details" id="gabdf7a43507d1d83ae25a80123303c358"><div>
+          <section class="m-doc-details" id="gabb8417eaf8c592e85fc5548145e5f8ab"><div>
             <h3>
-              Tag <a href="#gabdf7a43507d1d83ae25a80123303c358" class="m-doc-self">drawToHDRTag</a>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gabb8417eaf8c592e85fc5548145e5f8ab" class="m-doc-self">drawToHDRTag</a>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2hdr_2plugin_8hpp.html">&lt;engine/render/hdr/plugin.hpp&gt;</a></div>
             </h3>
             <p>Systems which draw to <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> textures should be tagged with this.</p>
-          </div></section>
-          <section class="m-doc-details" id="ga1c0b3799103d8c16a5bc3d9a3f6bc821"><div>
-            <h3>
-              Tag <a href="#ga1c0b3799103d8c16a5bc3d9a3f6bc821" class="m-doc-self">toneMappingTag</a>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2tone__mapping_2plugin_8hpp.html">&lt;engine/render/tone_mapping/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Tags the system which does the tone mapping.</p>
           </div></section>
         </section>
       </div>

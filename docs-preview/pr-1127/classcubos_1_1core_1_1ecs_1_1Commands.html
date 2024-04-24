@@ -74,6 +74,16 @@
               <span class="m-doc-wrap-bumper"><a href="#aeb159dceb62b76cc43dea0b82e9a0893" class="m-doc-self">Commands</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Move constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; buffer,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt id="a04c8c13ee25316c1fcc3226ebd8e6c73">
+              <span class="m-doc-wrap-bumper"><a href="#a04c8c13ee25316c1fcc3226ebd8e6c73" class="m-doc-self">BlueprintBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; buffer,
+              std::unordered_map&lt;std::string, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>&gt; nameToEntity)</span>
+            </dt>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -103,7 +113,7 @@
             </dt>
             <dd>Removes a resource from the world.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adfff8c90558b30c4a062d3339fa8a29d" class="m-doc">create</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#adfff8c90558b30c4a062d3339fa8a29d" class="m-doc">create</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a></span>
             </dt>
             <dd>Creates a new entity.</dd>
             <dt>
@@ -112,7 +122,7 @@
             <dd>Destroys an entity.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab21595883fc5237b145b2503f940fc09" class="m-doc">spawn</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint,
-              bool withName = true) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a></span>
+              bool withName = true) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#a04c8c13ee25316c1fcc3226ebd8e6c73" class="m-doc">BlueprintBuilder</a></span>
             </dt>
             <dd>Spawns a blueprint into the world.</dd>
             <dt>
@@ -163,6 +173,40 @@
               <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>&amp;</span>
             </dt>
             <dd>Removes the relation, if there&#x27;s any, between the two given entities.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8da4d8cb902b2843a9024534d7c7d333" class="m-doc">entity</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
+            </dt>
+            <dd>Gets the entity this builder is modifying.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a20150869d1329a74fe37c587aeb8faf6" class="m-doc">named</a>(</span><span class="m-doc-wrap">std::string name) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds a <a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">Name</a> component to the entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aede0c54e65767cc35f56cee6ad69c21d" class="m-doc">add</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds a component to the entity.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a53ab9c1625a43dfb4a0cb5639baa0aac" class="m-doc">add</a>(</span><span class="m-doc-wrap">T value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds a component to the entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8386eeafa9c66c0a595fbb8d2a2d0770" class="m-doc">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
+            </dt>
+            <dd>Gets an entity of the spawned blueprint.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa8da9f7b99dfc256e5945759854fa748" class="m-doc">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#a04c8c13ee25316c1fcc3226ebd8e6c73" class="m-doc">BlueprintBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds a component to an entity of the blueprint.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2966746f0073ef8ddde46fbc075e7e52" class="m-doc">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              T value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#a04c8c13ee25316c1fcc3226ebd8e6c73" class="m-doc">BlueprintBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds a component to an entity of the blueprint.</dd>
           </dl>
         </section>
         <section>
@@ -180,6 +224,28 @@
                 <tr>
                   <td style="width: 1%">buffer</td>
                   <td>Command buffer to write to.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad8688933ac452511fefbe6a47cad22d3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad8688933ac452511fefbe6a47cad22d3" class="m-doc-self">EntityBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; buffer,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">buffer</td>
+                  <td>Command buffer.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> being modified.</td>
                 </tr>
               </tbody>
             </table>
@@ -303,7 +369,7 @@
           </div></section>
           <section class="m-doc-details" id="adfff8c90558b30c4a062d3339fa8a29d"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adfff8c90558b30c4a062d3339fa8a29d" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adfff8c90558b30c4a062d3339fa8a29d" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Creates a new entity.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -334,7 +400,7 @@
           </div></section>
           <section class="m-doc-details" id="ab21595883fc5237b145b2503f940fc09"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab21595883fc5237b145b2503f940fc09" class="m-doc-self">spawn</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint,
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#a04c8c13ee25316c1fcc3226ebd8e6c73" class="m-doc">BlueprintBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab21595883fc5237b145b2503f940fc09" class="m-doc-self">spawn</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint,
               bool withName = true)</span></span>
             </h3>
             <p>Spawns a blueprint into the world.</p>
@@ -653,6 +719,205 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a8da4d8cb902b2843a9024534d7c7d333"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8da4d8cb902b2843a9024534d7c7d333" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the entity this builder is modifying.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a20150869d1329a74fe37c587aeb8faf6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20150869d1329a74fe37c587aeb8faf6" class="m-doc-self">named</a>(</span><span class="m-doc-wrap">std::string name)</span></span>
+            </h3>
+            <p>Adds a <a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">Name</a> component to the entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aede0c54e65767cc35f56cee6ad69c21d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aede0c54e65767cc35f56cee6ad69c21d" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
+            </h3>
+            <p>Adds a component to the entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Component value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a53ab9c1625a43dfb4a0cb5639baa0aac"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a53ab9c1625a43dfb4a0cb5639baa0aac" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">T value)</span></span>
+            </h3>
+            <p>Adds a component to the entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Component value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8386eeafa9c66c0a595fbb8d2a2d0770"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8386eeafa9c66c0a595fbb8d2a2d0770" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
+            </h3>
+            <p>Gets an entity of the spawned blueprint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the name does not match any entity of the blueprint.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa8da9f7b99dfc256e5945759854fa748"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#a04c8c13ee25316c1fcc3226ebd8e6c73" class="m-doc">BlueprintBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa8da9f7b99dfc256e5945759854fa748" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
+            </h3>
+            <p>Adds a component to an entity of the blueprint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Component Type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Component value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if <code>name</code> does not match any entity of the blueprint.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2966746f0073ef8ddde46fbc075e7e52"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#a04c8c13ee25316c1fcc3226ebd8e6c73" class="m-doc">BlueprintBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2966746f0073ef8ddde46fbc075e7e52" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              T value)</span></span>
+            </h3>
+            <p>Adds a component to an entity of the blueprint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Component value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if <code>name</code> does not match any entity of the blueprint.</p>
           </div></section>
         </section>
       </div>

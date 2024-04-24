@@ -102,6 +102,34 @@
               <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a9c26cc1dfb48fbe4947f6a83c65c5f10" class="m-doc">AddressOf</a> addressOf)</span>
             </dt>
             <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aee2948a8c6050e0567c3a798f6e83586" class="m-doc">View</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html" class="m-doc">ArrayTrait</a>&amp; trait,
+              void* instance)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a94cc98dbae3c9980f7620303921bb590" class="m-doc">ConstView</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html" class="m-doc">ArrayTrait</a>&amp; trait,
+              const void* instance)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a6b447d7c5118f27449e097be5d8fce5d" class="m-doc">View</a>&amp; view,
+              std::size_t index)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a977d009ca68dc054a2ad205731a27573" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; iterator) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Copy constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ac1edcffbffbf73315c3e4aee88c87c1c" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a4117caf2d24f7b8b25d9dd89bd1f7619" class="m-doc">ConstView</a>&amp; view,
+              std::size_t index)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a977d009ca68dc054a2ad205731a27573" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; iterator) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Copy constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -148,13 +176,95 @@
             </dt>
             <dd>Returns the element type of the array.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9d5941fdf712c14c30035460d0e46d23" class="m-doc">view</a>(</span><span class="m-doc-wrap">void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait_1_1View.html" class="m-doc">View</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9d5941fdf712c14c30035460d0e46d23" class="m-doc">view</a>(</span><span class="m-doc-wrap">void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a6b447d7c5118f27449e097be5d8fce5d" class="m-doc">View</a></span>
             </dt>
             <dd>Returns a view of the given array instance.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7f99dbe43ac7ea704697b9b7e2b61c4d" class="m-doc">view</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait_1_1ConstView.html" class="m-doc">ConstView</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7f99dbe43ac7ea704697b9b7e2b61c4d" class="m-doc">view</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a4117caf2d24f7b8b25d9dd89bd1f7619" class="m-doc">ConstView</a></span>
             </dt>
             <dd>Returns a view of the given array instance.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3078742375c507a653c591d50a6d38c1" class="m-doc">length</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Returns the length of the array.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a119d14113a8ba480256aee8d9df33c99" class="m-doc">get</a>(</span><span class="m-doc-wrap">std::size_t index) const -&gt; void*</span>
+            </dt>
+            <dd>Gets a pointer to the element with the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa100361a5a2b224debb20e1dc2824f0f" class="m-doc">insertDefault</a>(</span><span class="m-doc-wrap">std::size_t index) const</span>
+            </dt>
+            <dd>Inserts a default-constructed element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa40a619819229ff447a9344bb763d85d" class="m-doc">insertCopy</a>(</span><span class="m-doc-wrap">std::size_t index,
+              const void* value) const</span>
+            </dt>
+            <dd>Inserts a copy-constructed element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a802bf62869d3c7e1c7a96151884c53cb" class="m-doc">insertMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* value) const</span>
+            </dt>
+            <dd>Inserts a move-constructed element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af5ecdd33ba807571dc03930346d43050" class="m-doc">erase</a>(</span><span class="m-doc-wrap">std::size_t index) const</span>
+            </dt>
+            <dd>Removes an element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4a8ee62427c9bfb8aafead9ba69c65f3" class="m-doc">clear</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Clears the array.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a738273c8e0ca4a7dd30cd9b8b075f0f0" class="m-doc">resize</a>(</span><span class="m-doc-wrap">std::size_t size) const</span>
+            </dt>
+            <dd>Resizes the array. If this increases the size of the array, <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#aa100361a5a2b224debb20e1dc2824f0f" class="m-doc">insertDefault</a> is used to insert the remaining elements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2e2f0aaca2177faac5be33b18650f95e" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Gets an iterator to the first element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ade72d24c5f16871d8b4cbfeee8bed4fe" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Gets an iterator to the element after the last element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3078742375c507a653c591d50a6d38c1" class="m-doc">length</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Returns the length of the array.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0b53202f84e69fa25bc3fdd1d2ba0148" class="m-doc">get</a>(</span><span class="m-doc-wrap">std::size_t index) const -&gt; const void*</span>
+            </dt>
+            <dd>Gets a pointer to the element with the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2e2f0aaca2177faac5be33b18650f95e" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Gets an iterator to the first element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ade72d24c5f16871d8b4cbfeee8bed4fe" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Gets an iterator to the element after the last element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af078bf1f19b7a69518958b79229404a6" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; void*</span>
+            </dt>
+            <dd>Accesses the element referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aefd6230f25604f2a3b21122dec95446e" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; void*</span>
+            </dt>
+            <dd>Accesses the element referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6672178e1e30c1e032a4f18550435c57" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Advances the iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac75247db2b1daf504f04a80fa12e2472" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const void*</span>
+            </dt>
+            <dd>Accesses the element referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab15a2a31d3b444d38fa61aaebd975b35" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const void*</span>
+            </dt>
+            <dd>Accesses the element referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6672178e1e30c1e032a4f18550435c57" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Advances the iterator.</dd>
           </dl>
         </section>
         <section>
@@ -182,6 +292,128 @@
                 <tr>
                   <td>addressOf</td>
                   <td>Function used to address an element in an array.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aee2948a8c6050e0567c3a798f6e83586"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee2948a8c6050e0567c3a798f6e83586" class="m-doc-self">View</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html" class="m-doc">ArrayTrait</a>&amp; trait,
+              void* instance)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">trait</td>
+                  <td>Trait.</td>
+                </tr>
+                <tr>
+                  <td>instance</td>
+                  <td>Instance.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a94cc98dbae3c9980f7620303921bb590"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a94cc98dbae3c9980f7620303921bb590" class="m-doc-self">ConstView</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html" class="m-doc">ArrayTrait</a>&amp; trait,
+              const void* instance)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">trait</td>
+                  <td>Trait.</td>
+                </tr>
+                <tr>
+                  <td>instance</td>
+                  <td>Instance.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adec55c02cf47a303db932c5d418572c7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adec55c02cf47a303db932c5d418572c7" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a6b447d7c5118f27449e097be5d8fce5d" class="m-doc">View</a>&amp; view,
+              std::size_t index)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">view</td>
+                  <td>Array view.</td>
+                </tr>
+                <tr>
+                  <td>index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a977d009ca68dc054a2ad205731a27573"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a977d009ca68dc054a2ad205731a27573" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; iterator) <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">iterator</td>
+                  <td>Iterator.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac1edcffbffbf73315c3e4aee88c87c1c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1edcffbffbf73315c3e4aee88c87c1c" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a4117caf2d24f7b8b25d9dd89bd1f7619" class="m-doc">ConstView</a>&amp; view,
+              std::size_t index)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">view</td>
+                  <td>Array view.</td>
+                </tr>
+                <tr>
+                  <td>index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a977d009ca68dc054a2ad205731a27573"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a977d009ca68dc054a2ad205731a27573" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; iterator) <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">iterator</td>
+                  <td>Iterator.</td>
                 </tr>
               </tbody>
             </table>
@@ -340,7 +572,7 @@
           </div></section>
           <section class="m-doc-details" id="a9d5941fdf712c14c30035460d0e46d23"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d5941fdf712c14c30035460d0e46d23" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a6b447d7c5118f27449e097be5d8fce5d" class="m-doc">View</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d5941fdf712c14c30035460d0e46d23" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
             </h3>
             <p>Returns a view of the given array instance.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -363,7 +595,7 @@
           </div></section>
           <section class="m-doc-details" id="a7f99dbe43ac7ea704697b9b7e2b61c4d"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait_1_1ConstView.html" class="m-doc">ConstView</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f99dbe43ac7ea704697b9b7e2b61c4d" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a4117caf2d24f7b8b25d9dd89bd1f7619" class="m-doc">ConstView</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f99dbe43ac7ea704697b9b7e2b61c4d" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
             </h3>
             <p>Returns a view of the given array instance.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -383,6 +615,333 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a3078742375c507a653c591d50a6d38c1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3078742375c507a653c591d50a6d38c1" class="m-doc-self">length</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the length of the array.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Array length.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a119d14113a8ba480256aee8d9df33c99"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a119d14113a8ba480256aee8d9df33c99" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
+            </h3>
+            <p>Gets a pointer to the element with the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the element.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa100361a5a2b224debb20e1dc2824f0f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa100361a5a2b224debb20e1dc2824f0f" class="m-doc-self">insertDefault</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
+            </h3>
+            <p>Inserts a default-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a3a50682a0490483af8a22229599df9f8" class="m-doc">ArrayTrait::<wbr />hasInsertDefault()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aa40a619819229ff447a9344bb763d85d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa40a619819229ff447a9344bb763d85d" class="m-doc-self">insertCopy</a>(</span><span class="m-doc-wrap">std::size_t index,
+              const void* value) const</span></span>
+            </h3>
+            <p>Inserts a copy-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a85dfb18b85e7948cdd60bc779fa58918" class="m-doc">ArrayTrait::<wbr />hasInsertCopy()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a802bf62869d3c7e1c7a96151884c53cb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a802bf62869d3c7e1c7a96151884c53cb" class="m-doc-self">insertMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* value) const</span></span>
+            </h3>
+            <p>Inserts a move-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#aec70f03d073eaf1d8fba31d3dd3f3191" class="m-doc">ArrayTrait::<wbr />hasInsertMove()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="af5ecdd33ba807571dc03930346d43050"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af5ecdd33ba807571dc03930346d43050" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
+            </h3>
+            <p>Removes an element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#ab5a00f300110912cd1395bad6bdb1c16" class="m-doc">ArrayTrait::<wbr />hasErase()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a4a8ee62427c9bfb8aafead9ba69c65f3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4a8ee62427c9bfb8aafead9ba69c65f3" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Clears the array.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#ab5a00f300110912cd1395bad6bdb1c16" class="m-doc">ArrayTrait::<wbr />hasErase()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a738273c8e0ca4a7dd30cd9b8b075f0f0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a738273c8e0ca4a7dd30cd9b8b075f0f0" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap">std::size_t size) const</span></span>
+            </h3>
+            <p>Resizes the array. If this increases the size of the array, <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#aa100361a5a2b224debb20e1dc2824f0f" class="m-doc">insertDefault</a> is used to insert the remaining elements.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">size</td>
+                  <td>Array size.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#a3cd5870fe0e0b733c8c6f39ddb6d1f18" class="m-doc">ArrayTrait::<wbr />hasResize()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a2e2f0aaca2177faac5be33b18650f95e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2e2f0aaca2177faac5be33b18650f95e" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets an iterator to the first element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ade72d24c5f16871d8b4cbfeee8bed4fe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ade72d24c5f16871d8b4cbfeee8bed4fe" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets an iterator to the element after the last element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3078742375c507a653c591d50a6d38c1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3078742375c507a653c591d50a6d38c1" class="m-doc-self">length</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the length of the array.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Array length.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0b53202f84e69fa25bc3fdd1d2ba0148"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b53202f84e69fa25bc3fdd1d2ba0148" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
+            </h3>
+            <p>Gets a pointer to the element with the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the element.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2e2f0aaca2177faac5be33b18650f95e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2e2f0aaca2177faac5be33b18650f95e" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets an iterator to the first element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ade72d24c5f16871d8b4cbfeee8bed4fe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ade72d24c5f16871d8b4cbfeee8bed4fe" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets an iterator to the element after the last element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af078bf1f19b7a69518958b79229404a6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af078bf1f19b7a69518958b79229404a6" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the element referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Element.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aefd6230f25604f2a3b21122dec95446e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aefd6230f25604f2a3b21122dec95446e" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the element referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Element.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a6672178e1e30c1e032a4f18550435c57"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6672178e1e30c1e032a4f18550435c57" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Advances the iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to this.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ac75247db2b1daf504f04a80fa12e2472"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac75247db2b1daf504f04a80fa12e2472" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the element referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Element.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ab15a2a31d3b444d38fa61aaebd975b35"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab15a2a31d3b444d38fa61aaebd975b35" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the element referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Element.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a6672178e1e30c1e032a4f18550435c57"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html#adec55c02cf47a303db932c5d418572c7" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6672178e1e30c1e032a4f18550435c57" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Advances the iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to this.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
           </div></section>
         </section>
       </div>
