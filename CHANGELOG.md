@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Render Mesh plugin (#1110, **@RiscadoA**).
 - Optional synchronous loading to asset bridges (**@RiscadoA**).
 - Allow toggling vSync through setting (**@RiscadoA**).
+- GBuffer Rasterizer plugin (#1062, **@RiscadoA**)
 
 ### Changed
 
