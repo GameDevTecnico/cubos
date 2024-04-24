@@ -210,6 +210,22 @@
             </dt>
             <dd>Component which stores the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture of a render target.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a>
+            </dt>
+            <dd>Component which makes an entity behave like a directional light.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1RenderEnvironment.html" class="m-doc">RenderEnvironment</a>
+            </dt>
+            <dd>Resource which stores the scene&#x27;s ambient light and sky colors.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a>
+            </dt>
+            <dd>Component which makes an entity behave like a point light.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a>
+            </dt>
+            <dd>Component which makes an entity emit a spot light in the direction of its local forward vector.</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a>
             </dt>
             <dd>Component which provides a texture to store entity/gizmo ids, for selection with a mouse.</dd>
@@ -250,14 +266,6 @@
             </dt>
             <dd>Renderer implementation which uses deferred rendering.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a>
-            </dt>
-            <dd>Component which makes an entity behave like a directional light.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1RendererEnvironment.html" class="m-doc">RendererEnvironment</a>
-            </dt>
-            <dd>Resource which stores the renderer&#x27;s ambient light and sky colors.</dd>
-            <dt>
               class <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>
             </dt>
             <dd>Resource which describes a scene to be drawn by the renderer.</dd>
@@ -273,10 +281,6 @@
               struct <a href="structcubos_1_1engine_1_1ActiveVoxelPalette.html" class="m-doc">ActiveVoxelPalette</a>
             </dt>
             <dd>Resource which holds an asset handle to the currently active palette.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a>
-            </dt>
-            <dd>Component which makes an entity behave like a point light.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1PostProcessingBloom.html" class="m-doc">PostProcessingBloom</a>
             </dt>
@@ -297,10 +301,6 @@
               class <a href="classcubos_1_1engine_1_1BaseRenderer.html" class="m-doc">BaseRenderer</a>
             </dt>
             <dd>Interface which abstracts different rendering methods.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a>
-            </dt>
-            <dd>Component which makes an entity emit a spot light in the direction of its forward vector.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1VoxelVertex.html" class="m-doc">VoxelVertex</a>
             </dt>
@@ -526,6 +526,10 @@
             <dd>Plugin entry function.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__render-hdr-plugin.html#ga7d68d19e4bfa2230f8c56183b874a947" class="m-doc">hdrPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__render-lights-plugin.html#ga1bf31894b29c0a07708205fd1c6162b9" class="m-doc">lightsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
