@@ -3,7 +3,30 @@
         "render-target": {
             "cubos::engine::RenderTarget": {},
             "cubos::engine::HDR": {},
-            "cubos::engine::ToneMapping": {}
+            "cubos::engine::ToneMapping": {},
+            "cubos::engine::RenderDepth": {},
+            "cubos::engine::RenderPicker": {},
+            "cubos::engine::GBuffer": {},
+            "cubos::engine::GBufferRasterizer": {}
+        },
+        "camera": {
+            "cubos::engine::PerspectiveCamera": {},
+            "cubos::engine::DrawsTo@render-target": {},
+            "cubos::engine::Position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        "car": {
+            "cubos::engine::RenderVoxelGrid": {
+                "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c75"
+            },
+            "cubos::engine::Position": {
+                "x": 0,
+                "y": 0,
+                "z": -10
+            }
         }
     }
 }
