@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::VoxelPalette::Iterator class | CUBOS. Docs</title>
+  <title>cubos::engine::RenderVoxelGrid struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,45 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1VoxelPalette.html">VoxelPalette</a>::<wbr/></span>Iterator <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="voxels_2palette_8hpp.html">&lt;engine/voxels/palette.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>RenderVoxelGrid <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="render_2voxels_2grid_8hpp.html">&lt;engine/render/voxels/grid.hpp&gt;</a></div>
         </h1>
-        <p>Used to iterate over materials on the palette.</p>
+        <p>Component used to draw voxel grids.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>When added to an entity, the grid may not be able to be rendered immediately, as the asset must load first, and the necessary data must be sent to the GPU. A <a href="structcubos_1_1engine_1_1LoadRenderVoxels.html" class="m-doc">LoadRenderVoxels</a> component is automatically added to the entity by an observer, which can be used to track the grid&#x27;s loading progress. When the grid is loaded, the task is removed.</p><p>If the grid is changed, in order to update the rendering, a new <a href="structcubos_1_1engine_1_1LoadRenderVoxels.html" class="m-doc">LoadRenderVoxels</a> component must be added to the entity, manually.</p>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt; <a href="#acbcbc5ceda7cd48f08809982dd765c25" class="m-doc">asset</a>
+            </dt>
+            <dd>Handle to the grid asset to be rendered.</dd>
+            <dt id="a8edfff557481d0ce480de5f1b6476056">
+              glm::vec3 <a href="#a8edfff557481d0ce480de5f1b6476056" class="m-doc-self">offset</a>
+            </dt>
+            <dd>Translation applied to the grid.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="acbcbc5ceda7cd48f08809982dd765c25"><div>
+            <h3>
+              <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt; cubos::<wbr />engine::<wbr />RenderVoxelGrid::<wbr /><a href="#acbcbc5ceda7cd48f08809982dd765c25" class="m-doc-self">asset</a>
+            </h3>
+            <p>Handle to the grid asset to be rendered.</p>
+<p>When null, no grid will be rendered.</p>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>
