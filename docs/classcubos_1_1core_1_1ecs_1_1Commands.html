@@ -100,9 +100,9 @@
             <dd>Inserts a resource into the world.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#ae2ddf40e09b1dbbf914cf75cf22e3434" class="m-doc">insertResource</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ac54e74fc35e349948f67b8fa47cd45a5" class="m-doc">emplaceResource</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args)</span>
             </dt>
-            <dd>Inserts a resource into the world.</dd>
+            <dd>Emplaces a resource into the world. Directly constructs the resource in place.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a0f81f25c65928338be07371bc6203583" class="m-doc">eraseResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
             </dt>
@@ -296,14 +296,14 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae2ddf40e09b1dbbf914cf75cf22e3434"><div>
+          <section class="m-doc-details" id="ac54e74fc35e349948f67b8fa47cd45a5"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T, typename... TArgs&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae2ddf40e09b1dbbf914cf75cf22e3434" class="m-doc-self">insertResource</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac54e74fc35e349948f67b8fa47cd45a5" class="m-doc-self">emplaceResource</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args)</span></span>
             </h3>
-            <p>Inserts a resource into the world.</p>
+            <p>Emplaces a resource into the world. Directly constructs the resource in place.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -328,6 +328,7 @@
                 </tr>
               </tbody>
             </table>
+<p>This is useful when the resource doesn&#x27;t have a move constructor, for example, due to not implementing reflection.</p>
           </div></section>
           <section class="m-doc-details" id="a0f81f25c65928338be07371bc6203583"><div>
             <h3>
