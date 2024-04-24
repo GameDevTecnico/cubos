@@ -37,7 +37,7 @@ simple @ref cubos::engine::PointLight "PointLight".
 @snippet renderer/main.cpp Spawning a point light
 
 We can also add some ambient lighting, and even add a sky gradient, through the
-@ref cubos::engine::RendererEnvironment "RendererEnvironment" resource.
+@ref cubos::engine::RenderEnvironment "RenderEnvironment" resource.
 
 @snippet renderer/main.cpp Setting the environment
 

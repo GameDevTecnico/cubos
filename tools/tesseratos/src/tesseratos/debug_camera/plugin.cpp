@@ -5,9 +5,9 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
-#include <cubos/engine/renderer/environment.hpp>
+#include <cubos/engine/render/lights/environment.hpp>
+#include <cubos/engine/render/lights/point.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 

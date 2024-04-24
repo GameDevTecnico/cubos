@@ -1,6 +1,6 @@
-#include <cubos/engine/renderer/environment.hpp>
+#include <cubos/engine/render/lights/environment.hpp>
+#include <cubos/engine/render/lights/point.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
@@ -61,7 +61,7 @@ int main()
     /// [Spawning a point light]
 
     /// [Setting the environment]
-    cubos.startupSystem("set the environment").call([](RendererEnvironment& env) {
+    cubos.startupSystem("set the environment").call([](RenderEnvironment& env) {
         env.ambient = {0.2F, 0.2F, 0.2F};
         env.skyGradient[0] = {0.1F, 0.2F, 0.4F};
         env.skyGradient[1] = {0.6F, 0.6F, 0.8F};

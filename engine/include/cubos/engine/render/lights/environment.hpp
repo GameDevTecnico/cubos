@@ -1,6 +1,6 @@
 /// @file
-/// @brief Resource @ref cubos::engine::RendererEnvironment.
-/// @ingroup renderer-plugin
+/// @brief Resource @ref cubos::engine::RenderEnvironment.
+/// @ingroup render-lights-plugin
 
 #pragma once
 
@@ -12,9 +12,9 @@
 
 namespace cubos::engine
 {
-    /// @brief Resource which stores the renderer's ambient light and sky colors.
-    /// @ingroup renderer-plugin
-    struct CUBOS_ENGINE_API RendererEnvironment
+    /// @brief Resource which stores the scene's ambient light and sky colors.
+    /// @ingroup render-lights-plugin
+    struct CUBOS_ENGINE_API RenderEnvironment
     {
         CUBOS_REFLECT;
 
