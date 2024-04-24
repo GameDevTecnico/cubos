@@ -538,12 +538,12 @@ namespace cubos::core::gl
             uint8_t readMask = 0xFF;  ///< Stencil read mask.
             uint8_t writeMask = 0xFF; ///< Stencil write mask.
 
-            Face backFace;  ///< Stencil back face options.
-            Face frontFace; ///< Stencil front face options.
+            Face backFace{};  ///< Stencil back face options.
+            Face frontFace{}; ///< Stencil front face options.
         };
 
-        Depth depth;     ///< Depth state options.
-        Stencil stencil; ///< Depth stencil options.
+        Depth depth{};     ///< Depth state options.
+        Stencil stencil{}; ///< Depth stencil options.
     };
 
     /// @brief Describes a blend state.
