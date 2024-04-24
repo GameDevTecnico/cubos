@@ -50,7 +50,7 @@
           <div class="m-doc-template">template&lt;typename O, typename F&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html">FieldsTrait</a>::<wbr/></span>AddressOfImpl <span class="m-thin">class</span>
         </h1>
-        <p>Implementation of <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a> for a pointer to member.</p>
+        <p>Implementation of AddressOf for a pointer to member.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -62,7 +62,7 @@
             </tr>
             <tr>
               <td>F</td>
-              <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> type.</td>
+              <td>Field type.</td>
             </tr>
           </tbody>
         </table>
@@ -73,7 +73,6 @@
               Reference
               <ul>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
@@ -85,15 +84,6 @@
               <span class="m-doc-wrap-bumper"><a href="#a969f5dff6503ea8cbe08fe85c82e8a04" class="m-doc">AddressOfImpl</a>(</span><span class="m-doc-wrap">F O::* pointer)</span>
             </dt>
             <dd>Constructs.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0b27863a3f402f44b8233970b35fb37c" class="m-doc">get</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; uintptr_t <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Gets the address of the field on a given instance.</dd>
           </dl>
         </section>
         <section>
@@ -116,32 +106,6 @@
                   <td>Pointer to member.</td>
                 </tr>
               </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a0b27863a3f402f44b8233970b35fb37c"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename O, typename F&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">uintptr_t cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr />AddressOfImpl&lt;O, F&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b27863a3f402f44b8233970b35fb37c" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const void* instance) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Gets the address of the field on a given instance.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Pointer to the instance.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Address of the field on the given instance.</td>
-                </tr>
-              </tfoot>
             </table>
           </div></section>
         </section>

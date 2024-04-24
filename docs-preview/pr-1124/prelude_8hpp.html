@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::RenderVoxels struct | CUBOS. Docs</title>
+  <title>engine/prelude.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,44 +46,86 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>RenderVoxels <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="voxels_8hpp.html">&lt;engine/render/voxels/voxels.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span>prelude.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Component used to draw voxel grids.</p>
+        <p>Includes commonly used headers and defines aliases for commonly used types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>When added to an entity, the grid may not be able to be rendered immediately, as the asset must load first, and the necessary data must be sent to the GPU. A <a href="structcubos_1_1engine_1_1LoadRenderVoxels.html" class="m-doc">LoadRenderVoxels</a> component is automatically added to the entity by an observer, which can be used to track the grid&#x27;s loading progress. When the grid is loaded, the task is removed.</p><p>If the grid is changed, in order to update the rendering, a new <a href="structcubos_1_1engine_1_1LoadRenderVoxels.html" class="m-doc">LoadRenderVoxels</a> component must be added to the entity, manually.</p>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>
-              <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt; <a href="#a7d0dd1dfd02e128441e0b3fca0d8cd85" class="m-doc">asset</a>
-            </dt>
-            <dd>Handle to the grid asset to be rendered.</dd>
-            <dt id="aeef5d201b46d143d9cf2f4f116b84958">
-              glm::vec3 <a href="#aeef5d201b46d143d9cf2f4f116b84958" class="m-doc-self">offset</a>
-            </dt>
-            <dd>Translation applied to the grid.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="a7d0dd1dfd02e128441e0b3fca0d8cd85"><div>
-            <h3>
-              <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt; cubos::<wbr />engine::<wbr />RenderVoxels::<wbr /><a href="#a7d0dd1dfd02e128441e0b3fca0d8cd85" class="m-doc-self">asset</a>
-            </h3>
-            <p>Handle to the grid asset to be rendered.</p>
-<p>When null, no grid will be rendered.</p>
-          </div></section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> = core::ecs::Tag
+            </dt>
+            <dd>Represents a tag to be used with the <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> class.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a2b3cae287edbca3b8a3e96baecab4146" class="m-doc">Plugin</a> = core::ecs::Plugin
+            </dt>
+            <dd>Function pointer type representing a plugin.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> = core::ecs::Cubos
+            </dt>
+            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a426547b7a41f84591b3fd8d967bc5435" class="m-doc">DeltaTime</a> = core::ecs::DeltaTime
+            </dt>
+            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a0a4fcc97e34218f81162d4e3fb61a8df" class="m-doc">ShouldQuit</a> = core::ecs::ShouldQuit
+            </dt>
+            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a1f8d4a63dca935415d2191391be6c2dd" class="m-doc">Arguments</a> = core::ecs::Arguments
+            </dt>
+            <dd>Resource which stores the command-line arguments.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#a306c379fd24b3dcc1990b06cdb386244" class="m-doc">Query</a> = core::ecs::Query&lt;ComponentTypes...&gt;
+            </dt>
+            <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a34019c3c344f309409d8b0abc510002d" class="m-doc">Entity</a> = core::ecs::Entity
+            </dt>
+            <dd>Identifies an entity.</dd>
+            <dt>
+              using <a href="namespacecubos_1_1engine.html#a736c6baa44b5c42048f897283a5ef1b1" class="m-doc">Commands</a> = core::ecs::Commands
+            </dt>
+            <dd>System argument used to write ECS commands and execute them at a later time.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc">Opt</a> = core::ecs::Opt&lt;T&gt;
+            </dt>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a> = core::ecs::EventReader&lt;T, M&gt;
+            </dt>
+            <dd>System arguments used to read events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="namespacecubos_1_1engine.html#a7ef542827dad012c740982fed224e341" class="m-doc">EventWriter</a> = core::ecs::EventWriter&lt;T&gt;
+            </dt>
+            <dd>System argument which allows the system to send events of type <code>T</code> to other systems.</dd>
+          </dl>
         </section>
       </div>
     </div>
