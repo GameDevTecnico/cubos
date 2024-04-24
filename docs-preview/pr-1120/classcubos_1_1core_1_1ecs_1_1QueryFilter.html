@@ -56,12 +56,22 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Match.html" class="m-doc">Match</a>
+            </dt>
+            <dd>Output structure of the iterator.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -70,6 +80,24 @@
               const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>&gt;&amp; terms)</span>
             </dt>
             <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html" class="m-doc">QueryFilter</a>&amp; filter,
+              <a href="classcubos_1_1core_1_1ecs_1_1QueryNode.html#ad35a58b9c09e9292581e9ace95a36515" class="m-doc">QueryNode::<wbr />TargetMask</a> pinMask = 0)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a517eaf9f49c734d81d858641c6b0d71c" class="m-doc">View</a>(</span><span class="m-doc-wrap">const View&amp; view) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Copy constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a>&amp; view,
+              bool end)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#af289afba6570fb52128fd71f9638c97e" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Copy constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -84,13 +112,58 @@
             </dt>
             <dd>Fetches any new matching archetypes that have been added since the last call to this function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4bcfbcff3efb79b5e7b4ba52f5d8cca4" class="m-doc">view</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter_1_1View.html" class="m-doc">View</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4bcfbcff3efb79b5e7b4ba52f5d8cca4" class="m-doc">view</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a></span>
             </dt>
             <dd>Returns a view which can be used to iterate over the matches.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae61f09a5fd04701c8e1222200e7100dd" class="m-doc">targetCount</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
             </dt>
             <dd>Gets the number of targets.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a262ac9928d54d617bc848d90832d19d2" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a>&amp; view) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a>&amp;</span>
+            </dt>
+            <dd>Copy assigns.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a005617c5a207cc3e7864b32081cd85c3" class="m-doc">pin</a>(</span><span class="m-doc-wrap">int target,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a></span>
+            </dt>
+            <dd>Returns a new view equal to this one but with the given target pinned to the given entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4b914209c49330eeff7150d75e4976f2" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator pointing to the first query match.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a02a437638713ff7bca3ccc4f9b1406e8" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an out of bounds iterator representing the end of the query matches.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9a88ec1feb0df19421350b3914a79005" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a>&amp; other) const -&gt; bool</span>
+            </dt>
+            <dd>Compares two iterators.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aab88591761c811a765280fae9f7ca393" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Match.html" class="m-doc">Match</a>&amp;</span>
+            </dt>
+            <dd>Accesses the match referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a605e7c847c3c2865def55296b3614479" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Match.html" class="m-doc">Match</a>*</span>
+            </dt>
+            <dd>Accesses the match referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a47cc856b595e45dfed4c253e56845a21" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Advances the iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad8648d74ec85f52431ac0da68061eca3" class="m-doc">targetArchetypes</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>*</span>
+            </dt>
+            <dd>Gets the archetype of each target.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a07ab5e4194da360077ff1f1725e9c934" class="m-doc">cursorRows</a>(</span><span class="m-doc-wrap">) const -&gt; const std::size_t*</span>
+            </dt>
+            <dd>Gets the row number for each cursor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2eb46c79fea36ef2646ad229c6cf69fa" class="m-doc">valid</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if the iterator is out of bounds.</dd>
           </dl>
         </section>
         <section>
@@ -113,6 +186,84 @@
                 <tr>
                   <td>terms</td>
                   <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> terms.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a861bf8f371b28a3902b1b171200b7699"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a861bf8f371b28a3902b1b171200b7699" class="m-doc-self">View</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html" class="m-doc">QueryFilter</a>&amp; filter,
+              <a href="classcubos_1_1core_1_1ecs_1_1QueryNode.html#ad35a58b9c09e9292581e9ace95a36515" class="m-doc">QueryNode::<wbr />TargetMask</a> pinMask = 0)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">filter</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> filter.</td>
+                </tr>
+                <tr>
+                  <td>pinMask</td>
+                  <td>Mask with the targets which are pinned.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a517eaf9f49c734d81d858641c6b0d71c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a517eaf9f49c734d81d858641c6b0d71c" class="m-doc-self">View</a>(</span><span class="m-doc-wrap">const View&amp; view) <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">view</td>
+                  <td>Other view.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2c8e62b8eda798e2aab510852842dbff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2c8e62b8eda798e2aab510852842dbff" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a>&amp; view,
+              bool end)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">view</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> filter view.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Whether the iterator should point to the end of the matches.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af289afba6570fb52128fd71f9638c97e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af289afba6570fb52128fd71f9638c97e" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other) <span class="m-label m-info">defaulted</span></span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
                 </tr>
               </tbody>
             </table>
@@ -142,14 +293,14 @@
           </div></section>
           <section class="m-doc-details" id="a4bcfbcff3efb79b5e7b4ba52f5d8cca4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4bcfbcff3efb79b5e7b4ba52f5d8cca4" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4bcfbcff3efb79b5e7b4ba52f5d8cca4" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Returns a view which can be used to iterate over the matches.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter_1_1View.html" class="m-doc">View</a>.</td>
+                  <td>View.</td>
                 </tr>
               </tfoot>
             </table>
@@ -164,6 +315,190 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Target count.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a262ac9928d54d617bc848d90832d19d2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a262ac9928d54d617bc848d90832d19d2" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a>&amp; view)</span></span>
+            </h3>
+            <p>Copy assigns.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">view</td>
+                  <td>Other view.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a005617c5a207cc3e7864b32081cd85c3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a861bf8f371b28a3902b1b171200b7699" class="m-doc">View</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a005617c5a207cc3e7864b32081cd85c3" class="m-doc-self">pin</a>(</span><span class="m-doc-wrap">int target,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+            </h3>
+            <p>Returns a new view equal to this one but with the given target pinned to the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Target index.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>View.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Effectively this filters out all matches where the given target isn&#x27;t the given entity.</p>
+          </div></section>
+          <section class="m-doc-details" id="a4b914209c49330eeff7150d75e4976f2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b914209c49330eeff7150d75e4976f2" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns an iterator pointing to the first query match.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a02a437638713ff7bca3ccc4f9b1406e8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a02a437638713ff7bca3ccc4f9b1406e8" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns an out of bounds iterator representing the end of the query matches.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9a88ec1feb0df19421350b3914a79005"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a88ec1feb0df19421350b3914a79005" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a>&amp; other) const</span></span>
+            </h3>
+            <p>Compares two iterators.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the iterators point to the same match.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aab88591761c811a765280fae9f7ca393"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Match.html" class="m-doc">Match</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aab88591761c811a765280fae9f7ca393" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the match referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Match.html" class="m-doc">Match</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a605e7c847c3c2865def55296b3614479"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Match.html" class="m-doc">Match</a>* cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a605e7c847c3c2865def55296b3614479" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the match referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryFilter_1_1Match.html" class="m-doc">Match</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a47cc856b595e45dfed4c253e56845a21"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html#a2c8e62b8eda798e2aab510852842dbff" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a47cc856b595e45dfed4c253e56845a21" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Advances the iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to this.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ad8648d74ec85f52431ac0da68061eca3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>* cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad8648d74ec85f52431ac0da68061eca3" class="m-doc-self">targetArchetypes</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the archetype of each target.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Target archetypes array.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a07ab5e4194da360077ff1f1725e9c934"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const std::size_t* cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a07ab5e4194da360077ff1f1725e9c934" class="m-doc-self">cursorRows</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the row number for each cursor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Cursor row number array.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2eb46c79fea36ef2646ad229c6cf69fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />QueryFilter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2eb46c79fea36ef2646ad229c6cf69fa" class="m-doc-self">valid</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Checks if the iterator is out of bounds.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the iterator is valid.</td>
                 </tr>
               </tfoot>
             </table>

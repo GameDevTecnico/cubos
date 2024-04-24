@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Voxels module | CUBOS. Docs</title>
+  <title>cubos::core::ecs::Plugins class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,91 +46,98 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Voxels <span class="m-thin">module</span></h1>
-        <p>Adds grid and palette assets to <strong>CUBOS</strong>.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Plugins <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugins_8hpp.html">&lt;core/ecs/system/arguments/plugins.hpp&gt;</a></div>
+        </h1>
+        <p><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to add or remove <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> plugins at runtime.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md108">Bridges</a></li>
-            <li><a href="#autotoc_md109">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md108"><h3><a href="#autotoc_md108">Bridges</a></h3><ul><li>BinaryBridge - registered with the <code>.grd</code> extension, loads <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a> assets.</li><li>BinaryBridge - registered with the <code>.pal</code> extension, loads <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a> assets.</li></ul></section><section id="autotoc_md109"><h3><a href="#autotoc_md109">Dependencies</a></h3><ul><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="voxels_2grid_8hpp.html" class="m-doc">grid.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">cubos::<wbr />engine::<wbr />VoxelGrid</a>.</dd>
-            <dt>file <a href="grid__bridge_8hpp.html" class="m-doc">grid_bridge.hpp</a></dt>
-            <dd>Class cubos::engine::GridBridge.</dd>
-            <dt>file <a href="material_8hpp.html" class="m-doc">material.hpp</a></dt>
-            <dd>Class <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">cubos::<wbr />engine::<wbr />VoxelMaterial</a>.</dd>
-            <dt>file <a href="voxels_2palette_8hpp.html" class="m-doc">palette.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">cubos::<wbr />engine::<wbr />VoxelPalette</a>.</dd>
-            <dt>file <a href="palette__bridge_8hpp.html" class="m-doc">palette_bridge.hpp</a></dt>
-            <dd>Class cubos::engine::PaletteBridge.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2voxels_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a4bc77641f2505bbf035ffaaf2caf8aec" class="m-doc">Plugins</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">PluginQueue</a>* queue)</span>
+            </dt>
+            <dd>Constructs.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">cubos::engine::VoxelGrid</a>
+              <span class="m-doc-wrap-bumper">void <a href="#a538140d7b7cba6a6b6426876791a5d6f" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span>
             </dt>
-            <dd>Represents a voxel object using a 3D grid.</dd>
+            <dd>Adds a plugin to the application. Will be executed on the next frame.</dd>
             <dt>
-              class <a href="classcubos_1_1engine_1_1VoxelGridBridge.html" class="m-doc">cubos::engine::VoxelGridBridge</a>
+              <span class="m-doc-wrap-bumper">void <a href="#a11b4e19a7f3567dc808af18b4086d99c" class="m-doc">remove</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span>
             </dt>
-            <dd>Bridge which loads and saves Grid assets.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">cubos::engine::VoxelMaterial</a>
-            </dt>
-            <dd>Describes a voxel material.</dd>
-            <dt>
-              class <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">cubos::engine::VoxelPalette</a>
-            </dt>
-            <dd>Holds a palette of materials. Supports up to 65535 materials.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#gad99b6a2b88e5c1363ec98b41384db416" class="m-doc">voxelsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Removes a plugin from the application. Will be executed on the next frame.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gad99b6a2b88e5c1363ec98b41384db416"><div>
+          <section class="m-doc-details" id="a4bc77641f2505bbf035ffaaf2caf8aec"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gad99b6a2b88e5c1363ec98b41384db416" class="m-doc-self">voxelsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2voxels_2plugin_8hpp.html">&lt;engine/voxels/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Plugins::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4bc77641f2505bbf035ffaaf2caf8aec" class="m-doc-self">Plugins</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">PluginQueue</a>* queue)</span></span>
             </h3>
-            <p>Plugin entry function.</p>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class.</td>
+                  <td style="width: 1%">queue</td>
+                  <td>Plugin queue.</td>
                 </tr>
               </tbody>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a538140d7b7cba6a6b6426876791a5d6f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Plugins::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a538140d7b7cba6a6b6426876791a5d6f" class="m-doc-self">add</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span></span>
+            </h3>
+            <p>Adds a plugin to the application. Will be executed on the next frame.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">plugin</td>
+                  <td>Plugin.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The plugin&#x27;s startup systems will run before the frame begins.</p>
+          </div></section>
+          <section class="m-doc-details" id="a11b4e19a7f3567dc808af18b4086d99c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Plugins::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a11b4e19a7f3567dc808af18b4086d99c" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span></span>
+            </h3>
+            <p>Removes a plugin from the application. Will be executed on the next frame.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">plugin</td>
+                  <td>Plugin.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>This will revert all configuration changes made by the plugin. It won&#x27;t revert any effects caused by the plugin on the world, such as adding or removing entities.</p>
           </div></section>
         </section>
       </div>
