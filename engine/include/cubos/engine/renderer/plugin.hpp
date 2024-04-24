@@ -32,7 +32,7 @@ namespace cubos::engine
     /// @ref LocalToWorld components.
     ///
     /// The rendering environment, such as the ambient lighting and sky color, can be set through
-    /// the resource @ref RendererEnvironment.
+    /// the resource @ref RenderEnvironment.
     ///
     /// ## Settings
     /// - `cubos.renderer.ssao.enabled` - whether SSAO is enabled.
@@ -41,7 +41,7 @@ namespace cubos::engine
     /// ## Resources
     /// - @ref Renderer - handle to the renderer.
     /// - @ref RendererFrame - holds the current frame information.
-    /// - @ref RendererEnvironment - holds the environment information (ambient light, sky gradient).
+    /// - @ref RenderEnvironment - holds the environment information (ambient light, sky gradient).
     /// - @ref ActiveCameras - holds the entities which represents the active cameras.
     /// - @ref ActiveVoxelPalette - holds an asset handle to the currently active palette.
     ///

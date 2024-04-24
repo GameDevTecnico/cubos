@@ -6,10 +6,10 @@
 
 #include <vector>
 
-#include <cubos/engine/renderer/directional_light.hpp>
-#include <cubos/engine/renderer/point_light.hpp>
+#include <cubos/engine/render/lights/directional.hpp>
+#include <cubos/engine/render/lights/point.hpp>
+#include <cubos/engine/render/lights/spot.hpp>
 #include <cubos/engine/renderer/renderer.hpp>
-#include <cubos/engine/renderer/spot_light.hpp>
 
 namespace cubos::engine
 {

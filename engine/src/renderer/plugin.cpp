@@ -1,14 +1,15 @@
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 
+#include <cubos/engine/render/lights/directional.hpp>
+#include <cubos/engine/render/lights/environment.hpp>
+#include <cubos/engine/render/lights/plugin.hpp>
+#include <cubos/engine/render/lights/point.hpp>
+#include <cubos/engine/render/lights/spot.hpp>
 #include <cubos/engine/renderer/deferred_renderer.hpp>
-#include <cubos/engine/renderer/directional_light.hpp>
-#include <cubos/engine/renderer/environment.hpp>
 #include <cubos/engine/renderer/frame.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/renderer/pps/bloom.hpp>
-#include <cubos/engine/renderer/spot_light.hpp>
 #include <cubos/engine/renderer/viewport.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
@@ -45,6 +46,8 @@ CUBOS_REFLECT_IMPL(ActiveVoxelPalette)
 
 void cubos::engine::rendererPlugin(Cubos& cubos)
 {
+    cubos.plugin(lightsPlugin);
+
     cubos.depends(transformPlugin);
     cubos.depends(windowPlugin);
     cubos.depends(assetsPlugin);
@@ -54,14 +57,10 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.resource<RendererFrame>();
     cubos.resource<Renderer>();
     cubos.resource<ActiveCameras>();
-    cubos.resource<RendererEnvironment>();
     cubos.resource<ActiveVoxelPalette>();
 
     cubos.component<RenderableGrid>();
     cubos.component<Camera>();
-    cubos.component<SpotLight>();
-    cubos.component<DirectionalLight>();
-    cubos.component<PointLight>();
     cubos.component<Viewport>();
 
     cubos.startupTag(rendererInitTag).after(windowInitTag);
@@ -134,7 +133,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
 
     cubos.system("set Frame environment")
         .tagged(rendererFrameTag)
-        .call([](RendererFrame& frame, const RendererEnvironment& env) {
+        .call([](RendererFrame& frame, const RenderEnvironment& env) {
             frame.ambient(env.ambient);
             frame.skyGradient(env.skyGradient[0], env.skyGradient[1]);
         });

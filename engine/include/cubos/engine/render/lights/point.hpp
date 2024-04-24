@@ -1,6 +1,6 @@
 /// @file
-/// @brief Component @ref cubos::engine::SpotLight.
-/// @ingroup renderer-plugin
+/// @brief Component @ref cubos::engine::PointLight.
+/// @ingroup render-lights-plugin
 
 #pragma once
 
@@ -12,16 +12,14 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which makes an entity emit a spot light in the direction of its forward vector.
-    /// @ingroup renderer-plugin
-    struct CUBOS_ENGINE_API SpotLight
+    /// @brief Component which makes an entity behave like a point light.
+    /// @ingroup render-lights-plugin
+    struct CUBOS_ENGINE_API PointLight
     {
         CUBOS_REFLECT;
 
         glm::vec3 color = {1.0F, 1.0F, 1.0F}; ///< Color of the light.
         float intensity = 1.0F;               ///< Intensity of the light.
         float range = 5.0F;                   ///< Range of the light.
-        float spotAngle = 60.0F;              ///< Angle of the spot light in degrees.
-        float innerSpotAngle = 30.0F;         ///< Angle of the spot light in degrees.
     };
 } // namespace cubos::engine

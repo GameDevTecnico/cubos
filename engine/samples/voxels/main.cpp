@@ -1,4 +1,4 @@
-#include <cubos/engine/renderer/directional_light.hpp>
+#include <cubos/engine/render/lights/directional.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>

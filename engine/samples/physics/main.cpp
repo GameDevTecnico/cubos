@@ -3,7 +3,7 @@
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
 #include <cubos/engine/physics/solver/solver.hpp>
-#include <cubos/engine/renderer/directional_light.hpp>
+#include <cubos/engine/render/lights/directional.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>

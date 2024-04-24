@@ -2,7 +2,7 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include <cubos/engine/renderer/spot_light.hpp>
+#include <cubos/engine/render/lights/spot.hpp>
 
 CUBOS_REFLECT_IMPL(cubos::engine::SpotLight)
 {

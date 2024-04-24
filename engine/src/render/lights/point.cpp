@@ -2,7 +2,7 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include <cubos/engine/renderer/point_light.hpp>
+#include <cubos/engine/render/lights/point.hpp>
 
 CUBOS_REFLECT_IMPL(cubos::engine::PointLight)
 {

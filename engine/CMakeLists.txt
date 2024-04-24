@@ -83,10 +83,6 @@ set(CUBOS_ENGINE_SOURCE
 	"src/renderer/vertex.cpp"
 	"src/renderer/frame.cpp"
 	"src/renderer/camera.cpp"
-	"src/renderer/environment.cpp"
-	"src/renderer/directional_light.cpp"
-	"src/renderer/point_light.cpp"
-	"src/renderer/spot_light.cpp"
 	"src/renderer/renderer.cpp"
 	"src/renderer/deferred_renderer.cpp"
 	"src/renderer/pps/bloom.cpp"
@@ -125,6 +121,11 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/voxels/load.cpp"
 	"src/render/voxels/grid.cpp"
 	"src/render/voxels/palette.cpp"
+	"src/render/lights/plugin.cpp"
+	"src/render/lights/environment.cpp"
+	"src/render/lights/directional.cpp"
+	"src/render/lights/point.cpp"
+	"src/render/lights/spot.cpp"
 )
 
 # Create cubos engine
