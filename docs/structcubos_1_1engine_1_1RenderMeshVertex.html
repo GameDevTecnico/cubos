@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::thread::ThreadPool class | CUBOS. Docs</title>
+  <title>cubos::engine::RenderMeshVertex struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,77 +46,121 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1thread.html">thread</a>::<wbr/></span>ThreadPool <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2thread_2pool_8hpp.html">&lt;core/thread/pool.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>RenderMeshVertex <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="mesh_2vertex_8hpp.html">&lt;engine/render/mesh/vertex.hpp&gt;</a></div>
         </h1>
-        <p>Manages a pool of threads, to which tasks can be submitted.</p>
+        <p>Vertex data type stored in the <a href="classcubos_1_1engine_1_1RenderMeshPool.html" class="m-doc">RenderMeshPool</a>&#x27;s vertex buffer.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-info"><h4>Note</h4><p>Blocks on tasks to finish on destruction.</p></aside>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#abdbaae0ccedf58a93ff81a2ce026e006" class="m-doc">ThreadPool</a>(</span><span class="m-doc-wrap">std::size_t numThreads)</span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#ac5b7e4f0098d82a370974413a972d3e1" class="m-doc">addVertexElements</a>(</span><span class="m-doc-wrap">const char* position,
+              const char* normal,
+              const char* material,
+              std::size_t bufferIndex,
+              <a href="structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html" class="m-doc">core::<wbr />gl::<wbr />VertexArrayDesc</a>&amp; desc) -&gt; bool</span>
             </dt>
-            <dd>Constructs a pool with <code>numThreads</code>, starting them immediately.</dd>
+            <dd>Generates a vertex element description for this vertex type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static void <a href="#a4eef9b7f784598637ca318c269f4dd9e" class="m-doc">generate</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; grid,
+              std::vector&lt;<a href="structcubos_1_1engine_1_1RenderMeshVertex.html" class="m-doc">RenderMeshVertex</a>&gt;&amp; facverticeses)</span>
+            </dt>
+            <dd>Generates a vertex mesh for the given voxel grid.</dd>
           </dl>
         </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aff5817ae36b7fd181f8dc5a194fa5ec2" class="m-doc">addTask</a>(</span><span class="m-doc-wrap">std::function&lt;void()&gt; task)</span>
+            <dt id="aaa6b45f5f4c253ee1faf654d84b86d66">
+              glm::u8vec3 <a href="#aaa6b45f5f4c253ee1faf654d84b86d66" class="m-doc-self">position</a>
             </dt>
-            <dd>Adds a task to the thread pool. Starts when a thread becomes available.</dd>
-            <dt id="a63db14f032659eb4e3909e37dc83b7f4">
-              <span class="m-doc-wrap-bumper">void <a href="#a63db14f032659eb4e3909e37dc83b7f4" class="m-doc-self">wait</a>(</span><span class="m-doc-wrap">)</span>
+            <dd>Vertex position within the mesh.</dd>
+            <dt id="a2b339770948514a1b8c1fb15b207fc46">
+              glm::uint8 <a href="#a2b339770948514a1b8c1fb15b207fc46" class="m-doc-self">normal</a>
             </dt>
-            <dd>Blocks until all tasks finish.</dd>
+            <dd>Vertex normal (0 for +X, 1 for -X, 2 for +Y, 3 for -Y, 4 for +Z, 5 for -Z).</dd>
+            <dt id="a0c8ff66e71c4e0b9de1dfa351352cd16">
+              glm::uint32 <a href="#a0c8ff66e71c4e0b9de1dfa351352cd16" class="m-doc-self">material</a>
+            </dt>
+            <dd>Vertex material.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="abdbaae0ccedf58a93ff81a2ce026e006"><div>
+          <section class="m-doc-details" id="ac5b7e4f0098d82a370974413a972d3e1"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />thread::<wbr />ThreadPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abdbaae0ccedf58a93ff81a2ce026e006" class="m-doc-self">ThreadPool</a>(</span><span class="m-doc-wrap">std::size_t numThreads)</span></span>
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />engine::<wbr />RenderMeshVertex::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac5b7e4f0098d82a370974413a972d3e1" class="m-doc-self">addVertexElements</a>(</span><span class="m-doc-wrap">const char* position,
+              const char* normal,
+              const char* material,
+              std::size_t bufferIndex,
+              <a href="structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html" class="m-doc">core::<wbr />gl::<wbr />VertexArrayDesc</a>&amp; desc)</span></span>
             </h3>
-            <p>Constructs a pool with <code>numThreads</code>, starting them immediately.</p>
+            <p>Generates a vertex element description for this vertex type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">numThreads</td>
-                  <td>Number of threads to create.</td>
+                  <td style="width: 1%">position</td>
+                  <td><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> attribute name in the pipeline.</td>
+                </tr>
+                <tr>
+                  <td>normal</td>
+                  <td>Normal attribute name in the pipeline.</td>
+                </tr>
+                <tr>
+                  <td>material</td>
+                  <td>Material attribute name in the pipeline.</td>
+                </tr>
+                <tr>
+                  <td>bufferIndex</td>
+                  <td>Index of the vertex buffer where the elements will be stored.</td>
+                </tr>
+                <tr>
+                  <td>desc</td>
+                  <td>Vertex array description to add the elements to.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the vertex elements fitted in the vertex array description.</td>
+                </tr>
+              </tfoot>
             </table>
+<p>Assumes a vertex buffer stores this and only this type, as an array of ivec2, where the x component is the positionAndSize, and the colorAndNormal is the y component.</p>
           </div></section>
-          <section class="m-doc-details" id="aff5817ae36b7fd181f8dc5a194fa5ec2"><div>
+          <section class="m-doc-details" id="a4eef9b7f784598637ca318c269f4dd9e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />thread::<wbr />ThreadPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff5817ae36b7fd181f8dc5a194fa5ec2" class="m-doc-self">addTask</a>(</span><span class="m-doc-wrap">std::function&lt;void()&gt; task)</span></span>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />engine::<wbr />RenderMeshVertex::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4eef9b7f784598637ca318c269f4dd9e" class="m-doc-self">generate</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; grid,
+              std::vector&lt;<a href="structcubos_1_1engine_1_1RenderMeshVertex.html" class="m-doc">RenderMeshVertex</a>&gt;&amp; facverticeses)</span></span>
             </h3>
-            <p>Adds a task to the thread pool. Starts when a thread becomes available.</p>
+            <p>Generates a vertex mesh for the given voxel grid.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">task</td>
-                  <td><a href="classcubos_1_1core_1_1thread_1_1Task.html" class="m-doc">Task</a> to add.</td>
+                  <td style="width: 1%">grid</td>
+                  <td>Voxel grid.</td>
+                </tr>
+                <tr>
+                  <td>facverticeses</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>

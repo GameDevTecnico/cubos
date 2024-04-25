@@ -226,6 +226,22 @@
             </dt>
             <dd>Component which makes an entity emit a spot light in the direction of its local forward vector.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1RenderMesh.html" class="m-doc">RenderMesh</a>
+            </dt>
+            <dd>Component used to draw meshes stored in the vertex pool.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1RenderMeshPool.html" class="m-doc">RenderMeshPool</a>
+            </dt>
+            <dd>Used to allocate render meshes, which can then be rendered using a single draw call.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1RenderMeshTask.html" class="m-doc">RenderMeshTask</a>
+            </dt>
+            <dd>Component used to track meshing tasks for <a href="structcubos_1_1engine_1_1RenderVoxelGrid.html" class="m-doc">RenderVoxelGrid</a> components.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1RenderMeshVertex.html" class="m-doc">RenderMeshVertex</a>
+            </dt>
+            <dd>Vertex data type stored in the <a href="classcubos_1_1engine_1_1RenderMeshPool.html" class="m-doc">RenderMeshPool</a>&#x27;s vertex buffer.</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a>
             </dt>
             <dd>Component which provides a texture to store entity/gizmo ids, for selection with a mouse.</dd>
@@ -533,6 +549,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__render-mesh-plugin.html#ga3642892e33cdb29aade93551d90c84e0" class="m-doc">renderMeshPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__render-picker-plugin.html#ga95033c1048e6660c7988dcd1751dd77b" class="m-doc">renderPickerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -683,6 +703,10 @@
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-hdr-plugin.html#gabb8417eaf8c592e85fc5548145e5f8ab" class="m-doc">drawToHDRTag</a>
             </dt>
             <dd>Systems which draw to <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> textures should be tagged with this.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#aa7969567cf76b4c3f1dbf0b45f733252" class="m-doc">renderMeshPoolInitTag</a>
+            </dt>
+            <dd>Render mesh pool is initialized (startup).</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#ab308b1f08c95157c685660cd9bf4ced9" class="m-doc">createRenderPickerTag</a>
             </dt>
@@ -1007,6 +1031,13 @@
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2input_2plugin_8hpp.html">&lt;engine/input/plugin.hpp&gt;</a></div>
             </h3>
             <p>Updates the input state.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa7969567cf76b4c3f1dbf0b45f733252"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#aa7969567cf76b4c3f1dbf0b45f733252" class="m-doc-self">renderMeshPoolInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2mesh_2plugin_8hpp.html">&lt;engine/render/mesh/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Render mesh pool is initialized (startup).</p>
           </div></section>
           <section class="m-doc-details" id="ab308b1f08c95157c685660cd9bf4ced9"><div>
             <h3>
