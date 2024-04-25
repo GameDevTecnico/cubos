@@ -13,6 +13,7 @@
 #include <tesseratos/transform_gizmo/plugin.hpp>
 #include <tesseratos/voxel_palette_editor/plugin.hpp>
 #include <tesseratos/world_inspector/plugin.hpp>
+#include <tesseratos/console/plugin.hpp>
 
 void tesseratos::plugin(cubos::engine::Cubos& cubos)
 {
@@ -35,6 +36,7 @@ void tesseratos::plugin(cubos::engine::Cubos& cubos)
     cubos.plugin(transformGizmoPlugin);
     cubos.plugin(playPausePlugin);
     cubos.plugin(ecsStatisticsPlugin);
+    cubos.addPlugin(consolePlugin);
 
     cubos.plugin(sceneEditorPlugin);
     cubos.plugin(voxelPaletteEditorPlugin);
