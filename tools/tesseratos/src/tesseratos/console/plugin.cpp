@@ -65,7 +65,7 @@ static ImVec4 levelToColor(cubos::core::Logger::Level level)
     case cubos::core::Logger::Level::Critical:
         return ImVec4(1.0F, 1.0F, 1.0F, 1.0F); // White (or any color you prefer for critical)
     default:
-        return ImVec4(1.0F, 1.0F, 1.0F, 1.0F); // Default to
+        return {1.0F, 1.0F, 1.0F, 1.0F}; // Default to
     }
 }
 
@@ -142,6 +142,8 @@ void tesseratos::consolePlugin(Cubos& cubos)
                 break;
             case cubos::core::Logger::Level::Critical:
                 criticalCount++;
+                break;
+            case cubos::core::Logger::Level::Off:
                 break;
             }
 
