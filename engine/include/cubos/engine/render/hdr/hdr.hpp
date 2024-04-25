@@ -19,10 +19,15 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        /// @brief Size of the HDR texture, in pixels.
+        /// @brief Size of the HDR textures, in pixels.
         glm::uvec2 size = {0, 0};
 
-        /// @brief Handle to the actual HDR texture.
-        core::gl::Texture2D texture{nullptr};
+        /// @brief Handle to the HDR texture to write to/read from.
+        core::gl::Texture2D frontTexture{nullptr};
+
+        /// @brief Handle to the HDR texture to be written to by post-processing plugins.
+        ///
+        /// Each effect should write to this texture and then swap it with @ref frontTexture.
+        core::gl::Texture2D backTexture{nullptr};
     };
 } // namespace cubos::engine

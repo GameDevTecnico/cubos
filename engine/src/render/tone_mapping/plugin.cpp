@@ -83,7 +83,7 @@ void cubos::engine::toneMappingPlugin(Cubos& cubos)
                 rd.setBlendState(nullptr);
                 rd.setDepthStencilState(nullptr);
                 rd.setShaderPipeline(state.pipeline);
-                state.hdrBP->bind(hdr.texture);
+                state.hdrBP->bind(hdr.frontTexture);
                 state.gammaBP->setConstant(toneMapping.gamma);
                 state.exposureBP->setConstant(toneMapping.exposure);
                 rd.setVertexArray(state.screenQuad);

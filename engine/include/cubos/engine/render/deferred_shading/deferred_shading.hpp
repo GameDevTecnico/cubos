@@ -18,9 +18,17 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         /// @brief Framebuffer used to draw to the HDR texture.
-        core::gl::Framebuffer framebuffer;
+        core::gl::Framebuffer frontFramebuffer;
 
-        /// @brief HDR texture present in the @ref framebuffer.
-        core::gl::Texture2D hdr;
+        /// @brief Framebuffer used to draw to the back HDR texture.
+        ///
+        /// Swapped with @ref frontFramebuffer as needed so that the textures match with the @ref HDR component.
+        core::gl::Framebuffer backFramebuffer;
+
+        /// @brief HDR texture present in the @ref frontFramebuffer.
+        core::gl::Texture2D frontHDR;
+
+        /// @brief HDR texture present in the @ref backFramebuffer.
+        core::gl::Texture2D backHDR;
     };
 } // namespace cubos::engine
