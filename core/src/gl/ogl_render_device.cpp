@@ -1534,10 +1534,11 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     // Check if the framebuffer is complete
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    auto status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    if (status != GL_FRAMEBUFFER_COMPLETE)
     {
         glDeleteFramebuffers(1, &id);
-        CUBOS_ERROR("glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE");
+        CUBOS_ERROR("glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE (returned {})", status);
         return nullptr;
     }
 
