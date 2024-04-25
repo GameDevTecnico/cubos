@@ -18,6 +18,7 @@ set(TESSERATOS_SOURCE
 	"src/tesseratos/collider_gizmos/plugin.cpp"
 	"src/tesseratos/play_pause/plugin.cpp"
 	"src/tesseratos/ecs_statistics/plugin.cpp"
+	"src/tesseratos/console/plugin.cpp"
 )
 
 add_executable(tesseratos ${TESSERATOS_SOURCE})
