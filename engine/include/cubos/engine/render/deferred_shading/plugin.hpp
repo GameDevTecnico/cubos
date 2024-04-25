@@ -21,6 +21,7 @@ namespace cubos::engine
     /// - @ref assets-plugin
     /// - @ref render-shader-plugin
     /// - @ref render-g-buffer-plugin
+    /// - @ref render-ssao-plugin
     /// - @ref render-hdr-plugin
     /// - @ref render-camera-plugin
     /// - @ref render-lights-plugin

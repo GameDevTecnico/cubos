@@ -5,6 +5,7 @@ in vec2 fragUv;
 uniform sampler2D positionTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D albedoTexture;
+uniform sampler2D ssaoTexture;
 
 struct DirectionalLight
 {
@@ -121,9 +122,10 @@ void main()
     {
         vec3 albedo = texture(albedoTexture, fragUv).rgb;
         vec3 position = texture(positionTexture, fragUv).xyz;
+        float ssao = texture(ssaoTexture, fragUv).r;
 
         // Calculate lighting from each light source.
-        vec3 lighting = ambientLight.rgb;
+        vec3 lighting = ambientLight.rgb * ssao;
         for (uint i = 0u; i < numSpotLights; i++)
         {
             lighting += spotLightCalc(position, normal, spotLights[i]);

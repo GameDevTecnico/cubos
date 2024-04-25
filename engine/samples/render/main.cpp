@@ -12,6 +12,7 @@
 #include <cubos/engine/render/mesh/plugin.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
+#include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/tone_mapping/plugin.hpp>
 #include <cubos/engine/render/voxels/palette.hpp>
@@ -48,6 +49,7 @@ int main()
     cubos.plugin(renderMeshPlugin);
     cubos.plugin(gBufferRasterizerPlugin);
     cubos.plugin(lightsPlugin);
+    cubos.plugin(ssaoPlugin);
     cubos.plugin(deferredShadingPlugin);
     cubos.plugin(toneMappingPlugin);
     /// [Adding the plugins]

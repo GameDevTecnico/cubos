@@ -17,6 +17,8 @@
 #include <cubos/engine/render/lights/point.hpp>
 #include <cubos/engine/render/lights/spot.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
+#include <cubos/engine/render/ssao/plugin.hpp>
+#include <cubos/engine/render/ssao/ssao.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -83,6 +85,7 @@ namespace
         ShaderBindingPoint positionBP;
         ShaderBindingPoint normalBP;
         ShaderBindingPoint albedoBP;
+        ShaderBindingPoint ssaoBP;
         ShaderBindingPoint perSceneBP;
 
         VertexArray screenQuad;
@@ -95,9 +98,11 @@ namespace
             positionBP = pipeline->getBindingPoint("positionTexture");
             normalBP = pipeline->getBindingPoint("normalTexture");
             albedoBP = pipeline->getBindingPoint("albedoTexture");
+            ssaoBP = pipeline->getBindingPoint("ssaoTexture");
             perSceneBP = pipeline->getBindingPoint("PerScene");
-            CUBOS_ASSERT(positionBP && normalBP && albedoBP && perSceneBP,
-                         "positionTexture, normalTexture, albedoTexture and PerScene binding points must exist");
+            CUBOS_ASSERT(
+                positionBP && normalBP && albedoBP && ssaoBP && perSceneBP,
+                "positionTexture, normalTexture, albedoTexture, ssaoTexture and PerScene binding points must exist");
 
             generateScreenQuad(renderDevice, pipeline, screenQuad);
 
@@ -115,12 +120,13 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
     cubos.depends(assetsPlugin);
     cubos.depends(shaderPlugin);
     cubos.depends(gBufferPlugin);
+    cubos.depends(ssaoPlugin);
     cubos.depends(cameraPlugin);
     cubos.depends(lightsPlugin);
     cubos.depends(hdrPlugin);
     cubos.depends(transformPlugin);
 
-    cubos.tag(deferredShadingTag).tagged(drawToHDRTag).after(drawToGBufferTag);
+    cubos.tag(deferredShadingTag).tagged(drawToHDRTag).after(drawToGBufferTag).after(drawToSSAOTag);
 
     cubos.uninitResource<State>();
 
@@ -142,11 +148,11 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                  Query<const LocalToWorld&, const DirectionalLight&> directionalLights,
                  Query<const LocalToWorld&, const PointLight&> pointLights,
                  Query<const LocalToWorld&, const SpotLight&> spotLights,
-                 Query<Entity, const HDR&, const GBuffer&, DeferredShading&> targets,
+                 Query<Entity, const HDR&, const GBuffer&, const SSAO&, DeferredShading&> targets,
                  Query<const LocalToWorld&, const PerspectiveCamera&, const DrawsTo&> perspectiveCameras) {
             auto& rd = window->renderDevice();
 
-            for (auto [targetEnt, hdr, gBuffer, deferredShading] : targets)
+            for (auto [targetEnt, hdr, gBuffer, ssao, deferredShading] : targets)
             {
                 // Find the camera that draws to the GBuffer.
                 for (auto [localToWorld, camera, drawsTo] : perspectiveCameras.pin(1, targetEnt))
@@ -220,6 +226,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.positionBP->bind(gBuffer.position);
                     state.normalBP->bind(gBuffer.normal);
                     state.albedoBP->bind(gBuffer.albedo);
+                    state.ssaoBP->bind(ssao.blurTexture);
                     state.perSceneBP->bind(state.perSceneCB);
                     rd.setVertexArray(state.screenQuad);
                     rd.drawTriangles(0, 6);

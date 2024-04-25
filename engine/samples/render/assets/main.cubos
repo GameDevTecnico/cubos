@@ -8,6 +8,7 @@
             "cubos::engine::RenderPicker": {},
             "cubos::engine::GBuffer": {},
             "cubos::engine::GBufferRasterizer": {},
+            "cubos::engine::SSAO": {},
             "cubos::engine::DeferredShading": {}
         },
         "camera": {
@@ -21,13 +22,19 @@
         },
         "car": {
             "cubos::engine::RenderVoxelGrid": {
-                "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c75"
+                "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c75",
+                "offset": {
+                    "x": -7.5,
+                    "y": 0.0,
+                    "z": -16.0
+                }
             },
             "cubos::engine::Position": {
-                "x": 40,
-                "y": 0,
-                "z": -100
-            }
+                "x": -5,
+                "y": -5,
+                "z": -20
+            },
+            "cubos::engine::Scale": 0.5
         }
     }
 }
