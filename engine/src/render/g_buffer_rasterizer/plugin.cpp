@@ -17,6 +17,7 @@
 #include <cubos/engine/render/picker/picker.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
+#include <cubos/engine/render/voxels/grid.hpp>
 #include <cubos/engine/render/voxels/palette.hpp>
 #include <cubos/engine/render/voxels/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -144,7 +145,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
         .call([](State& state, const Window& window, const RenderMeshPool& pool, const RenderPalette& palette,
                  Assets& assets, Query<const LocalToWorld&, PerspectiveCamera&> perspectiveCameras,
                  Query<Entity, GBufferRasterizer&, GBuffer&, RenderDepth&, RenderPicker&> targets,
-                 Query<Entity, const LocalToWorld&, const RenderMesh&> meshes) {
+                 Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
 
             // Update the palette's data if necessary (if the asset handle changed or the asset itself was modified).
@@ -254,10 +255,11 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                     state.paletteBP->bind(state.paletteTexture);
 
                     // Iterate over all mesh buckets and issue draw calls.
-                    for (auto [meshEnt, meshLocalToWorld, mesh] : meshes)
+                    for (auto [meshEnt, meshLocalToWorld, mesh, grid] : meshes)
                     {
                         // Send the PerMesh data to the GPU.
-                        PerMesh perMesh{.model = meshLocalToWorld.mat, .picker = meshEnt.index};
+                        PerMesh perMesh{.model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset),
+                                        .picker = meshEnt.index};
                         state.perMeshCB->fill(&perMesh, sizeof(perMesh));
 
                         // Iterate over the buckets of the mesh (it may be split over many of them).
