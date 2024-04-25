@@ -1,6 +1,7 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/bloom/plugin.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/deferred_shading/plugin.hpp>
 #include <cubos/engine/render/depth/plugin.hpp>
@@ -54,6 +55,8 @@ int main()
     cubos.plugin(deferredShadingPlugin);
     cubos.plugin(toneMappingPlugin);
     cubos.plugin(splitScreenPlugin);
+    cubos.plugin(bloomPlugin);
+    cubos.tag(bloomTag).after(deferredShadingTag);
     /// [Adding the plugins]
 
     cubos.plugin(scenePlugin);
@@ -67,7 +70,7 @@ int main()
         .tagged(assetsTag)
         .call([](Commands commands, const Assets& assets, RenderPalette& palette, RenderEnvironment& environment) {
             palette.asset = PaletteAsset;
-            environment.ambient = {0.2F, 0.2F, 0.2F};
+            environment.ambient = {0.1F, 0.1F, 0.1F};
             environment.skyGradient[0] = {0.1F, 0.2F, 0.4F};
             environment.skyGradient[1] = {0.6F, 0.6F, 0.8F};
             commands.spawn(assets.read(SceneAsset)->blueprint);
