@@ -47,14 +47,13 @@ layout(std140) uniform PerScene
     vec4 ambientLight;
 
     // Lights data.
-    uint numDirectionalLights;
     DirectionalLight directionalLights[16];
-
-    uint numPointLights;
     PointLight pointLights[128];
-
-    uint numSpotLights;
     SpotLight spotLights[128];
+
+    uint numDirectionalLights;
+    uint numPointLights;
+    uint numSpotLights;
 };
 
 layout(location = 0) out vec3 color;
@@ -143,6 +142,6 @@ void main()
         {
             lighting += pointLightCalc(position, normal, pointLights[i]);
         }
-        color = min(albedo * lighting, 1.0);
+        color = albedo * lighting;
     }
 }

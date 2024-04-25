@@ -41,6 +41,7 @@ namespace
         glm::vec4 direction;
         glm::vec4 color;
         float intensity;
+        float padding[3];
     };
 
     struct PerPointLight
@@ -48,6 +49,7 @@ namespace
         glm::vec4 position;
         glm::vec4 color;
         float intensity;
+        float padding[3];
     };
 
     struct PerSpotLight
@@ -69,14 +71,13 @@ namespace
         glm::vec4 skyGradient[2];
         glm::vec4 ambientLight;
 
-        glm::uint numDirectionalLights{0};
         PerDirectionalLight directionalLights[16];
-
-        glm::uint numPointLights{0};
         PerPointLight pointLights[128];
-
-        glm::uint numSpotLights{0};
         PerSpotLight spotLights[128];
+
+        glm::uint numDirectionalLights{0};
+        glm::uint numPointLights{0};
+        glm::uint numSpotLights{0};
     };
 
     struct State
