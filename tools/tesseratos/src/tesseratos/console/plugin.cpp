@@ -185,6 +185,8 @@ void tesseratos::consolePlugin(Cubos& cubos)
                     continue;
                 }
                 break;
+            case cubos::core::Logger::Level::Off:
+                break;
             }
 
             if (searchString[0] != '\0' && e.message.find(searchString) == std::string::npos)
