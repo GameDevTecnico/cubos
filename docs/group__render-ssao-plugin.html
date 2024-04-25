@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tesseratos &raquo; World inspector module | CUBOS. Docs</title>
+  <title>Engine &raquo; Render &raquo; Screen Space Ambient Occlusion module | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,45 +46,68 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__tesseratos.html">Tesseratos</a> &raquo;</span>
-          World inspector <span class="m-thin">module</span></h1>
-        <p>Shows all of the entities in the world through a ImGui window, and allows selecting them.</p>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
+          Screen Space Ambient Occlusion <span class="m-thin">module</span></h1>
+        <p>Applies the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> technique on the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> and outputs the result to the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> texture.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md136">Dependencies</a></li>
+            <li><a href="#autotoc_md97">Dependencies</a></li>
             <li>
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-info"><h4>Note</h4><p>Selected entities are identified by the <a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> resource.</p></aside><section id="autotoc_md136"><h3><a href="#autotoc_md136">Dependencies</a></h3><ul><li><a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></li><li><a href="group__tesseratos-entity-selector-plugin.html" class="m-doc">Entity selector</a></li><li><a href="group__tesseratos-toolbox-plugin.html" class="m-doc">Toolbox</a></li></ul></section>
+<section id="autotoc_md97"><h3><a href="#autotoc_md97">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li><a href="group__render-shader-plugin.html" class="m-doc">Shader</a></li><li><a href="group__render-g-buffer-plugin.html" class="m-doc">G-Buffer</a></li><li><a href="group__render-camera-plugin.html" class="m-doc">Camera</a></li><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="tools_2tesseratos_2include_2tesseratos_2world__inspector_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dt>file <a href="engine_2include_2cubos_2engine_2render_2ssao_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
+            <dt>file <a href="ssao_8hpp.html" class="m-doc">ssao.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">cubos::<wbr />engine::<wbr />SSAO</a>.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">cubos::engine::SSAO</a>
+            </dt>
+            <dd>Component which stores the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> textures for a render target.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga4439dcbece3c73a5aa63e1fe38855c10" class="m-doc">worldInspectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#gab3973765cd0f7924d15e3faed10a30ee" class="m-doc">ssaoPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gaa81ad5c7548341a299db444222e23d67" class="m-doc">drawToSSAOTag</a>
+            </dt>
+            <dd>Tags the system which applies the Screen Space Ambient Occlusion technique.</dd>
+          </dl>
+        </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga4439dcbece3c73a5aa63e1fe38855c10"><div>
+          <section class="m-doc-details" id="gab3973765cd0f7924d15e3faed10a30ee"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga4439dcbece3c73a5aa63e1fe38855c10" class="m-doc-self">worldInspectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2include_2tesseratos_2world__inspector_2plugin_8hpp.html">&lt;tesseratos/world_inspector/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gab3973765cd0f7924d15e3faed10a30ee" class="m-doc-self">ssaoPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2ssao_2plugin_8hpp.html">&lt;engine/render/ssao/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -94,10 +117,20 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
+                  <td><strong>CUBOS</strong>. main class.</td>
                 </tr>
               </tbody>
             </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="gaa81ad5c7548341a299db444222e23d67"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gaa81ad5c7548341a299db444222e23d67" class="m-doc-self">drawToSSAOTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2ssao_2plugin_8hpp.html">&lt;engine/render/ssao/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Tags the system which applies the Screen Space Ambient Occlusion technique.</p>
           </div></section>
         </section>
       </div>

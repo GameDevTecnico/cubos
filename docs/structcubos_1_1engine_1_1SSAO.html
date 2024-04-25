@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tesseratos &raquo; World inspector module | CUBOS. Docs</title>
+  <title>cubos::engine::SSAO struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,59 +46,57 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__tesseratos.html">Tesseratos</a> &raquo;</span>
-          World inspector <span class="m-thin">module</span></h1>
-        <p>Shows all of the entities in the world through a ImGui window, and allows selecting them.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>SSAO <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ssao_8hpp.html">&lt;engine/render/ssao/ssao.hpp&gt;</a></div>
+        </h1>
+        <p>Component which stores the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> textures for a render target.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md136">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-info"><h4>Note</h4><p>Selected entities are identified by the <a href="structtesseratos_1_1EntitySelector.html" class="m-doc">EntitySelector</a> resource.</p></aside><section id="autotoc_md136"><h3><a href="#autotoc_md136">Dependencies</a></h3><ul><li><a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></li><li><a href="group__tesseratos-entity-selector-plugin.html" class="m-doc">Entity selector</a></li><li><a href="group__tesseratos-toolbox-plugin.html" class="m-doc">Toolbox</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="tools_2tesseratos_2include_2tesseratos_2world__inspector_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga4439dcbece3c73a5aa63e1fe38855c10" class="m-doc">worldInspectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span>
+            <dt id="af759c749700b1639096f56c792b09ad5">
+              glm::uvec2 <a href="#af759c749700b1639096f56c792b09ad5" class="m-doc-self">size</a>
             </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Size of the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> textures, in pixels.</dd>
+            <dt id="a28ad7aa4c9f22b35e747915a9bb6a36b">
+              int <a href="#a28ad7aa4c9f22b35e747915a9bb6a36b" class="m-doc-self">samples</a>
+            </dt>
+            <dd>Number of samples to use.</dd>
+            <dt id="aefda8a08425f20f3109d77176eb0dfac">
+              float <a href="#aefda8a08425f20f3109d77176eb0dfac" class="m-doc-self">radius</a>
+            </dt>
+            <dd>Radius parameter.</dd>
+            <dt id="a38b15f3dfbe037ac17e858296ef70328">
+              float <a href="#a38b15f3dfbe037ac17e858296ef70328" class="m-doc-self">bias</a>
+            </dt>
+            <dd>Bias parameter.</dd>
+            <dt id="acd71b0df81c9b719bd1963fc570eb824">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#acd71b0df81c9b719bd1963fc570eb824" class="m-doc-self">baseFramebuffer</a>
+            </dt>
+            <dd>Framebuffer used to draw to the base <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> texture.</dd>
+            <dt id="a9fe706719a0a9efad281b56a8eab14c5">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a9fe706719a0a9efad281b56a8eab14c5" class="m-doc-self">blurFramebuffer</a>
+            </dt>
+            <dd>Framebuffer used to draw to the base <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> texture.</dd>
+            <dt id="a5971aa194b6c245c983324b7b0778530">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a5971aa194b6c245c983324b7b0778530" class="m-doc-self">baseTexture</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> base texture.</dd>
+            <dt id="a7a971f268289e37a5c943cc4f9a9c293">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a7a971f268289e37a5c943cc4f9a9c293" class="m-doc-self">blurTexture</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> blurred texture.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga4439dcbece3c73a5aa63e1fe38855c10"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga4439dcbece3c73a5aa63e1fe38855c10" class="m-doc-self">worldInspectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2include_2tesseratos_2world__inspector_2plugin_8hpp.html">&lt;tesseratos/world_inspector/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
