@@ -50,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow toggling vSync through setting (**@RiscadoA**).
 - GBuffer Rasterizer plugin (#1062, **@RiscadoA**).
 - Deferred Shading plugin (#1086, **@RiscadoA**).
+- SSAO plugin (#1088, **@RiscadoA**).
 
 ### Changed
 

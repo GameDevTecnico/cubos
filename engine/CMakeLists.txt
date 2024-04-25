@@ -133,6 +133,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/mesh/task.cpp"
 	"src/render/g_buffer_rasterizer/plugin.cpp"
 	"src/render/g_buffer_rasterizer/g_buffer_rasterizer.cpp"
+	"src/render/ssao/plugin.cpp"
+	"src/render/ssao/ssao.cpp"
 	"src/render/deferred_shading/plugin.cpp"
 	"src/render/deferred_shading/deferred_shading.cpp"
 )
