@@ -34,13 +34,15 @@ void cubos::engine::hdrPlugin(Cubos& cubos)
                 {
                     hdr.size = target.size;
 
-                    // Recreate depth texture.
-                    hdr.texture = window->renderDevice().createTexture2D({
+                    // Recreate both textures.
+                    Texture2DDesc desc{
                         .width = hdr.size.x,
                         .height = hdr.size.y,
                         .usage = Usage::Dynamic,
                         .format = TextureFormat::RGB32Float,
-                    });
+                    };
+                    hdr.frontTexture = window->renderDevice().createTexture2D(desc);
+                    hdr.backTexture = window->renderDevice().createTexture2D(desc);
 
                     CUBOS_INFO("Resized HDR to {}x{}", hdr.size.x, hdr.size.y);
                 }

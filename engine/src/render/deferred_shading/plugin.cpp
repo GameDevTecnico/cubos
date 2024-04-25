@@ -168,16 +168,23 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     }
 
                     // Check if the HDR texture has changed.
-                    if (deferredShading.hdr != hdr.texture)
+                    if (deferredShading.frontHDR != hdr.frontTexture)
                     {
-                        // Create a new framebuffer for drawing to the new HDR texture.
+                        // It may have just been swapped by a post-processing effect.
+                        std::swap(deferredShading.frontFramebuffer, deferredShading.backFramebuffer);
+                        std::swap(deferredShading.frontHDR, deferredShading.backHDR);
+                    }
+                    if (deferredShading.frontHDR != hdr.frontTexture)
+                    {
+                        // Then the texture has really changed. Create a new framebuffer for drawing to the new HDR
+                        // texture.
                         FramebufferDesc desc{};
                         desc.targetCount = 1;
-                        desc.targets[0].setTexture2DTarget(hdr.texture);
-                        deferredShading.framebuffer = rd.createFramebuffer(desc);
-                        deferredShading.hdr = hdr.texture;
+                        desc.targets[0].setTexture2DTarget(hdr.frontTexture);
+                        deferredShading.frontFramebuffer = rd.createFramebuffer(desc);
+                        deferredShading.frontHDR = hdr.frontTexture;
 
-                        CUBOS_INFO("Recreated Deferred Shading framebuffer");
+                        CUBOS_INFO("Recreated Deferred Shading front framebuffer");
                     }
 
                     // Fill the PerScene constant buffer.
@@ -224,7 +231,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.perSceneCB->fill(&perScene, sizeof(PerScene));
 
                     // Draw the screen quad with the GBuffer textures.
-                    rd.setFramebuffer(deferredShading.framebuffer);
+                    rd.setFramebuffer(deferredShading.frontFramebuffer);
                     rd.setViewport(static_cast<int>(drawsTo.viewportOffset.x * float(gBuffer.size.x)),
                                    static_cast<int>(drawsTo.viewportOffset.y * float(gBuffer.size.y)),
                                    static_cast<int>(drawsTo.viewportSize.x * float(gBuffer.size.x)),
