@@ -17,7 +17,8 @@ namespace cubos::engine
     /// @brief Adds shader assets to @b CUBOS.
     ///
     /// ## Bridges
-    /// - @ref ShaderBridge - registered with the `.glsl` extension, loads @ref Shader assets.
+    /// - @ref ShaderBridge - registered with the `.vs` extension, loads Vertex @ref Shader assets.
+    /// - @ref ShaderBridge - registered with the `.fs` extension, loads Pixel @ref Shader assets.
     ///
     /// ## Dependencies
     /// - @ref assets-plugin
