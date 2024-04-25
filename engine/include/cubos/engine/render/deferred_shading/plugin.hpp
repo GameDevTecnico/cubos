@@ -8,7 +8,6 @@
 #pragma once
 
 #include <cubos/engine/prelude.hpp>
-#include <cubos/engine/render/tone_mapping/tone_mapping.hpp>
 
 namespace cubos::engine
 {
@@ -20,7 +19,7 @@ namespace cubos::engine
     /// ## Dependencies
     /// - @ref window-plugin
     /// - @ref assets-plugin
-    /// - @ref shader-plugin
+    /// - @ref render-shader-plugin
     /// - @ref render-g-buffer-plugin
     /// - @ref render-hdr-plugin
     /// - @ref render-camera-plugin
