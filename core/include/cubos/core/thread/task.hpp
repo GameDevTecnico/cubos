@@ -54,6 +54,7 @@ namespace cubos::core::thread
             mData = other.mData;
             std::unique_lock lock{mData->mMutex};
             mData->mRefCount += 1;
+            return *this;
         }
 
         /// @brief Move assigns.
@@ -63,6 +64,7 @@ namespace cubos::core::thread
             this->discard();
             mData = other.mData;
             other.mData = nullptr;
+            return *this;
         }
 
         /// @brief Finishes the task, setting its result and notifying a waiting thread.
