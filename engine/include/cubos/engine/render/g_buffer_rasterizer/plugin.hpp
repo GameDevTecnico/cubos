@@ -20,7 +20,7 @@ namespace cubos::engine
     /// - @ref window-plugin
     /// - @ref assets-plugin
     /// - @ref transform-plugin
-    /// - @ref shader-plugin
+    /// - @ref render-shader-plugin
     /// - @ref render-g-buffer-plugin
     /// - @ref render-depth-plugin
     /// - @ref render-picker-plugin

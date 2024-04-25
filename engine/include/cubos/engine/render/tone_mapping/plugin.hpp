@@ -19,7 +19,7 @@ namespace cubos::engine
     /// ## Dependencies
     /// - @ref window-plugin
     /// - @ref assets-plugin
-    /// - @ref shader-plugin
+    /// - @ref render-shader-plugin
     /// - @ref render-target-plugin
     /// - @ref render-hdr-plugin
 
