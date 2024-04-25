@@ -7,7 +7,6 @@
 #include <tesseratos/console/plugin.hpp>
 #include <tesseratos/toolbox/plugin.hpp>
 
-using cubos::core::ecs::Write;
 using cubos::engine::Cubos;
 
 using namespace tesseratos;
@@ -70,215 +69,218 @@ static ImVec4 levelToColor(cubos::core::Logger::Level level)
     }
 }
 
-static void console(Write<Mode> mode)
+void tesseratos::consolePlugin(Cubos& cubos)
 {
-    static char searchString[256];
+    cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(toolboxPlugin);
+    cubos.resource<Mode>();
 
-    ImGui::SetNextWindowSize(ImVec2(930, 310), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
-    ImGui::Begin("Console");
-
-    ImGui::Columns(2, "ConsoleLayout", true);
-
-    // Log Scrollable Window
-    ImGui::SetColumnWidth(0, ImGui::GetWindowWidth() * 0.8f);
-
-    std::size_t cursor = mode->prevCursor;
-    cubos::core::Logger::Entry entry;
-    std::vector<cubos::core::Logger::Entry> ui_entries;
-    cubos::core::Logger::Entry previousEntry;
-
-    // Counters for each log level
-    std::size_t traceCount = 0;
-    std::size_t debugCount = 0;
-    std::size_t infoCount = 0;
-    std::size_t warnCount = 0;
-    std::size_t errorCount = 0;
-    std::size_t criticalCount = 0;
-
-    ImGui::BeginChild("Log", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()));
-
-    while (cubos::core::Logger::read(cursor, entry))
-    {
-        ui_entries.push_back(entry);
-    }
-
-    if (mode->clearEnabled)
-    {
-        ui_entries.clear();
-        mode->clearEnabled = false;
-        mode->prevCursor = cursor;
-    }
-
-    std::size_t counter = 0;
-    bool isFirstEntry = true;
-    for (cubos::core::Logger::Entry& e : ui_entries)
-    {
-        switch (e.level)
+    cubos.system("show Logger UI").tagged(cubos::engine::imguiTag).call([](Toolbox& toolbox, Mode& mode) {
+        if (!toolbox.isOpen("Console"))
         {
-        case cubos::core::Logger::Level::Trace:
-            traceCount++;
-            break;
-        case cubos::core::Logger::Level::Debug:
-            debugCount++;
-            break;
-        case cubos::core::Logger::Level::Info:
-            infoCount++;
-            break;
-        case cubos::core::Logger::Level::Warn:
-            warnCount++;
-            break;
-        case cubos::core::Logger::Level::Error:
-            errorCount++;
-            break;
-        case cubos::core::Logger::Level::Critical:
-            criticalCount++;
-            break;
+            return;
         }
 
-        switch (e.level)
+        static char searchString[256];
+
+        ImGui::SetNextWindowSize(ImVec2(930, 310), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
+        ImGui::Begin("Console");
+
+        ImGui::Columns(2, "ConsoleLayout", true);
+
+        // Log Scrollable Window
+        ImGui::SetColumnWidth(0, ImGui::GetWindowWidth() * 0.8f);
+
+        std::size_t cursor = mode.prevCursor;
+        cubos::core::Logger::Entry entry;
+        std::vector<cubos::core::Logger::Entry> ui_entries;
+        cubos::core::Logger::Entry previousEntry;
+
+        // Counters for each log level
+        std::size_t traceCount = 0;
+        std::size_t debugCount = 0;
+        std::size_t infoCount = 0;
+        std::size_t warnCount = 0;
+        std::size_t errorCount = 0;
+        std::size_t criticalCount = 0;
+
+        ImGui::BeginChild("Log", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()));
+
+        while (cubos::core::Logger::read(cursor, entry))
         {
-        case cubos::core::Logger::Level::Trace:
-            if (!mode->traceEnabled)
-            {
-                continue;
-            }
-            break;
-        case cubos::core::Logger::Level::Debug:
-            if (!mode->debugEnabled)
-            {
-                continue;
-            }
-            break;
-        case cubos::core::Logger::Level::Info:
-            if (!mode->infoEnabled)
-            {
-                continue;
-            }
-            break;
-        case cubos::core::Logger::Level::Warn:
-            if (!mode->warnEnabled)
-            {
-                continue;
-            }
-            break;
-        case cubos::core::Logger::Level::Error:
-            if (!mode->errorEnabled)
-            {
-                continue;
-            }
-            break;
-        case cubos::core::Logger::Level::Critical:
-            if (!mode->criticalEnabled)
-            {
-                continue;
-            }
-            break;
+            ui_entries.push_back(entry);
         }
 
-        if (searchString[0] != '\0' && e.message.find(searchString) == std::string::npos)
+        if (mode.clearEnabled)
         {
-            continue;
+            ui_entries.clear();
+            mode.clearEnabled = false;
+            mode.prevCursor = cursor;
         }
 
-        if (mode->collapseEnabled)
+        std::size_t counter = 0;
+        bool isFirstEntry = true;
+        for (cubos::core::Logger::Entry& e : ui_entries)
         {
-            if (!isFirstEntry && previousEntry.message == e.message)
+            switch (e.level)
             {
-                counter++;
+            case cubos::core::Logger::Level::Trace:
+                traceCount++;
+                break;
+            case cubos::core::Logger::Level::Debug:
+                debugCount++;
+                break;
+            case cubos::core::Logger::Level::Info:
+                infoCount++;
+                break;
+            case cubos::core::Logger::Level::Warn:
+                warnCount++;
+                break;
+            case cubos::core::Logger::Level::Error:
+                errorCount++;
+                break;
+            case cubos::core::Logger::Level::Critical:
+                criticalCount++;
+                break;
+            }
+
+            switch (e.level)
+            {
+            case cubos::core::Logger::Level::Trace:
+                if (!mode.traceEnabled)
+                {
+                    continue;
+                }
+                break;
+            case cubos::core::Logger::Level::Debug:
+                if (!mode.debugEnabled)
+                {
+                    continue;
+                }
+                break;
+            case cubos::core::Logger::Level::Info:
+                if (!mode.infoEnabled)
+                {
+                    continue;
+                }
+                break;
+            case cubos::core::Logger::Level::Warn:
+                if (!mode.warnEnabled)
+                {
+                    continue;
+                }
+                break;
+            case cubos::core::Logger::Level::Error:
+                if (!mode.errorEnabled)
+                {
+                    continue;
+                }
+                break;
+            case cubos::core::Logger::Level::Critical:
+                if (!mode.criticalEnabled)
+                {
+                    continue;
+                }
+                break;
+            }
+
+            if (searchString[0] != '\0' && e.message.find(searchString) == std::string::npos)
+            {
                 continue;
+            }
+
+            if (mode.collapseEnabled)
+            {
+                if (!isFirstEntry && previousEntry.message == e.message)
+                {
+                    counter++;
+                    continue;
+                }
+                else
+                {
+                    if (!isFirstEntry && counter > 0)
+                    {
+                        ImGui::TextColored(levelToColor(previousEntry.level), "[%s] %s (x%zu)",
+                                           levelToString(previousEntry.level).c_str(), previousEntry.message.c_str(),
+                                           counter + 1);
+                        counter = 0;
+                    }
+                    else if (!isFirstEntry)
+                    {
+                        ImGui::TextColored(levelToColor(previousEntry.level), "[%s] %s",
+                                           levelToString(previousEntry.level).c_str(), previousEntry.message.c_str());
+                    }
+                }
+                previousEntry = e;
+                isFirstEntry = false;
             }
             else
             {
-                if (!isFirstEntry && counter > 0)
-                {
-                    ImGui::TextColored(levelToColor(previousEntry.level), "[%s] %s (x%zu)",
-                                       levelToString(previousEntry.level).c_str(), previousEntry.message.c_str(),
-                                       counter + 1);
-                    counter = 0;
-                }
-                else if (!isFirstEntry)
-                {
-                    ImGui::TextColored(levelToColor(previousEntry.level), "[%s] %s",
-                                       levelToString(previousEntry.level).c_str(), previousEntry.message.c_str());
-                }
+                ImGui::TextColored(levelToColor(e.level), "[%s] %s", levelToString(e.level).c_str(), e.message.c_str());
             }
-            previousEntry = e;
-            isFirstEntry = false;
         }
-        else
+
+        ImGui::EndChild();
+
+        // Input Search Bar
+        ImGui ::InputTextWithHint("##Search", "Filter Messages", searchString, sizeof(searchString));
+
+        ImGui::NextColumn();
+
+        ImGui::SetColumnWidth(1, 128);
+
+        // Clear Button
+        if (ImGui::SmallButton("Clear"))
         {
-            ImGui::TextColored(levelToColor(e.level), "[%s] %s", levelToString(e.level).c_str(), e.message.c_str());
+            mode.clearEnabled = true;
         }
-    }
 
-    ImGui::EndChild();
+        // Collapse Button
+        if (ImGui::SmallButton("Collapse"))
+        {
+            mode.collapseEnabled = !mode.collapseEnabled;
+        }
 
-    // Input Search Bar
-    ImGui ::InputTextWithHint("##Search", "Filter Messages", searchString, sizeof(searchString));
+        // Log Level Counters
+        // ImGui SELECTABLE
+        std::string traceText = "Trace (" + std::to_string(traceCount) + ")";
+        if (ImGui::SmallButton(traceText.c_str()))
+        {
+            mode.traceEnabled = !mode.traceEnabled;
+        }
 
-    ImGui::NextColumn();
+        std::string debugText = "Debug (" + std::to_string(debugCount) + ")";
+        if (ImGui::SmallButton(debugText.c_str()))
+        {
+            mode.debugEnabled = !mode.debugEnabled;
+        }
 
-    ImGui::SetColumnWidth(1, 128);
+        std::string infoText = "Info (" + std::to_string(infoCount) + ")";
+        if (ImGui::SmallButton(infoText.c_str()))
+        {
+            mode.infoEnabled = !mode.infoEnabled;
+        }
 
-    // Clear Button
-    if (ImGui::SmallButton("Clear"))
-    {
-        mode->clearEnabled = true;
-    }
+        std::string warnText = "Warn (" + std::to_string(warnCount) + ")";
+        if (ImGui::SmallButton(warnText.c_str()))
+        {
+            mode.warnEnabled = !mode.warnEnabled;
+        }
 
-    // Collapse Button
-    if (ImGui::SmallButton("Collapse"))
-    {
-        mode->collapseEnabled = !mode->collapseEnabled;
-    }
+        std::string errorText = "Error (" + std::to_string(errorCount) + ")";
+        if (ImGui::SmallButton(errorText.c_str()))
+        {
+        }
 
-    // Log Level Counters
-    // ImGui SELECTABLE
-    std::string traceText = "Trace (" + std::to_string(traceCount) + ")";
-    if (ImGui::SmallButton(traceText.c_str()))
-    {
-        mode->traceEnabled = !mode->traceEnabled;
-    }
+        std::string criticalText = "Critical (" + std::to_string(criticalCount) + ")";
+        if (ImGui::SmallButton(criticalText.c_str()))
+        {
+            mode.criticalEnabled = !mode.criticalEnabled;
+        }
 
-    std::string debugText = "Debug (" + std::to_string(debugCount) + ")";
-    if (ImGui::SmallButton(debugText.c_str()))
-    {
-        mode->debugEnabled = !mode->debugEnabled;
-    }
+        ImGui::Columns(1); // Reset columns
 
-    std::string infoText = "Info (" + std::to_string(infoCount) + ")";
-    if (ImGui::SmallButton(infoText.c_str()))
-    {
-        mode->infoEnabled = !mode->infoEnabled;
-    }
-
-    std::string warnText = "Warn (" + std::to_string(warnCount) + ")";
-    if (ImGui::SmallButton(warnText.c_str()))
-    {
-        mode->warnEnabled = !mode->warnEnabled;
-    }
-
-    std::string errorText = "Error (" + std::to_string(errorCount) + ")";
-    if (ImGui::SmallButton(errorText.c_str()))
-    {
-    }
-
-    std::string criticalText = "Critical (" + std::to_string(criticalCount) + ")";
-    if (ImGui::SmallButton(criticalText.c_str()))
-    {
-        mode->criticalEnabled = !mode->criticalEnabled;
-    }
-
-    ImGui::Columns(1); // Reset columns
-
-    ImGui::End();
-}
-
-void tesseratos::consolePlugin(Cubos& cubos)
-{
-    cubos.addPlugin(cubos::engine::imguiPlugin);
-    cubos.addResource<Mode>();
-    cubos.addPlugin(toolboxPlugin);
-    cubos.system(console).tagged("cubos.imgui");
+        ImGui::End();
+    });
 }
