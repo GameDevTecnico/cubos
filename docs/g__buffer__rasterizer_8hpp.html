@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::RenderPicker struct | CUBOS. Docs</title>
+  <title>engine/render/g_buffer_rasterizer/g_buffer_rasterizer.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,40 +46,37 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>RenderPicker <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="picker_8hpp.html">&lt;engine/render/picker/picker.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_13f5e2b140054f355a8f8a8c95923a6a.html">render</a>/</span><span class="m-breadcrumb"><a href="dir_cbbe2c367f05f2003d65e7dca7d78889.html">g_buffer_rasterizer</a>/</span>g_buffer_rasterizer.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Component which provides a texture to store entity/gizmo ids, for selection with a mouse.</p>
+        <p>Component <a href="structcubos_1_1engine_1_1GBufferRasterizer.html" class="m-doc">cubos::<wbr />engine::<wbr />GBufferRasterizer</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="a1bb465840d4f152532a3c2284e48bd89">
-              glm::uvec2 <a href="#a1bb465840d4f152532a3c2284e48bd89" class="m-doc-self">size</a>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1GBufferRasterizer.html" class="m-doc">cubos::engine::GBufferRasterizer</a>
             </dt>
-            <dd>Size of the <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> textures, in pixels.</dd>
-            <dt id="af52d9e069e24db8d26c74e916de695dc">
-              bool <a href="#af52d9e069e24db8d26c74e916de695dc" class="m-doc-self">cleared</a>
-            </dt>
-            <dd>Whether the <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> front texture has already been cleared this frame.</dd>
-            <dt id="adc912404e1ffd7a1ad3882424c713330">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#adc912404e1ffd7a1ad3882424c713330" class="m-doc-self">backTexture</a>
-            </dt>
-            <dd>Picking back texture, stores entity/gizmo ids for each pixel on the screen. Access to the picker results should be made through this texture, to ensure the CPU doesn&#x27;t wait for the current frame to finish.</dd>
-            <dt id="ac6ed243f78f8e176d961554c16803af0">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#ac6ed243f78f8e176d961554c16803af0" class="m-doc-self">frontTexture</a>
-            </dt>
-            <dd>Picking front texture, stores entity/gizmo ids for each pixel on the screen. This is the texture used by the renderer to write ids. It is automatically swapped with the back texture by the renderPickerPlugin.</dd>
+            <dd>Component which stores the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> rasterizer state.</dd>
           </dl>
         </section>
       </div>
