@@ -67,6 +67,11 @@
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a36e20e7da5d11e05e3c3a4c62f49dc28" class="m-doc">customConstruct</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args) -&gt; <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Constructs a value of the given type with the given arguments.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a38a2c6f7cd7e551f5aa5593da63af870" class="m-doc">defaultConstruct</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Default constructs a value with the given type.</dd>
@@ -93,6 +98,10 @@
               <span class="m-doc-wrap-bumper"><a href="#acbe724a5fe4976952e5866de0c6666ab" class="m-doc">AnyValue</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Move constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ab38fb0c296004a71ab8e7011a578df7f" class="m-doc">AnyValue</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Copy constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -122,6 +131,39 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a36e20e7da5d11e05e3c3a4c62f49dc28"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, typename... TArgs&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a> cubos::<wbr />core::<wbr />memory::<wbr />AnyValue::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a36e20e7da5d11e05e3c3a4c62f49dc28" class="m-doc-self">customConstruct</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Constructs a value of the given type with the given arguments.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Value type.</td>
+                </tr>
+                <tr>
+                  <td>TArgs</td>
+                  <td>Argument types.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>args</td>
+                  <td>Arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a38a2c6f7cd7e551f5aa5593da63af870"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a> cubos::<wbr />core::<wbr />memory::<wbr />AnyValue::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38a2c6f7cd7e551f5aa5593da63af870" class="m-doc-self">defaultConstruct</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) <span class="m-label m-success">noexcept</span></span></span>
@@ -209,6 +251,23 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />AnyValue::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acbe724a5fe4976952e5866de0c6666ab" class="m-doc-self">AnyValue</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Move constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab38fb0c296004a71ab8e7011a578df7f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />AnyValue::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab38fb0c296004a71ab8e7011a578df7f" class="m-doc-self">AnyValue</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Copy constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>

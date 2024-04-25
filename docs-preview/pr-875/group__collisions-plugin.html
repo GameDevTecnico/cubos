@@ -52,10 +52,9 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md59">Components</a></li>
-            <li><a href="#autotoc_md60">Events</a></li>
-            <li><a href="#autotoc_md61">Tags</a></li>
-            <li><a href="#autotoc_md62">Dependencies</a></li>
+            <li><a href="#autotoc_md70">Components</a></li>
+            <li><a href="#autotoc_md71">Events</a></li>
+            <li><a href="#autotoc_md72">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -66,14 +65,14 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md59"><h3><a href="#autotoc_md59">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> - holds the box collision shape.</li><li><a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> - holds the capsule collision shape.</li><li><a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> - holds collider data.</li></ul></section><section id="autotoc_md60"><h3><a href="#autotoc_md60">Events</a></h3><ul><li><a href="structcubos_1_1engine_1_1CollisionEvent.html" class="m-doc">CollisionEvent</a> - (TODO) emitted when a collision occurs.</li><li>TriggerEvent - (TODO) emitted when a trigger is entered or exited.</li></ul></section><section id="autotoc_md61"><h3><a href="#autotoc_md61">Tags</a></h3><ul><li><code>cubos.collisions.setup</code> - new colliders are setup.</li><li><code>cubos.collisions.broad</code> - broad phase candidate pairs are generated.</li></ul></section><section id="autotoc_md62"><h3><a href="#autotoc_md62">Dependencies</a></h3><ul><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li></ul></section>
+<section id="autotoc_md70"><h3><a href="#autotoc_md70">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> - holds the box collision shape.</li><li><a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> - holds the capsule collision shape.</li><li><a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> - holds collider data.</li></ul></section><section id="autotoc_md71"><h3><a href="#autotoc_md71">Events</a></h3><ul><li>CollisionEvent - (TODO) emitted when a collision occurs.</li><li>TriggerEvent - (TODO) emitted when a trigger is entered or exited.</li></ul></section><section id="autotoc_md72"><h3><a href="#autotoc_md72">Dependencies</a></h3><ul><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
             <dt>file <a href="collider_8hpp.html" class="m-doc">collider.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">cubos::<wbr />engine::<wbr />Collider</a>.</dd>
-            <dt>file <a href="collision__event_8hpp.html" class="m-doc">collision_event.hpp</a></dt>
-            <dd>Event <a href="structcubos_1_1engine_1_1CollisionEvent.html" class="m-doc">cubos::<wbr />engine::<wbr />CollisionEvent</a>.</dd>
+            <dt>file <a href="colliding__with_8hpp.html" class="m-doc">colliding_with.hpp</a></dt>
+            <dd>Relation <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">cubos::<wbr />engine::<wbr />CollidingWith</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2collisions_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2collisions_2shapes_2box_8hpp.html" class="m-doc">box.hpp</a></dt>
@@ -90,9 +89,9 @@
             </dt>
             <dd>Component which adds a collider to an entity.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1CollisionEvent.html" class="m-doc">cubos::engine::CollisionEvent</a>
+              struct <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">cubos::engine::CollidingWith</a>
             </dt>
-            <dd>Represents a collision event.</dd>
+            <dd>Relation which represents a collision.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">cubos::engine::BoxCollisionShape</a>
             </dt>
@@ -107,16 +106,16 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga9a5e69018500e5d53b1e3d61bb7985bf" class="m-doc">collisionsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#gaba0729a65395f1f505cf229d85c1c9b9" class="m-doc">collisionsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga9a5e69018500e5d53b1e3d61bb7985bf"><div>
+          <section class="m-doc-details" id="gaba0729a65395f1f505cf229d85c1c9b9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga9a5e69018500e5d53b1e3d61bb7985bf" class="m-doc-self">collisionsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaba0729a65395f1f505cf229d85c1c9b9" class="m-doc-self">collisionsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2collisions_2plugin_8hpp.html">&lt;engine/collisions/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>

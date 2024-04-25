@@ -65,17 +65,29 @@
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
+            <dt>file <a href="archetype__graph_8hpp.html" class="m-doc">archetype_graph.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />ArchetypeGraph</a>.</dd>
+            <dt>file <a href="archetype__id_8hpp.html" class="m-doc">archetype_id.hpp</a></dt>
+            <dd>Struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />ArchetypeId</a>.</dd>
             <dt>file <a href="entity_8hpp.html" class="m-doc">entity.hpp</a></dt>
             <dd>Struct <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a>.</dd>
             <dt>file <a href="hash_8hpp.html" class="m-doc">hash.hpp</a></dt>
             <dd>Struct <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EntityHash</a>.</dd>
-            <dt>file <a href="core_2include_2cubos_2core_2ecs_2entity_2manager_8hpp.html" class="m-doc">manager.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager</a>.</dd>
+            <dt>file <a href="core_2include_2cubos_2core_2ecs_2entity_2pool_8hpp.html" class="m-doc">pool.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1EntityPool.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />EntityPool</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">cubos::core::ecs::ArchetypeGraph</a>
+            </dt>
+            <dd>Stores which column types each archetype holds and the edges which connect them.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">cubos::core::ecs::ArchetypeId</a>
+            </dt>
+            <dd>Identifies an archetype.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::core::ecs::Entity</a>
             </dt>
@@ -85,9 +97,9 @@
             </dt>
             <dd>Used to hash <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> objects.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager.html" class="m-doc">cubos::core::ecs::EntityManager</a>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EntityPool.html" class="m-doc">cubos::core::ecs::EntityPool</a>
             </dt>
-            <dd>Internal type which holds and manages entities and their component masks.</dd>
+            <dd>Manages the creation and destruction of entity identifiers, as well as storing their archetype identifiers.</dd>
           </dl>
         </section>
       </div>

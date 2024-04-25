@@ -47,7 +47,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>VoxelPalette <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="palette_8hpp.html">&lt;engine/voxels/palette.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="voxels_2palette_8hpp.html">&lt;engine/voxels/palette.hpp&gt;</a></div>
         </h1>
         <p>Holds a palette of materials. Supports up to 65535 materials.</p>
         <nav class="m-block m-default">
@@ -132,6 +132,14 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a028dd60c7609726652a6fa5d542b88d5" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1engine_1_1VoxelPalette_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
             <dd>Returns an iterator to the last material.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a68edac47bf64b74a1b6761db4cb88594" class="m-doc">loadFrom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool</span>
+            </dt>
+            <dd>Loads the palette&#x27;s data from the given stream.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a23232e9a3a32ebfa4fdd2d0e0c89f82d" class="m-doc">writeTo</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) const -&gt; bool</span>
+            </dt>
+            <dd>Writes the palette&#x27;s data to the given stream.</dd>
           </dl>
         </section>
         <section>
@@ -353,6 +361,54 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a68edac47bf64b74a1b6761db4cb88594"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />VoxelPalette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68edac47bf64b74a1b6761db4cb88594" class="m-doc-self">loadFrom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream)</span></span>
+            </h3>
+            <p>Loads the palette&#x27;s data from the given stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stream</td>
+                  <td>Stream to read from.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the stream contained valid data.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Assumes the data is stored in big-endian (network byte order). The first bytes correspond to an uint16_t, which represents the number of materials in the palette. The next bytes correspond to <code>numMaterials * 4</code> floats (each material is represented by 4 floats (r, g, b, a)), which represents the actual palette data.</p>
+          </div></section>
+          <section class="m-doc-details" id="a23232e9a3a32ebfa4fdd2d0e0c89f82d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />VoxelPalette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23232e9a3a32ebfa4fdd2d0e0c89f82d" class="m-doc-self">writeTo</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) const</span></span>
+            </h3>
+            <p>Writes the palette&#x27;s data to the given stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stream</td>
+                  <td>Stream to write to.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the write was successful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Writes in the format specified in <a href="classcubos_1_1engine_1_1VoxelPalette.html#a68edac47bf64b74a1b6761db4cb88594" class="m-doc">loadFrom</a>.</p>
           </div></section>
         </section>
       </div>

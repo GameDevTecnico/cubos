@@ -56,12 +56,30 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-info"><h4>Note</h4><p>This component is written to by the <a href="group__transform-plugin.html" class="m-doc">transform plugin</a>, and it only makes sense to modify it manually if its not accompanied by the other transform components.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> Applies a translation to this matrix.</p><p><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> Applies a rotation to this matrix.</p><p><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> Applies a scaling to this matrix.</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p>This component is written to by the <a href="group__transform-plugin.html" class="m-doc">transform plugin</a>, thus it never makes sense to write to it manually.</p></aside><aside class="m-note m-default"><h4>See also</h4><p>The value is calculated from the <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> component and the parent&#x27;s <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a>, if there&#x27;s any.</p></aside>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ade0cc4828320042c2b4281fd39684956" class="m-doc">worldPosition</a>(</span><span class="m-doc-wrap">) const -&gt; glm::vec3</span>
+            </dt>
+            <dd>Gets global position of the entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1b695fe2e9f3d699f1984e2e49e452c4" class="m-doc">worldRotation</a>(</span><span class="m-doc-wrap">) const -&gt; glm::quat</span>
+            </dt>
+            <dd>Gets global rotation of the entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a25dfe6215c728bd4960afb9019343e14" class="m-doc">worldScale</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
+            </dt>
+            <dd>Gets global scale of the entity.</dd>
+          </dl>
+        </section>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
@@ -70,6 +88,51 @@
             </dt>
             <dd>Local to world space matrix.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ade0cc4828320042c2b4281fd39684956"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::vec3 cubos::<wbr />engine::<wbr />LocalToWorld::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ade0cc4828320042c2b4281fd39684956" class="m-doc-self">worldPosition</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets global position of the entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> vector in world space.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1b695fe2e9f3d699f1984e2e49e452c4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::quat cubos::<wbr />engine::<wbr />LocalToWorld::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b695fe2e9f3d699f1984e2e49e452c4" class="m-doc-self">worldRotation</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets global rotation of the entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> quaternion in world space.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a25dfe6215c728bd4960afb9019343e14"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float cubos::<wbr />engine::<wbr />LocalToWorld::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a25dfe6215c728bd4960afb9019343e14" class="m-doc-self">worldScale</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets global scale of the entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> value in world space.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

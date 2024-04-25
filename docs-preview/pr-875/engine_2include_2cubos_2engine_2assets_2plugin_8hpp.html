@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
@@ -74,9 +75,30 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__assets-plugin.html#gad4b3f1b0d0d3fa8c8951129860b5f0d1" class="m-doc">assetsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__assets-plugin.html#ga54060a0615c9d9248131073431910492" class="m-doc">assetsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="namespacecubos_1_1engine.html#ab465468d5eec626deed573dfa4e88381" class="m-doc">assetsInitTag</a>
+            </dt>
+            <dd>Initializes the assets manager and loads the meta files (after <a href="namespacecubos_1_1engine.html#a6a8999b41ddd30683eb9669015296699" class="m-doc">settingsTag</a>).</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="namespacecubos_1_1engine.html#ad6f405fae77b4b70574c8f3d2836b6b7" class="m-doc">assetsBridgeTag</a>
+            </dt>
+            <dd>Systems which add bridges to the asset manager should be tagged with this.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="namespacecubos_1_1engine.html#abe669b16cd12d813861ce950bd9df767" class="m-doc">assetsCleanupTag</a>
+            </dt>
+            <dd>Frees any assets no longer in use.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="namespacecubos_1_1engine.html#a94b258d6ee1c588f3ae6ffd0dff8eec8" class="m-doc">assetsTag</a>
+            </dt>
+            <dd>Startup systems which load assets should be tagged with this.</dd>
           </dl>
         </section>
       </div>

@@ -87,6 +87,10 @@
             </dt>
             <dd>Reserves space for at least <code>capacity</code> elements.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4c64b46ba44a0162336d3003a224ff78" class="m-doc">pushUninit</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Pushes an uninitialized element to the back of the vector.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a59eef702d9d8eeec7c4bd899ab25223c" class="m-doc">pushDefault</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Pushes a new default-constructed element to the back of the vector.</dd>
@@ -94,14 +98,37 @@
               <span class="m-doc-wrap-bumper">void <a href="#a8658c20373a33c05f6dc0b9b34576399" class="m-doc">pushCopy</a>(</span><span class="m-doc-wrap">const void* value)</span>
             </dt>
             <dd>Pushes a new copy-constructed element to the back of the vector.</dd>
-            <dt id="aafd49aade109794b17c533a93bbb99a1">
-              <span class="m-doc-wrap-bumper">void <a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc-self">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span>
             </dt>
             <dd>Pushes a new move-constructed element to the back of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#adbdaba90671bae31f5bdfb604ad312f4" class="m-doc">setDefault</a>(</span><span class="m-doc-wrap">std::size_t index)</span>
+            </dt>
+            <dd>Overwrites the element at the given index with a new default-constructed element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a56d841130ad8b7093447ecee68b89946" class="m-doc">setCopy</a>(</span><span class="m-doc-wrap">std::size_t index,
+              const void* value)</span>
+            </dt>
+            <dd>Overwrites the element at the given index with a new copy-constructed element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a80570f9e1293754b08767dce10cfdf1a" class="m-doc">setMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* value)</span>
+            </dt>
+            <dd>Overwrites the element at the given index with a new move-constructed element.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aab7d751cc75d24e9d545cc86cef85646" class="m-doc">pop</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Removes the last element from the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a49e6e9e0c3000729b5fa836e3f082eab" class="m-doc">swapErase</a>(</span><span class="m-doc-wrap">std::size_t index)</span>
+            </dt>
+            <dd>Removes the element at the given index from the vector, moving the last element to its place if it isn&#x27;t the last element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9b4fa3473e75dfa8d645511ee300e953" class="m-doc">swapMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* destination)</span>
+            </dt>
+            <dd>Moves the element at the given index from the vector into the given address, moving the last element to its place if it isn&#x27;t the last element.</dd>
             <dt id="a5ad818e13818cce38fd46d9843a3d947">
               <span class="m-doc-wrap-bumper">void <a href="#a5ad818e13818cce38fd46d9843a3d947" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -197,6 +224,13 @@
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>capacity</code> is less than <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#a1bd1bbd8bf47a3f21790f9d803100025" class="m-doc">size()</a>.</p></aside>
           </div></section>
+          <section class="m-doc-details" id="a4c64b46ba44a0162336d3003a224ff78"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c64b46ba44a0162336d3003a224ff78" class="m-doc-self">pushUninit</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Pushes an uninitialized element to the back of the vector.</p>
+<aside class="m-note m-danger"><h4>Warning</h4><p>Care must be taken to ensure that the constructor of the element is called before it is used or before the vector is destroyed, as the destructor will be called on it.</p></aside>
+          </div></section>
           <section class="m-doc-details" id="a59eef702d9d8eeec7c4bd899ab25223c"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59eef702d9d8eeec7c4bd899ab25223c" class="m-doc-self">pushDefault</a>(</span><span class="m-doc-wrap">)</span></span>
@@ -209,7 +243,99 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8658c20373a33c05f6dc0b9b34576399" class="m-doc-self">pushCopy</a>(</span><span class="m-doc-wrap">const void* value)</span></span>
             </h3>
             <p>Pushes a new copy-constructed element to the back of the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Element to copy.</td>
+                </tr>
+              </tbody>
+            </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not copy-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aafd49aade109794b17c533a93bbb99a1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc-self">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span></span>
+            </h3>
+            <p>Pushes a new move-constructed element to the back of the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Element to move.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adbdaba90671bae31f5bdfb604ad312f4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adbdaba90671bae31f5bdfb604ad312f4" class="m-doc-self">setDefault</a>(</span><span class="m-doc-wrap">std::size_t index)</span></span>
+            </h3>
+            <p>Overwrites the element at the given index with a new default-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not default-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a56d841130ad8b7093447ecee68b89946"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56d841130ad8b7093447ecee68b89946" class="m-doc-self">setCopy</a>(</span><span class="m-doc-wrap">std::size_t index,
+              const void* value)</span></span>
+            </h3>
+            <p>Overwrites the element at the given index with a new copy-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Element to copy.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not copy-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a80570f9e1293754b08767dce10cfdf1a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80570f9e1293754b08767dce10cfdf1a" class="m-doc-self">setMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* value)</span></span>
+            </h3>
+            <p>Overwrites the element at the given index with a new move-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Element to move.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not move-constructible.</p></aside>
           </div></section>
           <section class="m-doc-details" id="aab7d751cc75d24e9d545cc86cef85646"><div>
             <h3>
@@ -217,6 +343,47 @@
             </h3>
             <p>Removes the last element from the vector.</p>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if the vector is empty.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a49e6e9e0c3000729b5fa836e3f082eab"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a49e6e9e0c3000729b5fa836e3f082eab" class="m-doc-self">swapErase</a>(</span><span class="m-doc-wrap">std::size_t index)</span></span>
+            </h3>
+            <p>Removes the element at the given index from the vector, moving the last element to its place if it isn&#x27;t the last element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>index</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9b4fa3473e75dfa8d645511ee300e953"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b4fa3473e75dfa8d645511ee300e953" class="m-doc-self">swapMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* destination)</span></span>
+            </h3>
+            <p>Moves the element at the given index from the vector into the given address, moving the last element to its place if it isn&#x27;t the last element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+                <tr>
+                  <td>destination</td>
+                  <td>Address to move the element to.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>index</code> is out of bounds.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a71c8a345c8bf7d70999d375df0a832dc"><div>
             <h3>

@@ -62,7 +62,7 @@
             </li>
           </ul>
         </nav>
-<p>The core library contains loose utilities and functionality on which the rest of the <strong>CUBOS</strong>. libraries and applications are built on. Lives in the <a href="namespacecubos_1_1core.html" class="m-doc">cubos::<wbr />core</a> namespace.</p><p>This library can be further divided into modules, which are documented in their respective module pages. Each of these modules has its own namespace and directory in the source tree. For example, the <a href="group__core-ecs.html" class="m-doc">ECS</a> module lives in the <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::<wbr />core::<wbr />ecs</a> namespace.</p>
+<p>Macro used to export and import symbols from the library.</p><p>The core library contains loose utilities and functionality on which the rest of the <strong>CUBOS</strong>. libraries and applications are built on. Lives in the <a href="namespacecubos_1_1core.html" class="m-doc">cubos::<wbr />core</a> namespace.</p><p>This library can be further divided into modules, which are documented in their respective module pages. Each of these modules has its own namespace and directory in the source tree. For example, the <a href="group__core-ecs.html" class="m-doc">ECS</a> module lives in the <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::<wbr />core::<wbr />ecs</a> namespace.</p>
         <section id="groups">
           <h2><a href="#groups">Modules</a></h2>
           <dl class="m-doc">
@@ -71,7 +71,7 @@
             <dt>module <a href="group__core-data.html" class="m-doc">Data</a></dt>
             <dd>Provides filesystem and serialization utilities.</dd>
             <dt>module <a href="group__core-ecs.html" class="m-doc">ECS</a></dt>
-            <dd>Entity Component System library.</dd>
+            <dd>Entity Component <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> library.</dd>
             <dt>module <a href="group__core-geom.html" class="m-doc">Geometry</a></dt>
             <dd>Provides geometry utilities.</dd>
             <dt>module <a href="group__core-gl.html" class="m-doc">Graphics</a></dt>
@@ -82,15 +82,17 @@
             <dd>Provides a stream library and memory utilities.</dd>
             <dt>module <a href="group__core-reflection.html" class="m-doc">Reflection</a></dt>
             <dd>Provides utilities useful for handling type-erased data.</dd>
+            <dt>module <a href="group__core-thread.html" class="m-doc">Threading</a></dt>
+            <dd>Provides threading and asynchronous related utilities.</dd>
           </dl>
         </section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
+            <dt>file <a href="core_2include_2cubos_2core_2api_8hpp.html" class="m-doc">api.hpp</a></dt>
+            <dd>Macro <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a>.</dd>
             <dt>file <a href="log_8hpp.html" class="m-doc">log.hpp</a></dt>
             <dd>Logging and assertion macros.</dd>
-            <dt>file <a href="thread__pool_8hpp.html" class="m-doc">thread_pool.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">cubos::<wbr />core::<wbr />ThreadPool</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -100,10 +102,6 @@
               class <a href="classcubos_1_1core_1_1Logger.html" class="m-doc">cubos::core::Logger</a>
             </dt>
             <dd>Singleton which holds the logging state.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">cubos::core::ThreadPool</a>
-            </dt>
-            <dd>Manages a pool of threads, to which tasks can be submitted.</dd>
           </dl>
         </section>
         <section id="define-members">
@@ -187,6 +185,12 @@
               ...)</span>
             </dt>
             <dd>Asserts that a condition is true, aborting the program if it is not.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#gaf13ab8923b051abcc334b9f32453d02b" class="m-doc">CUBOS_ASSERT_IMP</a>(</span><span class="m-doc-wrap">cond,
+              cons,
+              ...)</span>
+            </dt>
+            <dd>Asserts that an implication is true, aborting the program if it is not.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="#ga604b5aae9d864dfd7b5afebbc914f696" class="m-doc">CUBOS_DEBUG_ASSERT</a>(</span><span class="m-doc-wrap">cond,
               ...)</span>
@@ -467,6 +471,34 @@
                 <tr>
                   <td style="width: 1%">cond</td>
                   <td>Condition to assert.</td>
+                </tr>
+                <tr>
+                  <td>...</td>
+                  <td>Optional format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gaf13ab8923b051abcc334b9f32453d02b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#gaf13ab8923b051abcc334b9f32453d02b" class="m-doc-self">CUBOS_ASSERT_IMP</a>(</span><span class="m-doc-wrap">cond,
+              cons,
+              ...)</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="log_8hpp.html">&lt;core/log.hpp&gt;</a></div>
+            </h3>
+            <p>Asserts that an implication is true, aborting the program if it is not.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cond</td>
+                  <td>Implication condition.</td>
+                </tr>
+                <tr>
+                  <td>cons</td>
+                  <td>Implication consequence.</td>
                 </tr>
                 <tr>
                   <td>...</td>

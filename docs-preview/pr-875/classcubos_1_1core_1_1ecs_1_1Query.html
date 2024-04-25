@@ -46,19 +46,19 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="query_8hpp.html">&lt;core/ecs/system/query.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="query_8hpp.html">&lt;core/ecs/system/arguments/query.hpp&gt;</a></div>
+          <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Query <span class="m-thin">class</span>
         </h1>
-        <p>System argument which holds the result of a query over all entities in world which match the given arguments.</p>
+        <p><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which holds the result of a query over all entities in world which match the given arguments.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td style="width: 1%">ComponentTypes</td>
-              <td>Component accessor types to be queried.</td>
+              <td style="width: 1%">Ts</td>
+              <td>Argument types.</td>
             </tr>
           </tbody>
         </table>
@@ -68,140 +68,153 @@
             <li>
               Reference
               <ul>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Read</span><span class="o">&lt;</span><span class="n">Velocity</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">OptWrite</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">OptRead</span><span class="o">&lt;</span><span class="n">Scale</span><span class="o">&gt;&gt;</span></pre><p>This query will return all entities with a <code>Position</code> and <code>Velocity</code> component. Accessors to <code>Rotation</code> and <code>Scale</code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, Read/OptRead should be used.</p>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html" class="m-doc">Iterator</a>
-            </dt>
-            <dd>Used to iterate over the results of a query.</dd>
-          </dl>
-        </section>
-        <section id="pub-static-methods">
-          <h2><a href="#pub-static-methods">Public static functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a115a884cac56ca2b3ff35f0713a4c782" class="m-doc">info</a>(</span><span class="m-doc-wrap">) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1QueryInfo.html" class="m-doc">QueryInfo</a></span>
-            </dt>
-            <dd>Gets information about the query.</dd>
-          </dl>
-        </section>
+<p>An example of a valid query is:</p><pre class="m-code"><span class="n">Query</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&amp;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Opt</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Scale</span><span class="o">&amp;&gt;&gt;</span></pre><p>This query will return all entities with a <code>Position</code> and <code>Velocity</code> component. Accessors to <code>Rotation</code> and <code>Scale</code> components are also passed but may be null if the component is not present in the entity. Whenever mutability is not needed, <code>const</code> should be used.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a53f19847f095ae24670b82c8216c8e34" class="m-doc">Query</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a8bb3e23e8e28bc804bcbed18c545b598" class="m-doc">Query</a>(</span><span class="m-doc-wrap">typename <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;::View view)</span>
             </dt>
-            <dd>Constructs a query over the given world.</dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a086fee27d32740033c0acf73eadced0c" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1c1939dc0f31116c569337116df344d9" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query.html#af1f7496cd6d49810626e626cb3921f43" class="m-doc">Iterator</a></span>
             </dt>
-            <dd>Gets an iterator to the first entity which matches the query.</dd>
+            <dd>Returns an iterator pointing to the first query match.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6dcc28104f32dd01d365d188e42f1ad4" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aad89c4ec9c11579c5af0d6ac60c6db05" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query.html#af1f7496cd6d49810626e626cb3921f43" class="m-doc">Iterator</a></span>
             </dt>
-            <dd>Gets an iterator to the end of the query.</dd>
+            <dd>Returns an out of bounds iterator representing the end of the query matches.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a38e77256516870800c1fd45e0fbf6d10" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; std::optional&lt;std::tuple&lt;ComponentTypes...&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa112d0599e3c7d463d946e2367c62f0a" class="m-doc">pin</a>(</span><span class="m-doc-wrap">int target,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a></span>
             </dt>
-            <dd>Accesses an entity&#x27;s components directly, without iterating over the query.</dd>
+            <dd>Returns a new query equal to this one but with the given target pinned to the given entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ace8ecfc0b95cb8d12e5beadec0988542" class="m-doc">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
+            </dt>
+            <dd>Accesses the match for the given entity, if there is one.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a313487ca184eb894a0d3e66ea786a9d0" class="m-doc">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> firstEntity,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> secondEntity) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
+            </dt>
+            <dd>Accesses the match for the given entities, if there is one.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a96f49fdc8a3b113fdda1a8e99791c5d6" class="m-doc">first</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt;</span>
+            </dt>
+            <dd>Returns the first match of the query, if there&#x27;s any.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a471bf29b16a0c590244d8664a6980e61" class="m-doc">empty</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Returns whether the query is empty.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a115a884cac56ca2b3ff35f0713a4c782"><div>
+          <section class="m-doc-details" id="a8bb3e23e8e28bc804bcbed18c545b598"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
+                template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1ecs_1_1QueryInfo.html" class="m-doc">QueryInfo</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;ComponentTypes&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a115a884cac56ca2b3ff35f0713a4c782" class="m-doc-self">info</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bb3e23e8e28bc804bcbed18c545b598" class="m-doc-self">Query</a>(</span><span class="m-doc-wrap">typename <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>&lt;Ts...&gt;::View view)</span></span>
             </h3>
-            <p>Gets information about the query.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> information.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a53f19847f095ae24670b82c8216c8e34"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;ComponentTypes&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a53f19847f095ae24670b82c8216c8e34" class="m-doc-self">Query</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world)</span></span>
-            </h3>
-            <p>Constructs a query over the given world.</p>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">world</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to query.</td>
+                  <td style="width: 1%">view</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> data view.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a086fee27d32740033c0acf73eadced0c"><div>
+          <section class="m-doc-details" id="a1c1939dc0f31116c569337116df344d9"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
+                template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;ComponentTypes&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a086fee27d32740033c0acf73eadced0c" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query.html#af1f7496cd6d49810626e626cb3921f43" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c1939dc0f31116c569337116df344d9" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Gets an iterator to the first entity which matches the query.</p>
+            <p>Returns an iterator pointing to the first query match.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                  <td>Iterator.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a6dcc28104f32dd01d365d188e42f1ad4"><div>
+          <section class="m-doc-details" id="aad89c4ec9c11579c5af0d6ac60c6db05"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
+                template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;ComponentTypes&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6dcc28104f32dd01d365d188e42f1ad4" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query.html#af1f7496cd6d49810626e626cb3921f43" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aad89c4ec9c11579c5af0d6ac60c6db05" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Gets an iterator to the end of the query.</p>
+            <p>Returns an out of bounds iterator representing the end of the query matches.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                  <td>Iterator.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a38e77256516870800c1fd45e0fbf6d10"><div>
+          <section class="m-doc-details" id="aa112d0599e3c7d463d946e2367c62f0a"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename... ComponentTypes&gt;
+                template&lt;typename... Ts&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::optional&lt;std::tuple&lt;ComponentTypes...&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;ComponentTypes&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38e77256516870800c1fd45e0fbf6d10" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa112d0599e3c7d463d946e2367c62f0a" class="m-doc-self">pin</a>(</span><span class="m-doc-wrap">int target,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
             </h3>
-            <p>Accesses an entity&#x27;s components directly, without iterating over the query.</p>
+            <p>Returns a new query equal to this one but with the given target pinned to the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Target index.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Effectively this filters out all matches where the given target isn&#x27;t the given entity.</p>
+          </div></section>
+          <section class="m-doc-details" id="ace8ecfc0b95cb8d12e5beadec0988542"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ace8ecfc0b95cb8d12e5beadec0988542" class="m-doc-self">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+            </h3>
+            <p>Accesses the match for the given entity, if there is one.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -209,13 +222,78 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to access.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Requested components, or std::nullopt if the entity does not match the query.</td>
+                  <td>Requested components, or nothing if the entity does not match the query.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a313487ca184eb894a0d3e66ea786a9d0"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a313487ca184eb894a0d3e66ea786a9d0" class="m-doc-self">at</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> firstEntity,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> secondEntity)</span></span>
+            </h3>
+            <p>Accesses the match for the given entities, if there is one.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">firstEntity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> for the first target.</td>
+                </tr>
+                <tr>
+                  <td>secondEntity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> for the second target.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Requested data, or nothing if the entities do not match the query.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a96f49fdc8a3b113fdda1a8e99791c5d6"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;std::tuple&lt;Ts...&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a96f49fdc8a3b113fdda1a8e99791c5d6" class="m-doc-self">first</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the first match of the query, if there&#x27;s any.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Requested data, or nothing if there are no matches.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a471bf29b16a0c590244d8664a6980e61"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename... Ts&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Query&lt;Ts&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a471bf29b16a0c590244d8664a6980e61" class="m-doc-self">empty</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns whether the query is empty.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if the query is empty, false otherwise.</td>
                 </tr>
               </tfoot>
             </table>

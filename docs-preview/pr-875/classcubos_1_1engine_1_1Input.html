@@ -150,6 +150,27 @@
             </dt>
             <dd>Handle a mouse button event.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aae7d64ee6a17aad2c0b7505d0f8b3504" class="m-doc">handle</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
+              const <a href="structcubos_1_1core_1_1io_1_1MouseMoveEvent.html" class="m-doc">core::<wbr />io::<wbr />MouseMoveEvent</a>&amp; event)</span>
+            </dt>
+            <dd>Handle a mouse movement event.</dd>
+            <dt id="a782b51ae71d9f3a8d0df2178d3801f8f">
+              <span class="m-doc-wrap-bumper">void <a href="#a782b51ae71d9f3a8d0df2178d3801f8f" class="m-doc-self">updateMouse</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Resets the previous mouse position to equal the current.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af0f3d64c07ce6d6e2702d569a3e61554" class="m-doc">mousePosition</a>(</span><span class="m-doc-wrap">) const -&gt; glm::ivec2</span>
+            </dt>
+            <dd>Gets the mouse position in screen space.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5a7f81b399fd690c8ef3a95ea8bc77df" class="m-doc">previousMousePosition</a>(</span><span class="m-doc-wrap">) const -&gt; glm::ivec2</span>
+            </dt>
+            <dd>Gets the mouse position in the previous frame in screen space.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a62f79b185b5bec7a5acf74c340c78a01" class="m-doc">mouseDelta</a>(</span><span class="m-doc-wrap">) const -&gt; glm::ivec2</span>
+            </dt>
+            <dd>Gets displacement of the mouse during the last frame, in screen space.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a5610ffedd14c53803167b97f3f016eb4" class="m-doc">pollGamepads</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window)</span>
             </dt>
             <dd>Polls the input state of the gamepads.</dd>
@@ -388,6 +409,70 @@
                   <td>Mouse button event.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aae7d64ee6a17aad2c0b7505d0f8b3504"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aae7d64ee6a17aad2c0b7505d0f8b3504" class="m-doc-self">handle</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
+              const <a href="structcubos_1_1core_1_1io_1_1MouseMoveEvent.html" class="m-doc">core::<wbr />io::<wbr />MouseMoveEvent</a>&amp; event)</span></span>
+            </h3>
+            <p>Handle a mouse movement event.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">window</td>
+                  <td>Window that received the event.</td>
+                </tr>
+                <tr>
+                  <td>event</td>
+                  <td>Mouse movement event.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af0f3d64c07ce6d6e2702d569a3e61554"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::ivec2 cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af0f3d64c07ce6d6e2702d569a3e61554" class="m-doc-self">mousePosition</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the mouse position in screen space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Mouse position.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5a7f81b399fd690c8ef3a95ea8bc77df"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::ivec2 cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5a7f81b399fd690c8ef3a95ea8bc77df" class="m-doc-self">previousMousePosition</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the mouse position in the previous frame in screen space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Mouse position in the previous frame.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a62f79b185b5bec7a5acf74c340c78a01"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::ivec2 cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a62f79b185b5bec7a5acf74c340c78a01" class="m-doc-self">mouseDelta</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets displacement of the mouse during the last frame, in screen space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Mouse displacement.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a5610ffedd14c53803167b97f3f016eb4"><div>

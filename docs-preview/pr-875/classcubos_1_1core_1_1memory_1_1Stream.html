@@ -53,7 +53,7 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md51">Motivation</a></li>
+            <li><a href="#autotoc_md64">Motivation</a></li>
             <li>
               Reference
               <ul>
@@ -65,7 +65,7 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md51"><h3><a href="#autotoc_md51">Motivation</a></h3><p>Why do we have our own streams? Well, the standard library streams are hard to use and extend, and very template heavy. Using our own streams allows us to abstract away more easily where the data is coming from, or going to, allowing us, for example, to embed files into the executable and not have to worry about the code that reads them.</p></section>
+<section id="autotoc_md64"><h3><a href="#autotoc_md64">Motivation</a></h3><p>Why do we have our own streams? Well, the standard library streams are hard to use and extend, and very template heavy. Using our own streams allows us to abstract away more easily where the data is coming from, or going to, allowing us, for example, to embed files into the executable and not have to worry about the code that reads them.</p></section>
         <section id="derived-classes">
           <h2><a href="#derived-classes">Derived classes</a></h2>
           <dl class="m-doc">
@@ -112,10 +112,6 @@
               <span class="m-doc-wrap-bumper"><a href="#afcc76e1e97383f75bf24f0656e235c99" class="m-doc-self">Stream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Move constructs.</dd>
-            <dt id="a2d15d5258bfcd87715b0f604b9ea142e">
-              <span class="m-doc-wrap-bumper"><a href="#a2d15d5258bfcd87715b0f604b9ea142e" class="m-doc-self">Stream</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd>Forbid copy construction.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper"><a href="#a1c345b2b25de134d6caec571d9de7119" class="m-doc">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; ::std::is_signed_v&lt;T&gt;) void print(T value</span>
@@ -654,7 +650,7 @@
                 </tr>
               </tbody>
             </table>
-<h5 id="autotoc_md52">Usage</h5><pre class="m-code"><span class="n">stream</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello, {}!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="p">);</span>
+<h5 id="autotoc_md65">Usage</h5><pre class="m-code"><span class="n">stream</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello, {}!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="p">);</span>
 <span class="n">stream</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;{} + {} = {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
 <span class="n">stream</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">{} {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// This will print &quot;{} 2&quot;</span></pre>
           </div></section>

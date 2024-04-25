@@ -52,10 +52,9 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md76">Resources</a></li>
-            <li><a href="#autotoc_md77">Components</a></li>
-            <li><a href="#autotoc_md78">Tags</a></li>
-            <li><a href="#autotoc_md79">Dependencies</a></li>
+            <li><a href="#autotoc_md82">Resources</a></li>
+            <li><a href="#autotoc_md83">Components</a></li>
+            <li><a href="#autotoc_md84">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -67,12 +66,14 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the examples-engine-physics example for a demonstration of this plugin.</p></aside><section id="autotoc_md76"><h3><a href="#autotoc_md76">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li><li>PhysicsAccumulator - holds the progress to the next integration.</li><li><a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> - holds the damping value for integration.</li><li><a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a> - holds the amount of substeps for the physics update.</li></ul></section><section id="autotoc_md77"><h3><a href="#autotoc_md77">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">PhysicsVelocity</a> - holds the information for moving an object straight.</li><li><a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">PhysicsMass</a> - holds the mass of an object.</li><li><a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a> - holds the previous position of the entity in a substep.</li><li><a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> - holds the corrections accumulated from the constraints solving.</li></ul></section><section id="autotoc_md78"><h3><a href="#autotoc_md78">Tags</a></h3><ul><li><code>cubos.physics.apply_forces</code></li></ul></section><section id="autotoc_md79"><h3><a href="#autotoc_md79">Dependencies</a></h3><ul><li><a href="group__physics-gravity-plugin.html" class="m-doc">Gravity</a></li></ul></section>
+<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the examples-engine-physics example for a demonstration of this plugin.</p></aside><section id="autotoc_md82"><h3><a href="#autotoc_md82">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> - holds the damping value for integration.</li><li><a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a> - holds the amount of substeps for the physics update.</li></ul></section><section id="autotoc_md83"><h3><a href="#autotoc_md83">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">PhysicsBundle</a> - bundle that holds the physics information to give to a new entity.</li><li><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a> - holds the information for moving an object straight.</li><li><a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a> - holds forces applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a> - holds impulses applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> - holds the mass of an object.</li><li><a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a> - holds the previous position of the entity in a substep.</li><li><a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> - holds the corrections accumulated from the constraints solving.</li></ul></section><section id="autotoc_md84"><h3><a href="#autotoc_md84">Dependencies</a></h3><ul><li><a href="group__physics-gravity-plugin.html" class="m-doc">Gravity</a></li></ul></section>
         <section id="groups">
           <h2><a href="#groups">Modules</a></h2>
           <dl class="m-doc">
             <dt>module <a href="group__physics-gravity-plugin.html" class="m-doc">Gravity</a></dt>
             <dd>Adds gravity to particles.</dd>
+            <dt>module <a href="group__physics-solver-plugin.html" class="m-doc">Solver</a></dt>
+            <dd>Adds solver for constraints.</dd>
           </dl>
         </section>
         <section id="files">
@@ -80,18 +81,22 @@
           <dl class="m-doc">
             <dt>file <a href="accumulated__correction_8hpp.html" class="m-doc">accumulated_correction.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">cubos::<wbr />engine::<wbr />AccumulatedCorrection</a>.</dd>
-            <dt>file <a href="physics__mass_8hpp.html" class="m-doc">physics_mass.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">cubos::<wbr />engine::<wbr />PhysicsMass</a>.</dd>
-            <dt>file <a href="physics__velocity_8hpp.html" class="m-doc">physics_velocity.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">cubos::<wbr />engine::<wbr />PhysicsVelocity</a>.</dd>
+            <dt>file <a href="force_8hpp.html" class="m-doc">force.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1Force.html" class="m-doc">cubos::<wbr />engine::<wbr />Force</a>.</dd>
+            <dt>file <a href="impulse_8hpp.html" class="m-doc">impulse.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1Force.html" class="m-doc">cubos::<wbr />engine::<wbr />Force</a>.</dd>
+            <dt>file <a href="mass_8hpp.html" class="m-doc">mass.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">cubos::<wbr />engine::<wbr />Mass</a>.</dd>
             <dt>file <a href="previous__position_8hpp.html" class="m-doc">previous_position.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">cubos::<wbr />engine::<wbr />PreviousPosition</a>.</dd>
+            <dt>file <a href="velocity_8hpp.html" class="m-doc">velocity.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">cubos::<wbr />engine::<wbr />Velocity</a>.</dd>
+            <dt>file <a href="physics__bundle_8hpp.html" class="m-doc">physics_bundle.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">cubos::<wbr />engine::<wbr />PhysicsBundle</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2physics_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
             <dt>file <a href="damping_8hpp.html" class="m-doc">damping.hpp</a></dt>
             <dd>Resource <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">cubos::<wbr />engine::<wbr />Damping</a>.</dd>
-            <dt>file <a href="fixed__delta__time_8hpp.html" class="m-doc">fixed_delta_time.hpp</a></dt>
-            <dd>Resource <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::<wbr />engine::<wbr />FixedDeltaTime</a>.</dd>
             <dt>file <a href="resources_2gravity_8hpp.html" class="m-doc">gravity.hpp</a></dt>
             <dd>Resource <a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">cubos::<wbr />engine::<wbr />Gravity</a>.</dd>
             <dt>file <a href="substeps_8hpp.html" class="m-doc">substeps.hpp</a></dt>
@@ -106,49 +111,57 @@
             </dt>
             <dd>Component which holds the corrections accumulated from the constraints solving.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">cubos::engine::PhysicsMass</a>
+              struct <a href="structcubos_1_1engine_1_1Force.html" class="m-doc">cubos::engine::Force</a>
+            </dt>
+            <dd>Component which holds forces applied on a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">cubos::engine::Impulse</a>
+            </dt>
+            <dd>Component which holds impulses applied on a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">cubos::engine::Mass</a>
             </dt>
             <dd>Component which defines the mass of a particle.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">cubos::engine::PhysicsVelocity</a>
-            </dt>
-            <dd>Component which holds velocity and forces applied on a particle.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">cubos::engine::PreviousPosition</a>
             </dt>
             <dd>Component which holds the previous position of the entity. Used for the integrator on the update velocity step.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">cubos::engine::Velocity</a>
+            </dt>
+            <dd>Component which holds velocity and forces applied on a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">cubos::engine::PhysicsBundle</a>
+            </dt>
+            <dd>Component which encapsulates the creation all components required for physics.</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">cubos::engine::Damping</a>
             </dt>
             <dd>Resource which holds the damping value for integration.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::engine::FixedDeltaTime</a>
-            </dt>
-            <dd>Resouce which holds the value of the fixed delta for the physics update.</dd>
-            <dt>
               struct <a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">cubos::engine::Gravity</a>
             </dt>
-            <dd>Resouce which holds the global value of gravity.</dd>
+            <dd>Resource which holds the global value of gravity.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">cubos::engine::Substeps</a>
             </dt>
-            <dd>Resouce which holds the amount of substeps for the physics update.</dd>
+            <dd>Resource which holds the amount of substeps for the physics update.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga007d2fbda4c9e539aa45f5f888163b4f" class="m-doc">physicsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga00def8619be17481204ec8e876ea9e3e" class="m-doc">physicsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga007d2fbda4c9e539aa45f5f888163b4f"><div>
+          <section class="m-doc-details" id="ga00def8619be17481204ec8e876ea9e3e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga007d2fbda4c9e539aa45f5f888163b4f" class="m-doc-self">physicsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga00def8619be17481204ec8e876ea9e3e" class="m-doc-self">physicsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2physics_2plugin_8hpp.html">&lt;engine/physics/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>

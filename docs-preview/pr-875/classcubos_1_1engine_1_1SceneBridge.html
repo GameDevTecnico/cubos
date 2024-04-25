@@ -92,7 +92,8 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a0f9a0bddb2a63d2c781212cf6a56fd2a" class="m-doc">SceneBridge</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a> components)</span>
+              <span class="m-doc-wrap-bumper"><a href="#a0c0f7cc128eac6506d9d33883bd47978" class="m-doc">SceneBridge</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a> components,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a> relations)</span>
             </dt>
             <dd>Constructs a bridge.</dd>
           </dl>
@@ -104,6 +105,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aeb064ca7c94a7df32cc1b9c6aa3daf86" class="m-doc">components</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a>&amp;</span>
             </dt>
             <dd>Returns the type registry used to deserialize components.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9ff119539331ddf798601f4549dd0641" class="m-doc">relations</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a>&amp;</span>
+            </dt>
+            <dd>Returns the type registry used to deserialize relations.</dd>
           </dl>
         </section>
         <section id="pro-methods">
@@ -125,9 +130,10 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a0f9a0bddb2a63d2c781212cf6a56fd2a"><div>
+          <section class="m-doc-details" id="a0c0f7cc128eac6506d9d33883bd47978"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />SceneBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f9a0bddb2a63d2c781212cf6a56fd2a" class="m-doc-self">SceneBridge</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a> components)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />SceneBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c0f7cc128eac6506d9d33883bd47978" class="m-doc-self">SceneBridge</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a> components,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a> relations)</span></span>
             </h3>
             <p>Constructs a bridge.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -138,6 +144,10 @@
                 <tr>
                   <td style="width: 1%">components</td>
                   <td>Component type registry.</td>
+                </tr>
+                <tr>
+                  <td>relations</td>
+                  <td>Relation type registry.</td>
                 </tr>
               </tbody>
             </table>
@@ -152,6 +162,20 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Component type registry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9ff119539331ddf798601f4549dd0641"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a>&amp; cubos::<wbr />engine::<wbr />SceneBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ff119539331ddf798601f4549dd0641" class="m-doc-self">relations</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the type registry used to deserialize relations.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Relations type registry.</td>
                 </tr>
               </tfoot>
             </table>
