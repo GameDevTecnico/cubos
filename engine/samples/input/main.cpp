@@ -47,6 +47,27 @@ static void showcaseXZ(const Input& input, bool& explained)
         CUBOS_INFO("X or Z");
     }
 }
+
+static void showcaseJustXZ(const Input& input, bool& explained)
+{
+    if (!explained)
+    {
+        CUBOS_WARN("This showcase will print `justPressed X or Z` when either X or Z is justPressed and `justReleased "
+                   "X or Z when either X or Z is justReleased`. Press Enter to advance to the "
+                   "next showcase.");
+        explained = true;
+    }
+
+    if (input.justPressed("x-or-z"))
+    {
+        CUBOS_INFO("justPressed X or Z");
+    }
+    if (input.justReleased("x-or-z"))
+    {
+        CUBOS_INFO("justReleased X or Z");
+    }
+}
+
 /// [Showcase Action Press]
 
 /// [Showcase Modifier]
@@ -217,16 +238,18 @@ int main()
             case 1:
                 return showcaseXZ(input, state.explained);
             case 2:
-                return showcaseModifiers(input, state.explained);
+                return showcaseJustXZ(input, state.explained);
             case 3:
-                return showcaseMultipleModifiers(input, state.explained);
+                return showcaseModifiers(input, state.explained);
             case 4:
-                return showcaseAxis(input, state.explained);
+                return showcaseMultipleModifiers(input, state.explained);
             case 5:
-                return showcaseModifierAxis(input, state.explained);
+                return showcaseAxis(input, state.explained);
             case 6:
-                return showcaseUnbound(window, state.explained);
+                return showcaseModifierAxis(input, state.explained);
             case 7:
+                return showcaseUnbound(window, state.explained);
+            case 8:
                 return showcaseMouseButtons(input, state.explained);
             default:
                 shouldQuit.value = true;

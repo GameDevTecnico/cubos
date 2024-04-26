@@ -96,6 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Collider gizmos plugin, used to view collision shapes (**@RiscadoA**).
 - Delta Time multiplier, can be used to adjust simulation speed (#866, **@RiscadoA**).
 - Collision Solver plugin (#532, **@fallenatlas**).
+- Allow detecting rising/falling edges on Input actions (#958, **@diogomsmiranda**).
 
 ### Changed
 

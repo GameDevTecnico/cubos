@@ -28,6 +28,7 @@ void cubos::engine::inputPlugin(Cubos& cubos)
         .after(windowPollTag)
         .call([](const Window& window, Input& input, EventReader<WindowEvent> events) {
             input.updateMouse();
+            input.updateActions();
 
             for (auto event : events)
             {

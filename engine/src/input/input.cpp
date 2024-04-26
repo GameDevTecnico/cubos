@@ -160,6 +160,44 @@ bool Input::pressed(const char* actionName, int player) const
     return aIt->second.pressed();
 }
 
+bool Input::justPressed(const char* actionName, int player) const
+{
+    auto pIt = mPlayerBindings.find(player);
+    if (pIt == mPlayerBindings.end())
+    {
+        CUBOS_WARN("Player {} does not have any associated input bindings", player);
+        return false;
+    }
+
+    auto aIt = pIt->second.actions().find(actionName);
+    if (aIt == pIt->second.actions().end())
+    {
+        CUBOS_WARN("Action {} is not bound to any input for player {}", actionName, player);
+        return false;
+    }
+
+    return aIt->second.justPressed();
+}
+
+bool Input::justReleased(const char* actionName, int player) const
+{
+    auto pIt = mPlayerBindings.find(player);
+    if (pIt == mPlayerBindings.end())
+    {
+        CUBOS_WARN("Player {} does not have any associated input bindings", player);
+        return false;
+    }
+
+    auto aIt = pIt->second.actions().find(actionName);
+    if (aIt == pIt->second.actions().end())
+    {
+        CUBOS_WARN("Action {} is not bound to any input for player {}", actionName, player);
+        return false;
+    }
+
+    return aIt->second.justReleased();
+}
+
 float Input::axis(const char* axisName, int player) const
 {
     auto pIt = mPlayerBindings.find(player);
@@ -237,6 +275,17 @@ void Input::handleActions(const Window& window, const std::vector<BindingIndex>&
         {
             action.pressed(pressed);
             CUBOS_TRACE("Action {} was {}", boundAction.name, pressed ? "pressed" : "released");
+
+            if (pressed)
+            {
+                action.justPressed(true);
+                action.justReleased(false);
+            }
+            else
+            {
+                action.justReleased(true);
+                action.justPressed(false);
+            }
         }
     }
 }
@@ -322,6 +371,18 @@ void Input::handle(const Window& /*unused*/, const MouseMoveEvent& event)
 void Input::updateMouse()
 {
     mPreviousMousePosition = mMousePosition;
+}
+
+void Input::updateActions()
+{
+    for (auto& [_, bindings] : mPlayerBindings)
+    {
+        for (auto& [_, action] : bindings.actions())
+        {
+            action.justPressed(false);
+            action.justReleased(false);
+        }
+    }
 }
 
 glm::ivec2 Input::mousePosition() const
