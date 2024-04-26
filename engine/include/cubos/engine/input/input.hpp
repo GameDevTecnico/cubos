@@ -66,6 +66,18 @@ namespace cubos::engine
         /// @return Whether the action exists and is pressed.
         bool pressed(const char* actionName, int player = 0) const;
 
+        /// @brief Gets an action state for a specific player.
+        /// @param actionName Name of the action.
+        /// @param player Player whose action state will be retrieved.
+        /// @return Whether the action exists and was just pressed.
+        bool justPressed(const char* actionName, int player = 0) const;
+
+        /// @brief Gets an action state for a specific player.
+        /// @param actionName Name of the action.
+        /// @param player Player whose action state will be retrieved.
+        /// @return Whether the action exists and was just released.
+        bool justReleased(const char* actionName, int player = 0) const;
+
         /// @brief Gets an axis value for a specific player.
         /// @param axisName Name of the axis.
         /// @param player Player whose axis value will be retrieved.
@@ -94,6 +106,9 @@ namespace cubos::engine
 
         /// @brief Resets the previous mouse position to equal the current.
         void updateMouse();
+
+        /// @brief Reset the previous Action justPressed and justReleased states.
+        void updateActions();
 
         /// @brief Gets the mouse position in screen space.
         /// @return Mouse position.

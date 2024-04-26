@@ -49,12 +49,32 @@ std::vector<MouseButton>& InputAction::mouseButtons()
     return mMouseButtons;
 }
 
+void InputAction::pressed(bool pressed)
+{
+    mPressed = pressed;
+}
+
+void InputAction::justPressed(bool justPressed)
+{
+    mJustPressed = justPressed;
+}
+
+void InputAction::justReleased(bool justReleased)
+{
+    mJustReleased = justReleased;
+}
+
 bool InputAction::pressed() const
 {
     return mPressed;
 }
 
-void InputAction::pressed(bool pressed)
+bool InputAction::justPressed() const
 {
-    mPressed = pressed;
+    return mJustPressed;
+}
+
+bool InputAction::justReleased() const
+{
+    return mJustReleased;
 }

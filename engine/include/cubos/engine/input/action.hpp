@@ -70,15 +70,33 @@ namespace cubos::engine
         /// @return Whether this action is pressed.
         bool pressed() const;
 
+        /// @brief Checks if this action was just pressed.
+        /// @return Whether this action was just pressed.
+        bool justPressed() const;
+
+        /// @brief Checks if this action was just released.
+        /// @return Whether this action was just released.
+        bool justReleased() const;
+
         /// @brief Sets whether this action is pressed.
         /// @param pressed New pressed state.
         void pressed(bool pressed);
+
+        /// @brief Checks if this action was just pressed.
+        /// @param justPressed Whether this action was just pressed.
+        void justPressed(bool justPressed);
+
+        /// @brief Checks if this accion was just released.
+        /// @param justReleased Whether this action was just released.
+        void justReleased(bool justReleased);
 
     private:
         std::vector<core::io::KeyWithModifiers> mKeys;
         std::vector<core::io::GamepadButton> mGamepadButtons;
         std::vector<core::io::MouseButton> mMouseButtons;
 
-        bool mPressed; ///< Not serialized.
+        bool mPressed;      ///< Not serialized.
+        bool mJustPressed;  ///< Not serialized.
+        bool mJustReleased; ///< Not serialized;
     };
 } // namespace cubos::engine
