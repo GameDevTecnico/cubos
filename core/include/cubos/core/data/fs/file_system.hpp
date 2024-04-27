@@ -18,7 +18,7 @@ namespace cubos::core::data
     ///
     /// @see File
     /// @ingroup core-data-fs
-    class CUBOS_CORE_API FileSystem final
+    class FileSystem final
     {
     public:
         FileSystem() = delete;
@@ -131,5 +131,17 @@ namespace cubos::core::data
         /// @param destinationPath Absolute path of the destination file.
         /// @return Whether the file was successfully copied.
         static bool copy(std::string_view sourcePath, std::string_view destinationPath);
+
+        /// @brief Moves or renames a file from the source path to the destination path.
+        ///
+        /// This method moves a file to a new location within the virtual file system. It allows you to either rename a
+        /// file or move it to a new directory. This uses the copy-then-delete mechanism.
+        ///
+        /// @note The source file needs to exist.
+        ///
+        /// @param sourcePath Absolute path of the source file to be moved.
+        /// @param destinationPath Absolute path where the source file should be moved.
+        /// @return Whether the file was successfully moved.
+        static bool move(std::string_view sourcePath, std::string_view destinationPath);
     };
 } // namespace cubos::core::data

@@ -151,3 +151,33 @@ bool FileSystem::copy(std::string_view sourcePath, std::string_view destinationP
 
     return true;
 }
+
+bool FileSystem::move(std::string_view sourcePath, std::string_view destinationPath)
+{
+    if (FileSystem::find(destinationPath) == nullptr)
+    {
+        CUBOS_ERROR("File destination {} already exists, can not move", destinationPath);
+        return false;
+    }
+
+    auto file = FileSystem::find(sourcePath);
+    if (file == nullptr)
+    {
+        CUBOS_ERROR("Could not find file {} for moving", sourcePath);
+        return false;
+    }
+
+    if (!FileSystem::copy(sourcePath, destinationPath))
+    {
+        CUBOS_ERROR("Could not copy file {} to {} for moving", sourcePath, destinationPath);
+        return false;
+    }
+
+    if (!file->destroy())
+    {
+        CUBOS_ERROR("Could not destroy file {} after moving", sourcePath, destinationPath);
+        return false;
+    }
+
+    return true;
+}
