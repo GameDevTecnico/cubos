@@ -253,7 +253,8 @@ TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
                 return 5;
             }
 
-            REQUIRE(name == "newbaz");
+            auto correctName = name == "newbaz" || name == "qux_moved";
+            REQUIRE(correctName);
             REQUIRE(parent == 2);
             REQUIRE_FALSE(directory);
             children[2] = 6;
@@ -364,6 +365,10 @@ TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
                 fillFileBuffers = true;
             }
 
+            // Test move files
+            REQUIRE_FALSE(FileSystem::move("/dir/sub/arc/bar/newfiledoesntmatter", "/dir/sub/arc/bar/newbaz"));
+            REQUIRE_FALSE(FileSystem::move("/dir/sub/arc/bar/nonexistent", "/dir/sub/arc/bar/newfiledoesntmatter"));
+
             // Cannot create a file with an invalid path.
             REQUIRE(bar->create("/qux", false) == nullptr);
 
@@ -372,6 +377,11 @@ TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
 
             // Check that "qux" was created correctly.
             auto qux = FileSystem::find("/dir/sub/arc/bar/qux");
+
+            // move and move back
+            REQUIRE(FileSystem::move("/dir/sub/arc/bar/qux", "/dir/sub/arc/bar/qux_moved"));
+            REQUIRE(FileSystem::move("/dir/sub/arc/bar/qux_moved", "/dir/sub/arc/bar/qux"));
+
             REQUIRE(qux != nullptr);
             REQUIRE(qux->name() == "qux");
             REQUIRE(qux->path() == "/dir/sub/arc/bar/qux");
