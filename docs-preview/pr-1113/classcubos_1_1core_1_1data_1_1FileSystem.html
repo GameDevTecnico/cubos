@@ -101,6 +101,11 @@
               std::string_view destinationPath) -&gt; bool</span>
             </dt>
             <dd>Copies a file from the source path to the destination path.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#af338960b7a4c255427e3a51a612d878f" class="m-doc">move</a>(</span><span class="m-doc-wrap">std::string_view sourcePath,
+              std::string_view destinationPath) -&gt; bool</span>
+            </dt>
+            <dd>Moves or renames a file from the source path to the destination path.</dd>
           </dl>
         </section>
         <section>
@@ -306,6 +311,35 @@
               </tfoot>
             </table>
 <p>This method opens the source file in binary mode, reads its contents, and writes them to the destination file. If the destination file already exists, it will be overwritten.</p><aside class="m-note m-info"><h4>Note</h4><p>The source file needs to exist.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="af338960b7a4c255427e3a51a612d878f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />data::<wbr />FileSystem::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af338960b7a4c255427e3a51a612d878f" class="m-doc-self">move</a>(</span><span class="m-doc-wrap">std::string_view sourcePath,
+              std::string_view destinationPath)</span></span>
+            </h3>
+            <p>Moves or renames a file from the source path to the destination path.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">sourcePath</td>
+                  <td>Absolute path of the source file to be moved.</td>
+                </tr>
+                <tr>
+                  <td>destinationPath</td>
+                  <td>Absolute path where the source file should be moved.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the file was successfully moved.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This method moves a file to a new location within the virtual file system. It allows you to either rename a file or move it to a new directory. This uses the copy-then-delete mechanism.</p><aside class="m-note m-info"><h4>Note</h4><p>The source file needs to exist.</p></aside>
           </div></section>
         </section>
       </div>
