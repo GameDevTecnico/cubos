@@ -63,6 +63,7 @@
             </li>
           </ul>
         </nav>
+<p>Asynchronous loading is disabled for this bridge, as render device calls must be made from the main thread, and they&#x27;re needed to create shaders.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
@@ -76,7 +77,8 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#afe4bd9dd33af8e93c662fe758aa73d30" class="m-doc">ShaderBridge</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice)</span>
+              <span class="m-doc-wrap-bumper"><a href="#ae83778f23c9fef1b000f3a4875bb627f" class="m-doc">ShaderBridge</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
+              <a href="group__core-gl.html#ga2d5159701c8bbbd6946b31442595fc39" class="m-doc">core::<wbr />gl::<wbr />Stage</a> stage)</span>
             </dt>
             <dd>Constructs a bridge.</dd>
           </dl>
@@ -100,9 +102,10 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="afe4bd9dd33af8e93c662fe758aa73d30"><div>
+          <section class="m-doc-details" id="ae83778f23c9fef1b000f3a4875bb627f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />ShaderBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe4bd9dd33af8e93c662fe758aa73d30" class="m-doc-self">ShaderBridge</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />ShaderBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae83778f23c9fef1b000f3a4875bb627f" class="m-doc-self">ShaderBridge</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
+              <a href="group__core-gl.html#ga2d5159701c8bbbd6946b31442595fc39" class="m-doc">core::<wbr />gl::<wbr />Stage</a> stage)</span></span>
             </h3>
             <p>Constructs a bridge.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -113,6 +116,10 @@
                 <tr>
                   <td style="width: 1%">renderDevice</td>
                   <td>Render device used to create the shader.</td>
+                </tr>
+                <tr>
+                  <td>stage</td>
+                  <td><a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> stage to create.</td>
                 </tr>
               </tbody>
             </table>

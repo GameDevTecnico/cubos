@@ -48,7 +48,12 @@
         <h1>
           Inherits Trait
         </h1>
-<p><a name="md_reflection_traits_inherits_page"></a></p><section id="autotoc_md64"><h2><a href="#autotoc_md64">@brief Exposing the inheritance relationship between types.</a></h2><p>For structured types, you might want to expose their inheritance relationships using <code>InheritsTrait</code>. This trait allows you to specify the parent type from which another type inherits.</p><p>In this example, we have two simple structs, <code>Parent</code> and <code>Son</code>, where <code>Son</code> is declared to inherit from <code>Parent</code>.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
+<p><a name="md_reflection_traits_inherits_page"></a></p><section id="autotoc_md66"><h2><a href="#autotoc_md66">@brief Exposing the inheritance relationship between types.</a></h2><p>For structured types, you might want to expose their inheritance relationships using <code>InheritsTrait</code>. This trait allows you to specify the parent type from which another type inherits.</p><p>In this example, we have three simple structs, <code>GrandParent</code>, <code>Parent</code> and <code>Son</code>, where <code>Son</code> is declared to inherit from <code>Parent</code>, and parent from <code>GrandParent</code>.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">GrandParent</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="k">struct</span><span class="w"> </span><span class="nc">Parent</span>
 <span class="p">{</span>
@@ -63,14 +68,19 @@
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">InheritsTrait</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span>
 
+<span class="n">CUBOS_REFLECT_IMPL</span><span class="p">(</span><span class="n">GrandParent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;GrandParent&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
 <span class="n">CUBOS_REFLECT_IMPL</span><span class="p">(</span><span class="n">Parent</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Parent&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Parent&quot;</span><span class="p">).</span><span class="n">with</span><span class="p">(</span><span class="n">InheritsTrait</span><span class="o">::</span><span class="n">from</span><span class="o">&lt;</span><span class="n">GrandParent</span><span class="o">&gt;</span><span class="p">());</span>
 <span class="p">}</span>
 
 <span class="n">CUBOS_REFLECT_IMPL</span><span class="p">(</span><span class="n">Son</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Son&quot;</span><span class="p">).</span><span class="n">with</span><span class="p">(</span><span class="n">InheritsTrait</span><span class="p">().</span><span class="n">from</span><span class="o">&lt;</span><span class="n">Parent</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Son&quot;</span><span class="p">).</span><span class="n">with</span><span class="p">(</span><span class="n">InheritsTrait</span><span class="o">::</span><span class="n">from</span><span class="o">&lt;</span><span class="n">Parent</span><span class="o">&gt;</span><span class="p">());</span>
 <span class="p">}</span></pre><pre class="m-code"><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="kt">void</span><span class="w"> </span><span class="n">reflectType</span><span class="p">()</span>
 <span class="p">{</span>
@@ -86,14 +96,29 @@
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{} DOES NOT inherit from Parent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">.</span><span class="n">name</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="p">.</span><span class="n">has</span><span class="o">&lt;</span><span class="n">InheritsTrait</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">type</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">InheritsTrait</span><span class="o">&gt;</span><span class="p">().</span><span class="n">inherits</span><span class="o">&lt;</span><span class="n">GrandParent</span><span class="o">&gt;</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{} inherits from GrandParent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">.</span><span class="n">name</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{} DOES NOT inherit from GrandParent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">.</span><span class="n">name</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">reflectType</span><span class="o">&lt;</span><span class="n">Son</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">reflectType</span><span class="o">&lt;</span><span class="n">Parent</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">    </span><span class="n">reflectType</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></pre></section>
+<span class="p">}</span></pre><p>Output:</p><pre class="m-code"><span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:56<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;Son&quot;</span><span class="w"> </span>inherits<span class="w"> </span>from<span class="w"> </span>Parent
+<span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:65<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;Son&quot;</span><span class="w"> </span>inherits<span class="w"> </span>from<span class="w"> </span>GrandParent
+<span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:60<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;Parent&quot;</span><span class="w"> </span>DOES<span class="w"> </span>NOT<span class="w"> </span>inherit<span class="w"> </span>from<span class="w"> </span>Parent
+<span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:65<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;Parent&quot;</span><span class="w"> </span>inherits<span class="w"> </span>from<span class="w"> </span>GrandParent
+<span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:60<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="w"> </span>DOES<span class="w"> </span>NOT<span class="w"> </span>inherit<span class="w"> </span>from<span class="w"> </span>Parent
+<span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:69<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="w"> </span>DOES<span class="w"> </span>NOT<span class="w"> </span>inherit<span class="w"> </span>from<span class="w"> </span>GrandParent</pre></section>
       </div>
     </div>
   </div>
