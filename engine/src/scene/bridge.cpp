@@ -187,7 +187,7 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
                     des.feed(dataJSON);
                     if (!des.read(relation.type(), relation.get()))
                     {
-                        CUBOS_ERROR("Could not deserialize component of type {} of entity {}", typeName, entityName);
+                        CUBOS_ERROR("Could not deserialize relation of type {} of entity {}", typeName, entityName);
                         return false;
                     }
 
