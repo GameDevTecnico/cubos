@@ -36,8 +36,8 @@ namespace cubos::core::memory
         /// @brief Move constructor.
         /// @param other Guard to move from.
         inline ReadGuard(ReadGuard&& other) noexcept
-            : mObject(other.object)
-            , mLock(std::move(other.lock))
+            : mObject(other.mObject)
+            , mLock(std::move(other.mLock))
         {
         }
 
