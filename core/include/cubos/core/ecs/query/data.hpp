@@ -70,8 +70,7 @@ namespace cubos::core::ecs
 
             // Initialize the fetchers with a templated functor which receives a sequence of indices (at compile time)
             // and initializes each fetcher for the argument term with the corresponding index.
-            auto initFetchers = [&]<std::size_t... Is>(std::index_sequence<Is...>)
-            {
+            auto initFetchers = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
                 return new std::tuple<QueryFetcher<Ts>...>(QueryFetcher<Ts>(world, argumentTerms[Is])...);
             };
 
@@ -191,7 +190,8 @@ namespace cubos::core::ecs
     private:
         /// @brief If necessary, prepares the fetchers for iteration over the given archetypes.
         /// @param archetypes Target archetypes.
-        void prepare(const ArchetypeId* archetypes)
+        /// @param cursorDepths Cursor depths.
+        void prepare(const ArchetypeId* archetypes, const int* cursorDepths)
         {
             // Check if anything changed at all, and if any of the archetypes is empty.
             bool changed = false;
@@ -210,9 +210,26 @@ namespace cubos::core::ecs
                 }
             }
 
+            for (auto cursor : mFetcherCursors)
+            {
+                if (mPreparedDepths[cursor] != cursorDepths[cursor])
+                {
+                    mPreparedDepths[cursor] = cursorDepths[cursor];
+                    changed = true;
+                }
+            }
+
             if (changed && !empty)
             {
-                std::apply([archetypes](auto&&... fetchers) { (fetchers.prepare(archetypes), ...); }, *mFetchers);
+                // Templated functor which receives a sequence of indices (at compile time) and prepares the
+                // corresponding fetcher with each cursor depth.
+                auto prepareAll = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
+                    (std::get<Is>(*mFetchers).prepare(archetypes, cursorDepths[mFetcherCursors[Is]]), ...);
+                };
+
+                // Call the above functor with a sequence of indices from 0 to the number of fetchers.
+                // This will expand to a call to prepare() for each fetcher.
+                prepareAll(std::index_sequence_for<Ts...>{});
             }
         }
 
@@ -223,6 +240,7 @@ namespace cubos::core::ecs
         std::tuple<QueryFetcher<Ts>...>* mFetchers;
         std::vector<size_t> mFetcherCursors;
         ArchetypeId mPreparedArchetypes[QueryNode::MaxTargetCount];
+        int mPreparedDepths[QueryNode::MaxCursorCount];
     };
 
     template <typename... Ts>
@@ -316,13 +334,12 @@ namespace cubos::core::ecs
         /// @return Match.
         Match operator*() const
         {
-            mData.prepare(mIterator.targetArchetypes());
+            mData.prepare(mIterator.targetArchetypes(), mIterator.cursorDepths());
             const auto* cursorRows = mIterator.cursorRows();
 
             // Templated functor which receives a sequence of indices (at compile time) and fetches the corresponding
             // data from the tuple of fetchers with each index.
-            auto fetchAll = [&]<std::size_t... Is>(std::index_sequence<Is...>)
-            {
+            auto fetchAll = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
                 return std::tuple<Ts...>(
                     std::get<Is>(*mData.mFetchers).fetch(cursorRows[mData.mFetcherCursors[Is]])...);
             };

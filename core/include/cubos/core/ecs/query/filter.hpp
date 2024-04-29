@@ -48,7 +48,7 @@ namespace cubos::core::ecs
     private:
         World& mWorld;
 
-        /// @brief Cursors fo each of the received terms.
+        /// @brief Cursors for each of the received terms.
         std::vector<std::size_t> mTermCursors;
 
         /// @brief Number of targets we have, limited to @ref QueryNode::MaxTargetCount.
@@ -160,6 +160,10 @@ namespace cubos::core::ecs
         /// @brief Gets the archetype of each target.
         /// @return Target archetypes array.
         const ArchetypeId* targetArchetypes() const;
+
+        /// @brief Gets the depth level for each cursor (used for relation terms).
+        /// @return Cursor depth level array.
+        const int* cursorDepths() const;
 
         /// @brief Gets the row number for each cursor.
         /// @return Cursor row number array.

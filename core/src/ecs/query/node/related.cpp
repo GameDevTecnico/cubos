@@ -139,6 +139,7 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
     // Define some utility aliases.
     auto& tableIndex = iterator.cursorIndex[this->cursor()];
     auto& row = iterator.cursorRows[this->cursor()];
+    auto& depth = iterator.cursorDepths[this->cursor()];
     auto& denseTables = world.tables().dense();
     auto& relationTables = world.tables().sparseRelation();
 
@@ -167,6 +168,7 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
             {
                 auto& table = relationTables.at(tableId);
                 row = table.row(fromIndex, toIndex);
+                depth = tableId.depth;
                 if (row != table.size())
                 {
                     return true; // Stop as soon as we find the relation we were looking for.
@@ -198,12 +200,14 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
             if (tableIndex < mTables.size())
             {
                 tableId = mTables[tableIndex];
+                depth = tableId.depth;
                 table = &relationTables.at(tableId);
                 isReverse = false;
             }
             else if (tableIndex < mTables.size() + mReverseTables.size())
             {
                 tableId = mReverseTables[tableIndex - mTables.size()].id;
+                depth = tableId.depth;
                 table = &relationTables.at(tableId);
                 isReverse = true;
             }
@@ -321,6 +325,9 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
     world.tables().sparseRelation().at(id).indices(row, fromIndex, toIndex);
     auto fromArchetype = id.from;
     auto toArchetype = id.to;
+
+    // Set the depth of the relation.
+    depth = id.depth;
 
     // If we're traversing in the reverse direction, swap the entities.
     if (tableIndex >= mTables.size())
