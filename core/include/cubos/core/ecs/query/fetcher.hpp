@@ -46,9 +46,11 @@ namespace cubos::core::ecs
         /// @brief Called when iteration starts for the given archetypes. Always called before @ref fetch(), which
         /// may be called multiple times after this.
         /// @param targetArchetypes Pointer to array with the archetype identifiers for the targets.
-        void prepare(const ArchetypeId* targetArchetypes)
+        /// @param depth Depth of the sparse relation table, if applicable.
+        void prepare(const ArchetypeId* targetArchetypes, int depth)
         {
             (void)targetArchetypes;
+            (void)depth;
 
             // This should never be instantiated. This method is only defined for documentation purposes.
             static_assert(AlwaysFalse<T>, "Invalid query argument type");
@@ -87,7 +89,7 @@ namespace cubos::core::ecs
             return QueryTerm::makeEntity(-1);
         }
 
-        void prepare(const ArchetypeId* targetArchetypes)
+        void prepare(const ArchetypeId* targetArchetypes, int /*depth*/)
         {
             mTable = &mWorld.tables().dense().at(targetArchetypes[mTarget]);
         }
@@ -143,7 +145,7 @@ namespace cubos::core::ecs
             CUBOS_FAIL("Query arguments of the form T& must be components or relations");
         }
 
-        void prepare(const ArchetypeId* targetArchetypes)
+        void prepare(const ArchetypeId* targetArchetypes, int depth)
         {
             if (mIsComponent)
             {
@@ -160,7 +162,8 @@ namespace cubos::core::ecs
                     std::swap(fromArchetype, toArchetype);
                 }
 
-                mSparseRelationTable = &mWorld.tables().sparseRelation().at({mDataType, fromArchetype, toArchetype});
+                mSparseRelationTable =
+                    &mWorld.tables().sparseRelation().at({mDataType, fromArchetype, toArchetype, depth});
             }
         }
 
@@ -222,7 +225,7 @@ namespace cubos::core::ecs
             CUBOS_FAIL("Query arguments of the form const T& must be components or relations");
         }
 
-        void prepare(const ArchetypeId* targetArchetypes)
+        void prepare(const ArchetypeId* targetArchetypes, int depth)
         {
             if (mIsComponent)
             {
@@ -239,7 +242,8 @@ namespace cubos::core::ecs
                     std::swap(fromArchetype, toArchetype);
                 }
 
-                mSparseRelationTable = &mWorld.tables().sparseRelation().at({mDataType, fromArchetype, toArchetype});
+                mSparseRelationTable =
+                    &mWorld.tables().sparseRelation().at({mDataType, fromArchetype, toArchetype, depth});
             }
         }
 
@@ -283,7 +287,7 @@ namespace cubos::core::ecs
             return QueryTerm::makeOptComponent(type, -1);
         }
 
-        void prepare(const ArchetypeId* targetArchetypes)
+        void prepare(const ArchetypeId* targetArchetypes, int /*depth*/)
         {
             if (mWorld.tables().dense().at(targetArchetypes[mTarget]).contains(mColumnId))
             {
@@ -333,7 +337,7 @@ namespace cubos::core::ecs
             return QueryTerm::makeOptComponent(type, -1);
         }
 
-        void prepare(const ArchetypeId* targetArchetypes)
+        void prepare(const ArchetypeId* targetArchetypes, int /*depth*/)
         {
             if (mWorld.tables().dense().at(targetArchetypes[mTarget]).contains(mColumnId))
             {

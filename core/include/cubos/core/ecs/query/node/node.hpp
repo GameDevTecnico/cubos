@@ -91,6 +91,9 @@ namespace cubos::core::ecs
         /// @brief Index which identifies the archetype or table of each cursor.
         std::size_t cursorIndex[MaxCursorCount];
 
+        /// @brief Depth level for each cursor (used for relation terms). The first 'target count' cursors are unused.
+        int cursorDepths[MaxCursorCount];
+
         /// @brief Row number of each cursor. The first 'target count' rows are reserved for the target rows.
         std::size_t cursorRows[MaxCursorCount];
     };

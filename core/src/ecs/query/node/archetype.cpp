@@ -155,12 +155,14 @@ bool QueryArchetypeNode::next(World& world, TargetMask pins, Iterator& iterator)
     // If we get here, then the target is not pinned and we need to iterate.
     auto& archetypeIndex = iterator.cursorIndex[cursor];
     auto& row = iterator.cursorRows[cursor];
+    auto& depth = iterator.cursorDepths[cursor];
 
     if (archetypeIndex >= mArchetypes.size())
     {
         // If the cursor index is out of bounds, we're starting from the beginning.
         archetypeIndex = 0;
         row = 0;
+        depth = 0;
     }
     else
     {

@@ -313,6 +313,12 @@ const ArchetypeId* QueryFilter::View::Iterator::targetArchetypes() const
     return mIterator.targetArchetypes;
 }
 
+const int* QueryFilter::View::Iterator::cursorDepths() const
+{
+    CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
+    return mIterator.cursorDepths;
+}
+
 const std::size_t* QueryFilter::View::Iterator::cursorRows() const
 {
     CUBOS_ASSERT(this->valid(), "Iterator out of bounds");
