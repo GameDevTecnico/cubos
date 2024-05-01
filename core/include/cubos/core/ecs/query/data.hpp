@@ -50,6 +50,11 @@ namespace cubos::core::ecs
                 archetype = ArchetypeId::Invalid;
             }
 
+            for (auto& depth : mPreparedDepths)
+            {
+                depth = -1;
+            }
+
             // Extract terms from the query argument types.
             std::vector<QueryTerm> argumentTerms = {QueryFetcher<Ts>::term(world)...};
 
@@ -70,7 +75,8 @@ namespace cubos::core::ecs
 
             // Initialize the fetchers with a templated functor which receives a sequence of indices (at compile time)
             // and initializes each fetcher for the argument term with the corresponding index.
-            auto initFetchers = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
+            auto initFetchers = [&]<std::size_t... Is>(std::index_sequence<Is...>)
+            {
                 return new std::tuple<QueryFetcher<Ts>...>(QueryFetcher<Ts>(world, argumentTerms[Is])...);
             };
 
@@ -126,6 +132,7 @@ namespace cubos::core::ecs
             for (int i = 0; i < QueryNode::MaxTargetCount; ++i)
             {
                 mPreparedArchetypes[i] = other.mPreparedArchetypes[i];
+                mPreparedDepths[i] = other.mPreparedDepths[i];
             }
 
             other.mFilter = nullptr;
@@ -223,7 +230,8 @@ namespace cubos::core::ecs
             {
                 // Templated functor which receives a sequence of indices (at compile time) and prepares the
                 // corresponding fetcher with each cursor depth.
-                auto prepareAll = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
+                auto prepareAll = [&]<std::size_t... Is>(std::index_sequence<Is...>)
+                {
                     (std::get<Is>(*mFetchers).prepare(archetypes, cursorDepths[mFetcherCursors[Is]]), ...);
                 };
 
@@ -339,7 +347,8 @@ namespace cubos::core::ecs
 
             // Templated functor which receives a sequence of indices (at compile time) and fetches the corresponding
             // data from the tuple of fetchers with each index.
-            auto fetchAll = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
+            auto fetchAll = [&]<std::size_t... Is>(std::index_sequence<Is...>)
+            {
                 return std::tuple<Ts...>(
                     std::get<Is>(*mData.mFetchers).fetch(cursorRows[mData.mFetcherCursors[Is]])...);
             };

@@ -187,5 +187,6 @@ bool QueryArchetypeNode::next(World& world, TargetMask pins, Iterator& iterator)
 
     // Update the target's archetype.
     iterator.targetArchetypes[cursor] = mArchetypes[archetypeIndex];
+    iterator.cursorDepths[cursor] = -1;
     return true;
 }

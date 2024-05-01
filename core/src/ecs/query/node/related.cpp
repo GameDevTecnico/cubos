@@ -168,9 +168,9 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
             {
                 auto& table = relationTables.at(tableId);
                 row = table.row(fromIndex, toIndex);
-                depth = tableId.depth;
                 if (row != table.size())
                 {
+                    depth = tableId.depth;
                     return true; // Stop as soon as we find the relation we were looking for.
                 }
             }
@@ -200,14 +200,12 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
             if (tableIndex < mTables.size())
             {
                 tableId = mTables[tableIndex];
-                depth = tableId.depth;
                 table = &relationTables.at(tableId);
                 isReverse = false;
             }
             else if (tableIndex < mTables.size() + mReverseTables.size())
             {
                 tableId = mReverseTables[tableIndex - mTables.size()].id;
-                depth = tableId.depth;
                 table = &relationTables.at(tableId);
                 isReverse = true;
             }
@@ -278,6 +276,8 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
         uint32_t unpinnedIndex = (fromPinned != isReverse) ? table->to(row) : table->from(row);
         iterator.targetArchetypes[unpinnedCursor] = unpinnedArchetype;
         iterator.cursorRows[unpinnedCursor] = denseTables.at(unpinnedArchetype).row(unpinnedIndex);
+        iterator.cursorDepths[unpinnedCursor] = -1;
+        depth = tableId.depth;
         return true;
     }
 
@@ -341,5 +341,7 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
     iterator.targetArchetypes[mToNode.target()] = toArchetype;
     iterator.cursorRows[mFromNode.target()] = world.tables().dense().at(fromArchetype).row(fromIndex);
     iterator.cursorRows[mToNode.target()] = world.tables().dense().at(toArchetype).row(toIndex);
+    iterator.cursorDepths[mFromNode.target()] = -1;
+    iterator.cursorDepths[mToNode.target()] = -1;
     return true;
 }
