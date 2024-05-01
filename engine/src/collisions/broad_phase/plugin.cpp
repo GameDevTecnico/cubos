@@ -42,7 +42,7 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
         });
 
     cubos.observer("remove old Colliders from SweepAndPrune")
-        .onAdd<Collider>()
+        .onRemove<Collider>()
         .call([](Query<Entity> query, BroadPhaseSweepAndPrune& sweepAndPrune) {
             for (auto [entity] : query)
             {
