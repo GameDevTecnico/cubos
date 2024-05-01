@@ -241,6 +241,7 @@ QueryFilter::View::Iterator::Iterator(View& view, bool end)
                 auto archetype = mView.mFilter.mWorld.archetype(ent);
                 mIterator.targetArchetypes[i] = archetype;
                 mIterator.cursorRows[i] = mView.mFilter.mWorld.tables().dense().at(archetype).row(ent.index);
+                mIterator.cursorDepths[i] = -1;
             }
         }
 
