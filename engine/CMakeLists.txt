@@ -137,6 +137,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/ssao/ssao.cpp"
 	"src/render/deferred_shading/plugin.cpp"
 	"src/render/deferred_shading/deferred_shading.cpp"
+	"src/render/split_screen/plugin.cpp"
+	"src/render/split_screen/split_screen.cpp"
 )
 
 # Create cubos engine

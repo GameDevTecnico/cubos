@@ -8,6 +8,9 @@ uniform sampler2D positionTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D noiseTexture;
 
+uniform vec2 viewportOffset;
+uniform vec2 viewportSize;
+
 layout(std140) uniform PerScene
 {
     mat4 view;
@@ -22,13 +25,15 @@ layout (location = 0) out float color;
 
 vec3 getViewPosition(vec2 fragUv)
 {
-    vec3 worldPosition = texture(positionTexture, fragUv).xyz;
+    vec2 uv = fragUv * viewportSize + viewportOffset;
+    vec3 worldPosition = texture(positionTexture, uv).xyz;
     return (view * vec4(worldPosition, 1.0)).xyz;
 }
 
 vec3 getViewNormal(vec2 fragUv)
 {
-    vec3 worldNormal = texture(normalTexture, fragUv).xyz;
+    vec2 uv = fragUv * viewportSize + viewportOffset;
+    vec3 worldNormal = texture(normalTexture, uv).xyz;
     return normalize(view * vec4(worldNormal, 0.0)).xyz;
 }
 

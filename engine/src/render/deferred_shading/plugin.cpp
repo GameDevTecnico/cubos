@@ -87,6 +87,8 @@ namespace
         ShaderBindingPoint albedoBP;
         ShaderBindingPoint ssaoBP;
         ShaderBindingPoint perSceneBP;
+        ShaderBindingPoint viewportOffsetBP;
+        ShaderBindingPoint viewportSizeBP;
 
         VertexArray screenQuad;
 
@@ -100,9 +102,12 @@ namespace
             albedoBP = pipeline->getBindingPoint("albedoTexture");
             ssaoBP = pipeline->getBindingPoint("ssaoTexture");
             perSceneBP = pipeline->getBindingPoint("PerScene");
-            CUBOS_ASSERT(
-                positionBP && normalBP && albedoBP && ssaoBP && perSceneBP,
-                "positionTexture, normalTexture, albedoTexture, ssaoTexture and PerScene binding points must exist");
+            viewportOffsetBP = pipeline->getBindingPoint("viewportOffset");
+            viewportSizeBP = pipeline->getBindingPoint("viewportSize");
+            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && perSceneBP && viewportOffsetBP &&
+                             viewportSizeBP,
+                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, PerScene, viewportOffset and "
+                         "viewportSize binding points must exist");
 
             generateScreenQuad(renderDevice, pipeline, screenQuad);
 
@@ -154,7 +159,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
 
             for (auto [targetEnt, hdr, gBuffer, ssao, deferredShading] : targets)
             {
-                // Find the camera that draws to the GBuffer.
+                // Find the cameras that draw to the GBuffer.
                 for (auto [localToWorld, camera, drawsTo] : perspectiveCameras.pin(1, targetEnt))
                 {
                     if (!camera.active)
@@ -178,9 +183,11 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     // Fill the PerScene constant buffer.
                     PerScene perScene{};
                     perScene.inverseView = localToWorld.mat;
-                    perScene.inverseProjection = glm::inverse(
-                        glm::perspective(glm::radians(camera.fovY), float(gBuffer.size.x) / float(gBuffer.size.y),
-                                         camera.zNear, camera.zFar));
+                    perScene.inverseProjection =
+                        glm::inverse(glm::perspective(glm::radians(camera.fovY),
+                                                      (float(gBuffer.size.x) * drawsTo.viewportSize.x) /
+                                                          (float(gBuffer.size.y) * drawsTo.viewportSize.y),
+                                                      camera.zNear, camera.zFar));
 
                     perScene.ambientLight = glm::vec4(environment.ambient, 1.0F);
                     perScene.skyGradient[0] = glm::vec4(environment.skyGradient[0], 1.0F);
@@ -218,7 +225,14 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
 
                     // Draw the screen quad with the GBuffer textures.
                     rd.setFramebuffer(deferredShading.framebuffer);
-                    rd.setViewport(0, 0, static_cast<int>(gBuffer.size.x), static_cast<int>(gBuffer.size.y));
+                    rd.setViewport(static_cast<int>(drawsTo.viewportOffset.x * float(gBuffer.size.x)),
+                                   static_cast<int>(drawsTo.viewportOffset.y * float(gBuffer.size.y)),
+                                   static_cast<int>(drawsTo.viewportSize.x * float(gBuffer.size.x)),
+                                   static_cast<int>(drawsTo.viewportSize.y * float(gBuffer.size.y)));
+                    rd.setScissor(static_cast<int>(drawsTo.viewportOffset.x * float(gBuffer.size.x)),
+                                  static_cast<int>(drawsTo.viewportOffset.y * float(gBuffer.size.y)),
+                                  static_cast<int>(drawsTo.viewportSize.x * float(gBuffer.size.x)),
+                                  static_cast<int>(drawsTo.viewportSize.y * float(gBuffer.size.y)));
                     rd.setRasterState(nullptr);
                     rd.setBlendState(nullptr);
                     rd.setDepthStencilState(nullptr);
@@ -228,11 +242,10 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.albedoBP->bind(gBuffer.albedo);
                     state.ssaoBP->bind(ssao.blurTexture);
                     state.perSceneBP->bind(state.perSceneCB);
+                    state.viewportOffsetBP->setConstant(drawsTo.viewportOffset);
+                    state.viewportSizeBP->setConstant(drawsTo.viewportSize);
                     rd.setVertexArray(state.screenQuad);
                     rd.drawTriangles(0, 6);
-
-                    // We only use the first active camera, thus, break out of the loop immediately.
-                    break;
                 }
             }
         });

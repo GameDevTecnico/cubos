@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <glm/vec2.hpp>
+
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/api.hpp>
@@ -15,5 +17,11 @@ namespace cubos::engine
     struct CUBOS_ENGINE_API DrawsTo
     {
         CUBOS_REFLECT;
+
+        /// @brief Offset of the viewport, in normalized coordinates.
+        glm::vec2 viewportOffset = {0, 0};
+
+        /// @brief Size of the viewport, in normalized coordinates.
+        glm::vec2 viewportSize = {1, 1};
     };
 } // namespace cubos::engine

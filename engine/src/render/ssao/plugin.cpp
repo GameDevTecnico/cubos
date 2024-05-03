@@ -50,9 +50,13 @@ namespace
         ShaderBindingPoint baseNoiseBP;
         ShaderBindingPoint basePerSceneBP;
         VertexArray baseScreenQuad;
+        ShaderBindingPoint baseViewportOffsetBP;
+        ShaderBindingPoint baseViewportSizeBP;
 
         ShaderPipeline blurPipeline;
         ShaderBindingPoint blurSSAOBP;
+        ShaderBindingPoint blurViewportOffsetBP;
+        ShaderBindingPoint blurViewportSizeBP;
         VertexArray blurScreenQuad;
 
         ConstantBuffer perSceneCB;
@@ -68,12 +72,19 @@ namespace
             baseNormalBP = basePipeline->getBindingPoint("normalTexture");
             baseNoiseBP = basePipeline->getBindingPoint("noiseTexture");
             basePerSceneBP = basePipeline->getBindingPoint("PerScene");
-            CUBOS_ASSERT(basePositionBP && baseNormalBP && baseNoiseBP && basePerSceneBP,
-                         "positionTexture, normalTexture, noiseTexture and PerScene binding points must exist");
+            baseViewportOffsetBP = basePipeline->getBindingPoint("viewportOffset");
+            baseViewportSizeBP = basePipeline->getBindingPoint("viewportSize");
+            CUBOS_ASSERT(basePositionBP && baseNormalBP && baseNoiseBP && basePerSceneBP && baseViewportOffsetBP &&
+                             baseViewportSizeBP,
+                         "positionTexture, normalTexture, noiseTexture and PerScene, viewportOffset and viewportSize "
+                         "binding points must exist");
             generateScreenQuad(renderDevice, basePipeline, baseScreenQuad);
 
             blurSSAOBP = blurPipeline->getBindingPoint("ssaoTexture");
-            CUBOS_ASSERT(blurSSAOBP, "ssaoTexture binding point must exist");
+            blurViewportOffsetBP = blurPipeline->getBindingPoint("viewportOffset");
+            blurViewportSizeBP = blurPipeline->getBindingPoint("viewportSize");
+            CUBOS_ASSERT(blurSSAOBP && blurViewportOffsetBP && blurViewportSizeBP,
+                         "ssaoTexture, viewportOffset and viewportSize binding points must exist");
             generateScreenQuad(renderDevice, blurPipeline, blurScreenQuad);
 
             perSceneCB = renderDevice.createConstantBuffer(sizeof(PerScene), nullptr, Usage::Dynamic);
@@ -174,7 +185,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     }
                 }
 
-                // Find the camera that draws to the SSAO target.
+                // Find the cameras that draw to the SSAO target.
                 for (auto [localToWorld, camera, drawsTo] : perspectiveCameras.pin(1, targetEnt))
                 {
                     if (!camera.active)
@@ -212,9 +223,10 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     // Fill the PerScene constant buffer.
                     PerScene perScene{};
                     perScene.view = glm::inverse(localToWorld.mat);
-                    perScene.projection =
-                        glm::perspective(glm::radians(camera.fovY), float(gBuffer.size.x) / float(gBuffer.size.y),
-                                         camera.zNear, camera.zFar);
+                    perScene.projection = glm::perspective(glm::radians(camera.fovY),
+                                                           (float(gBuffer.size.x) * drawsTo.viewportSize.x) /
+                                                               (float(gBuffer.size.y) * drawsTo.viewportSize.y),
+                                                           camera.zNear, camera.zFar);
                     for (std::size_t i = 0; i < state.kernel.size(); ++i)
                     {
                         perScene.samples[i] = glm::vec4(state.kernel[i], 0.0F);
@@ -226,7 +238,14 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     state.perSceneCB->fill(&perScene, sizeof(PerScene));
 
                     // Set state common to both passes.
-                    rd.setViewport(0, 0, static_cast<int>(ssao.size.x), static_cast<int>(ssao.size.y));
+                    rd.setViewport(static_cast<int>(drawsTo.viewportOffset.x * float(ssao.size.x)),
+                                   static_cast<int>(drawsTo.viewportOffset.y * float(ssao.size.y)),
+                                   static_cast<int>(drawsTo.viewportSize.x * float(ssao.size.x)),
+                                   static_cast<int>(drawsTo.viewportSize.y * float(ssao.size.y)));
+                    rd.setScissor(static_cast<int>(drawsTo.viewportOffset.x * float(ssao.size.x)),
+                                  static_cast<int>(drawsTo.viewportOffset.y * float(ssao.size.y)),
+                                  static_cast<int>(drawsTo.viewportSize.x * float(ssao.size.x)),
+                                  static_cast<int>(drawsTo.viewportSize.y * float(ssao.size.y)));
                     rd.setRasterState(nullptr);
                     rd.setBlendState(nullptr);
                     rd.setDepthStencilState(nullptr);
@@ -238,6 +257,8 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     state.baseNormalBP->bind(gBuffer.normal);
                     state.baseNoiseBP->bind(state.noiseTexture);
                     state.basePerSceneBP->bind(state.perSceneCB);
+                    state.baseViewportOffsetBP->setConstant(drawsTo.viewportOffset);
+                    state.baseViewportSizeBP->setConstant(drawsTo.viewportSize);
                     rd.setVertexArray(state.baseScreenQuad);
                     rd.drawTriangles(0, 6);
 
@@ -245,11 +266,10 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     rd.setFramebuffer(ssao.blurFramebuffer);
                     rd.setShaderPipeline(state.blurPipeline);
                     state.blurSSAOBP->bind(ssao.baseTexture);
+                    state.blurViewportOffsetBP->setConstant(drawsTo.viewportOffset);
+                    state.blurViewportSizeBP->setConstant(drawsTo.viewportSize);
                     rd.setVertexArray(state.blurScreenQuad);
                     rd.drawTriangles(0, 6);
-
-                    // We only use the first active camera, thus, break out of the loop immediately.
-                    break;
                 }
             }
         });
