@@ -7,6 +7,9 @@ uniform sampler2D normalTexture;
 uniform sampler2D albedoTexture;
 uniform sampler2D ssaoTexture;
 
+uniform vec2 viewportOffset;
+uniform vec2 viewportSize;
+
 struct DirectionalLight
 {
     vec4 direction;
@@ -111,7 +114,9 @@ vec3 rayDir(vec2 uv)
 
 void main()
 {
-    vec3 normal = texture(normalTexture, fragUv).xyz;
+    vec2 uv = fragUv * viewportSize + viewportOffset;
+
+    vec3 normal = texture(normalTexture, uv).xyz;
     if (normal == vec3(0.0))
     {
         // If the normal is zero, then we are rendering the sky.
@@ -120,9 +125,9 @@ void main()
     }
     else
     {
-        vec3 albedo = texture(albedoTexture, fragUv).rgb;
-        vec3 position = texture(positionTexture, fragUv).xyz;
-        float ssao = texture(ssaoTexture, fragUv).r;
+        vec3 albedo = texture(albedoTexture, uv).rgb;
+        vec3 position = texture(positionTexture, uv).xyz;
+        float ssao = texture(ssaoTexture, uv).r;
 
         // Calculate lighting from each light source.
         vec3 lighting = ambientLight.rgb * ssao;

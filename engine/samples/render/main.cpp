@@ -12,6 +12,7 @@
 #include <cubos/engine/render/mesh/plugin.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
+#include <cubos/engine/render/split_screen/plugin.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/tone_mapping/plugin.hpp>
@@ -52,6 +53,7 @@ int main()
     cubos.plugin(ssaoPlugin);
     cubos.plugin(deferredShadingPlugin);
     cubos.plugin(toneMappingPlugin);
+    cubos.plugin(splitScreenPlugin);
     /// [Adding the plugins]
 
     cubos.plugin(scenePlugin);

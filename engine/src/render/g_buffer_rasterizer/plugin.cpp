@@ -143,7 +143,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
         .with<PerspectiveCamera>()
         .related<DrawsTo>()
         .call([](State& state, const Window& window, const RenderMeshPool& pool, const RenderPalette& palette,
-                 Assets& assets, Query<const LocalToWorld&, PerspectiveCamera&> perspectiveCameras,
+                 Assets& assets, Query<const LocalToWorld&, PerspectiveCamera&, const DrawsTo&> perspectiveCameras,
                  Query<Entity, GBufferRasterizer&, GBuffer&, RenderDepth&, RenderPicker&> targets,
                  Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
@@ -230,8 +230,8 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                     picker.cleared = true;
                 }
 
-                // Find the first active camera for this target.
-                for (auto [cameraLocalToWorld, camera] : perspectiveCameras.pin(1, ent))
+                // Find the active cameras for this target.
+                for (auto [cameraLocalToWorld, camera, drawsTo] : perspectiveCameras.pin(1, ent))
                 {
                     // Skip inactive cameras.
                     if (!camera.active)
@@ -241,12 +241,22 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
 
                     // Send the PerScene data to the GPU.
                     auto view = glm::inverse(cameraLocalToWorld.mat);
-                    auto proj =
-                        glm::perspective(glm::radians(camera.fovY), float(gBuffer.size.x) / float(gBuffer.size.y),
-                                         camera.zNear, camera.zFar);
+                    auto proj = glm::perspective(glm::radians(camera.fovY),
+                                                 (float(gBuffer.size.x) * drawsTo.viewportSize.x) /
+                                                     (float(gBuffer.size.y) * drawsTo.viewportSize.y),
+                                                 camera.zNear, camera.zFar);
                     PerScene perScene{.viewProj = proj * view};
                     state.perSceneCB->fill(&perScene, sizeof(perScene));
 
+                    // Set the viewport.
+                    rd.setViewport(static_cast<int>(drawsTo.viewportOffset.x * float(gBuffer.size.x)),
+                                   static_cast<int>(drawsTo.viewportOffset.y * float(gBuffer.size.y)),
+                                   static_cast<int>(drawsTo.viewportSize.x * float(gBuffer.size.x)),
+                                   static_cast<int>(drawsTo.viewportSize.y * float(gBuffer.size.y)));
+                    rd.setScissor(static_cast<int>(drawsTo.viewportOffset.x * float(gBuffer.size.x)),
+                                  static_cast<int>(drawsTo.viewportOffset.y * float(gBuffer.size.y)),
+                                  static_cast<int>(drawsTo.viewportSize.x * float(gBuffer.size.x)),
+                                  static_cast<int>(drawsTo.viewportSize.y * float(gBuffer.size.y)));
                     // Bind the shader, vertex array and uniform buffer.
                     rd.setShaderPipeline(state.pipeline);
                     rd.setVertexArray(state.vertexArray);
@@ -269,9 +279,6 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                             rd.drawTriangles(pool.bucketSize() * bucket.inner, pool.vertexCount(bucket));
                         }
                     }
-
-                    // We only use the first active camera, thus, break out of the loop immediately.
-                    break;
                 }
 
                 // Swap front and back framebuffers and textures.

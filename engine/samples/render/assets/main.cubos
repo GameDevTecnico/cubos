@@ -9,7 +9,8 @@
             "cubos::engine::GBuffer": {},
             "cubos::engine::GBufferRasterizer": {},
             "cubos::engine::SSAO": {},
-            "cubos::engine::DeferredShading": {}
+            "cubos::engine::DeferredShading": {},
+            "cubos::engine::SplitScreen": {}
         },
         "camera": {
             "cubos::engine::PerspectiveCamera": {},
@@ -17,6 +18,24 @@
             "cubos::engine::Position": {
                 "x": 0,
                 "y": 0,
+                "z": 0
+            }
+        },
+        "camera2": {
+            "cubos::engine::PerspectiveCamera": {},
+            "cubos::engine::DrawsTo@render-target": {},
+            "cubos::engine::Position": {
+                "x": 3,
+                "y": 5,
+                "z": 0
+            }
+        },
+        "camera3": {
+            "cubos::engine::PerspectiveCamera": {},
+            "cubos::engine::DrawsTo@render-target": {},
+            "cubos::engine::Position": {
+                "x": -3,
+                "y": -5,
                 "z": 0
             }
         },
