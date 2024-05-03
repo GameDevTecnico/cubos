@@ -60,6 +60,10 @@ namespace cubos::engine
         /// @return Gamepad if it exists, -1 otherwise.
         int gamepad(int player) const;
 
+        /// @brief Gets the number of currently connected gamepads.
+        /// @return Number of connected gamepads.
+        int gamepadCount() const;
+
         /// @brief Gets an action state for a specific player.
         /// @param actionName Name of the action.
         /// @param player Player whose action state will be retrieved.

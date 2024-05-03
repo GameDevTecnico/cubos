@@ -141,6 +141,11 @@ int Input::gamepad(int player) const
     return -1;
 }
 
+int Input::gamepadCount() const
+{
+    return static_cast<int>(mGamepadStates.size());
+}
+
 bool Input::pressed(const char* actionName, int player) const
 {
     auto pIt = mPlayerBindings.find(player);
