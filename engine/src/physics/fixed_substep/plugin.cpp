@@ -1,8 +1,7 @@
-#include "../collisions/narrow_phase/plugin.hpp"
+#include "plugin.hpp"
 
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
-#include <cubos/engine/fixed_substep/plugin.hpp>
 
 CUBOS_DEFINE_TAG(cubos::engine::fixedSubstepTag);
 
@@ -22,7 +21,7 @@ void cubos::engine::fixedSubstepPlugin(Cubos& cubos)
     cubos.resource<Substeps>();
 
     cubos.tag(fixedSubstepTag)
-        .after(collisionsNarrowTag)
+        .after(collisionsTag)
         .repeatWhile([](SubstepsCount& count, const Substeps& substeps) {
             count.value += 1;
             return count.value <= substeps.value;

@@ -1,6 +1,6 @@
-#include <cubos/core/ecs/reflection.hpp>
+#include "substeps.hpp"
 
-#include <cubos/engine/fixed_substep/substeps.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 
 CUBOS_REFLECT_IMPL(cubos::engine::Substeps)
 {

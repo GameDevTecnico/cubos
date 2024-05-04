@@ -1,8 +1,9 @@
+#include "fixed_substep/plugin.hpp"
+
 #include <glm/glm.hpp>
 
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
-#include <cubos/engine/fixed_substep/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
@@ -76,8 +77,9 @@ CUBOS_REFLECT_IMPL(Damping)
 void cubos::engine::physicsPlugin(Cubos& cubos)
 {
     cubos.depends(fixedStepPlugin);
-    cubos.depends(fixedSubstepPlugin);
     cubos.depends(transformPlugin);
+
+    cubos.plugin(fixedSubstepPlugin);
 
     cubos.resource<Damping>();
 

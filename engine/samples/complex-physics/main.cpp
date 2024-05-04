@@ -7,7 +7,6 @@
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
-#include <cubos/engine/fixed_substep/plugin.hpp>
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
@@ -70,7 +69,6 @@ int main(int argc, char** argv)
     cubos.plugin(voxelsPlugin);
     cubos.plugin(fixedStepPlugin);
     cubos.plugin(collisionsPlugin);
-    cubos.plugin(fixedSubstepPlugin);
     cubos.plugin(physicsPlugin);
     cubos.plugin(solverPlugin);
     cubos.plugin(gravityPlugin);

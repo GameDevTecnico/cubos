@@ -10,7 +10,6 @@
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
-#include <cubos/engine/fixed_substep/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
@@ -49,7 +48,6 @@ int main()
     cubos.plugin(transformPlugin);
     cubos.plugin(fixedStepPlugin);
     cubos.plugin(collisionsPlugin);
-    cubos.plugin(fixedSubstepPlugin);
     cubos.plugin(physicsPlugin);
     cubos.plugin(solverPlugin);
     cubos.plugin(assetsPlugin);
