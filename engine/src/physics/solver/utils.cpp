@@ -4,8 +4,8 @@
 
 using namespace cubos::engine;
 
-float cubos::engine::getLagrangeMultiplierUpdate(float c, float lagrange, const float inverseMasses[],
-                                                 glm::vec3 gradients[], int numParticles, float compliance, float dt)
+float cubos::engine::getLagrangeMultiplierUpdate(float c, const float inverseMasses[], glm::vec3 gradients[],
+                                                 int numParticles, float compliance, float dt)
 {
     float wGradientSum = 0.0F;
     for (int i = 0; i < numParticles; i++)
@@ -20,5 +20,5 @@ float cubos::engine::getLagrangeMultiplierUpdate(float c, float lagrange, const 
         return 0.0F;
     }
 
-    return (-c - tildeAlpha * lagrange) / (wGradientSum + tildeAlpha);
+    return (-c) / (wGradientSum + tildeAlpha);
 }

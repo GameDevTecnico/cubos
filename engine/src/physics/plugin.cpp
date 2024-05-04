@@ -154,23 +154,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 position.vec += velocity.vec * subDeltaTime;
             }
         });
-    
-    cubos.system("apply corrections to positions")
-        .tagged(physicsSimulationSubstepsCorrectPositionTag)
-        .after(physicsSimulationSubstepsIntegrateTag)
-        .tagged(fixedSubstepTag)
-        .call([](Query<Position&, AccumulatedCorrection&, Mass&> query) {
-            for (auto [position, correction, mass] : query)
-            {
-                if (mass.inverseMass <= 0.0F)
-                {
-                    continue;
-                }
-                position.vec += correction.vec; // lagrange * correction * inverseMass
-                correction.vec = glm::vec3(0, 0, 0);
-            }
-        });
-    
+
     cubos.system("update velocities")
         .tagged(physicsSimulationSubstepsUpdateVelocityTag)
         .after(physicsSimulationSubstepsCorrectPositionTag)
@@ -181,7 +165,8 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
 
             for (auto [position, prevPosition, velocity] : query)
             {
-                // consider changing this to accumulated correction due to floating point accuracy for objects far from origin
+                // consider changing this to accumulated correction due to floating point accuracy for objects far from
+                // origin
                 velocity.vec = (position.vec - prevPosition.vec) / subDeltaTime;
             }
         });
