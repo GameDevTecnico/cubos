@@ -5,6 +5,7 @@
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
+#include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
@@ -20,17 +21,18 @@ CUBOS_DEFINE_TAG(cubos::engine::collisionsBroadTag);
 void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
 {
     cubos.depends(transformPlugin);
+    cubos.depends(fixedStepPlugin);
     cubos.depends(interfaceCollisionsPlugin);
 
     cubos.relation<PotentiallyCollidingWith>();
 
     cubos.resource<BroadPhaseSweepAndPrune>();
 
-    cubos.tag(collisionsAABBUpdateTag);
-    cubos.tag(collisionsBroadMarkersTag);
-    cubos.tag(collisionsBroadSweepTag);
-    cubos.tag(collisionsBroadCleanTag);
-    cubos.tag(collisionsBroadTag);
+    cubos.tag(collisionsAABBUpdateTag).tagged(fixedStepTag);
+    cubos.tag(collisionsBroadMarkersTag).tagged(fixedStepTag);
+    cubos.tag(collisionsBroadSweepTag).tagged(fixedStepTag);
+    cubos.tag(collisionsBroadCleanTag).tagged(fixedStepTag);
+    cubos.tag(collisionsBroadTag).tagged(fixedStepTag);
 
     cubos.observer("add new Colliders to SweepAndPrune")
         .onAdd<Collider>()

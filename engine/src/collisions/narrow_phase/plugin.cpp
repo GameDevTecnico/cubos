@@ -4,6 +4,7 @@
 
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
+#include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
@@ -17,11 +18,12 @@ CUBOS_DEFINE_TAG(cubos::engine::collisionsNarrowTag);
 void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
 {
     cubos.depends(transformPlugin);
+    cubos.depends(fixedStepPlugin);
     cubos.depends(interfaceCollisionsPlugin);
     cubos.depends(broadPhaseCollisionsPlugin);
 
-    cubos.tag(collisionsNarrowCleanTag);
-    cubos.tag(collisionsNarrowTag);
+    cubos.tag(collisionsNarrowCleanTag).tagged(fixedStepTag);
+    cubos.tag(collisionsNarrowTag).tagged(fixedStepTag);
 
     cubos.system("clean colliding pairs")
         .tagged(collisionsNarrowCleanTag)
