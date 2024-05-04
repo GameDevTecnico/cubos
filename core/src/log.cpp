@@ -1,14 +1,21 @@
 #include <chrono>
 #include <ctime>
+#include <memory>
 #include <mutex>
 #include <vector>
 
+#include <cubos/core/data/fs/file.hpp>
+#include <cubos/core/data/fs/file_system.hpp>
+#include <cubos/core/data/fs/standard_archive.hpp>
 #include <cubos/core/data/ser/debug.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 
 using cubos::core::Logger;
+using cubos::core::data::File;
+using cubos::core::data::FileSystem;
+using cubos::core::data::StandardArchive;
 using cubos::core::reflection::EnumTrait;
 
 CUBOS_REFLECT_EXTERNAL_IMPL(Logger::Level)
@@ -31,6 +38,7 @@ namespace
         std::mutex mutex;
         Logger::Level level = Logger::Level::Debug;
         std::vector<Logger::Entry> entries;
+        std::unique_ptr<cubos::core::memory::Stream> logFileStream;
     };
 } // namespace
 
@@ -139,6 +147,40 @@ auto Logger::level() -> Logger::Level
     return state().level;
 }
 
+bool Logger::logToFile(const std::string& filePath)
+{
+    auto file = FileSystem::create(filePath, /*directory=*/false);
+    if (file == nullptr)
+    {
+        return false;
+    }
+
+    state().logFileStream = file->open(File::OpenMode::Write);
+
+    // sync old logs to file
+    for (const auto& e : state().entries)
+    {
+        state().logFileStream->printf("[{}] [{}] {}: {}\n", e.timestamp.string(), e.location.string(),
+                                      toLower(EnumTrait::toString(e.level)), e.message);
+    }
+
+    return true;
+}
+
+bool Logger::logToFile()
+{
+    if (!FileSystem::mount("/logs", std::make_unique<cubos::core::data::StandardArchive>("./logs", /*isDirectory=*/true,
+                                                                                         /*readOnly=*/false)))
+    {
+        return false;
+    }
+
+    auto timestamp = Timestamp::now();
+    auto filePath = "cubos_" + timestamp.string();
+    auto fullPath = "/logs/" + filePath + ".log";
+    return logToFile(fullPath);
+}
+
 void Logger::write(Level level, Location location, std::string message)
 {
     auto timestamp = Timestamp::now();
@@ -149,6 +191,13 @@ void Logger::write(Level level, Location location, std::string message)
     {
         // If the log level is higher than the message level, then just ignore it.
         return;
+    }
+
+    // Print to file if opened
+    if (state().logFileStream != nullptr)
+    {
+        state().logFileStream->printf("[{}] [{}] {}: {}\n", timestamp.string(), location.string(),
+                                      toLower(EnumTrait::toString(level)), message);
     }
 
     // Print the message to stderr.

@@ -319,6 +319,18 @@ namespace cubos::core
         /// @return Log level.
         static Level level();
 
+        /// @brief Sets a file path where logs will be saved.
+        /// @note Previous logs are also dumped to the file.
+        /// @param filePath Path to file in the virtual file system.
+        /// @return Whether the file could be opened for logging.
+        static bool logToFile(const std::string& filePath);
+
+        /// @brief Mounts a standard archive on the `/logs/` directory, and calls `logToFile` to a timestamped log file
+        /// on that directory.
+        /// @note Previous logs are also dumped to the file.
+        /// @return Whether the file could be mounted and opened for logging.
+        static bool logToFile();
+
         /// @brief Creates a new entry in the logs, as long as the log level is high enough.
         /// @param level Log level.
         /// @param location Code location.
