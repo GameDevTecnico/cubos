@@ -67,11 +67,6 @@ CUBOS_REFLECT_IMPL(PhysicsBundle)
         .build();
 }
 
-CUBOS_REFLECT_IMPL(Substeps)
-{
-    return core::ecs::TypeBuilder<Substeps>("cubos::engine::Substeps").build();
-}
-
 CUBOS_REFLECT_IMPL(Damping)
 {
     return core::ecs::TypeBuilder<Damping>("cubos::engine::Damping").build();
@@ -82,7 +77,6 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.depends(fixedStepPlugin);
     cubos.depends(transformPlugin);
 
-    cubos.resource<Substeps>();
     cubos.resource<Damping>();
 
     cubos.component<Velocity>();
@@ -136,7 +130,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
 
     cubos.system("integrate position")
         .tagged(physicsSimulationSubstepsIntegrateTag)
-        .tagged(fixedStepTag)
+        .tagged(fixedSubstepTag)
         .call([](Query<Position&, PreviousPosition&, Velocity&, const Force&, const Mass&> query,
                  const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
@@ -160,11 +154,11 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 position.vec += velocity.vec * subDeltaTime;
             }
         });
-
+    
     cubos.system("apply corrections to positions")
         .tagged(physicsSimulationSubstepsCorrectPositionTag)
         .after(physicsSimulationSubstepsIntegrateTag)
-        .tagged(fixedStepTag)
+        .tagged(fixedSubstepTag)
         .call([](Query<Position&, AccumulatedCorrection&, Mass&> query) {
             for (auto [position, correction, mass] : query)
             {
@@ -176,17 +170,18 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 correction.vec = glm::vec3(0, 0, 0);
             }
         });
-
+    
     cubos.system("update velocities")
         .tagged(physicsSimulationSubstepsUpdateVelocityTag)
         .after(physicsSimulationSubstepsCorrectPositionTag)
-        .tagged(fixedStepTag)
+        .tagged(fixedSubstepTag)
         .call([](Query<const Position&, const PreviousPosition&, Velocity&> query, const FixedDeltaTime& fixedDeltaTime,
                  const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
             for (auto [position, prevPosition, velocity] : query)
             {
+                // consider changing this to accumulated correction due to floating point accuracy for objects far from origin
                 velocity.vec = (position.vec - prevPosition.vec) / subDeltaTime;
             }
         });
