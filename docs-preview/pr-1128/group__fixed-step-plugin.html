@@ -53,6 +53,7 @@
           <h3>Contents</h3>
           <ul>
             <li><a href="#autotoc_md73">Resources</a></li>
+            <li><a href="#autotoc_md74">Resources</a></li>
             <li>
               Reference
               <ul>
@@ -63,13 +64,15 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md73"><h3><a href="#autotoc_md73">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li></ul></section>
+<section id="autotoc_md73"><h3><a href="#autotoc_md73">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li></ul></section><section id="autotoc_md74"><h3><a href="#autotoc_md74">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
             <dt>file <a href="fixed__delta__time_8hpp.html" class="m-doc">fixed_delta_time.hpp</a></dt>
             <dd>Resource <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::<wbr />engine::<wbr />FixedDeltaTime</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2fixed__substep_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
           </dl>
         </section>
@@ -86,17 +89,39 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga2401d3ef5272b2eedecc13ec6cf2198b" class="m-doc">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ga640d6b2bcba1240898382e72afe35edb" class="m-doc">fixedSubstepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga2401d3ef5272b2eedecc13ec6cf2198b"><div>
+          <section class="m-doc-details" id="ga98331d506cbd48c4baaec28b89f6b498"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga2401d3ef5272b2eedecc13ec6cf2198b" class="m-doc-self">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc-self">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html">&lt;engine/fixed_step/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga640d6b2bcba1240898382e72afe35edb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga640d6b2bcba1240898382e72afe35edb" class="m-doc-self">fixedSubstepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2fixed__substep_2plugin_8hpp.html">&lt;engine/fixed_substep/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">

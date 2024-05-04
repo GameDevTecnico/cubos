@@ -58,6 +58,7 @@
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
@@ -134,6 +135,10 @@
             </dt>
             <dd>Stores and manages all of the observers associated with a world.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">PluginQueue</a>
+            </dt>
+            <dd>Stores plugin operations to be executed later.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>
             </dt>
@@ -208,6 +213,10 @@
               class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a>
             </dt>
             <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which allows the system to send events of type <code>T</code> to other systems.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Plugins.html" class="m-doc">Plugins</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to add or remove <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> plugins at runtime.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>
@@ -320,13 +329,22 @@
             <dd>Possible traversal types for tree relation terms.</dd>
           </dl>
         </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> = void(*)(<a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;)
+            </dt>
+            <dd>Function pointer type representing a plugin.</dd>
+          </dl>
+        </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a2fd36a82365d207f5b95b2f52780d490" class="m-doc">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt;&amp; map,
+              <span class="m-doc-wrap-bumper">auto <a href="#a2c5677b7a03cecd5a9464dad2abf1f12" class="m-doc">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt;&amp; map,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
-              void* value)</span>
+              void* value) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
             </dt>
             <dd>Converts entities in a value to their respective new entities. If an entity is not found in the map, it is left unchanged.</dd>
           </dl>
@@ -365,10 +383,20 @@
           </div></section>
         </section>
         <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a2fd36a82365d207f5b95b2f52780d490"><div>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="a2238d3875336b07640eb86802393f63f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2fd36a82365d207f5b95b2f52780d490" class="m-doc-self">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt;&amp; map,
+              using cubos::<wbr />core::<wbr />ecs::<wbr /><a href="#a2238d3875336b07640eb86802393f63f" class="m-doc-self">Plugin</a> = void(*)(<a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;)
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugin__queue_8hpp.html">&lt;core/ecs/plugin_queue.hpp&gt;</a></div>
+            </h3>
+            <p>Function pointer type representing a plugin.</p>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a2c5677b7a03cecd5a9464dad2abf1f12"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />ecs::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2c5677b7a03cecd5a9464dad2abf1f12" class="m-doc-self">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt;&amp; map,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
               void* value)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="blueprint_8hpp.html">&lt;core/ecs/blueprint.hpp&gt;</a></div>
