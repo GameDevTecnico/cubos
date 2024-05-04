@@ -1,5 +1,5 @@
 /// @file
-/// @brief Penetration Constraint plugin, resource @ref cubos::engine::PenetrationConstraintPlugin.
+/// @brief Penetration Constraint plugin.
 /// @ingroup physics-solver-plugin
 
 #pragma once
