@@ -20,7 +20,7 @@ void cubos::engine::solverPlugin(Cubos& cubos)
     cubos.tag(physicsSolveTag)
         .after(physicsSimulationSubstepsIntegrateTag)
         .before(physicsSimulationSubstepsCorrectPositionTag)
-        .tagged(fixedStepTag);
+        .tagged(fixedSubstepTag);
 
     cubos.plugin(penetrationConstraintPlugin);
 }
