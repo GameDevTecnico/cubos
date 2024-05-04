@@ -85,6 +85,7 @@
               <a href="#a4b350300f3e614bea6d2cba32f271de2a56525ae64d370c0b448ac0d60710ef17" class="m-doc">Warn</a> = CUBOS_LOG_LEVEL_WARN,
               <a href="#a4b350300f3e614bea6d2cba32f271de2a902b0d55fddef6f8d651fe1035b7d4bd" class="m-doc">Error</a> = CUBOS_LOG_LEVEL_ERROR,
               <a href="#a4b350300f3e614bea6d2cba32f271de2a278d01e5af56273bae1bb99a98b370cd" class="m-doc">Critical</a> = CUBOS_LOG_LEVEL_CRITICAL,
+              <a href="#a4b350300f3e614bea6d2cba32f271de2a216ab40cda5c7c00ff42a4efb1827d89" class="m-doc">Metric</a> = CUBOS_LOG_LEVEL_METRIC,
               <a href="#a4b350300f3e614bea6d2cba32f271de2ad15305d7a4e34e02489c74a5ef542f36" class="m-doc">Off</a> = CUBOS_LOG_LEVEL_OFF }</span>
             </dt>
             <dd>Represents a logging level.</dd>
@@ -101,6 +102,10 @@
               <span class="m-doc-wrap-bumper">static auto <a href="#ab73eeab73012fc5e6ec81809a312cf85" class="m-doc">level</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1Logger.html#a4b350300f3e614bea6d2cba32f271de2" class="m-doc">Level</a></span>
             </dt>
             <dd>Gets the current log level.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#abe68d5f3027412657b06284d66837743" class="m-doc">setFilePath</a>(</span><span class="m-doc-wrap">const std::string&amp; filePath) -&gt; bool</span>
+            </dt>
+            <dd>Sets a file path where logs will be saved.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#ad42c74549d55a38d94509d89bfac2af7" class="m-doc">write</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1Logger.html#a4b350300f3e614bea6d2cba32f271de2" class="m-doc">Level</a> level,
               <a href="structcubos_1_1core_1_1Logger_1_1Location.html" class="m-doc">Location</a> location,
@@ -178,6 +183,12 @@
                   </td>
                 </tr>
                 <tr>
+                  <td><a href="#a4b350300f3e614bea6d2cba32f271de2a216ab40cda5c7c00ff42a4efb1827d89" class="m-doc-self" id="a4b350300f3e614bea6d2cba32f271de2a216ab40cda5c7c00ff42a4efb1827d89">Metric</a></td>
+                  <td>
+                  <p><a href="structMetric.html" class="m-doc">Metric</a> log level. Used to debug metric values.</p>
+                  </td>
+                </tr>
+                <tr>
                   <td><a href="#a4b350300f3e614bea6d2cba32f271de2ad15305d7a4e34e02489c74a5ef542f36" class="m-doc-self" id="a4b350300f3e614bea6d2cba32f271de2ad15305d7a4e34e02489c74a5ef542f36">Off</a></td>
                   <td>
                   <p>Off log level, disables all logging.</p>
@@ -220,6 +231,30 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="abe68d5f3027412657b06284d66837743"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abe68d5f3027412657b06284d66837743" class="m-doc-self">setFilePath</a>(</span><span class="m-doc-wrap">const std::string&amp; filePath)</span></span>
+            </h3>
+            <p>Sets a file path where logs will be saved.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">filePath</td>
+                  <td>Path to file (inside <code>/logs</code>)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether setting the file occurred successfully.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Logs before setting the file will be dumped!</p></aside>
           </div></section>
           <section class="m-doc-details" id="ad42c74549d55a38d94509d89bfac2af7"><div>
             <h3>
