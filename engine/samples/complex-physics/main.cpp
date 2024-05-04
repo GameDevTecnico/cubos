@@ -30,11 +30,11 @@ static const Asset<Scene> RedCubeSceneAsset = AnyAsset("1aa5e234-28cb-4386-99b4-
 static const Asset<Scene> WhiteCubeSceneAsset = AnyAsset("1aa5e234-28cb-4386-99b4-39386b0fc222");
 static const Asset<VoxelPalette> PaletteAsset = AnyAsset("1aa5e234-28cb-4386-99b4-39386b0fc220");
 
-static const int NUM_WALLS = 3;
-static const int WALL_WIDTH = 11;
-static const int WALL_HEIGHT = 5;
-static const bool RANDOM_DIRECTIOn = true;
-static const glm::vec3 AIM_POINT = glm::vec3(0.0F, 3.0F, 0.0F);
+static const int NumWalls = 3;
+static const int WallWidth = 11;
+static const int WallHeight = 5;
+static const bool RandomDirection = true;
+static const glm::vec3 AimPoint = glm::vec3(0.0F, 3.0F, 0.0F);
 
 struct TimeBetweenShoots
 {
@@ -51,7 +51,7 @@ glm::vec3 randomPosition()
 
 glm::vec3 calculateDirection(glm::vec3 position)
 {
-    return glm::normalize(AIM_POINT - position);
+    return glm::normalize(AimPoint - position);
 }
 
 int main(int argc, char** argv)
@@ -127,13 +127,13 @@ int main(int argc, char** argv)
         // White cubes have 10 kg mass
         bool red = true;
         glm::vec3 nextPosition = {-4.5F, 1.0F, 0.5F};
-        for (int b = 0; b < NUM_WALLS; b++)
+        for (int b = 0; b < NumWalls; b++)
         {
             nextPosition.x = -4.5F;
-            for (int w = 0; w < WALL_WIDTH; w++)
+            for (int w = 0; w < WallWidth; w++)
             {
                 nextPosition.y = 1.0F;
-                for (int h = 0; h < WALL_HEIGHT; h++)
+                for (int h = 0; h < WallHeight; h++)
                 {
                     auto builder = cmds.spawn(red ? redCube->blueprint : whiteCube->blueprint);
                     builder.add("cube", Position{.vec = nextPosition});
@@ -157,7 +157,7 @@ int main(int argc, char** argv)
             {
                 // create cube in a position
                 auto builder = cmds.spawn(cube->blueprint);
-                glm::vec3 position = RANDOM_DIRECTIOn ? randomPosition() : glm::vec3{0.0F, 3.0F, -7.0F};
+                glm::vec3 position = RandomDirection ? randomPosition() : glm::vec3{0.0F, 3.0F, -7.0F};
                 builder.add("cube", Position{.vec = position});
 
                 // push cube in direction to the center
@@ -173,16 +173,6 @@ int main(int argc, char** argv)
                 time.current = 0.0F;
             }
         });
-
-    /*
-    cubos.startupSystem("load and set the Input Bindings")
-        .tagged("cubos.assets")
-        .call([](const Assets& assets, Input& input) {
-            input.bind(*assets.read<InputBindings>(EditorBindingsAsset), 0);
-            input.bind(*assets.read<InputBindings>(Player1BindingsAsset), 1);
-            input.bind(*assets.read<InputBindings>(Player2BindingsAsset), 2);
-        });
-    */
 
     cubos.system("draw gizmos").call([](Gizmos& gizmos) {
         // Draw Ground
