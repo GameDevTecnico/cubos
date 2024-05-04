@@ -16,6 +16,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        float value = 1.0F / 50.0F;
+        float value = 1.0F / 30.0F;
     };
 } // namespace cubos::engine
