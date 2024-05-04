@@ -23,7 +23,7 @@ void cubos::engine::gravityPlugin(Cubos& cubos)
             {
                 if (mass.inverseMass <= 0.0F)
                 {
-                    return;
+                    continue;
                 }
 
                 // Apply gravity force
