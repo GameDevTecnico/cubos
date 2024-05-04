@@ -21,6 +21,10 @@ int main()
     cubos::core::Logger::level(cubos::core::Logger::Level::Trace);
     /// [Set logging level]
 
+    /// [Log to file]
+    cubos::core::Logger::logToFile();
+    /// [Log to file]
+
     /// [Logging macros]
     CUBOS_TRACE("Trace message");
     CUBOS_DEBUG("Debug message");
@@ -29,6 +33,10 @@ int main()
     CUBOS_ERROR("Error message");
     CUBOS_CRITICAL("Critical message");
     /// [Logging macros]
+
+    /// [Set logging file]
+    cubos::core::Logger::logToFile("/logs/sample_logs.txt");
+    /// [Set logging file]
 
     /// [Logging macros with arguments]
     CUBOS_INFO("An integer: {}", 1);
