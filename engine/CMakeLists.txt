@@ -75,6 +75,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/physics/solver/utils.cpp"
 	"src/physics/constraints/penetration_constraint.cpp"
 	"src/physics/solver/penetration_constraint/plugin.cpp"
+	"src/physics/fixed_substep/plugin.cpp"
+	"src/physics/fixed_substep/substeps.cpp"
 
 	"src/input/plugin.cpp"
 	"src/input/input.cpp"
@@ -101,9 +103,6 @@ set(CUBOS_ENGINE_SOURCE
 	
 	"src/fixed_step/plugin.cpp"
 	"src/fixed_step/fixed_delta_time.cpp"
-
-	"src/fixed_substep/plugin.cpp"
-	"src/fixed_substep/substeps.cpp"
 
 	"src/render/shader/plugin.cpp"
 	"src/render/shader/shader.cpp"

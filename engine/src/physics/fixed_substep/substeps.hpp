@@ -4,13 +4,15 @@
 
 #pragma once
 
+#include <cubos/core/reflection/reflect.hpp>
+
 #include <cubos/engine/api.hpp>
 
 namespace cubos::engine
 {
     /// @brief Resource which holds the amount of substeps for the physics update.
     /// @ingroup physics-plugin
-    struct CUBOS_ENGINE_API Substeps
+    struct Substeps
     {
         CUBOS_REFLECT;
 
