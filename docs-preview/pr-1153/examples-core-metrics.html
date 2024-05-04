@@ -49,7 +49,8 @@
           Metrics
         </h1>
         <p>Using the metrics system.</p>
-<p><a name="md_metrics_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/metrics">here</a>.</p></aside><p>Logging metrics in <strong>CUBOS.</strong> is done through the metric macros defined in <a href="metrics_8hpp.html" class="m-doc">core/<wbr />metrics.hpp</a>.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/metrics.hpp&gt;</span></pre><p>You can calculate how much time a function/scope takes by using CUBOS_PROFILE :</p><pre class="m-code"><span class="kt">void</span><span class="w"> </span><span class="nf">myFunction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<p><a name="md_metrics_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/metrics">here</a>.</p></aside><p>Logging metrics in <strong>CUBOS.</strong> is done through the metric macros defined in <a href="metrics_8hpp.html" class="m-doc">core/<wbr />metrics.hpp</a>.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/metrics.hpp&gt;</span></pre><p>You can calculate how much time a function/scope takes by using CUBOS_PROFILE :</p><pre class="m-code"><span class="kt">void</span><span class="w"> </span><span class="nf">myFunction</span><span class="p">()</span>
+<span class="p">{</span>
 <span class="w">    </span><span class="n">CUBOS_PROFILE</span><span class="p">();</span>
 <span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// this function should take about 2000ms...</span>
