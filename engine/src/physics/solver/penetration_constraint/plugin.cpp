@@ -4,6 +4,7 @@
 
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
+#include <cubos/engine/fixed_substep/plugin.hpp>
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
@@ -30,6 +31,7 @@ glm::vec3 applyCorrectionToPosition(float inverseMass, glm::vec3 position, glm::
 void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
 {
     cubos.depends(fixedStepPlugin);
+    cubos.depends(fixedSubstepPlugin);
     cubos.depends(transformPlugin);
     cubos.depends(collisionsPlugin);
     cubos.depends(physicsPlugin);
@@ -44,7 +46,6 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
     // collision solving
     cubos.system("solve penetration constraints")
         .tagged(penetrationConstraintSolveTag)
-        .after(collisionsNarrowTag)
         .tagged(physicsSolveTag)
         .call([](Query<Entity, const Mass&, Position&, AccumulatedCorrection&, PenetrationConstraint&, Entity,
                        const Mass&, Position&, AccumulatedCorrection&>
@@ -108,6 +109,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
         .tagged(addPenetrationConstraintTag)
         .after(collisionsNarrowTag)
         .before(penetrationConstraintSolveTag)
+        .tagged(fixedStepTag)
         .call([](Commands cmds, Query<Entity, const CollidingWith&, Entity> query) {
             for (auto [ent1, collidingWith, ent2] : query)
             {
@@ -122,7 +124,8 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
 
     cubos.system("clean penetration constraint pairs")
         .tagged(penetrationConstraintCleanTag)
-        .before(collisionsNarrowTag)
+        .before(addPenetrationConstraintTag)
+        .tagged(fixedStepTag)
         .call([](Commands cmds, Query<Entity, PenetrationConstraint&, Entity> query) {
             for (auto [entity, constraint, other] : query)
             {

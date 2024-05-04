@@ -14,7 +14,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        int count = 0;
         int value = 4;
     };
 } // namespace cubos::engine

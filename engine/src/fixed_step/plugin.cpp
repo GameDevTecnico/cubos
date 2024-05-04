@@ -1,9 +1,6 @@
-#include <cubos/core/ecs/reflection.hpp>
-
 #include <cubos/engine/fixed_step/plugin.hpp>
 
 CUBOS_DEFINE_TAG(cubos::engine::fixedStepTag);
-CUBOS_DEFINE_TAG(cubos::engine::fixedSubstepTag);
 
 namespace
 {
@@ -13,16 +10,10 @@ namespace
     };
 } // namespace
 
-CUBOS_REFLECT_IMPL(cubos::engine::Substeps)
-{
-    return core::ecs::TypeBuilder<Substeps>("cubos::engine::Substeps").build();
-}
-
 void cubos::engine::fixedStepPlugin(Cubos& cubos)
 {
     cubos.resource<AccumulatedTime>();
     cubos.resource<FixedDeltaTime>();
-    cubos.resource<Substeps>();
 
     cubos.tag(fixedStepTag).repeatWhile([](AccumulatedTime& timer, const FixedDeltaTime& step) {
         if (timer.value >= step.value)
@@ -32,15 +23,6 @@ void cubos::engine::fixedStepPlugin(Cubos& cubos)
         }
         return false;
     });
-
-    cubos.tag(fixedSubstepTag)
-        .repeatWhile([](Substeps& substeps) {
-            substeps.count += 1;
-            return substeps.count <= substeps.value;
-        })
-        .tagged(fixedStepTag);
-
-    cubos.system("reset substeps tag").before(fixedStepTag).call([](Substeps& substeps) { substeps.count = 0; });
 
     cubos.system("accumulate time resource").before(fixedStepTag).call([](AccumulatedTime& timer, const DeltaTime& dt) {
         timer.value += dt.value();
