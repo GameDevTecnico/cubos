@@ -12,8 +12,8 @@
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
-#include <cubos/engine/renderer/directional_light.hpp>
-#include <cubos/engine/renderer/environment.hpp>
+#include <cubos/engine/render/lights/directional.hpp>
+#include <cubos/engine/render/lights/environment.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
 #include <cubos/engine/scene/scene.hpp>
@@ -101,7 +101,7 @@ int main(int argc, char** argv)
         renderer->setPalette(*assets.read<VoxelPalette>(PaletteAsset));
     });
 
-    cubos.startupSystem("set environment").call([](RendererEnvironment& environment) {
+    cubos.startupSystem("set environment").call([](RenderEnvironment& environment) {
         environment.ambient = {0.4F, 0.4F, 0.4F};
         environment.skyGradient[0] = {0.6F, 1.0F, 0.8F};
         environment.skyGradient[1] = {0.25F, 0.65F, 1.0F};
