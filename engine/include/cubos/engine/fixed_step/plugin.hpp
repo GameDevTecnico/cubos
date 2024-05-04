@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cubos/engine/fixed_step/fixed_delta_time.hpp>
+#include <cubos/engine/physics/resources/substeps.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -22,6 +23,7 @@ namespace cubos::engine
 
     /// @brief Systems with this tag run at a fixed framerate.
     CUBOS_ENGINE_API extern Tag fixedStepTag;
+    CUBOS_ENGINE_API extern Tag fixedSubstepTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
