@@ -26,5 +26,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup fixed-step-plugin
-    void fixedSubstepPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void fixedSubstepPlugin(Cubos& cubos);
 } // namespace cubos::engine
