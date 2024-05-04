@@ -18,6 +18,15 @@ CUBOS_DEFINE_TAG(cubos::engine::addPenetrationConstraintTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintCleanTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintSolveTag);
 
+glm::vec3 applyCorrectionToPosition(float inverseMass, glm::vec3 position, glm::vec3 correction)
+{
+    if (inverseMass <= 0.0F)
+    {
+        return position;
+    }
+    return position + correction; // lagrange * correction * inverseMass
+}
+
 void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
 {
     cubos.depends(fixedStepPlugin);
@@ -37,8 +46,8 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
         .tagged(penetrationConstraintSolveTag)
         .after(collisionsNarrowTag)
         .tagged(physicsSolveTag)
-        .call([](Query<Entity, const Mass&, const Position&, AccumulatedCorrection&, PenetrationConstraint&, Entity,
-                       const Mass&, const Position&, AccumulatedCorrection&>
+        .call([](Query<Entity, const Mass&, Position&, AccumulatedCorrection&, PenetrationConstraint&, Entity,
+                       const Mass&, Position&, AccumulatedCorrection&>
                      query,
                  const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             for (auto [ent1, mass1, position1, correction1, constraint, ent2, mass2, position2, correction2] : query)
@@ -49,26 +58,30 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 // rigid bodies
                 auto penetration = constraint.penetration;
 
-                auto differencePenetration1 =
-                    glm::dot(position1.vec - constraint.entity1OriginalPosition, constraint.normal);
-                auto differencePenetration2 =
-                    glm::dot(position2.vec - constraint.entity2OriginalPosition, constraint.normal);
+                float distForOgPenetration = glm::abs(glm::dot(
+                    constraint.entity1OriginalPosition - constraint.entity2OriginalPosition, constraint.normal));
+                float distForNowPenetration = glm::abs(glm::dot(position1.vec - position2.vec, constraint.normal));
 
-                if (ent1 == constraint.entity)
-                {
-                    penetration = penetration + differencePenetration1 - differencePenetration2;
-                }
-                else
-                {
-                    penetration = penetration - differencePenetration1 + differencePenetration2;
-                }
+                penetration += distForOgPenetration - distForNowPenetration;
 
                 glm::vec3 gradients[2] = {constraint.normal, -constraint.normal};
                 float inverseMasses[2] = {mass1.inverseMass, mass2.inverseMass};
 
+                // We use max to cap the distance that we can move the objects in a substep.
+                // We do this to prevent the velocity calculated after the correction from being too high making the
+                // simulation very explosive.
+                // The solution proposed in the papers is to choose a maximum velocity for a
+                // substep, however we couldn't get the simulation to stabilize like that so we opted so for a cap based
+                // on the current penetration between the objects.
+                float max = glm::max(penetration / (float)substeps.value, 0.0F);
+                float c = penetration - glm::max(penetration - max, 0.0F);
+                if (c <= 0.0F)
+                {
+                    continue;
+                }
+
                 float lagrangeUpdate =
-                    getLagrangeMultiplierUpdate(penetration, constraint.lagrangeMultiplier, inverseMasses, gradients, 2,
-                                                constraint.compliance, subDeltaTime);
+                    getLagrangeMultiplierUpdate(c, inverseMasses, gradients, 2, constraint.compliance, subDeltaTime);
 
                 glm::vec3 positionUpdate = lagrangeUpdate * constraint.normal;
 
@@ -76,25 +89,18 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 {
                     correction1.vec += positionUpdate * mass1.inverseMass;
                     correction2.vec -= positionUpdate * mass2.inverseMass;
+                    position1.vec = applyCorrectionToPosition(mass1.inverseMass, position1.vec, correction1.vec);
+                    position2.vec = applyCorrectionToPosition(mass2.inverseMass, position2.vec, correction2.vec);
                 }
                 else
                 {
                     correction1.vec -= positionUpdate * mass1.inverseMass;
                     correction2.vec += positionUpdate * mass2.inverseMass;
+                    position1.vec = applyCorrectionToPosition(mass1.inverseMass, position1.vec, correction1.vec);
+                    position2.vec = applyCorrectionToPosition(mass2.inverseMass, position2.vec, correction2.vec);
                 }
-
-                constraint.lagrangeMultiplier += lagrangeUpdate;
-            }
-        });
-
-    cubos.system("clear penetration constraint lagrange multiplier")
-        .tagged(physicsSimulationClearForcesTag)
-        .after(physicsSimulationSubstepsUpdateVelocityTag)
-        .tagged(fixedStepTag)
-        .call([](Query<PenetrationConstraint&> query) {
-            for (auto [constraint] : query)
-            {
-                constraint.lagrangeMultiplier = 0.0F;
+                correction1.vec = glm::vec3(0, 0, 0);
+                correction2.vec = glm::vec3(0, 0, 0);
             }
         });
 
