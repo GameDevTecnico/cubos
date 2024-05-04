@@ -19,7 +19,6 @@
 #include <cubos/engine/physics/components/velocity.hpp>
 #include <cubos/engine/physics/physics_bundle.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
-#include <cubos/engine/physics/resources/substeps.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
