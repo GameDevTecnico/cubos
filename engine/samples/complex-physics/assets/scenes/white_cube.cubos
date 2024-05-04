@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "cube": {
+      "cubos::engine::AccumulatedCorrection": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "cubos::engine::BoxCollisionShape": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "cubos::engine::Collider": {
+        "a": {
+          "w": 0.0,
+          "x": 1.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "b": {
+          "w": 0.0,
+          "x": 0.0,
+          "y": 1.0,
+          "z": 0.0
+        },
+        "c": {
+          "w": 0.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 1.0
+        },
+        "d": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "cubos::engine::Force": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "cubos::engine::Impulse": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "cubos::engine::Mass": {
+        "inverseMass": 0.1,
+        "mass": 10.0
+      },
+      "cubos::engine::Position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "cubos::engine::PreviousPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "cubos::engine::RenderableGrid": {
+        "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c86",
+        "offset": {
+          "x": -0.5,
+          "y": -0.5,
+          "z": -0.5
+        }
+      },
+      "cubos::engine::Rotation": {
+        "w": 0.0,
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "cubos::engine::Scale": 1.0,
+      "cubos::engine::Velocity": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    }
+  },
+  "imports": {}
+}
