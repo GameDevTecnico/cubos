@@ -130,6 +130,16 @@
             </dt>
             <dd>Gets an action state for a specific player.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1bd8c9ddd1c6bb83be20b67c5bb9d6ab" class="m-doc">justPressed</a>(</span><span class="m-doc-wrap">const char* actionName,
+              int player = 0) const -&gt; bool</span>
+            </dt>
+            <dd>Gets an action state for a specific player.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a13acda90845261071d2b60d5b5c54aae" class="m-doc">justReleased</a>(</span><span class="m-doc-wrap">const char* actionName,
+              int player = 0) const -&gt; bool</span>
+            </dt>
+            <dd>Gets an action state for a specific player.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a5e2e2aa6f0d63286725de27d3da983a1" class="m-doc">axis</a>(</span><span class="m-doc-wrap">const char* axisName,
               int player = 0) const -&gt; float</span>
             </dt>
@@ -158,6 +168,10 @@
               <span class="m-doc-wrap-bumper">void <a href="#a782b51ae71d9f3a8d0df2178d3801f8f" class="m-doc-self">updateMouse</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Resets the previous mouse position to equal the current.</dd>
+            <dt id="adf8ad545a2f4691c6571c83adb559bf5">
+              <span class="m-doc-wrap-bumper">void <a href="#adf8ad545a2f4691c6571c83adb559bf5" class="m-doc-self">updateActions</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Reset the previous Action justPressed and justReleased states.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af0f3d64c07ce6d6e2702d569a3e61554" class="m-doc">mousePosition</a>(</span><span class="m-doc-wrap">) const -&gt; glm::ivec2</span>
             </dt>
@@ -313,6 +327,62 @@
                 <tr>
                   <th>Returns</th>
                   <td>Whether the action exists and is pressed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1bd8c9ddd1c6bb83be20b67c5bb9d6ab"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1bd8c9ddd1c6bb83be20b67c5bb9d6ab" class="m-doc-self">justPressed</a>(</span><span class="m-doc-wrap">const char* actionName,
+              int player = 0) const</span></span>
+            </h3>
+            <p>Gets an action state for a specific player.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">actionName</td>
+                  <td>Name of the action.</td>
+                </tr>
+                <tr>
+                  <td>player</td>
+                  <td>Player whose action state will be retrieved.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the action exists and was just pressed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a13acda90845261071d2b60d5b5c54aae"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13acda90845261071d2b60d5b5c54aae" class="m-doc-self">justReleased</a>(</span><span class="m-doc-wrap">const char* actionName,
+              int player = 0) const</span></span>
+            </h3>
+            <p>Gets an action state for a specific player.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">actionName</td>
+                  <td>Name of the action.</td>
+                </tr>
+                <tr>
+                  <td>player</td>
+                  <td>Player whose action state will be retrieved.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the action exists and was just released.</td>
                 </tr>
               </tfoot>
             </table>
