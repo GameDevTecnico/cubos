@@ -77,7 +77,8 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a318a3676cd93f9362d9b0cb5ddb4db12" class="m-doc">AssetBridge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type) <span class="m-label m-flat m-info">explicit</span> </span>
+              <span class="m-doc-wrap-bumper"><a href="#a358f49c37a98132efc2cef5f7db8b5bd" class="m-doc">AssetBridge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              bool asynchronous = true) <span class="m-label m-flat m-info">explicit</span> </span>
             </dt>
             <dd>Constructs a bridge.</dd>
           </dl>
@@ -99,13 +100,18 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a7ca70b7b0ddc4bb1c7a8189da52ecdcf" class="m-doc">assetType</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp;</span>
             </dt>
             <dd>Gets the type of the assets the bridge loads.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5efb2732b7ce46524ad80846779b6c13" class="m-doc">asynchronous</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Whether the bridge should load assets asynchronously.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a318a3676cd93f9362d9b0cb5ddb4db12"><div>
+          <section class="m-doc-details" id="a358f49c37a98132efc2cef5f7db8b5bd"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />AssetBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a318a3676cd93f9362d9b0cb5ddb4db12" class="m-doc-self">AssetBridge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type) <span class="m-label m-info">explicit</span> </span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />AssetBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a358f49c37a98132efc2cef5f7db8b5bd" class="m-doc-self">AssetBridge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              bool asynchronous = true) <span class="m-label m-info">explicit</span> </span></span>
             </h3>
             <p>Constructs a bridge.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -116,6 +122,10 @@
                 <tr>
                   <td style="width: 1%">type</td>
                   <td>Type of assets loaded by the bridge.</td>
+                </tr>
+                <tr>
+                  <td>asynchronous</td>
+                  <td>Whether the bridge should load assets asynchronously.</td>
                 </tr>
               </tbody>
             </table>
@@ -188,6 +198,20 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Type of the asset.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5efb2732b7ce46524ad80846779b6c13"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />AssetBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5efb2732b7ce46524ad80846779b6c13" class="m-doc-self">asynchronous</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Whether the bridge should load assets asynchronously.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the bridge should load assets asynchronously.</td>
                 </tr>
               </tfoot>
             </table>

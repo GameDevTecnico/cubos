@@ -110,16 +110,9 @@
             </dt>
             <dd>Returns the index used to search for tables of relations with a given type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ae8680569dec181a3c9464071f4d94ffd" class="m-doc">move</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> source,
-              <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> target,
-              uint32_t index)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#aa3aaedc30b03c621bbc7f3a8ea014907" class="m-doc">erase</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> type)</span>
             </dt>
-            <dd>Moves all relations of an entity from an archetype to another.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a299d566d80ca17c3490b70bdbd01d205" class="m-doc">erase</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype,
-              uint32_t index)</span>
-            </dt>
-            <dd>Removes all relations of an entity.</dd>
+            <dd>Removes all relations of the given type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a78bd647c2d1b58221e40ac01b9c78994" class="m-doc">forEach</a>(</span><span class="m-doc-wrap">std::size_t counter,
               auto func) const -&gt; std::size_t</span>
@@ -260,51 +253,19 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae8680569dec181a3c9464071f4d94ffd"><div>
+          <section class="m-doc-details" id="aa3aaedc30b03c621bbc7f3a8ea014907"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTableRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8680569dec181a3c9464071f4d94ffd" class="m-doc-self">move</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> source,
-              <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> target,
-              uint32_t index)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTableRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3aaedc30b03c621bbc7f3a8ea014907" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a> type)</span></span>
             </h3>
-            <p>Moves all relations of an entity from an archetype to another.</p>
+            <p>Removes all relations of the given type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">source</td>
-                  <td>Old archetype.</td>
-                </tr>
-                <tr>
-                  <td>target</td>
-                  <td>New archetype.</td>
-                </tr>
-                <tr>
-                  <td>index</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a299d566d80ca17c3490b70bdbd01d205"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTableRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a299d566d80ca17c3490b70bdbd01d205" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a> archetype,
-              uint32_t index)</span></span>
-            </h3>
-            <p>Removes all relations of an entity.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">archetype</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> archetype.</td>
-                </tr>
-                <tr>
-                  <td>index</td>
-                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
+                  <td style="width: 1%">type</td>
+                  <td>Type identifier.</td>
                 </tr>
               </tbody>
             </table>

@@ -52,8 +52,8 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md105">Components</a></li>
-            <li><a href="#autotoc_md106">Relations</a></li>
+            <li><a href="#autotoc_md113">Components</a></li>
+            <li><a href="#autotoc_md114">Relations</a></li>
             <li>
               Reference
               <ul>
@@ -64,7 +64,7 @@
             </li>
           </ul>
         </nav>
-<p>This plugin operates on entities with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> and <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components, and any combination of the <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components. For example, if you have an entity which doesn&#x27;t need rotation, but has a position and a scale, you do not need to add the <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> component, and its transform will still be updated.</p><aside class="m-note m-info"><h4>Note</h4><p>Any entity with either a <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> or <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> component automatically gets a <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> component.</p></aside><section id="autotoc_md105"><h3><a href="#autotoc_md105">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> - holds the local to parent transform matrix.</li><li><a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> - holds the local to world transform matrix.</li><li><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> - holds the position of an entity.</li><li><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> - holds the rotation of an entity.</li><li><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> - holds the scaling of an entity.</li></ul></section><section id="autotoc_md106"><h3><a href="#autotoc_md106">Relations</a></h3><ul><li><a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a> - tree like relation which indicates an entity is a child of another.</li></ul></section>
+<p>This plugin operates on entities with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> and <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> components, and any combination of the <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components. For example, if you have an entity which doesn&#x27;t need rotation, but has a position and a scale, you do not need to add the <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> component, and its transform will still be updated.</p><aside class="m-note m-info"><h4>Note</h4><p>Any entity with either a <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> or <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> component automatically gets a <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> component.</p></aside><section id="autotoc_md113"><h3><a href="#autotoc_md113">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> - holds the local to parent transform matrix.</li><li><a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> - holds the local to world transform matrix.</li><li><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> - holds the position of an entity.</li><li><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> - holds the rotation of an entity.</li><li><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> - holds the scaling of an entity.</li></ul></section><section id="autotoc_md114"><h3><a href="#autotoc_md114">Relations</a></h3><ul><li><a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a> - tree like relation which indicates an entity is a child of another.</li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -117,16 +117,16 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga6dbdbeb2e933ee94558ed2d742f0fefe" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga2c61d596bb784b0791e87d0fc8197f54"><div>
+          <section class="m-doc-details" id="ga6dbdbeb2e933ee94558ed2d742f0fefe"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc-self">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga6dbdbeb2e933ee94558ed2d742f0fefe" class="m-doc-self">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2transform_2plugin_8hpp.html">&lt;engine/transform/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>

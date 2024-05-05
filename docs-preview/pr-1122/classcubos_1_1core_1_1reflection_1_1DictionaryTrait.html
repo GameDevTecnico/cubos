@@ -67,6 +67,10 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>
+            </dt>
+            <dd>Output structure for the iterator.</dd>
             <dt id="a47f7998f3782763f8ed01a890e4b1f42">
               using <a href="#a47f7998f3782763f8ed01a890e4b1f42" class="m-doc-self">Length</a> = std::size_t(*)(const void*instance)
             </dt>
@@ -128,6 +132,32 @@
               <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a02403e9cc1ecde82815cf6538ae94d85" class="m-doc">Value</a> value)</span>
             </dt>
             <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a9f1341dc341739448134519c332d37c5" class="m-doc">View</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html" class="m-doc">DictionaryTrait</a>&amp; trait,
+              void* instance)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a4ee452d73f5458db83e95fd7bf618e3a" class="m-doc">ConstView</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html" class="m-doc">DictionaryTrait</a>&amp; trait,
+              const void* instance)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other)</span>
+            </dt>
+            <dd>Copy constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ab9407c5a3967a98aa49babf8596a76da" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">Iterator&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other)</span>
+            </dt>
+            <dd>Copy constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ab9407c5a3967a98aa49babf8596a76da" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">Iterator&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -174,13 +204,119 @@
             </dt>
             <dd>Returns the value type of the dictionary.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0a17a82ee5446515718491fa110c5a95" class="m-doc">view</a>(</span><span class="m-doc-wrap">void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1View.html" class="m-doc">View</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0a17a82ee5446515718491fa110c5a95" class="m-doc">view</a>(</span><span class="m-doc-wrap">void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a0406ed6a8abc69187c542fa41cb14e31" class="m-doc">View</a></span>
             </dt>
             <dd>Returns a view of the given dictionary instance.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7cf536f6084654c67061ae15efd955db" class="m-doc">view</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1ConstView.html" class="m-doc">ConstView</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7cf536f6084654c67061ae15efd955db" class="m-doc">view</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a99c325be8495aea25bf004fd9b2d9ddc" class="m-doc">ConstView</a></span>
             </dt>
             <dd>Returns a view of the given dictionary instance.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9d77670c5f5572e023bae293983008eb" class="m-doc">length</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Returns the length of the dictionary.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afb2e7a14c3d074df0736b258d53dff6c" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator to the first entry.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aaa050e20131da585ecfc42da9f56164e" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator to the entry after the last entry.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aff41426338a654207a3d49cc3bd5a406" class="m-doc">find</a>(</span><span class="m-doc-wrap">const void* key) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator to the entry with the given key.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a95466f04e727dec59bc22de4d9ff59c4" class="m-doc">insertDefault</a>(</span><span class="m-doc-wrap">const void* key) const</span>
+            </dt>
+            <dd>Inserts a default-constructed value with the given key.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac92c2a8951fe6543f479d7e9dd850890" class="m-doc">insertCopy</a>(</span><span class="m-doc-wrap">const void* key,
+              const void* value) const</span>
+            </dt>
+            <dd>Inserts a copy-constructed value with the given key.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a631166e7a538b62476e88e741e7918a8" class="m-doc">insertMove</a>(</span><span class="m-doc-wrap">const void* key,
+              void* value) const</span>
+            </dt>
+            <dd>Inserts a move-constructed value with the given key.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a6d9c7ce20ed66b70658411b72c02fccc" class="m-doc">erase</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; iterator) const</span>
+            </dt>
+            <dd>Removes an entry.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a587899e5abf826a877122abbb95e667c" class="m-doc">erase</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;&amp; iterator) const</span>
+            </dt>
+            <dd>Removes an entry.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#abf3ce65af8990b6bee95937b94e24d1e" class="m-doc">clear</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Clears the dictionary.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9d77670c5f5572e023bae293983008eb" class="m-doc">length</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Returns the length of the dictionary.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afb2e7a14c3d074df0736b258d53dff6c" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator to the first entry.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aaa050e20131da585ecfc42da9f56164e" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator to the entry after the last entry.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aff41426338a654207a3d49cc3bd5a406" class="m-doc">find</a>(</span><span class="m-doc-wrap">const void* key) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator to the entry with the given key.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3d3662f87029d7c0664da11eff1f5580" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; other) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Assigns an iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1c68d9f74bce83a5f93869075208e4b7" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; other) const -&gt; bool</span>
+            </dt>
+            <dd>Compares two iterators.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a28cefcf9ec3e5d8bcdaadf4aa3d66327" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;) const -&gt; bool</span>
+            </dt>
+            <dd>Compares two iterators.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a02556abc87315256f470ecf90d208fc4" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>&amp;</span>
+            </dt>
+            <dd>Accesses the entry referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae4a7963d922126f52fb8d80eb0c5dee0" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>*</span>
+            </dt>
+            <dd>Accesses the entry referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af58702303add909caa500e4861a97648" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Advances the iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3d3662f87029d7c0664da11eff1f5580" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; other) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Assigns an iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1c68d9f74bce83a5f93869075208e4b7" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; other) const -&gt; bool</span>
+            </dt>
+            <dd>Compares two iterators.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a28cefcf9ec3e5d8bcdaadf4aa3d66327" class="m-doc">operator!=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;) const -&gt; bool</span>
+            </dt>
+            <dd>Compares two iterators.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a02556abc87315256f470ecf90d208fc4" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>&amp;</span>
+            </dt>
+            <dd>Accesses the entry referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae4a7963d922126f52fb8d80eb0c5dee0" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>*</span>
+            </dt>
+            <dd>Accesses the entry referenced by this iterator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af58702303add909caa500e4861a97648" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;</span>
+            </dt>
+            <dd>Advances the iterator.</dd>
           </dl>
         </section>
         <section>
@@ -238,6 +374,118 @@
                 <tr>
                   <td>value</td>
                   <td>Function used to get the address of the value pointed to by an iterator.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9f1341dc341739448134519c332d37c5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9f1341dc341739448134519c332d37c5" class="m-doc-self">View</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html" class="m-doc">DictionaryTrait</a>&amp; trait,
+              void* instance)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">trait</td>
+                  <td>Trait.</td>
+                </tr>
+                <tr>
+                  <td>instance</td>
+                  <td>Instance.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4ee452d73f5458db83e95fd7bf618e3a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ee452d73f5458db83e95fd7bf618e3a" class="m-doc-self">ConstView</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html" class="m-doc">DictionaryTrait</a>&amp; trait,
+              const void* instance)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">trait</td>
+                  <td>Trait.</td>
+                </tr>
+                <tr>
+                  <td>instance</td>
+                  <td>Instance.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a59188a3059a273ae03df6fd18cd2cf87"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other)</span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab9407c5a3967a98aa49babf8596a76da"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab9407c5a3967a98aa49babf8596a76da" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">Iterator&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a59188a3059a273ae03df6fd18cd2cf87"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const Iterator&amp; other)</span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab9407c5a3967a98aa49babf8596a76da"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab9407c5a3967a98aa49babf8596a76da" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">Iterator&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
                 </tr>
               </tbody>
             </table>
@@ -396,7 +644,7 @@
           </div></section>
           <section class="m-doc-details" id="a0a17a82ee5446515718491fa110c5a95"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a17a82ee5446515718491fa110c5a95" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a0406ed6a8abc69187c542fa41cb14e31" class="m-doc">View</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a17a82ee5446515718491fa110c5a95" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
             </h3>
             <p>Returns a view of the given dictionary instance.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -419,7 +667,7 @@
           </div></section>
           <section class="m-doc-details" id="a7cf536f6084654c67061ae15efd955db"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1ConstView.html" class="m-doc">ConstView</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7cf536f6084654c67061ae15efd955db" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a99c325be8495aea25bf004fd9b2d9ddc" class="m-doc">ConstView</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7cf536f6084654c67061ae15efd955db" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
             </h3>
             <p>Returns a view of the given dictionary instance.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -439,6 +687,455 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a9d77670c5f5572e023bae293983008eb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d77670c5f5572e023bae293983008eb" class="m-doc-self">length</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the length of the dictionary.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Dictionary length.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afb2e7a14c3d074df0736b258d53dff6c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afb2e7a14c3d074df0736b258d53dff6c" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns an iterator to the first entry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aaa050e20131da585ecfc42da9f56164e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa050e20131da585ecfc42da9f56164e" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns an iterator to the entry after the last entry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aff41426338a654207a3d49cc3bd5a406"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff41426338a654207a3d49cc3bd5a406" class="m-doc-self">find</a>(</span><span class="m-doc-wrap">const void* key) const</span></span>
+            </h3>
+            <p>Returns an iterator to the entry with the given key.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>If no entry with the given key exists, <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#aaa050e20131da585ecfc42da9f56164e" class="m-doc">end()</a> is returned.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a95466f04e727dec59bc22de4d9ff59c4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a95466f04e727dec59bc22de4d9ff59c4" class="m-doc-self">insertDefault</a>(</span><span class="m-doc-wrap">const void* key) const</span></span>
+            </h3>
+            <p>Inserts a default-constructed value with the given key.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a32b5dbbb8d5eb89a33d235298addeb5d" class="m-doc">DictionaryTrait::<wbr />hasInsertDefault()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ac92c2a8951fe6543f479d7e9dd850890"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac92c2a8951fe6543f479d7e9dd850890" class="m-doc-self">insertCopy</a>(</span><span class="m-doc-wrap">const void* key,
+              const void* value) const</span></span>
+            </h3>
+            <p>Inserts a copy-constructed value with the given key.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#abe1115f846edda2fe8217f2409a58401" class="m-doc">DictionaryTrait::<wbr />hasInsertCopy()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a631166e7a538b62476e88e741e7918a8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a631166e7a538b62476e88e741e7918a8" class="m-doc-self">insertMove</a>(</span><span class="m-doc-wrap">const void* key,
+              void* value) const</span></span>
+            </h3>
+            <p>Inserts a move-constructed value with the given key.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a4b0d83d0cc344a7d0b5a94d57f3e2451" class="m-doc">DictionaryTrait::<wbr />hasInsertMove()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a6d9c7ce20ed66b70658411b72c02fccc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6d9c7ce20ed66b70658411b72c02fccc" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; iterator) const</span></span>
+            </h3>
+            <p>Removes an entry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">iterator</td>
+                  <td>Iterator.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a0647676cf7f2c519be6d8cf4b02c2d96" class="m-doc">DictionaryTrait::<wbr />hasErase()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a587899e5abf826a877122abbb95e667c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a587899e5abf826a877122abbb95e667c" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;&amp; iterator) const</span></span>
+            </h3>
+            <p>Removes an entry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">iterator</td>
+                  <td>Iterator.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a0647676cf7f2c519be6d8cf4b02c2d96" class="m-doc">DictionaryTrait::<wbr />hasErase()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="abf3ce65af8990b6bee95937b94e24d1e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf3ce65af8990b6bee95937b94e24d1e" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Clears the dictionary.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a0647676cf7f2c519be6d8cf4b02c2d96" class="m-doc">DictionaryTrait::<wbr />hasErase()</a> returns false.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9d77670c5f5572e023bae293983008eb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d77670c5f5572e023bae293983008eb" class="m-doc-self">length</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the length of the dictionary.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Dictionary length.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afb2e7a14c3d074df0736b258d53dff6c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afb2e7a14c3d074df0736b258d53dff6c" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns an iterator to the first entry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aaa050e20131da585ecfc42da9f56164e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa050e20131da585ecfc42da9f56164e" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns an iterator to the entry after the last entry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aff41426338a654207a3d49cc3bd5a406"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff41426338a654207a3d49cc3bd5a406" class="m-doc-self">find</a>(</span><span class="m-doc-wrap">const void* key) const</span></span>
+            </h3>
+            <p>Returns an iterator to the entry with the given key.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>If no entry with the given key exists, <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#aaa050e20131da585ecfc42da9f56164e" class="m-doc">end()</a> is returned.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a3d3662f87029d7c0664da11eff1f5580"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d3662f87029d7c0664da11eff1f5580" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; other)</span></span>
+            </h3>
+            <p>Assigns an iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1c68d9f74bce83a5f93869075208e4b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c68d9f74bce83a5f93869075208e4b7" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; other) const</span></span>
+            </h3>
+            <p>Compares two iterators.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the iterators point to the same entry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a28cefcf9ec3e5d8bcdaadf4aa3d66327"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28cefcf9ec3e5d8bcdaadf4aa3d66327" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;) const</span></span>
+            </h3>
+            <p>Compares two iterators.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the iterators point to different entries.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a02556abc87315256f470ecf90d208fc4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a02556abc87315256f470ecf90d208fc4" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the entry referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ae4a7963d922126f52fb8d80eb0c5dee0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>* cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae4a7963d922126f52fb8d80eb0c5dee0" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the entry referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="af58702303add909caa500e4861a97648"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af58702303add909caa500e4861a97648" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Advances the iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to this.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a3d3662f87029d7c0664da11eff1f5580"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d3662f87029d7c0664da11eff1f5580" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; other)</span></span>
+            </h3>
+            <p>Assigns an iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1c68d9f74bce83a5f93869075208e4b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c68d9f74bce83a5f93869075208e4b7" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; other) const</span></span>
+            </h3>
+            <p>Compares two iterators.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other iterator.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the iterators point to the same entry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a28cefcf9ec3e5d8bcdaadf4aa3d66327"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28cefcf9ec3e5d8bcdaadf4aa3d66327" class="m-doc-self">operator!=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp;) const</span></span>
+            </h3>
+            <p>Compares two iterators.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the iterators point to different entries.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a02556abc87315256f470ecf90d208fc4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a02556abc87315256f470ecf90d208fc4" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the entry referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ae4a7963d922126f52fb8d80eb0c5dee0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>* cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae4a7963d922126f52fb8d80eb0c5dee0" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Accesses the entry referenced by this iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="structcubos_1_1core_1_1reflection_1_1DictionaryTrait_1_1Entry.html" class="m-doc">Entry</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="af58702303add909caa500e4861a97648"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html#a59188a3059a273ae03df6fd18cd2cf87" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />DictionaryTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af58702303add909caa500e4861a97648" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Advances the iterator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to this.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if out of bounds.</p></aside>
           </div></section>
         </section>
       </div>

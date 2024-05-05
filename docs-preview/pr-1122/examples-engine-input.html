@@ -173,6 +173,26 @@
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;X or Z&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">showcaseJustXZ</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Input</span><span class="o">&amp;</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&amp;</span><span class="w"> </span><span class="n">explained</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">explained</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_WARN</span><span class="p">(</span><span class="s">&quot;This showcase will print `justPressed X or Z` when either X or Z is justPressed and `justReleased &quot;</span>
+<span class="w">                   </span><span class="s">&quot;X or Z when either X or Z is justReleased`. Press Enter to advance to the &quot;</span>
+<span class="w">                   </span><span class="s">&quot;next showcase.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">explained</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">justPressed</span><span class="p">(</span><span class="s">&quot;x-or-z&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;justPressed X or Z&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">justReleased</span><span class="p">(</span><span class="s">&quot;x-or-z&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;justReleased X or Z&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span></pre><p>Finding out whether the user is pressing a key is checked by a simple call to <a href="classcubos_1_1engine_1_1Input.html#a10c7543ffde9d8d2dbac868e266849e6" class="m-doc">Input::<wbr />pressed</a>.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">showcaseModifiers</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Input</span><span class="o">&amp;</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&amp;</span><span class="w"> </span><span class="n">explained</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">explained</span><span class="p">)</span>
