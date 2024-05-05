@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::DeferredShading struct | CUBOS. Docs</title>
+  <title>cubos::engine::Bloom struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DeferredShading <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="deferred__shading_8hpp.html">&lt;engine/render/deferred_shading/deferred_shading.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Bloom <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="bloom_2bloom_8hpp.html">&lt;engine/render/bloom/bloom.hpp&gt;</a></div>
         </h1>
-        <p>Component which stores the Deferred Shading state for a render target.</p>
+        <p>Component which stores the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> state for a render target.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,32 +64,72 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a5038b2f53da56219720008c75f2bf378">
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a5038b2f53da56219720008c75f2bf378" class="m-doc-self">frontFramebuffer</a>
+            <dt id="adc4de94d08a373a398800c2dfe0fa8c5">
+              int <a href="#adc4de94d08a373a398800c2dfe0fa8c5" class="m-doc-self">iterations</a>
+            </dt>
+            <dd>Number of blur passes to apply.</dd>
+            <dt id="a04b41eaced561943a0831cea84d29f79">
+              float <a href="#a04b41eaced561943a0831cea84d29f79" class="m-doc-self">threshold</a>
+            </dt>
+            <dd>Threshold for the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> effect.</dd>
+            <dt id="a62da0d3cd7ca67a2e1dcb6c4b8b141dd">
+              float <a href="#a62da0d3cd7ca67a2e1dcb6c4b8b141dd" class="m-doc-self">softThreshold</a>
+            </dt>
+            <dd>Soft threshold for the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> effect.</dd>
+            <dt id="afd9ba3bd9bc2c38a2a8b4aa56f47e1ce">
+              float <a href="#afd9ba3bd9bc2c38a2a8b4aa56f47e1ce" class="m-doc-self">intensity</a>
+            </dt>
+            <dd>Intensity of the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> effect.</dd>
+            <dt id="a9cb71ec05b71be31be18be23e167f709">
+              glm::vec3 <a href="#a9cb71ec05b71be31be18be23e167f709" class="m-doc-self">luminance</a>
+            </dt>
+            <dd>Luminance values used to calculate the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> effect.</dd>
+            <dt id="a84189e551eed56e46ed278e51fb8adcf">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a84189e551eed56e46ed278e51fb8adcf" class="m-doc-self">frontFramebuffer</a>
             </dt>
             <dd>Framebuffer used to draw to the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</dd>
             <dt>
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a1fe802bcb2e8bd7f5e682202103dd12a" class="m-doc">backFramebuffer</a>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a107a0cc05c9da31ac6a7394d89c41f49" class="m-doc">backFramebuffer</a>
             </dt>
             <dd>Framebuffer used to draw to the back <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</dd>
-            <dt id="a7147fa28b2d426270568a685e34b3f7f">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a7147fa28b2d426270568a685e34b3f7f" class="m-doc-self">frontHDR</a>
+            <dt id="ad42d7f62c9514398ce98325c8d8168e6">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#ad42d7f62c9514398ce98325c8d8168e6" class="m-doc-self">frontHDR</a>
             </dt>
-            <dd><a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture present in the <a href="structcubos_1_1engine_1_1DeferredShading.html#a5038b2f53da56219720008c75f2bf378" class="m-doc">frontFramebuffer</a>.</dd>
-            <dt id="a353e10d13bf6dd4f1e3c5eca3f2a71b5">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a353e10d13bf6dd4f1e3c5eca3f2a71b5" class="m-doc-self">backHDR</a>
+            <dd><a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture present in the <a href="structcubos_1_1engine_1_1Bloom.html#a84189e551eed56e46ed278e51fb8adcf" class="m-doc">frontFramebuffer</a>.</dd>
+            <dt id="aa05e3ff158c7de7aea905fea5cffdfe8">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#aa05e3ff158c7de7aea905fea5cffdfe8" class="m-doc-self">backHDR</a>
             </dt>
-            <dd><a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture present in the <a href="structcubos_1_1engine_1_1DeferredShading.html#a1fe802bcb2e8bd7f5e682202103dd12a" class="m-doc">backFramebuffer</a>.</dd>
+            <dd><a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture present in the <a href="structcubos_1_1engine_1_1Bloom.html#a107a0cc05c9da31ac6a7394d89c41f49" class="m-doc">backFramebuffer</a>.</dd>
+            <dt id="ac2b9566afdaf3f2544638fff8b2d4f3c">
+              glm::uvec2 <a href="#ac2b9566afdaf3f2544638fff8b2d4f3c" class="m-doc-self">size</a>
+            </dt>
+            <dd>Size of the textures.</dd>
+            <dt id="a09518cfb634c36e681dd74ba6abbb774">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a09518cfb634c36e681dd74ba6abbb774" class="m-doc-self">extractionTexture</a>
+            </dt>
+            <dd>Texture where the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> extraction result is stored.</dd>
+            <dt id="aeb0c7dc4ab84a2e1ef22b05a8ecda98c">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#aeb0c7dc4ab84a2e1ef22b05a8ecda98c" class="m-doc-self">extractionFramebuffer</a>
+            </dt>
+            <dd>Framebuffer used to draw to the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> extraction texture.</dd>
+            <dt id="ab7856656ac78a7dc060578b40284b947">
+              std::vector&lt;<a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt; <a href="#ab7856656ac78a7dc060578b40284b947" class="m-doc-self">bloomTextures</a>
+            </dt>
+            <dd>Textures where the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> result is stored.</dd>
+            <dt id="a4c9c2fd87a27703acd887c203737379a">
+              std::vector&lt;<a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&gt; <a href="#a4c9c2fd87a27703acd887c203737379a" class="m-doc-self">bloomFramebuffers</a>
+            </dt>
+            <dd>Framebuffers used to draw to the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> textures.</dd>
           </dl>
         </section>
         <section>
           <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="a1fe802bcb2e8bd7f5e682202103dd12a"><div>
+          <section class="m-doc-details" id="a107a0cc05c9da31ac6a7394d89c41f49"><div>
             <h3>
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> cubos::<wbr />engine::<wbr />DeferredShading::<wbr /><a href="#a1fe802bcb2e8bd7f5e682202103dd12a" class="m-doc-self">backFramebuffer</a>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> cubos::<wbr />engine::<wbr />Bloom::<wbr /><a href="#a107a0cc05c9da31ac6a7394d89c41f49" class="m-doc-self">backFramebuffer</a>
             </h3>
             <p>Framebuffer used to draw to the back <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</p>
-<p>Swapped with <a href="structcubos_1_1engine_1_1DeferredShading.html#a5038b2f53da56219720008c75f2bf378" class="m-doc">frontFramebuffer</a> as needed so that the textures match with the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> component.</p>
+<p>Swapped with <a href="structcubos_1_1engine_1_1Bloom.html#a84189e551eed56e46ed278e51fb8adcf" class="m-doc">frontFramebuffer</a> as needed so that the textures match with the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> component.</p>
           </div></section>
         </section>
       </div>

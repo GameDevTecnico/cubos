@@ -67,12 +67,26 @@
             <dt id="a8ab8f61fb7d8034ecd84c05fe021cd46">
               glm::uvec2 <a href="#a8ab8f61fb7d8034ecd84c05fe021cd46" class="m-doc-self">size</a>
             </dt>
-            <dd>Size of the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture, in pixels.</dd>
-            <dt id="a307703f4e37c79756be07f2a287c4662">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a307703f4e37c79756be07f2a287c4662" class="m-doc-self">texture</a>
+            <dd>Size of the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> textures, in pixels.</dd>
+            <dt id="a4878629e64fa4b45fd8c8159ea8cbadb">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a4878629e64fa4b45fd8c8159ea8cbadb" class="m-doc-self">frontTexture</a>
             </dt>
-            <dd>Handle to the actual <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</dd>
+            <dd>Handle to the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture to write to/read from.</dd>
+            <dt>
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#ac997afe8418bd3bb009962585012e78f" class="m-doc">backTexture</a>
+            </dt>
+            <dd>Handle to the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture to be written to by post-processing plugins.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="ac997afe8418bd3bb009962585012e78f"><div>
+            <h3>
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> cubos::<wbr />engine::<wbr />HDR::<wbr /><a href="#ac997afe8418bd3bb009962585012e78f" class="m-doc-self">backTexture</a>
+            </h3>
+            <p>Handle to the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture to be written to by post-processing plugins.</p>
+<p>Each effect should write to this texture and then swap it with <a href="structcubos_1_1engine_1_1HDR.html#a4878629e64fa4b45fd8c8159ea8cbadb" class="m-doc">frontTexture</a>.</p>
+          </div></section>
         </section>
       </div>
     </div>
