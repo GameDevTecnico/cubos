@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deferred Shading plugin (#1086, **@RiscadoA**).
 - SSAO plugin (#1088, **@RiscadoA**).
 - Split screen for the new renderer (#1149, **@tomas7770**).
+- Trait for representing inheritance relationships under reflection. (#693, **@roby2014**).
 
 ### Changed
 
