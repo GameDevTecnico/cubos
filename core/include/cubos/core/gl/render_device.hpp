@@ -60,6 +60,7 @@ namespace cubos::core::gl
         class DepthStencilState;
         class BlendState;
 
+        class PixelPackBuffer;
         class Sampler;
         class Texture1D;
         class Texture2D;
@@ -97,6 +98,11 @@ namespace cubos::core::gl
     /// @see @ref impl::BlendState - blend state interface.
     /// @ingroup core-gl
     using BlendState = std::shared_ptr<impl::BlendState>;
+
+    /// @brief Handle to a pixel pack buffer.
+    /// @see @ref impl::PixelPackBuffer - pixel pack buffer interface.
+    /// @ingroup core-gl
+    using PixelPackBuffer = std::shared_ptr<impl::PixelPackBuffer>;
 
     /// @brief Handle to a sampler.
     /// @see @ref impl::Sampler - sampler interface.
@@ -763,6 +769,11 @@ namespace cubos::core::gl
         /// @param bs Blend state handle.
         virtual void setBlendState(BlendState bs) = 0;
 
+        /// @brief Creates a new pixel pack buffer.
+        /// @param size Buffer size in bytes.
+        /// @return Pixel pack buffer handle, or nullptr on failure.
+        virtual PixelPackBuffer createPixelPackBuffer(std::size_t size) = 0;
+
         /// @brief Creates a new texture sampler.
         /// @param desc Sampler description.
         /// @return Sampler handle, or nullptr on failure.
@@ -1002,6 +1013,23 @@ namespace cubos::core::gl
             BlendState() = default;
         };
 
+        /// @brief Abstract pixel pack buffer.
+        class CUBOS_CORE_API PixelPackBuffer
+        {
+        public:
+            virtual ~PixelPackBuffer() = default;
+
+            /// @brief Maps the pixel buffer to a region in memory. Must be matched with a call to @ref unmap().
+            /// @return Pointer to the memory region.
+            virtual const void* map() = 0;
+
+            /// @brief Unmaps the pixel buffer.
+            virtual void unmap() = 0;
+
+        protected:
+            PixelPackBuffer() = default;
+        };
+
         /// @brief Abstract sampler.
         class CUBOS_CORE_API Sampler
         {
@@ -1055,6 +1083,11 @@ namespace cubos::core::gl
             /// @param outputBuffer Buffer to write the data to.
             /// @param level Mip level to read.
             virtual void read(void* outputBuffer, std::size_t level = 0) = 0;
+
+            /// @brief Copies part of the texture data into a pixel pack buffer.
+            /// @param buffer Buffer to copy into.
+            /// @param level Mip level to copy.
+            virtual void copyTo(gl::PixelPackBuffer buffer, std::size_t level = 0) = 0;
 
             /// @brief Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
