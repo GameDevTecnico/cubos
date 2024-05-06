@@ -16,10 +16,8 @@
 
 #include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/screen_picker/plugin.hpp>
+#include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
-#include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 /// [Including plugin headers]
@@ -94,10 +92,7 @@ int main()
     /// [Adding the plugin]
     cubos.plugin(settingsPlugin);
     cubos.plugin(windowPlugin);
-    cubos.plugin(transformPlugin);
-    cubos.plugin(assetsPlugin);
-    cubos.plugin(screenPickerPlugin);
-    cubos.plugin(rendererPlugin);
+    cubos.plugin(renderTargetPlugin);
     cubos.plugin(imguiPlugin);
     /// [Adding the plugin]
 

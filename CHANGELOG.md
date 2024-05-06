@@ -67,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Split Dispatcher into Planner and Schedule (#1117, **@RiscadoA**).
 - Use Pixel Pack Buffers to speed up entity picking (**@RiscadoA**).
 - Make Gizmos plugin draw to RenderTargets (#1157, **@RiscadoA**).
+- Make ImGui plugin use RenderTargets (#1140, **@RiscadoA**).
 
 ### Fixed
 
