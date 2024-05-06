@@ -7,11 +7,10 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/render/defaults/plugin.hpp>
+#include <cubos/engine/render/tone_mapping/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
-#include <cubos/engine/screen_picker/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
-#include <cubos/engine/splitscreen/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -34,14 +33,15 @@ void cubos::engine::defaultsPlugin(Cubos& cubos)
 
     cubos.plugin(scenePlugin);
     cubos.plugin(voxelsPlugin);
-    cubos.plugin(screenPickerPlugin);
     cubos.plugin(inputPlugin);
     cubos.plugin(physicsPlugin);
 
     cubos.plugin(solverPlugin);
-    cubos.plugin(rendererPlugin);
+    cubos.plugin(renderDefaultsPlugin);
 
-    cubos.plugin(splitscreenPlugin);
     cubos.plugin(gizmosPlugin);
     cubos.plugin(imguiPlugin);
+
+    cubos.tag(gizmosDrawTag).after(toneMappingTag);
+    cubos.tag(imguiEndTag).after(gizmosDrawTag);
 }
