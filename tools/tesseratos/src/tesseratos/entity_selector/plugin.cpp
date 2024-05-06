@@ -3,8 +3,10 @@
 #include <cubos/core/ecs/reflection.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/screen_picker/plugin.hpp>
+#include <cubos/engine/render/picker/picker.hpp>
+#include <cubos/engine/render/picker/plugin.hpp>
+#include <cubos/engine/render/target/plugin.hpp>
+#include <cubos/engine/render/target/target.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 #include <tesseratos/entity_selector/plugin.hpp>
@@ -19,7 +21,9 @@ using cubos::core::io::WindowEvent;
 
 using cubos::engine::Cubos;
 using cubos::engine::EventReader;
-using cubos::engine::ScreenPicker;
+using cubos::engine::Query;
+using cubos::engine::RenderPicker;
+using cubos::engine::RenderTarget;
 
 using namespace tesseratos;
 
@@ -33,9 +37,9 @@ CUBOS_REFLECT_IMPL(EntitySelector)
 void tesseratos::entitySelectorPlugin(Cubos& cubos)
 {
     cubos.depends(cubos::engine::imguiPlugin);
-    cubos.depends(cubos::engine::screenPickerPlugin);
     cubos.depends(cubos::engine::windowPlugin);
-    cubos.depends(cubos::engine::rendererPlugin);
+    cubos.depends(cubos::engine::renderTargetPlugin);
+    cubos.depends(cubos::engine::renderPickerPlugin);
 
     cubos.resource<EntitySelector>();
 
@@ -46,10 +50,9 @@ void tesseratos::entitySelectorPlugin(Cubos& cubos)
 
     cubos.system("process window input for EntitySelector")
         .after(cubos::engine::windowPollTag)
-        .after(cubos::engine::rendererDrawTag)
-        .after(cubos::engine::screenPickerDrawTag)
-        .call([](const ScreenPicker& screenPicker, EntitySelector& entitySelector, const World& world,
-                 EventReader<WindowEvent> windowEvent) {
+        .after(cubos::engine::drawToRenderPickerTag)
+        .call([](Query<const RenderPicker&, const RenderTarget&> pickers, EntitySelector& entitySelector,
+                 const World& world, EventReader<WindowEvent> windowEvent) {
             for (const auto& event : windowEvent)
             {
                 if (ImGui::GetIO().WantCaptureMouse)
@@ -68,16 +71,25 @@ void tesseratos::entitySelectorPlugin(Cubos& cubos)
                     {
                         if (std::get<MouseButtonEvent>(event).pressed)
                         {
-                            uint32_t entityId =
-                                screenPicker.at(entitySelector.lastMousePosition.x, entitySelector.lastMousePosition.y);
+                            for (auto [picker, target] : pickers)
+                            {
+                                if (target.framebuffer == nullptr)
+                                {
+                                    uint32_t entityId =
+                                        picker.read(static_cast<unsigned int>(entitySelector.lastMousePosition.x),
+                                                    static_cast<unsigned int>(entitySelector.lastMousePosition.y));
 
-                            if (entityId == UINT32_MAX)
-                            {
-                                entitySelector.selection = Entity{};
-                            }
-                            else if (entityId < static_cast<uint32_t>(1 << 31))
-                            {
-                                entitySelector.selection = Entity{entityId, world.generation(entityId)};
+                                    if (entityId == UINT32_MAX)
+                                    {
+                                        entitySelector.selection = Entity{};
+                                    }
+                                    else if (entityId < static_cast<uint32_t>(1 << 31))
+                                    {
+                                        entitySelector.selection = Entity{entityId, world.generation(entityId)};
+                                    }
+
+                                    break;
+                                }
                             }
                         }
                     }

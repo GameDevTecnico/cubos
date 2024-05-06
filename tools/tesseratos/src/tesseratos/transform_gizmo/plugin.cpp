@@ -6,7 +6,8 @@
 
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -22,12 +23,11 @@ using cubos::core::ecs::Query;
 using cubos::core::ecs::World;
 using cubos::core::io::Window;
 
-using cubos::engine::ActiveCameras;
-using cubos::engine::Camera;
 using cubos::engine::Cubos;
 using cubos::engine::Gizmos;
 using cubos::engine::Input;
 using cubos::engine::LocalToWorld;
+using cubos::engine::PerspectiveCamera;
 using cubos::engine::Position;
 using cubos::engine::Rotation;
 using cubos::engine::Scale;
@@ -110,13 +110,10 @@ static void checkRotation(Rotation& rotation, glm::vec3 globalPosition, glm::vec
     rotation.quat = glm::angleAxis(angle, axisVector) * rotation.quat;
 }
 
-static void drawPositionGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
-                              Query<Position&, LocalToWorld&> positionQuery, Gizmos& gizmos, const Input& input,
-                              const Window& window, Entity cameraEntity, Entity selectedEntity, bool useLocalAxis,
-                              double distance)
+static void drawPositionGizmo(Query<Position&, LocalToWorld&> positionQuery, const PerspectiveCamera& camera,
+                              const LocalToWorld& cameraLtw, Gizmos& gizmos, const Input& input, const Window& window,
+                              Entity selectedEntity, bool useLocalAxis, double distance)
 {
-    auto [camera, cameraLtw] = *cameraQuery.at(cameraEntity);
-
     auto [position, localToWorld] = *positionQuery.at(selectedEntity);
 
     auto cameraPosition = cameraLtw.worldPosition();
@@ -231,13 +228,10 @@ static void drawPositionGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
                      0.7F);
 }
 
-static void drawRotationGizmo(Query<const Camera&, LocalToWorld&> cameraQuery,
-                              Query<Rotation&, LocalToWorld&> positionQuery, Gizmos& gizmos, const Input& input,
-                              const Window& window, Entity cameraEntity, Entity selectedEntity, bool useLocalAxis,
-                              double distance)
+static void drawRotationGizmo(Query<Rotation&, LocalToWorld&> positionQuery, const PerspectiveCamera& camera,
+                              const LocalToWorld& cameraLtw, Gizmos& gizmos, const Input& input, const Window& window,
+                              Entity selectedEntity, bool useLocalAxis, double distance)
 {
-    auto [camera, cameraLtw] = *cameraQuery.at(cameraEntity);
-
     auto [rotation, localToWorld] = *positionQuery.at(selectedEntity);
 
     auto cameraPosition = cameraLtw.worldPosition();
@@ -301,21 +295,27 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::gizmosPlugin);
     cubos.depends(cubos::engine::inputPlugin);
     cubos.depends(cubos::engine::settingsPlugin);
-    cubos.depends(cubos::engine::rendererPlugin);
+    cubos.depends(cubos::engine::cameraPlugin);
     cubos.depends(cubos::engine::windowPlugin);
 
     cubos.depends(entitySelectorPlugin);
 
     cubos.system("draw Transform Gizmo")
         .after(cubos::engine::transformUpdateTag)
-        .call([](const EntitySelector& entitySelector, const ActiveCameras& activeCameras, const Window& window,
-                 const Input& input, Settings& settings, Gizmos& gizmos, Query<Position&, LocalToWorld&> positionQuery,
-                 Query<Rotation&, LocalToWorld&> rotationQuery, Query<const Camera&, LocalToWorld&> cameraQuery) {
+        .call([](const EntitySelector& entitySelector, const Window& window, const Input& input, Settings& settings,
+                 Gizmos& gizmos, Query<Position&, LocalToWorld&> positionQuery,
+                 Query<Rotation&, LocalToWorld&> rotationQuery,
+                 Query<Entity, const PerspectiveCamera&, LocalToWorld&> cameraQuery) {
             if (entitySelector.selection.isNull())
             {
                 return;
             }
-            if (activeCameras.entities[0] == entitySelector.selection)
+            if (cameraQuery.empty())
+            {
+                return;
+            }
+            auto [cameraEnt, camera, cameraLtw] = *cameraQuery.first();
+            if (cameraEnt == entitySelector.selection)
             {
                 return;
             }
@@ -323,17 +323,13 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
             {
                 return;
             }
-            if (!cameraQuery.at(activeCameras.entities[0]))
-            {
-                return;
-            }
 
             bool useLocal = settings.getBool("transformGizmo.useLocalAxis", true);
             double distance = settings.getDouble("transformGizmo.distanceToCamera", 10.0F);
 
-            drawPositionGizmo(cameraQuery, positionQuery, gizmos, input, window, activeCameras.entities[0],
-                              entitySelector.selection, useLocal, distance);
-            drawRotationGizmo(cameraQuery, rotationQuery, gizmos, input, window, activeCameras.entities[0],
-                              entitySelector.selection, useLocal, distance);
+            drawPositionGizmo(positionQuery, camera, cameraLtw, gizmos, input, window, entitySelector.selection,
+                              useLocal, distance);
+            drawRotationGizmo(rotationQuery, camera, cameraLtw, gizmos, input, window, entitySelector.selection,
+                              useLocal, distance);
         });
 }

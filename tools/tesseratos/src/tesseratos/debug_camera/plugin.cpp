@@ -1,13 +1,15 @@
-#include <imgui.h>
+#include <unordered_set>
 
-#include <cubos/core/ecs/name.hpp>
+#include <imgui.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
-#include <cubos/engine/render/lights/environment.hpp>
-#include <cubos/engine/render/lights/point.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/render/camera/draws_to.hpp>
+#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/camera/plugin.hpp>
+#include <cubos/engine/render/target/plugin.hpp>
+#include <cubos/engine/render/target/target.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
@@ -16,25 +18,31 @@
 
 using namespace cubos::core::io;
 
-using cubos::core::ecs::Name;
+using cubos::core::ecs::EntityHash;
 
-using cubos::engine::ActiveCameras;
-using cubos::engine::Camera;
 using cubos::engine::Commands;
 using cubos::engine::Cubos;
+using cubos::engine::DrawsTo;
 using cubos::engine::Entity;
 using cubos::engine::FreeCameraController;
 using cubos::engine::Input;
+using cubos::engine::PerspectiveCamera;
 using cubos::engine::Position;
 using cubos::engine::Query;
+using cubos::engine::RenderTarget;
 
 namespace
 {
-    struct DebugCameraInfo
+    struct State
     {
-        Entity copy[4]; // copy old camera entities to re-apply them in the next camera change
-        Entity ent;     // debug camera entity
-        bool justChanged = false;
+        // Cameras which were deactivated by the plugin.
+        std::unordered_set<Entity, EntityHash> deactivated;
+
+        // Entity of the debug camera.
+        Entity entity;
+
+        // Whether the debug camera is currently active.
+        bool active;
     };
 } // namespace
 
@@ -42,84 +50,89 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
 {
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::freeCameraPlugin);
-    cubos.depends(cubos::engine::rendererPlugin);
+    cubos.depends(cubos::engine::cameraPlugin);
+    cubos.depends(cubos::engine::renderTargetPlugin);
     cubos.depends(cubos::engine::inputPlugin);
 
     cubos.depends(toolboxPlugin);
 
-    cubos.resource<DebugCameraInfo>();
+    cubos.resource<State>();
 
-    cubos.startupSystem("create Debug Camera").call([](Commands commands, DebugCameraInfo& debugCamera) {
-        debugCamera.ent = commands.create()
-                              .add(Name{"debug-camera"})
-                              .add(Camera{})
-                              .add(Position{{}})
-                              .add(FreeCameraController{
-                                  .enabled = false,
-                                  .unscaledDeltaTime = true,
-                                  .lateral = "debug-move-lateral",
-                                  .vertical = "debug-move-vertical",
-                                  .longitudinal = "debug-move-longitudinal",
-                              })
-                              .entity();
+    cubos.startupSystem("create Debug Camera").call([](Commands commands, State& debugCamera) {
+        debugCamera.entity = commands.create()
+                                 .named("debug-camera")
+                                 .add(PerspectiveCamera{
+                                     .active = false,
+                                 })
+                                 .add(Position{{}})
+                                 .add(FreeCameraController{
+                                     .enabled = false,
+                                     .unscaledDeltaTime = true,
+                                     .lateral = "debug-move-lateral",
+                                     .vertical = "debug-move-vertical",
+                                     .longitudinal = "debug-move-longitudinal",
+                                 })
+                                 .entity();
     });
 
-    cubos.system("toggle Debug Camera")
-        .call([](Input& input, DebugCameraInfo& info, Query<FreeCameraController&> entities,
-                 const ActiveCameras& cameras) {
-            if (auto match = entities.at(info.ent); match && cameras.entities[0] == info.ent)
+    cubos.system("toggle Debug Camera controller")
+        .call([](Input& input, State& state, Query<FreeCameraController&> entities) {
+            if (auto match = entities.at(state.entity); match && state.active)
             {
                 auto [controller] = *match;
-                if (!input.pressed("debug-camera-toggle"))
+                if (input.justPressed("debug-camera-toggle"))
                 {
-                    info.justChanged = false;
-                }
-                else if (!info.justChanged)
-                {
-                    info.justChanged = true;
                     controller.enabled = !controller.enabled;
                 }
             }
         });
 
-    cubos.system("show Debug Camera UI")
+    cubos.system("update Debug Camera")
         .tagged(cubos::engine::imguiTag)
-        .call([](ActiveCameras& camera, Toolbox& toolbox, DebugCameraInfo& debugCamera) {
-            if (!toolbox.isOpen("Debug Camera"))
-            {
-                return;
-            }
-
+        .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("Debug Camera"); })
+        .call([](State& state, Commands cmds,
+                 Query<Entity, PerspectiveCamera&, const DrawsTo&, const RenderTarget&> cameras,
+                 Query<Entity, const RenderTarget&> targets) {
             ImGui::Begin("Debug Camera");
 
-            ImGui::Text("Current camera: %s", debugCamera.ent == camera.entities[0] ? "Debug" : "Game");
-            ImGui::Text("Key to change: F12");
-
-            if (ImGui::Button("Change camera") || ImGui::IsKeyPressed(ImGuiKey_F12))
+            ImGui::Text("Current camera: %s", state.active ? "Debug" : "Game");
+            if (ImGui::Button("Toggle camera"))
             {
-                CUBOS_DEBUG("Changed camera ...");
-                if (debugCamera.ent == camera.entities[0])
+                state.active = !state.active;
+            }
+
+            if (cameras.pin(0, state.entity).empty())
+            {
+                for (auto [targetEnt, target] : targets)
                 {
-                    std::copy(std::begin(debugCamera.copy), std::end(debugCamera.copy), camera.entities);
+                    if (target.framebuffer == nullptr)
+                    {
+                        cmds.relate(state.entity, targetEnt, DrawsTo{});
+                    }
                 }
-                else
+            }
+
+            for (auto [cameraEnt, camera, _1, target] : cameras)
+            {
+                if (target.framebuffer == nullptr)
                 {
-                    std::copy(std::begin(camera.entities), std::end(camera.entities), debugCamera.copy);
-                    camera.entities[0] = debugCamera.ent;
-                    camera.entities[1] = Entity();
-                    camera.entities[2] = Entity();
-                    camera.entities[3] = Entity();
+                    if (cameraEnt == state.entity)
+                    {
+                        camera.active = state.active;
+                    }
+                    else if (camera.active && state.active)
+                    {
+                        state.deactivated.insert(cameraEnt);
+                        camera.active = false;
+                    }
+                    else if (!state.active && state.deactivated.contains(cameraEnt))
+                    {
+                        state.deactivated.erase(cameraEnt);
+                        camera.active = true;
+                    }
                 }
             }
 
             ImGui::End();
         });
-
-    cubos.system("fallback to Debug Camera").call([](ActiveCameras& cameras, DebugCameraInfo& debugCamera) {
-        if (cameras.entities[0].isNull())
-        {
-            std::copy(std::begin(cameras.entities), std::end(cameras.entities), debugCamera.copy);
-            cameras.entities[0] = debugCamera.ent;
-        }
-    });
 }

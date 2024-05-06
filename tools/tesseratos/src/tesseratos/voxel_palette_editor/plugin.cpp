@@ -4,7 +4,8 @@
 #include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/render/voxels/palette.hpp>
+#include <cubos/engine/render/voxels/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
 #include <tesseratos/asset_explorer/plugin.hpp>
@@ -13,10 +14,10 @@
 
 using cubos::core::ecs::EventReader;
 
-using cubos::engine::ActiveVoxelPalette;
 using cubos::engine::Asset;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
+using cubos::engine::RenderPalette;
 using cubos::engine::VoxelMaterial;
 using cubos::engine::VoxelPalette;
 
@@ -54,7 +55,7 @@ static void savePaletteUiGuard(Assets& assets, SelectedPaletteInfo& selectedPale
 
         if (ImGui::Button("Yes", ImVec2(80, 0)))
         {
-            CUBOS_INFO("Saving palette asset {} modificaations", selectedPalette.next);
+            CUBOS_INFO("Saving palette asset {} modifications", selectedPalette.next);
             assets.store(selectedPalette.asset, selectedPalette.paletteCopy);
             assets.save(selectedPalette.asset);
             optionSelected = true;
@@ -91,7 +92,7 @@ static void savePaletteUiGuard(Assets& assets, SelectedPaletteInfo& selectedPale
 void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
 {
     cubos.depends(cubos::engine::assetsPlugin);
-    cubos.depends(cubos::engine::rendererPlugin);
+    cubos.depends(cubos::engine::renderVoxelsPlugin);
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::voxelsPlugin);
 
@@ -131,8 +132,7 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
 
     cubos.system("show Voxel Palette Editor UI")
         .tagged(cubos::engine::imguiTag)
-        .call([](Assets& assets, SelectedPaletteInfo& selectedPalette, ActiveVoxelPalette& activePalette,
-                 Toolbox& toolbox) {
+        .call([](Assets& assets, SelectedPaletteInfo& selectedPalette, RenderPalette& activePalette, Toolbox& toolbox) {
             if (!toolbox.isOpen("Palette Editor"))
             {
                 return;
