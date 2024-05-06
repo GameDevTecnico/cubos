@@ -25,6 +25,8 @@ RenderMeshPool::RenderMeshPool(RenderDevice& renderDevice, std::size_t bucketCou
     : mBucketCount{bucketCount}
     , mBucketSize{bucketSize}
 {
+    CUBOS_ASSERT(bucketSize % 3 == 0, "Bucket size must be a multiple of 3 (to store whole triangles)");
+
     mVertexBuffer =
         renderDevice.createVertexBuffer(bucketCount * bucketSize * sizeof(RenderMeshVertex), nullptr, Usage::Dynamic);
     if (mVertexBuffer == nullptr)

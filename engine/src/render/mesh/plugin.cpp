@@ -1,15 +1,16 @@
 #include <unordered_map>
+#include <unordered_set>
 
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/uuid.hpp>
 #include <cubos/core/thread/pool.hpp>
+#include <cubos/core/thread/task.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/render/mesh/mesh.hpp>
 #include <cubos/engine/render/mesh/plugin.hpp>
 #include <cubos/engine/render/mesh/pool.hpp>
-#include <cubos/engine/render/mesh/task.hpp>
 #include <cubos/engine/render/voxels/grid.hpp>
 #include <cubos/engine/render/voxels/load.hpp>
 #include <cubos/engine/render/voxels/plugin.hpp>
@@ -17,6 +18,7 @@
 #include <cubos/engine/window/plugin.hpp>
 
 using cubos::core::io::Window;
+using cubos::core::thread::Task;
 using cubos::core::thread::ThreadPool;
 using cubos::engine::Asset;
 using cubos::engine::RenderMeshPool;
@@ -34,10 +36,12 @@ namespace
             RenderMeshPool::BucketId firstBucketId{};
             Asset<VoxelGrid> asset{};
             int referenceCount{};
+            Task<std::vector<RenderMeshVertex>> meshingTask{};
         };
 
         ThreadPool pool;
         std::unordered_map<uuids::uuid, Entry> entries;
+        std::unordered_set<uuids::uuid> meshing;
 
         State(std::size_t threadCount)
             : pool(threadCount)
@@ -45,10 +49,6 @@ namespace
         }
     };
 } // namespace
-
-/// @brief Generates faces for the given voxel grid.
-/// @param grid Voxel grid.
-/// @param[out] faces Faces generated from the voxel grid.
 
 void cubos::engine::renderMeshPlugin(Cubos& cubos)
 {
@@ -61,7 +61,6 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
     cubos.uninitResource<State>();
 
     cubos.component<RenderMesh>();
-    cubos.component<RenderMeshTask>();
 
     cubos.startupTag(renderMeshPoolInitTag).after(windowInitTag).after(settingsTag);
 
@@ -81,18 +80,24 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
         .call([](Commands cmds, State& state, Assets& assets, Query<Entity, const RenderVoxelGrid&> query) {
             for (auto [ent, grid] : query)
             {
+                if (grid.asset.isNull())
+                {
+                    continue;
+                }
+
                 // If the asset has never been loaded, or it has been updated since the last meshing, update the entry
                 // and queue a meshing task. Otherwise, just reuse the existing mesh.
                 auto& entry = state.entries[grid.asset.getId()];
                 entry.referenceCount += 1;
                 if (entry.asset.isNull() || assets.update(entry.asset))
                 {
+                    entry.firstBucketId = {};
                     entry.asset = grid.asset;
                     assets.update(entry.asset); // Make sure the stored handle is up-to-date.
 
                     // Spawn a thread task to mesh the voxels
-                    RenderMeshTask renderMesh{};
-                    state.pool.addTask([&assets, task = renderMesh.task, asset = grid.asset]() mutable {
+                    entry.meshingTask = {}; // Reset the task.
+                    state.pool.addTask([&assets, task = entry.meshingTask, asset = grid.asset]() mutable {
                         // Load the voxel data.
                         auto grid = assets.read<VoxelGrid>(asset);
 
@@ -104,25 +109,62 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                         task.finish(std::move(vertices));
                     });
 
-                    cmds.add(ent, std::move(renderMesh));
+                    state.meshing.insert(grid.asset.getId());
                 }
-                else
+                else if (entry.firstBucketId != RenderMeshPool::BucketId::Invalid)
                 {
-                    cmds.add(ent, RenderMesh{.firstBucketId = entry.firstBucketId});
+                    cmds.add(ent, RenderMesh{.firstBucketId = entry.firstBucketId}).remove<LoadRenderVoxels>(ent);
                 }
             }
         });
 
-    cubos.system("poll RenderMeshTasks")
-        .call([](Commands cmds, State& state, Query<Entity, const RenderVoxelGrid&, RenderMeshTask&> query,
-                 RenderMeshPool& pool) {
-            for (auto [ent, grid, renderMesh] : query)
+    cubos.system("poll RenderMesh tasks")
+        .call([](Commands cmds, Assets& assets, State& state,
+                 Query<Entity, RenderVoxelGrid&, const LoadRenderVoxels&> query, RenderMeshPool& pool) {
+            for (auto [ent, grid, load] : query)
             {
-                if (renderMesh.task.isDone())
+                if (grid.asset.isNull())
                 {
-                    auto vertices = renderMesh.task.result();
+                    cmds.remove<LoadRenderVoxels>(ent);
+                    continue;
+                }
+
+                auto& entry = state.entries[grid.asset.getId()];
+                if (!state.meshing.contains(grid.asset.getId()))
+                {
+                    if (entry.asset.isNull() || assets.update(entry.asset))
+                    {
+                        entry.firstBucketId = {};
+                        entry.asset = grid.asset;
+                        assets.update(entry.asset); // Make sure the stored handle is up-to-date.
+
+                        // Spawn a thread task to mesh the voxels
+                        entry.meshingTask = {}; // Reset the task.
+                        state.pool.addTask([&assets, task = entry.meshingTask, asset = grid.asset]() mutable {
+                            // Load the voxel data.
+                            auto grid = assets.read<VoxelGrid>(asset);
+
+                            // Generate a mesh from the voxel data.
+                            std::vector<RenderMeshVertex> vertices{};
+                            RenderMeshVertex::generate(*grid, vertices);
+
+                            // Output the task result.
+                            task.finish(std::move(vertices));
+                        });
+
+                        state.meshing.insert(grid.asset.getId());
+                    }
+                    else
+                    {
+                        CUBOS_ASSERT(entry.firstBucketId != RenderMeshPool::BucketId::Invalid);
+                        cmds.add(ent, RenderMesh{.firstBucketId = entry.firstBucketId});
+                        cmds.remove<LoadRenderVoxels>(ent);
+                    }
+                }
+                else if (entry.meshingTask.isDone())
+                {
+                    auto vertices = entry.meshingTask.result();
                     auto firstBucketId = pool.allocate(vertices.data(), vertices.size());
-                    cmds.remove<RenderMeshTask>(ent);
                     cmds.remove<LoadRenderVoxels>(ent);
                     cmds.add(ent, RenderMesh{.firstBucketId = firstBucketId});
                     CUBOS_INFO("Finished meshing voxel grid asset {} ({} vertices), allocated new render bucket",
@@ -135,6 +177,7 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                         CUBOS_INFO("Deallocated old render mesh bucket of asset {}", grid.asset.getId());
                     }
                     entry.firstBucketId = firstBucketId;
+                    state.meshing.erase(grid.asset.getId());
                 }
             }
         });

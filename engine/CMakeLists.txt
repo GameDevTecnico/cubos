@@ -137,7 +137,6 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/mesh/vertex.cpp"
 	"src/render/mesh/pool.cpp"
 	"src/render/mesh/mesh.cpp"
-	"src/render/mesh/task.cpp"
 	"src/render/g_buffer_rasterizer/plugin.cpp"
 	"src/render/g_buffer_rasterizer/g_buffer_rasterizer.cpp"
 	"src/render/ssao/plugin.cpp"
