@@ -1,6 +1,7 @@
 #include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/render/target/plugin.hpp>
+#include <cubos/engine/render/target/target.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -16,14 +17,15 @@ using cubos::core::io::WindowEvent;
 
 void cubos::engine::imguiPlugin(Cubos& cubos)
 {
-    cubos.depends(windowPlugin);
-    cubos.depends(rendererPlugin);
     cubos.depends(settingsPlugin);
+    cubos.depends(windowPlugin);
+    cubos.depends(renderTargetPlugin);
 
     cubos.resource<DataInspector>();
 
     cubos.startupTag(imguiInitTag).after(windowInitTag);
-    cubos.tag(imguiBeginTag).after(rendererDrawTag);
+
+    cubos.tag(imguiBeginTag).after(windowPollTag);
     cubos.tag(imguiEndTag).before(windowRenderTag).after(imguiBeginTag);
     cubos.tag(imguiTag).after(imguiBeginTag).before(imguiEndTag);
 
@@ -46,5 +48,26 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
         imguiBeginFrame();
     });
 
-    cubos.system("end ImGui frame").tagged(imguiEndTag).call([]() { imguiEndFrame(); });
+    cubos.system("end ImGui frame").tagged(imguiEndTag).call([](const Window& window, Query<RenderTarget&> targets) {
+        bool cleared = false;
+        for (auto [target] : targets)
+        {
+            if (target.framebuffer == nullptr)
+            {
+                cleared = target.cleared;
+                target.cleared = true;
+                break;
+            }
+        }
+
+        if (!cleared)
+        {
+            window->renderDevice().setFramebuffer(nullptr);
+            window->renderDevice().setScissor(0, 0, static_cast<int>(window->framebufferSize().x),
+                                              static_cast<int>(window->framebufferSize().y));
+            window->renderDevice().clearColor(0.0F, 0.0F, 0.0F, 0.0F);
+        }
+
+        imguiEndFrame();
+    });
 }
