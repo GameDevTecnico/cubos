@@ -53,6 +53,8 @@ void RenderMeshVertex::generate(const VoxelGrid& grid, std::vector<RenderMeshVer
     std::vector<uint32_t> mask;
 
     const auto& sz = grid.size();
+    CUBOS_ASSERT(sz.x <= 255 && sz.y <= 255 && sz.z <= 255,
+                 "Only grids with sizes up to 255 in each dimension are supported");
 
     // For both back and front faces.
     bool backFace = true;
@@ -84,7 +86,7 @@ void RenderMeshVertex::generate(const VoxelGrid& grid, std::vector<RenderMeshVer
                         {
                             mask[n++] = backFace ? grid.get(x + q) : 0;
                         }
-                        else if (x[d] == static_cast<uint8_t>(sz[d]) - 1)
+                        else if (x[d] == static_cast<uint8_t>(sz[d] - 1))
                         {
                             mask[n++] = backFace ? 0 : grid.get(x);
                         }
