@@ -1,7 +1,15 @@
 #include <cubos/engine/gizmos/plugin.hpp>
+#include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/prelude.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/screen_picker/plugin.hpp>
+#include <cubos/engine/render/camera/draws_to.hpp>
+#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/camera/plugin.hpp>
+#include <cubos/engine/render/picker/picker.hpp>
+#include <cubos/engine/render/picker/plugin.hpp>
+#include <cubos/engine/render/split_screen/plugin.hpp>
+#include <cubos/engine/render/split_screen/split_screen.hpp>
+#include <cubos/engine/render/target/plugin.hpp>
+#include <cubos/engine/render/target/target.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -15,9 +23,10 @@ int main(int argc, char** argv)
     cubos.plugin(settingsPlugin);
     cubos.plugin(windowPlugin);
     cubos.plugin(transformPlugin);
-    cubos.plugin(assetsPlugin);
-    cubos.plugin(screenPickerPlugin);
-    cubos.plugin(rendererPlugin);
+    cubos.plugin(renderTargetPlugin);
+    cubos.plugin(renderPickerPlugin);
+    cubos.plugin(cameraPlugin);
+    cubos.plugin(splitScreenPlugin);
 
     /// [Adding plugin]
     cubos.plugin(gizmosPlugin);
@@ -29,35 +38,39 @@ int main(int argc, char** argv)
         settings.setBool("assets.io.enabled", false);
     });
 
-    cubos.startupSystem("setup camera").call([](ActiveCameras& camera, Commands cmds) {
-        camera.entities[0] =
-            cmds.create()
-                .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-                .add(LocalToWorld{})
-                .add(Position{{5.0F, 5.0F, 0.0F}})
-                .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-                .entity();
-        camera.entities[1] =
-            cmds.create()
-                .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-                .add(LocalToWorld{})
-                .add(Position{{-25.0F, 25.0F, 0.0F}})
-                .add(Rotation{glm::quatLookAt(glm::vec3{1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-                .entity();
-        camera.entities[2] =
-            cmds.create()
-                .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-                .add(LocalToWorld{})
-                .add(Position{{-25.0F, -25.0F, 0.0F}})
-                .add(Rotation{glm::quatLookAt(glm::vec3{1.0F, 1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-                .entity();
-        camera.entities[3] =
-            cmds.create()
-                .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-                .add(LocalToWorld{})
-                .add(Position{{25.0F, -25.0F, 0.0F}})
-                .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, 1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-                .entity();
+    cubos.startupSystem("setup render target and cameras").call([](Commands cmds) {
+        auto target =
+            cmds.create().add(RenderTarget{}).add(RenderPicker{}).add(GizmosTarget{}).add(SplitScreen{}).entity();
+
+        cmds.create()
+            .relatedTo(target, DrawsTo{})
+            .add(PerspectiveCamera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(LocalToWorld{})
+            .add(Position{{5.0F, 5.0F, 0.0F}})
+            .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})});
+
+        cmds.create()
+            .relatedTo(target, DrawsTo{})
+            .add(PerspectiveCamera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(LocalToWorld{})
+            .add(Position{{-25.0F, 25.0F, 0.0F}})
+            .add(Rotation{glm::quatLookAt(glm::vec3{1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})});
+
+        cmds.create()
+            .relatedTo(target, DrawsTo{})
+            .add(PerspectiveCamera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(LocalToWorld{})
+            .add(Position{{-25.0F, -25.0F, 0.0F}})
+            .add(Rotation{glm::quatLookAt(glm::vec3{1.0F, 1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+            .entity();
+
+        cmds.create()
+            .relatedTo(target, DrawsTo{})
+            .add(PerspectiveCamera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(LocalToWorld{})
+            .add(Position{{25.0F, -25.0F, 0.0F}})
+            .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, 1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+            .entity();
     });
 
     /// [Start Up System]

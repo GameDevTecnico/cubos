@@ -20,23 +20,20 @@ namespace cubos::engine
     /// - @ref Gizmos - used to queue gizmo draw commands.
     ///
     /// ## Dependencies
-    /// - @ref screen-picker-plugin
     /// - @ref window-plugin
+    /// - @ref transform-plugin
+    /// - @ref render-picker-plugin
+    /// - @ref render-camera-plugin
+    /// - @ref render-target-plugin
 
     /// @brief Gizmos renderer is initialized, after @ref windowInitTag.
     CUBOS_ENGINE_API extern Tag gizmosInitTag;
 
-    /// @brief Gizmos interaction is handled, after @ref WindowPollTag and
-    /// before @ref gizmosDrawTag.
+    /// @brief Gizmos interaction is handled, after @ref windowPollTag and before @ref gizmosDrawTag.
     CUBOS_ENGINE_API extern Tag gizmosInputTag;
 
-    /// @brief Queued gizmos are rendered to the window, after @ref rendererDrawTag and
-    /// before @ref windowRenderTag.
+    /// @brief Gizmos are drawn to all render targets with @ref GizmosTarget components.
     CUBOS_ENGINE_API extern Tag gizmosDrawTag;
-
-    /// @brief The ScreenPicker resource is accessed to detect gizmos at mouse coordinates, after
-    /// @ref gizmosDrawTag.
-    CUBOS_ENGINE_API extern Tag gizmosPickTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

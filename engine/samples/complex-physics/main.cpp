@@ -72,7 +72,7 @@ int main(int argc, char** argv)
     cubos.plugin(physicsPlugin);
     cubos.plugin(solverPlugin);
     cubos.plugin(gravityPlugin);
-    cubos.plugin(gizmosPlugin);
+    // cubos.plugin(gizmosPlugin);
     cubos.plugin(scenePlugin);
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
@@ -174,11 +174,11 @@ int main(int argc, char** argv)
             }
         });
 
-    cubos.system("draw gizmos").call([](Gizmos& gizmos) {
+    /*cubos.system("draw gizmos").call([](Gizmos& gizmos) {
         // Draw Ground
         gizmos.color({0.2F, 0.2F, 1.0F});
         gizmos.drawWireBox("wire box", {-20.0, -0.5, -20.0}, {20.0, 0.5, 20.0}, 0, Gizmos::Space::World);
-    });
+    });*/
 
     cubos.run();
 }
