@@ -25,7 +25,8 @@ RenderMeshPool::RenderMeshPool(RenderDevice& renderDevice, std::size_t bucketCou
     : mBucketCount{bucketCount}
     , mBucketSize{bucketSize}
 {
-    mVertexBuffer = renderDevice.createVertexBuffer(bucketSize * sizeof(RenderMeshVertex), nullptr, Usage::Dynamic);
+    mVertexBuffer =
+        renderDevice.createVertexBuffer(bucketCount * bucketSize * sizeof(RenderMeshVertex), nullptr, Usage::Dynamic);
     if (mVertexBuffer == nullptr)
     {
         mBucketCount = 0;
