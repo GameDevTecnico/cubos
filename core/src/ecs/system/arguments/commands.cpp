@@ -86,6 +86,17 @@ Commands::EntityBuilder& Commands::EntityBuilder::add(const reflection::Type& ty
     return *this;
 }
 
+Commands::EntityBuilder& Commands::EntityBuilder::relatedFrom(Entity entity, const reflection::Type& type, void* value)
+{
+    mBuffer.relate(entity, mEntity, type, value);
+    return *this;
+}
+
+Commands::EntityBuilder& Commands::EntityBuilder::relatedTo(Entity entity, const reflection::Type& type, void* value)
+{
+    mBuffer.relate(mEntity, entity, type, value);
+    return *this;
+}
 Commands::BlueprintBuilder::BlueprintBuilder(CommandBuffer& buffer,
                                              std::unordered_map<std::string, Entity> nameToEntity)
     : mBuffer{buffer}

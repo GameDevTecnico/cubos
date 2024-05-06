@@ -205,6 +205,42 @@ namespace cubos::core::ecs
             return this->add(reflection::reflect<T>(), &value);
         }
 
+        /// @brief Adds an incoming relation from the given entity to this entity.
+        /// @param entity Entity.
+        /// @param type Relation type.
+        /// @param value Relation value.
+        /// @return Reference to this builder, for chaining.
+        EntityBuilder& relatedFrom(Entity entity, const reflection::Type& type, void* value);
+
+        /// @brief Adds an incoming relation from the given entity to this entity.
+        /// @tparam T Relation type.
+        /// @param entity Entity.
+        /// @param value Relation value.
+        /// @return Reference to this builder, for chaining.
+        template <typename T>
+        EntityBuilder& relatedFrom(Entity entity, T value)
+        {
+            return this->relatedFrom(entity, reflection::reflect<T>(), &value);
+        }
+
+        /// @brief Adds an outgoing relation from this entity to the given entity.
+        /// @param entity Entity.
+        /// @param type Relation type.
+        /// @param value Relation value.
+        /// @return Reference to this builder, for chaining.
+        EntityBuilder& relatedTo(Entity entity, const reflection::Type& type, void* value);
+
+        /// @brief Adds an outgoing relation from this entity to the given entity.
+        /// @tparam T Relation type.
+        /// @param entity Entity.
+        /// @param value Relation value.
+        /// @return Reference to this builder, for chaining.
+        template <typename T>
+        EntityBuilder& relatedTo(Entity entity, T value)
+        {
+            return this->relatedTo(entity, reflection::reflect<T>(), &value);
+        }
+
     private:
         CommandBuffer& mBuffer;
         Entity mEntity;
