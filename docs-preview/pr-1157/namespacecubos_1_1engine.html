@@ -138,6 +138,10 @@
             </dt>
             <dd>Resource which allows the user to inspect or modify any reflectable value on the UI.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1ImGuiTarget.html" class="m-doc">ImGuiTarget</a>
+            </dt>
+            <dd>Component used to indicate that the ImGui frame should be rendered to a given <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a>.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a>
             </dt>
             <dd>Stores the state of a single input action, such as &quot;jump&quot; or &quot;attack&quot;.</dd>
@@ -706,11 +710,11 @@
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a1109b936198e7c6b6ca8dd3447e615a9" class="m-doc">imguiBeginTag</a>
             </dt>
-            <dd>The ImGui frame begins (after <a href="namespacecubos_1_1engine.html#a39d4df18cdcd25f8aeb7191ffceef5ac" class="m-doc">rendererDrawTag</a>).</dd>
+            <dd>The ImGui frame begins, after <a href="namespacecubos_1_1engine.html#a3fe349e8be3ca97e2110e00939d2d93f" class="m-doc">windowPollTag</a>.</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#aa39013c7d735e0eed665f390be50ba11" class="m-doc">imguiEndTag</a>
             </dt>
-            <dd>The ImGui frame ends (before <a href="namespacecubos_1_1engine.html#a797c3d9e88d5246f2a4c4f2bc72b896e" class="m-doc">windowRenderTag</a>).</dd>
+            <dd>The ImGui frame ends and is rendered to the window&#x27;s render target.</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a3f2925a0dd717232ca70049ee33ac627" class="m-doc">imguiTag</a>
             </dt>
@@ -1066,14 +1070,14 @@
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a1109b936198e7c6b6ca8dd3447e615a9" class="m-doc-self">imguiBeginTag</a>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2imgui_2plugin_8hpp.html">&lt;engine/imgui/plugin.hpp&gt;</a></div>
             </h3>
-            <p>The ImGui frame begins (after <a href="namespacecubos_1_1engine.html#a39d4df18cdcd25f8aeb7191ffceef5ac" class="m-doc">rendererDrawTag</a>).</p>
+            <p>The ImGui frame begins, after <a href="namespacecubos_1_1engine.html#a3fe349e8be3ca97e2110e00939d2d93f" class="m-doc">windowPollTag</a>.</p>
           </div></section>
           <section class="m-doc-details" id="aa39013c7d735e0eed665f390be50ba11"><div>
             <h3>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#aa39013c7d735e0eed665f390be50ba11" class="m-doc-self">imguiEndTag</a>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2imgui_2plugin_8hpp.html">&lt;engine/imgui/plugin.hpp&gt;</a></div>
             </h3>
-            <p>The ImGui frame ends (before <a href="namespacecubos_1_1engine.html#a797c3d9e88d5246f2a4c4f2bc72b896e" class="m-doc">windowRenderTag</a>).</p>
+            <p>The ImGui frame ends and is rendered to the window&#x27;s render target.</p>
           </div></section>
           <section class="m-doc-details" id="a3f2925a0dd717232ca70049ee33ac627"><div>
             <h3>
