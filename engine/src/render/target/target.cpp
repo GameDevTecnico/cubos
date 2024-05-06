@@ -8,5 +8,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::RenderTarget)
 {
     return core::ecs::TypeBuilder<RenderTarget>("cubos::engine::RenderTarget")
         .withField("size", &RenderTarget::size)
+        .withField("cleared", &RenderTarget::cleared)
         .build();
 }

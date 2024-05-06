@@ -8,6 +8,7 @@
 using cubos::core::io::Window;
 
 CUBOS_DEFINE_TAG(cubos::engine::resizeRenderTargetTag);
+CUBOS_DEFINE_TAG(cubos::engine::drawToRenderTargetTag);
 
 void cubos::engine::renderTargetPlugin(Cubos& cubos)
 {
@@ -16,6 +17,7 @@ void cubos::engine::renderTargetPlugin(Cubos& cubos)
     cubos.component<RenderTarget>();
 
     cubos.tag(resizeRenderTargetTag);
+    cubos.tag(drawToRenderTargetTag).after(resizeRenderTargetTag).before(windowRenderTag);
 
     cubos.system("resize render targets")
         .tagged(resizeRenderTargetTag)
@@ -28,6 +30,8 @@ void cubos::engine::renderTargetPlugin(Cubos& cubos)
 
                     CUBOS_INFO("Resized RenderTarget to {}x{}", target.size.x, target.size.y);
                 }
+
+                target.cleared = false;
             }
         });
 }

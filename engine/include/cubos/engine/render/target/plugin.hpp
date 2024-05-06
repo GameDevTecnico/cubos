@@ -23,6 +23,10 @@ namespace cubos::engine
     /// @ingroup render-target-plugin
     CUBOS_ENGINE_API extern Tag resizeRenderTargetTag;
 
+    /// @brief Systems which draw to Render Target framebuffers should be tagged with this.
+    /// @ingroup render-target-plugin
+    CUBOS_ENGINE_API extern Tag drawToRenderTargetTag;
+
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
     /// @ingroup render-target-plugin
