@@ -45,12 +45,19 @@ void cubos::engine::renderPickerPlugin(Cubos& cubos)
 
                     renderPicker.backTexture = rd.createTexture2D(desc);
                     renderPicker.frontTexture = rd.createTexture2D(desc);
+                    renderPicker.pixelBuffer = rd.createPixelPackBuffer(desc.width * desc.height * 4);
 
                     CUBOS_INFO("Resized RenderPicker to {}x{}", renderPicker.size.x, renderPicker.size.y);
                 }
 
                 // Swap textures
                 std::swap(renderPicker.backTexture, renderPicker.frontTexture);
+
+                // Copy the back texture to the pixel buffer.
+                if (renderPicker.backTexture != nullptr)
+                {
+                    renderPicker.backTexture->copyTo(renderPicker.pixelBuffer);
+                }
 
                 // New frame, hint that the front texture needs to be cleared.
                 renderPicker.cleared = false;
