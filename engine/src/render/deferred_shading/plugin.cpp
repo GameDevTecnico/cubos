@@ -49,7 +49,8 @@ namespace
         glm::vec4 position;
         glm::vec4 color;
         float intensity;
-        float padding[3];
+        float range;
+        float padding[2];
     };
 
     struct PerSpotLight
@@ -204,7 +205,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     for (auto [lightLocalToWorld, light] : directionalLights)
                     {
                         auto& perLight = perScene.directionalLights[perScene.numDirectionalLights++];
-                        perLight.direction = glm::vec4(0.0F, 0.0F, 1.0F, 0.0F) * lightLocalToWorld.mat;
+                        perLight.direction = glm::normalize(lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 1.0F, 0.0F));
                         perLight.color = glm::vec4(light.color, 1.0F);
                         perLight.intensity = light.intensity;
                     }
@@ -212,16 +213,17 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     for (auto [lightLocalToWorld, light] : pointLights)
                     {
                         auto& perLight = perScene.pointLights[perScene.numPointLights++];
-                        perLight.position = glm::vec4(0.0F, 0.0F, 0.0F, 1.0F) * lightLocalToWorld.mat;
+                        perLight.position = lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
                         perLight.color = glm::vec4(light.color, 1.0F);
                         perLight.intensity = light.intensity;
+                        perLight.range = light.range;
                     }
 
                     for (auto [lightLocalToWorld, light] : spotLights)
                     {
                         auto& perLight = perScene.spotLights[perScene.numSpotLights++];
-                        perLight.position = glm::vec4(0.0F, 0.0F, 0.0F, 1.0F) * lightLocalToWorld.mat;
-                        perLight.direction = glm::vec4(0.0F, 0.0F, 1.0F, 0.0F) * lightLocalToWorld.mat;
+                        perLight.position = lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+                        perLight.direction = glm::normalize(lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 1.0F, 0.0F));
                         perLight.color = glm::vec4(light.color, 1.0F);
                         perLight.intensity = light.intensity;
                         perLight.range = light.range;
