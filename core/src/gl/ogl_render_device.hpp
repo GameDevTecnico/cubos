@@ -31,6 +31,7 @@ namespace cubos::core::gl
         Texture3D createTexture3D(const Texture3DDesc& desc) override;
         CubeMap createCubeMap(const CubeMapDesc& desc) override;
         CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
+        PixelPackBuffer createPixelPackBuffer(std::size_t size) override;
         ConstantBuffer createConstantBuffer(std::size_t size, const void* data, Usage usage) override;
         IndexBuffer createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage) override;
         void setIndexBuffer(IndexBuffer ib) override;

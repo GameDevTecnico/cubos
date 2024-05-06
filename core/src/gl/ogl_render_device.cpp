@@ -532,6 +532,39 @@ public:
     GLenum alphaBlendOp;
 };
 
+class OGLPixelPackBuffer : public impl::PixelPackBuffer
+{
+public:
+    OGLPixelPackBuffer(std::shared_ptr<bool> destroyed, GLuint id)
+        : destroyed(destroyed)
+        , id(id)
+    {
+    }
+
+    ~OGLPixelPackBuffer() override
+    {
+        if (!*destroyed)
+        {
+            glDeleteBuffers(1, &this->id);
+        }
+    }
+
+    const void* map() override
+    {
+        glBindBuffer(GL_PIXEL_PACK_BUFFER, this->id);
+        return glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+    }
+
+    void unmap() override
+    {
+        glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+    }
+
+    std::shared_ptr<bool> destroyed;
+
+    GLuint id;
+};
+
 class OGLSampler : public impl::Sampler
 {
 public:
@@ -625,8 +658,17 @@ public:
 
     void read(void* outputBuffer, std::size_t level) override
     {
+        glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
         glBindTexture(GL_TEXTURE_2D, this->id);
         glGetTexImage(GL_TEXTURE_2D, static_cast<GLint>(level), this->format, this->type, outputBuffer);
+    }
+
+    void copyTo(PixelPackBuffer buffer, std::size_t level) override
+    {
+        glBindBuffer(GL_PIXEL_PACK_BUFFER, std::static_pointer_cast<OGLPixelPackBuffer>(buffer)->id);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, this->id);
+        glGetTexImage(GL_TEXTURE_2D, static_cast<GLint>(level), this->format, this->type, nullptr);
     }
 
     void generateMipmaps() override
@@ -2090,6 +2132,26 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     }
 
     return std::make_shared<OGLCubeMapArray>(mDestroyed, id, internalFormat, format, type);
+}
+
+PixelPackBuffer OGLRenderDevice::createPixelPackBuffer(std::size_t size)
+{
+    // Initialize buffer
+    GLuint id;
+    glGenBuffers(1, &id);
+    glBindBuffer(GL_PIXEL_PACK_BUFFER, id);
+    glBufferData(GL_PIXEL_PACK_BUFFER, static_cast<GLsizeiptr>(size), NULL, GL_STREAM_COPY);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteBuffers(1, &id);
+        LOG_GL_ERROR(glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLPixelPackBuffer>(mDestroyed, id);
 }
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(std::size_t size, const void* data, Usage usage)
