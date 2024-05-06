@@ -105,6 +105,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/fixed_step/plugin.cpp"
 	"src/fixed_step/fixed_delta_time.cpp"
 
+	"src/render/defaults/plugin.cpp"
 	"src/render/shader/plugin.cpp"
 	"src/render/shader/shader.cpp"
 	"src/render/shader/bridge.cpp"
