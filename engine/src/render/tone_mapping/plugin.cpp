@@ -70,9 +70,9 @@ void cubos::engine::toneMappingPlugin(Cubos& cubos)
         });
 
     cubos.system("apply Tone Mapping to the HDR texture")
+        .tagged(drawToRenderTargetTag)
         .tagged(toneMappingTag)
-        .call([](const State& state, const Window& window,
-                 Query<const RenderTarget&, const HDR&, const ToneMapping&> query) {
+        .call([](const State& state, const Window& window, Query<RenderTarget&, const HDR&, const ToneMapping&> query) {
             auto& rd = window->renderDevice();
 
             for (auto [target, hdr, toneMapping] : query)
@@ -82,12 +82,15 @@ void cubos::engine::toneMappingPlugin(Cubos& cubos)
                 rd.setRasterState(nullptr);
                 rd.setBlendState(nullptr);
                 rd.setDepthStencilState(nullptr);
+                rd.clearDepth(1.0F);
                 rd.setShaderPipeline(state.pipeline);
                 state.hdrBP->bind(hdr.frontTexture);
                 state.gammaBP->setConstant(toneMapping.gamma);
                 state.exposureBP->setConstant(toneMapping.exposure);
                 rd.setVertexArray(state.screenQuad);
                 rd.drawTriangles(0, 6);
+
+                target.cleared = true;
             }
         });
 }

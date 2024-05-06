@@ -26,5 +26,8 @@ namespace cubos::engine
 
         /// @brief Framebuffer to render to.
         core::gl::Framebuffer framebuffer{nullptr};
+
+        /// @brief Whether the target has been already cleared this frame.
+        bool cleared{false};
     };
 } // namespace cubos::engine
