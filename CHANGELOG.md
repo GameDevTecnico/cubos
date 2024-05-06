@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Palette & Grid saving/loading now use streams instead of serialization (#572, **@Dacops**).
 - Split Dispatcher into Planner and Schedule (#1117, **@RiscadoA**).
 - Use Pixel Pack Buffers to speed up entity picking (**@RiscadoA**).
+- Make Gizmos plugin draw to RenderTargets (#1157, **@RiscadoA**).
 
 ### Fixed
 

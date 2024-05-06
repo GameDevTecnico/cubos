@@ -46,6 +46,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/gizmos/plugin.cpp"
 	"src/gizmos/gizmos.cpp"
 	"src/gizmos/renderer.cpp"
+	"src/gizmos/target.cpp"
 
 	"src/scene/plugin.cpp"
 	"src/scene/scene.cpp"
