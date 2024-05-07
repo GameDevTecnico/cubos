@@ -93,6 +93,11 @@
               <span class="m-doc-wrap-bumper"><a href="#a45b825b789c1c08d4d05ca4dd3a8f579" class="m-doc">operator bool</a>(</span><span class="m-doc-wrap">) const</span>
             </dt>
             <dd>Checks if the optional contains a value.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename U = T&gt;</div>
+              <span class="m-doc-wrap-bumper"><a href="#a4fde03be6976c98711bf442ad8afbd58" class="m-doc">requires</a>(</span><span class="m-doc-wrap">requires(const U&amp;a, const U&amp;b) { a==b;}) bool operator</span>
+            </dt>
+            <dd>Compares with another optional value.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -126,10 +131,6 @@
               <span class="m-doc-wrap-bumper">auto <a href="#adbe6cf1c980bbde24a0a3c014482dd3f" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) -&gt; T*</span>
             </dt>
             <dd>Gets the underlying value.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab948f3f9879556e47d79e4e6dd61c53c" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; other) const requires requires(const T &amp;a -&gt; bool</span>
-            </dt>
-            <dd>Compares with another optional value.</dd>
           </dl>
         </section>
         <section>
@@ -187,6 +188,24 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Whether the optional contains a value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4fde03be6976c98711bf442ad8afbd58"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+                template&lt;typename U = T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4fde03be6976c98711bf442ad8afbd58" class="m-doc-self">requires</a>(</span><span class="m-doc-wrap">requires(const U&amp;a, const U&amp;b) { a==b;}) bool operator</span></span>
+            </h3>
+            <p>Compares with another optional value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether they&#x27;re equal.</td>
                 </tr>
               </tfoot>
             </table>
@@ -299,32 +318,6 @@
               </tfoot>
             </table>
 <p>Aborts if there&#x27;s no value.</p>
-          </div></section>
-          <section class="m-doc-details" id="ab948f3f9879556e47d79e4e6dd61c53c"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab948f3f9879556e47d79e4e6dd61c53c" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; other) const requires requires(const T &amp;a</span></span>
-            </h3>
-            <p>Compares with another optional value.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>Other value.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether they&#x27;re equal.</td>
-                </tr>
-              </tfoot>
-            </table>
           </div></section>
         </section>
       </div>
