@@ -249,7 +249,10 @@ bool Assets::saveMeta(const AnyAsset& handle) const
         nlohmann::json json;
         for (const auto& [key, value] : meta->params())
         {
-            json[key] = value;
+            if (key != "path")
+            {
+                json[key] = value;
+            }
         }
         stream->print(json.dump(4));
         return true;
