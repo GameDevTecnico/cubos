@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Inherits Trait | CUBOS. Docs</title>
+  <title>Examples &raquo; Core &raquo; Reflection &raquo; Inherits Trait | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,9 +46,13 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <span class="m-breadcrumb"><a href="examples.html">Examples</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core.html">Core</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core-reflection.html">Reflection</a> &raquo;</span>
           Inherits Trait
         </h1>
-<p><a name="md_reflection_traits_inherits_page"></a></p><section id="autotoc_md66"><h2><a href="#autotoc_md66">@brief Exposing the inheritance relationship between types.</a></h2><p>For structured types, you might want to expose their inheritance relationships using <code>InheritsTrait</code>. This trait allows you to specify the parent type from which another type inherits.</p><p>In this example, we have three simple structs, <code>GrandParent</code>, <code>Parent</code> and <code>Son</code>, where <code>Son</code> is declared to inherit from <code>Parent</code>, and parent from <code>GrandParent</code>.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
+        <p>Exposing the inheritance relationship between types.</p>
+<p><a name="md_reflection_traits_inherits_page"></a></p><p>For structured types, you might want to expose their inheritance relationships using <code>InheritsTrait</code>. This trait allows you to specify the parent type from which another type inherits.</p><p>In this example, we have three simple structs, <code>GrandParent</code>, <code>Parent</code> and <code>Son</code>, where <code>Son</code> is declared to inherit from <code>Parent</code>, and parent from <code>GrandParent</code>.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
 
 <span class="k">struct</span><span class="w"> </span><span class="nc">GrandParent</span>
 <span class="p">{</span>
@@ -118,7 +122,7 @@
 <span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:60<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;Parent&quot;</span><span class="w"> </span>DOES<span class="w"> </span>NOT<span class="w"> </span>inherit<span class="w"> </span>from<span class="w"> </span>Parent
 <span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:65<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;Parent&quot;</span><span class="w"> </span>inherits<span class="w"> </span>from<span class="w"> </span>GrandParent
 <span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:60<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="w"> </span>DOES<span class="w"> </span>NOT<span class="w"> </span>inherit<span class="w"> </span>from<span class="w"> </span>Parent
-<span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:69<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="w"> </span>DOES<span class="w"> </span>NOT<span class="w"> </span>inherit<span class="w"> </span>from<span class="w"> </span>GrandParent</pre></section>
+<span class="o">[</span><span class="m">15</span>:30:10.611<span class="o">]</span><span class="w"> </span><span class="o">[</span>main.cpp:69<span class="w"> </span>reflectType<span class="o">]</span><span class="w"> </span>info:<span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="w"> </span>DOES<span class="w"> </span>NOT<span class="w"> </span>inherit<span class="w"> </span>from<span class="w"> </span>GrandParent</pre>
       </div>
     </div>
   </div>

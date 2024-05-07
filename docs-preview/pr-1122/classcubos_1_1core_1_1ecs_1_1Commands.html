@@ -192,6 +192,30 @@
             </dt>
             <dd>Adds a component to the entity.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac8d1b7f025abdca8e9e8205fb1757d4c" class="m-doc">relatedFrom</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds an incoming relation from the given entity to this entity.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#abe3f6374543ce424b0b8776236a25da8" class="m-doc">relatedFrom</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              T value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds an incoming relation from the given entity to this entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aaa4e310b336c91430aace0d3e3258832" class="m-doc">relatedTo</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds an outgoing relation from this entity to the given entity.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#afb57af4d1eb8e69b9a225fbbdf796bfd" class="m-doc">relatedTo</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              T value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp;</span>
+            </dt>
+            <dd>Adds an outgoing relation from this entity to the given entity.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8386eeafa9c66c0a595fbb8d2a2d0770" class="m-doc">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
             <dd>Gets an entity of the spawned blueprint.</dd>
@@ -810,6 +834,152 @@
                 <tr>
                   <td>value</td>
                   <td>Component value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac8d1b7f025abdca8e9e8205fb1757d4c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8d1b7f025abdca8e9e8205fb1757d4c" class="m-doc-self">relatedFrom</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
+            </h3>
+            <p>Adds an incoming relation from the given entity to this entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Relation value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abe3f6374543ce424b0b8776236a25da8"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abe3f6374543ce424b0b8776236a25da8" class="m-doc-self">relatedFrom</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              T value)</span></span>
+            </h3>
+            <p>Adds an incoming relation from the given entity to this entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Relation value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aaa4e310b336c91430aace0d3e3258832"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa4e310b336c91430aace0d3e3258832" class="m-doc-self">relatedTo</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
+            </h3>
+            <p>Adds an outgoing relation from this entity to the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Relation value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afb57af4d1eb8e69b9a225fbbdf796bfd"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8688933ac452511fefbe6a47cad22d3" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Commands::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afb57af4d1eb8e69b9a225fbbdf796bfd" class="m-doc-self">relatedTo</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              T value)</span></span>
+            </h3>
+            <p>Adds an outgoing relation from this entity to the given entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Relation value.</td>
                 </tr>
               </tbody>
               <tfoot>
