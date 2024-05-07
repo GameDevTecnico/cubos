@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Core &raquo; ECS module | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="group__core.html">Core</a> &raquo;</span>
+          ECS <span class="m-thin">module</span></h1>
+        <p>Entity Component <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> library.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li><a href="#autotoc_md57">System argument types</a></li>
+            <li><a href="#autotoc_md58">Query argument types</a></li>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#groups">Modules</a></li>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>This module is arguably the heart of the engine, as it provides a means to organize and manage the data and logic of both the engine and games built with it. It is, as of now, a bit of a mess. Most of the exposed types are internal to the documentation, and thus it can get hard to navigate (TODO #377).</p><aside class="m-note m-info"><h4>Note</h4><p>Check out the <a href="features-ecs.html" class="m-doc">ECS feature guide</a> for an in-depth explanation of what an ECS is and how it can be used.</p></aside><section id="autotoc_md57"><h3><a href="#autotoc_md57">System argument types</a></h3><ul><li><code>const R&amp;</code> - used to read resource data of type <code>R</code>.</li><li><code>R&amp;</code> - used to write resource data of type <code>R</code>.</li><li><code>const <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp;</code> - used to read the world directly (not recommended, ruins parallelism, prefer <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>).</li><li>World&amp; - used to write the world directly (not recommended, ruins parallelism, prefer <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>).</li><li><a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> - used to queue entities to be created, destroyed and other operations.</li><li><a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader&lt;E&gt;</a> - reads events of type <code>E</code> sent from other systems.</li><li><a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter&lt;E&gt;</a> - sends events of type <code>E</code> to other systems.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query&lt;Args...&gt;</a> - queries the world for entities which match its arguments.</li><li><a href="classcubos_1_1core_1_1ecs_1_1Plugins.html" class="m-doc">Plugins</a> - used to add and remove plugins dynamically.</li></ul></section><section id="autotoc_md58"><h3><a href="#autotoc_md58">Query argument types</a></h3><ul><li><code>const C&amp;</code> - matches entities with the component <code>C</code>, read-only access.</li><li><code>C&amp;</code> - matches entities with the component <code>C</code>, write access.</li><li><code><a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">Opt</a>&lt;const C&amp;&gt;&quot; - matches all entities, read-only access when the component <code>C</code> is present. -</code>Opt&lt;C&amp;&gt;` - matches all entities, write access when the component <code>C</code> is present.</li></ul></section>
+        <section id="groups">
+          <h2><a href="#groups">Modules</a></h2>
+          <dl class="m-doc">
+            <dt>module <a href="group__core-ecs-entity.html" class="m-doc">Entity</a></dt>
+            <dd><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> part of the ECS.</dd>
+            <dt>module <a href="group__core-ecs-observer.html" class="m-doc">Observer</a></dt>
+            <dd>Observer part of the ECS.</dd>
+            <dt>module <a href="group__core-ecs-query.html" class="m-doc">Query</a></dt>
+            <dd>Defines the query functionality of the ECS.</dd>
+            <dt>module <a href="group__core-ecs-system.html" class="m-doc">System</a></dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> part of the ECS.</dd>
+            <dt>module <a href="group__core-ecs-table.html" class="m-doc">Table</a></dt>
+            <dd>Contains various table-like data structures which storage data associated to entities.</dd>
+          </dl>
+        </section>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
+          <dl class="m-doc">
+            <dt>file <a href="blueprint_8hpp.html" class="m-doc">blueprint.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint</a>.</dd>
+            <dt>file <a href="command__buffer_8hpp.html" class="m-doc">command_buffer.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />CommandBuffer</a>.</dd>
+            <dt>file <a href="cubos_8hpp.html" class="m-doc">cubos.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Cubos</a>.</dd>
+            <dt>file <a href="name_8hpp.html" class="m-doc">name.hpp</a></dt>
+            <dd>Class <a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Name</a>.</dd>
+            <dt>file <a href="plugin__queue_8hpp.html" class="m-doc">plugin_queue.hpp</a></dt>
+            <dd>Class <a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />PluginQueue</a>.</dd>
+            <dt>file <a href="reflection_8hpp.html" class="m-doc">reflection.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />TypeBuilder</a>.</dd>
+            <dt>file <a href="tag_8hpp.html" class="m-doc">tag.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Tag</a>.</dd>
+            <dt>file <a href="types_8hpp.html" class="m-doc">types.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Types</a>.</dd>
+            <dt>file <a href="world_8hpp.html" class="m-doc">world.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />World</a>.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::core::ecs::Blueprint</a>
+            </dt>
+            <dd>Collection of entities and their respective components and relations.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">cubos::core::ecs::CommandBuffer</a>
+            </dt>
+            <dd>Stores commands to execute them later.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html" class="m-doc">cubos::core::ecs::DeltaTime</a>
+            </dt>
+            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ShouldQuit.html" class="m-doc">cubos::core::ecs::ShouldQuit</a>
+            </dt>
+            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">cubos::core::ecs::Arguments</a>
+            </dt>
+            <dd>Resource which stores the command-line arguments.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">cubos::core::ecs::Cubos</a>
+            </dt>
+            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">cubos::core::ecs::PluginQueue</a>
+            </dt>
+            <dd>Stores plugin operations to be executed later.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SymmetricTrait.html" class="m-doc">cubos::core::ecs::SymmetricTrait</a>
+            </dt>
+            <dd>Trait used to identify symmetric relations.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1TreeTrait.html" class="m-doc">cubos::core::ecs::TreeTrait</a>
+            </dt>
+            <dd>Trait used to identify tree relations.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1EphemeralTrait.html" class="m-doc">cubos::core::ecs::EphemeralTrait</a>
+            </dt>
+            <dd>Trait used to identify types which are ephemeral and should not be persisted.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">cubos::core::ecs::TypeBuilder</a>
+            </dt>
+            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent ECS types.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">cubos::core::ecs::World</a>
+            </dt>
+            <dd>Holds entities, their components and resources.</dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
