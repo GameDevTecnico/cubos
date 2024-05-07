@@ -215,9 +215,9 @@ bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& s
     return true;
 }
 
-static std::tuple<std::string, const Asset<Scene>&> originalComponentData(
-    const Assets& assets, const Asset<Scene>& sceneAsset, const std::string& entityPath,
-    const cubos::core::reflection::Type& componentType)
+static std::tuple<std::string, Asset<Scene>> originalComponentData(const Assets& assets, const Asset<Scene>& sceneAsset,
+                                                                   std::string entityPath,
+                                                                   const cubos::core::reflection::Type& componentType)
 {
     auto scene = assets.read<Scene>(sceneAsset);
     if (entityPath.find('.') == std::string::npos)
@@ -230,17 +230,27 @@ static std::tuple<std::string, const Asset<Scene>&> originalComponentData(
             return {entityPath, sceneAsset};
         }
 
-        return {{}, sceneAsset};
+        return {"", sceneAsset};
     }
 
     auto subScenePath = entityPath.substr(0, entityPath.find('.'));
-    auto newPath = entityPath.substr(entityPath.find('.') + 1);
+    entityPath = entityPath.substr(entityPath.find('.') + 1);
     CUBOS_ASSERT(scene->imports.contains(subScenePath));
-    return originalComponentData(assets, scene->imports.at(subScenePath), newPath, componentType);
+
+    auto subScene = assets.read<Scene>(scene->imports.at(subScenePath));
+    auto entity = subScene->blueprint.entities().atRight(entityPath);
+
+    if (subScene->blueprint.components().contains(componentType) &&
+        subScene->blueprint.components().at(componentType).contains(entity))
+    {
+        return {entityPath, scene->imports.at(subScenePath)};
+    }
+
+    return {"", scene->imports.at(subScenePath)};
 }
 
-static std::tuple<std::string, std::string, const Asset<Scene>&> originalRelationData(
-    const Assets& assets, const Asset<Scene>& sceneAsset, const std::string& entityPath, const std::string& otherPath,
+static std::tuple<std::string, std::string, Asset<Scene>> originalRelationData(
+    const Assets& assets, const Asset<Scene>& sceneAsset, std::string entityPath, std::string otherPath,
     const cubos::core::reflection::Type& relationType)
 {
     auto scene = assets.read<Scene>(sceneAsset);
@@ -267,10 +277,29 @@ static std::tuple<std::string, std::string, const Asset<Scene>&> originalRelatio
     {
         return {"", "", sceneAsset};
     }
+
     std::string subScenePath = entityPath.substr(0, entityPath.find('.'));
-    auto newPath = entityPath.substr(entityPath.find('.') + 1);
-    auto newOtherPath = otherPath.substr(otherPath.find('.') + 1);
-    return originalRelationData(assets, scene->imports.at(subScenePath), newPath, newOtherPath, relationType);
+    entityPath = entityPath.substr(entityPath.find('.') + 1);
+    otherPath = otherPath.substr(otherPath.find('.') + 1);
+
+    auto subScene = assets.read<Scene>(scene->imports.at(subScenePath));
+    auto entity = subScene->blueprint.entities().atRight(entityPath);
+    auto other = subScene->blueprint.entities().atRight(otherPath);
+
+    if (!subScene->blueprint.relations().contains(relationType))
+    {
+        return {"", "", scene->imports.at(subScenePath)};
+    }
+    auto relations = subScene->blueprint.relations().at(relationType);
+    if (!relations.contains(entity))
+    {
+        return {"", "", scene->imports.at(subScenePath)};
+    }
+    if (!relations[entity].contains(other))
+    {
+        return {"", "", scene->imports.at(subScenePath)};
+    }
+    return {entityPath, otherPath, scene->imports.at(subScenePath)};
 }
 
 bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Stream& stream)
@@ -340,11 +369,11 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                 if (!entityName.empty())
                 {
                     auto subScene = assets.read<Scene>(subHandle);
-                    if (cubos::core::reflection::compare(*type, components[entity].get(),
-                                                         subScene->blueprint.components()
-                                                             .at(*type)
-                                                             .at(subScene->blueprint.entities().atRight(entityName))
-                                                             .get()))
+                    if (core::reflection::compare(*type, components[entity].get(),
+                                                  subScene->blueprint.components()
+                                                      .at(*type)
+                                                      .at(subScene->blueprint.entities().atRight(entityName))
+                                                      .get()))
                     {
                         continue;
                     }
@@ -366,12 +395,12 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
                     if (!entityName.empty())
                     {
                         if (auto subScene = assets.read<Scene>(subHandle);
-                            cubos::core::reflection::compare(*type, relation.get(),
-                                                             subScene->blueprint.relations()
-                                                                 .at(*type)
-                                                                 .at(subScene->blueprint.entities().atRight(entityName))
-                                                                 .at(subScene->blueprint.entities().atRight(otherName))
-                                                                 .get()))
+                            core::reflection::compare(*type, relation.get(),
+                                                      subScene->blueprint.relations()
+                                                          .at(*type)
+                                                          .at(subScene->blueprint.entities().atRight(entityName))
+                                                          .at(subScene->blueprint.entities().atRight(otherName))
+                                                          .get()))
                         {
                             continue;
                         }
