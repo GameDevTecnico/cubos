@@ -5,56 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [v0.2.0] - 2024-05-07
 
 ### Added
 
+- Trait for representing inheritance relationships under reflection. (#693, **@roby2014**).
 - Log the system order on the dispatcher (#414, **@RiscadoA**).
-- Negative tags to the dispatcher (#390, **@RiscadoA**).
 - Support for queries with multiple relation terms (#929, **@RiscadoA**).
 - Support for queries with more than one unrelated targets (#930, **@RiscadoA**).
 - Allow iterating over entity relations directly through the World (#1006, **@RiscadoA**).
 - Observers, which allow reacting to component addition and removal (#724, **@RiscadoA**).
-- Fixed Time Step plugin (#989, **@joaomanita**).
-- New feature guide focused on queries (#995, **@RiscadoA**).
-- ECS Statistics tesseratos plugin (#1024, **@RiscadoA**).
-- Global position, rotation and scale getters (#1002, **@DiogoMendonc-a**).
-- Show childOf hierarchy on the world inspector (#991, **@diogomsmiranda**).
-- Rotation to the Transform Gizmo (#878, **@DiogoMendonc-a**).
-- Rotated box Gizmo (#878, **@DiogoMendonc-a**).
-- Shader asset and bridge (#1058, **@tomas7770**).
-- GBuffer plugin (#1061, **@RiscadoA**).
-- Defaults plugin (#229, **@RiscadoA**).
 - Support for untyped resources (#1057, **@RiscadoA**).
 - Addition and removal of resources through Commands (#325, **@RiscadoA**).
+- New feature guide focused on queries (#995, **@RiscadoA**).
+- Plugins system argument, which can be used to dynamically add and remove plugins (#1034, **@RiscadoA**).
+- Task class, for use in asynchronous code (#1111, **@RiscadoA**).
+- Fixed Time Step plugin (#989, **@joaomanita**).
 - Access to unscaled delta time for utilities like the debug camera (#1020, **@RiscadoA**).
+- Defaults plugin (#229, **@RiscadoA**).
+- Global position, rotation and scale getters (#1002, **@DiogoMendonc-a**).
+- Rotated box Gizmo (#878, **@DiogoMendonc-a**).
+- Optional synchronous loading to asset bridges (**@RiscadoA**).
+- Shader asset and bridge (#1058, **@tomas7770**).
+- GBuffer plugin (#1061, **@RiscadoA**).
+- Camera plugin (#1063, **@tomas7770**).
 - RenderTarget plugin (#1059, **@tomas7770**).
 - RenderPicker plugin (#1060, **@tomas7770**).
 - ToneMapping plugin (#1087, **@RiscadoA**).
 - RenderDepth plugin (#1082, **@RiscadoA**).
-- Task class, for use in asynchronous code (#1111, **@RiscadoA**).
 - HDR plugin (#1085, **@RiscadoA**).
-- Camera plugin (#1063, **@tomas7770**).
 - Lights plugin (#1135, **@RiscadoA**).
-- Search bar to World Inspector which allows filtering by components (#1105, **@diogomsmiranda**).
-- Allow filtering by entity names in the World Inspector (#1106, **@diogomsmiranda**).
-- Possibility of building the core library as a shared library (#1052, **@RiscadoA**).
-- Possibility of building the engine library as a shared library (#1053, **@RiscadoA**).
-- Plugins system argument, which can be used to dynamically add and remove plugins (#1034, **@RiscadoA**).
-- Show relations on the Entity Inspector (#907, **@RiscadoA**).
-- Allow adding and removing relations through the Entity Inspector (#1022, **@RiscadoA**).
-- Optional synchronous loading to asset bridges (**@RiscadoA**).
 - Render Voxels plugin (#1119, **@RiscadoA**).
 - Render Mesh plugin (#1110, **@RiscadoA**).
-- Optional synchronous loading to asset bridges (**@RiscadoA**).
-- Allow toggling vSync through setting (**@RiscadoA**).
 - GBuffer Rasterizer plugin (#1062, **@RiscadoA**).
 - Deferred Shading plugin (#1086, **@RiscadoA**).
 - SSAO plugin (#1088, **@RiscadoA**).
-- Split screen for the new renderer (#1149, **@tomas7770**).
-- Trait for representing inheritance relationships under reflection. (#693, **@roby2014**).
+- Split Screen plugin for the new camera plugin (#1149, **@tomas7770**).
 - Bloom plugin (#1089, **@RiscadoA**).
 - Render Defaults plugin (#1158, **@RiscadoA**).
+- Allow toggling vSync through setting (**@RiscadoA**).
+- ECS Statistics tesseratos plugin (#1024, **@RiscadoA**).
+- Show childOf hierarchy on the world inspector (#991, **@diogomsmiranda**).
+- Rotation to the Transform Gizmo (#878, **@DiogoMendonc-a**).
+- Search bar to World Inspector which allows filtering by components (#1105, **@diogomsmiranda**).
+- Allow filtering by entity names in the World Inspector (#1106, **@diogomsmiranda**).
+- Show relations on the Entity Inspector (#907, **@RiscadoA**).
+- Allow adding and removing relations through the Entity Inspector (#1022, **@RiscadoA**).
+- Possibility of building the core library as a shared library (#1052, **@RiscadoA**).
+- Possibility of building the engine library as a shared library (#1053, **@RiscadoA**).
+- Allow detecting rising/falling edges on Input actions (#958, **@diogomsmiranda**).
+- Solve collisions with proper constraints (#1015, **@fallenatlas**).
+- Substeps sub-loop in fixed step for physics simulation (**@fallenatlas**).
+- Allow adding sub-scenes through the scene editor (#552, **@teres4**).
 
 ### Changed
 
@@ -69,6 +71,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use Pixel Pack Buffers to speed up entity picking (**@RiscadoA**).
 - Make Gizmos plugin draw to RenderTargets (#1157, **@RiscadoA**).
 - Make ImGui plugin use RenderTargets (#1140, **@RiscadoA**).
+- Change solver to use penetration constraint for collision solving (#1015, **@fallenatlas**).
+
+### Removed
+
+- Old renderer plugin (#1160, **@RiscadoA**).
+- Old core debug renderer code (#668, **@RiscadoA**).
+- Template-based serialization system (#1101, **@Dacops**).
 
 ### Fixed
 
@@ -83,12 +92,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Crash due to DataInspector BeginTable calls being unchecked (#1036, **@RiscadoA**).
 - Segmentation fault when closing window with deferred renderer plugin (#959, **@RiscadoA**).
 - Scenes saving unnecessary non-overridden sub-scene components (#988, **@RiscadoA**).
-
-### Removed
-
-- Old renderer plugin (#1160, **@RiscadoA**).
-- Old core debug renderer code (#668, **@RiscadoA**).
-- Old serialization code (#1101, **@Dacops**).
 
 ## [v0.1.0] - 2024-02-17
 
@@ -120,9 +123,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Collider gizmos plugin, used to view collision shapes (**@RiscadoA**).
 - Delta Time multiplier, can be used to adjust simulation speed (#866, **@RiscadoA**).
 - Collision Solver plugin (#532, **@fallenatlas**).
-- Allow detecting rising/falling edges on Input actions (#958, **@diogomsmiranda**).
-- Penetration constraint plugin (#1015, **@fallenatlas**).
-- Substeps subloop in fixed step for physics simulation (**@fallenatlas**).
 
 ### Changed
 
@@ -135,7 +135,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default to debug camera when no other camera is active (#840, **@RiscadoA**).
 - Bump `glad` from `d08b1aa` to `73eaae0`.
 - Bump `json` from `v3.11.2` to `v3.11.3`.
-- Change solver to use penetration constraint for collision solving (#1015, **@fallenatlas**).
 
 ### Deprecated
 
