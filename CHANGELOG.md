@@ -110,6 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Delta Time multiplier, can be used to adjust simulation speed (#866, **@RiscadoA**).
 - Collision Solver plugin (#532, **@fallenatlas**).
 - Allow detecting rising/falling edges on Input actions (#958, **@diogomsmiranda**).
+- Penetration constraint plugin (#1015, **@fallenatlas**).
+- Substeps subloop in fixed step for physics simulation (**@fallenatlas**).
 
 ### Changed
 
@@ -122,6 +124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default to debug camera when no other camera is active (#840, **@RiscadoA**).
 - Bump `glad` from `d08b1aa` to `73eaae0`.
 - Bump `json` from `v3.11.2` to `v3.11.3`.
+- Change solver to use penetration constraint for collision solving (#1015, **@fallenatlas**).
 
 ### Deprecated
 
@@ -141,6 +144,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Crash when a renderable grid has a null asset (#956, **@RiscadoA**).
 - Bug where other PRs doc previews are deleted when you merge a single PR (#563, **@RiscadoA**).
 - Fix spotlight transform and cutoff math (**@RiscadoA**).
+- Gravity not working for all entities if an entity had inverse mass smaller or equal to zero (**@fallenatlas**).
 
 ## Previous Contributions
 
