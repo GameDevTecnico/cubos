@@ -16,6 +16,14 @@ TEST_CASE("reflection::Type")
     CHECK(namespacedType.name() == "cubos::core::reflection::Foo");
     CHECK(namespacedType.shortName() == "Foo");
 
+    auto& templatedType = Type::create("foo::Foo<bar::Bar>");
+    CHECK(templatedType.name() == "foo::Foo<bar::Bar>");
+    CHECK(templatedType.shortName() == "Foo<Bar>");
+
+    auto& multiTemplatedType = Type::create("foo::Foo<bar::Bar, baz::Baz>");
+    CHECK(multiTemplatedType.name() == "foo::Foo<bar::Bar, baz::Baz>");
+    CHECK(multiTemplatedType.shortName() == "Foo<Bar, Baz>");
+
     SUBCASE("without traits")
     {
         CHECK_FALSE(type.has<bool>());

@@ -96,6 +96,27 @@ Type::~Type()
 
 Type::Type(std::string name)
     : mName(std::move(name))
-    , mShortName(mName.substr(mName.find_last_of("::") + 1))
 {
+    // Remove all alphanumeric characters preceding colons in the name.
+    bool isNamespace{false};
+    for (int i = static_cast<int>(mName.size()) - 1; i >= 0; --i)
+    {
+        auto c = mName[static_cast<std::size_t>(i)];
+        if (c == ':')
+        {
+            isNamespace = true;
+            continue;
+        }
+
+        if (std::isalnum(c) == 0)
+        {
+            isNamespace = false;
+        }
+
+        if (!isNamespace)
+        {
+            mShortName.push_back(c);
+        }
+    }
+    mShortName = std::string(mShortName.rbegin(), mShortName.rend());
 }
