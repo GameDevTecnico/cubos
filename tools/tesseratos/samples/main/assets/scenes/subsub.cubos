@@ -1,0 +1,19 @@
+{
+  "entities": {
+    "main": {
+      "cubos::engine::Position": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "cubos::engine::Rotation": {
+        "w": 1.0,
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "cubos::engine::Scale": 1.0
+    }
+  },
+  "imports": {}
+}
