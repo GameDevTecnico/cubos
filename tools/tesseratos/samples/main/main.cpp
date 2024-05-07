@@ -1,7 +1,7 @@
+#include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/defaults/plugin.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -9,11 +9,9 @@
 
 #include <tesseratos/plugin.hpp>
 
-using cubos::engine::ActiveCameras;
 using cubos::engine::AnyAsset;
 using cubos::engine::Asset;
 using cubos::engine::Assets;
-using cubos::engine::Camera;
 using cubos::engine::Commands;
 using cubos::engine::Cubos;
 using cubos::engine::Input;

@@ -72,7 +72,6 @@ set(CUBOS_CORE_SOURCE
 	"src/io/keyboard.cpp"
 	"src/io/gamepad.cpp"
 
-	"src/gl/debug.cpp"
 	"src/gl/render_device.cpp"
 	"src/gl/ogl_render_device.hpp"
 	"src/gl/ogl_render_device.cpp"
