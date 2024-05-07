@@ -6,6 +6,9 @@
 
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/move.hpp>
+#include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/traits/nullable.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 namespace cubos::core::ecs
 {
@@ -16,6 +19,8 @@ namespace cubos::core::ecs
     class Opt
     {
     public:
+        CUBOS_REFLECT;
+
         ~Opt()
         {
             if (mContains)
@@ -122,7 +127,8 @@ namespace cubos::core::ecs
         /// @brief Compares with another optional value.
         /// @param other Other value.
         /// @return Whether they're equal.
-        bool operator==(const Opt<T>& other) const
+        template <typename U = T> // See https://brevzin.github.io/c++/2021/11/21/conditional-members/
+        requires(requires(const U& a, const U& b) { a == b; }) bool operator==(const Opt<U>& other) const
         {
             return (!mContains && !other.mContains) || (mContains && other.mContains && mValue == other.mValue);
         }
@@ -185,3 +191,14 @@ namespace cubos::core::ecs
         T* mValue;
     };
 } // namespace cubos::core::ecs
+
+CUBOS_REFLECT_TEMPLATE_IMPL((typename T), (cubos::core::ecs::Opt<T>))
+{
+    using namespace cubos::core::reflection;
+    using cubos::core::ecs::Opt;
+
+    return Type::create("cubos::core::ecs::Opt<" + reflect<T>().name() + ">")
+        .with(ConstructibleTrait::typed<Opt<T>>().withDefaultConstructor().withCopyConstructor().build())
+        .with(NullableTrait{[](const void* obj) -> bool { return static_cast<const Opt<T>*>(obj)->contains(); },
+                            [](void* obj) { static_cast<Opt<T>*>(obj)->reset(); }});
+}
