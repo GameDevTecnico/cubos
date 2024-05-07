@@ -68,7 +68,7 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
     displayName.erase(0, displayName.rfind('/'));
     if (displayName.empty())
     {
-        displayName = "/";
+        displayName.append("/");
     }
 
     ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(149, 252, 75));
