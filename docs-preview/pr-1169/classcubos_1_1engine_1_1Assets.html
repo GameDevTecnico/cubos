@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::engine::Assets class | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Assets <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="assets_8hpp.html">&lt;engine/assets/assets.hpp&gt;</a></div>
+        </h1>
+        <p>Resource which manages all assets. Responsible for loading and unloading assets, storing them in memory, and providing access to them.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> are all identified through <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> handles.</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#a5b5adddb5a35766e6213ff1cb4adbe96" class="m-doc">Status</a> { </span><span class="m-doc-wrap"><a href="#a5b5adddb5a35766e6213ff1cb4adbe96a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc">Unknown</a>,
+              <a href="#a5b5adddb5a35766e6213ff1cb4adbe96aa5ae20aa7fda5bd38bf0dce98e65bd2d" class="m-doc">Unloaded</a>,
+              <a href="#a5b5adddb5a35766e6213ff1cb4adbe96a16bfbf9c462762cf1cba4134ec53c504" class="m-doc">Loading</a>,
+              <a href="#a5b5adddb5a35766e6213ff1cb4adbe96a7381d487d18845b379422325c0a768d6" class="m-doc">Loaded</a> }</span>
+            </dt>
+            <dd>Possible statuses for an asset.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="ac45ff608c17917299022e7aa34e382b8">
+              <span class="m-doc-wrap-bumper"><a href="#ac45ff608c17917299022e7aa34e382b8" class="m-doc-self">Assets</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs an empty manager without any bridges or metadata.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8bde39a5f2a590b97af5dd99a91589e7" class="m-doc">registerBridge</a>(</span><span class="m-doc-wrap">const std::string&amp; extension,
+              std::shared_ptr&lt;<a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">AssetBridge</a>&gt; bridge)</span>
+            </dt>
+            <dd>Registers a new bridge for the given extension.</dd>
+            <dt id="aa969a9a1dd0c38baf813843bfe428ef1">
+              <span class="m-doc-wrap-bumper">void <a href="#aa969a9a1dd0c38baf813843bfe428ef1" class="m-doc-self">cleanup</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Cleans up all assets that are not in use. Should be called periodically to free up memory.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae64176ab58187c7cd8bee61f871618e3" class="m-doc">loadMeta</a>(</span><span class="m-doc-wrap">std::string_view path)</span>
+            </dt>
+            <dd>Loads all metadata from the virtual filesystem, in the given path. If the path points to a directory, it will be recursively searched for metadata files.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae36fcf1fb1a44c37a404c3aab43a5c4b" class="m-doc">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> handle) const -&gt; <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a></span>
+            </dt>
+            <dd>Loads the asset with the given handle, upgrading the handle to a strong one.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6d4a621ac5aeab1620bd2ccdcb167680" class="m-doc">saveMeta</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; bool</span>
+            </dt>
+            <dd>Saves changes made to an asset&#x27;s metadata.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afa9723ff3a34d23625d88faebbbc2576" class="m-doc">save</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; bool</span>
+            </dt>
+            <dd>Saves changes made to the asset with the given handle.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac828dcafc98d0aeee23e4219e67f5c19" class="m-doc">readMeta</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; <a href="group__assets-plugin.html#ga7b93d7e0cc9a1705899e577d770eac16" class="m-doc">AssetMetaRead</a></span>
+            </dt>
+            <dd>Gets read-only access to the metadata associated with the given handle.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4e27d706928e59dddce3d3a731e045a6" class="m-doc">writeMeta</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) -&gt; <a href="group__assets-plugin.html#ga2483ca387767b2bae7735d3bac3c138b" class="m-doc">AssetMetaWrite</a></span>
+            </dt>
+            <dd>Gets read-write access to the metadata associated with the given handle.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1516e8aa8d7184fdfbc6f73e7cc625be" class="m-doc">read</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt; handle) const -&gt; <a href="group__assets-plugin.html#gaceca2b8de7d01d914f7d9ce5fffd40a5" class="m-doc">AssetRead</a>&lt;T&gt;</span>
+            </dt>
+            <dd>Gets read-only access to the asset data associated with the given handle.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#acb41ad9267389341425706213c464ddf" class="m-doc">write</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt; handle) -&gt; <a href="group__assets-plugin.html#ga3befb4912d95d097c98bc627a8e7cf97" class="m-doc">AssetWrite</a>&lt;T&gt;</span>
+            </dt>
+            <dd>Gets read-write access to the asset data associated with the given handle.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afee0d6b03afb0bca3e14ff118bef4a77" class="m-doc">status</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; <a href="classcubos_1_1engine_1_1Assets.html#a5b5adddb5a35766e6213ff1cb4adbe96" class="m-doc">Status</a></span>
+            </dt>
+            <dd>Gets the status of the asset with the given handle.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a28a7adfb0a711ec3cc5a309b597030ba" class="m-doc">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; bool</span>
+            </dt>
+            <dd>Updates the given handle to the latest version of the asset.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa39fdd2b7a46f2405d0c744a01813e1a" class="m-doc">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;&amp; handle) const -&gt; bool</span>
+            </dt>
+            <dd>Updates the given handle to the latest version of the asset.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab7dcff382baac0d80a3d69239277501a" class="m-doc">invalidate</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle)</span>
+            </dt>
+            <dd>Unloads the given asset. Can be used to force assets to be reloaded.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#adcfc19950c5e467dbe09702956f6d301" class="m-doc">create</a>(</span><span class="m-doc-wrap">T data) -&gt; <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;</span>
+            </dt>
+            <dd>Creates a new asset with a random UUID with the given data (and empty metadata).</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7e70edc35babe62ab36a9352be590b8e" class="m-doc">store</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> handle,
+              T data) -&gt; <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a></span>
+            </dt>
+            <dd>Stores the given asset data in memory, associated with the given handle.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a899c4d0979fad20766d8a00e543649c4" class="m-doc">listAll</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;<a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&gt;</span>
+            </dt>
+            <dd>Gets all assets that have been registered.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa3221912a1be49ea259253cb4496bb11" class="m-doc">type</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp;</span>
+            </dt>
+            <dd>Gets the type of an asset.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a65e420980c4d63a658e4d40bbb368e88" class="m-doc">hasKnownType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if the asset has a known type.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a5b5adddb5a35766e6213ff1cb4adbe96"><div>
+            <h3>
+              enum class cubos::<wbr />engine::<wbr />Assets::<wbr /><a href="#a5b5adddb5a35766e6213ff1cb4adbe96" class="m-doc-self">Status</a>
+            </h3>
+            <p>Possible statuses for an asset.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a5b5adddb5a35766e6213ff1cb4adbe96a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc-self" id="a5b5adddb5a35766e6213ff1cb4adbe96a88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</a></td>
+                  <td>
+                  <p>No metadata is associated with the asset.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a5b5adddb5a35766e6213ff1cb4adbe96aa5ae20aa7fda5bd38bf0dce98e65bd2d" class="m-doc-self" id="a5b5adddb5a35766e6213ff1cb4adbe96aa5ae20aa7fda5bd38bf0dce98e65bd2d">Unloaded</a></td>
+                  <td>
+                  <p>The asset is not loaded.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a5b5adddb5a35766e6213ff1cb4adbe96a16bfbf9c462762cf1cba4134ec53c504" class="m-doc-self" id="a5b5adddb5a35766e6213ff1cb4adbe96a16bfbf9c462762cf1cba4134ec53c504">Loading</a></td>
+                  <td>
+                  <p>The asset is being loaded.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a5b5adddb5a35766e6213ff1cb4adbe96a7381d487d18845b379422325c0a768d6" class="m-doc-self" id="a5b5adddb5a35766e6213ff1cb4adbe96a7381d487d18845b379422325c0a768d6">Loaded</a></td>
+                  <td>
+                  <p>The asset is loaded.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a8bde39a5f2a590b97af5dd99a91589e7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bde39a5f2a590b97af5dd99a91589e7" class="m-doc-self">registerBridge</a>(</span><span class="m-doc-wrap">const std::string&amp; extension,
+              std::shared_ptr&lt;<a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">AssetBridge</a>&gt; bridge)</span></span>
+            </h3>
+            <p>Registers a new bridge for the given extension.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">extension</td>
+                  <td>Extension to register the bridge for.</td>
+                </tr>
+                <tr>
+                  <td>bridge</td>
+                  <td>Bridge to register.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>If more than one extension match a given asset&#x27;s name, the longest extension is picked.</p>
+          </div></section>
+          <section class="m-doc-details" id="ae64176ab58187c7cd8bee61f871618e3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae64176ab58187c7cd8bee61f871618e3" class="m-doc-self">loadMeta</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
+            </h3>
+            <p>Loads all metadata from the virtual filesystem, in the given path. If the path points to a directory, it will be recursively searched for metadata files.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path</td>
+                  <td>Path to load metadata from.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae36fcf1fb1a44c37a404c3aab43a5c4b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae36fcf1fb1a44c37a404c3aab43a5c4b" class="m-doc-self">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> handle) const</span></span>
+            </h3>
+            <p>Loads the asset with the given handle, upgrading the handle to a strong one.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to load the asset for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Strong handle to the asset, or a null handle if an error occurred.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This method doesn&#x27;t block, thus the asset may have not yet been loaded when it returns. If the manager is unable to find the asset or a bridge for loading it, a null handle is returned. If an error occurs while loading the asset, it will only fail in <a href="classcubos_1_1engine_1_1Assets.html#a1516e8aa8d7184fdfbc6f73e7cc625be" class="m-doc">read()</a> or be visible through <a href="classcubos_1_1engine_1_1Assets.html#afee0d6b03afb0bca3e14ff118bef4a77" class="m-doc">status()</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6d4a621ac5aeab1620bd2ccdcb167680"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6d4a621ac5aeab1620bd2ccdcb167680" class="m-doc-self">saveMeta</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Saves changes made to an asset&#x27;s metadata.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle identifying the asset to save.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the operation was successful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This method blocks until the asset is saved.</p>
+          </div></section>
+          <section class="m-doc-details" id="afa9723ff3a34d23625d88faebbbc2576"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afa9723ff3a34d23625d88faebbbc2576" class="m-doc-self">save</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Saves changes made to the asset with the given handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle identifying the asset to save.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the operation was successful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This method blocks until the asset is saved.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac828dcafc98d0aeee23e4219e67f5c19"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__assets-plugin.html#ga7b93d7e0cc9a1705899e577d770eac16" class="m-doc">AssetMetaRead</a> cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac828dcafc98d0aeee23e4219e67f5c19" class="m-doc-self">readMeta</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Gets read-only access to the metadata associated with the given handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle of the asset to get the metadata for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the metadata.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the asset is unknown.</p>
+          </div></section>
+          <section class="m-doc-details" id="a4e27d706928e59dddce3d3a731e045a6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__assets-plugin.html#ga2483ca387767b2bae7735d3bac3c138b" class="m-doc">AssetMetaWrite</a> cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4e27d706928e59dddce3d3a731e045a6" class="m-doc-self">writeMeta</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle)</span></span>
+            </h3>
+            <p>Gets read-write access to the metadata associated with the given handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to get the metadata for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the metadata.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the asset is unknown, an empty metadata object is returned.</p>
+          </div></section>
+          <section class="m-doc-details" id="a1516e8aa8d7184fdfbc6f73e7cc625be"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="group__assets-plugin.html#gaceca2b8de7d01d914f7d9ce5fffd40a5" class="m-doc">AssetRead</a>&lt;T&gt; cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1516e8aa8d7184fdfbc6f73e7cc625be" class="m-doc-self">read</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt; handle) const</span></span>
+            </h3>
+            <p>Gets read-only access to the asset data associated with the given handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the asset data.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle to get the asset data for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the asset data.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the asset is not loaded, this blocks until it is. If the asset cannot be loaded, abort is called.</p>
+          </div></section>
+          <section class="m-doc-details" id="acb41ad9267389341425706213c464ddf"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="group__assets-plugin.html#ga3befb4912d95d097c98bc627a8e7cf97" class="m-doc">AssetWrite</a>&lt;T&gt; cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acb41ad9267389341425706213c464ddf" class="m-doc-self">write</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt; handle)</span></span>
+            </h3>
+            <p>Gets read-write access to the asset data associated with the given handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the asset data.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle to get the asset data for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the asset data.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the asset is not loaded, this blocks until it is. If the asset cannot be loaded, abort is called. This increases the asset&#x27;s version.</p>
+          </div></section>
+          <section class="m-doc-details" id="afee0d6b03afb0bca3e14ff118bef4a77"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1Assets.html#a5b5adddb5a35766e6213ff1cb4adbe96" class="m-doc">Status</a> cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afee0d6b03afb0bca3e14ff118bef4a77" class="m-doc-self">status</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Gets the status of the asset with the given handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to check the status for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Status of the asset.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a28a7adfb0a711ec3cc5a309b597030ba"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28a7adfb0a711ec3cc5a309b597030ba" class="m-doc-self">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Updates the given handle to the latest version of the asset.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to update.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the version was updated.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Can be used to implement hot-reloading.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa39fdd2b7a46f2405d0c744a01813e1a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa39fdd2b7a46f2405d0c744a01813e1a" class="m-doc-self">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;&amp; handle) const</span></span>
+            </h3>
+            <p>Updates the given handle to the latest version of the asset.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to update.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the version was updated.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Can be used to implement hot-reloading.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab7dcff382baac0d80a3d69239277501a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab7dcff382baac0d80a3d69239277501a" class="m-doc-self">invalidate</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle)</span></span>
+            </h3>
+            <p>Unloads the given asset. Can be used to force assets to be reloaded.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to unload.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adcfc19950c5e467dbe09702956f6d301"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt; cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adcfc19950c5e467dbe09702956f6d301" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">T data)</span></span>
+            </h3>
+            <p>Creates a new asset with a random UUID with the given data (and empty metadata).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the asset data.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>data</td>
+                  <td><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> data to store.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Strong handle to the new asset.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7e70edc35babe62ab36a9352be590b8e"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e70edc35babe62ab36a9352be590b8e" class="m-doc-self">store</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> handle,
+              T data)</span></span>
+            </h3>
+            <p>Stores the given asset data in memory, associated with the given handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the asset data.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle to associate the asset with.</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> data to store.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Strong handle to the asset.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If an asset with the same handle already exists, it will be replaced. If no metadata is associated with the handle, an empty one will be created. This increases the asset&#x27;s version.</p>
+          </div></section>
+          <section class="m-doc-details" id="a899c4d0979fad20766d8a00e543649c4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&gt; cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a899c4d0979fad20766d8a00e543649c4" class="m-doc-self">listAll</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets all assets that have been registered.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Vector with all registered assets.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa3221912a1be49ea259253cb4496bb11"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3221912a1be49ea259253cb4496bb11" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Gets the type of an asset.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to check the type for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> type.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the asset is not loaded, its type is deduced from its bridge. If there&#x27;s also no associated bridge, aborts. If the asset does not exist, aborts.</p>
+          </div></section>
+          <section class="m-doc-details" id="a65e420980c4d63a658e4d40bbb368e88"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a65e420980c4d63a658e4d40bbb368e88" class="m-doc-self">hasKnownType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Checks if the asset has a known type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to check the type for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>wheter the asset has a known type</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

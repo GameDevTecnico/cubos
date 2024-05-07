@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Engine &raquo; Render module | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          Render <span class="m-thin">module</span></h1>
+        <p>Provides plugins for graphics rendering.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#groups">Modules</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="groups">
+          <h2><a href="#groups">Modules</a></h2>
+          <dl class="m-doc">
+            <dt>module <a href="group__render-bloom-plugin.html" class="m-doc">Bloom</a></dt>
+            <dd>Applies the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> effect on the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</dd>
+            <dt>module <a href="group__render-camera-plugin.html" class="m-doc">Camera</a></dt>
+            <dd>Adds <a href="structcubos_1_1engine_1_1PerspectiveCamera.html" class="m-doc">PerspectiveCamera</a> components and the <a href="structcubos_1_1engine_1_1DrawsTo.html" class="m-doc">DrawsTo</a> relation.</dd>
+            <dt>module <a href="group__render-deferred-shading-plugin.html" class="m-doc">Deferred Shading</a></dt>
+            <dd>Applies the Deferred Shading technique on the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> and outputs the result to the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</dd>
+            <dt>module <a href="group__render-depth-plugin.html" class="m-doc">Depth</a></dt>
+            <dd>Adds and manages the <a href="structcubos_1_1engine_1_1RenderDepth.html" class="m-doc">RenderDepth</a> component.</dd>
+            <dt>module <a href="group__render-g-buffer-plugin.html" class="m-doc">G-Buffer</a></dt>
+            <dd>Adds and manages <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> components.</dd>
+            <dt>module <a href="group__render-g-buffer-rasterizer-plugin.html" class="m-doc">G-Buffer Rasterizer</a></dt>
+            <dd>Draws <a href="structcubos_1_1engine_1_1RenderMesh.html" class="m-doc">RenderMesh</a> components to the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a>.</dd>
+            <dt>module <a href="group__render-hdr-plugin.html" class="m-doc">HDR</a></dt>
+            <dd>Adds and manages <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> components.</dd>
+            <dt>module <a href="group__render-lights-plugin.html" class="m-doc">Lights</a></dt>
+            <dd>Common interface for the lighting part of rendering plugins.</dd>
+            <dt>module <a href="group__render-mesh-plugin.html" class="m-doc">Mesh</a></dt>
+            <dd>Adds and manages <a href="structcubos_1_1engine_1_1RenderMesh.html" class="m-doc">RenderMesh</a> components.</dd>
+            <dt>module <a href="group__render-picker-plugin.html" class="m-doc">RenderPicker</a></dt>
+            <dd>Adds and manages <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> components.</dd>
+            <dt>module <a href="group__render-shader-plugin.html" class="m-doc">Shader</a></dt>
+            <dd>Adds shader assets to <strong>CUBOS</strong>.</dd>
+            <dt>module <a href="group__render-split-screen-plugin.html" class="m-doc">Splitscreen</a></dt>
+            <dd>Adjusts the viewport in <a href="structcubos_1_1engine_1_1DrawsTo.html" class="m-doc">DrawsTo</a> relations to achieve a splitscreen layout.</dd>
+            <dt>module <a href="group__render-ssao-plugin.html" class="m-doc">Screen Space Ambient Occlusion</a></dt>
+            <dd>Applies the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> technique on the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> and outputs the result to the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> texture.</dd>
+            <dt>module <a href="group__render-target-plugin.html" class="m-doc">Render Target</a></dt>
+            <dd>Adds and manages <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a> components.</dd>
+            <dt>module <a href="group__render-tone-mapping-plugin.html" class="m-doc">Tone Mapping</a></dt>
+            <dd>Draws the tone-mapped <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture to the render target&#x27;s framebuffer.</dd>
+            <dt>module <a href="group__render-voxels-plugin.html" class="m-doc">Render Voxels</a></dt>
+            <dd>Common interface for voxel rendering plugins.</dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
