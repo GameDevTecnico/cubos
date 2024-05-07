@@ -1,6 +1,6 @@
 # Inherits Trait {#examples-core-reflection-traits-inherits}
 
-## @brief Exposing the inheritance relationship between types.
+@brief Exposing the inheritance relationship between types.
 
 For structured types, you might want to expose their inheritance relationships using `InheritsTrait`. This trait allows you to specify the parent type from which another type inherits.
 
