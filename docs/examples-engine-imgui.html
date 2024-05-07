@@ -68,16 +68,11 @@
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/imgui/data_inspector.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/imgui/plugin.hpp&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/renderer/plugin.hpp&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/screen_picker/plugin.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/render/target/plugin.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/settings/plugin.hpp&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/transform/plugin.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/window/plugin.hpp&gt;</span></pre><p>Then, make sure to add the plugin.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">settingsPlugin</span><span class="p">);</span>
 <span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">windowPlugin</span><span class="p">);</span>
-<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">transformPlugin</span><span class="p">);</span>
-<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">assetsPlugin</span><span class="p">);</span>
-<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">screenPickerPlugin</span><span class="p">);</span>
-<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">rendererPlugin</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">renderTargetPlugin</span><span class="p">);</span>
 <span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">imguiPlugin</span><span class="p">);</span></pre><p>Once the ImGui plugin is added, you can create systems to display ImGui windows and widgets. Here&#x27;s a system which opens an ImGui window, and its demo.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;show ImGui demo&quot;</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="n">imguiTag</span><span class="p">).</span><span class="n">call</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">ImGui</span><span class="o">::</span><span class="n">Begin</span><span class="p">(</span><span class="s">&quot;Dear ImGui + CUBOS.&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">);</span>

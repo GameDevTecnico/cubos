@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/render/mesh/task.hpp file | CUBOS. Docs</title>
+  <title>cubos::engine::ImGuiTarget struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,37 +46,40 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_13f5e2b140054f355a8f8a8c95923a6a.html">render</a>/</span><span class="m-breadcrumb"><a href="dir_7b909ba8d9da7f57f6483ac5a4ecdca1.html">mesh</a>/</span>task.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ImGuiTarget <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="imgui_2target_8hpp.html">&lt;engine/imgui/target.hpp&gt;</a></div>
         </h1>
-        <p>Component <a href="structcubos_1_1engine_1_1RenderMeshTask.html" class="m-doc">cubos::<wbr />engine::<wbr />RenderMeshTask</a>.</p>
+        <p>Component used to indicate that the ImGui frame should be rendered to a given <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
-            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1RenderMeshTask.html" class="m-doc">cubos::engine::RenderMeshTask</a>
+            <dt id="a0fc0c1fe5cce9fedffb6cbc61e5c7a92">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a0fc0c1fe5cce9fedffb6cbc61e5c7a92" class="m-doc-self">frontFramebuffer</a>
             </dt>
-            <dd>Component used to track meshing tasks for <a href="structcubos_1_1engine_1_1RenderVoxelGrid.html" class="m-doc">RenderVoxelGrid</a> components.</dd>
+            <dd>Framebuffer used to draw to the front <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> texture.</dd>
+            <dt id="a80ae9c0f439b02ecbefb4a9c82fd92d2">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a80ae9c0f439b02ecbefb4a9c82fd92d2" class="m-doc-self">backFramebuffer</a>
+            </dt>
+            <dd>Framebuffer used to draw to the back <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> texture.</dd>
+            <dt id="a638146ca5e97037f428ff981ae280b28">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a638146ca5e97037f428ff981ae280b28" class="m-doc-self">frontPicker</a>
+            </dt>
+            <dd>Picker texture present in the <a href="structcubos_1_1engine_1_1ImGuiTarget.html#a0fc0c1fe5cce9fedffb6cbc61e5c7a92" class="m-doc">frontFramebuffer</a>.</dd>
+            <dt id="ac0db7ab74ff7eb322c4339642d842063">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#ac0db7ab74ff7eb322c4339642d842063" class="m-doc-self">backPicker</a>
+            </dt>
+            <dd>Picker texture present in the <a href="structcubos_1_1engine_1_1ImGuiTarget.html#a80ae9c0f439b02ecbefb4a9c82fd92d2" class="m-doc">backFramebuffer</a>.</dd>
           </dl>
         </section>
       </div>
