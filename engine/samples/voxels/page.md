@@ -19,9 +19,9 @@ Lets start by defining the handles of the assets we want to use, as done in the 
 
 @snippet voxels/main.cpp Get handles to assets
 
-In this sample, instead of creating a new palette, we just read the data from the asset identified from the `PaletteAsset` handle we defined previously. Internally, the @ref cubos::engine::Assets "assets manager" will automatically load the palette asset if it hasn't been loaded before.
+In this sample, instead of creating a new palette, we just set the @ref cubos::engine::RenderPalette "RenderPalette"'s handle to the `PaletteAsset` handle we defined previously.
 
-@snippet voxels/main.cpp Load and set palette
+@snippet voxels/main.cpp Set palette
 
 Now, we can create an entity with our car asset. 
 

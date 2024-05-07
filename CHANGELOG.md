@@ -84,6 +84,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Segmentation fault when closing window with deferred renderer plugin (#959, **@RiscadoA**).
 - Scenes saving unnecessary non-overridden sub-scene components (#988, **@RiscadoA**).
 
+### Removed
+
+- Old renderer plugin (#1160, **@RiscadoA**).
+- Old core debug renderer code (#668, **@RiscadoA**).
+
 ## [v0.1.0] - 2024-02-17
 
 ### Added

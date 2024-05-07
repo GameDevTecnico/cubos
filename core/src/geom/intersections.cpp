@@ -1,8 +1,10 @@
 #include <limits>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/geom/intersections.hpp>
-#include <cubos/core/gl/debug.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>

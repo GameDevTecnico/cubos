@@ -84,23 +84,6 @@ set(CUBOS_ENGINE_SOURCE
 	"src/input/bindings.cpp"
 	"src/input/action.cpp"
 	"src/input/axis.cpp"
-
-	"src/renderer/plugin.cpp"
-	"src/renderer/vertex.cpp"
-	"src/renderer/frame.cpp"
-	"src/renderer/camera.cpp"
-	"src/renderer/renderer.cpp"
-	"src/renderer/deferred_renderer.cpp"
-	"src/renderer/pps/bloom.cpp"
-	"src/renderer/pps/copy_pass.cpp"
-	"src/renderer/pps/manager.cpp"
-	"src/renderer/pps/pass.cpp"
-	"src/renderer/viewport.cpp"
-
-	"src/splitscreen/plugin.cpp"
-
-	"src/screen_picker/plugin.cpp"
-	"src/screen_picker/screen_picker.cpp"
 	
 	"src/fixed_step/plugin.cpp"
 	"src/fixed_step/fixed_delta_time.cpp"

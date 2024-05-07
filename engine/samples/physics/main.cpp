@@ -1,11 +1,16 @@
+#include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
+#include <cubos/engine/render/camera/draws_to.hpp>
+#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/defaults/plugin.hpp>
+#include <cubos/engine/render/defaults/target.hpp>
 #include <cubos/engine/render/lights/directional.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/screen_picker/plugin.hpp>
+#include <cubos/engine/render/voxels/grid.hpp>
+#include <cubos/engine/render/voxels/palette.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -34,8 +39,7 @@ int main(int argc, char** argv)
     cubos.plugin(windowPlugin);
     cubos.plugin(transformPlugin);
     cubos.plugin(assetsPlugin);
-    cubos.plugin(screenPickerPlugin);
-    cubos.plugin(rendererPlugin);
+    cubos.plugin(renderDefaultsPlugin);
     cubos.plugin(voxelsPlugin);
     cubos.plugin(fixedStepPlugin);
     cubos.plugin(collisionsPlugin);
@@ -47,13 +51,14 @@ int main(int argc, char** argv)
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
     });
 
-    cubos.startupSystem("create Camera").call([](Commands cmds, ActiveCameras& activeCameras) {
-        activeCameras.entities[0] = cmds.create()
-                                        .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
-                                        .add(Position{{50.0F, 50.0F, 50.0F}})
-                                        .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{-1.0F, -1.0F, -1.0F}),
-                                                                      glm::vec3{0.0F, 1.0F, 0.0F})})
-                                        .entity();
+    cubos.startupSystem("create Camera").call([](Commands cmds) {
+        auto targetEnt = cmds.create().add(RenderTargetDefaults{}).entity();
+        cmds.create()
+            .relatedTo(targetEnt, DrawsTo{})
+            .add(PerspectiveCamera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(LocalToWorld{})
+            .add(Position{{50.0F, 50.0F, 50.0F}})
+            .add(Rotation::lookingAt({-1.0F, -1.0F, -1.0F}, glm::vec3{0.0F, 1.0F, 0.0F}));
     });
 
     cubos.startupSystem("create the sun").call([](Commands cmds) {
@@ -62,10 +67,7 @@ int main(int argc, char** argv)
             .add(Rotation{glm::quat(glm::vec3(glm::radians(45.0F), glm::radians(45.0F), 0))});
     });
 
-    cubos.startupSystem("load the palette").after(rendererInitTag).call([](const Assets& assets, Renderer& renderer) {
-        auto palette = assets.read(PaletteAsset);
-        renderer->setPalette(*palette);
-    });
+    cubos.startupSystem("set the palette").call([](RenderPalette& palette) { palette.asset = PaletteAsset; });
 
     cubos.startupSystem("create a car")
         .after(settingsTag)
@@ -77,14 +79,9 @@ int main(int argc, char** argv)
 
             // Create the car entity
             cmds.create()
-                .add(RenderableGrid{CarAsset, offset})
+                .add(RenderVoxelGrid{CarAsset, offset})
+                .add(PhysicsBundle{.mass = 500.0F})
                 .add(Position{{0.0F, 0.0F, 0.0F}})
-                .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
-                .add(Velocity{.vec = {0.0F, 0.0F, 0.0F}})
-                .add(Force{})
-                .add(Impulse{})
-                .add(Mass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
-                .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{});
         });
 

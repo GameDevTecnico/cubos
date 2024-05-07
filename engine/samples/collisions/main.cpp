@@ -1,20 +1,25 @@
 #include <glm/gtc/random.hpp>
 
 #include <cubos/core/geom/box.hpp>
-#include <cubos/core/gl/debug.hpp>
 #include <cubos/core/log.hpp>
 
+#include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
+#include <cubos/engine/gizmos/plugin.hpp>
+#include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
-#include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/screen_picker/plugin.hpp>
+#include <cubos/engine/render/camera/draws_to.hpp>
+#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/defaults/plugin.hpp>
+#include <cubos/engine/render/defaults/target.hpp>
+#include <cubos/engine/render/tone_mapping/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -51,9 +56,10 @@ int main()
     cubos.plugin(physicsPlugin);
     cubos.plugin(solverPlugin);
     cubos.plugin(assetsPlugin);
-    cubos.plugin(screenPickerPlugin);
-    cubos.plugin(rendererPlugin);
     cubos.plugin(inputPlugin);
+    cubos.plugin(renderDefaultsPlugin);
+    cubos.plugin(gizmosPlugin);
+    cubos.tag(gizmosDrawTag).after(toneMappingTag);
 
     cubos.resource<State>();
 
@@ -68,15 +74,14 @@ int main()
         input.bind(bindings);
     });
 
-    cubos.startupSystem("setup camera").call([](Commands commands, ActiveCameras& cameras) {
-        // Spawn the camera.
-        cameras.entities[0] =
-            commands.create()
-                .add(Camera{.fovY = 60.0, .zNear = 0.1F, .zFar = 100.0F})
-                .add(LocalToWorld{})
-                .add(Position{{-4.0, 1.5, 0}})
-                .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{3.0, -1.0, 0.0}), glm::vec3{0.0, 1.0, 0.0})})
-                .entity();
+    cubos.startupSystem("setup camera").call([](Commands commands) {
+        auto targetEnt = commands.create().add(RenderTargetDefaults{}).add(GizmosTarget{}).entity();
+        commands.create()
+            .relatedTo(targetEnt, DrawsTo{})
+            .add(PerspectiveCamera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(LocalToWorld{})
+            .add(Position{{-4.0F, 1.5F, 0.0F}})
+            .add(Rotation::lookingAt({3.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F}));
     });
 
     cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
@@ -147,17 +152,20 @@ int main()
             }
         });
 
-    cubos.system("render").after(collisionsSampleUpdated).call([](Query<const LocalToWorld&, const Collider&> query) {
-        for (auto [localToWorld, collider] : query)
-        {
-            cubos::core::gl::Debug::drawWireBox(
-                collider.localAABB.box(),
-                glm::translate(localToWorld.mat * collider.transform, collider.localAABB.center()));
-            cubos::core::gl::Debug::drawWireBox(collider.worldAABB.box(),
-                                                glm::translate(glm::mat4{1.0}, collider.worldAABB.center()),
-                                                glm::vec3{1.0, 0.0, 0.0});
-        }
-    });
+    cubos.system("render")
+        .after(collisionsSampleUpdated)
+        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const Collider&> query) {
+            for (auto [localToWorld, collider] : query)
+            {
+                auto size = collider.localAABB.box().halfSize * 2.0F;
+                glm::mat4 transform = glm::scale(localToWorld.mat * collider.transform, size);
+                gizmos.color({1.0F, 1.0F, 1.0F});
+                gizmos.drawWireBox("local AABB", transform);
+
+                gizmos.color({1.0F, 0.0F, 0.0F});
+                gizmos.drawWireBox("world AABB", collider.worldAABB.min(), collider.worldAABB.max());
+            }
+        });
 
     cubos.run();
     return 0;
