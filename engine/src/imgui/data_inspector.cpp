@@ -119,7 +119,9 @@ bool DataInspector::inspect(const std::string& name, const Type& type, void* val
                 ImGui::PushID("array_elements");
                 for (size_t idx = 0; auto* element : view)
                 {
-                    auto idxStrRepresentation = std::string("[" + std::to_string(idx) + "]");
+                    std::string idxStrRepresentation = "[";
+                    idxStrRepresentation.append(std::to_string(idx));
+                    idxStrRepresentation.push_back(']');
                     changed |= inspect(idxStrRepresentation, trait.elementType(), element, readOnly);
 
                     // Removing elements

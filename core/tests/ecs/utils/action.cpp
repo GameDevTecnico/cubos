@@ -17,12 +17,20 @@ using namespace test::ecs;
 
 static std::string constructor(Entity entity)
 {
-    return "{" + std::to_string(entity.index) + ", " + std::to_string(entity.generation) + "}";
+    std::string result = "{";
+    result.append(std::to_string(entity.index));
+    result.append(", ");
+    result.append(std::to_string(entity.generation));
+    result.append("}");
+    return result;
 }
 
 static std::string constructor(const Type& type)
 {
-    return "world.types().type(world.types().id(\"" + type.name() + "\"))";
+    std::string result = "world.types().type(world.types().id(\"";
+    result.append(type.name());
+    result.append("\"))");
+    return result;
 }
 
 static std::string constructor(const std::unordered_set<const Type*>& types)
@@ -30,9 +38,11 @@ static std::string constructor(const std::unordered_set<const Type*>& types)
     std::string result = "{";
     for (const auto* type : types)
     {
-        result += "&" + ::constructor(*type) + ", ";
+        result.append("&");
+        result.append(::constructor(*type));
+        result.append(", ");
     }
-    result += "}";
+    result.append("}");
     return result;
 }
 
@@ -88,7 +98,10 @@ Action* DestroyAction::random(ExpectedWorld& expected)
 
 std::string DestroyAction::constructor() const
 {
-    return "DestroyAction{" + ::constructor(mEntity) + "}";
+    std::string result = "DestroyAction{";
+    result.append(::constructor(mEntity));
+    result.append("}");
+    return result;
 }
 
 void DestroyAction::test(World& world, ExpectedWorld& expected)
@@ -149,7 +162,14 @@ Action* AddAction::random(ExpectedWorld& expected)
 
 std::string AddAction::constructor() const
 {
-    return "AddAction{" + ::constructor(mEntity) + ", " + ::constructor(mType) + ", " + std::to_string(mValue) + "}";
+    std::string result = "AddAction{";
+    result.append(::constructor(mEntity));
+    result.append(", ");
+    result.append(::constructor(mType));
+    result.append(", ");
+    result.append(std::to_string(mValue));
+    result.append("}");
+    return result;
 }
 
 void AddAction::test(World& world, ExpectedWorld& expected)
@@ -191,7 +211,12 @@ Action* RemoveAction::random(ExpectedWorld& expected)
 
 std::string RemoveAction::constructor() const
 {
-    return "RemoveAction{" + ::constructor(mEntity) + ", " + ::constructor(mType) + "}";
+    std::string result = "RemoveAction{";
+    result.append(::constructor(mEntity));
+    result.append(", ");
+    result.append(::constructor(mType));
+    result.append("}");
+    return result;
 }
 
 void RemoveAction::test(World& world, ExpectedWorld& expected)
@@ -252,8 +277,16 @@ Action* RelateAction::random(ExpectedWorld& expected)
 
 std::string RelateAction::constructor() const
 {
-    return "RelateAction{" + ::constructor(mFrom) + ", " + ::constructor(mTo) + ", " + ::constructor(mType) + ", " +
-           std::to_string(mValue) + "}";
+    std::string result = "RelateAction{";
+    result.append(::constructor(mFrom));
+    result.append(", ");
+    result.append(::constructor(mTo));
+    result.append(", ");
+    result.append(::constructor(mType));
+    result.append(", ");
+    result.append(std::to_string(mValue));
+    result.append("}");
+    return result;
 }
 
 void RelateAction::test(World& world, ExpectedWorld& expected)
@@ -326,7 +359,14 @@ Action* UnrelateAction::random(ExpectedWorld& expected)
 
 std::string UnrelateAction::constructor() const
 {
-    return "UnrelateAction{" + ::constructor(mFrom) + ", " + ::constructor(mTo) + ", " + ::constructor(mType) + "}";
+    std::string result = "UnrelateAction{";
+    result.append(::constructor(mFrom));
+    result.append(", ");
+    result.append(::constructor(mTo));
+    result.append(", ");
+    result.append(::constructor(mType));
+    result.append("}");
+    return result;
 }
 
 void UnrelateAction::test(World& world, ExpectedWorld& expected)
@@ -401,8 +441,14 @@ Action* SingleTargetQueryAction::random(ExpectedWorld& expected)
 
 std::string SingleTargetQueryAction::constructor() const
 {
-    return "SingleTargetQueryAction{" + ::constructor(mWith) + ", " + ::constructor(mWithout) + ", " +
-           ::constructor(mOptional) + "}";
+    std::string result = "SingleTargetQueryAction{";
+    result.append(::constructor(mWith));
+    result.append(", ");
+    result.append(::constructor(mWithout));
+    result.append(", ");
+    result.append(::constructor(mOptional));
+    result.append("}");
+    return result;
 }
 
 void SingleTargetQueryAction::test(World& world, ExpectedWorld& expected)
@@ -587,9 +633,22 @@ Action* SingleRelationQueryAction::random(ExpectedWorld& expected)
 
 std::string SingleRelationQueryAction::constructor() const
 {
-    return "SingleRelationQueryAction{" + ::constructor(mRelation) + ", " + ::constructor(mWithA) + ", " +
-           ::constructor(mWithoutA) + ", " + ::constructor(mOptionalA) + ", " + ::constructor(mWithB) + ", " +
-           ::constructor(mWithoutB) + ", " + ::constructor(mOptionalB) + "}";
+    std::string result = "SingleRelationQueryAction{";
+    result.append(::constructor(mRelation));
+    result.append(", ");
+    result.append(::constructor(mWithA));
+    result.append(", ");
+    result.append(::constructor(mWithoutA));
+    result.append(", ");
+    result.append(::constructor(mOptionalA));
+    result.append(", ");
+    result.append(::constructor(mWithB));
+    result.append(", ");
+    result.append(::constructor(mWithoutB));
+    result.append(", ");
+    result.append(::constructor(mOptionalB));
+    result.append("}");
+    return result;
 }
 
 void SingleRelationQueryAction::test(World& world, ExpectedWorld& expected)
