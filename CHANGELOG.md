@@ -88,6 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Old renderer plugin (#1160, **@RiscadoA**).
 - Old core debug renderer code (#668, **@RiscadoA**).
+- Old serialization code (#1101, **@Dacops**).
 
 ## [v0.1.0] - 2024-02-17
 
