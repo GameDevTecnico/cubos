@@ -170,3 +170,4 @@ Although they've moved on, their work is etched into the project's foundations.
 
 [unreleased]: https://github.com/GameDevTecnico/cubos/commits/main/
 [v0.1.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.1.0
+[v0.2.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.2.0
