@@ -86,10 +86,12 @@ set(CUBOS_ENGINE_SOURCE
 	"src/input/axis.cpp"
 
 	"src/ui/canvas/plugin.cpp"
-	"src/ui/canvas/ui_canvas.cpp"
-	"src/ui/canvas/ui_element.cpp"
+	"src/ui/canvas/canvas.cpp"
+	"src/ui/canvas/element.cpp"
 	"src/ui/canvas/vertical_stretch.cpp"
 	"src/ui/canvas/horizontal_stretch.cpp"
+	"src/ui/color_rect/plugin.cpp"
+	"src/ui/color_rect/color_rect.cpp"
 
 	"src/fixed_step/plugin.cpp"
 	"src/fixed_step/fixed_delta_time.cpp"

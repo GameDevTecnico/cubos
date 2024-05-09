@@ -6,10 +6,10 @@
 #include <cubos/engine/render/target/target.hpp>
 #include <cubos/engine/transform/child_of.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/ui/canvas/canvas.hpp>
+#include <cubos/engine/ui/canvas/element.hpp>
 #include <cubos/engine/ui/canvas/horizontal_stretch.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
-#include <cubos/engine/ui/canvas/ui_canvas.hpp>
-#include <cubos/engine/ui/canvas/ui_element.hpp>
 #include <cubos/engine/ui/canvas/vertical_stretch.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -20,36 +20,37 @@ CUBOS_DEFINE_TAG(cubos::engine::uiDrawTag)
 
 using namespace cubos::engine;
 
-void cubos::engine::canvasPlugin(Cubos& cubos)
+void cubos::engine::uiCanvasPlugin(Cubos& cubos)
 {
-    cubos.component<UIElement>();
-    cubos.component<UICanvas>();
-    cubos.component<HorizontalStretch>();
-    cubos.component<VerticalStretch>();
-
     cubos.depends(windowPlugin);
     cubos.depends(renderTargetPlugin);
     cubos.depends(transformPlugin);
 
+    cubos.component<UIElement>();
+    cubos.component<UICanvas>();
+    cubos.component<UIHorizontalStretch>();
+    cubos.component<UIVerticalStretch>();
+
     cubos.tag(elementVPUpdateTag);
     cubos.tag(elementPropagateTag).after(elementVPUpdateTag);
     cubos.tag(uiBeginTag).after(elementPropagateTag);
-    cubos.tag(uiDrawTag).after(uiBeginTag).before(windowRenderTag);
+    cubos.tag(uiDrawTag).after(uiBeginTag).tagged(drawToRenderTargetTag);
 
     cubos.observer("initialize Canvas").onAdd<UICanvas>().call([](Query<UICanvas&> query) {
         for (auto [canvas] : query)
         {
-            canvas.mat = glm::ortho<float>(0, canvas.width, 0, canvas.height, -10000, 100000);
+            canvas.mat = glm::ortho<float>(0, canvas.width, 0, canvas.height);
         }
     });
     cubos.system("set element matrix")
         .tagged(elementVPUpdateTag)
         .with<UIElement>()
-        .withOpt<HorizontalStretch>()
-        .withOpt<VerticalStretch>()
+        .withOpt<UIHorizontalStretch>()
+        .withOpt<UIVerticalStretch>()
         .related<ChildOf>()
         .with<UICanvas>()
-        .call([](Query<UIElement&, Opt<const HorizontalStretch&>, Opt<const VerticalStretch&>, const UICanvas&> query) {
+        .call([](Query<UIElement&, Opt<const UIHorizontalStretch&>, Opt<const UIVerticalStretch&>, const UICanvas&>
+                     query) {
             for (auto [element, hs, vs, canvas] : query)
             {
                 element.vp = canvas.mat;
@@ -70,11 +71,11 @@ void cubos::engine::canvasPlugin(Cubos& cubos)
     cubos.system("set child position")
         .tagged(elementPropagateTag)
         .with<UIElement>()
-        .withOpt<HorizontalStretch>()
-        .withOpt<VerticalStretch>()
+        .withOpt<UIHorizontalStretch>()
+        .withOpt<UIVerticalStretch>()
         .related<ChildOf>(core::ecs::Traversal::Down)
         .with<UIElement>()
-        .call([](Query<UIElement&, Opt<const HorizontalStretch&>, Opt<const VerticalStretch&>, const UIElement&>
+        .call([](Query<UIElement&, Opt<const UIHorizontalStretch&>, Opt<const UIVerticalStretch&>, const UIElement&>
                      children) {
             for (auto [child, hs, vs, parent] : children)
             {

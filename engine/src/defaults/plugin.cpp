@@ -41,13 +41,13 @@ void cubos::engine::defaultsPlugin(Cubos& cubos)
     cubos.plugin(solverPlugin);
     cubos.plugin(renderDefaultsPlugin);
 
-    cubos.plugin(canvasPlugin);
+    cubos.plugin(uiCanvasPlugin);
     cubos.plugin(colorRectPlugin);
 
     cubos.plugin(gizmosPlugin);
     cubos.plugin(imguiPlugin);
 
-    cubos.tag(uiDrawTag).after(toneMappingTag);
     cubos.tag(gizmosDrawTag).after(toneMappingTag);
-    cubos.tag(imguiEndTag).after(gizmosDrawTag);
+    cubos.tag(uiDrawTag).after(gizmosDrawTag);
+    cubos.tag(imguiEndTag).after(uiDrawTag);
 }
