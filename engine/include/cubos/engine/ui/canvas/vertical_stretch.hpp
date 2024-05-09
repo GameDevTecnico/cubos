@@ -1,12 +1,9 @@
 /// @file
-/// @brief Component @ref cubos::engine::VerticalStretch.
-/// @ingroup canvas-plugin
+/// @brief Component @ref cubos::engine::UIVerticalStretch.
+/// @ingroup ui-canvas-plugin
 
 #pragma once
 
-#include <glm/glm.hpp>
-
-#include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/api.hpp>
@@ -14,8 +11,8 @@
 namespace cubos::engine
 {
     /// @brief Component which makes a UI element fit vertically to its parent.
-    /// @ingroup canvas-plugin
-    struct CUBOS_ENGINE_API VerticalStretch
+    /// @ingroup ui-canvas-plugin
+    struct CUBOS_ENGINE_API UIVerticalStretch
     {
         CUBOS_REFLECT;
 

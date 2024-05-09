@@ -1,6 +1,6 @@
 /// @file
 /// @brief Component @ref cubos::engine::UIElement.
-/// @ingroup canvas-plugin
+/// @ingroup ui-canvas-plugin
 
 #pragma once
 
@@ -16,7 +16,7 @@ using namespace cubos::core::gl;
 namespace cubos::engine
 {
     /// @brief Component which defines the space an element of the UI occupies as a rect.
-    /// @ingroup canvas-plugin
+    /// @ingroup ui-canvas-plugin
     struct CUBOS_ENGINE_API UIElement
     {
         CUBOS_REFLECT;

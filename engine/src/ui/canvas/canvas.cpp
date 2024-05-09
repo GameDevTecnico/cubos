@@ -2,7 +2,7 @@
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include <cubos/engine/ui/canvas/ui_canvas.hpp>
+#include <cubos/engine/ui/canvas/canvas.hpp>
 
 CUBOS_REFLECT_IMPL(cubos::engine::UICanvas)
 {
