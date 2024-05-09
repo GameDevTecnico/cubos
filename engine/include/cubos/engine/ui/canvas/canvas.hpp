@@ -17,8 +17,8 @@ namespace cubos::engine
     struct CUBOS_ENGINE_API UICanvas
     {
         CUBOS_REFLECT;
-        float width = 1920.0F;  ///< Width of the canvas in global coordinates
-        float height = 1080.0F; ///< Height of the canvas in global coordinates
+        glm::vec2 referenceSize = {1920.0F,
+                                   1080.0F}; ///< Size to be used as reference for the elements below this canvas.
 
         glm::mat4 mat; ///< View matrix provided of the canvas.
     };

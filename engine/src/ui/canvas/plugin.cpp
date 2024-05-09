@@ -39,7 +39,7 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
     cubos.observer("initialize Canvas").onAdd<UICanvas>().call([](Query<UICanvas&> query) {
         for (auto [canvas] : query)
         {
-            canvas.mat = glm::ortho<float>(0, canvas.width, 0, canvas.height);
+            canvas.mat = glm::ortho<float>(0, canvas.referenceSize.x, 0, canvas.referenceSize.y);
         }
     });
     cubos.system("set element matrix")
@@ -54,15 +54,15 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
             for (auto [element, hs, vs, canvas] : query)
             {
                 element.vp = canvas.mat;
-                element.position = element.anchor * glm::vec2{canvas.width, canvas.height} + element.offset;
+                element.position = element.anchor * canvas.referenceSize + element.offset;
                 if (hs.contains())
                 {
-                    element.size.x = canvas.width - hs.value().rightOffset - hs.value().leftOffset;
+                    element.size.x = canvas.referenceSize.x - hs.value().rightOffset - hs.value().leftOffset;
                     element.position.x = hs.value().leftOffset + element.size.x * element.pivot.x + element.offset.x;
                 }
                 if (vs.contains())
                 {
-                    element.size.y = canvas.height - vs.value().topOffset - vs.value().bottomOffset;
+                    element.size.y = canvas.referenceSize.y - vs.value().topOffset - vs.value().bottomOffset;
                     element.position.y = vs.value().bottomOffset + element.size.y * element.pivot.y + element.offset.y;
                 }
             }
