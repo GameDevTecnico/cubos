@@ -12,6 +12,8 @@
 #include <cubos/engine/scene/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/ui/canvas/plugin.hpp>
+#include <cubos/engine/ui/color_rect/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -39,9 +41,13 @@ void cubos::engine::defaultsPlugin(Cubos& cubos)
     cubos.plugin(solverPlugin);
     cubos.plugin(renderDefaultsPlugin);
 
+    cubos.plugin(canvasPlugin);
+    cubos.plugin(colorRectPlugin);
+
     cubos.plugin(gizmosPlugin);
     cubos.plugin(imguiPlugin);
 
+    cubos.tag(uiDrawTag).after(toneMappingTag);
     cubos.tag(gizmosDrawTag).after(toneMappingTag);
     cubos.tag(imguiEndTag).after(gizmosDrawTag);
 }

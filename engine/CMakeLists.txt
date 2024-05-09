@@ -84,7 +84,13 @@ set(CUBOS_ENGINE_SOURCE
 	"src/input/bindings.cpp"
 	"src/input/action.cpp"
 	"src/input/axis.cpp"
-	
+
+	"src/ui/canvas/plugin.cpp"
+	"src/ui/canvas/ui_canvas.cpp"
+	"src/ui/canvas/ui_element.cpp"
+	"src/ui/canvas/vertical_stretch.cpp"
+	"src/ui/canvas/horizontal_stretch.cpp"
+
 	"src/fixed_step/plugin.cpp"
 	"src/fixed_step/fixed_delta_time.cpp"
 
@@ -143,6 +149,7 @@ if(BUILD_ENGINE_SHARED)
 else()
 	add_library(cubos-engine STATIC ${CUBOS_ENGINE_SOURCE})
 endif()
+
 target_include_directories(cubos-engine PUBLIC "include")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
 target_compile_definitions(cubos-engine PRIVATE CUBOS_BUILTIN_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
