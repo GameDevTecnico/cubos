@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::HorizontalStretch struct | CUBOS. Docs</title>
+  <title>Engine &raquo; Canvas module | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,33 +46,87 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>HorizontalStretch <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="horizontal__stretch_8hpp.html">&lt;engine/ui/canvas/horizontal_stretch.hpp&gt;</a></div>
-        </h1>
-        <p>Component which makes a UI element fit horizontally to its parent.</p>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          Canvas <span class="m-thin">module</span></h1>
+        <p>Adds UI canvas and elements.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt id="a5d123a237645382b9a2a36d2f592f4f3">
-              float <a href="#a5d123a237645382b9a2a36d2f592f4f3" class="m-doc-self">leftOffset</a>
-            </dt>
-            <dd>Margin to the left border of the parent.</dd>
-            <dt id="aeebb085bb4328656bb4dc949f79e7cbf">
-              float <a href="#aeebb085bb4328656bb4dc949f79e7cbf" class="m-doc-self">rightOffset</a>
-            </dt>
-            <dd>Margin to the right border of the parent.</dd>
+            <dt>file <a href="canvas_8hpp.html" class="m-doc">canvas.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">cubos::<wbr />engine::<wbr />UICanvas</a>.</dd>
+            <dt>file <a href="element_8hpp.html" class="m-doc">element.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">cubos::<wbr />engine::<wbr />UIElement</a>.</dd>
+            <dt>file <a href="horizontal__stretch_8hpp.html" class="m-doc">horizontal_stretch.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1UIHorizontalStretch.html" class="m-doc">cubos::<wbr />engine::<wbr />UIHorizontalStretch</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2ui_2canvas_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
+            <dt>file <a href="vertical__stretch_8hpp.html" class="m-doc">vertical_stretch.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1UIVerticalStretch.html" class="m-doc">cubos::<wbr />engine::<wbr />UIVerticalStretch</a>.</dd>
           </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">cubos::engine::UICanvas</a>
+            </dt>
+            <dd>Component which represents a target for UI rendering.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">cubos::engine::UIElement</a>
+            </dt>
+            <dd>Component which defines the space an element of the UI occupies as a rect.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIHorizontalStretch.html" class="m-doc">cubos::engine::UIHorizontalStretch</a>
+            </dt>
+            <dd>Component which makes a UI element fit horizontally to its parent.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIVerticalStretch.html" class="m-doc">cubos::engine::UIVerticalStretch</a>
+            </dt>
+            <dd>Component which makes a UI element fit vertically to its parent.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga14a0490ecf8a4251fd14e1d2e557409d" class="m-doc">uiCanvasPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga14a0490ecf8a4251fd14e1d2e557409d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga14a0490ecf8a4251fd14e1d2e557409d" class="m-doc-self">uiCanvasPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2ui_2canvas_2plugin_8hpp.html">&lt;engine/ui/canvas/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>CUBOS</strong>. main class</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
