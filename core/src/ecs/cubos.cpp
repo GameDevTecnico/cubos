@@ -484,6 +484,30 @@ auto Cubos::SystemBuilder::with(const reflection::Type& type, int target) && -> 
     return std::move(*this);
 }
 
+auto Cubos::SystemBuilder::withOpt(const reflection::Type& type, int target) && -> SystemBuilder&&
+{
+    CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());
+    auto dataTypeId = mCubos.mWorld.types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().queryTerms.emplace_back(QueryTerm::makeOptComponent(dataTypeId, target));
+    return std::move(*this);
+}
+
 auto Cubos::SystemBuilder::without(const reflection::Type& type, int target) && -> SystemBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());

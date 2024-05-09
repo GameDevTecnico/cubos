@@ -416,6 +416,20 @@ namespace cubos::core::ecs
             return std::move(*this).with(reflection::reflect<T>(), target);
         }
 
+        /// @brief Accepts the following component from the given target of the next query argument.
+        /// @param type Component type.
+        /// @param target Target index. By default, the last specified target or 0.
+        /// @return Builder.
+        SystemBuilder&& withOpt(const reflection::Type& type, int target = -1) &&;
+
+        /// @copydoc withOpt(const reflection::Type&, int)
+        /// @tparam T Component type.
+        template <typename T>
+        SystemBuilder&& withOpt(int target = -1) &&
+        {
+            return std::move(*this).with(reflection::reflect<T>(), target);
+        }
+
         /// @brief Forces the given target of the next query argument to not have the following component.
         /// @param type Component type.
         /// @param target Target. By default, the last specified target or 0.
