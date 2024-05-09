@@ -12,13 +12,13 @@ using namespace cubos::engine;
 
 namespace
 {
-
     struct PerElement
     {
         glm::vec2 xRange;
         glm::vec2 yRange;
         int depth;
     };
+
     struct State
     {
         ShaderPipeline pipeline;

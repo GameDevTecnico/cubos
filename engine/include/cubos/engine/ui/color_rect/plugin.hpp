@@ -1,9 +1,9 @@
 /// @dir
-/// @brief @ref color-rect-plugin plugin directory.
+/// @brief @ref ui-color-rect-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
-/// @ingroup color-rect-plugin
+/// @ingroup ui-color-rect-plugin
 
 #pragma once
 
@@ -11,12 +11,12 @@
 
 namespace cubos::engine
 {
-    /// @defgroup color-rect-plugin Canvas
+    /// @defgroup ui-color-rect-plugin Canvas
     /// @ingroup engine
-    /// @brief Adds color rect.
+    /// @brief Adds color rectangle elements.
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
-    /// @ingroup color-rect-plugin
+    /// @ingroup ui-color-rect-plugin
     CUBOS_ENGINE_API void colorRectPlugin(Cubos& cubos);
 } // namespace cubos::engine

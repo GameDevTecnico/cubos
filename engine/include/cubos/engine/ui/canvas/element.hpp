@@ -28,7 +28,7 @@ namespace cubos::engine
         int layer = 0;                   ///< Rendering order layer.
 
         glm::vec2 position = {0.0F, 0.0F}; ///< Global position of the pivot.
-        glm::mat4 vp;                      ///< View matrix provided by the canvas.
+        glm::mat4 vp = {};                 ///< View matrix provided by the canvas.
 
         int hierarchyDepth = 0; ///< Depth in hierarchy. Used for depth sorting.
 

@@ -1,6 +1,6 @@
 /// @file
 /// @brief Component @ref cubos::engine::UIColorRect.
-/// @ingroup color-rect-plugin
+/// @ingroup ui-color-rect-plugin
 
 #pragma once
 
@@ -13,7 +13,7 @@
 namespace cubos::engine
 {
     /// @brief Component that draws a UI element as a solid color.
-    /// @ingroup color-rect-plugin
+    /// @ingroup ui-color-rect-plugin
     struct CUBOS_ENGINE_API UIColorRect
     {
         CUBOS_REFLECT;
