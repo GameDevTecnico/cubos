@@ -64,15 +64,33 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a1a9cb42d3e4cc0db4ea3aba0d120ca7f">
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a1a9cb42d3e4cc0db4ea3aba0d120ca7f" class="m-doc-self">framebuffer</a>
+            <dt id="a5038b2f53da56219720008c75f2bf378">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a5038b2f53da56219720008c75f2bf378" class="m-doc-self">frontFramebuffer</a>
             </dt>
             <dd>Framebuffer used to draw to the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</dd>
-            <dt id="adf49e09325eba6c90c723e52795865b5">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#adf49e09325eba6c90c723e52795865b5" class="m-doc-self">hdr</a>
+            <dt>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a1fe802bcb2e8bd7f5e682202103dd12a" class="m-doc">backFramebuffer</a>
             </dt>
-            <dd><a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture present in the <a href="structcubos_1_1engine_1_1DeferredShading.html#a1a9cb42d3e4cc0db4ea3aba0d120ca7f" class="m-doc">framebuffer</a>.</dd>
+            <dd>Framebuffer used to draw to the back <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</dd>
+            <dt id="a7147fa28b2d426270568a685e34b3f7f">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a7147fa28b2d426270568a685e34b3f7f" class="m-doc-self">frontHDR</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture present in the <a href="structcubos_1_1engine_1_1DeferredShading.html#a5038b2f53da56219720008c75f2bf378" class="m-doc">frontFramebuffer</a>.</dd>
+            <dt id="a353e10d13bf6dd4f1e3c5eca3f2a71b5">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a353e10d13bf6dd4f1e3c5eca3f2a71b5" class="m-doc-self">backHDR</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture present in the <a href="structcubos_1_1engine_1_1DeferredShading.html#a1fe802bcb2e8bd7f5e682202103dd12a" class="m-doc">backFramebuffer</a>.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a1fe802bcb2e8bd7f5e682202103dd12a"><div>
+            <h3>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> cubos::<wbr />engine::<wbr />DeferredShading::<wbr /><a href="#a1fe802bcb2e8bd7f5e682202103dd12a" class="m-doc-self">backFramebuffer</a>
+            </h3>
+            <p>Framebuffer used to draw to the back <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</p>
+<p>Swapped with <a href="structcubos_1_1engine_1_1DeferredShading.html#a5038b2f53da56219720008c75f2bf378" class="m-doc">frontFramebuffer</a> as needed so that the textures match with the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> component.</p>
+          </div></section>
         </section>
       </div>
     </div>

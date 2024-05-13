@@ -167,6 +167,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aa3221912a1be49ea259253cb4496bb11" class="m-doc">type</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp;</span>
             </dt>
             <dd>Gets the type of an asset.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a65e420980c4d63a658e4d40bbb368e88" class="m-doc">hasKnownType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if the asset has a known type.</dd>
           </dl>
         </section>
         <section>
@@ -645,6 +649,29 @@
               </tfoot>
             </table>
 <p>If the asset is not loaded, its type is deduced from its bridge. If there&#x27;s also no associated bridge, aborts. If the asset does not exist, aborts.</p>
+          </div></section>
+          <section class="m-doc-details" id="a65e420980c4d63a658e4d40bbb368e88"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a65e420980c4d63a658e4d40bbb368e88" class="m-doc-self">hasKnownType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Checks if the asset has a known type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to check the type for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>wheter the asset has a known type</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
       </div>
