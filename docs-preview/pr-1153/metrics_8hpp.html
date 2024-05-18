@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Metric struct | CUBOS. Docs</title>
+  <title>core/metrics.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,41 +46,77 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          Metric <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="metrics_8hpp.html">&lt;core/metrics.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span>metrics.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Represents a metric.</p>
+        <p>Metrics and profiling utilities and macros.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
-            <dt id="a4fc66c6962e74af2740ff116da7dd52d">
-              std::string <a href="#a4fc66c6962e74af2740ff116da7dd52d" class="m-doc-self">mName</a>
+            <dt>
+              struct <a href="structMetric.html" class="m-doc">Metric</a>
             </dt>
-            <dd>The name of the metric.</dd>
-            <dt id="aac8b413e7fe1a20d0254a9c3c844020f">
-              double <a href="#aac8b413e7fe1a20d0254a9c3c844020f" class="m-doc-self">mValue</a>
+            <dd>Represents a metric.</dd>
+            <dt>
+              class <a href="classMetricsPool.html" class="m-doc">MetricsPool</a>
             </dt>
-            <dd>The value of the metric (as a double).</dd>
-            <dt id="afeff63a8c12648f372adc30d7b6346a7">
-              std::string <a href="#afeff63a8c12648f372adc30d7b6346a7" class="m-doc-self">mFile</a>
+            <dd>Singleton class that manages a collection of metrics.</dd>
+            <dt>
+              class <a href="classTimeTracker.html" class="m-doc">TimeTracker</a>
             </dt>
-            <dd>The source file where the metric was created.</dd>
-            <dt id="a0810c34a8845c6ad5fd2aa7593e27022">
-              int <a href="#a0810c34a8845c6ad5fd2aa7593e27022" class="m-doc-self">mLine</a>
-            </dt>
-            <dd>The line number where the metric was created.</dd>
+            <dd>Utility to measure the execution time of a scope.</dd>
           </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#a8b8f469658e213c221fb1233396f5e57" class="m-doc">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">name,
+              val)</span>
+            </dt>
+            <dd>Macro to add a metric.</dd>
+            <dt id="ad9dc2d48537d6c5ed87cc6b9b993cfec">
+              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc-self">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Macro to measure the execution time of a function/scope.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Define documentation</h2>
+          <section class="m-doc-details" id="a8b8f469658e213c221fb1233396f5e57"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#a8b8f469658e213c221fb1233396f5e57" class="m-doc-self">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">name,
+              val)</span>
+            </h3>
+            <p>Macro to add a metric.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>The name of the metric.</td>
+                </tr>
+                <tr>
+                  <td>val</td>
+                  <td>The value to set for the metric.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>The metric will be logged.</p></aside>
+          </div></section>
         </section>
       </div>
     </div>
