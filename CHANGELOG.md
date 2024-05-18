@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - UI canvas, elements, and color rects. (#1116, **@DiogoMendonc-a**)
+- Implemented file-based logging (#1154, **@roby2014**).
 
 ## [v0.2.0] - 2024-05-07
 
