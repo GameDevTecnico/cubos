@@ -57,7 +57,7 @@
               Reference
               <ul>
                 <li><a href="#pub-static-methods">Public static functions</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
               </ul>
             </li>
           </ul>
@@ -66,43 +66,35 @@
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a553426b278c021ecd8a5e3abca3e5cc2" class="m-doc">instance</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>&amp;</span>
-            </dt>
-            <dd>Get the singleton instance of the <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a942c550dd22aba90bf68b8b2796c1e04" class="m-doc">metric</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a>&amp; metric) -&gt; <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">static void <a href="#a9c24b588b0fc2a780bb92407b875bdd7" class="m-doc">metric</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a>&amp; metric)</span>
             </dt>
             <dd>Add a metric in the pool.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ada0c7247ea2d64067c34a74a2c56e2e4" class="m-doc">size</a>(</span><span class="m-doc-wrap">) -&gt; size_t</span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#aa256d6e08f4cf6affab111d5cebe8132" class="m-doc">size</a>(</span><span class="m-doc-wrap">) -&gt; size_t</span>
             </dt>
             <dd>Size of the metric pool.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#abaa368d6da46c918877b4800727f67c7" class="m-doc">read</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              double&amp; value,
+              size_t&amp; offset) -&gt; bool</span>
+            </dt>
+            <dd>Read a metric by name, updating the value and keeping track of the offset.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="ae4a5699895b60cf1dd93e33b552b9ea8">
+              <span class="m-doc-wrap-bumper"><a href="#ae4a5699895b60cf1dd93e33b552b9ea8" class="m-doc-self">MetricsPool</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Deleted constructor.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a553426b278c021ecd8a5e3abca3e5cc2"><div>
+          <section class="m-doc-details" id="a9c24b588b0fc2a780bb92407b875bdd7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>&amp; cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a553426b278c021ecd8a5e3abca3e5cc2" class="m-doc-self">instance</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Get the singleton instance of the <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>A reference to the singleton instance.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a942c550dd22aba90bf68b8b2796c1e04"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>&amp; cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a942c550dd22aba90bf68b8b2796c1e04" class="m-doc-self">metric</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a>&amp; metric)</span></span>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9c24b588b0fc2a780bb92407b875bdd7" class="m-doc-self">metric</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a>&amp; metric)</span></span>
             </h3>
             <p>Add a metric in the pool.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -115,17 +107,11 @@
                   <td>The metric to add.</td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A reference to the current instance.</td>
-                </tr>
-              </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ada0c7247ea2d64067c34a74a2c56e2e4"><div>
+          <section class="m-doc-details" id="aa256d6e08f4cf6affab111d5cebe8132"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">size_t cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ada0c7247ea2d64067c34a74a2c56e2e4" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">static size_t cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa256d6e08f4cf6affab111d5cebe8132" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Size of the metric pool.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -133,6 +119,39 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Metrics count.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abaa368d6da46c918877b4800727f67c7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abaa368d6da46c918877b4800727f67c7" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              double&amp; value,
+              size_t&amp; offset)</span></span>
+            </h3>
+            <p>Read a metric by name, updating the value and keeping track of the offset.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td><a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a> name.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value to store.</td>
+                </tr>
+                <tr>
+                  <td>offset</td>
+                  <td>Read count.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether reading the metric was successfull.</td>
                 </tr>
               </tfoot>
             </table>
