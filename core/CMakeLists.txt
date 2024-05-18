@@ -17,6 +17,9 @@ option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
 option(BUILD_CORE_SHARED "Build cubos core as shared library?" ON)
 
+option(ENABLE_PROFILING "Should profiling macros be compiled?" ON)
+set(CUBOS_METRIC_MAX_ENTRIES "1024" CACHE STRING "Maximum number of entries each metric can store")
+
 message("# Building core samples: " ${BUILD_CORE_SAMPLES})
 message("# Building core tests: " ${BUILD_CORE_TESTS})
 message("# Building core as shared library: " ${BUILD_CORE_SHARED})
@@ -25,6 +28,7 @@ message("# Building core as shared library: " ${BUILD_CORE_SHARED})
 set(CUBOS_CORE_SOURCE
 	"src/api.cpp"
 	"src/log.cpp"
+	"src/metrics.cpp"
 
 	"src/thread/pool.cpp"
 	"src/thread/task.cpp"
@@ -214,4 +218,12 @@ endif()
 # Add core samples
 if(BUILD_CORE_SAMPLES)
 	add_subdirectory(samples)
+endif()
+
+if(ENABLE_PROFILING)
+	target_compile_definitions(cubos-core
+		PUBLIC 
+		-DCUBOS_PROFILING=${ENABLE_PROFILING}
+		-DCUBOS_METRIC_MAX_ENTRIES=${CUBOS_METRIC_MAX_ENTRIES}
+	)
 endif()
