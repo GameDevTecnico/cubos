@@ -78,6 +78,11 @@
               std::size_t level = 0) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Reads texture data into a buffer, which must have the same format used when the texture was created.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#adf64a6ff4f614fa741a91343f12f4862" class="m-doc">copyTo</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga797e15f0e0cf846c01a616390e6a3055" class="m-doc">gl::<wbr />PixelPackBuffer</a> buffer,
+              std::size_t level = 0) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Copies part of the texture data into a pixel pack buffer.</dd>
             <dt id="a7a5fdbc797550dd87a47d615ff93bdf7">
               <span class="m-doc-wrap-bumper">void <a href="#a7a5fdbc797550dd87a47d615ff93bdf7" class="m-doc-self">generateMipmaps</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -146,6 +151,28 @@
                 <tr>
                   <td>level</td>
                   <td>Mip level to read.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adf64a6ff4f614fa741a91343f12f4862"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />Texture2D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf64a6ff4f614fa741a91343f12f4862" class="m-doc-self">copyTo</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga797e15f0e0cf846c01a616390e6a3055" class="m-doc">gl::<wbr />PixelPackBuffer</a> buffer,
+              std::size_t level = 0) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Copies part of the texture data into a pixel pack buffer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">buffer</td>
+                  <td>Buffer to copy into.</td>
+                </tr>
+                <tr>
+                  <td>level</td>
+                  <td>Mip level to copy.</td>
                 </tr>
               </tbody>
             </table>

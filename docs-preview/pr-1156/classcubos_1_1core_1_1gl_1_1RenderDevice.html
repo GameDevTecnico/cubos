@@ -98,6 +98,10 @@
             </dt>
             <dd>Sets the current blend state.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9482be70232e51102d9c38f87ad44d54" class="m-doc">createPixelPackBuffer</a>(</span><span class="m-doc-wrap">std::size_t size) -&gt; <a href="group__core-gl.html#ga797e15f0e0cf846c01a616390e6a3055" class="m-doc">PixelPackBuffer</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Creates a new pixel pack buffer.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af844cd1cc948f4f686ce73936b7a193e" class="m-doc">createSampler</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1SamplerDesc.html" class="m-doc">SamplerDesc</a>&amp; desc) -&gt; <a href="group__core-gl.html#ga22124e98761cd51e956d597091fde1de" class="m-doc">Sampler</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Creates a new texture sampler.</dd>
@@ -428,6 +432,29 @@
                   <td>Blend state handle.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9482be70232e51102d9c38f87ad44d54"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core-gl.html#ga797e15f0e0cf846c01a616390e6a3055" class="m-doc">PixelPackBuffer</a> cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9482be70232e51102d9c38f87ad44d54" class="m-doc-self">createPixelPackBuffer</a>(</span><span class="m-doc-wrap">std::size_t size) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Creates a new pixel pack buffer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">size</td>
+                  <td>Buffer size in bytes.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pixel pack buffer handle, or nullptr on failure.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="af844cd1cc948f4f686ce73936b7a193e"><div>

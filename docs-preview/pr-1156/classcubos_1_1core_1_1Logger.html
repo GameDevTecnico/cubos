@@ -102,9 +102,13 @@
             </dt>
             <dd>Gets the current log level.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#abe68d5f3027412657b06284d66837743" class="m-doc">setFilePath</a>(</span><span class="m-doc-wrap">const std::string&amp; filePath) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#ae0863acccfb9e9c5dea0bd9eacbb812a" class="m-doc">logToFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filePath) -&gt; bool</span>
             </dt>
             <dd>Sets a file path where logs will be saved.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#acd2762f1d28c0a0a620ba113971193d0" class="m-doc">logToFile</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Sets a file based on current timestamp where logs will be saved.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#ad42c74549d55a38d94509d89bfac2af7" class="m-doc">write</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1Logger.html#a4b350300f3e614bea6d2cba32f271de2" class="m-doc">Level</a> level,
               <a href="structcubos_1_1core_1_1Logger_1_1Location.html" class="m-doc">Location</a> location,
@@ -225,9 +229,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="abe68d5f3027412657b06284d66837743"><div>
+          <section class="m-doc-details" id="ae0863acccfb9e9c5dea0bd9eacbb812a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abe68d5f3027412657b06284d66837743" class="m-doc-self">setFilePath</a>(</span><span class="m-doc-wrap">const std::string&amp; filePath)</span></span>
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae0863acccfb9e9c5dea0bd9eacbb812a" class="m-doc-self">logToFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filePath)</span></span>
             </h3>
             <p>Sets a file path where logs will be saved.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -237,17 +241,32 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">filePath</td>
-                  <td>Path to file (inside <code>/logs</code>)</td>
+                  <td>Path to file in the virtual file system.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether setting the file occurred successfully.</td>
+                  <td>Whether the file could be opened for logging.</td>
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p>Logs before setting the file will be dumped!</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p>Previous logs are also dumped to the file.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="acd2762f1d28c0a0a620ba113971193d0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acd2762f1d28c0a0a620ba113971193d0" class="m-doc-self">logToFile</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Sets a file based on current timestamp where logs will be saved.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the file could be opened for logging.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Previous logs are also dumped to the file.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ad42c74549d55a38d94509d89bfac2af7"><div>
             <h3>
