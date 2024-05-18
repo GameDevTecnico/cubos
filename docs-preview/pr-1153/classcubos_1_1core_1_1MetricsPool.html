@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MetricsPool class | CUBOS. Docs</title>
+  <title>cubos::core::MetricsPool class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,7 +46,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          MetricsPool <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>MetricsPool <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="metrics_8hpp.html">&lt;core/metrics.hpp&gt;</a></div>
         </h1>
         <p>Singleton class that manages a collection of metrics.</p>
@@ -66,39 +66,31 @@
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#ab4c98b1fa6f944a46d91cfe2a0d16610" class="m-doc">instance</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classMetricsPool.html" class="m-doc">MetricsPool</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a553426b278c021ecd8a5e3abca3e5cc2" class="m-doc">instance</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>&amp;</span>
             </dt>
-            <dd>Get the singleton instance of the <a href="classMetricsPool.html" class="m-doc">MetricsPool</a>.</dd>
+            <dd>Get the singleton instance of the <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af95d00f1b23fb0878718b35d3e829972" class="m-doc">metric</a>(</span><span class="m-doc-wrap">const <a href="structMetric.html" class="m-doc">Metric</a>&amp; metric) -&gt; <a href="classMetricsPool.html" class="m-doc">MetricsPool</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a942c550dd22aba90bf68b8b2796c1e04" class="m-doc">metric</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a>&amp; metric) -&gt; <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>&amp;</span>
             </dt>
             <dd>Add a metric in the pool.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a718ffbc1965c32262881191f38482307" class="m-doc">size</a>(</span><span class="m-doc-wrap">) -&gt; size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ada0c7247ea2d64067c34a74a2c56e2e4" class="m-doc">size</a>(</span><span class="m-doc-wrap">) -&gt; size_t</span>
             </dt>
             <dd>Size of the metric pool.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a170d804e02a4d75f5d3efb8b37e06918" class="m-doc">get</a>(</span><span class="m-doc-wrap">const std::string&amp; metricName) const -&gt; std::vector&lt;<a href="structMetric.html" class="m-doc">Metric</a>&gt;</span>
-            </dt>
-            <dd>Get metrics by name.</dd>
-            <dt id="a6c104774bc8ebe79dc497a2234814e74">
-              <span class="m-doc-wrap-bumper">void <a href="#a6c104774bc8ebe79dc497a2234814e74" class="m-doc-self">log</a>(</span><span class="m-doc-wrap">const std::string&amp; metricName) const</span>
-            </dt>
-            <dd>Log a specific metric by its name.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ab4c98b1fa6f944a46d91cfe2a0d16610"><div>
+          <section class="m-doc-details" id="a553426b278c021ecd8a5e3abca3e5cc2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static <a href="classMetricsPool.html" class="m-doc">MetricsPool</a>&amp; MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab4c98b1fa6f944a46d91cfe2a0d16610" class="m-doc-self">instance</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>&amp; cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a553426b278c021ecd8a5e3abca3e5cc2" class="m-doc-self">instance</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Get the singleton instance of the <a href="classMetricsPool.html" class="m-doc">MetricsPool</a>.</p>
+            <p>Get the singleton instance of the <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -108,9 +100,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af95d00f1b23fb0878718b35d3e829972"><div>
+          <section class="m-doc-details" id="a942c550dd22aba90bf68b8b2796c1e04"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classMetricsPool.html" class="m-doc">MetricsPool</a>&amp; MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af95d00f1b23fb0878718b35d3e829972" class="m-doc-self">metric</a>(</span><span class="m-doc-wrap">const <a href="structMetric.html" class="m-doc">Metric</a>&amp; metric)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">MetricsPool</a>&amp; cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a942c550dd22aba90bf68b8b2796c1e04" class="m-doc-self">metric</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a>&amp; metric)</span></span>
             </h3>
             <p>Add a metric in the pool.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -131,9 +123,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a718ffbc1965c32262881191f38482307"><div>
+          <section class="m-doc-details" id="ada0c7247ea2d64067c34a74a2c56e2e4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">size_t MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a718ffbc1965c32262881191f38482307" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">size_t cubos::<wbr />core::<wbr />MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ada0c7247ea2d64067c34a74a2c56e2e4" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Size of the metric pool.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -141,20 +133,6 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Metrics count.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a170d804e02a4d75f5d3efb8b37e06918"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="structMetric.html" class="m-doc">Metric</a>&gt; MetricsPool::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a170d804e02a4d75f5d3efb8b37e06918" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const std::string&amp; metricName) const</span></span>
-            </h3>
-            <p>Get metrics by name.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Collection of metrics found with the specified [metricName].</td>
                 </tr>
               </tfoot>
             </table>

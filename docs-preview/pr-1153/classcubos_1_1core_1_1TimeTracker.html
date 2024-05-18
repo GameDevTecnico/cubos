@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Metric struct | CUBOS. Docs</title>
+  <title>cubos::core::TimeTracker class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,40 +46,33 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          Metric <span class="m-thin">struct</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>TimeTracker <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="metrics_8hpp.html">&lt;core/metrics.hpp&gt;</a></div>
         </h1>
-        <p>Represents a metric.</p>
+        <p>Utility to measure the execution time of a scope.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+<p>This class measures the time between its construction and destruction, providing a way to profile code execution time.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a4fc66c6962e74af2740ff116da7dd52d">
-              std::string <a href="#a4fc66c6962e74af2740ff116da7dd52d" class="m-doc-self">mName</a>
+            <dt id="a6a56a230c2da2ed83c9c3f39d2f16e3b">
+              <span class="m-doc-wrap-bumper"><a href="#a6a56a230c2da2ed83c9c3f39d2f16e3b" class="m-doc-self">TimeTracker</a>(</span><span class="m-doc-wrap">std::string name)</span>
             </dt>
-            <dd>The name of the metric.</dd>
-            <dt id="aac8b413e7fe1a20d0254a9c3c844020f">
-              double <a href="#aac8b413e7fe1a20d0254a9c3c844020f" class="m-doc-self">mValue</a>
+            <dd>Construct a <a href="classcubos_1_1core_1_1TimeTracker.html" class="m-doc">TimeTracker</a> with a given name.</dd>
+            <dt id="a760cff8d1a9045cc70fbe535a1ec96a0">
+              <span class="m-doc-wrap-bumper"><a href="#a760cff8d1a9045cc70fbe535a1ec96a0" class="m-doc-self">~TimeTracker</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>The value of the metric (as a double).</dd>
-            <dt id="afeff63a8c12648f372adc30d7b6346a7">
-              std::string <a href="#afeff63a8c12648f372adc30d7b6346a7" class="m-doc-self">mFile</a>
-            </dt>
-            <dd>The source file where the metric was created.</dd>
-            <dt id="a0810c34a8845c6ad5fd2aa7593e27022">
-              int <a href="#a0810c34a8845c6ad5fd2aa7593e27022" class="m-doc-self">mLine</a>
-            </dt>
-            <dd>The line number where the metric was created.</dd>
+            <dd>Destruct the <a href="classcubos_1_1core_1_1TimeTracker.html" class="m-doc">TimeTracker</a> and calculate the elapsed time.</dd>
           </dl>
         </section>
       </div>

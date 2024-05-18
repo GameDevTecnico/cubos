@@ -55,25 +55,35 @@
             <li>
               Reference
               <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+          </dl>
+        </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structMetric.html" class="m-doc">Metric</a>
+              struct <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">cubos::core::Metric</a>
             </dt>
             <dd>Represents a metric.</dd>
             <dt>
-              class <a href="classMetricsPool.html" class="m-doc">MetricsPool</a>
+              class <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">cubos::core::MetricsPool</a>
             </dt>
             <dd>Singleton class that manages a collection of metrics.</dd>
             <dt>
-              class <a href="classTimeTracker.html" class="m-doc">TimeTracker</a>
+              class <a href="classcubos_1_1core_1_1TimeTracker.html" class="m-doc">cubos::core::TimeTracker</a>
             </dt>
             <dd>Utility to measure the execution time of a scope.</dd>
           </dl>
@@ -86,8 +96,8 @@
               val)</span>
             </dt>
             <dd>Macro to add a metric.</dd>
-            <dt id="ad9dc2d48537d6c5ed87cc6b9b993cfec">
-              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc-self">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Macro to measure the execution time of a function/scope.</dd>
           </dl>
@@ -116,6 +126,13 @@
               </tbody>
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>The metric will be logged.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ad9dc2d48537d6c5ed87cc6b9b993cfec"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc-self">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
+            </h3>
+            <p>Macro to measure the execution time of a function/scope.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>The value will be logged and stored as a metric.</p></aside>
           </div></section>
         </section>
       </div>
