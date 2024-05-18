@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reset method to the Cubos class (#1225, **@RiscadoA**).
 - Plugin injection to the Cubos class (#1214, **@RiscadoA**).
 - Utility class used to load plugins from shared libraries (#1035, **@RiscadoA**).
+- Implemented metrics and profiling tools (#1150, **@roby2014**).
 
 ## [v0.2.0] - 2024-05-07
 
