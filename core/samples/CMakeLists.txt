@@ -27,6 +27,7 @@ macro(make_sample)
 endmacro()
 
 make_sample(DIR "logging")
+make_sample(DIR "metrics")
 make_sample(DIR "reflection/basic")
 make_sample(DIR "reflection/traits/constructible")
 make_sample(DIR "reflection/traits/fields")
