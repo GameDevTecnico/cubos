@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CUBOS - Release</title><link href="https://gamedevtecnico.github.io/cubos/" rel="alternate"></link><link href="https://gamedevtecnico.github.io/cubos/feeds/release.atom.xml" rel="self"></link><id>https://gamedevtecnico.github.io/cubos/</id><updated>2024-05-21T10:00:00+01:00</updated><entry><title>Coffee'n Jam and... 0.2!</title><link href="https://gamedevtecnico.github.io/cubos/coffeen-jam-and-02.html" rel="alternate"></link><published>2024-05-21T10:00:00+01:00</published><updated>2024-05-21T10:00:00+01:00</updated><author><name>CUBOS Team</name></author><id>tag:gamedevtecnico.github.io,2024-05-21:/cubos/coffeen-jam-and-02.html</id><summary type="html">&lt;p&gt;CUBOS 0.2 Release and Coffee'n Jam!&lt;/p&gt;
+</summary><content type="html">&lt;section id="coffee-n-jam"&gt;
+&lt;h2&gt;Coffee'n Jam&lt;/h2&gt;
+&lt;p&gt;From 26th of April to 3rd of May, &amp;#64;RiscadoA and &amp;#64;joaomanita participated in the Coffee'n Jam, a game jam organized by GameDev Técnico, with our engine, &lt;strong&gt;CUBOS&lt;/strong&gt;.
+The goal was to create a game in a week, with the theme &amp;quot;Apocalypse&amp;quot; - and we had a blast!&lt;/p&gt;
+&lt;p&gt;The game jam was a great opportunity to test the engine in a real game development scenario, and we learned a lot from it.
+The game is called &lt;em&gt;Scraps vs Zombies&lt;/em&gt;, and you can download it from its &lt;a href="https://riscadoa.itch.io/scraps-vs-zombies"&gt;itch.io page&lt;/a&gt;.
+You can also check out its source code in our &lt;a href="https://github.com/GameDevTecnico/cubos-demo"&gt;demo repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We managed to win the &amp;quot;Best Gameplay&amp;quot; and &amp;quot;People's Choice&amp;quot; awards, which we're very proud of!&lt;/p&gt;
+&lt;div class="m-image"&gt;
+&lt;a href="https://riscadoa.itch.io/scraps-vs-zombies"&gt;&lt;img src="images/scraps_vs_zombies.png" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;We found a lot of bugs and missing features during the jam. Additionally, we had performance become a problem for the first time.
+One particular area that is in dire need of development is Audio, which we've been ignoring so far - people expect to hear something when they play a game!
+We'll be working on fixing these issues in the next release, and we'll also be profiling the engine to find out where the bottlenecks are.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="new-0-2-features"&gt;
+&lt;h2&gt;New 0.2 Features&lt;/h2&gt;
+&lt;p&gt;Our focus on this release was to continue working on improving and implementing base functionality, such as rendering and physics, and also to improve on the tools available to the developer.
+We've compiled here some of the most important changes (if you're curious, you can check out the full changelog in our &lt;a href="https://github.com/GameDevTecnico/cubos/blob/main/CHANGELOG.md"&gt;repository&lt;/a&gt;).&lt;/p&gt;
+&lt;section id="on-the-editor"&gt;
+&lt;h3&gt;On the Editor&lt;/h3&gt;
+&lt;section id="transform-gizmo-upgrades-diogomendonc-a"&gt;
+&lt;h4&gt;Transform Gizmo Upgrades &lt;span class="m-text m-dim"&gt;(&amp;#64;DiogoMendonc-a)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;The biggest change was the addition of a rotation gizmo, so now you can rotate entities using your mouse!&lt;/p&gt;
+&lt;p&gt;We also added a toggle that allows changing between using global or local space with the Transform Gizmo,
+and a new type of gizmo, a &lt;code&gt;Rotated Box&lt;/code&gt;, which, unlike the old boz gizmos, does not need to be axis-aligned.&lt;/p&gt;
+&lt;p&gt;Finally, the transform gizmo is now always rendered at the same size, regardless of the selected entity's distance to the camera.
+This should hopefully make it easier to use the tool when moving entities either very far away, or very close.&lt;/p&gt;
+&lt;img class="m-image" src="images/transform_gizmo.gif" /&gt;
+&lt;/section&gt;
+&lt;section id="world-inspector-overhaul-diogomsmiranda"&gt;
+&lt;h4&gt;World Inspector Overhaul &lt;span class="m-text m-dim"&gt;(&amp;#64;diogomsmiranda)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;The World inspector has been on our radar for quite some time now, as a tool that could be improved.
+This release we particularly aimed on making it better by focusing on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Making it easier to find the entities you are looking for.&lt;/li&gt;
+&lt;li&gt;Displaying more information about the entities in the scene.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To tackle the first point we've added a search bar that allows you to filter the entities in the scene, either by their name, or by their components. e.g:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Searching for &amp;quot;player&amp;quot; will show all entities that have &amp;quot;player&amp;quot; in their name.&lt;/li&gt;
+&lt;li&gt;Searching for &amp;quot;Transform&amp;quot; will show all entities that have a &lt;code&gt;Transform&lt;/code&gt; component.&lt;/li&gt;
+&lt;li&gt;Searching for &amp;quot;player, Transform&amp;quot; will show all entities that have a &lt;code&gt;Transform&lt;/code&gt; component and contain &amp;quot;player&amp;quot; in their name.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To tackle the second point on our list we added an hierarchy view that shows the entities in the scene in a tree-like structure representing the &lt;code&gt;ChildOf&lt;/code&gt; relation between entities.&lt;/p&gt;
+&lt;img class="m-image" src="images/world_inspector.gif" /&gt;
+&lt;/section&gt;
+&lt;section id="sub-scene-importing-in-scene-editor-teres4"&gt;
+&lt;h4&gt;Sub-scene importing in scene editor &lt;span class="m-text m-dim"&gt;(&amp;#64;teres4)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;Previously our scene editor was lacking support for importing sub-scenes.
+This meant that developers had to manually open the scene file and paste the sub-scene UUID in its import section.
+To save time, we've added a popup that shows all the importable sub-scenes, and allows the developer to select the one they want to import.&lt;/p&gt;
+&lt;img class="m-image" src="images/scene_editor.gif" /&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+&lt;section id="on-the-engine"&gt;
+&lt;h3&gt;On the Engine&lt;/h3&gt;
+&lt;section id="physics-improvements-fallenatlas"&gt;
+&lt;h4&gt;Physics Improvements &lt;span class="m-text m-dim"&gt;(&amp;#64;fallenatlas)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;This update we introduced the &lt;code&gt;Solver&lt;/code&gt;, which works to satisfy the physics constraints applied to entities (e.g. Spring, Fixed distance between entities, etc.).&lt;/p&gt;
+&lt;p&gt;This means that the developers can now give entities any number of constraints, either engine defined or their own, and the solver will handle their expected interaction.
+As of now, we have one constraint, internal to the engine, the &lt;code&gt;PenetrationConstraint&lt;/code&gt;, which separates bodies that are inside each other, and comes in to replace our previous collision solving system.&lt;/p&gt;
+&lt;p&gt;With the ability to have repeating systems, it was possible to introduce the physics substeps loop, which
+will perform the physics update in multiple smaller steps. This is important to increase the convergence rate of the solver and preservation of energy, by reducing the errors caused by approximations of the simulation.&lt;/p&gt;
+&lt;p&gt;These changes should lead to more realistic behavior, as well as better consistency between systems with different performance levels.&lt;/p&gt;
+&lt;img class="m-image" src="images/complex_physics_sample.gif" /&gt;
+&lt;/section&gt;
+&lt;section id="modular-renderer-riscadoa-tomas7770"&gt;
+&lt;h4&gt;Modular Renderer &lt;span class="m-text m-dim"&gt;(&amp;#64;RiscadoA, &amp;#64;tomas7770)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;Before this update, our graphics renderer was very monolithic, with a lot of the code being held in a single file. This posed some problems,
+namely that if we wanted to implement new rendering methods in the future (e.g. raytracing), we would end up with tons of duplicate code.
+It also didn't fit well with our ECS design, since things such as the renderer and its active cameras were just global resources.&lt;/p&gt;
+&lt;p&gt;To overcome this, we've restructured the renderer, splitting it into &lt;a href="https://gamedevtecnico.github.io/cubos/docs/group__render-plugins.html"&gt;several components with their respective plugins&lt;/a&gt;. The most important ones
+are perhaps &lt;code&gt;RenderTarget&lt;/code&gt;, representing something that can be drawn to, and &lt;code&gt;PerspectiveCamera&lt;/code&gt;, which draws to render targets using perspective projection.
+Entities with these components are related using a &lt;code&gt;DrawsTo&lt;/code&gt; relation. There are also components that individually enable various parts of the renderer,
+such as deferred shading, or effects like bloom and SSAO. This separation opens up possibilities for more customizability from the user side,
+and makes the renderer code easier to deal with by engine developers.&lt;/p&gt;
+&lt;p&gt;We also used the opportunity to optimize the renderer, namely, by allocating a large GPU buffer for all the voxel meshes, which we then split into smaller buckets.
+This way, we can draw all the voxel objects with fewer draw calls, and with way less context switches.
+One other feature we improved greatly was entity picking - finding out which entity is visible at a given pixel. Previously, enabling it cut the framerate by more than half, which was unacceptable.
+By using &lt;a href="https://www.khronos.org/opengl/wiki/Pixel_Buffer_Object"&gt;Pixel Buffers&lt;/a&gt; and double-buffering, we managed to make its performance impact negligible.&lt;/p&gt;
+&lt;img class="m-image" src="images/scraps_vs_zombies_new_renderer.png" /&gt;
+&lt;p&gt;Additionally, we added a tone-mapping pass to the renderer, which makes better use of the HDR color space. It allows us to tune the exposure of the scene, and also to apply effects like bloom and SSAO in a more realistic way.
+One side-effect of us changing the color-space is that now the colors in the game are a bit more washed out. We'll have to go back and tweak the colors in the game to make them look good again.&lt;/p&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+&lt;section id="on-the-core"&gt;
+&lt;h3&gt;On the Core&lt;/h3&gt;
+&lt;section id="clearer-plugin-dependencies-riscadoa"&gt;
+&lt;h4&gt;Clearer Plugin Dependencies &lt;span class="m-text m-dim"&gt;(&amp;#64;RiscadoA)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;One of the main features of &lt;strong&gt;CUBOS&lt;/strong&gt; is its plugin system. We structure all of the engine and editor features as plugins, each with its own set of components, systems, and resources.
+The developer ultimately chooses which plugins to include in their game, and may also create their own plugins.&lt;/p&gt;
+&lt;p&gt;Plugins may depend on each other. One example is the &lt;a href="https://gamedevtecnico.github.io/cubos/docs/group__physics-plugin.html"&gt;physics plugin&lt;/a&gt;, which depends on the &lt;a href="https://gamedevtecnico.github.io/cubos/docs/group__collisions-plugin.html"&gt;collisions plugin&lt;/a&gt;.
+Previously, when a plugin was included, all of its dependencies were automatically included. It was also possible to include a plugin twice - the second time, the plugin would simply be ignored.&lt;/p&gt;
+&lt;p&gt;While this seems useful, this led to some problems. Since a plugin could be included more than once, there isn't a single place where its safe to make decisions about how a given plugin should behave.
+This was particularly problematic with the new modular renderer plugins.&lt;/p&gt;
+&lt;p&gt;Imagine a scenario where we have two plugins A and B, which implement different rendering methods.
+A and B are incompatible. Adding both should be an error, as it's impossible to have both rendering methods active at the same time.
+Additionally, A and B both add on a plugin C, and make decisions about how C should behave. If both A and B are included, which one should have the final say?
+How do we specify the dependency between them without coupling their code?&lt;/p&gt;
+&lt;p&gt;Our solution to this was to distinguish between &lt;em&gt;depending&lt;/em&gt; and &lt;em&gt;including&lt;/em&gt; a plugin. When a plugin X depends on a plugin Y, adding X without Y being present leads to an error.
+When a plugin X includes a plugin Y, including X will also include Y. But, if a plugin is included twice, an error occurs.
+This way, we get a clean plugin hierarchy, which is easier to reason about:&lt;/p&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;myPlugin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cubos&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cubos&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;cubos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;depends&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;renderVoxelsPlugin&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// Don&amp;#39;t care about internals, just need the plugin&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;cubos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plugin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mySubPlugin&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// Include a sub-plugin, which becomes part of my plugin&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;// ...&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;One issue with this solution is that you would now have to manually include all plugins you need when making a game.
+Of course, this is not ideal, and thus, we've added a new &lt;a href="https://gamedevtecnico.github.io/cubos/docs/group__defaults-plugin.html"&gt;defaults plugin&lt;/a&gt; to the engine that includes all the plugins that are necessary for a basic game to run.
+If the developer wants to configure the engine in a different way, they can simply write their own alternative defaults plugin.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="observers-riscadoa"&gt;
+&lt;h4&gt;Observers &lt;span class="m-text m-dim"&gt;(&amp;#64;RiscadoA)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;Very often while working with &lt;strong&gt;CUBOS&lt;/strong&gt;, we find the need to react to the addition and removal of components in entities.
+One use case, for example, is setting up the AABB of an entity when we add a collider to it.
+Previously, we had to manually implement this logic, for example, by adding a flag to the collider which was initially &lt;code&gt;false&lt;/code&gt;, and having a system initializing all colliders with the flag set to &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To solve this problem in a more elegant way, we added a new special kind of system: &lt;em&gt;observers&lt;/em&gt;. Observers are essentially systems which instead of running on a specific schedule, run immediately after a certain change occurs in the ECS (akin to callbacks).&lt;/p&gt;
+&lt;p&gt;We also found another unexpected use for this feature. Complex plugins with lots of components, such as the physics plugin, where previously cumbersome to work with, as all the required components had to be manually added to each entity we wanted physics to apply to.
+With observers, we instead now add a single component &lt;code&gt;PhysicsBundle&lt;/code&gt;. An observer picks up this addition, and immediately replaces this component with all of the required components for the physics plugin to work.&lt;/p&gt;
+&lt;p&gt;If you're interested in learning more about this feature and ECS in general on our engine, check out our &lt;a href="https://gamedevtecnico.github.io/cubos/docs/features-ecs.html"&gt;ECS feature guide&lt;/a&gt;.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="introducing-inheritance-in-reflection-roby2014"&gt;
+&lt;h4&gt;Introducing Inheritance in Reflection &lt;span class="m-text m-dim"&gt;(&amp;#64;roby2014)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;CUBOS&lt;/strong&gt; has a powerful &lt;a href="https://gamedevtecnico.github.io/cubos/docs/group__core-reflection.html"&gt;reflection system&lt;/a&gt; to examine and interact with a structures and types at runtime
+It works by attaching metadata to types, which we call &lt;em&gt;traits&lt;/em&gt;. These traits can be queried at runtime to get information about the type.
+For example, we provide a &lt;code&gt;FieldsTrait&lt;/code&gt;, which you can add to a type to expose its fields to the reflection system.&lt;/p&gt;
+&lt;p&gt;One thing we were missing was information about inheritance relationships between types.
+We've added a new trait, &lt;code&gt;InheritsTrait&lt;/code&gt;, which allows you to specify that a type inherits from another type.&lt;/p&gt;
+&lt;p&gt;This will be particularly useful for serialization, as right now we have to manually add the fields of the base class to the derived class. Now, serializers can check if this trait is present and fallback to the base class if necessary.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="repeating-systems-and-fixed-step-updates-joaomanita"&gt;
+&lt;h4&gt;Repeating Systems and Fixed-Step Updates &lt;span class="m-text m-dim"&gt;(&amp;#64;joaomanita)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;Certain plugins, like the physics plugin, required some of their systems to run multiple times per frame so that they could make more accurate
+aproximations. In addition, some of them need to be executed in ordered groups. For example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The integration system needs to run before the velocity update system.&lt;/li&gt;
+&lt;li&gt;The velocity update system needs to run before the force clear system.&lt;/li&gt;
+&lt;li&gt;The force clear system needs to run before the impulse clear system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To allow repeating groups such as these, we added a new feature to the ECS tags: the repeat while modifier. This makes the systems tagged by it repeat until a certain condition becomes false.&lt;/p&gt;
+&lt;pre class="m-code"&gt;&lt;span class="n"&gt;cubos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;groupTag&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;repeatWhile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;myCondition&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;cubos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;integrate physics&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;tagged&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;groupTag&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="cm"&gt;/* ... */&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;cubos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;update velocity&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;tagged&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;groupTag&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="cm"&gt;/* ... */&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;cubos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;clear forces&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;tagged&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;groupTag&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="cm"&gt;/* ... */&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Its also possible to make repeating subgroups by tagging the subgroup with the parent tag.&lt;/p&gt;
+&lt;pre class="m-code"&gt;&lt;span class="n"&gt;cubos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subgroupTag&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;tagged&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;groupTag&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;repeatWhile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;myOtherCondition&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;This way the subgroup's systems will repeat a total of n x m times, where n is the number of times the parent tag repeats and m is the number of times the subgroup tag repeats.&lt;/p&gt;
+&lt;p&gt;With this implemented, it was easy to implement the fixed-step plugin on the engine side. It simply adds a tag that makes systems repeat as needed according to
+the &lt;code&gt;DeltaTime&lt;/code&gt; passed, avoiding variance due to different frame rates and more/less powerful PCs.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="moving-away-from-the-old-serialization-dacops"&gt;
+&lt;h4&gt;Moving Away from the Old Serialization &lt;span class="m-text m-dim"&gt;(&amp;#64;Dacops)&lt;/span&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://gamedevtecnico.github.io/cubos/docs/group__core-data-ser.html"&gt;Serialization&lt;/a&gt; is a crucial part of the game engine that allows for the saving of any CUBOS game components as well as then loading them in.
+Previously, serialization was done through a series of functions, both for reading and writing, that could be overloaded for each type.
+On the previous (and first) release, we introduced a reflection system, that allowed for the inspection of types at runtime. This was an essential step to make the inspectors on the editor side work.&lt;/p&gt;
+&lt;p&gt;But with this new system, we now had two sources of truth for the types, the reflection system and the serialization system.
+To solve this, we decided to change the serialization system to use the reflection system, and thus, not force the developer to write serialization code for each type.&lt;/p&gt;
+&lt;p&gt;On this release, we've finally finished this transition, by replacing serialization by direct stream manipulation in places where performance was more of a concern, such as voxel object saving/loading; and by replacing the serialization methods by reflection in other places, such as the input bindings.&lt;/p&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+&lt;section id="next-steps"&gt;
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;We're very happy with the progress we've made on this release. The engine is becoming more and more powerful, and we were able to create a full game with it in a week!&lt;/p&gt;
+&lt;p&gt;For the next release, which should be out in July, we'll be focusing on expanding the engine's capabilities, as it is currently missing some key features, such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;strong&gt;standalone editor application&lt;/strong&gt;. Our tools are currently integrated into the games themselves which is not ideal.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Audio support&lt;/strong&gt;, as there's no sound at all in the engine right now.&lt;/li&gt;
+&lt;li&gt;An initial &lt;strong&gt;UI plugin&lt;/strong&gt;, which can render images, text and handle buttons.&lt;/li&gt;
+&lt;li&gt;Actual &lt;strong&gt;voxel collisions&lt;/strong&gt;, as we currently only check the bounding boxes.&lt;/li&gt;
+&lt;li&gt;Basic &lt;strong&gt;rigidbody physics&lt;/strong&gt;, with rotation and friction.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Shadows, transparency&lt;/strong&gt; and other rendering features.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Raycasting&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Networking&lt;/strong&gt; utilities, to allow for online multiplayer games.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web-support&lt;/strong&gt;, so that games can be played in the browser.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;C API&lt;/strong&gt;, so that we can use the engine from other languages (scripts!).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Better editor tools&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can check out the full list of stuff we want to get done in the &lt;a href="https://github.com/GameDevTecnico/cubos/milestone/26"&gt;milestone&lt;/a&gt; for the next release.&lt;/p&gt;
+&lt;p&gt;We're currently a team of 10 people, and &lt;strong&gt;we're looking to expand&lt;/strong&gt;! If you're interested in joining us, or just want to learn more about the project, join our &lt;a href="https://discord.gg/WjTtcNTRqD"&gt;Discord server&lt;/a&gt;!&lt;/p&gt;
+&lt;/section&gt;
+</content><category term="Release"></category></entry></feed>

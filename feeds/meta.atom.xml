@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>CUBOS. - Meta</title><link href="https://gamedevtecnico.github.io/cubos/" rel="alternate"></link><link href="https://gamedevtecnico.github.io/cubos/feeds/meta.atom.xml" rel="self"></link><id>https://gamedevtecnico.github.io/cubos/</id><updated>2023-11-10T10:06:00+00:00</updated><entry><title>Hello World</title><link href="https://gamedevtecnico.github.io/cubos/hello-world.html" rel="alternate"></link><published>2023-11-10T10:06:00+00:00</published><updated>2023-11-10T10:06:00+00:00</updated><author><name>CUBOS. Team</name></author><id>tag:gamedevtecnico.github.io,2023-11-10:/cubos/hello-world.html</id><summary type="html">&lt;p&gt;This is CUBOS!&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Hello everyone, and welcome to the very first post of the CUBOS engine blog. This is where we'll be posting updates and information about CUBOS.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CUBOS - Meta</title><link href="https://gamedevtecnico.github.io/cubos/" rel="alternate"></link><link href="https://gamedevtecnico.github.io/cubos/feeds/meta.atom.xml" rel="self"></link><id>https://gamedevtecnico.github.io/cubos/</id><updated>2023-11-10T10:06:00+00:00</updated><entry><title>Hello World</title><link href="https://gamedevtecnico.github.io/cubos/hello-world.html" rel="alternate"></link><published>2023-11-10T10:06:00+00:00</published><updated>2023-11-10T10:06:00+00:00</updated><author><name>CUBOS Team</name></author><id>tag:gamedevtecnico.github.io,2023-11-10:/cubos/hello-world.html</id><summary type="html">&lt;p&gt;This is CUBOS!&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Hello everyone, and welcome to the very first post of the CUBOS engine blog. This is where we'll be posting updates and information about CUBOS
 Let's start today by talking about what CUBOS is!&lt;/p&gt;
 &lt;p&gt;CUBOS is an open-source game engine with two core features: everything is made out of voxels, and the engine is built on an entity component system.
 You can find the &lt;a href="https://github.com/GameDevTecnico/cubos"&gt;source right here&lt;/a&gt;.
 Up to this point, our work has built a powerful core and an array of plugins that give CUBOS a lot of the necessary functionalities to make a complete game.
-We have also been working on a suite of tools called Tesseratos that you can plug into any game you're making with CUBOS. to help with development.
+We have also been working on a suite of tools called Tesseratos that you can plug into any game you're making with CUBOS to help with development.
 It provides, among other things, editors for scenes, entities, palette.&lt;/p&gt;
 &lt;p&gt;So, what are we working on?&lt;/p&gt;
 &lt;p&gt;Right now, our current goal is to have an engine that can feasibly be used in game jams.

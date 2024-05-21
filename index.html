@@ -2,15 +2,15 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
-  <title>CUBOS.</title>
+  <title>CUBOS</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="https://gamedevtecnico.github.io/cubos/static/m-dark.compiled.css" />
-  <link href="https://gamedevtecnico.github.io/cubos/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="CUBOS." />
+  <link href="https://gamedevtecnico.github.io/cubos/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="CUBOS" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#22272e" />
-  <meta property="og:site_name" content="CUBOS." />
-  <meta property="og:title" content="CUBOS." />
-  <meta name="twitter:title" content="CUBOS." />
+  <meta property="og:site_name" content="CUBOS" />
+  <meta property="og:title" content="CUBOS" />
+  <meta name="twitter:title" content="CUBOS" />
   <meta property="og:url" content="https://gamedevtecnico.github.io/cubos/" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:type" content="website" />
@@ -19,7 +19,7 @@
 <header><nav id="navigation">
   <div class="m-container">
     <div class="m-row">
-      <a href="./" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">CUBOS.</a>
+      <a href="./" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">CUBOS</a>
       <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
       <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
@@ -38,6 +38,208 @@
     <div class="m-col-m-10">
       <article>
         <header>
+          <h1><a href="https://gamedevtecnico.github.io/cubos/coffeen-jam-and-02.html" rel="bookmark" title="Permalink to Coffee'n Jam and... 0.2!">
+            <time class="m-date" datetime="2024-05-21T10:00:00+01:00">
+              May <span class="m-date-day">21</span> 2024
+            </time>
+            Coffee'n Jam and... 0.2!
+          </a></h1>
+          <p>CUBOS 0.2 Release and Coffee'n Jam!</p>
+        </header>
+        <div class="m-clearfix-l"></div>
+<!-- content -->
+<section id="coffee-n-jam">
+<h2>Coffee'n Jam</h2>
+<p>From 26th of April to 3rd of May, &#64;RiscadoA and &#64;joaomanita participated in the Coffee'n Jam, a game jam organized by GameDev Técnico, with our engine, <strong>CUBOS</strong>.
+The goal was to create a game in a week, with the theme &quot;Apocalypse&quot; - and we had a blast!</p>
+<p>The game jam was a great opportunity to test the engine in a real game development scenario, and we learned a lot from it.
+The game is called <em>Scraps vs Zombies</em>, and you can download it from its <a href="https://riscadoa.itch.io/scraps-vs-zombies">itch.io page</a>.
+You can also check out its source code in our <a href="https://github.com/GameDevTecnico/cubos-demo">demo repository</a>.</p>
+<p>We managed to win the &quot;Best Gameplay&quot; and &quot;People's Choice&quot; awards, which we're very proud of!</p>
+<div class="m-image">
+<a href="https://riscadoa.itch.io/scraps-vs-zombies"><img src="images/scraps_vs_zombies.png" /></a>
+</div>
+<p>We found a lot of bugs and missing features during the jam. Additionally, we had performance become a problem for the first time.
+One particular area that is in dire need of development is Audio, which we've been ignoring so far - people expect to hear something when they play a game!
+We'll be working on fixing these issues in the next release, and we'll also be profiling the engine to find out where the bottlenecks are.</p>
+</section>
+<section id="new-0-2-features">
+<h2>New 0.2 Features</h2>
+<p>Our focus on this release was to continue working on improving and implementing base functionality, such as rendering and physics, and also to improve on the tools available to the developer.
+We've compiled here some of the most important changes (if you're curious, you can check out the full changelog in our <a href="https://github.com/GameDevTecnico/cubos/blob/main/CHANGELOG.md">repository</a>).</p>
+<section id="on-the-editor">
+<h3>On the Editor</h3>
+<section id="transform-gizmo-upgrades-diogomendonc-a">
+<h4>Transform Gizmo Upgrades <span class="m-text m-dim">(&#64;DiogoMendonc-a)</span></h4>
+<p>The biggest change was the addition of a rotation gizmo, so now you can rotate entities using your mouse!</p>
+<p>We also added a toggle that allows changing between using global or local space with the Transform Gizmo,
+and a new type of gizmo, a <code>Rotated Box</code>, which, unlike the old boz gizmos, does not need to be axis-aligned.</p>
+<p>Finally, the transform gizmo is now always rendered at the same size, regardless of the selected entity's distance to the camera.
+This should hopefully make it easier to use the tool when moving entities either very far away, or very close.</p>
+<img class="m-image" src="images/transform_gizmo.gif" />
+</section>
+<section id="world-inspector-overhaul-diogomsmiranda">
+<h4>World Inspector Overhaul <span class="m-text m-dim">(&#64;diogomsmiranda)</span></h4>
+<p>The World inspector has been on our radar for quite some time now, as a tool that could be improved.
+This release we particularly aimed on making it better by focusing on:</p>
+<ul>
+<li>Making it easier to find the entities you are looking for.</li>
+<li>Displaying more information about the entities in the scene.</li>
+</ul>
+<p>To tackle the first point we've added a search bar that allows you to filter the entities in the scene, either by their name, or by their components. e.g:</p>
+<ul>
+<li>Searching for &quot;player&quot; will show all entities that have &quot;player&quot; in their name.</li>
+<li>Searching for &quot;Transform&quot; will show all entities that have a <code>Transform</code> component.</li>
+<li>Searching for &quot;player, Transform&quot; will show all entities that have a <code>Transform</code> component and contain &quot;player&quot; in their name.</li>
+</ul>
+<p>To tackle the second point on our list we added an hierarchy view that shows the entities in the scene in a tree-like structure representing the <code>ChildOf</code> relation between entities.</p>
+<img class="m-image" src="images/world_inspector.gif" />
+</section>
+<section id="sub-scene-importing-in-scene-editor-teres4">
+<h4>Sub-scene importing in scene editor <span class="m-text m-dim">(&#64;teres4)</span></h4>
+<p>Previously our scene editor was lacking support for importing sub-scenes.
+This meant that developers had to manually open the scene file and paste the sub-scene UUID in its import section.
+To save time, we've added a popup that shows all the importable sub-scenes, and allows the developer to select the one they want to import.</p>
+<img class="m-image" src="images/scene_editor.gif" />
+</section>
+</section>
+<section id="on-the-engine">
+<h3>On the Engine</h3>
+<section id="physics-improvements-fallenatlas">
+<h4>Physics Improvements <span class="m-text m-dim">(&#64;fallenatlas)</span></h4>
+<p>This update we introduced the <code>Solver</code>, which works to satisfy the physics constraints applied to entities (e.g. Spring, Fixed distance between entities, etc.).</p>
+<p>This means that the developers can now give entities any number of constraints, either engine defined or their own, and the solver will handle their expected interaction.
+As of now, we have one constraint, internal to the engine, the <code>PenetrationConstraint</code>, which separates bodies that are inside each other, and comes in to replace our previous collision solving system.</p>
+<p>With the ability to have repeating systems, it was possible to introduce the physics substeps loop, which
+will perform the physics update in multiple smaller steps. This is important to increase the convergence rate of the solver and preservation of energy, by reducing the errors caused by approximations of the simulation.</p>
+<p>These changes should lead to more realistic behavior, as well as better consistency between systems with different performance levels.</p>
+<img class="m-image" src="images/complex_physics_sample.gif" />
+</section>
+<section id="modular-renderer-riscadoa-tomas7770">
+<h4>Modular Renderer <span class="m-text m-dim">(&#64;RiscadoA, &#64;tomas7770)</span></h4>
+<p>Before this update, our graphics renderer was very monolithic, with a lot of the code being held in a single file. This posed some problems,
+namely that if we wanted to implement new rendering methods in the future (e.g. raytracing), we would end up with tons of duplicate code.
+It also didn't fit well with our ECS design, since things such as the renderer and its active cameras were just global resources.</p>
+<p>To overcome this, we've restructured the renderer, splitting it into <a href="https://gamedevtecnico.github.io/cubos/docs/group__render-plugins.html">several components with their respective plugins</a>. The most important ones
+are perhaps <code>RenderTarget</code>, representing something that can be drawn to, and <code>PerspectiveCamera</code>, which draws to render targets using perspective projection.
+Entities with these components are related using a <code>DrawsTo</code> relation. There are also components that individually enable various parts of the renderer,
+such as deferred shading, or effects like bloom and SSAO. This separation opens up possibilities for more customizability from the user side,
+and makes the renderer code easier to deal with by engine developers.</p>
+<p>We also used the opportunity to optimize the renderer, namely, by allocating a large GPU buffer for all the voxel meshes, which we then split into smaller buckets.
+This way, we can draw all the voxel objects with fewer draw calls, and with way less context switches.
+One other feature we improved greatly was entity picking - finding out which entity is visible at a given pixel. Previously, enabling it cut the framerate by more than half, which was unacceptable.
+By using <a href="https://www.khronos.org/opengl/wiki/Pixel_Buffer_Object">Pixel Buffers</a> and double-buffering, we managed to make its performance impact negligible.</p>
+<img class="m-image" src="images/scraps_vs_zombies_new_renderer.png" />
+<p>Additionally, we added a tone-mapping pass to the renderer, which makes better use of the HDR color space. It allows us to tune the exposure of the scene, and also to apply effects like bloom and SSAO in a more realistic way.
+One side-effect of us changing the color-space is that now the colors in the game are a bit more washed out. We'll have to go back and tweak the colors in the game to make them look good again.</p>
+</section>
+</section>
+<section id="on-the-core">
+<h3>On the Core</h3>
+<section id="clearer-plugin-dependencies-riscadoa">
+<h4>Clearer Plugin Dependencies <span class="m-text m-dim">(&#64;RiscadoA)</span></h4>
+<p>One of the main features of <strong>CUBOS</strong> is its plugin system. We structure all of the engine and editor features as plugins, each with its own set of components, systems, and resources.
+The developer ultimately chooses which plugins to include in their game, and may also create their own plugins.</p>
+<p>Plugins may depend on each other. One example is the <a href="https://gamedevtecnico.github.io/cubos/docs/group__physics-plugin.html">physics plugin</a>, which depends on the <a href="https://gamedevtecnico.github.io/cubos/docs/group__collisions-plugin.html">collisions plugin</a>.
+Previously, when a plugin was included, all of its dependencies were automatically included. It was also possible to include a plugin twice - the second time, the plugin would simply be ignored.</p>
+<p>While this seems useful, this led to some problems. Since a plugin could be included more than once, there isn't a single place where its safe to make decisions about how a given plugin should behave.
+This was particularly problematic with the new modular renderer plugins.</p>
+<p>Imagine a scenario where we have two plugins A and B, which implement different rendering methods.
+A and B are incompatible. Adding both should be an error, as it's impossible to have both rendering methods active at the same time.
+Additionally, A and B both add on a plugin C, and make decisions about how C should behave. If both A and B are included, which one should have the final say?
+How do we specify the dependency between them without coupling their code?</p>
+<p>Our solution to this was to distinguish between <em>depending</em> and <em>including</em> a plugin. When a plugin X depends on a plugin Y, adding X without Y being present leads to an error.
+When a plugin X includes a plugin Y, including X will also include Y. But, if a plugin is included twice, an error occurs.
+This way, we get a clean plugin hierarchy, which is easier to reason about:</p>
+<pre class="m-code"><span class="kt">void</span><span class="w"> </span><span class="nf">myPlugin</span><span class="p">(</span><span class="n">Cubos</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cubos</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">depends</span><span class="p">(</span><span class="n">renderVoxelsPlugin</span><span class="p">);</span><span class="w"> </span><span class="c1">// Don&#39;t care about internals, just need the plugin</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">mySubPlugin</span><span class="p">);</span><span class="w"> </span><span class="c1">// Include a sub-plugin, which becomes part of my plugin</span>
+
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span></pre>
+<p>One issue with this solution is that you would now have to manually include all plugins you need when making a game.
+Of course, this is not ideal, and thus, we've added a new <a href="https://gamedevtecnico.github.io/cubos/docs/group__defaults-plugin.html">defaults plugin</a> to the engine that includes all the plugins that are necessary for a basic game to run.
+If the developer wants to configure the engine in a different way, they can simply write their own alternative defaults plugin.</p>
+</section>
+<section id="observers-riscadoa">
+<h4>Observers <span class="m-text m-dim">(&#64;RiscadoA)</span></h4>
+<p>Very often while working with <strong>CUBOS</strong>, we find the need to react to the addition and removal of components in entities.
+One use case, for example, is setting up the AABB of an entity when we add a collider to it.
+Previously, we had to manually implement this logic, for example, by adding a flag to the collider which was initially <code>false</code>, and having a system initializing all colliders with the flag set to <code>false</code>.</p>
+<p>To solve this problem in a more elegant way, we added a new special kind of system: <em>observers</em>. Observers are essentially systems which instead of running on a specific schedule, run immediately after a certain change occurs in the ECS (akin to callbacks).</p>
+<p>We also found another unexpected use for this feature. Complex plugins with lots of components, such as the physics plugin, where previously cumbersome to work with, as all the required components had to be manually added to each entity we wanted physics to apply to.
+With observers, we instead now add a single component <code>PhysicsBundle</code>. An observer picks up this addition, and immediately replaces this component with all of the required components for the physics plugin to work.</p>
+<p>If you're interested in learning more about this feature and ECS in general on our engine, check out our <a href="https://gamedevtecnico.github.io/cubos/docs/features-ecs.html">ECS feature guide</a>.</p>
+</section>
+<section id="introducing-inheritance-in-reflection-roby2014">
+<h4>Introducing Inheritance in Reflection <span class="m-text m-dim">(&#64;roby2014)</span></h4>
+<p><strong>CUBOS</strong> has a powerful <a href="https://gamedevtecnico.github.io/cubos/docs/group__core-reflection.html">reflection system</a> to examine and interact with a structures and types at runtime
+It works by attaching metadata to types, which we call <em>traits</em>. These traits can be queried at runtime to get information about the type.
+For example, we provide a <code>FieldsTrait</code>, which you can add to a type to expose its fields to the reflection system.</p>
+<p>One thing we were missing was information about inheritance relationships between types.
+We've added a new trait, <code>InheritsTrait</code>, which allows you to specify that a type inherits from another type.</p>
+<p>This will be particularly useful for serialization, as right now we have to manually add the fields of the base class to the derived class. Now, serializers can check if this trait is present and fallback to the base class if necessary.</p>
+</section>
+<section id="repeating-systems-and-fixed-step-updates-joaomanita">
+<h4>Repeating Systems and Fixed-Step Updates <span class="m-text m-dim">(&#64;joaomanita)</span></h4>
+<p>Certain plugins, like the physics plugin, required some of their systems to run multiple times per frame so that they could make more accurate
+aproximations. In addition, some of them need to be executed in ordered groups. For example:</p>
+<ul>
+<li>The integration system needs to run before the velocity update system.</li>
+<li>The velocity update system needs to run before the force clear system.</li>
+<li>The force clear system needs to run before the impulse clear system.</li>
+</ul>
+<p>To allow repeating groups such as these, we added a new feature to the ECS tags: the repeat while modifier. This makes the systems tagged by it repeat until a certain condition becomes false.</p>
+<pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">tag</span><span class="p">(</span><span class="n">groupTag</span><span class="p">).</span><span class="n">repeatWhile</span><span class="p">(</span><span class="n">myCondition</span><span class="p">);</span>
+<span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;integrate physics&quot;</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="n">groupTag</span><span class="p">).</span><span class="cm">/* ... */</span><span class="p">;</span>
+<span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;update velocity&quot;</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="n">groupTag</span><span class="p">).</span><span class="cm">/* ... */</span><span class="p">;</span>
+<span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;clear forces&quot;</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="n">groupTag</span><span class="p">).</span><span class="cm">/* ... */</span><span class="p">;</span></pre>
+<p>Its also possible to make repeating subgroups by tagging the subgroup with the parent tag.</p>
+<pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">tag</span><span class="p">(</span><span class="n">subgroupTag</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="n">groupTag</span><span class="p">).</span><span class="n">repeatWhile</span><span class="p">(</span><span class="n">myOtherCondition</span><span class="p">);</span></pre>
+<p>This way the subgroup's systems will repeat a total of n x m times, where n is the number of times the parent tag repeats and m is the number of times the subgroup tag repeats.</p>
+<p>With this implemented, it was easy to implement the fixed-step plugin on the engine side. It simply adds a tag that makes systems repeat as needed according to
+the <code>DeltaTime</code> passed, avoiding variance due to different frame rates and more/less powerful PCs.</p>
+</section>
+<section id="moving-away-from-the-old-serialization-dacops">
+<h4>Moving Away from the Old Serialization <span class="m-text m-dim">(&#64;Dacops)</span></h4>
+<p><a href="https://gamedevtecnico.github.io/cubos/docs/group__core-data-ser.html">Serialization</a> is a crucial part of the game engine that allows for the saving of any CUBOS game components as well as then loading them in.
+Previously, serialization was done through a series of functions, both for reading and writing, that could be overloaded for each type.
+On the previous (and first) release, we introduced a reflection system, that allowed for the inspection of types at runtime. This was an essential step to make the inspectors on the editor side work.</p>
+<p>But with this new system, we now had two sources of truth for the types, the reflection system and the serialization system.
+To solve this, we decided to change the serialization system to use the reflection system, and thus, not force the developer to write serialization code for each type.</p>
+<p>On this release, we've finally finished this transition, by replacing serialization by direct stream manipulation in places where performance was more of a concern, such as voxel object saving/loading; and by replacing the serialization methods by reflection in other places, such as the input bindings.</p>
+</section>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps</h2>
+<p>We're very happy with the progress we've made on this release. The engine is becoming more and more powerful, and we were able to create a full game with it in a week!</p>
+<p>For the next release, which should be out in July, we'll be focusing on expanding the engine's capabilities, as it is currently missing some key features, such as:</p>
+<ul>
+<li>A <strong>standalone editor application</strong>. Our tools are currently integrated into the games themselves which is not ideal.</li>
+<li><strong>Audio support</strong>, as there's no sound at all in the engine right now.</li>
+<li>An initial <strong>UI plugin</strong>, which can render images, text and handle buttons.</li>
+<li>Actual <strong>voxel collisions</strong>, as we currently only check the bounding boxes.</li>
+<li>Basic <strong>rigidbody physics</strong>, with rotation and friction.</li>
+<li><strong>Shadows, transparency</strong> and other rendering features.</li>
+<li><strong>Raycasting</strong>.</li>
+<li><strong>Networking</strong> utilities, to allow for online multiplayer games.</li>
+<li><strong>Web-support</strong>, so that games can be played in the browser.</li>
+<li><strong>C API</strong>, so that we can use the engine from other languages (scripts!).</li>
+<li><strong>Better editor tools</strong>.</li>
+</ul>
+<p>You can check out the full list of stuff we want to get done in the <a href="https://github.com/GameDevTecnico/cubos/milestone/26">milestone</a> for the next release.</p>
+<p>We're currently a team of 10 people, and <strong>we're looking to expand</strong>! If you're interested in joining us, or just want to learn more about the project, join our <a href="https://discord.gg/WjTtcNTRqD">Discord server</a>!</p>
+</section>
+<!-- /content -->
+        <footer>
+          <p>Posted by <a href="https://gamedevtecnico.github.io/cubos/author/cubos-team.html">CUBOS Team</a> on <time datetime="2024-05-21T10:00:00+01:00">Tue 21 May 2024</time> in <a href="https://gamedevtecnico.github.io/cubos/category/release.html">Release</a>.</p>
+        </footer>
+      </article>
+      <article>
+        <header>
           <h1><a href="https://gamedevtecnico.github.io/cubos/hello-relations.html" rel="bookmark" title="Permalink to Hello Relations">
             <time class="m-date" datetime="2024-01-31T16:30:00+00:00">
               Jan <span class="m-date-day">31</span> 2024
@@ -46,266 +248,10 @@
           </a></h1>
           <p>Adding entity relations to our ECS</p>
         </header>
-        <div class="m-clearfix-l"></div>
-<!-- content -->
-<p>Hello! This past month I've been tinkering with the <em>ECS</em>, which arguably is the core foundation of CUBOS.
-We structure all of our engine code around it. You can learn more about the concept in our <a href="https://gamedevtecnico.github.io/cubos/docs/features-ecs.html">ECS guide</a>!</p>
-<section id="the-problem">
-<h2>The Problem</h2>
-<p>The ECS is a very powerful tool, but it's not without its limitations. One of the most common issues is that it's hard to represent relations between entities.
-Components are used to associate pieces of data to specific entities. This is great for stuff like position, velocity, health, etc.
-They can also be used to tag entities as belonging to a certain group. E.g., we could have a <code>Poisonous</code> component.
-We can then query all entities with a given set of components, and apply some logic to them:</p>
-<pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;integrate velocity naively&quot;</span><span class="p">)</span>
-<span class="w">     </span><span class="p">.</span><span class="n">each</span><span class="p">([](</span><span class="n">Position</span><span class="o">&amp;</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Velocity</span><span class="o">&amp;</span><span class="w"> </span><span class="n">velocity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="n">position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="p">;</span>
-<span class="w">     </span><span class="p">});</span></pre>
-<p>But what if we want to associate data to not one entity, but to a pair of entities?</p>
-<section id="parent-child-hierarchies">
-<h3>Parent-Child Hierarchies</h3>
-<p>One classical example are parent-child relations. In a standard ECS, we could technically add a <code>Parent</code> component to each entity, which would contain a reference to the parent entity.
-This way we could build hierarchies and easily discover the parent of an entity simply by accessing its <code>Parent</code> component.</p>
-<pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;print parents&quot;</span><span class="p">)</span>
-<span class="w">     </span><span class="p">.</span><span class="n">each</span><span class="p">([](</span><span class="n">Entity</span><span class="w"> </span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Parent</span><span class="o">&amp;</span><span class="w"> </span><span class="n">parent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Entity {} has parent {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">.</span><span class="n">entity</span><span class="p">);</span>
-<span class="w">     </span><span class="p">});</span></pre>
-<p>But what if we wanted to find all children of a given entity? There are two possible solutions:</p>
-<ul>
-<li>Query all entities with a <code>Parent</code> component and check if their parent is the entity you're looking for.</li>
-<li>Add a <code>Children</code> component to each entity, which contains a list of references to all of its children.</li>
-</ul>
-<p>The first option is very slow and inefficient, as it requires a full scan of all entities with a <code>Parent</code> component.
-The second option means having to store a heap allocated list of references in the component, ruining any cache locality you might have had.
-Not only that, you would also have to keep the <code>Children</code> component in sync with the <code>Parent</code> component, which is a pain to do.</p>
-</section>
-<section id="physics-constraints">
-<h3>Physics Constraints</h3>
-<p>Another use case we had trouble with at CUBOS was physics constraints. Eventually we will want to add support for adding constraints between entities such as springs, hinges, etc.
-Where do we store the data for these constraints? For example, a spring constraint needs to store the two entities it's connecting, as well as the spring constant and rest length.
-One possible solution would be to represent the constraint itself as a separate entity which stores this data, and the references to the two entities it's connecting.
-This isn't a bad solution, but we can do better!</p>
-</section>
-<section id="collision-pairs">
-<h3>Collision Pairs</h3>
-<p>This was kind of the tipping point for us. The collision plugins works in two phases: broadphase and narrowphase.</p>
-<p>The broadphase is collision shape agnostic - it doesn't care whether the entities are spheres, boxes, or whatever. If finds pairs of entities whose AABBs intersect.
-The narrowphase, on the other hand, is collision shape aware. It takes the pairs generated by the broadphase, and checks if the real shapes are actually colliding.</p>
-<p>On our original solution, we stored the pairs generated by the broadphase in a resource (used to share data between systems), which the narrowphase systems then read.
-This meant filtering the pairs generated by the broadphase by shape, which was not only inefficient but also a mess to implement. Lots of code duplication and boilerplate, which makes it hard to read and maintain.</p>
-</section>
-</section>
-<section id="adding-r-to-ecs">
-<h2>Adding R to ECS</h2>
-<p>While searching for possible solutions to our troubles, I came across a <a href="https://ajmmertens.medium.com/why-it-is-time-to-start-thinking-of-games-as-databases-e7971da33ac3">post by Sander Mertens</a>, the author of <a href="https://github.com/SanderMertens/flecs">Flecs</a>.
-I really recommend reading his series of posts on relations if you're interested in the topic. It has been a great source of inspiration and a tremendous help in understanding the concept.</p>
-<p>The idea is to add a new kind of 'component', which we'll call... <em>relations</em>! Like components, relations are pieces of data associated to entities.
-However, unlike components, relations belong to pairs of entities, instead of a single entity.</p>
-<section id="how-does-it-look-like">
-<h3>How does it look like?</h3>
-<p>Creating and removing relations is very similar to creating and removing components. We just pass one extra argument, which is the second entity in the pair.</p>
-<pre class="m-code"><span class="n">commands</span><span class="p">.</span><span class="n">relate</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span><span class="w"> </span><span class="n">bob</span><span class="p">,</span><span class="w"> </span><span class="n">ChildOf</span><span class="p">{});</span><span class="w">   </span><span class="c1">// Alice is now a child of Bob</span>
-<span class="n">commands</span><span class="p">.</span><span class="n">unrelate</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span><span class="w"> </span><span class="n">bob</span><span class="p">,</span><span class="w"> </span><span class="n">ChildOf</span><span class="p">{});</span><span class="w"> </span><span class="c1">// Alice is no longer a child of Bob</span></pre>
-<p>But the real power of relations comes from querying them. We can query all relations of a certain type, and apply filters on both entities in the pair.</p>
-<pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;access car wheels&quot;</span><span class="p">)</span>
-<span class="w">     </span><span class="p">.</span><span class="n">each</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">Wheel</span><span class="o">&amp;</span><span class="w"> </span><span class="n">wheel</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ChildOf</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Car</span><span class="o">&amp;</span><span class="w"> </span><span class="n">car</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="c1">// Do something with the wheel and its parent car.</span>
-<span class="w">     </span><span class="p">});</span></pre>
-<p>The query above, for example, will match all pairs of entities where the first entity has a <code>Wheel</code> component, the second entity has a <code>Car</code> component, and the first entity is a child of the second entity.</p>
-<p>This also allows us to write the narrowphase collision checks in a much more elegant manner:</p>
-<pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;box vs sphere&quot;</span><span class="p">)</span>
-<span class="w">     </span><span class="p">.</span><span class="n">each</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">Box</span><span class="o">&amp;</span><span class="w"> </span><span class="n">box</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">PotentiallyCollidingWith</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Sphere</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sphere</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">shapesIntersect</span><span class="p">(</span><span class="n">box</span><span class="p">,</span><span class="w"> </span><span class="n">sphere</span><span class="p">))</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// Do something with it.</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">     </span><span class="p">});</span></pre>
-<p>We also allow the user to customize the behavior of relation types with two extra options:</p>
-<ul>
-<li><strong>Symmetry</strong>: Whether the relation type is symmetric or not.</li>
-<li><strong>Tree</strong>: Whether instances of the relation type should form a tree.</li>
-</ul>
-<p>Symmetry is particularly important for collision relations. While the direction of some relations, such as <code>ChildOf</code>, matter, the direction of others, such as <code>CollidingWith</code>, should not.
-For example, a relation between <em>foo and bar</em> will also be identifiable through <em>bar and foo</em>.</p>
-<p>Tree relations are used to specify that each entity can only have at most one outgoing instance of that relation type, and that cycles are not allowed.
-This is useful for parent-child relations: <code>cmds.relate(a, b, ChildOf{})</code> would remove any previous relations of type <code>ChildOf</code> from <code>a</code> to other entity.</p>
-<p>This is great, but how do we store these relations tightly in memory while also allowing for fast queries?</p>
-</section>
-</section>
-<section id="implementation">
-<h2>Implementation</h2>
-<p>Although I was heavily inspired by Flecs, I decided to implement relations in a slightly different way.
-Both Flecs and our ECS are Archetype based, which means that entities are grouped into archetypes based on their components.
-An archetype is the set of all entities which have exactly the same set of components.</p>
-<p>To query entities with a given set of components, we just need to find the archetypes which contain those components, and then iterate over all entities in those archetypes.
-The operation of finding the archetypes may be slow, but it can be cached.</p>
-<p>Flecs handles relations by creating different archetypes for each relation target. For example, with four entities with some data we would get, in this case, three archetypes:</p>
-<table class="m-table m-frame">
-<caption>Archetype A</caption>
-<thead>
-<tr><th>Entity</th>
-<th>Health</th>
-<th>Player</th>
-<th>ChildOf(4)</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>1</td>
-<td>100</td>
-<td>()</td>
-<td>()</td>
-</tr>
-<tr><td>2</td>
-<td>50</td>
-<td>()</td>
-<td>()</td>
-</tr>
-</tbody>
-</table>
-<table class="m-table m-frame">
-<caption>Archetype B</caption>
-<thead>
-<tr><th>Entity</th>
-<th>Health</th>
-<th>ChildOf(4)</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>3</td>
-<td>75</td>
-<td>()</td>
-</tr>
-</tbody>
-</table>
-<table class="m-table m-frame">
-<caption>Archetype C</caption>
-<thead>
-<tr><th>Entity</th>
-<th>Health</th>
-<th>ChildOf(5)</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>4</td>
-<td>80</td>
-<td>()</td>
-</tr>
-</tbody>
-</table>
-<p>Where <code>Health</code> and <code>Player</code> are components, and <code>ChildOf</code> is a relation type. As you may have noticed, although entities 3 and 4 have the same data types, since they have different parents, they end up in different archetypes.</p>
-<p>While this allows for very fast queries for children of the same entity, it also means that data will be heavily fragmented in memory for relations with many different targets.
-It also means that adding a new relation to an entity will require moving it to another archetype, which can get expensive.
-This makes this approach unsuitable for our use case, as we want to be able to add and remove relations very frequently (e.g., collision pairs).</p>
-<section id="sparse-relation-tables">
-<h3>Sparse Relation Tables</h3>
-<p>Instead of touching the archetypes, we store relations in separate tables, which we call <em>sparse relation tables</em>.
-Each sparse relation table stores all relations of a given type whose entities belong to a given pair of archetypes</p>
-<p>We store relations in separate tables. For each pair of archetypes and relation type, we create a table which stores all relations of that type between entities in those archetypes.
-With the entities of the previous example, we would get only two archetypes:</p>
-<table class="m-table m-frame">
-<caption>Archetype A</caption>
-<thead>
-<tr><th>Entity</th>
-<th>Health</th>
-<th>Player</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>1</td>
-<td>100</td>
-<td>()</td>
-</tr>
-<tr><td>2</td>
-<td>50</td>
-<td>()</td>
-</tr>
-</tbody>
-</table>
-<table class="m-table m-frame">
-<caption>Archetype B</caption>
-<thead>
-<tr><th>Entity</th>
-<th>Health</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>3</td>
-<td>75</td>
-</tr>
-<tr><td>4</td>
-<td>80</td>
-</tr>
-</tbody>
-</table>
-<p>The relations would be stored in two separate tables: one for relations between archetype A and archetype B, and another for relations between archetype B and B.</p>
-<table class="m-table m-frame">
-<caption>A to B</caption>
-<thead>
-<tr><th>From</th>
-<th>To</th>
-<th>ChildOf</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>1</td>
-<td>4</td>
-<td>()</td>
-</tr>
-<tr><td>2</td>
-<td>4</td>
-<td>()</td>
-</tr>
-</tbody>
-</table>
-<table class="m-table m-frame">
-<caption>B to B</caption>
-<thead>
-<tr><th>From</th>
-<th>To</th>
-<th>ChildOf</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>3</td>
-<td>4</td>
-<td>()</td>
-</tr>
-<tr><td>4</td>
-<td>5</td>
-<td>()</td>
-</tr>
-</tbody>
-</table>
-<p>This means that to query over a given relation, we just need to find all sparse relation tables for that relation type, and whose archetypes match the query filters.
-This result, once again, can be cached. Feel free to take a look at the code on <em>GitHub</em> if you're interested in the details!</p>
-</section>
-<section id="symmetric-relations">
-<h3>Symmetric Relations</h3>
-<p>Implementing symmetric relations was actually really easy. On all operations, we simply sort the entities in the pair by their ID, such that the entity with the lowest ID is always the first one.
-This way, we can guarantee that the same relation will always be stored in the same table, regardless of the order in which the entities are passed to the operation.</p>
-<p>It also took some tuning on the query side to look for both orders of the pair, but it didn't take much effort.</p>
-</section>
-<section id="tree-relations">
-<h3>Tree Relations</h3>
-<p>Tree relations were a bit trickier to implement. The main issue was wanting to provide a fast way to perform BFS on the tree.
-Allowing traversal from top to bottom or bottom to top would allow us to easily implement parent-child transform updates, and I wanted to make sure that the components were laid out in memory in a way that would allow for fast traversal.</p>
-<p>To achieve this, I changed the sparse relation tables to not only be indexed by type and archetype pair, but also by their <em>depth</em>.
-Relations are then stored in the table corresponding to the depth of their destination entity.
-For example, parent-child relations whose parent has no parent are stored at depth 0, and relations whose parent has a parent but no grandparent are stored at depth 1.</p>
-<p>To traverse the tree from bottom to top or vice versa we just need to store the cached sparse relation tables by their depth, and voila!</p>
-</section>
-</section>
-<section id="what-s-next">
-<h2>What's next?</h2>
-<p>Regarding relations, there isn't anything else really blocking in the near future.
-It would be cool to extend the query system to support queries with more than two targets, and implement some sort of entity destruction policy for relations (e.g., destroy all children when destroying a parent).
-But these are not essential features, and can be added later on.</p>
-<p>With this out of the way, my focus will now shift to the renderer plugin. I've been wanting to tackle ray tracing for a while now, and I think it's time to give it a shot.
-We'll also be working on a new demo soon, so stay tuned for that!</p>
-</section>
-<!-- /content -->
         <footer>
           <p>Posted by <a href="https://gamedevtecnico.github.io/cubos/author/ricardo-antunes.html">Ricardo Antunes</a> on <time datetime="2024-01-31T16:30:00+00:00">Wed 31 January 2024</time> in <a href="https://gamedevtecnico.github.io/cubos/category/features.html">Features</a>. Tags: <a href="https://gamedevtecnico.github.io/cubos/tag/core.html">Core</a>, <a href="https://gamedevtecnico.github.io/cubos/tag/ecs.html">ECS</a>.</p>
         </footer>
+        <div class="m-clearfix-l"></div>
       </article>
       <article>
         <header>
@@ -318,7 +264,7 @@ We'll also be working on a new demo soon, so stay tuned for that!</p>
           <p>This is CUBOS!</p>
         </header>
         <footer>
-          <p>Posted by <a href="https://gamedevtecnico.github.io/cubos/author/cubos-team.html">CUBOS. Team</a> on <time datetime="2023-11-10T10:06:00+00:00">Fri 10 November 2023</time> in <a href="https://gamedevtecnico.github.io/cubos/category/meta.html">Meta</a>.</p>
+          <p>Posted by <a href="https://gamedevtecnico.github.io/cubos/author/cubos-team.html">CUBOS Team</a> on <time datetime="2023-11-10T10:06:00+00:00">Fri 10 November 2023</time> in <a href="https://gamedevtecnico.github.io/cubos/category/meta.html">Meta</a>.</p>
         </footer>
         <div class="m-clearfix-l"></div>
       </article>
@@ -328,6 +274,7 @@ We'll also be working on a new demo soon, so stay tuned for that!</p>
       <ol class="m-block-bar-m">
         <li><a href="https://gamedevtecnico.github.io/cubos/category/features.html">Features</a></li>
         <li><a href="https://gamedevtecnico.github.io/cubos/category/meta.html">Meta</a></li>
+        <li><a href="https://gamedevtecnico.github.io/cubos/category/release.html">Release</a></li>
       </ol>
       <h3>Tag cloud</h3>
       <ul class="m-tagcloud">
@@ -373,12 +320,13 @@ We'll also be working on a new demo soon, so stay tuned for that!</p>
         <ul>
           <li><a href="https://gamedevtecnico.github.io/cubos/category/features.html">Features</a></li>
           <li><a href="https://gamedevtecnico.github.io/cubos/category/meta.html">Meta</a></li>
+          <li><a href="https://gamedevtecnico.github.io/cubos/category/release.html">Release</a></li>
         </ul>
       </div>
     </div>
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>CUBOS.. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+        <p>CUBOS. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
       </div>
     </div>
   </div>
