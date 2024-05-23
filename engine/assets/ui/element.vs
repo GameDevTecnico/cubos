@@ -2,10 +2,11 @@
 
 in vec3 position;
 
-uniform PerElement
+layout(std140) uniform PerElement
 {
     vec2 xRange;
     vec2 yRange;
+    vec4 color;
     int depth;
 };
 

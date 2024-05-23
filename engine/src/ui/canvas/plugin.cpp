@@ -1,3 +1,6 @@
+#include <map>
+#include <utility>
+
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <cubos/core/io/window.hpp>
@@ -7,18 +10,49 @@
 #include <cubos/engine/transform/child_of.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/ui/canvas/canvas.hpp>
+#include <cubos/engine/ui/canvas/draw_list.hpp>
 #include <cubos/engine/ui/canvas/element.hpp>
 #include <cubos/engine/ui/canvas/horizontal_stretch.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
 #include <cubos/engine/ui/canvas/vertical_stretch.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
-CUBOS_DEFINE_TAG(cubos::engine::elementVPUpdateTag);
-CUBOS_DEFINE_TAG(cubos::engine::elementPropagateTag)
+CUBOS_DEFINE_TAG(cubos::engine::uiCanvasChildrenUpdateTag);
+CUBOS_DEFINE_TAG(cubos::engine::uiElementPropagateTag)
 CUBOS_DEFINE_TAG(cubos::engine::uiBeginTag)
 CUBOS_DEFINE_TAG(cubos::engine::uiDrawTag)
+CUBOS_DEFINE_TAG(cubos::engine::uiEndTag)
 
 using namespace cubos::engine;
+
+namespace
+{
+    struct State
+    {
+        cubos::core::gl::DepthStencilState dss;
+        cubos::core::gl::ConstantBuffer mvpBuffer;
+        State(cubos::core::gl::DepthStencilState depthStencilState, cubos::core::gl::ConstantBuffer mvpConstantBuffer)
+            : dss(std::move(depthStencilState))
+            , mvpBuffer(std::move(mvpConstantBuffer))
+        {
+        }
+    };
+} // namespace
+
+static void copyCommands(Query<Entity, UIElement&, UIElement&> query, UIElement& element, Entity entity,
+                         std::map<const UIDrawList::Type*, UIDrawList>& commands)
+{
+    for (size_t i = 0; i < element.drawList.size(); i++)
+    {
+        auto entry = element.drawList.entry(i);
+        commands[&entry.type].push(entry.type, entry.command, element.drawList.data(i));
+    }
+    element.drawList.clear();
+    for (auto [child, childElement, _] : query.pin(1, entity))
+    {
+        copyCommands(query, childElement, child, commands);
+    }
+}
 
 void cubos::engine::uiCanvasPlugin(Cubos& cubos)
 {
@@ -30,11 +64,13 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
     cubos.component<UICanvas>();
     cubos.component<UIHorizontalStretch>();
     cubos.component<UIVerticalStretch>();
+    cubos.uninitResource<State>();
 
-    cubos.tag(elementVPUpdateTag);
-    cubos.tag(elementPropagateTag).after(elementVPUpdateTag);
-    cubos.tag(uiBeginTag).after(elementPropagateTag);
-    cubos.tag(uiDrawTag).after(uiBeginTag).tagged(drawToRenderTargetTag);
+    cubos.tag(uiCanvasChildrenUpdateTag);
+    cubos.tag(uiElementPropagateTag).after(uiCanvasChildrenUpdateTag);
+    cubos.tag(uiBeginTag).after(uiElementPropagateTag);
+    cubos.tag(uiDrawTag).after(uiBeginTag);
+    cubos.tag(uiEndTag).after(uiDrawTag).tagged(drawToRenderTargetTag);
 
     cubos.observer("initialize Canvas").onAdd<UICanvas>().call([](Query<UICanvas&> query) {
         for (auto [canvas] : query)
@@ -42,8 +78,22 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
             canvas.mat = glm::ortho<float>(0, canvas.referenceSize.x, 0, canvas.referenceSize.y);
         }
     });
-    cubos.system("set element matrix")
-        .tagged(elementVPUpdateTag)
+
+    cubos.startupSystem("setup canvas state")
+        .after(windowInitTag)
+        .call([](Commands cmds, const core::io::Window& window) {
+            cubos::core::gl::DepthStencilStateDesc dssd;
+            dssd.depth.enabled = true;
+            dssd.depth.writeEnabled = true;
+            dssd.depth.near = -1.0F;
+            dssd.depth.compare = Compare::LEqual;
+            cmds.emplaceResource<State>(window->renderDevice().createDepthStencilState(dssd),
+                                        window->renderDevice().createConstantBuffer(sizeof(glm::mat4), nullptr,
+                                                                                    cubos::core::gl::Usage::Dynamic));
+        });
+
+    cubos.system("set canvas children rect")
+        .tagged(uiCanvasChildrenUpdateTag)
         .with<UIElement>()
         .withOpt<UIHorizontalStretch>()
         .withOpt<UIVerticalStretch>()
@@ -53,7 +103,6 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                      query) {
             for (auto [element, hs, vs, canvas] : query)
             {
-                element.vp = canvas.mat;
                 element.position = element.anchor * canvas.referenceSize + element.offset;
                 if (hs.contains())
                 {
@@ -69,7 +118,7 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
         });
 
     cubos.system("set child position")
-        .tagged(elementPropagateTag)
+        .tagged(uiElementPropagateTag)
         .with<UIElement>()
         .withOpt<UIHorizontalStretch>()
         .withOpt<UIVerticalStretch>()
@@ -81,7 +130,6 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
             {
                 child.position = child.anchor * parent.topRightCorner() +
                                  (glm::vec2{1, 1} - child.anchor) * parent.bottomLeftCorner() + child.offset;
-                child.vp = parent.vp;
                 child.hierarchyDepth = parent.hierarchyDepth + 1;
                 if (hs.contains())
                 {
@@ -114,6 +162,69 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                     target.cleared = true;
                 }
                 window->renderDevice().clearDepth(1);
+            }
+        });
+
+    cubos.system("draw ui")
+        .tagged(uiEndTag)
+        .with<UIElement>()
+        .related<ChildOf>()
+        .with<UICanvas>()
+        .other()
+        .with<UIElement>()
+        .related<ChildOf>()
+        .with<UIElement>()
+        .call([](Query<Entity, UIElement&, const UICanvas&> drawsToQuery,
+                 Query<Entity, UIElement&, UIElement&> childrenQuery,
+                 Query<Entity, UICanvas&, RenderTarget&> canvasQuery, const core::io::Window& window,
+                 const State& state) {
+            // For each render target with a UI canvas.
+            window->renderDevice().setDepthStencilState(state.dss);
+
+            for (auto [entity, canvas, renderTarget] : canvasQuery)
+            {
+                // Prepare what is common to all draw command types.
+                window->renderDevice().setViewport(0, 0, static_cast<int>(renderTarget.size.x),
+                                                   static_cast<int>(renderTarget.size.y));
+                state.mvpBuffer->fill(&canvas.mat, sizeof(glm::mat4));
+
+                // Extract draw commands from all children UI elements, recursively.
+                std::map<const UIDrawList::Type*, UIDrawList> commands;
+                for (auto [child, childElement, _] : drawsToQuery.pin(1, entity))
+                {
+                    copyCommands(childrenQuery, childElement, child, commands);
+                }
+
+                // For each draw command type.
+                for (const auto& [type, list] : commands)
+                {
+
+                    // Prepare state common to all instances of this draw command type.
+                    window->renderDevice().setShaderPipeline(type->pipeline);
+                    type->pipeline->getBindingPoint("MVP")->bind(state.mvpBuffer);
+                    type->constantBufferBindingPoint->bind(type->constantBuffer);
+
+                    // For all instances of this draw command type.
+                    for (size_t i = 0; i < list.size(); i++)
+                    {
+                        // Prepare command-specific state and issue draw call.
+                        auto entry = list.entry(i);
+                        window->renderDevice().setVertexArray(entry.command.vertexArray);
+
+                        type->constantBuffer->fill(list.data(i), type->perElementSize);
+
+                        for (size_t j = 0; j < UIDrawList::Type::MaxTextures; j++)
+                        {
+                            if (type->texBindingPoint[j] == nullptr)
+                            {
+                                continue;
+                            }
+                            type->texBindingPoint[j]->bind(entry.command.textures[j]);
+                            type->texBindingPoint[j]->bind(entry.command.samplers[j]);
+                        }
+                        window->renderDevice().drawTriangles(entry.command.vertexOffset, entry.command.vertexCount);
+                    }
+                }
             }
         });
 }
