@@ -1,6 +1,13 @@
 #version 330 core
 
-uniform vec4 color;
+layout(std140) uniform PerElement
+{
+    vec2 xRange;
+    vec2 yRange;
+    vec4 color;
+    int depth;
+};
+
 out vec4 out_color;
 
 void main()

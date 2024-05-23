@@ -1,5 +1,6 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
+#include <cubos/engine/ui/canvas/draw_list.hpp>
 #include <cubos/engine/ui/canvas/element.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
 #include <cubos/engine/ui/color_rect/color_rect.hpp>
@@ -16,23 +17,18 @@ namespace
     {
         glm::vec2 xRange;
         glm::vec2 yRange;
+        glm::vec4 color;
         int depth;
     };
 
     struct State
     {
-        ShaderPipeline pipeline;
-        ShaderBindingPoint color;
         VertexArray va;
-        VertexArrayDesc vad;
-        DepthStencilState dss;
-        ConstantBuffer perElement;
+        UIDrawList::Type drawType;
 
         State(RenderDevice& renderDevice, const ShaderPipeline& pipeline)
-            : pipeline(pipeline)
         {
-            color = pipeline->getBindingPoint("color");
-            CUBOS_ASSERT(color, "color binding point must exist");
+            VertexArrayDesc vad;
             vad.elementCount = 1;
             vad.elements[0].name = "position";
             vad.elements[0].type = cubos::core::gl::Type::Float;
@@ -47,15 +43,13 @@ namespace
             cubos::core::gl::VertexBuffer vb =
                 renderDevice.createVertexBuffer(sizeof(verts), verts, cubos::core::gl::Usage::Dynamic);
             vad.buffers[0] = vb;
-            cubos::core::gl::DepthStencilStateDesc dssd;
-            dssd.depth.enabled = true;
-            dssd.depth.writeEnabled = true;
-            dssd.depth.near = -1.0F;
-            dssd.depth.compare = Compare::LEqual;
-            dss = renderDevice.createDepthStencilState(dssd);
             va = renderDevice.createVertexArray(vad);
 
-            perElement = renderDevice.createConstantBuffer(sizeof(PerElement), nullptr, Usage::Dynamic);
+            drawType.constantBuffer = renderDevice.createConstantBuffer(sizeof(PerElement), nullptr, Usage::Dynamic);
+
+            drawType.constantBufferBindingPoint = pipeline->getBindingPoint("PerElement");
+            drawType.perElementSize = sizeof(PerElement);
+            drawType.pipeline = pipeline;
         }
     };
 } // namespace
@@ -88,28 +82,15 @@ void cubos::engine::colorRectPlugin(Cubos& cubos)
         .tagged(uiDrawTag)
         .with<UIElement>()
         .with<UIColorRect>()
-        .call([](const State& state, const Window& window, Query<UIElement&, const UIColorRect&> query) {
-            window->renderDevice().setDepthStencilState(state.dss);
-            window->renderDevice().setViewport(0, 0, static_cast<int>(window->framebufferSize()[0]),
-                                               static_cast<int>(window->framebufferSize()[1]));
-            window->renderDevice().setVertexArray(state.va);
-            window->renderDevice().setShaderPipeline(state.pipeline);
+        .call([](State& state, Query<UIElement&, const UIColorRect&> query) {
             for (auto [element, colorRect] : query)
             {
-                float minX = element.position.x - element.size.x * (element.pivot.x);
-                float minY = element.position.y - element.size.y * (element.pivot.y);
-                float maxX = element.position.x + element.size.x * (1.0F - element.pivot.x);
-                float maxY = element.position.y + element.size.y * (1.0F - element.pivot.y);
-
-                PerElement perElement{{minX, maxX}, {minY, maxY}, element.layer * 100 + element.hierarchyDepth};
-                state.perElement->fill(&perElement, sizeof(perElement));
-                state.pipeline->getBindingPoint("PerElement")->bind(state.perElement);
-
-                auto mvpBuffer = window->renderDevice().createConstantBuffer(sizeof(glm::mat4), &element.vp,
-                                                                             cubos::core::gl::Usage::Static);
-                state.pipeline->getBindingPoint("MVP")->bind(mvpBuffer);
-                state.color->setConstant(colorRect.color);
-                window->renderDevice().drawTriangles(0, 6);
+                glm::vec2 min = element.position - element.size * element.pivot;
+                glm::vec2 max = element.position + element.size * (glm::vec2(1.0F, 1.0F) - element.pivot);
+                element.draw(
+                    state.drawType, state.va, 0, 6,
+                    PerElement{
+                        {min.x, max.x}, {min.y, max.y}, colorRect.color, element.layer * 100 + element.hierarchyDepth});
             }
         });
 }

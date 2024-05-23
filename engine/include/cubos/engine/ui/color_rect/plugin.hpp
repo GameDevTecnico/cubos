@@ -11,8 +11,8 @@
 
 namespace cubos::engine
 {
-    /// @defgroup ui-color-rect-plugin Canvas
-    /// @ingroup engine
+    /// @defgroup ui-color-rect-plugin Color Rect
+    /// @ingroup ui-plugins
     /// @brief Adds color rectangle elements.
 
     /// @brief Plugin entry function.

@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref ui-plugins module.
+
+namespace cubos::engine
+{
+    /// @defgroup ui-plugins UI
+    /// @ingroup engine
+    /// @brief Provides plugins for graphical user interfaces.
+} // namespace cubos::engine

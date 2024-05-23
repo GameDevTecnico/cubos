@@ -43,12 +43,12 @@ int main(int argc, char** argv)
                              .entity();
         commands.relate(elementBg, canvas, ChildOf{});
         /// [Set up Background]
-
         /// [Set up Panel]
-        auto elementPanel = commands.create()
-                                .add(UIElement{{0, -50}, {200, 600}, {1, 0.5F}, {1, 0.5F}})
-                                .add(UIColorRect{{1, 0, 0, 1}})
-                                .entity();
+        auto elementPanel =
+            commands.create()
+                .add(UIElement{.offset = {-50, 0}, .size = {200, 600}, .pivot = {1, 0.5F}, .anchor = {1, 0.5F}})
+                .add(UIColorRect{{1, 0, 0, 1}})
+                .entity();
         commands.relate(elementPanel, elementBg, ChildOf{});
         /// [Set up Panel]
     });
