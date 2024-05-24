@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::UIElement struct | CUBOS. Docs</title>
+  <title>cubos::engine::UIDrawList class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,48 +46,57 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UIElement <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="element_8hpp.html">&lt;engine/ui/canvas/element.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UIDrawList <span class="m-thin">class</span>
         </h1>
-        <p>Component which defines the space an element of the UI occupies as a rect.</p>
+        <p>Holds a collections of draw commands and their data.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="af2bdabe9dbbcefd40ecbe7fd74d09010">
+              <span class="m-doc-wrap-bumper"><a href="#af2bdabe9dbbcefd40ecbe7fd74d09010" class="m-doc-self">UIDrawList</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs a draw list.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#afa09791335eaa51ee6b1f02488431a25" class="m-doc">UIDrawList</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">UIDrawList</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a3178ca47447502537d8380e9ed3048fe" class="m-doc">UIDrawList</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">UIDrawList</a>&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Copy constructs.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af39b494d01325a59eb5b910ffaff73c1" class="m-doc">bottomLeftCorner</a>(</span><span class="m-doc-wrap">) const -&gt; glm::vec2</span>
-            </dt>
-            <dd>Gets global position of the bottom left corner of the element.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a03a2267d69825101b7306953e6eff65b" class="m-doc">topRightCorner</a>(</span><span class="m-doc-wrap">) const -&gt; glm::vec2</span>
-            </dt>
-            <dd>Gets global position of the top right corner of the element.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a55ee9f43a195458ea9c8819eacad9b7d" class="m-doc">pushEntry</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a> entry,
+              <span class="m-doc-wrap-bumper">void <a href="#a2e121cfb771bec78f193ff851594bc80" class="m-doc">pushEntry</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a> entry,
               const void* data)</span>
             </dt>
             <dd>Adds entry to draw list.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adf94613602fd5221cb942a7f143869c7" class="m-doc">emplaceCommand</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; type,
-              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">VertexArray</a> vertexArray,
+              <span class="m-doc-wrap-bumper">auto <a href="#ab6964b8ef11a098175693cf8b21d9fef" class="m-doc">emplaceCommand</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; type,
+              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">core::<wbr />gl::<wbr />VertexArray</a> vertexArray,
               size_t vertexOffset,
               size_t vertexCount,
               void* data) -&gt; <a href="structcubos_1_1engine_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a>&amp;</span>
             </dt>
             <dd>Creates new draw command and adds it to draw list.</dd>
-            <dt id="a6165ffec9510e45a2fe7cdbe0d594905">
-              <span class="m-doc-wrap-bumper">void <a href="#a6165ffec9510e45a2fe7cdbe0d594905" class="m-doc-self">clearCommands</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="a59bb292d61d2ba691ab389362210a53b">
+              <span class="m-doc-wrap-bumper">void <a href="#a59bb292d61d2ba691ab389362210a53b" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Empties draw list.</dd>
           </dl>
@@ -95,73 +104,55 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a5f0ab7a9aef660158f51f10891752e80">
-              glm::vec2 <a href="#a5f0ab7a9aef660158f51f10891752e80" class="m-doc-self">offset</a>
+            <dt id="a0c634fbd92424b18bc83599caab7cd4f">
+              std::vector&lt;<a href="structcubos_1_1engine_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a>&gt; <a href="#a0c634fbd92424b18bc83599caab7cd4f" class="m-doc-self">entries</a>
             </dt>
-            <dd>Offset of the pivot.</dd>
-            <dt id="a933719cb52990676653bdacecec94d28">
-              glm::vec2 <a href="#a933719cb52990676653bdacecec94d28" class="m-doc-self">size</a>
+            <dd>List holding the draw commands of this element and all its children.</dd>
+            <dt id="af2c44f7da91fa50609617294a3fdf416">
+              void* <a href="#af2c44f7da91fa50609617294a3fdf416" class="m-doc-self">perElementData</a>
             </dt>
-            <dd>Size of the element.</dd>
-            <dt id="a9101afc3bbcfe64fdaeeab1ebf1e99c4">
-              glm::vec2 <a href="#a9101afc3bbcfe64fdaeeab1ebf1e99c4" class="m-doc-self">pivot</a>
-            </dt>
-            <dd>Relative position of the pivot to the element itself.</dd>
-            <dt id="ac07de4db9b109785fedf5438bb9ed1f1">
-              glm::vec2 <a href="#ac07de4db9b109785fedf5438bb9ed1f1" class="m-doc-self">anchor</a>
-            </dt>
-            <dd>Relative position of the pivot to the parent element.</dd>
-            <dt id="a19121c3949503f1e3633ae4bb867a00a">
-              int <a href="#a19121c3949503f1e3633ae4bb867a00a" class="m-doc-self">layer</a>
-            </dt>
-            <dd>Rendering order layer.</dd>
-            <dt id="ac99fba48e9b29c093a8568149e2bc7ab">
-              glm::vec2 <a href="#ac99fba48e9b29c093a8568149e2bc7ab" class="m-doc-self">position</a>
-            </dt>
-            <dd>Global position of the pivot.</dd>
-            <dt id="ab2d317b0ade5e300de360ca1b8932bf2">
-              int <a href="#ab2d317b0ade5e300de360ca1b8932bf2" class="m-doc-self">hierarchyDepth</a>
-            </dt>
-            <dd>Depth in hierarchy. Used for depth sorting.</dd>
-            <dt id="a8a23b61d7eb5013e21d57f8563725caf">
-              <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">UIDrawList</a> <a href="#a8a23b61d7eb5013e21d57f8563725caf" class="m-doc-self">drawList</a>
-            </dt>
-            <dd>Draw list holding draw commands from this element.</dd>
+            <dd>Buffer holding the data for all the draw commands.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="af39b494d01325a59eb5b910ffaff73c1"><div>
+          <section class="m-doc-details" id="afa09791335eaa51ee6b1f02488431a25"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">glm::vec2 cubos::<wbr />engine::<wbr />UIElement::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af39b494d01325a59eb5b910ffaff73c1" class="m-doc-self">bottomLeftCorner</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afa09791335eaa51ee6b1f02488431a25" class="m-doc-self">UIDrawList</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">UIDrawList</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Gets global position of the bottom left corner of the element.</p>
+            <p>Move constructs.</p>
             <table class="m-table m-fullwidth m-flat">
-              <tfoot>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> value in global coordinates.</td>
+                  <td style="width: 1%">other</td>
+                  <td>Other draw list.</td>
                 </tr>
-              </tfoot>
+              </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a03a2267d69825101b7306953e6eff65b"><div>
+          <section class="m-doc-details" id="a3178ca47447502537d8380e9ed3048fe"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">glm::vec2 cubos::<wbr />engine::<wbr />UIElement::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a03a2267d69825101b7306953e6eff65b" class="m-doc-self">topRightCorner</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3178ca47447502537d8380e9ed3048fe" class="m-doc-self">UIDrawList</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">UIDrawList</a>&amp; other) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Gets global position of the top right corner of the element.</p>
+            <p>Copy constructs.</p>
             <table class="m-table m-fullwidth m-flat">
-              <tfoot>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> value in global coordinates.</td>
+                  <td style="width: 1%">other</td>
+                  <td>Other draw list.</td>
                 </tr>
-              </tfoot>
+              </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a55ee9f43a195458ea9c8819eacad9b7d"><div>
+          <section class="m-doc-details" id="a2e121cfb771bec78f193ff851594bc80"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />UIElement::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a55ee9f43a195458ea9c8819eacad9b7d" class="m-doc-self">pushEntry</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a> entry,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2e121cfb771bec78f193ff851594bc80" class="m-doc-self">pushEntry</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a> entry,
               const void* data)</span></span>
             </h3>
             <p>Adds entry to draw list.</p>
@@ -181,10 +172,10 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="adf94613602fd5221cb942a7f143869c7"><div>
+          <section class="m-doc-details" id="ab6964b8ef11a098175693cf8b21d9fef"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1engine_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a>&amp; cubos::<wbr />engine::<wbr />UIElement::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf94613602fd5221cb942a7f143869c7" class="m-doc-self">emplaceCommand</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; type,
-              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">VertexArray</a> vertexArray,
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1engine_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a>&amp; cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab6964b8ef11a098175693cf8b21d9fef" class="m-doc-self">emplaceCommand</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; type,
+              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">core::<wbr />gl::<wbr />VertexArray</a> vertexArray,
               size_t vertexOffset,
               size_t vertexCount,
               void* data)</span></span>

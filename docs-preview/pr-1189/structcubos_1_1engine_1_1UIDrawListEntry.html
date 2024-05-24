@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::DrawType struct | CUBOS. Docs</title>
+  <title>cubos::engine::UIDrawListEntry struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,50 +46,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DrawType <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__type_8hpp.html">&lt;engine/ui/canvas/draw_type.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UIDrawListEntry <span class="m-thin">struct</span>
         </h1>
-        <p>Describes a UI draw call type.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a224da62f28cd68e7f759e46cda40c1c8">
-              <a href="group__core-gl.html#ga8fc198a419c32c893c8d75b5d1a41e35" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderPipeline</a> <a href="#a224da62f28cd68e7f759e46cda40c1c8" class="m-doc-self">pipeline</a>
-            </dt>
-            <dd>Handle to shader pipeline.</dd>
-            <dt id="a893f0afb7d3d5e1c886bba431f2273da">
-              <a href="group__core-gl.html#gaee7781a28344ba52b20d5a1635d7a1f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ConstantBuffer</a> <a href="#a893f0afb7d3d5e1c886bba431f2273da" class="m-doc-self">constantBuffer</a>
-            </dt>
-            <dd>Handle to the constant buffer to hold the per element data.</dd>
-            <dt id="abc7f7fb789163fd283e3169282bb1e3a">
-              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#abc7f7fb789163fd283e3169282bb1e3a" class="m-doc-self">constantBufferBindingPoint</a>
-            </dt>
-            <dd>Binding point of the element data.</dd>
-            <dt id="acbb8b5ffcb409ef35cded73fdcf8ba82">
-              size_t <a href="#acbb8b5ffcb409ef35cded73fdcf8ba82" class="m-doc-self">perElementSize</a>
-            </dt>
-            <dd>Size of the struct holding the element data.</dd>
-            <dt id="af2785eaecda2d1c3801d1afce18c960d">
-              <a href="group__core-gl.html#gac981d1c531afb68a59cd7d579b381935" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />DepthStencilState</a> <a href="#af2785eaecda2d1c3801d1afce18c960d" class="m-doc-self">depthStencilState</a>
-            </dt>
-            <dd>Depth stencil state to use when drawing.</dd>
-            <dt id="a30af270535515f65e1a84d896f19edef">
-              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#a30af270535515f65e1a84d896f19edef" class="m-doc-self">texBindingPoint</a>
-            </dt>
-            <dd>Textures binding points.</dd>
-          </dl>
-        </section>
+        <p>Describes a draw commands and how it fits into the draw list carrying it.</p>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::DrawCommand struct | CUBOS. Docs</title>
+  <title>cubos::engine::UIDrawType struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,95 +46,45 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DrawCommand <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__command_8hpp.html">&lt;engine/ui/canvas/draw_command.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UIDrawType <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__type_8hpp.html">&lt;engine/ui/canvas/draw_type.hpp&gt;</a></div>
         </h1>
-        <p>Describes a UI draw instruction.</p>
+        <p>Describes a UI draw call type.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a76c216ca1b878a3f3d8088a22b811191" class="m-doc">AddTexture</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Texture2D</a> texture,
-              <a href="group__core-gl.html#ga22124e98761cd51e956d597091fde1de" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Sampler</a> sampler = nullptr) -&gt; <a href="structcubos_1_1engine_1_1DrawCommand.html" class="m-doc">DrawCommand</a>&amp;</span>
-            </dt>
-            <dd>Adds a texture to the command.</dd>
-          </dl>
-        </section>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a77ed8f4d04fdde589e74fb59e134c972">
-              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />VertexArray</a> <a href="#a77ed8f4d04fdde589e74fb59e134c972" class="m-doc-self">vertexArray</a>
+            <dt id="a7d3468376b5177e2f7daf32e52cb25f5">
+              <a href="group__core-gl.html#ga8fc198a419c32c893c8d75b5d1a41e35" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderPipeline</a> <a href="#a7d3468376b5177e2f7daf32e52cb25f5" class="m-doc-self">pipeline</a>
             </dt>
-            <dd>Vertex array handle.</dd>
-            <dt id="a0776b95163ae145e2862591c42931945">
-              size_t <a href="#a0776b95163ae145e2862591c42931945" class="m-doc-self">vertexOffset</a>
+            <dd>Handle to shader pipeline.</dd>
+            <dt id="a25d261259873beb2257a0495b9692461">
+              <a href="group__core-gl.html#gaee7781a28344ba52b20d5a1635d7a1f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ConstantBuffer</a> <a href="#a25d261259873beb2257a0495b9692461" class="m-doc-self">constantBuffer</a>
             </dt>
-            <dd>Index of the first vertex to be drawn.</dd>
-            <dt id="a84a1e1cbb1a5303a9ec3c0bf9c12b06f">
-              size_t <a href="#a84a1e1cbb1a5303a9ec3c0bf9c12b06f" class="m-doc-self">vertexCount</a>
+            <dd>Handle to the constant buffer to hold the per element data.</dd>
+            <dt id="af25ace639c462bb51ab898b09913ac64">
+              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#af25ace639c462bb51ab898b09913ac64" class="m-doc-self">constantBufferBindingPoint</a>
             </dt>
-            <dd>Number of vertexes to draw.</dd>
-            <dt id="ae77046e137132acbb324d919c100f23e">
-              <a href="group__core-gl.html#ga22124e98761cd51e956d597091fde1de" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Sampler</a> <a href="#ae77046e137132acbb324d919c100f23e" class="m-doc-self">samplers</a>
+            <dd>Binding point of the element data.</dd>
+            <dt id="ac5fbe385c4f9a2ba71b384ed74df91bb">
+              size_t <a href="#ac5fbe385c4f9a2ba71b384ed74df91bb" class="m-doc-self">perElementSize</a>
             </dt>
-            <dd>Samplers.</dd>
-            <dt id="a8923cbf6b9220f14e36c77de464cc272">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Texture2D</a> <a href="#a8923cbf6b9220f14e36c77de464cc272" class="m-doc-self">textures</a>
+            <dd>Size of the struct holding the element data.</dd>
+            <dt id="aa96031b0964c18bfa6b396f90bc19fb3">
+              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#aa96031b0964c18bfa6b396f90bc19fb3" class="m-doc-self">texBindingPoint</a>
             </dt>
-            <dd>Textures.</dd>
-            <dt id="abcc8aaa8e87635b31bea04ead767fcb2">
-              void* <a href="#abcc8aaa8e87635b31bea04ead767fcb2" class="m-doc-self">perElementData</a>
-            </dt>
-            <dd>Element raw data.</dd>
-            <dt id="a49ac70f16b36418843c4077e1d658c7c">
-              int <a href="#a49ac70f16b36418843c4077e1d658c7c" class="m-doc-self">numTextures</a>
-            </dt>
-            <dd>Number of textures added to command.</dd>
+            <dd>Textures binding points.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a76c216ca1b878a3f3d8088a22b811191"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1engine_1_1DrawCommand.html" class="m-doc">DrawCommand</a>&amp; cubos::<wbr />engine::<wbr />DrawCommand::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a76c216ca1b878a3f3d8088a22b811191" class="m-doc-self">AddTexture</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Texture2D</a> texture,
-              <a href="group__core-gl.html#ga22124e98761cd51e956d597091fde1de" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Sampler</a> sampler = nullptr)</span></span>
-            </h3>
-            <p>Adds a texture to the command.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">texture</td>
-                  <td>Texture to add.</td>
-                </tr>
-                <tr>
-                  <td>sampler</td>
-                  <td>Sampler to be used with the texture.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Reference to the draw command.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
