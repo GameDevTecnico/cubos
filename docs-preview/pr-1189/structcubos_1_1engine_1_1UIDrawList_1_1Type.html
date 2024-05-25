@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::UIDrawList::UIDrawListEntry struct | CUBOS. Docs</title>
+  <title>cubos::engine::UIDrawList::Type struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1UIDrawList.html">UIDrawList</a>::<wbr/></span>UIDrawListEntry <span class="m-thin">struct</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1UIDrawList.html">UIDrawList</a>::<wbr/></span>Type <span class="m-thin">struct</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__list_8hpp.html">&lt;engine/ui/canvas/draw_list.hpp&gt;</a></div>
         </h1>
-        <p>Describes a draw commands and how it fits into the draw list carrying it.</p>
+        <p>Describes a UI draw call type.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -65,14 +65,8 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aae23acfdab3baa2f7b2e47644b298e69" class="m-doc">UIDrawListEntry</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; commandType) <span class="m-label m-flat m-info">explicit</span> </span>
-            </dt>
-            <dd>Constructs.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a0c20998614f41e2acc48fc06d2f85ef6" class="m-doc">UIDrawListEntry</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; commandType,
-              const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a>&amp; drawCommand,
-              size_t dataOffset)</span>
+            <dt id="a65dcbceca54a9a5d7c0a126799091fef">
+              <span class="m-doc-wrap-bumper"><a href="#a65dcbceca54a9a5d7c0a126799091fef" class="m-doc-self">Type</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Constructs.</dd>
           </dl>
@@ -80,66 +74,27 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a0684e44aee0422c97df51a96759b70e4">
-              const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; <a href="#a0684e44aee0422c97df51a96759b70e4" class="m-doc-self">type</a>
+            <dt id="a62d0a51af9e0a3c24a50162943f84b72">
+              <a href="group__core-gl.html#ga8fc198a419c32c893c8d75b5d1a41e35" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderPipeline</a> <a href="#a62d0a51af9e0a3c24a50162943f84b72" class="m-doc-self">pipeline</a>
             </dt>
-            <dd>Command type.</dd>
-            <dt id="a86026f72d99694efe44981cbcc94e62b">
-              <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a> <a href="#a86026f72d99694efe44981cbcc94e62b" class="m-doc-self">command</a>
+            <dd>Handle to shader pipeline.</dd>
+            <dt id="adbd22e969c823bc453f822c5166cf4fc">
+              <a href="group__core-gl.html#gaee7781a28344ba52b20d5a1635d7a1f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ConstantBuffer</a> <a href="#adbd22e969c823bc453f822c5166cf4fc" class="m-doc-self">constantBuffer</a>
             </dt>
-            <dd>UI draw command.</dd>
-            <dt id="a10721a70afcfd659e9ef4def32b61d44">
-              size_t <a href="#a10721a70afcfd659e9ef4def32b61d44" class="m-doc-self">offset</a>
+            <dd>Handle to the constant buffer to hold the per element data.</dd>
+            <dt id="a328ffd4e03f0078680d330612e239a6d">
+              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#a328ffd4e03f0078680d330612e239a6d" class="m-doc-self">constantBufferBindingPoint</a>
             </dt>
-            <dd><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> of the command data in the draw list.</dd>
+            <dd>Binding point of the element data.</dd>
+            <dt id="a192b019021e6bd5b52209c1fcecaf7cd">
+              size_t <a href="#a192b019021e6bd5b52209c1fcecaf7cd" class="m-doc-self">perElementSize</a>
+            </dt>
+            <dd>Size of the struct holding the element data.</dd>
+            <dt id="a574f3b6438f0a8ea75202c71b2a9dbf6">
+              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#a574f3b6438f0a8ea75202c71b2a9dbf6" class="m-doc-self">texBindingPoint</a>
+            </dt>
+            <dd>Textures binding points.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aae23acfdab3baa2f7b2e47644b298e69"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />UIDrawList::<wbr />UIDrawListEntry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aae23acfdab3baa2f7b2e47644b298e69" class="m-doc-self">UIDrawListEntry</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; commandType) <span class="m-label m-info">explicit</span> </span></span>
-            </h3>
-            <p>Constructs.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">commandType</td>
-                  <td>Command type.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a0c20998614f41e2acc48fc06d2f85ef6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />UIDrawList::<wbr />UIDrawListEntry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c20998614f41e2acc48fc06d2f85ef6" class="m-doc-self">UIDrawListEntry</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; commandType,
-              const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a>&amp; drawCommand,
-              size_t dataOffset)</span></span>
-            </h3>
-            <p>Constructs.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">commandType</td>
-                  <td>Command type.</td>
-                </tr>
-                <tr>
-                  <td>drawCommand</td>
-                  <td>UI draw command.</td>
-                </tr>
-                <tr>
-                  <td>dataOffset</td>
-                  <td><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> of the command data in the draw list.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
