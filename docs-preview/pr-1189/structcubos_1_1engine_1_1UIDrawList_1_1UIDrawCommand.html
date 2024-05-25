@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::UIDrawListEntry struct | CUBOS. Docs</title>
+  <title>cubos::engine::UIDrawList::UIDrawCommand struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,9 +46,46 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UIDrawListEntry <span class="m-thin">struct</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1UIDrawList.html">UIDrawList</a>::<wbr/></span>UIDrawCommand <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__list_8hpp.html">&lt;engine/ui/canvas/draw_list.hpp&gt;</a></div>
         </h1>
-        <p>Describes a draw commands and how it fits into the draw list carrying it.</p>
+        <p>Describes a UI draw instruction.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="ad0f1706ae8980c61d0fecdcf737c49a9">
+              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />VertexArray</a> <a href="#ad0f1706ae8980c61d0fecdcf737c49a9" class="m-doc-self">vertexArray</a>
+            </dt>
+            <dd>Vertex array handle.</dd>
+            <dt id="a640eb883a934d36655e86578663c041b">
+              size_t <a href="#a640eb883a934d36655e86578663c041b" class="m-doc-self">vertexOffset</a>
+            </dt>
+            <dd>Index of the first vertex to be drawn.</dd>
+            <dt id="acfabc6c16ab817b172003fd59e682c5c">
+              size_t <a href="#acfabc6c16ab817b172003fd59e682c5c" class="m-doc-self">vertexCount</a>
+            </dt>
+            <dd>Number of vertexes to draw.</dd>
+            <dt id="ac018cbd2870a2737e8a8e4fab6e7e6f8">
+              <a href="group__core-gl.html#ga22124e98761cd51e956d597091fde1de" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Sampler</a> <a href="#ac018cbd2870a2737e8a8e4fab6e7e6f8" class="m-doc-self">samplers</a>
+            </dt>
+            <dd>Samplers.</dd>
+            <dt id="a59a4557331287cb741d89cb8a45e8cfa">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Texture2D</a> <a href="#a59a4557331287cb741d89cb8a45e8cfa" class="m-doc-self">textures</a>
+            </dt>
+            <dd>Textures.</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>

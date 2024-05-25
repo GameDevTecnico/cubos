@@ -47,6 +47,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UIDrawList <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__list_8hpp.html">&lt;engine/ui/canvas/draw_list.hpp&gt;</a></div>
         </h1>
         <p>Holds a collections of draw commands and their data.</p>
         <nav class="m-block m-default">
@@ -55,12 +56,34 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a>
+            </dt>
+            <dd>Describes a UI draw instruction.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a>
+            </dt>
+            <dd>Describes a draw commands and how it fits into the draw list carrying it.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntryBuilder.html" class="m-doc">UIDrawListEntryBuilder</a>
+            </dt>
+            <dd>Builds a <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a>.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>
+            </dt>
+            <dd>Describes a UI draw call type.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -82,14 +105,35 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a3c10825c20059c1bfdee776f804d0b69" class="m-doc">push</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a> entry,
+              <span class="m-doc-wrap-bumper">void <a href="#a90ce02cb13196718c8417bab7253d623" class="m-doc">push</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; type,
+              const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a>&amp; command,
               const void* data)</span>
             </dt>
-            <dd>Adds entry to draw list.</dd>
+            <dd>Adds entry to the draw list.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab78cc63330ce8136d99315fb32ac8c94" class="m-doc">draw</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; type,
+              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">core::<wbr />gl::<wbr />VertexArray</a> vertexArray,
+              size_t vertexOffset,
+              size_t vertexCount,
+              const void* data) -&gt; <a href="classcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntryBuilder.html" class="m-doc">UIDrawListEntryBuilder</a></span>
+            </dt>
+            <dd>Creates a new entry in the draw list.</dd>
             <dt id="a59bb292d61d2ba691ab389362210a53b">
               <span class="m-doc-wrap-bumper">void <a href="#a59bb292d61d2ba691ab389362210a53b" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Empties draw list.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a837cde03bd50c9eff85b3f8a5511cd98" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Gets list size.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa402a66952a68a95194a702cab1de62d" class="m-doc">entry</a>(</span><span class="m-doc-wrap">std::size_t i) const -&gt; const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a>&amp;</span>
+            </dt>
+            <dd>Gets an entry from the list.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a384cf7805de1a0886134b7b26f4c91ae" class="m-doc">data</a>(</span><span class="m-doc-wrap">std::size_t i) const -&gt; const void*</span>
+            </dt>
+            <dd>Dets the data of an entry.</dd>
           </dl>
         </section>
         <section>
@@ -128,26 +172,134 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a3c10825c20059c1bfdee776f804d0b69"><div>
+          <section class="m-doc-details" id="a90ce02cb13196718c8417bab7253d623"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3c10825c20059c1bfdee776f804d0b69" class="m-doc-self">push</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a> entry,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a90ce02cb13196718c8417bab7253d623" class="m-doc-self">push</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; type,
+              const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawCommand.html" class="m-doc">UIDrawCommand</a>&amp; command,
               const void* data)</span></span>
             </h3>
-            <p>Adds entry to draw list.</p>
+            <p>Adds entry to the draw list.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">entry</td>
-                  <td>Entry to add.</td>
+                  <td style="width: 1%">type</td>
+                  <td>Command type.</td>
+                </tr>
+                <tr>
+                  <td>command</td>
+                  <td>UI draw command.</td>
                 </tr>
                 <tr>
                   <td>data</td>
-                  <td>Pointer to per element data.</td>
+                  <td>Command data.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab78cc63330ce8136d99315fb32ac8c94"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntryBuilder.html" class="m-doc">UIDrawListEntryBuilder</a> cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab78cc63330ce8136d99315fb32ac8c94" class="m-doc-self">draw</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">UIDrawType</a>&amp; type,
+              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">core::<wbr />gl::<wbr />VertexArray</a> vertexArray,
+              size_t vertexOffset,
+              size_t vertexCount,
+              const void* data)</span></span>
+            </h3>
+            <p>Creates a new entry in the draw list.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Command type.</td>
+                </tr>
+                <tr>
+                  <td>vertexArray</td>
+                  <td>Vertex array handle.</td>
+                </tr>
+                <tr>
+                  <td>vertexOffset</td>
+                  <td>Index of the first vertex to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>vertexCount</td>
+                  <td>Number of vertexes to draw.</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>Command data.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>A builder for the created entry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a837cde03bd50c9eff85b3f8a5511cd98"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a837cde03bd50c9eff85b3f8a5511cd98" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets list size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Number of elements in the list.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa402a66952a68a95194a702cab1de62d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a>&amp; cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa402a66952a68a95194a702cab1de62d" class="m-doc-self">entry</a>(</span><span class="m-doc-wrap">std::size_t i) const</span></span>
+            </h3>
+            <p>Gets an entry from the list.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">i</td>
+                  <td>Entry index.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>A list entry.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a384cf7805de1a0886134b7b26f4c91ae"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />engine::<wbr />UIDrawList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a384cf7805de1a0886134b7b26f4c91ae" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">std::size_t i) const</span></span>
+            </h3>
+            <p>Dets the data of an entry.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">i</td>
+                  <td>Entry index.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>A pointer to the entry&#x27;s data.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
         </section>

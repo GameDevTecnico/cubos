@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::UIDrawType struct | CUBOS. Docs</title>
+  <title>cubos::engine::UIDrawList::UIDrawType struct | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,8 +46,8 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UIDrawType <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__type_8hpp.html">&lt;engine/ui/canvas/draw_type.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1UIDrawList.html">UIDrawList</a>::<wbr/></span>UIDrawType <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__list_8hpp.html">&lt;engine/ui/canvas/draw_list.hpp&gt;</a></div>
         </h1>
         <p>Describes a UI draw call type.</p>
         <nav class="m-block m-default">
@@ -56,38 +56,44 @@
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="ab23e89992ce55c59348c4e4ff9927857">
+              <span class="m-doc-wrap-bumper"><a href="#ab23e89992ce55c59348c4e4ff9927857" class="m-doc-self">UIDrawType</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a7d3468376b5177e2f7daf32e52cb25f5">
-              <a href="group__core-gl.html#ga8fc198a419c32c893c8d75b5d1a41e35" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderPipeline</a> <a href="#a7d3468376b5177e2f7daf32e52cb25f5" class="m-doc-self">pipeline</a>
+            <dt id="a1fdf60beea7b489a8d44c109334d46f6">
+              <a href="group__core-gl.html#ga8fc198a419c32c893c8d75b5d1a41e35" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderPipeline</a> <a href="#a1fdf60beea7b489a8d44c109334d46f6" class="m-doc-self">pipeline</a>
             </dt>
             <dd>Handle to shader pipeline.</dd>
-            <dt id="a25d261259873beb2257a0495b9692461">
-              <a href="group__core-gl.html#gaee7781a28344ba52b20d5a1635d7a1f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ConstantBuffer</a> <a href="#a25d261259873beb2257a0495b9692461" class="m-doc-self">constantBuffer</a>
+            <dt id="a6778604657458fb0f0b2e06858a89773">
+              <a href="group__core-gl.html#gaee7781a28344ba52b20d5a1635d7a1f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ConstantBuffer</a> <a href="#a6778604657458fb0f0b2e06858a89773" class="m-doc-self">constantBuffer</a>
             </dt>
             <dd>Handle to the constant buffer to hold the per element data.</dd>
-            <dt id="af25ace639c462bb51ab898b09913ac64">
-              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#af25ace639c462bb51ab898b09913ac64" class="m-doc-self">constantBufferBindingPoint</a>
+            <dt id="af02f0890797d18efaab64044d3952c83">
+              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#af02f0890797d18efaab64044d3952c83" class="m-doc-self">constantBufferBindingPoint</a>
             </dt>
             <dd>Binding point of the element data.</dd>
-            <dt id="ac5fbe385c4f9a2ba71b384ed74df91bb">
-              size_t <a href="#ac5fbe385c4f9a2ba71b384ed74df91bb" class="m-doc-self">perElementSize</a>
+            <dt id="a97782005acb328f2705a7fb567793f3d">
+              size_t <a href="#a97782005acb328f2705a7fb567793f3d" class="m-doc-self">perElementSize</a>
             </dt>
             <dd>Size of the struct holding the element data.</dd>
-            <dt id="aa96031b0964c18bfa6b396f90bc19fb3">
-              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#aa96031b0964c18bfa6b396f90bc19fb3" class="m-doc-self">texBindingPoint</a>
+            <dt id="ab828f5f8ddf2d09ec1d7fc92da486257">
+              <a href="group__core-gl.html#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />ShaderBindingPoint</a> <a href="#ab828f5f8ddf2d09ec1d7fc92da486257" class="m-doc-self">texBindingPoint</a>
             </dt>
             <dd>Textures binding points.</dd>
-            <dt id="ad447c3ab09eedcdf34c27d5f6f38935d">
-              size_t <a href="#ad447c3ab09eedcdf34c27d5f6f38935d" class="m-doc-self">numTextures</a>
-            </dt>
-            <dd>Number of textures the shader requires.</dd>
           </dl>
         </section>
       </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::UIDrawCommand struct | CUBOS. Docs</title>
+  <title>engine/ui/canvas/draw_list.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,44 +46,53 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UIDrawCommand <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="draw__command_8hpp.html">&lt;engine/ui/canvas/draw_command.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_a0e345b5ef3f916fe64ce8826d84a921.html">ui</a>/</span><span class="m-breadcrumb"><a href="dir_1df0034ddb3bcba614277f72ec51c76d.html">canvas</a>/</span>draw_list.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Describes a UI draw instruction.</p>
+        <p>Class <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">cubos::<wbr />engine::<wbr />UIDrawList</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="a29a2d3b1ca4ae73f56c92088d78ada82">
-              <a href="group__core-gl.html#ga8822259eddb245702e232a3d033decbb" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />VertexArray</a> <a href="#a29a2d3b1ca4ae73f56c92088d78ada82" class="m-doc-self">vertexArray</a>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">cubos::engine::UIDrawList</a>
             </dt>
-            <dd>Vertex array handle.</dd>
-            <dt id="a350a9011d7c6367d762311c9467cafcb">
-              size_t <a href="#a350a9011d7c6367d762311c9467cafcb" class="m-doc-self">vertexOffset</a>
+            <dd>Holds a collections of draw commands and their data.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawType.html" class="m-doc">cubos::engine::UIDrawList::UIDrawType</a>
             </dt>
-            <dd>Index of the first vertex to be drawn.</dd>
-            <dt id="a774168eb709824b02ec5794d3d3b2087">
-              size_t <a href="#a774168eb709824b02ec5794d3d3b2087" class="m-doc-self">vertexCount</a>
+            <dd>Describes a UI draw call type.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawCommand.html" class="m-doc">cubos::engine::UIDrawList::UIDrawCommand</a>
             </dt>
-            <dd>Number of vertexes to draw.</dd>
-            <dt id="a4db489c244d33895f5d4ace81b220efa">
-              <a href="group__core-gl.html#ga22124e98761cd51e956d597091fde1de" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Sampler</a> <a href="#a4db489c244d33895f5d4ace81b220efa" class="m-doc-self">samplers</a>
+            <dd>Describes a UI draw instruction.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntry.html" class="m-doc">cubos::engine::UIDrawList::UIDrawListEntry</a>
             </dt>
-            <dd>Samplers.</dd>
-            <dt id="a2b4171cdc74252b2f659168511353957">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Texture2D</a> <a href="#a2b4171cdc74252b2f659168511353957" class="m-doc-self">textures</a>
+            <dd>Describes a draw commands and how it fits into the draw list carrying it.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntryBuilder.html" class="m-doc">cubos::engine::UIDrawList::UIDrawListEntryBuilder</a>
             </dt>
-            <dd>Textures.</dd>
+            <dd>Builds a <a href="structcubos_1_1engine_1_1UIDrawList_1_1UIDrawListEntry.html" class="m-doc">UIDrawListEntry</a>.</dd>
           </dl>
         </section>
       </div>
