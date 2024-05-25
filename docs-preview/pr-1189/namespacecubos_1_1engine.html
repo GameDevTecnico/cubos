@@ -742,7 +742,7 @@
             </dt>
             <dd>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> component and the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components of the parent.</dd>
             <dt>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a487b3c335cd34dd44f5636e36fb2d10d" class="m-doc">uiElementVPUpdateTag</a>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a46462101193039c643272ec676b0d2a5" class="m-doc">uiCanvasChildrenUpdateTag</a>
             </dt>
             <dd><a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> components&#x27; information is passed to related <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> components.</dd>
             <dt>
@@ -757,6 +757,10 @@
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a5f7a4f0189fcb59bf65d7c19d64e6549" class="m-doc">uiDrawTag</a>
             </dt>
             <dd>Systems which draw to canvas should be tagged with this.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a0c356f5be2b9cf04b7dd10da232387bf" class="m-doc">uiEndTag</a>
+            </dt>
+            <dd>All queued draw commands are collected and executed to the render targets.</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#abdde5420fb3ee84100b1150f9ec0dee0" class="m-doc">windowInitTag</a>
             </dt>
@@ -1071,9 +1075,9 @@
             </h3>
             <p>The <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are updated with the information from the <a href="structcubos_1_1engine_1_1LocalToParent.html" class="m-doc">LocalToParent</a> component and the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components of the parent.</p>
           </div></section>
-          <section class="m-doc-details" id="a487b3c335cd34dd44f5636e36fb2d10d"><div>
+          <section class="m-doc-details" id="a46462101193039c643272ec676b0d2a5"><div>
             <h3>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a487b3c335cd34dd44f5636e36fb2d10d" class="m-doc-self">uiElementVPUpdateTag</a>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a46462101193039c643272ec676b0d2a5" class="m-doc-self">uiCanvasChildrenUpdateTag</a>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2ui_2canvas_2plugin_8hpp.html">&lt;engine/ui/canvas/plugin.hpp&gt;</a></div>
             </h3>
             <p><a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> components&#x27; information is passed to related <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> components.</p>
@@ -1098,6 +1102,13 @@
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2ui_2canvas_2plugin_8hpp.html">&lt;engine/ui/canvas/plugin.hpp&gt;</a></div>
             </h3>
             <p>Systems which draw to canvas should be tagged with this.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0c356f5be2b9cf04b7dd10da232387bf"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="namespacecubos_1_1engine.html#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a0c356f5be2b9cf04b7dd10da232387bf" class="m-doc-self">uiEndTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2ui_2canvas_2plugin_8hpp.html">&lt;engine/ui/canvas/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>All queued draw commands are collected and executed to the render targets.</p>
           </div></section>
           <section class="m-doc-details" id="abdde5420fb3ee84100b1150f9ec0dee0"><div>
             <h3>
