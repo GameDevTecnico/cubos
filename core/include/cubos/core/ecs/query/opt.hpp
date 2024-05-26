@@ -197,7 +197,7 @@ CUBOS_REFLECT_TEMPLATE_IMPL((typename T), (cubos::core::ecs::Opt<T>))
     using namespace cubos::core::reflection;
     using cubos::core::ecs::Opt;
 
-    return Type::create("cubos::core::ecs::Opt<" + reflect<T>().name() + ">")
+    return reflection::Type::create("cubos::core::ecs::Opt<" + reflect<T>().name() + ">")
         .with(ConstructibleTrait::typed<Opt<T>>().withDefaultConstructor().withCopyConstructor().build())
         .with(NullableTrait{[](const void* obj) -> bool { return static_cast<const Opt<T>*>(obj)->contains(); },
                             [](void* obj) { static_cast<Opt<T>*>(obj)->reset(); }});
