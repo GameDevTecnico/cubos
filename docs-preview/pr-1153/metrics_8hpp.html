@@ -79,7 +79,7 @@
             </dt>
             <dd>Represents a metric.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1MetricsPool.html" class="m-doc">cubos::core::MetricsPool</a>
+              class <a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">cubos::core::Metrics</a>
             </dt>
             <dd>Singleton class that manages a collection of metrics.</dd>
             <dt>
@@ -96,11 +96,21 @@
               val)</span>
             </dt>
             <dd>Macro to add a metric.</dd>
-            <dt id="ad9dc2d48537d6c5ed87cc6b9b993cfec">
-              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc-self">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Macro to measure the execution time of a function/scope.</dd>
+            <dd>Macro to measure the execution time of a function/scope, registering it as a metric.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Define documentation</h2>
+          <section class="m-doc-details" id="ad9dc2d48537d6c5ed87cc6b9b993cfec"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc-self">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
+            </h3>
+            <p>Macro to measure the execution time of a function/scope, registering it as a metric.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>The macro uses <code>__FUNCTION__</code> to register the metric name.</p></aside>
+          </div></section>
         </section>
       </div>
     </div>
