@@ -78,6 +78,12 @@
             </dt>
             <dd>Size of metrics associated with a given name.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a755588edb39f601196e5c0078d27c348" class="m-doc">readMetric</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a>&amp; value,
+              size_t&amp; offset) -&gt; bool</span>
+            </dt>
+            <dd>Read a metric by its name.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a45dd3c6b92fbab88adc7e437db6b45aa" class="m-doc">readValue</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               double&amp; value,
               size_t&amp; offset) -&gt; bool</span>
@@ -151,6 +157,39 @@
                 <tr>
                   <th>Returns</th>
                   <td><a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">Metrics</a> count.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a755588edb39f601196e5c0078d27c348"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a755588edb39f601196e5c0078d27c348" class="m-doc-self">readMetric</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a>&amp; value,
+              size_t&amp; offset)</span></span>
+            </h3>
+            <p>Read a metric by its name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td><a href="structcubos_1_1core_1_1Metric.html" class="m-doc">Metric</a> name.</td>
+                </tr>
+                <tr>
+                  <td>value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Buffer to store metric.</td>
+                </tr>
+                <tr>
+                  <td>offset</td>
+                  <td>Read count per metric.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the metric was found.</td>
                 </tr>
               </tfoot>
             </table>
