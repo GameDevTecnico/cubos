@@ -83,7 +83,7 @@
             </dt>
             <dd>Singleton class that manages a collection of metrics.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1TimeTracker.html" class="m-doc">cubos::core::TimeTracker</a>
+              class <a href="classcubos_1_1core_1_1ScopeProfiler.html" class="m-doc">cubos::core::ScopeProfiler</a>
             </dt>
             <dd>Utility to measure the execution time of a scope.</dd>
           </dl>
@@ -91,26 +91,16 @@
         <section id="define-members">
           <h2><a href="#define-members">Defines</a></h2>
           <dl class="m-doc">
-            <dt id="a8b8f469658e213c221fb1233396f5e57">
-              <span class="m-doc-wrap-bumper">#define <a href="#a8b8f469658e213c221fb1233396f5e57" class="m-doc-self">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">name,
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga8b8f469658e213c221fb1233396f5e57" class="m-doc">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">name,
               val)</span>
             </dt>
             <dd>Macro to add a metric.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#gad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Macro to measure the execution time of a function/scope, registering it as a metric.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Define documentation</h2>
-          <section class="m-doc-details" id="ad9dc2d48537d6c5ed87cc6b9b993cfec"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">#define <a href="#ad9dc2d48537d6c5ed87cc6b9b993cfec" class="m-doc-self">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">)</span>
-            </h3>
-            <p>Macro to measure the execution time of a function/scope, registering it as a metric.</p>
-<aside class="m-note m-info"><h4>Note</h4><p>The macro uses <code>__FUNCTION__</code> to register the metric name.</p></aside>
-          </div></section>
         </section>
       </div>
     </div>
