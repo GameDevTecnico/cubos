@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Examples &raquo; Engine &raquo; ImGui | CUBOS. Docs</title>
+  <title>Examples &raquo; Engine &raquo; ImGui | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#22272e" />
 </head>
@@ -14,7 +14,7 @@
   <div class="m-container">
     <div class="m-row">
       <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+        <a href="https://gamedevtecnico.github.io/cubos/"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
       </span>
       <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
         <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -51,7 +51,7 @@
           ImGui
         </h1>
         <p>Using the <a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a> plugin and <a href="classcubos_1_1engine_1_1DataInspector.html" class="m-doc">cubos::<wbr />engine::<wbr />DataInspector</a> resource.</p>
-<p><a name="md_imgui_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/imgui">here</a>.</p></aside><p>The ImGui plugin allows you to integrate the <a href="https://github.com/ocornut/imgui">Dear ImGui</a> library with CUBOS., making it quick, straightforward, and effortless to create user interfaces and interactive debugging tools within your applications.</p><img class="m-image" src="img1.png" alt="Image" /><p>First, let&#x27;s start by including the header files we need.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<p><a name="md_imgui_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/imgui">here</a>.</p></aside><p>The ImGui plugin allows you to integrate the <a href="https://github.com/ocornut/imgui">Dear ImGui</a> library with <strong>Cubos</strong>, making it quick, straightforward, and effortless to create user interfaces and interactive debugging tools within your applications.</p><img class="m-image" src="img1.png" alt="Image" /><p>First, let&#x27;s start by including the header files we need.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;map&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
 
@@ -74,7 +74,7 @@
 <span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">windowPlugin</span><span class="p">);</span>
 <span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">renderTargetPlugin</span><span class="p">);</span>
 <span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">imguiPlugin</span><span class="p">);</span></pre><p>Once the ImGui plugin is added, you can create systems to display ImGui windows and widgets. Here&#x27;s a system which opens an ImGui window, and its demo.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;show ImGui demo&quot;</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="n">imguiTag</span><span class="p">).</span><span class="n">call</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">ImGui</span><span class="o">::</span><span class="n">Begin</span><span class="p">(</span><span class="s">&quot;Dear ImGui + CUBOS.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ImGui</span><span class="o">::</span><span class="n">Begin</span><span class="p">(</span><span class="s">&quot;Dear ImGui + Cubos&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span>
 
@@ -187,7 +187,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
