@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Canvas module | CUBOS. Docs</title>
+  <title>Engine &raquo; UI &raquo; Canvas module | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -47,11 +47,13 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__ui-plugins.html">UI</a> &raquo;</span>
           Canvas <span class="m-thin">module</span></h1>
-        <p>Adds UI canvas and elements.</p>
+        <p>Adds the core UI functionality and rendering logic.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
+            <li><a href="#autotoc_md108">Architecture</a></li>
             <li>
               Reference
               <ul>
@@ -62,11 +64,14 @@
             </li>
           </ul>
         </nav>
+<section id="autotoc_md108"><h2><a href="#autotoc_md108">Architecture</a></h2><p>The two main UI components are <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> and <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a>. For it to work properly, each <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> must be a child of a <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a>, or of another <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a>.</p><p>Each <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> generates a list of drawing commands, <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">UIDrawList</a>, that are then pooled together by the <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> at the root of the hierarchy.</p><p>Each entry in a draw list contains a <a href="structcubos_1_1engine_1_1UIDrawList_1_1Type.html" class="m-doc">UIDrawList::<wbr />Type</a> and a <a href="structcubos_1_1engine_1_1UIDrawList_1_1Command.html" class="m-doc">UIDrawList::<wbr />Command</a>. The Type holds information that is common for all similar commands, and the Command contains the specifics to that one command. Each entry also has a raw data buffer to hold the data the command needs to pass to the shaders.</p><p>After aggregating the draw commands, the <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> draws them, grouped by type.</p><p>Check out <a href="examples-engine-ui.html" class="m-doc">UI</a> for the an example of the UI plugin in use.</p></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
             <dt>file <a href="canvas_8hpp.html" class="m-doc">canvas.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">cubos::<wbr />engine::<wbr />UICanvas</a>.</dd>
+            <dt>file <a href="draw__list_8hpp.html" class="m-doc">draw_list.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">cubos::<wbr />engine::<wbr />UIDrawList</a>.</dd>
             <dt>file <a href="element_8hpp.html" class="m-doc">element.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">cubos::<wbr />engine::<wbr />UIElement</a>.</dd>
             <dt>file <a href="horizontal__stretch_8hpp.html" class="m-doc">horizontal_stretch.hpp</a></dt>
@@ -84,6 +89,26 @@
               struct <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">cubos::engine::UICanvas</a>
             </dt>
             <dd>Component which represents a target for UI rendering.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">cubos::engine::UIDrawList</a>
+            </dt>
+            <dd>Holds a collections of draw commands and their data.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1Type.html" class="m-doc">cubos::engine::UIDrawList::Type</a>
+            </dt>
+            <dd>Describes a UI draw call type.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1Command.html" class="m-doc">cubos::engine::UIDrawList::Command</a>
+            </dt>
+            <dd>Describes a UI draw instruction.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIDrawList_1_1Entry.html" class="m-doc">cubos::engine::UIDrawList::Entry</a>
+            </dt>
+            <dd>Describes a draw commands and how it fits into the draw list carrying it.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1UIDrawList_1_1EntryBuilder.html" class="m-doc">cubos::engine::UIDrawList::EntryBuilder</a>
+            </dt>
+            <dd>Builds an <a href="structcubos_1_1engine_1_1UIDrawList_1_1Entry.html" class="m-doc">Entry</a>.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">cubos::engine::UIElement</a>
             </dt>
