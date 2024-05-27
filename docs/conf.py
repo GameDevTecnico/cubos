@@ -7,6 +7,8 @@ LINKS_NAVBAR1 = [
     (None, 'modules', []),
 ]
 
+FAVICON = '@DOXYGEN_PROJECT_ROOT@/docs/images/Favicon.png'
+
 # Add your own navbar links using the code below.
 # To find the valid link names, you can inspect the URL of a generated documentation site.
 
