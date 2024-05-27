@@ -27,7 +27,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag drawToRenderPickerTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-picker-plugin
     CUBOS_ENGINE_API void renderPickerPlugin(Cubos& cubos);
 } // namespace cubos::engine

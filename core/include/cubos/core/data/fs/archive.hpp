@@ -8,7 +8,7 @@
 
 namespace cubos::core::data
 {
-    /// @brief Interface for a bridge between the CUBOS. virtual file system and the real world.
+    /// @brief Interface for a bridge between the @b Cubos virtual file system and the real world.
     ///
     /// @note Should never be used directly by the user - instead, use the FileSystem and File
     /// classes.

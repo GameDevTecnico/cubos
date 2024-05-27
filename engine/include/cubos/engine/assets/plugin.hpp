@@ -14,7 +14,7 @@ namespace cubos::engine
 {
     /// @defgroup assets-plugin Assets
     /// @ingroup engine
-    /// @brief Adds asset management to @b CUBOS.
+    /// @brief Adds asset management to @b Cubos
     ///
     /// ## Settings
     /// - `assets.io.enabled` - whether asset I/O should be done (default: `true`).
@@ -44,7 +44,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag assetsTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup assets-plugin
     CUBOS_ENGINE_API void assetsPlugin(Cubos& cubos);
 } // namespace cubos::engine

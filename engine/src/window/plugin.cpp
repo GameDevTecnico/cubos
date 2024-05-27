@@ -27,7 +27,7 @@ void cubos::engine::windowPlugin(Cubos& cubos)
         .call([](Commands cmds, ShouldQuit& quit, Settings& settings) {
             quit.value = false;
             cmds.insertResource(
-                openWindow(settings.getString("window.title", "CUBOS."),
+                openWindow(settings.getString("window.title", "Cubos"),
                            {settings.getInteger("window.width", 800), settings.getInteger("window.height", 600)},
                            settings.getBool("window.vSync", true)));
         });

@@ -41,7 +41,7 @@ namespace tesseratos
     };
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-entity-selector-plugin
     void entitySelectorPlugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos

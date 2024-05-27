@@ -20,7 +20,7 @@ namespace cubos::engine
     /// - @ref FreeCameraController - handles logic to move a camera.
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup free-camera-plugin
     CUBOS_ENGINE_API void freeCameraPlugin(Cubos& cubos);
 } // namespace cubos::engine

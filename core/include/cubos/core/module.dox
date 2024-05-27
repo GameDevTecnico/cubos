@@ -7,10 +7,10 @@
 namespace cubos::core
 {
     /// @defgroup core Core
-    /// @brief @b CUBOS. core library.
+    /// @brief @b Cubos core library.
     ///
     /// The core library contains loose utilities and functionality on which the rest of the
-    /// @b CUBOS. libraries and applications are built on. Lives in the @ref cubos::core namespace.
+    /// @b Cubos libraries and applications are built on. Lives in the @ref cubos::core namespace.
     ///
     /// This library can be further divided into modules, which are documented in their respective
     /// module pages. Each of these modules has its own namespace and directory in the source tree.

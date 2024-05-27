@@ -21,7 +21,7 @@ namespace tesseratos
     /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-debug-camera-plugin
     void debugCameraPlugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos

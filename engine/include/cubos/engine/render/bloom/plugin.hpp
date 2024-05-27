@@ -26,7 +26,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag bloomTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-bloom-plugin
     CUBOS_ENGINE_API void bloomPlugin(Cubos& cubos);
 } // namespace cubos::engine

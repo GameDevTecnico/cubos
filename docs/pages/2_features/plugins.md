@@ -11,7 +11,7 @@ familiar with the concepts of components, resources and systems.
 
 Plugins are a feature of the @ref cubos::core::ecs::Cubos class. This class is
 the main thing you'll be interacting with when developing a game with
-**CUBOS.**. It is used to configure the engine and run the game loop. Through
+**Cubos**. It is used to configure the engine and run the game loop. Through
 it, you can register new components, relations, resources and configure systems to be run on specific conditions.
 
 Below is an example of an application which:

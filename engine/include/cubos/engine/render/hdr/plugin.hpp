@@ -29,7 +29,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag drawToHDRTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-hdr-plugin
     CUBOS_ENGINE_API void hdrPlugin(Cubos& cubos);
 } // namespace cubos::engine

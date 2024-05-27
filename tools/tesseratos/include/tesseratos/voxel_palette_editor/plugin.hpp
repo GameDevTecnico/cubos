@@ -19,7 +19,7 @@ namespace tesseratos
     /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-voxel-palette-editor-plugin
     void voxelPaletteEditorPlugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos

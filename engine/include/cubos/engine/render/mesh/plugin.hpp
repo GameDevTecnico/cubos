@@ -30,7 +30,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag renderMeshPoolInitTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-mesh-plugin
     CUBOS_ENGINE_API void renderMeshPlugin(Cubos& cubos);
 } // namespace cubos::engine

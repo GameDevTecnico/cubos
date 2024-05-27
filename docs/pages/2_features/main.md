@@ -1,12 +1,12 @@
 # Feature Guide {#features}
 
-This is a brief introduction to the **CUBOS.** engine and its features. Before
+This is a brief introduction to the **Cubos** engine and its features. Before
 diving into the documentation of each class and function, it's recommended to
 read through this guide.
 
 ## Overview
 
-The **CUBOS.** engine is divided into two libraries: @ref core and @ref engine.
+The **Cubos** engine is divided into two libraries: @ref core and @ref engine.
 Each library has its own namespace, which corresponds to a sub-folder in the
 include path.
 
@@ -48,5 +48,5 @@ a lot of features. For example, we don't have rigid body physics yet, and the ed
 There's no scripting language, thus you will have to write all your game logic in C++.
 
 Making a game with the engine is still very painful. Our goal is to make
-**CUBOS.** usable for game jams by people who are not on the team. This means a
+**Cubos** usable for game jams by people who are not on the team. This means a
 lot of work, but we're confident we can get there.

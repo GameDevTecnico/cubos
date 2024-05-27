@@ -17,7 +17,7 @@ namespace cubos::engine
     /// @brief Common interface for the lighting part of rendering plugins.
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-lights-plugin
     CUBOS_ENGINE_API void lightsPlugin(Cubos& cubos);
 } // namespace cubos::engine

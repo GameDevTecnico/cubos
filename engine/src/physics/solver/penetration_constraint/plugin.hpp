@@ -18,7 +18,7 @@ namespace cubos::engine
     extern Tag penetrationConstraintSolveTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup physics-solver-plugin
     void penetrationConstraintPlugin(Cubos& cubos);
 } // namespace cubos::engine

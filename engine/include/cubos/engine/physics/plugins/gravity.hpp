@@ -22,7 +22,7 @@ namespace cubos::engine
     /// - @ref Gravity - holds the global value of gravity.
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup physics-gravity-plugin
     CUBOS_ENGINE_API void gravityPlugin(Cubos& cubos);
 } // namespace cubos::engine

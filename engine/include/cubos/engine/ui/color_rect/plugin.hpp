@@ -16,7 +16,7 @@ namespace cubos::engine
     /// @brief Adds color rectangle elements.
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup ui-color-rect-plugin
     CUBOS_ENGINE_API void colorRectPlugin(Cubos& cubos);
 } // namespace cubos::engine

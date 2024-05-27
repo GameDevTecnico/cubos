@@ -19,7 +19,7 @@ namespace cubos::engine
     extern Tag physicsSolveTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup physics-gravity-plugin
     CUBOS_ENGINE_API void solverPlugin(Cubos& cubos);
 } // namespace cubos::engine

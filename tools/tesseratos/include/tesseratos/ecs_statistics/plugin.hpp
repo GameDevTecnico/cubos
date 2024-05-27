@@ -21,7 +21,7 @@ namespace tesseratos
     /// - @ref tesseratos-entity-selector-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-ecs-statistics-plugin
     void ecsStatisticsPlugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos

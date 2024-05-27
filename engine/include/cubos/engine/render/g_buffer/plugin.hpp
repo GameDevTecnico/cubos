@@ -29,7 +29,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag drawToGBufferTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-g-buffer-plugin
     CUBOS_ENGINE_API void gBufferPlugin(Cubos& cubos);
 } // namespace cubos::engine

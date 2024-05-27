@@ -21,7 +21,7 @@ namespace cubos::engine
 
     /// @defgroup collisions-plugin Collisions
     /// @ingroup engine
-    /// @brief Adds collision detection to @b CUBOS.
+    /// @brief Adds collision detection to @b Cubos
     ///
     /// ## Components
     /// - @ref BoxCollisionShape - holds the box collision shape.
@@ -39,7 +39,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag collisionsTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup collisions-plugin
     CUBOS_ENGINE_API void collisionsPlugin(Cubos& cubos);
 } // namespace cubos::engine

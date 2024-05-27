@@ -21,7 +21,7 @@ namespace cubos::engine
     extern Tag fixedSubstepTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup physics-plugin
     void fixedSubstepPlugin(Cubos& cubos);
 } // namespace cubos::engine

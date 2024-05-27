@@ -21,7 +21,7 @@ namespace cubos::engine
     /// closed.
     ///
     /// ## Settings
-    /// - `window.title` - the window's title (default: `CUBOS.`).
+    /// - `window.title` - the window's title (default: `Cubos`).
     /// - `window.width` - the window's width (default: `800`).
     /// - `window.height` - the window's height (default: `600`).
     /// - `window.vSync` - whether vertical synchronization is enabled (default: `true`).
@@ -44,7 +44,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag windowRenderTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup window-plugin
     CUBOS_ENGINE_API void windowPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -16,7 +16,7 @@ namespace cubos::engine
     /// @brief Adds the most frequently used rendering plugins to the engine.
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup render-defaults-plugin
     void renderDefaultsPlugin(Cubos& cubos);
 } // namespace cubos::engine

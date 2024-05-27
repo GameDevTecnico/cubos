@@ -14,7 +14,7 @@ namespace cubos::engine
 {
     /// @defgroup input-plugin Input
     /// @ingroup engine
-    /// @brief Adds input handling to @b CUBOS.
+    /// @brief Adds input handling to @b Cubos
     /// @see Take a look at the @ref examples-engine-input example for a demonstration of this
     /// plugin.
     ///
@@ -35,7 +35,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag inputUpdateTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup input-plugin
     CUBOS_ENGINE_API void inputPlugin(Cubos& cubos);
 } // namespace cubos::engine

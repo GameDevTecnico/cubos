@@ -52,7 +52,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag uiEndTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup ui-canvas-plugin
     CUBOS_ENGINE_API void uiCanvasPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -14,7 +14,7 @@ namespace cubos::engine
 {
     /// @defgroup render-shader-plugin Shader
     /// @ingroup render-plugins
-    /// @brief Adds shader assets to @b CUBOS.
+    /// @brief Adds shader assets to @b Cubos
     ///
     /// ## Bridges
     /// - @ref ShaderBridge - registered with the `.vs` extension, loads Vertex @ref Shader assets.
@@ -25,7 +25,7 @@ namespace cubos::engine
     /// - @ref window-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-shader-plugin
     CUBOS_ENGINE_API void shaderPlugin(Cubos& cubos);
 } // namespace cubos::engine

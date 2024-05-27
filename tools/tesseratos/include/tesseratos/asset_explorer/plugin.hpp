@@ -30,7 +30,7 @@ namespace tesseratos
     };
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-asset-explorer-plugin
     void assetExplorerPlugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos

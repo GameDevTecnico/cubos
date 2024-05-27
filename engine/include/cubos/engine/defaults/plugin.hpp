@@ -16,7 +16,7 @@ namespace cubos::engine
     /// @brief Adds a series of pre-configured essential plugins to the engine.
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup defaults-plugin
     void defaultsPlugin(Cubos& cubos);
 } // namespace cubos::engine

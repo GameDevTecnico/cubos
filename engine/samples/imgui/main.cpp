@@ -98,7 +98,7 @@ int main()
 
     /// [ImGui Demo]
     cubos.system("show ImGui demo").tagged(imguiTag).call([]() {
-        ImGui::Begin("Dear ImGui + CUBOS.");
+        ImGui::Begin("Dear ImGui + Cubos");
         ImGui::Text("Hello world!");
         ImGui::End();
 
