@@ -35,7 +35,7 @@ namespace cubos::core::data
     class CUBOS_CORE_API File final : public std::enable_shared_from_this<File>
     {
     public:
-        /// @brief Handle to a file in the CUBOS. virtual file system.
+        /// @brief Handle to a file in the @b Cubos virtual file system.
         ///
         /// This is a smart shared pointer, so that files are not destroyed while being referenced.
         using Handle = std::shared_ptr<File>;

@@ -139,7 +139,7 @@ namespace cubos::core::io
     /// @param vSync Whether to enable vertical synchronization.
     /// @return New window, or nullptr on failure.
     /// @ingroup core-io
-    CUBOS_CORE_API Window openWindow(const std::string& title = "CUBOS.", const glm::ivec2& size = {800, 600},
+    CUBOS_CORE_API Window openWindow(const std::string& title = "Cubos", const glm::ivec2& size = {800, 600},
                                      bool vSync = true);
 
     /// @brief Converts a @ref MouseButton enum to a string.

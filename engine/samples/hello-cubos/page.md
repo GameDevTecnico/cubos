@@ -1,4 +1,4 @@
-# Hello CUBOS. {#examples-engine-hello-cubos}
+# Hello Cubos {#examples-engine-hello-cubos}
 
 @brief Using @ref cubos::engine::Cubos "Cubos" to create a simple program.
 
@@ -17,9 +17,9 @@ We'll need it to add functionality to our program.
 
 Let's start by defining what functionality we want to add, by adding our first system.
 
-@snippet hello-cubos/main.cpp Hello CUBOS
+@snippet hello-cubos/main.cpp Hello Cubos
 
-This startup system simply prints `Hello CUBOS` to the console, using one of CUBOS's logging macros.
+This startup system simply prints `Hello Cubos` to the console, using one of Cubos's logging macros.
 You can find more about them @ref core/include/cubos/core/log.hpp "here".
 Startup systems run only once when the engine is loaded.
 
@@ -31,9 +31,9 @@ Let's print `Hello World`, but split it over two different systems.
 Instead of using `startupSystem`, we'll use @ref cubos::engine::Cubos::system "Cubos::system".
 This means the systems will be called after the startup systems and repeat every cycle, instead of just once at startup.
 
-@note As we don't have anything that would require multiple cycles (such as a window to draw to), the CUBOS. main cycle will run only once.
+@note As we don't have anything that would require multiple cycles (such as a window to draw to), the Cubos main cycle will run only once.
 
-Notice that we can't just do as we did for `Hello CUBOS` and call it a day.
+Notice that we can't just do as we did for `Hello Cubos` and call it a day.
 We want `Hello` to come before `World`, so we'll have to explicitly tell that to the engine, or else we risk having them in the wrong order.
 To do that we use tags.
 
@@ -52,7 +52,7 @@ Lets define a new component type, which stores a single integer, which we can us
 
 @snippet hello-cubos/main.cpp Component Decl
 
-Notice that not only we define the type, but we also define reflection for it. This is a way to let CUBOS know what our data type is made of, making it compatible with serialization, UI debug tools and others automatically.
+Notice that not only we define the type, but we also define reflection for it. This is a way to let Cubos know what our data type is made of, making it compatible with serialization, UI debug tools and others automatically.
 
 We also need to register the component type with the `Cubos` object.
 
@@ -79,7 +79,7 @@ Finally, we'll want a system that prints our entities.
 
 @snippet hello-cubos/main.cpp Entity Print
 
-In this case, we don't change `Pop`, and only read its value. Thus, we use `const Pop&`. This allows CUBOS to make some optimizations behind the scenes.
+In this case, we don't change `Pop`, and only read its value. Thus, we use `const Pop&`. This allows Cubos to make some optimizations behind the scenes.
 
 @ref cubos::core::ecs::Query "Query" allows us to access all entities with a given configuration of components. In this case, it will give us all entities with the `Num` component.
 

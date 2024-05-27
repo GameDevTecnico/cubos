@@ -62,7 +62,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag transformUpdatePropagateTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup transform-plugin
     CUBOS_ENGINE_API void transformPlugin(Cubos& cubos);
 } // namespace cubos::engine

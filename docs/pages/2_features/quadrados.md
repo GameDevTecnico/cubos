@@ -5,20 +5,20 @@
 @m_footernavigation
 
 @note This guide won't be very useful unless you're planning on developing a
-game with **CUBOS.** and need to convert voxel models into the internal format
+game with **Cubos** and need to convert voxel models into the internal format
 used by the engine, or embed files into an executable.
 
-*Quadrados* is the CLI tool used to work with **CUBOS.** At the moment, it
+*Quadrados* is the CLI tool used to work with **Cubos** At the moment, it
 contains the following commands:
 - `quadrados help` - shows the help message;
 - `quadrados convert` - converts a `.qb` voxel file into the internal format
-  used by CUBOS., `.grd` and `.pal`.
+  used by **Cubos**, `.grd` and `.pal`.
 - `quadrados embed` - utility used to embed files directly into an executable
   for use with the `EmbeddedArchive`.
 
 ## Convert
 
-The need for this tool arose from the fact that **CUBOS.** works with a single
+The need for this tool arose from the fact that **Cubos** works with a single
 palette of voxel materials, and voxel objects refer to specific materials by
 their index in this palette. For example, if we had a single voxel red object,
 the red color wouldn't be specified in the voxel object. Instead, this object
@@ -27,8 +27,8 @@ material `1` is red.
 
 The issue is, voxel formats like `.qb` and `.vox` are not designed to store
 only the indices of materials, but the whole material definition, per voxel.
-This conflicts with the way **CUBOS.** works, so we need to convert these
-formats into the internal format used by **CUBOS.**. This is where
+This conflicts with the way **Cubos** works, so we need to convert these
+formats into the internal format used by **Cubos**. This is where
 `quadrados convert` comes in. It takes a `.qb` voxel file and splits it into a
 palette (`.pal`), and one or more voxel grids (`.grd`).
 

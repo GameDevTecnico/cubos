@@ -15,7 +15,7 @@ namespace cubos::engine
 {
     /// @defgroup broad-phase-collisions-plugin Broad-phase Collisions
     /// @ingroup engine
-    /// @brief Adds broad-phase collision detection to @b CUBOS.
+    /// @brief Adds broad-phase collision detection to @b Cubos
     ///
     /// ## Relations
     /// - @ref PotentiallyCollidingWith - relates two entities that may be colliding
@@ -36,7 +36,7 @@ namespace cubos::engine
     extern Tag collisionsBroadTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup broad-phase-collisions-plugin
     void broadPhaseCollisionsPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -21,7 +21,7 @@ namespace cubos::engine
     /// can be implemented and swapped out without changing the rest of the engine.
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-voxels-plugin
     CUBOS_ENGINE_API void renderVoxelsPlugin(Cubos& cubos);
 } // namespace cubos::engine

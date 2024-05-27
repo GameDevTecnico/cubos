@@ -28,7 +28,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag toneMappingTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-tone-mapping-plugin
     CUBOS_ENGINE_API void toneMappingPlugin(Cubos& cubos);
 } // namespace cubos::engine

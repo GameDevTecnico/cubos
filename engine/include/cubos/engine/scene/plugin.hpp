@@ -14,7 +14,7 @@ namespace cubos::engine
 {
     /// @defgroup scene-plugin Scene
     /// @ingroup engine
-    /// @brief Adds scenes to @b CUBOS.
+    /// @brief Adds scenes to @b Cubos
     /// @see Take a look at the @ref examples-engine-scene example for a demonstration of this
     /// plugin.
     ///
@@ -25,7 +25,7 @@ namespace cubos::engine
     /// - @ref assets-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup scene-plugin
     CUBOS_ENGINE_API void scenePlugin(Cubos& cubos);
 } // namespace cubos::engine

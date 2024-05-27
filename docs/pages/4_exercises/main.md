@@ -1,6 +1,6 @@
 # Exercises {#exercises}
 
-This page contains challenges designed to help you start working with **CUBOS**.
+This page contains challenges designed to help you start working with **Cubos**.
 We recommend that you start by reading the @ref getting-started "getting started" and @ref features "features" guides.
 
 ## Creating a new engine sample
@@ -26,7 +26,7 @@ The final step is to add your new sample to the CMake configuration, at `engine/
 Open that file, and add a new line of the form `make_sample(DIR "my-own-sample" ASSETS)`.
 
 If you now reconfigure CMake, you should be able to launch the target `engine-sample.my-own-sample`.
-Don't worry if nothing shows up yet - in **CUBOS** you only get what you ask for, and in the code above we didn't do anything except run an empty application.
+Don't worry if nothing shows up yet - in **Cubos** you only get what you ask for, and in the code above we didn't do anything except run an empty application.
 
 ## Showing a cube
 
@@ -37,7 +37,7 @@ Try making your sample open a window and show a simple voxel cube! To do this, y
 4. Create a @ref cubos::engine::PointLight "PointLight".
 5. Create a @ref cubos::engine::Camera "Camera" and add it to @ref cubos::engine::ActiveCameras "ActiveCameras".
 
-You can take inspiration from the @ref examples-engine-hello-cubos "Hello CUBOS" @ref examples-engine-renderer "Renderer" samples. 
+You can take inspiration from the @ref examples-engine-hello-cubos "Hello Cubos" @ref examples-engine-renderer "Renderer" samples. 
 
 ## Replace the cube by an actual voxel model
 
@@ -45,7 +45,7 @@ Of course we don't expect developers to generate their voxel models through code
 Change your sample to show an actual voxel model, created and stored in a `.qb` file.
 You can create one using [MagicaVoxel](https://ephtracy.github.io/), or simply download an existing model from the internet.
 
-**CUBOS** doesn't handle `.qb` files directly: it only supports `.grd`'s and `.pal`'s, our own formats for voxel grids and palettes.
+**Cubos** doesn't handle `.qb` files directly: it only supports `.grd`'s and `.pal`'s, our own formats for voxel grids and palettes.
 You can use **QUADRADOS** to convert a `.qb` to a `.grd` and `.pal`. Check out its @ref features-quadrados "feature guide" for more information.
 
 Take a look at the @ref examples-engine-voxels "Voxels" sample to figure out how you can load those files into the actual sample.

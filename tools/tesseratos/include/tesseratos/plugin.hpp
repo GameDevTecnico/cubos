@@ -16,11 +16,11 @@ namespace tesseratos
     /// @brief @b TESSERATOS. library.
     ///
     /// The tesseratos library provides tools useful for debugging and developing games using
-    /// @b CUBOS. It is built on top of the @ref engine "engine library". Each sub-module
+    /// @b Cubos It is built on top of the @ref engine "engine library". Each sub-module
     /// corresponds to a tool or a set of tools.
 
     /// @brief Tesseratos entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos
     void plugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos

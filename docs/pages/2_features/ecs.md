@@ -1,6 +1,6 @@
 # ECS {#features-ecs}
 
-@brief What is an ECS and how it's used in **CUBOS.**
+@brief What is an ECS and how it's used in **Cubos**
 
 @m_footernavigation
 
@@ -35,7 +35,7 @@ systems, since they have clearly defined dependencies.
 
 ### Our implementation
 
-**CUBOS.** ECS contains the following concepts:
+**Cubos** ECS contains the following concepts:
 - **Cubos** - used to configure and run an ECS world and systems.
 - **World** - the main object that holds all of the ECS state.
 - **Entities** - represent objects in the game world (e.g. a car, a player, a 
@@ -81,7 +81,7 @@ private:
 }
 ```
 
-In **CUBOS.** there are no game objects. Instead, we would define two
+In **Cubos** there are no game objects. Instead, we would define two
 components and a `DeltaTime` resource:
 
 ```cpp
@@ -137,7 +137,7 @@ their velocities and the delta time.
 
 Before components, relations and resources are used in a World, they must be registered
 on it. This should be done once, at the start of the program. For example,
-using the **CUBOS.** @ref cubos::core::ecs::Cubos "main class", for the
+using the **Cubos** @ref cubos::core::ecs::Cubos "main class", for the
 previous example we would write:
 
 ```cpp
@@ -195,7 +195,7 @@ actually created and destroyed later on, when the commands are executed.
 ### Observers
 
 If you find yourself wanting to apply some logic whenever a given component is added or removed, observers are the right tool for you!
-For example, one use case that arises frequently when working with CUBOS, is when you have multiple components that must be added to an entity for it perform some function correctly.
+For example, one use case that arises frequently when working with **Cubos**, is when you have multiple components that must be added to an entity for it perform some function correctly.
 This is the case for the @ref cubos::engine::Position "Position" component. If the entity doesn't have a @ref cubos::engine::LocalToWorld "LocalToWorld" component, then it's meaningless.
 To solve this, we do something along the lines of:
 
@@ -227,7 +227,7 @@ Relations can also be queried in systems - read the multiple-target section on t
 ### Blueprints
 
 A common pattern in game engines is to have a way to create entities in
-bundles, such as *Unity*'s *prefabs*. In **CUBOS.** we call these *blueprints*.
+bundles, such as *Unity*'s *prefabs*. In **Cubos** we call these *blueprints*.
 A blueprint is a set of entities and their components, which can be spawned
 into the world as many times as needed.
 

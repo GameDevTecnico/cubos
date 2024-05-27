@@ -14,7 +14,7 @@ namespace cubos::engine
 {
     /// @defgroup narrow-phase-collisions-plugin Narrow-phase Collisions
     /// @ingroup engine
-    /// @brief Adds narrow-phase collision detection to @b CUBOS.
+    /// @brief Adds narrow-phase collision detection to @b Cubos
     ///
     /// ## Relations
     /// - @ref CollidingWith - relates two entities that are colliding.
@@ -24,7 +24,7 @@ namespace cubos::engine
     extern Tag collisionsNarrowTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup narrow-phase-collisions-plugin
     void narrowPhaseCollisionsPlugin(Cubos& cubos);
 } // namespace cubos::engine

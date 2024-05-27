@@ -50,9 +50,9 @@ int main()
     Cubos cubos{};
     /// [Engine]
 
-    /// [Hello CUBOS]
-    cubos.startupSystem("say Hello CUBOS").call([]() { CUBOS_INFO("Hello CUBOS"); });
-    /// [Hello CUBOS]
+    /// [Hello Cubos]
+    cubos.startupSystem("say Hello Cubos").call([]() { CUBOS_INFO("Hello Cubos"); });
+    /// [Hello Cubos]
 
     /// [Tags]
     cubos.tag(helloTag);

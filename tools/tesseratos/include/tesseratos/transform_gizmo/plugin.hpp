@@ -21,7 +21,7 @@ namespace tesseratos
     /// the gizmo will be (default: `10`).
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-transform-gizmo-plugin
     void transformGizmoPlugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos

@@ -64,7 +64,7 @@ namespace tesseratos
     };
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-toolbox-plugin
     void toolboxPlugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos

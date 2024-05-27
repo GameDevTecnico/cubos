@@ -20,7 +20,7 @@ namespace cubos::engine
 {
     /// @brief Holds a palette of materials. Supports up to 65535 materials.
     ///
-    /// Instead of storing the materials themselves in voxel data, @b CUBOS.
+    /// Instead of storing the materials themselves in voxel data, @b Cubos
     /// uses palettes, and stores the index of the material in the palette
     /// instead.
     ///

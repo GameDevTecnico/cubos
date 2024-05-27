@@ -33,7 +33,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag rasterizeToGBufferTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-g-buffer-rasterizer-plugin
     CUBOS_ENGINE_API void gBufferRasterizerPlugin(Cubos& cubos);
 } // namespace cubos::engine

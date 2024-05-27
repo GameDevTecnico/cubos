@@ -17,7 +17,7 @@ namespace cubos::engine
     /// @brief Adds @ref PerspectiveCamera components and the @ref DrawsTo relation.
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-camera-plugin
     CUBOS_ENGINE_API void cameraPlugin(Cubos& cubos);
 } // namespace cubos::engine

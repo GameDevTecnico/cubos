@@ -28,7 +28,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag drawToRenderTargetTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-target-plugin
     CUBOS_ENGINE_API void renderTargetPlugin(Cubos& cubos);
 } // namespace cubos::engine

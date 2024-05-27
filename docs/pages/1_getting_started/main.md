@@ -8,13 +8,13 @@
 
 ### Getting the code
 
-The **CUBOS.** source code is [hosted on GitHub](https://github.com/GameDevTecnico/cubos),
+The **Cubos** source code is [hosted on GitHub](https://github.com/GameDevTecnico/cubos),
 so the easiest and only way to get the code right now is to clone the
 repository with git.
 
 ### Dependencies
 
-The following dependencies are used to compile **CUBOS**:
+The following dependencies are used to compile **Cubos**:
 
 | Name                                                | Importance         | Submodule Path      | Installed Separately | Version* |
 | --------------------------------------------------- | ------------------ | ------------------- | -------------------- | -------- |
@@ -53,7 +53,7 @@ git config --local include.path ../.gitconfig
 
 ### Compiling
 
-The easiest way to compile **CUBOS** is by opening its directory in an IDE with CMake support. We recommend using [Visual Studio Code](https://code.visualstudio.com/) with the CMake and C++ extensions installed, as it is cross-platform, and most of the team is using it.
+The easiest way to compile **Cubos** is by opening its directory in an IDE with CMake support. We recommend using [Visual Studio Code](https://code.visualstudio.com/) with the CMake and C++ extensions installed, as it is cross-platform, and most of the team is using it.
 
 The IDE you choose most probably provides a way to set CMake options through the UI.
 In *Visual Studio Code*, you can do this by pressing `Ctrl + Shift + P` and choosing `CMake: Edit CMake Cache (UI)`.
@@ -70,10 +70,10 @@ The following is a list of all the options available to configure the engine:
 | `GLFW_USE_SUBMODULE`       | Compile glfw from source?            |
 | `GLM_USE_SUBMODULE`        | Compile glm from source?             |
 | `DOCTEST_USE_SUBMODULE`    | Compile doctest from source?         |
-| `BUILD_CORE_SAMPLES`       | Build **CUBOS** `core` samples?      |
-| `BUILD_CORE_TESTS`         | Build **CUBOS** `core` tests?        |
-| `BUILD_ENGINE_SAMPLES`     | Build **CUBOS** `engine` samples?    |
-| `BUILD_ENGINE_TESTS`       | Build **CUBOS** `engine` tests?      |
+| `BUILD_CORE_SAMPLES`       | Build **Cubos** `core` samples?      |
+| `BUILD_CORE_TESTS`         | Build **Cubos** `core` tests?        |
+| `BUILD_ENGINE_SAMPLES`     | Build **Cubos** `engine` samples?    |
+| `BUILD_ENGINE_TESTS`       | Build **Cubos** `engine` tests?      |
 | `BUILD_TESSERATOS_SAMPLES` | Build **TESSERATOS** samples?        |
 | `BUILD_DOCUMENTATION`      | Build the documentation?             |
 | `ENABLE_COVERAGE`          | Enable code coverage? (GCC only)     |
@@ -94,14 +94,14 @@ This will show new multiple targets, one for each example.
 
 ### Testing
 
-**CUBOS** uses *doctest* for unit testing the engine. To build them, you must
+**Cubos** uses *doctest* for unit testing the engine. To build them, you must
 enable the `BUILD_CORE_TESTS` and/or `BUILD_ENGINE_TESTS` options. You can run the tests through the targets `cubos-core-tests` and `cubos-engine-tests`.
 
 ## Whats next?
 
 We recommend you start by reading the @ref features "feature guide", which
 introduces you to important concepts and features of the engine, such as what
-is an ECS and how it is used in **CUBOS.**.
+is an ECS and how it is used in **Cubos**.
 
 The @ref examples "examples page" is also a good place to go if you want to
 see how specific parts of the engine are used in practice.

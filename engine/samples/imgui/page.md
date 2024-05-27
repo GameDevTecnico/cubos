@@ -4,7 +4,7 @@
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/imgui).
 
-The ImGui plugin allows you to integrate the [Dear ImGui](https://github.com/ocornut/imgui) library with CUBOS., making it quick, straightforward, and effortless to create user interfaces and interactive debugging tools within your applications.
+The ImGui plugin allows you to integrate the [Dear ImGui](https://github.com/ocornut/imgui) library with **Cubos**, making it quick, straightforward, and effortless to create user interfaces and interactive debugging tools within your applications.
 
 ![](imgui/img1.png)
 

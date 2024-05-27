@@ -28,7 +28,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag drawToSSAOTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class.
+    /// @param cubos @b Cubos main class.
     /// @ingroup render-ssao-plugin
     CUBOS_ENGINE_API void ssaoPlugin(Cubos& cubos);
 } // namespace cubos::engine

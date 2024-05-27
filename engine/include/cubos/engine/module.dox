@@ -7,7 +7,7 @@
 namespace cubos::engine
 {
     /// @defgroup engine Engine
-    /// @brief @b CUBOS. engine library.
+    /// @brief @b Cubos engine library.
     ///
     /// The engine library is built on top of the @ref core "core library" and contains code exclusive to game
     /// execution. This includes asset management, rendering and physics. It is built around the @ref Cubos class and

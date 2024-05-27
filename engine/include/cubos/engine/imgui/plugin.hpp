@@ -13,7 +13,7 @@ namespace cubos::engine
 {
     /// @defgroup imgui-plugin ImGui integration
     /// @ingroup engine
-    /// @brief Initializes and configures ImGui for @b CUBOS.
+    /// @brief Initializes and configures ImGui for @b Cubos
     ///
     /// @note Systems using `ImGui` **must be** tagged with `cubos.imgui`.
     ///
@@ -39,7 +39,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag imguiTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup imgui-plugin
     CUBOS_ENGINE_API void imguiPlugin(Cubos& cubos);
 } // namespace cubos::engine

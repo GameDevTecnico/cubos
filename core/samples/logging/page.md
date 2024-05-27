@@ -4,7 +4,7 @@
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/logging).
 
-Logging in **CUBOS.** is done through the logging macros defined in @ref core/log.hpp.
+Logging in **Cubos** is done through the logging macros defined in @ref core/log.hpp.
 
 @snippet logging/main.cpp Logging include
 

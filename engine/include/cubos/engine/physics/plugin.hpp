@@ -58,7 +58,7 @@ namespace cubos::engine
     CUBOS_ENGINE_API extern Tag physicsSimulationClearForcesTag;
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup physics-plugin
     CUBOS_ENGINE_API void physicsPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -77,7 +77,7 @@ if(CCACHE_EXE)
     endif()
 endif()
 
-# Function which configures a target with the options common to all CUBOS. targets.
+# Function which configures a target with the options common to all Cubos targets.
 function(cubos_common_target_options target)
     # Enable all warnings and treat them as errors
     target_compile_options(${target} PRIVATE

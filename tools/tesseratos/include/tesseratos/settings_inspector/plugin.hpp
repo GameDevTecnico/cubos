@@ -21,7 +21,7 @@ namespace tesseratos
     /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos @b CUBOS. main class
+    /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-settings-inspector-plugin
     void settingsInspectorPlugin(cubos::engine::Cubos& cubos);
 } // namespace tesseratos
