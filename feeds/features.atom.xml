@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>CUBOS - Features</title><link href="https://gamedevtecnico.github.io/cubos/" rel="alternate"></link><link href="https://gamedevtecnico.github.io/cubos/feeds/features.atom.xml" rel="self"></link><id>https://gamedevtecnico.github.io/cubos/</id><updated>2024-01-31T16:30:00+00:00</updated><entry><title>Hello Relations</title><link href="https://gamedevtecnico.github.io/cubos/hello-relations.html" rel="alternate"></link><published>2024-01-31T16:30:00+00:00</published><updated>2024-01-31T16:30:00+00:00</updated><author><name>Ricardo Antunes</name></author><id>tag:gamedevtecnico.github.io,2024-01-31:/cubos/hello-relations.html</id><summary type="html">&lt;p&gt;Adding entity relations to our ECS&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Hello! This past month I've been tinkering with the &lt;em&gt;ECS&lt;/em&gt;, which arguably is the core foundation of CUBOS.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Cubos - Features</title><link href="https://gamedevtecnico.github.io/cubos/" rel="alternate"></link><link href="https://gamedevtecnico.github.io/cubos/feeds/features.atom.xml" rel="self"></link><id>https://gamedevtecnico.github.io/cubos/</id><updated>2024-01-31T16:30:00+00:00</updated><entry><title>Hello Relations</title><link href="https://gamedevtecnico.github.io/cubos/hello-relations.html" rel="alternate"></link><published>2024-01-31T16:30:00+00:00</published><updated>2024-01-31T16:30:00+00:00</updated><author><name>Ricardo Antunes</name></author><id>tag:gamedevtecnico.github.io,2024-01-31:/cubos/hello-relations.html</id><summary type="html">&lt;p&gt;Adding entity relations to our ECS&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Hello! This past month I've been tinkering with the &lt;em&gt;ECS&lt;/em&gt;, which arguably is the core foundation of &lt;strong&gt;Cubos&lt;/strong&gt;.
 We structure all of our engine code around it. You can learn more about the concept in our &lt;a href="https://gamedevtecnico.github.io/cubos/docs/features-ecs.html"&gt;ECS guide&lt;/a&gt;!&lt;/p&gt;
 &lt;section id="the-problem"&gt;
 &lt;h2&gt;The Problem&lt;/h2&gt;
@@ -32,7 +32,7 @@ Not only that, you would also have to keep the &lt;code&gt;Children&lt;/code&gt;
 &lt;/section&gt;
 &lt;section id="physics-constraints"&gt;
 &lt;h3&gt;Physics Constraints&lt;/h3&gt;
-&lt;p&gt;Another use case we had trouble with at CUBOS was physics constraints. Eventually we will want to add support for adding constraints between entities such as springs, hinges, etc.
+&lt;p&gt;Another use case we had trouble with at Cubos was physics constraints. Eventually we will want to add support for adding constraints between entities such as springs, hinges, etc.
 Where do we store the data for these constraints? For example, a spring constraint needs to store the two entities it's connecting, as well as the spring constant and rest length.
 One possible solution would be to represent the constraint itself as a separate entity which stores this data, and the references to the two entities it's connecting.
 This isn't a bad solution, but we can do better!&lt;/p&gt;

@@ -2,20 +2,21 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
-  <title>Coffee'n Jam and... 0.2! | CUBOS</title>
+  <title>Coffee'n Jam and... 0.2! | Cubos</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="https://gamedevtecnico.github.io/cubos/static/m-dark.compiled.css" />
+  <link rel="icon" href="https://gamedevtecnico.github.io/cubos/images/favicon.png" type="image/png" />
   <link rel="canonical" href="https://gamedevtecnico.github.io/cubos/coffeen-jam-and-02.html" />
-  <link href="https://gamedevtecnico.github.io/cubos/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="CUBOS" />
-  <link href="https://gamedevtecnico.github.io/cubos/feeds/release.atom.xml" type="application/atom+xml" rel="alternate" title="CUBOS | Release" />
+  <link href="https://gamedevtecnico.github.io/cubos/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Cubos" />
+  <link href="https://gamedevtecnico.github.io/cubos/feeds/release.atom.xml" type="application/atom+xml" rel="alternate" title="Cubos | Release" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#22272e" />
-  <meta property="og:site_name" content="CUBOS" />
+  <meta property="og:site_name" content="Cubos" />
   <meta property="og:title" content="Coffee'n Jam and... 0.2!" />
   <meta name="twitter:title" content="Coffee'n Jam and... 0.2!" />
   <meta property="og:url" content="https://gamedevtecnico.github.io/cubos/coffeen-jam-and-02.html" />
-  <meta property="og:description" content="CUBOS 0.2 Release and Coffee&#39;n Jam!" />
-  <meta name="twitter:description" content="CUBOS 0.2 Release and Coffee&#39;n Jam!" />
+  <meta property="og:description" content="Cubos 0.2 Release and Coffee&#39;n Jam!" />
+  <meta name="twitter:description" content="Cubos 0.2 Release and Coffee&#39;n Jam!" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:type" content="article" />
 </head>
@@ -23,7 +24,7 @@
 <header><nav id="navigation">
   <div class="m-container">
     <div class="m-row">
-      <a href="./" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">CUBOS</a>
+      <a href="./" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m"><img src="https://gamedevtecnico.github.io/cubos/images/favicon.png" alt="" />Cubos</a>
       <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
       <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
@@ -47,13 +48,13 @@
           </time>
           Coffee'n Jam and... 0.2!
         </a></h1>
-        <p>CUBOS 0.2 Release and Coffee'n Jam!</p>
+        <p>Cubos 0.2 Release and Coffee'n Jam!</p>
       </header>
       <div class="m-clearfix-l"></div>
 <!-- content -->
 <section id="coffee-n-jam">
 <h2>Coffee'n Jam</h2>
-<p>From 26th of April to 3rd of May, &#64;RiscadoA and &#64;joaomanita participated in the Coffee'n Jam, a game jam organized by GameDev Técnico, with our engine, <strong>CUBOS</strong>.
+<p>From 26th of April to 3rd of May, &#64;RiscadoA and &#64;joaomanita participated in the Coffee'n Jam, a game jam organized by GameDev Técnico, with our engine, <strong>Cubos</strong>.
 The goal was to create a game in a week, with the theme &quot;Apocalypse&quot; - and we had a blast!</p>
 <p>The game jam was a great opportunity to test the engine in a real game development scenario, and we learned a lot from it.
 The game is called <em>Scraps vs Zombies</em>, and you can download it from its <a href="https://riscadoa.itch.io/scraps-vs-zombies">itch.io page</a>.
@@ -141,7 +142,7 @@ One side-effect of us changing the color-space is that now the colors in the gam
 <h3>On the Core</h3>
 <section id="clearer-plugin-dependencies-riscadoa">
 <h4>Clearer Plugin Dependencies <span class="m-text m-dim">(&#64;RiscadoA)</span></h4>
-<p>One of the main features of <strong>CUBOS</strong> is its plugin system. We structure all of the engine and editor features as plugins, each with its own set of components, systems, and resources.
+<p>One of the main features of <strong>Cubos</strong> is its plugin system. We structure all of the engine and editor features as plugins, each with its own set of components, systems, and resources.
 The developer ultimately chooses which plugins to include in their game, and may also create their own plugins.</p>
 <p>Plugins may depend on each other. One example is the <a href="https://gamedevtecnico.github.io/cubos/docs/group__physics-plugin.html">physics plugin</a>, which depends on the <a href="https://gamedevtecnico.github.io/cubos/docs/group__collisions-plugin.html">collisions plugin</a>.
 Previously, when a plugin was included, all of its dependencies were automatically included. It was also possible to include a plugin twice - the second time, the plugin would simply be ignored.</p>
@@ -168,7 +169,7 @@ If the developer wants to configure the engine in a different way, they can simp
 </section>
 <section id="observers-riscadoa">
 <h4>Observers <span class="m-text m-dim">(&#64;RiscadoA)</span></h4>
-<p>Very often while working with <strong>CUBOS</strong>, we find the need to react to the addition and removal of components in entities.
+<p>Very often while working with <strong>Cubos</strong>, we find the need to react to the addition and removal of components in entities.
 One use case, for example, is setting up the AABB of an entity when we add a collider to it.
 Previously, we had to manually implement this logic, for example, by adding a flag to the collider which was initially <code>false</code>, and having a system initializing all colliders with the flag set to <code>false</code>.</p>
 <p>To solve this problem in a more elegant way, we added a new special kind of system: <em>observers</em>. Observers are essentially systems which instead of running on a specific schedule, run immediately after a certain change occurs in the ECS (akin to callbacks).</p>
@@ -178,7 +179,7 @@ With observers, we instead now add a single component <code>PhysicsBundle</code>
 </section>
 <section id="introducing-inheritance-in-reflection-roby2014">
 <h4>Introducing Inheritance in Reflection <span class="m-text m-dim">(&#64;roby2014)</span></h4>
-<p><strong>CUBOS</strong> has a powerful <a href="https://gamedevtecnico.github.io/cubos/docs/group__core-reflection.html">reflection system</a> to examine and interact with a structures and types at runtime
+<p><strong>Cubos</strong> has a powerful <a href="https://gamedevtecnico.github.io/cubos/docs/group__core-reflection.html">reflection system</a> to examine and interact with a structures and types at runtime
 It works by attaching metadata to types, which we call <em>traits</em>. These traits can be queried at runtime to get information about the type.
 For example, we provide a <code>FieldsTrait</code>, which you can add to a type to expose its fields to the reflection system.</p>
 <p>One thing we were missing was information about inheritance relationships between types.
@@ -207,7 +208,7 @@ the <code>DeltaTime</code> passed, avoiding variance due to different frame rate
 </section>
 <section id="moving-away-from-the-old-serialization-dacops">
 <h4>Moving Away from the Old Serialization <span class="m-text m-dim">(&#64;Dacops)</span></h4>
-<p><a href="https://gamedevtecnico.github.io/cubos/docs/group__core-data-ser.html">Serialization</a> is a crucial part of the game engine that allows for the saving of any CUBOS game components as well as then loading them in.
+<p><a href="https://gamedevtecnico.github.io/cubos/docs/group__core-data-ser.html">Serialization</a> is a crucial part of the game engine that allows for the saving of any Cubos game components as well as then loading them in.
 Previously, serialization was done through a series of functions, both for reading and writing, that could be overloaded for each type.
 On the previous (and first) release, we introduced a reflection system, that allowed for the inspection of types at runtime. This was an essential step to make the inspectors on the editor side work.</p>
 <p>But with this new system, we now had two sources of truth for the types, the reflection system and the serialization system.
@@ -238,7 +239,7 @@ To solve this, we decided to change the serialization system to use the reflecti
 </section>
 <!-- /content -->
       <footer>
-        <p>Posted by <a href="https://gamedevtecnico.github.io/cubos/author/cubos-team.html">CUBOS Team</a> on <time datetime="2024-05-21T10:00:00+01:00">Tue 21 May 2024</time> in <a href="https://gamedevtecnico.github.io/cubos/category/release.html">Release</a>.</p>
+        <p>Posted by <a href="https://gamedevtecnico.github.io/cubos/author/cubos-team.html">Cubos Team</a> on <time datetime="2024-05-21T10:00:00+01:00">Tue 21 May 2024</time> in <a href="https://gamedevtecnico.github.io/cubos/category/release.html">Release</a>.</p>
       </footer>
     </article>
     <nav class="m-navpanel m-col-m-2">
@@ -284,6 +285,7 @@ To solve this, we decided to change the serialization system to use the reflecti
         <ul>
           <li><a href="https://gamedevtecnico.github.io/cubos/feeds/all.atom.xml">Blog Feed</a></li>
           <li><a href="https://github.com/GameDevTecnico/cubos">GitHub</a></li>
+          <li><a href="https://discord.gg/WjTtcNTRqD">Discord</a></li>
           <li><a href="mailto:cubos@gamedev.tecnico.ulisboa.pt">E-mail</a></li>
         </ul>
       </div>
@@ -298,7 +300,7 @@ To solve this, we decided to change the serialization system to use the reflecti
     </div>
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>CUBOS. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+        <p>Cubos. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
       </div>
     </div>
   </div>
