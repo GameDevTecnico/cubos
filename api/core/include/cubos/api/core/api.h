@@ -1,11 +1,11 @@
 /// @file
 /// @brief Macro @ref CUBOS_CORE_C_API.
-/// @ingroup core
+/// @ingroup core-api
 
 #pragma once
 
 /// @brief Macro used to export and import symbols from the library.
-/// @addtogroup core
+/// @addtogroup core-api
 /// @{
 
 #if defined(_WIN32) || defined(_WIN64)

@@ -1,7 +1,6 @@
 # api/core/samples/CMakeLists.txt
 # Core C API samples build configuration
 
-
 # Macro used to reduce the boilerplate code
 macro(make_sample)
     set(oneValueArgs DIR)
