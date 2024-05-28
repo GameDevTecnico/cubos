@@ -8,8 +8,8 @@ option(BUILD_API_ENGINE_SHARED "Build cubos engine c api as shared library?" ON)
 message("# Building engine c api samples: " ${BUILD_API_ENGINE_SAMPLES})
 message("# Building engine c api as shared library: " ${BUILD_API_ENGINE_SHARED})
 
-# Create core c api library
-if(BUILD_CORE_SHARED)
+# Create engine c api library
+if(BUILD_API_ENGINE_SHARED)
     add_library(cubos-api-engine SHARED ${CUBOS_API_ENGINE_SOURCE})
     target_compile_definitions(cubos-api-engine
         PRIVATE -DCUBOS_ENGINE_C_EXPORT
