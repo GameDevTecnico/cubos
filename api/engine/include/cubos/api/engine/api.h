@@ -1,11 +1,11 @@
 /// @file
 /// @brief Macro @ref CUBOS_ENGINE_C_API.
-/// @ingroup engine
+/// @ingroup engine-api
 
 #pragma once
 
 /// @brief Macro used to export and import symbols from the library.
-/// @addtogroup engine
+/// @addtogroup engine-api
 /// @{
 
 #if defined(_WIN32) || defined(_WIN64)

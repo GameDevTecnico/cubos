@@ -2,7 +2,6 @@ set(CUBOS_API_ENGINE_SOURCE
     "src/api.cpp"
 )
 
-
 option(BUILD_API_ENGINE_SAMPLES "Build cubos engine c api samples" OFF)
 option(BUILD_API_ENGINE_SHARED "Build cubos engine c api as shared library?" ON)
 
