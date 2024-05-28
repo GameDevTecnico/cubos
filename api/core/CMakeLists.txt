@@ -9,7 +9,7 @@ set(CUBOS_API_CORE_SOURCE
 )
 
 # Create core c api library
-if(BUILD_CORE_SHARED)
+if(BUILD_API_CORE_SHARED)
     add_library(cubos-api-core SHARED ${CUBOS_API_CORE_SOURCE})
     target_compile_definitions(cubos-api-core
         PRIVATE -DCUBOS_CORE_C_EXPORT
