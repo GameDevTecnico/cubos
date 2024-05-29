@@ -1,6 +1,6 @@
 # Introduction {#mainpage}
 
-@image html "CubosLogoBig.png"
+@image html "CubosLogoDarkMode.png"
 
 ## Voxel based engine
 
