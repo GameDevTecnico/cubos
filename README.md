@@ -2,7 +2,11 @@
 
 <p align="center">
   <a href="https://gamedevtecnico.github.io/cubos">
-    <img src="docs/images/CubosLogoBig.png" alt="Cubos Engine logo">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/images/CubosLogoDarkMode.png">
+      <source media="(prefers-color-scheme: light)" srcset="docs/images/CubosLogoLightMode.png">
+      <img src="docs/images/CubosLogo.png" alt="Cubos Engine logo">
+    </picture>
   </a>
 </p>
 
