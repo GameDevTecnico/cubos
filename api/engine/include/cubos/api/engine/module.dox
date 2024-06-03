@@ -1,5 +1,5 @@
 /// @dir
 /// @brief @ref engine-api module.
 
-/// @defgroup engine-api
+/// @defgroup engine-api Engine API
 /// @brief C API for the @b Cubos engine library.
