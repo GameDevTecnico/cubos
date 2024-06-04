@@ -1,5 +1,5 @@
 /// @dir
 /// @brief @ref core-api module.
 
-/// @defgroup core-api
+/// @defgroup core-api Core API
 /// @brief C API for the @b Cubos core library.
