@@ -168,6 +168,23 @@ auto Cubos::observer(std::string name) -> ObserverBuilder
     return {*this, std::move(name)};
 }
 
+void Cubos::reset()
+{
+    delete mState;
+    mState = nullptr;
+
+    mWorld.reset();
+    mSystemRegistry.reset();
+    mStartupPlanner.clear();
+    mMainPlanner.clear();
+    mInstalledPlugins = {{nullptr, {}}};
+    mTypeToPlugin.clear();
+    mTags.clear();
+
+    this->resource<DeltaTime>();
+    this->resource<ShouldQuit>();
+}
+
 void Cubos::start()
 {
     CUBOS_ASSERT(mState == nullptr, "Cubos has already been started");

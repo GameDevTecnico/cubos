@@ -203,6 +203,11 @@ namespace cubos::core::ecs
         /// @return Builder used to configure the observer.
         ObserverBuilder observer(std::string name);
 
+        /// @brief Resets the application to its initial state.
+        ///
+        /// Equivalent to constructing a new Cubos object.
+        void reset();
+
         /// @brief Runs the application's startup systems.
         void start();
 

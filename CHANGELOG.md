@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - UI canvas, elements, and color rects. (#1116, **@DiogoMendonc-a**)
 - Implemented file-based logging (#1154, **@roby2014**).
 - Start and update methods to the Cubos class (#1213, **@RiscadoA**).
+- Reset method to the Cubos class (#1225, **@RiscadoA**).
 
 ## [v0.2.0] - 2024-05-07
 
