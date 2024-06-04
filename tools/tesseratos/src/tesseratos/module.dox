@@ -1,0 +1,13 @@
+/// @dir
+/// @brief @ref tesseratos module.
+
+/// @namespace tesseratos
+/// @brief @ref tesseratos namespace.
+
+namespace tesseratos
+{
+    /// @defgroup tesseratos Tesseratos
+    /// @brief @b Tesseratos application.
+    ///
+    /// @b Tesseratos is the @b Cubos editor application. It is itself made with @b Cubos.
+} // namespace tesseratos

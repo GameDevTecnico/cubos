@@ -1,9 +1,10 @@
+#include "plugin.hpp"
+
 #include <imgui.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
 
-#include <tesseratos/play_pause/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../toolbox/plugin.hpp"
 
 using cubos::core::reflection::reflect;
 

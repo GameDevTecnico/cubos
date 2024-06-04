@@ -1,12 +1,13 @@
+#include "plugin.hpp"
+
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
-#include <tesseratos/collider_gizmos/plugin.hpp>
-#include <tesseratos/entity_selector/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../entity_selector/plugin.hpp"
+#include "../toolbox/plugin.hpp"
 
 using namespace cubos::engine;
 

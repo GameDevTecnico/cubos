@@ -74,7 +74,6 @@ The following is a list of all the options available to configure the engine:
 | `BUILD_CORE_TESTS`         | Build **Cubos** `core` tests?        |
 | `BUILD_ENGINE_SAMPLES`     | Build **Cubos** `engine` samples?    |
 | `BUILD_ENGINE_TESTS`       | Build **Cubos** `engine` tests?      |
-| `BUILD_TESSERATOS_SAMPLES` | Build **TESSERATOS** samples?        |
 | `BUILD_DOCUMENTATION`      | Build the documentation?             |
 | `ENABLE_COVERAGE`          | Enable code coverage? (GCC only)     |
 | `FIX_CLANG_TIDY_ERRORS`    | Fix clang-tidy errors automatically? |
@@ -87,9 +86,9 @@ In *Visual Studio Code*, the CMake extension allows you to set the *debug* targe
 
 ### Examples
 
-Both `core`, `engine` and `tesseratos` contain examples which you can run to check if
+Both `core` and `engine` contain examples which you can run to check if
 things are running correctly. To build them, you must enable the
-`BUILD_CORE_SAMPLES`, `BUILD_ENGINE_SAMPLES` and/or `BUILD_TESSERATOS_SAMPLES` options.
+`BUILD_CORE_SAMPLES` and/or `BUILD_ENGINE_SAMPLES` options.
 This will show new multiple targets, one for each example.
 
 ### Testing

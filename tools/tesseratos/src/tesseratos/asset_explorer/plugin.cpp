@@ -1,11 +1,12 @@
+#include "plugin.hpp"
+
 #include <imgui.h>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 
-#include <tesseratos/asset_explorer/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../toolbox/plugin.hpp"
 
 using cubos::core::ecs::EventWriter;
 

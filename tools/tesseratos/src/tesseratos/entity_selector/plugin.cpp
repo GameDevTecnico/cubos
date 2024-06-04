@@ -1,3 +1,5 @@
+#include "plugin.hpp"
+
 #include <imgui.h>
 
 #include <cubos/core/ecs/reflection.hpp>
@@ -8,8 +10,6 @@
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/target/target.hpp>
 #include <cubos/engine/window/plugin.hpp>
-
-#include <tesseratos/entity_selector/plugin.hpp>
 
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
