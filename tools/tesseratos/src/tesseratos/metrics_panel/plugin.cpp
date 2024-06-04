@@ -1,3 +1,4 @@
+#include "plugin.hpp"
 #include <algorithm>
 #include <numeric> //Included for the accumulated/max_element funcs
 
@@ -6,8 +7,7 @@
 
 #include <cubos/engine/imgui/plugin.hpp>
 
-#include <tesseratos/metrics_panel/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../toolbox/plugin.hpp"
 
 using cubos::engine::Cubos;
 using cubos::engine::DeltaTime;

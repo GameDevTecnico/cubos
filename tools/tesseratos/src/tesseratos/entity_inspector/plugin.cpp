@@ -1,3 +1,5 @@
+#include "plugin.hpp"
+
 #include <imgui.h>
 
 #include <cubos/core/ecs/entity/entity.hpp>
@@ -7,9 +9,8 @@
 #include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 
-#include <tesseratos/entity_inspector/plugin.hpp>
-#include <tesseratos/entity_selector/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../entity_selector/plugin.hpp"
+#include "../toolbox/plugin.hpp"
 
 using cubos::core::ecs::Name;
 using cubos::core::ecs::World;

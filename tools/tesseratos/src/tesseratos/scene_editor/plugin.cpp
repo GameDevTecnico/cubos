@@ -1,3 +1,4 @@
+#include "plugin.hpp"
 #include <memory>
 #include <unordered_map>
 #include <vector>
@@ -13,11 +14,10 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
 
-#include <tesseratos/asset_explorer/plugin.hpp>
-#include <tesseratos/asset_explorer/popup.hpp>
-#include <tesseratos/entity_selector/plugin.hpp>
-#include <tesseratos/scene_editor/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../asset_explorer/plugin.hpp"
+#include "../asset_explorer/popup.hpp"
+#include "../entity_selector/plugin.hpp"
+#include "../toolbox/plugin.hpp"
 
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::convertEntities;

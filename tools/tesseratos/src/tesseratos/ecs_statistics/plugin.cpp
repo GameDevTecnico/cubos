@@ -1,3 +1,5 @@
+#include "plugin.hpp"
+
 #include <imgui.h>
 
 #include <cubos/core/ecs/name.hpp>
@@ -5,9 +7,8 @@
 #include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 
-#include <tesseratos/ecs_statistics/plugin.hpp>
-#include <tesseratos/entity_selector/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../entity_selector/plugin.hpp"
+#include "../toolbox/plugin.hpp"
 
 using cubos::core::ecs::ArchetypeId;
 using cubos::core::ecs::ColumnId;
