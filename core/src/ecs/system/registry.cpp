@@ -33,6 +33,24 @@ ConditionId SystemRegistry::add(std::string name, System<bool> condition)
     return {mConditions.size() - 1};
 }
 
+void SystemRegistry::reset()
+{
+    for (auto* system : mSystems)
+    {
+        delete system;
+    }
+
+    for (auto* condition : mConditions)
+    {
+        delete condition;
+    }
+
+    mSystems.clear();
+    mConditions.clear();
+    mSystemNames.clear();
+    mConditionNames.clear();
+}
+
 void SystemRegistry::remove(SystemId id)
 {
     delete mSystems[id.inner];
