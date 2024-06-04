@@ -110,6 +110,15 @@ namespace cubos::core::ecs
         /// @return Cubos.
         Cubos& depends(Plugin plugin);
 
+        /// @brief Marks the target plugin so that when it is added, it is replaced by the given plugin.
+        ///
+        /// Aborts if the target plugin has already been added.
+        ///
+        /// @param target Target plugin.
+        /// @param plugin Plugin.
+        /// @return Cubos.
+        Cubos& inject(Plugin target, Plugin plugin);
+
         /// @brief Registers a new resource type, without initializing it.
         /// @param type Type.
         /// @return Cubos.
@@ -308,6 +317,9 @@ namespace cubos::core::ecs
 
         /// @brief Maps installed plugins to their information.
         std::unordered_map<Plugin, PluginInfo> mInstalledPlugins{{nullptr, {}}};
+
+        /// @brief Maps plugins to their injected counterparts.
+        std::unordered_map<Plugin, Plugin> mInjectedPlugins;
 
         /// @brief Maps registered types to the plugin they were registered in.
         memory::TypeMap<Plugin> mTypeToPlugin;
