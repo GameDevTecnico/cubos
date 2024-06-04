@@ -51,6 +51,12 @@ namespace cubos::core::ecs
         /// @brief Forbid copy assignment.
         SystemRegistry& operator=(const SystemRegistry&) = delete;
 
+        /// @brief Removes all systems and conditions.
+        ///
+        /// Previously returned identifiers become invalid.
+        /// This operation is equivalent to constructing a new registry.
+        void reset();
+
         /// @brief Registers the given system.
         /// @param name Debug name.
         /// @param system System.
