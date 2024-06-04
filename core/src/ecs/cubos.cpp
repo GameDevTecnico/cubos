@@ -34,6 +34,20 @@ CUBOS_REFLECT_IMPL(Arguments)
     return TypeBuilder<Arguments>("cubos::core::ecs::Arguments").withField("value", &Arguments::value).build();
 }
 
+struct Cubos::State
+{
+    CommandBuffer cmdBuffer;
+    PluginQueue pluginQueue;
+    Opt<Schedule> startupSchedule;
+    Opt<Schedule> mainSchedule;
+    std::chrono::steady_clock::time_point lastUpdateTime;
+};
+
+Cubos::~Cubos()
+{
+    delete mState;
+}
+
 Cubos::Cubos()
     : Cubos(1, nullptr)
 {
@@ -154,72 +168,93 @@ auto Cubos::observer(std::string name) -> ObserverBuilder
     return {*this, std::move(name)};
 }
 
-void Cubos::run()
+void Cubos::start()
 {
+    CUBOS_ASSERT(mState == nullptr, "Cubos has already been started");
+    mState = new State{
+        .cmdBuffer = {mWorld},
+        .pluginQueue = {},
+        .startupSchedule = {},
+        .mainSchedule = {},
+        .lastUpdateTime = {},
+    };
+
     // Generate schedules.
     auto startupSchedule = mStartupPlanner.build();
     CUBOS_ASSERT(startupSchedule.contains(), "Couldn't build initial startup schedule");
+    mState->startupSchedule.replace(startupSchedule.value());
     CUBOS_DEBUG("Built base startup schedule:\n{}", '\n' + startupSchedule->debug(mSystemRegistry) + '\n');
     mStartupPlanner.clear();
 
     auto mainSchedule = mMainPlanner.build();
     CUBOS_ASSERT(mainSchedule.contains(), "Couldn't build initial main schedule");
-    CUBOS_DEBUG("Built main schedule:\n{}", '\n' + mainSchedule->debug(mSystemRegistry) + '\n');
+    mState->mainSchedule.replace(mainSchedule.value());
+    CUBOS_DEBUG("Built base main schedule:\n{}", '\n' + mState->mainSchedule->debug(mSystemRegistry) + '\n');
 
-    // Prepare system context.
-    CommandBuffer cmdBuffer(mWorld);
-    PluginQueue pluginQueue{};
-    SystemContext ctx{.cmdBuffer = cmdBuffer, .pluginQueue = &pluginQueue};
+    // Run startup systems.
+    SystemContext ctx{.cmdBuffer = mState->cmdBuffer, .pluginQueue = &mState->pluginQueue};
+    mState->startupSchedule->run(mSystemRegistry, ctx);
 
-    // Run base startup systems.
-    startupSchedule->run(mSystemRegistry, ctx);
+    mState->lastUpdateTime = std::chrono::steady_clock::now();
+}
 
-    // Repeat while the quit flag isn't set.
-    auto currentTime = std::chrono::steady_clock::now();
-    auto previousTime = std::chrono::steady_clock::now();
-    do
+bool Cubos::update()
+{
+    CUBOS_ASSERT(mState != nullptr, "Cubos hasn't been started yet");
+
+    SystemContext ctx{.cmdBuffer = mState->cmdBuffer, .pluginQueue = &mState->pluginQueue};
+
+    // Remove and add plugins.
+    for (auto plugin : mState->pluginQueue.toRemove)
     {
-        // Remove and add plugins.
-        for (auto plugin : pluginQueue.toRemove)
-        {
-            this->uninstall(plugin);
-        }
-        for (auto plugin : pluginQueue.toAdd)
-        {
-            this->install(plugin);
-        }
+        this->uninstall(plugin);
+    }
+    for (auto plugin : mState->pluginQueue.toAdd)
+    {
+        this->install(plugin);
+    }
 
-        // If any plugins were added, recompile the system execution chains, and rerun the startup systems.
-        if (!pluginQueue.toAdd.empty() || !pluginQueue.toRemove.empty())
-        {
-            // Clear the plugin queue.
-            pluginQueue.toRemove.clear();
-            pluginQueue.toAdd.clear();
+    // If any plugins were added, recompile the system execution chains, and rerun the startup systems.
+    if (!mState->pluginQueue.toAdd.empty() || !mState->pluginQueue.toRemove.empty())
+    {
+        // Clear the plugin queue.
+        mState->pluginQueue.toRemove.clear();
+        mState->pluginQueue.toAdd.clear();
 
-            // Build new schedules.
-            auto newStartupSchedule = mStartupPlanner.build();
-            CUBOS_ASSERT(newStartupSchedule.contains(), "Couldn't build updated startup schedule");
-            startupSchedule.replace(newStartupSchedule.value());
-            CUBOS_DEBUG("Built new startup schedule:\n{}", '\n' + startupSchedule->debug(mSystemRegistry) + '\n');
-            mStartupPlanner.clear();
+        // Build new schedules.
+        auto newStartupSchedule = mStartupPlanner.build();
+        CUBOS_ASSERT(newStartupSchedule.contains(), "Couldn't build updated startup schedule");
+        mState->startupSchedule.replace(newStartupSchedule.value());
+        CUBOS_DEBUG("Built new startup schedule:\n{}", '\n' + mState->startupSchedule->debug(mSystemRegistry) + '\n');
+        mStartupPlanner.clear();
 
-            auto newMainSchedule = mMainPlanner.build();
-            CUBOS_ASSERT(newMainSchedule.contains(), "Couldn't build updated main schedule");
-            mainSchedule.replace(newMainSchedule.value());
-            CUBOS_DEBUG("Built new main schedule:\n{}", '\n' + mainSchedule->debug(mSystemRegistry) + '\n');
+        auto newMainSchedule = mMainPlanner.build();
+        CUBOS_ASSERT(newMainSchedule.contains(), "Couldn't build updated main schedule");
+        mState->mainSchedule.replace(newMainSchedule.value());
+        CUBOS_DEBUG("Built new main schedule:\n{}", '\n' + mState->mainSchedule->debug(mSystemRegistry) + '\n');
 
-            // Run the newly installed startup systems.
-            startupSchedule->run(mSystemRegistry, ctx);
-        }
+        // Run the newly installed startup systems.
+        mState->startupSchedule->run(mSystemRegistry, ctx);
+    }
 
-        // Run main systems.
-        mainSchedule->run(mSystemRegistry, ctx);
+    // Run main systems.
+    mState->mainSchedule->run(mSystemRegistry, ctx);
 
-        // Update delta time.
-        currentTime = std::chrono::steady_clock::now();
-        mWorld.resource<DeltaTime>().unscaledValue = std::chrono::duration<float>(currentTime - previousTime).count();
-        previousTime = currentTime;
-    } while (!mWorld.resource<ShouldQuit>().value);
+    // Update delta time.
+    auto currentTime = std::chrono::steady_clock::now();
+    mWorld.resource<DeltaTime>().unscaledValue =
+        std::chrono::duration<float>(currentTime - mState->lastUpdateTime).count();
+    mState->lastUpdateTime = currentTime;
+
+    return !mWorld.resource<ShouldQuit>().value;
+}
+
+void Cubos::run()
+{
+    this->start();
+    while (this->update())
+    {
+    }
 }
 
 bool Cubos::isRegistered(const reflection::Type& type) const
