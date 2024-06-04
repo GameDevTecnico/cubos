@@ -332,4 +332,33 @@ TEST_CASE("ecs::Cubos")
 
         cubos.run();
     }
+
+    SUBCASE("reset allows adding resources again")
+    {
+        cubos.resource<int>();
+        cubos.reset();
+        cubos.resource<int>(); // Would crash without the reset.
+    }
+
+    SUBCASE("reset allows adding components again")
+    {
+        cubos.component<int>();
+        cubos.reset();
+        cubos.component<int>(); // Would crash without the reset.
+    }
+
+    SUBCASE("reset allows adding relations again")
+    {
+        cubos.relation<int>();
+        cubos.reset();
+        cubos.relation<int>(); // Would crash without the reset.
+    }
+
+    SUBCASE("reset allows adding plugins again")
+    {
+        auto plugin = [](Cubos&) {};
+        cubos.plugin(plugin);
+        cubos.reset();
+        cubos.plugin(plugin); // Would crash without the reset.
+    }
 }
