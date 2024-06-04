@@ -24,6 +24,21 @@ TEST_CASE("ecs::Cubos")
         CHECK(count == 1);
     }
 
+    SUBCASE("plugin is injected")
+    {
+        static int count = 1;
+        auto target = [](Cubos&) { count *= 2; };
+        auto plugin = [](Cubos&) { count *= 3; };
+
+        CHECK(count == 1);
+        cubos.inject(target, plugin);
+        CHECK(count == 1);
+        cubos.plugin(target);
+        CHECK(count == 3);
+        cubos.depends(target);
+        CHECK(count == 3);
+    }
+
     SUBCASE("systems are called")
     {
         CUBOS_DEFINE_TAG(middle);
