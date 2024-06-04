@@ -14,6 +14,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Identifies a data type registered in the world.
+    /// @ingroup core-ecs
     struct CUBOS_CORE_API DataTypeId
     {
         uint32_t inner; ///< Data type identifier.
@@ -27,12 +28,14 @@ namespace cubos::core::ecs
     };
 
     /// @brief Hash functor for @ref DataTypeId.
+    /// @ingroup core-ecs
     struct CUBOS_CORE_API DataTypeIdHash
     {
         std::size_t operator()(const DataTypeId& id) const;
     };
 
     /// @brief Registry of all data types used in an ECS world.
+    /// @ingroup core-ecs
     class CUBOS_CORE_API Types final
     {
     public:

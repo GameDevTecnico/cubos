@@ -14,6 +14,7 @@ namespace cubos::core::ecs
     class Cubos;
 
     /// @brief Function pointer type representing a plugin.
+    /// @ingroup core-ecs
     using Plugin = void (*)(Cubos&);
 
     /// @brief Stores plugin operations to be executed later.

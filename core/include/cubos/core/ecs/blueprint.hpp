@@ -20,6 +20,7 @@ namespace cubos::core::ecs
     /// @param map Map of old entities to new entities.
     /// @param type Value type.
     /// @param value Value.
+    /// @ingroup core-ecs
     CUBOS_CORE_API void convertEntities(const std::unordered_map<Entity, Entity, EntityHash>& map,
                                         const reflection::Type& type, void* value);
 

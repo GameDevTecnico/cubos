@@ -11,6 +11,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Component which stores the name of an entity.
+    /// @ingroup core-ecs
     struct CUBOS_CORE_API Name
     {
         CUBOS_REFLECT;
