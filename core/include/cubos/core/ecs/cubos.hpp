@@ -78,7 +78,7 @@ namespace cubos::core::ecs
         /// @brief Used to create new observers.
         class ObserverBuilder;
 
-        ~Cubos() = default;
+        ~Cubos();
 
         /// @brief Constructs an empty application without arguments.
         Cubos();
@@ -203,10 +203,16 @@ namespace cubos::core::ecs
         /// @return Builder used to configure the observer.
         ObserverBuilder observer(std::string name);
 
-        /// @brief Runs the engine.
+        /// @brief Runs the application's startup systems.
+        void start();
+
+        /// @brief Runs the application's main systems.
+        /// @return Whether the application should continue running, based on the @ref ShouldQuit resource.
+        bool update();
+
+        /// @brief Runs the application's main loop.
         ///
-        /// Initially, dispatches all of the startup systems.
-        /// Then, while @ref ShouldQuit is false, dispatches all other systems.
+        /// Equivalent to calling @ref start() followed by @ref update() until it returns false.
         void run();
 
     private:
@@ -248,6 +254,9 @@ namespace cubos::core::ecs
             Plugin plugin;
         };
 
+        /// @brief Stores runtime application state.
+        struct State;
+
         /// @brief Checks if the given type was registered by the current plugin, its dependencies or sub-plugins.
         /// @param type Type.
         /// @return Whether the type was registered.
@@ -279,6 +288,7 @@ namespace cubos::core::ecs
 
         World mWorld;
         SystemRegistry mSystemRegistry;
+        State* mState{nullptr};
 
         /// @brief Planner for systems which run before the main loop starts.
         Planner mStartupPlanner;
