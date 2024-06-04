@@ -16,6 +16,13 @@ std::size_t DataTypeIdHash::operator()(const DataTypeId& id) const
     return id.inner;
 }
 
+void Types::reset()
+{
+    mTypes.clear();
+    mNames.clear();
+    mEntries.clear();
+}
+
 void Types::addResource(const reflection::Type& type)
 {
     this->add(type, Kind::Resource);

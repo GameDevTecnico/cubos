@@ -21,6 +21,20 @@ World::World()
     this->registerComponent<Name>();
 }
 
+void World::reset()
+{
+    mTypes.reset();
+    mEntityPool.reset();
+    mArchetypeGraph.reset();
+    mTables.reset();
+    mResources.clear();
+
+    delete mObservers;
+    mObservers = new Observers{};
+
+    this->registerComponent<Name>();
+}
+
 void World::registerResource(const reflection::Type& type)
 {
     CUBOS_TRACE("Registered resource {}", type.name());

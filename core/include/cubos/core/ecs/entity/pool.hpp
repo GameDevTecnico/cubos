@@ -19,6 +19,11 @@ namespace cubos::core::ecs
     class CUBOS_CORE_API EntityPool final
     {
     public:
+        /// @brief Resets the pool to its initial state.
+        ///
+        /// Previously returned entity identifiers become invalid, as they might be reused.
+        void reset();
+
         /// @brief Creates a new entity on the given archetype.
         /// @param archetype Archetype identifier.
         /// @return Entity.

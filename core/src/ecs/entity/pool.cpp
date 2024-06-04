@@ -4,6 +4,12 @@ using cubos::core::ecs::ArchetypeId;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::EntityPool;
 
+void EntityPool::reset()
+{
+    mEntries.clear();
+    mFree = std::queue<uint32_t>();
+}
+
 Entity EntityPool::create(ArchetypeId archetype)
 {
     uint32_t index;

@@ -23,6 +23,11 @@ namespace cubos::core::ecs
         Tables& operator=(const Tables&) = delete;
         /// @}
 
+        /// @brief Resets the registry to its initial state.
+        ///
+        /// Previously returned identifiers become invalid, as they might be reused.
+        void reset();
+
         /// @brief Gets a reference to the dense table registry.
         /// @return Reference to dense table registry.
         DenseTableRegistry& dense();

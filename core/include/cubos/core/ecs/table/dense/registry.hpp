@@ -26,6 +26,11 @@ namespace cubos::core::ecs
         DenseTableRegistry& operator=(const DenseTableRegistry&) = delete;
         /// @}
 
+        /// @brief Resets the registry to its initial state.
+        ///
+        /// Previously returned identifiers become invalid, as they might be reused.
+        void reset();
+
         /// @brief Checks if the given archetype has a dense table.
         /// @param archetype Archetype identifier.
         /// @return WHether it contains a table or not.
