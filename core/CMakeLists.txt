@@ -128,6 +128,7 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/plugin_queue.cpp"
 	"src/ecs/types.cpp"
 	"src/ecs/cubos.cpp"
+	"src/ecs/dynamic.cpp"
 
     "src/geom/box.cpp"
     "src/geom/capsule.cpp"
