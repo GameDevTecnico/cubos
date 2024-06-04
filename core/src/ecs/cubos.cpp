@@ -64,6 +64,11 @@ Cubos::Cubos(int argc, char** argv)
 
 Cubos& Cubos::plugin(Plugin plugin)
 {
+    if (mInjectedPlugins.contains(plugin))
+    {
+        plugin = mInjectedPlugins.at(plugin);
+    }
+
     CUBOS_ASSERT(!mInstalledPlugins.contains(plugin), "Plugin has already been added by another plugin");
 
     mInstalledPlugins.at(mPluginStack.back()).subPlugins.emplace(plugin);
@@ -78,11 +83,26 @@ Cubos& Cubos::plugin(Plugin plugin)
 
 Cubos& Cubos::depends(Plugin plugin)
 {
+    if (mInjectedPlugins.contains(plugin))
+    {
+        plugin = mInjectedPlugins.at(plugin);
+    }
+
     CUBOS_ASSERT(mInstalledPlugins.contains(plugin),
                  "Plugin dependency wasn't fulfilled. Did you forget to add a plugin?");
 
     mInstalledPlugins.at(plugin).dependentCount += 1;
     mInstalledPlugins.at(mPluginStack.back()).dependencies.emplace(plugin);
+
+    return *this;
+}
+
+Cubos& Cubos::inject(Plugin target, Plugin plugin)
+{
+    CUBOS_ASSERT(!mInstalledPlugins.contains(target), "Target plugin has already been added");
+    CUBOS_ASSERT(!mInjectedPlugins.contains(target), "Target plugin has already been injected into");
+
+    mInjectedPlugins.insert({target, plugin});
 
     return *this;
 }
