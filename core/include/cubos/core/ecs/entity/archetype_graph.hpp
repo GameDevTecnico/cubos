@@ -31,6 +31,11 @@ namespace cubos::core::ecs
         /// @brief Constructs.
         ArchetypeGraph();
 
+        /// @brief Resets the graph to its initial state.
+        ///
+        /// Previously returned identifiers become invalid, as they might be reused.
+        void reset();
+
         /// @brief Checks if the given @p archetype contains the column type with the given @p id.
         /// @param archetype Archetype.
         /// @param id Column type identifier.

@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/world.hpp>
@@ -19,6 +21,14 @@ TEST_CASE("ecs::World")
     const World& constWorld = world;
 
     setupWorld(world);
+
+    if (rand() % 2 == 0)
+    {
+        INFO("World was reset");
+        world.create(); // Create an entity because why not.
+        world.reset();
+        setupWorld(world);
+    }
 
     SUBCASE("create an entity and then destroy it")
     {

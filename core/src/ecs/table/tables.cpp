@@ -4,6 +4,12 @@ using cubos::core::ecs::DenseTableRegistry;
 using cubos::core::ecs::SparseRelationTableRegistry;
 using cubos::core::ecs::Tables;
 
+void Tables::reset()
+{
+    mDense.reset();
+    mSparseRelation.reset();
+}
+
 DenseTableRegistry& Tables::dense()
 {
     return mDense;

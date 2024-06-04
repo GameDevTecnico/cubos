@@ -9,6 +9,12 @@ DenseTableRegistry::DenseTableRegistry()
     mTables.emplace(std::piecewise_construct, std::forward_as_tuple(0), std::forward_as_tuple());
 }
 
+void DenseTableRegistry::reset()
+{
+    mTables.clear();
+    mTables.emplace(std::piecewise_construct, std::forward_as_tuple(0), std::forward_as_tuple());
+}
+
 bool DenseTableRegistry::contains(ArchetypeId archetype) const
 {
     return mTables.contains(archetype.inner);
