@@ -69,6 +69,11 @@ namespace cubos::core::ecs
         SparseRelationTableRegistry& operator=(const SparseRelationTableRegistry&) = delete;
         /// @}
 
+        /// @brief Resets the registry to its initial state.
+        ///
+        /// Previously returned identifiers become invalid, as they might be reused.
+        void reset();
+
         /// @brief Checks if there's a table with the given identifier.
         /// @param id Identifier.
         /// @return Whether it contains the table or not.

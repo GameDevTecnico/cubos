@@ -36,6 +36,11 @@ namespace cubos::core::ecs
     class CUBOS_CORE_API Types final
     {
     public:
+        /// @brief Resets the registry to its initial state.
+        ///
+        /// Previously returned identifiers become invalid, as they might be reused.
+        void reset();
+
         /// @brief Registers a resource type.
         /// @param type Resource type.
         void addResource(const reflection::Type& type);

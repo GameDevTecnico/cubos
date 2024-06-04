@@ -52,6 +52,12 @@ namespace cubos::core::ecs
         /// @brief Used to immutably access the relations of an entity.
         class ConstRelations;
 
+        /// @brief Resets the world to its initial state.
+        ///
+        /// Equivalent to constructing a new world.
+        /// Previously returned entity identifiers become invalid, as they might be reused.
+        void reset();
+
         /// @brief Registers a resource type.
         /// @param type Resource type.
         void registerResource(const reflection::Type& type);

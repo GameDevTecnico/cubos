@@ -16,6 +16,13 @@ SparseRelationTableRegistry::SparseRelationTableRegistry()
     mEmptyTypeIndex = new TypeIndex();
 }
 
+void SparseRelationTableRegistry::reset()
+{
+    mTables.clear();
+    mTypeIndices.clear();
+    mIds.clear();
+}
+
 bool SparseRelationTableRegistry::contains(SparseRelationTableId id) const
 {
     return mTables.contains(id);

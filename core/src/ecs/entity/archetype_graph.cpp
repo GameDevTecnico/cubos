@@ -23,6 +23,12 @@ ArchetypeGraph::ArchetypeGraph()
     mNodes.emplace_back();
 }
 
+void ArchetypeGraph::reset()
+{
+    mNodes.clear();
+    mNodes.emplace_back();
+}
+
 bool ArchetypeGraph::contains(ArchetypeId archetype, ColumnId id) const
 {
     CUBOS_ASSERT(mNodes.size() > archetype.inner);
