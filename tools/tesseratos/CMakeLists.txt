@@ -1,10 +1,8 @@
 # tools/tesseratos/CMakeLists.txt
 # Tesseratos build configuration
 
-option(BUILD_TESSERATOS_SAMPLES "Build tesseratos samples" OFF)
-
 set(TESSERATOS_SOURCE
-	"src/tesseratos/plugin.cpp"
+	"src/tesseratos/main.cpp"
 	"src/tesseratos/asset_explorer/plugin.cpp"
 	"src/tesseratos/asset_explorer/popup.cpp"
 	"src/tesseratos/settings_inspector/plugin.cpp"
@@ -22,12 +20,7 @@ set(TESSERATOS_SOURCE
 	"src/tesseratos/ecs_statistics/plugin.cpp"
 )
 
-add_library(tesseratos ${TESSERATOS_SOURCE})
-target_include_directories(tesseratos PUBLIC "include")
-target_link_libraries(tesseratos PUBLIC cubos-core cubos-engine)
+add_executable(tesseratos ${TESSERATOS_SOURCE})
+target_link_libraries(tesseratos PRIVATE cubos-core cubos-engine)
+target_compile_definitions(tesseratos PRIVATE TESSERATOS_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
 cubos_common_target_options(tesseratos)
-
-# Add tesseratos samples
-if(BUILD_TESSERATOS_SAMPLES)
-	add_subdirectory(samples)
-endif()

@@ -1,3 +1,5 @@
+#include "plugin.hpp"
+
 #include <imgui.h>
 
 #include <cubos/core/reflection/external/string.hpp>
@@ -8,8 +10,7 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 
-#include <tesseratos/settings_inspector/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../toolbox/plugin.hpp"
 
 using cubos::core::reflection::reflect;
 

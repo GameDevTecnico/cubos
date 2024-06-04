@@ -1,3 +1,4 @@
+#include "plugin.hpp"
 #include <unordered_set>
 
 #include <imgui.h>
@@ -13,8 +14,7 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
-#include <tesseratos/debug_camera/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
+#include "../toolbox/plugin.hpp"
 
 using namespace cubos::core::io;
 

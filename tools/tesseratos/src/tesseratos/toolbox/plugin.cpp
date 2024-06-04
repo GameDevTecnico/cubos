@@ -1,10 +1,10 @@
+#include "plugin.hpp"
+
 #include <imgui.h>
 
 #include <cubos/core/ecs/reflection.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
-
-#include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::EventWriter;
 

@@ -1,3 +1,5 @@
+#include "plugin.hpp"
+
 #include <imgui.h>
 
 #include <cubos/core/log.hpp>
@@ -8,9 +10,8 @@
 #include <cubos/engine/render/voxels/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
-#include <tesseratos/asset_explorer/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
-#include <tesseratos/voxel_palette_editor/plugin.hpp>
+#include "../asset_explorer/plugin.hpp"
+#include "../toolbox/plugin.hpp"
 
 using cubos::core::ecs::EventReader;
 
