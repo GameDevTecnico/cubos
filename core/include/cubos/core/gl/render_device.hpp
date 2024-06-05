@@ -77,6 +77,8 @@ namespace cubos::core::gl
         class ShaderStage;
         class ShaderPipeline;
         class ShaderBindingPoint;
+
+        class Timer;
     } // namespace impl
 
     /// @brief Handle to a framebuffer.
@@ -173,6 +175,11 @@ namespace cubos::core::gl
     /// @see @ref impl::ShaderBindingPoint - shader binding point interface.
     /// @ingroup core-gl
     using ShaderBindingPoint = impl::ShaderBindingPoint*;
+
+    /// @brief Handle to a timer.
+    /// @see @ref impl::Timer - timer interface.
+    /// @ingroup core-gl
+    using Timer = std::shared_ptr<impl::Timer>;
 
     /// @brief Render device properties that can be queried at runtime.
     /// @see @ref RenderDevice::getProperty().
@@ -876,6 +883,10 @@ namespace cubos::core::gl
         /// @param pipeline Shader pipeline handle.
         virtual void setShaderPipeline(ShaderPipeline pipeline) = 0;
 
+        /// @brief Creates a new timer.
+        /// @return Timer handle, or nullptr on failure.
+        virtual Timer createTimer() = 0;
+
         /// @brief Clears the color buffer bit on the current framebuffer to a specific color.
         /// @param r Red component.
         /// @param g Green component.
@@ -1453,6 +1464,34 @@ namespace cubos::core::gl
 
         protected:
             ShaderBindingPoint() = default;
+        };
+
+        /// @brief Abstract timer.
+        class CUBOS_CORE_API Timer
+        {
+        public:
+            virtual ~Timer() = default;
+
+            /// @brief Starts a region to be timed.
+            virtual void begin() = 0;
+
+            /// @brief Ends a region.
+            virtual void end() = 0;
+
+            /// @brief Checks if result is available.
+            /// @return Whether the result is available.
+            virtual bool done() = 0;
+
+            /// @brief Gets the result, in nanoseconds.
+            ///
+            /// Blocks until a result is available.
+            ///
+            /// @return Time spent in region, in nanoseconds, or -1 if an error
+            /// occurred while querying the time.
+            virtual int result() = 0;
+
+        protected:
+            Timer() = default;
         };
     } // namespace impl
 
