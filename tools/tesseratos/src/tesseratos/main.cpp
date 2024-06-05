@@ -12,6 +12,7 @@
 #include "ecs_statistics/plugin.hpp"
 #include "entity_inspector/plugin.hpp"
 #include "entity_selector/plugin.hpp"
+#include "game/plugin.hpp"
 #include "metrics_panel/plugin.hpp"
 #include "play_pause/plugin.hpp"
 #include "scene_editor/plugin.hpp"
@@ -38,22 +39,26 @@ int main(int argc, char** argv)
     // The third block contains plugins which depend on plugins from the first and second blocks.
     // And so on.
 
+    // TODO: Go through each of the commented plugins below, convert them to use the new Game resource, and uncomment
+    // them.
+
+    cubos.plugin(gamePlugin);
     cubos.plugin(toolboxPlugin);
-    cubos.plugin(entitySelectorPlugin);
+    //  cubos.plugin(entitySelectorPlugin);
 
     cubos.plugin(assetExplorerPlugin);
-    cubos.plugin(entityInspectorPlugin);
-    cubos.plugin(worldInspectorPlugin);
-    cubos.plugin(debugCameraPlugin);
-    cubos.plugin(settingsInspectorPlugin);
-    cubos.plugin(metricsPanelPlugin);
-    cubos.plugin(colliderGizmosPlugin);
-    cubos.plugin(transformGizmoPlugin);
-    cubos.plugin(playPausePlugin);
-    cubos.plugin(ecsStatisticsPlugin);
+    // cubos.plugin(entityInspectorPlugin);
+    // cubos.plugin(worldInspectorPlugin);
+    // cubos.plugin(debugCameraPlugin);
+    // cubos.plugin(settingsInspectorPlugin);
+    // cubos.plugin(metricsPanelPlugin);
+    // cubos.plugin(colliderGizmosPlugin);
+    // cubos.plugin(transformGizmoPlugin);
+    // cubos.plugin(playPausePlugin);
+    // cubos.plugin(ecsStatisticsPlugin);
 
-    cubos.plugin(sceneEditorPlugin);
-    cubos.plugin(voxelPaletteEditorPlugin);
+    // cubos.plugin(sceneEditorPlugin);
+    // cubos.plugin(voxelPaletteEditorPlugin);
 
     cubos.startupSystem("configure Assets plugin").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);
