@@ -3,6 +3,9 @@
 
 set(TESSERATOS_SOURCE
 	"src/tesseratos/main.cpp"
+	"src/tesseratos/menu_bar/plugin.cpp"
+	"src/tesseratos/menu_bar/item.cpp"
+	"src/tesseratos/menu_bar/selected.cpp"
 	"src/tesseratos/asset_explorer/plugin.cpp"
 	"src/tesseratos/asset_explorer/popup.cpp"
 	"src/tesseratos/settings_inspector/plugin.cpp"

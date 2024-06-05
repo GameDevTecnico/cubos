@@ -4,6 +4,7 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
+#include <cubos/engine/transform/child_of.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
 #include "asset_explorer/plugin.hpp"
@@ -13,6 +14,7 @@
 #include "ecs_statistics/plugin.hpp"
 #include "entity_inspector/plugin.hpp"
 #include "entity_selector/plugin.hpp"
+#include "menu_bar/plugin.hpp"
 #include "metrics_panel/plugin.hpp"
 #include "play_pause/plugin.hpp"
 #include "scene_editor/plugin.hpp"
@@ -41,6 +43,7 @@ int main(int argc, char** argv)
 
     cubos.plugin(toolboxPlugin);
     cubos.plugin(entitySelectorPlugin);
+    cubos.plugin(menuBarPlugin);
 
     cubos.plugin(assetExplorerPlugin);
     cubos.plugin(entityInspectorPlugin);
@@ -67,6 +70,21 @@ int main(int argc, char** argv)
             auto bindings = assets.read<InputBindings>(BindingsAsset);
             input.bind(*bindings);
         });
+
+    cubos.startupSystem("add some menu items just for testing purposes").call([](Commands cmds) {
+        auto project = cmds.create().add(MenuBarItem{"Project", 0}).entity();
+        auto view = cmds.create().add(MenuBarItem{"View", 1}).entity();
+        cmds.create().add(MenuBarItem{"Help", 2});
+
+        cmds.create().add(MenuBarItem{"New", 0}).relatedTo(project, ChildOf{});
+        cmds.create().add(MenuBarItem{"Open", 1}).relatedTo(project, ChildOf{});
+        cmds.create().add(MenuBarItem{"Save", 2}).relatedTo(project, ChildOf{});
+
+        cmds.create().add(MenuBarItem{"Console", 0}).relatedTo(view, ChildOf{});
+        cmds.create().add(MenuBarItem{"Assets Explorer", 1}).relatedTo(view, ChildOf{});
+        cmds.create().add(MenuBarItem{"Entity Inspector", 2}).relatedTo(view, ChildOf{});
+        cmds.create().add(MenuBarItem{"World Inspector", 3}).relatedTo(view, ChildOf{});
+    });
 
     cubos.run();
 }

@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Raycasting, collisions between rays and box/capsule colliders (#225, **@diogomsmiranda**).
 - Change speed of the debug-camera using Tab and LShift, positive and negative respectively (#1159, **@diogomsmiranda**)
 - Console plugin (#875, **@Scarface1809**).
+- Menu Bar to Tesseratos (#1234, **@RiscadoA**).
 
 ### Changed
 
