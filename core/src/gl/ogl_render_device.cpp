@@ -1360,6 +1360,78 @@ private:
     int mSsboCount;
 };
 
+class OGLTimer : public impl::Timer
+{
+public:
+    OGLTimer(std::shared_ptr<bool> destroyed, GLuint beginId, GLuint endId)
+        : destroyed(std::move(destroyed))
+    {
+        ids[0] = beginId;
+        ids[1] = endId;
+    }
+
+    ~OGLTimer() override
+    {
+        if (!*destroyed)
+        {
+            glDeleteQueries(2, this->ids);
+        }
+    }
+
+    void begin() override
+    {
+        glQueryCounter(ids[0], GL_TIMESTAMP);
+        GLenum glErr = glGetError();
+        if (glErr != 0)
+        {
+            LOG_GL_ERROR(glErr);
+        }
+    }
+
+    void end() override
+    {
+        glQueryCounter(ids[1], GL_TIMESTAMP);
+        GLenum glErr = glGetError();
+        if (glErr != 0)
+        {
+            LOG_GL_ERROR(glErr);
+        }
+    }
+
+    bool done() override
+    {
+        int available;
+        // If "end" query is done, then "begin" query is done too, so only check "end"
+        glGetQueryObjectiv(ids[1], GL_QUERY_RESULT_AVAILABLE, &available);
+        GLenum glErr = glGetError();
+        if (glErr != 0)
+        {
+            LOG_GL_ERROR(glErr);
+            return false;
+        }
+        return static_cast<bool>(available);
+    }
+
+    int result() override
+    {
+        int beginTime;
+        int endTime;
+        glGetQueryObjectiv(ids[0], GL_QUERY_RESULT, &beginTime);
+        glGetQueryObjectiv(ids[1], GL_QUERY_RESULT, &endTime);
+        GLenum glErr = glGetError();
+        if (glErr != 0)
+        {
+            LOG_GL_ERROR(glErr);
+            return -1;
+        }
+        return endTime - beginTime;
+    }
+
+    std::shared_ptr<bool> destroyed;
+
+    GLuint ids[2]; // begin, end
+};
+
 OGLRenderDevice::~OGLRenderDevice()
 {
     *mDestroyed = true;
@@ -2586,6 +2658,24 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage cs)
 void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
 {
     glUseProgram(std::static_pointer_cast<OGLShaderPipeline>(pipeline)->program);
+}
+
+Timer OGLRenderDevice::createTimer()
+{
+    // Initialize query object
+    GLuint ids[2];
+    glGenQueries(2, ids);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteQueries(2, ids);
+        LOG_GL_ERROR(glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLTimer>(mDestroyed, ids[0], ids[1]);
 }
 
 void OGLRenderDevice::clearColor(float r, float g, float b, float a)

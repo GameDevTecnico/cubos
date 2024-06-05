@@ -42,6 +42,7 @@ namespace cubos::core::gl
         ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) override;
         ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) override;
         ShaderPipeline createShaderPipeline(ShaderStage cs) override;
+        Timer createTimer() override;
         void setShaderPipeline(ShaderPipeline pipeline) override;
         void clearColor(float r, float g, float b, float a) override;
         void clearTargetColor(std::size_t target, float r, float g, float b, float a) override;
