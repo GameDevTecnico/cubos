@@ -18,7 +18,6 @@
 
 namespace cubos::core::ecs
 {
-
     /// @brief Resource which stores the time since the last iteration of the main loop started.
     ///
     /// This resource is added and updated by the @ref Cubos class.
@@ -232,6 +231,10 @@ namespace cubos::core::ecs
         /// @brief Returns whether the application has been started.
         /// @return Whether the application has been started.
         bool isStarted() const;
+
+        /// @brief Gets a reference to the application's world.
+        /// @return World.
+        World& world();
 
     private:
         /// @brief Stores information regarding a plugin.
