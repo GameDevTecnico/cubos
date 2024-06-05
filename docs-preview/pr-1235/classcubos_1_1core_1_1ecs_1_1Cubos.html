@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::core::ecs::Cubos class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Cubos <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="cubos_8hpp.html">&lt;core/ecs/cubos.hpp&gt;</a></div>
+        </h1>
+        <p>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a9ba1df4323c3fae610f1f1d0b4322da0">
+              <span class="m-doc-wrap-bumper"><a href="#a9ba1df4323c3fae610f1f1d0b4322da0" class="m-doc-self">Cubos</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs an empty application without arguments.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a89583da9c287cb9d324d34ff98072e10" class="m-doc">Cubos</a>(</span><span class="m-doc-wrap">int argc,
+              char** argv)</span>
+            </dt>
+            <dd>Constructs an empty application with arguments.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos,
+              std::string name,
+              bool isStartup,
+              <a href="structcubos_1_1core_1_1ecs_1_1Planner_1_1TagId.html" class="m-doc">Planner::<wbr />TagId</a> tagId)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos,
+              bool isStartup,
+              std::string name)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos,
+              std::string name)</span>
+            </dt>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aafc22d9475e57e5dae937d8e7364c3e2" class="m-doc">plugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Adds a new plugin as a sub-plugin of the current plugin.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a99ef76466a0571a796d133822102bfa6" class="m-doc">depends</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Marks the given plugin as a dependency of the current plugin.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7ae61d2d895a165b67436842e8f077ca" class="m-doc">uninitResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new resource type, without initializing it.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9f3fa4b2a4bbbd93b26a098d0be3acf5" class="m-doc">resource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a> value) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new resource type with the given initial value.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4f65ff652b50dce8dd8382a7b1efd9ae" class="m-doc">uninitResource</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new resource type, without initializing it.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a17dfe619da8bd625341c63aec83976ad" class="m-doc">resource</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new resource type, constructing it with the given arguments.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9578a4ba32aa84d4c51b685a8c582ab4" class="m-doc">component</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new component type.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a85f90c25748aad8146a252a29d09094f" class="m-doc">component</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new component type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aee4cb2c053267b1d1e04fb6ea2032db4" class="m-doc">relation</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new relation type.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aeb31479d29a8df9f3b0ee89f5edd25bb" class="m-doc">relation</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new relation type.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac2316eac5e727059992ec4a559b62551" class="m-doc">event</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Registers a new event type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a194b5f5be5f32b94ecd9bc5fdd2f610f" class="m-doc">tag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a></span>
+            </dt>
+            <dd>Registers a new tag. Returns a builder used to configure tagged systems.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a515d4023d30a6d5e182fedb352892978" class="m-doc">startupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a></span>
+            </dt>
+            <dd>Registers a new startup tag. Returns a builder used to configure tagged systems.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1a07b2cf799947f70d9239c673557c38" class="m-doc">system</a>(</span><span class="m-doc-wrap">std::string name) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a></span>
+            </dt>
+            <dd>Returns a new builder used to add a system to the engine.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4f311d8d335ab706ab1c6d665131f49f" class="m-doc">startupSystem</a>(</span><span class="m-doc-wrap">std::string name) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a></span>
+            </dt>
+            <dd>Returns a new builder used to add a startup system to the engine.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ababa85bf9a9fc11242bc7040f2cbf1cc" class="m-doc">observer</a>(</span><span class="m-doc-wrap">std::string name) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a></span>
+            </dt>
+            <dd>Returns a new builder used to add an observer to the engine.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7815c8c987864e8e9e698c4f86b87e70" class="m-doc">run</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Runs the engine.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0d5aee528fb661eec93a649ae6553374" class="m-doc">before</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
+            </dt>
+            <dd>Makes all tagged systems run before systems with the given tag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad80d68d28b73b23f7ae96b8ad0d96044" class="m-doc">after</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
+            </dt>
+            <dd>Makes all tagged systems run after systems with the given tag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae42da9e65be63e272a4666ef997f4320" class="m-doc">tagged</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
+            </dt>
+            <dd>Tags all tagged systems with the given tag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8046ba6caa97ac3037ec5103ae20cc6" class="m-doc">addTo</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
+            </dt>
+            <dd>Equivalent to calling <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#ae42da9e65be63e272a4666ef997f4320" class="m-doc">tagged</a> on the given tag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af4481beae85071ccef64393a892ddec7" class="m-doc">runIf</a>(</span><span class="m-doc-wrap">auto func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
+            </dt>
+            <dd>Makes all systems within the tag run only if the given condition evaluates to true.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ade514c7ad731ced9d397913e1e83c74b" class="m-doc">repeatWhile</a>(</span><span class="m-doc-wrap">auto func) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
+            </dt>
+            <dd>Makes all systems within the tag repeat while the given condition evaluates to true.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4d968e9f7772b1d1d42390b9a582bdfa" class="m-doc">tagged</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Adds a tag to the system.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa3504ab21e7f05623a1bdec79c749d6e" class="m-doc">before</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces this system to only run after all systems with the given tag have finished.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a45bfb19d0fc6f62d2f662ad4c6cf7da5" class="m-doc">after</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces all systems with the given tag to run only after this system has finished.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af0327b4a5ae631172248bbebf5d63a50" class="m-doc">entity</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the next entity query argument to have the given target.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a87c5166868a979cc1d3bddcabd477318" class="m-doc">with</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the given target of the next query argument to have the following component.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3e09c5cb83b116906549087f25138465" class="m-doc">with</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9b74247b5f985203d6901c46c0b4dbff" class="m-doc">withOpt</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Accepts the following component from the given target of the next query argument.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3e663496ae1350258aee589af8dbaca7" class="m-doc">withOpt</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abd66ea650a4344fac936f013d4481c14" class="m-doc">without</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the given target of the next query argument to not have the following component.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#acd4ba6f624ea548700a8588e80aa79b6" class="m-doc">without</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae4145a20ccf462fb6e98710772a9edc4" class="m-doc">related</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the given targets of the next query argument to be related with the given relation.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#abc7f3001007ad886bc925ff82c6033ac" class="m-doc">related</a>(</span><span class="m-doc-wrap">int fromTarget = -1,
+              int toTarget = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6468786a05e82612fc384fb005f60526" class="m-doc">related</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              <a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> traversal,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the given targets of the next query argument to be related with the given tree relation.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a83dc9af4df8a665dd4b5b5a4a770fe" class="m-doc">related</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> traversal,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acc36639bf227d411f6e393ce8511eadd" class="m-doc">other</a>(</span><span class="m-doc-wrap">) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Makes the following argument options relative to the next argument.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a416b269052d3e75b290dea0636fe4fff" class="m-doc">onlyIf</a>(</span><span class="m-doc-wrap">auto function) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Makes the system only run if the given condition evaluates to true.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a728c53171fe2c607a9767e58358455ed" class="m-doc">call</a>(</span><span class="m-doc-wrap">auto function) &amp;&amp;</span>
+            </dt>
+            <dd>Finishes building the system with the given function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7507744476fc71dd0650e6845e274be6" class="m-doc">onAdd</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Triggers the observer whenever the given component is added to an entity.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8e1cc8f24346650f761c60b3916f7078" class="m-doc">onAdd</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1a574f08f34a245da2cdc71e14edbb61" class="m-doc">onRemove</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Triggers the observer whenever the given component is removed from an entity, or an entity with it is destroyed.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#af56b73590ae33030923ec76cb257df96" class="m-doc">onRemove</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1b397beccf2eb56779cf6289af66f929" class="m-doc">entity</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the next entity query argument to have the given target.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0895c8505772942dbb967a8fb09f3ed2" class="m-doc">with</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the given target of the next query argument to have the following component.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8525cfb457b7ce102621539b922391d1" class="m-doc">with</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac620e9883c00439f6d4b7423b0fe26b7" class="m-doc">without</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the given target of the next query argument to not have the following component.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a716fd45a212df252bd00b0be9f6ad351" class="m-doc">without</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a34ec9cfbd94e5a4fac610031e7acd19f" class="m-doc">related</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the given targets of the next query argument to be related with the given relation.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a61f7accf9c6d71fb4cabbd6ea748d652" class="m-doc">related</a>(</span><span class="m-doc-wrap">int fromTarget = -1,
+              int toTarget = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acc0871c2763272bbd0fe50c93a7fb983" class="m-doc">related</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              <a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> traversal,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Forces the given targets of the next query argument to be related with the given tree relation.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9a1cbd761269db2bcc4e0584e4cadd87" class="m-doc">related</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> traversal,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a94be033a6f4a31b15685e7d4320557e6" class="m-doc">other</a>(</span><span class="m-doc-wrap">) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp;</span>
+            </dt>
+            <dd>Makes the following argument options relative to the next argument.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a728c53171fe2c607a9767e58358455ed" class="m-doc">call</a>(</span><span class="m-doc-wrap">auto function) &amp;&amp;</span>
+            </dt>
+            <dd>Finishes building the observer with the given function.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a89583da9c287cb9d324d34ff98072e10"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a89583da9c287cb9d324d34ff98072e10" class="m-doc-self">Cubos</a>(</span><span class="m-doc-wrap">int argc,
+              char** argv)</span></span>
+            </h3>
+            <p>Constructs an empty application with arguments.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">argc</td>
+                  <td>Argument count.</td>
+                </tr>
+                <tr>
+                  <td>argv</td>
+                  <td>Argument array.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5ee6b6cb240148c91f3a151d09f3204b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc-self">TagBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos,
+              std::string name,
+              bool isStartup,
+              <a href="structcubos_1_1core_1_1ecs_1_1Planner_1_1TagId.html" class="m-doc">Planner::<wbr />TagId</a> tagId)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a> debug name.</td>
+                </tr>
+                <tr>
+                  <td>isStartup</td>
+                  <td>Whether the tag is a startup tag.</td>
+                </tr>
+                <tr>
+                  <td>tagId</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a> identifier.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a495cf253aa1f9df66b78d40682e5f11c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc-self">SystemBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos,
+              bool isStartup,
+              std::string name)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+                <tr>
+                  <td>isStartup</td>
+                  <td>Whether the system is a startup system.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Debug name.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1dd68a166ecb00d58abb910e14cd235e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc-self">ObserverBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos,
+              std::string name)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Debug name.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aafc22d9475e57e5dae937d8e7364c3e2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafc22d9475e57e5dae937d8e7364c3e2" class="m-doc-self">plugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span></span>
+            </h3>
+            <p>Adds a new plugin as a sub-plugin of the current plugin.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">plugin</td>
+                  <td>Plugin.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the plugin has already been added by this or any other plugin.</p>
+          </div></section>
+          <section class="m-doc-details" id="a99ef76466a0571a796d133822102bfa6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99ef76466a0571a796d133822102bfa6" class="m-doc-self">depends</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span></span>
+            </h3>
+            <p>Marks the given plugin as a dependency of the current plugin.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">plugin</td>
+                  <td>Plugin.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the plugin hasn&#x27;t been added by this or any other plugin.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7ae61d2d895a165b67436842e8f077ca"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7ae61d2d895a165b67436842e8f077ca" class="m-doc-self">uninitResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Registers a new resource type, without initializing it.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9f3fa4b2a4bbbd93b26a098d0be3acf5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9f3fa4b2a4bbbd93b26a098d0be3acf5" class="m-doc-self">resource</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a> value)</span></span>
+            </h3>
+            <p>Registers a new resource type with the given initial value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Resource value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4f65ff652b50dce8dd8382a7b1efd9ae"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f65ff652b50dce8dd8382a7b1efd9ae" class="m-doc-self">uninitResource</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Registers a new resource type, without initializing it.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a17dfe619da8bd625341c63aec83976ad"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, typename... TArgs&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a17dfe619da8bd625341c63aec83976ad" class="m-doc-self">resource</a>(</span><span class="m-doc-wrap">TArgs &amp;&amp; ... args)</span></span>
+            </h3>
+            <p>Registers a new resource type, constructing it with the given arguments.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
+                </tr>
+                <tr>
+                  <td>TArgs</td>
+                  <td>Constructor argument types.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>args</td>
+                  <td>Constructor arguments.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9578a4ba32aa84d4c51b685a8c582ab4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9578a4ba32aa84d4c51b685a8c582ab4" class="m-doc-self">component</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Registers a new component type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a85f90c25748aad8146a252a29d09094f"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85f90c25748aad8146a252a29d09094f" class="m-doc-self">component</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Registers a new component type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aee4cb2c053267b1d1e04fb6ea2032db4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee4cb2c053267b1d1e04fb6ea2032db4" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Registers a new relation type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aeb31479d29a8df9f3b0ee89f5edd25bb"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeb31479d29a8df9f3b0ee89f5edd25bb" class="m-doc-self">relation</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Registers a new relation type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac2316eac5e727059992ec4a559b62551"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac2316eac5e727059992ec4a559b62551" class="m-doc-self">event</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Registers a new event type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a194b5f5be5f32b94ecd9bc5fdd2f610f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a194b5f5be5f32b94ecd9bc5fdd2f610f" class="m-doc-self">tag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+            </h3>
+            <p>Registers a new tag. Returns a builder used to configure tagged systems.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>TagBuilder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a515d4023d30a6d5e182fedb352892978"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a515d4023d30a6d5e182fedb352892978" class="m-doc-self">startupTag</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+            </h3>
+            <p>Registers a new startup tag. Returns a builder used to configure tagged systems.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>TagBuilder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1a07b2cf799947f70d9239c673557c38"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a07b2cf799947f70d9239c673557c38" class="m-doc-self">system</a>(</span><span class="m-doc-wrap">std::string name)</span></span>
+            </h3>
+            <p>Returns a new builder used to add a system to the engine.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> debug name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder used to configure the system.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4f311d8d335ab706ab1c6d665131f49f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f311d8d335ab706ab1c6d665131f49f" class="m-doc-self">startupSystem</a>(</span><span class="m-doc-wrap">std::string name)</span></span>
+            </h3>
+            <p>Returns a new builder used to add a startup system to the engine.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> debug name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder used to configure the system.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ababa85bf9a9fc11242bc7040f2cbf1cc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a> cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ababa85bf9a9fc11242bc7040f2cbf1cc" class="m-doc-self">observer</a>(</span><span class="m-doc-wrap">std::string name)</span></span>
+            </h3>
+            <p>Returns a new builder used to add an observer to the engine.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Observer debug name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder used to configure the observer.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7815c8c987864e8e9e698c4f86b87e70"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7815c8c987864e8e9e698c4f86b87e70" class="m-doc-self">run</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Runs the engine.</p>
+<p>Initially, dispatches all of the startup systems. Then, while <a href="structcubos_1_1core_1_1ecs_1_1ShouldQuit.html" class="m-doc">ShouldQuit</a> is false, dispatches all other systems.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0d5aee528fb661eec93a649ae6553374"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0d5aee528fb661eec93a649ae6553374" class="m-doc-self">before</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+            </h3>
+            <p>Makes all tagged systems run before systems with the given tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad80d68d28b73b23f7ae96b8ad0d96044"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad80d68d28b73b23f7ae96b8ad0d96044" class="m-doc-self">after</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+            </h3>
+            <p>Makes all tagged systems run after systems with the given tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae42da9e65be63e272a4666ef997f4320"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae42da9e65be63e272a4666ef997f4320" class="m-doc-self">tagged</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+            </h3>
+            <p>Tags all tagged systems with the given tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8046ba6caa97ac3037ec5103ae20cc6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8046ba6caa97ac3037ec5103ae20cc6" class="m-doc-self">addTo</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag)</span></span>
+            </h3>
+            <p>Equivalent to calling <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#ae42da9e65be63e272a4666ef997f4320" class="m-doc">tagged</a> on the given tag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af4481beae85071ccef64393a892ddec7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af4481beae85071ccef64393a892ddec7" class="m-doc-self">runIf</a>(</span><span class="m-doc-wrap">auto func)</span></span>
+            </h3>
+            <p>Makes all systems within the tag run only if the given condition evaluates to true.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Condition system function.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ade514c7ad731ced9d397913e1e83c74b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ade514c7ad731ced9d397913e1e83c74b" class="m-doc-self">repeatWhile</a>(</span><span class="m-doc-wrap">auto func)</span></span>
+            </h3>
+            <p>Makes all systems within the tag repeat while the given condition evaluates to true.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Condition system function.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4d968e9f7772b1d1d42390b9a582bdfa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4d968e9f7772b1d1d42390b9a582bdfa" class="m-doc-self">tagged</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) &amp;&amp;</span></span>
+            </h3>
+            <p>Adds a tag to the system.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa3504ab21e7f05623a1bdec79c749d6e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3504ab21e7f05623a1bdec79c749d6e" class="m-doc-self">before</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces this system to only run after all systems with the given tag have finished.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a45bfb19d0fc6f62d2f662ad4c6cf7da5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45bfb19d0fc6f62d2f662ad4c6cf7da5" class="m-doc-self">after</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces all systems with the given tag to run only after this system has finished.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">tag</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af0327b4a5ae631172248bbebf5d63a50"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af0327b4a5ae631172248bbebf5d63a50" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the next entity query argument to have the given target.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Target index. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a87c5166868a979cc1d3bddcabd477318"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a87c5166868a979cc1d3bddcabd477318" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the given target of the next query argument to have the following component.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>target</td>
+                  <td>Target index. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3e09c5cb83b116906549087f25138465"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e09c5cb83b116906549087f25138465" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9b74247b5f985203d6901c46c0b4dbff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b74247b5f985203d6901c46c0b4dbff" class="m-doc-self">withOpt</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Accepts the following component from the given target of the next query argument.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>target</td>
+                  <td>Target index. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3e663496ae1350258aee589af8dbaca7"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e663496ae1350258aee589af8dbaca7" class="m-doc-self">withOpt</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abd66ea650a4344fac936f013d4481c14"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd66ea650a4344fac936f013d4481c14" class="m-doc-self">without</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the given target of the next query argument to not have the following component.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>target</td>
+                  <td>Target. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acd4ba6f624ea548700a8588e80aa79b6"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acd4ba6f624ea548700a8588e80aa79b6" class="m-doc-self">without</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae4145a20ccf462fb6e98710772a9edc4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae4145a20ccf462fb6e98710772a9edc4" class="m-doc-self">related</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the given targets of the next query argument to be related with the given relation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>fromTarget</td>
+                  <td>From target index. By default, the last specified target or 0.</td>
+                </tr>
+                <tr>
+                  <td>toTarget</td>
+                  <td>From target index. By default, <code>fromTarget</code> + 1.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abc7f3001007ad886bc925ff82c6033ac"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc7f3001007ad886bc925ff82c6033ac" class="m-doc-self">related</a>(</span><span class="m-doc-wrap">int fromTarget = -1,
+              int toTarget = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6468786a05e82612fc384fb005f60526"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6468786a05e82612fc384fb005f60526" class="m-doc-self">related</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              <a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> traversal,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the given targets of the next query argument to be related with the given tree relation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>traversal</td>
+                  <td>Tree traversal direction.</td>
+                </tr>
+                <tr>
+                  <td>fromTarget</td>
+                  <td>From target index. By default, the last specified target or 0.</td>
+                </tr>
+                <tr>
+                  <td>toTarget</td>
+                  <td>From target index. By default, <code>fromTarget</code> + 1.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6a83dc9af4df8a665dd4b5b5a4a770fe"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a83dc9af4df8a665dd4b5b5a4a770fe" class="m-doc-self">related</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> traversal,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acc36639bf227d411f6e393ce8511eadd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acc36639bf227d411f6e393ce8511eadd" class="m-doc-self">other</a>(</span><span class="m-doc-wrap">) &amp;&amp;</span></span>
+            </h3>
+            <p>Makes the following argument options relative to the next argument.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a416b269052d3e75b290dea0636fe4fff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a495cf253aa1f9df66b78d40682e5f11c" class="m-doc">SystemBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a416b269052d3e75b290dea0636fe4fff" class="m-doc-self">onlyIf</a>(</span><span class="m-doc-wrap">auto function) &amp;&amp;</span></span>
+            </h3>
+            <p>Makes the system only run if the given condition evaluates to true.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">function</td>
+                  <td>Condition function.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The condition runs immediately before the system runs, and is basically just like a normal system, but which returns a boolean instead of void.</p>
+          </div></section>
+          <section class="m-doc-details" id="a728c53171fe2c607a9767e58358455ed"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a728c53171fe2c607a9767e58358455ed" class="m-doc-self">call</a>(</span><span class="m-doc-wrap">auto function) &amp;&amp;</span></span>
+            </h3>
+            <p>Finishes building the system with the given function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">function</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> function.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7507744476fc71dd0650e6845e274be6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7507744476fc71dd0650e6845e274be6" class="m-doc-self">onAdd</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Triggers the observer whenever the given component is added to an entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>target</td>
+                  <td>Target index. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8e1cc8f24346650f761c60b3916f7078"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e1cc8f24346650f761c60b3916f7078" class="m-doc-self">onAdd</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1a574f08f34a245da2cdc71e14edbb61"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a574f08f34a245da2cdc71e14edbb61" class="m-doc-self">onRemove</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Triggers the observer whenever the given component is removed from an entity, or an entity with it is destroyed.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>target</td>
+                  <td>Target index. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af56b73590ae33030923ec76cb257df96"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af56b73590ae33030923ec76cb257df96" class="m-doc-self">onRemove</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1b397beccf2eb56779cf6289af66f929"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b397beccf2eb56779cf6289af66f929" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the next entity query argument to have the given target.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Target index. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0895c8505772942dbb967a8fb09f3ed2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0895c8505772942dbb967a8fb09f3ed2" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the given target of the next query argument to have the following component.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>target</td>
+                  <td>Target index. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8525cfb457b7ce102621539b922391d1"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8525cfb457b7ce102621539b922391d1" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac620e9883c00439f6d4b7423b0fe26b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac620e9883c00439f6d4b7423b0fe26b7" class="m-doc-self">without</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the given target of the next query argument to not have the following component.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>target</td>
+                  <td>Target. By default, the last specified target or 0.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a716fd45a212df252bd00b0be9f6ad351"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a716fd45a212df252bd00b0be9f6ad351" class="m-doc-self">without</a>(</span><span class="m-doc-wrap">int target = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a34ec9cfbd94e5a4fac610031e7acd19f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a34ec9cfbd94e5a4fac610031e7acd19f" class="m-doc-self">related</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the given targets of the next query argument to be related with the given relation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>fromTarget</td>
+                  <td>From target index. By default, the last specified target or 0.</td>
+                </tr>
+                <tr>
+                  <td>toTarget</td>
+                  <td>From target index. By default, <code>fromTarget</code> + 1.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a61f7accf9c6d71fb4cabbd6ea748d652"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61f7accf9c6d71fb4cabbd6ea748d652" class="m-doc-self">related</a>(</span><span class="m-doc-wrap">int fromTarget = -1,
+              int toTarget = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acc0871c2763272bbd0fe50c93a7fb983"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acc0871c2763272bbd0fe50c93a7fb983" class="m-doc-self">related</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              <a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> traversal,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp;</span></span>
+            </h3>
+            <p>Forces the given targets of the next query argument to be related with the given tree relation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>traversal</td>
+                  <td>Tree traversal direction.</td>
+                </tr>
+                <tr>
+                  <td>fromTarget</td>
+                  <td>From target index. By default, the last specified target or 0.</td>
+                </tr>
+                <tr>
+                  <td>toTarget</td>
+                  <td>From target index. By default, <code>fromTarget</code> + 1.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9a1cbd761269db2bcc4e0584e4cadd87"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a1cbd761269db2bcc4e0584e4cadd87" class="m-doc-self">related</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> traversal,
+              int fromTarget = -1,
+              int toTarget = -1) &amp;&amp;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Relation type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a94be033a6f4a31b15685e7d4320557e6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a1dd68a166ecb00d58abb910e14cd235e" class="m-doc">ObserverBuilder</a>&amp;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a94be033a6f4a31b15685e7d4320557e6" class="m-doc-self">other</a>(</span><span class="m-doc-wrap">) &amp;&amp;</span></span>
+            </h3>
+            <p>Makes the following argument options relative to the next argument.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a728c53171fe2c607a9767e58358455ed"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a728c53171fe2c607a9767e58358455ed" class="m-doc-self">call</a>(</span><span class="m-doc-wrap">auto function) &amp;&amp;</span></span>
+            </h3>
+            <p>Finishes building the observer with the given function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">function</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> function.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
