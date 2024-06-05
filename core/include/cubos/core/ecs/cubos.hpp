@@ -229,6 +229,10 @@ namespace cubos::core::ecs
         /// Equivalent to calling @ref start() followed by @ref update() until it returns false.
         void run();
 
+        /// @brief Returns whether the application has been started.
+        /// @return Whether the application has been started.
+        bool isStarted() const;
+
     private:
         /// @brief Stores information regarding a plugin.
         struct PluginInfo

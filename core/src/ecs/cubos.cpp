@@ -294,6 +294,11 @@ void Cubos::run()
     }
 }
 
+bool Cubos::isStarted() const
+{
+    return mState != nullptr;
+}
+
 bool Cubos::isRegistered(const reflection::Type& type) const
 {
     return (mTypeToPlugin.contains(type) && this->isKnownPlugin(mTypeToPlugin.at(type), mPluginStack.back())) ||
