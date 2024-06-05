@@ -12,6 +12,9 @@
 
 namespace cubos::engine
 {
+    /// @copydoc cubos::core::ecs::World
+    using World = core::ecs::World;
+
     /// @copydoc cubos::core::ecs::Tag
     using Tag = core::ecs::Tag;
 
