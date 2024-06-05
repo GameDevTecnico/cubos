@@ -1,3 +1,4 @@
+#include "plugin.hpp"
 #include <algorithm>
 #include <iostream>
 #include <sstream>
@@ -12,9 +13,8 @@
 #include <cubos/engine/transform/child_of.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
-#include <tesseratos/entity_selector/plugin.hpp>
-#include <tesseratos/toolbox/plugin.hpp>
-#include <tesseratos/world_inspector/plugin.hpp>
+#include "../entity_selector/plugin.hpp"
+#include "../toolbox/plugin.hpp"
 
 using cubos::core::ecs::Name;
 using cubos::core::ecs::World;

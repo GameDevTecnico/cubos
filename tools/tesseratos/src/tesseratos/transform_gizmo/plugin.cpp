@@ -1,3 +1,5 @@
+#include "plugin.hpp"
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/intersect.hpp>
 #include <glm/gtx/vector_angle.hpp>
@@ -12,9 +14,8 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
-#include <tesseratos/debug_camera/plugin.hpp>
-#include <tesseratos/entity_selector/plugin.hpp>
-#include <tesseratos/transform_gizmo/plugin.hpp>
+#include "../debug_camera/plugin.hpp"
+#include "../entity_selector/plugin.hpp"
 
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::EventReader;
