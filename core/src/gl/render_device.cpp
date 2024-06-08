@@ -1,4 +1,5 @@
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/log.hpp>
 
 using namespace cubos::core::gl;
 
@@ -58,4 +59,35 @@ void FramebufferDesc::FramebufferTarget::setTexture2DArrayTarget(const Texture2D
 bool FramebufferDesc::FramebufferTarget::isSet() const
 {
     return mSet;
+}
+
+impl::PipelinedTimer::PipelinedTimer(RenderDevice& rd)
+    : mRd(rd)
+{
+}
+
+void impl::PipelinedTimer::begin()
+{
+    CUBOS_ASSERT(!mNeedsEnd, "The previous call to begin() wasn't matched with a call to end()");
+    gl::Timer timer = mRd.createTimer();
+    timer->begin();
+    mTimers.push(timer);
+    mNeedsEnd = true;
+}
+
+impl::PipelinedTimer::Result impl::PipelinedTimer::end()
+{
+    CUBOS_ASSERT(mNeedsEnd, "Call to end() wasn't matched with a previous call to begin()");
+
+    mTimers.back()->end();
+
+    while (!mTimers.empty() && mTimers.front()->done())
+    {
+        mResult = mTimers.front()->result();
+        mTimers.pop();
+    }
+
+    mNeedsEnd = false;
+
+    return {mResult, mTimers.size()};
 }

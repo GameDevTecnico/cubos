@@ -5,6 +5,7 @@
 #pragma once
 
 #include <memory>
+#include <queue>
 #include <variant>
 
 #include <glm/glm.hpp>
@@ -79,6 +80,7 @@ namespace cubos::core::gl
         class ShaderBindingPoint;
 
         class Timer;
+        class PipelinedTimer;
     } // namespace impl
 
     /// @brief Handle to a framebuffer.
@@ -180,6 +182,11 @@ namespace cubos::core::gl
     /// @see @ref impl::Timer - timer interface.
     /// @ingroup core-gl
     using Timer = std::shared_ptr<impl::Timer>;
+
+    /// @brief Handle to a pipelined timer.
+    /// @see @ref impl::PipelinedTimer - pipelined timer interface.
+    /// @ingroup core-gl
+    using PipelinedTimer = std::shared_ptr<impl::PipelinedTimer>;
 
     /// @brief Render device properties that can be queried at runtime.
     /// @see @ref RenderDevice::getProperty().
@@ -887,6 +894,13 @@ namespace cubos::core::gl
         /// @return Timer handle, or nullptr on failure.
         virtual Timer createTimer() = 0;
 
+        /// @brief Creates a new pipelined timer.
+        /// @return Pipelined timer handle, or nullptr on failure.
+        PipelinedTimer createPipelinedTimer()
+        {
+            return std::make_shared<impl::PipelinedTimer>(*this);
+        }
+
         /// @brief Clears the color buffer bit on the current framebuffer to a specific color.
         /// @param r Red component.
         /// @param g Green component.
@@ -1492,6 +1506,34 @@ namespace cubos::core::gl
 
         protected:
             Timer() = default;
+        };
+
+        /// @brief Pipelined timer.
+        class CUBOS_CORE_API PipelinedTimer
+        {
+        public:
+            struct Result
+            {
+                int result;          ///< Time spent in region in the latest frame that finished rendering.
+                size_t framesBehind; ///< How many frames behind the CPU the latest rendered frame lags.
+            };
+
+            PipelinedTimer(RenderDevice& rd);
+
+            /// @brief Starts a region to be timed.
+            void begin();
+
+            /// @brief Ends a region.
+            /// @return Time spent in region in the latest frame that finished
+            /// rendering, in nanoseconds (-1 if no frame has finished yet),
+            /// and how many frames behind the CPU this frame lags.
+            Result end();
+
+        private:
+            std::queue<gl::Timer> mTimers;
+            RenderDevice& mRd;
+            int mResult = -1;
+            bool mNeedsEnd = false;
         };
     } // namespace impl
 
