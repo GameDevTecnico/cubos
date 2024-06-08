@@ -1,0 +1,108 @@
+{
+    "entities": {
+        "render-target": {
+            "cubos::engine::RenderTargetDefaults": {}
+        },
+        "player": {
+            "cubos::engine::RenderVoxelGrid": {
+                "asset": "57d1b886-8543-4b8b-8f78-d911e9c4f896",
+                "offset": {
+                    "x": -4,
+                    "y": 0,
+                    "z": -4
+                }
+            },
+            "cubos::engine::Position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "cubos::engine::BoxCollisionShape": {
+                "x": 3.0,
+                "y": 7.0,
+                "z": 2.0
+            },
+            "cubos::engine::Collider": {},
+            "Player": {
+                "speed": 5,
+                "laneWidth": 9
+            }
+        },
+        "track1": {
+            "cubos::engine::RenderVoxelGrid": {
+                "asset": "746088e3-84ec-4483-b4b2-216ae690c3b7",
+                "offset": {
+                    "x": -16,
+                    "y": -1,
+                    "z": 0
+                }
+            },
+            "cubos::engine::Position": {
+                "x": 0,
+                "y": 0,
+                "z": -48
+            },
+            "cubos::engine::Scale": 2
+        },
+        "track2": {
+            "cubos::engine::RenderVoxelGrid": {
+                "asset": "746088e3-84ec-4483-b4b2-216ae690c3b7",
+                "offset": {
+                    "x": -16,
+                    "y": -1,
+                    "z": 0
+                }
+            },
+            "cubos::engine::Position": {
+                "x": 0,
+                "y": 0,
+                "z": 208
+            },
+            "cubos::engine::Scale": 2
+        },
+        "obstacle-spawner": {
+            "cubos::engine::Position": {
+                "x": 0,
+                "y": 0,
+                "z": 300
+            },
+            "Spawner": {
+                "scene": "b15272c5-08c9-47f5-9b24-1192332580a8",
+                "sceneRoot": "base",
+                "period": 1.0,
+                "laneWidth": 9
+            }
+        },
+        "sun": {
+            "cubos::engine::DirectionalLight": {
+                "color": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "intensity": 1.0
+            },
+            "cubos::engine::Rotation": {
+                "w": 0.783,
+                "x": 0.488,
+                "y": 0.327,
+                "z": 0.204
+            }
+        },
+        "camera": {
+            "cubos::engine::PerspectiveCamera": {},
+            "cubos::engine::DrawsTo@render-target": {},
+            "cubos::engine::Position": {
+                "x": 0,
+                "y": 12.5,
+                "z": -25
+            },
+            "cubos::engine::Rotation": {
+                "x": 0,
+                "y": 1,
+                "z": 0,
+                "w": 0
+            }
+        }
+    }
+}

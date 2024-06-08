@@ -1,0 +1,21 @@
+{
+    "actions": {
+        "left": {
+            "keys": [
+                "A",
+                "Left"
+            ]
+        },
+        "right": {
+            "keys": [
+                "D",
+                "Right"
+            ]
+        },
+        "restart": {
+            "keys": [
+                "R"
+            ]
+        }
+    }
+}

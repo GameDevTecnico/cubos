@@ -47,5 +47,4 @@ make_sample(DIR "gizmos")
 make_sample(DIR "ui")
 make_sample(DIR "physics" ASSETS)
 make_sample(DIR "complex-physics" ASSETS)
-
-make_sample(DIR "games/subway-surfers" ASSETS)
+make_sample(DIR "games/cubosurfers" ASSETS SOURCES "spawner.cpp" "obstacle.cpp" "player.cpp")
