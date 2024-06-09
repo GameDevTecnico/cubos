@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shadow mapping with support for spot shadow casters (#1186, **@tomas7770**).
 - TcpStream network class (#1209, **@roby2014**).
 - TcpListener network class (#1210, **@roby2014**).
+- UdpSocket network class (#1208, **@roby2014**).
 
 ### Changed
 
