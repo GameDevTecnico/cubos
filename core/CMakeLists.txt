@@ -142,6 +142,7 @@ set(CUBOS_CORE_SOURCE
     "src/net/tcp_stream.cpp"
     "src/net/tcp_listener.cpp"
     "src/net/utils.cpp"
+    "src/net/udp_socket.cpp"
 )
 
 # Create core library
