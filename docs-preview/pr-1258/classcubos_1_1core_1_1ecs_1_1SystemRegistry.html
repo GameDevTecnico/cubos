@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::core::ecs::SystemRegistry class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemRegistry <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_2registry_8hpp.html">&lt;core/ecs/system/registry.hpp&gt;</a></div>
+        </h1>
+        <p>Stores known systems and conditions.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a19f96433a32a6d3a2fa63d6561c8d86e">
+              <span class="m-doc-wrap-bumper"><a href="#a19f96433a32a6d3a2fa63d6561c8d86e" class="m-doc-self">SystemRegistry</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt id="a9e5ffb15e9043f7ae88cbe6e383218db">
+              <span class="m-doc-wrap-bumper"><a href="#a9e5ffb15e9043f7ae88cbe6e383218db" class="m-doc-self">SystemRegistry</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">SystemRegistry</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Forbid copying.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="afb0a0c3d92d91a0aaa559c2729633cd6">
+              <span class="m-doc-wrap-bumper">auto <a href="#afb0a0c3d92d91a0aaa559c2729633cd6" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">SystemRegistry</a>&amp;) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">SystemRegistry</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Forbid copy assignment.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a8294ac1f760c78076ed28ae0f85d20" class="m-doc">add</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt; system) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a></span>
+            </dt>
+            <dd>Registers the given system.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac162a9a65d22cbe134858a6c2f5d2df3" class="m-doc">add</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;bool&gt; condition) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a></span>
+            </dt>
+            <dd>Registers the given condition.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#adfd88642fee36e348c861485d8c419a7" class="m-doc">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a> id)</span>
+            </dt>
+            <dd>Unregisters the given system.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a6b8a3785c2b160e9a1360f5601ca0e59" class="m-doc">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a> id)</span>
+            </dt>
+            <dd>Unregisters the given condition.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a53f0a5977970282c09d8b12a781e56ad" class="m-doc">name</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a> id) const -&gt; const std::string&amp;</span>
+            </dt>
+            <dd>Gets the debug name of the given system.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4fe3cd4bc9b4936e22cd6b828c908879" class="m-doc">name</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a> id) const -&gt; const std::string&amp;</span>
+            </dt>
+            <dd>Gets the debug name of the given condition.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a44043315fdd6bb35f2d93dfde7542b44" class="m-doc">system</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a> id) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt;&amp;</span>
+            </dt>
+            <dd>Gets the system with the given identifier.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afac360a270d9db4b2fec7b25001a2ef6" class="m-doc">condition</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a> id) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;bool&gt;&amp;</span>
+            </dt>
+            <dd>Gets the condition with the given identifier.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a6a8294ac1f760c78076ed28ae0f85d20"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a> cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a8294ac1f760c78076ed28ae0f85d20" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt; system)</span></span>
+            </h3>
+            <p>Registers the given system.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Debug name.</td>
+                </tr>
+                <tr>
+                  <td>system</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> identifier.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac162a9a65d22cbe134858a6c2f5d2df3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a> cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac162a9a65d22cbe134858a6c2f5d2df3" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;bool&gt; condition)</span></span>
+            </h3>
+            <p>Registers the given condition.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Debug name.</td>
+                </tr>
+                <tr>
+                  <td>condition</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Condition identifier.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adfd88642fee36e348c861485d8c419a7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adfd88642fee36e348c861485d8c419a7" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a> id)</span></span>
+            </h3>
+            <p>Unregisters the given system.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> identifier.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6b8a3785c2b160e9a1360f5601ca0e59"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b8a3785c2b160e9a1360f5601ca0e59" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a> id)</span></span>
+            </h3>
+            <p>Unregisters the given condition.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Condition identifier.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a53f0a5977970282c09d8b12a781e56ad"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const std::string&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a53f0a5977970282c09d8b12a781e56ad" class="m-doc-self">name</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a> id) const</span></span>
+            </h3>
+            <p>Gets the debug name of the given system.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> name.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4fe3cd4bc9b4936e22cd6b828c908879"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const std::string&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4fe3cd4bc9b4936e22cd6b828c908879" class="m-doc-self">name</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a> id) const</span></span>
+            </h3>
+            <p>Gets the debug name of the given condition.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Condition identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Condition name.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a44043315fdd6bb35f2d93dfde7542b44"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a44043315fdd6bb35f2d93dfde7542b44" class="m-doc-self">system</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a> id)</span></span>
+            </h3>
+            <p>Gets the system with the given identifier.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> identifier.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afac360a270d9db4b2fec7b25001a2ef6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;bool&gt;&amp; cubos::<wbr />core::<wbr />ecs::<wbr />SystemRegistry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afac360a270d9db4b2fec7b25001a2ef6" class="m-doc-self">condition</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a> id)</span></span>
+            </h3>
+            <p>Gets the condition with the given identifier.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Condition identifier.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
