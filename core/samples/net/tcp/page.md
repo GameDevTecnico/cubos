@@ -1,4 +1,4 @@
-# Tcp Sockets {#examples-core-tcp-sockets}
+# Tcp Sockets {#examples-core-net-tcp-sockets}
 
 @brief Using TCP sockets for communication between a server and a client.
 
