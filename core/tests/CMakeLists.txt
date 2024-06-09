@@ -72,6 +72,7 @@ add_executable(
 
 	net/address.cpp
 	net/tcp.cpp
+	net/udp_socket.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
