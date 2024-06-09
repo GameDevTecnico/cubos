@@ -48,7 +48,7 @@
         <h1>
           Udp Sockets
         </h1>
-        <p>Using UDP sockets for communication between a server and a client with Cubos.</p>
+        <p>Using UDP sockets for communication between a server and a client.</p>
 <p><a name="md_net_udp_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/net/udp">here</a>.</p></aside><p>This example demonstrates how to set up a UDP server and client using the <strong>Cubos</strong> engine.</p><p>First, we need the network dependencies</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/net/udp_socket.hpp&gt;</span></pre><p>We&#x27;ll also define some dummy constants for demonstration purposes</p><pre class="m-code"><span class="cp">#define SERVER_ADDRESS Address::LocalHost</span>
 <span class="cp">#define SERVER_PORT 8080</span>
 
@@ -62,7 +62,7 @@
 <span class="w">    </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Server is running and waiting for messages at port {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SERVER_PORT</span><span class="p">);</span>
 
 <span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">received</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">ssize_t</span><span class="w"> </span><span class="n">received</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Address</span><span class="w"> </span><span class="n">senderAddress</span><span class="p">;</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
