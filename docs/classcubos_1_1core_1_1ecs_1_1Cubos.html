@@ -106,6 +106,11 @@
             </dt>
             <dd>Marks the given plugin as a dependency of the current plugin.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acf8cb94306635aabd3db4f8b026c7f24" class="m-doc">inject</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> target,
+              <a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
+            </dt>
+            <dd>Marks the target plugin so that when it is added, it is replaced by the given plugin.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7ae61d2d895a165b67436842e8f077ca" class="m-doc">uninitResource</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
             <dd>Registers a new resource type, without initializing it.</dd>
@@ -522,6 +527,35 @@
               </tfoot>
             </table>
 <p>Aborts if the plugin hasn&#x27;t been added by this or any other plugin.</p>
+          </div></section>
+          <section class="m-doc-details" id="acf8cb94306635aabd3db4f8b026c7f24"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf8cb94306635aabd3db4f8b026c7f24" class="m-doc-self">inject</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> target,
+              <a href="namespacecubos_1_1core_1_1ecs.html#a2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin)</span></span>
+            </h3>
+            <p>Marks the target plugin so that when it is added, it is replaced by the given plugin.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Target plugin.</td>
+                </tr>
+                <tr>
+                  <td>plugin</td>
+                  <td>Plugin.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the target plugin has already been added.</p>
           </div></section>
           <section class="m-doc-details" id="a7ae61d2d895a165b67436842e8f077ca"><div>
             <h3>
