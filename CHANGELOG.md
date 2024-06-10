@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implemented metrics and profiling tools (#1150, **@roby2014**).
 - GL timer for profiling sections of rendering code (#1228, **@tomas7770**).
 
+### Changed
+
+- Move Opt class to memory namespace (#1212, **@roby2014**).
+
 ## [v0.2.0] - 2024-05-07
 
 ### Added
