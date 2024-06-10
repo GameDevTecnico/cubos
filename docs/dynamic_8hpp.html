@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/blueprint.hpp file | Cubos Docs</title>
+  <title>core/ecs/dynamic.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,9 +46,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span>blueprint.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span>dynamic.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint</a>.</p>
+        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1DynamicPlugin.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />DynamicPlugin</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -57,7 +57,6 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -77,20 +76,9 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::core::ecs::Blueprint</a>
+              class <a href="classcubos_1_1core_1_1ecs_1_1DynamicPlugin.html" class="m-doc">cubos::core::ecs::DynamicPlugin</a>
             </dt>
-            <dd>Collection of entities and their respective components and relations.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-ecs.html#ga2c5677b7a03cecd5a9464dad2abf1f12" class="m-doc">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;Entity, Entity, EntityHash&gt;&amp; map,
-              const reflection::Type&amp; type,
-              void* value) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Converts entities in a value to their respective new entities. If an entity is not found in the map, it is left unchanged.</dd>
+            <dd>Manages the loading and unloading of a plugin from a shared library.</dd>
           </dl>
         </section>
       </div>

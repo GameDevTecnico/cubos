@@ -60,6 +60,8 @@
                 <li><a href="#groups">Modules</a></li>
                 <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -89,6 +91,8 @@
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />CommandBuffer</a>.</dd>
             <dt>file <a href="cubos_8hpp.html" class="m-doc">cubos.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Cubos</a>.</dd>
+            <dt>file <a href="dynamic_8hpp.html" class="m-doc">dynamic.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1ecs_1_1DynamicPlugin.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />DynamicPlugin</a>.</dd>
             <dt>file <a href="name_8hpp.html" class="m-doc">name.hpp</a></dt>
             <dd>Class <a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Name</a>.</dd>
             <dt>file <a href="plugin__queue_8hpp.html" class="m-doc">plugin_queue.hpp</a></dt>
@@ -131,6 +135,14 @@
             </dt>
             <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
             <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1DynamicPlugin.html" class="m-doc">cubos::core::ecs::DynamicPlugin</a>
+            </dt>
+            <dd>Manages the loading and unloading of a plugin from a shared library.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">cubos::core::ecs::Name</a>
+            </dt>
+            <dd>Component which stores the name of an entity.</dd>
+            <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">cubos::core::ecs::PluginQueue</a>
             </dt>
             <dd>Stores plugin operations to be executed later.</dd>
@@ -152,10 +164,83 @@
             </dt>
             <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent ECS types.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">cubos::core::ecs::DataTypeId</a>
+            </dt>
+            <dd>Identifies a data type registered in the world.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">cubos::core::ecs::DataTypeIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">cubos::core::ecs::Types</a>
+            </dt>
+            <dd>Registry of all data types used in an ECS world.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">cubos::core::ecs::World</a>
             </dt>
             <dd>Holds entities, their components and resources.</dd>
           </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> = void(*)(Cubos&amp;)
+            </dt>
+            <dd>Function pointer type representing a plugin.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga2c5677b7a03cecd5a9464dad2abf1f12" class="m-doc">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;Entity, Entity, EntityHash&gt;&amp; map,
+              const reflection::Type&amp; type,
+              void* value) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Converts entities in a value to their respective new entities. If an entity is not found in the map, it is left unchanged.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="ga2238d3875336b07640eb86802393f63f"><div>
+            <h3>
+              using <a href="#ga2238d3875336b07640eb86802393f63f" class="m-doc-self">Plugin</a> = void(*)(Cubos&amp;)
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugin__queue_8hpp.html">&lt;core/ecs/plugin_queue.hpp&gt;</a></div>
+            </h3>
+            <p>Function pointer type representing a plugin.</p>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga2c5677b7a03cecd5a9464dad2abf1f12"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga2c5677b7a03cecd5a9464dad2abf1f12" class="m-doc-self">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;Entity, Entity, EntityHash&gt;&amp; map,
+              const reflection::Type&amp; type,
+              void* value)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="blueprint_8hpp.html">&lt;core/ecs/blueprint.hpp&gt;</a></div>
+            </h3>
+            <p>Converts entities in a value to their respective new entities. If an entity is not found in the map, it is left unchanged.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">map</td>
+                  <td>Map of old entities to new entities.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Value type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
