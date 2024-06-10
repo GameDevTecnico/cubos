@@ -40,9 +40,9 @@ namespace cubos::engine
     /// @copydoc cubos::core::ecs::Commands
     using Commands = core::ecs::Commands;
 
-    /// @copydoc cubos::core::ecs::Opt
+    /// @copydoc cubos::core::memory::Opt
     template <typename T>
-    using Opt = core::ecs::Opt<T>;
+    using Opt = core::memory::Opt<T>;
 
     /// @copydoc cubos::core::ecs::EventReader
     template <typename T, unsigned int M = DEFAULT_FILTER_MASK>

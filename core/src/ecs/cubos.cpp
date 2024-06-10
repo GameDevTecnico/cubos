@@ -6,6 +6,7 @@
 #include <cubos/core/ecs/observer/observers.hpp>
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/opt.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
@@ -15,6 +16,7 @@ using cubos::core::ecs::Cubos;
 using cubos::core::ecs::DeltaTime;
 using cubos::core::ecs::Name;
 using cubos::core::ecs::ShouldQuit;
+using cubos::core::memory::Opt;
 
 CUBOS_REFLECT_IMPL(DeltaTime)
 {

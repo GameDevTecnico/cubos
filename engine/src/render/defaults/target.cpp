@@ -3,8 +3,8 @@
 
 #include <cubos/engine/render/defaults/target.hpp>
 
-template class cubos::core::ecs::Opt<cubos::engine::SplitScreen>;
-template class cubos::core::ecs::Opt<cubos::engine::Bloom>;
+template class cubos::core::memory::Opt<cubos::engine::SplitScreen>;
+template class cubos::core::memory::Opt<cubos::engine::Bloom>;
 
 CUBOS_REFLECT_IMPL(cubos::engine::RenderTargetDefaults)
 {

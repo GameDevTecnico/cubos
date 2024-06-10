@@ -15,6 +15,7 @@
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/system/tag.hpp>
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/memory/opt.hpp>
 
 namespace cubos::core::ecs
 {
@@ -536,7 +537,7 @@ namespace cubos::core::ecs
         Cubos& mCubos;
         bool mIsStartup;
         std::string mName;
-        Opt<System<bool>> mCondition;
+        memory::Opt<System<bool>> mCondition;
         std::unordered_set<std::string> mTagged;
         std::unordered_set<std::string> mBefore;
         std::unordered_set<std::string> mAfter;

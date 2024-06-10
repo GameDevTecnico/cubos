@@ -68,7 +68,7 @@ namespace cubos::core::ecs
         /// @brief Accesses the match for the given entity, if there is one.
         /// @param entity Entity.
         /// @return Requested components, or nothing if the entity does not match the query.
-        Opt<std::tuple<Ts...>> at(Entity entity)
+        memory::Opt<std::tuple<Ts...>> at(Entity entity)
         {
             return mView.data().at(entity);
         }
@@ -77,14 +77,14 @@ namespace cubos::core::ecs
         /// @param firstEntity Entity for the first target.
         /// @param secondEntity Entity for the second target.
         /// @return Requested data, or nothing if the entities do not match the query.
-        Opt<std::tuple<Ts...>> at(Entity firstEntity, Entity secondEntity)
+        memory::Opt<std::tuple<Ts...>> at(Entity firstEntity, Entity secondEntity)
         {
             return mView.data().at(firstEntity, secondEntity);
         }
 
         /// @brief Returns the first match of the query, if there's any.
         /// @return Requested data, or nothing if there are no matches.
-        Opt<std::tuple<Ts...>> first()
+        memory::Opt<std::tuple<Ts...>> first()
         {
             auto it = this->begin();
             if (it == this->end())

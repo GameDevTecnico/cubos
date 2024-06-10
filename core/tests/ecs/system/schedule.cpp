@@ -2,11 +2,14 @@
 
 #include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/system/schedule.hpp>
+#include <cubos/core/memory/opt.hpp>
 #include <cubos/core/reflection/external/map.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
 
 #include "utils.hpp"
+
+using cubos::core::memory::Opt;
 
 static Schedule::NodeId validate(Opt<Schedule::NodeId> nodeId)
 {

@@ -4,6 +4,7 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 
 using cubos::core::ecs::Planner;
+using cubos::core::memory::Opt;
 
 std::size_t Planner::TagId::Hash::operator()(const TagId& tagId) const
 {

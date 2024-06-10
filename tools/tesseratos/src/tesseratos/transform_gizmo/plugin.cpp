@@ -19,10 +19,10 @@
 
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::EventReader;
-using cubos::core::ecs::Opt;
 using cubos::core::ecs::Query;
 using cubos::core::ecs::World;
 using cubos::core::io::Window;
+using cubos::core::memory::Opt;
 
 using cubos::engine::Cubos;
 using cubos::engine::Gizmos;
