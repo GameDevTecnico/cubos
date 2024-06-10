@@ -7,7 +7,7 @@
 #include <imgui.h>
 
 #include <cubos/core/ecs/name.hpp>
-#include <cubos/core/ecs/query/opt.hpp>
+#include <cubos/core/memory/opt.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/transform/child_of.hpp>

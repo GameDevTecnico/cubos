@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <cubos/core/ecs/query/opt.hpp>
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/memory/opt.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/api.hpp>
@@ -21,11 +21,11 @@
 #include <cubos/engine/render/target/target.hpp>
 #include <cubos/engine/render/tone_mapping/tone_mapping.hpp>
 
-namespace cubos::core::ecs
+namespace cubos::core::memory
 {
     CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::SplitScreen>;
     CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::Bloom>;
-} // namespace cubos::core::ecs
+} // namespace cubos::core::memory
 
 namespace cubos::engine
 {
@@ -63,9 +63,9 @@ namespace cubos::engine
         DeferredShading deferredShading{};
 
         /// @brief SplitScreen component.
-        core::ecs::Opt<SplitScreen> splitScreen{SplitScreen{}};
+        core::memory::Opt<SplitScreen> splitScreen{SplitScreen{}};
 
         /// @brief Bloom component.
-        core::ecs::Opt<Bloom> bloom{Bloom{}};
+        core::memory::Opt<Bloom> bloom{Bloom{}};
     };
 } // namespace cubos::engine

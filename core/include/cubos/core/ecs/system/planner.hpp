@@ -94,7 +94,7 @@ namespace cubos::core::ecs
 
         /// @brief Constructs a new schedule from the constraints specified until now.
         /// @return Schedule, or nothing if the constraints couldn't be fulfilled.
-        Opt<Schedule> build() const;
+        memory::Opt<Schedule> build() const;
 
     private:
         /// @brief Holds the constraints and data of a tag.
@@ -106,16 +106,16 @@ namespace cubos::core::ecs
             /// @brief System identifier associated to the tag.
             ///
             /// Only used by leaf tags.
-            Opt<SystemId> systemId{};
+            memory::Opt<SystemId> systemId{};
 
             /// @brief Condition identifiers associated to the tag.
             std::vector<ConditionId> conditionIds{};
 
             /// @brief If the tag is a repeat tag, holds its repeat condition.
-            Opt<ConditionId> repeatConditionId{};
+            memory::Opt<ConditionId> repeatConditionId{};
 
             /// @brief Parent repeating tag, if there's one. Set internally during @ref build.
-            Opt<TagId> repeatingParent{};
+            memory::Opt<TagId> repeatingParent{};
 
             /// @brief Parent tags of this tag.
             std::unordered_set<TagId, TagId::Hash> parents{};
@@ -159,7 +159,7 @@ namespace cubos::core::ecs
         /// @param tags Tags array.
         /// @param nodes Node identifiers for each tag.
         static void makeSystemOrRepeatNode(TagId tagId, Schedule& schedule, const std::vector<TagData>& tags,
-                                           std::vector<Opt<Schedule::NodeId>>& nodes);
+                                           std::vector<memory::Opt<Schedule::NodeId>>& nodes);
 
         std::vector<TagData> mTags{};
     };

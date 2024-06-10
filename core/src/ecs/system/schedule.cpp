@@ -3,13 +3,14 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 
 using cubos::core::ecs::Schedule;
+using cubos::core::memory::Opt;
 
 void Schedule::clear()
 {
     mNodes.clear();
 }
 
-auto Schedule::repeat(ConditionId conditionId, Opt<NodeId> repeatId) -> Opt<NodeId>
+auto Schedule::repeat(ConditionId conditionId, const Opt<NodeId>& repeatId) -> Opt<NodeId>
 {
     if (auto id = this->node(repeatId))
     {
@@ -21,7 +22,7 @@ auto Schedule::repeat(ConditionId conditionId, Opt<NodeId> repeatId) -> Opt<Node
     return {};
 }
 
-auto Schedule::system(SystemId systemId, Opt<NodeId> repeatId) -> Opt<NodeId>
+auto Schedule::system(SystemId systemId, const Opt<NodeId>& repeatId) -> Opt<NodeId>
 {
     if (auto id = this->node(repeatId))
     {
@@ -32,7 +33,7 @@ auto Schedule::system(SystemId systemId, Opt<NodeId> repeatId) -> Opt<NodeId>
     return {};
 }
 
-auto Schedule::condition(ConditionId conditionId, Opt<NodeId> repeatId) -> Opt<NodeId>
+auto Schedule::condition(ConditionId conditionId, const Opt<NodeId>& repeatId) -> Opt<NodeId>
 {
     if (auto id = this->node(repeatId))
     {
@@ -380,7 +381,7 @@ void Schedule::matchNodeDepths(NodeId& left, NodeId& right) const
     }
 }
 
-void Schedule::skip(Opt<NodeId> repeatId, NodeId nodeId)
+void Schedule::skip(const Opt<NodeId>& repeatId, NodeId nodeId)
 {
     auto& node = mNodes[nodeId.inner];
 

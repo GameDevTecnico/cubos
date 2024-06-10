@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include <cubos/core/ecs/query/opt.hpp>
 #include <cubos/core/ecs/query/term.hpp>
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/memory/opt.hpp>
 
 namespace cubos::core::ecs
 {
@@ -268,7 +268,7 @@ namespace cubos::core::ecs
     };
 
     template <typename T>
-    class QueryFetcher<Opt<T&>>
+    class QueryFetcher<memory::Opt<T&>>
     {
     public:
         QueryFetcher(World& world, const QueryTerm& term)
@@ -299,7 +299,7 @@ namespace cubos::core::ecs
             }
         }
 
-        Opt<T&> fetch(std::size_t row)
+        memory::Opt<T&> fetch(std::size_t row)
         {
             if (mColumn == nullptr)
             {
@@ -317,7 +317,7 @@ namespace cubos::core::ecs
     };
 
     template <typename T>
-    class QueryFetcher<Opt<const T&>>
+    class QueryFetcher<memory::Opt<const T&>>
     {
     public:
         QueryFetcher(World& world, const QueryTerm& term)
@@ -349,7 +349,7 @@ namespace cubos::core::ecs
             }
         }
 
-        Opt<const T&> fetch(std::size_t row)
+        memory::Opt<const T&> fetch(std::size_t row)
         {
             if (mColumn == nullptr)
             {

@@ -1,6 +1,6 @@
 /// @file
-/// @brief Class @ref cubos::core::ecs::Opt.
-/// @ingroup core-ecs-query
+/// @brief Class @ref cubos::core::memory::Opt.
+/// @ingroup core-memory
 
 #pragma once
 
@@ -10,11 +10,11 @@
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/type.hpp>
 
-namespace cubos::core::ecs
+namespace cubos::core::memory
 {
-    /// @brief Wrapper for reference types to indicate that the given argument type is optional in a query.
+    /// @brief Wrapper for reference types to indicate that the given argument type is optional.
     /// @tparam T Argument type.
-    /// @ingroup core-ecs-query
+    /// @ingroup core-memory
     template <typename T>
     class Opt
     {
@@ -190,14 +190,14 @@ namespace cubos::core::ecs
     private:
         T* mValue;
     };
-} // namespace cubos::core::ecs
+} // namespace cubos::core::memory
 
-CUBOS_REFLECT_TEMPLATE_IMPL((typename T), (cubos::core::ecs::Opt<T>))
+CUBOS_REFLECT_TEMPLATE_IMPL((typename T), (cubos::core::memory::Opt<T>))
 {
     using namespace cubos::core::reflection;
-    using cubos::core::ecs::Opt;
+    using cubos::core::memory::Opt;
 
-    return reflection::Type::create("cubos::core::ecs::Opt<" + reflect<T>().name() + ">")
+    return reflection::Type::create("cubos::core::memory::Opt<" + reflect<T>().name() + ">")
         .with(ConstructibleTrait::typed<Opt<T>>().withDefaultConstructor().withCopyConstructor().build())
         .with(NullableTrait{[](const void* obj) -> bool { return static_cast<const Opt<T>*>(obj)->contains(); },
                             [](void* obj) { static_cast<Opt<T>*>(obj)->reset(); }});

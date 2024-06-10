@@ -38,6 +38,7 @@ set(CUBOS_CORE_SOURCE
 	"src/memory/buffer_stream.cpp"
 	"src/memory/any_value.cpp"
 	"src/memory/any_vector.cpp"
+	"src/memory/opt.cpp"
 
 	"src/reflection/reflect.cpp"
 	"src/reflection/type.cpp"
@@ -119,7 +120,6 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/query/data.cpp"
 	"src/ecs/query/filter.cpp"
 	"src/ecs/query/fetcher.cpp"
-	"src/ecs/query/opt.cpp"
 	"src/ecs/query/node/node.cpp"
 	"src/ecs/query/node/archetype.cpp"
 	"src/ecs/query/node/related.cpp"

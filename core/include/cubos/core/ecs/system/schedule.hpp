@@ -7,8 +7,8 @@
 #include <queue>
 #include <vector>
 
-#include <cubos/core/ecs/query/opt.hpp>
 #include <cubos/core/ecs/system/registry.hpp>
+#include <cubos/core/memory/opt.hpp>
 
 namespace cubos::core::ecs
 {
@@ -94,19 +94,19 @@ namespace cubos::core::ecs
         /// @param conditionId Condition identifier.
         /// @param repeatId Repeat node to become part of, if any.
         /// @return Repeat node identifier, or nothing if the given repeat node is not a repeat node.
-        Opt<NodeId> repeat(ConditionId conditionId, Opt<NodeId> repeatId = {});
+        memory::Opt<NodeId> repeat(ConditionId conditionId, const memory::Opt<NodeId>& repeatId = {});
 
         /// @brief Adds a system node to the schedule.
         /// @param systemId System identifier.
         /// @param repeatId Repeat node to become part of, if any.
         /// @return System node identifier, or nothing if the given repeat node is not a repeat node.
-        Opt<NodeId> system(SystemId systemId, Opt<NodeId> repeatId = {});
+        memory::Opt<NodeId> system(SystemId systemId, const memory::Opt<NodeId>& repeatId = {});
 
         /// @brief Adds a condition node to the schedule.
         /// @param conditionId Condition identifier.
         /// @param repeatId Repeat node to become part of, if any.
         /// @return Condition node identifier, or nothing if the given repeat node is not a repeat node.
-        Opt<NodeId> condition(ConditionId conditionId, Opt<NodeId> repeatId = {});
+        memory::Opt<NodeId> condition(ConditionId conditionId, const memory::Opt<NodeId>& repeatId = {});
 
         /// @brief Specifies that a node should only run if a given condition node returns true after finishing.
         ///
@@ -166,13 +166,13 @@ namespace cubos::core::ecs
             bool alreadyEvaluatedToTrue{false};
 
             /// @brief If the node is part of a repeat node, holds the repeat node's identifier.
-            Opt<NodeId> repeatId{};
+            memory::Opt<NodeId> repeatId{};
 
             /// @brief If the node is a system node, holds the system identifier.
-            Opt<SystemId> systemId{};
+            memory::Opt<SystemId> systemId{};
 
             /// @brief If the node is a repeat or condition node, holds the respective condition identifier.
-            Opt<ConditionId> conditionId{};
+            memory::Opt<ConditionId> conditionId{};
 
             /// @brief Used to distinguish between repeat and condition nodes.
             bool isRepeat{false};
@@ -200,7 +200,7 @@ namespace cubos::core::ecs
         /// @brief Adds a new default constructed node to the schedule.
         /// @param repeatId Repeat node to become part of, if any.
         /// @return Node identifier, or nothing if the given repeat node is not a repeat node.
-        Opt<NodeId> node(Opt<NodeId> repeatId);
+        memory::Opt<NodeId> node(memory::Opt<NodeId> repeatId);
 
         /// @brief Runs a specific node.
         /// @param registry Registry containing the systems.
@@ -227,11 +227,11 @@ namespace cubos::core::ecs
         /// @brief Increments the satisfaction of nodes which depend on the given node, as it won't run.
         /// @param repeatId Identifier of the repeat group the condition which failed is in.
         /// @param nodeId Node identifier.
-        void skip(Opt<NodeId> repeatId, NodeId nodeId);
+        void skip(const memory::Opt<NodeId>& repeatId, NodeId nodeId);
 
         /// @brief Increments the satisfaction of the given node, if there's one.
         /// @param node Node identifier.
-        void incrementSatisfaction(Opt<NodeId> node);
+        void incrementSatisfaction(memory::Opt<NodeId> node);
 
         /// @brief Increments the satisfaction of all of the given nodes.
         /// @param nodes Node identifiers.

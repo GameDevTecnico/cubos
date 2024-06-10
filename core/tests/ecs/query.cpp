@@ -5,6 +5,7 @@
 #include "utils.hpp"
 
 using namespace cubos::core::ecs;
+using namespace cubos::core::memory;
 
 template <typename... Ts>
 static std::size_t queryCount(World& world)
