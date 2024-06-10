@@ -172,9 +172,21 @@
             </dt>
             <dd>Returns a new builder used to add an observer to the engine.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab3f698e20a1b78731807d9685f13d210" class="m-doc">reset</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Resets the application to its initial state.</dd>
+            <dt id="a72a118b02364d64572575867599918fc">
+              <span class="m-doc-wrap-bumper">void <a href="#a72a118b02364d64572575867599918fc" class="m-doc-self">start</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Runs the application&#x27;s startup systems.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a97b3da51fec07b4efcc810838d8c08cb" class="m-doc">update</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Runs the application&#x27;s main systems.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a7815c8c987864e8e9e698c4f86b87e70" class="m-doc">run</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Runs the engine.</dd>
+            <dd>Runs the application&#x27;s main loop.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0d5aee528fb661eec93a649ae6553374" class="m-doc">before</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
@@ -895,12 +907,33 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="ab3f698e20a1b78731807d9685f13d210"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3f698e20a1b78731807d9685f13d210" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Resets the application to its initial state.</p>
+<p>Equivalent to constructing a new <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> object.</p>
+          </div></section>
+          <section class="m-doc-details" id="a97b3da51fec07b4efcc810838d8c08cb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a97b3da51fec07b4efcc810838d8c08cb" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Runs the application&#x27;s main systems.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the application should continue running, based on the <a href="structcubos_1_1core_1_1ecs_1_1ShouldQuit.html" class="m-doc">ShouldQuit</a> resource.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a7815c8c987864e8e9e698c4f86b87e70"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7815c8c987864e8e9e698c4f86b87e70" class="m-doc-self">run</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Runs the engine.</p>
-<p>Initially, dispatches all of the startup systems. Then, while <a href="structcubos_1_1core_1_1ecs_1_1ShouldQuit.html" class="m-doc">ShouldQuit</a> is false, dispatches all other systems.</p>
+            <p>Runs the application&#x27;s main loop.</p>
+<p>Equivalent to calling <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a72a118b02364d64572575867599918fc" class="m-doc">start()</a> followed by <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a97b3da51fec07b4efcc810838d8c08cb" class="m-doc">update()</a> until it returns false.</p>
           </div></section>
           <section class="m-doc-details" id="a0d5aee528fb661eec93a649ae6553374"><div>
             <h3>
