@@ -13,8 +13,9 @@ using namespace tesseratos;
 
 namespace
 {
-    struct Mode
+    struct State
     {
+        std::vector<cubos::core::Logger::Entry> ui_entries;
         std::size_t prevCursor = 0; // Previous cursor position~could find a better way to clear log
         bool clearEnabled = false;
         bool collapseEnabled = false;
@@ -63,7 +64,7 @@ static ImVec4 levelToColor(cubos::core::Logger::Level level)
     case cubos::core::Logger::Level::Error:
         return ImVec4(1.0F, 0.0F, 0.0F, 1.0F); // Red
     case cubos::core::Logger::Level::Critical:
-        return ImVec4(1.0F, 1.0F, 1.0F, 1.0F); // White (or any color you prefer for critical)
+        return ImVec4(1.0F, 0.0F, 0.0F, 0.5F); // Bright Red
     default:
         return {1.0F, 1.0F, 1.0F, 1.0F}; // Default to
     }
@@ -73,9 +74,9 @@ void tesseratos::consolePlugin(Cubos& cubos)
 {
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(toolboxPlugin);
-    cubos.resource<Mode>();
+    cubos.resource<State>();
 
-    cubos.system("show Logger UI").tagged(cubos::engine::imguiTag).call([](Toolbox& toolbox, Mode& mode) {
+    cubos.system("show Logger UI").tagged(cubos::engine::imguiTag).call([](Toolbox& toolbox, State& state) {
         if (!toolbox.isOpen("Console"))
         {
             return;
@@ -92,9 +93,8 @@ void tesseratos::consolePlugin(Cubos& cubos)
         // Log Scrollable Window
         ImGui::SetColumnWidth(0, ImGui::GetWindowWidth() * 0.8f);
 
-        std::size_t cursor = mode.prevCursor;
+        std::size_t cursor = state.prevCursor;
         cubos::core::Logger::Entry entry;
-        std::vector<cubos::core::Logger::Entry> ui_entries;
         cubos::core::Logger::Entry previousEntry;
 
         // Counters for each log level
@@ -107,21 +107,22 @@ void tesseratos::consolePlugin(Cubos& cubos)
 
         ImGui::BeginChild("Log", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()));
 
+        state.ui_entries.clear();
+
         while (cubos::core::Logger::read(cursor, entry))
         {
-            ui_entries.push_back(entry);
+            state.ui_entries.push_back(entry);
         }
 
-        if (mode.clearEnabled)
+        if (state.clearEnabled)
         {
-            ui_entries.clear();
-            mode.clearEnabled = false;
-            mode.prevCursor = cursor;
+            state.clearEnabled = false;
+            state.prevCursor = cursor;
         }
 
         std::size_t counter = 0;
         bool isFirstEntry = true;
-        for (cubos::core::Logger::Entry& e : ui_entries)
+        for (cubos::core::Logger::Entry& e : state.ui_entries)
         {
             switch (e.level)
             {
@@ -150,37 +151,37 @@ void tesseratos::consolePlugin(Cubos& cubos)
             switch (e.level)
             {
             case cubos::core::Logger::Level::Trace:
-                if (!mode.traceEnabled)
+                if (!state.traceEnabled)
                 {
                     continue;
                 }
                 break;
             case cubos::core::Logger::Level::Debug:
-                if (!mode.debugEnabled)
+                if (!state.debugEnabled)
                 {
                     continue;
                 }
                 break;
             case cubos::core::Logger::Level::Info:
-                if (!mode.infoEnabled)
+                if (!state.infoEnabled)
                 {
                     continue;
                 }
                 break;
             case cubos::core::Logger::Level::Warn:
-                if (!mode.warnEnabled)
+                if (!state.warnEnabled)
                 {
                     continue;
                 }
                 break;
             case cubos::core::Logger::Level::Error:
-                if (!mode.errorEnabled)
+                if (!state.errorEnabled)
                 {
                     continue;
                 }
                 break;
             case cubos::core::Logger::Level::Critical:
-                if (!mode.criticalEnabled)
+                if (!state.criticalEnabled)
                 {
                     continue;
                 }
@@ -194,7 +195,7 @@ void tesseratos::consolePlugin(Cubos& cubos)
                 continue;
             }
 
-            if (mode.collapseEnabled)
+            if (state.collapseEnabled)
             {
                 if (!isFirstEntry && previousEntry.message == e.message)
                 {
@@ -237,13 +238,13 @@ void tesseratos::consolePlugin(Cubos& cubos)
         // Clear Button
         if (ImGui::SmallButton("Clear"))
         {
-            mode.clearEnabled = true;
+            state.clearEnabled = true;
         }
 
         // Collapse Button
         if (ImGui::SmallButton("Collapse"))
         {
-            mode.collapseEnabled = !mode.collapseEnabled;
+            state.collapseEnabled = !state.collapseEnabled;
         }
 
         // Log Level Counters
@@ -251,25 +252,25 @@ void tesseratos::consolePlugin(Cubos& cubos)
         std::string traceText = "Trace (" + std::to_string(traceCount) + ")";
         if (ImGui::SmallButton(traceText.c_str()))
         {
-            mode.traceEnabled = !mode.traceEnabled;
+            state.traceEnabled = !state.traceEnabled;
         }
 
         std::string debugText = "Debug (" + std::to_string(debugCount) + ")";
         if (ImGui::SmallButton(debugText.c_str()))
         {
-            mode.debugEnabled = !mode.debugEnabled;
+            state.debugEnabled = !state.debugEnabled;
         }
 
         std::string infoText = "Info (" + std::to_string(infoCount) + ")";
         if (ImGui::SmallButton(infoText.c_str()))
         {
-            mode.infoEnabled = !mode.infoEnabled;
+            state.infoEnabled = !state.infoEnabled;
         }
 
         std::string warnText = "Warn (" + std::to_string(warnCount) + ")";
         if (ImGui::SmallButton(warnText.c_str()))
         {
-            mode.warnEnabled = !mode.warnEnabled;
+            state.warnEnabled = !state.warnEnabled;
         }
 
         std::string errorText = "Error (" + std::to_string(errorCount) + ")";
@@ -280,7 +281,7 @@ void tesseratos::consolePlugin(Cubos& cubos)
         std::string criticalText = "Critical (" + std::to_string(criticalCount) + ")";
         if (ImGui::SmallButton(criticalText.c_str()))
         {
-            mode.criticalEnabled = !mode.criticalEnabled;
+            state.criticalEnabled = !state.criticalEnabled;
         }
 
         ImGui::Columns(1); // Reset columns

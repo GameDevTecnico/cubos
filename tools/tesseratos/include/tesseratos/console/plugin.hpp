@@ -11,7 +11,7 @@
 
 namespace tesseratos
 {
-    /// @defgroup tesseratos-console-plugin Asset explorer
+    /// @defgroup tesseratos-console-plugin Console/Logs
     /// @ingroup tesseratos
     /// @brief Displays Cubos Logs.
     ///
