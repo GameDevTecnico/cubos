@@ -433,6 +433,11 @@
             </dt>
             <dd>System argument used to write ECS commands and execute them at a later time.</dd>
             <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc">Opt</a> = <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">core::<wbr />ecs::<wbr />Opt</a>&lt;T&gt;
+            </dt>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional in a query.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
               using <a href="#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a> = <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">core::<wbr />ecs::<wbr />EventReader</a>&lt;T, M&gt;
             </dt>
@@ -843,6 +848,27 @@
             </h3>
             <p>System argument used to write ECS commands and execute them at a later time.</p>
 <p>Internally wraps a reference to a CommandBuffer object.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad0f59a49870122ca4b9ea925be1929b3"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="prelude_8hpp.html">&lt;engine/prelude.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              using cubos::<wbr />engine::<wbr /><a href="#ad0f59a49870122ca4b9ea925be1929b3" class="m-doc-self">Opt</a> = <a href="classcubos_1_1core_1_1ecs_1_1Opt.html" class="m-doc">core::<wbr />ecs::<wbr />Opt</a>&lt;T&gt;
+            </h3>
+            <p>Wrapper for reference types to indicate that the given argument type is optional in a query.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Argument type.</td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
           <section class="m-doc-details" id="aa962f62de69af44f93726b63b90295e0"><div>
             <h3>
