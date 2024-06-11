@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ecs/blueprint.hpp file | Cubos Docs</title>
+  <title>cubos::core::ecs::DynamicPlugin class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,52 +46,85 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span>blueprint.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>DynamicPlugin <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="dynamic_8hpp.html">&lt;core/ecs/dynamic.hpp&gt;</a></div>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint</a>.</p>
+        <p>Manages the loading and unloading of a plugin from a shared library.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
-          <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>Cubos</strong> libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">cubos::core::ecs::Blueprint</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa6a313e623d448fc253b83436a695754" class="m-doc">load</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; bool</span>
             </dt>
-            <dd>Collection of entities and their respective components and relations.</dd>
+            <dd>Loads the plugin from a shared library with the given name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a11f2bf3b8d58d8c52ff1e464300070c4" class="m-doc">unload</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Unloads the plugin.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a94ad9f93da5a032b88852084426c0d15" class="m-doc">function</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-ecs.html#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a></span>
+            </dt>
+            <dd>Gets the plugin function pointer.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-ecs.html#ga2c5677b7a03cecd5a9464dad2abf1f12" class="m-doc">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;Entity, Entity, EntityHash&gt;&amp; map,
-              const reflection::Type&amp; type,
-              void* value) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Converts entities in a value to their respective new entities. If an entity is not found in the map, it is left unchanged.</dd>
-          </dl>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa6a313e623d448fc253b83436a695754"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />DynamicPlugin::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6a313e623d448fc253b83436a695754" class="m-doc-self">load</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
+            </h3>
+            <p>Loads the plugin from a shared library with the given name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Shared library name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the plugin was loaded successfully.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a11f2bf3b8d58d8c52ff1e464300070c4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />DynamicPlugin::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a11f2bf3b8d58d8c52ff1e464300070c4" class="m-doc-self">unload</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Unloads the plugin.</p>
+<p>Does nothing if the plugin was not loaded.</p>
+          </div></section>
+          <section class="m-doc-details" id="a94ad9f93da5a032b88852084426c0d15"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core-ecs.html#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> cubos::<wbr />core::<wbr />ecs::<wbr />DynamicPlugin::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a94ad9f93da5a032b88852084426c0d15" class="m-doc-self">function</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the plugin function pointer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Plugin function pointer.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the plugin was not loaded.</p>
+          </div></section>
         </section>
       </div>
     </div>
