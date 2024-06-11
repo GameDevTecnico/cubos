@@ -83,7 +83,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#af3ece75dc266fe43f41c21769f2da9b9" class="m-doc">from</a>(</span><span class="m-doc-wrap">const std::string&amp; address) -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&gt;</span>
             </dt>
-            <dd>Parses a string to return a <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>.</dd>
+            <dd>Parses a string to return an <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -120,7 +120,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af389ed187bdd1f30f3c7e018665f611c" class="m-doc">toString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
             </dt>
-            <dd>Converts the IPv4 address 32-bit value to a string.</dd>
+            <dd>Converts the IPv4 address value to a string.</dd>
           </dl>
         </section>
         <section>
@@ -129,7 +129,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&gt; cubos::<wbr />core::<wbr />net::<wbr />Address::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3ece75dc266fe43f41c21769f2da9b9" class="m-doc-self">from</a>(</span><span class="m-doc-wrap">const std::string&amp; address)</span></span>
             </h3>
-            <p>Parses a string to return a <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>.</p>
+            <p>Parses a string to return an <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -137,13 +137,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">address</td>
-                  <td>The address in a string format, such as <code>127.0.0.1</code>.</td>
+                  <td>The address, either in IPv4 format, such as <code>127.0.0.1</code>, or as a domain hostname, like <code>localhost</code> or <code>www.google.com</code>.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> object.</td>
+                  <td><a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> object, or nothing if could not resolve provided <code>address</code>.</td>
                 </tr>
               </tfoot>
             </table>
@@ -152,12 +152,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />net::<wbr />Address::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af389ed187bdd1f30f3c7e018665f611c" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Converts the IPv4 address 32-bit value to a string.</p>
+            <p>Converts the IPv4 address value to a string.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> represented as string, in a <code>a.b.c.d</code> format.</td>
+                  <td><a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> represented as a string, in a <code>a.b.c.d</code> format.</td>
                 </tr>
               </tfoot>
             </table>
