@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>tesseratos/scene_editor/ directory | Cubos Docs</title>
+  <title>cubos::core::ecs::DynamicPlugin class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,26 +46,85 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_2a25e2bce65ce0f842dba5b7b3a0e22d.html">tesseratos</a>/</span>scene_editor<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>DynamicPlugin <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="dynamic_8hpp.html">&lt;core/ecs/dynamic.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__tesseratos-scene-editor-plugin.html" class="m-doc">Scene editor</a> plugin directory.</p>
+        <p>Manages the loading and unloading of a plugin from a shared library.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="tools_2tesseratos_2include_2tesseratos_2scene__editor_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa6a313e623d448fc253b83436a695754" class="m-doc">load</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Loads the plugin from a shared library with the given name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a11f2bf3b8d58d8c52ff1e464300070c4" class="m-doc">unload</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Unloads the plugin.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a94ad9f93da5a032b88852084426c0d15" class="m-doc">function</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-ecs.html#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a></span>
+            </dt>
+            <dd>Gets the plugin function pointer.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa6a313e623d448fc253b83436a695754"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />DynamicPlugin::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6a313e623d448fc253b83436a695754" class="m-doc-self">load</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
+            </h3>
+            <p>Loads the plugin from a shared library with the given name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Shared library name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the plugin was loaded successfully.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a11f2bf3b8d58d8c52ff1e464300070c4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />DynamicPlugin::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a11f2bf3b8d58d8c52ff1e464300070c4" class="m-doc-self">unload</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Unloads the plugin.</p>
+<p>Does nothing if the plugin was not loaded.</p>
+          </div></section>
+          <section class="m-doc-details" id="a94ad9f93da5a032b88852084426c0d15"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core-ecs.html#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> cubos::<wbr />core::<wbr />ecs::<wbr />DynamicPlugin::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a94ad9f93da5a032b88852084426c0d15" class="m-doc-self">function</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the plugin function pointer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Plugin function pointer.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Aborts if the plugin was not loaded.</p>
+          </div></section>
         </section>
       </div>
     </div>
