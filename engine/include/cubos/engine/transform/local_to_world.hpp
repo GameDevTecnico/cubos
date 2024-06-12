@@ -28,6 +28,10 @@ namespace cubos::engine
 
         glm::mat4 mat = glm::mat4(1.0F); ///< Local to world space matrix.
 
+        /// @brief Gets Local to world space matrix reversed.
+        /// @return World to local space matrix inversed.
+        glm::mat4 inverse() const;
+
         /// @brief Gets global position of the entity.
         /// @return Position vector in world space.
         glm::vec3 worldPosition() const;
