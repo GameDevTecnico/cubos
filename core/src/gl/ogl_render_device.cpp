@@ -1189,6 +1189,7 @@ public:
             return &bps.back();
         }
 
+#ifndef __EMSCRIPTEN__
         // Search for shader storage block binding
         index = glGetProgramResourceIndex(this->program, GL_SHADER_STORAGE_BLOCK, name);
         if (index != GL_INVALID_INDEX)
@@ -1207,6 +1208,7 @@ public:
             bps.emplace_back(name, loc);
             return &bps.back();
         }
+#endif
 
         return nullptr;
     }
