@@ -272,7 +272,6 @@ namespace cubos::core::gl
         Repeat,
         Mirror,
         Clamp,
-        Border,
     };
 
     /// @brief Texture filter type.
@@ -299,14 +298,6 @@ namespace cubos::core::gl
         Front,
         Back,
         FrontAndBack,
-    };
-
-    /// @brief Rasterizer mode.
-    /// @ingroup core-gl
-    enum class RasterMode
-    {
-        Wireframe,
-        Fill,
     };
 
     /// @brief Comparison function.
@@ -486,11 +477,10 @@ namespace cubos::core::gl
     /// @ingroup core-gl
     struct RasterStateDesc
     {
-        bool cullEnabled = false;                 ///< Is face culling enabled?
-        Face cullFace = Face::Back;               ///< Face that will be culled.
-        Winding frontFace = Winding::CCW;         ///< Front face winding.
-        RasterMode rasterMode = RasterMode::Fill; ///< Rasterizer mode.
-        bool scissorEnabled = false;              ///< Is scissor test enabled?
+        bool cullEnabled = false;         ///< Is face culling enabled?
+        Face cullFace = Face::Back;       ///< Face that will be culled.
+        Winding frontFace = Winding::CCW; ///< Front face winding.
+        bool scissorEnabled = false;      ///< Is scissor test enabled?
     };
 
     /// @brief Describes a depth stencil state.
@@ -557,8 +547,6 @@ namespace cubos::core::gl
     /// @ingroup core-gl
     struct SamplerDesc
     {
-        float borderColor[4] = {0.0F}; ///< Border color applied when the address mode is AddressMode::Border.
-
         TextureFilter minFilter = TextureFilter::Nearest; ///< Minifying filter.
         TextureFilter magFilter = TextureFilter::Nearest; ///< Magnifying filter.
         TextureFilter mipmapFilter = TextureFilter::None; ///< Set to None to disable mipmapping.
