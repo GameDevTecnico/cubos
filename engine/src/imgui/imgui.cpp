@@ -539,16 +539,24 @@ void cubos::engine::imguiEndFrame(const gl::Framebuffer& target)
 static bool handle(const io::MouseMoveEvent& event)
 {
     ImGuiIO& io = ImGui::GetIO();
-    io.MousePos = ImVec2(static_cast<float>(event.position.x) * io.DisplayFramebufferScale.x,
-                         static_cast<float>(event.position.y) * io.DisplayFramebufferScale.y);
+    auto* bd = (ImGuiData*)io.BackendPlatformUserData;
+
+    if (bd->window->mouseState() != io::MouseState::Locked)
+    {
+        io.MousePos = ImVec2(static_cast<float>(event.position.x) * io.DisplayFramebufferScale.x,
+                             static_cast<float>(event.position.y) * io.DisplayFramebufferScale.y);
+    }
+
     return io.WantCaptureMouse;
 }
 
 static bool handle(const io::MouseButtonEvent& event)
 {
     ImGuiIO& io = ImGui::GetIO();
+    auto* bd = (ImGuiData*)io.BackendPlatformUserData;
+
     int button = buttonToImGuiButton(event.button);
-    if (button != -1)
+    if (button != -1 && bd->window->mouseState() != io::MouseState::Locked)
     {
         io.AddMouseButtonEvent(button, event.pressed);
     }
@@ -558,7 +566,13 @@ static bool handle(const io::MouseButtonEvent& event)
 static bool handle(const io::MouseScrollEvent& event)
 {
     ImGuiIO& io = ImGui::GetIO();
-    io.AddMouseWheelEvent(static_cast<float>(event.offset.x), static_cast<float>(event.offset.y));
+    auto* bd = (ImGuiData*)io.BackendPlatformUserData;
+
+    if (bd->window->mouseState() != io::MouseState::Locked)
+    {
+        io.AddMouseWheelEvent(static_cast<float>(event.offset.x), static_cast<float>(event.offset.y));
+    }
+
     return io.WantCaptureMouse;
 }
 
