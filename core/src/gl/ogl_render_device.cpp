@@ -22,6 +22,7 @@ using namespace cubos::core::gl;
 
 #define LOG_GL_ERROR(err) CUBOS_ERROR("OpenGL error: {}", err)
 
+#ifndef __EMSCRIPTEN__
 // OpenGL message callback (errors, warnings, etc)
 static void GLAPIENTRY messageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length,
                                        const GLchar* message, const void* userParam)
@@ -39,6 +40,7 @@ static void GLAPIENTRY messageCallback(GLenum source, GLenum type, GLuint id, GL
         CUBOS_WARN("OpenGL warning (source = {}, type = {}): {}", source, type, message);
     }
 }
+#endif // __EMSCRIPTEN__
 
 // Converts a texture format into the necessary GL parameters
 static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, GLenum& format, GLenum& type)
@@ -1225,6 +1227,7 @@ OGLRenderDevice::~OGLRenderDevice()
 
 OGLRenderDevice::OGLRenderDevice()
 {
+#ifndef __EMSCRIPTEN__
     // Set the debug message callback
     // TODO: disable this on release for performance reasons (?)
     if (this->OGLRenderDevice::getProperty(Property::ComputeSupported) != 0)
@@ -1232,6 +1235,7 @@ OGLRenderDevice::OGLRenderDevice()
         glEnable(GL_DEBUG_OUTPUT);
         glDebugMessageCallback(messageCallback, nullptr);
     }
+#endif
 
     // Create default states
     mDefaultRS = OGLRenderDevice::createRasterState({});
