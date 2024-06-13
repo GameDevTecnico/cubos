@@ -1,3 +1,9 @@
+/**
+ * OpenGL 3.3 Reference http://opengl.org/sdk/docs/man3/
+ * OpenGL ES 3.0 Reference https://registry.khronos.org/OpenGL-Refpages/es3.0/
+ * Differences Between WebGL and OpenGL ES 3.0 https://registry.khronos.org/webgl/specs/latest/2.0/#5
+ */
+
 #include <cassert>
 #include <cstdlib>
 #include <list>
