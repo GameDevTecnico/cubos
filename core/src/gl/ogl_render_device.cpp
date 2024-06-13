@@ -567,7 +567,7 @@ class OGLTexture2D : public impl::Texture2D
 {
 public:
     OGLTexture2D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type,
-                 GLsizeiptr width, GLsizeiptr height)
+                 GLsizei width, GLsizei height)
         : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
@@ -621,8 +621,8 @@ public:
     GLenum internalFormat;
     GLenum format;
     GLenum type;
-    GLsizeiptr width;
-    GLsizeiptr height;
+    GLsizei width;
+    GLsizei height;
 };
 
 class OGLTexture2DArray : public impl::Texture2DArray
@@ -1769,7 +1769,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     }
 
     return std::make_shared<OGLTexture2D>(mDestroyed, id, internalFormat, format, type,
-                                          static_cast<GLsizeiptr>(desc.width), static_cast<GLsizeiptr>(desc.height));
+                                          static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height));
 }
 
 Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& desc)
