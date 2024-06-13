@@ -404,3 +404,5 @@ imgui.ini
 /.direnv
 
 .DS_store
+
+.em_cache

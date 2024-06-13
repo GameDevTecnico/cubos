@@ -18,6 +18,11 @@ message("# Building cubos::core samples: " ${CUBOS_CORE_SAMPLES})
 message("# Building cubos::core tests: " ${CUBOS_CORE_TESTS})
 message("# Building cubos::core as shared library: " ${CUBOS_CORE_SHARED})
 
+if (EMSCRIPTEN AND CUBOS_CORE_SHARED)
+	message(WARNING "Cannot build core as shared library on Emscripten")
+	set(CUBOS_CORE_SHARED OFF)
+endif()
+
 # --------------------- Define core library source files ----------------------
 
 set(CUBOS_CORE_SOURCE
@@ -178,10 +183,12 @@ endif()
 target_compile_options(cubos-core PRIVATE -DCUBOS_CORE_METRIC_MAX_ENTRIES=${CUBOS_CORE_METRIC_MAX_ENTRIES})
 
 # Link small libraries
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
 target_link_libraries(cubos-core PUBLIC ${CMAKE_DL_LIBS})
-target_link_libraries(cubos-core PRIVATE Threads::Threads)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+if(NOT EMSCRIPTEN)
+	find_package(Threads REQUIRED)
+	target_link_libraries(cubos-core PRIVATE Threads::Threads)
+endif()
 
 # ------------- Fetch and link core private library dependencies --------------
 
@@ -217,28 +224,37 @@ if(CUBOS_CORE_OPENGL)
 	endif()
 	target_link_libraries(cubos-core PRIVATE glad)
 	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_OPENGL GLAD_GLAPI_EXPORT GLAD_GLAPI_EXPORT_BUILD)
+
+	if(EMSCRIPTEN)
+		target_link_libraries(cubos-core PRIVATE GL)
+	endif()
 endif()
 
 # If GLFW support is enabled, fetch and link it
 if(CUBOS_CORE_GLFW)
-	FetchContent_Declare(
-		glfw
-		GIT_REPOSITORY https://github.com/glfw/glfw.git
-		GIT_TAG        3.3.8
-		SYSTEM 
-		FIND_PACKAGE_ARGS NAMES glfw3
-	)
-
-	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Don't build GLFW examples" FORCE)
-	set(GLFW_BUILD_TESTS OFF CACHE BOOL "Don't build GLFW tests" FORCE)
-	set(GLFW_BUILD_DOCS OFF CACHE BOOL "Don't build GLFW documentation" FORCE)
-	if(CUBOS_CORE_SHARED)
-		set(GLFW_INSTALL OFF CACHE BOOL "Don't install GLFW" FORCE)
+	if(EMSCRIPTEN)
+		# Emscripten ships its own GLFW
+        set_target_properties(cubos-core PROPERTIES LINK_FLAGS "-sUSE_GLFW=3")
 	else()
-		set(GLFW_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Don't install GLFW" FORCE)
+		FetchContent_Declare(
+			glfw
+			GIT_REPOSITORY https://github.com/glfw/glfw.git
+			GIT_TAG        3.3.8
+			SYSTEM 
+			FIND_PACKAGE_ARGS NAMES glfw3
+		)
+
+		set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Don't build GLFW examples" FORCE)
+		set(GLFW_BUILD_TESTS OFF CACHE BOOL "Don't build GLFW tests" FORCE)
+		set(GLFW_BUILD_DOCS OFF CACHE BOOL "Don't build GLFW documentation" FORCE)
+		if(CUBOS_CORE_SHARED)
+			set(GLFW_INSTALL OFF CACHE BOOL "Don't install GLFW" FORCE)
+		else()
+			set(GLFW_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Don't install GLFW" FORCE)
+		endif()
+		set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build GLFW as a static library" FORCE)
+		FetchContent_MakeAvailable(glfw)
 	endif()
-	set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build GLFW as a static library" FORCE)
-	FetchContent_MakeAvailable(glfw)
 
 	target_link_libraries(cubos-core PRIVATE glfw)
 	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_GLFW)

@@ -26,35 +26,44 @@
         devShell = pkgs.mkShell {
           hardeningDisable = [ "all" ];
 
-          packages = with pkgs;
-            [
-              # = build tools =
-              cmake
-              ccache
-              pkg-config
+          packages = with pkgs; [
+            # = build tools =
+            cmake
+            ccache
+            pkg-config
+            emscripten
+            ninja
 
-              # = formatting =
-              clang-tools
+            # = formatting =
+            clang-tools
 
-              # = docs =
-              doxygen
+            # = docs =
+            doxygen
 
-              (python3.withPackages (ps: [
-                ps.jinja2
-                ps.pygments
-              ]))
+            (python3.withPackages (ps: [
+              ps.jinja2
+              ps.pygments
+            ]))
 
-              # = libs =
-              glfw
-              glm
-              doctest
+            # = libs =
+            glfw
+            glm
+            doctest
 
-              # = debug =
-              gdb
-            ]
-            ++ sysLibs;
+            # = debug =
+            gdb
+          ]
+          ++ sysLibs;
 
           LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath sysLibs}";
+
+          shellHook = ''
+            export EMSCRIPTEN=${pkgs.emscripten}/share/emscripten
+            export EM_CACHE=$(git rev-parse --show-toplevel)/.em_cache
+            mkdir -p $EM_CACHE
+            cp -r $EMSCRIPTEN/cache/* $EM_CACHE
+            chmod u+rwx -R $EM_CACHE
+          '';
         };
 
         packages.default = pkgs.callPackage ./default.nix { };

@@ -124,6 +124,15 @@ function(cubos_common_target_options target)
             set_target_properties(${target} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}")
         endif()
     endif()
+
+    if(EMSCRIPTEN)
+        set_target_properties(${target} PROPERTIES
+            SUFFIX
+                ".html"
+            LINK_FLAGS
+                "-sSTRICT -sFILESYSTEM=0 -sASSERTIONS=0"
+        )
+    endif()
 endfunction()
 
 # -------------- Fetch dependencies common to multiple libraries --------------
