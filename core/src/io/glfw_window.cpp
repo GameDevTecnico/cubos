@@ -1,6 +1,10 @@
 #include "glfw_window.hpp"
 
+#ifdef __EMSCRIPTEN__
+#include <glad/gles2.h>
+#else
 #include <glad/gl.h>
+#endif
 
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
@@ -54,12 +58,19 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
         abort();
     }
 
+#ifdef __EMSCRIPTEN__
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+#else
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif // __APPLE__
+#endif // __EMSCRIPTEN__
 
     // TODO: handle mode (fullscreen, ...)
     mHandle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
@@ -71,11 +82,20 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
 
     // Create OpenGL render device
     glfwMakeContextCurrent(mHandle);
+#ifdef __EMSCRIPTEN__
+    int version = gladLoadGLES2(glfwGetProcAddress);
+    if (version == 0)
+    {
+        CUBOS_FAIL("OpenGL ES 3.0 loader failed");
+    }
+
+    CUBOS_INFO("OpenGL ES version: {}.{}", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
+#else
     if (gladLoadGL(glfwGetProcAddress) == 0)
     {
-        CUBOS_CRITICAL("OpenGL loader failed");
-        abort();
+        CUBOS_FAIL("OpenGL loader failed");
     }
+#endif //__EMSCRIPTEN__
     mRenderDevice = new gl::OGLRenderDevice();
 
     if (!vSync)
@@ -102,10 +122,10 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
             this->pushEvent(GamepadConnectionEvent{.gamepad = i, .connected = true});
         }
     }
-#endif
+#endif // __EMSCRIPTEN__
 #else
     UNSUPPORTED();
-#endif
+#endif // WITH_GLFW
 }
 
 GLFWWindow::~GLFWWindow()

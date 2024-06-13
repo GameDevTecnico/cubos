@@ -115,7 +115,7 @@ function(cubos_common_target_options target)
     endif()
 
     if (EMSCRIPTEN)
-        set(LFLAGS "-sSTRICT -sFILESYSTEM=0 -sASSERTIONS=0")
+        set(LFLAGS "-sSTRICT -sFILESYSTEM=0 -sASSERTIONS=0 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2")
 
         if (WITH_GLFW)
             set(LFLAGS "${LFLAGS} -sUSE_GLFW=3")
