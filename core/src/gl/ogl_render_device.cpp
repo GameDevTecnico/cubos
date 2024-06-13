@@ -104,7 +104,7 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         type = GL_BYTE;
         break;
     case TextureFormat::R16UNorm:
-        internalFormat = GL_R16;
+        internalFormat = GL_R16F;
         format = GL_RED;
         type = GL_UNSIGNED_SHORT;
         break;
@@ -119,7 +119,7 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         type = GL_SHORT;
         break;
     case TextureFormat::RG16UNorm:
-        internalFormat = GL_RG16;
+        internalFormat = GL_RG16F;
         format = GL_RG;
         type = GL_UNSIGNED_SHORT;
         break;
@@ -134,7 +134,7 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         type = GL_SHORT;
         break;
     case TextureFormat::RGBA16UNorm:
-        internalFormat = GL_RGBA16;
+        internalFormat = GL_RGBA16F;
         format = GL_RGBA;
         type = GL_UNSIGNED_SHORT;
         break;
@@ -1556,7 +1556,11 @@ void OGLRenderDevice::setDepthStencilState(DepthStencilState dss)
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(dssImpl->depthFunc);
         glDepthMask(dssImpl->depthWriteEnabled);
+#ifndef __EMSCRIPTEN__
         glDepthRange(dssImpl->depthNear, dssImpl->depthFar);
+#else
+        glDepthRangef(dssImpl->depthNear, dssImpl->depthFar);
+#endif
     }
 
     if (dssImpl->stencilEnabled == 0U)
@@ -2405,7 +2409,11 @@ void OGLRenderDevice::clearTargetColor(std::size_t target, int r, int g, int b, 
 
 void OGLRenderDevice::clearDepth(float depth)
 {
+#ifndef __EMSCRIPTEN__
     glClearDepth(depth);
+#else
+    glClearDepthf(depth);
+#endif
     glClear(GL_DEPTH_BUFFER_BIT);
 }
 
