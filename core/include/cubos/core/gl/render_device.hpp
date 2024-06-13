@@ -1001,13 +1001,11 @@ namespace cubos::core::gl
             /// @brief Reads texture data into a buffer, which must have the same format used when
             /// the texture was created.
             /// @param outputBuffer Buffer to write the data to.
-            /// @param level Mip level to read.
-            virtual void read(void* outputBuffer, std::size_t level = 0) = 0;
+            virtual void read(void* outputBuffer) = 0;
 
             /// @brief Copies part of the texture data into a pixel pack buffer.
             /// @param buffer Buffer to copy into.
-            /// @param level Mip level to copy.
-            virtual void copyTo(gl::PixelPackBuffer buffer, std::size_t level = 0) = 0;
+            virtual void copyTo(gl::PixelPackBuffer buffer) = 0;
 
             /// @brief Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;

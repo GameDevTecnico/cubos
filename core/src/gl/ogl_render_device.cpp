@@ -558,12 +558,15 @@ public:
 class OGLTexture2D : public impl::Texture2D
 {
 public:
-    OGLTexture2D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+    OGLTexture2D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type,
+                 GLsizeiptr width, GLsizeiptr height)
         : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
         , format(format)
         , type(type)
+        , width(width)
+        , height(height)
     {
     }
 
@@ -583,19 +586,19 @@ public:
                         static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type, data);
     }
 
-    void read(void* outputBuffer, std::size_t level) override
+    void read(void* outputBuffer) override
     {
         glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
         glBindTexture(GL_TEXTURE_2D, this->id);
-        glGetTexImage(GL_TEXTURE_2D, static_cast<GLint>(level), this->format, this->type, outputBuffer);
+        glReadPixels(0, 0, this->width, this->height, this->format, this->type, outputBuffer);
     }
 
-    void copyTo(PixelPackBuffer buffer, std::size_t level) override
+    void copyTo(PixelPackBuffer buffer) override
     {
         glBindBuffer(GL_PIXEL_PACK_BUFFER, std::static_pointer_cast<OGLPixelPackBuffer>(buffer)->id);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->id);
-        glGetTexImage(GL_TEXTURE_2D, static_cast<GLint>(level), this->format, this->type, nullptr);
+        glReadPixels(0, 0, this->width, this->height, this->format, this->type, nullptr);
     }
 
     void generateMipmaps() override
@@ -610,6 +613,8 @@ public:
     GLenum internalFormat;
     GLenum format;
     GLenum type;
+    GLsizeiptr width;
+    GLsizeiptr height;
 };
 
 class OGLTexture2DArray : public impl::Texture2DArray
@@ -1748,7 +1753,8 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
         return nullptr;
     }
 
-    return std::make_shared<OGLTexture2D>(mDestroyed, id, internalFormat, format, type);
+    return std::make_shared<OGLTexture2D>(mDestroyed, id, internalFormat, format, type,
+                                          static_cast<GLsizeiptr>(desc.width), static_cast<GLsizeiptr>(desc.height));
 }
 
 Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& desc)
