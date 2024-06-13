@@ -227,11 +227,8 @@ namespace cubos::core::gl
     enum class TextureFormat
     {
         R8SNorm,     ///< 1 channel 8 bits normalized signed integer.
-        R16SNorm,    ///< 1 channel 16 bits normalized signed integer.
         RG8SNorm,    ///< 2 channel 8 bits normalized signed integer.
-        RG16SNorm,   ///< 2 channel 16 bits normalized signed integer.
         RGBA8SNorm,  ///< 4 channel 8 bits normalized signed integer.
-        RGBA16SNorm, ///< 4 channel 16 bits normalized signed integer.
         R8UNorm,     ///< 1 channel 8 bits normalized unsigned integer.
         R16UNorm,    ///< 1 channel 16 bits normalized unsigned integer.
         RG8UNorm,    ///< 2 channel 8 bits normalized unsigned integer.
