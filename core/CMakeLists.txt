@@ -210,7 +210,7 @@ if(CUBOS_CORE_OPENGL)
 	FetchContent_Declare(
 		glad
 		GIT_REPOSITORY https://github.com/GameDevTecnico/cubos-glad.git
-		GIT_TAG        496c56587442591557a89551d90906b1c53f639f
+		GIT_TAG        207473f16f9ec17d3f69002f3bed923fb4064ac8
 		SYSTEM
 	)
 	if(CUBOS_CORE_SHARED)
@@ -227,6 +227,7 @@ if(CUBOS_CORE_OPENGL)
 
 	if(EMSCRIPTEN)
 		target_link_libraries(cubos-core PRIVATE GL)
+		set_target_properties(cubos-core PROPERTIES LINK_FLAGS "-sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2")
 	endif()
 endif()
 
