@@ -86,5 +86,5 @@ CUBOS_REFLECT_EXTERNAL_IMPL(WindowEvent)
 CUBOS_REFLECT_EXTERNAL_IMPL(Window)
 {
     return Type::create("cubos::core::io::Window")
-        .with(ConstructibleTrait::typed<Window>().withMoveConstructor().build());
+        .with(ConstructibleTrait::typed<Window>().withMoveConstructor().withCopyConstructor().build());
 }

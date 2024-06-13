@@ -1062,7 +1062,7 @@ namespace cubos::core::gl
         };
 
         /// @brief Abstract 2D texture.
-        class CUBOS_CORE_API Texture2D
+        class CUBOS_CORE_API Texture2D : public std::enable_shared_from_this<Texture2D>
         {
         public:
             virtual ~Texture2D() = default;

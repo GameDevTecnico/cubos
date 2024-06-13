@@ -15,6 +15,7 @@ using cubos::core::ecs::Cubos;
 using cubos::core::ecs::DeltaTime;
 using cubos::core::ecs::Name;
 using cubos::core::ecs::ShouldQuit;
+using cubos::core::ecs::World;
 
 CUBOS_REFLECT_IMPL(DeltaTime)
 {
@@ -203,6 +204,7 @@ void Cubos::reset()
 
     this->resource<DeltaTime>();
     this->resource<ShouldQuit>();
+    this->resource<Arguments>();
 }
 
 void Cubos::start()
@@ -292,6 +294,16 @@ void Cubos::run()
     while (this->update())
     {
     }
+}
+
+bool Cubos::isStarted() const
+{
+    return mState != nullptr;
+}
+
+World& Cubos::world()
+{
+    return mWorld;
 }
 
 bool Cubos::isRegistered(const reflection::Type& type) const

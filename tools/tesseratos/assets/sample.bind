@@ -1,0 +1,35 @@
+{
+    "actions": {
+        "toggle-camera": {
+            "keys": [
+                "Escape"
+            ]   
+        }
+    },
+    "axes": {
+        "move-lateral": {
+            "positive": [
+                "D"
+            ],
+            "negative": [
+                "A"
+            ]
+        },
+        "move-vertical": {
+            "positive": [
+                "E"
+            ],
+            "negative": [
+                "Q"
+            ]
+        },
+        "move-longitudinal": {
+            "positive": [
+                "W"
+            ],
+            "negative": [
+                "S"
+            ]
+        }
+    }
+}
