@@ -27,6 +27,20 @@ namespace tesseratos
         /// @param plugin Plugin to be injected.
         void inject(cubos::core::ecs::Plugin target, cubos::core::ecs::Plugin plugin);
 
+        /// @brief Adds a resource to the game which will be injected into the game's world before startup.
+        /// @param resource Resource.
+        void resource(cubos::core::memory::AnyValue resource);
+
+        /// @brief Adds a resource to the game which will be injected into the game's world before startup.
+        /// @tparam T Resource type.
+        /// @param resource Resource.
+        template <typename T, typename... TArgs>
+        void resource(TArgs&&... args)
+        {
+            this->resource(cubos::core::memory::AnyValue::customConstruct<T, TArgs...>(
+                cubos::core::memory::forward<TArgs>(args)...));
+        }
+
         /// @brief Unloads the game.
         ///
         /// Does nothing if the game has not been loaded.
@@ -96,5 +110,8 @@ namespace tesseratos
 
         /// @brief Plugins to be injected.
         std::unordered_map<cubos::core::ecs::Plugin, cubos::core::ecs::Plugin> mInjections{};
+
+        /// @brief Resources to be added.
+        std::vector<cubos::core::memory::AnyValue> mResources{};
     };
 } // namespace tesseratos

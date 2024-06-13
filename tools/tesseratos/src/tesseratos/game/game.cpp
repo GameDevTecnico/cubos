@@ -17,6 +17,12 @@ void Game::inject(cubos::core::ecs::Plugin target, cubos::core::ecs::Plugin plug
     mInjections.emplace(target, plugin);
 }
 
+void Game::resource(cubos::core::memory::AnyValue resource)
+{
+    CUBOS_ASSERT(!mCubos.isStarted(), "Game has already been started");
+    mResources.emplace_back(std::move(resource));
+}
+
 void Game::unload()
 {
     mCubos.reset();
@@ -46,6 +52,18 @@ void Game::start()
 {
     CUBOS_ASSERT(mPlugin != nullptr, "Game has not been loaded");
     CUBOS_ASSERT(!mCubos.isStarted(), "Game has already been started");
+
+    for (const auto& resource : mResources)
+    {
+        if (mCubos.world().types().contains(resource.type()))
+        {
+            mCubos.world().insertResource(resource);
+        }
+        else
+        {
+            CUBOS_WARN("Resource {} not registered on Game, skipping insertion", resource.type().name());
+        }
+    }
 
     CUBOS_INFO("Starting game");
     mCubos.start();
