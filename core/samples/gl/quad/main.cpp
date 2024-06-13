@@ -15,8 +15,6 @@ int main()
 
     {
         auto vs = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
-            #version 330 core
-
             in vec2 position;
             in vec2 uv;
 
@@ -35,8 +33,6 @@ int main()
         )");
 
         auto ps = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
-            #version 330 core
-
             in vec2 fragUV;
             out vec4 color;
 
