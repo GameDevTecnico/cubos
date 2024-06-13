@@ -11,6 +11,11 @@ message("# Building cubos::engine samples: " ${CUBOS_ENGINE_SAMPLES})
 message("# Building cubos::engine tests: " ${CUBOS_ENGINE_TESTS})
 message("# Building cubos::engine as shared library: " ${CUBOS_ENGINE_SHARED})
 
+if (EMSCRIPTEN AND CUBOS_ENGINE_SHARED)
+	message(WARNING "Cannot build engine as shared library on Emscripten")
+	set(CUBOS_ENGINE_SHARED OFF)
+endif()
+
 # -------------------- Define engine library source files ---------------------
 
 set(CUBOS_ENGINE_SOURCE
