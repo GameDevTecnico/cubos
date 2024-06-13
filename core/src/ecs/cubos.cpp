@@ -204,6 +204,7 @@ void Cubos::reset()
 
     this->resource<DeltaTime>();
     this->resource<ShouldQuit>();
+    this->resource<Arguments>();
 }
 
 void Cubos::start()
