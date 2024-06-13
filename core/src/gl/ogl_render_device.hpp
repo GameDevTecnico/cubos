@@ -25,12 +25,10 @@ namespace cubos::core::gl
         BlendState createBlendState(const BlendStateDesc& desc) override;
         void setBlendState(BlendState bs) override;
         Sampler createSampler(const SamplerDesc& desc) override;
-        Texture1D createTexture1D(const Texture1DDesc& desc) override;
         Texture2D createTexture2D(const Texture2DDesc& desc) override;
         Texture2DArray createTexture2DArray(const Texture2DArrayDesc& desc) override;
         Texture3D createTexture3D(const Texture3DDesc& desc) override;
         CubeMap createCubeMap(const CubeMapDesc& desc) override;
-        CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
         PixelPackBuffer createPixelPackBuffer(std::size_t size) override;
         ConstantBuffer createConstantBuffer(std::size_t size, const void* data, Usage usage) override;
         IndexBuffer createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage) override;

@@ -63,12 +63,10 @@ namespace cubos::core::gl
 
         class PixelPackBuffer;
         class Sampler;
-        class Texture1D;
         class Texture2D;
         class Texture2DArray;
         class Texture3D;
         class CubeMap;
-        class CubeMapArray;
 
         class ConstantBuffer;
         class IndexBuffer;
@@ -113,11 +111,6 @@ namespace cubos::core::gl
     /// @ingroup core-gl
     using Sampler = std::shared_ptr<impl::Sampler>;
 
-    /// @brief Handle to a 1D texture.
-    /// @see @ref impl::Texture1D - 1D texture interface.
-    /// @ingroup core-gl
-    using Texture1D = std::shared_ptr<impl::Texture1D>;
-
     /// @brief Handle to a 2D texture.
     /// @see @ref impl::Texture2D - 2D texture interface.
     /// @ingroup core-gl
@@ -137,11 +130,6 @@ namespace cubos::core::gl
     /// @see @ref impl::CubeMap - cube map interface.
     /// @ingroup core-gl
     using CubeMap = std::shared_ptr<impl::CubeMap>;
-
-    /// @brief Handle to a cube map array.
-    /// @see @ref impl::CubeMapArray - cube map array interface.
-    /// @ingroup core-gl
-    using CubeMapArray = std::shared_ptr<impl::CubeMapArray>;
 
     /// @brief Handle to a constant buffer.
     /// @see @ref impl::ConstantBuffer - constant buffer interface.
@@ -460,12 +448,6 @@ namespace cubos::core::gl
             Texture2D handle; ///< Texture handle.
         };
 
-        /// @brief Describes a cube map array target.
-        struct CubeMapArrayTarget
-        {
-            CubeMapArray handle; ///< Cube map array handle.
-        };
-
         /// @brief Describes a 2D texture array target.
         struct Texture2DArrayTarget
         {
@@ -477,7 +459,6 @@ namespace cubos::core::gl
         {
             CubeMap,
             Texture2D,
-            CubeMapArray,
             Texture2DArray
         };
 
@@ -495,21 +476,17 @@ namespace cubos::core::gl
 
             const Texture2DArrayTarget& getTexture2DArrayTarget() const;
 
-            const CubeMapArrayTarget& getCubeMapArrayTarget() const;
-
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
 
             void setTexture2DTarget(const Texture2D& handle);
 
             void setTexture2DArrayTarget(const Texture2DArray& handle);
 
-            void setCubeMapArrayTarget(const CubeMapArray& handle);
-
         private:
             bool mSet = false;
             TargetType mType; ///< Type of the currently set target.
 
-            std::variant<CubeMapTarget, Texture2DTarget, CubeMapArrayTarget, Texture2DArrayTarget> mTarget;
+            std::variant<CubeMapTarget, Texture2DTarget, Texture2DArrayTarget> mTarget;
         } targets[CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1;       ///< Number of render targets.
@@ -604,17 +581,6 @@ namespace cubos::core::gl
         std::size_t maxAnisotropy = 1; ///< Max anisotropy for filtering. Limited to Property::MaxAnisotropy.
     };
 
-    /// @brief Describes a 1D texture.
-    /// @ingroup core-gl
-    struct Texture1DDesc
-    {
-        const void* data[CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
-        std::size_t mipLevelCount = 1;                            ///< Number of mip levels.
-        std::size_t width;                                        ///< Texture width.
-        Usage usage;                                              ///< Texture usage mode.
-        TextureFormat format;                                     ///< Texture format.
-    };
-
     /// @brief Describes a 2D texture.
     /// @ingroup core-gl
     struct Texture2DDesc
@@ -663,20 +629,6 @@ namespace cubos::core::gl
         std::size_t mipLevelCount = 1; ///< Number of mip levels.
         std::size_t width;             ///< Cube map face width.
         std::size_t height;            ///< Cube map face height.
-        Usage usage;                   ///< Texture usage mode.
-        TextureFormat format;          ///< Texture format.
-    };
-
-    /// @brief Describes a cube map array.
-    /// @ingroup core-gl
-    struct CubeMapArrayDesc
-    {
-        const void* data[CUBOS_CORE_GL_MAX_CUBEMAP_ARRAY_SIZE][6][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] =
-            {};                        ///< Optional initial cube map data, indexed using CubeFace.
-        std::size_t mipLevelCount = 1; ///< Number of mip levels.
-        std::size_t width;             ///< Cube map face width.
-        std::size_t height;            ///< Cube map face height.
-        std::size_t size;              ///< Number of cube maps contained in the array.
         Usage usage;                   ///< Texture usage mode.
         TextureFormat format;          ///< Texture format.
     };
@@ -793,11 +745,6 @@ namespace cubos::core::gl
         /// @return Sampler handle, or nullptr on failure.
         virtual Sampler createSampler(const SamplerDesc& desc) = 0;
 
-        /// @brief Creates a new 1D texture.
-        /// @param desc 1D texture description.
-        /// @return Texture handle, or nullptr on failure.
-        virtual Texture1D createTexture1D(const Texture1DDesc& desc) = 0;
-
         /// @brief Creates a new 2D texture.
         /// @param desc 2D texture description.
         /// @return Texture handle, or nullptr on failure.
@@ -817,11 +764,6 @@ namespace cubos::core::gl
         /// @param desc Cube map description.
         /// @return Cube map handle, or nullptr on failure.
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) = 0;
-
-        /// @brief Creates a new cube map array.
-        /// @param desc Cube map array description.
-        /// @return Cube map array handle, or nullptr on failure.
-        virtual CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) = 0;
 
         /// @brief Creates a new constant buffer.
         /// @param size Size in bytes.
@@ -1065,27 +1007,6 @@ namespace cubos::core::gl
             Sampler() = default;
         };
 
-        /// @brief Abstract 1D texture.
-        class CUBOS_CORE_API Texture1D
-        {
-        public:
-            virtual ~Texture1D() = default;
-
-            /// @brief Updates the texture with new data, which must have the same format used when
-            /// the texture was created.
-            /// @param x Destination X coordinate.
-            /// @param width Width of the section which will be updated.
-            /// @param data Pointer to the new data.
-            /// @param level Mip level to update.
-            virtual void update(std::size_t x, std::size_t width, const void* data, std::size_t level = 0) = 0;
-
-            /// @brief Generates mipmaps on this texture.
-            virtual void generateMipmaps() = 0;
-
-        protected:
-            Texture1D() = default;
-        };
-
         /// @brief Abstract 2D texture.
         class CUBOS_CORE_API Texture2D
         {
@@ -1195,32 +1116,6 @@ namespace cubos::core::gl
 
         protected:
             CubeMap() = default;
-        };
-
-        /// @brief Abstract cube map.
-        class CUBOS_CORE_API CubeMapArray
-        {
-        public:
-            virtual ~CubeMapArray() = default;
-
-            /// @brief Updates a cube map's face with new data, which must have the same format
-            /// used when the cube map was created.
-            /// @param x Destination X coordinate.
-            /// @param y Destination Y coordinate.
-            /// @param i Index of the destination texture within the array.
-            /// @param width Width of the section which will be updated.
-            /// @param height Height of the section which will be updated.
-            /// @param data Pointer to the new data.
-            /// @param face Face to update.
-            /// @param level Mip level to update.
-            virtual void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height,
-                                const void* data, CubeFace face, std::size_t level = 0) = 0;
-
-            /// @brief Generates mipmaps on this cube map.
-            virtual void generateMipmaps() = 0;
-
-        protected:
-            CubeMapArray() = default;
         };
 
         /// @brief Abstract constant buffer.
@@ -1344,13 +1239,6 @@ namespace cubos::core::gl
             /// @param sampler Sampler to bind.
             virtual void bind(gl::Sampler sampler) = 0;
 
-            /// @brief Binds a 1D texture to the binding point.
-            ///
-            /// If this binding point doesn't support a 1D texture, an error is logged.
-            ///
-            /// @param tex Texture to bind.
-            virtual void bind(gl::Texture1D tex) = 0;
-
             /// @brief Binds a 2D texture to the binding point.
             ///
             /// If this binding point doesn't support a 2D texture, an error is logged.
@@ -1378,13 +1266,6 @@ namespace cubos::core::gl
             ///
             /// @param cubeMap Cube map to bind.
             virtual void bind(gl::CubeMap cubeMap) = 0;
-
-            /// @brief Binds a cube map array to the binding point.
-            ///
-            /// If this binding point doesn't support a cube map array, an error is logged.
-            ///
-            /// @param cubeMap Cube map to bind.
-            virtual void bind(gl::CubeMapArray cubeMap) = 0;
 
             /// @brief Binds a constant buffer to the binding point.
             ///
