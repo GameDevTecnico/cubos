@@ -103,7 +103,6 @@ int main()
         auto va = renderDevice.createVertexArray(vaDesc);
 
         gl::RasterStateDesc rsDesc;
-        rsDesc.rasterMode = gl::RasterMode::Wireframe;
         auto rs = renderDevice.createRasterState(rsDesc);
 
         float t = 0.0F;

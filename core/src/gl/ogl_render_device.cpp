@@ -247,9 +247,6 @@ static void addressToGL(AddressMode mode, GLenum& address)
     case AddressMode::Clamp:
         address = GL_CLAMP_TO_EDGE;
         break;
-    case AddressMode::Border:
-        address = GL_CLAMP_TO_BORDER;
-        break;
     default:
         abort(); // Invalid addressing mode
     }
@@ -312,22 +309,6 @@ static void windingToGL(Winding winding, GLenum& glWinding)
         break;
     case Winding::CCW:
         glWinding = GL_CCW;
-        break;
-    default:
-        abort(); // Invalid enum
-    }
-}
-
-// Converts a raster mode to the GL equivalent
-static void rasterModeToGL(RasterMode rasterMode, GLenum& polygonMode)
-{
-    switch (rasterMode)
-    {
-    case RasterMode::Fill:
-        polygonMode = GL_FILL;
-        break;
-    case RasterMode::Wireframe:
-        polygonMode = GL_LINE;
         break;
     default:
         abort(); // Invalid enum
@@ -1436,7 +1417,6 @@ RasterState OGLRenderDevice::createRasterState(const RasterStateDesc& desc)
     rs->scissorEnabled = static_cast<GLboolean>(desc.scissorEnabled);
     faceToGL(desc.cullFace, rs->cullFace);
     windingToGL(desc.frontFace, rs->frontFace);
-    rasterModeToGL(desc.rasterMode, rs->polygonMode);
     return rs;
 }
 
@@ -1464,7 +1444,6 @@ void OGLRenderDevice::setRasterState(RasterState rs)
     }
 
     glFrontFace(rsImpl->frontFace);
-    glPolygonMode(GL_FRONT_AND_BACK, rsImpl->polygonMode);
 }
 
 DepthStencilState OGLRenderDevice::createDepthStencilState(const DepthStencilStateDesc& desc)
@@ -1642,7 +1621,6 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     glSamplerParameteri(id, GL_TEXTURE_WRAP_S, static_cast<GLint>(addressU));
     glSamplerParameteri(id, GL_TEXTURE_WRAP_T, static_cast<GLint>(addressV));
     glSamplerParameteri(id, GL_TEXTURE_WRAP_R, static_cast<GLint>(addressW));
-    glSamplerParameterfv(id, GL_TEXTURE_BORDER_COLOR, desc.borderColor);
 
     // Check errors
     GLenum glErr = glGetError();
