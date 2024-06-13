@@ -503,9 +503,10 @@ public:
 class OGLPixelPackBuffer : public impl::PixelPackBuffer
 {
 public:
-    OGLPixelPackBuffer(std::shared_ptr<bool> destroyed, GLuint id)
+    OGLPixelPackBuffer(std::shared_ptr<bool> destroyed, GLuint id, GLsizeiptr size)
         : destroyed(std::move(destroyed))
         , id(id)
+        , size(size)
     {
     }
 
@@ -520,7 +521,7 @@ public:
     const void* map() override
     {
         glBindBuffer(GL_PIXEL_PACK_BUFFER, this->id);
-        return glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+        return glMapBufferRange(GL_PIXEL_PACK_BUFFER, 0, this->size, GL_MAP_READ_BIT);
     }
 
     void unmap() override
@@ -531,6 +532,7 @@ public:
     std::shared_ptr<bool> destroyed;
 
     GLuint id;
+    GLsizeiptr size;
 };
 
 class OGLSampler : public impl::Sampler
@@ -751,9 +753,10 @@ public:
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
-    OGLConstantBuffer(std::shared_ptr<bool> destroyed, GLuint id)
+    OGLConstantBuffer(std::shared_ptr<bool> destroyed, GLuint id, GLsizeiptr size)
         : destroyed(std::move(destroyed))
         , id(id)
+        , size(size)
     {
     }
 
@@ -768,7 +771,7 @@ public:
     void* map() override
     {
         glBindBuffer(GL_UNIFORM_BUFFER, this->id);
-        return glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
+        return glMapBufferRange(GL_UNIFORM_BUFFER, 0, this->size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
     }
 
     void unmap() override
@@ -785,16 +788,18 @@ public:
     std::shared_ptr<bool> destroyed;
 
     GLuint id;
+    GLsizeiptr size;
 };
 
 class OGLIndexBuffer : public impl::IndexBuffer
 {
 public:
-    OGLIndexBuffer(std::shared_ptr<bool> destroyed, GLuint id, GLenum format, std::size_t indexSz)
+    OGLIndexBuffer(std::shared_ptr<bool> destroyed, GLuint id, GLenum format, std::size_t indexSz, GLsizeiptr size)
         : destroyed(std::move(destroyed))
         , id(id)
         , format(format)
         , indexSz(indexSz)
+        , size(size)
     {
     }
 
@@ -809,7 +814,8 @@ public:
     void* map() override
     {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
-        return glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+        return glMapBufferRange(GL_ELEMENT_ARRAY_BUFFER, 0, this->size,
+                                GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
     }
 
     void unmap() override
@@ -822,14 +828,16 @@ public:
     GLuint id;
     GLenum format;
     std::size_t indexSz;
+    GLsizeiptr size;
 };
 
 class OGLVertexBuffer : public impl::VertexBuffer
 {
 public:
-    OGLVertexBuffer(std::shared_ptr<bool> destroyed, GLuint id)
+    OGLVertexBuffer(std::shared_ptr<bool> destroyed, GLuint id, GLsizeiptr size)
         : destroyed(std::move(destroyed))
         , id(id)
+        , size(size)
     {
     }
 
@@ -844,7 +852,7 @@ public:
     void* map() override
     {
         glBindBuffer(GL_ARRAY_BUFFER, this->id);
-        return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        return glMapBufferRange(GL_ARRAY_BUFFER, 0, this->size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
     }
 
     void* map(std::size_t offset, std::size_t length, bool synchronized) override
@@ -863,6 +871,7 @@ public:
     std::shared_ptr<bool> destroyed;
 
     GLuint id;
+    GLsizeiptr size;
 };
 
 class OGLVertexArray : public impl::VertexArray
@@ -1938,7 +1947,7 @@ PixelPackBuffer OGLRenderDevice::createPixelPackBuffer(std::size_t size)
         return nullptr;
     }
 
-    return std::make_shared<OGLPixelPackBuffer>(mDestroyed, id);
+    return std::make_shared<OGLPixelPackBuffer>(mDestroyed, id, static_cast<GLsizeiptr>(size));
 }
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(std::size_t size, const void* data, Usage usage)
@@ -1978,7 +1987,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(std::size_t size, const voi
         return nullptr;
     }
 
-    return std::make_shared<OGLConstantBuffer>(mDestroyed, id);
+    return std::make_shared<OGLConstantBuffer>(mDestroyed, id, static_cast<GLsizeiptr>(size));
 }
 
 IndexBuffer OGLRenderDevice::createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage)
@@ -2035,7 +2044,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(std::size_t size, const void* dat
         return nullptr;
     }
 
-    return std::make_shared<OGLIndexBuffer>(mDestroyed, id, glFormat, indexSz);
+    return std::make_shared<OGLIndexBuffer>(mDestroyed, id, glFormat, indexSz, static_cast<GLsizeiptr>(size));
 }
 
 void OGLRenderDevice::setIndexBuffer(IndexBuffer ib)
@@ -2083,7 +2092,7 @@ VertexBuffer OGLRenderDevice::createVertexBuffer(std::size_t size, const void* d
         return nullptr;
     }
 
-    return std::make_shared<OGLVertexBuffer>(mDestroyed, id);
+    return std::make_shared<OGLVertexBuffer>(mDestroyed, id, static_cast<GLsizeiptr>(size));
 }
 
 VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
