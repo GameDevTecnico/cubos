@@ -106,11 +106,6 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         format = GL_RED;
         type = GL_UNSIGNED_SHORT;
         break;
-    case TextureFormat::R16SNorm:
-        internalFormat = GL_R16_SNORM;
-        format = GL_RED;
-        type = GL_SHORT;
-        break;
     case TextureFormat::R16UInt:
         internalFormat = GL_R16UI;
         format = GL_RED_INTEGER;
@@ -126,11 +121,6 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         format = GL_RG;
         type = GL_UNSIGNED_SHORT;
         break;
-    case TextureFormat::RG16SNorm:
-        internalFormat = GL_RG16_SNORM;
-        format = GL_RG;
-        type = GL_SHORT;
-        break;
     case TextureFormat::RG16UInt:
         internalFormat = GL_RG16UI;
         format = GL_RG_INTEGER;
@@ -145,11 +135,6 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         internalFormat = GL_RGBA16;
         format = GL_RGBA;
         type = GL_UNSIGNED_SHORT;
-        break;
-    case TextureFormat::RGBA16SNorm:
-        internalFormat = GL_RGBA16_SNORM;
-        format = GL_RGBA;
-        type = GL_SHORT;
         break;
     case TextureFormat::RGBA16UInt:
         internalFormat = GL_RGBA16UI;
