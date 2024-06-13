@@ -183,7 +183,6 @@ static void createDeviceObjects()
 
     gl::RasterStateDesc rasterStateDesc;
     rasterStateDesc.cullEnabled = false;
-    rasterStateDesc.rasterMode = gl::RasterMode::Fill;
     rasterStateDesc.scissorEnabled = true;
     bd->rasterState = rd.createRasterState(rasterStateDesc);
 
