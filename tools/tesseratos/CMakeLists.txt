@@ -5,6 +5,7 @@ set(TESSERATOS_SOURCE
 	"src/tesseratos/main.cpp"
 	"src/tesseratos/game/plugin.cpp"
 	"src/tesseratos/game/game.cpp"
+	"src/tesseratos/game_imgui/plugin.cpp"
 	"src/tesseratos/asset_explorer/plugin.cpp"
 	"src/tesseratos/asset_explorer/popup.cpp"
 	"src/tesseratos/settings_inspector/plugin.cpp"
