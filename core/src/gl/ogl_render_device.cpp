@@ -1369,13 +1369,6 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
                 return nullptr;
             }
             break;
-        case FramebufferDesc::TargetType::Texture2DArray:
-            if (desc.targets[i].getTexture2DArrayTarget().handle == nullptr)
-            {
-                CUBOS_ERROR("Target {} is nullptr", i);
-                return nullptr;
-            }
-            break;
         }
     }
 
@@ -1403,12 +1396,6 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             glFramebufferTexture2D(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
                 std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
-                static_cast<GLint>(desc.targets[i].mipLevel));
-            break;
-        case FramebufferDesc::TargetType::Texture2DArray:
-            glFramebufferTexture(
-                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
-                std::static_pointer_cast<OGLTexture2DArray>(desc.targets[i].getTexture2DArrayTarget().handle)->id,
                 static_cast<GLint>(desc.targets[i].mipLevel));
             break;
         }
@@ -1452,24 +1439,6 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
                                        static_cast<GLint>(desc.depthStencil.mipLevel));
-            }
-            else
-            {
-                formatError = true;
-            }
-            break;
-        }
-        case FramebufferDesc::TargetType::Texture2DArray: {
-            auto ds = std::static_pointer_cast<OGLTexture2DArray>(desc.depthStencil.getTexture2DArrayTarget().handle);
-            if (ds->format == GL_DEPTH_COMPONENT)
-            {
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id,
-                                     static_cast<GLint>(desc.depthStencil.mipLevel));
-            }
-            else if (ds->format == GL_DEPTH_STENCIL)
-            {
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id,
-                                     static_cast<GLint>(desc.depthStencil.mipLevel));
             }
             else
             {
