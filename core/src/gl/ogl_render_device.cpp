@@ -2141,12 +2141,12 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     case Stage::Pixel:
         shaderType = GL_FRAGMENT_SHADER;
         break;
-    case Stage::Compute:
-        shaderType = GL_COMPUTE_SHADER;
-        break;
 #ifndef __EMSCRIPTEN__
     case Stage::Geometry:
         shaderType = GL_GEOMETRY_SHADER;
+        break;
+    case Stage::Compute:
+        shaderType = GL_COMPUTE_SHADER;
         break;
 #endif
     default:
@@ -2354,11 +2354,19 @@ void OGLRenderDevice::drawTrianglesIndexedInstanced(std::size_t offset, std::siz
 
 void OGLRenderDevice::dispatchCompute(std::size_t x, std::size_t y, std::size_t z)
 {
+#ifndef __EMSCRIPTEN__
     glDispatchCompute(static_cast<GLuint>(x), static_cast<GLuint>(y), static_cast<GLuint>(z));
+#else
+    (void)x;
+    (void)y;
+    (void)z;
+    CUBOS_ERROR("Compute shaders are not supported on Emscripten");
+#endif
 }
 
 void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
 {
+#ifndef __EMSCRIPTEN__
     GLbitfield barrier = 0;
     if ((barriers & MemoryBarriers::VertexBuffer) != MemoryBarriers::None)
     {
@@ -2385,6 +2393,10 @@ void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
         barrier |= GL_FRAMEBUFFER_BARRIER_BIT;
     }
     glMemoryBarrier(barrier);
+#else
+    (void)barriers;
+    CUBOS_ERROR("Compute shaders are not supported on Emscripten");
+#endif
 }
 
 void OGLRenderDevice::setViewport(int x, int y, int w, int h)
@@ -2417,9 +2429,15 @@ int OGLRenderDevice::getProperty(Property prop)
         }
 
     case Property::ComputeSupported:
+#ifdef __EMSCRIPTEN__
+        (void)major;
+        (void)minor;
+        return 0;
+#else
         glGetIntegerv(GL_MAJOR_VERSION, &major);
         glGetIntegerv(GL_MINOR_VERSION, &minor);
         return (major >= 4 && minor >= 3) ? 1 : 0;
+#endif
 
     default:
         return -1;
