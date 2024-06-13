@@ -1616,10 +1616,12 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     glGenSamplers(1, &id);
     glSamplerParameteri(id, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(minFilter));
     glSamplerParameteri(id, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(magFilter));
+#ifndef __EMSCRIPTEN__
     if (GLAD_GL_ARB_texture_filter_anisotropic != 0)
     {
         glSamplerParameteri(id, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<GLint>(desc.maxAnisotropy));
     }
+#endif
     glSamplerParameteri(id, GL_TEXTURE_WRAP_S, static_cast<GLint>(addressU));
     glSamplerParameteri(id, GL_TEXTURE_WRAP_T, static_cast<GLint>(addressV));
     glSamplerParameteri(id, GL_TEXTURE_WRAP_R, static_cast<GLint>(addressW));
@@ -1663,10 +1665,12 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+#ifndef __EMSCRIPTEN__
     if (GLAD_GL_ARB_texture_filter_anisotropic != 0)
     {
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
     }
+#endif
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1715,10 +1719,12 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+#ifndef __EMSCRIPTEN__
     if (GLAD_GL_ARB_texture_filter_anisotropic != 0)
     {
         glTexParameterf(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
     }
+#endif
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1766,10 +1772,12 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+#ifndef __EMSCRIPTEN__
     if (GLAD_GL_ARB_texture_filter_anisotropic != 0)
     {
         glTexParameterf(GL_TEXTURE_3D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
     }
+#endif
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1824,10 +1832,12 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+#ifndef __EMSCRIPTEN__
     if (GLAD_GL_ARB_texture_filter_anisotropic != 0)
     {
         glTexParameterf(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
     }
+#endif
 
     // Check errors
     GLenum glErr = glGetError();
@@ -2425,6 +2435,9 @@ int OGLRenderDevice::getProperty(Property prop)
     switch (prop)
     {
     case Property::MaxAnisotropy:
+#ifdef __EMSCRIPTEN__
+        return 1;
+#else
         if (GLAD_GL_ARB_texture_filter_anisotropic == 0)
         {
             return 1;
@@ -2435,6 +2448,7 @@ int OGLRenderDevice::getProperty(Property prop)
             glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &val);
             return static_cast<int>(val);
         }
+#endif
 
     case Property::ComputeSupported:
 #ifdef __EMSCRIPTEN__
