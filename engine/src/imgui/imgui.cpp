@@ -526,6 +526,10 @@ void cubos::engine::imguiEndFrame(const gl::Framebuffer& target)
                               clipMax.y - clipMin.y);
 
                 // Bind the texture and draw.
+                if (cmd->TextureId != nullptr)
+                {
+                    bd->textureBP->bind(static_cast<gl::impl::Texture2D*>(cmd->TextureId)->shared_from_this());
+                }
                 rd.drawTrianglesIndexed(cmd->IdxOffset, cmd->ElemCount);
             }
         }
