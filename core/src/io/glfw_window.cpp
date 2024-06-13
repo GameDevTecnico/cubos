@@ -95,6 +95,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
     glfwSetJoystickCallback(joystickCallback);
     currentWindow = this;
 
+#ifndef __EMSCRIPTEN__
     for (int i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_LAST; ++i)
     {
         if (glfwJoystickIsGamepad(i) != GLFW_FALSE)
@@ -102,6 +103,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
             this->pushEvent(GamepadConnectionEvent{.gamepad = i, .connected = true});
         }
     }
+#endif
 #else
     UNSUPPORTED();
 #endif
