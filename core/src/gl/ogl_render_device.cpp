@@ -2212,15 +2212,17 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     case Stage::Vertex:
         shaderType = GL_VERTEX_SHADER;
         break;
-    case Stage::Geometry:
-        shaderType = GL_GEOMETRY_SHADER;
-        break;
     case Stage::Pixel:
         shaderType = GL_FRAGMENT_SHADER;
         break;
     case Stage::Compute:
         shaderType = GL_COMPUTE_SHADER;
         break;
+#ifndef __EMSCRIPTEN__
+    case Stage::Geometry:
+        shaderType = GL_GEOMETRY_SHADER;
+        break;
+#endif
     default:
         CUBOS_CRITICAL("Unsupported shader stage type");
         return nullptr;
