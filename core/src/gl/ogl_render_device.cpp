@@ -2247,9 +2247,19 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
         return nullptr;
     }
 
+#ifdef __EMSCRIPTEN__
+#define GLSL_HEADER                                                                                                    \
+    "#version 300 es\n"                                                                                                \
+    "#define ES\n"                                                                                                     \
+    "precision highp float;\n"
+#else
+#define GLSL_HEADER "#version 330 core\n"
+#endif
+
     // Initialize shader
     GLuint id = glCreateShader(shaderType);
-    glShaderSource(id, 1, (const GLchar* const*)&src, nullptr);
+    const char* srcs[] = {GLSL_HEADER, src};
+    glShaderSource(id, 2, (const GLchar* const*)srcs, nullptr);
     glCompileShader(id);
 
     // Check for errors
