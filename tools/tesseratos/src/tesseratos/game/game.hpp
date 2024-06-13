@@ -5,6 +5,7 @@
 #pragma once
 
 #include <cubos/core/ecs/cubos.hpp>
+#include <cubos/core/memory/function.hpp>
 
 namespace tesseratos
 {
@@ -98,6 +99,14 @@ namespace tesseratos
         /// Aborts if the game has not been loaded.
         cubos::core::ecs::World& world();
 
+        /// @brief Adds a context switch function.
+        ///
+        /// The function will be called before executing any game code, and again after.
+        /// It receives a boolean which is true if we're entering the game code, and false if we're leaving.
+        ///
+        /// @param func Context switch function.
+        void addContextSwitch(cubos::core::memory::Function<void(bool)> func);
+
     private:
         /// @brief Whether the game has been paused.
         bool mPaused{false};
@@ -113,5 +122,8 @@ namespace tesseratos
 
         /// @brief Resources to be added.
         std::vector<cubos::core::memory::AnyValue> mResources{};
+
+        /// @brief Context switch functions.
+        std::vector<cubos::core::memory::Function<void(bool)>> mContextSwitches{};
     };
 } // namespace tesseratos

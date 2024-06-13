@@ -65,9 +65,21 @@ void Game::start()
         }
     }
 
+    // Switch to the game's context.
+    for (auto& func : mContextSwitches)
+    {
+        func(true);
+    }
+
     CUBOS_INFO("Starting game");
     mCubos.start();
     mPaused = false;
+
+    // Restore the editor context.
+    for (auto& func : mContextSwitches)
+    {
+        func(false);
+    }
 }
 
 void Game::update()
@@ -76,10 +88,22 @@ void Game::update()
 
     if (!mPaused)
     {
+        // Switch to the game's context.
+        for (auto& func : mContextSwitches)
+        {
+            func(true);
+        }
+
         if (mCubos.update())
         {
             CUBOS_INFO("Game has ended, resetting");
             this->reset();
+        }
+
+        // Restore the editor context.
+        for (auto& func : mContextSwitches)
+        {
+            func(false);
         }
     }
 }
@@ -125,4 +149,9 @@ cubos::core::ecs::World& Game::world()
 {
     CUBOS_ASSERT(this->isLoaded(), "Game has not been loaded");
     return mCubos.world();
+}
+
+void Game::addContextSwitch(cubos::core::memory::Function<void(bool)> func)
+{
+    mContextSwitches.emplace_back(std::move(func));
 }
