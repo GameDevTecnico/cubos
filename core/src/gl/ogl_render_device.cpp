@@ -587,47 +587,6 @@ public:
     GLuint id;
 };
 
-class OGLTexture1D : public impl::Texture1D
-{
-public:
-    OGLTexture1D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : destroyed(std::move(destroyed))
-        , id(id)
-        , internalFormat(internalFormat)
-        , format(format)
-        , type(type)
-    {
-    }
-
-    ~OGLTexture1D() override
-    {
-        if (!*destroyed)
-        {
-            glDeleteTextures(1, &this->id);
-        }
-    }
-
-    void update(std::size_t x, std::size_t width, const void* data, std::size_t level) override
-    {
-        glBindTexture(GL_TEXTURE_1D, this->id);
-        glTexSubImage1D(GL_TEXTURE_1D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLsizei>(width),
-                        this->format, this->type, data);
-    }
-
-    void generateMipmaps() override
-    {
-        glBindTexture(GL_TEXTURE_1D, this->id);
-        glGenerateMipmap(GL_TEXTURE_1D);
-    }
-
-    std::shared_ptr<bool> destroyed;
-
-    GLuint id;
-    GLenum internalFormat;
-    GLenum format;
-    GLenum type;
-};
-
 class OGLTexture2D : public impl::Texture2D
 {
 public:
@@ -806,49 +765,6 @@ public:
     {
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
         glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
-    }
-
-    std::shared_ptr<bool> destroyed;
-
-    GLuint id;
-    GLenum internalFormat;
-    GLenum format;
-    GLenum type;
-};
-
-class OGLCubeMapArray : public impl::CubeMapArray
-{
-public:
-    OGLCubeMapArray(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : destroyed(std::move(destroyed))
-        , id(id)
-        , internalFormat(internalFormat)
-        , format(format)
-        , type(type)
-    {
-    }
-
-    ~OGLCubeMapArray() override
-    {
-        if (!*destroyed)
-        {
-            glDeleteTextures(1, &this->id);
-        }
-    }
-
-    void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data,
-                CubeFace face, std::size_t level = 0) override
-    {
-        glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
-        glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x),
-                        static_cast<GLint>(y), static_cast<GLint>(i) * 6 + static_cast<GLint>(face),
-                        static_cast<GLsizei>(width), static_cast<GLsizei>(height), 1, this->format, this->type, data);
-    }
-
-    void generateMipmaps() override
-    {
-        glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
-        glGenerateMipmap(GL_TEXTURE_CUBE_MAP_ARRAY);
     }
 
     std::shared_ptr<bool> destroyed;
@@ -1054,20 +970,6 @@ public:
         }
     }
 
-    void bind(Texture1D tex) override
-    {
-        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
-        if (tex)
-        {
-            glBindTexture(GL_TEXTURE_1D, std::static_pointer_cast<OGLTexture1D>(tex)->id);
-        }
-        else
-        {
-            glBindTexture(GL_TEXTURE_1D, 0);
-        }
-        glUniform1i(this->loc, this->tex);
-    }
-
     void bind(Texture2D tex) override
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
@@ -1120,20 +1022,6 @@ public:
         else
         {
             glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-        }
-        glUniform1i(this->loc, this->tex);
-    }
-
-    void bind(CubeMapArray cubeMap) override
-    {
-        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
-        if (cubeMap)
-        {
-            glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, std::static_pointer_cast<OGLCubeMapArray>(cubeMap)->id);
-        }
-        else
-        {
-            glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
         }
         glUniform1i(this->loc, this->tex);
     }
@@ -1481,13 +1369,6 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
                 return nullptr;
             }
             break;
-        case FramebufferDesc::TargetType::CubeMapArray:
-            if (desc.targets[i].getCubeMapArrayTarget().handle == nullptr)
-            {
-                CUBOS_ERROR("Target {} is nullptr", i);
-                return nullptr;
-            }
-            break;
         case FramebufferDesc::TargetType::Texture2DArray:
             if (desc.targets[i].getTexture2DArrayTarget().handle == nullptr)
             {
@@ -1522,12 +1403,6 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             glFramebufferTexture2D(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
                 std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
-                static_cast<GLint>(desc.targets[i].mipLevel));
-            break;
-        case FramebufferDesc::TargetType::CubeMapArray:
-            glFramebufferTexture(
-                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
-                std::static_pointer_cast<OGLCubeMapArray>(desc.targets[i].getCubeMapArrayTarget().handle)->id,
                 static_cast<GLint>(desc.targets[i].mipLevel));
             break;
         case FramebufferDesc::TargetType::Texture2DArray:
@@ -1577,24 +1452,6 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
                                        static_cast<GLint>(desc.depthStencil.mipLevel));
-            }
-            else
-            {
-                formatError = true;
-            }
-            break;
-        }
-        case FramebufferDesc::TargetType::CubeMapArray: {
-            auto ds = std::static_pointer_cast<OGLCubeMapArray>(desc.depthStencil.getCubeMapArrayTarget().handle);
-            if (ds->format == GL_DEPTH_COMPONENT)
-            {
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id,
-                                     static_cast<GLint>(desc.depthStencil.mipLevel));
-            }
-            else if (ds->format == GL_DEPTH_STENCIL)
-            {
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id,
-                                     static_cast<GLint>(desc.depthStencil.mipLevel));
             }
             else
             {
@@ -1901,54 +1758,6 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     return std::make_shared<OGLSampler>(mDestroyed, id);
 }
 
-Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
-{
-    if (desc.format == TextureFormat::Depth16 || desc.format == TextureFormat::Depth32 ||
-        desc.format == TextureFormat::Depth24Stencil8 || desc.format == TextureFormat::Depth32Stencil8)
-    {
-        CUBOS_ERROR("Depth/stencil formats are not supported on 1D textures");
-        return nullptr;
-    }
-
-    GLenum internalFormat;
-    GLenum format;
-    GLenum type;
-
-    if (!textureFormatToGL(desc.format, internalFormat, format, type))
-    {
-        CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
-        return nullptr;
-    }
-
-    // Initialize texture
-    GLuint id;
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_1D, id);
-    for (std::size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
-    {
-        glTexImage1D(GL_TEXTURE_1D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), 0, format, type, desc.data[i]);
-    }
-    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    if (GLAD_GL_ARB_texture_filter_anisotropic != 0)
-    {
-        glTexParameterf(GL_TEXTURE_1D, GL_TEXTURE_MAX_ANISOTROPY, 1.0F);
-    }
-
-    // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteTextures(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
-
-    return std::make_shared<OGLTexture1D>(mDestroyed, id, internalFormat, format, type);
-}
-
 Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
 {
     GLenum internalFormat;
@@ -2155,61 +1964,6 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     }
 
     return std::make_shared<OGLCubeMap>(mDestroyed, id, internalFormat, format, type);
-}
-
-CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
-{
-    GLenum internalFormat;
-    GLenum format;
-    GLenum type;
-
-    if (!textureFormatToGL(desc.format, internalFormat, format, type))
-    {
-        CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
-        return nullptr;
-    }
-
-    // Initialize texture
-    GLuint id;
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, id);
-    glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, static_cast<GLsizei>(desc.mipLevelCount), internalFormat,
-                   static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
-                   static_cast<GLsizei>(desc.size * 6));
-    for (std::size_t i = 0; i < desc.size; ++i)
-    {
-        for (GLint face = 0; face < 6; ++face)
-        {
-            for (std::size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
-            {
-                if (desc.data[i][face][j] != nullptr)
-                {
-                    glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), 0, 0, static_cast<GLint>(i) * 6 + face,
-                                    static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 1,
-                                    format, type, desc.data[i][face][j]);
-                }
-            }
-        }
-    }
-    glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    if (GLAD_GL_ARB_texture_filter_anisotropic != 0)
-    {
-        glTexParameterf(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAX_ANISOTROPY, 1.0F);
-    }
-
-    // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteTextures(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
-
-    return std::make_shared<OGLCubeMapArray>(mDestroyed, id, internalFormat, format, type);
 }
 
 PixelPackBuffer OGLRenderDevice::createPixelPackBuffer(std::size_t size)
