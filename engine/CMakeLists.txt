@@ -5,6 +5,11 @@ option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
 option(BUILD_ENGINE_TESTS "Build cubos engine tests?" OFF)
 option(BUILD_ENGINE_SHARED "Build cubos engine as shared library?" ON)
 
+if (EMSCRIPTEN AND BUILD_ENGINE_SHARED)
+	message(WARNING "Cannot build engine as shared library on Emscripten")
+	set(BUILD_ENGINE_SHARED OFF)
+endif()
+
 message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
 message("# Building engine as shared library: " ${BUILD_ENGINE_SHARED})

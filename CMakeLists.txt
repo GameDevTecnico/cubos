@@ -113,14 +113,26 @@ function(cubos_common_target_options target)
             set_target_properties(${target} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}")
         endif()
     endif()
+
+    if (EMSCRIPTEN)
+        set(LFLAGS "-sSTRICT -sFILESYSTEM=0 -sASSERTIONS=0")
+
+        if (WITH_GLFW)
+            set(LFLAGS "${LFLAGS} -sUSE_GLFW=3")
+        endif ()
+
+        set_target_properties(${target} PROPERTIES SUFFIX ".html" LINK_FLAGS ${LFLAGS})
+    endif ()
 endfunction()
 
 # Add doctest as a submodule if it is not installed
 
-if (DOCTEST_USE_SUBMODULE)
-    add_subdirectory(lib/doctest)
-else ()
-    find_package(doctest REQUIRED)
+if (BUILD_CORE_TESTS OR BUILD_ENGINE_TESTS)
+    if (DOCTEST_USE_SUBMODULE)
+        add_subdirectory(lib/doctest)
+    else ()
+        find_package(doctest REQUIRED)
+    endif ()
 endif ()
 
 add_subdirectory(core)
