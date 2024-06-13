@@ -1009,6 +1009,7 @@ public:
 
     void bind(gl::Texture2D tex, int level, Access access) override
     {
+#ifndef __EMSCRIPTEN__
         auto texImpl = std::static_pointer_cast<OGLTexture2D>(tex);
         GLenum glAccess;
         switch (access)
@@ -1029,6 +1030,12 @@ public:
         glUniform1i(this->loc, this->tex);
         glBindImageTexture(static_cast<GLuint>(this->tex), texImpl->id, level, GL_TRUE, 0, glAccess,
                            texImpl->internalFormat);
+#else
+        (void)tex;
+        (void)level;
+        (void)access;
+        CUBOS_ERROR("Texture image binding is not supported on WebGL");
+#endif
     }
 
     void setConstant(glm::vec2 val) override
