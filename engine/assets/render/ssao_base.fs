@@ -1,5 +1,3 @@
-#version 330 core
-
 #define MAX_KERNEL_SIZE 64
 
 in vec2 fragUv;

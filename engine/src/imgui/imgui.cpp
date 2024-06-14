@@ -203,8 +203,6 @@ static void createDeviceObjects()
 
     // Setup shader pipeline.
     auto vs = rd.createShaderStage(gl::Stage::Vertex, R"glsl(
-#version 330 core
-
 layout (location = 0) in vec2 position;
 layout (location = 1) in vec2 uv;
 layout (location = 2) in vec4 color;
@@ -225,8 +223,6 @@ void main()
     )glsl");
 
     auto ps = rd.createShaderStage(gl::Stage::Pixel, R"glsl(
-#version 330 core
-
 uniform sampler2D tex;
 
 in vec2 fragUv;

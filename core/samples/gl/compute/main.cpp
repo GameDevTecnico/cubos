@@ -20,8 +20,6 @@ int main()
 
     {
         auto vs = renderDevice.createShaderStage(gl::Stage::Vertex, R"glsl(
-            #version 330 core
-
             in vec2 position;
             in vec2 uv;
 
@@ -35,8 +33,6 @@ int main()
         )glsl");
 
         auto ps = renderDevice.createShaderStage(gl::Stage::Pixel, R"glsl(
-            #version 330 core
-
             in vec2 fragUV;
             out vec4 color;
 
@@ -48,6 +44,7 @@ int main()
             }
         )glsl");
 
+        // FIXME: createShaderStage will inject #version 330 core, so this will fail.
         auto cs = renderDevice.createShaderStage(gl::Stage::Compute, R"glsl(
             #version 430 core
 

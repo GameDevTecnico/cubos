@@ -1,5 +1,3 @@
-#version 330 core
-
 #define DOWNSCALE_PASS 0
 #define UPSCALE_PASS 1
 #define COMBINE_PASS 2
