@@ -115,13 +115,16 @@ function(cubos_common_target_options target)
     endif()
 
     if (EMSCRIPTEN)
-        set(LFLAGS "-sSTRICT -sFILESYSTEM=0 -sASSERTIONS=0 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2")
+        target_link_options(${target} PUBLIC -sSTRICT -sASSERTIONS=0)
+        target_link_options(${target} PUBLIC -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2)
+        target_link_options(${target} PUBLIC -pthread -sPTHREAD_POOL_SIZE=navigator.hardwareConcurrency)
 
         if (WITH_GLFW)
-            set(LFLAGS "${LFLAGS} -sUSE_GLFW=3")
+            target_link_options(${target} PUBLIC -sUSE_GLFW=3)
         endif ()
 
-        set_target_properties(${target} PROPERTIES SUFFIX ".html" LINK_FLAGS ${LFLAGS})
+        set_target_properties(${target} PROPERTIES SUFFIX ".html")
+	    target_compile_options(${target} PUBLIC -pthread)
     endif ()
 endfunction()
 
