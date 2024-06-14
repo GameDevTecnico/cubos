@@ -1,5 +1,9 @@
 #include <utility>
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 #include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/cubos.hpp>
 #include <cubos/core/ecs/name.hpp>
@@ -306,9 +310,22 @@ bool Cubos::update()
 void Cubos::run()
 {
     this->start();
+#ifndef __EMSCRIPTEN__
     while (this->update())
     {
     }
+#else
+    auto* cubos = new Cubos(std::move(*this)); // Move the Cubos object to the heap so that it won't be destroyed.
+    emscripten_set_main_loop_arg(
+        [](void* cubos) {
+            if (static_cast<Cubos*>(cubos)->update() == 0)
+            {
+                emscripten_cancel_main_loop();
+                delete static_cast<Cubos*>(cubos);
+            }
+        },
+        cubos, 0, 1);
+#endif
 }
 
 bool Cubos::isRegistered(const reflection::Type& type) const
