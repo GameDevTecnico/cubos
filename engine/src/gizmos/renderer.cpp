@@ -15,8 +15,6 @@ CUBOS_REFLECT_IMPL(GizmosRenderer)
 void GizmosRenderer::initDrawPipeline()
 {
     auto vs = renderDevice->createShaderStage(Stage::Vertex, R"(
-            #version 330 core
-
             in vec3 position;
 
             uniform MVP
@@ -31,8 +29,6 @@ void GizmosRenderer::initDrawPipeline()
         )");
 
     auto ps = renderDevice->createShaderStage(Stage::Pixel, R"(
-            #version 330 core
-
             out vec4 color;
             
             uniform vec3 objColor;
@@ -49,8 +45,6 @@ void GizmosRenderer::initDrawPipeline()
 void GizmosRenderer::initIdPipeline()
 {
     auto vs = renderDevice->createShaderStage(Stage::Vertex, R"(
-            #version 330 core
-
             in vec3 position;
 
             uniform MVP
@@ -65,8 +59,6 @@ void GizmosRenderer::initIdPipeline()
         )");
 
     auto ps = renderDevice->createShaderStage(Stage::Pixel, R"(
-            #version 330 core
-
             uniform uint gizmo;
             
             out uvec2 idOutput;

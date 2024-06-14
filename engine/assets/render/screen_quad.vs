@@ -1,5 +1,3 @@
-#version 330 core
-
 in vec4 position;
 in vec2 uv;
 

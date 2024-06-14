@@ -1,5 +1,3 @@
-#version 330 core
-
 in vec3 position;
 
 layout(std140) uniform PerElement
