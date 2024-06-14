@@ -75,7 +75,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a74897ebcabd484b2894c7a60d4d0f338" class="m-doc">done</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Returns whether the result is available.</dd>
+            <dd>Checks if result is available.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac66e77e7b9d9ddbf6e0a4998004c302d" class="m-doc">result</a>(</span><span class="m-doc-wrap">) -&gt; int <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -88,12 +88,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />Timer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a74897ebcabd484b2894c7a60d4d0f338" class="m-doc-self">done</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
-            <p>Returns whether the result is available.</p>
+            <p>Checks if result is available.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>True if the result is available, false otherwise.</td>
+                  <td>Whether the result is available.</td>
                 </tr>
               </tfoot>
             </table>
@@ -107,7 +107,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Time spent in region, in nanoseconds.</td>
+                  <td>Time spent in region, in nanoseconds, or -1 if an error occurred while querying the time.</td>
                 </tr>
               </tfoot>
             </table>
