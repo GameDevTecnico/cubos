@@ -1,5 +1,9 @@
 #include <utility>
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 #include <cubos/core/ecs/command_buffer.hpp>
 #include <cubos/core/ecs/cubos.hpp>
 #include <cubos/core/ecs/name.hpp>
@@ -353,6 +357,20 @@ bool Cubos::update()
 
 void Cubos::run()
 {
+#ifdef __EMSCRIPTEN__
+    // Emscripten requires looping to be done through a callback.
+    this->start();
+    auto* cubos = new Cubos(std::move(*this)); // Move the Cubos object to the heap so that it won't be destroyed.
+    emscripten_set_main_loop_arg(
+        [](void* cubos) {
+            if (static_cast<Cubos*>(cubos)->update() == 0)
+            {
+                emscripten_cancel_main_loop();
+                delete static_cast<Cubos*>(cubos);
+            }
+        },
+        cubos, 0, 1);
+#else
     // If debugging is disabled, simply run the update loop.
     if (!mDebug.contains())
     {
@@ -400,6 +418,7 @@ void Cubos::run()
 
         CUBOS_INFO("Debugger disconnected from client");
     }
+#endif
 }
 
 bool Cubos::started() const
