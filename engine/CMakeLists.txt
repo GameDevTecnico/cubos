@@ -242,10 +242,9 @@ target_include_directories(cubos-engine PUBLIC
 	$<INSTALL_INTERFACE:include/cubos-engine> # On installation, the include files will have been copied here 
 )
 
-# Set the default path for the builtin assets folder, which is useful during development.
+# Let other targets know the path to the assets folder
 set(CUBOS_ENGINE_ASSETS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/assets)
 set(CUBOS_ENGINE_ASSETS_PATH ${CUBOS_ENGINE_ASSETS_PATH} PARENT_SCOPE)
-target_compile_definitions(cubos-engine PRIVATE CUBOS_ENGINE_ASSETS_PATH="${CUBOS_ENGINE_ASSETS_PATH}")
 
 # ------------- Fetch and link engine private library dependencies -------------
 
