@@ -46,6 +46,7 @@ struct Cubos::State
 Cubos::~Cubos()
 {
     delete mState;
+    delete mWorld;
 }
 
 Cubos::Cubos()
@@ -54,12 +55,28 @@ Cubos::Cubos()
 }
 
 Cubos::Cubos(int argc, char** argv)
+    : mWorld{new World{}}
 {
     std::vector<std::string> arguments(argv + 1, argv + argc);
 
     this->resource<DeltaTime>();
     this->resource<ShouldQuit>();
     this->resource<Arguments>(Arguments{.value = arguments});
+}
+
+Cubos::Cubos(Cubos&& other) noexcept
+    : mWorld{other.mWorld}
+    , mSystemRegistry{std::move(other.mSystemRegistry)}
+    , mState{other.mState}
+    , mStartupPlanner{std::move(other.mStartupPlanner)}
+    , mMainPlanner{std::move(other.mMainPlanner)}
+    , mPluginStack{std::move(other.mPluginStack)}
+    , mInstalledPlugins{std::move(other.mInstalledPlugins)}
+    , mInjectedPlugins{std::move(other.mInjectedPlugins)}
+    , mTypeToPlugin{std::move(other.mTypeToPlugin)}
+    , mTags{std::move(other.mTags)}
+{
+    other.mWorld = nullptr;
 }
 
 Cubos& Cubos::plugin(Plugin plugin)
@@ -111,14 +128,14 @@ Cubos& Cubos::uninitResource(const reflection::Type& type)
 {
     CUBOS_ASSERT(!mTypeToPlugin.contains(type), "Resource {} was already registered", type.name());
     mTypeToPlugin.insert(type, mPluginStack.back());
-    mWorld.registerResource(type);
+    mWorld->registerResource(type);
     return *this;
 }
 
 Cubos& Cubos::resource(memory::AnyValue value)
 {
     this->uninitResource(value.type());
-    mWorld.insertResource(std::move(value));
+    mWorld->insertResource(std::move(value));
     return *this;
 }
 
@@ -126,7 +143,7 @@ Cubos& Cubos::component(const reflection::Type& type)
 {
     CUBOS_ASSERT(!mTypeToPlugin.contains(type), "Component {} was already registered", type.name());
     mTypeToPlugin.insert(type, mPluginStack.back());
-    mWorld.registerComponent(type);
+    mWorld->registerComponent(type);
     return *this;
 }
 
@@ -134,7 +151,7 @@ Cubos& Cubos::relation(const reflection::Type& type)
 {
     CUBOS_ASSERT(!mTypeToPlugin.contains(type), "Relation {} was already registered", type.name());
     mTypeToPlugin.insert(type, mPluginStack.back());
-    mWorld.registerRelation(type);
+    mWorld->registerRelation(type);
     return *this;
 }
 
@@ -193,7 +210,7 @@ void Cubos::reset()
     delete mState;
     mState = nullptr;
 
-    mWorld.reset();
+    mWorld->reset();
     mSystemRegistry.reset();
     mStartupPlanner.clear();
     mMainPlanner.clear();
@@ -209,7 +226,7 @@ void Cubos::start()
 {
     CUBOS_ASSERT(mState == nullptr, "Cubos has already been started");
     mState = new State{
-        .cmdBuffer = {mWorld},
+        .cmdBuffer = {*mWorld},
         .pluginQueue = {},
         .startupSchedule = {},
         .mainSchedule = {},
@@ -279,11 +296,11 @@ bool Cubos::update()
 
     // Update delta time.
     auto currentTime = std::chrono::steady_clock::now();
-    mWorld.resource<DeltaTime>().unscaledValue =
+    mWorld->resource<DeltaTime>().unscaledValue =
         std::chrono::duration<float>(currentTime - mState->lastUpdateTime).count();
     mState->lastUpdateTime = currentTime;
 
-    return !mWorld.resource<ShouldQuit>().value;
+    return !mWorld->resource<ShouldQuit>().value;
 }
 
 void Cubos::run()
@@ -373,7 +390,7 @@ void Cubos::uninstall(Plugin plugin)
     for (const auto* type : types)
     {
         mTypeToPlugin.erase(*type);
-        mWorld.unregister(*type);
+        mWorld->unregister(*type);
     }
 
     // Get a list of the tags registered by the plugin.
@@ -412,7 +429,7 @@ void Cubos::uninstall(Plugin plugin)
     // Remove all of the observers.
     for (const auto& id : mInstalledPlugins.at(plugin).observers)
     {
-        mWorld.observers().unhook(id);
+        mWorld->observers().unhook(id);
     }
 
     // Decrease dependent count of all dependencies.
@@ -535,8 +552,9 @@ auto Cubos::SystemBuilder::entity(int target) && -> SystemBuilder&&
 auto Cubos::SystemBuilder::with(const reflection::Type& type, int target) && -> SystemBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isComponent(dataTypeId), "Type {} isn't registered as a component",
+                 type.name());
 
     if (mOptions.empty())
     {
@@ -559,8 +577,9 @@ auto Cubos::SystemBuilder::with(const reflection::Type& type, int target) && -> 
 auto Cubos::SystemBuilder::withOpt(const reflection::Type& type, int target) && -> SystemBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isComponent(dataTypeId), "Type {} isn't registered as a component",
+                 type.name());
 
     if (mOptions.empty())
     {
@@ -583,8 +602,9 @@ auto Cubos::SystemBuilder::withOpt(const reflection::Type& type, int target) && 
 auto Cubos::SystemBuilder::without(const reflection::Type& type, int target) && -> SystemBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isComponent(dataTypeId), "Type {} isn't registered as a component",
+                 type.name());
 
     if (mOptions.empty())
     {
@@ -613,10 +633,10 @@ auto Cubos::SystemBuilder::related(const reflection::Type& type, Traversal trave
                                    int toTarget) && -> SystemBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such relation type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isRelation(dataTypeId), "Type {} isn't registered as a relation", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isRelation(dataTypeId), "Type {} isn't registered as a relation", type.name());
 
-    CUBOS_ASSERT_IMP(traversal != Traversal::Random, mCubos.mWorld.types().isTreeRelation(dataTypeId),
+    CUBOS_ASSERT_IMP(traversal != Traversal::Random, mCubos.mWorld->types().isTreeRelation(dataTypeId),
                      "Directed traversal can only be used for tree relations, and {} isn't registered as one",
                      type.name());
 
@@ -653,7 +673,7 @@ void Cubos::SystemBuilder::finish(System<void> system)
     {
         for (const auto& dataTypeId : mCondition.value().access().dataTypes)
         {
-            const auto& type = mCubos.mWorld.types().type(dataTypeId);
+            const auto& type = mCubos.mWorld->types().type(dataTypeId);
             CUBOS_ASSERT(mCubos.isRegistered(type), "Type {} isn't registered by the plugin or its dependencies",
                          type.name());
         }
@@ -661,7 +681,7 @@ void Cubos::SystemBuilder::finish(System<void> system)
 
     for (const auto& dataTypeId : system.access().dataTypes)
     {
-        const auto& type = mCubos.mWorld.types().type(dataTypeId);
+        const auto& type = mCubos.mWorld->types().type(dataTypeId);
         CUBOS_ASSERT(mCubos.isRegistered(type), "Type {} isn't registered by the plugin or its dependencies",
                      type.name());
     }
@@ -711,8 +731,9 @@ Cubos::ObserverBuilder::ObserverBuilder(Cubos& cubos, std::string name)
 auto Cubos::ObserverBuilder::onAdd(const reflection::Type& type, int target) && -> ObserverBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isComponent(dataTypeId), "Type {} isn't registered as a component",
+                 type.name());
     CUBOS_ASSERT(mColumnId == ColumnId::Invalid, "An observer can only have at most one hook");
 
     if (mOptions.empty())
@@ -731,15 +752,16 @@ auto Cubos::ObserverBuilder::onAdd(const reflection::Type& type, int target) && 
 
     mOptions.back().observedTarget = target;
     mRemove = false;
-    mColumnId = ColumnId::make(mCubos.mWorld.types().id(type));
+    mColumnId = ColumnId::make(mCubos.mWorld->types().id(type));
     return std::move(*this);
 }
 
 auto Cubos::ObserverBuilder::onRemove(const reflection::Type& type, int target) && -> ObserverBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isComponent(dataTypeId), "Type {} isn't registered as a component",
+                 type.name());
     CUBOS_ASSERT(mColumnId == ColumnId::Invalid, "An observer can only have at most one hook");
 
     if (mOptions.empty())
@@ -758,7 +780,7 @@ auto Cubos::ObserverBuilder::onRemove(const reflection::Type& type, int target) 
 
     mOptions.back().observedTarget = target;
     mRemove = true;
-    mColumnId = ColumnId::make(mCubos.mWorld.types().id(type));
+    mColumnId = ColumnId::make(mCubos.mWorld->types().id(type));
     return std::move(*this);
 }
 
@@ -785,8 +807,9 @@ auto Cubos::ObserverBuilder::entity(int target) && -> ObserverBuilder&&
 auto Cubos::ObserverBuilder::with(const reflection::Type& type, int target) && -> ObserverBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isComponent(dataTypeId), "Type {} isn't registered as a component",
+                 type.name());
 
     if (mOptions.empty())
     {
@@ -809,8 +832,9 @@ auto Cubos::ObserverBuilder::with(const reflection::Type& type, int target) && -
 auto Cubos::ObserverBuilder::without(const reflection::Type& type, int target) && -> ObserverBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such component type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isComponent(dataTypeId), "Type {} isn't registered as a component", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isComponent(dataTypeId), "Type {} isn't registered as a component",
+                 type.name());
 
     if (mOptions.empty())
     {
@@ -839,10 +863,10 @@ auto Cubos::ObserverBuilder::related(const reflection::Type& type, Traversal tra
                                      int toTarget) && -> ObserverBuilder&&
 {
     CUBOS_ASSERT(mCubos.isRegistered(type), "No such relation type {} was registered", type.name());
-    auto dataTypeId = mCubos.mWorld.types().id(type);
-    CUBOS_ASSERT(mCubos.mWorld.types().isRelation(dataTypeId), "Type {} isn't registered as a relation", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isRelation(dataTypeId), "Type {} isn't registered as a relation", type.name());
 
-    CUBOS_ASSERT_IMP(traversal != Traversal::Random, mCubos.mWorld.types().isTreeRelation(dataTypeId),
+    CUBOS_ASSERT_IMP(traversal != Traversal::Random, mCubos.mWorld->types().isTreeRelation(dataTypeId),
                      "Directed traversal can only be used for tree relations, and {} isn't registered as one",
                      type.name());
 
@@ -877,7 +901,7 @@ void Cubos::ObserverBuilder::finish(System<void> system)
 {
     for (const auto& dataTypeId : system.access().dataTypes)
     {
-        const auto& type = mCubos.mWorld.types().type(dataTypeId);
+        const auto& type = mCubos.mWorld->types().type(dataTypeId);
         CUBOS_ASSERT(mCubos.isRegistered(type), "Type {} isn't registered by the plugin or its dependencies",
                      type.name());
     }
@@ -888,11 +912,11 @@ void Cubos::ObserverBuilder::finish(System<void> system)
     ObserverId id;
     if (mRemove)
     {
-        id = mCubos.mWorld.observers().hookOnRemove(mColumnId, std::move(system));
+        id = mCubos.mWorld->observers().hookOnRemove(mColumnId, std::move(system));
     }
     else
     {
-        id = mCubos.mWorld.observers().hookOnAdd(mColumnId, std::move(system));
+        id = mCubos.mWorld->observers().hookOnAdd(mColumnId, std::move(system));
     }
     mCubos.mInstalledPlugins.at(mCubos.mPluginStack.back()).observers.push_back(id);
 }
