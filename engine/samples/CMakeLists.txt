@@ -26,10 +26,21 @@ macro(make_sample)
     cubos_common_target_options(${target})
 
     if(MAKE_SAMPLE_ASSETS)
-        target_compile_definitions(${target} PUBLIC
+      if(EMSCRIPTEN)
+        target_link_options(${target} PRIVATE
+          "SHELL:--embed-file ${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}/assets@/assets"
+          "SHELL:--embed-file ${CUBOS_ENGINE_ASSETS_PATH}@/builtin"
+        )
+        target_compile_definitions(${target} PRIVATE
+            APP_ASSETS_PATH="/assets"
+            BUILTIN_ASSETS_PATH="/builtin"
+        )
+      else()
+        target_compile_definitions(${target} PRIVATE
             APP_ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}/assets"
             BUILTIN_ASSETS_PATH="${CUBOS_ENGINE_ASSETS_PATH}"
         )
+      endif()
     endif()
 endmacro()
 # Add samples

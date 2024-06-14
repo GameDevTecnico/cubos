@@ -227,7 +227,7 @@ if(CUBOS_CORE_OPENGL)
 
 	if(EMSCRIPTEN)
 		target_link_libraries(cubos-core PRIVATE GL)
-		set_target_properties(cubos-core PROPERTIES LINK_FLAGS "-sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2")
+		target_link_options(cubos-core PUBLIC -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2)
 	endif()
 endif()
 
@@ -235,7 +235,7 @@ endif()
 if(CUBOS_CORE_GLFW)
 	if(EMSCRIPTEN)
 		# Emscripten ships its own GLFW
-        set_target_properties(cubos-core PROPERTIES LINK_FLAGS "-sUSE_GLFW=3")
+        target_link_options(cubos-core PUBLIC -sUSE_GLFW=3)
 	else()
 		FetchContent_Declare(
 			glfw
