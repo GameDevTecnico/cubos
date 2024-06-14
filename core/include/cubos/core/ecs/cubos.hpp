@@ -90,6 +90,10 @@ namespace cubos::core::ecs
         /// @param argv Argument array.
         Cubos(int argc, char** argv);
 
+        /// @brief Move constructs.
+        /// @param other Other application.
+        Cubos(Cubos&& other) noexcept;
+
         /// @name Forbid copying.
         /// @{
         Cubos(const Cubos&) = delete;
@@ -324,7 +328,7 @@ namespace cubos::core::ecs
         /// @param plugin Plugin.
         void uninstall(Plugin plugin);
 
-        World mWorld;
+        World* mWorld;
         SystemRegistry mSystemRegistry;
         State* mState{nullptr};
 
@@ -397,7 +401,7 @@ namespace cubos::core::ecs
         TagBuilder& runIf(auto func)
         {
             auto conditionId = mCubos.mSystemRegistry.add(mName + "#condition",
-                                                          System<bool>::make(mCubos.mWorld, std::move(func), {}));
+                                                          System<bool>::make(*mCubos.mWorld, std::move(func), {}));
             mPlanner.onlyIf(mTagId, conditionId);
             return *this;
         }
@@ -408,7 +412,7 @@ namespace cubos::core::ecs
         TagBuilder& repeatWhile(auto func)
         {
             auto conditionId =
-                mCubos.mSystemRegistry.add(mName, System<bool>::make(mCubos.mWorld, std::move(func), {}));
+                mCubos.mSystemRegistry.add(mName, System<bool>::make(*mCubos.mWorld, std::move(func), {}));
             CUBOS_ASSERT(mPlanner.repeatWhile(mTagId, conditionId), "Tag was already set to repeating");
             return *this;
         }
@@ -544,7 +548,7 @@ namespace cubos::core::ecs
         SystemBuilder&& onlyIf(auto function) &&
         {
             CUBOS_ASSERT(!mCondition.contains(), "Only one condition can be set per system");
-            mCondition.replace(System<bool>::make(mCubos.mWorld, std::move(function), {}));
+            mCondition.replace(System<bool>::make(*mCubos.mWorld, std::move(function), {}));
             return std::move(*this);
         }
 
@@ -552,7 +556,7 @@ namespace cubos::core::ecs
         /// @param function System function.
         void call(auto function) &&
         {
-            this->finish(System<void>::make(mCubos.mWorld, std::move(function), mOptions));
+            this->finish(System<void>::make(*mCubos.mWorld, std::move(function), mOptions));
         }
 
     private:
@@ -687,7 +691,7 @@ namespace cubos::core::ecs
         /// @param function System function.
         void call(auto function) &&
         {
-            this->finish(System<void>::make(mCubos.mWorld, std::move(function), mOptions));
+            this->finish(System<void>::make(*mCubos.mWorld, std::move(function), mOptions));
         }
 
     private:

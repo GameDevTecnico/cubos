@@ -45,6 +45,9 @@ namespace cubos::core::ecs
         /// @brief Constructs.
         SystemRegistry() = default;
 
+        /// @brief Move constructs.
+        SystemRegistry(SystemRegistry&&) = default;
+
         /// @brief Forbid copying.
         SystemRegistry(const SystemRegistry&) = delete;
 
