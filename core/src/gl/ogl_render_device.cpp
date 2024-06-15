@@ -12,7 +12,7 @@
 #include <vector>
 
 #ifdef __EMSCRIPTEN__
-#include <glad/gles2.h>
+#include <webgl/webgl2.h>
 #else
 #include <glad/gl.h>
 #endif // __EMSCRIPTEN__
@@ -1381,6 +1381,13 @@ OGLRenderDevice::OGLRenderDevice()
     {
         CHECK(glEnable(GL_DEBUG_OUTPUT));
         CHECK(glDebugMessageCallback(messageCallback, nullptr));
+    }
+#else
+    // Check if GL_EXT_color_buffer_float is supported
+    const char* extensions = (const char*)glGetString(GL_EXTENSIONS);
+    if (strstr(extensions, "GL_EXT_color_buffer_float") == nullptr)
+    {
+        CUBOS_WARN("GL_EXT_color_buffer_float is required to use floating point textures as render targets");
     }
 #endif
 
