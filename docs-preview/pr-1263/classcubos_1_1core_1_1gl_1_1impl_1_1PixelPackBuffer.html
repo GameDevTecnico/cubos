@@ -65,41 +65,22 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a88d9cdd369d8d29876f07a94e8ec5a37" class="m-doc">map</a>(</span><span class="m-doc-wrap">) -&gt; const void* <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Maps the pixel buffer to a region in memory. Must be matched with a call to <a href="classcubos_1_1core_1_1gl_1_1impl_1_1PixelPackBuffer.html#a2e048a113d04e2bfd3debaf2d2c06469" class="m-doc">unmap()</a>.</dd>
-            <dt id="a2e048a113d04e2bfd3debaf2d2c06469">
-              <span class="m-doc-wrap-bumper">void <a href="#a2e048a113d04e2bfd3debaf2d2c06469" class="m-doc-self">unmap</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Unmaps the pixel buffer.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af2a1e171b8ff18fd03185cbfebe2d25c" class="m-doc">fill</a>(</span><span class="m-doc-wrap">const void* data,
+              <span class="m-doc-wrap-bumper">void <a href="#a13d6d7a2525611ea0566b733e90f31de" class="m-doc">copyTo</a>(</span><span class="m-doc-wrap">void* data,
+              std::size_t offset,
               std::size_t size) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Copies a region of the buffer to CPU memory.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a88d9cdd369d8d29876f07a94e8ec5a37"><div>
+          <section class="m-doc-details" id="a13d6d7a2525611ea0566b733e90f31de"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />PixelPackBuffer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88d9cdd369d8d29876f07a94e8ec5a37" class="m-doc-self">map</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Maps the pixel buffer to a region in memory. Must be matched with a call to <a href="classcubos_1_1core_1_1gl_1_1impl_1_1PixelPackBuffer.html#a2e048a113d04e2bfd3debaf2d2c06469" class="m-doc">unmap()</a>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Pointer to the memory region.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="af2a1e171b8ff18fd03185cbfebe2d25c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />PixelPackBuffer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af2a1e171b8ff18fd03185cbfebe2d25c" class="m-doc-self">fill</a>(</span><span class="m-doc-wrap">const void* data,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />PixelPackBuffer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13d6d7a2525611ea0566b733e90f31de" class="m-doc-self">copyTo</a>(</span><span class="m-doc-wrap">void* data,
+              std::size_t offset,
               std::size_t size) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Copies a region of the buffer to CPU memory.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -107,11 +88,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">data</td>
-                  <td>Pointer to data.</td>
+                  <td>Pointer to the destination memory.</td>
+                </tr>
+                <tr>
+                  <td>offset</td>
+                  <td>Offset in the buffer to start copying from.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>Data size in bytes.</td>
+                  <td>Size of the region to copy.</td>
                 </tr>
               </tbody>
             </table>
