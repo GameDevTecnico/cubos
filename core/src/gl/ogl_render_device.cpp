@@ -22,7 +22,49 @@
 using namespace cubos::core;
 using namespace cubos::core::gl;
 
-#define LOG_GL_ERROR(err) CUBOS_ERROR("OpenGL error: {}", err)
+#define LOG_GL_ERROR_SRC(src, err) CUBOS_ERROR("{}: {}", src, err)
+#define LOG_GL_ERROR(err) LOG_GL_ERROR_SRC("OpenGL error", err)
+
+#define CHECK_GL_ERROR(...)                                                                                            \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        GLenum glErr = glGetError();                                                                                   \
+        if (glErr != GL_NO_ERROR)                                                                                      \
+        {                                                                                                              \
+            LOG_GL_ERROR_SRC(#__VA_ARGS__, glErr);                                                                     \
+        }                                                                                                              \
+    } while (false)
+
+#define CLEANUP_GL_ERROR_RET(ret, ...)                                                                                 \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        GLenum glErr = glGetError();                                                                                   \
+        if (glErr != GL_NO_ERROR)                                                                                      \
+        {                                                                                                              \
+            __VA_ARGS__;                                                                                               \
+            LOG_GL_ERROR(glErr);                                                                                       \
+            return ret;                                                                                                \
+        }                                                                                                              \
+    } while (false)
+
+#ifndef NDEBUG // FIXME: This should be a build option, to allow Release with error checking
+#define CHECK(...)                                                                                                     \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        __VA_ARGS__;                                                                                                   \
+        CHECK_GL_ERROR(__VA_ARGS__);                                                                                   \
+    } while (false)
+
+#define CHECK_VAL(val, ...)                                                                                            \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        val = __VA_ARGS__;                                                                                             \
+        CHECK_GL_ERROR(__VA_ARGS__);                                                                                   \
+    } while (false)
+#else
+#define CHECK(...) __VA_ARGS__
+#define CHECK_VAL(val, ...) val = __VA_ARGS__
+#endif
 
 #ifndef __EMSCRIPTEN__
 // OpenGL message callback (errors, warnings, etc)
@@ -450,7 +492,7 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteFramebuffers(1, &this->id);
+            CHECK(glDeleteFramebuffers(1, &this->id));
         }
     }
 
@@ -520,19 +562,21 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteBuffers(1, &this->id);
+            CHECK(glDeleteBuffers(1, &this->id));
         }
     }
 
     const void* map() override
     {
-        glBindBuffer(GL_PIXEL_PACK_BUFFER, this->id);
-        return glMapBufferRange(GL_PIXEL_PACK_BUFFER, 0, this->size, GL_MAP_READ_BIT);
+        CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, this->id));
+        void* ptr;
+        CHECK_VAL(ptr, glMapBufferRange(GL_PIXEL_PACK_BUFFER, 0, this->size, GL_MAP_READ_BIT));
+        return ptr;
     }
 
     void unmap() override
     {
-        glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+        CHECK(glUnmapBuffer(GL_PIXEL_PACK_BUFFER));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -554,7 +598,7 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteSamplers(1, &this->id);
+            CHECK(glDeleteSamplers(1, &this->id));
         }
     }
 
@@ -582,37 +626,38 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteTextures(1, &this->id);
+            CHECK(glDeleteTextures(1, &this->id));
         }
     }
 
     void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data,
                 std::size_t level) override
     {
-        glBindTexture(GL_TEXTURE_2D, this->id);
-        glTexSubImage2D(GL_TEXTURE_2D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
-                        static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type, data);
+        CHECK(glBindTexture(GL_TEXTURE_2D, this->id));
+        CHECK(glTexSubImage2D(GL_TEXTURE_2D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
+                              static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type,
+                              data));
     }
 
     void read(void* outputBuffer) override
     {
-        glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
-        glBindTexture(GL_TEXTURE_2D, this->id);
-        glReadPixels(0, 0, this->width, this->height, this->format, this->type, outputBuffer);
+        CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, 0));
+        CHECK(glBindTexture(GL_TEXTURE_2D, this->id));
+        CHECK(glReadPixels(0, 0, this->width, this->height, this->format, this->type, outputBuffer));
     }
 
     void copyTo(PixelPackBuffer buffer) override
     {
-        glBindBuffer(GL_PIXEL_PACK_BUFFER, std::static_pointer_cast<OGLPixelPackBuffer>(buffer)->id);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->id);
-        glReadPixels(0, 0, this->width, this->height, this->format, this->type, nullptr);
+        CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, std::static_pointer_cast<OGLPixelPackBuffer>(buffer)->id));
+        CHECK(glActiveTexture(GL_TEXTURE0));
+        CHECK(glBindTexture(GL_TEXTURE_2D, this->id));
+        CHECK(glReadPixels(0, 0, this->width, this->height, this->format, this->type, nullptr));
     }
 
     void generateMipmaps() override
     {
-        glBindTexture(GL_TEXTURE_2D, this->id);
-        glGenerateMipmap(GL_TEXTURE_2D);
+        CHECK(glBindTexture(GL_TEXTURE_2D, this->id));
+        CHECK(glGenerateMipmap(GL_TEXTURE_2D));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -641,23 +686,23 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteTextures(1, &this->id);
+            CHECK(glDeleteTextures(1, &this->id));
         }
     }
 
     void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data,
                 std::size_t level) override
     {
-        glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
-        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
-                        static_cast<GLint>(i), static_cast<GLsizei>(width), static_cast<GLsizei>(height), 1,
-                        this->format, this->type, data);
+        CHECK(glBindTexture(GL_TEXTURE_2D_ARRAY, this->id));
+        CHECK(glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x),
+                              static_cast<GLint>(y), static_cast<GLint>(i), static_cast<GLsizei>(width),
+                              static_cast<GLsizei>(height), 1, this->format, this->type, data));
     }
 
     void generateMipmaps() override
     {
-        glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
-        glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
+        CHECK(glBindTexture(GL_TEXTURE_2D_ARRAY, this->id));
+        CHECK(glGenerateMipmap(GL_TEXTURE_2D_ARRAY));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -684,23 +729,23 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteTextures(1, &this->id);
+            CHECK(glDeleteTextures(1, &this->id));
         }
     }
 
     void update(std::size_t x, std::size_t y, std::size_t z, std::size_t width, std::size_t height, std::size_t depth,
                 const void* data, std::size_t level) override
     {
-        glBindTexture(GL_TEXTURE_3D, this->id);
-        glTexSubImage3D(GL_TEXTURE_3D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
-                        static_cast<GLint>(z), static_cast<GLsizei>(width), static_cast<GLsizei>(height),
-                        static_cast<GLsizei>(depth), this->format, this->type, data);
+        CHECK(glBindTexture(GL_TEXTURE_3D, this->id));
+        CHECK(glTexSubImage3D(GL_TEXTURE_3D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
+                              static_cast<GLint>(z), static_cast<GLsizei>(width), static_cast<GLsizei>(height),
+                              static_cast<GLsizei>(depth), this->format, this->type, data));
     }
 
     void generateMipmaps() override
     {
-        glBindTexture(GL_TEXTURE_3D, this->id);
-        glGenerateMipmap(GL_TEXTURE_3D);
+        CHECK(glBindTexture(GL_TEXTURE_3D, this->id));
+        CHECK(glGenerateMipmap(GL_TEXTURE_3D));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -727,7 +772,7 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteTextures(1, &this->id);
+            CHECK(glDeleteTextures(1, &this->id));
         }
     }
 
@@ -737,15 +782,16 @@ public:
         GLenum glFace;
         cubeFaceToGL(face, glFace);
 
-        glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
-        glTexSubImage2D(glFace, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
-                        static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type, data);
+        CHECK(glBindTexture(GL_TEXTURE_CUBE_MAP, this->id));
+        CHECK(glTexSubImage2D(glFace, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
+                              static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type,
+                              data));
     }
 
     void generateMipmaps() override
     {
-        glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
-        glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+        CHECK(glBindTexture(GL_TEXTURE_CUBE_MAP, this->id));
+        CHECK(glGenerateMipmap(GL_TEXTURE_CUBE_MAP));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -770,7 +816,7 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteBuffers(1, &this->id);
+            CHECK(glDeleteBuffers(1, &this->id));
         }
     }
 
@@ -787,8 +833,8 @@ public:
 
     void fill(const void* data, std::size_t size) override
     {
-        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
-        glBufferSubData(GL_UNIFORM_BUFFER, 0, static_cast<GLsizeiptr>(size), data);
+        CHECK(glBindBuffer(GL_UNIFORM_BUFFER, this->id));
+        CHECK(glBufferSubData(GL_UNIFORM_BUFFER, 0, static_cast<GLsizeiptr>(size), data));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -813,20 +859,22 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteBuffers(1, &this->id);
+            CHECK(glDeleteBuffers(1, &this->id));
         }
     }
 
     void* map() override
     {
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
-        return glMapBufferRange(GL_ELEMENT_ARRAY_BUFFER, 0, this->size,
-                                GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+        CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id));
+        void* ptr;
+        CHECK_VAL(ptr, glMapBufferRange(GL_ELEMENT_ARRAY_BUFFER, 0, this->size,
+                                        GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT));
+        return ptr;
     }
 
     void unmap() override
     {
-        glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+        CHECK(glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -851,27 +899,33 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteBuffers(1, &this->id);
+            CHECK(glDeleteBuffers(1, &this->id));
         }
     }
 
     void* map() override
     {
-        glBindBuffer(GL_ARRAY_BUFFER, this->id);
-        return glMapBufferRange(GL_ARRAY_BUFFER, 0, this->size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+        CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
+        void* ptr;
+        CHECK_VAL(ptr,
+                  glMapBufferRange(GL_ARRAY_BUFFER, 0, this->size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT));
+        return ptr;
     }
 
     void* map(std::size_t offset, std::size_t length, bool synchronized) override
     {
         GLbitfield flags = GL_MAP_WRITE_BIT;
         flags |= synchronized ? 0 : GL_MAP_UNSYNCHRONIZED_BIT;
-        glBindBuffer(GL_ARRAY_BUFFER, this->id);
-        return glMapBufferRange(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(length), flags);
+        CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
+        void* ptr;
+        CHECK_VAL(ptr, glMapBufferRange(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(length),
+                                        flags));
+        return ptr;
     }
 
     void unmap() override
     {
-        glUnmapBuffer(GL_ARRAY_BUFFER);
+        CHECK(glUnmapBuffer(GL_ARRAY_BUFFER));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -897,7 +951,7 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteVertexArrays(1, &this->id);
+            CHECK(glDeleteVertexArrays(1, &this->id));
         }
     }
 
@@ -921,7 +975,7 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteShader(this->shader);
+            CHECK(glDeleteShader(this->shader));
         }
     }
 
@@ -950,80 +1004,80 @@ public:
     {
         if (sampler)
         {
-            glBindSampler(static_cast<GLuint>(this->tex), std::static_pointer_cast<OGLSampler>(sampler)->id);
+            CHECK(glBindSampler(static_cast<GLuint>(this->tex), std::static_pointer_cast<OGLSampler>(sampler)->id));
         }
         else
         {
-            glBindSampler(static_cast<GLuint>(this->tex), 0);
+            CHECK(glBindSampler(static_cast<GLuint>(this->tex), 0));
         }
     }
 
     void bind(Texture2D tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
+        CHECK(glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex)));
         if (tex)
         {
-            glBindTexture(GL_TEXTURE_2D, std::static_pointer_cast<OGLTexture2D>(tex)->id);
+            CHECK(glBindTexture(GL_TEXTURE_2D, std::static_pointer_cast<OGLTexture2D>(tex)->id));
         }
         else
         {
-            glBindTexture(GL_TEXTURE_2D, 0);
+            CHECK(glBindTexture(GL_TEXTURE_2D, 0));
         }
-        glUniform1i(this->loc, this->tex);
+        CHECK(glUniform1i(this->loc, this->tex));
     }
 
     void bind(Texture2DArray tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
+        CHECK(glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex)));
         if (tex)
         {
-            glBindTexture(GL_TEXTURE_2D_ARRAY, std::static_pointer_cast<OGLTexture2DArray>(tex)->id);
+            CHECK(glBindTexture(GL_TEXTURE_2D_ARRAY, std::static_pointer_cast<OGLTexture2DArray>(tex)->id));
         }
         else
         {
-            glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+            CHECK(glBindTexture(GL_TEXTURE_2D_ARRAY, 0));
         }
-        glUniform1i(this->loc, this->tex);
+        CHECK(glUniform1i(this->loc, this->tex));
     }
 
     void bind(Texture3D tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
+        CHECK(glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex)));
         if (tex)
         {
-            glBindTexture(GL_TEXTURE_3D, std::static_pointer_cast<OGLTexture3D>(tex)->id);
+            CHECK(glBindTexture(GL_TEXTURE_3D, std::static_pointer_cast<OGLTexture3D>(tex)->id));
         }
         else
         {
-            glBindTexture(GL_TEXTURE_3D, 0);
+            CHECK(glBindTexture(GL_TEXTURE_3D, 0));
         }
-        glUniform1i(this->loc, this->tex);
+        CHECK(glUniform1i(this->loc, this->tex));
     }
 
     void bind(CubeMap cubeMap) override
     {
-        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
+        CHECK(glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex)));
         if (cubeMap)
         {
-            glBindTexture(GL_TEXTURE_CUBE_MAP, std::static_pointer_cast<OGLCubeMap>(cubeMap)->id);
+            CHECK(glBindTexture(GL_TEXTURE_CUBE_MAP, std::static_pointer_cast<OGLCubeMap>(cubeMap)->id));
         }
         else
         {
-            glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+            CHECK(glBindTexture(GL_TEXTURE_CUBE_MAP, 0));
         }
-        glUniform1i(this->loc, this->tex);
+        CHECK(glUniform1i(this->loc, this->tex));
     }
 
     void bind(ConstantBuffer cb) override
     {
         if (cb)
         {
-            glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc),
-                             std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+            CHECK(glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc),
+                                   std::static_pointer_cast<OGLConstantBuffer>(cb)->id));
         }
         else
         {
-            glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc), 0);
+            CHECK(glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc), 0));
         }
     }
 
@@ -1047,9 +1101,9 @@ public:
             CUBOS_FAIL("Invalid enum");
         }
 
-        glUniform1i(this->loc, this->tex);
-        glBindImageTexture(static_cast<GLuint>(this->tex), texImpl->id, level, GL_TRUE, 0, glAccess,
-                           texImpl->internalFormat);
+        CHECK(glUniform1i(this->loc, this->tex));
+        CHECK(glBindImageTexture(static_cast<GLuint>(this->tex), texImpl->id, level, GL_TRUE, 0, glAccess,
+                                 texImpl->internalFormat));
 #else
         (void)tex;
         (void)level;
@@ -1060,67 +1114,67 @@ public:
 
     void setConstant(glm::vec2 val) override
     {
-        glUniform2fv(loc, 1, &val[0]);
+        CHECK(glUniform2fv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::vec3 val) override
     {
-        glUniform3fv(loc, 1, &val[0]);
+        CHECK(glUniform3fv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::vec4 val) override
     {
-        glUniform4fv(loc, 1, &val[0]);
+        CHECK(glUniform4fv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::ivec2 val) override
     {
-        glUniform2iv(loc, 1, &val[0]);
+        CHECK(glUniform2iv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::ivec3 val) override
     {
-        glUniform3iv(loc, 1, &val[0]);
+        CHECK(glUniform3iv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::ivec4 val) override
     {
-        glUniform4iv(loc, 1, &val[0]);
+        CHECK(glUniform4iv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::uvec2 val) override
     {
-        glUniform2uiv(loc, 1, &val[0]);
+        CHECK(glUniform2uiv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::uvec3 val) override
     {
-        glUniform3uiv(loc, 1, &val[0]);
+        CHECK(glUniform3uiv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::uvec4 val) override
     {
-        glUniform4uiv(loc, 1, &val[0]);
+        CHECK(glUniform4uiv(loc, 1, &val[0]));
     }
 
     void setConstant(glm::mat4 val) override
     {
-        glUniformMatrix4fv(loc, 1, GL_FALSE, &val[0][0]);
+        CHECK(glUniformMatrix4fv(loc, 1, GL_FALSE, &val[0][0]));
     }
 
     void setConstant(float val) override
     {
-        glUniform1f(loc, val);
+        CHECK(glUniform1f(loc, val));
     }
 
     void setConstant(int val) override
     {
-        glUniform1i(loc, val);
+        CHECK(glUniform1i(loc, val));
     }
 
     void setConstant(unsigned int val) override
     {
-        glUniform1ui(loc, val);
+        CHECK(glUniform1ui(loc, val));
     }
 
     bool queryConstantBufferStructure(ConstantBufferStructure* /*structure*/) override
@@ -1166,7 +1220,7 @@ public:
     {
         if (!*destroyed)
         {
-            glDeleteProgram(this->program);
+            CHECK(glDeleteProgram(this->program));
         }
     }
 
@@ -1183,7 +1237,8 @@ public:
 
         // No existing binding point was found, it must be created first
 
-        auto loc = glGetUniformLocation(this->program, name);
+        GLint loc;
+        CHECK_VAL(loc, glGetUniformLocation(this->program, name));
         if (loc != -1)
         {
             bps.emplace_back(name, loc, mTexCount++);
@@ -1191,18 +1246,13 @@ public:
         }
 
         // Search for uniform block binding
-        auto index = glGetUniformBlockIndex(this->program, name);
+        GLuint index;
+        CHECK_VAL(index, glGetUniformBlockIndex(this->program, name));
         if (index != GL_INVALID_INDEX)
         {
             auto loc = mUboCount;
-            glUniformBlockBinding(this->program, index, static_cast<GLuint>(loc));
-
-            GLenum glErr = glGetError();
-            if (glErr != 0)
-            {
-                LOG_GL_ERROR(glErr);
-                return nullptr;
-            }
+            CHECK(glUniformBlockBinding(this->program, index, static_cast<GLuint>(loc)));
+            CLEANUP_GL_ERROR_RET(nullptr, (void)nullptr);
 
             mUboCount += 1;
             bps.emplace_back(name, loc);
@@ -1212,17 +1262,12 @@ public:
 #ifndef __EMSCRIPTEN__
         // Search for shader storage block binding
         index = glGetProgramResourceIndex(this->program, GL_SHADER_STORAGE_BLOCK, name);
+        CHECK_GL_ERROR(glGetProgramResourceIndex);
         if (index != GL_INVALID_INDEX)
         {
             auto loc = mSsboCount;
-            glShaderStorageBlockBinding(this->program, index, static_cast<GLuint>(loc));
-
-            GLenum glErr = glGetError();
-            if (glErr != 0)
-            {
-                LOG_GL_ERROR(glErr);
-                return nullptr;
-            }
+            CHECK(glShaderStorageBlockBinding(this->program, index, static_cast<GLuint>(loc)));
+            CLEANUP_GL_ERROR_RET(nullptr, (void)nullptr);
 
             mSsboCount += 1;
             bps.emplace_back(name, loc);
@@ -1329,8 +1374,8 @@ OGLRenderDevice::OGLRenderDevice()
     // TODO: disable this on release for performance reasons (?)
     if (this->OGLRenderDevice::getProperty(Property::ComputeSupported) != 0)
     {
-        glEnable(GL_DEBUG_OUTPUT);
-        glDebugMessageCallback(messageCallback, nullptr);
+        CHECK(glEnable(GL_DEBUG_OUTPUT));
+        CHECK(glDebugMessageCallback(messageCallback, nullptr));
     }
 #endif
 
@@ -1373,8 +1418,8 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 
     // Initialize framebuffer
     GLuint id;
-    glGenFramebuffers(1, &id);
-    glBindFramebuffer(GL_FRAMEBUFFER, id);
+    CHECK(glGenFramebuffers(1, &id));
+    CHECK(glBindFramebuffer(GL_FRAMEBUFFER, id));
 
     // Attach targets
     std::vector<GLenum> drawBuffers;
@@ -1449,7 +1494,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 
         if (formatError)
         {
-            glDeleteFramebuffers(1, &id);
+            CHECK(glDeleteFramebuffers(1, &id));
             CUBOS_ERROR("Invalid depth stencil target format");
             return nullptr;
         }
@@ -1458,28 +1503,23 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     // Define draw buffers
     if (drawBuffers.empty())
     {
-        glDrawBuffer(GL_NONE);
-        glReadBuffer(GL_NONE);
+        CHECK(glDrawBuffer(GL_NONE));
+        CHECK(glReadBuffer(GL_NONE));
     }
     else
     {
-        glDrawBuffers(static_cast<GLsizei>(drawBuffers.size()), drawBuffers.data());
+        CHECK(glDrawBuffers(static_cast<GLsizei>(drawBuffers.size()), drawBuffers.data()));
     }
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteFramebuffers(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteFramebuffers(1, &id));
 
     // Check if the framebuffer is complete
-    auto status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    GLenum status;
+    CHECK_VAL(status, glCheckFramebufferStatus(GL_FRAMEBUFFER));
     if (status != GL_FRAMEBUFFER_COMPLETE)
     {
-        glDeleteFramebuffers(1, &id);
+        CHECK(glDeleteFramebuffers(1, &id));
         CUBOS_ERROR("glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE (returned {})", status);
         return nullptr;
     }
@@ -1491,11 +1531,11 @@ void OGLRenderDevice::setFramebuffer(Framebuffer fb)
 {
     if (fb)
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, std::static_pointer_cast<OGLFramebuffer>(fb)->id);
+        CHECK(glBindFramebuffer(GL_FRAMEBUFFER, std::static_pointer_cast<OGLFramebuffer>(fb)->id));
     }
     else
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        CHECK(glBindFramebuffer(GL_FRAMEBUFFER, 0));
     }
 }
 
@@ -1515,24 +1555,24 @@ void OGLRenderDevice::setRasterState(RasterState rs)
 
     if (rsImpl->cullEnabled == 0U)
     {
-        glDisable(GL_CULL_FACE);
+        CHECK(glDisable(GL_CULL_FACE));
     }
     else
     {
-        glEnable(GL_CULL_FACE);
-        glCullFace(rsImpl->cullFace);
+        CHECK(glEnable(GL_CULL_FACE));
+        CHECK(glCullFace(rsImpl->cullFace));
     }
 
     if (rsImpl->scissorEnabled == 0U)
     {
-        glDisable(GL_SCISSOR_TEST);
+        CHECK(glDisable(GL_SCISSOR_TEST));
     }
     else
     {
-        glEnable(GL_SCISSOR_TEST);
+        CHECK(glEnable(GL_SCISSOR_TEST));
     }
 
-    glFrontFace(rsImpl->frontFace);
+    CHECK(glFrontFace(rsImpl->frontFace));
 }
 
 DepthStencilState OGLRenderDevice::createDepthStencilState(const DepthStencilStateDesc& desc)
@@ -1569,38 +1609,38 @@ void OGLRenderDevice::setDepthStencilState(DepthStencilState dss)
 
     if (dssImpl->depthEnabled == 0U)
     {
-        glDisable(GL_DEPTH_TEST);
+        CHECK(glDisable(GL_DEPTH_TEST));
     }
     else
     {
-        glEnable(GL_DEPTH_TEST);
-        glDepthFunc(dssImpl->depthFunc);
-        glDepthMask(dssImpl->depthWriteEnabled);
+        CHECK(glEnable(GL_DEPTH_TEST));
+        CHECK(glDepthFunc(dssImpl->depthFunc));
+        CHECK(glDepthMask(dssImpl->depthWriteEnabled));
 #ifndef __EMSCRIPTEN__
-        glDepthRange(dssImpl->depthNear, dssImpl->depthFar);
+        CHECK(glDepthRange(dssImpl->depthNear, dssImpl->depthFar));
 #else
-        glDepthRangef(dssImpl->depthNear, dssImpl->depthFar);
+        CHECK(glDepthRangef(dssImpl->depthNear, dssImpl->depthFar));
 #endif
     }
 
     if (dssImpl->stencilEnabled == 0U)
     {
-        glDisable(GL_STENCIL_TEST);
+        CHECK(glDisable(GL_STENCIL_TEST));
     }
     else
     {
-        glEnable(GL_STENCIL_TEST);
+        CHECK(glEnable(GL_STENCIL_TEST));
 
-        glStencilFuncSeparate(GL_FRONT, dssImpl->frontStencilFunc, static_cast<GLint>(dssImpl->stencilRef),
-                              dssImpl->stencilReadMask);
-        glStencilMaskSeparate(GL_FRONT, dssImpl->stencilWriteMask);
-        glStencilOpSeparate(GL_FRONT, dssImpl->frontFaceStencilFail, dssImpl->frontFaceDepthFail,
-                            dssImpl->frontFaceStencilPass);
-        glStencilFuncSeparate(GL_BACK, dssImpl->backStencilFunc, static_cast<GLint>(dssImpl->stencilRef),
-                              dssImpl->stencilReadMask);
-        glStencilMaskSeparate(GL_BACK, dssImpl->stencilWriteMask);
-        glStencilOpSeparate(GL_BACK, dssImpl->backFaceStencilFail, dssImpl->backFaceDepthFail,
-                            dssImpl->backFaceStencilPass);
+        CHECK(glStencilFuncSeparate(GL_FRONT, dssImpl->frontStencilFunc, static_cast<GLint>(dssImpl->stencilRef),
+                                    dssImpl->stencilReadMask));
+        CHECK(glStencilMaskSeparate(GL_FRONT, dssImpl->stencilWriteMask));
+        CHECK(glStencilOpSeparate(GL_FRONT, dssImpl->frontFaceStencilFail, dssImpl->frontFaceDepthFail,
+                                  dssImpl->frontFaceStencilPass));
+        CHECK(glStencilFuncSeparate(GL_BACK, dssImpl->backStencilFunc, static_cast<GLint>(dssImpl->stencilRef),
+                                    dssImpl->stencilReadMask));
+        CHECK(glStencilMaskSeparate(GL_BACK, dssImpl->stencilWriteMask));
+        CHECK(glStencilOpSeparate(GL_BACK, dssImpl->backFaceStencilFail, dssImpl->backFaceDepthFail,
+                                  dssImpl->backFaceStencilPass));
     }
 }
 
@@ -1625,13 +1665,14 @@ void OGLRenderDevice::setBlendState(BlendState bs)
 
     if (bsImpl->blendEnabled == 0U)
     {
-        glDisable(GL_BLEND);
+        CHECK(glDisable(GL_BLEND));
     }
     else
     {
-        glEnable(GL_BLEND);
-        glBlendFuncSeparate(bsImpl->srcFactor, bsImpl->dstFactor, bsImpl->srcAlphaFactor, bsImpl->dstAlphaFactor);
-        glBlendEquationSeparate(bsImpl->blendOp, bsImpl->alphaBlendOp);
+        CHECK(glEnable(GL_BLEND));
+        CHECK(
+            glBlendFuncSeparate(bsImpl->srcFactor, bsImpl->dstFactor, bsImpl->srcAlphaFactor, bsImpl->dstAlphaFactor));
+        CHECK(glBlendEquationSeparate(bsImpl->blendOp, bsImpl->alphaBlendOp));
     }
 }
 
@@ -1704,25 +1745,19 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
 
     // Initialize sampler
     GLuint id;
-    glGenSamplers(1, &id);
-    glSamplerParameteri(id, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(minFilter));
-    glSamplerParameteri(id, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(magFilter));
+    CHECK(glGenSamplers(1, &id));
+    CHECK(glSamplerParameteri(id, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(minFilter)));
+    CHECK(glSamplerParameteri(id, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(magFilter)));
     if (GL_EXT_texture_filter_anisotropic != 0)
     {
-        glSamplerParameteri(id, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<GLint>(desc.maxAnisotropy));
+        CHECK(glSamplerParameteri(id, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<GLint>(desc.maxAnisotropy)));
     }
-    glSamplerParameteri(id, GL_TEXTURE_WRAP_S, static_cast<GLint>(addressU));
-    glSamplerParameteri(id, GL_TEXTURE_WRAP_T, static_cast<GLint>(addressV));
-    glSamplerParameteri(id, GL_TEXTURE_WRAP_R, static_cast<GLint>(addressW));
+    CHECK(glSamplerParameteri(id, GL_TEXTURE_WRAP_S, static_cast<GLint>(addressU)));
+    CHECK(glSamplerParameteri(id, GL_TEXTURE_WRAP_T, static_cast<GLint>(addressV)));
+    CHECK(glSamplerParameteri(id, GL_TEXTURE_WRAP_R, static_cast<GLint>(addressW)));
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteSamplers(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteSamplers(1, &id));
 
     return std::make_shared<OGLSampler>(mDestroyed, id);
 }
@@ -1741,32 +1776,26 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
 
     // Initialize texture
     GLuint id;
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_2D, id);
-    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+    CHECK(glGenTextures(1, &id));
+    CHECK(glBindTexture(GL_TEXTURE_2D, id));
+    CHECK(glPixelStorei(GL_UNPACK_ROW_LENGTH, 0));
     for (std::size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
-        glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
-                     desc.data[i]);
+        CHECK(glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format,
+                           type, desc.data[i]));
     }
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+    CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+    CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
     if (GL_EXT_texture_filter_anisotropic != 0)
     {
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+        CHECK(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F));
     }
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteTextures(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
 
     return std::make_shared<OGLTexture2D>(mDestroyed, id, internalFormat, format, type,
                                           static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height));
@@ -1786,13 +1815,13 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
 
     // Initialize texture
     GLuint id;
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_2D_ARRAY, id);
+    CHECK(glGenTextures(1, &id));
+    CHECK(glBindTexture(GL_TEXTURE_2D_ARRAY, id));
     for (std::size_t j = 0; j < desc.mipLevelCount; ++j)
     {
-        glTexImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
-                     static_cast<GLsizei>(desc.size), 0, format, type, nullptr);
+        CHECK(glTexImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
+                           static_cast<GLsizei>(desc.size), 0, format, type, nullptr));
     }
     for (std::size_t i = 0; i < desc.size; ++i)
     {
@@ -1800,29 +1829,23 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
         {
             if (desc.data[i][j] != nullptr)
             {
-                glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), 0, 0, static_cast<GLint>(i),
-                                static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 1,
-                                format, type, desc.data[i][j]);
+                CHECK(glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), 0, 0, static_cast<GLint>(i),
+                                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div),
+                                      1, format, type, desc.data[i][j]));
             }
         }
     }
-    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    CHECK(glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+    CHECK(glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+    CHECK(glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    CHECK(glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
     if (GL_EXT_texture_filter_anisotropic != 0)
     {
-        glTexParameterf(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+        CHECK(glTexParameterf(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F));
     }
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteTextures(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
 
     return std::make_shared<OGLTexture2DArray>(mDestroyed, id, internalFormat, format, type);
 }
@@ -1848,32 +1871,26 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
 
     // Initialize texture
     GLuint id;
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_3D, id);
+    CHECK(glGenTextures(1, &id));
+    CHECK(glBindTexture(GL_TEXTURE_3D, id));
     for (std::size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
-        glTexImage3D(GL_TEXTURE_3D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div),
-                     static_cast<GLsizei>(desc.depth / div), 0, format, type, desc.data[i]);
+        CHECK(glTexImage3D(GL_TEXTURE_3D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div),
+                           static_cast<GLsizei>(desc.depth / div), 0, format, type, desc.data[i]));
     }
-    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    CHECK(glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+    CHECK(glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+    CHECK(glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    CHECK(glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+    CHECK(glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
     if (GL_EXT_texture_filter_anisotropic != 0)
     {
-        glTexParameterf(GL_TEXTURE_3D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+        CHECK(glTexParameterf(GL_TEXTURE_3D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F));
     }
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteTextures(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
 
     return std::make_shared<OGLTexture3D>(mDestroyed, id, internalFormat, format, type);
 }
@@ -1892,46 +1909,40 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 
     // Initialize texture
     GLuint id;
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+    CHECK(glGenTextures(1, &id));
+    CHECK(glBindTexture(GL_TEXTURE_CUBE_MAP, id));
     for (std::size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
-                     desc.data[static_cast<int>(CubeFace::PositiveX)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
-                     desc.data[static_cast<int>(CubeFace::NegativeX)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
-                     desc.data[static_cast<int>(CubeFace::PositiveY)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
-                     desc.data[static_cast<int>(CubeFace::NegativeY)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
-                     desc.data[static_cast<int>(CubeFace::PositiveZ)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
-                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
-                     desc.data[static_cast<int>(CubeFace::NegativeZ)][i]);
+        CHECK(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format,
+                           type, desc.data[static_cast<int>(CubeFace::PositiveX)][i]));
+        CHECK(glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format,
+                           type, desc.data[static_cast<int>(CubeFace::NegativeX)][i]));
+        CHECK(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format,
+                           type, desc.data[static_cast<int>(CubeFace::PositiveY)][i]));
+        CHECK(glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format,
+                           type, desc.data[static_cast<int>(CubeFace::NegativeY)][i]));
+        CHECK(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format,
+                           type, desc.data[static_cast<int>(CubeFace::PositiveZ)][i]));
+        CHECK(glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                           static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format,
+                           type, desc.data[static_cast<int>(CubeFace::NegativeZ)][i]));
     }
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+    CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+    CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
     if (GL_EXT_texture_filter_anisotropic != 0)
     {
-        glTexParameterf(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+        CHECK(glTexParameterf(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F));
     }
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteTextures(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
 
     return std::make_shared<OGLCubeMap>(mDestroyed, id, internalFormat, format, type);
 }
@@ -1940,18 +1951,12 @@ PixelPackBuffer OGLRenderDevice::createPixelPackBuffer(std::size_t size)
 {
     // Initialize buffer
     GLuint id;
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_PIXEL_PACK_BUFFER, id);
-    glBufferData(GL_PIXEL_PACK_BUFFER, static_cast<GLsizeiptr>(size), nullptr, GL_STREAM_COPY);
+    CHECK(glGenBuffers(1, &id));
+    CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, id));
+    CHECK(glBufferData(GL_PIXEL_PACK_BUFFER, static_cast<GLsizeiptr>(size), nullptr, GL_STREAM_COPY));
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteBuffers(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteBuffers(1, &id));
 
     return std::make_shared<OGLPixelPackBuffer>(mDestroyed, id, static_cast<GLsizeiptr>(size));
 }
@@ -1980,18 +1985,12 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(std::size_t size, const voi
 
     // Initialize buffer
     GLuint id;
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_UNIFORM_BUFFER, id);
-    glBufferData(GL_UNIFORM_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage);
+    CHECK(glGenBuffers(1, &id));
+    CHECK(glBindBuffer(GL_UNIFORM_BUFFER, id));
+    CHECK(glBufferData(GL_UNIFORM_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage));
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteBuffers(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteBuffers(1, &id));
 
     return std::make_shared<OGLConstantBuffer>(mDestroyed, id, static_cast<GLsizeiptr>(size));
 }
@@ -2037,18 +2036,12 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(std::size_t size, const void* dat
 
     // Initialize buffer
     GLuint id;
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage);
+    CHECK(glGenBuffers(1, &id));
+    CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id));
+    CHECK(glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage));
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteBuffers(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteBuffers(1, &id));
 
     return std::make_shared<OGLIndexBuffer>(mDestroyed, id, glFormat, indexSz, static_cast<GLsizeiptr>(size));
 }
@@ -2056,7 +2049,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(std::size_t size, const void* dat
 void OGLRenderDevice::setIndexBuffer(IndexBuffer ib)
 {
     auto ibImpl = std::static_pointer_cast<OGLIndexBuffer>(ib);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibImpl->id);
+    CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibImpl->id));
     mCurrentIndexFormat = static_cast<int>(ibImpl->format);
     mCurrentIndexSz = ibImpl->indexSz;
 }
@@ -2085,18 +2078,12 @@ VertexBuffer OGLRenderDevice::createVertexBuffer(std::size_t size, const void* d
 
     // Initialize buffer
     GLuint id;
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_ARRAY_BUFFER, id);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage);
+    CHECK(glGenBuffers(1, &id));
+    CHECK(glBindBuffer(GL_ARRAY_BUFFER, id));
+    CHECK(glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage));
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteBuffers(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteBuffers(1, &id));
 
     return std::make_shared<OGLVertexBuffer>(mDestroyed, id, static_cast<GLsizeiptr>(size));
 }
@@ -2108,8 +2095,8 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
 
     // Initialize vertex array
     GLuint id;
-    glGenVertexArrays(1, &id);
-    glBindVertexArray(id);
+    CHECK(glGenVertexArrays(1, &id));
+    CHECK(glBindVertexArray(id));
 
     // Link elements
     assert(desc.elementCount <= CUBOS_CORE_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT);
@@ -2118,13 +2105,14 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
         // Get buffer
         auto vb = std::static_pointer_cast<OGLVertexBuffer>(desc.buffers[desc.elements[i].buffer.index]);
         assert(vb != nullptr);
-        glBindBuffer(GL_ARRAY_BUFFER, vb->id);
+        CHECK(glBindBuffer(GL_ARRAY_BUFFER, vb->id));
 
         // Get attribute location
-        GLint loc = glGetAttribLocation(pp->program, desc.elements[i].name);
+        GLint loc;
+        CHECK_VAL(loc, glGetAttribLocation(pp->program, desc.elements[i].name));
         if (loc == -1)
         {
-            glDeleteVertexArrays(1, &id);
+            CHECK(glDeleteVertexArrays(1, &id));
             CUBOS_ERROR("Could not find vertex element with name {}", desc.elements[i].name);
             return nullptr;
         }
@@ -2197,36 +2185,30 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
 
         assert(desc.elements[i].size >= 1 && desc.elements[i].size <= 4);
 
-        glEnableVertexAttribArray(static_cast<GLuint>(loc));
+        CHECK(glEnableVertexAttribArray(static_cast<GLuint>(loc)));
         if (!integer)
         {
-            glVertexAttribPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type,
-                                  static_cast<GLboolean>(normalized), (GLsizei)desc.elements[i].buffer.stride,
-                                  (const void*)desc.elements[i].buffer.offset);
+            CHECK(glVertexAttribPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type,
+                                        static_cast<GLboolean>(normalized), (GLsizei)desc.elements[i].buffer.stride,
+                                        (const void*)desc.elements[i].buffer.offset));
         }
         else
         {
-            glVertexAttribIPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type,
-                                   (GLsizei)desc.elements[i].buffer.stride,
-                                   (const void*)desc.elements[i].buffer.offset);
+            CHECK(glVertexAttribIPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type,
+                                         (GLsizei)desc.elements[i].buffer.stride,
+                                         (const void*)desc.elements[i].buffer.offset));
         }
     }
 
     // Check errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteVertexArrays(1, &id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteVertexArrays(1, &id));
 
     return std::make_shared<OGLVertexArray>(mDestroyed, id, desc.buffers);
 }
 
 void OGLRenderDevice::setVertexArray(VertexArray va)
 {
-    glBindVertexArray(std::static_pointer_cast<OGLVertexArray>(va)->id);
+    CHECK(glBindVertexArray(std::static_pointer_cast<OGLVertexArray>(va)->id));
 }
 
 ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
@@ -2263,31 +2245,26 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
 #endif
 
     // Initialize shader
-    GLuint id = glCreateShader(shaderType);
+    GLuint id;
+    CHECK_VAL(id, glCreateShader(shaderType));
     const char* srcs[] = {GLSL_HEADER, src};
-    glShaderSource(id, 2, (const GLchar* const*)srcs, nullptr);
-    glCompileShader(id);
+    CHECK(glShaderSource(id, 2, (const GLchar* const*)srcs, nullptr));
+    CHECK(glCompileShader(id));
 
     // Check for errors
     GLint success;
-    glGetShaderiv(id, GL_COMPILE_STATUS, &success);
+    CHECK(glGetShaderiv(id, GL_COMPILE_STATUS, &success));
     if (success == 0)
     {
         GLchar infoLog[512];
-        glGetShaderInfoLog(id, sizeof(infoLog), nullptr, infoLog);
-        glDeleteShader(id);
+        CHECK(glGetShaderInfoLog(id, sizeof(infoLog), nullptr, infoLog));
+        CHECK(glDeleteShader(id));
         CUBOS_ERROR("Could not compile shader: {}", infoLog);
         return nullptr;
     }
 
     // Check for OpenGL errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteShader(id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteShader(id));
 
     return std::make_shared<OGLShaderStage>(mDestroyed, stage, id);
 }
@@ -2298,31 +2275,26 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage
     auto psImpl = std::static_pointer_cast<OGLShaderStage>(ps);
 
     // Initialize program
-    auto id = glCreateProgram();
-    glAttachShader(id, vsImpl->shader);
-    glAttachShader(id, psImpl->shader);
-    glLinkProgram(id);
+    GLuint id;
+    CHECK_VAL(id, glCreateProgram());
+    CHECK(glAttachShader(id, vsImpl->shader));
+    CHECK(glAttachShader(id, psImpl->shader));
+    CHECK(glLinkProgram(id));
 
     // Check for linking errors
     GLint success;
-    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    CHECK(glGetProgramiv(id, GL_LINK_STATUS, &success));
     if (success == 0)
     {
         char infoLog[512];
-        glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
-        glDeleteProgram(id);
+        CHECK(glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog));
+        CHECK(glDeleteProgram(id));
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
     }
 
     // Check for OpenGL errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteProgram(id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteProgram(id));
 
     return std::make_shared<OGLShaderPipeline>(mDestroyed, vsImpl, psImpl, id);
 }
@@ -2334,32 +2306,27 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage
     auto psImpl = std::static_pointer_cast<OGLShaderStage>(ps);
 
     // Initialize program
-    auto id = glCreateProgram();
-    glAttachShader(id, vsImpl->shader);
-    glAttachShader(id, gsImpl->shader);
-    glAttachShader(id, psImpl->shader);
-    glLinkProgram(id);
+    GLuint id;
+    CHECK_VAL(id, glCreateProgram());
+    CHECK(glAttachShader(id, vsImpl->shader));
+    CHECK(glAttachShader(id, gsImpl->shader));
+    CHECK(glAttachShader(id, psImpl->shader));
+    CHECK(glLinkProgram(id));
 
     // Check for linking errors
     GLint success;
-    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    CHECK(glGetProgramiv(id, GL_LINK_STATUS, &success));
     if (success == 0)
     {
         char infoLog[512];
-        glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
-        glDeleteProgram(id);
+        CHECK(glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog));
+        CHECK(glDeleteProgram(id));
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
     }
 
     // Check for OpenGL errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteProgram(id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteProgram(id));
 
     return std::make_shared<OGLShaderPipeline>(mDestroyed, vsImpl, gsImpl, psImpl, id);
 }
@@ -2369,37 +2336,32 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage cs)
     auto csImpl = std::static_pointer_cast<OGLShaderStage>(cs);
 
     // Initialize program
-    auto id = glCreateProgram();
-    glAttachShader(id, csImpl->shader);
-    glLinkProgram(id);
+    GLuint id;
+    CHECK_VAL(id, glCreateProgram());
+    CHECK(glAttachShader(id, csImpl->shader));
+    CHECK(glLinkProgram(id));
 
     // Check for linking errors
     GLint success;
-    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    CHECK(glGetProgramiv(id, GL_LINK_STATUS, &success));
     if (success == 0)
     {
         char infoLog[512];
-        glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
-        glDeleteProgram(id);
+        CHECK(glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog));
+        CHECK(glDeleteProgram(id));
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
     }
 
     // Check for OpenGL errors
-    GLenum glErr = glGetError();
-    if (glErr != 0)
-    {
-        glDeleteProgram(id);
-        LOG_GL_ERROR(glErr);
-        return nullptr;
-    }
+    CLEANUP_GL_ERROR_RET(nullptr, glDeleteProgram(id));
 
     return std::make_shared<OGLShaderPipeline>(mDestroyed, csImpl, id);
 }
 
 void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
 {
-    glUseProgram(std::static_pointer_cast<OGLShaderPipeline>(pipeline)->program);
+    CHECK(glUseProgram(std::static_pointer_cast<OGLShaderPipeline>(pipeline)->program));
 }
 
 Timer OGLRenderDevice::createTimer()
@@ -2422,46 +2384,46 @@ Timer OGLRenderDevice::createTimer()
 
 void OGLRenderDevice::clearColor(float r, float g, float b, float a)
 {
-    glClearColor(r, g, b, a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    CHECK(glClearColor(r, g, b, a));
+    CHECK(glClear(GL_COLOR_BUFFER_BIT));
 }
 
 void OGLRenderDevice::clearTargetColor(std::size_t target, float r, float g, float b, float a)
 {
     float color[] = {r, g, b, a};
-    glClearBufferfv(GL_COLOR, static_cast<GLint>(target), color);
+    CHECK(glClearBufferfv(GL_COLOR, static_cast<GLint>(target), color));
 }
 
 void OGLRenderDevice::clearTargetColor(std::size_t target, int r, int g, int b, int a)
 {
     int color[] = {r, g, b, a};
-    glClearBufferiv(GL_COLOR, static_cast<GLint>(target), color);
+    CHECK(glClearBufferiv(GL_COLOR, static_cast<GLint>(target), color));
 }
 
 void OGLRenderDevice::clearDepth(float depth)
 {
 #ifndef __EMSCRIPTEN__
-    glClearDepth(depth);
+    CHECK(glClearDepth(depth));
 #else
-    glClearDepthf(depth);
+    CHECK(glClearDepthf(depth));
 #endif
-    glClear(GL_DEPTH_BUFFER_BIT);
+    CHECK(glClear(GL_DEPTH_BUFFER_BIT));
 }
 
 void OGLRenderDevice::clearStencil(int stencil)
 {
-    glClearStencil(stencil);
-    glClear(GL_STENCIL_BUFFER_BIT);
+    CHECK(glClearStencil(stencil));
+    CHECK(glClear(GL_STENCIL_BUFFER_BIT));
 }
 
 void OGLRenderDevice::drawTriangles(std::size_t offset, std::size_t count)
 {
-    glDrawArrays(GL_TRIANGLES, static_cast<GLint>(offset), static_cast<GLsizei>(count));
+    CHECK(glDrawArrays(GL_TRIANGLES, static_cast<GLint>(offset), static_cast<GLsizei>(count)));
 }
 
 void OGLRenderDevice::drawLines(std::size_t offset, std::size_t count)
 {
-    glDrawArrays(GL_LINES, static_cast<GLint>(offset), static_cast<GLsizei>(count));
+    CHECK(glDrawArrays(GL_LINES, static_cast<GLint>(offset), static_cast<GLsizei>(count)));
 }
 
 void OGLRenderDevice::drawTrianglesIndexed(std::size_t offset, std::size_t count)
@@ -2486,7 +2448,7 @@ void OGLRenderDevice::drawTrianglesIndexedInstanced(std::size_t offset, std::siz
 void OGLRenderDevice::dispatchCompute(std::size_t x, std::size_t y, std::size_t z)
 {
 #ifndef __EMSCRIPTEN__
-    glDispatchCompute(static_cast<GLuint>(x), static_cast<GLuint>(y), static_cast<GLuint>(z));
+    CHECK(glDispatchCompute(static_cast<GLuint>(x), static_cast<GLuint>(y), static_cast<GLuint>(z)));
 #else
     (void)x;
     (void)y;
@@ -2523,7 +2485,7 @@ void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
     {
         barrier |= GL_FRAMEBUFFER_BARRIER_BIT;
     }
-    glMemoryBarrier(barrier);
+    CHECK(glMemoryBarrier(barrier));
 #else
     (void)barriers;
     CUBOS_ERROR("Compute shaders are not supported on Emscripten");
@@ -2532,12 +2494,12 @@ void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
 
 void OGLRenderDevice::setViewport(int x, int y, int w, int h)
 {
-    glViewport(x, y, w, h);
+    CHECK(glViewport(x, y, w, h));
 }
 
 void OGLRenderDevice::setScissor(int x, int y, int w, int h)
 {
-    glScissor(x, y, w, h);
+    CHECK(glScissor(x, y, w, h));
 }
 
 int OGLRenderDevice::getProperty(Property prop)
@@ -2555,7 +2517,7 @@ int OGLRenderDevice::getProperty(Property prop)
         else
         {
             GLfloat val;
-            glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &val);
+            CHECK(glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &val));
             return static_cast<int>(val);
         }
 
@@ -2565,8 +2527,8 @@ int OGLRenderDevice::getProperty(Property prop)
         (void)minor;
         return 0;
 #else
-        glGetIntegerv(GL_MAJOR_VERSION, &major);
-        glGetIntegerv(GL_MINOR_VERSION, &minor);
+        CHECK(glGetIntegerv(GL_MAJOR_VERSION, &major));
+        CHECK(glGetIntegerv(GL_MINOR_VERSION, &minor));
         return (major >= 4 && minor >= 3) ? 1 : 0;
 #endif
 
