@@ -118,6 +118,7 @@ function(cubos_common_target_options target)
         target_link_options(${target} PUBLIC -sSTRICT -sASSERTIONS=0)
         target_link_options(${target} PUBLIC -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2)
         target_link_options(${target} PUBLIC -pthread -sPTHREAD_POOL_SIZE=navigator.hardwareConcurrency)
+        target_link_options(${target} PUBLIC -sMINIFY_HTML=0)
 
         if (WITH_GLFW)
             target_link_options(${target} PUBLIC -sUSE_GLFW=3)
