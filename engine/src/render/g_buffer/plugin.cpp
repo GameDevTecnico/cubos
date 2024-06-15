@@ -43,7 +43,7 @@ void cubos::engine::gBufferPlugin(Cubos& cubos)
                     auto& rd = window->renderDevice();
 
                     // Create position and normal textures.
-                    desc.format = TextureFormat::RGB32Float;
+                    desc.format = TextureFormat::RGBA32Float;
                     gBuffer.position = rd.createTexture2D(desc);
                     gBuffer.normal = rd.createTexture2D(desc);
 

@@ -39,7 +39,7 @@ void cubos::engine::hdrPlugin(Cubos& cubos)
                         .width = hdr.size.x,
                         .height = hdr.size.y,
                         .usage = Usage::Dynamic,
-                        .format = TextureFormat::RGB32Float,
+                        .format = TextureFormat::RGBA32Float,
                     };
                     hdr.frontTexture = window->renderDevice().createTexture2D(desc);
                     hdr.backTexture = window->renderDevice().createTexture2D(desc);
