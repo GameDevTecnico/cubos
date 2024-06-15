@@ -979,6 +979,7 @@ public:
             CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
             CHECK(glBufferSubData(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(size), data));
         }
+#ifndef __EMSCRIPTEN__
         else
         {
             CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
@@ -989,6 +990,7 @@ public:
             memcpy(ptr, data, size);
             CHECK(glUnmapBuffer(GL_ARRAY_BUFFER));
         }
+#endif
     }
 
     std::shared_ptr<bool> destroyed;
