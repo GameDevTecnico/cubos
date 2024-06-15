@@ -21,10 +21,8 @@ uint32_t cubos::engine::RenderPicker::read(unsigned int x, unsigned int y) const
 
     y = size.y - y - 1;
 
-    const auto* data = this->pixelBuffer->map();
-    auto r = static_cast<const uint16_t*>(data)[(y * this->size.x + x) * 2U + 0U];
-    auto g = static_cast<const uint16_t*>(data)[(y * this->size.x + x) * 2U + 1U];
-    auto id = (static_cast<uint32_t>(r) << 16U) | static_cast<uint32_t>(g);
-    this->pixelBuffer->unmap();
-    return id;
+    // The pixel pack buffer holds data in the RGBA32UInt format.
+    glm::uvec4 pixel;
+    this->pixelBuffer->copyTo(&pixel, (y * this->size.x + x) * 16U, 16U);
+    return (pixel.r << 16U) | pixel.g;
 }

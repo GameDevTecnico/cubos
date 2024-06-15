@@ -264,6 +264,56 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
     return true;
 }
 
+// Figures out the GL format and type which should be used with glReadPixels
+static void textureFormatToGLForCopying(TextureFormat texFormat, GLenum& format, GLenum& type)
+{
+    switch (texFormat)
+    {
+    case TextureFormat::R8UNorm:
+    case TextureFormat::RG8UNorm:
+    case TextureFormat::RGBA8UNorm:
+    case TextureFormat::R8SNorm:
+    case TextureFormat::RG8SNorm:
+    case TextureFormat::RGBA8SNorm:
+        format = GL_RGBA;
+        type = GL_UNSIGNED_BYTE;
+        break;
+
+    case TextureFormat::R8UInt:
+    case TextureFormat::RG8UInt:
+    case TextureFormat::RGBA8UInt:
+    case TextureFormat::R16UInt:
+    case TextureFormat::RG16UInt:
+    case TextureFormat::RGBA16UInt:
+        format = GL_RGBA_INTEGER;
+        type = GL_UNSIGNED_INT;
+        break;
+
+    case TextureFormat::R8SInt:
+    case TextureFormat::RG8SInt:
+    case TextureFormat::RGBA8SInt:
+    case TextureFormat::R16SInt:
+    case TextureFormat::RG16SInt:
+    case TextureFormat::RGBA16SInt:
+        format = GL_RGBA_INTEGER;
+        type = GL_INT;
+        break;
+
+    case TextureFormat::R16Float:
+    case TextureFormat::RG16Float:
+    case TextureFormat::RGBA16Float:
+    case TextureFormat::R32Float:
+    case TextureFormat::RG32Float:
+    case TextureFormat::RGBA32Float:
+        format = GL_RGBA;
+        type = GL_FLOAT;
+        break;
+
+    default:
+        break;
+    }
+}
+
 // Converts an addressing mode into the necessary GL parameters
 static void addressToGL(AddressMode mode, GLenum& address)
 {
@@ -566,17 +616,12 @@ public:
         }
     }
 
-    const void* map() override
+    void copyTo(void* data, std::size_t offset, std::size_t size) override
     {
         CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, this->id));
-        void* ptr;
-        CHECK_VAL(ptr, glMapBufferRange(GL_PIXEL_PACK_BUFFER, 0, this->size, GL_MAP_READ_BIT));
-        return ptr;
-    }
-
-    void unmap() override
-    {
-        CHECK(glUnmapBuffer(GL_PIXEL_PACK_BUFFER));
+        CHECK(glGetBufferSubData(GL_PIXEL_PACK_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(size),
+                                 data));
+        CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, 0));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -611,12 +656,14 @@ class OGLTexture2D : public impl::Texture2D
 {
 public:
     OGLTexture2D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type,
-                 GLsizei width, GLsizei height)
+                 GLenum copyToFormat, GLenum copyToType, GLsizei width, GLsizei height)
         : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
         , format(format)
         , type(type)
+        , copyToFormat(copyToFormat)
+        , copyToType(copyToType)
         , width(width)
         , height(height)
     {
@@ -626,6 +673,11 @@ public:
     {
         if (!*destroyed)
         {
+            if (this->framebuffer != 0)
+            {
+                CHECK(glDeleteFramebuffers(1, &this->framebuffer));
+            }
+
             CHECK(glDeleteTextures(1, &this->id));
         }
     }
@@ -641,17 +693,36 @@ public:
 
     void read(void* outputBuffer) override
     {
-        CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, 0));
         CHECK(glBindTexture(GL_TEXTURE_2D, this->id));
         CHECK(glReadPixels(0, 0, this->width, this->height, this->format, this->type, outputBuffer));
     }
 
-    void copyTo(PixelPackBuffer buffer) override
+    void copyTo(std::size_t x, std::size_t y, std::size_t width, std::size_t height, PixelPackBuffer buffer) override
     {
+        if (this->copyToFormat == GL_INVALID_ENUM)
+        {
+            CUBOS_ERROR("This operation is unsupported for this texture format");
+            return;
+        }
+
+        if (this->framebuffer == 0)
+        {
+            CHECK(glGenFramebuffers(1, &this->framebuffer));
+            CHECK(glBindFramebuffer(GL_FRAMEBUFFER, this->framebuffer));
+            CHECK(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->id, 0));
+        }
+        else
+        {
+            CHECK(glBindFramebuffer(GL_FRAMEBUFFER, this->framebuffer));
+        }
+
+        CHECK(glViewport(0, 0, this->width, this->height));
         CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, std::static_pointer_cast<OGLPixelPackBuffer>(buffer)->id));
-        CHECK(glActiveTexture(GL_TEXTURE0));
-        CHECK(glBindTexture(GL_TEXTURE_2D, this->id));
-        CHECK(glReadPixels(0, 0, this->width, this->height, this->format, this->type, nullptr));
+        CHECK(glReadPixels(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width),
+                           static_cast<GLsizei>(height), this->copyToFormat, this->copyToType, nullptr));
+        CHECK(glBindBuffer(GL_PIXEL_PACK_BUFFER, 0));
+
+        CHECK(glBindFramebuffer(GL_FRAMEBUFFER, 0));
     }
 
     void generateMipmaps() override
@@ -666,8 +737,11 @@ public:
     GLenum internalFormat;
     GLenum format;
     GLenum type;
+    GLenum copyToFormat;
+    GLenum copyToType;
     GLsizei width;
     GLsizei height;
+    GLuint framebuffer = 0;
 };
 
 class OGLTexture2DArray : public impl::Texture2DArray
@@ -1767,12 +1841,16 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     GLenum internalFormat;
     GLenum format;
     GLenum type;
+    GLenum copyToFormat = GL_INVALID_ENUM;
+    GLenum copyToType = GL_INVALID_ENUM;
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
         CUBOS_ERROR("Unsupported texture format {}", static_cast<int>(desc.format));
         return nullptr;
     }
+
+    textureFormatToGLForCopying(desc.format, copyToFormat, copyToType);
 
     // Initialize texture
     GLuint id;
@@ -1797,7 +1875,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     // Check errors
     CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
 
-    return std::make_shared<OGLTexture2D>(mDestroyed, id, internalFormat, format, type,
+    return std::make_shared<OGLTexture2D>(mDestroyed, id, internalFormat, format, type, copyToFormat, copyToType,
                                           static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height));
 }
 
