@@ -2400,6 +2400,13 @@ void OGLRenderDevice::clearTargetColor(std::size_t target, int r, int g, int b, 
     CHECK(glClearBufferiv(GL_COLOR, static_cast<GLint>(target), color));
 }
 
+void OGLRenderDevice::clearTargetColor(std::size_t target, unsigned int r, unsigned int g, unsigned int b,
+                                       unsigned int a)
+{
+    unsigned int color[] = {r, g, b, a};
+    CHECK(glClearBufferuiv(GL_COLOR, static_cast<GLint>(target), color));
+}
+
 void OGLRenderDevice::clearDepth(float depth)
 {
 #ifndef __EMSCRIPTEN__

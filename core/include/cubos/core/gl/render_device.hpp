@@ -842,6 +842,16 @@ namespace cubos::core::gl
         /// @param a Alpha component.
         virtual void clearTargetColor(std::size_t target, int r, int g, int b, int a) = 0;
 
+        /// @brief Clear the color buffer of a specific target on the current framebuffer to a
+        /// specific color using unsigned integer values.
+        /// @param target Target index.
+        /// @param r Red component.
+        /// @param g Green component.
+        /// @param b Blue component.
+        /// @param a Alpha component.
+        virtual void clearTargetColor(std::size_t target, unsigned int r, unsigned int g, unsigned int b,
+                                      unsigned int a) = 0;
+
         /// @brief Clears the depth buffer bit on the current framebuffer to a specific value.
         /// @param depth Depth value.
         virtual void clearDepth(float depth) = 0;
