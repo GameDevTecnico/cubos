@@ -970,12 +970,11 @@ namespace cubos::core::gl
         public:
             virtual ~PixelPackBuffer() = default;
 
-            /// @brief Maps the pixel buffer to a region in memory. Must be matched with a call to @ref unmap().
-            /// @return Pointer to the memory region.
-            virtual const void* map() = 0;
-
-            /// @brief Unmaps the pixel buffer.
-            virtual void unmap() = 0;
+            /// @brief Copies a region of the buffer to CPU memory.
+            /// @param data Pointer to the destination memory.
+            /// @param offset Offset in the buffer to start copying from.
+            /// @param size Size of the region to copy.
+            virtual void copyTo(void* data, std::size_t offset, std::size_t size) = 0;
 
         protected:
             PixelPackBuffer() = default;
@@ -1014,8 +1013,20 @@ namespace cubos::core::gl
             virtual void read(void* outputBuffer) = 0;
 
             /// @brief Copies part of the texture data into a pixel pack buffer.
+            ///
+            /// The output buffer will store data in one of the three following formats:
+            /// - If the texture format ends with `Norm`, then the output format will be @ref TextureFormat::RGBA8UInt.
+            /// - If the texture format ends with `SInt`, then the output format will be @ref TextureFormat::RGBA32SInt.
+            /// - If the texture format ends with `UInt`, then the output format will be @ref TextureFormat::RGBA32UInt.
+            /// - Otherwise, the output format will be @ref TextureFormat::RGBA32Float.
+            ///
+            /// @param x Source X coordinate.
+            /// @param y Source Y coordinate.
+            /// @param width Width of the section which will be copied.
+            /// @param height Height of the section which will be copied.
             /// @param buffer Buffer to copy into.
-            virtual void copyTo(gl::PixelPackBuffer buffer) = 0;
+            virtual void copyTo(std::size_t x, std::size_t y, std::size_t width, std::size_t height,
+                                gl::PixelPackBuffer buffer) = 0;
 
             /// @brief Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;

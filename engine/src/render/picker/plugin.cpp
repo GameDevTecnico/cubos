@@ -45,7 +45,10 @@ void cubos::engine::renderPickerPlugin(Cubos& cubos)
 
                     renderPicker.backTexture = rd.createTexture2D(desc);
                     renderPicker.frontTexture = rd.createTexture2D(desc);
-                    renderPicker.pixelBuffer = rd.createPixelPackBuffer(desc.width * desc.height * 4);
+
+                    // Since copyTo outputs only RGBA data with 4 bytes per channel, we need to allocate 16 bytes per
+                    // pixel.
+                    renderPicker.pixelBuffer = rd.createPixelPackBuffer(desc.width * desc.height * 4 * 4);
 
                     CUBOS_INFO("Resized RenderPicker to {}x{}", renderPicker.size.x, renderPicker.size.y);
                 }
@@ -56,7 +59,8 @@ void cubos::engine::renderPickerPlugin(Cubos& cubos)
                 // Copy the back texture to the pixel buffer.
                 if (renderPicker.backTexture != nullptr)
                 {
-                    renderPicker.backTexture->copyTo(renderPicker.pixelBuffer);
+                    renderPicker.backTexture->copyTo(0, 0, renderPicker.size.x, renderPicker.size.y,
+                                                     renderPicker.pixelBuffer);
                 }
 
                 // New frame, hint that the front texture needs to be cleared.
