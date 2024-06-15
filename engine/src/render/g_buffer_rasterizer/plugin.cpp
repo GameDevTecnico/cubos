@@ -44,6 +44,7 @@ namespace
     {
         glm::mat4 model;
         glm::uint32_t picker;
+        glm::uint32_t padding[3];
     };
 
     struct State
