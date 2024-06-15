@@ -40,6 +40,7 @@ namespace
         int kernelSize;
         float radius;
         float bias;
+        float padding;
     };
 
     struct State
