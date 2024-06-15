@@ -43,8 +43,6 @@ namespace cubos::engine
         void draw(GizmosRenderer& renderer, DrawPhase phase,
                   const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
         {
-            auto* verts = static_cast<glm::vec3*>(renderer.ringPrimitive.vb->map());
-
             glm::vec3 n = glm::normalize(mPointB - mPointA);
             glm::vec3 p;
             if (n[0] != 0 && n[1] != 0)
@@ -79,29 +77,23 @@ namespace cubos::engine
             glm::vec3 pA = p * mRadiusOuter;
             glm::vec3 pB = p * mRadiusInner;
 
+            glm::vec3 verts[4 * GizmosRenderer::RingSections];
             for (std::size_t i = 0; i < GizmosRenderer::RingSections; i++)
             {
-                glm::vec3 vertOuter =
+                verts[2 * i] =
                     glm::rotate(pA, (float)i * glm::radians(360.0F / (float)GizmosRenderer::RingSections), n) + mPointA;
-                glm::vec3 vertInner =
+                verts[(2 * i) + 1] =
                     glm::rotate(pB, (float)i * glm::radians(360.0F / (float)GizmosRenderer::RingSections), n) + mPointA;
-                verts[2 * i] = {vertOuter[0], vertOuter[1], vertOuter[2]};
-                verts[(2 * i) + 1] = {vertInner[0], vertInner[1], vertInner[2]};
             }
 
             for (std::size_t i = 0; i < GizmosRenderer::RingSections; i++)
             {
-                glm::vec3 vertOuter =
+                verts[(std::size_t)GizmosRenderer::RingSections * 2 + 2 * i] =
                     glm::rotate(pA, (float)i * glm::radians(360.0F / (float)GizmosRenderer::RingSections), n) + mPointB;
-                glm::vec3 vertInner =
+                verts[(std::size_t)GizmosRenderer::RingSections * 2 + (2 * i) + 1] =
                     glm::rotate(pB, (float)i * glm::radians(360.0F / (float)GizmosRenderer::RingSections), n) + mPointB;
-                verts[(std::size_t)GizmosRenderer::RingSections * 2 + 2 * i] = {vertOuter[0], vertOuter[1],
-                                                                                vertOuter[2]};
-                verts[(std::size_t)GizmosRenderer::RingSections * 2 + (2 * i) + 1] = {vertInner[0], vertInner[1],
-                                                                                      vertInner[2]};
             }
-
-            renderer.ringPrimitive.vb->unmap();
+            renderer.ringPrimitive.vb->fill(verts, sizeof(verts));
 
             renderer.renderDevice->setVertexArray(renderer.ringPrimitive.va);
             renderer.renderDevice->setIndexBuffer(renderer.ringPrimitive.ib);
