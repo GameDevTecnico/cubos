@@ -228,7 +228,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
 
                 if (!picker.cleared)
                 {
-                    rd.clearTargetColor(3, UINT16_MAX, UINT16_MAX, 0, 0);
+                    rd.clearTargetColor(3, 65535U, 65535U, 0U, 0U);
                     picker.cleared = true;
                 }
 
