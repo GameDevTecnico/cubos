@@ -5,6 +5,11 @@ option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
 option(BUILD_ENGINE_TESTS "Build cubos engine tests?" OFF)
 option(BUILD_ENGINE_SHARED "Build cubos engine as shared library?" ON)
 
+if (EMSCRIPTEN AND BUILD_ENGINE_SHARED)
+	message(WARNING "Cannot build engine as shared library on Emscripten")
+	set(BUILD_ENGINE_SHARED OFF)
+endif()
+
 message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
 message("# Building engine as shared library: " ${BUILD_ENGINE_SHARED})
@@ -153,9 +158,15 @@ else()
 	add_library(cubos-engine STATIC ${CUBOS_ENGINE_SOURCE})
 endif()
 
+if(EMSCRIPTEN)
+    target_link_options(cubos-engine PUBLIC "SHELL:--embed-file ${CMAKE_CURRENT_SOURCE_DIR}/assets@/builtin")
+	target_compile_definitions(cubos-engine PRIVATE CUBOS_BUILTIN_ASSETS_FOLDER="/builtin")
+else()
+	target_compile_definitions(cubos-engine PRIVATE CUBOS_BUILTIN_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+endif()
+
 target_include_directories(cubos-engine PUBLIC "include")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
-target_compile_definitions(cubos-engine PRIVATE CUBOS_BUILTIN_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
 cubos_common_target_options(cubos-engine)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")

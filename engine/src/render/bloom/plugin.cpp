@@ -147,7 +147,7 @@ void cubos::engine::bloomPlugin(Cubos& cubos)
                     .width = hdr.size.x,
                     .height = hdr.size.y,
                     .usage = Usage::Dynamic,
-                    .format = TextureFormat::RGB32Float,
+                    .format = TextureFormat::RGBA32Float,
                 };
                 if (bloom.size != hdr.size)
                 {

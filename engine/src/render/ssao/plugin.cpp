@@ -40,6 +40,7 @@ namespace
         int kernelSize;
         float radius;
         float bias;
+        float padding;
     };
 
     struct State
@@ -104,7 +105,7 @@ namespace
 
             Texture2DDesc desc{};
             desc.width = desc.height = 4;
-            desc.format = TextureFormat::RGB32Float;
+            desc.format = TextureFormat::RGBA32Float;
             desc.data[0] = ssaoNoise.data();
             noiseTexture = renderDevice.createTexture2D(desc);
         }

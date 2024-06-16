@@ -79,6 +79,7 @@ namespace
         glm::uint numDirectionalLights{0};
         glm::uint numPointLights{0};
         glm::uint numSpotLights{0};
+        float padding;
     };
 
     struct State

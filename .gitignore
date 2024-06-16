@@ -366,8 +366,9 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
-.vscode/
+.vscode/*
 *.code-workspace
+!.vscode/cmake-kits.json
 
 # Local History for Visual Studio Code
 .history/
@@ -404,3 +405,4 @@ imgui.ini
 /.direnv
 
 .DS_store
+/.em_cache

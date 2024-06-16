@@ -4,6 +4,10 @@
 #include <mutex>
 #include <vector>
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten/console.h>
+#endif
+
 #include <cubos/core/data/fs/file.hpp>
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
@@ -200,9 +204,33 @@ void Logger::write(Level level, Location location, std::string message)
                                       toLower(EnumTrait::toString(level)), message);
     }
 
-    // Print the message to stderr.
+// Print the message to stderr.
+#ifndef __EMSCRIPTEN__
     memory::Stream::stdErr.printf("{}[{}] [{}] {}: {}{}\n", levelColor(level), timestamp.string(), location.string(),
                                   toLower(EnumTrait::toString(level)), message, ColorResetCode);
+#else
+    (void)levelColor;
+    std::string logMessage = "[";
+    logMessage.append(timestamp.string());
+    logMessage.append("] [");
+    logMessage.append(location.string());
+    logMessage.append("] ");
+    logMessage.append(toLower(EnumTrait::toString(level)));
+    logMessage.append(": ");
+    logMessage.append(message);
+    if (level == Level::Critical || level == Level::Error)
+    {
+        emscripten_console_error(logMessage.c_str());
+    }
+    else if (level == Level::Warn)
+    {
+        emscripten_console_warn(logMessage.c_str());
+    }
+    else
+    {
+        emscripten_console_log(logMessage.c_str());
+    }
+#endif
 
     // Store the log entry.
     state().entries.emplace_back(Entry{

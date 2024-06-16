@@ -43,8 +43,7 @@ namespace cubos::engine
         void draw(GizmosRenderer& renderer, DrawPhase phase,
                   const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
         {
-            auto* verts = static_cast<glm::vec3*>(renderer.cutConePrimitive.vb->map());
-
+            glm::vec3 verts[2 * GizmosRenderer::CutConeVertsPerBase];
             glm::vec3 n = glm::normalize(mPointB - mPointA);
             glm::vec3 p;
 
@@ -81,23 +80,21 @@ namespace cubos::engine
 
             for (int i = 0; i < GizmosRenderer::CutConeVertsPerBase; i++)
             {
-                glm::vec3 vert =
+                verts[i] =
                     glm::rotate(pA, (float)i * glm::radians(360.0F / (float)GizmosRenderer::CutConeVertsPerBase), n) +
                     mPointA;
-                verts[i] = {vert[0], vert[1], vert[2]};
             }
 
             glm::vec3 pB = p * mRadiusB;
 
             for (int i = GizmosRenderer::CutConeVertsPerBase; i < 2 * GizmosRenderer::CutConeVertsPerBase; i++)
             {
-                glm::vec3 vert =
+                verts[i] =
                     glm::rotate(pB, (float)i * glm::radians(360.0F / (float)GizmosRenderer::CutConeVertsPerBase), n) +
                     mPointB;
-                verts[i] = {vert[0], vert[1], vert[2]};
             }
 
-            renderer.cutConePrimitive.vb->unmap();
+            renderer.cutConePrimitive.vb->fill(verts, sizeof(verts));
 
             renderer.renderDevice->setVertexArray(renderer.cutConePrimitive.va);
             renderer.renderDevice->setIndexBuffer(renderer.cutConePrimitive.ib);

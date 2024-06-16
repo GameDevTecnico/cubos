@@ -25,12 +25,10 @@ namespace cubos::core::gl
         BlendState createBlendState(const BlendStateDesc& desc) override;
         void setBlendState(BlendState bs) override;
         Sampler createSampler(const SamplerDesc& desc) override;
-        Texture1D createTexture1D(const Texture1DDesc& desc) override;
         Texture2D createTexture2D(const Texture2DDesc& desc) override;
         Texture2DArray createTexture2DArray(const Texture2DArrayDesc& desc) override;
         Texture3D createTexture3D(const Texture3DDesc& desc) override;
         CubeMap createCubeMap(const CubeMapDesc& desc) override;
-        CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
         PixelPackBuffer createPixelPackBuffer(std::size_t size) override;
         ConstantBuffer createConstantBuffer(std::size_t size, const void* data, Usage usage) override;
         IndexBuffer createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage) override;
@@ -44,8 +42,10 @@ namespace cubos::core::gl
         ShaderPipeline createShaderPipeline(ShaderStage cs) override;
         void setShaderPipeline(ShaderPipeline pipeline) override;
         void clearColor(float r, float g, float b, float a) override;
-        void clearTargetColor(std::size_t target, float r, float g, float b, float a) override;
-        void clearTargetColor(std::size_t target, int r, int g, int b, int a) override;
+        void clearFloatTargetColor(std::size_t target, float r, float g, float b, float a) override;
+        void clearSIntTargetColor(std::size_t target, int r, int g, int b, int a) override;
+        void clearUIntTargetColor(std::size_t target, unsigned int r, unsigned int g, unsigned int b,
+                                  unsigned int a) override;
         void clearDepth(float depth) override;
         void clearStencil(int stencil) override;
         void drawLines(std::size_t offset, std::size_t count) override;

@@ -1,6 +1,11 @@
 option(BUILD_API_CORE_SAMPLES "Build cubos core c api samples" OFF)
 option(BUILD_API_CORE_SHARED "Build cubos core c api as shared library?" ON)
 
+if (EMSCRIPTEN AND BUILD_API_CORE_SHARED)
+	message(WARNING "Cannot build API core as shared library on Emscripten")
+	set(BUILD_API_CORE_SHARED OFF)
+endif()
+
 message("# Building core c api samples: " ${BUILD_API_CORE_SAMPLES})
 message("# Building core c api as shared library: " ${BUILD_API_CORE_SHARED})
 

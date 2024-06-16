@@ -1,5 +1,3 @@
-#version 330 core
-
 uniform sampler2D inputTexture;
 
 uniform vec3 luminance;

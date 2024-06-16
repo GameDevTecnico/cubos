@@ -5,6 +5,11 @@ set(CUBOS_API_ENGINE_SOURCE
 option(BUILD_API_ENGINE_SAMPLES "Build cubos engine c api samples" OFF)
 option(BUILD_API_ENGINE_SHARED "Build cubos engine c api as shared library?" ON)
 
+if (EMSCRIPTEN AND BUILD_API_ENGINE_SHARED)
+	message(WARNING "Cannot build API engine as shared library on Emscripten")
+	set(BUILD_API_ENGINE_SHARED OFF)
+endif()
+
 message("# Building engine c api samples: " ${BUILD_API_ENGINE_SAMPLES})
 message("# Building engine c api as shared library: " ${BUILD_API_ENGINE_SHARED})
 

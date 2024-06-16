@@ -1,5 +1,3 @@
-#version 330 core
-
 layout(std140) uniform PerElement
 {
     vec2 xRange;

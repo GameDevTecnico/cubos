@@ -19,6 +19,8 @@
             cmake
             ccache
             pkg-config
+            emscripten
+            ninja
 
             # = formatting =
             clang-tools
@@ -53,6 +55,14 @@
             xorg.libXi
             xorg.libXdmcp
           ];
+
+          shellHook = ''
+            export EMSCRIPTEN=${pkgs.emscripten}/share/emscripten
+            export EM_CACHE=$(git rev-parse --show-toplevel)/.em_cache
+            mkdir -p $EM_CACHE
+            cp -r $EMSCRIPTEN/cache/* $EM_CACHE
+            chmod u+rwx -R $EM_CACHE
+          '';
         };
       });
 }

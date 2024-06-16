@@ -113,14 +113,30 @@ function(cubos_common_target_options target)
             set_target_properties(${target} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}")
         endif()
     endif()
+
+    if (EMSCRIPTEN)
+        target_link_options(${target} PUBLIC -sSTRICT -sASSERTIONS=0)
+        target_link_options(${target} PUBLIC -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2)
+        target_link_options(${target} PUBLIC -pthread -sPTHREAD_POOL_SIZE=navigator.hardwareConcurrency)
+        target_link_options(${target} PUBLIC -sMINIFY_HTML=0)
+
+        if (WITH_GLFW)
+            target_link_options(${target} PUBLIC -sUSE_GLFW=3)
+        endif ()
+
+        set_target_properties(${target} PROPERTIES SUFFIX ".html")
+	    target_compile_options(${target} PUBLIC -pthread)
+    endif ()
 endfunction()
 
 # Add doctest as a submodule if it is not installed
 
-if (DOCTEST_USE_SUBMODULE)
-    add_subdirectory(lib/doctest)
-else ()
-    find_package(doctest REQUIRED)
+if (BUILD_CORE_TESTS OR BUILD_ENGINE_TESTS)
+    if (DOCTEST_USE_SUBMODULE)
+        add_subdirectory(lib/doctest)
+    else ()
+        find_package(doctest REQUIRED)
+    endif ()
 endif ()
 
 add_subdirectory(core)

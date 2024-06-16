@@ -1,5 +1,3 @@
-#version 330 core
-
 in vec2 fragUv;
 
 uniform sampler2D positionTexture;
@@ -67,15 +65,15 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
 {
     vec3 toLight = vec3(light.position) - fragPos;
     float r = length(toLight) / light.range;
-    if (r < 1)
+    if (r < 1.0)
     {
         vec3 toLightNormalized = normalize(toLight);
         float a = dot(toLightNormalized, -light.direction.xyz);
         if (a > light.spotCutoff)
         {
-            float angleValue = clamp(remap(a, light.innerSpotCutoff, light.spotCutoff, 1, 0), 0, 1);
-            float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
-            float diffuse = max(dot(fragNormal, toLightNormalized), 0);
+            float angleValue = clamp(remap(a, light.innerSpotCutoff, light.spotCutoff, 1.0, 0.0), 0.0, 1.0);
+            float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1.0 - r) * 5.0, 0.0, 1.0), 0.0, 1.0);
+            float diffuse = max(dot(fragNormal, toLightNormalized), 0.0);
             return angleValue * attenuation * diffuse * light.intensity * vec3(light.color);
         }
     }
@@ -84,17 +82,17 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
 
 vec3 directionalLightCalc(vec3 fragNormal, DirectionalLight light)
 {
-    return max(dot(fragNormal, -light.direction.xyz), 0) * light.intensity * vec3(light.color);
+    return max(dot(fragNormal, -light.direction.xyz), 0.0) * light.intensity * vec3(light.color);
 }
 
 vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLight light)
 {
     vec3 toLight = vec3(light.position) - fragPos;
     float r = length(toLight) / light.range;
-    if (r < 1)
+    if (r < 1.0)
     {
-        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
-        float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0);
+        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1.0 - r) * 5.0, 0.0, 1.0), 0.0, 1.0);
+        float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0.0);
         return attenuation * diffuse * light.intensity * vec3(light.color);
     }
     return vec3(0);

@@ -183,7 +183,6 @@ static void createDeviceObjects()
 
     gl::RasterStateDesc rasterStateDesc;
     rasterStateDesc.cullEnabled = false;
-    rasterStateDesc.rasterMode = gl::RasterMode::Fill;
     rasterStateDesc.scissorEnabled = true;
     bd->rasterState = rd.createRasterState(rasterStateDesc);
 
@@ -204,8 +203,6 @@ static void createDeviceObjects()
 
     // Setup shader pipeline.
     auto vs = rd.createShaderStage(gl::Stage::Vertex, R"glsl(
-#version 330 core
-
 layout (location = 0) in vec2 position;
 layout (location = 1) in vec2 uv;
 layout (location = 2) in vec4 color;
@@ -226,8 +223,6 @@ void main()
     )glsl");
 
     auto ps = rd.createShaderStage(gl::Stage::Pixel, R"glsl(
-#version 330 core
-
 uniform sampler2D tex;
 
 in vec2 fragUv;
@@ -424,10 +419,9 @@ void cubos::engine::imguiEndFrame(const gl::Framebuffer& target)
     auto* drawData = ImGui::GetDrawData();
 
     // Upload projection matrix to constant buffer.
-    glm::mat4& proj = *(glm::mat4*)bd->cb->map();
-    proj = glm::ortho(drawData->DisplayPos.x, drawData->DisplayPos.x + drawData->DisplaySize.x,
-                      drawData->DisplayPos.y + drawData->DisplaySize.y, drawData->DisplayPos.y);
-    bd->cb->unmap();
+    auto proj = glm::ortho(drawData->DisplayPos.x, drawData->DisplayPos.x + drawData->DisplaySize.x,
+                           drawData->DisplayPos.y + drawData->DisplaySize.y, drawData->DisplayPos.y);
+    bd->cb->fill(&proj, sizeof(proj));
 
     // Set render state.
     setupRenderState(bd, target);
@@ -481,12 +475,8 @@ void cubos::engine::imguiEndFrame(const gl::Framebuffer& target)
         }
 
         // Upload vertex and index data into vertex buffer.
-        auto* vtxDst = (ImDrawVert*)bd->vb->map();
-        auto* idxDst = (ImDrawIdx*)bd->ib->map();
-        memcpy(vtxDst, cmdList->VtxBuffer.Data, static_cast<std::size_t>(cmdList->VtxBuffer.Size) * sizeof(ImDrawVert));
-        memcpy(idxDst, cmdList->IdxBuffer.Data, static_cast<std::size_t>(cmdList->IdxBuffer.Size) * sizeof(ImDrawIdx));
-        bd->vb->unmap();
-        bd->ib->unmap();
+        bd->vb->fill(cmdList->VtxBuffer.Data, static_cast<std::size_t>(cmdList->VtxBuffer.Size) * sizeof(ImDrawVert));
+        bd->ib->fill(cmdList->IdxBuffer.Data, static_cast<std::size_t>(cmdList->IdxBuffer.Size) * sizeof(ImDrawIdx));
 
         rd.setVertexArray(bd->va);
         rd.setIndexBuffer(bd->ib);

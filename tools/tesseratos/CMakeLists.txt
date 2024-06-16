@@ -22,5 +22,12 @@ set(TESSERATOS_SOURCE
 
 add_executable(tesseratos ${TESSERATOS_SOURCE})
 target_link_libraries(tesseratos PRIVATE cubos-core cubos-engine)
-target_compile_definitions(tesseratos PRIVATE TESSERATOS_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+
+if(EMSCRIPTEN)
+    target_link_options(tesseratos PUBLIC "SHELL:--embed-file ${CMAKE_CURRENT_SOURCE_DIR}/assets@/tesseratos")
+	target_compile_definitions(tesseratos PRIVATE TESSERATOS_ASSETS_FOLDER="/tesseratos")
+else()
+	target_compile_definitions(tesseratos PRIVATE TESSERATOS_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+endif()
+
 cubos_common_target_options(tesseratos)
