@@ -189,7 +189,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                 rd.setFramebuffer(gizmosTarget.frontFramebuffer);
                 if (!picker.cleared)
                 {
-                    rd.clearTargetColor(0, 65535U, 65535U, 0U, 0U);
+                    rd.clearUIntTargetColor(0, UINT16_MAX, UINT16_MAX, 0, 0);
                     picker.cleared = true;
                 }
                 rd.setShaderPipeline(gizmosRenderer.idPipeline);

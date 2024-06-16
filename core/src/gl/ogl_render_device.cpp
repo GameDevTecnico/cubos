@@ -2378,20 +2378,20 @@ void OGLRenderDevice::clearColor(float r, float g, float b, float a)
     CHECK(glClear(GL_COLOR_BUFFER_BIT));
 }
 
-void OGLRenderDevice::clearTargetColor(std::size_t target, float r, float g, float b, float a)
+void OGLRenderDevice::clearFloatTargetColor(std::size_t target, float r, float g, float b, float a)
 {
     float color[] = {r, g, b, a};
     CHECK(glClearBufferfv(GL_COLOR, static_cast<GLint>(target), color));
 }
 
-void OGLRenderDevice::clearTargetColor(std::size_t target, int r, int g, int b, int a)
+void OGLRenderDevice::clearSIntTargetColor(std::size_t target, int r, int g, int b, int a)
 {
     int color[] = {r, g, b, a};
     CHECK(glClearBufferiv(GL_COLOR, static_cast<GLint>(target), color));
 }
 
-void OGLRenderDevice::clearTargetColor(std::size_t target, unsigned int r, unsigned int g, unsigned int b,
-                                       unsigned int a)
+void OGLRenderDevice::clearUIntTargetColor(std::size_t target, unsigned int r, unsigned int g, unsigned int b,
+                                           unsigned int a)
 {
     unsigned int color[] = {r, g, b, a};
     CHECK(glClearBufferuiv(GL_COLOR, static_cast<GLint>(target), color));

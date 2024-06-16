@@ -219,15 +219,15 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
 
                 if (!gBuffer.cleared)
                 {
-                    rd.clearTargetColor(0, 0.0F, 0.0F, 0.0F, 0.0F);
-                    rd.clearTargetColor(1, 0.0F, 0.0F, 0.0F, 0.0F);
-                    rd.clearTargetColor(2, 0.0F, 0.0F, 0.0F, 0.0F);
+                    rd.clearFloatTargetColor(0, 0.0F, 0.0F, 0.0F, 0.0F);
+                    rd.clearFloatTargetColor(1, 0.0F, 0.0F, 0.0F, 0.0F);
+                    rd.clearFloatTargetColor(2, 0.0F, 0.0F, 0.0F, 0.0F);
                     gBuffer.cleared = true;
                 }
 
                 if (!picker.cleared)
                 {
-                    rd.clearTargetColor(3, 65535U, 65535U, 0U, 0U);
+                    rd.clearUIntTargetColor(3, UINT16_MAX, UINT16_MAX, 0, 0);
                     picker.cleared = true;
                 }
 

@@ -799,33 +799,33 @@ namespace cubos::core::gl
         /// @param a Alpha component.
         virtual void clearColor(float r, float g, float b, float a) = 0;
 
-        /// @brief Clears the color buffer of a specific target on the current framebuffer to a
+        /// @brief Clears the color buffer of a specific float target on the current framebuffer to a
         /// specific color.
         /// @param target Target index.
         /// @param r Red component.
         /// @param g Green component.
         /// @param b Blue component.
         /// @param a Alpha component.
-        virtual void clearTargetColor(std::size_t target, float r, float g, float b, float a) = 0;
+        virtual void clearFloatTargetColor(std::size_t target, float r, float g, float b, float a) = 0;
 
-        /// @brief Clear the color buffer of a specific target on the current framebuffer to a
+        /// @brief Clear the color buffer of a specific signed integer target on the current framebuffer to a
         /// specific color using integer values.
         /// @param target Target index.
         /// @param r Red component.
         /// @param g Green component.
         /// @param b Blue component.
         /// @param a Alpha component.
-        virtual void clearTargetColor(std::size_t target, int r, int g, int b, int a) = 0;
+        virtual void clearSIntTargetColor(std::size_t target, int r, int g, int b, int a) = 0;
 
-        /// @brief Clear the color buffer of a specific target on the current framebuffer to a
+        /// @brief Clear the color buffer of a specific unsigned integer target on the current framebuffer to a
         /// specific color using unsigned integer values.
         /// @param target Target index.
         /// @param r Red component.
         /// @param g Green component.
         /// @param b Blue component.
         /// @param a Alpha component.
-        virtual void clearTargetColor(std::size_t target, unsigned int r, unsigned int g, unsigned int b,
-                                      unsigned int a) = 0;
+        virtual void clearUIntTargetColor(std::size_t target, unsigned int r, unsigned int g, unsigned int b,
+                                          unsigned int a) = 0;
 
         /// @brief Clears the depth buffer bit on the current framebuffer to a specific value.
         /// @param depth Depth value.
