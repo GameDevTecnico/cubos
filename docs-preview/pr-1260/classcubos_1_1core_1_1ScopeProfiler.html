@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core namespace | Cubos Docs</title>
+  <title>cubos::core::ScopeProfiler class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,59 +46,35 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span>core <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>ScopeProfiler <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="metrics_8hpp.html">&lt;core/metrics.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__core.html" class="m-doc">Core</a> namespace.</p>
+        <p>Utility to measure the execution time of a scope.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+<p>This class measures the time between its construction and destruction, providing a way to profile code execution time.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">al</a></dt>
-            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1data.html" class="m-doc">data</a></dt>
-            <dd><a href="group__core-data.html" class="m-doc">Data</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">geom</a></dt>
-            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1gl.html" class="m-doc">gl</a></dt>
-            <dd><a href="group__core-gl.html" class="m-doc">Graphics</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1io.html" class="m-doc">io</a></dt>
-            <dd><a href="group__core-io.html" class="m-doc">Input and output</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">memory</a></dt>
-            <dd><a href="group__core-memory.html" class="m-doc">Memory</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1reflection.html" class="m-doc">reflection</a></dt>
-            <dd><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1thread.html" class="m-doc">thread</a></dt>
-            <dd><a href="group__core-thread.html" class="m-doc">Threading</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1core_1_1Logger.html" class="m-doc">Logger</a>
+            <dt id="a4439c9c46e2357cd1a12aa95ab395ffa">
+              <span class="m-doc-wrap-bumper"><a href="#a4439c9c46e2357cd1a12aa95ab395ffa" class="m-doc-self">ScopeProfiler</a>(</span><span class="m-doc-wrap">std::string name,
+              std::string file,
+              std::size_t line)</span>
             </dt>
-            <dd>Singleton which holds the logging state.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">Metrics</a>
+            <dd>Construct a <a href="classcubos_1_1core_1_1ScopeProfiler.html" class="m-doc">ScopeProfiler</a> with a given name.</dd>
+            <dt id="a2a665387c8e706487cbdb03ef64f0bb5">
+              <span class="m-doc-wrap-bumper"><a href="#a2a665387c8e706487cbdb03ef64f0bb5" class="m-doc-self">~ScopeProfiler</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Singleton class that manages a collection of metrics.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ScopeProfiler.html" class="m-doc">ScopeProfiler</a>
-            </dt>
-            <dd>Utility to measure the execution time of a scope.</dd>
+            <dd>Destruct the <a href="classcubos_1_1core_1_1ScopeProfiler.html" class="m-doc">ScopeProfiler</a> and calculate the elapsed time.</dd>
           </dl>
         </section>
       </div>

@@ -93,6 +93,8 @@
             <dd>Macro <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a>.</dd>
             <dt>file <a href="log_8hpp.html" class="m-doc">log.hpp</a></dt>
             <dd>Logging and assertion macros.</dd>
+            <dt>file <a href="metrics_8hpp.html" class="m-doc">metrics.hpp</a></dt>
+            <dd>Metrics and profiling utilities and macros.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -102,6 +104,10 @@
               class <a href="classcubos_1_1core_1_1Logger.html" class="m-doc">cubos::core::Logger</a>
             </dt>
             <dd>Singleton which holds the logging state.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">cubos::core::Metrics</a>
+            </dt>
+            <dd>Singleton class that manages a collection of metrics.</dd>
           </dl>
         </section>
         <section id="define-members">
@@ -196,6 +202,14 @@
               ...)</span>
             </dt>
             <dd>In debug builds asserts that a condition is true, aborting the program if it is not.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga0f83cb90e749a1728e5ff70eb4693f1d" class="m-doc">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Macro to add a metric.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#gac3ba32b3517668800b034fbbfe742cde" class="m-doc">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Macro to measure the execution time of a function/scope, registering it as a metric.</dd>
           </dl>
         </section>
         <section>
@@ -529,6 +543,21 @@
                 </tr>
               </tbody>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="ga0f83cb90e749a1728e5ff70eb4693f1d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga0f83cb90e749a1728e5ff70eb4693f1d" class="m-doc-self">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">...)</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="metrics_8hpp.html">&lt;core/metrics.hpp&gt;</a></div>
+            </h3>
+            <p>Macro to add a metric.</p>
+          </div></section>
+          <section class="m-doc-details" id="gac3ba32b3517668800b034fbbfe742cde"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#gac3ba32b3517668800b034fbbfe742cde" class="m-doc-self">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">...)</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="metrics_8hpp.html">&lt;core/metrics.hpp&gt;</a></div>
+            </h3>
+            <p>Macro to measure the execution time of a function/scope, registering it as a metric.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>The macro uses <code>__FUNCTION__</code> to register the metric name.</p></aside>
           </div></section>
         </section>
       </div>
