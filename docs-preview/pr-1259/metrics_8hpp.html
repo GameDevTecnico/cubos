@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core namespace | Cubos Docs</title>
+  <title>core/metrics.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,9 +46,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span>core <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span>metrics.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="group__core.html" class="m-doc">Core</a> namespace.</p>
+        <p>Metrics and profiling utilities and macros.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
@@ -64,41 +65,36 @@
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">al</a></dt>
-            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1data.html" class="m-doc">data</a></dt>
-            <dd><a href="group__core-data.html" class="m-doc">Data</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">geom</a></dt>
-            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1gl.html" class="m-doc">gl</a></dt>
-            <dd><a href="group__core-gl.html" class="m-doc">Graphics</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1io.html" class="m-doc">io</a></dt>
-            <dd><a href="group__core-io.html" class="m-doc">Input and output</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">memory</a></dt>
-            <dd><a href="group__core-memory.html" class="m-doc">Memory</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1reflection.html" class="m-doc">reflection</a></dt>
-            <dd><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1thread.html" class="m-doc">thread</a></dt>
-            <dd><a href="group__core-thread.html" class="m-doc">Threading</a> module.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1Logger.html" class="m-doc">Logger</a>
-            </dt>
-            <dd>Singleton which holds the logging state.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">Metrics</a>
+              class <a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">cubos::core::Metrics</a>
             </dt>
             <dd>Singleton class that manages a collection of metrics.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ScopeProfiler.html" class="m-doc">ScopeProfiler</a>
+              class <a href="classcubos_1_1core_1_1ScopeProfiler.html" class="m-doc">cubos::core::ScopeProfiler</a>
             </dt>
             <dd>Utility to measure the execution time of a scope.</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga0f83cb90e749a1728e5ff70eb4693f1d" class="m-doc">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Macro to add a metric.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#gac3ba32b3517668800b034fbbfe742cde" class="m-doc">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Macro to measure the execution time of a function/scope, registering it as a metric.</dd>
           </dl>
         </section>
       </div>
