@@ -247,8 +247,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
 
         if (!mIterator->is_object())
         {
-            CUBOS_WARN("Type {} must be deserialized from a JSON object, not a {}", type.name(),
-                       mIterator->type_name());
+            CUBOS_CRITICAL("Expected an object {}, found a {}", type.name(), mIterator->type_name());
             return false;
         }
 
