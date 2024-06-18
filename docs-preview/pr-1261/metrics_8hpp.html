@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/memory/ directory | Cubos Docs</title>
+  <title>core/metrics.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,47 +46,55 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span>memory<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span>metrics.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="group__core-memory.html" class="m-doc">Memory</a> module.</p>
+        <p>Metrics and profiling utilities and macros.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="any__value_8hpp.html" class="m-doc">any_value.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />AnyValue</a>.</dd>
-            <dt>file <a href="any__vector_8hpp.html" class="m-doc">any_vector.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />AnyVector</a>.</dd>
-            <dt>file <a href="buffer__stream_8hpp.html" class="m-doc">buffer_stream.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />BufferStream</a>.</dd>
-            <dt>file <a href="endianness_8hpp.html" class="m-doc">endianness.hpp</a></dt>
-            <dd>Endianness utility functions.</dd>
-            <dt>file <a href="function_8hpp.html" class="m-doc">function.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Function</a>.</dd>
-            <dt>file <a href="guards_8hpp.html" class="m-doc">guards.hpp</a></dt>
-            <dd>Classes <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard</a> and <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard</a>.</dd>
-            <dt>file <a href="move_8hpp.html" class="m-doc">move.hpp</a></dt>
-            <dd>Functions <a href="group__core-memory.html#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a> and <a href="group__core-memory.html#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />forward</a>.</dd>
-            <dt>file <a href="opt_8hpp.html" class="m-doc">opt.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Opt</a>.</dd>
-            <dt>file <a href="standard__stream_8hpp.html" class="m-doc">standard_stream.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />StandardStream</a>.</dd>
-            <dt>file <a href="stream_8hpp.html" class="m-doc">stream.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Stream</a>.</dd>
-            <dt>file <a href="type__map_8hpp.html" class="m-doc">type_map.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />TypeMap</a>.</dd>
-            <dt>file <a href="unordered__bimap_8hpp.html" class="m-doc">unordered_bimap.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1UnorderedBimap.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap</a>.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">cubos::core::Metrics</a>
+            </dt>
+            <dd>Singleton class that manages a collection of metrics.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ScopeProfiler.html" class="m-doc">cubos::core::ScopeProfiler</a>
+            </dt>
+            <dd>Utility to measure the execution time of a scope.</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga0f83cb90e749a1728e5ff70eb4693f1d" class="m-doc">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Macro to add a metric.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#gac3ba32b3517668800b034fbbfe742cde" class="m-doc">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Macro to measure the execution time of a function/scope, registering it as a metric.</dd>
           </dl>
         </section>
       </div>
