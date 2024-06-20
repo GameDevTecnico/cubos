@@ -5,11 +5,11 @@
 #include <utility>
 #include <vector>
 
-#include <cubos/core/metrics.hpp>
 #include <cubos/core/tel/logging.hpp>
+#include <cubos/core/tel/metrics.hpp>
 
-using cubos::core::Metrics;
-using cubos::core::ScopeProfiler;
+using cubos::core::tel::Metrics;
+using cubos::core::tel::ScopeProfiler;
 
 namespace
 {
