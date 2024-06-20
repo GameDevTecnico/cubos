@@ -4,12 +4,12 @@
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/metrics).
 
-Registering metrics and profiling in **Cubos** can be done through the metric macros defined in @ref core/metrics.hpp and the @ref core::Metrics class.
+Registering metrics and profiling in **CUBOS.** can be done through the metric macros defined in @ref core/tel/metrics.hpp and the @ref core::tel::Metrics class.
 In order to enable these features, compile with `-DENABLE_PROFILING`.
 
 @snippet metrics/main.cpp Import metrics
 
-The following example demonstrates a simple usage of the @ref core::Metrics class, simulating a random function that takes X milliseconds to finish, where X is randomly generated, and also registering metrics values.
+The following example demonstrates a simple usage of the @ref core::tel::Metrics class, simulating a random function that takes X milliseconds to finish, where X is randomly generated, and also registering metrics values.
 
 This is the main loop:
 

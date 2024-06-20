@@ -1,6 +1,6 @@
 /// @file
 /// @brief Metrics and profiling utilities and macros.
-/// @ingroup core
+/// @ingroup core-tel
 
 #pragma once
 
@@ -10,7 +10,7 @@
 #include <cubos/core/api.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
-namespace cubos::core
+namespace cubos::core::tel
 {
     /// @brief Singleton class that manages a collection of metrics.
     /// @ingroup core
@@ -73,7 +73,7 @@ namespace cubos::core
         std::size_t mLine;                                                  ///< The line from where it was invoked.
         std::chrono::time_point<std::chrono::high_resolution_clock> mStart; ///< Start time when constructed.
     };
-} // namespace cubos::core
+} // namespace cubos::core::tel
 
 /// @def CUBOS_METRIC
 /// @ingroup core
@@ -82,7 +82,7 @@ namespace cubos::core
 /// @param val The value to set for the metric.
 
 #ifdef CUBOS_PROFILING
-#define CUBOS_METRIC(name, val) ::cubos::core::Metrics::metric(name, val)
+#define CUBOS_METRIC(name, val) ::cubos::core::tel::Metrics::metric(name, val)
 #else
 #define CUBOS_METRIC(...)                                                                                              \
     do                                                                                                                 \
@@ -96,7 +96,7 @@ namespace cubos::core
 /// @note The macro uses `__FUNCTION__` to register the metric name.
 
 #ifdef CUBOS_PROFILING
-#define CUBOS_PROFILE() ::cubos::core::ScopeProfiler _profilingTimeTracker(__FUNCTION__, __FILE__, __LINE__)
+#define CUBOS_PROFILE() ::cubos::core::tel::ScopeProfiler _profilingTimeTracker(__FUNCTION__, __FILE__, __LINE__)
 #else
 #define CUBOS_PROFILE(...)                                                                                             \
     do                                                                                                                 \
