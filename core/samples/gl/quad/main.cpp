@@ -4,7 +4,7 @@
 
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using namespace cubos::core;
 

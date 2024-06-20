@@ -1,5 +1,5 @@
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 /// [Printing any dictionary]
 #include <cubos/core/reflection/traits/dictionary.hpp>

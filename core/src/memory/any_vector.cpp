@@ -1,9 +1,9 @@
 #include <new>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_vector.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::memory::AnyVector;
 using cubos::core::reflection::ConstructibleTrait;
@@ -55,7 +55,7 @@ void AnyVector::reserve(std::size_t capacity)
     }
 
     // Allocate a new buffer, move the values there and then free the old one.
-    void* data = operator new(capacity* mStride, static_cast<std::align_val_t>(mConstructibleTrait->alignment()),
+    void* data = operator new(capacity * mStride, static_cast<std::align_val_t>(mConstructibleTrait->alignment()),
                               std::nothrow);
     CUBOS_ASSERT(data != nullptr, "Vector memory allocation failed");
     for (std::size_t i = 0; i < mSize; ++i)

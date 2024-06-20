@@ -6,8 +6,8 @@
 
 #include <cubos/core/data/des/json.hpp>
 #include <cubos/core/data/ser/json.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
 

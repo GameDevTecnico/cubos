@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/table/dense/table.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::DenseTable;
 using cubos::core::memory::AnyVector;

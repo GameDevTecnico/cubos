@@ -1,7 +1,7 @@
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/ecs/types.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::DataTypeId;
 using cubos::core::ecs::DataTypeIdHash;

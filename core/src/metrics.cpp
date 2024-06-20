@@ -5,8 +5,8 @@
 #include <utility>
 #include <vector>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/metrics.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::Metrics;
 using cubos::core::ScopeProfiler;

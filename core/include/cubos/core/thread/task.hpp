@@ -7,7 +7,7 @@
 #include <condition_variable>
 #include <mutex>
 
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::thread
 {

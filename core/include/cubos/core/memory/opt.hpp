@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/move.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::memory
 {
@@ -128,7 +128,8 @@ namespace cubos::core::memory
         /// @param other Other value.
         /// @return Whether they're equal.
         template <typename U = T> // See https://brevzin.github.io/c++/2021/11/21/conditional-members/
-        requires(requires(const U& a, const U& b) { a == b; }) bool operator==(const Opt<U>& other) const
+            requires(requires(const U& a, const U& b) { a == b; })
+        bool operator==(const Opt<U>& other) const
         {
             return (!mContains && !other.mContains) || (mContains && other.mContains && mValue == other.mValue);
         }

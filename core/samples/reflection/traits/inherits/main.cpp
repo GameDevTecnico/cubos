@@ -1,6 +1,6 @@
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 /// [Parent and Son declaration]
 #include <cubos/core/reflection/reflect.hpp>

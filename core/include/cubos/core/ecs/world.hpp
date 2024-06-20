@@ -11,13 +11,13 @@
 #include <cubos/core/ecs/entity/pool.hpp>
 #include <cubos/core/ecs/table/tables.hpp>
 #include <cubos/core/ecs/types.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
 #include <cubos/core/reflection/type.hpp>
 #include <cubos/core/reflection/type_registry.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::ecs
 {
