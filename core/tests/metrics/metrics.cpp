@@ -1,8 +1,8 @@
 #include <doctest/doctest.h>
 
-#include <cubos/core/metrics.hpp>
+#include <cubos/core/tel/metrics.hpp>
 
-using cubos::core::Metrics;
+using cubos::core::tel::Metrics;
 
 TEST_CASE("metrics")
 {
