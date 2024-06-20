@@ -1,4 +1,4 @@
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 /// [Person definition]
 #include <cubos/core/reflection/reflect.hpp>

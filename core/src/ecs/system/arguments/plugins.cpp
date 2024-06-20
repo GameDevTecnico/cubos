@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/system/arguments/plugins.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::Plugins;
 

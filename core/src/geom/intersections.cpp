@@ -6,9 +6,9 @@
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/geom/intersections.hpp>
 #include <cubos/core/geom/utils.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 static const float MaxDifference = static_cast<float>(1.0e-7);
 

@@ -4,7 +4,7 @@
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/logging).
 
-Logging in **Cubos** is done through the logging macros defined in @ref core/log.hpp.
+Logging in **Cubos** is done through the logging macros defined in @ref core/tel/logging.hpp.
 
 @snippet logging/main.cpp Logging include
 
@@ -13,8 +13,8 @@ In order of increasing severity, they are:
 
 @snippet logging/main.cpp Logging macros
 
-The minimum registered log level is set with @ref cubos::core::Logger::level "Logger::level". On
-this sample, to demonstrate @ref CUBOS_TRACE, we set it to @ref cubos::core::Logger::Level::Trace
+The minimum registered log level is set with @ref cubos::core::tel::Logger::level "Logger::level". On
+this sample, to demonstrate @ref CUBOS_TRACE, we set it to @ref cubos::core::tel::Logger::Level::Trace
 "Trace":
 
 @snippet logging/main.cpp Set logging level

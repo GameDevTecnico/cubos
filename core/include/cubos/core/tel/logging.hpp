@@ -1,13 +1,13 @@
 /// @file
 /// @brief Logging and assertion macros.
-/// @ingroup core
+/// @ingroup core-tel
 
 #pragma once
 
 #include <cubos/core/memory/buffer_stream.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
-/// @addtogroup core
+/// @addtogroup core-tel
 /// @{
 
 /// @brief Trace log level, lowest log level. Very verbose.
@@ -157,9 +157,9 @@
 /// @param ... Format string and arguments.
 /// @see CUBOS_LOG_LEVEL_CRITICAL
 #define CUBOS_LOG(level, ...)                                                                                          \
-    ::cubos::core::Logger::writeFormat(                                                                                \
-        ::cubos::core::Logger::Level::level,                                                                           \
-        ::cubos::core::Logger::Location{.function = __func__, .file = __FILE__, .line = __LINE__}, __VA_ARGS__)
+    ::cubos::core::tel::Logger::writeFormat(                                                                           \
+        ::cubos::core::tel::Logger::Level::level,                                                                      \
+        ::cubos::core::tel::Logger::Location{.function = __func__, .file = __FILE__, .line = __LINE__}, __VA_ARGS__)
 
 /// @brief Aborts a program, optionally printing a critical error message.
 /// @param ... Optional format string and arguments.
@@ -234,14 +234,14 @@
 
 /// @}
 
-namespace cubos::core
+namespace cubos::core::tel
 {
     /// @brief Aborts the program and prints a pretty stack trace.
     /// @ingroup core
     [[noreturn]] void abort();
 
     /// @brief Singleton which holds the logging state.
-    /// @ingroup core
+    /// @ingroup core-tel
     class CUBOS_CORE_API Logger final
     {
     public:
@@ -377,6 +377,6 @@ namespace cubos::core
         static const char* streamFormat(memory::Stream& stream, const char* format, const reflection::Type& type,
                                         const void* value);
     };
-} // namespace cubos::core
+} // namespace cubos::core::tel
 
-CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::Logger::Level);
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_CORE_API, cubos::core::tel::Logger::Level);

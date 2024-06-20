@@ -1,4 +1,4 @@
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 /// [Name declaration]
 #include <cubos/core/reflection/reflect.hpp>

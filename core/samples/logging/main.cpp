@@ -1,7 +1,7 @@
 #include <glm/glm.hpp>
 
 /// [Logging include]
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 /// [Logging include]
 
 /// [External reflection includes]
@@ -14,11 +14,11 @@
 int main()
 {
     /// [Set logging level]
-    cubos::core::Logger::level(cubos::core::Logger::Level::Trace);
+    cubos::core::tel::Logger::level(cubos::core::tel::Logger::Level::Trace);
     /// [Set logging level]
 
     /// [Log to file]
-    cubos::core::Logger::logToFile();
+    cubos::core::tel::Logger::logToFile();
     /// [Log to file]
 
     /// [Logging macros]
@@ -31,7 +31,7 @@ int main()
     /// [Logging macros]
 
     /// [Set logging file]
-    cubos::core::Logger::logToFile("/logs/sample_logs.txt");
+    cubos::core::tel::Logger::logToFile("/logs/sample_logs.txt");
     /// [Set logging file]
 
     /// [Logging macros with arguments]

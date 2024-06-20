@@ -6,8 +6,8 @@
 
 #include <cstddef>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/move.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::memory
 {

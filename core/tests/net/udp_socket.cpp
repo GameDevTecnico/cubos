@@ -5,8 +5,8 @@
 #include <doctest/doctest.h>
 #include <glm/glm.hpp>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/net/udp_socket.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 TEST_CASE("net::UdpSocket")
 {

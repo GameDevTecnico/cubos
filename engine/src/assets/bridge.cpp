@@ -1,4 +1,4 @@
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/bridge.hpp>
 

@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/query/node/node.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::QueryNode;
 

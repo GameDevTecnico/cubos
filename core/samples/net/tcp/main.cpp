@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 /// [Import headers]
 #include <cubos/core/net/tcp_listener.hpp>
 #include <cubos/core/net/tcp_stream.hpp>

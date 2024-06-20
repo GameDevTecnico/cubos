@@ -3,8 +3,8 @@
 #include <imgui.h>
 
 #include <cubos/core/ecs/reflection.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/render/voxels/palette.hpp>

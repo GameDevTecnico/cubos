@@ -1,9 +1,9 @@
 #include <new>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_vector.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::memory::AnyVector;
 using cubos::core::reflection::ConstructibleTrait;

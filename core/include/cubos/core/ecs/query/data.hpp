@@ -10,8 +10,8 @@
 
 #include <cubos/core/ecs/query/fetcher.hpp>
 #include <cubos/core/ecs/query/filter.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::ecs
 {

@@ -1,5 +1,4 @@
 #include <cubos/core/data/ser/json.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
@@ -9,6 +8,7 @@
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::data::JSONSerializer;
 using cubos::core::reflection::ArrayTrait;

@@ -1,9 +1,9 @@
 #include <cstring>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/endianness.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/voxels/palette.hpp>
 

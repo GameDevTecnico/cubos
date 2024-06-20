@@ -4,18 +4,18 @@
 
 #include <cubos/core/data/fs/archive.hpp>
 #include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include "../utils.hpp"
 
-using cubos::core::Logger;
 using cubos::core::data::Archive;
 using cubos::core::data::File;
 using cubos::core::data::FileSystem;
 using cubos::core::memory::BufferStream;
 using cubos::core::memory::SeekOrigin;
 using cubos::core::memory::Stream;
+using cubos::core::tel::Logger;
 
 /// Mock implementation of the Archive interface class.
 class MockArchive : public Archive

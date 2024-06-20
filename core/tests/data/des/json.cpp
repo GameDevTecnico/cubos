@@ -2,7 +2,6 @@
 #include <glm/vec3.hpp>
 
 #include <cubos/core/data/des/json.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/map.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -13,10 +12,10 @@
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include "../utils.hpp"
 
-using cubos::core::Logger;
 using cubos::core::data::JSONDeserializer;
 using cubos::core::reflection::autoConstructibleTrait;
 using cubos::core::reflection::EnumTrait;
@@ -24,6 +23,7 @@ using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
+using cubos::core::tel::Logger;
 
 namespace
 {

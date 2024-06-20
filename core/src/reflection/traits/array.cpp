@@ -1,6 +1,6 @@
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::reflection::ArrayTrait;
 using cubos::core::reflection::Type;

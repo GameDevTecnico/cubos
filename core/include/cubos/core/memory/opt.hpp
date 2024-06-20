@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/move.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::memory
 {

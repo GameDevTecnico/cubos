@@ -2,11 +2,11 @@
 #include <cmath>
 
 #include <cubos/core/io/keyboard.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/input/axis.hpp>
 

@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/table/dense/registry.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::DenseTable;
 using cubos::core::ecs::DenseTableRegistry;

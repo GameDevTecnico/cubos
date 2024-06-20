@@ -1,9 +1,9 @@
 #include <cstring>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/render/mesh/pool.hpp>
 

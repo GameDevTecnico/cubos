@@ -1,7 +1,7 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include <cubos/core/al/miniaudio_context.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using namespace cubos::core::al;
 

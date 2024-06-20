@@ -1,8 +1,8 @@
 #include <cubos/core/ecs/dynamic.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #ifdef _WIN32
 #include <windows.h>

@@ -1,8 +1,8 @@
 #include <stb_image.h>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/image/image.hpp>
 

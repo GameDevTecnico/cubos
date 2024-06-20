@@ -3,10 +3,10 @@
 #include <cmath>
 #include <cstring>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/standard_stream.hpp>
 #include <cubos/core/memory/stream.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using namespace cubos::core::memory;
 
