@@ -2,12 +2,12 @@
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/ser/json.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/comparison.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/unordered_map.hpp>
 #include <cubos/core/reflection/type_registry.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
 #include <cubos/engine/scene/bridge.hpp>

@@ -12,11 +12,11 @@
 #include <unistd.h>
 #endif
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/net/udp_socket.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::net::UdpSocket;
 

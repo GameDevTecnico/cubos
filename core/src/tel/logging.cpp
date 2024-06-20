@@ -10,19 +10,19 @@
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
 #include <cubos/core/data/ser/debug.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
+#include <cubos/core/tel/logging.hpp>
 
-using cubos::core::Logger;
 using cubos::core::data::File;
 using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
 using cubos::core::reflection::EnumTrait;
+using cubos::core::tel::Logger;
 
 CUBOS_REFLECT_EXTERNAL_IMPL(Logger::Level)
 {
-    return Type::create("cubos::core::Logger::Level")
+    return Type::create("cubos::core::tel::Logger::Level")
         .with(EnumTrait{}
                   .withVariant<Logger::Level::Trace>("Trace")
                   .withVariant<Logger::Level::Debug>("Debug")

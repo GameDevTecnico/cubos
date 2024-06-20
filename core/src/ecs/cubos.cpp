@@ -5,12 +5,12 @@
 #include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/observer/observers.hpp>
 #include <cubos/core/ecs/reflection.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/opt.hpp>
 #include <cubos/core/net/tcp_listener.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include "debugger.hpp"
 

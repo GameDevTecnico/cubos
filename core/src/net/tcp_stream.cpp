@@ -9,12 +9,12 @@
 #include <unistd.h>
 #endif
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/net/tcp_stream.hpp>
 #include <cubos/core/net/utils.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::net::Address;
 using cubos::core::net::TcpStream;

@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/table/sparse_relation/registry.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::SparseRelationTable;
 using cubos::core::ecs::SparseRelationTableRegistry;

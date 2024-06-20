@@ -1,6 +1,6 @@
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using namespace cubos::core::reflection;
 

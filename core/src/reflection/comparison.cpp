@@ -1,4 +1,3 @@
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/reflection/comparison.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -9,6 +8,7 @@
 #include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::memory::AnyValue;
 

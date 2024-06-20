@@ -1,6 +1,6 @@
 #include <cubos/core/ecs/query/term.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::QueryTerm;
 

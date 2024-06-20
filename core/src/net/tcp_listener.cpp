@@ -12,12 +12,12 @@
 #include <cstring>
 #include <memory>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/net/tcp_listener.hpp>
 #include <cubos/core/net/tcp_stream.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::net::Address;
 using cubos::core::net::TcpListener;

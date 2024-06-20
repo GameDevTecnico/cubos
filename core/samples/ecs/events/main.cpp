@@ -1,8 +1,8 @@
 #include <cubos/core/ecs/system/arguments/event/pipe.hpp>
 #include <cubos/core/ecs/system/arguments/event/reader.hpp>
 #include <cubos/core/ecs/system/arguments/event/writer.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/stream.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using namespace cubos::core::ecs;
 using namespace cubos::core::memory;

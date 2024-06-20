@@ -1,9 +1,9 @@
 #include <cubos/core/io/keyboard.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;

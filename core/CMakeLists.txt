@@ -26,8 +26,9 @@ message("# Building core as shared library: " ${BUILD_CORE_SHARED})
 # Set core source files
 set(CUBOS_CORE_SOURCE
 	"src/api.cpp"
-	"src/log.cpp"
 	"src/metrics.cpp"
+
+	"src/tel/logging.cpp"
 
 	"src/thread/pool.cpp"
 	"src/thread/task.cpp"

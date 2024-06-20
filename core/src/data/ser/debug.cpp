@@ -1,5 +1,4 @@
 #include <cubos/core/data/ser/debug.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
@@ -8,6 +7,7 @@
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::data::DebugSerializer;
 using cubos::core::reflection::ArrayTrait;

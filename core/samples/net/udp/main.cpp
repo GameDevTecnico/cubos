@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 /// [Import header]
 #include <cubos/core/net/udp_socket.hpp>
 /// [Import header]
