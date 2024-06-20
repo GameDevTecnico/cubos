@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::core::memory::AnyVector class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1memory.html">memory</a>::<wbr/></span>AnyVector <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="any__vector_8hpp.html">&lt;core/memory/any_vector.hpp&gt;</a></div>
+        </h1>
+        <p>Stores a dynamically sized array of blobs of a given reflected type.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aa5d31d31d438dec547a54ebb020b1a7d" class="m-doc">AnyVector</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; elementType)</span>
+            </dt>
+            <dd>Constructs with the given element type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ae4126504a6f7edd8d5189c7d677d87be" class="m-doc">AnyVector</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">AnyVector</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
+            </dt>
+            <dd>Get the type of the elements stored in the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#acfa6ad9708b5d90f95b671ceff1df0e4" class="m-doc">reserve</a>(</span><span class="m-doc-wrap">std::size_t capacity)</span>
+            </dt>
+            <dd>Reserves space for at least <code>capacity</code> elements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4c64b46ba44a0162336d3003a224ff78" class="m-doc">pushUninit</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Pushes an uninitialized element to the back of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a59eef702d9d8eeec7c4bd899ab25223c" class="m-doc">pushDefault</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Pushes a new default-constructed element to the back of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8658c20373a33c05f6dc0b9b34576399" class="m-doc">pushCopy</a>(</span><span class="m-doc-wrap">const void* value)</span>
+            </dt>
+            <dd>Pushes a new copy-constructed element to the back of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span>
+            </dt>
+            <dd>Pushes a new move-constructed element to the back of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#adbdaba90671bae31f5bdfb604ad312f4" class="m-doc">setDefault</a>(</span><span class="m-doc-wrap">std::size_t index)</span>
+            </dt>
+            <dd>Overwrites the element at the given index with a new default-constructed element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a56d841130ad8b7093447ecee68b89946" class="m-doc">setCopy</a>(</span><span class="m-doc-wrap">std::size_t index,
+              const void* value)</span>
+            </dt>
+            <dd>Overwrites the element at the given index with a new copy-constructed element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a80570f9e1293754b08767dce10cfdf1a" class="m-doc">setMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* value)</span>
+            </dt>
+            <dd>Overwrites the element at the given index with a new move-constructed element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aab7d751cc75d24e9d545cc86cef85646" class="m-doc">pop</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Removes the last element from the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a49e6e9e0c3000729b5fa836e3f082eab" class="m-doc">swapErase</a>(</span><span class="m-doc-wrap">std::size_t index)</span>
+            </dt>
+            <dd>Removes the element at the given index from the vector, moving the last element to its place if it isn&#x27;t the last element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9b4fa3473e75dfa8d645511ee300e953" class="m-doc">swapMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* destination)</span>
+            </dt>
+            <dd>Moves the element at the given index from the vector into the given address, moving the last element to its place if it isn&#x27;t the last element.</dd>
+            <dt id="a5ad818e13818cce38fd46d9843a3d947">
+              <span class="m-doc-wrap-bumper">void <a href="#a5ad818e13818cce38fd46d9843a3d947" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Removes all elements from the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a71c8a345c8bf7d70999d375df0a832dc" class="m-doc">at</a>(</span><span class="m-doc-wrap">std::size_t index) -&gt; void*</span>
+            </dt>
+            <dd>Get the element at the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a56b926218007e2c342dea19f78396e1f" class="m-doc">at</a>(</span><span class="m-doc-wrap">std::size_t index) const -&gt; const void*</span>
+            </dt>
+            <dd>Get the element at the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1bd1bbd8bf47a3f21790f9d803100025" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Get the number of elements in the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4c76c8e885d6f41fe6a8c20c7d922dda" class="m-doc">capacity</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Get the number of elements the vector can hold without reallocating.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8ca10b6a2b1768da6909f608dc504cd3" class="m-doc">empty</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if the vector is empty.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa5d31d31d438dec547a54ebb020b1a7d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa5d31d31d438dec547a54ebb020b1a7d" class="m-doc-self">AnyVector</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; elementType)</span></span>
+            </h3>
+            <p>Constructs with the given element type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">elementType</td>
+                  <td>Element type.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p><code>elementType</code> must have <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">reflection::<wbr />ConstructibleTrait</a> and be move constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ae4126504a6f7edd8d5189c7d677d87be"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae4126504a6f7edd8d5189c7d677d87be" class="m-doc-self">AnyVector</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">AnyVector</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Vector.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae60ce81d1aaa522672d5a248d8585e55"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc-self">elementType</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the type of the elements stored in the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Element type.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acfa6ad9708b5d90f95b671ceff1df0e4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acfa6ad9708b5d90f95b671ceff1df0e4" class="m-doc-self">reserve</a>(</span><span class="m-doc-wrap">std::size_t capacity)</span></span>
+            </h3>
+            <p>Reserves space for at least <code>capacity</code> elements.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">capacity</td>
+                  <td>Minimum capacity.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>capacity</code> is less than <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#a1bd1bbd8bf47a3f21790f9d803100025" class="m-doc">size()</a>.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a4c64b46ba44a0162336d3003a224ff78"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c64b46ba44a0162336d3003a224ff78" class="m-doc-self">pushUninit</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Pushes an uninitialized element to the back of the vector.</p>
+<aside class="m-note m-danger"><h4>Warning</h4><p>Care must be taken to ensure that the constructor of the element is called before it is used or before the vector is destroyed, as the destructor will be called on it.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a59eef702d9d8eeec7c4bd899ab25223c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59eef702d9d8eeec7c4bd899ab25223c" class="m-doc-self">pushDefault</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Pushes a new default-constructed element to the back of the vector.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not default-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a8658c20373a33c05f6dc0b9b34576399"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8658c20373a33c05f6dc0b9b34576399" class="m-doc-self">pushCopy</a>(</span><span class="m-doc-wrap">const void* value)</span></span>
+            </h3>
+            <p>Pushes a new copy-constructed element to the back of the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Element to copy.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not copy-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aafd49aade109794b17c533a93bbb99a1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc-self">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span></span>
+            </h3>
+            <p>Pushes a new move-constructed element to the back of the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Element to move.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adbdaba90671bae31f5bdfb604ad312f4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adbdaba90671bae31f5bdfb604ad312f4" class="m-doc-self">setDefault</a>(</span><span class="m-doc-wrap">std::size_t index)</span></span>
+            </h3>
+            <p>Overwrites the element at the given index with a new default-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not default-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a56d841130ad8b7093447ecee68b89946"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56d841130ad8b7093447ecee68b89946" class="m-doc-self">setCopy</a>(</span><span class="m-doc-wrap">std::size_t index,
+              const void* value)</span></span>
+            </h3>
+            <p>Overwrites the element at the given index with a new copy-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Element to copy.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not copy-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a80570f9e1293754b08767dce10cfdf1a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80570f9e1293754b08767dce10cfdf1a" class="m-doc-self">setMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* value)</span></span>
+            </h3>
+            <p>Overwrites the element at the given index with a new move-constructed element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Element to move.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not move-constructible.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aab7d751cc75d24e9d545cc86cef85646"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aab7d751cc75d24e9d545cc86cef85646" class="m-doc-self">pop</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Removes the last element from the vector.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if the vector is empty.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a49e6e9e0c3000729b5fa836e3f082eab"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a49e6e9e0c3000729b5fa836e3f082eab" class="m-doc-self">swapErase</a>(</span><span class="m-doc-wrap">std::size_t index)</span></span>
+            </h3>
+            <p>Removes the element at the given index from the vector, moving the last element to its place if it isn&#x27;t the last element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>index</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9b4fa3473e75dfa8d645511ee300e953"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b4fa3473e75dfa8d645511ee300e953" class="m-doc-self">swapMove</a>(</span><span class="m-doc-wrap">std::size_t index,
+              void* destination)</span></span>
+            </h3>
+            <p>Moves the element at the given index from the vector into the given address, moving the last element to its place if it isn&#x27;t the last element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Element index.</td>
+                </tr>
+                <tr>
+                  <td>destination</td>
+                  <td>Address to move the element to.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>index</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a71c8a345c8bf7d70999d375df0a832dc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71c8a345c8bf7d70999d375df0a832dc" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">std::size_t index)</span></span>
+            </h3>
+            <p>Get the element at the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the element to get.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the element.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>index</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a56b926218007e2c342dea19f78396e1f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56b926218007e2c342dea19f78396e1f" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
+            </h3>
+            <p>Get the element at the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the element to get.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the element.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <code>index</code> is out of bounds.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a1bd1bbd8bf47a3f21790f9d803100025"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1bd1bbd8bf47a3f21790f9d803100025" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the number of elements in the vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Element count.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4c76c8e885d6f41fe6a8c20c7d922dda"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c76c8e885d6f41fe6a8c20c7d922dda" class="m-doc-self">capacity</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the number of elements the vector can hold without reallocating.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Element capacity.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8ca10b6a2b1768da6909f608dc504cd3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8ca10b6a2b1768da6909f608dc504cd3" class="m-doc-self">empty</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Checks if the vector is empty.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the vector is empty.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
