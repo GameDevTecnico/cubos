@@ -71,10 +71,8 @@
 <span class="w">            </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Received message: {} with size {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">received</span><span class="p">);</span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">CUBOS_ERROR</span><span class="p">(</span><span class="s">&quot;Receive error&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">CUBOS_ERROR</span><span class="p">(</span><span class="s">&quot;Receive error&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span></pre><p>Server is up, so let&#x27;s create the UDP client which will send a message to the server</p><pre class="m-code"><span class="kt">void</span><span class="w"> </span><span class="nf">runClient</span><span class="p">()</span>
 <span class="p">{</span>
