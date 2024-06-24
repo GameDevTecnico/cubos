@@ -110,16 +110,16 @@
             </dt>
             <dd>Closes the inner socket.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8bcf4cc0c4f86025f2122cbbf288d714" class="m-doc">send</a>(</span><span class="m-doc-wrap">const void* data,
+              <span class="m-doc-wrap-bumper">auto <a href="#a4c7c7441b8c7b92dcd645cc4075f682d" class="m-doc">send</a>(</span><span class="m-doc-wrap">const char* data,
               size_t size,
               const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address,
               uint16_t port) -&gt; <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a></span>
             </dt>
             <dd>Sends <code>data</code> on the socket to the remote <code>address</code> and <code>port</code>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afd4595bb12323cd20337637444367b50" class="m-doc">receive</a>(</span><span class="m-doc-wrap">void* data,
+              <span class="m-doc-wrap-bumper">auto <a href="#aa133bd95515147edaac5a7d9bc512095" class="m-doc">receive</a>(</span><span class="m-doc-wrap">char* data,
               size_t size,
-              ssize_t&amp; received,
+              int&amp; received,
               <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address) -&gt; <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a></span>
             </dt>
             <dd>Receives a single datagram message on the socket.</dd>
@@ -159,9 +159,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8bcf4cc0c4f86025f2122cbbf288d714"><div>
+          <section class="m-doc-details" id="a4c7c7441b8c7b92dcd645cc4075f682d"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a> cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bcf4cc0c4f86025f2122cbbf288d714" class="m-doc-self">send</a>(</span><span class="m-doc-wrap">const void* data,
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a> cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c7c7441b8c7b92dcd645cc4075f682d" class="m-doc-self">send</a>(</span><span class="m-doc-wrap">const char* data,
               size_t size,
               const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address,
               uint16_t port)</span></span>
@@ -197,11 +197,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="afd4595bb12323cd20337637444367b50"><div>
+          <section class="m-doc-details" id="aa133bd95515147edaac5a7d9bc512095"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a> cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afd4595bb12323cd20337637444367b50" class="m-doc-self">receive</a>(</span><span class="m-doc-wrap">void* data,
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a> cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa133bd95515147edaac5a7d9bc512095" class="m-doc-self">receive</a>(</span><span class="m-doc-wrap">char* data,
               size_t size,
-              ssize_t&amp; received,
+              int&amp; received,
               <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address)</span></span>
             </h3>
             <p>Receives a single datagram message on the socket.</p>
