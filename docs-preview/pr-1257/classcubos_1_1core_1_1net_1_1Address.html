@@ -49,7 +49,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1net.html">net</a>::<wbr/></span>Address <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="address_8hpp.html">&lt;core/net/address.hpp&gt;</a></div>
         </h1>
-        <p>Represents an IPv4 address.</p>
+        <p>Represents an address, either IPv4 or IPv6.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -81,9 +81,23 @@
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a7ac2330e74bf24d46824caf0aeb96c44" class="m-doc">fromIPv4</a>(</span><span class="m-doc-wrap">uint8_t a,
+              uint8_t b,
+              uint8_t c,
+              uint8_t d) -&gt; <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a></span>
+            </dt>
+            <dd>Constructs a new IPv4 address from four 8-bit octets (<code>a.b.c.d</code>).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#ac7208044f2eaff2d4fde39cce40c07b0" class="m-doc">fromIPv6</a>(</span><span class="m-doc-wrap">uint32_t a,
+              uint32_t b,
+              uint32_t c,
+              uint32_t d) -&gt; <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a></span>
+            </dt>
+            <dd>Constructs a new IPv6 address from four 32-bit octets (<code>a.b.c.d</code>).</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#af3ece75dc266fe43f41c21769f2da9b9" class="m-doc">from</a>(</span><span class="m-doc-wrap">const std::string&amp; address) -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&gt;</span>
             </dt>
-            <dd>Parses a string to return an <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>.</dd>
+            <dd>Converts the provided string value to an <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -92,44 +106,89 @@
             <dt id="a23972703e7be21995be4f290ebd586f7">
               <span class="m-doc-wrap-bumper"><a href="#a23972703e7be21995be4f290ebd586f7" class="m-doc-self">Address</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Constructs a new IPv4 address with value &#x27;0.0.0.0&#x27;.</dd>
-            <dt id="a3c4964ad199de7fd12cd6c04ef297ce1">
-              <span class="m-doc-wrap-bumper"><a href="#a3c4964ad199de7fd12cd6c04ef297ce1" class="m-doc-self">Address</a>(</span><span class="m-doc-wrap">uint8_t a,
-              uint8_t b,
-              uint8_t c,
-              uint8_t d)</span>
-            </dt>
-            <dd>Constructs a new IPv4 address from four eight-bit octets.</dd>
-            <dt id="a8196b2067b0b3dd6112e16fcb33bc2f8">
-              <span class="m-doc-wrap-bumper"><a href="#a8196b2067b0b3dd6112e16fcb33bc2f8" class="m-doc-self">Address</a>(</span><span class="m-doc-wrap">uint32_t addr)</span>
-            </dt>
-            <dd>Constructs a new IPv4 address from a 32-bit integer (octets together basically).</dd>
-            <dt id="ab89d8b68d91d899b16390ea07b30d5d4">
-              <span class="m-doc-wrap-bumper"><a href="#ab89d8b68d91d899b16390ea07b30d5d4" class="m-doc-self">Address</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; other)</span>
-            </dt>
-            <dd>Copy constructor.</dd>
+            <dd>Constructs a empty address (IPv4 by default).</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a36df862abeec9b2e844d27ca79577f77">
-              <span class="m-doc-wrap-bumper">auto <a href="#a36df862abeec9b2e844d27ca79577f77" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; other) -&gt; <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; <span class="m-label m-flat m-info">defaulted</span></span>
-            </dt>
-            <dd>Assignment operator.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af389ed187bdd1f30f3c7e018665f611c" class="m-doc">toString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
             </dt>
-            <dd>Converts the IPv4 address value to a string.</dd>
+            <dd>Converts the address value to a string.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a7ac2330e74bf24d46824caf0aeb96c44"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> cubos::<wbr />core::<wbr />net::<wbr />Address::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7ac2330e74bf24d46824caf0aeb96c44" class="m-doc-self">fromIPv4</a>(</span><span class="m-doc-wrap">uint8_t a,
+              uint8_t b,
+              uint8_t c,
+              uint8_t d)</span></span>
+            </h3>
+            <p>Constructs a new IPv4 address from four 8-bit octets (<code>a.b.c.d</code>).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">a</td>
+                  <td>First octet.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>Second octet.</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>Third octet.</td>
+                </tr>
+                <tr>
+                  <td>d</td>
+                  <td>Fourth octet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac7208044f2eaff2d4fde39cce40c07b0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> cubos::<wbr />core::<wbr />net::<wbr />Address::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac7208044f2eaff2d4fde39cce40c07b0" class="m-doc-self">fromIPv6</a>(</span><span class="m-doc-wrap">uint32_t a,
+              uint32_t b,
+              uint32_t c,
+              uint32_t d)</span></span>
+            </h3>
+            <p>Constructs a new IPv6 address from four 32-bit octets (<code>a.b.c.d</code>).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">a</td>
+                  <td>First octet.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>Second octet.</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>Third octet.</td>
+                </tr>
+                <tr>
+                  <td>d</td>
+                  <td>Fourth octet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="af3ece75dc266fe43f41c21769f2da9b9"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&gt; cubos::<wbr />core::<wbr />net::<wbr />Address::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3ece75dc266fe43f41c21769f2da9b9" class="m-doc-self">from</a>(</span><span class="m-doc-wrap">const std::string&amp; address)</span></span>
             </h3>
-            <p>Parses a string to return an <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>.</p>
+            <p>Converts the provided string value to an <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -137,13 +196,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">address</td>
-                  <td>The address, either in IPv4 format, such as <code>127.0.0.1</code>, or as a domain hostname, like <code>localhost</code> or <code>www.google.com</code>.</td>
+                  <td>The address, either in IPv4/IPv6 format, or as a domain hostname.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> object, or nothing if could not resolve provided <code>address</code>.</td>
+                  <td><a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> object, or nothing if could not resolve the provided <code>address</code>.</td>
                 </tr>
               </tfoot>
             </table>
@@ -152,12 +211,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />net::<wbr />Address::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af389ed187bdd1f30f3c7e018665f611c" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Converts the IPv4 address value to a string.</p>
+            <p>Converts the address value to a string.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> represented as a string, in a <code>a.b.c.d</code> format.</td>
+                  <td><a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a> represented as a string.</td>
                 </tr>
               </tfoot>
             </table>
