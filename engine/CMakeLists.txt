@@ -140,6 +140,11 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/split_screen/split_screen.cpp"
 	"src/render/bloom/plugin.cpp"
 	"src/render/bloom/bloom.cpp"
+	"src/render/shadows/plugin.cpp"
+	"src/render/shadows/caster.cpp"
+	"src/render/shadows/spot_caster.cpp"
+	"src/render/shadows/directional_caster.cpp"
+	"src/render/shadows/point_caster.cpp"
 )
 
 # Create cubos engine
