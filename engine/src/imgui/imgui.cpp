@@ -6,7 +6,7 @@
 #include <implot.h>
 
 #include <cubos/core/io/cursor.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include "imgui.hpp"
 

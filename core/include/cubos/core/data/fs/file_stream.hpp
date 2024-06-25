@@ -7,8 +7,8 @@
 #include <utility>
 
 #include <cubos/core/data/fs/file.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/stream.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::data
 {

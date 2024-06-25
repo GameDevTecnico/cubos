@@ -3,7 +3,6 @@
 #include <misc/cpp/imgui_stdlib.h>
 
 #include <cubos/core/ecs/reflection.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
@@ -13,6 +12,7 @@
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/imgui/data_inspector.hpp>
 

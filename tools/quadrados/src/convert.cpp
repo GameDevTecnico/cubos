@@ -3,10 +3,10 @@
 #include <iostream>
 #include <unordered_map>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/endianness.hpp>
 #include <cubos/core/memory/standard_stream.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/voxels/grid.hpp>
 #include <cubos/engine/voxels/palette.hpp>

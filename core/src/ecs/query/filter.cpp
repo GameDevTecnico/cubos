@@ -4,9 +4,9 @@
 #include <cubos/core/ecs/query/node/archetype.hpp>
 #include <cubos/core/ecs/query/node/related.hpp>
 #include <cubos/core/ecs/world.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::ArchetypeId;
 using cubos::core::ecs::QueryFilter;

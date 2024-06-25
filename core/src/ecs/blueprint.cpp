@@ -1,7 +1,6 @@
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/name.hpp>
 #include <cubos/core/ecs/reflection.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
@@ -9,6 +8,7 @@
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::Entity;

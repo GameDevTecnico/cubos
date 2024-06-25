@@ -10,8 +10,8 @@
 
 #include <cubos/core/ecs/query/fetcher.hpp>
 #include <cubos/core/ecs/query/filter.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::ecs
 {
@@ -75,8 +75,7 @@ namespace cubos::core::ecs
 
             // Initialize the fetchers with a templated functor which receives a sequence of indices (at compile time)
             // and initializes each fetcher for the argument term with the corresponding index.
-            auto initFetchers = [&]<std::size_t... Is>(std::index_sequence<Is...>)
-            {
+            auto initFetchers = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
                 return new std::tuple<QueryFetcher<Ts>...>(QueryFetcher<Ts>(world, argumentTerms[Is])...);
             };
 
@@ -230,8 +229,7 @@ namespace cubos::core::ecs
             {
                 // Templated functor which receives a sequence of indices (at compile time) and prepares the
                 // corresponding fetcher with each cursor depth.
-                auto prepareAll = [&]<std::size_t... Is>(std::index_sequence<Is...>)
-                {
+                auto prepareAll = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
                     (std::get<Is>(*mFetchers).prepare(archetypes, cursorDepths[mFetcherCursors[Is]]), ...);
                 };
 
@@ -347,8 +345,7 @@ namespace cubos::core::ecs
 
             // Templated functor which receives a sequence of indices (at compile time) and fetches the corresponding
             // data from the tuple of fetchers with each index.
-            auto fetchAll = [&]<std::size_t... Is>(std::index_sequence<Is...>)
-            {
+            auto fetchAll = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
                 return std::tuple<Ts...>(
                     std::get<Is>(*mData.mFetchers).fetch(cursorRows[mData.mFetcherCursors[Is]])...);
             };

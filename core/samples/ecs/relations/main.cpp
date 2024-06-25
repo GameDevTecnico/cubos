@@ -1,9 +1,9 @@
 #include <cubos/core/ecs/query/data.hpp>
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/ecs/world.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::QueryData;

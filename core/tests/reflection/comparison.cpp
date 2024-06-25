@@ -1,7 +1,6 @@
 #include <doctest/doctest.h>
 #include <glm/glm.hpp>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/comparison.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -11,6 +10,7 @@
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>
 #include <cubos/core/reflection/type_registry.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::reflection::compare;
 using cubos::core::reflection::FieldsTrait;

@@ -1,6 +1,6 @@
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/type.hpp>
 #include <cubos/core/reflection/type_registry.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::reflection::Type;
 using cubos::core::reflection::TypeRegistry;

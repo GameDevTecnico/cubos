@@ -1,7 +1,7 @@
 #include <cstring>
 #include <utility>
 
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/ui/canvas/draw_list.hpp>
 

@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/system/registry.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::ConditionId;
 using cubos::core::ecs::System;

@@ -7,7 +7,7 @@
 #include <cubos/core/ecs/system/arguments/event/pipe.hpp>
 #include <cubos/core/ecs/system/fetcher.hpp>
 #include <cubos/core/ecs/world.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 namespace cubos::core::ecs
 {

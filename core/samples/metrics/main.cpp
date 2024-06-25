@@ -2,14 +2,14 @@
 #include <iostream>
 #include <thread>
 
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 /// [Import metrics]
-#include <cubos/core/metrics.hpp>
+#include <cubos/core/tel/metrics.hpp>
 
-using cubos::core::Metrics;
+using cubos::core::tel::Metrics;
 /// [Import metrics]
 
 /// [Generate random value]

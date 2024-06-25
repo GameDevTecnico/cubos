@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/entity/archetype_graph.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::ArchetypeGraph;
 using cubos::core::ecs::ArchetypeId;

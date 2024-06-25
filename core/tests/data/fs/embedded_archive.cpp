@@ -1,15 +1,15 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/data/fs/embedded_archive.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include "../utils.hpp"
 
-using cubos::core::Logger;
 using cubos::core::data::EmbeddedArchive;
 using cubos::core::data::File;
 using cubos::core::memory::SeekOrigin;
 using cubos::core::memory::Stream;
+using cubos::core::tel::Logger;
 
 // Fear not - we aren't supposed do this manually - usually quadrados would do this for us.
 

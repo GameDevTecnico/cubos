@@ -1,7 +1,7 @@
 #include <glm/gtc/random.hpp>
 
 #include <cubos/core/geom/box.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/collider.hpp>

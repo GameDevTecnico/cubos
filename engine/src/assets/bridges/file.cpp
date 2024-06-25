@@ -1,6 +1,6 @@
 #include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
 

@@ -20,7 +20,7 @@ Let's start by defining what functionality we want to add, by adding our first s
 @snippet hello-cubos/main.cpp Hello Cubos
 
 This startup system simply prints `Hello Cubos` to the console, using one of Cubos's logging macros.
-You can find more about them @ref core/include/cubos/core/log.hpp "here".
+You can find more about them @ref core/include/cubos/core/tel/logging.hpp "here".
 Startup systems run only once when the engine is loaded.
 
 Now let's make things more interesting.
