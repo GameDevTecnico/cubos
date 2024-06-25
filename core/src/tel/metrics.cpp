@@ -33,19 +33,21 @@ static State& state()
 
 void Metrics::metric(const std::string& name, const double metric)
 {
+    std::string fullName = SpanManager::current().path + ":" + name;
+
     std::lock_guard<std::mutex> lock(state().mMutex);
 
-    if (state().mMetrics[name].size() >= state().mMaxEntries)
+    if (state().mMetrics[fullName].size() >= state().mMaxEntries)
     {
-        state().mMetrics[name].pop_back();
+        state().mMetrics[fullName].pop_back();
     }
 
-    state().mMetrics[name].push_back(metric);
+    state().mMetrics[fullName].push_back(metric);
 
     // add metric name if new
-    if (std::find(state().mNames.cbegin(), state().mNames.cend(), name) == state().mNames.end())
+    if (std::find(state().mNames.cbegin(), state().mNames.cend(), fullName) == state().mNames.end())
     {
-        state().mNames.emplace_back(name);
+        state().mNames.emplace_back(fullName);
     }
 }
 

@@ -183,21 +183,21 @@ void Logger::write(Level level, Location location, std::string message)
     // Print to file if opened
     if (state().logFileStream != nullptr)
     {
-        state().logFileStream->printf("[{}] [{}] {}: {}\n", timestamp.string(), location.string(),
+        state().logFileStream->printf("[{}] [{}] [{}] {}: {}\n", timestamp.string(), location.string(), spanName,
                                       toLower(EnumTrait::toString(level)), message);
     }
 
     // Print the message to stderr.
-    memory::Stream::stdErr.printf("{}[{}] [{}] {}: {}{}\n", levelColor(level), timestamp.string(), location.string(),
-                                  toLower(EnumTrait::toString(level)), message, ColorResetCode);
+    memory::Stream::stdErr.printf("{}[{}] [{}] [{}] {}: {}{}\n", levelColor(level), timestamp.string(),
+                                  location.string(), spanName, toLower(EnumTrait::toString(level)), message,
+                                  ColorResetCode);
 
     // Store the log entry.
-    state().entries.emplace_back(Entry{
-        .level = level,
-        .timestamp = timestamp,
-        .location = std::move(location),
-        .message = std::move(message),
-    });
+    state().entries.emplace_back(Entry{.level = level,
+                                       .timestamp = timestamp,
+                                       .location = std::move(location),
+                                       .message = std::move(message),
+                                       .span = SpanManager::current()});
 }
 
 bool Logger::read(std::size_t& cursor, Entry& entry)
