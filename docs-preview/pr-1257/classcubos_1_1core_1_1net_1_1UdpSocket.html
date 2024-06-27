@@ -56,26 +56,12 @@
             <li>
               Reference
               <ul>
-                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="a61f7a652078def567e15c0c600efc950">
-              <span class="m-doc-wrap-bumper">enum class <a href="#a61f7a652078def567e15c0c600efc950" class="m-doc-self">ResultCode</a> { </span><span class="m-doc-wrap"><a href="#a61f7a652078def567e15c0c600efc950a505a83f220c02df2f85c3810cd9ceb38" class="m-doc">Success</a>,
-              <a href="#a61f7a652078def567e15c0c600efc950a0e4f8eb16eec43ffd4fa88d49195664a" class="m-doc">BindError</a>,
-              <a href="#a61f7a652078def567e15c0c600efc950ab8564a4d32a008dcb7af17bbdcd5f5a2" class="m-doc">SendError</a>,
-              <a href="#a61f7a652078def567e15c0c600efc950a18d8da77f8ec7c0948a23dadf80704d5" class="m-doc">ReceiveError</a>,
-              <a href="#a61f7a652078def567e15c0c600efc950abfaef30f1c8011c5cefa38ae470fb7aa" class="m-doc">UnknownError</a> }</span>
-            </dt>
-            <dd>Represents a result code.</dd>
-          </dl>
-        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -101,8 +87,8 @@
             </dt>
             <dd>Forbid copy assignment.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a28b7b3752c9456f59a59f99bf351d732" class="m-doc">bind</a>(</span><span class="m-doc-wrap">uint16_t port,
-              const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address = <a href="classcubos_1_1core_1_1net_1_1Address.html#a1b2472a0e1931681a68c25f6d3e5a01d" class="m-doc">Address::<wbr />Any</a>) -&gt; <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae19711ac27d1cb915c7933ae01fe74c8" class="m-doc">bind</a>(</span><span class="m-doc-wrap">uint16_t port,
+              const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address = <a href="classcubos_1_1core_1_1net_1_1Address.html#a1b2472a0e1931681a68c25f6d3e5a01d" class="m-doc">Address::<wbr />Any</a>) -&gt; bool</span>
             </dt>
             <dd>Creates a UDP socket from the given <code>port</code> and <code>address</code>.</dd>
             <dt id="ae3f284fcb848fd947910b8c417bf3238">
@@ -110,30 +96,30 @@
             </dt>
             <dd>Closes the inner socket.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4c8cff5953fdec4ac62ec2b7bbf7b800" class="m-doc">send</a>(</span><span class="m-doc-wrap">const char* data,
+              <span class="m-doc-wrap-bumper">auto <a href="#a8e9a39027dc9c1141a759aeb24d2956f" class="m-doc">send</a>(</span><span class="m-doc-wrap">const char* data,
               size_t size,
               const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address,
-              uint16_t port) const -&gt; <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a></span>
+              uint16_t port) const -&gt; bool</span>
             </dt>
             <dd>Sends <code>data</code> on the socket to the remote <code>address</code> and <code>port</code>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac08acad11020b3ea2df4c7afcd76ab8b" class="m-doc">receive</a>(</span><span class="m-doc-wrap">char* data,
+              <span class="m-doc-wrap-bumper">auto <a href="#a5258f6632beefb66a52ff93b9b900b00" class="m-doc">receive</a>(</span><span class="m-doc-wrap">char* data,
               size_t size,
               int&amp; received,
-              <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address) const -&gt; <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a></span>
+              <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address) const -&gt; bool</span>
             </dt>
             <dd>Receives a single datagram message on the socket.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a783a212e1ccb11a52a258d2f1d2f085a" class="m-doc">setBlocking</a>(</span><span class="m-doc-wrap">bool blocking)</span>
             </dt>
-            <dd>Control <code>blocking</code> mode of inner socket.</dd>
+            <dd>Control blocking mode of inner socket.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a28b7b3752c9456f59a59f99bf351d732"><div>
+          <section class="m-doc-details" id="ae19711ac27d1cb915c7933ae01fe74c8"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a> cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28b7b3752c9456f59a59f99bf351d732" class="m-doc-self">bind</a>(</span><span class="m-doc-wrap">uint16_t port,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae19711ac27d1cb915c7933ae01fe74c8" class="m-doc-self">bind</a>(</span><span class="m-doc-wrap">uint16_t port,
               const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address = <a href="classcubos_1_1core_1_1net_1_1Address.html#a1b2472a0e1931681a68c25f6d3e5a01d" class="m-doc">Address::<wbr />Any</a>)</span></span>
             </h3>
             <p>Creates a UDP socket from the given <code>port</code> and <code>address</code>.</p>
@@ -154,14 +140,14 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Result code.</td>
+                  <td>Whether binding was successful.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a4c8cff5953fdec4ac62ec2b7bbf7b800"><div>
+          <section class="m-doc-details" id="a8e9a39027dc9c1141a759aeb24d2956f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a> cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c8cff5953fdec4ac62ec2b7bbf7b800" class="m-doc-self">send</a>(</span><span class="m-doc-wrap">const char* data,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e9a39027dc9c1141a759aeb24d2956f" class="m-doc-self">send</a>(</span><span class="m-doc-wrap">const char* data,
               size_t size,
               const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address,
               uint16_t port) const</span></span>
@@ -192,14 +178,14 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Result code.</td>
+                  <td>Whether data was sent sucessfully.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac08acad11020b3ea2df4c7afcd76ab8b"><div>
+          <section class="m-doc-details" id="a5258f6632beefb66a52ff93b9b900b00"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1net_1_1UdpSocket.html#a61f7a652078def567e15c0c600efc950" class="m-doc">ResultCode</a> cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac08acad11020b3ea2df4c7afcd76ab8b" class="m-doc-self">receive</a>(</span><span class="m-doc-wrap">char* data,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5258f6632beefb66a52ff93b9b900b00" class="m-doc-self">receive</a>(</span><span class="m-doc-wrap">char* data,
               size_t size,
               int&amp; received,
               <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address) const</span></span>
@@ -230,7 +216,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Result code.</td>
+                  <td>Whether data was received sucessfully.</td>
                 </tr>
               </tfoot>
             </table>
@@ -239,7 +225,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a783a212e1ccb11a52a258d2f1d2f085a" class="m-doc-self">setBlocking</a>(</span><span class="m-doc-wrap">bool blocking)</span></span>
             </h3>
-            <p>Control <code>blocking</code> mode of inner socket.</p>
+            <p>Control blocking mode of inner socket.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
