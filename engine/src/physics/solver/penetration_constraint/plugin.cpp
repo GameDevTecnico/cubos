@@ -98,16 +98,16 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
                 correction2.impulse = newImpulse;
             }
 
-            glm::vec3 P = constraint.normal * impulse;
+            glm::vec3 p = constraint.normal * impulse;
             if (ent1 == constraint.entity)
             {
-                v1 = velocity1.vec - P * mass1.inverseMass;
-                v2 = velocity2.vec + P * mass2.inverseMass;
+                v1 = velocity1.vec - p * mass1.inverseMass;
+                v2 = velocity2.vec + p * mass2.inverseMass;
             }
             else
             {
-                v1 = velocity1.vec + P * mass1.inverseMass;
-                v2 = velocity2.vec - P * mass2.inverseMass;
+                v1 = velocity1.vec + p * mass1.inverseMass;
+                v2 = velocity2.vec - p * mass2.inverseMass;
             }
         }
 
