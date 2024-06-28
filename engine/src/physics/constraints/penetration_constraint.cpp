@@ -13,7 +13,9 @@ CUBOS_REFLECT_IMPL(cubos::engine::PenetrationConstraint)
         .withField("entity2OriginalPosition", &PenetrationConstraint::entity2OriginalPosition)
         .withField("penetration", &PenetrationConstraint::penetration)
         .withField("normal", &PenetrationConstraint::normal)
-        .withField("lagrangeMultiplier", &PenetrationConstraint::lagrangeMultiplier)
-        .withField("compliance", &PenetrationConstraint::compliance)
+        .withField("normalMass", &PenetrationConstraint::normalMass)
+        .withField("biasCoefficient", &PenetrationConstraint::biasCoefficient)
+        .withField("impulseCoefficient", &PenetrationConstraint::impulseCoefficient)
+        .withField("massCoefficient", &PenetrationConstraint::massCoefficient)
         .build();
 }

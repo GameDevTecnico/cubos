@@ -4,10 +4,6 @@
 
 #pragma once
 
-#include <cubos/engine/physics/components/force.hpp>
-#include <cubos/engine/physics/components/impulse.hpp>
-#include <cubos/engine/physics/components/mass.hpp>
-#include <cubos/engine/physics/components/velocity.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -16,7 +12,16 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     /// @brief Adds solver for constraints.
 
-    extern Tag physicsSolveTag;
+    extern Tag physicsPrepareSolveTag;
+    extern Tag physicsIntegrateVelocityTag;
+    extern Tag physicsSolveConstraintTag;
+    extern Tag physicsSolveUserConstraintTag;
+    extern Tag physicsSolveContactTag;
+    extern Tag physicsIntegratePositionTag;
+    extern Tag physicsSolveRelaxConstraintTag;
+    extern Tag physicsSolveRelaxUserConstraintTag;
+    extern Tag physicsSolveRelaxContactTag;
+    extern Tag physicsFinalizePositionTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class

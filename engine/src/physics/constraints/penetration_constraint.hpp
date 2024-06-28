@@ -26,8 +26,11 @@ namespace cubos::engine
         float penetration;                 ///< Penetration depth of the collision.
         glm::vec3 normal;                  ///< Normal of contact on the surface of the entity.
 
-        // constraint values
-        float lagrangeMultiplier = 0.0F; ///< Holds the lagrange multiplier value.
-        float compliance = 0.0F;         ///< Holds the compliance for the constraint (0.0 here).
+        float normalMass;
+
+        // soft constraint
+        float biasCoefficient;
+        float impulseCoefficient;
+        float massCoefficient;
     };
 } // namespace cubos::engine
