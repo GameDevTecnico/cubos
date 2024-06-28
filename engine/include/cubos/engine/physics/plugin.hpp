@@ -15,7 +15,6 @@
 #include <cubos/engine/physics/components/force.hpp>
 #include <cubos/engine/physics/components/impulse.hpp>
 #include <cubos/engine/physics/components/mass.hpp>
-#include <cubos/engine/physics/components/previous_position.hpp>
 #include <cubos/engine/physics/components/velocity.hpp>
 #include <cubos/engine/physics/physics_bundle.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
@@ -39,7 +38,6 @@ namespace cubos::engine
     /// - @ref Force - holds forces applied on a particle.
     /// - @ref Impulse - holds impulses applied on a particle.
     /// - @ref Mass - holds the mass of an object.
-    /// - @ref PreviousPosition - holds the previous position of the entity in a substep.
     /// - @ref AccumulatedCorrection - holds the corrections accumulated from the constraints solving.
     ///
     /// ## Dependencies

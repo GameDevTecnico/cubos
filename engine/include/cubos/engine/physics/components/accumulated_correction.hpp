@@ -18,6 +18,7 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        glm::vec3 vec = {0.0F, 0.0F, 0.0F}; ///< Accumulated correction.
+        glm::vec3 position = {0.0F, 0.0F, 0.0F}; ///< Accumulated position correction.
+        float impulse = 0.0F;                    ///< Accumulated impulse.
     };
 } // namespace cubos::engine

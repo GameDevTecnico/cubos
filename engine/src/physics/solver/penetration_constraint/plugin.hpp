@@ -16,6 +16,7 @@ namespace cubos::engine
     extern Tag addPenetrationConstraintTag;
     extern Tag penetrationConstraintCleanTag;
     extern Tag penetrationConstraintSolveTag;
+    extern Tag penetrationConstraintSolveRelaxTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class

@@ -5,27 +5,115 @@
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
-#include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
 #include "../../fixed_substep/plugin.hpp"
-#include "../utils.hpp"
 
 using namespace cubos::engine;
 
 CUBOS_DEFINE_TAG(cubos::engine::addPenetrationConstraintTag);
-CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintCleanTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintSolveTag);
+CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintSolveRelaxTag);
+CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintCleanTag);
 
-glm::vec3 applyCorrectionToPosition(float inverseMass, glm::vec3 position, glm::vec3 correction)
+void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection&, Velocity&, PenetrationConstraint&,
+                                      Entity, const Mass&, AccumulatedCorrection&, Velocity&>
+                                    query,
+                                const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps, const bool useBias)
 {
-    if (inverseMass <= 0.0F)
+    for (auto [ent1, mass1, correction1, velocity1, constraint, ent2, mass2, correction2, velocity2] : query)
     {
-        return position;
+
+        float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
+
+        glm::vec3 v1;
+        glm::vec3 v2;
+
+        // for each contact point, for now its for each entity
+        for (int i = 0; i < 2; i++)
+        {
+            float totalImpulse = i == 0 ? correction1.impulse : correction2.impulse;
+
+            // compute current penatration
+            float penetration = constraint.penetration;
+
+            if (ent1 == constraint.entity)
+            {
+                glm::vec3 deltaPenetration = correction2.position - correction1.position;
+                penetration += glm::dot(deltaPenetration, constraint.normal);
+            }
+            else
+            {
+                glm::vec3 deltaPenetration = correction1.position - correction2.position;
+                penetration += glm::dot(deltaPenetration, constraint.normal);
+            }
+
+            // penetration is positive but we need negative value for separation
+            penetration = -penetration;
+
+            float bias = 0.0F;
+            float massScale = 1.0F;
+            float impulseScale = 0.0F;
+            if (penetration > 0.0F)
+            {
+                bias = penetration * 1.0F / subDeltaTime;
+            }
+            else if (useBias)
+            {
+                bias = glm::max(constraint.biasCoefficient * penetration, -4.0F);
+                massScale = constraint.massCoefficient;
+                impulseScale = constraint.impulseCoefficient;
+            }
+
+            // Relative velocity at contact
+            glm::vec3 vr2;
+            glm::vec3 vr1;
+            if (ent1 == constraint.entity)
+            {
+                vr2 = velocity2.vec;
+                vr1 = velocity1.vec;
+            }
+            else
+            {
+                vr2 = velocity1.vec;
+                vr1 = velocity2.vec;
+            }
+
+            float vn = glm::dot(vr2 - vr1, constraint.normal);
+
+            // Compute normal impulse
+            float impulse = -constraint.normalMass * massScale * (vn + bias) - impulseScale * totalImpulse;
+
+            // Clamp the accumulated impulse
+            float newImpulse = glm::max(totalImpulse + impulse, 0.0F);
+            impulse = newImpulse - totalImpulse;
+            if (i == 0)
+            {
+                correction1.impulse = newImpulse;
+            }
+            else
+            {
+                correction2.impulse = newImpulse;
+            }
+
+            glm::vec3 P = constraint.normal * impulse;
+            if (ent1 == constraint.entity)
+            {
+                v1 = velocity1.vec - P * mass1.inverseMass;
+                v2 = velocity2.vec + P * mass2.inverseMass;
+            }
+            else
+            {
+                v1 = velocity1.vec + P * mass1.inverseMass;
+                v2 = velocity2.vec - P * mass2.inverseMass;
+            }
+        }
+
+        velocity1.vec = v1;
+        velocity2.vec = v2;
     }
-    return position + correction; // lagrange * correction * inverseMass
 }
 
 void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
@@ -39,85 +127,60 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
     cubos.relation<PenetrationConstraint>();
 
     cubos.tag(addPenetrationConstraintTag);
-    cubos.tag(penetrationConstraintCleanTag);
     cubos.tag(penetrationConstraintSolveTag);
+    cubos.tag(penetrationConstraintSolveRelaxTag);
+    cubos.tag(penetrationConstraintCleanTag);
 
-    // collision solving
-    cubos.system("solve penetration constraints")
+    cubos.system("solve contacts bias")
         .tagged(penetrationConstraintSolveTag)
-        .tagged(physicsSolveTag)
-        .call([](Query<Entity, const Mass&, Position&, AccumulatedCorrection&, PenetrationConstraint&, Entity,
-                       const Mass&, Position&, AccumulatedCorrection&>
+        .tagged(physicsSolveContactTag)
+        .call([](Query<Entity, const Mass&, AccumulatedCorrection&, Velocity&, PenetrationConstraint&, Entity,
+                       const Mass&, AccumulatedCorrection&, Velocity&>
                      query,
-                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
-            for (auto [ent1, mass1, position1, correction1, constraint, ent2, mass2, position2, correction2] : query)
-            {
-                float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
+                 const FixedDeltaTime& fixedDeltaTime,
+                 const Substeps& substeps) { solvePenetrationConstraint(query, fixedDeltaTime, substeps, true); });
 
-                // We will want to have contact points here, so we can easily calculate the penetration when we get
-                // rigid bodies
-                auto penetration = constraint.penetration;
-
-                float distForOgPenetration = glm::abs(glm::dot(
-                    constraint.entity1OriginalPosition - constraint.entity2OriginalPosition, constraint.normal));
-                float distForNowPenetration = glm::abs(glm::dot(position1.vec - position2.vec, constraint.normal));
-
-                penetration += distForOgPenetration - distForNowPenetration;
-
-                glm::vec3 gradients[2] = {constraint.normal, -constraint.normal};
-                float inverseMasses[2] = {mass1.inverseMass, mass2.inverseMass};
-
-                // We use max to cap the distance that we can move the objects in a substep.
-                // We do this to prevent the velocity calculated after the correction from being too high making the
-                // simulation very explosive.
-                // The solution proposed in the papers is to choose a maximum velocity for a
-                // substep, however we couldn't get the simulation to stabilize like that so we opted so for a cap based
-                // on the current penetration between the objects.
-                float max = glm::max(penetration / (float)substeps.value, 0.0F);
-                float c = penetration - glm::max(penetration - max, 0.0F);
-                if (c <= 0.0F)
-                {
-                    continue;
-                }
-
-                float lagrangeUpdate =
-                    getLagrangeMultiplierUpdate(c, inverseMasses, gradients, 2, constraint.compliance, subDeltaTime);
-
-                glm::vec3 positionUpdate = lagrangeUpdate * constraint.normal;
-
-                if (ent1 == constraint.entity)
-                {
-                    correction1.vec += positionUpdate * mass1.inverseMass;
-                    correction2.vec -= positionUpdate * mass2.inverseMass;
-                    position1.vec = applyCorrectionToPosition(mass1.inverseMass, position1.vec, correction1.vec);
-                    position2.vec = applyCorrectionToPosition(mass2.inverseMass, position2.vec, correction2.vec);
-                }
-                else
-                {
-                    correction1.vec -= positionUpdate * mass1.inverseMass;
-                    correction2.vec += positionUpdate * mass2.inverseMass;
-                    position1.vec = applyCorrectionToPosition(mass1.inverseMass, position1.vec, correction1.vec);
-                    position2.vec = applyCorrectionToPosition(mass2.inverseMass, position2.vec, correction2.vec);
-                }
-                correction1.vec = glm::vec3(0, 0, 0);
-                correction2.vec = glm::vec3(0, 0, 0);
-            }
-        });
+    cubos.system("solve contacts no bias")
+        .tagged(penetrationConstraintSolveRelaxTag)
+        .tagged(physicsSolveRelaxContactTag)
+        .call([](Query<Entity, const Mass&, AccumulatedCorrection&, Velocity&, PenetrationConstraint&, Entity,
+                       const Mass&, AccumulatedCorrection&, Velocity&>
+                     query,
+                 const FixedDeltaTime& fixedDeltaTime,
+                 const Substeps& substeps) { solvePenetrationConstraint(query, fixedDeltaTime, substeps, false); });
 
     cubos.system("add penetration constraint pair")
         .tagged(addPenetrationConstraintTag)
-        .after(collisionsTag)
-        .before(penetrationConstraintSolveTag)
-        .tagged(fixedStepTag)
-        .call([](Commands cmds, Query<Entity, const CollidingWith&, Entity> query) {
-            for (auto [ent1, collidingWith, ent2] : query)
+        .tagged(physicsPrepareSolveTag)
+        .call([](Commands cmds, Query<Entity, const Mass&, const CollidingWith&, Entity, const Mass&> query,
+                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
+            float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
+            float contactHertz = glm::min(30.0F, 0.25F * (1.0F / subDeltaTime));
+
+            for (auto [ent1, mass1, collidingWith, ent2, mass2] : query)
             {
+                float kNormal = mass1.inverseMass + mass2.inverseMass;
+                float normalMass = kNormal > 0.0F ? 1.0F / kNormal : 0.0F;
+
+                // Soft contact
+                const float zeta = 10.0F;
+                float omega = 2.0F * glm::pi<float>() * contactHertz;
+                float c = subDeltaTime * omega * (2.0F * zeta + subDeltaTime * omega);
+
+                float biasCoefficient = omega / (2.0F * zeta + subDeltaTime * omega);
+                float impulseCoefficient = 1.0F / (1.0F + c);
+                float massCoefficient = c * impulseCoefficient;
+
                 cmds.relate(ent1, ent2,
                             PenetrationConstraint{.entity = ent1,
                                                   .entity1OriginalPosition = collidingWith.entity1OriginalPosition,
                                                   .entity2OriginalPosition = collidingWith.entity2OriginalPosition,
                                                   .penetration = collidingWith.penetration,
-                                                  .normal = collidingWith.normal});
+                                                  .normal = collidingWith.normal,
+                                                  .normalMass = normalMass,
+                                                  .biasCoefficient = biasCoefficient,
+                                                  .impulseCoefficient = impulseCoefficient,
+                                                  .massCoefficient = massCoefficient});
             }
         });
 
