@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Move Opt class to memory namespace (#1212, **@roby2014**).
+- Moved from XPBD to TGS Soft for physics solving (#1269, **@fallenatlas**).
 
 ## [v0.2.0] - 2024-05-07
 
