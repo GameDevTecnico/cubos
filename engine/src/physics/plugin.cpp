@@ -61,7 +61,7 @@ CUBOS_REFLECT_IMPL(Damping)
 
 void cubos::engine::physicsPlugin(Cubos& cubos)
 {
-    cubos.plugin(fixedSubstepPlugin);
+    cubos.plugin(physicsFixedSubstepPlugin);
 
     cubos.resource<Damping>();
 
