@@ -91,21 +91,21 @@
               const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address = <a href="classcubos_1_1core_1_1net_1_1Address.html#a1b2472a0e1931681a68c25f6d3e5a01d" class="m-doc">Address::<wbr />Any</a>) -&gt; bool</span>
             </dt>
             <dd>Creates a UDP socket from the given <code>port</code> and <code>address</code>.</dd>
-            <dt id="ae3f284fcb848fd947910b8c417bf3238">
-              <span class="m-doc-wrap-bumper">void <a href="#ae3f284fcb848fd947910b8c417bf3238" class="m-doc-self">unbind</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="a06187457c351f3b4b93c66b490ede56e">
+              <span class="m-doc-wrap-bumper">void <a href="#a06187457c351f3b4b93c66b490ede56e" class="m-doc-self">unbind</a>(</span><span class="m-doc-wrap">) const</span>
             </dt>
             <dd>Closes the inner socket.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aedf43bd546f3b7dac7b87c95c4c225ad" class="m-doc">send</a>(</span><span class="m-doc-wrap">const char* data,
-              <a href="udp__socket_8hpp.html#ab9f31c0e25424a1c70d7ea3b2a46ce94" class="m-doc">BUF_<wbr />TYPE</a> size,
+              <span class="m-doc-wrap-bumper">auto <a href="#ae277609e244ed14f44f92ee40ef09452" class="m-doc">send</a>(</span><span class="m-doc-wrap">const char* data,
+              <a href="udp__socket_8hpp.html#ad4676480c63579ff0f8ea57e5e6be5e3" class="m-doc">BUF_<wbr />SEND_<wbr />TYPE</a> size,
               const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address,
-              uint16_t port) const -&gt; const bool</span>
+              uint16_t port) const -&gt; bool</span>
             </dt>
             <dd>Sends <code>data</code> on the socket to the remote <code>address</code> and <code>port</code>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aee4fa4519ebb227a4a9f9612088e9901" class="m-doc">receive</a>(</span><span class="m-doc-wrap">char* data,
-              <a href="udp__socket_8hpp.html#ab9f31c0e25424a1c70d7ea3b2a46ce94" class="m-doc">BUF_<wbr />TYPE</a> size,
-              <a href="udp__socket_8hpp.html#ab9f31c0e25424a1c70d7ea3b2a46ce94" class="m-doc">BUF_<wbr />TYPE</a>&amp; received,
+              <span class="m-doc-wrap-bumper">auto <a href="#a5225d9a97b52ed821c9ced8be50d8edd" class="m-doc">receive</a>(</span><span class="m-doc-wrap">char* data,
+              <a href="udp__socket_8hpp.html#ad4676480c63579ff0f8ea57e5e6be5e3" class="m-doc">BUF_<wbr />SEND_<wbr />TYPE</a> size,
+              <a href="udp__socket_8hpp.html#a777e459ad8c10d70c45b973b17264ba0" class="m-doc">BUF_<wbr />RECEIVE_<wbr />TYPE</a>&amp; received,
               <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address) const -&gt; bool</span>
             </dt>
             <dd>Receives a single datagram message on the socket.</dd>
@@ -145,10 +145,10 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aedf43bd546f3b7dac7b87c95c4c225ad"><div>
+          <section class="m-doc-details" id="ae277609e244ed14f44f92ee40ef09452"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const bool cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aedf43bd546f3b7dac7b87c95c4c225ad" class="m-doc-self">send</a>(</span><span class="m-doc-wrap">const char* data,
-              <a href="udp__socket_8hpp.html#ab9f31c0e25424a1c70d7ea3b2a46ce94" class="m-doc">BUF_<wbr />TYPE</a> size,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae277609e244ed14f44f92ee40ef09452" class="m-doc-self">send</a>(</span><span class="m-doc-wrap">const char* data,
+              <a href="udp__socket_8hpp.html#ad4676480c63579ff0f8ea57e5e6be5e3" class="m-doc">BUF_<wbr />SEND_<wbr />TYPE</a> size,
               const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address,
               uint16_t port) const</span></span>
             </h3>
@@ -183,11 +183,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aee4fa4519ebb227a4a9f9612088e9901"><div>
+          <section class="m-doc-details" id="a5225d9a97b52ed821c9ced8be50d8edd"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee4fa4519ebb227a4a9f9612088e9901" class="m-doc-self">receive</a>(</span><span class="m-doc-wrap">char* data,
-              <a href="udp__socket_8hpp.html#ab9f31c0e25424a1c70d7ea3b2a46ce94" class="m-doc">BUF_<wbr />TYPE</a> size,
-              <a href="udp__socket_8hpp.html#ab9f31c0e25424a1c70d7ea3b2a46ce94" class="m-doc">BUF_<wbr />TYPE</a>&amp; received,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />UdpSocket::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5225d9a97b52ed821c9ced8be50d8edd" class="m-doc-self">receive</a>(</span><span class="m-doc-wrap">char* data,
+              <a href="udp__socket_8hpp.html#ad4676480c63579ff0f8ea57e5e6be5e3" class="m-doc">BUF_<wbr />SEND_<wbr />TYPE</a> size,
+              <a href="udp__socket_8hpp.html#a777e459ad8c10d70c45b973b17264ba0" class="m-doc">BUF_<wbr />RECEIVE_<wbr />TYPE</a>&amp; received,
               <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address) const</span></span>
             </h3>
             <p>Receives a single datagram message on the socket.</p>
