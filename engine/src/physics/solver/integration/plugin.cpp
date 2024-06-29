@@ -15,7 +15,7 @@ using namespace cubos::engine;
 CUBOS_DEFINE_TAG(cubos::engine::physicsApplyImpulsesTag);
 CUBOS_DEFINE_TAG(cubos::engine::physicsClearForcesTag);
 
-void cubos::engine::integrationPlugin(Cubos& cubos)
+void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
 {
     cubos.depends(fixedStepPlugin);
     cubos.depends(transformPlugin);

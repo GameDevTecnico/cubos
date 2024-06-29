@@ -53,6 +53,6 @@ void cubos::engine::solverPlugin(Cubos& cubos)
 
     cubos.tag(physicsFinalizePositionTag).after(physicsSolveRelaxContactTag).tagged(fixedStepTag);
 
-    cubos.plugin(integrationPlugin);
+    cubos.plugin(physicsIntegrationPlugin);
     cubos.plugin(penetrationConstraintPlugin);
 }
