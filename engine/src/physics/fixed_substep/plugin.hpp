@@ -23,5 +23,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup physics-plugin
-    void fixedSubstepPlugin(Cubos& cubos);
+    void physicsFixedSubstepPlugin(Cubos& cubos);
 } // namespace cubos::engine

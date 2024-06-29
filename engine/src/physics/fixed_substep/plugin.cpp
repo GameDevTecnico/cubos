@@ -13,7 +13,7 @@ namespace
     };
 } // namespace
 
-void cubos::engine::fixedSubstepPlugin(Cubos& cubos)
+void cubos::engine::physicsFixedSubstepPlugin(Cubos& cubos)
 {
     cubos.depends(fixedStepPlugin);
     cubos.depends(collisionsPlugin);
