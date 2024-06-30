@@ -48,6 +48,10 @@ set(CUBOS_ENGINE_SOURCE
 	"src/gizmos/renderer.cpp"
 	"src/gizmos/target.cpp"
 
+	"src/image/bridge.cpp"
+	"src/image/image.cpp"
+	"src/image/plugin.cpp"
+
 	"src/scene/plugin.cpp"
 	"src/scene/scene.cpp"
 	"src/scene/bridge.cpp"
@@ -183,6 +187,8 @@ target_include_directories(imgui PUBLIC
 	"lib/implot"
 )
 target_link_libraries(cubos-engine PUBLIC imgui)
+
+target_include_directories(cubos-engine PRIVATE "lib/stb_image")
 
 # Add engine tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS)
