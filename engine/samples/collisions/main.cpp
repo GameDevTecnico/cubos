@@ -54,7 +54,7 @@ int main()
     cubos.plugin(fixedStepPlugin);
     cubos.plugin(collisionsPlugin);
     cubos.plugin(physicsPlugin);
-    cubos.plugin(solverPlugin);
+    cubos.plugin(physicsSolverPlugin);
     cubos.plugin(assetsPlugin);
     cubos.plugin(inputPlugin);
     cubos.plugin(renderDefaultsPlugin);

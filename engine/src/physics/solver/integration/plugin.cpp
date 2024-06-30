@@ -20,7 +20,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
     cubos.depends(fixedStepPlugin);
     cubos.depends(transformPlugin);
     cubos.depends(physicsPlugin);
-    cubos.depends(solverPlugin);
+    cubos.depends(physicsSolverPlugin);
 
     cubos.tag(physicsApplyImpulsesTag);
     cubos.tag(physicsClearForcesTag).after(physicsFinalizePositionTag).tagged(fixedStepTag);

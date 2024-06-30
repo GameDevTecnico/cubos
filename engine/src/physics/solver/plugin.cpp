@@ -21,7 +21,7 @@ CUBOS_DEFINE_TAG(cubos::engine::physicsFinalizePositionTag);
 
 using namespace cubos::engine;
 
-void cubos::engine::solverPlugin(Cubos& cubos)
+void cubos::engine::physicsSolverPlugin(Cubos& cubos)
 {
     cubos.depends(physicsPlugin);
     cubos.depends(fixedStepPlugin);

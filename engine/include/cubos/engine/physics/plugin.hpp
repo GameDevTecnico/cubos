@@ -42,7 +42,6 @@ namespace cubos::engine
     ///
     /// ## Dependencies
     /// - @ref physics-gravity-plugin
-    ///
 
     /// @brief Tag which should be used on all systems that modify velocity or apply forces or impulses.
     CUBOS_ENGINE_API extern Tag physicsApplyForcesTag;
