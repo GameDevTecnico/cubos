@@ -13,6 +13,7 @@
 #include <cubos/engine/ui/canvas/draw_list.hpp>
 #include <cubos/engine/ui/canvas/element.hpp>
 #include <cubos/engine/ui/canvas/horizontal_stretch.hpp>
+#include <cubos/engine/ui/canvas/native_aspect_ratio.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
 #include <cubos/engine/ui/canvas/vertical_stretch.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -64,6 +65,7 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
     cubos.component<UICanvas>();
     cubos.component<UIHorizontalStretch>();
     cubos.component<UIVerticalStretch>();
+    cubos.component<UINativeAspectRatio>();
     cubos.uninitResource<State>();
 
     cubos.tag(uiCanvasChildrenUpdateTag);
@@ -99,20 +101,41 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
         .withOpt<UIVerticalStretch>()
         .related<ChildOf>()
         .with<UICanvas>()
-        .call([](Query<UIElement&, Opt<const UIHorizontalStretch&>, Opt<const UIVerticalStretch&>, const UICanvas&>
+        .call([](Query<UIElement&, Opt<const UIHorizontalStretch&>, Opt<const UIVerticalStretch&>,
+                       Opt<const UINativeAspectRatio&>, const UICanvas&>
                      query) {
-            for (auto [element, hs, vs, canvas] : query)
+            for (auto [element, hs, vs, nar, canvas] : query)
             {
                 element.position = element.anchor * canvas.referenceSize + element.offset;
                 if (hs.contains())
                 {
                     element.size.x = canvas.referenceSize.x - hs.value().rightOffset - hs.value().leftOffset;
                     element.position.x = hs.value().leftOffset + element.size.x * element.pivot.x + element.offset.x;
+                    if (nar.contains() && !vs.contains() && nar.value().ratio != 0)
+                    {
+                        element.size.y = element.size.x / nar.value().ratio;
+                    }
                 }
                 if (vs.contains())
                 {
                     element.size.y = canvas.referenceSize.y - vs.value().topOffset - vs.value().bottomOffset;
                     element.position.y = vs.value().bottomOffset + element.size.y * element.pivot.y + element.offset.y;
+                    if (nar.contains() && !hs.contains() && nar.value().ratio != 0)
+                    {
+                        element.size.x = element.size.y * nar.value().ratio;
+                    }
+                }
+                if (nar.contains() && (vs.contains() == hs.contains()))
+                {
+                    float currentRatio = element.size.x / element.size.y;
+                    if (currentRatio > nar.value().ratio)
+                    {
+                        element.size.x = element.size.y * nar.value().ratio;
+                    }
+                    else
+                    {
+                        element.size.y = element.size.x / nar.value().ratio;
+                    }
                 }
             }
         });
@@ -122,11 +145,13 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
         .with<UIElement>()
         .withOpt<UIHorizontalStretch>()
         .withOpt<UIVerticalStretch>()
+        .withOpt<UINativeAspectRatio>()
         .related<ChildOf>(core::ecs::Traversal::Down)
         .with<UIElement>()
-        .call([](Query<UIElement&, Opt<const UIHorizontalStretch&>, Opt<const UIVerticalStretch&>, const UIElement&>
+        .call([](Query<UIElement&, Opt<const UIHorizontalStretch&>, Opt<const UIVerticalStretch&>,
+                       Opt<const UINativeAspectRatio&>, const UIElement&>
                      children) {
-            for (auto [child, hs, vs, parent] : children)
+            for (auto [child, hs, vs, nar, parent] : children)
             {
                 child.position = child.anchor * parent.topRightCorner() +
                                  (glm::vec2{1, 1} - child.anchor) * parent.bottomLeftCorner() + child.offset;
@@ -137,6 +162,10 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                                    hs.value().leftOffset;
                     child.position.x = parent.bottomLeftCorner().x + hs.value().leftOffset +
                                        child.size.x * child.pivot.x + child.offset.x;
+                    if (nar.contains() && !vs.contains() && nar.value().ratio != 0)
+                    {
+                        child.size.y = child.size.x / nar.value().ratio;
+                    }
                 }
                 if (vs.contains())
                 {
@@ -144,6 +173,22 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                                    vs.value().bottomOffset;
                     child.position.y = parent.bottomLeftCorner().y + vs.value().bottomOffset +
                                        child.size.y * child.pivot.y + child.offset.y;
+                    if (nar.contains() && !hs.contains() && nar.value().ratio != 0)
+                    {
+                        child.size.x = child.size.y * nar.value().ratio;
+                    }
+                }
+                if (nar.contains() && (vs.contains() == hs.contains()))
+                {
+                    float currentRatio = child.size.x / child.size.y;
+                    if (currentRatio > nar.value().ratio)
+                    {
+                        child.size.x = child.size.y * nar.value().ratio;
+                    }
+                    else
+                    {
+                        child.size.y = child.size.x / nar.value().ratio;
+                    }
                 }
             }
         });
