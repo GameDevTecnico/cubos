@@ -122,7 +122,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
     cubos.depends(transformPlugin);
     cubos.depends(collisionsPlugin);
     cubos.depends(physicsPlugin);
-    cubos.depends(solverPlugin);
+    cubos.depends(physicsSolverPlugin);
 
     cubos.relation<PenetrationConstraint>();
 

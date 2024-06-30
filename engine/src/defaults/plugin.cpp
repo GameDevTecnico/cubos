@@ -38,7 +38,7 @@ void cubos::engine::defaultsPlugin(Cubos& cubos)
     cubos.plugin(inputPlugin);
     cubos.plugin(physicsPlugin);
 
-    cubos.plugin(solverPlugin);
+    cubos.plugin(physicsSolverPlugin);
     cubos.plugin(renderDefaultsPlugin);
 
     cubos.plugin(uiCanvasPlugin);

@@ -44,7 +44,7 @@ int main(int argc, char** argv)
     cubos.plugin(fixedStepPlugin);
     cubos.plugin(collisionsPlugin);
     cubos.plugin(physicsPlugin);
-    cubos.plugin(solverPlugin);
+    cubos.plugin(physicsSolverPlugin);
     cubos.plugin(gravityPlugin);
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
