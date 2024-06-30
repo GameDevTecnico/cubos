@@ -26,4 +26,22 @@ Here we create a small panel to the right side of the screen. The anchor is set 
 
 We set this panel as child of the background, and we'll paint it red.
 
+Next let's add an image.
+
+@snippet ui/main.cpp Set up Logo
+
+To add an image, it's a simple matter of adding a @ref cubos::engine::UIImage component to an element, with the handle to an image asset.
+It will then be drawn onto that element's rect.
+
+We might, however, want to make sure that the image will retain its aspect ratio without having to manually adjust the element's size. The solution for that is the @ref cubos::engine::UINativeAspectRatio component. What it does is size down the element to have a size that is in line with the source file's aspect ratio.
+
+@note @ref cubos::engine::UINativeAspectRatio will behave differently when attached to a @ref cubos::engine::UIHorizontalStretch or a @ref cubos::engine::UIVerticalStretch component. It will keep the dimension that is being stretched, and alter the other one, which can result in either sizing up or down the element. In case both UIHorizontalStretch and UIVerticalStretch are present, UINativeAspectRatio will return to sizing the element down.
+
+@snippet ui/main.cpp Set up Longo Logo
+
+For this we will the use the extended version of our logo, which is rectangular. You'll notice that the UIElement it's being attached to is a square, but due to the UINativeAspectRatio component, that square will be sized down into proper shape.
+
+@note The @ref cubos::engine::UINativeAspectRatio is transformative. If you desire to keep the original size of the element information for other uses, it might be best to have the image instead be on a child entity of that element, and use both @ref cubos::engine::UIHorizontalStretch and @ref cubos::engine::UIVerticalStretch to achieve the same effect.
+
+
 ![](ui_output.png)
