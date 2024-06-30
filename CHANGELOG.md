@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GL timer for profiling sections of rendering code (#1228, **@tomas7770**).
 - Shadows plugin (#1185, **@tomas7770**).
 - Network Address class (#1211, **@roby2014**).
+- Image asset and UI Image component (#1270, **@DiogoMendonc-a**).
 
 ### Changed
 

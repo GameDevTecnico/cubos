@@ -98,6 +98,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/ui/canvas/horizontal_stretch.cpp"
 	"src/ui/color_rect/plugin.cpp"
 	"src/ui/color_rect/color_rect.cpp"
+	"src/ui/image/plugin.cpp"
+	"src/ui/image/image.cpp"
 
 	"src/fixed_step/plugin.cpp"
 	"src/fixed_step/fixed_delta_time.cpp"
