@@ -11,10 +11,13 @@
 #include <cubos/core/reflection/traits/constructible_utils.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/nullable.hpp>
 
 using cubos::core::data::JSONSerializer;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::NullableTrait;
+using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
 
 #define AUTO_TEST(type, value, expected)                                                                               \
@@ -39,6 +42,13 @@ namespace
         Green,
         Blue
     };
+
+    struct Nullable
+    {
+        CUBOS_REFLECT;
+
+        uint32_t value;
+    };
 } // namespace
 
 CUBOS_REFLECT_IMPL(ExampleStruct)
@@ -55,6 +65,14 @@ CUBOS_REFLECT_EXTERNAL_IMPL(Color)
 {
     return Type::create("Color").with(
         EnumTrait{}.withVariant<Color::Red>("Red").withVariant<Color::Green>("Green").withVariant<Color::Blue>("Blue"));
+}
+
+CUBOS_REFLECT_IMPL(Nullable)
+{
+    return Type::create("Nullable")
+        .with(NullableTrait{
+            [](const void* instance) -> bool { return static_cast<const Nullable*>(instance)->value == UINT32_MAX; },
+            [](void* instance) { static_cast<Nullable*>(instance)->value = UINT32_MAX; }});
 }
 
 TEST_CASE("data::JSONSerializer")
@@ -121,4 +139,11 @@ TEST_CASE("data::JSONSerializer")
     // Custom data types
     ExampleStruct myStruct{1, 2.5F, "Hello, world!"};
     AUTO_TEST(decltype(myStruct), myStruct, "{\"a\":1,\"b\":2.5,\"c\":\"Hello, world!\"}");
+
+    // Null
+    const auto& nullable = reflect<Nullable>();
+    const auto& nullableTrait = nullable.get<NullableTrait>();
+    Nullable null{144};
+    nullableTrait.setToNull(&null);
+    AUTO_TEST(Nullable, null, "null");
 }
