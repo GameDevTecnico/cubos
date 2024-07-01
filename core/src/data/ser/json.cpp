@@ -6,6 +6,7 @@
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -14,6 +15,7 @@ using cubos::core::reflection::ArrayTrait;
 using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
@@ -63,6 +65,17 @@ nlohmann::json JSONSerializer::output()
 
 bool JSONSerializer::decompose(const Type& type, const void* value)
 {
+    if (type.has<NullableTrait>())
+    {
+        const auto& trait = type.get<NullableTrait>();
+
+        if (trait.isNull(value))
+        {
+            mJSON = nlohmann::json::value_t::null;
+            return true;
+        }
+    }
+
     if (type.has<ArrayTrait>())
     {
         auto jsonArr = nlohmann::json::array();
