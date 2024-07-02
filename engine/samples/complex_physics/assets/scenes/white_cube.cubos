@@ -2,12 +2,9 @@
   "entities": {
     "cube": {
       "cubos::engine::AccumulatedCorrection": {
-        "position": {
           "x": 0.0,
           "y": 0.0,
           "z": 0.0
-        },
-        "impulse": 0.0
       },
       "cubos::engine::BoxCollisionShape": {
         "x": 0.5,

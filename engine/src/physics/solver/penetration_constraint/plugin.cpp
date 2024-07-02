@@ -28,16 +28,16 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
 
         float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
-        glm::vec3 v1;
-        glm::vec3 v2;
+        glm::vec3 v1 = velocity1.vec;
+        glm::vec3 v2 = velocity2.vec;
 
         // for each contact point, for now its for each entity
         for (int i = 0; i < 2; i++)
         {
-            float totalImpulse = i == 0 ? correction1.impulse : correction2.impulse;
+            float totalImpulse = constraint.normalImpulse;
 
-            // compute current penatration
-            float penetration = constraint.penetration;
+            // compute current penetration
+            float penetration = -constraint.penetration;
 
             if (ent1 == constraint.entity)
             {
@@ -50,15 +50,12 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
                 penetration += glm::dot(deltaPenetration, constraint.normal);
             }
 
-            // penetration is positive but we need negative value for separation
-            penetration = -penetration;
-
             float bias = 0.0F;
             float massScale = 1.0F;
             float impulseScale = 0.0F;
             if (penetration > 0.0F)
             {
-                bias = penetration * 1.0F / subDeltaTime;
+                bias = 0.2F * penetration * (1.0F / subDeltaTime);
             }
             else if (useBias)
             {
@@ -91,11 +88,11 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
             impulse = newImpulse - totalImpulse;
             if (i == 0)
             {
-                correction1.impulse = newImpulse;
+                constraint.normalImpulse = newImpulse;
             }
             else
             {
-                correction2.impulse = newImpulse;
+                constraint.normalImpulse = newImpulse;
             }
 
             glm::vec3 p = constraint.normal * impulse;
@@ -108,6 +105,73 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
             {
                 v1 = velocity1.vec + p * mass1.inverseMass;
                 v2 = velocity2.vec - p * mass2.inverseMass;
+            }
+        }
+
+        // Friction
+        float normalImpulse = constraint.normalImpulse;
+        float frictionImpulse1 = constraint.frictionImpulse1;
+        float frictionImpulse2 = constraint.frictionImpulse2;
+
+        // Relative velocity at contact
+        glm::vec3 vr2;
+        glm::vec3 vr1;
+        if (ent1 == constraint.entity)
+        {
+            vr2 = velocity2.vec;
+            vr1 = velocity1.vec;
+        }
+        else
+        {
+            vr2 = velocity1.vec;
+            vr1 = velocity2.vec;
+        }
+
+        glm::vec3 vr = vr2 - vr1;
+        glm::vec3 tangent1 = vr - glm::dot(vr, constraint.normal) * constraint.normal;
+        glm::vec3 tangent2;
+        float tangentLenSq = glm::length2(tangent1);
+        if (tangentLenSq > 1e-3)
+        {
+            tangent1 = glm::normalize(tangent1);
+            tangent2 = glm::cross(constraint.normal, tangent1);
+
+            float vn1 = glm::dot(vr, tangent1);
+            float vn2 = glm::dot(vr, tangent2);
+            if (vn1 < 1e-3)
+            {
+                vn1 = 0.0F;
+            }
+            if (vn2 < 1e-3)
+            {
+                vn2 = 0.0F;
+            }
+
+            // Compute friction force
+            float impulse1 = -constraint.frictionMass * vn1;
+            float impulse2 = -constraint.frictionMass * vn2;
+
+            // Clamp the accumulated force
+            float maxFriction = constraint.friction * normalImpulse;
+            float newImpulse1 = glm::clamp(frictionImpulse1 + impulse1, -maxFriction, maxFriction);
+            float newImpulse2 = glm::clamp(frictionImpulse2 + impulse2, -maxFriction, maxFriction);
+            impulse1 = newImpulse1 - frictionImpulse1;
+            impulse2 = newImpulse2 - frictionImpulse2;
+            constraint.frictionImpulse1 = newImpulse1;
+            constraint.frictionImpulse2 = newImpulse2;
+
+            // Apply contact impulse
+            glm::vec3 p1 = tangent1 * impulse1;
+            glm::vec3 p2 = tangent2 * impulse2;
+            if (ent1 == constraint.entity)
+            {
+                v1 -= p1 * mass1.inverseMass + p2 * mass1.inverseMass;
+                v2 += p1 * mass2.inverseMass + p2 * mass2.inverseMass;
+            }
+            else
+            {
+                v1 += p1 * mass1.inverseMass + p2 * mass1.inverseMass;
+                v2 -= p1 * mass2.inverseMass + p2 * mass2.inverseMass;
             }
         }
 
@@ -162,6 +226,13 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 float kNormal = mass1.inverseMass + mass2.inverseMass;
                 float normalMass = kNormal > 0.0F ? 1.0F / kNormal : 0.0F;
 
+                // friction mass
+                float kFriction = mass1.inverseMass + mass2.inverseMass;
+                float frictionMass = kFriction > 0.0F ? 1.0F / kFriction : 0.0F;
+
+                // determine friction (set to predefined value for now)
+                float friction = 0.01F;
+
                 // Soft contact
                 const float zeta = 10.0F;
                 float omega = 2.0F * glm::pi<float>() * contactHertz;
@@ -178,6 +249,11 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                                                   .penetration = collidingWith.penetration,
                                                   .normal = collidingWith.normal,
                                                   .normalMass = normalMass,
+                                                  .normalImpulse = 0.0F,
+                                                  .friction = friction,
+                                                  .frictionMass = frictionMass,
+                                                  .frictionImpulse1 = 0.0F,
+                                                  .frictionImpulse2 = 0.0F,
                                                   .biasCoefficient = biasCoefficient,
                                                   .impulseCoefficient = impulseCoefficient,
                                                   .massCoefficient = massCoefficient});
