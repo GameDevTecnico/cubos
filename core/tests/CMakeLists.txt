@@ -69,6 +69,9 @@ add_executable(
 	thread/task.cpp
 
 	metrics/metrics.cpp
+
+	net/address.cpp
+	net/udp_socket.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
