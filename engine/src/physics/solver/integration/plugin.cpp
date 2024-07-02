@@ -86,9 +86,9 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                 {
                     continue;
                 }
+
                 position.vec += correction.position;
                 correction.position = glm::vec3(0.0F);
-                correction.impulse = 0.0F;
             }
         });
 

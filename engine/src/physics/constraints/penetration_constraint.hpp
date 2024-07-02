@@ -26,7 +26,13 @@ namespace cubos::engine
         float penetration;                 ///< Penetration depth of the collision.
         glm::vec3 normal;                  ///< Normal of contact on the surface of the entity.
 
-        float normalMass;
+        float normalMass;    ///< Mass to use for normal impulse calculation.
+        float normalImpulse; ///< Accumulated impulse for separation.
+
+        float friction;         ///< Friction of the constraint.
+        float frictionMass;     ///< Mass to use for friction impulse calculation.
+        float frictionImpulse1; ///< Accumulated impulse for friction along the first tangent.
+        float frictionImpulse2; ///< Accumulated impulse for friction along the second tangent.
 
         // soft constraint
         float biasCoefficient;
