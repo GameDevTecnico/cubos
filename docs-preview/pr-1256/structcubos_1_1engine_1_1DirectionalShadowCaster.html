@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::PreviousPosition struct | Cubos Docs</title>
+  <title>cubos::engine::DirectionalShadowCaster struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>PreviousPosition <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="previous__position_8hpp.html">&lt;engine/physics/components/previous_position.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DirectionalShadowCaster <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="directional__caster_8hpp.html">&lt;engine/render/shadows/directional_caster.hpp&gt;</a></div>
         </h1>
-        <p>Component which holds the previous position of the entity. Used for the integrator on the update velocity step.</p>
+        <p>Component which enables shadow casting on a directional light.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,10 +64,18 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="ad867a6ed29f6f2b917aa347f2eaf9edb">
-              glm::vec3 <a href="#ad867a6ed29f6f2b917aa347f2eaf9edb" class="m-doc-self">vec</a>
+            <dt id="a6cef89f1522dc7a2db494f7a4de8fdc7">
+              int <a href="#a6cef89f1522dc7a2db494f7a4de8fdc7" class="m-doc-self">numSplits</a>
             </dt>
-            <dd>Previous position of the entity.</dd>
+            <dd>Number of splits for PSSM/CSM.</dd>
+            <dt id="aa8c134b7fa73a09f811bced112cf6833">
+              std::vector&lt;float&gt; <a href="#aa8c134b7fa73a09f811bced112cf6833" class="m-doc-self">splitDistances</a>
+            </dt>
+            <dd>Distance of each split from 0 to 1.</dd>
+            <dt id="a12e056df2cb52217476345954e0f121c">
+              float <a href="#a12e056df2cb52217476345954e0f121c" class="m-doc-self">maxDistance</a>
+            </dt>
+            <dd>Max distance (if 0, uses camera zFar).</dd>
           </dl>
         </section>
       </div>
