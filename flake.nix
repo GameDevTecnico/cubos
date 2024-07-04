@@ -44,6 +44,9 @@
             glfw
             glm
             doctest
+
+            # = debug =
+            gdb
           ]
           ++ sysLibs;
 
