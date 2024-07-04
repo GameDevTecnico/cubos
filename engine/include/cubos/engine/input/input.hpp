@@ -152,9 +152,8 @@ namespace cubos::engine
             bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 
-        static bool anyPressed(const core::io::Window& window, const std::vector<core::io::Key>& keys);
-        bool anyPressed(int player, const std::vector<GamepadButton>& buttons) const;
-        bool anyPressed(const core::io::Window& window, const std::vector<MouseButton>& buttons);
+        bool anyPressed(int player, const core::io::Window& window,
+                        const std::vector<InputCombination>& combinations) const;
         void handleActions(const core::io::Window& window, const std::vector<BindingIndex>& boundActions);
         void handleAxes(const core::io::Window& window, const std::vector<BindingIndex>& boundAxes);
 
@@ -162,11 +161,13 @@ namespace cubos::engine
         std::unordered_map<int, int> mPlayerGamepads;
         std::unordered_map<int, core::io::GamepadState> mGamepadStates;
 
-        std::unordered_map<Key, std::vector<BindingIndex>> mBoundActions;
-        std::unordered_map<Key, std::vector<BindingIndex>> mBoundAxes;
-        std::unordered_map<GamepadButton, std::vector<BindingIndex>> mBoundGamepadActions;
+        std::unordered_map<Key, std::vector<BindingIndex>> mBoundKeyActions;
+        std::unordered_map<GamepadButton, std::vector<BindingIndex>> mBoundGamepadButtonActions;
+        std::unordered_map<MouseButton, std::vector<BindingIndex>> mBoundMouseButtonActions;
+        std::unordered_map<Key, std::vector<BindingIndex>> mBoundKeyAxes;
+        std::unordered_map<GamepadButton, std::vector<BindingIndex>> mBoundGamepadButtonAxes;
+        std::unordered_map<MouseButton, std::vector<BindingIndex>> mBoundMouseButtonAxes;
         std::unordered_map<GamepadAxis, std::vector<BindingIndex>> mBoundGamepadAxes;
-        std::unordered_map<MouseButton, std::vector<BindingIndex>> mBoundMouseActions;
 
         glm::ivec2 mMousePosition = {0, 0};
         glm::ivec2 mPreviousMousePosition = {0, 0};

@@ -22,7 +22,7 @@ static void charCallback(GLFWwindow* window, unsigned int codepoint);
 static void joystickCallback(int id, int event);
 static void updateMods(GLFWWindow* handler, int glfwMods);
 static MouseButton glfwToCubosMouseButton(int button);
-static int cubosToGlfwMouseButton(MouseButton key);
+static int cubosToGlfwMouseButton(MouseButton button);
 static Key glfwToCubosKey(int key);
 static int cubosToGlfwKey(Key key);
 
