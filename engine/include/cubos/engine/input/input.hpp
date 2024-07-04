@@ -154,14 +154,13 @@ namespace cubos::engine
 
         static bool anyPressed(const core::io::Window& window, const std::vector<core::io::Key>& keys);
         bool anyPressed(int player, const std::vector<GamepadButton>& buttons) const;
-        bool anyPressed(const std::vector<MouseButton>& buttons);
+        bool anyPressed(const core::io::Window& window, const std::vector<MouseButton>& buttons);
         void handleActions(const core::io::Window& window, const std::vector<BindingIndex>& boundActions);
         void handleAxes(const core::io::Window& window, const std::vector<BindingIndex>& boundAxes);
 
         std::unordered_map<int, InputBindings> mPlayerBindings;
         std::unordered_map<int, int> mPlayerGamepads;
         std::unordered_map<int, core::io::GamepadState> mGamepadStates;
-        std::unordered_map<MouseButton, bool> mPressedMouseButtons;
 
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundActions;
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundAxes;

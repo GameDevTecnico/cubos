@@ -22,6 +22,7 @@ static void charCallback(GLFWwindow* window, unsigned int codepoint);
 static void joystickCallback(int id, int event);
 static void updateMods(GLFWWindow* handler, int glfwMods);
 static MouseButton glfwToCubosMouseButton(int button);
+static int cubosToGlfwMouseButton(MouseButton key);
 static Key glfwToCubosKey(int key);
 static int cubosToGlfwKey(Key key);
 
@@ -344,6 +345,15 @@ bool GLFWWindow::pressed(Key key, Modifiers modifiers) const
 #endif
 }
 
+bool GLFWWindow::pressed(MouseButton button) const
+{
+#ifdef WITH_GLFW
+    return glfwGetMouseButton(mHandle, cubosToGlfwMouseButton(button)) == GLFW_PRESS;
+#else
+    UNSUPPORTED();
+#endif
+}
+
 Modifiers GLFWWindow::modifiers() const
 {
 #ifdef WITH_GLFW
@@ -495,6 +505,24 @@ static MouseButton glfwToCubosMouseButton(int button)
         MAP_BUTTON(5, Extra2)
     default:
         return MouseButton::Invalid;
+    }
+#undef MAP_BUTTON
+}
+
+static int cubosToGlfwMouseButton(MouseButton button)
+{
+#define MAP_BUTTON(cubos, glfw)                                                                                        \
+    case MouseButton::cubos:                                                                                           \
+        return GLFW_MOUSE_BUTTON_##glfw;
+    switch (button)
+    {
+        MAP_BUTTON(Left, LEFT)
+        MAP_BUTTON(Right, RIGHT)
+        MAP_BUTTON(Middle, MIDDLE)
+        MAP_BUTTON(Extra1, 4)
+        MAP_BUTTON(Extra2, 5)
+    default:
+        return GLFW_MOUSE_BUTTON_LAST;
     }
 #undef MAP_BUTTON
 }
