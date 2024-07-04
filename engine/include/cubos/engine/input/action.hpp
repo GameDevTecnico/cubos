@@ -34,7 +34,7 @@ namespace cubos::engine
         /// @param keys Key bindings.
         /// @param gamepadButtons Gamepad button bindings.
         /// @param mouseButtons Mouse button bindings.
-        InputAction(std::vector<core::io::KeyWithModifiers> keys, std::vector<core::io::GamepadButton> gamepadButtons,
+        InputAction(std::vector<core::io::Key> keys, std::vector<core::io::GamepadButton> gamepadButtons,
                     std::vector<core::io::MouseButton> mouseButtons)
             : mKeys(std::move(keys))
             , mGamepadButtons(std::move(gamepadButtons))
@@ -44,11 +44,11 @@ namespace cubos::engine
 
         /// @brief Gets the key bindings.
         /// @return Vector of keys.
-        const std::vector<core::io::KeyWithModifiers>& keys() const;
+        const std::vector<core::io::Key>& keys() const;
 
         /// @brief Gets the key bindings.
         /// @return Vector of keys.
-        std::vector<core::io::KeyWithModifiers>& keys();
+        std::vector<core::io::Key>& keys();
 
         /// @brief Gets the gamepad button bindings.
         /// @return Vector of buttons.
@@ -86,12 +86,12 @@ namespace cubos::engine
         /// @param justPressed Whether this action was just pressed.
         void justPressed(bool justPressed);
 
-        /// @brief Checks if this accion was just released.
+        /// @brief Checks if this action was just released.
         /// @param justReleased Whether this action was just released.
         void justReleased(bool justReleased);
 
     private:
-        std::vector<core::io::KeyWithModifiers> mKeys;
+        std::vector<core::io::Key> mKeys;
         std::vector<core::io::GamepadButton> mGamepadButtons;
         std::vector<core::io::MouseButton> mMouseButtons;
 

@@ -14,16 +14,6 @@
                 "Z"
             ]
         },
-        "shift-space": {
-            "keys": [
-                "Shift-Space"
-            ]
-        },
-        "ctrl-shift-space": {
-            "keys": [
-                "Control-Shift-Space"
-            ]
-        },
         "left-mb": {
             "mouseButtons": [
                 "Left"
@@ -72,17 +62,6 @@
             "gamepadAxes": [
                 "LX"
             ]
-        },
-        "shift-vertical": {
-            "positive": [
-                "Shift-W",
-                "Shift-Up"
-            ],
-            "negative": [
-                "Shift-S",
-                "Shift-Down"
-            ],
-            "gamepadAxes": []
         }
     }
 }

@@ -10,7 +10,7 @@
 #include <cubos/engine/input/axis.hpp>
 
 using cubos::core::io::GamepadAxis;
-using cubos::core::io::KeyWithModifiers;
+using cubos::core::io::Key;
 using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(cubos::engine::InputAxis)
@@ -23,12 +23,12 @@ CUBOS_REFLECT_IMPL(cubos::engine::InputAxis)
                   .withField("gamepadAxes", &InputAxis::mGamepadAxes));
 }
 
-const std::vector<KeyWithModifiers>& InputAxis::positive() const
+const std::vector<Key>& InputAxis::positive() const
 {
     return mPositive;
 }
 
-const std::vector<KeyWithModifiers>& InputAxis::negative() const
+const std::vector<Key>& InputAxis::negative() const
 {
     return mNegative;
 }
@@ -38,12 +38,12 @@ const std::vector<GamepadAxis>& InputAxis::gamepadAxes() const
     return mGamepadAxes;
 }
 
-std::vector<KeyWithModifiers>& InputAxis::positive()
+std::vector<Key>& InputAxis::positive()
 {
     return mPositive;
 }
 
-std::vector<KeyWithModifiers>& InputAxis::negative()
+std::vector<Key>& InputAxis::negative()
 {
     return mNegative;
 }
