@@ -5,7 +5,7 @@
 #include <cubos/engine/input/action.hpp>
 
 using cubos::core::io::GamepadButton;
-using cubos::core::io::KeyWithModifiers;
+using cubos::core::io::Key;
 using cubos::core::io::MouseButton;
 using namespace cubos::engine;
 
@@ -19,7 +19,7 @@ CUBOS_REFLECT_IMPL(cubos::engine::InputAction)
                   .withField("mouseButtons", &InputAction::mMouseButtons));
 }
 
-const std::vector<KeyWithModifiers>& InputAction::keys() const
+const std::vector<Key>& InputAction::keys() const
 {
     return mKeys;
 }
@@ -34,7 +34,7 @@ const std::vector<MouseButton>& InputAction::mouseButtons() const
     return mMouseButtons;
 }
 
-std::vector<KeyWithModifiers>& InputAction::keys()
+std::vector<Key>& InputAction::keys()
 {
     return mKeys;
 }

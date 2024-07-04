@@ -34,7 +34,7 @@ namespace cubos::engine
         /// @param positive Positive key bindings.
         /// @param negative Negative key bindings.
         /// @param gamepadAxes Gamepad axis bindings.
-        InputAxis(std::vector<core::io::KeyWithModifiers> positive, std::vector<core::io::KeyWithModifiers> negative,
+        InputAxis(std::vector<core::io::Key> positive, std::vector<core::io::Key> negative,
                   std::vector<core::io::GamepadAxis> gamepadAxes)
             : mPositive(std::move(positive))
             , mNegative(std::move(negative))
@@ -44,11 +44,11 @@ namespace cubos::engine
 
         /// @brief Gets the positive key bindings.
         /// @return Vector of positive keys.
-        const std::vector<core::io::KeyWithModifiers>& positive() const;
+        const std::vector<core::io::Key>& positive() const;
 
         /// @brief Gets the negative key bindings.
         /// @return Vector of negative keys.
-        const std::vector<core::io::KeyWithModifiers>& negative() const;
+        const std::vector<core::io::Key>& negative() const;
 
         /// @brief Gets the gamepad axis bindings.
         /// @return Vector of gamepad axes.
@@ -56,11 +56,11 @@ namespace cubos::engine
 
         /// @brief Gets the positive key bindings.
         /// @return Vector of positive keys.
-        std::vector<core::io::KeyWithModifiers>& positive();
+        std::vector<core::io::Key>& positive();
 
         /// @brief Gets the negative key bindings.
         /// @return Vector of negative keys.
-        std::vector<core::io::KeyWithModifiers>& negative();
+        std::vector<core::io::Key>& negative();
 
         /// @brief Gets the gamepad axis bindings.
         /// @return Vector of gamepad axes.
@@ -75,8 +75,8 @@ namespace cubos::engine
         void value(float value);
 
     private:
-        std::vector<core::io::KeyWithModifiers> mPositive;
-        std::vector<core::io::KeyWithModifiers> mNegative;
+        std::vector<core::io::Key> mPositive;
+        std::vector<core::io::Key> mNegative;
         std::vector<core::io::GamepadAxis> mGamepadAxes;
 
         float mValue{0.0F}; ///< Not serialized.

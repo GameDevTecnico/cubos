@@ -70,40 +70,6 @@ static void showcaseJustXZ(const Input& input, bool& explained)
 
 /// [Showcase Action Press]
 
-/// [Showcase Modifier]
-static void showcaseModifiers(const Input& input, bool& explained)
-{
-    if (!explained)
-    {
-        CUBOS_WARN("Modifiers are supported. This showcase will print `Shift` when Shift+Space is pressed. "
-                   "Press Enter to advance to the next showcase.");
-        explained = true;
-    }
-
-    if (input.pressed("shift-space"))
-    {
-        CUBOS_INFO("Shift");
-    }
-}
-/// [Showcase Modifier]
-
-/// [Showcase Multi Modifier]
-static void showcaseMultipleModifiers(const Input& input, bool& explained)
-{
-    if (!explained)
-    {
-        CUBOS_WARN("Multiple modifiers are supported. This showcase will print `Ctrl Shift` when Ctrl+Shift+Space is "
-                   "pressed. Press Enter to advance to the next showcase.");
-        explained = true;
-    }
-
-    if (input.pressed("ctrl-shift-space"))
-    {
-        CUBOS_INFO("Ctrl Shift");
-    }
-}
-/// [Showcase Multi Modifier]
-
 /// [Showcase Axis]
 static void showcaseAxis(const Input& input, bool& explained)
 {
@@ -122,36 +88,18 @@ static void showcaseAxis(const Input& input, bool& explained)
 }
 /// [Showcase Axis]
 
-/// [Showcase Modifier Axis]
-static void showcaseModifierAxis(const Input& input, bool& explained)
-{
-    if (!explained)
-    {
-        CUBOS_WARN("Modifiers are supported with axis. This showcase will print the value of the `shift-vertical` axis "
-                   "when its value is different to 0. Use Shift+arrows and Shift+WASD to move the axis. Press Enter to "
-                   "advance to the next showcase.");
-        explained = true;
-    }
-
-    if (input.axis("shift-vertical") != 0.0F)
-    {
-        CUBOS_INFO("shift-vertical: {}", input.axis("shift-vertical"));
-    }
-}
-/// [Showcase Modifier Axis]
-
 /// [Showcase Unbound]
 static void showcaseUnbound(const Window& window, bool& explained)
 {
     if (!explained)
     {
-        CUBOS_WARN("Direct access is supported. This showcase will print `Unbound` when Ctrl+Shift+Y is pressed. Note "
-                   "that Ctrl+Shift+Y is not bound in sample.bind. Press Enter to advance to the next showcase.");
+        CUBOS_WARN("Direct access is supported. This showcase will print `Unbound` when Y is pressed. Note "
+                   "that Y is not bound in sample.bind. Press Enter to advance to the next showcase.");
         explained = true;
     }
 
     /// When no action is bound to a key, its state can still be accessed directly through the Window.
-    if (window->pressed(Input::Key::Y, Input::Modifiers::Shift | Input::Modifiers::Control))
+    if (window->pressed(Input::Key::Y))
     {
         CUBOS_INFO("Unbound");
     }
@@ -240,16 +188,10 @@ int main()
             case 2:
                 return showcaseJustXZ(input, state.explained);
             case 3:
-                return showcaseModifiers(input, state.explained);
-            case 4:
-                return showcaseMultipleModifiers(input, state.explained);
-            case 5:
                 return showcaseAxis(input, state.explained);
-            case 6:
-                return showcaseModifierAxis(input, state.explained);
-            case 7:
+            case 4:
                 return showcaseUnbound(window, state.explained);
-            case 8:
+            case 5:
                 return showcaseMouseButtons(input, state.explained);
             default:
                 shouldQuit.value = true;
