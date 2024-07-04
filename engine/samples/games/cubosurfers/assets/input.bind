@@ -1,21 +1,15 @@
 {
     "actions": {
-        "left": {
-            "keys": [
-                "A",
-                "Left"
-            ]
-        },
-        "right": {
-            "keys": [
-                "D",
-                "Right"
-            ]
-        },
-        "restart": {
-            "keys": [
-                "R"
-            ]
-        }
+        "left": [
+            {"keys": ["A"]},
+            {"keys": ["Left"]}
+        ],
+        "right": [
+            {"keys": ["D"]},
+            {"keys": ["Right"]}
+        ],
+        "restart": [
+            {"keys": ["R"]}
+        ]
     }
 }

@@ -34,8 +34,8 @@ namespace cubos::engine
         /// @param keys Keys to be pressed.
         /// @param gamepadButtons Gamepad buttons to be pressed.
         /// @param mouseButtons Mouse buttons to be pressed.
-        InputCombination(std::vector<core::io::Key> keys, std::vector<core::io::GamepadButton> gamepadButtons,
-                         std::vector<core::io::MouseButton> mouseButtons)
+        InputCombination(std::vector<core::io::Key> keys, std::vector<core::io::GamepadButton> gamepadButtons = {},
+                         std::vector<core::io::MouseButton> mouseButtons = {})
             : mKeys(std::move(keys))
             , mGamepadButtons(std::move(gamepadButtons))
             , mMouseButtons(std::move(mouseButtons))
