@@ -9,6 +9,7 @@
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -19,6 +20,7 @@ using cubos::core::reflection::ConstructibleTrait;
 using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
 
@@ -115,6 +117,13 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
             return false;
         }
 
+        return true;
+    }
+
+    if (type.has<NullableTrait>() && mIterator->is_null())
+    {
+        const auto& trait = type.get<NullableTrait>();
+        trait.setToNull(value);
         return true;
     }
 
@@ -247,7 +256,7 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
 
         if (!mIterator->is_object())
         {
-            CUBOS_CRITICAL("Expected an object {}, found a {}", type.name(), mIterator->type_name());
+            CUBOS_WARN("Expected an object of type {}, found a {}", type.name(), mIterator->type_name());
             return false;
         }
 

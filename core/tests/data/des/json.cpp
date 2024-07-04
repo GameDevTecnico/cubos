@@ -12,6 +12,7 @@
 #include <cubos/core/reflection/traits/constructible_utils.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/nullable.hpp>
 
 #include "../utils.hpp"
 
@@ -20,6 +21,8 @@ using cubos::core::data::JSONDeserializer;
 using cubos::core::reflection::autoConstructibleTrait;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::NullableTrait;
+using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
 
 namespace
@@ -59,6 +62,15 @@ namespace
         Green,
         Blue
     };
+
+    struct Nullable
+    {
+        CUBOS_REFLECT;
+
+        bool operator==(const Nullable& /*unused*/) const = default;
+
+        uint32_t value;
+    };
 } // namespace
 
 CUBOS_REFLECT_IMPL(NonConstructible)
@@ -81,6 +93,15 @@ CUBOS_REFLECT_EXTERNAL_IMPL(Color)
 {
     return Type::create("Color").with(
         EnumTrait{}.withVariant<Color::Red>("Red").withVariant<Color::Green>("Green").withVariant<Color::Blue>("Blue"));
+}
+
+CUBOS_REFLECT_IMPL(Nullable)
+{
+    return Type::create("Nullable")
+        .with(FieldsTrait{}.withField("value", &Nullable::value))
+        .with(NullableTrait{
+            [](const void* instance) -> bool { return static_cast<const Nullable*>(instance)->value == UINT32_MAX; },
+            [](void* instance) { static_cast<Nullable*>(instance)->value = UINT32_MAX; }});
 }
 
 #define AUTO_EXISTING(json, initial, expected)                                                                         \
@@ -169,5 +190,13 @@ TEST_CASE("data::JSONDeserializer")
     AUTO_EXISTING((Json::array({1, 2, 3})), (std::vector<int>{4, 3, 2, 1}), (std::vector<int>{1, 2, 3}));
     AUTO_SUCCESS((Json::array({1, 2, 3})), (std::vector<int>{1, 2, 3}));
     AUTO_FAILURE((Json::array({1, 2, "3"})), std::vector<int>);
+
+    const auto& nullable = reflect<Nullable>();
+    const auto& nullableTrait = nullable.get<NullableTrait>();
+    Nullable null{144};
+    AUTO_SUCCESS(144, null);
+
+    nullableTrait.setToNull(&null);
+    AUTO_SUCCESS(nlohmann::json::value_t::null, null);
 }
 // NOLINTEND(readability-function-size)
