@@ -69,6 +69,39 @@ static void showcaseJustXZ(const Input& input, bool& explained)
 }
 
 /// [Showcase Action Press]
+/// [Showcase Modifier]
+static void showcaseModifiers(const Input& input, bool& explained)
+{
+    if (!explained)
+    {
+        CUBOS_WARN("Modifiers are supported. This showcase will print `Shift` when Shift+Space is pressed. "
+                   "Press Enter to advance to the next showcase.");
+        explained = true;
+    }
+
+    if (input.pressed("shift-space"))
+    {
+        CUBOS_INFO("Shift");
+    }
+}
+/// [Showcase Modifier]
+
+/// [Showcase Multi Modifier]
+static void showcaseMultipleModifiers(const Input& input, bool& explained)
+{
+    if (!explained)
+    {
+        CUBOS_WARN("Multiple modifiers are supported. This showcase will print `Ctrl Shift` when Ctrl+Shift+Space is "
+                   "pressed. Press Enter to advance to the next showcase.");
+        explained = true;
+    }
+
+    if (input.pressed("ctrl-shift-space"))
+    {
+        CUBOS_INFO("Ctrl Shift");
+    }
+}
+/// [Showcase Multi Modifier]
 
 /// [Showcase Axis]
 static void showcaseAxis(const Input& input, bool& explained)
@@ -87,6 +120,25 @@ static void showcaseAxis(const Input& input, bool& explained)
     }
 }
 /// [Showcase Axis]
+
+/// [Showcase Modifier Axis]
+static void showcaseModifierAxis(const Input& input, bool& explained)
+{
+    if (!explained)
+    {
+        CUBOS_WARN("Modifiers are supported with axis. This showcase will print the value of the `shift-vertical` axis "
+                   "when its value is different to 0. Use Shift+arrows and Shift+WASD to move the axis. Press Enter to "
+                   "advance to the next showcase.");
+        explained = true;
+    }
+
+    if (input.axis("shift-horizontal") != 0.0F || input.axis("shift-vertical") != 0.0F)
+    {
+        CUBOS_INFO("shift-horizontal: {}, shift-vertical: {}", input.axis("shift-horizontal"),
+                   input.axis("shift-vertical"));
+    }
+}
+/// [Showcase Modifier Axis]
 
 /// [Showcase Unbound]
 static void showcaseUnbound(const Window& window, bool& explained)
@@ -166,14 +218,8 @@ int main()
     cubos.system("detect input")
         .after(inputUpdateTag)
         .call([](const Input& input, const Window& window, State& state, ShouldQuit& shouldQuit) {
-            // FIXME: This is an hack to have one-shot actions while we don't have input events.
-            if (input.pressed("next-showcase"))
+            if (input.justPressed("next-showcase"))
             {
-                state.nextPressed = true;
-            }
-            else if (state.nextPressed)
-            {
-                state.nextPressed = false;
                 state.explained = false;
                 state.showcase++;
             }
@@ -188,10 +234,16 @@ int main()
             case 2:
                 return showcaseJustXZ(input, state.explained);
             case 3:
-                return showcaseAxis(input, state.explained);
+                return showcaseModifiers(input, state.explained);
             case 4:
-                return showcaseUnbound(window, state.explained);
+                return showcaseMultipleModifiers(input, state.explained);
             case 5:
+                return showcaseAxis(input, state.explained);
+            case 6:
+                return showcaseModifierAxis(input, state.explained);
+            case 7:
+                return showcaseUnbound(window, state.explained);
+            case 8:
                 return showcaseMouseButtons(input, state.explained);
             default:
                 shouldQuit.value = true;

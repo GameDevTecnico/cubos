@@ -7,10 +7,10 @@
 #include <vector>
 
 #include <cubos/core/io/gamepad.hpp>
-#include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/api.hpp>
+#include <cubos/engine/input/combination.hpp>
 
 namespace cubos::engine
 {
@@ -34,7 +34,7 @@ namespace cubos::engine
         /// @param positive Positive key bindings.
         /// @param negative Negative key bindings.
         /// @param gamepadAxes Gamepad axis bindings.
-        InputAxis(std::vector<core::io::Key> positive, std::vector<core::io::Key> negative,
+        InputAxis(std::vector<InputCombination> positive, std::vector<InputCombination> negative,
                   std::vector<core::io::GamepadAxis> gamepadAxes)
             : mPositive(std::move(positive))
             , mNegative(std::move(negative))
@@ -44,11 +44,11 @@ namespace cubos::engine
 
         /// @brief Gets the positive key bindings.
         /// @return Vector of positive keys.
-        const std::vector<core::io::Key>& positive() const;
+        const std::vector<InputCombination>& positive() const;
 
         /// @brief Gets the negative key bindings.
         /// @return Vector of negative keys.
-        const std::vector<core::io::Key>& negative() const;
+        const std::vector<InputCombination>& negative() const;
 
         /// @brief Gets the gamepad axis bindings.
         /// @return Vector of gamepad axes.
@@ -56,11 +56,11 @@ namespace cubos::engine
 
         /// @brief Gets the positive key bindings.
         /// @return Vector of positive keys.
-        std::vector<core::io::Key>& positive();
+        std::vector<InputCombination>& positive();
 
         /// @brief Gets the negative key bindings.
         /// @return Vector of negative keys.
-        std::vector<core::io::Key>& negative();
+        std::vector<InputCombination>& negative();
 
         /// @brief Gets the gamepad axis bindings.
         /// @return Vector of gamepad axes.
@@ -75,8 +75,8 @@ namespace cubos::engine
         void value(float value);
 
     private:
-        std::vector<core::io::Key> mPositive;
-        std::vector<core::io::Key> mNegative;
+        std::vector<InputCombination> mPositive;
+        std::vector<InputCombination> mNegative;
         std::vector<core::io::GamepadAxis> mGamepadAxes;
 
         float mValue{0.0F}; ///< Not serialized.

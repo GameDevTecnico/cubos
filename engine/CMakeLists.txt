@@ -85,6 +85,7 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/input/plugin.cpp"
 	"src/input/input.cpp"
+	"src/input/combination.cpp"
 	"src/input/bindings.cpp"
 	"src/input/action.cpp"
 	"src/input/axis.cpp"

@@ -1,50 +1,46 @@
 {
     "actions": {
-        "next-showcase": {
-            "keys": [
-                "Return"
-            ],
-            "gamepadButtons": [
-                "RBumper"
-            ]
-        },
-        "x-or-z": {
-            "keys": [
-                "X",
-                "Z"
-            ]
-        },
-        "left-mb": {
-            "mouseButtons": [
-                "Left"
-            ]
-        },
-        "right-mb": {
-            "mouseButtons": [
-                "Right"
-            ]
-        },
-        "middle-mb": {
-            "mouseButtons": [
-                "Middle"
-            ]
-        },
-        "extra-mb": {
-            "mouseButtons": [
-                "Extra1",
-                "Extra2"
-            ]
-        }
+        "next-showcase": [
+            {"keys": ["Return"]},
+            {"gamepadButtons": ["RBumper"]}
+        ],
+        "x-or-z": [
+            {"keys": ["X"]},
+            {"keys": ["Z"]}
+        ],
+        "shift-space": [
+            {"keys": ["LShift", "Space"]},
+            {"keys": ["RShift", "Space"]}
+        ],
+        "ctrl-shift-space": [
+            {"keys": ["LControl", "LShift", "Space"]},
+            {"keys": ["LControl", "RShift", "Space"]},
+            {"keys": ["RControl", "LShift", "Space"]},
+            {"keys": ["RControl", "RShift", "Space"]}
+        ],
+        "left-mb": [
+            {"mouseButtons": ["Left"]}
+        ],
+        "right-mb": [
+            {"mouseButtons": ["Right"]}
+        ],
+        "middle-mb": [
+            {"mouseButtons": ["Middle"]}
+        ],
+        "extra-mb": [
+            {"mouseButtons": ["Extra1"]},
+            {"mouseButtons": ["Extra2"]}
+        ]
     },
     "axes": {
         "vertical": {
             "positive": [
-                "W",
-                "Up"
+                {"keys": ["W"]},
+                {"keys": ["Up"]}
             ],
             "negative": [
-                "S",
-                "Down"
+                {"keys": ["S"]},
+                {"keys": ["Down"]}
             ],
             "gamepadAxes": [
                 "LY"
@@ -52,15 +48,43 @@
         },
         "horizontal": {
             "positive": [
-                "D",
-                "Right"
+                {"keys": ["D"]},
+                {"keys": ["Right"]}
             ],
             "negative": [
-                "A",
-                "Left"
+                {"keys": ["A"]},
+                {"keys": ["Left"]}
             ],
             "gamepadAxes": [
                 "LX"
+            ]
+        },
+        "shift-vertical": {
+            "positive": [
+                {"keys": ["LShift", "W"]},
+                {"keys": ["LShift", "Up"]},
+                {"keys": ["RShift", "W"]},
+                {"keys": ["RShift", "Up"]}
+            ],
+            "negative": [
+                {"keys": ["LShift", "S"]},
+                {"keys": ["LShift", "Down"]},
+                {"keys": ["RShift", "S"]},
+                {"keys": ["RShift", "Down"]}
+            ]
+        },
+        "shift-horizontal": {
+            "positive": [
+                {"keys": ["LShift", "D"]},
+                {"keys": ["LShift", "Right"]},
+                {"keys": ["RShift", "D"]},
+                {"keys": ["RShift", "Right"]}
+            ],
+            "negative": [
+                {"keys": ["LShift", "A"]},
+                {"keys": ["LShift", "Left"]},
+                {"keys": ["RShift", "A"]},
+                {"keys": ["RShift", "Left"]}
             ]
         }
     }

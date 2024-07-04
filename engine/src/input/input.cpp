@@ -24,9 +24,14 @@ CUBOS_REFLECT_IMPL(Input)
 
 void Input::clear()
 {
-    mBoundActions.clear();
-    mBoundAxes.clear();
-    mBoundMouseActions.clear();
+    mBoundKeyActions.clear();
+    mBoundGamepadButtonActions.clear();
+    mBoundMouseButtonActions.clear();
+    mBoundKeyAxes.clear();
+    mBoundMouseButtonAxes.clear();
+    mBoundGamepadButtonAxes.clear();
+    mBoundGamepadAxes.clear();
+
     mPlayerBindings.clear();
     CUBOS_DEBUG("Input bindings cleared");
 }
@@ -35,19 +40,24 @@ void Input::clear(int player)
 {
     for (const auto& action : mPlayerBindings[player].actions())
     {
-        for (const auto& key : action.second.keys())
+        for (const auto& combo : action.second.combinations())
         {
-            std::erase_if(mBoundActions[key], [player](const auto& idx) { return idx.player == player; });
-        }
+            for (const auto& key : combo.keys())
+            {
+                std::erase_if(mBoundKeyActions[key], [player](const auto& idx) { return idx.player == player; });
+            }
 
-        for (const auto& button : action.second.gamepadButtons())
-        {
-            std::erase_if(mBoundGamepadActions[button], [player](const auto& idx) { return idx.player == player; });
-        }
+            for (const auto& button : combo.gamepadButtons())
+            {
+                std::erase_if(mBoundGamepadButtonActions[button],
+                              [player](const auto& idx) { return idx.player == player; });
+            }
 
-        for (const auto& button : action.second.mouseButtons())
-        {
-            std::erase_if(mBoundMouseActions[button], [player](const auto& idx) { return idx.player == player; });
+            for (const auto& button : combo.mouseButtons())
+            {
+                std::erase_if(mBoundMouseButtonActions[button],
+                              [player](const auto& idx) { return idx.player == player; });
+            }
         }
     }
 
@@ -55,12 +65,42 @@ void Input::clear(int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            std::erase_if(mBoundAxes[pos], [player](const auto& idx) { return idx.player == player; });
+            for (const auto& key : pos.keys())
+            {
+                std::erase_if(mBoundKeyAxes[key], [player](const auto& idx) { return idx.player == player; });
+            }
+
+            for (const auto& button : pos.mouseButtons())
+            {
+                std::erase_if(mBoundMouseButtonAxes[button],
+                              [player](const auto& idx) { return idx.player == player; });
+            }
+
+            for (const auto& button : pos.gamepadButtons())
+            {
+                std::erase_if(mBoundGamepadButtonActions[button],
+                              [player](const auto& idx) { return idx.player == player; });
+            }
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            std::erase_if(mBoundAxes[neg], [player](const auto& idx) { return idx.player == player; });
+            for (const auto& key : neg.keys())
+            {
+                std::erase_if(mBoundKeyAxes[key], [player](const auto& idx) { return idx.player == player; });
+            }
+
+            for (const auto& button : neg.mouseButtons())
+            {
+                std::erase_if(mBoundMouseButtonAxes[button],
+                              [player](const auto& idx) { return idx.player == player; });
+            }
+
+            for (const auto& button : neg.gamepadButtons())
+            {
+                std::erase_if(mBoundGamepadButtonAxes[button],
+                              [player](const auto& idx) { return idx.player == player; });
+            }
         }
 
         for (const auto& gamepadAxis : axis.second.gamepadAxes())
@@ -79,19 +119,22 @@ void Input::bind(const InputBindings& bindings, int player)
 
     for (const auto& action : bindings.actions())
     {
-        for (const auto& key : action.second.keys())
+        for (const auto& combo : action.second.combinations())
         {
-            mBoundActions[key].push_back(BindingIndex{action.first, player});
-        }
+            for (const auto& key : combo.keys())
+            {
+                mBoundKeyActions[key].push_back(BindingIndex{action.first, player});
+            }
 
-        for (const auto& button : action.second.gamepadButtons())
-        {
-            mBoundGamepadActions[button].push_back(BindingIndex{action.first, player});
-        }
+            for (const auto& button : combo.gamepadButtons())
+            {
+                mBoundGamepadButtonActions[button].push_back(BindingIndex{action.first, player});
+            }
 
-        for (const auto& button : action.second.mouseButtons())
-        {
-            mBoundMouseActions[button].push_back(BindingIndex{action.first, player});
+            for (const auto& button : combo.mouseButtons())
+            {
+                mBoundMouseButtonActions[button].push_back(BindingIndex{action.first, player});
+            }
         }
     }
 
@@ -99,12 +142,38 @@ void Input::bind(const InputBindings& bindings, int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            mBoundAxes[pos].push_back(BindingIndex{axis.first, player, false});
+            for (const auto& key : pos.keys())
+            {
+                mBoundKeyAxes[key].push_back(BindingIndex{axis.first, player, false});
+            }
+
+            for (const auto& button : pos.mouseButtons())
+            {
+                mBoundMouseButtonAxes[button].push_back(BindingIndex{axis.first, player});
+            }
+
+            for (const auto& button : pos.gamepadButtons())
+            {
+                mBoundGamepadButtonActions[button].push_back(BindingIndex{axis.first, player});
+            }
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            mBoundAxes[neg].push_back(BindingIndex{axis.first, player, true});
+            for (const auto& key : neg.keys())
+            {
+                mBoundKeyAxes[key].push_back(BindingIndex{axis.first, player, true});
+            }
+
+            for (const auto& button : neg.mouseButtons())
+            {
+                mBoundMouseButtonAxes[button].push_back(BindingIndex{axis.first, player});
+            }
+
+            for (const auto& button : neg.gamepadButtons())
+            {
+                mBoundGamepadButtonAxes[button].push_back(BindingIndex{axis.first, player});
+            }
         }
 
         for (const auto& gamepadAxis : axis.second.gamepadAxes())
@@ -222,42 +291,18 @@ float Input::axis(const char* axisName, int player) const
     return aIt->second.value();
 }
 
-bool Input::anyPressed(const Window& window, const std::vector<core::io::Key>& keys)
+bool Input::anyPressed(int player, const Window& window, const std::vector<InputCombination>& combinations) const
 {
-    for (const auto& key : keys)
-    {
-        if (window->pressed(key))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Input::anyPressed(int player, const std::vector<GamepadButton>& buttons) const
-{
+    GamepadState state;
     auto it = mPlayerGamepads.find(player);
-    if (it == mPlayerGamepads.end())
+    if (it != mPlayerGamepads.end())
     {
-        return false;
+        state = mGamepadStates.at(it->second);
     }
-    const auto& state = mGamepadStates.at(it->second);
 
-    for (const auto& button : buttons)
+    for (const auto& combo : combinations)
     {
-        if (state.pressed(button))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Input::anyPressed(const Window& window, const std::vector<MouseButton>& buttons)
-{
-    for (const auto& button : buttons)
-    {
-        if (window->pressed(button))
+        if (combo.pressed(window, it != mPlayerGamepads.end() ? &state : nullptr))
         {
             return true;
         }
@@ -270,8 +315,7 @@ void Input::handleActions(const Window& window, const std::vector<BindingIndex>&
     for (const auto& boundAction : boundActions)
     {
         auto& action = mPlayerBindings[boundAction.player].actions()[boundAction.name];
-        auto pressed = anyPressed(window, action.keys()) || anyPressed(boundAction.player, action.gamepadButtons()) ||
-                       anyPressed(window, action.mouseButtons());
+        auto pressed = anyPressed(boundAction.player, window, action.combinations());
 
         if (action.pressed() != pressed)
         {
@@ -299,11 +343,11 @@ void Input::handleAxes(const Window& window, const std::vector<BindingIndex>& bo
         auto& axis = mPlayerBindings[boundAxis.player].axes()[boundAxis.name];
 
         float value = 0.0F;
-        if (anyPressed(window, axis.negative()))
+        if (anyPressed(boundAxis.player, window, axis.negative()))
         {
             value -= 1.0F;
         }
-        if (anyPressed(window, axis.positive()))
+        if (anyPressed(boundAxis.player, window, axis.positive()))
         {
             value += 1.0F;
         }
@@ -325,8 +369,8 @@ void Input::handleAxes(const Window& window, const std::vector<BindingIndex>& bo
 
 void Input::handle(const Window& window, const KeyEvent& event)
 {
-    this->handleActions(window, mBoundActions[event.key]);
-    this->handleAxes(window, mBoundAxes[event.key]);
+    this->handleActions(window, mBoundKeyActions[event.key]);
+    this->handleAxes(window, mBoundKeyAxes[event.key]);
 }
 
 void Input::handle(const Window& /*unused*/, const GamepadConnectionEvent& event)
@@ -361,7 +405,7 @@ void Input::handle(const Window& /*unused*/, const GamepadConnectionEvent& event
 
 void Input::handle(const Window& window, const MouseButtonEvent& event)
 {
-    this->handleActions(window, mBoundMouseActions[event.button]);
+    this->handleActions(window, mBoundMouseButtonActions[event.button]);
 }
 
 void Input::handle(const Window& /*unused*/, const MouseMoveEvent& event)
@@ -417,7 +461,7 @@ void Input::pollGamepads(const Window& window)
         {
             if (state.buttons[i] != oldState.buttons[i])
             {
-                this->handleActions(window, mBoundGamepadActions[static_cast<GamepadButton>(i)]);
+                this->handleActions(window, mBoundGamepadButtonActions[static_cast<GamepadButton>(i)]);
             }
         }
 

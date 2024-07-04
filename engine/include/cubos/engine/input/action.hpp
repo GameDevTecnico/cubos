@@ -6,18 +6,16 @@
 
 #include <vector>
 
-#include <cubos/core/io/gamepad.hpp>
-#include <cubos/core/io/keyboard.hpp>
-#include <cubos/core/io/window.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/api.hpp>
+#include <cubos/engine/input/combination.hpp>
 
 namespace cubos::engine
 {
     /// @brief Stores the state of a single input action, such as "jump" or "attack".
     ///
-    /// Can be bound to multiple keys, and will be considered "pressed" if any of them are pressed.
+    /// Can be bound to multiple key combinations, and will be considered "pressed" if any of them are pressed.
     ///
     /// @ingroup input-plugin
     class CUBOS_ENGINE_API InputAction final
@@ -31,40 +29,19 @@ namespace cubos::engine
         InputAction() = default;
 
         /// @brief Constructs with existing bindings.
-        /// @param keys Key bindings.
-        /// @param gamepadButtons Gamepad button bindings.
-        /// @param mouseButtons Mouse button bindings.
-        InputAction(std::vector<core::io::Key> keys, std::vector<core::io::GamepadButton> gamepadButtons,
-                    std::vector<core::io::MouseButton> mouseButtons)
-            : mKeys(std::move(keys))
-            , mGamepadButtons(std::move(gamepadButtons))
-            , mMouseButtons(std::move(mouseButtons))
+        /// @param combinations Combinations to bind.
+        InputAction(std::vector<InputCombination> combinations)
+            : mCombinations(std::move(combinations))
         {
         }
 
-        /// @brief Gets the key bindings.
-        /// @return Vector of keys.
-        const std::vector<core::io::Key>& keys() const;
+        /// @brief Gets the bound combinations.
+        /// @return Vector of combinations.
+        const std::vector<InputCombination>& combinations() const;
 
-        /// @brief Gets the key bindings.
-        /// @return Vector of keys.
-        std::vector<core::io::Key>& keys();
-
-        /// @brief Gets the gamepad button bindings.
-        /// @return Vector of buttons.
-        const std::vector<core::io::GamepadButton>& gamepadButtons() const;
-
-        /// @brief Gets the gamepad button bindings.
-        /// @return Vector of buttons.
-        std::vector<core::io::GamepadButton>& gamepadButtons();
-
-        /// @brief Gets the mouse button bindings.
-        /// @return Vector of buttons.
-        const std::vector<core::io::MouseButton>& mouseButtons() const;
-
-        /// @brief Gets the mouse button bindings.
-        /// @return Vector of buttons.
-        std::vector<core::io::MouseButton>& mouseButtons();
+        /// @brief Gets the bound combinations.
+        /// @return Vector of combinations.
+        std::vector<InputCombination>& combinations();
 
         /// @brief Checks if this action is pressed.
         /// @return Whether this action is pressed.
@@ -91,9 +68,7 @@ namespace cubos::engine
         void justReleased(bool justReleased);
 
     private:
-        std::vector<core::io::Key> mKeys;
-        std::vector<core::io::GamepadButton> mGamepadButtons;
-        std::vector<core::io::MouseButton> mMouseButtons;
+        std::vector<InputCombination> mCombinations;
 
         bool mPressed;      ///< Not serialized.
         bool mJustPressed;  ///< Not serialized.
