@@ -325,12 +325,10 @@ void Input::handleActions(const Window& window, const std::vector<BindingIndex>&
             if (pressed)
             {
                 action.justPressed(true);
-                action.justReleased(false);
             }
             else
             {
                 action.justReleased(true);
-                action.justPressed(false);
             }
         }
     }
