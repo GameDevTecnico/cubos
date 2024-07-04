@@ -4,6 +4,7 @@
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>
+#include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
@@ -11,6 +12,7 @@
 using cubos::core::data::DebugSerializer;
 using cubos::core::reflection::ArrayTrait;
 using cubos::core::reflection::DictionaryTrait;
+using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
@@ -135,6 +137,13 @@ bool DebugSerializer::decompose(const Type& type, const void* value)
         mLevel -= 1;
         this->separate(true);
         mStream.put(']');
+    }
+    else if (type.has<EnumTrait>())
+    {
+        const auto& trait = type.get<EnumTrait>();
+        mStream.put('"');
+        mStream.print(trait.variant(value).name());
+        mStream.put('"');
     }
     else if (type.has<FieldsTrait>())
     {
