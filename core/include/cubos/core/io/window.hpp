@@ -246,6 +246,11 @@ namespace cubos::core::io
         /// @return Whether the key and modifiers (or a superset of) are currently pressed.
         virtual bool pressed(Key key, Modifiers modifiers = Modifiers::None) const = 0;
 
+        /// @brief Checks if a mouse button is currently pressed.
+        /// @param button Mouse button to check.
+        /// @return Whether the mouse button is currently pressed.
+        virtual bool pressed(MouseButton button) const = 0;
+
         /// @brief Gets the state of the specified gamepad.
         /// @param gamepad Gamepad to get the state of.
         /// @param state State to fill with the gamepad state.

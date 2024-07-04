@@ -253,11 +253,11 @@ bool Input::anyPressed(int player, const std::vector<GamepadButton>& buttons) co
     return false;
 }
 
-bool Input::anyPressed(const std::vector<MouseButton>& buttons)
+bool Input::anyPressed(const Window& window, const std::vector<MouseButton>& buttons)
 {
     for (const auto& button : buttons)
     {
-        if (mPressedMouseButtons[button])
+        if (window->pressed(button))
         {
             return true;
         }
@@ -271,7 +271,7 @@ void Input::handleActions(const Window& window, const std::vector<BindingIndex>&
     {
         auto& action = mPlayerBindings[boundAction.player].actions()[boundAction.name];
         auto pressed = anyPressed(window, action.keys()) || anyPressed(boundAction.player, action.gamepadButtons()) ||
-                       anyPressed(action.mouseButtons());
+                       anyPressed(window, action.mouseButtons());
 
         if (action.pressed() != pressed)
         {
@@ -361,7 +361,6 @@ void Input::handle(const Window& /*unused*/, const GamepadConnectionEvent& event
 
 void Input::handle(const Window& window, const MouseButtonEvent& event)
 {
-    mPressedMouseButtons[event.button] = event.pressed;
     this->handleActions(window, mBoundMouseActions[event.button]);
 }
 
