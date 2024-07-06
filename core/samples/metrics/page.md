@@ -4,7 +4,7 @@
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/metrics).
 
-Registering metrics and profiling in **CUBOS.** can be done through the metric macros defined in @ref core/metrics.hpp and the @ref core::Metrics class.
+Registering metrics and profiling in **Cubos** can be done through the metric macros defined in @ref core/metrics.hpp and the @ref core::Metrics class.
 In order to enable these features, compile with `-DENABLE_PROFILING`.
 
 @snippet metrics/main.cpp Import metrics
