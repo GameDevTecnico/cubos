@@ -1,6 +1,6 @@
 DOXYFILE = 'Doxyfile'
 
-MAIN_PROJECT_URL = 'https://docs.cubosengine.org'
+MAIN_PROJECT_URL = 'https://cubosengine.org'
 
 LINKS_NAVBAR1 = [
     (None, 'pages', []),
