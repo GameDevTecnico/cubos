@@ -43,4 +43,4 @@ jobs:
       uses: rossjrw/pr-preview-action@v1
       with:
         source-dir: ${{github.workspace}}/build/docs/doxygen/html
-        umbrella-dir: docs-preview
+        umbrella-dir: preview
