@@ -11,7 +11,6 @@
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/asset.hpp>
-#include <cubos/engine/collisions/octree.hpp>
 #include <cubos/engine/voxels/grid.hpp>
 
 namespace cubos::engine

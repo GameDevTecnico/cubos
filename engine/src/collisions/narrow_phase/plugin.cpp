@@ -3,7 +3,6 @@
 #include <cubos/core/geom/intersections.hpp>
 
 #include <cubos/engine/collisions/collider.hpp>
-#include <cubos/engine/collisions/octree.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/voxel.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>

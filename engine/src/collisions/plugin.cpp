@@ -184,6 +184,7 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
                             box.halfSize = boxCenter;
                             glm::vec3 shift = center - boxCenter;
                             shape.insertBox(box, shift);
+                            CUBOS_WARN("inserted pair");
                             currentMin = currentCoords;
                             possibleSize = glm::uvec3(0);
                         }

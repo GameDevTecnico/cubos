@@ -63,7 +63,6 @@ set(CUBOS_ENGINE_SOURCE
 	"src/collisions/interface/plugin.cpp"
 	"src/collisions/interface/collider.cpp"
 	"src/collisions/interface/colliding_with.cpp"
-	"src/collisions/interface/octree.cpp"
 	"src/collisions/interface/shapes/box.cpp"
 	"src/collisions/interface/shapes/capsule.cpp"
 	"src/collisions/interface/shapes/voxel.cpp"
