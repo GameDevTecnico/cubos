@@ -19,6 +19,20 @@ CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintSolveRelaxTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintRestitutionTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintCleanTag);
 
+void getPlaneSpace(const glm::vec3& n, glm::vec3& tangent1, glm::vec3& tangent2)
+{
+    if (glm::abs(n.z) > (1.0F / glm::sqrt(2.0F)))
+    {
+        tangent1 = glm::normalize(glm::vec3(0.0F, -n.z, n.y));
+        tangent2 = glm::cross(n, tangent1);
+    }
+    else
+    {
+        tangent1 = glm::normalize(glm::vec3(-n.y, n.x, 0.0F));
+        tangent2 = glm::cross(n, tangent1);
+    }
+}
+
 void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection&, Velocity&, PenetrationConstraint&,
                                       Entity, const Mass&, AccumulatedCorrection&, Velocity&>
                                     query,
@@ -39,16 +53,14 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
             // compute current penetration
             float penetration = -constraint.penetration;
 
-            if (ent1 == constraint.entity)
+            glm::vec3 deltaPenetration = correction2.position - correction1.position;
+
+            if (ent1 != constraint.entity)
             {
-                glm::vec3 deltaPenetration = correction2.position - correction1.position;
-                penetration += glm::dot(deltaPenetration, constraint.normal);
+                deltaPenetration *= -1.0F;
             }
-            else
-            {
-                glm::vec3 deltaPenetration = correction1.position - correction2.position;
-                penetration += glm::dot(deltaPenetration, constraint.normal);
-            }
+
+            penetration += glm::dot(deltaPenetration, constraint.normal);
 
             float bias = 0.0F;
             float massScale = 1.0F;
@@ -65,20 +77,14 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
             }
 
             // Relative velocity at contact
-            glm::vec3 vr2;
-            glm::vec3 vr1;
-            if (ent1 == constraint.entity)
+            glm::vec3 vr = velocity2.vec - velocity1.vec;
+
+            if (ent1 != constraint.entity)
             {
-                vr2 = velocity2.vec;
-                vr1 = velocity1.vec;
-            }
-            else
-            {
-                vr2 = velocity1.vec;
-                vr1 = velocity2.vec;
+                vr *= -1.0F;
             }
 
-            float vn = glm::dot(vr2 - vr1, constraint.normal);
+            float vn = glm::dot(vr, constraint.normal);
 
             // Compute normal impulse
             float impulse = -constraint.normalMass * massScale * (vn + bias) - impulseScale * totalImpulse;
@@ -88,17 +94,15 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
             impulse = newImpulse - totalImpulse;
             constraint.normalImpulse = newImpulse;
 
-            glm::vec3 p = constraint.normal * impulse;
-            if (ent1 == constraint.entity)
+            glm::vec3 p = impulse * constraint.normal;
+
+            if (ent1 != constraint.entity)
             {
-                v1 = velocity1.vec - p * mass1.inverseMass;
-                v2 = velocity2.vec + p * mass2.inverseMass;
+                p *= -1.0F;
             }
-            else
-            {
-                v1 = velocity1.vec + p * mass1.inverseMass;
-                v2 = velocity2.vec - p * mass2.inverseMass;
-            }
+
+            v1 = velocity1.vec - p * mass1.inverseMass;
+            v2 = velocity2.vec + p * mass2.inverseMass;
         }
 
         // Friction
@@ -109,58 +113,54 @@ void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection
             float frictionImpulse2 = constraint.frictionImpulse2;
 
             // Relative velocity at contact
-            glm::vec3 vr2;
-            glm::vec3 vr1;
-            if (ent1 == constraint.entity)
+            glm::vec3 vr = velocity2.vec - velocity1.vec;
+
+            if (ent1 != constraint.entity)
             {
-                vr2 = velocity2.vec;
-                vr1 = velocity1.vec;
-            }
-            else
-            {
-                vr2 = velocity1.vec;
-                vr1 = velocity2.vec;
+                vr *= -1.0F;
             }
 
-            glm::vec3 vr = vr2 - vr1;
             glm::vec3 tangent1 = vr - glm::dot(vr, constraint.normal) * constraint.normal;
             glm::vec3 tangent2;
             float tangentLenSq = glm::length2(tangent1);
-            if (tangentLenSq > 1e-6)
+            if (tangentLenSq > 1e-6 * 1e-6)
             {
                 tangent1 = glm::normalize(tangent1);
                 tangent2 = glm::cross(constraint.normal, tangent1);
-
-                float vn1 = glm::dot(vr, tangent1);
-                float vn2 = glm::dot(vr, tangent2);
-
-                // Compute friction force
-                float impulse1 = -constraint.frictionMass * vn1;
-                float impulse2 = -constraint.frictionMass * vn2;
-
-                // Clamp the accumulated force
-                float maxFriction = constraint.friction * normalImpulse;
-                float newImpulse1 = glm::clamp(frictionImpulse1 + impulse1, -maxFriction, maxFriction);
-                float newImpulse2 = glm::clamp(frictionImpulse2 + impulse2, -maxFriction, maxFriction);
-                impulse1 = newImpulse1 - frictionImpulse1;
-                impulse2 = newImpulse2 - frictionImpulse2;
-                constraint.frictionImpulse1 = newImpulse1;
-                constraint.frictionImpulse2 = newImpulse2;
-
-                // Apply contact impulse
-                glm::vec3 p1 = tangent1 * impulse1;
-                glm::vec3 p2 = tangent2 * impulse2;
-                if (ent1 == constraint.entity)
-                {
-                    v1 -= p1 * mass1.inverseMass + p2 * mass1.inverseMass;
-                    v2 += p1 * mass2.inverseMass + p2 * mass2.inverseMass;
-                }
-                else
-                {
-                    v1 += p1 * mass1.inverseMass + p2 * mass1.inverseMass;
-                    v2 -= p1 * mass2.inverseMass + p2 * mass2.inverseMass;
-                }
             }
+            else
+            {
+                // if there is no tangent in relation that can be obtained from vr calculate a basis for the tangent
+                // plane.
+                getPlaneSpace(constraint.normal, tangent1, tangent2);
+            }
+
+            float vn1 = glm::dot(vr, tangent1);
+            float vn2 = glm::dot(vr, tangent2);
+
+            // Compute friction force
+            float impulse1 = -constraint.frictionMass * vn1;
+            float impulse2 = -constraint.frictionMass * vn2;
+
+            // Clamp the accumulated force
+            float maxFriction = constraint.friction * normalImpulse;
+            float newImpulse1 = glm::clamp(frictionImpulse1 + impulse1, -maxFriction, maxFriction);
+            float newImpulse2 = glm::clamp(frictionImpulse2 + impulse2, -maxFriction, maxFriction);
+            impulse1 = newImpulse1 - frictionImpulse1;
+            impulse2 = newImpulse2 - frictionImpulse2;
+            constraint.frictionImpulse1 = newImpulse1;
+            constraint.frictionImpulse2 = newImpulse2;
+
+            // Apply contact impulse
+            glm::vec3 p = impulse1 * tangent1 + impulse2 * tangent2;
+
+            if (ent1 != constraint.entity)
+            {
+                p *= -1.0F;
+            }
+
+            v1 -= p * mass1.inverseMass;
+            v2 += p * mass2.inverseMass;
         }
 
         velocity1.vec = v1;
@@ -223,20 +223,13 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 }
 
                 // Relative normal velocity at contact
-                glm::vec3 vr2;
-                glm::vec3 vr1;
-                if (ent1 == constraint.entity)
-                {
-                    vr2 = velocity2.vec;
-                    vr1 = velocity1.vec;
-                }
-                else
-                {
-                    vr2 = velocity1.vec;
-                    vr1 = velocity2.vec;
-                }
+                glm::vec3 vr = velocity2.vec - velocity1.vec;
 
-                float vn = glm::dot(vr2 - vr1, constraint.normal);
+                if (ent1 != constraint.entity)
+                {
+                    vr *= -1.0F;
+                }
+                float vn = glm::dot(vr, constraint.normal);
 
                 // compute normal impulse
                 float impulse = -constraint.normalMass * (vn + constraint.restitution * constraint.relativeVelocity);
@@ -277,20 +270,13 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
 
                 // determine restitution (set to predefined value for now)
                 float restitution = 1.0F;
-                glm::vec3 vr2;
-                glm::vec3 vr1;
-                if (ent1 == collidingWith.entity)
-                {
-                    vr2 = velocity2.vec;
-                    vr1 = velocity1.vec;
-                }
-                else
-                {
-                    vr2 = velocity1.vec;
-                    vr1 = velocity2.vec;
-                }
+                glm::vec3 vr = velocity2.vec - velocity1.vec;
 
-                float relativeVelocity = glm::dot(vr2 - vr1, collidingWith.normal);
+                if (ent1 != collidingWith.entity)
+                {
+                    vr *= -1.0F;
+                }
+                float relativeVelocity = glm::dot(vr, collidingWith.normal);
 
                 // Soft contact
                 const float zeta = 10.0F;
