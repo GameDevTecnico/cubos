@@ -20,5 +20,6 @@ namespace cubos::engine
 
         float bias;       ///< Shadow bias.
         float blurRadius; ///< Shadow blur radius.
+        int id = -1;      ///< Caster id for the shadow atlas.
     };
 } // namespace cubos::engine
