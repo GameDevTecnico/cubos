@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Collision detection with VoxelCollisionShapes (#994, **@joaomanita**).
+
+### Added
+
 - Allow identifying assets in code from their path (#1177. **@GalaxyCrush**).
 
 ### Fixed
