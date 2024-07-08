@@ -47,9 +47,7 @@
           ]
           ++ sysLibs;
 
-        shellHook = ''
-          export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath sysLibs}"
-        '';
+        LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath sysLibs}";
       };
 
       formatter = pkgs.alejandra;
