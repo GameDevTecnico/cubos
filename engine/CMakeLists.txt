@@ -160,6 +160,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/shadows/point_caster.cpp"
 	"src/render/shadow_atlas/plugin.cpp"
 	"src/render/shadow_atlas/shadow_atlas.cpp"
+	"src/render/shadow_atlas_rasterizer/plugin.cpp"
+	"src/render/shadow_atlas_rasterizer/shadow_atlas_rasterizer.cpp"
 )
 
 # Create cubos engine
