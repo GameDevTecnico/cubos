@@ -1456,11 +1456,6 @@ OGLRenderDevice::OGLRenderDevice()
 Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 {
     // Validate arguments
-    if (desc.targetCount == 0)
-    {
-        CUBOS_ERROR("Framebuffer must have at least one render target");
-        return nullptr;
-    }
     if (desc.targetCount > CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
     {
         CUBOS_ERROR("Framebuffer can only have at most {} render targets",
@@ -1636,7 +1631,15 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     // Define draw buffers
-    glDrawBuffers(static_cast<GLsizei>(drawBuffers.size()), drawBuffers.data());
+    if (drawBuffers.empty())
+    {
+        glDrawBuffer(GL_NONE);
+        glReadBuffer(GL_NONE);
+    }
+    else
+    {
+        glDrawBuffers(static_cast<GLsizei>(drawBuffers.size()), drawBuffers.data());
+    }
 
     // Check errors
     GLenum glErr = glGetError();
