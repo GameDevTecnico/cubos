@@ -53,7 +53,7 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md108">Architecture</a></li>
+            <li><a href="#autotoc_md110">Architecture</a></li>
             <li>
               Reference
               <ul>
@@ -64,7 +64,7 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md108"><h2><a href="#autotoc_md108">Architecture</a></h2><p>The two main UI components are <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> and <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a>. For it to work properly, each <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> must be a child of a <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a>, or of another <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a>.</p><p>Each <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> generates a list of drawing commands, <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">UIDrawList</a>, that are then pooled together by the <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> at the root of the hierarchy.</p><p>Each entry in a draw list contains a <a href="structcubos_1_1engine_1_1UIDrawList_1_1Type.html" class="m-doc">UIDrawList::<wbr />Type</a> and a <a href="structcubos_1_1engine_1_1UIDrawList_1_1Command.html" class="m-doc">UIDrawList::<wbr />Command</a>. The Type holds information that is common for all similar commands, and the Command contains the specifics to that one command. Each entry also has a raw data buffer to hold the data the command needs to pass to the shaders.</p><p>After aggregating the draw commands, the <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> draws them, grouped by type.</p><p>Check out <a href="examples-engine-ui.html" class="m-doc">UI</a> for the an example of the UI plugin in use.</p></section>
+<section id="autotoc_md110"><h2><a href="#autotoc_md110">Architecture</a></h2><p>The two main UI components are <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> and <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a>. For it to work properly, each <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> must be a child of a <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a>, or of another <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a>.</p><p>Each <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">UIElement</a> generates a list of drawing commands, <a href="classcubos_1_1engine_1_1UIDrawList.html" class="m-doc">UIDrawList</a>, that are then pooled together by the <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> at the root of the hierarchy.</p><p>Each entry in a draw list contains a <a href="structcubos_1_1engine_1_1UIDrawList_1_1Type.html" class="m-doc">UIDrawList::<wbr />Type</a> and a <a href="structcubos_1_1engine_1_1UIDrawList_1_1Command.html" class="m-doc">UIDrawList::<wbr />Command</a>. The Type holds information that is common for all similar commands, and the Command contains the specifics to that one command. Each entry also has a raw data buffer to hold the data the command needs to pass to the shaders.</p><p>After aggregating the draw commands, the <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> draws them, grouped by type.</p><p>Check out <a href="examples-engine-ui.html" class="m-doc">UI</a> for the an example of the UI plugin in use.</p></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -76,6 +76,8 @@
             <dd>Component <a href="structcubos_1_1engine_1_1UIElement.html" class="m-doc">cubos::<wbr />engine::<wbr />UIElement</a>.</dd>
             <dt>file <a href="horizontal__stretch_8hpp.html" class="m-doc">horizontal_stretch.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1UIHorizontalStretch.html" class="m-doc">cubos::<wbr />engine::<wbr />UIHorizontalStretch</a>.</dd>
+            <dt>file <a href="native__aspect__ratio_8hpp.html" class="m-doc">native_aspect_ratio.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1UINativeAspectRatio.html" class="m-doc">cubos::<wbr />engine::<wbr />UINativeAspectRatio</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2ui_2canvas_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
             <dt>file <a href="vertical__stretch_8hpp.html" class="m-doc">vertical_stretch.hpp</a></dt>
@@ -117,6 +119,10 @@
               struct <a href="structcubos_1_1engine_1_1UIHorizontalStretch.html" class="m-doc">cubos::engine::UIHorizontalStretch</a>
             </dt>
             <dd>Component which makes a UI element fit horizontally to its parent.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UINativeAspectRatio.html" class="m-doc">cubos::engine::UINativeAspectRatio</a>
+            </dt>
+            <dd>Component which makes a UI element keep the aspect ratio of its source.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1UIVerticalStretch.html" class="m-doc">cubos::engine::UIVerticalStretch</a>
             </dt>
