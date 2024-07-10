@@ -17,6 +17,10 @@
 #include <cubos/engine/render/lights/point.hpp>
 #include <cubos/engine/render/lights/spot.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
+#include <cubos/engine/render/shadow_atlas/plugin.hpp>
+#include <cubos/engine/render/shadow_atlas/shadow_atlas.hpp>
+#include <cubos/engine/render/shadows/plugin.hpp>
+#include <cubos/engine/render/shadows/spot_caster.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/ssao/ssao.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -57,11 +61,14 @@ namespace
     {
         glm::vec4 position;
         glm::vec4 direction;
+        glm::mat4 matrix;
         glm::vec4 color;
         float intensity;
         float range;
         float spotCutoff;
         float innerSpotCutoff;
+        glm::vec2 shadowMapOffset;
+        glm::vec2 shadowMapSize;
     };
 
     struct PerScene
@@ -88,6 +95,7 @@ namespace
         ShaderBindingPoint normalBP;
         ShaderBindingPoint albedoBP;
         ShaderBindingPoint ssaoBP;
+        ShaderBindingPoint shadowAtlasBP;
         ShaderBindingPoint perSceneBP;
         ShaderBindingPoint viewportOffsetBP;
         ShaderBindingPoint viewportSizeBP;
@@ -103,12 +111,14 @@ namespace
             normalBP = pipeline->getBindingPoint("normalTexture");
             albedoBP = pipeline->getBindingPoint("albedoTexture");
             ssaoBP = pipeline->getBindingPoint("ssaoTexture");
+            shadowAtlasBP = pipeline->getBindingPoint("shadowAtlasTexture");
             perSceneBP = pipeline->getBindingPoint("PerScene");
             viewportOffsetBP = pipeline->getBindingPoint("viewportOffset");
             viewportSizeBP = pipeline->getBindingPoint("viewportSize");
-            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && perSceneBP && viewportOffsetBP &&
-                             viewportSizeBP,
-                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, PerScene, viewportOffset and "
+            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && shadowAtlasBP && perSceneBP &&
+                             viewportOffsetBP && viewportSizeBP,
+                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, shadowAtlasTexture, PerScene, "
+                         "viewportOffset and "
                          "viewportSize binding points must exist");
 
             generateScreenQuad(renderDevice, pipeline, screenQuad);
@@ -132,8 +142,14 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
     cubos.depends(lightsPlugin);
     cubos.depends(hdrPlugin);
     cubos.depends(transformPlugin);
+    cubos.depends(shadowsPlugin);
+    cubos.depends(shadowAtlasPlugin);
 
-    cubos.tag(deferredShadingTag).tagged(drawToHDRTag).after(drawToGBufferTag).after(drawToSSAOTag);
+    cubos.tag(deferredShadingTag)
+        .tagged(drawToHDRTag)
+        .after(drawToGBufferTag)
+        .after(drawToSSAOTag)
+        .after(drawToShadowAtlasTag);
 
     cubos.uninitResource<State>();
 
@@ -152,9 +168,9 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
     cubos.system("apply Deferred Shading to the GBuffer and output to the HDR texture")
         .tagged(deferredShadingTag)
         .call([](const State& state, const Window& window, const RenderEnvironment& environment,
-                 Query<const LocalToWorld&, const DirectionalLight&> directionalLights,
+                 const ShadowAtlas& shadowAtlas, Query<const LocalToWorld&, const DirectionalLight&> directionalLights,
                  Query<const LocalToWorld&, const PointLight&> pointLights,
-                 Query<const LocalToWorld&, const SpotLight&> spotLights,
+                 Query<const LocalToWorld&, const SpotLight&, Opt<const SpotShadowCaster&>> spotLights,
                  Query<Entity, const HDR&, const GBuffer&, const SSAO&, DeferredShading&> targets,
                  Query<const LocalToWorld&, const PerspectiveCamera&, const DrawsTo&> perspectiveCameras) {
             auto& rd = window->renderDevice();
@@ -219,7 +235,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         perLight.range = light.range;
                     }
 
-                    for (auto [lightLocalToWorld, light] : spotLights)
+                    for (auto [lightLocalToWorld, light, caster] : spotLights)
                     {
                         auto& perLight = perScene.spotLights[perScene.numSpotLights++];
                         perLight.position = lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
@@ -229,6 +245,27 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         perLight.range = light.range;
                         perLight.spotCutoff = glm::cos(glm::radians(light.spotAngle));
                         perLight.innerSpotCutoff = glm::cos(glm::radians(light.innerSpotAngle));
+
+                        if (caster.contains())
+                        {
+                            // Get light viewport
+                            auto slot = shadowAtlas.slotsMap.at(caster.value().baseSettings.id);
+
+                            // The light is actually facing the direction opposite to what's visible, so rotate it.
+                            auto lightView = glm::inverse(
+                                glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)));
+                            auto lightProj = glm::perspective(glm::radians(light.spotAngle),
+                                                              (float(shadowAtlas.getSize().x) * slot->size.x) /
+                                                                  (float(shadowAtlas.getSize().y) * slot->size.y),
+                                                              0.1F, light.range);
+                            perLight.matrix = lightProj * lightView;
+                            perLight.shadowMapOffset = slot->offset;
+                            perLight.shadowMapSize = slot->size;
+                        }
+                        else
+                        {
+                            perLight.shadowMapSize = glm::vec2(0.0F, 0.0F);
+                        }
                     }
 
                     state.perSceneCB->fill(&perScene, sizeof(PerScene));
@@ -251,6 +288,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.normalBP->bind(gBuffer.normal);
                     state.albedoBP->bind(gBuffer.albedo);
                     state.ssaoBP->bind(ssao.blurTexture);
+                    state.shadowAtlasBP->bind(shadowAtlas.atlas);
                     state.perSceneBP->bind(state.perSceneCB);
                     state.viewportOffsetBP->setConstant(drawsTo.viewportOffset);
                     state.viewportSizeBP->setConstant(drawsTo.viewportSize);

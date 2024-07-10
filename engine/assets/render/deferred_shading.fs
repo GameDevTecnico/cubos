@@ -6,6 +6,7 @@ uniform sampler2D positionTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D albedoTexture;
 uniform sampler2D ssaoTexture;
+uniform sampler2D shadowAtlasTexture;
 
 uniform vec2 viewportOffset;
 uniform vec2 viewportSize;
@@ -29,11 +30,14 @@ struct SpotLight
 {
     vec4 position;
     vec4 direction;
+    mat4 matrix;
     vec4 color;
     float intensity;
     float range;
     float spotCutoff;
     float innerSpotCutoff;
+    vec2 shadowMapOffset;
+    vec2 shadowMapSize;
 };
 
 layout(std140) uniform PerScene
@@ -65,6 +69,22 @@ float remap(float value, float min1, float max1, float min2, float max2)
 
 vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
 {
+    // Shadows
+    if (light.shadowMapSize.x > 0.0)
+    {
+        vec4 positionLightSpace = light.matrix * vec4(fragPos, 1.0);
+        vec3 projCoords = positionLightSpace.xyz / positionLightSpace.w;
+        projCoords = projCoords * 0.5 + 0.5;
+        vec2 uv = projCoords.xy * light.shadowMapSize + light.shadowMapOffset;
+        float closestDepth = texture(shadowAtlasTexture, uv).r;
+        float currentDepth = projCoords.z;
+        if (currentDepth > closestDepth)
+        {
+            return vec3(0);
+        }
+    }
+
+    // Lighting
     vec3 toLight = vec3(light.position) - fragPos;
     float r = length(toLight) / light.range;
     if (r < 1)
