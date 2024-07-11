@@ -38,6 +38,7 @@ struct SpotLight
     float innerSpotCutoff;
     vec2 shadowMapOffset;
     vec2 shadowMapSize;
+    float shadowBias;
 };
 
 layout(std140) uniform PerScene
@@ -78,7 +79,8 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
         vec2 uv = projCoords.xy * light.shadowMapSize + light.shadowMapOffset;
         float closestDepth = texture(shadowAtlasTexture, uv).r;
         float currentDepth = projCoords.z;
-        if (currentDepth > closestDepth)
+        float bias = light.shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
+        if (currentDepth - bias > closestDepth)
         {
             return vec3(0);
         }
