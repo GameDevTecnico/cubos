@@ -18,8 +18,8 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        float bias = 0.002F; ///< Shadow bias.
-        float blurRadius;    ///< Shadow blur radius.
-        int id = -1;         ///< Caster id for the shadow atlas.
+        float bias = 0.002F;     ///< Shadow bias.
+        float blurRadius = 1.0F; ///< Shadow blur radius.
+        int id = -1;             ///< Caster id for the shadow atlas.
     };
 } // namespace cubos::engine

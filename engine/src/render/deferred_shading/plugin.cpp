@@ -70,7 +70,8 @@ namespace
         glm::vec2 shadowMapOffset;
         glm::vec2 shadowMapSize;
         float shadowBias;
-        float padding[3];
+        float shadowBlurRadius;
+        float padding[2];
     };
 
     struct PerScene
@@ -264,6 +265,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             perLight.shadowMapOffset = slot->offset;
                             perLight.shadowMapSize = slot->size;
                             perLight.shadowBias = caster.value().baseSettings.bias;
+                            perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
                         }
                         else
                         {
