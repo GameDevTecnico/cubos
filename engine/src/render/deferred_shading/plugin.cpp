@@ -69,6 +69,8 @@ namespace
         float innerSpotCutoff;
         glm::vec2 shadowMapOffset;
         glm::vec2 shadowMapSize;
+        float shadowBias;
+        float padding[3];
     };
 
     struct PerScene
@@ -261,6 +263,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             perLight.matrix = lightProj * lightView;
                             perLight.shadowMapOffset = slot->offset;
                             perLight.shadowMapSize = slot->size;
+                            perLight.shadowBias = caster.value().baseSettings.bias;
                         }
                         else
                         {

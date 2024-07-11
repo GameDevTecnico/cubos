@@ -62,7 +62,7 @@ namespace
 
             rasterState = renderDevice.createRasterState({
                 .cullEnabled = true,
-                .cullFace = Face::Front,
+                .cullFace = Face::Back,
                 .frontFace = Winding::CCW,
             });
 
