@@ -39,6 +39,7 @@ struct SpotLight
     vec2 shadowMapOffset;
     vec2 shadowMapSize;
     float shadowBias;
+    float shadowBlurRadius;
 };
 
 layout(std140) uniform PerScene
@@ -71,18 +72,33 @@ float remap(float value, float min1, float max1, float min2, float max2)
 vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
 {
     // Shadows
+    float shadow = 0.0;
     if (light.shadowMapSize.x > 0.0)
     {
         vec4 positionLightSpace = light.matrix * vec4(fragPos, 1.0);
         vec3 projCoords = positionLightSpace.xyz / positionLightSpace.w;
         projCoords = projCoords * 0.5 + 0.5;
         vec2 uv = projCoords.xy * light.shadowMapSize + light.shadowMapOffset;
-        float closestDepth = texture(shadowAtlasTexture, uv).r;
         float currentDepth = projCoords.z;
         float bias = light.shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
-        if (currentDepth - bias > closestDepth)
+        // PCF
+        if (light.shadowBlurRadius <= 0.001f)
         {
-            return vec3(0);
+            float pcfDepth = texture(shadowAtlasTexture, uv).r;
+            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+        }
+        else
+        {
+            vec2 texelSize = vec2(1.0 / 1024.0); // largely arbitrary value, affects blur size
+            for(float x = -light.shadowBlurRadius; x <= light.shadowBlurRadius; x += light.shadowBlurRadius)
+            {
+                for(float y = -light.shadowBlurRadius; y <= light.shadowBlurRadius; y += light.shadowBlurRadius)
+                {
+                    float pcfDepth = texture(shadowAtlasTexture, uv + vec2(x, y) * texelSize).r;
+                    shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+                }
+            }
+            shadow /= 9.0;
         }
     }
 
@@ -98,7 +114,7 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
             float angleValue = clamp(remap(a, light.innerSpotCutoff, light.spotCutoff, 1, 0), 0, 1);
             float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
             float diffuse = max(dot(fragNormal, toLightNormalized), 0);
-            return angleValue * attenuation * diffuse * light.intensity * vec3(light.color);
+            return angleValue * attenuation * diffuse * (1.0 - shadow) * light.intensity * vec3(light.color);
         }
     }
     return vec3(0);
