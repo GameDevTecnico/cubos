@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shadows plugin (#1185, **@tomas7770**).
 - Network Address class (#1211, **@roby2014**).
 - Image asset and UI Image component (#1270, **@DiogoMendonc-a**).
+- Raycasting, collisions between rays and box/capsule colliders (#225 **@diogomsmiranda**).
 
 ### Changed
 
@@ -185,9 +186,9 @@ Although they've moved on, their work is etched into the project's foundations.
 
 - **@ratuspro**, for bringing the initial team together to work on this project and for his work on the input and settings managers and other utilities.
 - **@joaopat98**, for his work on setting up the repo, coordinating the initial team efforts and writing our first renderer.
-- **@DannyIsYog**, for his work on the input manager and for writing our first *ECS* dispatcher.
-- **@rsubtil**, for his work on bloom, SSAO, the dispatcher, and various essential engine features such as the *Cubos* class and the window plugin.
-- **@EdSwordsmith**, for introducing us to the *ECS* design paradigm and writing its first version on the engine.
+- **@DannyIsYog**, for his work on the input manager and for writing our first _ECS_ dispatcher.
+- **@rsubtil**, for his work on bloom, SSAO, the dispatcher, and various essential engine features such as the _Cubos_ class and the window plugin.
+- **@EdSwordsmith**, for introducing us to the _ECS_ design paradigm and writing its first version on the engine.
 - **@JoseGraca96256**, for his work on the first audio device abstraction.
 
 [unreleased]: https://github.com/GameDevTecnico/cubos/commits/main/
