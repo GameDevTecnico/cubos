@@ -4,6 +4,7 @@
 add_executable(
     cubos-engine-tests
     main.cpp
+    raycast.cpp
     transform.cpp
     settings.cpp
 )

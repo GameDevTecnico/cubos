@@ -13,6 +13,11 @@ CUBOS_REFLECT_IMPL(cubos::engine::LocalToWorld)
         .build();
 }
 
+glm::mat4 cubos::engine::LocalToWorld::inverse() const
+{
+    return glm::inverse(mat);
+}
+
 glm::vec3 cubos::engine::LocalToWorld::worldPosition() const
 {
     return mat[3];
