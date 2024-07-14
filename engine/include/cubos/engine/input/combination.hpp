@@ -67,8 +67,8 @@ namespace cubos::engine
         std::vector<core::io::MouseButton>& mouseButtons();
 
         /// @brief Checks if the key combination is pressed.
-        /// @param window The window to check for key and mouse button presses.
-        /// @param gamepad The gamepad to check for button presses.
+        /// @param window Window to check for key and mouse button presses.
+        /// @param gamepad Gamepad to check for button presses.
         /// @return Whether the key combination is pressed
         bool pressed(const core::io::Window& window, const core::io::GamepadState* gamepad) const;
 

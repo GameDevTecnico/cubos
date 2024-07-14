@@ -31,8 +31,8 @@ namespace cubos::engine
         InputAxis() = default;
 
         /// @brief Constructs with existing bindings.
-        /// @param positive Positive key bindings.
-        /// @param negative Negative key bindings.
+        /// @param positive Positive input combinations.
+        /// @param negative Negative input combinations.
         /// @param gamepadAxes Gamepad axis bindings.
         InputAxis(std::vector<InputCombination> positive, std::vector<InputCombination> negative,
                   std::vector<core::io::GamepadAxis> gamepadAxes)
@@ -42,24 +42,24 @@ namespace cubos::engine
         {
         }
 
-        /// @brief Gets the positive key bindings.
-        /// @return Vector of positive keys.
+        /// @brief Gets the positive input combinations.
+        /// @return Vector of positive input combinations.
         const std::vector<InputCombination>& positive() const;
 
-        /// @brief Gets the negative key bindings.
-        /// @return Vector of negative keys.
+        /// @brief Gets the negative input combinations.
+        /// @return Vector of negative input combinations.
         const std::vector<InputCombination>& negative() const;
 
         /// @brief Gets the gamepad axis bindings.
         /// @return Vector of gamepad axes.
         const std::vector<core::io::GamepadAxis>& gamepadAxes() const;
 
-        /// @brief Gets the positive key bindings.
-        /// @return Vector of positive keys.
+        /// @brief Gets the positive input combinations.
+        /// @return Vector of positive input combinations.
         std::vector<InputCombination>& positive();
 
-        /// @brief Gets the negative key bindings.
-        /// @return Vector of negative keys.
+        /// @brief Gets the negative input combinations.
+        /// @return Vector of negative input combinations.
         std::vector<InputCombination>& negative();
 
         /// @brief Gets the gamepad axis bindings.
