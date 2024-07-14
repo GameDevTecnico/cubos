@@ -141,9 +141,7 @@ bool DebugSerializer::decompose(const Type& type, const void* value)
     else if (type.has<EnumTrait>())
     {
         const auto& trait = type.get<EnumTrait>();
-        mStream.put('"');
         mStream.print(trait.variant(value).name());
-        mStream.put('"');
     }
     else if (type.has<FieldsTrait>())
     {
