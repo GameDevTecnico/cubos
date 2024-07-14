@@ -44,15 +44,15 @@ namespace cubos::engine
         std::vector<InputCombination>& combinations();
 
         /// @brief Checks if this action is pressed.
-        /// @return Whether this action is pressed.
+        /// @return Sets whether this action is pressed.
         bool pressed() const;
 
         /// @brief Checks if this action was just pressed.
-        /// @return Whether this action was just pressed.
+        /// @return Sets whether this action was just pressed.
         bool justPressed() const;
 
         /// @brief Checks if this action was just released.
-        /// @return Whether this action was just released.
+        /// @return Sets whether this action was just released.
         bool justReleased() const;
 
         /// @brief Sets whether this action is pressed.
