@@ -36,9 +36,9 @@ namespace cubos::engine
     {
     public:
         Raycast(Query<Entity, const LocalToWorld&, const BoxCollisionShape&> boxes,
-                Query<Entity, const LocalToWorld&, const CapsuleCollisionShape&, const Position&> spheres)
+                Query<Entity, const LocalToWorld&, const CapsuleCollisionShape&, const Position&> capsules)
             : mBoxes{std::move(boxes)}
-            , mSpheres{std::move(spheres)} {};
+            , mCapsules{std::move(capsules)} {};
 
         Opt<Hit> fire(Ray ray)
         {
@@ -65,7 +65,7 @@ namespace cubos::engine
                 }
             }
 
-            for (auto [entity, localToWorld, shape, position] : mSpheres)
+            for (auto [entity, localToWorld, shape, position] : mCapsules)
             {
                 auto worldToLocal = localToWorld.inverse();
                 Ray localRay = {glm::vec3(worldToLocal * glm::vec4(ray.origin, 1.0F)),
@@ -86,7 +86,7 @@ namespace cubos::engine
 
     private:
         Query<Entity, const LocalToWorld&, const BoxCollisionShape&> mBoxes;
-        Query<Entity, const LocalToWorld&, const CapsuleCollisionShape&, const Position&> mSpheres;
+        Query<Entity, const LocalToWorld&, const CapsuleCollisionShape&, const Position&> mCapsules;
 
         static float intersects(Ray ray, cubos::core::geom::Box box)
         {
@@ -233,23 +233,23 @@ namespace cubos::core::ecs
         SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::BoxCollisionShape&>> boxes;
         SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::CapsuleCollisionShape&,
                             const cubos::engine::Position&>>
-            spheres;
+            capsules;
 
         SystemFetcher(World& world, const SystemOptions& options)
             : boxes{world, options}
-            , spheres{world, options}
+            , capsules{world, options}
         {
         }
 
         void analyze(SystemAccess& access) const
         {
             boxes.analyze(access);
-            spheres.analyze(access);
+            capsules.analyze(access);
         }
 
         cubos::engine::Raycast fetch(const SystemContext& ctx)
         {
-            return {boxes.fetch(ctx), spheres.fetch(ctx)};
+            return {boxes.fetch(ctx), capsules.fetch(ctx)};
         }
     };
 } // namespace cubos::core::ecs

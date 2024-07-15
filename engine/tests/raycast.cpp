@@ -84,7 +84,7 @@ TEST_CASE("simple use cases of raycast")
             CHECK(world.components(hit5->entity).get<Name>().value == "box5");
             CHECK_VEC3_EQ(hit5->point, glm::vec3{0.0F, 0.0F, -1.5F});
 
-            // box1 getts no hit
+            // box1 gets no hit
         });
     }
 
