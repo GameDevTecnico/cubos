@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bounciness calculation for penetration constraint (#1275, **@fallenatlas**).
 - UI scalling modes. (#1284, **@DiogoMendonc-a**)
 - Shadow mapping with support for spot shadow casters (#1186, **@tomas7770**).
+- TcpStream network class (#1209, **@roby2014**).
+- TcpListener network class (#1210, **@roby2014**).
 
 ### Changed
 
