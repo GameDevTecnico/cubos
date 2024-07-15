@@ -144,6 +144,10 @@
             </dt>
             <dd>Checks if a key is currently pressed with (at least) the given modifiers.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8a1f64f73416fbeb03e6f0de2c164ec" class="m-doc">pressed</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> button) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Checks if a mouse button is currently pressed.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac1137b9cdcdd244996623097f948bb35" class="m-doc">gamepadState</a>(</span><span class="m-doc-wrap">int gamepad,
               <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">GamepadState</a>&amp; state) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -448,6 +452,29 @@
                 <tr>
                   <th>Returns</th>
                   <td>Whether the key and modifiers (or a superset of) are currently pressed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8a1f64f73416fbeb03e6f0de2c164ec"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8a1f64f73416fbeb03e6f0de2c164ec" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> button) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Checks if a mouse button is currently pressed.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">button</td>
+                  <td>Mouse button to check.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the mouse button is currently pressed.</td>
                 </tr>
               </tfoot>
             </table>
