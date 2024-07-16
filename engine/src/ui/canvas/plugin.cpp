@@ -13,6 +13,7 @@
 #include <cubos/engine/ui/canvas/draw_list.hpp>
 #include <cubos/engine/ui/canvas/element.hpp>
 #include <cubos/engine/ui/canvas/horizontal_stretch.hpp>
+#include <cubos/engine/ui/canvas/keep_pixel_size.hpp>
 #include <cubos/engine/ui/canvas/native_aspect_ratio.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
 #include <cubos/engine/ui/canvas/vertical_stretch.hpp>
@@ -63,9 +64,13 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
 
     cubos.component<UIElement>();
     cubos.component<UICanvas>();
+
+    cubos.component<UIKeepPixelSize>();
+
     cubos.component<UIHorizontalStretch>();
     cubos.component<UIVerticalStretch>();
     cubos.component<UINativeAspectRatio>();
+
     cubos.uninitResource<State>();
 
     cubos.tag(uiCanvasChildrenUpdateTag);
@@ -73,13 +78,6 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
     cubos.tag(uiBeginTag).after(uiElementPropagateTag);
     cubos.tag(uiDrawTag).after(uiBeginTag);
     cubos.tag(uiEndTag).after(uiDrawTag).tagged(drawToRenderTargetTag);
-
-    cubos.observer("initialize Canvas").onAdd<UICanvas>().call([](Query<UICanvas&> query) {
-        for (auto [canvas] : query)
-        {
-            canvas.mat = glm::ortho<float>(0, canvas.referenceSize.x, 0, canvas.referenceSize.y);
-        }
-    });
 
     cubos.startupSystem("setup canvas state")
         .after(windowInitTag)
@@ -94,11 +92,28 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                                                                                     cubos::core::gl::Usage::Dynamic));
         });
 
+    cubos.system("scale canvas").call([](Query<UICanvas&, const RenderTarget&, Opt<const UIKeepPixelSize&>> query) {
+        for (auto [canvas, rt, kpis] : query)
+        {
+            if (kpis.contains())
+            {
+                canvas.virtualSize = rt.size;
+            }
+            else
+            {
+                canvas.virtualSize = canvas.referenceSize;
+            }
+
+            canvas.mat = glm::ortho<float>(0, canvas.virtualSize.x, 0, canvas.virtualSize.y);
+        }
+    });
+
     cubos.system("set canvas children rect")
         .tagged(uiCanvasChildrenUpdateTag)
         .with<UIElement>()
         .withOpt<UIHorizontalStretch>()
         .withOpt<UIVerticalStretch>()
+        .withOpt<UINativeAspectRatio>()
         .related<ChildOf>()
         .with<UICanvas>()
         .call([](Query<UIElement&, Opt<const UIHorizontalStretch&>, Opt<const UIVerticalStretch&>,
@@ -106,10 +121,10 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                      query) {
             for (auto [element, hs, vs, nar, canvas] : query)
             {
-                element.position = element.anchor * canvas.referenceSize + element.offset;
+                element.position = element.anchor * canvas.virtualSize + element.offset;
                 if (hs.contains())
                 {
-                    element.size.x = canvas.referenceSize.x - hs.value().rightOffset - hs.value().leftOffset;
+                    element.size.x = canvas.virtualSize.x - hs.value().rightOffset - hs.value().leftOffset;
                     element.position.x = hs.value().leftOffset + element.size.x * element.pivot.x + element.offset.x;
                     if (nar.contains() && !vs.contains() && nar.value().ratio != 0)
                     {
@@ -118,7 +133,7 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                 }
                 if (vs.contains())
                 {
-                    element.size.y = canvas.referenceSize.y - vs.value().topOffset - vs.value().bottomOffset;
+                    element.size.y = canvas.virtualSize.y - vs.value().topOffset - vs.value().bottomOffset;
                     element.position.y = vs.value().bottomOffset + element.size.y * element.pivot.y + element.offset.y;
                     if (nar.contains() && !hs.contains() && nar.value().ratio != 0)
                     {
