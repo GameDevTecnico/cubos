@@ -16,14 +16,14 @@ using cubos::core::ecs::Name;
 using cubos::core::ecs::World;
 using namespace cubos::engine;
 
-TEST_CASE("simple use cases of raycast")
+TEST_CASE("cubos::engine::Raycast")
 {
     Cubos cubos{};
     cubos.plugin(transformPlugin);
     cubos.plugin(fixedStepPlugin);
     cubos.plugin(collisionsPlugin);
 
-    SUBCASE("Get the right scalar from multiple boxes")
+    SUBCASE("get the right scalar from multiple boxes")
     {
         cubos.startupSystem("create resources").call([](Commands cmds) {
             cmds.create()
@@ -88,7 +88,7 @@ TEST_CASE("simple use cases of raycast")
         });
     }
 
-    SUBCASE("Hit check with a single capsule")
+    SUBCASE("hit check with a single capsule")
     {
         cubos.startupSystem("create resources").call([](Commands cmds) {
             cmds.create()
