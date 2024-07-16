@@ -87,6 +87,17 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
             }
         });
 
+    cubos.system("update Debug Camera speed")
+        .call([](Input& input, Query<FreeCameraController&> entities, const cubos::core::ecs::DeltaTime& deltaTime) {
+            for (auto [controller] : entities)
+            {
+                if (controller.enabled)
+                {
+                    controller.speed += input.axis("debug-change-speed") * deltaTime.value();
+                }
+            }
+        });
+
     cubos.system("update Debug Camera")
         .tagged(cubos::engine::imguiTag)
         .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("Debug Camera"); })

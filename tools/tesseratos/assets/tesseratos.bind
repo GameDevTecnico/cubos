@@ -2,7 +2,7 @@
     "actions": {
         "debug-camera-toggle": [
             {"keys": ["LControl"]}
-        ],
+        ]
     },
     "axes": {
         "debug-move-lateral": {
@@ -27,6 +27,14 @@
             ],
             "negative": [
                 {"keys": ["S"]}
+            ]
+        },
+        "debug-change-speed": {
+            "positive": [
+                {"keys": ["Tab"]}
+            ],
+            "negative": [
+                {"keys": ["LShift"]}
             ]
         }
     }
