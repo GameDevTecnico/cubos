@@ -71,6 +71,7 @@ add_executable(
 	metrics/metrics.cpp
 
 	net/address.cpp
+	net/tcp.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
