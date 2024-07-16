@@ -94,6 +94,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/ui/canvas/plugin.cpp"
 	"src/ui/canvas/canvas.cpp"
 	"src/ui/canvas/draw_list.cpp"
+	"src/ui/canvas/keep_pixel_size.cpp"
 	"src/ui/canvas/native_aspect_ratio.cpp"
 	"src/ui/canvas/element.cpp"
 	"src/ui/canvas/vertical_stretch.cpp"
