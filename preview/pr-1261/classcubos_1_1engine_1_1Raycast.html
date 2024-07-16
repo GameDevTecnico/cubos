@@ -49,13 +49,14 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Raycast <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="raycast_8hpp.html">&lt;engine/collisions/raycast.hpp&gt;</a></div>
         </h1>
-        <p>System argument which holds all the entities with box/capsule colliders intended for raycasting.</p>
+        <p>System argument which allows performing raycast queries among all entities with colliders.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
@@ -69,6 +70,19 @@
 <span class="w">        </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;Hit {} at {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hit</span><span class="o">-&gt;</span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="n">hit</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">});</span></pre>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Raycast_1_1Hit.html" class="m-doc">Hit</a>
+            </dt>
+            <dd>Holds the result of a raycast query.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Raycast_1_1Ray.html" class="m-doc">Ray</a>
+            </dt>
+            <dd>Describes the ray used in a raycast query.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
