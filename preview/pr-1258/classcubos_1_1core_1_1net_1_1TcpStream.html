@@ -100,17 +100,17 @@
               <span class="m-doc-wrap-bumper">auto <a href="#afc70fe9a4de64df31bb1fc83532af7bc" class="m-doc">connect</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address,
               uint16_t port) -&gt; bool</span>
             </dt>
-            <dd>Connects to a TCP socket (on a remote machine).</dd>
+            <dd>Connects to a TCP listener, possibly on a remote machine.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae36e77856b3d1ef40c23940ea1647d35" class="m-doc">connect</a>(</span><span class="m-doc-wrap"><a href="tcp__stream_8hpp.html#aff55fe551a9992a54ec54621c524d0a4" class="m-doc">SOCKET</a> socket) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a19288c083846ffe82932e65653ca22fc" class="m-doc">inner</a>(</span><span class="m-doc-wrap"><a href="tcp__stream_8hpp.html#aff55fe551a9992a54ec54621c524d0a4" class="m-doc">SOCKET</a> socket) -&gt; bool</span>
             </dt>
-            <dd>Connects to an existing connection on the given <code>socket</code>.</dd>
+            <dd>Connects to an existing connection, replacing the inner socket.</dd>
             <dt id="abc211a985b5193d2fd920c6f1ef92905">
               <span class="m-doc-wrap-bumper">void <a href="#abc211a985b5193d2fd920c6f1ef92905" class="m-doc-self">disconnect</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Disconnects inner socket.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a22a3848224134dd3064c2a1f09c7dbb4" class="m-doc">is_connected</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#adf8ecf8cd55df1920ef51b0b1f6ef4da" class="m-doc">connected</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Checks if inner socket is connected.</dd>
             <dt>
@@ -149,7 +149,7 @@
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc70fe9a4de64df31bb1fc83532af7bc" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>&amp; address,
               uint16_t port)</span></span>
             </h3>
-            <p>Connects to a TCP socket (on a remote machine).</p>
+            <p>Connects to a TCP listener, possibly on a remote machine.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -172,11 +172,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae36e77856b3d1ef40c23940ea1647d35"><div>
+          <section class="m-doc-details" id="a19288c083846ffe82932e65653ca22fc"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae36e77856b3d1ef40c23940ea1647d35" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap"><a href="tcp__stream_8hpp.html#aff55fe551a9992a54ec54621c524d0a4" class="m-doc">SOCKET</a> socket)</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19288c083846ffe82932e65653ca22fc" class="m-doc-self">inner</a>(</span><span class="m-doc-wrap"><a href="tcp__stream_8hpp.html#aff55fe551a9992a54ec54621c524d0a4" class="m-doc">SOCKET</a> socket)</span></span>
             </h3>
-            <p>Connects to an existing connection on the given <code>socket</code>.</p>
+            <p>Connects to an existing connection, replacing the inner socket.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -195,9 +195,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a22a3848224134dd3064c2a1f09c7dbb4"><div>
+          <section class="m-doc-details" id="adf8ecf8cd55df1920ef51b0b1f6ef4da"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a22a3848224134dd3064c2a1f09c7dbb4" class="m-doc-self">is_connected</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf8ecf8cd55df1920ef51b0b1f6ef4da" class="m-doc-self">connected</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Checks if inner socket is connected.</p>
             <table class="m-table m-fullwidth m-flat">
