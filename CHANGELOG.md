@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Friction calculation for penetration constraint (#1244, **@fallenatlas**).
 - Bounciness calculation for penetration constraint (#1275, **@fallenatlas**).
 - UI scalling modes. (#1284, **@DiogoMendonc-a**)
+- Shadow mapping with support for spot shadow casters (#1186, **@tomas7770**).
 
 ### Changed
 
