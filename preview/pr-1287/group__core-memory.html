@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Core &raquo; Memory module | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="group__core.html">Core</a> &raquo;</span>
+          Memory <span class="m-thin">module</span></h1>
+        <p>Provides a stream library and memory utilities.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
+          <dl class="m-doc">
+            <dt>file <a href="any__value_8hpp.html" class="m-doc">any_value.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />AnyValue</a>.</dd>
+            <dt>file <a href="any__vector_8hpp.html" class="m-doc">any_vector.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />AnyVector</a>.</dd>
+            <dt>file <a href="buffer__stream_8hpp.html" class="m-doc">buffer_stream.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />BufferStream</a>.</dd>
+            <dt>file <a href="endianness_8hpp.html" class="m-doc">endianness.hpp</a></dt>
+            <dd>Endianness utility functions.</dd>
+            <dt>file <a href="function_8hpp.html" class="m-doc">function.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Function</a>.</dd>
+            <dt>file <a href="guards_8hpp.html" class="m-doc">guards.hpp</a></dt>
+            <dd>Classes <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard</a> and <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard</a>.</dd>
+            <dt>file <a href="move_8hpp.html" class="m-doc">move.hpp</a></dt>
+            <dd>Functions <a href="group__core-memory.html#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a> and <a href="group__core-memory.html#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />forward</a>.</dd>
+            <dt>file <a href="opt_8hpp.html" class="m-doc">opt.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Opt</a>.</dd>
+            <dt>file <a href="standard__stream_8hpp.html" class="m-doc">standard_stream.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />StandardStream</a>.</dd>
+            <dt>file <a href="stream_8hpp.html" class="m-doc">stream.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Stream</a>.</dd>
+            <dt>file <a href="type__map_8hpp.html" class="m-doc">type_map.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />TypeMap</a>.</dd>
+            <dt>file <a href="unordered__bimap_8hpp.html" class="m-doc">unordered_bimap.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1UnorderedBimap.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap</a>.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">cubos::core::memory::AnyValue</a>
+            </dt>
+            <dd>Stores a blob of a given reflected type.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html" class="m-doc">cubos::core::memory::AnyVector</a>
+            </dt>
+            <dd>Stores a dynamically sized array of blobs of a given reflected type.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">cubos::core::memory::BufferStream</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which writes to/reads from a buffer.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename R, typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1Function_3_01R_07Ts_8_8_8_08_4.html" class="m-doc">cubos::core::memory::Function&lt;R(Ts...)&gt;</a>
+            </dt>
+            <dd>Generic function pointer which can also store capturing lambda functions.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">cubos::core::memory::ReadGuard</a>
+            </dt>
+            <dd>Provides safe read-only access to an object using a lock.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">cubos::core::memory::WriteGuard</a>
+            </dt>
+            <dd>Provides safe read-write access to an object using a lock.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">cubos::core::memory::Opt</a>
+            </dt>
+            <dd>Wrapper for reference types to indicate that the given argument type is optional.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">cubos::core::memory::StandardStream</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which wraps a <code>libc</code> file pointer.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">cubos::core::memory::Stream</a>
+            </dt>
+            <dd>Interface class for memory streams. Abstracts away sources or destinations of data.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename V&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">cubos::core::memory::TypeMap</a>
+            </dt>
+            <dd>A map that stores values of type <code>V</code>, using reflection types as keys.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename L, typename R, typename LHash = std::hash&lt;L&gt;, typename RHash = std::hash&lt;R&gt;&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1UnorderedBimap.html" class="m-doc">cubos::core::memory::UnorderedBimap</a>
+            </dt>
+            <dd>A bidirectional hash table.</dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> { </span><span class="m-doc-wrap"><a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a1a06729125544cab7cee73195fc044f0" class="m-doc">Begin</a>,
+              <a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a222a267cc5778206b253be35ee3ddab5" class="m-doc">Current</a>,
+              <a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a87557f11575c0ad78e4e28abedc13b6e" class="m-doc">End</a> }</span>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> seek origin.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#gae68e6c3d7aafd173d4e828b554df40cf" class="m-doc">swapBytes</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Swaps the bytes of a value, changing its endianness.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga78e8f24eb6023b99c232c2c7612963d8" class="m-doc">isLittleEndian</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Checks if the current platform is little endian.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#gab3c10b61d10d7b6ea6bd9fbe833db418" class="m-doc">fromLittleEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from little endianness to local endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga8d48939acb057aaed839810919294142" class="m-doc">toLittleEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from local endianness to little endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga4810962c6a13ca18aee18a975eec63cf" class="m-doc">fromBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from big endianness to local endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga542ca475a4392ceda925fab6d9200b26" class="m-doc">toBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from local endianness to big endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; RemoveReference&lt;T&gt;::Type&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Returns an R-value reference to the given value.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">forward</a>(</span><span class="m-doc-wrap">typename RemoveReference&lt;T&gt;::Type&amp; argument) -&gt; T&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="ga3a9cad9834d027f9ee8194a3ceb9edb0"><div>
+            <h3>
+              enum class <a href="#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc-self">SeekOrigin</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="stream_8hpp.html">&lt;core/memory/stream.hpp&gt;</a></div>
+            </h3>
+            <p><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> seek origin.</p>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="gae68e6c3d7aafd173d4e828b554df40cf"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="endianness_8hpp.html">&lt;core/memory/endianness.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gae68e6c3d7aafd173d4e828b554df40cf" class="m-doc-self">swapBytes</a>(</span><span class="m-doc-wrap">T value)</span></span>
+            </h3>
+            <p>Swaps the bytes of a value, changing its endianness.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Value type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to swap.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Swapped value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga78e8f24eb6023b99c232c2c7612963d8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga78e8f24eb6023b99c232c2c7612963d8" class="m-doc-self">isLittleEndian</a>(</span><span class="m-doc-wrap">)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="endianness_8hpp.html">&lt;core/memory/endianness.hpp&gt;</a></div>
+            </h3>
+            <p>Checks if the current platform is little endian.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether its little endian.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gab3c10b61d10d7b6ea6bd9fbe833db418"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="endianness_8hpp.html">&lt;core/memory/endianness.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gab3c10b61d10d7b6ea6bd9fbe833db418" class="m-doc-self">fromLittleEndian</a>(</span><span class="m-doc-wrap">T value)</span></span>
+            </h3>
+            <p>Converts a value from little endianness to local endianness.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Value type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Converted value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga8d48939acb057aaed839810919294142"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="endianness_8hpp.html">&lt;core/memory/endianness.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga8d48939acb057aaed839810919294142" class="m-doc-self">toLittleEndian</a>(</span><span class="m-doc-wrap">T value)</span></span>
+            </h3>
+            <p>Converts a value from local endianness to little endianness.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Value type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Converted value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga4810962c6a13ca18aee18a975eec63cf"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="endianness_8hpp.html">&lt;core/memory/endianness.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga4810962c6a13ca18aee18a975eec63cf" class="m-doc-self">fromBigEndian</a>(</span><span class="m-doc-wrap">T value)</span></span>
+            </h3>
+            <p>Converts a value from big endianness to local endianness.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Value type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Converted value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga542ca475a4392ceda925fab6d9200b26"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="endianness_8hpp.html">&lt;core/memory/endianness.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga542ca475a4392ceda925fab6d9200b26" class="m-doc-self">toBigEndian</a>(</span><span class="m-doc-wrap">T value)</span></span>
+            </h3>
+            <p>Converts a value from local endianness to big endianness.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Value type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Converted value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga3cd36ad26aeaf837279dade433600b38"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">RemoveReference&lt;T&gt;::Type&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3cd36ad26aeaf837279dade433600b38" class="m-doc-self">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Returns an R-value reference to the given value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Value type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to move.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Moved value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This is a replacement for <code>std::move</code>, which allows us to avoid including the entire <code>&lt;utility&gt;</code> header.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ga9c4df9a5d6d81c87f0bc17ca34a14a3a"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc-self">forward</a>(</span><span class="m-doc-wrap">typename RemoveReference&lt;T&gt;::Type&amp; argument) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Argument type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>argument</td>
+                  <td>Argument to forward.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Forwarded argument.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This is a replacement for <code>std::forward</code>, which allows us to avoid including the entire <code>&lt;utility&gt;</code> header.</p></aside>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
