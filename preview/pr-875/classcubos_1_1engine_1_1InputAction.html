@@ -62,7 +62,7 @@
             </li>
           </ul>
         </nav>
-<p>Can be bound to multiple keys, and will be considered &quot;pressed&quot; if any of them are pressed.</p>
+<p>Can be bound to multiple key combinations, and will be considered &quot;pressed&quot; if any of them are pressed.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -71,9 +71,7 @@
             </dt>
             <dd>Constructs without any bindings.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ae92fd3f3feeae165795cd3baaabde0ee" class="m-doc">InputAction</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">core::<wbr />io::<wbr />KeyWithModifiers</a>&gt; keys,
-              std::vector&lt;<a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">core::<wbr />io::<wbr />GamepadButton</a>&gt; gamepadButtons,
-              std::vector&lt;<a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">core::<wbr />io::<wbr />MouseButton</a>&gt; mouseButtons)</span>
+              <span class="m-doc-wrap-bumper"><a href="#ab83ceecc73fba6e447e3c90bd1102f72" class="m-doc">InputAction</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt; combinations)</span>
             </dt>
             <dd>Constructs with existing bindings.</dd>
           </dl>
@@ -82,29 +80,13 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a993a3398106072835067469d2bba145f" class="m-doc">keys</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;<a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">core::<wbr />io::<wbr />KeyWithModifiers</a>&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#accff6ef6631cff18b651ced6a522d0bf" class="m-doc">combinations</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt;&amp;</span>
             </dt>
-            <dd>Gets the key bindings.</dd>
+            <dd>Gets the bound combinations.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab9dc5b10851d1ec30ef5b948f285aa00" class="m-doc">keys</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt;<a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">core::<wbr />io::<wbr />KeyWithModifiers</a>&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af4feb5628bedf259ea7b846a869ea85d" class="m-doc">combinations</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt;&amp;</span>
             </dt>
-            <dd>Gets the key bindings.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aceccc5877c72862a7a02c4c19331a379" class="m-doc">gamepadButtons</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;<a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">core::<wbr />io::<wbr />GamepadButton</a>&gt;&amp;</span>
-            </dt>
-            <dd>Gets the gamepad button bindings.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afcea7629d0297f524d5dd905e9962156" class="m-doc">gamepadButtons</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt;<a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">core::<wbr />io::<wbr />GamepadButton</a>&gt;&amp;</span>
-            </dt>
-            <dd>Gets the gamepad button bindings.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a411338baf138f9748f46488481873fa0" class="m-doc">mouseButtons</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;<a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">core::<wbr />io::<wbr />MouseButton</a>&gt;&amp;</span>
-            </dt>
-            <dd>Gets the mouse button bindings.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a55e082a08f6e9dde7f46c57f53b2a436" class="m-doc">mouseButtons</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt;<a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">core::<wbr />io::<wbr />MouseButton</a>&gt;&amp;</span>
-            </dt>
-            <dd>Gets the mouse button bindings.</dd>
+            <dd>Gets the bound combinations.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1a8c5585eac3f94e129c6ec1e496f228" class="m-doc">pressed</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
@@ -128,16 +110,14 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a60b872a0eae4e21f980c7a3ceb6cb146" class="m-doc">justReleased</a>(</span><span class="m-doc-wrap">bool justReleased)</span>
             </dt>
-            <dd>Checks if this accion was just released.</dd>
+            <dd>Checks if this action was just released.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ae92fd3f3feeae165795cd3baaabde0ee"><div>
+          <section class="m-doc-details" id="ab83ceecc73fba6e447e3c90bd1102f72"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae92fd3f3feeae165795cd3baaabde0ee" class="m-doc-self">InputAction</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">core::<wbr />io::<wbr />KeyWithModifiers</a>&gt; keys,
-              std::vector&lt;<a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">core::<wbr />io::<wbr />GamepadButton</a>&gt; gamepadButtons,
-              std::vector&lt;<a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">core::<wbr />io::<wbr />MouseButton</a>&gt; mouseButtons)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab83ceecc73fba6e447e3c90bd1102f72" class="m-doc-self">InputAction</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt; combinations)</span></span>
             </h3>
             <p>Constructs with existing bindings.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -146,100 +126,36 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">keys</td>
-                  <td>Key bindings.</td>
-                </tr>
-                <tr>
-                  <td>gamepadButtons</td>
-                  <td>Gamepad button bindings.</td>
-                </tr>
-                <tr>
-                  <td>mouseButtons</td>
-                  <td>Mouse button bindings.</td>
+                  <td style="width: 1%">combinations</td>
+                  <td>Combinations to bind.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a993a3398106072835067469d2bba145f"><div>
+          <section class="m-doc-details" id="accff6ef6631cff18b651ced6a522d0bf"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const std::vector&lt;<a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">core::<wbr />io::<wbr />KeyWithModifiers</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a993a3398106072835067469d2bba145f" class="m-doc-self">keys</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#accff6ef6631cff18b651ced6a522d0bf" class="m-doc-self">combinations</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Gets the key bindings.</p>
+            <p>Gets the bound combinations.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Vector of keys.</td>
+                  <td>Vector of combinations.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab9dc5b10851d1ec30ef5b948f285aa00"><div>
+          <section class="m-doc-details" id="af4feb5628bedf259ea7b846a869ea85d"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="structcubos_1_1core_1_1io_1_1KeyWithModifiers.html" class="m-doc">core::<wbr />io::<wbr />KeyWithModifiers</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab9dc5b10851d1ec30ef5b948f285aa00" class="m-doc-self">keys</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af4feb5628bedf259ea7b846a869ea85d" class="m-doc-self">combinations</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Gets the key bindings.</p>
+            <p>Gets the bound combinations.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Vector of keys.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aceccc5877c72862a7a02c4c19331a379"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const std::vector&lt;<a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">core::<wbr />io::<wbr />GamepadButton</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aceccc5877c72862a7a02c4c19331a379" class="m-doc-self">gamepadButtons</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Gets the gamepad button bindings.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Vector of buttons.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="afcea7629d0297f524d5dd905e9962156"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">core::<wbr />io::<wbr />GamepadButton</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afcea7629d0297f524d5dd905e9962156" class="m-doc-self">gamepadButtons</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Gets the gamepad button bindings.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Vector of buttons.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a411338baf138f9748f46488481873fa0"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const std::vector&lt;<a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">core::<wbr />io::<wbr />MouseButton</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a411338baf138f9748f46488481873fa0" class="m-doc-self">mouseButtons</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Gets the mouse button bindings.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Vector of buttons.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a55e082a08f6e9dde7f46c57f53b2a436"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::vector&lt;<a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">core::<wbr />io::<wbr />MouseButton</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a55e082a08f6e9dde7f46c57f53b2a436" class="m-doc-self">mouseButtons</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Gets the mouse button bindings.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Vector of buttons.</td>
+                  <td>Vector of combinations.</td>
                 </tr>
               </tfoot>
             </table>
@@ -253,7 +169,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Whether this action is pressed.</td>
+                  <td>Sets whether this action is pressed.</td>
                 </tr>
               </tfoot>
             </table>
@@ -267,7 +183,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Whether this action was just pressed.</td>
+                  <td>Sets whether this action was just pressed.</td>
                 </tr>
               </tfoot>
             </table>
@@ -281,7 +197,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Whether this action was just released.</td>
+                  <td>Sets whether this action was just released.</td>
                 </tr>
               </tfoot>
             </table>
@@ -324,7 +240,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60b872a0eae4e21f980c7a3ceb6cb146" class="m-doc-self">justReleased</a>(</span><span class="m-doc-wrap">bool justReleased)</span></span>
             </h3>
-            <p>Checks if this accion was just released.</p>
+            <p>Checks if this action was just released.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
