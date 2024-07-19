@@ -43,5 +43,16 @@ For this we will the use the extended version of our logo, which is rectangular.
 
 @note The @ref cubos::engine::UINativeAspectRatio is transformative. If you desire to keep the original size of the element information for other uses, it might be best to have the image instead be on a child entity of that element, and use both @ref cubos::engine::UIHorizontalStretch and @ref cubos::engine::UIVerticalStretch to achieve the same effect.
 
-
 ![](ui_output.png)
+
+Another important thing to keep in mind while building the UI is how it is going to adapt to different resolutions and aspect ratios.
+
+You can do this by using a set of components that when added to an entity with a UICanvas will change how it handles these differences. In this sample, you can change which is being used by pressing the shortcut numbers in the first collumn. All these components are meant to be used exclusively, meaning that no more than one should be present in one entity.
+
+| Shortcut | Mode            | Component                                                         | Description                                                                                                       |
+|----------|-----------------|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| 1        | Stretch         | None - Canvas defaults to this when no other component is present | Canvas is stretch to fit the window. Will warp elements.                                                          |
+| 2        | Keep Pixel Size | @ref cubos::engine::UIKeepPixelSize "UIKeepPixelSize"                                   | Distances to anchors are constant. Might cause overlap between elements with different anchors.                   |
+| 3        | Match Height    | @ref cubos::engine::UIMatchHeight "UIMatchHeight"                                     | Vertical proportions are kept. Width is adjusted to keep each element's aspect ratio.                             |
+| 4        | Match Width     | @ref cubos::engine::UIMatchWidth "UIMatchWidth"                                      | Horizontal proportions are kept. Height is adjusted to keep each element's aspect ratio.                          |
+| 5        | Expand          | @ref cubos::engine::UIExpand "UIExpand"                                          | Switches between matching height or matching width, depending on which will cause the elements to reduce in size. |

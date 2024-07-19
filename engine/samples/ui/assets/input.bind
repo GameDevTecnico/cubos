@@ -1,0 +1,21 @@
+{
+    "actions": {
+        "set_stretch": [
+            {"keys": ["Num1"]}
+        ],
+        "set_keep_pixel_size": [
+            {"keys": ["Num2"]}
+        ],
+        "set_match_width": [
+            {"keys": ["Num3"]}
+        ],
+        "set_match_height": [
+            {"keys": ["Num4"]}
+        ],
+        "set_expand": [
+            {"keys": ["Num5"]}
+        ]
+    },
+    "axes": {
+    }
+}
