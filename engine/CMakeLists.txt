@@ -99,6 +99,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/ui/canvas/match_height.cpp"
 	"src/ui/canvas/match_width.cpp"
 	"src/ui/canvas/element.cpp"
+	"src/ui/canvas/expand.cpp"
 	"src/ui/canvas/vertical_stretch.cpp"
 	"src/ui/canvas/horizontal_stretch.cpp"
 	"src/ui/color_rect/plugin.cpp"
