@@ -14,6 +14,7 @@
 #include <cubos/engine/ui/canvas/element.hpp>
 #include <cubos/engine/ui/canvas/horizontal_stretch.hpp>
 #include <cubos/engine/ui/canvas/keep_pixel_size.hpp>
+#include <cubos/engine/ui/canvas/match_height.hpp>
 #include <cubos/engine/ui/canvas/native_aspect_ratio.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
 #include <cubos/engine/ui/canvas/vertical_stretch.hpp>
@@ -65,7 +66,9 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
     cubos.component<UIElement>();
     cubos.component<UICanvas>();
 
+    // TODO: Make these exclusive
     cubos.component<UIKeepPixelSize>();
+    cubos.component<UIMatchHeight>();
 
     cubos.component<UIHorizontalStretch>();
     cubos.component<UIVerticalStretch>();
@@ -92,21 +95,28 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                                                                                     cubos::core::gl::Usage::Dynamic));
         });
 
-    cubos.system("scale canvas").call([](Query<UICanvas&, const RenderTarget&, Opt<const UIKeepPixelSize&>> query) {
-        for (auto [canvas, rt, kpis] : query)
-        {
-            if (kpis.contains())
-            {
-                canvas.virtualSize = rt.size;
-            }
-            else
-            {
-                canvas.virtualSize = canvas.referenceSize;
-            }
+    cubos.system("scale canvas")
+        .call(
+            [](Query<UICanvas&, const RenderTarget&, Opt<const UIKeepPixelSize&>, Opt<const UIMatchHeight&>, > query) {
+                for (auto [canvas, rt, kpis, mh] : query)
+                {
+                    if (kpis.contains())
+                    {
+                        canvas.virtualSize = rt.size;
+                    }
+                    else if (mh.contains())
+                    {
+                        canvas.virtualSize.y = canvas.referenceSize.y;
+                        canvas.virtualSize.x = canvas.virtualSize.y * (float)rt.size.x / (float)rt.size.y;
+                    }
+                    else
+                    {
+                        canvas.virtualSize = canvas.referenceSize;
+                    }
 
-            canvas.mat = glm::ortho<float>(0, canvas.virtualSize.x, 0, canvas.virtualSize.y);
-        }
-    });
+                    canvas.mat = glm::ortho<float>(0, canvas.virtualSize.x, 0, canvas.virtualSize.y);
+                }
+            });
 
     cubos.system("set canvas children rect")
         .tagged(uiCanvasChildrenUpdateTag)
