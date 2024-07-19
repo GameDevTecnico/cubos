@@ -97,6 +97,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/ui/canvas/keep_pixel_size.cpp"
 	"src/ui/canvas/native_aspect_ratio.cpp"
 	"src/ui/canvas/match_height.cpp"
+	"src/ui/canvas/match_width.cpp"
 	"src/ui/canvas/element.cpp"
 	"src/ui/canvas/vertical_stretch.cpp"
 	"src/ui/canvas/horizontal_stretch.cpp"
