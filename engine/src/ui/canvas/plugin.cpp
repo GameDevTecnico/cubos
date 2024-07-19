@@ -12,6 +12,7 @@
 #include <cubos/engine/ui/canvas/canvas.hpp>
 #include <cubos/engine/ui/canvas/draw_list.hpp>
 #include <cubos/engine/ui/canvas/element.hpp>
+#include <cubos/engine/ui/canvas/expand.hpp>
 #include <cubos/engine/ui/canvas/horizontal_stretch.hpp>
 #include <cubos/engine/ui/canvas/keep_pixel_size.hpp>
 #include <cubos/engine/ui/canvas/match_height.hpp>
@@ -71,6 +72,7 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
     cubos.component<UIKeepPixelSize>();
     cubos.component<UIMatchHeight>();
     cubos.component<UIMatchWidth>();
+    cubos.component<UIExpand>();
 
     cubos.component<UIHorizontalStretch>();
     cubos.component<UIVerticalStretch>();
@@ -98,10 +100,10 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
         });
 
     cubos.system("scale canvas")
-        .call([](const core::io::Window& window, Query<UICanvas&, const RenderTarget&, Opt<const UIKeepPixelSize&>,
-                                                       Opt<const UIMatchHeight&>, Opt<const UIMatchWidth&>>
-                                                     query) {
-            for (auto [canvas, rt, kpis, mh, mw] : query)
+        .call([](Query<UICanvas&, const RenderTarget&, Opt<const UIKeepPixelSize&>, Opt<const UIMatchHeight&>,
+                       Opt<const UIMatchWidth&>, Opt<const UIExpand&>>
+                     query) {
+            for (auto [canvas, rt, kpis, mh, mw, exp] : query)
             {
                 if (kpis.contains())
                 {
@@ -116,6 +118,19 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                 {
                     canvas.virtualSize.x = canvas.referenceSize.x;
                     canvas.virtualSize.y = canvas.virtualSize.x * (float)rt.size.y / (float)rt.size.x;
+                }
+                else if (exp.contains())
+                {
+                    if ((float)rt.size.y / (float)rt.size.x > canvas.referenceSize.y / canvas.referenceSize.x)
+                    {
+                        canvas.virtualSize.x = canvas.referenceSize.x;
+                        canvas.virtualSize.y = canvas.virtualSize.x * (float)rt.size.y / (float)rt.size.x;
+                    }
+                    else
+                    {
+                        canvas.virtualSize.y = canvas.referenceSize.y;
+                        canvas.virtualSize.x = canvas.virtualSize.y * (float)rt.size.x / (float)rt.size.y;
+                    }
                 }
                 else
                 {
