@@ -1,5 +1,6 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/image/plugin.hpp>
+#include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
@@ -9,7 +10,11 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/ui/canvas/canvas.hpp>
 #include <cubos/engine/ui/canvas/element.hpp>
+#include <cubos/engine/ui/canvas/expand.hpp>
 #include <cubos/engine/ui/canvas/horizontal_stretch.hpp>
+#include <cubos/engine/ui/canvas/keep_pixel_size.hpp>
+#include <cubos/engine/ui/canvas/match_height.hpp>
+#include <cubos/engine/ui/canvas/match_width.hpp>
 #include <cubos/engine/ui/canvas/native_aspect_ratio.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
 #include <cubos/engine/ui/canvas/vertical_stretch.hpp>
@@ -21,6 +26,8 @@
 
 using namespace cubos::engine;
 
+static const Asset<InputBindings> BindingsAsset = AnyAsset("fd242bc2-ebb4-4287-b015-56876b355810");
+
 int main(int argc, char** argv)
 {
     Cubos cubos{argc, argv};
@@ -28,6 +35,7 @@ int main(int argc, char** argv)
     cubos.plugin(settingsPlugin);
     cubos.plugin(windowPlugin);
     cubos.plugin(assetsPlugin);
+    cubos.plugin(inputPlugin);
     cubos.plugin(renderTargetPlugin);
     cubos.plugin(shaderPlugin);
     cubos.plugin(transformPlugin);
@@ -35,6 +43,13 @@ int main(int argc, char** argv)
     cubos.plugin(imagePlugin);
     cubos.plugin(uiImagePlugin);
     cubos.plugin(colorRectPlugin);
+
+    cubos.startupSystem("load and set the Input Bindings")
+        .tagged(assetsTag)
+        .call([](const Assets& assets, Input& input) {
+            auto bindings = assets.read<InputBindings>(BindingsAsset);
+            input.bind(*bindings);
+        });
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
@@ -79,6 +94,59 @@ int main(int argc, char** argv)
                             .entity();
         commands.relate(longLogo, elementBg, ChildOf{});
         /// [Set up Long Logo]
+    });
+
+    cubos.system("change scale mode").call([](Commands cmds, const Input& input, Query<Entity, UICanvas&> query) {
+        if (input.pressed("set_stretch"))
+        {
+            for (auto [entity, _] : query)
+            {
+                cmds.remove<UIKeepPixelSize>(entity);
+                cmds.remove<UIMatchHeight>(entity);
+                cmds.remove<UIMatchWidth>(entity);
+                cmds.remove<UIExpand>(entity);
+            }
+        }
+        if (input.pressed("set_keep_pixel_size"))
+        {
+            for (auto [entity, _] : query)
+            {
+                cmds.add(entity, UIKeepPixelSize{});
+                cmds.remove<UIMatchHeight>(entity);
+                cmds.remove<UIMatchWidth>(entity);
+                cmds.remove<UIExpand>(entity);
+            }
+        }
+        if (input.pressed("set_match_width"))
+        {
+            for (auto [entity, _] : query)
+            {
+                cmds.add(entity, UIMatchWidth{});
+                cmds.remove<UIKeepPixelSize>(entity);
+                cmds.remove<UIMatchHeight>(entity);
+                cmds.remove<UIExpand>(entity);
+            }
+        }
+        if (input.pressed("set_match_height"))
+        {
+            for (auto [entity, _] : query)
+            {
+                cmds.add(entity, UIMatchHeight{});
+                cmds.remove<UIKeepPixelSize>(entity);
+                cmds.remove<UIMatchWidth>(entity);
+                cmds.remove<UIExpand>(entity);
+            }
+        }
+        if (input.pressed("set_expand"))
+        {
+            for (auto [entity, _] : query)
+            {
+                cmds.add(entity, UIExpand{});
+                cmds.remove<UIKeepPixelSize>(entity);
+                cmds.remove<UIMatchHeight>(entity);
+                cmds.remove<UIMatchWidth>(entity);
+            }
+        }
     });
 
     cubos.run();
