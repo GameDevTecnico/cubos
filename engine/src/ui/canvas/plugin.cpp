@@ -15,6 +15,7 @@
 #include <cubos/engine/ui/canvas/horizontal_stretch.hpp>
 #include <cubos/engine/ui/canvas/keep_pixel_size.hpp>
 #include <cubos/engine/ui/canvas/match_height.hpp>
+#include <cubos/engine/ui/canvas/match_width.hpp>
 #include <cubos/engine/ui/canvas/native_aspect_ratio.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
 #include <cubos/engine/ui/canvas/vertical_stretch.hpp>
@@ -69,6 +70,7 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
     // TODO: Make these exclusive
     cubos.component<UIKeepPixelSize>();
     cubos.component<UIMatchHeight>();
+    cubos.component<UIMatchWidth>();
 
     cubos.component<UIHorizontalStretch>();
     cubos.component<UIVerticalStretch>();
@@ -96,27 +98,33 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
         });
 
     cubos.system("scale canvas")
-        .call(
-            [](Query<UICanvas&, const RenderTarget&, Opt<const UIKeepPixelSize&>, Opt<const UIMatchHeight&>, > query) {
-                for (auto [canvas, rt, kpis, mh] : query)
+        .call([](const core::io::Window& window, Query<UICanvas&, const RenderTarget&, Opt<const UIKeepPixelSize&>,
+                                                       Opt<const UIMatchHeight&>, Opt<const UIMatchWidth&>>
+                                                     query) {
+            for (auto [canvas, rt, kpis, mh, mw] : query)
+            {
+                if (kpis.contains())
                 {
-                    if (kpis.contains())
-                    {
-                        canvas.virtualSize = rt.size;
-                    }
-                    else if (mh.contains())
-                    {
-                        canvas.virtualSize.y = canvas.referenceSize.y;
-                        canvas.virtualSize.x = canvas.virtualSize.y * (float)rt.size.x / (float)rt.size.y;
-                    }
-                    else
-                    {
-                        canvas.virtualSize = canvas.referenceSize;
-                    }
-
-                    canvas.mat = glm::ortho<float>(0, canvas.virtualSize.x, 0, canvas.virtualSize.y);
+                    canvas.virtualSize = rt.size;
                 }
-            });
+                else if (mh.contains())
+                {
+                    canvas.virtualSize.y = canvas.referenceSize.y;
+                    canvas.virtualSize.x = canvas.virtualSize.y * (float)rt.size.x / (float)rt.size.y;
+                }
+                else if (mw.contains())
+                {
+                    canvas.virtualSize.x = canvas.referenceSize.x;
+                    canvas.virtualSize.y = canvas.virtualSize.x * (float)rt.size.y / (float)rt.size.x;
+                }
+                else
+                {
+                    canvas.virtualSize = canvas.referenceSize;
+                }
+
+                canvas.mat = glm::ortho<float>(0, canvas.virtualSize.x, 0, canvas.virtualSize.y);
+            }
+        });
 
     cubos.system("set canvas children rect")
         .tagged(uiCanvasChildrenUpdateTag)
