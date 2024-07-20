@@ -10,6 +10,7 @@
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/collisions/shapes/voxel.hpp>
+#include <cubos/engine/defaults/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/gizmos/target.hpp>
@@ -20,6 +21,7 @@
 #include <cubos/engine/render/camera/perspective_camera.hpp>
 #include <cubos/engine/render/defaults/plugin.hpp>
 #include <cubos/engine/render/defaults/target.hpp>
+#include <cubos/engine/render/picker/plugin.hpp>
 #include <cubos/engine/render/tone_mapping/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
@@ -29,6 +31,7 @@
 using cubos::core::geom::Box;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;
+using cubos::core::io::MouseButton;
 
 using namespace cubos::engine;
 
@@ -49,18 +52,19 @@ int main()
 {
     auto cubos = Cubos();
 
-    cubos.plugin(settingsPlugin);
-    cubos.plugin(windowPlugin);
-    cubos.plugin(transformPlugin);
-    cubos.plugin(assetsPlugin);
-    cubos.plugin(collisionsPlugin);
-    cubos.plugin(fixedStepPlugin);
-    cubos.plugin(collisionsPlugin);
-    cubos.plugin(physicsPlugin);
-    cubos.plugin(solverPlugin);
-    cubos.plugin(inputPlugin);
-    cubos.plugin(renderDefaultsPlugin);
-    cubos.plugin(gizmosPlugin);
+    cubos.plugin(defaultsPlugin);
+    // cubos.plugin(inputPlugin);
+    //  cubos.plugin(settingsPlugin);
+    //  cubos.plugin(windowPlugin);
+    //  cubos.plugin(transformPlugin);
+    //  cubos.plugin(assetsPlugin);
+    //  cubos.plugin(fixedStepPlugin);
+    //  cubos.plugin(collisionsPlugin);
+    //  cubos.plugin(physicsPlugin);
+    //  cubos.plugin(solverPlugin);
+    //   cubos.plugin(inputPlugin);
+    //    cubos.plugin(renderDefaultsPlugin);
+    //    cubos.plugin(gizmosPlugin);
     cubos.tag(gizmosDrawTag).after(toneMappingTag);
 
     cubos.resource<State>();
@@ -73,6 +77,7 @@ int main()
         // Add procedural asset for detecting a reset action on a space key press.
         auto bindings = InputBindings{};
         bindings.actions()["reset"].keys().push_back({Key::Space, Modifiers::None});
+        bindings.actions()["left-mb"].mouseButtons().push_back(MouseButton::Left);
         input.bind(bindings);
     });
 
@@ -150,6 +155,19 @@ int main()
                 if ((ent1 == state.a && ent2 == state.b) || (ent1 == state.b && ent2 == state.a))
                 {
                     state.collided = true;
+                }
+            }
+        });
+
+    cubos.system("drag collision shapes with mouse")
+        .after(collisionsSampleUpdated)
+        .call([](Query<Entity, RenderPicker&> query, Input& input) {
+            glm::ivec2 pos = input.mousePosition();
+            for (auto [ent, picker] : query)
+            {
+                if (input.pressed("left-mb"))
+                {
+                    CUBOS_WARN("{}", picker.read(pos.x, pos.y));
                 }
             }
         });
