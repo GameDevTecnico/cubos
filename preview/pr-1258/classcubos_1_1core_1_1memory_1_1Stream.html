@@ -137,10 +137,20 @@
             </dt>
             <dd>Reads data from the stream.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a>(</span><span class="m-doc-wrap">void* data,
+              std::size_t size) -&gt; bool</span>
+            </dt>
+            <dd>Reads data from the stream with the exact specified size.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7865e5ea6bc59b0c87bc12ec9f68a25f" class="m-doc">write</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Writes data to the stream.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc">writeExact</a>(</span><span class="m-doc-wrap">const void* data,
+              std::size_t size) -&gt; bool</span>
+            </dt>
+            <dd>Writes data to the stream with the exact specified size.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2d6367c724309042140d6d1f84c5c65e" class="m-doc">tell</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -345,6 +355,35 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="ae5fcc3e6a2bbd22580eddfadf26107af"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc-self">readExact</a>(</span><span class="m-doc-wrap">void* data,
+              std::size_t size)</span></span>
+            </h3>
+            <p>Reads data from the stream with the exact specified size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">data</td>
+                  <td>Buffer to read data into.</td>
+                </tr>
+                <tr>
+                  <td>size</td>
+                  <td>Size of the buffer.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether reading was sucessful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after buffer is completed.</p></aside>
+          </div></section>
           <section class="m-doc-details" id="a7865e5ea6bc59b0c87bc12ec9f68a25f"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7865e5ea6bc59b0c87bc12ec9f68a25f" class="m-doc-self">write</a>(</span><span class="m-doc-wrap">const void* data,
@@ -372,6 +411,35 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a1dd03e1a5cd7fd587a99860a748fe447"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc-self">writeExact</a>(</span><span class="m-doc-wrap">const void* data,
+              std::size_t size)</span></span>
+            </h3>
+            <p>Writes data to the stream with the exact specified size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">data</td>
+                  <td>Buffer to write data from.</td>
+                </tr>
+                <tr>
+                  <td>size</td>
+                  <td>Size of the buffer.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether writing was sucessful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after whole buffer is written.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a2d6367c724309042140d6d1f84c5c65e"><div>
             <h3>
