@@ -139,6 +139,9 @@ set(CUBOS_CORE_SOURCE
     "src/geom/intersections.cpp"
 
     "src/net/address.cpp"
+    "src/net/tcp_stream.cpp"
+    "src/net/tcp_listener.cpp"
+    "src/net/utils.cpp"
 )
 
 # Create core library
