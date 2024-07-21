@@ -2,6 +2,7 @@
 
 #include <imgui.h>
 
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -28,12 +29,21 @@ namespace
 {
     struct SelectedPaletteInfo
     {
+        CUBOS_ANONYMOUS_REFLECT(SelectedPaletteInfo);
+
         Asset<VoxelPalette> asset;
         VoxelPalette paletteCopy;
         bool modified;
         Asset<VoxelPalette> next;
     };
 } // namespace
+
+CUBOS_REFLECT_IMPL(AssetSelectedEvent)
+{
+    return cubos::core::ecs::TypeBuilder<AssetSelectedEvent>("tesseratos::AssetSelectedEvent")
+        .withField("asset", &AssetSelectedEvent::asset)
+        .build();
+}
 
 static void savePaletteUiGuard(Assets& assets, SelectedPaletteInfo& selectedPalette)
 {

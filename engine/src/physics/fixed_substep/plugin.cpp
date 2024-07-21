@@ -9,6 +9,8 @@ namespace
 {
     struct SubstepsCount
     {
+        CUBOS_ANONYMOUS_REFLECT(SubstepsCount);
+
         int value = 0;
     };
 } // namespace

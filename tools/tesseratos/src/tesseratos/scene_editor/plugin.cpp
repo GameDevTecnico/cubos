@@ -52,6 +52,8 @@ namespace
     // Resource which stores the editor state.
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         Asset<Scene> asset{nullptr};
         SceneInfo root;
         std::unordered_map<std::string, Asset<Scene>> imports;

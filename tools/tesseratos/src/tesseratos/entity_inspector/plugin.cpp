@@ -28,6 +28,8 @@ namespace
 {
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         const Type* relationType;
     };
 } // namespace

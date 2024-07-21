@@ -9,13 +9,6 @@ Type& Type::create(std::string name)
     return *(new Type(std::move(name)));
 }
 
-Type& Type::unnamed(unsigned long long id)
-{
-    auto& type = Type::create("unnamed" + std::to_string(id));
-    type.mImplemented = false;
-    return type;
-}
-
 void Type::destroy(Type& type)
 {
     delete &type;
@@ -79,11 +72,6 @@ bool Type::operator==(const Type& other) const
 
     CUBOS_ASSERT(this->mName != other.mName, "Two types should never have the same name");
     return false;
-}
-
-bool Type::implemented() const
-{
-    return mImplemented;
 }
 
 Type::~Type()

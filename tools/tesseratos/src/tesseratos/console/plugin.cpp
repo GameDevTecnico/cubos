@@ -17,6 +17,8 @@ namespace
     // Resource used to store the state of the console
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         std::vector<cubos::core::Logger::Entry> uiEntries;
         std::size_t cursor = 0;
         char searchString[256];

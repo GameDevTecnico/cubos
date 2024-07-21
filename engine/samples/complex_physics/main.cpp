@@ -41,6 +41,8 @@ static const glm::vec3 AimPoint = glm::vec3(0.0F, 3.0F, 0.0F);
 
 struct TimeBetweenShoots
 {
+    CUBOS_ANONYMOUS_REFLECT(TimeBetweenShoots);
+
     float max = 3.0F;
     float current = 0.0F;
 };

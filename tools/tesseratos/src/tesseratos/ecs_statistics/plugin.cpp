@@ -25,6 +25,8 @@ namespace
 {
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         char columnFilter[256]{0};
         ArchetypeId selectedArchetype{ArchetypeId::Invalid};
         DataTypeId selectedSparseRelationTypeId{DataTypeId::Invalid};

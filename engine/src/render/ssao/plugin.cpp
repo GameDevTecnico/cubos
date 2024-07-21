@@ -44,6 +44,8 @@ namespace
 
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         ShaderPipeline basePipeline;
         ShaderBindingPoint basePositionBP;
         ShaderBindingPoint baseNormalBP;

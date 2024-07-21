@@ -26,6 +26,8 @@ namespace tesseratos
     /// @brief Event sent when an asset is selected.
     struct AssetSelectedEvent
     {
+        CUBOS_REFLECT;
+
         cubos::engine::AnyAsset asset; ///< Handle to the selected asset.
     };
 

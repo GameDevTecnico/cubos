@@ -15,6 +15,8 @@ namespace
 {
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         bool paused{false};
         float scale{1.0F};
     };

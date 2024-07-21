@@ -6,6 +6,8 @@ namespace
 {
     struct AccumulatedTime
     {
+        CUBOS_ANONYMOUS_REFLECT(AccumulatedTime);
+
         float value = 0.0F;
     };
 } // namespace

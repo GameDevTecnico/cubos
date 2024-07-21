@@ -34,6 +34,8 @@ namespace
 {
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         cubos::core::gl::DepthStencilState dss;
         cubos::core::gl::ConstantBuffer mvpBuffer;
         State(cubos::core::gl::DepthStencilState depthStencilState, cubos::core::gl::ConstantBuffer mvpConstantBuffer)
