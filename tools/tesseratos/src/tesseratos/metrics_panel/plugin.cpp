@@ -16,6 +16,8 @@ namespace
 {
     struct Metrics
     {
+        CUBOS_ANONYMOUS_REFLECT(Metrics);
+
         float timeElapsed = 0.0F;
         float fps = 0.0F;
         float maxFps = 0.0F;

@@ -243,17 +243,7 @@ const char* Logger::streamFormat(memory::Stream& stream, const char* format, con
             }
 
             foundArgument = true;
-            if (!type.implemented())
-            {
-                CUBOS_WARN("You tried to print a type ({}) which doesn't implement reflection. Did you forget to "
-                           "include its reflection definition?",
-                           type.name());
-                stream.print("(no reflection)");
-            }
-            else
-            {
-                data::DebugSerializer{stream}.write(type, value);
-            }
+            data::DebugSerializer{stream}.write(type, value);
             ++format;
         }
         else

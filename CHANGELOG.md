@@ -35,7 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Move Opt class to memory namespace (#1212, **@roby2014**).
 - Moved from XPBD to TGS Soft for physics solving (#1269, **@fallenatlas**).
-- Allow arbitrary input combinations for actions and axes (#417, #1279, **@luishfonseca**)
+- Allow arbitrary input combinations for actions and axes (#417, #1279, **@luishfonseca**).
+- Replaced fallback anonymous reflection types by a new anonymous reflection macro (#1163, **@RiscadoA**).
 
 ## [v0.2.0] - 2024-05-07
 

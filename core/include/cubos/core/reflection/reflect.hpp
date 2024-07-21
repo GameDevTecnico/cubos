@@ -15,19 +15,16 @@ namespace cubos::core::reflection
 {
     class Type;
 
-    /// @brief Creates a new unnamed type with the given identifier. Used as a fallback for non-reflectable C++ types.
-    ///
-    /// The created 'unnamed' type is named from the given identifier, and has a minimal @ref ConstructibleTrait, which
-    /// exposes its identifier, size, alignment and destructor. This means that types without reflection which don't
-    /// expose destructors (e.g., singletons), are not supported by @ref reflect.
-    ///
-    /// @param id Unique type identifier.
+    /// @brief Creates a new reflection type with a unique name created from a type name and a file path, and with a
+    /// minimal @ref ConstructibleTrait.
+    /// @param name Type name.
+    /// @param file Path of the file where the type is defined.
     /// @param size Type size in bytes.
     /// @param alignment Type alignment in bytes.
     /// @param destructor Type destructor.
     /// @ingroup core-reflection
-    CUBOS_CORE_API const Type& makeUnnamedType(unsigned long long id, std::size_t size, std::size_t alignment,
-                                               void (*destructor)(void*));
+    CUBOS_CORE_API const Type& makeAnonymousType(const char* name, const char* file, std::size_t size,
+                                                 std::size_t alignment, void (*destructor)(void*));
 
     /// @brief Defines the reflection function for the given type @p T.
     ///
@@ -62,25 +59,12 @@ namespace cubos::core::reflection
         // your type or an external type.
         static const Type& get()
         {
-            constexpr bool ImplementsReflection = requires()
+            constexpr bool HasReflectionMethod = requires()
             {
                 T::reflectGet();
             };
-
-            if constexpr (ImplementsReflection)
-            {
-                return T::reflectGet();
-            }
-            else
-            {
-                // This variable is unused, but since there is one for each type, its address is
-                // guaranteed to be unique for each type. Thus, we use it as an identifier.
-                static const bool Var = false;
-                static const Type& type =
-                    makeUnnamedType(reinterpret_cast<unsigned long long>(&Var), sizeof(T), alignof(T),
-                                    [](void* value) { static_cast<T*>(value)->~T(); });
-                return type;
-            }
+            static_assert(HasReflectionMethod, "Type does not implement reflection");
+            return T::reflectGet();
         }
     };
 
@@ -281,3 +265,35 @@ namespace cubos::core::reflection
                                                                                                                        \
     template <CUBOS_PACK args>                                                                                         \
     const ::cubos::core::reflection::Type& ::cubos::core::reflection::Reflect<CUBOS_PACK T>::make()
+
+/// @brief Defines minimal reflection for a type private to a compilation unit.
+///
+/// Equivalent to @ref CUBOS_REFLECT with an implementation which uses @ref makeAnonymousType.
+///
+/// @code{.cpp}
+/// // my_type.cpp
+/// #include <cubos/core/reflection/reflect.hpp>
+///
+/// namespace
+/// {
+///     struct State
+///     {
+///         CUBOS_ANONYMOUS_REFLECT(State);
+///     };
+/// }
+/// @endcode
+///
+/// @ingroup core-reflection
+#define CUBOS_ANONYMOUS_REFLECT(...)                                                                                   \
+    static inline const cubos::core::reflection::Type& reflectGet()                                                    \
+    {                                                                                                                  \
+        static const ::cubos::core::reflection::Type& type = reflectMake();                                            \
+        return type;                                                                                                   \
+    }                                                                                                                  \
+    static inline const cubos::core::reflection::Type& reflectMake()                                                   \
+    {                                                                                                                  \
+        return ::cubos::core::reflection::makeAnonymousType(                                                           \
+            #__VA_ARGS__, __FILE__, sizeof(__VA_ARGS__), alignof(__VA_ARGS__),                                         \
+            [](void* ptr) { static_cast<__VA_ARGS__*>(ptr)->~__VA_ARGS__(); });                                        \
+    }                                                                                                                  \
+    static_assert(true, "") /* Here just to force the user to enter a semicolon */

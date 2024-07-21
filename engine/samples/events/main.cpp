@@ -18,12 +18,16 @@ CUBOS_DEFINE_TAG(cubos::engine::eventC);
 /// [Event struct]
 struct MyEvent
 {
+    CUBOS_ANONYMOUS_REFLECT(MyEvent);
+
     int value;
 };
 /// [Event struct]
 
 struct State
 {
+    CUBOS_ANONYMOUS_REFLECT(State);
+
     int step;
 };
 

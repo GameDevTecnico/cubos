@@ -33,14 +33,6 @@ namespace cubos::core::reflection
         /// @return Reference to the type.
         static Type& create(std::string name);
 
-        /// @brief Constructs an unnamed type with the given identifier.
-        ///
-        /// The type is also marked as not being implemented.
-        ///
-        /// @param id Type identifier.
-        /// @return Reference to the type.
-        static Type& unnamed(unsigned long long id);
-
         /// @brief Destroys the given type.
         /// @param type Type to destroy.
         static void destroy(Type& type);
@@ -122,9 +114,6 @@ namespace cubos::core::reflection
         /// @return Whether the objects have the same address, which indicates equality.
         bool operator==(const Type& other) const;
 
-        /// @brief Checks whether the type had reflection implemented for it.
-        bool implemented() const;
-
     private:
         ~Type();
 
@@ -142,7 +131,6 @@ namespace cubos::core::reflection
 
         std::string mName;
         std::string mShortName;
-        bool mImplemented{true};
         std::vector<Trait> mTraits;
     };
 } // namespace cubos::core::reflection

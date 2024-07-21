@@ -25,6 +25,8 @@ static const Asset<VoxelPalette> PaletteAsset = AnyAsset("1aa5e234-28cb-4386-99b
 
 struct MaxTime
 {
+    CUBOS_ANONYMOUS_REFLECT(MaxTime);
+
     float max = 1.0F;
     float current = 0.0F;
 };

@@ -35,6 +35,8 @@ namespace
 {
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         // Cameras which were deactivated by the plugin.
         std::unordered_set<Entity, EntityHash> deactivated;
 

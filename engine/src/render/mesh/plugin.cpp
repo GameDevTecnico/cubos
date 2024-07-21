@@ -31,6 +31,8 @@ namespace
 {
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         struct Entry
         {
             RenderMeshPool::BucketId firstBucketId{};

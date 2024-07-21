@@ -35,6 +35,8 @@ static CUBOS_DEFINE_TAG(collisionsSampleUpdated);
 
 struct State
 {
+    CUBOS_ANONYMOUS_REFLECT(State);
+
     bool collided = false;
 
     Entity a;

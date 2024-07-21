@@ -33,11 +33,17 @@ struct Position
 /// [Your own trait]
 struct ColorTrait
 {
+    CUBOS_REFLECT;
     float r, g, b;
 };
 /// [Your own trait]
 
 /// [Adding your own trait]
+CUBOS_REFLECT_IMPL(ColorTrait)
+{
+    return Type::create("ColorTrait");
+}
+
 CUBOS_REFLECT_IMPL(Position)
 {
     return Type::create("Position").with(ColorTrait{.r = 0.0F, .g = 1.0F, .b = 0.0F});

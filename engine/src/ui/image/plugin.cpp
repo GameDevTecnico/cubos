@@ -27,6 +27,8 @@ namespace
 
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         VertexArray va;
         UIDrawList::Type drawType;
 

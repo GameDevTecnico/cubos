@@ -17,6 +17,8 @@ static const Asset<InputBindings> BindingsAsset = AnyAsset("bf49ba61-5103-41bc-9
 
 struct State
 {
+    CUBOS_ANONYMOUS_REFLECT(State);
+
     int showcase = 0;
     bool nextPressed = false;
     bool explained = false;

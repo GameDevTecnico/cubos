@@ -9,9 +9,11 @@ namespace cubos::core::reflection
     /// @brief Provides inheritance relationship between types.
     /// @see See @ref examples-core-reflection-traits-inherits for an example of using this trait.
     /// @ingroup core-reflection
-    class InheritsTrait
+    class CUBOS_CORE_API InheritsTrait
     {
     public:
+        CUBOS_REFLECT;
+
         ~InheritsTrait() = default;
 
         /// @brief Constructs.

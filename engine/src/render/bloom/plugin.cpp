@@ -23,6 +23,8 @@ namespace
 
     struct State
     {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
         ShaderPipeline extractPipeline;
         ShaderBindingPoint extractInputBP;
         ShaderBindingPoint extractThresholdFilterBP;
