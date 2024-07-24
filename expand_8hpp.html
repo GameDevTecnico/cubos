@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::UICanvas struct | Cubos Docs</title>
+  <title>engine/ui/canvas/expand.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,36 +46,37 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>UICanvas <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="canvas_8hpp.html">&lt;engine/ui/canvas/canvas.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_a0e345b5ef3f916fe64ce8826d84a921.html">ui</a>/</span><span class="m-breadcrumb"><a href="dir_1df0034ddb3bcba614277f72ec51c76d.html">canvas</a>/</span>expand.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Component which represents a target for UI rendering.</p>
+        <p>Component <a href="structcubos_1_1engine_1_1UIExpand.html" class="m-doc">cubos::<wbr />engine::<wbr />UIExpand</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="a8f4a62c5e413d6a47fa3cd1a42ef010d">
-              glm::vec2 <a href="#a8f4a62c5e413d6a47fa3cd1a42ef010d" class="m-doc-self">referenceSize</a>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIExpand.html" class="m-doc">cubos::engine::UIExpand</a>
             </dt>
-            <dd>Size to be used as reference for the elements below this canvas.</dd>
-            <dt id="a44d253b4255c307be8338f87ffcf52a3">
-              glm::vec2 <a href="#a44d253b4255c307be8338f87ffcf52a3" class="m-doc-self">virtualSize</a>
-            </dt>
-            <dd>Internal size of the canvas, with scalling applied.</dd>
-            <dt id="a201020acd8211414420f653db4fce40e">
-              glm::mat4 <a href="#a201020acd8211414420f653db4fce40e" class="m-doc-self">mat</a>
-            </dt>
-            <dd>View matrix provided of the canvas.</dd>
+            <dd>Component which makes a UI canvas scale to maintain proportions, choosing the dimension which reduces the element sizes on screen.</dd>
           </dl>
         </section>
       </div>
