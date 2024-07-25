@@ -118,7 +118,8 @@ int main(int argc, char** argv)
             .add(Force{})
             .add(Impulse{})
             .add(Mass{.mass = 1.0F, .inverseMass = 0.0F})
-            .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}});
+            .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
+            .add(PhysicsMaterial{});
 
         auto redCube = assets.read(RedCubeSceneAsset);
         auto whiteCube = assets.read(WhiteCubeSceneAsset);
