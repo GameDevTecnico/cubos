@@ -51,6 +51,12 @@
         "inverseMass": 0.02,
         "mass": 50.0
       },
+      "cubos::engine::PhysicsMaterial": {
+        "friction": 0.02,
+        "bounciness": 1.0,
+        "frictionMix": "Average",
+        "bouncinessMix": "Average"
+      },
       "cubos::engine::Position": {
         "x": 0.0,
         "y": 0.0,
