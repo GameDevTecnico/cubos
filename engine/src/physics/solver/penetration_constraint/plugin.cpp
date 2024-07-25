@@ -33,6 +33,29 @@ void getPlaneSpace(const glm::vec3& n, glm::vec3& tangent1, glm::vec3& tangent2)
     }
 }
 
+PhysicsMaterial::MixProperty getMixProperty(PhysicsMaterial::MixProperty mixProperty1,
+                                            PhysicsMaterial::MixProperty mixProperty2)
+{
+    return mixProperty1 > mixProperty2 ? mixProperty2 : mixProperty1;
+}
+
+float mixValues(float value1, float value2, PhysicsMaterial::MixProperty mixProperty)
+{
+    switch (mixProperty)
+    {
+    case PhysicsMaterial::MixProperty::Maximum:
+        return value1 > value2 ? value1 : value2;
+    case PhysicsMaterial::MixProperty::Multiply:
+        return value1 * value2;
+    case PhysicsMaterial::MixProperty::Minimum:
+        return value1 > value2 ? value2 : value1;
+    case PhysicsMaterial::MixProperty::Average:
+        return (value1 + value2) / 2.0F;
+    default:
+        return 0.0F;
+    }
+}
+
 void solvePenetrationConstraint(Query<Entity, const Mass&, AccumulatedCorrection&, Velocity&, PenetrationConstraint&,
                                       Entity, const Mass&, AccumulatedCorrection&, Velocity&>
                                     query,
@@ -217,7 +240,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                     continue;
                 }
 
-                if (constraint.relativeVelocity > -0.1F || constraint.normalImpulse == 0.0F)
+                if (constraint.relativeVelocity > -0.01F || constraint.normalImpulse == 0.0F)
                 {
                     continue;
                 }
@@ -250,13 +273,14 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
         .tagged(addPenetrationConstraintTag)
         .tagged(physicsPrepareSolveTag)
         .call([](Commands cmds,
-                 Query<Entity, const Mass&, const Velocity&, const CollidingWith&, Entity, const Mass&, const Velocity&>
+                 Query<Entity, const Mass&, const Velocity&, const PhysicsMaterial&, const CollidingWith&, Entity,
+                       const Mass&, const Velocity&, const PhysicsMaterial&>
                      query,
                  const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
             float contactHertz = glm::min(30.0F, 0.25F * (1.0F / subDeltaTime));
 
-            for (auto [ent1, mass1, velocity1, collidingWith, ent2, mass2, velocity2] : query)
+            for (auto [ent1, mass1, velocity1, material1, collidingWith, ent2, mass2, velocity2, material2] : query)
             {
                 float kNormal = mass1.inverseMass + mass2.inverseMass;
                 float normalMass = kNormal > 0.0F ? 1.0F / kNormal : 0.0F;
@@ -266,10 +290,12 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 float frictionMass = kFriction > 0.0F ? 1.0F / kFriction : 0.0F;
 
                 // determine friction (set to predefined value for now)
-                float friction = 0.01F;
+                float friction = mixValues(material1.friction, material2.friction,
+                                           getMixProperty(material1.frictionMix, material2.frictionMix));
 
                 // determine restitution (set to predefined value for now)
-                float restitution = 1.0F;
+                float restitution = mixValues(material1.bounciness, material2.bounciness,
+                                              getMixProperty(material1.bouncinessMix, material2.bouncinessMix));
                 glm::vec3 vr = velocity2.vec - velocity1.vec;
 
                 if (ent1 != collidingWith.entity)
