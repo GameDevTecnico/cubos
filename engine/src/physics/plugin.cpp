@@ -2,6 +2,9 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/reflection/traits/enum.hpp>
+#include <cubos/core/reflection/type.hpp>
+
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 
@@ -43,6 +46,27 @@ CUBOS_REFLECT_IMPL(Impulse)
         .build();
 }
 
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, PhysicsMaterial::MixProperty);
+CUBOS_REFLECT_EXTERNAL_IMPL(PhysicsMaterial::MixProperty)
+{
+    return cubos::core::reflection::Type::create("PhysicsMaterial::MixProperty")
+        .with(cubos::core::reflection::EnumTrait{}
+                  .withVariant<PhysicsMaterial::MixProperty::Maximum>("Maximum")
+                  .withVariant<PhysicsMaterial::MixProperty::Multiply>("Multiply")
+                  .withVariant<PhysicsMaterial::MixProperty::Minimum>("Minimum")
+                  .withVariant<PhysicsMaterial::MixProperty::Average>("Average"));
+}
+
+CUBOS_REFLECT_IMPL(PhysicsMaterial)
+{
+    return cubos::core::ecs::TypeBuilder<PhysicsMaterial>("cubos::engine::PhysicsMaterial")
+        .withField("friction", &PhysicsMaterial::friction)
+        .withField("bounciness", &PhysicsMaterial::bounciness)
+        .withField("frictionMix", &PhysicsMaterial::frictionMix)
+        .withField("bouncinessMix", &PhysicsMaterial::bouncinessMix)
+        .build();
+}
+
 CUBOS_REFLECT_IMPL(PhysicsBundle)
 {
     return cubos::core::ecs::TypeBuilder<PhysicsBundle>("cubos::engine::PhysicsBundle")
@@ -69,6 +93,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.component<Impulse>();
     cubos.component<Mass>();
     cubos.component<AccumulatedCorrection>();
+    cubos.component<PhysicsMaterial>();
     cubos.component<PhysicsBundle>();
 
     cubos.observer("unpack PhysicsBundle's")
@@ -89,6 +114,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 cmds.add(ent, force);
                 cmds.add(ent, impulse);
                 cmds.add(ent, AccumulatedCorrection{});
+                cmds.add(ent, PhysicsMaterial{});
             }
         });
 

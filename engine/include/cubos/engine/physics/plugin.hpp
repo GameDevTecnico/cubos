@@ -15,6 +15,7 @@
 #include <cubos/engine/physics/components/force.hpp>
 #include <cubos/engine/physics/components/impulse.hpp>
 #include <cubos/engine/physics/components/mass.hpp>
+#include <cubos/engine/physics/components/physics_material.hpp>
 #include <cubos/engine/physics/components/velocity.hpp>
 #include <cubos/engine/physics/physics_bundle.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
@@ -39,6 +40,7 @@ namespace cubos::engine
     /// - @ref Impulse - holds impulses applied on a particle.
     /// - @ref Mass - holds the mass of an object.
     /// - @ref AccumulatedCorrection - holds the corrections accumulated from the constraints solving.
+    /// - @ref PhysicsMaterial - holds the friction and bounciness properties of the particle.
     ///
     /// ## Dependencies
     /// - @ref physics-gravity-plugin
