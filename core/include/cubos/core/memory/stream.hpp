@@ -79,7 +79,7 @@ namespace cubos::core::memory
 
         /// @brief Peeks one byte from the stream.
         /// @return Peeked byte.
-        virtual char peek() const = 0;
+        virtual char peek() = 0;
 
         /// @brief Gets one byte from the stream.
         /// @return Read byte.
@@ -94,14 +94,16 @@ namespace cubos::core::memory
         /// @param value Value to print.
         /// @param base Base to use.
         template <typename T>
-        requires(::std::is_integral_v<T>&& ::std::is_signed_v<T>) void print(T value, std::size_t base = 10);
+            requires(::std::is_integral_v<T> && ::std::is_signed_v<T>)
+        void print(T value, std::size_t base = 10);
 
         /// @brief Prints a signed integer to the stream.
         /// @tparam T Integer type.
         /// @param value Value to print.
         /// @param base Base to use.
         template <typename T>
-        requires(::std::is_integral_v<T> && !::std::is_signed_v<T>) inline void print(T value, std::size_t base = 10);
+            requires(::std::is_integral_v<T> && !::std::is_signed_v<T>)
+        inline void print(T value, std::size_t base = 10);
 
         /// @brief Prints a 64 bit signed integer to the stream.
         /// @param value Value to print.
@@ -227,13 +229,15 @@ namespace cubos::core::memory
     // Implementation
 
     template <typename T>
-    requires(std::is_integral_v<T>&& std::is_signed_v<T>) inline void Stream::print(T value, std::size_t base)
+        requires(std::is_integral_v<T> && std::is_signed_v<T>)
+    inline void Stream::print(T value, std::size_t base)
     {
         this->print(static_cast<int64_t>(value), base);
     }
 
     template <typename T>
-    requires(std::is_integral_v<T> && !std::is_signed_v<T>) inline void Stream::print(T value, std::size_t base)
+        requires(std::is_integral_v<T> && !std::is_signed_v<T>)
+    inline void Stream::print(T value, std::size_t base)
     {
         this->print(static_cast<uint64_t>(value), base);
     }

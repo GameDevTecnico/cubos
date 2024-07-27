@@ -42,7 +42,7 @@ namespace cubos::core::data
         std::size_t tell() const override;
         void seek(ptrdiff_t offset, memory::SeekOrigin origin) override;
         bool eof() const override;
-        char peek() const override;
+        char peek() override;
 
     private:
         File::Handle mFile;
@@ -93,7 +93,7 @@ namespace cubos::core::data
     }
 
     template <typename T>
-    inline char FileStream<T>::peek() const
+    inline char FileStream<T>::peek()
     {
         return mStream.peek();
     }

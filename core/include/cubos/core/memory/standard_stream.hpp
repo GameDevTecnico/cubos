@@ -31,7 +31,7 @@ namespace cubos::core::memory
         std::size_t tell() const override;
         void seek(ptrdiff_t offset, SeekOrigin origin) override;
         bool eof() const override;
-        char peek() const override;
+        char peek() override;
 
     private:
         FILE* mFile; ///< File to read/write from.
