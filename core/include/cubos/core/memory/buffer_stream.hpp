@@ -55,7 +55,7 @@ namespace cubos::core::memory
         std::size_t tell() const override;
         void seek(ptrdiff_t offset, SeekOrigin origin) override;
         bool eof() const override;
-        char peek() const override;
+        char peek() override;
 
     private:
         void* mBuffer;         ///< Pointer to the buffer being written to/read from.

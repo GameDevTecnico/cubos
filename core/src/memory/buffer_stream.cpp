@@ -204,7 +204,7 @@ bool BufferStream::eof() const
     return mReachedEof;
 }
 
-char BufferStream::peek() const
+char BufferStream::peek()
 {
     if (mPosition == mSize)
     {

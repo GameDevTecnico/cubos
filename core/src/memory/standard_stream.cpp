@@ -61,7 +61,7 @@ bool StandardStream::eof() const
     return feof(mFile) != 0;
 }
 
-char StandardStream::peek() const
+char StandardStream::peek()
 {
     auto c = fgetc(mFile);
     ungetc(c, mFile);
