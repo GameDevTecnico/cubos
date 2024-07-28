@@ -553,3 +553,41 @@ void Stream::ignore(std::size_t size)
         this->get();
     }
 }
+
+bool Stream::writeExact(const void* data, std::size_t size)
+{
+    const char* dataPtr = static_cast<const char*>(data);
+    std::size_t totalBytesWritten = 0;
+
+    while (totalBytesWritten < size)
+    {
+        auto bytesWritten = write(dataPtr + totalBytesWritten, size - totalBytesWritten);
+        if (bytesWritten <= 0)
+        {
+            return false;
+        }
+
+        totalBytesWritten += bytesWritten;
+    }
+
+    return true;
+}
+
+bool Stream::readExact(void* data, std::size_t size)
+{
+    char* dataPtr = static_cast<char*>(data);
+    std::size_t totalBytesRead = 0;
+
+    while (totalBytesRead < size)
+    {
+        auto bytesRead = read(dataPtr + totalBytesRead, size - totalBytesRead);
+        if (bytesRead <= 0)
+        {
+            return false;
+        }
+
+        totalBytesRead += bytesRead;
+    }
+
+    return true;
+}

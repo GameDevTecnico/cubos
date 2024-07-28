@@ -55,14 +55,30 @@ namespace cubos::core::memory
         /// @brief Reads data from the stream.
         /// @param data Buffer to read data into.
         /// @param size Size of the buffer.
+        /// @note Data may be read partially, @ref readExact is recommended.
         /// @return Number of bytes read.
         virtual std::size_t read(void* data, std::size_t size) = 0;
 
         /// @brief Writes data to the stream.
         /// @param data Buffer to write data from.
         /// @param size Size of the buffer.
+        /// @note Data may be written partially, @ref writeExact is recommended.
         /// @return Number of bytes written.
         virtual std::size_t write(const void* data, std::size_t size) = 0;
+
+        /// @brief Reads data from the stream with the exact specified size.
+        /// @param data Buffer to read data into.
+        /// @param size Size of the buffer.
+        /// @note This function will only return after buffer is completed or an error occurs.
+        /// @return Whether reading was sucessful.
+        bool readExact(void* data, std::size_t size);
+
+        /// @brief Writes data to the stream with the exact specified size.
+        /// @param data Buffer to write data from.
+        /// @param size Size of the buffer.
+        /// @note This function will only return after whole buffer is written or an error occurs.
+        /// @return Whether writing was sucessful.
+        bool writeExact(const void* data, std::size_t size);
 
         /// @brief Gets the current position in the stream.
         /// @return Current position in the stream, or SIZE_MAX if the position is unknown.
@@ -94,16 +110,14 @@ namespace cubos::core::memory
         /// @param value Value to print.
         /// @param base Base to use.
         template <typename T>
-            requires(::std::is_integral_v<T> && ::std::is_signed_v<T>)
-        void print(T value, std::size_t base = 10);
+        requires(::std::is_integral_v<T>&& ::std::is_signed_v<T>) void print(T value, std::size_t base = 10);
 
         /// @brief Prints a signed integer to the stream.
         /// @tparam T Integer type.
         /// @param value Value to print.
         /// @param base Base to use.
         template <typename T>
-            requires(::std::is_integral_v<T> && !::std::is_signed_v<T>)
-        inline void print(T value, std::size_t base = 10);
+        requires(::std::is_integral_v<T> && !::std::is_signed_v<T>) inline void print(T value, std::size_t base = 10);
 
         /// @brief Prints a 64 bit signed integer to the stream.
         /// @param value Value to print.
@@ -229,15 +243,13 @@ namespace cubos::core::memory
     // Implementation
 
     template <typename T>
-        requires(std::is_integral_v<T> && std::is_signed_v<T>)
-    inline void Stream::print(T value, std::size_t base)
+    requires(std::is_integral_v<T>&& std::is_signed_v<T>) inline void Stream::print(T value, std::size_t base)
     {
         this->print(static_cast<int64_t>(value), base);
     }
 
     template <typename T>
-        requires(std::is_integral_v<T> && !std::is_signed_v<T>)
-    inline void Stream::print(T value, std::size_t base)
+    requires(std::is_integral_v<T> && !std::is_signed_v<T>) inline void Stream::print(T value, std::size_t base)
     {
         this->print(static_cast<uint64_t>(value), base);
     }
