@@ -20,9 +20,13 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         float mass = 1.0F;
+        glm::vec3 colliderDimensions = {1.0F, 1.0F, 1.0F};
         glm::vec3 velocity = {0.0F, 0.0F, 0.0F};
+        glm::vec3 angularVelocity = {0.0F, 0.0F, 0.0F};
         glm::vec3 force = {0.0F, 0.0F, 0.0F};
+        glm::vec3 torque = {0.0F, 0.0F, 0.0F};
         glm::vec3 impulse = {0.0F, 0.0F, 0.0F};
+        glm::vec3 angularImpulse = {0.0F, 0.0F, 0.0F};
         PhysicsMaterial material = PhysicsMaterial{};
     };
 } // namespace cubos::engine
