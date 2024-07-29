@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tesseratos &raquo; ECS Statistics module | Cubos Docs</title>
+  <title>Engine &raquo; Render &raquo; Shadow atlas module | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,45 +46,76 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__tesseratos.html">Tesseratos</a> &raquo;</span>
-          ECS Statistics <span class="m-thin">module</span></h1>
-        <p>Shows tons of statistics and information about the internal state of the ECS.</p>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
+          Shadow atlas <span class="m-thin">module</span></h1>
+        <p>Creates and manages a shadow map atlas.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md125">Dependencies</a></li>
+            <li><a href="#autotoc_md100">Dependencies</a></li>
             <li>
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md125"><h3><a href="#autotoc_md125">Dependencies</a></h3><ul><li><a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></li><li><a href="group__tesseratos-toolbox-plugin.html" class="m-doc">Toolbox</a></li><li><a href="group__tesseratos-entity-selector-plugin.html" class="m-doc">Entity selector</a></li></ul></section>
+<section id="autotoc_md100"><h3><a href="#autotoc_md100">Dependencies</a></h3><ul><li><a href="group__render-shadows-plugin.html" class="m-doc">Shadows</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="tools_2tesseratos_2src_2tesseratos_2ecs__statistics_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dt>file <a href="engine_2include_2cubos_2engine_2render_2shadow__atlas_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
+            <dt>file <a href="shadow__atlas_8hpp.html" class="m-doc">shadow_atlas.hpp</a></dt>
+            <dd>Resource <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">cubos::<wbr />engine::<wbr />ShadowAtlas</a>.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">cubos::engine::ShadowAtlas</a>
+            </dt>
+            <dd>Resource which stores the shadow map atlas, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gaa52586f5bb949a785b16c0a14174f497" class="m-doc">ecsStatisticsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga813324499441f3279142c37dd7171396" class="m-doc">shadowAtlasPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga8da37b5203432183347b0886ab935326" class="m-doc">createShadowAtlasTag</a>
+            </dt>
+            <dd>Creates the shadow atlas.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gaf42ecd1d50d9e3473cfc92d0b05cb70d" class="m-doc">reserveShadowCastersTag</a>
+            </dt>
+            <dd>Reserves space for shadow casters.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga23dfaa7469e7e281740d66d3469ac93e" class="m-doc">drawToShadowAtlasTag</a>
+            </dt>
+            <dd>Systems which draw to the shadow atlas texture should be tagged with this.</dd>
+          </dl>
+        </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gaa52586f5bb949a785b16c0a14174f497"><div>
+          <section class="m-doc-details" id="ga813324499441f3279142c37dd7171396"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaa52586f5bb949a785b16c0a14174f497" class="m-doc-self">ecsStatisticsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2src_2tesseratos_2ecs__statistics_2plugin_8hpp.html">&lt;tesseratos/ecs_statistics/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga813324499441f3279142c37dd7171396" class="m-doc-self">shadowAtlasPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadow__atlas_2plugin_8hpp.html">&lt;engine/render/shadow_atlas/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -94,10 +125,34 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class</td>
+                  <td><strong>Cubos</strong> main class.</td>
                 </tr>
               </tbody>
             </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="ga8da37b5203432183347b0886ab935326"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga8da37b5203432183347b0886ab935326" class="m-doc-self">createShadowAtlasTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadow__atlas_2plugin_8hpp.html">&lt;engine/render/shadow_atlas/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Creates the shadow atlas.</p>
+          </div></section>
+          <section class="m-doc-details" id="gaf42ecd1d50d9e3473cfc92d0b05cb70d"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gaf42ecd1d50d9e3473cfc92d0b05cb70d" class="m-doc-self">reserveShadowCastersTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadow__atlas_2plugin_8hpp.html">&lt;engine/render/shadow_atlas/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Reserves space for shadow casters.</p>
+          </div></section>
+          <section class="m-doc-details" id="ga23dfaa7469e7e281740d66d3469ac93e"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga23dfaa7469e7e281740d66d3469ac93e" class="m-doc-self">drawToShadowAtlasTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadow__atlas_2plugin_8hpp.html">&lt;engine/render/shadow_atlas/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Systems which draw to the shadow atlas texture should be tagged with this.</p>
           </div></section>
         </section>
       </div>
