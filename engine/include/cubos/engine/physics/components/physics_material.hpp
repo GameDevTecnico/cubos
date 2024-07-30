@@ -16,22 +16,24 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
+        /// @brief Type of mixing for the material property. When mixing between bodies with different types, the
+        /// priority is taken into account. The priority is as defined in the enum, lower priority takes precedence.
         enum class MixProperty
         {
-            Maximum,
-            Multiply,
-            Minimum,
-            Average
-        }; ///< Type of mixing for the material property. When mixing between bodies with different types, the priority
-           ///< is taken into account. The priority is as defined in the enum, lower values will take priority over
-           ///< higher values.
+            Maximum,  /**< Use highest property value | Priority 0. */
+            Multiply, /**< Multiply property values | Priority 1. */
+            Minimum,  /**< Use lowest property value | Priority 2. */
+            Average   /**< Use the average of property values | Priority 3. */
+        };
 
-        float friction = 0.0F;   ///< Static and Dynamic friction coefficient for the body. Range between 0, for no
-                                 ///< friction, and 1, for maximum friction.
-        float bounciness = 0.0F; ///< Bounciness of the body. Range between 0, for no bounce, and 1, for maximum bounce.
-        MixProperty frictionMix =
-            MixProperty::Average; ///< Type of value mixing for friction, according to @ref MixProperty.
-        MixProperty bouncinessMix =
-            MixProperty::Average; ///< Type of value mixing for bounciness, according to @ref MixProperty.
+        /// @brief Static and Dynamic friction coefficient for the body. Range between 0, for no friction, and 1, for
+        /// maximum friction.
+        float friction = 0.0F;
+        /// @brief Bounciness of the body. Range between 0, for no bounce, and 1, for maximum bounce.
+        float bounciness = 0.0F;
+        /// @brief Type of value mixing for friction, according to @ref MixProperty.
+        MixProperty frictionMix = MixProperty::Average;
+        /// @brief Type of value mixing for bounciness, according to @ref MixProperty.
+        MixProperty bouncinessMix = MixProperty::Average;
     };
 } // namespace cubos::engine
