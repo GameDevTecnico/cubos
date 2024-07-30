@@ -56,18 +56,31 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ae64907634691b7e8353aa253f85378ea" class="m-doc">MixProperty</a> { </span><span class="m-doc-wrap"><a href="#ae64907634691b7e8353aa253f85378eaa8321e79c278ec510f63675c040594892" class="m-doc">Maximum</a>,
+              <a href="#ae64907634691b7e8353aa253f85378eaae257376d913f3b53cbb4a9b19d770648" class="m-doc">Multiply</a>,
+              <a href="#ae64907634691b7e8353aa253f85378eaaa1d0ec6d56f8833a078b5a7ac4caf2d4" class="m-doc">Minimum</a>,
+              <a href="#ae64907634691b7e8353aa253f85378eaab1897515d548a960afe49ecf66a29021" class="m-doc">Average</a> }</span>
+            </dt>
+            <dd>Type of mixing for the material property. When mixing between bodies with different types, the priority is taken into account. The priority is as defined in the enum, lower values will take priority over higher values.</dd>
+          </dl>
+        </section>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              float <a href="#ad609f16f2b0a95e8eb2818eaea32855a" class="m-doc">friction</a>
+            <dt id="ad609f16f2b0a95e8eb2818eaea32855a">
+              float <a href="#ad609f16f2b0a95e8eb2818eaea32855a" class="m-doc-self">friction</a>
             </dt>
-            <dd></dd>
+            <dd>Static and Dynamic friction coefficient for the body. Range between 0, for no friction, and 1, for maximum friction.</dd>
             <dt id="a90489d0a0ed17b26c1778a61f3e16a7b">
               float <a href="#a90489d0a0ed17b26c1778a61f3e16a7b" class="m-doc-self">bounciness</a>
             </dt>
@@ -83,12 +96,41 @@
           </dl>
         </section>
         <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="ad609f16f2b0a95e8eb2818eaea32855a"><div>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="ae64907634691b7e8353aa253f85378ea"><div>
             <h3>
-              float cubos::<wbr />engine::<wbr />PhysicsMaterial::<wbr /><a href="#ad609f16f2b0a95e8eb2818eaea32855a" class="m-doc-self">friction</a>
+              enum class cubos::<wbr />engine::<wbr />PhysicsMaterial::<wbr /><a href="#ae64907634691b7e8353aa253f85378ea" class="m-doc-self">MixProperty</a>
             </h3>
-<p>Static and Dynamic friction coefficient for the body. Range between 0, for no friction, and 1, for maximum friction.</p>
+            <p>Type of mixing for the material property. When mixing between bodies with different types, the priority is taken into account. The priority is as defined in the enum, lower values will take priority over higher values.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#ae64907634691b7e8353aa253f85378eaa8321e79c278ec510f63675c040594892" class="m-doc-self" id="ae64907634691b7e8353aa253f85378eaa8321e79c278ec510f63675c040594892">Maximum</a></td>
+                  <td>
+<p>Use highest property value</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ae64907634691b7e8353aa253f85378eaae257376d913f3b53cbb4a9b19d770648" class="m-doc-self" id="ae64907634691b7e8353aa253f85378eaae257376d913f3b53cbb4a9b19d770648">Multiply</a></td>
+                  <td>
+<p>Multiply property values</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ae64907634691b7e8353aa253f85378eaaa1d0ec6d56f8833a078b5a7ac4caf2d4" class="m-doc-self" id="ae64907634691b7e8353aa253f85378eaaa1d0ec6d56f8833a078b5a7ac4caf2d4">Minimum</a></td>
+                  <td>
+<p>Use lowest property value</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ae64907634691b7e8353aa253f85378eaab1897515d548a960afe49ecf66a29021" class="m-doc-self" id="ae64907634691b7e8353aa253f85378eaab1897515d548a960afe49ecf66a29021">Average</a></td>
+                  <td>
+<p>Use the average of property values</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
         </section>
       </div>
