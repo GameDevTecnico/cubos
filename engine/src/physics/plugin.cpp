@@ -130,9 +130,9 @@ CUBOS_REFLECT_IMPL(Damping)
 glm::mat3 boxInertiaTensor(float mass, glm::vec3 dimensions)
 {
     float constant = mass / 12.0F;
-    float x2 = (float)glm::pow(dimensions.x, 2);
-    float y2 = (float)glm::pow(dimensions.y, 2);
-    float z2 = (float)glm::pow(dimensions.z, 2);
+    auto x2 = (float)glm::pow(dimensions.x, 2);
+    auto y2 = (float)glm::pow(dimensions.y, 2);
+    auto z2 = (float)glm::pow(dimensions.z, 2);
 
     return glm::mat3{constant * (z2 + y2), 0.0F, 0.0F, 0.0F, constant * (x2 + z2), 0.0F, 0.0F, 0.0F,
                      constant * (x2 + y2)};
