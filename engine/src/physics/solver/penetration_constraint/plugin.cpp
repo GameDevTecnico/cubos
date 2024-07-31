@@ -289,11 +289,11 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 float kFriction = mass1.inverseMass + mass2.inverseMass;
                 float frictionMass = kFriction > 0.0F ? 1.0F / kFriction : 0.0F;
 
-                // determine friction (set to predefined value for now)
+                // determine friction
                 float friction = mixValues(material1.friction, material2.friction,
                                            getMixProperty(material1.frictionMix, material2.frictionMix));
 
-                // determine restitution (set to predefined value for now)
+                // determine restitution
                 float restitution = mixValues(material1.bounciness, material2.bounciness,
                                               getMixProperty(material1.bouncinessMix, material2.bouncinessMix));
                 glm::vec3 vr = velocity2.vec - velocity1.vec;
