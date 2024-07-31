@@ -5,6 +5,7 @@
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/type.hpp>
 
+#include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 
@@ -24,6 +25,7 @@ CUBOS_REFLECT_IMPL(Mass)
     return cubos::core::ecs::TypeBuilder<Mass>("cubos::engine::Mass")
         .withField("mass", &Mass::mass)
         .withField("inverseMass", &Mass::inverseMass)
+        .withField("changed", &Mass::changed)
         .build();
 }
 
@@ -110,7 +112,6 @@ CUBOS_REFLECT_IMPL(PhysicsBundle)
 {
     return cubos::core::ecs::TypeBuilder<PhysicsBundle>("cubos::engine::PhysicsBundle")
         .withField("mass", &PhysicsBundle::mass)
-        .withField("colliderDimensions", &PhysicsBundle::colliderDimensions)
         .withField("velocity", &PhysicsBundle::velocity)
         .withField("angularVelocity", &PhysicsBundle::angularVelocity)
         .withField("force", &PhysicsBundle::force)
@@ -118,6 +119,7 @@ CUBOS_REFLECT_IMPL(PhysicsBundle)
         .withField("impulse", &PhysicsBundle::impulse)
         .withField("angularImpulse", &PhysicsBundle::angularImpulse)
         .withField("material", &PhysicsBundle::material)
+        .withField("inertiaTensor", &PhysicsBundle::inertiaTensor)
         .build();
 }
 
@@ -176,9 +178,12 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 angularImpulse.add(bundle.angularImpulse);
 
                 cmds.add(ent, Mass{.mass = bundle.mass, .inverseMass = 1.0F / bundle.mass});
-
-                glm::mat3 inertiaTensor = boxInertiaTensor(bundle.mass, bundle.colliderDimensions);
-                cmds.add(ent, Inertia{.inertia = inertiaTensor, .inverseInertia = glm::inverse(inertiaTensor)});
+                if (bundle.inertiaTensor != glm::mat3(0.0F))
+                {
+                    cmds.add(ent, Inertia{.inertia = bundle.inertiaTensor,
+                                          .inverseInertia = glm::inverse(bundle.inertiaTensor),
+                                          .autoUpdate = false});
+                }
                 cmds.add(ent, Velocity{.vec = bundle.velocity});
                 cmds.add(ent, AngularVelocity{.vec = bundle.angularVelocity});
                 cmds.add(ent, force);
@@ -187,6 +192,40 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 cmds.add(ent, angularImpulse);
                 cmds.add(ent, AccumulatedCorrection{});
                 cmds.add(ent, bundle.material);
+            }
+        });
+
+    // Should this be here?
+    cubos.system("update inertia - box collider")
+        .tagged(physicsPrepareSolveTag)
+        .call([](Query<Mass&, BoxCollisionShape&, Inertia&> query) {
+            for (auto [mass, shape, inertia] : query)
+            {
+                if (!inertia.autoUpdate)
+                {
+                    continue;
+                }
+
+                if (!mass.changed && !shape.changed)
+                {
+                    continue;
+                }
+
+                mass.changed = false;
+                shape.changed = false;
+
+                // Object has infinite mass
+                if (mass.inverseMass == 0.0F)
+                {
+                    inertia.inertia = glm::mat3(0.0F);
+                    inertia.inverseInertia = glm::mat3(0.0F);
+                    continue;
+                }
+
+                // Recalculate inertia tensor
+                glm::mat3 inertiaTensor = boxInertiaTensor(mass.mass, shape.box.halfSize * 2.0F);
+                inertia.inertia = inertiaTensor;
+                inertia.inverseInertia = glm::inverse(inertiaTensor);
             }
         });
 

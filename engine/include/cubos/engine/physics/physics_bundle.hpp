@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <glm/mat3x3.hpp>
 #include <glm/vec3.hpp>
 
 #include <cubos/core/reflection/reflect.hpp>
@@ -20,7 +21,6 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         float mass = 1.0F;
-        glm::vec3 colliderDimensions = {1.0F, 1.0F, 1.0F};
         glm::vec3 velocity = {0.0F, 0.0F, 0.0F};
         glm::vec3 angularVelocity = {0.0F, 0.0F, 0.0F};
         glm::vec3 force = {0.0F, 0.0F, 0.0F};
@@ -28,5 +28,6 @@ namespace cubos::engine
         glm::vec3 impulse = {0.0F, 0.0F, 0.0F};
         glm::vec3 angularImpulse = {0.0F, 0.0F, 0.0F};
         PhysicsMaterial material = PhysicsMaterial{};
+        glm::mat3 inertiaTensor = glm::mat3(0.0F);
     };
 } // namespace cubos::engine

@@ -20,6 +20,6 @@ namespace cubos::engine
 
         glm::mat3 inertia;
         glm::mat3 inverseInertia;
-        bool selfUpdate = false;
+        bool autoUpdate = false;
     };
 } // namespace cubos::engine

@@ -20,5 +20,7 @@ namespace cubos::engine
 
         float mass;
         float inverseMass;
+
+        bool changed = true;
     };
 } // namespace cubos::engine
