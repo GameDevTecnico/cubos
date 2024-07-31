@@ -102,7 +102,7 @@
             </dt>
             <dd>Connects to a TCP listener, possibly on a remote machine.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a79f5932174b5d577ee9707ea9fb2a447" class="m-doc">inner</a>(</span><span class="m-doc-wrap"><a href="utils_8hpp.html#a461a8496180c54946c1e26a7a850ee9d" class="m-doc">InnerSocket</a> socket)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a79f5932174b5d577ee9707ea9fb2a447" class="m-doc">inner</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1net.html#a17e7e746667266e84985e73052f91fb6" class="m-doc">InnerSocket</a> socket)</span>
             </dt>
             <dd>Replaces the inner socket with the given one.</dd>
             <dt id="abc211a985b5193d2fd920c6f1ef92905">
@@ -113,6 +113,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a13a71e7b1f8a507a9c2a7271e045578d" class="m-doc">valid</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Checks if inner socket is connected.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa5d5e74a0a062d65cc79ffbc2326ec1d" class="m-doc">setBlocking</a>(</span><span class="m-doc-wrap">bool blocking) -&gt; bool</span>
+            </dt>
+            <dd>Control blocking mode of inner socket.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a52b2841e5adc1a327f87b356c700b32d" class="m-doc">read</a>(</span><span class="m-doc-wrap">void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
@@ -132,7 +136,7 @@
             </dt>
             <dd>Checks if the stream still has content to read.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a00ca979833c739a25f6c4c7cf0037e6d" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) const -&gt; char <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1102d1881b36077fc9f76c3c8f061cfe" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) -&gt; char <span class="m-label m-flat m-warning">override</span></span>
             </dt>
             <dd>Peeks one byte from the stream.</dd>
             <dt>
@@ -174,7 +178,7 @@
           </div></section>
           <section class="m-doc-details" id="a79f5932174b5d577ee9707ea9fb2a447"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a79f5932174b5d577ee9707ea9fb2a447" class="m-doc-self">inner</a>(</span><span class="m-doc-wrap"><a href="utils_8hpp.html#a461a8496180c54946c1e26a7a850ee9d" class="m-doc">InnerSocket</a> socket)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a79f5932174b5d577ee9707ea9fb2a447" class="m-doc-self">inner</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1net.html#a17e7e746667266e84985e73052f91fb6" class="m-doc">InnerSocket</a> socket)</span></span>
             </h3>
             <p>Replaces the inner socket with the given one.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -209,6 +213,30 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="aa5d5e74a0a062d65cc79ffbc2326ec1d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa5d5e74a0a062d65cc79ffbc2326ec1d" class="m-doc-self">setBlocking</a>(</span><span class="m-doc-wrap">bool blocking)</span></span>
+            </h3>
+            <p>Control blocking mode of inner socket.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">blocking</td>
+                  <td>Whether to block or not.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether setting the block flag was sucessful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>A blocking socket does not return control until it has sent (or received) some or all data specified for the operation.</p></aside>
+          </div></section>
           <section class="m-doc-details" id="a52b2841e5adc1a327f87b356c700b32d"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a52b2841e5adc1a327f87b356c700b32d" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* data,
@@ -236,6 +264,7 @@
                 </tr>
               </tfoot>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Data may be read partially, <a href="classcubos_1_1core_1_1memory_1_1Stream.html#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a> is recommended.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a5f52da059d7c7caf3bacf604fc474a1b"><div>
             <h3>
@@ -264,6 +293,7 @@
                 </tr>
               </tfoot>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Data may be written partially, <a href="classcubos_1_1core_1_1memory_1_1Stream.html#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc">writeExact</a> is recommended.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ad09233137e360c40c9d58c293fe714b9"><div>
             <h3>
@@ -293,9 +323,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a00ca979833c739a25f6c4c7cf0037e6d"><div>
+          <section class="m-doc-details" id="a1102d1881b36077fc9f76c3c8f061cfe"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a00ca979833c739a25f6c4c7cf0037e6d" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1102d1881b36077fc9f76c3c8f061cfe" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
             </h3>
             <p>Peeks one byte from the stream.</p>
             <table class="m-table m-fullwidth m-flat">

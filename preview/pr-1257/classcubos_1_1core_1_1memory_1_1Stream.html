@@ -147,6 +147,11 @@
             </dt>
             <dd>Writes data to the stream.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a>(</span><span class="m-doc-wrap">void* data,
+              std::size_t size) -&gt; bool</span>
+            </dt>
+            <dd>Reads data from the stream with the exact specified size.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc">writeExact</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) -&gt; bool</span>
             </dt>
@@ -165,7 +170,7 @@
             </dt>
             <dd>Checks if the stream still has content to read.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#acefff86d37cd9bfd27108412d8e51645" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) const -&gt; char <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6ba0c7ef9a4fc51df926fc5c8cf478e8" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) -&gt; char <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Peeks one byte from the stream.</dd>
             <dt>
@@ -354,6 +359,7 @@
                 </tr>
               </tfoot>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Data may be read partially, <a href="classcubos_1_1core_1_1memory_1_1Stream.html#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a> is recommended.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ae5fcc3e6a2bbd22580eddfadf26107af"><div>
             <h3>
@@ -411,6 +417,36 @@
                 </tr>
               </tfoot>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Data may be written partially, <a href="classcubos_1_1core_1_1memory_1_1Stream.html#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc">writeExact</a> is recommended.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ae5fcc3e6a2bbd22580eddfadf26107af"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc-self">readExact</a>(</span><span class="m-doc-wrap">void* data,
+              std::size_t size)</span></span>
+            </h3>
+            <p>Reads data from the stream with the exact specified size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">data</td>
+                  <td>Buffer to read data into.</td>
+                </tr>
+                <tr>
+                  <td>size</td>
+                  <td>Size of the buffer.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether reading was sucessful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after buffer is completed or an error occurs.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a1dd03e1a5cd7fd587a99860a748fe447"><div>
             <h3>
@@ -439,7 +475,7 @@
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after whole buffer is written.</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after whole buffer is written or an error occurs.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a2d6367c724309042140d6d1f84c5c65e"><div>
             <h3>
@@ -491,9 +527,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="acefff86d37cd9bfd27108412d8e51645"><div>
+          <section class="m-doc-details" id="a6ba0c7ef9a4fc51df926fc5c8cf478e8"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acefff86d37cd9bfd27108412d8e51645" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6ba0c7ef9a4fc51df926fc5c8cf478e8" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Peeks one byte from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
