@@ -6,5 +6,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::BoxCollisionShape)
 {
     return core::ecs::TypeBuilder<BoxCollisionShape>("cubos::engine::BoxCollisionShape")
         .withField("box", &BoxCollisionShape::box)
+        .withField("changed", &BoxCollisionShape::changed)
         .build();
 }
