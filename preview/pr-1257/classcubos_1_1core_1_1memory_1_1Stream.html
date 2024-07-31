@@ -82,10 +82,6 @@
               class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">StandardStream</a>
             </dt>
             <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which wraps a <code>libc</code> file pointer.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">cubos::core::net::TcpStream</a>
-            </dt>
-            <dd>Stream implementation which writes to/reads from a TCP connection.</dd>
           </dl>
         </section>
         <section id="pub-static-attribs">
@@ -137,25 +133,10 @@
             </dt>
             <dd>Reads data from the stream.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a>(</span><span class="m-doc-wrap">void* data,
-              std::size_t size) -&gt; bool</span>
-            </dt>
-            <dd>Reads data from the stream with the exact specified size.</dd>
-            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7865e5ea6bc59b0c87bc12ec9f68a25f" class="m-doc">write</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Writes data to the stream.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a>(</span><span class="m-doc-wrap">void* data,
-              std::size_t size) -&gt; bool</span>
-            </dt>
-            <dd>Reads data from the stream with the exact specified size.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc">writeExact</a>(</span><span class="m-doc-wrap">const void* data,
-              std::size_t size) -&gt; bool</span>
-            </dt>
-            <dd>Writes data to the stream with the exact specified size.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2d6367c724309042140d6d1f84c5c65e" class="m-doc">tell</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -359,36 +340,6 @@
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p>Data may be read partially, <a href="classcubos_1_1core_1_1memory_1_1Stream.html#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a> is recommended.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="ae5fcc3e6a2bbd22580eddfadf26107af"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc-self">readExact</a>(</span><span class="m-doc-wrap">void* data,
-              std::size_t size)</span></span>
-            </h3>
-            <p>Reads data from the stream with the exact specified size.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">data</td>
-                  <td>Buffer to read data into.</td>
-                </tr>
-                <tr>
-                  <td>size</td>
-                  <td>Size of the buffer.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether reading was sucessful.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after buffer is completed.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a7865e5ea6bc59b0c87bc12ec9f68a25f"><div>
             <h3>
@@ -417,65 +368,6 @@
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p>Data may be written partially, <a href="classcubos_1_1core_1_1memory_1_1Stream.html#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc">writeExact</a> is recommended.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="ae5fcc3e6a2bbd22580eddfadf26107af"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc-self">readExact</a>(</span><span class="m-doc-wrap">void* data,
-              std::size_t size)</span></span>
-            </h3>
-            <p>Reads data from the stream with the exact specified size.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">data</td>
-                  <td>Buffer to read data into.</td>
-                </tr>
-                <tr>
-                  <td>size</td>
-                  <td>Size of the buffer.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether reading was sucessful.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after buffer is completed or an error occurs.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a1dd03e1a5cd7fd587a99860a748fe447"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc-self">writeExact</a>(</span><span class="m-doc-wrap">const void* data,
-              std::size_t size)</span></span>
-            </h3>
-            <p>Writes data to the stream with the exact specified size.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">data</td>
-                  <td>Buffer to write data from.</td>
-                </tr>
-                <tr>
-                  <td>size</td>
-                  <td>Size of the buffer.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether writing was sucessful.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after whole buffer is written or an error occurs.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a2d6367c724309042140d6d1f84c5c65e"><div>
             <h3>
