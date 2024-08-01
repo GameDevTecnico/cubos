@@ -21,6 +21,7 @@ set(TESSERATOS_SOURCE
 	"src/tesseratos/play_pause/plugin.cpp"
 	"src/tesseratos/ecs_statistics/plugin.cpp"
 	"src/tesseratos/console/plugin.cpp"
+	"src/tesseratos/importer/plugin.cpp"
 )
 
 add_executable(tesseratos ${TESSERATOS_SOURCE})

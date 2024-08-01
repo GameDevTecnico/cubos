@@ -14,6 +14,7 @@
 #include "ecs_statistics/plugin.hpp"
 #include "entity_inspector/plugin.hpp"
 #include "entity_selector/plugin.hpp"
+#include "importer/plugin.hpp"
 #include "metrics_panel/plugin.hpp"
 #include "play_pause/plugin.hpp"
 #include "scene_editor/plugin.hpp"
@@ -55,6 +56,7 @@ int main(int argc, char** argv)
     cubos.plugin(playPausePlugin);
     cubos.plugin(ecsStatisticsPlugin);
     cubos.plugin(consolePlugin);
+    cubos.plugin(importerPlugin);
 
     cubos.plugin(sceneEditorPlugin);
     cubos.plugin(voxelPaletteEditorPlugin);
