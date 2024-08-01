@@ -82,6 +82,10 @@ namespace cubos::engine
         /// up memory.
         void cleanup();
 
+        /// @brief Imports all files without a .meta file. Similar to loadMeta
+        /// @param path Path to load metadata from.
+        void importAll(std::string_view path);
+
         /// @brief Loads all metadata from the virtual filesystem, in the given path. If the path
         /// points to a directory, it will be recursively searched for metadata files.
         /// @param path Path to load metadata from.

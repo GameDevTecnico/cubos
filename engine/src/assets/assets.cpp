@@ -90,6 +90,57 @@ void Assets::cleanup()
     }
 }
 
+void Assets::importAll(std::string_view path)
+{
+    auto file = core::data::FileSystem::find(path);
+    if (file == nullptr)
+    {
+        CUBOS_ERROR("Couldn't load asset metadata: file {} not found", path);
+        return;
+    }
+
+    if (file->directory())
+    {
+        auto child = file->child();
+        while (child != nullptr)
+        {
+            this->importAll(child->path());
+            child = child->sibling();
+        }
+    }
+    // Skip files that already have a .meta extension.
+    else if (!file->name().ends_with(".meta"))
+    {
+        // Check if the .meta file exists.
+        auto metaPath = std::string(file->path()) + ".meta";
+        auto metaFile = core::data::FileSystem::find(metaPath);
+
+        if (metaFile == nullptr)
+        {
+            CUBOS_DEBUG("Creating asset metadata for {}", file->path());
+
+            // Write the metadata to the .meta file.
+            auto stream = core::data::FileSystem::open(metaPath, core::data::File::OpenMode::Write);
+            if (stream == nullptr)
+            {
+                CUBOS_ERROR("Couldn't create metadata file {}", metaPath);
+                return;
+            }
+
+            // Create new metadata with a random UUID.
+            nlohmann::json json;
+            json["id"] = uuids::to_string(uuids::uuid_random_generator(mRandom.value())());
+            // json["path"] = file->path();
+            stream->print(json.dump(4));
+            stream.reset();
+
+            CUBOS_DEBUG("Created asset metadata {} for {}", metaPath, file->path());
+
+            loadMeta(metaPath);
+        }
+    }
+}
+
 void Assets::loadMeta(std::string_view path)
 {
     auto file = core::data::FileSystem::find(path);

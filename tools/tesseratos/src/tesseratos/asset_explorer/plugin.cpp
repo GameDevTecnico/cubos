@@ -1,23 +1,45 @@
 #include "plugin.hpp"
+#include <filesystem>
 
 #include <imgui.h>
+
+#include <cubos/core/data/fs/file_system.hpp>
+#include <cubos/core/memory/standard_stream.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
+#include <cubos/engine/voxels/voxel_model.hpp>
 
 #include "../toolbox/plugin.hpp"
 
+using cubos::core::data::File;
+using cubos::core::data::FileSystem;
+using cubos::core::ecs::EventReader;
 using cubos::core::ecs::EventWriter;
 
 using cubos::engine::AnyAsset;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
 using cubos::engine::Settings;
+using cubos::engine::VoxelGrid;
+using cubos::engine::VoxelModel;
+using cubos::engine::VoxelPalette;
+
+namespace fs = std::filesystem;
+namespace memory = cubos::core::memory;
 
 using namespace tesseratos;
 
-static bool assetsCompare(AnyAsset const& a, AnyAsset const& b, Assets const& assets)
+namespace
+{
+    struct AssetExplorerState
+    {
+        std::vector<AnyAsset> assetsVector;
+    };
+} // namespace
+
+static bool assetsCompare(AnyAsset const& a, AnyAsset const& b, Assets& assets)
 {
     std::string aPath = assets.readMeta(a)->get("path").value();
     std::string bPath = assets.readMeta(b)->get("path").value();
@@ -47,11 +69,12 @@ static bool assetsCompare(AnyAsset const& a, AnyAsset const& b, Assets const& as
     return aPath.compare(bPath) > 0;
 }
 
-static void showAsset(Assets const& assets, AnyAsset const& asset, EventWriter<AssetSelectedEvent> events)
+static void showAsset(Assets& assets, AnyAsset const& asset, cubos::core::ecs::EventWriter<AssetSelectedEvent> events)
 {
     std::string path = assets.readMeta(asset)->get("path").value();
+    std::string fileName = path.substr(path.rfind('/') + 1);
     ImGui::PushID(path.c_str());
-    ImGui::BulletText("%s", path.erase(0, path.rfind('/') + 1).c_str());
+    ImGui::BulletText("%s", fileName.c_str());
     ImGui::SameLine();
     if (ImGui::Button("Select"))
     {
@@ -60,10 +83,10 @@ static void showAsset(Assets const& assets, AnyAsset const& asset, EventWriter<A
     ImGui::PopID();
 }
 
-static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::string const& folder,
+static std::vector<AnyAsset>::iterator showFolder(Assets& assets, std::string const& folder,
                                                   std::vector<AnyAsset>::iterator iter,
                                                   std::vector<AnyAsset>::iterator end,
-                                                  EventWriter<AssetSelectedEvent> events)
+                                                  cubos::core::ecs::EventWriter<AssetSelectedEvent> events)
 {
     std::string displayName = folder;
     displayName.erase(0, displayName.rfind('/'));
@@ -116,6 +139,23 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
     return iter;
 }
 
+static void refresh(Assets& assets, AssetExplorerState& state)
+{
+    assets.importAll("/assets");
+
+    state.assetsVector.clear();
+
+    for (auto const& a : assets.listAll())
+    {
+        if (assets.readMeta(a)->get("path").has_value())
+        {
+            state.assetsVector.push_back(a);
+        }
+    }
+    std::sort(state.assetsVector.begin(), state.assetsVector.end(),
+              [&assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, assets); });
+}
+
 void tesseratos::assetExplorerPlugin(Cubos& cubos)
 {
     cubos.event<AssetSelectedEvent>();
@@ -123,10 +163,12 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
     cubos.depends(toolboxPlugin);
+    cubos.resource<AssetExplorerState>();
 
     cubos.system("show Asset Explorer UI")
         .tagged(cubos::engine::imguiTag)
-        .call([](const Assets& assets, Toolbox& toolbox, EventWriter<AssetSelectedEvent> events) {
+        .call([](Assets& assets, Toolbox& toolbox, cubos::core::ecs::EventWriter<AssetSelectedEvent> events,
+                 AssetExplorerState& state) {
             if (!toolbox.isOpen("Asset Explorer"))
             {
                 return;
@@ -134,18 +176,17 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
 
             ImGui::Begin("Asset Explorer");
 
-            std::vector<AnyAsset> assetsVector;
-            for (auto const& a : assets.listAll())
+            if (state.assetsVector.empty())
             {
-                if (assets.readMeta(a)->get("path").has_value())
-                {
-                    assetsVector.push_back(a);
-                }
+                refresh(assets, state);
             }
-            std::sort(assetsVector.begin(), assetsVector.end(),
-                      [&assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, assets); });
 
-            showFolder(assets, "", assetsVector.begin(), assetsVector.end(), events);
+            if (ImGui::Button("Refresh"))
+            {
+                refresh(assets, state);
+            }
+
+            showFolder(assets, "", state.assetsVector.begin(), state.assetsVector.end(), events);
 
             ImGui::End();
         });
