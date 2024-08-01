@@ -67,6 +67,26 @@ VoxelGrid::VoxelGrid(VoxelGrid&& other) noexcept
     new (&mIndices) std::vector<uint16_t>(std::move(other.mIndices));
 }
 
+VoxelGrid& VoxelGrid::operator=(VoxelGrid&& other) noexcept
+{
+    if (this != &other)
+    {
+        mSize = other.mSize;
+        mIndices = std::move(other.mIndices);
+
+        other.mSize = {1, 1, 1};
+        other.mIndices.clear();
+        other.mIndices.resize(1, 0);
+    }
+    return *this;
+}
+
+VoxelGrid::VoxelGrid(const VoxelGrid& other)
+    : mSize(other.mSize)
+    , mIndices(other.mIndices)
+{
+}
+
 VoxelGrid::VoxelGrid()
 {
     mSize = {1, 1, 1};
