@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [v0.3.0] - 2024-08-02
 
 ### Added
 
-- UI canvas, elements, and color rects. (#1116, **@DiogoMendonc-a**)
+- UI canvas, elements, and color rectangles (#1116, **@DiogoMendonc-a**).
 - Implemented file-based logging (#1154, **@roby2014**).
 - Start and update methods to the Cubos class (#1213, **@RiscadoA**).
 - Reset method to the Cubos class (#1225, **@RiscadoA**).
@@ -21,11 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Network Address class (#1211, **@roby2014**).
 - Image asset and UI Image component (#1270, **@DiogoMendonc-a**).
 - Raycasting, collisions between rays and box/capsule colliders (#225, **@diogomsmiranda**).
-- Change speed of the debug-camera using Tab and LShift, positive and negative respectively (#1159, **@diogomsmiranda**)
+- Change speed of the debug-camera using Tab and LShift, positive and negative respectively (#1159, **@diogomsmiranda**).
 - Console plugin (#875, **@Scarface1809**).
 - Friction calculation for penetration constraint (#1244, **@fallenatlas**).
 - Bounciness calculation for penetration constraint (#1275, **@fallenatlas**).
-- UI scalling modes. (#1284, **@DiogoMendonc-a**)
+- UI scaling modes (#1284, **@DiogoMendonc-a**).
 - Shadow mapping with support for spot shadow casters (#1186, **@tomas7770**).
 - TcpStream network class (#1209, **@roby2014**).
 - TcpListener network class (#1210, **@roby2014**).
@@ -208,3 +208,4 @@ Although they've moved on, their work is etched into the project's foundations.
 [unreleased]: https://github.com/GameDevTecnico/cubos/commits/main/
 [v0.1.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.1.0
 [v0.2.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.2.0
+[v0.3.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.3.0
