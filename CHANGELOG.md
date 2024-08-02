@@ -180,6 +180,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix spotlight transform and cutoff math (**@RiscadoA**).
 - Gravity not working for all entities if an entity had inverse mass smaller or equal to zero (**@fallenatlas**).
 
+## Non-Code Contributions
+
+- **Nuno Baptista**, for the logo, the engine's visual identity and the editor's UX design.
+
 ## Previous Contributions
 
 Before we started documenting changes, there were some key contributors who helped shape the engine.
