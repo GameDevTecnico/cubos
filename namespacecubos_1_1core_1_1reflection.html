@@ -125,12 +125,13 @@
             </dt>
             <dd>Compares two instances of the same type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#gaedeede487ffed5421ea51cec682ebf68" class="m-doc">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long long id,
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga843186fa1a151fb6c47c4a4994009ddd" class="m-doc">makeAnonymousType</a>(</span><span class="m-doc-wrap">const char* name,
+              const char* file,
               std::size_t size,
               std::size_t alignment,
               void(*)(void*) destructor) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
             </dt>
-            <dd>Creates a new unnamed type with the given identifier. Used as a fallback for non-reflectable C++ types.</dd>
+            <dd>Creates a new reflection type with a unique name created from a type name and a file path, and with a minimal <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
