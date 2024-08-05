@@ -39,7 +39,7 @@ CUBOS_REFLECT_IMPL(CenterOfMass)
 CUBOS_REFLECT_IMPL(Inertia)
 {
     return cubos::core::ecs::TypeBuilder<Inertia>("cubos::engine::Inertia")
-        .withField("Inertia", &Inertia::inertia)
+        .withField("inertia", &Inertia::inertia)
         .withField("inverseInertia", &Inertia::inverseInertia)
         .build();
 }
@@ -60,32 +60,22 @@ CUBOS_REFLECT_IMPL(AngularVelocity)
 
 CUBOS_REFLECT_IMPL(Force)
 {
-    return cubos::core::ecs::TypeBuilder<Force>("cubos::engine::Force")
-        .withField("mForce", &Force::mForce)
-        .withField("mTorque", &Force::mTorque)
-        .build();
+    return cubos::core::ecs::TypeBuilder<Force>("cubos::engine::Force").build();
 }
 
 CUBOS_REFLECT_IMPL(Torque)
 {
-    return cubos::core::ecs::TypeBuilder<Torque>("cubos::engine::Torque")
-        .withField("mTorque", &Torque::mTorque)
-        .build();
+    return cubos::core::ecs::TypeBuilder<Torque>("cubos::engine::Torque").build();
 }
 
 CUBOS_REFLECT_IMPL(Impulse)
 {
-    return cubos::core::ecs::TypeBuilder<Impulse>("cubos::engine::Impulse")
-        .withField("mImpulse", &Impulse::mImpulse)
-        .withField("mAngularImpulse", &Impulse::mAngularImpulse)
-        .build();
+    return cubos::core::ecs::TypeBuilder<Impulse>("cubos::engine::Impulse").build();
 }
 
 CUBOS_REFLECT_IMPL(AngularImpulse)
 {
-    return cubos::core::ecs::TypeBuilder<AngularImpulse>("cubos::engine::AngularImpulse")
-        .withField("mAngularImpulse", &AngularImpulse::mAngularImpulse)
-        .build();
+    return cubos::core::ecs::TypeBuilder<AngularImpulse>("cubos::engine::AngularImpulse").build();
 }
 
 CUBOS_REFLECT_EXTERNAL_IMPL(PhysicsMaterial::MixProperty)
@@ -129,7 +119,7 @@ CUBOS_REFLECT_IMPL(Damping)
 }
 
 // Compute Inertia Tensor for box shape
-glm::mat3 boxInertiaTensor(float mass, glm::vec3 dimensions)
+static glm::mat3 boxInertiaTensor(float mass, glm::vec3 dimensions)
 {
     float constant = mass / 12.0F;
     auto x2 = (float)glm::pow(dimensions.x, 2);
