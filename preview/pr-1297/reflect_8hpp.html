@@ -89,12 +89,13 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#gaedeede487ffed5421ea51cec682ebf68" class="m-doc">makeUnnamedType</a>(</span><span class="m-doc-wrap">unsigned long long id,
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga843186fa1a151fb6c47c4a4994009ddd" class="m-doc">makeAnonymousType</a>(</span><span class="m-doc-wrap">const char* name,
+              const char* file,
               std::size_t size,
               std::size_t alignment,
               void(*)(void*) destructor) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> const Type&amp;</span>
             </dt>
-            <dd>Creates a new unnamed type with the given identifier. Used as a fallback for non-reflectable C++ types.</dd>
+            <dd>Creates a new reflection type with a unique name created from a type name and a file path, and with a minimal <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const Type&amp;</span>
@@ -125,7 +126,7 @@
               <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga9f6c7a8208509aa84f66d081e2283f95" class="m-doc">CUBOS_REFLECT_TEMPLATE_IMPL</a>(</span><span class="m-doc-wrap">args,
               T)</span>
             </dt>
-            <dd>Similar to <a href="toolbox_2plugin_8cpp.html#a547ef47a48178a64568efba2f3a9b36b" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> but tailored to templated types.</dd>
+            <dd>Similar to <a href="voxel__palette__editor_2plugin_8cpp.html#ad08593825e6e6021a439f59b2b9e0ea6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> but tailored to templated types.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gab24b41a195fdf07a246383d74fd583d7" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE</a>(</span><span class="m-doc-wrap">api,
               T)</span>
@@ -145,6 +146,10 @@
               T)</span>
             </dt>
             <dd>Both declares and implements a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga817e173f03dea06cab0e754f39105573" class="m-doc">CUBOS_ANONYMOUS_REFLECT</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Defines minimal reflection for a type private to a compilation unit.</dd>
           </dl>
         </section>
       </div>
