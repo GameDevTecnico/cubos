@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::reflection::Reflect struct | Cubos Docs</title>
+  <title>core/net/udp_socket.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,23 +46,39 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="reflect_8hpp.html">&lt;core/reflection/reflect.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename T&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>Reflect <span class="m-thin">struct</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_fc6889969533064170c58614aaaf55a9.html">net</a>/</span>udp_socket.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Defines the reflection function for the given type <code>T</code>.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td>Type to reflect.</td>
-            </tr>
-          </tbody>
-        </table>
-<p>By default, this function calls the static member function <code>reflect</code> of the type, which should return a pointer to an instance of <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>.</p><p>To implement reflection for your type, you should either:</p><ul><li>Define a static member function <code>reflect</code> with return type <code>const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</code> on your type.</li><li>Specialize this struct for your type.</li></ul><p>The first option is preferred, as it is less verbose. However, when handling external types, to which member functions cannot be added, the second option is necessary.</p><p>Both options can and should be shortened by using the macros:</p><ul><li><a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a> - declaring the reflection member functions.</li><li><a href="voxel__palette__editor_2plugin_8cpp.html#ad08593825e6e6021a439f59b2b9e0ea6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> - defining the reflection member functions.</li><li><a href="physics__material_8hpp.html#a9495afb6efadb4174eadde1ae61150db" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />DECL</a> - declaring the reflection specialization.</li><li><a href="group__core-reflection.html#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />IMPL</a> - defining the reflection specialization&#x27;s functions.</li></ul>
+        <p>Class <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />UdpSocket</a>.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html" class="m-doc">cubos::core::net::UdpSocket</a>
+            </dt>
+            <dd>Represents a UDP socket.</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>
