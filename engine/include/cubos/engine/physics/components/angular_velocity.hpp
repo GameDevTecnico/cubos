@@ -1,5 +1,5 @@
 /// @file
-/// @brief Component @ref cubos::engine::Mass.
+/// @brief Component @ref cubos::engine::AngularVelocity.
 /// @ingroup physics-plugin
 
 #pragma once
@@ -12,15 +12,13 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which defines the mass of a particle.
+    /// @brief Component which holds angular velocity of a body.
+    /// @note Should be used with @ref Inertia and @ref Rotation.
     /// @ingroup physics-plugin
-    struct CUBOS_ENGINE_API Mass
+    struct CUBOS_ENGINE_API AngularVelocity
     {
         CUBOS_REFLECT;
 
-        float mass;
-        float inverseMass;
-
-        bool changed = true;
+        glm::vec3 vec;
     };
 } // namespace cubos::engine

@@ -18,5 +18,7 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         cubos::core::geom::Box box; ///< Box shape.
+
+        bool changed = true;
     };
 } // namespace cubos::engine
