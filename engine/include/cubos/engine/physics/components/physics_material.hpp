@@ -37,3 +37,5 @@ namespace cubos::engine
         MixProperty bouncinessMix = MixProperty::Average;
     };
 } // namespace cubos::engine
+
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, cubos::engine::PhysicsMaterial::MixProperty);
