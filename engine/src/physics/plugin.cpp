@@ -73,6 +73,7 @@ CUBOS_REFLECT_IMPL(PhysicsBundle)
         .withField("velocity", &PhysicsBundle::velocity)
         .withField("force", &PhysicsBundle::force)
         .withField("impulse", &PhysicsBundle::impulse)
+        .withField("material", &PhysicsBundle::material)
         .build();
 }
 
@@ -113,7 +114,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 cmds.add(ent, force);
                 cmds.add(ent, impulse);
                 cmds.add(ent, AccumulatedCorrection{});
-                cmds.add(ent, PhysicsMaterial{});
+                cmds.add(ent, bundle.material);
             }
         });
 
