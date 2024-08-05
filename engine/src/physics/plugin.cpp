@@ -46,10 +46,9 @@ CUBOS_REFLECT_IMPL(Impulse)
         .build();
 }
 
-CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, PhysicsMaterial::MixProperty);
 CUBOS_REFLECT_EXTERNAL_IMPL(PhysicsMaterial::MixProperty)
 {
-    return cubos::core::reflection::Type::create("PhysicsMaterial::MixProperty")
+    return cubos::core::reflection::Type::create("cubos::engine::PhysicsMaterial::MixProperty")
         .with(cubos::core::reflection::EnumTrait{}
                   .withVariant<PhysicsMaterial::MixProperty::Maximum>("Maximum")
                   .withVariant<PhysicsMaterial::MixProperty::Multiply>("Multiply")
