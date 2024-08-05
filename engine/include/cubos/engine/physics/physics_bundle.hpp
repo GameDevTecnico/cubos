@@ -9,6 +9,7 @@
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/api.hpp>
+#include <cubos/engine/physics/components/physics_material.hpp>
 
 namespace cubos::engine
 {
@@ -22,5 +23,6 @@ namespace cubos::engine
         glm::vec3 velocity = {0.0F, 0.0F, 0.0F};
         glm::vec3 force = {0.0F, 0.0F, 0.0F};
         glm::vec3 impulse = {0.0F, 0.0F, 0.0F};
+        PhysicsMaterial material = PhysicsMaterial{};
     };
 } // namespace cubos::engine
