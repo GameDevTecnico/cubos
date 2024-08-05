@@ -1,4 +1,5 @@
 #include <cubos/core/ecs/reflection.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/collisions/shapes/box.hpp>
 
