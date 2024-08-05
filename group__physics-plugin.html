@@ -66,7 +66,7 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the examples-engine-physics example for a demonstration of this plugin.</p></aside><section id="autotoc_md84"><h3><a href="#autotoc_md84">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> - holds the damping value for integration.</li><li>Substeps - holds the amount of substeps for the physics update.</li></ul></section><section id="autotoc_md85"><h3><a href="#autotoc_md85">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">PhysicsBundle</a> - bundle that holds the physics information to give to a new entity.</li><li><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a> - holds the information for moving an object straight.</li><li><a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a> - holds forces applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a> - holds impulses applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> - holds the mass of an object.</li><li><a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> - holds the corrections accumulated from the constraints solving.</li></ul></section><section id="autotoc_md86"><h3><a href="#autotoc_md86">Dependencies</a></h3><ul><li><a href="group__physics-gravity-plugin.html" class="m-doc">Gravity</a></li></ul></section>
+<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the examples-engine-physics example for a demonstration of this plugin.</p></aside><section id="autotoc_md84"><h3><a href="#autotoc_md84">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> - holds the damping value for integration.</li><li>Substeps - holds the amount of substeps for the physics update.</li></ul></section><section id="autotoc_md85"><h3><a href="#autotoc_md85">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">PhysicsBundle</a> - bundle that holds the physics information to give to a new entity.</li><li><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a> - holds the information for moving an object straight.</li><li><a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a> - holds forces applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a> - holds impulses applied on a particle.</li><li><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> - holds the mass of an object.</li><li><a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> - holds the corrections accumulated from the constraints solving.</li><li><a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">PhysicsMaterial</a> - holds the friction and bounciness properties of the particle.</li></ul></section><section id="autotoc_md86"><h3><a href="#autotoc_md86">Dependencies</a></h3><ul><li><a href="group__physics-gravity-plugin.html" class="m-doc">Gravity</a></li></ul></section>
         <section id="groups">
           <h2><a href="#groups">Modules</a></h2>
           <dl class="m-doc">
@@ -87,6 +87,8 @@
             <dd>Component <a href="structcubos_1_1engine_1_1Force.html" class="m-doc">cubos::<wbr />engine::<wbr />Force</a>.</dd>
             <dt>file <a href="mass_8hpp.html" class="m-doc">mass.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">cubos::<wbr />engine::<wbr />Mass</a>.</dd>
+            <dt>file <a href="physics__material_8hpp.html" class="m-doc">physics_material.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">cubos::<wbr />engine::<wbr />PhysicsMaterial</a>.</dd>
             <dt>file <a href="velocity_8hpp.html" class="m-doc">velocity.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">cubos::<wbr />engine::<wbr />Velocity</a>.</dd>
             <dt>file <a href="physics__bundle_8hpp.html" class="m-doc">physics_bundle.hpp</a></dt>
@@ -118,6 +120,10 @@
               struct <a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">cubos::engine::Mass</a>
             </dt>
             <dd>Component which defines the mass of a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">cubos::engine::PhysicsMaterial</a>
+            </dt>
+            <dd>Component which defines the friction and bounciness of a body.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">cubos::engine::Velocity</a>
             </dt>
