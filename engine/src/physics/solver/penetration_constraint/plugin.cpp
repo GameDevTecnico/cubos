@@ -33,13 +33,13 @@ void getPlaneSpace(const glm::vec3& n, glm::vec3& tangent1, glm::vec3& tangent2)
     }
 }
 
-PhysicsMaterial::MixProperty getMixProperty(PhysicsMaterial::MixProperty mixProperty1,
-                                            PhysicsMaterial::MixProperty mixProperty2)
+static PhysicsMaterial::MixProperty getMixProperty(PhysicsMaterial::MixProperty mixProperty1,
+                                                   PhysicsMaterial::MixProperty mixProperty2)
 {
     return mixProperty1 > mixProperty2 ? mixProperty2 : mixProperty1;
 }
 
-float mixValues(float value1, float value2, PhysicsMaterial::MixProperty mixProperty)
+static float mixValues(float value1, float value2, PhysicsMaterial::MixProperty mixProperty)
 {
     switch (mixProperty)
     {
