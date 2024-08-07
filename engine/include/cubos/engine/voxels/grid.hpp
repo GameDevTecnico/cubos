@@ -53,6 +53,14 @@ namespace cubos::engine
         /// @param other Other grid.
         VoxelGrid(VoxelGrid&& other) noexcept;
 
+        /// @brief Move Operator
+        /// @param other Other grid.
+        VoxelGrid& operator=(VoxelGrid&& other) noexcept;
+
+        /// @brief Copy constructs.
+        /// @param other Other grid.
+        VoxelGrid(const VoxelGrid& other);
+
         /// @brief Makes this grid a copy of another grid.
         /// @param rhs Other grid.
         /// @return This grid, for chaining.
