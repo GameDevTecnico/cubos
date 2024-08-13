@@ -5,7 +5,9 @@
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/type.hpp>
 
+#include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
+#include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 
@@ -41,6 +43,7 @@ CUBOS_REFLECT_IMPL(Inertia)
     return cubos::core::ecs::TypeBuilder<Inertia>("cubos::engine::Inertia")
         .withField("inertia", &Inertia::inertia)
         .withField("inverseInertia", &Inertia::inverseInertia)
+        .withField("autoUpdate", &Inertia::autoUpdate)
         .build();
 }
 
@@ -118,6 +121,8 @@ CUBOS_REFLECT_IMPL(Damping)
     return core::ecs::TypeBuilder<Damping>("cubos::engine::Damping").build();
 }
 
+CUBOS_DEFINE_TAG(cubos::engine::physicsPrepareTag);
+
 // Compute Inertia Tensor for box shape
 static glm::mat3 boxInertiaTensor(float mass, glm::vec3 dimensions)
 {
@@ -132,7 +137,12 @@ static glm::mat3 boxInertiaTensor(float mass, glm::vec3 dimensions)
 
 void cubos::engine::physicsPlugin(Cubos& cubos)
 {
+    cubos.depends(fixedStepPlugin);
+    cubos.depends(collisionsPlugin);
+
     cubos.plugin(physicsFixedSubstepPlugin);
+
+    cubos.tag(physicsPrepareTag).after(collisionsTag).tagged(fixedStepTag);
 
     cubos.resource<Damping>();
 
@@ -144,6 +154,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.component<AngularImpulse>();
     cubos.component<Mass>();
     cubos.component<Inertia>();
+    cubos.component<CenterOfMass>();
     cubos.component<AccumulatedCorrection>();
     cubos.component<PhysicsMaterial>();
     cubos.component<PhysicsBundle>();
@@ -187,7 +198,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
 
     // Should this be here?
     cubos.system("update inertia - box collider")
-        .tagged(physicsPrepareSolveTag)
+        .tagged(physicsPrepareTag)
         .call([](Query<Mass&, BoxCollisionShape&, Inertia&> query) {
             for (auto [mass, shape, inertia] : query)
             {
