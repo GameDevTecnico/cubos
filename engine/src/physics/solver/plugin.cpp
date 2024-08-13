@@ -1,6 +1,5 @@
 #include "penetration_constraint/plugin.hpp"
 
-#include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
@@ -25,11 +24,10 @@ void cubos::engine::physicsSolverPlugin(Cubos& cubos)
 {
     cubos.depends(physicsPlugin);
     cubos.depends(fixedStepPlugin);
-    cubos.depends(collisionsPlugin);
 
     // doesn't need to be after collisions but for now it should stay in case we do velocity based prediction for
     // collisions in the future
-    cubos.tag(physicsPrepareSolveTag).after(collisionsTag).tagged(fixedStepTag);
+    cubos.tag(physicsPrepareSolveTag).tagged(physicsPrepareTag);
 
     cubos.tag(physicsIntegrateVelocityTag)
         .after(physicsPrepareSolveTag)

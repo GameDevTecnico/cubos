@@ -57,6 +57,7 @@ namespace cubos::engine
 
     /// @brief Tag which should be used on all systems that modify velocity or apply forces or impulses.
     CUBOS_ENGINE_API extern Tag physicsApplyForcesTag;
+    extern Tag physicsPrepareTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
