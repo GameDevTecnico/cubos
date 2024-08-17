@@ -2014,7 +2014,7 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
                    static_cast<GLsizei>(desc.size));
     for (std::size_t i = 0; i < desc.size; ++i)
     {
-        for (std::size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
+        for (std::size_t j = 0, div = 1; j < desc.mipLevelCount; ++j, div *= 2)
         {
             if (desc.data[i][j] != nullptr)
             {
