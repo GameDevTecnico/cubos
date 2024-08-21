@@ -135,7 +135,7 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 polygon2 = cubos::core::geom::sutherlandHodgmanClipping(polygon2, 1, &refPlane, true);
 
                 // Use the remaining contact point on the manifold
-                std::vector<ContactPointData> points = std::vector<ContactPointData>(polygon2.size());
+                std::vector<ContactPointData> points;
 
                 for (const glm::vec3& point : polygon2)
                 {
@@ -160,6 +160,7 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                     // Just make a final sanity check that the contact point
                     // is actual a point of contact not just a clipping bug
                     // and consider only points with positive penetration
+                    CUBOS_DEBUG("Penetration: {}", contactPenetration);
                     if (contactPenetration >= 0.0F)
                     {
                         ContactPointData contact = ContactPointData{.entity = ent1,
