@@ -138,6 +138,7 @@ set(CUBOS_CORE_SOURCE
     "src/geom/capsule.cpp"
     "src/geom/intersections.cpp"
 	"src/geom/plane.cpp"
+	"src/geom/utils.cpp"
 
     "src/net/address.cpp"
     "src/net/tcp_stream.cpp"
