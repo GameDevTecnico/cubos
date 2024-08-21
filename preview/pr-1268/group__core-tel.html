@@ -172,6 +172,30 @@
               ...)</span>
             </dt>
             <dd>In debug builds asserts that a condition is true, aborting the program if it is not.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga21cbca9b4083b034dc78f85298bdc8e3" class="m-doc">CUBOS_SPAN_LEVEL_TRACE</a></span>
+            </dt>
+            <dd>Trace span level.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga12fcf9c07540d982d0270325e0d0cbd6" class="m-doc">CUBOS_SPAN_LEVEL_DEBUG</a></span>
+            </dt>
+            <dd>Debug span level.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#gaf53ae95d6a6807fa11619e8efa4ee900" class="m-doc">CUBOS_SPAN_LEVEL_INFO</a></span>
+            </dt>
+            <dd>Information log level.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga6cbf990bace15b38fb617f2a9bac0cbf" class="m-doc">CUBOS_SPAN_INFO</a>(</span><span class="m-doc-wrap">name)</span>
+            </dt>
+            <dd>Constructs a new info span.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga4d8388bc67e5455bbf38376d7583b439" class="m-doc">CUBOS_SPAN_DEBUG</a>(</span><span class="m-doc-wrap">name)</span>
+            </dt>
+            <dd>Constructs a new debug span.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#gae4c646ca1862a70f42cdb6f6b51a150a" class="m-doc">CUBOS_SPAN_TRACE</a>(</span><span class="m-doc-wrap">name)</span>
+            </dt>
+            <dd>Constructs a new trace span.</dd>
           </dl>
         </section>
         <section>
@@ -502,6 +526,84 @@
                 <tr>
                   <td>...</td>
                   <td>Optional format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga21cbca9b4083b034dc78f85298bdc8e3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga21cbca9b4083b034dc78f85298bdc8e3" class="m-doc-self">CUBOS_SPAN_LEVEL_TRACE</a></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
+            </h3>
+            <p>Trace span level.</p>
+<aside class="m-note m-default"><h4>See also</h4><p>CUBOS_SPAN_LEVEL</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ga12fcf9c07540d982d0270325e0d0cbd6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga12fcf9c07540d982d0270325e0d0cbd6" class="m-doc-self">CUBOS_SPAN_LEVEL_DEBUG</a></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
+            </h3>
+            <p>Debug span level.</p>
+<aside class="m-note m-default"><h4>See also</h4><p>CUBOS_SPAN_LEVEL</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="gaf53ae95d6a6807fa11619e8efa4ee900"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#gaf53ae95d6a6807fa11619e8efa4ee900" class="m-doc-self">CUBOS_SPAN_LEVEL_INFO</a></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
+            </h3>
+            <p>Information log level.</p>
+<aside class="m-note m-default"><h4>See also</h4><p>CUBOS_SPAN_LEVEL</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ga6cbf990bace15b38fb617f2a9bac0cbf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga6cbf990bace15b38fb617f2a9bac0cbf" class="m-doc-self">CUBOS_SPAN_INFO</a>(</span><span class="m-doc-wrap">name)</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
+            </h3>
+            <p>Constructs a new info span.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Span name.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga4d8388bc67e5455bbf38376d7583b439"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga4d8388bc67e5455bbf38376d7583b439" class="m-doc-self">CUBOS_SPAN_DEBUG</a>(</span><span class="m-doc-wrap">name)</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
+            </h3>
+            <p>Constructs a new debug span.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Span name.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gae4c646ca1862a70f42cdb6f6b51a150a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#gae4c646ca1862a70f42cdb6f6b51a150a" class="m-doc-self">CUBOS_SPAN_TRACE</a>(</span><span class="m-doc-wrap">name)</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
+            </h3>
+            <p>Constructs a new trace span.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Span name.</td>
                 </tr>
               </tbody>
             </table>
