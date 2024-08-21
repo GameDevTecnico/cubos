@@ -315,8 +315,6 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
 
                 cmds.relate(ent1, ent2,
                             PenetrationConstraint{.entity = ent1,
-                                                  .entity1OriginalPosition = collidingWith.entity1OriginalPosition,
-                                                  .entity2OriginalPosition = collidingWith.entity2OriginalPosition,
                                                   .penetration = collidingWith.penetration,
                                                   .normal = collidingWith.normal,
                                                   .normalMass = normalMass,
