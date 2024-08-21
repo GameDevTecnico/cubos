@@ -1,0 +1,44 @@
+{
+    "actions": {
+        "camera-toggle": [
+            {"keys": ["LControl"]}
+        ],
+        "reset": [
+            {"keys": ["Space"]}
+        ]
+    },
+    "axes": {
+        "move-lateral": {
+            "positive": [
+                {"keys": ["D"]}
+            ],
+            "negative": [
+                {"keys": ["A"]}
+            ]
+        },
+        "move-vertical": {
+            "positive": [
+                {"keys": ["E"]}
+            ],
+            "negative": [
+                {"keys": ["Q"]}
+            ]
+        },
+        "move-longitudinal": {
+            "positive": [
+                {"keys": ["W"]}
+            ],
+            "negative": [
+                {"keys": ["S"]}
+            ]
+        },
+        "change-speed": {
+            "positive": [
+                {"keys": ["Tab"]}
+            ],
+            "negative": [
+                {"keys": ["LShift"]}
+            ]
+        }
+    }
+}
