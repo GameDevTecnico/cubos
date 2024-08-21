@@ -23,6 +23,8 @@ namespace cubos::engine
 
     extern Tag collisionsNarrowTag;
 
+    extern Tag collisionsManifoldTag;
+
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class.
     /// @ingroup narrow-phase-collisions-plugin

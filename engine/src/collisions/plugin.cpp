@@ -19,7 +19,7 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
     cubos.plugin(broadPhaseCollisionsPlugin);
     cubos.plugin(narrowPhaseCollisionsPlugin);
 
-    cubos.tag(collisionsTag).addTo(collisionsBroadTag).addTo(collisionsNarrowTag);
+    cubos.tag(collisionsTag).addTo(collisionsBroadTag).addTo(collisionsNarrowTag).addTo(collisionsManifoldTag);
 
     auto initializeBoxColliders = [](Query<const BoxCollisionShape&, Collider&> query) {
         for (auto [shape, collider] : query)
