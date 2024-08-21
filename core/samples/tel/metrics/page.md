@@ -1,4 +1,4 @@
-# Metrics {#examples-core-metrics}
+# Metrics {#examples-core-tel-metrics}
 
 @brief Using the metrics system.
 

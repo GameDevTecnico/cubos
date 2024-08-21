@@ -1,4 +1,4 @@
-# Logging {#examples-core-logging}
+# Logging {#examples-core-tel-logging}
 
 @brief Using the logging system.
 

@@ -112,7 +112,7 @@
         {                                                                                                              \
             CUBOS_CRITICAL("" __VA_ARGS__);                                                                            \
         }                                                                                                              \
-        ::cubos::core::abort();                                                                                        \
+        ::cubos::core::tel::abort();                                                                                   \
     } while (false)
 
 /// @brief Marks a code path as supposedly unreachable. Aborts the program when reached.

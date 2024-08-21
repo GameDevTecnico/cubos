@@ -8,7 +8,7 @@ will need to use some of the features of the @ref core library directly.
 
 The following examples have fully documented tutorials:
 
-- @subpage examples-core-logging - @copybrief examples-core-logging
+- @subpage examples-core-tel - @copybrief examples-core-tel
 - @subpage examples-core-reflection - @copybrief examples-core-reflection
 - @subpage examples-core-data - @copybrief examples-core-data
 - @subpage examples-core-networking - @copybrief examples-core-networking

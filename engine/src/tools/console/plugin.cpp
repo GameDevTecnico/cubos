@@ -1,6 +1,6 @@
 #include <imgui.h>
 
-#include <cubos/core/log.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/console/plugin.hpp>
