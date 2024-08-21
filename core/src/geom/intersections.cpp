@@ -5,6 +5,7 @@
 
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/geom/intersections.hpp>
+#include <cubos/core/geom/utils.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -17,7 +18,6 @@ CUBOS_REFLECT_IMPL(cubos::core::geom::Intersection)
 {
     return core::ecs::TypeBuilder<Intersection>("cubos::engine::Intersection")
         .withField("penetration", &Intersection::penetration)
-        .withField("position", &Intersection::position)
         .withField("normal", &Intersection::normal)
         .build();
 }
@@ -148,5 +148,107 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
         }
     }
 
+    return true;
+}
+
+std::list<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::list<glm::vec3>& inputPolygon,
+                                                                  int numClipPlanes,
+                                                                  const cubos::core::geom::Plane* clipPlanes,
+                                                                  bool removeNotClipToPlane)
+{
+    if (numClipPlanes == 0)
+    {
+        return inputPolygon;
+    }
+
+    // Create temporary list of vertices
+    std::list<glm::vec3> tempPolygon1, tempPolygon2;
+    std::list<glm::vec3>*input = &tempPolygon1, *output = &tempPolygon2;
+
+    *input = inputPolygon;
+
+    // Iterate over each clip plane
+    for (int i = 0; i < numClipPlanes; i++)
+    {
+        // If every point has already been removed previously, just exit
+        if (input->empty())
+        {
+            break;
+        }
+
+        const cubos::core::geom::Plane& plane = clipPlanes[i];
+
+        glm::vec3 tempPoint, startPoint = input->back();
+        for (const glm::vec3& endPoint : *input)
+        {
+            bool startInPlane = pointInPlane(startPoint, plane);
+            bool endInPlane = pointInPlane(endPoint, plane);
+
+            if (removeNotClipToPlane)
+            {
+                if (endInPlane)
+                {
+                    output->push_back(endPoint);
+                }
+            }
+            else
+            {
+                if (startInPlane && endInPlane)
+                {
+                    output->push_back(endPoint);
+                }
+                else if (startInPlane && !endInPlane)
+                {
+                    if (planeEdgeIntersection(plane, startPoint, endPoint, tempPoint))
+                    {
+                        output->push_back(tempPoint);
+                    }
+                }
+                else if (!startInPlane && endInPlane)
+                {
+                    if (planeEdgeIntersection(plane, startPoint, endPoint, tempPoint))
+                    {
+                        output->push_back(tempPoint);
+                    }
+
+                    output->push_back(endPoint);
+                }
+            }
+
+            startPoint = endPoint;
+        }
+
+        // Swap input/output polygons, and clear output list to generate next
+        std::swap(input, output);
+        output->clear();
+    }
+
+    return *input;
+}
+
+bool cubos::core::geom::planeEdgeIntersection(const cubos::core::geom::Plane& plane, const glm::vec3& start,
+                                              const glm::vec3& end, glm::vec3& outPoint)
+{
+    glm::vec3 edge = end - start;
+
+    // Check that the edge and plane are not parallel and thus never intersect
+    float dotEdge = glm::dot(plane.normal, edge);
+    if (glm::abs(dotEdge) < MaxDifference)
+    {
+        return false;
+    }
+
+    // Generate a random point on the plane
+    glm::vec3 pointOnPlane = plane.normal * (-plane.d);
+
+    // Work out the edge factor to scale edge by
+    //  e.g. how far along the edge to traverse before it meets the plane.
+    float factor = -glm::dot(plane.normal, start - pointOnPlane) / dotEdge;
+
+    // Stop any large floating point divide issues with almost parallel planes
+    factor = glm::clamp(factor, 0.0F, 1.0F);
+
+    // Return point on edge
+    outPoint = start + edge * factor;
     return true;
 }
