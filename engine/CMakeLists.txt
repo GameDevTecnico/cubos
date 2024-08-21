@@ -67,6 +67,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/collisions/interface/plugin.cpp"
 	"src/collisions/interface/collider.cpp"
 	"src/collisions/interface/colliding_with.cpp"
+	"src/collisions/interface/contact_manifold.cpp"
 	"src/collisions/interface/shapes/box.cpp"
 	"src/collisions/interface/raycast.cpp"
 	"src/collisions/interface/shapes/capsule.cpp"
