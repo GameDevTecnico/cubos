@@ -78,7 +78,7 @@ static const char* levelColor(Level level)
     }
 }
 
-void cubos::core::abort()
+void cubos::core::tel::abort()
 {
     cpptrace::generate_trace(1).print();
     std::abort();

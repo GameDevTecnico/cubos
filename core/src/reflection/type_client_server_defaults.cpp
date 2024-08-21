@@ -399,7 +399,7 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
             for (uint64_t i = 0; i < static_cast<uint64_t>(bits.size()); ++i)
             {
                 trait.addBit(
-                    bits[i],
+                    bits[static_cast<std::size_t>(i)],
                     [i](const void* value) {
                         return (*static_cast<const uint64_t*>(value) & (static_cast<uint64_t>(1) << i)) !=
                                static_cast<uint64_t>(0);
