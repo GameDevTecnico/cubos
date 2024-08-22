@@ -100,7 +100,7 @@ namespace cubos::core::geom
                 faces[1] = 2;
                 faces[2] = 5;
             }
-            else if (vertexIndex == 7)
+            else
             {
                 faces[0] = 0;
                 faces[1] = 3;
@@ -186,7 +186,7 @@ namespace cubos::core::geom
                 faces[0] = 1;
                 faces[1] = 3;
             }
-            else if (edgeIndex == 11)
+            else
             {
                 faces[0] = 2;
                 faces[1] = 5;
@@ -233,7 +233,7 @@ namespace cubos::core::geom
                 edges[2] = 2;
                 edges[3] = 6;
             }
-            else if (faceIndex == 5)
+            else
             {
                 edges[0] = 5;
                 edges[1] = 11;
