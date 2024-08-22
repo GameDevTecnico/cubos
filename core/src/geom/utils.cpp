@@ -7,11 +7,7 @@
 
 bool cubos::core::geom::pointInPlane(const glm::vec3& point, const cubos::core::geom::Plane& plane)
 {
-    if (glm::dot(point, plane.normal) + plane.d < 0.0F)
-    {
-        return false;
-    }
-    return true;
+    return glm::dot(point, plane.normal) + plane.d >= 0.0F;
 }
 
 int cubos::core::geom::getMaxVertexInAxis(const int numVertices, const glm::vec3 vertices[], const glm::vec3& localAxis)
@@ -83,7 +79,7 @@ void cubos::core::geom::getIncidentReferencePolygon(const cubos::core::geom::Box
     for (int i = 0; i < 4; i++)
     {
         int vertexIndex = faces[bestFaceIndex][i];
-        outPoints.push_back(glm::vec3(localToWorld * glm::vec4(vertices[vertexIndex], 1.0F)));
+        outPoints.emplace_back(localToWorld * glm::vec4(vertices[vertexIndex], 1.0F));
     }
 
     // Loop over all adjacent faces and output a clip plane for each.
@@ -93,23 +89,22 @@ void cubos::core::geom::getIncidentReferencePolygon(const cubos::core::geom::Box
     int faceEdgesIndices[4];
     cubos::core::geom::Box::faceEdges(bestFaceIndex, faceEdgesIndices);
 
-    for (int i = 0; i < 4; i++)
+    for (int edgeIndex : faceEdgesIndices)
     {
-        int vertexIndex = edgesIndices[faceEdgesIndices[i]][0];
+        int vertexIndex = edgesIndices[edgeIndex][0];
         glm::vec3 wsPointOnPlane = glm::vec3(localToWorld * glm::vec4(vertices[vertexIndex], 1.0F));
 
         int adjacentEdgeFacesIndices[2];
-        cubos::core::geom::Box::edgeAdjacentFaces(faceEdgesIndices[i], adjacentEdgeFacesIndices);
+        cubos::core::geom::Box::edgeAdjacentFaces(edgeIndex, adjacentEdgeFacesIndices);
 
-        for (int j = 0; j < 2; j++)
+        for (int faceIndex : adjacentEdgeFacesIndices)
         {
-            int faceIndex = adjacentEdgeFacesIndices[j];
             if (faceIndex != bestFaceIndex)
             {
                 glm::vec3 planeNormal = glm::normalize(-(normalMatrix * faceNormals[faceIndex]));
                 float planeDistance = -glm::dot(planeNormal, wsPointOnPlane);
 
-                cubos::core::geom::Plane plane = Plane{};
+                auto plane = Plane{};
                 plane.normal = planeNormal;
                 plane.d = planeDistance;
                 outAdjacentPlanes.push_back(plane);
@@ -120,8 +115,6 @@ void cubos::core::geom::getIncidentReferencePolygon(const cubos::core::geom::Box
 
 glm::vec3 cubos::core::geom::getClosestPointEdge(const glm::vec3& point, glm::vec3 start, glm::vec3 end)
 {
-    glm::vec3 edge = end - start;
-
     glm::vec3 startToPoint = point - start;
     glm::vec3 startToEnd = end - start;
 
@@ -140,7 +133,7 @@ glm::vec3 cubos::core::geom::getClosestPointEdge(const glm::vec3& point, glm::ve
 
 glm::vec3 cubos::core::geom::getClosestPointPolygon(const glm::vec3& point, const std::list<glm::vec3>& polygon)
 {
-    glm::vec3 finalClosestPoint = glm::vec3(0.0F);
+    auto finalClosestPoint = glm::vec3(0.0F);
     float finalClosestDistanceSqr = std::numeric_limits<float>::infinity();
 
     glm::vec3 last = polygon.back();

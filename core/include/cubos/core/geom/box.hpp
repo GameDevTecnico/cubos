@@ -260,12 +260,12 @@ namespace cubos::core::geom
         static void faceNormals(glm::vec3 normals[6])
         {
             // in ccw winding order
-            normals[0] = {0.0f, 0.0f, -1.0f};
-            normals[1] = {0.0f, 0.0f, 1.0f};
-            normals[2] = {0.0f, 1.0f, 0.0f};
-            normals[3] = {0.0f, -1.0f, 0.0f};
-            normals[4] = {1.0f, 0.0f, 0.0f};
-            normals[5] = {-1.0f, 0.0f, 0.0f};
+            normals[0] = {0.0F, 0.0F, -1.0F};
+            normals[1] = {0.0F, 0.0F, 1.0F};
+            normals[2] = {0.0F, 1.0F, 0.0F};
+            normals[3] = {0.0F, -1.0F, 0.0F};
+            normals[4] = {1.0F, 0.0F, 0.0F};
+            normals[5] = {-1.0F, 0.0F, 0.0F};
         }
 
         static void normals(glm::vec3 normals[3])

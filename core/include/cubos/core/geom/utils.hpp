@@ -26,8 +26,7 @@ namespace cubos::core::geom
     /// @param vertices Array of vertices.
     /// @param localAxis The direction of the axis in local coordinates.
     /// @return The index of the vertex.
-    CUBOS_CORE_API int getMaxVertexInAxis(const int numVertices, const glm::vec3 vertices[],
-                                          const glm::vec3& localAxis);
+    CUBOS_CORE_API int getMaxVertexInAxis(int numVertices, const glm::vec3 vertices[], const glm::vec3& localAxis);
 
     /// TODO: since this is a box shape, we know how many points and adjacent planes exist beforehand
     /// @brief Computes the candidate face of the polygon to be reference, as well as it's normal and adjacent planes.
