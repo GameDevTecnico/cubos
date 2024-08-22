@@ -164,8 +164,8 @@ std::list<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::lis
     // Create temporary list of vertices
     std::list<glm::vec3> tempPolygon1;
     std::list<glm::vec3> tempPolygon2;
-    std::list<glm::vec3> *input = &tempPolygon1;
-    std::list<glm::vec3> *output = &tempPolygon2;
+    std::list<glm::vec3>* input = &tempPolygon1;
+    std::list<glm::vec3>* output = &tempPolygon2;
 
     *input = inputPolygon;
 

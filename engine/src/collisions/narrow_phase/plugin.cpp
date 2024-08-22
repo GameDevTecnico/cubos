@@ -102,9 +102,12 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 }
 
                 // Calculate incident and reference face
-                std::list<glm::vec3> polygon1, polygon2;
-                glm::vec3 normal1, normal2;
-                std::vector<cubos::core::geom::Plane> adjPlanes1, adjPlanes2;
+                std::list<glm::vec3> polygon1;
+                std::list<glm::vec3> polygon2;
+                glm::vec3 normal1;
+                glm::vec3 normal2;
+                std::vector<cubos::core::geom::Plane> adjPlanes1;
+                std::vector<cubos::core::geom::Plane> adjPlanes2;
                 getIncidentReferencePolygon(boxShape1.box, collidingWith.normal, polygon1, normal1, adjPlanes1,
                                             localToWorld1.mat, localToWorld1.worldScale());
                 getIncidentReferencePolygon(boxShape2.box, -collidingWith.normal, polygon2, normal2, adjPlanes2,
@@ -123,11 +126,8 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 }
 
                 // Clip the incident face to the adjacent edges of the reference face
-                if (adjPlanes1.size() > 0)
-                {
-                    polygon2 = cubos::core::geom::sutherlandHodgmanClipping(polygon2, (int)adjPlanes1.size(),
-                                                                            &adjPlanes1[0], false);
-                }
+                polygon2 = cubos::core::geom::sutherlandHodgmanClipping(polygon2, (int)adjPlanes1.size(),
+                                                                        adjPlanes1.data(), false);
 
                 // Finally clip (and remove) any contact points that are above the reference face
                 cubos::core::geom::Plane refPlane =
@@ -160,14 +160,13 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                     // Just make a final sanity check that the contact point
                     // is actual a point of contact not just a clipping bug
                     // and consider only points with positive penetration
-                    CUBOS_DEBUG("Penetration: {}", contactPenetration);
                     if (contactPenetration >= 0.0F)
                     {
-                        ContactPointData contact = ContactPointData{.entity = ent1,
-                                                                    .position1 = globalOnA,
-                                                                    .position2 = globalOnB,
-                                                                    .penetration = collidingWith.penetration,
-                                                                    .id = 0};
+                        auto contact = ContactPointData{.entity = ent1,
+                                                        .position1 = globalOnA,
+                                                        .position2 = globalOnB,
+                                                        .penetration = collidingWith.penetration,
+                                                        .id = 0};
 
                         points.push_back(contact);
                     }
