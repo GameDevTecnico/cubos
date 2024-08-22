@@ -37,14 +37,29 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
             }
         });
 
+    cubos.system("apply angular impulses")
+        .tagged(physicsApplyImpulsesTag)
+        .after(physicsApplyForcesTag)
+        .before(physicsIntegrateVelocityTag)
+        .tagged(fixedStepTag)
+        .call([](Query<AngularVelocity&, const AngularImpulse&, const Inertia&, const Rotation&> query) {
+            for (auto [angVelocity, angImpulse, inertia, rotation] : query)
+            {
+                angVelocity.vec += inertia.rotatedInverseInertia(rotation.quat) * angImpulse.vec();
+            }
+        });
+
     cubos.system("integrate velocity")
         .tagged(physicsIntegrateVelocityTag)
-        .call([](Query<Velocity&, const Force&, const Mass&> query, const Damping& damping,
-                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
+        .call([](Query<Velocity&, AngularVelocity&, const Force&, const Torque&, const Mass&, const Inertia&,
+                       const Rotation&>
+                     query,
+                 const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
-            for (auto [velocity, force, mass] : query)
+            for (auto [velocity, angVelocity, force, torque, mass, inertia, rotation] : query)
             {
+                // Linear velocity
                 if (mass.inverseMass <= 0.0F)
                 {
                     continue;
@@ -57,23 +72,53 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                 glm::vec3 deltaLinearVelocity = force.vec() * mass.inverseMass * subDeltaTime;
 
                 velocity.vec += deltaLinearVelocity;
+
+                // Angular velocity
+                if (inertia.inverseInertia == glm::mat3(0.0F))
+                {
+                    continue;
+                }
+
+                // Apply damping
+                angVelocity.vec *= glm::pow(damping.value, subDeltaTime);
+
+                // Rotate inertia tensor
+                glm::mat3 rotatedInverseInertia = inertia.rotatedInverseInertia(rotation.quat);
+
+                // Apply external torque
+                glm::vec3 deltaAngularVelocity = rotatedInverseInertia * (force.torque() + torque.vec()) * subDeltaTime;
+
+                angVelocity.vec += deltaAngularVelocity;
             }
         });
 
     cubos.system("integrate delta position")
         .tagged(physicsIntegratePositionTag)
-        .call([](Query<AccumulatedCorrection&, Velocity&, const Mass&> query, const FixedDeltaTime& fixedDeltaTime,
-                 const Substeps& substeps) {
+        .call([](Query<AccumulatedCorrection&, Rotation&, const Velocity&, const AngularVelocity&, const Mass&,
+                       const Inertia&>
+                     query,
+                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
-            for (auto [correction, velocity, mass] : query)
+            for (auto [correction, rotation, velocity, angVelocity, mass, inertia] : query)
             {
+                // Position
                 if (mass.inverseMass <= 0.0F)
                 {
                     continue;
                 }
 
                 correction.position += velocity.vec * subDeltaTime;
+
+                // Rotation
+                if (inertia.inverseInertia == glm::mat3(0.0F))
+                {
+                    continue;
+                }
+
+                rotation.quat =
+                    glm::normalize(rotation.quat +
+                                   (glm::quat(glm::vec4(angVelocity.vec * subDeltaTime * 0.5F, 0.0F)) * rotation.quat));
             }
         });
 
@@ -99,10 +144,24 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
         }
     });
 
+    cubos.system("clear torque").tagged(physicsClearForcesTag).call([](Query<Torque&> query) {
+        for (auto [torque] : query)
+        {
+            torque.clear();
+        }
+    });
+
     cubos.system("clear impulses").tagged(physicsClearForcesTag).call([](Query<Impulse&> query) {
         for (auto [impulse] : query)
         {
             impulse.clear();
+        }
+    });
+
+    cubos.system("clear angular impulses").tagged(physicsClearForcesTag).call([](Query<AngularImpulse&> query) {
+        for (auto [angImpulse] : query)
+        {
+            angImpulse.clear();
         }
     });
 }
