@@ -162,8 +162,10 @@ std::list<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::lis
     }
 
     // Create temporary list of vertices
-    std::list<glm::vec3> tempPolygon1, tempPolygon2;
-    std::list<glm::vec3>*input = &tempPolygon1, *output = &tempPolygon2;
+    std::list<glm::vec3> tempPolygon1;
+    std::list<glm::vec3> tempPolygon2;
+    std::list<glm::vec3> *input = &tempPolygon1;
+    std::list<glm::vec3> *output = &tempPolygon2;
 
     *input = inputPolygon;
 
@@ -178,7 +180,8 @@ std::list<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::lis
 
         const cubos::core::geom::Plane& plane = clipPlanes[i];
 
-        glm::vec3 tempPoint, startPoint = input->back();
+        glm::vec3 tempPoint;
+        glm::vec3 startPoint = input->back();
         for (const glm::vec3& endPoint : *input)
         {
             bool startInPlane = pointInPlane(startPoint, plane);
