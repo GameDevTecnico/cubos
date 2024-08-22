@@ -18,6 +18,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        glm::vec3 vec = {0.0F, 0.0F, 0.0F};
+        glm::vec3 vec = {0.0F, 0.0F, 0.0F}; ///< Position of the center in local space.
     };
 } // namespace cubos::engine
