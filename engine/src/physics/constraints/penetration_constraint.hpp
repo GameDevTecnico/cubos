@@ -13,14 +13,6 @@
 
 namespace cubos::engine
 {
-    struct PenetrationConstraintPointData
-    {
-        /// TODO: should contain what contact point has but with also information to resolve the constraint
-        /// TODO: should accumulated things be here?
-        float initialPenetration;
-        glm::vec3 initialRelativeVelocity; // I believe this depends on rotation speed at the point so should be here
-    };
-
     /// @brief Relation which holds the information for resolving a penetration between particles.
     /// @ingroup physics-solver-plugin
     struct PenetrationConstraint
@@ -47,8 +39,6 @@ namespace cubos::engine
         // restitution
         float restitution;      ///< Restitution coefficient of the constraint. yes.
         float relativeVelocity; ///< Relative velocity for computing restitution. This is to be removed (probably)
-
-        std::vector<PenetrationConstraintPointData> points;
 
         // soft constraint
         float biasCoefficient;
