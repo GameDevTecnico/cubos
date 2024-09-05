@@ -4,7 +4,7 @@
 
 using cubos::core::tel::Metrics;
 
-TEST_CASE("metrics")
+TEST_CASE("tel::metrics")
 {
     CUBOS_METRIC("a", 1);
     CUBOS_METRIC("b", 2);

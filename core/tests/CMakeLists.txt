@@ -70,7 +70,8 @@ add_executable(
 
 	thread/task.cpp
 
-	metrics/metrics.cpp
+	tel/metrics.cpp
+	tel/tracing.cpp
 
 	net/address.cpp
 	net/tcp.cpp
