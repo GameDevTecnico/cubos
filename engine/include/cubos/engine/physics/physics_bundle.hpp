@@ -28,6 +28,7 @@ namespace cubos::engine
         glm::vec3 impulse = {0.0F, 0.0F, 0.0F};
         glm::vec3 angularImpulse = {0.0F, 0.0F, 0.0F};
         PhysicsMaterial material = PhysicsMaterial{};
-        glm::mat3 inertiaTensor = glm::mat3(0.0F);
+        glm::mat3 inertiaTensor = glm::mat3(0.0F); // Temporary value. We use this value to check if the inertia tensor
+                                                   // is to be calculated automatically.
     };
 } // namespace cubos::engine
