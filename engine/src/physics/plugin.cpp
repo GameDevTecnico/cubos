@@ -185,6 +185,12 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                                           .inverseInertia = glm::inverse(bundle.inertiaTensor),
                                           .autoUpdate = false});
                 }
+                else
+                {
+                    cmds.add(
+                        ent,
+                        Inertia{.inertia = glm::mat3(0.0F), .inverseInertia = glm::mat3(0.0F), .autoUpdate = true});
+                }
                 cmds.add(ent, Velocity{.vec = bundle.velocity});
                 cmds.add(ent, AngularVelocity{.vec = bundle.angularVelocity});
                 cmds.add(ent, force);
