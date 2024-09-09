@@ -74,7 +74,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#a3666515797e2a23a87508b2ea88b2249" class="m-doc">edges</a>(</span><span class="m-doc-wrap">glm::ivec2 edges[12])</span>
             </dt>
-            <dd>Computes the edges of a box.</dd>
+            <dd>Computes the edges of a box. An edge is a pair of the corner indexes that compose it.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#ae0af6c2c764655635e29dc96a9ff41fb" class="m-doc">edgeAdjacentFaces</a>(</span><span class="m-doc-wrap">int edgeIndex,
               int faces[2])</span>
@@ -88,7 +88,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#a80b96f3f376802b78ca50166cf084c7f" class="m-doc">faces</a>(</span><span class="m-doc-wrap">glm::ivec4 faces[6])</span>
             </dt>
-            <dd>Computes the faces with regards to the corners that compose them. In conter-clock wise winding order.</dd>
+            <dd>Computes the faces with regards to the corner indexes that compose them. In conter-clock wise winding order.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#adcfa7d12d274cd0b42b0c0067c9bb441" class="m-doc">faceNormals</a>(</span><span class="m-doc-wrap">glm::vec3 normals[6])</span>
             </dt>
@@ -140,7 +140,7 @@
                 </tr>
                 <tr>
                   <td>faces</td>
-                  <td>Array to store the three faces in.</td>
+                  <td>Array to store the three face indexes in, according to the returned by faces.</td>
                 </tr>
               </tbody>
             </table>
@@ -149,7 +149,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />geom::<wbr />Box::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3666515797e2a23a87508b2ea88b2249" class="m-doc-self">edges</a>(</span><span class="m-doc-wrap">glm::ivec2 edges[12])</span></span>
             </h3>
-            <p>Computes the edges of a box.</p>
+            <p>Computes the edges of a box. An edge is a pair of the corner indexes that compose it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -210,7 +210,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />geom::<wbr />Box::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80b96f3f376802b78ca50166cf084c7f" class="m-doc-self">faces</a>(</span><span class="m-doc-wrap">glm::ivec4 faces[6])</span></span>
             </h3>
-            <p>Computes the faces with regards to the corners that compose them. In conter-clock wise winding order.</p>
+            <p>Computes the faces with regards to the corner indexes that compose them. In conter-clock wise winding order.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
