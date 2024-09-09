@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include <list>
 #include <vector>
 
 #include <glm/glm.hpp>
@@ -40,10 +39,10 @@ namespace cubos::core::geom
     /// @param clipPlanes Clipping planes
     /// @param removeNotClipToPlane Whether to remove the points if they're outside the plane.
     /// @return The polygon resulting from the clipping.
-    CUBOS_CORE_API std::list<glm::vec3> sutherlandHodgmanClipping(const std::list<glm::vec3>& inputPolygon,
-                                                                  int numClipPlanes,
-                                                                  const cubos::core::geom::Plane* clipPlanes,
-                                                                  bool removeNotClipToPlane);
+    CUBOS_CORE_API std::vector<glm::vec3> sutherlandHodgmanClipping(const std::vector<glm::vec3>& inputPolygon,
+                                                                    int numClipPlanes,
+                                                                    const cubos::core::geom::Plane* clipPlanes,
+                                                                    bool removeNotClipToPlane);
 
     /// @brief Compute the intersection between a plane and an edge.
     /// @param plane The plane.

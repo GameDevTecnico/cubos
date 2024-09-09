@@ -31,7 +31,7 @@ int cubos::core::geom::getMaxVertexInAxis(const int numVertices, const glm::vec3
 }
 
 void cubos::core::geom::getIncidentReferencePolygon(const cubos::core::geom::Box& shape, const glm::vec3& normal,
-                                                    std::list<glm::vec3>& outPoints, glm::vec3& outNormal,
+                                                    std::vector<glm::vec3>& outPoints, glm::vec3& outNormal,
                                                     std::vector<cubos::core::geom::Plane>& outAdjacentPlanes,
                                                     const glm::mat4& localToWorld, float scale)
 {
@@ -131,7 +131,7 @@ glm::vec3 cubos::core::geom::getClosestPointEdge(const glm::vec3& point, glm::ve
     return start + startToEnd * distance;
 }
 
-glm::vec3 cubos::core::geom::getClosestPointPolygon(const glm::vec3& point, const std::list<glm::vec3>& polygon)
+glm::vec3 cubos::core::geom::getClosestPointPolygon(const glm::vec3& point, const std::vector<glm::vec3>& polygon)
 {
     auto finalClosestPoint = glm::vec3(0.0F);
     float finalClosestDistanceSqr = std::numeric_limits<float>::infinity();
