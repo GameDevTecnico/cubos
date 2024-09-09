@@ -83,8 +83,11 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 }
             });
 
-    /// TODO: this can potentially simplified, since we know we're dealing with boxes, the number of points
-    // contained in each polygon and the adjacent faces might be always the same.
+    /// Our method to calculate contact manifolds (and all supporting functions) is inspired by the tutorial:
+    /// https://research.ncl.ac.uk/game/mastersdegree/gametechnologies/previousinformation/physics5collisionmanifolds/2017%20Tutorial%205%20-%20Collision%20Manifolds.pdf
+    /// and the code of the course (Framework 2017):
+    /// https://research.ncl.ac.uk/game/mastersdegree/gametechnologies/previousinformation/csc8503coderepository/
+    /// This system is for box shapes only, so it's simplyfied in comparison to the tutorial.
     cubos.system("collision manifolds")
         .tagged(collisionsManifoldTag)
         .after(collisionsNarrowTag)
