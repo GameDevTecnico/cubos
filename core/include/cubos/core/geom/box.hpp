@@ -58,53 +58,48 @@ namespace cubos::core::geom
         /// @param faces Array to store the three face indexes in, according to the returned by faces.
         static void enclosingFaces(int vertexIndex, int faces[3])
         {
-            if (vertexIndex == 0)
+            switch (vertexIndex)
             {
+            case 0:
                 faces[0] = 0;
                 faces[1] = 3;
                 faces[2] = 5;
-            }
-            else if (vertexIndex == 1)
-            {
+                break;
+            case 1:
                 faces[0] = 1;
                 faces[1] = 2;
                 faces[2] = 4;
-            }
-            else if (vertexIndex == 2)
-            {
+                break;
+            case 2:
                 faces[0] = 1;
                 faces[1] = 3;
                 faces[2] = 5;
-            }
-            else if (vertexIndex == 3)
-            {
+                break;
+            case 3:
                 faces[0] = 0;
                 faces[1] = 2;
                 faces[2] = 4;
-            }
-            else if (vertexIndex == 4)
-            {
+                break;
+            case 4:
                 faces[0] = 0;
                 faces[1] = 2;
                 faces[2] = 5;
-            }
-            else if (vertexIndex == 5)
-            {
+                break;
+            case 5:
                 faces[0] = 1;
                 faces[1] = 3;
                 faces[2] = 4;
-            }
-            else if (vertexIndex == 6)
-            {
+                break;
+            case 6:
                 faces[0] = 1;
                 faces[1] = 2;
                 faces[2] = 5;
-            }
-            else
-            {
+                break;
+            default:
                 faces[0] = 0;
                 faces[1] = 3;
                 faces[2] = 4;
+                break;
             }
         }
 
@@ -131,65 +126,56 @@ namespace cubos::core::geom
         /// @param faces Array to store the two faces in.
         static void edgeAdjacentFaces(int edgeIndex, int faces[2])
         {
-            if (edgeIndex == 0)
+            switch (edgeIndex)
             {
+            case 0:
                 faces[0] = 0;
                 faces[1] = 5;
-            }
-            else if (edgeIndex == 1)
-            {
+                break;
+            case 1:
                 faces[0] = 0;
                 faces[1] = 2;
-            }
-            else if (edgeIndex == 2)
-            {
+                break;
+            case 2:
                 faces[0] = 0;
                 faces[1] = 4;
-            }
-            else if (edgeIndex == 3)
-            {
+                break;
+            case 3:
                 faces[0] = 1;
                 faces[1] = 4;
-            }
-            else if (edgeIndex == 4)
-            {
+                break;
+            case 4:
                 faces[0] = 1;
                 faces[1] = 2;
-            }
-            else if (edgeIndex == 5)
-            {
+                break;
+            case 5:
                 faces[0] = 1;
                 faces[1] = 5;
-            }
-            else if (edgeIndex == 6)
-            {
+                break;
+            case 6:
                 faces[0] = 2;
                 faces[1] = 4;
-            }
-            else if (edgeIndex == 7)
-            {
+                break;
+            case 7:
                 faces[0] = 0;
                 faces[1] = 3;
-            }
-            else if (edgeIndex == 8)
-            {
+                break;
+            case 8:
                 faces[0] = 3;
                 faces[1] = 4;
-            }
-            else if (edgeIndex == 9)
-            {
+                break;
+            case 9:
                 faces[0] = 3;
                 faces[1] = 5;
-            }
-            else if (edgeIndex == 10)
-            {
+                break;
+            case 10:
                 faces[0] = 1;
                 faces[1] = 3;
-            }
-            else
-            {
+                break;
+            default:
                 faces[0] = 2;
                 faces[1] = 5;
+                break;
             }
         }
 
@@ -198,47 +184,44 @@ namespace cubos::core::geom
         /// @param edges Array to store the four edges in.
         static void faceEdges(int faceIndex, int edges[4])
         {
-            if (faceIndex == 0)
+            switch (faceIndex)
             {
+            case 0:
                 edges[0] = 0;
                 edges[1] = 1;
                 edges[2] = 2;
                 edges[3] = 7;
-            }
-            else if (faceIndex == 1)
-            {
+                break;
+            case 1:
                 edges[0] = 3;
                 edges[1] = 4;
                 edges[2] = 5;
                 edges[3] = 10;
-            }
-            else if (faceIndex == 2)
-            {
+                break;
+            case 2:
                 edges[0] = 4;
                 edges[1] = 6;
                 edges[2] = 1;
                 edges[3] = 11;
-            }
-            else if (faceIndex == 3)
-            {
+                break;
+            case 3:
                 edges[0] = 7;
                 edges[1] = 8;
                 edges[2] = 10;
                 edges[3] = 9;
-            }
-            else if (faceIndex == 4)
-            {
+                break;
+            case 4:
                 edges[0] = 3;
                 edges[1] = 8;
                 edges[2] = 2;
                 edges[3] = 6;
-            }
-            else
-            {
+                break;
+            default:
                 edges[0] = 5;
                 edges[1] = 11;
                 edges[2] = 0;
                 edges[3] = 9;
+                break;
             }
         }
 
