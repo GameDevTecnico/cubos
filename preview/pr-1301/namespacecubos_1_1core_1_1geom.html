@@ -98,10 +98,10 @@
             </dt>
             <dd>Computes the intersection between two box shapes.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aaada9ddbda307603bb2c8df0d86bf9c5" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">const std::list&lt;glm::vec3&gt;&amp; inputPolygon,
+              <span class="m-doc-wrap-bumper">auto <a href="#ad9a260232261ba27314f97268f92297b" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">const std::vector&lt;glm::vec3&gt;&amp; inputPolygon,
               int numClipPlanes,
               const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
-              bool removeNotClipToPlane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::list&lt;glm::vec3&gt;</span>
+              bool removeNotClipToPlane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::vector&lt;glm::vec3&gt;</span>
             </dt>
             <dd>Performs the Sutherland-Hodgman Clipping algorithm.</dd>
             <dt>
@@ -123,9 +123,9 @@
             </dt>
             <dd>Computes the vertex furthest along the axis.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa5e11ce984e7c7ac55bdd6f8c34dba6f" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
+              <span class="m-doc-wrap-bumper">auto <a href="#a134d0895c5d8bb08c9212d43f1f45640" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
               const glm::vec3&amp; normal,
-              std::list&lt;glm::vec3&gt;&amp; outPoints,
+              std::vector&lt;glm::vec3&gt;&amp; outPoints,
               glm::vec3&amp; outNormal,
               std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
               const glm::mat4&amp; localToWorld,
@@ -139,8 +139,8 @@
             </dt>
             <dd>Computes the closest point on the line (edge) to point.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aaf2bdc6b9995d3dd15a5e59ccf9d6507" class="m-doc">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
-              const std::list&lt;glm::vec3&gt;&amp; polygon) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a47b5961879b1b902bebf793f36a622b0" class="m-doc">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const std::vector&lt;glm::vec3&gt;&amp; polygon) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
             </dt>
             <dd>Iterates through all edges in polygon and computes closest position on the edges of the polygon to point.</dd>
           </dl>
@@ -185,9 +185,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aaada9ddbda307603bb2c8df0d86bf9c5"><div>
+          <section class="m-doc-details" id="ad9a260232261ba27314f97268f92297b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::list&lt;glm::vec3&gt; cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaada9ddbda307603bb2c8df0d86bf9c5" class="m-doc-self">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">const std::list&lt;glm::vec3&gt;&amp; inputPolygon,
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::vector&lt;glm::vec3&gt; cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad9a260232261ba27314f97268f92297b" class="m-doc-self">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">const std::vector&lt;glm::vec3&gt;&amp; inputPolygon,
               int numClipPlanes,
               const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
               bool removeNotClipToPlane)</span></span>
@@ -326,11 +326,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aa5e11ce984e7c7ac55bdd6f8c34dba6f"><div>
+          <section class="m-doc-details" id="a134d0895c5d8bb08c9212d43f1f45640"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa5e11ce984e7c7ac55bdd6f8c34dba6f" class="m-doc-self">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a134d0895c5d8bb08c9212d43f1f45640" class="m-doc-self">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
               const glm::vec3&amp; normal,
-              std::list&lt;glm::vec3&gt;&amp; outPoints,
+              std::vector&lt;glm::vec3&gt;&amp; outPoints,
               glm::vec3&amp; outNormal,
               std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
               const glm::mat4&amp; localToWorld,
@@ -409,10 +409,10 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aaf2bdc6b9995d3dd15a5e59ccf9d6507"><div>
+          <section class="m-doc-details" id="a47b5961879b1b902bebf793f36a622b0"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3 cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaf2bdc6b9995d3dd15a5e59ccf9d6507" class="m-doc-self">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
-              const std::list&lt;glm::vec3&gt;&amp; polygon)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3 cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a47b5961879b1b902bebf793f36a622b0" class="m-doc-self">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const std::vector&lt;glm::vec3&gt;&amp; polygon)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
             </h3>
             <p>Iterates through all edges in polygon and computes closest position on the edges of the polygon to point.</p>

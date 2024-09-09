@@ -87,9 +87,9 @@
             </dt>
             <dd>Computes the vertex furthest along the axis.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#aa5e11ce984e7c7ac55bdd6f8c34dba6f" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a134d0895c5d8bb08c9212d43f1f45640" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
               const glm::vec3&amp; normal,
-              std::list&lt;glm::vec3&gt;&amp; outPoints,
+              std::vector&lt;glm::vec3&gt;&amp; outPoints,
               glm::vec3&amp; outNormal,
               std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
               const glm::mat4&amp; localToWorld,
@@ -103,8 +103,8 @@
             </dt>
             <dd>Computes the closest point on the line (edge) to point.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#aaf2bdc6b9995d3dd15a5e59ccf9d6507" class="m-doc">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
-              const std::list&lt;glm::vec3&gt;&amp; polygon) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a47b5961879b1b902bebf793f36a622b0" class="m-doc">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const std::vector&lt;glm::vec3&gt;&amp; polygon) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
             </dt>
             <dd>Iterates through all edges in polygon and computes closest position on the edges of the polygon to point.</dd>
           </dl>
