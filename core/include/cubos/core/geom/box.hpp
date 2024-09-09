@@ -55,7 +55,7 @@ namespace cubos::core::geom
 
         /// @brief Computes the enclosing faces of the corner.
         /// @param vertexIndex Index of the corner, according to the returned by corners.
-        /// @param faces Array to store the three faces in.
+        /// @param faces Array to store the three face indexes in, according to the returned by faces.
         static void enclosingFaces(int vertexIndex, int faces[3])
         {
             if (vertexIndex == 0)
@@ -108,7 +108,7 @@ namespace cubos::core::geom
             }
         }
 
-        /// @brief Computes the edges of a box.
+        /// @brief Computes the edges of a box. An edge is a pair of the corner indexes that compose it.
         /// @param edges Array to store the twelve edges in.
         static void edges(glm::ivec2 edges[12])
         {
@@ -242,7 +242,8 @@ namespace cubos::core::geom
             }
         }
 
-        /// @brief Computes the faces with regards to the corners that compose them. In conter-clock wise winding order.
+        /// @brief Computes the faces with regards to the corner indexes that compose them. In conter-clock wise winding
+        /// order.
         /// @param faces Array to store the six faces in.
         static void faces(glm::ivec4 faces[6])
         {
