@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - PhysicsMaterial component (#1254, **@fallenatlas**).
 - Components to support rigid body rotation (#865, **@fallenatlas**).
+- Compute contact points and contact manifold for collision between boxes (#1243, **@fallenatlas**).
 
 ## [v0.3.0] - 2024-08-02
 
