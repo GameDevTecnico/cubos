@@ -151,10 +151,10 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
     return true;
 }
 
-std::list<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::list<glm::vec3>& inputPolygon,
-                                                                  int numClipPlanes,
-                                                                  const cubos::core::geom::Plane* clipPlanes,
-                                                                  bool removeNotClipToPlane)
+std::vector<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::vector<glm::vec3>& inputPolygon,
+                                                                    int numClipPlanes,
+                                                                    const cubos::core::geom::Plane* clipPlanes,
+                                                                    bool removeNotClipToPlane)
 {
     if (numClipPlanes == 0)
     {
@@ -162,10 +162,10 @@ std::list<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::lis
     }
 
     // Create temporary list of vertices
-    std::list<glm::vec3> tempPolygon1;
-    std::list<glm::vec3> tempPolygon2;
-    std::list<glm::vec3>* input = &tempPolygon1;
-    std::list<glm::vec3>* output = &tempPolygon2;
+    std::vector<glm::vec3> tempPolygon1;
+    std::vector<glm::vec3> tempPolygon2;
+    std::vector<glm::vec3>* input = &tempPolygon1;
+    std::vector<glm::vec3>* output = &tempPolygon2;
 
     *input = inputPolygon;
 

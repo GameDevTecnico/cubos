@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include <list>
 #include <vector>
 
 #include <glm/glm.hpp>
@@ -38,7 +37,7 @@ namespace cubos::core::geom
     /// @param localToWorld The localToWorld matrix of the body.
     /// @param scale The scale of the body.
     CUBOS_CORE_API void getIncidentReferencePolygon(const cubos::core::geom::Box& shape, const glm::vec3& normal,
-                                                    std::list<glm::vec3>& outPoints, glm::vec3& outNormal,
+                                                    std::vector<glm::vec3>& outPoints, glm::vec3& outNormal,
                                                     std::vector<cubos::core::geom::Plane>& outAdjacentPlanes,
                                                     const glm::mat4& localToWorld, float scale);
 
@@ -53,5 +52,5 @@ namespace cubos::core::geom
     /// @param point Position of the point.
     /// @param polygon List of points that compose the shape (edges are defined as a line-loop list of vertices).
     /// @return Closest point that resides on any of the given edges of the polygon.
-    CUBOS_CORE_API glm::vec3 getClosestPointPolygon(const glm::vec3& point, const std::list<glm::vec3>& polygon);
+    CUBOS_CORE_API glm::vec3 getClosestPointPolygon(const glm::vec3& point, const std::vector<glm::vec3>& polygon);
 } // namespace cubos::core::geom

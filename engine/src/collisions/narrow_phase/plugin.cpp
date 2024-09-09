@@ -102,8 +102,8 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 }
 
                 // Calculate incident and reference face
-                std::list<glm::vec3> polygon1;
-                std::list<glm::vec3> polygon2;
+                std::vector<glm::vec3> polygon1;
+                std::vector<glm::vec3> polygon2;
                 glm::vec3 normal1;
                 glm::vec3 normal2;
                 std::vector<cubos::core::geom::Plane> adjPlanes1;
