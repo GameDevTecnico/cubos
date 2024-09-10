@@ -21,6 +21,7 @@ void cubos::engine::shaderPlugin(Cubos& cubos)
         .call([](Assets& assets, Window& window) {
             // Add bridges for vertex and pixel shaders.
             assets.registerBridge(".vs", std::make_unique<ShaderBridge>(window->renderDevice(), Stage::Vertex));
+            assets.registerBridge(".gs", std::make_unique<ShaderBridge>(window->renderDevice(), Stage::Geometry));
             assets.registerBridge(".fs", std::make_unique<ShaderBridge>(window->renderDevice(), Stage::Pixel));
         });
 }

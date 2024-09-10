@@ -1,6 +1,7 @@
 #include <cubos/engine/render/bloom/plugin.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/cascaded_shadow_maps/plugin.hpp>
+#include <cubos/engine/render/cascaded_shadow_maps_rasterizer/plugin.hpp>
 #include <cubos/engine/render/defaults/plugin.hpp>
 #include <cubos/engine/render/defaults/target.hpp>
 #include <cubos/engine/render/deferred_shading/plugin.hpp>
@@ -53,6 +54,7 @@ void cubos::engine::renderDefaultsPlugin(Cubos& cubos)
     cubos.plugin(toneMappingPlugin);
     cubos.plugin(bloomPlugin);
     cubos.plugin(shadowAtlasRasterizerPlugin);
+    cubos.plugin(cascadedShadowMapsRasterizerPlugin);
 
     cubos.plugin(deferredShadingPlugin);
 

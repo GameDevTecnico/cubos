@@ -53,4 +53,13 @@ namespace cubos::core::geom
     /// @param polygon List of points that compose the shape (edges are defined as a line-loop list of vertices).
     /// @return Closest point that resides on any of the given edges of the polygon.
     CUBOS_CORE_API glm::vec3 getClosestPointPolygon(const glm::vec3& point, const std::vector<glm::vec3>& polygon);
+
+    /// @brief Gets a camera's frustum corners in world space.
+    /// @param view Matrix that transforms world space to the camera's view space.
+    /// @param proj Matrix that transforms the camera's view space to its clip space.
+    /// @param zNear Near clipping plane.
+    /// @param zFar Far clipping plane.
+    /// @param corners Output vector where the corners will be stored.
+    CUBOS_CORE_API void getCameraFrustumCorners(const glm::mat4& view, const glm::mat4& proj, float zNear, float zFar,
+                                                std::vector<glm::vec4>& corners);
 } // namespace cubos::core::geom

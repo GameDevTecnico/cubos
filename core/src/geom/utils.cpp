@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <limits>
 
 #include <glm/glm.hpp>
@@ -155,4 +156,38 @@ glm::vec3 cubos::core::geom::getClosestPointPolygon(const glm::vec3& point, cons
     }
 
     return finalClosestPoint;
+}
+
+void cubos::core::geom::getCameraFrustumCorners(const glm::mat4& view, const glm::mat4& proj, float zNear, float zFar,
+                                                std::vector<glm::vec4>& corners)
+{
+    // Convert zNear and zFar to normalized coordinates.
+    // If they don't match the clipping planes of the projection matrix, the points returned
+    // won't be the actual corners of the frustum. This may be useful for splitting the
+    // frustum along clipping planes between near and far.
+
+    // Points are converted from view space to clip space
+    auto pointNear = proj * glm::vec4(0.0F, 0.0F, -zNear, 1.0F);
+    auto pointFar = proj * glm::vec4(0.0F, 0.0F, -zFar, 1.0F);
+    pointNear /= pointNear.w;
+    pointFar /= pointFar.w;
+
+    float zNearNDC = std::clamp(pointNear.z, -1.0F, 1.0F);
+    float zFarNDC = std::clamp(pointFar.z, -1.0F, 1.0F);
+
+    // Proceed to getting the corners
+
+    auto viewProjInv = glm::inverse(proj * view);
+
+    for (int x = -1; x <= 1; x += 2)
+    {
+        for (int y = -1; y <= 1; y += 2)
+        {
+            auto cornerNear = viewProjInv * glm::vec4(x, y, zNearNDC, 1.0F);
+            corners.push_back(cornerNear / cornerNear.w);
+
+            auto cornerFar = viewProjInv * glm::vec4(x, y, zFarNDC, 1.0F);
+            corners.push_back(cornerFar / cornerFar.w);
+        }
+    }
 }

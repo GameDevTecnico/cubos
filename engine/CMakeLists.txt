@@ -168,6 +168,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/shadow_atlas_rasterizer/plugin.cpp"
 	"src/render/shadow_atlas_rasterizer/shadow_atlas_rasterizer.cpp"
 	"src/render/cascaded_shadow_maps/plugin.cpp"
+	"src/render/cascaded_shadow_maps_rasterizer/plugin.cpp"
 
 	"src/tools/settings_inspector/plugin.cpp"
 	"src/tools/selection/plugin.cpp"
