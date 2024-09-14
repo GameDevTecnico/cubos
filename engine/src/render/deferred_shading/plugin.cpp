@@ -257,8 +257,9 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             auto slot = shadowAtlas.slotsMap.at(caster.value().baseSettings.id);
 
                             // The light is actually facing the direction opposite to what's visible, so rotate it.
-                            auto lightView = glm::inverse(
-                                glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)));
+                            auto lightView = glm::inverse(glm::scale(
+                                glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)),
+                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
                             auto lightProj = glm::perspective(glm::radians(light.spotAngle),
                                                               (float(shadowAtlas.getSize().x) * slot->size.x) /
                                                                   (float(shadowAtlas.getSize().y) * slot->size.y),

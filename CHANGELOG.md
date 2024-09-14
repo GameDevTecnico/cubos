@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Spot light angle mismatch between light and shadows (#1310, **@tomas7770**).
+- Spot shadows cause light range cutoff (#1312, **@tomas7770**).
 
 ## [v0.3.0] - 2024-08-02
 

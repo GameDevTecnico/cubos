@@ -166,8 +166,9 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
 
                 // Send the PerScene data to the GPU.
                 // The light is actually facing the direction opposite to what's visible, so rotate it.
-                auto view =
-                    glm::inverse(glm::rotate(localToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)));
+                auto view = glm::inverse(
+                    glm::scale(glm::rotate(localToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)),
+                               glm::vec3(1.0F / localToWorld.worldScale())));
                 auto proj = glm::perspective(glm::radians(light.spotAngle),
                                              (float(atlas.getSize().x) * slot->size.x) /
                                                  (float(atlas.getSize().y) * slot->size.y),
