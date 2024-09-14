@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Components to support rigid body rotation (#865, **@fallenatlas**).
 - Compute contact points and contact manifold for collision between boxes (#1243, **@fallenatlas**).
 
+### Fixed
+
+- Spot light angle mismatch between light and shadows (#1310, **@tomas7770**).
+
 ## [v0.3.0] - 2024-08-02
 
 ### Added

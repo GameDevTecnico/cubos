@@ -248,8 +248,8 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         perLight.color = glm::vec4(light.color, 1.0F);
                         perLight.intensity = light.intensity;
                         perLight.range = light.range;
-                        perLight.spotCutoff = glm::cos(glm::radians(light.spotAngle));
-                        perLight.innerSpotCutoff = glm::cos(glm::radians(light.innerSpotAngle));
+                        perLight.spotCutoff = glm::cos(glm::radians(light.spotAngle / 2.0F));
+                        perLight.innerSpotCutoff = glm::cos(glm::radians(light.innerSpotAngle / 2.0F));
 
                         if (caster.contains())
                         {
