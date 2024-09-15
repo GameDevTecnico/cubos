@@ -93,6 +93,20 @@
               Intersection&amp; intersect) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
             </dt>
             <dd>Computes the intersection between two box shapes.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#ad9a260232261ba27314f97268f92297b" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">const std::vector&lt;glm::vec3&gt;&amp; inputPolygon,
+              int numClipPlanes,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
+              bool removeNotClipToPlane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::vector&lt;glm::vec3&gt;</span>
+            </dt>
+            <dd>Performs the Sutherland-Hodgman Clipping algorithm.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a3aa4069dfc64c9ae974264957c9877b9" class="m-doc">planeEdgeIntersection</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane,
+              const glm::vec3&amp; start,
+              const glm::vec3&amp; end,
+              glm::vec3&amp; outPoint) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+            </dt>
+            <dd>Compute the intersection between a plane and an edge.</dd>
           </dl>
         </section>
       </div>
