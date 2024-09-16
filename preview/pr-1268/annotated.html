@@ -253,6 +253,7 @@
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a> <span class="m-doc">Represents a box shape.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">Capsule</a> <span class="m-doc">Represents a capsule or sphere shape.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a> <span class="m-doc">Contains info regarding an intersection between shapes.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a> <span class="m-doc">Represents a plane. Assumes equation: normal.x + normal.y + normal.z + d = 0.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
@@ -412,6 +413,8 @@
                 <a href="#" onclick="return toggle(this)">namespace</a> <a href="namespacecubos_1_1engine.html" class="m-doc">engine</a> <span class="m-doc"><a href="group__engine.html" class="m-doc">Engine</a> module.</span>
                 <ul class="m-doc">
                   <li>struct <a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> <span class="m-doc">Component which holds the corrections accumulated from the constraints solving.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1AngularImpulse.html" class="m-doc">AngularImpulse</a> <span class="m-doc">Component which holds angular impulses applied on a body.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1AngularVelocity.html" class="m-doc">AngularVelocity</a> <span class="m-doc">Component which holds angular velocity of a body.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> <span class="m-doc">Handle to an asset of any type. May either be weak or strong. Weak handles do not guarantee the asset is loaded, while strong handles do.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> <span class="m-doc">Handle to an asset of a specific type.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">AssetBridge</a> <span class="m-doc">Bridges are the objects responsible for loading and saving assets from/to disk. They form the bridge between the asset manager and the virtual file system.</span></li>
@@ -431,9 +434,12 @@
                   <li>struct <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> <span class="m-doc">Component which stores the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> state for a render target.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> <span class="m-doc">Component which adds a box collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> <span class="m-doc">Component which adds a capsule collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1CenterOfMass.html" class="m-doc">CenterOfMass</a> <span class="m-doc">Component which defines the center of mass of a body.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a> <span class="m-doc">Tree relation which indicates the &#x27;from&#x27; entity is a child of the &#x27;to&#x27; entity.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> <span class="m-doc">Component which adds a collider to an entity.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">CollidingWith</a> <span class="m-doc">Relation which represents a collision.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1ContactManifold.html" class="m-doc">ContactManifold</a> <span class="m-doc">Represents a contact interface between two bodies.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1ContactPointData.html" class="m-doc">ContactPointData</a> <span class="m-doc">Contains info regarding a contact point of a @ContactManifold.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> <span class="m-doc">Resource which holds the damping value for integration.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1DataInspector.html" class="m-doc">DataInspector</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Resource which allows the user to inspect or modify any reflectable value on the UI.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1DeferredShading.html" class="m-doc">DeferredShading</a> <span class="m-doc">Component which stores the Deferred Shading state for a render target.</span></li>
@@ -459,6 +465,7 @@
                   <li>class <a href="classcubos_1_1engine_1_1ImageBridge.html" class="m-doc">ImageBridge</a> <span class="m-doc">Bridge which loads and saves <a href="structcubos_1_1engine_1_1Image.html" class="m-doc">Image</a> assets.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1ImGuiTarget.html" class="m-doc">ImGuiTarget</a> <span class="m-doc">Component used to indicate that the ImGui frame should be rendered to a given <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a>.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a> <span class="m-doc">Component which holds impulses applied on a particle.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> <span class="m-doc">Component which defines the inertia of a body.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Resource which stores the input bindings for multiple players.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the state of a single input action, such as &quot;jump&quot; or &quot;attack&quot;.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1InputAxis.html" class="m-doc">InputAxis</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores the state of a single input axis, such as &quot;move forward&quot; or &quot;move right&quot;.</span></li>
@@ -517,6 +524,7 @@
                   <li>struct <a href="structcubos_1_1engine_1_1SpotShadowCaster.html" class="m-doc">SpotShadowCaster</a> <span class="m-doc">Component which enables shadow casting on a spot light.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> <span class="m-doc">Component which stores the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> textures for a render target.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1ToneMapping.html" class="m-doc">ToneMapping</a> <span class="m-doc">Component which stores Tone Mapping configuration for a render target.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1Torque.html" class="m-doc">Torque</a> <span class="m-doc">Component which holds torque applied on a body.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1UICanvas.html" class="m-doc">UICanvas</a> <span class="m-doc">Component which represents a target for UI rendering.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1UIColorRect.html" class="m-doc">UIColorRect</a> <span class="m-doc">Component that draws a UI element as a solid color.</span></li>
                   <li class="m-doc-collapsible collapsed">

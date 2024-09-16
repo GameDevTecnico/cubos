@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/collisions/ directory | Cubos Docs</title>
+  <title>core/geom/utils.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,41 +46,67 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span>collisions<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_c1deef5baf41393ad8a994c3fd53e62f.html">geom</a>/</span>utils.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="group__collisions-plugin.html" class="m-doc">Collisions</a> plugin directory.</p>
+        <p>Class cubos::core::geom::Utils.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#subdirs">Directories</a></li>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="subdirs">
-          <h2><a href="#subdirs">Directories</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>directory <a href="dir_46c6a4a310169812045f09ba6135aa36.html" class="m-doc">shapes</a>/</dt>
-            <dd>Collision shapes components directory.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">cubos::core::geom</a></dt>
+            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
           </dl>
         </section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="collider_8hpp.html" class="m-doc">collider.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">cubos::<wbr />engine::<wbr />Collider</a>.</dd>
-            <dt>file <a href="colliding__with_8hpp.html" class="m-doc">colliding_with.hpp</a></dt>
-            <dd>Relation <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">cubos::<wbr />engine::<wbr />CollidingWith</a>.</dd>
-            <dt>file <a href="contact__manifold_8hpp.html" class="m-doc">contact_manifold.hpp</a></dt>
-            <dd>Relation <a href="structcubos_1_1engine_1_1ContactManifold.html" class="m-doc">cubos::<wbr />engine::<wbr />ContactManifold</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2collisions_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="raycast_8hpp.html" class="m-doc">raycast.hpp</a></dt>
-            <dd>System argument <a href="classcubos_1_1engine_1_1Raycast.html" class="m-doc">cubos::<wbr />engine::<wbr />Raycast</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a2a9001e6ccfe5bf8319bee2371e56176" class="m-doc">pointInPlane</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+            </dt>
+            <dd>Computes if a point is in the area limited by the plane.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a60469250da525272e95b5fa9f87b415c" class="m-doc">getMaxVertexInAxis</a>(</span><span class="m-doc-wrap">int numVertices,
+              const glm::vec3 vertices[],
+              const glm::vec3&amp; localAxis) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> int</span>
+            </dt>
+            <dd>Computes the vertex furthest along the axis.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a134d0895c5d8bb08c9212d43f1f45640" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
+              const glm::vec3&amp; normal,
+              std::vector&lt;glm::vec3&gt;&amp; outPoints,
+              glm::vec3&amp; outNormal,
+              std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
+              const glm::mat4&amp; localToWorld,
+              float scale) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Computes the candidate face of the polygon to be reference, as well as it&#x27;s normal and adjacent planes.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a94c609bb4af401e4cdd9f748459ae634" class="m-doc">getClosestPointEdge</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              glm::vec3 start,
+              glm::vec3 end) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
+            </dt>
+            <dd>Computes the closest point on the line (edge) to point.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a47b5961879b1b902bebf793f36a622b0" class="m-doc">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const std::vector&lt;glm::vec3&gt;&amp; polygon) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
+            </dt>
+            <dd>Iterates through all edges in polygon and computes closest position on the edges of the polygon to point.</dd>
           </dl>
         </section>
       </div>
