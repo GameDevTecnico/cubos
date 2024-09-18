@@ -16,9 +16,11 @@
                 "w": 0
             },
             "cubos::engine::BoxCollisionShape": {
-                "x": 3.0,
-                "y": 7.0,
-                "z": 2.0
+                "box": {
+                    "x": 3.0,
+                    "y": 7.0,
+                    "z": 2.0
+                }
             },
             "cubos::engine::Collider": {},
             "Obstacle": {
