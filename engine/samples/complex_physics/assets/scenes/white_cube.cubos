@@ -62,8 +62,8 @@
         "z": 0.0
       },
       "cubos::engine::PhysicsMaterial": {
-        "friction": 0.02,
-        "bounciness": 1.0,
+        "friction": 0.5,
+        "bounciness": 0.5,
         "frictionMix": "Average",
         "bouncinessMix": "Average"
       },

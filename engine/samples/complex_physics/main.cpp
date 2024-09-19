@@ -114,12 +114,18 @@ int main(int argc, char** argv)
             .add(BoxCollisionShape{cubos::core::geom::Box{.halfSize = glm::vec3{20.0F, 0.5F, 20.0F}}})
             .add(LocalToWorld{})
             .add(Position{{0.0F, 0.0F, 0.0F}})
+            .add(Rotation{})
             .add(Velocity{.vec = {0.0F, 0.0F, 0.0F}})
+            .add(AngularVelocity{})
             .add(Force{})
+            .add(Torque{})
             .add(Impulse{})
+            .add(AngularImpulse{})
             .add(Mass{.mass = 1.0F, .inverseMass = 0.0F})
+            .add(CenterOfMass{})
             .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
-            .add(PhysicsMaterial{});
+            .add(Inertia{.inertia = glm::mat3(0.0F), .inverseInertia = glm::mat3(0.0F), .autoUpdate = true})
+            .add(PhysicsMaterial{.friction = 0.1F});
 
         auto redCube = assets.read(RedCubeSceneAsset);
         auto whiteCube = assets.read(WhiteCubeSceneAsset);
