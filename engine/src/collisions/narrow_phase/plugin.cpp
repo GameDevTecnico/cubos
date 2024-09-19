@@ -120,10 +120,10 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 glm::vec3 normal2;
                 std::vector<cubos::core::geom::Plane> adjPlanes1;
                 std::vector<cubos::core::geom::Plane> adjPlanes2;
-                getIncidentReferencePolygon(*matchedShape1, collidingWith.normal, polygon1, normal1, adjPlanes1, matchedLocalToWorld1->mat,
-                                            matchedLocalToWorld1->worldScale());
-                getIncidentReferencePolygon(*matchedShape2, -collidingWith.normal, polygon2, normal2, adjPlanes2, matchedLocalToWorld2->mat,
-                                            matchedLocalToWorld2->worldScale());
+                getIncidentReferencePolygon(*matchedShape1, collidingWith.normal, polygon1, normal1, adjPlanes1,
+                                            matchedLocalToWorld1->mat, matchedLocalToWorld1->worldScale());
+                getIncidentReferencePolygon(*matchedShape2, -collidingWith.normal, polygon2, normal2, adjPlanes2,
+                                            matchedLocalToWorld2->mat, matchedLocalToWorld2->worldScale());
 
                 // Each face will always have more than 1 point so we proceed to clipping
                 // See which one of the normals is the reference one by checking which has the highest dot product
