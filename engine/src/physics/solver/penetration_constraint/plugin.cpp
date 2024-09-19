@@ -37,7 +37,6 @@ void getTangents(const glm::vec3& velocity1, const glm::vec3& velocity2, const g
                  glm::vec3& tangent2)
 {
     // Use linear relative velocity for determining tangents.
-    /// TODO: test this with the normal way
     glm::vec3 linearVr = velocity2 - velocity1;
 
     tangent1 = linearVr - glm::dot(linearVr, n) * n;
@@ -453,6 +452,3 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
             }
         });
 }
-
-// cleanup code
-// change name in creation of manifold
