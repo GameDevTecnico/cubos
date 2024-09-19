@@ -112,6 +112,7 @@ CUBOS_REFLECT_IMPL(PhysicsBundle)
         .withField("impulse", &PhysicsBundle::impulse)
         .withField("angularImpulse", &PhysicsBundle::angularImpulse)
         .withField("material", &PhysicsBundle::material)
+        .withField("centerOfMass", &PhysicsBundle::centerOfMass)
         .withField("inertiaTensor", &PhysicsBundle::inertiaTensor)
         .build();
 }
@@ -179,6 +180,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 angularImpulse.add(bundle.angularImpulse);
 
                 cmds.add(ent, Mass{.mass = bundle.mass, .inverseMass = 1.0F / bundle.mass});
+                cmds.add(ent, CenterOfMass{.vec = bundle.centerOfMass});
                 if (bundle.inertiaTensor != glm::mat3(0.0F))
                 {
                     cmds.add(ent, Inertia{.inertia = bundle.inertiaTensor,
