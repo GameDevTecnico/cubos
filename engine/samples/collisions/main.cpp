@@ -237,7 +237,7 @@ int main(int argc, char** argv)
                     for (const cubos::engine::ContactPointData& end : manifold.points)
                     {
                         gizmos.color({1.0F, 1.0F, 0.0F});
-                        gizmos.drawArrow("line", start.position1, end.position1 - start.position1, 0.01F, 0.05F, 1.0F,
+                        gizmos.drawArrow("line", start.globalOn1, end.globalOn1 - start.globalOn1, 0.01F, 0.05F, 1.0F,
                                          0.05F, Gizmos::Space::World);
                         start = end;
                     }
@@ -248,11 +248,11 @@ int main(int argc, char** argv)
                     for (auto point : manifold.points)
                     {
                         gizmos.color({0.0F, 0.0F, 1.0F});
-                        gizmos.drawArrow("point", point.position1, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F, 1.0F,
+                        gizmos.drawArrow("point", point.globalOn1, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F, 1.0F,
                                          0.05F, Gizmos::Space::World);
 
                         gizmos.color({1.0F, 0.0F, 1.0F});
-                        gizmos.drawArrow("point", point.position2, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F, 1.0F,
+                        gizmos.drawArrow("point", point.globalOn2, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F, 1.0F,
                                          0.05F, Gizmos::Space::World);
                     }
                 }

@@ -9,8 +9,10 @@ CUBOS_REFLECT_IMPL(cubos::engine::ContactPointData)
 {
     return core::ecs::TypeBuilder<ContactPointData>("cubos::engine::ContactPointData")
         .withField("entity", &ContactPointData::entity)
-        .withField("position1", &ContactPointData::position1)
-        .withField("position2", &ContactPointData::position2)
+        .withField("globalOn1", &ContactPointData::globalOn1)
+        .withField("globalOn2", &ContactPointData::globalOn2)
+        .withField("localOn1", &ContactPointData::localOn1)
+        .withField("localOn2", &ContactPointData::localOn2)
         .withField("penetration", &ContactPointData::penetration)
         .withField("id", &ContactPointData::id)
         .build();
