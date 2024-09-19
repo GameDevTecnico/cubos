@@ -21,10 +21,11 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         cubos::core::ecs::Entity entity; ///< Entity to which the normal is relative to.
-        glm::vec3 position1;             ///< Position on the entity of the contact in global coordinates.
-        glm::vec3 position2;             ///< Position on the other entity of the contact in global coordinates.
+        glm::vec3 globalOn1;             ///< Position on the entity of the contact in global coordinates.
+        glm::vec3 globalOn2;             ///< Position on the other entity of the contact in global coordinates.
+        glm::vec3 localOn1;              ///< Position on the entity of the contact in local coordinates.
+        glm::vec3 localOn2;              ///< Position on the other entity of the contact in local coordinates.
         float penetration;               ///< Penetration of the contact point. Always positive.
-        /// TODO: normal and tangent impulse?
         /// The contact feature ID on the first shape. This indicates the ID of
         /// the vertex, edge, or face of the contact, if one can be determined.
         int id; /// TODO: use this
