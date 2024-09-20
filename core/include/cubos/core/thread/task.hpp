@@ -50,6 +50,11 @@ namespace cubos::core::thread
         /// @param other Task.
         Task& operator=(const Task& other)
         {
+            if (this == &other)
+            {
+                return *this;
+            }
+
             this->discard();
             mData = other.mData;
             std::unique_lock lock{mData->mMutex};
@@ -61,6 +66,11 @@ namespace cubos::core::thread
         /// @param other Task.
         Task& operator=(Task&& other) noexcept
         {
+            if (this == &other)
+            {
+                return *this;
+            }
+
             this->discard();
             mData = other.mData;
             other.mData = nullptr;

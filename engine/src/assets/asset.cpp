@@ -69,6 +69,11 @@ AnyAsset::AnyAsset(AnyAsset&& other) noexcept
 
 AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 {
+    if (this == &other)
+    {
+        return *this;
+    }
+
     this->decRef();
     reflectedId = other.reflectedId;
     mId = other.mId;
@@ -80,6 +85,11 @@ AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 
 AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
 {
+    if (this == &other)
+    {
+        return *this;
+    }
+
     this->decRef();
     reflectedId = other.reflectedId;
     mId = other.mId;

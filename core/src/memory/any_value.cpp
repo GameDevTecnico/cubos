@@ -30,6 +30,11 @@ AnyValue::AnyValue()
 
 AnyValue& AnyValue::operator=(AnyValue&& other) noexcept
 {
+    if (this == &other)
+    {
+        return *this;
+    }
+
     mType = other.mType;
     mValue = other.mValue;
     other.mType = nullptr;
