@@ -8,6 +8,7 @@
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -17,6 +18,7 @@ using cubos::core::reflection::ArrayTrait;
 using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::MaskTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
 
@@ -144,6 +146,40 @@ bool BinaryDeserializer::decompose(const Type& type, void* value)
         }
 
         trait.at(name).set(value);
+    }
+    else if (type.has<MaskTrait>())
+    {
+        const auto& trait = type.get<MaskTrait>();
+
+        std::size_t bitCount = 0;
+        if (!this->read(bitCount))
+        {
+            CUBOS_ERROR("Could not deserialize mask bit count");
+            return false;
+        }
+
+        for (auto& bit : trait)
+        {
+            bit.clear(value);
+        }
+
+        for (std::size_t i = 0; i < bitCount; ++i)
+        {
+            std::string bit;
+            if (!this->read(bit))
+            {
+                CUBOS_ERROR("Could not deserialize mask bit name");
+                return false;
+            }
+
+            if (!trait.contains(bit))
+            {
+                CUBOS_ERROR("Could not deserialize mask, no such bit '{}'", bit);
+                return false;
+            }
+
+            trait.at(bit).set(value);
+        }
     }
     else if (type.has<FieldsTrait>())
     {
