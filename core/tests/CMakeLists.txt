@@ -9,6 +9,7 @@ add_executable(
 	reflection/reflect.cpp
 	reflection/comparison.cpp
 	reflection/type.cpp
+	reflection/type_client_server.cpp
 	reflection/type_registry.cpp
 	reflection/traits/constructible.cpp
 	reflection/traits/fields.cpp
