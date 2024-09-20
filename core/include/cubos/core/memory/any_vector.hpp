@@ -29,6 +29,11 @@ namespace cubos::core::memory
         /// @param elementType Element type.
         AnyVector(const reflection::Type& elementType);
 
+        /// @brief Copy constructs.
+        /// @note Aborts if the element type of @p other is not copy constructible.
+        /// @param other Vector.
+        AnyVector(const AnyVector& other);
+
         /// @brief Move constructs.
         /// @param other Vector.
         AnyVector(AnyVector&& other) noexcept;
@@ -41,6 +46,30 @@ namespace cubos::core::memory
         /// @note Aborts if @p capacity is less than @ref size().
         /// @param capacity Minimum capacity.
         void reserve(std::size_t capacity);
+
+        /// @brief Inserts an uninitialized element at the given index.
+        /// @note Aborts if @p index is out of bounds.
+        /// @param index Element index.
+        void insertUninit(std::size_t index);
+
+        /// @brief Inserts a default-constructed element at the given index.
+        /// @note Aborts if @ref elementType() is not default-constructible.
+        /// @note Aborts if @p index is out of bounds.
+        /// @param index Element index.
+        void insertDefault(std::size_t index);
+
+        /// @brief Inserts a copy-constructed element at the given index.
+        /// @note Aborts if @ref elementType() is not copy-constructible.
+        /// @note Aborts if @p index is out of bounds.
+        /// @param index Element index.
+        /// @param value Element to copy.
+        void insertCopy(std::size_t index, const void* value);
+
+        /// @brief Inserts a move-constructed element at the given index.
+        /// @note Aborts if @p index is out of bounds.
+        /// @param index Element index.
+        /// @param value Element to move.
+        void insertMove(std::size_t index, void* value);
 
         /// @brief Pushes an uninitialized element to the back of the vector.
         /// @warning Care must be taken to ensure that the constructor of the element is called before it is used or
@@ -81,6 +110,14 @@ namespace cubos::core::memory
         /// @note Aborts if the vector is empty.
         void pop();
 
+        /// @brief Removes the element at the given index from the vector.
+        ///
+        /// Prefer using @ref swapErase() if the order of elements doesn't matter, as it is more efficient.
+        ///
+        /// @note Aborts if @p index is out of bounds.
+        /// @param index Element index.
+        void erase(std::size_t index);
+
         /// @brief Removes the element at the given index from the vector, moving the last element
         /// to its place if it isn't the last element.
         /// @note Aborts if @p index is out of bounds.
@@ -119,6 +156,15 @@ namespace cubos::core::memory
         bool empty() const;
 
     private:
+        /// @brief Moves a slice of elements from one position to another in the vector.
+        ///
+        /// No deconstructors are called on the elements which were moved into.
+        ///
+        /// @param from Start index of the slice to move.
+        /// @param to Start index to move the slice to.
+        /// @param count Number of elements to move.
+        void moveSlice(std::size_t from, std::size_t to, std::size_t count);
+
         const reflection::Type& mElementType;
         const reflection::ConstructibleTrait* mConstructibleTrait{nullptr};
         void* mData{nullptr};
