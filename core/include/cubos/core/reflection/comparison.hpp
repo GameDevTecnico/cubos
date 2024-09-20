@@ -14,5 +14,5 @@ namespace cubos::core::reflection
     /// @param b The other instance.
     /// @note If the type has no comparable trait, this function will abort.
     /// @return True if the values are equal, false otherwise.
-    CUBOS_CORE_API bool compare(const Type& type, void* a, void* b);
+    CUBOS_CORE_API bool compare(const Type& type, const void* a, const void* b);
 } // namespace cubos::core::reflection

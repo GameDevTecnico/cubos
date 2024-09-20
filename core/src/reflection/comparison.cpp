@@ -14,7 +14,7 @@ using cubos::core::memory::AnyValue;
     if ((reflected).is<type>())                                                                                        \
     return *(type*)(a) == *(type*)(b)
 
-bool cubos::core::reflection::compare(const Type& type, void* a, void* b)
+bool cubos::core::reflection::compare(const Type& type, const void* a, const void* b)
 {
     PRIMITIVE_CHECK(type, bool, a, b);
     PRIMITIVE_CHECK(type, char, a, b);
