@@ -35,7 +35,7 @@ void MaskTrait::addBit(std::string name, Tester tester, Setter setter, Clearer c
         CUBOS_ASSERT(bit->mName != name, "Mask bit with name {} already exists", name);
     }
 
-    auto* bit = new Bit(std::move(name), tester, setter, clearer);
+    auto* bit = new Bit(std::move(name), std::move(tester), std::move(setter), std::move(clearer));
     if (mFirstBit != nullptr)
     {
         mLastBit->mNext = bit;
@@ -50,7 +50,7 @@ void MaskTrait::addBit(std::string name, Tester tester, Setter setter, Clearer c
 
 MaskTrait&& MaskTrait::withBit(std::string name, Tester tester, Setter setter, Clearer clearer) &&
 {
-    this->addBit(std::move(name), tester, setter, clearer);
+    this->addBit(std::move(name), std::move(tester), std::move(setter), std::move(clearer));
     return std::move(*this);
 }
 
@@ -111,9 +111,9 @@ auto MaskTrait::view(const void* instance) const -> ConstView
 
 MaskTrait::Bit::Bit(std::string name, Tester tester, Setter setter, Clearer clearer)
     : mName{std::move(name)}
-    , mTester{tester}
-    , mSetter{setter}
-    , mClearer{clearer}
+    , mTester{std::move(tester)}
+    , mSetter{std::move(setter)}
+    , mClearer{std::move(clearer)}
 {
 }
 

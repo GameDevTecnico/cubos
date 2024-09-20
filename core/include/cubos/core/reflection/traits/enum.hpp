@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <string>
 
+#include <cubos/core/memory/function.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -27,10 +28,10 @@ namespace cubos::core::reflection
         class Iterator;
 
         /// @brief Function pointer to test if a value matches the variant.
-        using Tester = bool (*)(const void* instance);
+        using Tester = memory::Function<bool(const void*) const>;
 
         /// @brief Function pointer to set the value of the variant.
-        using Setter = void (*)(void* instance);
+        using Setter = memory::Function<void(void*) const>;
 
         ~EnumTrait();
 

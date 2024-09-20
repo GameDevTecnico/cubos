@@ -7,7 +7,7 @@
 #include <cstddef>
 
 #include <cubos/core/api.hpp>
-#include <cubos/core/memory/move.hpp>
+#include <cubos/core/memory/function.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::reflection
@@ -22,16 +22,16 @@ namespace cubos::core::reflection
         CUBOS_REFLECT;
 
         /// @brief Function pointer to the destructor of a type.
-        using Destructor = void (*)(void* instance);
+        using Destructor = memory::Function<void(void* instance) const>;
 
         /// @brief Function pointer to the default constructor of a type.
-        using DefaultConstructor = void (*)(void* instance);
+        using DefaultConstructor = memory::Function<void(void* instance) const>;
 
         /// @brief Function pointer to the copy constructor of a type.
-        using CopyConstructor = void (*)(void* instance, const void* other);
+        using CopyConstructor = memory::Function<void(void* instance, const void* other) const>;
 
         /// @brief Function pointer to the move constructor of a type.
-        using MoveConstructor = void (*)(void* instance, void* other);
+        using MoveConstructor = memory::Function<void(void* instance, void* other) const>;
 
         /// @brief Builder for @ref ConstructibleTrait.
         template <typename T>
@@ -40,8 +40,8 @@ namespace cubos::core::reflection
         /// @brief Constructs.
         /// @param size Size of the type in bytes.
         /// @param alignment Alignment of the type in bytes (must be a power of two).
-        /// @param destructor Function pointer to the destructor of the type.
-        ConstructibleTrait(std::size_t size, std::size_t alignment, void (*destructor)(void*));
+        /// @param destructor Destructor of the type.
+        ConstructibleTrait(std::size_t size, std::size_t alignment, Destructor destructor);
 
         /// @brief Returns a trait builder for the given type.
         /// @tparam T Type to build a trait for.
@@ -118,9 +118,9 @@ namespace cubos::core::reflection
         std::size_t mSize;
         std::size_t mAlignment;
         Destructor mDestructor;
-        DefaultConstructor mDefaultConstructor{nullptr};
-        CopyConstructor mCopyConstructor{nullptr};
-        MoveConstructor mMoveConstructor{nullptr};
+        DefaultConstructor mDefaultConstructor{};
+        CopyConstructor mCopyConstructor{};
+        MoveConstructor mMoveConstructor{};
     };
 
     template <typename T>
@@ -137,7 +137,7 @@ namespace cubos::core::reflection
         /// @return Constructed trait.
         ConstructibleTrait build() &&
         {
-            return mTrait;
+            return memory::move(mTrait);
         }
 
         /// @brief Sets the default constructor of the type.

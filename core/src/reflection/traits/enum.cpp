@@ -35,7 +35,7 @@ void EnumTrait::addVariant(std::string name, Tester tester, Setter setter)
         CUBOS_ASSERT(variant->mName != name, "Enum variant {} already exists", name);
     }
 
-    auto* variant = new Variant(std::move(name), tester, setter);
+    auto* variant = new Variant(std::move(name), std::move(tester), std::move(setter));
     if (mFirstVariant != nullptr)
     {
         mLastVariant->mNext = variant;
@@ -50,7 +50,7 @@ void EnumTrait::addVariant(std::string name, Tester tester, Setter setter)
 
 EnumTrait&& EnumTrait::withVariant(std::string name, Tester tester, Setter setter) &&
 {
-    this->addVariant(std::move(name), tester, setter);
+    this->addVariant(std::move(name), std::move(tester), std::move(setter));
     return std::move(*this);
 }
 
@@ -113,8 +113,8 @@ std::size_t EnumTrait::size() const
 
 EnumTrait::Variant::Variant(std::string name, Tester tester, Setter setter)
     : mName(std::move(name))
-    , mTester(tester)
-    , mSetter(setter)
+    , mTester(std::move(tester))
+    , mSetter(std::move(setter))
 {
 }
 
