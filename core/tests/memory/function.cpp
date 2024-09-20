@@ -82,4 +82,38 @@ TEST_CASE("memory::Function")
         function = nullptr;
         CHECK(flag);
     }
+
+    SUBCASE("move constructor works for mutable functions")
+    {
+        Function<void()> function = nullptr;
+        CHECK(function == nullptr);
+
+        function = []() {};
+        CHECK(function != nullptr);
+
+        Function<void()> movedFunction = move(function);
+        CHECK(function == nullptr);
+        CHECK(movedFunction != nullptr);
+
+        function = move(movedFunction);
+        CHECK(function != nullptr);
+        CHECK(movedFunction == nullptr);
+    }
+
+    SUBCASE("move constructor works for const functions")
+    {
+        Function<void() const> function = nullptr;
+        CHECK(function == nullptr);
+
+        function = []() {};
+        CHECK(function != nullptr);
+
+        Function<void() const> movedFunction = move(function);
+        CHECK(function == nullptr);
+        CHECK(movedFunction != nullptr);
+
+        function = move(movedFunction);
+        CHECK(function != nullptr);
+        CHECK(movedFunction == nullptr);
+    }
 }
