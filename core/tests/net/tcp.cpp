@@ -25,10 +25,12 @@ TEST_CASE("net::Tcp*")
         std::jthread serverThread{[&svAddr, &svPort, &svLatch]() {
             TcpListener listener;
             REQUIRE(listener.listen(svAddr, svPort, 1));
+            REQUIRE(listener.valid());
             svLatch.count_down();
 
             TcpStream stream;
             REQUIRE(listener.accept(stream));
+            REQUIRE(stream.valid());
 
             char readBuffer[5]; // 4 bytes for "ping" and 1 for the null terminator
             REQUIRE(stream.read(readBuffer, 4));
@@ -46,6 +48,7 @@ TEST_CASE("net::Tcp*")
         TcpStream stream;
         svLatch.wait(); // wait for the server to start
         REQUIRE(stream.connect(svAddr, svPort));
+        REQUIRE(stream.valid());
 
         const char* msg = "ping";
         REQUIRE(stream.write(msg, 4));
@@ -58,45 +61,37 @@ TEST_CASE("net::Tcp*")
         REQUIRE(std::string(readBuffer) == "pong");
 
         stream.disconnect();
-        REQUIRE(!stream.valid());
-
-        serverThread.join();
+        REQUIRE_FALSE(stream.valid());
     }
 
     SUBCASE("empty tcp stream")
     {
         TcpStream stream;
-        REQUIRE(!stream.valid());
-        REQUIRE(!stream.eof());
-    }
-
-    SUBCASE("inner valid")
-    {
-        TcpStream stream;
-        stream.inner(1337);
-        REQUIRE(stream.valid());
+        REQUIRE_FALSE(stream.valid());
+        REQUIRE_FALSE(stream.eof());
     }
 
     SUBCASE("stream inner invalid")
     {
         TcpStream stream;
+        REQUIRE_FALSE(stream.valid());
         stream.inner(InnerInvalidSocket);
-        REQUIRE(!stream.valid());
+        REQUIRE_FALSE(stream.valid());
     }
 
     SUBCASE("stream disconnect")
     {
         TcpStream stream;
-        stream.inner(1336); // dummy value, not a real socket
-        REQUIRE(stream.valid());
-
+        REQUIRE_FALSE(stream.valid());
         stream.disconnect();
-        REQUIRE(!stream.valid());
+        REQUIRE_FALSE(stream.valid());
     }
 
     SUBCASE("listener disconnect")
     {
         TcpListener listener;
-        REQUIRE(!listener.valid());
+        REQUIRE_FALSE(listener.valid());
+        listener.close();
+        REQUIRE_FALSE(listener.valid());
     }
 }

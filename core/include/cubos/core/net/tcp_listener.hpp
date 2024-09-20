@@ -66,6 +66,10 @@ namespace cubos::core::net
         bool setBlocking(bool blocking);
 
     private:
+        /// @brief Initializes the inner socket.
+        /// @return Whether initialization was successful.
+        bool create();
+
         InnerSocket mSock{InnerInvalidSocket};
         bool mBlocking{true};
     };
