@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compute contact points and contact manifold for collision between boxes (#1243, **@fallenatlas**).
 - Handle body rotation on physics integration (#1242, **&fallenatlas**).
 - Binary Serializer and Deserializer (#1306, **@RiscadoA**).
+- Type Client and Type Server (#1302, **@RiscadoA**).
 
 ### Fixed
 
