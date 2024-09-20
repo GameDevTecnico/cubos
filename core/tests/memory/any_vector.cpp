@@ -14,7 +14,47 @@ TEST_CASE("memory::AnyVector")
     SUBCASE("with integers")
     {
         AnyVector vec{reflect<int>()};
+
         CHECK(vec.elementType().is<int>());
+
+        SUBCASE("insertDefault/insertCopy/insertMove/erase")
+        {
+            int i = 2;
+            vec.insertCopy(0, &i);
+            i = 1;
+            vec.insertMove(0, &i);
+            vec.insertDefault(0);
+
+            REQUIRE(vec.size() == 3);
+            CHECK(*static_cast<const int*>(vec.at(0)) == 0);
+            CHECK(*static_cast<const int*>(vec.at(1)) == 1);
+            CHECK(*static_cast<const int*>(vec.at(2)) == 2);
+
+            vec.insertDefault(2);
+            REQUIRE(vec.size() == 4);
+            CHECK(*static_cast<const int*>(vec.at(0)) == 0);
+            CHECK(*static_cast<const int*>(vec.at(1)) == 1);
+            CHECK(*static_cast<const int*>(vec.at(2)) == 0);
+            CHECK(*static_cast<const int*>(vec.at(3)) == 2);
+
+            vec.erase(2);
+            REQUIRE(vec.size() == 3);
+            CHECK(*static_cast<const int*>(vec.at(0)) == 0);
+            CHECK(*static_cast<const int*>(vec.at(1)) == 1);
+            CHECK(*static_cast<const int*>(vec.at(2)) == 2);
+
+            vec.erase(2);
+            REQUIRE(vec.size() == 2);
+            CHECK(*static_cast<const int*>(vec.at(0)) == 0);
+            CHECK(*static_cast<const int*>(vec.at(1)) == 1);
+
+            vec.erase(0);
+            REQUIRE(vec.size() == 1);
+            CHECK(*static_cast<const int*>(vec.at(0)) == 1);
+
+            vec.erase(0);
+            REQUIRE(vec.size() == 0);
+        }
 
         SUBCASE("pushDefault")
         {
@@ -41,6 +81,28 @@ TEST_CASE("memory::AnyVector")
             CHECK(vec.size() == 1);
             CHECK(vec.at(0) != nullptr);
             CHECK(*static_cast<const int*>(vec.at(0)) == 42);
+        }
+
+        SUBCASE("copy constructor")
+        {
+            constexpr std::size_t Size = 100;
+
+            for (std::size_t i = 0; i < Size; ++i)
+            {
+                vec.pushDefault();
+                *static_cast<int*>(vec.at(i)) = static_cast<int>(i);
+            }
+
+            AnyVector vec2{vec};
+            CHECK_FALSE(vec2.empty());
+            CHECK(vec.size() == Size);
+            CHECK(vec2.size() == Size);
+
+            for (std::size_t i = 0; i < Size; ++i)
+            {
+                CHECK(*static_cast<const int*>(vec.at(i)) == static_cast<int>(i));
+                CHECK(*static_cast<const int*>(vec2.at(i)) == static_cast<int>(i));
+            }
         }
 
         SUBCASE("move constructor")

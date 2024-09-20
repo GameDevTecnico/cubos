@@ -27,6 +27,16 @@ AnyVector::AnyVector(const Type& elementType)
     mStride = mConstructibleTrait->size();
 }
 
+AnyVector::AnyVector(const AnyVector& other)
+    : AnyVector(other.mElementType)
+{
+    this->reserve(other.mSize);
+    for (std::size_t i = 0; i < other.mSize; ++i)
+    {
+        this->pushCopy(static_cast<char*>(other.mData) + i * mStride);
+    }
+}
+
 AnyVector::AnyVector(AnyVector&& other) noexcept
     : mElementType(other.mElementType)
     , mConstructibleTrait(other.mConstructibleTrait)
@@ -55,7 +65,7 @@ void AnyVector::reserve(std::size_t capacity)
     }
 
     // Allocate a new buffer, move the values there and then free the old one.
-    void* data = operator new(capacity* mStride, static_cast<std::align_val_t>(mConstructibleTrait->alignment()),
+    void* data = operator new(capacity * mStride, static_cast<std::align_val_t>(mConstructibleTrait->alignment()),
                               std::nothrow);
     CUBOS_ASSERT(data != nullptr, "Vector memory allocation failed");
     for (std::size_t i = 0; i < mSize; ++i)
@@ -67,6 +77,51 @@ void AnyVector::reserve(std::size_t capacity)
 
     mData = data;
     mCapacity = capacity;
+}
+
+void AnyVector::insertUninit(std::size_t index)
+{
+    CUBOS_ASSERT(index <= mSize, "Index must be less than or equal to size");
+
+    if (index == mSize)
+    {
+        this->pushUninit();
+    }
+    else
+    {
+        if (mSize == mCapacity)
+        {
+            this->reserve(mCapacity == 0 ? 1 : mCapacity * 2);
+        }
+
+        this->moveSlice(index, index + 1, mSize - index);
+
+        mSize += 1;
+    }
+}
+
+void AnyVector::insertDefault(std::size_t index)
+{
+    CUBOS_ASSERT(mConstructibleTrait->hasDefaultConstruct(), "Type must be default-constructible");
+
+    this->insertUninit(index);
+    mConstructibleTrait->defaultConstruct(static_cast<char*>(mData) + mStride * index);
+}
+
+void AnyVector::insertCopy(std::size_t index, const void* value)
+{
+    CUBOS_ASSERT(mConstructibleTrait->hasCopyConstruct(), "Type must be copy-constructible");
+
+    this->insertUninit(index);
+    mConstructibleTrait->copyConstruct(static_cast<char*>(mData) + mStride * index, value);
+}
+
+void AnyVector::insertMove(std::size_t index, void* value)
+{
+    CUBOS_ASSERT(mConstructibleTrait->hasMoveConstruct(), "Type must be move-constructible");
+
+    this->insertUninit(index);
+    mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + mStride * index, value);
 }
 
 void AnyVector::pushUninit()
@@ -136,6 +191,15 @@ void AnyVector::pop()
 
     --mSize;
     mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * mSize);
+}
+
+void AnyVector::erase(std::size_t index)
+{
+    CUBOS_ASSERT(index < mSize, "Index must be less than size");
+
+    mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * index);
+    this->moveSlice(index + 1, index, mSize - index - 1);
+    mSize -= 1;
 }
 
 void AnyVector::swapErase(std::size_t index)
@@ -209,4 +273,35 @@ std::size_t AnyVector::capacity() const
 bool AnyVector::empty() const
 {
     return mSize == 0;
+}
+
+void AnyVector::moveSlice(std::size_t from, std::size_t to, std::size_t count)
+{
+    if (count == 0)
+    {
+        return;
+    }
+
+    CUBOS_ASSERT(from + count <= mSize, "Slice must be within bounds");
+    CUBOS_ASSERT(to + count <= mCapacity, "Slice must be within bounds");
+    CUBOS_ASSERT(from != to, "From and to must be different");
+
+    if (from < to)
+    {
+        for (std::size_t i = count; i > 0; --i)
+        {
+            mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + (to + i - 1) * mStride,
+                                               static_cast<char*>(mData) + (from + i - 1) * mStride);
+            mConstructibleTrait->destruct(static_cast<char*>(mData) + (from + i - 1) * mStride);
+        }
+    }
+    else
+    {
+        for (std::size_t i = 0; i < count; ++i)
+        {
+            mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + (to + i) * mStride,
+                                               static_cast<char*>(mData) + (from + i) * mStride);
+            mConstructibleTrait->destruct(static_cast<char*>(mData) + (from + i) * mStride);
+        }
+    }
 }
