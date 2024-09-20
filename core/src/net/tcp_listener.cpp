@@ -29,7 +29,6 @@ TcpListener::TcpListener()
     WSADATA wsa;
     CUBOS_ASSERT(WSAStartup(MAKEWORD(2, 2), &wsa) == 0, " WSAStartup failed: {}", WSAGetLastError());
 #endif
-    setBlocking(mBlocking);
 }
 
 TcpListener::~TcpListener()
@@ -39,14 +38,7 @@ TcpListener::~TcpListener()
 
 bool TcpListener::listen(const Address& address, uint16_t port, int maxQueueLength)
 {
-    close();
-
-    mSock = socket(AF_INET, SOCK_STREAM, 0);
-    if (mSock == InnerInvalidSocket)
-    {
-        CUBOS_ERROR("Failed to allocate TCP socket: {}", logSystemError());
-        return false;
-    }
+    this->create();
 
     sockaddr_in addr;
     addr.sin_family = AF_INET;
@@ -131,4 +123,21 @@ bool TcpListener::setBlocking(bool blocking)
     }
 
     return success;
+}
+
+bool TcpListener::create()
+{
+    this->close();
+
+    mSock = socket(AF_INET, SOCK_STREAM, 0);
+    if (mSock == InnerInvalidSocket)
+    {
+        CUBOS_ERROR("Failed to create TCP socket, got error {}", logSystemError());
+        return false;
+    }
+    else
+    {
+        this->setBlocking(mBlocking);
+        return true;
+    }
 }

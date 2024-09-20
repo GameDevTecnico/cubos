@@ -19,12 +19,31 @@
 using cubos::core::net::Address;
 using cubos::core::net::TcpStream;
 
+TcpStream::TcpStream()
+{
+#ifdef _WIN32
+    WSADATA wsa;
+    CUBOS_ASSERT(WSAStartup(MAKEWORD(2, 2), &wsa) == 0, " WSAStartup failed: {}", WSAGetLastError());
+#endif
+}
+
+TcpStream::~TcpStream()
+{
+    disconnect();
+}
+
+TcpStream::TcpStream(TcpStream&& other) noexcept
+    : mSock(other.mSock)
+    , mBlocking(other.mBlocking)
+    , mEof(other.mEof)
+{
+    other.mSock = InnerInvalidSocket;
+}
+
 bool TcpStream::connect(const Address& address, uint16_t port)
 {
-    mSock = socket(AF_INET, SOCK_STREAM, 0);
-    if (mSock == InnerInvalidSocket)
+    if (!this->create())
     {
-        CUBOS_ERROR("Failed to allocate TCP socket: {}", logSystemError());
         return false;
     }
 
@@ -45,7 +64,7 @@ bool TcpStream::connect(const Address& address, uint16_t port)
 
 void TcpStream::inner(InnerSocket socket)
 {
-    disconnect();
+    this->disconnect();
     mSock = socket;
 }
 
@@ -61,20 +80,6 @@ void TcpStream::disconnect()
 #endif
         mSock = InnerInvalidSocket;
     }
-}
-
-TcpStream::TcpStream()
-{
-#ifdef _WIN32
-    WSADATA wsa;
-    CUBOS_ASSERT(WSAStartup(MAKEWORD(2, 2), &wsa) == 0, " WSAStartup failed: {}", WSAGetLastError());
-#endif
-    setBlocking(mBlocking);
-}
-
-TcpStream::~TcpStream()
-{
-    disconnect();
 }
 
 std::size_t TcpStream::read(void* buffer, std::size_t size)
@@ -198,4 +203,21 @@ bool TcpStream::setBlocking(bool blocking)
     }
 
     return success;
+}
+
+bool TcpStream::create()
+{
+    this->disconnect();
+
+    mSock = socket(AF_INET, SOCK_STREAM, 0);
+    if (mSock == InnerInvalidSocket)
+    {
+        CUBOS_ERROR("Failed to create TCP socket, got error {}", logSystemError());
+        return false;
+    }
+    else
+    {
+        this->setBlocking(mBlocking);
+        return true;
+    }
 }

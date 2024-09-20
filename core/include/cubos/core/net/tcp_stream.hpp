@@ -22,6 +22,9 @@ namespace cubos::core::net
         /// @brief Deconstructs.
         ~TcpStream() override;
 
+        /// @brief Move constructor.
+        TcpStream(TcpStream&& other) noexcept;
+
         /// @brief Forbid copy construction.
         TcpStream(const TcpStream&) = delete;
 
@@ -42,8 +45,8 @@ namespace cubos::core::net
         /// @brief Disconnects inner socket.
         void disconnect();
 
-        /// @brief Checks if inner socket is connected.
-        /// @return Whether the buffer holds a valid connection.
+        /// @brief Checks if inner socket is currently valid successfully.
+        /// @return Whether inner socket is valid.
         bool valid() const
         {
             return mSock != InnerInvalidSocket;
@@ -74,6 +77,10 @@ namespace cubos::core::net
         void seek(ptrdiff_t offset, memory::SeekOrigin origin) override;
 
     private:
+        /// @brief Initializes the inner socket.
+        /// @return Whether initialization was successful.
+        bool create();
+
         InnerSocket mSock{InnerInvalidSocket};
         bool mBlocking{true};
         bool mEof{false};
