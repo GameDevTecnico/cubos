@@ -8,7 +8,7 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/net/udp_socket.hpp>
 
-TEST_CASE("udp socket")
+TEST_CASE("net::UdpSocket")
 {
     using cubos::core::net::Address;
     using cubos::core::net::UdpSocket;
