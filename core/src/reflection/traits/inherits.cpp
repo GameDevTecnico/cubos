@@ -8,7 +8,7 @@ CUBOS_REFLECT_IMPL(InheritsTrait)
     return Type::create("cubos::core::ecs::InheritsTrait");
 }
 
-const Type& InheritsTrait::base()
+const Type& InheritsTrait::base() const
 {
     return *mType;
 }
