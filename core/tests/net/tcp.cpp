@@ -1,4 +1,5 @@
 #include <cstring>
+#include <latch>
 #include <thread>
 
 #include <doctest/doctest.h>
@@ -19,10 +20,12 @@ TEST_CASE("net::Tcp*")
     {
         auto svAddr = Address::fromIPv4(127, 0, 0, 1);
         uint16_t svPort = 8080;
+        std::latch svLatch{1};
 
-        std::thread serverThread{[&svAddr, &svPort]() {
+        std::jthread serverThread{[&svAddr, &svPort, &svLatch]() {
             TcpListener listener;
             REQUIRE(listener.listen(svAddr, svPort, 1));
+            svLatch.count_down();
 
             TcpStream stream;
             REQUIRE(listener.accept(stream));
@@ -40,9 +43,8 @@ TEST_CASE("net::Tcp*")
             REQUIRE(!listener.valid());
         }};
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // wait so server is up
-
         TcpStream stream;
+        svLatch.wait(); // wait for the server to start
         REQUIRE(stream.connect(svAddr, svPort));
 
         const char* msg = "ping";
