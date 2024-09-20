@@ -7,6 +7,7 @@
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -15,6 +16,7 @@ using cubos::core::reflection::ArrayTrait;
 using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::MaskTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
 
@@ -110,6 +112,31 @@ bool BinarySerializer::decompose(const Type& type, const void* value)
         {
             CUBOS_WARN("Could not serialize enum variant");
             return false;
+        }
+    }
+    else if (type.has<MaskTrait>())
+    {
+        const auto& trait = type.get<MaskTrait>();
+        std::size_t i = 0;
+        for (const auto& bit : trait.view(value))
+        {
+            (void)bit;
+            ++i;
+        }
+
+        if (!this->write(i))
+        {
+            CUBOS_WARN("Could not serialize mask bit count");
+            return false;
+        }
+
+        for (const auto& bit : trait.view(value))
+        {
+            if (!this->write(bit.name()))
+            {
+                CUBOS_WARN("Could not serialize mask bit");
+                return false;
+            }
         }
     }
     else if (type.has<FieldsTrait>())
