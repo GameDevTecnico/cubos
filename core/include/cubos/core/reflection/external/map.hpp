@@ -20,10 +20,20 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::map<K, V>))
         [](uintptr_t instance, bool writeable) -> void* {
             if (writeable)
             {
-                return new typename Map::iterator(reinterpret_cast<Map*>(instance)->begin());
+                auto it = reinterpret_cast<Map*>(instance)->begin();
+                if (it == reinterpret_cast<Map*>(instance)->end())
+                {
+                    return nullptr;
+                }
+                return new typename Map::iterator(it);
             }
 
-            return new typename Map::const_iterator(reinterpret_cast<const Map*>(instance)->cbegin());
+            auto it = reinterpret_cast<const Map*>(instance)->cbegin();
+            if (it == reinterpret_cast<const Map*>(instance)->cend())
+            {
+                return nullptr;
+            }
+            return new typename Map::const_iterator(it);
         } /*begin*/,
         [](uintptr_t instance, const void* key, bool writeable) -> void* {
             if (writeable)
@@ -37,7 +47,7 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::map<K, V>))
             }
 
             auto it = reinterpret_cast<const Map*>(instance)->find(*reinterpret_cast<const K*>(key));
-            if (it == reinterpret_cast<const Map*>(instance)->end())
+            if (it == reinterpret_cast<const Map*>(instance)->cend())
             {
                 return nullptr;
             }
