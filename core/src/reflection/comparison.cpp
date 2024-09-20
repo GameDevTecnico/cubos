@@ -4,7 +4,9 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>
+#include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -74,6 +76,25 @@ bool cubos::core::reflection::compare(const Type& type, const void* a, const voi
                 return false;
             }
             if (!compare(trait.valueType(), value, trait.view(b).find(key)->value))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    if (type.has<EnumTrait>())
+    {
+        const auto& trait = type.get<EnumTrait>();
+        return trait.variant(a).test(b);
+    }
+
+    if (type.has<MaskTrait>())
+    {
+        const auto& trait = type.get<MaskTrait>();
+        for (const auto& bit : trait)
+        {
+            if (bit.test(a) != bit.test(b))
             {
                 return false;
             }
