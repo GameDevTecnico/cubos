@@ -9,8 +9,8 @@ CUBOS_REFLECT_IMPL(NullableTrait)
 }
 
 NullableTrait::NullableTrait(IsNull isNull, SetToNull setToNull)
-    : mIsNull(isNull)
-    , mSetToNull(setToNull)
+    : mIsNull(std::move(isNull))
+    , mSetToNull(std::move(setToNull))
 {
 }
 

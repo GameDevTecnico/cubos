@@ -6,6 +6,7 @@
 
 #include <string>
 
+#include <cubos/core/memory/function.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::reflection
@@ -34,13 +35,13 @@ namespace cubos::core::reflection
         class ConstView;
 
         /// @brief Function pointer to test if a bit is set on the mask.
-        using Tester = bool (*)(const void* instance);
+        using Tester = memory::Function<bool(const void*) const>;
 
         /// @brief Function pointer to set the bit on the mask.
-        using Setter = void (*)(void* instance);
+        using Setter = memory::Function<void(void*) const>;
 
         /// @brief Function pointer to clear the bit on the mask.
-        using Clearer = void (*)(void* instance);
+        using Clearer = memory::Function<void(void*) const>;
 
         ~MaskTrait();
 

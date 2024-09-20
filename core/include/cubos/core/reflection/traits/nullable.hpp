@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <cubos/core/memory/function.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::reflection
@@ -17,10 +18,10 @@ namespace cubos::core::reflection
         CUBOS_REFLECT;
 
         /// @brief Function pointer to check if a value represents null.
-        using IsNull = bool (*)(const void* instance);
+        using IsNull = memory::Function<bool(const void*) const>;
 
         /// @brief Function pointer to set a value to its null representation.
-        using SetToNull = void (*)(void* instance);
+        using SetToNull = memory::Function<void(void*) const>;
 
         /// @brief Constructs.
         /// @param isNull IsNull.
