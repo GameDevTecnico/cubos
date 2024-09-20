@@ -42,7 +42,7 @@ namespace cubos::core::reflection
 
         /// @brief Gets the base type of the inherited type.
         /// @return Type.
-        const Type& base();
+        const Type& base() const;
 
     private:
         const Type* mType;
