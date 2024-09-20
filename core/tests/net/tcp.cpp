@@ -7,7 +7,7 @@
 #include <cubos/core/net/tcp_listener.hpp>
 #include <cubos/core/net/tcp_stream.hpp>
 
-TEST_CASE("tcp")
+TEST_CASE("net::Tcp*")
 {
     using cubos::core::net::Address;
     using cubos::core::net::InnerInvalidSocket;

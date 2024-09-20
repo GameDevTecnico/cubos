@@ -4,7 +4,7 @@
 #include <cubos/core/reflection/reflect.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 
-TEST_CASE("address")
+TEST_CASE("net::Address")
 {
     using cubos::core::net::Address;
     using cubos::core::reflection::reflect;
