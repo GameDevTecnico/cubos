@@ -59,7 +59,9 @@ CUBOS_REFLECT_EXTERNAL_IMPL(MouseButton)
                   .withVariant<MouseButton::Right>("Right")
                   .withVariant<MouseButton::Middle>("Middle")
                   .withVariant<MouseButton::Extra1>("Extra1")
-                  .withVariant<MouseButton::Extra2>("Extra2"));
+                  .withVariant<MouseButton::Extra2>("Extra2")
+
+                  .withVariant<MouseButton::Count>("Count"));
 }
 
 CUBOS_REFLECT_EXTERNAL_IMPL(MouseAxis)

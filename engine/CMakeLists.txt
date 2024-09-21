@@ -83,9 +83,12 @@ set(CUBOS_ENGINE_SOURCE
 	"src/physics/fixed_substep/substeps.cpp"
 	"src/physics/solver/integration/plugin.cpp"
 
+	"src/input/sources/axis.cpp"
+	"src/input/sources/press.cpp"
 	"src/input/plugin.cpp"
 	"src/input/input.cpp"
 	"src/input/combination.cpp"
+	"src/input/event_tracker.cpp"
 	"src/input/bindings.cpp"
 	"src/input/action.cpp"
 	"src/input/axis.cpp"

@@ -7,6 +7,7 @@
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/input/bindings.hpp>
+#include <cubos/engine/input/event_tracker.hpp>
 
 namespace cubos::engine
 {
@@ -32,8 +33,20 @@ namespace cubos::engine
         /// @brief Alias for @ref core::io::MouseButton.
         using MouseButton = core::io::MouseButton;
 
+        /// @brief Alias for @ref core::io::MouseButton.
+        using MouseAxis = core::io::MouseAxis;
+
         Input() = default;
         ~Input() = default;
+
+        /// @brief Handles a Window event.
+        /// @param window Window that received the event.
+        /// @param event Event to handle.
+        void handle(const core::io::Window& window, const core::io::WindowEvent& event);
+
+        /// @brief Updates the input state.
+        /// @param window Window to get the input state from.
+        void update(const core::io::Window& window);
 
         /// @brief Clears all bindings.
         void clear();
@@ -47,129 +60,37 @@ namespace cubos::engine
         /// @param player Player whose bindings will be set.
         void bind(const InputBindings& bindings, int player = 0);
 
-        /// @brief Sets the gamepad for a specific player.
-        /// @param player Player whose gamepad will be set.
-        /// @param gamepad Gamepad to set.
-        void gamepad(int player, int gamepad);
+        /// @brief Binds an action to a specific player.
+        /// @param actionName Name of the action.
+        /// @param action Action to bind.
+        /// @param player Player to whom the action will be bound.
+        void bind(const char* actionName, const InputAction& action, int player = 0);
 
-        /// @brief Gets the gamepad for a specific player.
-        /// @param player Player whose gamepad will be retrieved.
-        /// @return Gamepad if it exists, -1 otherwise.
-        int gamepad(int player) const;
-
-        /// @brief Gets the number of currently connected gamepads.
-        /// @return Number of connected gamepads.
-        int gamepadCount() const;
+        /// @brief Binds an axis to a specific player.
+        /// @param axisName Name of the axis.
+        /// @param axis Axis to bind.
+        /// @param player Player to whom the axis will be bound.
+        void bind(const char* axisName, const InputAxis& axis, int player = 0);
 
         /// @brief Gets an action state for a specific player.
         /// @param actionName Name of the action.
         /// @param player Player whose action state will be retrieved.
-        /// @return Whether the action exists and is pressed.
-        bool pressed(const char* actionName, int player = 0) const;
+        /// @return Action state.
+        const InputAction& action(const char* actionName, int player = 0) const;
 
-        /// @brief Gets an action state for a specific player.
-        /// @param actionName Name of the action.
-        /// @param player Player whose action state will be retrieved.
-        /// @return Whether the action exists and was just pressed.
-        bool justPressed(const char* actionName, int player = 0) const;
-
-        /// @brief Gets an action state for a specific player.
-        /// @param actionName Name of the action.
-        /// @param player Player whose action state will be retrieved.
-        /// @return Whether the action exists and was just released.
-        bool justReleased(const char* actionName, int player = 0) const;
-
-        /// @brief Gets an axis value for a specific player.
+        /// @brief Gets an axis state for a specific player.
         /// @param axisName Name of the axis.
         /// @param player Player whose axis value will be retrieved.
-        /// @return Axis value if the axis exists, 0.0 otherwise.
-        float axis(const char* axisName, int player = 0) const;
-
-        /// @brief Handle a key event.
-        /// @param window Window that received the event.
-        /// @param event Key event.
-        void handle(const core::io::Window& window, const core::io::KeyEvent& event);
-
-        /// @brief Handle a gamepad connection event.
-        /// @param window Window that received the event.
-        /// @param event Gamepad connection event.
-        void handle(const core::io::Window& window, const core::io::GamepadConnectionEvent& event);
-
-        /// @brief Handle a mouse button event.
-        /// @param window Window that received the event.
-        /// @param event Mouse button event.
-        void handle(const core::io::Window& window, const core::io::MouseButtonEvent& event);
-
-        /// @brief Handle a mouse movement event.
-        /// @param window Window that received the event.
-        /// @param event Mouse movement event.
-        void handle(const core::io::Window& window, const core::io::MouseMoveEvent& event);
-
-        /// @brief Resets the previous mouse position to equal the current.
-        void updateMouse();
-
-        /// @brief Reset the previous Action justPressed and justReleased states.
-        void updateActions();
-
-        /// @brief Gets the mouse position in screen space.
-        /// @return Mouse position.
-        glm::ivec2 mousePosition() const;
-
-        /// @brief Gets the mouse position in the previous frame in screen space.
-        /// @return Mouse position in the previous frame.
-        glm::ivec2 previousMousePosition() const;
-
-        /// @brief Gets displacement of the mouse during the last frame, in screen space.
-        /// @return Mouse displacement.
-        glm::ivec2 mouseDelta() const;
-
-        /// @brief Handle all other events - discards them.
-        ///
-        /// This is method exists so that `std::visit` can be used with @ref core::io::WindowEvent
-        /// on @ref handle().
-        ///
-        /// @param window Window that received the event.
-        /// @param event Event to discard.
-        static void handle(const core::io::Window& window, const core::io::WindowEvent& event)
-        {
-            (void)window;
-            (void)event;
-        }
-
-        /// @brief Polls the input state of the gamepads.
-        /// @param window Window to poll the gamepad state from.
-        void pollGamepads(const core::io::Window& window);
+        /// @return Axis state.
+        const InputAxis& axis(const char* axisName, int player = 0) const;
 
         /// @brief Gets the bindings for each player.
         /// @return Bindings for each player.
         const std::unordered_map<int, InputBindings>& bindings() const;
 
     private:
-        struct BindingIndex
-        {
-            std::string name;      ///< Name of the action or axis.
-            int player;            ///< Player index.
-            bool negative = false; ///< Whether the pressed key is a negative axis key.
-        };
-
-        bool anyPressed(int player, const core::io::Window& window,
-                        const std::vector<InputCombination>& combinations) const;
-        void handleActions(const core::io::Window& window, const std::vector<BindingIndex>& boundActions);
-        void handleAxes(const core::io::Window& window, const std::vector<BindingIndex>& boundAxes);
-
-        std::unordered_map<int, InputBindings> mPlayerBindings;
-        std::unordered_map<int, int> mPlayerGamepads;
-        std::unordered_map<int, core::io::GamepadState> mGamepadStates;
-
-        std::unordered_map<Key, std::vector<BindingIndex>> mBoundKeyActions;
-        std::unordered_map<GamepadButton, std::vector<BindingIndex>> mBoundGamepadButtonActions;
-        std::unordered_map<MouseButton, std::vector<BindingIndex>> mBoundMouseButtonActions;
-        std::unordered_map<Key, std::vector<BindingIndex>> mBoundKeyAxes;
-        std::unordered_map<GamepadButton, std::vector<BindingIndex>> mBoundGamepadButtonAxes;
-        std::unordered_map<MouseButton, std::vector<BindingIndex>> mBoundMouseButtonAxes;
-        std::unordered_map<GamepadAxis, std::vector<BindingIndex>> mBoundGamepadAxes;
-
-        glm::ivec2 mMousePosition = {0, 0};
-        glm::ivec2 mPreviousMousePosition = {0, 0};
+        std::unordered_map<int, InputBindings> mBindings;
+        // std::unordered_map<int, InputEventTracker> mEventTrackers;
+        // std::unordered_map<int, bool> mNeedsUpdate;
     };
 } // namespace cubos::engine

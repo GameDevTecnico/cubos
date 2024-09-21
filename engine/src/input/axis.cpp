@@ -18,39 +18,9 @@ CUBOS_REFLECT_IMPL(cubos::engine::InputAxis)
     using namespace cubos::core::reflection;
     return Type::create("cubos::engine::InputAxis")
         .with(FieldsTrait{}
-                  .withField("positive", &InputAxis::mPositive)
-                  .withField("negative", &InputAxis::mNegative)
-                  .withField("gamepadAxes", &InputAxis::mGamepadAxes));
-}
-
-const std::vector<InputCombination>& InputAxis::positive() const
-{
-    return mPositive;
-}
-
-const std::vector<InputCombination>& InputAxis::negative() const
-{
-    return mNegative;
-}
-
-const std::vector<GamepadAxis>& InputAxis::gamepadAxes() const
-{
-    return mGamepadAxes;
-}
-
-std::vector<InputCombination>& InputAxis::positive()
-{
-    return mPositive;
-}
-
-std::vector<InputCombination>& InputAxis::negative()
-{
-    return mNegative;
-}
-
-std::vector<GamepadAxis>& InputAxis::gamepadAxes()
-{
-    return mGamepadAxes;
+                  .withField("axes", &InputAxis::axes)
+                  .withField("positive", &InputAxis::positive)
+                  .withField("negative", &InputAxis::negative));
 }
 
 float InputAxis::value() const
@@ -58,13 +28,34 @@ float InputAxis::value() const
     return mValue;
 }
 
-void InputAxis::value(float value)
+void InputAxis::update(const core::io::Window& window)
 {
-    mValue = value;
-
-    if (std::abs(mValue) > 1.0F)
+    float value = 0.0f;
+    for (const auto& axis : axes)
     {
-        CUBOS_WARN("Axis value out of range: {}", mValue);
-        mValue = mValue > 1.0F ? 1.0F : -1.0F;
+        value += axis.value(window);
     }
+
+    positive.update(window);
+    if (positive.pressed())
+    {
+        value += 1.0f;
+    }
+
+    negative.update(window);
+    if (negative.pressed())
+    {
+        value -= 1.0f;
+    }
+
+    if (value > 1.0f)
+    {
+        value = 1.0f;
+    }
+    else if (value < -1.0f)
+    {
+        value = -1.0f;
+    }
+
+    mValue = value;
 }

@@ -42,7 +42,7 @@ static void showcaseXZ(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.pressed("x-or-z"))
+    if (input.action("x-or-z").pressed())
     {
         CUBOS_INFO("X or Z");
     }
@@ -58,11 +58,11 @@ static void showcaseJustXZ(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.justPressed("x-or-z"))
+    if (input.action("x-or-z").justReleased())
     {
         CUBOS_INFO("justPressed X or Z");
     }
-    if (input.justReleased("x-or-z"))
+    if (input.action("x-or-z").justReleased())
     {
         CUBOS_INFO("justReleased X or Z");
     }
@@ -79,7 +79,7 @@ static void showcaseModifiers(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.pressed("shift-space"))
+    if (input.action("shift-space").pressed())
     {
         CUBOS_INFO("Shift");
     }
@@ -96,7 +96,7 @@ static void showcaseMultipleModifiers(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.pressed("ctrl-shift-space"))
+    if (input.action("ctrl-shift-space").pressed())
     {
         CUBOS_INFO("Ctrl Shift");
     }
@@ -114,7 +114,7 @@ static void showcaseAxis(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.axis("horizontal") != 0.0F || input.axis("vertical") != 0.0F)
+    if (input.axis("horizontal").value() != 0.0F || input.axis("vertical").value() != 0.0F)
     {
         CUBOS_INFO("horizontal: {}, vertical: {}", input.axis("horizontal"), input.axis("vertical"));
     }
@@ -132,7 +132,7 @@ static void showcaseModifierAxis(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.axis("shift-horizontal") != 0.0F || input.axis("shift-vertical") != 0.0F)
+    if (input.axis("shift-horizontal").value() != 0.0F || input.axis("shift-vertical").value() != 0.0F)
     {
         CUBOS_INFO("shift-horizontal: {}, shift-vertical: {}", input.axis("shift-horizontal"),
                    input.axis("shift-vertical"));
@@ -168,19 +168,19 @@ static void showcaseMouseButtons(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.pressed("left-mb"))
+    if (input.action("left-mb").pressed())
     {
         CUBOS_INFO("Left");
     }
-    if (input.pressed("right-mb"))
+    if (input.action("right-mb").pressed())
     {
         CUBOS_INFO("Right");
     }
-    if (input.pressed("middle-mb"))
+    if (input.action("middle-mb").pressed())
     {
         CUBOS_INFO("Middle");
     }
-    if (input.pressed("extra-mb"))
+    if (input.action("extra-mb").pressed())
     {
         CUBOS_INFO("Extra1 or Extra2");
     }
@@ -218,7 +218,7 @@ int main()
     cubos.system("detect input")
         .after(inputUpdateTag)
         .call([](const Input& input, const Window& window, State& state, ShouldQuit& shouldQuit) {
-            if (input.justPressed("next-showcase"))
+            if (input.action("next-showcase").justPressed())
             {
                 state.explained = false;
                 state.showcase++;

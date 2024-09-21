@@ -10,32 +10,7 @@ CUBOS_REFLECT_IMPL(cubos::engine::InputAction)
 {
     using namespace cubos::core::reflection;
     return Type::create("cubos::engine::InputAction")
-        .with(FieldsTrait{}.withField("combinations", &InputAction::mCombinations));
-}
-
-const std::vector<InputCombination>& InputAction::combinations() const
-{
-    return mCombinations;
-}
-
-std::vector<InputCombination>& InputAction::combinations()
-{
-    return mCombinations;
-}
-
-void InputAction::pressed(bool pressed)
-{
-    mPressed = pressed;
-}
-
-void InputAction::justPressed(bool justPressed)
-{
-    mJustPressed = justPressed;
-}
-
-void InputAction::justReleased(bool justReleased)
-{
-    mJustReleased = justReleased;
+        .with(FieldsTrait{}.withField("combinations", &InputAction::combinations));
 }
 
 bool InputAction::pressed() const
@@ -51,4 +26,21 @@ bool InputAction::justPressed() const
 bool InputAction::justReleased() const
 {
     return mJustReleased;
+}
+
+void InputAction::update(const core::io::Window& window)
+{
+    bool pressed = false;
+    for (const auto& combination : combinations)
+    {
+        if (combination.pressed(window))
+        {
+            pressed = true;
+            break;
+        }
+    }
+
+    mJustPressed = pressed && !mPressed;
+    mJustReleased = !pressed && mPressed;
+    mPressed = pressed;
 }

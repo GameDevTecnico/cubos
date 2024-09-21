@@ -37,15 +37,21 @@ namespace cubos::core::io
         Middle,
         Extra1,
         Extra2,
+
+        Count
     };
 
     /// @brief Mouse axes enums.
     /// @ingroup core-io
     enum class MouseAxis
     {
+        Invalid = -1, ///< Used for unknown mouse axes.
+
         X,
         Y,
         Scroll,
+
+        Count
     };
 
     /// @brief Possible mouse states.

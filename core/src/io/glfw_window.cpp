@@ -19,7 +19,7 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 static void charCallback(GLFWwindow* window, unsigned int codepoint);
-static void joystickCallback(int id, int event);
+static void gamepadCallback(int id, int event);
 static void updateMods(GLFWWindow* handler, int glfwMods);
 static MouseButton glfwToCubosMouseButton(int button);
 static int cubosToGlfwMouseButton(MouseButton button);
@@ -92,7 +92,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
     glfwSetScrollCallback(mHandle, scrollCallback);
     glfwSetFramebufferSizeCallback(mHandle, framebufferSizeCallback);
     glfwSetCharCallback(mHandle, charCallback);
-    glfwSetJoystickCallback(joystickCallback);
+    glfwSetJoystickCallback(gamepadCallback);
     currentWindow = this;
 
     for (int i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_LAST; ++i)
@@ -102,6 +102,9 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
             this->pushEvent(GamepadConnectionEvent{.gamepad = i, .connected = true});
         }
     }
+
+    if (glfwRawMouseMotionSupported())
+        glfwSetInputMode(mHandle, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 #else
     UNSUPPORTED();
 #endif
@@ -459,13 +462,13 @@ static void charCallback(GLFWwindow* window, unsigned int codepoint)
     handler->pushEvent(TextEvent{.codepoint = static_cast<char32_t>(codepoint)});
 }
 
-static void joystickCallback(int id, int event)
+static void gamepadCallback(int id, int event)
 {
     CUBOS_ASSERT(currentWindow != nullptr);
-    currentWindow->pushEvent(GamepadConnectionEvent{
-        .gamepad = id,
-        .connected = event == GLFW_CONNECTED,
-    });
+    if (glfwJoystickIsGamepad(id) != GLFW_FALSE)
+    {
+        currentWindow->pushEvent(GamepadConnectionEvent{.gamepad = id, .connected = event == GLFW_CONNECTED});
+    }
 }
 
 static void updateMods(GLFWWindow* handler, int glfwMods)

@@ -34,8 +34,8 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
                 auto dt = controller.unscaledDeltaTime ? deltaTime.unscaledValue : deltaTime.value();
 
                 // Update camera angles based on mouse motion.
-                controller.phi -= static_cast<float>(input.mouseDelta().y) * dt * controller.sens;
-                controller.theta -= static_cast<float>(input.mouseDelta().x) * dt * controller.sens;
+                controller.phi -= input.axis(controller.rotationX.c_str()).value() * dt * controller.sens;
+                controller.theta -= input.axis(controller.rotationY.c_str()).value() * dt * controller.sens;
                 controller.phi = std::clamp(controller.phi, -89.8F, 89.8F);
 
                 // Calculate camera direction from angles and calculate the rotation from it.
@@ -50,9 +50,9 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
 
                 // Translate the camera based on input.
                 auto factor = dt * controller.speed;
-                position.vec += right * input.axis(controller.lateral.c_str()) * factor;
-                position.vec.y += input.axis(controller.vertical.c_str()) * factor;
-                position.vec += forward * input.axis(controller.longitudinal.c_str()) * factor;
+                position.vec += right * input.axis(controller.translationX.c_str()).value() * factor;
+                position.vec.y += input.axis(controller.translationY.c_str()).value() * factor;
+                position.vec += forward * input.axis(controller.translationZ.c_str()).value() * factor;
             }
 
             // Lock/unlock mouse depending on if any FreeCameraController is enabled.

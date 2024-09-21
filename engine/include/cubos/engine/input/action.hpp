@@ -23,25 +23,9 @@ namespace cubos::engine
     public:
         CUBOS_REFLECT;
 
-        ~InputAction() = default;
-
-        /// @brief Constructs without any bindings.
-        InputAction() = default;
-
-        /// @brief Constructs with existing bindings.
-        /// @param combinations Combinations to bind.
-        InputAction(std::vector<InputCombination> combinations)
-            : mCombinations(std::move(combinations))
-        {
-        }
-
-        /// @brief Gets the bound combinations.
-        /// @return Vector of combinations.
-        const std::vector<InputCombination>& combinations() const;
-
-        /// @brief Gets the bound combinations.
-        /// @return Vector of combinations.
-        std::vector<InputCombination>& combinations();
+        /// @brief Updates the state of the action.
+        /// @param window Window to get the value from.
+        void update(const core::io::Window& window);
 
         /// @brief Checks if this action is pressed.
         /// @return Sets whether this action is pressed.
@@ -55,23 +39,13 @@ namespace cubos::engine
         /// @return Sets whether this action was just released.
         bool justReleased() const;
 
-        /// @brief Sets whether this action is pressed.
-        /// @param pressed New pressed state.
-        void pressed(bool pressed);
-
-        /// @brief Checks if this action was just pressed.
-        /// @param justPressed Whether this action was just pressed.
-        void justPressed(bool justPressed);
-
-        /// @brief Checks if this action was just released.
-        /// @param justReleased Whether this action was just released.
-        void justReleased(bool justReleased);
+        std::vector<InputCombination> combinations;
 
     private:
-        std::vector<InputCombination> mCombinations;
-
-        bool mPressed;      ///< Not serialized.
-        bool mJustPressed;  ///< Not serialized.
-        bool mJustReleased; ///< Not serialized;
+        bool mPressed;
+        bool mJustPressed;
+        bool mJustReleased;
     };
+
+    static const InputAction NullAction = InputAction{};
 } // namespace cubos::engine

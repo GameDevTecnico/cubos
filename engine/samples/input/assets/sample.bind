@@ -1,90 +1,243 @@
 {
     "actions": {
         "next-showcase": [
-            {"keys": ["Return"]},
-            {"gamepadButtons": ["RBumper"]}
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Key",
+                    "value": "Return"
+                }
+            ],
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Gamepad",
+                    "value": "RBumper"
+                }
+            ]
         ],
         "x-or-z": [
-            {"keys": ["X"]},
-            {"keys": ["Z"]}
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Key",
+                    "value": "X"
+                }
+            ],
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Key",
+                    "value": "Z"
+                }
+            ]
         ],
         "shift-space": [
-            {"keys": ["LShift", "Space"]},
-            {"keys": ["RShift", "Space"]}
-        ],
-        "ctrl-shift-space": [
-            {"keys": ["LControl", "LShift", "Space"]},
-            {"keys": ["LControl", "RShift", "Space"]},
-            {"keys": ["RControl", "LShift", "Space"]},
-            {"keys": ["RControl", "RShift", "Space"]}
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Key",
+                    "value": "LShift"
+                },
+                {
+                    "variant": "cubos::engine::InputPressSource::Key",
+                    "value": "Space"
+                }
+            ],
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Key",
+                    "value": "RShift"
+                },
+                {
+                    "variant": "cubos::engine::InputPressSource::Key",
+                    "value": "Space"
+                }
+            ]
         ],
         "left-mb": [
-            {"mouseButtons": ["Left"]}
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Mouse",
+                    "value": "Left"
+                }
+            ]
         ],
         "right-mb": [
-            {"mouseButtons": ["Right"]}
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Mouse",
+                    "value": "Right"
+                }
+            ]
         ],
         "middle-mb": [
-            {"mouseButtons": ["Middle"]}
-        ],
-        "extra-mb": [
-            {"mouseButtons": ["Extra1"]},
-            {"mouseButtons": ["Extra2"]}
+            [
+                {
+                    "variant": "cubos::engine::InputPressSource::Mouse",
+                    "value": "Middle"
+                }
+            ]
         ]
     },
     "axes": {
         "vertical": {
             "positive": [
-                {"keys": ["W"]},
-                {"keys": ["Up"]}
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "W"
+                    }
+                ],
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "Up"
+                    }
+                ]
             ],
             "negative": [
-                {"keys": ["S"]},
-                {"keys": ["Down"]}
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "S"
+                    }
+                ],
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "Down"
+                    }
+                ]
             ],
-            "gamepadAxes": [
-                "LY"
+            "axes": [
+                {
+                    "variant": "cubos::engine::InputAxisSource::Gamepad",
+                    "value": "LY"
+                }
             ]
         },
         "horizontal": {
             "positive": [
-                {"keys": ["D"]},
-                {"keys": ["Right"]}
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "D"
+                    }
+                ],
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "Right"
+                    }
+                ]
             ],
             "negative": [
-                {"keys": ["A"]},
-                {"keys": ["Left"]}
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "A"
+                    }
+                ],
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "Left"
+                    }
+                ]
             ],
-            "gamepadAxes": [
-                "LX"
+            "axes": [
+                {
+                    "variant": "cubos::engine::InputAxisSource::Gamepad",
+                    "value": "LX"
+                }
             ]
         },
-        "shift-vertical": {
+        "lshift-vertical": {
             "positive": [
-                {"keys": ["LShift", "W"]},
-                {"keys": ["LShift", "Up"]},
-                {"keys": ["RShift", "W"]},
-                {"keys": ["RShift", "Up"]}
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "W"
+                    },
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "LShift"
+                    }
+                ],
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "Up"
+                    },
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "LShift"
+                    }
+                ]
             ],
             "negative": [
-                {"keys": ["LShift", "S"]},
-                {"keys": ["LShift", "Down"]},
-                {"keys": ["RShift", "S"]},
-                {"keys": ["RShift", "Down"]}
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "S"
+                    },
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "LShift"
+                    }
+                ],
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "Down"
+                    },
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "LShift"
+                    }
+                ]
             ]
         },
-        "shift-horizontal": {
+        "lshift-horizontal": {
             "positive": [
-                {"keys": ["LShift", "D"]},
-                {"keys": ["LShift", "Right"]},
-                {"keys": ["RShift", "D"]},
-                {"keys": ["RShift", "Right"]}
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "D"
+                    },
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "LShift"
+                    }
+                ],
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "Right"
+                    },
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "LShift"
+                    }
+                ]
             ],
             "negative": [
-                {"keys": ["LShift", "A"]},
-                {"keys": ["LShift", "Left"]},
-                {"keys": ["RShift", "A"]},
-                {"keys": ["RShift", "Left"]}
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "A"
+                    },
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "LShift"
+                    }
+                ],
+                [
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "Left"
+                    },
+                    {
+                        "variant": "cubos::engine::InputPressSource::Key",
+                        "value": "LShift"
+                    }
+                ]
             ]
         }
     }

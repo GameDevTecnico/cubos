@@ -28,13 +28,19 @@ namespace cubos::engine
         bool unscaledDeltaTime = false;
 
         /// @brief Action used to move the camera laterally (positive is right).
-        std::string lateral = "move-lateral";
+        std::string translationX = "move-lateral";
 
         /// @brief Action used to move the camera vertically (positive is up).
-        std::string vertical = "move-vertical";
+        std::string translationY = "move-vertical";
 
         /// @brief Action used to move the camera longitudinally (positive is forward).
-        std::string longitudinal = "move-longitudinal";
+        std::string translationZ = "move-longitudinal";
+
+        /// @brief Action used to rotate the camera around the X axis (positive is up).
+        std::string rotationX = "rotate-pitch";
+
+        /// @brief Action used to rotate the camera around the Y axis (positive is right).
+        std::string rotationY = "rotate-yaw";
 
         /// @brief Speed at which the camera moves.
         float speed = 6.0F;

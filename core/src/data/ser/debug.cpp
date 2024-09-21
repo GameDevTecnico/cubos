@@ -7,6 +7,7 @@
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
+#include <cubos/core/reflection/traits/union.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::data::DebugSerializer;
@@ -16,6 +17,7 @@ using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
+using cubos::core::reflection::UnionTrait;
 
 #define AUTO_HOOK(type, ...)                                                                                           \
     this->hook<type>([this](const type& value) {                                                                       \
