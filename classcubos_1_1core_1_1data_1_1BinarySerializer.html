@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/data/des/ directory | Cubos Docs</title>
+  <title>cubos::core::data::BinarySerializer class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,30 +46,99 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_95549d37735ad5b142799f042eef0d37.html">data</a>/</span>des<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>BinarySerializer <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ser_2binary_8hpp.html">&lt;core/data/ser/binary.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__core-data-des.html" class="m-doc">Deserialization</a> directory.</p>
+        <p>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class meant to serialize data in a non-readable but fast and compact way.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="des_2binary_8hpp.html" class="m-doc">binary.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />BinaryDeserializer</a>.</dd>
-            <dt>file <a href="deserializer_8hpp.html" class="m-doc">deserializer.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />Deserializer</a>.</dd>
-            <dt>file <a href="core_2include_2cubos_2core_2data_2des_2json_8hpp.html" class="m-doc">json.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />JSONDeserializer</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>
+            </dt>
+            <dd>Base class for serializers, which defines the interface for serializing arbitrary data using its reflection metadata.</dd>
           </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ae0b8bffe3ee92eba7fa65dea40c19fa4" class="m-doc">BinarySerializer</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream)</span>
+            </dt>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6c2983415369a221d80f8539cbc93521" class="m-doc">decompose</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              const void* value) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Called for each type with no hook defined.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ae0b8bffe3ee92eba7fa65dea40c19fa4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />data::<wbr />BinarySerializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae0b8bffe3ee92eba7fa65dea40c19fa4" class="m-doc-self">BinarySerializer</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stream</td>
+                  <td>Stream to write to.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6c2983415369a221d80f8539cbc93521"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />BinarySerializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c2983415369a221d80f8539cbc93521" class="m-doc-self">decompose</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              const void* value) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Called for each type with no hook defined.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the value was successfully serialized.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Should recurse by calling <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a4baab0fc3ce1b9c40bd33a4e9081c43e" class="m-doc">write()</a> again as appropriate.</p>
+          </div></section>
         </section>
       </div>
     </div>
