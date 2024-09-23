@@ -16,6 +16,7 @@
 #include <cubos/core/ecs/system/tag.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/memory/opt.hpp>
+#include <cubos/core/reflection/type_server.hpp>
 
 namespace cubos::core::ecs
 {
@@ -213,6 +214,13 @@ namespace cubos::core::ecs
         /// @return Builder used to configure the observer.
         ObserverBuilder observer(std::string name);
 
+        /// @brief Returns the type server to be used by the engine, in case debugging is enabled.
+        ///
+        /// Can be used to register new types or traits manually.
+        ///
+        /// @return Type server.
+        memory::Opt<reflection::TypeServer&> typeServer();
+
         /// @brief Resets the application to its initial state.
         ///
         /// Equivalent to constructing a new Cubos object.
@@ -229,6 +237,14 @@ namespace cubos::core::ecs
         ///
         /// Equivalent to calling @ref start() followed by @ref update() until it returns false.
         void run();
+
+        /// @brief Returns whether the application has been started.
+        /// @return Whether the application has been started.
+        bool started() const;
+
+        /// @brief Returns whether the application should quit.
+        /// @return Whether the application should quit.
+        bool shouldQuit() const;
 
     private:
         /// @brief Stores information regarding a plugin.
@@ -267,6 +283,13 @@ namespace cubos::core::ecs
 
             /// @brief Plugin which registered the tag.
             Plugin plugin;
+        };
+
+        /// @brief Stores debugging-related state.
+        struct Debug
+        {
+            uint16_t port{};
+            reflection::TypeServer typeServer{};
         };
 
         /// @brief Stores runtime application state.
@@ -327,6 +350,9 @@ namespace cubos::core::ecs
 
         /// @brief Maps registered tags to their data.
         std::unordered_map<std::string, TagInfo> mTags;
+
+        /// @brief Debugging state, in case it is enabled.
+        memory::Opt<Debug> mDebug;
     };
 
     class CUBOS_CORE_API Cubos::TagBuilder

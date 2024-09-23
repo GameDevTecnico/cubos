@@ -3,6 +3,8 @@
 
 set(TESSERATOS_SOURCE
 	"src/tesseratos/main.cpp"
+	"src/tesseratos/debugger/plugin.cpp"
+	"src/tesseratos/debugger/debugger.cpp"
 	"src/tesseratos/asset_explorer/plugin.cpp"
 	"src/tesseratos/asset_explorer/popup.cpp"
 	"src/tesseratos/settings_inspector/plugin.cpp"
