@@ -189,9 +189,9 @@ static void showcaseMouseButtons(const Input& input, bool& explained)
 }
 /// [Showcase Mouse Buttons]
 
-int main()
+int main(int argc, char** argv)
 {
-    auto cubos = Cubos();
+    auto cubos = Cubos(argc, argv);
 
     /// [Adding the plugin]
     cubos.plugin(settingsPlugin);

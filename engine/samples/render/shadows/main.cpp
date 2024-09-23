@@ -28,9 +28,9 @@ CUBOS_REFLECT_IMPL(Spin)
     return cubos::core::ecs::TypeBuilder<Spin>("Spin").build();
 }
 
-int main()
+int main(int argc, char** argv)
 {
-    Cubos cubos{};
+    Cubos cubos{argc, argv};
 
     cubos.component<Spin>();
 

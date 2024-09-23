@@ -15,9 +15,9 @@ using namespace cubos::engine;
 static const Asset<Scene> SceneAsset = AnyAsset("05db7643-a8b8-49cd-8c16-0992136cfacf");
 static const Asset<VoxelPalette> PaletteAsset = AnyAsset("1aa5e234-28cb-4386-99b4-39386b0fc215");
 
-int main()
+int main(int argc, char** argv)
 {
-    Cubos cubos{};
+    Cubos cubos{argc, argv};
 
     /// [Adding the plugins]
     cubos.plugin(settingsPlugin);

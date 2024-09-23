@@ -29,9 +29,9 @@ CUBOS_REFLECT_IMPL(IntegerAsset)
 }
 /// [Asset type]
 
-int main()
+int main(int argc, char** argv)
 {
-    Cubos cubos{};
+    Cubos cubos{argc, argv};
 
     cubos.plugin(settingsPlugin);
     cubos.plugin(assetsPlugin);
