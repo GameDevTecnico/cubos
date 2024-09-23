@@ -141,7 +141,7 @@ bool BinaryDeserializer::decompose(const Type& type, void* value)
 
         if (!trait.contains(name))
         {
-            CUBOS_ERROR("Could not deserialize enum, no such variant '{}'", name);
+            CUBOS_ERROR("Could not deserialize enum, no such variant {}", name);
             return false;
         }
 
@@ -174,7 +174,7 @@ bool BinaryDeserializer::decompose(const Type& type, void* value)
 
             if (!trait.contains(bit))
             {
-                CUBOS_ERROR("Could not deserialize mask, no such bit '{}'", bit);
+                CUBOS_ERROR("Could not deserialize mask, no such bit {}", bit);
                 return false;
             }
 
@@ -188,7 +188,7 @@ bool BinaryDeserializer::decompose(const Type& type, void* value)
         {
             if (!this->read(field->type(), fieldValue))
             {
-                CUBOS_ERROR("Could not deserialize field '{}'", field->name());
+                CUBOS_ERROR("Could not deserialize field {}", field->name());
                 return false;
             }
         }
@@ -206,7 +206,7 @@ bool BinaryDeserializer::decompose(const Type& type, void* value)
 
         if (!trait.from(value, string))
         {
-            CUBOS_ERROR("Could not deserialize string conversion, string '{}' is not a valid conversion", string);
+            CUBOS_ERROR("Could not deserialize string conversion, string {} is not a valid conversion", string);
             return false;
         }
     }

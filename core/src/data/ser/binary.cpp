@@ -146,7 +146,7 @@ bool BinarySerializer::decompose(const Type& type, const void* value)
         {
             if (!this->write(field->type(), fieldValue))
             {
-                CUBOS_WARN("Could not serialize field '{}'", field->name());
+                CUBOS_WARN("Could not serialize field {}", field->name());
                 return false;
             }
         }
