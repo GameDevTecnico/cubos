@@ -8,6 +8,8 @@ uniform sampler2D albedoTexture;
 uniform sampler2D ssaoTexture;
 uniform sampler2D shadowAtlasTexture;
 
+uniform sampler2DArray directionalShadowMap; // only one directional light with shadows is supported, for now
+
 uniform vec2 viewportOffset;
 uniform vec2 viewportSize;
 
@@ -15,7 +17,14 @@ struct DirectionalLight
 {
     vec4 direction;
     vec4 color;
+    mat4 matrices[10]; // hardcoded max splits
     float intensity;
+    float shadowBias;
+    float shadowBlurRadius;
+    float padding;
+    vec4 shadowFarSplitDistances[3]; // intended to be a float array, but std140 layout aligns array elements
+                                     // to vec4 size; number of vec4s = ceiling(MaxCascades / 4 components)
+    int numCascades;
 };
 
 struct PointLight
@@ -60,6 +69,8 @@ layout(std140) uniform PerScene
     uint numDirectionalLights;
     uint numPointLights;
     uint numSpotLights;
+    
+    int directionalLightWithShadowsId; // index of directional light that casts shadows, or -1 if none
 };
 
 layout(location = 0) out vec3 color;
@@ -90,10 +101,12 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
         else
         {
             vec2 texelSize = vec2(1.0 / 1024.0); // largely arbitrary value, affects blur size
-            for(float x = -light.shadowBlurRadius; x <= light.shadowBlurRadius; x += light.shadowBlurRadius)
+            for(int xi = -1; xi <= 1; xi++)
             {
-                for(float y = -light.shadowBlurRadius; y <= light.shadowBlurRadius; y += light.shadowBlurRadius)
+                for(int yi = -1; yi <= 1; yi++)
                 {
+                    float x = light.shadowBlurRadius*float(xi);
+                    float y = light.shadowBlurRadius*float(yi);
                     float pcfDepth = texture(shadowAtlasTexture, uv + vec2(x, y) * texelSize).r;
                     shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
                 }
@@ -120,9 +133,60 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
     return vec3(0);
 }
 
-vec3 directionalLightCalc(vec3 fragNormal, DirectionalLight light)
+vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, DirectionalLight light, bool drawShadows)
 {
-    return max(dot(fragNormal, -light.direction.xyz), 0) * light.intensity * vec3(light.color);
+    // Shadows
+    float shadow = 0.0;
+    if (drawShadows)
+    {
+        // Select split
+        vec4 positionCameraSpace = inverse(inverseView) * vec4(fragPos, 1.0);
+        float depthCameraSpace = abs(positionCameraSpace.z);
+        int split = light.numCascades - 1;
+        for (int i = 0; i < light.numCascades; i++)
+        {
+            float far = light.shadowFarSplitDistances[i / 4][i % 4];
+            if (depthCameraSpace < far)
+            {
+                split = i;
+                break;
+            }
+        }
+
+        // Sample shadow map
+        vec4 positionLightSpace = light.matrices[split] * vec4(fragPos, 1.0);
+        vec3 projCoords = positionLightSpace.xyz / positionLightSpace.w;
+        projCoords = projCoords * 0.5 + 0.5;
+        if (projCoords.z < 1.0)
+        {
+            vec2 uv = projCoords.xy;
+            float currentDepth = projCoords.z;
+            float bias = light.shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
+            // PCF
+            if (light.shadowBlurRadius <= 0.001f)
+            {
+                float pcfDepth = texture(directionalShadowMap, vec3(uv.xy, split)).r;
+                shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+            }
+            else
+            {
+                vec2 texelSize = vec2(1.0 / 1024.0); // largely arbitrary value, affects blur size
+                for(int xi = -1; xi <= 1; xi++)
+                {
+                    for(int yi = -1; yi <= 1; yi++)
+                    {
+                        float x = light.shadowBlurRadius*float(xi);
+                        float y = light.shadowBlurRadius*float(yi);
+                        vec2 newUv = uv + vec2(x, y) * texelSize;
+                        float pcfDepth = texture(directionalShadowMap, vec3(newUv.xy, split)).r;
+                        shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+                    }
+                }
+                shadow /= 9.0;
+            }
+        }
+    }
+    return max(dot(fragNormal, -light.direction.xyz), 0) * (1.0 - shadow) * light.intensity * vec3(light.color);
 }
 
 vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLight light)
@@ -174,7 +238,8 @@ void main()
         }
         for (uint i = 0u; i < numDirectionalLights; i++)
         {
-            lighting += directionalLightCalc(normal, directionalLights[i]);
+            lighting += directionalLightCalc(position, normal, directionalLights[i],
+                int(i) == directionalLightWithShadowsId);
         }
         for (uint i = 0u; i < numPointLights; i++)
         {
