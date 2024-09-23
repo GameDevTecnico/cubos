@@ -138,6 +138,7 @@ set(CUBOS_CORE_SOURCE
 	"src/ecs/types.cpp"
 	"src/ecs/cubos.cpp"
 	"src/ecs/dynamic.cpp"
+	"src/ecs/debugger.cpp"
 
     "src/geom/box.cpp"
     "src/geom/capsule.cpp"

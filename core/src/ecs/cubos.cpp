@@ -7,9 +7,12 @@
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/opt.hpp>
+#include <cubos/core/net/tcp_listener.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
+
+#include "debugger.hpp"
 
 using cubos::core::ecs::Arguments;
 using cubos::core::ecs::Cubos;
@@ -17,6 +20,9 @@ using cubos::core::ecs::DeltaTime;
 using cubos::core::ecs::Name;
 using cubos::core::ecs::ShouldQuit;
 using cubos::core::memory::Opt;
+using cubos::core::net::Address;
+using cubos::core::net::TcpListener;
+using cubos::core::net::TcpStream;
 
 CUBOS_REFLECT_IMPL(DeltaTime)
 {
@@ -57,7 +63,37 @@ Cubos::Cubos()
 
 Cubos::Cubos(int argc, char** argv)
 {
-    std::vector<std::string> arguments(argv + 1, argv + argc);
+    std::vector<std::string> arguments{};
+
+    // Filter command line arguments before storing them as a resource.
+    for (int i = 1; i < argc; ++i)
+    {
+        std::string arg{argv[i]};
+
+        if (arg == "--debug")
+        {
+            ++i;
+
+            if (i >= argc)
+            {
+                CUBOS_ERROR("Missing port number argument for --debug option");
+                continue;
+            }
+
+            try
+            {
+                mDebug.replace({.port = static_cast<uint16_t>(std::stoi(argv[i]))});
+            }
+            catch (const std::invalid_argument&)
+            {
+                CUBOS_ERROR("Invalid port number argument for --debug option");
+            }
+        }
+        else
+        {
+            arguments.emplace_back(argv[i]);
+        }
+    }
 
     this->resource<DeltaTime>();
     this->resource<ShouldQuit>();
@@ -190,6 +226,16 @@ auto Cubos::observer(std::string name) -> ObserverBuilder
     return {*this, std::move(name)};
 }
 
+auto Cubos::typeServer() -> memory::Opt<reflection::TypeServer&>
+{
+    if (mDebug.contains())
+    {
+        return mDebug->typeServer;
+    }
+
+    return {};
+}
+
 void Cubos::reset()
 {
     delete mState;
@@ -285,15 +331,68 @@ bool Cubos::update()
         std::chrono::duration<float>(currentTime - mState->lastUpdateTime).count();
     mState->lastUpdateTime = currentTime;
 
-    return !mWorld.resource<ShouldQuit>().value;
+    return !this->shouldQuit();
 }
 
 void Cubos::run()
 {
-    this->start();
-    while (this->update())
+    // If debugging is disabled, simply run the update loop.
+    if (!mDebug.contains())
     {
+        this->start();
+        while (this->update())
+        {
+        }
+
+        return;
     }
+
+    // Add all known types to the type server.
+    for (const auto& [type, _] : mTypeToPlugin)
+    {
+        mDebug->typeServer.addType(*type);
+    }
+
+    // Start a TCP listener and wait for a connection.
+    TcpListener listener;
+    if (!listener.listen(Address::Any, mDebug->port))
+    {
+        CUBOS_CRITICAL("Debugger failed to start listening on port {}, shutting down", mDebug->port);
+        return;
+    }
+
+    CUBOS_INFO("Debugging enabled on port {}", mDebug->port);
+
+    while (true)
+    {
+        CUBOS_INFO("Debugger waiting for a connection");
+
+        TcpStream stream;
+        if (!listener.accept(stream))
+        {
+            CUBOS_CRITICAL("Debugger failed to accept connection, shutting down");
+            break;
+        }
+
+        CUBOS_INFO("Debugger connected to a client");
+
+        if (!debugger(stream, *this))
+        {
+            break;
+        }
+
+        CUBOS_INFO("Debugger disconnected from client");
+    }
+}
+
+bool Cubos::started() const
+{
+    return mState != nullptr;
+}
+
+bool Cubos::shouldQuit() const
+{
+    return mWorld.resource<ShouldQuit>().value;
 }
 
 bool Cubos::isRegistered(const reflection::Type& type) const

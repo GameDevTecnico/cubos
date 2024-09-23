@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Type Client and Type Server (#1302, **@RiscadoA**).
 - Deadzone for input axis (#844, **@kuukitenshi**)
 - Generic Camera component to hold projection matrix (#1331, **@mkuritsu**)
+- Initial application debugging through Tesseratos (#1303, **@RiscadoA**).
 
 ### Fixed
 

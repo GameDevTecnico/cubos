@@ -10,6 +10,7 @@
 #include "collider_gizmos/plugin.hpp"
 #include "console/plugin.hpp"
 #include "debug_camera/plugin.hpp"
+#include "debugger/plugin.hpp"
 #include "ecs_statistics/plugin.hpp"
 #include "entity_inspector/plugin.hpp"
 #include "entity_selector/plugin.hpp"
@@ -42,6 +43,7 @@ int main(int argc, char** argv)
     cubos.plugin(toolboxPlugin);
     cubos.plugin(entitySelectorPlugin);
 
+    cubos.plugin(debuggerPlugin);
     cubos.plugin(assetExplorerPlugin);
     cubos.plugin(entityInspectorPlugin);
     cubos.plugin(worldInspectorPlugin);
