@@ -253,10 +253,19 @@ namespace cubos::core::memory
         /// @param other Other.
         Function(Function&& other) noexcept = default;
 
+        /// @brief Copy constructs.
+        /// @param other Other.
+        Function(const Function& other) = default;
+
         /// @brief Move assigns.
         /// @param other Other.
         /// @return This.
         Function& operator=(Function&& other) noexcept = default;
+
+        /// @brief Copy assigns.
+        /// @param other Other.
+        /// @return This.
+        Function& operator=(const Function& other) = default;
 
         /// @brief Invokes the underlying function.
         ///
