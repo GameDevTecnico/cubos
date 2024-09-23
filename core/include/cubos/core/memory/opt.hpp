@@ -54,6 +54,63 @@ namespace cubos::core::memory
             }
         }
 
+        /// @brief Move constructor.
+        /// @param other Other optional.
+        Opt(Opt<T>&& other) noexcept
+            : mContains{other.mContains}
+        {
+            if (mContains)
+            {
+                new (&mValue) T(memory::move(other.mValue));
+                other.reset();
+            }
+        }
+
+        /// @brief Copy assignment.
+        /// @param other Other optional.
+        /// @return Reference to this.
+        Opt<T>& operator=(const Opt<T>& other)
+        {
+            if (this != &other)
+            {
+                if (mContains)
+                {
+                    mValue.~T();
+                }
+
+                mContains = other.mContains;
+                if (mContains)
+                {
+                    new (&mValue) T(other.mValue);
+                }
+            }
+
+            return *this;
+        }
+
+        /// @brief Move assignment.
+        /// @param other Other optional.
+        /// @return Reference to this.
+        Opt<T>& operator=(Opt<T>&& other) noexcept
+        {
+            if (this != &other)
+            {
+                if (mContains)
+                {
+                    mValue.~T();
+                }
+
+                mContains = other.mContains;
+                if (mContains)
+                {
+                    new (&mValue) T(memory::move(other.mValue));
+                    other.reset();
+                }
+            }
+
+            return *this;
+        }
+
         /// @brief Moves the given value into the optional, destroying any previously stored value.
         /// @param value Value.
         void replace(T value)
