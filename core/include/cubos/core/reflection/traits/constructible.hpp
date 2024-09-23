@@ -114,6 +114,22 @@ namespace cubos::core::reflection
         /// @param other Pointer to the instance to move construct from.
         void moveConstruct(void* instance, void* other) const;
 
+        /// @brief Gets the destructor of the type.
+        /// @return Destructor of the type.
+        Destructor destructor() const;
+
+        /// @brief Gets the default constructor of the type.
+        /// @return Default constructor of the type.
+        DefaultConstructor defaultConstructor() const;
+
+        /// @brief Gets the copy constructor of the type.
+        /// @return Copy constructor of the type.
+        CopyConstructor copyConstructor() const;
+
+        /// @brief Gets the move constructor of the type.
+        /// @return Move constructor of the type.
+        MoveConstructor moveConstructor() const;
+
     private:
         std::size_t mSize;
         std::size_t mAlignment;

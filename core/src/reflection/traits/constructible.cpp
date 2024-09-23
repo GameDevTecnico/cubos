@@ -87,3 +87,23 @@ void ConstructibleTrait::moveConstruct(void* instance, void* other) const
     CUBOS_ASSERT(this->hasMoveConstruct());
     mMoveConstructor(instance, other);
 }
+
+ConstructibleTrait::Destructor ConstructibleTrait::destructor() const
+{
+    return mDestructor;
+}
+
+ConstructibleTrait::DefaultConstructor ConstructibleTrait::defaultConstructor() const
+{
+    return mDefaultConstructor;
+}
+
+ConstructibleTrait::CopyConstructor ConstructibleTrait::copyConstructor() const
+{
+    return mCopyConstructor;
+}
+
+ConstructibleTrait::MoveConstructor ConstructibleTrait::moveConstructor() const
+{
+    return mMoveConstructor;
+}
