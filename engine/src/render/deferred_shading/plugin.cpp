@@ -1,3 +1,4 @@
+#include <cubos/core/geom/utils.hpp>
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/io/window.hpp>
 
@@ -5,6 +6,7 @@
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
+#include <cubos/engine/render/cascaded_shadow_maps/plugin.hpp>
 #include <cubos/engine/render/deferred_shading/deferred_shading.hpp>
 #include <cubos/engine/render/deferred_shading/plugin.hpp>
 #include <cubos/engine/render/g_buffer/g_buffer.hpp>
@@ -19,6 +21,7 @@
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/shadow_atlas/plugin.hpp>
 #include <cubos/engine/render/shadow_atlas/shadow_atlas.hpp>
+#include <cubos/engine/render/shadows/directional_caster.hpp>
 #include <cubos/engine/render/shadows/plugin.hpp>
 #include <cubos/engine/render/shadows/spot_caster.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
@@ -26,12 +29,16 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
+using cubos::core::gl::AddressMode;
 using cubos::core::gl::ConstantBuffer;
 using cubos::core::gl::FramebufferDesc;
 using cubos::core::gl::generateScreenQuad;
 using cubos::core::gl::RenderDevice;
+using cubos::core::gl::Sampler;
+using cubos::core::gl::SamplerDesc;
 using cubos::core::gl::ShaderBindingPoint;
 using cubos::core::gl::ShaderPipeline;
+using cubos::core::gl::Texture2DArray;
 using cubos::core::gl::Usage;
 using cubos::core::gl::VertexArray;
 using cubos::core::io::Window;
@@ -44,8 +51,16 @@ namespace
     {
         glm::vec4 direction;
         glm::vec4 color;
+        glm::mat4 matrices[cubos::engine::DirectionalShadowCaster::MaxCascades];
         float intensity;
-        float padding[3];
+        float shadowBias;
+        float shadowBlurRadius;
+        float padding[1];
+        glm::vec4 shadowFarSplitDistances[(cubos::engine::DirectionalShadowCaster::MaxCascades + 3) /
+                                          4]; // intended to be a float array, but std140 layout aligns array elements
+                                              // to vec4 size; number of vec4s = ceiling(MaxCascades / 4 components)
+        int numCascades;
+        int padding2[3];
     };
 
     struct PerPointLight
@@ -89,6 +104,8 @@ namespace
         glm::uint numDirectionalLights{0};
         glm::uint numPointLights{0};
         glm::uint numSpotLights{0};
+
+        int directionalLightWithShadowsId;
     };
 
     struct State
@@ -101,9 +118,11 @@ namespace
         ShaderBindingPoint albedoBP;
         ShaderBindingPoint ssaoBP;
         ShaderBindingPoint shadowAtlasBP;
+        ShaderBindingPoint directionalShadowMapBP;
         ShaderBindingPoint perSceneBP;
         ShaderBindingPoint viewportOffsetBP;
         ShaderBindingPoint viewportSizeBP;
+        Sampler directionalShadowSampler;
 
         VertexArray screenQuad;
 
@@ -117,14 +136,25 @@ namespace
             albedoBP = pipeline->getBindingPoint("albedoTexture");
             ssaoBP = pipeline->getBindingPoint("ssaoTexture");
             shadowAtlasBP = pipeline->getBindingPoint("shadowAtlasTexture");
+            directionalShadowMapBP = pipeline->getBindingPoint("directionalShadowMap");
             perSceneBP = pipeline->getBindingPoint("PerScene");
             viewportOffsetBP = pipeline->getBindingPoint("viewportOffset");
             viewportSizeBP = pipeline->getBindingPoint("viewportSize");
-            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && shadowAtlasBP && perSceneBP &&
-                             viewportOffsetBP && viewportSizeBP,
-                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, shadowAtlasTexture, PerScene, "
+            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && shadowAtlasBP && directionalShadowMapBP &&
+                             perSceneBP && viewportOffsetBP && viewportSizeBP,
+                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, shadowAtlasTexture, "
+                         "directionalShadowMap, PerScene, "
                          "viewportOffset and "
                          "viewportSize binding points must exist");
+
+            SamplerDesc directionalShadowSamplerDesc{};
+            directionalShadowSamplerDesc.addressU = AddressMode::Border;
+            directionalShadowSamplerDesc.addressV = AddressMode::Border;
+            for (float& borderColor : directionalShadowSamplerDesc.borderColor)
+            {
+                borderColor = 1.0F;
+            }
+            directionalShadowSampler = renderDevice.createSampler(directionalShadowSamplerDesc);
 
             generateScreenQuad(renderDevice, pipeline, screenQuad);
 
@@ -149,12 +179,14 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
     cubos.depends(transformPlugin);
     cubos.depends(shadowsPlugin);
     cubos.depends(shadowAtlasPlugin);
+    cubos.depends(cascadedShadowMapsPlugin);
 
     cubos.tag(deferredShadingTag)
         .tagged(drawToHDRTag)
         .after(drawToGBufferTag)
         .after(drawToSSAOTag)
-        .after(drawToShadowAtlasTag);
+        .after(drawToShadowAtlasTag)
+        .after(drawToCascadedShadowMapsTag);
 
     cubos.uninitResource<State>();
 
@@ -172,18 +204,20 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
 
     cubos.system("apply Deferred Shading to the GBuffer and output to the HDR texture")
         .tagged(deferredShadingTag)
-        .call([](const State& state, const Window& window, const RenderEnvironment& environment,
-                 const ShadowAtlas& shadowAtlas, Query<const LocalToWorld&, const DirectionalLight&> directionalLights,
+        .call([](State& state, const Window& window, const RenderEnvironment& environment,
+                 const ShadowAtlas& shadowAtlas,
+                 Query<const LocalToWorld&, const DirectionalLight&, Opt<const DirectionalShadowCaster&>>
+                     directionalLights,
                  Query<const LocalToWorld&, const PointLight&> pointLights,
                  Query<const LocalToWorld&, const SpotLight&, Opt<const SpotShadowCaster&>> spotLights,
                  Query<Entity, const HDR&, const GBuffer&, const SSAO&, DeferredShading&> targets,
-                 Query<const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
+                 Query<Entity, const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = window->renderDevice();
 
             for (auto [targetEnt, hdr, gBuffer, ssao, deferredShading] : targets)
             {
                 // Find the cameras that draw to the GBuffer.
-                for (auto [localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
+                for (auto [cameraEntity, localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
                 {
                     if (!camera.active)
                     {
@@ -214,17 +248,93 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     PerScene perScene{};
                     perScene.inverseView = localToWorld.mat;
                     perScene.inverseProjection = glm::inverse(camera.projection);
+                    perScene.directionalLightWithShadowsId = -1;
 
                     perScene.ambientLight = glm::vec4(environment.ambient, 1.0F);
                     perScene.skyGradient[0] = glm::vec4(environment.skyGradient[0], 1.0F);
                     perScene.skyGradient[1] = glm::vec4(environment.skyGradient[1], 1.0F);
 
-                    for (auto [lightLocalToWorld, light] : directionalLights)
+                    int directionalLightIndex = 0;
+                    Texture2DArray directionalShadowMap = nullptr;
+                    for (auto [lightLocalToWorld, light, caster] : directionalLights)
                     {
                         auto& perLight = perScene.directionalLights[perScene.numDirectionalLights++];
                         perLight.direction = glm::normalize(lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 1.0F, 0.0F));
                         perLight.color = glm::vec4(light.color, 1.0F);
                         perLight.intensity = light.intensity;
+
+                        if (caster.contains())
+                        {
+                            float maxDistance =
+                                caster.value().maxDistance == 0 ? camera.zFar : caster.value().maxDistance;
+                            float nearDistance =
+                                caster.value().nearDistance == 0 ? camera.zNear : caster.value().nearDistance;
+                            int numCascades = static_cast<int>(caster.value().getCurrentSplitDistances().size()) + 1;
+                            for (int i = 0; i < numCascades; i++)
+                            {
+                                float near = glm::mix(nearDistance, maxDistance,
+                                                      i == 0 ? 0.0F
+                                                             : caster.value().getCurrentSplitDistances().at(
+                                                                   static_cast<unsigned long>(i) - 1));
+                                float far = glm::mix(
+                                    nearDistance, maxDistance,
+                                    i == numCascades - 1
+                                        ? 1.0F
+                                        : caster.value().getCurrentSplitDistances().at(static_cast<unsigned long>(i)));
+
+                                auto cameraView = glm::inverse(localToWorld.mat);
+
+                                std::vector<glm::vec4> cameraFrustumCorners;
+                                core::geom::getCameraFrustumCorners(cameraView, camera.projection, near, far,
+                                                                    cameraFrustumCorners);
+
+                                glm::vec3 center = {0.0F, 0.0F, 0.0F};
+                                for (const auto& corner : cameraFrustumCorners)
+                                {
+                                    center += glm::vec3(corner);
+                                }
+                                center /= cameraFrustumCorners.size();
+
+                                auto lightDir = glm::vec3(lightLocalToWorld.mat[2]);
+                                auto view = glm::lookAt(center - lightDir, center, glm::vec3(0.0F, 1.0F, 0.0F));
+
+                                // Transform frustum corners to light view space
+                                for (auto& corner : cameraFrustumCorners)
+                                {
+                                    corner = view * corner;
+                                }
+                                // Find minimum/maximum coordinates along each axis
+                                float minX = std::numeric_limits<float>::max();
+                                float maxX = std::numeric_limits<float>::lowest();
+                                float minY = std::numeric_limits<float>::max();
+                                float maxY = std::numeric_limits<float>::lowest();
+                                float minZ = std::numeric_limits<float>::max();
+                                float maxZ = std::numeric_limits<float>::lowest();
+                                for (const auto& corner : cameraFrustumCorners)
+                                {
+                                    minX = std::min(minX, corner.x);
+                                    maxX = std::max(maxX, corner.x);
+                                    minY = std::min(minY, corner.y);
+                                    maxY = std::max(maxY, corner.y);
+                                    minZ = std::min(minZ, corner.z);
+                                    maxZ = std::max(maxZ, corner.z);
+                                }
+
+                                // Expand space between Z planes, so that objects outside the frustum can cast shadows
+                                minZ -= std::abs(minZ) * 0.5F;
+                                maxZ += std::abs(maxZ) * 0.5F;
+                                auto proj = glm::ortho(minX, maxX, minY, maxY, -maxZ, -minZ);
+                                perLight.matrices[i] = proj * view;
+                                perLight.shadowFarSplitDistances[i / 4][i % 4] = far;
+                            }
+
+                            perLight.shadowBias = caster.value().baseSettings.bias;
+                            perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
+                            perLight.numCascades = numCascades;
+                            perScene.directionalLightWithShadowsId = directionalLightIndex;
+                            directionalShadowMap = caster.value().shadowMaps.at(cameraEntity)->cascades;
+                        }
+                        directionalLightIndex++;
                     }
 
                     for (auto [lightLocalToWorld, light] : pointLights)
@@ -293,6 +403,9 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.albedoBP->bind(gBuffer.albedo);
                     state.ssaoBP->bind(ssao.blurTexture);
                     state.shadowAtlasBP->bind(shadowAtlas.atlas);
+                    // directionalShadowMap needs to be bound even if it's null, or else errors may occur on some GPUs
+                    state.directionalShadowMapBP->bind(directionalShadowMap);
+                    state.directionalShadowMapBP->bind(state.directionalShadowSampler);
                     state.perSceneBP->bind(state.perSceneCB);
                     state.viewportOffsetBP->setConstant(drawsTo.viewportOffset);
                     state.viewportSizeBP->setConstant(drawsTo.viewportSize);
