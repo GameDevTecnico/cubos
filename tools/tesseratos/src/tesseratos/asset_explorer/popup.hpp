@@ -1,6 +1,3 @@
-/// @dir
-/// @brief @ref Function @ref tesseratos::assetSelectionPopup.
-
 /// @file
 /// @brief Utility function to show up a popup containing assets with given type.
 /// @ingroup tesseratos-asset-explorer
