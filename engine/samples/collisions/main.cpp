@@ -67,9 +67,9 @@ struct State
     glm::vec3 bRotationAxis;
 };
 
-int main()
+int main(int argc, char** argv)
 {
-    auto cubos = Cubos();
+    auto cubos = Cubos(argc, argv);
 
     cubos.plugin(settingsPlugin);
     cubos.plugin(windowPlugin);

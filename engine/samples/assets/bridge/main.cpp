@@ -48,9 +48,9 @@ public:
 };
 /// [TextBridge::saveToFile]
 
-int main()
+int main(int argc, char** argv)
 {
-    auto cubos = Cubos();
+    auto cubos = Cubos(argc, argv);
 
     cubos.plugin(settingsPlugin);
     cubos.plugin(assetsPlugin);

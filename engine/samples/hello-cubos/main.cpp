@@ -45,9 +45,9 @@ CUBOS_DEFINE_TAG(cubos::engine::helloTag);
 CUBOS_DEFINE_TAG(cubos::engine::worldTag);
 
 /// [Engine]
-int main()
+int main(int argc, char** argv)
 {
-    Cubos cubos{};
+    Cubos cubos{argc, argv};
     /// [Engine]
 
     /// [Hello Cubos]

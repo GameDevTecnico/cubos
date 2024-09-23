@@ -85,9 +85,9 @@ CUBOS_REFLECT_IMPL(DummyResource)
 }
 /// [Creating a dummy resource]
 
-int main()
+int main(int argc, char** argv)
 {
-    Cubos cubos{};
+    Cubos cubos{argc, argv};
 
     /// [Adding the plugin]
     cubos.plugin(settingsPlugin);

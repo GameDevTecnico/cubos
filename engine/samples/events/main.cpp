@@ -31,9 +31,9 @@ struct State
     int step;
 };
 
-int main()
+int main(int argc, char** argv)
 {
-    cubos::engine::Cubos cubos;
+    cubos::engine::Cubos cubos(argc, argv);
     cubos.resource<State>(State{.step = 0});
 
     /// [Adding event]
