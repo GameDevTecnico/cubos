@@ -9,10 +9,10 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/render/voxels/palette.hpp>
 #include <cubos/engine/render/voxels/plugin.hpp>
+#include <cubos/engine/tools/toolbox/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
 #include "../asset_explorer/plugin.hpp"
-#include "../toolbox/plugin.hpp"
 
 using cubos::core::ecs::EventReader;
 
@@ -20,6 +20,7 @@ using cubos::engine::Asset;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
 using cubos::engine::RenderPalette;
+using cubos::engine::Toolbox;
 using cubos::engine::VoxelMaterial;
 using cubos::engine::VoxelPalette;
 
@@ -106,9 +107,9 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::renderVoxelsPlugin);
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::voxelsPlugin);
+    cubos.depends(cubos::engine::toolboxPlugin);
 
     cubos.depends(assetExplorerPlugin);
-    cubos.depends(toolboxPlugin);
 
     cubos.resource<SelectedPaletteInfo>();
 

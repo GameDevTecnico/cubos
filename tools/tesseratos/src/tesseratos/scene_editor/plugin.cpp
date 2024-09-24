@@ -13,11 +13,11 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
+#include <cubos/engine/tools/selection/plugin.hpp>
+#include <cubos/engine/tools/toolbox/plugin.hpp>
 
 #include "../asset_explorer/plugin.hpp"
 #include "../asset_explorer/popup.hpp"
-#include "../entity_selector/plugin.hpp"
-#include "../toolbox/plugin.hpp"
 
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::convertEntities;
@@ -33,6 +33,8 @@ using cubos::engine::Commands;
 using cubos::engine::Cubos;
 using cubos::engine::Entity;
 using cubos::engine::Scene;
+using cubos::engine::Selection;
+using cubos::engine::Toolbox;
 
 using namespace tesseratos;
 
@@ -133,7 +135,7 @@ static int entityNameFilter(ImGuiInputTextCallbackData* data)
 
 // Shows the entities within a scene and allows the user to select, add more or remove them.
 static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entities, SceneInfo& scene,
-                              EntitySelector& selector, Commands& cmds, int hierarchyDepth)
+                              Selection& selection, Commands& cmds, int hierarchyDepth)
 {
     ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(255, 255, 255));
     //  Add entity to current scene (needs to be root, not a sub scene)
@@ -150,7 +152,7 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
         bool removed = false;
         auto name = entities[i].first;
         auto handle = entities[i].second;
-        bool selected = selector.selection == handle;
+        bool selected = selection.entity == handle;
         std::string buff = name;
         std::string id = "##" + name;
         // Gives the selected entity a different color (bright green)
@@ -175,7 +177,7 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
             else if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
             {
                 CUBOS_INFO("Selected entity {}", name);
-                selector.selection = handle;
+                selection.entity = handle;
             }
 
             if (ImGui::IsMouseClicked(ImGuiMouseButton_Right) && hierarchyDepth == 0)
@@ -249,7 +251,7 @@ static void updateNameComponent(SceneInfo& scene, Commands& commands)
 }
 
 // Recursively draws the scene hierarchy and allows the user to remove scenes
-static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector& selector, int hierarchyDepth,
+static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, Selection& selection, int hierarchyDepth,
                                Assets& assets, State& state)
 {
     ImGui::PushID(&scene);
@@ -333,7 +335,7 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
     {
         // Add entity to current scene (needs to be root, not a sub scene)
 
-        showSceneEntities(scene.entities, scene, selector, cmds, hierarchyDepth);
+        showSceneEntities(scene.entities, scene, selection, cmds, hierarchyDepth);
         if (hierarchyDepth == 0)
         {
             ImGui::Separator();
@@ -364,7 +366,7 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
             }
             else
             {
-                showSceneHierarchy(*scene.scenes[i], cmds, selector, hierarchyDepth + 1, assets, state);
+                showSceneHierarchy(*scene.scenes[i], cmds, selection, hierarchyDepth + 1, assets, state);
             }
         }
         for (const auto& i : sceneToRemove)
@@ -432,10 +434,10 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::assetsPlugin);
     cubos.depends(cubos::engine::scenePlugin);
     cubos.depends(cubos::engine::imguiPlugin);
+    cubos.depends(cubos::engine::selectionPlugin);
+    cubos.depends(cubos::engine::toolboxPlugin);
 
-    cubos.depends(entitySelectorPlugin);
     cubos.depends(assetExplorerPlugin);
-    cubos.depends(toolboxPlugin);
 
     cubos.resource<State>();
 
@@ -457,7 +459,7 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
 
     cubos.system("show Scene Editor UI")
         .tagged(cubos::engine::imguiTag)
-        .call([](const World& world, Assets& assets, Commands cmds, State& state, EntitySelector& selector,
+        .call([](const World& world, Assets& assets, Commands cmds, State& state, Selection& selection,
                  Toolbox& toolbox) {
             if (!toolbox.isOpen("Scene Editor"))
             {
@@ -489,7 +491,7 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
                 else
                 {
                     ImGui::Separator();
-                    showSceneHierarchy(state.root, cmds, selector, 0, assets, state);
+                    showSceneHierarchy(state.root, cmds, selection, 0, assets, state);
                 }
             }
 

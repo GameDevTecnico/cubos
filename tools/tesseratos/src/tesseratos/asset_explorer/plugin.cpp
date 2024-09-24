@@ -5,8 +5,7 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
-
-#include "../toolbox/plugin.hpp"
+#include <cubos/engine/tools/toolbox/plugin.hpp>
 
 using cubos::core::ecs::EventWriter;
 
@@ -14,6 +13,7 @@ using cubos::engine::AnyAsset;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
 using cubos::engine::Settings;
+using cubos::engine::Toolbox;
 
 using namespace tesseratos;
 
@@ -122,7 +122,7 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
 
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
-    cubos.depends(toolboxPlugin);
+    cubos.depends(cubos::engine::toolboxPlugin);
 
     cubos.system("show Asset Explorer UI")
         .tagged(cubos::engine::imguiTag)

@@ -20,7 +20,7 @@ CUBOS_REFLECT_IMPL(Spawner)
         .build();
 }
 
-void spawnerPlugin(cubos::engine::Cubos& cubos)
+void spawnerPlugin(Cubos& cubos)
 {
     cubos.depends(assetsPlugin);
     cubos.depends(transformPlugin);

@@ -190,7 +190,7 @@ int main(int argc, char** argv)
 
     cubos.system("check collisions")
         .tagged(collisionsSampleUpdated)
-        .after(cubos::engine::collisionsTag)
+        .after(collisionsTag)
         .call([](Query<Entity, CollidingWith&, Entity> query, State& state) {
             for (auto [ent1, colliding, ent2] : query)
             {

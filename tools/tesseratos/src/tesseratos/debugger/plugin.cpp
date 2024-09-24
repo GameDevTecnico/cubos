@@ -4,8 +4,7 @@
 #include <imgui_stdlib.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
-
-#include "../toolbox/plugin.hpp"
+#include <cubos/engine/tools/toolbox/plugin.hpp>
 
 using cubos::core::net::Address;
 
