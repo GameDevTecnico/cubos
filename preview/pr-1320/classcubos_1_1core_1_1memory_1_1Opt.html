@@ -108,6 +108,14 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9ace564ab61e9761ad642b399821e3ea" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; other) -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp;</span>
+            </dt>
+            <dd>Copy assignment.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b8c2535450a81876eca42e1a62285da" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp;&amp; other) -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move assignment.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa2fe18796fc6844790a11a597d7e0bef" class="m-doc">replace</a>(</span><span class="m-doc-wrap">T value)</span>
             </dt>
             <dd>Moves the given value into the optional, destroying any previously stored value.</dd>
@@ -230,6 +238,58 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Whether they&#x27;re equal.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9ace564ab61e9761ad642b399821e3ea"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; cubos::<wbr />core::<wbr />memory::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ace564ab61e9761ad642b399821e3ea" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; other)</span></span>
+            </h3>
+            <p>Copy assignment.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other optional.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3b8c2535450a81876eca42e1a62285da"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp; cubos::<wbr />core::<wbr />memory::<wbr />Opt&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b8c2535450a81876eca42e1a62285da" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>&lt;T&gt;&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move assignment.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other optional.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this.</td>
                 </tr>
               </tfoot>
             </table>
