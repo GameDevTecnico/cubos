@@ -71,8 +71,8 @@
               using <a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(<a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">data::<wbr />Serializer</a>&amp;, const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, bool) const &gt;
             </dt>
             <dd>Function type for serializing traits.</dd>
-            <dt id="a66447fe41b93ad5cf505066fd47f11b9">
-              using <a href="#a66447fe41b93ad5cf505066fd47f11b9" class="m-doc-self">DiscoverTypes</a> = void(*)(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;) const &gt;)
+            <dt id="afa0c75d619739b1b7968b736ceb217cc">
+              using <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc-self">DiscoverTypes</a> = void(*)(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;) const &gt;&amp;)
             </dt>
             <dd>Function type for discovering new types from a trait.</dd>
           </dl>
@@ -92,13 +92,13 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
               <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#a66447fe41b93ad5cf505066fd47f11b9" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
             </dt>
             <dd>Registers a trait to be supported by the channel.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#a66447fe41b93ad5cf505066fd47f11b9" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
             </dt>
             <dd>Registers a trait to be supported by the channel.</dd>
             <dt>
@@ -132,7 +132,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
               <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#a66447fe41b93ad5cf505066fd47f11b9" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
             </h3>
             <p>Registers a trait to be supported by the channel.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -162,7 +162,7 @@
                 template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#a66447fe41b93ad5cf505066fd47f11b9" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
             </h3>
             <p>Registers a trait to be supported by the channel.</p>
             <table class="m-table m-fullwidth m-flat">
