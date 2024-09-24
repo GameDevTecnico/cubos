@@ -9,10 +9,10 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/tools/toolbox/plugin.hpp>
 #include <cubos/engine/voxels/model.hpp>
 
 #include "../asset_explorer/plugin.hpp"
-#include "../toolbox/plugin.hpp"
 
 using cubos::core::data::File;
 using cubos::core::data::FileSystem;
@@ -22,6 +22,7 @@ using cubos::engine::AnyAsset;
 using cubos::engine::AssetRead;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
+using cubos::engine::Toolbox;
 using cubos::engine::VoxelGrid;
 using cubos::engine::VoxelModel;
 using cubos::engine::VoxelPalette;
@@ -176,7 +177,7 @@ static void showImport(Assets& assets, cubos::core::ecs::EventReader<AssetSelect
     }
     if (assets.type(state.currentAsset).is<VoxelModel>())
     {
-        cubos::core::memory::Opt<AssetRead<VoxelModel>> voxelModelResult;
+        cubos::core::memory::Opt<AssetRead<VoxelModel>> voxelModelResult{};
         if (assetChanged)
         {
             voxelModelResult = assets.tryRead<VoxelModel>(state.currentAsset);
@@ -306,7 +307,8 @@ void tesseratos::importerPlugin(Cubos& cubos)
 {
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
-    cubos.depends(toolboxPlugin);
+    cubos.depends(cubos::engine::toolboxPlugin);
+
     cubos.resource<ImportState>();
 
     cubos.system("show Importer UI")

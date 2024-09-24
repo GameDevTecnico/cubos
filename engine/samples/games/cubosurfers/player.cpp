@@ -16,7 +16,7 @@ CUBOS_REFLECT_IMPL(Player)
         .build();
 }
 
-void playerPlugin(cubos::engine::Cubos& cubos)
+void playerPlugin(Cubos& cubos)
 {
     cubos.depends(inputPlugin);
     cubos.depends(transformPlugin);

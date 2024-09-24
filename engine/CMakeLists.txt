@@ -167,6 +167,22 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/shadow_atlas/shadow_atlas.cpp"
 	"src/render/shadow_atlas_rasterizer/plugin.cpp"
 	"src/render/shadow_atlas_rasterizer/shadow_atlas_rasterizer.cpp"
+
+	"src/tools/settings_inspector/plugin.cpp"
+	"src/tools/selection/plugin.cpp"
+	"src/tools/selection/selection.cpp"
+	"src/tools/world_inspector/plugin.cpp"
+	"src/tools/entity_inspector/plugin.cpp"
+	"src/tools/debug_camera/plugin.cpp"
+	"src/tools/toolbox/plugin.cpp"
+	"src/tools/toolbox/toolbox.cpp"
+	"src/tools/transform_gizmo/plugin.cpp"
+	"src/tools/metrics_panel/plugin.cpp"
+	"src/tools/collider_gizmos/plugin.cpp"
+	"src/tools/play_pause/plugin.cpp"
+	"src/tools/ecs_statistics/plugin.cpp"
+	"src/tools/console/plugin.cpp"
+	"src/tools/plugin.cpp"
 )
 
 # Create cubos engine
