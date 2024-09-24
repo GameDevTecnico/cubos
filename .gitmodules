@@ -34,3 +34,6 @@
 [submodule "engine/lib/stb_image"]
 	path = engine/lib/stb_image
 	url = https://github.com/GameDevTecnico/cubos-stb.git
+[submodule "core/lib/miniaudio"]
+	path = core/lib/miniaudio
+	url = https://github.com/mackron/miniaudio

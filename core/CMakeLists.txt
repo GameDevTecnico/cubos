@@ -221,6 +221,10 @@ target_link_libraries(cubos-core PRIVATE cpptrace::cpptrace)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
+add_library(miniaudio INTERFACE)
+target_include_directories(miniaudio SYSTEM INTERFACE "lib/miniaudio")
+target_link_libraries(cubos-core PUBLIC miniaudio)
+
 target_compile_definitions(cubos-core PUBLIC GLM_FORCE_SILENT_WARNINGS) # Needed for compilation to succeed on MSVC
 target_link_libraries(cubos-core PUBLIC glm::glm nlohmann_json::nlohmann_json ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE Threads::Threads)
