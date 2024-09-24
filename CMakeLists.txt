@@ -91,7 +91,7 @@ function(cubos_common_target_options target)
             /wd4335  # Disable warning about Mac file format
             /wd4702  # Disable warning about unreachable code
             /wd4251> # Disable warning about missing DLL interfaces
-            
+
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
             -Wall
             -Wextra
@@ -99,6 +99,9 @@ function(cubos_common_target_options target)
             -Wconversion
             -Werror
             -Wno-attributes>
+
+        $<$<CXX_COMPILER_ID:GNU>:
+            -Wno-maybe-uninitialized> # Causes false positives with optionals 
     )
 
     # Enable clang-tidy

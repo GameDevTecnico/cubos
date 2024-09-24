@@ -6,6 +6,8 @@
 #include <cubos/engine/render/voxels/palette.hpp>
 #include <cubos/engine/scene/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
+#include <cubos/engine/tools/plugin.hpp>
+#include <cubos/engine/utils/free_camera/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
 #include "obstacle.hpp"
@@ -23,6 +25,8 @@ int main(int argc, char** argv)
     Cubos cubos{argc, argv};
 
     cubos.plugin(defaultsPlugin);
+    cubos.plugin(freeCameraPlugin);
+    cubos.plugin(toolsPlugin);
     cubos.plugin(spawnerPlugin);
     cubos.plugin(obstaclePlugin);
     cubos.plugin(playerPlugin);

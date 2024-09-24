@@ -4,25 +4,14 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
+#include <cubos/engine/tools/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
 #include "asset_explorer/plugin.hpp"
-#include "collider_gizmos/plugin.hpp"
-#include "console/plugin.hpp"
-#include "debug_camera/plugin.hpp"
 #include "debugger/plugin.hpp"
-#include "ecs_statistics/plugin.hpp"
-#include "entity_inspector/plugin.hpp"
-#include "entity_selector/plugin.hpp"
 #include "importer/plugin.hpp"
-#include "metrics_panel/plugin.hpp"
-#include "play_pause/plugin.hpp"
 #include "scene_editor/plugin.hpp"
-#include "settings_inspector/plugin.hpp"
-#include "toolbox/plugin.hpp"
-#include "transform_gizmo/plugin.hpp"
 #include "voxel_palette_editor/plugin.hpp"
-#include "world_inspector/plugin.hpp"
 
 using namespace cubos::engine;
 using namespace tesseratos;
@@ -41,25 +30,14 @@ int main(int argc, char** argv)
     // The third block contains plugins which depend on plugins from the first and second blocks.
     // And so on.
 
-    cubos.plugin(toolboxPlugin);
-    cubos.plugin(entitySelectorPlugin);
+    cubos.plugin(cubos::engine::toolsPlugin);
 
     cubos.plugin(debuggerPlugin);
     cubos.plugin(assetExplorerPlugin);
-    cubos.plugin(entityInspectorPlugin);
-    cubos.plugin(worldInspectorPlugin);
-    cubos.plugin(debugCameraPlugin);
-    cubos.plugin(settingsInspectorPlugin);
-    cubos.plugin(metricsPanelPlugin);
-    cubos.plugin(colliderGizmosPlugin);
-    cubos.plugin(transformGizmoPlugin);
-    cubos.plugin(playPausePlugin);
-    cubos.plugin(ecsStatisticsPlugin);
-    cubos.plugin(consolePlugin);
-    cubos.plugin(importerPlugin);
 
     cubos.plugin(sceneEditorPlugin);
     cubos.plugin(voxelPaletteEditorPlugin);
+    cubos.plugin(importerPlugin);
 
     cubos.startupSystem("configure Assets plugin").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);

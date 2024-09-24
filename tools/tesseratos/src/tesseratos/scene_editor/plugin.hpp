@@ -15,14 +15,8 @@ namespace tesseratos
     /// @ingroup tesseratos
     /// @brief Adds a window to edit scenes and select entities in them.
     ///
-    /// @note Selected entities are registered in the @ref EntitySelector resource.
+    /// @note Selected entities are registered in the @ref Selection resource.
     /// @note The opened scene is identified by the @ref AssetSelectedEvent event.
-    ///
-    /// ## Dependencies
-    /// - @ref scene-plugin
-    /// - @ref tesseratos-asset-explorer-plugin
-    /// - @ref tesseratos-entity-selector-plugin
-    /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class

@@ -14,9 +14,6 @@ namespace tesseratos
     /// @defgroup tesseratos-voxel-palette-editor-plugin Palette editor
     /// @ingroup tesseratos
     /// @brief Allows the user to open and inspect/edit a palette asset.
-    ///
-    /// ## Dependencies
-    /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class

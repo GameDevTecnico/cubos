@@ -18,7 +18,7 @@ CUBOS_REFLECT_IMPL(Obstacle)
         .build();
 }
 
-void obstaclePlugin(cubos::engine::Cubos& cubos)
+void obstaclePlugin(Cubos& cubos)
 {
     cubos.depends(assetsPlugin);
     cubos.depends(transformPlugin);
