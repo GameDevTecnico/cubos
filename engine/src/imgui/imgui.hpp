@@ -14,7 +14,7 @@ namespace cubos::engine
     /// @param window The window to use.
     /// @param dpiScale Size factor by which to scale ImGui elements.
     /// @ingroup imgui-plugin
-    void imguiInitialize(core::io::Window window, float dpiScale);
+    void imguiInitialize(const core::io::Window& window, float dpiScale);
 
     /// @brief Shuts down ImGui.
     /// @note Should only be called once, after @ref initialize(), and no ImGui calls should be

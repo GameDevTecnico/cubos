@@ -98,8 +98,8 @@ static void parse(World& world, const char* searchBuffer, Query<Entity, Opt<cons
         if (isValid(query)) // TODO: ADD future checks for queries here
         {
             query.erase(std::remove(query.begin(), query.end(), ' '),
-                        query.end()); // remove all white-spaces from the query
-            if (isupper(query[0]))    // check if the query is for a component
+                        query.end());   // remove all white-spaces from the query
+            if (isupper(query[0]) != 0) // check if the query is for a component
             {
                 for (auto [componentType, string] : worldComponents)
                 {
@@ -191,10 +191,10 @@ void tesseratos::worldInspectorPlugin(Cubos& cubos)
 
             if (!ImGui::IsWindowCollapsed())
             {
-                std::string searchQuery = "";
-                float window_width = ImGui::GetContentRegionAvail().x;
+                std::string searchQuery{};
+                float windowWidth = ImGui::GetContentRegionAvail().x;
                 static char searchBuffer[512];
-                ImGui::PushItemWidth(window_width);
+                ImGui::PushItemWidth(windowWidth);
                 ImGui::InputText("##searchQuery", searchBuffer, sizeof(searchBuffer));
                 ImGui::PopItemWidth();
                 ImGui::Spacing();

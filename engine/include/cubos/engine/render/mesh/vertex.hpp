@@ -47,6 +47,6 @@ namespace cubos::engine
         /// @brief Generates a vertex mesh for the given voxel grid.
         /// @param grid Voxel grid.
         /// @param[out] vertices Vertices generated from the voxel grid.
-        static void generate(const VoxelGrid& grid, std::vector<RenderMeshVertex>& facverticeses);
+        static void generate(const VoxelGrid& grid, std::vector<RenderMeshVertex>& vertices);
     };
 } // namespace cubos::engine

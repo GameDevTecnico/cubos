@@ -36,7 +36,8 @@ TEST_CASE("net::UdpSocket")
 
     SUBCASE("send and receive")
     {
-        UdpSocket socket1, socket2;
+        UdpSocket socket1;
+        UdpSocket socket2;
         REQUIRE(socket1.bind(8080));
         REQUIRE(socket2.bind(8081));
 

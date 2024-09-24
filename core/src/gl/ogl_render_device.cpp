@@ -467,7 +467,7 @@ class OGLFramebuffer : public impl::Framebuffer
 {
 public:
     OGLFramebuffer(std::shared_ptr<bool> destroyed, GLuint id)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
     {
     }
@@ -536,7 +536,7 @@ class OGLPixelPackBuffer : public impl::PixelPackBuffer
 {
 public:
     OGLPixelPackBuffer(std::shared_ptr<bool> destroyed, GLuint id)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
     {
     }
@@ -569,7 +569,7 @@ class OGLSampler : public impl::Sampler
 {
 public:
     OGLSampler(std::shared_ptr<bool> destroyed, GLuint id)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
     {
     }
@@ -591,7 +591,7 @@ class OGLTexture1D : public impl::Texture1D
 {
 public:
     OGLTexture1D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
         , format(format)
@@ -632,7 +632,7 @@ class OGLTexture2D : public impl::Texture2D
 {
 public:
     OGLTexture2D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
         , format(format)
@@ -689,7 +689,7 @@ class OGLTexture2DArray : public impl::Texture2DArray
 {
 public:
     OGLTexture2DArray(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
         , format(format)
@@ -732,7 +732,7 @@ class OGLTexture3D : public impl::Texture3D
 {
 public:
     OGLTexture3D(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
         , format(format)
@@ -775,7 +775,7 @@ class OGLCubeMap : public impl::CubeMap
 {
 public:
     OGLCubeMap(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
         , format(format)
@@ -820,7 +820,7 @@ class OGLCubeMapArray : public impl::CubeMapArray
 {
 public:
     OGLCubeMapArray(std::shared_ptr<bool> destroyed, GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
         , internalFormat(internalFormat)
         , format(format)
@@ -863,7 +863,7 @@ class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
     OGLConstantBuffer(std::shared_ptr<bool> destroyed, GLuint id)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
     {
     }
@@ -902,7 +902,7 @@ class OGLIndexBuffer : public impl::IndexBuffer
 {
 public:
     OGLIndexBuffer(std::shared_ptr<bool> destroyed, GLuint id, GLenum format, std::size_t indexSz)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
         , format(format)
         , indexSz(indexSz)
@@ -939,7 +939,7 @@ class OGLVertexBuffer : public impl::VertexBuffer
 {
 public:
     OGLVertexBuffer(std::shared_ptr<bool> destroyed, GLuint id)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
     {
     }
@@ -980,7 +980,7 @@ class OGLVertexArray : public impl::VertexArray
 {
 public:
     OGLVertexArray(std::shared_ptr<bool> destroyed, GLuint id, const VertexBuffer* buffers)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , id(id)
     {
         for (std::size_t i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
@@ -1007,7 +1007,7 @@ class OGLShaderStage : public impl::ShaderStage
 {
 public:
     OGLShaderStage(std::shared_ptr<bool> destroyed, Stage type, GLuint shader)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , type(type)
         , shader(shader)
     {
@@ -1253,7 +1253,7 @@ class OGLShaderPipeline : public impl::ShaderPipeline
 {
 public:
     OGLShaderPipeline(std::shared_ptr<bool> destroyed, ShaderStage vs, ShaderStage ps, GLuint program)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , vs(std::move(vs))
         , ps(std::move(ps))
         , program(program)
@@ -1264,13 +1264,13 @@ public:
     }
 
     OGLShaderPipeline(std::shared_ptr<bool> destroyed, ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
-        : OGLShaderPipeline(destroyed, std::move(vs), std::move(ps), program)
+        : OGLShaderPipeline(std::move(destroyed), std::move(vs), std::move(ps), program)
     {
         this->gs = std::move(gs);
     }
 
     OGLShaderPipeline(std::shared_ptr<bool> destroyed, ShaderStage cs, GLuint program)
-        : destroyed(destroyed)
+        : destroyed(std::move(destroyed))
         , cs(std::move(cs))
         , program(program)
     {
@@ -2215,7 +2215,7 @@ PixelPackBuffer OGLRenderDevice::createPixelPackBuffer(std::size_t size)
     GLuint id;
     glGenBuffers(1, &id);
     glBindBuffer(GL_PIXEL_PACK_BUFFER, id);
-    glBufferData(GL_PIXEL_PACK_BUFFER, static_cast<GLsizeiptr>(size), NULL, GL_STREAM_COPY);
+    glBufferData(GL_PIXEL_PACK_BUFFER, static_cast<GLsizeiptr>(size), nullptr, GL_STREAM_COPY);
 
     // Check errors
     GLenum glErr = glGetError();

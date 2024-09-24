@@ -316,22 +316,22 @@ TEST_CASE("ecs::Cubos")
     {
         using cubos::core::reflection::reflect;
 
-        static constexpr auto removedPlugin = [](Cubos& cubos) { cubos.component<long>(); };
-        static constexpr auto dependencyPlugin = [](Cubos&) {};
-        static constexpr auto subPlugin = [](Cubos& cubos) { cubos.component<int>(); };
-        static constexpr auto plugin = [](Cubos& cubos) {
-            cubos.depends(dependencyPlugin);
-            cubos.plugin(subPlugin);
+        static constexpr auto RemovedPlugin = [](Cubos& cubos) { cubos.component<long>(); };
+        static constexpr auto DependencyPlugin = [](Cubos&) {};
+        static constexpr auto SubPlugin = [](Cubos& cubos) { cubos.component<int>(); };
+        static constexpr auto Plugin = [](Cubos& cubos) {
+            cubos.depends(DependencyPlugin);
+            cubos.plugin(SubPlugin);
         };
 
-        cubos.plugin(removedPlugin);
+        cubos.plugin(RemovedPlugin);
 
         cubos.startupSystem("add plugins").call([](World& world, Plugins plugins, Commands cmds) {
             REQUIRE(world.types().contains(reflect<long>()));
             REQUIRE_FALSE(world.types().contains(reflect<int>()));
-            plugins.add(dependencyPlugin);
-            plugins.add(plugin);
-            plugins.remove(removedPlugin);
+            plugins.add(DependencyPlugin);
+            plugins.add(Plugin);
+            plugins.remove(RemovedPlugin);
 
             cmds.create().add<long>(0);
         });

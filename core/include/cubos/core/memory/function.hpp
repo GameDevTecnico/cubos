@@ -160,7 +160,11 @@ namespace cubos::core::memory
         template <typename F>
         static void* (*getCopier())(const void*)
         {
-            constexpr bool IsCopyable = requires(const F& f) { new F(f); };
+            constexpr bool IsCopyable = requires(const F& f)
+            {
+                new F(f);
+            };
+
             if constexpr (IsCopyable)
             {
                 return [](const void* function) -> void* { return new F(*static_cast<const F*>(function)); };
@@ -172,9 +176,9 @@ namespace cubos::core::memory
         }
 
         void* mFunction{nullptr};
-        I mInvoke;
-        void (*mFree)(void*);
-        void* (*mCopy)(const void*);
+        I mInvoke{};
+        void (*mFree)(void*){};
+        void* (*mCopy)(const void*){};
     };
 
     template <typename R, typename... Ts>

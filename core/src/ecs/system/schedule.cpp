@@ -120,7 +120,7 @@ bool Schedule::order(NodeId before, NodeId after)
         return true;
     }
 
-    if (this->ordered(after, before))
+    if (this->ordered(after, before)) // NOLINT(readability-suspicious-call-argument)
     {
         // Would form a cycle.
         CUBOS_ERROR("Making node {} run before {} would form a cycle, as {} must already run before {}", before.inner,

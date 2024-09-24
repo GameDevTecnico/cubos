@@ -22,7 +22,7 @@ TEST_CASE("net::Tcp*")
         uint16_t svPort = 8080;
         std::latch svLatch{1};
 
-        std::jthread serverThread{[&svAddr, &svPort, &svLatch]() {
+        std::thread serverThread{[&svAddr, &svPort, &svLatch]() {
             TcpListener listener;
             REQUIRE(listener.listen(svAddr, svPort, 1));
             REQUIRE(listener.valid());
@@ -62,6 +62,7 @@ TEST_CASE("net::Tcp*")
 
         stream.disconnect();
         REQUIRE_FALSE(stream.valid());
+        serverThread.join();
     }
 
     SUBCASE("empty tcp stream")

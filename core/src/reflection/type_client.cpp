@@ -27,12 +27,13 @@ void TypeClient::addTrait(bool isStructural, const Type& traitType, Deserialize 
     auto& trait = mTraits.at(traitType);
 
     // Re-discover types that are already known and have the new trait.
+    memory::Function<void(const Type&) const> addType = [this](const Type& type) { this->addType(type); };
     auto oldKnownTypes = mKnownTypes;
     for (auto [type, _] : oldKnownTypes)
     {
         if (type->has(traitType))
         {
-            trait.discoverTypes(*type, [this](const Type& type) { this->addType(type); });
+            trait.discoverTypes(*type, addType);
         }
     }
 }
@@ -52,11 +53,12 @@ void TypeClient::addType(const Type& type)
     mKnownTypes.insert(type);
 
     // Add types which can be discovered from the new type.
+    memory::Function<void(const Type&) const> addType = [this](const Type& type) { this->addType(type); };
     for (const auto& [traitType, trait] : mTraits)
     {
         if (type.has(*traitType))
         {
-            trait.discoverTypes(type, [this](const Type& type) { this->addType(type); });
+            trait.discoverTypes(type, addType);
         }
     }
 }

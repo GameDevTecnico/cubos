@@ -23,7 +23,7 @@ using cubos::core::net::Address;
 using cubos::core::net::TcpListener;
 using cubos::core::net::TcpStream;
 
-TcpListener::TcpListener()
+TcpListener::TcpListener() // NOLINT(modernize-use-equals-default)
 {
 #ifdef _WIN32
     WSADATA wsa;
@@ -135,9 +135,7 @@ bool TcpListener::create()
         CUBOS_ERROR("Failed to create TCP socket, got error {}", logSystemError());
         return false;
     }
-    else
-    {
-        this->setBlocking(mBlocking);
-        return true;
-    }
+
+    this->setBlocking(mBlocking);
+    return true;
 }

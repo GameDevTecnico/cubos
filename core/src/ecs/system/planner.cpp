@@ -23,13 +23,13 @@ auto Planner::add() -> TagId
 
 auto Planner::add(std::string name) -> TagId
 {
-    mTags.push_back(TagData{.name = name});
+    mTags.push_back(TagData{.name = memory::move(name)});
     return {mTags.size() - 1};
 }
 
 auto Planner::add(std::string name, SystemId systemId) -> TagId
 {
-    mTags.push_back(TagData{.name = name, .systemId = systemId});
+    mTags.push_back(TagData{.name = memory::move(name), .systemId = systemId});
     return {mTags.size() - 1};
 }
 
@@ -370,7 +370,7 @@ void Planner::makeSystemOrRepeatNode(TagId tagId, Schedule& schedule, const std:
         return;
     }
 
-    auto& tag = tags[tagId.inner];
+    const auto& tag = tags[tagId.inner];
 
     // Get the repeating node the new node will belong to.
     Opt<Schedule::NodeId> repeatingNodeId{};

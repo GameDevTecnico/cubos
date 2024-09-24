@@ -65,8 +65,9 @@ void AnyVector::reserve(std::size_t capacity)
     }
 
     // Allocate a new buffer, move the values there and then free the old one.
-    void* data = operator new(capacity * mStride, static_cast<std::align_val_t>(mConstructibleTrait->alignment()),
-                              std::nothrow);
+    auto size = capacity * mStride;
+    auto alignment = static_cast<std::align_val_t>(mConstructibleTrait->alignment());
+    void* data = operator new(size, alignment, std::nothrow);
     CUBOS_ASSERT(data != nullptr, "Vector memory allocation failed");
     for (std::size_t i = 0; i < mSize; ++i)
     {

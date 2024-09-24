@@ -114,10 +114,10 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
                     return false;
                 }
 
-                const auto& type = registry.at(typeName);
-                if (type.has<ConstructibleTrait>() && type.get<ConstructibleTrait>().hasDefaultConstruct())
+                const auto& fieldType = registry.at(typeName);
+                if (fieldType.has<ConstructibleTrait>() && fieldType.get<ConstructibleTrait>().hasDefaultConstruct())
                 {
-                    trait.addField(registry.at(typeName), fieldName, new FieldsTraitAddressOf(fieldName));
+                    trait.addField(fieldType, fieldName, new FieldsTraitAddressOf(fieldName));
                 }
                 else
                 {
@@ -140,7 +140,7 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
 
             return true;
         },
-        [](const Type& type, memory::Function<void(const Type&) const> addType) {
+        [](const Type& type, memory::Function<void(const Type&) const>& addType) {
             for (const auto& field : type.get<FieldsTrait>())
             {
                 addType(field.type());
@@ -207,7 +207,7 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
 
             return true;
         },
-        [](const Type& type, memory::Function<void(const Type&) const> addType) {
+        [](const Type& type, memory::Function<void(const Type&) const>& addType) {
             addType(type.get<ArrayTrait>().elementType());
         });
 
@@ -353,7 +353,7 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
 
             return true;
         },
-        [](const Type& type, memory::Function<void(const Type&) const> addType) {
+        [](const Type& type, memory::Function<void(const Type&) const>& addType) {
             addType(type.get<DictionaryTrait>().keyType());
             addType(type.get<DictionaryTrait>().valueType());
         });
@@ -381,7 +381,7 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
 
             return true;
         },
-        [](const Type&, memory::Function<void(const Type&) const>) {});
+        [](const Type&, memory::Function<void(const Type&) const>&) {});
 
     client.addTrait<MaskTrait>(
         /*isStructural=*/true,
@@ -399,16 +399,20 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
             for (uint64_t i = 0; i < static_cast<uint64_t>(bits.size()); ++i)
             {
                 trait.addBit(
-                    bits[i], [i](const void* value) { return (*static_cast<const uint64_t*>(value) & (1 << i)) != 0; },
-                    [i](void* value) { *static_cast<uint64_t*>(value) |= (1 << i); },
-                    [i](void* value) { *static_cast<uint64_t*>(value) &= ~(1 << i); });
+                    bits[i],
+                    [i](const void* value) {
+                        return (*static_cast<const uint64_t*>(value) & (static_cast<uint64_t>(1) << i)) !=
+                               static_cast<uint64_t>(0);
+                    },
+                    [i](void* value) { *static_cast<uint64_t*>(value) |= (static_cast<uint64_t>(1) << i); },
+                    [i](void* value) { *static_cast<uint64_t*>(value) &= ~(static_cast<uint64_t>(1) << i); });
             }
             type.with(memory::move(trait));
             type.with(TypeClient::RemoteTrait::createBasic<uint64_t>());
 
             return true;
         },
-        [](const Type&, memory::Function<void(const Type&) const>) {});
+        [](const Type&, memory::Function<void(const Type&) const>&) {});
 
     client.addTrait<StringConversionTrait>(
         /*isStructural=*/true,
@@ -424,7 +428,7 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
 
             return true;
         },
-        [](const Type&, memory::Function<void(const Type&) const>) {});
+        [](const Type&, memory::Function<void(const Type&) const>&) {});
 
     // Add non-structural traits.
 
@@ -448,7 +452,7 @@ void cubos::core::reflection::setupTypeClientDefaults(TypeClient& client)
 
             return true;
         },
-        [](const Type& type, memory::Function<void(const Type&) const> addType) {
+        [](const Type& type, memory::Function<void(const Type&) const>& addType) {
             addType(type.get<InheritsTrait>().base());
         });
 }
@@ -492,7 +496,7 @@ void cubos::core::reflection::setupTypeServerDefaults(TypeServer& server)
 
             return true;
         },
-        [](const Type& type, memory::Function<void(const Type&) const> addType) {
+        [](const Type& type, memory::Function<void(const Type&) const>& addType) {
             for (const auto& field : type.get<FieldsTrait>())
             {
                 addType(field.type());
@@ -501,7 +505,7 @@ void cubos::core::reflection::setupTypeServerDefaults(TypeServer& server)
 
     server.addTrait<ArrayTrait>([](data::Serializer& ser, const Type& type,
                                    bool) { return ser.write(type.get<ArrayTrait>().elementType().name()); },
-                                [](const Type& type, memory::Function<void(const Type&) const> addType) {
+                                [](const Type& type, memory::Function<void(const Type&) const>& addType) {
                                     addType(type.get<ArrayTrait>().elementType());
                                 });
 
@@ -510,7 +514,7 @@ void cubos::core::reflection::setupTypeServerDefaults(TypeServer& server)
             const auto& trait = type.get<DictionaryTrait>();
             return ser.write(trait.keyType().name()) && ser.write(trait.valueType().name());
         },
-        [](const Type& type, memory::Function<void(const Type&) const> addType) {
+        [](const Type& type, memory::Function<void(const Type&) const>& addType) {
             addType(type.get<DictionaryTrait>().keyType());
             addType(type.get<DictionaryTrait>().valueType());
         });
@@ -525,7 +529,7 @@ void cubos::core::reflection::setupTypeServerDefaults(TypeServer& server)
             }
             return ser.write(variants);
         },
-        [](const Type&, memory::Function<void(const Type&) const>) {});
+        [](const Type&, memory::Function<void(const Type&) const>&) {});
 
     server.addTrait<MaskTrait>(
         [](data::Serializer& ser, const Type& type, bool) {
@@ -537,10 +541,10 @@ void cubos::core::reflection::setupTypeServerDefaults(TypeServer& server)
             }
             return ser.write(bits);
         },
-        [](const Type&, memory::Function<void(const Type&) const>) {});
+        [](const Type&, memory::Function<void(const Type&) const>&) {});
 
     server.addTrait<StringConversionTrait>([](data::Serializer&, const Type&, bool) { return true; },
-                                           [](const Type&, memory::Function<void(const Type&) const>) {});
+                                           [](const Type&, memory::Function<void(const Type&) const>&) {});
 
     // Add non-structural traits.
 
@@ -549,7 +553,7 @@ void cubos::core::reflection::setupTypeServerDefaults(TypeServer& server)
             const auto& trait = type.get<InheritsTrait>();
             return ser.write(trait.base().name());
         },
-        [](const Type& type, memory::Function<void(const Type&) const> addType) {
+        [](const Type& type, memory::Function<void(const Type&) const>& addType) {
             addType(type.get<InheritsTrait>().base());
         });
 }
