@@ -117,19 +117,19 @@ MaskTrait::Bit::Bit(std::string name, Tester tester, Setter setter, Clearer clea
 {
 }
 
-bool MaskTrait::Bit::test(const void* instance) const
+bool MaskTrait::Bit::test(const void* value) const
 {
-    return mTester(instance);
+    return mTester(value);
 }
 
-void MaskTrait::Bit::set(void* instance) const
+void MaskTrait::Bit::set(void* value) const
 {
-    mSetter(instance);
+    mSetter(value);
 }
 
-void MaskTrait::Bit::clear(void* instance) const
+void MaskTrait::Bit::clear(void* value) const
 {
-    mClearer(instance);
+    mClearer(value);
 }
 
 const std::string& MaskTrait::Bit::name() const

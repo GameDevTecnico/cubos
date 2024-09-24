@@ -156,7 +156,7 @@ TEST_CASE("reflection::TypeClient & reflection::TypeServer")
     std::latch serverLatch{1};
     std::latch clientLatch{1};
 
-    std::jthread serverThread{[&]() {
+    std::thread serverThread{[&]() {
         TcpListener listener{};
         REQUIRE(listener.listen(Address::LocalHost, 8888));
         serverLatch.count_down(); // Notify client that server is ready.
@@ -242,4 +242,5 @@ TEST_CASE("reflection::TypeClient & reflection::TypeServer")
 
     stream.disconnect();
     clientLatch.count_down(); // Notify server that client is disconnected.
+    serverThread.join();
 }

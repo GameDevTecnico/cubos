@@ -156,7 +156,7 @@ OALAudioDevice::OALAudioDevice(const std::string& specifier)
 #endif // WITH_OPENAL
 }
 
-OALAudioDevice::~OALAudioDevice()
+OALAudioDevice::~OALAudioDevice() // NOLINT(modernize-use-equals-default)
 {
 #ifdef WITH_OPENAL
     auto* context = alcGetCurrentContext();

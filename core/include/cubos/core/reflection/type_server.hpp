@@ -46,7 +46,7 @@ namespace cubos::core::reflection
         using Serialize = memory::Function<bool(data::Serializer&, const Type&, bool) const>;
 
         /// @brief Function type for discovering new types from a trait.
-        using DiscoverTypes = void (*)(const Type&, memory::Function<void(const Type&) const>);
+        using DiscoverTypes = void (*)(const Type&, memory::Function<void(const Type&) const>&);
 
         /// @brief Default constructs.
         TypeServer();

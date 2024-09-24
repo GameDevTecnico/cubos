@@ -51,7 +51,7 @@ namespace cubos::core::reflection
         using Deserialize = memory::Function<bool(const TypeRegistry&, Type&, data::Deserializer&) const>;
 
         /// @brief Function type for discovering new types from a trait.
-        using DiscoverTypes = void (*)(const Type&, memory::Function<void(const Type&) const>);
+        using DiscoverTypes = void (*)(const Type&, memory::Function<void(const Type&) const>&);
 
         /// @brief Default constructor.
         TypeClient();

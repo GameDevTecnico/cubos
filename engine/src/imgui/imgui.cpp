@@ -275,7 +275,7 @@ void main()
     bd->ibSize = 0;
 }
 
-void cubos::engine::imguiInitialize(io::Window window, float dpiScale)
+void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale)
 {
     // Initialize ImGui
     IMGUI_CHECKVERSION();

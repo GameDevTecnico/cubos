@@ -158,7 +158,7 @@ bool BinaryDeserializer::decompose(const Type& type, void* value)
             return false;
         }
 
-        for (auto& bit : trait)
+        for (const auto& bit : trait)
         {
             bit.clear(value);
         }

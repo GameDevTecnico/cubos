@@ -28,12 +28,13 @@ void TypeServer::addTrait(const Type& traitType, Serialize serialize, DiscoverTy
     const auto& trait = mTraits.at(traitType);
 
     // Re-discover types for all known types that have the new trait.
+    memory::Function<void(const Type&) const> recurse = [this](const Type& type) { this->addType(type); };
     auto oldKnownTypes = mKnownTypes;
     for (auto [type, _] : oldKnownTypes)
     {
         if (type->has(traitType))
         {
-            trait.discoverTypes(*type, [this](const Type& type) { this->addType(type); });
+            trait.discoverTypes(*type, recurse);
         }
     }
 }
@@ -49,11 +50,12 @@ void TypeServer::addType(const Type& type)
     mKnownTypes.insert(type);
 
     // Add types which can be discovered from the new type.
+    memory::Function<void(const Type&) const> recurse = [this](const Type& type) { this->addType(type); };
     for (const auto& [traitType, trait] : mTraits)
     {
         if (type.has(*traitType))
         {
-            trait.discoverTypes(type, [this](const Type& type) { this->addType(type); });
+            trait.discoverTypes(type, recurse);
         }
     }
 
@@ -190,10 +192,8 @@ Opt<TypeServer::Connection> TypeServer::connect(memory::Stream& stream)
             CUBOS_TRACE("Skipping type {} as it is already known by the client", type->name());
             continue;
         }
-        else
-        {
-            CUBOS_TRACE("Sharing type {}", type->name());
-        }
+
+        CUBOS_TRACE("Sharing type {}", type->name());
 
         if (!ser.write(type->name()))
         {
@@ -218,7 +218,7 @@ Opt<TypeServer::Connection> TypeServer::connect(memory::Stream& stream)
         {
             auto& trait = mTraits.at(*structuralTraitType);
 
-            trait.discoverTypes(*type, [&](const Type& discoveredType) {
+            memory::Function<void(const Type&) const> findNonStructured = [&](const Type& discoveredType) {
                 if (structuralTraitType != nullptr && !structuredTypes.contains(discoveredType))
                 {
                     CUBOS_WARN("Type {} discovered from type {} through structural trait {} isn't structured, causing "
@@ -226,7 +226,8 @@ Opt<TypeServer::Connection> TypeServer::connect(memory::Stream& stream)
                                discoveredType.name(), type->name(), structuralTraitType->name(), type->name());
                     structuralTraitType = nullptr;
                 }
-            });
+            };
+            trait.discoverTypes(*type, findNonStructured);
         }
 
         // Count how many traits we'll be sending.

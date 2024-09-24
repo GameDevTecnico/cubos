@@ -46,6 +46,18 @@ namespace cubos::engine
         /// @brief Constructs an empty palette.
         VoxelPalette() = default;
 
+        /// @brief Copy constructs.
+        VoxelPalette(const VoxelPalette&) = default;
+
+        /// @brief Move constructs.
+        VoxelPalette(VoxelPalette&&) noexcept = default;
+
+        /// @brief Copy assigns.
+        VoxelPalette& operator=(const VoxelPalette&) = default;
+
+        /// @brief Move assigns.
+        VoxelPalette& operator=(VoxelPalette&&) noexcept = default;
+
         /// @brief Gets a pointer to the array of materials on the palette.
         /// @note The first element in the array corresponds to index 1, as index 0 is reserved.
         /// @return Pointer to the array of materials on the palette.

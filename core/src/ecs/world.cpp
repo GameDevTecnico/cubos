@@ -1198,7 +1198,7 @@ void World::ConstRelations::Iterator::advance()
             for (; mTableIndex < tables.size(); ++mTableIndex)
             {
                 mTableId = tables[mTableIndex];
-                auto& table = registry.at(mTableId);
+                const auto& table = registry.at(mTableId);
 
                 if (mRow >= table.size())
                 {
