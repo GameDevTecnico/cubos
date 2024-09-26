@@ -89,7 +89,8 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac1fb8fc2cf6a5636ee6787e1400fd2a8" class="m-doc">createBuffer</a>(</span><span class="m-doc-wrap">const std::string&amp; filePath) -&gt; <a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5882a4579bb6e4e39af02595f6ccc0a9" class="m-doc">createBuffer</a>(</span><span class="m-doc-wrap">const void* data,
+              size_t dataSize) -&gt; <a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Creates a new audio buffer.</dd>
             <dt>
@@ -148,24 +149,16 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac1fb8fc2cf6a5636ee6787e1400fd2a8"><div>
+          <section class="m-doc-details" id="a5882a4579bb6e4e39af02595f6ccc0a9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1fb8fc2cf6a5636ee6787e1400fd2a8" class="m-doc-self">createBuffer</a>(</span><span class="m-doc-wrap">const std::string&amp; filePath) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> cubos::<wbr />core::<wbr />al::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5882a4579bb6e4e39af02595f6ccc0a9" class="m-doc-self">createBuffer</a>(</span><span class="m-doc-wrap">const void* data,
+              size_t dataSize) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Creates a new audio buffer.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">filePath</td>
-                  <td>File path to create buffer from.</td>
-                </tr>
-              </tbody>
               <tfoot>
                 <tr>
-                  <th>Returns</th>
+                  <th style="width: 1%">Returns</th>
                   <td>Handle of the new buffer.</td>
                 </tr>
               </tfoot>
