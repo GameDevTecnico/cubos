@@ -28,11 +28,13 @@ cubos_common_target_options(tesseratos)
 
 if (TESSERATOS_DISTRIBUTE)
 	target_compile_definitions(tesseratos PRIVATE
+		TEMPLATES_PATH="templates"
 		APP_ASSETS_PATH="assets"
 		BUILTIN_ASSETS_PATH="builtin"
 	)
 else()
 	target_compile_definitions(tesseratos PRIVATE
+		TEMPLATES_PATH="${CMAKE_CURRENT_SOURCE_DIR}/templates"
 		APP_ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets"
 		BUILTIN_ASSETS_PATH="${CUBOS_ENGINE_ASSETS_PATH}"
 	)
@@ -42,6 +44,7 @@ endif()
 
 if(TESSERATOS_DISTRIBUTE)
 	install(TARGETS tesseratos RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+	install(DIRECTORY templates/ DESTINATION ${CMAKE_INSTALL_DATADIR}/tesseratos/templates)
 	install(DIRECTORY assets/ DESTINATION ${CMAKE_INSTALL_DATADIR}/tesseratos/assets)
     install(DIRECTORY ${CUBOS_ENGINE_ASSETS_PATH}/ DESTINATION ${CMAKE_INSTALL_DATADIR}/tesseratos/builtin)
 endif()
