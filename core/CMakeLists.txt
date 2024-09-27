@@ -217,6 +217,9 @@ add_subdirectory(lib/json)
 add_subdirectory(lib/stduuid)
 target_link_libraries(cubos-core PUBLIC stduuid)
 
+add_subdirectory(lib/cpptrace)
+target_link_libraries(cubos-core PRIVATE cpptrace::cpptrace)
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
