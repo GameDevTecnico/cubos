@@ -33,6 +33,7 @@ set(CUBOS_CORE_SOURCE
 	"src/tel/level.cpp"
 
 	"src/thread/pool.cpp"
+	"src/thread/process.cpp"
 	"src/thread/task.cpp"
 
 	"src/memory/stream.cpp"
