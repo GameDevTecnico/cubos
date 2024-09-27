@@ -16,6 +16,7 @@ using cubos::core::memory::Stream;
 static void assertInitializationFailed(StandardArchive& archive)
 {
     REQUIRE_FALSE(archive.directory(1)); // Independently of it was created as a directory or not.
+    REQUIRE_FALSE(archive.initialized());
     REQUIRE(archive.parent(1) == 0);
     REQUIRE(archive.sibling(1) == 0);
     REQUIRE(archive.child(1) == 0);
@@ -62,6 +63,7 @@ TEST_CASE("data::StandardArchive") // NOLINT(readability-function-size)
 
         // Check if the structure is correct.
         CHECK(archive.readOnly() == readOnly);
+        CHECK(archive.initialized());
         CHECK(archive.parent(1) == 0);
         CHECK(archive.sibling(1) == 0);
         CHECK(archive.child(1) == 0);
@@ -133,6 +135,7 @@ TEST_CASE("data::StandardArchive") // NOLINT(readability-function-size)
         {
             archive = std::make_unique<StandardArchive>(path, true, false);
             CHECK_FALSE(archive->readOnly());
+            CHECK(archive->initialized());
 
             // Check initial structure.
             CHECK(archive->parent(1) == 0);
@@ -220,6 +223,7 @@ TEST_CASE("data::StandardArchive") // NOLINT(readability-function-size)
             // Create a read-only archive on the generated directory.
             archive = std::make_unique<StandardArchive>(path, true, true);
             CHECK(archive->readOnly());
+            CHECK(archive->initialized());
 
             // Check root.
             CHECK(archive->directory(1));
