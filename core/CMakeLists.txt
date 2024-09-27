@@ -159,7 +159,16 @@ if(BUILD_CORE_SHARED)
 else()
 	add_library(cubos-core STATIC ${CUBOS_CORE_SOURCE})
 endif()
-target_include_directories(cubos-core PUBLIC "include")
+
+# Alias so that we can use cubos::core inside the build tree
+add_library(cubos::core ALIAS cubos-core)
+set_target_properties(cubos-core PROPERTIES EXPORT_NAME core)
+set(CUBOS_CORE_TARGETS cubos-core PARENT_SCOPE)
+
+target_include_directories(cubos-core PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+	$<INSTALL_INTERFACE:include/cubos-core>
+)
 target_compile_definitions(cubos-core PUBLIC
 	-DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS}
 )
@@ -175,6 +184,7 @@ if(WITH_OPENGL)
 	endif()
 	target_link_libraries(cubos-core PRIVATE glad)
 	target_compile_definitions(cubos-core PRIVATE WITH_OPENGL GLAD_GLAPI_EXPORT GLAD_GLAPI_EXPORT_BUILD)
+	set(CUBOS_CORE_TARGETS ${CUBOS_CORE_TARGETS} glad PARENT_SCOPE)
 endif()
 
 if(WITH_GLFW)
@@ -183,6 +193,7 @@ if(WITH_GLFW)
 		set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 		set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 		add_subdirectory(lib/glfw)
+		set(CUBOS_CORE_TARGETS ${CUBOS_CORE_TARGETS} glfw PARENT_SCOPE)
 	else()
 		find_package(glfw3 REQUIRED)
 	endif()
@@ -199,18 +210,22 @@ if(WITH_OPENAL)
 	target_include_directories(cubos-core PRIVATE lib/openal-soft/include)
 	target_link_libraries(cubos-core PRIVATE OpenAL)
 	target_compile_definitions(cubos-core PRIVATE WITH_OPENAL)
+	set(CUBOS_CORE_TARGETS ${CUBOS_CORE_TARGETS} OpenAL PARENT_SCOPE)
 endif()
 
 if(GLM_USE_SUBMODULE)
 	add_subdirectory(lib/glm SYSTEM)
+	set(CUBOS_CORE_TARGETS ${CUBOS_CORE_TARGETS} glm PARENT_SCOPE)
 else()
 	find_package(glm REQUIRED)
 endif()
 
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 add_subdirectory(lib/json)
+set(CUBOS_CORE_TARGETS ${CUBOS_CORE_TARGETS} nlohmann_json PARENT_SCOPE)
 
 add_subdirectory(lib/stduuid)
+set(CUBOS_CORE_TARGETS ${CUBOS_CORE_TARGETS} stduuid PARENT_SCOPE)
 target_link_libraries(cubos-core PUBLIC stduuid)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)

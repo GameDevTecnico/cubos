@@ -176,7 +176,15 @@ else()
 	add_library(cubos-engine STATIC ${CUBOS_ENGINE_SOURCE})
 endif()
 
-target_include_directories(cubos-engine PUBLIC "include")
+# Alias so that we can use cubos::engine inside the build tree
+add_library(cubos::engine ALIAS cubos-engine)
+set_target_properties(cubos-engine PROPERTIES EXPORT_NAME engine)
+set(CUBOS_ENGINE_TARGETS cubos-engine PARENT_SCOPE)
+
+target_include_directories(cubos-engine PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+	$<INSTALL_INTERFACE:include/cubos-engine>
+)
 target_link_libraries(cubos-engine PUBLIC cubos-core)
 target_compile_definitions(cubos-engine PRIVATE CUBOS_BUILTIN_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
 cubos_common_target_options(cubos-engine)
@@ -199,16 +207,23 @@ set(IMGUI_SOURCES
 	"lib/implot/implot_demo.cpp"
 )
 add_library(imgui STATIC ${IMGUI_SOURCES})
+set(CUBOS_ENGINE_TARGETS ${CUBOS_ENGINE_TARGETS} imgui PARENT_SCOPE)
 set_property(TARGET imgui PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_include_directories(imgui PUBLIC
-	"lib/imgui"
-	"lib/imgui/misc/cpp"
-	"lib/implot"
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib/imgui>
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib/imgui/misc/cpp>
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib/implot>
+	$<INSTALL_INTERFACE:include/imgui>
 )
 target_link_libraries(cubos-engine PUBLIC imgui)
 
 add_library(stb_image INTERFACE)
-target_include_directories(stb_image SYSTEM INTERFACE "lib/stb_image")
+set(CUBOS_ENGINE_TARGETS ${CUBOS_ENGINE_TARGETS} stb_image PARENT_SCOPE)
+target_include_directories(stb_image SYSTEM INTERFACE
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib/stb_image>
+	$<INSTALL_INTERFACE:include/stb_image>
+)
+
 target_link_libraries(cubos-engine PUBLIC stb_image)
 
 # Add engine tests
