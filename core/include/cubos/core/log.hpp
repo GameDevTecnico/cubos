@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <cstdlib>
-
 #include <cubos/core/memory/buffer_stream.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
@@ -172,7 +170,7 @@
         {                                                                                                              \
             CUBOS_CRITICAL("" __VA_ARGS__);                                                                            \
         }                                                                                                              \
-        std::abort();                                                                                                  \
+        ::cubos::core::abort();                                                                                        \
     } while (false)
 
 /// @brief Marks a code path as supposedly unreachable. Aborts the program when reached.
@@ -238,6 +236,10 @@
 
 namespace cubos::core
 {
+    /// @brief Aborts the program and prints a pretty stack trace.
+    /// @ingroup core
+    [[noreturn]] void abort();
+
     /// @brief Singleton which holds the logging state.
     /// @ingroup core
     class CUBOS_CORE_API Logger final
