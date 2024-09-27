@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Global telemetry level (for tracing/logging) (#1265, **@roby2014**).
 - Spans for tracing and profiling (#1265, **@roby2014**).
 - Simple cross-platform multi-process utilities (**@RiscadoA**).
+- Project opening and closing on Tesseratos (#1218, **@RiscadoA**).
 
 ### Changed
 
