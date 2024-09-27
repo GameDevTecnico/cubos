@@ -247,7 +247,7 @@ static void addressToGL(AddressMode mode, GLenum& address)
         address = GL_CLAMP_TO_BORDER;
         break;
     default:
-        abort(); // Invalid addressing mode
+        CUBOS_FAIL("Invalid addressing mode");
     }
 }
 
@@ -275,7 +275,7 @@ static void cubeFaceToGL(CubeFace cubeFace, GLenum& face)
         face = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
         break;
     default:
-        abort(); // Invalid enum
+        CUBOS_FAIL("Invalid enum");
     }
 }
 
@@ -294,7 +294,7 @@ static void faceToGL(Face face, GLenum& glFace)
         glFace = GL_FRONT_AND_BACK;
         break;
     default:
-        abort(); // Invalid enum
+        CUBOS_FAIL("Invalid enum");
     }
 }
 
@@ -310,7 +310,7 @@ static void windingToGL(Winding winding, GLenum& glWinding)
         glWinding = GL_CCW;
         break;
     default:
-        abort(); // Invalid enum
+        CUBOS_FAIL("Invalid enum");
     }
 }
 
@@ -326,7 +326,7 @@ static void rasterModeToGL(RasterMode rasterMode, GLenum& polygonMode)
         polygonMode = GL_LINE;
         break;
     default:
-        abort(); // Invalid enum
+        CUBOS_FAIL("Invalid enum");
     }
 }
 
@@ -360,7 +360,7 @@ static void compareToGL(Compare compare, GLenum& glCompare)
         glCompare = GL_ALWAYS;
         break;
     default:
-        abort(); // Invalid enum
+        CUBOS_FAIL("Invalid enum");
     }
 }
 
@@ -394,7 +394,7 @@ static void stencilActionToGL(StencilAction action, GLenum& glAction)
         glAction = GL_INVERT;
         break;
     default:
-        abort(); // Invalid enum
+        CUBOS_FAIL("Invalid enum");
     }
 }
 
@@ -434,7 +434,7 @@ static void blendFactorToGL(BlendFactor blendFactor, GLenum& glBlendFactor)
         glBlendFactor = GL_ONE_MINUS_DST_ALPHA;
         break;
     default:
-        abort(); // Invalid enum
+        CUBOS_FAIL("Invalid enum");
     }
 }
 
@@ -459,7 +459,7 @@ static void blendOpToGL(BlendOp blendOp, GLenum& glBlendOp)
         glBlendOp = GL_MIN;
         break;
     default:
-        abort(); // Invalid enum
+        CUBOS_FAIL("Invalid enum");
     }
 }
 
@@ -1167,7 +1167,7 @@ public:
             glAccess = GL_READ_WRITE;
             break;
         default:
-            abort();
+            CUBOS_FAIL("Invalid enum");
         }
 
         glUniform1i(this->loc, this->tex);
