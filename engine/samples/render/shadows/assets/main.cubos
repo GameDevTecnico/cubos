@@ -103,6 +103,25 @@
                 "z": 0.0
             },
             "cubos::engine::SpotShadowCaster": {}
+        },
+        "sun": {
+            "cubos::engine::DirectionalLight": {
+                "color": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "intensity": 0.5
+            },
+            "cubos::engine::Rotation": {
+                "w": -0.5263455,
+                "x": -0.7605053,
+                "y": -0.3802527,
+                "z": 0.0
+            },
+            "cubos::engine::DirectionalShadowCaster": {
+                "maxDistance": 100.0
+            }
         }
     }
 }
