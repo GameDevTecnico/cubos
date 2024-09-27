@@ -68,16 +68,16 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="a68d46e0c52d2ac69a5f37eab8f9818ba">
-              using <a href="#a68d46e0c52d2ac69a5f37eab8f9818ba" class="m-doc-self">Tester</a> = bool(*)(const void*instance)
+            <dt id="a599422264105b204d3b3acf95dbc0534">
+              using <a href="#a599422264105b204d3b3acf95dbc0534" class="m-doc-self">Tester</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(const void*) const &gt;
             </dt>
             <dd>Function pointer to test if a bit is set on the mask.</dd>
-            <dt id="ae305993ed3cab9e8858799920ce2ccd9">
-              using <a href="#ae305993ed3cab9e8858799920ce2ccd9" class="m-doc-self">Setter</a> = void(*)(void*instance)
+            <dt id="aaa9f452bb7700997940b7ca6ce219031">
+              using <a href="#aaa9f452bb7700997940b7ca6ce219031" class="m-doc-self">Setter</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*) const &gt;
             </dt>
             <dd>Function pointer to set the bit on the mask.</dd>
-            <dt id="a47355a5080c2cfc24221bb1a0af47b8a">
-              using <a href="#a47355a5080c2cfc24221bb1a0af47b8a" class="m-doc-self">Clearer</a> = void(*)(void*instance)
+            <dt id="a0a12df3c28065114ff313bf44aa6f906">
+              using <a href="#a0a12df3c28065114ff313bf44aa6f906" class="m-doc-self">Clearer</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*) const &gt;
             </dt>
             <dd>Function pointer to clear the bit on the mask.</dd>
           </dl>
@@ -104,9 +104,9 @@
             <dd>Move constructs.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a9fb37a9b7d3a169da00627bc13565b9c" class="m-doc">Bit</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a68d46e0c52d2ac69a5f37eab8f9818ba" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#ae305993ed3cab9e8858799920ce2ccd9" class="m-doc">Setter</a> setter,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a47355a5080c2cfc24221bb1a0af47b8a" class="m-doc">Clearer</a> clearer)</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a599422264105b204d3b3acf95dbc0534" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#aaa9f452bb7700997940b7ca6ce219031" class="m-doc">Setter</a> setter,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a0a12df3c28065114ff313bf44aa6f906" class="m-doc">Clearer</a> clearer)</span>
             </dt>
             <dd>Constructs.</dd>
             <dt>
@@ -143,16 +143,16 @@
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a234df7ae82e51c88bbc3b71e170f07f4" class="m-doc">addBit</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a68d46e0c52d2ac69a5f37eab8f9818ba" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#ae305993ed3cab9e8858799920ce2ccd9" class="m-doc">Setter</a> setter,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a47355a5080c2cfc24221bb1a0af47b8a" class="m-doc">Clearer</a> clearer)</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a599422264105b204d3b3acf95dbc0534" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#aaa9f452bb7700997940b7ca6ce219031" class="m-doc">Setter</a> setter,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a0a12df3c28065114ff313bf44aa6f906" class="m-doc">Clearer</a> clearer)</span>
             </dt>
             <dd>Adds a bit to the type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a18497723c1535a683d87bf2017df01dc" class="m-doc">withBit</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a68d46e0c52d2ac69a5f37eab8f9818ba" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#ae305993ed3cab9e8858799920ce2ccd9" class="m-doc">Setter</a> setter,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a47355a5080c2cfc24221bb1a0af47b8a" class="m-doc">Clearer</a> clearer) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html" class="m-doc">MaskTrait</a>&amp;&amp;</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a599422264105b204d3b3acf95dbc0534" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#aaa9f452bb7700997940b7ca6ce219031" class="m-doc">Setter</a> setter,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a0a12df3c28065114ff313bf44aa6f906" class="m-doc">Clearer</a> clearer) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html" class="m-doc">MaskTrait</a>&amp;&amp;</span>
             </dt>
             <dd>Adds a bit to the type.</dd>
             <dt>
@@ -326,9 +326,9 @@
           <section class="m-doc-details" id="a9fb37a9b7d3a169da00627bc13565b9c"><div>
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />MaskTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9fb37a9b7d3a169da00627bc13565b9c" class="m-doc-self">Bit</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a68d46e0c52d2ac69a5f37eab8f9818ba" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#ae305993ed3cab9e8858799920ce2ccd9" class="m-doc">Setter</a> setter,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a47355a5080c2cfc24221bb1a0af47b8a" class="m-doc">Clearer</a> clearer)</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a599422264105b204d3b3acf95dbc0534" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#aaa9f452bb7700997940b7ca6ce219031" class="m-doc">Setter</a> setter,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a0a12df3c28065114ff313bf44aa6f906" class="m-doc">Clearer</a> clearer)</span></span>
             </h3>
             <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -475,9 +475,9 @@
           <section class="m-doc-details" id="a234df7ae82e51c88bbc3b71e170f07f4"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />MaskTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a234df7ae82e51c88bbc3b71e170f07f4" class="m-doc-self">addBit</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a68d46e0c52d2ac69a5f37eab8f9818ba" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#ae305993ed3cab9e8858799920ce2ccd9" class="m-doc">Setter</a> setter,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a47355a5080c2cfc24221bb1a0af47b8a" class="m-doc">Clearer</a> clearer)</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a599422264105b204d3b3acf95dbc0534" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#aaa9f452bb7700997940b7ca6ce219031" class="m-doc">Setter</a> setter,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a0a12df3c28065114ff313bf44aa6f906" class="m-doc">Clearer</a> clearer)</span></span>
             </h3>
             <p>Adds a bit to the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -507,9 +507,9 @@
           <section class="m-doc-details" id="a18497723c1535a683d87bf2017df01dc"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html" class="m-doc">MaskTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />MaskTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a18497723c1535a683d87bf2017df01dc" class="m-doc-self">withBit</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a68d46e0c52d2ac69a5f37eab8f9818ba" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#ae305993ed3cab9e8858799920ce2ccd9" class="m-doc">Setter</a> setter,
-              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a47355a5080c2cfc24221bb1a0af47b8a" class="m-doc">Clearer</a> clearer) &amp;&amp;</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a599422264105b204d3b3acf95dbc0534" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#aaa9f452bb7700997940b7ca6ce219031" class="m-doc">Setter</a> setter,
+              <a href="classcubos_1_1core_1_1reflection_1_1MaskTrait.html#a0a12df3c28065114ff313bf44aa6f906" class="m-doc">Clearer</a> clearer) &amp;&amp;</span></span>
             </h3>
             <p>Adds a bit to the type.</p>
             <table class="m-table m-fullwidth m-flat">
