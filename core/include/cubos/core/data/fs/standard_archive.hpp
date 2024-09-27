@@ -35,6 +35,10 @@ namespace cubos::core::data
         /// @param readOnly True if the archive is read-only, false otherwise.
         StandardArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly);
 
+        /// @brief Checks if the archive was successfully initialized.
+        /// @return True if the archive was successfully initialized, false otherwise.
+        bool initialized() const;
+
         std::size_t create(std::size_t parent, std::string_view name, bool directory = false) override;
         bool destroy(std::size_t id) override;
         std::string name(std::size_t id) const override;
