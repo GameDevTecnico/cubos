@@ -247,6 +247,30 @@ void Assets::loadMeta(std::string_view path)
     }
 }
 
+void Assets::unloadMeta(std::string_view path)
+{
+    std::unique_lock lock(mMutex);
+
+    // Search for assets that have the given path as a prefix and remove the path from their metadata.
+    std::vector<uuids::uuid> toRemove;
+    for (auto& [id, entry] : mEntries)
+    {
+        std::unique_lock lock(entry->mutex);
+
+        if (auto metaPath = entry->meta.get("path"))
+        {
+            if (metaPath->starts_with(path))
+            {
+                entry->meta.remove("path");
+                if (entry->status == Status::Unloaded || entry->status == Status::Unknown)
+                {
+                    toRemove.push_back(id);
+                }
+            }
+        }
+    }
+}
+
 AnyAsset Assets::load(AnyAsset handle) const
 {
     auto assetEntry = this->entry(handle);
