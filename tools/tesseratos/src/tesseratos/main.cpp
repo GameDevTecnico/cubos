@@ -9,6 +9,7 @@
 
 #include "asset_explorer/plugin.hpp"
 #include "debugger/plugin.hpp"
+#include "project/plugin.hpp"
 #include "scene_editor/plugin.hpp"
 #include "voxel_palette_editor/plugin.hpp"
 
@@ -33,6 +34,8 @@ int main(int argc, char** argv)
 
     cubos.plugin(debuggerPlugin);
     cubos.plugin(assetExplorerPlugin);
+
+    cubos.plugin(projectPlugin);
 
     cubos.plugin(sceneEditorPlugin);
     cubos.plugin(voxelPaletteEditorPlugin);

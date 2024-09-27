@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial application debugging through Tesseratos (#1303, **@RiscadoA**).
 - Print stacktrace with *cpptrace* on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
 - Simple cross-platform multi-process utilities (**@RiscadoA**).
+- Project opening and closing on Tesseratos (#1218, **@RiscadoA**).
 
 ### Changed
 
