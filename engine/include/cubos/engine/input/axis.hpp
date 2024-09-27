@@ -35,10 +35,11 @@ namespace cubos::engine
         /// @param negative Negative input combinations.
         /// @param gamepadAxes Gamepad axis bindings.
         InputAxis(std::vector<InputCombination> positive, std::vector<InputCombination> negative,
-                  std::vector<core::io::GamepadAxis> gamepadAxes)
+                  std::vector<core::io::GamepadAxis> gamepadAxes, float deadzone = 0.0F)
             : mPositive(std::move(positive))
             , mNegative(std::move(negative))
             , mGamepadAxes(std::move(gamepadAxes))
+            , mDeadzone(deadzone)
         {
         }
 
@@ -74,11 +75,20 @@ namespace cubos::engine
         /// @param value New value.
         void value(float value);
 
+        /// @brief Gets the deadzone.
+        /// @return Deadzone.
+        float deadzone() const;
+
+        /// @brief Sets the deadzone.
+        /// @param deadzone New deadzone.
+        void deadzone(float deadzone);
+
     private:
         std::vector<InputCombination> mPositive;
         std::vector<InputCombination> mNegative;
         std::vector<core::io::GamepadAxis> mGamepadAxes;
 
         float mValue{0.0F}; ///< Not serialized.
+        float mDeadzone{0.0F};
     };
 } // namespace cubos::engine
