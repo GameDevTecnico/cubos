@@ -4,6 +4,8 @@
 #include <mutex>
 #include <vector>
 
+#include <cpptrace/cpptrace.hpp>
+
 #include <cubos/core/data/fs/file.hpp>
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
@@ -86,6 +88,12 @@ static const char* levelColor(Logger::Level level)
     default:
         return ColorResetCode;
     }
+}
+
+void cubos::core::abort()
+{
+    cpptrace::generate_trace(1).print();
+    std::abort();
 }
 
 std::string Logger::Location::string() const
