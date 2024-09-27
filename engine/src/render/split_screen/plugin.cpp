@@ -1,7 +1,7 @@
 #include <glm/vec2.hpp>
 
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/split_screen/plugin.hpp>
 #include <cubos/engine/render/split_screen/split_screen.hpp>
@@ -62,48 +62,46 @@ void cubos::engine::splitScreenPlugin(Cubos& cubos)
 
     cubos.system("split screen for each DrawsTo relation")
         .tagged(splitScreenTag)
-        .call(
-            [](Query<Entity, const RenderTarget&> targets,
-               Query<const LocalToWorld&, const PerspectiveCamera&, DrawsTo&, const SplitScreen&> perspectiveCameras) {
-                for (auto [targetEnt, target] : targets)
+        .call([](Query<Entity, const RenderTarget&> targets,
+                 Query<const LocalToWorld&, const Camera&, DrawsTo&, const SplitScreen&> cameras) {
+            for (auto [targetEnt, target] : targets)
+            {
+                int cameraCount = 0;
+
+                // Find the cameras that draw to the target.
+                for (auto [localToWorld, camera, drawsTo, splitScreen] : cameras.pin(1, targetEnt))
                 {
-                    int cameraCount = 0;
+                    // Ignore unused argument warnings
+                    (void)splitScreen;
 
-                    // Find the cameras that draw to the target.
-                    for (auto [localToWorld, camera, drawsTo, splitScreen] : perspectiveCameras.pin(1, targetEnt))
+                    if (!camera.active)
                     {
-                        // Ignore unused argument warnings
-                        (void)splitScreen;
-
-                        if (!camera.active)
-                        {
-                            continue;
-                        }
-
-                        cameraCount += 1;
+                        continue;
                     }
 
-                    std::vector<glm::ivec2> positions(static_cast<unsigned long>(cameraCount));
-                    std::vector<glm::ivec2> sizes(static_cast<unsigned long>(cameraCount));
-
-                    setViewportCameras({0, 0}, target.size, cameraCount, positions.begin(), sizes.begin());
-
-                    unsigned long i = 0;
-                    for (auto [localToWorld, camera, drawsTo, splitScreen] : perspectiveCameras.pin(1, targetEnt))
-                    {
-                        // Ignore unused argument warnings
-                        (void)splitScreen;
-
-                        if (!camera.active)
-                        {
-                            continue;
-                        }
-
-                        drawsTo.viewportOffset =
-                            static_cast<glm::vec2>(positions[i]) / static_cast<glm::vec2>(target.size);
-                        drawsTo.viewportSize = static_cast<glm::vec2>(sizes[i]) / static_cast<glm::vec2>(target.size);
-                        i++;
-                    }
+                    cameraCount += 1;
                 }
-            });
+
+                std::vector<glm::ivec2> positions(static_cast<unsigned long>(cameraCount));
+                std::vector<glm::ivec2> sizes(static_cast<unsigned long>(cameraCount));
+
+                setViewportCameras({0, 0}, target.size, cameraCount, positions.begin(), sizes.begin());
+
+                unsigned long i = 0;
+                for (auto [localToWorld, camera, drawsTo, splitScreen] : cameras.pin(1, targetEnt))
+                {
+                    // Ignore unused argument warnings
+                    (void)splitScreen;
+
+                    if (!camera.active)
+                    {
+                        continue;
+                    }
+
+                    drawsTo.viewportOffset = static_cast<glm::vec2>(positions[i]) / static_cast<glm::vec2>(target.size);
+                    drawsTo.viewportSize = static_cast<glm::vec2>(sizes[i]) / static_cast<glm::vec2>(target.size);
+                    i++;
+                }
+            }
+        });
 }

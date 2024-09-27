@@ -5,8 +5,8 @@
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/g_buffer/g_buffer.hpp>
 #include <cubos/engine/render/g_buffer/plugin.hpp>
@@ -146,7 +146,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
     cubos.system("apply SSAO to the GBuffer and output to the SSAO texture")
         .tagged(drawToSSAOTag)
         .call([](State& state, const Window& window, Query<Entity, const GBuffer&, SSAO&> targets,
-                 Query<const LocalToWorld&, const PerspectiveCamera&, const DrawsTo&> perspectiveCameras) {
+                 Query<const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = window->renderDevice();
 
             for (auto [targetEnt, gBuffer, ssao] : targets)
@@ -188,7 +188,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                 }
 
                 // Find the cameras that draw to the SSAO target.
-                for (auto [localToWorld, camera, drawsTo] : perspectiveCameras.pin(1, targetEnt))
+                for (auto [localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
                 {
                     if (!camera.active)
                     {
@@ -225,10 +225,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     // Fill the PerScene constant buffer.
                     PerScene perScene{};
                     perScene.view = glm::inverse(localToWorld.mat);
-                    perScene.projection = glm::perspective(glm::radians(camera.fovY),
-                                                           (float(gBuffer.size.x) * drawsTo.viewportSize.x) /
-                                                               (float(gBuffer.size.y) * drawsTo.viewportSize.y),
-                                                           camera.zNear, camera.zFar);
+                    perScene.projection = camera.projection;
                     for (std::size_t i = 0; i < state.kernel.size(); ++i)
                     {
                         perScene.samples[i] = glm::vec4(state.kernel[i], 0.0F);

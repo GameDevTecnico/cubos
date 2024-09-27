@@ -6,7 +6,6 @@
 CUBOS_REFLECT_IMPL(cubos::engine::PerspectiveCamera)
 {
     return core::ecs::TypeBuilder<PerspectiveCamera>("cubos::engine::PerspectiveCamera")
-        .withField("active", &PerspectiveCamera::active)
         .withField("fovY", &PerspectiveCamera::fovY)
         .withField("zNear", &PerspectiveCamera::zNear)
         .withField("zFar", &PerspectiveCamera::zFar)

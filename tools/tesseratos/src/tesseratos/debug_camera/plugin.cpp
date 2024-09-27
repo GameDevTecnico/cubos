@@ -6,6 +6,7 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/perspective_camera.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
@@ -20,6 +21,7 @@ using namespace cubos::core::io;
 
 using cubos::core::ecs::EntityHash;
 
+using cubos::engine::Camera;
 using cubos::engine::Commands;
 using cubos::engine::Cubos;
 using cubos::engine::DrawsTo;
@@ -63,9 +65,8 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
     cubos.startupSystem("create Debug Camera").call([](Commands commands, State& debugCamera) {
         debugCamera.entity = commands.create()
                                  .named("debug-camera")
-                                 .add(PerspectiveCamera{
-                                     .active = false,
-                                 })
+                                 .add(Camera{.active = false})
+                                 .add(PerspectiveCamera{})
                                  .add(Position{{}})
                                  .add(FreeCameraController{
                                      .enabled = false,
@@ -103,8 +104,7 @@ void tesseratos::debugCameraPlugin(Cubos& cubos)
     cubos.system("update Debug Camera")
         .tagged(cubos::engine::imguiTag)
         .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("Debug Camera"); })
-        .call([](State& state, Commands cmds,
-                 Query<Entity, PerspectiveCamera&, const DrawsTo&, const RenderTarget&> cameras,
+        .call([](State& state, Commands cmds, Query<Entity, Camera&, const DrawsTo&, const RenderTarget&> cameras,
                  Query<Entity, const RenderTarget&> targets) {
             ImGui::Begin("Debug Camera");
 

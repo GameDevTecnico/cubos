@@ -2,8 +2,8 @@
 #include <cubos/core/reflection/external/uuid.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/depth/depth.hpp>
 #include <cubos/engine/render/depth/plugin.hpp>
@@ -142,10 +142,10 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
 
     cubos.system("rasterize to GBuffer")
         .tagged(rasterizeToGBufferTag)
-        .with<PerspectiveCamera>()
+        .with<Camera>()
         .related<DrawsTo>()
         .call([](State& state, const Window& window, const RenderMeshPool& pool, const RenderPalette& palette,
-                 Assets& assets, Query<const LocalToWorld&, PerspectiveCamera&, const DrawsTo&> perspectiveCameras,
+                 Assets& assets, Query<const LocalToWorld&, Camera&, const DrawsTo&> cameras,
                  Query<Entity, GBufferRasterizer&, GBuffer&, RenderDepth&, RenderPicker&> targets,
                  Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
@@ -233,7 +233,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                 }
 
                 // Find the active cameras for this target.
-                for (auto [cameraLocalToWorld, camera, drawsTo] : perspectiveCameras.pin(1, ent))
+                for (auto [cameraLocalToWorld, camera, drawsTo] : cameras.pin(1, ent))
                 {
                     // Skip inactive cameras.
                     if (!camera.active)
@@ -243,10 +243,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
 
                     // Send the PerScene data to the GPU.
                     auto view = glm::inverse(cameraLocalToWorld.mat);
-                    auto proj = glm::perspective(glm::radians(camera.fovY),
-                                                 (float(gBuffer.size.x) * drawsTo.viewportSize.x) /
-                                                     (float(gBuffer.size.y) * drawsTo.viewportSize.y),
-                                                 camera.zNear, camera.zFar);
+                    auto proj = camera.projection;
                     PerScene perScene{.viewProj = proj * view};
                     state.perSceneCB->fill(&perScene, sizeof(perScene));
 
