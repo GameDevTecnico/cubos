@@ -11,17 +11,23 @@ using namespace cubos::engine;
 
 bool FileBridge::load(Assets& assets, const AnyAsset& handle)
 {
-    auto path = assets.readMeta(handle)->get("path").value();
-    auto stream = FileSystem::open(path, File::OpenMode::Read);
+    auto path = assets.readMeta(handle)->get("path");
+    if (!path.has_value())
+    {
+        CUBOS_ERROR("Asset does not have a file path");
+        return false;
+    }
+
+    auto stream = FileSystem::open(*path, File::OpenMode::Read);
     if (stream == nullptr)
     {
-        CUBOS_ERROR("Could not open file {}", path);
+        CUBOS_ERROR("Could not open file {}", *path);
         return false;
     }
 
     if (!this->loadFromFile(assets, handle, *stream))
     {
-        CUBOS_ERROR("Could not load asset from file {}", path);
+        CUBOS_ERROR("Could not load asset from file {}", *path);
         return false;
     }
 
@@ -30,9 +36,14 @@ bool FileBridge::load(Assets& assets, const AnyAsset& handle)
 
 bool FileBridge::save(const Assets& assets, const AnyAsset& handle)
 {
-    auto path = assets.readMeta(handle)->get("path").value();
+    auto path = assets.readMeta(handle)->get("path");
+    if (!path.has_value())
+    {
+        CUBOS_ERROR("Asset does not have a file path");
+        return false;
+    }
 
-    auto swpPath = path + ".swp";
+    auto swpPath = *path + ".swp";
     auto swpFile = FileSystem::create(swpPath);
 
     if (swpFile == nullptr)
@@ -58,9 +69,9 @@ bool FileBridge::save(const Assets& assets, const AnyAsset& handle)
     stream = nullptr;
 
     /// @todo This can be done simpler with #737.
-    if (!FileSystem::copy(swpPath, path))
+    if (!FileSystem::copy(swpPath, *path))
     {
-        CUBOS_ERROR("Could not overwrite asset {} with swap file", path);
+        CUBOS_ERROR("Could not overwrite asset {} with swap file", *path);
         return false;
     }
 
