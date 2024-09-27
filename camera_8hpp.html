@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Exercises | Cubos Docs</title>
+  <title>engine/render/camera/camera.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,17 +46,39 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          Exercises
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_13f5e2b140054f355a8f8a8c95923a6a.html">render</a>/</span><span class="m-breadcrumb"><a href="dir_5bfb929504efd2928af00ae5299c5a8d.html">camera</a>/</span>camera.hpp <span class="m-thin">file</span>
         </h1>
-<p><a name="md_docs_pages_4_exercises_main"></a> This page contains challenges designed to help you start working with <strong>Cubos</strong>. We recommend that you start by reading the <a href="getting-started.html" class="m-doc">getting started</a> and <a href="features.html" class="m-doc">features</a> guides.</p><section id="autotoc_md40"><h2><a href="#autotoc_md40">Creating a new engine sample</a></h2><p>Before moving on to the actual exercises, lets start by creating your own empty sample, which will be expanded upon the next steps.</p><p>Start by creating a new folder in the <code>engine/samples</code> directory, i.e., <code>engine/samples/my-own-sample</code>. Make sure to add a <code><a href="main_8cpp.html" class="m-doc">main.cpp</a></code> to that folder, with the following base code:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/prelude.hpp&gt;</span>
-
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">cubos</span><span class="o">::</span><span class="nn">engine</span><span class="p">;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-<span class="w">      </span><span class="n">Cubos</span><span class="w"> </span><span class="n">cubos</span><span class="p">{};</span>
-<span class="w">      </span><span class="n">cubos</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
-<span class="p">}</span></pre><p>The final step is to add your new sample to the CMake configuration, at <code>engine/samples/CMakeLists.txt</code>. Open that file, and add a new line of the form <code>make_sample(DIR &quot;my-own-sample&quot; ASSETS)</code>.</p><p>If you now reconfigure CMake, you should be able to launch the target <code>engine-sample.my-own-sample</code>. Don&#x27;t worry if nothing shows up yet - in <strong>Cubos</strong> you only get what you ask for, and in the code above we didn&#x27;t do anything except run an empty application.</p></section><section id="autotoc_md41"><h2><a href="#autotoc_md41">Showing a cube</a></h2><p>Try making your sample open a window and show a simple voxel cube! To do this, you will need to:</p><ol><li>Add the Renderer plugin.</li><li>Create a <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>.</li><li>Create a <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>.</li><li>Create a <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a>.</li><li>Create a <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> and add it to ActiveCameras.</li></ol><p>You can take inspiration from the <a href="examples-engine-hello-cubos.html" class="m-doc">Hello Cubos</a> Renderer samples.</p></section><section id="autotoc_md42"><h2><a href="#autotoc_md42">Replace the cube by an actual voxel model</a></h2><p>Of course we don&#x27;t expect developers to generate their voxel models through code! Change your sample to show an actual voxel model, created and stored in a <code>.qb</code> file. You can create one using <a href="https://ephtracy.github.io/">MagicaVoxel</a>, or simply download an existing model from the internet.</p><p><strong>Cubos</strong> doesn&#x27;t handle <code>.qb</code> files directly: it only supports <code>.grd</code>&#x27;s and <code>.pal</code>&#x27;s, our own formats for voxel grids and palettes. You can use <strong>QUADRADOS</strong> to convert a <code>.qb</code> to a <code>.grd</code> and <code>.pal</code>. Check out its <a href="features-quadrados.html" class="m-doc">feature guide</a> for more information.</p><p>Take a look at the <a href="examples-engine-voxels.html" class="m-doc">Voxels</a> sample to figure out how you can load those files into the actual sample.</p></section><section id="autotoc_md43"><h2><a href="#autotoc_md43">Move the voxel model on input</a></h2><p>Make the model you added previously move when some buttons are pressed. You will need to:</p><ol><li>Add the <a href="group__input-plugin.html" class="m-doc">Input plugin</a>.</li><li>Create an input bindings asset.</li><li>Add a system which uses the <a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a> resource to move the model.</li></ol><p>Check out the <a href="examples-engine-input.html" class="m-doc">Input</a> sample for inspiration.</p></section>
+        <p>Component <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">cubos::<wbr />engine::<wbr />Camera</a>.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">cubos::engine::Camera</a>
+            </dt>
+            <dd>Generic component to hold the projection matrix of a specific camera (either perspective or orthogonal).</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>
