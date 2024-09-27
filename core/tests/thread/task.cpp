@@ -10,6 +10,13 @@ using cubos::core::thread::Task;
 
 TEST_CASE("thread::Task")
 {
+    SUBCASE("finished task")
+    {
+        Task<int> task{42};
+        REQUIRE(task.isDone());
+        REQUIRE(task.result() == 42);
+    }
+
     SUBCASE("task which produces an int")
     {
         Task<int> task{};
