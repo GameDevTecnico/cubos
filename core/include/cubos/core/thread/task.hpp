@@ -29,6 +29,15 @@ namespace cubos::core::thread
             mData = new Data();
         }
 
+        /// @brief Constructs a finished task.
+        /// @param value Task result.
+        /// @return Task.
+        Task(T value)
+            : Task{}
+        {
+            this->finish(std::move(value));
+        }
+
         /// @brief Copy constructs.
         /// @param other Task.
         Task(const Task& other)
