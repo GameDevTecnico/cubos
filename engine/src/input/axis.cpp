@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cmath>
 
 #include <cubos/core/io/keyboard.hpp>
@@ -20,7 +21,8 @@ CUBOS_REFLECT_IMPL(cubos::engine::InputAxis)
         .with(FieldsTrait{}
                   .withField("positive", &InputAxis::mPositive)
                   .withField("negative", &InputAxis::mNegative)
-                  .withField("gamepadAxes", &InputAxis::mGamepadAxes));
+                  .withField("gamepadAxes", &InputAxis::mGamepadAxes)
+                  .withField("deadzone", &InputAxis::mDeadzone));
 }
 
 const std::vector<InputCombination>& InputAxis::positive() const
@@ -60,11 +62,25 @@ float InputAxis::value() const
 
 void InputAxis::value(float value)
 {
-    mValue = value;
+    mValue = std::abs(value) < mDeadzone ? 0.0F : value;
 
     if (std::abs(mValue) > 1.0F)
     {
         CUBOS_WARN("Axis value out of range: {}", mValue);
-        mValue = mValue > 1.0F ? 1.0F : -1.0F;
+        mValue = std::clamp(mValue, -1.0F, 1.0F);
     }
+}
+
+float InputAxis::deadzone() const
+{
+    return mDeadzone;
+}
+
+void InputAxis::deadzone(float deadzone)
+{
+    if (deadzone < 0.0F || deadzone > 1.0F)
+    {
+        CUBOS_WARN("Invalid deadzone value: {}. Value must be between 0.0 and 1.0.", deadzone);
+    }
+    mDeadzone = std::clamp(deadzone, 0.0F, 1.0F);
 }

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Handle body rotation on physics integration (#1242, **&fallenatlas**).
 - Binary Serializer and Deserializer (#1306, **@RiscadoA**).
 - Type Client and Type Server (#1302, **@RiscadoA**).
+- Deadzone for input axis (#844, **@kuukitenshi**)
 
 ### Fixed
 
