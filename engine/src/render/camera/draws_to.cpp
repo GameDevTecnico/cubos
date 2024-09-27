@@ -6,6 +6,7 @@
 CUBOS_REFLECT_IMPL(cubos::engine::DrawsTo)
 {
     return core::ecs::TypeBuilder<DrawsTo>("cubos::engine::DrawsTo")
+        .tree()
         .withField("viewportOffset", &DrawsTo::viewportOffset)
         .withField("viewportSize", &DrawsTo::viewportSize)
         .build();

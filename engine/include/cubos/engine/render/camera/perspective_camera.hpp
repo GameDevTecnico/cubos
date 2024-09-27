@@ -17,9 +17,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        /// @brief Whether the camera is drawing to a target.
-        bool active = true;
-
         /// @brief Vertical field of view in degrees.
         float fovY = 60.0F;
 

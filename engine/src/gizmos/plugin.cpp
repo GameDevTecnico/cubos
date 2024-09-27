@@ -6,8 +6,8 @@
 
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/gizmos/target.hpp>
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/picker/picker.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
@@ -106,7 +106,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
         .tagged(drawToRenderPickerTag)
         .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, const DeltaTime& deltaTime,
                  Query<Entity, RenderTarget&, RenderPicker&, GizmosTarget&> targets,
-                 Query<const LocalToWorld&, const PerspectiveCamera&, const DrawsTo&> cameras) {
+                 Query<const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = *gizmosRenderer.renderDevice;
             auto orthoVP =
                 glm::translate(glm::mat4(1.0F), glm::vec3(-1.0F, -1.0F, 0.0F)) * glm::ortho(-0.5F, 0.5F, -0.5F, 0.5F);
@@ -156,11 +156,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                                   static_cast<int>(drawsTo.viewportSize.y * static_cast<float>(target.size.y)));
 
                     // Prepare camera projection (TODO: fetch this matrix from a Camera component).
-                    auto worldVP = glm::perspective(glm::radians(camera.fovY),
-                                                    (drawsTo.viewportSize.x * static_cast<float>(target.size.x)) /
-                                                        (drawsTo.viewportSize.y * static_cast<float>(target.size.y)),
-                                                    camera.zNear, camera.zFar) *
-                                   glm::inverse(localToWorld.mat);
+                    auto worldVP = camera.projection * glm::inverse(localToWorld.mat);
 
                     // Draw world-space gizmos.
                     rd.setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);
@@ -209,11 +205,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                                   static_cast<int>(drawsTo.viewportSize.y * static_cast<float>(target.size.y)));
 
                     // Prepare camera projection (TODO: fetch this matrix from a Camera component).
-                    auto worldVP = glm::perspective(glm::radians(camera.fovY),
-                                                    (drawsTo.viewportSize.x * static_cast<float>(target.size.x)) /
-                                                        (drawsTo.viewportSize.y * static_cast<float>(target.size.y)),
-                                                    camera.zNear, camera.zFar) *
-                                   glm::inverse(localToWorld.mat);
+                    auto worldVP = camera.projection * glm::inverse(localToWorld.mat);
 
                     // Draw world-space gizmos.
                     rd.setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);

@@ -8,7 +8,7 @@
 
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -24,11 +24,11 @@ using cubos::core::ecs::World;
 using cubos::core::io::Window;
 using cubos::core::memory::Opt;
 
+using cubos::engine::Camera;
 using cubos::engine::Cubos;
 using cubos::engine::Gizmos;
 using cubos::engine::Input;
 using cubos::engine::LocalToWorld;
-using cubos::engine::PerspectiveCamera;
 using cubos::engine::Position;
 using cubos::engine::Rotation;
 using cubos::engine::Scale;
@@ -111,7 +111,7 @@ static void checkRotation(Rotation& rotation, glm::vec3 globalPosition, glm::vec
     rotation.quat = glm::angleAxis(angle, axisVector) * rotation.quat;
 }
 
-static void drawPositionGizmo(Query<Position&, LocalToWorld&> positionQuery, const PerspectiveCamera& camera,
+static void drawPositionGizmo(Query<Position&, LocalToWorld&> positionQuery, const Camera& camera,
                               const LocalToWorld& cameraLtw, Gizmos& gizmos, const Input& input, const Window& window,
                               Entity selectedEntity, bool useLocalAxis, double distance)
 {
@@ -123,9 +123,7 @@ static void drawPositionGizmo(Query<Position&, LocalToWorld&> positionQuery, con
 
     pv = glm::inverse(pv);
 
-    pv = glm::perspective(glm::radians(camera.fovY), (float)window->size().x / (float)window->size().y, camera.zNear,
-                          camera.zFar) *
-         pv;
+    pv = camera.projection * pv;
 
     glm::vec3 xColor = {1, 0, 0};
     glm::vec3 yColor = {0, 1, 0};
@@ -229,7 +227,7 @@ static void drawPositionGizmo(Query<Position&, LocalToWorld&> positionQuery, con
                      0.7F);
 }
 
-static void drawRotationGizmo(Query<Rotation&, LocalToWorld&> positionQuery, const PerspectiveCamera& camera,
+static void drawRotationGizmo(Query<Rotation&, LocalToWorld&> positionQuery, const Camera& camera,
                               const LocalToWorld& cameraLtw, Gizmos& gizmos, const Input& input, const Window& window,
                               Entity selectedEntity, bool useLocalAxis, double distance)
 {
@@ -241,9 +239,7 @@ static void drawRotationGizmo(Query<Rotation&, LocalToWorld&> positionQuery, con
 
     pv = glm::inverse(pv);
 
-    pv = glm::perspective(glm::radians(camera.fovY), (float)window->size().x / (float)window->size().y, camera.zNear,
-                          camera.zFar) *
-         pv;
+    pv = camera.projection * pv;
 
     glm::vec3 xColor = {1, 0, 0};
     glm::vec3 yColor = {0, 1, 0};
@@ -306,7 +302,7 @@ void tesseratos::transformGizmoPlugin(Cubos& cubos)
         .call([](const EntitySelector& entitySelector, const Window& window, const Input& input, Settings& settings,
                  Gizmos& gizmos, Query<Position&, LocalToWorld&> positionQuery,
                  Query<Rotation&, LocalToWorld&> rotationQuery,
-                 Query<Entity, const PerspectiveCamera&, LocalToWorld&> cameraQuery) {
+                 Query<Entity, const Camera&, LocalToWorld&> cameraQuery) {
             if (entitySelector.selection.isNull())
             {
                 return;

@@ -129,6 +129,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/camera/plugin.cpp"
 	"src/render/camera/perspective_camera.cpp"
 	"src/render/camera/draws_to.cpp"
+	"src/render/camera/camera.cpp"
 	"src/render/voxels/plugin.cpp"
 	"src/render/voxels/load.cpp"
 	"src/render/voxels/grid.cpp"
