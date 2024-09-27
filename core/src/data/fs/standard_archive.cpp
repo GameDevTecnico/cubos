@@ -109,6 +109,11 @@ void StandardArchive::generate(std::size_t parent)
     }
 }
 
+bool StandardArchive::initialized() const
+{
+    return !mFiles.empty();
+}
+
 std::size_t StandardArchive::create(std::size_t parent, std::string_view name, bool directory)
 {
     INIT_OR_RETURN(0);
