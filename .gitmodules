@@ -22,12 +22,15 @@
 [submodule "core/lib/json"]
 	path = core/lib/json
 	url = https://github.com/nlohmann/json.git
-[submodule "core/lib/glad"]
-	path = core/lib/glad
-	url = https://github.com/Dav1dde/glad.git
 [submodule "engine/lib/implot"]
 	path = engine/lib/implot
 	url = https://github.com/epezent/implot.git
 [submodule "core/lib/cpptrace"]
 	path = core/lib/cpptrace
 	url = https://github.com/jeremy-rifkin/cpptrace.git
+[submodule "core/lib/glad"]
+	path = core/lib/glad
+	url = https://github.com/GameDevTecnico/cubos-glad.git
+[submodule "engine/lib/stb_image"]
+	path = engine/lib/stb_image
+	url = https://github.com/GameDevTecnico/cubos-stb.git

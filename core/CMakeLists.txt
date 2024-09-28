@@ -171,9 +171,7 @@ cubos_common_target_options(cubos-core)
 
 # Link dependencies
 if(WITH_OPENGL)
-	set(GLAD_SOUURCES_DIR "lib/glad")
-	add_subdirectory("${GLAD_SOUURCES_DIR}/cmake" glad_cmake SYSTEM)
-	glad_add_library(glad REPRODUCIBLE API gl:core=3.3)
+	add_subdirectory("lib/glad")
 	if(BUILD_CORE_SHARED)
 		set_property(TARGET glad PROPERTY POSITION_INDEPENDENT_CODE ON)
 	endif()

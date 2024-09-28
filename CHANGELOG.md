@@ -15,15 +15,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Handle body rotation on physics integration (#1242, **&fallenatlas**).
 - Binary Serializer and Deserializer (#1306, **@RiscadoA**).
 - Type Client and Type Server (#1302, **@RiscadoA**).
-- Deadzone for input axis (#844, **@kuukitenshi**)
-- Generic Camera component to hold projection matrix (#1331, **@mkuritsu**)
+- Deadzone for input axis (#844, **@kuukitenshi**).
+- Generic Camera component to hold projection matrix (#1331, **@mkuritsu**).
 - Initial application debugging through Tesseratos (#1303, **@RiscadoA**).
 - Print stacktrace with *cpptrace* on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
+
+### Changed
+
+- Moved Glad and stb-image libs to another repositories, cubos-glad and cubos-stb, respectively (#1323, **@kuukitenshi**).
 
 ### Fixed
 
 - Spot light angle mismatch between light and shadows (#1310, **@tomas7770**).
 - Spot shadows cause light range cutoff (#1312, **@tomas7770**).
+
 
 ## [v0.3.0] - 2024-08-02
 
