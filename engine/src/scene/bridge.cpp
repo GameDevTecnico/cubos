@@ -320,7 +320,7 @@ bool SceneBridge::saveToFile(const Assets& assets, const AnyAsset& handle, Strea
     auto importJson = nlohmann::json::object();
     for (const auto& [name, subHandle] : scene->imports)
     {
-        importJson.emplace(name.c_str(), uuids::to_string(subHandle.getId()));
+        importJson.emplace(name.c_str(), subHandle.getId());
     }
     json.push_back({"imports", importJson});
 
