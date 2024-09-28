@@ -30,4 +30,4 @@
 	url = https://github.com/epezent/implot.git
 [submodule "core/lib/cpptrace"]
 	path = core/lib/cpptrace
-	url = git@github.com:jeremy-rifkin/cpptrace.git
+	url = https://github.com/jeremy-rifkin/cpptrace.git
