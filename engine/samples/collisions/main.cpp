@@ -17,7 +17,7 @@
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/camera/perspective.hpp>
 #include <cubos/engine/render/defaults/plugin.hpp>
 #include <cubos/engine/render/defaults/target.hpp>
 #include <cubos/engine/render/tone_mapping/plugin.hpp>

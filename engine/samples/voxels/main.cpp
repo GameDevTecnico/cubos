@@ -1,6 +1,6 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/camera/perspective.hpp>
 #include <cubos/engine/render/defaults/plugin.hpp>
 #include <cubos/engine/render/defaults/target.hpp>
 #include <cubos/engine/render/lights/directional.hpp>
