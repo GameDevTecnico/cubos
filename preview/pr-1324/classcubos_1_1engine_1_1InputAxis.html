@@ -71,9 +71,10 @@
             </dt>
             <dd>Constructs without any bindings.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a80d1fae15f6128eb96bca9ff35fa369a" class="m-doc">InputAxis</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt; positive,
+              <span class="m-doc-wrap-bumper"><a href="#ad7465db1b0951a900046c4aa4b398b5e" class="m-doc">InputAxis</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt; positive,
               std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt; negative,
-              std::vector&lt;<a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">core::<wbr />io::<wbr />GamepadAxis</a>&gt; gamepadAxes)</span>
+              std::vector&lt;<a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">core::<wbr />io::<wbr />GamepadAxis</a>&gt; gamepadAxes,
+              float deadzone = 0.0F)</span>
             </dt>
             <dd>Constructs with existing bindings.</dd>
           </dl>
@@ -113,15 +114,24 @@
               <span class="m-doc-wrap-bumper">void <a href="#a85b0b6f2a0c7a5eac573597dbcf67005" class="m-doc">value</a>(</span><span class="m-doc-wrap">float value)</span>
             </dt>
             <dd>Sets the value.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac60165d7c144c137178948070d79e94e" class="m-doc">deadzone</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
+            </dt>
+            <dd>Gets the deadzone.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a633b8316094e46323c36ebd0f9687ad1" class="m-doc">deadzone</a>(</span><span class="m-doc-wrap">float deadzone)</span>
+            </dt>
+            <dd>Sets the deadzone.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a80d1fae15f6128eb96bca9ff35fa369a"><div>
+          <section class="m-doc-details" id="ad7465db1b0951a900046c4aa4b398b5e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80d1fae15f6128eb96bca9ff35fa369a" class="m-doc-self">InputAxis</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt; positive,
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad7465db1b0951a900046c4aa4b398b5e" class="m-doc-self">InputAxis</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt; positive,
               std::vector&lt;<a href="classcubos_1_1engine_1_1InputCombination.html" class="m-doc">InputCombination</a>&gt; negative,
-              std::vector&lt;<a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">core::<wbr />io::<wbr />GamepadAxis</a>&gt; gamepadAxes)</span></span>
+              std::vector&lt;<a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">core::<wbr />io::<wbr />GamepadAxis</a>&gt; gamepadAxes,
+              float deadzone = 0.0F)</span></span>
             </h3>
             <p>Constructs with existing bindings.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -140,6 +150,10 @@
                 <tr>
                   <td>gamepadAxes</td>
                   <td>Gamepad axis bindings.</td>
+                </tr>
+                <tr>
+                  <td>deadzone</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -255,6 +269,37 @@
                 <tr>
                   <td style="width: 1%">value</td>
                   <td>New value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac60165d7c144c137178948070d79e94e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac60165d7c144c137178948070d79e94e" class="m-doc-self">deadzone</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the deadzone.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Deadzone.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a633b8316094e46323c36ebd0f9687ad1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a633b8316094e46323c36ebd0f9687ad1" class="m-doc-self">deadzone</a>(</span><span class="m-doc-wrap">float deadzone)</span></span>
+            </h3>
+            <p>Sets the deadzone.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">deadzone</td>
+                  <td>New deadzone.</td>
                 </tr>
               </tbody>
             </table>
