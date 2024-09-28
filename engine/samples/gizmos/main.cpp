@@ -2,7 +2,7 @@
 #include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/camera/perspective.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/picker/picker.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>

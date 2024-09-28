@@ -22,7 +22,9 @@
             }
         },
         "camera3": {
-            "cubos::engine::PerspectiveCamera": {},
+            "cubos::engine::OrthographicCamera": {
+                "size": 10
+            },
             "cubos::engine::DrawsTo@render-target": {},
             "cubos::engine::Position": {
                 "x": -3,

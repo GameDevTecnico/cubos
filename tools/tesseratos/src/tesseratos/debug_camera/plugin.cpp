@@ -8,7 +8,7 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
-#include <cubos/engine/render/camera/perspective_camera.hpp>
+#include <cubos/engine/render/camera/perspective.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/target/target.hpp>
