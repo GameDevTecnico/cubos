@@ -247,7 +247,6 @@ namespace cubos::engine
         struct Entry
         {
             Entry();
-
             Status status{Status::Unloaded}; ///< The status of the asset.
             AssetMeta meta;                  ///< The metadata associated with the asset.
 
@@ -307,6 +306,11 @@ namespace cubos::engine
         /// @param handle Handle to lock.
         /// @return Lock guard.
         std::unique_lock<std::shared_mutex> lockWrite(const AnyAsset& handle) const;
+
+        /// @brief Checks if the given ID is of the correct type.
+        /// @param id ID to check.
+        /// @return The ID as a string.
+        std::string checkIdType(const std::string& id) const;
 
         /// @brief Gets a pointer to the entry associated with the given handle.
         /// @param handle Handle to get the entry for.

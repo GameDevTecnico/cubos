@@ -27,7 +27,7 @@ AnyAsset::AnyAsset(std::nullptr_t)
 }
 
 AnyAsset::AnyAsset(uuids::uuid id)
-    : reflectedId(id)
+    : idOrPath(uuids::to_string(id))
     , mId(id)
     , mRefCount(nullptr)
     , mVersion(-1)
@@ -38,31 +38,42 @@ AnyAsset::AnyAsset(std::string_view str)
     : mRefCount(nullptr)
     , mVersion(-1)
 {
+
     if (auto id = uuids::uuid::from_string(str))
     {
-        reflectedId = id.value();
+        idOrPath = str;
         mId = id.value();
     }
     else
     {
-        CUBOS_ERROR("Could not create asset handle, invalid UUID: \"{}\"", str);
+        if (str.find('/') != std::string::npos || str.find('\\') != std::string::npos)
+        {
+            idOrPath = str;
+            path = str;
+        }
+        else
+        {
+            CUBOS_ERROR("Could not create asset handle, invalid UUID or Path: \"{}\"", str);
+        }
     }
 }
 
 AnyAsset::AnyAsset(const AnyAsset& other)
-    : reflectedId(other.reflectedId)
+    : idOrPath(other.idOrPath)
     , mId(other.mId)
     , mRefCount(other.mRefCount)
     , mVersion(other.mVersion)
+    , path(other.path)
 {
     this->incRef();
 }
 
 AnyAsset::AnyAsset(AnyAsset&& other) noexcept
-    : reflectedId(other.reflectedId)
+    : idOrPath(other.idOrPath)
     , mId(other.mId)
     , mRefCount(other.mRefCount)
     , mVersion(other.mVersion)
+    , path(other.path)
 {
     other.mRefCount = nullptr;
 }
@@ -70,10 +81,11 @@ AnyAsset::AnyAsset(AnyAsset&& other) noexcept
 AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 {
     this->decRef();
-    reflectedId = other.reflectedId;
+    idOrPath = other.idOrPath;
     mId = other.mId;
     mRefCount = other.mRefCount;
     mVersion = other.mVersion;
+    path = other.path;
     this->incRef();
     return *this;
 }
@@ -81,11 +93,12 @@ AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
 {
     this->decRef();
-    reflectedId = other.reflectedId;
+    idOrPath = other.idOrPath;
     mId = other.mId;
     mRefCount = other.mRefCount;
     mVersion = other.mVersion;
     other.mRefCount = nullptr;
+    path = other.path;
     return *this;
 }
 
@@ -96,22 +109,27 @@ bool AnyAsset::operator==(const AnyAsset& other) const
 
 int AnyAsset::getVersion() const
 {
-    return reflectedId == mId ? mVersion : 0;
+    return uuids::uuid::from_string(idOrPath) == mId ? mVersion : 0;
 }
 
-uuids::uuid AnyAsset::getId() const
+std::string AnyAsset::getId() const
 {
-    return reflectedId;
+    return idOrPath;
+}
+
+std::string AnyAsset::getPath() const
+{
+    return path;
 }
 
 bool AnyAsset::isNull() const
 {
-    return reflectedId.is_nil();
+    return idOrPath.empty();
 }
 
 bool AnyAsset::isStrong() const
 {
-    return reflectedId == mId && mRefCount != nullptr;
+    return uuids::uuid::from_string(idOrPath) == mId && mRefCount != nullptr;
 }
 
 void AnyAsset::makeWeak()
@@ -126,12 +144,12 @@ cubos::core::reflection::Type& AnyAsset::makeType(std::string name)
 
     return Type::create(std::move(name))
         .with(ConstructibleTrait::typed<AnyAsset>().withBasicConstructors().build())
-        .with(FieldsTrait().withField("id", &AnyAsset::reflectedId));
+        .with(FieldsTrait().withField("id", &AnyAsset::idOrPath));
 }
 
 void AnyAsset::incRef() const
 {
-    if (reflectedId == mId && mRefCount != nullptr)
+    if (uuids::uuid::from_string(idOrPath) == mId && mRefCount != nullptr)
     {
         static_cast<std::atomic<int>*>(mRefCount)->fetch_add(1);
     }
@@ -139,7 +157,7 @@ void AnyAsset::incRef() const
 
 void AnyAsset::decRef() const
 {
-    if (reflectedId == mId && mRefCount != nullptr)
+    if (uuids::uuid::from_string(idOrPath) == mId && mRefCount != nullptr)
     {
         static_cast<std::atomic<int>*>(mRefCount)->fetch_sub(1);
     }

@@ -14,6 +14,7 @@
 
 using namespace cubos::engine;
 
+// static const Asset<Scene> SceneAsset = AnyAsset("/assets/scenes/main.cubos");
 static const Asset<Scene> SceneAsset = AnyAsset("ee5bb451-05b7-430f-a641-a746f7009eef");
 static const Asset<VoxelPalette> PaletteAsset = AnyAsset("101da567-3d23-46ae-a391-c10ec00e8718");
 static const Asset<InputBindings> InputBindingsAsset = AnyAsset("b20900a4-20ee-4caa-8830-14585050bead");

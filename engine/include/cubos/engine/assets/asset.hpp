@@ -30,7 +30,7 @@ namespace cubos::engine
 
         /// @brief Avoid using this field, use @ref getId() instead.
         /// @todo This was added as a dirty fix for #692, should be removed once the issue is fixed.
-        uuids::uuid reflectedId;
+        std::string idOrPath;
 
         ~AnyAsset();
 
@@ -73,7 +73,11 @@ namespace cubos::engine
 
         /// @brief Gets the UUID of the asset.
         /// @return Asset UUID.
-        uuids::uuid getId() const;
+        std::string getId() const;
+
+        /// @brief Gets the path of the asset.
+        /// @return Asset path.
+        std::string getPath() const;
 
         /// @brief Checks if the handle is null.
         /// @return Whether the handle is null.
@@ -111,9 +115,10 @@ namespace cubos::engine
         /// @brief Decrements the reference count of the asset.
         void decRef() const;
 
-        uuids::uuid mId; ///< UUID of the asset.
-        void* mRefCount; ///< Void pointer to avoid including `<atomic>` in the header.
-        int mVersion;    ///< Last known version of the asset.
+        uuids::uuid mId;  ///< UUID of the asset.
+        void* mRefCount;  ///< Void pointer to avoid including `<atomic>` in the header.
+        int mVersion;     ///< Last known version of the asset.
+        std::string path; ///< Path of the asset.
     };
 
     /// @brief Handle to an asset of a specific type.
@@ -160,10 +165,11 @@ namespace cubos::engine
     inline AnyAsset::operator Asset<T>() const
     {
         Asset<T> asset;
-        asset.reflectedId = reflectedId;
+        asset.idOrPath = idOrPath;
         asset.mId = mId;
         asset.mRefCount = mRefCount;
         asset.mVersion = mVersion;
+        asset.path = path;
         asset.incRef();
         return asset;
     }
