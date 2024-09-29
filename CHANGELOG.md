@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Generic Camera component to hold projection matrix (#1331, **@mkuritsu**).
 - Initial application debugging through Tesseratos (#1303, **@RiscadoA**).
 - Print stacktrace with *cpptrace* on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
-- OrthographicCamera component (#1335, **@mkuritsu**)
+- Orthographic Camera component (#1182, **@mkuritsu**).
 
 ### Changed
 
@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Spot light angle mismatch between light and shadows (#1310, **@tomas7770**).
 - Spot shadows cause light range cutoff (#1312, **@tomas7770**).
+- Precision error in split screen size calculations (**@mkuritsu**).
 
 
 ## [v0.3.0] - 2024-08-02
