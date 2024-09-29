@@ -4,7 +4,7 @@
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/metrics).
 
-Registering metrics and profiling in **CUBOS.** can be done through the metric macros defined in @ref core/tel/metrics.hpp and the @ref core::tel::Metrics class.
+Registering metrics and profiling in **Cubos** can be done through the metric macros defined in @ref core/tel/metrics.hpp and the @ref core::tel::Metrics class.
 In order to enable these features, compile with `-DENABLE_PROFILING`.
 
 @snippet metrics/main.cpp Import metrics
@@ -28,26 +28,37 @@ We can now get the existing metrics and their values:
 Output:
 
 ```
-[11:34:13.824] [main.cpp:51 main] debug: Found new metric: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27"
-[11:34:13.824] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 103.0721
-[11:34:13.824] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 469.1480
-[11:34:13.825] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 379.0656
-[11:34:13.825] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 388.1754
-[11:34:13.825] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 37.1140
-[11:34:13.825] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 14.0966
-[11:34:13.825] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 8.1281
-[11:34:13.825] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 464.1636
-[11:34:13.826] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 313.1553
-[11:34:13.826] [main.cpp:56 main] debug: "profiling:/home/cubos/core/samples/metrics/main.cpp:simulateFrame:27" : 57.0801
-[11:34:13.826] [main.cpp:51 main] debug: Found new metric: "i"
-[11:34:13.826] [main.cpp:56 main] debug: "i" : 0.0000
-[11:34:13.827] [main.cpp:56 main] debug: "i" : 1.0000
-[11:34:13.827] [main.cpp:56 main] debug: "i" : 2.0000
-[11:34:13.827] [main.cpp:56 main] debug: "i" : 3.0000
-[11:34:13.827] [main.cpp:56 main] debug: "i" : 4.0000
-[11:34:13.827] [main.cpp:56 main] debug: "i" : 5.0000
-[11:34:13.828] [main.cpp:56 main] debug: "i" : 6.0000
-[11:34:13.828] [main.cpp:56 main] debug: "i" : 7.0000
-[11:34:13.828] [main.cpp:56 main] debug: "i" : 8.0000
-[11:34:13.828] [main.cpp:56 main] debug: "i" : 9.0000
+[17:21:59.677] [main.cpp:53 main] [thread21496] debug: Found new metric: "thread21496:simulateFrame:begin"
+[17:21:59.679] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.680] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.681] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.681] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.682] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.683] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.684] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.685] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.686] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.687] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:begin" : 5.0244E+8
+[17:21:59.687] [main.cpp:53 main] [thread21496] debug: Found new metric: "thread21496:simulateFrame:end"
+[17:21:59.688] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.689] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.690] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.691] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.693] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.694] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.695] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.696] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.697] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.698] [main.cpp:58 main] [thread21496] debug: "thread21496:simulateFrame:end" : 5.0244E+8
+[17:21:59.699] [main.cpp:53 main] [thread21496] debug: Found new metric: "thread21496:i"
+[17:21:59.700] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 0.0000
+[17:21:59.701] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 1.0000
+[17:21:59.701] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 2.0000
+[17:21:59.702] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 3.0000
+[17:21:59.703] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 4.0000
+[17:21:59.704] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 5.0000
+[17:21:59.705] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 6.0000
+[17:21:59.706] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 7.0000
+[17:21:59.707] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 8.0000
+[17:21:59.708] [main.cpp:58 main] [thread21496] debug: "thread21496:i" : 9.0000
 ```

@@ -9,7 +9,6 @@
 #include <cubos/core/tel/metrics.hpp>
 
 using cubos::core::tel::Metrics;
-using cubos::core::tel::ScopeProfiler;
 
 namespace
 {
@@ -117,18 +116,3 @@ bool Metrics::readName(std::string& name, size_t& seenCount)
     seenCount++;
     return true;
 }
-
-ScopeProfiler::ScopeProfiler(std::string name, std::string file, std::size_t line)
-    : mName(std::move(name))
-    , mFile(std::move(file))
-    , mLine(line)
-    , mStart(std::chrono::time_point<std::chrono::high_resolution_clock>::clock::now())
-{
-}
-
-ScopeProfiler::~ScopeProfiler()
-{
-    auto now = std::chrono::time_point<std::chrono::high_resolution_clock>::clock::now();
-    std::chrono::duration<double, std::milli> elapsed = now - mStart;
-    Metrics::metric("profiling:" + mFile + ":" + mName + ":" + std::to_string(mLine), elapsed.count());
-};

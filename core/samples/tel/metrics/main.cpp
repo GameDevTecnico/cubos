@@ -23,7 +23,7 @@ static int randomMs(int min, int max)
 /// [Simulate profiling]
 static void simulateFrame(int ms)
 {
-    CUBOS_PROFILE();
+    CUBOS_SPAN_INFO("simulateFrame");
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 }
 /// [Simulate profiling]
