@@ -78,27 +78,17 @@
               struct <a href="structcubos_1_1core_1_1tel_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a>
             </dt>
             <dd>A timestamp used to identify when a logging message was written.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum class <a href="#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a> { </span><span class="m-doc-wrap"><a href="#aad49ff8e7a07860d34be315ce564e3aaadd4ec0ac4e58f7c32a01244ae91150b1" class="m-doc">Trace</a> = CUBOS_LOG_LEVEL_TRACE,
-              <a href="#aad49ff8e7a07860d34be315ce564e3aaaa603905470e2a5b8c13e96b579ef0dba" class="m-doc">Debug</a> = CUBOS_LOG_LEVEL_DEBUG,
-              <a href="#aad49ff8e7a07860d34be315ce564e3aaa4059b0251f66a18cb56f544728796875" class="m-doc">Info</a> = CUBOS_LOG_LEVEL_INFO,
-              <a href="#aad49ff8e7a07860d34be315ce564e3aaa56525ae64d370c0b448ac0d60710ef17" class="m-doc">Warn</a> = CUBOS_LOG_LEVEL_WARN,
-              <a href="#aad49ff8e7a07860d34be315ce564e3aaa902b0d55fddef6f8d651fe1035b7d4bd" class="m-doc">Error</a> = CUBOS_LOG_LEVEL_ERROR,
-              <a href="#aad49ff8e7a07860d34be315ce564e3aaa278d01e5af56273bae1bb99a98b370cd" class="m-doc">Critical</a> = CUBOS_LOG_LEVEL_CRITICAL,
-              <a href="#aad49ff8e7a07860d34be315ce564e3aaad15305d7a4e34e02489c74a5ef542f36" class="m-doc">Off</a> = CUBOS_LOG_LEVEL_OFF }</span>
-            </dt>
-            <dd>Represents a logging level.</dd>
           </dl>
         </section>
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static void <a href="#a0e9da538539cca80e3fa9ffc8e02ec0f" class="m-doc">level</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1tel_1_1Logger.html#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a> level)</span>
+              <span class="m-doc-wrap-bumper">static void <a href="#a0e9da538539cca80e3fa9ffc8e02ec0f" class="m-doc">level</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span>
             </dt>
             <dd>Sets the log level.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a51f5b2fc874d6514e98852348d17acd9" class="m-doc">level</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1tel_1_1Logger.html#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a></span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a51f5b2fc874d6514e98852348d17acd9" class="m-doc">level</a>(</span><span class="m-doc-wrap">) -&gt; <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a></span>
             </dt>
             <dd>Gets the current log level.</dd>
             <dt>
@@ -110,14 +100,14 @@
             </dt>
             <dd>Mounts a standard archive on the <code>/logs/</code> directory, and calls <code>logToFile</code> to a timestamped log file on that directory.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static void <a href="#a8e8855d6f1df4ac73752c8de49fb8293" class="m-doc">write</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1tel_1_1Logger.html#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a> level,
+              <span class="m-doc-wrap-bumper">static void <a href="#a8e8855d6f1df4ac73752c8de49fb8293" class="m-doc">write</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level,
               <a href="structcubos_1_1core_1_1tel_1_1Logger_1_1Location.html" class="m-doc">Location</a> location,
               std::string message)</span>
             </dt>
             <dd>Creates a new entry in the logs, as long as the log level is high enough.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... TArgs&gt;</div>
-              <span class="m-doc-wrap-bumper">static void <a href="#a5313175a17d4235267ffb5379715fa4e" class="m-doc">writeFormat</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1tel_1_1Logger.html#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a> level,
+              <span class="m-doc-wrap-bumper">static void <a href="#a5313175a17d4235267ffb5379715fa4e" class="m-doc">writeFormat</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level,
               <a href="structcubos_1_1core_1_1tel_1_1Logger_1_1Location.html" class="m-doc">Location</a> location,
               const char* format,
               TArgs... args)</span>
@@ -140,66 +130,10 @@
           </dl>
         </section>
         <section>
-          <h2>Enum documentation</h2>
-          <section class="m-doc-details" id="aad49ff8e7a07860d34be315ce564e3aa"><div>
-            <h3>
-              enum class cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /><a href="#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc-self">Level</a>
-            </h3>
-            <p>Represents a logging level.</p>
-            <table class="m-table m-fullwidth m-flat m-doc">
-              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
-              <tbody>
-                <tr>
-                  <td><a href="#aad49ff8e7a07860d34be315ce564e3aaadd4ec0ac4e58f7c32a01244ae91150b1" class="m-doc-self" id="aad49ff8e7a07860d34be315ce564e3aaadd4ec0ac4e58f7c32a01244ae91150b1">Trace</a></td>
-                  <td>
-                  <p>Trace log level, lowest log level. Very verbose.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="#aad49ff8e7a07860d34be315ce564e3aaaa603905470e2a5b8c13e96b579ef0dba" class="m-doc-self" id="aad49ff8e7a07860d34be315ce564e3aaaa603905470e2a5b8c13e96b579ef0dba">Debug</a></td>
-                  <td>
-                  <p>Debug log level. Contains messages useful for debugging, but which are not necessary in release builds.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="#aad49ff8e7a07860d34be315ce564e3aaa4059b0251f66a18cb56f544728796875" class="m-doc-self" id="aad49ff8e7a07860d34be315ce564e3aaa4059b0251f66a18cb56f544728796875">Info</a></td>
-                  <td>
-                  <p>Information log level. Contains important events that are not errors.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="#aad49ff8e7a07860d34be315ce564e3aaa56525ae64d370c0b448ac0d60710ef17" class="m-doc-self" id="aad49ff8e7a07860d34be315ce564e3aaa56525ae64d370c0b448ac0d60710ef17">Warn</a></td>
-                  <td>
-                  <p>Warn log level. Contains events that are not errors, but which are unexpected and may be problematic.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="#aad49ff8e7a07860d34be315ce564e3aaa902b0d55fddef6f8d651fe1035b7d4bd" class="m-doc-self" id="aad49ff8e7a07860d34be315ce564e3aaa902b0d55fddef6f8d651fe1035b7d4bd">Error</a></td>
-                  <td>
-                  <p>Error log level. Contains errors which are recoverable from.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="#aad49ff8e7a07860d34be315ce564e3aaa278d01e5af56273bae1bb99a98b370cd" class="m-doc-self" id="aad49ff8e7a07860d34be315ce564e3aaa278d01e5af56273bae1bb99a98b370cd">Critical</a></td>
-                  <td>
-                  <p>Critical log level, highest log level. Contains errors which are unrecoverable from.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="#aad49ff8e7a07860d34be315ce564e3aaad15305d7a4e34e02489c74a5ef542f36" class="m-doc-self" id="aad49ff8e7a07860d34be315ce564e3aaad15305d7a4e34e02489c74a5ef542f36">Off</a></td>
-                  <td>
-                  <p>Off log level, disables all logging.</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-        </section>
-        <section>
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a0e9da538539cca80e3fa9ffc8e02ec0f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0e9da538539cca80e3fa9ffc8e02ec0f" class="m-doc-self">level</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1tel_1_1Logger.html#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a> level)</span></span>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0e9da538539cca80e3fa9ffc8e02ec0f" class="m-doc-self">level</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span></span>
             </h3>
             <p>Sets the log level.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -213,11 +147,11 @@
                 </tr>
               </tbody>
             </table>
-<p>If <a href="group__core-tel.html#gab30a9342864743fe7f08c2eba1a796bf" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL</a> is higher than the set level, entries below it are still not registered.</p>
+<p>If <a href="group__core-tel.html#ga6a082608c8a7c997dc1ecd62c64eaf12" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL</a> is higher than the set level, entries below it are still not registered.</p>
           </div></section>
           <section class="m-doc-details" id="a51f5b2fc874d6514e98852348d17acd9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1tel_1_1Logger.html#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a> cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51f5b2fc874d6514e98852348d17acd9" class="m-doc-self">level</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">static <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51f5b2fc874d6514e98852348d17acd9" class="m-doc-self">level</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Gets the current log level.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -270,7 +204,7 @@
           </div></section>
           <section class="m-doc-details" id="a8e8855d6f1df4ac73752c8de49fb8293"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e8855d6f1df4ac73752c8de49fb8293" class="m-doc-self">write</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1tel_1_1Logger.html#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a> level,
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e8855d6f1df4ac73752c8de49fb8293" class="m-doc-self">write</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level,
               <a href="structcubos_1_1core_1_1tel_1_1Logger_1_1Location.html" class="m-doc">Location</a> location,
               std::string message)</span></span>
             </h3>
@@ -300,7 +234,7 @@
               <div class="m-doc-template">
                 template&lt;typename... TArgs&gt;
               </div>
-              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5313175a17d4235267ffb5379715fa4e" class="m-doc-self">writeFormat</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1tel_1_1Logger.html#aad49ff8e7a07860d34be315ce564e3aa" class="m-doc">Level</a> level,
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5313175a17d4235267ffb5379715fa4e" class="m-doc-self">writeFormat</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level,
               <a href="structcubos_1_1core_1_1tel_1_1Logger_1_1Location.html" class="m-doc">Location</a> location,
               const char* format,
               TArgs... args)</span></span>

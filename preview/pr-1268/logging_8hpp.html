@@ -106,95 +106,197 @@
           <h2><a href="#define-members">Defines</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga2a7abf5148c7e9b2ee89f6abd095df6e" class="m-doc">CUBOS_LOG_LEVEL_TRACE</a></span>
-            </dt>
-            <dd>Trace log level, lowest log level. Very verbose.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga4114acc5174f2e647521d523af9dc765" class="m-doc">CUBOS_LOG_LEVEL_DEBUG</a></span>
-            </dt>
-            <dd>Debug log level. Contains messages useful for debugging, but which are not necessary in release builds.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga1bd654ee38cf123e6679dac057c39a3d" class="m-doc">CUBOS_LOG_LEVEL_INFO</a></span>
-            </dt>
-            <dd>Information log level. Contains important events that are not errors.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gaca1a964d151305f9ae25b3be3cc91481" class="m-doc">CUBOS_LOG_LEVEL_WARN</a></span>
-            </dt>
-            <dd>Warn log level. Contains events that are not errors, but which are unexpected and may be problematic.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga7f1a472ae2de8c9f5af1e8fbcad6b8ff" class="m-doc">CUBOS_LOG_LEVEL_ERROR</a></span>
-            </dt>
-            <dd>Error log level. Contains errors which are recoverable from.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga092bceb964835e9a2f1d08e62a847cee" class="m-doc">CUBOS_LOG_LEVEL_CRITICAL</a></span>
-            </dt>
-            <dd>Critical log level, highest log level. Contains errors which are unrecoverable from.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga684c1d8f866203995006823ec5a75a4e" class="m-doc">CUBOS_LOG_LEVEL_OFF</a></span>
-            </dt>
-            <dd>Off log level, disables all logging.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gab30a9342864743fe7f08c2eba1a796bf" class="m-doc">CUBOS_LOG_LEVEL</a></span>
-            </dt>
-            <dd>Log level to compile in.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga1650d294b3772237b3e8f70ed29959c5" class="m-doc">CUBOS_TRACE</a>(</span><span class="m-doc-wrap">...)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="#a1650d294b3772237b3e8f70ed29959c5" class="m-doc">CUBOS_TRACE</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Used for logging very verbose information.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gac68a7b48ebad5da4b0064dbc2ae42187" class="m-doc">CUBOS_DEBUG</a>(</span><span class="m-doc-wrap">...)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="#ac68a7b48ebad5da4b0064dbc2ae42187" class="m-doc">CUBOS_DEBUG</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Used for logging information which is useful for debugging but not necessary in release builds.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gaa5a3222f80534562afe8e28d001994d4" class="m-doc">CUBOS_INFO</a>(</span><span class="m-doc-wrap">...)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="#aa5a3222f80534562afe8e28d001994d4" class="m-doc">CUBOS_INFO</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Used for logging information which is useful in release builds.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga09debf288c8d96c1c6661bf065a4d7a4" class="m-doc">CUBOS_WARN</a>(</span><span class="m-doc-wrap">...)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="#a09debf288c8d96c1c6661bf065a4d7a4" class="m-doc">CUBOS_WARN</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Used for logging unexpected events.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga29caf118f508f57043129399cdbc8aa7" class="m-doc">CUBOS_ERROR</a>(</span><span class="m-doc-wrap">...)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="#a29caf118f508f57043129399cdbc8aa7" class="m-doc">CUBOS_ERROR</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Used for logging recoverable errors.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga397b0c0ac9a14be8db875c7d5c9436d0" class="m-doc">CUBOS_CRITICAL</a>(</span><span class="m-doc-wrap">...)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="#a397b0c0ac9a14be8db875c7d5c9436d0" class="m-doc">CUBOS_CRITICAL</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Used for logging unrecoverable errors.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gaee324546677ce2aabba558ed6d7e3e88" class="m-doc">CUBOS_LOG</a>(</span><span class="m-doc-wrap">level,
+              <span class="m-doc-wrap-bumper">#define <a href="#aee324546677ce2aabba558ed6d7e3e88" class="m-doc">CUBOS_LOG</a>(</span><span class="m-doc-wrap">level,
               ...)</span>
             </dt>
             <dd>Used for logging messages.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga134dfbf1cece1d0b52e7031022f9de34" class="m-doc">CUBOS_FAIL</a>(</span><span class="m-doc-wrap">...)</span>
+            <dt id="a134dfbf1cece1d0b52e7031022f9de34">
+              <span class="m-doc-wrap-bumper">#define <a href="#a134dfbf1cece1d0b52e7031022f9de34" class="m-doc-self">CUBOS_FAIL</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Aborts a program, optionally printing a critical error message.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga557fc5b27b4fb8b7c0921e57704f0de6" class="m-doc">CUBOS_UNREACHABLE</a>(</span><span class="m-doc-wrap">...)</span>
+            <dt id="a557fc5b27b4fb8b7c0921e57704f0de6">
+              <span class="m-doc-wrap-bumper">#define <a href="#a557fc5b27b4fb8b7c0921e57704f0de6" class="m-doc-self">CUBOS_UNREACHABLE</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Marks a code path as supposedly unreachable. Aborts the program when reached.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga817422d20f1aa67a06c2b6578cbe1a7d" class="m-doc">CUBOS_TODO</a>(</span><span class="m-doc-wrap">...)</span>
+            <dt id="a817422d20f1aa67a06c2b6578cbe1a7d">
+              <span class="m-doc-wrap-bumper">#define <a href="#a817422d20f1aa67a06c2b6578cbe1a7d" class="m-doc-self">CUBOS_TODO</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Marks a code path as unfinished. Aborts the program when reached.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga05d4ae5d43da9aa0aade1eb82e9abca3" class="m-doc">CUBOS_ASSERT</a>(</span><span class="m-doc-wrap">cond,
+            <dt id="a05d4ae5d43da9aa0aade1eb82e9abca3">
+              <span class="m-doc-wrap-bumper">#define <a href="#a05d4ae5d43da9aa0aade1eb82e9abca3" class="m-doc-self">CUBOS_ASSERT</a>(</span><span class="m-doc-wrap">cond,
               ...)</span>
             </dt>
             <dd>Asserts that a condition is true, aborting the program if it is not.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gaf13ab8923b051abcc334b9f32453d02b" class="m-doc">CUBOS_ASSERT_IMP</a>(</span><span class="m-doc-wrap">cond,
+            <dt id="af13ab8923b051abcc334b9f32453d02b">
+              <span class="m-doc-wrap-bumper">#define <a href="#af13ab8923b051abcc334b9f32453d02b" class="m-doc-self">CUBOS_ASSERT_IMP</a>(</span><span class="m-doc-wrap">cond,
               cons,
               ...)</span>
             </dt>
             <dd>Asserts that an implication is true, aborting the program if it is not.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga604b5aae9d864dfd7b5afebbc914f696" class="m-doc">CUBOS_DEBUG_ASSERT</a>(</span><span class="m-doc-wrap">cond,
+            <dt id="a604b5aae9d864dfd7b5afebbc914f696">
+              <span class="m-doc-wrap-bumper">#define <a href="#a604b5aae9d864dfd7b5afebbc914f696" class="m-doc-self">CUBOS_DEBUG_ASSERT</a>(</span><span class="m-doc-wrap">cond,
               ...)</span>
             </dt>
             <dd>In debug builds asserts that a condition is true, aborting the program if it is not.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Define documentation</h2>
+          <section class="m-doc-details" id="a1650d294b3772237b3e8f70ed29959c5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#a1650d294b3772237b3e8f70ed29959c5" class="m-doc-self">CUBOS_TRACE</a>(</span><span class="m-doc-wrap">...)</span>
+            </h3>
+            <p>Used for logging very verbose information.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">...</td>
+                  <td>Format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-tel.html#gaa0a24c67125f0e99b43199ce5a512e15" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />TRACE</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ac68a7b48ebad5da4b0064dbc2ae42187"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ac68a7b48ebad5da4b0064dbc2ae42187" class="m-doc-self">CUBOS_DEBUG</a>(</span><span class="m-doc-wrap">...)</span>
+            </h3>
+            <p>Used for logging information which is useful for debugging but not necessary in release builds.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">...</td>
+                  <td>Format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-tel.html#ga20110fc95ba905a8770cdc5df3589358" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />DEBUG</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aa5a3222f80534562afe8e28d001994d4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#aa5a3222f80534562afe8e28d001994d4" class="m-doc-self">CUBOS_INFO</a>(</span><span class="m-doc-wrap">...)</span>
+            </h3>
+            <p>Used for logging information which is useful in release builds.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">...</td>
+                  <td>Format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-tel.html#ga3f06950f38620f5724b1f0e93a618c3a" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />INFO</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a09debf288c8d96c1c6661bf065a4d7a4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#a09debf288c8d96c1c6661bf065a4d7a4" class="m-doc-self">CUBOS_WARN</a>(</span><span class="m-doc-wrap">...)</span>
+            </h3>
+            <p>Used for logging unexpected events.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">...</td>
+                  <td>Format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-tel.html#ga40853fe4553fa712bfb264301a05c5c4" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />WARN</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a29caf118f508f57043129399cdbc8aa7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#a29caf118f508f57043129399cdbc8aa7" class="m-doc-self">CUBOS_ERROR</a>(</span><span class="m-doc-wrap">...)</span>
+            </h3>
+            <p>Used for logging recoverable errors.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">...</td>
+                  <td>Format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-tel.html#gac9a4116f620f6cb50f52a10de5c287fe" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />ERROR</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a397b0c0ac9a14be8db875c7d5c9436d0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#a397b0c0ac9a14be8db875c7d5c9436d0" class="m-doc-self">CUBOS_CRITICAL</a>(</span><span class="m-doc-wrap">...)</span>
+            </h3>
+            <p>Used for logging unrecoverable errors.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">...</td>
+                  <td>Format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-tel.html#ga2fb12867a6338cfa2b24105468f41490" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />CRITICAL</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aee324546677ce2aabba558ed6d7e3e88"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#aee324546677ce2aabba558ed6d7e3e88" class="m-doc-self">CUBOS_LOG</a>(</span><span class="m-doc-wrap">level,
+              ...)</span>
+            </h3>
+            <p>Used for logging messages.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">level</td>
+                  <td>Log level.</td>
+                </tr>
+                <tr>
+                  <td>...</td>
+                  <td>Format string and arguments.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-tel.html#ga2fb12867a6338cfa2b24105468f41490" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />CRITICAL</a></p></aside>
+          </div></section>
         </section>
       </div>
     </div>
