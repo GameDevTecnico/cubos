@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Camera module | Cubos Docs</title>
+  <title>engine/render/camera/perspective.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,88 +46,38 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
-          Camera <span class="m-thin">module</span></h1>
-        <p>Adds <a href="structcubos_1_1engine_1_1PerspectiveCamera.html" class="m-doc">PerspectiveCamera</a> components and the <a href="structcubos_1_1engine_1_1DrawsTo.html" class="m-doc">DrawsTo</a> relation.</p>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_13f5e2b140054f355a8f8a8c95923a6a.html">render</a>/</span><span class="m-breadcrumb"><a href="dir_5bfb929504efd2928af00ae5299c5a8d.html">camera</a>/</span>perspective.hpp <span class="m-thin">file</span>
+        </h1>
+        <p>Component <a href="structcubos_1_1engine_1_1PerspectiveCamera.html" class="m-doc">cubos::<wbr />engine::<wbr />PerspectiveCamera</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="camera_8hpp.html" class="m-doc">camera.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">cubos::<wbr />engine::<wbr />Camera</a>.</dd>
-            <dt>file <a href="draws__to_8hpp.html" class="m-doc">draws_to.hpp</a></dt>
-            <dd>Relation <a href="structcubos_1_1engine_1_1DrawsTo.html" class="m-doc">cubos::<wbr />engine::<wbr />DrawsTo</a>.</dd>
-            <dt>file <a href="orthographic_8hpp.html" class="m-doc">orthographic.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1OrthographicCamera.html" class="m-doc">cubos::<wbr />engine::<wbr />OrthographicCamera</a>.</dd>
-            <dt>file <a href="perspective_8hpp.html" class="m-doc">perspective.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1PerspectiveCamera.html" class="m-doc">cubos::<wbr />engine::<wbr />PerspectiveCamera</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2camera_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">cubos::engine::Camera</a>
-            </dt>
-            <dd>Generic component to hold the projection matrix of a specific camera (either perspective or orthogonal).</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1DrawsTo.html" class="m-doc">cubos::engine::DrawsTo</a>
-            </dt>
-            <dd>Relation which indicates the &#x27;from&#x27; entity is a camera that draws to the &#x27;to&#x27; target.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1OrthographicCamera.html" class="m-doc">cubos::engine::OrthographicCamera</a>
-            </dt>
-            <dd>Component which defines parameters of a orthographic camera used to render the world.</dd>
-            <dt>
               struct <a href="structcubos_1_1engine_1_1PerspectiveCamera.html" class="m-doc">cubos::engine::PerspectiveCamera</a>
             </dt>
             <dd>Component which defines parameters of a perspective camera used to render the world.</dd>
           </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga8392a29879b80ce3ca7d324e33a3e774" class="m-doc">cameraPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga8392a29879b80ce3ca7d324e33a3e774"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga8392a29879b80ce3ca7d324e33a3e774" class="m-doc-self">cameraPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2camera_2plugin_8hpp.html">&lt;engine/render/camera/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
