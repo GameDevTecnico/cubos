@@ -7,9 +7,6 @@
 
 #pragma once
 
-#include <cubos/core/ecs/entity/entity.hpp>
-#include <cubos/core/gl/render_device.hpp>
-
 #include <cubos/engine/prelude.hpp>
 
 #include "debugger.hpp"
