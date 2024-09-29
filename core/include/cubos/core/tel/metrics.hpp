@@ -54,25 +54,6 @@ namespace cubos::core::tel
         static bool readName(std::string& name, size_t& seenCount);
     };
 
-    /// @brief Utility to measure the execution time of a scope.
-    ///
-    /// This class measures the time between its construction and destruction,
-    /// providing a way to profile code execution time.
-    class CUBOS_CORE_API ScopeProfiler
-    {
-    public:
-        /// @brief Construct a ScopeProfiler with a given name.
-        ScopeProfiler(std::string name, std::string file, std::size_t line);
-
-        /// @brief Destruct the ScopeProfiler and calculate the elapsed time.
-        ~ScopeProfiler();
-
-    private:
-        std::string mName;                                                  ///< The name of the scope.
-        std::string mFile;                                                  ///< The file from where it was invoked.
-        std::size_t mLine;                                                  ///< The line from where it was invoked.
-        std::chrono::time_point<std::chrono::high_resolution_clock> mStart; ///< Start time when constructed.
-    };
 } // namespace cubos::core::tel
 
 /// @def CUBOS_METRIC
@@ -85,20 +66,6 @@ namespace cubos::core::tel
 #define CUBOS_METRIC(name, val) ::cubos::core::tel::Metrics::metric(name, val)
 #else
 #define CUBOS_METRIC(...)                                                                                              \
-    do                                                                                                                 \
-    {                                                                                                                  \
-    } while (false)
-#endif
-
-/// @def CUBOS_PROFILE
-/// @ingroup core
-/// @brief Macro to measure the execution time of a function/scope, registering it as a metric.
-/// @note The macro uses `__FUNCTION__` to register the metric name.
-
-#ifdef CUBOS_PROFILING
-#define CUBOS_PROFILE() ::cubos::core::tel::ScopeProfiler _profilingTimeTracker(__FUNCTION__, __FILE__, __LINE__)
-#else
-#define CUBOS_PROFILE(...)                                                                                             \
     do                                                                                                                 \
     {                                                                                                                  \
     } while (false)
