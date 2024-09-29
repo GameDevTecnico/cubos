@@ -15,6 +15,7 @@ using cubos::core::data::FileSystem;
 using cubos::core::memory::BufferStream;
 using cubos::core::memory::SeekOrigin;
 using cubos::core::memory::Stream;
+using cubos::core::tel::Level;
 using cubos::core::tel::Logger;
 
 /// Mock implementation of the Archive interface class.
@@ -64,7 +65,7 @@ inline void unmountAll(const File::Handle& handle)
 
 TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
 {
-    Logger::level(Logger::Level::Critical);
+    cubos::core::tel::level(Level::Critical);
     unmountAll(FileSystem::root());
 
     SUBCASE("without anything mounted")

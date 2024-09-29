@@ -6,8 +6,8 @@
 #include <cubos/core/data/des/binary.hpp>
 #include <cubos/core/data/ser/binary.hpp>
 #include <cubos/core/ecs/cubos.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/function.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using namespace cubos::core;
 

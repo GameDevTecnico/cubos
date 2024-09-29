@@ -23,6 +23,7 @@ using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
+using cubos::core::tel::Level;
 using cubos::core::tel::Logger;
 
 namespace
@@ -132,7 +133,7 @@ TEST_CASE("data::JSONDeserializer")
 {
     using Json = nlohmann::json;
 
-    Logger::level(Logger::Level::Critical);
+    cubos::core::tel::level(Level::Critical);
 
     JSONDeserializer des{};
 

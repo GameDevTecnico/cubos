@@ -1,5 +1,4 @@
 #include <cubos/core/data/ser/binary.hpp>
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/endianness.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
@@ -10,6 +9,7 @@
 #include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/tel/logging.hpp>
 
 using cubos::core::data::BinarySerializer;
 using cubos::core::reflection::ArrayTrait;

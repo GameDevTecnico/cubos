@@ -151,7 +151,7 @@ CUBOS_REFLECT_IMPL(UnserializableBigStruct)
 TEST_CASE("reflection::TypeClient & reflection::TypeServer")
 {
     // You should probably uncomment this if you're debugging this test:
-    cubos::core::Logger::level(cubos::core::Logger::Level::Trace);
+    cubos::core::tel::level(cubos::core::tel::Level::Trace);
 
     std::latch serverLatch{1};
     std::latch clientLatch{1};
