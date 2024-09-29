@@ -35,12 +35,12 @@ static void setViewportCameras(glm::ivec2 position, glm::ivec2 size, int count,
         // Split along the largest axis.
         if (size.x > size.y)
         {
-            splitSize = {size.x / 2, size.y};
+            splitSize = {(size.x + 1) / 2, size.y};
             splitOffset = {size.x / 2, 0};
         }
         else
         {
-            splitSize = {size.x, size.y / 2};
+            splitSize = {size.x, (size.y + 1) / 2};
             splitOffset = {0, size.y / 2};
         }
 
