@@ -148,6 +148,11 @@
             </dt>
             <dd>Telemetry level to compile in.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga326bc7437d88503920910f70c4963ef7" class="m-doc">CUBOS_SPAN</a>(</span><span class="m-doc-wrap">name,
+              level)</span>
+            </dt>
+            <dd>Constructs a new span with a specified level.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">#define <a href="#ga6cbf990bace15b38fb617f2a9bac0cbf" class="m-doc">CUBOS_SPAN_INFO</a>(</span><span class="m-doc-wrap">name)</span>
             </dt>
             <dd>Constructs a new info span.</dd>
@@ -319,6 +324,29 @@
             </h3>
             <p>Telemetry level to compile in.</p>
 <p>This macro essentially controls the minimum Telemetry level that will be compiled into the binary.</p><p>Should be set to one of the following:</p><ul><li><a href="group__core-tel.html#gaa0a24c67125f0e99b43199ce5a512e15" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />TRACE</a></li><li><a href="group__core-tel.html#ga20110fc95ba905a8770cdc5df3589358" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />DEBUG</a></li><li><a href="group__core-tel.html#ga3f06950f38620f5724b1f0e93a618c3a" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />INFO</a></li><li><a href="group__core-tel.html#ga40853fe4553fa712bfb264301a05c5c4" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />WARN</a></li><li><a href="group__core-tel.html#gac9a4116f620f6cb50f52a10de5c287fe" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />ERROR</a></li><li><a href="group__core-tel.html#ga2fb12867a6338cfa2b24105468f41490" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />CRITICAL</a></li><li><a href="group__core-tel.html#gab71872ab58c8c473e7cefe52aebbe9cc" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />OFF</a></li></ul><p>By default, on debug builds, this is set to <a href="group__core-tel.html#gaa0a24c67125f0e99b43199ce5a512e15" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />TRACE</a>. On release builds, this is set to <a href="group__core-tel.html#ga3f06950f38620f5724b1f0e93a618c3a" class="m-doc">CUBOS_<wbr />TEL_<wbr />LEVEL_<wbr />INFO</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ga326bc7437d88503920910f70c4963ef7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">#define <a href="#ga326bc7437d88503920910f70c4963ef7" class="m-doc-self">CUBOS_SPAN</a>(</span><span class="m-doc-wrap">name,
+              level)</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
+            </h3>
+            <p>Constructs a new span with a specified level.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Span name.</td>
+                </tr>
+                <tr>
+                  <td>level</td>
+                  <td>Span level.</td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
           <section class="m-doc-details" id="ga6cbf990bace15b38fb617f2a9bac0cbf"><div>
             <h3>

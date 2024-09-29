@@ -77,11 +77,11 @@
             <dt>
               struct <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">cubos::core::tel::SpanId</a>
             </dt>
-            <dd>Represents the unique identifier and path for a span.</dd>
+            <dd>Uniquely identifies a span.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1tel_1_1SpanGuard.html" class="m-doc">cubos::core::tel::SpanGuard</a>
             </dt>
-            <dd>A guard object that ensures a span ends when it goes out of scope.</dd>
+            <dd>A guard object that automatically ends the current span when it goes out of scope.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1tel_1_1SpanManager.html" class="m-doc">cubos::core::tel::SpanManager</a>
             </dt>
@@ -91,6 +91,11 @@
         <section id="define-members">
           <h2><a href="#define-members">Defines</a></h2>
           <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga326bc7437d88503920910f70c4963ef7" class="m-doc">CUBOS_SPAN</a>(</span><span class="m-doc-wrap">name,
+              level)</span>
+            </dt>
+            <dd>Constructs a new span with a specified level.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga6cbf990bace15b38fb617f2a9bac0cbf" class="m-doc">CUBOS_SPAN_INFO</a>(</span><span class="m-doc-wrap">name)</span>
             </dt>

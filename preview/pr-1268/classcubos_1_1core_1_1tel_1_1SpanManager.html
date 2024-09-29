@@ -64,8 +64,8 @@
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
-            <dt id="a9ea7cff4e6fef557be40b2902d759937">
-              <span class="m-doc-wrap-bumper">static void <a href="#a9ea7cff4e6fef557be40b2902d759937" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+            <dt>
+              <span class="m-doc-wrap-bumper">static void <a href="#a9ea7cff4e6fef557be40b2902d759937" class="m-doc">begin</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span>
             </dt>
             <dd>Begins a new span.</dd>
@@ -77,14 +77,32 @@
               <span class="m-doc-wrap-bumper">static auto <a href="#a371607854a702e849f55a5755116d22e" class="m-doc">current</a>(</span><span class="m-doc-wrap">) -&gt; <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">SpanId</a></span>
             </dt>
             <dd>Gets the current active span.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">static void <a href="#a8810959ca671bdc984556046729fe398" class="m-doc">level</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span>
-            </dt>
-            <dd>Sets the tracing level.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9ea7cff4e6fef557be40b2902d759937"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />SpanManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ea7cff4e6fef557be40b2902d759937" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span></span>
+            </h3>
+            <p>Begins a new span.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Span name.</td>
+                </tr>
+                <tr>
+                  <td>level</td>
+                  <td>Span level.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a371607854a702e849f55a5755116d22e"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">SpanId</a> cubos::<wbr />core::<wbr />tel::<wbr />SpanManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a371607854a702e849f55a5755116d22e" class="m-doc-self">current</a>(</span><span class="m-doc-wrap">)</span></span>
@@ -98,24 +116,6 @@
                 </tr>
               </tfoot>
             </table>
-          </div></section>
-          <section class="m-doc-details" id="a8810959ca671bdc984556046729fe398"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />SpanManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8810959ca671bdc984556046729fe398" class="m-doc-self">level</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span></span>
-            </h3>
-            <p>Sets the tracing level.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">level</td>
-                  <td>New span level.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>If CUBOS_SPAN_LEVEL is higher than the set level, entries below it are still not registered.</p>
           </div></section>
         </section>
       </div>
