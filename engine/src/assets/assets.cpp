@@ -187,6 +187,8 @@ void Assets::loadMeta(std::string_view path)
 AnyAsset Assets::load(AnyAsset handle) const
 {
     auto assetEntry = this->entry(handle);
+    CUBOS_INFO("Asset::load Loading asset with ID: {} and Path: {}", assetEntry->meta.get("id").value_or(""),
+               assetEntry->meta.get("path").value_or(""));
     if (assetEntry == nullptr)
     {
         CUBOS_ERROR("Could not load asset");
@@ -225,6 +227,8 @@ AnyAsset Assets::load(AnyAsset handle) const
     assetEntry->refCount += 1;
     handle.mRefCount = &assetEntry->refCount;
     handle.mId = uuids::uuid::from_string(assetEntry->meta.get("id").value_or("")).value_or(uuids::uuid());
+    CUBOS_INFO("New Handle ID: {} and Path: {}", uuids::to_string(handle.mId),
+               assetEntry->meta.get("path").value_or(""));
     return handle;
 }
 
@@ -359,6 +363,7 @@ void Assets::invalidate(const AnyAsset& handle, bool shouldLock)
 
 AssetMetaRead Assets::readMeta(const AnyAsset& handle) const
 {
+    CUBOS_WARN("Reading metadata for asset {}", handle);
     auto assetEntry = this->entry(handle);
     CUBOS_ASSERT(assetEntry != nullptr, "Could not access metadata");
 
@@ -523,7 +528,6 @@ std::string Assets::checkIdType(const std::string& id) const
     }
 }
 
-// TODO: Implement this function, too much sus
 std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
 {
     // If the handle is null, we can't access the asset.
@@ -535,50 +539,48 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
 
     // Lock the entries map for reading.
     auto sharedLock = std::shared_lock(mMutex);
-
     // Search for the entry in the map.
     std::string id = handle.getId();
-
+    uuids::uuid uuid = uuids::uuid{};
     CUBOS_ERROR("Assets::entry 1 Current ID: {}", id);
+    CUBOS_INFO("Assets::entry 1 Current ID type: {}", checkIdType(id));
     if (Assets::checkIdType(id) == "Path")
     {
-        std::vector<AnyAsset> assets = this->listAll();
-        for (auto& asset : assets)
+        for (auto asset : mEntries)
         {
-            auto meta = this->readMeta(asset);
-            auto path = meta->get("path");
-            CUBOS_ERROR("Assets::entry 1 Current path: {}", path.value());
+            auto meta = asset.second->meta;
+            auto path = meta.get("path");
+            auto idd = meta.get("id");
+            CUBOS_ERROR("Assets::entry Path Current path: {}", path.value());
+            CUBOS_WARN("Assets::entry Path Current ID: {}", idd.value());
             if (path.has_value() && path.value() == id)
             {
-                auto it = mEntries.find(uuids::uuid::from_string(asset.getId()).value());
-                CUBOS_ERROR("Assets::entry 1 Current ID: {}", asset.getId());
-                if (it == mEntries.end())
-                {
-                    CUBOS_ERROR("No such asset {}", handle);
-                    return nullptr;
-                }
-                return it->second;
+                CUBOS_INFO("Assets::entry Path Found asset with path: {}", id);
+                uuid = uuids::uuid::from_string(meta.get("id").value()).value();
+                CUBOS_INFO("Assets::entry Path Found asset with id: {}", uuids::to_string(uuid));
+                break;
             }
         }
-
-        CUBOS_ERROR("No such asset {}", handle);
-        return nullptr;
     }
     else if (Assets::checkIdType(id) == "UUID")
     {
-        auto it = mEntries.find(uuids::uuid::from_string(handle.getId()).value());
-        if (it == mEntries.end())
-        {
-            CUBOS_ERROR("No such asset {}", handle);
-            return nullptr;
-        }
-        return it->second;
+        uuid = uuids::uuid::from_string(id).value();
     }
     else
     {
-        CUBOS_ERROR("No such asset {}", handle);
+        CUBOS_ERROR("Type mismatch {}", handle);
         return nullptr;
     }
+    auto it = mEntries.find(uuid);
+    // CUBOS_INFO("Assets::entry 1 Found asset with id: {}, and Path: {}", uuids::to_string(it->first),
+    //            it->second->meta.get("path").value());
+    CUBOS_INFO("Assets::entry 1 UUID to find id: {}", uuids::to_string(uuid));
+    if (it == mEntries.end())
+    {
+        CUBOS_ERROR("No such asset found with the uuid:  {}", handle);
+        return nullptr;
+    }
+    return it->second;
 }
 
 std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create)
@@ -609,23 +611,14 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
     uuids::uuid uuid = uuids::uuid{};
     if (Assets::checkIdType(id) == "Path")
     {
-        std::vector<AnyAsset> assets = this->listAll();
-        for (auto& asset : assets)
+        for (auto asset : mEntries)
         {
-            auto meta = this->readMeta(asset);
-            auto path = meta->get("path");
+            auto meta = asset.second->meta;
+            auto path = meta.get("path");
             if (path.has_value() && path.value() == id)
             {
-                auto tid = meta->get("id");
-                if (tid.has_value())
-                {
-                    uuid = uuids::uuid::from_string(tid.value()).value();
-                }
-                else
-                {
-                    CUBOS_ERROR("No such asset {}", handle);
-                    return nullptr;
-                }
+                uuid = uuids::uuid::from_string(meta.get("id").value()).value();
+                break;
             }
         }
     }
@@ -638,7 +631,7 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
         CUBOS_ERROR("Id type missmatch", id);
         return nullptr;
     }
-    auto it = mEntries.find(uuids::uuid::from_string(id).value());
+    auto it = mEntries.find(uuid);
     if (it == mEntries.end())
     {
         // If we're creating the asset, create a new entry for it.
