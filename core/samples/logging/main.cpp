@@ -14,7 +14,7 @@
 int main()
 {
     /// [Set logging level]
-    cubos::core::tel::Logger::level(cubos::core::tel::Logger::Level::Trace);
+    cubos::core::tel::level(cubos::core::tel::Level::Trace);
     /// [Set logging level]
 
     /// [Log to file]

@@ -29,6 +29,8 @@ set(CUBOS_CORE_SOURCE
 
 	"src/tel/logging.cpp"
 	"src/tel/metrics.cpp"
+	"src/tel/tracing.cpp"
+	"src/tel/level.cpp"
 
 	"src/thread/pool.cpp"
 	"src/thread/task.cpp"

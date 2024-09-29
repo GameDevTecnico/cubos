@@ -18,19 +18,8 @@ using cubos::core::data::File;
 using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
 using cubos::core::reflection::EnumTrait;
+using cubos::core::tel::Level;
 using cubos::core::tel::Logger;
-
-CUBOS_REFLECT_EXTERNAL_IMPL(Logger::Level)
-{
-    return Type::create("cubos::core::tel::Logger::Level")
-        .with(EnumTrait{}
-                  .withVariant<Logger::Level::Trace>("Trace")
-                  .withVariant<Logger::Level::Debug>("Debug")
-                  .withVariant<Logger::Level::Info>("Info")
-                  .withVariant<Logger::Level::Warn>("Warn")
-                  .withVariant<Logger::Level::Error>("Error")
-                  .withVariant<Logger::Level::Critical>("Critical"));
-}
 
 namespace
 {
@@ -38,7 +27,6 @@ namespace
     struct State
     {
         std::mutex mutex;
-        Logger::Level level = Logger::Level::Debug;
         std::vector<Logger::Entry> entries;
         std::unique_ptr<cubos::core::memory::Stream> logFileStream;
     };
@@ -69,21 +57,21 @@ static constexpr const char* ColorResetCode = "\033[m";
 /// @brief Returns an ASCII color code for the given log level.
 /// @param level Log level.
 /// @return ASCII color code.
-static const char* levelColor(Logger::Level level)
+static const char* levelColor(Level level)
 {
     switch (level)
     {
-    case Logger::Level::Trace:
+    case Level::Trace:
         return "\033[37m"; // White
-    case Logger::Level::Debug:
+    case Level::Debug:
         return "\033[36m"; // Cyan
-    case Logger::Level::Info:
+    case Level::Info:
         return "\033[32m"; // Green
-    case Logger::Level::Warn:
+    case Level::Warn:
         return "\033[33m\033[1m"; // Yellow bold
-    case Logger::Level::Error:
+    case Level::Error:
         return "\033[31m\033[1m"; // Red bold
-    case Logger::Level::Critical:
+    case Level::Critical:
         return "\033[1m\033[41m"; // Bold on red
     default:
         return ColorResetCode;
@@ -143,18 +131,6 @@ std::string Logger::Timestamp::string() const
     return hoursMinsSecs + '.' + msStr;
 }
 
-void Logger::level(Level level)
-{
-    std::lock_guard<std::mutex> guard{state().mutex};
-    state().level = level;
-}
-
-auto Logger::level() -> Logger::Level
-{
-    std::lock_guard<std::mutex> guard{state().mutex};
-    return state().level;
-}
-
 bool Logger::logToFile(const std::string& filePath)
 {
     auto file = FileSystem::create(filePath, /*directory=*/false);
@@ -195,11 +171,14 @@ void Logger::write(Level level, Location location, std::string message)
 
     std::lock_guard<std::mutex> guard{state().mutex};
 
-    if (static_cast<int>(state().level) > static_cast<int>(level))
+    if (static_cast<int>(tel::level()) > static_cast<int>(level))
     {
         // If the log level is higher than the message level, then just ignore it.
         return;
     }
+
+    // Cache so we dont loop spans twice.
+    auto spanName = SpanManager::current().path;
 
     // Print to file if opened
     if (state().logFileStream != nullptr)

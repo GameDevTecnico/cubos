@@ -9,6 +9,7 @@ using cubos::core::data::EmbeddedArchive;
 using cubos::core::data::File;
 using cubos::core::memory::SeekOrigin;
 using cubos::core::memory::Stream;
+using cubos::core::tel::Level;
 using cubos::core::tel::Logger;
 
 // Fear not - we aren't supposed do this manually - usually quadrados would do this for us.
@@ -33,7 +34,7 @@ static const EmbeddedArchive::Data MultipleData = {MultipleEntries,
 
 TEST_CASE("data::EmbeddedArchive")
 {
-    Logger::level(Logger::Level::Critical);
+    cubos::core::tel::level(Level::Critical);
 
     // Must use static since there are multiple subcases.
     static bool registered = false;

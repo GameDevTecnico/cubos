@@ -28,21 +28,21 @@ namespace
 } // namespace
 
 // Function to convert log level to a string
-static std::string levelToString(cubos::core::tel::Logger::Level level)
+static std::string levelToString(cubos::core::tel::Level level)
 {
     switch (level)
     {
-    case cubos::core::tel::Logger::Level::Trace:
+    case cubos::core::tel::Level::Trace:
         return "Trace";
-    case cubos::core::tel::Logger::Level::Debug:
+    case cubos::core::tel::Level::Debug:
         return "Debug";
-    case cubos::core::tel::Logger::Level::Info:
+    case cubos::core::tel::Level::Info:
         return "Info";
-    case cubos::core::tel::Logger::Level::Warn:
+    case cubos::core::tel::Level::Warn:
         return "Warn";
-    case cubos::core::tel::Logger::Level::Error:
+    case cubos::core::tel::Level::Error:
         return "Error";
-    case cubos::core::tel::Logger::Level::Critical:
+    case cubos::core::tel::Level::Critical:
         return "Critical";
     default:
         return "Unknown";
@@ -50,21 +50,21 @@ static std::string levelToString(cubos::core::tel::Logger::Level level)
 }
 
 // Function to convert log level to a color
-static ImVec4 levelToColor(cubos::core::tel::Logger::Level level)
+static ImVec4 levelToColor(cubos::core::tel::Level level)
 {
     switch (level)
     {
-    case cubos::core::tel::Logger::Level::Trace:
+    case cubos::core::tel::Level::Trace:
         return {1.0F, 1.0F, 1.0F, 1.0F}; // White
-    case cubos::core::tel::Logger::Level::Debug:
+    case cubos::core::tel::Level::Debug:
         return {0.0F, 1.0F, 1.0F, 1.0F}; // Cyan
-    case cubos::core::tel::Logger::Level::Info:
+    case cubos::core::tel::Level::Info:
         return {0.0F, 1.0F, 0.0F, 1.0F}; // Green
-    case cubos::core::tel::Logger::Level::Warn:
+    case cubos::core::tel::Level::Warn:
         return {1.0F, 1.0F, 0.0F, 1.0F}; // Yellow
-    case cubos::core::tel::Logger::Level::Error:
+    case cubos::core::tel::Level::Error:
         return {1.0F, 0.0F, 0.0F, 1.0F}; // Red
-    case cubos::core::tel::Logger::Level::Critical:
+    case cubos::core::tel::Level::Critical:
         return {1.0F, 0.0F, 1.0F, 1.0F}; // Magenta
     default:
         return {1.0F, 1.0F, 1.0F, 1.0F}; // Default to white
@@ -97,10 +97,10 @@ void cubos::engine::consolePlugin(Cubos& cubos)
         cubos::core::tel::Logger::Entry previousEntry;
 
         // Counters for each log level
-        std::unordered_map<cubos::core::tel::Logger::Level, int> logCounts = {
-            {cubos::core::tel::Logger::Level::Trace, 0}, {cubos::core::tel::Logger::Level::Debug, 0},
-            {cubos::core::tel::Logger::Level::Info, 0},  {cubos::core::tel::Logger::Level::Warn, 0},
-            {cubos::core::tel::Logger::Level::Error, 0}, {cubos::core::tel::Logger::Level::Critical, 0}};
+        std::unordered_map<cubos::core::tel::Level, int> logCounts = {
+            {cubos::core::tel::Level::Trace, 0}, {cubos::core::tel::Level::Debug, 0},
+            {cubos::core::tel::Level::Info, 0},  {cubos::core::tel::Level::Warn, 0},
+            {cubos::core::tel::Level::Error, 0}, {cubos::core::tel::Level::Critical, 0}};
 
         ImGui::BeginChild("Log", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()));
 
@@ -119,50 +119,50 @@ void cubos::engine::consolePlugin(Cubos& cubos)
         bool isFirstEntry = true;
         for (cubos::core::tel::Logger::Entry& e : state.uiEntries)
         {
-            if (e.level != cubos::core::tel::Logger::Level::Off)
+            if (e.level != cubos::core::tel::Level::Off)
             {
                 logCounts[e.level]++;
             }
 
             switch (e.level)
             {
-            case cubos::core::tel::Logger::Level::Trace:
+            case cubos::core::tel::Level::Trace:
                 if (!state.traceEnabled)
                 {
                     continue;
                 }
                 break;
-            case cubos::core::tel::Logger::Level::Debug:
+            case cubos::core::tel::Level::Debug:
                 if (!state.debugEnabled)
                 {
                     continue;
                 }
                 break;
-            case cubos::core::tel::Logger::Level::Info:
+            case cubos::core::tel::Level::Info:
                 if (!state.infoEnabled)
                 {
                     continue;
                 }
                 break;
-            case cubos::core::tel::Logger::Level::Warn:
+            case cubos::core::tel::Level::Warn:
                 if (!state.warnEnabled)
                 {
                     continue;
                 }
                 break;
-            case cubos::core::tel::Logger::Level::Error:
+            case cubos::core::tel::Level::Error:
                 if (!state.errorEnabled)
                 {
                     continue;
                 }
                 break;
-            case cubos::core::tel::Logger::Level::Critical:
+            case cubos::core::tel::Level::Critical:
                 if (!state.criticalEnabled)
                 {
                     continue;
                 }
                 break;
-            case cubos::core::tel::Logger::Level::Off:
+            case cubos::core::tel::Level::Off:
                 break;
             }
 
@@ -220,37 +220,36 @@ void cubos::engine::consolePlugin(Cubos& cubos)
             state.collapseEnabled = !state.collapseEnabled;
         }
 
-        std::string traceText = "Trace (" + std::to_string(logCounts[cubos::core::tel::Logger::Level::Trace]) + ")";
+        std::string traceText = "Trace (" + std::to_string(logCounts[cubos::core::tel::Level::Trace]) + ")";
         if (ImGui::SmallButton(traceText.c_str()))
         {
             state.traceEnabled = !state.traceEnabled;
         }
 
-        std::string debugText = "Debug (" + std::to_string(logCounts[cubos::core::tel::Logger::Level::Debug]) + ")";
+        std::string debugText = "Debug (" + std::to_string(logCounts[cubos::core::tel::Level::Debug]) + ")";
         if (ImGui::SmallButton(debugText.c_str()))
         {
             state.debugEnabled = !state.debugEnabled;
         }
 
-        std::string infoText = "Info (" + std::to_string(logCounts[cubos::core::tel::Logger::Level::Info]) + ")";
+        std::string infoText = "Info (" + std::to_string(logCounts[cubos::core::tel::Level::Info]) + ")";
         if (ImGui::SmallButton(infoText.c_str()))
         {
             state.infoEnabled = !state.infoEnabled;
         }
 
-        std::string warnText = "Warn (" + std::to_string(logCounts[cubos::core::tel::Logger::Level::Warn]) + ")";
+        std::string warnText = "Warn (" + std::to_string(logCounts[cubos::core::tel::Level::Warn]) + ")";
         if (ImGui::SmallButton(warnText.c_str()))
         {
             state.warnEnabled = !state.warnEnabled;
         }
 
-        std::string errorText = "Error (" + std::to_string(logCounts[cubos::core::tel::Logger::Level::Error]) + ")";
+        std::string errorText = "Error (" + std::to_string(logCounts[cubos::core::tel::Level::Error]) + ")";
         if (ImGui::SmallButton(errorText.c_str()))
         {
         }
 
-        std::string criticalText =
-            "Critical (" + std::to_string(logCounts[cubos::core::tel::Logger::Level::Critical]) + ")";
+        std::string criticalText = "Critical (" + std::to_string(logCounts[cubos::core::tel::Level::Critical]) + ")";
         if (ImGui::SmallButton(criticalText.c_str()))
         {
             state.criticalEnabled = !state.criticalEnabled;

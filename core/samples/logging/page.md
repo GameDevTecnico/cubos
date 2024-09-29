@@ -13,8 +13,8 @@ In order of increasing severity, they are:
 
 @snippet logging/main.cpp Logging macros
 
-The minimum registered log level is set with @ref cubos::core::tel::Logger::level "Logger::level". On
-this sample, to demonstrate @ref CUBOS_TRACE, we set it to @ref cubos::core::tel::Logger::Level::Trace
+The minimum registered log level is set with @ref cubos::core::tel::level "level". On
+this sample, to demonstrate @ref CUBOS_TRACE, we set it to @ref cubos::core::tel::Level::Trace
 "Trace":
 
 @snippet logging/main.cpp Set logging level
@@ -67,8 +67,8 @@ t reflection: (no reflection)
 ```
 
 @note By default, on debug builds all logging calls are compiled, while on release builds only
-messages with severity level @ref CUBOS_LOG_LEVEL_INFO or higher are compiled. This can be changed
-by defining @ref CUBOS_LOG_LEVEL to the desired level.
+messages with severity level @ref CUBOS_TEL_LEVEL_INFO or higher are compiled. This can be changed
+by defining @ref CUBOS_TEL_LEVEL to the desired level.
 
 These macros can also take arguments, which can be of any reflectable type.
 
