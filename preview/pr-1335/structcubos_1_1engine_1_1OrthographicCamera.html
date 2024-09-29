@@ -56,19 +56,34 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
 <aside class="m-note m-info"><h4>Note</h4><p>Should be used with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a>.</p></aside>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a0bb9ecec5bcd808b499c0f9d62831703">
+              <span class="m-doc-wrap-bumper">enum class <a href="#a0bb9ecec5bcd808b499c0f9d62831703" class="m-doc-self">Axis</a> { </span><span class="m-doc-wrap"><a href="#a0bb9ecec5bcd808b499c0f9d62831703a86e5d0d8407ce71f7e2004ef3949894e" class="m-doc">HORIZONTAL</a>,
+              <a href="#a0bb9ecec5bcd808b499c0f9d62831703a3e1b74251c07310c5f1b968145bf00dc" class="m-doc">VERTICAL</a> }</span>
+            </dt>
+            <dd>The axis that can be fixed for this projection.</dd>
+          </dl>
+        </section>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a0985331149a4cd01aaa3c82b40bafe5c">
-              glm::vec2 <a href="#a0985331149a4cd01aaa3c82b40bafe5c" class="m-doc-self">size</a>
+            <dt id="a4c5417ad13cf64b9ef37f744760d3a67">
+              float <a href="#a4c5417ad13cf64b9ef37f744760d3a67" class="m-doc-self">size</a>
             </dt>
-            <dd>Size multiplier for orthographic camera planes.</dd>
+            <dd>The size of the fixed axis of the projection.</dd>
+            <dt id="a4630d1a2994245c9629361e976f3d557">
+              <a href="structcubos_1_1engine_1_1OrthographicCamera.html#a0bb9ecec5bcd808b499c0f9d62831703" class="m-doc">Axis</a> <a href="#a4630d1a2994245c9629361e976f3d557" class="m-doc-self">axis</a>
+            </dt>
+            <dd>The axis to be fixed for the projection.</dd>
             <dt id="a5da107467533dc062922077fba154e91">
               float <a href="#a5da107467533dc062922077fba154e91" class="m-doc-self">zNear</a>
             </dt>
