@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>tesseratos/asset_explorer/ directory | Cubos Docs</title>
+  <title>cubos::engine::OrthographicCamera struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,27 +46,52 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_66ee469e7479b8bd292626243a0daea9.html">tesseratos</a>/</span>asset_explorer<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>OrthographicCamera <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="orthographic_8hpp.html">&lt;engine/render/camera/orthographic.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__tesseratos-asset-explorer-plugin.html" class="m-doc">Asset explorer</a> plugin directory.</p>
+        <p>Component which defines parameters of a orthographic camera used to render the world.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+<aside class="m-note m-info"><h4>Note</h4><p>Should be used with <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a>.</p></aside>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="tools_2tesseratos_2src_2tesseratos_2asset__explorer_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="popup_8hpp.html" class="m-doc">popup.hpp</a></dt>
-            <dd>Utility function to show up a popup containing assets with given type.</dd>
+            <dt id="a0bb9ecec5bcd808b499c0f9d62831703">
+              <span class="m-doc-wrap-bumper">enum class <a href="#a0bb9ecec5bcd808b499c0f9d62831703" class="m-doc-self">Axis</a> { </span><span class="m-doc-wrap"><a href="#a0bb9ecec5bcd808b499c0f9d62831703ac1b5fa03ecdb95d4a45dd1c40b02527f" class="m-doc">Horizontal</a>,
+              <a href="#a0bb9ecec5bcd808b499c0f9d62831703a06ce2a25e5d12c166a36f654dbea6012" class="m-doc">Vertical</a> }</span>
+            </dt>
+            <dd>The axis that can be fixed for this projection.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a4c5417ad13cf64b9ef37f744760d3a67">
+              float <a href="#a4c5417ad13cf64b9ef37f744760d3a67" class="m-doc-self">size</a>
+            </dt>
+            <dd>The size of the fixed axis of the projection.</dd>
+            <dt id="a4630d1a2994245c9629361e976f3d557">
+              <a href="structcubos_1_1engine_1_1OrthographicCamera.html#a0bb9ecec5bcd808b499c0f9d62831703" class="m-doc">Axis</a> <a href="#a4630d1a2994245c9629361e976f3d557" class="m-doc-self">axis</a>
+            </dt>
+            <dd>The axis to be fixed for the projection.</dd>
+            <dt id="a5da107467533dc062922077fba154e91">
+              float <a href="#a5da107467533dc062922077fba154e91" class="m-doc-self">zNear</a>
+            </dt>
+            <dd>Near clipping plane.</dd>
+            <dt id="ab89bb6d77e718fb9069cbabc38fc1c5e">
+              float <a href="#ab89bb6d77e718fb9069cbabc38fc1c5e" class="m-doc-self">zFar</a>
+            </dt>
+            <dd>Far clipping plane.</dd>
           </dl>
         </section>
       </div>
