@@ -9,6 +9,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include <uuid.h>
+
 #include <cubos/engine/api.hpp>
 
 namespace cubos::engine
@@ -43,6 +45,14 @@ namespace cubos::engine
         /// @param key Key of the parameter.
         /// @return The value of the parameter, if the parameter exists.
         std::optional<std::string> get(std::string_view key) const;
+
+        /// @brief Gets the ID of the asset.
+        /// @return ID of the asset.
+        uuids::uuid getId() const;
+
+        /// @brief Gets the path of the asset.
+        /// @return Path of the asset.
+        std::string getPath() const;
 
         /// @brief Sets a parameter on the asset's metadata.
         /// @param key Key of the parameter.

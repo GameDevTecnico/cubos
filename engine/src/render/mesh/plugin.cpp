@@ -87,9 +87,11 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                     continue;
                 }
 
+                // If not loaded, the mId might be a nil UUID, so we need to load the asset first.
+                assets.load(grid.asset);
                 // If the asset has never been loaded, or it has been updated since the last meshing, update the entry
                 // and queue a meshing task. Otherwise, just reuse the existing mesh.
-                auto& entry = state.entries[grid.asset.getId()];
+                auto& entry = state.entries[grid.asset.getId().value()];
                 entry.referenceCount += 1;
                 if (entry.asset.isNull() || assets.update(entry.asset))
                 {
@@ -111,7 +113,7 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                         task.finish(std::move(vertices));
                     });
 
-                    state.meshing.insert(grid.asset.getId());
+                    state.meshing.insert(grid.asset.getId().value());
                 }
                 else if (entry.firstBucketId != RenderMeshPool::BucketId::Invalid)
                 {
@@ -131,8 +133,8 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                     continue;
                 }
 
-                auto& entry = state.entries[grid.asset.getId()];
-                if (!state.meshing.contains(grid.asset.getId()))
+                auto& entry = state.entries[grid.asset.getId().value()];
+                if (!state.meshing.contains(grid.asset.getId().value()))
                 {
                     if (entry.asset.isNull() || assets.update(entry.asset))
                     {
@@ -154,7 +156,7 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                             task.finish(std::move(vertices));
                         });
 
-                        state.meshing.insert(grid.asset.getId());
+                        state.meshing.insert(grid.asset.getId().value());
                     }
                     else
                     {
@@ -170,16 +172,16 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                     cmds.remove<LoadRenderVoxels>(ent);
                     cmds.add(ent, RenderMesh{.firstBucketId = firstBucketId});
                     CUBOS_INFO("Finished meshing voxel grid asset {} ({} vertices), allocated new render bucket",
-                               grid.asset.getId(), vertices.size());
+                               grid.asset.getIdString(), vertices.size());
 
-                    auto& entry = state.entries[grid.asset.getId()];
+                    auto& entry = state.entries[grid.asset.getId().value()];
                     if (entry.firstBucketId != RenderMeshPool::BucketId::Invalid)
                     {
                         pool.deallocate(entry.firstBucketId);
-                        CUBOS_INFO("Deallocated old render mesh bucket of asset {}", grid.asset.getId());
+                        CUBOS_INFO("Deallocated old render mesh bucket of asset {}", grid.asset.getIdString());
                     }
                     entry.firstBucketId = firstBucketId;
-                    state.meshing.erase(grid.asset.getId());
+                    state.meshing.erase(grid.asset.getId().value());
                 }
             }
         });
@@ -189,13 +191,14 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
         .call([](Query<Entity, const RenderVoxelGrid&> query, RenderMeshPool& pool, State& state) {
             for (auto [ent, grid] : query)
             {
-                auto& entry = state.entries[grid.asset.getId()];
+                auto& entry = state.entries[grid.asset.getId().value()];
                 entry.referenceCount -= 1;
                 if (entry.referenceCount == 0)
                 {
                     pool.deallocate(entry.firstBucketId);
-                    state.entries.erase(grid.asset.getId());
-                    CUBOS_INFO("Deallocated render mesh bucket of asset {} (no more references)", grid.asset.getId());
+                    state.entries.erase(grid.asset.getId().value());
+                    CUBOS_INFO("Deallocated render mesh bucket of asset {} (no more references)",
+                               grid.asset.getIdString());
                 }
             }
         });

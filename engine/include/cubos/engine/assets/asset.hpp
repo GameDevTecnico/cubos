@@ -30,7 +30,7 @@ namespace cubos::engine
 
         /// @brief Avoid using this field, use @ref getId() instead.
         /// @todo This was added as a dirty fix for #692, should be removed once the issue is fixed.
-        uuids::uuid reflectedId;
+        std::string pathOrId;
 
         ~AnyAsset();
 
@@ -71,9 +71,13 @@ namespace cubos::engine
         /// @return Asset version.
         int getVersion() const;
 
-        /// @brief Gets the UUID of the asset.
+        /// @brief Gets the Path or UUID of the asset.
+        /// @return Asset Path or UUID.
+        std::string getIdString() const;
+
+        /// @brief Gets the UUID of the asset if it is the case of having one.
         /// @return Asset UUID.
-        uuids::uuid getId() const;
+        std::optional<uuids::uuid> getId() const;
 
         /// @brief Checks if the handle is null.
         /// @return Whether the handle is null.
@@ -160,7 +164,7 @@ namespace cubos::engine
     inline AnyAsset::operator Asset<T>() const
     {
         Asset<T> asset;
-        asset.reflectedId = reflectedId;
+        asset.pathOrId = pathOrId;
         asset.mId = mId;
         asset.mRefCount = mRefCount;
         asset.mVersion = mVersion;
