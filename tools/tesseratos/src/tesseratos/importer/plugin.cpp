@@ -138,7 +138,7 @@ static bool handleImport(Assets& assets, ImportState& state)
         return false;
     }
 
-    assets.writeMeta(state.currentAsset)->set("paletteId", uuids::to_string(paletteHandle.getId()));
+    assets.writeMeta(state.currentAsset)->set("paletteId", uuids::to_string(paletteHandle.getId().value()));
 
     for (std::size_t i = 0; i < state.gridCount; ++i)
     {
@@ -147,7 +147,7 @@ static bool handleImport(Assets& assets, ImportState& state)
             continue;
         }
         assets.writeMeta(state.currentAsset)
-            ->set("grid" + std::to_string(i) + "Id", uuids::to_string(gridHandles[i].getId()));
+            ->set("grid" + std::to_string(i) + "Id", uuids::to_string(gridHandles[i].getId().value()));
     }
 
     assets.saveMeta(state.currentAsset);

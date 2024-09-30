@@ -219,7 +219,7 @@ void Assets::loadMeta(std::string_view path)
         // Get the UUID from the metadata, if it exists.
         if (meta.get("id").has_value())
         {
-            id = uuids::uuid::from_string(meta.get("id").value()).value_or(uuids::uuid());
+            id = meta.getId();
         }
 
         // If the UUID is invalid, generate a new random one.
@@ -311,6 +311,7 @@ AnyAsset Assets::load(AnyAsset handle) const
     // Return a strong handle to the asset.
     assetEntry->refCount += 1;
     handle.mRefCount = &assetEntry->refCount;
+    handle.mId = assetEntry->meta.getId();
     return handle;
 }
 
@@ -378,7 +379,7 @@ Assets::Status Assets::status(const AnyAsset& handle) const
     std::shared_lock lock(mMutex);
 
     // Do not use .entry() here because we don't want to log errors if the asset is unknown.
-    auto it = mEntries.find(handle.getId());
+    auto it = mEntries.find(handle.getId().value());
     if (it == mEntries.end())
     {
         return Status::Unknown;
@@ -396,9 +397,9 @@ bool Assets::update(AnyAsset& handle) const
         return false;
     }
 
-    if (handle.mId != handle.reflectedId)
+    if (handle.mId != assetEntry->meta.getId())
     {
-        handle = AnyAsset{handle.reflectedId};
+        handle = AnyAsset{assetEntry->meta.getId()};
         handle.mVersion = assetEntry->version;
         return true;
     }
@@ -620,6 +621,18 @@ std::unique_lock<std::shared_mutex> Assets::lockWrite(const AnyAsset& handle) co
     abort();
 }
 
+std::string Assets::isPath(const std::string& path)
+{
+    if (path.find('/') != std::string::npos || path.find('\\') != std::string::npos)
+    {
+        return "Path";
+    }
+    else if (auto id = uuids::uuid::from_string(path))
+    {
+        return "UUID";
+    }
+    return "Invalid format";
+}
 std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
 {
     // If the handle is null, we can't access the asset.
@@ -632,15 +645,33 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
     // Lock the entries map for reading.
     auto sharedLock = std::shared_lock(mMutex);
 
-    // Search for the entry in the map.
-    auto it = mEntries.find(handle.getId());
-    if (it == mEntries.end())
+    auto sid = handle.getIdString();
+
+    if (isPath(sid) == "Path")
     {
+        for (const auto& [eid, entry] : mEntries)
+        {
+            if (entry->meta.getPath() == sid)
+            {
+                return entry;
+            }
+        }
         CUBOS_ERROR("No such asset {}", handle);
         return nullptr;
     }
-
-    return it->second;
+    if (isPath(sid) == "UUID")
+    {
+        // Search for the entry in the map.
+        auto it = mEntries.find(handle.getId().value());
+        if (it == mEntries.end())
+        {
+            CUBOS_ERROR("No such asset {}", handle);
+            return nullptr;
+        }
+        return it->second;
+    }
+    CUBOS_ERROR("Invalid asset handle");
+    return nullptr;
 }
 
 std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create)
@@ -665,27 +696,57 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
         sharedLock.lock();
     }
 
-    // Search for an existing entry for the asset.
-    auto it = mEntries.find(handle.getId());
-    if (it == mEntries.end())
+    auto sid = handle.getIdString();
+
+    if (isPath(sid) == "Path")
     {
-        // If we're creating the asset, create a new entry for it.
-        // Otherwise, return nullptr.
+        for (const auto& [eid, entry] : mEntries)
+        {
+            if (entry->meta.getPath() == sid)
+            {
+                return entry;
+            }
+        }
         if (create)
         {
+            auto nUuid = uuids::uuid_random_generator(mRandom.value())();
             auto entry = std::make_shared<Entry>();
-            entry->meta.set("id", uuids::to_string(handle.getId()));
-            it = mEntries.emplace(handle.getId(), std::move(entry)).first;
+            entry->meta.set("path", sid);
+            entry->meta.set("id", uuids::to_string(nUuid));
+            auto it = mEntries.emplace(nUuid, std::move(entry)).first;
             CUBOS_TRACE("Created new asset entry for {}", handle);
+            return it->second;
         }
-        else
-        {
-            CUBOS_ERROR("No such asset {}", handle);
-            return nullptr;
-        }
-    }
 
-    return it->second;
+        CUBOS_ERROR("No such asset {}", handle);
+        return nullptr;
+    }
+    if (isPath(sid) == "UUID")
+    {
+
+        // Search for an existing entry for the asset.
+        auto it = mEntries.find(handle.getId().value());
+        if (it == mEntries.end())
+        {
+            // If we're creating the asset, create a new entry for it.
+            // Otherwise, return nullptr.
+            if (create)
+            {
+                auto entry = std::make_shared<Entry>();
+                entry->meta.set("id", uuids::to_string(handle.getId().value()));
+                it = mEntries.emplace(handle.getId().value(), std::move(entry)).first;
+                CUBOS_TRACE("Created new asset entry for {}", handle);
+            }
+            else
+            {
+                CUBOS_ERROR("No such asset {}", handle);
+                return nullptr;
+            }
+        }
+        return it->second;
+    }
+    CUBOS_ERROR("Invalid asset handle");
+    return nullptr;
 }
 
 std::shared_ptr<AssetBridge> Assets::bridge(const AnyAsset& handle, bool logError) const
