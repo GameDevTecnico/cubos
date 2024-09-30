@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Print stacktrace with *cpptrace* on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
 - Orthographic Camera component (#1182, **@mkuritsu**).
 - Importer plugin (#1299, **@Scarface1809**).
+- Handle body rotation on penetration solving (#1272, **&fallenatlas**).
 
 ### Changed
 
