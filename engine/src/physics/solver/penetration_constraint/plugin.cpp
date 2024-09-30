@@ -19,7 +19,7 @@ CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintSolveRelaxTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintRestitutionTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintCleanTag);
 
-void getPlaneSpace(const glm::vec3& n, glm::vec3& tangent1, glm::vec3& tangent2)
+static void getPlaneSpace(const glm::vec3& n, glm::vec3& tangent1, glm::vec3& tangent2)
 {
     if (glm::abs(n.z) > (1.0F / glm::sqrt(2.0F)))
     {
@@ -33,8 +33,8 @@ void getPlaneSpace(const glm::vec3& n, glm::vec3& tangent1, glm::vec3& tangent2)
     }
 }
 
-void getTangents(const glm::vec3& velocity1, const glm::vec3& velocity2, const glm::vec3& n, glm::vec3& tangent1,
-                 glm::vec3& tangent2)
+static void getTangents(const glm::vec3& velocity1, const glm::vec3& velocity2, const glm::vec3& n, glm::vec3& tangent1,
+                        glm::vec3& tangent2)
 {
     // Use linear relative velocity for determining tangents.
     glm::vec3 linearVr = velocity2 - velocity1;
@@ -77,7 +77,7 @@ static float mixValues(float value1, float value2, PhysicsMaterial::MixProperty 
     }
 }
 
-void solvePenetrationConstraint(
+static void solvePenetrationConstraint(
     Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&,
           PenetrationConstraint&, Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&,
           Velocity&, AngularVelocity&>
