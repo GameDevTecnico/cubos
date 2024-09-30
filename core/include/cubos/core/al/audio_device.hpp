@@ -9,7 +9,6 @@
 #include <vector>
 
 #include <glm/glm.hpp>
-#include <miniaudio.h>
 
 #include <cubos/core/api.hpp>
 
@@ -48,34 +47,35 @@ namespace cubos::core::al
         /// @return Audio device, or nullptr on failure.
         static std::shared_ptr<AudioDevice> create();
 
-        /// @brief Creates a new audio buffer
-        /// @param filePath File path to create buffer from.
-        /// @return Handle of the new buffer.
-        static Buffer createBuffer(const void* data, size_t dataSize);
-
-        /// @brief Creates a new audio source.
-        /// @return Handle of the new source.
-        static Source createSource();
-
         /// @brief Enumerates the available devices.
         /// @param[out] devices Vector to fill with the available devices.
         static void enumerateDevices(std::vector<std::string>& devices);
 
+        /// @brief Creates a new audio buffer
+        /// @param data Data to be written to the buffer, cubos currently supports .wav, .mp3 and .flac files
+        /// @param datSize Size of the data to be written.
+        /// @return Handle of the new buffer.
+        virtual Buffer createBuffer(const void* data, size_t dataSize) = 0;
+
+        /// @brief Creates a new audio source.
+        /// @return Handle of the new source.
+        virtual Source createSource() = 0;
+
         /// @brief Sets the position of the listener.
         /// @param position Position.
-        /// @param listenerIndex Index of the listener
+        /// @param listenerIndex Index of the listener.
         virtual void setListenerPosition(const glm::vec3& position, unsigned int listenerIndex = 0) = 0;
 
         /// @brief Sets the orientation of the listener.
         /// @param forward Forward direction of the listener.
         /// @param up Up direction of the listener.
-        /// @param listenerIndex Index of the listener
+        /// @param listenerIndex Index of the listener.
         virtual void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up,
                                             unsigned int listenerIndex = 0) = 0;
 
         /// @brief Sets the velocity of the listener. Used to implement the doppler effect.
         /// @param velocity Velocity of the listener.
-        /// @param listenerIndex Index of the listener
+        /// @param listenerIndex Index of the listener.
         virtual void setListenerVelocity(const glm::vec3& velocity, unsigned int listenerIndex = 0) = 0;
     };
 
@@ -86,11 +86,8 @@ namespace cubos::core::al
         class CUBOS_CORE_API Buffer
         {
         public:
-            ma_decoder mDecoder;
-
             virtual ~Buffer() = default;
             virtual size_t getLength() = 0;
-            static std::shared_ptr<Buffer> create(const void* data, size_t dataSize);
 
         protected:
             Buffer() = default;
@@ -101,9 +98,6 @@ namespace cubos::core::al
         {
         public:
             virtual ~Source() = default;
-
-            /// @brief  Creates a source
-            static std::shared_ptr<Source> create();
 
             /// @brief Sets the buffer to be played by the source.
             /// @param buffer Buffer.

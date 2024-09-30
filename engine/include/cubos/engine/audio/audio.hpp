@@ -20,7 +20,7 @@ namespace cubos::engine
         std::shared_ptr<cubos::core::al::impl::Buffer> mData; // Raw data of the audio
         size_t mLength;                                       // Audio length in seconds TODO: add getter in audio
 
-        explicit Audio(core::memory::Stream& stream);
+        explicit Audio(std::shared_ptr<cubos::core::al::MiniaudioDevice> device, core::memory::Stream& stream);
         Audio(Audio&& other) noexcept;
         ~Audio();
     };
