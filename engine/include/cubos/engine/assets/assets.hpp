@@ -7,6 +7,7 @@
 #include <condition_variable>
 #include <deque>
 #include <memory>
+#include <optional>
 #include <shared_mutex>
 #include <string>
 #include <thread>
@@ -57,6 +58,7 @@ namespace cubos::engine
             Unloaded, ///< The asset is not loaded.
             Loading,  ///< The asset is being loaded.
             Loaded,   ///< The asset is loaded.
+            Failed,   ///< The asset failed to load.
         };
 
         ~Assets();
@@ -85,6 +87,11 @@ namespace cubos::engine
         /// @brief Imports all files without a .meta file. Similar to loadMeta
         /// @param path Path to load metadata from.
         void importAll(std::string_view path);
+
+        /// @brief Get AssetHandle from Path.
+        /// @param path Path to get handle from.
+        /// @return AssetHandle from Path, or a null handle if unable to find.
+        AnyAsset getAsset(std::string_view path);
 
         /// @brief Loads all metadata from the virtual filesystem, in the given path. If the path
         /// points to a directory, it will be recursively searched for metadata files.
@@ -150,6 +157,28 @@ namespace cubos::engine
             auto lock = this->lockRead(strong);
             auto data = static_cast<const T*>(this->access(strong, core::reflection::reflect<T>(), lock, false));
             return AssetRead<T>(*data, std::move(lock));
+        }
+
+        /// @brief Gets read-only access to the asset data associated with the given handle.
+        ///
+        /// If the asset is not loaded, this blocks until it is. If the asset cannot be loaded,
+        /// returns std::nullopt.
+        ///
+        /// @tparam T Type of the asset data.
+        /// @param handle Handle to get the asset data for.
+        /// @return Reference to the asset data.
+        template <typename T>
+        inline std::optional<std::reference_wrapper<const T>> tryRead(Asset<T> handle) const
+        {
+            // Create a strong handle to the asset, so that the asset starts loading if it isn't already.
+            auto strong = this->load(handle);
+            auto lock = this->lockRead(strong);
+            auto data = static_cast<const T*>(this->tryAccess(strong, core::reflection::reflect<T>(), lock, false));
+            if (data == nullptr)
+            {
+                return std::nullopt;
+            }
+            return std::cref(*data);
         }
 
         /// @brief Gets read-write access to the asset data associated with the given handle.
@@ -301,6 +330,21 @@ namespace cubos::engine
         /// @return Pointer to the asset's data.
         template <typename Lock>
         void* access(const AnyAsset& handle, const core::reflection::Type& type, Lock& lock, bool incVersion) const;
+
+        /// @brief Gets a pointer to the asset data associated with the given handle.
+        ///
+        /// If the asset is not loaded, this blocks until it is. If the asset cannot be loaded,
+        /// return nullpt. If this function is called from the loader thread, instead of waiting
+        /// for the asset to load, it will be loaded synchronously.
+        ///
+        /// @tparam Lock The type of the lock guard.
+        /// @param handle Handle to get the asset data for.
+        /// @param type Expected type of the asset data.
+        /// @param lock Lock guard for the asset.
+        /// @param incVersion Whether to increase the asset's version.
+        /// @return Pointer to the asset's data.
+        template <typename Lock>
+        void* tryAccess(const AnyAsset& handle, const core::reflection::Type& type, Lock& lock, bool incVersion) const;
 
         /// @brief Locks the given asset for reading.
         /// @param handle Handle to lock.

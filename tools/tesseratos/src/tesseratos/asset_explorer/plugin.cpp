@@ -35,6 +35,8 @@ namespace
 {
     struct AssetExplorerState
     {
+        CUBOS_ANONYMOUS_REFLECT(AssetExplorerState);
+
         std::vector<AnyAsset> assetsVector;
     };
 } // namespace

@@ -16,7 +16,7 @@ bool VoxelModelBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stre
     VoxelModel model{};
     if (model.loadFrom(stream))
     {
-        assets.store(handle, std::move(model));
+        assets.store(handle, model);
         return true;
     }
     return false;

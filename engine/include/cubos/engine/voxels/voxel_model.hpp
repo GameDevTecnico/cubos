@@ -43,11 +43,17 @@ namespace cubos::engine
         /// @brief Constructs an empty VoxelModel
         VoxelModel() = default;
 
+        static constexpr uint32_t MaxMaterials = 65536;
+
         uint16_t getMatricesSize() const;
 
         const VoxelPalette& getPalette() const;
 
-        VoxelGrid& getGrid(uint16_t index);
+        void setPalette(const VoxelPalette& palette);
+
+        const VoxelGrid& getGrid(uint16_t index) const;
+
+        void setGrid(uint16_t index, const VoxelGrid& grid, const glm::ivec3& position);
 
         /// @brief Loads the grid's data from the given stream.
         ///
@@ -69,7 +75,7 @@ namespace cubos::engine
         bool writeTo(core::memory::Stream& stream) const;
 
     private:
-        std::vector<QBMatrix> matrices;
-        VoxelPalette palette;
+        std::vector<QBMatrix> mAtrices;
+        VoxelPalette mPalette;
     };
 } // namespace cubos::engine
