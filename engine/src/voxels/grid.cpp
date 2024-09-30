@@ -81,11 +81,7 @@ VoxelGrid& VoxelGrid::operator=(VoxelGrid&& other) noexcept
     return *this;
 }
 
-VoxelGrid::VoxelGrid(const VoxelGrid& other)
-    : mSize(other.mSize)
-    , mIndices(other.mIndices)
-{
-}
+VoxelGrid::VoxelGrid(const VoxelGrid& other) = default;
 
 VoxelGrid::VoxelGrid()
 {

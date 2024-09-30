@@ -108,7 +108,7 @@ void Assets::importAll(std::string_view path)
             child = child->sibling();
         }
     }
-    // Skip files that already have a .meta extension.
+    // Skip meta files.
     else if (!file->name().ends_with(".meta"))
     {
         // Check if the .meta file exists.
@@ -139,6 +139,19 @@ void Assets::importAll(std::string_view path)
             loadMeta(metaPath);
         }
     }
+}
+
+AnyAsset Assets::getAsset(std::string_view path)
+{
+    for (const auto& [uuid, entry] : mEntries)
+    {
+        auto pathMeta = entry->meta.get("path");
+        if (pathMeta.has_value() && pathMeta.value() == path)
+        {
+            return {uuid};
+        }
+    }
+    return {};
 }
 
 void Assets::loadMeta(std::string_view path)
@@ -524,6 +537,66 @@ void* Assets::access(const AnyAsset& handle, const Type& type, Lock& lock, bool 
     return assetEntry->data;
 }
 
+template <typename Lock>
+void* Assets::tryAccess(const AnyAsset& handle, const Type& type, Lock& lock, bool incVersion) const
+{
+    CUBOS_ASSERT(!handle.isNull(), "Could not access asset");
+
+    // Get the entry for the asset.
+    auto assetEntry = this->entry(handle);
+    CUBOS_ASSERT(assetEntry != nullptr, "Could not access asset");
+
+    // If the asset hasn't been loaded yet, and its bridge isn't asynchronous, or we're in the loader thread, then load
+    // it now.
+    if (assetEntry->status != Status::Loaded)
+    {
+        auto bridge = this->bridge(handle);
+        CUBOS_ASSERT(bridge != nullptr, "Could not access asset");
+
+        if (!bridge->asynchronous() || std::this_thread::get_id() == mLoaderThread.get_id())
+        {
+            CUBOS_DEBUG("Loading asset {} as a dependency", handle);
+
+            // Load the asset - the const_cast is okay since the const qualifiers are only used to make
+            // the interface more readable. We need to unlock temporarily to avoid a deadlock, since the
+            // bridge will call back into the asset manager.
+            lock.unlock();
+            if (!bridge->load(const_cast<Assets&>(*this), handle))
+            {
+                CUBOS_CRITICAL("Could not load asset {}", handle);
+                abort();
+            }
+            lock.lock();
+        }
+    }
+
+    // Wait until the asset finishes loading.
+    while (assetEntry->status == Status::Loading)
+    {
+        assetEntry->cond.wait(lock);
+    }
+
+    if (assetEntry->status != Status::Loaded || assetEntry->data == nullptr)
+    {
+        CUBOS_ERROR("Could not access asset");
+        return nullptr;
+    }
+
+    if (assetEntry->type != &type)
+    {
+        CUBOS_ERROR("Type mismatch, expected {}, got {}", type.name(), assetEntry->type->name());
+        return nullptr;
+    }
+
+    if (incVersion)
+    {
+        assetEntry->version++;
+        CUBOS_DEBUG("Incremented version of asset {}", handle);
+    }
+
+    return assetEntry->data;
+}
+
 // Define the explicit instantiations of the access() function, one for each lock type.
 // Necessary because the function is template - would otherwise cause linker errors.
 
@@ -531,6 +604,10 @@ template void* Assets::access<std::shared_lock<std::shared_mutex>>(const AnyAsse
                                                                    std::shared_lock<std::shared_mutex>&, bool) const;
 template void* Assets::access<std::unique_lock<std::shared_mutex>>(const AnyAsset&, const Type&,
                                                                    std::unique_lock<std::shared_mutex>&, bool) const;
+template void* Assets::tryAccess<std::shared_lock<std::shared_mutex>>(const AnyAsset&, const Type&,
+                                                                      std::shared_lock<std::shared_mutex>&, bool) const;
+template void* Assets::tryAccess<std::unique_lock<std::shared_mutex>>(const AnyAsset&, const Type&,
+                                                                      std::unique_lock<std::shared_mutex>&, bool) const;
 
 std::shared_lock<std::shared_mutex> Assets::lockRead(const AnyAsset& handle) const
 {
@@ -680,7 +757,7 @@ void Assets::loader()
 
             auto assetEntry = this->entry(task.handle);
             CUBOS_ASSERT(assetEntry != nullptr, "This should never happen");
-            assetEntry->status = Assets::Status::Unloaded;
+            assetEntry->status = Assets::Status::Failed;
             assetEntry->cond.notify_all();
         }
         else

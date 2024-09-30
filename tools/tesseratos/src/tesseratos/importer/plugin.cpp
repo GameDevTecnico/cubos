@@ -18,6 +18,7 @@ using cubos::core::data::FileSystem;
 using cubos::core::ecs::EventReader;
 
 using cubos::engine::AnyAsset;
+using cubos::engine::AssetRead;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
 using cubos::engine::VoxelGrid;
@@ -33,174 +34,159 @@ namespace
 {
     struct ImportState
     {
+        CUBOS_ANONYMOUS_REFLECT(ImportState);
+
+        // Generic
         AnyAsset currentAsset;
-        int gridCount = 1;
-        std::unordered_map<std::size_t, std::string> gridFilePaths;
-        char paletteFilePath[256] = "";
+        std::string currentAssetPath;
         bool showError = false;
+        bool isModelLoaded = false;
+
+        // VoxelModel specifics
+        int gridMax = 0;
+        int gridCount = 0;
+        std::unordered_map<std::size_t, std::string> gridFilePaths;
+        std::string paletteFilePath;
+
+        // Other Imports...
     };
 } // namespace
 
-/// Tries to load a VoxelModel from the given path.
-/// @param path The path of the VoxelModel.
-/// @param model The model to fill.
-static bool loadVoxelModel(const fs::path& path, VoxelModel& model)
+static bool handleImport(Assets& assets, ImportState& state)
 {
-    std::string fullPath = "../../tools/tesseratos" + path.string();
-    auto* file = fopen(fullPath.c_str(), "rb");
-    if (file == nullptr)
+    CUBOS_INFO("Starting handleImport");
+    auto paletteHandle = assets.getAsset(state.paletteFilePath);
     {
-        return false;
-    }
-
-    auto stream = memory::StandardStream(file, true);
-    if (!model.loadFrom(stream))
-    {
-        CUBOS_ERROR("Failed to deserialize model.");
-        return false;
-    }
-    return true;
-}
-
-/// Tries to load the palette from the given path.
-/// @param path The path of the palette.
-/// @param palette The palette to fill.
-static bool loadPalette(const fs::path& path, VoxelPalette& palette)
-{
-    std::string fullPath = "../../tools/tesseratos" + path.string();
-    auto* file = fopen(fullPath.c_str(), "rb");
-    if (file == nullptr)
-    {
-        return false;
-    }
-
-    auto stream = memory::StandardStream(file, true);
-    if (!palette.loadFrom(stream))
-    {
-        CUBOS_ERROR("Failed to deserialize palette.");
-        return false;
-    }
-
-    return true;
-}
-
-/// Saves the given palette to the given path.
-/// @param path The path of the palette.
-/// @param palette The palette to save.
-static bool savePalette(const fs::path& path, const VoxelPalette& palette)
-{
-    std::string fullPath = "../../tools/tesseratos" + path.string();
-    auto* file = fopen(fullPath.c_str(), "wb");
-    if (file == nullptr)
-    {
-        return false;
-    }
-
-    auto stream = memory::StandardStream(file, true);
-    if (!palette.writeTo(stream))
-    {
-        CUBOS_ERROR("Failed to serialize palette.");
-        return false;
-    }
-
-    return true;
-}
-
-/// Saves the given grid to the given path.
-/// @param path The path of the grid.
-/// @param grid The grid to export.
-static bool saveGrid(const fs::path& path, const VoxelGrid& grid)
-{
-    std::string fullPath = "../../tools/tesseratos" + path.string();
-    auto* file = fopen(fullPath.c_str(), "wb");
-    if (file == nullptr)
-    {
-        return false;
-    }
-
-    auto stream = memory::StandardStream(file, true);
-    if (!grid.writeTo(stream))
-    {
-        CUBOS_ERROR("Failed to serialize grid.");
-        return false;
-    }
-
-    return true;
-}
-
-static bool handleImport(ImportState& state, VoxelModel& model)
-{
-    // First, load the palette.
-    VoxelPalette palette;
-    if (strlen(state.paletteFilePath) > 0)
-    {
-        if (!loadPalette(state.paletteFilePath, palette))
+        auto model = assets.read<VoxelModel>(state.currentAsset);
+        if (paletteHandle.isNull())
         {
-            CUBOS_WARN("Failed to load palette: write disabled & file {} not found. Going to create new one",
-                       state.paletteFilePath);
+            CUBOS_INFO("Failed to get asset handle for paletteFilePath: {}", state.paletteFilePath);
+            CUBOS_INFO("Creating new palette asset.");
+            // Should create new palette asset.
+            paletteHandle = assets.create(VoxelPalette{});
+            assets.writeMeta(paletteHandle)->set("path", state.paletteFilePath);
+            assets.save(paletteHandle);
+            if (paletteHandle.isNull())
+            {
+                // Should not happen.
+                CUBOS_ERROR("Failed to create palette asset.");
+                return false;
+            }
         }
-    }
-
-    // Iterate over the grids which will be exported.
-    for (uint16_t i = 0; i < model.getMatricesSize(); ++i)
-    {
-        if (state.gridFilePaths.contains(i))
         {
-            auto modelsPalette = model.getPalette();
-            auto modelsGrid = model.getGrid(i);
-            auto path = state.gridFilePaths.at(i);
-            std::string fullPath = "../../tools/tesseratos" + path;
-            if (std::filesystem::exists(fullPath))
+            auto palette = assets.write<VoxelPalette>(paletteHandle);
+            // Iterate over the grids which will be exported.
+            for (uint16_t i = 0; i < model.get().getMatricesSize(); ++i)
             {
-                CUBOS_WARN("Output file already exists re-Importing.");
-            }
+                if (state.gridFilePaths.contains(i))
+                {
+                    auto gridPath = state.gridFilePaths.at(i);
+                    auto gridHandle = assets.getAsset(gridPath);
+                    if (gridHandle.isNull())
+                    {
+                        CUBOS_INFO("Failed to get asset handle for gridPath: {}", gridPath);
+                        CUBOS_INFO("Creating new grid asset.");
+                        gridHandle = assets.create(VoxelGrid{});
+                        assets.writeMeta(gridHandle)->set("path", gridPath);
+                        assets.save(gridHandle);
+                        if (gridHandle.isNull())
+                        {
+                            // Should not happen.
+                            CUBOS_ERROR("Failed to create grid asset.");
+                            return false;
+                        }
+                    }
+                    // Merge this palette with the main one.
+                    palette.get().merge(model.get().getPalette(), 1.0F);
 
-            // If write is enabled, merge this palette with the main one.
-            palette.merge(modelsPalette, 1.0F);
+                    {
+                        auto grid = assets.write<VoxelGrid>(gridHandle);
+                        // Convert the grid to the main palette.
+                        if (!grid.get().convert(model.get().getPalette(), palette.get(), 1.0F))
+                        {
+                            CUBOS_ERROR("Error converting grid to main palette");
+                            return false;
+                        }
+                    }
 
-            // Convert the grid to the main palette.
-            if (!modelsGrid.convert(modelsPalette, palette, 1.0F))
-            {
-                CUBOS_ERROR("Error converting grid to main palette");
-                return false;
-            }
+                    CUBOS_INFO("Saving grid to path: {}", gridPath);
 
-            // Save the grid to the given path.
-            if (!saveGrid(path, modelsGrid))
-            {
-                CUBOS_ERROR("Failed to save grid {} to {} .", i, path);
-                return false;
+                    // Save the grid to the given path.
+                    if (!assets.save(gridHandle))
+                    {
+                        CUBOS_ERROR("Error saving grid to path: {}", gridPath);
+                        return false;
+                    }
+
+                    // CUBOS_INFO("Setting grid path to asset meta");
+                    //  Not sure if needed (would be helpful probably). Causes deadlock for now.
+                    //  assets.writeMeta(state.currentAsset)->set("grid_path", gridPath);
+                }
             }
         }
     }
 
-    if (!savePalette(state.paletteFilePath, palette))
+    CUBOS_INFO("Saving palette to path: {}", state.paletteFilePath);
+
+    // Save the palette to the asset system.
+    if (!assets.save(paletteHandle))
     {
-        CUBOS_ERROR("Failed to save palette to {} .", state.paletteFilePath);
+        CUBOS_ERROR("Error saving palette to asset system");
         return false;
     }
 
+    // CUBOS_INFO("Setting palette path to asset meta");
+    //  Not sure if needed (would be helpful probably).
+    //  assets.writeMeta(state.currentAsset)->set("palette_path", state.paletteFilePath);
+
+    // Save the model to the asset system.
+    if (!assets.save(state.currentAsset))
+    {
+        CUBOS_ERROR("Error saving model to asset system");
+        return false;
+    }
+
+    CUBOS_INFO("handleImport completed successfully");
     return true;
 }
 
 static void showImport(Assets& assets, cubos::core::ecs::EventReader<AssetSelectedEvent> reader, ImportState& state)
 {
+    // The instance where the asset has changed.
+    bool assetChanged = false;
     for (const auto& event : reader)
     {
-        state.currentAsset = event.asset;
+        if (event.asset != state.currentAsset)
+        {
+            state.currentAsset = event.asset;
+            assetChanged = true;
+            state.isModelLoaded = false;
+        }
     }
-
     if (state.currentAsset == nullptr)
     {
         ImGui::Text("No asset selected");
+        state.isModelLoaded = false;
+        return;
     }
-    else if (assets.type(state.currentAsset).is<VoxelModel>())
+    if (assets.type(state.currentAsset).is<VoxelModel>())
     {
-        VoxelModel model;
-        if (!loadVoxelModel(fs::path(assets.readMeta(state.currentAsset)->get("path").value()), model))
+        std::optional<std::reference_wrapper<const VoxelModel>> voxelModelResult;
+        if (assetChanged)
         {
-            ImGui::TextColored({1.0F, 0.0F, 0.0F, 1.0F}, "Failed to load VoxelModel.");
-            return;
+            voxelModelResult = assets.tryRead<VoxelModel>(state.currentAsset);
+        }
+        if (!state.isModelLoaded ||
+            assets.readMeta(state.currentAsset)->get("path").value_or("") != state.currentAssetPath)
+        {
+            if (!voxelModelResult.has_value())
+            {
+                ImGui::Text("Error reading VoxelModel check console for details");
+                return;
+            }
+            state.gridMax = voxelModelResult.value().get().getMatricesSize();
+            state.currentAssetPath = assets.readMeta(state.currentAsset)->get("path").value_or("");
+            state.isModelLoaded = true;
         }
 
         // Handle VoxelModel import options
@@ -208,28 +194,33 @@ static void showImport(Assets& assets, cubos::core::ecs::EventReader<AssetSelect
                     assets.readMeta(state.currentAsset)->get("path").value_or("Unknown").c_str());
 
         ImGui::Text("Palette File Path:");
-        ImGui::InputTextWithHint("##paletteFilePath", "Ex:/assets/models/main.pal", state.paletteFilePath,
-                                 IM_ARRAYSIZE(state.paletteFilePath));
+        char paletteBuffer[256] = "";
+        strncpy(paletteBuffer, state.paletteFilePath.c_str(), sizeof(paletteBuffer) - 1);
+        if (ImGui::InputTextWithHint("##paletteFilePath", "Ex:/assets/models/main.pal", paletteBuffer,
+                                     sizeof(paletteBuffer)))
+        {
+            state.paletteFilePath = paletteBuffer;
+        }
 
         ImGui::Spacing();
 
-        ImGui::Text("Number of Grids: Max Supported by file: %d", model.getMatricesSize());
+        ImGui::Text("Number of Grids: Max Supported by file: %d", state.gridMax);
         ImGui::InputInt("##gridCount", &state.gridCount, 1, 5);
 
         if (state.gridCount < 1)
         {
             state.gridCount = 1;
         }
-        else if (state.gridCount > model.getMatricesSize())
+        else if (state.gridCount > state.gridMax)
         {
-            state.gridCount = model.getMatricesSize();
+            state.gridCount = state.gridMax;
         }
 
-        for (int i = 0; i < state.gridCount; ++i)
+        for (unsigned long i = 0; i < static_cast<unsigned long>(state.gridCount); ++i)
         {
             char buffer[256];
-            snprintf(buffer, sizeof(buffer), "Grid File Path %d:", i + 1);
-            ImGui::Text(buffer);
+            snprintf(buffer, sizeof(buffer), "Grid File Path %lu:", i + 1);
+            ImGui::Text("%s", buffer);
 
             char inputBuffer[256];
             auto it = state.gridFilePaths.find(i);
@@ -239,7 +230,7 @@ static void showImport(Assets& assets, cubos::core::ecs::EventReader<AssetSelect
             }
 
             std::string& gridPath = state.gridFilePaths[i];
-            strncpy(inputBuffer, gridPath.c_str(), sizeof(inputBuffer));
+            strncpy(inputBuffer, gridPath.c_str(), sizeof(inputBuffer) - 1);
             if (ImGui::InputTextWithHint(("##gridFilePath" + std::to_string(i)).c_str(), "Ex:/assets/models/car.grd",
                                          inputBuffer, sizeof(inputBuffer)))
             {
@@ -262,7 +253,7 @@ static void showImport(Assets& assets, cubos::core::ecs::EventReader<AssetSelect
             }
             if (!state.showError)
             {
-                handleImport(state, model);
+                handleImport(assets, state);
             }
         }
 
@@ -273,7 +264,7 @@ static void showImport(Assets& assets, cubos::core::ecs::EventReader<AssetSelect
     }
     else
     {
-        // Handle other asset types (future-proofing)
+        // Handle other asset types
         ImGui::Text("No import options for: %s",
                     assets.readMeta(state.currentAsset)->get("path").value_or("Unknown").c_str());
     }
