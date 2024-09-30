@@ -8,7 +8,7 @@ using namespace cubos::engine;
 
 bool AudioBridge::loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream)
 {
-    Audio audio{stream};
+    Audio audio{mDevice, stream};
     if (audio.mData == nullptr)
     {
         return false;

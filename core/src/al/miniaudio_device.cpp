@@ -5,132 +5,153 @@
 
 using namespace cubos::core::al;
 
-MiniaudioBuffer::MiniaudioBuffer(const void* data, size_t dataSize)
+class MiniaudioBuffer : public impl::Buffer
 {
-    if (ma_decoder_init_memory(data, dataSize, nullptr, &mDecoder) != MA_SUCCESS)
+public:
+    ma_decoder mDecoder;
+    MiniaudioBuffer(const void* data, size_t dataSize)
     {
-        CUBOS_CRITICAL("Failed to initialize Decoder from data");
-        abort();
-    }
-}
-
-size_t MiniaudioBuffer::getLength()
-{
-    ma_uint64 lengthInPCMFrames;
-    ma_result result = ma_decoder_get_length_in_pcm_frames(&mDecoder, &lengthInPCMFrames);
-
-    if (result != MA_SUCCESS)
-    {
-        CUBOS_ERROR("Failed to get the length of audio in PCM frames.");
-        return 0;
+        if (ma_decoder_init_memory(data, dataSize, nullptr, &mDecoder) != MA_SUCCESS)
+        {
+            CUBOS_ERROR("Failed to initialize Decoder from data");
+        }
     }
 
-    // Calculate the length in seconds: Length in PCM frames divided by the sample rate.
-    return static_cast<size_t>(lengthInPCMFrames) / mDecoder.outputSampleRate;
-}
+    ~MiniaudioBuffer() override
+    {
+        ma_decoder_uninit(&mDecoder);
+    }
 
-MiniaudioBuffer::~MiniaudioBuffer()
-{
-    ma_decoder_uninit(&mDecoder);
+    size_t getLength() override
+    {
+        ma_uint64 lengthInPCMFrames;
+        ma_result result = ma_decoder_get_length_in_pcm_frames(&mDecoder, &lengthInPCMFrames);
+
+        if (result != MA_SUCCESS)
+        {
+            CUBOS_ERROR("Failed to get the length of audio in PCM frames.");
+            return 0;
+        }
+
+        // Calculate the length in seconds: Length in PCM frames divided by the sample rate.
+        return static_cast<size_t>(lengthInPCMFrames) / mDecoder.outputSampleRate;
+    }
 };
 
-MiniaudioSource::MiniaudioSource()
+class MiniaudioSource : public impl::Source
 {
-    if (ma_engine_init(nullptr, &mEngine) != MA_SUCCESS)
+public:
+    MiniaudioSource()
     {
-        CUBOS_CRITICAL("Failed to initialize miniaudio engine.");
-        abort();
+        if (ma_engine_init(nullptr, &mEngine) != MA_SUCCESS)
+        {
+            CUBOS_FAIL("Failed to initialize miniaudio engine.");
+            abort();
+        }
     }
-}
 
-MiniaudioSource::~MiniaudioSource()
-{
-    ma_sound_uninit(&mSound);
-    ma_engine_uninit(&mEngine);
-}
-
-void MiniaudioSource::setBuffer(Buffer buffer)
-{
-    if (ma_sound_init_from_data_source(&mEngine, &buffer->mDecoder, 0, nullptr, &mSound) != MA_SUCCESS)
+    ~MiniaudioSource() override
     {
-        CUBOS_CRITICAL("Failed to initialize sound from buffer.");
-        abort();
+        ma_sound_uninit(&mSound);
+        ma_engine_uninit(&mEngine);
     }
-}
 
-void MiniaudioSource::setPosition(const glm::vec3& position)
-{
-    ma_sound_set_position(&mSound, position.x, position.y, position.z);
-}
-
-void MiniaudioSource::setVelocity(const glm::vec3& velocity)
-{
-    ma_sound_set_velocity(&mSound, velocity.x, velocity.y, velocity.z);
-}
-
-void MiniaudioSource::setGain(float gain)
-{
-    ma_sound_set_volume(&mSound, gain);
-}
-
-void MiniaudioSource::setPitch(float pitch)
-{
-    ma_sound_set_pitch(&mSound, pitch);
-}
-
-void MiniaudioSource::setLooping(bool looping)
-{
-    ma_sound_set_looping(&mSound, static_cast<ma_bool32>(looping));
-}
-
-void MiniaudioSource::setRelative(bool relative)
-{
-    relative ? ma_sound_set_positioning(&mSound, ma_positioning_relative)
-             : ma_sound_set_positioning(&mSound, ma_positioning_absolute);
-}
-
-void MiniaudioSource::setMaxDistance(float maxDistance)
-{
-    ma_sound_set_max_distance(&mSound, maxDistance);
-}
-
-void MiniaudioSource::setMinDistance(float minDistance)
-{
-    ma_sound_set_min_distance(&mSound, minDistance);
-}
-
-void MiniaudioSource::setCone(float innerAngle, float outerAngle, float outerGain = 1.0F)
-{
-    ma_sound_set_cone(&mSound, innerAngle, outerAngle, outerGain);
-}
-
-void MiniaudioSource::setConeDirection(const glm::vec3& direction)
-{
-    ma_sound_set_direction(&mSound, direction.x, direction.y, direction.z);
-}
-
-void MiniaudioSource::play()
-{
-    if (ma_sound_start(&mSound) != MA_SUCCESS)
+    void setBuffer(Buffer buffer) override
     {
-        CUBOS_CRITICAL("Failed to start sound.");
-        abort();
+        // Try to dynamically cast the Buffer to a MiniaudioBuffer.
+        auto miniaudioBuffer = std::dynamic_pointer_cast<MiniaudioBuffer>(buffer);
+
+        if (miniaudioBuffer == nullptr)
+        {
+            CUBOS_FAIL("Buffer is not of type MiniaudioBuffer.");
+            abort();
+        }
+
+        if (ma_sound_init_from_data_source(&mEngine, &miniaudioBuffer->mDecoder, 0, nullptr, &mSound) != MA_SUCCESS)
+        {
+            CUBOS_ERROR("Failed to initialize sound from buffer.");
+            abort();
+        }
     }
-}
+
+    void setPosition(const glm::vec3& position) override
+    {
+        ma_sound_set_position(&mSound, position.x, position.y, position.z);
+    }
+
+    void setVelocity(const glm::vec3& velocity) override
+    {
+        ma_sound_set_velocity(&mSound, velocity.x, velocity.y, velocity.z);
+    }
+
+    void setGain(float gain) override
+    {
+        ma_sound_set_volume(&mSound, gain);
+    }
+
+    void setPitch(float pitch) override
+    {
+        ma_sound_set_pitch(&mSound, pitch);
+    }
+
+    void setLooping(bool looping) override
+    {
+        ma_sound_set_looping(&mSound, static_cast<ma_bool32>(looping));
+    }
+
+    void setRelative(bool relative) override
+    {
+        relative ? ma_sound_set_positioning(&mSound, ma_positioning_relative)
+                 : ma_sound_set_positioning(&mSound, ma_positioning_absolute);
+    }
+
+    void setMaxDistance(float maxDistance) override
+    {
+        ma_sound_set_max_distance(&mSound, maxDistance);
+    }
+
+    void setMinDistance(float minDistance) override
+    {
+        ma_sound_set_min_distance(&mSound, minDistance);
+    }
+
+    void setCone(float innerAngle, float outerAngle, float outerGain = 1.0F) override
+    {
+        ma_sound_set_cone(&mSound, innerAngle, outerAngle, outerGain);
+    }
+
+    void setConeDirection(const glm::vec3& direction) override
+    {
+        ma_sound_set_direction(&mSound, direction.x, direction.y, direction.z);
+    }
+
+    void play() override
+    {
+        if (ma_sound_start(&mSound) != MA_SUCCESS)
+        {
+            CUBOS_ERROR("Failed to start sound.");
+            abort();
+        }
+    }
+
+private:
+    ma_sound mSound;
+    ma_engine mEngine;
+};
 
 MiniaudioDevice::MiniaudioDevice()
 {
     // Initialize miniaudio context.
     if (ma_context_init(nullptr, 0, nullptr, &mContext) != MA_SUCCESS)
     {
-        CUBOS_CRITICAL("Failed to initialize miniaudio context.");
+        CUBOS_FAIL("Failed to initialize miniaudio context.");
         abort();
     }
 
     // Initialize miniaudio engine
     if (ma_engine_init(nullptr, &mEngine) != MA_SUCCESS)
     {
-        CUBOS_CRITICAL("Failed to initialize miniaudio engine.");
+        CUBOS_FAIL("Failed to initialize miniaudio engine.");
         abort();
     }
 
@@ -143,7 +164,7 @@ MiniaudioDevice::MiniaudioDevice()
     // Initialize the audio device.
     if (ma_device_init(&mContext, &deviceConfig, &mDevice) != MA_SUCCESS)
     {
-        CUBOS_CRITICAL("Failed to initialize audio device.");
+        CUBOS_FAIL("Failed to initialize audio device.");
         ma_context_uninit(&mContext);
         abort();
     }
@@ -153,7 +174,6 @@ MiniaudioDevice::MiniaudioDevice()
 
 MiniaudioDevice::~MiniaudioDevice()
 {
-
     ma_device_uninit(&mDevice);
     ma_context_uninit(&mContext);
 }
@@ -163,7 +183,7 @@ void MiniaudioDevice::enumerateDevices(std::vector<std::string>& devices)
     ma_context context;
     if (ma_context_init(nullptr, 0, nullptr, &context) != MA_SUCCESS)
     {
-        CUBOS_CRITICAL("Failed to initialize audio context.");
+        CUBOS_ERROR("Failed to initialize audio context.");
         abort();
     }
 
@@ -171,7 +191,7 @@ void MiniaudioDevice::enumerateDevices(std::vector<std::string>& devices)
     ma_uint32 playbackDeviceCount;
     if (ma_context_get_devices(&context, &pPlaybackDeviceInfos, &playbackDeviceCount, nullptr, nullptr) != MA_SUCCESS)
     {
-        CUBOS_CRITICAL("Failed to enumerate devices.");
+        CUBOS_FAIL("Failed to enumerate devices.");
         ma_context_uninit(&context); // Uninitialize context before aborting
         abort();
     }
@@ -189,7 +209,7 @@ std::string MiniaudioDevice::getDefaultDevice()
     ma_context context;
     if (ma_context_init(nullptr, 0, nullptr, &context) != MA_SUCCESS)
     {
-        CUBOS_CRITICAL("Failed to initialize audio context.");
+        CUBOS_FAIL("Failed to initialize audio context.");
         abort();
     }
 
@@ -213,12 +233,12 @@ std::string MiniaudioDevice::getDefaultDevice()
 
 Buffer MiniaudioDevice::createBuffer(const void* data, size_t dataSize)
 {
-    return MiniaudioBuffer::create(data, dataSize);
+    return std::make_shared<MiniaudioBuffer>(data, dataSize);
 }
 
 Source MiniaudioDevice::createSource()
 {
-    return MiniaudioSource::create();
+    return std::make_shared<MiniaudioSource>();
 }
 
 void MiniaudioDevice::setListenerPosition(const glm::vec3& position, ma_uint32 listenerIndex)
