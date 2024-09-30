@@ -473,7 +473,7 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
             }
             else
             {
-                auto id = uuids::to_string(state.asset.getId());
+                auto id = state.asset.getIdString();
                 ImGui::Text("Editing scene %s", id.c_str());
 
                 if (ImGui::Button("Save"))

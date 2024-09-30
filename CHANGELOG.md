@@ -23,12 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Importer plugin (#1299, **@Scarface1809**).
 - Handle body rotation on penetration solving (#1272, **&fallenatlas**).
 - Cascaded shadow maps (#1187, **@tomas7770**).
+- Allow identifying assets in code from their path (#1177. **@GalaxyCrush**).
 
 ### Changed
 
 - Moved Glad and stb-image libs to another repositories, cubos-glad and cubos-stb, respectively (#1323, **@kuukitenshi**).
 - Moved most tools from Tesseratos to the engine (#1322, **@RiscadoA**).
-
+  
 ### Fixed
 
 - Spot light angle mismatch between light and shadows (#1310, **@tomas7770**).
