@@ -68,12 +68,12 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="a3cecdaa4171940801e067cc91ba3e279">
-              using <a href="#a3cecdaa4171940801e067cc91ba3e279" class="m-doc-self">Tester</a> = bool(*)(const void*instance)
+            <dt id="ae0a44360d9a40c0792572e8447f0e12b">
+              using <a href="#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc-self">Tester</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(const void*) const &gt;
             </dt>
             <dd>Function pointer to test if a value matches the variant.</dd>
-            <dt id="a3c5b2ff96ac0e7be3844c1e491aa546c">
-              using <a href="#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc-self">Setter</a> = void(*)(void*instance)
+            <dt id="ac68cc9e54ce41079c1648150616e2ed0">
+              using <a href="#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc-self">Setter</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*) const &gt;
             </dt>
             <dd>Function pointer to set the value of the variant.</dd>
           </dl>
@@ -111,8 +111,8 @@
             <dd>Move constructs.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter)</span>
             </dt>
             <dd>Constructs a variant with a given name, tester function, and setter function.</dd>
             <dt>
@@ -130,14 +130,14 @@
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ac0cebb961a32feab109fcca1533630d1" class="m-doc">addVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter)</span>
             </dt>
             <dd>Adds a variant to the type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ad832e7e4b79fe21a7e8059ac50de45fb" class="m-doc">withVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp;</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp;</span>
             </dt>
             <dd>Adds a variant to the type.</dd>
             <dt>
@@ -296,8 +296,8 @@
           <section class="m-doc-details" id="a2047fcf7ea357a4c4f8660f7ad7a0712"><div>
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc-self">Variant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter)</span></span>
             </h3>
             <p>Constructs a variant with a given name, tester function, and setter function.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -357,8 +357,8 @@
           <section class="m-doc-details" id="ac0cebb961a32feab109fcca1533630d1"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac0cebb961a32feab109fcca1533630d1" class="m-doc-self">addVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter)</span></span>
             </h3>
             <p>Adds a variant to the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -384,8 +384,8 @@
           <section class="m-doc-details" id="ad832e7e4b79fe21a7e8059ac50de45fb"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad832e7e4b79fe21a7e8059ac50de45fb" class="m-doc-self">withVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter) &amp;&amp;</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter) &amp;&amp;</span></span>
             </h3>
             <p>Adds a variant to the type.</p>
             <table class="m-table m-fullwidth m-flat">

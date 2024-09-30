@@ -172,6 +172,10 @@
             </dt>
             <dd>Returns a new builder used to add an observer to the engine.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa44a17638d512ffd824ecabcc3281a7e" class="m-doc">typeServer</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html" class="m-doc">reflection::<wbr />TypeServer</a>&amp;&gt;</span>
+            </dt>
+            <dd>Returns the type server to be used by the engine, in case debugging is enabled.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ab3f698e20a1b78731807d9685f13d210" class="m-doc">reset</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Resets the application to its initial state.</dd>
@@ -187,6 +191,14 @@
               <span class="m-doc-wrap-bumper">void <a href="#a7815c8c987864e8e9e698c4f86b87e70" class="m-doc">run</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Runs the application&#x27;s main loop.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4b31e3a494a7b9c4617520781ef271bb" class="m-doc">started</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Returns whether the application has been started.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aceaa275ed71e2823cb1f76d17a7c02d9" class="m-doc">shouldQuit</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Returns whether the application should quit.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0d5aee528fb661eec93a649ae6553374" class="m-doc">before</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
@@ -453,7 +465,7 @@
                 </tr>
                 <tr>
                   <td>name</td>
-                  <td>Debug name.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Cubos_1_1Debug.html" class="m-doc">Debug</a> name.</td>
                 </tr>
               </tbody>
             </table>
@@ -475,7 +487,7 @@
                 </tr>
                 <tr>
                   <td>name</td>
-                  <td>Debug name.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Cubos_1_1Debug.html" class="m-doc">Debug</a> name.</td>
                 </tr>
               </tbody>
             </table>
@@ -907,6 +919,21 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="aa44a17638d512ffd824ecabcc3281a7e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html" class="m-doc">reflection::<wbr />TypeServer</a>&amp;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa44a17638d512ffd824ecabcc3281a7e" class="m-doc-self">typeServer</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the type server to be used by the engine, in case debugging is enabled.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Type server.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Can be used to register new types or traits manually.</p>
+          </div></section>
           <section class="m-doc-details" id="ab3f698e20a1b78731807d9685f13d210"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3f698e20a1b78731807d9685f13d210" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap">)</span></span>
@@ -934,6 +961,34 @@
             </h3>
             <p>Runs the application&#x27;s main loop.</p>
 <p>Equivalent to calling <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a72a118b02364d64572575867599918fc" class="m-doc">start()</a> followed by <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a97b3da51fec07b4efcc810838d8c08cb" class="m-doc">update()</a> until it returns false.</p>
+          </div></section>
+          <section class="m-doc-details" id="a4b31e3a494a7b9c4617520781ef271bb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b31e3a494a7b9c4617520781ef271bb" class="m-doc-self">started</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns whether the application has been started.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the application has been started.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aceaa275ed71e2823cb1f76d17a7c02d9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aceaa275ed71e2823cb1f76d17a7c02d9" class="m-doc-self">shouldQuit</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns whether the application should quit.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the application should quit.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
           <section class="m-doc-details" id="a0d5aee528fb661eec93a649ae6553374"><div>
             <h3>

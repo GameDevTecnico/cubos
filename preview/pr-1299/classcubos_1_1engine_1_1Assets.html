@@ -71,7 +71,8 @@
               <span class="m-doc-wrap-bumper">enum class <a href="#a5b5adddb5a35766e6213ff1cb4adbe96" class="m-doc">Status</a> { </span><span class="m-doc-wrap"><a href="#a5b5adddb5a35766e6213ff1cb4adbe96a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc">Unknown</a>,
               <a href="#a5b5adddb5a35766e6213ff1cb4adbe96aa5ae20aa7fda5bd38bf0dce98e65bd2d" class="m-doc">Unloaded</a>,
               <a href="#a5b5adddb5a35766e6213ff1cb4adbe96a16bfbf9c462762cf1cba4134ec53c504" class="m-doc">Loading</a>,
-              <a href="#a5b5adddb5a35766e6213ff1cb4adbe96a7381d487d18845b379422325c0a768d6" class="m-doc">Loaded</a> }</span>
+              <a href="#a5b5adddb5a35766e6213ff1cb4adbe96a7381d487d18845b379422325c0a768d6" class="m-doc">Loaded</a>,
+              <a href="#a5b5adddb5a35766e6213ff1cb4adbe96ad7c8c85bf79bbe1b7188497c32c3b0ca" class="m-doc">Failed</a> }</span>
             </dt>
             <dd>Possible statuses for an asset.</dd>
           </dl>
@@ -102,6 +103,10 @@
             </dt>
             <dd>Imports all files without a .meta file. Similar to loadMeta.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5b86d677edb80cbe4ff3558bca72b6ab" class="m-doc">getAsset</a>(</span><span class="m-doc-wrap">std::string_view path) -&gt; <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a></span>
+            </dt>
+            <dd>Get AssetHandle from Path.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ae64176ab58187c7cd8bee61f871618e3" class="m-doc">loadMeta</a>(</span><span class="m-doc-wrap">std::string_view path)</span>
             </dt>
             <dd>Loads all metadata from the virtual filesystem, in the given path. If the path points to a directory, it will be recursively searched for metadata files.</dd>
@@ -128,6 +133,11 @@
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a1516e8aa8d7184fdfbc6f73e7cc625be" class="m-doc">read</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt; handle) const -&gt; <a href="group__assets-plugin.html#gaceca2b8de7d01d914f7d9ce5fffd40a5" class="m-doc">AssetRead</a>&lt;T&gt;</span>
+            </dt>
+            <dd>Gets read-only access to the asset data associated with the given handle.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa58362ae3c817603f256763663aab770" class="m-doc">tryRead</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt; handle) const -&gt; std::optional&lt;std::reference_wrapper&lt;const T&gt;&gt;</span>
             </dt>
             <dd>Gets read-only access to the asset data associated with the given handle.</dd>
             <dt>
@@ -211,6 +221,12 @@
                   <p>The asset is loaded.</p>
                   </td>
                 </tr>
+                <tr>
+                  <td><a href="#a5b5adddb5a35766e6213ff1cb4adbe96ad7c8c85bf79bbe1b7188497c32c3b0ca" class="m-doc-self" id="a5b5adddb5a35766e6213ff1cb4adbe96ad7c8c85bf79bbe1b7188497c32c3b0ca">Failed</a></td>
+                  <td>
+                  <p>The asset failed to load.</p>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div></section>
@@ -255,6 +271,29 @@
                   <td>Path to load metadata from.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5b86d677edb80cbe4ff3558bca72b6ab"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5b86d677edb80cbe4ff3558bca72b6ab" class="m-doc-self">getAsset</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
+            </h3>
+            <p>Get AssetHandle from Path.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path</td>
+                  <td>Path to get handle from.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>AssetHandle from Path, or a null handle if unable to find.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="ae64176ab58187c7cd8bee61f871618e3"><div>
@@ -429,6 +468,42 @@
               </tfoot>
             </table>
 <p>If the asset is not loaded, this blocks until it is. If the asset cannot be loaded, abort is called.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa58362ae3c817603f256763663aab770"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">std::optional&lt;std::reference_wrapper&lt;const T&gt;&gt; cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa58362ae3c817603f256763663aab770" class="m-doc-self">tryRead</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt; handle) const</span></span>
+            </h3>
+            <p>Gets read-only access to the asset data associated with the given handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the asset data.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle to get the asset data for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the asset data.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the asset is not loaded, this blocks until it is. If the asset cannot be loaded, returns std::nullopt.</p>
           </div></section>
           <section class="m-doc-details" id="acb41ad9267389341425706213c464ddf"><div>
             <h3>
