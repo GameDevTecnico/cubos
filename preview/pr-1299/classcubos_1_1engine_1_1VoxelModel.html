@@ -47,9 +47,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>VoxelModel <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="voxel__model_8hpp.html">&lt;engine/voxels/voxel_model.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="model_8hpp.html">&lt;engine/voxels/model.hpp&gt;</a></div>
         </h1>
-        <p>Holds a VoxelPallete &amp; Grids.</p>
+        <p>Holds the data loaded from voxel model files, such as Qubicle models.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -77,7 +77,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aa6773c9930d16cb3de4aff64717917de" class="m-doc">loadFrom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool</span>
             </dt>
-            <dd>Loads the grid&#x27;s data from the given stream.</dd>
+            <dd>Loads the voxel model data from the given stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a11061fbc5e941124c0ed9d64d97dcb45" class="m-doc">writeTo</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) const -&gt; bool</span>
             </dt>
@@ -90,7 +90,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6773c9930d16cb3de4aff64717917de" class="m-doc-self">loadFrom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream)</span></span>
             </h3>
-            <p>Loads the grid&#x27;s data from the given stream.</p>
+            <p>Loads the voxel model data from the given stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -108,7 +108,7 @@
                 </tr>
               </tfoot>
             </table>
-<p>Assumes the data is stored in big-endian (network byte order). The first bytes correspond to three uint32_t, which represent the size of the grid (x, y, z). The next bytes correspond to <code>size.x * size.y * size.z</code> uint16_t, which represent the actual voxel materials. The voxel data is indexed by <code>x + y * size.x + z * size.x * size.y</code>.</p>
+<p>This method reads the voxel model data from a stream in a format compatible with Qubicle files. The method assumes the following structure in the stream: <a href="https://getqubicle.com/qubicle/documentation/docs/file/qb/">https:/<wbr />/<wbr />getqubicle.com/<wbr />qubicle/<wbr />documentation/<wbr />docs/<wbr />file/<wbr />qb/<wbr /></a></p>
           </div></section>
           <section class="m-doc-details" id="a11061fbc5e941124c0ed9d64d97dcb45"><div>
             <h3>
