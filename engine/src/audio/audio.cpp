@@ -9,8 +9,11 @@ CUBOS_REFLECT_IMPL(cubos::engine::Audio)
     return core::reflection::Type::create("cubos::engine::Audio");
 }
 
-cubos::engine::Audio::Audio(std::shared_ptr<cubos::core::al::MiniaudioDevice> device, core::memory::Stream& stream)
+cubos::engine::Audio::Audio(std::shared_ptr<cubos::core::al::MiniaudioContext> context, core::memory::Stream& stream)
 {
+    // create audio device from context
+    auto device = context->createDevice("AudioDevice"); // TODO: does this make sense?
+
     stream.seek(0, cubos::core::memory::SeekOrigin::End);
     size_t streamSize = stream.tell();
     void* contents = operator new(sizeof(char) * streamSize);
@@ -18,7 +21,6 @@ cubos::engine::Audio::Audio(std::shared_ptr<cubos::core::al::MiniaudioDevice> de
     if (stream.read((char*)contents, streamSize) < streamSize)
     {
         CUBOS_ERROR("Couldn't load audio: Read less than stream lenght");
-        // TODO: add audio buffer here
         mData = nullptr;
         operator delete(contents);
         return;

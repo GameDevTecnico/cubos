@@ -17,12 +17,12 @@ namespace cubos::engine
     class AudioBridge : public FileBridge
     {
     public:
-        std::shared_ptr<cubos::core::al::MiniaudioDevice> mDevice;
+        std::shared_ptr<cubos::core::al::MiniaudioContext> mContext;
 
         /// @brief Constructs a bridge.
-        AudioBridge(std::shared_ptr<cubos::core::al::MiniaudioDevice> device)
+        AudioBridge(std::shared_ptr<cubos::core::al::MiniaudioContext> context)
             : FileBridge(core::reflection::reflect<Audio>())
-            , mDevice(device)
+            , mContext(context)
         {
         }
 

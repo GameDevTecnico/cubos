@@ -15,10 +15,10 @@ namespace cubos::core::al
         MiniaudioContext();
         ~MiniaudioContext() override;
 
-        AudioDevice createDevice(unsigned int listenerCount, const std::string& specifier) override;
-        Buffer createBuffer(const void* data, size_t dataSize) override;
-        void enumerateDevices(std::vector<std::string>& devices) override;
-        std::string getDefaultDevice();
+        std::shared_ptr<AudioDevice> createDevice(const std::string& specifier) override;
+
+        static void enumerateDevices(std::vector<std::string>& devices);
+        static std::string getDefaultDevice();
 
     private:
         ma_context mContext;

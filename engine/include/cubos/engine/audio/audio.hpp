@@ -3,7 +3,7 @@
 /// @ingroup audio-plugin
 #pragma once
 
-#include <cubos/core/al/miniaudio_device.hpp>
+#include <cubos/core/al/miniaudio_context.hpp>
 #include <cubos/core/memory/stream.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
@@ -20,7 +20,7 @@ namespace cubos::engine
         std::shared_ptr<cubos::core::al::impl::Buffer> mData; // Raw data of the audio
         size_t mLength;                                       // Audio length in seconds TODO: add getter in audio
 
-        explicit Audio(std::shared_ptr<cubos::core::al::MiniaudioDevice> device, core::memory::Stream& stream);
+        explicit Audio(std::shared_ptr<cubos::core::al::MiniaudioContext>, core::memory::Stream& stream);
         Audio(Audio&& other) noexcept;
         ~Audio();
     };

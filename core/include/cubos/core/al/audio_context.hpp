@@ -18,13 +18,11 @@ namespace cubos::core::al
     {
         class Buffer;
         class Source;
-        class Listener;
-        class AudioDevice;
     } // namespace impl
 
     /// @brief Handle to an audio buffer.
     /// @see impl::Buffer - audio buffer interface.
-    /// @see AudioContext::createBuffer()
+    /// @see AudioDevice::createBuffer()
     /// @ingroup core-al
     using Buffer = std::shared_ptr<impl::Buffer>;
 
@@ -34,17 +32,45 @@ namespace cubos::core::al
     /// @ingroup core-al
     using Source = std::shared_ptr<impl::Source>;
 
-    /// @brief Handle to an audio listener.
-    /// @see impl::Listener - audio listener interface.
-    /// @see AudioDevice::createListener()
-    /// @ingroup core-al
-    using Listener = std::shared_ptr<impl::Listener>;
+    /// @brief Audio device interface used to wrap low-level audio rendering APIs.
+    class CUBOS_CORE_API AudioDevice
+    {
+    public:
+        virtual ~AudioDevice() = default;
 
-    /// @brief Handle to an audio device.
-    /// @see impl::AudioDevice - audio device interface.
-    /// @see AudioContext::createDevice()
-    /// @ingroup core-al
-    using AudioDevice = std::shared_ptr<impl::AudioDevice>;
+        /// @brief Forbid copy construction.
+        AudioDevice(const AudioDevice&) = delete;
+
+        /// @brief Creates a new audio buffer
+        /// @param data Data to be written to the buffer, cubos currently supports .wav, .mp3 and .flac files
+        /// @param datSize Size of the data to be written.
+        /// @return Handle of the new buffer.
+        virtual Buffer createBuffer(const void* data, size_t dataSize) = 0;
+
+        /// @brief Creates a new audio source.
+        /// @return Handle of the new source.
+        virtual Source createSource() = 0;
+
+        /// @brief Sets the position of the listener.
+        /// @param position Position.
+        /// @param listenerIndex Index of the listener.
+        virtual void setListenerPosition(const glm::vec3& position, unsigned int listenerIndex = 0) = 0;
+
+        /// @brief Sets the orientation of the listener.
+        /// @param forward Forward direction of the listener.
+        /// @param up Up direction of the listener.
+        /// @param listenerIndex Index of the listener.
+        virtual void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up,
+                                            unsigned int listenerIndex = 0) = 0;
+
+        /// @brief Sets the velocity of the listener. Used to implement the doppler effect.
+        /// @param velocity Velocity of the listener.
+        /// @param listenerIndex Index of the listener.
+        virtual void setListenerVelocity(const glm::vec3& velocity, unsigned int listenerIndex = 0) = 0;
+
+    protected:
+        AudioDevice() = default;
+    };
 
     /// @brief Audio context that contains audio devices;
     class CUBOS_CORE_API AudioContext
@@ -58,20 +84,13 @@ namespace cubos::core::al
         static std::shared_ptr<AudioContext> create();
 
         /// @brief Enumerates the available devices.
-        /// @param[out] devices Vector to fill with the available device's specifiers.
-        virtual void enumerateDevices(std::vector<std::string>& devices) = 0;
+        /// @param[out] devices Vector to fill with the available devices.
+        static void enumerateDevices(std::vector<std::string>& devices);
 
         /// @brief Creates a new audio device
-        /// @param listenerCount Number of audio listeners to be supported by the device.
-        /// @param specifier Identifier of the audio device.
+        /// @param specifier The specifier of the audio device, used to identify it
         /// @return Handle of the new device
-        virtual AudioDevice createDevice(unsigned int listenerCount, const std::string& specifier = "") = 0;
-
-        /// @brief Creates a new audio buffer.
-        /// @param data Data to be written to the buffer, either .wav, .mp3 or .flac.
-        /// @param dataSize Size of the data to be written.
-        /// @return Handle of the new buffer.
-        virtual Buffer createBuffer(const void* data, size_t dataSize) = 0;
+        virtual std::shared_ptr<AudioDevice> createDevice(const std::string& specifier) = 0;
     };
 
     /// @brief Namespace to store the abstract types implemented by the audio device implementations.
@@ -82,10 +101,7 @@ namespace cubos::core::al
         {
         public:
             virtual ~Buffer() = default;
-
-            /// @brief  Gets the length in seconds of the audio buffer.
-            /// @return Length in seconds of the audio buffer.
-            virtual float length() = 0;
+            virtual size_t getLength() = 0;
 
         protected:
             Buffer() = default;
@@ -125,7 +141,7 @@ namespace cubos::core::al
             /// @brief Sets whether the source position and velocity is relative to the listener or
             /// not.
             /// @param relative Relative flag.
-            virtual void setRelative(cubos::core::al::Listener listener) = 0;
+            virtual void setRelative(bool relative) = 0;
 
             /// @brief Sets the maximum distance at which the source is audible.
             /// @param maxDistance Maximum distance.
@@ -150,50 +166,6 @@ namespace cubos::core::al
 
         protected:
             Source() = default;
-        };
-
-        // Abstract audio listener.
-        class CUBOS_CORE_API Listener
-        {
-        public:
-            virtual ~Listener() = default;
-
-            /// @brief Sets the velocity of the listener. Used to implement the doppler effect.
-            /// @param velocity Velocity of the listener.
-            virtual void setVelocity(const glm::vec3& velocity) = 0;
-
-            /// @brief Sets the position of the listener.
-            /// @param position Position.
-            virtual void setPosition(const glm::vec3& position) = 0;
-
-            /// @brief Sets the orientation of the listener.
-            /// @param forward Forward direction of the listener.
-            /// @param up Up direction of the listener.
-            virtual void setOrientation(const glm::vec3& forward, const glm::vec3& up) = 0;
-
-        protected:
-            Listener() = default;
-        };
-
-        /// @brief Audio device interface used to wrap low-level audio rendering APIs.
-        class CUBOS_CORE_API AudioDevice
-        {
-        public:
-            virtual ~AudioDevice() = default;
-
-            /// @brief Forbid copy construction.
-            AudioDevice(const AudioDevice&) = delete;
-
-            /// @brief Creates a new audio source.
-            /// @return Handle of the new source.
-            virtual std::shared_ptr<impl::Source> createSource() = 0;
-
-            /// @brief  Creates a new audio listener.
-            /// @return Handle of the new listener.
-            virtual std::shared_ptr<impl::Listener> listener(size_t index) = 0;
-
-        protected:
-            AudioDevice() = default;
         };
     } // namespace impl
 } // namespace cubos::core::al
