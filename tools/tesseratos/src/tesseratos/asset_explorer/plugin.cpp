@@ -1,20 +1,13 @@
 #include "plugin.hpp"
-#include <filesystem>
 
 #include <imgui.h>
-
-#include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/memory/standard_stream.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
-#include <cubos/engine/voxels/voxel_model.hpp>
 
 #include "../toolbox/plugin.hpp"
 
-using cubos::core::data::File;
-using cubos::core::data::FileSystem;
 using cubos::core::ecs::EventReader;
 using cubos::core::ecs::EventWriter;
 
@@ -22,12 +15,6 @@ using cubos::engine::AnyAsset;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
 using cubos::engine::Settings;
-using cubos::engine::VoxelGrid;
-using cubos::engine::VoxelModel;
-using cubos::engine::VoxelPalette;
-
-namespace fs = std::filesystem;
-namespace memory = cubos::core::memory;
 
 using namespace tesseratos;
 

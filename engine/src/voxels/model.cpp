@@ -6,11 +6,8 @@
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
 
-#include <cubos/engine/voxels/voxel_model.hpp>
+#include <cubos/engine/voxels/model.hpp>
 
-using cubos::core::memory::fromBigEndian;
-using cubos::core::memory::Stream;
-using cubos::core::memory::toBigEndian;
 namespace memory = cubos::core::memory;
 
 using namespace cubos::engine;
@@ -23,37 +20,42 @@ CUBOS_REFLECT_IMPL(VoxelModel)
         .with(ConstructibleTrait::typed<VoxelModel>().withDefaultConstructor().withMoveConstructor().build());
 }
 
-uint16_t VoxelModel::getMatricesSize() const
+std::size_t VoxelModel::gridCount() const
 {
-    return static_cast<uint16_t>(mAtrices.size());
+    return mMatrices.size();
 }
 
-const VoxelPalette& VoxelModel::getPalette() const
+const VoxelPalette& VoxelModel::palette() const
 {
     return mPalette;
 }
 
-void VoxelModel::setPalette(const VoxelPalette& palette)
+VoxelPalette& VoxelModel::palette()
 {
-    this->mPalette = palette;
+    return mPalette;
 }
 
-const VoxelGrid& VoxelModel::getGrid(uint16_t index) const
+const VoxelGrid& VoxelModel::grid(std::size_t index) const
 {
-    return mAtrices[index].grid;
+    return mMatrices[index].grid;
 }
 
-void VoxelModel::setGrid(uint16_t index, const VoxelGrid& grid, const glm::ivec3& position)
+VoxelGrid& VoxelModel::grid(std::size_t index)
 {
-    if (index >= mAtrices.size())
-    {
-        mAtrices.resize(index + 1);
-    }
-    mAtrices[index].grid = grid;
-    mAtrices[index].position = position;
+    return mMatrices[index].grid;
 }
 
-bool VoxelModel::loadFrom(Stream& stream)
+glm::ivec3 VoxelModel::gridPosition(std::size_t index) const
+{
+    return mMatrices[index].position;
+}
+
+void VoxelModel::gridPosition(std::size_t index, glm::ivec3 position)
+{
+    mMatrices[index].position = position;
+}
+
+bool VoxelModel::loadFrom(memory::Stream& stream)
 {
     uint8_t version[4] = {0, 0, 0, 0};
     uint32_t colorFormat;
@@ -100,7 +102,7 @@ bool VoxelModel::loadFrom(Stream& stream)
     }
 
     // Parse the matrices.
-    mAtrices.resize(numMatrices);
+    mMatrices.resize(numMatrices);
     for (uint32_t i = 0; i < numMatrices; ++i)
     {
         uint8_t nameLen;
@@ -123,7 +125,7 @@ bool VoxelModel::loadFrom(Stream& stream)
         sizeX = memory::fromLittleEndian(sizeX);
         sizeY = memory::fromLittleEndian(sizeY);
         sizeZ = memory::fromLittleEndian(sizeZ);
-        mAtrices[i].grid.setSize({sizeX, sizeY, sizeZ});
+        mMatrices[i].grid.setSize({sizeX, sizeY, sizeZ});
 
         // Read the matrix position.
         stream.read(&posX, 4);
@@ -132,7 +134,7 @@ bool VoxelModel::loadFrom(Stream& stream)
         posX = memory::fromLittleEndian(posX);
         posY = memory::fromLittleEndian(posY);
         posZ = memory::fromLittleEndian(posZ);
-        mAtrices[i].position = glm::ivec3(posX, posY, posZ);
+        mMatrices[i].position = glm::ivec3(posX, posY, posZ);
 
         // Read the matrix voxels.
         if (compressed == 0)
@@ -170,9 +172,9 @@ bool VoxelModel::loadFrom(Stream& stream)
                         }
                         if (mat == nextMat)
                         {
-                            if (mat >= MaxMaterials)
+                            if (mat >= VoxelPalette::MaxMaterials)
                             {
-                                CUBOS_ERROR("Too many materials, max is {}", MaxMaterials);
+                                CUBOS_ERROR("Too many materials, max is {}", VoxelPalette::MaxMaterials);
                                 return false;
                             }
 
@@ -184,7 +186,7 @@ bool VoxelModel::loadFrom(Stream& stream)
                         }
 
                         // Set the voxel.
-                        mAtrices[i].grid.set(glm::ivec3(x, y, z), static_cast<uint16_t>(mat));
+                        mMatrices[i].grid.set(glm::ivec3(x, y, z), static_cast<uint16_t>(mat));
                     }
                 }
             }
@@ -199,7 +201,7 @@ bool VoxelModel::loadFrom(Stream& stream)
     return true;
 }
 
-bool VoxelModel::writeTo(core::memory::Stream& stream) const
+bool VoxelModel::writeTo(memory::Stream& stream) const
 {
     // Write the version of the file.
     uint8_t version[4] = {1, 1, 0, 0};
@@ -210,7 +212,7 @@ bool VoxelModel::writeTo(core::memory::Stream& stream) const
     uint32_t zAxisOrientation = 0;      // Assuming 0
     uint32_t compressed = 0;            // No compression
     uint32_t visibilityMaskEncoded = 0; // No visibility mask
-    auto numMatrices = static_cast<uint32_t>(mAtrices.size());
+    auto numMatrices = static_cast<uint32_t>(mMatrices.size());
 
     stream.write(&colorFormat, 4);
     stream.write(&zAxisOrientation, 4);
@@ -219,7 +221,7 @@ bool VoxelModel::writeTo(core::memory::Stream& stream) const
     stream.write(&numMatrices, 4);
 
     // Write each matrix.
-    for (const auto& matrix : mAtrices)
+    for (const auto& matrix : mMatrices)
     {
         const auto& grid = matrix.grid;
 
