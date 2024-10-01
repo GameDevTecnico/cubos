@@ -1,5 +1,5 @@
 /// @file
-/// @brief Class @ref cubos::core::al::AudioDevice and related types.
+/// @brief Class @ref cubos::core::al::AudioContext and related types.
 /// @ingroup core-al
 
 #pragma once
@@ -36,20 +36,10 @@ namespace cubos::core::al
     class CUBOS_CORE_API AudioDevice
     {
     public:
-        AudioDevice() = default;
         virtual ~AudioDevice() = default;
 
         /// @brief Forbid copy construction.
         AudioDevice(const AudioDevice&) = delete;
-
-        /// @brief Creates an audio device.
-        /// @see enumerateDevices()
-        /// @return Audio device, or nullptr on failure.
-        static std::shared_ptr<AudioDevice> create();
-
-        /// @brief Enumerates the available devices.
-        /// @param[out] devices Vector to fill with the available devices.
-        static void enumerateDevices(std::vector<std::string>& devices);
 
         /// @brief Creates a new audio buffer
         /// @param data Data to be written to the buffer, cubos currently supports .wav, .mp3 and .flac files
@@ -77,6 +67,30 @@ namespace cubos::core::al
         /// @param velocity Velocity of the listener.
         /// @param listenerIndex Index of the listener.
         virtual void setListenerVelocity(const glm::vec3& velocity, unsigned int listenerIndex = 0) = 0;
+
+    protected:
+        AudioDevice() = default;
+    };
+
+    /// @brief Audio context that contains audio devices;
+    class CUBOS_CORE_API AudioContext
+    {
+    public:
+        AudioContext() = default;
+        virtual ~AudioContext() = default;
+
+        /// @brief Creates an audio context.
+        /// @return AudioContext, or nullptr on failure.
+        static std::shared_ptr<AudioContext> create();
+
+        /// @brief Enumerates the available devices.
+        /// @param[out] devices Vector to fill with the available devices.
+        static void enumerateDevices(std::vector<std::string>& devices);
+
+        /// @brief Creates a new audio device
+        /// @param specifier The specifier of the audio device, used to identify it
+        /// @return Handle of the new device
+        virtual std::shared_ptr<AudioDevice> createDevice(const std::string& specifier) = 0;
     };
 
     /// @brief Namespace to store the abstract types implemented by the audio device implementations.

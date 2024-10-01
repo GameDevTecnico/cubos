@@ -86,8 +86,8 @@ set(CUBOS_CORE_SOURCE
 	"src/gl/ogl_render_device.cpp"
 	"src/gl/util.cpp"
 
-	"src/al/audio_device.cpp"
-	"src/al/miniaudio_device.cpp"
+	"src/al/audio_context.cpp"
+	"src/al/miniaudio_context.cpp"
 
 	"src/ecs/entity/entity.cpp"
 	"src/ecs/entity/hash.cpp"
