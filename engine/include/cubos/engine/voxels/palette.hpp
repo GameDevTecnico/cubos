@@ -32,6 +32,8 @@ namespace cubos::engine
     class CUBOS_ENGINE_API VoxelPalette final
     {
     public:
+        static constexpr uint32_t MaxMaterials = 65536;
+
         /// @brief Used to iterate over materials on the palette.
         class Iterator;
 

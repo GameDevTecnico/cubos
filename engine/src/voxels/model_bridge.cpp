@@ -1,8 +1,7 @@
-#include <cubos/engine/voxels/voxel_model.hpp>
-#include <cubos/engine/voxels/voxel_model_bridge.hpp>
+#include <cubos/engine/voxels/model.hpp>
+#include <cubos/engine/voxels/model_bridge.hpp>
 
 using cubos::core::memory::Stream;
-using cubos::engine::VoxelModel;
 
 using namespace cubos::engine;
 

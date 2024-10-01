@@ -63,6 +63,7 @@ int main(int argc, char** argv)
 
     cubos.startupSystem("configure Assets plugin").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);
+        settings.setBool("assets.io.readOnly", false);
     });
 
     cubos.startupSystem("load and set the Input Bindings")

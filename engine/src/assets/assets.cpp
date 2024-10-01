@@ -95,7 +95,7 @@ void Assets::importAll(std::string_view path)
     auto file = core::data::FileSystem::find(path);
     if (file == nullptr)
     {
-        CUBOS_ERROR("Couldn't load asset metadata: file {} not found", path);
+        CUBOS_ERROR("Couldn't import asset metadata: file {} not found", path);
         return;
     }
 
@@ -130,21 +130,23 @@ void Assets::importAll(std::string_view path)
             // Create new metadata with a random UUID.
             nlohmann::json json;
             json["id"] = uuids::to_string(uuids::uuid_random_generator(mRandom.value())());
-            // json["path"] = file->path();
             stream->print(json.dump(4));
             stream.reset();
 
-            CUBOS_DEBUG("Created asset metadata {} for {}", metaPath, file->path());
+            std::string id = json["id"];
+            CUBOS_INFO("Created asset metadata at {} for {} with UUID {}", metaPath, file->path(), id);
 
             loadMeta(metaPath);
         }
     }
 }
 
-AnyAsset Assets::getAsset(std::string_view path)
+AnyAsset Assets::find(std::string_view path)
 {
+    std::shared_lock lock(mMutex);
     for (const auto& [uuid, entry] : mEntries)
     {
+        std::shared_lock lock(entry->mutex);
         auto pathMeta = entry->meta.get("path");
         if (pathMeta.has_value() && pathMeta.value() == path)
         {
@@ -488,53 +490,11 @@ AnyAsset Assets::store(AnyAsset handle, const Type& type, void* data, void (*des
 template <typename Lock>
 void* Assets::access(const AnyAsset& handle, const Type& type, Lock& lock, bool incVersion) const
 {
-    CUBOS_ASSERT(!handle.isNull(), "Could not access asset");
+    void* data = tryAccess(handle, type, lock, incVersion);
 
-    // Get the entry for the asset.
-    auto assetEntry = this->entry(handle);
-    CUBOS_ASSERT(assetEntry != nullptr, "Could not access asset");
+    CUBOS_ASSERT(data != nullptr, "Could not access asset");
 
-    // If the asset hasn't been loaded yet, and its bridge isn't asynchronous, or we're in the loader thread, then load
-    // it now.
-    if (assetEntry->status != Status::Loaded)
-    {
-        auto bridge = this->bridge(handle);
-        CUBOS_ASSERT(bridge != nullptr, "Could not access asset");
-
-        if (!bridge->asynchronous() || std::this_thread::get_id() == mLoaderThread.get_id())
-        {
-            CUBOS_DEBUG("Loading asset {} as a dependency", handle);
-
-            // Load the asset - the const_cast is okay since the const qualifiers are only used to make
-            // the interface more readable. We need to unlock temporarily to avoid a deadlock, since the
-            // bridge will call back into the asset manager.
-            lock.unlock();
-            if (!bridge->load(const_cast<Assets&>(*this), handle))
-            {
-                CUBOS_CRITICAL("Could not load asset {}", handle);
-                abort();
-            }
-            lock.lock();
-        }
-    }
-
-    // Wait until the asset finishes loading.
-    while (assetEntry->status == Status::Loading)
-    {
-        assetEntry->cond.wait(lock);
-    }
-
-    CUBOS_ASSERT(assetEntry->status == Status::Loaded && assetEntry->data != nullptr, "Could not access asset");
-    CUBOS_ASSERT(assetEntry->type == &type, "Type mismatch, expected {}, got {}", type.name(),
-                 assetEntry->type->name());
-
-    if (incVersion)
-    {
-        assetEntry->version++;
-        CUBOS_DEBUG("Incremented version of asset {}", handle);
-    }
-
-    return assetEntry->data;
+    return data;
 }
 
 template <typename Lock>
@@ -551,7 +511,11 @@ void* Assets::tryAccess(const AnyAsset& handle, const Type& type, Lock& lock, bo
     if (assetEntry->status != Status::Loaded)
     {
         auto bridge = this->bridge(handle);
-        CUBOS_ASSERT(bridge != nullptr, "Could not access asset");
+        if (bridge == nullptr)
+        {
+            CUBOS_ERROR("Could not access unloaded asset as it has no associated bridge");
+            return nullptr;
+        }
 
         if (!bridge->asynchronous() || std::this_thread::get_id() == mLoaderThread.get_id())
         {
@@ -561,12 +525,13 @@ void* Assets::tryAccess(const AnyAsset& handle, const Type& type, Lock& lock, bo
             // the interface more readable. We need to unlock temporarily to avoid a deadlock, since the
             // bridge will call back into the asset manager.
             lock.unlock();
-            if (!bridge->load(const_cast<Assets&>(*this), handle))
-            {
-                CUBOS_CRITICAL("Could not load asset {}", handle);
-                abort();
-            }
+            auto success = bridge->load(const_cast<Assets&>(*this), handle);
             lock.lock();
+            if (!success)
+            {
+                CUBOS_ERROR("Could not load asset {}", handle);
+                return nullptr;
+            }
         }
     }
 
@@ -771,6 +736,7 @@ void Assets::loader()
 
 std::vector<AnyAsset> Assets::listAll() const
 {
+    std::shared_lock lock(mMutex);
     std::vector<AnyAsset> out;
     for (const auto& [entry, _] : mEntries)
     {

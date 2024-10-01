@@ -29,7 +29,7 @@ void cubos::engine::assetsPlugin(Cubos& cubos)
         if (settings.getBool("assets.io.enabled", true))
         {
             std::filesystem::path path = settings.getString("assets.io.path", "assets");
-            bool readOnly = settings.getBool("assets.io.readOnly", false);
+            bool readOnly = settings.getBool("assets.io.readOnly", true);
 
             // Create a standard archive for the assets directory and mount it.
             FileSystem::mount("/assets", std::make_unique<StandardArchive>(path, true, readOnly));
