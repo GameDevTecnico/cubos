@@ -11,9 +11,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::Audio)
 
 cubos::engine::Audio::Audio(std::shared_ptr<cubos::core::al::MiniaudioContext> context, core::memory::Stream& stream)
 {
-    // create audio device from context
-    auto device = context->createDevice("AudioDevice"); // TODO: does this make sense?
-
     stream.seek(0, cubos::core::memory::SeekOrigin::End);
     size_t streamSize = stream.tell();
     void* contents = operator new(sizeof(char) * streamSize);
@@ -26,7 +23,7 @@ cubos::engine::Audio::Audio(std::shared_ptr<cubos::core::al::MiniaudioContext> c
         return;
     };
 
-    mData = device->createBuffer(contents, (size_t)streamSize);
+    mData = context->createBuffer(contents, (size_t)streamSize);
     if (mData == nullptr)
     {
         CUBOS_ERROR("Couldn't create audio buffer");
