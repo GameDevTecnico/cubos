@@ -3,6 +3,8 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 
+// TODO: settings.getInteger("audio ")
+
 using namespace cubos::core::al;
 
 class MiniaudioBuffer : public impl::Buffer
@@ -49,7 +51,6 @@ public:
     ~MiniaudioSource() override
     {
         ma_sound_uninit(&mSound);
-        ma_engine_uninit(&mEngine);
     }
 
     void setBuffer(Buffer buffer) override
@@ -135,11 +136,46 @@ private:
     ma_engine mEngine;
 };
 
+class MiniaudioListener : public impl::Listener
+{
+public:
+    MiniaudioListener(ma_engine& engine, unsigned int index)
+        : mEngine(engine)
+        , mIndex(index)
+    {
+    }
+
+    ~MiniaudioListener() override
+    {
+    }
+
+    void setPosition(const glm::vec3& position) override
+    {
+        ma_engine_listener_set_position(&mEngine, mIndex, position.x, position.y, position.z);
+    }
+
+    void setOrientation(const glm::vec3& forward, const glm::vec3& up) override
+    {
+        ma_engine_listener_set_direction(&mEngine, mIndex, forward.x, forward.y, forward.z);
+        ma_engine_listener_set_world_up(&mEngine, mIndex, up.x, up.y, up.z);
+    }
+
+    void setVelocity(const glm::vec3& velocity) override
+    {
+        ma_engine_listener_set_velocity(&mEngine, mIndex, velocity.x, velocity.y, velocity.z);
+    }
+
+private:
+    ma_engine& mEngine;
+    unsigned int mIndex;
+};
+
 class MiniaudioDevice : public cubos::core::al::AudioDevice
 {
 public:
-    MiniaudioDevice(ma_context& context, const std::string& deviceName)
+    MiniaudioDevice(ma_context& context, const std::string& deviceName, ma_uint32 listenerCount)
         : mContext(context)
+        , mListeners()
     {
         ma_device_info* pPlaybackDeviceInfos;
         ma_uint32 playbackDeviceCount;
@@ -169,12 +205,26 @@ public:
         }
 
         ma_engine_config engineConfig = ma_engine_config_init();
+
+        if (listenerCount > MA_ENGINE_MAX_LISTENERS)
+        {
+            CUBOS_FAIL("Maximum number of listeners is 4");
+            return;
+        }
+
+        engineConfig.listenerCount = listenerCount;
         engineConfig.pPlaybackDeviceID = deviceId; // Use the found device ID
 
         if (ma_engine_init(&engineConfig, &mEngine) != MA_SUCCESS)
         {
             CUBOS_FAIL("Failed to initialize audio engine");
             return;
+        }
+
+        mListeners.reserve(listenerCount);
+        for (ma_uint32 i = 0; i < listenerCount; ++i)
+        {
+            mListeners.emplace_back(std::make_shared<MiniaudioListener>(mEngine, i));
         }
     }
 
@@ -183,36 +233,26 @@ public:
         ma_device_uninit(&mDevice);
     }
 
-    Buffer createBuffer(const void* data, size_t dataSize) override
-    {
-        return std::make_shared<MiniaudioBuffer>(data, dataSize);
-    }
-
     Source createSource() override
     {
         return std::make_shared<MiniaudioSource>(mEngine);
     }
 
-    void setListenerPosition(const glm::vec3& position, ma_uint32 listenerIndex) override
+    Listener listener(size_t index) override
     {
-        ma_engine_listener_set_position(&mEngine, listenerIndex, position.x, position.y, position.z);
-    }
-
-    void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up, ma_uint32 listenerIndex) override
-    {
-        ma_engine_listener_set_direction(&mEngine, listenerIndex, forward.x, forward.y, forward.z);
-        ma_engine_listener_set_world_up(&mEngine, listenerIndex, up.x, up.y, up.z);
-    }
-
-    void setListenerVelocity(const glm::vec3& velocity, ma_uint32 listenerIndex) override
-    {
-        ma_engine_listener_set_velocity(&mEngine, listenerIndex, velocity.x, velocity.y, velocity.z);
+        if (index >= mListeners.size())
+        {
+            CUBOS_ERROR("Listener index out of range");
+            return nullptr;
+        }
+        return mListeners[index];
     }
 
 private:
     ma_context mContext;
     ma_device mDevice;
     ma_engine mEngine;
+    std::vector<std::shared_ptr<MiniaudioListener>> mListeners;
 };
 
 MiniaudioContext::MiniaudioContext()
@@ -299,7 +339,12 @@ void MiniaudioContext::enumerateDevices(std::vector<std::string>& devices)
     }
 }
 
-std::shared_ptr<AudioDevice> MiniaudioContext::createDevice(const std::string& specifier)
+Buffer MiniaudioContext::createBuffer(const void* data, size_t dataSize)
 {
-    return std::make_shared<MiniaudioDevice>(mContext, specifier);
+    return std::make_shared<MiniaudioBuffer>(data, dataSize);
+}
+
+std::shared_ptr<AudioDevice> MiniaudioContext::createDevice(const std::string& specifier, ma_uint32 listenerCount)
+{
+    return std::make_shared<MiniaudioDevice>(mContext, specifier, listenerCount);
 }
