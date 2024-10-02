@@ -19,11 +19,12 @@ namespace cubos::core::al
         class Buffer;
         class Source;
         class Listener;
+        class AudioDevice;
     } // namespace impl
 
     /// @brief Handle to an audio buffer.
     /// @see impl::Buffer - audio buffer interface.
-    /// @see AudioDevice::createBuffer()
+    /// @see AudioContext::createBuffer()
     /// @ingroup core-al
     using Buffer = std::shared_ptr<impl::Buffer>;
 
@@ -39,26 +40,11 @@ namespace cubos::core::al
     /// @ingroup core-al
     using Listener = std::shared_ptr<impl::Listener>;
 
-    /// @brief Audio device interface used to wrap low-level audio rendering APIs.
-    class CUBOS_CORE_API AudioDevice
-    {
-    public:
-        virtual ~AudioDevice() = default;
-
-        /// @brief Forbid copy construction.
-        AudioDevice(const AudioDevice&) = delete;
-
-        /// @brief Creates a new audio source.
-        /// @return Handle of the new source.
-        virtual Source createSource() = 0;
-
-        /// @brief  Creates a new audio listener.
-        /// @return Handle of the new listener.
-        virtual Listener listener(size_t index) = 0;
-
-    protected:
-        AudioDevice() = default;
-    };
+    /// @brief Handle to an audio device.
+    /// @see impl::AudioDevice - audio device interface.
+    /// @see AudioContext::createDevice()
+    /// @ingroup core-al
+    using AudioDevice = std::shared_ptr<impl::AudioDevice>;
 
     /// @brief Audio context that contains audio devices;
     class CUBOS_CORE_API AudioContext
@@ -73,15 +59,17 @@ namespace cubos::core::al
 
         /// @brief Enumerates the available devices.
         /// @param[out] devices Vector to fill with the available devices.
-        static void enumerateDevices(std::vector<std::string>& devices);
+        virtual void enumerateDevices(std::vector<std::string>& devices) = 0;
 
         /// @brief Creates a new audio device
         /// @param specifier The specifier of the audio device, used to identify it
+        /// @param listenerCount The number of audio listener to be created by the device's engine.
         /// @return Handle of the new device
-        virtual std::shared_ptr<AudioDevice> createDevice(const std::string& specifier, unsigned int listenerCount) = 0;
+        virtual AudioDevice createDevice(unsigned int listenerCount,
+                                         const std::string& specifier = "MiniaudioDevice") = 0;
 
         /// @brief Creates a new audio buffer.
-        /// @param data Data to be written to the buffer, cubos currently supports .wav, .mp3 and .flac files.
+        /// @param data Data to be written to the buffer, either .wav, .mp3 or .flac.
         /// @param datSize Size of the data to be written.
         /// @return Handle of the new buffer.
         virtual Buffer createBuffer(const void* data, size_t dataSize) = 0;
@@ -95,7 +83,10 @@ namespace cubos::core::al
         {
         public:
             virtual ~Buffer() = default;
-            virtual size_t getLength() = 0;
+
+            /// @brief  Gets the length in seconds of the audio buffer.
+            /// @return Length in seconds of the audio buffer.
+            virtual size_t length() = 0;
 
         protected:
             Buffer() = default;
@@ -162,6 +153,7 @@ namespace cubos::core::al
             Source() = default;
         };
 
+        // Abstract audio listener.
         class CUBOS_CORE_API Listener
         {
         public:
@@ -182,6 +174,27 @@ namespace cubos::core::al
 
         protected:
             Listener() = default;
+        };
+
+        /// @brief Audio device interface used to wrap low-level audio rendering APIs.
+        class CUBOS_CORE_API AudioDevice
+        {
+        public:
+            virtual ~AudioDevice() = default;
+
+            /// @brief Forbid copy construction.
+            AudioDevice(const AudioDevice&) = delete;
+
+            /// @brief Creates a new audio source.
+            /// @return Handle of the new source.
+            virtual std::shared_ptr<impl::Source> createSource() = 0;
+
+            /// @brief  Creates a new audio listener.
+            /// @return Handle of the new listener.
+            virtual std::shared_ptr<impl::Listener> listener(size_t index) = 0;
+
+        protected:
+            AudioDevice() = default;
         };
     } // namespace impl
 } // namespace cubos::core::al

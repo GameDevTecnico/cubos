@@ -17,10 +17,11 @@ namespace cubos::engine
     struct CUBOS_ENGINE_API Audio
     {
         CUBOS_REFLECT;
-        std::shared_ptr<cubos::core::al::impl::Buffer> mData; // Raw data of the audio
-        size_t mLength;                                       // Audio length in seconds TODO: add getter in audio
 
-        explicit Audio(std::shared_ptr<cubos::core::al::MiniaudioContext>, core::memory::Stream& stream);
+        /// @brief Audio buffer.
+        cubos::core::al::Buffer buffer;
+
+        explicit Audio(std::shared_ptr<cubos::core::al::AudioContext>, core::memory::Stream& stream);
         Audio(Audio&& other) noexcept;
         ~Audio();
     };

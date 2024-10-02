@@ -36,6 +36,9 @@ set(CUBOS_ENGINE_SOURCE
 	"src/utils/free_camera/plugin.cpp"
 	"src/utils/free_camera/controller.cpp"
 
+	"src/audio/plugin.cpp"
+	"src/audio/source.cpp"
+	"src/audio/listener.cpp"
     "src/audio/audio.cpp"
     "src/audio/bridge.cpp"
 

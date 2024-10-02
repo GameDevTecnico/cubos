@@ -9,22 +9,22 @@ CUBOS_REFLECT_IMPL(cubos::engine::Audio)
     return core::reflection::Type::create("cubos::engine::Audio");
 }
 
-cubos::engine::Audio::Audio(std::shared_ptr<cubos::core::al::MiniaudioContext> context, core::memory::Stream& stream)
+cubos::engine::Audio::Audio(std::shared_ptr<cubos::core::al::AudioContext> context, core::memory::Stream& stream)
 {
     stream.seek(0, cubos::core::memory::SeekOrigin::End);
     size_t streamSize = stream.tell();
     void* contents = operator new(sizeof(char) * streamSize);
     stream.seek(0, cubos::core::memory::SeekOrigin::Begin);
-    if (stream.read((char*)contents, streamSize) < streamSize)
+    if (!stream.readExact((char*)contents, streamSize))
     {
-        CUBOS_ERROR("Couldn't load audio: Read less than stream lenght");
-        mData = nullptr;
+        CUBOS_ERROR("Couldn't load audio: stream read failed");
+        buffer = nullptr;
         operator delete(contents);
         return;
     };
 
-    mData = context->createBuffer(contents, (size_t)streamSize);
-    if (mData == nullptr)
+    buffer = context->createBuffer(contents, (size_t)streamSize);
+    if (buffer == nullptr)
     {
         CUBOS_ERROR("Couldn't create audio buffer");
     }
@@ -37,7 +37,7 @@ cubos::engine::Audio::~Audio()
 }
 
 cubos::engine::Audio::Audio(Audio&& other) noexcept
-    : mData(other.mData)
+    : buffer(other.buffer)
 {
-    other.mData = nullptr;
+    other.buffer = nullptr;
 }
