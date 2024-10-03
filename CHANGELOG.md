@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Moved Glad and stb-image libs to another repositories, cubos-glad and cubos-stb, respectively (#1323, **@kuukitenshi**).
+- Replaced OpenAL audio device with Miniaudio backend (#1005, **@Dageus**, **@diogomsmiranda**)
 
 ### Fixed
 
