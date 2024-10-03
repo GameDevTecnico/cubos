@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/al/audio_device.hpp file | Cubos Docs</title>
+  <title>engine/audio/source.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,9 +46,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f6f65ff657bd34b22e5078310628f4e7.html">al</a>/</span>audio_device.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_625b04ad8cbfc0c08de8737bfc424295.html">audio</a>/</span>source.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1al_1_1AudioDevice.html" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />AudioDevice</a> and related types.</p>
+        <p>Component <a href="structcubos_1_1engine_1_1AudioSource.html" class="m-doc">cubos::<wbr />engine::<wbr />AudioSource</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -57,7 +57,6 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#typedef-members">Typedefs</a></li>
               </ul>
             </li>
           </ul>
@@ -67,42 +66,17 @@
           <dl class="m-doc">
             <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
             <dd><strong>Cubos</strong> libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">cubos::core::al</a></dt>
-            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al_1_1impl.html" class="m-doc">cubos::core::al::impl</a></dt>
-            <dd>Namespace to store the abstract types implemented by the audio device implementations.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1AudioDevice.html" class="m-doc">cubos::core::al::AudioDevice</a>
+              struct <a href="structcubos_1_1engine_1_1AudioSource.html" class="m-doc">cubos::engine::AudioSource</a>
             </dt>
-            <dd>Audio device interface used to wrap low-level audio rendering APIs.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">cubos::core::al::impl::Buffer</a>
-            </dt>
-            <dd>Abstract audio buffer.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">cubos::core::al::impl::Source</a>
-            </dt>
-            <dd>Abstract audio source.</dd>
-          </dl>
-        </section>
-        <section id="typedef-members">
-          <h2><a href="#typedef-members">Typedefs</a></h2>
-          <dl class="m-doc">
-            <dt>
-              using <a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> = std::shared_ptr&lt;impl::Buffer&gt;
-            </dt>
-            <dd>Handle to an audio buffer.</dd>
-            <dt>
-              using <a href="group__core-al.html#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc">Source</a> = std::shared_ptr&lt;impl::Source&gt;
-            </dt>
-            <dd>Handle to an audio source.</dd>
+            <dd>Component which adds an <a href="structcubos_1_1engine_1_1AudioSource.html" class="m-doc">AudioSource</a> to the entitiy.</dd>
           </dl>
         </section>
       </div>
