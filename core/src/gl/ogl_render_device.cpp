@@ -2009,9 +2009,12 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D_ARRAY, id);
-    glTexStorage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLsizei>(desc.mipLevelCount), internalFormat,
-                   static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
-                   static_cast<GLsizei>(desc.size));
+    for (std::size_t j = 0; j < desc.mipLevelCount; ++j)
+    {
+        glTexImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), static_cast<GLint>(internalFormat),
+                     static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
+                     static_cast<GLsizei>(desc.size), 0, format, type, nullptr);
+    }
     for (std::size_t i = 0; i < desc.size; ++i)
     {
         for (std::size_t j = 0, div = 1; j < desc.mipLevelCount; ++j, div *= 2)
