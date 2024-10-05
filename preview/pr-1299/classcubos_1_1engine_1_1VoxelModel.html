@@ -75,6 +75,35 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0ccd65e51c5de37de43c39a02d487a52" class="m-doc">gridCount</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Returns the number of grids in the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a20e83bab08c7f24aa6abfdeb8700df6a" class="m-doc">palette</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>&amp;</span>
+            </dt>
+            <dd>Returns the palette of the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1c28dfa3ca95982a839fcba80807e260" class="m-doc">palette</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>&amp;</span>
+            </dt>
+            <dd>Returns the palette of the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab4512b2ff00888b8ec3fe33476d68b61" class="m-doc">grid</a>(</span><span class="m-doc-wrap">std::size_t index) const -&gt; const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp;</span>
+            </dt>
+            <dd>Returns the grid at the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2062f386a4c6e062e22c1e509d19c41f" class="m-doc">grid</a>(</span><span class="m-doc-wrap">std::size_t index) -&gt; <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp;</span>
+            </dt>
+            <dd>Returns the grid at the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad0b554d7d8377d64f995f53b9abac009" class="m-doc">gridPosition</a>(</span><span class="m-doc-wrap">std::size_t index) const -&gt; glm::ivec3</span>
+            </dt>
+            <dd>Returns the position of the grid at the given index.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad42fdda081119d009b81e7a18be4c245" class="m-doc">gridPosition</a>(</span><span class="m-doc-wrap">std::size_t index,
+              glm::ivec3 position)</span>
+            </dt>
+            <dd>Sets the position of the grid at the given index.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aa6773c9930d16cb3de4aff64717917de" class="m-doc">loadFrom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool</span>
             </dt>
             <dd>Loads the voxel model data from the given stream.</dd>
@@ -86,6 +115,139 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a0ccd65e51c5de37de43c39a02d487a52"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ccd65e51c5de37de43c39a02d487a52" class="m-doc-self">gridCount</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the number of grids in the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Number of grids.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a20e83bab08c7f24aa6abfdeb8700df6a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>&amp; cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20e83bab08c7f24aa6abfdeb8700df6a" class="m-doc-self">palette</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the palette of the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Palette of the model.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1c28dfa3ca95982a839fcba80807e260"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>&amp; cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c28dfa3ca95982a839fcba80807e260" class="m-doc-self">palette</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the palette of the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Palette of the model.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab4512b2ff00888b8ec3fe33476d68b61"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab4512b2ff00888b8ec3fe33476d68b61" class="m-doc-self">grid</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
+            </h3>
+            <p>Returns the grid at the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the grid.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Grid at the given index.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2062f386a4c6e062e22c1e509d19c41f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2062f386a4c6e062e22c1e509d19c41f" class="m-doc-self">grid</a>(</span><span class="m-doc-wrap">std::size_t index)</span></span>
+            </h3>
+            <p>Returns the grid at the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the grid.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Grid at the given index.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad0b554d7d8377d64f995f53b9abac009"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::ivec3 cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0b554d7d8377d64f995f53b9abac009" class="m-doc-self">gridPosition</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
+            </h3>
+            <p>Returns the position of the grid at the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the grid.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> of the grid at the given index.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad42fdda081119d009b81e7a18be4c245"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad42fdda081119d009b81e7a18be4c245" class="m-doc-self">gridPosition</a>(</span><span class="m-doc-wrap">std::size_t index,
+              glm::ivec3 position)</span></span>
+            </h3>
+            <p>Sets the position of the grid at the given index.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the grid.</td>
+                </tr>
+                <tr>
+                  <td>position</td>
+                  <td><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> to set.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="aa6773c9930d16cb3de4aff64717917de"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />VoxelModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6773c9930d16cb3de4aff64717917de" class="m-doc-self">loadFrom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream)</span></span>
