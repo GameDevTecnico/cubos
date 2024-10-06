@@ -8,7 +8,6 @@ if(WITH_GLFW)
 	option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
 endif()
 
-option(WITH_OPENAL "With OpenAL?" OFF)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 
 set(CUBOS_CORE_ECS_MAX_COMPONENTS "63" CACHE STRING "The maximum number of components registered in an ECS world.")
@@ -87,9 +86,8 @@ set(CUBOS_CORE_SOURCE
 	"src/gl/ogl_render_device.cpp"
 	"src/gl/util.cpp"
 
-	"src/al/audio_device.cpp"
-	"src/al/oal_audio_device.cpp"
-	"src/al/oal_audio_device.hpp"
+	"src/al/audio_context.cpp"
+	"src/al/miniaudio_context.cpp"
 
 	"src/ecs/entity/entity.cpp"
 	"src/ecs/entity/hash.cpp"
@@ -193,16 +191,6 @@ if(WITH_GLFW)
 	target_compile_definitions(cubos-core PRIVATE WITH_GLFW)
 endif()
 
-if(WITH_OPENAL)
-	set(ALSOFT_UTILS OFF CACHE BOOL "" FORCE)
-	set(ALSOFT_NO_CONFIG_UTIL OFF CACHE BOOL "" FORCE)
-	set(ALSOFT_EXAMPLES OFF CACHE BOOL "" FORCE)
-	add_subdirectory(lib/openal-soft)
-	target_include_directories(cubos-core PRIVATE lib/openal-soft/include)
-	target_link_libraries(cubos-core PRIVATE OpenAL)
-	target_compile_definitions(cubos-core PRIVATE WITH_OPENAL)
-endif()
-
 if(GLM_USE_SUBMODULE)
 	add_subdirectory(lib/glm SYSTEM)
 else()
@@ -220,6 +208,10 @@ target_link_libraries(cubos-core PRIVATE cpptrace::cpptrace)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
+
+add_library(miniaudio INTERFACE)
+target_include_directories(miniaudio SYSTEM INTERFACE "lib/miniaudio")
+target_link_libraries(cubos-core PUBLIC miniaudio)
 
 target_compile_definitions(cubos-core PUBLIC GLM_FORCE_SILENT_WARNINGS) # Needed for compilation to succeed on MSVC
 target_link_libraries(cubos-core PUBLIC glm::glm nlohmann_json::nlohmann_json ${CMAKE_DL_LIBS})

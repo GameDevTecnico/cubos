@@ -4,9 +4,6 @@
 [submodule "core/lib/glm"]
 	path = core/lib/glm
 	url = https://github.com/g-truc/glm.git
-[submodule "core/lib/openal-soft"]
-	path = core/lib/openal-soft
-	url = https://github.com/kcat/openal-soft
 [submodule "core/lib/stduuid"]
 	path = core/lib/stduuid
 	url = https://github.com/mariusbancila/stduuid.git
@@ -34,3 +31,6 @@
 [submodule "engine/lib/stb_image"]
 	path = engine/lib/stb_image
 	url = https://github.com/GameDevTecnico/cubos-stb.git
+[submodule "core/lib/miniaudio"]
+	path = core/lib/miniaudio
+	url = https://github.com/mackron/miniaudio
