@@ -134,3 +134,51 @@ option(BUILD_DOCUMENTATION "Build docs" OFF)
 if(BUILD_DOCUMENTATION)
     add_subdirectory(docs)
 endif()
+
+# Installation instructions
+
+include(GNUInstallDirs)
+set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/cubos)
+
+install(TARGETS ${CUBOS_CORE_TARGETS} ${CUBOS_ENGINE_TARGETS}
+    EXPORT cubos-targets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
+# Copy the headers to the install directory
+install(DIRECTORY core/include DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cubos-core)
+install(DIRECTORY engine/include DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cubos-engine)
+
+# Export the targets to a script
+install(EXPORT cubos-targets
+    FILE cubosTargets.cmake
+    NAMESPACE cubos::
+    DESTINATION ${INSTALL_CONFIGDIR}
+)
+
+# Write a ConfigVersion.cmake file so that find_package can be used with version specification
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(cubosConfigVersion.cmake
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMinorVersion
+)
+
+configure_package_config_file(${CMAKE_CURRENT_LIST_DIR}/cmake/cubosConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/cubosConfig.cmake
+    INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
+)
+
+# Install the config and configversion modules
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/cubosConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/cubosConfigVersion.cmake
+    DESTINATION ${INSTALL_CONFIGDIR}
+)
+
+# Export from the build tree
+
+export(TARGETS ${CUBOS_CORE_TARGETS} ${CUBOS_ENGINE_TARGETS}
+    FILE ${CMAKE_CURRENT_BINARY_DIR}/cubosTargets.cmake
+    NAMESPACE cubos::)
+export(PACKAGE cubos)

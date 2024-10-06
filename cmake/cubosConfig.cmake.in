@@ -1,0 +1,13 @@
+get_filename_component(CUBOS_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(CMakeFindDependencyMacro)
+
+list(APPEND CMAKE_MODULE_PATH ${CUBOS_CMAKE_DIR})
+
+find_dependency(nlohmann_json)
+find_dependency(stduuid)
+
+if(NOT TARGET cubos::core OR NOT TARGET cubos::engine)
+    include("${CUBOS_CMAKE_DIR}/cubosTargets.cmake")
+endif()
+
+set(CUBOS_LIBRARIES cubos::core cubos::engine)
