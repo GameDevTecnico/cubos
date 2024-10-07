@@ -40,8 +40,10 @@ int main(int argc, char** argv)
     cubos.plugin(sceneEditorPlugin);
     cubos.plugin(voxelPaletteEditorPlugin);
 
-    cubos.startupSystem("configure Assets plugin").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
-        settings.setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);
+    cubos.startupSystem("configure Assets plugin").before(cubos::engine::settingsTag).call([](Settings& settings) {
+        // If the setting has not been set yet, use the default value.
+        settings.getString("assets.builtin.path", CUBOS_ENGINE_ASSETS_PATH);
+        settings.getString("assets.io.path", TESSERATOS_ASSETS_PATH);
     });
 
     cubos.startupSystem("load and set the Input Bindings")

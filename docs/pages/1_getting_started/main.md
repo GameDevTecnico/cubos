@@ -63,20 +63,20 @@ Alternatively, you can change options directly through the `CMakeCache.txt` on t
 
 The following is a list of all the options available to configure the engine:
 
-| Name                       | Description                          |
-| -------------------------- | ------------------------------------ |
-| `WITH_GLFW`                | Use GLFW? (Required for now)         |
-| `WITH_OPENGL`              | Use OpenGL? (Required for now)       |
-| `GLFW_USE_SUBMODULE`       | Compile glfw from source?            |
-| `GLM_USE_SUBMODULE`        | Compile glm from source?             |
-| `DOCTEST_USE_SUBMODULE`    | Compile doctest from source?         |
-| `BUILD_CORE_SAMPLES`       | Build **Cubos** `core` samples?      |
-| `BUILD_CORE_TESTS`         | Build **Cubos** `core` tests?        |
-| `BUILD_ENGINE_SAMPLES`     | Build **Cubos** `engine` samples?    |
-| `BUILD_ENGINE_TESTS`       | Build **Cubos** `engine` tests?      |
-| `BUILD_DOCUMENTATION`      | Build the documentation?             |
-| `ENABLE_COVERAGE`          | Enable code coverage? (GCC only)     |
-| `FIX_CLANG_TIDY_ERRORS`    | Fix clang-tidy errors automatically? |
+| Name                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `CUBOS_CORE_GLFW`       | Use GLFW? (Required for now)         |
+| `CUBOS_CORE_OPENGL`     | Use OpenGL? (Required for now)       |
+| `GLFW_USE_SUBMODULE`    | Compile glfw from source?            |
+| `GLM_USE_SUBMODULE`     | Compile glm from source?             |
+| `DOCTEST_USE_SUBMODULE` | Compile doctest from source?         |
+| `BUILD_CORE_SAMPLES`    | Build **Cubos** `core` samples?      |
+| `BUILD_CORE_TESTS`      | Build **Cubos** `core` tests?        |
+| `BUILD_ENGINE_SAMPLES`  | Build **Cubos** `engine` samples?    |
+| `BUILD_ENGINE_TESTS`    | Build **Cubos** `engine` tests?      |
+| `BUILD_DOCUMENTATION`   | Build the documentation?             |
+| `ENABLE_COVERAGE`       | Enable code coverage? (GCC only)     |
+| `FIX_CLANG_TIDY_ERRORS` | Fix clang-tidy errors automatically? |
 
 After you change an option's value, make sure to reconfigure CMake! In *Visual Studio Code*, you can do this by pressing `Ctrl + Shift + P` and choosing `CMake: Configure`.
 

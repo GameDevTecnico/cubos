@@ -22,7 +22,7 @@ macro(make_sample)
 
   # Add the sample target
   add_executable(${target} ${sources})
-  target_link_libraries(${target} cubos-engine)
+  target_link_libraries(${target} cubos::engine)
   cubos_common_target_options(${target})
 
   if(MAKE_SAMPLE_ASSETS)

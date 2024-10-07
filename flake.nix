@@ -6,53 +6,59 @@
   };
 
   outputs = inputs:
-    inputs.flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import inputs.nixpkgs {inherit system;};
+    inputs.flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import inputs.nixpkgs { inherit system; };
 
-      sysLibs = with pkgs; [
-        libGL
-        xorg.libX11
-        xorg.libXrandr
-        xorg.libXinerama
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXdmcp
-      ];
-    in {
-      devShell = pkgs.mkShell {
-        hardeningDisable = ["all"];
+        sysLibs = with pkgs; [
+          libGL
+          xorg.libX11
+          xorg.libXrandr
+          xorg.libXinerama
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXdmcp
+        ];
+      in
+      {
+        name = "cubos";
 
-        packages = with pkgs;
-          [
-            # = build tools =
-            cmake
-            ccache
-            pkg-config
+        devShell = pkgs.mkShell {
+          hardeningDisable = [ "all" ];
 
-            # = formatting =
-            clang-tools
+          packages = with pkgs;
+            [
+              # = build tools =
+              cmake
+              ccache
+              pkg-config
 
-            # = docs =
-            doxygen
+              # = formatting =
+              clang-tools
 
-            (python3.withPackages (ps: [
-              ps.jinja2
-              ps.pygments
-            ]))
+              # = docs =
+              doxygen
 
-            # = libs =
-            glfw
-            glm
-            doctest
+              (python3.withPackages (ps: [
+                ps.jinja2
+                ps.pygments
+              ]))
 
-            # = debug =
-            gdb
-          ]
-          ++ sysLibs;
+              # = libs =
+              glfw
+              glm
+              doctest
 
-        LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath sysLibs}";
-      };
+              # = debug =
+              gdb
+            ]
+            ++ sysLibs;
 
-      formatter = pkgs.alejandra;
-    });
+          LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath sysLibs}";
+        };
+
+        packages.default = pkgs.callPackage ./default.nix { };
+
+        formatter = pkgs.alejandra;
+      });
 }

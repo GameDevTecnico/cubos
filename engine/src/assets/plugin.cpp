@@ -28,20 +28,42 @@ void cubos::engine::assetsPlugin(Cubos& cubos)
         // Get the relevant settings.
         if (settings.getBool("assets.io.enabled", true))
         {
-            std::filesystem::path path = settings.getString("assets.io.path", "assets");
+            std::string path = settings.getString("assets.io.path", "assets");
             bool readOnly = settings.getBool("assets.io.readOnly", true);
 
             // Create a standard archive for the assets directory and mount it.
-            FileSystem::mount("/assets", std::make_unique<StandardArchive>(path, true, readOnly));
-
-            // Load the meta files on the assets directory.
-            assets.loadMeta("/assets");
+            auto archive = std::make_unique<StandardArchive>(path, true, readOnly);
+            if (archive->initialized())
+            {
+                CUBOS_INFO("Successfully initialized assets directory archive with path {}", path);
+                if (FileSystem::mount("/assets", std::move(archive)))
+                {
+                    // Load the meta files on the assets directory.
+                    assets.loadMeta("/assets");
+                }
+            }
+            else
+            {
+                CUBOS_ERROR("Couldn't initialize assets directory archive with path {}", path);
+            }
         }
 
         // Create a standard archive for the builtin assets directory and mount it.
         // Also load the meta files on the builtin assets directory.
-        FileSystem::mount("/builtin", std::make_unique<StandardArchive>(CUBOS_BUILTIN_ASSETS_FOLDER, true, true));
-        assets.loadMeta("/builtin");
+        std::string builtinPath = settings.getString("assets.builtin.path", CUBOS_ENGINE_ASSETS_PATH);
+        auto builtinArchive = std::make_unique<StandardArchive>(builtinPath, true, true);
+        if (builtinArchive->initialized())
+        {
+            CUBOS_INFO("Successfully initialized builtin assets directory archive with path {}", builtinPath);
+            if (FileSystem::mount("/builtin", std::move(builtinArchive)))
+            {
+                assets.loadMeta("/builtin");
+            }
+        }
+        else
+        {
+            CUBOS_ERROR("Couldn't initialize builtin assets directory archive with path {}", builtinPath);
+        }
     });
 
     cubos.system("cleanup unused assets").tagged(assetsCleanupTag).call([](Assets& assets) {

@@ -81,7 +81,7 @@ namespace cubos::core
 /// @param name The name of the metric.
 /// @param val The value to set for the metric.
 
-#ifdef CUBOS_PROFILING
+#ifdef CUBOS_CORE_PROFILING
 #define CUBOS_METRIC(name, val) ::cubos::core::Metrics::metric(name, val)
 #else
 #define CUBOS_METRIC(...)                                                                                              \
@@ -95,7 +95,7 @@ namespace cubos::core
 /// @brief Macro to measure the execution time of a function/scope, registering it as a metric.
 /// @note The macro uses `__FUNCTION__` to register the metric name.
 
-#ifdef CUBOS_PROFILING
+#ifdef CUBOS_CORE_PROFILING
 #define CUBOS_PROFILE() ::cubos::core::ScopeProfiler _profilingTimeTracker(__FUNCTION__, __FILE__, __LINE__)
 #else
 #define CUBOS_PROFILE(...)                                                                                             \

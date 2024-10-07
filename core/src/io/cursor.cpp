@@ -8,7 +8,7 @@ using cubos::core::io::Cursor;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::Type;
 
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
 io::Cursor::Cursor(GLFWcursor* handle)
 {
     mGlfwHandle = handle;
@@ -17,7 +17,7 @@ io::Cursor::Cursor(GLFWcursor* handle)
 
 io::Cursor::~Cursor()
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     if (mGlfwHandle != nullptr)
     {
         glfwDestroyCursor(mGlfwHandle);
