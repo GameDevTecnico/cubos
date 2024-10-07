@@ -29,12 +29,6 @@ namespace cubos::engine
 
         /// @brief The axis to be fixed for the projection.
         Axis axis{Axis::Vertical};
-
-        /// @brief Near clipping plane.
-        float zNear{0.1F};
-
-        /// @brief Far clipping plane.
-        float zFar{1000.0F};
     };
 } // namespace cubos::engine
 

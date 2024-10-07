@@ -16,6 +16,7 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/perspective.hpp>
 #include <cubos/engine/render/defaults/plugin.hpp>
@@ -103,7 +104,8 @@ int main(int argc, char** argv)
 
         commands.create()
             .relatedTo(targetEnt, DrawsTo{})
-            .add(PerspectiveCamera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(Camera{.zNear = 0.1F, .zFar = 100.0F})
+            .add(PerspectiveCamera{.fovY = 60.0F})
             .add(LocalToWorld{})
             .add(Position{{-4.0F, 1.5F, 0.0F}})
             .add(Rotation{Rotation::lookingAt({3.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})

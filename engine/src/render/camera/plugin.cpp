@@ -49,7 +49,7 @@ void cubos::engine::cameraPlugin(Cubos& cubos)
                 if (aspect > 0)
                 {
                     camera.projection =
-                        glm::perspective(glm::radians(perspective.fovY), aspect, perspective.zNear, perspective.zFar);
+                        glm::perspective(glm::radians(perspective.fovY), aspect, camera.zNear, camera.zFar);
                 }
             }
         });
@@ -63,12 +63,12 @@ void cubos::engine::cameraPlugin(Cubos& cubos)
                 if (ortho.axis == OrthographicCamera::Axis::Vertical)
                 {
                     camera.projection = glm::ortho(-ortho.size * aspect, ortho.size * aspect, -ortho.size, ortho.size,
-                                                   ortho.zNear, ortho.zFar);
+                                                   camera.zNear, camera.zFar);
                 }
                 else
                 {
                     camera.projection = glm::ortho(-ortho.size, ortho.size, -ortho.size / aspect, ortho.size / aspect,
-                                                   ortho.zNear, ortho.zFar);
+                                                   camera.zNear, camera.zFar);
                 }
             }
         });

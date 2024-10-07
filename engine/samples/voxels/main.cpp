@@ -1,4 +1,5 @@
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/perspective.hpp>
 #include <cubos/engine/render/defaults/plugin.hpp>
@@ -42,7 +43,8 @@ int main(int argc, char** argv)
 
         cmds.create()
             .relatedTo(targetEnt, DrawsTo{})
-            .add(PerspectiveCamera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
+            .add(Camera{.zNear = 0.1F, .zFar = 1000.0F})
+            .add(PerspectiveCamera{.fovY = 60.0F})
             .add(Position{{50.0F, 50.0F, 50.0F}})
             .add(Rotation::lookingAt({-1.0F, -1.0F, -1.0F}, glm::vec3{0.0F, 1.0F, 0.0F}));
     });

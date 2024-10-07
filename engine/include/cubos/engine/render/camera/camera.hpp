@@ -24,5 +24,11 @@ namespace cubos::engine
 
         /// @brief Projection matrix of the camera.
         glm::mat4 projection{};
+
+        /// @brief Near clipping plane.
+        float zNear = 0.1F;
+
+        /// @brief Far clipping plane.
+        float zFar = 1000.0F;
     };
 } // namespace cubos::engine

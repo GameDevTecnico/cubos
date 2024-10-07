@@ -9,5 +9,7 @@ CUBOS_REFLECT_IMPL(cubos::engine::Camera)
     return core::ecs::TypeBuilder<Camera>("cubos::engine::Camera")
         .withField("active", &Camera::active)
         .withField("projection", &Camera::projection)
+        .withField("zNear", &Camera::zNear)
+        .withField("zFar", &Camera::zFar)
         .build();
 }
