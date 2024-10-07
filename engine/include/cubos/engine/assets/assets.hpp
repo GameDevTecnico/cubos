@@ -98,6 +98,14 @@ namespace cubos::engine
         /// @param path Path to load metadata from.
         void loadMeta(std::string_view path);
 
+        /// @brief Unloads all asset metadata from assets within the given path.
+        ///
+        /// If an asset from the given path is currently loaded, it will not be unloaded, but it will be dissociated
+        /// from its original metadata path.
+        ///
+        /// @param path Path to unload metadata from.
+        void unloadMeta(std::string_view path);
+
         /// @brief Loads the asset with the given handle, upgrading the handle to a strong one.
         ///
         /// This method doesn't block, thus the asset may have not yet been loaded when it returns.

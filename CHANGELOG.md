@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Print stacktrace with *cpptrace* on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
 - Orthographic Camera component (#1182, **@mkuritsu**).
 - Importer plugin (#1299, **@Scarface1809**).
+- Simple cross-platform multi-process utilities (**@RiscadoA**).
+- Project opening and closing on Tesseratos (#1218, **@RiscadoA**).
 
 ### Changed
 
