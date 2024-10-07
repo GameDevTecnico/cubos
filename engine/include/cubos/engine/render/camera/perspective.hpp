@@ -19,11 +19,5 @@ namespace cubos::engine
 
         /// @brief Vertical field of view in degrees.
         float fovY = 60.0F;
-
-        /// @brief Near clipping plane.
-        float zNear = 0.1F;
-
-        /// @brief Far clipping plane.
-        float zFar = 1000.0F;
     };
 } // namespace cubos::engine

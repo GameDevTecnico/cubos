@@ -4,7 +4,7 @@
             "cubos::engine::RenderTargetDefaults": {}
         },
         "camera": {
-            "cubos::engine::PerspectiveCamera": {},
+            "cubos::engine::PerspectiveCamera": 60.0,
             "cubos::engine::DrawsTo@render-target": {},
             "cubos::engine::Position": {
                 "x": 0,
@@ -13,7 +13,7 @@
             }
         },
         "camera2": {
-            "cubos::engine::PerspectiveCamera": {},
+            "cubos::engine::PerspectiveCamera": 60.0,
             "cubos::engine::DrawsTo@render-target": {},
             "cubos::engine::Position": {
                 "x": 3,

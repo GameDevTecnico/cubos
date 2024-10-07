@@ -22,7 +22,5 @@ CUBOS_REFLECT_IMPL(OrthographicCamera)
     return core::ecs::TypeBuilder<OrthographicCamera>("cubos::engine::OrthographicCamera")
         .withField("size", &OrthographicCamera::size)
         .withField("axis", &OrthographicCamera::axis)
-        .withField("zNear", &OrthographicCamera::zNear)
-        .withField("zFar", &OrthographicCamera::zFar)
         .build();
 }
