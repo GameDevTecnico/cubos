@@ -64,14 +64,10 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a776d8c30f76f9039805e65bb3eac49a7">
-              int <a href="#a776d8c30f76f9039805e65bb3eac49a7" class="m-doc-self">configNumSplits</a>
-            </dt>
-            <dd>Target number of splits for PSSM/CSM.</dd>
             <dt id="a6cef89f1522dc7a2db494f7a4de8fdc7">
               int <a href="#a6cef89f1522dc7a2db494f7a4de8fdc7" class="m-doc-self">numSplits</a>
             </dt>
-            <dd>Current number of splits for PSSM/CSM.</dd>
+            <dd>Number of splits for PSSM/CSM.</dd>
             <dt>
               std::vector&lt;float&gt; <a href="#a2419df4da47232778924447d3573cbd4" class="m-doc">configSplitDistances</a>
             </dt>
@@ -87,7 +83,7 @@
             <dt id="abc89ebc6960697c28c2a76e9e1f0d05f">
               float <a href="#abc89ebc6960697c28c2a76e9e1f0d05f" class="m-doc-self">nearDistance</a>
             </dt>
-            <dd>Minimum near plane distance of splits frustum.</dd>
+            <dd>Near distance of shadow frustum (if 0, uses camera zNear).</dd>
             <dt id="ad0e4c186438b3e1d19ea6c4cf2685c69">
               std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>, <a href="classcubos_1_1engine_1_1DirectionalShadowCaster_1_1ShadowMap.html" class="m-doc">ShadowMap</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">core::<wbr />ecs::<wbr />EntityHash</a>&gt; <a href="#ad0e4c186438b3e1d19ea6c4cf2685c69" class="m-doc-self">shadowMaps</a>
             </dt>

@@ -377,6 +377,14 @@
             </dt>
             <dd>Stores settings as key-value pairs and provides methods to retrieve them.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1Selection.html" class="m-doc">Selection</a>
+            </dt>
+            <dd>Resource which identifies the current selection.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Toolbox.html" class="m-doc">Toolbox</a>
+            </dt>
+            <dd>Manages the visibility of each tool.</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a>
             </dt>
             <dd>Tree relation which indicates the &#x27;from&#x27; entity is a child of the &#x27;to&#x27; entity.</dd>
@@ -464,6 +472,14 @@
               struct <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">VoxelMaterial</a>
             </dt>
             <dd>Describes a voxel material.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1VoxelModel.html" class="m-doc">VoxelModel</a>
+            </dt>
+            <dd>Holds the data loaded from voxel model files, such as Qubicle models.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1VoxelModelBridge.html" class="m-doc">VoxelModelBridge</a>
+            </dt>
+            <dd>Bridge which loads and saves <a href="classcubos_1_1engine_1_1VoxelModel.html" class="m-doc">VoxelModel</a> assets.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>
             </dt>
@@ -690,6 +706,58 @@
             <dd>Plugin entry function.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__settings-plugin.html#gaff5f82df5510d05fb52d26ed6dc3005b" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__collider-gizmos-tool-plugin.html#ga17cf98b513e0a89337a622f8cd41e2aa" class="m-doc">colliderGizmosPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__console-tool-plugin.html#gaee8352fc2932006a5accdf4d25d6e6eb" class="m-doc">consolePlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__debug-camera-tool-plugin.html#ga22ea90135aeb0076585d0719458f9b19" class="m-doc">debugCameraPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__ecs-statistics-tool-plugin.html#gad5e02e6ab17795b6792fae3097d560a2" class="m-doc">ecsStatisticsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__entity-inspector-tool-plugin.html#ga9b4caf36ecb5c56e8c553e728c2fc412" class="m-doc">entityInspectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__metrics-panel-tool-plugin.html#gabc44c5ae6c0d8031aa2c1d4be23b8824" class="m-doc">metricsPanelPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__play-pause-tool-plugin.html#gab46ac19bc1283d5a8becc406559e5e8a" class="m-doc">playPauseToolPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__tool-plugins.html#ga7c6803bf9e4b977d2e8d824c922db998" class="m-doc">toolsPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__selection-tool-plugin.html#ga993b8581ecbfb2670e2c0a83b894e7cc" class="m-doc">selectionPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__settings-inspector-tool-plugin.html#gac6343e50a150b4b6d20eb279a0c6327f" class="m-doc">settingsInspectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__toolbox-tool-plugin.html#ga97d37fc51428771f0360c5942f2f997d" class="m-doc">toolboxPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__transform-gizmo-tool-plugin.html#gad8002dd0ea2a8ee02e83d4665dbedaf9" class="m-doc">transformGizmoPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__world-inspector-tool-plugin.html#ga23b62dfaae8b3162043938f89282d09e" class="m-doc">worldInspectorPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
