@@ -29,7 +29,7 @@ namespace cubos::core::geom
         }
 
         /// @brief Computes four corners of the box, one for each diagonal.
-        /// @param corners Array to store the three corners in.
+        /// @param corners Array to store the four corners in.
         void corners4(glm::vec3 corners[4]) const
         {
             corners[0] = {halfSize.x, -halfSize.y, -halfSize.z};
