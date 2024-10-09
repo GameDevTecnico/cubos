@@ -22,5 +22,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup toolbox-tool-plugin
-    void toolboxPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void toolboxPlugin(Cubos& cubos);
 } // namespace cubos::engine

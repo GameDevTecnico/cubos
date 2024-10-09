@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -18,5 +19,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup ecs-statistics-tool-plugin
-    void ecsStatisticsPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void ecsStatisticsPlugin(Cubos& cubos);
 } // namespace cubos::engine

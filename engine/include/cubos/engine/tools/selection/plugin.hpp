@@ -24,5 +24,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup selection-tool-plugin
-    void selectionPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void selectionPlugin(Cubos& cubos);
 } // namespace cubos::engine
