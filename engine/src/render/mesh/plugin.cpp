@@ -79,7 +79,7 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
 
     cubos.observer("update RenderMesh on LoadRenderVoxels")
         .onAdd<LoadRenderVoxels>()
-        .call([](Commands cmds, State& state, Assets& assets, Query<Entity, const RenderVoxelGrid&> query) {
+        .call([](Commands cmds, State& state, Assets& assets, Query<Entity, RenderVoxelGrid&> query) {
             for (auto [ent, grid] : query)
             {
                 if (grid.asset.isNull())
@@ -87,8 +87,8 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                     continue;
                 }
 
-                // If not loaded, the mId might be a nil UUID, so we need to load the asset first.
-                assets.load(grid.asset);
+                // The asset handle might not yet have a valid ID, and since we need getId, we load it first.
+                grid.asset = assets.load(grid.asset);
                 // If the asset has never been loaded, or it has been updated since the last meshing, update the entry
                 // and queue a meshing task. Otherwise, just reuse the existing mesh.
                 auto& entry = state.entries[grid.asset.getId().value()];
