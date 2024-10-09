@@ -12,6 +12,7 @@
 
 namespace cubos::engine
 {
+
     template <typename T>
     class Asset;
 
@@ -27,6 +28,13 @@ namespace cubos::engine
     {
     public:
         CUBOS_REFLECT;
+        /// @brief Type of the asset identifier.
+        enum class IdType
+        {
+            UUID,
+            Path,
+            Invalid
+        };
 
         /// @brief Avoid using this field, use @ref getId() instead.
         /// @todo This was added as a dirty fix for #692, should be removed once the issue is fixed.
@@ -71,11 +79,22 @@ namespace cubos::engine
         /// @return Asset version.
         int getVersion() const;
 
+        /// @brief Gets the type of the asset identifier.
+        /// @return Asset identifier type.
+        IdType getIdType() const;
+
         /// @brief Gets the Path or UUID of the asset.
         /// @return Asset Path or UUID.
         std::string getIdString() const;
 
-        /// @brief Gets the UUID of the asset if it is the case of having one.
+        /// @brief Gets the UUID of the asset if it has one.
+        ///
+        /// There are two possible reasons for an asset handle to have no UUID:
+        /// - it being an invalid or null handle;
+        /// - it being created from an asset path.
+        ///
+        /// To ensure an asset handle gets a UUID, you can use @ref Assets::load.
+        ///
         /// @return Asset UUID.
         std::optional<uuids::uuid> getId() const;
 

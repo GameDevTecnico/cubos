@@ -43,13 +43,13 @@ AnyAsset::AnyAsset(std::string_view str)
         pathOrId = str;
         mId = id.value();
     }
-    else if (str.find('/') != std::string_view::npos || str.find('\\') != std::string_view::npos)
+    else if (!str.empty() && str[0] == '/')
     {
         pathOrId = str;
     }
     else
     {
-        CUBOS_ERROR("Could not create asset handle, invalid UUID: \"{}\"", str);
+        CUBOS_ERROR("Could not create asset handle, invalid path or UUID: \"{}\"", str);
     }
 }
 
@@ -111,6 +111,19 @@ bool AnyAsset::operator==(const AnyAsset& other) const
 int AnyAsset::getVersion() const
 {
     return getId().has_value() && getId().value() == mId ? mVersion : 0;
+}
+
+AnyAsset::IdType AnyAsset::getIdType() const
+{
+    if (!pathOrId.empty() && pathOrId[0] == '/')
+    {
+        return IdType::Path;
+    }
+    else if (auto id = uuids::uuid::from_string(pathOrId))
+    {
+        return IdType::UUID;
+    }
+    return IdType::Invalid;
 }
 
 std::string AnyAsset::getIdString() const
