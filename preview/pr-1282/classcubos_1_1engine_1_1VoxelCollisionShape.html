@@ -49,26 +49,174 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>VoxelCollisionShape <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="voxel_8hpp.html">&lt;engine/collisions/shapes/voxel.hpp&gt;</a></div>
         </h1>
-        <p>Component which adds a voxel collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</p>
+        <p>Component which adds a collision shape corresponding to a given voxel grid to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a>
+            </dt>
+            <dd>Struct which holds a sub-box of the voxel collision shape, and its shift from the center of the shape.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="abc8286e3bdf72ac4540f89ba6704f656">
+              <span class="m-doc-wrap-bumper"><a href="#abc8286e3bdf72ac4540f89ba6704f656" class="m-doc-self">VoxelCollisionShape</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs voxel shape with no grid.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a84b345bd2fc3ecdbb2de86f8ad3e00f0" class="m-doc">VoxelCollisionShape</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt; grid)</span>
+            </dt>
+            <dd>Constructs voxel shape with voxel grid.</dd>
+            <dt id="ad34506fe5007f38ca52a9c1514f284c0">
+              <span class="m-doc-wrap-bumper"><a href="#ad34506fe5007f38ca52a9c1514f284c0" class="m-doc-self">~VoxelCollisionShape</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Default destructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#af23bfd0093f0a2d6fd2c590f43e5b90b" class="m-doc">VoxelCollisionShape</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a09fcbab027923f97894aaaf701ac67f7" class="m-doc">VoxelCollisionShape</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a>&amp; shape)</span>
+            </dt>
+            <dd>Copy constructor.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a51f22948a09452bff529fabecdb7f460" class="m-doc">setGrid</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt;&amp; grid)</span>
+            </dt>
+            <dd>Sets the grid.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a49479446641dada25110d67eff927586" class="m-doc">insertBox</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; box,
+              const glm::vec3&amp; shift)</span>
+            </dt>
+            <dd>Inserts a new <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a> to the list of the class.</dd>
+            <dt id="a8803f7e4ee57f1c2eb8761afb0d4a78b">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8803f7e4ee57f1c2eb8761afb0d4a78b" class="m-doc-self">getBoxes</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;<a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a>&gt;</span>
+            </dt>
+            <dd>Getter for the list of <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a> of the class.</dd>
+          </dl>
+        </section>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
             <dt id="a5d40f4cd6080c4df6ea88397ab3139ab">
               <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt; <a href="#a5d40f4cd6080c4df6ea88397ab3139ab" class="m-doc-self">grid</a>
             </dt>
-            <dd>Entities voxel shape.</dd>
+            <dd>Entities voxel grid.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a84b345bd2fc3ecdbb2de86f8ad3e00f0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />VoxelCollisionShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a84b345bd2fc3ecdbb2de86f8ad3e00f0" class="m-doc-self">VoxelCollisionShape</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt; grid)</span></span>
+            </h3>
+            <p>Constructs voxel shape with voxel grid.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">grid</td>
+                  <td><a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a> given in constructor.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af23bfd0093f0a2d6fd2c590f43e5b90b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />VoxelCollisionShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af23bfd0093f0a2d6fd2c590f43e5b90b" class="m-doc-self">VoxelCollisionShape</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td><a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a> to move.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a09fcbab027923f97894aaaf701ac67f7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />VoxelCollisionShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a09fcbab027923f97894aaaf701ac67f7" class="m-doc-self">VoxelCollisionShape</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a>&amp; shape)</span></span>
+            </h3>
+            <p>Copy constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">shape</td>
+                  <td>VoxelCollisionSHape to copy.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a51f22948a09452bff529fabecdb7f460"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />VoxelCollisionShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51f22948a09452bff529fabecdb7f460" class="m-doc-self">setGrid</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&gt;&amp; grid)</span></span>
+            </h3>
+            <p>Sets the grid.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">grid</td>
+                  <td>to set.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a49479446641dada25110d67eff927586"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />VoxelCollisionShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a49479446641dada25110d67eff927586" class="m-doc-self">insertBox</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; box,
+              const glm::vec3&amp; shift)</span></span>
+            </h3>
+            <p>Inserts a new <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a> to the list of the class.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">box</td>
+                  <td>Box to insert.</td>
+                </tr>
+                <tr>
+                  <td>shift</td>
+                  <td>Shift vector of the box.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
