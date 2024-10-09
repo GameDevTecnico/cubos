@@ -151,7 +151,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
             auto& rd = window->renderDevice();
 
             // Update the palette's data if necessary (if the asset handle changed or the asset itself was modified).
-            if (state.paletteAsset.getId() != palette.asset.getId() ||
+            if (state.paletteAsset != palette.asset ||
                 (!state.paletteAsset.isNull() && assets.update(state.paletteAsset)))
             {
                 state.paletteAsset = assets.load(palette.asset);
@@ -172,7 +172,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                 // Send the data to the GPU.
                 state.paletteTexture->update(0, 0, 256, 256, data.data());
 
-                CUBOS_INFO("Updated GBufferRasterizer's palette texture to asset {}", state.paletteAsset.getId());
+                CUBOS_INFO("Updated GBufferRasterizer's palette texture to asset {}", state.paletteAsset.getIdString());
             }
 
             for (auto [ent, rasterizer, gBuffer, depth, picker] : targets)

@@ -21,3 +21,13 @@ void AssetMeta::remove(std::string_view key)
 {
     mParams.erase(std::string(key));
 }
+
+uuids::uuid AssetMeta::getId() const
+{
+    return uuids::uuid::from_string(this->get("id").value()).value();
+}
+
+std::optional<std::string> AssetMeta::getPath() const
+{
+    return this->get("path");
+}
