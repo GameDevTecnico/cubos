@@ -364,11 +364,6 @@ namespace cubos::engine
         /// @return Lock guard.
         std::unique_lock<std::shared_mutex> lockWrite(const AnyAsset& handle) const;
 
-        /// @brief Checks if the given path is a valid path to an asset.
-        /// @param path Path to check.
-        /// @return A string that says if the given string is a path, uuid or not a valid format string
-        static std::string isPath(const std::string& path);
-
         /// @brief Gets a pointer to the entry associated with the given handle.
         /// @param handle Handle to get the entry for.
         /// @return Entry for the given handle, or nullptr if there is no such entry.

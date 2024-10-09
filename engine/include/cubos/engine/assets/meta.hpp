@@ -52,7 +52,7 @@ namespace cubos::engine
 
         /// @brief Gets the path of the asset.
         /// @return Path of the asset.
-        std::string getPath() const;
+        std::optional<std::string> getPath() const;
 
         /// @brief Sets a parameter on the asset's metadata.
         /// @param key Key of the parameter.

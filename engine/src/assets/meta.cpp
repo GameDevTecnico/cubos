@@ -27,11 +27,7 @@ uuids::uuid AssetMeta::getId() const
     return uuids::uuid::from_string(this->get("id").value()).value();
 }
 
-std::string AssetMeta::getPath() const
+std::optional<std::string> AssetMeta::getPath() const
 {
-    if (auto path = this->get("path"))
-    {
-        return path.value();
-    }
-    return {};
+    return this->get("path");
 }

@@ -621,18 +621,6 @@ std::unique_lock<std::shared_mutex> Assets::lockWrite(const AnyAsset& handle) co
     abort();
 }
 
-std::string Assets::isPath(const std::string& path)
-{
-    if (path.find('/') != std::string::npos || path.find('\\') != std::string::npos)
-    {
-        return "Path";
-    }
-    else if (auto id = uuids::uuid::from_string(path))
-    {
-        return "UUID";
-    }
-    return "Invalid format";
-}
 std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
 {
     // If the handle is null, we can't access the asset.
@@ -646,8 +634,9 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
     auto sharedLock = std::shared_lock(mMutex);
 
     auto sid = handle.getIdString();
+    auto type = handle.getIdType();
 
-    if (isPath(sid) == "Path")
+    if (type == AnyAsset::IdType::Path)
     {
         for (const auto& [eid, entry] : mEntries)
         {
@@ -659,7 +648,7 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
         CUBOS_ERROR("No such asset {}", handle);
         return nullptr;
     }
-    if (isPath(sid) == "UUID")
+    if (type == AnyAsset::IdType::UUID)
     {
         // Search for the entry in the map.
         auto it = mEntries.find(handle.getId().value());
@@ -697,8 +686,8 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
     }
 
     auto sid = handle.getIdString();
-
-    if (isPath(sid) == "Path")
+    auto type = handle.getIdType();
+    if (type == AnyAsset::IdType::Path)
     {
         for (const auto& [eid, entry] : mEntries)
         {
@@ -721,9 +710,8 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
         CUBOS_ERROR("No such asset {}", handle);
         return nullptr;
     }
-    if (isPath(sid) == "UUID")
+    else if (type == AnyAsset::IdType::UUID)
     {
-
         // Search for an existing entry for the asset.
         auto it = mEntries.find(handle.getId().value());
         if (it == mEntries.end())
