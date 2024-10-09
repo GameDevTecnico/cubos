@@ -143,6 +143,14 @@
               const std::vector&lt;glm::vec3&gt;&amp; polygon) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
             </dt>
             <dd>Iterates through all edges in polygon and computes closest position on the edges of the polygon to point.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a38130e48ca28a539e8e5f1895e2e9750" class="m-doc">getCameraFrustumCorners</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              const glm::mat4&amp; proj,
+              float zNear,
+              float zFar,
+              std::vector&lt;glm::vec4&gt;&amp; corners) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Gets a camera&#x27;s frustum corners in world space.</dd>
           </dl>
         </section>
         <section>
@@ -436,6 +444,44 @@
                   <td>Closest point that resides on any of the given edges of the polygon.</td>
                 </tr>
               </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a38130e48ca28a539e8e5f1895e2e9750"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38130e48ca28a539e8e5f1895e2e9750" class="m-doc-self">getCameraFrustumCorners</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              const glm::mat4&amp; proj,
+              float zNear,
+              float zFar,
+              std::vector&lt;glm::vec4&gt;&amp; corners)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Gets a camera&#x27;s frustum corners in world space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">view</td>
+                  <td>Matrix that transforms world space to the camera&#x27;s view space.</td>
+                </tr>
+                <tr>
+                  <td>proj</td>
+                  <td>Matrix that transforms the camera&#x27;s view space to its clip space.</td>
+                </tr>
+                <tr>
+                  <td>zNear</td>
+                  <td>Near clipping plane.</td>
+                </tr>
+                <tr>
+                  <td>zFar</td>
+                  <td>Far clipping plane.</td>
+                </tr>
+                <tr>
+                  <td>corners</td>
+                  <td>Output vector where the corners will be stored.</td>
+                </tr>
+              </tbody>
             </table>
           </div></section>
         </section>
