@@ -6,11 +6,13 @@
 
 #include <cubos/core/ecs/entity/entity.hpp>
 
+#include <cubos/engine/api.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which identifies the current selection.
     /// @ingroup selection-tool-plugin
-    struct Selection
+    struct CUBOS_ENGINE_API Selection
     {
         CUBOS_REFLECT;
 

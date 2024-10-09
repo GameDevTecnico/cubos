@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -23,5 +24,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup transform-gizmo-tool-plugin
-    void transformGizmoPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void transformGizmoPlugin(Cubos& cubos);
 } // namespace cubos::engine

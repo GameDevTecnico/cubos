@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -18,5 +19,5 @@ namespace cubos::engine
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup settings-inspector-tool-plugin
-    void settingsInspectorPlugin(Cubos& cubos);
+    CUBOS_ENGINE_API void settingsInspectorPlugin(Cubos& cubos);
 } // namespace cubos::engine

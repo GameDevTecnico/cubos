@@ -4,13 +4,14 @@
 
 #pragma once
 
+#include <cubos/engine/api.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
 {
     /// @brief Manages the visibility of each tool.
     /// @ingroup toolbox-tool-plugin
-    class Toolbox final
+    class CUBOS_ENGINE_API Toolbox final
     {
     public:
         CUBOS_REFLECT;
