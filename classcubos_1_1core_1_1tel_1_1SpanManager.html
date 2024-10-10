@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core namespace | Cubos Docs</title>
+  <title>cubos::core::tel::SpanManager class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,42 +46,77 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span>core <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1tel.html">tel</a>::<wbr/></span>SpanManager <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__core.html" class="m-doc">Core</a> namespace.</p>
+        <p>Manages the creation and ending of spans.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">al</a></dt>
-            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1data.html" class="m-doc">data</a></dt>
-            <dd><a href="group__core-data.html" class="m-doc">Data</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">geom</a></dt>
-            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1gl.html" class="m-doc">gl</a></dt>
-            <dd><a href="group__core-gl.html" class="m-doc">Graphics</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1io.html" class="m-doc">io</a></dt>
-            <dd><a href="group__core-io.html" class="m-doc">Input and output</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">memory</a></dt>
-            <dd><a href="group__core-memory.html" class="m-doc">Memory</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1reflection.html" class="m-doc">reflection</a></dt>
-            <dd><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1thread.html" class="m-doc">thread</a></dt>
-            <dd><a href="group__core-thread.html" class="m-doc">Threading</a> module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static void <a href="#a9ea7cff4e6fef557be40b2902d759937" class="m-doc">begin</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span>
+            </dt>
+            <dd>Begins a new span.</dd>
+            <dt id="a963f1fc6414f40f2fc0229f1f4a35f21">
+              <span class="m-doc-wrap-bumper">static void <a href="#a963f1fc6414f40f2fc0229f1f4a35f21" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Ends the current active span.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a371607854a702e849f55a5755116d22e" class="m-doc">current</a>(</span><span class="m-doc-wrap">) -&gt; <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">SpanId</a></span>
+            </dt>
+            <dd>Gets the current active span.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9ea7cff4e6fef557be40b2902d759937"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />SpanManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ea7cff4e6fef557be40b2902d759937" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span></span>
+            </h3>
+            <p>Begins a new span.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Span name.</td>
+                </tr>
+                <tr>
+                  <td>level</td>
+                  <td>Span level.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a371607854a702e849f55a5755116d22e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">SpanId</a> cubos::<wbr />core::<wbr />tel::<wbr />SpanManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a371607854a702e849f55a5755116d22e" class="m-doc-self">current</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Gets the current active span.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Identifier of the current span.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

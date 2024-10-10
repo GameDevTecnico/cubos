@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core namespace | Cubos Docs</title>
+  <title>cubos::core::tel::Logger::Location struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,42 +46,64 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span>core <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1tel.html">tel</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1tel_1_1Logger.html">Logger</a>::<wbr/></span>Location <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="logging_8hpp.html">&lt;core/tel/logging.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__core.html" class="m-doc">Core</a> namespace.</p>
+        <p>Identifies a location in the code.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">al</a></dt>
-            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1data.html" class="m-doc">data</a></dt>
-            <dd><a href="group__core-data.html" class="m-doc">Data</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">geom</a></dt>
-            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1gl.html" class="m-doc">gl</a></dt>
-            <dd><a href="group__core-gl.html" class="m-doc">Graphics</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1io.html" class="m-doc">io</a></dt>
-            <dd><a href="group__core-io.html" class="m-doc">Input and output</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">memory</a></dt>
-            <dd><a href="group__core-memory.html" class="m-doc">Memory</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1reflection.html" class="m-doc">reflection</a></dt>
-            <dd><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1thread.html" class="m-doc">thread</a></dt>
-            <dd><a href="group__core-thread.html" class="m-doc">Threading</a> module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a613ad7be9f66d74e11b9d141346fcae5" class="m-doc">string</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd>Returns a string representation for the location.</dd>
           </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="aaf543c4562deb70ebe946838ce8bd249">
+              std::string <a href="#aaf543c4562deb70ebe946838ce8bd249" class="m-doc-self">function</a>
+            </dt>
+            <dd>Function name.</dd>
+            <dt id="adfadba7747a03d37c7b4e9e499031585">
+              std::string <a href="#adfadba7747a03d37c7b4e9e499031585" class="m-doc-self">file</a>
+            </dt>
+            <dd>File name.</dd>
+            <dt id="a96abd7cd019e8e59ed341f4775a408e5">
+              int <a href="#a96abd7cd019e8e59ed341f4775a408e5" class="m-doc-self">line</a>
+            </dt>
+            <dd>Line number.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a613ad7be9f66d74e11b9d141346fcae5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />tel::<wbr />Logger::<wbr />Location::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a613ad7be9f66d74e11b9d141346fcae5" class="m-doc-self">string</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns a string representation for the location.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
