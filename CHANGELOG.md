@@ -18,20 +18,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deadzone for input axis (#844, **@kuukitenshi**).
 - Generic Camera component to hold projection matrix (#1331, **@mkuritsu**).
 - Initial application debugging through Tesseratos (#1303, **@RiscadoA**).
-- Print stacktrace with *cpptrace* on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
+- Print stacktrace with _cpptrace_ on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
 - Orthographic Camera component (#1182, **@mkuritsu**).
 - Importer plugin (#1299, **@Scarface1809**).
 - Handle body rotation on penetration solving (#1272, **&fallenatlas**).
 - Cascaded shadow maps (#1187, **@tomas7770**).
 - Global telemetry level (for tracing/logging) (#1265, **@roby2014**).
 - Spans for tracing and profiling (#1265, **@roby2014**).
+- Audio asset (#230, **@Dageus**, **@diogomsmiranda**).
 
 ### Changed
 
 - Moved Glad and stb-image libs to another repositories, cubos-glad and cubos-stb, respectively (#1323, **@kuukitenshi**).
 - Moved most tools from Tesseratos to the engine (#1322, **@RiscadoA**).
 - Replaced OpenAL audio device with Miniaudio backend (#1005, **@Dageus**, **@diogomsmiranda**)
+
 ### Fixed
+
 - Spot light angle mismatch between light and shadows (#1310, **@tomas7770**).
 - Spot shadows cause light range cutoff (#1312, **@tomas7770**).
 - Precision error in split screen size calculations (**@mkuritsu**).
