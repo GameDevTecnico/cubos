@@ -5,14 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [v0.4.0] - 2024-10-13
 
 ### Added
 
 - PhysicsMaterial component (#1254, **@fallenatlas**).
 - Components to support rigid body rotation (#865, **@fallenatlas**).
 - Compute contact points and contact manifold for collision between boxes (#1243, **@fallenatlas**).
-- Handle body rotation on physics integration (#1242, **&fallenatlas**).
+- Handle body rotation on physics integration (#1242, **@fallenatlas**).
 - Binary Serializer and Deserializer (#1306, **@RiscadoA**).
 - Type Client and Type Server (#1302, **@RiscadoA**).
 - Deadzone for input axis (#844, **@kuukitenshi**).
@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Print stacktrace with *cpptrace* on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
 - Orthographic Camera component (#1182, **@mkuritsu**).
 - Importer plugin (#1299, **@Scarface1809**).
-- Handle body rotation on penetration solving (#1272, **&fallenatlas**).
+- Handle body rotation on penetration solving (#1272, **@fallenatlas**).
 - Cascaded shadow maps (#1187, **@tomas7770**).
 - Global telemetry level (for tracing/logging) (#1265, **@roby2014**).
 - Spans for tracing and profiling (#1265, **@roby2014**).
@@ -32,7 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Moved Glad and stb-image libs to another repositories, cubos-glad and cubos-stb, respectively (#1323, **@kuukitenshi**).
 - Moved most tools from Tesseratos to the engine (#1322, **@RiscadoA**).
-- Replaced OpenAL audio device with Miniaudio backend (#1005, **@Dageus**, **@diogomsmiranda**)
+- Replaced OpenAL audio device with Miniaudio backend (#1005, **@Dageus**, **@diogomsmiranda**).
+
 ### Fixed
 - Spot light angle mismatch between light and shadows (#1310, **@tomas7770**).
 - Spot shadows cause light range cutoff (#1312, **@tomas7770**).
@@ -244,3 +245,4 @@ Although they've moved on, their work is etched into the project's foundations.
 [v0.1.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.1.0
 [v0.2.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.2.0
 [v0.3.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.3.0
+[v0.4.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.4.0
