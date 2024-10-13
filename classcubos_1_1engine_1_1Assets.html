@@ -111,6 +111,10 @@
             </dt>
             <dd>Loads all metadata from the virtual filesystem, in the given path. If the path points to a directory, it will be recursively searched for metadata files.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a056f99df1e93d5401f3f1f3e9b6f9725" class="m-doc">unloadMeta</a>(</span><span class="m-doc-wrap">std::string_view path)</span>
+            </dt>
+            <dd>Unloads all asset metadata from assets within the given path.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae36fcf1fb1a44c37a404c3aab43a5c4b" class="m-doc">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> handle) const -&gt; <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a></span>
             </dt>
             <dd>Loads the asset with the given handle, upgrading the handle to a strong one.</dd>
@@ -312,6 +316,24 @@
                 </tr>
               </tbody>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a056f99df1e93d5401f3f1f3e9b6f9725"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a056f99df1e93d5401f3f1f3e9b6f9725" class="m-doc-self">unloadMeta</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
+            </h3>
+            <p>Unloads all asset metadata from assets within the given path.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path</td>
+                  <td>Path to unload metadata from.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>If an asset from the given path is currently loaded, it will not be unloaded, but it will be dissociated from its original metadata path.</p>
           </div></section>
           <section class="m-doc-details" id="ae36fcf1fb1a44c37a404c3aab43a5c4b"><div>
             <h3>
