@@ -2,7 +2,7 @@
 # Cubos project root build configuration
 
 cmake_minimum_required(VERSION 3.20.0)
-project(cubos VERSION 0.2.0)
+project(cubos VERSION 0.4.0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
