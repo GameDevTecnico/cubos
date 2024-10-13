@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::Logger::Entry struct | Cubos Docs</title>
+  <title>core/tel/tracing.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,40 +46,68 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1Logger.html">Logger</a>::<wbr/></span>Entry <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="log_8hpp.html">&lt;core/log.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_bfdd4927d1ba49b1ff336415007d4782.html">tel</a>/</span>tracing.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Data created by a call to log.</p>
+        <p>Tracing macros.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="ae5f7c9f6e8299f065e41960d109ea4e6">
-              <a href="classcubos_1_1core_1_1Logger.html#a4b350300f3e614bea6d2cba32f271de2" class="m-doc">Level</a> <a href="#ae5f7c9f6e8299f065e41960d109ea4e6" class="m-doc-self">level</a>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">cubos::core::tel::SpanId</a>
             </dt>
-            <dd>Level.</dd>
-            <dt id="ac0f75d90bc04599dc70853dddb32dca5">
-              <a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a> <a href="#ac0f75d90bc04599dc70853dddb32dca5" class="m-doc-self">timestamp</a>
+            <dd>Uniquely identifies a span.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1tel_1_1SpanGuard.html" class="m-doc">cubos::core::tel::SpanGuard</a>
             </dt>
-            <dd><a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a>;.</dd>
-            <dt id="a479b94c3660c7a8b3c57bec873903d62">
-              <a href="structcubos_1_1core_1_1Logger_1_1Location.html" class="m-doc">Location</a> <a href="#a479b94c3660c7a8b3c57bec873903d62" class="m-doc-self">location</a>
+            <dd>A guard object that automatically ends the current span when it goes out of scope.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1tel_1_1SpanManager.html" class="m-doc">cubos::core::tel::SpanManager</a>
             </dt>
-            <dd>Code location which originated the log message.</dd>
-            <dt id="ac02426bae7542ac03be730ad80177e0c">
-              std::string <a href="#ac02426bae7542ac03be730ad80177e0c" class="m-doc-self">message</a>
+            <dd>Manages the creation and ending of spans.</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga326bc7437d88503920910f70c4963ef7" class="m-doc">CUBOS_SPAN</a>(</span><span class="m-doc-wrap">name,
+              level)</span>
             </dt>
-            <dd>Message.</dd>
+            <dd>Constructs a new span with a specified level.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga6cbf990bace15b38fb617f2a9bac0cbf" class="m-doc">CUBOS_SPAN_INFO</a>(</span><span class="m-doc-wrap">name)</span>
+            </dt>
+            <dd>Constructs a new info span.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga4d8388bc67e5455bbf38376d7583b439" class="m-doc">CUBOS_SPAN_DEBUG</a>(</span><span class="m-doc-wrap">name)</span>
+            </dt>
+            <dd>Constructs a new debug span.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gae4c646ca1862a70f42cdb6f6b51a150a" class="m-doc">CUBOS_SPAN_TRACE</a>(</span><span class="m-doc-wrap">name)</span>
+            </dt>
+            <dd>Constructs a new trace span.</dd>
           </dl>
         </section>
       </div>

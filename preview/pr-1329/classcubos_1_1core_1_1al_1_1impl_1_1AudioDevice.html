@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::Logger::Timestamp struct | Cubos Docs</title>
+  <title>cubos::core::al::impl::AudioDevice class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,76 +46,70 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1Logger.html">Logger</a>::<wbr/></span>Timestamp <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="log_8hpp.html">&lt;core/log.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al.html">al</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al_1_1impl.html">impl</a>::<wbr/></span>AudioDevice <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__context_8hpp.html">&lt;core/al/audio_context.hpp&gt;</a></div>
         </h1>
-        <p>A timestamp used to identify when a logging message was written.</p>
+        <p>Audio device interface used to wrap low-level audio rendering APIs.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-static-methods">
-          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a461af80fc9e3d4dcbc33d80336cffcb3" class="m-doc">now</a>(</span><span class="m-doc-wrap">) -&gt; <a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a></span>
+            <dt id="a5232a331252d27dc436c2a5d2502e885">
+              <span class="m-doc-wrap-bumper"><a href="#a5232a331252d27dc436c2a5d2502e885" class="m-doc-self">AudioDevice</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1al_1_1impl_1_1AudioDevice.html" class="m-doc">AudioDevice</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
             </dt>
-            <dd>Returns a timestamp with the current time.</dd>
+            <dd>Forbid copy construction.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8d17f3891c6c844800f3a09ad7f5d8e0" class="m-doc">string</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa6efb21cff21318c075c9d3ec981db3e" class="m-doc">createSource</a>(</span><span class="m-doc-wrap">) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">impl::<wbr />Source</a>&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Returns a string representation for the timestamp, containing hours, minutes, seconds and milliseconds.</dd>
-          </dl>
-        </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a073aaa6203e5ee820005b6fe59f8160b">
-              int64_t <a href="#a073aaa6203e5ee820005b6fe59f8160b" class="m-doc-self">timestamp</a>
+            <dd>Creates a new audio source.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9ce71588ad64246b8112ff7093af38f8" class="m-doc">listener</a>(</span><span class="m-doc-wrap">size_t index) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Listener.html" class="m-doc">impl::<wbr />Listener</a>&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Milliseconds since the UNIX epoch.</dd>
+            <dd>Creates a new audio listener.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a461af80fc9e3d4dcbc33d80336cffcb3"><div>
+          <section class="m-doc-details" id="aa6efb21cff21318c075c9d3ec981db3e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a> cubos::<wbr />core::<wbr />Logger::<wbr />Timestamp::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a461af80fc9e3d4dcbc33d80336cffcb3" class="m-doc-self">now</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">impl::<wbr />Source</a>&gt; cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6efb21cff21318c075c9d3ec981db3e" class="m-doc-self">createSource</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
-            <p>Returns a timestamp with the current time.</p>
+            <p>Creates a new audio source.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a>.</td>
+                  <td>Handle of the new source.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8d17f3891c6c844800f3a09ad7f5d8e0"><div>
+          <section class="m-doc-details" id="a9ce71588ad64246b8112ff7093af38f8"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />Logger::<wbr />Timestamp::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d17f3891c6c844800f3a09ad7f5d8e0" class="m-doc-self">string</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Listener.html" class="m-doc">impl::<wbr />Listener</a>&gt; cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ce71588ad64246b8112ff7093af38f8" class="m-doc-self">listener</a>(</span><span class="m-doc-wrap">size_t index) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
-            <p>Returns a string representation for the timestamp, containing hours, minutes, seconds and milliseconds.</p>
+            <p>Creates a new audio listener.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>String representation.</td>
+                  <td>Handle of the new listener.</td>
                 </tr>
               </tfoot>
             </table>
