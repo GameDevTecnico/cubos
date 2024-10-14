@@ -806,11 +806,18 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
         return *this;
     }
 
-    // Trigger any observers that are interested in this change.
+    // Trigger any observers that are interested in this change, before component is removed.
     CommandBuffer cmdBuffer{mWorld};
     if (mWorld.mObservers->notifyRemove(cmdBuffer, mEntity, columnId))
     {
         cmdBuffer.commit();
+    }
+
+    // Update old archetype since observers might have modified it.
+    oldArchetype = mWorld.mEntityPool.archetype(mEntity.index);
+    if (!mWorld.mArchetypeGraph.contains(oldArchetype, columnId))
+    {
+        return *this;
     }
 
     auto& oldTable = mWorld.mTables.dense().at(oldArchetype);
