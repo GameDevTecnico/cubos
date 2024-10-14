@@ -73,6 +73,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/collisions/interface/shapes/box.cpp"
 	"src/collisions/interface/raycast.cpp"
 	"src/collisions/interface/shapes/capsule.cpp"
+	"src/collisions/interface/shapes/voxel.cpp"
 	"src/collisions/broad_phase/plugin.cpp"
 	"src/collisions/broad_phase/sweep_and_prune.cpp"
 	"src/collisions/broad_phase/potentially_colliding_with.cpp"

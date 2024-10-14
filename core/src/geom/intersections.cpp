@@ -147,7 +147,6 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
             }
         }
     }
-
     return true;
 }
 
