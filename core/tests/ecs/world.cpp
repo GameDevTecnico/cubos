@@ -2,6 +2,7 @@
 
 #include <doctest/doctest.h>
 
+#include <cubos/core/ecs/observer/observers.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/type.hpp>
@@ -546,6 +547,39 @@ TEST_CASE("ecs::World")
 
             CHECK(it->type->is<IntegerRelation>());
         }
+    }
+
+    SUBCASE("world remove works correctly with remove observers")
+    {
+        auto foo = world.create();
+        auto bar = world.create();
+
+        world.components(foo).add(IntegerComponent{0});
+        auto columnId = cubos::core::ecs::ColumnId::make(world.types().id<IntegerComponent>());
+        world.observers().hookOnRemove(columnId, cubos::core::ecs::System<void>::make(world, [foo, bar](World& w) {
+                                           w.components(foo).add(ParentComponent{bar});
+                                       }));
+        // Removing IntegerComponent triggers observer, which alters the entity
+        world.components(foo).remove<IntegerComponent>();
+        CHECK_FALSE(world.components(foo).has<IntegerComponent>());
+        CHECK(world.components(foo).has<ParentComponent>());
+    }
+
+    SUBCASE("world destroy works correctly with remove observers")
+    {
+        auto foo = world.create();
+        auto bar = world.create();
+
+        world.components(foo).add(IntegerComponent{0});
+        auto columnId = cubos::core::ecs::ColumnId::make(world.types().id<IntegerComponent>());
+        world.observers().hookOnRemove(columnId, cubos::core::ecs::System<void>::make(world, [foo, bar](World& w) {
+                                           w.components(foo).add(ParentComponent{bar});
+                                           w.components(bar).add(ParentComponent{foo});
+                                       }));
+        // Destroying foo triggers observer, which alters the entity
+        world.destroy(foo);
+        CHECK_FALSE(world.isAlive(foo));
+        CHECK(world.components(bar).has<ParentComponent>());
     }
 }
 // NOLINTEND(readability-function-size)
