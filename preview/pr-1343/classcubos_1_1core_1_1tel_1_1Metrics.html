@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::Metrics class | Cubos Docs</title>
+  <title>cubos::core::tel::Metrics class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,8 +46,8 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>Metrics <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="metrics_8hpp.html">&lt;core/metrics.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1tel.html">tel</a>::<wbr/></span>Metrics <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="metrics_8hpp.html">&lt;core/tel/metrics.hpp&gt;</a></div>
         </h1>
         <p>Singleton class that manages a collection of metrics.</p>
         <nav class="m-block m-default">
@@ -66,34 +66,34 @@
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">static void <a href="#ad3896981773396204845489078096679" class="m-doc">metric</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <span class="m-doc-wrap-bumper">static void <a href="#ab96e51f639d0b4b559d8501b9fd791d3" class="m-doc">metric</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               double metric)</span>
             </dt>
             <dd>Add a metric in the pool.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a072fba3866c758a53e3db1149ca880a4" class="m-doc">size</a>(</span><span class="m-doc-wrap">) -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a4bc3b5c4cf9c475b383d180ed58f3901" class="m-doc">size</a>(</span><span class="m-doc-wrap">) -&gt; std::size_t</span>
             </dt>
             <dd>Size of the metric pool.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#ad48d2a9d2fc9f0f7f2355b24d313a004" class="m-doc">sizeByName</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#ade3b5eb2fb3e38f9cdf5612774731fa3" class="m-doc">sizeByName</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; std::size_t</span>
             </dt>
             <dd>Size of metrics associated with a given name.</dd>
-            <dt id="a8bdf1bf1f6e15d0b1ed73d60a574c888">
-              <span class="m-doc-wrap-bumper">static void <a href="#a8bdf1bf1f6e15d0b1ed73d60a574c888" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="a0c869d1c2f2873a48d4d0363953cbf54">
+              <span class="m-doc-wrap-bumper">static void <a href="#a0c869d1c2f2873a48d4d0363953cbf54" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Clears the metric pool.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static void <a href="#ab916618811cf207c5f6ee5d7d48b1134" class="m-doc">setMaxEntries</a>(</span><span class="m-doc-wrap">std::size_t n)</span>
+              <span class="m-doc-wrap-bumper">static void <a href="#ab4f47922911239ea3a43f834368fe4c9" class="m-doc">setMaxEntries</a>(</span><span class="m-doc-wrap">std::size_t n)</span>
             </dt>
             <dd>Sets maximum metric entries.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a45dd3c6b92fbab88adc7e437db6b45aa" class="m-doc">readValue</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <span class="m-doc-wrap-bumper">static auto <a href="#a4bb2d1ced231806aff379eded950ec32" class="m-doc">readValue</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               double&amp; value,
               size_t&amp; offset) -&gt; bool</span>
             </dt>
             <dd>Read a metric value by its name.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#aa3e1e461d47e5f523051bd33277121d4" class="m-doc">readName</a>(</span><span class="m-doc-wrap">std::string&amp; name,
+              <span class="m-doc-wrap-bumper">static auto <a href="#aa43b84e245f1ae7911ea3669ceff0a76" class="m-doc">readName</a>(</span><span class="m-doc-wrap">std::string&amp; name,
               size_t&amp; seenCount) -&gt; bool</span>
             </dt>
             <dd>Search for a new unique metric name.</dd>
@@ -102,17 +102,17 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="acea733263e0b8918e8b3dc1dc62ad5df">
-              <span class="m-doc-wrap-bumper"><a href="#acea733263e0b8918e8b3dc1dc62ad5df" class="m-doc-self">Metrics</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-danger">deleted</span></span>
+            <dt id="a29876ef7ee85a04a731513842094eac7">
+              <span class="m-doc-wrap-bumper"><a href="#a29876ef7ee85a04a731513842094eac7" class="m-doc-self">Metrics</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-danger">deleted</span></span>
             </dt>
             <dd>Deleted constructor.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad3896981773396204845489078096679"><div>
+          <section class="m-doc-details" id="ab96e51f639d0b4b559d8501b9fd791d3"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad3896981773396204845489078096679" class="m-doc-self">metric</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab96e51f639d0b4b559d8501b9fd791d3" class="m-doc-self">metric</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               double metric)</span></span>
             </h3>
             <p>Add a metric in the pool.</p>
@@ -132,23 +132,23 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a072fba3866c758a53e3db1149ca880a4"><div>
+          <section class="m-doc-details" id="a4bc3b5c4cf9c475b383d180ed58f3901"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static std::size_t cubos::<wbr />core::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a072fba3866c758a53e3db1149ca880a4" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">static std::size_t cubos::<wbr />core::<wbr />tel::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4bc3b5c4cf9c475b383d180ed58f3901" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Size of the metric pool.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">Metrics</a> count.</td>
+                  <td><a href="classcubos_1_1core_1_1tel_1_1Metrics.html" class="m-doc">Metrics</a> count.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad48d2a9d2fc9f0f7f2355b24d313a004"><div>
+          <section class="m-doc-details" id="ade3b5eb2fb3e38f9cdf5612774731fa3"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static std::size_t cubos::<wbr />core::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad48d2a9d2fc9f0f7f2355b24d313a004" class="m-doc-self">sizeByName</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
+              <span class="m-doc-wrap-bumper">static std::size_t cubos::<wbr />core::<wbr />tel::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ade3b5eb2fb3e38f9cdf5612774731fa3" class="m-doc-self">sizeByName</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
             </h3>
             <p>Size of metrics associated with a given name.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -164,14 +164,14 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">Metrics</a> count.</td>
+                  <td><a href="classcubos_1_1core_1_1tel_1_1Metrics.html" class="m-doc">Metrics</a> count.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab916618811cf207c5f6ee5d7d48b1134"><div>
+          <section class="m-doc-details" id="ab4f47922911239ea3a43f834368fe4c9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab916618811cf207c5f6ee5d7d48b1134" class="m-doc-self">setMaxEntries</a>(</span><span class="m-doc-wrap">std::size_t n)</span></span>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab4f47922911239ea3a43f834368fe4c9" class="m-doc-self">setMaxEntries</a>(</span><span class="m-doc-wrap">std::size_t n)</span></span>
             </h3>
             <p>Sets maximum metric entries.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -186,9 +186,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a45dd3c6b92fbab88adc7e437db6b45aa"><div>
+          <section class="m-doc-details" id="a4bb2d1ced231806aff379eded950ec32"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45dd3c6b92fbab88adc7e437db6b45aa" class="m-doc-self">readValue</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />tel::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4bb2d1ced231806aff379eded950ec32" class="m-doc-self">readValue</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               double&amp; value,
               size_t&amp; offset)</span></span>
             </h3>
@@ -219,9 +219,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aa3e1e461d47e5f523051bd33277121d4"><div>
+          <section class="m-doc-details" id="aa43b84e245f1ae7911ea3669ceff0a76"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3e1e461d47e5f523051bd33277121d4" class="m-doc-self">readName</a>(</span><span class="m-doc-wrap">std::string&amp; name,
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />tel::<wbr />Metrics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa43b84e245f1ae7911ea3669ceff0a76" class="m-doc-self">readName</a>(</span><span class="m-doc-wrap">std::string&amp; name,
               size_t&amp; seenCount)</span></span>
             </h3>
             <p>Search for a new unique metric name.</p>

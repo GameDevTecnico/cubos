@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::al::impl namespace | Cubos Docs</title>
+  <title>core/al/audio_context.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,35 +46,75 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al.html">al</a>::<wbr/></span>impl <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f6f65ff657bd34b22e5078310628f4e7.html">al</a>/</span>audio_context.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Namespace to store the abstract types implemented by the audio device implementations.</p>
+        <p>Class <a href="classcubos_1_1core_1_1al_1_1AudioContext.html" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />AudioContext</a> and related types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">cubos::core::al</a></dt>
+            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1al_1_1impl.html" class="m-doc">cubos::core::al::impl</a></dt>
+            <dd>Namespace to store the abstract types implemented by the audio device implementations.</dd>
+          </dl>
+        </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">Buffer</a>
+              class <a href="classcubos_1_1core_1_1al_1_1AudioContext.html" class="m-doc">cubos::core::al::AudioContext</a>
+            </dt>
+            <dd>Audio context that contains audio devices;.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">cubos::core::al::impl::Buffer</a>
             </dt>
             <dd>Abstract audio buffer.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">Source</a>
+              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">cubos::core::al::impl::Source</a>
             </dt>
             <dd>Abstract audio source.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1AudioDevice.html" class="m-doc">AudioDevice</a>
+              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1AudioDevice.html" class="m-doc">cubos::core::al::impl::AudioDevice</a>
             </dt>
             <dd>Audio device interface used to wrap low-level audio rendering APIs.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> = std::shared_ptr&lt;impl::Buffer&gt;
+            </dt>
+            <dd>Handle to an audio buffer.</dd>
+            <dt>
+              using <a href="group__core-al.html#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc">Source</a> = std::shared_ptr&lt;impl::Source&gt;
+            </dt>
+            <dd>Handle to an audio source.</dd>
+            <dt>
+              using <a href="group__core-al.html#ga8484e4c0384c146bb8772b75f475f77d" class="m-doc">Listener</a> = std::shared_ptr&lt;impl::Listener&gt;
+            </dt>
+            <dd>Handle to an audio listener.</dd>
+            <dt>
+              using <a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> = std::shared_ptr&lt;impl::AudioDevice&gt;
+            </dt>
+            <dd>Handle to an audio device.</dd>
           </dl>
         </section>
       </div>

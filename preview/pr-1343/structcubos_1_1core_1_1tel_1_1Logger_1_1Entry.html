@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::al::impl namespace | Cubos Docs</title>
+  <title>cubos::core::tel::Logger::Entry struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,35 +46,44 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al.html">al</a>::<wbr/></span>impl <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1tel.html">tel</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1tel_1_1Logger.html">Logger</a>::<wbr/></span>Entry <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="logging_8hpp.html">&lt;core/tel/logging.hpp&gt;</a></div>
         </h1>
-        <p>Namespace to store the abstract types implemented by the audio device implementations.</p>
+        <p>Data created by a call to log.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">Buffer</a>
+            <dt id="a14311a843169e0eaf8c52ca34f075e5a">
+              <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> <a href="#a14311a843169e0eaf8c52ca34f075e5a" class="m-doc-self">level</a>
             </dt>
-            <dd>Abstract audio buffer.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">Source</a>
+            <dd>Level.</dd>
+            <dt id="a74ef149dc5ab3dc78e10640017c813f4">
+              <a href="structcubos_1_1core_1_1tel_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a> <a href="#a74ef149dc5ab3dc78e10640017c813f4" class="m-doc-self">timestamp</a>
             </dt>
-            <dd>Abstract audio source.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1AudioDevice.html" class="m-doc">AudioDevice</a>
+            <dd><a href="structcubos_1_1core_1_1tel_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a>;.</dd>
+            <dt id="a9c7821936fae48f7f6c90ae28467dbde">
+              <a href="structcubos_1_1core_1_1tel_1_1Logger_1_1Location.html" class="m-doc">Location</a> <a href="#a9c7821936fae48f7f6c90ae28467dbde" class="m-doc-self">location</a>
             </dt>
-            <dd>Audio device interface used to wrap low-level audio rendering APIs.</dd>
+            <dd>Code location which originated the log message.</dd>
+            <dt id="a5071de38fd0b3b1344372435819441b5">
+              std::string <a href="#a5071de38fd0b3b1344372435819441b5" class="m-doc-self">message</a>
+            </dt>
+            <dd>Message.</dd>
+            <dt id="a87b97f10b9fd357050664daf61fff3a4">
+              <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">SpanId</a> <a href="#a87b97f10b9fd357050664daf61fff3a4" class="m-doc-self">span</a>
+            </dt>
+            <dd>Span identifier.</dd>
           </dl>
         </section>
       </div>
