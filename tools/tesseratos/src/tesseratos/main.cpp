@@ -9,6 +9,7 @@
 
 #include "asset_explorer/plugin.hpp"
 #include "debugger/plugin.hpp"
+#include "file_selector/plugin.hpp"
 #include "importer/plugin.hpp"
 #include "project/plugin.hpp"
 #include "scene_editor/plugin.hpp"
@@ -41,6 +42,7 @@ int main(int argc, char** argv)
     cubos.plugin(sceneEditorPlugin);
     cubos.plugin(voxelPaletteEditorPlugin);
     cubos.plugin(importerPlugin);
+    cubos.plugin(fileSelectorPlugin);
 
     cubos.startupSystem("configure Assets plugin").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);
