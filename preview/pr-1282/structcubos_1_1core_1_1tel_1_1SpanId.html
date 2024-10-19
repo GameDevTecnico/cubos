@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::al::impl namespace | Cubos Docs</title>
+  <title>cubos::core::tel::SpanId struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,35 +46,32 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al.html">al</a>::<wbr/></span>impl <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1tel.html">tel</a>::<wbr/></span>SpanId <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
         </h1>
-        <p>Namespace to store the abstract types implemented by the audio device implementations.</p>
+        <p>Uniquely identifies a span.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">Buffer</a>
+            <dt id="aef5794bc06eb9a0c9145bd00965f1edc">
+              std::size_t <a href="#aef5794bc06eb9a0c9145bd00965f1edc" class="m-doc-self">id</a>
             </dt>
-            <dd>Abstract audio buffer.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">Source</a>
+            <dd>Identifier which distinguishes between instances of spans with the same path.</dd>
+            <dt id="afdaf33132a2585360b6c716c8e4b7994">
+              std::string <a href="#afdaf33132a2585360b6c716c8e4b7994" class="m-doc-self">path</a>
             </dt>
-            <dd>Abstract audio source.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1AudioDevice.html" class="m-doc">AudioDevice</a>
-            </dt>
-            <dd>Audio device interface used to wrap low-level audio rendering APIs.</dd>
+            <dd>Span path.</dd>
           </dl>
         </section>
       </div>

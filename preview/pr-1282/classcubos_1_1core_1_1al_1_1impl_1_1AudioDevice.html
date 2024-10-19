@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/al/audio_device.hpp file | Cubos Docs</title>
+  <title>cubos::core::al::impl::AudioDevice class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,77 +46,74 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f6f65ff657bd34b22e5078310628f4e7.html">al</a>/</span>audio_device.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al.html">al</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al_1_1impl.html">impl</a>::<wbr/></span>AudioDevice <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__context_8hpp.html">&lt;core/al/audio_context.hpp&gt;</a></div>
         </h1>
-        <p>Class <a href="classcubos_1_1core_1_1al_1_1AudioDevice.html" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />AudioDevice</a> and related types.</p>
+        <p>Audio device interface used to wrap low-level audio rendering APIs.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#enum-members">Enums</a></li>
-                <li><a href="#typedef-members">Typedefs</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>Cubos</strong> libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">cubos::core::al</a></dt>
-            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al_1_1impl.html" class="m-doc">cubos::core::al::impl</a></dt>
-            <dd>Namespace to store the abstract types implemented by the audio device implementations.</dd>
+            <dt id="a5232a331252d27dc436c2a5d2502e885">
+              <span class="m-doc-wrap-bumper"><a href="#a5232a331252d27dc436c2a5d2502e885" class="m-doc-self">AudioDevice</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1al_1_1impl_1_1AudioDevice.html" class="m-doc">AudioDevice</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Forbid copy construction.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1AudioDevice.html" class="m-doc">cubos::core::al::AudioDevice</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa6efb21cff21318c075c9d3ec981db3e" class="m-doc">createSource</a>(</span><span class="m-doc-wrap">) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">impl::<wbr />Source</a>&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Audio device interface used to wrap low-level audio rendering APIs.</dd>
+            <dd>Creates a new audio source.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">cubos::core::al::impl::Buffer</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9ce71588ad64246b8112ff7093af38f8" class="m-doc">listener</a>(</span><span class="m-doc-wrap">size_t index) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Listener.html" class="m-doc">impl::<wbr />Listener</a>&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Abstract audio buffer.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">cubos::core::al::impl::Source</a>
-            </dt>
-            <dd>Abstract audio source.</dd>
+            <dd>Creates a new audio listener.</dd>
           </dl>
         </section>
-        <section id="enum-members">
-          <h2><a href="#enum-members">Enums</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">enum class <a href="namespacecubos_1_1core_1_1al.html#a4d801c5155ac7b63ffb25b4eadc201b3" class="m-doc">Format</a> { </span><span class="m-doc-wrap"><a href="#a4d801c5155ac7b63ffb25b4eadc201b3abc5c44624758954f1a4af1e009f5cf6e" class="m-doc">Mono8</a>,
-              <a href="#a4d801c5155ac7b63ffb25b4eadc201b3aab2f4f7e4448e8c91c89774787a1cc2c" class="m-doc">Mono16</a>,
-              <a href="#a4d801c5155ac7b63ffb25b4eadc201b3ac6b222ce6dafa010da034571a80c21f3" class="m-doc">Stereo8</a>,
-              <a href="#a4d801c5155ac7b63ffb25b4eadc201b3a851cd6283aaf71edd18bb2fcda2505f4" class="m-doc">Stereo16</a> }</span>
-            </dt>
-            <dd>Possible audio formats.</dd>
-          </dl>
-        </section>
-        <section id="typedef-members">
-          <h2><a href="#typedef-members">Typedefs</a></h2>
-          <dl class="m-doc">
-            <dt>
-              using <a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">Buffer</a> = std::shared_ptr&lt;impl::Buffer&gt;
-            </dt>
-            <dd>Handle to an audio buffer.</dd>
-            <dt>
-              using <a href="group__core-al.html#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc">Source</a> = std::shared_ptr&lt;impl::Source&gt;
-            </dt>
-            <dd>Handle to an audio source.</dd>
-          </dl>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa6efb21cff21318c075c9d3ec981db3e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">impl::<wbr />Source</a>&gt; cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6efb21cff21318c075c9d3ec981db3e" class="m-doc-self">createSource</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Creates a new audio source.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Handle of the new source.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9ce71588ad64246b8112ff7093af38f8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Listener.html" class="m-doc">impl::<wbr />Listener</a>&gt; cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ce71588ad64246b8112ff7093af38f8" class="m-doc-self">listener</a>(</span><span class="m-doc-wrap">size_t index) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Creates a new audio listener.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Handle of the new listener.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

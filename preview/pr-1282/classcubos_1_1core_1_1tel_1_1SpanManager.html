@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::Logger::Entry struct | Cubos Docs</title>
+  <title>cubos::core::tel::SpanManager class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,41 +46,77 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1Logger.html">Logger</a>::<wbr/></span>Entry <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="log_8hpp.html">&lt;core/log.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1tel.html">tel</a>::<wbr/></span>SpanManager <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tracing_8hpp.html">&lt;core/tel/tracing.hpp&gt;</a></div>
         </h1>
-        <p>Data created by a call to log.</p>
+        <p>Manages the creation and ending of spans.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
-            <dt id="ae5f7c9f6e8299f065e41960d109ea4e6">
-              <a href="classcubos_1_1core_1_1Logger.html#a4b350300f3e614bea6d2cba32f271de2" class="m-doc">Level</a> <a href="#ae5f7c9f6e8299f065e41960d109ea4e6" class="m-doc-self">level</a>
+            <dt>
+              <span class="m-doc-wrap-bumper">static void <a href="#a9ea7cff4e6fef557be40b2902d759937" class="m-doc">begin</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span>
             </dt>
-            <dd>Level.</dd>
-            <dt id="ac0f75d90bc04599dc70853dddb32dca5">
-              <a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a> <a href="#ac0f75d90bc04599dc70853dddb32dca5" class="m-doc-self">timestamp</a>
+            <dd>Begins a new span.</dd>
+            <dt id="a963f1fc6414f40f2fc0229f1f4a35f21">
+              <span class="m-doc-wrap-bumper">static void <a href="#a963f1fc6414f40f2fc0229f1f4a35f21" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd><a href="structcubos_1_1core_1_1Logger_1_1Timestamp.html" class="m-doc">Timestamp</a>;.</dd>
-            <dt id="a479b94c3660c7a8b3c57bec873903d62">
-              <a href="structcubos_1_1core_1_1Logger_1_1Location.html" class="m-doc">Location</a> <a href="#a479b94c3660c7a8b3c57bec873903d62" class="m-doc-self">location</a>
+            <dd>Ends the current active span.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a371607854a702e849f55a5755116d22e" class="m-doc">current</a>(</span><span class="m-doc-wrap">) -&gt; <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">SpanId</a></span>
             </dt>
-            <dd>Code location which originated the log message.</dd>
-            <dt id="ac02426bae7542ac03be730ad80177e0c">
-              std::string <a href="#ac02426bae7542ac03be730ad80177e0c" class="m-doc-self">message</a>
-            </dt>
-            <dd>Message.</dd>
+            <dd>Gets the current active span.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9ea7cff4e6fef557be40b2902d759937"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />tel::<wbr />SpanManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ea7cff4e6fef557be40b2902d759937" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span></span>
+            </h3>
+            <p>Begins a new span.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Span name.</td>
+                </tr>
+                <tr>
+                  <td>level</td>
+                  <td>Span level.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a371607854a702e849f55a5755116d22e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">SpanId</a> cubos::<wbr />core::<wbr />tel::<wbr />SpanManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a371607854a702e849f55a5755116d22e" class="m-doc-self">current</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Gets the current active span.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Identifier of the current span.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
