@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contribution guidelines | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Contribution guidelines
+        </h1>
+        <p>Guide on the project&#x27;s conventions and code style.</p>
+<p><a name="md_docs_pages_5_contribution_main"></a></p><section id="autotoc_md44"><h2><a href="#autotoc_md44">Commits</a></h2><p>Commits should be concise and small, such that they are easy to review. Avoid at all costs including non-related changes in a commit - use <code>git add -p</code> or something similar to force yourself to review the changes you are commiting, and to avoid accidentally commiting unrelated changes.</p><p>Commits should follow <a href="https://www.conventionalcommits.org/">Conventional Commits</a> and be written in imperative mood. As scopes, we use the names of the labels that start by <code>B-</code> in the <a href="https://github.com/GameDevTecnico/cubos/labels">label list</a> (e.g.: <code>assets</code>, <code>audio</code>). If the commit affects multiple of those areas, then pick one of the labels that start by <code>A-</code> (e.g.: <code>core</code>, <code>engine</code>, <code>tesseratos</code>). If a commit affects more than one of those, then you can ommit the scope.</p><p>If your description is too long, you can add a body to the commit message. The body should be separated from the description by a blank line.</p><p>Examples of good commit messages:</p><pre class="m-code">feat(core): add CUBOS_FAIL, CUBOS_UNREACHABLE and CUBOS_DEBUG_ASSERT 
+test(core): move filesystem tests to data/fs
+fix(core): fix segfault when popping a sub context
+feat(engine): implement system for sweeping the markers  
+docs(engine): add comments to colliders
+chore: replace GoogleTest submodule with doctest</pre><p>Examples of bad commit messages:</p><pre class="m-code">fix: fix bug
+make it work
+feat(core): Add CUBOS_FAIL
+docs(engine): added comments to colliders</pre></section><section id="autotoc_md45"><h2><a href="#autotoc_md45">Pull Requests</a></h2><p>Pull requests should be concise and small, and if needed, split into multiple smaller PRs so that they are easier to review. If your PR is still not finished, mark it as a draft. When working on new features, draft PRs should be created so that other contributors can have an idea of what is being worked on.</p><p>Any features added in a PR should be covered by tests and documentation, including new examples demonstrating the feature.</p></section><section id="autotoc_md46"><h2><a href="#autotoc_md46">Documentation</a></h2><p>We use <a href="https://www.doxygen.nl/index.html">Doxygen</a> for documentation, which means that the documentation is mostly written in the code itself. When adding new files, classes, functions, etc, make sure to at least add a triple slash comment (<code>///</code>) with a <code>@brief</code> section describing what it does, otherwise Doxygen will omit it from the documentation.</p><p>Make sure to document all function parameters, template parameters and return values. Take a look at other files to get a grasp of the documentation style we use.</p><p>When changing the code, the documentation should be updated accordingly.</p><section id="autotoc_md47"><h3><a href="#autotoc_md47">Plugins</a></h3><p>Engine plugins should document which components and resources they add, which tags and settings are used, and how to use them. Take a look at the documentation of other plugins such as the renderer plugin to get an idea of how it should look like.</p><p>Every type or function that is part of the public API of a plugin should be added to its corresponding <code>group</code> in the Doxygen documentation, using the <code>@ingroup</code> tag.</p></section></section><section id="autotoc_md48"><h2><a href="#autotoc_md48">Code Style</a></h2><section id="autotoc_md49"><h3><a href="#autotoc_md49">Casing</a></h3><p>We use <code>camelCase</code> for functions, methods, local variables and fields. Private fields are prefixed with <code>m</code> (e.g. <code>mMyField</code>). <code>PascalCase</code> is used for class names and constants. <code>UPPER_CASE</code> is used for macros. <code>snake_case</code> is used for namespaces, folders and files.</p></section><section id="autotoc_md50"><h3><a href="#autotoc_md50">Formatting</a></h3><p>Code is formatted using <a href="https://clang.llvm.org/docs/ClangFormat.html">clang format</a>. Although we have an action that runs clang format on every PR, it is recommended that you run it locally before commiting your changes, to make it easier for the reviewers to read your code.</p><p>We also check the code with <a href="https://clang.llvm.org/extra/clang-tidy/">clang tidy</a>, which is a static analysis tool which picks up many common mistakes and code smell. This runs on every commit you push to your branch.</p></section><section id="autotoc_md51"><h3><a href="#autotoc_md51">Macros</a></h3><p>Avoid using macros whenever possible - use <code>constexpr</code> variables or functions instead. If you do need to use a macro to make an implementation more readable, restrict the macro to the source file where it is used. Defining macros in header files is heavily discouraged.</p></section><section id="autotoc_md52"><h3><a href="#autotoc_md52">Namespaces</a></h3><p>Avoid <code>using namespace</code> in header files. In source files, prefer <code>using foo::bar::X</code> over <code>using namespace foo::bar</code>. If your code is under the namespace <code>foo::bar</code>, you can use <code>using namespace foo::bar</code> in the source files, to make the code more readable.</p><p>When closing a namespace the namespace name should be added as a comment. E.g.:</p><pre class="m-code"><span class="k">namespace</span><span class="w"> </span><span class="nn">foo</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace foo</span></pre></section></section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
