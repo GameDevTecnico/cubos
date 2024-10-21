@@ -240,6 +240,8 @@ TEST_CASE("ecs::Cubos")
                 }
             }
         });
+
+        cubos.run();
     }
 
     SUBCASE("on removal, observers are triggered correctly")
@@ -276,6 +278,8 @@ TEST_CASE("ecs::Cubos")
             ++it;
             CHECK(it == query.end());
         });
+
+        cubos.run();
     }
 
     SUBCASE("observers can be triggered in a chain")
@@ -310,6 +314,56 @@ TEST_CASE("ecs::Cubos")
             ++it;
             CHECK(it == query.end());
         });
+
+        cubos.run();
+    }
+
+    SUBCASE("observers can remove observed component from observed entity")
+    {
+        cubos.component<int>();
+
+        cubos.observer("remove observed component from observed entity")
+            .onRemove<int>()
+            .call([](Commands cmds, Query<Entity> query) {
+                for (auto [ent] : query)
+                {
+                    cmds.remove<int>(ent);
+                }
+            });
+
+        cubos.startupSystem("remove component").call([](Commands cmds) {
+            auto ent1 = cmds.create().add<int>(1).entity();
+            cmds.create().add<int>(2);
+            cmds.remove<int>(ent1);
+        });
+
+        cubos.system("check if component is gone").call([](Query<Entity, int&> query) {
+            for (auto [entity, i] : query)
+            {
+                CHECK(i == 2);
+            }
+        });
+
+        cubos.run();
+    }
+
+    SUBCASE("observers can destroy observed entity")
+    {
+        cubos.component<int>();
+
+        cubos.observer("destroy observed entity").onRemove<int>().call([](Commands cmds, Query<Entity> query) {
+            for (auto [ent] : query)
+            {
+                cmds.destroy(ent);
+            }
+        });
+
+        cubos.startupSystem("destroy entity with observed component").call([](Commands cmds) {
+            auto ent1 = cmds.create().add<int>(1).entity();
+            cmds.destroy(ent1);
+        });
+
+        cubos.run();
     }
 
     SUBCASE("plugin can be installed and removed dynamically")
