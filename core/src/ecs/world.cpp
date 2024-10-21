@@ -159,15 +159,16 @@ void World::destroy(Entity entity)
 
     auto archetype = mEntityPool.archetype(entity.index);
 
+    CommandBuffer cmdBuffer{*this};
+    bool observed = false;
     // For each column, notify the observers.
     for (auto columnId = mArchetypeGraph.first(archetype); columnId != ColumnId::Invalid;
          columnId = mArchetypeGraph.next(archetype, columnId))
     {
         // Trigger any observers that are interested in this change.
-        CommandBuffer cmdBuffer{*this};
         if (mObservers->notifyRemove(cmdBuffer, entity, columnId))
         {
-            cmdBuffer.commit();
+            observed = true;
         }
     }
 
@@ -211,6 +212,12 @@ void World::destroy(Entity entity)
                 mTables.sparseRelation().at(table).eraseTo(entity.index);
             }
         }
+    }
+
+    // Run commands from observers after entity is destroyed
+    if (observed)
+    {
+        cmdBuffer.commit();
     }
 
     CUBOS_DEBUG("Destroyed entity {}", entity);
@@ -808,10 +815,7 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
 
     // Trigger any observers that are interested in this change.
     CommandBuffer cmdBuffer{mWorld};
-    if (mWorld.mObservers->notifyRemove(cmdBuffer, mEntity, columnId))
-    {
-        cmdBuffer.commit();
-    }
+    bool observed = mWorld.mObservers->notifyRemove(cmdBuffer, mEntity, columnId);
 
     auto& oldTable = mWorld.mTables.dense().at(oldArchetype);
 
@@ -829,6 +833,13 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
     mWorld.moveSparse(mEntity, oldArchetype, newArchetype);
 
     CUBOS_TRACE("Removed component {} from entity {}", type.name(), mEntity);
+
+    // Run commands from observers after component is removed
+    if (observed)
+    {
+        cmdBuffer.commit();
+    }
+
     return *this;
 }
 
