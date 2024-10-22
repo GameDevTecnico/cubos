@@ -58,18 +58,19 @@ namespace cubos::core::al
         static std::shared_ptr<AudioContext> create();
 
         /// @brief Enumerates the available devices.
-        /// @param[out] devices Vector to fill with the available device's specifiers.
+        /// @param[out] devices Vector to fill with the available devices.
         virtual void enumerateDevices(std::vector<std::string>& devices) = 0;
 
         /// @brief Creates a new audio device
-        /// @param listenerCount Number of audio listeners to be supported by the device.
-        /// @param specifier Identifier of the audio device.
+        /// @param specifier The specifier of the audio device, used to identify it
+        /// @param listenerCount The number of audio listener to be created by the device's engine.
         /// @return Handle of the new device
-        virtual AudioDevice createDevice(unsigned int listenerCount, const std::string& specifier = "") = 0;
+        virtual AudioDevice createDevice(unsigned int listenerCount,
+                                         const std::string& specifier = "MiniaudioDevice") = 0;
 
         /// @brief Creates a new audio buffer.
         /// @param data Data to be written to the buffer, either .wav, .mp3 or .flac.
-        /// @param dataSize Size of the data to be written.
+        /// @param datSize Size of the data to be written.
         /// @return Handle of the new buffer.
         virtual Buffer createBuffer(const void* data, size_t dataSize) = 0;
     };
@@ -85,7 +86,7 @@ namespace cubos::core::al
 
             /// @brief  Gets the length in seconds of the audio buffer.
             /// @return Length in seconds of the audio buffer.
-            virtual float length() = 0;
+            virtual size_t length() = 0;
 
         protected:
             Buffer() = default;
@@ -125,7 +126,7 @@ namespace cubos::core::al
             /// @brief Sets whether the source position and velocity is relative to the listener or
             /// not.
             /// @param relative Relative flag.
-            virtual void setRelative(cubos::core::al::Listener listener) = 0;
+            virtual void setRelative(bool relative) = 0;
 
             /// @brief Sets the maximum distance at which the source is audible.
             /// @param maxDistance Maximum distance.

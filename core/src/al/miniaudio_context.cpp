@@ -1,7 +1,7 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include <cubos/core/al/miniaudio_context.hpp>
+#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/string.hpp>
-#include <cubos/core/tel/logging.hpp>
 
 using namespace cubos::core::al;
 
@@ -16,10 +16,8 @@ public:
         {
             CUBOS_ERROR("Failed to initialize Decoder from data");
         }
-        else
-        {
-            mValid = true;
-        }
+
+        mValid = true;
     }
 
     ~MiniaudioBuffer() override
@@ -27,19 +25,19 @@ public:
         ma_decoder_uninit(&decoder);
     }
 
-    float length() override
+    size_t length() override
     {
         ma_uint64 lengthInPCMFrames;
         ma_result result = ma_decoder_get_length_in_pcm_frames(&decoder, &lengthInPCMFrames);
 
         if (result != MA_SUCCESS)
         {
-            CUBOS_ERROR("Failed to get the length of audio in PCM frames");
+            CUBOS_ERROR("Failed to get the length of audio in PCM frames.");
             return 0;
         }
 
         // Calculate the length in seconds: Length in PCM frames divided by the sample rate.
-        return static_cast<float>(lengthInPCMFrames) / static_cast<float>(decoder.outputSampleRate);
+        return static_cast<size_t>(lengthInPCMFrames) / decoder.outputSampleRate;
     }
 
     bool isValid() const
@@ -49,43 +47,6 @@ public:
 
 private:
     bool mValid = false;
-};
-
-class MiniaudioListener : public impl::Listener
-{
-public:
-    MiniaudioListener(ma_engine& engine, unsigned int index)
-        : mEngine(engine)
-        , mIndex(index)
-    {
-    }
-
-    ~MiniaudioListener() override = default;
-
-    void setPosition(const glm::vec3& position) override
-    {
-        ma_engine_listener_set_position(&mEngine, mIndex, position.x, position.y, position.z);
-    }
-
-    void setOrientation(const glm::vec3& forward, const glm::vec3& up) override
-    {
-        ma_engine_listener_set_direction(&mEngine, mIndex, forward.x, forward.y, forward.z);
-        ma_engine_listener_set_world_up(&mEngine, mIndex, up.x, up.y, up.z);
-    }
-
-    void setVelocity(const glm::vec3& velocity) override
-    {
-        ma_engine_listener_set_velocity(&mEngine, mIndex, velocity.x, velocity.y, velocity.z);
-    }
-
-    unsigned int index() const
-    {
-        return mIndex;
-    }
-
-private:
-    ma_engine& mEngine;
-    unsigned int mIndex;
 };
 
 class MiniaudioSource : public impl::Source
@@ -104,11 +65,17 @@ public:
     void setBuffer(Buffer buffer) override
     {
         // Try to dynamically cast the Buffer to a MiniaudioBuffer.
-        auto miniaudioBuffer = std::static_pointer_cast<MiniaudioBuffer>(buffer);
+        auto miniaudioBuffer = std::dynamic_pointer_cast<MiniaudioBuffer>(buffer);
+
+        if (miniaudioBuffer == nullptr)
+        {
+            CUBOS_FAIL("Buffer is not of type MiniaudioBuffer.");
+            return;
+        }
 
         if (ma_sound_init_from_data_source(&mEngine, &miniaudioBuffer->decoder, 0, nullptr, &mSound) != MA_SUCCESS)
         {
-            CUBOS_ERROR("Failed to initialize sound from buffer");
+            CUBOS_ERROR("Failed to initialize sound from buffer.");
             return;
         }
     }
@@ -138,16 +105,10 @@ public:
         ma_sound_set_looping(&mSound, static_cast<ma_bool32>(looping));
     }
 
-    void setRelative(Listener listener) override
+    void setRelative(bool relative) override
     {
-        CUBOS_ASSERT(listener != nullptr);
-
-        // Try to dynamically cast the Listener to a MiniaudioListener.
-        auto miniaudioListener = std::static_pointer_cast<MiniaudioListener>(listener);
-
-        ma_sound_set_pinned_listener_index(&mSound, miniaudioListener->index());
-
-        ma_sound_set_positioning(&mSound, ma_positioning_relative);
+        relative ? ma_sound_set_positioning(&mSound, ma_positioning_relative)
+                 : ma_sound_set_positioning(&mSound, ma_positioning_absolute);
     }
 
     void setMaxDistance(float maxDistance) override
@@ -174,7 +135,7 @@ public:
     {
         if (ma_sound_start(&mSound) != MA_SUCCESS)
         {
-            CUBOS_ERROR("Failed to start sound");
+            CUBOS_ERROR("Failed to start sound.");
             return;
         }
     }
@@ -184,11 +145,46 @@ private:
     ma_engine& mEngine;
 };
 
+class MiniaudioListener : public impl::Listener
+{
+public:
+    MiniaudioListener(ma_engine& engine, unsigned int index)
+        : mEngine(engine)
+        , mIndex(index)
+    {
+    }
+
+    ~MiniaudioListener() override
+    {
+    }
+
+    void setPosition(const glm::vec3& position) override
+    {
+        ma_engine_listener_set_position(&mEngine, mIndex, position.x, position.y, position.z);
+    }
+
+    void setOrientation(const glm::vec3& forward, const glm::vec3& up) override
+    {
+        ma_engine_listener_set_direction(&mEngine, mIndex, forward.x, forward.y, forward.z);
+        ma_engine_listener_set_world_up(&mEngine, mIndex, up.x, up.y, up.z);
+    }
+
+    void setVelocity(const glm::vec3& velocity) override
+    {
+        ma_engine_listener_set_velocity(&mEngine, mIndex, velocity.x, velocity.y, velocity.z);
+    }
+
+private:
+    ma_engine& mEngine;
+    unsigned int mIndex;
+};
+
 class MiniaudioDevice : public impl::AudioDevice
 {
 public:
     MiniaudioDevice(ma_context& context, const std::string& deviceName, ma_uint32 listenerCount)
         : mContext(context)
+        , mListeners()
     {
         ma_device_info* pPlaybackDeviceInfos;
         ma_uint32 playbackDeviceCount;
@@ -292,20 +288,28 @@ MiniaudioContext::~MiniaudioContext()
 
 std::string MiniaudioContext::getDefaultDevice()
 {
+    // Create a temporary context
+    ma_context context;
+    if (ma_context_init(nullptr, 0, nullptr, &context) != MA_SUCCESS)
+    {
+        CUBOS_ERROR("Failed to initialize audio context for default device lookup");
+        return "";
+    }
+
     ma_device_info* pPlaybackDeviceInfos;
     ma_uint32 playbackDeviceCount;
 
-    if (ma_context_get_devices(&mContext, &pPlaybackDeviceInfos, &playbackDeviceCount, nullptr, nullptr) != MA_SUCCESS)
+    if (ma_context_get_devices(&context, &pPlaybackDeviceInfos, &playbackDeviceCount, nullptr, nullptr) != MA_SUCCESS)
     {
         CUBOS_ERROR("Failed to enumerate audio devices when searching for default");
         return "";
     }
 
-    ma_context_uninit(&mContext);
+    ma_context_uninit(&context);
 
     for (ma_uint32 i = 0; i < playbackDeviceCount; i++)
     {
-        if (pPlaybackDeviceInfos[i].isDefault != 0u)
+        if (pPlaybackDeviceInfos[i].isDefault)
         {
             return pPlaybackDeviceInfos[i].name;
         }
@@ -324,7 +328,7 @@ void MiniaudioContext::enumerateDevices(std::vector<std::string>& devices)
 
     if (ma_context_get_devices(&mContext, &pPlaybackDeviceInfos, &playbackDeviceCount, nullptr, nullptr) != MA_SUCCESS)
     {
-        CUBOS_ERROR("Failed to enumerate audio devices");
+        CUBOS_ERROR("Failed to enumerate audio devices.");
         return;
     }
 
@@ -348,7 +352,7 @@ Buffer MiniaudioContext::createBuffer(const void* data, size_t dataSize)
     auto buffer = std::make_shared<MiniaudioBuffer>(data, dataSize);
     if (!buffer->isValid())
     {
-        CUBOS_ERROR("Failed to create MiniaudioBuffer");
+        CUBOS_ERROR("Failed to create MiniaudioBuffer.");
         return nullptr;
     }
 
@@ -360,7 +364,7 @@ AudioDevice MiniaudioContext::createDevice(ma_uint32 listenerCount, const std::s
     auto device = std::make_shared<MiniaudioDevice>(mContext, specifier, listenerCount);
     if (!device->isValid())
     {
-        CUBOS_ERROR("Failed to create MiniaudioDevice");
+        CUBOS_ERROR("Failed to create MiniaudioDevice.");
         return nullptr;
     }
 

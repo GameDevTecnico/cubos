@@ -18,7 +18,8 @@ namespace cubos::core::al
         AudioDevice createDevice(unsigned int listenerCount, const std::string& specifier) override;
         Buffer createBuffer(const void* data, size_t dataSize) override;
         void enumerateDevices(std::vector<std::string>& devices) override;
-        std::string getDefaultDevice();
+
+        static std::string getDefaultDevice();
 
     private:
         ma_context mContext;
