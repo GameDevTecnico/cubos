@@ -134,7 +134,10 @@ void QueryFilter::update()
 
     // Update the pin masks with which each node will run.
     mNodePins[0] = 0;
-    for (int i = 1; i < mNodeCount; ++i)
+    // Copy mNodeCount since the compiler thinks it will change. See issue #1351
+    int nodeCount = this->mNodeCount;
+    CUBOS_ASSERT(nodeCount <= QueryNode::MaxCursorCount);
+    for (int i = 1; i < nodeCount; ++i)
     {
         mNodePins[i] = mNodePins[i - 1] | mNodes[i - 1]->pins();
     }
