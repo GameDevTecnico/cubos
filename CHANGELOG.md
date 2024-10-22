@@ -13,8 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Crash in ecs when removing or destroying components with observers (#1348, **@SrGesus**)
-  
+- Crash in ecs when removing or destroying components with observers (#1348, **@SrGesus**).
+- Compiler Error when using -O3 flag (#1351, **@SrGesus**).
+
 ## [v0.4.0] - 2024-10-13
 
 ### Added
