@@ -54,9 +54,8 @@ void cubos::engine::playPauseToolPlugin(Cubos& cubos)
             {
                 state.scale = 1.0F;
             }
-
-            ImGui::End();
         }
+        ImGui::End();
 
         if (!state.paused)
         {
