@@ -1,6 +1,12 @@
-* @RiscadoA @GameDevTecnico/cubos-team
+* @RiscadoA @GameDevTecnico/cubos-wildcard-team
 
-**/engine/collisions/ @fallenatlas @joaomanita @GameDevTecnico/cubos-team
-**/engine/physics/ @fallenatlas @GameDevTecnico/cubos-team
-**/engine/gizmos/ @DiogoMendonc-a @GameDevTecnico/cubos-team
-**/engine/render/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-team
+**/core/gl/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
+**/engine/gizmos/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
+**/engine/render/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
+**/engine/ui/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
+
+**/core/geom/ @RiscadoA @fallenatlas @GameDevTecnico/cubos-physics-team
+**/engine/collisions/ @RiscadoA @fallenatlas @GameDevTecnico/cubos-physics-team
+**/engine/physics/ @RiscadoA @fallenatlas @GameDevTecnico/cubos-physics-team
+
+**/tools/ @RiscadoA @GameDevTecnico/cubos-tools-team
