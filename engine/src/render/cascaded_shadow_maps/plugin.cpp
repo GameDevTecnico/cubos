@@ -3,6 +3,7 @@
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/cascaded_shadow_maps/plugin.hpp>
@@ -26,7 +27,8 @@ void cubos::engine::cascadedShadowMapsPlugin(Cubos& cubos)
 
     cubos.system("create cascaded shadow maps")
         .tagged(createCascadedShadowMapsTag)
-        .call([](const Window& window, Query<DirectionalShadowCaster&> query, Query<Entity, const Camera&> cameras) {
+        .call([](const Window& window, Query<DirectionalShadowCaster&> query,
+                 Query<Entity, const Camera&, const Active&> cameras) {
             for (auto [caster] : query)
             {
                 // Remove shadow maps for cameras that no longer exist
@@ -38,9 +40,9 @@ void cubos::engine::cascadedShadowMapsPlugin(Cubos& cubos)
                         removedCameras.push_back(cameraEntity);
                     }
                 }
-                for (auto [entity, camera] : cameras)
+                for (auto [entity, camera, active] : cameras)
                 {
-                    if (!camera.active && caster.shadowMaps.contains(entity))
+                    if (!active.active && caster.shadowMaps.contains(entity))
                     {
                         removedCameras.push_back(entity);
                     }
@@ -53,9 +55,9 @@ void cubos::engine::cascadedShadowMapsPlugin(Cubos& cubos)
                 caster.updateShadowMaps(window->renderDevice());
 
                 // Create shadow maps for new cameras
-                for (auto [entity, camera] : cameras)
+                for (auto [entity, camera, active] : cameras)
                 {
-                    if (camera.active && !caster.shadowMaps.contains(entity))
+                    if (active.active && !caster.shadowMaps.contains(entity))
                     {
                         caster.shadowMaps[entity] = std::make_shared<DirectionalShadowCaster::ShadowMap>();
                         caster.shadowMaps[entity]->resize(window->renderDevice(), caster.size,

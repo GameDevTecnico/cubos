@@ -3,6 +3,7 @@
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
@@ -211,15 +212,15 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                  Query<const LocalToWorld&, const PointLight&> pointLights,
                  Query<const LocalToWorld&, const SpotLight&, Opt<const SpotShadowCaster&>> spotLights,
                  Query<Entity, const HDR&, const GBuffer&, const SSAO&, DeferredShading&> targets,
-                 Query<Entity, const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
+                 Query<Entity, const LocalToWorld&, const Camera&, const Active&, const DrawsTo&> cameras) {
             auto& rd = window->renderDevice();
 
             for (auto [targetEnt, hdr, gBuffer, ssao, deferredShading] : targets)
             {
                 // Find the cameras that draw to the GBuffer.
-                for (auto [cameraEntity, localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
+                for (auto [cameraEntity, localToWorld, camera, active, drawsTo] : cameras.pin(1, targetEnt))
                 {
-                    if (!camera.active)
+                    if (!active.active)
                     {
                         continue;
                     }

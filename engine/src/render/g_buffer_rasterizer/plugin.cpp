@@ -2,6 +2,8 @@
 #include <cubos/core/reflection/external/uuid.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/active/active.hpp>
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
@@ -145,7 +147,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
         .with<Camera>()
         .related<DrawsTo>()
         .call([](State& state, const Window& window, const RenderMeshPool& pool, const RenderPalette& palette,
-                 Assets& assets, Query<const LocalToWorld&, Camera&, const DrawsTo&> cameras,
+                 Assets& assets, Query<const LocalToWorld&, Camera&, const Active&, const DrawsTo&> cameras,
                  Query<Entity, GBufferRasterizer&, GBuffer&, RenderDepth&, RenderPicker&> targets,
                  Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
@@ -233,10 +235,10 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                 }
 
                 // Find the active cameras for this target.
-                for (auto [cameraLocalToWorld, camera, drawsTo] : cameras.pin(1, ent))
+                for (auto [cameraLocalToWorld, camera, active, drawsTo] : cameras.pin(1, ent))
                 {
                     // Skip inactive cameras.
-                    if (!camera.active)
+                    if (!active.active)
                     {
                         continue;
                     }
