@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow identifying assets in code from their path (#1177. **@GalaxyCrush**).
 - Added an Audio asset (#230, **@Dageus**, **@diogomsmiranda**).
 
+### Changed
+
+- Reduced performance overhead of directional shadow support (#1345, **@tomas7770**).
+
 ### Fixed
 
 - Crash in ecs when removing or destroying components with observers (#1348, **@SrGesus**)
