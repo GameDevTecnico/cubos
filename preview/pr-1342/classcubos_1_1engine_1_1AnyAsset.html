@@ -57,6 +57,7 @@
               Reference
               <ul>
                 <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
@@ -89,6 +90,17 @@
               class <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>
             </dt>
             <dd>Handle to an asset of a specific type.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a5a2888e2033939d6602e378278a6ea12">
+              <span class="m-doc-wrap-bumper">enum class <a href="#a5a2888e2033939d6602e378278a6ea12" class="m-doc-self">IdType</a> { </span><span class="m-doc-wrap"><a href="#a5a2888e2033939d6602e378278a6ea12a5a54d9ad87f7c4c1c70c8f05b9515d5a" class="m-doc">UUID</a>,
+              <a href="#a5a2888e2033939d6602e378278a6ea12aac70412e939d72a9234cdebb1af5867b" class="m-doc">Path</a>,
+              <a href="#a5a2888e2033939d6602e378278a6ea12a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> }</span>
+            </dt>
+            <dd>Type of the asset identifier.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -141,9 +153,17 @@
             </dt>
             <dd>Gets the version of the asset last seen by this handle.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a71d67a1ee37c73927a94e1f2a88aee24" class="m-doc">getId</a>(</span><span class="m-doc-wrap">) const -&gt; uuids::uuid</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a78a8a0d60d7d0b756e6f2df56bee626a" class="m-doc">getIdType</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1engine_1_1AnyAsset.html#a5a2888e2033939d6602e378278a6ea12" class="m-doc">IdType</a></span>
             </dt>
-            <dd>Gets the UUID of the asset.</dd>
+            <dd>Gets the type of the asset identifier.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a01bd252f49fc957785414d26af158714" class="m-doc">getIdString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd>Gets the Path or UUID of the asset.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a143d2628d7e5e2ef35ac3e8a8eb530bb" class="m-doc">getId</a>(</span><span class="m-doc-wrap">) const -&gt; std::optional&lt;uuids::uuid&gt;</span>
+            </dt>
+            <dd>Gets the UUID of the asset if it has one.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a71be11e482301a872a0d9f51478f4334" class="m-doc">isNull</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
@@ -161,10 +181,10 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a54deb5d54d93771b55493890d40dc061">
-              uuids::uuid <a href="#a54deb5d54d93771b55493890d40dc061" class="m-doc-self">reflectedId</a>
+            <dt id="a8c7363d88f8024428b825d06ab399569">
+              std::string <a href="#a8c7363d88f8024428b825d06ab399569" class="m-doc-self">pathOrId</a>
             </dt>
-            <dd>Avoid using this field, use <a href="classcubos_1_1engine_1_1AnyAsset.html#a71d67a1ee37c73927a94e1f2a88aee24" class="m-doc">getId()</a> instead.</dd>
+            <dd>Avoid using this field, use <a href="classcubos_1_1engine_1_1AnyAsset.html#a143d2628d7e5e2ef35ac3e8a8eb530bb" class="m-doc">getId()</a> instead.</dd>
           </dl>
         </section>
         <section id="pro-static-methods">
@@ -343,11 +363,39 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a71d67a1ee37c73927a94e1f2a88aee24"><div>
+          <section class="m-doc-details" id="a78a8a0d60d7d0b756e6f2df56bee626a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">uuids::uuid cubos::<wbr />engine::<wbr />AnyAsset::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71d67a1ee37c73927a94e1f2a88aee24" class="m-doc-self">getId</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1AnyAsset.html#a5a2888e2033939d6602e378278a6ea12" class="m-doc">IdType</a> cubos::<wbr />engine::<wbr />AnyAsset::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a78a8a0d60d7d0b756e6f2df56bee626a" class="m-doc-self">getIdType</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Gets the UUID of the asset.</p>
+            <p>Gets the type of the asset identifier.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> identifier type.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a01bd252f49fc957785414d26af158714"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />engine::<wbr />AnyAsset::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a01bd252f49fc957785414d26af158714" class="m-doc-self">getIdString</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the Path or UUID of the asset.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> Path or UUID.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a143d2628d7e5e2ef35ac3e8a8eb530bb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::optional&lt;uuids::uuid&gt; cubos::<wbr />engine::<wbr />AnyAsset::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a143d2628d7e5e2ef35ac3e8a8eb530bb" class="m-doc-self">getId</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the UUID of the asset if it has one.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -356,6 +404,7 @@
                 </tr>
               </tfoot>
             </table>
+<p>There are two possible reasons for an asset handle to have no UUID:</p><ul><li>it being an invalid or null handle;</li><li>it being created from an asset path.</li></ul><p>To ensure an asset handle gets a UUID, you can use <a href="classcubos_1_1engine_1_1Assets.html#ae36fcf1fb1a44c37a404c3aab43a5c4b" class="m-doc">Assets::<wbr />load</a>.</p>
           </div></section>
           <section class="m-doc-details" id="a71be11e482301a872a0d9f51478f4334"><div>
             <h3>
