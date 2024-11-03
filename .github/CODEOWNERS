@@ -4,6 +4,8 @@
 **/engine/gizmos/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
 **/engine/render/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
 **/engine/ui/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
+**/engine/assets/render/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
+**/engine/assets/ui/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
 
 **/core/geom/ @RiscadoA @fallenatlas @GameDevTecnico/cubos-physics-team
 **/engine/collisions/ @RiscadoA @fallenatlas @GameDevTecnico/cubos-physics-team
