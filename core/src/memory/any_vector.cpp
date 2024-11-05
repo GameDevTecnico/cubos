@@ -227,11 +227,12 @@ void AnyVector::swapMove(std::size_t index, void* destination)
     CUBOS_ASSERT(index < mSize, "Index must be less than size");
 
     mConstructibleTrait->moveConstruct(destination, static_cast<char*>(mData) + mStride * index);
-    mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * index);
 
     if (index + 1 != mSize)
     {
         // If the element isn't the last one, we move the last element to its place.
+        // We must also destruct the element in the removed position before constructing the new one on top.
+        mConstructibleTrait->destruct(static_cast<char*>(mData) + mStride * index);
         mConstructibleTrait->moveConstruct(static_cast<char*>(mData) + mStride * index,
                                            static_cast<char*>(mData) + mStride * (mSize - 1));
     }
