@@ -104,6 +104,23 @@
             },
             "cubos::engine::SpotShadowCaster": {}
         },
+        "point1": {
+            "cubos::engine::PointLight": {
+                "color": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "intensity": 1.0,
+                "range": 50.0
+            },
+            "cubos::engine::Position": {
+                "x": 0.0,
+                "y": -2.0,
+                "z": -18.0
+            },
+            "cubos::engine::PointShadowCaster": {}
+        },
         "sun": {
             "cubos::engine::DirectionalLight": {
                 "color": {
