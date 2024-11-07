@@ -20,6 +20,9 @@ namespace cubos::engine
         /// @brief Framebuffer used by the rasterizer to render to the ShadowAtlas.
         core::gl::Framebuffer framebuffer{nullptr};
 
+        /// @brief Framebuffer used by the rasterizer to render to the cube ShadowAtlas.
+        core::gl::Framebuffer cubeFramebuffer{nullptr};
+
         /// @brief Atlas texture in the current framebuffer.
         core::gl::Texture2D atlas{nullptr};
     };
