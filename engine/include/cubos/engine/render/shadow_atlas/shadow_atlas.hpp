@@ -41,8 +41,11 @@ namespace cubos::engine
         /// @brief Whether the shadow atlas texture has already been cleared this frame.
         bool cleared = false;
 
-        /// @brief Stores shadow maps for each shadow caster component.
+        /// @brief Stores shadow maps for each spot shadow caster component.
         core::gl::Texture2D atlas{nullptr};
+
+        /// @brief Stores shadow maps for each point shadow caster component.
+        core::gl::Texture2DArray cubeAtlas{nullptr};
 
         /// @brief Slot for a shadow map in the shadow atlas.
         struct Slot
@@ -64,6 +67,10 @@ namespace cubos::engine
         /// @brief Stores the sizes, offsets, and caster ids of the shadow maps
         /// in the atlas.
         std::vector<std::shared_ptr<Slot>> slots;
+
+        /// @brief Stores the sizes, offsets, and caster ids of the shadow maps
+        /// in the cube atlas.
+        std::vector<std::shared_ptr<Slot>> cubeSlots;
 
         /// @brief Maps shadow caster ids to their corresponding slots.
         std::map<int, std::shared_ptr<Slot>> slotsMap;

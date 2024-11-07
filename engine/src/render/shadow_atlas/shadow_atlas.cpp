@@ -4,6 +4,7 @@
 
 #include <cubos/engine/render/shadow_atlas/shadow_atlas.hpp>
 
+using cubos::core::gl::Texture2DArrayDesc;
 using cubos::core::gl::Texture2DDesc;
 using cubos::core::gl::TextureFormat;
 using cubos::core::gl::Usage;
@@ -25,7 +26,7 @@ void cubos::engine::ShadowAtlas::resize(cubos::core::gl::RenderDevice& rd)
 {
     mSize = configSize;
 
-    // Prepare common texture description.
+    // Prepare texture description.
     Texture2DDesc desc{};
     desc.width = mSize.x;
     desc.height = mSize.y;
@@ -34,4 +35,15 @@ void cubos::engine::ShadowAtlas::resize(cubos::core::gl::RenderDevice& rd)
     // Create shadow atlas texture.
     desc.format = TextureFormat::Depth32;
     atlas = rd.createTexture2D(desc);
+
+    // Prepare texture array description.
+    Texture2DArrayDesc cubeDesc{};
+    cubeDesc.width = mSize.x;
+    cubeDesc.height = mSize.y;
+    cubeDesc.size = 6;
+    cubeDesc.usage = Usage::Dynamic;
+
+    // Create shadow cube atlas texture.
+    cubeDesc.format = TextureFormat::Depth32;
+    cubeAtlas = rd.createTexture2DArray(cubeDesc);
 }

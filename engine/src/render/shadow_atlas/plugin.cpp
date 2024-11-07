@@ -3,15 +3,70 @@
 
 #include <cubos/engine/render/shadow_atlas/plugin.hpp>
 #include <cubos/engine/render/shadow_atlas/shadow_atlas.hpp>
+#include <cubos/engine/render/shadows/caster.hpp>
 #include <cubos/engine/render/shadows/plugin.hpp>
+#include <cubos/engine/render/shadows/point_caster.hpp>
 #include <cubos/engine/render/shadows/spot_caster.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 using cubos::core::io::Window;
 
+using cubos::engine::ShadowAtlas;
+using cubos::engine::ShadowCaster;
+
 CUBOS_DEFINE_TAG(cubos::engine::createShadowAtlasTag);
 CUBOS_DEFINE_TAG(cubos::engine::reserveShadowCastersTag);
 CUBOS_DEFINE_TAG(cubos::engine::drawToShadowAtlasTag);
+
+static void reserveCasterSlot(std::vector<std::shared_ptr<ShadowAtlas::Slot>>& slots,
+                              std::map<int, std::shared_ptr<ShadowAtlas::Slot>>& slotsMap,
+                              ShadowCaster& casterBaseSettings, int& id)
+{
+    bool foundSlot = false;
+    casterBaseSettings.id = id++;
+    for (const auto& slot : slots)
+    {
+        if (slot->casterId == -1)
+        {
+            slot->casterId = casterBaseSettings.id;
+            slotsMap[casterBaseSettings.id] = slot;
+            foundSlot = true;
+            break;
+        }
+    }
+    if (!foundSlot)
+    {
+        // Subdivide largest slot, which is always the first
+        auto oldSlot = slots.at(0);
+        auto newSize = oldSlot->size / glm::vec2(2.0F);
+
+        slots.erase(slots.begin());
+        oldSlot->size = newSize;
+        slots.push_back(oldSlot);
+
+        for (int i = 1; i < 4; i++)
+        {
+            // Intentional truncation of (i / 2) so that the result is always 0.0 or 1.0
+            // NOLINTBEGIN(bugprone-integer-division)
+            auto newOffset = oldSlot->offset +
+                             glm::vec2(newSize.x * static_cast<float>(i % 2), newSize.y * static_cast<float>(i / 2));
+            // NOLINTEND(bugprone-integer-division)
+            auto newSlot = std::make_shared<ShadowAtlas::Slot>(newSize, newOffset, -1);
+            slots.push_back(newSlot);
+        }
+
+        // Re-attempt
+        for (const auto& slot : slots)
+        {
+            if (slot->casterId == -1)
+            {
+                slot->casterId = casterBaseSettings.id;
+                slotsMap[casterBaseSettings.id] = slot;
+                break;
+            }
+        }
+    }
+}
 
 void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
 {
@@ -38,60 +93,25 @@ void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
 
     cubos.system("reserve space for shadow casters")
         .tagged(reserveShadowCastersTag)
-        .call([](ShadowAtlas& atlas, Query<SpotShadowCaster&> casters) {
+        .call([](ShadowAtlas& atlas, Query<SpotShadowCaster&> spotCasters, Query<PointShadowCaster&> pointCasters) {
             atlas.slots.clear();
+            atlas.cubeSlots.clear();
             atlas.slotsMap.clear();
             atlas.slots.push_back(
+                std::make_shared<ShadowAtlas::Slot>(glm::vec2(1.0F, 1.0F), glm::vec2(0.0F, 0.0F), -1));
+            atlas.cubeSlots.push_back(
                 std::make_shared<ShadowAtlas::Slot>(glm::vec2(1.0F, 1.0F), glm::vec2(0.0F, 0.0F), -1));
 
             int id = 1;
 
-            for (auto [caster] : casters)
+            for (auto [caster] : spotCasters)
             {
-                bool foundSlot = false;
-                caster.baseSettings.id = id++;
-                for (const auto& slot : atlas.slots)
-                {
-                    if (slot->casterId == -1)
-                    {
-                        slot->casterId = caster.baseSettings.id;
-                        atlas.slotsMap[caster.baseSettings.id] = slot;
-                        foundSlot = true;
-                        break;
-                    }
-                }
-                if (!foundSlot)
-                {
-                    // Subdivide largest slot, which is always the first
-                    auto oldSlot = atlas.slots.at(0);
-                    auto newSize = oldSlot->size / glm::vec2(2.0F);
+                reserveCasterSlot(atlas.slots, atlas.slotsMap, caster.baseSettings, id);
+            }
 
-                    atlas.slots.erase(atlas.slots.begin());
-                    oldSlot->size = newSize;
-                    atlas.slots.push_back(oldSlot);
-
-                    for (int i = 1; i < 4; i++)
-                    {
-                        // Intentional truncation of (i / 2) so that the result is always 0.0 or 1.0
-                        // NOLINTBEGIN(bugprone-integer-division)
-                        auto newOffset = oldSlot->offset + glm::vec2(newSize.x * static_cast<float>(i % 2),
-                                                                     newSize.y * static_cast<float>(i / 2));
-                        // NOLINTEND(bugprone-integer-division)
-                        auto newSlot = std::make_shared<ShadowAtlas::Slot>(newSize, newOffset, -1);
-                        atlas.slots.push_back(newSlot);
-                    }
-
-                    // Re-attempt
-                    for (const auto& slot : atlas.slots)
-                    {
-                        if (slot->casterId == -1)
-                        {
-                            slot->casterId = caster.baseSettings.id;
-                            atlas.slotsMap[caster.baseSettings.id] = slot;
-                            break;
-                        }
-                    }
-                }
+            for (auto [caster] : pointCasters)
+            {
+                reserveCasterSlot(atlas.cubeSlots, atlas.slotsMap, caster.baseSettings, id);
             }
         });
 }
