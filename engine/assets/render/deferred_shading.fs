@@ -7,6 +7,7 @@ uniform sampler2D normalTexture;
 uniform sampler2D albedoTexture;
 uniform sampler2D ssaoTexture;
 uniform sampler2D shadowAtlasTexture;
+uniform sampler2DArray shadowCubeAtlasTexture;
 
 uniform sampler2DArray directionalShadowMap; // only one directional light with shadows is supported, for now
 
@@ -32,8 +33,14 @@ struct PointLight
 {
     vec4 position;
     vec4 color;
+    mat4 matrices[6];
     float intensity;
     float range;
+    float shadowBias;
+    float shadowBlurRadius;
+    vec2 shadowMapOffset;
+    vec2 shadowMapSize;
+    float normalOffsetScale;
 };
 
 struct SpotLight
@@ -212,12 +219,77 @@ vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI, bool drawS
 vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
 {
     vec3 toLight = vec3(pointLights[lightI].position) - fragPos;
+    // Shadows
+    float shadow = 0.0;
+    if (pointLights[lightI].shadowMapSize.x > 0.0)
+    {
+        // Select cube face
+        int face = 0;
+        float rx = -toLight.x;
+        float ry = -toLight.y;
+        float rz = -toLight.z;
+        if (abs(rz) >= abs(rx) && abs(rz) >= abs(ry))
+        {
+            if (rz <= 0) // z-
+                face = 0;
+            else // z+
+                face = 1;
+        }
+        else if (abs(rx) >= abs(ry) && abs(rx) >= abs(rz))
+        {
+            if (rx <= 0) // x-
+                face = 2;
+            else // x+
+                face = 3;
+        }
+        else if (abs(ry) >= abs(rx) && abs(ry) >= abs(rz))
+        {
+            if (ry <= 0) // y-
+                face = 5;
+            else // y+
+                face = 4;
+        }
+
+        float normalOffsetScale = pointLights[lightI].normalOffsetScale;
+        vec3 offsetFragPos = normalOffsetScale > 0.0 ? applyNormalOffset(fragNormal, toLight, fragPos, normalOffsetScale) : fragPos;
+        vec4 positionLightSpace = pointLights[lightI].matrices[face] * vec4(offsetFragPos, 1.0);
+        vec3 projCoords = positionLightSpace.xyz / positionLightSpace.w;
+        projCoords = projCoords * 0.5 + 0.5;
+        vec2 uv = projCoords.xy * pointLights[lightI].shadowMapSize + pointLights[lightI].shadowMapOffset;
+        float currentDepth = projCoords.z;
+        float bias = pointLights[lightI].shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
+        // PCF
+        if (pointLights[lightI].shadowBlurRadius <= 0.001f)
+        {
+            float pcfDepth = texture(shadowCubeAtlasTexture, vec3(uv.xy, face)).r;
+            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+        }
+        else
+        {
+            vec2 texelSize = vec2(1.0 / 1024.0); // largely arbitrary value, affects blur size
+            for(int xi = -1; xi <= 1; xi++)
+            {
+                for(int yi = -1; yi <= 1; yi++)
+                {
+                    float x = pointLights[lightI].shadowBlurRadius*float(xi);
+                    float y = pointLights[lightI].shadowBlurRadius*float(yi);
+                    vec2 newUv = uv + vec2(x, y) * texelSize;
+                    float pcfDepth = texture(shadowCubeAtlasTexture, vec3(newUv.xy, face)).r;
+                    shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+                }
+            }
+            shadow /= 9.0;
+        }
+    }
+
+    // Lighting
     float r = length(toLight) / pointLights[lightI].range;
     if (r < 1)
     {
         float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
         float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0);
-        return attenuation * diffuse * pointLights[lightI].intensity * vec3(pointLights[lightI].color);
+        return attenuation * diffuse * (1.0 - shadow) * pointLights[lightI].intensity
+            * vec3(pointLights[lightI].color);
     }
     return vec3(0);
 }

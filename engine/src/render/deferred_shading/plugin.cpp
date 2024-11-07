@@ -23,6 +23,7 @@
 #include <cubos/engine/render/shadow_atlas/shadow_atlas.hpp>
 #include <cubos/engine/render/shadows/directional_caster.hpp>
 #include <cubos/engine/render/shadows/plugin.hpp>
+#include <cubos/engine/render/shadows/point_caster.hpp>
 #include <cubos/engine/render/shadows/spot_caster.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/ssao/ssao.hpp>
@@ -68,9 +69,15 @@ namespace
     {
         glm::vec4 position;
         glm::vec4 color;
+        glm::mat4 matrices[6];
         float intensity;
         float range;
-        float padding[2];
+        float shadowBias;
+        float shadowBlurRadius;
+        glm::vec2 shadowMapOffset;
+        glm::vec2 shadowMapSize;
+        float normalOffsetScale;
+        float padding[3];
     };
 
     struct PerSpotLight
@@ -120,6 +127,7 @@ namespace
         ShaderBindingPoint albedoBP;
         ShaderBindingPoint ssaoBP;
         ShaderBindingPoint shadowAtlasBP;
+        ShaderBindingPoint shadowCubeAtlasBP;
         ShaderBindingPoint directionalShadowMapBP;
         ShaderBindingPoint perSceneBP;
         ShaderBindingPoint viewportOffsetBP;
@@ -138,14 +146,15 @@ namespace
             albedoBP = pipeline->getBindingPoint("albedoTexture");
             ssaoBP = pipeline->getBindingPoint("ssaoTexture");
             shadowAtlasBP = pipeline->getBindingPoint("shadowAtlasTexture");
+            shadowCubeAtlasBP = pipeline->getBindingPoint("shadowCubeAtlasTexture");
             directionalShadowMapBP = pipeline->getBindingPoint("directionalShadowMap");
             perSceneBP = pipeline->getBindingPoint("PerScene");
             viewportOffsetBP = pipeline->getBindingPoint("viewportOffset");
             viewportSizeBP = pipeline->getBindingPoint("viewportSize");
-            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && shadowAtlasBP && directionalShadowMapBP &&
-                             perSceneBP && viewportOffsetBP && viewportSizeBP,
-                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, shadowAtlasTexture, "
-                         "directionalShadowMap, PerScene, "
+            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && shadowAtlasBP && shadowCubeAtlasBP &&
+                             directionalShadowMapBP && perSceneBP && viewportOffsetBP && viewportSizeBP,
+                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, shadowAtlasTexture"
+                         "shadowCubeAtlasTexture, directionalShadowMap, PerScene, "
                          "viewportOffset and "
                          "viewportSize binding points must exist");
 
@@ -210,7 +219,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                  const ShadowAtlas& shadowAtlas,
                  Query<const LocalToWorld&, const DirectionalLight&, Opt<const DirectionalShadowCaster&>>
                      directionalLights,
-                 Query<const LocalToWorld&, const PointLight&> pointLights,
+                 Query<const LocalToWorld&, const PointLight&, Opt<const PointShadowCaster&>> pointLights,
                  Query<const LocalToWorld&, const SpotLight&, Opt<const SpotShadowCaster&>> spotLights,
                  Query<Entity, const HDR&, const GBuffer&, const SSAO&, DeferredShading&> targets,
                  Query<Entity, const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
@@ -340,13 +349,81 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         directionalLightIndex++;
                     }
 
-                    for (auto [lightLocalToWorld, light] : pointLights)
+                    for (auto [lightLocalToWorld, light, caster] : pointLights)
                     {
                         auto& perLight = perScene.pointLights[perScene.numPointLights++];
                         perLight.position = lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
                         perLight.color = glm::vec4(light.color, 1.0F);
                         perLight.intensity = light.intensity;
                         perLight.range = light.range;
+
+                        if (caster.contains())
+                        {
+                            // Get light viewport
+                            auto slot = shadowAtlas.slotsMap.at(caster.value().baseSettings.id);
+
+                            auto lightProj = glm::perspective(glm::radians(90.0F),
+                                                              (float(shadowAtlas.getSize().x) * slot->size.x) /
+                                                                  (float(shadowAtlas.getSize().y) * slot->size.y),
+                                                              0.1F, light.range);
+
+                            for (int i = 0; i < 6; i++)
+                            {
+                                glm::mat4 lightView;
+                                switch (i)
+                                {
+                                case 0:
+                                    lightView = glm::inverse(glm::scale(
+                                        lightLocalToWorld.mat, glm::vec3(1.0F / lightLocalToWorld.worldScale())));
+                                    break;
+                                case 1:
+                                    lightView =
+                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F),
+                                                                            glm::vec3(0.0F, 1.0F, 0.0F)),
+                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
+                                    break;
+                                case 2:
+                                    lightView =
+                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(90.0F),
+                                                                            glm::vec3(0.0F, 1.0F, 0.0F)),
+                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
+                                    break;
+                                case 3:
+                                    lightView =
+                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(-90.0F),
+                                                                            glm::vec3(0.0F, 1.0F, 0.0F)),
+                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
+                                    break;
+                                case 4:
+                                    lightView =
+                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(90.0F),
+                                                                            glm::vec3(1.0F, 0.0F, 0.0F)),
+                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
+                                    break;
+                                case 5:
+                                    lightView =
+                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(-90.0F),
+                                                                            glm::vec3(1.0F, 0.0F, 0.0F)),
+                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
+                                    break;
+                                default:
+                                    lightView = glm::inverse(glm::scale(
+                                        lightLocalToWorld.mat, glm::vec3(1.0F / lightLocalToWorld.worldScale())));
+                                    break;
+                                }
+
+                                perLight.matrices[i] = lightProj * lightView;
+                            }
+                            perLight.shadowMapOffset = slot->offset;
+                            perLight.shadowMapSize = slot->size;
+                            perLight.shadowBias = caster.value().baseSettings.bias;
+                            perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
+                            perLight.normalOffsetScale = caster.value().baseSettings.normalOffsetScale;
+                        }
+                        else
+                        {
+                            perLight.shadowMapSize = glm::vec2(0.0F, 0.0F);
+                        }
                     }
 
                     for (auto [lightLocalToWorld, light, caster] : spotLights)
@@ -407,6 +484,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.albedoBP->bind(gBuffer.albedo);
                     state.ssaoBP->bind(ssao.blurTexture);
                     state.shadowAtlasBP->bind(shadowAtlas.atlas);
+                    state.shadowCubeAtlasBP->bind(shadowAtlas.cubeAtlas);
                     // directionalShadowMap needs to be bound even if it's null, or else errors may occur on some GPUs
                     state.directionalShadowMapBP->bind(directionalShadowMap);
                     state.directionalShadowMapBP->bind(state.directionalShadowSampler);
