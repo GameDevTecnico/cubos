@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the option to use Shadow Normal Offset Bias algorithm (#1308, **@GalaxyCrush**)
 - UI text element using MSDF for text rendering (#1300, **@mkuritsu**).
 - Added anti-aliasing using FXAA technique (#1334, **@kuukitenshi**).
+- Point light shadows (#1188, **@tomas7770**).
 
 ### Changed
 
