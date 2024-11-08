@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::AudioBridge class | Cubos Docs</title>
+  <title>cubos::core::thread::Process class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,123 +46,148 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>AudioBridge <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio_2bridge_8hpp.html">&lt;engine/audio/bridge.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1thread.html">thread</a>::<wbr/></span>Process <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="process_8hpp.html">&lt;core/thread/process.hpp&gt;</a></div>
         </h1>
-        <p>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">Audio</a> assets.</p>
+        <p>Provides a cross-platform way to spawn child processes.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pro-methods">Protected functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Uses the default supported file formats from miniaudio.h, which are WAV, FLAC, and MP3.</p>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a>
-            </dt>
-            <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
-          </dl>
-        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a1c6eef3356c99f4d1110463424a3bd53">
-              <span class="m-doc-wrap-bumper"><a href="#a1c6eef3356c99f4d1110463424a3bd53" class="m-doc-self">AudioBridge</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1AudioContext.html" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />AudioContext</a>&gt; context)</span>
+            <dt id="a36f62149e78b7c57ffe8aa68f11f6581">
+              <span class="m-doc-wrap-bumper"><a href="#a36f62149e78b7c57ffe8aa68f11f6581" class="m-doc-self">Process</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
-            <dd>Constructs a bridge.</dd>
+            <dd>Default constructor.</dd>
+            <dt id="ac801aef4253f09ac645fbf649c3511d8">
+              <span class="m-doc-wrap-bumper"><a href="#ac801aef4253f09ac645fbf649c3511d8" class="m-doc-self">Process</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1thread_1_1Process.html" class="m-doc">Process</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructor.</dd>
           </dl>
         </section>
-        <section id="pro-methods">
-          <h2><a href="#pro-methods">Protected functions</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af155e85c72b21a0657da2448da3ed9e7" class="m-doc">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            <dt id="a95122417ea9963227f98d42c2bb80b68">
+              <span class="m-doc-wrap-bumper">auto <a href="#a95122417ea9963227f98d42c2bb80b68" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1thread_1_1Process.html" class="m-doc">Process</a>&amp;&amp; other) -&gt; <a href="classcubos_1_1core_1_1thread_1_1Process.html" class="m-doc">Process</a>&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Loads an asset from a file stream.</dd>
+            <dd>Move assignment operator.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad0e88f5de2e2c6e4d313e8d4f8b32937" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af20431a294ea1954a09d1ae05a1dde54" class="m-doc">start</a>(</span><span class="m-doc-wrap">const std::string&amp; command,
+              const std::vector&lt;std::string&gt;&amp; args = {},
+              const std::string&amp; cwd = &quot;&quot;) -&gt; bool</span>
             </dt>
-            <dd>Saves an asset to a file stream.</dd>
+            <dd>Starts a new process.</dd>
+            <dt id="acc01edb0d04f079941496145efb1be25">
+              <span class="m-doc-wrap-bumper">void <a href="#acc01edb0d04f079941496145efb1be25" class="m-doc-self">kill</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Kills the process.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0f49fe9f2c9e97412b82f238c0befcf8" class="m-doc">wait</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Waits for the process to finish.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8d9eeff8626706d9b827ad0e646ec05d" class="m-doc">wait</a>(</span><span class="m-doc-wrap">int&amp; status) -&gt; bool</span>
+            </dt>
+            <dd>Waits for the process to finish.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6e1a7a1bdce62933deffa32671a4e9f7" class="m-doc">started</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Checks whether the process has been started.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="af155e85c72b21a0657da2448da3ed9e7"><div>
+          <section class="m-doc-details" id="af20431a294ea1954a09d1ae05a1dde54"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />AudioBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af155e85c72b21a0657da2448da3ed9e7" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />thread::<wbr />Process::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af20431a294ea1954a09d1ae05a1dde54" class="m-doc-self">start</a>(</span><span class="m-doc-wrap">const std::string&amp; command,
+              const std::vector&lt;std::string&gt;&amp; args = {},
+              const std::string&amp; cwd = &quot;&quot;)</span></span>
             </h3>
-            <p>Loads an asset from a file stream.</p>
+            <p>Starts a new process.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">assets</td>
-                  <td>Manager to write into.</td>
+                  <td style="width: 1%">command</td>
+                  <td>Command to execute.</td>
                 </tr>
                 <tr>
-                  <td>handle</td>
-                  <td>Handle of the asset being loaded.</td>
+                  <td>args</td>
+                  <td>Arguments to pass to the command.</td>
                 </tr>
                 <tr>
-                  <td>stream</td>
-                  <td>File stream.</td>
+                  <td>cwd</td>
+                  <td>Working directory for the new process.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the asset was successfully loaded.</td>
+                  <td>Whether the process was started successfully.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad0e88f5de2e2c6e4d313e8d4f8b32937"><div>
+          <section class="m-doc-details" id="a0f49fe9f2c9e97412b82f238c0befcf8"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />AudioBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0e88f5de2e2c6e4d313e8d4f8b32937" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />thread::<wbr />Process::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f49fe9f2c9e97412b82f238c0befcf8" class="m-doc-self">wait</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Saves an asset to a file stream.</p>
+            <p>Waits for the process to finish.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the process exited normally.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8d9eeff8626706d9b827ad0e646ec05d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />thread::<wbr />Process::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d9eeff8626706d9b827ad0e646ec05d" class="m-doc-self">wait</a>(</span><span class="m-doc-wrap">int&amp; status)</span></span>
+            </h3>
+            <p>Waits for the process to finish.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">assets</td>
-                  <td>Manager to read from.</td>
-                </tr>
-                <tr>
-                  <td>handle</td>
-                  <td>Handle of the asset being saved.</td>
-                </tr>
-                <tr>
-                  <td>stream</td>
-                  <td>File stream.</td>
+                  <td style="width: 1%">status</td>
+                  <td>Exit code of the process, if it exited normally.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the asset was successfully saved.</td>
+                  <td>Whether the process exited normally.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6e1a7a1bdce62933deffa32671a4e9f7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />thread::<wbr />Process::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6e1a7a1bdce62933deffa32671a4e9f7" class="m-doc-self">started</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Checks whether the process has been started.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the process has been started.</td>
                 </tr>
               </tfoot>
             </table>

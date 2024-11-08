@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::AudioBridge class | Cubos Docs</title>
+  <title>tesseratos::ProjectManager class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,126 +46,145 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>AudioBridge <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio_2bridge_8hpp.html">&lt;engine/audio/bridge.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacetesseratos.html">tesseratos</a>::<wbr/></span>ProjectManager <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="manager_8hpp.html">&lt;tesseratos/project/manager.hpp&gt;</a></div>
         </h1>
-        <p>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">Audio</a> assets.</p>
+        <p>System argument which can be used to manage the currently loaded project.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pro-methods">Protected functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Uses the default supported file formats from miniaudio.h, which are WAV, FLAC, and MP3.</p>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a>
-            </dt>
-            <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
-          </dl>
-        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="a1c6eef3356c99f4d1110463424a3bd53">
-              <span class="m-doc-wrap-bumper"><a href="#a1c6eef3356c99f4d1110463424a3bd53" class="m-doc-self">AudioBridge</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1AudioContext.html" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />AudioContext</a>&gt; context)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aa7639059c5298e14c19f12990366a174" class="m-doc">ProjectManager</a>(</span><span class="m-doc-wrap"><a href="classtesseratos_1_1ProjectManager_1_1State.html" class="m-doc">State</a>&amp; state,
+              <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&amp; assets,
+              <a href="classtesseratos_1_1Debugger.html" class="m-doc">Debugger</a>&amp; debugger)</span>
             </dt>
-            <dd>Constructs a bridge.</dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
-        <section id="pro-methods">
-          <h2><a href="#pro-methods">Protected functions</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af155e85c72b21a0657da2448da3ed9e7" class="m-doc">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a121efa724f570a9d32d95c31d87fa7ef" class="m-doc">open</a>(</span><span class="m-doc-wrap">std::string projectOSPath,
+              std::string binaryOSPath) -&gt; bool</span>
             </dt>
-            <dd>Loads an asset from a file stream.</dd>
+            <dd>Opens a project directory.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad0e88f5de2e2c6e4d313e8d4f8b32937" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3c2c048dbc34534c653e31f0efd1147c" class="m-doc">open</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
-            <dd>Saves an asset to a file stream.</dd>
+            <dd>Checks whether a project is currently open.</dd>
+            <dt id="a0d99541a42c99a406f9a7a84c6034711">
+              <span class="m-doc-wrap-bumper">void <a href="#a0d99541a42c99a406f9a7a84c6034711" class="m-doc-self">close</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Closes the currently open project.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5afeabc2dd6a069d2c7f17dbeb6e0059" class="m-doc">launch</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Launches the project&#x27;s binary and attaches the debugger.</dd>
+            <dt id="a48213bd53700f4c86a902ddfa8d68c13">
+              <span class="m-doc-wrap-bumper">void <a href="#a48213bd53700f4c86a902ddfa8d68c13" class="m-doc-self">terminate</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Stops the project&#x27;s binary.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="af155e85c72b21a0657da2448da3ed9e7"><div>
+          <section class="m-doc-details" id="aa7639059c5298e14c19f12990366a174"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />AudioBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af155e85c72b21a0657da2448da3ed9e7" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+              <span class="m-doc-wrap-bumper"> tesseratos::<wbr />ProjectManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa7639059c5298e14c19f12990366a174" class="m-doc-self">ProjectManager</a>(</span><span class="m-doc-wrap"><a href="classtesseratos_1_1ProjectManager_1_1State.html" class="m-doc">State</a>&amp; state,
+              <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&amp; assets,
+              <a href="classtesseratos_1_1Debugger.html" class="m-doc">Debugger</a>&amp; debugger)</span></span>
             </h3>
-            <p>Loads an asset from a file stream.</p>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">assets</td>
-                  <td>Manager to write into.</td>
+                  <td style="width: 1%">state</td>
+                  <td><a href="classtesseratos_1_1ProjectManager_1_1State.html" class="m-doc">State</a> of the project manager.</td>
                 </tr>
                 <tr>
-                  <td>handle</td>
-                  <td>Handle of the asset being loaded.</td>
+                  <td>assets</td>
+                  <td>Asset manager.</td>
                 </tr>
                 <tr>
-                  <td>stream</td>
-                  <td>File stream.</td>
+                  <td>debugger</td>
+                  <td><a href="classtesseratos_1_1Debugger.html" class="m-doc">Debugger</a>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a121efa724f570a9d32d95c31d87fa7ef"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr />ProjectManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a121efa724f570a9d32d95c31d87fa7ef" class="m-doc-self">open</a>(</span><span class="m-doc-wrap">std::string projectOSPath,
+              std::string binaryOSPath)</span></span>
+            </h3>
+            <p>Opens a project directory.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">projectOSPath</td>
+                  <td>Project&#x27;s directory path in the operating system.</td>
+                </tr>
+                <tr>
+                  <td>binaryOSPath</td>
+                  <td>Project&#x27;s binary directory path in the operating system.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the asset was successfully loaded.</td>
+                  <td>Whether the project could be opened successfully.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The given project directory is mounted in the /project directory in the virtual file system. Unmounts any previously opened project directory.</p>
+          </div></section>
+          <section class="m-doc-details" id="a3c2c048dbc34534c653e31f0efd1147c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr />ProjectManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3c2c048dbc34534c653e31f0efd1147c" class="m-doc-self">open</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Checks whether a project is currently open.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether a project is currently open.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad0e88f5de2e2c6e4d313e8d4f8b32937"><div>
+          <section class="m-doc-details" id="a5afeabc2dd6a069d2c7f17dbeb6e0059"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />AudioBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0e88f5de2e2c6e4d313e8d4f8b32937" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr />ProjectManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5afeabc2dd6a069d2c7f17dbeb6e0059" class="m-doc-self">launch</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Saves an asset to a file stream.</p>
+            <p>Launches the project&#x27;s binary and attaches the debugger.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">assets</td>
-                  <td>Manager to read from.</td>
-                </tr>
-                <tr>
-                  <td>handle</td>
-                  <td>Handle of the asset being saved.</td>
-                </tr>
-                <tr>
-                  <td>stream</td>
-                  <td>File stream.</td>
-                </tr>
-              </tbody>
               <tfoot>
                 <tr>
-                  <th>Returns</th>
-                  <td>Whether the asset was successfully saved.</td>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the project could be launched successfully.</td>
                 </tr>
               </tfoot>
             </table>
+<p>If the binary is already running, it is stopped first.</p>
           </div></section>
         </section>
       </div>
