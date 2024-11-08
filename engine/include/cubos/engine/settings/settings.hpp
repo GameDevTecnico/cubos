@@ -101,6 +101,12 @@ namespace cubos::engine
         /// @param settingsToMerge Settings to be merged to this instance.
         void merge(const Settings& settingsToMerge);
 
+        /// @brief Save settings as json to specified path.
+        /// @param path Virtual `cubos::core::data::FileSystem` path to write settings in.
+        /// @param indent Indent of the Json, -1 for selects the most compact representation.
+        /// @return Whether call was successful.
+        bool save(std::string_view path = "/settings.json", int indent = 2) const;
+
         /// @return Underlying `std::unordered_map` with the settings.
         const std::unordered_map<std::string, std::string>& getValues() const;
 

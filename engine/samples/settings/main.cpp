@@ -14,6 +14,15 @@ int main(int argc, char** argv)
 
     cubos.startupSystem("print setting value").after(settingsTag).call([](Settings& settings) {
         CUBOS_INFO("{}", settings.getString("greeting", "Hello!"));
+        settings.save("/settings.json", 4);
+    });
+
+    cubos.startupSystem("print number setting value").after(settingsTag).call([](Settings& settings) {
+        CUBOS_INFO("{}", settings.getInteger("number", 1));
+        CUBOS_INFO("{}", settings.getDouble("double", 1e-07));
+        CUBOS_INFO("{}", settings.getBool("boolean", false));
+        CUBOS_INFO("{}", settings.getString("emptyString", ""));
+        settings.save("/settings.json", 4);
     });
 
     cubos.run();
