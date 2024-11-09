@@ -36,6 +36,9 @@ set(CUBOS_ENGINE_SOURCE
 	"src/utils/free_camera/plugin.cpp"
 	"src/utils/free_camera/controller.cpp"
 
+    "src/audio/audio.cpp"
+    "src/audio/bridge.cpp"
+
 	"src/assets/plugin.cpp"
 	"src/assets/assets.cpp"
 	"src/assets/bridge.cpp"
