@@ -13,6 +13,7 @@ CUBOS_REFLECT_IMPL(cubos::engine::ShadowAtlas)
 {
     return core::ecs::TypeBuilder<ShadowAtlas>("cubos::engine::ShadowAtlas")
         .withField("configSize", &ShadowAtlas::configSize)
+        .withField("configCubeSize", &ShadowAtlas::configCubeSize)
         .withField("cleared", &ShadowAtlas::cleared)
         .build();
 }
@@ -22,9 +23,15 @@ glm::uvec2 cubos::engine::ShadowAtlas::getSize() const
     return mSize;
 }
 
+glm::uvec2 cubos::engine::ShadowAtlas::getCubeSize() const
+{
+    return mCubeSize;
+}
+
 void cubos::engine::ShadowAtlas::resize(cubos::core::gl::RenderDevice& rd)
 {
     mSize = configSize;
+    mCubeSize = configCubeSize;
 
     // Prepare texture description.
     Texture2DDesc desc{};
@@ -38,8 +45,8 @@ void cubos::engine::ShadowAtlas::resize(cubos::core::gl::RenderDevice& rd)
 
     // Prepare texture array description.
     Texture2DArrayDesc cubeDesc{};
-    cubeDesc.width = mSize.x;
-    cubeDesc.height = mSize.y;
+    cubeDesc.width = mCubeSize.x;
+    cubeDesc.height = mCubeSize.y;
     cubeDesc.size = 6;
     cubeDesc.usage = Usage::Dynamic;
 

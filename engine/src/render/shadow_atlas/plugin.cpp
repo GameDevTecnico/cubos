@@ -80,11 +80,12 @@ void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
     cubos.tag(drawToShadowAtlasTag).after(reserveShadowCastersTag);
 
     cubos.system("create ShadowAtlas").tagged(createShadowAtlasTag).call([](const Window& window, ShadowAtlas& atlas) {
-        if (atlas.getSize() != atlas.configSize)
+        if (atlas.getSize() != atlas.configSize || atlas.getCubeSize() != atlas.configCubeSize)
         {
             atlas.resize(window->renderDevice());
 
-            CUBOS_INFO("Resized ShadowAtlas to {}x{}", atlas.getSize().x, atlas.getSize().y);
+            CUBOS_INFO("Resized ShadowAtlas to {}x{} (spot), {}x{} (point)", atlas.getSize().x, atlas.getSize().y,
+                       atlas.getCubeSize().x, atlas.getCubeSize().y);
         }
 
         // New frame, hint that the shadow atlas texture needs to be cleared.

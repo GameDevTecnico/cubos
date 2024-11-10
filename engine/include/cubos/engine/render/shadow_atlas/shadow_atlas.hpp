@@ -28,8 +28,12 @@ namespace cubos::engine
         /// @return Size of the shadow atlas texture, in pixels.
         glm::uvec2 getSize() const;
 
-        /// @brief Recreates the shadow atlas texture.
-        /// @param rd Render device used to create the texture.
+        /// @brief Gets the size of the shadow cube atlas texture.
+        /// @return Size of the shadow cube atlas texture, in pixels.
+        glm::uvec2 getCubeSize() const;
+
+        /// @brief Recreates the shadow atlas textures.
+        /// @param rd Render device used to create the textures.
         void resize(cubos::core::gl::RenderDevice& rd);
 
         /// @brief Configured size of the shadow atlas texture, in pixels.
@@ -37,6 +41,12 @@ namespace cubos::engine
         /// texture isn't immediately resized; use @ref getSize() to get the
         /// actual texture size.
         glm::uvec2 configSize = {4096, 4096};
+
+        /// @brief Configured size of the cube shadow atlas texture, in pixels.
+        /// Use this to change the resolution of the cube atlas. Note that the
+        /// texture isn't immediately resized; use @ref getCubeSize() to get the
+        /// actual texture size.
+        glm::uvec2 configCubeSize = {1024, 1024};
 
         /// @brief Whether the shadow atlas texture has already been cleared this frame.
         bool cleared = false;
@@ -78,5 +88,8 @@ namespace cubos::engine
     private:
         /// @brief Size of the shadow atlas texture, in pixels.
         glm::uvec2 mSize = {0, 0};
+
+        /// @brief Size of the cube shadow atlas texture, in pixels.
+        glm::uvec2 mCubeSize = {0, 0};
     };
 } // namespace cubos::engine
