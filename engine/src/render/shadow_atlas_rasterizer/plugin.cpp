@@ -238,7 +238,7 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
 
             // Bind the framebuffer and set the viewport.
             rd.setFramebuffer(rasterizer.cubeFramebuffer);
-            rd.setViewport(0, 0, static_cast<int>(atlas.getSize().x), static_cast<int>(atlas.getSize().y));
+            rd.setViewport(0, 0, static_cast<int>(atlas.getCubeSize().x), static_cast<int>(atlas.getCubeSize().y));
 
             // Clear
             if (!atlas.cleared)
@@ -253,20 +253,20 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
                 auto slot = atlas.slotsMap.at(caster.baseSettings.id);
 
                 // Set the viewport.
-                rd.setViewport(static_cast<int>(slot->offset.x * float(atlas.getSize().x)),
-                               static_cast<int>(slot->offset.y * float(atlas.getSize().y)),
-                               static_cast<int>(slot->size.x * float(atlas.getSize().x)),
-                               static_cast<int>(slot->size.y * float(atlas.getSize().y)));
-                rd.setScissor(static_cast<int>(slot->offset.x * float(atlas.getSize().x)),
-                              static_cast<int>(slot->offset.y * float(atlas.getSize().y)),
-                              static_cast<int>(slot->size.x * float(atlas.getSize().x)),
-                              static_cast<int>(slot->size.y * float(atlas.getSize().y)));
+                rd.setViewport(static_cast<int>(slot->offset.x * float(atlas.getCubeSize().x)),
+                               static_cast<int>(slot->offset.y * float(atlas.getCubeSize().y)),
+                               static_cast<int>(slot->size.x * float(atlas.getCubeSize().x)),
+                               static_cast<int>(slot->size.y * float(atlas.getCubeSize().y)));
+                rd.setScissor(static_cast<int>(slot->offset.x * float(atlas.getCubeSize().x)),
+                              static_cast<int>(slot->offset.y * float(atlas.getCubeSize().y)),
+                              static_cast<int>(slot->size.x * float(atlas.getCubeSize().x)),
+                              static_cast<int>(slot->size.y * float(atlas.getCubeSize().y)));
 
                 // Send the PerScene data to the GPU.
                 PerSceneCube perScene;
                 auto proj = glm::perspective(glm::radians(90.0F),
-                                             (float(atlas.getSize().x) * slot->size.x) /
-                                                 (float(atlas.getSize().y) * slot->size.y),
+                                             (float(atlas.getCubeSize().x) * slot->size.x) /
+                                                 (float(atlas.getCubeSize().y) * slot->size.y),
                                              0.1F, light.range);
 
                 for (int i = 0; i < 6; i++)

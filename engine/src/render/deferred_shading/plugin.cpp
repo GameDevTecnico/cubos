@@ -363,8 +363,8 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             auto slot = shadowAtlas.slotsMap.at(caster.value().baseSettings.id);
 
                             auto lightProj = glm::perspective(glm::radians(90.0F),
-                                                              (float(shadowAtlas.getSize().x) * slot->size.x) /
-                                                                  (float(shadowAtlas.getSize().y) * slot->size.y),
+                                                              (float(shadowAtlas.getCubeSize().x) * slot->size.x) /
+                                                                  (float(shadowAtlas.getCubeSize().y) * slot->size.y),
                                                               0.1F, light.range);
 
                             for (int i = 0; i < 6; i++)
