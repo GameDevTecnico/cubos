@@ -134,20 +134,24 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
         .after(createGBufferTag)
         .call(
             [](State& state, const Window& window, const RenderMeshPool& pool,
-               Query<DirectionalShadowCaster&, const DirectionalLight&, const LocalToWorld&> lights,
+               Query<DirectionalShadowCaster&, const DirectionalLight&, const LocalToWorld&, const Active&> lights,
                Query<Entity, const LocalToWorld&, const Camera&, const Active&, const DrawsTo&, const GBuffer&> cameras,
                Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
                 auto& rd = window->renderDevice();
 
-                for (auto [cameraEntity, cameraLocalToWorld, camera, active, drawsTo, gBuffer] : cameras)
+                for (auto [cameraEntity, cameraLocalToWorld, camera, CameraActive, drawsTo, gBuffer] : cameras)
                 {
-                    if (!active.active)
+                    if (!CameraActive.active)
                     {
                         continue;
                     }
 
-                    for (auto [caster, light, localToWorld] : lights)
+                    for (auto [caster, light, localToWorld, lightActive] : lights)
                     {
+                        if (!lightActive.active)
+                        {
+                            continue;
+                        }
                         auto& shadowMap = caster.shadowMaps.at(cameraEntity);
                         // Check if we need to recreate the framebuffer.
                         if (shadowMap->previousCascades != shadowMap->cascades)

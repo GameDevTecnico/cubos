@@ -11,13 +11,6 @@
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/g_buffer/g_buffer.hpp>
 #include <cubos/engine/render/g_buffer/plugin.hpp>
-#include <cubos/engine/render/hdr/hdr.hpp>
-#include <cubos/engine/render/hdr/plugin.hpp>
-#include <cubos/engine/render/lights/directional.hpp>
-#include <cubos/engine/render/lights/environment.hpp>
-#include <cubos/engine/render/lights/plugin.hpp>
-#include <cubos/engine/render/lights/point.hpp>
-#include <cubos/engine/render/lights/spot.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/ssao/ssao.hpp>

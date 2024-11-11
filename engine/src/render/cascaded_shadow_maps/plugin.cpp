@@ -27,10 +27,14 @@ void cubos::engine::cascadedShadowMapsPlugin(Cubos& cubos)
 
     cubos.system("create cascaded shadow maps")
         .tagged(createCascadedShadowMapsTag)
-        .call([](const Window& window, Query<DirectionalShadowCaster&> query,
+        .call([](const Window& window, Query<DirectionalShadowCaster&, Active&> query,
                  Query<Entity, const Camera&, const Active&> cameras) {
-            for (auto [caster] : query)
+            for (auto [caster, active] : query)
             {
+                if (!active.active)
+                {
+                    continue;
+                }
                 // Remove shadow maps for cameras that no longer exist
                 std::vector<Entity> removedCameras;
                 for (auto& [cameraEntity, shadowMap] : caster.shadowMaps)
