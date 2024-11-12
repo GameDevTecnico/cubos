@@ -49,6 +49,10 @@ void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
 
             for (auto [caster, active] : casters)
             {
+                if (!active.active)
+                {
+                    continue;
+                }
 
                 bool foundSlot = false;
                 caster.baseSettings.id = id++;

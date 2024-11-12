@@ -52,7 +52,6 @@ void cubos::engine::debugCameraPlugin(Cubos& cubos)
     cubos.startupSystem("create Debug Camera").call([](Commands commands, State& debugCamera) {
         debugCamera.entity = commands.create()
                                  .named("debug-camera")
-                                 .add(Camera{})
                                  .add(PerspectiveCamera{})
                                  .add(Position{{}})
                                  .add(FreeCameraController{

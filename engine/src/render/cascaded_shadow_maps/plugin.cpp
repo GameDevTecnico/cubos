@@ -27,7 +27,7 @@ void cubos::engine::cascadedShadowMapsPlugin(Cubos& cubos)
 
     cubos.system("create cascaded shadow maps")
         .tagged(createCascadedShadowMapsTag)
-        .call([](const Window& window, Query<DirectionalShadowCaster&, Active&> query,
+        .call([](const Window& window, Query<DirectionalShadowCaster&, const Active&> query,
                  Query<Entity, const Camera&, const Active&> cameras) {
             for (auto [caster, active] : query)
             {
@@ -44,9 +44,9 @@ void cubos::engine::cascadedShadowMapsPlugin(Cubos& cubos)
                         removedCameras.push_back(cameraEntity);
                     }
                 }
-                for (auto [entity, camera, active] : cameras)
+                for (auto [entity, camera, cameraActive] : cameras)
                 {
-                    if (!active.active && caster.shadowMaps.contains(entity))
+                    if (!cameraActive.active && caster.shadowMaps.contains(entity))
                     {
                         removedCameras.push_back(entity);
                     }
@@ -59,9 +59,9 @@ void cubos::engine::cascadedShadowMapsPlugin(Cubos& cubos)
                 caster.updateShadowMaps(window->renderDevice());
 
                 // Create shadow maps for new cameras
-                for (auto [entity, camera, active] : cameras)
+                for (auto [entity, camera, cameraActive] : cameras)
                 {
-                    if (active.active && !caster.shadowMaps.contains(entity))
+                    if (cameraActive.active && !caster.shadowMaps.contains(entity))
                     {
                         caster.shadowMaps[entity] = std::make_shared<DirectionalShadowCaster::ShadowMap>();
                         caster.shadowMaps[entity]->resize(window->renderDevice(), caster.size,

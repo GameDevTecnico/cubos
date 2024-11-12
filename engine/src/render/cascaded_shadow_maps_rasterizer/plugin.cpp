@@ -139,9 +139,9 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
                 auto& rd = window->renderDevice();
 
-                for (auto [cameraEntity, cameraLocalToWorld, camera, CameraActive, drawsTo, gBuffer] : cameras)
+                for (auto [cameraEntity, cameraLocalToWorld, camera, cameraActive, drawsTo, gBuffer] : cameras)
                 {
-                    if (!CameraActive.active)
+                    if (!cameraActive.active)
                     {
                         continue;
                     }
