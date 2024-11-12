@@ -2,10 +2,12 @@
 
 #include <cubos/core/ecs/name.hpp>
 
+#include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/raycast.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/prelude.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/transform/position.hpp>
@@ -19,8 +21,10 @@ using namespace cubos::engine;
 TEST_CASE("cubos::engine::Raycast")
 {
     Cubos cubos{};
+    cubos.plugin(settingsPlugin);
     cubos.plugin(transformPlugin);
     cubos.plugin(fixedStepPlugin);
+    cubos.plugin(assetsPlugin);
     cubos.plugin(collisionsPlugin);
 
     SUBCASE("get the right scalar from multiple boxes")

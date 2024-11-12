@@ -52,7 +52,12 @@ TEST_CASE("cubos::engine::settingsPlugin")
     };
 
     EmbeddedArchive::registerData("settings.json", settingsData);
-    FileSystem::mount("/settings.json", std::make_unique<EmbeddedArchive>("settings.json"));
+
+    if (!FileSystem::mount("/settings.json", std::make_unique<EmbeddedArchive>("settings.json")))
+    {
+        FileSystem::unmount("/settings.json");
+        FileSystem::mount("/settings.json", std::make_unique<EmbeddedArchive>("settings.json"));
+    }
 
     // Run the actual test.
     Cubos cubos{argc, argv};
