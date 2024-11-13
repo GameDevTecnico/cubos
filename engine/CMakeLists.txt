@@ -116,9 +116,20 @@ set(CUBOS_ENGINE_SOURCE
 	"src/ui/color_rect/color_rect.cpp"
 	"src/ui/image/plugin.cpp"
 	"src/ui/image/image.cpp"
+	"src/ui/text/plugin.cpp"
+    "src/ui/text/text_impl.cpp"
+    "src/ui/text/text_stretch.cpp"
+	"src/ui/text/text.cpp"
 
 	"src/fixed_step/plugin.cpp"
 	"src/fixed_step/fixed_delta_time.cpp"
+
+    "src/font/atlas/glyph.cpp"
+    "src/font/atlas/bridge.cpp"
+    "src/font/atlas/atlas.cpp"
+	"src/font/plugin.cpp"
+	"src/font/font.cpp"
+	"src/font/bridge.cpp"
 
 	"src/render/defaults/plugin.cpp"
 	"src/render/defaults/target.cpp"
@@ -285,6 +296,44 @@ target_include_directories(imgui PUBLIC
 # Finally, link the target we created for both ImGui and Implot
 target_link_libraries(cubos-engine PUBLIC imgui)
 
+# freetype (msdfgen dependency) - fails to build on windows without this
+set(FT_DISABLE_ZLIB ON)
+set(FT_DISABLE_BZIP2 ON)
+set(FT_DISABLE_PNG ON)
+set(FT_DISABLE_HARFBUZZ ON)
+set(FT_DISABLE_BROTLI ON)
+FetchContent_Declare(freetype
+    GIT_REPOSITORY "https://gitlab.freedesktop.org/freetype/freetype.git"
+    GIT_TAG "VER-2-13-3"
+    SYSTEM
+    FIND_PACKAGE_ARGS
+)
+FetchContent_MakeAvailable(freetype)
+if (NOT TARGET Freetype::Freetype)
+    add_library(Freetype::Freetype ALIAS freetype)
+endif()
+set_property(TARGET freetype PROPERTY POSITION_INDEPENDENT_CODE ON)
+
+# msdf-atlas-gen
+set(MSDF_ATLAS_USE_VCPKG OFF)
+set(MSDF_ATLAS_USE_SKIA OFF)
+set(MSDF_ATLAS_BUILD_STANDALONE OFF)
+set(MSDF_ATLAS_NO_ARTERY_FONT ON)
+set(MSDFGEN_DISABLE_PNG ON)
+set(MSDFGEN_BUILD_STANDALONE OFF)
+set(MSDF_ATLAS_DYNAMIC_RUNTIME ON)
+FetchContent_Declare(msdf-atlas-gen
+    GIT_REPOSITORY "https://github.com/Chlumsky/msdf-atlas-gen.git"
+    SYSTEM
+    FIND_PACKAGE_ARGS
+)
+FetchContent_MakeAvailable(msdf-atlas-gen)
+# To prevent reallocation errors when compiling engine as a shared library
+set_property(TARGET msdf-atlas-gen PROPERTY POSITION_INDEPENDENT_CODE ON)
+set_property(TARGET msdfgen-core PROPERTY POSITION_INDEPENDENT_CODE ON)
+
+target_link_libraries(cubos-engine PRIVATE msdf-atlas-gen)
+
 # ------------------------ Configure tests and samples ------------------------
 
 if(CUBOS_ENGINE_TESTS)
@@ -312,4 +361,5 @@ if(CUBOS_ENABLE_INSTALL)
 	install(DIRECTORY ${imgui_SOURCE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/imgui)
 	install(DIRECTORY ${implot_SOURCE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/implot)
 	install(DIRECTORY assets/ DESTINATION ${CUBOS_ENGINE_ASSETS_INSTALL_PATH})
+    install(DIRECTORY ${msdf-atlas-gen_SOURCE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/msdf-atlas-gen)
 endif()

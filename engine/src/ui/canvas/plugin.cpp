@@ -3,6 +3,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/render/target/plugin.hpp>
@@ -38,21 +39,25 @@ namespace
 
         cubos::core::gl::DepthStencilState dss;
         cubos::core::gl::ConstantBuffer mvpBuffer;
-        State(cubos::core::gl::DepthStencilState depthStencilState, cubos::core::gl::ConstantBuffer mvpConstantBuffer)
+        cubos::core::gl::BlendState bs;
+        State(cubos::core::gl::DepthStencilState depthStencilState, cubos::core::gl::ConstantBuffer mvpConstantBuffer,
+              cubos::core::gl ::BlendState blendState)
             : dss(std::move(depthStencilState))
             , mvpBuffer(std::move(mvpConstantBuffer))
+            , bs(std::move(blendState))
         {
         }
     };
 } // namespace
 
 static void copyCommands(Query<Entity, UIElement&, UIElement&> query, UIElement& element, Entity entity,
-                         std::map<const UIDrawList::Type*, UIDrawList>& commands)
+                         std::map<int, std::map<const UIDrawList::Type*, UIDrawList>>& commands)
 {
     for (size_t i = 0; i < element.drawList.size(); i++)
     {
+        int depth = element.layer * 100 + element.hierarchyDepth;
         auto entry = element.drawList.entry(i);
-        commands[&entry.type].push(entry.type, entry.command, element.drawList.data(i));
+        commands[depth][&entry.type].push(entry.type, entry.command, element.drawList.data(i));
     }
     element.drawList.clear();
     for (auto [child, childElement, _] : query.pin(1, entity))
@@ -91,14 +96,26 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
     cubos.startupSystem("setup canvas state")
         .after(windowInitTag)
         .call([](Commands cmds, const core::io::Window& window) {
-            cubos::core::gl::DepthStencilStateDesc dssd;
-            dssd.depth.enabled = true;
-            dssd.depth.writeEnabled = true;
-            dssd.depth.near = -1.0F;
-            dssd.depth.compare = Compare::LEqual;
+            cubos::core::gl::DepthStencilStateDesc dssd = {.depth = {.enabled = false}, .stencil = {.enabled = false}};
+            cubos::core::gl::BlendStateDesc bsd = {
+                .blendEnabled = true,
+                .color =
+                    {
+                        .src = BlendFactor::SrcAlpha,
+                        .dst = BlendFactor::InvSrcAlpha,
+                        .op = BlendOp::Add,
+                    },
+                .alpha =
+                    {
+                        .src = BlendFactor::One,
+                        .dst = BlendFactor::Zero,
+                        .op = BlendOp::Add,
+                    },
+            };
             cmds.emplaceResource<State>(window->renderDevice().createDepthStencilState(dssd),
                                         window->renderDevice().createConstantBuffer(sizeof(glm::mat4), nullptr,
-                                                                                    cubos::core::gl::Usage::Dynamic));
+                                                                                    cubos::core::gl::Usage::Dynamic),
+                                        window->renderDevice().createBlendState(bsd));
         });
 
     cubos.system("scale canvas")
@@ -139,7 +156,7 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                     canvas.virtualSize = canvas.referenceSize;
                 }
 
-                canvas.mat = glm::ortho<float>(0, canvas.virtualSize.x, 0, canvas.virtualSize.y);
+                canvas.mat = glm::ortho<float>(0, canvas.virtualSize.x, 0, canvas.virtualSize.y, -1000.0F, 1000.0F);
             }
         });
 
@@ -256,7 +273,6 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                     window->renderDevice().clearColor(0.0F, 0.0F, 0.0F, 0.0F);
                     target.cleared = true;
                 }
-                window->renderDevice().clearDepth(1);
             }
         });
 
@@ -275,6 +291,7 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                  const State& state) {
             // For each render target with a UI canvas.
             window->renderDevice().setDepthStencilState(state.dss);
+            window->renderDevice().setBlendState(state.bs);
 
             for (auto [entity, canvas, renderTarget] : canvasQuery)
             {
@@ -284,40 +301,42 @@ void cubos::engine::uiCanvasPlugin(Cubos& cubos)
                 state.mvpBuffer->fill(&canvas.mat, sizeof(glm::mat4));
 
                 // Extract draw commands from all children UI elements, recursively.
-                std::map<const UIDrawList::Type*, UIDrawList> commands;
+                std::map<int, std::map<const UIDrawList::Type*, UIDrawList>> layerCommands;
                 for (auto [child, childElement, _] : drawsToQuery.pin(1, entity))
                 {
-                    copyCommands(childrenQuery, childElement, child, commands);
+                    copyCommands(childrenQuery, childElement, child, layerCommands);
                 }
 
-                // For each draw command type.
-                for (const auto& [type, list] : commands)
+                for (const auto& [layer, commands] : layerCommands)
                 {
-
-                    // Prepare state common to all instances of this draw command type.
-                    window->renderDevice().setShaderPipeline(type->pipeline);
-                    type->pipeline->getBindingPoint("MVP")->bind(state.mvpBuffer);
-                    type->constantBufferBindingPoint->bind(type->constantBuffer);
-
-                    // For all instances of this draw command type.
-                    for (size_t i = 0; i < list.size(); i++)
+                    // For each draw command type.
+                    for (const auto& [type, list] : commands)
                     {
-                        // Prepare command-specific state and issue draw call.
-                        auto entry = list.entry(i);
-                        window->renderDevice().setVertexArray(entry.command.vertexArray);
+                        // Prepare state common to all instances of this draw command type.
+                        window->renderDevice().setShaderPipeline(type->pipeline);
+                        type->pipeline->getBindingPoint("MVP")->bind(state.mvpBuffer);
+                        type->constantBufferBindingPoint->bind(type->constantBuffer);
 
-                        type->constantBuffer->fill(list.data(i), type->perElementSize);
-
-                        for (size_t j = 0; j < UIDrawList::Type::MaxTextures; j++)
+                        // For all instances of this draw command type.
+                        for (size_t i = 0; i < list.size(); i++)
                         {
-                            if (type->texBindingPoint[j] == nullptr)
+                            // Prepare command-specific state and issue draw call.
+                            auto entry = list.entry(i);
+                            window->renderDevice().setVertexArray(entry.command.vertexArray);
+
+                            type->constantBuffer->fill(list.data(i), type->perElementSize);
+
+                            for (size_t j = 0; j < UIDrawList::Type::MaxTextures; j++)
                             {
-                                continue;
+                                if (type->texBindingPoint[j] == nullptr)
+                                {
+                                    continue;
+                                }
+                                type->texBindingPoint[j]->bind(entry.command.textures[j]);
+                                type->texBindingPoint[j]->bind(entry.command.samplers[j]);
                             }
-                            type->texBindingPoint[j]->bind(entry.command.textures[j]);
-                            type->texBindingPoint[j]->bind(entry.command.samplers[j]);
+                            window->renderDevice().drawTriangles(entry.command.vertexOffset, entry.command.vertexCount);
                         }
-                        window->renderDevice().drawTriangles(entry.command.vertexOffset, entry.command.vertexCount);
                     }
                 }
             }

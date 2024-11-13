@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compatibility with CMake find_package (#1326, **@RiscadoA**).
 - A proper Nix package which can be used to install Cubos and Tesseratos (#1327, **RiscadoA**).
 - Added the option to use Shadow Normal Offset Bias algorithm (#1308, **@GalaxyCrush**)
+- UI text element using MSDF for text rendering (#1300, **@mkuritsu**).
 
 ### Changed
 
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flipped documentation of SystemBuilder::before and SystemBuilder::after (#1371, **@RiscadoA**).
 - Inconsistent behavior on ECS queries on symmetric self-relations (**@RiscadoA**).
 - Undefined behavior on ECS entity removal due to creating tables while iterating over tables (#1363, **@RiscadoA**).
+- Made canvas draw calls sorted by layer in order to prevent undeterministic behavior when drawing elements with transparency (**@mkuritsu**).
 
 ## [v0.4.0] - 2024-10-13
 
