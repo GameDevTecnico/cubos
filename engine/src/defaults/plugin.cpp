@@ -2,6 +2,7 @@
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/defaults/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
+#include <cubos/engine/font/plugin.hpp>
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
@@ -14,6 +15,7 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/ui/canvas/plugin.hpp>
 #include <cubos/engine/ui/color_rect/plugin.hpp>
+#include <cubos/engine/ui/text/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -32,6 +34,7 @@ void cubos::engine::defaultsPlugin(Cubos& cubos)
     cubos.plugin(assetsPlugin);
     cubos.plugin(collisionsPlugin);
     cubos.plugin(windowPlugin);
+    cubos.plugin(fontPlugin);
 
     cubos.plugin(scenePlugin);
     cubos.plugin(voxelsPlugin);
@@ -43,6 +46,7 @@ void cubos::engine::defaultsPlugin(Cubos& cubos)
 
     cubos.plugin(uiCanvasPlugin);
     cubos.plugin(colorRectPlugin);
+    cubos.plugin(uiTextPlugin);
 
     cubos.plugin(gizmosPlugin);
     cubos.plugin(imguiPlugin);
