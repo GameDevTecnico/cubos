@@ -34,6 +34,12 @@ namespace
 
         // Whether the debug camera is currently active.
         bool active;
+
+        // Whether the debug camera's toggle mode is currently active.
+        bool toggled;
+
+        // Whether the debug camera's hold mode is currently active.
+        bool holding;
     };
 } // namespace
 
@@ -66,12 +72,31 @@ void cubos::engine::debugCameraPlugin(Cubos& cubos)
 
     cubos.system("toggle Debug Camera controller")
         .call([](Input& input, State& state, Query<FreeCameraController&> entities) {
-            if (auto match = entities.at(state.entity); match && state.active)
+            if (auto match = entities.at(state.entity); match && state.active && !state.holding)
             {
                 auto [controller] = *match;
                 if (input.justPressed("debug-camera-toggle"))
                 {
+                    state.toggled = !state.toggled;
                     controller.enabled = !controller.enabled;
+                }
+            }
+        });
+
+    cubos.system("hold Debug Camera controller")
+        .call([](Input& input, State& state, Query<FreeCameraController&> entities) {
+            if (auto match = entities.at(state.entity); match && state.active && !state.toggled)
+            {
+                auto [controller] = *match;
+                if (input.pressed("debug-camera-hold"))
+                {
+                    state.holding = true;
+                    controller.enabled = true;
+                }
+                else
+                {
+                    state.holding = false;
+                    controller.enabled = false;
                 }
             }
         });
