@@ -194,6 +194,7 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
         SparseRelationTableId tableId;
         SparseRelationTable* table;
         bool isReverse;
+        bool isDuplicate;
 
         // Utility function which updates the table pointer based on the current table index.
         auto setTable = [&]() {
@@ -202,12 +203,14 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
                 tableId = mTables[tableIndex];
                 table = &relationTables.at(tableId);
                 isReverse = false;
+                isDuplicate = false;
             }
             else if (tableIndex < mTables.size() + mReverseTables.size())
             {
                 tableId = mReverseTables[tableIndex - mTables.size()].id;
                 table = &relationTables.at(tableId);
                 isReverse = true;
+                isDuplicate = mReverseTables[tableIndex - mTables.size()].isDuplicate;
             }
             else
             {
@@ -225,7 +228,7 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
 
         // Utility function which checks if the current row stores a relation from an entity to itself.
         auto skipIfIdentityRow = [&]() {
-            if (isReverse && !mIncludeDuplicates && row < table->size() && table->from(row) == table->to(row))
+            if (isReverse && isDuplicate && row < table->size() && table->from(row) == table->to(row))
             {
                 advanceRow();
             }
@@ -303,12 +306,28 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
     {
         // If we've tried all normal tables, try the ones facing the reverse direction.
         // If mIncludeDuplicates is false, skip duplicate tables.
-        while (tableIndex < mTables.size() + mReverseTables.size() &&
-               (row >= world.tables().sparseRelation().at(mReverseTables[tableIndex - mTables.size()].id).size() ||
-                (!mIncludeDuplicates && mReverseTables[tableIndex - mTables.size()].isDuplicate)))
+        while (tableIndex < mTables.size() + mReverseTables.size())
         {
-            ++tableIndex;
-            row = 0;
+            SparseRelationTable& table =
+                world.tables().sparseRelation().at(mReverseTables[tableIndex - mTables.size()].id);
+            if (row >= table.size() || (!mIncludeDuplicates && mReverseTables[tableIndex - mTables.size()].isDuplicate))
+            {
+                ++tableIndex;
+                row = 0;
+                continue;
+            }
+
+            // We're iterating over the reverse tables. If we find a self-relation, and we have already iterated over
+            // the same table in the forward direction, we should skip it. E.g. if we have a relation (ent1, ent1), we
+            // should only iterate over it once.
+            if (table.from(row) == table.to(row) && mReverseTables[tableIndex - mTables.size()].isDuplicate)
+            {
+                ++row;
+            }
+            else
+            {
+                break;
+            }
         }
     }
 

@@ -834,24 +834,6 @@ void SingleRelationQueryAction::test(World& world, ExpectedWorld& expected)
                 // Make sure that the matched relation actually exists.
                 REQUIRE(it != range.second);
                 entities.erase(it);
-
-                if (entity == toEntity && !excludeDuplicates && mRelation.has<SymmetricTrait>())
-                {
-                    // Then it should have been matched twice.
-                    range = entities.equal_range(entity);
-                    it = range.first;
-                    for (; it != range.second; ++it)
-                    {
-                        if (it->second == toEntity)
-                        {
-                            break;
-                        }
-                    }
-
-                    // Make sure that the matched relation actually exists.
-                    REQUIRE(it != range.second);
-                    entities.erase(it);
-                }
             }
         }
     }
