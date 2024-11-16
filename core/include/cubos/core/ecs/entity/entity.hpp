@@ -23,9 +23,6 @@ namespace cubos::core::ecs
     {
         CUBOS_REFLECT;
 
-        /// @brief Type used to store which components an entity has.
-        using Mask = std::bitset<CUBOS_CORE_ECS_MAX_COMPONENTS + 1>;
-
         /// @brief Constructs a null entity.
         Entity();
 
