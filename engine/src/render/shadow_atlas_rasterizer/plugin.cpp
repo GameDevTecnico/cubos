@@ -151,36 +151,37 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
                  Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
 
-            // Check if we need to recreate the framebuffer.
-            if (rasterizer.atlas != atlas.atlas)
+            // Check if we need to recreate the framebuffers.
+            if (rasterizer.atlas != atlas.spotAtlas)
             {
                 // Store textures so we can check if they change in the next frame.
-                rasterizer.atlas = atlas.atlas;
+                rasterizer.atlas = atlas.spotAtlas;
 
-                // Create the framebuffer.
+                // Create the framebuffers.
                 FramebufferDesc desc{};
                 desc.targetCount = 0;
-                desc.depthStencil.setTexture2DTarget(atlas.atlas);
-                rasterizer.framebuffer = rd.createFramebuffer(desc);
+                desc.depthStencil.setTexture2DTarget(atlas.spotAtlas);
+                rasterizer.spotAtlasFramebuffer = rd.createFramebuffer(desc);
 
                 FramebufferDesc cubeDesc{};
                 cubeDesc.targetCount = 0;
-                cubeDesc.depthStencil.setTexture2DArrayTarget(atlas.cubeAtlas);
-                rasterizer.cubeFramebuffer = rd.createFramebuffer(cubeDesc);
+                cubeDesc.depthStencil.setTexture2DArrayTarget(atlas.pointAtlas);
+                rasterizer.pointAtlasFramebuffer = rd.createFramebuffer(cubeDesc);
 
-                CUBOS_INFO("Recreated ShadowAtlasRasterizer's framebuffer");
+                CUBOS_INFO("Recreated ShadowAtlasRasterizer's framebuffers");
             }
 
-            // Bind the framebuffer and set the viewport.
-            rd.setFramebuffer(rasterizer.framebuffer);
-            rd.setViewport(0, 0, static_cast<int>(atlas.getSize().x), static_cast<int>(atlas.getSize().y));
+            // Bind the spot atlas framebuffer and set the viewport.
+            rd.setFramebuffer(rasterizer.spotAtlasFramebuffer);
+            rd.setViewport(0, 0, static_cast<int>(atlas.getSpotAtlasSize().x),
+                           static_cast<int>(atlas.getSpotAtlasSize().y));
 
             // Set the raster and depth-stencil states.
             rd.setRasterState(state.rasterState);
             rd.setBlendState(nullptr);
             rd.setDepthStencilState(state.depthStencilState);
 
-            // Clear
+            // Clear spot atlas
             if (!atlas.cleared)
             {
                 rd.clearDepth(1.0F);
@@ -197,21 +198,21 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
                     glm::scale(glm::rotate(localToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)),
                                glm::vec3(1.0F / localToWorld.worldScale())));
                 auto proj = glm::perspective(glm::radians(light.spotAngle),
-                                             (float(atlas.getSize().x) * slot->size.x) /
-                                                 (float(atlas.getSize().y) * slot->size.y),
+                                             (float(atlas.getSpotAtlasSize().x) * slot->size.x) /
+                                                 (float(atlas.getSpotAtlasSize().y) * slot->size.y),
                                              0.1F, light.range);
                 PerScene perScene{.lightViewProj = proj * view};
                 state.perSceneCB->fill(&perScene, sizeof(perScene));
 
                 // Set the viewport.
-                rd.setViewport(static_cast<int>(slot->offset.x * float(atlas.getSize().x)),
-                               static_cast<int>(slot->offset.y * float(atlas.getSize().y)),
-                               static_cast<int>(slot->size.x * float(atlas.getSize().x)),
-                               static_cast<int>(slot->size.y * float(atlas.getSize().y)));
-                rd.setScissor(static_cast<int>(slot->offset.x * float(atlas.getSize().x)),
-                              static_cast<int>(slot->offset.y * float(atlas.getSize().y)),
-                              static_cast<int>(slot->size.x * float(atlas.getSize().x)),
-                              static_cast<int>(slot->size.y * float(atlas.getSize().y)));
+                rd.setViewport(static_cast<int>(slot->offset.x * float(atlas.getSpotAtlasSize().x)),
+                               static_cast<int>(slot->offset.y * float(atlas.getSpotAtlasSize().y)),
+                               static_cast<int>(slot->size.x * float(atlas.getSpotAtlasSize().x)),
+                               static_cast<int>(slot->size.y * float(atlas.getSpotAtlasSize().y)));
+                rd.setScissor(static_cast<int>(slot->offset.x * float(atlas.getSpotAtlasSize().x)),
+                              static_cast<int>(slot->offset.y * float(atlas.getSpotAtlasSize().y)),
+                              static_cast<int>(slot->size.x * float(atlas.getSpotAtlasSize().x)),
+                              static_cast<int>(slot->size.y * float(atlas.getSpotAtlasSize().y)));
                 // Bind the shader, vertex array and uniform buffer.
                 rd.setShaderPipeline(state.pipeline);
                 rd.setVertexArray(state.vertexArray);
@@ -236,11 +237,12 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
                 }
             }
 
-            // Bind the framebuffer and set the viewport.
-            rd.setFramebuffer(rasterizer.cubeFramebuffer);
-            rd.setViewport(0, 0, static_cast<int>(atlas.getCubeSize().x), static_cast<int>(atlas.getCubeSize().y));
+            // Bind the point atlas framebuffer and set the viewport.
+            rd.setFramebuffer(rasterizer.pointAtlasFramebuffer);
+            rd.setViewport(0, 0, static_cast<int>(atlas.getPointAtlasSize().x),
+                           static_cast<int>(atlas.getPointAtlasSize().y));
 
-            // Clear
+            // Clear point atlas
             if (!atlas.cleared)
             {
                 rd.clearDepth(1.0F);
@@ -253,20 +255,20 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
                 auto slot = atlas.slotsMap.at(caster.baseSettings.id);
 
                 // Set the viewport.
-                rd.setViewport(static_cast<int>(slot->offset.x * float(atlas.getCubeSize().x)),
-                               static_cast<int>(slot->offset.y * float(atlas.getCubeSize().y)),
-                               static_cast<int>(slot->size.x * float(atlas.getCubeSize().x)),
-                               static_cast<int>(slot->size.y * float(atlas.getCubeSize().y)));
-                rd.setScissor(static_cast<int>(slot->offset.x * float(atlas.getCubeSize().x)),
-                              static_cast<int>(slot->offset.y * float(atlas.getCubeSize().y)),
-                              static_cast<int>(slot->size.x * float(atlas.getCubeSize().x)),
-                              static_cast<int>(slot->size.y * float(atlas.getCubeSize().y)));
+                rd.setViewport(static_cast<int>(slot->offset.x * float(atlas.getPointAtlasSize().x)),
+                               static_cast<int>(slot->offset.y * float(atlas.getPointAtlasSize().y)),
+                               static_cast<int>(slot->size.x * float(atlas.getPointAtlasSize().x)),
+                               static_cast<int>(slot->size.y * float(atlas.getPointAtlasSize().y)));
+                rd.setScissor(static_cast<int>(slot->offset.x * float(atlas.getPointAtlasSize().x)),
+                              static_cast<int>(slot->offset.y * float(atlas.getPointAtlasSize().y)),
+                              static_cast<int>(slot->size.x * float(atlas.getPointAtlasSize().x)),
+                              static_cast<int>(slot->size.y * float(atlas.getPointAtlasSize().y)));
 
                 // Send the PerScene data to the GPU.
                 PerSceneCube perScene;
                 auto proj = glm::perspective(glm::radians(90.0F),
-                                             (float(atlas.getCubeSize().x) * slot->size.x) /
-                                                 (float(atlas.getCubeSize().y) * slot->size.y),
+                                             (float(atlas.getPointAtlasSize().x) * slot->size.x) /
+                                                 (float(atlas.getPointAtlasSize().y) * slot->size.y),
                                              0.1F, light.range);
 
                 for (int i = 0; i < 6; i++)

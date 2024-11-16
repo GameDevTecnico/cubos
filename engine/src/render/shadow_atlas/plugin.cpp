@@ -80,12 +80,13 @@ void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
     cubos.tag(drawToShadowAtlasTag).after(reserveShadowCastersTag);
 
     cubos.system("create ShadowAtlas").tagged(createShadowAtlasTag).call([](const Window& window, ShadowAtlas& atlas) {
-        if (atlas.getSize() != atlas.configSize || atlas.getCubeSize() != atlas.configCubeSize)
+        if (atlas.getSpotAtlasSize() != atlas.configSpotAtlasSize ||
+            atlas.getPointAtlasSize() != atlas.configPointAtlasSize)
         {
             atlas.resize(window->renderDevice());
 
-            CUBOS_INFO("Resized ShadowAtlas to {}x{} (spot), {}x{} (point)", atlas.getSize().x, atlas.getSize().y,
-                       atlas.getCubeSize().x, atlas.getCubeSize().y);
+            CUBOS_INFO("Resized ShadowAtlas to {}x{} (spot), {}x{} (point)", atlas.getSpotAtlasSize().x,
+                       atlas.getSpotAtlasSize().y, atlas.getPointAtlasSize().x, atlas.getPointAtlasSize().y);
         }
 
         // New frame, hint that the shadow atlas texture needs to be cleared.
@@ -95,24 +96,24 @@ void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
     cubos.system("reserve space for shadow casters")
         .tagged(reserveShadowCastersTag)
         .call([](ShadowAtlas& atlas, Query<SpotShadowCaster&> spotCasters, Query<PointShadowCaster&> pointCasters) {
-            atlas.slots.clear();
-            atlas.cubeSlots.clear();
+            atlas.spotAtlasSlots.clear();
+            atlas.pointAtlasSlots.clear();
             atlas.slotsMap.clear();
-            atlas.slots.push_back(
+            atlas.spotAtlasSlots.push_back(
                 std::make_shared<ShadowAtlas::Slot>(glm::vec2(1.0F, 1.0F), glm::vec2(0.0F, 0.0F), -1));
-            atlas.cubeSlots.push_back(
+            atlas.pointAtlasSlots.push_back(
                 std::make_shared<ShadowAtlas::Slot>(glm::vec2(1.0F, 1.0F), glm::vec2(0.0F, 0.0F), -1));
 
             int id = 1;
 
             for (auto [caster] : spotCasters)
             {
-                reserveCasterSlot(atlas.slots, atlas.slotsMap, caster.baseSettings, id);
+                reserveCasterSlot(atlas.spotAtlasSlots, atlas.slotsMap, caster.baseSettings, id);
             }
 
             for (auto [caster] : pointCasters)
             {
-                reserveCasterSlot(atlas.cubeSlots, atlas.slotsMap, caster.baseSettings, id);
+                reserveCasterSlot(atlas.pointAtlasSlots, atlas.slotsMap, caster.baseSettings, id);
             }
         });
 }

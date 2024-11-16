@@ -126,8 +126,8 @@ namespace
         ShaderBindingPoint normalBP;
         ShaderBindingPoint albedoBP;
         ShaderBindingPoint ssaoBP;
-        ShaderBindingPoint shadowAtlasBP;
-        ShaderBindingPoint shadowCubeAtlasBP;
+        ShaderBindingPoint spotShadowAtlasBP;
+        ShaderBindingPoint pointShadowAtlasBP;
         ShaderBindingPoint directionalShadowMapBP;
         ShaderBindingPoint perSceneBP;
         ShaderBindingPoint viewportOffsetBP;
@@ -145,16 +145,16 @@ namespace
             normalBP = pipeline->getBindingPoint("normalTexture");
             albedoBP = pipeline->getBindingPoint("albedoTexture");
             ssaoBP = pipeline->getBindingPoint("ssaoTexture");
-            shadowAtlasBP = pipeline->getBindingPoint("shadowAtlasTexture");
-            shadowCubeAtlasBP = pipeline->getBindingPoint("shadowCubeAtlasTexture");
+            spotShadowAtlasBP = pipeline->getBindingPoint("spotShadowAtlasTexture");
+            pointShadowAtlasBP = pipeline->getBindingPoint("pointShadowAtlasTexture");
             directionalShadowMapBP = pipeline->getBindingPoint("directionalShadowMap");
             perSceneBP = pipeline->getBindingPoint("PerScene");
             viewportOffsetBP = pipeline->getBindingPoint("viewportOffset");
             viewportSizeBP = pipeline->getBindingPoint("viewportSize");
-            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && shadowAtlasBP && shadowCubeAtlasBP &&
+            CUBOS_ASSERT(positionBP && normalBP && albedoBP && ssaoBP && spotShadowAtlasBP && pointShadowAtlasBP &&
                              directionalShadowMapBP && perSceneBP && viewportOffsetBP && viewportSizeBP,
-                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, shadowAtlasTexture"
-                         "shadowCubeAtlasTexture, directionalShadowMap, PerScene, "
+                         "positionTexture, normalTexture, albedoTexture, ssaoTexture, spotShadowAtlasTexture"
+                         "pointShadowAtlasTexture, directionalShadowMap, PerScene, "
                          "viewportOffset and "
                          "viewportSize binding points must exist");
 
@@ -362,10 +362,11 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             // Get light viewport
                             auto slot = shadowAtlas.slotsMap.at(caster.value().baseSettings.id);
 
-                            auto lightProj = glm::perspective(glm::radians(90.0F),
-                                                              (float(shadowAtlas.getCubeSize().x) * slot->size.x) /
-                                                                  (float(shadowAtlas.getCubeSize().y) * slot->size.y),
-                                                              0.1F, light.range);
+                            auto lightProj =
+                                glm::perspective(glm::radians(90.0F),
+                                                 (float(shadowAtlas.getPointAtlasSize().x) * slot->size.x) /
+                                                     (float(shadowAtlas.getPointAtlasSize().y) * slot->size.y),
+                                                 0.1F, light.range);
 
                             for (int i = 0; i < 6; i++)
                             {
@@ -446,10 +447,11 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             auto lightView = glm::inverse(glm::scale(
                                 glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)),
                                 glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                            auto lightProj = glm::perspective(glm::radians(light.spotAngle),
-                                                              (float(shadowAtlas.getSize().x) * slot->size.x) /
-                                                                  (float(shadowAtlas.getSize().y) * slot->size.y),
-                                                              0.1F, light.range);
+                            auto lightProj =
+                                glm::perspective(glm::radians(light.spotAngle),
+                                                 (float(shadowAtlas.getSpotAtlasSize().x) * slot->size.x) /
+                                                     (float(shadowAtlas.getSpotAtlasSize().y) * slot->size.y),
+                                                 0.1F, light.range);
                             perLight.matrix = lightProj * lightView;
                             perLight.shadowMapOffset = slot->offset;
                             perLight.shadowMapSize = slot->size;
@@ -483,8 +485,8 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.normalBP->bind(gBuffer.normal);
                     state.albedoBP->bind(gBuffer.albedo);
                     state.ssaoBP->bind(ssao.blurTexture);
-                    state.shadowAtlasBP->bind(shadowAtlas.atlas);
-                    state.shadowCubeAtlasBP->bind(shadowAtlas.cubeAtlas);
+                    state.spotShadowAtlasBP->bind(shadowAtlas.spotAtlas);
+                    state.pointShadowAtlasBP->bind(shadowAtlas.pointAtlas);
                     // directionalShadowMap needs to be bound even if it's null, or else errors may occur on some GPUs
                     state.directionalShadowMapBP->bind(directionalShadowMap);
                     state.directionalShadowMapBP->bind(state.directionalShadowSampler);
