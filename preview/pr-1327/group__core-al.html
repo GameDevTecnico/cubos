@@ -64,8 +64,8 @@
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="audio__device_8hpp.html" class="m-doc">audio_device.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1al_1_1AudioDevice.html" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />AudioDevice</a> and related types.</dd>
+            <dt>file <a href="audio__context_8hpp.html" class="m-doc">audio_context.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1al_1_1AudioContext.html" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />AudioContext</a> and related types.</dd>
           </dl>
         </section>
         <section id="typedef-members">
@@ -79,6 +79,14 @@
               using <a href="#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc">Source</a> = std::shared_ptr&lt;impl::Source&gt;
             </dt>
             <dd>Handle to an audio source.</dd>
+            <dt>
+              using <a href="#ga8484e4c0384c146bb8772b75f475f77d" class="m-doc">Listener</a> = std::shared_ptr&lt;impl::Listener&gt;
+            </dt>
+            <dd>Handle to an audio listener.</dd>
+            <dt>
+              using <a href="#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> = std::shared_ptr&lt;impl::AudioDevice&gt;
+            </dt>
+            <dd>Handle to an audio device.</dd>
           </dl>
         </section>
         <section>
@@ -86,18 +94,34 @@
           <section class="m-doc-details" id="gabf798aa0b180fc8bba2872789bab349e"><div>
             <h3>
               using <a href="#gabf798aa0b180fc8bba2872789bab349e" class="m-doc-self">Buffer</a> = std::shared_ptr&lt;impl::Buffer&gt;
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__device_8hpp.html">&lt;core/al/audio_device.hpp&gt;</a></div>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__context_8hpp.html">&lt;core/al/audio_context.hpp&gt;</a></div>
             </h3>
             <p>Handle to an audio buffer.</p>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">impl::<wbr />Buffer</a> - audio buffer interface.</p><p><a href="classcubos_1_1core_1_1al_1_1AudioDevice.html#aa62570280045b495cbc6440e82bdeed3" class="m-doc">AudioDevice::<wbr />createBuffer()</a></p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">impl::<wbr />Buffer</a> - audio buffer interface.</p><p><a href="classcubos_1_1core_1_1al_1_1AudioContext.html#ac94450fd25db89331cfef27fd06c94a1" class="m-doc">AudioContext::<wbr />createBuffer()</a></p></aside>
           </div></section>
           <section class="m-doc-details" id="ga0cc30a9a62066f32d33e96e39c60d3bf"><div>
             <h3>
               using <a href="#ga0cc30a9a62066f32d33e96e39c60d3bf" class="m-doc-self">Source</a> = std::shared_ptr&lt;impl::Source&gt;
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__device_8hpp.html">&lt;core/al/audio_device.hpp&gt;</a></div>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__context_8hpp.html">&lt;core/al/audio_context.hpp&gt;</a></div>
             </h3>
             <p>Handle to an audio source.</p>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">impl::<wbr />Source</a> - audio source interface.</p><p><a href="classcubos_1_1core_1_1al_1_1AudioDevice.html#a3082a10b84fd69d4b1da40c4bc89e730" class="m-doc">AudioDevice::<wbr />createSource()</a></p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html" class="m-doc">impl::<wbr />Source</a> - audio source interface.</p><p>AudioDevice::createSource()</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ga8484e4c0384c146bb8772b75f475f77d"><div>
+            <h3>
+              using <a href="#ga8484e4c0384c146bb8772b75f475f77d" class="m-doc-self">Listener</a> = std::shared_ptr&lt;impl::Listener&gt;
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__context_8hpp.html">&lt;core/al/audio_context.hpp&gt;</a></div>
+            </h3>
+            <p>Handle to an audio listener.</p>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1al_1_1impl_1_1Listener.html" class="m-doc">impl::<wbr />Listener</a> - audio listener interface.</p><p>AudioDevice::createListener()</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="gac457570e93f052ef01c4a84fdeee8df2"><div>
+            <h3>
+              using <a href="#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc-self">AudioDevice</a> = std::shared_ptr&lt;impl::AudioDevice&gt;
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__context_8hpp.html">&lt;core/al/audio_context.hpp&gt;</a></div>
+            </h3>
+            <p>Handle to an audio device.</p>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1al_1_1impl_1_1AudioDevice.html" class="m-doc">impl::<wbr />AudioDevice</a> - audio device interface.</p><p><a href="classcubos_1_1core_1_1al_1_1AudioContext.html#a443a5dee02de177dc21f9702a3123616" class="m-doc">AudioContext::<wbr />createDevice()</a></p></aside>
           </div></section>
         </section>
       </div>

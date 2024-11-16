@@ -68,12 +68,12 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="a3cecdaa4171940801e067cc91ba3e279">
-              using <a href="#a3cecdaa4171940801e067cc91ba3e279" class="m-doc-self">Tester</a> = bool(*)(const void*instance)
+            <dt id="ae0a44360d9a40c0792572e8447f0e12b">
+              using <a href="#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc-self">Tester</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(const void*) const &gt;
             </dt>
             <dd>Function pointer to test if a value matches the variant.</dd>
-            <dt id="a3c5b2ff96ac0e7be3844c1e491aa546c">
-              using <a href="#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc-self">Setter</a> = void(*)(void*instance)
+            <dt id="ac68cc9e54ce41079c1648150616e2ed0">
+              using <a href="#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc-self">Setter</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*) const &gt;
             </dt>
             <dd>Function pointer to set the value of the variant.</dd>
           </dl>
@@ -93,7 +93,7 @@
             </dt>
             <dd>Converts a string to a value of a specified type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#ab3c921ec34bcdeb2fbe77968b590ab18" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">static auto <a href="#ab3c921ec34bcdeb2fbe77968b590ab18" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a></span>
             </dt>
             <dd>Gets an iterator to the last variant of the type.</dd>
           </dl>
@@ -111,12 +111,12 @@
             <dd>Move constructs.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span>
+              <a href="#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter)</span>
             </dt>
             <dd>Constructs a variant with a given name, tester function, and setter function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>* variant)</span>
+              <span class="m-doc-wrap-bumper"><a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>(</span><span class="m-doc-wrap">const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>* variant)</span>
             </dt>
             <dd>Constructs.</dd>
             <dt>
@@ -130,14 +130,14 @@
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ac0cebb961a32feab109fcca1533630d1" class="m-doc">addVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span>
+              <a href="#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter)</span>
             </dt>
             <dd>Adds a variant to the type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ad832e7e4b79fe21a7e8059ac50de45fb" class="m-doc">withVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp;</span>
+              <a href="#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp;</span>
             </dt>
             <dd>Adds a variant to the type.</dd>
             <dt>
@@ -150,15 +150,15 @@
             </dt>
             <dd>Checks if a variant with the given name exists.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad60e02471514ad4f6a07b06a91b60560" class="m-doc">at</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad60e02471514ad4f6a07b06a91b60560" class="m-doc">at</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp;</span>
             </dt>
             <dd>Gets the variant with the specified name.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af62a609f9fe3381f1165688e115de07f" class="m-doc">variant</a>(</span><span class="m-doc-wrap">const void* value) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af62a609f9fe3381f1165688e115de07f" class="m-doc">variant</a>(</span><span class="m-doc-wrap">const void* value) const -&gt; const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp;</span>
             </dt>
             <dd>Gets the variant associated with the given value.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a01330d672b1d6e0697370bb2217c2048" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a01330d672b1d6e0697370bb2217c2048" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a></span>
             </dt>
             <dd>Gets an iterator to the first variant of the type.</dd>
             <dt>
@@ -178,27 +178,27 @@
             </dt>
             <dd>Gets the name of the variant.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac1fc2a828d9444fd1b5aecccc9abaeba" class="m-doc">next</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>*</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac1fc2a828d9444fd1b5aecccc9abaeba" class="m-doc">next</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>*</span>
             </dt>
             <dd>Returns the next variant in the linked list.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af3f6177ab1f27d619c2c0f24cd4da202" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp; <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af3f6177ab1f27d619c2c0f24cd4da202" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;) -&gt; <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp; <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Copy assigns.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8eedc6ba1cfc6eea9739607059c67100" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8eedc6ba1cfc6eea9739607059c67100" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;) const -&gt; bool <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Compares with another iterator.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0f0cec6a84b27c00926204a1d011c204" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0f0cec6a84b27c00926204a1d011c204" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp;</span>
             </dt>
             <dd>Accesses the variant referenced by this iterator.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab09ecd3518201328942cccf66b9d3743" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>*</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab09ecd3518201328942cccf66b9d3743" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>*</span>
             </dt>
             <dd>Accesses the variant referenced by this iterator.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8a4b757ecbb241501c0cfab44766fd73" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8a4b757ecbb241501c0cfab44766fd73" class="m-doc">operator++</a>(</span><span class="m-doc-wrap">) -&gt; <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;</span>
             </dt>
             <dd>Advances the iterator.</dd>
           </dl>
@@ -264,7 +264,7 @@
           </div></section>
           <section class="m-doc-details" id="ab3c921ec34bcdeb2fbe77968b590ab18"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3c921ec34bcdeb2fbe77968b590ab18" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">static <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3c921ec34bcdeb2fbe77968b590ab18" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Gets an iterator to the last variant of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -296,8 +296,8 @@
           <section class="m-doc-details" id="a2047fcf7ea357a4c4f8660f7ad7a0712"><div>
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc-self">Variant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span></span>
+              <a href="#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter)</span></span>
             </h3>
             <p>Constructs a variant with a given name, tester function, and setter function.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -322,7 +322,7 @@
           </div></section>
           <section class="m-doc-details" id="ae498411c71ef849cf127259ad554d0c6"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>* variant)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc-self">Iterator</a>(</span><span class="m-doc-wrap">const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>* variant)</span></span>
             </h3>
             <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -357,8 +357,8 @@
           <section class="m-doc-details" id="ac0cebb961a32feab109fcca1533630d1"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac0cebb961a32feab109fcca1533630d1" class="m-doc-self">addVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span></span>
+              <a href="#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter)</span></span>
             </h3>
             <p>Adds a variant to the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -384,8 +384,8 @@
           <section class="m-doc-details" id="ad832e7e4b79fe21a7e8059ac50de45fb"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad832e7e4b79fe21a7e8059ac50de45fb" class="m-doc-self">withVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
-              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter) &amp;&amp;</span></span>
+              <a href="#ae0a44360d9a40c0792572e8447f0e12b" class="m-doc">Tester</a> tester,
+              <a href="#ac68cc9e54ce41079c1648150616e2ed0" class="m-doc">Setter</a> setter) &amp;&amp;</span></span>
             </h3>
             <p>Adds a variant to the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -474,7 +474,7 @@
           </div></section>
           <section class="m-doc-details" id="ad60e02471514ad4f6a07b06a91b60560"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad60e02471514ad4f6a07b06a91b60560" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad60e02471514ad4f6a07b06a91b60560" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
             </h3>
             <p>Gets the variant with the specified name.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -498,7 +498,7 @@
           </div></section>
           <section class="m-doc-details" id="af62a609f9fe3381f1165688e115de07f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af62a609f9fe3381f1165688e115de07f" class="m-doc-self">variant</a>(</span><span class="m-doc-wrap">const void* value) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af62a609f9fe3381f1165688e115de07f" class="m-doc-self">variant</a>(</span><span class="m-doc-wrap">const void* value) const</span></span>
             </h3>
             <p>Gets the variant associated with the given value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -521,7 +521,7 @@
           </div></section>
           <section class="m-doc-details" id="a01330d672b1d6e0697370bb2217c2048"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a01330d672b1d6e0697370bb2217c2048" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a01330d672b1d6e0697370bb2217c2048" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets an iterator to the first variant of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -603,7 +603,7 @@
           </div></section>
           <section class="m-doc-details" id="ac1fc2a828d9444fd1b5aecccc9abaeba"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>* cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1fc2a828d9444fd1b5aecccc9abaeba" class="m-doc-self">next</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>* cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1fc2a828d9444fd1b5aecccc9abaeba" class="m-doc-self">next</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Returns the next variant in the linked list.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -617,7 +617,7 @@
           </div></section>
           <section class="m-doc-details" id="af3f6177ab1f27d619c2c0f24cd4da202"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3f6177ab1f27d619c2c0f24cd4da202" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;) <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3f6177ab1f27d619c2c0f24cd4da202" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;) <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Copy assigns.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -631,7 +631,7 @@
           </div></section>
           <section class="m-doc-details" id="a8eedc6ba1cfc6eea9739607059c67100"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8eedc6ba1cfc6eea9739607059c67100" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;) const <span class="m-label m-info">defaulted</span></span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8eedc6ba1cfc6eea9739607059c67100" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp;) const <span class="m-label m-info">defaulted</span></span></span>
             </h3>
             <p>Compares with another iterator.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -645,7 +645,7 @@
           </div></section>
           <section class="m-doc-details" id="a0f0cec6a84b27c00926204a1d011c204"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f0cec6a84b27c00926204a1d011c204" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f0cec6a84b27c00926204a1d011c204" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Accesses the variant referenced by this iterator.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -660,7 +660,7 @@
           </div></section>
           <section class="m-doc-details" id="ab09ecd3518201328942cccf66b9d3743"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>* cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab09ecd3518201328942cccf66b9d3743" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="#a2047fcf7ea357a4c4f8660f7ad7a0712" class="m-doc">Variant</a>* cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab09ecd3518201328942cccf66b9d3743" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Accesses the variant referenced by this iterator.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -675,7 +675,7 @@
           </div></section>
           <section class="m-doc-details" id="a8a4b757ecbb241501c0cfab44766fd73"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8a4b757ecbb241501c0cfab44766fd73" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#ae498411c71ef849cf127259ad554d0c6" class="m-doc">Iterator</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8a4b757ecbb241501c0cfab44766fd73" class="m-doc-self">operator++</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Advances the iterator.</p>
             <table class="m-table m-fullwidth m-flat">
