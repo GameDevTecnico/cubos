@@ -15,10 +15,10 @@ namespace
     /// @brief Private type which stores the state of the metrics pool.
     struct State
     {
-        std::map<std::string, std::deque<double>> mMetrics; ///< Collection of metrics.
-        std::vector<std::string> mNames;                    ///< Collection of unique metric names.
-        std::size_t mMaxEntries{CUBOS_METRIC_MAX_ENTRIES};  ///< Maximum number of entries each metric can store.
-        mutable std::mutex mMutex;                          ///< Mutex for thread-safe access to the metrics.
+        std::map<std::string, std::deque<double>> mMetrics;     ///< Collection of metrics.
+        std::vector<std::string> mNames;                        ///< Collection of unique metric names.
+        std::size_t mMaxEntries{CUBOS_CORE_METRIC_MAX_ENTRIES}; ///< Maximum number of entries each metric can store.
+        mutable std::mutex mMutex;                              ///< Mutex for thread-safe access to the metrics.
     };
 } // namespace
 
