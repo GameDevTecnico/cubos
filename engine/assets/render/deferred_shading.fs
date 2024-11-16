@@ -6,8 +6,8 @@ uniform sampler2D positionTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D albedoTexture;
 uniform sampler2D ssaoTexture;
-uniform sampler2D shadowAtlasTexture;
-uniform sampler2DArray shadowCubeAtlasTexture;
+uniform sampler2D spotShadowAtlasTexture;
+uniform sampler2DArray pointShadowAtlasTexture;
 
 uniform sampler2DArray directionalShadowMap; // only one directional light with shadows is supported, for now
 
@@ -118,7 +118,7 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
         // PCF
         if (spotLights[lightI].shadowBlurRadius <= 0.001f)
         {
-            float pcfDepth = texture(shadowAtlasTexture, uv).r;
+            float pcfDepth = texture(spotShadowAtlasTexture, uv).r;
             shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
         }
         else
@@ -130,7 +130,7 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
                 {
                     float x = spotLights[lightI].shadowBlurRadius*float(xi);
                     float y = spotLights[lightI].shadowBlurRadius*float(yi);
-                    float pcfDepth = texture(shadowAtlasTexture, uv + vec2(x, y) * texelSize).r;
+                    float pcfDepth = texture(spotShadowAtlasTexture, uv + vec2(x, y) * texelSize).r;
                     shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
                 }
             }
@@ -261,7 +261,7 @@ vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
         // PCF
         if (pointLights[lightI].shadowBlurRadius <= 0.001f)
         {
-            float pcfDepth = texture(shadowCubeAtlasTexture, vec3(uv.xy, face)).r;
+            float pcfDepth = texture(pointShadowAtlasTexture, vec3(uv.xy, face)).r;
             shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
         }
         else
@@ -274,7 +274,7 @@ vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
                     float x = pointLights[lightI].shadowBlurRadius*float(xi);
                     float y = pointLights[lightI].shadowBlurRadius*float(yi);
                     vec2 newUv = uv + vec2(x, y) * texelSize;
-                    float pcfDepth = texture(shadowCubeAtlasTexture, vec3(newUv.xy, face)).r;
+                    float pcfDepth = texture(pointShadowAtlasTexture, vec3(newUv.xy, face)).r;
                     shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
                 }
             }

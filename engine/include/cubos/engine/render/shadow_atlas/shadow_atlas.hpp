@@ -15,47 +15,49 @@
 
 namespace cubos::engine
 {
-    /// @brief Resource which stores the shadow map atlas, a large texture that
-    /// holds the shadow maps for each shadow caster in a quadtree structure,
-    /// reducing texture switching.
+    /// @brief Resource which stores shadow map atlases, large textures that
+    /// hold the shadow maps for each shadow caster in a quadtree structure,
+    /// reducing texture switching. There is an atlas for spot lights, and another
+    /// for point lights.
     /// @ingroup render-shadow-atlas-plugin
     class CUBOS_ENGINE_API ShadowAtlas
     {
     public:
         CUBOS_REFLECT;
 
-        /// @brief Gets the size of the shadow atlas texture.
-        /// @return Size of the shadow atlas texture, in pixels.
-        glm::uvec2 getSize() const;
+        /// @brief Gets the size of the spot shadow atlas texture.
+        /// @return Size of the spot shadow atlas texture, in pixels.
+        glm::uvec2 getSpotAtlasSize() const;
 
-        /// @brief Gets the size of the shadow cube atlas texture.
-        /// @return Size of the shadow cube atlas texture, in pixels.
-        glm::uvec2 getCubeSize() const;
+        /// @brief Gets the size of the point shadow atlas texture.
+        /// @return Size of the point shadow atlas texture, in pixels.
+        glm::uvec2 getPointAtlasSize() const;
 
         /// @brief Recreates the shadow atlas textures.
         /// @param rd Render device used to create the textures.
         void resize(cubos::core::gl::RenderDevice& rd);
 
-        /// @brief Configured size of the shadow atlas texture, in pixels.
-        /// Use this to change the resolution of the atlas. Note that the
-        /// texture isn't immediately resized; use @ref getSize() to get the
+        /// @brief Configured size of the spot shadow atlas texture, in pixels.
+        /// Use this to change the resolution of the spot atlas. Note that the
+        /// texture isn't immediately resized; use @ref getSpotAtlasSize() to get the
         /// actual texture size.
-        glm::uvec2 configSize = {4096, 4096};
+        glm::uvec2 configSpotAtlasSize = {4096, 4096};
 
-        /// @brief Configured size of the cube shadow atlas texture, in pixels.
-        /// Use this to change the resolution of the cube atlas. Note that the
-        /// texture isn't immediately resized; use @ref getCubeSize() to get the
+        /// @brief Configured size of the point shadow atlas texture, in pixels.
+        /// Use this to change the resolution of the point atlas. Note that the
+        /// texture isn't immediately resized; use @ref getPointAtlasSize() to get the
         /// actual texture size.
-        glm::uvec2 configCubeSize = {1024, 1024};
+        glm::uvec2 configPointAtlasSize = {1024, 1024};
 
-        /// @brief Whether the shadow atlas texture has already been cleared this frame.
+        /// @brief Whether the shadow atlas textures have already been cleared this frame.
         bool cleared = false;
 
         /// @brief Stores shadow maps for each spot shadow caster component.
-        core::gl::Texture2D atlas{nullptr};
+        core::gl::Texture2D spotAtlas{nullptr};
 
         /// @brief Stores shadow maps for each point shadow caster component.
-        core::gl::Texture2DArray cubeAtlas{nullptr};
+        /// Each texture of the array corresponds to a face of a cubemap.
+        core::gl::Texture2DArray pointAtlas{nullptr};
 
         /// @brief Slot for a shadow map in the shadow atlas.
         struct Slot
@@ -75,21 +77,21 @@ namespace cubos::engine
         };
 
         /// @brief Stores the sizes, offsets, and caster ids of the shadow maps
-        /// in the atlas.
-        std::vector<std::shared_ptr<Slot>> slots;
+        /// in the spot atlas.
+        std::vector<std::shared_ptr<Slot>> spotAtlasSlots;
 
         /// @brief Stores the sizes, offsets, and caster ids of the shadow maps
-        /// in the cube atlas.
-        std::vector<std::shared_ptr<Slot>> cubeSlots;
+        /// in the point atlas.
+        std::vector<std::shared_ptr<Slot>> pointAtlasSlots;
 
         /// @brief Maps shadow caster ids to their corresponding slots.
         std::map<int, std::shared_ptr<Slot>> slotsMap;
 
     private:
-        /// @brief Size of the shadow atlas texture, in pixels.
-        glm::uvec2 mSize = {0, 0};
+        /// @brief Size of the spot shadow atlas texture, in pixels.
+        glm::uvec2 mSpotAtlasSize = {0, 0};
 
-        /// @brief Size of the cube shadow atlas texture, in pixels.
-        glm::uvec2 mCubeSize = {0, 0};
+        /// @brief Size of the point shadow atlas texture, in pixels.
+        glm::uvec2 mPointAtlasSize = {0, 0};
     };
 } // namespace cubos::engine

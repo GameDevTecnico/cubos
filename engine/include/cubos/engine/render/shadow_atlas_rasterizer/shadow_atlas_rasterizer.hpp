@@ -17,13 +17,13 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        /// @brief Framebuffer used by the rasterizer to render to the ShadowAtlas.
-        core::gl::Framebuffer framebuffer{nullptr};
+        /// @brief Framebuffer used by the rasterizer to render to the spot shadow atlas.
+        core::gl::Framebuffer spotAtlasFramebuffer{nullptr};
 
-        /// @brief Framebuffer used by the rasterizer to render to the cube ShadowAtlas.
-        core::gl::Framebuffer cubeFramebuffer{nullptr};
+        /// @brief Framebuffer used by the rasterizer to render to the point shadow atlas.
+        core::gl::Framebuffer pointAtlasFramebuffer{nullptr};
 
-        /// @brief Atlas texture in the current framebuffer.
+        /// @brief Atlas texture stored to check if the framebuffers need to be recreated.
         core::gl::Texture2D atlas{nullptr};
     };
 } // namespace cubos::engine
