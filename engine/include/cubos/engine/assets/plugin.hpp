@@ -17,16 +17,14 @@ namespace cubos::engine
     /// @brief Adds asset management to @b Cubos
     ///
     /// ## Settings
-    /// - `assets.io.enabled` - whether asset I/O should be done (default: `true`).
-    /// - `assets.io.path` - path to the assets directory - will be mounted to `/assets/` (default: `assets/`).
-    /// - `assets.io.readOnly` - if true, the assets directory will be mounted as read-only (default: `true`).
-    ///
-    /// ## Events
-    /// - @ref AssetEvent - (TODO) emitted when an asset is either loaded, modified or unloaded.
+    /// - `assets.app.osPath` - path to the application assets directory - will be mounted to `/assets/.
+    ///   If empty (default), no archive is mounted, and the user is responsible for mounting one.
+    /// - `assets.app.readOnly` - whether the mounted archive, if any, should be read-only. Default is `true`.
+    /// - `assets.builtin.osPath` - path to the builtin assets directory - will be mounted to `/builtin/`.
+    ///   If empty (default), no archive is mounted, and the user is responsible for mounting one.
     ///
     /// ## Resources
     /// - @ref Assets - the asset manager, used to access asset data.
-    ///
     ///
     /// ## Dependencies
     /// - @ref settings-plugin

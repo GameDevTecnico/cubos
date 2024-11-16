@@ -90,8 +90,9 @@ int main(int argc, char** argv)
     cubos.resource<DebugDraw>();
     cubos.resource<Options>();
 
-    cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
-        settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    cubos.startupSystem("configure Assets").before(settingsTag).call([](Settings& settings) {
+        settings.setString("assets.app.osPath", APP_ASSETS_PATH);
+        settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
     });
 
     cubos.startupSystem("setup input").tagged(assetsTag).call([](const Assets& assets, Input& input) {

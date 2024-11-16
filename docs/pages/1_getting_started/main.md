@@ -14,32 +14,10 @@ repository with git.
 
 ### Dependencies
 
-The following dependencies are used to compile **Cubos**:
-
-| Name                                                | Importance         | Submodule Path      | Installed Separately | Version* |
-| --------------------------------------------------- | ------------------ | ------------------- | -------------------- | -------- |
-| [CMake](https://cmake.org/)                         | Essential          | -                   | Yes                  | -        |
-| [glad](https://github.com/Dav1dde/glad)             | Essential          | `core/lib/glad`     | No                   | 2.0.4    |
-| [glfw](https://github.com/glfw/glfw)                | Essential          | `core/lib/glfw`     | Optionally           | 3.3.8    |
-| [glm](https://github.com/g-truc/glm)                | Essential          | `core/lib/glm`      | Optionally           | 0.9.9.8  |
-| [stduuid](https://github.com/mariusbancila/stduuid) | Essential          | `core/lib/stduuid`  | No                   | 1.2.3    |
-| [doctest](https://github.com/doctest/doctest)       | Required for tests | `core/lib/doctest`  | Optionally           | 2.4.11   |
-| [json](https://github.com/nlohmann/json)            | Essential          | `core/lib/json`     | No                   | 3.11.2   |
-| [imgui](https://github.com/ocornut/imgui)           | Essential          | `engine/lib/imgui`  | No                   | 1.89.9   |
-| [imgui](https://github.com/ocornut/imgui)           | Essential          | `engine/lib/implot` | No                   | 1.89.9   |
-
-*versions tested in CI and installed by submodules, others might work
-
-Dependencies marked as *Essential* are required to compile the engine. If they
-are installed separately, you must first install them manually. If they're not,
-it means they come as submodules and you can install them with the engine by
-cloning the whole repository with the `--recursive` flag. If you've already
-cloned the repository, you can install them by running the following command
-from the root directory of the repository:
-
-```bash
-git submodule update --init --recursive
-```
+All required dependencies are fetched by CMake through `FetchContent` commands.
+It first looks for them, and if it can't find an existing installation, it installs them locally.
+You can see a list of those dependencies in the `CMakeLists.txt` configuration of each target.
+For example, to see the dependencies of the `cubos-core` library, take a look at `core/CMakeLists.txt`.
 
 ### Formatting
 
@@ -61,22 +39,17 @@ Alternatively, you can change options directly through the `CMakeCache.txt` on t
 
 *Visual Studio Code*'s CMake extension allows you to set a *build* target. You can set this target, for example, to `cubos-core`, in order to compile only the `core`. To compile it, just press the build button.
 
-The following is a list of all the options available to configure the engine:
+You can see a list of all the options available to configure the engine through CMake, or through the `CMakeLists.txt` files themselves.
+We've put some of the most used options in the table below:
 
-| Name                       | Description                          |
-| -------------------------- | ------------------------------------ |
-| `WITH_GLFW`                | Use GLFW? (Required for now)         |
-| `WITH_OPENGL`              | Use OpenGL? (Required for now)       |
-| `GLFW_USE_SUBMODULE`       | Compile glfw from source?            |
-| `GLM_USE_SUBMODULE`        | Compile glm from source?             |
-| `DOCTEST_USE_SUBMODULE`    | Compile doctest from source?         |
-| `BUILD_CORE_SAMPLES`       | Build **Cubos** `core` samples?      |
-| `BUILD_CORE_TESTS`         | Build **Cubos** `core` tests?        |
-| `BUILD_ENGINE_SAMPLES`     | Build **Cubos** `engine` samples?    |
-| `BUILD_ENGINE_TESTS`       | Build **Cubos** `engine` tests?      |
-| `BUILD_DOCUMENTATION`      | Build the documentation?             |
-| `ENABLE_COVERAGE`          | Enable code coverage? (GCC only)     |
-| `FIX_CLANG_TIDY_ERRORS`    | Fix clang-tidy errors automatically? |
+| Name                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `CUBOS_CORE_SAMPLES`    | Build core samples?                  |
+| `CUBOS_CORE_TESTS`      | Build core tests?                    |
+| `CUBOS_ENGINE_SAMPLES`  | Build engine samples?                |
+| `CUBOS_ENGINE_TESTS`    | Build engine tests?                  |
+| `CUBOS_DOCUMENTATION`   | Build the documentation?             |
+| `TESSERATOS_DISTRIBUTE` | Build the editor for distribution?   |
 
 After you change an option's value, make sure to reconfigure CMake! In *Visual Studio Code*, you can do this by pressing `Ctrl + Shift + P` and choosing `CMake: Configure`.
 
@@ -88,13 +61,13 @@ In *Visual Studio Code*, the CMake extension allows you to set the *debug* targe
 
 Both `core` and `engine` contain examples which you can run to check if
 things are running correctly. To build them, you must enable the
-`BUILD_CORE_SAMPLES` and/or `BUILD_ENGINE_SAMPLES` options.
+`CUBOS_CORE_SAMPLES` and/or `CUBOS_ENGINE_SAMPLES` options.
 This will show new multiple targets, one for each example.
 
 ### Testing
 
 **Cubos** uses *doctest* for unit testing the engine. To build them, you must
-enable the `BUILD_CORE_TESTS` and/or `BUILD_ENGINE_TESTS` options. You can run the tests through the targets `cubos-core-tests` and `cubos-engine-tests`.
+enable the `CUBOS_CORE_TESTS` and/or `CUBOS_ENGINE_TESTS` options. You can run the tests through the targets `cubos-core-tests` and `cubos-engine-tests`.
 
 ## Whats next?
 

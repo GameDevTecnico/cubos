@@ -1,29 +1,25 @@
 # core/CMakeLists.txt
 # Cubos core build configuration
 
-option(WITH_GLFW "With GLFW?" ON)
-option(WITH_OPENGL "With OpenGL?" ON)
+# ----------------------- Declare core library options ------------------------
 
-if(WITH_GLFW)
-	option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
-endif()
+option(CUBOS_CORE_SAMPLES "Build cubos::core samples" ${PROJECT_IS_TOP_LEVEL})
+option(CUBOS_CORE_TESTS "Build cubos::core tests?" ${PROJECT_IS_TOP_LEVEL})
+option(CUBOS_CORE_SHARED "Build cubos::core as shared library?" ON)
 
-option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
+option(CUBOS_CORE_GLFW "Build cubos::core with GLFW support?" ON)
+option(CUBOS_CORE_OPENGL "Build cubos::core with OpenGL support?" ON)
+option(CUBOS_CORE_MINIAUDIO "Build cubos::core with MiniAudio support?" ON)
 
-set(CUBOS_CORE_ECS_MAX_COMPONENTS "63" CACHE STRING "The maximum number of components registered in an ECS world.")
+option(CUBOS_CORE_PROFILING "Should cubos::core profiling macros be compiled?" ON)
+set(CUBOS_CORE_METRIC_MAX_ENTRIES "1024" CACHE STRING "Maximum number of entries each cubos::core metric can store")
 
-option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
-option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
-option(BUILD_CORE_SHARED "Build cubos core as shared library?" ON)
+message("# Building cubos::core samples: " ${CUBOS_CORE_SAMPLES})
+message("# Building cubos::core tests: " ${CUBOS_CORE_TESTS})
+message("# Building cubos::core as shared library: " ${CUBOS_CORE_SHARED})
 
-option(ENABLE_PROFILING "Should profiling macros be compiled?" ON)
-set(CUBOS_METRIC_MAX_ENTRIES "1024" CACHE STRING "Maximum number of entries each metric can store")
+# --------------------- Define core library source files ----------------------
 
-message("# Building core samples: " ${BUILD_CORE_SAMPLES})
-message("# Building core tests: " ${BUILD_CORE_TESTS})
-message("# Building core as shared library: " ${BUILD_CORE_SHARED})
-
-# Set core source files
 set(CUBOS_CORE_SOURCE
 	"src/api.cpp"
 
@@ -155,86 +151,183 @@ set(CUBOS_CORE_SOURCE
     "src/net/udp_socket.cpp"
 )
 
-# Create core library
-if(BUILD_CORE_SHARED)
+# ----------------------- Configure core library target -----------------------
+
+if(CUBOS_CORE_SHARED)
 	add_library(cubos-core SHARED ${CUBOS_CORE_SOURCE})
 	target_compile_definitions(cubos-core
-		PRIVATE -DCUBOS_CORE_EXPORT
-		PUBLIC -DCUBOS_CORE_IMPORT
+		PRIVATE -DCUBOS_CORE_EXPORT # When compiling library source files, we export symbols
+		PUBLIC -DCUBOS_CORE_IMPORT  # When compiling client source files, we import symbols
 	)
 else()
 	add_library(cubos-core STATIC ${CUBOS_CORE_SOURCE})
 endif()
-target_include_directories(cubos-core PUBLIC "include")
-target_compile_definitions(cubos-core PUBLIC
-	-DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS}
-)
+add_library(cubos::core ALIAS cubos-core) # Alias so that we can use cubos::core inside the build tree
+set_target_properties(cubos-core PROPERTIES EXPORT_NAME core) # Will be within the cubos namespace when exported
 cubos_common_target_options(cubos-core)
 
-# Link dependencies
-if(WITH_OPENGL)
-	add_subdirectory("lib/glad")
-	if(BUILD_CORE_SHARED)
-		set_property(TARGET glad PROPERTY POSITION_INDEPENDENT_CODE ON)
-	endif()
-	target_link_libraries(cubos-core PRIVATE glad)
-	target_compile_definitions(cubos-core PRIVATE WITH_OPENGL GLAD_GLAPI_EXPORT GLAD_GLAPI_EXPORT_BUILD)
+target_include_directories(cubos-core PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+	$<INSTALL_INTERFACE:include/cubos-core> # On installation, the include tree will have been copied here 
+)
+
+# Configure profiling and metrics
+if(CUBOS_CORE_PROFILING)
+	target_compile_definitions(cubos-core PUBLIC -DCUBOS_CORE_PROFILING)
 endif()
+target_compile_options(cubos-core PRIVATE -DCUBOS_CORE_METRIC_MAX_ENTRIES=${CUBOS_CORE_METRIC_MAX_ENTRIES})
 
-if(WITH_GLFW)
-	if(GLFW_USE_SUBMODULE)
-		set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-		set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-		set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-		add_subdirectory(lib/glfw)
-	else()
-		find_package(glfw3 REQUIRED)
-	endif()
-
-	target_link_libraries(cubos-core PRIVATE glfw)
-	target_compile_definitions(cubos-core PRIVATE WITH_GLFW)
-endif()
-
-if(GLM_USE_SUBMODULE)
-	add_subdirectory(lib/glm SYSTEM)
-else()
-	find_package(glm REQUIRED)
-endif()
-
-set(JSON_BuildTests OFF CACHE INTERNAL "")
-add_subdirectory(lib/json)
-
-add_subdirectory(lib/stduuid)
-target_link_libraries(cubos-core PUBLIC stduuid)
-
-add_subdirectory(lib/cpptrace)
-target_link_libraries(cubos-core PRIVATE cpptrace::cpptrace)
-
+# Link small libraries
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
-
-add_library(miniaudio INTERFACE)
-target_include_directories(miniaudio SYSTEM INTERFACE "lib/miniaudio")
-target_link_libraries(cubos-core PUBLIC miniaudio)
-
-target_compile_definitions(cubos-core PUBLIC GLM_FORCE_SILENT_WARNINGS) # Needed for compilation to succeed on MSVC
-target_link_libraries(cubos-core PUBLIC glm::glm nlohmann_json::nlohmann_json ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE Threads::Threads)
 
-# Add core tests
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_CORE_TESTS)
+# ------------- Fetch and link core private library dependencies --------------
+
+include(FetchContent)
+
+# Fetch and link cpptrace
+FetchContent_Declare(
+    cpptrace
+    GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
+    GIT_TAG        v0.7.1
+	SYSTEM
+	FIND_PACKAGE_ARGS
+)
+FetchContent_MakeAvailable(cpptrace)
+target_link_libraries(cubos-core PRIVATE cpptrace::cpptrace)
+
+# If OpenGL support is enabled, fetch and link glad
+if(CUBOS_CORE_OPENGL)
+	FetchContent_Declare(
+		glad
+		GIT_REPOSITORY https://github.com/GameDevTecnico/cubos-glad.git
+		GIT_TAG        496c56587442591557a89551d90906b1c53f639f
+		SYSTEM
+	)
+	if(CUBOS_CORE_SHARED)
+		set(GLAD_INSTALL OFF CACHE BOOL "Don't install glad" FORCE)
+	else()
+		set(GLAD_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Install glad" FORCE)
+	endif()
+	FetchContent_MakeAvailable(glad)
+	if(CUBOS_CORE_SHARED)
+		set_target_properties(glad PROPERTIES POSITION_INDEPENDENT_CODE ON)
+	endif()
+	target_link_libraries(cubos-core PRIVATE glad)
+	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_OPENGL GLAD_GLAPI_EXPORT GLAD_GLAPI_EXPORT_BUILD)
+endif()
+
+# If GLFW support is enabled, fetch and link it
+if(CUBOS_CORE_GLFW)
+	FetchContent_Declare(
+		glfw
+		GIT_REPOSITORY https://github.com/glfw/glfw.git
+		GIT_TAG        3.3.8
+		SYSTEM 
+		FIND_PACKAGE_ARGS NAMES glfw3
+	)
+
+	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Don't build GLFW examples" FORCE)
+	set(GLFW_BUILD_TESTS OFF CACHE BOOL "Don't build GLFW tests" FORCE)
+	set(GLFW_BUILD_DOCS OFF CACHE BOOL "Don't build GLFW documentation" FORCE)
+	if(CUBOS_CORE_SHARED)
+		set(GLFW_INSTALL OFF CACHE BOOL "Don't install GLFW" FORCE)
+	else()
+		set(GLFW_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Don't install GLFW" FORCE)
+	endif()
+	set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build GLFW as a static library" FORCE)
+	FetchContent_MakeAvailable(glfw)
+
+	target_link_libraries(cubos-core PRIVATE glfw)
+	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_GLFW)
+endif()
+
+# If MiniAudio support is enabled, fetch and link it
+if(CUBOS_CORE_MINIAUDIO)
+	FetchContent_Declare(
+		miniaudio
+		GIT_REPOSITORY https://github.com/mackron/miniaudio
+		GIT_TAG        0.11.21
+		SYSTEM
+	)
+	FetchContent_MakeAvailable(miniaudio)
+
+	# We need to define our own miniaudio target as the repository doesn't have its own CMakeLists.txt
+	add_library(miniaudio INTERFACE)
+	target_include_directories(miniaudio SYSTEM INTERFACE ${miniaudio_SOURCE_DIR})
+
+	# Link miniaudio
+	target_link_libraries(cubos-core PRIVATE $<BUILD_INTERFACE:miniaudio>)
+
+	# Define the CUBOS_CORE_MINIAUDIO to toggle MiniAudio support
+	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_MINIAUDIO)
+endif()
+
+# -------------- Fetch and link core public library dependencies --------------
+
+# Fetch and link stduuid
+FetchContent_Declare(
+	stduuid
+	GIT_REPOSITORY https://github.com/mariusbancila/stduuid.git
+	GIT_TAG        v1.2.3
+	SYSTEM
+	FIND_PACKAGE_ARGS
+)
+set(UUID_ENABLE_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Install stduuid" FORCE)
+FetchContent_MakeAvailable(stduuid)
+target_link_libraries(cubos-core PUBLIC stduuid)
+
+# Fetch and link glm
+FetchContent_Declare(
+	glm
+	GIT_REPOSITORY https://github.com/GameDevTecnico/cubos-glm.git
+	GIT_TAG        c1c3790818795f9ebb9da9049830c1cc0ba8a721
+	SYSTEM
+	FIND_PACKAGE_ARGS
+)
+set(GLM_BUILD_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Install glm" FORCE)
+FetchContent_MakeAvailable(glm)
+target_compile_definitions(cubos-core
+	PUBLIC
+		GLM_FORCE_SILENT_WARNINGS # Needed for compilation to succeed on MSVC
+		GLM_ENABLE_EXPERIMENTAL   # We use some experimental features
+) 
+target_link_libraries(cubos-core PUBLIC glm::glm)
+
+# Fetch and link nlohmann json
+FetchContent_Declare(
+	json
+	GIT_REPOSITORY https://github.com/nlohmann/json.git
+	GIT_TAG        v3.11.3
+	SYSTEM
+	FIND_PACKAGE_ARGS NAMES nlohmann_json
+)
+set(JSON_BuildTests OFF CACHE BOOL "Don't build json tests" FORCE)
+set(JSON_Install ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Install nlohmann json" FORCE)
+FetchContent_MakeAvailable(json)
+target_link_libraries(cubos-core PUBLIC nlohmann_json::nlohmann_json)
+
+# ------------------------ Configure tests and samples ------------------------
+
+if(CUBOS_CORE_TESTS)
 	add_subdirectory(tests)
 endif()
 
-# Add core samples
-if(BUILD_CORE_SAMPLES)
+if(CUBOS_CORE_SAMPLES)
 	add_subdirectory(samples)
 endif()
 
-if(ENABLE_PROFILING)
-	target_compile_definitions(cubos-core
-		PUBLIC 
-		-DCUBOS_PROFILING=${ENABLE_PROFILING}
-		-DCUBOS_METRIC_MAX_ENTRIES=${CUBOS_METRIC_MAX_ENTRIES}
-	)
+# -------------------- Configure core library installation --------------------
+
+if(CUBOS_ENABLE_INSTALL)
+	# Install core target
+    install(TARGETS cubos-core
+        EXPORT cubos-core-targets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+    install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cubos-core)
 endif()

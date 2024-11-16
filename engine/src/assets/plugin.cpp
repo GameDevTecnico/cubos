@@ -26,22 +26,60 @@ void cubos::engine::assetsPlugin(Cubos& cubos)
 
     cubos.startupSystem("load asset meta files").tagged(assetsInitTag).call([](Assets& assets, Settings& settings) {
         // Get the relevant settings.
-        if (settings.getBool("assets.io.enabled", true))
+        std::string appOsPath = settings.getString("assets.app.osPath", "");
+        std::string builtinOsPath = settings.getString("assets.builtin.osPath", "");
+
+        // Mount the application assets directory only if a path was provided.
+        if (!appOsPath.empty())
         {
-            std::filesystem::path path = settings.getString("assets.io.path", "assets");
-            bool readOnly = settings.getBool("assets.io.readOnly", true);
+            bool readOnly = settings.getBool("assets.app.readOnly", true);
 
             // Create a standard archive for the assets directory and mount it.
-            FileSystem::mount("/assets", std::make_unique<StandardArchive>(path, true, readOnly));
-
-            // Load the meta files on the assets directory.
-            assets.loadMeta("/assets");
+            auto archive = std::make_unique<StandardArchive>(appOsPath, /*isDirectory=*/true, readOnly);
+            if (archive->initialized() && FileSystem::mount("/assets", std::move(archive)))
+            {
+                CUBOS_INFO("Mounted application assets directory with path {}", appOsPath);
+            }
+            else
+            {
+                CUBOS_ERROR("Couldn't mount application assets directory with path {}", appOsPath);
+            }
         }
 
-        // Create a standard archive for the builtin assets directory and mount it.
-        // Also load the meta files on the builtin assets directory.
-        FileSystem::mount("/builtin", std::make_unique<StandardArchive>(CUBOS_BUILTIN_ASSETS_FOLDER, true, true));
-        assets.loadMeta("/builtin");
+        // Mount the builtin assets directory only if a path was provided.
+        if (!builtinOsPath.empty())
+        {
+            // Create a standard archive for the builtin assets directory and mount it.
+            auto archive = std::make_unique<StandardArchive>(builtinOsPath, /*isDirectory=*/true, /*readOnly=*/true);
+            if (archive->initialized() && FileSystem::mount("/builtin", std::move(archive)))
+            {
+                CUBOS_INFO("Mounted builtin assets directory with path {}", builtinOsPath);
+            }
+            else
+            {
+                CUBOS_ERROR("Couldn't mount builtin assets directory with path {}", builtinOsPath);
+            }
+        }
+
+        if (FileSystem::find("/assets") != nullptr)
+        {
+            assets.loadMeta("/assets");
+        }
+        else
+        {
+            CUBOS_WARN("No application assets directory has been mounted, have you forgotten to set the "
+                       "`assets.app.osPath` setting?");
+        }
+
+        if (FileSystem::find("/builtin") != nullptr)
+        {
+            assets.loadMeta("/builtin");
+        }
+        else
+        {
+            CUBOS_WARN("No builtin assets directory has been mounted, have you forgotten to set the "
+                       "`assets.builtin.osPath` setting?");
+        }
     });
 
     cubos.system("cleanup unused assets").tagged(assetsCleanupTag).call([](Assets& assets) {

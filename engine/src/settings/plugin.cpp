@@ -81,8 +81,8 @@ static Settings loadFromFile(std::string_view path)
     if (FileSystem::find("/settings.json") == nullptr)
     {
         // Mount the real settings file as `/settings.json`.
-        if (!FileSystem::mount("/settings.json",
-                               std::make_unique<StandardArchive>(path, false /*isDirectory*/, false /*readOnly*/)))
+        auto archive = std::make_unique<StandardArchive>(path, false /*isDirectory*/, false /*readOnly*/);
+        if (!archive->initialized() || !FileSystem::mount("/settings.json", std::move(archive)))
         {
             CUBOS_ERROR("Couldn't mount the settings file at {}", path);
             return {};

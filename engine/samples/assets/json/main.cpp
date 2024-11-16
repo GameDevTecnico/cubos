@@ -40,8 +40,9 @@ int main(int argc, char** argv)
     cubos.plugin(settingsPlugin);
     cubos.plugin(assetsPlugin);
 
-    cubos.startupSystem("configure Assets plugin").tagged(settingsTag).call([](Settings& settings) {
-        settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    cubos.startupSystem("configure Assets plugin").before(settingsTag).call([](Settings& settings) {
+        settings.setString("assets.app.osPath", APP_ASSETS_PATH);
+        settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
     });
 
     /// [Register bridge]

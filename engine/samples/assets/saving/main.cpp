@@ -37,12 +37,13 @@ int main(int argc, char** argv)
     cubos.plugin(assetsPlugin);
 
     /// [Setting]
-    cubos.startupSystem("configure Assets plugin").tagged(settingsTag).call([](Settings& settings) {
+    cubos.startupSystem("configure Assets plugin").before(settingsTag).call([](Settings& settings) {
         // If we want to save assets, we must set this to false.
-        settings.setBool("assets.io.readOnly", false);
+        settings.setBool("assets.app.readOnly", false);
         /// [Setting]
 
-        settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+        settings.setString("assets.app.osPath", APP_ASSETS_PATH);
+        settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
     });
 
     cubos.startupSystem("setup bridge to load and save .int assets").tagged(assetsBridgeTag).call([](Assets& assets) {
