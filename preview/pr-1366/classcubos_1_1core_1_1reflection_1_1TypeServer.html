@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::core::reflection::TypeServer class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>TypeServer <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="type__server_8hpp.html">&lt;core/reflection/type_server.hpp&gt;</a></div>
+        </h1>
+        <p>Used to setup a TypeChannel on top of a stream, from the server side.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>This class allows the server to send and receive values of types unknown by the client to the client. Not all types registered on the server will support this: some may not have enough information to be serialized. The set of types which can be safely serialized is returned by the <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#aa39152d4fe1dd3b312a6750558f2152f" class="m-doc">connect</a> function.</p><p>The protocol used by this class is as follows:</p><ol><li>Server receives a list of supported trait types from the client, and whether they are structural.</li><li>Server receives a list of the types which the client already knows.</li><li>Server sends the type information of the types which the client does not know. This includes: a) name of each type, b) structural trait of the type which is supported by the client, if any, b) non-structural traits of the type which are supported by the client, d) if the type has a structural trait and is default-constructible, the default-constructed serialized value.</li></ol><p>If the type has multiple structural traits, the first one added to the server is used. The non-structural traits are sent in the order they were added to the server.</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(<a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">data::<wbr />Serializer</a>&amp;, const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, bool) const &gt;
+            </dt>
+            <dd>Function type for serializing traits.</dd>
+            <dt id="afa0c75d619739b1b7968b736ceb217cc">
+              using <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc-self">DiscoverTypes</a> = void(*)(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;) const &gt;&amp;)
+            </dt>
+            <dd>Function type for discovering new types from a trait.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="acee5218c656c7414370d1b5163a8f8a5">
+              <span class="m-doc-wrap-bumper"><a href="#acee5218c656c7414370d1b5163a8f8a5" class="m-doc-self">TypeServer</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Default constructs.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+            </dt>
+            <dd>Registers a trait to be supported by the channel.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+            </dt>
+            <dd>Registers a trait to be supported by the channel.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9b73101270ad6959d778f22443ba4229" class="m-doc">addType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span>
+            </dt>
+            <dd>Adds a type to be supported by the channel.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#acf3540371f97d27b0557b0e9597b0f87" class="m-doc">addType</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Adds a type to be supported by the channel.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa39152d4fe1dd3b312a6750558f2152f" class="m-doc">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream) -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeServer_1_1Connection.html" class="m-doc">Connection</a>&gt;</span>
+            </dt>
+            <dd>Connects to a new client, using the given stream.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="ac1ca9c58f5f3dcb08b535c04e36c580a"><div>
+            <h3>
+              using cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc-self">Serialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(<a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">data::<wbr />Serializer</a>&amp;, const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, bool) const &gt;
+            </h3>
+            <p>Function type for serializing traits.</p>
+<p>Receives a serializer, the value to serialize, and whether the type is already serializable.</p>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a15b9dd42dbbc334aec04492d3f12719e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
+            </h3>
+            <p>Registers a trait to be supported by the channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">traitType</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>serialize</td>
+                  <td>Function to serialize the trait.</td>
+                </tr>
+                <tr>
+                  <td>discoverTypes</td>
+                  <td>Function to discover new types from the trait.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>If a connection is already active, will only take effect after the channel is reconnected.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ae32916d0f2b8334b3c769b655f277f0a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
+            </h3>
+            <p>Registers a trait to be supported by the channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td><a href="structcubos_1_1core_1_1reflection_1_1TypeServer_1_1Trait.html" class="m-doc">Trait</a> type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>serialize</td>
+                  <td>Function to serialize the trait.</td>
+                </tr>
+                <tr>
+                  <td>discoverTypes</td>
+                  <td>Function to discover new types from the trait.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>If a connection is already active, will only take effect after the channel is reconnected.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9b73101270ad6959d778f22443ba4229"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b73101270ad6959d778f22443ba4229" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Adds a type to be supported by the channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a> to be supported.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Also adds any types used by the type, recursively. I.e., types of fields if the type has a <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="acf3540371f97d27b0557b0e9597b0f87"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf3540371f97d27b0557b0e9597b0f87" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Adds a type to be supported by the channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a> to be supported.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Also adds any types used by the type, recursively. I.e., types of fields if the type has a <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa39152d4fe1dd3b312a6750558f2152f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeServer_1_1Connection.html" class="m-doc">Connection</a>&gt; cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa39152d4fe1dd3b312a6750558f2152f" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream)</span></span>
+            </h3>
+            <p>Connects to a new client, using the given stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stream</td>
+                  <td>Stream.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1TypeServer_1_1Connection.html" class="m-doc">Connection</a> information, or nothing if the connection failed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
