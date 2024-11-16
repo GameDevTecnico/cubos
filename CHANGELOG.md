@@ -11,12 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Collision detection with VoxelCollisionShapes (#994, **@joaomanita**).
 - Allow identifying assets in code from their path (#1177. **@GalaxyCrush**).
-- Added an Audio asset (#230, **@Dageus**, **@diogomsmiranda**).
 - Hold function for debug_camera (#1030, **@jdbaracho**).
+- Audio asset (#230, **@Dageus**, **@diogomsmiranda**).
+- Compatibility with CMake find_package (#1326, **@RiscadoA**).
+- A proper Nix package which can be used to install Cubos and Tesseratos (#1327, **RiscadoA**).
 
 ### Changed
 
 - Reduced performance overhead of directional shadow support (#1345, **@tomas7770**).
+- Replaced git submodules with CMake FetchContent (#1327, **RiscadoA**).
 
 ### Fixed
 
