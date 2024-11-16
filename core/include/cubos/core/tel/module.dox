@@ -1,0 +1,13 @@
+/// @dir
+/// @brief @ref core-tel module.
+
+/// @namespace cubos::core::tel
+/// @brief @ref core-tel module.
+/// @ingroup core-tel
+
+namespace cubos::core::tel
+{
+    /// @defgroup core-tel Telemetry
+    /// @ingroup core
+    /// @brief Provides telemetry utilities, such as logging, tracing and metrics.
+} // namespace cubos::core::tel

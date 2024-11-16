@@ -1,6 +1,6 @@
 # ImGui {#examples-engine-imgui}
 
-@brief Using the @ref imgui-plugin plugin and @ref cubos::engine::DataInspector resource.
+@brief Using the @ref imgui-plugin plugin and the @ref cubos::engine::DataInspector "DataInspector" resource.
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/imgui).
 
