@@ -33,12 +33,6 @@ int main(int argc, char** argv)
     cubos.plugin(gizmosPlugin);
     /// [Adding plugin]
 
-    cubos.startupSystem("disable Assets IO").tagged(settingsTag).call([](Settings& settings) {
-        // We don't load assets in this sample and we don't even have an assets folder, so we should
-        // disable assets IO.
-        settings.setBool("assets.io.enabled", false);
-    });
-
     cubos.startupSystem("setup render target and cameras").call([](Commands cmds) {
         auto target =
             cmds.create().add(RenderTarget{}).add(RenderPicker{}).add(GizmosTarget{}).add(SplitScreen{}).entity();

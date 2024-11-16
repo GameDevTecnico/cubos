@@ -61,8 +61,9 @@ int main(int argc, char** argv)
 
     cubos.startupTag(spawnTag);
 
-    cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
-        settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    cubos.startupSystem("configure Assets").before(settingsTag).call([](Settings& settings) {
+        settings.setString("assets.app.osPath", APP_ASSETS_PATH);
+        settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
     });
 
     /// [Spawning the scene]

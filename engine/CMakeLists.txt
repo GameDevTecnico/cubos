@@ -1,15 +1,18 @@
 # engine/CMakeLists.txt
 # Cubos engine build configuration
 
-option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
-option(BUILD_ENGINE_TESTS "Build cubos engine tests?" OFF)
-option(BUILD_ENGINE_SHARED "Build cubos engine as shared library?" ON)
+# ---------------------- Declare engine library options -----------------------
 
-message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
-message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
-message("# Building engine as shared library: " ${BUILD_ENGINE_SHARED})
+option(CUBOS_ENGINE_SAMPLES "Build cubos::engine samples" ${PROJECT_IS_TOP_LEVEL})
+option(CUBOS_ENGINE_TESTS "Build cubos::engine tests?" ${PROJECT_IS_TOP_LEVEL})
+option(CUBOS_ENGINE_SHARED "Build cubos::engine as shared library?" ON)
 
-# Set engine source files
+message("# Building cubos::engine samples: " ${CUBOS_ENGINE_SAMPLES})
+message("# Building cubos::engine tests: " ${CUBOS_ENGINE_TESTS})
+message("# Building cubos::engine as shared library: " ${CUBOS_ENGINE_SHARED})
+
+# -------------------- Define engine library source files ---------------------
+
 set(CUBOS_ENGINE_SOURCE
 	"src/api.cpp"
 	"src/prelude.cpp"
@@ -191,58 +194,122 @@ set(CUBOS_ENGINE_SOURCE
 	"src/tools/plugin.cpp"
 )
 
-# Create cubos engine
-if(BUILD_ENGINE_SHARED)
+# ---------------------- Configure engine library target ----------------------
+
+if(CUBOS_ENGINE_SHARED)
 	add_library(cubos-engine SHARED ${CUBOS_ENGINE_SOURCE})
 	target_compile_definitions(cubos-engine
-		PRIVATE -DCUBOS_ENGINE_EXPORT
-		PUBLIC -DCUBOS_ENGINE_IMPORT
+		PRIVATE -DCUBOS_ENGINE_EXPORT # When compiling library source files, we export symbols
+		PUBLIC -DCUBOS_ENGINE_IMPORT  # When compiling client source files, we import symbols
 	)
 else()
 	add_library(cubos-engine STATIC ${CUBOS_ENGINE_SOURCE})
 endif()
-
-target_include_directories(cubos-engine PUBLIC "include")
-target_link_libraries(cubos-engine PUBLIC cubos-core)
-target_compile_definitions(cubos-engine PRIVATE CUBOS_BUILTIN_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+add_library(cubos::engine ALIAS cubos-engine) # Alias so that we can use cubos::engine inside the build tree
+set_target_properties(cubos-engine PROPERTIES EXPORT_NAME engine) # Will be within the cubos namespace when exported
 cubos_common_target_options(cubos-engine)
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	target_compile_options(cubos-engine PUBLIC -Wno-attributes)
-endif()
+target_include_directories(cubos-engine PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+	$<INSTALL_INTERFACE:include/cubos-engine> # On installation, the include files will have been copied here 
+)
 
-# Add ImGui and ImPlot
+# Set the default path for the builtin assets folder, which is useful during development.
+set(CUBOS_ENGINE_ASSETS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/assets)
+set(CUBOS_ENGINE_ASSETS_PATH ${CUBOS_ENGINE_ASSETS_PATH} PARENT_SCOPE)
+target_compile_definitions(cubos-engine PRIVATE CUBOS_ENGINE_ASSETS_PATH="${CUBOS_ENGINE_ASSETS_PATH}")
+
+# ------------- Fetch and link engine private library dependencies -------------
+
+include(FetchContent)
+
+# Fetch stb_image
+FetchContent_Declare(
+	stb_image
+	GIT_REPOSITORY https://github.com/GameDevTecnico/cubos-stb.git
+	GIT_TAG        5c340b5ee24ac74e69bf92b5bacdfbac6bbaa4a8
+	SYSTEM
+)
+FetchContent_MakeAvailable(stb_image)
+
+# We need to define our own stb_image target as the repository doesn't have its own CMakeLists.txt
+add_library(stb_image INTERFACE)
+target_include_directories(stb_image SYSTEM INTERFACE ${stb_image_SOURCE_DIR})
+
+# Link stb_image
+target_link_libraries(cubos-engine PRIVATE $<BUILD_INTERFACE:stb_image>)
+
+# ------------- Fetch and link engine public library dependencies -------------
+
+# Link our own core library
+target_link_libraries(cubos-engine PUBLIC cubos-core)
+
+# Fetch ImGui and ImPlot
+FetchContent_Declare(
+	imgui
+	GIT_REPOSITORY https://github.com/ocornut/imgui.git
+	GIT_TAG        v1.89.9
+)
+FetchContent_Declare(
+	implot
+	GIT_REPOSITORY https://github.com/epezent/implot.git
+	GIT_TAG        1f7a8c0314d838a76695bccebe0f66864f507bc0
+)
+FetchContent_MakeAvailable(imgui)
+FetchContent_MakeAvailable(implot)
+
+# We need to define our own ImGui target as the ImGui repository doesn't have its own CMakeLists.txt
 set(IMGUI_SOURCES
-	"lib/imgui/imgui.cpp"
-	"lib/imgui/imgui_draw.cpp"
-	"lib/imgui/imgui_tables.cpp"
-	"lib/imgui/imgui_widgets.cpp"
-	"lib/imgui/imgui_demo.cpp"
-	"lib/imgui/misc/cpp/imgui_stdlib.cpp"
+	"${imgui_SOURCE_DIR}/imgui.cpp"
+	"${imgui_SOURCE_DIR}/imgui_draw.cpp"
+	"${imgui_SOURCE_DIR}/imgui_tables.cpp"
+	"${imgui_SOURCE_DIR}/imgui_widgets.cpp"
+	"${imgui_SOURCE_DIR}/imgui_demo.cpp"
+	"${imgui_SOURCE_DIR}/misc/cpp/imgui_stdlib.cpp"
 
-	"lib/implot/implot.cpp"
-	"lib/implot/implot_items.cpp"
-	"lib/implot/implot_demo.cpp"
+	"${implot_SOURCE_DIR}/implot.cpp"
+	"${implot_SOURCE_DIR}/implot_items.cpp"
+	"${implot_SOURCE_DIR}/implot_demo.cpp"
 )
 add_library(imgui STATIC ${IMGUI_SOURCES})
 set_property(TARGET imgui PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_include_directories(imgui PUBLIC
-	"lib/imgui"
-	"lib/imgui/misc/cpp"
-	"lib/implot"
+	$<BUILD_INTERFACE:${imgui_SOURCE_DIR}>
+	$<BUILD_INTERFACE:${imgui_SOURCE_DIR}/misc/cpp>
+	$<BUILD_INTERFACE:${implot_SOURCE_DIR}>
+	$<INSTALL_INTERFACE:include/imgui> # On installation, we copy the include files here
+	$<INSTALL_INTERFACE:include/imgui/misc/cpp>
+	$<INSTALL_INTERFACE:include/implot>
 )
+
+# Finally, link the target we created for both ImGui and Implot
 target_link_libraries(cubos-engine PUBLIC imgui)
 
-add_library(stb_image INTERFACE)
-target_include_directories(stb_image SYSTEM INTERFACE "lib/stb_image")
-target_link_libraries(cubos-engine PUBLIC stb_image)
+# ------------------------ Configure tests and samples ------------------------
 
-# Add engine tests
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS)
+if(CUBOS_ENGINE_TESTS)
 	add_subdirectory(tests)
 endif()
 
-# Add engine samples
-if(BUILD_ENGINE_SAMPLES)
+if(CUBOS_ENGINE_SAMPLES)
 	add_subdirectory(samples)
+endif()
+
+# ------------------- Configure engine library installation -------------------
+
+if(CUBOS_ENABLE_INSTALL)
+    set(CUBOS_ENGINE_ASSETS_INSTALL_PATH ${CMAKE_INSTALL_DATADIR}/cubos-engine)
+    set(CUBOS_ENGINE_ASSETS_INSTALL_PATH ${CUBOS_ENGINE_ASSETS_INSTALL_PATH} PARENT_SCOPE)
+
+	# Install engine target and imgui target
+    install(TARGETS cubos-engine imgui
+        EXPORT cubos-engine-targets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+    install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cubos-engine)
+	install(DIRECTORY ${imgui_SOURCE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/imgui)
+	install(DIRECTORY ${implot_SOURCE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/implot)
+	install(DIRECTORY assets/ DESTINATION ${CUBOS_ENGINE_ASSETS_INSTALL_PATH})
 endif()
