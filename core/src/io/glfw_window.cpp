@@ -11,7 +11,7 @@
 using namespace cubos::core;
 using namespace cubos::core::io;
 
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos);
@@ -28,7 +28,7 @@ static int cubosToGlfwKey(Key key);
 
 static GLFWWindow* currentWindow = nullptr;
 
-#endif // WITH_GLFW
+#endif // CUBOS_CORE_GLFW
 
 #define UNSUPPORTED()                                                                                                  \
     do                                                                                                                 \
@@ -44,7 +44,7 @@ static void errorCallback(int errorCode, const char* description)
 
 GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vSync)
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     CUBOS_ASSERT(currentWindow == nullptr, "Only one window is supported at the moment");
 
     glfwSetErrorCallback(errorCallback);
@@ -109,7 +109,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
 
 GLFWWindow::~GLFWWindow()
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     delete mRenderDevice;
     glfwTerminate();
 #else
@@ -119,7 +119,7 @@ GLFWWindow::~GLFWWindow()
 
 void GLFWWindow::pollEvents()
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     glfwPollEvents();
 #else
     UNSUPPORTED();
@@ -128,7 +128,7 @@ void GLFWWindow::pollEvents()
 
 void GLFWWindow::swapBuffers()
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     glfwSwapBuffers(mHandle);
 #else
     UNSUPPORTED();
@@ -137,7 +137,7 @@ void GLFWWindow::swapBuffers()
 
 gl::RenderDevice& GLFWWindow::renderDevice() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     return *mRenderDevice;
 #else
     UNSUPPORTED();
@@ -146,7 +146,7 @@ gl::RenderDevice& GLFWWindow::renderDevice() const
 
 glm::uvec2 GLFWWindow::size() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     int width;
     int height;
     glfwGetWindowSize(mHandle, &width, &height);
@@ -158,7 +158,7 @@ glm::uvec2 GLFWWindow::size() const
 
 glm::uvec2 GLFWWindow::framebufferSize() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     int width;
     int height;
     glfwGetFramebufferSize(mHandle, &width, &height);
@@ -170,7 +170,7 @@ glm::uvec2 GLFWWindow::framebufferSize() const
 
 float GLFWWindow::contentScale() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     float xscale;
     float yscale;
     glfwGetWindowContentScale(mHandle, &xscale, &yscale);
@@ -183,7 +183,7 @@ float GLFWWindow::contentScale() const
 
 bool GLFWWindow::shouldClose() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     return glfwWindowShouldClose(mHandle) != 0;
 #else
     UNSUPPORTED();
@@ -192,7 +192,7 @@ bool GLFWWindow::shouldClose() const
 
 double GLFWWindow::time() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     return glfwGetTime();
 #else
     UNSUPPORTED();
@@ -201,7 +201,7 @@ double GLFWWindow::time() const
 
 void GLFWWindow::mouseState(MouseState state)
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     int cursorState;
     switch (state)
     {
@@ -226,7 +226,7 @@ void GLFWWindow::mouseState(MouseState state)
 
 MouseState GLFWWindow::mouseState() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     switch (glfwGetInputMode(mHandle, GLFW_CURSOR))
     {
     case GLFW_CURSOR_NORMAL:
@@ -246,7 +246,7 @@ MouseState GLFWWindow::mouseState() const
 
 glm::ivec2 GLFWWindow::getMousePosition()
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     double xpos = 0;
     double ypos = 0;
     glfwGetCursorPos(mHandle, &xpos, &ypos);
@@ -258,7 +258,7 @@ glm::ivec2 GLFWWindow::getMousePosition()
 
 void GLFWWindow::setMousePosition(const glm::ivec2 pos)
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     glfwSetCursorPos(mHandle, (double)pos.x, (double)pos.y);
 #else
     UNSUPPORTED();
@@ -267,7 +267,7 @@ void GLFWWindow::setMousePosition(const glm::ivec2 pos)
 
 std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     GLFWcursor* cursor;
     switch (standard)
     {
@@ -301,7 +301,7 @@ std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
 
 void GLFWWindow::cursor(std::shared_ptr<Cursor> cursor)
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     if (cursor == nullptr)
     {
         glfwSetCursor(mHandle, nullptr);
@@ -318,7 +318,7 @@ void GLFWWindow::cursor(std::shared_ptr<Cursor> cursor)
 
 void GLFWWindow::clipboard(const std::string& text)
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     glfwSetClipboardString(mHandle, text.c_str());
 #else
     UNSUPPORTED();
@@ -327,7 +327,7 @@ void GLFWWindow::clipboard(const std::string& text)
 
 const char* GLFWWindow::clipboard() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     return glfwGetClipboardString(mHandle);
 #else
     UNSUPPORTED();
@@ -336,7 +336,7 @@ const char* GLFWWindow::clipboard() const
 
 bool GLFWWindow::pressed(Key key, Modifiers modifiers) const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     // Returns true even if a superset of modifiers is active.
 
     return glfwGetKey(mHandle, cubosToGlfwKey(key)) == GLFW_PRESS && (modifiers & this->modifiers()) == modifiers;
@@ -347,7 +347,7 @@ bool GLFWWindow::pressed(Key key, Modifiers modifiers) const
 
 bool GLFWWindow::pressed(MouseButton button) const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     return glfwGetMouseButton(mHandle, cubosToGlfwMouseButton(button)) == GLFW_PRESS;
 #else
     UNSUPPORTED();
@@ -356,7 +356,7 @@ bool GLFWWindow::pressed(MouseButton button) const
 
 Modifiers GLFWWindow::modifiers() const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     return mModifiers;
 #else
     UNSUPPORTED();
@@ -370,7 +370,7 @@ void GLFWWindow::modifiers(Modifiers modifiers)
 
 bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const
 {
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
     GLFWgamepadstate glfwState;
     if (glfwGetGamepadState(gamepad, &glfwState) == GLFW_FALSE)
     {
@@ -411,7 +411,7 @@ bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const
 #endif
 }
 
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
 
 static void keyCallback(GLFWwindow* window, int key, int /*unused*/, int action, int mods)
 {
@@ -747,4 +747,4 @@ static int cubosToGlfwKey(Key key)
 #undef MAP_KEY
 }
 
-#endif // WITH_GLFW
+#endif // CUBOS_CORE_GLFW

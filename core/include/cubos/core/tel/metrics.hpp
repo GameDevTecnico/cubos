@@ -62,7 +62,7 @@ namespace cubos::core::tel
 /// @param name The name of the metric.
 /// @param val The value to set for the metric.
 
-#ifdef CUBOS_PROFILING
+#ifdef CUBOS_CORE_PROFILING
 #define CUBOS_METRIC(name, val) ::cubos::core::tel::Metrics::metric(name, val)
 #else
 #define CUBOS_METRIC(...)                                                                                              \
