@@ -176,42 +176,57 @@ void World::destroy(Entity entity)
     mEntityPool.destroy(entity.index);
     mTables.dense().at(archetype).swapErase(entity.index);
 
+    std::vector<std::pair<DataTypeId, SparseRelationTable*>> delayedPropagateDepth{};
     for (const auto& [type, index] : mTables.sparseRelation())
     {
         // For each table where the entity's archetype is the 'from' archetype.
         if (index.from().contains(archetype))
         {
-            for (const auto& table : index.from().at(archetype))
+            for (const auto& tableId : index.from().at(archetype))
             {
                 // Erase all occurrences of the entity in the 'from' column.
-                mTables.sparseRelation().at(table).eraseFrom(entity.index);
+                mTables.sparseRelation().at(tableId).eraseFrom(entity.index);
             }
         }
 
         // For each table where the entity's archetype is the 'to' archetype.
         if (index.to().contains(archetype))
         {
-            for (const auto& table : index.to().at(archetype))
+            for (const auto& tableId : index.to().at(archetype))
             {
+                auto& table = mTables.sparseRelation().at(tableId);
+
                 if (mTypes.isTreeRelation(type))
                 {
                     // If the relation is tree-like, then we need to update the depth of the corresponding 'from'
-                    // entities.
-                    for (auto row = mTables.sparseRelation().at(table).firstTo(entity.index);
-                         row != mTables.sparseRelation().at(table).size();
-                         row = mTables.sparseRelation().at(table).nextTo(row))
-                    {
-                        uint32_t fromIndex;
-                        uint32_t toIndex;
-                        mTables.sparseRelation().at(table).indices(row, fromIndex, toIndex);
-                        this->propagateDepth(fromIndex, type, 0);
-                    }
+                    // entities. We delay this to after the loop has finished, as we're iterating over all tables and
+                    // propagateDepth() may create new tables, which can lead to UB.
+                    //
+                    // We won't erase the relation here, as we'll need to iterate over the table below.
+                    delayedPropagateDepth.emplace_back(type, &table);
                 }
-
-                // Erase all occurrences of the entity in the 'to' column.
-                mTables.sparseRelation().at(table).eraseTo(entity.index);
+                else
+                {
+                    // Erase all occurrences of the entity in the 'to' column.
+                    table.eraseTo(entity.index);
+                }
             }
         }
+    }
+
+    // Process the delayed depth propagation.
+    for (auto [type, table] : delayedPropagateDepth)
+    {
+        for (auto row = table->firstTo(entity.index); row != table->size(); row = table->nextTo(row))
+        {
+            uint32_t fromIndex;
+            uint32_t toIndex;
+            table->indices(row, fromIndex, toIndex);
+            this->propagateDepth(fromIndex, type, 0);
+        }
+
+        // Now it's safe to erase the relations.
+        table->eraseTo(entity.index);
     }
 
     // Run commands from observers after entity is destroyed
