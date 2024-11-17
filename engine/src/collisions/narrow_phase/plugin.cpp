@@ -22,7 +22,9 @@ CUBOS_DEFINE_TAG(cubos::engine::collisionsNarrowCleanTag);
 CUBOS_DEFINE_TAG(cubos::engine::collisionsNarrowTag);
 CUBOS_DEFINE_TAG(cubos::engine::collisionsManifoldTag);
 
+using cubos::core::geom::PolygonalFeature;
 using cubos::engine::CollidingWith;
+using cubos::engine::ContactFeatureId;
 using cubos::engine::ContactPointData;
 using cubos::engine::LocalToWorld;
 
@@ -33,56 +35,63 @@ std::vector<ContactPointData> computeContactPoints(const cubos::core::geom::Box*
                                                    CollidingWith& collidingWith)
 {
     // Calculate incident and reference face
-    std::vector<glm::vec3> polygon1;
-    std::vector<glm::vec3> polygon2;
-    glm::vec3 normal1;
-    glm::vec3 normal2;
+    PolygonalFeature face1;
+    PolygonalFeature face2;
+    std::vector<uint32_t> adjPlanes1Ids;
+    std::vector<uint32_t> adjPlanes2Ids;
     std::vector<cubos::core::geom::Plane> adjPlanes1;
     std::vector<cubos::core::geom::Plane> adjPlanes2;
-    getIncidentReferencePolygon(*matchedShape1, collidingWith.normal, polygon1, normal1, adjPlanes1,
+    getIncidentReferencePolygon(*matchedShape1, collidingWith.normal, face1, adjPlanes1, adjPlanes1Ids,
                                 matchedLocalToWorld1->mat, matchedLocalToWorld1->worldScale());
-    getIncidentReferencePolygon(*matchedShape2, -collidingWith.normal, polygon2, normal2, adjPlanes2,
+    getIncidentReferencePolygon(*matchedShape2, -collidingWith.normal, face2, adjPlanes2, adjPlanes2Ids,
                                 matchedLocalToWorld2->mat, matchedLocalToWorld2->worldScale());
 
     // Each face will always have more than 1 point so we proceed to clipping
     // See which one of the normals is the reference one by checking which has the highest dot product
-    bool flipped = fabs(glm::dot(collidingWith.normal, normal1)) < fabs(glm::dot(collidingWith.normal, normal2));
+    bool flipped =
+        fabs(glm::dot(collidingWith.normal, face1.normal)) < fabs(glm::dot(collidingWith.normal, face2.normal));
 
     if (flipped)
     {
-        std::swap(polygon1, polygon2);
-        std::swap(normal1, normal2);
+        std::swap(face1, face2);
         std::swap(adjPlanes1, adjPlanes2);
+        std::swap(adjPlanes1Ids, adjPlanes2Ids);
     }
 
     // Clip the incident face to the adjacent edges of the reference face
-    polygon2 = cubos::core::geom::sutherlandHodgmanClipping(polygon2, (int)adjPlanes1.size(), adjPlanes1.data(), false);
+    cubos::core::geom::sutherlandHodgmanClipping(face2, (int)adjPlanes1.size(), adjPlanes1.data(), false);
 
     // Finally clip (and remove) any contact points that are above the reference face
     cubos::core::geom::Plane refPlane =
-        cubos::core::geom::Plane{.normal = -normal1, .d = -glm::dot(-normal1, polygon1.front())};
-    polygon2 = cubos::core::geom::sutherlandHodgmanClipping(polygon2, 1, &refPlane, true);
+        cubos::core::geom::Plane{.normal = -face1.normal, .d = -glm::dot(-face1.normal, face1.vertices.front())};
+    cubos::core::geom::sutherlandHodgmanClipping(face2, 1, &refPlane, true);
 
     // Use the remaining contact point on the manifold
     std::vector<ContactPointData> points;
 
-    for (const glm::vec3& point : polygon2)
+    for (size_t i = 0; i < face2.vertices.size(); i++)
     {
         // Compute distance to reference plane
-        glm::vec3 pointDiff = point - cubos::core::geom::getClosestPointPolygon(point, polygon1);
+        glm::vec3 pointDiff =
+            face2.vertices[i] - cubos::core::geom::getClosestPointPolygon(face2.vertices[i], face1.vertices);
         float contactPenetration = -glm::dot(pointDiff, collidingWith.normal); // is this positive
 
         // Set Contact data
-        glm::vec3 globalOn1 = point;                                             // world coordinates
-        glm::vec3 globalOn2 = point + collidingWith.normal * contactPenetration; // world coordinates
+        glm::vec3 globalOn1 = face2.vertices[i] + collidingWith.normal * contactPenetration; // world coordinates
+        glm::vec3 globalOn2 = face2.vertices[i];                                             // world coordinates
+
+        ContactFeatureId featureId1;
+        featureId1.setAsFace(face1.faceId);
+        ContactFeatureId featureId2;
+        featureId2.setAsVertex(face2.vertexIds[i]);
 
         // If we flipped incident and reference planes, we will
         // need to flip it back before sending it to the manifold.
         if (flipped)
         {
             contactPenetration = -contactPenetration;
-            globalOn1 = point - collidingWith.normal * contactPenetration;
-            globalOn2 = point;
+            std::swap(globalOn1, globalOn2);
+            std::swap(featureId1, featureId2);
         }
 
         glm::vec3 localOn1 = glm::vec3(matchedLocalToWorld1->inverse() * glm::vec4(globalOn1, 1.0F));
@@ -99,12 +108,33 @@ std::vector<ContactPointData> computeContactPoints(const cubos::core::geom::Box*
                                             .localOn1 = localOn1,
                                             .localOn2 = localOn2,
                                             .penetration = collidingWith.penetration,
-                                            .id = 0};
+                                            .normalImpulse = 0.0F,
+                                            .frictionImpulse1 = 0.0F,
+                                            .frictionImpulse2 = 0.0F,
+                                            .fid1 = featureId1,
+                                            .fid2 = featureId2};
 
             points.push_back(contact);
         }
     }
     return points;
+}
+
+static void matchContactPoints(std::vector<ContactPointData>& newPoints, std::vector<ContactPointData>& oldPoints)
+{
+    for (auto newPoint : newPoints)
+    {
+        for (auto oldPoint : oldPoints)
+        {
+            if ((newPoint.fid1 == oldPoint.fid1) && (newPoint.fid2 == oldPoint.fid2))
+            {
+                newPoint.normalImpulse = oldPoint.normalImpulse;
+                newPoint.frictionImpulse1 = oldPoint.frictionImpulse1;
+                newPoint.frictionImpulse2 = oldPoint.frictionImpulse2;
+                break;
+            }
+        }
+    }
 }
 
 void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
@@ -118,42 +148,77 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
     cubos.tag(collisionsNarrowTag).tagged(fixedStepTag);
     cubos.tag(collisionsManifoldTag).tagged(fixedStepTag);
 
+    // Remove CollidingWith when it isn't related by PotentiallyCollidingWith
     cubos.system("clean colliding pairs")
         .tagged(collisionsNarrowCleanTag)
-        .before(collisionsNarrowTag)
-        .call([](Commands cmds, Query<Entity, CollidingWith&, Entity> query) {
-            for (auto [entity, collidingWith, other] : query)
+        .after(collisionsNarrowTag)
+        .before(collisionsManifoldTag)
+        .call([](Commands cmds, Query<Entity, PotentiallyCollidingWith&, Entity> pQuery,
+                 Query<Entity, CollidingWith&, Entity> cQuery) {
+            for (auto [entity, collidingWith, other] : cQuery)
             {
-                cmds.unrelate<CollidingWith>(entity, other);
-            }
-        });
-
-    cubos.system("clean manifolds")
-        .tagged(collisionsNarrowCleanTag)
-        .before(collisionsNarrowTag)
-        .call([](Commands cmds, Query<Entity, ContactManifold&, Entity> query) {
-            for (auto [entity, collidingWith, other] : query)
-            {
-                cmds.unrelate<ContactManifold>(entity, other);
+                if (!pQuery.pin(0, entity).pin(1, other).first())
+                {
+                    cmds.unrelate<CollidingWith>(entity, other);
+                    cmds.unrelate<ContactManifold>(entity, other);
+                }
             }
         });
 
     cubos.system("find colliding pairs")
         .tagged(collisionsNarrowTag)
         .after(collisionsBroadTag)
-        .call(
-            [](Commands cmds,
-               Query<Entity, const Position&, const LocalToWorld&, const BoxCollisionShape&, PotentiallyCollidingWith&,
-                     Entity, const Position&, const LocalToWorld&, const BoxCollisionShape&>
-                   query) {
-                for (auto [ent1, position1, localToWorld1, boxShape1, potentiallyCollidingWith, ent2, position2,
-                           localToWorld2, boxShape2] : query)
+        .call([](Commands cmds,
+                 Query<Entity, const Position&, const LocalToWorld&, const BoxCollisionShape&,
+                       const PotentiallyCollidingWith&, Entity, const Position&, const LocalToWorld&,
+                       const BoxCollisionShape&>
+                     nQuery,
+                 Query<Entity, const Position&, const LocalToWorld&, const BoxCollisionShape&, CollidingWith&, Entity,
+                       const Position&, const LocalToWorld&, const BoxCollisionShape&>
+                     yQuery) {
+            for (auto [ent1, position1, localToWorld1, boxShape1, potentiallyCollidingWith, ent2, position2,
+                       localToWorld2, boxShape2] : nQuery)
+            {
+
+                cubos::core::geom::Intersection intersectionInfo{};
+
+                bool intersects = cubos::core::geom::intersects(boxShape1.box, localToWorld1.mat, boxShape2.box,
+                                                                localToWorld2.mat, intersectionInfo);
+
+                // If CollidingWith present in previous frame update it
+                if (auto match = yQuery.pin(0, ent1).pin(1, ent2).first())
                 {
-                    cubos::core::geom::Intersection intersectionInfo{};
+                    if (!intersects)
+                    {
+                        // Remove CollidingWith when it is related by PotentiallyCollidingWith but not intersecting
+                        cmds.unrelate<CollidingWith>(ent1, ent2);
+                        cmds.unrelate<ContactManifold>(ent1, ent2);
+                        continue;
+                    }
 
-                    bool intersects = cubos::core::geom::intersects(boxShape1.box, localToWorld1.mat, boxShape2.box,
-                                                                    localToWorld2.mat, intersectionInfo);
+                    auto [ent1, position1, localToWorld1, boxShape1, collidingWith, ent2, position2, localToWorld2,
+                          boxShape2] = *match;
 
+                    /// TODO: this can be simplyfied when we do the refactor
+                    if (collidingWith.entity == ent1)
+                    {
+                        collidingWith.entity1OriginalPosition = position1.vec;
+                        collidingWith.entity2OriginalPosition = position2.vec;
+                        collidingWith.penetration = intersectionInfo.penetration;
+                        collidingWith.position = {0.0F, 0.0F, 0.0F};
+                        collidingWith.normal = intersectionInfo.normal;
+                    }
+                    else
+                    {
+                        collidingWith.entity1OriginalPosition = position2.vec;
+                        collidingWith.entity2OriginalPosition = position1.vec;
+                        collidingWith.penetration = intersectionInfo.penetration;
+                        collidingWith.position = {0.0F, 0.0F, 0.0F};
+                        collidingWith.normal = -intersectionInfo.normal;
+                    }
+                }
+                else
+                {
                     if (!intersects)
                     {
                         continue;
@@ -167,7 +232,8 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                                               .position = {0.0F, 0.0F, 0.0F},
                                               .normal = intersectionInfo.normal});
                 }
-            });
+            }
+        });
 
     /// Our method to calculate contact manifolds (and all supporting functions) is inspired by the tutorial:
     /// https://research.ncl.ac.uk/game/mastersdegree/gametechnologies/previousinformation/physics5collisionmanifolds/2017%20Tutorial%205%20-%20Collision%20Manifolds.pdf
@@ -177,10 +243,14 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
     cubos.system("collision manifolds")
         .tagged(collisionsManifoldTag)
         .after(collisionsNarrowTag)
-        .call([](Commands cmds, Query<Entity, const LocalToWorld&, const BoxCollisionShape&, CollidingWith&, Entity,
-                                      const LocalToWorld&, const BoxCollisionShape&>
-                                    query) {
-            for (auto [ent1, localToWorld1, boxShape1, collidingWith, ent2, localToWorld2, boxShape2] : query)
+        .call([](Commands cmds,
+                 Query<Entity, const LocalToWorld&, const BoxCollisionShape&, CollidingWith&, Entity,
+                       const LocalToWorld&, const BoxCollisionShape&>
+                     cQuery,
+                 Query<Entity, const LocalToWorld&, const BoxCollisionShape&, ContactManifold&, Entity,
+                       const LocalToWorld&, const BoxCollisionShape&>
+                     ymQuery) {
+            for (auto [ent1, localToWorld1, boxShape1, collidingWith, ent2, localToWorld2, boxShape2] : cQuery)
             {
                 // If penetration not bigger than 0 continue
                 if (collidingWith.penetration < 0)
@@ -202,9 +272,21 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 auto points = computeContactPoints(matchedShape1, matchedLocalToWorld1, matchedShape2,
                                                    matchedLocalToWorld2, collidingWith);
 
-                cmds.relate(
-                    ent1, ent2,
-                    ContactManifold{.entity = collidingWith.entity, .normal = collidingWith.normal, .points = points});
+                // TODO: in the refactor change this to work with the internal vector of manifolds
+                // If Manifold present in previous frame update it
+                if (auto match = ymQuery.pin(0, ent1).pin(1, ent2).first())
+                {
+                    auto [ent1, localToWorld1, boxShape1, contactManifold, ent2, localToWorld2, boxShape2] = *match;
+                    contactManifold.normal = collidingWith.normal;
+                    matchContactPoints(points, contactManifold.points);
+                    contactManifold.points = points;
+                }
+                else
+                {
+                    cmds.relate(ent1, ent2,
+                                ContactManifold{
+                                    .entity = collidingWith.entity, .normal = collidingWith.normal, .points = points});
+                }
             }
         });
 

@@ -5,6 +5,7 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/mat3x3.hpp>
 
+#include <cubos/core/geom/intersections.hpp>
 #include <cubos/core/geom/utils.hpp>
 
 bool cubos::core::geom::pointInPlane(const glm::vec3& point, const cubos::core::geom::Plane& plane)
@@ -33,8 +34,9 @@ int cubos::core::geom::getMaxVertexInAxis(const int numVertices, const glm::vec3
 }
 
 void cubos::core::geom::getIncidentReferencePolygon(const cubos::core::geom::Box& shape, const glm::vec3& normal,
-                                                    std::vector<glm::vec3>& outPoints, glm::vec3& outNormal,
+                                                    PolygonalFeature& outPolygon,
                                                     std::vector<cubos::core::geom::Plane>& outAdjacentPlanes,
+                                                    std::vector<uint32_t> outAdjacentPlanesIds,
                                                     const glm::mat4& localToWorld, float scale)
 {
     glm::mat3 m = glm::mat3(localToWorld) / scale;
@@ -72,7 +74,9 @@ void cubos::core::geom::getIncidentReferencePolygon(const cubos::core::geom::Box
     }
 
     // Output face normal
-    outNormal = glm::normalize(normalMatrix * faceNormals[bestFaceIndex]);
+    outPolygon.normal = glm::normalize(normalMatrix * faceNormals[bestFaceIndex]);
+    // Output face id
+    outPolygon.faceId = (uint32_t)bestFaceIndex;
 
     glm::ivec4 faces[6];
     cubos::core::geom::Box::faces(faces);
@@ -81,7 +85,8 @@ void cubos::core::geom::getIncidentReferencePolygon(const cubos::core::geom::Box
     for (int i = 0; i < 4; i++)
     {
         int vertexIndex = faces[bestFaceIndex][i];
-        outPoints.emplace_back(localToWorld * glm::vec4(vertices[vertexIndex], 1.0F));
+        outPolygon.vertices.emplace_back(localToWorld * glm::vec4(vertices[vertexIndex], 1.0F));
+        outPolygon.vertexIds.emplace_back(vertexIndex);
     }
 
     // Loop over all adjacent faces and output a clip plane for each.
@@ -110,6 +115,7 @@ void cubos::core::geom::getIncidentReferencePolygon(const cubos::core::geom::Box
                 plane.normal = planeNormal;
                 plane.d = planeDistance;
                 outAdjacentPlanes.push_back(plane);
+                outAdjacentPlanesIds.emplace_back(faceIndex);
             }
         }
     }

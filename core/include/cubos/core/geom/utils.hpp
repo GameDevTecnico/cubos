@@ -11,6 +11,7 @@
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/geom/box.hpp>
 #include <cubos/core/geom/plane.hpp>
+#include <cubos/core/geom/polygonal_feature.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::geom
@@ -31,14 +32,15 @@ namespace cubos::core::geom
     /// @brief Computes the candidate face of the polygon to be reference, as well as it's normal and adjacent planes.
     /// @param shape Collider shape.
     /// @param normal The reference normal in world coordinates.
-    /// @param outPoints The points of the resulting face.
-    /// @param outNormal The resulting normal.
+    /// @param outPolygon The polygon of the resulting face.
     /// @param outAdjacentPlanes The resulting adjacent planes (4).
+    /// @param outAdjacentPlanesIds The resulting adjacent planes ids (4).
     /// @param localToWorld The localToWorld matrix of the body.
     /// @param scale The scale of the body.
     CUBOS_CORE_API void getIncidentReferencePolygon(const cubos::core::geom::Box& shape, const glm::vec3& normal,
-                                                    std::vector<glm::vec3>& outPoints, glm::vec3& outNormal,
+                                                    PolygonalFeature& outPolygon,
                                                     std::vector<cubos::core::geom::Plane>& outAdjacentPlanes,
+                                                    std::vector<uint32_t> outAdjacentPlanesIds,
                                                     const glm::mat4& localToWorld, float scale);
 
     /// @brief Computes the closest point on the line (edge) to point.

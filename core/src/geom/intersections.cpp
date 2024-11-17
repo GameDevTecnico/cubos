@@ -150,23 +150,26 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
     return true;
 }
 
-std::vector<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::vector<glm::vec3>& inputPolygon,
-                                                                    int numClipPlanes,
-                                                                    const cubos::core::geom::Plane* clipPlanes,
-                                                                    bool removeNotClipToPlane)
+void cubos::core::geom::sutherlandHodgmanClipping(PolygonalFeature& polygon, int numClipPlanes,
+                                                  const cubos::core::geom::Plane* clipPlanes, bool removeNotClipToPlane)
 {
     if (numClipPlanes == 0)
     {
-        return inputPolygon;
+        return;
     }
 
     // Create temporary list of vertices
     std::vector<glm::vec3> tempPolygon1;
+    std::vector<uint32_t> tempPolygonIds1;
     std::vector<glm::vec3> tempPolygon2;
+    std::vector<uint32_t> tempPolygonIds2;
     std::vector<glm::vec3>* input = &tempPolygon1;
+    std::vector<uint32_t>* inputIds = &tempPolygonIds1;
     std::vector<glm::vec3>* output = &tempPolygon2;
+    std::vector<uint32_t>* outputIds = &tempPolygonIds2;
 
-    *input = inputPolygon;
+    *input = polygon.vertices;
+    *inputIds = polygon.vertexIds;
 
     // Iterate over each clip plane
     for (int i = 0; i < numClipPlanes; i++)
@@ -181,8 +184,9 @@ std::vector<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::v
 
         glm::vec3 tempPoint;
         glm::vec3 startPoint = input->back();
-        for (const glm::vec3& endPoint : *input)
+        for (size_t p = 0; p < input->size(); p++)
         {
+            const glm::vec3& endPoint = (*input)[p];
             bool startInPlane = pointInPlane(startPoint, plane);
             bool endInPlane = pointInPlane(endPoint, plane);
 
@@ -191,6 +195,7 @@ std::vector<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::v
                 if (endInPlane)
                 {
                     output->push_back(endPoint);
+                    outputIds->push_back((*inputIds)[p]);
                 }
             }
             else
@@ -198,12 +203,14 @@ std::vector<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::v
                 if (startInPlane && endInPlane)
                 {
                     output->push_back(endPoint);
+                    outputIds->push_back((*inputIds)[p]);
                 }
                 else if (startInPlane && !endInPlane)
                 {
                     if (planeEdgeIntersection(plane, startPoint, endPoint, tempPoint))
                     {
                         output->push_back(tempPoint);
+                        outputIds->push_back((*inputIds)[p]);
                     }
                 }
                 else if (!startInPlane && endInPlane)
@@ -211,9 +218,11 @@ std::vector<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::v
                     if (planeEdgeIntersection(plane, startPoint, endPoint, tempPoint))
                     {
                         output->push_back(tempPoint);
+                        outputIds->push_back((*inputIds)[p]);
                     }
 
                     output->push_back(endPoint);
+                    outputIds->push_back((*inputIds)[p]);
                 }
             }
 
@@ -223,9 +232,13 @@ std::vector<glm::vec3> cubos::core::geom::sutherlandHodgmanClipping(const std::v
         // Swap input/output polygons, and clear output list to generate next
         std::swap(input, output);
         output->clear();
+
+        std::swap(inputIds, outputIds);
+        outputIds->clear();
     }
 
-    return *input;
+    polygon.vertices = *input;
+    polygon.vertexIds = *inputIds;
 }
 
 bool cubos::core::geom::planeEdgeIntersection(const cubos::core::geom::Plane& plane, const glm::vec3& start,

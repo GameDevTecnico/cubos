@@ -11,6 +11,7 @@
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/geom/box.hpp>
 #include <cubos/core/geom/plane.hpp>
+#include <cubos/core/geom/polygonal_feature.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::geom
@@ -34,15 +35,13 @@ namespace cubos::core::geom
                                    const glm::mat4& localToWorld2, Intersection& intersect);
 
     /// @brief Performs the Sutherland-Hodgman Clipping algorithm.
-    /// @param inputPolygon The polygon to perform the clipping on.
+    /// @param polygon The polygon to perform the clipping on.
     /// @param numClipPlanes Number of cliping planes.
     /// @param clipPlanes Clipping planes
     /// @param removeNotClipToPlane Whether to remove the points if they're outside the plane.
-    /// @return The polygon resulting from the clipping.
-    CUBOS_CORE_API std::vector<glm::vec3> sutherlandHodgmanClipping(const std::vector<glm::vec3>& inputPolygon,
-                                                                    int numClipPlanes,
-                                                                    const cubos::core::geom::Plane* clipPlanes,
-                                                                    bool removeNotClipToPlane);
+    CUBOS_CORE_API void sutherlandHodgmanClipping(PolygonalFeature& polygon, int numClipPlanes,
+                                                  const cubos::core::geom::Plane* clipPlanes,
+                                                  bool removeNotClipToPlane);
 
     /// @brief Compute the intersection between a plane and an edge.
     /// @param plane The plane.
