@@ -5,6 +5,13 @@
 
 #include <cubos/engine/collisions/contact_manifold.hpp>
 
+CUBOS_REFLECT_IMPL(cubos::engine::ContactFeatureId)
+{
+    return core::ecs::TypeBuilder<ContactFeatureId>("cubos::engine::ContactFeatureId")
+        .withField("id", &ContactFeatureId::id)
+        .build();
+}
+
 CUBOS_REFLECT_IMPL(cubos::engine::ContactPointData)
 {
     return core::ecs::TypeBuilder<ContactPointData>("cubos::engine::ContactPointData")
@@ -14,7 +21,11 @@ CUBOS_REFLECT_IMPL(cubos::engine::ContactPointData)
         .withField("localOn1", &ContactPointData::localOn1)
         .withField("localOn2", &ContactPointData::localOn2)
         .withField("penetration", &ContactPointData::penetration)
-        .withField("id", &ContactPointData::id)
+        .withField("normalImpulse", &ContactPointData::normalImpulse)
+        .withField("frictionImpulse1", &ContactPointData::frictionImpulse1)
+        .withField("frictionImpulse2", &ContactPointData::frictionImpulse2)
+        .withField("fid1", &ContactPointData::fid1)
+        .withField("fid2", &ContactPointData::fid2)
         .build();
 }
 

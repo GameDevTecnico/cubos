@@ -249,11 +249,13 @@ int main(int argc, char** argv)
                 {
                     for (auto point : manifold.points)
                     {
-                        gizmos.color({0.0F, 0.0F, 1.0F});
+                        // Have a set color for each of the entities for an easier distinction
+                        bool isEnt1 = ent1 == manifold.entity;
+                        gizmos.color((isEnt1 ? glm::vec3(0.0F, 0.0F, 1.0F) : glm::vec3(1.0F, 0.0F, 1.0F)));
                         gizmos.drawArrow("point", point.globalOn1, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F, 1.0F,
                                          0.05F, Gizmos::Space::World);
 
-                        gizmos.color({1.0F, 0.0F, 1.0F});
+                        gizmos.color((isEnt1 ? glm::vec3(1.0F, 0.0F, 1.0F) : glm::vec3(0.0F, 0.0F, 1.0F)));
                         gizmos.drawArrow("point", point.globalOn2, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F, 1.0F,
                                          0.05F, Gizmos::Space::World);
                     }
