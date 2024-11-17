@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compiler Error when using -O3 flag (#1351, **@SrGesus**).
 - Flipped documentation of SystemBuilder::before and SystemBuilder::after (#1371, **@RiscadoA**).
 - Inconsistent behavior on ECS queries on symmetric self-relations (**@RiscadoA**).
+- Undefined behavior on ECS entity removal due to creating tables while iterating over tables (#1363, **@RiscadoA**).
 
 ## [v0.4.0] - 2024-10-13
 
