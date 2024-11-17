@@ -63,7 +63,7 @@
             </li>
           </ul>
         </nav>
-<p>This class allows the server to send and receive values of types unknown by the client to the client. Not all types registered on the server will support this: some may not have enough information to be serialized. The set of types which can be safely serialized is returned by the <a href="#aa39152d4fe1dd3b312a6750558f2152f" class="m-doc">connect</a> function.</p><p>The protocol used by this class is as follows:</p><ol><li>Server receives a list of supported trait types from the client, and whether they are structural.</li><li>Server receives a list of the types which the client already knows.</li><li>Server sends the type information of the types which the client does not know. This includes: a) name of each type, b) structural trait of the type which is supported by the client, if any, b) non-structural traits of the type which are supported by the client, d) if the type has a structural trait and is default-constructible, the default-constructed serialized value.</li></ol><p>If the type has multiple structural traits, the first one added to the server is used. The non-structural traits are sent in the order they were added to the server.</p>
+<p>This class allows the server to send and receive values of types unknown by the client to the client. Not all types registered on the server will support this: some may not have enough information to be serialized. The set of types which can be safely serialized is returned by the <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#aa39152d4fe1dd3b312a6750558f2152f" class="m-doc">connect</a> function.</p><p>The protocol used by this class is as follows:</p><ol><li>Server receives a list of supported trait types from the client, and whether they are structural.</li><li>Server receives a list of the types which the client already knows.</li><li>Server sends the type information of the types which the client does not know. This includes: a) name of each type, b) structural trait of the type which is supported by the client, if any, b) non-structural traits of the type which are supported by the client, d) if the type has a structural trait and is default-constructible, the default-constructed serialized value.</li></ol><p>If the type has multiple structural traits, the first one added to the server is used. The non-structural traits are sent in the order they were added to the server.</p>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -91,14 +91,14 @@
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
-              <a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
             </dt>
             <dd>Registers a trait to be supported by the channel.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
             </dt>
             <dd>Registers a trait to be supported by the channel.</dd>
             <dt>
@@ -131,8 +131,8 @@
           <section class="m-doc-details" id="a15b9dd42dbbc334aec04492d3f12719e"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
-              <a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
             </h3>
             <p>Registers a trait to be supported by the channel.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -161,8 +161,8 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
             </h3>
             <p>Registers a trait to be supported by the channel.</p>
             <table class="m-table m-fullwidth m-flat">

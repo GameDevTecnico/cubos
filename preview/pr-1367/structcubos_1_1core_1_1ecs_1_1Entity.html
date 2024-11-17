@@ -56,6 +56,7 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
@@ -64,6 +65,15 @@
           </ul>
         </nav>
 <p>When serializing/deserializing, if there&#x27;s a data::old::SerializationMap&lt;Entity, std::string, EntityHash&gt; in the context, it will be used to (de)serialize strings representing the entities. Otherwise, the identifiers will be (de)serialized as objects with two fields: their index and their generation.</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a3c5e8f1bc346637df9bed0d12aa83c91">
+              using <a href="#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc-self">Mask</a> = std::bitset&lt;CUBOS_CORE_ECS_MAX_COMPONENTS+1&gt;
+            </dt>
+            <dd>Type used to store which components an entity has.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
