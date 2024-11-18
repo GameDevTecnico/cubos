@@ -7,6 +7,7 @@
 #include <cubos/engine/prelude.hpp>
 
 #include "../../constraints/penetration_constraint.hpp"
+#include "magi_config_pc.hpp"
 
 namespace cubos::engine
 {

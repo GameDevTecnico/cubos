@@ -6,10 +6,16 @@
 
 #include <cubos/engine/prelude.hpp>
 
+#include "magi_config_integration.hpp"
+
 namespace cubos::engine
 {
     /// @ingroup physics-solver-plugin
     /// @brief Adds velocity and position integration.
+    ///
+    /// ## Resources
+    /// - @ref MagiConfigIntegration - holds values to resolve magic numbers.
+    ///
 
     extern Tag physicsApplyImpulsesTag;
     extern Tag physicsClearForcesTag;

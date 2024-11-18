@@ -83,9 +83,11 @@ set(CUBOS_ENGINE_SOURCE
 	"src/physics/solver/plugin.cpp"
 	"src/physics/constraints/penetration_constraint.cpp"
 	"src/physics/solver/penetration_constraint/plugin.cpp"
+	"src/physics/solver/penetration_constraint/magi_config_pc.cpp"
 	"src/physics/fixed_substep/plugin.cpp"
 	"src/physics/fixed_substep/substeps.cpp"
 	"src/physics/solver/integration/plugin.cpp"
+	"src/physics/solver/integration/magi_config_integration.cpp"
 
 	"src/input/plugin.cpp"
 	"src/input/input.cpp"
