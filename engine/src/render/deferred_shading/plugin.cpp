@@ -60,7 +60,8 @@ namespace
                                           4]; // intended to be a float array, but std140 layout aligns array elements
                                               // to vec4 size; number of vec4s = ceiling(MaxCascades / 4 components)
         int numCascades;
-        int padding2[3];
+        float normalOffsetScale;
+        int padding2[2];
     };
 
     struct PerPointLight
@@ -86,7 +87,8 @@ namespace
         glm::vec2 shadowMapSize;
         float shadowBias;
         float shadowBlurRadius;
-        float padding[2];
+        float normalOffsetScale;
+        float padding[1];
     };
 
     struct PerScene
@@ -332,6 +334,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
                             perLight.numCascades = numCascades;
                             perScene.directionalLightWithShadowsId = directionalLightIndex;
+                            perLight.normalOffsetScale = caster.value().baseSettings.normalOffsetScale;
                             directionalShadowMap = caster.value().shadowMaps.at(cameraEntity)->cascades;
                         }
                         directionalLightIndex++;
@@ -375,6 +378,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             perLight.shadowMapSize = slot->size;
                             perLight.shadowBias = caster.value().baseSettings.bias;
                             perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
+                            perLight.normalOffsetScale = caster.value().baseSettings.normalOffsetScale;
                         }
                         else
                         {

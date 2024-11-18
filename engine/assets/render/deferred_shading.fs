@@ -25,6 +25,7 @@ struct DirectionalLight
     vec4 shadowFarSplitDistances[3]; // intended to be a float array, but std140 layout aligns array elements
                                      // to vec4 size; number of vec4s = ceiling(MaxCascades / 4 components)
     int numCascades;
+    float normalOffsetScale;
 };
 
 struct PointLight
@@ -49,6 +50,7 @@ struct SpotLight
     vec2 shadowMapSize;
     float shadowBias;
     float shadowBlurRadius;
+    float normalOffsetScale;
 };
 
 layout(std140) uniform PerScene
@@ -80,13 +82,27 @@ float remap(float value, float min1, float max1, float min2, float max2)
     return max2 + (value - min1) * (max2 - min2) / (max1 - min1);
 }
 
+vec3 applyNormalOffset(vec3 normal, vec3 lightDir, vec3 position, float normalOffsetScale) {
+
+    float prod = dot(normal, lightDir);
+    prod = max(0.0, prod); 
+    
+    float slopeScale = 0.02;
+    float offset = slopeScale * prod + normalOffsetScale;
+    
+    vec3 offsetPosition = position + normal * offset;
+    return offsetPosition;
+}
+
 vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
 {
     // Shadows
     float shadow = 0.0;
     if (spotLights[lightI].shadowMapSize.x > 0.0)
     {
-        vec4 positionLightSpace = spotLights[lightI].matrix * vec4(fragPos, 1.0);
+        float normalOffsetScale = spotLights[lightI].normalOffsetScale;
+        vec3 offsetFragPos = normalOffsetScale > 0.0 ? applyNormalOffset(fragNormal, spotLights[lightI].direction.xyz, fragPos, normalOffsetScale) : fragPos;
+        vec4 positionLightSpace = spotLights[lightI].matrix * vec4(offsetFragPos, 1.0);
         vec3 projCoords = positionLightSpace.xyz / positionLightSpace.w;
         projCoords = projCoords * 0.5 + 0.5;
         vec2 uv = projCoords.xy * spotLights[lightI].shadowMapSize + spotLights[lightI].shadowMapOffset;
@@ -136,12 +152,14 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
 
 vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI, bool drawShadows)
 {
+    float normalOffsetScale = directionalLights[lightI].normalOffsetScale;
+    vec3 offsetFragPos = normalOffsetScale > 0.0 ? applyNormalOffset(fragNormal, directionalLights[lightI].direction.xyz, fragPos, normalOffsetScale) : fragPos;
     // Shadows
     float shadow = 0.0;
     if (drawShadows)
     {
         // Select split
-        vec4 positionCameraSpace = inverse(inverseView) * vec4(fragPos, 1.0);
+        vec4 positionCameraSpace = inverse(inverseView) * vec4(offsetFragPos, 1.0);
         float depthCameraSpace = abs(positionCameraSpace.z);
         int split = directionalLights[lightI].numCascades - 1;
         for (int i = 0; i < directionalLights[lightI].numCascades; i++)
@@ -155,7 +173,7 @@ vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI, bool drawS
         }
 
         // Sample shadow map
-        vec4 positionLightSpace = directionalLights[lightI].matrices[split] * vec4(fragPos, 1.0);
+        vec4 positionLightSpace = directionalLights[lightI].matrices[split] * vec4(offsetFragPos, 1.0);
         vec3 projCoords = positionLightSpace.xyz / positionLightSpace.w;
         projCoords = projCoords * 0.5 + 0.5;
         if (projCoords.z < 1.0)

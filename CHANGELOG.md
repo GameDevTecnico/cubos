@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Audio asset (#230, **@Dageus**, **@diogomsmiranda**).
 - Compatibility with CMake find_package (#1326, **@RiscadoA**).
 - A proper Nix package which can be used to install Cubos and Tesseratos (#1327, **RiscadoA**).
+- Added the option to use Shadow Normal Offset Bias algorithm (#1308, **@GalaxyCrush**)
 
 ### Changed
 
