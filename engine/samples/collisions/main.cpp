@@ -147,7 +147,6 @@ int main(int argc, char** argv)
 
     cubos.system("move colliders")
         .tagged(physicsApplyForcesTag)
-        .before(transformUpdateTag)
         .call(
             [](State& state, const Options& options, const Input& input, Query<Position&, Rotation&, Velocity&> query) {
                 auto [aPos, aRot, aVel] = *query.at(state.a);

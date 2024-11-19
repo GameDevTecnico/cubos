@@ -121,7 +121,7 @@ int main()
     });
 
     cubos.system("move colliders")
-        .before(transformUpdateTag)
+        .tagged(physicsApplyForcesTag)
         .call([](State& state, Query<Position&, Rotation&, Velocity&> query) {
             auto [aPos, aRot, aVel] = *query.at(state.a);
             auto [bPos, bRot, bVel] = *query.at(state.b);

@@ -26,7 +26,9 @@ void cubos::engine::fixedStepPlugin(Cubos& cubos)
         return false;
     });
 
-    cubos.system("accumulate time resource").before(fixedStepTag).call([](AccumulatedTime& timer, const DeltaTime& dt) {
-        timer.value += dt.value();
-    });
+    cubos.system("accumulate time resource")
+        .before(fixedStepTag)
+        .call([](AccumulatedTime& timer, const DeltaTime& dt, const FixedDeltaTime& step) {
+            timer.value += std::min(dt.value(), 2 * step.value);
+        });
 }

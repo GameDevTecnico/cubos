@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fixed delta time not used in some physics systems and simulations exploding after being frozen for too long (**@joaomanita**).
 - Crash in ecs when removing or destroying components with observers (#1348, **@SrGesus**).
 - Crash when opening the Play Pause menu (**SrGesus**).
 - Duplicated destructor call in AnyVector which caused double free crashes on multiple samples (**@RiscadoA**).
