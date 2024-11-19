@@ -238,5 +238,5 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
             }
         });
 
-    cubos.tag(physicsApplyForcesTag);
+    cubos.tag(physicsApplyForcesTag).tagged(fixedStepTag);
 }
