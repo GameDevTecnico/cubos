@@ -16,32 +16,32 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        float biasMax = -4.0f;
+        float biasMax = -4.0F;
 
-        float contactHertzMin = 30.0f;
+        float contactHertzMin = 30.0F;
 
-        float kNormal = 0.0f;
+        float kNormal = 0.0F;
 
-        float kFriction = 0.0f;
+        float kFriction = 0.0F;
 
-        bool cmpTangentLenSq(float tangentLenSq)
+        static bool cmpTangentLenSq(float tangentLenSq)
         {
             return tangentLenSq > 1e-6 * 1e-6;
         };
 
-        bool cmpRestitution(float restitution)
+        static bool cmpRestitution(float restitution)
         {
-            return restitution == 0.0f;
+            return restitution == 0.0F;
         };
 
-        bool cmpNormalSpeed(float normalSpeed)
+        static bool cmpNormalSpeed(float normalSpeed)
         {
-            return normalSpeed > -0.01f;
+            return normalSpeed > -0.01F;
         };
 
-        bool cmpNormalImpulse(float normalImpulse)
+        static bool cmpNormalImpulse(float normalImpulse)
         {
-            return normalImpulse == 0.0f;
+            return normalImpulse == 0.0F;
         };
     };
 

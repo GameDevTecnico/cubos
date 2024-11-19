@@ -18,14 +18,14 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        bool cmpInvMass(float inverseMass)
+        static bool cmpInvMass(float inverseMass)
         {
-            return inverseMass <= 0.0f;
+            return inverseMass <= 0.0F;
         };
 
-        bool cmpInvInertia(glm::mat3 inverseInertia)
+        static bool cmpInvInertia(glm::mat3 inverseInertia)
         {
-            return inverseInertia == glm::mat3(0.0f);
+            return inverseInertia == glm::mat3(0.0F);
         };
     };
 
