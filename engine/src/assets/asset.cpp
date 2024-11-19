@@ -63,7 +63,7 @@ AnyAsset::AnyAsset(const AnyAsset& other)
 }
 
 AnyAsset::AnyAsset(AnyAsset&& other) noexcept
-    : pathOrId(other.pathOrId)
+    : pathOrId(std::move(other.pathOrId))
     , mId(other.mId)
     , mRefCount(other.mRefCount)
     , mVersion(other.mVersion)
@@ -95,7 +95,7 @@ AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
     }
 
     this->decRef();
-    pathOrId = other.pathOrId;
+    pathOrId = std::move(other.pathOrId);
     mId = other.mId;
     mRefCount = other.mRefCount;
     mVersion = other.mVersion;

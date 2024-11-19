@@ -80,20 +80,20 @@ float remap(float value, float min1, float max1, float min2, float max2)
     return max2 + (value - min1) * (max2 - min2) / (max1 - min1);
 }
 
-vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
+vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
 {
     // Shadows
     float shadow = 0.0;
-    if (light.shadowMapSize.x > 0.0)
+    if (spotLights[lightI].shadowMapSize.x > 0.0)
     {
-        vec4 positionLightSpace = light.matrix * vec4(fragPos, 1.0);
+        vec4 positionLightSpace = spotLights[lightI].matrix * vec4(fragPos, 1.0);
         vec3 projCoords = positionLightSpace.xyz / positionLightSpace.w;
         projCoords = projCoords * 0.5 + 0.5;
-        vec2 uv = projCoords.xy * light.shadowMapSize + light.shadowMapOffset;
+        vec2 uv = projCoords.xy * spotLights[lightI].shadowMapSize + spotLights[lightI].shadowMapOffset;
         float currentDepth = projCoords.z;
-        float bias = light.shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
+        float bias = spotLights[lightI].shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
         // PCF
-        if (light.shadowBlurRadius <= 0.001f)
+        if (spotLights[lightI].shadowBlurRadius <= 0.001f)
         {
             float pcfDepth = texture(shadowAtlasTexture, uv).r;
             shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
@@ -105,8 +105,8 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
             {
                 for(int yi = -1; yi <= 1; yi++)
                 {
-                    float x = light.shadowBlurRadius*float(xi);
-                    float y = light.shadowBlurRadius*float(yi);
+                    float x = spotLights[lightI].shadowBlurRadius*float(xi);
+                    float y = spotLights[lightI].shadowBlurRadius*float(yi);
                     float pcfDepth = texture(shadowAtlasTexture, uv + vec2(x, y) * texelSize).r;
                     shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
                 }
@@ -116,24 +116,25 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light)
     }
 
     // Lighting
-    vec3 toLight = vec3(light.position) - fragPos;
-    float r = length(toLight) / light.range;
+    vec3 toLight = vec3(spotLights[lightI].position) - fragPos;
+    float r = length(toLight) / spotLights[lightI].range;
     if (r < 1)
     {
         vec3 toLightNormalized = normalize(toLight);
-        float a = dot(toLightNormalized, -light.direction.xyz);
-        if (a > light.spotCutoff)
+        float a = dot(toLightNormalized, -spotLights[lightI].direction.xyz);
+        if (a > spotLights[lightI].spotCutoff)
         {
-            float angleValue = clamp(remap(a, light.innerSpotCutoff, light.spotCutoff, 1, 0), 0, 1);
+            float angleValue = clamp(remap(a, spotLights[lightI].innerSpotCutoff, spotLights[lightI].spotCutoff, 1, 0), 0, 1);
             float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
             float diffuse = max(dot(fragNormal, toLightNormalized), 0);
-            return angleValue * attenuation * diffuse * (1.0 - shadow) * light.intensity * vec3(light.color);
+            return angleValue * attenuation * diffuse * (1.0 - shadow) * spotLights[lightI].intensity
+                * vec3(spotLights[lightI].color);
         }
     }
     return vec3(0);
 }
 
-vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, DirectionalLight light, bool drawShadows)
+vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI, bool drawShadows)
 {
     // Shadows
     float shadow = 0.0;
@@ -142,10 +143,10 @@ vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, DirectionalLight light,
         // Select split
         vec4 positionCameraSpace = inverse(inverseView) * vec4(fragPos, 1.0);
         float depthCameraSpace = abs(positionCameraSpace.z);
-        int split = light.numCascades - 1;
-        for (int i = 0; i < light.numCascades; i++)
+        int split = directionalLights[lightI].numCascades - 1;
+        for (int i = 0; i < directionalLights[lightI].numCascades; i++)
         {
-            float far = light.shadowFarSplitDistances[i / 4][i % 4];
+            float far = directionalLights[lightI].shadowFarSplitDistances[i / 4][i % 4];
             if (depthCameraSpace < far)
             {
                 split = i;
@@ -154,16 +155,16 @@ vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, DirectionalLight light,
         }
 
         // Sample shadow map
-        vec4 positionLightSpace = light.matrices[split] * vec4(fragPos, 1.0);
+        vec4 positionLightSpace = directionalLights[lightI].matrices[split] * vec4(fragPos, 1.0);
         vec3 projCoords = positionLightSpace.xyz / positionLightSpace.w;
         projCoords = projCoords * 0.5 + 0.5;
         if (projCoords.z < 1.0)
         {
             vec2 uv = projCoords.xy;
             float currentDepth = projCoords.z;
-            float bias = light.shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
+            float bias = directionalLights[lightI].shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
             // PCF
-            if (light.shadowBlurRadius <= 0.001f)
+            if (directionalLights[lightI].shadowBlurRadius <= 0.001f)
             {
                 float pcfDepth = texture(directionalShadowMap, vec3(uv.xy, split)).r;
                 shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
@@ -175,8 +176,8 @@ vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, DirectionalLight light,
                 {
                     for(int yi = -1; yi <= 1; yi++)
                     {
-                        float x = light.shadowBlurRadius*float(xi);
-                        float y = light.shadowBlurRadius*float(yi);
+                        float x = directionalLights[lightI].shadowBlurRadius*float(xi);
+                        float y = directionalLights[lightI].shadowBlurRadius*float(yi);
                         vec2 newUv = uv + vec2(x, y) * texelSize;
                         float pcfDepth = texture(directionalShadowMap, vec3(newUv.xy, split)).r;
                         shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
@@ -186,18 +187,19 @@ vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, DirectionalLight light,
             }
         }
     }
-    return max(dot(fragNormal, -light.direction.xyz), 0) * (1.0 - shadow) * light.intensity * vec3(light.color);
+    return max(dot(fragNormal, -directionalLights[lightI].direction.xyz), 0)
+        * (1.0 - shadow) * directionalLights[lightI].intensity * vec3(directionalLights[lightI].color);
 }
 
-vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLight light)
+vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
 {
-    vec3 toLight = vec3(light.position) - fragPos;
-    float r = length(toLight) / light.range;
+    vec3 toLight = vec3(pointLights[lightI].position) - fragPos;
+    float r = length(toLight) / pointLights[lightI].range;
     if (r < 1)
     {
         float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
         float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0);
-        return attenuation * diffuse * light.intensity * vec3(light.color);
+        return attenuation * diffuse * pointLights[lightI].intensity * vec3(pointLights[lightI].color);
     }
     return vec3(0);
 }
@@ -234,16 +236,15 @@ void main()
         vec3 lighting = ambientLight.rgb * ssao;
         for (uint i = 0u; i < numSpotLights; i++)
         {
-            lighting += spotLightCalc(position, normal, spotLights[i]);
+            lighting += spotLightCalc(position, normal, i);
         }
         for (uint i = 0u; i < numDirectionalLights; i++)
         {
-            lighting += directionalLightCalc(position, normal, directionalLights[i],
-                int(i) == directionalLightWithShadowsId);
+            lighting += directionalLightCalc(position, normal, i, int(i) == directionalLightWithShadowsId);
         }
         for (uint i = 0u; i < numPointLights; i++)
         {
-            lighting += pointLightCalc(position, normal, pointLights[i]);
+            lighting += pointLightCalc(position, normal, i);
         }
         color = albedo * lighting;
     }

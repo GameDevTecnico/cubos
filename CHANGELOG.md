@@ -9,8 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Collision detection with VoxelCollisionShapes (#994, **@joaomanita**).
 - Allow identifying assets in code from their path (#1177. **@GalaxyCrush**).
-  
+- Added an Audio asset (#230, **@Dageus**, **@diogomsmiranda**).
+
+### Changed
+
+- Reduced performance overhead of directional shadow support (#1345, **@tomas7770**).
+
+### Fixed
+
+- Crash in ecs when removing or destroying components with observers (#1348, **@SrGesus**).
+- Crash when opening the Play Pause menu (**SrGesus**).
+- Duplicated destructor call in AnyVector which caused double free crashes on multiple samples (**@RiscadoA**).
+- Compiler Error when using -O3 flag (#1351, **@SrGesus**).
+
 ## [v0.4.0] - 2024-10-13
 
 ### Added
@@ -41,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced OpenAL audio device with Miniaudio backend (#1005, **@Dageus**, **@diogomsmiranda**).
 
 ### Fixed
+
 - Spot light angle mismatch between light and shadows (#1310, **@tomas7770**).
 - Spot shadows cause light range cutoff (#1312, **@tomas7770**).
 - Precision error in split screen size calculations (**@mkuritsu**).
