@@ -41,7 +41,7 @@ static void getTangents(const glm::vec3& velocity1, const glm::vec3& velocity2, 
 
     tangent1 = linearVr - glm::dot(linearVr, n) * n;
     float tangentLenSq = glm::length2(tangent1);
-    if (physicsConstants.cmpTangentLenSq(tangentLenSq)) /// TODO: check this
+    if (cubos::engine::PhysicsConstantsPC::cmpTangentLenSq(tangentLenSq)) /// TODO: check this
     {
         tangent1 = glm::normalize(tangent1);
         tangent2 = glm::cross(n, tangent1);
@@ -273,7 +273,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
             for (auto [ent1, mass1, inertia1, correction1, velocity1, angVelocity1, constraint, ent2, mass2, inertia2,
                        correction2, velocity2, angVelocity2] : query)
             {
-                if (physicsConstants.cmpRestitution(constraint.restitution))
+                if (cubos::engine::PhysicsConstantsPC::cmpRestitution(constraint.restitution))
                 {
                     continue;
                 }
@@ -285,8 +285,8 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
 
                 for (auto point : constraint.points)
                 {
-                    if (physicsConstants.cmpNormalSpeed(point.normalSpeed) ||
-                        physicsConstants.cmpNormalImpulse(point.normalImpulse))
+                    if (cubos::engine::PhysicsConstantsPC::cmpNormalSpeed(point.normalSpeed) ||
+                        cubos::engine::PhysicsConstantsPC::cmpNormalImpulse(point.normalImpulse))
                     {
                         continue;
                     }

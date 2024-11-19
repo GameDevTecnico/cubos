@@ -63,7 +63,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
             for (auto [velocity, angVelocity, force, torque, mass, inertia, rotation] : query)
             {
                 // Linear velocity
-                if (physicsConstants.cmpInvMass(mass.inverseMass))
+                if (cubos::engine::PhysicsConstantsIntegration::cmpInvMass(mass.inverseMass))
                 {
                     continue;
                 }
@@ -77,7 +77,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                 velocity.vec += deltaLinearVelocity;
 
                 // Angular velocity
-                if (physicsConstants.cmpInvInertia(inertia.inverseInertia))
+                if (cubos::engine::PhysicsConstantsIntegration::cmpInvInertia(inertia.inverseInertia))
                 {
                     continue;
                 }
@@ -107,7 +107,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
             for (auto [correction, rotation, velocity, angVelocity, mass, inertia] : query)
             {
                 // Position
-                if (physicsConstants.cmpInvMass(mass.inverseMass))
+                if (cubos::engine::PhysicsConstantsIntegration::cmpInvMass(mass.inverseMass))
                 {
                     continue;
                 }
@@ -115,7 +115,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                 correction.position += velocity.vec * subDeltaTime;
 
                 // Rotation
-                if (physicsConstants.cmpInvInertia(inertia.inverseInertia))
+                if (cubos::engine::PhysicsConstantsIntegration::cmpInvInertia(inertia.inverseInertia))
                 {
                     continue;
                 }
@@ -132,7 +132,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                  PhysicsConstantsIntegration& physicsConstants) {
             for (auto [position, correction, mass] : query)
             {
-                if (physicsConstants.cmpInvMass(mass.inverseMass))
+                if (cubos::engine::PhysicsConstantsIntegration::cmpInvMass(mass.inverseMass))
                 {
                     continue;
                 }
