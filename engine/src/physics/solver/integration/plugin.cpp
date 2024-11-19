@@ -22,7 +22,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
     cubos.depends(physicsPlugin);
     cubos.depends(physicsSolverPlugin);
 
-    cubos.resource<MagiConfigIntegration>();
+    cubos.resource<PhysicsConstantsIntegration>();
 
     cubos.tag(physicsApplyImpulsesTag);
     cubos.tag(physicsClearForcesTag).after(physicsFinalizePositionTag).tagged(fixedStepTag);
@@ -57,13 +57,13 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                        const Rotation&>
                      query,
                  const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
-                 MagiConfigIntegration& magiConfig) {
+                 PhysicsConstantsIntegration& physicsConstants) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
             for (auto [velocity, angVelocity, force, torque, mass, inertia, rotation] : query)
             {
                 // Linear velocity
-                if (magiConfig.cmpInvMass(mass.inverseMass))
+                if (physicsConstants.cmpInvMass(mass.inverseMass))
                 {
                     continue;
                 }
@@ -77,7 +77,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                 velocity.vec += deltaLinearVelocity;
 
                 // Angular velocity
-                if (magiConfig.cmpInvInertia(inertia.inverseInertia))
+                if (physicsConstants.cmpInvInertia(inertia.inverseInertia))
                 {
                     continue;
                 }
@@ -100,13 +100,14 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
         .call([](Query<AccumulatedCorrection&, Rotation&, const Velocity&, const AngularVelocity&, const Mass&,
                        const Inertia&>
                      query,
-                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps, MagiConfigIntegration& magiConfig) {
+                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
+                 PhysicsConstantsIntegration& physicsConstants) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
             for (auto [correction, rotation, velocity, angVelocity, mass, inertia] : query)
             {
                 // Position
-                if (magiConfig.cmpInvMass(mass.inverseMass))
+                if (physicsConstants.cmpInvMass(mass.inverseMass))
                 {
                     continue;
                 }
@@ -114,7 +115,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                 correction.position += velocity.vec * subDeltaTime;
 
                 // Rotation
-                if (magiConfig.cmpInvInertia(inertia.inverseInertia))
+                if (physicsConstants.cmpInvInertia(inertia.inverseInertia))
                 {
                     continue;
                 }
@@ -127,10 +128,11 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
 
     cubos.system("finalize position")
         .tagged(physicsFinalizePositionTag)
-        .call([](Query<Position&, AccumulatedCorrection&, const Mass&> query, MagiConfigIntegration& magiConfig) {
+        .call([](Query<Position&, AccumulatedCorrection&, const Mass&> query,
+                 PhysicsConstantsIntegration& physicsConstants) {
             for (auto [position, correction, mass] : query)
             {
-                if (magiConfig.cmpInvMass(mass.inverseMass))
+                if (physicsConstants.cmpInvMass(mass.inverseMass))
                 {
                     continue;
                 }

@@ -12,7 +12,7 @@ namespace cubos::engine
 {
     /// @brief Resource which allows configuration over magic numbers in the solver plugin.
     /// @ingroup physics-plugin
-    struct MagiConfigPC
+    struct PhysicsConstantsPC
     {
         CUBOS_REFLECT;
 
