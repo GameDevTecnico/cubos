@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Inconsistent behavior on ECS queries on symmetric self-relations (**@RiscadoA**).
 - Undefined behavior on ECS entity removal due to creating tables while iterating over tables (#1363, **@RiscadoA**).
 - Made canvas draw calls sorted by layer in order to prevent undeterministic behavior when drawing elements with transparency (**@mkuritsu**).
+- Crash when using ImGui across DLL boundaries (#1144, **@RiscadoA**).
 
 ## [v0.4.0] - 2024-10-13
 
