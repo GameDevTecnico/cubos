@@ -96,6 +96,12 @@ int main(int argc, char** argv)
     cubos.plugin(imguiPlugin);
     /// [Adding the plugin]
 
+    /// [ImGui initialization]
+    cubos.startupSystem("set ImGui context").after(imguiInitTag).call([](ImGuiContextHolder& holder) {
+        ImGui::SetCurrentContext(holder.context);
+    });
+    /// [ImGui initialization]
+
     /// [ImGui Demo]
     cubos.system("show ImGui demo").tagged(imguiTag).call([]() {
         ImGui::Begin("Dear ImGui + Cubos");

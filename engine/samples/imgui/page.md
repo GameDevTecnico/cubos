@@ -16,7 +16,13 @@ Then, make sure to add the plugin.
 
 @snippet imgui/main.cpp Adding the plugin
 
-Once the ImGui plugin is added, you can create systems to display ImGui windows and widgets. Here's a system which opens an ImGui window, and its demo.
+When you're using ImGui directly in an application or a library, you must also make sure to initialize the ImGui context on it.
+To do so, you can add a startup system just like the one below:
+
+@snippet imgui/main.cpp ImGui initialization
+
+You can read more about this in the documentation of @ref cubos::engine::ImGuiContextHolder.
+Now, you can create systems to display ImGui windows and widgets. Here's a system which opens an ImGui window, and its demo.
 
 @snippet imgui/main.cpp ImGui Demo
 
