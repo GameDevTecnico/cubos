@@ -1,5 +1,6 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/defaults/plugin.hpp>
+#include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
@@ -53,6 +54,10 @@ int main(int argc, char** argv)
             auto bindings = assets.read<InputBindings>(BindingsAsset);
             input.bind(*bindings);
         });
+
+    cubos.startupSystem("set ImGui context").after(imguiInitTag).call([](ImGuiContextHolder& holder) {
+        ImGui::SetCurrentContext(holder.context);
+    });
 
     cubos.run();
 }
