@@ -34,14 +34,14 @@ static void getPlaneSpace(const glm::vec3& n, glm::vec3& tangent1, glm::vec3& ta
 }
 
 static void getTangents(const glm::vec3& velocity1, const glm::vec3& velocity2, const glm::vec3& n, glm::vec3& tangent1,
-                        glm::vec3& tangent2)
+                        glm::vec3& tangent2, const SolverConstants& solverConstants)
 {
     // Use linear relative velocity for determining tangents.
     glm::vec3 linearVr = velocity2 - velocity1;
 
     tangent1 = linearVr - glm::dot(linearVr, n) * n;
     float tangentLenSq = glm::length2(tangent1);
-    if (tangentLenSq > 1e-6 * 1e-6) /// TODO: check this
+    if (tangentLenSq > solverConstants.minTangentLenSq) /// TODO: check this
     {
         tangent1 = glm::normalize(tangent1);
         tangent2 = glm::cross(n, tangent1);
@@ -82,7 +82,8 @@ static void solvePenetrationConstraint(
           PenetrationConstraint&, Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&,
           Velocity&, AngularVelocity&>
         query,
-    const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps, const bool useBias)
+    const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps, const SolverConstants& solverConstants,
+    const bool useBias)
 {
     for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraint, ent2, mass2,
                inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
@@ -120,7 +121,7 @@ static void solvePenetrationConstraint(
             }
             else if (useBias)
             {
-                bias = glm::max(constraint.biasCoefficient * separation, -4.0F);
+                bias = glm::max(constraint.biasCoefficient * separation, solverConstants.maxBias);
                 massScale = constraint.massCoefficient;
                 impulseScale = constraint.impulseCoefficient;
             }
@@ -161,11 +162,11 @@ static void solvePenetrationConstraint(
         glm::vec3 tangent2;
         if (ent1 != constraint.entity)
         {
-            getTangents(v2, v1, constraint.normal, tangent1, tangent2);
+            getTangents(v2, v1, constraint.normal, tangent1, tangent2, solverConstants);
         }
         else
         {
-            getTangents(v1, v2, constraint.normal, tangent1, tangent2);
+            getTangents(v1, v2, constraint.normal, tangent1, tangent2, solverConstants);
         }
 
         // Friction
@@ -242,8 +243,10 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                        AngularVelocity&, PenetrationConstraint&, Entity, const Mass&, const Inertia&, const Rotation&,
                        AccumulatedCorrection&, Velocity&, AngularVelocity&>
                      query,
-                 const FixedDeltaTime& fixedDeltaTime,
-                 const Substeps& substeps) { solvePenetrationConstraint(query, fixedDeltaTime, substeps, true); });
+                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
+                 const SolverConstants& solverConstants) {
+            solvePenetrationConstraint(query, fixedDeltaTime, substeps, solverConstants, true);
+        });
 
     cubos.system("solve contacts no bias")
         .tagged(penetrationConstraintSolveRelaxTag)
@@ -252,8 +255,10 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                        AngularVelocity&, PenetrationConstraint&, Entity, const Mass&, const Inertia&, const Rotation&,
                        AccumulatedCorrection&, Velocity&, AngularVelocity&>
                      query,
-                 const FixedDeltaTime& fixedDeltaTime,
-                 const Substeps& substeps) { solvePenetrationConstraint(query, fixedDeltaTime, substeps, false); });
+                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
+                 const SolverConstants& solverConstants) {
+            solvePenetrationConstraint(query, fixedDeltaTime, substeps, solverConstants, false);
+        });
 
     cubos.system("add restitution")
         .tagged(penetrationConstraintRestitutionTag)
@@ -263,11 +268,12 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
         .call([](Query<Entity, const Mass&, const Inertia&, AccumulatedCorrection&, Velocity&, AngularVelocity&,
                        PenetrationConstraint&, Entity, const Mass&, const Inertia&, AccumulatedCorrection&, Velocity&,
                        AngularVelocity&>
-                     query) {
+                     query,
+                 const SolverConstants& solverConstants) {
             for (auto [ent1, mass1, inertia1, correction1, velocity1, angVelocity1, constraint, ent2, mass2, inertia2,
                        correction2, velocity2, angVelocity2] : query)
             {
-                if (constraint.restitution == 0.0F)
+                if (constraint.restitution == solverConstants.minRestitution)
                 {
                     continue;
                 }
@@ -279,7 +285,8 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
 
                 for (auto point : constraint.points)
                 {
-                    if (point.normalSpeed > -0.01F || point.normalImpulse == 0.0F)
+                    if (point.normalSpeed > solverConstants.minNormalSpeed ||
+                        point.normalImpulse == solverConstants.minNormalImpulse)
                     {
                         continue;
                     }
@@ -330,9 +337,10 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                        const Inertia&, const CenterOfMass&, const Rotation&, const Velocity&, const AngularVelocity&,
                        const PhysicsMaterial&>
                      query,
-                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
+                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
+                 const SolverConstants& solverConstants) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
-            float contactHertz = glm::min(30.0F, 0.25F * (1.0F / subDeltaTime));
+            float contactHertz = glm::min(solverConstants.minContactHertz, 0.25F * (1.0F / subDeltaTime));
 
             for (auto [ent1, mass1, inertia1, centerOfMass1, rotation1, velocity1, angVelocity1, material1, manifold,
                        ent2, mass2, inertia2, centerOfMass2, rotation2, velocity2, angVelocity2, material2] : query)
@@ -341,11 +349,11 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 glm::vec3 tangent2;
                 if (ent1 != manifold.entity)
                 {
-                    getTangents(velocity2.vec, velocity1.vec, manifold.normal, tangent1, tangent2);
+                    getTangents(velocity2.vec, velocity1.vec, manifold.normal, tangent1, tangent2, solverConstants);
                 }
                 else
                 {
-                    getTangents(velocity1.vec, velocity2.vec, manifold.normal, tangent1, tangent2);
+                    getTangents(velocity1.vec, velocity2.vec, manifold.normal, tangent1, tangent2, solverConstants);
                 }
 
                 std::vector<PenetrationConstraintPointData> points;
@@ -386,7 +394,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                     float kNormal = mass1.inverseMass + mass2.inverseMass +
                                     glm::dot(inertia1.inverseInertia * rn1, rn1) +
                                     glm::dot(inertia2.inverseInertia * rn2, rn2);
-                    pointData.normalMass = kNormal > 0.0F ? 1.0F / kNormal : 0.0F;
+                    pointData.normalMass = kNormal > solverConstants.minKNormal ? 1.0F / kNormal : 0.0F;
 
                     // friction mass
                     glm::vec3 rt11 = glm::cross(r1, tangent1);
@@ -406,8 +414,8 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                         mass1.inverseMass + mass2.inverseMass + glm::dot(i1Rt21, rt21) + glm::dot(i2Rt22, rt22);
 
                     /// TODO: these could be an array in the point
-                    pointData.frictionMass1 = kFriction1 > 0.0F ? 1.0F / kFriction1 : 0.0F;
-                    pointData.frictionMass2 = kFriction2 > 0.0F ? 1.0F / kFriction2 : 0.0F;
+                    pointData.frictionMass1 = kFriction1 > solverConstants.minKFriction ? 1.0F / kFriction1 : 0.0F;
+                    pointData.frictionMass2 = kFriction2 > solverConstants.minKFriction ? 1.0F / kFriction2 : 0.0F;
 
                     points.push_back(pointData);
                 }

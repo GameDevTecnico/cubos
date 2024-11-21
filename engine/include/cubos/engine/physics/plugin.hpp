@@ -24,6 +24,7 @@
 #include <cubos/engine/physics/components/velocity.hpp>
 #include <cubos/engine/physics/physics_bundle.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
+#include <cubos/engine/physics/resources/solver_constants.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine
@@ -37,6 +38,7 @@ namespace cubos::engine
     /// ## Resources
     /// - @ref Damping - holds the damping value for integration.
     /// - @ref Substeps - holds the amount of substeps for the physics update.
+    /// - @ref SolverConstants - holds the constants for the solver.
     ///
     /// ## Components
     /// - @ref PhysicsBundle - bundle that holds the physics information to give to a new entity.

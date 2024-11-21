@@ -122,6 +122,22 @@ CUBOS_REFLECT_IMPL(Damping)
     return core::ecs::TypeBuilder<Damping>("cubos::engine::Damping").build();
 }
 
+CUBOS_REFLECT_IMPL(SolverConstants)
+{
+    return core::ecs::TypeBuilder<SolverConstants>("cubos::engine::SolverConstants")
+        .withField("minInvMass", &SolverConstants::minInvMass)
+        .withField("minInvInertia", &SolverConstants::minInvInertia)
+        .withField("maxBias", &SolverConstants::maxBias)
+        .withField("minContactHertz", &SolverConstants::minContactHertz)
+        .withField("minKNormal", &SolverConstants::minKNormal)
+        .withField("minKFriction", &SolverConstants::minKFriction)
+        .withField("minTangentLenSq", &SolverConstants::minTangentLenSq)
+        .withField("minRestitution", &SolverConstants::minRestitution)
+        .withField("minNormalSpeed", &SolverConstants::minNormalSpeed)
+        .withField("minNormalImpulse", &SolverConstants::minNormalImpulse)
+        .build();
+}
+
 CUBOS_DEFINE_TAG(cubos::engine::physicsPrepareTag);
 
 // Compute Inertia Tensor for box shape
@@ -146,6 +162,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.tag(physicsPrepareTag).after(collisionsTag).tagged(fixedStepTag);
 
     cubos.resource<Damping>();
+    cubos.resource<SolverConstants>();
 
     cubos.component<Velocity>();
     cubos.component<AngularVelocity>();

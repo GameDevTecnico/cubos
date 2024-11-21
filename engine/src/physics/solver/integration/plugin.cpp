@@ -54,13 +54,14 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
         .call([](Query<Velocity&, AngularVelocity&, const Force&, const Torque&, const Mass&, const Inertia&,
                        const Rotation&>
                      query,
-                 const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
+                 const Damping& damping, const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
+                 const SolverConstants& solverConstants) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
             for (auto [velocity, angVelocity, force, torque, mass, inertia, rotation] : query)
             {
                 // Linear velocity
-                if (mass.inverseMass <= 0.0F)
+                if (mass.inverseMass <= solverConstants.minInvMass)
                 {
                     continue;
                 }
@@ -74,7 +75,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                 velocity.vec += deltaLinearVelocity;
 
                 // Angular velocity
-                if (inertia.inverseInertia == glm::mat3(0.0F))
+                if (inertia.inverseInertia == solverConstants.minInvInertia)
                 {
                     continue;
                 }
@@ -97,13 +98,14 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
         .call([](Query<AccumulatedCorrection&, Rotation&, const Velocity&, const AngularVelocity&, const Mass&,
                        const Inertia&>
                      query,
-                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps) {
+                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
+                 const SolverConstants& solverConstants) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
             for (auto [correction, rotation, velocity, angVelocity, mass, inertia] : query)
             {
                 // Position
-                if (mass.inverseMass <= 0.0F)
+                if (mass.inverseMass <= solverConstants.minInvMass)
                 {
                     continue;
                 }
@@ -111,7 +113,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
                 correction.position += velocity.vec * subDeltaTime;
 
                 // Rotation
-                if (inertia.inverseInertia == glm::mat3(0.0F))
+                if (inertia.inverseInertia == solverConstants.minInvInertia)
                 {
                     continue;
                 }
@@ -124,10 +126,11 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
 
     cubos.system("finalize position")
         .tagged(physicsFinalizePositionTag)
-        .call([](Query<Position&, AccumulatedCorrection&, const Mass&> query) {
+        .call([](Query<Position&, AccumulatedCorrection&, const Mass&> query,
+                 const SolverConstants& solverConstants) {
             for (auto [position, correction, mass] : query)
             {
-                if (mass.inverseMass <= 0.0F)
+                if (mass.inverseMass <= solverConstants.minInvMass)
                 {
                     continue;
                 }
