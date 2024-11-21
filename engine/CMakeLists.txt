@@ -27,6 +27,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/imgui/plugin.cpp"
 	"src/imgui/imgui.cpp"
 	"src/imgui/data_inspector.cpp"
+	"src/imgui/context.cpp"
 
 	"src/transform/plugin.cpp"
 	"src/transform/child_of.cpp"

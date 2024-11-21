@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/imgui/context.hpp>
 #include <cubos/engine/prelude.hpp>
 
 namespace cubos::engine

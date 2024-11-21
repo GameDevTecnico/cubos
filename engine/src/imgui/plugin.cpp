@@ -1,3 +1,6 @@
+#include <imgui.h>
+
+#include <cubos/engine/imgui/context.hpp>
 #include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
@@ -22,6 +25,7 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
     cubos.depends(renderTargetPlugin);
 
     cubos.resource<DataInspector>();
+    cubos.uninitResource<ImGuiContextHolder>();
 
     cubos.startupTag(imguiInitTag).after(windowInitTag);
 
@@ -29,10 +33,14 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
     cubos.tag(imguiEndTag).before(windowRenderTag).after(imguiBeginTag);
     cubos.tag(imguiTag).after(imguiBeginTag).before(imguiEndTag);
 
-    cubos.startupSystem("initialize ImGui").tagged(imguiInitTag).call([](const Window& window, Settings& settings) {
-        float dpiScale = static_cast<float>(settings.getDouble("imgui.scale", window->contentScale()));
-        imguiInitialize(window, dpiScale);
-    });
+    cubos.startupSystem("initialize ImGui")
+        .tagged(imguiInitTag)
+        .call([](Commands cmds, const Window& window, Settings& settings) {
+            float dpiScale = static_cast<float>(settings.getDouble("imgui.scale", window->contentScale()));
+            imguiInitialize(window, dpiScale);
+
+            cmds.insertResource<ImGuiContextHolder>(ImGuiContextHolder{ImGui::GetCurrentContext()});
+        });
 
     cubos.system("begin ImGui frame").tagged(imguiBeginTag).call([](EventReader<WindowEvent> events) {
         // Pass window events to ImGui.
