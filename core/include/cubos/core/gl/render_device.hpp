@@ -436,11 +436,19 @@ namespace cubos::core::gl
             Texture2D handle; ///< Texture handle.
         };
 
+        /// @brief Describes a 2D texture array target.
+        struct Texture2DArrayTarget
+        {
+            Texture2DArray handle; ///< Texture array handle.
+            uint32_t layer = 0;    ///< Layer of the texture array which will be used as target.
+        };
+
         /// @brief Possible types of targets.
         enum class TargetType
         {
             CubeMap,
-            Texture2D
+            Texture2D,
+            Texture2DArray
         };
 
         /// @brief Describes a framebuffer target.
@@ -455,15 +463,19 @@ namespace cubos::core::gl
 
             const Texture2DTarget& getTexture2DTarget() const;
 
+            const Texture2DArrayTarget& getTexture2DArrayTarget() const;
+
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
 
             void setTexture2DTarget(const Texture2D& handle);
+
+            void setTexture2DArrayTarget(const Texture2DArray& handle, uint32_t layer);
 
         private:
             bool mSet = false;
             TargetType mType; ///< Type of the currently set target.
 
-            std::variant<CubeMapTarget, Texture2DTarget> mTarget;
+            std::variant<CubeMapTarget, Texture2DTarget, Texture2DArrayTarget> mTarget;
         } targets[CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1;       ///< Number of render targets.
