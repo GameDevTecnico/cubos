@@ -38,17 +38,17 @@ namespace cubos::engine
         void draw(cubos::engine::GizmosRenderer& renderer, DrawPhase phase,
                   const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
         {
-            auto* verts = static_cast<glm::vec3*>(renderer.boxPrimitive.vb->map());
-            verts[0] = mTransform * glm::vec4{mPointA[0], mPointA[1], mPointA[2], 1.0F};
-            verts[1] = mTransform * glm::vec4{mPointB[0], mPointA[1], mPointA[2], 1.0F};
-            verts[2] = mTransform * glm::vec4{mPointB[0], mPointA[1], mPointB[2], 1.0F};
-            verts[3] = mTransform * glm::vec4{mPointA[0], mPointA[1], mPointB[2], 1.0F};
-            verts[4] = mTransform * glm::vec4{mPointA[0], mPointB[1], mPointB[2], 1.0F};
-            verts[5] = mTransform * glm::vec4{mPointA[0], mPointB[1], mPointA[2], 1.0F};
-            verts[6] = mTransform * glm::vec4{mPointB[0], mPointB[1], mPointA[2], 1.0F};
-            verts[7] = mTransform * glm::vec4{mPointB[0], mPointB[1], mPointB[2], 1.0F};
-
-            renderer.boxPrimitive.vb->unmap();
+            glm::vec3 verts[8] = {
+                mTransform * glm::vec4{mPointA[0], mPointA[1], mPointA[2], 1.0F},
+                mTransform * glm::vec4{mPointB[0], mPointA[1], mPointA[2], 1.0F},
+                mTransform * glm::vec4{mPointB[0], mPointA[1], mPointB[2], 1.0F},
+                mTransform * glm::vec4{mPointA[0], mPointA[1], mPointB[2], 1.0F},
+                mTransform * glm::vec4{mPointA[0], mPointB[1], mPointB[2], 1.0F},
+                mTransform * glm::vec4{mPointA[0], mPointB[1], mPointA[2], 1.0F},
+                mTransform * glm::vec4{mPointB[0], mPointB[1], mPointA[2], 1.0F},
+                mTransform * glm::vec4{mPointB[0], mPointB[1], mPointB[2], 1.0F},
+            };
+            renderer.boxPrimitive.vb->fill(verts, sizeof(verts));
 
             renderer.renderDevice->setVertexArray(renderer.boxPrimitive.va);
             renderer.renderDevice->setIndexBuffer(renderer.boxPrimitive.ib);
@@ -71,5 +71,5 @@ namespace cubos::engine
                 renderer.renderDevice->createRasterState(cubos::core::gl::RasterStateDesc{}));
             renderer.renderDevice->drawTrianglesIndexed(0, 36);
         }
-    };
+    }; // namespace cubos::engine
 } // namespace cubos::engine

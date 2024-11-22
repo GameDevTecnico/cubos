@@ -894,17 +894,6 @@ public:
         }
     }
 
-    void* map() override
-    {
-        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
-        return glMapBufferRange(GL_UNIFORM_BUFFER, 0, this->size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
-    }
-
-    void unmap() override
-    {
-        glUnmapBuffer(GL_UNIFORM_BUFFER);
-    }
-
     void fill(const void* data, std::size_t size) override
     {
         CHECK(glBindBuffer(GL_UNIFORM_BUFFER, this->id));
@@ -937,18 +926,10 @@ public:
         }
     }
 
-    void* map() override
+    void fill(const void* data, std::size_t size) override
     {
         CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id));
-        void* ptr;
-        CHECK_VAL(ptr, glMapBufferRange(GL_ELEMENT_ARRAY_BUFFER, 0, this->size,
-                                        GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT));
-        return ptr;
-    }
-
-    void unmap() override
-    {
-        CHECK(glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER));
+        CHECK(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(size), data));
     }
 
     std::shared_ptr<bool> destroyed;
@@ -977,29 +958,35 @@ public:
         }
     }
 
-    void* map() override
+    void fill(const void* data, std::size_t size) override
     {
         CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
-        void* ptr;
-        CHECK_VAL(ptr,
-                  glMapBufferRange(GL_ARRAY_BUFFER, 0, this->size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT));
-        return ptr;
+        CHECK(glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(size), data));
     }
 
-    void* map(std::size_t offset, std::size_t length, bool synchronized) override
+    void fill(const void* data, std::size_t offset, std::size_t size, bool synchronized = true) override
     {
-        GLbitfield flags = GL_MAP_WRITE_BIT;
-        flags |= synchronized ? 0 : GL_MAP_UNSYNCHRONIZED_BIT;
+#ifdef __EMSCRIPTEN__
+        // On WebGL2, we can't use glMapBufferRange. Therefore, if on Emscripten, we always use glBufferSubData
+        synchronized = true;
+#endif
+        if (synchronized)
+        {
         CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
+            CHECK(glBufferSubData(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(size), data));
+        }
+        else
+        {
+#ifndef __EMSCRIPTEN__
+            CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
         void* ptr;
-        CHECK_VAL(ptr, glMapBufferRange(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(length),
-                                        flags));
-        return ptr;
-    }
-
-    void unmap() override
-    {
+            CHECK_VAL(ptr,
+                      glMapBufferRange(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(size),
+                                       GL_MAP_WRITE_BIT | GL_MAP_UNSYNCHRONIZED_BIT));
+            memcpy(ptr, data, size);
         CHECK(glUnmapBuffer(GL_ARRAY_BUFFER));
+#endif // __EMSCRIPTEN__
+        }
     }
 
     std::shared_ptr<bool> destroyed;
