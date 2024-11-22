@@ -4,10 +4,11 @@
 #include <mutex>
 #include <vector>
 
-#include <cpptrace/cpptrace.hpp>
-
 #ifdef __EMSCRIPTEN__
+#include <emscripten.h>
 #include <emscripten/console.h>
+#else
+#include <cpptrace/cpptrace.hpp>
 #endif
 
 #include <cubos/core/data/fs/file.hpp>
@@ -84,7 +85,13 @@ static const char* levelColor(Level level)
 
 void cubos::core::tel::abort()
 {
+#ifdef __EMSCRIPTEN__
+    char callstack[4096];
+    emscripten_get_callstack(EM_LOG_C_STACK, callstack, sizeof(callstack));
+    std::puts(callstack);
+#else
     cpptrace::generate_trace(1).print();
+#endif
     std::abort();
 }
 
