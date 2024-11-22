@@ -1609,12 +1609,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     // Define draw buffers
-    if (drawBuffers.empty())
-    {
-        CHECK(glDrawBuffer(GL_NONE));
-        CHECK(glReadBuffer(GL_NONE));
-    }
-    else
+    if (!drawBuffers.empty())
     {
         CHECK(glDrawBuffers(static_cast<GLsizei>(drawBuffers.size()), drawBuffers.data()));
     }
