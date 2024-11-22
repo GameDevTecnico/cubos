@@ -12,7 +12,11 @@
 #include <utility>
 #include <vector>
 
-#include <glad/glad.h>
+#ifdef __EMSCRIPTEN__
+#include <webgl/webgl2.h>
+#else
+#include <glad/gl.h>
+#endif // __EMSCRIPTEN__
 
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
