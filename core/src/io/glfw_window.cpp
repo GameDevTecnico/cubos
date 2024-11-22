@@ -1,6 +1,10 @@
 #include "glfw_window.hpp"
 
-#include <glad/glad.h>
+#ifdef __EMSCRIPTEN__
+#include <GL/gl.h>
+#else
+#include <glad/gl.h>
+#endif // __EMSCRIPTEN__
 
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -81,20 +85,22 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size, bool vS
     glfwMakeContextCurrent(mHandle);
 
 #ifdef __EMSCRIPTEN__
-    if (gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress) == 0)
+    // Emscripten statically links the GL API, so we can avoid the pointer indirection of glad
+    const char* version = (const char*)glGetString(GL_VERSION);
+    if (version == nullptr)
     {
-        CUBOS_FAIL("OpenGL ES 3.0 loader failed");
+        CUBOS_FAIL("OpenGL ES version query failed");
     }
 
-    CUBOS_INFO("OpenGL ES version: {}.{}", GLVersion.major, GLVersion.minor);
+    CUBOS_INFO("OpenGL ES version: {}", version);
 #else
-    int version = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-    if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == 0)
+    int version = gladLoadGL(glfwGetProcAddress);
+    if (version == 0)
     {
         CUBOS_FAIL("OpenGL loader failed");
     }
 
-    CUBOS_INFO("OpenGL version: {}.{}", GLVersion.major, GLVersion.minor);
+    CUBOS_INFO("OpenGL version: {}.{}", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
 #endif // __EMSCRIPTEN__
 
     mRenderDevice = new gl::OGLRenderDevice();
