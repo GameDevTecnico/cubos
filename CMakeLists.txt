@@ -126,9 +126,14 @@ function(cubos_common_target_options target)
     endif()
 
     if(EMSCRIPTEN)
-        target_link_options(${target} PUBLIC -sSTRICT -sASSERTIONS=0)
-        target_link_options(${target} PUBLIC -pthread -sPTHREAD_POOL_SIZE=navigator.hardwareConcurrency)
-	    target_compile_options(${target} PUBLIC -pthread)
+        target_link_options(${target} PUBLIC
+            -sASSERTIONS=1
+            -pthread
+            -sPTHREAD_POOL_SIZE=navigator.hardwareConcurrency
+            -sENVIRONMENT=web,worker
+        )
+
+        target_compile_options(${target} PUBLIC -pthread)
 
         set_target_properties(${target} PROPERTIES SUFFIX ".html")
     endif()
