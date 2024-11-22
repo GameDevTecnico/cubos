@@ -1,0 +1,72 @@
+name: 🌐 Build Engine Web
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  BUILD_TYPE: Release
+  CCACHE_BASEDIR: ${{ github.workspace }}
+  CCACHE_DIR: "${{ github.workspace }}/.ccache"
+  CCACHE_COMPILERTYPE: emcc
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install ccache
+
+    - name: Install emsdk
+      uses: mymindstorm/setup-emsdk@v14
+
+    - name: Get timestamp
+      shell: bash
+      id: ccache_vars
+      run: |
+        echo "timestamp=$(date +%s)" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache@v4
+      with:
+        path: ${{ env.CCACHE_DIR }}
+        key: ccache-${{ env.CCACHE_COMPILERTYPE }}-${{ env.BUILD_TYPE }}-${{ github.ref }}-${{ steps.ccache_vars.outputs.timestamp }}
+        restore-keys: |
+          ccache-${{ env.CCACHE_COMPILERTYPE }}-${{ env.BUILD_TYPE }}-${{ github.ref }}-
+          ccache-${{ env.CCACHE_COMPILERTYPE }}-${{ env.BUILD_TYPE }}-
+          ccache-${{ env.CCACHE_COMPILERTYPE }}-
+          ccache-
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCUBOS_CORE_SAMPLES=ON  -DCUBOS_ENGINE_SAMPLES=ON -DCMAKE_TOOLCHAIN_FILE=${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
+      shell: bash
+
+    - name: CCache Prolog
+      run: |-
+        ccache -s # Print current cache stats
+        ccache -z # Zero cache entry
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target all
+    
+    - name: CCache Epilog
+      run: |
+        ccache -s # Print current cache stats
+    
+    - name: Copy results
+      run: |
+          mkdir -p ${{github.workspace}}/results
+          cp ${{github.workspace}}/build/*.{js,wasm,html} ${{github.workspace}}/results
+
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: emscripten
+        path: ${{github.workspace}}/results
