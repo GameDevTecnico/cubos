@@ -35,11 +35,8 @@ namespace cubos::engine
         void draw(cubos::engine::GizmosRenderer& renderer, DrawPhase phase,
                   const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
         {
-            auto* verts = static_cast<glm::vec3*>(renderer.linePrimitive.vb->map());
-            verts[0] = {mPointA[0], mPointA[1], mPointA[2]};
-            verts[1] = {mPointB[0], mPointB[1], mPointB[2]};
-
-            renderer.linePrimitive.vb->unmap();
+            glm::vec3 verts[2] = {mPointA, mPointB};
+            renderer.linePrimitive.vb->fill(verts, sizeof(verts));
 
             renderer.renderDevice->setVertexArray(renderer.linePrimitive.va);
 

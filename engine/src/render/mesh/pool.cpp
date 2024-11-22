@@ -92,10 +92,8 @@ auto RenderMeshPool::allocate(const RenderMeshVertex* vertices, std::size_t coun
         // Notice that we do an unsynchronized access - if any operation on the region is still occurring, the behavior
         // will be undefined. Since we popped the first bucket in the free queue, it probably hasn't been used in a long
         // time. Thus, no synchronization here should be safe (and give us a very big performance boost).
-        auto* buffer = mVertexBuffer->map(bucketId.inner * mBucketSize * sizeof(RenderMeshVertex),
-                                          amount * sizeof(RenderMeshVertex), /*synchronized=*/false);
-        memcpy(buffer, vertices, amount * sizeof(RenderMeshVertex));
-        mVertexBuffer->unmap();
+        mVertexBuffer->fill(vertices, bucketId.inner * mBucketSize * sizeof(RenderMeshVertex),
+                            amount * sizeof(RenderMeshVertex), /*synchronized=*/false);
 
         // Setup bucket information.
         mBuckets[bucketId.inner].size = amount;

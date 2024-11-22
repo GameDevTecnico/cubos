@@ -1117,15 +1117,6 @@ namespace cubos::core::gl
         public:
             virtual ~ConstantBuffer() = default;
 
-            /// @brief Maps the constant buffer to a region in memory. Must be matched with a call
-            /// to @ref unmap().
-            /// @return Pointer to the memory region.
-            virtual void* map() = 0;
-
-            /// @brief Unmaps the constant buffer, updating it with data written to the mapped
-            /// region.
-            virtual void unmap() = 0;
-
             /// @brief Fills the buffer with the given data.
             /// @param data Pointer to data.
             /// @param size Data size in bytes.
@@ -1141,13 +1132,10 @@ namespace cubos::core::gl
         public:
             virtual ~IndexBuffer() = default;
 
-            /// @brief Maps the index buffer to a region in memory. Must be matched with a call
-            /// to @ref unmap().
-            /// @return Pointer to the memory region.
-            virtual void* map() = 0;
-
-            /// @brief Unmaps the index buffer, updating it with data written to the mapped region.
-            virtual void unmap() = 0;
+            /// @brief Fills the buffer with the given data.
+            /// @param data Pointer to data.
+            /// @param size Data size in bytes.
+            virtual void fill(const void* data, std::size_t size) = 0;
 
         protected:
             IndexBuffer() = default;
@@ -1159,23 +1147,17 @@ namespace cubos::core::gl
         public:
             virtual ~VertexBuffer() = default;
 
-            /// @brief Maps the vertex buffer to a region in memory. Must be matched with a call
-            /// to @ref unmap().
-            /// @return Pointer to the memory region.
-            virtual void* map() = 0;
+            // @brief Fills the buffer with the given data.
+            /// @param data Pointer to data.
+            /// @param size Data size in bytes.
+            virtual void fill(const void* data, std::size_t size) = 0;
 
-            /// @brief Maps a region of the vertex buffer to a region in memory. Must be matched with a call to @ref
-            /// unmap().
-            /// @param offset Offset in bytes.
-            /// @param length Length in bytes.
-            /// @param synchronized Whether pending operations on the buffer should be synchronized prior to returning
-            /// from this method.
-            /// @return Pointer to the memory region.
-            virtual void* map(std::size_t offset, std::size_t length, bool synchronized = true) = 0;
-
-            /// @brief Unmaps the vertex buffer, updating it with data written to the mapped
-            /// region.
-            virtual void unmap() = 0;
+            // @brief Fills the buffer with the given data.
+            /// @param data Pointer to data.
+            /// @param size Data size in bytes.
+            /// @param offset Offset in the buffer where the data will be written.
+            /// @param synchronized TODO: IDK WHAT THIS DOES HELP RICARDO
+            virtual void fill(const void* data, std::size_t offset, std::size_t size, bool synchronized) = 0;
 
         protected:
             VertexBuffer() = default;
