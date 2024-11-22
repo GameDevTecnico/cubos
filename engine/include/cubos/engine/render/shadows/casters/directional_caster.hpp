@@ -69,9 +69,8 @@ namespace cubos::engine
     class DirectionalShadowCaster::ShadowMap
     {
     public:
-        core::gl::Texture2DArray cascades;         ///< Cascades of the shadow map.
-        core::gl::Texture2DArray previousCascades; ///< Used to check if the framebuffer needs to be recreated.
-        core::gl::Framebuffer framebuffer;         ///< Framebuffer used by the shadow rasterizer.
+        core::gl::Texture2DArray cascades;               ///< Cascades of the shadow map.
+        std::vector<core::gl::Framebuffer> framebuffers; ///< Framebuffers used by the shadow rasterizer.
 
         /// @brief Gets the size of the shadow map textures.
         /// @return Size of the shadow map textures, in pixels.
