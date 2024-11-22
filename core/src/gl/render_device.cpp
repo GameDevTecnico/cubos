@@ -18,6 +18,11 @@ const FramebufferDesc::Texture2DTarget& FramebufferDesc::FramebufferTarget::getT
     return std::get<Texture2DTarget>(mTarget);
 }
 
+const FramebufferDesc::Texture2DArrayTarget& FramebufferDesc::FramebufferTarget::getTexture2DArrayTarget() const
+{
+    return std::get<Texture2DArrayTarget>(mTarget);
+}
+
 void FramebufferDesc::FramebufferTarget::setCubeMapTarget(const CubeMap& handle, CubeFace face)
 {
     mSet = true;
@@ -30,6 +35,13 @@ void FramebufferDesc::FramebufferTarget::setTexture2DTarget(const Texture2D& han
     mSet = true;
     mType = TargetType::Texture2D;
     mTarget = Texture2DTarget{handle};
+}
+
+void FramebufferDesc::FramebufferTarget::setTexture2DArrayTarget(const Texture2DArray& handle, uint32_t layer)
+{
+    mSet = true;
+    mType = TargetType::Texture2DArray;
+    mTarget = Texture2DArrayTarget{handle, layer};
 }
 
 bool FramebufferDesc::FramebufferTarget::isSet() const
