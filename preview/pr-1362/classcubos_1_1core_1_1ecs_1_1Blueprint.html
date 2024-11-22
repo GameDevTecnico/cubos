@@ -70,15 +70,15 @@
             <dt id="ad100889252360195106e54fed87f2d54">
               using <a href="#ad100889252360195106e54fed87f2d54" class="m-doc-self">Create</a> = <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>(*)(void*userData, std::string name)
             </dt>
-            <dd>Function used by <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a92bb828165bf177727a266567862742a" class="m-doc">instantiate</a> to create entities.</dd>
+            <dd>Function used by <a href="#a92bb828165bf177727a266567862742a" class="m-doc">instantiate</a> to create entities.</dd>
             <dt id="a7bfe09653c7ea84456cb20bc5a9eff41">
               using <a href="#a7bfe09653c7ea84456cb20bc5a9eff41" class="m-doc-self">Add</a> = void(*)(void*userData, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity, <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a> component)
             </dt>
-            <dd>Function used by <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a92bb828165bf177727a266567862742a" class="m-doc">instantiate</a> to add components to entities.</dd>
+            <dd>Function used by <a href="#a92bb828165bf177727a266567862742a" class="m-doc">instantiate</a> to add components to entities.</dd>
             <dt id="af489f8de9153de1bdb1e80b4f3bc15fa">
               using <a href="#af489f8de9153de1bdb1e80b4f3bc15fa" class="m-doc-self">Relate</a> = void(*)(void*userData, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> fromEntity, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> toEntity, <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a> relation)
             </dt>
-            <dd>Function used by <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a92bb828165bf177727a266567862742a" class="m-doc">instantiate</a> to add relations to entities.</dd>
+            <dd>Function used by <a href="#a92bb828165bf177727a266567862742a" class="m-doc">instantiate</a> to add relations to entities.</dd>
           </dl>
         </section>
         <section id="pub-static-methods">
@@ -136,9 +136,9 @@
             <dd>Returns a bimap which maps entities to their names.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a92bb828165bf177727a266567862742a" class="m-doc">instantiate</a>(</span><span class="m-doc-wrap">void* userData,
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#ad100889252360195106e54fed87f2d54" class="m-doc">Create</a> create,
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a7bfe09653c7ea84456cb20bc5a9eff41" class="m-doc">Add</a> add,
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#af489f8de9153de1bdb1e80b4f3bc15fa" class="m-doc">Relate</a> relate,
+              <a href="#ad100889252360195106e54fed87f2d54" class="m-doc">Create</a> create,
+              <a href="#a7bfe09653c7ea84456cb20bc5a9eff41" class="m-doc">Add</a> add,
+              <a href="#af489f8de9153de1bdb1e80b4f3bc15fa" class="m-doc">Relate</a> relate,
               bool withName) const</span>
             </dt>
             <dd>Instantiates the blueprint by calling the given functions.</dd>
@@ -155,11 +155,11 @@
             </dt>
             <dd>Gets the map relating entities to their name.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae8de885ad9b31f422766f40943ab5731" class="m-doc">components</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8de885ad9b31f422766f40943ab5731" class="m-doc">components</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;</span>
             </dt>
             <dd>Gets the map relating types of components to maps of entities to the component values.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af01608c90e4775dfe20342679fdece85" class="m-doc">relations</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af01608c90e4775dfe20342679fdece85" class="m-doc">relations</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;&gt;</span>
             </dt>
             <dd>Gets the map relating types of relations to maps of entities to maps of entities to the component values.</dd>
           </dl>
@@ -203,7 +203,7 @@
                 </tr>
               </tfoot>
             </table>
-<p>An entity with the same name must not exist. The name must be <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a4c2cb5bd1bdac49429e24772dc4d99a8" class="m-doc">valid</a>.</p><aside class="m-note m-danger"><h4>Warning</h4><p>The returned entity is only valid inside the blueprint itself.</p></aside>
+<p>An entity with the same name must not exist. The name must be <a href="#a4c2cb5bd1bdac49429e24772dc4d99a8" class="m-doc">valid</a>.</p><aside class="m-note m-danger"><h4>Warning</h4><p>The returned entity is only valid inside the blueprint itself.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a5c4657ca67d6036b6dc984cd207ed778"><div>
             <h3>
@@ -367,9 +367,9 @@
           <section class="m-doc-details" id="a92bb828165bf177727a266567862742a"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92bb828165bf177727a266567862742a" class="m-doc-self">instantiate</a>(</span><span class="m-doc-wrap">void* userData,
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#ad100889252360195106e54fed87f2d54" class="m-doc">Create</a> create,
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a7bfe09653c7ea84456cb20bc5a9eff41" class="m-doc">Add</a> add,
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#af489f8de9153de1bdb1e80b4f3bc15fa" class="m-doc">Relate</a> relate,
+              <a href="#ad100889252360195106e54fed87f2d54" class="m-doc">Create</a> create,
+              <a href="#a7bfe09653c7ea84456cb20bc5a9eff41" class="m-doc">Add</a> add,
+              <a href="#af489f8de9153de1bdb1e80b4f3bc15fa" class="m-doc">Relate</a> relate,
               bool withName) const</span></span>
             </h3>
             <p>Instantiates the blueprint by calling the given functions.</p>
@@ -469,7 +469,7 @@
           </div></section>
           <section class="m-doc-details" id="ae8de885ad9b31f422766f40943ab5731"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8de885ad9b31f422766f40943ab5731" class="m-doc-self">components</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8de885ad9b31f422766f40943ab5731" class="m-doc-self">components</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the map relating types of components to maps of entities to the component values.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -483,7 +483,7 @@
           </div></section>
           <section class="m-doc-details" id="af01608c90e4775dfe20342679fdece85"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af01608c90e4775dfe20342679fdece85" class="m-doc-self">relations</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">memory::<wbr />TypeMap</a>&lt;<a href="#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="#a195e6b578d5e4da771809180576c7127" class="m-doc">EntityMap</a>&lt;<a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">memory::<wbr />AnyValue</a>&gt;&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af01608c90e4775dfe20342679fdece85" class="m-doc-self">relations</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the map relating types of relations to maps of entities to maps of entities to the component values.</p>
             <table class="m-table m-fullwidth m-flat">
