@@ -269,7 +269,8 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                     {
                         // Send the PerMesh data to the GPU.
                         PerMesh perMesh{.model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset),
-                                        .picker = meshEnt.index};
+                                        .picker = meshEnt.index,
+                                        .padding = {}};
                         state.perMeshCB->fill(&perMesh, sizeof(perMesh));
 
                         // Iterate over the buckets of the mesh (it may be split over many of them).
