@@ -112,8 +112,9 @@
               <span class="m-doc-wrap-bumper">void <a href="#a6810350acf40546ee5e65f0432afe46f" class="m-doc">merge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a>&amp; settingsToMerge)</span>
             </dt>
             <dd>Merges the settings from <code>settingsToMerge</code>.</dd>
-            <dt id="ab6c3206c774b9c4d4293c630339b222b">
-              <span class="m-doc-wrap-bumper">auto <a href="#ab6c3206c774b9c4d4293c630339b222b" class="m-doc-self">save</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac1a8d9da6bf298f2345dfcece1a4d5cd" class="m-doc">save</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;,
+              int indent = 2) -&gt; bool</span>
             </dt>
             <dd>Saves settings as json to path specified in the settings.path value.</dd>
             <dt>
@@ -359,6 +360,34 @@
               </tbody>
             </table>
 <p>If a setting from <code>settingsToMerge</code> is already defined in this instance, its value is overwritten.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac1a8d9da6bf298f2345dfcece1a4d5cd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1a8d9da6bf298f2345dfcece1a4d5cd" class="m-doc-self">save</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;,
+              int indent = 2)</span></span>
+            </h3>
+            <p>Saves settings as json to path specified in the settings.path value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path</td>
+                  <td>Virtual <code><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />FileSystem</a></code> to write system in.</td>
+                </tr>
+                <tr>
+                  <td>indent</td>
+                  <td>Indent of the Json, -1 for selects the most compact representation.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>false if unsuccessful.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
           <section class="m-doc-details" id="a0af7b50bd43b4312c27fac1356578bc6"><div>
             <h3>
