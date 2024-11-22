@@ -977,19 +977,19 @@ public:
 #endif
         if (synchronized)
         {
-        CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
+            CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
             CHECK(glBufferSubData(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(size), data));
         }
         else
         {
 #ifndef __EMSCRIPTEN__
             CHECK(glBindBuffer(GL_ARRAY_BUFFER, this->id));
-        void* ptr;
+            void* ptr;
             CHECK_VAL(ptr,
                       glMapBufferRange(GL_ARRAY_BUFFER, static_cast<GLintptr>(offset), static_cast<GLsizeiptr>(size),
                                        GL_MAP_WRITE_BIT | GL_MAP_UNSYNCHRONIZED_BIT));
             memcpy(ptr, data, size);
-        CHECK(glUnmapBuffer(GL_ARRAY_BUFFER));
+            CHECK(glUnmapBuffer(GL_ARRAY_BUFFER));
 #endif // __EMSCRIPTEN__
         }
     }
@@ -2356,7 +2356,9 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
 #define GLSL_HEADER                                                                                                    \
     "#version 300 es\n"                                                                                                \
     "#define ES\n"                                                                                                     \
-    "precision highp float;\n"
+    "precision highp float;\n"                                                                                         \
+    "precision highp int;\n"                                                                                           \
+    "precision highp sampler2DArray;\n"
 #else
 #define GLSL_HEADER "#version 330 core\n"
 #endif
