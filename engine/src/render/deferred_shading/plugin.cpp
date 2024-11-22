@@ -160,12 +160,8 @@ namespace
                          "viewportSize binding points must exist");
 
             SamplerDesc directionalShadowSamplerDesc{};
-            directionalShadowSamplerDesc.addressU = AddressMode::Border;
-            directionalShadowSamplerDesc.addressV = AddressMode::Border;
-            for (float& borderColor : directionalShadowSamplerDesc.borderColor)
-            {
-                borderColor = 1.0F;
-            }
+            directionalShadowSamplerDesc.addressU = AddressMode::Clamp;
+            directionalShadowSamplerDesc.addressV = AddressMode::Clamp;
             directionalShadowSampler = renderDevice.createSampler(directionalShadowSamplerDesc);
 
             generateScreenQuad(renderDevice, pipeline, screenQuad);
