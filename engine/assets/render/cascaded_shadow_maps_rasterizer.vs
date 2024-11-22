@@ -1,13 +1,16 @@
-#version 330 core
-
 in uvec3 position;
 
-uniform PerMesh
+layout(std140) uniform PerScene
+{
+    mat4 lightViewProj;
+};
+
+layout(std140) uniform PerMesh
 {
     mat4 model;
 };
 
 void main(void)
 {
-    gl_Position = model * vec4(position, 1.0);
+    gl_Position = lightViewProj * model * vec4(position, 1.0);
 }

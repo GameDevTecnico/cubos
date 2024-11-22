@@ -5,6 +5,7 @@
 
 #include <cubos/engine/render/shadows/casters/directional_caster.hpp>
 
+using cubos::core::gl::FramebufferDesc;
 using cubos::core::gl::Texture2DArrayDesc;
 using cubos::core::gl::TextureFormat;
 using cubos::core::gl::Usage;
@@ -83,4 +84,14 @@ void cubos::engine::DirectionalShadowCaster::ShadowMap::resize(cubos::core::gl::
     // Create shadow map texture.
     desc.format = TextureFormat::Depth32;
     cascades = rd.createTexture2DArray(desc);
+
+    // Reset the framebuffers.
+    framebuffers.clear();
+    for (uint32_t i = 0; i < static_cast<uint32_t>(numCascades); i++)
+    {
+        FramebufferDesc desc{};
+        desc.targetCount = 0;
+        desc.depthStencil.setTexture2DArrayTarget(cascades, i);
+        framebuffers.push_back(rd.createFramebuffer(desc));
+    }
 }

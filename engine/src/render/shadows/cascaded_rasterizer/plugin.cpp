@@ -34,9 +34,7 @@ namespace
     // Holds the data sent per scene to the GPU.
     struct PerScene
     {
-        glm::mat4 lightViewProj[cubos::engine::DirectionalShadowCaster::MaxCascades];
-        int numCascades;
-        int padding[3];
+        glm::mat4 lightViewProj;
     };
 
     // Holds the data sent per mesh to the GPU.
@@ -100,7 +98,6 @@ namespace
 void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
 {
     static const Asset<Shader> VertexShader = AnyAsset("852fcd11-700b-454f-8a70-ef2c5ebd3bbe");
-    static const Asset<Shader> GeometryShader = AnyAsset("404e782e-b959-4120-b446-05ca8f2ecdf5");
     static const Asset<Shader> PixelShader = AnyAsset("186bc625-eb3a-4a69-8c63-0eab53e39735");
 
     cubos.depends(windowPlugin);
@@ -123,9 +120,8 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
         .call([](Commands cmds, const Window& window, Assets& assets, const RenderMeshPool& pool) {
             auto& rd = window->renderDevice();
             auto vs = assets.read(VertexShader)->shaderStage();
-            auto gs = assets.read(GeometryShader)->shaderStage();
             auto ps = assets.read(PixelShader)->shaderStage();
-            cmds.emplaceResource<State>(rd, rd.createShaderPipeline(vs, gs, ps), pool.vertexBuffer());
+            cmds.emplaceResource<State>(rd, rd.createShaderPipeline(vs, ps), pool.vertexBuffer());
         });
 
     cubos.system("rasterize to cascaded shadow maps")
@@ -137,6 +133,11 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                  Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
 
+            // Set the raster and depth-stencil states.
+            rd.setRasterState(state.rasterState);
+            rd.setBlendState(nullptr);
+            rd.setDepthStencilState(state.depthStencilState);
+
             for (auto [cameraEntity, cameraLocalToWorld, camera, drawsTo, gBuffer] : cameras)
             {
                 if (!camera.active)
@@ -147,45 +148,27 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                 for (auto [caster, light, localToWorld] : lights)
                 {
                     auto& shadowMap = caster.shadowMaps.at(cameraEntity);
-                    // Check if we need to recreate the framebuffer.
-                    if (shadowMap->previousCascades != shadowMap->cascades)
-                    {
-                        // Store textures so we can check if they change in the next frame.
-                        shadowMap->previousCascades = shadowMap->cascades;
 
-                        // Create the framebuffer.
-                        FramebufferDesc desc{};
-                        desc.targetCount = 0;
-                        desc.depthStencil.setTexture2DArrayTarget(shadowMap->cascades);
-                        shadowMap->framebuffer = rd.createFramebuffer(desc);
-                    }
-
-                    // Bind the framebuffer and set the viewport.
-                    rd.setFramebuffer(shadowMap->framebuffer);
+                    // Set the viewport to match the shadow map size.
                     rd.setViewport(0, 0, static_cast<int>(caster.getCurrentSize().x),
                                    static_cast<int>(caster.getCurrentSize().y));
-
-                    // Set the raster and depth-stencil states.
-                    rd.setRasterState(state.rasterState);
-                    rd.setBlendState(nullptr);
-                    rd.setDepthStencilState(state.depthStencilState);
-
-                    // Clear
-                    rd.clearDepth(1.0F);
-
-                    // Send the PerScene data to the GPU.
-                    PerScene perScene;
 
                     float maxDistance = caster.maxDistance == 0 ? camera.zFar : caster.maxDistance;
                     float nearDistance = caster.nearDistance == 0 ? camera.zNear : caster.nearDistance;
                     int numCascades = static_cast<int>(caster.getCurrentSplitDistances().size()) + 1;
-                    for (int i = 0; i < numCascades; i++)
+
+                    for (std::size_t i = 0; i < shadowMap->framebuffers.size(); ++i)
                     {
+                        // Bind the framebuffer of the current layer and clear it.
+                        rd.setFramebuffer(shadowMap->framebuffers[i]);
+                        rd.clearDepth(1.0F);
+
+                        // Calculate the light view-projection matrix for the current cascade.
                         float near = glm::mix(
                             nearDistance, maxDistance,
                             i == 0 ? 0.0F : caster.getCurrentSplitDistances().at(static_cast<unsigned long>(i) - 1));
                         float far = glm::mix(nearDistance, maxDistance,
-                                             i == numCascades - 1
+                                             i == static_cast<std::size_t>(numCascades) - 1
                                                  ? 1.0F
                                                  : caster.getCurrentSplitDistances().at(static_cast<unsigned long>(i)));
 
@@ -210,6 +193,7 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                         {
                             corner = view * corner;
                         }
+
                         // Find minimum/maximum coordinates along each axis
                         float minX = std::numeric_limits<float>::max();
                         float maxX = std::numeric_limits<float>::lowest();
@@ -231,31 +215,32 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                         minZ -= std::abs(minZ) * 0.5F;
                         maxZ += std::abs(maxZ) * 0.5F;
                         auto proj = glm::ortho(minX, maxX, minY, maxY, -maxZ, -minZ);
-                        perScene.lightViewProj[i] = proj * view;
-                        perScene.numCascades = numCascades;
-                    }
-                    state.perSceneCB->fill(&perScene, sizeof(perScene));
 
-                    // Bind the shader, vertex array and uniform buffer.
-                    rd.setShaderPipeline(state.pipeline);
-                    rd.setVertexArray(state.vertexArray);
-                    state.perSceneBP->bind(state.perSceneCB);
-                    state.perMeshBP->bind(state.perMeshCB);
+                        // Send the PerScene data to the GPU.
+                        PerScene perScene = {.lightViewProj = proj * view};
+                        state.perSceneCB->fill(&perScene, sizeof(perScene));
 
-                    // Iterate over all mesh buckets and issue draw calls.
-                    for (auto [meshEnt, meshLocalToWorld, mesh, grid] : meshes)
-                    {
-                        // Send the PerMesh data to the GPU.
-                        PerMesh perMesh{
-                            .model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset),
-                        };
-                        state.perMeshCB->fill(&perMesh, sizeof(perMesh));
+                        // Bind the shader, vertex array and uniform buffer.
+                        rd.setShaderPipeline(state.pipeline);
+                        rd.setVertexArray(state.vertexArray);
+                        state.perSceneBP->bind(state.perSceneCB);
+                        state.perMeshBP->bind(state.perMeshCB);
 
-                        // Iterate over the buckets of the mesh (it may be split over many of them).
-                        for (auto bucket = mesh.firstBucketId; bucket != RenderMeshPool::BucketId::Invalid;
-                             bucket = pool.next(bucket))
+                        // Iterate over all mesh buckets and issue draw calls.
+                        for (auto [meshEnt, meshLocalToWorld, mesh, grid] : meshes)
                         {
-                            rd.drawTriangles(pool.bucketSize() * bucket.inner, pool.vertexCount(bucket));
+                            // Send the PerMesh data to the GPU.
+                            PerMesh perMesh{
+                                .model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset),
+                            };
+                            state.perMeshCB->fill(&perMesh, sizeof(perMesh));
+
+                            // Iterate over the buckets of the mesh (it may be split over many of them).
+                            for (auto bucket = mesh.firstBucketId; bucket != RenderMeshPool::BucketId::Invalid;
+                                 bucket = pool.next(bucket))
+                            {
+                                rd.drawTriangles(pool.bucketSize() * bucket.inner, pool.vertexCount(bucket));
+                            }
                         }
                     }
                 }
