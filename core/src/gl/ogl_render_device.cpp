@@ -1351,6 +1351,7 @@ private:
     int mSsboCount;
 };
 
+#ifndef __EMSCRIPTEN__
 class OGLTimer : public impl::Timer
 {
 public:
@@ -1422,6 +1423,7 @@ public:
 
     GLuint ids[2]; // begin, end
 };
+#endif // __EMSCRIPTEN__
 
 OGLRenderDevice::~OGLRenderDevice()
 {
@@ -2438,6 +2440,10 @@ void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
 
 Timer OGLRenderDevice::createTimer()
 {
+#ifdef __EMSCRIPTEN__
+    CUBOS_ERROR("Timers are not supported on Emscripten");
+    return nullptr;
+#else
     // Initialize query object
     GLuint ids[2];
     glGenQueries(2, ids);
@@ -2452,6 +2458,7 @@ Timer OGLRenderDevice::createTimer()
     }
 
     return std::make_shared<OGLTimer>(mDestroyed, ids[0], ids[1]);
+#endif // __EMSCRIPTEN__
 }
 
 void OGLRenderDevice::clearColor(float r, float g, float b, float a)
