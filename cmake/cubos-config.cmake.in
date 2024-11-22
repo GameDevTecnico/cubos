@@ -11,10 +11,6 @@ if(NOT @CUBOS_CORE_SHARED@)
     if(@CUBOS_CORE_GLFW@)
         find_dependency(glfw3 REQUIRED)
     endif()
-
-    if(@CUBOS_CORE_OPENAL@)
-        find_dependency(OpenAL REQUIRED)
-    endif()
 endif()
 
 find_dependency(stduuid REQUIRED)
