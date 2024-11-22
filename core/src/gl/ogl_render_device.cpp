@@ -1818,10 +1818,12 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     CHECK(glGenSamplers(1, &id));
     CHECK(glSamplerParameteri(id, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(minFilter)));
     CHECK(glSamplerParameteri(id, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(magFilter)));
-    if (GL_EXT_texture_filter_anisotropic != 0)
+#ifndef __EMSCRIPTEN__
+    if (GLAD_GL_EXT_texture_filter_anisotropic != 0)
     {
         CHECK(glSamplerParameteri(id, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<GLint>(desc.maxAnisotropy)));
     }
+#endif
     CHECK(glSamplerParameteri(id, GL_TEXTURE_WRAP_S, static_cast<GLint>(addressU)));
     CHECK(glSamplerParameteri(id, GL_TEXTURE_WRAP_T, static_cast<GLint>(addressV)));
     CHECK(glSamplerParameteri(id, GL_TEXTURE_WRAP_R, static_cast<GLint>(addressW)));
@@ -1863,10 +1865,12 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
     CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
     CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-    if (GL_EXT_texture_filter_anisotropic != 0)
+#ifndef __EMSCRIPTEN__
+    if (GLAD_GL_EXT_texture_filter_anisotropic != 0)
     {
         CHECK(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F));
     }
+#endif
 
     // Check errors
     CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
@@ -1913,10 +1917,12 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     CHECK(glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
     CHECK(glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
     CHECK(glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-    if (GL_EXT_texture_filter_anisotropic != 0)
+#ifndef __EMSCRIPTEN__
+    if (GLAD_GL_EXT_texture_filter_anisotropic != 0)
     {
         CHECK(glTexParameterf(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F));
     }
+#endif
 
     // Check errors
     CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
@@ -1958,10 +1964,12 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     CHECK(glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
     CHECK(glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
     CHECK(glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
-    if (GL_EXT_texture_filter_anisotropic != 0)
+#ifndef __EMSCRIPTEN__
+    if (GLAD_GL_EXT_texture_filter_anisotropic != 0)
     {
         CHECK(glTexParameterf(GL_TEXTURE_3D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F));
     }
+#endif
 
     // Check errors
     CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
@@ -2010,10 +2018,12 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
     CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
     CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-    if (GL_EXT_texture_filter_anisotropic != 0)
+#ifndef __EMSCRIPTEN__
+    if (GLAD_GL_EXT_texture_filter_anisotropic != 0)
     {
         CHECK(glTexParameterf(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F));
     }
+#endif
 
     // Check errors
     CLEANUP_GL_ERROR_RET(nullptr, glDeleteTextures(1, &id));
@@ -2596,6 +2606,9 @@ int OGLRenderDevice::getProperty(Property prop)
     switch (prop)
     {
     case Property::MaxAnisotropy:
+#ifdef __EMSCRIPTEN__
+        return 1;
+#else
         if (GLAD_GL_EXT_texture_filter_anisotropic == 0)
         {
             return 1;
@@ -2606,6 +2619,7 @@ int OGLRenderDevice::getProperty(Property prop)
             CHECK(glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &val));
             return static_cast<int>(val);
         }
+#endif
 
     case Property::ComputeSupported:
 #ifdef __EMSCRIPTEN__
