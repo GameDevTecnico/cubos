@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Audio Plugin (#1004, **@Dageus**, **@diogomsmiranda**).
 - Contact caching for collision between box shapes (#1355, **@fallenatlas**).
 - Template Cubos project (#1009, **@RiscadoA**).
+- Web support, through Emscripten (#465, **@luishfonseca**, **@RiscadoA**).
 
 ### Changed
 
