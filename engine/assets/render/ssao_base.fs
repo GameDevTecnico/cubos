@@ -42,7 +42,7 @@ void main(void)
     vec3 normal = getViewNormal(fragUv);
 
     // Sample a noise vector.
-    vec2 noiseScale = vec2(textureSize(positionTexture, 0)) / 4;
+    vec2 noiseScale = vec2(textureSize(positionTexture, 0)) / 4.0;
     vec3 randomVector = normalize(texture(noiseTexture, fragUv * noiseScale).xyz);
 
     // Calculate the TBN matrix from the fragment normal and the random vector.
@@ -75,5 +75,5 @@ void main(void)
 
     // We substract the occlusion factor from 1.0 to get the ambient occlusion color.
     // Then in further processing we can simply multiply this value with the color of the fragment.
-    color = 1.0 - (occlusion / kernelSize);
+    color = 1.0 - (occlusion / float(kernelSize));
 }

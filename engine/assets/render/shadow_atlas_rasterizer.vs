@@ -1,5 +1,3 @@
-#version 330 core
-
 in uvec3 position;
 
 uniform PerScene

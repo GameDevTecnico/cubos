@@ -139,15 +139,15 @@ vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
     // Lighting
     vec3 toLight = vec3(spotLights[lightI].position) - fragPos;
     float r = length(toLight) / spotLights[lightI].range;
-    if (r < 1)
+    if (r < 1.0)
     {
         vec3 toLightNormalized = normalize(toLight);
         float a = dot(toLightNormalized, -spotLights[lightI].direction.xyz);
         if (a > spotLights[lightI].spotCutoff)
         {
-            float angleValue = clamp(remap(a, spotLights[lightI].innerSpotCutoff, spotLights[lightI].spotCutoff, 1, 0), 0, 1);
-            float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
-            float diffuse = max(dot(fragNormal, toLightNormalized), 0);
+            float angleValue = clamp(remap(a, spotLights[lightI].innerSpotCutoff, spotLights[lightI].spotCutoff, 1.0, 0.0), 0.0, 1.0);
+            float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1.0 - r) * 5.0, 0.0, 1.0), 0.0, 1.0);
+            float diffuse = max(dot(fragNormal, toLightNormalized), 0.0);
             return angleValue * attenuation * diffuse * (1.0 - shadow) * spotLights[lightI].intensity
                 * vec3(spotLights[lightI].color);
         }
@@ -187,7 +187,7 @@ vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI, bool drawS
             float currentDepth = projCoords.z;
             float bias = directionalLights[lightI].shadowBias / positionLightSpace.w; // make the bias not depend on near/far planes
             // PCF
-            if (directionalLights[lightI].shadowBlurRadius <= 0.001f)
+            if (directionalLights[lightI].shadowBlurRadius <= 0.001)
             {
                 float pcfDepth = texture(directionalShadowMap, vec3(uv.xy, split)).r;
                 shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
@@ -210,7 +210,7 @@ vec3 directionalLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI, bool drawS
             }
         }
     }
-    return max(dot(fragNormal, -directionalLights[lightI].direction.xyz), 0)
+    return max(dot(fragNormal, -directionalLights[lightI].direction.xyz), 0.0)
         * (1.0 - shadow) * directionalLights[lightI].intensity * vec3(directionalLights[lightI].color);
 }
 
@@ -282,14 +282,14 @@ vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
 
     // Lighting
     float r = length(toLight) / pointLights[lightI].range;
-    if (r < 1)
+    if (r < 1.0)
     {
-        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
-        float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0);
+        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0.0, 1.0), 0.0, 1.0);
+        float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0.0);
         return attenuation * diffuse * (1.0 - shadow) * pointLights[lightI].intensity
             * vec3(pointLights[lightI].color);
     }
-    return vec3(0);
+    return vec3(0.0);
 }
 
 vec3 rayDir(vec2 uv)
