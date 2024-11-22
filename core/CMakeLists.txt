@@ -194,41 +194,46 @@ endif()
 
 include(FetchContent)
 
-# Fetch and link cpptrace
-FetchContent_Declare(
-    cpptrace
-    GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
-    GIT_TAG        v0.7.1
-	SYSTEM
-	FIND_PACKAGE_ARGS
-)
-FetchContent_MakeAvailable(cpptrace)
-target_link_libraries(cubos-core PRIVATE cpptrace::cpptrace)
+if(NOT EMSCRIPTEN)
+	# Fetch and link cpptrace - only available (and needed) on non-Emscripten platforms
+	FetchContent_Declare(
+		cpptrace
+		GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
+		GIT_TAG        v0.7.1
+		SYSTEM
+		FIND_PACKAGE_ARGS
+	)
+	FetchContent_MakeAvailable(cpptrace)
+	target_link_libraries(cubos-core PRIVATE cpptrace::cpptrace)
+endif()
 
 # If OpenGL support is enabled, fetch and link glad
 if(CUBOS_CORE_OPENGL)
-	FetchContent_Declare(
-		glad
-		GIT_REPOSITORY https://github.com/GameDevTecnico/cubos-glad.git
-		GIT_TAG        207473f16f9ec17d3f69002f3bed923fb4064ac8
-		SYSTEM
-	)
-	if(CUBOS_CORE_SHARED)
-		set(GLAD_INSTALL OFF CACHE BOOL "Don't install glad" FORCE)
-	else()
-		set(GLAD_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Install glad" FORCE)
-	endif()
-	FetchContent_MakeAvailable(glad)
-	if(CUBOS_CORE_SHARED)
-		set_target_properties(glad PROPERTIES POSITION_INDEPENDENT_CODE ON)
-	endif()
-	target_link_libraries(cubos-core PRIVATE glad)
-	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_OPENGL GLAD_GLAPI_EXPORT GLAD_GLAPI_EXPORT_BUILD)
-
 	if(EMSCRIPTEN)
+		# Unless we're on Emscripten, which statically links to OpenGL for us, and is thus more efficient
+		# than using glad
 		target_link_libraries(cubos-core PRIVATE GL)
 		target_link_options(cubos-core PUBLIC -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2)
+	else()
+		FetchContent_Declare(
+			glad
+			GIT_REPOSITORY https://github.com/GameDevTecnico/cubos-glad.git
+			GIT_TAG        bdf4d66072830f9822512f8f7dc3ca3fd72d9f69
+			SYSTEM
+		)
+		if(CUBOS_CORE_SHARED)
+			set(GLAD_INSTALL OFF CACHE BOOL "Don't install glad" FORCE)
+		else()
+			set(GLAD_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Install glad" FORCE)
+		endif()
+		FetchContent_MakeAvailable(glad)
+		if(CUBOS_CORE_SHARED)
+			set_target_properties(glad PROPERTIES POSITION_INDEPENDENT_CODE ON)
+		endif()
+		target_link_libraries(cubos-core PRIVATE glad)
+		target_compile_definitions(cubos-core PRIVATE GLAD_GLAPI_EXPORT GLAD_GLAPI_EXPORT_BUILD)
 	endif()
+	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_OPENGL)
 endif()
 
 # If GLFW support is enabled, fetch and link it
