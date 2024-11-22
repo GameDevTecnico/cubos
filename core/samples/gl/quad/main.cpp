@@ -170,6 +170,7 @@ int main()
 #ifndef __EMSCRIPTEN__
     while (!state.window->shouldClose())
     {
+        update(&state);
     }
 #else
     emscripten_set_main_loop_arg(update, &state, 0, 1);
