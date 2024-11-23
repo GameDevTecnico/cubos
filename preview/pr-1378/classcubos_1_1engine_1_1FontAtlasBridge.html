@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Font module | Cubos Docs</title>
+  <title>cubos::engine::FontAtlasBridge class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,92 +46,114 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Font <span class="m-thin">module</span></h1>
-        <p>Adds fonts to <strong>Cubos</strong> using msdfgen.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>FontAtlasBridge <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="font_2atlas_2bridge_8hpp.html">&lt;engine/font/atlas/bridge.hpp&gt;</a></div>
+        </h1>
+        <p>Bridge which loads and saves <a href="structcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md73">Bridges</a></li>
-            <li><a href="#autotoc_md74">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md73"><h3><a href="#autotoc_md73">Bridges</a></h3><ul><li><a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">FontBridge</a> - loads <a href="structcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</li></ul></section><section id="autotoc_md74"><h3><a href="#autotoc_md74">Dependencies</a></h3><ul><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="atlas_8hpp.html" class="m-doc">atlas.hpp</a></dt>
-            <dd>Struct <a href="structcubos_1_1engine_1_1FontAtlas.html" class="m-doc">cubos::<wbr />engine::<wbr />FontAtlas</a>.</dd>
-            <dt>file <a href="font_2atlas_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />FontAtlasBridge</a>.</dd>
-            <dt>file <a href="glyph_8hpp.html" class="m-doc">glyph.hpp</a></dt>
-            <dd>Struct <a href="structcubos_1_1engine_1_1Glyph.html" class="m-doc">cubos::<wbr />engine::<wbr />Glyph</a>.</dd>
-            <dt>file <a href="atlas__store_8hpp.html" class="m-doc">atlas_store.hpp</a></dt>
-            <dd>Resource <a href="structcubos_1_1engine_1_1FontAtlasStore.html" class="m-doc">cubos::<wbr />engine::<wbr />FontAtlasStore</a>.</dd>
-            <dt>file <a href="font_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />FontBridge</a>.</dd>
-            <dt>file <a href="font_8hpp.html" class="m-doc">font.hpp</a></dt>
-            <dd>Struct <a href="structcubos_1_1engine_1_1Font.html" class="m-doc">cubos::<wbr />engine::<wbr />Font</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2font_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a>
+            </dt>
+            <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structcubos_1_1engine_1_1FontAtlas.html" class="m-doc">cubos::engine::FontAtlas</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#a15dff9e02f5a211b13f3650854f60e55" class="m-doc">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Class that holds all the necessary data about a font atlas. This font atlas represents the texure created from all the different glyphs in a font, that will be then used for drawing the text.</dd>
+            <dd>Loads an asset from a file stream.</dd>
             <dt>
-              class <a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">cubos::engine::FontAtlasBridge</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1ab21dedd4bfefcd81e6fc12d0ef6542" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</dd>
-            <dt>
-              class <a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">cubos::engine::FontBridge</a>
-            </dt>
-            <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1Font.html" class="m-doc">cubos::engine::Font</a>
-            </dt>
-            <dd><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing font data.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#gaac7e6f56482136a66f22c9deb27054a7" class="m-doc">fontPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Saves an asset to a file stream.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gaac7e6f56482136a66f22c9deb27054a7"><div>
+          <section class="m-doc-details" id="a15dff9e02f5a211b13f3650854f60e55"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaac7e6f56482136a66f22c9deb27054a7" class="m-doc-self">fontPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2font_2plugin_8hpp.html">&lt;engine/font/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FontAtlasBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15dff9e02f5a211b13f3650854f60e55" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-            <p>Plugin entry function.</p>
+            <p>Loads an asset from a file stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class.</td>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to write into.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being loaded.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the asset was successfully loaded.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1ab21dedd4bfefcd81e6fc12d0ef6542"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FontAtlasBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ab21dedd4bfefcd81e6fc12d0ef6542" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Saves an asset to a file stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to read from.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being saved.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the asset was successfully saved.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
         </section>
