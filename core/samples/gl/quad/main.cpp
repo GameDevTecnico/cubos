@@ -25,7 +25,7 @@ struct State
     gl::RasterState rasterState;
 
     float t;
-} state;
+};
 
 void update(void* data)
 {
@@ -74,6 +74,7 @@ void update(void* data)
 
 int main()
 {
+    State state{};
     state.window = io::openWindow();
     auto& renderDevice = state.window->renderDevice();
 
