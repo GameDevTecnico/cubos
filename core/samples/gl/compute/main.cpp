@@ -46,8 +46,6 @@ int main()
 
         // FIXME: createShaderStage will inject #version 330 core, so this will fail.
         auto cs = renderDevice.createShaderStage(gl::Stage::Compute, R"glsl(
-            #version 430 core
-
             layout(local_size_x = 16, local_size_y = 16) in;
             layout(binding = 0, rgba32f) uniform image2D tex;
 
