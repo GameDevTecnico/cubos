@@ -66,37 +66,34 @@
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a>
+              class <a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">AssetBridge</a>
             </dt>
-            <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
+            <dd>Bridges are the objects responsible for loading and saving assets from/to disk. They form the bridge between the asset manager and the virtual file system.</dd>
           </dl>
         </section>
         <section id="pro-methods">
           <h2><a href="#pro-methods">Protected functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a15dff9e02f5a211b13f3650854f60e55" class="m-doc">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a15ad404ccc16de173e0e45a8c5ef87a3" class="m-doc">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Loads an asset from a file stream.</dd>
+            <dd>Loads an asset.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1ab21dedd4bfefcd81e6fc12d0ef6542" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#abf44a2e42eb1f46f979bdfb6eaf03214" class="m-doc">save</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Saves an asset to a file stream.</dd>
+            <dd>Saves an asset.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a15dff9e02f5a211b13f3650854f60e55"><div>
+          <section class="m-doc-details" id="a15ad404ccc16de173e0e45a8c5ef87a3"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FontAtlasBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15dff9e02f5a211b13f3650854f60e55" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FontAtlasBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15ad404ccc16de173e0e45a8c5ef87a3" class="m-doc-self">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-            <p>Loads an asset from a file stream.</p>
+            <p>Loads an asset.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -110,10 +107,6 @@
                   <td>handle</td>
                   <td>Handle of the asset being loaded.</td>
                 </tr>
-                <tr>
-                  <td>stream</td>
-                  <td>File stream.</td>
-                </tr>
               </tbody>
               <tfoot>
                 <tr>
@@ -122,14 +115,14 @@
                 </tr>
               </tfoot>
             </table>
+<p>The metadata of the given asset should already be present in the asset manager.</p>
           </div></section>
-          <section class="m-doc-details" id="a1ab21dedd4bfefcd81e6fc12d0ef6542"><div>
+          <section class="m-doc-details" id="abf44a2e42eb1f46f979bdfb6eaf03214"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FontAtlasBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ab21dedd4bfefcd81e6fc12d0ef6542" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
-              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FontAtlasBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf44a2e42eb1f46f979bdfb6eaf03214" class="m-doc-self">save</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-            <p>Saves an asset to a file stream.</p>
+            <p>Saves an asset.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -143,10 +136,6 @@
                   <td>handle</td>
                   <td>Handle of the asset being saved.</td>
                 </tr>
-                <tr>
-                  <td>stream</td>
-                  <td>File stream.</td>
-                </tr>
               </tbody>
               <tfoot>
                 <tr>
@@ -155,6 +144,7 @@
                 </tr>
               </tfoot>
             </table>
+<p>The asset should be loaded in the asset manager.</p>
           </div></section>
         </section>
       </div>
