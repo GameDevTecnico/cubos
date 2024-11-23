@@ -299,6 +299,7 @@ set(IMGUI_SOURCES
 	"${implot_SOURCE_DIR}/implot_demo.cpp"
 )
 add_library(imgui STATIC ${IMGUI_SOURCES})
+set_target_properties(imgui PROPERTIES SYSTEM TRUE)
 set_property(TARGET imgui PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_include_directories(imgui PUBLIC
 	$<BUILD_INTERFACE:${imgui_SOURCE_DIR}>
