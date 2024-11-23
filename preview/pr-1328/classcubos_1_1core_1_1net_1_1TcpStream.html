@@ -83,6 +83,10 @@
               <span class="m-doc-wrap-bumper"><a href="#ae24e9a4c0146cef66f98485ec4f48ca9" class="m-doc-self">~TcpStream</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
             <dd>Deconstructs.</dd>
+            <dt id="aab840e2110c2a9e462715ee93c7e3f5f">
+              <span class="m-doc-wrap-bumper"><a href="#aab840e2110c2a9e462715ee93c7e3f5f" class="m-doc-self">TcpStream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">TcpStream</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructor.</dd>
             <dt id="a20dcfe54d67dc7fc5016f1aee1838bc9">
               <span class="m-doc-wrap-bumper"><a href="#a20dcfe54d67dc7fc5016f1aee1838bc9" class="m-doc-self">TcpStream</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">TcpStream</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
             </dt>
@@ -112,7 +116,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a13a71e7b1f8a507a9c2a7271e045578d" class="m-doc">valid</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
-            <dd>Checks if inner socket is connected.</dd>
+            <dd>Checks if inner socket is currently valid successfully.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aa5d5e74a0a062d65cc79ffbc2326ec1d" class="m-doc">setBlocking</a>(</span><span class="m-doc-wrap">bool blocking) -&gt; bool</span>
             </dt>
@@ -203,12 +207,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />net::<wbr />TcpStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13a71e7b1f8a507a9c2a7271e045578d" class="m-doc-self">valid</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Checks if inner socket is connected.</p>
+            <p>Checks if inner socket is currently valid successfully.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>Whether the buffer holds a valid connection.</td>
+                  <td>Whether inner socket is valid.</td>
                 </tr>
               </tfoot>
             </table>

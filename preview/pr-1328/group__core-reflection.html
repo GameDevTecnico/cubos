@@ -68,7 +68,7 @@
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
             <dt>file <a href="comparison_8hpp.html" class="m-doc">comparison.hpp</a></dt>
-            <dd>Function <a href="namespacecubos_1_1core_1_1reflection.html#acf5c0011c6c2f0f1e2ad450c7216449c" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />compare</a>.</dd>
+            <dd>Function <a href="namespacecubos_1_1core_1_1reflection.html#a36b1ceae70bfc4f4c9ae8478388ceae7" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />compare</a>.</dd>
             <dt>file <a href="cstring_8hpp.html" class="m-doc">cstring.hpp</a></dt>
             <dd>Reflection declaration for C-strings.</dd>
             <dt>file <a href="glm_8hpp.html" class="m-doc">glm.hpp</a></dt>
@@ -111,8 +111,12 @@
             <dd>Class <a href="classcubos_1_1core_1_1reflection_1_1StringConversionTrait.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />StringConversionTrait</a>.</dd>
             <dt>file <a href="type_8hpp.html" class="m-doc">type.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Type</a>.</dd>
+            <dt>file <a href="type__client_8hpp.html" class="m-doc">type_client.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1reflection_1_1TypeClient.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient</a>.</dd>
             <dt>file <a href="type__registry_8hpp.html" class="m-doc">type_registry.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />TypeRegistry</a>.</dd>
+            <dt>file <a href="type__server_8hpp.html" class="m-doc">type_server.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -164,9 +168,17 @@
             </dt>
             <dd>Describes a reflected type.</dd>
             <dt>
+              class <a href="classcubos_1_1core_1_1reflection_1_1TypeClient.html" class="m-doc">cubos::core::reflection::TypeClient</a>
+            </dt>
+            <dd>Manages the client-side of a reflection channel on top of a stream.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">cubos::core::reflection::TypeRegistry</a>
             </dt>
             <dd>Stores a set of types which can be accessed by name.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html" class="m-doc">cubos::core::reflection::TypeServer</a>
+            </dt>
+            <dd>Used to setup a TypeChannel on top of a stream, from the server side.</dd>
           </dl>
         </section>
         <section id="func-members">
@@ -390,7 +402,7 @@
 <span class="n">CUBOS_REFLECT_IMPL</span><span class="p">(</span><span class="n">MyType</span><span class="p">)</span><span class="w"> </span><span class="c1">// defines `const Type&amp; MyType::reflectGet()` and `const Type&amp; MyType::reflectMake()`.</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="cm">/* create your type here */</span><span class="p">;</span>
-<span class="p">}</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a>.</p></aside>
+<span class="p">}</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ga9f6c7a8208509aa84f66d081e2283f95"><div>
             <h3>
@@ -420,7 +432,7 @@
 <span class="n">CUBOS_REFLECT_IMPL</span><span class="p">((</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">TemplatedType</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">))</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="cm">/* create your type here */</span><span class="p">;</span>
-<span class="p">}</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a>.</p></aside>
+<span class="p">}</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="gab24b41a195fdf07a246383d74fd583d7"><div>
             <h3>
@@ -448,7 +460,7 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE</span><span class="p">(</span><span class="n">TemplatedType</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">);</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="group__core-reflection.html#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />IMPL</a>.</p></aside>
+<span class="n">CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE</span><span class="p">(</span><span class="n">TemplatedType</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">);</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />IMPL</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ga821b6e389136b4c449893edfd8d950fa"><div>
             <h3>
@@ -475,7 +487,7 @@
 <pre class="m-code"><span class="c1">// not_my_type_reflection.hpp</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
 
-<span class="n">CUBOS_REFLECT_EXTERNAL_DECL</span><span class="p">(</span><span class="n">CUBOS_CORE_API</span><span class="p">,</span><span class="w"> </span><span class="n">NotMyType</span><span class="p">);</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="group__core-reflection.html#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />IMPL</a>.</p></aside>
+<span class="n">CUBOS_REFLECT_EXTERNAL_DECL</span><span class="p">(</span><span class="n">CUBOS_CORE_API</span><span class="p">,</span><span class="w"> </span><span class="n">NotMyType</span><span class="p">);</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />IMPL</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ga1825cb321439299e6f528a5b34ebf0e6"><div>
             <h3>
@@ -500,7 +512,7 @@
 <span class="n">CUBOS_REFLECT_EXTERNAL_IMPL</span><span class="p">(</span><span class="n">NotMyType</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="cm">/* create your type here */</span><span class="p">;</span>
-<span class="p">}</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with either <a href="physics__material_8hpp.html#a9495afb6efadb4174eadde1ae61150db" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />DECL</a> or <a href="group__core-reflection.html#gab24b41a195fdf07a246383d74fd583d7" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />DECL_<wbr />TEMPLATE</a>.</p></aside>
+<span class="p">}</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with either <a href="orthographic_8hpp.html#a2ecfd07209e4aeb4bacb166b1c9a9c2e" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />DECL</a> or <a href="#gab24b41a195fdf07a246383d74fd583d7" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />DECL_<wbr />TEMPLATE</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ga72591a0e4a14f0daab6ffa71f666b757"><div>
             <h3>
@@ -538,7 +550,7 @@
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="reflect_8hpp.html">&lt;core/reflection/reflect.hpp&gt;</a></div>
             </h3>
             <p>Defines minimal reflection for a type private to a compilation unit.</p>
-<p>Equivalent to <a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a> with an implementation which uses makeAnonymousType.</p><pre class="m-code"><span class="c1">// my_type.cpp</span>
+<p>Equivalent to <a href="#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a> with an implementation which uses makeAnonymousType.</p><pre class="m-code"><span class="c1">// my_type.cpp</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
 
 <span class="k">namespace</span>

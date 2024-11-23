@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/metrics.hpp file | Cubos Docs</title>
+  <title>core/tel/metrics.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,7 +46,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span>metrics.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_bfdd4927d1ba49b1ff336415007d4782.html">tel</a>/</span>metrics.hpp <span class="m-thin">file</span>
         </h1>
         <p>Metrics and profiling utilities and macros.</p>
         <nav class="m-block m-default">
@@ -69,19 +69,17 @@
             <dd><strong>Cubos</strong> libraries namespace.</dd>
             <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
             <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1tel.html" class="m-doc">cubos::core::tel</a></dt>
+            <dd><a href="group__core-tel.html" class="m-doc">Telemetry</a> module.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1Metrics.html" class="m-doc">cubos::core::Metrics</a>
+              class <a href="classcubos_1_1core_1_1tel_1_1Metrics.html" class="m-doc">cubos::core::tel::Metrics</a>
             </dt>
             <dd>Singleton class that manages a collection of metrics.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ScopeProfiler.html" class="m-doc">cubos::core::ScopeProfiler</a>
-            </dt>
-            <dd>Utility to measure the execution time of a scope.</dd>
           </dl>
         </section>
         <section id="define-members">
@@ -91,10 +89,6 @@
               <span class="m-doc-wrap-bumper">#define <a href="group__core.html#ga0f83cb90e749a1728e5ff70eb4693f1d" class="m-doc">CUBOS_METRIC</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
             <dd>Macro to add a metric.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core.html#gac3ba32b3517668800b034fbbfe742cde" class="m-doc">CUBOS_PROFILE</a>(</span><span class="m-doc-wrap">...)</span>
-            </dt>
-            <dd>Macro to measure the execution time of a function/scope, registering it as a metric.</dd>
           </dl>
         </section>
       </div>

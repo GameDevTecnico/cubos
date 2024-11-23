@@ -47,7 +47,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al.html">al</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1al_1_1impl.html">impl</a>::<wbr/></span>Source <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__device_8hpp.html">&lt;core/al/audio_device.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="audio__context_8hpp.html">&lt;core/al/audio_context.hpp&gt;</a></div>
         </h1>
         <p>Abstract audio source.</p>
         <nav class="m-block m-default">
@@ -65,7 +65,7 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a6034a51fdf51b82e4606b529fffa3c27" class="m-doc">setBuffer</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">Buffer</a>&gt; buffer) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#abe87fa96a49a34adac109291044669a9" class="m-doc">setBuffer</a>(</span><span class="m-doc-wrap"><a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />Buffer</a> buffer) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Sets the buffer to be played by the source.</dd>
             <dt>
@@ -88,30 +88,28 @@
               <span class="m-doc-wrap-bumper">void <a href="#ab6bcd6cc73ce70ffc453f59ba32ed8f6" class="m-doc">setLooping</a>(</span><span class="m-doc-wrap">bool looping) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Sets whether the source plays in a loop.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a5df2d3078d139f36c393167f39974915" class="m-doc">setRelative</a>(</span><span class="m-doc-wrap">bool relative) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            <dt id="af821408773bc4fec9fd1463c9c59dc9a">
+              <span class="m-doc-wrap-bumper">void <a href="#af821408773bc4fec9fd1463c9c59dc9a" class="m-doc-self">setRelative</a>(</span><span class="m-doc-wrap"><a href="group__core-al.html#ga8484e4c0384c146bb8772b75f475f77d" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />Listener</a> listener) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Sets whether the source position and velocity is relative to the listener or not.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a0783e16012aa847b85ce16ba5472db7e" class="m-doc">setDistance</a>(</span><span class="m-doc-wrap">float maxDistance) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a63a792eff863af503df3522ab024ea9c" class="m-doc">setMaxDistance</a>(</span><span class="m-doc-wrap">float maxDistance) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Sets the maximum distance at which the source is audible.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a15ed7fbbc29c6924d4e60d9421594d12" class="m-doc">setConeAngle</a>(</span><span class="m-doc-wrap">float coneAngle) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a468ea992078680c63ecdd1ec455a966b" class="m-doc">setMinDistance</a>(</span><span class="m-doc-wrap">float minDistance) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Sets the cone angle of the source, in degrees. By default, 360.</dd>
+            <dd>Sets the minimum distance at which the source starts to attenuate.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ad2c6c7eee653b435385e6efb1cabffac" class="m-doc">setConeGain</a>(</span><span class="m-doc-wrap">float coneGain) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a614544218553497c31b8e12dd44fb73c" class="m-doc">setCone</a>(</span><span class="m-doc-wrap">float innerAngle,
+              float outerAngle,
+              float outerGain) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Sets the cone gain of the source.</dd>
+            <dd>Sets the cone angle, in degrees. While also setting the outerGain.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa03cb7effef2dea6cc31665cd8e7833f" class="m-doc">setConeDirection</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; direction) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Sets the cone direction of the source.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a38034f30c78eee7ec20767ecd05b768f" class="m-doc">setReferenceDistance</a>(</span><span class="m-doc-wrap">float referenceDistance) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Sets the distance under which the volume for the source would normally drop by half.</dd>
             <dt id="ab83ed9423ffbe173aa09044143189629">
               <span class="m-doc-wrap-bumper">void <a href="#ab83ed9423ffbe173aa09044143189629" class="m-doc-self">play</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -120,9 +118,9 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a6034a51fdf51b82e4606b529fffa3c27"><div>
+          <section class="m-doc-details" id="abe87fa96a49a34adac109291044669a9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6034a51fdf51b82e4606b529fffa3c27" class="m-doc-self">setBuffer</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html" class="m-doc">Buffer</a>&gt; buffer) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abe87fa96a49a34adac109291044669a9" class="m-doc-self">setBuffer</a>(</span><span class="m-doc-wrap"><a href="group__core-al.html#gabf798aa0b180fc8bba2872789bab349e" class="m-doc">cubos::<wbr />core::<wbr />al::<wbr />Buffer</a> buffer) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Sets the buffer to be played by the source.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -153,7 +151,7 @@
                 </tr>
               </tbody>
             </table>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html#a5df2d3078d139f36c393167f39974915" class="m-doc">setRelative()</a> to change this behavior.</p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="#af821408773bc4fec9fd1463c9c59dc9a" class="m-doc">setRelative()</a> to change this behavior.</p></aside>
           </div></section>
           <section class="m-doc-details" id="aaa5538b167db0d822e209c2e8b2d8e31"><div>
             <h3>
@@ -223,26 +221,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a5df2d3078d139f36c393167f39974915"><div>
+          <section class="m-doc-details" id="a63a792eff863af503df3522ab024ea9c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5df2d3078d139f36c393167f39974915" class="m-doc-self">setRelative</a>(</span><span class="m-doc-wrap">bool relative) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Sets whether the source position and velocity is relative to the listener or not.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">relative</td>
-                  <td>Relative flag.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a0783e16012aa847b85ce16ba5472db7e"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0783e16012aa847b85ce16ba5472db7e" class="m-doc-self">setDistance</a>(</span><span class="m-doc-wrap">float maxDistance) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a63a792eff863af503df3522ab024ea9c" class="m-doc-self">setMaxDistance</a>(</span><span class="m-doc-wrap">float maxDistance) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Sets the maximum distance at which the source is audible.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -257,36 +238,46 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a15ed7fbbc29c6924d4e60d9421594d12"><div>
+          <section class="m-doc-details" id="a468ea992078680c63ecdd1ec455a966b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15ed7fbbc29c6924d4e60d9421594d12" class="m-doc-self">setConeAngle</a>(</span><span class="m-doc-wrap">float coneAngle) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a468ea992078680c63ecdd1ec455a966b" class="m-doc-self">setMinDistance</a>(</span><span class="m-doc-wrap">float minDistance) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
-            <p>Sets the cone angle of the source, in degrees. By default, 360.</p>
+            <p>Sets the minimum distance at which the source starts to attenuate.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">coneAngle</td>
-                  <td>Angle, in degrees.</td>
+                  <td style="width: 1%">minDistance</td>
+                  <td>Minimum distance.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad2c6c7eee653b435385e6efb1cabffac"><div>
+          <section class="m-doc-details" id="a614544218553497c31b8e12dd44fb73c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad2c6c7eee653b435385e6efb1cabffac" class="m-doc-self">setConeGain</a>(</span><span class="m-doc-wrap">float coneGain) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a614544218553497c31b8e12dd44fb73c" class="m-doc-self">setCone</a>(</span><span class="m-doc-wrap">float innerAngle,
+              float outerAngle,
+              float outerGain) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
-            <p>Sets the cone gain of the source.</p>
+            <p>Sets the cone angle, in degrees. While also setting the outerGain.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">coneGain</td>
-                  <td>Gain.</td>
+                  <td style="width: 1%">innerAngle</td>
+                  <td>Outer angle, in degrees.</td>
+                </tr>
+                <tr>
+                  <td>outerAngle</td>
+                  <td>Inner angle, in degrees.</td>
+                </tr>
+                <tr>
+                  <td>outerGain</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -304,23 +295,6 @@
                 <tr>
                   <td style="width: 1%">direction</td>
                   <td>Direction.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a38034f30c78eee7ec20767ecd05b768f"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />Source::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38034f30c78eee7ec20767ecd05b768f" class="m-doc-self">setReferenceDistance</a>(</span><span class="m-doc-wrap">float referenceDistance) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Sets the distance under which the volume for the source would normally drop by half.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">referenceDistance</td>
-                  <td>Distance.</td>
                 </tr>
               </tbody>
             </table>
