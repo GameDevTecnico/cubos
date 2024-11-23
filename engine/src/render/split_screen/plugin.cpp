@@ -1,5 +1,6 @@
 #include <glm/vec2.hpp>
 
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
@@ -63,18 +64,18 @@ void cubos::engine::splitScreenPlugin(Cubos& cubos)
     cubos.system("split screen for each DrawsTo relation")
         .tagged(splitScreenTag)
         .call([](Query<Entity, const RenderTarget&> targets,
-                 Query<const LocalToWorld&, const Camera&, DrawsTo&, const SplitScreen&> cameras) {
+                 Query<const LocalToWorld&, const Camera&, const Active&, DrawsTo&, const SplitScreen&> cameras) {
             for (auto [targetEnt, target] : targets)
             {
                 int cameraCount = 0;
 
                 // Find the cameras that draw to the target.
-                for (auto [localToWorld, camera, drawsTo, splitScreen] : cameras.pin(1, targetEnt))
+                for (auto [localToWorld, camera, active, drawsTo, splitScreen] : cameras.pin(1, targetEnt))
                 {
                     // Ignore unused argument warnings
                     (void)splitScreen;
 
-                    if (!camera.active)
+                    if (!active.active)
                     {
                         continue;
                     }
@@ -88,12 +89,12 @@ void cubos::engine::splitScreenPlugin(Cubos& cubos)
                 setViewportCameras({0, 0}, target.size, cameraCount, positions.begin(), sizes.begin());
 
                 unsigned long i = 0;
-                for (auto [localToWorld, camera, drawsTo, splitScreen] : cameras.pin(1, targetEnt))
+                for (auto [localToWorld, camera, active, drawsTo, splitScreen] : cameras.pin(1, targetEnt))
                 {
                     // Ignore unused argument warnings
                     (void)splitScreen;
 
-                    if (!camera.active)
+                    if (!active.active)
                     {
                         continue;
                     }

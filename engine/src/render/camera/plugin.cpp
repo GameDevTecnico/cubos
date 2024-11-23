@@ -1,5 +1,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <cubos/engine/render/active/active.hpp>
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/orthographic.hpp>
@@ -13,12 +15,23 @@ using namespace cubos::engine;
 void cubos::engine::cameraPlugin(Cubos& cubos)
 {
     cubos.depends(renderTargetPlugin);
+    cubos.depends(activePlugin);
 
     cubos.component<Camera>();
     cubos.component<PerspectiveCamera>();
     cubos.component<OrthographicCamera>();
 
     cubos.relation<DrawsTo>();
+
+    cubos.observer("add active component on add Camera")
+        .onAdd<Camera>()
+        .without<Active>()
+        .call([](Commands cmds, Query<Entity> query) {
+            for (auto [ent] : query)
+            {
+                cmds.add(ent, Active{});
+            }
+        });
 
     cubos.observer("add Camera on add PerspectiveCamera")
         .onAdd<PerspectiveCamera>()

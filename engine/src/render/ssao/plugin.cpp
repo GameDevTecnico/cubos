@@ -5,18 +5,12 @@
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/g_buffer/g_buffer.hpp>
 #include <cubos/engine/render/g_buffer/plugin.hpp>
-#include <cubos/engine/render/hdr/hdr.hpp>
-#include <cubos/engine/render/hdr/plugin.hpp>
-#include <cubos/engine/render/lights/directional.hpp>
-#include <cubos/engine/render/lights/environment.hpp>
-#include <cubos/engine/render/lights/plugin.hpp>
-#include <cubos/engine/render/lights/point.hpp>
-#include <cubos/engine/render/lights/spot.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/ssao/ssao.hpp>
@@ -146,7 +140,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
     cubos.system("apply SSAO to the GBuffer and output to the SSAO texture")
         .tagged(drawToSSAOTag)
         .call([](State& state, const Window& window, Query<Entity, const GBuffer&, SSAO&> targets,
-                 Query<const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
+                 Query<const LocalToWorld&, const Camera&, const Active&, const DrawsTo&> cameras) {
             auto& rd = window->renderDevice();
 
             for (auto [targetEnt, gBuffer, ssao] : targets)
@@ -188,9 +182,9 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                 }
 
                 // Find the cameras that draw to the SSAO target.
-                for (auto [localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
+                for (auto [localToWorld, camera, active, drawsTo] : cameras.pin(1, targetEnt))
                 {
-                    if (!camera.active)
+                    if (!active.active)
                     {
                         continue;
                     }

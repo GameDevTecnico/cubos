@@ -1,6 +1,7 @@
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/shadow_atlas/plugin.hpp>
 #include <cubos/engine/render/shadow_atlas/shadow_atlas.hpp>
 #include <cubos/engine/render/shadows/plugin.hpp>
@@ -38,7 +39,7 @@ void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
 
     cubos.system("reserve space for shadow casters")
         .tagged(reserveShadowCastersTag)
-        .call([](ShadowAtlas& atlas, Query<SpotShadowCaster&> casters) {
+        .call([](ShadowAtlas& atlas, Query<SpotShadowCaster&, const Active&> casters) {
             atlas.slots.clear();
             atlas.slotsMap.clear();
             atlas.slots.push_back(
@@ -46,8 +47,13 @@ void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
 
             int id = 1;
 
-            for (auto [caster] : casters)
+            for (auto [caster, active] : casters)
             {
+                if (!active.active)
+                {
+                    continue;
+                }
+
                 bool foundSlot = false;
                 caster.baseSettings.id = id++;
                 for (const auto& slot : atlas.slots)

@@ -5,6 +5,7 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/perspective.hpp>
@@ -57,7 +58,6 @@ void cubos::engine::debugCameraPlugin(Cubos& cubos)
     cubos.startupSystem("create Debug Camera").call([](Commands commands, State& debugCamera) {
         debugCamera.entity = commands.create()
                                  .named("debug-camera")
-                                 .add(Camera{.active = false})
                                  .add(PerspectiveCamera{})
                                  .add(Position{{}})
                                  .add(FreeCameraController{
@@ -115,7 +115,8 @@ void cubos::engine::debugCameraPlugin(Cubos& cubos)
     cubos.system("update Debug Camera")
         .tagged(imguiTag)
         .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("Debug Camera"); })
-        .call([](State& state, Commands cmds, Query<Entity, Camera&, const DrawsTo&, const RenderTarget&> cameras,
+        .call([](State& state, Commands cmds,
+                 Query<Entity, Camera&, Active&, const DrawsTo&, const RenderTarget&> cameras,
                  Query<Entity, const RenderTarget&> targets) {
             ImGui::Begin("Debug Camera");
 
@@ -136,23 +137,23 @@ void cubos::engine::debugCameraPlugin(Cubos& cubos)
                 }
             }
 
-            for (auto [cameraEnt, camera, _1, target] : cameras)
+            for (auto [cameraEnt, camera, active, _1, target] : cameras)
             {
                 if (target.framebuffer == nullptr)
                 {
                     if (cameraEnt == state.entity)
                     {
-                        camera.active = state.active;
+                        active.active = state.active;
                     }
-                    else if (camera.active && state.active)
+                    else if (active.active && state.active)
                     {
                         state.deactivated.insert(cameraEnt);
-                        camera.active = false;
+                        active.active = false;
                     }
                     else if (!state.active && state.deactivated.contains(cameraEnt))
                     {
                         state.deactivated.erase(cameraEnt);
-                        camera.active = true;
+                        active.active = true;
                     }
                 }
             }

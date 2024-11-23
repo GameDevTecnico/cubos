@@ -19,9 +19,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        /// @brief Whether the camera is drawing to a target.
-        bool active{true};
-
         /// @brief Projection matrix of the camera.
         glm::mat4 projection{};
 

@@ -3,6 +3,7 @@
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
@@ -208,20 +209,20 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
         .tagged(deferredShadingTag)
         .call([](State& state, const Window& window, const RenderEnvironment& environment,
                  const ShadowAtlas& shadowAtlas,
-                 Query<const LocalToWorld&, const DirectionalLight&, Opt<const DirectionalShadowCaster&>>
+                 Query<const LocalToWorld&, const DirectionalLight&, const Active&, Opt<const DirectionalShadowCaster&>>
                      directionalLights,
-                 Query<const LocalToWorld&, const PointLight&> pointLights,
-                 Query<const LocalToWorld&, const SpotLight&, Opt<const SpotShadowCaster&>> spotLights,
+                 Query<const LocalToWorld&, const PointLight&, const Active&> pointLights,
+                 Query<const LocalToWorld&, const SpotLight&, const Active&, Opt<const SpotShadowCaster&>> spotLights,
                  Query<Entity, const HDR&, const GBuffer&, const SSAO&, DeferredShading&> targets,
-                 Query<Entity, const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
+                 Query<Entity, const LocalToWorld&, const Camera&, const Active&, const DrawsTo&> cameras) {
             auto& rd = window->renderDevice();
 
             for (auto [targetEnt, hdr, gBuffer, ssao, deferredShading] : targets)
             {
                 // Find the cameras that draw to the GBuffer.
-                for (auto [cameraEntity, localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
+                for (auto [cameraEntity, localToWorld, camera, cameraActive, drawsTo] : cameras.pin(1, targetEnt))
                 {
-                    if (!camera.active)
+                    if (!cameraActive.active)
                     {
                         continue;
                     }
@@ -258,8 +259,13 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
 
                     int directionalLightIndex = 0;
                     Texture2DArray directionalShadowMap = nullptr;
-                    for (auto [lightLocalToWorld, light, caster] : directionalLights)
+                    for (auto [lightLocalToWorld, light, lightActive, caster] : directionalLights)
                     {
+                        if (!lightActive.active)
+                        {
+                            continue;
+                        }
+
                         auto& perLight = perScene.directionalLights[perScene.numDirectionalLights++];
                         perLight.direction = glm::normalize(lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 1.0F, 0.0F));
                         perLight.color = glm::vec4(light.color, 1.0F);
@@ -340,8 +346,13 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         directionalLightIndex++;
                     }
 
-                    for (auto [lightLocalToWorld, light] : pointLights)
+                    for (auto [lightLocalToWorld, light, lightActive] : pointLights)
                     {
+                        if (!lightActive.active)
+                        {
+                            continue;
+                        }
+
                         auto& perLight = perScene.pointLights[perScene.numPointLights++];
                         perLight.position = lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
                         perLight.color = glm::vec4(light.color, 1.0F);
@@ -349,8 +360,13 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         perLight.range = light.range;
                     }
 
-                    for (auto [lightLocalToWorld, light, caster] : spotLights)
+                    for (auto [lightLocalToWorld, light, lightActive, caster] : spotLights)
                     {
+                        if (!lightActive.active)
+                        {
+                            continue;
+                        }
+
                         auto& perLight = perScene.spotLights[perScene.numSpotLights++];
                         perLight.position = lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
                         perLight.direction = glm::normalize(lightLocalToWorld.mat * glm::vec4(0.0F, 0.0F, 1.0F, 0.0F));

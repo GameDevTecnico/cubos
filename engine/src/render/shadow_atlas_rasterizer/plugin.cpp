@@ -2,6 +2,7 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/active/plugin.hpp>
 #include <cubos/engine/render/lights/plugin.hpp>
 #include <cubos/engine/render/lights/spot.hpp>
 #include <cubos/engine/render/mesh/mesh.hpp>
@@ -124,7 +125,7 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
         .tagged(drawToShadowAtlasTag)
         .call([](State& state, const Window& window, const RenderMeshPool& pool, ShadowAtlas& atlas,
                  ShadowAtlasRasterizer& rasterizer,
-                 Query<const SpotShadowCaster&, const SpotLight&, const LocalToWorld&> lights,
+                 Query<const SpotShadowCaster&, const SpotLight&, const LocalToWorld&, const Active&> lights,
                  Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
 
@@ -159,8 +160,13 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
                 atlas.cleared = true;
             }
 
-            for (auto [caster, light, localToWorld] : lights)
+            for (auto [caster, light, localToWorld, active] : lights)
             {
+                if (!active.active)
+                {
+                    continue;
+                }
+
                 // Get light viewport
                 auto slot = atlas.slotsMap.at(caster.baseSettings.id);
 
