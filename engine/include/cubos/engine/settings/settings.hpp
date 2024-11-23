@@ -103,9 +103,14 @@ namespace cubos::engine
 
         /// @brief Save settings as json to specified path.
         /// @param path Virtual `cubos::core::data::FileSystem` path to write settings in.
-        /// @param indent Indent of the Json, -1 for selects the most compact representation.
+        /// @param indent Indent of the Json, -1 for no whitespace.
         /// @return Whether call was successful.
         bool save(std::string_view path = "/settings.json", int indent = 2) const;
+
+        /// @brief Load settings from json in specified path.
+        /// @param path Virtual `cubos::core::data::FileSystem` path to read settings from.
+        /// @return Loaded settings object.
+        static Settings load(std::string_view path = "/settings.json");
 
         /// @return Underlying `std::unordered_map` with the settings.
         const std::unordered_map<std::string, std::string>& getValues() const;

@@ -3,6 +3,8 @@
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
 #include <cubos/core/ecs/reflection.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 #include <cubos/engine/settings/settings.hpp>
 
@@ -132,13 +134,12 @@ static inline void saveSettingsAsJson(const Settings& settings, Stream& stream, 
 
 bool Settings::save(std::string_view path, int indent) const
 {
-    // If the settings file is not mounted.
-    if (FileSystem::find(path) == nullptr)
-    {
-        return false;
+    auto stream = FileSystem::open(path, File::OpenMode::Read);
+    // If settings file fails to open
+    if (stream == nullptr) {
+        CUBOS_ERROR("Couldn't open the settings file at: {}", path);
+        return {};
     }
-
-    auto stream = FileSystem::open(path, File::OpenMode::Write);
     saveSettingsAsJson(*this, *stream, indent);
     return true;
 }
@@ -175,6 +176,47 @@ static void loadFromJSON(const std::string& prefix, const nlohmann::json& json, 
             CUBOS_ERROR("Unsupported type {} for setting {}", value.type_name(), prefix + key);
         }
     }
+}
+
+Settings Settings::load(std::string_view path)
+{
+    std::string contents;
+    // If settings file fails to open
+    auto stream = FileSystem::open(path, File::OpenMode::Read);
+    if (stream == nullptr) {
+        CUBOS_ERROR("Couldn't open the settings file at: {}", path);
+        return {};
+    }
+    stream->readUntil(contents, nullptr);
+
+    // If the file is empty, ignore it.
+    if (contents.empty())
+    {
+        return {};
+    }
+
+    // Parse it as JSON.
+    nlohmann::json json{};
+    try
+    {
+        json = nlohmann::json::parse(contents);
+    }
+    catch (nlohmann::json::parse_error& e)
+    {
+        CUBOS_ERROR("Couldn't parse the settings file: {}", e.what());
+        return {};
+    }
+
+    if (!json.is_object())
+    {
+        CUBOS_ERROR("Expected root element in settings file to be an object, but got {}", json.type_name());
+        return {};
+    }
+
+    // Read the settings from the JSON.
+    Settings settings{};
+    loadFromJSON("", json, settings);
+    return settings;
 }
 
 const std::unordered_map<std::string, std::string>& Settings::getValues() const
