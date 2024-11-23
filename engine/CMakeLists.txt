@@ -157,6 +157,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/voxels/palette.cpp"
 	"src/render/tone_mapping/plugin.cpp"
 	"src/render/tone_mapping/tone_mapping.cpp"
+	"src/render/tone_mapping/fxaa.cpp"
 	"src/render/lights/plugin.cpp"
 	"src/render/lights/environment.cpp"
 	"src/render/lights/directional.cpp"

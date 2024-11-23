@@ -76,6 +76,7 @@ void cubos::engine::renderDefaultsPlugin(Cubos& cubos)
                     .add(entity, defaults.gBufferRasterizer)
                     .add(entity, defaults.ssao)
                     .add(entity, defaults.toneMapping)
+                    .add(entity, defaults.fxaa)
                     .add(entity, defaults.deferredShading);
 
                 if (defaults.splitScreen)

@@ -19,7 +19,9 @@
 #include <cubos/engine/render/split_screen/split_screen.hpp>
 #include <cubos/engine/render/ssao/ssao.hpp>
 #include <cubos/engine/render/target/target.hpp>
+#include <cubos/engine/render/tone_mapping/fxaa.hpp>
 #include <cubos/engine/render/tone_mapping/tone_mapping.hpp>
+
 
 namespace cubos::core::memory
 {
@@ -58,6 +60,9 @@ namespace cubos::engine
 
         /// @brief Tone Mapping component.
         ToneMapping toneMapping{};
+
+        /// @brief FXAA component.
+        FXAA fxaa{};
 
         /// @brief Deferred Shading component.
         DeferredShading deferredShading{};

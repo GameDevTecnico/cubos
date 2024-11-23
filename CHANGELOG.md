@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A proper Nix package which can be used to install Cubos and Tesseratos (#1327, **RiscadoA**).
 - Added the option to use Shadow Normal Offset Bias algorithm (#1308, **@GalaxyCrush**)
 - UI text element using MSDF for text rendering (#1300, **@mkuritsu**).
+- Added anti-aliasing using FXAA technique (#1334, **@kuukitenshi**).
 
 ### Changed
 
