@@ -3,10 +3,15 @@
 
 # Macro used to reduce the boilerplate code
 macro(make_sample)
-    set(options COMPONENTS ASSETS)
+    set(options COMPONENTS ASSETS NO_WEB)
     set(oneValueArgs DIR)
     set(multiValueArgs SOURCES)
     cmake_parse_arguments(MAKE_SAMPLE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    # Skip the sample if we're on Emscripten and it is not supported on Emscripten
+    if(EMSCRIPTEN AND MAKE_SAMPLE_NO_WEB)
+        return()
+    endif()
 
     # Get the target name from the sample directory path
     message(STATUS "Adding sample: ${MAKE_SAMPLE_DIR}")
@@ -51,7 +56,7 @@ make_sample(DIR "events")
 make_sample(DIR "input" ASSETS)
 make_sample(DIR "assets/bridge" ASSETS)
 make_sample(DIR "assets/json" ASSETS)
-make_sample(DIR "assets/saving" ASSETS)
+make_sample(DIR "assets/saving" ASSETS NO_WEB) # Can't save assets on Emscripten!
 make_sample(DIR "render/main" ASSETS)
 make_sample(DIR "render/shadows" ASSETS)
 make_sample(DIR "imgui")
