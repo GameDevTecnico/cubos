@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::Font struct | Cubos Docs</title>
+  <title>cubos::engine::FontAtlas class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,28 +46,28 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Font <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="font_8hpp.html">&lt;engine/font/font.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>FontAtlas <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="atlas_8hpp.html">&lt;engine/font/atlas/atlas.hpp&gt;</a></div>
         </h1>
-        <p><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing font data.</p>
+        <p>Class that holds all the necessary data about a font atlas. This font atlas represents the texure created from all the different glyphs in a font, that will be then used for drawing the text.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a54efd8afa42a04c712e9b99d9b2d8d2c">
-              void* <a href="#a54efd8afa42a04c712e9b99d9b2d8d2c" class="m-doc-self">fontHandle</a>
+            <dt id="a0487655f9729ac69ac183957c936ddda">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0487655f9729ac69ac183957c936ddda" class="m-doc-self">texture</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Texture2D</a></span>
             </dt>
-            <dd>The handle to the loaded font.</dd>
+            <dd>Returns the GPU texture created with this font atlas.</dd>
           </dl>
         </section>
       </div>

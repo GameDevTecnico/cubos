@@ -64,22 +64,20 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md73"><h3><a href="#autotoc_md73">Bridges</a></h3><ul><li><a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">FontBridge</a> - loads <a href="structcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</li></ul></section><section id="autotoc_md74"><h3><a href="#autotoc_md74">Dependencies</a></h3><ul><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li></ul></section>
+<section id="autotoc_md73"><h3><a href="#autotoc_md73">Bridges</a></h3><ul><li><a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">FontBridge</a> - loads <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</li><li><a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">FontAtlasBridge</a> - loads <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</li></ul></section><section id="autotoc_md74"><h3><a href="#autotoc_md74">Dependencies</a></h3><ul><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
             <dt>file <a href="atlas_8hpp.html" class="m-doc">atlas.hpp</a></dt>
-            <dd>Struct <a href="structcubos_1_1engine_1_1FontAtlas.html" class="m-doc">cubos::<wbr />engine::<wbr />FontAtlas</a>.</dd>
+            <dd>Struct <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">cubos::<wbr />engine::<wbr />FontAtlas</a>.</dd>
             <dt>file <a href="font_2atlas_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />FontAtlasBridge</a>.</dd>
             <dt>file <a href="glyph_8hpp.html" class="m-doc">glyph.hpp</a></dt>
             <dd>Struct <a href="structcubos_1_1engine_1_1Glyph.html" class="m-doc">cubos::<wbr />engine::<wbr />Glyph</a>.</dd>
-            <dt>file <a href="atlas__store_8hpp.html" class="m-doc">atlas_store.hpp</a></dt>
-            <dd>Resource <a href="structcubos_1_1engine_1_1FontAtlasStore.html" class="m-doc">cubos::<wbr />engine::<wbr />FontAtlasStore</a>.</dd>
             <dt>file <a href="font_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />FontBridge</a>.</dd>
             <dt>file <a href="font_8hpp.html" class="m-doc">font.hpp</a></dt>
-            <dd>Struct <a href="structcubos_1_1engine_1_1Font.html" class="m-doc">cubos::<wbr />engine::<wbr />Font</a>.</dd>
+            <dd>Struct <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">cubos::<wbr />engine::<wbr />Font</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2font_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
           </dl>
@@ -88,19 +86,23 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structcubos_1_1engine_1_1FontAtlas.html" class="m-doc">cubos::engine::FontAtlas</a>
+              class <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">cubos::engine::FontAtlas</a>
             </dt>
             <dd>Class that holds all the necessary data about a font atlas. This font atlas represents the texure created from all the different glyphs in a font, that will be then used for drawing the text.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">cubos::engine::FontAtlasBridge</a>
             </dt>
-            <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</dd>
+            <dd>Bridge which loads and saves <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Glyph.html" class="m-doc">cubos::engine::Glyph</a>
+            </dt>
+            <dd>Struct that holds glyph data such as texcoords, position offsets and advance.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">cubos::engine::FontBridge</a>
             </dt>
-            <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</dd>
+            <dd>Bridge which loads and saves <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1Font.html" class="m-doc">cubos::engine::Font</a>
+              class <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">cubos::engine::Font</a>
             </dt>
             <dd><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing font data.</dd>
           </dl>
