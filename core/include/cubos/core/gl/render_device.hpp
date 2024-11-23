@@ -1159,16 +1159,16 @@ namespace cubos::core::gl
         public:
             virtual ~VertexBuffer() = default;
 
-            // @brief Fills the buffer with the given data.
+            /// @brief Fills the buffer with the given data.
             /// @param data Pointer to data.
             /// @param size Data size in bytes.
             virtual void fill(const void* data, std::size_t size) = 0;
 
-            // @brief Fills the buffer with the given data.
+            /// @brief Fills the buffer with the given data.
             /// @param data Pointer to data.
             /// @param size Data size in bytes.
             /// @param offset Offset in the buffer where the data will be written.
-            /// @param synchronized TODO: IDK WHAT THIS DOES HELP RICARDO
+            /// @param synchronized Whether the next draw call will wait for the fill to complete.
             virtual void fill(const void* data, std::size_t offset, std::size_t size, bool synchronized) = 0;
 
         protected:
