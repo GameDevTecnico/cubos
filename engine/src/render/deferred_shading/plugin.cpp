@@ -6,7 +6,6 @@
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
-#include <cubos/engine/render/cascaded_shadow_maps/plugin.hpp>
 #include <cubos/engine/render/deferred_shading/deferred_shading.hpp>
 #include <cubos/engine/render/deferred_shading/plugin.hpp>
 #include <cubos/engine/render/g_buffer/g_buffer.hpp>
@@ -19,12 +18,14 @@
 #include <cubos/engine/render/lights/point.hpp>
 #include <cubos/engine/render/lights/spot.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
-#include <cubos/engine/render/shadow_atlas/plugin.hpp>
-#include <cubos/engine/render/shadow_atlas/shadow_atlas.hpp>
-#include <cubos/engine/render/shadows/directional_caster.hpp>
-#include <cubos/engine/render/shadows/plugin.hpp>
-#include <cubos/engine/render/shadows/point_caster.hpp>
-#include <cubos/engine/render/shadows/spot_caster.hpp>
+#include <cubos/engine/render/shadows/atlas/plugin.hpp>
+#include <cubos/engine/render/shadows/atlas/point_atlas.hpp>
+#include <cubos/engine/render/shadows/atlas/spot_atlas.hpp>
+#include <cubos/engine/render/shadows/cascaded/plugin.hpp>
+#include <cubos/engine/render/shadows/casters/directional_caster.hpp>
+#include <cubos/engine/render/shadows/casters/plugin.hpp>
+#include <cubos/engine/render/shadows/casters/point_caster.hpp>
+#include <cubos/engine/render/shadows/casters/spot_caster.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/ssao/ssao.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -188,7 +189,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
     cubos.depends(lightsPlugin);
     cubos.depends(hdrPlugin);
     cubos.depends(transformPlugin);
-    cubos.depends(shadowsPlugin);
+    cubos.depends(shadowCastersPlugin);
     cubos.depends(shadowAtlasPlugin);
     cubos.depends(cascadedShadowMapsPlugin);
 
@@ -216,7 +217,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
     cubos.system("apply Deferred Shading to the GBuffer and output to the HDR texture")
         .tagged(deferredShadingTag)
         .call([](State& state, const Window& window, const RenderEnvironment& environment,
-                 const ShadowAtlas& shadowAtlas,
+                 const SpotShadowAtlas& spotShadowAtlas, const PointShadowAtlas& pointShadowAtlas,
                  Query<const LocalToWorld&, const DirectionalLight&, Opt<const DirectionalShadowCaster&>>
                      directionalLights,
                  Query<const LocalToWorld&, const PointLight&, Opt<const PointShadowCaster&>> pointLights,
@@ -360,60 +361,21 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         if (caster.contains())
                         {
                             // Get light viewport
-                            auto slot = shadowAtlas.slotsMap.at(caster.value().baseSettings.id);
+                            auto slot = pointShadowAtlas.slotsMap.at(caster.value().baseSettings.id);
 
-                            auto lightProj =
-                                glm::perspective(glm::radians(90.0F),
-                                                 (float(shadowAtlas.getPointAtlasSize().x) * slot->size.x) /
-                                                     (float(shadowAtlas.getPointAtlasSize().y) * slot->size.y),
-                                                 0.1F, light.range);
+                            auto lightProj = glm::perspective(glm::radians(90.0F),
+                                                              (float(pointShadowAtlas.getSize().x) * slot->size.x) /
+                                                                  (float(pointShadowAtlas.getSize().y) * slot->size.y),
+                                                              0.1F, light.range);
 
-                            for (int i = 0; i < 6; i++)
+                            std::vector<glm::mat4> lightViewMatrices;
+                            core::geom::getCubeViewMatrices(
+                                glm::scale(lightLocalToWorld.mat, glm::vec3(1.0F / lightLocalToWorld.worldScale())),
+                                lightViewMatrices);
+
+                            for (unsigned long i = 0; i < 6; i++)
                             {
-                                glm::mat4 lightView;
-                                switch (i)
-                                {
-                                case 0:
-                                    lightView = glm::inverse(glm::scale(
-                                        lightLocalToWorld.mat, glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                                    break;
-                                case 1:
-                                    lightView =
-                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F),
-                                                                            glm::vec3(0.0F, 1.0F, 0.0F)),
-                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                                    break;
-                                case 2:
-                                    lightView =
-                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(90.0F),
-                                                                            glm::vec3(0.0F, 1.0F, 0.0F)),
-                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                                    break;
-                                case 3:
-                                    lightView =
-                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(-90.0F),
-                                                                            glm::vec3(0.0F, 1.0F, 0.0F)),
-                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                                    break;
-                                case 4:
-                                    lightView =
-                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(90.0F),
-                                                                            glm::vec3(1.0F, 0.0F, 0.0F)),
-                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                                    break;
-                                case 5:
-                                    lightView =
-                                        glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(-90.0F),
-                                                                            glm::vec3(1.0F, 0.0F, 0.0F)),
-                                                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                                    break;
-                                default:
-                                    lightView = glm::inverse(glm::scale(
-                                        lightLocalToWorld.mat, glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                                    break;
-                                }
-
-                                perLight.matrices[i] = lightProj * lightView;
+                                perLight.matrices[i] = lightProj * lightViewMatrices[i];
                             }
                             perLight.shadowMapOffset = slot->offset;
                             perLight.shadowMapSize = slot->size;
@@ -441,17 +403,16 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         if (caster.contains())
                         {
                             // Get light viewport
-                            auto slot = shadowAtlas.slotsMap.at(caster.value().baseSettings.id);
+                            auto slot = spotShadowAtlas.slotsMap.at(caster.value().baseSettings.id);
 
                             // The light is actually facing the direction opposite to what's visible, so rotate it.
                             auto lightView = glm::inverse(glm::scale(
                                 glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)),
                                 glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                            auto lightProj =
-                                glm::perspective(glm::radians(light.spotAngle),
-                                                 (float(shadowAtlas.getSpotAtlasSize().x) * slot->size.x) /
-                                                     (float(shadowAtlas.getSpotAtlasSize().y) * slot->size.y),
-                                                 0.1F, light.range);
+                            auto lightProj = glm::perspective(glm::radians(light.spotAngle),
+                                                              (float(spotShadowAtlas.getSize().x) * slot->size.x) /
+                                                                  (float(spotShadowAtlas.getSize().y) * slot->size.y),
+                                                              0.1F, light.range);
                             perLight.matrix = lightProj * lightView;
                             perLight.shadowMapOffset = slot->offset;
                             perLight.shadowMapSize = slot->size;
@@ -485,8 +446,8 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.normalBP->bind(gBuffer.normal);
                     state.albedoBP->bind(gBuffer.albedo);
                     state.ssaoBP->bind(ssao.blurTexture);
-                    state.spotShadowAtlasBP->bind(shadowAtlas.spotAtlas);
-                    state.pointShadowAtlasBP->bind(shadowAtlas.pointAtlas);
+                    state.spotShadowAtlasBP->bind(spotShadowAtlas.atlas);
+                    state.pointShadowAtlasBP->bind(pointShadowAtlas.atlas);
                     // directionalShadowMap needs to be bound even if it's null, or else errors may occur on some GPUs
                     state.directionalShadowMapBP->bind(directionalShadowMap);
                     state.directionalShadowMapBP->bind(state.directionalShadowSampler);

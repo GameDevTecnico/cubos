@@ -2,6 +2,7 @@
 #include <limits>
 
 #include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 #include <glm/mat3x3.hpp>
 
 #include <cubos/core/geom/utils.hpp>
@@ -189,5 +190,20 @@ void cubos::core::geom::getCameraFrustumCorners(const glm::mat4& view, const glm
             auto cornerFar = viewProjInv * glm::vec4(x, y, zFarNDC, 1.0F);
             corners.push_back(cornerFar / cornerFar.w);
         }
+    }
+}
+
+void cubos::core::geom::getCubeViewMatrices(const glm::mat4& inverseView, std::vector<glm::mat4>& cubeViewMatrices)
+{
+    static const float ViewAngle[6] = {0.0F, 180.0F, 90.0F, -90.0F, 90.0F, -90.0F};
+    static const glm::vec3 ViewAxis[6] = {glm::vec3(0.0F, 1.0F, 0.0F), glm::vec3(0.0F, 1.0F, 0.0F),
+                                          glm::vec3(0.0F, 1.0F, 0.0F), glm::vec3(0.0F, 1.0F, 0.0F),
+                                          glm::vec3(1.0F, 0.0F, 0.0F), glm::vec3(1.0F, 0.0, 0.0F)};
+
+    cubeViewMatrices.resize(6);
+
+    for (size_t i = 0; i < 6; i++)
+    {
+        cubeViewMatrices[i] = glm::inverse(glm::rotate(inverseView, glm::radians(ViewAngle[i]), ViewAxis[i]));
     }
 }

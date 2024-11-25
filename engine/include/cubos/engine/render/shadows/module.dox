@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref render-shadows-plugins module.
+
+namespace cubos::engine
+{
+    /// @defgroup render-shadows-plugins Shadows
+    /// @ingroup render-plugins
+    /// @brief Provides plugins for rendering shadows.
+} // namespace cubos::engine
