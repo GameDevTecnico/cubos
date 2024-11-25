@@ -49,18 +49,37 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Font <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="font_8hpp.html">&lt;engine/font/font.hpp&gt;</a></div>
         </h1>
-        <p><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing font data.</p>
+        <p><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing raw font data containing the glyphs and their shape. This is used to create <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> that can be used for rendering text.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="ac89645082592ff4ae0a5713c78825e5b">
+              <span class="m-doc-wrap-bumper"><a href="#ac89645082592ff4ae0a5713c78825e5b" class="m-doc-self">Font</a>(</span><span class="m-doc-wrap">void* freetypeHandle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream)</span>
+            </dt>
+            <dd>Creates a new <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> asset from the data in the stream.</dd>
+            <dt id="a2e2703dbab8a6c82544dfb4285e7098a">
+              <span class="m-doc-wrap-bumper"><a href="#a2e2703dbab8a6c82544dfb4285e7098a" class="m-doc-self">Font</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructor that moves the font handle to another <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> asset.</dd>
+            <dt id="a72ccecefaace0a7e9f2f948e00dc6927">
+              <span class="m-doc-wrap-bumper"><a href="#a72ccecefaace0a7e9f2f948e00dc6927" class="m-doc-self">~Font</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destroys the associated handle to the font.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
