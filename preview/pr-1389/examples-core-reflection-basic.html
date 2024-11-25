@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Examples &raquo; Core &raquo; Reflection &raquo; Basic Usage | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="examples.html">Examples</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core.html">Core</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core-reflection.html">Reflection</a> &raquo;</span>
+          Basic Usage
+        </h1>
+        <p>Defining and using reflectable types.</p>
+<p><a name="md_reflection_basic_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/reflection/basic/">here</a>.</p></aside><p>Lets say you have a type <code>Person</code>, which you want to be able to reflect. You can declare it as reflectable using the macro <a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a>, for example, in your header, like this:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Person</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">weight</span><span class="p">;</span>
+<span class="p">};</span></pre><p>The file <a href="reflect_8hpp.html" class="m-doc">core/<wbr />reflection/<wbr />reflect.hpp</a> is a very lightweight header which you should include when declaring types as reflectable. It only defines the reflection macros and the reflection function. Avoid including other unnecessary reflection headers, which might be heavier, in order to reduce compile times.</p><p>In your source file, you must define the reflection data for your type. This is done through the <a href="voxel__palette__editor_2plugin_8cpp.html#ad08593825e6e6021a439f59b2b9e0ea6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> macro:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/type.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span>
+
+<span class="n">CUBOS_REFLECT_IMPL</span><span class="p">(</span><span class="n">Person</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Person&quot;</span><span class="p">);</span>
+<span class="p">}</span></pre><p>To access this reflection data, you should use the <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />reflect</a> function, which is also defined in the <a href="reflect_8hpp.html" class="m-doc">core/<wbr />reflection/<wbr />reflect.hpp</a> header.</p><pre class="m-code"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">reflect</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">personType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reflect</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">personType</span><span class="p">.</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Person&quot;</span><span class="p">);</span></pre><p>Lets say you want to associate your own data to your types, to describe them further. For example, imagine you&#x27;re making a GUI editor for your game and you which to display the fields of your types in a tree view, with different colors for different types. You could associate colors to your types by defining a trait:</p><pre class="m-code"><span class="k">struct</span><span class="w"> </span><span class="nc">ColorTrait</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">};</span></pre><p>Now, when you define your type reflection, you add your trait with the <a href="classcubos_1_1core_1_1reflection_1_1Type.html#a1c955d63fb82c71b7a9db67dcf134779" class="m-doc">Type::<wbr />with</a> method.</p><pre class="m-code"><span class="n">CUBOS_REFLECT_IMPL</span><span class="p">(</span><span class="n">ColorTrait</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;ColorTrait&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">CUBOS_REFLECT_IMPL</span><span class="p">(</span><span class="n">Position</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Position&quot;</span><span class="p">).</span><span class="n">with</span><span class="p">(</span><span class="n">ColorTrait</span><span class="p">{.</span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">});</span>
+<span class="p">}</span></pre><p>To check if a type has a trait, you use the <a href="classcubos_1_1core_1_1reflection_1_1Type.html#a18cf563593854a28f1f22e31d1fec65c" class="m-doc">Type::<wbr />has</a> method.</p><pre class="m-code"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">positionType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reflect</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">positionType</span><span class="p">.</span><span class="n">has</span><span class="o">&lt;</span><span class="n">ColorTrait</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="o">!</span><span class="n">personType</span><span class="p">.</span><span class="n">has</span><span class="o">&lt;</span><span class="n">ColorTrait</span><span class="o">&gt;</span><span class="p">());</span></pre><p>To actually access the trait data, you use the <a href="classcubos_1_1core_1_1reflection_1_1Type.html#ae6bfd0379010788bf695f6e3766330a4" class="m-doc">Type::<wbr />get</a> method.</p><pre class="m-code"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">colorTrait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">positionType</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">ColorTrait</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">colorTrait</span><span class="p">.</span><span class="n">r</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">colorTrait</span><span class="p">.</span><span class="n">g</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">colorTrait</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></pre>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
