@@ -62,4 +62,9 @@ namespace cubos::core::geom
     /// @param corners Output vector where the corners will be stored.
     CUBOS_CORE_API void getCameraFrustumCorners(const glm::mat4& view, const glm::mat4& proj, float zNear, float zFar,
                                                 std::vector<glm::vec4>& corners);
+
+    /// @brief Gets view matrices for rendering a cubemap.
+    /// @param inverseView Matrix that transforms the camera's view space to world space.
+    /// @param cubeViewMatrices Output vector where the view matrices will be stored.
+    CUBOS_CORE_API void getCubeViewMatrices(const glm::mat4& inverseView, std::vector<glm::mat4>& cubeViewMatrices);
 } // namespace cubos::core::geom

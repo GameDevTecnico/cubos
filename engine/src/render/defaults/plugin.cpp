@@ -1,7 +1,5 @@
 #include <cubos/engine/render/bloom/plugin.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
-#include <cubos/engine/render/cascaded_shadow_maps/plugin.hpp>
-#include <cubos/engine/render/cascaded_shadow_maps_rasterizer/plugin.hpp>
 #include <cubos/engine/render/defaults/plugin.hpp>
 #include <cubos/engine/render/defaults/target.hpp>
 #include <cubos/engine/render/deferred_shading/plugin.hpp>
@@ -14,9 +12,11 @@
 #include <cubos/engine/render/mesh/plugin.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
-#include <cubos/engine/render/shadow_atlas/plugin.hpp>
-#include <cubos/engine/render/shadow_atlas_rasterizer/plugin.hpp>
-#include <cubos/engine/render/shadows/plugin.hpp>
+#include <cubos/engine/render/shadows/atlas/plugin.hpp>
+#include <cubos/engine/render/shadows/atlas_rasterizer/plugin.hpp>
+#include <cubos/engine/render/shadows/cascaded/plugin.hpp>
+#include <cubos/engine/render/shadows/cascaded_rasterizer/plugin.hpp>
+#include <cubos/engine/render/shadows/casters/plugin.hpp>
 #include <cubos/engine/render/split_screen/plugin.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
@@ -38,7 +38,7 @@ void cubos::engine::renderDefaultsPlugin(Cubos& cubos)
     cubos.plugin(lightsPlugin);
     cubos.plugin(cameraPlugin);
     cubos.plugin(shaderPlugin);
-    cubos.plugin(shadowsPlugin);
+    cubos.plugin(shadowCastersPlugin);
 
     cubos.plugin(hdrPlugin);
     cubos.plugin(gBufferPlugin);
