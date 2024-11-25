@@ -24,7 +24,7 @@ namespace cubos::engine
         /// @brief Minimum inverse inertia for a body to rotate.
         glm::mat3 minInvInertia = glm::mat3(0.0F);
 
-        /// @brief The maximum "boost" for the initial solving of the constraint. 
+        /// @brief The maximum "boost" for the initial solving of the constraint.
         float maxBias = -4.0F;
 
         /// @brief The minimum update frequency of the collision solving.
@@ -36,17 +36,23 @@ namespace cubos::engine
         /// @brief The minimum value for KFriction (to avoid divisions by zero).
         float minKFriction = 0.0F;
 
-        /// @brief The minimum length of the tangent vector in the direction of the relative velocity (if it's below this we recalculate a basis for the tangents).
+        /// @brief The minimum length of the tangent vector in the direction of the relative velocity (if it's below
+        /// this we recalculate a basis for the tangents).
         float minTangentLenSq = 1e-6F * 1e-6F;
 
         /// @brief The minimum restitution value to calculate restitution for a body (restitution is bounciness).
         float minRestitution = 0.0F;
 
-        /// @brief The minimum speed in the normal direction to calculate restitution for a body (lower is closer to elastic collisions).
+        /// @brief The minimum speed in the normal direction to calculate restitution for a body (lower is closer to
+        /// elastic collisions).
         float minNormalSpeed = -0.01F;
 
-        /// @brief The minimum impulse being applied in the normal direction to calculate restitution for a body (to avoid applying restitution when body position didn't change).
+        /// @brief The minimum impulse being applied in the normal direction to calculate restitution for a body (to
+        /// avoid applying restitution when body position didn't change).
         float minNormalImpulse = 0.0F;
+
+        /// @brief Coefficient for how much of the impulse of the previous frame will be used for warm-starting.
+        float warmStartCoefficient = 1.0F;
     };
 
 } // namespace cubos::engine
