@@ -1,5 +1,7 @@
 * @RiscadoA @GameDevTecnico/cubos-wildcard-team
 
+CHANGELOG.md @RiscadoA
+
 **/core/gl/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
 **/engine/gizmos/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
 **/engine/render/ @RiscadoA @tomas7770 @GameDevTecnico/cubos-graphics-team
