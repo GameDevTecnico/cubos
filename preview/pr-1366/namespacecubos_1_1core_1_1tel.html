@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/render/cascaded_shadow_maps_rasterizer/ directory | Cubos Docs</title>
+  <title>cubos::core::tel namespace | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,25 +46,77 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_13f5e2b140054f355a8f8a8c95923a6a.html">render</a>/</span>cascaded_shadow_maps_rasterizer<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>tel <span class="m-thin">namespace</span>
         </h1>
-        <p><a href="group__render-cascaded-shadow-maps-rasterizer-plugin.html" class="m-doc">Cascaded shadow maps rasterizer</a> plugin directory.</p>
+        <p><a href="group__core-tel.html" class="m-doc">Telemetry</a> module.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2cascaded__shadow__maps__rasterizer_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1tel_1_1Logger.html" class="m-doc">Logger</a>
+            </dt>
+            <dd>Singleton which holds the logging state.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1tel_1_1Metrics.html" class="m-doc">Metrics</a>
+            </dt>
+            <dd>Singleton class that manages a collection of metrics.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1tel_1_1SpanId.html" class="m-doc">SpanId</a>
+            </dt>
+            <dd>Uniquely identifies a span.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1tel_1_1SpanGuard.html" class="m-doc">SpanGuard</a>
+            </dt>
+            <dd>A guard object that automatically ends the current span when it goes out of scope.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1tel_1_1SpanManager.html" class="m-doc">SpanManager</a>
+            </dt>
+            <dd>Manages the creation and ending of spans.</dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> { </span><span class="m-doc-wrap"><a href="#gga18bccc868d3747254ac30255d35a2fc0add4ec0ac4e58f7c32a01244ae91150b1" class="m-doc">Trace</a> = CUBOS_TEL_LEVEL_TRACE,
+              <a href="#gga18bccc868d3747254ac30255d35a2fc0aa603905470e2a5b8c13e96b579ef0dba" class="m-doc">Debug</a> = CUBOS_TEL_LEVEL_DEBUG,
+              <a href="#gga18bccc868d3747254ac30255d35a2fc0a4059b0251f66a18cb56f544728796875" class="m-doc">Info</a> = CUBOS_TEL_LEVEL_INFO,
+              <a href="#gga18bccc868d3747254ac30255d35a2fc0a56525ae64d370c0b448ac0d60710ef17" class="m-doc">Warn</a> = CUBOS_TEL_LEVEL_WARN,
+              <a href="#gga18bccc868d3747254ac30255d35a2fc0a902b0d55fddef6f8d651fe1035b7d4bd" class="m-doc">Error</a> = CUBOS_TEL_LEVEL_ERROR,
+              <a href="#gga18bccc868d3747254ac30255d35a2fc0a278d01e5af56273bae1bb99a98b370cd" class="m-doc">Critical</a> = CUBOS_TEL_LEVEL_CRITICAL,
+              <a href="#gga18bccc868d3747254ac30255d35a2fc0ad15305d7a4e34e02489c74a5ef542f36" class="m-doc">Off</a> = CUBOS_TEL_LEVEL_OFF }</span>
+            </dt>
+            <dd>Represents a telemetry level.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-tel.html#ga0a48f1bd1890fbec513416f7f77cce3f" class="m-doc">level</a>(</span><span class="m-doc-wrap"><a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> level)</span>
+            </dt>
+            <dd>Set telemetry level.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-tel.html#gab43b8f4d360276a4bc09f2563b9f918e" class="m-doc">level</a>(</span><span class="m-doc-wrap">) -&gt; Level -&gt; auto</span>
+            </dt>
+            <dd>Get telemetry level.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core.html#gaaed7fcc6ad2b945a7615fbe28eb19402" class="m-doc">abort</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Aborts the program and prints a pretty stack trace.</dd>
           </dl>
         </section>
       </div>

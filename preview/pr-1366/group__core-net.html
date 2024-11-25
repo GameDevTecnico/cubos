@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::ShadowAtlas::Slot struct | Cubos Docs</title>
+  <title>Core &raquo; Networking module | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,79 +46,56 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1ShadowAtlas.html">ShadowAtlas</a>::<wbr/></span>Slot <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="shadow__atlas_8hpp.html">&lt;engine/render/shadow_atlas/shadow_atlas.hpp&gt;</a></div>
-        </h1>
-        <p><a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a> for a shadow map in the shadow atlas.</p>
+          <span class="m-breadcrumb"><a href="group__core.html">Core</a> &raquo;</span>
+          Networking <span class="m-thin">module</span></h1>
+        <p>Provides networking utilities, such as TCP and UDP socket abstractions.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
+          <dl class="m-doc">
+            <dt>file <a href="address_8hpp.html" class="m-doc">address.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />Address</a>.</dd>
+            <dt>file <a href="tcp__listener_8hpp.html" class="m-doc">tcp_listener.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1net_1_1TcpListener.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />TcpListener</a>.</dd>
+            <dt>file <a href="tcp__stream_8hpp.html" class="m-doc">tcp_stream.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />TcpStream</a>.</dd>
+            <dt>file <a href="udp__socket_8hpp.html" class="m-doc">udp_socket.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />UdpSocket</a>.</dd>
+            <dt>file <a href="net_2utils_8hpp.html" class="m-doc">utils.hpp</a></dt>
+            <dd>Network utilities.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a4cc04b8c40cad5de7fc11b318a63f819" class="m-doc">Slot</a>(</span><span class="m-doc-wrap">glm::vec2 size,
-              glm::vec2 offset,
-              int casterId)</span>
+              class <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">cubos::core::net::Address</a>
             </dt>
-            <dd>Constructs.</dd>
+            <dd>Represents an address, either IPv4 or IPv6.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1net_1_1TcpListener.html" class="m-doc">cubos::core::net::TcpListener</a>
+            </dt>
+            <dd>A TCP socket server, listening for connections.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">cubos::core::net::TcpStream</a>
+            </dt>
+            <dd>Stream implementation which writes to/reads from a TCP connection.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html" class="m-doc">cubos::core::net::UdpSocket</a>
+            </dt>
+            <dd>Represents a UDP socket.</dd>
           </dl>
-        </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="aac0d4c19a64b2e2b5a353d1dcbd78515">
-              glm::vec2 <a href="#aac0d4c19a64b2e2b5a353d1dcbd78515" class="m-doc-self">size</a>
-            </dt>
-            <dd>Shadow map size, in normalized coordinates.</dd>
-            <dt id="ad8447288fe76b0354929888eddd3bb6d">
-              glm::vec2 <a href="#ad8447288fe76b0354929888eddd3bb6d" class="m-doc-self">offset</a>
-            </dt>
-            <dd>Shadow map offset, in normalized coordinates.</dd>
-            <dt id="a3e7ff0f400c75f74d89cdfab43bb5f8b">
-              int <a href="#a3e7ff0f400c75f74d89cdfab43bb5f8b" class="m-doc-self">casterId</a>
-            </dt>
-            <dd>Id of the shadow caster (-1 if none).</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a4cc04b8c40cad5de7fc11b318a63f819"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />ShadowAtlas::<wbr />Slot::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4cc04b8c40cad5de7fc11b318a63f819" class="m-doc-self">Slot</a>(</span><span class="m-doc-wrap">glm::vec2 size,
-              glm::vec2 offset,
-              int casterId)</span></span>
-            </h3>
-            <p>Constructs.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">size</td>
-                  <td>Shadow map size, in normalized coordinates.</td>
-                </tr>
-                <tr>
-                  <td>offset</td>
-                  <td>Shadow map offset, in normalized coordinates.</td>
-                </tr>
-                <tr>
-                  <td>casterId</td>
-                  <td>Id of the shadow caster (-1 if none).</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

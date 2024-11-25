@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Shadows module | Cubos Docs</title>
+  <title>cubos::core::net namespace | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,87 +46,107 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
-          Shadows <span class="m-thin">module</span></h1>
-        <p>Base interface plugin for shadows.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>net <span class="m-thin">namespace</span>
+        </h1>
+        <p><a href="group__core-net.html" class="m-doc">Networking</a> module.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="caster_8hpp.html" class="m-doc">caster.hpp</a></dt>
-            <dd>Struct <a href="structcubos_1_1engine_1_1ShadowCaster.html" class="m-doc">cubos::<wbr />engine::<wbr />ShadowCaster</a>.</dd>
-            <dt>file <a href="directional__caster_8hpp.html" class="m-doc">directional_caster.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1DirectionalShadowCaster.html" class="m-doc">cubos::<wbr />engine::<wbr />DirectionalShadowCaster</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2shadows_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="point__caster_8hpp.html" class="m-doc">point_caster.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1PointShadowCaster.html" class="m-doc">cubos::<wbr />engine::<wbr />PointShadowCaster</a>.</dd>
-            <dt>file <a href="spot__caster_8hpp.html" class="m-doc">spot_caster.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1SpotShadowCaster.html" class="m-doc">cubos::<wbr />engine::<wbr />SpotShadowCaster</a>.</dd>
-          </dl>
-        </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structcubos_1_1engine_1_1ShadowCaster.html" class="m-doc">cubos::engine::ShadowCaster</a>
+              class <a href="classcubos_1_1core_1_1net_1_1Address.html" class="m-doc">Address</a>
             </dt>
-            <dd>Struct which contains the settings common to all shadow casters.</dd>
+            <dd>Represents an address, either IPv4 or IPv6.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1DirectionalShadowCaster.html" class="m-doc">cubos::engine::DirectionalShadowCaster</a>
+              class <a href="classcubos_1_1core_1_1net_1_1TcpListener.html" class="m-doc">TcpListener</a>
             </dt>
-            <dd>Component which enables shadow casting on a directional light.</dd>
+            <dd>A TCP socket server, listening for connections.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1PointShadowCaster.html" class="m-doc">cubos::engine::PointShadowCaster</a>
+              class <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">TcpStream</a>
             </dt>
-            <dd>Component which enables shadow casting on a point light.</dd>
+            <dd>Stream implementation which writes to/reads from a TCP connection.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1SpotShadowCaster.html" class="m-doc">cubos::engine::SpotShadowCaster</a>
+              class <a href="classcubos_1_1core_1_1net_1_1UdpSocket.html" class="m-doc">UdpSocket</a>
             </dt>
-            <dd>Component which enables shadow casting on a spot light.</dd>
+            <dd>Represents a UDP socket.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="#a17e7e746667266e84985e73052f91fb6" class="m-doc">InnerSocket</a> = decltype(socket(0, 0, 0))
+            </dt>
+            <dd>Socket type. Differs from Windows (SOCKET) and POSIX (int).</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga1d49dd93ccdc8d8709238e099961c822" class="m-doc">shadowsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a118224d5858c51ff0ec35e9743eaddd4" class="m-doc">logSystemError</a>(</span><span class="m-doc-wrap">) -&gt; std::string</span>
             </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Cross-platform utility to get last networking error message.</dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <a href="#a17e7e746667266e84985e73052f91fb6" class="m-doc">InnerSocket</a> <a href="#a207991d5b776cc41c30cb2c88c4ecac3" class="m-doc">InnerInvalidSocket</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd>Represents an invalid socket.</dd>
           </dl>
         </section>
         <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga1d49dd93ccdc8d8709238e099961c822"><div>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="a17e7e746667266e84985e73052f91fb6"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga1d49dd93ccdc8d8709238e099961c822" class="m-doc-self">shadowsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadows_2plugin_8hpp.html">&lt;engine/render/shadows/plugin.hpp&gt;</a></div>
+              using cubos::<wbr />core::<wbr />net::<wbr /><a href="#a17e7e746667266e84985e73052f91fb6" class="m-doc-self">InnerSocket</a> = decltype(socket(0, 0, 0))
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="net_2utils_8hpp.html">&lt;core/net/utils.hpp&gt;</a></div>
             </h3>
-            <p>Plugin entry function.</p>
+            <p>Socket type. Differs from Windows (SOCKET) and POSIX (int).</p>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a118224d5858c51ff0ec35e9743eaddd4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />net::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a118224d5858c51ff0ec35e9743eaddd4" class="m-doc-self">logSystemError</a>(</span><span class="m-doc-wrap">)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="net_2utils_8hpp.html">&lt;core/net/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Cross-platform utility to get last networking error message.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
+              <tfoot>
                 <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class.</td>
+                  <th style="width: 1%">Returns</th>
+                  <td>Message.</td>
                 </tr>
-              </tbody>
+              </tfoot>
             </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a207991d5b776cc41c30cb2c88c4ecac3"><div>
+            <h3>
+              <a href="#a17e7e746667266e84985e73052f91fb6" class="m-doc">InnerSocket</a> cubos::<wbr />core::<wbr />net::<wbr /><a href="#a207991d5b776cc41c30cb2c88c4ecac3" class="m-doc-self">InnerInvalidSocket</a> <span class="m-label m-primary">constexpr</span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="net_2utils_8hpp.html">&lt;core/net/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Represents an invalid socket.</p>
           </div></section>
         </section>
       </div>
