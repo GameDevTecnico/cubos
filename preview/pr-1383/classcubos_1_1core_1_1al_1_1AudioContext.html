@@ -79,6 +79,10 @@
               <span class="m-doc-wrap-bumper">static auto <a href="#ac3b9bc65cf537314c9016b13030aeedd" class="m-doc">create</a>(</span><span class="m-doc-wrap">) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1AudioContext.html" class="m-doc">AudioContext</a>&gt;</span>
             </dt>
             <dd>Creates an audio context.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#acef1a3b1e75ef0fd5b5f12572df4e83b" class="m-doc">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) -&gt; int</span>
+            </dt>
+            <dd>Gets the maximum number of listeners supported by the audio context.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -101,10 +105,6 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a6a65b5fed5bf7ab4e6fd1e6617a2c928" class="m-doc">getDefaultDevice</a>(</span><span class="m-doc-wrap">) -&gt; std::string <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Gets the default audio device.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0b07d511191dd2c0cb7826b422210d13" class="m-doc">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) -&gt; int <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Gets the maximum number of listeners supported by the audio context.</dd>
           </dl>
         </section>
         <section>
@@ -119,6 +119,20 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td><a href="classcubos_1_1core_1_1al_1_1AudioContext.html" class="m-doc">AudioContext</a>, or nullptr on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acef1a3b1e75ef0fd5b5f12572df4e83b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static int cubos::<wbr />core::<wbr />al::<wbr />AudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acef1a3b1e75ef0fd5b5f12572df4e83b" class="m-doc-self">getMaxListenerCount</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Gets the maximum number of listeners supported by the audio context.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Maximum number of listeners.</td>
                 </tr>
               </tfoot>
             </table>
@@ -201,20 +215,6 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Name of the default audio device.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a0b07d511191dd2c0cb7826b422210d13"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">int cubos::<wbr />core::<wbr />al::<wbr />AudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b07d511191dd2c0cb7826b422210d13" class="m-doc-self">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Gets the maximum number of listeners supported by the audio context.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Maximum number of listeners.</td>
                 </tr>
               </tfoot>
             </table>
