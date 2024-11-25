@@ -14,6 +14,7 @@
 using namespace cubos::engine;
 
 CUBOS_DEFINE_TAG(cubos::engine::addPenetrationConstraintTag);
+CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintWarmStartTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintSolveTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintSolveRelaxTag);
 CUBOS_DEFINE_TAG(cubos::engine::penetrationConstraintRestitutionTag);
@@ -231,10 +232,67 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
     cubos.relation<PenetrationConstraint>();
 
     cubos.tag(addPenetrationConstraintTag);
+    cubos.tag(penetrationConstraintWarmStartTag);
     cubos.tag(penetrationConstraintSolveTag);
     cubos.tag(penetrationConstraintSolveRelaxTag);
     cubos.tag(penetrationConstraintRestitutionTag);
     cubos.tag(penetrationConstraintCleanTag);
+
+    cubos.system("warm start")
+        .tagged(penetrationConstraintWarmStartTag)
+        .after(addPenetrationConstraintTag)
+        .before(penetrationConstraintSolveTag)
+        .tagged(fixedSubstepTag)
+        .call([](Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&,
+                       AngularVelocity&, PenetrationConstraint&, Entity, const Mass&, const Inertia&, const Rotation&,
+                       AccumulatedCorrection&, Velocity&, AngularVelocity&>
+                     query,
+                 const SolverConstants& solverConstants) {
+            for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraint, ent2, mass2,
+                       inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
+            {
+                glm::vec3 v1 = velocity1.vec;
+                glm::vec3 v2 = velocity2.vec;
+
+                glm::vec3 w1 = angVelocity1.vec;
+                glm::vec3 w2 = angVelocity2.vec;
+
+                glm::vec3 tangent1;
+                glm::vec3 tangent2;
+                if (ent1 != constraint.entity)
+                {
+                    getTangents(v2, v1, constraint.normal, tangent1, tangent2, solverConstants);
+                }
+                else
+                {
+                    getTangents(v1, v2, constraint.normal, tangent1, tangent2, solverConstants);
+                }
+
+                for (PenetrationConstraintPointData& contactPoint : constraint.points)
+                {
+                    glm::vec3 r1 = contactPoint.fixedAnchor1;
+                    glm::vec3 r2 = contactPoint.fixedAnchor2;
+
+                    glm::vec3 p =
+                        solverConstants.warmStartCoefficient * (contactPoint.normalImpulse * constraint.normal) +
+                        (contactPoint.frictionImpulse1 * tangent1) + (contactPoint.frictionImpulse2 * tangent2);
+                    if (ent1 != constraint.entity)
+                    {
+                        p *= -1.0F;
+                    }
+
+                    v1 -= p * mass1.inverseMass;
+                    w1 -= inertia1.inverseInertia * glm::cross(r1, p);
+                    v2 += p * mass2.inverseMass;
+                    w2 += inertia2.inverseInertia * glm::cross(r2, p);
+                }
+
+                velocity1.vec = v1;
+                angVelocity1.vec = w1;
+                velocity2.vec = v2;
+                angVelocity2.vec = w2;
+            }
+        });
 
     cubos.system("solve contacts bias")
         .tagged(penetrationConstraintSolveTag)
@@ -361,10 +419,9 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 {
                     auto pointData = PenetrationConstraintPointData{};
 
-                    /// TODO: when we have warm-start change this
-                    pointData.normalImpulse = 0.0F;
-                    pointData.frictionImpulse1 = 0.0F;
-                    pointData.frictionImpulse2 = 0.0F;
+                    pointData.normalImpulse = point.normalImpulse;
+                    pointData.frictionImpulse1 = point.frictionImpulse1;
+                    pointData.frictionImpulse2 = point.frictionImpulse2;
 
                     pointData.localAnchor1 = point.localOn1 - centerOfMass1.vec;
                     pointData.localAnchor2 = point.localOn2 - centerOfMass2.vec;
@@ -449,13 +506,22 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
             }
         });
 
-    cubos.system("clean penetration constraint pairs")
-        .tagged(penetrationConstraintCleanTag)
-        .before(addPenetrationConstraintTag)
-        .tagged(fixedStepTag)
-        .call([](Commands cmds, Query<Entity, PenetrationConstraint&, Entity> query) {
-            for (auto [entity, constraint, other] : query)
+    cubos.system("store impulses and clean penetration constraint pairs")
+        .tagged(physicsFinalizePositionTag)
+        .call([](Commands cmds, Query<Entity, ContactManifold&, Entity> cQuery,
+                 Query<Entity, PenetrationConstraint&, Entity> pQuery) {
+            for (auto [entity, constraint, other] : cQuery)
             {
+                if (auto match = pQuery.pin(0, entity).pin(1, other).first())
+                {
+                    auto [entity, manifold, other] = *match;
+                    for (size_t i = 0; i < manifold.points.size(); i++)
+                    {
+                        manifold.points[i].normalImpulse = constraint.points[i].normalImpulse;
+                        manifold.points[i].frictionImpulse1 = constraint.points[i].frictionImpulse1;
+                        manifold.points[i].frictionImpulse2 = constraint.points[i].frictionImpulse2;
+                    }
+                }
                 cmds.unrelate<PenetrationConstraint>(entity, other);
             }
         });

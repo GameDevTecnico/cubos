@@ -126,8 +126,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
 
     cubos.system("finalize position")
         .tagged(physicsFinalizePositionTag)
-        .call([](Query<Position&, AccumulatedCorrection&, const Mass&> query,
-                 const SolverConstants& solverConstants) {
+        .call([](Query<Position&, AccumulatedCorrection&, const Mass&> query, const SolverConstants& solverConstants) {
             for (auto [position, correction, mass] : query)
             {
                 if (mass.inverseMass <= solverConstants.minInvMass)

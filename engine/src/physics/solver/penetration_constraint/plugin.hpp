@@ -14,6 +14,7 @@ namespace cubos::engine
     /// @brief Adds solver for penetration constraint.
 
     extern Tag addPenetrationConstraintTag;
+    extern Tag penetrationConstraintWarmStartTag;
     extern Tag penetrationConstraintCleanTag;
     extern Tag penetrationConstraintSolveTag;
     extern Tag penetrationConstraintRestitutionTag;

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - SSAO resolution scale (#1423, **@tomas7770**).
+- Warm starting for collision solving (#1248, **@fallenatlas**).
 
 ### Changed
 
