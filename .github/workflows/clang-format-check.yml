@@ -10,9 +10,6 @@ jobs:
   
     steps:
     - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        fetch-depth: 2
         
     - name: Install dependencies
       run: |

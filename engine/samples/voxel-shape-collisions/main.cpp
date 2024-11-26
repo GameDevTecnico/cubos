@@ -88,7 +88,8 @@ int main()
     });
 
     cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
-        settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+        settings.setString("assets.app.osPath", APP_ASSETS_PATH);
+        settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
     });
 
     cubos.startupSystem("set palette").call([](RenderPalette& palette) { palette.asset = PaletteAsset; });

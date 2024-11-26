@@ -5,6 +5,7 @@
 
 using namespace cubos::core::al;
 
+#ifdef CUBOS_CORE_MINIAUDIO
 class MiniaudioBuffer : public impl::Buffer
 {
 public:
@@ -275,23 +276,29 @@ private:
     std::vector<std::shared_ptr<MiniaudioListener>> mListeners;
     bool mValid = false;
 };
+#endif // CUBOS_CORE_MINIAUDIO
 
 MiniaudioContext::MiniaudioContext()
 {
+#ifdef CUBOS_CORE_MINIAUDIO
     if (ma_context_init(nullptr, 0, nullptr, &mContext) != MA_SUCCESS)
     {
         CUBOS_FAIL("Failed to initialize audio context.");
         return;
     }
+#endif
 }
 
 MiniaudioContext::~MiniaudioContext()
 {
+#ifdef CUBOS_CORE_MINIAUDIO
     ma_context_uninit(&mContext);
+#endif
 }
 
 std::string MiniaudioContext::getDefaultDevice()
 {
+#ifdef CUBOS_CORE_MINIAUDIO
     ma_device_info* pPlaybackDeviceInfos;
     ma_uint32 playbackDeviceCount;
 
@@ -313,10 +320,14 @@ std::string MiniaudioContext::getDefaultDevice()
 
     CUBOS_WARN("No default audio device found");
     return "";
+#else
+    return "";
+#endif
 }
 
 void MiniaudioContext::enumerateDevices(std::vector<std::string>& devices)
 {
+#ifdef CUBOS_CORE_MINIAUDIO
     devices.clear();
 
     ma_device_info* pPlaybackDeviceInfos;
@@ -341,10 +352,14 @@ void MiniaudioContext::enumerateDevices(std::vector<std::string>& devices)
     {
         CUBOS_WARN("No audio playback devices found");
     }
+#else
+    (void)devices;
+#endif
 }
 
 Buffer MiniaudioContext::createBuffer(const void* data, size_t dataSize)
 {
+#ifdef CUBOS_CORE_MINIAUDIO
     auto buffer = std::make_shared<MiniaudioBuffer>(data, dataSize);
     if (!buffer->isValid())
     {
@@ -353,10 +368,16 @@ Buffer MiniaudioContext::createBuffer(const void* data, size_t dataSize)
     }
 
     return buffer;
+#else
+    (void)data;
+    (void)dataSize;
+    return nullptr;
+#endif
 }
 
-AudioDevice MiniaudioContext::createDevice(ma_uint32 listenerCount, const std::string& specifier)
+AudioDevice MiniaudioContext::createDevice(unsigned int listenerCount, const std::string& specifier)
 {
+#ifdef CUBOS_CORE_MINIAUDIO
     auto device = std::make_shared<MiniaudioDevice>(mContext, specifier, listenerCount);
     if (!device->isValid())
     {
@@ -365,4 +386,9 @@ AudioDevice MiniaudioContext::createDevice(ma_uint32 listenerCount, const std::s
     }
 
     return device;
+#else
+    (void)listenerCount;
+    (void)specifier;
+    return nullptr;
+#endif
 }

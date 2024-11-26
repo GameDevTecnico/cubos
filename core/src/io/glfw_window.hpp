@@ -4,7 +4,7 @@
 
 #include <glm/glm.hpp>
 
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
@@ -51,7 +51,7 @@ namespace cubos::core::io
         std::shared_ptr<Cursor> mCursor;
         Modifiers mModifiers;
 
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
         GLFWwindow* mHandle;
         gl::OGLRenderDevice* mRenderDevice;
 #endif

@@ -1,4 +1,5 @@
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/font/plugin.hpp>
 #include <cubos/engine/image/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/prelude.hpp>
@@ -22,6 +23,9 @@
 #include <cubos/engine/ui/color_rect/plugin.hpp>
 #include <cubos/engine/ui/image/image.hpp>
 #include <cubos/engine/ui/image/plugin.hpp>
+#include <cubos/engine/ui/text/plugin.hpp>
+#include <cubos/engine/ui/text/text.hpp>
+#include <cubos/engine/ui/text/text_stretch.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 using namespace cubos::engine;
@@ -43,6 +47,8 @@ int main(int argc, char** argv)
     cubos.plugin(imagePlugin);
     cubos.plugin(uiImagePlugin);
     cubos.plugin(colorRectPlugin);
+    cubos.plugin(fontPlugin);
+    cubos.plugin(uiTextPlugin);
 
     cubos.startupSystem("load and set the Input Bindings")
         .tagged(assetsTag)
@@ -51,8 +57,9 @@ int main(int argc, char** argv)
             input.bind(*bindings);
         });
 
-    cubos.startupSystem("configure Assets").tagged(settingsTag).call([](Settings& settings) {
-        settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    cubos.startupSystem("configure Assets").before(settingsTag).call([](Settings& settings) {
+        settings.setString("assets.app.osPath", APP_ASSETS_PATH);
+        settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
     });
 
     cubos.startupSystem("create ui elements").after(windowInitTag).after(settingsTag).call([](Commands commands) {
@@ -61,7 +68,7 @@ int main(int argc, char** argv)
         /// [Set up Canvas]
         /// [Set up Background]
         auto elementBg = commands.create()
-                             .add(UIElement{})
+                             .add(UIElement{.layer = 0})
                              .add(UIHorizontalStretch{20, 20})
                              .add(UIVerticalStretch{20, 20})
                              .add(UIColorRect{{1, 1, 1, 1}})
@@ -72,28 +79,45 @@ int main(int argc, char** argv)
         /// [Set up Panel]
         auto elementPanel =
             commands.create()
-                .add(UIElement{.offset = {-50, 0}, .size = {200, 600}, .pivot = {1, 0.5F}, .anchor = {1, 0.5F}})
+                .add(UIElement{
+                    .offset = {-50, 0}, .size = {200, 600}, .pivot = {1, 0.5F}, .anchor = {1, 0.5F}, .layer = 1})
                 .add(UIColorRect{{1, 0, 0, 1}})
                 .entity();
         commands.relate(elementPanel, elementBg, ChildOf{});
         /// [Set up Panel]
 
         /// [Set up Logo]
-        auto logo = commands.create()
-                        .add(UIElement{.offset = {50, -50}, .size = {200, 200}, .pivot = {0, 1}, .anchor = {0, 1}})
-                        .add(UIImage{AnyAsset("50423317-a543-4614-9f4e-c2df975f5c0d")})
-                        .entity();
+        auto logo =
+            commands.create()
+                .add(UIElement{.offset = {50, -50}, .size = {200, 200}, .pivot = {0, 1}, .anchor = {0, 1}, .layer = 1})
+                .add(UIImage{AnyAsset("50423317-a543-4614-9f4e-c2df975f5c0d")})
+                .entity();
         commands.relate(logo, elementBg, ChildOf{});
         /// [Set up Logo]
 
         /// [Set up Long Logo]
-        auto longLogo = commands.create()
-                            .add(UIElement{.offset = {50, 50}, .size = {400, 400}, .pivot = {0, 0}, .anchor = {0, 0}})
-                            .add(UIImage{AnyAsset("6c24c031-2eac-47c9-be30-485238c3e355")})
-                            .add(UINativeAspectRatio{})
-                            .entity();
+        auto longLogo =
+            commands.create()
+                .add(UIElement{.offset = {50, 50}, .size = {400, 400}, .pivot = {0, 0}, .anchor = {0, 0}, .layer = 1})
+                .add(UIImage{AnyAsset("6c24c031-2eac-47c9-be30-485238c3e355")})
+                .add(UINativeAspectRatio{})
+                .entity();
         commands.relate(longLogo, elementBg, ChildOf{});
         /// [Set up Long Logo]
+
+        /// [Setup title]
+        auto title =
+            commands.create()
+                .add(UIElement{
+                    .offset = {0, -20}, .size = {100, 100}, .pivot = {0.5F, 0.5F}, .anchor = {0.5F, 1.0F}, .layer = 2})
+                .add(UIText{.text = "cubosengine.org",
+                            .color = {0.13, 0.14, 0.15, 1},
+                            .fontSize = 48.0F,
+                            .fontAtlas{AnyAsset{"bd0387d2-af3d-4c65-8561-33f5bcf6ab37"}}})
+                .add(UITextStretch{})
+                .entity();
+        commands.relate(title, elementBg, ChildOf{});
+        /// [Setup title]
     });
 
     cubos.system("change scale mode").call([](Commands cmds, const Input& input, Query<Entity, UICanvas&> query) {

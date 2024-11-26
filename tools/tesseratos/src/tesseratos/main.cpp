@@ -42,9 +42,9 @@ int main(int argc, char** argv)
     cubos.plugin(voxelPaletteEditorPlugin);
     cubos.plugin(importerPlugin);
 
-    cubos.startupSystem("configure Assets plugin").tagged(cubos::engine::settingsTag).call([](Settings& settings) {
-        settings.setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);
-        settings.setBool("assets.io.readOnly", false);
+    cubos.startupSystem("configure Assets plugin").before(cubos::engine::settingsTag).call([](Settings& settings) {
+        settings.setString("assets.app.osPath", APP_ASSETS_PATH);
+        settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
     });
 
     cubos.startupSystem("load and set the Input Bindings")

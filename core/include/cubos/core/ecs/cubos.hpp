@@ -441,12 +441,12 @@ namespace cubos::core::ecs
         /// @return Builder.
         SystemBuilder&& tagged(const Tag& tag) &&;
 
-        /// @brief Forces this system to only run after all systems with the given tag have finished.
+        /// @brief Forces all systems with the given tag to run only after this system has finished.
         /// @param tag Tag.
         /// @return Builder.
         SystemBuilder&& before(const Tag& tag) &&;
 
-        /// @brief Forces all systems with the given tag to run only after this system has finished.
+        /// @brief Forces this system to only run after all systems with the given tag have finished.
         /// @param tag Tag.
         /// @return Builder.
         SystemBuilder&& after(const Tag& tag) &&;

@@ -1,0 +1,13 @@
+/// @dir
+/// @brief @ref core-net module.
+
+/// @namespace cubos::core::net
+/// @brief @ref core-net module.
+/// @ingroup core-net
+
+namespace cubos::core::net
+{
+    /// @defgroup core-net Networking
+    /// @ingroup core
+    /// @brief Provides networking utilities, such as TCP and UDP socket abstractions.
+} // namespace cubos::core::net

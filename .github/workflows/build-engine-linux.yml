@@ -19,8 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-      with:
-        submodules: recursive
         
     - name: Install dependencies
       run: |
@@ -44,7 +42,7 @@ jobs:
           ccache-
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON -DBUILD_ENGINE_TESTS=ON -DBUILD_ENGINE_SAMPLES=ON -DUSE_CLANG_TIDY=OFF
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCUBOS_CORE_SAMPLES=ON -DCUBOS_CORE_TESTS=ON -DCUBOS_ENGINE_TESTS=ON -DCUBOS_ENGINE_SAMPLES=ON -DUSE_CLANG_TIDY=OFF
       shell: bash
       env:
         CC:   gcc-11

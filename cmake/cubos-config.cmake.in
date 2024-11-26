@@ -1,0 +1,28 @@
+include(CMakeFindDependencyMacro)
+
+if(NOT @CUBOS_CORE_SHARED@)
+    find_dependency(Threads)
+    find_dependency(cpptrace REQUIRED)
+    
+    if(@CUBOS_CORE_OPENGL@)
+        find_dependency(glad REQUIRED)
+    endif()
+
+    if(@CUBOS_CORE_GLFW@)
+        find_dependency(glfw3 REQUIRED)
+    endif()
+endif()
+
+find_dependency(stduuid REQUIRED)
+find_dependency(nlohmann_json REQUIRED)
+find_dependency(glm REQUIRED)
+
+set(CUBOS_ENGINE_ASSETS_PATH "${CMAKE_CURRENT_LIST_DIR}/@CUBOS_ENGINE_ASSETS_INSTALL_RELPATH@")
+
+if(NOT TARGET cubos::core)
+    include("${CMAKE_CURRENT_LIST_DIR}/cubos-core-targets.cmake")
+endif()
+
+if(NOT TARGET cubos::engine)
+    include("${CMAKE_CURRENT_LIST_DIR}/cubos-engine-targets.cmake")
+endif()

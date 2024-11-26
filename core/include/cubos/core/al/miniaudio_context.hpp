@@ -2,7 +2,9 @@
 
 #include <cstddef>
 
+#ifdef CUBOS_CORE_MINIAUDIO
 #include <miniaudio.h>
+#endif
 
 #include <cubos/core/al/audio_context.hpp>
 
@@ -21,6 +23,8 @@ namespace cubos::core::al
         std::string getDefaultDevice();
 
     private:
+#ifdef CUBOS_CORE_MINIAUDIO
         ma_context mContext;
+#endif
     };
 } // namespace cubos::core::al

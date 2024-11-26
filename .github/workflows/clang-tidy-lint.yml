@@ -13,9 +13,6 @@ jobs:
   
     steps:
     - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        fetch-depth: 2
 
     - name: Install dependencies
       run: |
@@ -46,7 +43,7 @@ jobs:
         git add tools/tesseratos/src/extra.cpp
   
     - name: Prepare compile_commands.json
-      run: cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON -DBUILD_ENGINE_SAMPLES=ON -DBUILD_TESSERATOS_SAMPLES=ON -DUSE_CLANG_TIDY=ON
+      run: cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCUBOS_CORE_SAMPLES=ON -DCUBOS_CORE_TESTS=ON -DCUBOS_ENGINE_SAMPLES=ON -DBUILD_TESSERATOS_SAMPLES=ON -DUSE_CLANG_TIDY=ON
       shell: bash
       env:
         CC:   clang-14

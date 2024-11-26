@@ -6,7 +6,7 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #endif
@@ -36,7 +36,7 @@ namespace cubos::core::io
         ~Cursor();
 
     private:
-#ifdef WITH_GLFW
+#ifdef CUBOS_CORE_GLFW
         friend class GLFWWindow;
 
         Cursor(GLFWcursor* handle);
