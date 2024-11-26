@@ -108,7 +108,7 @@ namespace
         glm::vec4 ambientLight;
 
         PerDirectionalLight directionalLights[16];
-        PerPointLight pointLights[128];
+        PerPointLight pointLights[64];
         PerSpotLight spotLights[128];
 
         glm::uint numDirectionalLights{0};

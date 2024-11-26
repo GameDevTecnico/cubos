@@ -72,7 +72,7 @@ layout(std140) uniform PerScene
 
     // Lights data.
     DirectionalLight directionalLights[16];
-    PointLight pointLights[128];
+    PointLight pointLights[64];
     SpotLight spotLights[128];
 
     uint numDirectionalLights;
