@@ -32,3 +32,13 @@ float cubos::engine::LocalToWorld::worldScale() const
 {
     return glm::length(mat[0]);
 }
+
+glm::vec3 cubos::engine::LocalToWorld::forward() const
+{
+    return glm::normalize(glm::vec3(mat[2]));
+}
+
+glm::vec3 cubos::engine::LocalToWorld::up() const
+{
+    return glm::normalize(glm::vec3(mat[1]));
+}

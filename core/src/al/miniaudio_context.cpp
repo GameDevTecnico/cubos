@@ -1,4 +1,6 @@
 #define MINIAUDIO_IMPLEMENTATION
+#include <cstring>
+
 #include <cubos/core/al/miniaudio_context.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/tel/logging.hpp>
@@ -11,9 +13,12 @@ class MiniaudioBuffer : public impl::Buffer
 public:
     ma_decoder decoder;
 
-    MiniaudioBuffer(const void* data, size_t dataSize)
+    MiniaudioBuffer(const void* srcData, size_t dataSize)
     {
-        if (ma_decoder_init_memory(data, dataSize, nullptr, &decoder) != MA_SUCCESS)
+        mData = operator new(dataSize);
+        std::memcpy(mData, srcData, dataSize);
+
+        if (ma_decoder_init_memory(mData, dataSize, nullptr, &decoder) != MA_SUCCESS)
         {
             CUBOS_ERROR("Failed to initialize Decoder from data");
         }
@@ -26,6 +31,7 @@ public:
     ~MiniaudioBuffer() override
     {
         ma_decoder_uninit(&decoder);
+        operator delete(mData);
     }
 
     float length() override
@@ -50,6 +56,7 @@ public:
 
 private:
     bool mValid = false;
+    void* mData;
 };
 
 class MiniaudioListener : public impl::Listener
@@ -93,7 +100,8 @@ class MiniaudioSource : public impl::Source
 {
 public:
     MiniaudioSource(ma_engine& engine)
-        : mEngine(engine)
+        : mSound({})
+        , mEngine(engine)
     {
     }
 
@@ -104,6 +112,8 @@ public:
 
     void setBuffer(Buffer buffer) override
     {
+        ma_sound_uninit(&mSound);
+
         // Try to dynamically cast the Buffer to a MiniaudioBuffer.
         auto miniaudioBuffer = std::static_pointer_cast<MiniaudioBuffer>(buffer);
 
@@ -180,6 +190,25 @@ public:
         }
     }
 
+    void stop() override
+    {
+        if (ma_sound_stop(&mSound) != MA_SUCCESS)
+        {
+            CUBOS_ERROR("Failed to stop sound");
+            return;
+        }
+        ma_sound_seek_to_pcm_frame(&mSound, 0);
+    }
+
+    void pause() override
+    {
+        if (ma_sound_stop(&mSound) != MA_SUCCESS)
+        {
+            CUBOS_ERROR("Failed to pause sound");
+            return;
+        }
+    }
+
 private:
     ma_sound mSound;
     ma_engine& mEngine;
@@ -191,6 +220,12 @@ public:
     MiniaudioDevice(ma_context& context, const std::string& deviceName, ma_uint32 listenerCount)
         : mContext(context)
     {
+        if (listenerCount > MA_ENGINE_MAX_LISTENERS)
+        {
+            CUBOS_FAIL("Maximum number of listeners is 4");
+            return;
+        }
+
         ma_device_info* pPlaybackDeviceInfos;
         ma_uint32 playbackDeviceCount;
         ma_result result =
@@ -203,31 +238,29 @@ public:
         }
 
         ma_device_id* deviceId = nullptr;
-        for (ma_uint32 i = 0; i < playbackDeviceCount; i++)
-        {
-            if (deviceName == pPlaybackDeviceInfos[i].name)
-            {
-                deviceId = &pPlaybackDeviceInfos[i].id;
-                break;
-            }
-        }
 
-        if (deviceId == nullptr)
+        if (!deviceName.empty()) // in case a device name is provided
         {
-            CUBOS_FAIL("Audio device '{}' not found", deviceName);
-            return;
+            for (ma_uint32 i = 0; i < playbackDeviceCount; i++)
+            {
+                if (deviceName == pPlaybackDeviceInfos[i].name)
+                {
+                    deviceId = &pPlaybackDeviceInfos[i].id;
+                    break;
+                }
+            }
+
+            if (deviceId == nullptr)
+            {
+                CUBOS_FAIL("Audio device '{}' not found", deviceName);
+                return;
+            }
         }
 
         ma_engine_config engineConfig = ma_engine_config_init();
 
-        if (listenerCount > MA_ENGINE_MAX_LISTENERS)
-        {
-            CUBOS_FAIL("Maximum number of listeners is 4");
-            return;
-        }
-
         engineConfig.listenerCount = listenerCount;
-        engineConfig.pPlaybackDeviceID = deviceId; // Use the found device ID
+        engineConfig.pPlaybackDeviceID = deviceId;
 
         if (ma_engine_init(&engineConfig, &mEngine) != MA_SUCCESS)
         {
@@ -246,6 +279,7 @@ public:
 
     ~MiniaudioDevice() override
     {
+        ma_engine_uninit(&mEngine);
         ma_device_uninit(&mDevice);
     }
 
@@ -296,6 +330,15 @@ MiniaudioContext::~MiniaudioContext()
 #endif
 }
 
+int MiniaudioContext::getMaxListenerCount() const
+{
+#ifdef CUBOS_CORE_MINIAUDIO
+    return MA_ENGINE_MAX_LISTENERS;
+#else
+    return 0;
+#endif
+}
+
 std::string MiniaudioContext::getDefaultDevice()
 {
 #ifdef CUBOS_CORE_MINIAUDIO
@@ -308,11 +351,9 @@ std::string MiniaudioContext::getDefaultDevice()
         return "";
     }
 
-    ma_context_uninit(&mContext);
-
     for (ma_uint32 i = 0; i < playbackDeviceCount; i++)
     {
-        if (pPlaybackDeviceInfos[i].isDefault != 0u)
+        if (pPlaybackDeviceInfos[i].isDefault != 0U)
         {
             return pPlaybackDeviceInfos[i].name;
         }
@@ -338,8 +379,6 @@ void MiniaudioContext::enumerateDevices(std::vector<std::string>& devices)
         CUBOS_ERROR("Failed to enumerate audio devices");
         return;
     }
-
-    ma_context_uninit(&mContext);
 
     devices.reserve(playbackDeviceCount);
 
@@ -388,7 +427,6 @@ AudioDevice MiniaudioContext::createDevice(unsigned int listenerCount, const std
     return device;
 #else
     (void)listenerCount;
-    (void)specifier;
     return nullptr;
 #endif
 }
