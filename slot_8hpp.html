@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Shader module | Cubos Docs</title>
+  <title>engine/render/shadows/atlas/slot.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,79 +46,38 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
-          Shader <span class="m-thin">module</span></h1>
-        <p>Adds shader assets to <strong>Cubos</strong>.</p>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_13f5e2b140054f355a8f8a8c95923a6a.html">render</a>/</span><span class="m-breadcrumb"><a href="dir_d56b3b460aaf5e63a90e3ed12bfd34f7.html">shadows</a>/</span><span class="m-breadcrumb"><a href="dir_96e3f5c002ab7bd394a15a8f0db98b8f.html">atlas</a>/</span>slot.hpp <span class="m-thin">file</span>
+        </h1>
+        <p>Resource <a href="structcubos_1_1engine_1_1ShadowMapSlot.html" class="m-doc">cubos::<wbr />engine::<wbr />ShadowMapSlot</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md99">Bridges</a></li>
-            <li><a href="#autotoc_md100">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md99"><h3><a href="#autotoc_md99">Bridges</a></h3><ul><li><a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">ShaderBridge</a> - registered with the <code>.vs</code> extension, loads Vertex <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> assets.</li><li><a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">ShaderBridge</a> - registered with the <code>.fs</code> extension, loads Pixel <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> assets.</li></ul></section><section id="autotoc_md100"><h3><a href="#autotoc_md100">Dependencies</a></h3><ul><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="render_2shader_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />ShaderBridge</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2shader_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="shader_8hpp.html" class="m-doc">shader.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">cubos::<wbr />engine::<wbr />Shader</a>.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">cubos::engine::ShaderBridge</a>
+              struct <a href="structcubos_1_1engine_1_1ShadowMapSlot.html" class="m-doc">cubos::engine::ShadowMapSlot</a>
             </dt>
-            <dd>Bridge for loading shader assets.</dd>
-            <dt>
-              class <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">cubos::engine::Shader</a>
-            </dt>
-            <dd>Contains a shader stage created from GLSL code.</dd>
+            <dd>Slot for a shadow map in the shadow atlas.</dd>
           </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga0dd27092abbb114a06a41185f9d62330" class="m-doc">shaderPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga0dd27092abbb114a06a41185f9d62330"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga0dd27092abbb114a06a41185f9d62330" class="m-doc-self">shaderPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shader_2plugin_8hpp.html">&lt;engine/render/shader/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
