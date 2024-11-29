@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::ShadowAtlas::Slot struct | Cubos Docs</title>
+  <title>cubos::engine::ShadowMapSlot struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1ShadowAtlas.html">ShadowAtlas</a>::<wbr/></span>Slot <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="shadow__atlas_8hpp.html">&lt;engine/render/shadow_atlas/shadow_atlas.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ShadowMapSlot <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="slot_8hpp.html">&lt;engine/render/shadows/atlas/slot.hpp&gt;</a></div>
         </h1>
-        <p><a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a> for a shadow map in the shadow atlas.</p>
+        <p>Slot for a shadow map in the shadow atlas.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -66,7 +66,7 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a4cc04b8c40cad5de7fc11b318a63f819" class="m-doc">Slot</a>(</span><span class="m-doc-wrap">glm::vec2 size,
+              <span class="m-doc-wrap-bumper"><a href="#a7be6d7aa8a5e27a806334a0d3255717f" class="m-doc">ShadowMapSlot</a>(</span><span class="m-doc-wrap">glm::vec2 size,
               glm::vec2 offset,
               int casterId)</span>
             </dt>
@@ -76,25 +76,25 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="aac0d4c19a64b2e2b5a353d1dcbd78515">
-              glm::vec2 <a href="#aac0d4c19a64b2e2b5a353d1dcbd78515" class="m-doc-self">size</a>
+            <dt id="af11e81b787e26a21f118e653a9d0b956">
+              glm::vec2 <a href="#af11e81b787e26a21f118e653a9d0b956" class="m-doc-self">size</a>
             </dt>
             <dd>Shadow map size, in normalized coordinates.</dd>
-            <dt id="ad8447288fe76b0354929888eddd3bb6d">
-              glm::vec2 <a href="#ad8447288fe76b0354929888eddd3bb6d" class="m-doc-self">offset</a>
+            <dt id="a2c2fb55f9f1219011fb6c5f20070dcd4">
+              glm::vec2 <a href="#a2c2fb55f9f1219011fb6c5f20070dcd4" class="m-doc-self">offset</a>
             </dt>
             <dd>Shadow map offset, in normalized coordinates.</dd>
-            <dt id="a3e7ff0f400c75f74d89cdfab43bb5f8b">
-              int <a href="#a3e7ff0f400c75f74d89cdfab43bb5f8b" class="m-doc-self">casterId</a>
+            <dt id="ad685440552c13b1d13d884fbb0d8635e">
+              int <a href="#ad685440552c13b1d13d884fbb0d8635e" class="m-doc-self">casterId</a>
             </dt>
             <dd>Id of the shadow caster (-1 if none).</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a4cc04b8c40cad5de7fc11b318a63f819"><div>
+          <section class="m-doc-details" id="a7be6d7aa8a5e27a806334a0d3255717f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />ShadowAtlas::<wbr />Slot::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4cc04b8c40cad5de7fc11b318a63f819" class="m-doc-self">Slot</a>(</span><span class="m-doc-wrap">glm::vec2 size,
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />ShadowMapSlot::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7be6d7aa8a5e27a806334a0d3255717f" class="m-doc-self">ShadowMapSlot</a>(</span><span class="m-doc-wrap">glm::vec2 size,
               glm::vec2 offset,
               int casterId)</span></span>
             </h3>

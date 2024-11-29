@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Shader module | Cubos Docs</title>
+  <title>cubos::engine::PointShadowAtlas class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,75 +46,89 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
-          Shader <span class="m-thin">module</span></h1>
-        <p>Adds shader assets to <strong>Cubos</strong>.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>PointShadowAtlas <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="point__atlas_8hpp.html">&lt;engine/render/shadows/atlas/point_atlas.hpp&gt;</a></div>
+        </h1>
+        <p>Resource which stores the shadow map atlas for point lights, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md99">Bridges</a></li>
-            <li><a href="#autotoc_md100">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md99"><h3><a href="#autotoc_md99">Bridges</a></h3><ul><li><a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">ShaderBridge</a> - registered with the <code>.vs</code> extension, loads Vertex <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> assets.</li><li><a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">ShaderBridge</a> - registered with the <code>.fs</code> extension, loads Pixel <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> assets.</li></ul></section><section id="autotoc_md100"><h3><a href="#autotoc_md100">Dependencies</a></h3><ul><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="render_2shader_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />ShaderBridge</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2shader_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="shader_8hpp.html" class="m-doc">shader.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">cubos::<wbr />engine::<wbr />Shader</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac35c098ca630cb491ca8cd9cd8fd697c" class="m-doc">getSize</a>(</span><span class="m-doc-wrap">) const -&gt; glm::uvec2</span>
+            </dt>
+            <dd>Gets the size of the shadow atlas texture.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae8e80b6e9014e1e9bd502b2bbf80bdfc" class="m-doc">resize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice</a>&amp; rd)</span>
+            </dt>
+            <dd>Recreates the shadow atlas texture.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">cubos::engine::ShaderBridge</a>
+            <dt id="af59f43a199f92be78ffc3ffaf4c0361f">
+              glm::uvec2 <a href="#af59f43a199f92be78ffc3ffaf4c0361f" class="m-doc-self">configSize</a>
             </dt>
-            <dd>Bridge for loading shader assets.</dd>
-            <dt>
-              class <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">cubos::engine::Shader</a>
+            <dd>Configured size of the shadow atlas texture, in pixels. Use this to change the resolution of the atlas. Note that the texture isn&#x27;t immediately resized; use <a href="#ac35c098ca630cb491ca8cd9cd8fd697c" class="m-doc">getSize()</a> to get the actual texture size.</dd>
+            <dt id="a15a06b1405ce217deb64f67306a0e106">
+              bool <a href="#a15a06b1405ce217deb64f67306a0e106" class="m-doc-self">cleared</a>
             </dt>
-            <dd>Contains a shader stage created from GLSL code.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga0dd27092abbb114a06a41185f9d62330" class="m-doc">shaderPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            <dd>Whether the shadow atlas texture has already been cleared this frame.</dd>
+            <dt id="aaef23704e0fe8761787adff62811c2f3">
+              <a href="group__core-gl.html#ga72ef2891a7d23bab8103d4adfbcf1bc4" class="m-doc">core::<wbr />gl::<wbr />Texture2DArray</a> <a href="#aaef23704e0fe8761787adff62811c2f3" class="m-doc-self">atlas</a>
             </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Stores shadow maps for each point shadow caster component. Each texture of the array corresponds to a face of a cubemap.</dd>
+            <dt id="ab6101a92c8f99c6357a8fc9658927efa">
+              std::vector&lt;std::shared_ptr&lt;<a href="structcubos_1_1engine_1_1ShadowMapSlot.html" class="m-doc">cubos::<wbr />engine::<wbr />ShadowMapSlot</a>&gt;&gt; <a href="#ab6101a92c8f99c6357a8fc9658927efa" class="m-doc-self">slots</a>
+            </dt>
+            <dd>Stores the sizes, offsets, and caster ids of the shadow maps in the atlas.</dd>
+            <dt id="af68da59b1caaed7b21908ce6bf820580">
+              std::map&lt;int, std::shared_ptr&lt;<a href="structcubos_1_1engine_1_1ShadowMapSlot.html" class="m-doc">cubos::<wbr />engine::<wbr />ShadowMapSlot</a>&gt;&gt; <a href="#af68da59b1caaed7b21908ce6bf820580" class="m-doc-self">slotsMap</a>
+            </dt>
+            <dd>Maps shadow caster ids to their corresponding slots.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga0dd27092abbb114a06a41185f9d62330"><div>
+          <section class="m-doc-details" id="ac35c098ca630cb491ca8cd9cd8fd697c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga0dd27092abbb114a06a41185f9d62330" class="m-doc-self">shaderPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shader_2plugin_8hpp.html">&lt;engine/render/shader/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper">glm::uvec2 cubos::<wbr />engine::<wbr />PointShadowAtlas::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac35c098ca630cb491ca8cd9cd8fd697c" class="m-doc-self">getSize</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Plugin entry function.</p>
+            <p>Gets the size of the shadow atlas texture.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Size of the shadow atlas texture, in pixels.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8e80b6e9014e1e9bd502b2bbf80bdfc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PointShadowAtlas::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8e80b6e9014e1e9bd502b2bbf80bdfc" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice</a>&amp; rd)</span></span>
+            </h3>
+            <p>Recreates the shadow atlas texture.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class.</td>
+                  <td style="width: 1%">rd</td>
+                  <td>Render device used to create the texture.</td>
                 </tr>
               </tbody>
             </table>
