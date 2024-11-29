@@ -74,7 +74,8 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a08cfae9642746b44ef34849fcb997385" class="m-doc">createDevice</a>(</span><span class="m-doc-wrap">unsigned int listenerCount) -&gt; <a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aeec10c50f6cef9b600535de75e5ccbdd" class="m-doc">createDevice</a>(</span><span class="m-doc-wrap">unsigned int listenerCount,
+              const std::string&amp; specifier) -&gt; <a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> <span class="m-label m-flat m-warning">override</span></span>
             </dt>
             <dd>Creates a new audio device.</dd>
             <dt>
@@ -87,6 +88,10 @@
             </dt>
             <dd>Enumerates the available devices.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aff208673bff009202971af2cac4e50ce" class="m-doc">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) const -&gt; int <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Gets the maximum number of listeners supported by the audio context.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab015edf158ece28802af6fb7de3c7134" class="m-doc">getDefaultDevice</a>(</span><span class="m-doc-wrap">) -&gt; std::string <span class="m-label m-flat m-warning">override</span></span>
             </dt>
             <dd>Gets the default audio device.</dd>
@@ -94,9 +99,10 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a08cfae9642746b44ef34849fcb997385"><div>
+          <section class="m-doc-details" id="aeec10c50f6cef9b600535de75e5ccbdd"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> cubos::<wbr />core::<wbr />al::<wbr />MiniaudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a08cfae9642746b44ef34849fcb997385" class="m-doc-self">createDevice</a>(</span><span class="m-doc-wrap">unsigned int listenerCount) <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> cubos::<wbr />core::<wbr />al::<wbr />MiniaudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeec10c50f6cef9b600535de75e5ccbdd" class="m-doc-self">createDevice</a>(</span><span class="m-doc-wrap">unsigned int listenerCount,
+              const std::string&amp; specifier) <span class="m-label m-warning">override</span></span></span>
             </h3>
             <p>Creates a new audio device.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -107,6 +113,10 @@
                 <tr>
                   <td style="width: 1%">listenerCount</td>
                   <td>Number of audio listeners to be supported by the device.</td>
+                </tr>
+                <tr>
+                  <td>specifier</td>
+                  <td>Identifier of the audio device.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -160,6 +170,20 @@
                   <td>Vector to fill with the available device&#x27;s specifiers.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aff208673bff009202971af2cac4e50ce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int cubos::<wbr />core::<wbr />al::<wbr />MiniaudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff208673bff009202971af2cac4e50ce" class="m-doc-self">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Gets the maximum number of listeners supported by the audio context.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Maximum number of listeners.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="ab015edf158ece28802af6fb7de3c7134"><div>

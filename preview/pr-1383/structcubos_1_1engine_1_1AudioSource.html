@@ -49,7 +49,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>AudioSource <span class="m-thin">struct</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="source_8hpp.html">&lt;engine/audio/source.hpp&gt;</a></div>
         </h1>
-        <p>Component which adds an <a href="structcubos_1_1engine_1_1AudioSource.html" class="m-doc">AudioSource</a> to the entitiy.</p>
+        <p>Component which makes an entity emit sound.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,6 +61,7 @@
             </li>
           </ul>
         </nav>
+<p>The behavior of this component can be controlled through the <a href="structcubos_1_1engine_1_1AudioPlay.html" class="m-doc">AudioPlay</a>, <a href="structcubos_1_1engine_1_1AudioStop.html" class="m-doc">AudioStop</a> and <a href="structcubos_1_1engine_1_1AudioPause.html" class="m-doc">AudioPause</a> components. Take a look at the audio sample for more information.</p><p>If the cone angles are changed, the audio source becomes directional, in which case it points in the direction specified by <a href="structcubos_1_1engine_1_1LocalToWorld.html#ac76a0249c859ec7f5cc37d45cdb3aa3c" class="m-doc">LocalToWorld::<wbr />forward</a>.</p>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
@@ -71,7 +72,7 @@
             <dt id="acbd592afb7f65b7c818a86d029ee1aa3">
               bool <a href="#acbd592afb7f65b7c818a86d029ee1aa3" class="m-doc-self">looping</a>
             </dt>
-            <dd>Whether the source is looping or not.</dd>
+            <dd>Whether the source should loop sounds instead of stopping.</dd>
             <dt id="aebc921db427ee456d3905965118a574f">
               float <a href="#aebc921db427ee456d3905965118a574f" class="m-doc-self">gain</a>
             </dt>
@@ -83,11 +84,11 @@
             <dt id="a195d9d8940c2d04427264074ffe36eec">
               float <a href="#a195d9d8940c2d04427264074ffe36eec" class="m-doc-self">maxDistance</a>
             </dt>
-            <dd>Maximum distance of the source.</dd>
+            <dd>Maximum distance at which the source is heard.</dd>
             <dt id="a18f83e14a5974916b289980faba11a7b">
               float <a href="#a18f83e14a5974916b289980faba11a7b" class="m-doc-self">minDistance</a>
             </dt>
-            <dd>Minimum distance of the source.</dd>
+            <dd>Minimum distance at which the source is heard.</dd>
             <dt id="aa50c1577facd991944d2a41630a3f305">
               float <a href="#aa50c1577facd991944d2a41630a3f305" class="m-doc-self">innerConeAngle</a>
             </dt>
@@ -100,10 +101,6 @@
               float <a href="#a3de522cbccd5707a9e403d4cc610f29e" class="m-doc-self">outerConeGain</a>
             </dt>
             <dd>Outer cone gain of the source.</dd>
-            <dt id="affd3c5f8b944a758045add5b6b0cbdd2">
-              glm::vec3 <a href="#affd3c5f8b944a758045add5b6b0cbdd2" class="m-doc-self">coneDirection</a>
-            </dt>
-            <dd>Direction of the source&#x27;s cone.</dd>
             <dt id="a739956983add82c7e215e3068407c627">
               <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">Audio</a>&gt; <a href="#a739956983add82c7e215e3068407c627" class="m-doc-self">sound</a>
             </dt>

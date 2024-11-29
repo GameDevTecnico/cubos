@@ -79,21 +79,22 @@
               <span class="m-doc-wrap-bumper">static auto <a href="#ac3b9bc65cf537314c9016b13030aeedd" class="m-doc">create</a>(</span><span class="m-doc-wrap">) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1AudioContext.html" class="m-doc">AudioContext</a>&gt;</span>
             </dt>
             <dd>Creates an audio context.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#acef1a3b1e75ef0fd5b5f12572df4e83b" class="m-doc">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) -&gt; int</span>
-            </dt>
-            <dd>Gets the maximum number of listeners supported by the audio context.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6e92494f4a432115aed2c5bc5dfcbcf8" class="m-doc">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) const -&gt; int <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the maximum number of listeners supported by the audio context.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#adb45ce63ac2b9fbf9a9b248b0945be25" class="m-doc">enumerateDevices</a>(</span><span class="m-doc-wrap">std::vector&lt;std::string&gt;&amp; devices) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Enumerates the available devices.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8a92d1dd40cc1ce1b798b3a114bf32ef" class="m-doc">createDevice</a>(</span><span class="m-doc-wrap">unsigned int listenerCount) -&gt; <a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a443a5dee02de177dc21f9702a3123616" class="m-doc">createDevice</a>(</span><span class="m-doc-wrap">unsigned int listenerCount,
+              const std::string&amp; specifier = &quot;&quot;) -&gt; <a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Creates a new audio device.</dd>
             <dt>
@@ -123,9 +124,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="acef1a3b1e75ef0fd5b5f12572df4e83b"><div>
+          <section class="m-doc-details" id="a6e92494f4a432115aed2c5bc5dfcbcf8"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">static int cubos::<wbr />core::<wbr />al::<wbr />AudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acef1a3b1e75ef0fd5b5f12572df4e83b" class="m-doc-self">getMaxListenerCount</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">int cubos::<wbr />core::<wbr />al::<wbr />AudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6e92494f4a432115aed2c5bc5dfcbcf8" class="m-doc-self">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Gets the maximum number of listeners supported by the audio context.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -154,9 +155,10 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8a92d1dd40cc1ce1b798b3a114bf32ef"><div>
+          <section class="m-doc-details" id="a443a5dee02de177dc21f9702a3123616"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> cubos::<wbr />core::<wbr />al::<wbr />AudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8a92d1dd40cc1ce1b798b3a114bf32ef" class="m-doc-self">createDevice</a>(</span><span class="m-doc-wrap">unsigned int listenerCount) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core-al.html#gac457570e93f052ef01c4a84fdeee8df2" class="m-doc">AudioDevice</a> cubos::<wbr />core::<wbr />al::<wbr />AudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a443a5dee02de177dc21f9702a3123616" class="m-doc-self">createDevice</a>(</span><span class="m-doc-wrap">unsigned int listenerCount,
+              const std::string&amp; specifier = &quot;&quot;) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Creates a new audio device.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -167,6 +169,10 @@
                 <tr>
                   <td style="width: 1%">listenerCount</td>
                   <td>Number of audio listeners to be supported by the device.</td>
+                </tr>
+                <tr>
+                  <td>specifier</td>
+                  <td>Identifier of the audio device.</td>
                 </tr>
               </tbody>
               <tfoot>
