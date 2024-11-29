@@ -40,6 +40,14 @@ namespace cubos::engine
         /// @return Rotation quaternion in world space.
         glm::quat worldRotation() const;
 
+        /// @brief Gets global forward vector of the entity.
+        /// @return Forward vector in world space.
+        glm::vec3 forward() const;
+
+        /// @brief Gets global up vector of the entity.
+        /// @return Up vector in world space.
+        glm::vec3 up() const;
+
         /// @brief Gets global scale of the entity.
         /// @return Scale value in world space.
         float worldScale() const;
