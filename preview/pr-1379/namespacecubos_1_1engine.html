@@ -141,6 +141,26 @@
             </dt>
             <dd>Resource which holds the value of the fixed delta for the fixedStep plugin.</dd>
             <dt>
+              class <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a>
+            </dt>
+            <dd>Class that holds all the necessary data about a font atlas. This font atlas represents the texure created from all the different glyphs in a font, that will be then used for drawing the text.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">FontAtlasBridge</a>
+            </dt>
+            <dd>Bridge which loads <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FontGlyph.html" class="m-doc">FontGlyph</a>
+            </dt>
+            <dd>Struct that holds glyph data such as texcoords, position offsets and advance.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">FontBridge</a>
+            </dt>
+            <dd>Bridge which loads <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a>
+            </dt>
+            <dd><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing raw font data containing the glyphs and their shape. This is used to create <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> that can be used for rendering text.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a>
             </dt>
             <dd>Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.</dd>
@@ -361,6 +381,10 @@
             </dt>
             <dd>Component which represents a render target.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1FXAA.html" class="m-doc">FXAA</a>
+            </dt>
+            <dd>Component which stores the <a href="structcubos_1_1engine_1_1FXAA.html" class="m-doc">FXAA</a> configuration for a render target.</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1ToneMapping.html" class="m-doc">ToneMapping</a>
             </dt>
             <dd>Component which stores Tone Mapping configuration for a render target.</dd>
@@ -468,6 +492,14 @@
               struct <a href="structcubos_1_1engine_1_1UIImage.html" class="m-doc">UIImage</a>
             </dt>
             <dd>Component used to draw images on the UI.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIText.html" class="m-doc">UIText</a>
+            </dt>
+            <dd>Component used to draw text on the UI.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UITextStretch.html" class="m-doc">UITextStretch</a>
+            </dt>
+            <dd>Component which makes a UI element fit the text it has.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1FreeCameraController.html" class="m-doc">FreeCameraController</a>
             </dt>
@@ -594,6 +626,10 @@
             <dd>Plugin entry function.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__fixed-step-plugin.html#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc">fixedStepPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__font-plugin.html#gaac7e6f56482136a66f22c9deb27054a7" class="m-doc">fontPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -786,6 +822,10 @@
             <dd>Plugin entry function.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__ui-image-plugin.html#ga2efbd32fc2619bb97c5419785958296e" class="m-doc">uiImagePlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__ui-text-plugin.html#ga11d36a423fa6b10d930a36e5fa93efbf" class="m-doc">uiTextPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
