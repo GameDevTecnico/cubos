@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Point light shadows (#1188, **@tomas7770**).
 - Added method to save Settings to file (#1349, **@SrGesus**).
 - Added resource to easily configure magic numbers in solver (#1281, **@GCeSilva**).
+- Audio Plugin (#1004, **@Dageus**, **@diogomsmiranda**).
 
 ### Changed
 
@@ -52,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deadzone for input axis (#844, **@kuukitenshi**).
 - Generic Camera component to hold projection matrix (#1331, **@mkuritsu**).
 - Initial application debugging through Tesseratos (#1303, **@RiscadoA**).
-- Print stacktrace with *cpptrace* on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
+- Print stacktrace with _cpptrace_ on calls to CUBOS_FAIL (#1172, **@RiscadoA**).
 - Orthographic Camera component (#1182, **@mkuritsu**).
 - Importer plugin (#1299, **@Scarface1809**).
 - Handle body rotation on penetration solving (#1272, **@fallenatlas**).

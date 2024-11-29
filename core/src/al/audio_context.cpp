@@ -12,3 +12,5 @@ std::shared_ptr<AudioContext> AudioContext::create()
     return nullptr;
 #endif
 }
+
+cubos::core::al::AudioContext::~AudioContext() = default;

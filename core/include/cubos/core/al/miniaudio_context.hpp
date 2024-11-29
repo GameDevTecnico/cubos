@@ -20,7 +20,8 @@ namespace cubos::core::al
         AudioDevice createDevice(unsigned int listenerCount, const std::string& specifier) override;
         Buffer createBuffer(const void* data, size_t dataSize) override;
         void enumerateDevices(std::vector<std::string>& devices) override;
-        std::string getDefaultDevice();
+        int getMaxListenerCount() const override;
+        std::string getDefaultDevice() override;
 
     private:
 #ifdef CUBOS_CORE_MINIAUDIO

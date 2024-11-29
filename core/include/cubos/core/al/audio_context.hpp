@@ -51,11 +51,15 @@ namespace cubos::core::al
     {
     public:
         AudioContext() = default;
-        virtual ~AudioContext() = default;
+        virtual ~AudioContext();
 
         /// @brief Creates an audio context.
         /// @return AudioContext, or nullptr on failure.
         static std::shared_ptr<AudioContext> create();
+
+        /// @brief Gets the maximum number of listeners supported by the audio context.
+        /// @return Maximum number of listeners.
+        virtual int getMaxListenerCount() const = 0;
 
         /// @brief Enumerates the available devices.
         /// @param[out] devices Vector to fill with the available device's specifiers.
@@ -72,6 +76,10 @@ namespace cubos::core::al
         /// @param dataSize Size of the data to be written.
         /// @return Handle of the new buffer.
         virtual Buffer createBuffer(const void* data, size_t dataSize) = 0;
+
+        /// @brief Gets the default audio device.
+        /// @return Name of the default audio device.
+        virtual std::string getDefaultDevice() = 0;
     };
 
     /// @brief Namespace to store the abstract types implemented by the audio device implementations.
@@ -148,6 +156,12 @@ namespace cubos::core::al
             /// @brief Plays the source.
             virtual void play() = 0;
 
+            /// @brief Stops the source, restarting buffer to position 0.
+            virtual void stop() = 0;
+
+            /// @brief Pauses the source, allowing to be played from the moment it was paused.
+            virtual void pause() = 0;
+
         protected:
             Source() = default;
         };
@@ -188,8 +202,9 @@ namespace cubos::core::al
             /// @return Handle of the new source.
             virtual std::shared_ptr<impl::Source> createSource() = 0;
 
-            /// @brief  Creates a new audio listener.
-            /// @return Handle of the new listener.
+            /// @brief  Gets the listener with the specific index.
+            /// @param index Index of the listener.
+            /// @return Handle of the listener.
             virtual std::shared_ptr<impl::Listener> listener(size_t index) = 0;
 
         protected:
