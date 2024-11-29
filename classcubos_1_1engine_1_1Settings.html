@@ -56,11 +56,21 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a136f166d1bb67b9ccbb47ca3d694310e" class="m-doc">load</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;) -&gt; <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a></span>
+            </dt>
+            <dd>Load settings from json in specified path.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -113,6 +123,11 @@
             </dt>
             <dd>Merges the settings from <code>settingsToMerge</code>.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af18e6578b7f390850ceb4d542a4d7a59" class="m-doc">save</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;,
+              int indent = 2) const -&gt; bool</span>
+            </dt>
+            <dd>Save settings as json to specified path.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0af7b50bd43b4312c27fac1356578bc6" class="m-doc">getValues</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;std::string, std::string&gt;&amp;</span>
             </dt>
             <dd></dd>
@@ -124,6 +139,29 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a136f166d1bb67b9ccbb47ca3d694310e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a> cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a136f166d1bb67b9ccbb47ca3d694310e" class="m-doc-self">load</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;)</span></span>
+            </h3>
+            <p>Load settings from json in specified path.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path</td>
+                  <td>Virtual <code><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />FileSystem</a></code> path to read settings from.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Loaded settings object.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a3bb6967c7eeaef6dc8994509ffd87abd"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3bb6967c7eeaef6dc8994509ffd87abd" class="m-doc-self">setBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
@@ -355,6 +393,34 @@
               </tbody>
             </table>
 <p>If a setting from <code>settingsToMerge</code> is already defined in this instance, its value is overwritten.</p>
+          </div></section>
+          <section class="m-doc-details" id="af18e6578b7f390850ceb4d542a4d7a59"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af18e6578b7f390850ceb4d542a4d7a59" class="m-doc-self">save</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;,
+              int indent = 2) const</span></span>
+            </h3>
+            <p>Save settings as json to specified path.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path</td>
+                  <td>Virtual <code><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />FileSystem</a></code> path to write settings in.</td>
+                </tr>
+                <tr>
+                  <td>indent</td>
+                  <td>Indent of the Json, -1 for no whitespace.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether call was successful.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
           <section class="m-doc-details" id="a0af7b50bd43b4312c27fac1356578bc6"><div>
             <h3>
