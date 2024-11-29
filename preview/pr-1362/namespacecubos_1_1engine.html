@@ -141,6 +141,26 @@
             </dt>
             <dd>Resource which holds the value of the fixed delta for the fixedStep plugin.</dd>
             <dt>
+              class <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a>
+            </dt>
+            <dd>Class that holds all the necessary data about a font atlas. This font atlas represents the texure created from all the different glyphs in a font, that will be then used for drawing the text.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">FontAtlasBridge</a>
+            </dt>
+            <dd>Bridge which loads <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FontGlyph.html" class="m-doc">FontGlyph</a>
+            </dt>
+            <dd>Struct that holds glyph data such as texcoords, position offsets and advance.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">FontBridge</a>
+            </dt>
+            <dd>Bridge which loads <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a>
+            </dt>
+            <dd><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing raw font data containing the glyphs and their shape. This is used to create <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> that can be used for rendering text.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a>
             </dt>
             <dd>Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.</dd>
@@ -325,13 +345,21 @@
             </dt>
             <dd>Contains a shader stage created from GLSL code.</dd>
             <dt>
-              class <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a>
+              class <a href="classcubos_1_1engine_1_1PointShadowAtlas.html" class="m-doc">PointShadowAtlas</a>
             </dt>
-            <dd>Resource which stores the shadow map atlas, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</dd>
+            <dd>Resource which stores the shadow map atlas for point lights, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1ShadowMapSlot.html" class="m-doc">ShadowMapSlot</a>
+            </dt>
+            <dd>Slot for a shadow map in the shadow atlas.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1SpotShadowAtlas.html" class="m-doc">SpotShadowAtlas</a>
+            </dt>
+            <dd>Resource which stores the shadow map atlas for spot lights, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1ShadowAtlasRasterizer.html" class="m-doc">ShadowAtlasRasterizer</a>
             </dt>
-            <dd>Resource which stores the <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a> rasterizer state.</dd>
+            <dd>Resource which stores the ShadowAtlas rasterizer state.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1ShadowCaster.html" class="m-doc">ShadowCaster</a>
             </dt>
@@ -360,6 +388,10 @@
               struct <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a>
             </dt>
             <dd>Component which represents a render target.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FXAA.html" class="m-doc">FXAA</a>
+            </dt>
+            <dd>Component which stores the <a href="structcubos_1_1engine_1_1FXAA.html" class="m-doc">FXAA</a> configuration for a render target.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1ToneMapping.html" class="m-doc">ToneMapping</a>
             </dt>
@@ -468,6 +500,14 @@
               struct <a href="structcubos_1_1engine_1_1UIImage.html" class="m-doc">UIImage</a>
             </dt>
             <dd>Component used to draw images on the UI.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIText.html" class="m-doc">UIText</a>
+            </dt>
+            <dd>Component used to draw text on the UI.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UITextStretch.html" class="m-doc">UITextStretch</a>
+            </dt>
+            <dd>Component which makes a UI element fit the text it has.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1FreeCameraController.html" class="m-doc">FreeCameraController</a>
             </dt>
@@ -597,6 +637,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__font-plugin.html#gaac7e6f56482136a66f22c9deb27054a7" class="m-doc">fontPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__gizmos-plugin.html#ga0b040721a2b27572a4f191b728ccc3a1" class="m-doc">gizmosPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -630,14 +674,6 @@
             <dd>Plugin entry function.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__render-camera-plugin.html#ga8392a29879b80ce3ca7d324e33a3e774" class="m-doc">cameraPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__render-cascaded-shadow-maps-plugin.html#ga12c02c1502a578b3b606951ec534d622" class="m-doc">cascadedShadowMapsPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__render-cascaded-shadow-maps-rasterizer-plugin.html#gae3546a552b4f1e0efaab5b4c316c75cd" class="m-doc">cascadedShadowMapsRasterizerPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -689,7 +725,15 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__render-shadows-plugin.html#ga1d49dd93ccdc8d8709238e099961c822" class="m-doc">shadowsPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__render-cascaded-shadow-maps-plugin.html#ga12c02c1502a578b3b606951ec534d622" class="m-doc">cascadedShadowMapsPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__render-cascaded-shadow-maps-rasterizer-plugin.html#gae3546a552b4f1e0efaab5b4c316c75cd" class="m-doc">cascadedShadowMapsRasterizerPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__render-shadow-casters-plugin.html#ga63a8c9feda4c2db01d7f7f6e781d1de4" class="m-doc">shadowCastersPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -789,6 +833,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__ui-text-plugin.html#ga11d36a423fa6b10d930a36e5fa93efbf" class="m-doc">uiTextPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__free-camera-plugin.html#gaebd645bb5d39017763d6b91157532430" class="m-doc">freeCameraPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -870,14 +918,6 @@
             </dt>
             <dd>Tags the system which applies the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> effect.</dd>
             <dt>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-cascaded-shadow-maps-plugin.html#gade5456d477ade37c7e55f611f69515c3" class="m-doc">createCascadedShadowMapsTag</a>
-            </dt>
-            <dd>Creates the shadow maps.</dd>
-            <dt>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-cascaded-shadow-maps-plugin.html#ga53b480ef60355dfb80d11949f3b82281" class="m-doc">drawToCascadedShadowMapsTag</a>
-            </dt>
-            <dd>Systems which draw to the cascaded shadow maps should be tagged with this.</dd>
-            <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-deferred-shading-plugin.html#ga7e9a8c09ce18d6905140f0b920be5437" class="m-doc">deferredShadingTag</a>
             </dt>
             <dd>Tags the system which applies the Deferred Shading technique.</dd>
@@ -924,7 +964,7 @@
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-shadow-atlas-plugin.html#ga8da37b5203432183347b0886ab935326" class="m-doc">createShadowAtlasTag</a>
             </dt>
-            <dd>Creates the shadow atlas.</dd>
+            <dd>Creates the shadow atlases.</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-shadow-atlas-plugin.html#gaf42ecd1d50d9e3473cfc92d0b05cb70d" class="m-doc">reserveShadowCastersTag</a>
             </dt>
@@ -932,7 +972,15 @@
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-shadow-atlas-plugin.html#ga23dfaa7469e7e281740d66d3469ac93e" class="m-doc">drawToShadowAtlasTag</a>
             </dt>
-            <dd>Systems which draw to the shadow atlas texture should be tagged with this.</dd>
+            <dd>Systems which draw to the shadow atlas textures should be tagged with this.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-cascaded-shadow-maps-plugin.html#gade5456d477ade37c7e55f611f69515c3" class="m-doc">createCascadedShadowMapsTag</a>
+            </dt>
+            <dd>Creates the shadow maps.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-cascaded-shadow-maps-plugin.html#ga53b480ef60355dfb80d11949f3b82281" class="m-doc">drawToCascadedShadowMapsTag</a>
+            </dt>
+            <dd>Systems which draw to the cascaded shadow maps should be tagged with this.</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-split-screen-plugin.html#ga189cfb960564374eac457929128427eb" class="m-doc">splitScreenTag</a>
             </dt>

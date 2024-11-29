@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::ShadowAtlas class | Cubos Docs</title>
+  <title>Engine &raquo; UI &raquo; Ui-text-plugin module | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,99 +46,74 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ShadowAtlas <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="shadow__atlas_8hpp.html">&lt;engine/render/shadow_atlas/shadow_atlas.hpp&gt;</a></div>
-        </h1>
-        <p>Resource which stores the shadow map atlas, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</p>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__ui-plugins.html">UI</a> &raquo;</span>
+          Ui-text-plugin <span class="m-thin">module</span></h1>
+        <p>Adds text element to UI.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
+            <li><a href="#autotoc_md117">Dependencies:</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
+<section id="autotoc_md117"><h3><a href="#autotoc_md117">Dependencies:</a></h3><ul><li><a href="group__ui-canvas-plugin.html" class="m-doc">Canvas</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li><a href="group__render-shader-plugin.html" class="m-doc">Shader</a></li><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li><a href="group__font-plugin.html" class="m-doc">Font</a></li></ul></section>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a>
-            </dt>
-            <dd><a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a> for a shadow map in the shadow atlas.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2ui_2text_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
+            <dt>file <a href="text_8hpp.html" class="m-doc">text.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1UIText.html" class="m-doc">cubos::<wbr />engine::<wbr />UIText</a>.</dd>
+            <dt>file <a href="text__stretch_8hpp.html" class="m-doc">text_stretch.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1UITextStretch.html" class="m-doc">cubos::<wbr />engine::<wbr />UITextStretch</a>.</dd>
           </dl>
         </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2071e6153042f7daedaf79550a14d195" class="m-doc">getSize</a>(</span><span class="m-doc-wrap">) const -&gt; glm::uvec2</span>
+              struct <a href="structcubos_1_1engine_1_1UIText.html" class="m-doc">cubos::engine::UIText</a>
             </dt>
-            <dd>Gets the size of the shadow atlas texture.</dd>
+            <dd>Component used to draw text on the UI.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a92f7ddac9f57457c8ded1030827c5fab" class="m-doc">resize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice</a>&amp; rd)</span>
+              struct <a href="structcubos_1_1engine_1_1UITextStretch.html" class="m-doc">cubos::engine::UITextStretch</a>
             </dt>
-            <dd>Recreates the shadow atlas texture.</dd>
+            <dd>Component which makes a UI element fit the text it has.</dd>
           </dl>
         </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
-            <dt id="aaccb90d749a8c9f85af407d90901674b">
-              glm::uvec2 <a href="#aaccb90d749a8c9f85af407d90901674b" class="m-doc-self">configSize</a>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga11d36a423fa6b10d930a36e5fa93efbf" class="m-doc">uiTextPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
-            <dd>Configured size of the shadow atlas texture, in pixels. Use this to change the resolution of the atlas. Note that the texture isn&#x27;t immediately resized; use <a href="#a2071e6153042f7daedaf79550a14d195" class="m-doc">getSize()</a> to get the actual texture size.</dd>
-            <dt id="a4504be429c51c3be066b4f410e9537f4">
-              bool <a href="#a4504be429c51c3be066b4f410e9537f4" class="m-doc-self">cleared</a>
-            </dt>
-            <dd>Whether the shadow atlas texture has already been cleared this frame.</dd>
-            <dt id="af1d2c0f55fb074847e8be235c8da3964">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#af1d2c0f55fb074847e8be235c8da3964" class="m-doc-self">atlas</a>
-            </dt>
-            <dd>Stores shadow maps for each shadow caster component.</dd>
-            <dt id="a2e960e8b9715811dde67c84523d6557b">
-              std::vector&lt;std::shared_ptr&lt;<a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a>&gt;&gt; <a href="#a2e960e8b9715811dde67c84523d6557b" class="m-doc-self">slots</a>
-            </dt>
-            <dd>Stores the sizes, offsets, and caster ids of the shadow maps in the atlas.</dd>
-            <dt id="a8c46282f97f3efa4b222b5ad1b83b2c2">
-              std::map&lt;int, std::shared_ptr&lt;<a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a>&gt;&gt; <a href="#a8c46282f97f3efa4b222b5ad1b83b2c2" class="m-doc-self">slotsMap</a>
-            </dt>
-            <dd>Maps shadow caster ids to their corresponding slots.</dd>
+            <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a2071e6153042f7daedaf79550a14d195"><div>
+          <section class="m-doc-details" id="ga11d36a423fa6b10d930a36e5fa93efbf"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">glm::uvec2 cubos::<wbr />engine::<wbr />ShadowAtlas::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2071e6153042f7daedaf79550a14d195" class="m-doc-self">getSize</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga11d36a423fa6b10d930a36e5fa93efbf" class="m-doc-self">uiTextPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2ui_2text_2plugin_8hpp.html">&lt;engine/ui/text/plugin.hpp&gt;</a></div>
             </h3>
-            <p>Gets the size of the shadow atlas texture.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Size of the shadow atlas texture, in pixels.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a92f7ddac9f57457c8ded1030827c5fab"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />ShadowAtlas::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92f7ddac9f57457c8ded1030827c5fab" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice</a>&amp; rd)</span></span>
-            </h3>
-            <p>Recreates the shadow atlas texture.</p>
+            <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">rd</td>
-                  <td>Render device used to create the texture.</td>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>Cubos</strong> main class</td>
                 </tr>
               </tbody>
             </table>

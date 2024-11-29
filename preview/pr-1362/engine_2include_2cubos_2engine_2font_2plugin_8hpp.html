@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::ShadowAtlas::Slot struct | Cubos Docs</title>
+  <title>engine/font/plugin.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,79 +46,38 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1ShadowAtlas.html">ShadowAtlas</a>::<wbr/></span>Slot <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="shadow__atlas_8hpp.html">&lt;engine/render/shadow_atlas/shadow_atlas.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_5b3b50982cfbd8ab81afaa651274e081.html">font</a>/</span>plugin.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a> for a shadow map in the shadow atlas.</p>
+        <p>Plugin entry point.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a4cc04b8c40cad5de7fc11b318a63f819" class="m-doc">Slot</a>(</span><span class="m-doc-wrap">glm::vec2 size,
-              glm::vec2 offset,
-              int casterId)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__font-plugin.html#gaac7e6f56482136a66f22c9deb27054a7" class="m-doc">fontPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
-            <dd>Constructs.</dd>
+            <dd>Plugin entry function.</dd>
           </dl>
-        </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="aac0d4c19a64b2e2b5a353d1dcbd78515">
-              glm::vec2 <a href="#aac0d4c19a64b2e2b5a353d1dcbd78515" class="m-doc-self">size</a>
-            </dt>
-            <dd>Shadow map size, in normalized coordinates.</dd>
-            <dt id="ad8447288fe76b0354929888eddd3bb6d">
-              glm::vec2 <a href="#ad8447288fe76b0354929888eddd3bb6d" class="m-doc-self">offset</a>
-            </dt>
-            <dd>Shadow map offset, in normalized coordinates.</dd>
-            <dt id="a3e7ff0f400c75f74d89cdfab43bb5f8b">
-              int <a href="#a3e7ff0f400c75f74d89cdfab43bb5f8b" class="m-doc-self">casterId</a>
-            </dt>
-            <dd>Id of the shadow caster (-1 if none).</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a4cc04b8c40cad5de7fc11b318a63f819"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />ShadowAtlas::<wbr />Slot::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4cc04b8c40cad5de7fc11b318a63f819" class="m-doc-self">Slot</a>(</span><span class="m-doc-wrap">glm::vec2 size,
-              glm::vec2 offset,
-              int casterId)</span></span>
-            </h3>
-            <p>Constructs.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">size</td>
-                  <td>Shadow map size, in normalized coordinates.</td>
-                </tr>
-                <tr>
-                  <td>offset</td>
-                  <td>Shadow map offset, in normalized coordinates.</td>
-                </tr>
-                <tr>
-                  <td>casterId</td>
-                  <td>Id of the shadow caster (-1 if none).</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

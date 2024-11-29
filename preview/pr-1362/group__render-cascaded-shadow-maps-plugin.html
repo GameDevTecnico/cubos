@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Cascaded shadow maps module | Cubos Docs</title>
+  <title>Engine &raquo; Render &raquo; Shadows &raquo; Cascaded shadow maps module | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -48,12 +48,13 @@
         <h1>
           <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
           <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__render-shadows-plugins.html">Shadows</a> &raquo;</span>
           Cascaded shadow maps <span class="m-thin">module</span></h1>
         <p>Creates and manages shadow maps for directional shadow casters.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md88">Dependencies</a></li>
+            <li><a href="#autotoc_md103">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -64,11 +65,11 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md88"><h3><a href="#autotoc_md88">Dependencies</a></h3><ul><li><a href="group__render-camera-plugin.html" class="m-doc">Camera</a></li><li><a href="group__render-shadows-plugin.html" class="m-doc">Shadows</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
+<section id="autotoc_md103"><h3><a href="#autotoc_md103">Dependencies</a></h3><ul><li><a href="group__render-camera-plugin.html" class="m-doc">Camera</a></li><li><a href="group__render-shadow-casters-plugin.html" class="m-doc">Shadow casters</a></li><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2cascaded__shadow__maps_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dt>file <a href="engine_2include_2cubos_2engine_2render_2shadows_2cascaded_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
           </dl>
         </section>
@@ -99,7 +100,7 @@
           <section class="m-doc-details" id="ga12c02c1502a578b3b606951ec534d622"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga12c02c1502a578b3b606951ec534d622" class="m-doc-self">cascadedShadowMapsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2cascaded__shadow__maps_2plugin_8hpp.html">&lt;engine/render/cascaded_shadow_maps/plugin.hpp&gt;</a></div>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadows_2cascaded_2plugin_8hpp.html">&lt;engine/render/shadows/cascaded/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -120,14 +121,14 @@
           <section class="m-doc-details" id="gade5456d477ade37c7e55f611f69515c3"><div>
             <h3>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#gade5456d477ade37c7e55f611f69515c3" class="m-doc-self">createCascadedShadowMapsTag</a>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2cascaded__shadow__maps_2plugin_8hpp.html">&lt;engine/render/cascaded_shadow_maps/plugin.hpp&gt;</a></div>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadows_2cascaded_2plugin_8hpp.html">&lt;engine/render/shadows/cascaded/plugin.hpp&gt;</a></div>
             </h3>
             <p>Creates the shadow maps.</p>
           </div></section>
           <section class="m-doc-details" id="ga53b480ef60355dfb80d11949f3b82281"><div>
             <h3>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> Tag <a href="#ga53b480ef60355dfb80d11949f3b82281" class="m-doc-self">drawToCascadedShadowMapsTag</a>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2cascaded__shadow__maps_2plugin_8hpp.html">&lt;engine/render/cascaded_shadow_maps/plugin.hpp&gt;</a></div>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadows_2cascaded_2plugin_8hpp.html">&lt;engine/render/shadows/cascaded/plugin.hpp&gt;</a></div>
             </h3>
             <p>Systems which draw to the cascaded shadow maps should be tagged with this.</p>
           </div></section>
