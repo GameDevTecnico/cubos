@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Collision detection with VoxelCollisionShapes (#994, **@joaomanita**).
-- Allow identifying assets in code from their path (#1177. **@GalaxyCrush**).
+- Allow identifying assets in code from their path (#1177, **@GalaxyCrush**).
 - Hold function for debug_camera (#1030, **@jdbaracho**).
 - Audio asset (#230, **@Dageus**, **@diogomsmiranda**).
 - Compatibility with CMake find_package (#1326, **@RiscadoA**).
@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - UI text element using MSDF for text rendering (#1300, **@mkuritsu**).
 - Added anti-aliasing using FXAA technique (#1334, **@kuukitenshi**).
 - Point light shadows (#1188, **@tomas7770**).
+- Added method to save Settings to file (#1349, **@SrGesus**).
 
 ### Changed
 

@@ -5,6 +5,7 @@
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/external/string_view.hpp>
 
 #include <cubos/engine/settings/settings.hpp>
 
@@ -136,7 +137,8 @@ bool Settings::save(std::string_view path, int indent) const
 {
     auto stream = FileSystem::open(path, File::OpenMode::Read);
     // If settings file fails to open
-    if (stream == nullptr) {
+    if (stream == nullptr)
+    {
         CUBOS_ERROR("Couldn't open the settings file at: {}", path);
         return {};
     }
@@ -183,7 +185,8 @@ Settings Settings::load(std::string_view path)
     std::string contents;
     // If settings file fails to open
     auto stream = FileSystem::open(path, File::OpenMode::Read);
-    if (stream == nullptr) {
+    if (stream == nullptr)
+    {
         CUBOS_ERROR("Couldn't open the settings file at: {}", path);
         return {};
     }
