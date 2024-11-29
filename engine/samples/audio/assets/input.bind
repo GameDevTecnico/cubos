@@ -1,0 +1,13 @@
+{
+	"actions": {
+		"skip": [
+			{"keys": ["Return"]}
+		],
+		"play_pause": [
+			{"keys": ["Space"]}
+		],
+		"stop": [
+			{"keys": ["BackSpace"]}
+		]
+	}
+}

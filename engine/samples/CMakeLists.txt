@@ -33,6 +33,7 @@ macro(make_sample)
     endif()
 endmacro()
 # Add samples
+make_sample(DIR "audio" ASSETS)
 make_sample(DIR "hello-cubos")
 make_sample(DIR "settings")
 make_sample(DIR "events")
