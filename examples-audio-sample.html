@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Fixed Time Step module | Cubos Docs</title>
+  <title>Audio | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,72 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Fixed Time Step <span class="m-thin">module</span></h1>
-        <p>Adds a tag which makes its systems run at a fixed frame rate.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li><a href="#autotoc_md74">Resources</a></li>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<section id="autotoc_md74"><h3><a href="#autotoc_md74">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="fixed__delta__time_8hpp.html" class="m-doc">fixed_delta_time.hpp</a></dt>
-            <dd>Resource <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::<wbr />engine::<wbr />FixedDeltaTime</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::engine::FixedDeltaTime</a>
-            </dt>
-            <dd>Resource which holds the value of the fixed delta for the fixedStep plugin.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga98331d506cbd48c4baaec28b89f6b498"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc-self">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html">&lt;engine/fixed_step/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-        </section>
+          Audio
+        </h1>
+        <p>Using the <a href="group__audio-plugin.html" class="m-doc">Audio</a> plugin.</p>
+<p><a name="md_audio_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/audio">here</a></p></aside><p>This sample shows how the <a href="group__audio-plugin.html" class="m-doc">Audio</a> can be used to load audio samples and interact with them, using all supported file formats.</p><p>Let&#x27;s start by creating a Listener (represented through the camera).</p><pre class="m-code"></pre><p>In order to produce sound, we also need to create an AudioSource.</p><pre class="m-code"></pre><p>How does this source know what to play? You can assign any audio asset, as long as in the supported format, to the AudioSource component.</p><pre class="m-code"></pre><p>We add a system which cycles through 3 assets and allows to play/pause and stop them through user input.</p><p>The way we signal cubos to play, pause and stop an asset is through the use of the <code>AudioPlay</code>, <code>AudioPause</code>, and <code>AudioStop</code> components; just add them and the actions should happen immediatly.</p><pre class="m-code"></pre><p>That way, using our selected inputs, if you press <code>Enter</code>, you will skip to the next asset; <code>Spacebar</code> will play or pause the asset; and pressing <code>Backspace</code> will stop the current audio asset.</p><p>You can play around with the audio samples and listen to each one using the plugin!</p>
       </div>
     </div>
   </div>

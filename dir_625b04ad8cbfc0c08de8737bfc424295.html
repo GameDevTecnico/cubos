@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Fixed Time Step module | Cubos Docs</title>
+  <title>engine/audio/ directory | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,71 +46,40 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Fixed Time Step <span class="m-thin">module</span></h1>
-        <p>Adds a tag which makes its systems run at a fixed frame rate.</p>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span>audio<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+        </h1>
+        <p><a href="group__audio-plugin.html" class="m-doc">Audio</a> plugin directory.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md74">Resources</a></li>
             <li>
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md74"><h3><a href="#autotoc_md74">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="fixed__delta__time_8hpp.html" class="m-doc">fixed_delta_time.hpp</a></dt>
-            <dd>Resource <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::<wbr />engine::<wbr />FixedDeltaTime</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dt>file <a href="audio_8hpp.html" class="m-doc">audio.hpp</a></dt>
+            <dd>Class <a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">cubos::<wbr />engine::<wbr />Audio</a>.</dd>
+            <dt>file <a href="audio_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1AudioBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />AudioBridge</a>.</dd>
+            <dt>file <a href="listener_8hpp.html" class="m-doc">listener.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1AudioListener.html" class="m-doc">cubos::<wbr />engine::<wbr />AudioListener</a>.</dd>
+            <dt>file <a href="pause_8hpp.html" class="m-doc">pause.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1AudioPause.html" class="m-doc">cubos::<wbr />engine::<wbr />AudioPause</a>.</dd>
+            <dt>file <a href="play_8hpp.html" class="m-doc">play.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1AudioPlay.html" class="m-doc">cubos::<wbr />engine::<wbr />AudioPlay</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2audio_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
+            <dt>file <a href="source_8hpp.html" class="m-doc">source.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1AudioSource.html" class="m-doc">cubos::<wbr />engine::<wbr />AudioSource</a>.</dd>
+            <dt>file <a href="stop_8hpp.html" class="m-doc">stop.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1AudioStop.html" class="m-doc">cubos::<wbr />engine::<wbr />AudioStop</a>.</dd>
           </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::engine::FixedDeltaTime</a>
-            </dt>
-            <dd>Resource which holds the value of the fixed delta for the fixedStep plugin.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga98331d506cbd48c4baaec28b89f6b498"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc-self">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html">&lt;engine/fixed_step/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

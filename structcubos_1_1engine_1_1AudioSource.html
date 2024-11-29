@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Fixed Time Step module | Cubos Docs</title>
+  <title>cubos::engine::AudioSource struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,71 +46,66 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Fixed Time Step <span class="m-thin">module</span></h1>
-        <p>Adds a tag which makes its systems run at a fixed frame rate.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>AudioSource <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="source_8hpp.html">&lt;engine/audio/source.hpp&gt;</a></div>
+        </h1>
+        <p>Component which makes an entity emit sound.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md74">Resources</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md74"><h3><a href="#autotoc_md74">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+<p>The behavior of this component can be controlled through the <a href="structcubos_1_1engine_1_1AudioPlay.html" class="m-doc">AudioPlay</a>, <a href="structcubos_1_1engine_1_1AudioStop.html" class="m-doc">AudioStop</a> and <a href="structcubos_1_1engine_1_1AudioPause.html" class="m-doc">AudioPause</a> components. Take a look at the audio sample for more information.</p><p>If the cone angles are changed, the audio source becomes directional, in which case it points in the direction specified by <a href="structcubos_1_1engine_1_1LocalToWorld.html#ac76a0249c859ec7f5cc37d45cdb3aa3c" class="m-doc">LocalToWorld::<wbr />forward</a>.</p>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="fixed__delta__time_8hpp.html" class="m-doc">fixed_delta_time.hpp</a></dt>
-            <dd>Resource <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::<wbr />engine::<wbr />FixedDeltaTime</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::engine::FixedDeltaTime</a>
+            <dt id="a32bb3bb1085b7944856b9337b0ee8496">
+              bool <a href="#a32bb3bb1085b7944856b9337b0ee8496" class="m-doc-self">playing</a>
             </dt>
-            <dd>Resource which holds the value of the fixed delta for the fixedStep plugin.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            <dd>Whether the source is playing or not.</dd>
+            <dt id="acbd592afb7f65b7c818a86d029ee1aa3">
+              bool <a href="#acbd592afb7f65b7c818a86d029ee1aa3" class="m-doc-self">looping</a>
             </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Whether the source should loop sounds instead of stopping.</dd>
+            <dt id="aebc921db427ee456d3905965118a574f">
+              float <a href="#aebc921db427ee456d3905965118a574f" class="m-doc-self">gain</a>
+            </dt>
+            <dd>Gain of the source.</dd>
+            <dt id="a26c20d12e7cabe4f6b488221a580d0ae">
+              float <a href="#a26c20d12e7cabe4f6b488221a580d0ae" class="m-doc-self">pitch</a>
+            </dt>
+            <dd>Pitch of the source.</dd>
+            <dt id="a195d9d8940c2d04427264074ffe36eec">
+              float <a href="#a195d9d8940c2d04427264074ffe36eec" class="m-doc-self">maxDistance</a>
+            </dt>
+            <dd>Maximum distance at which the source is heard.</dd>
+            <dt id="a18f83e14a5974916b289980faba11a7b">
+              float <a href="#a18f83e14a5974916b289980faba11a7b" class="m-doc-self">minDistance</a>
+            </dt>
+            <dd>Minimum distance at which the source is heard.</dd>
+            <dt id="aa50c1577facd991944d2a41630a3f305">
+              float <a href="#aa50c1577facd991944d2a41630a3f305" class="m-doc-self">innerConeAngle</a>
+            </dt>
+            <dd>Inner cone angle of the source.</dd>
+            <dt id="aa3b19852ed184894e9499ff7d618c5c7">
+              float <a href="#aa3b19852ed184894e9499ff7d618c5c7" class="m-doc-self">outerConeAngle</a>
+            </dt>
+            <dd>Outer cone angle of the source.</dd>
+            <dt id="a3de522cbccd5707a9e403d4cc610f29e">
+              float <a href="#a3de522cbccd5707a9e403d4cc610f29e" class="m-doc-self">outerConeGain</a>
+            </dt>
+            <dd>Outer cone gain of the source.</dd>
+            <dt id="a739956983add82c7e215e3068407c627">
+              <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">Audio</a>&gt; <a href="#a739956983add82c7e215e3068407c627" class="m-doc-self">sound</a>
+            </dt>
+            <dd>Sound to be played by the source.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga98331d506cbd48c4baaec28b89f6b498"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc-self">fixedStepPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2fixed__step_2plugin_8hpp.html">&lt;engine/fixed_step/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
