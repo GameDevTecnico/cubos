@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::ContactPointData struct | Cubos Docs</title>
+  <title>core/geom/polygonal_feature.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,62 +46,40 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ContactPointData <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="contact__manifold_8hpp.html">&lt;engine/collisions/contact_manifold.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_c1deef5baf41393ad8a994c3fd53e62f.html">geom</a>/</span>polygonal_feature.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Contains info regarding a contact point of a @ContactManifold.</p>
+        <p>Struct <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />PolygonalFeature</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="a8f72afcf47785273eed32b323c7deb6a">
-              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a> <a href="#a8f72afcf47785273eed32b323c7deb6a" class="m-doc-self">entity</a>
-            </dt>
-            <dd>Entity to which the normal is relative to.</dd>
-            <dt id="a53fbbe1d207da023ff1169938228216c">
-              glm::vec3 <a href="#a53fbbe1d207da023ff1169938228216c" class="m-doc-self">globalOn1</a>
-            </dt>
-            <dd><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> on the entity of the contact in global coordinates.</dd>
-            <dt id="ad133e6d68f758df01e782f1d6f965e89">
-              glm::vec3 <a href="#ad133e6d68f758df01e782f1d6f965e89" class="m-doc-self">globalOn2</a>
-            </dt>
-            <dd><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> on the other entity of the contact in global coordinates.</dd>
-            <dt id="adcc6737e8c7f398c1801bb755d6028bc">
-              glm::vec3 <a href="#adcc6737e8c7f398c1801bb755d6028bc" class="m-doc-self">localOn1</a>
-            </dt>
-            <dd><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> on the entity of the contact in local coordinates.</dd>
-            <dt id="a136e77709a2bda93356a360c9081f710">
-              glm::vec3 <a href="#a136e77709a2bda93356a360c9081f710" class="m-doc-self">localOn2</a>
-            </dt>
-            <dd><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> on the other entity of the contact in local coordinates.</dd>
-            <dt id="a8501131dbf2e030af2c1f0d1d147bd12">
-              float <a href="#a8501131dbf2e030af2c1f0d1d147bd12" class="m-doc-self">penetration</a>
-            </dt>
-            <dd>Penetration of the contact point. Always positive.</dd>
-            <dt>
-              <a href="classcubos_1_1engine_1_1ContactFeatureId.html" class="m-doc">ContactFeatureId</a> <a href="#a71ca3b57c6ad93436f5e77eab5e83f22" class="m-doc">fid1</a>
-            </dt>
-            <dd></dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">cubos::core::geom</a></dt>
+            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
           </dl>
         </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="a71ca3b57c6ad93436f5e77eab5e83f22"><div>
-            <h3>
-              <a href="classcubos_1_1engine_1_1ContactFeatureId.html" class="m-doc">ContactFeatureId</a> cubos::<wbr />engine::<wbr />ContactPointData::<wbr /><a href="#a71ca3b57c6ad93436f5e77eab5e83f22" class="m-doc-self">fid1</a>
-            </h3>
-<p>The contact feature ID on the first shape. This indicates the ID of the vertex, edge, or face of the contact, if one can be determined.</p>
-          </div></section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">cubos::core::geom::PolygonalFeature</a>
+            </dt>
+            <dd>Represents a polygonal feature. Used internally for manifold computation.</dd>
+          </dl>
         </section>
       </div>
     </div>

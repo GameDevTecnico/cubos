@@ -84,6 +84,10 @@
               struct <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a>
             </dt>
             <dd>Represents a plane. Assumes equation: normal.x + normal.y + normal.z + d = 0.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>
+            </dt>
+            <dd>Represents a polygonal feature. Used internally for manifold computation.</dd>
           </dl>
         </section>
         <section id="func-members">
@@ -98,10 +102,10 @@
             </dt>
             <dd>Computes the intersection between two box shapes.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad9a260232261ba27314f97268f92297b" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">const std::vector&lt;glm::vec3&gt;&amp; inputPolygon,
+              <span class="m-doc-wrap-bumper">auto <a href="#a847980982b35c728e17b0f0fd48fb82c" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; polygon,
               int numClipPlanes,
               const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
-              bool removeNotClipToPlane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::vector&lt;glm::vec3&gt;</span>
+              bool removeNotClipToPlane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
             </dt>
             <dd>Performs the Sutherland-Hodgman Clipping algorithm.</dd>
             <dt>
@@ -123,11 +127,11 @@
             </dt>
             <dd>Computes the vertex furthest along the axis.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a134d0895c5d8bb08c9212d43f1f45640" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
+              <span class="m-doc-wrap-bumper">auto <a href="#a04e4e0c7aeb3fa65e7c172323d6de64c" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
               const glm::vec3&amp; normal,
-              std::vector&lt;glm::vec3&gt;&amp; outPoints,
-              glm::vec3&amp; outNormal,
+              <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; outPolygon,
               std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
+              std::vector&lt;uint32_t&gt; outAdjacentPlanesIds,
               const glm::mat4&amp; localToWorld,
               float scale) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
             </dt>
@@ -198,9 +202,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad9a260232261ba27314f97268f92297b"><div>
+          <section class="m-doc-details" id="a847980982b35c728e17b0f0fd48fb82c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::vector&lt;glm::vec3&gt; cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad9a260232261ba27314f97268f92297b" class="m-doc-self">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">const std::vector&lt;glm::vec3&gt;&amp; inputPolygon,
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a847980982b35c728e17b0f0fd48fb82c" class="m-doc-self">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; polygon,
               int numClipPlanes,
               const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
               bool removeNotClipToPlane)</span></span>
@@ -213,7 +217,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">inputPolygon</td>
+                  <td style="width: 1%">polygon</td>
                   <td>The polygon to perform the clipping on.</td>
                 </tr>
                 <tr>
@@ -229,12 +233,6 @@
                   <td>Whether to remove the points if they&#x27;re outside the plane.</td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The polygon resulting from the clipping.</td>
-                </tr>
-              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a3aa4069dfc64c9ae974264957c9877b9"><div>
@@ -339,13 +337,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a134d0895c5d8bb08c9212d43f1f45640"><div>
+          <section class="m-doc-details" id="a04e4e0c7aeb3fa65e7c172323d6de64c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a134d0895c5d8bb08c9212d43f1f45640" class="m-doc-self">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a04e4e0c7aeb3fa65e7c172323d6de64c" class="m-doc-self">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
               const glm::vec3&amp; normal,
-              std::vector&lt;glm::vec3&gt;&amp; outPoints,
-              glm::vec3&amp; outNormal,
+              <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; outPolygon,
               std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
+              std::vector&lt;uint32_t&gt; outAdjacentPlanesIds,
               const glm::mat4&amp; localToWorld,
               float scale)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
@@ -365,16 +363,16 @@
                   <td>The reference normal in world coordinates.</td>
                 </tr>
                 <tr>
-                  <td>outPoints</td>
-                  <td>The points of the resulting face.</td>
-                </tr>
-                <tr>
-                  <td>outNormal</td>
-                  <td>The resulting normal.</td>
+                  <td>outPolygon</td>
+                  <td>The polygon of the resulting face.</td>
                 </tr>
                 <tr>
                   <td>outAdjacentPlanes</td>
                   <td>The resulting adjacent planes (4).</td>
+                </tr>
+                <tr>
+                  <td>outAdjacentPlanesIds</td>
+                  <td>The resulting adjacent planes ids (4).</td>
                 </tr>
                 <tr>
                   <td>localToWorld</td>
