@@ -259,6 +259,7 @@
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">Capsule</a> <span class="m-doc">Represents a capsule or sphere shape.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a> <span class="m-doc">Contains info regarding an intersection between shapes.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a> <span class="m-doc">Represents a plane. Assumes equation: normal.x + normal.y + normal.z + d = 0.</span></li>
+                      <li>struct <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a> <span class="m-doc">Represents a polygonal feature. Used internally for manifold computation.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
@@ -467,6 +468,11 @@
                   </li>
                   <li>struct <a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">Audio</a> <span class="m-doc"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing raw <a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">Audio</a> data.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1AudioBridge.html" class="m-doc">AudioBridge</a> <span class="m-doc">Bridge which loads and saves <a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">Audio</a> assets.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1AudioListener.html" class="m-doc">AudioListener</a> <span class="m-doc">Component which adds an <a href="structcubos_1_1engine_1_1AudioListener.html" class="m-doc">AudioListener</a> to the entitiy.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1AudioPause.html" class="m-doc">AudioPause</a> <span class="m-doc">Component which triggers the pause of an audio source.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1AudioPlay.html" class="m-doc">AudioPlay</a> <span class="m-doc">Component which triggers the play of an audio source.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1AudioSource.html" class="m-doc">AudioSource</a> <span class="m-doc">Component which makes an entity emit sound.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1AudioStop.html" class="m-doc">AudioStop</a> <span class="m-doc">Component which triggers the stop of an audio source.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> <span class="m-doc">Component which stores the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> state for a render target.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> <span class="m-doc">Component which adds a box collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> <span class="m-doc">Generic component to hold the projection matrix of a specific camera (either perspective or orthogonal).</span></li>
@@ -475,6 +481,7 @@
                   <li>struct <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a> <span class="m-doc">Tree relation which indicates the &#x27;from&#x27; entity is a child of the &#x27;to&#x27; entity.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> <span class="m-doc">Component which adds a collider to an entity.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">CollidingWith</a> <span class="m-doc">Relation which represents a collision.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1ContactFeatureId.html" class="m-doc">ContactFeatureId</a> <span class="m-doc">Indicates the type of a geometric feature (vertex, edge, or face) and the feature index. Currently each feature index is simply the index in the array with that information in the shape.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1ContactManifold.html" class="m-doc">ContactManifold</a> <span class="m-doc">Represents a contact interface between two bodies.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1ContactPointData.html" class="m-doc">ContactPointData</a> <span class="m-doc">Contains info regarding a contact point of a @ContactManifold.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> <span class="m-doc">Resource which holds the damping value for integration.</span></li>
@@ -485,8 +492,14 @@
                   <li>struct <a href="structcubos_1_1engine_1_1DrawsTo.html" class="m-doc">DrawsTo</a> <span class="m-doc">Relation which indicates the &#x27;from&#x27; entity is a camera that draws to the &#x27;to&#x27; target.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a> <span class="m-doc">Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> <span class="m-doc">Resource which holds the value of the fixed delta for the fixedStep plugin.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> <span class="m-doc"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing raw font data containing the glyphs and their shape. This is used to create <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> that can be used for rendering text.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> <span class="m-doc">Class that holds all the necessary data about a font atlas. This font atlas represents the texure created from all the different glyphs in a font, that will be then used for drawing the text.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">FontAtlasBridge</a> <span class="m-doc">Bridge which loads <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">FontBridge</a> <span class="m-doc">Bridge which loads <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1FontGlyph.html" class="m-doc">FontGlyph</a> <span class="m-doc">Struct that holds glyph data such as texcoords, position offsets and advance.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a> <span class="m-doc">Component which holds forces applied on a particle.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1FreeCameraController.html" class="m-doc">FreeCameraController</a> <span class="m-doc">Component which moves the camera.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1FXAA.html" class="m-doc">FXAA</a> <span class="m-doc">Component which stores the <a href="structcubos_1_1engine_1_1FXAA.html" class="m-doc">FXAA</a> configuration for a render target.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> <span class="m-doc">Component which stores the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> textures of a render target.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1GBufferRasterizer.html" class="m-doc">GBufferRasterizer</a> <span class="m-doc">Component which stores the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> rasterizer state.</span></li>
                   <li class="m-doc-collapsible collapsed">
@@ -519,6 +532,7 @@
                   <li>struct <a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">PhysicsBundle</a> <span class="m-doc">Component which encapsulates the creation all components required for physics.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">PhysicsMaterial</a> <span class="m-doc">Component which defines the friction and bounciness of a body.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a> <span class="m-doc">Component which makes an entity behave like a point light.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1PointShadowAtlas.html" class="m-doc">PointShadowAtlas</a> <span class="m-doc">Resource which stores the shadow map atlas for point lights, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1PointShadowCaster.html" class="m-doc">PointShadowCaster</a> <span class="m-doc">Component which enables shadow casting on a point light.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> <span class="m-doc">Component which assigns a position to an entity.</span></li>
                   <li class="m-doc-collapsible collapsed">
@@ -551,16 +565,13 @@
                   <li>class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores settings as key-value pairs and provides methods to retrieve them.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Contains a shader stage created from GLSL code.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1ShaderBridge.html" class="m-doc">ShaderBridge</a> <span class="m-doc">Bridge for loading shader assets.</span></li>
-                  <li class="m-doc-collapsible collapsed">
-                    <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a> <span class="m-doc">Resource which stores the shadow map atlas, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</span>
-                    <ul class="m-doc">
-                      <li>struct <a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a> <span class="m-doc"><a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a> for a shadow map in the shadow atlas.</span></li>
-                    </ul>
-                  </li>
-                  <li>struct <a href="structcubos_1_1engine_1_1ShadowAtlasRasterizer.html" class="m-doc">ShadowAtlasRasterizer</a> <span class="m-doc">Resource which stores the <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a> rasterizer state.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1ShadowAtlasRasterizer.html" class="m-doc">ShadowAtlasRasterizer</a> <span class="m-doc">Resource which stores the ShadowAtlas rasterizer state.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1ShadowCaster.html" class="m-doc">ShadowCaster</a> <span class="m-doc">Struct which contains the settings common to all shadow casters.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1ShadowMapSlot.html" class="m-doc">ShadowMapSlot</a> <span class="m-doc">Slot for a shadow map in the shadow atlas.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1SolverConstants.html" class="m-doc">SolverConstants</a> <span class="m-doc">Resource which allows configuration over constants in the solver plugin.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1SplitScreen.html" class="m-doc">SplitScreen</a> <span class="m-doc">Component which enables splitscreen in a render target.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a> <span class="m-doc">Component which makes an entity emit a spot light in the direction of its local forward vector.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1SpotShadowAtlas.html" class="m-doc">SpotShadowAtlas</a> <span class="m-doc">Resource which stores the shadow map atlas for spot lights, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1SpotShadowCaster.html" class="m-doc">SpotShadowCaster</a> <span class="m-doc">Component which enables shadow casting on a spot light.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> <span class="m-doc">Component which stores the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> textures for a render target.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1ToneMapping.html" class="m-doc">ToneMapping</a> <span class="m-doc">Component which stores Tone Mapping configuration for a render target.</span></li>
@@ -585,6 +596,8 @@
                   <li>struct <a href="structcubos_1_1engine_1_1UIMatchHeight.html" class="m-doc">UIMatchHeight</a> <span class="m-doc">Component which makes a UI canvas scale to maintain vertical proportions.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1UIMatchWidth.html" class="m-doc">UIMatchWidth</a> <span class="m-doc">Component which makes a UI canvas scale to maintain horizontal proportions.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1UINativeAspectRatio.html" class="m-doc">UINativeAspectRatio</a> <span class="m-doc">Component which makes a UI element keep the aspect ratio of its source.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1UIText.html" class="m-doc">UIText</a> <span class="m-doc">Component used to draw text on the UI.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1UITextStretch.html" class="m-doc">UITextStretch</a> <span class="m-doc">Component which makes a UI element fit the text it has.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1UIVerticalStretch.html" class="m-doc">UIVerticalStretch</a> <span class="m-doc">Component which makes a UI element fit vertically to its parent.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a> <span class="m-doc">Component which holds velocity and forces applied on a particle.</span></li>
                   <li class="m-doc-collapsible collapsed">

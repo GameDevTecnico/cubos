@@ -88,9 +88,11 @@
             <a href="#" onclick="return toggle(this)">module</a> <a href="group__engine.html" class="m-doc">Engine</a> <span class="m-doc"><strong>Cubos</strong> engine library.</span>
             <ul class="m-doc">
               <li>module <a href="group__assets-plugin.html" class="m-doc">Assets</a> <span class="m-doc">Adds asset management to <strong>Cubos</strong>.</span></li>
+              <li>module <a href="group__audio-plugin.html" class="m-doc">Audio</a> <span class="m-doc">Adds audio to <strong>Cubos</strong>.</span></li>
               <li>module <a href="group__collisions-plugin.html" class="m-doc">Collisions</a> <span class="m-doc">Adds collision detection to <strong>Cubos</strong>.</span></li>
               <li>module <a href="group__defaults-plugin.html" class="m-doc">Defaults</a> <span class="m-doc">Adds a series of pre-configured essential plugins to the engine.</span></li>
               <li>module <a href="group__fixed-step-plugin.html" class="m-doc">Fixed Time Step</a> <span class="m-doc">Adds a tag which makes its systems run at a fixed frame rate.</span></li>
+              <li>module <a href="group__font-plugin.html" class="m-doc">Font</a> <span class="m-doc">Adds fonts to <strong>Cubos</strong> using msdfgen.</span></li>
               <li>module <a href="group__gizmos-plugin.html" class="m-doc">Gizmos</a> <span class="m-doc">Used to draw gizmos helpful for debugging and tools.</span></li>
               <li>module <a href="group__image-plugin.html" class="m-doc">Image</a> <span class="m-doc">Adds images to <strong>Cubos</strong> using stb_image.</span></li>
               <li>module <a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a> <span class="m-doc">Initializes and configures ImGui for <strong>Cubos</strong>.</span></li>
@@ -108,8 +110,6 @@
                 <ul class="m-doc">
                   <li>module <a href="group__render-bloom-plugin.html" class="m-doc">Bloom</a> <span class="m-doc">Applies the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> effect on the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</span></li>
                   <li>module <a href="group__render-camera-plugin.html" class="m-doc">Camera</a> <span class="m-doc">Adds <a href="structcubos_1_1engine_1_1PerspectiveCamera.html" class="m-doc">PerspectiveCamera</a> components and the <a href="structcubos_1_1engine_1_1DrawsTo.html" class="m-doc">DrawsTo</a> relation.</span></li>
-                  <li>module <a href="group__render-cascaded-shadow-maps-plugin.html" class="m-doc">Cascaded shadow maps</a> <span class="m-doc">Creates and manages shadow maps for directional shadow casters.</span></li>
-                  <li>module <a href="group__render-cascaded-shadow-maps-rasterizer-plugin.html" class="m-doc">Cascaded shadow maps rasterizer</a> <span class="m-doc">Draws all render meshes for each directional light to its shadow map.</span></li>
                   <li>module <a href="group__render-deferred-shading-plugin.html" class="m-doc">Deferred Shading</a> <span class="m-doc">Applies the Deferred Shading technique on the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> and outputs the result to the <a href="structcubos_1_1engine_1_1HDR.html" class="m-doc">HDR</a> texture.</span></li>
                   <li>module <a href="group__render-depth-plugin.html" class="m-doc">Depth</a> <span class="m-doc">Adds and manages the <a href="structcubos_1_1engine_1_1RenderDepth.html" class="m-doc">RenderDepth</a> component.</span></li>
                   <li>module <a href="group__render-g-buffer-plugin.html" class="m-doc">G-Buffer</a> <span class="m-doc">Adds and manages <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> components.</span></li>
@@ -119,9 +119,16 @@
                   <li>module <a href="group__render-mesh-plugin.html" class="m-doc">Mesh</a> <span class="m-doc">Adds and manages <a href="structcubos_1_1engine_1_1RenderMesh.html" class="m-doc">RenderMesh</a> components.</span></li>
                   <li>module <a href="group__render-picker-plugin.html" class="m-doc">RenderPicker</a> <span class="m-doc">Adds and manages <a href="structcubos_1_1engine_1_1RenderPicker.html" class="m-doc">RenderPicker</a> components.</span></li>
                   <li>module <a href="group__render-shader-plugin.html" class="m-doc">Shader</a> <span class="m-doc">Adds shader assets to <strong>Cubos</strong>.</span></li>
-                  <li>module <a href="group__render-shadow-atlas-plugin.html" class="m-doc">Shadow atlas</a> <span class="m-doc">Creates and manages a shadow map atlas.</span></li>
-                  <li>module <a href="group__render-shadow-atlas-rasterizer-plugin.html" class="m-doc">Shadow atlas rasterizer</a> <span class="m-doc">Draws all render meshes for each light to the shadow map atlas.</span></li>
-                  <li>module <a href="group__render-shadows-plugin.html" class="m-doc">Shadows</a> <span class="m-doc">Base interface plugin for shadows.</span></li>
+                  <li class="m-doc-collapsible">
+                    <a href="#" onclick="return toggle(this)">module</a> <a href="group__render-shadows-plugins.html" class="m-doc">Shadows</a> <span class="m-doc">Provides plugins for rendering shadows.</span>
+                    <ul class="m-doc">
+                      <li>module <a href="group__render-shadow-atlas-plugin.html" class="m-doc">Shadow atlas</a> <span class="m-doc">Creates and manages shadow map atlases.</span></li>
+                      <li>module <a href="group__render-shadow-atlas-rasterizer-plugin.html" class="m-doc">Shadow atlas rasterizer</a> <span class="m-doc">Draws all render meshes for each light to the shadow map atlas.</span></li>
+                      <li>module <a href="group__render-cascaded-shadow-maps-plugin.html" class="m-doc">Cascaded shadow maps</a> <span class="m-doc">Creates and manages shadow maps for directional shadow casters.</span></li>
+                      <li>module <a href="group__render-cascaded-shadow-maps-rasterizer-plugin.html" class="m-doc">Cascaded shadow maps rasterizer</a> <span class="m-doc">Draws all render meshes for each directional light to its shadow map.</span></li>
+                      <li>module <a href="group__render-shadow-casters-plugin.html" class="m-doc">Shadow casters</a> <span class="m-doc">Base interface plugin for shadows.</span></li>
+                    </ul>
+                  </li>
                   <li>module <a href="group__render-split-screen-plugin.html" class="m-doc">Splitscreen</a> <span class="m-doc">Adjusts the viewport in <a href="structcubos_1_1engine_1_1DrawsTo.html" class="m-doc">DrawsTo</a> relations to achieve a splitscreen layout.</span></li>
                   <li>module <a href="group__render-ssao-plugin.html" class="m-doc">Screen Space Ambient Occlusion</a> <span class="m-doc">Applies the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> technique on the <a href="structcubos_1_1engine_1_1GBuffer.html" class="m-doc">GBuffer</a> and outputs the result to the <a href="structcubos_1_1engine_1_1SSAO.html" class="m-doc">SSAO</a> texture.</span></li>
                   <li>module <a href="group__render-target-plugin.html" class="m-doc">Render Target</a> <span class="m-doc">Adds and manages <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a> components.</span></li>
@@ -155,6 +162,7 @@
                   <li>module <a href="group__ui-canvas-plugin.html" class="m-doc">Canvas</a> <span class="m-doc">Adds the core UI functionality and rendering logic.</span></li>
                   <li>module <a href="group__ui-color-rect-plugin.html" class="m-doc">Color Rect</a> <span class="m-doc">Adds color rectangle elements.</span></li>
                   <li>module <a href="group__ui-image-plugin.html" class="m-doc">Color Rect</a> <span class="m-doc">Adds image element to UI.</span></li>
+                  <li>module <a href="group__ui-text-plugin.html" class="m-doc">Ui-text-plugin</a> <span class="m-doc">Adds text element to UI.</span></li>
                 </ul>
               </li>
               <li>module <a href="group__free-camera-plugin.html" class="m-doc">Free Camera</a> <span class="m-doc">Adds the free camera controller component, which locks the mouse and moves an entity.</span></li>

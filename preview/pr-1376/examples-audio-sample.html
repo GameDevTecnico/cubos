@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/render/shadow_atlas/shadow_atlas.hpp file | Cubos Docs</title>
+  <title>Audio | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,43 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_13f5e2b140054f355a8f8a8c95923a6a.html">render</a>/</span><span class="m-breadcrumb"><a href="dir_813047b950d372893fd1f8cd570e3b39.html">shadow_atlas</a>/</span>shadow_atlas.hpp <span class="m-thin">file</span>
+          Audio
         </h1>
-        <p>Resource <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">cubos::<wbr />engine::<wbr />ShadowAtlas</a>.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
-          <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>Cubos</strong> libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
-            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">cubos::engine::ShadowAtlas</a>
-            </dt>
-            <dd>Resource which stores the shadow map atlas, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">cubos::engine::ShadowAtlas::Slot</a>
-            </dt>
-            <dd><a href="structcubos_1_1engine_1_1ShadowAtlas_1_1Slot.html" class="m-doc">Slot</a> for a shadow map in the shadow atlas.</dd>
-          </dl>
-        </section>
+        <p>Using the <a href="group__audio-plugin.html" class="m-doc">Audio</a> plugin.</p>
+<p><a name="md_audio_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/audio">here</a></p></aside><p>This sample shows how the <a href="group__audio-plugin.html" class="m-doc">Audio</a> can be used to load audio samples and interact with them, using all supported file formats.</p><p>Let&#x27;s start by creating a Listener (represented through the camera).</p><pre class="m-code"></pre><p>In order to produce sound, we also need to create an AudioSource.</p><pre class="m-code"></pre><p>How does this source know what to play? You can assign any audio asset, as long as in the supported format, to the AudioSource component.</p><pre class="m-code"></pre><p>We add a system which cycles through 3 assets and allows to play/pause and stop them through user input.</p><p>The way we signal cubos to play, pause and stop an asset is through the use of the <code>AudioPlay</code>, <code>AudioPause</code>, and <code>AudioStop</code> components; just add them and the actions should happen immediatly.</p><pre class="m-code"></pre><p>That way, using our selected inputs, if you press <code>Enter</code>, you will skip to the next asset; <code>Spacebar</code> will play or pause the asset; and pressing <code>Backspace</code> will stop the current audio asset.</p><p>You can play around with the audio samples and listen to each one using the plugin!</p>
       </div>
     </div>
   </div>

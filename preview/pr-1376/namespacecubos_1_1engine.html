@@ -105,6 +105,26 @@
             </dt>
             <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Audio.html" class="m-doc">Audio</a> assets.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1AudioListener.html" class="m-doc">AudioListener</a>
+            </dt>
+            <dd>Component which adds an <a href="structcubos_1_1engine_1_1AudioListener.html" class="m-doc">AudioListener</a> to the entitiy.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1AudioPause.html" class="m-doc">AudioPause</a>
+            </dt>
+            <dd>Component which triggers the pause of an audio source.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1AudioPlay.html" class="m-doc">AudioPlay</a>
+            </dt>
+            <dd>Component which triggers the play of an audio source.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1AudioSource.html" class="m-doc">AudioSource</a>
+            </dt>
+            <dd>Component which makes an entity emit sound.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1AudioStop.html" class="m-doc">AudioStop</a>
+            </dt>
+            <dd>Component which triggers the stop of an audio source.</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a>
             </dt>
             <dd>Component which adds a collider to an entity.</dd>
@@ -112,6 +132,10 @@
               struct <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">CollidingWith</a>
             </dt>
             <dd>Relation which represents a collision.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1ContactFeatureId.html" class="m-doc">ContactFeatureId</a>
+            </dt>
+            <dd>Indicates the type of a geometric feature (vertex, edge, or face) and the feature index. Currently each feature index is simply the index in the array with that information in the shape.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1ContactPointData.html" class="m-doc">ContactPointData</a>
             </dt>
@@ -140,6 +164,26 @@
               struct <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a>
             </dt>
             <dd>Resource which holds the value of the fixed delta for the fixedStep plugin.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a>
+            </dt>
+            <dd>Class that holds all the necessary data about a font atlas. This font atlas represents the texure created from all the different glyphs in a font, that will be then used for drawing the text.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FontAtlasBridge.html" class="m-doc">FontAtlasBridge</a>
+            </dt>
+            <dd>Bridge which loads <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> assets.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FontGlyph.html" class="m-doc">FontGlyph</a>
+            </dt>
+            <dd>Struct that holds glyph data such as texcoords, position offsets and advance.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FontBridge.html" class="m-doc">FontBridge</a>
+            </dt>
+            <dd>Bridge which loads <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a> assets.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Font.html" class="m-doc">Font</a>
+            </dt>
+            <dd><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> containing raw font data containing the glyphs and their shape. This is used to create <a href="classcubos_1_1engine_1_1FontAtlas.html" class="m-doc">FontAtlas</a> that can be used for rendering text.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a>
             </dt>
@@ -245,6 +289,10 @@
             </dt>
             <dd>Resource which holds the global value of gravity.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1SolverConstants.html" class="m-doc">SolverConstants</a>
+            </dt>
+            <dd>Resource which allows configuration over constants in the solver plugin.</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a>
             </dt>
             <dd>Component which stores the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> state for a render target.</dd>
@@ -329,13 +377,21 @@
             </dt>
             <dd>Contains a shader stage created from GLSL code.</dd>
             <dt>
-              class <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a>
+              class <a href="classcubos_1_1engine_1_1PointShadowAtlas.html" class="m-doc">PointShadowAtlas</a>
             </dt>
-            <dd>Resource which stores the shadow map atlas, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</dd>
+            <dd>Resource which stores the shadow map atlas for point lights, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1ShadowMapSlot.html" class="m-doc">ShadowMapSlot</a>
+            </dt>
+            <dd>Slot for a shadow map in the shadow atlas.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1SpotShadowAtlas.html" class="m-doc">SpotShadowAtlas</a>
+            </dt>
+            <dd>Resource which stores the shadow map atlas for spot lights, a large texture that holds the shadow maps for each shadow caster in a quadtree structure, reducing texture switching.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1ShadowAtlasRasterizer.html" class="m-doc">ShadowAtlasRasterizer</a>
             </dt>
-            <dd>Resource which stores the <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a> rasterizer state.</dd>
+            <dd>Resource which stores the ShadowAtlas rasterizer state.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1ShadowCaster.html" class="m-doc">ShadowCaster</a>
             </dt>
@@ -364,6 +420,10 @@
               struct <a href="structcubos_1_1engine_1_1RenderTarget.html" class="m-doc">RenderTarget</a>
             </dt>
             <dd>Component which represents a render target.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FXAA.html" class="m-doc">FXAA</a>
+            </dt>
+            <dd>Component which stores the <a href="structcubos_1_1engine_1_1FXAA.html" class="m-doc">FXAA</a> configuration for a render target.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1ToneMapping.html" class="m-doc">ToneMapping</a>
             </dt>
@@ -472,6 +532,14 @@
               struct <a href="structcubos_1_1engine_1_1UIImage.html" class="m-doc">UIImage</a>
             </dt>
             <dd>Component used to draw images on the UI.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UIText.html" class="m-doc">UIText</a>
+            </dt>
+            <dd>Component used to draw text on the UI.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1UITextStretch.html" class="m-doc">UITextStretch</a>
+            </dt>
+            <dd>Component which makes a UI element fit the text it has.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1FreeCameraController.html" class="m-doc">FreeCameraController</a>
             </dt>
@@ -589,6 +657,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__assets-plugin.html#ga9cfeb2b776aa2066c1310b8bc119beec" class="m-doc">audioPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__collisions-plugin.html#gaba0729a65395f1f505cf229d85c1c9b9" class="m-doc">collisionsPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -598,6 +670,10 @@
             <dd>Plugin entry function.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__fixed-step-plugin.html#ga98331d506cbd48c4baaec28b89f6b498" class="m-doc">fixedStepPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__font-plugin.html#gaac7e6f56482136a66f22c9deb27054a7" class="m-doc">fontPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -634,14 +710,6 @@
             <dd>Plugin entry function.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__render-camera-plugin.html#ga8392a29879b80ce3ca7d324e33a3e774" class="m-doc">cameraPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__render-cascaded-shadow-maps-plugin.html#ga12c02c1502a578b3b606951ec534d622" class="m-doc">cascadedShadowMapsPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__render-cascaded-shadow-maps-rasterizer-plugin.html#gae3546a552b4f1e0efaab5b4c316c75cd" class="m-doc">cascadedShadowMapsRasterizerPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -693,7 +761,15 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__render-shadows-plugin.html#ga1d49dd93ccdc8d8709238e099961c822" class="m-doc">shadowsPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__render-cascaded-shadow-maps-plugin.html#ga12c02c1502a578b3b606951ec534d622" class="m-doc">cascadedShadowMapsPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__render-cascaded-shadow-maps-rasterizer-plugin.html#gae3546a552b4f1e0efaab5b4c316c75cd" class="m-doc">cascadedShadowMapsRasterizerPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__render-shadow-casters-plugin.html#ga63a8c9feda4c2db01d7f7f6e781d1de4" class="m-doc">shadowCastersPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
@@ -793,6 +869,10 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__ui-text-plugin.html#ga11d36a423fa6b10d930a36e5fa93efbf" class="m-doc">uiTextPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__free-camera-plugin.html#gaebd645bb5d39017763d6b91157532430" class="m-doc">freeCameraPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -825,6 +905,14 @@
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a94b258d6ee1c588f3ae6ffd0dff8eec8" class="m-doc">assetsTag</a>
             </dt>
             <dd>Startup systems which load assets should be tagged with this.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#afa38b2cdc3255e9066dcffc196cd2053" class="m-doc">audioInitTag</a>
+            </dt>
+            <dd>Initializes the audio context (after <a href="#a6a8999b41ddd30683eb9669015296699" class="m-doc">settingsTag</a>).</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a9fc9dbfd2ad59ae34e7366d2a684e7a2" class="m-doc">audioStateInitTag</a>
+            </dt>
+            <dd>Initializes the audio state (after <a href="#afa38b2cdc3255e9066dcffc196cd2053" class="m-doc">audioInitTag</a>).</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="#a9e4ab955787e8d1b8f9770b2a9c8e5c6" class="m-doc">collisionsTag</a>
             </dt>
@@ -874,14 +962,6 @@
             </dt>
             <dd>Tags the system which applies the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> effect.</dd>
             <dt>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-cascaded-shadow-maps-plugin.html#gade5456d477ade37c7e55f611f69515c3" class="m-doc">createCascadedShadowMapsTag</a>
-            </dt>
-            <dd>Creates the shadow maps.</dd>
-            <dt>
-              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-cascaded-shadow-maps-plugin.html#ga53b480ef60355dfb80d11949f3b82281" class="m-doc">drawToCascadedShadowMapsTag</a>
-            </dt>
-            <dd>Systems which draw to the cascaded shadow maps should be tagged with this.</dd>
-            <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-deferred-shading-plugin.html#ga7e9a8c09ce18d6905140f0b920be5437" class="m-doc">deferredShadingTag</a>
             </dt>
             <dd>Tags the system which applies the Deferred Shading technique.</dd>
@@ -928,7 +1008,7 @@
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-shadow-atlas-plugin.html#ga8da37b5203432183347b0886ab935326" class="m-doc">createShadowAtlasTag</a>
             </dt>
-            <dd>Creates the shadow atlas.</dd>
+            <dd>Creates the shadow atlases.</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-shadow-atlas-plugin.html#gaf42ecd1d50d9e3473cfc92d0b05cb70d" class="m-doc">reserveShadowCastersTag</a>
             </dt>
@@ -936,7 +1016,15 @@
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-shadow-atlas-plugin.html#ga23dfaa7469e7e281740d66d3469ac93e" class="m-doc">drawToShadowAtlasTag</a>
             </dt>
-            <dd>Systems which draw to the shadow atlas texture should be tagged with this.</dd>
+            <dd>Systems which draw to the shadow atlas textures should be tagged with this.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-cascaded-shadow-maps-plugin.html#gade5456d477ade37c7e55f611f69515c3" class="m-doc">createCascadedShadowMapsTag</a>
+            </dt>
+            <dd>Creates the shadow maps.</dd>
+            <dt>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-cascaded-shadow-maps-plugin.html#ga53b480ef60355dfb80d11949f3b82281" class="m-doc">drawToCascadedShadowMapsTag</a>
+            </dt>
+            <dd>Systems which draw to the cascaded shadow maps should be tagged with this.</dd>
             <dt>
               <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> <a href="group__render-split-screen-plugin.html#ga189cfb960564374eac457929128427eb" class="m-doc">splitScreenTag</a>
             </dt>
@@ -1184,6 +1272,20 @@
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2assets_2plugin_8hpp.html">&lt;engine/assets/plugin.hpp&gt;</a></div>
             </h3>
             <p>Startup systems which load assets should be tagged with this.</p>
+          </div></section>
+          <section class="m-doc-details" id="afa38b2cdc3255e9066dcffc196cd2053"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#afa38b2cdc3255e9066dcffc196cd2053" class="m-doc-self">audioInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2audio_2plugin_8hpp.html">&lt;engine/audio/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Initializes the audio context (after <a href="#a6a8999b41ddd30683eb9669015296699" class="m-doc">settingsTag</a>).</p>
+          </div></section>
+          <section class="m-doc-details" id="a9fc9dbfd2ad59ae34e7366d2a684e7a2"><div>
+            <h3>
+              <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> <a href="#a47b73d9ba7e1e1d8e047199c0c29bfd1" class="m-doc">Tag</a> cubos::<wbr />engine::<wbr /><a href="#a9fc9dbfd2ad59ae34e7366d2a684e7a2" class="m-doc-self">audioStateInitTag</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2audio_2plugin_8hpp.html">&lt;engine/audio/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Initializes the audio state (after <a href="#afa38b2cdc3255e9066dcffc196cd2053" class="m-doc">audioInitTag</a>).</p>
           </div></section>
           <section class="m-doc-details" id="a9e4ab955787e8d1b8f9770b2a9c8e5c6"><div>
             <h3>
