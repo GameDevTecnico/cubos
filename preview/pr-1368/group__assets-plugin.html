@@ -53,9 +53,8 @@
           <h3>Contents</h3>
           <ul>
             <li><a href="#autotoc_md66">Settings</a></li>
-            <li><a href="#autotoc_md67">Events</a></li>
-            <li><a href="#autotoc_md68">Resources</a></li>
-            <li><a href="#autotoc_md69">Dependencies</a></li>
+            <li><a href="#autotoc_md67">Resources</a></li>
+            <li><a href="#autotoc_md68">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -67,7 +66,7 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md66"><h3><a href="#autotoc_md66">Settings</a></h3><ul><li><code>assets.io.enabled</code> - whether asset I/O should be done (default: <code>true</code>).</li><li><code>assets.io.path</code> - path to the assets directory - will be mounted to <code>/assets/</code> (default: <code>assets/</code>).</li><li><code>assets.io.readOnly</code> - if true, the assets directory will be mounted as read-only (default: <code>true</code>).</li></ul></section><section id="autotoc_md67"><h3><a href="#autotoc_md67">Events</a></h3><ul><li>AssetEvent - (TODO) emitted when an asset is either loaded, modified or unloaded.</li></ul></section><section id="autotoc_md68"><h3><a href="#autotoc_md68">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> - the asset manager, used to access asset data.</li></ul></section><section id="autotoc_md69"><h3><a href="#autotoc_md69">Dependencies</a></h3><ul><li><a href="group__settings-plugin.html" class="m-doc">Settings</a></li></ul></section>
+<section id="autotoc_md66"><h3><a href="#autotoc_md66">Settings</a></h3><ul><li><code>assets.app.osPath</code> - path to the application assets directory - will be mounted to `/assets/. If empty (default), no archive is mounted, and the user is responsible for mounting one.</li><li><code>assets.app.readOnly</code> - whether the mounted archive, if any, should be read-only. Default is <code>true</code>.</li><li><code>assets.builtin.osPath</code> - path to the builtin assets directory - will be mounted to <code>/builtin/</code>. If empty (default), no archive is mounted, and the user is responsible for mounting one.</li></ul></section><section id="autotoc_md67"><h3><a href="#autotoc_md67">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> - the asset manager, used to access asset data.</li></ul></section><section id="autotoc_md68"><h3><a href="#autotoc_md68">Dependencies</a></h3><ul><li><a href="group__settings-plugin.html" class="m-doc">Settings</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -152,6 +151,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#ga54060a0615c9d9248131073431910492" class="m-doc">assetsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga9cfeb2b776aa2066c1310b8bc119beec" class="m-doc">audioPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
@@ -219,6 +222,24 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga54060a0615c9d9248131073431910492" class="m-doc-self">assetsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2assets_2plugin_8hpp.html">&lt;engine/assets/plugin.hpp&gt;</a></div>
+            </h3>
+            <p>Plugin entry function.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cubos</td>
+                  <td><strong>Cubos</strong> main class.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga9cfeb2b776aa2066c1310b8bc119beec"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga9cfeb2b776aa2066c1310b8bc119beec" class="m-doc-self">audioPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2audio_2plugin_8hpp.html">&lt;engine/audio/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
