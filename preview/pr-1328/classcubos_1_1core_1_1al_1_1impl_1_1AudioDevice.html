@@ -81,7 +81,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a9ce71588ad64246b8112ff7093af38f8" class="m-doc">listener</a>(</span><span class="m-doc-wrap">size_t index) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Listener.html" class="m-doc">impl::<wbr />Listener</a>&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Creates a new audio listener.</dd>
+            <dd>Gets the listener with the specific index.</dd>
           </dl>
         </section>
         <section>
@@ -104,12 +104,21 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1al_1_1impl_1_1Listener.html" class="m-doc">impl::<wbr />Listener</a>&gt; cubos::<wbr />core::<wbr />al::<wbr />impl::<wbr />AudioDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ce71588ad64246b8112ff7093af38f8" class="m-doc-self">listener</a>(</span><span class="m-doc-wrap">size_t index) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
-            <p>Creates a new audio listener.</p>
+            <p>Gets the listener with the specific index.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the listener.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Handle of the new listener.</td>
+                  <th>Returns</th>
+                  <td>Handle of the listener.</td>
                 </tr>
               </tfoot>
             </table>

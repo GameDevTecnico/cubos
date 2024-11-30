@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Render &raquo; Shadow atlas rasterizer module | Cubos Docs</title>
+  <title>Engine &raquo; Render &raquo; Shadows &raquo; Shadow atlas rasterizer module | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -48,12 +48,13 @@
         <h1>
           <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
           <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__render-shadows-plugins.html">Shadows</a> &raquo;</span>
           Shadow atlas rasterizer <span class="m-thin">module</span></h1>
         <p>Draws all render meshes for each light to the shadow map atlas.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md102">Dependencies</a></li>
+            <li><a href="#autotoc_md104">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -64,14 +65,14 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md102"><h3><a href="#autotoc_md102">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li><li>lights-plugin</li><li><a href="group__render-shadow-atlas-plugin.html" class="m-doc">Shadow atlas</a></li><li><a href="group__render-shadows-plugin.html" class="m-doc">Shadows</a></li><li><a href="group__render-mesh-plugin.html" class="m-doc">Mesh</a></li><li><a href="group__render-voxels-plugin.html" class="m-doc">Render Voxels</a></li></ul></section>
+<section id="autotoc_md104"><h3><a href="#autotoc_md104">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li><li>lights-plugin</li><li><a href="group__render-shadow-atlas-plugin.html" class="m-doc">Shadow atlas</a></li><li><a href="group__render-shadow-casters-plugin.html" class="m-doc">Shadow casters</a></li><li><a href="group__render-mesh-plugin.html" class="m-doc">Mesh</a></li><li><a href="group__render-voxels-plugin.html" class="m-doc">Render Voxels</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="engine_2include_2cubos_2engine_2render_2shadow__atlas__rasterizer_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="shadow__atlas__rasterizer_8hpp.html" class="m-doc">shadow_atlas_rasterizer.hpp</a></dt>
+            <dt>file <a href="atlas__rasterizer_8hpp.html" class="m-doc">atlas_rasterizer.hpp</a></dt>
             <dd>Resource <a href="structcubos_1_1engine_1_1ShadowAtlasRasterizer.html" class="m-doc">cubos::<wbr />engine::<wbr />ShadowAtlasRasterizer</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2render_2shadows_2atlas__rasterizer_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -80,7 +81,7 @@
             <dt>
               struct <a href="structcubos_1_1engine_1_1ShadowAtlasRasterizer.html" class="m-doc">cubos::engine::ShadowAtlasRasterizer</a>
             </dt>
-            <dd>Resource which stores the <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a> rasterizer state.</dd>
+            <dd>Resource which stores the ShadowAtlas rasterizer state.</dd>
           </dl>
         </section>
         <section id="func-members">
@@ -97,7 +98,7 @@
           <section class="m-doc-details" id="gaeb012badab025ff0880e6d4b56203d41"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaeb012badab025ff0880e6d4b56203d41" class="m-doc-self">shadowAtlasRasterizerPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadow__atlas__rasterizer_2plugin_8hpp.html">&lt;engine/render/shadow_atlas_rasterizer/plugin.hpp&gt;</a></div>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2shadows_2atlas__rasterizer_2plugin_8hpp.html">&lt;engine/render/shadows/atlas_rasterizer/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
