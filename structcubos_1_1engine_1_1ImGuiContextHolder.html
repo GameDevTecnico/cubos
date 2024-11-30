@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/imgui/ directory | Cubos Docs</title>
+  <title>cubos::engine::ImGuiContextHolder struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,31 +46,29 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span>imgui<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ImGuiContextHolder <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="context_8hpp.html">&lt;engine/imgui/context.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a> ImGui plugin directory.</p>
+        <p>Resource which stores a pointer to the ImGui context created by the ImGui plugin.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+<p>This resource is inserted by the <a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a> during <a href="namespacecubos_1_1engine.html#a37ed0f6d79db09ced330739db00bd85d" class="m-doc">imguiInitTag</a>.</p><p>When linking dynamically the engine library from an application or another library, although this plugin initializes the context, it might not be set automatically on the client side - particularly, this happens on Windows, as global variables are not shared between DLLs and applications.</p><p>So, if you&#x27;re using ImGui in your application or library, to ensure dynamic linking capability in all platforms, you should call <code>ImGui::SetCurrentContext(ImGuiContextHolder::context)</code> before using any ImGui functions.</p><p>This resource is not named ImGuiContext because ImGui already has a type with that name.</p>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="context_8hpp.html" class="m-doc">context.hpp</a></dt>
-            <dd>Resource <a href="structcubos_1_1engine_1_1ImGuiContextHolder.html" class="m-doc">cubos::<wbr />engine::<wbr />ImGuiContextHolder</a>.</dd>
-            <dt>file <a href="data__inspector_8hpp.html" class="m-doc">data_inspector.hpp</a></dt>
-            <dd>Resource <a href="classcubos_1_1engine_1_1DataInspector.html" class="m-doc">cubos::<wbr />engine::<wbr />DataInspector</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2imgui_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="imgui_2target_8hpp.html" class="m-doc">target.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1ImGuiTarget.html" class="m-doc">cubos::<wbr />engine::<wbr />ImGuiTarget</a>.</dd>
+            <dt id="a8c3a4ec16115dbc0defcbb560289259a">
+              ImGuiContext* <a href="#a8c3a4ec16115dbc0defcbb560289259a" class="m-doc-self">context</a>
+            </dt>
+            <dd>Pointer to the ImGui context.</dd>
           </dl>
         </section>
       </div>
