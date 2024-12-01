@@ -2,8 +2,8 @@
 # Core samples build configuration
 
 
-# Macro used to reduce the boilerplate code
-macro(make_sample)
+# Function used to reduce the boilerplate code
+function(make_sample)
     set(oneValueArgs DIR)
     set(multiValueArgs SOURCES)
     cmake_parse_arguments(MAKE_SAMPLE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -24,7 +24,7 @@ macro(make_sample)
     add_executable(${target} ${sources})
     target_link_libraries(${target} cubos::core)
     cubos_common_target_options(${target})
-endmacro()
+endfunction()
 
 make_sample(DIR "tel/logging")
 make_sample(DIR "tel/metrics")
