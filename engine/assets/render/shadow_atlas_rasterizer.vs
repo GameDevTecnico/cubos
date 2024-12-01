@@ -1,11 +1,11 @@
 in uvec3 position;
 
-uniform PerScene
+layout(std140) uniform PerScene
 {
     mat4 lightViewProj;
 };
 
-uniform PerMesh
+layout(std140) uniform PerMesh
 {
     mat4 model;
 };

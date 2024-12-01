@@ -20,8 +20,8 @@ namespace cubos::engine
         /// @brief Framebuffer used by the rasterizer to render to the spot shadow atlas.
         core::gl::Framebuffer spotAtlasFramebuffer{nullptr};
 
-        /// @brief Framebuffer used by the rasterizer to render to the point shadow atlas.
-        core::gl::Framebuffer pointAtlasFramebuffer{nullptr};
+        /// @brief Framebuffers used by the rasterizer to render to each face of the point shadow atlas.
+        core::gl::Framebuffer pointAtlasFramebuffer[6]{};
 
         /// @brief Atlas texture stored to check if the spot atlas framebuffer needs to be recreated.
         core::gl::Texture2D spotAtlas{nullptr};

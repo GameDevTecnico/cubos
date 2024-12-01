@@ -102,7 +102,10 @@ void cubos::engine::shadowAtlasPlugin(Cubos& cubos)
 
             // New frame, hint that the shadow atlas texture needs to be cleared.
             spotAtlas.cleared = false;
-            pointAtlas.cleared = false;
+            for (auto& cleared : pointAtlas.cleared)
+            {
+                cleared = false;
+            }
         });
 
     cubos.system("reserve space for shadow casters")

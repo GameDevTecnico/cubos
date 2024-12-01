@@ -1,6 +1,5 @@
 #include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
-#include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/render/shadows/atlas/point_atlas.hpp>
 
@@ -12,7 +11,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::PointShadowAtlas)
 {
     return core::ecs::TypeBuilder<PointShadowAtlas>("cubos::engine::PointShadowAtlas")
         .withField("configSize", &PointShadowAtlas::configSize)
-        .withField("cleared", &PointShadowAtlas::cleared)
         .build();
 }
 
