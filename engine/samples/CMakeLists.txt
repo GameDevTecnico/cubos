@@ -1,8 +1,8 @@
 # engine/samples/CMakeLists.txt
 # Engine samples build configuration
 
-# Macro used to reduce the boilerplate code
-macro(make_sample)
+# Function used to reduce the boilerplate code
+function(make_sample)
     set(options COMPONENTS ASSETS NO_WEB)
     set(oneValueArgs DIR)
     set(multiValueArgs SOURCES)
@@ -47,7 +47,8 @@ macro(make_sample)
         )
       endif()
     endif()
-endmacro()
+endfunction()
+
 # Add samples
 make_sample(DIR "audio" ASSETS)
 make_sample(DIR "hello-cubos")
