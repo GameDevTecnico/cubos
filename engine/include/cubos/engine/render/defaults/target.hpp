@@ -22,11 +22,14 @@
 #include <cubos/engine/render/tone_mapping/fxaa.hpp>
 #include <cubos/engine/render/tone_mapping/tone_mapping.hpp>
 
-
+// Export types so that code using the engine shared library can share reflection data,
+// otherwise we may end up with e.g. a Opt<cubos::engine::SplitScreen> type in the engine
+// and another one in the external code.
 namespace cubos::core::memory
 {
     CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::SplitScreen>;
     CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::Bloom>;
+    CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::SSAO>;
 } // namespace cubos::core::memory
 
 namespace cubos::engine
@@ -56,7 +59,7 @@ namespace cubos::engine
         GBufferRasterizer gBufferRasterizer{};
 
         /// @brief SSAO component.
-        SSAO ssao{};
+        core::memory::Opt<SSAO> ssao{SSAO{}};
 
         /// @brief Tone Mapping component.
         ToneMapping toneMapping{};

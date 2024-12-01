@@ -116,6 +116,7 @@ namespace
         glm::uint numSpotLights{0};
 
         int directionalLightWithShadowsId;
+        int useSSAO;
     };
 
     struct State
@@ -218,7 +219,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                      directionalLights,
                  Query<const LocalToWorld&, const PointLight&, Opt<const PointShadowCaster&>> pointLights,
                  Query<const LocalToWorld&, const SpotLight&, Opt<const SpotShadowCaster&>> spotLights,
-                 Query<Entity, const HDR&, const GBuffer&, const SSAO&, DeferredShading&> targets,
+                 Query<Entity, const HDR&, const GBuffer&, Opt<const SSAO&>, DeferredShading&> targets,
                  Query<Entity, const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = window->renderDevice();
 
@@ -441,7 +442,15 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     state.positionBP->bind(gBuffer.position);
                     state.normalBP->bind(gBuffer.normal);
                     state.albedoBP->bind(gBuffer.albedo);
-                    state.ssaoBP->bind(ssao.blurTexture);
+                    if (ssao.contains())
+                    {
+                        state.ssaoBP->bind(ssao.value().blurTexture);
+                        perScene.useSSAO = 1;
+                    }
+                    else
+                    {
+                        perScene.useSSAO = 0;
+                    }
                     state.spotShadowAtlasBP->bind(spotShadowAtlas.atlas);
                     state.pointShadowAtlasBP->bind(pointShadowAtlas.atlas);
                     // directionalShadowMap needs to be bound even if it's null, or else errors may occur on some GPUs

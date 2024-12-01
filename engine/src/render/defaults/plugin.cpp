@@ -74,7 +74,6 @@ void cubos::engine::renderDefaultsPlugin(Cubos& cubos)
                     .add(entity, defaults.picker)
                     .add(entity, defaults.depth)
                     .add(entity, defaults.gBufferRasterizer)
-                    .add(entity, defaults.ssao)
                     .add(entity, defaults.toneMapping)
                     .add(entity, defaults.fxaa)
                     .add(entity, defaults.deferredShading);
@@ -87,6 +86,11 @@ void cubos::engine::renderDefaultsPlugin(Cubos& cubos)
                 if (defaults.bloom)
                 {
                     cmds.add(entity, defaults.bloom.value());
+                }
+
+                if (defaults.ssao)
+                {
+                    cmds.add(entity, defaults.ssao.value());
                 }
             }
         });
