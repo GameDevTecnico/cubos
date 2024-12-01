@@ -13,7 +13,7 @@ message("# Building cubos::engine as shared library: " ${CUBOS_ENGINE_SHARED})
 
 if (EMSCRIPTEN AND CUBOS_ENGINE_SHARED)
 	message(WARNING "Cannot build engine as shared library on Emscripten")
-	set(CUBOS_ENGINE_SHARED OFF)
+	set(CUBOS_ENGINE_SHARED OFF CACHE BOOL "Build cubos::engine as shared library?" FORCE)
 endif()
 
 # -------------------- Define engine library source files ---------------------
