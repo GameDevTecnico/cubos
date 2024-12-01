@@ -47,9 +47,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ShadowAtlasRasterizer <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="shadow__atlas__rasterizer_8hpp.html">&lt;engine/render/shadow_atlas_rasterizer/shadow_atlas_rasterizer.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="atlas__rasterizer_8hpp.html">&lt;engine/render/shadows/atlas_rasterizer/atlas_rasterizer.hpp&gt;</a></div>
         </h1>
-        <p>Resource which stores the <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a> rasterizer state.</p>
+        <p>Resource which stores the ShadowAtlas rasterizer state.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,14 +64,22 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a87548409170e3677638bb605d0514e4f">
-              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a87548409170e3677638bb605d0514e4f" class="m-doc-self">framebuffer</a>
+            <dt id="a8221599cb14525f57ed3d6e93d4efeef">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a8221599cb14525f57ed3d6e93d4efeef" class="m-doc-self">spotAtlasFramebuffer</a>
             </dt>
-            <dd>Framebuffer used by the rasterizer to render to the <a href="classcubos_1_1engine_1_1ShadowAtlas.html" class="m-doc">ShadowAtlas</a>.</dd>
-            <dt id="a25498c5a0c10a5f09e955ee48a4a84e7">
-              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a25498c5a0c10a5f09e955ee48a4a84e7" class="m-doc-self">atlas</a>
+            <dd>Framebuffer used by the rasterizer to render to the spot shadow atlas.</dd>
+            <dt id="a851fa0d5bd75ad38f04f67b713119e56">
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> <a href="#a851fa0d5bd75ad38f04f67b713119e56" class="m-doc-self">pointAtlasFramebuffer</a>
             </dt>
-            <dd>Atlas texture in the current framebuffer.</dd>
+            <dd>Framebuffers used by the rasterizer to render to each face of the point shadow atlas.</dd>
+            <dt id="a3740ea764ea63c0bdba4e942d1be4e2c">
+              <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> <a href="#a3740ea764ea63c0bdba4e942d1be4e2c" class="m-doc-self">spotAtlas</a>
+            </dt>
+            <dd>Atlas texture stored to check if the spot atlas framebuffer needs to be recreated.</dd>
+            <dt id="a938848006e50def06cb9fc0face6ab55">
+              <a href="group__core-gl.html#ga72ef2891a7d23bab8103d4adfbcf1bc4" class="m-doc">core::<wbr />gl::<wbr />Texture2DArray</a> <a href="#a938848006e50def06cb9fc0face6ab55" class="m-doc-self">pointAtlas</a>
+            </dt>
+            <dd>Atlas texture stored to check if the point atlas framebuffer needs to be recreated.</dd>
           </dl>
         </section>
       </div>
