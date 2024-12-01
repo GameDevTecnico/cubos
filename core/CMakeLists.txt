@@ -20,7 +20,7 @@ message("# Building cubos::core as shared library: " ${CUBOS_CORE_SHARED})
 
 if (EMSCRIPTEN AND CUBOS_CORE_SHARED)
 	message(WARNING "Cannot build core as shared library on Emscripten")
-	set(CUBOS_CORE_SHARED OFF)
+	set(CUBOS_CORE_SHARED OFF CACHE BOOL "Build cubos::core as shared library?" FORCE)
 endif()
 
 # --------------------- Define core library source files ----------------------
