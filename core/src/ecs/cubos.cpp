@@ -359,7 +359,6 @@ void Cubos::run()
 {
 #ifdef __EMSCRIPTEN__
     // Emscripten requires looping to be done through a callback.
-    this->start();
     auto* cubos = new Cubos(std::move(*this)); // Move the Cubos object to the heap so that it won't be destroyed.
     emscripten_set_main_loop_arg(
         [](void* cubos) {
@@ -369,7 +368,8 @@ void Cubos::run()
                 delete static_cast<Cubos*>(cubos);
             }
         },
-        cubos, 0, 1);
+        cubos, 0, 0);
+    cubos->start();
 #else
     // If debugging is disabled, simply run the update loop.
     if (!mDebug.contains())
