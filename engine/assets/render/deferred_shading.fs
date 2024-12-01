@@ -78,6 +78,7 @@ layout(std140) uniform PerScene
     uint numSpotLights;
     
     int directionalLightWithShadowsId; // index of directional light that casts shadows, or -1 if none
+    int useSSAO;
 };
 
 layout(location = 0) out vec3 color;
@@ -318,7 +319,7 @@ void main()
     {
         vec3 albedo = texture(albedoTexture, uv).rgb;
         vec3 position = texture(positionTexture, uv).xyz;
-        float ssao = texture(ssaoTexture, uv).r;
+        float ssao = useSSAO == 1 ? texture(ssaoTexture, uv).r : 1.0;
 
         // Calculate lighting from each light source.
         vec3 lighting = ambientLight.rgb * ssao;
