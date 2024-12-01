@@ -266,6 +266,89 @@ target_include_directories(stb_image SYSTEM INTERFACE ${stb_image_SOURCE_DIR})
 # Link stb_image
 target_link_libraries(cubos-engine PRIVATE $<BUILD_INTERFACE:stb_image>)
 
+# Fetch Freetype, which msdfgen depends on
+FetchContent_Declare(Freetype
+	GIT_REPOSITORY "https://gitlab.freedesktop.org/freetype/freetype.git"
+	GIT_TAG "VER-2-13-3"
+	SYSTEM
+)
+
+set(FT_DISABLE_ZLIB ON)
+set(FT_DISABLE_BZIP2 ON)
+set(FT_DISABLE_PNG ON)
+set(FT_DISABLE_HARFBUZZ ON)
+set(FT_DISABLE_BROTLI ON)
+if(CUBOS_ENGINE_SHARED OR NOT CUBOS_ENABLE_INSTALL)
+	set(SKIP_INSTALL_LIBRARIES ON CACHE BOOL "Don't install Freetype" FORCE)
+	set(SKIP_INSTALL_ALL ON CACHE BOOL "Don't install Freetype" FORCE)
+else()
+	set(SKIP_INSTALL_LIBRARIES OFF CACHE BOOL "Install Freetype" FORCE)
+	set(SKIP_INSTALL_ALL OFF CACHE BOOL "Install Freetype" FORCE)
+endif()
+
+FetchContent_MakeAvailable(Freetype)
+set_property(TARGET freetype PROPERTY POSITION_INDEPENDENT_CODE ON)
+add_library(Freetype::Freetype ALIAS freetype)
+if(EMSCRIPTEN)
+	target_compile_options(freetype PUBLIC -pthread)
+	target_link_options(freetype PUBLIC -pthread)
+endif()
+# Needed by msdfgen, as Freetype doesn't do this by itself
+export(TARGETS freetype FILE "${CMAKE_BINARY_DIR}/FreetypeTargets.cmake")
+
+# Fetch msdfgen, which msdf-atlas-gen depends on
+FetchContent_Declare(msdfgen
+	GIT_REPOSITORY "https://github.com/GameDevTecnico/cubos-msdfgen.git"
+	GIT_TAG "7293c65d49219c0dea71c5c59760c7df7f452e71"
+	SYSTEM
+)
+
+set(MSDFGEN_BUILD_STANDALONE OFF)
+set(MSDFGEN_USE_VCPKG OFF)
+set(MSDFGEN_USE_SKIA OFF)
+set(MSDFGEN_DISABLE_SVG ON)
+set(MSDFGEN_DISABLE_PNG ON)
+if(CUBOS_ENGINE_SHARED)
+	set(MSDFGEN_INSTALL OFF CACHE BOOL "Don't install msdfgen" FORCE)
+	set(MSDFGEN_DYNAMIC_RUNTIME ON CACHE BOOL "Use dynamic runtime" FORCE)
+else()
+	set(MSDFGEN_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Install msdfgen" FORCE)
+	set(MSDFGEN_DYNAMIC_RUNTIME OFF CACHE BOOL "Don't use dynamic runtime" FORCE)
+endif()
+
+FetchContent_MakeAvailable(msdfgen)
+set_property(TARGET msdfgen-core PROPERTY POSITION_INDEPENDENT_CODE ON)
+set_property(TARGET msdfgen-ext PROPERTY POSITION_INDEPENDENT_CODE ON)
+
+# Fetch and link msdf-atlas-gen
+FetchContent_Declare(msdf-atlas-gen
+    GIT_REPOSITORY "https://github.com/Chlumsky/msdf-atlas-gen.git"
+	GIT_TAG "v1.3"
+    SYSTEM
+)
+
+set(MSDF_ATLAS_BUILD_STANDALONE OFF)
+set(MSDF_ATLAS_USE_VCPKG OFF)
+set(MSDF_ATLAS_USE_SKIA OFF)
+set(MSDF_ATLAS_NO_ARTERY_FONT ON)
+set(MSDF_ATLAS_MSDFGEN_EXTERNAL ON)
+if(CUBOS_ENGINE_SHARED)
+	set(MSDF_ATLAS_INSTALL OFF CACHE BOOL "Don't install msdf-atlas-gen" FORCE)
+	set(MSDF_ATLAS_DYNAMIC_RUNTIME ON CACHE BOOL "Use dynamic runtime" FORCE)
+else()
+	set(MSDF_ATLAS_INSTALL ${CUBOS_ENABLE_INSTALL} CACHE BOOL "Install msdf-atlas-gen" FORCE)
+	set(MSDF_ATLAS_DYNAMIC_RUNTIME OFF CACHE BOOL "Don't use dynamic runtime" FORCE)
+endif()
+
+FetchContent_MakeAvailable(msdf-atlas-gen)
+set_property(TARGET msdf-atlas-gen PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(cubos-engine PRIVATE msdf-atlas-gen)
+
+if(EMSCRIPTEN)
+	target_compile_options(msdf-atlas-gen PUBLIC -pthread)
+	target_link_options(msdf-atlas-gen PUBLIC -pthread)
+endif()
+
 # ------------- Fetch and link engine public library dependencies -------------
 
 # Link our own core library
@@ -313,44 +396,6 @@ target_include_directories(imgui PUBLIC
 # Finally, link the target we created for both ImGui and Implot
 target_link_libraries(cubos-engine PUBLIC imgui)
 
-# freetype (msdfgen dependency) - fails to build on windows without this
-set(FT_DISABLE_ZLIB ON)
-set(FT_DISABLE_BZIP2 ON)
-set(FT_DISABLE_PNG ON)
-set(FT_DISABLE_HARFBUZZ ON)
-set(FT_DISABLE_BROTLI ON)
-FetchContent_Declare(freetype
-    GIT_REPOSITORY "https://gitlab.freedesktop.org/freetype/freetype.git"
-    GIT_TAG "VER-2-13-3"
-    SYSTEM
-    FIND_PACKAGE_ARGS
-)
-FetchContent_MakeAvailable(freetype)
-if (NOT TARGET Freetype::Freetype)
-    add_library(Freetype::Freetype ALIAS freetype)
-endif()
-set_property(TARGET freetype PROPERTY POSITION_INDEPENDENT_CODE ON)
-
-# msdf-atlas-gen
-set(MSDF_ATLAS_USE_VCPKG OFF)
-set(MSDF_ATLAS_USE_SKIA OFF)
-set(MSDF_ATLAS_BUILD_STANDALONE OFF)
-set(MSDF_ATLAS_NO_ARTERY_FONT ON)
-set(MSDFGEN_DISABLE_PNG ON)
-set(MSDFGEN_BUILD_STANDALONE OFF)
-set(MSDF_ATLAS_DYNAMIC_RUNTIME ON)
-FetchContent_Declare(msdf-atlas-gen
-    GIT_REPOSITORY "https://github.com/Chlumsky/msdf-atlas-gen.git"
-    SYSTEM
-    FIND_PACKAGE_ARGS
-)
-FetchContent_MakeAvailable(msdf-atlas-gen)
-# To prevent reallocation errors when compiling engine as a shared library
-set_property(TARGET msdf-atlas-gen PROPERTY POSITION_INDEPENDENT_CODE ON)
-set_property(TARGET msdfgen-core PROPERTY POSITION_INDEPENDENT_CODE ON)
-
-target_link_libraries(cubos-engine PRIVATE msdf-atlas-gen)
-
 # ------------------------ Configure tests and samples ------------------------
 
 if(CUBOS_ENGINE_TESTS)
@@ -378,5 +423,4 @@ if(CUBOS_ENABLE_INSTALL)
 	install(DIRECTORY ${imgui_SOURCE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/imgui)
 	install(DIRECTORY ${implot_SOURCE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/implot)
 	install(DIRECTORY assets/ DESTINATION ${CUBOS_ENGINE_ASSETS_INSTALL_PATH})
-    install(DIRECTORY ${msdf-atlas-gen_SOURCE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/msdf-atlas-gen)
 endif()
