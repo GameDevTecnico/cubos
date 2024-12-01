@@ -30,8 +30,8 @@ let
   glad = fetchFromGitHub {
     owner = "GameDevTecnico";
     repo = "cubos-glad";
-    rev = "496c56587442591557a89551d90906b1c53f639f";
-    sha256 = "sha256-566u+oiPUJQ+LQ4gE+lE58uw60ftheWUSiklgRge4Jc=";
+    rev = "bdf4d66072830f9822512f8f7dc3ca3fd72d9f69";
+    sha256 = "sha256-jG9ZhbdbUBIjyEFOOoyiywK7gMvzr8tb2BxHO87JUyg=";
   };
 
   stb_image = fetchFromGitHub {
@@ -39,6 +39,27 @@ let
     repo = "cubos-stb";
     rev = "5c340b5ee24ac74e69bf92b5bacdfbac6bbaa4a8";
     sha256 = "sha256-D4fWoezHR+rp3Ecnlj6BhaVu5IhB7Yr2cJH2dgFHZnY=";
+  };
+
+  freetype = fetchFromGitHub {
+    owner = "freetype";
+    repo = "freetype";
+    rev = "VER-2-13-3";
+    sha256 = "sha256-4l90lDtpgm5xlh2m7ifrqNy373DTRTULRkAzicrM93c=";
+  };
+
+  msdfgen = fetchFromGitHub {
+    owner = "GameDevTecnico";
+    repo = "cubos-msdfgen";
+    rev = "7293c65d49219c0dea71c5c59760c7df7f452e71";
+    sha256 = "sha256-y/luplRQex6fI3qi1uoP6ViLVCi+gKNbRHltggkKhVQ=";
+  };
+
+  msdf-atlas-gen = fetchFromGitHub {
+    owner = "Chlumsky";
+    repo = "msdf-atlas-gen";
+    rev = "v1.3";
+    sha256 = "sha256-SfzQ008aoYI8tkrHXsXVQq9Qq+NIqT1zvSIHK1LTbLU=";
   };
 
   imgui = fetchFromGitHub {
@@ -70,6 +91,9 @@ stdenv.mkDerivation {
     (cmakeBool "FETCHCONTENT_FULLY_DISCONNECTED" true)
     (cmakeOptionType "path" "FETCHCONTENT_SOURCE_DIR_GLAD" "${glad}")
     (cmakeOptionType "path" "FETCHCONTENT_SOURCE_DIR_STB_IMAGE" "${stb_image}")
+    (cmakeOptionType "path" "FETCHCONTENT_SOURCE_DIR_FREETYPE" "${freetype}")
+    (cmakeOptionType "path" "FETCHCONTENT_SOURCE_DIR_MSDFGEN" "${msdfgen}")
+    (cmakeOptionType "path" "FETCHCONTENT_SOURCE_DIR_MSDF-ATLAS-GEN" "${msdf-atlas-gen}")
     (cmakeOptionType "path" "FETCHCONTENT_SOURCE_DIR_IMGUI" "${imgui}")
     (cmakeOptionType "path" "FETCHCONTENT_SOURCE_DIR_IMPLOT" "${implot}")
     (cmakeOptionType "path" "FETCHCONTENT_SOURCE_DIR_LIBDWARF" "${libdwarf-lite}")
