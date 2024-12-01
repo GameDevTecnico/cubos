@@ -131,6 +131,9 @@ function(cubos_common_target_options target)
             -pthread
             -sPTHREAD_POOL_SIZE=navigator.hardwareConcurrency
             -sENVIRONMENT=web,worker
+            -sMINIFY_HTML=0
+            -sINITIAL_MEMORY=128MB
+            -sSTACK_SIZE=1MB
         )
 
         target_compile_options(${target} PUBLIC -pthread)
