@@ -17,6 +17,10 @@ find_dependency(stduuid REQUIRED)
 find_dependency(nlohmann_json REQUIRED)
 find_dependency(glm REQUIRED)
 
+if(NOT @CUBOS_ENGINE_SHARED@)
+    find_dependency(msdf-atlas-gen REQUIRED)
+endif()
+
 set(CUBOS_ENGINE_ASSETS_PATH "${CMAKE_CURRENT_LIST_DIR}/@CUBOS_ENGINE_ASSETS_INSTALL_RELPATH@")
 
 if(NOT TARGET cubos::core)
