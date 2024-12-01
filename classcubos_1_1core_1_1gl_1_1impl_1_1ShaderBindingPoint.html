@@ -69,10 +69,6 @@
             </dt>
             <dd>Binds a sampler to the binding point.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#abbf4bb35777a26f34bbc492f462e41cf" class="m-doc">bind</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga1754de424e707d7b67d127c07f02eba9" class="m-doc">gl::<wbr />Texture1D</a> tex) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Binds a 1D texture to the binding point.</dd>
-            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ad80dcb94065d0aa369b8f4ab553b0197" class="m-doc">bind</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">gl::<wbr />Texture2D</a> tex) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Binds a 2D texture to the binding point.</dd>
@@ -88,10 +84,6 @@
               <span class="m-doc-wrap-bumper">void <a href="#a70eaab95bcc8f92492f5f4e41b015dfc" class="m-doc">bind</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga2fc0f9688c55bf452d587eb92dc6090c" class="m-doc">gl::<wbr />CubeMap</a> cubeMap) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Binds a cube map to the binding point.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#acfa23b313bc48dae8780e8ed9d75cba1" class="m-doc">bind</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga515ffd2436bb99ef2083df3bb0b79299" class="m-doc">gl::<wbr />CubeMapArray</a> cubeMap) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Binds a cube map array to the binding point.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ade29c780ef66aba7ee1fe1491e5204f0" class="m-doc">bind</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#gaee7781a28344ba52b20d5a1635d7a1f7" class="m-doc">gl::<wbr />ConstantBuffer</a> cb) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -180,24 +172,6 @@
             </table>
 <p>If this binding point doesn&#x27;t support a sampler, an error is logged.</p>
           </div></section>
-          <section class="m-doc-details" id="abbf4bb35777a26f34bbc492f462e41cf"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />ShaderBindingPoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbf4bb35777a26f34bbc492f462e41cf" class="m-doc-self">bind</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga1754de424e707d7b67d127c07f02eba9" class="m-doc">gl::<wbr />Texture1D</a> tex) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Binds a 1D texture to the binding point.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">tex</td>
-                  <td>Texture to bind.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>If this binding point doesn&#x27;t support a 1D texture, an error is logged.</p>
-          </div></section>
           <section class="m-doc-details" id="ad80dcb94065d0aa369b8f4ab553b0197"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />ShaderBindingPoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad80dcb94065d0aa369b8f4ab553b0197" class="m-doc-self">bind</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">gl::<wbr />Texture2D</a> tex) <span class="m-label m-warning">pure virtual</span></span></span>
@@ -269,24 +243,6 @@
               </tbody>
             </table>
 <p>If this binding point doesn&#x27;t support a cube map, an error is logged.</p>
-          </div></section>
-          <section class="m-doc-details" id="acfa23b313bc48dae8780e8ed9d75cba1"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />ShaderBindingPoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acfa23b313bc48dae8780e8ed9d75cba1" class="m-doc-self">bind</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga515ffd2436bb99ef2083df3bb0b79299" class="m-doc">gl::<wbr />CubeMapArray</a> cubeMap) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Binds a cube map array to the binding point.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubeMap</td>
-                  <td>Cube map to bind.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>If this binding point doesn&#x27;t support a cube map array, an error is logged.</p>
           </div></section>
           <section class="m-doc-details" id="ade29c780ef66aba7ee1fe1491e5204f0"><div>
             <h3>
