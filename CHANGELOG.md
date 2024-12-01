@@ -5,23 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [v0.5.0] - 2024-12-01
 
 ### Added
 
 - Collision detection with VoxelCollisionShapes (#994, **@joaomanita**).
 - Allow identifying assets in code from their path (#1177, **@GalaxyCrush**).
-- Hold function for debug_camera (#1030, **@jdbaracho**).
-- Audio asset (#230, **@Dageus**, **@diogomsmiranda**).
+- Debug camera rotation through middle mouse hold (#1030, **@jdbaracho**).
 - Compatibility with CMake find_package (#1326, **@RiscadoA**).
 - A proper Nix package which can be used to install Cubos and Tesseratos (#1327, **RiscadoA**).
-- Added the option to use Shadow Normal Offset Bias algorithm (#1308, **@GalaxyCrush**)
+- Option to use Shadow Normal Offset Bias algorithm (#1308, **@GalaxyCrush**).
 - UI text element using MSDF for text rendering (#1300, **@mkuritsu**).
-- Added anti-aliasing using FXAA technique (#1334, **@kuukitenshi**).
+- Anti-aliasing using FXAA technique (#1334, **@kuukitenshi**).
 - Point light shadows (#1188, **@tomas7770**).
-- Added method to save Settings to file (#1349, **@SrGesus**).
-- Added resource to easily configure magic numbers in solver (#1281, **@GCeSilva**).
-- Audio Plugin (#1004, **@Dageus**, **@diogomsmiranda**).
+- Method to save settings to files (#1349, **@SrGesus**).
+- Resource to easily configure constants in the physics solver (#1281, **@GCeSilva**).
+- Audio plugin which uses the audio context abstraction (#1004, **@Dageus**, **@diogomsmiranda**).
 - Contact caching for collision between box shapes (#1355, **@fallenatlas**).
 - Template Cubos project (#1009, **@RiscadoA**).
 - Web support, through Emscripten (#465, **@luishfonseca**, **@RiscadoA**).
@@ -34,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed delta time not used in some physics systems and simulations exploding after being frozen for too long (**@joaomanita**).
-- Crash in ecs when removing or destroying components with observers (#1348, **@SrGesus**).
+- Crash in ECS when removing or destroying components with observers (#1348, **@SrGesus**).
 - Crash when opening the Play Pause menu (**SrGesus**).
 - Duplicated destructor call in AnyVector which caused double free crashes on multiple samples (**@RiscadoA**).
 - Compiler Error when using -O3 flag (#1351, **@SrGesus**).
@@ -286,3 +285,4 @@ Although they've moved on, their work is etched into the project's foundations.
 [v0.2.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.2.0
 [v0.3.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.3.0
 [v0.4.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.4.0
+[v0.5.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.5.0
