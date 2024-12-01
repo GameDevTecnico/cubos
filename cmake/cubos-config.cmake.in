@@ -2,14 +2,17 @@ include(CMakeFindDependencyMacro)
 
 if(NOT @CUBOS_CORE_SHARED@)
     find_dependency(Threads)
-    find_dependency(cpptrace REQUIRED)
-    
-    if(@CUBOS_CORE_OPENGL@)
-        find_dependency(glad REQUIRED)
-    endif()
 
-    if(@CUBOS_CORE_GLFW@)
-        find_dependency(glfw3 REQUIRED)
+    if(NOT EMSCRIPTEN)
+        find_dependency(cpptrace REQUIRED)
+        
+        if(@CUBOS_CORE_OPENGL@)
+            find_dependency(glad REQUIRED)
+        endif()
+
+        if(@CUBOS_CORE_GLFW@)
+            find_dependency(glfw3 REQUIRED)
+        endif()
     endif()
 endif()
 
