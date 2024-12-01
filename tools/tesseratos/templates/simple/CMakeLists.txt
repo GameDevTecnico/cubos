@@ -16,21 +16,35 @@ target_compile_options(game PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>: /Zc:preprocessor>
 )
 
-if(DISTRIBUTE)
+if(EMSCRIPTEN)
+    set_target_properties(game PROPERTIES SUFFIX ".html")
+
+    # If we're building for the web, the assets directories will be embedded in the executable
+    target_link_options(game PRIVATE
+		"SHELL:--embed-file ${CMAKE_CURRENT_SOURCE_DIR}/assets@/assets"
+		"SHELL:--embed-file ${CUBOS_ENGINE_ASSETS_PATH}@/builtin"
+	)
+    target_compile_definitions(game PRIVATE
+		APP_ASSETS_PATH="/assets"
+		BUILTIN_ASSETS_PATH="/builtin"
+	)
+elseif(DISTRIBUTE)
     # If we're building for distribution, we want to use the assets directories in the same directory as the executable
     target_compile_definitions(game PRIVATE
 		APP_ASSETS_PATH="assets"
 		BUILTIN_ASSETS_PATH="builtin"
 	)
-
-    # On installation, copy both the executable and the assets directories to the installation directory
-    install(TARGETS game RUNTIME DESTINATION .)
-    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets/ DESTINATION assets)
-    install(DIRECTORY ${CUBOS_ENGINE_ASSETS_PATH}/ DESTINATION builtin)
 else()
     # If we're in development, we want to use the assets directory in the project directory
     target_compile_definitions(game PRIVATE
 		APP_ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets"
 		BUILTIN_ASSETS_PATH="${CUBOS_ENGINE_ASSETS_PATH}"
 	)
+endif()
+
+if(DISTRIBUTE)
+    # On installation, copy both the executable and the assets directories to the installation directory
+    install(TARGETS game RUNTIME DESTINATION .)
+    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/assets/ DESTINATION assets)
+    install(DIRECTORY ${CUBOS_ENGINE_ASSETS_PATH}/ DESTINATION builtin)
 endif()
