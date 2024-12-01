@@ -2,7 +2,7 @@
 # Cubos project root build configuration
 
 cmake_minimum_required(VERSION 3.25.0)
-project(cubos VERSION 0.4.0)
+project(cubos VERSION 0.5.0)
 
 include(GNUInstallDirs) # Get default install directories
 
