@@ -39,8 +39,8 @@ namespace cubos::engine
         /// actual texture size.
         glm::uvec2 configSize = {1024, 1024};
 
-        /// @brief Whether the shadow atlas texture has already been cleared this frame.
-        bool cleared = false;
+        /// @brief Whether the each face of the shadow atlas texture has already been cleared this frame.
+        bool cleared[6] = {};
 
         /// @brief Stores shadow maps for each point shadow caster component.
         /// Each texture of the array corresponds to a face of a cubemap.
