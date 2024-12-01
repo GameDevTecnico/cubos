@@ -48,7 +48,6 @@ int main(int argc, char** argv)
     cubos.startupSystem("configure settings").before(settingsTag).call([](Settings& settings) {
         settings.setString("assets.app.osPath", APP_ASSETS_PATH);
         settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
-        settings.setBool("window.vSync", false);
     });
 
     cubos.startupSystem("set the palette and environment and spawn the scene")

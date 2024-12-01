@@ -33,7 +33,6 @@ int main(int argc, char** argv)
     cubos.startupSystem("configure settings").before(settingsTag).call([](Settings& settings) {
         settings.setString("assets.app.osPath", APP_ASSETS_PATH);
         settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
-        settings.setBool("window.vSync", false);
     });
 
     cubos.startupSystem("set the palette and environment and spawn the scene")
@@ -45,8 +44,6 @@ int main(int argc, char** argv)
             environment.skyGradient[1] = {0.6F, 0.6F, 0.8F};
             commands.spawn(assets.read(SceneAsset)->blueprint);
         });
-
-    cubos.system("log FPS").call([](const DeltaTime& dt) { CUBOS_INFO("FPS: {}", 1.0F / dt.unscaledValue); });
 
     cubos.run();
 }
