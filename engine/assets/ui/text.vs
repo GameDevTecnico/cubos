@@ -1,5 +1,3 @@
-#version 330 core
-
 in vec2 in_position;
 in vec2 in_texCoord;
 

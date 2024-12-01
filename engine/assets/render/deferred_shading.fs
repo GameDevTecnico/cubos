@@ -228,21 +228,21 @@ vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
         float rz = -toLight.z;
         if (abs(rz) >= abs(rx) && abs(rz) >= abs(ry))
         {
-            if (rz <= 0) // z-
+            if (rz <= 0.0) // z-
                 face = 0;
             else // z+
                 face = 1;
         }
         else if (abs(rx) >= abs(ry) && abs(rx) >= abs(rz))
         {
-            if (rx <= 0) // x-
+            if (rx <= 0.0) // x-
                 face = 2;
             else // x+
                 face = 3;
         }
         else if (abs(ry) >= abs(rx) && abs(ry) >= abs(rz))
         {
-            if (ry <= 0) // y-
+            if (ry <= 0.0) // y-
                 face = 5;
             else // y+
                 face = 4;
@@ -284,7 +284,7 @@ vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, uint lightI)
     float r = length(toLight) / pointLights[lightI].range;
     if (r < 1.0)
     {
-        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0.0, 1.0), 0.0, 1.0);
+        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1.0 - r) * 5.0, 0.0, 1.0), 0.0, 1.0);
         float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0.0);
         return attenuation * diffuse * (1.0 - shadow) * pointLights[lightI].intensity
             * vec3(pointLights[lightI].color);
