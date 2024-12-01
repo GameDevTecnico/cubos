@@ -19,6 +19,7 @@ namespace
         glm::vec2 yRange;
         glm::vec4 color;
         int depth;
+        int padding[3] = {};
     };
 
     struct State

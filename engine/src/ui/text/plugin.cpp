@@ -30,6 +30,7 @@ namespace
         glm::vec2 yRange;
         glm::vec4 color;
         int depth;
+        int padding[3];
     };
 
     struct State
@@ -200,7 +201,8 @@ void cubos::engine::uiTextPlugin(Cubos& cubos)
                               PerElement{{min.x, max.x},
                                          {min.y, max.y},
                                          uiText.color,
-                                         element.layer * 100 + element.hierarchyDepth})
+                                         element.layer * 100 + element.hierarchyDepth,
+                                         {}})
                         .withTexture(0, atlas->texture(), state.sampler);
                 }
             }
