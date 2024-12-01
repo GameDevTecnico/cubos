@@ -23,7 +23,7 @@ float rgb2luma(vec3 rgb){
 }
 
 float quality(int i) {
-    return (i < 5) ? 1.0 : 1.5 + (i - 5) * 0.5; //increase progressively the quality
+    return (i < 5) ? 1.0 : 1.5 + float(i - 5) * 0.5; //increase progressively the quality
 }
 
 vec3 fxaa(sampler2D screenTexture, vec2 fragUv, vec2 inverseScreenSize){
@@ -162,7 +162,7 @@ vec3 fxaa(sampler2D screenTexture, vec2 fragUv, vec2 inverseScreenSize){
 
 void main()
 {
-    vec2 inverseScreenSize = vec2(1.0 / screenSize.x, 1.0 / screenSize.y);
+    vec2 inverseScreenSize = vec2(1.0 / float(screenSize.x), 1.0 / float(screenSize.y));
     vec3 hdrColor;
     if(fxaaEnabled){
         hdrColor = fxaa(hdrTexture, fragUv, inverseScreenSize);

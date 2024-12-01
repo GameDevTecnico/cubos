@@ -1,5 +1,3 @@
-#version 330 core
-
 out vec4 out_color;
 
 uniform sampler2D image;
