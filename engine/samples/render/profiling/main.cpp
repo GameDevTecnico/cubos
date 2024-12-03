@@ -3,6 +3,7 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/defaults/plugin.hpp>
 #include <cubos/engine/render/lights/environment.hpp>
 #include <cubos/engine/render/voxels/grid.hpp>
@@ -87,24 +88,83 @@ int main(int argc, char** argv)
             environment.skyGradient[1] = {0.6F, 0.6F, 0.8F};
             // Spawn base scene
             commands.spawn(assets.read(SceneAsset)->blueprint);
-            // Create a grid with random materials.
-            glm::uvec3 gridSize = {128, 32, 128};
-            auto voxelGrid = VoxelGrid{gridSize};
-            for (glm::uint x = 0; x < gridSize.x; x++)
-            {
-                for (glm::uint z = 0; z < gridSize.z; z++)
-                {
-                    for (glm::uint y = 0;
-                         y < static_cast<glm::uint>(static_cast<float>(gridSize.y) * perlin_noise({x, z}, 0.05F)); y++)
-                    {
-                        voxelGrid.set({x, y, z}, 1);
-                    }
-                }
-            }
-            auto gridAsset = assets.create(voxelGrid);
-            // Spawn an entity with a renderable grid component and a identity transform.
-            commands.create().add(RenderVoxelGrid{gridAsset, {-1.0F, 0.0F, -1.0F}}).add(LocalToWorld{});
         });
 
+    cubos.system("update chunks")
+        .call([](Commands commands, Assets& assets, Query<Entity, const RenderVoxelGrid&, const Position&> chunks,
+                 Query<const Camera&, const Position&> cameras) {
+            constexpr float chunkSize = 32.0F;
+            constexpr int genRadiusChunks = 8;
+            for (auto [camera, position] : cameras)
+            {
+                for (int x = -genRadiusChunks; x < genRadiusChunks; x++)
+                {
+                    for (int z = -genRadiusChunks; z < genRadiusChunks; z++)
+                    {
+                        float posX = float(x + static_cast<int>(position.vec.x / chunkSize)) * chunkSize;
+                        float posZ = float(z + static_cast<int>(position.vec.z / chunkSize)) * chunkSize;
+                        bool hasChunk = false;
+                        for (auto [entity, grid, gridPosition] : chunks)
+                        {
+                            if (gridPosition.vec.x == posX && gridPosition.vec.z == posZ)
+                            {
+                                hasChunk = true;
+                                break;
+                            }
+                        }
+                        if (!hasChunk)
+                        {
+                            // Create a grid with random materials.
+                            glm::uvec3 gridSize = {static_cast<int>(chunkSize), 32, static_cast<int>(chunkSize)};
+                            auto voxelGrid = VoxelGrid{gridSize};
+                            for (glm::uint gx = 0; gx < gridSize.x; gx++)
+                            {
+                                for (glm::uint gz = 0; gz < gridSize.z; gz++)
+                                {
+                                    for (glm::uint gy = 0;
+                                         gy < static_cast<glm::uint>(
+                                                  static_cast<float>(gridSize.y) *
+                                                  perlin_noise({float(gx) + posX, float(gz) + posZ}, 0.05F));
+                                         gy++)
+                                    {
+                                        voxelGrid.set({gx, gy, gz}, 1);
+                                    }
+                                }
+                            }
+                            auto gridAsset = assets.create(voxelGrid);
+                            // Spawn an entity with a renderable grid component and a identity transform.
+                            commands.create()
+                                .add(RenderVoxelGrid{gridAsset, {-1.0F, 0.0F, -1.0F}})
+                                .add(LocalToWorld{})
+                                .add(Position{{posX, 0.0F, posZ}});
+                        }
+                    }
+                }
+                std::vector<Entity> removedChunks;
+                float minX = float(-genRadiusChunks + static_cast<int>(position.vec.x / chunkSize)) * chunkSize;
+                float maxX = float(genRadiusChunks + static_cast<int>(position.vec.x / chunkSize)) * chunkSize;
+                float minZ = float(-genRadiusChunks + static_cast<int>(position.vec.z / chunkSize)) * chunkSize;
+                float maxZ = float(genRadiusChunks + static_cast<int>(position.vec.z / chunkSize)) * chunkSize;
+                for (auto [entity, grid, gridPosition] : chunks)
+                {
+                    if (gridPosition.vec.x < minX || gridPosition.vec.x > maxX || gridPosition.vec.z < minZ ||
+                        gridPosition.vec.z > maxZ)
+                    {
+                        removedChunks.push_back(entity);
+                    }
+                }
+                for (auto& chunkEntity : removedChunks)
+                {
+                    commands.destroy(chunkEntity);
+                }
+            }
+        });
+
+    cubos.system("move camera").call([](Query<const Camera&, Position&> cameras, DeltaTime& dt) {
+        for (auto [camera, position] : cameras)
+        {
+            position.vec += glm::vec3(0.0F, 0.0F, -30.0F * dt.value());
+        }
+    });
     cubos.run();
 }
