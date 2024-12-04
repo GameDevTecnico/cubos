@@ -34,7 +34,7 @@ void main(void)
     if (normal == 4u) localNormal.z = +1.0;
     if (normal == 5u) localNormal.z = -1.0;
     mat3 N = transpose(inverse(mat3(model)));
-    fragNormal = N * localNormal;
+    fragNormal = normalize(N * localNormal);
 
     fragAlbedo = texelFetch(palette, ivec2(mod(float(material), 256.0), material / 256u), 0).rgb;
 
