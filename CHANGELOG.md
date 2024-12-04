@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Make SSAO optional (#1396, **@tomas7770**).
 
+### Fixed
+
+- Normalize normals while drawing to the GBuffer to avoid shiny small objects (**@RiscadoA**).
+
 ## [v0.5.0] - 2024-12-01
 
 ### Added
