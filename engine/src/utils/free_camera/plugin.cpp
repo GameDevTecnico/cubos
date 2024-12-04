@@ -9,6 +9,16 @@
 
 using namespace cubos::core::io;
 
+namespace
+{
+    struct State
+    {
+        CUBOS_ANONYMOUS_REFLECT(State);
+
+        bool tookOverMouse = false;
+    };
+} // namespace
+
 void cubos::engine::freeCameraPlugin(Cubos& cubos)
 {
     cubos.depends(inputPlugin);
@@ -17,8 +27,10 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
 
     cubos.component<FreeCameraController>();
 
+    cubos.resource<State>();
+
     cubos.system("rotate FreeCameraController on mouse motion")
-        .call([](const Input& input, Window& window, const DeltaTime& deltaTime,
+        .call([](const Input& input, Window& window, const DeltaTime& deltaTime, State& state,
                  Query<FreeCameraController&, Position&, Rotation&> entities) {
             bool anyEnabled = false;
 
@@ -59,10 +71,13 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
             if (anyEnabled && window->mouseState() != MouseState::Locked)
             {
                 window->mouseState(MouseState::Locked);
+                state.tookOverMouse = true;
             }
-            else if (!anyEnabled && window->mouseState() != MouseState::Default)
+
+            if (!anyEnabled && state.tookOverMouse)
             {
                 window->mouseState(MouseState::Default);
+                state.tookOverMouse = false;
             }
         });
 }
