@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Normalize normals while drawing to the GBuffer to avoid shiny small objects (**@RiscadoA**).
+- Make FreeCameraController respect other plugins locking the mouse (**@RiscadoA**).
 
 ## [v0.5.0] - 2024-12-01
 
