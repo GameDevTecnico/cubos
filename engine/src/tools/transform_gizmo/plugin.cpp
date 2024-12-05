@@ -5,8 +5,10 @@
 #include <cubos/core/reflection/external/glm.hpp>
 
 #include <cubos/engine/gizmos/plugin.hpp>
+#include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
+#include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/tools/selection/plugin.hpp>
@@ -285,20 +287,12 @@ void cubos::engine::transformGizmoPlugin(Cubos& cubos)
         .call([](const Selection& selection, const Window& window, const Input& input, Settings& settings,
                  Gizmos& gizmos, Query<Position&, LocalToWorld&> positionQuery,
                  Query<Rotation&, LocalToWorld&> rotationQuery,
-                 Query<Entity, const Camera&, LocalToWorld&> cameraQuery) {
+                 Query<Entity, const Camera&, LocalToWorld&, const DrawsTo&, const GizmosTarget&> cameraQuery) {
             if (selection.entity.isNull())
             {
                 return;
             }
-            if (cameraQuery.empty())
-            {
-                return;
-            }
-            auto [cameraEnt, camera, cameraLtw] = *cameraQuery.first();
-            if (cameraEnt == selection.entity)
-            {
-                return;
-            }
+
             if (!positionQuery.at(selection.entity))
             {
                 return;
@@ -307,9 +301,19 @@ void cubos::engine::transformGizmoPlugin(Cubos& cubos)
             bool useLocal = settings.getBool("transformGizmo.useLocalAxis", true);
             double distance = settings.getDouble("transformGizmo.distanceToCamera", 10.0F);
 
-            drawPositionGizmo(positionQuery, camera, cameraLtw, gizmos, input, window, selection.entity, useLocal,
-                              distance);
-            drawRotationGizmo(rotationQuery, camera, cameraLtw, gizmos, input, window, selection.entity, useLocal,
-                              distance);
+            // Draw the gizmos once for each camera that is active, which draws to a gizmos target.
+            // TODO: filter each gizmo for each camera #1402
+            for (auto [entity, camera, cameraLtw, drawsTo, gizmosTarget] : cameraQuery)
+            {
+                if (!camera.active || entity == selection.entity)
+                {
+                    continue;
+                }
+
+                drawPositionGizmo(positionQuery, camera, cameraLtw, gizmos, input, window, selection.entity, useLocal,
+                                  distance);
+                drawRotationGizmo(rotationQuery, camera, cameraLtw, gizmos, input, window, selection.entity, useLocal,
+                                  distance);
+            }
         });
 }
