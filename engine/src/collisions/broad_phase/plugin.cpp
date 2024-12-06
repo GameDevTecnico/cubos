@@ -179,6 +179,12 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
                         }
                         auto [otherCollider] = *otherMatch;
 
+                        if (((collider.mask & (static_cast<uint64_t>(1) << otherCollider.layer)) == 0u) ||
+                            ((otherCollider.mask & (static_cast<uint64_t>(1) << collider.layer)) == 0u))
+                        {
+                            continue;
+                        }
+
                         switch (axis)
                         {
                         case 0: // X
