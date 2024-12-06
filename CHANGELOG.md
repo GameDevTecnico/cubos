@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Collision layers and masks, for filtering collisions (**@RiscadoA**).
+
 ### Fixed
 
 - Normalize normals while drawing to the GBuffer to avoid shiny small objects (**@RiscadoA**).
