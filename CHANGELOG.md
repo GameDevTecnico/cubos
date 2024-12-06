@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SSAO resolution scale (#1423, **@tomas7770**).
 - Warm starting for collision solving (#1248, **@fallenatlas**).
 - Conditional shader compilation (#1406, **@tomas7770**).
+- Collision layers and masks, for filtering collisions (**@RiscadoA**).
 
 ### Changed
 
