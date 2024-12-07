@@ -66,6 +66,7 @@ namespace
 
         ConstantBuffer perSceneCB;
         Texture2D noiseTexture;
+        Sampler noiseSampler;
 
         std::vector<glm::vec3> kernel{};
 
@@ -110,9 +111,14 @@ namespace
 
             Texture2DDesc desc{};
             desc.width = desc.height = 4;
-            desc.format = TextureFormat::RGBA32Float;
+            desc.format = TextureFormat::RGB32Float;
             desc.data[0] = ssaoNoise.data();
             noiseTexture = renderDevice.createTexture2D(desc);
+
+            SamplerDesc samplerDesc{};
+            samplerDesc.minFilter = samplerDesc.magFilter = TextureFilter::Nearest;
+            samplerDesc.addressU = samplerDesc.addressV = AddressMode::Repeat;
+            noiseSampler = renderDevice.createSampler(samplerDesc);
         }
     };
 } // namespace
@@ -272,6 +278,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     state.basePositionBP->bind(gBuffer.position);
                     state.baseNormalBP->bind(gBuffer.normal);
                     state.baseNoiseBP->bind(state.noiseTexture);
+                    state.baseNoiseBP->bind(state.noiseSampler);
                     state.basePerSceneBP->bind(state.perSceneCB);
                     state.baseViewportOffsetBP->setConstant(drawsTo.viewportOffset);
                     state.baseViewportSizeBP->setConstant(drawsTo.viewportSize);
