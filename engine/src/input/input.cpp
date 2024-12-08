@@ -149,12 +149,12 @@ void Input::bind(const InputBindings& bindings, int player)
 
             for (const auto& button : pos.mouseButtons())
             {
-                mBoundMouseButtonAxes[button].push_back(BindingIndex{axis.first, player});
+                mBoundMouseButtonAxes[button].push_back(BindingIndex{axis.first, player, false});
             }
 
             for (const auto& button : pos.gamepadButtons())
             {
-                mBoundGamepadButtonActions[button].push_back(BindingIndex{axis.first, player});
+                mBoundGamepadButtonAxes[button].push_back(BindingIndex{axis.first, player, false});
             }
         }
 
@@ -167,12 +167,12 @@ void Input::bind(const InputBindings& bindings, int player)
 
             for (const auto& button : neg.mouseButtons())
             {
-                mBoundMouseButtonAxes[button].push_back(BindingIndex{axis.first, player});
+                mBoundMouseButtonAxes[button].push_back(BindingIndex{axis.first, player, true});
             }
 
             for (const auto& button : neg.gamepadButtons())
             {
-                mBoundGamepadButtonAxes[button].push_back(BindingIndex{axis.first, player});
+                mBoundGamepadButtonAxes[button].push_back(BindingIndex{axis.first, player, true});
             }
         }
 
@@ -404,6 +404,7 @@ void Input::handle(const Window& /*unused*/, const GamepadConnectionEvent& event
 void Input::handle(const Window& window, const MouseButtonEvent& event)
 {
     this->handleActions(window, mBoundMouseButtonActions[event.button]);
+    this->handleAxes(window, mBoundMouseButtonAxes[event.button]);
 }
 
 void Input::handle(const Window& /*unused*/, const MouseMoveEvent& event)
@@ -460,6 +461,7 @@ void Input::pollGamepads(const Window& window)
             if (state.buttons[i] != oldState.buttons[i])
             {
                 this->handleActions(window, mBoundGamepadButtonActions[static_cast<GamepadButton>(i)]);
+                this->handleAxes(window, mBoundGamepadButtonAxes[static_cast<GamepadButton>(i)]);
             }
         }
 

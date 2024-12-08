@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Draw Transform Gizmos for all active cameras instead of only the first one (**@RiscadoA**).
 - Consider Collider component transform matrix while doing Raycast (**@RiscadoA**).
 - Screen Space Ambient Occlusion noise undefined behavior (**@RiscadoA**).
+- Added missing updates to mouse and gamepad buttons on input axes (**@RiscadoA**).
 
 ## [v0.5.0] - 2024-12-01
 
