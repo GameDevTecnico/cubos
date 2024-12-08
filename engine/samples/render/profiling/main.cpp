@@ -1,4 +1,7 @@
 #include <random>
+#include <unordered_map>
+
+#include <glm/gtx/hash.hpp>
 
 #include <cubos/core/reflection/external/primitives.hpp>
 
@@ -55,6 +58,13 @@ float perlin_noise(glm::vec2 uv, float cells_count)
     return (0.5F + 0.5F * (noise_value / 0.7F));
 }
 
+struct ChunkMap
+{
+    CUBOS_ANONYMOUS_REFLECT(ChunkMap);
+
+    std::unordered_map<glm::vec2, bool> chunkExists;
+};
+
 int main(int argc, char** argv)
 {
     Cubos cubos{argc, argv};
@@ -70,9 +80,12 @@ int main(int argc, char** argv)
 
     cubos.plugin(scenePlugin);
 
+    cubos.resource<ChunkMap>();
+
     cubos.startupSystem("configure settings").before(settingsTag).call([](Settings& settings) {
         settings.setString("assets.app.osPath", APP_ASSETS_PATH);
         settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
+        settings.setInteger("renderMeshPool.bucketCount", 2048);
     });
 
     cubos.startupSystem("set the palette and environment and spawn the scene")
@@ -92,9 +105,9 @@ int main(int argc, char** argv)
 
     cubos.system("update chunks")
         .call([](Commands commands, Assets& assets, Query<Entity, const RenderVoxelGrid&, const Position&> chunks,
-                 Query<const Camera&, const Position&> cameras) {
+                 Query<const Camera&, const Position&> cameras, ChunkMap& chunkMap) {
             constexpr float chunkSize = 32.0F;
-            constexpr int genRadiusChunks = 8;
+            constexpr int genRadiusChunks = 16;
             for (auto [camera, position] : cameras)
             {
                 for (int x = -genRadiusChunks; x < genRadiusChunks; x++)
@@ -103,17 +116,9 @@ int main(int argc, char** argv)
                     {
                         float posX = float(x + static_cast<int>(position.vec.x / chunkSize)) * chunkSize;
                         float posZ = float(z + static_cast<int>(position.vec.z / chunkSize)) * chunkSize;
-                        bool hasChunk = false;
-                        for (auto [entity, grid, gridPosition] : chunks)
+                        if (!chunkMap.chunkExists.contains(glm::vec2(posX, posZ)))
                         {
-                            if (gridPosition.vec.x == posX && gridPosition.vec.z == posZ)
-                            {
-                                hasChunk = true;
-                                break;
-                            }
-                        }
-                        if (!hasChunk)
-                        {
+                            chunkMap.chunkExists[glm::vec2(posX, posZ)] = true;
                             // Create a grid with random materials.
                             glm::uvec3 gridSize = {static_cast<int>(chunkSize), 32, static_cast<int>(chunkSize)};
                             auto voxelGrid = VoxelGrid{gridSize};
@@ -151,6 +156,7 @@ int main(int argc, char** argv)
                         gridPosition.vec.z > maxZ)
                     {
                         removedChunks.push_back(entity);
+                        chunkMap.chunkExists.erase(glm::vec2(gridPosition.vec.x, gridPosition.vec.z));
                     }
                 }
                 for (auto& chunkEntity : removedChunks)
