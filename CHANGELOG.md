@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Make SSAO optional (#1396, **@tomas7770**).
+- Made the fixed step accumulator a public resource of the fixed step plugin (**@RiscadoA**).
 
 ### Fixed
 
