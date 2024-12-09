@@ -33,8 +33,11 @@ void cubos::engine::selectionPlugin(Cubos& cubos)
                     // Find the render picker for the main window (nullptr framebuffer)
                     if (target.framebuffer == nullptr)
                     {
-                        uint32_t entityId = picker.read(static_cast<unsigned int>(ImGui::GetMousePos().x),
-                                                        static_cast<unsigned int>(ImGui::GetMousePos().y));
+                        uint32_t entityId =
+                            picker.read(static_cast<unsigned int>((ImGui::GetMousePos().x / ImGui::GetWindowWidth()) *
+                                                                  static_cast<float>(target.size.x)),
+                                        static_cast<unsigned int>((ImGui::GetMousePos().y / ImGui::GetWindowHeight()) *
+                                                                  static_cast<float>(target.size.y)));
 
                         if (entityId == UINT32_MAX)
                         {
