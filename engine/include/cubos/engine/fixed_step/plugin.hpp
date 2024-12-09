@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cubos/engine/fixed_step/fixed_accumulated_time.hpp>
 #include <cubos/engine/fixed_step/fixed_delta_time.hpp>
 #include <cubos/engine/prelude.hpp>
 

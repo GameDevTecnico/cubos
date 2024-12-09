@@ -137,6 +137,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/ui/text/text.cpp"
 
 	"src/fixed_step/plugin.cpp"
+	"src/fixed_step/fixed_accumulated_time.cpp"
 	"src/fixed_step/fixed_delta_time.cpp"
 
     "src/font/atlas/glyph.cpp"

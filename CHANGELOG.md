@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Collision layers and masks, for filtering collisions and raycasts (**@RiscadoA**).
 
+### Changed
+
+- Made the fixed step accumulator a public resource of the fixed step plugin (**@RiscadoA**).
+
 ### Fixed
 
 - Normalize normals while drawing to the GBuffer to avoid shiny small objects (**@RiscadoA**).
