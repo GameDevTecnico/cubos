@@ -242,7 +242,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
 
     cubos.system("do Gizmos picking")
         .after(drawToRenderPickerTag)
-        .call([](GizmosRenderer& gizmosRenderer, Gizmos& gizmos,
+        .call([](const Window& window, GizmosRenderer& gizmosRenderer, Gizmos& gizmos,
                  Query<const RenderTarget&, const RenderPicker&> renderPickers) {
             int mouseX = gizmosRenderer.lastMousePosition.x;
             int mouseY = gizmosRenderer.lastMousePosition.y;
@@ -252,6 +252,11 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
             {
                 if (target.framebuffer == nullptr)
                 {
+                    mouseX = static_cast<int>(static_cast<float>(mouseX) * static_cast<float>(target.size.x) /
+                                              static_cast<float>(window->size().x));
+                    mouseY = static_cast<int>(static_cast<float>(mouseY) * static_cast<float>(target.size.y) /
+                                              static_cast<float>(window->size().y));
+
                     auto id = picker.read(static_cast<unsigned int>(mouseX), static_cast<unsigned int>(mouseY));
                     if (id < static_cast<uint32_t>(1 << 31))
                     {

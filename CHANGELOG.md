@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added missing updates to mouse and gamepad buttons on input axes (**@RiscadoA**).
 - Added missing reflection for sound field of AudioSource component (**@RiscadoA**).
 - Added libpulseaudio to NixOS flake, which was necessary to get audio working on NixOS (**@RiscadoA**).
+- Fixed Gizmos selection on HiDPI screens (**@diogomsmiranda**).
 
 ## [v0.5.0] - 2024-12-01
 
