@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Consider Collider component transform matrix while doing Raycast (**@RiscadoA**).
 - Screen Space Ambient Occlusion noise undefined behavior (**@RiscadoA**).
 - Added missing updates to mouse and gamepad buttons on input axes (**@RiscadoA**).
+- Added missing reflection for sound field of AudioSource component (**@RiscadoA**).
 
 ## [v0.5.0] - 2024-12-01
 
