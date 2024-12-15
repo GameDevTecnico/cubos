@@ -15,5 +15,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::AudioSource)
         .withField("innerConeAngle", &AudioSource::innerConeAngle)
         .withField("outerConeAngle", &AudioSource::outerConeAngle)
         .withField("outerConeGain", &AudioSource::outerConeGain)
+        .withField("sound", &AudioSource::sound)
         .build();
 }
