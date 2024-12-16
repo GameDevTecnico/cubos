@@ -18,6 +18,7 @@
           xorg.libXcursor
           xorg.libXi
           xorg.libXdmcp
+          libpulseaudio
         ];
       in
       {
