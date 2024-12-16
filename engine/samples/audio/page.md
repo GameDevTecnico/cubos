@@ -1,4 +1,4 @@
-# Audio {#examples-audio-sample}
+# Audio {#examples-engine-audio}
 
 @brief Using the @ref audio-plugin plugin
 
