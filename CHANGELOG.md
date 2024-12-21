@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - SSAO resolution scale (#1423, **@tomas7770**).
+- Enable ImGui docking branch
+- Enable ImGui docking on Tesseratos with a dockspace
 
 ### Changed
 
