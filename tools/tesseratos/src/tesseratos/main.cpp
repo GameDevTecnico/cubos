@@ -69,14 +69,14 @@ int main(int argc, char** argv)
         ImGui::SetNextWindowViewport(viewport->ID);
 
         // ImGui window flags, check imgui.h for definition
-        ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-        window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-        window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+        ImGuiWindowFlags windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+        windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+        windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
     
-        ImGui::Begin("Tesseratos", NULL, window_flags);
+        ImGui::Begin("Tesseratos", nullptr, windowFlags);
         
-        ImGuiID dockspace_id = ImGui::GetID("TesseratosRoot");
-        ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f));
+        ImGuiID dockspaceId = ImGui::GetID("TesseratosRoot");
+        ImGui::DockSpace(dockspaceId, ImVec2(0.0F, 0.0F));
 
         ImGui::End();
     });
