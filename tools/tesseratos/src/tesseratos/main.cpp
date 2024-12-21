@@ -55,8 +55,30 @@ int main(int argc, char** argv)
             input.bind(*bindings);
         });
 
-    cubos.startupSystem("set ImGui context").after(imguiInitTag).call([](ImGuiContextHolder& holder) {
+    cubos.startupSystem("set ImGui context and enable docking").after(imguiInitTag).call([](ImGuiContextHolder& holder) {
         ImGui::SetCurrentContext(holder.context);
+        ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+    });
+
+    cubos.system("setup ImGui dockspace").tagged(imguiTag).call([]() {
+
+        // make DockSpace fullscreen
+        const ImGuiViewport* viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(viewport->WorkPos);
+        ImGui::SetNextWindowSize(viewport->WorkSize);
+        ImGui::SetNextWindowViewport(viewport->ID);
+
+        // ImGui window flags, check imgui.h for definition
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+        window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+        window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+    
+        ImGui::Begin("Tesseratos", NULL, window_flags);
+        
+        ImGuiID dockspace_id = ImGui::GetID("TesseratosRoot");
+        ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f));
+
+        ImGui::End();
     });
 
     cubos.run();
