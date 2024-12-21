@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Enable ImGui docking branch
-- Enable ImGui docking on Tesseratos with a dockspace
+- Enable ImGui docking branch (#839, **@jdbaracho**).
+- Enable ImGui docking on Tesseratos with a dockspace (#839, **@jdbaracho**).
 
 ### Changed
 
