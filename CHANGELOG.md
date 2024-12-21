@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Conditional shader compilation (#1406, **@tomas7770**).
 - Collision layers and masks, for filtering collisions and raycasts (**@RiscadoA**).
 - Frustum geometry and intersection functions (#1184, **@mkuritsu**).
+- Enable ImGui docking branch and modify Tesseratos to accommodate it (#839, **@jdbaracho**).
 
 ### Changed
 
