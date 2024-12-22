@@ -8,6 +8,7 @@ CUBOS_REFLECT_IMPL(cubos::engine::SSAO)
 {
     return core::ecs::TypeBuilder<SSAO>("cubos::engine::SSAO")
         .withField("size", &SSAO::size)
+        .withField("resolutionScale", &SSAO::resolutionScale)
         .withField("samples", &SSAO::samples)
         .withField("radius", &SSAO::radius)
         .withField("bias", &SSAO::bias)

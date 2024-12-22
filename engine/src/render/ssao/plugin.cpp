@@ -29,6 +29,7 @@ using cubos::core::io::Window;
 CUBOS_DEFINE_TAG(cubos::engine::drawToSSAOTag);
 
 #define MAX_KERNEL_SIZE 64
+#define MAX_SSAO_RESOLUTION 2.0F
 
 namespace
 {
@@ -60,6 +61,7 @@ namespace
         ShaderBindingPoint blurSSAOBP;
         ShaderBindingPoint blurViewportOffsetBP;
         ShaderBindingPoint blurViewportSizeBP;
+        ShaderBindingPoint blurResolutionScaleBP;
         VertexArray blurScreenQuad;
 
         ConstantBuffer perSceneCB;
@@ -86,8 +88,9 @@ namespace
             blurSSAOBP = blurPipeline->getBindingPoint("ssaoTexture");
             blurViewportOffsetBP = blurPipeline->getBindingPoint("viewportOffset");
             blurViewportSizeBP = blurPipeline->getBindingPoint("viewportSize");
-            CUBOS_ASSERT(blurSSAOBP && blurViewportOffsetBP && blurViewportSizeBP,
-                         "ssaoTexture, viewportOffset and viewportSize binding points must exist");
+            blurResolutionScaleBP = blurPipeline->getBindingPoint("resolutionScale");
+            CUBOS_ASSERT(blurSSAOBP && blurViewportOffsetBP && blurViewportSizeBP && blurResolutionScaleBP,
+                         "ssaoTexture, viewportOffset, viewportSize and resolutionScale binding points must exist");
             generateScreenQuad(renderDevice, blurPipeline, blurScreenQuad);
 
             perSceneCB = renderDevice.createConstantBuffer(sizeof(PerScene), nullptr, Usage::Dynamic);
@@ -197,15 +200,28 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     }
 
                     // Check if we need to resize the SSAO textures.
-                    if (ssao.size != gBuffer.size)
+                    if (ssao.resolutionScale > MAX_SSAO_RESOLUTION)
                     {
-                        ssao.size = gBuffer.size;
+                        // There's probably not much benefit to a scale larger than 1.0, so don't allow very large scale
+                        CUBOS_WARN("SSAO resolution scale is too large, clamping to {}", MAX_SSAO_RESOLUTION);
+                        ssao.resolutionScale = MAX_SSAO_RESOLUTION;
+                    }
+                    else if (ssao.resolutionScale <= 0.0F)
+                    {
+                        CUBOS_WARN("SSAO resolution scale must be positive, setting to 0.5");
+                        ssao.resolutionScale = 0.5F;
+                    }
+                    auto ssaoConfigSize = glm::uvec2(float(gBuffer.size.x) * ssao.resolutionScale,
+                                                     float(gBuffer.size.y) * ssao.resolutionScale);
+                    if (ssao.size != ssaoConfigSize)
+                    {
+                        ssao.size = ssaoConfigSize;
 
                         // Prepare common texture description.
                         Texture2DDesc desc{};
                         desc.format = TextureFormat::R32Float;
-                        desc.width = gBuffer.size.x;
-                        desc.height = gBuffer.size.y;
+                        desc.width = ssao.size.x;
+                        desc.height = ssao.size.y;
                         desc.usage = Usage::Dynamic;
 
                         // Create base and blur textures.
@@ -268,6 +284,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     state.blurSSAOBP->bind(ssao.baseTexture);
                     state.blurViewportOffsetBP->setConstant(drawsTo.viewportOffset);
                     state.blurViewportSizeBP->setConstant(drawsTo.viewportSize);
+                    state.blurResolutionScaleBP->setConstant(ssao.resolutionScale);
                     rd.setVertexArray(state.blurScreenQuad);
                     rd.drawTriangles(0, 6);
                 }

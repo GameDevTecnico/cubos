@@ -5,11 +5,13 @@ uniform sampler2D ssaoTexture;
 uniform vec2 viewportOffset;
 uniform vec2 viewportSize;
 
+uniform float resolutionScale;
+
 layout (location = 0) out float color;
 
 void main() {
     vec2 uv = fragUv * viewportSize + viewportOffset;
-    vec2 texelSize = 1.0 / vec2(textureSize(ssaoTexture, 0));
+    vec2 texelSize = resolutionScale / vec2(textureSize(ssaoTexture, 0));
     float result = 0.0;
     for (int x = -2; x < 2; ++x)
     {
