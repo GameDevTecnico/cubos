@@ -22,6 +22,9 @@ namespace cubos::engine
         /// @brief Size of the SSAO textures, in pixels.
         glm::uvec2 size = {0, 0};
 
+        /// @brief Scale value to configure SSAO texture size.
+        float resolutionScale = 0.5F;
+
         /// @brief Number of samples to use.
         int samples = 64;
 

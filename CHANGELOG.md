@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- SSAO resolution scale (#1423, **@tomas7770**).
+
 ### Changed
 
 - Make SSAO optional (#1396, **@tomas7770**).
