@@ -16,3 +16,4 @@ multiple plugins of the engine:
 - @subpage examples-engine-events - @copybrief examples-engine-events
 - @subpage examples-engine-voxels - @copybrief examples-engine-voxels
 - @subpage examples-engine-imgui - @copybrief examples-engine-imgui
+- @subpage examples-engine-audio - @copybrief examples-engine-audio
