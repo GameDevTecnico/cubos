@@ -52,13 +52,16 @@ int main(int argc, char** argv)
             input.bind(*bindings);
         });
 
+    /// [Adding an AudioListener]
     cubos.startupSystem("create a camera").call([](Commands cmds) {
         cmds.create()
             .add(Position{{0.0F, 0.0F, 0.0F}})
             .add(Rotation::lookingAt({-1.0F, -1.0F, -1.0F}, glm::vec3{0.0F, 1.0F, 0.0F}))
             .add(AudioListener{true});
     });
+    /// [Adding an AudioListener]
 
+    /// [Adding the AudioSource]
     cubos.startupSystem("create an audio source").after(audioStateInitTag).call([](Commands cmds) {
         cmds.create()
             .add(Position{{0.0F, 0.0F, 0.0F}})
@@ -66,16 +69,20 @@ int main(int argc, char** argv)
             .add(Rotation::lookingAt({-1.0F, -1.0F, -1.0F}, glm::vec3{0.0F, 1.0F, 0.0F}))
             .add(AudioSource{});
     });
+    /// [Adding the AudioSource]
 
     cubos.system("play audio").call([&currAsset](Input& input, Commands cmds, Query<Entity, AudioSource&> query) {
         for (auto [ent, src] : query)
         {
+            /// [Adding the asset]
             if (src.sound.isNull())
             {
                 src.sound = AudioAssets[0];
                 cmds.add(ent, AudioPlay{});
             }
+            /// [Adding the asset]
 
+            /// [Manipulating audio assets]
             if (input.justPressed("skip"))
             {
                 CUBOS_INFO("SKIP: {}", src.sound.getIdString());
@@ -102,6 +109,7 @@ int main(int argc, char** argv)
                 cmds.add(ent, AudioStop{});
                 CUBOS_INFO("STOPPING: {}", src.sound.getIdString());
             }
+            /// [Manipulating audio assets]
         }
     });
 
