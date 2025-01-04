@@ -244,14 +244,12 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
 
         if (trait.size() == 1)
         {
-            // If there's a single field, read it directly.
-            if (!this->read(trait.begin()->type(), view.begin()->value))
+            // If there's a single field, attempt to read it directly.
+            if (this->read(trait.begin()->type(), view.begin()->value))
             {
-                CUBOS_WARN("Couldn't deserialize wrapped field {}", trait.begin()->name());
-                return false;
+                return true;
             }
 
-            return true;
         }
 
         if (!mIterator->is_object())
