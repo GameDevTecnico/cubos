@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decomposition of 4x4 matrices into translation, scale and rotation on the inspector (#1179, **@RiscadoA**).
 - Default entities on blueprints, used as roots for scenes (#1398, **@RiscadoA**).
 - Automatically add ColliderAABB when adding a Collision Shape to an entity (#1444, **@fallenatlas**).
+- Wrapper trait to distinguish between single-field structs and wrapper structs (**SrGesus**, **@RiscadoA**).
 
 ### Changed
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).

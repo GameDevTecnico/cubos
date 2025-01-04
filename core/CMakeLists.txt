@@ -61,6 +61,7 @@ set(CUBOS_CORE_SOURCE
 	"src/reflection/traits/mask.cpp"
 	"src/reflection/traits/inherits.cpp"
 	"src/reflection/traits/vector.cpp"
+	"src/reflection/traits/wrapper.cpp"
 	"src/reflection/external/primitives.cpp"
 	"src/reflection/external/cstring.cpp"
 	"src/reflection/external/string.cpp"

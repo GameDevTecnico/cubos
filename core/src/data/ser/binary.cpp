@@ -8,6 +8,7 @@
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
+#include <cubos/core/reflection/traits/wrapper.hpp>
 #include <cubos/core/reflection/type.hpp>
 #include <cubos/core/tel/logging.hpp>
 
@@ -19,6 +20,7 @@ using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::MaskTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
+using cubos::core::reflection::WrapperTrait;
 
 #define AUTO_HOOK(casted, type)                                                                                        \
     this->hook<type>([this](const type& value) {                                                                       \
@@ -149,6 +151,15 @@ bool BinarySerializer::decompose(const Type& type, const void* value)
                 CUBOS_WARN("Could not serialize field {}", field->name());
                 return false;
             }
+        }
+    }
+    else if (type.has<WrapperTrait>())
+    {
+        const auto& trait = type.get<WrapperTrait>();
+        if (!this->write(trait.type(), trait.value(value)))
+        {
+            CUBOS_ERROR("Could not serialize wrapper of type {}", trait.type().name());
+            return false;
         }
     }
     else if (type.has<StringConversionTrait>())
