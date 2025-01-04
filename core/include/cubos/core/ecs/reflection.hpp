@@ -6,6 +6,7 @@
 
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/wrapper.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 namespace cubos::core::ecs
@@ -88,7 +89,7 @@ namespace cubos::core::ecs
         /// @param pointer Field pointer.
         /// @return Builder.
         template <typename F>
-        TypeBuilder&& withField(std::string name, F T::*pointer) &&
+        TypeBuilder&& withField(std::string name, F T::* pointer) &&
         {
             mFields.addField(std::move(name), pointer);
             return std::move(*this);
@@ -99,6 +100,18 @@ namespace cubos::core::ecs
         reflection::Type& build() &&
         {
             mType.with(std::move(mFields));
+            return mType;
+        }
+
+        /// @brief Creates a type with a single field.
+        /// @tparam F Field type.
+        /// @param pointer Field pointer.
+        /// @return Type.
+        template <typename F>
+        reflection::Type& wrap(F T::* pointer) &&
+        {
+            CUBOS_ASSERT(mFields.size() == 0);
+            mType.with(reflection::WrapperTrait(pointer));
             return mType;
         }
 

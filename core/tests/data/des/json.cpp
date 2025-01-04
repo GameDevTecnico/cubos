@@ -12,6 +12,7 @@
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
+#include <cubos/core/reflection/traits/wrapper.hpp>
 #include <cubos/core/tel/logging.hpp>
 
 #include "../utils.hpp"
@@ -23,6 +24,7 @@ using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
+using cubos::core::reflection::WrapperTrait;
 using cubos::core::tel::Level;
 using cubos::core::tel::Logger;
 
@@ -86,7 +88,7 @@ CUBOS_REFLECT_IMPL(Empty)
 
 CUBOS_REFLECT_IMPL(Wrapper)
 {
-    return Type::create("Wrapper").with(FieldsTrait{}.withField("inner", &Wrapper::inner));
+    return Type::create("Wrapper").with(WrapperTrait{&Wrapper::inner});
 }
 
 CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, Color);
@@ -195,7 +197,7 @@ TEST_CASE("data::JSONDeserializer")
     const auto& nullable = reflect<Nullable>();
     const auto& nullableTrait = nullable.get<NullableTrait>();
     Nullable null{144};
-    AUTO_SUCCESS(144, null);
+    AUTO_SUCCESS((Json::object({{"value", 144}})), null);
 
     nullableTrait.setToNull(&null);
     AUTO_SUCCESS(nlohmann::json::value_t::null, null);

@@ -12,6 +12,7 @@ add_executable(
 	reflection/type_client_server.cpp
 	reflection/type_registry.cpp
 	reflection/traits/constructible.cpp
+	reflection/traits/wrapper.cpp
 	reflection/traits/fields.cpp
 	reflection/traits/nullable.cpp
 	reflection/traits/enum.cpp
