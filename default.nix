@@ -65,7 +65,7 @@ let
   imgui = fetchFromGitHub {
     owner = "ocornut";
     repo = "imgui";
-    rev = "v1.89.9";
+    rev = "v1.89.9-docking";
     sha256 = "sha256-0k9jKrJUrG9piHNFQaBBY3zgNIKM23ZA879NY+MNYTU=";
   };
 
