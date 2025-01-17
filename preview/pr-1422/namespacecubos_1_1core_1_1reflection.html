@@ -56,7 +56,6 @@
               Reference
               <ul>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -64,11 +63,6 @@
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">Reflect</a>
-            </dt>
-            <dd>Defines the reflection function for the given type <code>T</code>.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html" class="m-doc">ArrayTrait</a>
             </dt>
@@ -102,6 +96,11 @@
             </dt>
             <dd>Used to manipulate values of null-representable types.</dd>
             <dt>
+              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+              struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">Reflect</a>
+            </dt>
+            <dd>Defines the reflection function for the given type <code>T</code>.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1reflection_1_1StringConversionTrait.html" class="m-doc">StringConversionTrait</a>
             </dt>
             <dd>Stores functions for converting a type to and from a string.</dd>
@@ -120,75 +119,8 @@
             <dt>
               class <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html" class="m-doc">TypeServer</a>
             </dt>
-            <dd>Used to setup a TypeChannel on top of a stream, from the server side.</dd>
+            <dd>Used to setup a <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">TypeChannel</a> on top of a stream, from the server side.</dd>
           </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a36b1ceae70bfc4f4c9ae8478388ceae7" class="m-doc">compare</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
-              const void* a,
-              const void* b) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
-            </dt>
-            <dd>Compares two instances of the same type.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga843186fa1a151fb6c47c4a4994009ddd" class="m-doc">makeAnonymousType</a>(</span><span class="m-doc-wrap">const char* name,
-              const char* file,
-              std::size_t size,
-              std::size_t alignment,
-              void(*)(void*) destructor) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
-            </dt>
-            <dd>Creates a new reflection type with a unique name created from a type name and a file path, and with a minimal <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
-            </dt>
-            <dd>Reflects the given type <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#gaecd81749630d84a2baa8afb81568bb94" class="m-doc">autoConstructibleTrait</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a></span>
-            </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a> with the default, copy and move constructors, set only if the type has them.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a36b1ceae70bfc4f4c9ae8478388ceae7"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool cubos::<wbr />core::<wbr />reflection::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a36b1ceae70bfc4f4c9ae8478388ceae7" class="m-doc-self">compare</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
-              const void* a,
-              const void* b)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="comparison_8hpp.html">&lt;core/reflection/comparison.hpp&gt;</a></div>
-            </h3>
-            <p>Compares two instances of the same type.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">type</td>
-                  <td>The type of the data being compared</td>
-                </tr>
-                <tr>
-                  <td>a</td>
-                  <td>One of the instances.</td>
-                </tr>
-                <tr>
-                  <td>b</td>
-                  <td>The other instance.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True if the values are equal, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>If the type has no comparable trait, this function will abort.</p></aside>
-          </div></section>
         </section>
       </div>
     </div>
@@ -234,7 +166,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

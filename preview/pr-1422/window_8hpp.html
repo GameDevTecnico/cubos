@@ -57,9 +57,6 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#enum-members">Enums</a></li>
-                <li><a href="#typedef-members">Typedefs</a></li>
-                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -118,64 +115,6 @@
             <dd>Interface used to wrap low-level window API implementations.</dd>
           </dl>
         </section>
-        <section id="enum-members">
-          <h2><a href="#enum-members">Enums</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">enum class <a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> { </span><span class="m-doc-wrap"><a href="#gga345e43df7245483a92ed345d78c340d5a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> = -1,
-              <a href="#gga345e43df7245483a92ed345d78c340d5a945d5e233cf7d6240f6b783b36a374ff" class="m-doc">Left</a>,
-              <a href="#gga345e43df7245483a92ed345d78c340d5a92b09c7c48c520c3c55e497875da437c" class="m-doc">Right</a>,
-              <a href="#gga345e43df7245483a92ed345d78c340d5ab1ca34f82e83c52b010f86955f264e05" class="m-doc">Middle</a>,
-              <a href="#gga345e43df7245483a92ed345d78c340d5a113f84d105af2b8016b3896117c9deab" class="m-doc">Extra1</a>,
-              <a href="#gga345e43df7245483a92ed345d78c340d5a83dca46dd08ad782e968d586375715e1" class="m-doc">Extra2</a> }</span>
-            </dt>
-            <dd>Mouse buttons enum.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum class <a href="group__core-io.html#gad80efa2cc9794975a6e6e0151494ce26" class="m-doc">MouseAxis</a> { </span><span class="m-doc-wrap"><a href="#ggad80efa2cc9794975a6e6e0151494ce26a02129bb861061d1a052c592e2dc6b383" class="m-doc">X</a>,
-              <a href="#ggad80efa2cc9794975a6e6e0151494ce26a57cec4137b614c87cb4e24a3d003a3e0" class="m-doc">Y</a>,
-              <a href="#ggad80efa2cc9794975a6e6e0151494ce26a105078d294d30c978ca2badf7f376934" class="m-doc">Scroll</a> }</span>
-            </dt>
-            <dd>Mouse axes enums.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum class <a href="group__core-io.html#ga6a91085b03d6b96ddf36b0ba9a9ae78b" class="m-doc">MouseState</a> { </span><span class="m-doc-wrap"><a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78ba7a1920d61156abc05a60135aefe8bc67" class="m-doc">Default</a>,
-              <a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78bad0f2e5376298c880665077b565ffd7dd" class="m-doc">Locked</a>,
-              <a href="#gga6a91085b03d6b96ddf36b0ba9a9ae78ba7acdf85c69cc3c5305456a293524386e" class="m-doc">Hidden</a> }</span>
-            </dt>
-            <dd>Possible mouse states.</dd>
-          </dl>
-        </section>
-        <section id="typedef-members">
-          <h2><a href="#typedef-members">Typedefs</a></h2>
-          <dl class="m-doc">
-            <dt>
-              using <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a> = std::variant&lt;KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent, ResizeEvent, TextEvent, GamepadConnectionEvent&gt;
-            </dt>
-            <dd>Variant that can hold any of the window events.</dd>
-            <dt>
-              using <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">Window</a> = std::shared_ptr&lt;BaseWindow&gt;
-            </dt>
-            <dd>Handle to a window.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-io.html#gab4138d4aaec432d1851d358751431911" class="m-doc">openWindow</a>(</span><span class="m-doc-wrap">const std::string&amp; title = &quot;Cubos&quot;,
-              const glm::ivec2&amp; size = {800, 600},
-              bool vSync = true) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> Window</span>
-            </dt>
-            <dd>Opens a new window.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-io.html#gaf5824ab6cd7b4d997e7515dfb2380405" class="m-doc">mouseButtonToString</a>(</span><span class="m-doc-wrap">MouseButton button) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> std::string</span>
-            </dt>
-            <dd>Converts a <a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> enum to a string.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-io.html#gad3b338856e0281eb4944202b7bdcffc3" class="m-doc">stringToMouseButton</a>(</span><span class="m-doc-wrap">const std::string&amp; str) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> MouseButton</span>
-            </dt>
-            <dd>Convert a string to a <a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> enum.</dd>
-          </dl>
-        </section>
       </div>
     </div>
   </div>
@@ -220,7 +159,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
