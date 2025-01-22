@@ -74,13 +74,15 @@
             </dt>
             <dd>Updates the texture with new data, which must have the same format used when the texture was created.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a617ffd494a7ec923559cd322774a2ec4" class="m-doc">read</a>(</span><span class="m-doc-wrap">void* outputBuffer,
-              std::size_t level = 0) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a9e7207dd7321ff702ab769daea4708f7" class="m-doc">read</a>(</span><span class="m-doc-wrap">void* outputBuffer) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Reads texture data into a buffer, which must have the same format used when the texture was created.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#adf64a6ff4f614fa741a91343f12f4862" class="m-doc">copyTo</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga797e15f0e0cf846c01a616390e6a3055" class="m-doc">gl::<wbr />PixelPackBuffer</a> buffer,
-              std::size_t level = 0) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a96d3ea2ad5ab4bdb95c203367626e50e" class="m-doc">copyTo</a>(</span><span class="m-doc-wrap">std::size_t x,
+              std::size_t y,
+              std::size_t width,
+              std::size_t height,
+              <a href="group__core-gl.html#ga797e15f0e0cf846c01a616390e6a3055" class="m-doc">gl::<wbr />PixelPackBuffer</a> buffer) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Copies part of the texture data into a pixel pack buffer.</dd>
             <dt id="a7a5fdbc797550dd87a47d615ff93bdf7">
@@ -133,10 +135,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a617ffd494a7ec923559cd322774a2ec4"><div>
+          <section class="m-doc-details" id="a9e7207dd7321ff702ab769daea4708f7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />Texture2D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a617ffd494a7ec923559cd322774a2ec4" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* outputBuffer,
-              std::size_t level = 0) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />Texture2D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9e7207dd7321ff702ab769daea4708f7" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* outputBuffer) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Reads texture data into a buffer, which must have the same format used when the texture was created.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -148,17 +149,16 @@
                   <td style="width: 1%">outputBuffer</td>
                   <td>Buffer to write the data to.</td>
                 </tr>
-                <tr>
-                  <td>level</td>
-                  <td>Mip level to read.</td>
-                </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="adf64a6ff4f614fa741a91343f12f4862"><div>
+          <section class="m-doc-details" id="a96d3ea2ad5ab4bdb95c203367626e50e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />Texture2D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf64a6ff4f614fa741a91343f12f4862" class="m-doc-self">copyTo</a>(</span><span class="m-doc-wrap"><a href="group__core-gl.html#ga797e15f0e0cf846c01a616390e6a3055" class="m-doc">gl::<wbr />PixelPackBuffer</a> buffer,
-              std::size_t level = 0) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />Texture2D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a96d3ea2ad5ab4bdb95c203367626e50e" class="m-doc-self">copyTo</a>(</span><span class="m-doc-wrap">std::size_t x,
+              std::size_t y,
+              std::size_t width,
+              std::size_t height,
+              <a href="group__core-gl.html#ga797e15f0e0cf846c01a616390e6a3055" class="m-doc">gl::<wbr />PixelPackBuffer</a> buffer) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Copies part of the texture data into a pixel pack buffer.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -167,15 +167,28 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">buffer</td>
-                  <td>Buffer to copy into.</td>
+                  <td style="width: 1%">x</td>
+                  <td>Source X coordinate.</td>
                 </tr>
                 <tr>
-                  <td>level</td>
-                  <td>Mip level to copy.</td>
+                  <td>y</td>
+                  <td>Source Y coordinate.</td>
+                </tr>
+                <tr>
+                  <td>width</td>
+                  <td>Width of the section which will be copied.</td>
+                </tr>
+                <tr>
+                  <td>height</td>
+                  <td>Height of the section which will be copied.</td>
+                </tr>
+                <tr>
+                  <td>buffer</td>
+                  <td>Buffer to copy into.</td>
                 </tr>
               </tbody>
             </table>
+<p>The output buffer will store data in one of the three following formats:</p><ul><li>If the texture format ends with <code>Norm</code>, then the output format will be <a href="group__core-gl.html#ggaddc177005230140ebc1319b5f5342881ad7271caeb6a15b0b8a9d27dfbb1d9e7b" class="m-doc">TextureFormat::<wbr />RGBA8UInt</a>.</li><li>If the texture format ends with <code>SInt</code>, then the output format will be TextureFormat::RGBA32SInt.</li><li>If the texture format ends with <code>UInt</code>, then the output format will be TextureFormat::RGBA32UInt.</li><li>Otherwise, the output format will be <a href="group__core-gl.html#ggaddc177005230140ebc1319b5f5342881aeb2c00a865e6d373efbef741bd999a53" class="m-doc">TextureFormat::<wbr />RGBA32Float</a>.</li></ul>
           </div></section>
         </section>
       </div>
@@ -222,7 +235,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

@@ -64,21 +64,25 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>
+            </dt>
+            <dd>Interface for a bridge between the <strong>Cubos</strong> virtual file system and the real world.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" class="m-doc">BinaryDeserializer</a>
             </dt>
             <dd>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> class meant to deserialize data written by a <a href="classcubos_1_1core_1_1data_1_1BinarySerializer.html" class="m-doc">BinarySerializer</a>.</dd>
             <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1BinarySerializer.html" class="m-doc">BinarySerializer</a>
+            </dt>
+            <dd>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class meant to serialize data in a non-readable but fast and compact way.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1DebugSerializer.html" class="m-doc">DebugSerializer</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> implementation which prints the given data to a stream in a human-readable format not meant to be parsed.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>
             </dt>
             <dd>Base class for deserializers, which defines the interface for deserializing arbitrary data using its reflection metadata.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" class="m-doc">JSONDeserializer</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> implementation which allows reading data from a JSON object.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>
-            </dt>
-            <dd>Interface for a bridge between the <strong>Cubos</strong> virtual file system and the real world.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" class="m-doc">EmbeddedArchive</a>
             </dt>
@@ -97,17 +101,9 @@
             </dt>
             <dd>Singleton which represents the virtual file system of the engine.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1StandardArchive.html" class="m-doc">StandardArchive</a>
+              class <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" class="m-doc">JSONDeserializer</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads and writes from/into the OS file system using the standard library.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1BinarySerializer.html" class="m-doc">BinarySerializer</a>
-            </dt>
-            <dd>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class meant to serialize data in a non-readable but fast and compact way.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1DebugSerializer.html" class="m-doc">DebugSerializer</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> implementation which prints the given data to a stream in a human-readable format not meant to be parsed.</dd>
+            <dd><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> implementation which allows reading data from a JSON object.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html" class="m-doc">JSONSerializer</a>
             </dt>
@@ -116,6 +112,10 @@
               class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>
             </dt>
             <dd>Base class for serializers, which defines the interface for serializing arbitrary data using its reflection metadata.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1StandardArchive.html" class="m-doc">StandardArchive</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads and writes from/into the OS file system using the standard library.</dd>
           </dl>
         </section>
       </div>
@@ -162,7 +162,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

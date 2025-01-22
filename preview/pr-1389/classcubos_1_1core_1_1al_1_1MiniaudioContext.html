@@ -87,6 +87,14 @@
               <span class="m-doc-wrap-bumper">void <a href="#aef15b7952f0ca81af4037c045362fff0" class="m-doc">enumerateDevices</a>(</span><span class="m-doc-wrap">std::vector&lt;std::string&gt;&amp; devices) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
             <dd>Enumerates the available devices.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aff208673bff009202971af2cac4e50ce" class="m-doc">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) const -&gt; int <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Gets the maximum number of listeners supported by the audio context.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab015edf158ece28802af6fb7de3c7134" class="m-doc">getDefaultDevice</a>(</span><span class="m-doc-wrap">) -&gt; std::string <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Gets the default audio device.</dd>
           </dl>
         </section>
         <section>
@@ -164,6 +172,34 @@
               </tbody>
             </table>
           </div></section>
+          <section class="m-doc-details" id="aff208673bff009202971af2cac4e50ce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int cubos::<wbr />core::<wbr />al::<wbr />MiniaudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff208673bff009202971af2cac4e50ce" class="m-doc-self">getMaxListenerCount</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Gets the maximum number of listeners supported by the audio context.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Maximum number of listeners.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab015edf158ece28802af6fb7de3c7134"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />al::<wbr />MiniaudioContext::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab015edf158ece28802af6fb7de3c7134" class="m-doc-self">getDefaultDevice</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Gets the default audio device.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Name of the default audio device.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
@@ -209,7 +245,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

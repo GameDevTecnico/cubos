@@ -49,7 +49,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>TypeServer <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="type__server_8hpp.html">&lt;core/reflection/type_server.hpp&gt;</a></div>
         </h1>
-        <p>Used to setup a TypeChannel on top of a stream, from the server side.</p>
+        <p>Used to setup a <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">TypeChannel</a> on top of a stream, from the server side.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -63,16 +63,16 @@
             </li>
           </ul>
         </nav>
-<p>This class allows the server to send and receive values of types unknown by the client to the client. Not all types registered on the server will support this: some may not have enough information to be serialized. The set of types which can be safely serialized is returned by the <a href="#aa39152d4fe1dd3b312a6750558f2152f" class="m-doc">connect</a> function.</p><p>The protocol used by this class is as follows:</p><ol><li>Server receives a list of supported trait types from the client, and whether they are structural.</li><li>Server receives a list of the types which the client already knows.</li><li>Server sends the type information of the types which the client does not know. This includes: a) name of each type, b) structural trait of the type which is supported by the client, if any, b) non-structural traits of the type which are supported by the client, d) if the type has a structural trait and is default-constructible, the default-constructed serialized value.</li></ol><p>If the type has multiple structural traits, the first one added to the server is used. The non-structural traits are sent in the order they were added to the server.</p>
+<p>This class allows the server to send and receive values of types unknown by the client to the client. Not all types registered on the server will support this: some may not have enough information to be serialized. The set of types which can be safely serialized is returned by the <a href="#a89db39a16ed11ecd8d01b8a873073a3c" class="m-doc">connect</a> function.</p><p>The protocol used by this class is as follows:</p><ol><li>Server receives a list of supported trait types from the client, and whether they are structural.</li><li>Server receives a list of the types which the client already knows.</li><li>Server sends the type information of the types which the client does not know. This includes: a) name of each type, b) structural trait of the type which is supported by the client, if any, b) non-structural traits of the type which are supported by the client, d) if the type has a structural trait and is default-constructible, the default-constructed serialized value.</li></ol><p>If the type has multiple structural traits, the first one added to the server is used. The non-structural traits are sent in the order they were added to the server.</p>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt>
-              using <a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(<a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">data::<wbr />Serializer</a>&amp;, const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, bool) const &gt;
+              using <a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a>(<a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">data::<wbr />Serializer</a>&amp;, <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a>) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
             </dt>
             <dd>Function type for serializing traits.</dd>
             <dt id="afa0c75d619739b1b7968b736ceb217cc">
-              using <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc-self">DiscoverTypes</a> = void(*)(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;) const &gt;&amp;)
+              using <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc-self">DiscoverTypes</a> = <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(*)(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;&amp;)
             </dt>
             <dd>Function type for discovering new types from a trait.</dd>
           </dl>
@@ -90,28 +90,28 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
+              <span class="m-doc-wrap-bumper">auto <a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
               <a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+              <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes) -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
             </dt>
             <dd>Registers a trait to be supported by the channel.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
-              <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes) -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
             </dt>
             <dd>Registers a trait to be supported by the channel.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a9b73101270ad6959d778f22443ba4229" class="m-doc">addType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9b73101270ad6959d778f22443ba4229" class="m-doc">addType</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type) -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
             </dt>
             <dd>Adds a type to be supported by the channel.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#acf3540371f97d27b0557b0e9597b0f87" class="m-doc">addType</a>(</span><span class="m-doc-wrap">)</span>
+              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#acf3540371f97d27b0557b0e9597b0f87" class="m-doc">addType</a>(</span><span class="m-doc-wrap">) -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
             </dt>
             <dd>Adds a type to be supported by the channel.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa39152d4fe1dd3b312a6750558f2152f" class="m-doc">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream) -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeServer_1_1Connection.html" class="m-doc">Connection</a>&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a89db39a16ed11ecd8d01b8a873073a3c" class="m-doc">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream) -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeServer_1_1Connection.html" class="m-doc">Connection</a>&gt;</span>
             </dt>
             <dd>Connects to a new client, using the given stream.</dd>
           </dl>
@@ -120,7 +120,7 @@
           <h2>Typedef documentation</h2>
           <section class="m-doc-details" id="ac1ca9c58f5f3dcb08b535c04e36c580a"><div>
             <h3>
-              using cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc-self">Serialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(<a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">data::<wbr />Serializer</a>&amp;, const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, bool) const &gt;
+              using cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc-self">Serialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a>(<a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">data::<wbr />Serializer</a>&amp;, <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a>) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
             </h3>
             <p>Function type for serializing traits.</p>
 <p>Receives a serializer, the value to serialize, and whether the type is already serializable.</p>
@@ -130,7 +130,7 @@
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a15b9dd42dbbc334aec04492d3f12719e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
+              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15b9dd42dbbc334aec04492d3f12719e" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
               <a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
               <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
             </h3>
@@ -159,9 +159,9 @@
           <section class="m-doc-details" id="ae32916d0f2b8334b3c769b655f277f0a"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename T&gt;
+                template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
+              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae32916d0f2b8334b3c769b655f277f0a" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="#ac1ca9c58f5f3dcb08b535c04e36c580a" class="m-doc">Serialize</a> serialize,
               <a href="#afa0c75d619739b1b7968b736ceb217cc" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
             </h3>
             <p>Registers a trait to be supported by the channel.</p>
@@ -193,7 +193,7 @@
           </div></section>
           <section class="m-doc-details" id="a9b73101270ad6959d778f22443ba4229"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b73101270ad6959d778f22443ba4229" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b73101270ad6959d778f22443ba4229" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span></span>
             </h3>
             <p>Adds a type to be supported by the channel.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -212,9 +212,9 @@
           <section class="m-doc-details" id="acf3540371f97d27b0557b0e9597b0f87"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename T&gt;
+                template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf3540371f97d27b0557b0e9597b0f87" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf3540371f97d27b0557b0e9597b0f87" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Adds a type to be supported by the channel.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -230,9 +230,9 @@
             </table>
 <p>Also adds any types used by the type, recursively. I.e., types of fields if the type has a <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>.</p>
           </div></section>
-          <section class="m-doc-details" id="aa39152d4fe1dd3b312a6750558f2152f"><div>
+          <section class="m-doc-details" id="a89db39a16ed11ecd8d01b8a873073a3c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeServer_1_1Connection.html" class="m-doc">Connection</a>&gt; cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa39152d4fe1dd3b312a6750558f2152f" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeServer_1_1Connection.html" class="m-doc">Connection</a>&gt; cubos::<wbr />core::<wbr />reflection::<wbr />TypeServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a89db39a16ed11ecd8d01b8a873073a3c" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream)</span></span>
             </h3>
             <p>Connects to a new client, using the given stream.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -298,7 +298,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

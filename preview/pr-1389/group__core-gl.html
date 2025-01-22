@@ -56,6 +56,7 @@
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#enum-members">Enums</a></li>
                 <li><a href="#typedef-members">Typedefs</a></li>
@@ -71,6 +72,15 @@
             <dd>Class <a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice</a> and related types.</dd>
             <dt>file <a href="util_8hpp.html" class="m-doc">util.hpp</a></dt>
             <dd>Function <a href="namespacecubos_1_1core_1_1gl.html#ac414ddafd9a32efab34020940450d041" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />generateScreenQuad</a>.</dd>
+          </dl>
+        </section>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos_1_1core_1_1gl.html" class="m-doc">cubos::core::gl</a></dt>
+            <dd><a href="group__core-gl.html" class="m-doc">Graphics</a> module.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1gl_1_1impl.html" class="m-doc">cubos::core::gl::impl</a></dt>
+            <dd>Namespace to store the abstract types implemented by the render device implementations.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -97,10 +107,6 @@
             </dt>
             <dd>Describes a sampler.</dd>
             <dt>
-              struct <a href="structcubos_1_1core_1_1gl_1_1Texture1DDesc.html" class="m-doc">cubos::core::gl::Texture1DDesc</a>
-            </dt>
-            <dd>Describes a 1D texture.</dd>
-            <dt>
               struct <a href="structcubos_1_1core_1_1gl_1_1Texture2DDesc.html" class="m-doc">cubos::core::gl::Texture2DDesc</a>
             </dt>
             <dd>Describes a 2D texture.</dd>
@@ -116,10 +122,6 @@
               struct <a href="structcubos_1_1core_1_1gl_1_1CubeMapDesc.html" class="m-doc">cubos::core::gl::CubeMapDesc</a>
             </dt>
             <dd>Describes a cube map.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1gl_1_1CubeMapArrayDesc.html" class="m-doc">cubos::core::gl::CubeMapArrayDesc</a>
-            </dt>
-            <dd>Describes a cube map array.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html" class="m-doc">cubos::core::gl::ConstantBufferElement</a>
             </dt>
@@ -177,11 +179,8 @@
             <dd>Index format.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">enum class <a href="#gaddc177005230140ebc1319b5f5342881" class="m-doc">TextureFormat</a> { </span><span class="m-doc-wrap"><a href="#ggaddc177005230140ebc1319b5f5342881af0a6f506aa5b194a87ae1ac8ae197c1f" class="m-doc">R8SNorm</a>,
-              <a href="#ggaddc177005230140ebc1319b5f5342881ad61354fa9f24e44c60534e4edf0f496d" class="m-doc">R16SNorm</a>,
               <a href="#ggaddc177005230140ebc1319b5f5342881a46c380f94f3087cd3e31bf99ee4b1e92" class="m-doc">RG8SNorm</a>,
-              <a href="#ggaddc177005230140ebc1319b5f5342881a0d63a698872837baed5fe7e14d20034c" class="m-doc">RG16SNorm</a>,
               <a href="#ggaddc177005230140ebc1319b5f5342881a6dc6f228212f891edfd07efeb33d60e2" class="m-doc">RGBA8SNorm</a>,
-              <a href="#ggaddc177005230140ebc1319b5f5342881abf53a194df61181251d9e67928dc8e6e" class="m-doc">RGBA16SNorm</a>,
               <a href="#ggaddc177005230140ebc1319b5f5342881a976adf6af511e151f4634ac9a155c1ad" class="m-doc">R8UNorm</a>,
               <a href="#ggaddc177005230140ebc1319b5f5342881ab7ac339ff1189758f743f71a47c9f227" class="m-doc">R16UNorm</a>,
               <a href="#ggaddc177005230140ebc1319b5f5342881a4e9be3a70af24aede537e22cbc459451" class="m-doc">RG8UNorm</a>,
@@ -217,8 +216,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">enum class <a href="#ga495f33cd510c839993feac6cf9425b2c" class="m-doc">AddressMode</a> { </span><span class="m-doc-wrap"><a href="#gga495f33cd510c839993feac6cf9425b2ca7020426cfb0a204051be4b3053d2acc8" class="m-doc">Repeat</a>,
               <a href="#gga495f33cd510c839993feac6cf9425b2ca2403def5083f02105e7802b3b315681e" class="m-doc">Mirror</a>,
-              <a href="#gga495f33cd510c839993feac6cf9425b2ca08825280e3f8137556325061ba67ff8c" class="m-doc">Clamp</a>,
-              <a href="#gga495f33cd510c839993feac6cf9425b2ca070554647306343cbea29ebfdd278ba8" class="m-doc">Border</a> }</span>
+              <a href="#gga495f33cd510c839993feac6cf9425b2ca08825280e3f8137556325061ba67ff8c" class="m-doc">Clamp</a> }</span>
             </dt>
             <dd>Texture address mode.</dd>
             <dt>
@@ -238,11 +236,6 @@
               <a href="#gga5c78e32c8b2ea58f559c7d183eb50c12a8be41da9b58e32ece35a2b5751f6aeb9" class="m-doc">FrontAndBack</a> }</span>
             </dt>
             <dd>Specifies a face.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum class <a href="#gaefb4a8fcd0f892b53c64e5b5780f5899" class="m-doc">RasterMode</a> { </span><span class="m-doc-wrap"><a href="#ggaefb4a8fcd0f892b53c64e5b5780f5899a33e42d0f3b166a4c405127e4412fbef2" class="m-doc">Wireframe</a>,
-              <a href="#ggaefb4a8fcd0f892b53c64e5b5780f5899adb3e3f51c9107e26c9bccf9a188ce2ed" class="m-doc">Fill</a> }</span>
-            </dt>
-            <dd>Rasterizer mode.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">enum class <a href="#gaf0f7a1fade80ac7ceb9d289ecbb81c0d" class="m-doc">Compare</a> { </span><span class="m-doc-wrap"><a href="#ggaf0f7a1fade80ac7ceb9d289ecbb81c0da6e7b34fa59e1bd229b207892956dc41c" class="m-doc">Never</a>,
               <a href="#ggaf0f7a1fade80ac7ceb9d289ecbb81c0da1cfdf0e8d0c87a228c1f40d9bee7888b" class="m-doc">Less</a>,
@@ -349,10 +342,6 @@
             </dt>
             <dd>Handle to a sampler.</dd>
             <dt>
-              using <a href="#ga1754de424e707d7b67d127c07f02eba9" class="m-doc">Texture1D</a> = std::shared_ptr&lt;impl::Texture1D&gt;
-            </dt>
-            <dd>Handle to a 1D texture.</dd>
-            <dt>
               using <a href="#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">Texture2D</a> = std::shared_ptr&lt;impl::Texture2D&gt;
             </dt>
             <dd>Handle to a 2D texture.</dd>
@@ -368,10 +357,6 @@
               using <a href="#ga2fc0f9688c55bf452d587eb92dc6090c" class="m-doc">CubeMap</a> = std::shared_ptr&lt;impl::CubeMap&gt;
             </dt>
             <dd>Handle to a cube map.</dd>
-            <dt>
-              using <a href="#ga515ffd2436bb99ef2083df3bb0b79299" class="m-doc">CubeMapArray</a> = std::shared_ptr&lt;impl::CubeMapArray&gt;
-            </dt>
-            <dd>Handle to a cube map array.</dd>
             <dt>
               using <a href="#gaee7781a28344ba52b20d5a1635d7a1f7" class="m-doc">ConstantBuffer</a> = std::shared_ptr&lt;impl::ConstantBuffer&gt;
             </dt>
@@ -599,33 +584,15 @@
                   </td>
                 </tr>
                 <tr>
-                  <td><a href="#ggaddc177005230140ebc1319b5f5342881ad61354fa9f24e44c60534e4edf0f496d" class="m-doc-self" id="ggaddc177005230140ebc1319b5f5342881ad61354fa9f24e44c60534e4edf0f496d">R16SNorm</a></td>
-                  <td>
-                  <p>1 channel 16 bits normalized signed integer.</p>
-                  </td>
-                </tr>
-                <tr>
                   <td><a href="#ggaddc177005230140ebc1319b5f5342881a46c380f94f3087cd3e31bf99ee4b1e92" class="m-doc-self" id="ggaddc177005230140ebc1319b5f5342881a46c380f94f3087cd3e31bf99ee4b1e92">RG8SNorm</a></td>
                   <td>
                   <p>2 channel 8 bits normalized signed integer.</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><a href="#ggaddc177005230140ebc1319b5f5342881a0d63a698872837baed5fe7e14d20034c" class="m-doc-self" id="ggaddc177005230140ebc1319b5f5342881a0d63a698872837baed5fe7e14d20034c">RG16SNorm</a></td>
-                  <td>
-                  <p>2 channel 16 bits normalized signed integer.</p>
-                  </td>
-                </tr>
-                <tr>
                   <td><a href="#ggaddc177005230140ebc1319b5f5342881a6dc6f228212f891edfd07efeb33d60e2" class="m-doc-self" id="ggaddc177005230140ebc1319b5f5342881a6dc6f228212f891edfd07efeb33d60e2">RGBA8SNorm</a></td>
                   <td>
                   <p>4 channel 8 bits normalized signed integer.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="#ggaddc177005230140ebc1319b5f5342881abf53a194df61181251d9e67928dc8e6e" class="m-doc-self" id="ggaddc177005230140ebc1319b5f5342881abf53a194df61181251d9e67928dc8e6e">RGBA16SNorm</a></td>
-                  <td>
-                  <p>4 channel 16 bits normalized signed integer.</p>
                   </td>
                 </tr>
                 <tr>
@@ -856,13 +823,6 @@
             </h3>
             <p>Specifies a face.</p>
           </div></section>
-          <section class="m-doc-details" id="gaefb4a8fcd0f892b53c64e5b5780f5899"><div>
-            <h3>
-              enum class <a href="#gaefb4a8fcd0f892b53c64e5b5780f5899" class="m-doc-self">RasterMode</a>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="render__device_8hpp.html">&lt;core/gl/render_device.hpp&gt;</a></div>
-            </h3>
-            <p>Rasterizer mode.</p>
-          </div></section>
           <section class="m-doc-details" id="gaf0f7a1fade80ac7ceb9d289ecbb81c0d"><div>
             <h3>
               enum class <a href="#gaf0f7a1fade80ac7ceb9d289ecbb81c0d" class="m-doc-self">Compare</a>
@@ -1046,14 +1006,6 @@
             <p>Handle to a sampler.</p>
 <aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1gl_1_1impl_1_1Sampler.html" class="m-doc">impl::<wbr />Sampler</a> - sampler interface.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="ga1754de424e707d7b67d127c07f02eba9"><div>
-            <h3>
-              using <a href="#ga1754de424e707d7b67d127c07f02eba9" class="m-doc-self">Texture1D</a> = std::shared_ptr&lt;impl::Texture1D&gt;
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="render__device_8hpp.html">&lt;core/gl/render_device.hpp&gt;</a></div>
-            </h3>
-            <p>Handle to a 1D texture.</p>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html" class="m-doc">impl::<wbr />Texture1D</a> - 1D texture interface.</p></aside>
-          </div></section>
           <section class="m-doc-details" id="ga0ae8900d7cc51e23143dd6c77cff24f7"><div>
             <h3>
               using <a href="#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc-self">Texture2D</a> = std::shared_ptr&lt;impl::Texture2D&gt;
@@ -1085,14 +1037,6 @@
             </h3>
             <p>Handle to a cube map.</p>
 <aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1gl_1_1impl_1_1CubeMap.html" class="m-doc">impl::<wbr />CubeMap</a> - cube map interface.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="ga515ffd2436bb99ef2083df3bb0b79299"><div>
-            <h3>
-              using <a href="#ga515ffd2436bb99ef2083df3bb0b79299" class="m-doc-self">CubeMapArray</a> = std::shared_ptr&lt;impl::CubeMapArray&gt;
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="render__device_8hpp.html">&lt;core/gl/render_device.hpp&gt;</a></div>
-            </h3>
-            <p>Handle to a cube map array.</p>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1gl_1_1impl_1_1CubeMapArray.html" class="m-doc">impl::<wbr />CubeMapArray</a> - cube map array interface.</p></aside>
           </div></section>
           <section class="m-doc-details" id="gaee7781a28344ba52b20d5a1635d7a1f7"><div>
             <h3>
@@ -1270,7 +1214,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

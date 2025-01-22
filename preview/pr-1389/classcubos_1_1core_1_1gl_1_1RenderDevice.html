@@ -106,10 +106,6 @@
             </dt>
             <dd>Creates a new texture sampler.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a47f8b71d08c182c6c0558a5b73f5b37b" class="m-doc">createTexture1D</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Texture1DDesc.html" class="m-doc">Texture1DDesc</a>&amp; desc) -&gt; <a href="group__core-gl.html#ga1754de424e707d7b67d127c07f02eba9" class="m-doc">Texture1D</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Creates a new 1D texture.</dd>
-            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1a617e38ae123a4cf8bf6077322b4af2" class="m-doc">createTexture2D</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Texture2DDesc.html" class="m-doc">Texture2DDesc</a>&amp; desc) -&gt; <a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">Texture2D</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Creates a new 2D texture.</dd>
@@ -125,10 +121,6 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a3688e1e05f51ece0a07e33cf1b042fed" class="m-doc">createCubeMap</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1CubeMapDesc.html" class="m-doc">CubeMapDesc</a>&amp; desc) -&gt; <a href="group__core-gl.html#ga2fc0f9688c55bf452d587eb92dc6090c" class="m-doc">CubeMap</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Creates a new cube map.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1c125bdb650c982122e2fec7ac590895" class="m-doc">createCubeMapArray</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1CubeMapArrayDesc.html" class="m-doc">CubeMapArrayDesc</a>&amp; desc) -&gt; <a href="group__core-gl.html#ga515ffd2436bb99ef2083df3bb0b79299" class="m-doc">CubeMapArray</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Creates a new cube map array.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab5747e2e751b3b834087f2019b619404" class="m-doc">createConstantBuffer</a>(</span><span class="m-doc-wrap">std::size_t size,
               const void* data,
@@ -215,6 +207,14 @@
               int a) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Clear the color buffer of a specific target on the current framebuffer to a specific color using integer values.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8bbc0fdb669715fdb62915095e06326a" class="m-doc">clearTargetColor</a>(</span><span class="m-doc-wrap">std::size_t target,
+              unsigned int r,
+              unsigned int g,
+              unsigned int b,
+              unsigned int a) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Clear the color buffer of a specific target on the current framebuffer to a specific color using unsigned integer values.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a5014d0ea90013108af6e1419bbb09877" class="m-doc">clearDepth</a>(</span><span class="m-doc-wrap">float depth) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -488,29 +488,6 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a47f8b71d08c182c6c0558a5b73f5b37b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-gl.html#ga1754de424e707d7b67d127c07f02eba9" class="m-doc">Texture1D</a> cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a47f8b71d08c182c6c0558a5b73f5b37b" class="m-doc-self">createTexture1D</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Texture1DDesc.html" class="m-doc">Texture1DDesc</a>&amp; desc) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Creates a new 1D texture.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">desc</td>
-                  <td>1D texture description.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Texture handle, or nullptr on failure.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
           <section class="m-doc-details" id="a1a617e38ae123a4cf8bf6077322b4af2"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="group__core-gl.html#ga0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">Texture2D</a> cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a617e38ae123a4cf8bf6077322b4af2" class="m-doc-self">createTexture2D</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Texture2DDesc.html" class="m-doc">Texture2DDesc</a>&amp; desc) <span class="m-label m-warning">pure virtual</span></span></span>
@@ -599,29 +576,6 @@
                 <tr>
                   <th>Returns</th>
                   <td>Cube map handle, or nullptr on failure.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1c125bdb650c982122e2fec7ac590895"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-gl.html#ga515ffd2436bb99ef2083df3bb0b79299" class="m-doc">CubeMapArray</a> cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c125bdb650c982122e2fec7ac590895" class="m-doc-self">createCubeMapArray</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1CubeMapArrayDesc.html" class="m-doc">CubeMapArrayDesc</a>&amp; desc) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Creates a new cube map array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">desc</td>
-                  <td>Cube map array description.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Cube map array handle, or nullptr on failure.</td>
                 </tr>
               </tfoot>
             </table>
@@ -1052,6 +1006,43 @@
               </tbody>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a8bbc0fdb669715fdb62915095e06326a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bbc0fdb669715fdb62915095e06326a" class="m-doc-self">clearTargetColor</a>(</span><span class="m-doc-wrap">std::size_t target,
+              unsigned int r,
+              unsigned int g,
+              unsigned int b,
+              unsigned int a) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Clear the color buffer of a specific target on the current framebuffer to a specific color using unsigned integer values.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Target index.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>Red component.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>Green component.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>Blue component.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>Alpha component.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a5014d0ea90013108af6e1419bbb09877"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5014d0ea90013108af6e1419bbb09877" class="m-doc-self">clearDepth</a>(</span><span class="m-doc-wrap">float depth) <span class="m-label m-warning">pure virtual</span></span></span>
@@ -1377,7 +1368,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
