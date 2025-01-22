@@ -158,7 +158,7 @@ int main(int argc, char** argv)
     });
 
     cubos.system("shoot cube")
-        .tagged(physicsApplyForcesTag)
+        .before(transformUpdateTag)
         .call([](Commands cmds, const DeltaTime& dt, const Assets& assets, TimeBetweenShoots& time) {
             time.current += dt.value();
 
