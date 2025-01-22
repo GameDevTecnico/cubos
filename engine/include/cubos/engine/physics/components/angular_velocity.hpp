@@ -19,6 +19,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        glm::vec3 vec;
+        glm::vec3 vec = {0.0F, 0.0F, 0.0F};
     };
 } // namespace cubos::engine
