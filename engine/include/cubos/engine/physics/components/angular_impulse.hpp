@@ -35,7 +35,7 @@ namespace cubos::engine
         }
 
     private:
-        glm::vec3 mAngularImpulse;
+        glm::vec3 mAngularImpulse = {0.0F, 0.0F, 0.0F};
     };
 
 } // namespace cubos::engine
