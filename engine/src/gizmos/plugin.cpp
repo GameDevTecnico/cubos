@@ -105,7 +105,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
         .tagged(gizmosDrawTag)
         .tagged(drawToRenderPickerTag)
         .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, const DeltaTime& deltaTime,
-                 Query<Entity, RenderTarget&, RenderPicker&, GizmosTarget&> targets,
+                 Query<Entity, RenderTarget&, Opt<RenderPicker&>, GizmosTarget&> targets,
                  Query<const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = *gizmosRenderer.renderDevice;
             auto orthoVP =
@@ -115,19 +115,22 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
             for (auto [targetEnt, target, picker, gizmosTarget] : targets)
             {
                 // Prepare a framebuffer for drawing to the picker texture, if necessary.
-                if (gizmosTarget.frontPicker != picker.frontTexture)
+                if (picker.contains() && picker.value().frontTexture != nullptr)
                 {
-                    std::swap(gizmosTarget.frontPicker, gizmosTarget.backPicker);
-                    std::swap(gizmosTarget.frontFramebuffer, gizmosTarget.backFramebuffer);
-                }
-                if (gizmosTarget.frontPicker != picker.frontTexture)
-                {
-                    FramebufferDesc desc{};
-                    desc.targetCount = 1;
-                    desc.targets[0].setTexture2DTarget(picker.frontTexture);
+                    if (gizmosTarget.frontPicker != picker.value().frontTexture)
+                    {
+                        std::swap(gizmosTarget.frontPicker, gizmosTarget.backPicker);
+                        std::swap(gizmosTarget.frontFramebuffer, gizmosTarget.backFramebuffer);
+                    }
+                    if (gizmosTarget.frontPicker != picker.value().frontTexture)
+                    {
+                        FramebufferDesc desc{};
+                        desc.targetCount = 1;
+                        desc.targets[0].setTexture2DTarget(picker.value().frontTexture);
 
-                    gizmosTarget.frontPicker = picker.frontTexture;
-                    gizmosTarget.frontFramebuffer = rd.createFramebuffer(desc);
+                        gizmosTarget.frontPicker = picker.value().frontTexture;
+                        gizmosTarget.frontFramebuffer = rd.createFramebuffer(desc);
+                    }
                 }
 
                 // Prepare for color pass.
@@ -182,11 +185,16 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                 }
 
                 // Prepare for picking pass.
+                if (!picker.contains() || picker.value().frontTexture == nullptr)
+                {
+                    continue;
+                }
+
                 rd.setFramebuffer(gizmosTarget.frontFramebuffer);
-                if (!picker.cleared)
+                if (!picker.value().cleared)
                 {
                     rd.clearTargetColor(0, UINT16_MAX, UINT16_MAX, 0, 0);
-                    picker.cleared = true;
+                    picker.value().cleared = true;
                 }
                 rd.setShaderPipeline(gizmosRenderer.idPipeline);
                 auto* idBP = gizmosRenderer.idPipeline->getBindingPoint("gizmo");
