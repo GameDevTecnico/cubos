@@ -17,5 +17,10 @@ CUBOS_REFLECT_IMPL(Shader)
 
 cubos::core::gl::ShaderStage Shader::shaderStage() const
 {
-    return mShaderStage;
+    return builder().build();
+}
+
+ShaderBuilder Shader::builder() const
+{
+    return {mRenderDevice, mStage, mContents};
 }

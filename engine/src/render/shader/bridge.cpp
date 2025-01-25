@@ -12,15 +12,8 @@ bool ShaderBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& 
     std::string contents;
     stream.readUntil(contents, nullptr);
 
-    cubos::core::gl::ShaderStage shaderStage = mRenderDevice.createShaderStage(mStage, contents.c_str());
-    if (shaderStage == nullptr)
-    {
-        CUBOS_ERROR("Shader asset stage creation failed");
-        return false;
-    }
-
     // Store the asset's data.
-    assets.store(handle, Shader(shaderStage));
+    assets.store(handle, Shader(mStage, mRenderDevice, contents));
     return true;
 }
 
