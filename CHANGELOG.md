@@ -8,12 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Entity destruction detection to observers (#1458, **@kuukitenshi**).
 - Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
 
 ### Changed
-- Made collision layer and mask their own components (#535, **@fallenatlas**).
 
+- Made collision layer and mask their own components (#535, **@fallenatlas**).
+- Make RenderPicker optional (#1407, **@tomas7770**).
 
 ## [v0.6.0] - 2025-02-10
 
