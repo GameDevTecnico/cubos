@@ -52,7 +52,7 @@
           Tcp Sockets
         </h1>
         <p>Using TCP sockets for communication between a server and a client.</p>
-<p><a name="md_net_tcp_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/net/tcp">here</a>.</p></aside><p>This example demonstrates how to set up a TCP server and client, exchanging data, using the <strong>Cubos</strong> engine.</p><p>The TCP sockets are wrapped around a <a href="classcubos_1_1core_1_1net_1_1TcpListener.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />TcpListener</a> and <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />TcpStream</a> classes for a better API and simpler usage.</p><p>First, we need the network dependencies:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/net/tcp_listener.hpp&gt;</span>
+<aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/net/tcp">here</a>.</p></aside><p>This example demonstrates how to set up a TCP server and client, exchanging data, using the <strong>Cubos</strong> engine.</p><p>The TCP sockets are wrapped around a <a href="classcubos_1_1core_1_1net_1_1TcpListener.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />TcpListener</a> and <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />TcpStream</a> classes for a better API and simpler usage.</p><p>First, we need the network dependencies:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/net/tcp_listener.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/net/tcp_stream.hpp&gt;</span></pre><p>We&#x27;ll also define some dummy constants for demonstration purposes:</p><pre class="m-code"><span class="cp">#define SERVER_ADDRESS Address::LocalHost</span>
 <span class="cp">#define SERVER_PORT 8080</span></pre><p>Now, let&#x27;s launch the &quot;TCP server&quot;, which will be a <a href="classcubos_1_1core_1_1net_1_1TcpListener.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />TcpListener</a> waiting for a new connection, and quit after receveing a message from client via <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">cubos::<wbr />core::<wbr />net::<wbr />TcpStream</a> .</p><pre class="m-code"><span class="kt">void</span><span class="w"> </span><span class="nf">runServer</span><span class="p">()</span>
 <span class="p">{</span>
@@ -136,7 +136,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

@@ -56,9 +56,6 @@
               Reference
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#enum-members">Enums</a></li>
-                <li><a href="#func-members">Functions</a></li>
-                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
@@ -72,71 +69,6 @@
             <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1tel.html" class="m-doc">cubos::core::tel</a></dt>
             <dd><a href="group__core-tel.html" class="m-doc">Telemetry</a> module.</dd>
-          </dl>
-        </section>
-        <section id="enum-members">
-          <h2><a href="#enum-members">Enums</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">enum class <a href="group__core-tel.html#ga18bccc868d3747254ac30255d35a2fc0" class="m-doc">Level</a> { </span><span class="m-doc-wrap"><a href="#gga18bccc868d3747254ac30255d35a2fc0add4ec0ac4e58f7c32a01244ae91150b1" class="m-doc">Trace</a> = CUBOS_TEL_LEVEL_TRACE,
-              <a href="#gga18bccc868d3747254ac30255d35a2fc0aa603905470e2a5b8c13e96b579ef0dba" class="m-doc">Debug</a> = CUBOS_TEL_LEVEL_DEBUG,
-              <a href="#gga18bccc868d3747254ac30255d35a2fc0a4059b0251f66a18cb56f544728796875" class="m-doc">Info</a> = CUBOS_TEL_LEVEL_INFO,
-              <a href="#gga18bccc868d3747254ac30255d35a2fc0a56525ae64d370c0b448ac0d60710ef17" class="m-doc">Warn</a> = CUBOS_TEL_LEVEL_WARN,
-              <a href="#gga18bccc868d3747254ac30255d35a2fc0a902b0d55fddef6f8d651fe1035b7d4bd" class="m-doc">Error</a> = CUBOS_TEL_LEVEL_ERROR,
-              <a href="#gga18bccc868d3747254ac30255d35a2fc0a278d01e5af56273bae1bb99a98b370cd" class="m-doc">Critical</a> = CUBOS_TEL_LEVEL_CRITICAL,
-              <a href="#gga18bccc868d3747254ac30255d35a2fc0ad15305d7a4e34e02489c74a5ef542f36" class="m-doc">Off</a> = CUBOS_TEL_LEVEL_OFF }</span>
-            </dt>
-            <dd>Represents a telemetry level.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core-tel.html#ga0a48f1bd1890fbec513416f7f77cce3f" class="m-doc">level</a>(</span><span class="m-doc-wrap">Level level)</span>
-            </dt>
-            <dd>Set telemetry level.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-tel.html#gab43b8f4d360276a4bc09f2563b9f918e" class="m-doc">level</a>(</span><span class="m-doc-wrap">) -&gt; Level -&gt; auto</span>
-            </dt>
-            <dd>Get telemetry level.</dd>
-          </dl>
-        </section>
-        <section id="define-members">
-          <h2><a href="#define-members">Defines</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gaa0a24c67125f0e99b43199ce5a512e15" class="m-doc">CUBOS_TEL_LEVEL_TRACE</a></span>
-            </dt>
-            <dd>Trace telemetry level, lowest telemetry level. Very verbose.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga20110fc95ba905a8770cdc5df3589358" class="m-doc">CUBOS_TEL_LEVEL_DEBUG</a></span>
-            </dt>
-            <dd>Debug telemetry level. Contains logs and tracing useful for debugging, but which are not necessary in release builds.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga3f06950f38620f5724b1f0e93a618c3a" class="m-doc">CUBOS_TEL_LEVEL_INFO</a></span>
-            </dt>
-            <dd>Information telemetry level. Contains important events that are not errors.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga40853fe4553fa712bfb264301a05c5c4" class="m-doc">CUBOS_TEL_LEVEL_WARN</a></span>
-            </dt>
-            <dd>Warn telemetry level. Contains events that are not errors, but which are unexpected and may be problematic.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gac9a4116f620f6cb50f52a10de5c287fe" class="m-doc">CUBOS_TEL_LEVEL_ERROR</a></span>
-            </dt>
-            <dd>Error telemetry level. Contains errors which are recoverable from.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga2fb12867a6338cfa2b24105468f41490" class="m-doc">CUBOS_TEL_LEVEL_CRITICAL</a></span>
-            </dt>
-            <dd>Critical telemetry level, highest log level. Contains errors which are unrecoverable from.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#gab71872ab58c8c473e7cefe52aebbe9cc" class="m-doc">CUBOS_TEL_LEVEL_OFF</a></span>
-            </dt>
-            <dd>Off telemetry level, disables all logging/tracing.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="group__core-tel.html#ga6a082608c8a7c997dc1ecd62c64eaf12" class="m-doc">CUBOS_TEL_LEVEL</a></span>
-            </dt>
-            <dd>Telemetry level to compile in.</dd>
           </dl>
         </section>
       </div>
@@ -183,7 +115,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

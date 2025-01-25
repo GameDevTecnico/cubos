@@ -68,11 +68,11 @@
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt id="a42c8334706c1c7f49f19f20a0a7fef59">
-              using <a href="#a42c8334706c1c7f49f19f20a0a7fef59" class="m-doc-self">Deserialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(const <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">TypeRegistry</a>&amp;, <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">data::<wbr />Deserializer</a>&amp;) const &gt;
+              using <a href="#a42c8334706c1c7f49f19f20a0a7fef59" class="m-doc-self">Deserialize</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">TypeRegistry</a>&amp;, <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">data::<wbr />Deserializer</a>&amp;) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
             </dt>
             <dd>Function type for deserializing traits.</dd>
             <dt id="ab928ed73a21229d942cbfbac60a6ca1c">
-              using <a href="#ab928ed73a21229d942cbfbac60a6ca1c" class="m-doc-self">DiscoverTypes</a> = void(*)(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;) const &gt;&amp;)
+              using <a href="#ab928ed73a21229d942cbfbac60a6ca1c" class="m-doc-self">DiscoverTypes</a> = <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(*)(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;, <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;&amp;)
             </dt>
             <dd>Function type for discovering new types from a trait.</dd>
           </dl>
@@ -90,30 +90,30 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a30292b390cd488e399debc1264bac753" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap">bool isStructural,
-              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
+              <span class="m-doc-wrap-bumper">auto <a href="#a30292b390cd488e399debc1264bac753" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a> isStructural,
+              <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
               <a href="#a42c8334706c1c7f49f19f20a0a7fef59" class="m-doc">Deserialize</a> deserialize,
-              <a href="#ab928ed73a21229d942cbfbac60a6ca1c" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+              <a href="#ab928ed73a21229d942cbfbac60a6ca1c" class="m-doc">DiscoverTypes</a> discoverTypes) -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
             </dt>
             <dd>Registers a trait to be supported by the channel.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a08f38909de8984ebb7c9d1c399831ac0" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap">bool isStructural,
+              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a08f38909de8984ebb7c9d1c399831ac0" class="m-doc">addTrait</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a> isStructural,
               <a href="#a42c8334706c1c7f49f19f20a0a7fef59" class="m-doc">Deserialize</a> deserialize,
-              <a href="#ab928ed73a21229d942cbfbac60a6ca1c" class="m-doc">DiscoverTypes</a> discoverTypes)</span>
+              <a href="#ab928ed73a21229d942cbfbac60a6ca1c" class="m-doc">DiscoverTypes</a> discoverTypes) -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
             </dt>
             <dd>Registers a trait to be supported by the channel.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a25c7c462c2f125160088f463cfd4f5f7" class="m-doc">addType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a25c7c462c2f125160088f463cfd4f5f7" class="m-doc">addType</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type) -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
             </dt>
             <dd>Adds a known type to the channel.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a2a9c0a2eca2ddd36e8abbff21370d23e" class="m-doc">addType</a>(</span><span class="m-doc-wrap">)</span>
+              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2a9c0a2eca2ddd36e8abbff21370d23e" class="m-doc">addType</a>(</span><span class="m-doc-wrap">) -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
             </dt>
             <dd>Adds a known type to the channel.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a26913888a065ae76e3995a9378380aa5" class="m-doc">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeClient_1_1Connection.html" class="m-doc">Connection</a>&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#adabe83544e933461f67cb849c8b27c94" class="m-doc">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream) const -&gt; <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeClient_1_1Connection.html" class="m-doc">Connection</a>&gt;</span>
             </dt>
             <dd>Connects to a server, using the given stream.</dd>
           </dl>
@@ -122,8 +122,8 @@
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a30292b390cd488e399debc1264bac753"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a30292b390cd488e399debc1264bac753" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap">bool isStructural,
-              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
+              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a30292b390cd488e399debc1264bac753" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a> isStructural,
+              <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; traitType,
               <a href="#a42c8334706c1c7f49f19f20a0a7fef59" class="m-doc">Deserialize</a> deserialize,
               <a href="#ab928ed73a21229d942cbfbac60a6ca1c" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
             </h3>
@@ -155,9 +155,9 @@
           <section class="m-doc-details" id="a08f38909de8984ebb7c9d1c399831ac0"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename T&gt;
+                template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a08f38909de8984ebb7c9d1c399831ac0" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap">bool isStructural,
+              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a08f38909de8984ebb7c9d1c399831ac0" class="m-doc-self">addTrait</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a> isStructural,
               <a href="#a42c8334706c1c7f49f19f20a0a7fef59" class="m-doc">Deserialize</a> deserialize,
               <a href="#ab928ed73a21229d942cbfbac60a6ca1c" class="m-doc">DiscoverTypes</a> discoverTypes)</span></span>
             </h3>
@@ -193,7 +193,7 @@
           </div></section>
           <section class="m-doc-details" id="a25c7c462c2f125160088f463cfd4f5f7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a25c7c462c2f125160088f463cfd4f5f7" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a25c7c462c2f125160088f463cfd4f5f7" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span></span>
             </h3>
             <p>Adds a known type to the channel.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -212,9 +212,9 @@
           <section class="m-doc-details" id="a2a9c0a2eca2ddd36e8abbff21370d23e"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename T&gt;
+                template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2a9c0a2eca2ddd36e8abbff21370d23e" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2a9c0a2eca2ddd36e8abbff21370d23e" class="m-doc-self">addType</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Adds a known type to the channel.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -230,9 +230,9 @@
             </table>
 <p>This allows the channel to reuse the given type instead of creating a new runtime type when connecting to a server.</p><aside class="m-note m-info"><h4>Note</h4><p>The type must be default constructible.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a26913888a065ae76e3995a9378380aa5"><div>
+          <section class="m-doc-details" id="adabe83544e933461f67cb849c8b27c94"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeClient_1_1Connection.html" class="m-doc">Connection</a>&gt; cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a26913888a065ae76e3995a9378380aa5" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">memory::<wbr />Opt</a>&lt;<a href="classcubos_1_1core_1_1reflection_1_1TypeClient_1_1Connection.html" class="m-doc">Connection</a>&gt; cubos::<wbr />core::<wbr />reflection::<wbr />TypeClient::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adabe83544e933461f67cb849c8b27c94" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream) const</span></span>
             </h3>
             <p>Connects to a server, using the given stream.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -298,7 +298,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
