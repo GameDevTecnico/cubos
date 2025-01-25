@@ -150,6 +150,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/defaults/target.cpp"
 	"src/render/shader/plugin.cpp"
 	"src/render/shader/shader.cpp"
+	"src/render/shader/shader_builder.cpp"
 	"src/render/shader/bridge.cpp"
 	"src/render/g_buffer/plugin.cpp"
 	"src/render/g_buffer/g_buffer.cpp"
