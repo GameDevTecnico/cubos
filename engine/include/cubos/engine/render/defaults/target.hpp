@@ -30,6 +30,7 @@ namespace cubos::core::memory
     CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::SplitScreen>;
     CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::Bloom>;
     CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::SSAO>;
+    CUBOS_ENGINE_EXTERN template class CUBOS_ENGINE_API Opt<cubos::engine::RenderPicker>;
 } // namespace cubos::core::memory
 
 namespace cubos::engine
@@ -50,7 +51,7 @@ namespace cubos::engine
         GBuffer gBuffer{};
 
         /// @brief Picker component.
-        RenderPicker picker{};
+        core::memory::Opt<RenderPicker> picker{RenderPicker{}};
 
         /// @brief Depth component.
         RenderDepth depth{};
