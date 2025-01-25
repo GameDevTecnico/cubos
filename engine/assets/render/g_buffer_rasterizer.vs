@@ -5,7 +5,9 @@ in uint material;
 out vec3 fragPosition;
 out vec3 fragNormal;
 out vec3 fragAlbedo;
+#ifdef RENDER_PICKER
 flat out uvec2 fragPicker;
+#endif
 
 uniform PerScene
 {
@@ -38,6 +40,8 @@ void main(void)
 
     fragAlbedo = texelFetch(palette, ivec2(mod(float(material), 256.0), material / 256u), 0).rgb;
 
+    #ifdef RENDER_PICKER
     fragPicker.r = (picker >> 16U);
     fragPicker.g = (picker & 65535U);
+    #endif
 }
