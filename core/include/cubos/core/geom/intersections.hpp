@@ -10,6 +10,8 @@
 
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/geom/box.hpp>
+#include <cubos/core/geom/capsule.hpp>
+#include <cubos/core/geom/frustum.hpp>
 #include <cubos/core/geom/plane.hpp>
 #include <cubos/core/geom/polygonal_feature.hpp>
 #include <cubos/core/reflection/reflect.hpp>
@@ -34,14 +36,26 @@ namespace cubos::core::geom
     CUBOS_CORE_API bool intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
                                    const glm::mat4& localToWorld2, Intersection& intersect);
 
+    /// @brief Computes the intersection between a frustum and a box.
+    /// @param box Box shape of the entity.
+    /// @param localToWorld Local to world matrix of the entity.
+    /// @return True if there's intersection, false otherwise.
+    CUBOS_CORE_API bool intersects(const Frustum& frustum, const Box& box, const glm::mat4& localToWorld);
+
+    /// @brief Computes the intersection between a frustum and a capsule.
+    /// @param capsule Capsule shape of the entity.
+    /// @param localToWorld Local to world matrix of the entity.
+    /// @return True if there's intersection, false otherwise.
+    CUBOS_CORE_API bool intersects(const Frustum& frustum, const Capsule& capsule, const glm::mat4& localToWorld);
+
     /// @brief Performs the Sutherland-Hodgman Clipping algorithm.
     /// @param polygon The polygon to perform the clipping on.
     /// @param numClipPlanes Number of cliping planes.
     /// @param clipPlanes Clipping planes
     /// @param removeNotClipToPlane Whether to remove the points if they're outside the plane.
-    CUBOS_CORE_API void sutherlandHodgmanClipping(PolygonalFeature& polygon, int numClipPlanes,
-                                                  const cubos::core::geom::Plane* clipPlanes,
-                                                  bool removeNotClipToPlane);
+    CUBOS_CORE_API
+    void sutherlandHodgmanClipping(PolygonalFeature& polygon, int numClipPlanes,
+                                   const cubos::core::geom::Plane* clipPlanes, bool removeNotClipToPlane);
 
     /// @brief Compute the intersection between a plane and an edge.
     /// @param plane The plane.

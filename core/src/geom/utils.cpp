@@ -13,6 +13,11 @@ bool cubos::core::geom::pointInPlane(const glm::vec3& point, const cubos::core::
     return glm::dot(point, plane.normal) + plane.d >= 0.0F;
 }
 
+float cubos::core::geom::pointDistanceToPlane(const glm::vec3& point, const cubos::core::geom::Plane& plane)
+{
+    return glm::dot(plane.normal, point) - plane.d;
+}
+
 int cubos::core::geom::getMaxVertexInAxis(const int numVertices, const glm::vec3 vertices[], const glm::vec3& localAxis)
 {
     float maxValue = glm::dot(localAxis, vertices[0]);
