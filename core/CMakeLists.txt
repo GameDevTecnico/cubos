@@ -145,6 +145,7 @@ set(CUBOS_CORE_SOURCE
 
     "src/geom/box.cpp"
     "src/geom/capsule.cpp"
+	"src/geom/frustum.cpp"
     "src/geom/intersections.cpp"
 	"src/geom/plane.cpp"
 	"src/geom/utils.cpp"

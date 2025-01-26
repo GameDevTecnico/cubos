@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <array>
 #include <limits>
 
 #include <glm/glm.hpp>
@@ -148,6 +150,34 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
         }
     }
     return true;
+}
+
+bool cubos::core::geom::intersects(const Frustum& frustum, const Box& box, const glm::mat4& localToWorld)
+{
+    std::array<glm::vec3, 8> corners;
+    box.corners(corners.data());
+    std::ranges::transform(corners, corners.begin(),
+                           [localToWorld](glm::vec3& corner) { return localToWorld * glm::vec4{corner, 1.0F}; });
+    auto planes = {&frustum.top, &frustum.right, &frustum.bottom, &frustum.left, &frustum.near, &frustum.far};
+    return std::ranges::any_of(corners, [planes](const glm::vec3 corner) {
+        return std::ranges::all_of(
+            planes, [corner](const Plane* plane) { return pointDistanceToPlane(corner, *plane) > 0.0F; });
+    });
+}
+
+bool cubos::core::geom::intersects(const Frustum& frustum, const Capsule& capsule, const glm::mat4& localToWorld)
+{
+    // capsule is a sphere
+    if (capsule.length == 0.0F)
+    {
+        glm::vec3 center = localToWorld * glm::vec4{0.0F, 0.0F, 0.0F, 1.0F};
+        auto planes = {&frustum.top, &frustum.right, &frustum.bottom, &frustum.left, &frustum.near, &frustum.far};
+        return std::ranges::all_of(planes, [center, capsule](const Plane* plane) {
+            return pointDistanceToPlane(center, *plane) + capsule.radius >= 0.0F;
+        });
+    }
+
+    return intersects(frustum, capsule.aabb().box(), localToWorld);
 }
 
 void cubos::core::geom::sutherlandHodgmanClipping(PolygonalFeature& polygon, int numClipPlanes,

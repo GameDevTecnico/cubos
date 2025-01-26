@@ -22,6 +22,12 @@ namespace cubos::core::geom
     /// @return True is the point is on the plane or closer, false otherwise.
     CUBOS_CORE_API bool pointInPlane(const glm::vec3& point, const cubos::core::geom::Plane& plane);
 
+    /// @brief Computes the signed distance from thene plane to a point.
+    /// @param point The position of the point in world coordinates.
+    /// @param plane The plane to use.
+    /// @return The signed distance.
+    CUBOS_CORE_API float pointDistanceToPlane(const glm::vec3& point, const cubos::core::geom::Plane& plane);
+
     /// @brief Computes the vertex furthest along the axis.
     /// @param vertices Array of vertices.
     /// @param localAxis The direction of the axis in local coordinates.
