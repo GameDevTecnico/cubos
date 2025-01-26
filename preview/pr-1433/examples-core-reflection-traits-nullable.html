@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Examples &raquo; Core &raquo; Reflection &raquo; Nullable Trait | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="examples.html">Examples</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core.html">Core</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-core-reflection.html">Reflection</a> &raquo;</span>
+          Nullable Trait
+        </h1>
+        <p>Handling null type representation.</p>
+<p>The <code>NullableTrait</code> is a reflection trait designed to provide a mechanism for representing a null state for a specific type. This is particularly useful when working with types that are not literally null but can be conceptually treated as null in certain scenarios.</p><p>Consider a scenario where you have a data structure, such as the <code>Entity</code> struct, which represents an entity with an <code>index</code> and a <code>generation</code>. In some cases, you may want to define a special state that indicates the absence of a valid entity instead of checking if both fields are <code>UINT32_MAX</code>. So, instead of using a separate boolean flag to represent this state, the <code>NullableTrait</code> allows you to define a custom condition for considering an instance of the type as &quot;null&quot;.</p><p>So, let&#x27;s see how we can use this. First, we create a reflectable structure:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">MyEntity</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">idx</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">generation</span><span class="p">;</span>
+<span class="p">};</span></pre><p>In the reflection definition, we use the <code>NullableTrait</code> to define the conditions under which an instance of <code>MyEntity</code> is considered null, and also another to set it to null.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/traits/nullable.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/type.hpp&gt;</span>
+
+<span class="c1">// Since we&#39;re exposing fields of primitive types (uint32_t), its important to</span>
+<span class="c1">// include the header which defines their reflection.</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/external/primitives.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">NullableTrait</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span>
+
+<span class="n">CUBOS_REFLECT_IMPL</span><span class="p">(</span><span class="n">MyEntity</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;MyEntity&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">with</span><span class="p">(</span><span class="n">NullableTrait</span><span class="p">{[](</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">ent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">MyEntity</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span>
+<span class="w">                                </span><span class="k">return</span><span class="w"> </span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">idx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">generation</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">;</span>
+<span class="w">                            </span><span class="p">},</span>
+<span class="w">                            </span><span class="p">[](</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">ent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">MyEntity</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span>
+<span class="w">                                </span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">;</span>
+<span class="w">                                </span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">generation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">;</span>
+<span class="w">                            </span><span class="p">}});</span>
+<span class="p">}</span></pre><p>Now, we can simply use it:</p><pre class="m-code"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">reflect</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Retrieve the reflection information for MyEntity</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">entityType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reflect</span><span class="o">&lt;</span><span class="n">MyEntity</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Check if MyEntity has the NullableTrait</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">entityType</span><span class="p">.</span><span class="n">has</span><span class="o">&lt;</span><span class="n">NullableTrait</span><span class="o">&gt;</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Retrieve the NullableTrait for MyEntity</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">nullableTrait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entityType</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">NullableTrait</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Create an instance of MyEntity</span>
+<span class="w">    </span><span class="n">MyEntity</span><span class="w"> </span><span class="n">ent</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// Check if the instance is not null</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="o">!</span><span class="n">nullableTrait</span><span class="p">.</span><span class="n">isNull</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ent</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Set the instance to the null state</span>
+<span class="w">    </span><span class="n">nullableTrait</span><span class="p">.</span><span class="n">setToNull</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ent</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Check if the instance is now null</span>
+<span class="w">    </span><span class="n">CUBOS_ASSERT</span><span class="p">(</span><span class="n">nullableTrait</span><span class="p">.</span><span class="n">isNull</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ent</span><span class="p">));</span>
+<span class="p">}</span></pre>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

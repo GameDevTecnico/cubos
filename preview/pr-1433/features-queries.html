@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feature Guide &raquo; Queries | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <link rel="prev" href="features-plugins.html" />
+  <link rel="next" href="features-quadrados.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="features.html">Feature Guide</a> &raquo;</span>
+          Queries
+        </h1>
+        <p>In-depth guide on writing queries.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>This guide assumes you&#x27;ve read the <a href="features-ecs.html" class="m-doc">ECS</a> guide and are familiar with the concepts of components, relations, resources and systems.</p></aside><section id="autotoc_md35"><h2><a href="#autotoc_md35">Single-target queries</a></h2><p>Let&#x27;s say you want to implement behavior for regenerating the health of all players of a certain class. One possible way to design this would be to have a component <code>Health</code>, and another for the class, e.g., <code>Mage</code>. Then you could add a system similar to the one below:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;heal mages&quot;</span><span class="p">).</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Health</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Mage</span><span class="o">&amp;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">health</span><span class="p">,</span><span class="w"> </span><span class="n">mage</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">health</span><span class="p">.</span><span class="n">points</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span></pre><p>Notice that we don&#x27;t actually access the mage component at all. We just want it to be present on the entities given by the query. A better way to write this would be to add an explicit query term:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;heal mages&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">with</span><span class="o">&lt;</span><span class="n">Mage</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="c1">// &lt;--- EXPLICIT TERM</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Health</span><span class="o">&amp;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">health</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">         </span><span class="p">{</span>
+<span class="w">             </span><span class="n">health</span><span class="p">.</span><span class="n">points</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre><p>Notice that we could also add <code>.with&lt;Health&gt;()</code> above, but that would be redundant.</p><p>Explicit query terms bring a lot of possibilities: they can also be used to specify, for example, that entities should <em>not</em> have a component. With this, we can easily prevent healing mages which are already dead:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;heal alive mages&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">with</span><span class="o">&lt;</span><span class="n">Mage</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">without</span><span class="o">&lt;</span><span class="n">Dead</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Health</span><span class="o">&amp;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">     </span><span class="p">});</span></pre><p>But how do we mark entities as <code>Dead</code>? We add the <code>Dead</code> component to entities with <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#ae484ff4a74c52cc5ce8323bb3c6c2570" class="m-doc">Commands::<wbr />add()</a>, but how do we get the entity handles of the entities with health set to zero? Just adding <code>Entity</code> as a query argument type is enough!</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;add dead to entities with zero health&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">without</span><span class="o">&lt;</span><span class="n">Dead</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="c1">// no use killing it twice!</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Commands</span><span class="w"> </span><span class="n">cmds</span><span class="p">,</span><span class="w"> </span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Health</span><span class="o">&amp;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">     </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="n">health</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">health</span><span class="p">.</span><span class="n">points</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">cmds</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="n">Dead</span><span class="p">{});</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre></section><section id="autotoc_md36"><h2><a href="#autotoc_md36">Multiple-target queries</a></h2><p>Until now we&#x27;ve only seen queries matching against <em>single</em> entities, but what if we want to access relations? Relations no longer belong to a single entity - and this is where the query system really starts to shine.</p><p>Lets add arrows to our fictional RPG. Arrow entities are identified by, you guessed it, an <code>Arrow</code> component. When an arrow hits an entity with health, we want to destroy the arrow and reduce the health. To check if two entities are colliding, we&#x27;ll use the <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">CollidingWith</a> relation.</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;arrow damages entity&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Commands</span><span class="w"> </span><span class="n">cmds</span><span class="p">,</span><span class="w"> </span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Arrow</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CollidingWith</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Health</span><span class="o">&amp;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">arrowEntity</span><span class="p">,</span><span class="w"> </span><span class="n">arrow</span><span class="p">,</span><span class="w"> </span><span class="n">collidingWith</span><span class="p">,</span><span class="w"> </span><span class="n">health</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">health</span><span class="p">.</span><span class="n">points</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cmds</span><span class="p">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">arrowEntity</span><span class="p">),</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre><p>Notice that once again we&#x27;re not accessing some of the data: the <code>Arrow</code> and <code>CollidingWith</code> components. We can rewrite the query above as:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;arrow damages entity&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">entity</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">with</span><span class="o">&lt;</span><span class="n">Arrow</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">related</span><span class="o">&lt;</span><span class="n">CollidingWith</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">with</span><span class="o">&lt;</span><span class="n">Health</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Commands</span><span class="w"> </span><span class="n">cmds</span><span class="p">,</span><span class="w"> </span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="n">Health</span><span class="o">&amp;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">arrowEntity</span><span class="p">,</span><span class="w"> </span><span class="n">health</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">health</span><span class="p">.</span><span class="n">points</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cmds</span><span class="p">.</span><span class="n">destroy</span><span class="p">(</span><span class="n">arrowEntity</span><span class="p">),</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre><p>Notice that this time we include <code>.entity</code> and <code>.with&lt;Health&gt;</code> on the explicit terms to remove the ambiguity that could arise otherwise. Terms before <code>.related</code> are assigned to the target <code>0</code>, the relation is assigned to <code>0, 1</code> and the terms after it to <code>1</code>. We could also set those targets manually, if we wanted to, by simply passing them as arguments to the terms (e.g. <code>.with&lt;Health&gt;(1)</code>).</p><p>For example, iterating over all pairs of entities could be done through:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;for each pair of entities&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">entity</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">entity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="n">Entity</span><span class="o">&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">second</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre></section><section id="autotoc_md37"><h2><a href="#autotoc_md37">Tree Traversal</a></h2><p>Tree relations form hierarchies, and the query system provides a way to traverse them in specific BFS order, if necessary. For example, if you want to traverse the <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a> tree from top to bottom, you could:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;print all ChildOf relations ordered&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">entity</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">related</span><span class="o">&lt;</span><span class="n">ChildOf</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Traversal</span><span class="o">::</span><span class="n">Up</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">entity</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="n">Entity</span><span class="o">&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">child</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{} is a child of {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">child</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre><p>The above system would first print all <code>ChildOf</code> relations originating from entities which don&#x27;t have children, then their parents, and so on until reaching the root entities of the hierarchy. To traverse in the opposite direction you can also use <code>Traversal::Down</code>.</p></section><section id="autotoc_md38"><h2><a href="#autotoc_md38">Pinning</a></h2><p>Alright, its cool that we can query over all entities, but what if we just want to do something with the children of specific entity? You can just pin the parent target to a specific entity!</p><p>Notice that the first target of a relation is identified by <code>0</code>, the second by <code>1</code>, and so on.</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;print all children of some specific entity&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">entity</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">related</span><span class="o">&lt;</span><span class="n">ChildOf</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Entity</span><span class="o">&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">SomeResource</span><span class="o">&amp;</span><span class="w"> </span><span class="n">resource</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Forces all matches of the query to have target 1 = resource.entity</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">child</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">.</span><span class="n">pin</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="p">.</span><span class="n">entity</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{} is a child of {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">child</span><span class="p">,</span><span class="w"> </span><span class="n">entity</span><span class="p">.</span><span class="n">entity</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre><p>To find the parent of an entity, you could also just go the other way around:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;print the parent of some specific entity&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">related</span><span class="o">&lt;</span><span class="n">ChildOf</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">entity</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Entity</span><span class="o">&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">SomeResource</span><span class="o">&amp;</span><span class="w"> </span><span class="n">resource</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">match</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">query</span><span class="p">.</span><span class="n">pin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="p">.</span><span class="n">entity</span><span class="p">).</span><span class="n">first</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">parent</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">match</span><span class="p">;</span>
+<span class="w">            </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{} is the parent of {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="p">.</span><span class="n">entity</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre></section><section id="autotoc_md39"><h2><a href="#autotoc_md39">Direct access</a></h2><p>If you pin all targets of a query, you get either zero or one matches. This can be used to access the components of specific entities, or the relation between two specific entities for example.</p><p>For example, to access the health of a specific entity, you could:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;access the health of a specific entity&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Health</span><span class="o">&amp;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">SomeResource</span><span class="o">&amp;</span><span class="w"> </span><span class="n">resource</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">match</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">query</span><span class="p">.</span><span class="n">pin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="p">.</span><span class="n">entity</span><span class="p">).</span><span class="n">first</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">health</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">match</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// Do something with the health component</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre><p>If you wanted to check if two specific entities are colliding, you could:</p><pre class="m-code"><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;test collisions between specific entities&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">related</span><span class="o">&lt;</span><span class="n">CollidingWith</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">     </span><span class="p">.</span><span class="n">call</span><span class="p">([](</span><span class="n">Query</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">SomeResource</span><span class="o">&amp;</span><span class="w"> </span><span class="n">resource</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">query</span><span class="p">.</span><span class="n">pin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="p">.</span><span class="n">first</span><span class="p">).</span><span class="n">pin</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="p">.</span><span class="n">second</span><span class="p">).</span><span class="n">first</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// They&#39;re colliding!</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span></pre><p>Both of the examples can be shortened using the <a href="classcubos_1_1core_1_1ecs_1_1Query.html#a5412b7887c228f5761e92c5e6324cbf0" class="m-doc">Query::<wbr />at()</a> method. With a single target query, instead of <code>query.pin(0, entity).first()</code>, you can write <code>query.at(entity)</code>. With two targets, instead of <code>query.pin(0, entityA).pin(1, entityB).first()</code>, you can write <code>query.at(entityA, entityB)</code>.</p></section>
+        <div class="m-note m-dim m-thin m-text-center"><a href="features-plugins.html" class="m-doc">&laquo; Plugins</a> | <a href="features.html" class="m-doc">Feature Guide</a> | <a href="features-quadrados.html" class="m-doc">Quadrados &raquo;</a></div>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
