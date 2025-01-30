@@ -6,7 +6,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::Velocity)
 {
-    return cubos::core::ecs::TypeBuilder<Velocity>("cubos::engine::Velocity")
-        .withField("velocity", &Velocity::vec)
-        .build();
+    return cubos::core::ecs::TypeBuilder<Velocity>("cubos::engine::Velocity").wrap(&Velocity::vec);
 }

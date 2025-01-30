@@ -6,7 +6,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::CenterOfMass)
 {
-    return cubos::core::ecs::TypeBuilder<CenterOfMass>("cubos::engine::CenterOfMass")
-        .withField("vec", &CenterOfMass::vec)
-        .build();
+    return cubos::core::ecs::TypeBuilder<CenterOfMass>("cubos::engine::CenterOfMass").wrap(&CenterOfMass::vec);
 }

@@ -7,6 +7,5 @@
 CUBOS_REFLECT_IMPL(cubos::engine::AccumulatedCorrection)
 {
     return cubos::core::ecs::TypeBuilder<AccumulatedCorrection>("cubos::engine::AccumulatedCorrection")
-        .withField("position", &AccumulatedCorrection::position)
-        .build();
+        .wrap(&AccumulatedCorrection::position);
 }

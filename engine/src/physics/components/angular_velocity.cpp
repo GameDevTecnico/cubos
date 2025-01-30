@@ -6,7 +6,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::AngularVelocity)
 {
-    return cubos::core::ecs::TypeBuilder<AngularVelocity>("cubos::engine::AngularVelocity")
-        .withField("vec", &AngularVelocity::vec)
-        .build();
+    return cubos::core::ecs::TypeBuilder<AngularVelocity>("cubos::engine::AngularVelocity").wrap(&AngularVelocity::vec);
 }

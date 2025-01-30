@@ -27,7 +27,7 @@ CUBOS_DEFINE_TAG(cubos::engine::spawnTag);
 
 CUBOS_REFLECT_IMPL(Num)
 {
-    return cubos::core::ecs::TypeBuilder<Num>("Num").withField("value", &Num::value).build();
+    return cubos::core::ecs::TypeBuilder<Num>("Num").wrap(&Num::value);
 }
 
 CUBOS_REFLECT_IMPL(OwnedBy)
@@ -37,10 +37,7 @@ CUBOS_REFLECT_IMPL(OwnedBy)
 
 CUBOS_REFLECT_IMPL(DistanceTo)
 {
-    return cubos::core::ecs::TypeBuilder<DistanceTo>("DistanceTo")
-        .symmetric()
-        .withField("value", &DistanceTo::value)
-        .build();
+    return cubos::core::ecs::TypeBuilder<DistanceTo>("DistanceTo").symmetric().wrap(&DistanceTo::value);
 }
 /// [Component Refl]
 

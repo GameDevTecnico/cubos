@@ -38,12 +38,12 @@ CUBOS_REFLECT_IMPL(DeltaTime)
 
 CUBOS_REFLECT_IMPL(ShouldQuit)
 {
-    return TypeBuilder<ShouldQuit>("cubos::core::ecs::ShouldQuit").withField("value", &ShouldQuit::value).build();
+    return TypeBuilder<ShouldQuit>("cubos::core::ecs::ShouldQuit").wrap(&ShouldQuit::value);
 }
 
 CUBOS_REFLECT_IMPL(Arguments)
 {
-    return TypeBuilder<Arguments>("cubos::core::ecs::Arguments").withField("value", &Arguments::value).build();
+    return TypeBuilder<Arguments>("cubos::core::ecs::Arguments").wrap(&Arguments::value);
 }
 
 struct Cubos::State

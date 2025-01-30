@@ -33,7 +33,7 @@ namespace cubos::engine
     ///     "game::Player": {},
     ///     "#camera": {
     ///         "cubos::engine::PerspectiveCamera": {
-    ///             "fov": 90,
+    ///             "fovY": 90,
     ///         }
     ///     },
     ///     "#gun": {
