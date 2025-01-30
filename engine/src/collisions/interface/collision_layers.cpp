@@ -5,9 +5,7 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::CollisionLayers)
 {
-    return core::ecs::TypeBuilder<CollisionLayers>("cubos::engine::CollisionLayers")
-        .withField("value", &CollisionLayers::value)
-        .build();
+    return core::ecs::TypeBuilder<CollisionLayers>("cubos::engine::CollisionLayers").wrap(&CollisionLayers::value);
 }
 
 void cubos::engine::CollisionLayers::setLayerValue(unsigned int layerNumber, bool newValue)

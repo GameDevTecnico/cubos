@@ -5,7 +5,7 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::Rotation)
 {
-    return core::ecs::TypeBuilder<Rotation>("cubos::engine::Rotation").withField("quat", &Rotation::quat).build();
+    return core::ecs::TypeBuilder<Rotation>("cubos::engine::Rotation").wrap(&Rotation::quat);
 }
 
 auto cubos::engine::Rotation::lookingAt(glm::vec3 direction, glm::vec3 up) -> Rotation

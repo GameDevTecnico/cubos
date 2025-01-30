@@ -3,7 +3,9 @@
         "cubos::engine::RenderTargetDefaults": {}
     },
     "#camera": {
-        "cubos::engine::PerspectiveCamera": 60.0,
+        "cubos::engine::PerspectiveCamera": {
+            "fovY": 60.0
+        },
         "cubos::engine::DrawsTo#render-target": {},
         "cubos::engine::Position": {
             "x": 0,

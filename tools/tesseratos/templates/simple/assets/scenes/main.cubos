@@ -4,7 +4,9 @@
         "cubos::engine::GizmosTarget": {}
     },
     "#camera": {
-        "cubos::engine::PerspectiveCamera": 70.0,
+        "cubos::engine::PerspectiveCamera": {
+            "fovY": 70.0
+        },
         "cubos::engine::DrawsTo#render-target": {},
         "cubos::engine::Position": {
             "x": 0,

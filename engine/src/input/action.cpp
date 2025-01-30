@@ -1,3 +1,4 @@
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>
@@ -8,9 +9,8 @@ using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(cubos::engine::InputAction)
 {
-    using namespace cubos::core::reflection;
-    return Type::create("cubos::engine::InputAction")
-        .with(FieldsTrait{}.withField("combinations", &InputAction::mCombinations));
+    return cubos::core::ecs::TypeBuilder<cubos::engine::InputAction>("cubos::engine::InputAction")
+        .wrap(&InputAction::mCombinations);
 }
 
 const std::vector<InputCombination>& InputAction::combinations() const
