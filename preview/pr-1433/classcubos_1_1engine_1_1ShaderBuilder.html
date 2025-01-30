@@ -71,23 +71,18 @@
               const std::string&amp; contents)</span>
             </dt>
             <dd>Creates a shader builder.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#afb46af321e91de2a3b8f89462d899e1a" class="m-doc">ShaderBuilder</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a>&amp; shaderBuilder,
-              const std::string&amp; contents)</span>
-            </dt>
-            <dd>Creates a shader builder, using the same render device and shader stage as another builder.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3b7750163e55636914196222d26e7823" class="m-doc">with</a>(</span><span class="m-doc-wrap">const std::string&amp; defineName) const -&gt; <a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4e61f115a99dfa47c649c83541c473cf" class="m-doc">with</a>(</span><span class="m-doc-wrap">const std::string&amp; defineName) -&gt; <a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a>&amp;</span>
             </dt>
             <dd>Defines a parameter with no value.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4d9bbe41052511970cdfb46738a11856" class="m-doc">with</a>(</span><span class="m-doc-wrap">const std::string&amp; defineName,
-              const std::string&amp; defineValue) const -&gt; <a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a875f9014fc0ecae924c30658bbc37684" class="m-doc">with</a>(</span><span class="m-doc-wrap">const std::string&amp; defineName,
+              const std::string&amp; defineValue) -&gt; <a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a>&amp;</span>
             </dt>
             <dd>Defines a parameter with a value.</dd>
             <dt>
@@ -125,31 +120,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="afb46af321e91de2a3b8f89462d899e1a"><div>
+          <section class="m-doc-details" id="a4e61f115a99dfa47c649c83541c473cf"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />ShaderBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afb46af321e91de2a3b8f89462d899e1a" class="m-doc-self">ShaderBuilder</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a>&amp; shaderBuilder,
-              const std::string&amp; contents)</span></span>
-            </h3>
-            <p>Creates a shader builder, using the same render device and shader stage as another builder.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">shaderBuilder</td>
-                  <td><a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> builder to copy parameters from.</td>
-                </tr>
-                <tr>
-                  <td>contents</td>
-                  <td><a href="classcubos_1_1engine_1_1Shader.html" class="m-doc">Shader</a> source code.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a3b7750163e55636914196222d26e7823"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a> cubos::<wbr />engine::<wbr />ShaderBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b7750163e55636914196222d26e7823" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">const std::string&amp; defineName) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a>&amp; cubos::<wbr />engine::<wbr />ShaderBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4e61f115a99dfa47c649c83541c473cf" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">const std::string&amp; defineName)</span></span>
             </h3>
             <p>Defines a parameter with no value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -165,15 +138,15 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>New shader builder with the parameter defined.</td>
+                  <td>This shader builder (for chaining calls).</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a4d9bbe41052511970cdfb46738a11856"><div>
+          <section class="m-doc-details" id="a875f9014fc0ecae924c30658bbc37684"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a> cubos::<wbr />engine::<wbr />ShaderBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4d9bbe41052511970cdfb46738a11856" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">const std::string&amp; defineName,
-              const std::string&amp; defineValue) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1ShaderBuilder.html" class="m-doc">ShaderBuilder</a>&amp; cubos::<wbr />engine::<wbr />ShaderBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a875f9014fc0ecae924c30658bbc37684" class="m-doc-self">with</a>(</span><span class="m-doc-wrap">const std::string&amp; defineName,
+              const std::string&amp; defineValue)</span></span>
             </h3>
             <p>Defines a parameter with a value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -193,7 +166,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>New shader builder with the parameter defined.</td>
+                  <td>This shader builder (for chaining calls).</td>
                 </tr>
               </tfoot>
             </table>
