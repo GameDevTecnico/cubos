@@ -20,6 +20,14 @@ namespace tesseratos
     /// - @ref assets-plugin
     /// - @ref tesseratos-toolbox-plugin
 
+    /// @brief Tool state.
+    struct ImporterTool
+    {
+        CUBOS_REFLECT;
+
+        bool isOpen{false};
+    };
+
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-importer-plugin

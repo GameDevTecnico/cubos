@@ -6,36 +6,40 @@
 
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
-#include <cubos/engine/tools/toolbox/plugin.hpp>
 
 #include "../debugger/plugin.hpp"
 
 using namespace cubos::core::data;
 using namespace cubos::engine;
 
+using namespace tesseratos;
+
+CUBOS_REFLECT_IMPL(ProjectTool)
+{
+    return cubos::core::ecs::TypeBuilder<ProjectTool>("ProjectTool").withField("isOpen", &ProjectTool::isOpen).build();
+}
+
 void tesseratos::projectPlugin(Cubos& cubos)
 {
-    cubos.depends(toolboxPlugin);
     cubos.depends(imguiPlugin);
     cubos.depends(settingsPlugin);
     cubos.depends(assetsPlugin);
     cubos.depends(debuggerPlugin);
 
+    cubos.resource<ProjectTool>();
     cubos.resource<ProjectManager::State>();
 
     cubos.system("show Project")
+        .onlyIf([](ProjectTool& tool) { return tool.isOpen; })
         .tagged(imguiTag)
-        .call([](ProjectManager project, Toolbox& toolbox, Settings& settings) {
-            if (!toolbox.isOpen("Project"))
-            {
-                return;
-            }
+        .call([](ProjectManager project, Settings& settings, ProjectTool& tool) {
 
-            if (!ImGui::Begin("Project"))
+            if (!ImGui::Begin("Project", &tool.isOpen))
             {
                 ImGui::End();
                 return;
