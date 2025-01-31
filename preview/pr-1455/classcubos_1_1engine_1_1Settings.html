@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::engine::Settings class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Settings <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="settings_8hpp.html">&lt;engine/settings/settings.hpp&gt;</a></div>
+        </h1>
+        <p>Stores settings as key-value pairs and provides methods to retrieve them.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a136f166d1bb67b9ccbb47ca3d694310e" class="m-doc">load</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;) -&gt; <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a></span>
+            </dt>
+            <dd>Load settings from json in specified path.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="ad2f2a84df69646b8a75c02b85a4c1204">
+              <span class="m-doc-wrap-bumper">void <a href="#ad2f2a84df69646b8a75c02b85a4c1204" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Clears all the settings.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a3bb6967c7eeaef6dc8994509ffd87abd" class="m-doc">setBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              bool value)</span>
+            </dt>
+            <dd>Defines a new boolean setting.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9c8f8656913e788605fdb695a9f9e3b6" class="m-doc">getBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              bool defaultValue) -&gt; bool</span>
+            </dt>
+            <dd>Retrieves the bool setting with the given <code>key</code>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a957660d3f9ff97eefbe83e3ccb5138d3" class="m-doc">setString</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              const std::string&amp; value)</span>
+            </dt>
+            <dd>Defines a new string setting.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae143729578e7c09e06e92c77d4e4d141" class="m-doc">getString</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              const std::string&amp; defaultValue) -&gt; std::string</span>
+            </dt>
+            <dd>Retrieves the string setting with the given <code>key</code>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2aedf8c7c2dfb08a7d3c9127c18d326f" class="m-doc">setInteger</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              int value)</span>
+            </dt>
+            <dd>Defines a new integer setting.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a04dfd07619cfa2f4d82c9fed8a206975" class="m-doc">getInteger</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              int defaultValue) -&gt; int</span>
+            </dt>
+            <dd>Retrieves the integer setting with the given <code>key</code>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aaeeef4735e7df964b7061a72fdb31559" class="m-doc">setDouble</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              double value)</span>
+            </dt>
+            <dd>Defines a new double setting.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6bac1e64374661f8893927bbeda1bfee" class="m-doc">getDouble</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              double defaultValue) -&gt; double</span>
+            </dt>
+            <dd>Retrieves the double setting with the given <code>key</code>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a6810350acf40546ee5e65f0432afe46f" class="m-doc">merge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a>&amp; settingsToMerge)</span>
+            </dt>
+            <dd>Merges the settings from <code>settingsToMerge</code>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af18e6578b7f390850ceb4d542a4d7a59" class="m-doc">save</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;,
+              int indent = 2) const -&gt; bool</span>
+            </dt>
+            <dd>Save settings as json to specified path.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad20de264e89d9b30c767f9002e4845fa" class="m-doc">getValues</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;std::string, std::string&gt;&amp;</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a453578b3628afcb7ef5b747940f7c59a" class="m-doc">getValues</a>(</span><span class="m-doc-wrap">) -&gt; std::unordered_map&lt;std::string, std::string&gt;&amp;</span>
+            </dt>
+            <dd></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a136f166d1bb67b9ccbb47ca3d694310e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a> cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a136f166d1bb67b9ccbb47ca3d694310e" class="m-doc-self">load</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;)</span></span>
+            </h3>
+            <p>Load settings from json in specified path.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path</td>
+                  <td>Virtual <code><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />FileSystem</a></code> path to read settings from.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Loaded settings object.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3bb6967c7eeaef6dc8994509ffd87abd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3bb6967c7eeaef6dc8994509ffd87abd" class="m-doc-self">setBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              bool value)</span></span>
+            </h3>
+            <p>Defines a new boolean setting.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>If the setting already exists, overwrites its value.</p>
+          </div></section>
+          <section class="m-doc-details" id="a9c8f8656913e788605fdb695a9f9e3b6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9c8f8656913e788605fdb695a9f9e3b6" class="m-doc-self">getBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              bool defaultValue)</span></span>
+            </h3>
+            <p>Retrieves the bool setting with the given <code>key</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>defaultValue</td>
+                  <td>Default value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Current value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If no setting exists with such key, sets it to <code>defaultValue</code> and returns it. If the setting exists but its value is not &quot;true&quot;, returns false.</p>
+          </div></section>
+          <section class="m-doc-details" id="a957660d3f9ff97eefbe83e3ccb5138d3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a957660d3f9ff97eefbe83e3ccb5138d3" class="m-doc-self">setString</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              const std::string&amp; value)</span></span>
+            </h3>
+            <p>Defines a new string setting.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>If the setting already exists, overwrites its value.</p>
+          </div></section>
+          <section class="m-doc-details" id="ae143729578e7c09e06e92c77d4e4d141"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae143729578e7c09e06e92c77d4e4d141" class="m-doc-self">getString</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              const std::string&amp; defaultValue)</span></span>
+            </h3>
+            <p>Retrieves the string setting with the given <code>key</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>defaultValue</td>
+                  <td>Default value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Current value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If no setting exists with such key, sets it to <code>defaultValue</code> and returns it.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2aedf8c7c2dfb08a7d3c9127c18d326f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2aedf8c7c2dfb08a7d3c9127c18d326f" class="m-doc-self">setInteger</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              int value)</span></span>
+            </h3>
+            <p>Defines a new integer setting.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Current value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the setting already exists, overwrites its value.</p>
+          </div></section>
+          <section class="m-doc-details" id="a04dfd07619cfa2f4d82c9fed8a206975"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a04dfd07619cfa2f4d82c9fed8a206975" class="m-doc-self">getInteger</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              int defaultValue)</span></span>
+            </h3>
+            <p>Retrieves the integer setting with the given <code>key</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>defaultValue</td>
+                  <td>Default value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Current value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If no setting exists with such key, sets it to <code>defaultValue</code> and returns it. If the setting exists but its value is not a valid integer, returns <code>defaultValue</code>.</p>
+          </div></section>
+          <section class="m-doc-details" id="aaeeef4735e7df964b7061a72fdb31559"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaeeef4735e7df964b7061a72fdb31559" class="m-doc-self">setDouble</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              double value)</span></span>
+            </h3>
+            <p>Defines a new double setting.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>If the setting already exists, overwrites its value.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6bac1e64374661f8893927bbeda1bfee"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">double cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6bac1e64374661f8893927bbeda1bfee" class="m-doc-self">getDouble</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
+              double defaultValue)</span></span>
+            </h3>
+            <p>Retrieves the double setting with the given <code>key</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key.</td>
+                </tr>
+                <tr>
+                  <td>defaultValue</td>
+                  <td>Default value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Current value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If no setting exists with such key, sets it to <code>defaultValue</code> and returns it. If the setting exists but its value is not a valid double, returns the default value.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6810350acf40546ee5e65f0432afe46f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6810350acf40546ee5e65f0432afe46f" class="m-doc-self">merge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a>&amp; settingsToMerge)</span></span>
+            </h3>
+            <p>Merges the settings from <code>settingsToMerge</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">settingsToMerge</td>
+                  <td><a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a> to be merged to this instance.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>If a setting from <code>settingsToMerge</code> is already defined in this instance, its value is overwritten.</p>
+          </div></section>
+          <section class="m-doc-details" id="af18e6578b7f390850ceb4d542a4d7a59"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af18e6578b7f390850ceb4d542a4d7a59" class="m-doc-self">save</a>(</span><span class="m-doc-wrap">std::string_view path = &quot;/settings.json&quot;,
+              int indent = 2) const</span></span>
+            </h3>
+            <p>Save settings as json to specified path.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">path</td>
+                  <td>Virtual <code><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />FileSystem</a></code> path to write settings in.</td>
+                </tr>
+                <tr>
+                  <td>indent</td>
+                  <td>Indent of the Json, -1 for no whitespace.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether call was successful.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad20de264e89d9b30c767f9002e4845fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const std::unordered_map&lt;std::string, std::string&gt;&amp; cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad20de264e89d9b30c767f9002e4845fa" class="m-doc-self">getValues</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Underlying <code>std::unordered_map</code> with the settings.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a453578b3628afcb7ef5b747940f7c59a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::unordered_map&lt;std::string, std::string&gt;&amp; cubos::<wbr />engine::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a453578b3628afcb7ef5b747940f7c59a" class="m-doc-self">getValues</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Underlying <code>std::unordered_map</code> with the settings.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feature Guide &raquo; Plugins | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <link rel="prev" href="features-ecs.html" />
+  <link rel="next" href="features-queries.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="features.html">Feature Guide</a> &raquo;</span>
+          Plugins
+        </h1>
+        <p>What are plugins and how they can be used to organize your code.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>This guide assumes you&#x27;ve read the <a href="features-ecs.html" class="m-doc">ECS</a> guide and are familiar with the concepts of components, resources and systems.</p></aside><section id="autotoc_md24"><h2><a href="#autotoc_md24">Configuring the engine</a></h2><p>Plugins are a feature of the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Cubos</a> class. This class is the main thing you&#x27;ll be interacting with when developing a game with <strong>Cubos</strong>. It is used to configure the engine and run the game loop. Through it, you can register new components, relations, resources and configure systems to be run on specific conditions.</p><p>Below is an example of an application which:</p><ol><li>adds a resource with the string <code>&quot;Hello World&quot;</code>.</li><li>prints its contents.</li></ol><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/engine/prelude.hpp&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">engine</span><span class="o">::</span><span class="n">Cubos</span><span class="p">;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Message</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Cubos</span><span class="w"> </span><span class="n">cubos</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">resource</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="s">&quot;show message&quot;</span><span class="p">).</span><span class="n">call</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">Message</span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span></pre></section><section id="autotoc_md25"><h2><a href="#autotoc_md25">What are plugins?</a></h2><p>If you had to add every system, component and resource to your game&#x27;s main source file, it would quickly become a mess. Plugins are just functions which receive a reference to the <a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a> class. Nothing more.</p><p>The idiomatic way to use plugins is through the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a041a5c80907e169da3f3f11e9c6e2469" class="m-doc">Cubos::<wbr />plugin</a> and <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#ace9c4e93e571e86ce323379090bf6c04" class="m-doc">Cubos::<wbr />depends</a> methods. The first receives a function to a plugin, and executes it. The second marks the current plugin as depending on the given plugin.</p><p>Lets take the example above and move the functionality to a plugin.</p><pre class="m-code"><span class="c1">// ...</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">helloWorldPlugin</span><span class="p">(</span><span class="n">Cubos</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cubos</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">resource</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Message</span><span class="p">{</span><span class="s">&quot;Hello World!&quot;</span><span class="p">});</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="s">&quot;show message&quot;</span><span class="p">).</span><span class="n">call</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">Message</span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Cubos</span><span class="w"> </span><span class="n">cubos</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">helloWorldPlugin</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span></pre><p>Looks good! But lets pretend for a moment that there&#x27;s a lot of logic necessary to create the message and resource. How could we divide this further?</p><pre class="m-code"><span class="kt">void</span><span class="w"> </span><span class="nf">messagePlugin</span><span class="p">(</span><span class="n">Cubos</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cubos</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">resource</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Message</span><span class="p">{</span><span class="s">&quot;Hello World!&quot;</span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">showPlugin</span><span class="p">(</span><span class="n">Cubos</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cubos</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">depends</span><span class="p">(</span><span class="n">messagePlugin</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="s">&quot;show message&quot;</span><span class="p">).</span><span class="n">call</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">Message</span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Cubos</span><span class="w"> </span><span class="n">cubos</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">messagePlugin</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">plugin</span><span class="p">(</span><span class="n">showPlugin</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span></pre><p>Notice that the <code>showPlugin</code> marks itself as depending on <code>messagePlugin</code>. This is necessary, as we use a resource which is defined in that plugin. Since <code>showPlugin</code> depends on <code>messagePlugin</code>, we must add it before the <code>showPlugin</code>.</p><p>The two main rules to be take into account are:</p><ul><li>plugins may only be added once (through <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html#a041a5c80907e169da3f3f11e9c6e2469" class="m-doc">Cubos::<wbr />plugin</a>).</li><li>plugins cannot use tags, resources, components or relations from plugins they didn&#x27;t add or don&#x27;t depend on.</li></ul></section><section id="autotoc_md26"><h2><a href="#autotoc_md26">What plugins are there?</a></h2><p>The engine is basically a big bundle of plugins which add all of kinds of functionality. You can find an exhaustive list of the plugins provided by the engine and their documentation on the <a href="group__engine.html" class="m-doc">engine module page</a>. Check out the <a href="examples-engine.html" class="m-doc">engine examples</a> to see how they are used in practice.</p></section>
+        <div class="m-note m-dim m-thin m-text-center"><a href="features-ecs.html" class="m-doc">&laquo; ECS</a> | <a href="features.html" class="m-doc">Feature Guide</a> | <a href="features-queries.html" class="m-doc">Queries &raquo;</a></div>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
