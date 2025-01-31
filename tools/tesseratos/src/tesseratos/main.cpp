@@ -6,8 +6,10 @@
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/tools/plugin.hpp>
+#include <cubos/engine/tools/selection/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
+#include "menu_bar/plugin.hpp"
 #include "asset_explorer/plugin.hpp"
 #include "debugger/plugin.hpp"
 #include "importer/plugin.hpp"
@@ -32,7 +34,7 @@ int main(int argc, char** argv)
     // The third block contains plugins which depend on plugins from the first and second blocks.
     // And so on.
 
-    cubos.plugin(cubos::engine::toolsPlugin);
+    cubos.plugin(selectionPlugin);
 
     cubos.plugin(debuggerPlugin);
     cubos.plugin(assetExplorerPlugin);
@@ -42,6 +44,8 @@ int main(int argc, char** argv)
     cubos.plugin(sceneEditorPlugin);
     cubos.plugin(voxelPaletteEditorPlugin);
     cubos.plugin(importerPlugin);
+
+    cubos.plugin(menuBarPlugin);
 
     cubos.startupSystem("configure Assets plugin").before(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.app.osPath", APP_ASSETS_PATH);
