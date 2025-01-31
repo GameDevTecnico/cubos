@@ -80,6 +80,14 @@
               struct <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a>
             </dt>
             <dd>Contains info regarding an intersection between shapes.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a>
+            </dt>
+            <dd>Represents a plane. Assumes equation: normal.x + normal.y + normal.z + d = 0.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>
+            </dt>
+            <dd>Represents a polygonal feature. Used internally for manifold computation.</dd>
           </dl>
         </section>
         <section id="func-members">
@@ -93,6 +101,65 @@
               <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a>&amp; intersect) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
             </dt>
             <dd>Computes the intersection between two box shapes.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a847980982b35c728e17b0f0fd48fb82c" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; polygon,
+              int numClipPlanes,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
+              bool removeNotClipToPlane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Performs the Sutherland-Hodgman Clipping algorithm.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3aa4069dfc64c9ae974264957c9877b9" class="m-doc">planeEdgeIntersection</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane,
+              const glm::vec3&amp; start,
+              const glm::vec3&amp; end,
+              glm::vec3&amp; outPoint) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+            </dt>
+            <dd>Compute the intersection between a plane and an edge.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2a9001e6ccfe5bf8319bee2371e56176" class="m-doc">pointInPlane</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+            </dt>
+            <dd>Computes if a point is in the area limited by the plane.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a60469250da525272e95b5fa9f87b415c" class="m-doc">getMaxVertexInAxis</a>(</span><span class="m-doc-wrap">int numVertices,
+              const glm::vec3 vertices[],
+              const glm::vec3&amp; localAxis) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> int</span>
+            </dt>
+            <dd>Computes the vertex furthest along the axis.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a04e4e0c7aeb3fa65e7c172323d6de64c" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
+              const glm::vec3&amp; normal,
+              <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; outPolygon,
+              std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
+              std::vector&lt;uint32_t&gt; outAdjacentPlanesIds,
+              const glm::mat4&amp; localToWorld,
+              float scale) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Computes the candidate face of the polygon to be reference, as well as it&#x27;s normal and adjacent planes.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a94c609bb4af401e4cdd9f748459ae634" class="m-doc">getClosestPointEdge</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              glm::vec3 start,
+              glm::vec3 end) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
+            </dt>
+            <dd>Computes the closest point on the line (edge) to point.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a47b5961879b1b902bebf793f36a622b0" class="m-doc">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const std::vector&lt;glm::vec3&gt;&amp; polygon) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
+            </dt>
+            <dd>Iterates through all edges in polygon and computes closest position on the edges of the polygon to point.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a38130e48ca28a539e8e5f1895e2e9750" class="m-doc">getCameraFrustumCorners</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              const glm::mat4&amp; proj,
+              float zNear,
+              float zFar,
+              std::vector&lt;glm::vec4&gt;&amp; corners) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Gets a camera&#x27;s frustum corners in world space.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4d044076649edd71f9be254807483cd9" class="m-doc">getCubeViewMatrices</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; inverseView,
+              std::vector&lt;glm::mat4&gt;&amp; cubeViewMatrices) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Gets view matrices for rendering a cubemap.</dd>
           </dl>
         </section>
         <section>
@@ -131,6 +198,314 @@
                 <tr>
                   <td>intersect</td>
                   <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a847980982b35c728e17b0f0fd48fb82c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a847980982b35c728e17b0f0fd48fb82c" class="m-doc-self">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; polygon,
+              int numClipPlanes,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
+              bool removeNotClipToPlane)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="intersections_8hpp.html">&lt;core/geom/intersections.hpp&gt;</a></div>
+            </h3>
+            <p>Performs the Sutherland-Hodgman Clipping algorithm.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">polygon</td>
+                  <td>The polygon to perform the clipping on.</td>
+                </tr>
+                <tr>
+                  <td>numClipPlanes</td>
+                  <td>Number of cliping planes.</td>
+                </tr>
+                <tr>
+                  <td>clipPlanes</td>
+                  <td>Clipping planes</td>
+                </tr>
+                <tr>
+                  <td>removeNotClipToPlane</td>
+                  <td>Whether to remove the points if they&#x27;re outside the plane.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3aa4069dfc64c9ae974264957c9877b9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3aa4069dfc64c9ae974264957c9877b9" class="m-doc-self">planeEdgeIntersection</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane,
+              const glm::vec3&amp; start,
+              const glm::vec3&amp; end,
+              glm::vec3&amp; outPoint)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="intersections_8hpp.html">&lt;core/geom/intersections.hpp&gt;</a></div>
+            </h3>
+            <p>Compute the intersection between a plane and an edge.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">plane</td>
+                  <td>The plane.</td>
+                </tr>
+                <tr>
+                  <td>start</td>
+                  <td>The start point of the edge.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>The end point of the edge.</td>
+                </tr>
+                <tr>
+                  <td>outPoint</td>
+                  <td>The position of the intersection.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if there&#x27;s intersection, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2a9001e6ccfe5bf8319bee2371e56176"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2a9001e6ccfe5bf8319bee2371e56176" class="m-doc-self">pointInPlane</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Computes if a point is in the area limited by the plane.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">point</td>
+                  <td>The position of the point in world coordinates.</td>
+                </tr>
+                <tr>
+                  <td>plane</td>
+                  <td>The plane to use.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True is the point is on the plane or closer, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a60469250da525272e95b5fa9f87b415c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> int cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60469250da525272e95b5fa9f87b415c" class="m-doc-self">getMaxVertexInAxis</a>(</span><span class="m-doc-wrap">int numVertices,
+              const glm::vec3 vertices[],
+              const glm::vec3&amp; localAxis)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Computes the vertex furthest along the axis.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">numVertices</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>vertices</td>
+                  <td>Array of vertices.</td>
+                </tr>
+                <tr>
+                  <td>localAxis</td>
+                  <td>The direction of the axis in local coordinates.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The index of the vertex.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a04e4e0c7aeb3fa65e7c172323d6de64c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a04e4e0c7aeb3fa65e7c172323d6de64c" class="m-doc-self">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
+              const glm::vec3&amp; normal,
+              <a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; outPolygon,
+              std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
+              std::vector&lt;uint32_t&gt; outAdjacentPlanesIds,
+              const glm::mat4&amp; localToWorld,
+              float scale)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Computes the candidate face of the polygon to be reference, as well as it&#x27;s normal and adjacent planes.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">shape</td>
+                  <td>Collider shape.</td>
+                </tr>
+                <tr>
+                  <td>normal</td>
+                  <td>The reference normal in world coordinates.</td>
+                </tr>
+                <tr>
+                  <td>outPolygon</td>
+                  <td>The polygon of the resulting face.</td>
+                </tr>
+                <tr>
+                  <td>outAdjacentPlanes</td>
+                  <td>The resulting adjacent planes (4).</td>
+                </tr>
+                <tr>
+                  <td>outAdjacentPlanesIds</td>
+                  <td>The resulting adjacent planes ids (4).</td>
+                </tr>
+                <tr>
+                  <td>localToWorld</td>
+                  <td>The localToWorld matrix of the body.</td>
+                </tr>
+                <tr>
+                  <td>scale</td>
+                  <td>The scale of the body.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>TODO: since this is a box shape, we know how many points and adjacent planes exist beforehand</p>
+          </div></section>
+          <section class="m-doc-details" id="a94c609bb4af401e4cdd9f748459ae634"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3 cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a94c609bb4af401e4cdd9f748459ae634" class="m-doc-self">getClosestPointEdge</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              glm::vec3 start,
+              glm::vec3 end)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Computes the closest point on the line (edge) to point.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">point</td>
+                  <td>Position of the point.</td>
+                </tr>
+                <tr>
+                  <td>start</td>
+                  <td>Starting position of the edge.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>End position of the edge.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Closest position on edge to the point.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a47b5961879b1b902bebf793f36a622b0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3 cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a47b5961879b1b902bebf793f36a622b0" class="m-doc-self">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const std::vector&lt;glm::vec3&gt;&amp; polygon)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Iterates through all edges in polygon and computes closest position on the edges of the polygon to point.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">point</td>
+                  <td>Position of the point.</td>
+                </tr>
+                <tr>
+                  <td>polygon</td>
+                  <td>List of points that compose the shape (edges are defined as a line-loop list of vertices).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Closest point that resides on any of the given edges of the polygon.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a38130e48ca28a539e8e5f1895e2e9750"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38130e48ca28a539e8e5f1895e2e9750" class="m-doc-self">getCameraFrustumCorners</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
+              const glm::mat4&amp; proj,
+              float zNear,
+              float zFar,
+              std::vector&lt;glm::vec4&gt;&amp; corners)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Gets a camera&#x27;s frustum corners in world space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">view</td>
+                  <td>Matrix that transforms world space to the camera&#x27;s view space.</td>
+                </tr>
+                <tr>
+                  <td>proj</td>
+                  <td>Matrix that transforms the camera&#x27;s view space to its clip space.</td>
+                </tr>
+                <tr>
+                  <td>zNear</td>
+                  <td>Near clipping plane.</td>
+                </tr>
+                <tr>
+                  <td>zFar</td>
+                  <td>Far clipping plane.</td>
+                </tr>
+                <tr>
+                  <td>corners</td>
+                  <td>Output vector where the corners will be stored.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4d044076649edd71f9be254807483cd9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4d044076649edd71f9be254807483cd9" class="m-doc-self">getCubeViewMatrices</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; inverseView,
+              std::vector&lt;glm::mat4&gt;&amp; cubeViewMatrices)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Gets view matrices for rendering a cubemap.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">inverseView</td>
+                  <td>Matrix that transforms the camera&#x27;s view space to world space.</td>
+                </tr>
+                <tr>
+                  <td>cubeViewMatrices</td>
+                  <td>Output vector where the view matrices will be stored.</td>
                 </tr>
               </tbody>
             </table>
@@ -180,7 +555,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

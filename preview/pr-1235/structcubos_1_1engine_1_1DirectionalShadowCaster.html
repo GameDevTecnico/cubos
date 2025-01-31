@@ -47,7 +47,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DirectionalShadowCaster <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="directional__caster_8hpp.html">&lt;engine/render/shadows/directional_caster.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="directional__caster_8hpp.html">&lt;engine/render/shadows/casters/directional_caster.hpp&gt;</a></div>
         </h1>
         <p>Component which enables shadow casting on a directional light.</p>
         <nav class="m-block m-default">
@@ -56,27 +56,122 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a07bedc8df82832ea86f11096cd075bd2" class="m-doc">updateShadowMaps</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice</a>&amp; rd)</span>
+            </dt>
+            <dd>Update shadow maps to the target size and target number of cascades.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac37087c5b3a77062e9533aa6178270c2" class="m-doc">setDefaultSplitDistances</a>(</span><span class="m-doc-wrap">int numCascades)</span>
+            </dt>
+            <dd>Set splits to have the same distance between each other.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7f5d952585f6bcfb0d184f1fa9d886aa" class="m-doc">getCurrentSplitDistances</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;float&gt;&amp;</span>
+            </dt>
+            <dd>Get the real current distances of each split.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8127f7c9691eadb7a999d1d51d8bb387" class="m-doc">getCurrentSize</a>(</span><span class="m-doc-wrap">) const -&gt; glm::uvec2</span>
+            </dt>
+            <dd>Get the real current size of shadow maps.</dd>
+          </dl>
+        </section>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a6cef89f1522dc7a2db494f7a4de8fdc7">
-              int <a href="#a6cef89f1522dc7a2db494f7a4de8fdc7" class="m-doc-self">numSplits</a>
-            </dt>
-            <dd>Number of splits for PSSM/CSM.</dd>
             <dt id="aa8c134b7fa73a09f811bced112cf6833">
               std::vector&lt;float&gt; <a href="#aa8c134b7fa73a09f811bced112cf6833" class="m-doc-self">splitDistances</a>
             </dt>
-            <dd>Distance of each split from 0 to 1.</dd>
+            <dd>Target distance of each split from 0 to 1 (interpolated between nearDistance and maxDistance).</dd>
             <dt id="a12e056df2cb52217476345954e0f121c">
               float <a href="#a12e056df2cb52217476345954e0f121c" class="m-doc-self">maxDistance</a>
             </dt>
             <dd>Max distance (if 0, uses camera zFar).</dd>
+            <dt id="abc89ebc6960697c28c2a76e9e1f0d05f">
+              float <a href="#abc89ebc6960697c28c2a76e9e1f0d05f" class="m-doc-self">nearDistance</a>
+            </dt>
+            <dd>Near distance of shadow frustum (if 0, uses camera zNear).</dd>
+            <dt id="a825b4dc72de7a5d0965f6e173120e662">
+              std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>, std::shared_ptr&lt;<a href="classcubos_1_1engine_1_1DirectionalShadowCaster_1_1ShadowMap.html" class="m-doc">ShadowMap</a>&gt;, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">core::<wbr />ecs::<wbr />EntityHash</a>&gt; <a href="#a825b4dc72de7a5d0965f6e173120e662" class="m-doc-self">shadowMaps</a>
+            </dt>
+            <dd>Caster&#x27;s shadow maps for each camera.</dd>
+            <dt id="aeda365bf883f0cab7a51471d9f4afbcc">
+              glm::uvec2 <a href="#aeda365bf883f0cab7a51471d9f4afbcc" class="m-doc-self">size</a>
+            </dt>
+            <dd>Target size of the shadow map textures, in pixels. Use this to change the resolution of the shadow maps. Note that the real resolution may not match this, as it may be dynamically adjusted.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a07bedc8df82832ea86f11096cd075bd2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DirectionalShadowCaster::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a07bedc8df82832ea86f11096cd075bd2" class="m-doc-self">updateShadowMaps</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice</a>&amp; rd)</span></span>
+            </h3>
+            <p>Update shadow maps to the target size and target number of cascades.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rd</td>
+                  <td>Render device used to create the textures.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac37087c5b3a77062e9533aa6178270c2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DirectionalShadowCaster::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac37087c5b3a77062e9533aa6178270c2" class="m-doc-self">setDefaultSplitDistances</a>(</span><span class="m-doc-wrap">int numCascades)</span></span>
+            </h3>
+            <p>Set splits to have the same distance between each other.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">numCascades</td>
+                  <td>Number of shadow map cascades.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7f5d952585f6bcfb0d184f1fa9d886aa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const std::vector&lt;float&gt;&amp; cubos::<wbr />engine::<wbr />DirectionalShadowCaster::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f5d952585f6bcfb0d184f1fa9d886aa" class="m-doc-self">getCurrentSplitDistances</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the real current distances of each split.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Current distances of each split.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8127f7c9691eadb7a999d1d51d8bb387"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::uvec2 cubos::<wbr />engine::<wbr />DirectionalShadowCaster::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8127f7c9691eadb7a999d1d51d8bb387" class="m-doc-self">getCurrentSize</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the real current size of shadow maps.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Size of the shadow map textures, in pixels.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
@@ -122,7 +217,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

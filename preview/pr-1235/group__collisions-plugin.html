@@ -52,9 +52,9 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md70">Components</a></li>
-            <li><a href="#autotoc_md71">Events</a></li>
-            <li><a href="#autotoc_md72">Dependencies</a></li>
+            <li><a href="#autotoc_md71">Components</a></li>
+            <li><a href="#autotoc_md72">Events</a></li>
+            <li><a href="#autotoc_md73">Dependencies</a></li>
             <li>
               Reference
               <ul>
@@ -65,7 +65,7 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md70"><h3><a href="#autotoc_md70">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> - holds the box collision shape.</li><li><a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> - holds the capsule collision shape.</li><li><a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> - holds collider data.</li></ul></section><section id="autotoc_md71"><h3><a href="#autotoc_md71">Events</a></h3><ul><li>CollisionEvent - (TODO) emitted when a collision occurs.</li><li>TriggerEvent - (TODO) emitted when a trigger is entered or exited.</li></ul></section><section id="autotoc_md72"><h3><a href="#autotoc_md72">Dependencies</a></h3><ul><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li></ul></section>
+<section id="autotoc_md71"><h3><a href="#autotoc_md71">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> - holds the box collision shape.</li><li><a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> - holds the capsule collision shape.</li><li><a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> - holds collider data.</li></ul></section><section id="autotoc_md72"><h3><a href="#autotoc_md72">Events</a></h3><ul><li>CollisionEvent - (TODO) emitted when a collision occurs.</li><li>TriggerEvent - (TODO) emitted when a trigger is entered or exited.</li></ul></section><section id="autotoc_md73"><h3><a href="#autotoc_md73">Dependencies</a></h3><ul><li><a href="group__transform-plugin.html" class="m-doc">Transform</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -73,6 +73,8 @@
             <dd>Component <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">cubos::<wbr />engine::<wbr />Collider</a>.</dd>
             <dt>file <a href="colliding__with_8hpp.html" class="m-doc">colliding_with.hpp</a></dt>
             <dd>Relation <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">cubos::<wbr />engine::<wbr />CollidingWith</a>.</dd>
+            <dt>file <a href="contact__manifold_8hpp.html" class="m-doc">contact_manifold.hpp</a></dt>
+            <dd>Relation <a href="structcubos_1_1engine_1_1ContactManifold.html" class="m-doc">cubos::<wbr />engine::<wbr />ContactManifold</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2collisions_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
             <dt>file <a href="raycast_8hpp.html" class="m-doc">raycast.hpp</a></dt>
@@ -81,6 +83,8 @@
             <dd>Component <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">cubos::<wbr />engine::<wbr />BoxCollisionShape</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2collisions_2shapes_2capsule_8hpp.html" class="m-doc">capsule.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">cubos::<wbr />engine::<wbr />CapsuleCollisionShape</a>.</dd>
+            <dt>file <a href="voxel_8hpp.html" class="m-doc">voxel.hpp</a></dt>
+            <dd>Component <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">cubos::<wbr />engine::<wbr />VoxelCollisionShape</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -106,6 +110,14 @@
               struct <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">cubos::engine::CapsuleCollisionShape</a>
             </dt>
             <dd>Component which adds a capsule collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">cubos::engine::VoxelCollisionShape</a>
+            </dt>
+            <dd>Component which adds a collision shape corresponding to a given voxel grid to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">cubos::engine::VoxelCollisionShape::BoxShiftPair</a>
+            </dt>
+            <dd>Struct which holds a sub-box of the voxel collision shape, and its shift from the center of the shape.</dd>
           </dl>
         </section>
         <section id="func-members">
@@ -182,7 +194,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

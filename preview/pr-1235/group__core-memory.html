@@ -56,6 +56,7 @@
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#enum-members">Enums</a></li>
                 <li><a href="#func-members">Functions</a></li>
@@ -79,7 +80,7 @@
             <dt>file <a href="guards_8hpp.html" class="m-doc">guards.hpp</a></dt>
             <dd>Classes <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard</a> and <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard</a>.</dd>
             <dt>file <a href="move_8hpp.html" class="m-doc">move.hpp</a></dt>
-            <dd>Functions <a href="group__core-memory.html#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a> and <a href="group__core-memory.html#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />forward</a>.</dd>
+            <dd>Functions <a href="group__core-memory.html#ga8d073b214c0e7087df7e69263c9d6d88" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a> and <a href="group__core-memory.html#ga11d4e890885c4861a6f6ec778f1b3afc" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />forward</a>.</dd>
             <dt>file <a href="opt_8hpp.html" class="m-doc">opt.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Opt</a>.</dd>
             <dt>file <a href="standard__stream_8hpp.html" class="m-doc">standard_stream.hpp</a></dt>
@@ -90,6 +91,13 @@
             <dd>Class <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />TypeMap</a>.</dd>
             <dt>file <a href="unordered__bimap_8hpp.html" class="m-doc">unordered_bimap.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1memory_1_1UnorderedBimap.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap</a>.</dd>
+          </dl>
+        </section>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">cubos::core::memory</a></dt>
+            <dd><a href="group__core-memory.html" class="m-doc">Memory</a> module.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -108,8 +116,8 @@
             </dt>
             <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which writes to/reads from a buffer.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename R, typename... Ts&gt;</div>
-              class <a href="classcubos_1_1core_1_1memory_1_1Function_3_01R_07Ts_8_8_8_08_4.html" class="m-doc">cubos::core::memory::Function&lt;R(Ts...)&gt;</a>
+              <div class="m-doc-template">template&lt;typename&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">cubos::core::memory::Function</a>
             </dt>
             <dd>Generic function pointer which can also store capturing lambda functions.</dd>
             <dt>
@@ -192,12 +200,12 @@
             <dd>Converts a value from local endianness to big endianness.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; RemoveReference&lt;T&gt;::Type&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga8d073b214c0e7087df7e69263c9d6d88" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; RemoveReference&lt;T&gt;::Type&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Returns an R-value reference to the given value.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">forward</a>(</span><span class="m-doc-wrap">typename RemoveReference&lt;T&gt;::Type&amp; argument) -&gt; T&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga11d4e890885c4861a6f6ec778f1b3afc" class="m-doc">forward</a>(</span><span class="m-doc-wrap">typename RemoveReference&lt;T&gt;::Type&amp; argument) -&gt; T&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</dd>
           </dl>
@@ -409,13 +417,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ga3cd36ad26aeaf837279dade433600b38"><div>
+          <section class="m-doc-details" id="ga8d073b214c0e7087df7e69263c9d6d88"><div>
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">RemoveReference&lt;T&gt;::Type&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3cd36ad26aeaf837279dade433600b38" class="m-doc-self">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper">RemoveReference&lt;T&gt;::Type&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga8d073b214c0e7087df7e69263c9d6d88" class="m-doc-self">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Returns an R-value reference to the given value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -446,13 +454,13 @@
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>This is a replacement for <code>std::move</code>, which allows us to avoid including the entire <code>&lt;utility&gt;</code> header.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="ga9c4df9a5d6d81c87f0bc17ca34a14a3a"><div>
+          <section class="m-doc-details" id="ga11d4e890885c4861a6f6ec778f1b3afc"><div>
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">T&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc-self">forward</a>(</span><span class="m-doc-wrap">typename RemoveReference&lt;T&gt;::Type&amp; argument) <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper">T&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga11d4e890885c4861a6f6ec778f1b3afc" class="m-doc-self">forward</a>(</span><span class="m-doc-wrap">typename RemoveReference&lt;T&gt;::Type&amp; argument) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -528,7 +536,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

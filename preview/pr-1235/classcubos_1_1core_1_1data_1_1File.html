@@ -62,7 +62,7 @@
             </li>
           </ul>
         </nav>
-<p>Instances of this class are always held through a <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a>, which is just a smart shared pointer.</p><p>Files may either be regular files or directories. Directories can have children files, but no data. Regular files are only allowed inside mounted archives, since they must have data associated with them, while the directories are just a way to organize the files.</p><aside class="m-note m-info"><h4>Note</h4><p>All operations on this class expect relative paths without leading or trailing slashes, and are equivalent to the same operations on the <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> with absolute paths. For example, the empty path and the paths <code>foo/bar</code> and <code>foo</code> are valid relative paths, while <code>/foo/bar</code>, <code>foo/bar/</code> and <code>/</code> are not.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a></p><p><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a></p></aside>
+<p>Instances of this class are always held through a <a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a>, which is just a smart shared pointer.</p><p>Files may either be regular files or directories. Directories can have children files, but no data. Regular files are only allowed inside mounted archives, since they must have data associated with them, while the directories are just a way to organize the files.</p><aside class="m-note m-info"><h4>Note</h4><p>All operations on this class expect relative paths without leading or trailing slashes, and are equivalent to the same operations on the <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> with absolute paths. For example, the empty path and the paths <code>foo/bar</code> and <code>foo</code> are valid relative paths, while <code>/foo/bar</code>, <code>foo/bar/</code> and <code>/</code> are not.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a></p><p><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a></p></aside>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -91,12 +91,12 @@
             </dt>
             <dd>Unmounts an archive from a path relative to this file.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3b6013df9cddc2507d157d8127a120ec" class="m-doc">find</a>(</span><span class="m-doc-wrap">std::string_view path) -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b6013df9cddc2507d157d8127a120ec" class="m-doc">find</a>(</span><span class="m-doc-wrap">std::string_view path) -&gt; <a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
             <dd>Gets a handle to a file relative to this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#afce44126c19f14913e5342d8741700ba" class="m-doc">create</a>(</span><span class="m-doc-wrap">std::string_view path,
-              bool directory = false) -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
+              bool directory = false) -&gt; <a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
             <dd>Creates a new file on a path relative to this file.</dd>
             <dt>
@@ -104,7 +104,7 @@
             </dt>
             <dd>Marks this file for destruction.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2b134893a1eca18512809215bbab87a4" class="m-doc">open</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">OpenMode</a> mode) -&gt; std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1b04350f919a48da09078fdba81099c2" class="m-doc">open</a>(</span><span class="m-doc-wrap"><a href="#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">OpenMode</a> mode) -&gt; std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt;</span>
             </dt>
             <dd>Opens this file for reading or writing.</dd>
             <dt>
@@ -120,7 +120,7 @@
             </dt>
             <dd>Checks whether this file is a directory.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abd4a4e71dfa2b6b426d204cd02699710" class="m-doc">archive</a>(</span><span class="m-doc-wrap">) const -&gt; const std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a14f0931f09c5bff24e5e6e71b41e6133" class="m-doc">archive</a>(</span><span class="m-doc-wrap">) const -&gt; const std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt;&amp;</span>
             </dt>
             <dd>Gets the archive this file is in.</dd>
             <dt>
@@ -128,15 +128,15 @@
             </dt>
             <dd>Gets the identifier of this file on its archive.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8f3b4b222dfb314053b291d032981e19" class="m-doc">parent</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8f3b4b222dfb314053b291d032981e19" class="m-doc">parent</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
             <dd>Gets the parent directory of this file.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5ae786ac53c59d1934650ee5c83afc84" class="m-doc">sibling</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5ae786ac53c59d1934650ee5c83afc84" class="m-doc">sibling</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
             <dd>Gets the next sibling of this file.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a937c9996376cf21acb35df8ccfc5f42f" class="m-doc">child</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a937c9996376cf21acb35df8ccfc5f42f" class="m-doc">child</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
             <dd>Gets the first child of this file.</dd>
           </dl>
@@ -240,7 +240,7 @@
           </div></section>
           <section class="m-doc-details" id="a3b6013df9cddc2507d157d8127a120ec"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b6013df9cddc2507d157d8127a120ec" class="m-doc-self">find</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b6013df9cddc2507d157d8127a120ec" class="m-doc-self">find</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
             </h3>
             <p>Gets a handle to a file relative to this file.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -264,7 +264,7 @@
           </div></section>
           <section class="m-doc-details" id="afce44126c19f14913e5342d8741700ba"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afce44126c19f14913e5342d8741700ba" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">std::string_view path,
+              <span class="m-doc-wrap-bumper"><a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afce44126c19f14913e5342d8741700ba" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">std::string_view path,
               bool directory = false)</span></span>
             </h3>
             <p>Creates a new file on a path relative to this file.</p>
@@ -306,9 +306,9 @@
             </table>
 <p>Although the file will only be deleted when no more references to it exist, it is immediately removed from the virtual file system and this method is called recursively on all its children.</p><p>This method fails on the following conditions:</p><ul><li>this file is the mount point of an archive.</li><li>this file does not belong to an archive.</li><li>this file belongs to a read-only archive.</li></ul>
           </div></section>
-          <section class="m-doc-details" id="a2b134893a1eca18512809215bbab87a4"><div>
+          <section class="m-doc-details" id="a1b04350f919a48da09078fdba81099c2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt; cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b134893a1eca18512809215bbab87a4" class="m-doc-self">open</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">OpenMode</a> mode)</span></span>
+              <span class="m-doc-wrap-bumper">std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt; cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b04350f919a48da09078fdba81099c2" class="m-doc-self">open</a>(</span><span class="m-doc-wrap"><a href="#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">OpenMode</a> mode)</span></span>
             </h3>
             <p>Opens this file for reading or writing.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -328,7 +328,7 @@
                 </tr>
               </tfoot>
             </table>
-<p>If the file is being written to, blocks until the other threads are done with the file.</p><p>This method fails on the following conditions:</p><ul><li>this file is a directory.</li><li>this file belongs to a read-only archive and the mode is not <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6a7a1a5f3e79fdc91edf2f5ead9d66abb4" class="m-doc">OpenMode::<wbr />Read</a>.</li></ul>
+<p>If the file is being written to, blocks until the other threads are done with the file.</p><p>This method fails on the following conditions:</p><ul><li>this file is a directory.</li><li>this file belongs to a read-only archive and the mode is not <a href="#a2f796d43a554bc3af6a3fe4747568de6a7a1a5f3e79fdc91edf2f5ead9d66abb4" class="m-doc">OpenMode::<wbr />Read</a>.</li></ul>
           </div></section>
           <section class="m-doc-details" id="a2951ccf946c6d49e5b92ccf6449002ab"><div>
             <h3>
@@ -372,9 +372,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="abd4a4e71dfa2b6b426d204cd02699710"><div>
+          <section class="m-doc-details" id="a14f0931f09c5bff24e5e6e71b41e6133"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt;&amp; cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd4a4e71dfa2b6b426d204cd02699710" class="m-doc-self">archive</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt;&amp; cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a14f0931f09c5bff24e5e6e71b41e6133" class="m-doc-self">archive</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the archive this file is in.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -402,7 +402,7 @@
           </div></section>
           <section class="m-doc-details" id="a8f3b4b222dfb314053b291d032981e19"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f3b4b222dfb314053b291d032981e19" class="m-doc-self">parent</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f3b4b222dfb314053b291d032981e19" class="m-doc-self">parent</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the parent directory of this file.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -416,7 +416,7 @@
           </div></section>
           <section class="m-doc-details" id="a5ae786ac53c59d1934650ee5c83afc84"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ae786ac53c59d1934650ee5c83afc84" class="m-doc-self">sibling</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ae786ac53c59d1934650ee5c83afc84" class="m-doc-self">sibling</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the next sibling of this file.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -430,7 +430,7 @@
           </div></section>
           <section class="m-doc-details" id="a937c9996376cf21acb35df8ccfc5f42f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a937c9996376cf21acb35df8ccfc5f42f" class="m-doc-self">child</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a937c9996376cf21acb35df8ccfc5f42f" class="m-doc-self">child</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the first child of this file.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -487,7 +487,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

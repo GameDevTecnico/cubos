@@ -93,6 +93,20 @@
               Intersection&amp; intersect) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
             </dt>
             <dd>Computes the intersection between two box shapes.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a847980982b35c728e17b0f0fd48fb82c" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">PolygonalFeature&amp; polygon,
+              int numClipPlanes,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
+              bool removeNotClipToPlane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Performs the Sutherland-Hodgman Clipping algorithm.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a3aa4069dfc64c9ae974264957c9877b9" class="m-doc">planeEdgeIntersection</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane,
+              const glm::vec3&amp; start,
+              const glm::vec3&amp; end,
+              glm::vec3&amp; outPoint) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+            </dt>
+            <dd>Compute the intersection between a plane and an edge.</dd>
           </dl>
         </section>
       </div>
@@ -139,7 +153,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

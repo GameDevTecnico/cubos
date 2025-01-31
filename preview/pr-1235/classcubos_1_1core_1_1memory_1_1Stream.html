@@ -82,6 +82,10 @@
               class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">StandardStream</a>
             </dt>
             <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which wraps a <code>libc</code> file pointer.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1net_1_1TcpStream.html" class="m-doc">cubos::core::net::TcpStream</a>
+            </dt>
+            <dd>Stream implementation which writes to/reads from a TCP connection.</dd>
           </dl>
         </section>
         <section id="pub-static-attribs">
@@ -112,16 +116,6 @@
               <span class="m-doc-wrap-bumper"><a href="#afcc76e1e97383f75bf24f0656e235c99" class="m-doc-self">Stream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Move constructs.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper"><a href="#a1c345b2b25de134d6caec571d9de7119" class="m-doc">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; ::std::is_signed_v&lt;T&gt;) void print(T value</span>
-            </dt>
-            <dd>Prints a signed integer to the stream.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper"><a href="#ad64cec749b2e37131e94c5a679e20fab" class="m-doc">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; !::std::is_signed_v&lt;T&gt;) inline void print(T value</span>
-            </dt>
-            <dd>Prints a signed integer to the stream.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -138,6 +132,16 @@
             </dt>
             <dd>Writes data to the stream.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a>(</span><span class="m-doc-wrap">void* data,
+              std::size_t size) -&gt; bool</span>
+            </dt>
+            <dd>Reads data from the stream with the exact specified size.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc">writeExact</a>(</span><span class="m-doc-wrap">const void* data,
+              std::size_t size) -&gt; bool</span>
+            </dt>
+            <dd>Writes data to the stream with the exact specified size.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2d6367c724309042140d6d1f84c5c65e" class="m-doc">tell</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Gets the current position in the stream.</dd>
@@ -151,7 +155,7 @@
             </dt>
             <dd>Checks if the stream still has content to read.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#acefff86d37cd9bfd27108412d8e51645" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) const -&gt; char <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6ba0c7ef9a4fc51df926fc5c8cf478e8" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) -&gt; char <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Peeks one byte from the stream.</dd>
             <dt>
@@ -162,6 +166,18 @@
               <span class="m-doc-wrap-bumper">void <a href="#af1423e4600073d89d24422b17b463d1f" class="m-doc">put</a>(</span><span class="m-doc-wrap">char c)</span>
             </dt>
             <dd>Puts one byte into the stream.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#a24c513a81281564eb0433cb25aa83351" class="m-doc">print</a>(</span><span class="m-doc-wrap">T value,
+              std::size_t base = 10)</span>
+            </dt>
+            <dd>Prints a signed integer to the stream.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#a6caffab93eee0a17a9eaca01140943bd" class="m-doc">print</a>(</span><span class="m-doc-wrap">T value,
+              std::size_t base = 10)</span>
+            </dt>
+            <dd>Prints a signed integer to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a4e091a2ca751bdeb6893f977888989f4" class="m-doc">print</a>(</span><span class="m-doc-wrap">int64_t value,
               std::size_t base = 10)</span>
@@ -273,46 +289,6 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a1c345b2b25de134d6caec571d9de7119"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c345b2b25de134d6caec571d9de7119" class="m-doc-self">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; ::std::is_signed_v&lt;T&gt;) void print(T value</span></span>
-            </h3>
-            <p>Prints a signed integer to the stream.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Type of the integer.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ad64cec749b2e37131e94c5a679e20fab"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad64cec749b2e37131e94c5a679e20fab" class="m-doc-self">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; !::std::is_signed_v&lt;T&gt;) inline void print(T value</span></span>
-            </h3>
-            <p>Prints a signed integer to the stream.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Integer type.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
           <section class="m-doc-details" id="a8932b836f804b7edffbf144dfa446464"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8932b836f804b7edffbf144dfa446464" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* data,
@@ -340,6 +316,7 @@
                 </tr>
               </tfoot>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Data may be read partially, <a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc">readExact</a> is recommended.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a7865e5ea6bc59b0c87bc12ec9f68a25f"><div>
             <h3>
@@ -368,6 +345,65 @@
                 </tr>
               </tfoot>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Data may be written partially, <a href="#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc">writeExact</a> is recommended.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ae5fcc3e6a2bbd22580eddfadf26107af"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5fcc3e6a2bbd22580eddfadf26107af" class="m-doc-self">readExact</a>(</span><span class="m-doc-wrap">void* data,
+              std::size_t size)</span></span>
+            </h3>
+            <p>Reads data from the stream with the exact specified size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">data</td>
+                  <td>Buffer to read data into.</td>
+                </tr>
+                <tr>
+                  <td>size</td>
+                  <td>Size of the buffer.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether reading was sucessful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after buffer is completed or an error occurs.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a1dd03e1a5cd7fd587a99860a748fe447"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1dd03e1a5cd7fd587a99860a748fe447" class="m-doc-self">writeExact</a>(</span><span class="m-doc-wrap">const void* data,
+              std::size_t size)</span></span>
+            </h3>
+            <p>Writes data to the stream with the exact specified size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">data</td>
+                  <td>Buffer to write data from.</td>
+                </tr>
+                <tr>
+                  <td>size</td>
+                  <td>Size of the buffer.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether writing was sucessful.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This function will only return after whole buffer is written or an error occurs.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a2d6367c724309042140d6d1f84c5c65e"><div>
             <h3>
@@ -419,9 +455,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="acefff86d37cd9bfd27108412d8e51645"><div>
+          <section class="m-doc-details" id="a6ba0c7ef9a4fc51df926fc5c8cf478e8"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acefff86d37cd9bfd27108412d8e51645" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6ba0c7ef9a4fc51df926fc5c8cf478e8" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Peeks one byte from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -460,6 +496,74 @@
                 <tr>
                   <td style="width: 1%">c</td>
                   <td>Byte to put.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a24c513a81281564eb0433cb25aa83351"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a24c513a81281564eb0433cb25aa83351" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">T value,
+              std::size_t base = 10)</span></span>
+            </h3>
+            <p>Prints a signed integer to the stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the integer.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to print.</td>
+                </tr>
+                <tr>
+                  <td>base</td>
+                  <td>Base to use.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6caffab93eee0a17a9eaca01140943bd"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6caffab93eee0a17a9eaca01140943bd" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">T value,
+              std::size_t base = 10)</span></span>
+            </h3>
+            <p>Prints a signed integer to the stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Integer type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to print.</td>
+                </tr>
+                <tr>
+                  <td>base</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
@@ -670,7 +774,7 @@
                 </tr>
               </tbody>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p>This overload is used to terminate the recursion in <a href="classcubos_1_1core_1_1memory_1_1Stream.html#ad6a14e841ba6f89786f189edb4e59586" class="m-doc">printf()</a>.</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p>This overload is used to terminate the recursion in <a href="#ad6a14e841ba6f89786f189edb4e59586" class="m-doc">printf()</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="abcef0f3e7bf685e944f6881d7b6510e5"><div>
             <h3>
@@ -999,7 +1103,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

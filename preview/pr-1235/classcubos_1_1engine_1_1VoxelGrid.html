@@ -83,13 +83,21 @@
               <span class="m-doc-wrap-bumper"><a href="#a6425d8423803a1a6904476c6f117cd67" class="m-doc">VoxelGrid</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Move constructs.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a279e2fd64a5babb2abc2012ae9d34248" class="m-doc">VoxelGrid</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; other)</span>
+            </dt>
+            <dd>Copy constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0b92c0e5ed507babf698ec48d8efd4d1" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; rhs) -&gt; <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a84860d3a8db652f8a356edd468dd3ae7" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp;&amp; other) -&gt; <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move Operator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac972b4822f2f4844209308d9c50c0f73" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; rhs) -&gt; <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp;</span>
             </dt>
             <dd>Makes this grid a copy of another grid.</dd>
             <dt>
@@ -97,7 +105,7 @@
             </dt>
             <dd>Resizes the grid. New voxels are initialized to 0.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a457a346c936b6685b98709b45598e766" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; const glm::uvec3&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4422c9cd33e78e67de00d21e0f574fa7" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; const glm::uvec3&amp;</span>
             </dt>
             <dd>Gets the size of the grid.</dd>
             <dt id="a155c294e19a872542f0f67f56b293bd6">
@@ -188,9 +196,43 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a0b92c0e5ed507babf698ec48d8efd4d1"><div>
+          <section class="m-doc-details" id="a279e2fd64a5babb2abc2012ae9d34248"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; cubos::<wbr />engine::<wbr />VoxelGrid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b92c0e5ed507babf698ec48d8efd4d1" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; rhs)</span></span>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />VoxelGrid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a279e2fd64a5babb2abc2012ae9d34248" class="m-doc-self">VoxelGrid</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; other)</span></span>
+            </h3>
+            <p>Copy constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other grid.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a84860d3a8db652f8a356edd468dd3ae7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; cubos::<wbr />engine::<wbr />VoxelGrid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a84860d3a8db652f8a356edd468dd3ae7" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move Operator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other grid.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac972b4822f2f4844209308d9c50c0f73"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; cubos::<wbr />engine::<wbr />VoxelGrid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac972b4822f2f4844209308d9c50c0f73" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; rhs)</span></span>
             </h3>
             <p>Makes this grid a copy of another grid.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -228,9 +270,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a457a346c936b6685b98709b45598e766"><div>
+          <section class="m-doc-details" id="a4422c9cd33e78e67de00d21e0f574fa7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const glm::uvec3&amp; cubos::<wbr />engine::<wbr />VoxelGrid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a457a346c936b6685b98709b45598e766" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const glm::uvec3&amp; cubos::<wbr />engine::<wbr />VoxelGrid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4422c9cd33e78e67de00d21e0f574fa7" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the size of the grid.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -367,7 +409,7 @@
                 </tr>
               </tfoot>
             </table>
-<p>Writes in the format specified in <a href="classcubos_1_1engine_1_1VoxelGrid.html#ac9bfb9b9cfee1ba3c848172dd6891aa3" class="m-doc">loadFrom</a>.</p>
+<p>Writes in the format specified in <a href="#ac9bfb9b9cfee1ba3c848172dd6891aa3" class="m-doc">loadFrom</a>.</p>
           </div></section>
         </section>
       </div>
@@ -414,7 +456,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
