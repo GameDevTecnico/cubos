@@ -6,16 +6,9 @@
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/tools/plugin.hpp>
-#include <cubos/engine/tools/selection/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
 #include "menu_bar/plugin.hpp"
-#include "asset_explorer/plugin.hpp"
-#include "debugger/plugin.hpp"
-#include "importer/plugin.hpp"
-#include "project/plugin.hpp"
-#include "scene_editor/plugin.hpp"
-#include "voxel_palette_editor/plugin.hpp"
 
 using namespace cubos::engine;
 using namespace tesseratos;
@@ -27,23 +20,6 @@ int main(int argc, char** argv)
     Cubos cubos{argc, argv};
     cubos.plugin(cubos::engine::defaultsPlugin);
     cubos.plugin(cubos::engine::freeCameraPlugin);
-
-    // For readability purposes, plugins are divided into blocks based on their dependencies.
-    // The first block contains plugins without dependencies.
-    // The second block contains plugins which depend on plugins from the first block.
-    // The third block contains plugins which depend on plugins from the first and second blocks.
-    // And so on.
-
-    cubos.plugin(selectionPlugin);
-
-    cubos.plugin(debuggerPlugin);
-    cubos.plugin(assetExplorerPlugin);
-
-    cubos.plugin(projectPlugin);
-
-    cubos.plugin(sceneEditorPlugin);
-    cubos.plugin(voxelPaletteEditorPlugin);
-    cubos.plugin(importerPlugin);
 
     cubos.plugin(menuBarPlugin);
 
