@@ -6,6 +6,7 @@
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/tools/plugin.hpp>
+#include <cubos/engine/tools/selection/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
 #include "menu_bar/plugin.hpp"
