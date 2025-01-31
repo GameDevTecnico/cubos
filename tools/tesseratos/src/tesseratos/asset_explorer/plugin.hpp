@@ -26,6 +26,14 @@ namespace tesseratos
         cubos::engine::AnyAsset asset; ///< Handle to the selected asset.
     };
 
+    /// @brief Tool state.
+    struct AssetExplorerTool
+    {
+        CUBOS_REFLECT;
+
+        bool isOpen{false};
+    };
+
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-asset-explorer-plugin

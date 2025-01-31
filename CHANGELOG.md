@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Make SSAO optional (#1396, **@tomas7770**).
+- Move Tesseratos' tools' status to their respective plugins and removing them from the Toolbox (#1234, **@jdbaracho**).
 
 ## [v0.5.0] - 2024-12-01
 
