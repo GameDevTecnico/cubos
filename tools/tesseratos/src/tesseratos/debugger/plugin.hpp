@@ -20,6 +20,14 @@ namespace tesseratos
     /// ## Resources
     /// - @ref Debugger - contains connection information.
 
+    /// @brief Tool state.
+    struct DebuggerTool
+    {
+        CUBOS_REFLECT;
+
+        bool isOpen{false};
+    };
+
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-debugger-plugin
