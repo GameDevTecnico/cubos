@@ -2,6 +2,7 @@
 
 #include <cubos/engine/defaults/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/tools/selection/plugin.hpp>
 
 #include "../asset_explorer/plugin.hpp"
 #include "../debugger/plugin.hpp"
@@ -16,15 +17,23 @@ using namespace tesseratos;
 void tesseratos::menuBarPlugin(Cubos& cubos)
 {
     cubos.depends(imguiPlugin);
+    
+    // For readability purposes, plugins are divided into blocks based on their dependencies.
+    // The first block contains plugins without dependencies.
+    // The second block contains plugins which depend on plugins from the first block.
+    // The third block contains plugins which depend on plugins from the first and second blocks.
+    // And so on.
 
-    cubos.depends(debuggerPlugin);
-    cubos.depends(assetExplorerPlugin);
+    cubos.plugin(selectionPlugin);
 
-    cubos.depends(projectPlugin);
+    cubos.plugin(debuggerPlugin);
+    cubos.plugin(assetExplorerPlugin);
 
-    cubos.depends(sceneEditorPlugin);
-    cubos.depends(voxelPaletteEditorPlugin);
-    cubos.depends(importerPlugin);
+    cubos.plugin(projectPlugin);
+
+    cubos.plugin(sceneEditorPlugin);
+    cubos.plugin(voxelPaletteEditorPlugin);
+    cubos.plugin(importerPlugin);
 
     cubos.system("setup Menu Bar")
         .tagged(imguiTag)
