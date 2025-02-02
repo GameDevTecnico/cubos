@@ -30,6 +30,7 @@ namespace cubos::engine
         {
             cubos::core::geom::Box box;
             glm::vec3 shift;
+            uint32_t boxId;
         };
 
         /// @brief Entities voxel grid.
@@ -74,11 +75,12 @@ namespace cubos::engine
         /// @brief Inserts a new @ref BoxShiftPair to the list of the class.
         /// @param box Box to insert.
         /// @param shift Shift vector of the box.
-        void insertBox(const cubos::core::geom::Box& box, const glm::vec3& shift)
+        void insertBox(const cubos::core::geom::Box& box, const glm::vec3& shift, uint32_t boxId)
         {
             BoxShiftPair pair;
             pair.box = box;
             pair.shift = shift;
+            pair.boxId = boxId;
             this->mBoxes.push_back(pair);
         }
 
