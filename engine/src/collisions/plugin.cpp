@@ -229,6 +229,7 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
             glm::uvec3 size = grid.size();
             glm::vec3 center = glm::vec3(size) / 2.0F;
             auto boxCoords = greedy3dMeshing(grid);
+            uint32_t boxId = 1;
 
             for (auto corners : boxCoords)
             {
@@ -236,7 +237,8 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
                 auto boxCenter = glm::vec3(glm::ivec3(corners.first + corners.second) + glm::ivec3(1, 1, 1)) / 2.0F;
                 glm::vec3 shift = center - boxCenter;
                 box.halfSize = glm::vec3(glm::ivec3(corners.second - corners.first) + glm::ivec3(1, 1, 1)) / 2.0F;
-                shape.insertBox(box, shift);
+                shape.insertBox(box, shift, boxId);
+                boxId++;
             }
         }
     };

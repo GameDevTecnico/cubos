@@ -9,8 +9,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::CollidingWith)
     return core::ecs::TypeBuilder<CollidingWith>("cubos::engine::CollidingWith")
         .symmetric()
         .withField("entity", &CollidingWith::entity)
-        .withField("penetration", &CollidingWith::penetration)
-        .withField("position", &CollidingWith::position)
-        .withField("normal", &CollidingWith::normal)
+        .withField("manifolds", &CollidingWith::manifolds)
         .build();
 }

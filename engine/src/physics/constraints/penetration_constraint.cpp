@@ -27,8 +27,6 @@ CUBOS_REFLECT_IMPL(cubos::engine::PenetrationConstraintPointData)
 CUBOS_REFLECT_IMPL(cubos::engine::PenetrationConstraint)
 {
     return cubos::core::ecs::TypeBuilder<PenetrationConstraint>("cubos::engine::PenetrationConstraint")
-        .symmetric()
-        .withField("entity", &PenetrationConstraint::entity)
         .withField("normal", &PenetrationConstraint::normal)
         .withField("friction", &PenetrationConstraint::friction)
         .withField("restitution", &PenetrationConstraint::restitution)
@@ -36,5 +34,14 @@ CUBOS_REFLECT_IMPL(cubos::engine::PenetrationConstraint)
         .withField("biasCoefficient", &PenetrationConstraint::biasCoefficient)
         .withField("impulseCoefficient", &PenetrationConstraint::impulseCoefficient)
         .withField("massCoefficient", &PenetrationConstraint::massCoefficient)
+        .build();
+}
+
+CUBOS_REFLECT_IMPL(cubos::engine::PenetrationConstraints)
+{
+    return cubos::core::ecs::TypeBuilder<PenetrationConstraints>("cubos::engine::PenetrationConstraints")
+        .symmetric()
+        .withField("entity", &PenetrationConstraints::entity)
+        .withField("penConstraints", &PenetrationConstraints::penConstraints)
         .build();
 }

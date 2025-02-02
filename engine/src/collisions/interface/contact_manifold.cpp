@@ -32,9 +32,9 @@ CUBOS_REFLECT_IMPL(cubos::engine::ContactPointData)
 CUBOS_REFLECT_IMPL(cubos::engine::ContactManifold)
 {
     return core::ecs::TypeBuilder<ContactManifold>("cubos::engine::ContactManifold")
-        .symmetric()
-        .withField("entity", &ContactManifold::entity)
         .withField("normal", &ContactManifold::normal)
         .withField("points", &ContactManifold::points)
+        .withField("boxId1", &ContactManifold::boxId1)
+        .withField("boxId2", &ContactManifold::boxId2)
         .build();
 }

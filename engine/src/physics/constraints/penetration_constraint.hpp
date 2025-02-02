@@ -50,7 +50,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        cubos::core::ecs::Entity entity; ///< Entity to which the normal is relative to.
         glm::vec3 normal;                ///< Normal of contact on the surface of the entity.
         float friction;                  ///< Friction of the constraint.
         float restitution;               ///< Restitution coefficient of the constraint.
@@ -61,5 +60,16 @@ namespace cubos::engine
         float biasCoefficient;
         float impulseCoefficient;
         float massCoefficient;
+    };
+
+    /// @brief Holds multiple PenetrationConstraints
+    /// @ingroup physics-solver-plugin
+    struct PenetrationConstraints
+    {
+        CUBOS_REFLECT;
+
+        cubos::core::ecs::Entity entity; ///< Entity to which the normal is relative to.
+
+        std::vector<PenetrationConstraint> penConstraints; ///< Penetration contraints for each manifold.
     };
 } // namespace cubos::engine

@@ -7,9 +7,11 @@
 #include <glm/vec3.hpp>
 
 #include <cubos/core/ecs/entity/entity.hpp>
+#include <cubos/core/reflection/external/vector.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/api.hpp>
+#include <cubos/engine/collisions/contact_manifold.hpp>
 
 namespace cubos::engine
 {
@@ -20,10 +22,7 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         cubos::core::ecs::Entity entity; ///< Entity to which the normal is relative to.
-        glm::vec3 entity1OriginalPosition;
-        glm::vec3 entity2OriginalPosition;
-        float penetration;  ///< Penetration depth of the collision.
-        glm::vec3 position; ///< Position of contact on the surface of the entity.
-        glm::vec3 normal;   ///< Normal of contact on the surface of the entity.
+
+        std::vector<ContactManifold> manifolds; ///< All contact interfaces between the entities
     };
 } // namespace cubos::engine

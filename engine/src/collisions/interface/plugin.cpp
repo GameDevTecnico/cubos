@@ -15,5 +15,4 @@ void cubos::engine::interfaceCollisionsPlugin(Cubos& cubos)
     cubos.component<VoxelCollisionShape>();
 
     cubos.relation<CollidingWith>();
-    cubos.relation<ContactManifold>();
 }

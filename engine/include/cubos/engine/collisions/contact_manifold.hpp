@@ -1,5 +1,5 @@
 /// @file
-/// @brief Relation @ref cubos::engine::ContactManifold.
+/// @brief Struct @ref cubos::engine::ContactManifold.
 /// @ingroup collisions-plugin
 
 #pragma once
@@ -127,9 +127,10 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        cubos::core::ecs::Entity entity;      ///< Entity to which the normal is relative to.
         glm::vec3 normal;                     ///< A contact normal shared by all contacts in this manifold,
                                               ///< expressed in the local space of the first entity.
         std::vector<ContactPointData> points; ///< Contact points of this manifold.
+        uint32_t boxId1;                      ///< If the manifold is from a voxelShape we need to know which boxes
+        uint32_t boxId2;                      ///< are colliding
     };
 } // namespace cubos::engine
