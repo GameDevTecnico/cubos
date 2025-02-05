@@ -21,7 +21,7 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        cubos::core::ecs::Entity entity; ///< Entity to which the normal is relative to.
+        cubos::core::ecs::Entity entity; ///< Entity to which the normals in the manifolds are relative to..
 
         std::vector<ContactManifold> manifolds; ///< All contact interfaces between the entities
     };

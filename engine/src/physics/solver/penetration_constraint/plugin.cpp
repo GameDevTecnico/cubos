@@ -87,19 +87,19 @@ static void solvePenetrationConstraint(
     const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps, const SolverConstants& solverConstants,
     const bool useBias)
 {
+    float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
+
     for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraints, ent2, mass2,
                inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
     {
-        for (auto constraint : constraints.penConstraints)
+        glm::vec3 v1 = velocity1.vec;
+        glm::vec3 v2 = velocity2.vec;
+
+        glm::vec3 w1 = angVelocity1.vec;
+        glm::vec3 w2 = angVelocity2.vec;
+
+        for (auto& constraint : constraints.penConstraints)
         {
-            float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
-
-            glm::vec3 v1 = velocity1.vec;
-            glm::vec3 v2 = velocity2.vec;
-
-            glm::vec3 w1 = angVelocity1.vec;
-            glm::vec3 w2 = angVelocity2.vec;
-
             // Separate bodies
             for (PenetrationConstraintPointData& contactPoint : constraint.points)
             {
@@ -215,11 +215,11 @@ static void solvePenetrationConstraint(
                 v2 += p * mass2.inverseMass;
                 w2 += inertia2.inverseInertia * glm::cross(r2, p);
             }
-            velocity1.vec = v1;
-            angVelocity1.vec = w1;
-            velocity2.vec = v2;
-            angVelocity2.vec = w2;
         }
+        velocity1.vec = v1;
+        angVelocity1.vec = w1;
+        velocity2.vec = v2;
+        angVelocity2.vec = w2;
     }
 }
 
@@ -337,7 +337,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
             for (auto [ent1, mass1, inertia1, correction1, velocity1, angVelocity1, constraints, ent2, mass2, inertia2,
                        correction2, velocity2, angVelocity2] : query)
             {
-                for (auto& constraint : constraints.penConstraints)
+                for (const auto& constraint : constraints.penConstraints)
                 {
                     if (constraint.restitution == solverConstants.minRestitution)
                     {
@@ -414,7 +414,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                        material2] : query)
             {
                 std::vector<PenetrationConstraint> penConstraints;
-                for (auto manifold : collidingWith.manifolds)
+                for (const auto& manifold : collidingWith.manifolds)
                 {
                     glm::vec3 tangent1;
                     glm::vec3 tangent2;
