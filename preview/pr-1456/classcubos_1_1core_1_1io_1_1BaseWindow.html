@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::core::io::BaseWindow class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1io.html">io</a>::<wbr/></span>BaseWindow <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
+        </h1>
+        <p>Interface used to wrap low-level window API implementations.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>Allows polling of input events and creates a <a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">gl::<wbr />RenderDevice</a> for rendering to the window.</p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a57bbad4140153d361376bf488c981749" class="m-doc">pushEvent</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a>&amp;&amp; event)</span>
+            </dt>
+            <dd>Pushes an event to the event queue.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aef473cb06844a3cde065b652455ceb95" class="m-doc">pollEvent</a>(</span><span class="m-doc-wrap">) -&gt; std::optional&lt;<a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a>&gt;</span>
+            </dt>
+            <dd>Polls the window for events.</dd>
+            <dt id="a4a592436f7f4c8e1947b2de9e32688a0">
+              <span class="m-doc-wrap-bumper">void <a href="#a4a592436f7f4c8e1947b2de9e32688a0" class="m-doc-self">swapBuffers</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Swaps the window buffers.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2200af65b9f25e7bdae57867d27764ff" class="m-doc">renderDevice</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">gl::<wbr />RenderDevice</a>&amp; <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the render device associated with this window.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad32f09a72539e745e15bba8bc526a16f" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; glm::uvec2 <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the window size, which may differ from the framebuffer size.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad8ae77a1f82deb3decbe0ccf8ba867c0" class="m-doc">framebufferSize</a>(</span><span class="m-doc-wrap">) const -&gt; glm::uvec2 <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the window framebuffer size, which may differ from the window size.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a5d74ae691e3250025fc827c3ef75fa" class="m-doc">contentScale</a>(</span><span class="m-doc-wrap">) const -&gt; float <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the window content scale, commonly known as &quot;DPI scale&quot;.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6c0c4d300917b46aed46a95046a12f97" class="m-doc">shouldClose</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Checks whether the window should close.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa97eac6d57cbea86f7a9cec4fd038b50" class="m-doc">time</a>(</span><span class="m-doc-wrap">) const -&gt; double <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the time since the window was created.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5cd2b1d3bacdc0d6ded39ab14825d2fd" class="m-doc">mouseState</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga6a91085b03d6b96ddf36b0ba9a9ae78b" class="m-doc">MouseState</a> state) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Sets the mouse state when the window is focused.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3bc40a4a2e7a26b3251da5b3765b99d4" class="m-doc">mouseState</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-io.html#ga6a91085b03d6b96ddf36b0ba9a9ae78b" class="m-doc">MouseState</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the mouse state when the window is focused.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4447d8b196cff9c7a8d97fd8c71a0fd4" class="m-doc">getMousePosition</a>(</span><span class="m-doc-wrap">) -&gt; glm::ivec2 <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the position of the mouse cursor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a014571cb896d121b3efdd7bbf04f76db" class="m-doc">setMousePosition</a>(</span><span class="m-doc-wrap">glm::ivec2 position) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Sets the position of the mouse cursor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1d7c623972bf70e74986f2f80adf06f4" class="m-doc">createCursor</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24" class="m-doc">Cursor::<wbr />Standard</a> standard) -&gt; std::shared_ptr&lt;<a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">Cursor</a>&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Creates a new cursor with a standard shape.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aed04f58259f6ac26b953f2bd85fd45ef" class="m-doc">cursor</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">Cursor</a>&gt; cursor) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Sets the current cursor. Pass nullptr to use the default cursor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2607cc0fac0f9774e22e1fbb30f1bca1" class="m-doc">clipboard</a>(</span><span class="m-doc-wrap">const std::string&amp; text) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Sets the content of the clipboard.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad776e729cd97ea81c3a7ec7de5a82887" class="m-doc">clipboard</a>(</span><span class="m-doc-wrap">) const -&gt; const char* <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the content of the clipboard.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a53b47477a036180275dd536b9dc33850" class="m-doc">modifiers</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the last used keyboard modifiers.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a71588bc3b5297bf0879d4a3c64911685" class="m-doc">pressed</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">Key</a> key,
+              <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> modifiers = <a href="group__core-io.html#ggad9bb6ed019dd984f94ece386e31f4493a6adf97f83acf6453d4a6a4b1070f3754" class="m-doc">Modifiers::<wbr />None</a>) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Checks if a key is currently pressed with (at least) the given modifiers.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8a1f64f73416fbeb03e6f0de2c164ec" class="m-doc">pressed</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> button) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Checks if a mouse button is currently pressed.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac1137b9cdcdd244996623097f948bb35" class="m-doc">gamepadState</a>(</span><span class="m-doc-wrap">int gamepad,
+              <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">GamepadState</a>&amp; state) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the state of the specified gamepad.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt id="aa820a0d03f1de76b67408f3c842a5abd">
+              <span class="m-doc-wrap-bumper">void <a href="#aa820a0d03f1de76b67408f3c842a5abd" class="m-doc-self">pollEvents</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Asks the implementation to fill the event queue with new events.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a57bbad4140153d361376bf488c981749"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57bbad4140153d361376bf488c981749" class="m-doc-self">pushEvent</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a>&amp;&amp; event)</span></span>
+            </h3>
+            <p>Pushes an event to the event queue.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">event</td>
+                  <td>Event to push.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aef473cb06844a3cde065b652455ceb95"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::optional&lt;<a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a>&gt; cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef473cb06844a3cde065b652455ceb95" class="m-doc-self">pollEvent</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Polls the window for events.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Next event, or std::nullopt if there are no more events.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2200af65b9f25e7bdae57867d27764ff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">gl::<wbr />RenderDevice</a>&amp; cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2200af65b9f25e7bdae57867d27764ff" class="m-doc-self">renderDevice</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the render device associated with this window.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Render device associated with this window.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad32f09a72539e745e15bba8bc526a16f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::uvec2 cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad32f09a72539e745e15bba8bc526a16f" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the window size, which may differ from the framebuffer size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Window size, in screen coordinates.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad8ae77a1f82deb3decbe0ccf8ba867c0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::uvec2 cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad8ae77a1f82deb3decbe0ccf8ba867c0" class="m-doc-self">framebufferSize</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the window framebuffer size, which may differ from the window size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Window framebuffer size, in pixels.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6a5d74ae691e3250025fc827c3ef75fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a5d74ae691e3250025fc827c3ef75fa" class="m-doc-self">contentScale</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the window content scale, commonly known as &quot;DPI scale&quot;.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Ratio between the current DPI and the platform&#x27;s default DPI.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6c0c4d300917b46aed46a95046a12f97"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c0c4d300917b46aed46a95046a12f97" class="m-doc-self">shouldClose</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Checks whether the window should close.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the window should close.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa97eac6d57cbea86f7a9cec4fd038b50"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">double cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa97eac6d57cbea86f7a9cec4fd038b50" class="m-doc-self">time</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the time since the window was created.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Time since the window was created, in seconds.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5cd2b1d3bacdc0d6ded39ab14825d2fd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5cd2b1d3bacdc0d6ded39ab14825d2fd" class="m-doc-self">mouseState</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga6a91085b03d6b96ddf36b0ba9a9ae78b" class="m-doc">MouseState</a> state) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Sets the mouse state when the window is focused.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">state</td>
+                  <td>Mouse state.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3bc40a4a2e7a26b3251da5b3765b99d4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core-io.html#ga6a91085b03d6b96ddf36b0ba9a9ae78b" class="m-doc">MouseState</a> cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3bc40a4a2e7a26b3251da5b3765b99d4" class="m-doc-self">mouseState</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the mouse state when the window is focused.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Mouse state when the window is focused.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4447d8b196cff9c7a8d97fd8c71a0fd4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::ivec2 cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4447d8b196cff9c7a8d97fd8c71a0fd4" class="m-doc-self">getMousePosition</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the position of the mouse cursor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Position of the mouse cursor, in screen coordinates.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a014571cb896d121b3efdd7bbf04f76db"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a014571cb896d121b3efdd7bbf04f76db" class="m-doc-self">setMousePosition</a>(</span><span class="m-doc-wrap">glm::ivec2 position) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Sets the position of the mouse cursor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">position</td>
+                  <td>New position of the mouse cursor, in screen coordinates.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1d7c623972bf70e74986f2f80adf06f4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">Cursor</a>&gt; cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d7c623972bf70e74986f2f80adf06f4" class="m-doc-self">createCursor</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24" class="m-doc">Cursor::<wbr />Standard</a> standard) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Creates a new cursor with a standard shape.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">standard</td>
+                  <td>Standard cursor to use.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>New cursor, or nullptr if creation failed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aed04f58259f6ac26b953f2bd85fd45ef"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aed04f58259f6ac26b953f2bd85fd45ef" class="m-doc-self">cursor</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">Cursor</a>&gt; cursor) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Sets the current cursor. Pass nullptr to use the default cursor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cursor</td>
+                  <td>New cursor.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2607cc0fac0f9774e22e1fbb30f1bca1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2607cc0fac0f9774e22e1fbb30f1bca1" class="m-doc-self">clipboard</a>(</span><span class="m-doc-wrap">const std::string&amp; text) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Sets the content of the clipboard.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">text</td>
+                  <td>New clipboard text.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad776e729cd97ea81c3a7ec7de5a82887"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad776e729cd97ea81c3a7ec7de5a82887" class="m-doc-self">clipboard</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the content of the clipboard.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Text from the clipboard. Guaranteed to be valid until the next call.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>This function is not thread-safe, check #451 for more information.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a53b47477a036180275dd536b9dc33850"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a53b47477a036180275dd536b9dc33850" class="m-doc-self">modifiers</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the last used keyboard modifiers.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Active keyboard modifiers.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a71588bc3b5297bf0879d4a3c64911685"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71588bc3b5297bf0879d4a3c64911685" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">Key</a> key,
+              <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> modifiers = <a href="group__core-io.html#ggad9bb6ed019dd984f94ece386e31f4493a6adf97f83acf6453d4a6a4b1070f3754" class="m-doc">Modifiers::<wbr />None</a>) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Checks if a key is currently pressed with (at least) the given modifiers.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">key</td>
+                  <td>Key to check.</td>
+                </tr>
+                <tr>
+                  <td>modifiers</td>
+                  <td>Modifiers to check.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the key and modifiers (or a superset of) are currently pressed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8a1f64f73416fbeb03e6f0de2c164ec"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8a1f64f73416fbeb03e6f0de2c164ec" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga345e43df7245483a92ed345d78c340d5" class="m-doc">MouseButton</a> button) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Checks if a mouse button is currently pressed.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">button</td>
+                  <td>Mouse button to check.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the mouse button is currently pressed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac1137b9cdcdd244996623097f948bb35"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1137b9cdcdd244996623097f948bb35" class="m-doc-self">gamepadState</a>(</span><span class="m-doc-wrap">int gamepad,
+              <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">GamepadState</a>&amp; state) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the state of the specified gamepad.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">gamepad</td>
+                  <td>Gamepad to get the state of.</td>
+                </tr>
+                <tr>
+                  <td>state</td>
+                  <td>State to fill with the gamepad state.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the gamepad was found.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
