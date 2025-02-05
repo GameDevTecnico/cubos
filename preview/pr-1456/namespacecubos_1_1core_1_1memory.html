@@ -56,6 +56,8 @@
               Reference
               <ul>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -81,6 +83,21 @@
             </dt>
             <dd>Generic function pointer which can also store capturing lambda functions.</dd>
             <dt>
+              <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">ReadGuard</a>
+            </dt>
+            <dd>Provides safe read-only access to an object using a lock.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">WriteGuard</a>
+            </dt>
+            <dd>Provides safe read-write access to an object using a lock.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              struct <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>
+            </dt>
+            <dd>Provides a type which is the same as the given type, but without any references.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               struct <a href="structcubos_1_1core_1_1memory_1_1IsLValueReference.html" class="m-doc">IsLValueReference</a>
             </dt>
@@ -90,16 +107,6 @@
               class <a href="classcubos_1_1core_1_1memory_1_1Opt.html" class="m-doc">Opt</a>
             </dt>
             <dd>Wrapper for reference types to indicate that the given argument type is optional.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
-              class <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">ReadGuard</a>
-            </dt>
-            <dd>Provides safe read-only access to an object using a lock.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              struct <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>
-            </dt>
-            <dd>Provides a type which is the same as the given type, but without any references.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">StandardStream</a>
             </dt>
@@ -118,12 +125,107 @@
               class <a href="classcubos_1_1core_1_1memory_1_1UnorderedBimap.html" class="m-doc">UnorderedBimap</a>
             </dt>
             <dd>A bidirectional hash table.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
-              class <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">WriteGuard</a>
-            </dt>
-            <dd>Provides safe read-write access to an object using a lock.</dd>
           </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="group__core-memory.html#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> { </span><span class="m-doc-wrap"><a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a1a06729125544cab7cee73195fc044f0" class="m-doc">Begin</a>,
+              <a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a222a267cc5778206b253be35ee3ddab5" class="m-doc">Current</a>,
+              <a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a87557f11575c0ad78e4e28abedc13b6e" class="m-doc">End</a> }</span>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> seek origin.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#gae68e6c3d7aafd173d4e828b554df40cf" class="m-doc">swapBytes</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Swaps the bytes of a value, changing its endianness.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga78e8f24eb6023b99c232c2c7612963d8" class="m-doc">isLittleEndian</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Checks if the current platform is little endian.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#gab3c10b61d10d7b6ea6bd9fbe833db418" class="m-doc">fromLittleEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from little endianness to local endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga8d48939acb057aaed839810919294142" class="m-doc">toLittleEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from local endianness to little endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga4810962c6a13ca18aee18a975eec63cf" class="m-doc">fromBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from big endianness to local endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga542ca475a4392ceda925fab6d9200b26" class="m-doc">toBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from local endianness to big endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Returns an R-value reference to the given value.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">forward</a>(</span><span class="m-doc-wrap">typename <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp; argument) -&gt; T&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9c86bb075e5298ab61c9dc547b40dfa7" class="m-doc">forward</a>(</span><span class="m-doc-wrap">typename <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp;&amp; argument) -&gt; T&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9c86bb075e5298ab61c9dc547b40dfa7"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T&amp;&amp; cubos::<wbr />core::<wbr />memory::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9c86bb075e5298ab61c9dc547b40dfa7" class="m-doc-self">forward</a>(</span><span class="m-doc-wrap">typename <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp;&amp; argument) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Argument type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>argument</td>
+                  <td>Argument to forward.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Forwarded argument.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This is a replacement for <code>std::forward</code>, which allows us to avoid including the entire <code>&lt;utility&gt;</code> header.</p></aside>
+          </div></section>
         </section>
       </div>
     </div>
@@ -169,7 +271,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

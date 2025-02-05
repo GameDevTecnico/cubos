@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
               </ul>
             </li>
           </ul>
@@ -77,6 +78,29 @@
               class <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::engine::Assets</a>
             </dt>
             <dd>Resource which manages all assets. Responsible for loading and unloading assets, storing them in memory, and providing access to them.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="group__assets-plugin.html#ga7b93d7e0cc9a1705899e577d770eac16" class="m-doc">AssetMetaRead</a> = core::memory::ReadGuard&lt;AssetMeta, std::shared_lock&lt;std::shared_mutex&gt;&gt;
+            </dt>
+            <dd>Read-only guard for an asset&#x27;s metadata.</dd>
+            <dt>
+              using <a href="group__assets-plugin.html#ga2483ca387767b2bae7735d3bac3c138b" class="m-doc">AssetMetaWrite</a> = core::memory::WriteGuard&lt;AssetMeta, std::unique_lock&lt;std::shared_mutex&gt;&gt;
+            </dt>
+            <dd>Read-write guard for an asset&#x27;s metadata.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="group__assets-plugin.html#gaceca2b8de7d01d914f7d9ce5fffd40a5" class="m-doc">AssetRead</a> = core::memory::ReadGuard&lt;T, std::shared_lock&lt;std::shared_mutex&gt;&gt;
+            </dt>
+            <dd>Read-only guard for an asset&#x27;s data.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="group__assets-plugin.html#ga3befb4912d95d097c98bc627a8e7cf97" class="m-doc">AssetWrite</a> = core::memory::WriteGuard&lt;T, std::unique_lock&lt;std::shared_mutex&gt;&gt;
+            </dt>
+            <dd>Read-write guard for an asset&#x27;s data.</dd>
           </dl>
         </section>
       </div>
@@ -123,7 +147,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
