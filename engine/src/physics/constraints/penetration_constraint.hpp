@@ -50,9 +50,9 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        glm::vec3 normal;                ///< Normal of contact on the surface of the entity.
-        float friction;                  ///< Friction of the constraint.
-        float restitution;               ///< Restitution coefficient of the constraint.
+        glm::vec3 normal;  ///< Normal of contact on the surface of the entity.
+        float friction;    ///< Friction of the constraint.
+        float restitution; ///< Restitution coefficient of the constraint.
 
         std::vector<PenetrationConstraintPointData> points; ///< Contact points in the contact manifold.
 
@@ -62,13 +62,16 @@ namespace cubos::engine
         float massCoefficient;
     };
 
-    /// @brief Holds multiple PenetrationConstraints
+    /// @brief Holds multiple PenetrationConstraints.
+    ///
+    /// Necessary due to the possibility of two entities having more than once collision contact.
+    ///
     /// @ingroup physics-solver-plugin
     struct PenetrationConstraints
     {
         CUBOS_REFLECT;
 
-        cubos::core::ecs::Entity entity; ///< Entity to which the normal is relative to.
+        cubos::core::ecs::Entity entity; ///< Entity to which the normals are relative to.
 
         std::vector<PenetrationConstraint> penConstraints; ///< Penetration contraints for each manifold.
     };
