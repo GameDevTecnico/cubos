@@ -53,7 +53,7 @@
           JSON Serializer
         </h1>
         <p>Implementing <a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html" class="m-doc">JSONSerializer</a>.</p>
-<aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/data/ser/json">here</a>.</p></aside><p>You&#x27;ll need to include <a href="core_2include_2cubos_2core_2data_2ser_2json_8hpp.html" class="m-doc">core/<wbr />data/<wbr />ser/<wbr />json.hpp</a>. For simplicity, in this sample we&#x27;ll use the following aliases:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/data/ser/serializer.hpp&gt;</span>
+<p><a name="md_data_ser_json_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/data/ser/json">here</a>.</p></aside><p>You&#x27;ll need to include <a href="core_2include_2cubos_2core_2data_2ser_2json_8hpp.html" class="m-doc">core/<wbr />data/<wbr />ser/<wbr />json.hpp</a>. For simplicity, in this sample we&#x27;ll use the following aliases:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/data/ser/serializer.hpp&gt;</span>
 
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">data</span><span class="o">::</span><span class="n">Serializer</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span></pre><p>Using the JSON serializer is as simple as calling <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a4baab0fc3ce1b9c40bd33a4e9081c43e" class="m-doc">JSONSerializer::<wbr />write</a> on the data we want to serialize.</p><p>In this case, we&#x27;ll be serializing a <code>std::vector&lt;std::vector&lt;std::vector&lt;glm::ivec3&gt;&gt;&gt;</code>, which is a nested array of objects with three <code>int32_t</code> fields.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;glm/vec3.hpp&gt;</span>
@@ -112,7 +112,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
