@@ -116,6 +116,16 @@
               <span class="m-doc-wrap-bumper"><a href="#afcc76e1e97383f75bf24f0656e235c99" class="m-doc-self">Stream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
             </dt>
             <dd>Move constructs.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper"><a href="#a1c345b2b25de134d6caec571d9de7119" class="m-doc">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; ::std::is_signed_v&lt;T&gt;) void print(T value</span>
+            </dt>
+            <dd>Prints a signed integer to the stream.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper"><a href="#ad64cec749b2e37131e94c5a679e20fab" class="m-doc">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; !::std::is_signed_v&lt;T&gt;) inline void print(T value</span>
+            </dt>
+            <dd>Prints a signed integer to the stream.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -166,18 +176,6 @@
               <span class="m-doc-wrap-bumper">void <a href="#af1423e4600073d89d24422b17b463d1f" class="m-doc">put</a>(</span><span class="m-doc-wrap">char c)</span>
             </dt>
             <dd>Puts one byte into the stream.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a24c513a81281564eb0433cb25aa83351" class="m-doc">print</a>(</span><span class="m-doc-wrap">T value,
-              std::size_t base = 10)</span>
-            </dt>
-            <dd>Prints a signed integer to the stream.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a6caffab93eee0a17a9eaca01140943bd" class="m-doc">print</a>(</span><span class="m-doc-wrap">T value,
-              std::size_t base = 10)</span>
-            </dt>
-            <dd>Prints a signed integer to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a4e091a2ca751bdeb6893f977888989f4" class="m-doc">print</a>(</span><span class="m-doc-wrap">int64_t value,
               std::size_t base = 10)</span>
@@ -289,6 +287,46 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a1c345b2b25de134d6caec571d9de7119"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c345b2b25de134d6caec571d9de7119" class="m-doc-self">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; ::std::is_signed_v&lt;T&gt;) void print(T value</span></span>
+            </h3>
+            <p>Prints a signed integer to the stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the integer.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad64cec749b2e37131e94c5a679e20fab"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad64cec749b2e37131e94c5a679e20fab" class="m-doc-self">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; !::std::is_signed_v&lt;T&gt;) inline void print(T value</span></span>
+            </h3>
+            <p>Prints a signed integer to the stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Integer type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a8932b836f804b7edffbf144dfa446464"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8932b836f804b7edffbf144dfa446464" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* data,
@@ -496,74 +534,6 @@
                 <tr>
                   <td style="width: 1%">c</td>
                   <td>Byte to put.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a24c513a81281564eb0433cb25aa83351"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a24c513a81281564eb0433cb25aa83351" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">T value,
-              std::size_t base = 10)</span></span>
-            </h3>
-            <p>Prints a signed integer to the stream.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Type of the integer.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>value</td>
-                  <td>Value to print.</td>
-                </tr>
-                <tr>
-                  <td>base</td>
-                  <td>Base to use.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a6caffab93eee0a17a9eaca01140943bd"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6caffab93eee0a17a9eaca01140943bd" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">T value,
-              std::size_t base = 10)</span></span>
-            </h3>
-            <p>Prints a signed integer to the stream.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Integer type.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>value</td>
-                  <td>Value to print.</td>
-                </tr>
-                <tr>
-                  <td>base</td>
-                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
@@ -1103,7 +1073,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

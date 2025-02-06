@@ -48,7 +48,7 @@
         <h1>
           <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f4414684a5bb1e1b8e9ba236e8bdb594.html">reflection</a>/</span>reflect.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Function <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />reflect</a> and related macros.</p>
+        <p>Function <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />reflect</a> and related macros.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -57,6 +57,8 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
@@ -77,10 +79,77 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::core::reflection::Reflect</a>
             </dt>
             <dd>Defines the reflection function for the given type <code>T</code>.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga843186fa1a151fb6c47c4a4994009ddd" class="m-doc">makeAnonymousType</a>(</span><span class="m-doc-wrap">const char* name,
+              const char* file,
+              std::size_t size,
+              std::size_t alignment,
+              void(*)(void*) destructor) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> const Type&amp;</span>
+            </dt>
+            <dd>Creates a new reflection type with a unique name created from a type name and a file path, and with a minimal <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const Type&amp;</span>
+            </dt>
+            <dd>Reflects the given type <code>T</code>.</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gacf5ab7d1a0215259c832827a40d13b17" class="m-doc">CUBOS_PACK</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Helper macro used to pass arguments with commas to other macros, wrapped in parentheses.</dd>
+            <dt id="a0708aa0f83dd368012d716ea5af6315f">
+              <span class="m-doc-wrap-bumper">#define <a href="#a0708aa0f83dd368012d716ea5af6315f" class="m-doc-self">CUBOS_EMPTY</a></span>
+            </dt>
+            <dd>Helper macro with no effect.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_REFLECT</a></span>
+            </dt>
+            <dd>Declares the static reflection methods.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gabe4c61ca9774781ef107e74f89494663" class="m-doc">CUBOS_REFLECT_IMPL</a>(</span><span class="m-doc-wrap">T)</span>
+            </dt>
+            <dd>Defines a reflection method for a non-templated type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga9f6c7a8208509aa84f66d081e2283f95" class="m-doc">CUBOS_REFLECT_TEMPLATE_IMPL</a>(</span><span class="m-doc-wrap">args,
+              T)</span>
+            </dt>
+            <dd>Similar to <a href="voxel__palette__editor_2plugin_8cpp.html#ad08593825e6e6021a439f59b2b9e0ea6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> but tailored to templated types.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gab24b41a195fdf07a246383d74fd583d7" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE</a>(</span><span class="m-doc-wrap">api,
+              T)</span>
+            </dt>
+            <dd>Declares a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a templated type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga821b6e389136b4c449893edfd8d950fa" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL</a>(</span><span class="m-doc-wrap">api,
+              T)</span>
+            </dt>
+            <dd>Declares a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_REFLECT_EXTERNAL_IMPL</a>(</span><span class="m-doc-wrap">T)</span>
+            </dt>
+            <dd>Implements a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga72591a0e4a14f0daab6ffa71f666b757" class="m-doc">CUBOS_REFLECT_EXTERNAL_TEMPLATE</a>(</span><span class="m-doc-wrap">args,
+              T)</span>
+            </dt>
+            <dd>Both declares and implements a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga817e173f03dea06cab0e754f39105573" class="m-doc">CUBOS_ANONYMOUS_REFLECT</a>(</span><span class="m-doc-wrap">...)</span>
+            </dt>
+            <dd>Defines minimal reflection for a type private to a compilation unit.</dd>
           </dl>
         </section>
       </div>
@@ -127,7 +196,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
