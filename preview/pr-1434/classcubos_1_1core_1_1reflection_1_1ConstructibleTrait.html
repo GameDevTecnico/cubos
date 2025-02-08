@@ -64,29 +64,29 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">See</a> <a href="examples-core-reflection-traits-constructible.html" class="m-doc">Constructible Trait</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">for</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">an</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">example</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">of</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">using</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">this</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">trait</a>.</p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p>See <a href="examples-core-reflection-traits-constructible.html" class="m-doc">Constructible Trait</a> for an example of using this trait.</p></aside>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait_1_1Builder.html" class="m-doc">Builder</a>
             </dt>
             <dd><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait_1_1Builder.html" class="m-doc">Builder</a> for <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>.</dd>
             <dt id="ad23a5fe7d116ac6d49da82f38274a880">
-              using <a href="#ad23a5fe7d116ac6d49da82f38274a880" class="m-doc-self">Destructor</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">instance</a>) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
+              using <a href="#ad23a5fe7d116ac6d49da82f38274a880" class="m-doc-self">Destructor</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*instance) const &gt;
             </dt>
             <dd>Function pointer to the destructor of a type.</dd>
             <dt id="a50425653e0ec2020ec572fa15c2c24c3">
-              using <a href="#a50425653e0ec2020ec572fa15c2c24c3" class="m-doc-self">DefaultConstructor</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">instance</a>) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
+              using <a href="#a50425653e0ec2020ec572fa15c2c24c3" class="m-doc-self">DefaultConstructor</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*instance) const &gt;
             </dt>
             <dd>Function pointer to the default constructor of a type.</dd>
             <dt id="afec55de0d5c2f5214b7e7718aaa352cb">
-              using <a href="#afec55de0d5c2f5214b7e7718aaa352cb" class="m-doc-self">CopyConstructor</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">instance</a>, <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*other) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
+              using <a href="#afec55de0d5c2f5214b7e7718aaa352cb" class="m-doc-self">CopyConstructor</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*instance, const void*other) const &gt;
             </dt>
             <dd>Function pointer to the copy constructor of a type.</dd>
             <dt id="a52e48fc48ccd27a5fc802c6c33cd0ecf">
-              using <a href="#a52e48fc48ccd27a5fc802c6c33cd0ecf" class="m-doc-self">MoveConstructor</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">instance</a>, <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*other) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
+              using <a href="#a52e48fc48ccd27a5fc802c6c33cd0ecf" class="m-doc-self">MoveConstructor</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*instance, void*other) const &gt;
             </dt>
             <dd>Function pointer to the move constructor of a type.</dd>
           </dl>
@@ -95,7 +95,7 @@
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">static auto <a href="#a3e1a220fba867875e3f0657b6e162f95" class="m-doc">typed</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait_1_1Builder.html" class="m-doc">Builder</a>&lt;T&gt;</span>
             </dt>
             <dd>Returns a trait builder for the given type.</dd>
@@ -116,15 +116,15 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a04dc0eb09fd777a8a7c5e71d5ea92de9" class="m-doc">withDefaultConstructor</a>(</span><span class="m-doc-wrap"><a href="#a50425653e0ec2020ec572fa15c2c24c3" class="m-doc">DefaultConstructor</a> defaultConstructor) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5536cdf395498ea4cf6b7b1df48c6c6a" class="m-doc">withDefaultConstructor</a>(</span><span class="m-doc-wrap"><a href="#a50425653e0ec2020ec572fa15c2c24c3" class="m-doc">DefaultConstructor</a> defaultConstructor) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp;</span>
             </dt>
             <dd>Sets the default constructor of the type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab3396fef0b8089a3307501f69c6ab9ea" class="m-doc">withCopyConstructor</a>(</span><span class="m-doc-wrap"><a href="#afec55de0d5c2f5214b7e7718aaa352cb" class="m-doc">CopyConstructor</a> copyConstructor) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a88e53e29010a7a7b2c541e44299a71dc" class="m-doc">withCopyConstructor</a>(</span><span class="m-doc-wrap"><a href="#afec55de0d5c2f5214b7e7718aaa352cb" class="m-doc">CopyConstructor</a> copyConstructor) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp;</span>
             </dt>
             <dd>Sets the copy constructor of the type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a677401161b99f549af00f0f01d89290a" class="m-doc">withMoveConstructor</a>(</span><span class="m-doc-wrap"><a href="#a52e48fc48ccd27a5fc802c6c33cd0ecf" class="m-doc">MoveConstructor</a> moveConstructor) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af0a8863b8868235fdfef49e56fdab55f" class="m-doc">withMoveConstructor</a>(</span><span class="m-doc-wrap"><a href="#a52e48fc48ccd27a5fc802c6c33cd0ecf" class="m-doc">MoveConstructor</a> moveConstructor) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp;</span>
             </dt>
             <dd>Sets the move constructor of the type.</dd>
             <dt>
@@ -136,33 +136,33 @@
             </dt>
             <dd>Returns the alignment of the type in bytes.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a67e6e079a2d22e68a83a29815c25fd02" class="m-doc">hasDefaultConstruct</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a67e6e079a2d22e68a83a29815c25fd02" class="m-doc">hasDefaultConstruct</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Checks if default construction is supported.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afb30cd6877857271be5f671f4ab85983" class="m-doc">hasCopyConstruct</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#afb30cd6877857271be5f671f4ab85983" class="m-doc">hasCopyConstruct</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Checks if copy construction is supported.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae5c7cba3b688d7e6c3cb57f971582b07" class="m-doc">hasMoveConstruct</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae5c7cba3b688d7e6c3cb57f971582b07" class="m-doc">hasMoveConstruct</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Checks if move construction is supported.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a634781af7174b5943a8a66f8e38a16d7" class="m-doc">destruct</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a634781af7174b5943a8a66f8e38a16d7" class="m-doc">destruct</a>(</span><span class="m-doc-wrap">void* instance) const</span>
             </dt>
             <dd>Destructs an instance of the type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae645997768640a518b42486e9df105d2" class="m-doc">defaultConstruct</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
+              <span class="m-doc-wrap-bumper">void <a href="#ae645997768640a518b42486e9df105d2" class="m-doc">defaultConstruct</a>(</span><span class="m-doc-wrap">void* instance) const</span>
             </dt>
             <dd>Default constructs an instance of the type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9348a6a1cb01d443161863c9c0b158c0" class="m-doc">copyConstruct</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance,
-              <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* other) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a9348a6a1cb01d443161863c9c0b158c0" class="m-doc">copyConstruct</a>(</span><span class="m-doc-wrap">void* instance,
+              const void* other) const</span>
             </dt>
             <dd>Copy constructs an instance of the type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8bf4c60b19f95a9c18f0d3d163966bdc" class="m-doc">moveConstruct</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance,
-              <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* other) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a8bf4c60b19f95a9c18f0d3d163966bdc" class="m-doc">moveConstruct</a>(</span><span class="m-doc-wrap">void* instance,
+              void* other) const</span>
             </dt>
             <dd>Move constructs an instance of the type.</dd>
             <dt>
@@ -188,7 +188,7 @@
           <section class="m-doc-details" id="a3e1a220fba867875e3f0657b6e162f95"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;
+                template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait_1_1Builder.html" class="m-doc">Builder</a>&lt;T&gt; cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e1a220fba867875e3f0657b6e162f95" class="m-doc-self">typed</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
@@ -238,9 +238,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a04dc0eb09fd777a8a7c5e71d5ea92de9"><div>
+          <section class="m-doc-details" id="a5536cdf395498ea4cf6b7b1df48c6c6a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a04dc0eb09fd777a8a7c5e71d5ea92de9" class="m-doc-self">withDefaultConstructor</a>(</span><span class="m-doc-wrap"><a href="#a50425653e0ec2020ec572fa15c2c24c3" class="m-doc">DefaultConstructor</a> defaultConstructor) &amp;&amp;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5536cdf395498ea4cf6b7b1df48c6c6a" class="m-doc-self">withDefaultConstructor</a>(</span><span class="m-doc-wrap"><a href="#a50425653e0ec2020ec572fa15c2c24c3" class="m-doc">DefaultConstructor</a> defaultConstructor) &amp;&amp;</span></span>
             </h3>
             <p>Sets the default constructor of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -262,9 +262,9 @@
             </table>
 <p>Aborts if the default constructor has already been set.</p>
           </div></section>
-          <section class="m-doc-details" id="ab3396fef0b8089a3307501f69c6ab9ea"><div>
+          <section class="m-doc-details" id="a88e53e29010a7a7b2c541e44299a71dc"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3396fef0b8089a3307501f69c6ab9ea" class="m-doc-self">withCopyConstructor</a>(</span><span class="m-doc-wrap"><a href="#afec55de0d5c2f5214b7e7718aaa352cb" class="m-doc">CopyConstructor</a> copyConstructor) &amp;&amp;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88e53e29010a7a7b2c541e44299a71dc" class="m-doc-self">withCopyConstructor</a>(</span><span class="m-doc-wrap"><a href="#afec55de0d5c2f5214b7e7718aaa352cb" class="m-doc">CopyConstructor</a> copyConstructor) &amp;&amp;</span></span>
             </h3>
             <p>Sets the copy constructor of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -286,9 +286,9 @@
             </table>
 <p>Aborts if the copy constructor has already been set.</p>
           </div></section>
-          <section class="m-doc-details" id="a677401161b99f549af00f0f01d89290a"><div>
+          <section class="m-doc-details" id="af0a8863b8868235fdfef49e56fdab55f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a677401161b99f549af00f0f01d89290a" class="m-doc-self">withMoveConstructor</a>(</span><span class="m-doc-wrap"><a href="#a52e48fc48ccd27a5fc802c6c33cd0ecf" class="m-doc">MoveConstructor</a> moveConstructor) &amp;&amp;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af0a8863b8868235fdfef49e56fdab55f" class="m-doc-self">withMoveConstructor</a>(</span><span class="m-doc-wrap"><a href="#a52e48fc48ccd27a5fc802c6c33cd0ecf" class="m-doc">MoveConstructor</a> moveConstructor) &amp;&amp;</span></span>
             </h3>
             <p>Sets the move constructor of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -340,7 +340,7 @@
           </div></section>
           <section class="m-doc-details" id="a67e6e079a2d22e68a83a29815c25fd02"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a> cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a67e6e079a2d22e68a83a29815c25fd02" class="m-doc-self">hasDefaultConstruct</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a67e6e079a2d22e68a83a29815c25fd02" class="m-doc-self">hasDefaultConstruct</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Checks if default construction is supported.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -354,7 +354,7 @@
           </div></section>
           <section class="m-doc-details" id="afb30cd6877857271be5f671f4ab85983"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a> cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afb30cd6877857271be5f671f4ab85983" class="m-doc-self">hasCopyConstruct</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afb30cd6877857271be5f671f4ab85983" class="m-doc-self">hasCopyConstruct</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Checks if copy construction is supported.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -368,7 +368,7 @@
           </div></section>
           <section class="m-doc-details" id="ae5c7cba3b688d7e6c3cb57f971582b07"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a> cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5c7cba3b688d7e6c3cb57f971582b07" class="m-doc-self">hasMoveConstruct</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae5c7cba3b688d7e6c3cb57f971582b07" class="m-doc-self">hasMoveConstruct</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Checks if move construction is supported.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -382,7 +382,7 @@
           </div></section>
           <section class="m-doc-details" id="a634781af7174b5943a8a66f8e38a16d7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a634781af7174b5943a8a66f8e38a16d7" class="m-doc-self">destruct</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a634781af7174b5943a8a66f8e38a16d7" class="m-doc-self">destruct</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
             </h3>
             <p>Destructs an instance of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -399,7 +399,7 @@
           </div></section>
           <section class="m-doc-details" id="ae645997768640a518b42486e9df105d2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae645997768640a518b42486e9df105d2" class="m-doc-self">defaultConstruct</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae645997768640a518b42486e9df105d2" class="m-doc-self">defaultConstruct</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
             </h3>
             <p>Default constructs an instance of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -417,8 +417,8 @@
           </div></section>
           <section class="m-doc-details" id="a9348a6a1cb01d443161863c9c0b158c0"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9348a6a1cb01d443161863c9c0b158c0" class="m-doc-self">copyConstruct</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance,
-              <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* other) const</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9348a6a1cb01d443161863c9c0b158c0" class="m-doc-self">copyConstruct</a>(</span><span class="m-doc-wrap">void* instance,
+              const void* other) const</span></span>
             </h3>
             <p>Copy constructs an instance of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -440,8 +440,8 @@
           </div></section>
           <section class="m-doc-details" id="a8bf4c60b19f95a9c18f0d3d163966bdc"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bf4c60b19f95a9c18f0d3d163966bdc" class="m-doc-self">moveConstruct</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance,
-              <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* other) const</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bf4c60b19f95a9c18f0d3d163966bdc" class="m-doc-self">moveConstruct</a>(</span><span class="m-doc-wrap">void* instance,
+              void* other) const</span></span>
             </h3>
             <p>Move constructs an instance of the type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -562,7 +562,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

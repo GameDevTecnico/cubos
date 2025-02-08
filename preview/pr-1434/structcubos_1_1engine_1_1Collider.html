@@ -76,6 +76,14 @@
               <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a5a0506323be1be6fd35cdaee81ffce10" class="m-doc-self">worldAABB</a>
             </dt>
             <dd>World space AABB of the collider.</dd>
+            <dt id="a9e79043b4eab1149f0c634682a60d292">
+              uint64_t <a href="#a9e79043b4eab1149f0c634682a60d292" class="m-doc-self">layer</a>
+            </dt>
+            <dd>Layer of the collider, from 0 to 63.</dd>
+            <dt>
+              uint64_t <a href="#a09fd739c96ee72aee17c89c0d5642802" class="m-doc">mask</a>
+            </dt>
+            <dd>Mask of layers which the collider can collide with.</dd>
             <dt>
               float <a href="#af0706098c7b2102f8d36e48c48a2130c" class="m-doc">margin</a>
             </dt>
@@ -84,6 +92,13 @@
         </section>
         <section>
           <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a09fd739c96ee72aee17c89c0d5642802"><div>
+            <h3>
+              uint64_t cubos::<wbr />engine::<wbr />Collider::<wbr /><a href="#a09fd739c96ee72aee17c89c0d5642802" class="m-doc-self">mask</a>
+            </h3>
+            <p>Mask of layers which the collider can collide with.</p>
+<p>Set to (1 &lt;&lt; 0) to collide only with entities of layer 0, to (1 &lt;&lt; 0) | (1 &lt;&lt; 1) to collide with entities of layer 0 and 1, etc.</p><p>By default, colliders collide with layer 0.</p>
+          </div></section>
           <section class="m-doc-details" id="af0706098c7b2102f8d36e48c48a2130c"><div>
             <h3>
               float cubos::<wbr />engine::<wbr />Collider::<wbr /><a href="#af0706098c7b2102f8d36e48c48a2130c" class="m-doc-self">margin</a>
@@ -136,7 +151,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
