@@ -5,6 +5,5 @@
 CUBOS_REFLECT_IMPL(cubos::engine::CapsuleCollisionShape)
 {
     return core::ecs::TypeBuilder<CapsuleCollisionShape>("cubos::engine::CapsuleCollisionShape")
-        .withField("capsule", &CapsuleCollisionShape::capsule)
-        .build();
+        .wrap(&CapsuleCollisionShape::capsule);
 }

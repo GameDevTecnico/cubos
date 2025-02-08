@@ -7,9 +7,7 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::ContactFeatureId)
 {
-    return core::ecs::TypeBuilder<ContactFeatureId>("cubos::engine::ContactFeatureId")
-        .withField("id", &ContactFeatureId::id)
-        .build();
+    return core::ecs::TypeBuilder<ContactFeatureId>("cubos::engine::ContactFeatureId").wrap(&ContactFeatureId::id);
 }
 
 CUBOS_REFLECT_IMPL(cubos::engine::ContactPointData)

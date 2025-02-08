@@ -5,6 +5,5 @@
 CUBOS_REFLECT_IMPL(cubos::engine::RenderPalette)
 {
     return core::ecs::TypeBuilder<RenderPalette>("cubos::engine::RenderPalette")
-        .withField("asset", &RenderPalette::asset)
-        .build();
+        .wrap(&RenderPalette::asset);
 }
