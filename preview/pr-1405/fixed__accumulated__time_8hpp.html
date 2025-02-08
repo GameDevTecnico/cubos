@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::SolverConstants struct | Cubos Docs</title>
+  <title>engine/fixed_step/fixed_accumulated_time.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,68 +46,37 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>SolverConstants <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="solver__constants_8hpp.html">&lt;engine/physics/resources/solver_constants.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_3504744c369d3ac8de67ffae1d44d2b4.html">fixed_step</a>/</span>fixed_accumulated_time.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Resource which allows configuration over constants in the solver plugin.</p>
+        <p>Resource <a href="structcubos_1_1engine_1_1FixedAccumulatedTime.html" class="m-doc">cubos::<wbr />engine::<wbr />FixedAccumulatedTime</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="a40086d2676c858fafeeb7fc8c6c7453e">
-              float <a href="#a40086d2676c858fafeeb7fc8c6c7453e" class="m-doc-self">minInvMass</a>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FixedAccumulatedTime.html" class="m-doc">cubos::engine::FixedAccumulatedTime</a>
             </dt>
-            <dd>Minimum inverse mass for a body to be considered as imovable (as if it had infinite mass).</dd>
-            <dt id="a95f667933c09eb85b19c5f25948956f0">
-              glm::mat3 <a href="#a95f667933c09eb85b19c5f25948956f0" class="m-doc-self">minInvInertia</a>
-            </dt>
-            <dd>Minimum inverse inertia for a body to rotate.</dd>
-            <dt id="a4dbdc296e13b3e20f694b916707920b8">
-              float <a href="#a4dbdc296e13b3e20f694b916707920b8" class="m-doc-self">maxBias</a>
-            </dt>
-            <dd>The maximum &quot;boost&quot; for the initial solving of the constraint.</dd>
-            <dt id="a2dc038e5b3abad6fac2316eca451117c">
-              float <a href="#a2dc038e5b3abad6fac2316eca451117c" class="m-doc-self">minContactHertz</a>
-            </dt>
-            <dd>The minimum update frequency of the collision solving.</dd>
-            <dt id="ad3f761a01286dacaf44cb3372f60b8f0">
-              float <a href="#ad3f761a01286dacaf44cb3372f60b8f0" class="m-doc-self">minKNormal</a>
-            </dt>
-            <dd>The minimum value for KNormal (to avoid divisions by zero).</dd>
-            <dt id="a6cfc4f716ef26472d6877b64ccb5b7a7">
-              float <a href="#a6cfc4f716ef26472d6877b64ccb5b7a7" class="m-doc-self">minKFriction</a>
-            </dt>
-            <dd>The minimum value for KFriction (to avoid divisions by zero).</dd>
-            <dt id="af9d1a9a5d600b647b97f98a2c27ea1aa">
-              float <a href="#af9d1a9a5d600b647b97f98a2c27ea1aa" class="m-doc-self">minTangentLenSq</a>
-            </dt>
-            <dd>The minimum length of the tangent vector in the direction of the relative velocity (if it&#x27;s below this we recalculate a basis for the tangents).</dd>
-            <dt id="aae1c06c5398cf3f612773e204d447113">
-              float <a href="#aae1c06c5398cf3f612773e204d447113" class="m-doc-self">minRestitution</a>
-            </dt>
-            <dd>The minimum restitution value to calculate restitution for a body (restitution is bounciness).</dd>
-            <dt id="a422502cda2705e298dcb022ea776d436">
-              float <a href="#a422502cda2705e298dcb022ea776d436" class="m-doc-self">minNormalSpeed</a>
-            </dt>
-            <dd>The minimum speed in the normal direction to calculate restitution for a body (lower is closer to elastic collisions).</dd>
-            <dt id="a5bf18ef47a21c9ab0ef470db692b4775">
-              float <a href="#a5bf18ef47a21c9ab0ef470db692b4775" class="m-doc-self">minNormalImpulse</a>
-            </dt>
-            <dd>The minimum impulse being applied in the normal direction to calculate restitution for a body (to avoid applying restitution when body position didn&#x27;t change).</dd>
-            <dt id="aead68d2f7273e8a48ea5560777aa4dab">
-              float <a href="#aead68d2f7273e8a48ea5560777aa4dab" class="m-doc-self">warmStartCoefficient</a>
-            </dt>
-            <dd>Coefficient for how much of the impulse of the previous frame will be used for warm-starting.</dd>
+            <dd>Resource which holds the accumulated time for the fixedStep plugin.</dd>
           </dl>
         </section>
       </div>
