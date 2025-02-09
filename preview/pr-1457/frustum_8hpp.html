@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/geom/utils.hpp file | Cubos Docs</title>
+  <title>core/geom/frustum.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,9 +46,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_c1deef5baf41393ad8a994c3fd53e62f.html">geom</a>/</span>utils.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_c1deef5baf41393ad8a994c3fd53e62f.html">geom</a>/</span>frustum.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Class cubos::core::geom::Utils.</p>
+        <p>Class <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Frustum</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -56,7 +56,7 @@
               Reference
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
@@ -72,59 +72,13 @@
             <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a2a9001e6ccfe5bf8319bee2371e56176" class="m-doc">pointInPlane</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
-              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+              struct <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">cubos::core::geom::Frustum</a>
             </dt>
-            <dd>Computes if a point is in the area limited by the plane.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a30f83e95a2dc031ea8058b43952836e6" class="m-doc">pointDistanceToPlane</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
-              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> float</span>
-            </dt>
-            <dd>Computes the signed distance from thene plane to a point.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a60469250da525272e95b5fa9f87b415c" class="m-doc">getMaxVertexInAxis</a>(</span><span class="m-doc-wrap">int numVertices,
-              const glm::vec3 vertices[],
-              const glm::vec3&amp; localAxis) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> int</span>
-            </dt>
-            <dd>Computes the vertex furthest along the axis.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a04e4e0c7aeb3fa65e7c172323d6de64c" class="m-doc">getIncidentReferencePolygon</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; shape,
-              const glm::vec3&amp; normal,
-              PolygonalFeature&amp; outPolygon,
-              std::vector&lt;<a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&gt;&amp; outAdjacentPlanes,
-              std::vector&lt;uint32_t&gt; outAdjacentPlanesIds,
-              const glm::mat4&amp; localToWorld,
-              float scale) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Computes the candidate face of the polygon to be reference, as well as it&#x27;s normal and adjacent planes.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a94c609bb4af401e4cdd9f748459ae634" class="m-doc">getClosestPointEdge</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
-              glm::vec3 start,
-              glm::vec3 end) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
-            </dt>
-            <dd>Computes the closest point on the line (edge) to point.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a47b5961879b1b902bebf793f36a622b0" class="m-doc">getClosestPointPolygon</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
-              const std::vector&lt;glm::vec3&gt;&amp; polygon) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> glm::vec3</span>
-            </dt>
-            <dd>Iterates through all edges in polygon and computes closest position on the edges of the polygon to point.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a38130e48ca28a539e8e5f1895e2e9750" class="m-doc">getCameraFrustumCorners</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; view,
-              const glm::mat4&amp; proj,
-              float zNear,
-              float zFar,
-              std::vector&lt;glm::vec4&gt;&amp; corners) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Gets a camera&#x27;s frustum corners in world space.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a4d044076649edd71f9be254807483cd9" class="m-doc">getCubeViewMatrices</a>(</span><span class="m-doc-wrap">const glm::mat4&amp; inverseView,
-              std::vector&lt;glm::mat4&gt;&amp; cubeViewMatrices) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Gets view matrices for rendering a cubemap.</dd>
+            <dd>Represents a camera frustum.</dd>
           </dl>
         </section>
       </div>

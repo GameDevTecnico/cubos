@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::Raycast::Ray struct | Cubos Docs</title>
+  <title>cubos::core::geom::Frustum struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1Raycast.html">Raycast</a>::<wbr/></span>Ray <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="raycast_8hpp.html">&lt;engine/collisions/raycast.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1geom.html">geom</a>::<wbr/></span>Frustum <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="frustum_8hpp.html">&lt;core/geom/frustum.hpp&gt;</a></div>
         </h1>
-        <p>Describes the ray used in a raycast query.</p>
+        <p>Represents a camera frustum.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,18 +64,30 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a43997e09c32940d37bcf9783f605fbc0">
-              glm::vec3 <a href="#a43997e09c32940d37bcf9783f605fbc0" class="m-doc-self">origin</a>
+            <dt id="a86fc28c27e97fcf53088bb51bd707709">
+              <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a> <a href="#a86fc28c27e97fcf53088bb51bd707709" class="m-doc-self">top</a>
             </dt>
-            <dd>Origin of the ray.</dd>
-            <dt id="a47005abe6ebf122bce74eba2be8e2ad6">
-              glm::vec3 <a href="#a47005abe6ebf122bce74eba2be8e2ad6" class="m-doc-self">direction</a>
+            <dd>Top plane of <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</dd>
+            <dt id="a8bb0da81242b2da801c8902c81ef3d1f">
+              <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a> <a href="#a8bb0da81242b2da801c8902c81ef3d1f" class="m-doc-self">right</a>
             </dt>
-            <dd>Direction of the ray.</dd>
-            <dt id="aa23eed3fe9fb350e7e807e57438db6d0">
-              uint64_t <a href="#aa23eed3fe9fb350e7e807e57438db6d0" class="m-doc-self">mask</a>
+            <dd>Right plane of <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</dd>
+            <dt id="a18dca5a3913bec56f418a5d985e8a74f">
+              <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a> <a href="#a18dca5a3913bec56f418a5d985e8a74f" class="m-doc-self">bottom</a>
             </dt>
-            <dd>Mask of collision layers to consider.</dd>
+            <dd>Bottom plane of <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</dd>
+            <dt id="a72a9854b5415fd64ca8bd9d354ced946">
+              <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a> <a href="#a72a9854b5415fd64ca8bd9d354ced946" class="m-doc-self">left</a>
+            </dt>
+            <dd>Left plane of <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</dd>
+            <dt id="ac9b0b0c86421ac9d417cf8079c825a85">
+              <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a> <a href="#ac9b0b0c86421ac9d417cf8079c825a85" class="m-doc-self">near</a>
+            </dt>
+            <dd>Near plane of <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</dd>
+            <dt id="a9552ecfaa5829140e85eeb36bc082f5a">
+              <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">Plane</a> <a href="#a9552ecfaa5829140e85eeb36bc082f5a" class="m-doc-self">far</a>
+            </dt>
+            <dd>Far plane of <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</dd>
           </dl>
         </section>
       </div>
