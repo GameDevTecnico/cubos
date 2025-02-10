@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Make SSAO optional (#1396, **@tomas7770**).
 - Made the fixed step accumulator a public resource of the fixed step plugin (**@RiscadoA**).
+- Move Tesseratos' tools' status to their respective plugins and removing them from the Toolbox (#1234, **@jdbaracho**).
 
 ### Fixed
 
@@ -39,7 +40,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added missing reflection for sound field of AudioSource component (**@RiscadoA**).
 - Added libpulseaudio to NixOS flake, which was necessary to get audio working on NixOS (**@RiscadoA**).
 - Fixed Gizmos selection on HiDPI screens (**@diogomsmiranda**).
-- Move Tesseratos' tools' status to their respective plugins and removing them from the Toolbox (#1234, **@jdbaracho**).
 
 ## [v0.5.0] - 2024-12-01
 
