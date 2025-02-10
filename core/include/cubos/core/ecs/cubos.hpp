@@ -618,6 +618,11 @@ namespace cubos::core::ecs
             return std::move(*this).onRemove(reflection::reflect<T>(), target);
         }
 
+        /// @brief Triggers the observer whenever the given entity with it is destroyed.
+        /// @param target Target index. By default, the last specified target or 0.
+        /// @return Builder.
+        ObserverBuilder&& onDestroy(int target = -1) &&;
+
         /// @brief Forces the next entity query argument to have the given target.
         /// @param target Target index. By default, the last specified target or 0.
         /// @return Builder.
@@ -704,6 +709,7 @@ namespace cubos::core::ecs
         std::vector<SystemOptions> mOptions;
         int mDefaultTarget{0};
         bool mRemove{false};
+        bool mDestroy{false};
         ColumnId mColumnId{ColumnId::Invalid};
     };
 } // namespace cubos::core::ecs
