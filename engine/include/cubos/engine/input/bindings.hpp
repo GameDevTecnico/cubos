@@ -10,6 +10,8 @@
 
 #include <cubos/engine/input/action.hpp>
 #include <cubos/engine/input/axis.hpp>
+#include <cubos/engine/input/transparent_equal.hpp>
+#include <cubos/engine/input/transparent_hash.hpp>
 
 namespace cubos::engine
 {
@@ -28,22 +30,22 @@ namespace cubos::engine
 
         /// @brief Gets the input actions map.
         /// @return Input actions map.
-        const std::unordered_map<std::string, InputAction>& actions() const;
+        const std::unordered_map<std::string, InputAction, InputTransparentHash, InputTransparentEqual>& actions() const;
 
         /// @brief Gets the input axes map.
         /// @return Input axes map.
-        const std::unordered_map<std::string, InputAxis>& axes() const;
+        const std::unordered_map<std::string, InputAxis, InputTransparentHash, InputTransparentEqual>& axes() const;
 
         /// @brief Gets the input actions map.
         /// @return Input actions map.
-        std::unordered_map<std::string, InputAction>& actions();
+        std::unordered_map<std::string, InputAction, InputTransparentHash, InputTransparentEqual>& actions();
 
         /// @brief Gets the input axes map.
         /// @return Input axes map.
-        std::unordered_map<std::string, InputAxis>& axes();
+        std::unordered_map<std::string, InputAxis, InputTransparentHash, InputTransparentEqual>& axes();
 
     private:
-        std::unordered_map<std::string, InputAction> mActions;
-        std::unordered_map<std::string, InputAxis> mAxes;
+        std::unordered_map<std::string, InputAction, InputTransparentHash, InputTransparentEqual> mActions;
+        std::unordered_map<std::string, InputAxis, InputTransparentHash, InputTransparentEqual> mAxes;
     };
 } // namespace cubos::engine

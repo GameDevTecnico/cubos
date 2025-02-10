@@ -115,6 +115,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/input/bindings.cpp"
 	"src/input/action.cpp"
 	"src/input/axis.cpp"
+    "src/input/transparent_equal.cpp"
+    "src/input/transparent_hash.cpp"
 
 	"src/ui/canvas/plugin.cpp"
 	"src/ui/canvas/canvas.cpp"

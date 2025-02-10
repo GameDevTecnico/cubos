@@ -14,22 +14,22 @@ CUBOS_REFLECT_IMPL(cubos::engine::InputBindings)
         .with(FieldsTrait{}.withField("actions", &InputBindings::mActions).withField("axes", &InputBindings::mAxes));
 }
 
-const std::unordered_map<std::string, InputAction>& InputBindings::actions() const
+const std::unordered_map<std::string, InputAction, InputTransparentHash, InputTransparentEqual>& InputBindings::actions() const
 {
     return mActions;
 }
 
-const std::unordered_map<std::string, InputAxis>& InputBindings::axes() const
+const std::unordered_map<std::string, InputAxis, InputTransparentHash, InputTransparentEqual>& InputBindings::axes() const
 {
     return mAxes;
 }
 
-std::unordered_map<std::string, InputAction>& InputBindings::actions()
+std::unordered_map<std::string, InputAction, InputTransparentHash, InputTransparentEqual>& InputBindings::actions()
 {
     return mActions;
 }
 
-std::unordered_map<std::string, InputAxis>& InputBindings::axes()
+std::unordered_map<std::string, InputAxis, InputTransparentHash, InputTransparentEqual>& InputBindings::axes()
 {
     return mAxes;
 }
