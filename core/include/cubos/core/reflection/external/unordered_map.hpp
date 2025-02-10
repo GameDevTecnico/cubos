@@ -10,9 +10,9 @@
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/type.hpp>
 
-CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::unordered_map<K, V>))
+CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V, typename H, typename E), (std::unordered_map<K, V, H, E>))
 {
-    using Map = std::unordered_map<K, V>;
+    using Map = std::unordered_map<K, V, H, E>;
 
     auto dictionaryTrait = DictionaryTrait(
         reflect<K>(), reflect<V>(),
