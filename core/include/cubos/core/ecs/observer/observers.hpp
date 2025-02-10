@@ -35,6 +35,13 @@ namespace cubos::core::ecs
         /// @return Whether an observer was triggered.
         bool notifyRemove(CommandBuffer& commandBuffer, Entity entity, ColumnId column);
 
+        /// @brief Notifies was destroyed.
+        /// @param commandBuffer Command buffer to record the any commands emitted by the observer.
+        /// @param entity Entity.
+        /// @param column Column.
+        /// @return Whether an observer was triggered.
+        bool notifyDestroy(CommandBuffer& commandBuffer, Entity entity, ColumnId column);
+
         /// @brief Hooks an observer to the addition of a column.
         /// @param column Column.
         /// @param observer Observer system.
@@ -47,6 +54,12 @@ namespace cubos::core::ecs
         /// @return Observer identifier.
         ObserverId hookOnRemove(ColumnId column, System<void> observer);
 
+        /// @brief Hooks an observer to the entity destruction.
+        /// @param column Column.
+        /// @param observer Observer system.
+        /// @return Observer identifier.
+        ObserverId hookOnDestroy(ColumnId column, System<void> observer);
+
         /// @brief Unhooks an observer.
         /// @param id Observer identifier.
         void unhook(ObserverId id);
@@ -55,5 +68,6 @@ namespace cubos::core::ecs
         std::vector<System<void>*> mObservers; /// Indexed by observer identifier.
         std::unordered_multimap<ColumnId, ObserverId, ColumnIdHash> mOnAdd;
         std::unordered_multimap<ColumnId, ObserverId, ColumnIdHash> mOnRemove;
+        std::unordered_multimap<ColumnId, ObserverId, ColumnIdHash> mOnDestroy;
     };
 } // namespace cubos::core::ecs
