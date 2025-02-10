@@ -80,6 +80,8 @@ set(CUBOS_CORE_SOURCE
 	"src/data/des/deserializer.cpp"
 	"src/data/des/json.cpp"
 	"src/data/des/binary.cpp"
+    "src/data/transparent/string_equal.cpp"
+    "src/data/transparent/string_hash.cpp"
 
 	"src/io/window.cpp"
 	"src/io/cursor.cpp"
