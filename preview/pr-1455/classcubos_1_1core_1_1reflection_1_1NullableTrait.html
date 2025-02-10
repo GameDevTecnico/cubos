@@ -63,16 +63,16 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">See</a> <a href="examples-core-reflection-traits-nullable.html" class="m-doc">Nullable Trait</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">for</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">an</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">example</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">of</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">using</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">this</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">trait</a>.</p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p>See <a href="examples-core-reflection-traits-nullable.html" class="m-doc">Nullable Trait</a> for an example of using this trait.</p></aside>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt id="ac8b3376d68c486fe894a269f0ed5adc9">
-              using <a href="#ac8b3376d68c486fe894a269f0ed5adc9" class="m-doc-self">IsNull</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
+              using <a href="#ac8b3376d68c486fe894a269f0ed5adc9" class="m-doc-self">IsNull</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(const void*) const &gt;
             </dt>
             <dd>Function pointer to check if a value represents null.</dd>
             <dt id="a10ee17851f486ca1f4c3c71864a9d92c">
-              using <a href="#a10ee17851f486ca1f4c3c71864a9d92c" class="m-doc-self">SetToNull</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>(<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*) <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> &gt;
+              using <a href="#a10ee17851f486ca1f4c3c71864a9d92c" class="m-doc-self">SetToNull</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;void(void*) const &gt;
             </dt>
             <dd>Function pointer to set a value to its null representation.</dd>
           </dl>
@@ -91,11 +91,11 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc">isNull</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc">isNull</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; bool</span>
             </dt>
             <dd>Checks if the given value represents null.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc">setToNull</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc">setToNull</a>(</span><span class="m-doc-wrap">void* instance) const</span>
             </dt>
             <dd>Sets a value to its null representation.</dd>
           </dl>
@@ -126,7 +126,7 @@
           </div></section>
           <section class="m-doc-details" id="a0ab1c6d1f804bfaabaaf8df308567545"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">bool</a> cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc-self">isNull</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc-self">isNull</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
             </h3>
             <p>Checks if the given value represents null.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -149,7 +149,7 @@
           </div></section>
           <section class="m-doc-details" id="a38635a82e1a7c7b0282afaaccd19e797"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a> cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc-self">setToNull</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc-self">setToNull</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
             </h3>
             <p>Sets a value to its null representation.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -209,7 +209,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
