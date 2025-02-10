@@ -10,18 +10,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Entity destruction detection to observers (#1458, **@kuukitenshi**).
+- Added a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
 - Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
 - Perform frustum culling for voxel meshes (#1183, **@mkuritsu**).
 - Infinite terrain profiling sample (#1487, **@tomas7770**).
 - Added inertia for voxel shape (**@fallenatlas**).
 - Added a method to Query to count the number of matches (#1451, **@GalaxyCrush**).
+- Added a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
 
 ### Changed
-
+- Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
 - Made collision layer and mask their own components (#535, **@fallenatlas**).
 - Make RenderPicker optional (#1407, **@tomas7770**).
 - Allow mouse state to be changed through the input plugin (#1401, **@mcanais**).
 - Move the reflection implementation of each physics component into its own file (**@fallenatlas**).
+- Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
 
 ### Fixed
 
@@ -38,7 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Collision layers and masks, for filtering collisions and raycasts (**@RiscadoA**).
 - Frustum geometry and intersection functions (#1184, **@mkuritsu**).
 - Enable ImGui docking branch and modify Tesseratos to accommodate it (#839, **@jdbaracho**).
-- Add a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
 
 ### Changed
 
@@ -56,7 +58,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added missing reflection for sound field of AudioSource component (**@RiscadoA**).
 - Added libpulseaudio to NixOS flake, which was necessary to get audio working on NixOS (**@RiscadoA**).
 - Fixed Gizmos selection on HiDPI screens (**@diogomsmiranda**).
-- Move Tesseratos' tools' status to their respective plugins and removing them from the Toolbox (#1234, **@jdbaracho**).
 
 ## [v0.5.0] - 2024-12-01
 
