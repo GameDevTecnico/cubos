@@ -18,6 +18,7 @@ set(TESSERATOS_SOURCE
 	"src/tesseratos/scene_editor/plugin.cpp"
 	"src/tesseratos/voxel_palette_editor/plugin.cpp"
 	"src/tesseratos/importer/plugin.cpp"
+	"src/tesseratos/file_selector/plugin.cpp"
 )
 
 # ------------------------ Configure tesseratos target ------------------------
