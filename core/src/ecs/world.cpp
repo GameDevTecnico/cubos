@@ -161,12 +161,17 @@ void World::destroy(Entity entity)
 
     CommandBuffer cmdBuffer{*this};
     bool observed = false;
+
     // For each column, notify the observers.
     for (auto columnId = mArchetypeGraph.first(archetype); columnId != ColumnId::Invalid;
          columnId = mArchetypeGraph.next(archetype, columnId))
     {
         // Trigger any observers that are interested in this change.
         if (mObservers->notifyRemove(cmdBuffer, entity, columnId))
+        {
+            observed = true;
+        }
+        if (mObservers->notifyDestroy(cmdBuffer, entity, columnId))
         {
             observed = true;
         }

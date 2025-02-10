@@ -35,5 +35,6 @@ namespace cubos::engine
 
         /// @brief Translation applied to the grid.
         glm::vec3 offset = {0.0F, 0.0F, 0.0F};
+
     };
 } // namespace cubos::engine

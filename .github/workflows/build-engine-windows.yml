@@ -9,7 +9,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  CCACHE_VERSION: 4.8.3
+  CCACHE_VERSION: 4.10.2
   CCACHE_BASEDIR: ${{ github.workspace }}
   CCACHE_DIR: "${{ github.workspace }}/.ccache"
   CCACHE_COMPILERTYPE: msvc

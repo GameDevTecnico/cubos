@@ -23,6 +23,7 @@ namespace cubos::core::ecs
     {
         std::vector<Plugin> toAdd;
         std::vector<Plugin> toRemove;
+        std::vector<Plugin> toDestroy;
         std::mutex mutex;
     };
 } // namespace cubos::core::ecs
