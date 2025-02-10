@@ -52,7 +52,7 @@
           Nullable Trait
         </h1>
         <p>Handling null type representation.</p>
-<p>The <code>NullableTrait</code> is a reflection trait designed to provide a mechanism for representing a null state for a specific type. This is particularly useful when working with types that are not literally null but can be conceptually treated as null in certain scenarios.</p><p>Consider a scenario where you have a data structure, such as the <code>Entity</code> struct, which represents an entity with an <code>index</code> and a <code>generation</code>. In some cases, you may want to define a special state that indicates the absence of a valid entity instead of checking if both fields are <code>UINT32_MAX</code>. So, instead of using a separate boolean flag to represent this state, the <code>NullableTrait</code> allows you to define a custom condition for considering an instance of the type as &quot;null&quot;.</p><p>So, let&#x27;s see how we can use this. First, we create a reflectable structure:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
+<p><a name="md_reflection_traits_nullable_page"></a></p><p>The <code>NullableTrait</code> is a reflection trait designed to provide a mechanism for representing a null state for a specific type. This is particularly useful when working with types that are not literally null but can be conceptually treated as null in certain scenarios.</p><p>Consider a scenario where you have a data structure, such as the <code>Entity</code> struct, which represents an entity with an <code>index</code> and a <code>generation</code>. In some cases, you may want to define a special state that indicates the absence of a valid entity instead of checking if both fields are <code>UINT32_MAX</code>. So, instead of using a separate boolean flag to represent this state, the <code>NullableTrait</code> allows you to define a custom condition for considering an instance of the type as &quot;null&quot;.</p><p>So, let&#x27;s see how we can use this. First, we create a reflectable structure:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
 
 <span class="k">struct</span><span class="w"> </span><span class="nc">MyEntity</span>
 <span class="p">{</span>
@@ -150,7 +150,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

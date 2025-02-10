@@ -47,7 +47,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="reflect_8hpp.html">&lt;core/reflection/reflect.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> T&gt;</div>
+          <div class="m-doc-template">template&lt;typename T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>Reflect <span class="m-thin">struct</span>
         </h1>
         <p>Defines the reflection function for the given type <code>T</code>.</p>
@@ -62,7 +62,7 @@
             </tr>
           </tbody>
         </table>
-<p>By default, this function calls the static member function <code>reflect</code> of the type, which should return a pointer to an instance of <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>.</p><p>To implement reflection for your type, you should either:</p><ul><li>Define a static member function <code>reflect</code> with return type <code>const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</code> on your type.</li><li>Specialize this struct for your type.</li></ul><p>The first option is preferred, as it is less verbose. However, when handling external types, to which member functions cannot be added, the second option is necessary.</p><p>Both options can and should be shortened by using the macros:</p><ul><li><a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a> - declaring the reflection member functions.</li><li><a href="group__core-reflection.html#gabe4c61ca9774781ef107e74f89494663" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> - defining the reflection member functions.</li><li><a href="group__core-reflection.html#ga821b6e389136b4c449893edfd8d950fa" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />DECL</a> - declaring the reflection specialization.</li><li><a href="group__core-reflection.html#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />IMPL</a> - defining the reflection specialization&#x27;s functions.</li></ul>
+<p>By default, this function calls the static member function <code>reflect</code> of the type, which should return a pointer to an instance of <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>.</p><p>To implement reflection for your type, you should either:</p><ul><li>Define a static member function <code>reflect</code> with return type <code>const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</code> on your type.</li><li>Specialize this struct for your type.</li></ul><p>The first option is preferred, as it is less verbose. However, when handling external types, to which member functions cannot be added, the second option is necessary.</p><p>Both options can and should be shortened by using the macros:</p><ul><li><a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_<wbr />REFLECT</a> - declaring the reflection member functions.</li><li><a href="voxel__palette__editor_2plugin_8cpp.html#ad08593825e6e6021a439f59b2b9e0ea6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a> - defining the reflection member functions.</li><li><a href="orthographic_8hpp.html#a2ecfd07209e4aeb4bacb166b1c9a9c2e" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />DECL</a> - declaring the reflection specialization.</li><li><a href="group__core-reflection.html#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />EXTERNAL_<wbr />IMPL</a> - defining the reflection specialization&#x27;s functions.</li></ul>
       </div>
     </div>
   </div>
@@ -107,7 +107,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
