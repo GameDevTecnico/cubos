@@ -223,41 +223,45 @@ int main(int argc, char** argv)
         .after(collisionsTag)
         .after(gizmosDrawTag)
         .call([](Gizmos& gizmos, const DebugDraw& draw,
-                 Query<Entity, const Position&, const ContactManifold&, Entity, const Position&> query) {
-            for (auto [ent1, pos1, manifold, ent2, pos2] : query)
+                 Query<Entity, const Position&, const CollidingWith&, Entity, const Position&> query) {
+            for (auto [ent1, pos1, collidingWith, ent2, pos2] : query)
             {
-                if (draw.normal)
+                for (auto manifold : collidingWith.manifolds)
                 {
-                    glm::vec3 origin = ent1 == manifold.entity ? pos1.vec : pos2.vec;
-                    gizmos.color({0.0F, 1.0F, 0.0F});
-                    gizmos.drawArrow("arrow", origin, manifold.normal, 0.01F, 0.05F, 0.7F, 0.05F, Gizmos::Space::World);
-                }
-
-                if (draw.manifoldPolygon && manifold.points.size() > 1)
-                {
-                    cubos::engine::ContactPointData start = manifold.points.back();
-                    for (const cubos::engine::ContactPointData& end : manifold.points)
+                    if (draw.normal)
                     {
-                        gizmos.color({1.0F, 1.0F, 0.0F});
-                        gizmos.drawArrow("line", start.globalOn1, end.globalOn1 - start.globalOn1, 0.01F, 0.05F, 1.0F,
-                                         0.05F, Gizmos::Space::World);
-                        start = end;
+                        glm::vec3 origin = ent1 == collidingWith.entity ? pos1.vec : pos2.vec;
+                        gizmos.color({0.0F, 1.0F, 0.0F});
+                        gizmos.drawArrow("arrow", origin, manifold.normal, 0.01F, 0.05F, 0.7F, 0.05F,
+                                         Gizmos::Space::World);
                     }
-                }
 
-                if (draw.points)
-                {
-                    for (auto point : manifold.points)
+                    if (draw.manifoldPolygon && manifold.points.size() > 1)
                     {
-                        // Have a set color for each of the entities for an easier distinction
-                        bool isEnt1 = ent1 == manifold.entity;
-                        gizmos.color((isEnt1 ? glm::vec3(0.0F, 0.0F, 1.0F) : glm::vec3(1.0F, 0.0F, 1.0F)));
-                        gizmos.drawArrow("point", point.globalOn1, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F, 1.0F,
-                                         0.05F, Gizmos::Space::World);
+                        cubos::engine::ContactPointData start = manifold.points.back();
+                        for (const cubos::engine::ContactPointData& end : manifold.points)
+                        {
+                            gizmos.color({1.0F, 1.0F, 0.0F});
+                            gizmos.drawArrow("line", start.globalOn1, end.globalOn1 - start.globalOn1, 0.01F, 0.05F,
+                                             1.0F, 0.05F, Gizmos::Space::World);
+                            start = end;
+                        }
+                    }
 
-                        gizmos.color((isEnt1 ? glm::vec3(1.0F, 0.0F, 1.0F) : glm::vec3(0.0F, 0.0F, 1.0F)));
-                        gizmos.drawArrow("point", point.globalOn2, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F, 1.0F,
-                                         0.05F, Gizmos::Space::World);
+                    if (draw.points)
+                    {
+                        for (auto point : manifold.points)
+                        {
+                            // Have a set color for each of the entities for an easier distinction
+                            bool isEnt1 = ent1 == collidingWith.entity;
+                            gizmos.color((isEnt1 ? glm::vec3(0.0F, 0.0F, 1.0F) : glm::vec3(1.0F, 0.0F, 1.0F)));
+                            gizmos.drawArrow("point", point.globalOn1, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F,
+                                             1.0F, 0.05F, Gizmos::Space::World);
+
+                            gizmos.color((isEnt1 ? glm::vec3(1.0F, 0.0F, 1.0F) : glm::vec3(0.0F, 0.0F, 1.0F)));
+                            gizmos.drawArrow("point", point.globalOn2, glm::vec3(0.02F, 0.02F, 0.02F), 0.03F, 0.05F,
+                                             1.0F, 0.05F, Gizmos::Space::World);
+                        }
                     }
                 }
             }
