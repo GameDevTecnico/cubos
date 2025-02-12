@@ -191,12 +191,6 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 bool intersects = cubos::core::geom::intersects(boxShape1.box, localToWorld1.mat, boxShape2.box,
                                                                 localToWorld2.mat, intersectionInfo);
 
-                // If penetration not bigger than 0 continue
-                if (intersects && intersectionInfo.penetration < 0)
-                {
-                    continue;
-                }
-
                 auto match = yQuery.pin(0, ent1).pin(1, ent2).first();
 
                 // Make sure that shape1 corresponds to the entity refered to in collidingWith
@@ -208,7 +202,7 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 // If CollidingWith present in previous frame update it
                 if (match)
                 {
-                    if (!intersects)
+                    if (!intersects || (intersects && intersectionInfo.penetration < 0))
                     {
                         // Remove CollidingWith when it is related by PotentiallyCollidingWith but not intersecting
                         cmds.unrelate<CollidingWith>(ent1, ent2);
@@ -407,11 +401,14 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                             cubos::core::geom::intersects(box1.box, pos1, box2.box, pos2, intersectionInfo);
 
                         // If penetration not bigger than 0 continue
-                        if (intersects && intersectionInfo.penetration < 0)
+                        // if (intersects && intersectionInfo.penetration < 0)
+                        //{
+                        //    continue;
+                        //}
+                        if (intersects)
                         {
-                            continue;
+                            anyIntersects = true;
                         }
-                        anyIntersects = true;
 
                         // Make sure that shape1 corresponds to the entity refered to in collidingWith
                         const cubos::core::geom::Box* matchedShape1 = &box1.box;
@@ -425,7 +422,7 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                             auto [ent1, localToWorld1, voxelShape1, collidingWith, ent2, localToWorld2, voxelShape2] =
                                 *match;
 
-                            if (!intersects)
+                            if (!intersects || (intersects && intersectionInfo.penetration < 0))
                             {
                                 auto it = std::remove_if(collidingWith.manifolds.begin(), collidingWith.manifolds.end(),
                                                          [&](const auto& manifold) {
