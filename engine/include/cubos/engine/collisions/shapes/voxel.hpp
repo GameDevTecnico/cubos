@@ -17,6 +17,8 @@ namespace cubos::engine
 {
     /// @brief Component which adds a collision shape corresponding to a given voxel grid to an entity, used with a @ref
     /// Collider component.
+    ///
+    /// Assumes the VoxelGrid to be centered in the entity space.
     /// @ingroup collisions-plugin
     class CUBOS_ENGINE_API VoxelCollisionShape
     {
@@ -35,6 +37,8 @@ namespace cubos::engine
 
         /// @brief Entities voxel grid.
         Asset<VoxelGrid> grid;
+
+        bool changed{true};
 
         /// @brief Constructs voxel shape with no grid.
         VoxelCollisionShape() = default;

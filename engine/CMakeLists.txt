@@ -111,6 +111,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/physics/fixed_substep/plugin.cpp"
 	"src/physics/fixed_substep/substeps.cpp"
 	"src/physics/solver/integration/plugin.cpp"
+	"src/physics/components/inertia.cpp"
 
 	"src/input/plugin.cpp"
 	"src/input/input.cpp"
