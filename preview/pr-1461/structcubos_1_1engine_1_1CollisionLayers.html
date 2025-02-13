@@ -82,7 +82,7 @@
             <dt>
               uint32_t <a href="#a6552a4211e191fc20d71194b60596d6a" class="m-doc">value</a>
             </dt>
-            <dd>Layers of the collider. There are 32 layers, from 0 to 31.</dd>
+            <dd>Layers of the collider.</dd>
           </dl>
         </section>
         <section>
@@ -133,8 +133,8 @@
             <h3>
               uint32_t cubos::<wbr />engine::<wbr />CollisionLayers::<wbr /><a href="#a6552a4211e191fc20d71194b60596d6a" class="m-doc-self">value</a>
             </h3>
-            <p>Layers of the collider. There are 32 layers, from 0 to 31.</p>
-<p>A collider can belong to any number of layers.</p><p>Internally, the layers go right to left, meaning, layer 0 is the least significant bit and layer 31 the most significant bit. Any type of number can be used to manually set the layers, just make sure the binary representation has all the bits corresponding to the wanted layers are set to 1.</p><p>By default, colliders belong to layer 0.</p>
+            <p>Layers of the collider.</p>
+<p>There are 32 layers, from 0 to 31. A collider can belong to any number of layers.</p><p>Internally, the layers go from right to left, meaning, layer 0 is the least significant bit and layer 31 the most significant bit. Any type of number can be used to manually set the layers, just make sure the binary representation has all the bits corresponding to the wanted layers set to 1.</p><p>By default, colliders appear only in layer 0.</p>
           </div></section>
         </section>
       </div>
