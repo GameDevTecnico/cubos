@@ -26,7 +26,10 @@ namespace cubos::engine
     /// ## Components
     /// - @ref BoxCollisionShape - holds the box collision shape.
     /// - @ref CapsuleCollisionShape - holds the capsule collision shape.
+    /// - @ref VoxelCollisionShape - holds the voxel collision shape.
     /// - @ref Collider - holds collider data.
+    /// - @ref CollisionLayers - holds the collision layers where the collider appears in.
+    /// - @ref CollisionMask - holds the mask of layers which the collider can collide with.
     ///
     /// ## Events
     /// - @ref CollisionEvent - (TODO) emitted when a collision occurs.
