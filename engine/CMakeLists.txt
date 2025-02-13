@@ -100,6 +100,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/collisions/broad_phase/plugin.cpp"
 	"src/collisions/broad_phase/sweep_and_prune.cpp"
 	"src/collisions/broad_phase/potentially_colliding_with.cpp"
+	"src/collisions/broad_phase/collision_group.cpp"
 	"src/collisions/narrow_phase/plugin.cpp"
 
 	"src/physics/plugin.cpp"
