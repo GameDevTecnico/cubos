@@ -95,6 +95,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/collisions/interface/raycast.cpp"
 	"src/collisions/interface/shapes/capsule.cpp"
 	"src/collisions/interface/shapes/voxel.cpp"
+	"src/collisions/interface/collision_layers.cpp"
+	"src/collisions/interface/collision_mask.cpp"
 	"src/collisions/broad_phase/plugin.cpp"
 	"src/collisions/broad_phase/sweep_and_prune.cpp"
 	"src/collisions/broad_phase/potentially_colliding_with.cpp"

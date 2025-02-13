@@ -8,7 +8,5 @@ CUBOS_REFLECT_IMPL(cubos::engine::Collider)
 {
     return core::ecs::TypeBuilder<Collider>("cubos::engine::Collider")
         .withField("transform", &Collider::transform)
-        .withField("layer", &Collider::layer)
-        .withField("mask", &Collider::mask)
         .build();
 }

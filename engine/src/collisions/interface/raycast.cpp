@@ -140,9 +140,9 @@ cubos::engine::Opt<cubos::engine::Raycast::Hit> cubos::engine::Raycast::fire(Ray
     // normalize the ray
     ray.direction = glm::normalize(ray.direction);
 
-    for (auto [entity, localToWorld, collider, shape] : mBoxes)
+    for (auto [entity, localToWorld, collider, shape, layers] : mBoxes)
     {
-        if ((ray.mask & (static_cast<uint64_t>(1) << collider.layer)) == 0u)
+        if ((ray.mask & layers.value) == 0U)
         {
             continue;
         }
@@ -162,9 +162,9 @@ cubos::engine::Opt<cubos::engine::Raycast::Hit> cubos::engine::Raycast::fire(Ray
         }
     }
 
-    for (auto [entity, localToWorld, collider, shape, position] : mCapsules)
+    for (auto [entity, localToWorld, collider, shape, position, layers] : mCapsules)
     {
-        if (!(ray.mask & (static_cast<uint64_t>(1) << collider.layer)))
+        if ((ray.mask & layers.value) == 0U)
         {
             continue;
         }

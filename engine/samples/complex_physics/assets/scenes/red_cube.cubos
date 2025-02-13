@@ -37,6 +37,8 @@
           "z": 0.0
         }
       },
+      "cubos::engine::CollisionLayers": 1,
+      "cubos::engine::CollisionMask": 1,
       "cubos::engine::Force": {
       },
       "cubos::engine::Torque": {

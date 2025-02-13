@@ -35,35 +35,40 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{});
+                .add(Collider{})
+                .add(CollisionLayers{});
 
             cmds.create()
                 .add(Name{"box2"})
                 .add(Position{{1.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{});
+                .add(Collider{})
+                .add(CollisionLayers{});
 
             cmds.create()
                 .add(Name{"box3"})
                 .add(Position{{0.0F, 0.0F, 1.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{});
+                .add(Collider{})
+                .add(CollisionLayers{});
 
             cmds.create()
                 .add(Name{"box4"})
                 .add(Position{{-1.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{});
+                .add(Collider{})
+                .add(CollisionLayers{});
 
             cmds.create()
                 .add(Name{"box5"})
                 .add(Position{{0.0F, 0.0F, -1.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{});
+                .add(Collider{})
+                .add(CollisionLayers{});
         });
 
         cubos.system("raycast").after(transformUpdateTag).call([](const World& world, Raycast raycast) {
@@ -99,7 +104,8 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(CapsuleCollisionShape{{1, 1}})
-                .add(Collider{});
+                .add(Collider{})
+                .add(CollisionLayers{});
         });
 
         cubos.system("raycast").after(transformUpdateTag).call([](Raycast raycast) {
