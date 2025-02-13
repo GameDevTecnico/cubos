@@ -2,6 +2,8 @@
 #include <algorithm>
 
 #include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/collision_layers.hpp>
+#include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
@@ -10,6 +12,7 @@
 #include <cubos/engine/transform/plugin.hpp>
 
 #include "../interface/plugin.hpp"
+#include "collision_group.hpp"
 #include "sweep_and_prune.hpp"
 
 CUBOS_DEFINE_TAG(cubos::engine::collisionsAABBUpdateTag);
@@ -158,7 +161,8 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
     cubos.system("create PotentiallyCollidingWith relations")
         .tagged(collisionsBroadTag)
         .after(collisionsBroadSweepTag)
-        .call([](Commands cmds, Query<const Collider&> query, const BroadPhaseSweepAndPrune& sweepAndPrune) {
+        .call([](Commands cmds, Query<const Collider&, const CollisionLayers&, const CollisionMask&> query,
+                 const BroadPhaseSweepAndPrune& sweepAndPrune) {
             for (glm::length_t axis = 0; axis < 3; axis++)
             {
                 for (const auto& [entity, overlaps] : sweepAndPrune.sweepOverlapMaps[axis])
@@ -168,7 +172,7 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
                     {
                         continue;
                     }
-                    auto [collider] = *match;
+                    auto [collider, layers, mask] = *match;
 
                     for (const auto& other : overlaps)
                     {
@@ -177,10 +181,9 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
                         {
                             continue;
                         }
-                        auto [otherCollider] = *otherMatch;
+                        auto [otherCollider, otherLayers, otherMask] = *otherMatch;
 
-                        if (((collider.mask & (static_cast<uint64_t>(1) << otherCollider.layer)) == 0u) ||
-                            ((otherCollider.mask & (static_cast<uint64_t>(1) << collider.layer)) == 0u))
+                        if (((layers.value & otherMask.value) == 0U) && ((otherLayers.value & mask.value) == 0U))
                         {
                             continue;
                         }
