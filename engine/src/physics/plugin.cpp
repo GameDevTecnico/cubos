@@ -33,9 +33,7 @@ CUBOS_REFLECT_IMPL(Mass)
 
 CUBOS_REFLECT_IMPL(CenterOfMass)
 {
-    return cubos::core::ecs::TypeBuilder<CenterOfMass>("cubos::engine::CenterOfMass")
-        .withField("vec", &CenterOfMass::vec)
-        .build();
+    return cubos::core::ecs::TypeBuilder<CenterOfMass>("cubos::engine::CenterOfMass").wrap(&CenterOfMass::vec);
 }
 
 CUBOS_REFLECT_IMPL(Inertia)
@@ -49,16 +47,12 @@ CUBOS_REFLECT_IMPL(Inertia)
 
 CUBOS_REFLECT_IMPL(Velocity)
 {
-    return cubos::core::ecs::TypeBuilder<Velocity>("cubos::engine::Velocity")
-        .withField("velocity", &Velocity::vec)
-        .build();
+    return cubos::core::ecs::TypeBuilder<Velocity>("cubos::engine::Velocity").wrap(&Velocity::vec);
 }
 
 CUBOS_REFLECT_IMPL(AngularVelocity)
 {
-    return cubos::core::ecs::TypeBuilder<AngularVelocity>("cubos::engine::AngularVelocity")
-        .withField("vec", &AngularVelocity::vec)
-        .build();
+    return cubos::core::ecs::TypeBuilder<AngularVelocity>("cubos::engine::AngularVelocity").wrap(&AngularVelocity::vec);
 }
 
 CUBOS_REFLECT_IMPL(Force)

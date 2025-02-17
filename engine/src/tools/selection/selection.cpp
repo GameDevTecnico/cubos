@@ -4,7 +4,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::Selection)
 {
-    return cubos::core::ecs::TypeBuilder<Selection>("cubos::engine::::Selection")
-        .withField("entity", &Selection::entity)
-        .build();
+    return cubos::core::ecs::TypeBuilder<Selection>("cubos::engine::::Selection").wrap(&Selection::entity);
 }

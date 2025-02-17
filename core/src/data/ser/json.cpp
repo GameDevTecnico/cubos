@@ -7,6 +7,7 @@
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
+#include <cubos/core/reflection/traits/wrapper.hpp>
 #include <cubos/core/reflection/type.hpp>
 #include <cubos/core/tel/logging.hpp>
 
@@ -19,6 +20,7 @@ using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
+using cubos::core::reflection::WrapperTrait;
 
 // Macro used to reduce code duplication for primitive type hooks.
 #define AUTO_HOOK(type, ...)                                                                                           \
@@ -65,6 +67,12 @@ nlohmann::json JSONSerializer::output()
 
 bool JSONSerializer::decompose(const Type& type, const void* value)
 {
+    if (type.has<WrapperTrait>())
+    {
+        const auto& wrapper = type.get<WrapperTrait>();
+        return this->write(wrapper.type(), wrapper.value(value));
+    }
+
     if (type.has<NullableTrait>())
     {
         const auto& trait = type.get<NullableTrait>();
@@ -112,21 +120,11 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
 
     if (type.has<FieldsTrait>())
     {
-        if (type.get<FieldsTrait>().size() == 1)
-        {
-            // If there's a single field, write it directly.
-            if (!this->write(type.get<FieldsTrait>().begin()->type(),
-                             type.get<FieldsTrait>().view(value).begin()->value))
-            {
-                CUBOS_WARN("Couldn't serialize wrapped field {}", type.get<FieldsTrait>().begin()->name());
-                return false;
-            }
-
-            return true;
-        }
+        const auto& trait = type.get<FieldsTrait>();
+        auto view = trait.view(value);
         auto jsonObj = nlohmann::json::object();
 
-        for (const auto& [field, fieldValue] : type.get<FieldsTrait>().view(value))
+        for (const auto& [field, fieldValue] : view)
         {
             if (!this->write(field->type(), fieldValue))
             {

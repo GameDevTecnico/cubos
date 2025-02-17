@@ -5,5 +5,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::Scale)
 {
-    return core::ecs::TypeBuilder<Scale>("cubos::engine::Scale").withField("mat", &Scale::factor).build();
+    return core::ecs::TypeBuilder<Scale>("cubos::engine::Scale").wrap(&Scale::factor);
 }
