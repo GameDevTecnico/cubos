@@ -64,10 +64,6 @@
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a02884bdb007403768162f9414359b8f9">
-              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Entity</a> <a href="#a02884bdb007403768162f9414359b8f9" class="m-doc-self">entity</a>
-            </dt>
-            <dd>Entity to which the normal is relative to.</dd>
             <dt>
               glm::vec3 <a href="#a85d01f524cad994578df9e5c48758d3f" class="m-doc">normal</a>
             </dt>
@@ -76,6 +72,14 @@
               std::vector&lt;<a href="structcubos_1_1engine_1_1ContactPointData.html" class="m-doc">ContactPointData</a>&gt; <a href="#a9b031cd35b9ffef08b6bea47924ea4c3" class="m-doc-self">points</a>
             </dt>
             <dd>Contact points of this manifold.</dd>
+            <dt id="a95f071e0c2f700afa179b181114937d7">
+              uint32_t <a href="#a95f071e0c2f700afa179b181114937d7" class="m-doc-self">boxId1</a>
+            </dt>
+            <dd>If the manifold is from a voxelShape we need to know which boxes.</dd>
+            <dt id="a6e017ca8d847964765b5cb18442aaca2">
+              uint32_t <a href="#a6e017ca8d847964765b5cb18442aaca2" class="m-doc-self">boxId2</a>
+            </dt>
+            <dd>are colliding</dd>
           </dl>
         </section>
         <section>
