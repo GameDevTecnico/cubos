@@ -13,6 +13,7 @@
 #include <cubos/core/geom/box.hpp>
 
 #include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/prelude.hpp>
@@ -49,17 +50,19 @@ namespace cubos::engine
         /// @brief Describes the ray used in a raycast query.
         struct Ray
         {
-            glm::vec3 origin;                   ///< Origin of the ray.
-            glm::vec3 direction;                ///< Direction of the ray.
-            uint64_t mask = 0xFFFFFFFFFFFFFFFF; ///< Mask of collision layers to consider.
+            glm::vec3 origin;           ///< Origin of the ray.
+            glm::vec3 direction;        ///< Direction of the ray.
+            uint32_t mask = 0xFFFFFFFF; ///< Mask of collision layers to consider. By default, considers all layers.
         };
 
         /// @brief Constructs.
         /// @param boxes Query for entities with box colliders.
         /// @param capsules Query for entities with capsule colliders.
         Raycast(
-            Query<Entity, const LocalToWorld&, const Collider&, const BoxCollisionShape&> boxes,
-            Query<Entity, const LocalToWorld&, const Collider&, const CapsuleCollisionShape&, const Position&> capsules)
+            Query<Entity, const LocalToWorld&, const Collider&, const BoxCollisionShape&, const CollisionLayers&> boxes,
+            Query<Entity, const LocalToWorld&, const Collider&, const CapsuleCollisionShape&, const Position&,
+                  const CollisionLayers&>
+                capsules)
             : mBoxes{std::move(boxes)}
             , mCapsules{std::move(capsules)} {};
 
@@ -69,8 +72,10 @@ namespace cubos::engine
         Opt<Hit> fire(Ray ray);
 
     private:
-        Query<Entity, const LocalToWorld&, const Collider&, const BoxCollisionShape&> mBoxes;
-        Query<Entity, const LocalToWorld&, const Collider&, const CapsuleCollisionShape&, const Position&> mCapsules;
+        Query<Entity, const LocalToWorld&, const Collider&, const BoxCollisionShape&, const CollisionLayers&> mBoxes;
+        Query<Entity, const LocalToWorld&, const Collider&, const CapsuleCollisionShape&, const Position&,
+              const CollisionLayers&>
+            mCapsules;
     };
 } // namespace cubos::engine
 
@@ -83,10 +88,11 @@ namespace cubos::core::ecs
         static inline constexpr bool ConsumesOptions = false;
 
         SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::Collider&,
-                            const cubos::engine::BoxCollisionShape&>>
+                            const cubos::engine::BoxCollisionShape&, const cubos::engine::CollisionLayers&>>
             boxes;
         SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::Collider&,
-                            const cubos::engine::CapsuleCollisionShape&, const cubos::engine::Position&>>
+                            const cubos::engine::CapsuleCollisionShape&, const cubos::engine::Position&,
+                            const cubos::engine::CollisionLayers&>>
             capsules;
 
         SystemFetcher(World& world, const SystemOptions& options)
