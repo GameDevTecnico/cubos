@@ -4,12 +4,12 @@
 #include <imgui.h>
 
 #include <cubos/core/data/fs/file_system.hpp>
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/memory/opt.hpp>
 #include <cubos/core/memory/standard_stream.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
-#include <cubos/engine/tools/toolbox/plugin.hpp>
 #include <cubos/engine/voxels/model.hpp>
 
 #include "../asset_explorer/plugin.hpp"
@@ -22,7 +22,6 @@ using cubos::engine::AnyAsset;
 using cubos::engine::AssetRead;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
-using cubos::engine::Toolbox;
 using cubos::engine::VoxelGrid;
 using cubos::engine::VoxelModel;
 using cubos::engine::VoxelPalette;
@@ -31,6 +30,11 @@ namespace fs = std::filesystem;
 namespace memory = cubos::core::memory;
 
 using namespace tesseratos;
+
+CUBOS_REFLECT_IMPL(ImporterTool)
+{
+    return cubos::core::ecs::TypeBuilder<ImporterTool>("ImporterTool").withField("isOpen", &ImporterTool::isOpen).build();
+}
 
 namespace
 {
@@ -307,20 +311,17 @@ void tesseratos::importerPlugin(Cubos& cubos)
 {
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
-    cubos.depends(cubos::engine::toolboxPlugin);
 
+    cubos.resource<ImporterTool>();
     cubos.resource<ImportState>();
 
     cubos.system("show Importer UI")
+        .onlyIf([](ImporterTool& tool) { return tool.isOpen; })
         .tagged(cubos::engine::imguiTag)
-        .call([](Assets& assets, Toolbox& toolbox, cubos::core::ecs::EventReader<AssetSelectedEvent> reader,
-                 ImportState& state) {
-            if (!toolbox.isOpen("Importer"))
-            {
-                return;
-            }
+        .call([](Assets& assets, cubos::core::ecs::EventReader<AssetSelectedEvent> reader,
+                 ImportState& state, ImporterTool& tool) {
 
-            ImGui::Begin("Importer");
+            ImGui::Begin("Importer", &tool.isOpen);
 
             showImport(assets, reader, state);
 
