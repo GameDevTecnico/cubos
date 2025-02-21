@@ -315,16 +315,21 @@ bool Cubos::update()
     {
         this->uninstall(plugin);
     }
+    for (auto plugin : mState->pluginQueue.toDestroy)
+    {
+        this->uninstall(plugin);
+    }
     for (auto plugin : mState->pluginQueue.toAdd)
     {
         this->install(plugin);
     }
 
     // If any plugins were added, recompile the system execution chains, and rerun the startup systems.
-    if (!mState->pluginQueue.toAdd.empty() || !mState->pluginQueue.toRemove.empty())
+    if (!mState->pluginQueue.toAdd.empty() || !mState->pluginQueue.toRemove.empty() || !mState->pluginQueue.toDestroy.empty())
     {
         // Clear the plugin queue.
         mState->pluginQueue.toRemove.clear();
+        mState->pluginQueue.toDestroy.clear();
         mState->pluginQueue.toAdd.clear();
 
         // Build new schedules.
@@ -872,6 +877,7 @@ auto Cubos::ObserverBuilder::onAdd(const reflection::Type& type, int target) && 
 
     mOptions.back().observedTarget = target;
     mRemove = false;
+    mDestroy = false;
     mColumnId = ColumnId::make(mCubos.mWorld->types().id(type));
     return std::move(*this);
 }
@@ -900,9 +906,35 @@ auto Cubos::ObserverBuilder::onRemove(const reflection::Type& type, int target) 
 
     mOptions.back().observedTarget = target;
     mRemove = true;
+    mDestroy = false;   
     mColumnId = ColumnId::make(mCubos.mWorld->types().id(type));
     return std::move(*this);
 }
+
+auto Cubos::ObserverBuilder::onDestroy(int target) && -> ObserverBuilder&&
+{
+    CUBOS_ASSERT(mColumnId == ColumnId::Invalid, "An observer can only have at most one hook");
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (target == -1)
+    {
+        target = mDefaultTarget;
+    }
+    else
+    {
+        mDefaultTarget = target;
+    }
+
+    mOptions.back().observedTarget = target;
+    mRemove = true;
+    mDestroy = true;
+    return std::move(*this);
+}
+
 
 auto Cubos::ObserverBuilder::entity(int target) && -> ObserverBuilder&&
 {
@@ -1033,6 +1065,10 @@ void Cubos::ObserverBuilder::finish(System<void> system)
     if (mRemove)
     {
         id = mCubos.mWorld->observers().hookOnRemove(mColumnId, std::move(system));
+    }
+    else if (mDestroy)
+    {
+        id = mCubos.mWorld->observers().hookOnDestroy(mColumnId, std::move(system));
     }
     else
     {
