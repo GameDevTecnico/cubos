@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Entity destruction detection to observers (#1458, **@kuukitenshi**).
+- Add a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
 
+### Changed
+- Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
 
 ## [v0.6.0] - 2025-02-10
 
@@ -21,13 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Collision layers and masks, for filtering collisions and raycasts (**@RiscadoA**).
 - Frustum geometry and intersection functions (#1184, **@mkuritsu**).
 - Enable ImGui docking branch and modify Tesseratos to accommodate it (#839, **@jdbaracho**).
-- Add a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
 
 ### Changed
 
 - Make SSAO optional (#1396, **@tomas7770**).
 - Made the fixed step accumulator a public resource of the fixed step plugin (**@RiscadoA**).
-- Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
 
 ### Fixed
 
