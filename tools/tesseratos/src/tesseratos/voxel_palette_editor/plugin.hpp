@@ -15,6 +15,14 @@ namespace tesseratos
     /// @ingroup tesseratos
     /// @brief Allows the user to open and inspect/edit a palette asset.
 
+    /// @brief Tool state.
+    struct VoxelPalleteEditorTool
+    {
+        CUBOS_REFLECT;
+
+        bool isOpen{false};
+    };
+
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-voxel-palette-editor-plugin

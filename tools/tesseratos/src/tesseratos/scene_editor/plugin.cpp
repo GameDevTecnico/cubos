@@ -14,7 +14,6 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
 #include <cubos/engine/tools/selection/plugin.hpp>
-#include <cubos/engine/tools/toolbox/plugin.hpp>
 
 #include "../asset_explorer/plugin.hpp"
 #include "../asset_explorer/popup.hpp"
@@ -34,9 +33,13 @@ using cubos::engine::Cubos;
 using cubos::engine::Entity;
 using cubos::engine::Scene;
 using cubos::engine::Selection;
-using cubos::engine::Toolbox;
 
 using namespace tesseratos;
+
+CUBOS_REFLECT_IMPL(SceneEditorTool)
+{
+    return cubos::core::ecs::TypeBuilder<SceneEditorTool>("SceneEditorTool").withField("isOpen", &SceneEditorTool::isOpen).build();
+}
 
 namespace
 {
@@ -435,20 +438,20 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::scenePlugin);
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::selectionPlugin);
-    cubos.depends(cubos::engine::toolboxPlugin);
 
     cubos.depends(assetExplorerPlugin);
 
+    cubos.resource<SceneEditorTool>();
     cubos.resource<State>();
 
     cubos.system("open Scene Editor on asset selection")
         .call([](cubos::core::ecs::EventReader<AssetSelectedEvent> reader, Commands commands, const Assets& assets,
-                 State& state, Toolbox& toolbox) {
+                 State& state, SceneEditorTool& tool) {
             for (const auto& event : reader)
             {
                 if (assets.type(event.asset).is<Scene>())
                 {
-                    toolbox.open("Scene Editor");
+                    tool.isOpen = true;
                     CUBOS_INFO("Opening scene {}", event.asset);
                     closeScene(commands, state.root);
                     state.asset = event.asset;
@@ -458,15 +461,12 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
         });
 
     cubos.system("show Scene Editor UI")
+        .onlyIf([](SceneEditorTool& tool) { return tool.isOpen; })
         .tagged(cubos::engine::imguiTag)
         .call([](const World& world, Assets& assets, Commands cmds, State& state, Selection& selection,
-                 Toolbox& toolbox) {
-            if (!toolbox.isOpen("Scene Editor"))
-            {
-                return;
-            }
+            SceneEditorTool& tool) {
 
-            ImGui::Begin("Scene Editor");
+            ImGui::Begin("Scene Editor", &tool.isOpen);
             if (state.asset == nullptr)
             {
                 ImGui::Text("No scene opened");
