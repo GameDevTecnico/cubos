@@ -1,5 +1,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <cubos/core/memory/opt.hpp>
+
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/orthographic.hpp>
@@ -7,12 +9,15 @@
 #include <cubos/engine/render/camera/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/target/target.hpp>
+#include <cubos/engine/transform/local_to_world.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 
 using namespace cubos::engine;
 
 void cubos::engine::cameraPlugin(Cubos& cubos)
 {
     cubos.depends(renderTargetPlugin);
+    cubos.depends(transformPlugin);
 
     cubos.component<Camera>();
     cubos.component<PerspectiveCamera>();
@@ -70,6 +75,54 @@ void cubos::engine::cameraPlugin(Cubos& cubos)
                     camera.projection = glm::ortho(-ortho.size, ortho.size, -ortho.size / aspect, ortho.size / aspect,
                                                    camera.zNear, camera.zFar);
                 }
+            }
+        });
+
+    cubos.system("update Camera frustum by PerspectiveCamera")
+        .call([](Query<Camera&, const PerspectiveCamera&, Opt<const LocalToWorld&>> query) {
+            for (auto [camera, perspective, optLocalToWorld] : query)
+            {
+                if (camera.active)
+                {
+                    (void)perspective;
+                    glm::mat4 view{1.0f};
+                    if (optLocalToWorld.contains())
+                    {
+                        view = optLocalToWorld.value().mat;
+                    }
+                    glm::vec3 up = glm::normalize(glm::vec3{view[0][0], view[1][0], view[2][0]});
+                    glm::vec right = glm::normalize(glm::vec3{view[0][1], view[1][1], view[2][1]});
+                    glm::vec3 front = glm::normalize(glm::vec3{view[0][2], view[1][2], view[2][2]});
+                    glm::vec3 position = {view[0][3], view[1][3], view[2][3]};
+
+                    const float halfVSide = camera.zFar * tanf(perspective.fovY * .5f);
+                    float aspect = camera.projection[1][1] / camera.projection[0][0];
+                    const float halfHSide = halfVSide * aspect;
+
+                    glm::vec3 nearPoint = position + camera.zNear * front;
+                    glm::vec3 farPoint = position + camera.zFar * front;
+                    glm::vec3 rightNorm = glm::normalize(glm::cross(camera.zFar * front - right * halfHSide, up));
+                    glm::vec3 leftNorm = glm::normalize(glm::cross(up, camera.zFar * front + right * halfHSide));
+                    glm::vec3 topNorm = glm::normalize(glm::cross(right, camera.zFar * front - up * halfVSide));
+                    glm::vec3 botNorm = glm::normalize(glm::cross(camera.zFar * front + up * halfVSide, right));
+
+                    camera.frustum.near = {front, glm::dot(front, nearPoint)};
+                    camera.frustum.far = {-front, glm::dot(-front, farPoint)};
+                    camera.frustum.right = {rightNorm, glm::dot(rightNorm, position)};
+                    camera.frustum.left = {leftNorm, glm::dot(leftNorm, position)};
+                    camera.frustum.top = {topNorm, glm::dot(topNorm, position)};
+                    camera.frustum.bottom = {botNorm, glm::dot(botNorm, position)};
+                }
+            }
+        });
+
+    cubos.system("update Camera frustum by OrthographicCamera")
+        .call([](Query<Camera&, const OrthographicCamera&> query) {
+            for (auto [camera, perspective] : query)
+            {
+                (void)camera;
+                (void)perspective;
+                (void)query;
             }
         });
 }

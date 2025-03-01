@@ -1,3 +1,4 @@
+#include <cubos/core/geom/intersections.hpp>
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/reflection/external/uuid.hpp>
 
@@ -272,7 +273,12 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                                         .picker = meshEnt.index,
                                         .padding = {}};
                         state.perMeshCB->fill(&perMesh, sizeof(perMesh));
-
+                        cubos::core::geom::Capsule capsule = cubos::core::geom::Capsule::sphere(1);
+                        if (!cubos::core::geom::intersects(camera.frustum, capsule, meshLocalToWorld.mat))
+                        {
+                            CUBOS_WARN("Mesh not inside frustum!");
+                            continue;
+                        }
                         // Iterate over the buckets of the mesh (it may be split over many of them).
                         for (auto bucket = mesh.firstBucketId; bucket != RenderMeshPool::BucketId::Invalid;
                              bucket = pool.next(bucket))

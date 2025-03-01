@@ -6,6 +6,7 @@
 
 #include <glm/mat4x4.hpp>
 
+#include <cubos/core/geom/frustum.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/api.hpp>
@@ -30,5 +31,7 @@ namespace cubos::engine
 
         /// @brief Far clipping plane.
         float zFar = 1000.0F;
+
+        core::geom::Frustum frustum{};
     };
 } // namespace cubos::engine
