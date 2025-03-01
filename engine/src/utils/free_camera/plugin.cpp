@@ -31,11 +31,24 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
 
                 anyEnabled = true;
 
+
                 auto dt = controller.unscaledDeltaTime ? deltaTime.unscaledValue : deltaTime.value();
+                auto md = input.mouseDelta();
+
+                if (window->mouseState() != MouseState::Locked)
+                {
+                    controller.ignorePreviousMovement = true;
+                }
+
+                if (controller.ignorePreviousMovement && glm::length(glm::vec2(md)) > 0)
+                {
+                    controller.ignorePreviousMovement = false;
+                    continue;
+                }
 
                 // Update camera angles based on mouse motion.
-                controller.phi -= static_cast<float>(input.mouseDelta().y) * dt * controller.sens;
-                controller.theta -= static_cast<float>(input.mouseDelta().x) * dt * controller.sens;
+                controller.phi -= static_cast<float>(md.y) * dt * controller.sens;
+                controller.theta -= static_cast<float>(md.x) * dt * controller.sens;
                 controller.phi = std::clamp(controller.phi, -89.8F, 89.8F);
 
                 // Calculate camera direction from angles and calculate the rotation from it.
@@ -58,6 +71,10 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
             // Lock/unlock mouse depending on if any FreeCameraController is enabled.
             if (anyEnabled && window->mouseState() != MouseState::Locked)
             {
+                // Set the mouse to the center of the window.
+                glm::uvec2 size = window->size();
+                window->setMousePosition(glm::ivec2{size.x/2, size.y/2});
+
                 window->mouseState(MouseState::Locked);
             }
             else if (!anyEnabled && window->mouseState() != MouseState::Default)

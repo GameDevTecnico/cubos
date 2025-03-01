@@ -27,6 +27,9 @@ namespace cubos::engine
         /// @brief Whether the controller uses unscaled delta time.
         bool unscaledDeltaTime = false;
 
+        /// @brief Whether to ignore the mouseDelta movement (when the controller switches from disabled to enabled).
+        bool ignorePreviousMovement = false;
+
         /// @brief Action used to move the camera laterally (positive is right).
         std::string lateral = "move-lateral";
 
