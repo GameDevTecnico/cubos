@@ -273,7 +273,7 @@ target_link_libraries(cubos-engine PRIVATE $<BUILD_INTERFACE:stb_image>)
 
 # Fetch Freetype, which msdfgen depends on
 FetchContent_Declare(Freetype
-	GIT_REPOSITORY "https://gitlab.freedesktop.org/freetype/freetype.git"
+	GIT_REPOSITORY "https://github.com/freetype/freetype.git"
 	GIT_TAG "VER-2-13-3"
 	SYSTEM
 )

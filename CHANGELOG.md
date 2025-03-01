@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Entity destruction detection to observers (#1458, **@kuukitenshi**).
 - Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
+- Perform frustum culling for voxel meshes (#1183, **@mkuritsu**).
 
 ### Changed
 

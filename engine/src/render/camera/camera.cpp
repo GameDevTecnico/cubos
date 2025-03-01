@@ -11,5 +11,7 @@ CUBOS_REFLECT_IMPL(cubos::engine::Camera)
         .withField("projection", &Camera::projection)
         .withField("zNear", &Camera::zNear)
         .withField("zFar", &Camera::zFar)
+        .withField("frustum", &Camera::frustum)
+        .withField("freezeFrustum", &Camera::freezeFrustum)
         .build();
 }
