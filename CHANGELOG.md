@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Make SSAO optional (#1396, **@tomas7770**).
 
+### Fixed
+- Fixed freeCamera jumping when activated (#1439, **@mcanais**).
+
 ## [v0.5.0] - 2024-12-01
 
 ### Added

@@ -71,10 +71,6 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
             // Lock/unlock mouse depending on if any FreeCameraController is enabled.
             if (anyEnabled && window->mouseState() != MouseState::Locked)
             {
-                // Set the mouse to the center of the window.
-                glm::uvec2 size = window->size();
-                window->setMousePosition(glm::ivec2{size.x/2, size.y/2});
-
                 window->mouseState(MouseState::Locked);
             }
             else if (!anyEnabled && window->mouseState() != MouseState::Default)
