@@ -90,14 +90,18 @@ void cubos::engine::cameraPlugin(Cubos& cubos)
                     {
                         view = optLocalToWorld.value().mat;
                     }
-                    glm::vec3 up = glm::normalize(glm::vec3{view[0][0], view[1][0], view[2][0]});
-                    glm::vec right = glm::normalize(glm::vec3{view[0][1], view[1][1], view[2][1]});
+                    glm::vec up = glm::normalize(glm::vec3{view[0][1], view[1][1], view[2][1]});
+                    glm::vec3 right = glm::normalize(glm::vec3{view[0][0], view[1][0], view[2][0]});
                     glm::vec3 front = glm::normalize(glm::vec3{view[0][2], view[1][2], view[2][2]});
                     glm::vec3 position = {view[0][3], view[1][3], view[2][3]};
 
                     const float halfVSide = camera.zFar * tanf(perspective.fovY * .5f);
                     float aspect = camera.projection[1][1] / camera.projection[0][0];
                     const float halfHSide = halfVSide * aspect;
+                    CUBOS_WARN("Position: {} {} {}", position.x, position.y, position.z);
+                    CUBOS_WARN("UP: {} {} {}", up.x, up.y, up.z);
+                    CUBOS_WARN("Right: {} {} {}", right.x, right.y, right.z);
+                    CUBOS_WARN("FRONT: {} {} {}", front.x, front.y, front.z);
 
                     glm::vec3 nearPoint = position + camera.zNear * front;
                     glm::vec3 farPoint = position + camera.zFar * front;
@@ -105,13 +109,24 @@ void cubos::engine::cameraPlugin(Cubos& cubos)
                     glm::vec3 leftNorm = glm::normalize(glm::cross(up, camera.zFar * front + right * halfHSide));
                     glm::vec3 topNorm = glm::normalize(glm::cross(right, camera.zFar * front - up * halfVSide));
                     glm::vec3 botNorm = glm::normalize(glm::cross(camera.zFar * front + up * halfVSide, right));
+                    (void)farPoint;
+                    (void)rightNorm;
+                    (void)leftNorm;
+                    (void)topNorm;
+                    (void)botNorm;
 
                     camera.frustum.near = {front, glm::dot(front, nearPoint)};
-                    camera.frustum.far = {-front, glm::dot(-front, farPoint)};
-                    camera.frustum.right = {rightNorm, glm::dot(rightNorm, position)};
-                    camera.frustum.left = {leftNorm, glm::dot(leftNorm, position)};
-                    camera.frustum.top = {topNorm, glm::dot(topNorm, position)};
-                    camera.frustum.bottom = {botNorm, glm::dot(botNorm, position)};
+                    camera.frustum.far = camera.frustum.near;
+                    camera.frustum.right = camera.frustum.near;
+                    camera.frustum.left = camera.frustum.near;
+                    camera.frustum.top = camera.frustum.near;
+                    camera.frustum.bottom = camera.frustum.near;
+
+                    // camera.frustum.far = {-front, glm::dot(-front, farPoint)};
+                    // camera.frustum.right = {rightNorm, glm::dot(rightNorm, position)};
+                    // camera.frustum.left = {leftNorm, glm::dot(leftNorm, position)};
+                    // camera.frustum.top = {topNorm, glm::dot(topNorm, position)};
+                    // camera.frustum.bottom = {botNorm, glm::dot(botNorm, position)};
                 }
             }
         });

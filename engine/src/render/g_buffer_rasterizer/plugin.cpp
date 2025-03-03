@@ -25,6 +25,7 @@
 #include <cubos/engine/window/plugin.hpp>
 
 using namespace cubos::core::gl;
+using cubos::core::geom::Box;
 using cubos::core::io::Window;
 using cubos::engine::Asset;
 using cubos::engine::RenderMeshVertex;
@@ -273,8 +274,10 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                                         .picker = meshEnt.index,
                                         .padding = {}};
                         state.perMeshCB->fill(&perMesh, sizeof(perMesh));
-                        cubos::core::geom::Capsule capsule = cubos::core::geom::Capsule::sphere(1);
-                        if (!cubos::core::geom::intersects(camera.frustum, capsule, meshLocalToWorld.mat))
+                        auto voxelGrid = assets.read(grid.asset);
+                        glm::uvec3 size = voxelGrid->size();
+                        Box box{.halfSize = size / 2U};
+                        if (!cubos::core::geom::intersects(camera.frustum, box, meshLocalToWorld.mat))
                         {
                             CUBOS_WARN("Mesh not inside frustum!");
                             continue;
