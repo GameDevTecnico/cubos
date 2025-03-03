@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Entity destruction detection to observers (#1458, **@kuukitenshi**).
-
+- Destroy child entities when parent entities are destroyed (#1418, **@kuukitenshi**).
 
 ## [v0.6.0] - 2025-02-10
 
