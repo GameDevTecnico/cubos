@@ -39,8 +39,8 @@ Entity CommandBuffer::create()
 void CommandBuffer::destroy(Entity entity)
 {
     std::lock_guard<std::mutex> lock(mMutex);
-
-    mCommands.emplace_back([entity](World& world) { world.destroy(entity); });
+    
+    mCommands.emplace_back([entity](World& world) { world.destroy(entity);});
 }
 
 std::unordered_map<std::string, Entity> CommandBuffer::spawn(const Blueprint& blueprint, bool withName)
