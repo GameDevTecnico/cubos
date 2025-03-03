@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Perform frustum culling for voxel meshes (#1183, **@mkuritsu**).
 - Infinite terrain profiling sample (#1487, **@tomas7770**).
 - Added inertia for voxel shape (**@fallenatlas**).
+- Destroy child entities when parent entities are destroyed (#1418, **@kuukitenshi**).
 
 ### Changed
 
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Deferred shading missing padding leading to black screen on web builds (#1476, **@RiscadoA**).
+
 
 ## [v0.6.0] - 2025-02-10
 
