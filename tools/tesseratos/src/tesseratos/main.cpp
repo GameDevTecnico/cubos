@@ -10,6 +10,7 @@
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
 #include "menu_bar/plugin.hpp"
+#include "layout_bridge/plugin.hpp"
 
 using namespace cubos::engine;
 using namespace tesseratos;
@@ -23,6 +24,7 @@ int main(int argc, char** argv)
     cubos.plugin(cubos::engine::freeCameraPlugin);
 
     cubos.plugin(menuBarPlugin);
+    cubos.plugin(layoutBridgePlugin);
 
     cubos.startupSystem("configure Assets plugin").before(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.app.osPath", APP_ASSETS_PATH);
