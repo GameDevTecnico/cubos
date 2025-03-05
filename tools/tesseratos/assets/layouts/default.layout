@@ -1,0 +1,49 @@
+[Window][Tesseratos]
+Pos=0,0
+Size=800,600
+Collapsed=0
+
+[Window][Debug##Default]
+Pos=60,60
+Size=400,400
+Collapsed=0
+
+[Window][Asset Explorer]
+Pos=8,392
+Size=784,200
+Collapsed=0
+DockId=0x00000004,0
+
+[Window][Debugger]
+Pos=658,27
+Size=134,363
+Collapsed=0
+DockId=0x00000006,0
+
+[Window][Importer]
+Pos=8,392
+Size=784,200
+Collapsed=0
+DockId=0x00000004,2
+
+[Window][Project]
+Pos=8,392
+Size=784,200
+Collapsed=0
+DockId=0x00000004,1
+
+[Window][Scene Editor]
+Pos=8,27
+Size=120,363
+Collapsed=0
+DockId=0x00000001,0
+
+[Docking][Data]
+DockSpace       ID=0x1D66FF35 Window=0x9AFEFC28 Pos=8,27 Size=784,565 Split=Y
+  DockNode      ID=0x00000003 Parent=0x1D66FF35 SizeRef=784,363 Split=X
+    DockNode    ID=0x00000001 Parent=0x00000003 SizeRef=120,565 Selected=0xE8C23EBC
+    DockNode    ID=0x00000002 Parent=0x00000003 SizeRef=662,565 Split=X
+      DockNode  ID=0x00000005 Parent=0x00000002 SizeRef=526,363 CentralNode=1
+      DockNode  ID=0x00000006 Parent=0x00000002 SizeRef=134,363 Selected=0xE1830C86
+  DockNode      ID=0x00000004 Parent=0x1D66FF35 SizeRef=784,200 Selected=0xBD37CC0B
+
