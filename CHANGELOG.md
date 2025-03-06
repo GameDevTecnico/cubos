@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Made collision layer and mask their own components (#535, **@fallenatlas**).
 - Make RenderPicker optional (#1407, **@tomas7770**).
+- Allow mouse state to be changed through the input plugin (#1401, **@mcanais**).
 
 ## [v0.6.0] - 2025-02-10
 

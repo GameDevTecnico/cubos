@@ -13,6 +13,7 @@ using cubos::core::io::KeyEvent;
 using cubos::core::io::MouseButton;
 using cubos::core::io::MouseButtonEvent;
 using cubos::core::io::MouseMoveEvent;
+using cubos::core::io::MouseState;
 using cubos::core::io::Window;
 
 using namespace cubos::engine;
@@ -442,6 +443,28 @@ glm::ivec2 Input::previousMousePosition() const
 glm::ivec2 Input::mouseDelta() const
 {
     return mMousePosition - mPreviousMousePosition;
+}
+
+void Input::mouseState(MouseState state)
+{
+    mUpdateMouseState = true;
+    mMouseState = state;
+}
+
+MouseState Input::mouseState() const
+{
+    return mMouseState;
+}
+
+void Input::updateMouseState(Window& window)
+{
+    window->mouseState(mMouseState);
+    mUpdateMouseState = false;
+}
+
+bool Input::updateMouseState() const
+{
+    return mUpdateMouseState;
 }
 
 void Input::pollGamepads(const Window& window)
