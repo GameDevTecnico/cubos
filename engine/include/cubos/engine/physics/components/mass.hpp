@@ -13,6 +13,9 @@
 namespace cubos::engine
 {
     /// @brief Component which defines the mass of a particle.
+    ///
+    /// Directly setting density for a body is not supported. However, you can set mass based on density by considering
+    /// `mass = volume * density`.
     /// @ingroup physics-plugin
     struct CUBOS_ENGINE_API Mass
     {
