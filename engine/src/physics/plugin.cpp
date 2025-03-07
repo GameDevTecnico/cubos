@@ -2,9 +2,6 @@
 
 #include <glm/glm.hpp>
 
-#include <cubos/core/reflection/traits/enum.hpp>
-#include <cubos/core/reflection/type.hpp>
-
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
@@ -16,83 +13,6 @@
 CUBOS_DEFINE_TAG(cubos::engine::physicsApplyForcesTag);
 
 using namespace cubos::engine;
-
-CUBOS_REFLECT_IMPL(AccumulatedCorrection)
-{
-    return cubos::core::ecs::TypeBuilder<AccumulatedCorrection>("cubos::engine::AccumulatedCorrection")
-        .withField("position", &AccumulatedCorrection::position)
-        .build();
-}
-
-CUBOS_REFLECT_IMPL(Mass)
-{
-    return cubos::core::ecs::TypeBuilder<Mass>("cubos::engine::Mass")
-        .withField("mass", &Mass::mass)
-        .withField("inverseMass", &Mass::inverseMass)
-        .withField("changed", &Mass::changed)
-        .build();
-}
-
-CUBOS_REFLECT_IMPL(CenterOfMass)
-{
-    return cubos::core::ecs::TypeBuilder<CenterOfMass>("cubos::engine::CenterOfMass")
-        .withField("vec", &CenterOfMass::vec)
-        .build();
-}
-
-CUBOS_REFLECT_IMPL(Velocity)
-{
-    return cubos::core::ecs::TypeBuilder<Velocity>("cubos::engine::Velocity")
-        .withField("velocity", &Velocity::vec)
-        .build();
-}
-
-CUBOS_REFLECT_IMPL(AngularVelocity)
-{
-    return cubos::core::ecs::TypeBuilder<AngularVelocity>("cubos::engine::AngularVelocity")
-        .withField("vec", &AngularVelocity::vec)
-        .build();
-}
-
-CUBOS_REFLECT_IMPL(Force)
-{
-    return cubos::core::ecs::TypeBuilder<Force>("cubos::engine::Force").build();
-}
-
-CUBOS_REFLECT_IMPL(Torque)
-{
-    return cubos::core::ecs::TypeBuilder<Torque>("cubos::engine::Torque").build();
-}
-
-CUBOS_REFLECT_IMPL(Impulse)
-{
-    return cubos::core::ecs::TypeBuilder<Impulse>("cubos::engine::Impulse").build();
-}
-
-CUBOS_REFLECT_IMPL(AngularImpulse)
-{
-    return cubos::core::ecs::TypeBuilder<AngularImpulse>("cubos::engine::AngularImpulse").build();
-}
-
-CUBOS_REFLECT_EXTERNAL_IMPL(PhysicsMaterial::MixProperty)
-{
-    return cubos::core::reflection::Type::create("cubos::engine::PhysicsMaterial::MixProperty")
-        .with(cubos::core::reflection::EnumTrait{}
-                  .withVariant<PhysicsMaterial::MixProperty::Maximum>("Maximum")
-                  .withVariant<PhysicsMaterial::MixProperty::Multiply>("Multiply")
-                  .withVariant<PhysicsMaterial::MixProperty::Minimum>("Minimum")
-                  .withVariant<PhysicsMaterial::MixProperty::Average>("Average"));
-}
-
-CUBOS_REFLECT_IMPL(PhysicsMaterial)
-{
-    return cubos::core::ecs::TypeBuilder<PhysicsMaterial>("cubos::engine::PhysicsMaterial")
-        .withField("friction", &PhysicsMaterial::friction)
-        .withField("bounciness", &PhysicsMaterial::bounciness)
-        .withField("frictionMix", &PhysicsMaterial::frictionMix)
-        .withField("bouncinessMix", &PhysicsMaterial::bouncinessMix)
-        .build();
-}
 
 CUBOS_REFLECT_IMPL(PhysicsBundle)
 {
