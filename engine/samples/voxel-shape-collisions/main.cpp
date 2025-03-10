@@ -6,6 +6,8 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
+#include <cubos/engine/collisions/collision_layers.hpp> //maybe put this in the collisions plugin
+#include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/contact_manifold.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
@@ -101,6 +103,8 @@ int main()
                       .add(Collider{})
                       .add(RenderVoxelGrid{CarAsset, offset})
                       .add(VoxelCollisionShape(CarAsset))
+                      .add(CollisionLayers{})
+                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, -10.0F, -20.0F}})
                       .add(Rotation{})
@@ -112,6 +116,8 @@ int main()
                       .add(Collider{})
                       .add(RenderVoxelGrid{CarAsset, offset})
                       .add(VoxelCollisionShape(CarAsset))
+                      .add(CollisionLayers{})
+                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 15.0F, 10.0F}})
                       .add(Rotation{})
