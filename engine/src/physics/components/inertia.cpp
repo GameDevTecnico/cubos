@@ -50,6 +50,45 @@ glm::mat3 Inertia::rotatedInverseInertia(const glm::quat& rotationQuat) const
     return rotationMat * inverseInertia * glm::transpose(rotationMat);
 }
 
+/// @brief Calculates the volume of a box shape.
+/// @param dimensions The width, height and lenght of the box.
+/// @return The volume of the box with the given `dimensions`.
+inline static float boxShapeVolume(const glm::vec3& dimensions)
+{
+    return dimensions.x * dimensions.y * dimensions.z;
+}
+
+/// @brief Calculates the volume of a ball shape.
+/// @param radius of the shape.
+/// @return The volume of the ball with the given `radius`.
+inline static float ballShapeVolume(float radius)
+{
+    return glm::pi<float>() * radius * radius * radius * 4.0F / 3.0F;
+}
+
+/// @brief Calculates the volume of a cylinder shape.
+/// @param height of the cylinder shape.
+/// @param radius of the cylinder shape.
+/// @return The volume of the cylinder with the given `height` and `radius`.
+inline static float cylinderShapeVolume(float height, float radius)
+{
+    return glm::pi<float>() * radius * radius * height;
+}
+
+/// @brief Calculates the volume of a voxel shape.
+/// @param shape The voxel collision shape.
+/// @return The volume of the box with the given `dimensions`
+static float voxelShapeVolume(const VoxelCollisionShape& shape)
+{
+    float volume = 0.0F;
+    for (auto& box : shape.getBoxes())
+    {
+        volume += boxShapeVolume(box.box.halfSize * 2.0F);
+    }
+
+    return volume;
+}
+
 glm::mat3 cubos::engine::boxShapeInertiaTensor(const float mass, const glm::vec3 dimensions)
 {
     float constant = mass / 12.0F;
@@ -80,8 +119,8 @@ glm::mat3 cubos::engine::cylinderShapeInertiaTensor(const float mass, const floa
 glm::mat3 cubos::engine::capsuleShapeInertiaTensor(const float mass, const float length, const float radius)
 {
     // Volume of the shape
-    float volumeCylinder = cubos::core::geom::cylinderVolume(length, radius);
-    float volumeBall = cubos::core::geom::ballVolume(radius);
+    float volumeCylinder = cylinderShapeVolume(length, radius);
+    float volumeBall = ballShapeVolume(radius);
     float capsuleVolume = volumeCylinder + volumeBall;
 
     // Inertia Tensor of cilinder and ball that compose this shape
@@ -90,7 +129,7 @@ glm::mat3 cubos::engine::capsuleShapeInertiaTensor(const float mass, const float
 
     glm::mat3 capsuleTensor = (cylinderTensor * volumeCylinder + ballTensor * volumeBall) * mass / capsuleVolume;
 
-    float extra = (length * length * 0.25 + length * radius * 3.0F / 8.0F) * volumeBall * mass / capsuleVolume;
+    float extra = (length * length * 0.25F + length * radius * 3.0F / 8.0F) * volumeBall * mass / capsuleVolume;
 
     capsuleTensor[0][0] += extra;
     capsuleTensor[2][2] += extra;
@@ -134,7 +173,7 @@ glm::mat3 cubos::engine::voxelShapeInertiaTensor(const float mass, const cubos::
 
     for (auto& box : shape.getBoxes())
     {
-        auto subBoxVolume = cubos::core::geom::boxShapeVolume(box.box.halfSize * 2.0F);
+        auto subBoxVolume = boxShapeVolume(box.box.halfSize * 2.0F);
         float subBoxMass = mass * subBoxVolume / totalShapeVolume;
         auto subBoxInertia = boxShapeInertiaTensor(subBoxMass, box.box.halfSize * 2.0F);
         // Need to invert the direction shift since it indicates the shift to put the box in the center of mass and we
