@@ -342,7 +342,16 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                             perLight.numCascades = numCascades;
                             perScene.directionalLightWithShadowsId = directionalLightIndex;
                             perLight.normalOffsetScale = caster.value().baseSettings.normalOffsetScale;
-                            directionalShadowMap = caster.value().shadowMaps.at(cameraEntity)->cascades;
+
+                            if (!caster.value().shadowMaps.contains(cameraEntity))
+                            {
+                                CUBOS_WARN("Directional shadow caster does not contain a shadow map for camera {}",
+                                           cameraEntity.index);
+                            }
+                            else
+                            {
+                                directionalShadowMap = caster.value().shadowMaps.at(cameraEntity)->cascades;
+                            }
                         }
                         directionalLightIndex++;
                     }
@@ -357,28 +366,38 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
 
                         if (caster.contains())
                         {
-                            // Get light viewport
-                            auto slot = pointShadowAtlas.slotsMap.at(caster.value().baseSettings.id);
-
-                            auto lightProj = glm::perspective(glm::radians(90.0F),
-                                                              (float(pointShadowAtlas.getSize().x) * slot->size.x) /
-                                                                  (float(pointShadowAtlas.getSize().y) * slot->size.y),
-                                                              0.1F, light.range);
-
-                            std::vector<glm::mat4> lightViewMatrices;
-                            core::geom::getCubeViewMatrices(
-                                glm::scale(lightLocalToWorld.mat, glm::vec3(1.0F / lightLocalToWorld.worldScale())),
-                                lightViewMatrices);
-
-                            for (unsigned long i = 0; i < 6; i++)
+                            if (!pointShadowAtlas.slotsMap.contains(caster.value().baseSettings.id))
                             {
-                                perLight.matrices[i] = lightProj * lightViewMatrices[i];
+                                CUBOS_WARN(
+                                    "Point shadow atlas does not contain a slot for point shadow caster with id {}",
+                                    caster.value().baseSettings.id);
                             }
-                            perLight.shadowMapOffset = slot->offset;
-                            perLight.shadowMapSize = slot->size;
-                            perLight.shadowBias = caster.value().baseSettings.bias;
-                            perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
-                            perLight.normalOffsetScale = caster.value().baseSettings.normalOffsetScale;
+                            else
+                            {
+                                // Get light viewport
+                                auto slot = pointShadowAtlas.slotsMap.at(caster.value().baseSettings.id);
+
+                                auto lightProj =
+                                    glm::perspective(glm::radians(90.0F),
+                                                     (float(pointShadowAtlas.getSize().x) * slot->size.x) /
+                                                         (float(pointShadowAtlas.getSize().y) * slot->size.y),
+                                                     0.1F, light.range);
+
+                                std::vector<glm::mat4> lightViewMatrices;
+                                core::geom::getCubeViewMatrices(
+                                    glm::scale(lightLocalToWorld.mat, glm::vec3(1.0F / lightLocalToWorld.worldScale())),
+                                    lightViewMatrices);
+
+                                for (unsigned long i = 0; i < 6; i++)
+                                {
+                                    perLight.matrices[i] = lightProj * lightViewMatrices[i];
+                                }
+                                perLight.shadowMapOffset = slot->offset;
+                                perLight.shadowMapSize = slot->size;
+                                perLight.shadowBias = caster.value().baseSettings.bias;
+                                perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
+                                perLight.normalOffsetScale = caster.value().baseSettings.normalOffsetScale;
+                            }
                         }
                         else
                         {
@@ -399,23 +418,34 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
 
                         if (caster.contains())
                         {
-                            // Get light viewport
-                            auto slot = spotShadowAtlas.slotsMap.at(caster.value().baseSettings.id);
+                            if (!spotShadowAtlas.slotsMap.contains(caster.value().baseSettings.id))
+                            {
+                                CUBOS_WARN(
+                                    "Spot shadow atlas does not contain a slot for spot shadow caster with id {}",
+                                    caster.value().baseSettings.id);
+                            }
+                            else
+                            {
+                                // Get light viewport
+                                auto slot = spotShadowAtlas.slotsMap.at(caster.value().baseSettings.id);
 
-                            // The light is actually facing the direction opposite to what's visible, so rotate it.
-                            auto lightView = glm::inverse(glm::scale(
-                                glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F), glm::vec3(0.0F, 1.0F, 0.0F)),
-                                glm::vec3(1.0F / lightLocalToWorld.worldScale())));
-                            auto lightProj = glm::perspective(glm::radians(light.spotAngle),
-                                                              (float(spotShadowAtlas.getSize().x) * slot->size.x) /
-                                                                  (float(spotShadowAtlas.getSize().y) * slot->size.y),
-                                                              0.1F, light.range);
-                            perLight.matrix = lightProj * lightView;
-                            perLight.shadowMapOffset = slot->offset;
-                            perLight.shadowMapSize = slot->size;
-                            perLight.shadowBias = caster.value().baseSettings.bias;
-                            perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
-                            perLight.normalOffsetScale = caster.value().baseSettings.normalOffsetScale;
+                                // The light is actually facing the direction opposite to what's visible, so rotate it.
+                                auto lightView =
+                                    glm::inverse(glm::scale(glm::rotate(lightLocalToWorld.mat, glm::radians(180.0F),
+                                                                        glm::vec3(0.0F, 1.0F, 0.0F)),
+                                                            glm::vec3(1.0F / lightLocalToWorld.worldScale())));
+                                auto lightProj =
+                                    glm::perspective(glm::radians(light.spotAngle),
+                                                     (float(spotShadowAtlas.getSize().x) * slot->size.x) /
+                                                         (float(spotShadowAtlas.getSize().y) * slot->size.y),
+                                                     0.1F, light.range);
+                                perLight.matrix = lightProj * lightView;
+                                perLight.shadowMapOffset = slot->offset;
+                                perLight.shadowMapSize = slot->size;
+                                perLight.shadowBias = caster.value().baseSettings.bias;
+                                perLight.shadowBlurRadius = caster.value().baseSettings.blurRadius;
+                                perLight.normalOffsetScale = caster.value().baseSettings.normalOffsetScale;
+                            }
                         }
                         else
                         {
