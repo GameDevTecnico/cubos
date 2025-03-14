@@ -101,6 +101,18 @@ namespace cubos::core::ecs
             return this->begin() == this->end();
         }
 
+        /// @brief Returns the number of matches for the query.
+        /// @return Number of matches.
+        std::size_t count()
+        {
+            std::size_t count = 0;
+            for (auto it = this->begin(); it != this->end(); ++it)
+            {
+                ++count;
+            }
+            return count;
+        }
+
     private:
         typename QueryData<Ts...>::View mView;
     };
