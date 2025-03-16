@@ -6,14 +6,16 @@
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/defaults/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
-#include <cubos/engine/render/defaults/plugin.hpp>
 #include <cubos/engine/render/lights/environment.hpp>
 #include <cubos/engine/render/voxels/grid.hpp>
 #include <cubos/engine/render/voxels/palette.hpp>
 #include <cubos/engine/scene/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
+#include <cubos/engine/tools/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/utils/free_camera/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -70,15 +72,10 @@ int main(int argc, char** argv)
     Cubos cubos{argc, argv};
 
     /// [Adding the plugins]
-    cubos.plugin(settingsPlugin);
-    cubos.plugin(windowPlugin);
-    cubos.plugin(transformPlugin);
-    cubos.plugin(assetsPlugin);
-    cubos.plugin(voxelsPlugin);
-    cubos.plugin(renderDefaultsPlugin);
+    cubos.plugin(defaultsPlugin);
+    cubos.plugin(freeCameraPlugin);
+    cubos.plugin(toolsPlugin);
     /// [Adding the plugins]
-
-    cubos.plugin(scenePlugin);
 
     cubos.resource<ChunkMap>();
 
@@ -110,6 +107,8 @@ int main(int argc, char** argv)
             constexpr int genRadiusChunks = 16;
             for (auto [camera, position] : cameras)
             {
+                if (!camera.active)
+                    return;
                 for (int x = -genRadiusChunks; x < genRadiusChunks; x++)
                 {
                     for (int z = -genRadiusChunks; z < genRadiusChunks; z++)
@@ -169,6 +168,8 @@ int main(int argc, char** argv)
     cubos.system("move camera").call([](Query<const Camera&, Position&> cameras, DeltaTime& dt) {
         for (auto [camera, position] : cameras)
         {
+            if (!camera.active)
+                return;
             position.vec += glm::vec3(0.0F, 0.0F, -30.0F * dt.value());
         }
     });
