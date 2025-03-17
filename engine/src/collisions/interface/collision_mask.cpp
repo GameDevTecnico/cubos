@@ -13,7 +13,7 @@ CUBOS_REFLECT_IMPL(cubos::engine::CollisionMask)
 void cubos::engine::CollisionMask::setLayerValue(unsigned int layerNumber, bool newValue)
 {
     CUBOS_ASSERT(layerNumber < 32, "Collision mask layer number must be between 0 and 31");
-    value = (value & ~(1 << layerNumber)) | (static_cast<uint32_t>(newValue) << layerNumber);
+    value = (value & ~static_cast<uint32_t>(1 << layerNumber)) | (static_cast<uint32_t>(newValue) << layerNumber);
 }
 
 bool cubos::engine::CollisionMask::getLayerValue(unsigned int layerNumber) const
