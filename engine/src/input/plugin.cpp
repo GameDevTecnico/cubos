@@ -26,13 +26,18 @@ void cubos::engine::inputPlugin(Cubos& cubos)
     cubos.system("handle WindowEvents for Input")
         .tagged(inputUpdateTag)
         .after(windowPollTag)
-        .call([](const Window& window, Input& input, EventReader<WindowEvent> events) {
+        .call([](Window& window, Input& input, EventReader<WindowEvent> events) {
             input.updateMouse();
             input.updateActions();
 
             for (auto event : events)
             {
                 std::visit([window, &input](auto e) { input.handle(window, e); }, event);
+            }
+
+            if (input.updateMouseState())
+            {
+                input.updateMouseState(window);
             }
 
             input.pollGamepads(window);

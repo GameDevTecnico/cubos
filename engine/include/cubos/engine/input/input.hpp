@@ -32,6 +32,9 @@ namespace cubos::engine
         /// @brief Alias for @ref core::io::MouseButton.
         using MouseButton = core::io::MouseButton;
 
+        /// @brief Alias for @ref core::io::MouseState.
+        using MouseState = core::io::MouseState;
+
         Input() = default;
         ~Input() = default;
 
@@ -123,6 +126,22 @@ namespace cubos::engine
         /// @return Mouse displacement.
         glm::ivec2 mouseDelta() const;
 
+        /// @brief Sets the mouse state when the window is focused.
+        /// @param state Mouse state.
+        void mouseState(MouseState state);
+
+        /// @brief Gets the mouse state when the window is focused.
+        /// @return Mouse state when the window is focused.
+        MouseState mouseState() const;
+
+        /// @brief Sets the mouse state to be updated.
+        /// @param window Window.
+        void updateMouseState(core::io::Window& window);
+
+        /// @brief Gets the update mouse state.
+        /// @return Whether the mouse state should be updated.
+        bool updateMouseState() const;
+
         /// @brief Handle all other events - discards them.
         ///
         /// This is method exists so that `std::visit` can be used with @ref core::io::WindowEvent
@@ -171,5 +190,8 @@ namespace cubos::engine
 
         glm::ivec2 mMousePosition = {0, 0};
         glm::ivec2 mPreviousMousePosition = {0, 0};
+
+        MouseState mMouseState = MouseState::Default;
+        bool mUpdateMouseState = false;
     };
 } // namespace cubos::engine

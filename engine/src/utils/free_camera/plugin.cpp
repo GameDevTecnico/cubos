@@ -30,7 +30,7 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
     cubos.resource<State>();
 
     cubos.system("rotate FreeCameraController on mouse motion")
-        .call([](const Input& input, Window& window, const DeltaTime& deltaTime, State& state,
+        .call([](Input& input, const DeltaTime& deltaTime, State& state,
                  Query<FreeCameraController&, Position&, Rotation&> entities) {
             bool anyEnabled = false;
 
@@ -68,15 +68,15 @@ void cubos::engine::freeCameraPlugin(Cubos& cubos)
             }
 
             // Lock/unlock mouse depending on if any FreeCameraController is enabled.
-            if (anyEnabled && window->mouseState() != MouseState::Locked)
+            if (anyEnabled && input.mouseState() != MouseState::Locked)
             {
-                window->mouseState(MouseState::Locked);
+                input.mouseState(MouseState::Locked);
                 state.tookOverMouse = true;
             }
 
             if (!anyEnabled && state.tookOverMouse)
             {
-                window->mouseState(MouseState::Default);
+                input.mouseState(MouseState::Default);
                 state.tookOverMouse = false;
             }
         });

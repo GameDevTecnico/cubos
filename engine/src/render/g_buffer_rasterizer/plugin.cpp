@@ -52,9 +52,13 @@ namespace
         CUBOS_ANONYMOUS_REFLECT(State);
 
         ShaderPipeline pipeline;
+        ShaderPipeline pipelineWithPicker;
         ShaderBindingPoint perSceneBP;
         ShaderBindingPoint perMeshBP;
         ShaderBindingPoint paletteBP;
+        ShaderBindingPoint perSceneWithPickerBP;
+        ShaderBindingPoint perMeshWithPickerBP;
+        ShaderBindingPoint paletteWithPickerBP;
 
         RasterState rasterState;
         DepthStencilState depthStencilState;
@@ -67,13 +71,19 @@ namespace
         Texture2D paletteTexture;
         Asset<VoxelPalette> paletteAsset{};
 
-        State(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexBuffer vertexBuffer)
+        State(RenderDevice& renderDevice, const ShaderPipeline& pipeline, const ShaderPipeline& pipelineWithPicker,
+              VertexBuffer vertexBuffer)
             : pipeline(pipeline)
+            , pipelineWithPicker(pipelineWithPicker)
         {
             perSceneBP = pipeline->getBindingPoint("PerScene");
             perMeshBP = pipeline->getBindingPoint("PerMesh");
             paletteBP = pipeline->getBindingPoint("palette");
-            CUBOS_ASSERT(perSceneBP && perMeshBP && paletteBP,
+            perSceneWithPickerBP = pipelineWithPicker->getBindingPoint("PerScene");
+            perMeshWithPickerBP = pipelineWithPicker->getBindingPoint("PerMesh");
+            paletteWithPickerBP = pipelineWithPicker->getBindingPoint("palette");
+            CUBOS_ASSERT(perSceneBP && perMeshBP && paletteBP && perSceneWithPickerBP && perMeshWithPickerBP &&
+                             paletteWithPickerBP,
                          "PerScene, PerMesh and palette binding points must exist");
 
             rasterState = renderDevice.createRasterState({
@@ -136,9 +146,17 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
         .after(renderMeshPoolInitTag)
         .call([](Commands cmds, const Window& window, Assets& assets, const RenderMeshPool& pool) {
             auto& rd = window->renderDevice();
-            auto vs = assets.read(VertexShader)->shaderStage();
-            auto ps = assets.read(PixelShader)->shaderStage();
-            cmds.emplaceResource<State>(rd, rd.createShaderPipeline(vs, ps), pool.vertexBuffer());
+            auto vsAsset = assets.read(VertexShader);
+            auto psAsset = assets.read(PixelShader);
+
+            auto vs = vsAsset->shaderStage();
+            auto ps = psAsset->shaderStage();
+
+            auto vsWithPicker = vsAsset->builder().with("RENDER_PICKER").build();
+            auto psWithPicker = psAsset->builder().with("RENDER_PICKER").build();
+
+            cmds.emplaceResource<State>(rd, rd.createShaderPipeline(vs, ps),
+                                        rd.createShaderPipeline(vsWithPicker, psWithPicker), pool.vertexBuffer());
         });
 
     cubos.system("rasterize to GBuffer")
@@ -147,7 +165,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
         .related<DrawsTo>()
         .call([](State& state, const Window& window, const RenderMeshPool& pool, const RenderPalette& palette,
                  Assets& assets, Query<const LocalToWorld&, Camera&, const DrawsTo&> cameras,
-                 Query<Entity, GBufferRasterizer&, GBuffer&, RenderDepth&, RenderPicker&> targets,
+                 Query<Entity, GBufferRasterizer&, GBuffer&, RenderDepth&, Opt<RenderPicker&>> targets,
                  Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
 
@@ -180,24 +198,35 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
             {
                 // Check if we need to recreate the framebuffer.
                 if (rasterizer.position != gBuffer.position || rasterizer.normal != gBuffer.normal ||
-                    rasterizer.albedo != gBuffer.albedo || rasterizer.frontPicker != picker.frontTexture ||
-                    rasterizer.depth != depth.texture)
+                    rasterizer.albedo != gBuffer.albedo ||
+                    (picker.contains() && rasterizer.frontPicker != picker.value().frontTexture) ||
+                    (!picker.contains() && rasterizer.frontPicker != nullptr) || rasterizer.depth != depth.texture)
                 {
                     // Store textures so we can check if they change in the next frame.
                     rasterizer.position = gBuffer.position;
                     rasterizer.normal = gBuffer.normal;
                     rasterizer.albedo = gBuffer.albedo;
                     rasterizer.depth = depth.texture;
-                    rasterizer.frontPicker = picker.frontTexture;
+                    if (picker.contains())
+                    {
+                        rasterizer.frontPicker = picker.value().frontTexture;
+                    }
+                    else
+                    {
+                        rasterizer.frontPicker = nullptr;
+                    }
 
                     // Create the framebuffer.
                     FramebufferDesc desc{};
-                    desc.targetCount = 4;
+                    desc.targetCount = picker.contains() ? 4 : 3;
                     desc.depthStencil.setTexture2DTarget(depth.texture);
                     desc.targets[0].setTexture2DTarget(gBuffer.position);
                     desc.targets[1].setTexture2DTarget(gBuffer.normal);
                     desc.targets[2].setTexture2DTarget(gBuffer.albedo);
-                    desc.targets[3].setTexture2DTarget(picker.frontTexture);
+                    if (picker.contains())
+                    {
+                        desc.targets[3].setTexture2DTarget(picker.value().frontTexture);
+                    }
                     rasterizer.frontFramebuffer = rd.createFramebuffer(desc);
 
                     CUBOS_INFO("Recreated GBufferRasterizer's front framebuffer");
@@ -227,10 +256,10 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                     gBuffer.cleared = true;
                 }
 
-                if (!picker.cleared)
+                if (picker.contains() && !picker.value().cleared)
                 {
                     rd.clearTargetColor(3, 65535U, 65535U, 0U, 0U);
-                    picker.cleared = true;
+                    picker.value().cleared = true;
                 }
 
                 // Find the active cameras for this target.
@@ -258,11 +287,20 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                                   static_cast<int>(drawsTo.viewportSize.x * float(gBuffer.size.x)),
                                   static_cast<int>(drawsTo.viewportSize.y * float(gBuffer.size.y)));
                     // Bind the shader, vertex array and uniform buffer.
-                    rd.setShaderPipeline(state.pipeline);
+                    rd.setShaderPipeline(picker.contains() ? state.pipelineWithPicker : state.pipeline);
                     rd.setVertexArray(state.vertexArray);
-                    state.perSceneBP->bind(state.perSceneCB);
-                    state.perMeshBP->bind(state.perMeshCB);
-                    state.paletteBP->bind(state.paletteTexture);
+                    if (picker.contains())
+                    {
+                        state.perSceneWithPickerBP->bind(state.perSceneCB);
+                        state.perMeshWithPickerBP->bind(state.perMeshCB);
+                        state.paletteWithPickerBP->bind(state.paletteTexture);
+                    }
+                    else
+                    {
+                        state.perSceneBP->bind(state.perSceneCB);
+                        state.perMeshBP->bind(state.perMeshCB);
+                        state.paletteBP->bind(state.paletteTexture);
+                    }
 
                     // Iterate over all mesh buckets and issue draw calls.
                     for (auto [meshEnt, meshLocalToWorld, mesh, grid] : meshes)
@@ -285,8 +323,11 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                 // Swap front and back framebuffers and textures.
                 // If we didn't do this, we would be recreating the framebuffer every frame, due to the picker's
                 // front texture changing every frame.
-                std::swap(rasterizer.frontFramebuffer, rasterizer.backFramebuffer);
-                std::swap(rasterizer.frontPicker, rasterizer.backPicker);
+                if (picker.contains())
+                {
+                    std::swap(rasterizer.frontFramebuffer, rasterizer.backFramebuffer);
+                    std::swap(rasterizer.frontPicker, rasterizer.backPicker);
+                }
             }
         });
 }
