@@ -17,6 +17,14 @@ namespace tesseratos
     /// @ingroup tesseratos
     /// @brief Adds a resource used to manage the currently loaded project.
 
+    /// @brief Tool state.
+    struct ProjectTool
+    {
+        CUBOS_REFLECT;
+
+        bool isOpen{false};
+    };
+
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-project-plugin

@@ -10,10 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Entity destruction detection to observers (#1458, **@kuukitenshi**).
-- Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
+- Add a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
 
 ### Changed
-
+- Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
+- Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
 - Made collision layer and mask their own components (#535, **@fallenatlas**).
 - Make RenderPicker optional (#1407, **@tomas7770**).
 - Allow mouse state to be changed through the input plugin (#1401, **@mcanais**).

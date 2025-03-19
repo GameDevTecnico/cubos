@@ -2,10 +2,11 @@
 
 #include <imgui.h>
 
+#include <cubos/core/ecs/reflection.hpp>
+
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
-#include <cubos/engine/tools/toolbox/plugin.hpp>
 
 using cubos::core::ecs::EventReader;
 using cubos::core::ecs::EventWriter;
@@ -14,9 +15,13 @@ using cubos::engine::AnyAsset;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
 using cubos::engine::Settings;
-using cubos::engine::Toolbox;
 
 using namespace tesseratos;
+
+CUBOS_REFLECT_IMPL(AssetExplorerTool)
+{
+    return cubos::core::ecs::TypeBuilder<AssetExplorerTool>("AssetExplorerTool").withField("isOpen", &AssetExplorerTool::isOpen).build();
+}
 
 namespace
 {
@@ -151,20 +156,17 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
 
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
-    cubos.depends(cubos::engine::toolboxPlugin);
 
+    cubos.resource<AssetExplorerTool>();
     cubos.resource<AssetExplorerState>();
 
     cubos.system("show Asset Explorer UI")
+        .onlyIf([](AssetExplorerTool& tool) { return tool.isOpen; })
         .tagged(cubos::engine::imguiTag)
-        .call([](Assets& assets, Toolbox& toolbox, cubos::core::ecs::EventWriter<AssetSelectedEvent> events,
-                 AssetExplorerState& state) {
-            if (!toolbox.isOpen("Asset Explorer"))
-            {
-                return;
-            }
+        .call([](Assets& assets, cubos::core::ecs::EventWriter<AssetSelectedEvent> events,
+                 AssetExplorerState& state, AssetExplorerTool& tool) {
 
-            ImGui::Begin("Asset Explorer");
+            ImGui::Begin("Asset Explorer", &tool.isOpen);
 
             if (state.assetsVector.empty())
             {

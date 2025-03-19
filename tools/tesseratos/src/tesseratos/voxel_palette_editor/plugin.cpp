@@ -9,7 +9,6 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/render/voxels/palette.hpp>
 #include <cubos/engine/render/voxels/plugin.hpp>
-#include <cubos/engine/tools/toolbox/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
 #include "../asset_explorer/plugin.hpp"
@@ -20,11 +19,15 @@ using cubos::engine::Asset;
 using cubos::engine::Assets;
 using cubos::engine::Cubos;
 using cubos::engine::RenderPalette;
-using cubos::engine::Toolbox;
 using cubos::engine::VoxelMaterial;
 using cubos::engine::VoxelPalette;
 
 using namespace tesseratos;
+
+CUBOS_REFLECT_IMPL(VoxelPalleteEditorTool)
+{
+    return cubos::core::ecs::TypeBuilder<VoxelPalleteEditorTool>("VoxelPalleteEditorTool").withField("isOpen", &VoxelPalleteEditorTool::isOpen).build();
+}
 
 namespace
 {
@@ -107,21 +110,21 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::renderVoxelsPlugin);
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::voxelsPlugin);
-    cubos.depends(cubos::engine::toolboxPlugin);
 
     cubos.depends(assetExplorerPlugin);
 
+    cubos.resource<VoxelPalleteEditorTool>();
     cubos.resource<SelectedPaletteInfo>();
 
     cubos.system("open Voxel Palette Editor on asset selection")
         .tagged(cubos::engine::imguiTag)
         .call([](EventReader<AssetSelectedEvent> reader, Assets& assets, SelectedPaletteInfo& selectedPalette,
-                 Toolbox& toolbox) {
+                 VoxelPalleteEditorTool& tool) {
             for (const auto& event : reader)
             {
                 if (assets.type(event.asset).is<VoxelPalette>())
                 {
-                    toolbox.open("Palette Editor");
+                    tool.isOpen = true;
 
                     CUBOS_INFO("Opening palette asset {}", event.asset);
                     if (!selectedPalette.asset.isNull() && selectedPalette.modified)
@@ -143,19 +146,16 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
         });
 
     cubos.system("show Voxel Palette Editor UI")
+        .onlyIf([](VoxelPalleteEditorTool& tool) { return tool.isOpen; })
         .tagged(cubos::engine::imguiTag)
-        .call([](Assets& assets, SelectedPaletteInfo& selectedPalette, RenderPalette& activePalette, Toolbox& toolbox) {
-            if (!toolbox.isOpen("Palette Editor"))
-            {
-                return;
-            }
+        .call([](Assets& assets, SelectedPaletteInfo& selectedPalette, RenderPalette& activePalette, VoxelPalleteEditorTool& tool) {
 
             if (assets.status(selectedPalette.asset) != Assets::Status::Loaded)
             {
                 return;
             }
 
-            ImGui::Begin("Palette Editor");
+            ImGui::Begin("Palette Editor", &tool.isOpen);
 
             bool wasMaterialModified = false;
             std::pair<uint16_t, VoxelMaterial> modifiedMaterial;

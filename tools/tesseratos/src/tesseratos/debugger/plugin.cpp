@@ -3,12 +3,19 @@
 #include <imgui.h>
 #include <imgui_stdlib.h>
 
+#include <cubos/core/ecs/reflection.hpp>
+
 #include <cubos/engine/imgui/plugin.hpp>
-#include <cubos/engine/tools/toolbox/plugin.hpp>
 
 using cubos::core::net::Address;
 
 using namespace cubos::engine;
+using namespace tesseratos;
+
+CUBOS_REFLECT_IMPL(DebuggerTool)
+{
+    return cubos::core::ecs::TypeBuilder<DebuggerTool>("DebuggerTool").withField("isOpen", &DebuggerTool::isOpen).build();
+}
 
 namespace
 {
@@ -25,19 +32,18 @@ namespace
 
 void tesseratos::debuggerPlugin(Cubos& cubos)
 {
-    cubos.depends(toolboxPlugin);
     cubos.depends(imguiPlugin);
 
+    cubos.resource<DebuggerTool>();
     cubos.resource<Debugger>();
     cubos.resource<State>();
 
-    cubos.system("show Debugger").tagged(imguiTag).call([](Toolbox& toolbox, State& state, Debugger& debugger) {
-        if (!toolbox.isOpen("Debugger"))
-        {
-            return;
-        }
+    cubos.system("show Debugger")
+        .onlyIf([](DebuggerTool& tool) { return tool.isOpen; })
+        .tagged(imguiTag)
+        .call([](State& state, Debugger& debugger, DebuggerTool& tool) {
 
-        if (!ImGui::Begin("Debugger"))
+        if (!ImGui::Begin("Debugger", &tool.isOpen))
         {
             ImGui::End();
             return;
