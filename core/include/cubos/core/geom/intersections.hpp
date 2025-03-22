@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <vector>
-
 #include <glm/glm.hpp>
 
 #include <cubos/core/ecs/entity/entity.hpp>

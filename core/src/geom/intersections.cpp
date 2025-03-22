@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <array>
 #include <limits>
 
 #include <glm/glm.hpp>
@@ -154,14 +153,12 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
 
 bool cubos::core::geom::intersects(const Frustum& frustum, const Box& box, const glm::mat4& localToWorld)
 {
-    std::array<glm::vec3, 8> corners;
-    box.corners(corners.data());
-    std::ranges::transform(corners, corners.begin(),
-                           [localToWorld](glm::vec3& corner) { return localToWorld * glm::vec4{corner, 1.0F}; });
     auto planes = {&frustum.top, &frustum.right, &frustum.bottom, &frustum.left, &frustum.near, &frustum.far};
-    return std::ranges::any_of(corners, [planes](const glm::vec3 corner) {
-        return std::ranges::all_of(
-            planes, [corner](const Plane* plane) { return pointDistanceToPlane(corner, *plane) > 0.0F; });
+    glm::vec3 center = localToWorld * glm::vec4{0.0F, 0.0F, 0.0F, 1.0F};
+    return std::ranges::all_of(planes, [box, center](const Plane* plane) {
+        glm::vec3 norm = glm::vec3{std::abs(plane->normal.x), std::abs(plane->normal.y), std::abs(plane->normal.z)};
+        float r = glm::dot(box.halfSize, norm);
+        return -r <= pointDistanceToPlane(center, *plane);
     });
 }
 

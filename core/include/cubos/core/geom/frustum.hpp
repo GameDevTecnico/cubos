@@ -2,6 +2,8 @@
 /// @brief Class @ref cubos::core::geom::Frustum.
 /// @ingroup core-geom
 
+#pragma once
+
 #include <cubos/core/api.hpp>
 #include <cubos/core/geom/plane.hpp>
 #include <cubos/core/reflection/reflect.hpp>
