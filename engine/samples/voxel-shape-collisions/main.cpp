@@ -6,6 +6,8 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
+#include <cubos/engine/collisions/collision_layers.hpp> //maybe put this in the collisions plugin
+#include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/contact_manifold.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
@@ -101,8 +103,10 @@ int main()
                       .add(Collider{})
                       .add(RenderVoxelGrid{CarAsset, offset})
                       .add(VoxelCollisionShape(CarAsset))
+                      .add(CollisionLayers{})
+                      .add(CollisionMask{})
                       .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, -30.0F}})
+                      .add(Position{glm::vec3{0.0F, -10.0F, -20.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 1.0F}})
                       .entity();
@@ -112,10 +116,15 @@ int main()
                       .add(Collider{})
                       .add(RenderVoxelGrid{CarAsset, offset})
                       .add(VoxelCollisionShape(CarAsset))
+                      .add(CollisionLayers{})
+                      .add(CollisionMask{})
                       .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, 10.0F}})
+                      .add(Position{glm::vec3{0.0F, 15.0F, 10.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, -1.0F}})
+                      .add(PhysicsBundle{.mass = 500.0F,
+                                         .velocity = {0.0F, 0.0F, -1.0F},
+                                         .material = PhysicsMaterial{.bounciness = 0.0},
+                                         .inertiaTensor = glm::mat3(0.0F)})
                       .entity();
         state.bRotationAxis = glm::sphericalRand(1.0F);
     });
@@ -126,11 +135,11 @@ int main()
             auto [aPos, aRot, aVel] = *query.at(state.a);
             auto [bPos, bRot, bVel] = *query.at(state.b);
 
-            aRot.quat = glm::rotate(aRot.quat, 0.001F, state.aRotationAxis);
-            aVel.vec += glm::vec3{0.0F, 0.0F, 0.01F};
+            // aRot.quat = glm::rotate(aRot.quat, 0.001F, state.aRotationAxis);
+            aVel.vec += glm::vec3{0.0F, 0.01F, 0.00F};
 
-            bRot.quat = glm::rotate(bRot.quat, 0.001F, state.bRotationAxis);
-            bVel.vec -= glm::vec3{0.0F, 0.0F, 0.01F};
+            // bRot.quat = glm::rotate(bRot.quat, 0.001F, state.bRotationAxis);
+            bVel.vec -= glm::vec3{0.0F, 0.01F, 0.0F};
         });
 
     cubos.tag(collisionsSampleUpdated);
