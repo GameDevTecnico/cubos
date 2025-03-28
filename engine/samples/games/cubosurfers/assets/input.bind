@@ -19,6 +19,23 @@
         ]
     },
     "axes": {
+        "debug-rotate-yaw": {
+            "mouse": {
+                "axis": "X",
+                "sensitivity": 0.1,
+                "requiresMouseLocked": true
+            },
+            "gamepadAxis": [ "LX" ],
+            "positive": [
+                {"keys": ["Right"]}
+            ],
+            "negative": [
+                {"keys": ["Left"]}
+            ]
+        },
+        "debug-rotate-pitch": {
+            "mouseAxis": "Y"
+        },
         "debug-move-lateral": {
             "positive": [
                 {"keys": ["D"]}
