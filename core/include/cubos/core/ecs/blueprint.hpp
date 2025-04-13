@@ -91,15 +91,6 @@ namespace cubos::core::ecs
             this->relate(fromEntity, toEntity, memory::AnyValue::moveConstruct(reflection::reflect<T>(), &relation));
         }
 
-        /// @brief Merges another blueprint into this one.
-        ///
-        /// Entities in the other blueprint will have their names prefixed with the specified
-        /// string.
-        ///
-        /// @param prefix Name to prefix with the merged blueprint.
-        /// @param other Blueprint to merge.
-        void merge(const std::string& prefix, const Blueprint& other);
-
         /// @brief Clears the blueprint.
         void clear();
 
@@ -112,8 +103,7 @@ namespace cubos::core::ecs
         /// @param create Function used to create entities.
         /// @param add Function used to add components to entities.
         /// @param relate Function used to add relations to entities.
-        /// @param withName Whether to add the 'Name' component to instantiated entities.
-        void instantiate(void* userData, Create create, Add add, Relate relate, bool withName) const;
+        void instantiate(void* userData, Create create, Add add, Relate relate) const;
 
         /// @brief Instantiates the blueprint by calling the given functors.
         /// @tparam C Create functor type.
@@ -122,9 +112,8 @@ namespace cubos::core::ecs
         /// @param create Functor used to create entities.
         /// @param add Functor used to add components to entities.
         /// @param relate Functor used to add relations to entities.
-        /// @param withName Whether to use the entity names from the blueprint.
         template <typename C, typename A, typename R>
-        void instantiate(C create, A add, R relate, bool withName) const
+        void instantiate(C create, A add, R relate) const
         {
             struct Functors
             {
@@ -150,7 +139,7 @@ namespace cubos::core::ecs
             // We pass the functors pair using the userData argument. We could use std::function
             // here and pass them directly, but that would mean unnecessary heap allocations and an
             // extra large include on the header.
-            this->instantiate(&functors, createFunc, addFunc, relateFunc, withName);
+            this->instantiate(&functors, createFunc, addFunc, relateFunc);
         }
 
         /// @brief Checks if the given name is a valid entity name.

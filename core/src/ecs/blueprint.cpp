@@ -121,26 +121,6 @@ void Blueprint::relate(Entity fromEntity, Entity toEntity, AnyValue relation)
     mRelations.at(relation.type())[fromEntity].insert_or_assign(toEntity, std::move(relation));
 }
 
-void Blueprint::merge(const std::string& prefix, const Blueprint& other)
-{
-    other.instantiate(
-        [&](std::string name) -> Entity {
-            name = prefix + '.' + name;
-
-            CUBOS_ASSERT(!mBimap.containsRight(name),
-                         "A blueprint with the prefix {} was already merged to the blueprint", prefix);
-
-            Entity entity{static_cast<uint32_t>(mBimap.size()), 0};
-            mBimap.insert(entity, std::move(name));
-            return entity;
-        },
-        [&](Entity entity, AnyValue component) { this->add(entity, std::move(component)); },
-        [&](Entity fromEntity, Entity toEntity, AnyValue relation) {
-            this->relate(fromEntity, toEntity, std::move(relation));
-        },
-        false);
-}
-
 void Blueprint::clear()
 {
     mBimap.clear();
@@ -153,19 +133,24 @@ const UnorderedBimap<Entity, std::string, EntityHash>& Blueprint::bimap() const
     return mBimap;
 }
 
-void Blueprint::instantiate(void* userData, Create create, Add add, Relate relate, bool withName) const
+void Blueprint::instantiate(void* userData, Create create, Add add, Relate relate) const
 {
     // Instantiate our entities and create a map from them to their instanced counterparts.
     std::unordered_map<Entity, Entity, EntityHash> thisToInstance{};
+    Entity root{};
+    if (mBimap.containsRight(""))
+    {
+        root = create(userData, "");
+        thisToInstance.emplace(mBimap.atRight(""), root);
+    }
     for (const auto& [entity, name] : mBimap)
     {
-        thisToInstance.emplace(entity, create(userData, name));
-
-        if (withName)
+        if (name.empty())
         {
-            Name nameComponent{name};
-            add(userData, thisToInstance.at(entity), AnyValue::moveConstruct(reflect<Name>(), (void*)&nameComponent));
+            continue;
         }
+
+        thisToInstance.emplace(entity, create(userData, name));
     }
 
     // Add copies of our components to their instantiated entities. Since the components themselves
@@ -203,7 +188,7 @@ bool Blueprint::validEntityName(const std::string& name)
     {
         bool isLowerAlpha = c >= 'a' && c <= 'z';
         bool isNumeric = c >= '0' && c <= '9';
-        if (!isLowerAlpha && !isNumeric && c != '-')
+        if (!isLowerAlpha && !isNumeric && c != '-' && c != '#')
         {
             return false;
         }

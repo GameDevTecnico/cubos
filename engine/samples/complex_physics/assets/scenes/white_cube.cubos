@@ -1,102 +1,93 @@
 {
-  "entities": {
-    "cube": {
-      "cubos::engine::AccumulatedCorrection": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-      },
-      "cubos::engine::BoxCollisionShape": {
-        "x": 0.5,
-        "y": 0.5,
-        "z": 0.5 
-      },
-      "cubos::engine::Collider": {
-        "a": {
-          "w": 0.0,
-          "x": 1.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "b": {
-          "w": 0.0,
-          "x": 0.0,
-          "y": 1.0,
-          "z": 0.0
-        },
-        "c": {
-          "w": 0.0,
-          "x": 0.0,
-          "y": 0.0,
-          "z": 1.0
-        },
-        "d": {
-          "w": 1.0,
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        }
-      },
-      "cubos::engine::CollisionLayers": 1,
-      "cubos::engine::CollisionMask": 1,
-      "cubos::engine::Force": {
-      },
-      "cubos::engine::Torque": {
-      },
-      "cubos::engine::Impulse": {
-      },
-      "cubos::engine::AngularImpulse": {
-      },
-      "cubos::engine::Mass": {
-        "inverseMass": 0.1,
-        "mass": 10.0,
-        "changed": true
-      },
-      "cubos::engine::Inertia": {
-        "autoUpdate": true
-      },
-      "cubos::engine::CenterOfMass": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "cubos::engine::PhysicsMaterial": {
-        "friction": 0.5,
-        "bounciness": 0.5,
-        "frictionMix": "Average",
-        "bouncinessMix": "Average"
-      },
-      "cubos::engine::Position": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "cubos::engine::RenderVoxelGrid": {
-        "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c86",
-        "offset": {
-          "x": -0.5,
-          "y": -0.5,
-          "z": -0.5
-        }
-      },
-      "cubos::engine::Rotation": {
-        "w": 0.0,
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "cubos::engine::Scale": 1.0,
-      "cubos::engine::Velocity": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "cubos::engine::AngularVelocity": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      }
+  "cubos::engine::AccumulatedCorrection": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "cubos::engine::BoxCollisionShape": {
+    "x": 0.5,
+    "y": 0.5,
+    "z": 0.5
+  },
+  "cubos::engine::Collider": {
+    "a": {
+      "w": 0.0,
+      "x": 1.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "b": {
+      "w": 0.0,
+      "x": 0.0,
+      "y": 1.0,
+      "z": 0.0
+    },
+    "c": {
+      "w": 0.0,
+      "x": 0.0,
+      "y": 0.0,
+      "z": 1.0
+    },
+    "d": {
+      "w": 1.0,
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
     }
   },
-  "imports": {}
+  "cubos::engine::CollisionLayers": 1,
+  "cubos::engine::CollisionMask": 1,
+  "cubos::engine::Force": {},
+  "cubos::engine::Torque": {},
+  "cubos::engine::Impulse": {},
+  "cubos::engine::AngularImpulse": {},
+  "cubos::engine::Mass": {
+    "inverseMass": 0.1,
+    "mass": 10.0,
+    "changed": true
+  },
+  "cubos::engine::Inertia": {
+    "autoUpdate": true
+  },
+  "cubos::engine::CenterOfMass": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "cubos::engine::PhysicsMaterial": {
+    "friction": 0.5,
+    "bounciness": 0.5,
+    "frictionMix": "Average",
+    "bouncinessMix": "Average"
+  },
+  "cubos::engine::Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "cubos::engine::RenderVoxelGrid": {
+    "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c86",
+    "offset": {
+      "x": -0.5,
+      "y": -0.5,
+      "z": -0.5
+    }
+  },
+  "cubos::engine::Rotation": {
+    "w": 0.0,
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "cubos::engine::Scale": 1.0,
+  "cubos::engine::Velocity": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "cubos::engine::AngularVelocity": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  }
 }

@@ -76,6 +76,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/scene/plugin.cpp"
 	"src/scene/scene.cpp"
 	"src/scene/bridge.cpp"
+	"src/scene/node.cpp"
 
 	"src/voxels/plugin.cpp"
 	"src/voxels/grid.cpp"
