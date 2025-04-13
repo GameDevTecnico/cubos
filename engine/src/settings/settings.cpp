@@ -135,7 +135,7 @@ static inline void saveSettingsAsJson(const Settings& settings, Stream& stream, 
 
 bool Settings::save(std::string_view path, int indent) const
 {
-    auto stream = FileSystem::open(path, File::OpenMode::Read);
+    auto stream = FileSystem::open(path, File::OpenMode::Write);
     // If settings file fails to open
     if (stream == nullptr)
     {
