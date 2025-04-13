@@ -1,13 +1,16 @@
 #include <cubos/core/data/ser/debug.hpp>
+#include <cubos/core/ecs/name.hpp>
 #include <cubos/core/memory/stream.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 
 #include "components.hpp"
 
+using cubos::core::ecs::Name;
 using cubos::core::ecs::World;
 
 using namespace cubos::engine;
@@ -52,6 +55,7 @@ int main(int argc, char** argv)
     /// [Adding the plugin]
     cubos.plugin(settingsPlugin);
     cubos.plugin(assetsPlugin);
+    cubos.plugin(transformPlugin);
     cubos.plugin(scenePlugin);
     /// [Adding the plugin]
 
@@ -70,27 +74,30 @@ int main(int argc, char** argv)
     cubos.startupSystem("spawn the scene")
         .tagged(spawnTag)
         .tagged(assetsTag)
-        .call([](Commands commands, const Assets& assets) {
-            auto sceneRead = assets.read(SceneAsset);
-            commands.spawn(sceneRead->blueprint);
-        });
+        .call([](Commands commands, const Assets& assets) { commands.spawn(*assets.read(SceneAsset)).named("scene"); });
     /// [Spawning the scene]
 
     /// [Printing the scene]
     cubos.startupSystem("print the scene")
         .after(spawnTag)
-        .call([](Query<Entity, const Num&> numQuery, Query<const OwnedBy&, Entity> ownedByQuery,
-                 Query<const DistanceTo&, Entity> distanceToQuery) {
+        .call([](Query<Entity, const Name&> nameQuery, Query<const Num&> numQuery,
+                 Query<const OwnedBy&, Entity> ownedByQuery, Query<const DistanceTo&, Entity> distanceToQuery,
+                 Query<const ChildOf&, Entity> childOfQuery) {
             using cubos::core::data::DebugSerializer;
             using cubos::core::memory::Stream;
 
             DebugSerializer ser{Stream::stdOut};
 
-            for (auto [entity, num] : numQuery)
+            for (auto [entity, name] : nameQuery)
             {
                 Stream::stdOut.print("Entity ");
                 ser.write(entity);
-                Stream::stdOut.printf(":\n- Num = {}\n", num.value);
+                Stream::stdOut.printf(":\n- Name = {}\n", name.value);
+
+                for (auto [num] : numQuery.pin(0, entity))
+                {
+                    Stream::stdOut.printf("- Num = {}\n", num.value);
+                }
 
                 for (auto [distanceTo, what] : distanceToQuery.pin(0, entity))
                 {
@@ -103,6 +110,13 @@ int main(int argc, char** argv)
                 {
                     Stream::stdOut.print("- OwnedBy(");
                     ser.write(owner);
+                    Stream::stdOut.print(")\n");
+                }
+
+                for (auto [childOf, parent] : childOfQuery.pin(0, entity))
+                {
+                    Stream::stdOut.print("- ChildOf(");
+                    ser.write(parent);
                     Stream::stdOut.print(")\n");
                 }
             }
