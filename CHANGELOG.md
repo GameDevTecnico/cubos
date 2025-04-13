@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Distance Constraint and sample (#1492, **@joaomanita**).
 - Entity destruction detection to observers (#1458, **@kuukitenshi**).
 - Added a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
 - Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
