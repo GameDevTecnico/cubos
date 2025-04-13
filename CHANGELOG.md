@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Deferred shading missing padding leading to black screen on web builds (#1476, **@RiscadoA**).
+- Open settings file in correct mode when saving (**@RiscadoA**).
 
 ## [v0.6.0] - 2025-02-10
 
