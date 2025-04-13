@@ -33,9 +33,9 @@ void Commands::destroy(Entity entity)
     mBuffer.destroy(entity);
 }
 
-Commands::BlueprintBuilder Commands::spawn(const Blueprint& blueprint, bool withName)
+Commands::BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
 {
-    auto nameToEntity = mBuffer.spawn(blueprint, withName);
+    auto nameToEntity = mBuffer.spawn(blueprint);
     return {mBuffer, std::move(nameToEntity)};
 }
 
@@ -110,9 +110,30 @@ Entity Commands::BlueprintBuilder::entity(const std::string& name) const
     return mNameToEntity.at(name);
 }
 
+Entity Commands::BlueprintBuilder::entity() const
+{
+    CUBOS_ASSERT(mNameToEntity.contains(""), "No root entity in blueprint");
+    return mNameToEntity.at("");
+}
+
 Commands::BlueprintBuilder& Commands::BlueprintBuilder::add(const std::string& name, const reflection::Type& type,
                                                             void* value)
 {
     mBuffer.add(this->entity(name), type, value);
+    return *this;
+}
+
+Commands::BlueprintBuilder& Commands::BlueprintBuilder::add(const reflection::Type& type, void* value)
+{
+    mBuffer.add(this->entity(), type, value);
+    return *this;
+}
+
+Commands::BlueprintBuilder& Commands::BlueprintBuilder::named(const std::string& name)
+{
+    for (auto& [entityName, entity] : mNameToEntity)
+    {
+        this->add(entityName, Name{name + entityName});
+    }
     return *this;
 }

@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for VectorTrait on the inspector (**@RiscadoA**).
 - Support for quaternions on the inspector (#1018, **@RiscadoA**).
 - Decomposition of 4x4 matrices into translation, scale and rotation on the inspector (#1179, **@RiscadoA**).
+- Default entities on blueprints, used as roots for scenes (#1398, **@RiscadoA**).
 
 ### Changed
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
@@ -31,6 +32,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow mouse state to be changed through the input plugin (#1401, **@mcanais**).
 - Move the reflection implementation of each physics component into its own file (**@fallenatlas**).
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
+
+### Changed
+
+- Blueprint entity naming scheme from dots to # (#1398, **@RiscadoA**).
+- Scene format is now hierarchy based (#1398, **@RiscadoA**).
 
 ### Fixed
 

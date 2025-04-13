@@ -60,7 +60,7 @@ int main(int argc, char** argv)
             environment.skyGradient[0] = {0.1F, 0.2F, 0.4F};
             environment.skyGradient[1] = {0.6F, 0.6F, 0.8F};
             // Spawn base scene
-            commands.spawn(assets.read(SceneAsset)->blueprint);
+            commands.spawn(assets.read(SceneAsset)->blueprint());
         });
 
     cubos.system("update chunks")
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
             {
                 if (!camera.active)
                 {
-                    return;
+                    continue;
                 }
                 for (int x = -GenRadiusChunks; x < GenRadiusChunks; x++)
                 {
@@ -134,7 +134,7 @@ int main(int argc, char** argv)
         {
             if (!camera.active)
             {
-                return;
+                continue;
             }
             position.vec += glm::vec3(0.0F, 0.0F, -30.0F * dt.value());
         }

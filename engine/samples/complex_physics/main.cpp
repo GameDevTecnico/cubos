@@ -150,8 +150,8 @@ int main(int argc, char** argv)
                 nextPosition.y = 1.0F;
                 for (int h = 0; h < WallHeight; h++)
                 {
-                    auto builder = cmds.spawn(red ? redCube->blueprint : whiteCube->blueprint);
-                    builder.add("cube", Position{.vec = nextPosition});
+                    auto builder = cmds.spawn(red ? redCube->blueprint() : whiteCube->blueprint());
+                    builder.add(Position{.vec = nextPosition});
                     nextPosition.y += 1.0F;
                     red = !red;
                 }
@@ -171,19 +171,19 @@ int main(int argc, char** argv)
             if (time.current >= time.max)
             {
                 // create cube in a position
-                auto builder = cmds.spawn(cube->blueprint);
+                auto builder = cmds.spawn(cube->blueprint());
                 glm::vec3 position = RandomDirection ? randomPosition() : glm::vec3{0.0F, 3.0F, -7.0F};
-                builder.add("cube", Position{.vec = position});
+                builder.add(Position{.vec = position});
 
                 // push cube in direction to the center
                 glm::vec3 impulseDirection = calculateDirection(position);
                 float impulseStrength = 250.0F;
                 auto impulse = Impulse{};
                 impulse.add(impulseDirection * impulseStrength);
-                builder.add("cube", impulse);
+                builder.add(impulse);
 
                 // rotate cube according to impulse direction
-                builder.add("cube", Rotation::lookingAt(impulseDirection));
+                builder.add(Rotation::lookingAt(impulseDirection));
 
                 time.current = 0.0F;
             }
