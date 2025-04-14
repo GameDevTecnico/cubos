@@ -5,5 +5,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::Substeps)
 {
-    return core::ecs::TypeBuilder<Substeps>("cubos::engine::Substeps").withField("value", &Substeps::value).build();
+    return core::ecs::TypeBuilder<Substeps>("cubos::engine::Substeps").wrap(&Substeps::value);
 }

@@ -5,5 +5,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::Position)
 {
-    return core::ecs::TypeBuilder<Position>("cubos::engine::Position").withField("vec", &Position::vec).build();
+    return core::ecs::TypeBuilder<Position>("cubos::engine::Position").wrap(&Position::vec);
 }
