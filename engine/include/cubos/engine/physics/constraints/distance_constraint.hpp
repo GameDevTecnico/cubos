@@ -19,17 +19,20 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        float length;           ///< Distance between anchor points
+        bool isRigid;          ///< Wether the constraint enforces a fixed distance or a range
+        float fixedDistance;   ///< Fixed distance between anchor points
+        float minDistance;     ///< Minimum distance between anchor points
+        float maxDistance;     ///< Maximum distance between anchor points
+        glm::vec3 deltaCenter; ///< The world-space vector from the center of the first body to the second.
+
         glm::vec3 localAnchor1; ///< The local contact point relative to the center of mass of the first body.
         glm::vec3 localAnchor2; ///< The local contact point relative to the center of mass of the second body.
-        glm::vec3 deltaCenter;  ///< The world-space vector from the center of the first body to the second.
-
-        float maxDistance; ///< Maximum distance between anchor points
-        float minDistance; ///< Minimum distance between anchor points
 
         float axialMass; ///< Effective mass to use for impulse calculation
 
-        float impulse; ///< Stored impulse for warmstarting
+        float impulse;      ///< Stored impulse for warmstarting
+        float lowerImpulse; ///< Stored impulse for warmstarting
+        float upperImpulse; ///< Stored impulse for warmstarting
 
         // soft constraint
         float biasCoefficient;

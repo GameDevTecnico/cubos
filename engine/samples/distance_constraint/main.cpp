@@ -106,7 +106,7 @@ int main(int argc, char** argv)
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {2.0F, 0.0F, 1.0F}})
+                      .add(PhysicsBundle{.mass = 100000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         state.b = commands.create()
@@ -117,12 +117,15 @@ int main(int argc, char** argv)
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {-2.0F, 0.0F, 1.0F}})
+                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {1.0F, 0.0F, 1.0F}})
                       .entity();
 
-        commands.relate(
-            state.a, state.b,
-            DistanceConstraint{.length = 5.0F, .localAnchor1 = {0.0F, 0.0F, 0.0F}, .localAnchor2 = {0.0F, 0.0F, 0.0F}});
+        commands.relate(state.a, state.b,
+                        DistanceConstraint{.isRigid = false,
+                                           .minDistance = 5.0F,
+                                           .maxDistance = 15.0F,
+                                           .localAnchor1 = {0.0F, 0.0F, 0.0F},
+                                           .localAnchor2 = {0.0F, 0.0F, 0.0F}});
     });
 
     cubos.system("activate free camera").call([](const Input& input, Query<FreeCameraController&> query) {
