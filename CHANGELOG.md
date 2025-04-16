@@ -13,12 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
 - Perform frustum culling for voxel meshes (#1183, **@mkuritsu**).
 - Infinite terrain profiling sample (#1487, **@tomas7770**).
+- Added inertia for voxel shape (**@fallenatlas**).
 
 ### Changed
 
 - Made collision layer and mask their own components (#535, **@fallenatlas**).
 - Make RenderPicker optional (#1407, **@tomas7770**).
 - Allow mouse state to be changed through the input plugin (#1401, **@mcanais**).
+- Move the reflection implementation of each physics component into its own file (**@fallenatlas**).
 
 ### Fixed
 
