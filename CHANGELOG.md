@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New ImGui Inspector with custom hook support and better UI (#1179, **@RiscadoA**).
 - Support for MaskTrait and EnumTrait on the inspector (**@RiscadoA**).
 - VectorTrait for providing information about math vector types (**@RiscadoA**).
+- Support for VectorTrait on the inspector (**@RiscadoA**).
 
 ### Changed
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
