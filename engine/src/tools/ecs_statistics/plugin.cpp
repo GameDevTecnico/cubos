@@ -2,7 +2,7 @@
 
 #include <cubos/core/ecs/name.hpp>
 
-#include <cubos/engine/imgui/data_inspector.hpp>
+#include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/ecs_statistics/plugin.hpp>
 #include <cubos/engine/tools/selection/plugin.hpp>
@@ -38,7 +38,7 @@ void cubos::engine::ecsStatisticsPlugin(Cubos& cubos)
     cubos.system("show ECS statistics")
         .tagged(imguiTag)
         .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("ECS Statistics"); })
-        .call([](const World& world, State& state, Selection& selection, DataInspector& inspector) {
+        .call([](const World& world, State& state, Selection& selection, ImGuiInspector inspector) {
             if (world.isAlive(selection.entity))
             {
                 state.selectedArchetype = world.archetype(selection.entity);
@@ -416,7 +416,8 @@ void cubos::engine::ecsStatisticsPlugin(Cubos& cubos)
 
                     if (world.hasResource(*state.selectedResourceType))
                     {
-                        inspector.show(*state.selectedResourceType, world.resource(*state.selectedResourceType));
+                        inspector.show("Value", *state.selectedResourceType,
+                                       world.resource(*state.selectedResourceType));
                     }
                     else
                     {
