@@ -4,7 +4,7 @@
 #include <cubos/core/reflection/external/unordered_map.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
-#include <cubos/engine/imgui/data_inspector.hpp>
+#include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
@@ -18,7 +18,7 @@ void cubos::engine::settingsInspectorPlugin(Cubos& cubos)
 
     cubos.system("show Settings Inspector UI")
         .tagged(imguiTag)
-        .call([](Settings& settings, DataInspector& inspector, Toolbox& toolbox) {
+        .call([](Settings& settings, ImGuiInspector inspector, Toolbox& toolbox) {
             if (!toolbox.isOpen("Settings Inspector"))
             {
                 return;
@@ -34,7 +34,8 @@ void cubos::engine::settingsInspectorPlugin(Cubos& cubos)
                 }
                 else
                 {
-                    inspector.edit(map);
+                    ImGui::SetNextItemOpen(true, ImGuiCond_Appearing);
+                    inspector.edit("Settings", map);
                 }
             }
             ImGui::End();

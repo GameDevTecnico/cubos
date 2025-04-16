@@ -1,7 +1,7 @@
 #include <imgui.h>
 
 #include <cubos/engine/imgui/context.hpp>
-#include <cubos/engine/imgui/data_inspector.hpp>
+#include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/target/target.hpp>
@@ -24,7 +24,7 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
     cubos.depends(windowPlugin);
     cubos.depends(renderTargetPlugin);
 
-    cubos.resource<DataInspector>();
+    cubos.resource<ImGuiInspector::State>();
     cubos.uninitResource<ImGuiContextHolder>();
 
     cubos.startupTag(imguiInitTag).after(windowInitTag);
