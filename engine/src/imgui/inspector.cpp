@@ -1,7 +1,9 @@
+#include <glm/gtc/quaternion.hpp>
 #include <imgui.h>
 #include <imgui_stdlib.h>
 
 #include <cubos/core/ecs/reflection.hpp>
+#include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>
@@ -611,6 +613,49 @@ ImGuiInspector::State::State()
         if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
         {
             ImGui::SetTooltip("Vector of type %s", type.shortName().c_str());
+        }
+
+        return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
+    });
+
+    // Handle GLM quaternion types.
+    hooks.push_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+        bool modified = false;
+
+        if (type.is<glm::quat>())
+        {
+            glm::quat& quat = *static_cast<glm::quat*>(value);
+            auto euler = glm::degrees(glm::eulerAngles(quat));
+
+            ImGui::BeginDisabled(readOnly);
+            if (ImGui::InputScalarN(name.c_str(), ImGuiDataType_Float, &euler, 3))
+            {
+                quat = glm::normalize(glm::quat(glm::radians(euler)));
+                modified = true;
+            }
+            ImGui::EndDisabled();
+        }
+        else if (type.is<glm::dquat>())
+        {
+            glm::dquat& quat = *static_cast<glm::dquat*>(value);
+            auto euler = glm::degrees(glm::eulerAngles(quat));
+
+            ImGui::BeginDisabled(readOnly);
+            if (ImGui::InputScalarN(name.c_str(), ImGuiDataType_Double, &euler, 3))
+            {
+                quat = glm::normalize(glm::quat(glm::radians(euler)));
+                modified = true;
+            }
+            ImGui::EndDisabled();
+        }
+        else
+        {
+            return ImGuiInspector::HookResult::Unhandled;
+        }
+
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+        {
+            ImGui::SetTooltip("Quaternion of type %s (in XYZ euler angles)", type.shortName().c_str());
         }
 
         return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
