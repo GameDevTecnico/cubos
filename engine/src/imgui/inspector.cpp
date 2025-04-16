@@ -1,4 +1,6 @@
-#include <glm/gtc/quaternion.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
+#include <glm/gtx/quaternion.hpp>
 #include <imgui.h>
 #include <imgui_stdlib.h>
 
@@ -660,4 +662,62 @@ ImGuiInspector::State::State()
 
         return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
     });
+
+    // Handle 4x4 GLM matrices.
+    hooks.push_back(
+        [](const std::string& name, bool readOnly, ImGuiInspector& inspector, const Type& type, void* value) {
+            if (type.is<glm::mat4>() || type.is<glm::dmat4>())
+            {
+                auto mat = type.is<glm::mat4>() ? static_cast<glm::dmat4>(*static_cast<glm::mat4*>(value))
+                                                : *static_cast<glm::dmat4*>(value);
+
+                glm::dvec3 scale;
+                glm::dquat orientation;
+                glm::dvec3 translation;
+                glm::dvec3 skew;
+                glm::dvec4 perspective;
+                if (!glm::decompose(mat, scale, orientation, translation, skew, perspective))
+                {
+                    return ImGuiInspector::HookResult::Unhandled;
+                }
+
+                if (!ImGui::CollapsingHeader(name.c_str()))
+                {
+                    return ImGuiInspector::HookResult::Shown;
+                }
+                if (ImGui::IsItemHovered())
+                {
+                    ImGui::SetTooltip("Matrix of type %s", type.shortName().c_str());
+                }
+                ImGui::PushID(name.c_str());
+                ImGui::Indent();
+
+                bool modified = false;
+                modified |= inspector.inspect("scale", readOnly, reflect<glm::dvec3>(), &scale);
+                modified |= inspector.inspect("rotation", readOnly, reflect<glm::dquat>(), &orientation);
+                modified |= inspector.inspect("translation", readOnly, reflect<glm::dvec3>(), &translation);
+                inspector.show("skew", skew);
+                inspector.show("perspective", perspective);
+                if (modified)
+                {
+                    mat = glm::translate(glm::dmat4(1.0f), translation) * glm::toMat4(orientation) *
+                          glm::scale(glm::dmat4(1.0f), scale);
+                    if (type.is<glm::mat4>())
+                    {
+                        *static_cast<glm::mat4*>(value) = static_cast<glm::mat4>(mat);
+                    }
+                    else
+                    {
+                        *static_cast<glm::dmat4*>(value) = mat;
+                    }
+                }
+
+                ImGui::Unindent();
+                ImGui::PopID();
+
+                return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
+            }
+
+            return ImGuiInspector::HookResult::Unhandled;
+        });
 }

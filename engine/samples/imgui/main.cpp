@@ -130,8 +130,8 @@ struct GLMState
     glm::dmat4x2 dmat4x2;
     glm::mat4x3 mat4x3;
     glm::dmat4x3 dmat4x3;
-    glm::mat4 mat4;
-    glm::dmat4 dmat4;
+    glm::mat4 mat4{1.0F};
+    glm::dmat4 dmat4{1.0F};
 
     glm::vec2 vec2;
     glm::bvec2 bvec2;
