@@ -5,7 +5,7 @@ using cubos::core::reflection::NullableTrait;
 
 CUBOS_REFLECT_IMPL(NullableTrait)
 {
-    return Type::create("cubos::core::ecs::NullableTrait");
+    return Type::create("cubos::core::reflection::NullableTrait");
 }
 
 NullableTrait::NullableTrait(IsNull isNull, SetToNull setToNull)

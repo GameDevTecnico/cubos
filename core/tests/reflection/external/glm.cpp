@@ -5,10 +5,12 @@
 
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/vector.hpp>
 
 #include "../traits/constructible.hpp"
 
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::VectorTrait;
 
 template <glm::length_t C, glm::length_t R, typename T, glm::qualifier Q>
 static void testMat(const char* name, glm::mat<C, R, T, Q> mat, glm::vec<R, T, Q> col)
@@ -63,6 +65,16 @@ static void testVec(const char* name, glm::vec<L, T, Q> vec)
     const Type& type = reflect<Vec>();
     CHECK(type.name() == name);
     testConstructible<Vec>(&vec);
+
+    // Must have a Vector trait.
+    REQUIRE(type.has<VectorTrait>());
+    const auto& vector = type.get<VectorTrait>();
+    CHECK(vector.scalarType().is<T>());
+    CHECK(vector.dimensions() == L);
+    for (std::size_t i = 0; i < static_cast<std::size_t>(L); ++i)
+    {
+        CHECK(static_cast<const T*>(vector.get(&vec, i)) == &vec[static_cast<glm::length_t>(i)]);
+    }
 
     // The fields of the vector must be named x, y, z, w, in that order.
     REQUIRE(type.has<FieldsTrait>());
