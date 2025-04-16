@@ -9,6 +9,7 @@
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
+#include <cubos/core/reflection/traits/vector.hpp>
 
 #include <cubos/engine/imgui/inspector.hpp>
 
@@ -569,6 +570,47 @@ ImGuiInspector::State::State()
         if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
         {
             ImGui::SetTooltip("Mask of type %s", type.shortName().c_str());
+        }
+
+        return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
+    });
+
+    // Handle primitive vector types.
+    hooks.push_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+        if (!type.has<VectorTrait>())
+        {
+            return ImGuiInspector::HookResult::Unhandled;
+        }
+
+        auto& vector = type.get<VectorTrait>();
+        ImGuiDataType dataType;
+        if (vector.scalarType().is<float>())
+        {
+            dataType = ImGuiDataType_Float;
+        }
+        else if (vector.scalarType().is<double>())
+        {
+            dataType = ImGuiDataType_Double;
+        }
+        else if (vector.scalarType().is<int>())
+        {
+            dataType = ImGuiDataType_S32;
+        }
+        else if (vector.scalarType().is<unsigned int>())
+        {
+            dataType = ImGuiDataType_U32;
+        }
+        else
+        {
+            return ImGuiInspector::HookResult::Unhandled;
+        }
+
+        ImGui::BeginDisabled(readOnly);
+        bool modified = ImGui::InputScalarN(name.c_str(), dataType, value, static_cast<int>(vector.dimensions()));
+        ImGui::EndDisabled();
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+        {
+            ImGui::SetTooltip("Vector of type %s", type.shortName().c_str());
         }
 
         return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
