@@ -7,7 +7,7 @@ using cubos::core::reflection::Type;
 
 CUBOS_REFLECT_IMPL(ArrayTrait)
 {
-    return Type::create("cubos::core::ecs::ArrayTrait");
+    return Type::create("cubos::core::reflection::ArrayTrait");
 }
 
 ArrayTrait::ArrayTrait(const Type& elementType, Length length, AddressOf addressOf)

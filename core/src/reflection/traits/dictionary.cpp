@@ -7,7 +7,7 @@ using cubos::core::reflection::Type;
 
 CUBOS_REFLECT_IMPL(DictionaryTrait)
 {
-    return Type::create("cubos::core::ecs::DictionaryTrait");
+    return Type::create("cubos::core::reflection::DictionaryTrait");
 }
 
 DictionaryTrait::DictionaryTrait(const Type& keyType, const Type& valueType, Length length, Begin begin, Find find,

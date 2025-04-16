@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Infinite terrain profiling sample (#1487, **@tomas7770**).
 - New ImGui Inspector with custom hook support and better UI (#1179, **@RiscadoA**).
 - Support for MaskTrait and EnumTrait on the inspector (**@RiscadoA**).
+- VectorTrait for providing information about math vector types (**@RiscadoA**).
 
 ### Changed
 

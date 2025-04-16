@@ -5,7 +5,7 @@ using cubos::core::reflection::StringConversionTrait;
 
 CUBOS_REFLECT_IMPL(StringConversionTrait)
 {
-    return Type::create("cubos::core::ecs::StringConversionTrait");
+    return Type::create("cubos::core::reflection::StringConversionTrait");
 }
 
 StringConversionTrait::StringConversionTrait(Into into, From from)

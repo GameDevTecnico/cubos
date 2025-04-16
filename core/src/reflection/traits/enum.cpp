@@ -7,7 +7,7 @@ using cubos::core::reflection::EnumTrait;
 
 CUBOS_REFLECT_IMPL(EnumTrait)
 {
-    return Type::create("cubos::core::ecs::EnumTrait");
+    return Type::create("cubos::core::reflection::EnumTrait");
 }
 
 EnumTrait::~EnumTrait()

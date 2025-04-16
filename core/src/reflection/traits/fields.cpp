@@ -7,7 +7,7 @@ using namespace cubos::core::reflection;
 
 CUBOS_REFLECT_IMPL(FieldsTrait)
 {
-    return Type::create("cubos::core::ecs::FieldsTrait");
+    return Type::create("cubos::core::reflection::FieldsTrait");
 }
 
 FieldsTrait::Field::~Field()
