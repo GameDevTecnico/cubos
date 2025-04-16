@@ -1,6 +1,6 @@
 # ImGui {#examples-engine-imgui}
 
-@brief Using the @ref imgui-plugin plugin and the @ref cubos::engine::DataInspector "DataInspector" resource.
+@brief Using the @ref imgui-plugin plugin and the @ref cubos::engine::ImGuiInspector "ImGuiInspector" resource.
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/imgui).
 
@@ -22,7 +22,7 @@ To do so, you can add a startup system just like the one below:
 @snippet imgui/main.cpp ImGui initialization
 
 You can read more about this in the documentation of @ref cubos::engine::ImGuiContextHolder.
-Now, you can create systems to display ImGui windows and widgets. Here's a system which opens an ImGui window, and its demo.
+Now, you can create systems to display ImGui windows and widgets. Here's a system which opens the ImGui demo window.
 
 @snippet imgui/main.cpp ImGui Demo
 
@@ -30,19 +30,11 @@ Ensure that you add your system with the `cubos.imgui` tag; otherwise, the ImGui
 
 Pretty simple right? You're now equipped to craft and utilize ImGui's functions to design your cool user interface.
 
-Now, we'll also show you how you can use the @ref cubos::engine::DataInspector resource in combination with @ref imgui-plugin plugin to inspect/modify data in real time.
+Now, we'll also show you how you can use the @ref cubos::engine::ImGuiInspector resource in combination with @ref imgui-plugin plugin to inspect/modify data in real time. All you have to do, is use the functions `ImGuiInspector::show` and `ImGuiInspector::edit`.
 
-To start off, we'll need to have some sort of dummy data shared across our application, so we can inspect/modify later. Let's create a `DummyResource` with some fields and fill it with random data.
+@note Any value you want to inspect must have reflection implemented. In case you did not read about @ref core-reflection yet, you should take a look at that first.
 
-@note In case you did not read about @ref core-reflection yet, you should take a look at that first, since we'll use some of it's concepts here.
-
-@snippet imgui/main.cpp Creating a dummy resource
-
-@snippet imgui/main.cpp Filling the dummy resource
-
-Well now, using the @ref cubos::engine::DataInspector is pretty easy, all you have to do is access the resource on your system, and use the functions `DataInspector::edit` and `DataInspector::edit`.
-
-@snippet imgui/main.cpp DataInspector window example
+@snippet imgui/main.cpp ImGuiInspector window example
 
 ![](imgui/img2.png)
 
