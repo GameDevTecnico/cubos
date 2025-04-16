@@ -7,7 +7,7 @@ using cubos::core::reflection::MaskTrait;
 
 CUBOS_REFLECT_IMPL(MaskTrait)
 {
-    return Type::create("cubos::core::ecs::MaskTrait");
+    return Type::create("cubos::core::reflection::MaskTrait");
 }
 
 MaskTrait::~MaskTrait()

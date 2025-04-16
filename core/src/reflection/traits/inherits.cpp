@@ -5,7 +5,7 @@ using namespace cubos::core::reflection;
 
 CUBOS_REFLECT_IMPL(InheritsTrait)
 {
-    return Type::create("cubos::core::ecs::InheritsTrait");
+    return Type::create("cubos::core::reflection::InheritsTrait");
 }
 
 const Type& InheritsTrait::base() const
