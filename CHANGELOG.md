@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
 - Perform frustum culling for voxel meshes (#1183, **@mkuritsu**).
 - Infinite terrain profiling sample (#1487, **@tomas7770**).
+- New ImGui Inspector with custom hook support and better UI (#1179, **@RiscadoA**).
+- Support for MaskTrait and EnumTrait on the inspector (**@RiscadoA**).
+- VectorTrait for providing information about math vector types (**@RiscadoA**).
+- Support for VectorTrait on the inspector (**@RiscadoA**).
+- Support for quaternions on the inspector (#1018, **@RiscadoA**).
+- Decomposition of 4x4 matrices into translation, scale and rotation on the inspector (#1179, **@RiscadoA**).
 
 ### Changed
 
