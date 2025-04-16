@@ -57,7 +57,7 @@ int main(int argc, char** argv)
             environment.ambient = {0.01F, 0.01F, 0.01F};
             environment.skyGradient[0] = {0.1F, 0.2F, 0.4F};
             environment.skyGradient[1] = {0.6F, 0.6F, 0.8F};
-            commands.spawn(assets.read(SceneAsset)->blueprint);
+            commands.spawn(assets.read(SceneAsset)->blueprint());
         });
 
     cubos.startupSystem("create a voxel grid").tagged(assetsTag).call([](Commands commands, Assets& assets) {
