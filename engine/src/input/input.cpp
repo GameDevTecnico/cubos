@@ -216,7 +216,7 @@ int Input::gamepadCount() const
     return static_cast<int>(mGamepadStates.size());
 }
 
-bool Input::pressed(const char* actionName, int player) const
+bool Input::pressed(std::string_view actionName, int player) const
 {
     auto pIt = mPlayerBindings.find(player);
     if (pIt == mPlayerBindings.end())
@@ -228,14 +228,14 @@ bool Input::pressed(const char* actionName, int player) const
     auto aIt = pIt->second.actions().find(actionName);
     if (aIt == pIt->second.actions().end())
     {
-        CUBOS_WARN("Action {} is not bound to any input for player {}", actionName, player);
+        CUBOS_WARN("Action {} is not bound to any input for player {}", std::string(actionName), player);
         return false;
     }
 
     return aIt->second.pressed();
 }
 
-bool Input::justPressed(const char* actionName, int player) const
+bool Input::justPressed(std::string_view actionName, int player) const
 {
     auto pIt = mPlayerBindings.find(player);
     if (pIt == mPlayerBindings.end())
@@ -247,14 +247,14 @@ bool Input::justPressed(const char* actionName, int player) const
     auto aIt = pIt->second.actions().find(actionName);
     if (aIt == pIt->second.actions().end())
     {
-        CUBOS_WARN("Action {} is not bound to any input for player {}", actionName, player);
+        CUBOS_WARN("Action {} is not bound to any input for player {}", std::string(actionName), player);
         return false;
     }
 
     return aIt->second.justPressed();
 }
 
-bool Input::justReleased(const char* actionName, int player) const
+bool Input::justReleased(std::string_view actionName, int player) const
 {
     auto pIt = mPlayerBindings.find(player);
     if (pIt == mPlayerBindings.end())
@@ -266,14 +266,14 @@ bool Input::justReleased(const char* actionName, int player) const
     auto aIt = pIt->second.actions().find(actionName);
     if (aIt == pIt->second.actions().end())
     {
-        CUBOS_WARN("Action {} is not bound to any input for player {}", actionName, player);
+        CUBOS_WARN("Action {} is not bound to any input for player {}", std::string(actionName), player);
         return false;
     }
 
     return aIt->second.justReleased();
 }
 
-float Input::axis(const char* axisName, int player) const
+float Input::axis(std::string_view axisName, int player) const
 {
     auto pIt = mPlayerBindings.find(player);
     if (pIt == mPlayerBindings.end())
@@ -285,7 +285,7 @@ float Input::axis(const char* axisName, int player) const
     auto aIt = pIt->second.axes().find(axisName);
     if (aIt == pIt->second.axes().end())
     {
-        CUBOS_WARN("Axis {} is not bound to any input for player {}", axisName, player);
+        CUBOS_WARN("Axis {} is not bound to any input for player {}", std::string(axisName), player);
         return 0.0F;
     }
 
