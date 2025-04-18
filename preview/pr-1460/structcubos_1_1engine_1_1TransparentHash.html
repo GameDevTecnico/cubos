@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::Raycast::Ray struct | Cubos Docs</title>
+  <title>cubos::engine::TransparentHash struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,38 +46,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1Raycast.html">Raycast</a>::<wbr/></span>Ray <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="raycast_8hpp.html">&lt;engine/collisions/raycast.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>TransparentHash <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="bindings_8hpp.html">&lt;engine/input/bindings.hpp&gt;</a></div>
         </h1>
-        <p>Describes the ray used in a raycast query.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a43997e09c32940d37bcf9783f605fbc0">
-              glm::vec3 <a href="#a43997e09c32940d37bcf9783f605fbc0" class="m-doc-self">origin</a>
-            </dt>
-            <dd>Origin of the ray.</dd>
-            <dt id="a47005abe6ebf122bce74eba2be8e2ad6">
-              glm::vec3 <a href="#a47005abe6ebf122bce74eba2be8e2ad6" class="m-doc-self">direction</a>
-            </dt>
-            <dd>Direction of the ray.</dd>
-            <dt id="a54b6c23630d6da29d3c1cad1b0419e4c">
-              uint32_t <a href="#a54b6c23630d6da29d3c1cad1b0419e4c" class="m-doc-self">mask</a>
-            </dt>
-            <dd>Mask of collision layers to consider. By default, considers all layers.</dd>
-          </dl>
-        </section>
+        <p>Redefines hash function for std::string_view and std::string.</p>
+<p>This allows using std::string_view as a key in unordered_map, while still allowing std::string as a key.</p>
       </div>
     </div>
   </div>
