@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::TransparentHash struct | Cubos Docs</title>
+  <title>cubos::engine::InputTransparentHash class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,11 +46,84 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>TransparentHash <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="bindings_8hpp.html">&lt;engine/input/bindings.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>InputTransparentHash <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="transparent__hash_8hpp.html">&lt;engine/input/transparent_hash.hpp&gt;</a></div>
         </h1>
-        <p>Redefines hash function for std::string_view and std::string.</p>
+        <p>Hash function for std::string and std::string_view, implemented as a class.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
 <p>This allows using std::string_view as a key in unordered_map, while still allowing std::string as a key.</p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a20fb42f3f610342c13ae20945ccf61bf" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">std::string_view sv) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Hash function for std::string_view.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0c698d04e2150693dd9f0a8c589a16b6" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; s) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Hash function for std::string.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a20fb42f3f610342c13ae20945ccf61bf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />InputTransparentHash::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20fb42f3f610342c13ae20945ccf61bf" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">std::string_view sv) const</span></span>
+            </h3>
+            <p>Hash function for std::string_view.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">sv</td>
+                  <td>The string view to hash.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The hash value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0c698d04e2150693dd9f0a8c589a16b6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />InputTransparentHash::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c698d04e2150693dd9f0a8c589a16b6" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; s) const</span></span>
+            </h3>
+            <p>Hash function for std::string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">s</td>
+                  <td>The string to hash.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The hash value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>
