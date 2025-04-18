@@ -133,6 +133,14 @@
             </dt>
             <dd>Relation which represents a collision.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1CollisionLayers.html" class="m-doc">CollisionLayers</a>
+            </dt>
+            <dd>Component that contains the collision layers where the collider appears in. Check also <a href="structcubos_1_1engine_1_1CollisionMask.html" class="m-doc">CollisionMask</a>.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1CollisionMask.html" class="m-doc">CollisionMask</a>
+            </dt>
+            <dd>Component that contains the mask of layers which the collider can collide with. Check also <a href="structcubos_1_1engine_1_1CollisionLayers.html" class="m-doc">CollisionLayers</a>.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1ContactFeatureId.html" class="m-doc">ContactFeatureId</a>
             </dt>
             <dd>Indicates the type of a geometric feature (vertex, edge, or face) and the feature index. Currently each feature index is simply the index in the array with that information in the shape.</dd>
@@ -701,6 +709,39 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a87d86f20e91eadc1c8819beae3a01408" class="m-doc">boxShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              glm::vec3 dimensions) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for box shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a066a2321327cbc466defc737b1ae3859" class="m-doc">ballShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float radius) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for ball shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a80fe68032fd6a18e18f2448e5e1066d3" class="m-doc">cylinderShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float height,
+              float radius) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for capsule shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8596a5a124d7fcf540367a591c85134" class="m-doc">capsuleShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float length,
+              float radius) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for cylinder shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acd01edd2648e457ad8f44cbe1526c163" class="m-doc">voxelShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              const <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a>&amp; shape) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for a voxel shape. In case the shape is not symmetric, the inertia will not be diagonal.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab89dff72cc0168bde0757ea86eafe155" class="m-doc">shiftedInertiaTensor</a>(</span><span class="m-doc-wrap">const glm::mat3&amp; matrix,
+              const glm::vec3&amp; shift,
+              const float mass) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Computes the inertia tensor shifted by the given vector, taking into account the given mass.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__physics-plugin.html#ga00def8619be17481204ec8e876ea9e3e" class="m-doc">physicsPlugin</a>(</span><span class="m-doc-wrap"><a href="#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">Cubos</a>&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -1249,6 +1290,198 @@
               </tbody>
             </table>
 <aside class="m-note m-default"><h4>See also</h4><p>Systems can read sent events using <a href="#aa962f62de69af44f93726b63b90295e0" class="m-doc">EventReader</a>.</p></aside>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a87d86f20e91eadc1c8819beae3a01408"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a87d86f20e91eadc1c8819beae3a01408" class="m-doc-self">boxShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              glm::vec3 dimensions)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="inertia_8hpp.html">&lt;engine/physics/components/inertia.hpp&gt;</a></div>
+            </h3>
+            <p>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for box shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">mass</td>
+                  <td>of the body.</td>
+                </tr>
+                <tr>
+                  <td>dimensions</td>
+                  <td>of the shape.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for a box shape.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a066a2321327cbc466defc737b1ae3859"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a066a2321327cbc466defc737b1ae3859" class="m-doc-self">ballShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float radius)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="inertia_8hpp.html">&lt;engine/physics/components/inertia.hpp&gt;</a></div>
+            </h3>
+            <p>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for ball shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">mass</td>
+                  <td>of the body.</td>
+                </tr>
+                <tr>
+                  <td>radius</td>
+                  <td>of the shape.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> tensor for a ball shape.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a80fe68032fd6a18e18f2448e5e1066d3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80fe68032fd6a18e18f2448e5e1066d3" class="m-doc-self">cylinderShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float height,
+              float radius)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="inertia_8hpp.html">&lt;engine/physics/components/inertia.hpp&gt;</a></div>
+            </h3>
+            <p>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for capsule shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">mass</td>
+                  <td>of the body.</td>
+                </tr>
+                <tr>
+                  <td>height</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>radius</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for a cylinder shape.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8596a5a124d7fcf540367a591c85134"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8596a5a124d7fcf540367a591c85134" class="m-doc-self">capsuleShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float length,
+              float radius)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="inertia_8hpp.html">&lt;engine/physics/components/inertia.hpp&gt;</a></div>
+            </h3>
+            <p>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for cylinder shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">mass</td>
+                  <td>of the body.</td>
+                </tr>
+                <tr>
+                  <td>length</td>
+                  <td>of the shape. Corresponds to just the height of the cylinder part.</td>
+                </tr>
+                <tr>
+                  <td>radius</td>
+                  <td>of the shape.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> tensor for a capsule shape.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acd01edd2648e457ad8f44cbe1526c163"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acd01edd2648e457ad8f44cbe1526c163" class="m-doc-self">voxelShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              const <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a>&amp; shape)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="inertia_8hpp.html">&lt;engine/physics/components/inertia.hpp&gt;</a></div>
+            </h3>
+            <p>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for a voxel shape. In case the shape is not symmetric, the inertia will not be diagonal.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">mass</td>
+                  <td><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> of the body.</td>
+                </tr>
+                <tr>
+                  <td>shape</td>
+                  <td>Voxel collision shape.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> tensor for a voxel shape.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab89dff72cc0168bde0757ea86eafe155"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab89dff72cc0168bde0757ea86eafe155" class="m-doc-self">shiftedInertiaTensor</a>(</span><span class="m-doc-wrap">const glm::mat3&amp; matrix,
+              const glm::vec3&amp; shift,
+              const float mass)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="inertia_8hpp.html">&lt;engine/physics/components/inertia.hpp&gt;</a></div>
+            </h3>
+            <p>Computes the inertia tensor shifted by the given vector, taking into account the given mass.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">matrix</td>
+                  <td>The inertia tensor.</td>
+                </tr>
+                <tr>
+                  <td>shift</td>
+                  <td>The offset to shift the inertia tensor.</td>
+                </tr>
+                <tr>
+                  <td>mass</td>
+                  <td><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> to consider for the shift.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> tensor shifted by the given offset.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
         <section>
