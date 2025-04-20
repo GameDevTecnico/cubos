@@ -218,7 +218,7 @@ void cubos::engine::shadowAtlasRasterizerPlugin(Cubos& cubos)
                 {
                     // Send the PerMesh data to the GPU.
                     PerMesh perMesh{
-                        .model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset),
+                        .model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset + (mesh.baseOffset * -1.0F)),
                     };
                     state.perMeshCB->fill(&perMesh, sizeof(perMesh));
 

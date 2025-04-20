@@ -99,9 +99,8 @@ int main()
 
     cubos.startupSystem("create colliders").tagged(assetsTag).call([](State& state, Commands commands, Assets& assets) {
         auto car = assets.read(CarAsset);
-        glm::vec3 offset = glm::vec3(car->size().x, car->size().y, car->size().z) / -2.0F;
         state.a = commands.create()
-                      .add(RenderVoxelGrid{CarAsset, offset})
+                      .add(RenderVoxelGrid{CarAsset})
                       .add(VoxelCollisionShape(CarAsset))
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -113,7 +112,7 @@ int main()
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
         state.b = commands.create()
-                      .add(RenderVoxelGrid{CarAsset, offset})
+                      .add(RenderVoxelGrid{CarAsset})
                       .add(VoxelCollisionShape(CarAsset))
                       .add(CollisionLayers{})
                       .add(CollisionMask{})

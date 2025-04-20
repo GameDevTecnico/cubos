@@ -2,9 +2,9 @@
     "cubos::engine::RenderVoxelGrid": {
         "asset": "fe862296-fab7-4bf9-b62e-3cc28448dff1",
         "offset": {
-            "x": -4,
-            "y": 0,
-            "z": -4
+            "x": 0,
+            "y": -0.5,
+            "z": 0
         }
     },
     "cubos::engine::Rotation": {

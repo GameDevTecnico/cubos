@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Blueprint entity naming scheme from dots to # (#1398, **@RiscadoA**).
 - Scene format is now hierarchy based (#1398, **@RiscadoA**).
+- Change RenderVoxelGrid pivot to the center of the grids (#1442, **@kuukitenshi**).
 
 ### Fixed
 
