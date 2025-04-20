@@ -935,6 +935,63 @@ auto Cubos::ObserverBuilder::onDestroy(int target) && -> ObserverBuilder&&
     return std::move(*this);
 }
 
+auto Cubos::ObserverBuilder::onRelate(const reflection::Type& type, int fromTarget, int toTarget) && -> ObserverBuilder&&
+{
+    CUBOS_ASSERT(mCubos.isRegistered(type), "No such relation type {} was registered", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isRelation(dataTypeId), "Type {} isn't registered as a relation", type.name());
+    CUBOS_ASSERT(mColumnId == ColumnId::Invalid, "An observer can only have at most one hook");
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (fromTarget == -1)
+    {
+        fromTarget = mDefaultTarget;
+    }
+    if (toTarget == -1)
+    {
+        toTarget = fromTarget + 1;
+    }
+
+    mDefaultTarget = toTarget;
+    mOptions.back().observedTarget = fromTarget;
+    mRemove = false;
+    mDestroy = false;
+    mColumnId = ColumnId::make(mCubos.mWorld->types().id(type));
+    return std::move(*this);
+}
+
+auto Cubos::ObserverBuilder::onUnrelate(const reflection::Type& type, int fromTarget, int toTarget) && -> ObserverBuilder&&
+{
+    CUBOS_ASSERT(mCubos.isRegistered(type), "No such relation type {} was registered", type.name());
+    auto dataTypeId = mCubos.mWorld->types().id(type);
+    CUBOS_ASSERT(mCubos.mWorld->types().isRelation(dataTypeId), "Type {} isn't registered as a relation", type.name());
+    CUBOS_ASSERT(mColumnId == ColumnId::Invalid, "An observer can only have at most one hook");
+
+    if (mOptions.empty())
+    {
+        mOptions.emplace_back();
+    }
+
+    if (fromTarget == -1)
+    {
+        fromTarget = mDefaultTarget;
+    }
+    if (toTarget == -1)
+    {
+        toTarget = fromTarget + 1;
+    }
+
+    mDefaultTarget = toTarget;
+    mOptions.back().observedTarget = fromTarget;
+    mRemove = true;
+    mDestroy = false;
+    mColumnId = ColumnId::make(mCubos.mWorld->types().id(type));
+    return std::move(*this);
+}
 
 auto Cubos::ObserverBuilder::entity(int target) && -> ObserverBuilder&&
 {

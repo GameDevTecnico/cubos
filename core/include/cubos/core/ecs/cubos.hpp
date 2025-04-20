@@ -623,6 +623,36 @@ namespace cubos::core::ecs
         /// @return Builder.
         ObserverBuilder&& onDestroy(int target = -1) &&;
 
+        /// @brief Triggers the observer whenever the given relation is added between entities.
+        /// @param type Relation type.
+        /// @param fromTarget From target index. By default, the last specified target or 0.
+        /// @param toTarget To target index. By default, @p fromTarget + 1.
+        /// @return Builder.
+        ObserverBuilder&& onRelate(const reflection::Type& type, int fromTarget = -1, int toTarget = -1) &&;
+
+        /// @copydoc onRelate(const reflection::Type&, int, int)
+        /// @tparam T Relation type.
+        template <typename T>
+        ObserverBuilder&& onRelate(int fromTarget = -1, int toTarget = -1) &&
+        {
+            return std::move(*this).onRelate(reflection::reflect<T>(), fromTarget, toTarget);
+        }
+
+        /// @brief Triggers the observer whenever the given relation is removed between entities.
+        /// @param type Relation type.
+        /// @param fromTarget From target index. By default, the last specified target or 0.
+        /// @param toTarget To target index. By default, @p fromTarget + 1.
+        /// @return Builder.
+        ObserverBuilder&& onUnrelate(const reflection::Type& type, int fromTarget = -1, int toTarget = -1) &&;
+
+        /// @copydoc onUnrelate(const reflection::Type&, int, int)
+        /// @tparam T Relation type.
+        template <typename T>
+        ObserverBuilder&& onUnrelate(int fromTarget = -1, int toTarget = -1) &&
+        {
+            return std::move(*this).onUnrelate(reflection::reflect<T>(), fromTarget, toTarget);
+        }
+
         /// @brief Forces the next entity query argument to have the given target.
         /// @param target Target index. By default, the last specified target or 0.
         /// @return Builder.

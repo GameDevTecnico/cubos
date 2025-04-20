@@ -411,6 +411,17 @@ void World::relate(Entity from, Entity to, const reflection::Type& type, void* v
     // Get or create the table and insert a new row.
     auto& table = mTables.sparseRelation().create(tableId, mTypes);
     table.insert(from.index, to.index, value);
+    
+    // Notify the observers of the new relation.
+    CommandBuffer cmdBuffer{*this};
+    if (mObservers->notifyRelate(cmdBuffer, from, ColumnId::make(dataType)))
+    {
+        cmdBuffer.commit();
+    }
+    if (mObservers->notifyRelate(cmdBuffer, to, ColumnId::make(dataType)))
+    {
+        cmdBuffer.commit();
+    }
     CUBOS_TRACE("Added relation {} from entity {} to entity {}", type.name(), from, to);
 }
 
@@ -445,6 +456,18 @@ void World::unrelate(Entity from, Entity to, const reflection::Type& type)
             auto& table = mTables.sparseRelation().at(tableId);
             if (table.erase(from.index, to.index))
             {
+                // If the relation was erased, we need to notify the observers.
+                // We need to notify the observers of the 'from' and 'to' entity.
+                CommandBuffer cmdBuffer{*this};
+                if (mObservers->notifyUnrelate(cmdBuffer, from, ColumnId::make(dataType)))
+                {
+                    cmdBuffer.commit();
+                }
+                if (mObservers->notifyUnrelate(cmdBuffer, to, ColumnId::make(dataType)))
+                {
+                    cmdBuffer.commit();
+                }
+
                 CUBOS_TRACE("Removed relation {} from entity {} to entity {}", type.name(), from, to);
 
                 if (mTypes.isTreeRelation(dataType))
