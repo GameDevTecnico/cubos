@@ -68,6 +68,18 @@ void cubos::engine::transformPlugin(Cubos& cubos)
         .without<LocalToParent>()
         .call(addComponent<LocalToParent>);
 
+    cubos.observer("destroy childs when parent is destroyed")
+        .onDestroy()
+        .call([](Query<Entity> query, Query<Entity, const ChildOf&> children, Commands cmds) {
+            for (auto [entity] : query)
+            {
+                for (auto [child, childOf] : children.pin(1, entity))
+                {
+                    cmds.destroy(child);
+                }
+            }
+        });
+
     cubos.system("update LocalToParent's")
         .tagged(transformUpdateTag)
         .before(transformUpdatePropagateTag)

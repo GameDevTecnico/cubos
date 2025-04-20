@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Infinite terrain profiling sample (#1487, **@tomas7770**).
 - Added inertia for voxel shape (**@fallenatlas**).
 - Added a method to Query to count the number of matches (#1451, **@GalaxyCrush**).
+- Destroy child entities when parent entities are destroyed (#1418, **@kuukitenshi**).
+
 
 ### Changed
 
@@ -27,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Deferred shading missing padding leading to black screen on web builds (#1476, **@RiscadoA**).
 - Crashes when adding shadow casters (#1471, **@GalaxyCrush**).
+
 
 ## [v0.6.0] - 2025-02-10
 
