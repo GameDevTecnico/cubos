@@ -65,6 +65,43 @@ bool Observers::notifyDestroy(CommandBuffer& commandBuffer, Entity entity, Colum
     return triggered;
 }
 
+bool Observers::notifyRelate(CommandBuffer& commandBuffer, Entity entity, ColumnId column)
+{
+    bool triggered = false;
+
+    auto range = mOnRelate.equal_range(column);
+    for (auto it = range.first; it != range.second; ++it)
+    {
+        auto* observer = mObservers[it->second.inner];
+        if (observer != nullptr)
+        {
+            observer->run({.cmdBuffer = commandBuffer, .observedEntity = entity});
+            triggered = true;
+        }
+    }
+
+    return triggered;
+}
+
+bool Observers::notifyUnrelate(CommandBuffer& commandBuffer, Entity entity, ColumnId column)
+{
+    bool triggered = false;
+
+    auto range = mOnUnrelate.equal_range(column);
+    for (auto it = range.first; it != range.second; ++it)
+    {
+        auto* observer = mObservers[it->second.inner];
+        if (observer != nullptr)
+        {
+            observer->run({.cmdBuffer = commandBuffer, .observedEntity = entity});
+            triggered = true;
+        }
+    }
+
+    return triggered;
+}
+
+
 ObserverId Observers::hookOnAdd(ColumnId column, System<void> observer)
 {
     ObserverId id{.inner = mObservers.size()};
@@ -86,6 +123,22 @@ ObserverId Observers::hookOnDestroy(ColumnId column, System<void> observer)
     ObserverId id{.inner = mObservers.size()};
     mObservers.push_back(new System<void>(std::move(observer)));
     mOnDestroy.emplace(column, id);
+    return id;
+}
+
+ObserverId Observers::hookOnRelate(ColumnId column, System<void> observer)
+{
+    ObserverId id{.inner = mObservers.size()};
+    mObservers.push_back(new System<void>(std::move(observer)));
+    mOnRelate.emplace(column, id);
+    return id;
+}
+
+ObserverId Observers::hookOnUnrelate(ColumnId column, System<void> observer)
+{
+    ObserverId id{.inner = mObservers.size()};
+    mObservers.push_back(new System<void>(std::move(observer)));
+    mOnUnrelate.emplace(column, id);
     return id;
 }
 

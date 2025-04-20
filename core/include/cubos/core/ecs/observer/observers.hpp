@@ -42,6 +42,20 @@ namespace cubos::core::ecs
         /// @return Whether an observer was triggered.
         bool notifyDestroy(CommandBuffer& commandBuffer, Entity entity, ColumnId column);
 
+        /// @brief Notifies that the given entity has a new relationship.
+        /// @param commandBuffer Command buffer to record the any commands emitted by the observer.
+        /// @param entity Entity.
+        /// @param column Column.
+        /// @return Whether an observer was triggered.
+        bool notifyRelate(CommandBuffer& commandBuffer, Entity entity, ColumnId column);
+
+        /// @brief Notifies that the given entity has lost a relationship.
+        /// @param commandBuffer Command buffer to record the any commands emitted by the observer.
+        /// @param entity Entity.
+        /// @param column Column.
+        /// @return Whether an observer was triggered.
+        bool notifyUnrelate(CommandBuffer& commandBuffer, Entity entity, ColumnId column);
+
         /// @brief Hooks an observer to the addition of a column.
         /// @param column Column.
         /// @param observer Observer system.
@@ -60,6 +74,18 @@ namespace cubos::core::ecs
         /// @return Observer identifier.
         ObserverId hookOnDestroy(ColumnId column, System<void> observer);
 
+        /// @brief Hooks an observer to add the relationship of a column.
+        /// @param column Column.
+        /// @param observer Observer system.
+        /// @return Observer identifier.
+        ObserverId hookOnRelate(ColumnId column, System<void> observer);
+
+        /// @brief Hooks an observer to the removal of a relationship of a column.
+        /// @param column Column.
+        /// @param observer Observer system.
+        /// @return Observer identifier.
+        ObserverId hookOnUnrelate(ColumnId column, System<void> observer);
+
         /// @brief Unhooks an observer.
         /// @param id Observer identifier.
         void unhook(ObserverId id);
@@ -69,5 +95,7 @@ namespace cubos::core::ecs
         std::unordered_multimap<ColumnId, ObserverId, ColumnIdHash> mOnAdd;
         std::unordered_multimap<ColumnId, ObserverId, ColumnIdHash> mOnRemove;
         std::unordered_multimap<ColumnId, ObserverId, ColumnIdHash> mOnDestroy;
+        std::unordered_multimap<ColumnId, ObserverId, ColumnIdHash> mOnRelate;
+        std::unordered_multimap<ColumnId, ObserverId, ColumnIdHash> mOnUnrelate;
     };
 } // namespace cubos::core::ecs
