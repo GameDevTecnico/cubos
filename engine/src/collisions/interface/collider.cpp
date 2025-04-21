@@ -6,7 +6,5 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::Collider)
 {
-    return core::ecs::TypeBuilder<Collider>("cubos::engine::Collider")
-        .withField("transform", &Collider::transform)
-        .build();
+    return core::ecs::TypeBuilder<Collider>("cubos::engine::Collider").build();
 }

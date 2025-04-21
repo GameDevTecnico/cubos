@@ -12,7 +12,7 @@
 #include <cubos/core/ecs/system/fetcher.hpp>
 #include <cubos/core/geom/box.hpp>
 
-#include <cubos/engine/collisions/collider.hpp>
+// #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
@@ -59,9 +59,8 @@ namespace cubos::engine
         /// @param boxes Query for entities with box colliders.
         /// @param capsules Query for entities with capsule colliders.
         Raycast(
-            Query<Entity, const LocalToWorld&, const Collider&, const BoxCollisionShape&, const CollisionLayers&> boxes,
-            Query<Entity, const LocalToWorld&, const Collider&, const CapsuleCollisionShape&, const Position&,
-                  const CollisionLayers&>
+            Query<Entity, const LocalToWorld&, const BoxCollisionShape&, const CollisionLayers&> boxes,
+            Query<Entity, const LocalToWorld&, const CapsuleCollisionShape&, const Position&, const CollisionLayers&>
                 capsules)
             : mBoxes{std::move(boxes)}
             , mCapsules{std::move(capsules)} {};
@@ -72,9 +71,8 @@ namespace cubos::engine
         Opt<Hit> fire(Ray ray);
 
     private:
-        Query<Entity, const LocalToWorld&, const Collider&, const BoxCollisionShape&, const CollisionLayers&> mBoxes;
-        Query<Entity, const LocalToWorld&, const Collider&, const CapsuleCollisionShape&, const Position&,
-              const CollisionLayers&>
+        Query<Entity, const LocalToWorld&, const BoxCollisionShape&, const CollisionLayers&> mBoxes;
+        Query<Entity, const LocalToWorld&, const CapsuleCollisionShape&, const Position&, const CollisionLayers&>
             mCapsules;
     };
 } // namespace cubos::engine
@@ -87,12 +85,11 @@ namespace cubos::core::ecs
     public:
         static inline constexpr bool ConsumesOptions = false;
 
-        SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::Collider&,
-                            const cubos::engine::BoxCollisionShape&, const cubos::engine::CollisionLayers&>>
-            boxes;
-        SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::Collider&,
-                            const cubos::engine::CapsuleCollisionShape&, const cubos::engine::Position&,
+        SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::BoxCollisionShape&,
                             const cubos::engine::CollisionLayers&>>
+            boxes;
+        SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::CapsuleCollisionShape&,
+                            const cubos::engine::Position&, const cubos::engine::CollisionLayers&>>
             capsules;
 
         SystemFetcher(World& world, const SystemOptions& options)

@@ -70,7 +70,7 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
                                         glm::vec4{corners[2], 1.0F}, glm::vec4{corners[3], 1.0F}};
 
                 // Transforms collider space to world space.
-                auto transform = localToWorld.mat * collider.transform;
+                auto transform = localToWorld.mat;
 
                 // Only want scale and rotation, extract translation and remove it.
                 auto translation = glm::vec3{transform[3]};

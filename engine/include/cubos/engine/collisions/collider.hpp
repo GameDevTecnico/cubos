@@ -19,8 +19,6 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
-        glm::mat4 transform{1.0F}; ///< Transform of the collider.
-
         core::geom::AABB localAABB{}; ///< Local space AABB of the collider.
         core::geom::AABB worldAABB{}; ///< World space AABB of the collider.
 

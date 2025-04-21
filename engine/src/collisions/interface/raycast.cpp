@@ -140,14 +140,14 @@ cubos::engine::Opt<cubos::engine::Raycast::Hit> cubos::engine::Raycast::fire(Ray
     // normalize the ray
     ray.direction = glm::normalize(ray.direction);
 
-    for (auto [entity, localToWorld, collider, shape, layers] : mBoxes)
+    for (auto [entity, localToWorld, shape, layers] : mBoxes)
     {
         if ((ray.mask & layers.value) == 0U)
         {
             continue;
         }
 
-        auto worldToLocal = glm::inverse(collider.transform) * localToWorld.inverse();
+        auto worldToLocal = localToWorld.inverse();
         Ray localRay = {glm::vec3(worldToLocal * glm::vec4(ray.origin, 1.0F)),
                         glm::normalize(glm::vec3(worldToLocal * glm::vec4(ray.direction, 0.0F)))};
         float scalar = intersects(localRay, shape.box);
@@ -162,14 +162,14 @@ cubos::engine::Opt<cubos::engine::Raycast::Hit> cubos::engine::Raycast::fire(Ray
         }
     }
 
-    for (auto [entity, localToWorld, collider, shape, position, layers] : mCapsules)
+    for (auto [entity, localToWorld, shape, position, layers] : mCapsules)
     {
         if ((ray.mask & layers.value) == 0U)
         {
             continue;
         }
 
-        auto worldToLocal = glm::inverse(collider.transform) * localToWorld.inverse();
+        auto worldToLocal = localToWorld.inverse();
         Ray localRay = {glm::vec3(worldToLocal * glm::vec4(ray.origin, 1.0F)),
                         glm::normalize(glm::vec3(worldToLocal * glm::vec4(ray.direction, 0.0F)))};
         float scalar = intersects(localRay, worldToLocal, shape.capsule, position);
