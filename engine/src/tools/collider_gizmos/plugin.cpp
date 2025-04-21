@@ -29,7 +29,7 @@ void cubos::engine::colliderGizmosPlugin(Cubos& cubos)
                 if (showAll || ent == selection.entity)
                 {
                     auto size = shape.box.halfSize * 2.0F;
-                    auto transform = glm::scale(localToWorld.mat * collider.transform, size);
+                    auto transform = glm::scale(localToWorld.mat, size);
                     gizmos.drawWireBox("collider-gizmos", transform);
                 }
             }

@@ -216,7 +216,7 @@ int main(int argc, char** argv)
             for (auto [localToWorld, collider] : query)
             {
                 auto size = collider.localAABB.box().halfSize * 2.0F;
-                glm::mat4 transform = glm::scale(localToWorld.mat * collider.transform, size);
+                glm::mat4 transform = glm::scale(localToWorld.mat, size);
                 gizmos.color({1.0F, 1.0F, 1.0F});
                 gizmos.drawWireBox("local AABB", transform);
 
