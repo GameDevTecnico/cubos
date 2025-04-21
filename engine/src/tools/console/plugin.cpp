@@ -18,6 +18,7 @@ namespace
         char searchString[256];
         bool clearEnabled = false;
         bool collapseEnabled = false;
+        bool autoScrollEnabled = true;
         bool traceEnabled = true;
         bool debugEnabled = true;
         bool infoEnabled = true;
@@ -103,6 +104,12 @@ void cubos::engine::consolePlugin(Cubos& cubos)
             {cubos::core::tel::Level::Error, 0}, {cubos::core::tel::Level::Critical, 0}};
 
         ImGui::BeginChild("Log", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()));
+
+        // If scrolled up manually, disable auto-scroll
+        if (state.autoScrollEnabled && ImGui::IsWindowHovered() && ImGui::GetIO().MouseWheel > 0)
+        {
+            state.autoScrollEnabled = false;
+        }
 
         while (cubos::core::tel::Logger::read(state.cursor, entry))
         {
@@ -199,6 +206,12 @@ void cubos::engine::consolePlugin(Cubos& cubos)
             }
         }
 
+        // If auto-scroll is enabled and a new entry was added, scroll to bottom
+        if (state.autoScrollEnabled && ImGui::GetScrollY() >= ImGui::GetScrollMaxX())
+        {
+            ImGui::SetScrollHereY(1.0F);
+        }
+
         ImGui::EndChild();
 
         // Input Search Bar
@@ -219,6 +232,9 @@ void cubos::engine::consolePlugin(Cubos& cubos)
         {
             state.collapseEnabled = !state.collapseEnabled;
         }
+
+        // Auto-Scroll Checkbox
+        ImGui::Checkbox("Auto-Scroll", &state.autoScrollEnabled);
 
         std::string traceText = "Trace (" + std::to_string(logCounts[cubos::core::tel::Level::Trace]) + ")";
         if (ImGui::SmallButton(traceText.c_str()))

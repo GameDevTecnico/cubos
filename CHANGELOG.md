@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automatically add ColliderAABB when adding a Collision Shape to an entity (#1444, **@fallenatlas**).
 - Wrapper trait to distinguish between single-field structs and wrapper structs (**SrGesus**, **@RiscadoA**).
 - Bindings subpropject for future lua bindings (#1496, **@mkuritsu**).
+- Added an auto-scroll toggle to Console tool (#1438, **@R-Camacho**)
 
 ### Changed
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).

@@ -11,6 +11,7 @@ concurrency: preview-${{ github.ref }}
 
 jobs:
   build:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-22.04
 
     steps:
