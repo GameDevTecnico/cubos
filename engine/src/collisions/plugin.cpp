@@ -4,7 +4,6 @@
 #include <cubos/core/reflection/external/glm.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
-#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>

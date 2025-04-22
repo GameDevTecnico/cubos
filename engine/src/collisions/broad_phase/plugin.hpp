@@ -9,6 +9,7 @@
 
 #include <cubos/engine/prelude.hpp>
 
+#include "collider_aabb.hpp"
 #include "potentially_colliding_with.hpp"
 
 namespace cubos::engine
