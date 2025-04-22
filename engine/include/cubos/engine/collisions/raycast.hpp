@@ -12,7 +12,6 @@
 #include <cubos/core/ecs/system/fetcher.hpp>
 #include <cubos/core/geom/box.hpp>
 
-// #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>

@@ -3,6 +3,7 @@
 #include <cubos/core/ecs/name.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/raycast.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
@@ -35,7 +36,7 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
+                .add(ColliderAABB{})
                 .add(CollisionLayers{});
 
             cmds.create()
@@ -43,7 +44,7 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{1.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
+                .add(ColliderAABB{})
                 .add(CollisionLayers{});
 
             cmds.create()
@@ -51,7 +52,7 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, 1.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
+                .add(ColliderAABB{})
                 .add(CollisionLayers{});
 
             cmds.create()
@@ -59,7 +60,7 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{-1.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
+                .add(ColliderAABB{})
                 .add(CollisionLayers{});
 
             cmds.create()
@@ -67,7 +68,7 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, -1.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
+                .add(ColliderAABB{})
                 .add(CollisionLayers{});
         });
 
@@ -104,7 +105,7 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(CapsuleCollisionShape{{1, 1}})
-                .add(Collider{})
+                .add(ColliderAABB{})
                 .add(CollisionLayers{});
         });
 
