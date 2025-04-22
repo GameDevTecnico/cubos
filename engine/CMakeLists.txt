@@ -89,7 +89,7 @@ set(CUBOS_ENGINE_SOURCE
 
 	"src/collisions/plugin.cpp"
 	"src/collisions/interface/plugin.cpp"
-	"src/collisions/interface/collider.cpp"
+	"src/collisions/interface/collider_aabb.cpp"
 	"src/collisions/interface/colliding_with.cpp"
 	"src/collisions/interface/contact_manifold.cpp"
 	"src/collisions/interface/shapes/box.cpp"

@@ -8,7 +8,6 @@
 #include <cubos/core/geom/plane.hpp>
 #include <cubos/core/geom/utils.hpp>
 
-#include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/contact_manifold.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/voxel.hpp>
