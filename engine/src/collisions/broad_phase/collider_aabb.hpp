@@ -12,8 +12,10 @@
 namespace cubos::engine
 {
     /// @brief Component which adds an collider AABB to an entity.
+    ///
+    /// Added automatically when any collision shape is added to the entity.
     /// @ingroup collisions-plugin
-    struct CUBOS_ENGINE_API ColliderAABB
+    struct ColliderAABB
     {
         CUBOS_REFLECT;
 

@@ -1,4 +1,3 @@
-#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/gizmos/plugin.hpp>
