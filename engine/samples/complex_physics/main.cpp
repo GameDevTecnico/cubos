@@ -2,7 +2,6 @@
 #include <glm/gtx/vector_angle.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
-#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
@@ -115,7 +114,6 @@ int main(int argc, char** argv)
     cubos.startupSystem("load and spawn the scene").tagged(assetsTag).call([](Commands cmds, const Assets& assets) {
         // Spawn floor collider
         cmds.create()
-            .add(ColliderAABB{})
             .add(BoxCollisionShape{cubos::core::geom::Box{.halfSize = glm::vec3{20.0F, 0.5F, 20.0F}}})
             .add(CollisionLayers{})
             .add(CollisionMask{})

@@ -117,7 +117,6 @@ int main(int argc, char** argv)
 
     cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
         state.a = commands.create()
-                      .add(ColliderAABB{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -129,7 +128,6 @@ int main(int argc, char** argv)
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
         state.b = commands.create()
-                      .add(ColliderAABB{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
