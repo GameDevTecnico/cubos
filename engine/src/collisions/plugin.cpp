@@ -195,36 +195,36 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
 
     cubos.tag(collisionsTag).addTo(collisionsBroadTag).addTo(collisionsNarrowTag).addTo(collisionsManifoldTag);
 
-    auto initializeBoxColliders = [](Query<const BoxCollisionShape&, ColliderAABB&> query) {
-        for (auto [shape, colliderAABB] : query)
+    auto initializeBoxColliders = [](Commands cmds, Query<Entity, const BoxCollisionShape&> query) {
+        for (auto [entity, shape] : query)
         {
+            auto colliderAABB = ColliderAABB{.margin = 0.04F};
             shape.box.diag(colliderAABB.localAABB.diag);
-            colliderAABB.margin = 0.04F;
+            cmds.add(entity, colliderAABB);
         }
     };
 
     cubos.observer("setup Box Colliders").onAdd<BoxCollisionShape>().call(initializeBoxColliders);
-    cubos.observer("setup Box Colliders").onAdd<ColliderAABB>().call(initializeBoxColliders);
 
-    auto initializeCapsuleColliders = [](Query<const CapsuleCollisionShape&, ColliderAABB&> query) {
-        for (auto [shape, colliderAABB] : query)
+    auto initializeCapsuleColliders = [](Commands cmds, Query<Entity, const CapsuleCollisionShape&> query) {
+        for (auto [entity, shape] : query)
         {
-            colliderAABB.localAABB = shape.capsule.aabb();
-            colliderAABB.margin = 0.0F;
+            auto colliderAABB = ColliderAABB{.localAABB = shape.capsule.aabb(), .margin = 0.0F};
+            cmds.add(entity, colliderAABB);
         }
     };
 
     cubos.observer("setup Capsule Colliders").onAdd<CapsuleCollisionShape>().call(initializeCapsuleColliders);
-    cubos.observer("setup Capsule Colliders").onAdd<ColliderAABB>().call(initializeCapsuleColliders);
 
-    auto initializeVoxelColliders = [](const Assets& assets, Query<VoxelCollisionShape&, ColliderAABB&> query) {
-        for (auto [shape, colliderAABB] : query)
+    auto initializeVoxelColliders = [](Commands cmds, const Assets& assets, Query<Entity, VoxelCollisionShape&> query) {
+        for (auto [entity, shape] : query)
         {
             // load the voxel grid
             const VoxelGrid& grid = assets.read(shape.grid).get();
             // set the local AABB
+            auto colliderAABB = ColliderAABB{.margin = 0.04F};
             voxelGridToAABB(grid, colliderAABB.localAABB);
-            colliderAABB.margin = 0.04F;
+            cmds.add(entity, colliderAABB);
 
             glm::uvec3 size = grid.size();
             glm::vec3 center = glm::vec3(size) / 2.0F;
@@ -244,5 +244,4 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
     };
 
     cubos.observer("setup Voxel Colliders").onAdd<VoxelCollisionShape>().call(initializeVoxelColliders);
-    cubos.observer("setup Voxel Colliders").onAdd<ColliderAABB>().call(initializeVoxelColliders);
 }

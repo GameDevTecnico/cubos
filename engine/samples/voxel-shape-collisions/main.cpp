@@ -100,7 +100,6 @@ int main()
         auto car = assets.read(CarAsset);
         glm::vec3 offset = glm::vec3(car->size().x, car->size().y, car->size().z) / -2.0F;
         state.a = commands.create()
-                      .add(ColliderAABB{})
                       .add(RenderVoxelGrid{CarAsset, offset})
                       .add(VoxelCollisionShape(CarAsset))
                       .add(CollisionLayers{})
@@ -113,7 +112,6 @@ int main()
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
         state.b = commands.create()
-                      .add(ColliderAABB{})
                       .add(RenderVoxelGrid{CarAsset, offset})
                       .add(VoxelCollisionShape(CarAsset))
                       .add(CollisionLayers{})
