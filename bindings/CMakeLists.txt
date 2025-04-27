@@ -1,4 +1,8 @@
 # bindings/CMakeLists.txt
 # Cubos bindings build configuration
 
-add_subdirectory(lua)
+option(CUBOS_BINDINGS_LUA "Build lua bindings library" ON)
+
+if(CUBOS_BINDINGS_LUA)
+    add_subdirectory(lua)
+endif()
