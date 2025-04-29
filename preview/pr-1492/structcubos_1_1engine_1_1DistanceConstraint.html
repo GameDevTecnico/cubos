@@ -49,7 +49,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DistanceConstraint <span class="m-thin">struct</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="distance__constraint_8hpp.html">&lt;engine/physics/constraints/distance_constraint.hpp&gt;</a></div>
         </h1>
-        <p>Relation which holds the information for resolving a limited distance between particles.</p>
+        <p>Relation that holds the information for a distance constraint between two physics bodies.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -71,19 +71,15 @@
             <dt id="a4de23b6c5860f74cdbc8f176c7990c99">
               float <a href="#a4de23b6c5860f74cdbc8f176c7990c99" class="m-doc-self">fixedDistance</a>
             </dt>
-            <dd>Fixed distance between anchor points.</dd>
+            <dd>Fixed distance between anchor points (only used in the rigid case)</dd>
             <dt id="a41da91cbbb48ccb480b5b5362f513325">
               float <a href="#a41da91cbbb48ccb480b5b5362f513325" class="m-doc-self">minDistance</a>
             </dt>
-            <dd>Minimum distance between anchor points.</dd>
+            <dd>Minimum distance between anchor points (only used when non-rigid)</dd>
             <dt id="afd74387a7d1977ff823c1f0169da8938">
               float <a href="#afd74387a7d1977ff823c1f0169da8938" class="m-doc-self">maxDistance</a>
             </dt>
-            <dd>Maximum distance between anchor points.</dd>
-            <dt id="af590adc56fc20283c9fc3221c9909165">
-              glm::vec3 <a href="#af590adc56fc20283c9fc3221c9909165" class="m-doc-self">deltaCenter</a>
-            </dt>
-            <dd>The world-space vector from the center of the first body to the second.</dd>
+            <dd>Maximum distance between anchor points (only used when non-rigid)</dd>
             <dt id="a92b16bf2bb88ea4d55afdd9dad45c228">
               glm::vec3 <a href="#a92b16bf2bb88ea4d55afdd9dad45c228" class="m-doc-self">localAnchor1</a>
             </dt>
@@ -92,6 +88,10 @@
               glm::vec3 <a href="#a40b18e2c7182833619300d7ee219d2fd" class="m-doc-self">localAnchor2</a>
             </dt>
             <dd>The local contact point relative to the center of mass of the second body.</dd>
+            <dt id="af590adc56fc20283c9fc3221c9909165">
+              glm::vec3 <a href="#af590adc56fc20283c9fc3221c9909165" class="m-doc-self">deltaCenter</a>
+            </dt>
+            <dd>The world-space vector from the center of the first body to the second.</dd>
             <dt id="af763961b38c7a261884b58d1d925866f">
               float <a href="#af763961b38c7a261884b58d1d925866f" class="m-doc-self">axialMass</a>
             </dt>
