@@ -270,7 +270,7 @@ void main()
     bd->ibSize = 0;
 }
 
-void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale)
+void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale, const Font& font)
 {
     // Initialize ImGui
     IMGUI_CHECKVERSION();
@@ -326,10 +326,12 @@ void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale)
         dpiScale = 1.0F;
     }
     ImGui::GetStyle().ScaleAllSizes(dpiScale);
-    ImFontConfig fontCfg;
+    ImFontConfig fontCfg{};
     // Default font size is 13; scale that
     fontCfg.SizePixels = 13.0F * dpiScale;
-    io.Fonts->AddFontDefault(&fontCfg);
+    fontCfg.FontDataOwnedByAtlas = false;
+    io.Fonts->AddFontFromMemoryTTF(const_cast<void*>(static_cast<const void*>(font.data().data())),
+                                   static_cast<int>(font.data().size()), 0.0F, &fontCfg);
 
     createDeviceObjects();
 

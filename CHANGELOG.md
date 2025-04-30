@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow mouse state to be changed through the input plugin (#1401, **@mcanais**).
 - Move the reflection implementation of each physics component into its own file (**@fallenatlas**).
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
+- Use Roboto font in ImGui, following the Brand Guidelines (#817, **@RiscadoA**).
 
 ### Changed
 
