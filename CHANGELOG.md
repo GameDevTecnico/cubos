@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Pretty Emscripten HTML template with mobile support (**@NunoBaptista57**, **@RiscadoA**).
 - Voxel collision shapes to debug collider gizmos (**@RiscadoA**).
 - Raycasting support to the voxel collision shapes (**@RiscadoA**).
 - Reflection support for C arrays (**@RiscadoA**).
