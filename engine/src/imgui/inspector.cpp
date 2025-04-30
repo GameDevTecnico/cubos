@@ -201,7 +201,7 @@ ImGuiInspector::State::State()
             ImGui::PushID(name.c_str());
             ImGui::Indent();
 
-            auto& fields = type.get<FieldsTrait>();
+            const auto& fields = type.get<FieldsTrait>();
             bool modified = false;
             for (const auto& [field, fieldValue] : fields.view(value))
             {
@@ -235,7 +235,7 @@ ImGuiInspector::State::State()
             ImGui::PushID(name.c_str());
             ImGui::Indent();
 
-            auto& array = type.get<ArrayTrait>();
+            const auto& array = type.get<ArrayTrait>();
             auto arrayView = array.view(value);
             bool modified = false;
             std::size_t eraseI = arrayView.length();
@@ -326,7 +326,7 @@ ImGuiInspector::State::State()
         ImGui::PushID(name.c_str());
         ImGui::Indent();
 
-        auto& dictionary = type.get<DictionaryTrait>();
+        const auto& dictionary = type.get<DictionaryTrait>();
         auto dictionaryView = dictionary.view(value);
         bool modified = false;
         DictionaryTrait::View::Iterator eraseIt = dictionaryView.end();
@@ -429,7 +429,7 @@ ImGuiInspector::State::State()
             return ImGuiInspector::HookResult::Unhandled;
         }
 
-        auto& stringConversion = type.get<StringConversionTrait>();
+        const auto& stringConversion = type.get<StringConversionTrait>();
         std::string str = stringConversion.into(value);
         ImGui::BeginDisabled(readOnly);
         bool modified = ImGui::InputText(name.c_str(), &str);
@@ -464,7 +464,7 @@ ImGuiInspector::State::State()
             return ImGuiInspector::HookResult::Unhandled;
         }
 
-        auto& enumTrait = type.get<EnumTrait>();
+        const auto& enumTrait = type.get<EnumTrait>();
         ImGui::BeginDisabled(readOnly);
         bool modified = false;
         if (ImGui::BeginCombo(name.c_str(), enumTrait.variant(value).name().c_str()))
@@ -501,7 +501,7 @@ ImGuiInspector::State::State()
             return ImGuiInspector::HookResult::Unhandled;
         }
 
-        auto& mask = type.get<MaskTrait>();
+        const auto& mask = type.get<MaskTrait>();
         std::string maskStr = "";
         for (const auto& bit : mask.view(value))
         {
@@ -586,7 +586,7 @@ ImGuiInspector::State::State()
             return ImGuiInspector::HookResult::Unhandled;
         }
 
-        auto& vector = type.get<VectorTrait>();
+        const auto& vector = type.get<VectorTrait>();
         ImGuiDataType dataType;
         if (vector.scalarType().is<float>())
         {
