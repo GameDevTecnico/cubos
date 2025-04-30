@@ -449,7 +449,7 @@ ImGuiInspector::State::State()
 
         if (ImGui::BeginPopup("String conversion error"))
         {
-            ImGui::TextColored({1.0f, 0.0f, 0.0f, 1.0f}, "String is not a valid representation of the type %s",
+            ImGui::TextColored({1.0F, 0.0F, 0.0F, 1.0F}, "String is not a valid representation of the type %s",
                                type.shortName().c_str());
             ImGui::EndPopup();
         }
@@ -700,8 +700,8 @@ ImGuiInspector::State::State()
                 inspector.show("perspective", perspective);
                 if (modified)
                 {
-                    mat = glm::translate(glm::dmat4(1.0f), translation) * glm::toMat4(orientation) *
-                          glm::scale(glm::dmat4(1.0f), scale);
+                    mat = glm::translate(glm::dmat4(1.0F), translation) * glm::toMat4(orientation) *
+                          glm::scale(glm::dmat4(1.0F), scale);
                     if (type.is<glm::mat4>())
                     {
                         *static_cast<glm::mat4*>(value) = static_cast<glm::mat4>(mat);
