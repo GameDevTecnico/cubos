@@ -57,6 +57,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -77,6 +78,44 @@
               struct <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">cubos::engine::Inertia</a>
             </dt>
             <dd>Component which defines the inertia of a body.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine.html#a87d86f20e91eadc1c8819beae3a01408" class="m-doc">boxShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              glm::vec3 dimensions) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for box shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine.html#a066a2321327cbc466defc737b1ae3859" class="m-doc">ballShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float radius) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for ball shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine.html#a80fe68032fd6a18e18f2448e5e1066d3" class="m-doc">cylinderShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float height,
+              float radius) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for capsule shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine.html#ae8596a5a124d7fcf540367a591c85134" class="m-doc">capsuleShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              float length,
+              float radius) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for cylinder shape. The shape is symmetric so it guarantees a diagonal inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine.html#acd01edd2648e457ad8f44cbe1526c163" class="m-doc">voxelShapeInertiaTensor</a>(</span><span class="m-doc-wrap">float mass,
+              const VoxelCollisionShape&amp; shape) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Compute <a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> Tensor for a voxel shape. In case the shape is not symmetric, the inertia will not be diagonal.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine.html#ab89dff72cc0168bde0757ea86eafe155" class="m-doc">shiftedInertiaTensor</a>(</span><span class="m-doc-wrap">const glm::mat3&amp; matrix,
+              const glm::vec3&amp; shift,
+              const float mass) -&gt; glm::mat3 <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a></span>
+            </dt>
+            <dd>Computes the inertia tensor shifted by the given vector, taking into account the given mass.</dd>
           </dl>
         </section>
       </div>
