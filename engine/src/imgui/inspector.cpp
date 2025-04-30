@@ -502,7 +502,7 @@ ImGuiInspector::State::State()
         }
 
         const auto& mask = type.get<MaskTrait>();
-        std::string maskStr = "";
+        std::string maskStr;
         for (const auto& bit : mask.view(value))
         {
             if (!maskStr.empty())
