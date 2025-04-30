@@ -76,7 +76,7 @@ void ImGuiInspector::hook(Hook hook)
 ImGuiInspector::State::State()
 {
     // Catch all unhandled types.
-    hooks.push_back([](const std::string& name, bool, ImGuiInspector&, const Type& type, void*) {
+    hooks.emplace_back([](const std::string& name, bool, ImGuiInspector&, const Type& type, void*) {
         std::string label = "unsupported";
         ImGui::BeginDisabled(true);
         ImGui::InputText(name.c_str(), label.data(), label.size());
@@ -90,7 +90,7 @@ ImGuiInspector::State::State()
     });
 
     // Catch all primitive types.
-    hooks.push_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+    hooks.emplace_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
         ImGui::BeginDisabled(readOnly);
         bool modified = false;
 
@@ -181,7 +181,7 @@ ImGuiInspector::State::State()
     });
 
     // Handle object types.
-    hooks.push_back(
+    hooks.emplace_back(
         [](const std::string& name, bool readOnly, ImGuiInspector& inspector, const Type& type, void* value) {
             if (!type.has<FieldsTrait>())
             {
@@ -215,7 +215,7 @@ ImGuiInspector::State::State()
         });
 
     // Handle array types.
-    hooks.push_back(
+    hooks.emplace_back(
         [](const std::string& name, bool readOnly, ImGuiInspector& inspector, const Type& type, void* value) {
             if (!type.has<ArrayTrait>())
             {
@@ -306,8 +306,8 @@ ImGuiInspector::State::State()
         });
 
     // Handle dictionary types.
-    hooks.push_back([newKey = AnyValue{}](const std::string& name, bool readOnly, ImGuiInspector& inspector,
-                                          const Type& type, void* value) mutable {
+    hooks.emplace_back([newKey = AnyValue{}](const std::string& name, bool readOnly, ImGuiInspector& inspector,
+                                             const Type& type, void* value) mutable {
         if (!type.has<DictionaryTrait>())
         {
             return ImGuiInspector::HookResult::Unhandled;
@@ -423,7 +423,7 @@ ImGuiInspector::State::State()
     });
 
     // Handle string conversion types.
-    hooks.push_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+    hooks.emplace_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
         if (!type.has<StringConversionTrait>())
         {
             return ImGuiInspector::HookResult::Unhandled;
@@ -458,7 +458,7 @@ ImGuiInspector::State::State()
     });
 
     // Handle enum types.
-    hooks.push_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+    hooks.emplace_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
         if (!type.has<EnumTrait>())
         {
             return ImGuiInspector::HookResult::Unhandled;
@@ -495,7 +495,7 @@ ImGuiInspector::State::State()
     });
 
     // Handle mask types.
-    hooks.push_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+    hooks.emplace_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
         if (!type.has<MaskTrait>())
         {
             return ImGuiInspector::HookResult::Unhandled;
@@ -580,7 +580,7 @@ ImGuiInspector::State::State()
     });
 
     // Handle primitive vector types.
-    hooks.push_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+    hooks.emplace_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
         if (!type.has<VectorTrait>())
         {
             return ImGuiInspector::HookResult::Unhandled;
@@ -621,7 +621,7 @@ ImGuiInspector::State::State()
     });
 
     // Handle GLM quaternion types.
-    hooks.push_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+    hooks.emplace_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
         bool modified = false;
 
         if (type.is<glm::quat>())
@@ -664,7 +664,7 @@ ImGuiInspector::State::State()
     });
 
     // Handle 4x4 GLM matrices.
-    hooks.push_back(
+    hooks.emplace_back(
         [](const std::string& name, bool readOnly, ImGuiInspector& inspector, const Type& type, void* value) {
             if (type.is<glm::mat4>() || type.is<glm::dmat4>())
             {
