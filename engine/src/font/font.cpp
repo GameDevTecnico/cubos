@@ -59,4 +59,8 @@ namespace cubos::engine
         return mHandle;
     }
 
+    const std::vector<uint8_t>& Font::data() const
+    {
+        return mData;
+    }
 } // namespace cubos::engine

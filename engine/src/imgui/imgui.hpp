@@ -7,14 +7,17 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
 
+#include <cubos/engine/font/font.hpp>
+
 namespace cubos::engine
 {
     /// @brief Initializes ImGui for use with the given window.
     /// @note Should only be called once and no ImGui calls should be made before this is called.
     /// @param window The window to use.
     /// @param dpiScale Size factor by which to scale ImGui elements.
+    /// @param font Font to use.
     /// @ingroup imgui-plugin
-    void imguiInitialize(const core::io::Window& window, float dpiScale);
+    void imguiInitialize(const core::io::Window& window, float dpiScale, const Font& font);
 
     /// @brief Shuts down ImGui.
     /// @note Should only be called once, after @ref initialize(), and no ImGui calls should be

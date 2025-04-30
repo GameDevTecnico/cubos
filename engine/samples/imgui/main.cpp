@@ -19,6 +19,8 @@
 #include <cubos/core/reflection/traits/nullable.hpp>
 
 /// [Including plugin headers]
+#include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/font/plugin.hpp>
 #include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 /// [Including plugin headers]
@@ -271,9 +273,16 @@ int main(int argc, char** argv)
     cubos.plugin(settingsPlugin);
     cubos.plugin(windowPlugin);
     cubos.plugin(renderTargetPlugin);
+    cubos.plugin(assetsPlugin);
+    cubos.plugin(fontPlugin);
     /// [Adding the plugin]
     cubos.plugin(imguiPlugin);
     /// [Adding the plugin]
+
+    cubos.startupSystem("configure settings").before(settingsTag).call([](Settings& settings) {
+        settings.setString("assets.app.osPath", APP_ASSETS_PATH);
+        settings.setString("assets.builtin.osPath", BUILTIN_ASSETS_PATH);
+    });
 
     /// [ImGui initialization]
     cubos.startupSystem("set ImGui context").after(imguiInitTag).call([](ImGuiContextHolder& holder) {
