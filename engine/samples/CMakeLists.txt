@@ -30,6 +30,12 @@ function(make_sample)
     target_link_libraries(${target} cubos::engine)
     cubos_common_target_options(${target})
 
+    if(EMSCRIPTEN)
+      target_link_options(${target} PRIVATE
+        "SHELL:--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/emscripten.html"
+      )
+    endif()
+
     if(MAKE_SAMPLE_ASSETS)
       if(EMSCRIPTEN)
         target_link_options(${target} PRIVATE
