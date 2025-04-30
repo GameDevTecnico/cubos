@@ -199,33 +199,33 @@ struct State
 {
     CUBOS_REFLECT;
 
-    bool bool_primitive{true};
-    char char_primitive{'A'};
-    signed char signed_char_primitive{1};
-    short short_primitive{-123};
-    int int_primitive{-321};
-    long long_primitive{12345};
-    long long long_long_primitive{987654321};
-    unsigned char unsigned_char_primitive{5};
-    unsigned short unsigned_short_primitive{55};
-    unsigned int unsigned_int_primitive{555};
-    unsigned long unsigned_long_primitive{5555};
-    unsigned long long unsigned_long_long_primitive{55555};
-    float float_primitive{3.14159265359F};
-    double double_primitive{2.718281828459045235360287471352};
+    bool boolPrimitive{true};
+    char charPrimitive{'A'};
+    signed char signedCharPrimitive{1};
+    short shortPrimitive{-123};
+    int intPrimitive{-321};
+    long longPrimitive{12345};
+    long long longLongPrimitive{987654321};
+    unsigned char unsignedCharPrimitive{5};
+    unsigned short unsignedShortPrimitive{55};
+    unsigned int unsignedIntPrimitive{555};
+    unsigned long unsignedLongPrimitive{5555};
+    unsigned long long unsignedLongLongPrimitive{55555};
+    float floatPrimitive{3.14159265359F};
+    double doublePrimitive{2.718281828459045235360287471352};
     std::string string{"Hello, ImGui!"};
-    MyUnsupported my_unsupported;
-    MyEnum my_enum{MyEnum::Foo};
-    MyMask my_mask{MyMask::Flag1 | MyMask::Flag3};
-    MyStruct my_struct;
-    std::vector<int> int_vector{1, 2, 3, 4, 5};
-    std::vector<MyStruct> my_struct_vector{{1, 0.1F}, {2, 0.2F}};
-    std::map<int, int> int_int_map{{1, 2}, {2, 1}, {3, 4}, {4, 3}};
-    std::map<MyEnum, MyStruct> enum_struct_map{
+    MyUnsupported myUnsupported;
+    MyEnum myEnum{MyEnum::Foo};
+    MyMask myMask{MyMask::Flag1 | MyMask::Flag3};
+    MyStruct myStruct;
+    std::vector<int> intVector{1, 2, 3, 4, 5};
+    std::vector<MyStruct> myStructVector{{1, 0.1F}, {2, 0.2F}};
+    std::map<int, int> intIntMap{{1, 2}, {2, 1}, {3, 4}, {4, 3}};
+    std::map<MyEnum, MyStruct> enumStructMap{
         {MyEnum::Foo, {1, 0.1F}},
         {MyEnum::Bar, {2, 0.2F}},
     };
-    std::map<int, std::map<int, int>> int_int_int_map{
+    std::map<int, std::map<int, int>> intIntIntMap{
         {1, {{1, 2}, {2, 3}}},
         {2, {{3, 5}, {4, 6}}},
     };
@@ -236,30 +236,30 @@ CUBOS_REFLECT_IMPL(State)
 {
     return Type::create("State")
         .with(FieldsTrait()
-                  .withField("bool_primitive", &State::bool_primitive)
-                  .withField("char_primitive", &State::char_primitive)
-                  .withField("signed_char_primitive", &State::signed_char_primitive)
-                  .withField("short_primitive", &State::short_primitive)
-                  .withField("int_primitive", &State::int_primitive)
-                  .withField("long_primitive", &State::long_primitive)
-                  .withField("long_long_primitive", &State::long_long_primitive)
-                  .withField("unsigned_char_primitive", &State::unsigned_char_primitive)
-                  .withField("unsigned_short_primitive", &State::unsigned_short_primitive)
-                  .withField("unsigned_int_primitive", &State::unsigned_int_primitive)
-                  .withField("unsigned_long_primitive", &State::unsigned_long_primitive)
-                  .withField("unsigned_long_long_primitive", &State::unsigned_long_long_primitive)
-                  .withField("float_primitive", &State::float_primitive)
-                  .withField("double_primitive", &State::double_primitive)
+                  .withField("boolPrimitive", &State::boolPrimitive)
+                  .withField("charPrimitive", &State::charPrimitive)
+                  .withField("signedCharPrimitive", &State::signedCharPrimitive)
+                  .withField("shortPrimitive", &State::shortPrimitive)
+                  .withField("intPrimitive", &State::intPrimitive)
+                  .withField("longPrimitive", &State::longPrimitive)
+                  .withField("longLongPrimitive", &State::longLongPrimitive)
+                  .withField("unsignedCharPrimitive", &State::unsignedCharPrimitive)
+                  .withField("unsignedShortPrimitive", &State::unsignedShortPrimitive)
+                  .withField("unsignedIntPrimitive", &State::unsignedIntPrimitive)
+                  .withField("unsignedLongPrimitive", &State::unsignedLongPrimitive)
+                  .withField("unsignedLongLongPrimitive", &State::unsignedLongLongPrimitive)
+                  .withField("floatPrimitive", &State::floatPrimitive)
+                  .withField("doublePrimitive", &State::doublePrimitive)
                   .withField("string", &State::string)
-                  .withField("my_unsupported", &State::my_unsupported)
-                  .withField("my_enum", &State::my_enum)
-                  .withField("my_mask", &State::my_mask)
-                  .withField("my_struct", &State::my_struct)
-                  .withField("int_vector", &State::int_vector)
-                  .withField("my_struct_vector", &State::my_struct_vector)
-                  .withField("int_int_map", &State::int_int_map)
-                  .withField("enum_struct_map", &State::enum_struct_map)
-                  .withField("int_int_int_map", &State::int_int_int_map)
+                  .withField("myUnsupported", &State::myUnsupported)
+                  .withField("myEnum", &State::myEnum)
+                  .withField("myMask", &State::myMask)
+                  .withField("myStruct", &State::myStruct)
+                  .withField("intVector", &State::intVector)
+                  .withField("myStructVector", &State::myStructVector)
+                  .withField("intIntMap", &State::intIntMap)
+                  .withField("enumStructMap", &State::enumStructMap)
+                  .withField("intIntIntMap", &State::intIntIntMap)
                   .withField("glm", &State::glm))
         .with(ConstructibleTrait::typed<State>().withDefaultConstructor().build());
 }
