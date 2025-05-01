@@ -9,6 +9,8 @@
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
+#include <cubos/engine/render/depth/depth.hpp>
+#include <cubos/engine/render/depth/plugin.hpp>
 #include <cubos/engine/render/picker/picker.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
@@ -54,6 +56,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
     cubos.depends(cameraPlugin);
     cubos.depends(renderPickerPlugin);
     cubos.depends(renderTargetPlugin);
+    cubos.depends(renderDepthPlugin);
 
     cubos.resource<Gizmos>();
     cubos.resource<GizmosRenderer>();
@@ -105,14 +108,14 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
         .tagged(gizmosDrawTag)
         .tagged(drawToRenderPickerTag)
         .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, const DeltaTime& deltaTime,
-                 Query<Entity, RenderTarget&, Opt<RenderPicker&>, GizmosTarget&> targets,
+                 Query<Entity, RenderTarget&, Opt<RenderPicker&>, RenderDepth&, GizmosTarget&> targets,
                  Query<const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = *gizmosRenderer.renderDevice;
             auto orthoVP =
                 glm::translate(glm::mat4(1.0F), glm::vec3(-1.0F, -1.0F, 0.0F)) * glm::ortho(-0.5F, 0.5F, -0.5F, 0.5F);
 
             // Draw gizmos to each of the requested targets.
-            for (auto [targetEnt, target, picker, gizmosTarget] : targets)
+            for (auto [targetEnt, target, picker, depth, gizmosTarget] : targets)
             {
                 // Prepare a framebuffer for drawing to the picker texture, if necessary.
                 if (picker.contains() && picker.value().frontTexture != nullptr)
@@ -120,15 +123,18 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                     if (gizmosTarget.frontPicker != picker.value().frontTexture)
                     {
                         std::swap(gizmosTarget.frontPicker, gizmosTarget.backPicker);
+                        std::swap(gizmosTarget.frontDepth, gizmosTarget.backDepth);
                         std::swap(gizmosTarget.frontFramebuffer, gizmosTarget.backFramebuffer);
                     }
-                    if (gizmosTarget.frontPicker != picker.value().frontTexture)
+                    if (gizmosTarget.frontPicker != picker.value().frontTexture ||
+                        gizmosTarget.frontDepth != depth.texture)
                     {
                         FramebufferDesc desc{};
                         desc.targetCount = 1;
                         desc.targets[0].setTexture2DTarget(picker.value().frontTexture);
-
+                        desc.depthStencil.setTexture2DTarget(depth.texture);
                         gizmosTarget.frontPicker = picker.value().frontTexture;
+                        gizmosTarget.frontDepth = depth.texture;
                         gizmosTarget.frontFramebuffer = rd.createFramebuffer(desc);
                     }
                 }
@@ -158,7 +164,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                                   static_cast<int>(drawsTo.viewportSize.x * static_cast<float>(target.size.x)),
                                   static_cast<int>(drawsTo.viewportSize.y * static_cast<float>(target.size.y)));
 
-                    // Prepare camera projection (TODO: fetch this matrix from a Camera component).
+                    // Prepare camera view projection matrix.
                     auto worldVP = camera.projection * glm::inverse(localToWorld.mat);
 
                     // Draw world-space gizmos.
@@ -212,7 +218,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                                   static_cast<int>(drawsTo.viewportSize.x * static_cast<float>(target.size.x)),
                                   static_cast<int>(drawsTo.viewportSize.y * static_cast<float>(target.size.y)));
 
-                    // Prepare camera projection (TODO: fetch this matrix from a Camera component).
+                    // Prepare camera view projection matrix.
                     auto worldVP = camera.projection * glm::inverse(localToWorld.mat);
 
                     // Draw world-space gizmos.

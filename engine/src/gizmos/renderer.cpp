@@ -80,6 +80,7 @@ void GizmosRenderer::init(RenderDevice* currentRenderDevice)
     cubos::core::gl::DepthStencilStateDesc dss;
     dss.depth.enabled = true;
     dss.depth.writeEnabled = true;
+    dss.depth.compare = Compare::LEqual;
     doDepthCheckStencilState = renderDevice->createDepthStencilState(dss);
     dss.depth.enabled = false;
     dss.depth.writeEnabled = false;
