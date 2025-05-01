@@ -28,5 +28,11 @@ namespace cubos::engine
 
         /// @brief Picker texture present in the @ref backFramebuffer.
         core::gl::Texture2D backPicker;
+
+        /// @brief Depth texture present in the @ref frontFramebuffer.
+        core::gl::Texture2D frontDepth;
+
+        /// @brief Depth texture present in the @ref backFramebuffer.
+        core::gl::Texture2D backDepth;
     };
 } // namespace cubos::engine
