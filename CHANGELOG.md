@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deferred shading missing padding leading to black screen on web builds (#1476, **@RiscadoA**).
 - Crashes when adding shadow casters (#1471, **@GalaxyCrush**).
 - Open settings file in correct mode when saving (**@RiscadoA**).
+- Entity and gizmo selection (#1475, **@RiscadoA**).
 
 ## [v0.6.0] - 2025-02-10
 
