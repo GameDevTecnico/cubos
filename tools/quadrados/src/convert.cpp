@@ -9,6 +9,7 @@
 #include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/voxels/grid.hpp>
+#include <cubos/engine/voxels/model.hpp>
 #include <cubos/engine/voxels/palette.hpp>
 
 #include "tools.hpp"
@@ -29,14 +30,6 @@ struct ConvertOptions
     bool force = false;                              ///< Enables force mode.
     bool help = false;                               ///< Prints the help message.
     float similarity = 1.0F;                         ///< The similarity threshold.
-};
-
-/// @brief Represents the data read from a matrix in a QB file.
-struct QBMatrix
-{
-    VoxelGrid grid;       ///< Grid of the matrix.
-    VoxelPalette palette; ///< VoxelPalette of the matrix.
-    glm::ivec3 position;  ///< Position of the matrix.
 };
 
 /// Prints the help message of the program.
@@ -167,156 +160,6 @@ static bool parseArguments(int argc, char** argv, ConvertOptions& options)
     return true;
 }
 
-/// @brief Parses a Qubicle file (.qb), pushing every matrix found in the file to the passed vector.
-/// @param[out] matrices Parsed matrices.
-/// @param stream Stream to read from.
-/// @return Whether the file was parsed successfully.
-bool parseQB(std::vector<QBMatrix>& matrices, memory::Stream& stream)
-{
-    uint8_t version[4] = {0, 0, 0, 0};
-    uint32_t colorFormat;
-    uint32_t zAxisOrientation;
-    uint32_t compressed;
-    uint32_t visibilityMaskEncoded;
-    uint32_t numMatrices;
-
-    // Parse the version of the file.
-    stream.read(version, 4);
-    if (stream.eof())
-    {
-        CUBOS_ERROR("Unexpected end of file while reading file version");
-        return false;
-    }
-    if (version[0] != 1 || version[1] != 1 || version[2] != 0 || version[3] != 0)
-    {
-        CUBOS_ERROR("Unsupported version {}.{}.{}.{}, only 1.1.0.0 is supported", version[0], version[1], version[2],
-                    version[3]);
-        return false;
-    }
-
-    // Parse the rest of the header.
-    stream.read(&colorFormat, 4);
-    stream.read(&zAxisOrientation, 4);
-    stream.read(&compressed, 4);
-    stream.read(&visibilityMaskEncoded, 4);
-    stream.read(&numMatrices, 4);
-    colorFormat = memory::fromLittleEndian(colorFormat);
-    zAxisOrientation = memory::fromLittleEndian(zAxisOrientation);
-    compressed = memory::fromLittleEndian(compressed);
-    visibilityMaskEncoded = memory::fromLittleEndian(visibilityMaskEncoded);
-    numMatrices = memory::fromLittleEndian(numMatrices);
-
-    if (stream.eof())
-    {
-        CUBOS_ERROR("Unexpected end of file while reading file header");
-        return false;
-    }
-    if (visibilityMaskEncoded != 0U)
-    {
-        CUBOS_ERROR("Visibility mask encoding is not supported");
-        return false;
-    }
-
-    // Parse the matrices.
-    matrices.resize(numMatrices);
-    for (uint32_t i = 0; i < numMatrices; ++i)
-    {
-        uint8_t nameLen;
-        uint32_t sizeX;
-        uint32_t sizeY;
-        uint32_t sizeZ;
-        int32_t posX;
-        int32_t posY;
-        int32_t posZ;
-
-        // Read the matrix name.
-        stream.read(&nameLen, 1);
-        std::string name(nameLen, ' ');
-        stream.read(name.data(), nameLen);
-
-        // Read the matrix size.
-        stream.read(&sizeX, 4);
-        stream.read(&sizeY, 4);
-        stream.read(&sizeZ, 4);
-        sizeX = memory::fromLittleEndian(sizeX);
-        sizeY = memory::fromLittleEndian(sizeY);
-        sizeZ = memory::fromLittleEndian(sizeZ);
-        matrices[i].grid.setSize({sizeX, sizeY, sizeZ});
-
-        // Read the matrix position.
-        stream.read(&posX, 4);
-        stream.read(&posY, 4);
-        stream.read(&posZ, 4);
-        posX = memory::fromLittleEndian(posX);
-        posY = memory::fromLittleEndian(posY);
-        posZ = memory::fromLittleEndian(posZ);
-        matrices[i].position = glm::ivec3(posX, posY, posZ);
-
-        // Read the matrix voxels.
-        if (compressed == 0)
-        {
-            uint8_t color[4];
-            std::size_t nextMat = 1;
-
-            for (uint32_t z = 0; z < sizeZ; ++z)
-            {
-                for (uint32_t y = 0; y < sizeY; ++y)
-                {
-                    for (uint32_t x = 0; x < sizeX; ++x)
-                    {
-                        stream.read(color, 4);
-                        if (color[3] == 0)
-                        {
-                            continue;
-                        }
-                        if (colorFormat != 0U)
-                        { // BGRA -> RGBA
-                            std::swap(color[0], color[2]);
-                        }
-                        glm::vec4 colorVec(static_cast<float>(color[0]) / 255.0F, static_cast<float>(color[1]) / 255.0F,
-                                           static_cast<float>(color[2]) / 255.0F,
-                                           static_cast<float>(color[3]) / 255.0F);
-
-                        // Check if the material is already in the palette.
-                        std::size_t mat;
-                        for (mat = 1; mat < nextMat; ++mat)
-                        {
-                            if (matrices[i].palette.get(static_cast<uint16_t>(mat)).color == colorVec)
-                            {
-                                break;
-                            }
-                        }
-                        if (mat == nextMat)
-                        {
-                            if (mat >= 65536)
-                            {
-                                CUBOS_ERROR("Too many materials, max is 65536");
-                                return false;
-                            }
-
-                            // Add the material to the palette.
-                            VoxelMaterial desc;
-                            desc.color = colorVec;
-                            matrices[i].palette.set(static_cast<uint16_t>(mat), desc);
-                            nextMat += 1;
-                        }
-
-                        // Set the voxel.
-                        matrices[i].grid.set(glm::ivec3(x, y, z), static_cast<uint16_t>(mat));
-                    }
-                }
-            }
-        }
-        else
-        {
-            CUBOS_ERROR("Compressed QB files are not supported");
-            return false;
-        }
-    }
-
-    return true;
-}
-
 /// Tries to load the palette from the given path.
 /// @param path The path of the palette.
 /// @param palette The palette to fill.
@@ -341,7 +184,7 @@ static bool loadPalette(const fs::path& path, VoxelPalette& palette)
 /// Tries to load a QBModel from the given path.
 /// @param path The path of the QBModel.
 /// @param model The model to fill.
-static bool loadQB(const fs::path& path, std::vector<QBMatrix>& model)
+static bool loadQB(const fs::path& path, VoxelModel& model)
 {
     auto* file = fopen(path.string().c_str(), "rb");
     if (file == nullptr)
@@ -350,7 +193,7 @@ static bool loadQB(const fs::path& path, std::vector<QBMatrix>& model)
     }
 
     auto stream = memory::StandardStream(file, true);
-    return parseQB(model, stream);
+    return model.loadFrom(stream);
 }
 
 /// Saves the given palette to the given path.
@@ -425,7 +268,7 @@ static bool convert(const ConvertOptions& options)
         std::cerr << "Failed to load model: unsupported format " << options.input.extension() << "." << std::endl;
     }
 
-    std::vector<QBMatrix> model;
+    VoxelModel model;
     if (!loadQB(options.input, model))
     {
         std::cerr << "Failed to load model: " << options.input << " not found." << std::endl;
@@ -434,15 +277,15 @@ static bool convert(const ConvertOptions& options)
 
     if (options.verbose)
     {
-        std::cerr << "Found " << model.size() << " QB matrices." << std::endl;
-        for (std::size_t i = 0; i < model.size(); i++)
+        std::cerr << "Found " << model.gridCount() << " QB matrices." << std::endl;
+        for (std::size_t i = 0; i < model.gridCount(); i++)
         {
             std::cerr << "Matrix " << i << ":" << std::endl;
-            std::cerr << "- Position: " << model[i].position.x << " " << model[i].position.y << " "
-                      << model[i].position.z << std::endl;
-            std::cerr << "- Grid size: " << model[i].grid.size().x << "x" << model[i].grid.size().y << "x"
-                      << model[i].grid.size().z << std::endl;
-            std::cerr << "- Palette size: " << model[i].palette.size() << std::endl;
+            std::cerr << "- Position: " << model.gridPosition(i).x << " " << model.gridPosition(i).y << " "
+                      << model.gridPosition(i).z << std::endl;
+            std::cerr << "- Grid size: " << model.grid(i).size().x << "x" << model.grid(i).size().y << "x"
+                      << model.grid(i).size().z << std::endl;
+            std::cerr << "- Palette size: " << model.palette().size() << std::endl;
         }
 
         if (options.palette.empty())
@@ -458,7 +301,7 @@ static bool convert(const ConvertOptions& options)
     }
 
     // Iterate over the grids which will be exported.
-    for (std::size_t i = 0; i < model.size(); ++i)
+    for (std::size_t i = 0; i < model.gridCount(); ++i)
     {
         if (options.grids.contains(i))
         {
@@ -482,11 +325,12 @@ static bool convert(const ConvertOptions& options)
             // If write is enabled, merge this palette with the main one.
             if (options.write)
             {
-                palette.merge(model[i].palette, options.similarity);
+                palette.merge(model.palette(), options.similarity);
             }
 
             // Convert the grid to the main palette.
-            if (!model[i].grid.convert(model[i].palette, palette, options.similarity))
+            VoxelGrid grid = model.grid(i); // Make a copy of the grid
+            if (!grid.convert(model.palette(), palette, options.similarity))
             {
                 std::cerr << "Failed to convert grid " << i << " from its palette to the palette chosen." << std::endl;
 
@@ -505,7 +349,7 @@ static bool convert(const ConvertOptions& options)
             }
 
             // Save the grid to the given path.
-            if (!saveGrid(path, model[i].grid))
+            if (!saveGrid(path, grid))
             {
                 std::cerr << "Failed to save grid " << i << " to " << path << "." << std::endl;
                 return false;
