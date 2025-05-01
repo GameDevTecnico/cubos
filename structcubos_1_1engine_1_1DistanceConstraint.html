@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Physics &raquo; Solver module | Cubos Docs</title>
+  <title>cubos::engine::DistanceConstraint struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,38 +46,68 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__physics-plugin.html">Physics</a> &raquo;</span>
-          Solver <span class="m-thin">module</span></h1>
-        <p>Adds solver for constraints.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DistanceConstraint <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="distance__constraint_8hpp.html">&lt;engine/physics/constraints/distance_constraint.hpp&gt;</a></div>
+        </h1>
+        <p>Relation that holds the information for a distance constraint between two physics bodies.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="distance__constraint_8hpp.html" class="m-doc">distance_constraint.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1DistanceConstraint.html" class="m-doc">cubos::<wbr />engine::<wbr />DistanceConstraint</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2physics_2solver_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Solver plugin, resource cubos::engine::Solver.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1DistanceConstraint.html" class="m-doc">cubos::engine::DistanceConstraint</a>
+            <dt id="aff35df01cb3e6887d3f8a397df1cc4e5">
+              bool <a href="#aff35df01cb3e6887d3f8a397df1cc4e5" class="m-doc-self">isRigid</a>
             </dt>
-            <dd>Relation that holds the information for a distance constraint between two physics bodies.</dd>
+            <dd>Whether the constraint enforces a fixed distance or a range.</dd>
+            <dt id="a4de23b6c5860f74cdbc8f176c7990c99">
+              float <a href="#a4de23b6c5860f74cdbc8f176c7990c99" class="m-doc-self">fixedDistance</a>
+            </dt>
+            <dd>Fixed distance between anchor points (only used in the rigid case)</dd>
+            <dt id="a41da91cbbb48ccb480b5b5362f513325">
+              float <a href="#a41da91cbbb48ccb480b5b5362f513325" class="m-doc-self">minDistance</a>
+            </dt>
+            <dd>Minimum distance between anchor points (only used when non-rigid)</dd>
+            <dt id="afd74387a7d1977ff823c1f0169da8938">
+              float <a href="#afd74387a7d1977ff823c1f0169da8938" class="m-doc-self">maxDistance</a>
+            </dt>
+            <dd>Maximum distance between anchor points (only used when non-rigid)</dd>
+            <dt id="a92b16bf2bb88ea4d55afdd9dad45c228">
+              glm::vec3 <a href="#a92b16bf2bb88ea4d55afdd9dad45c228" class="m-doc-self">localAnchor1</a>
+            </dt>
+            <dd>The local contact point relative to the center of mass of the first body.</dd>
+            <dt id="a40b18e2c7182833619300d7ee219d2fd">
+              glm::vec3 <a href="#a40b18e2c7182833619300d7ee219d2fd" class="m-doc-self">localAnchor2</a>
+            </dt>
+            <dd>The local contact point relative to the center of mass of the second body.</dd>
+            <dt id="af590adc56fc20283c9fc3221c9909165">
+              glm::vec3 <a href="#af590adc56fc20283c9fc3221c9909165" class="m-doc-self">deltaCenter</a>
+            </dt>
+            <dd>The world-space vector from the center of the first body to the second.</dd>
+            <dt id="af763961b38c7a261884b58d1d925866f">
+              float <a href="#af763961b38c7a261884b58d1d925866f" class="m-doc-self">axialMass</a>
+            </dt>
+            <dd>Effective mass to use for impulse calculation.</dd>
+            <dt id="ac1653081771cdf9428b2d1d190f8418d">
+              float <a href="#ac1653081771cdf9428b2d1d190f8418d" class="m-doc-self">impulse</a>
+            </dt>
+            <dd>Stored impulse for warmstarting.</dd>
+            <dt id="ad024f4bd7fa5e461d16bf603b7915342">
+              float <a href="#ad024f4bd7fa5e461d16bf603b7915342" class="m-doc-self">lowerImpulse</a>
+            </dt>
+            <dd>Stored impulse for warmstarting.</dd>
+            <dt id="ae57aad70b4f738d0150f0049f6b59116">
+              float <a href="#ae57aad70b4f738d0150f0049f6b59116" class="m-doc-self">upperImpulse</a>
+            </dt>
+            <dd>Stored impulse for warmstarting.</dd>
           </dl>
         </section>
       </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Physics &raquo; Solver module | Cubos Docs</title>
+  <title>DistanceConstraint | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,40 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__physics-plugin.html">Physics</a> &raquo;</span>
-          Solver <span class="m-thin">module</span></h1>
-        <p>Adds solver for constraints.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="distance__constraint_8hpp.html" class="m-doc">distance_constraint.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1DistanceConstraint.html" class="m-doc">cubos::<wbr />engine::<wbr />DistanceConstraint</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2physics_2solver_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Solver plugin, resource cubos::engine::Solver.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1DistanceConstraint.html" class="m-doc">cubos::engine::DistanceConstraint</a>
-            </dt>
-            <dd>Relation that holds the information for a distance constraint between two physics bodies.</dd>
-          </dl>
-        </section>
+          DistanceConstraint
+        </h1>
+        <p>Using the <a href="group__physics-solver-plugin.html" class="m-doc">Solver</a> plugin.</p>
+<p><a name="md_distance_constraint_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/distance_constraint">here</a>.</p></aside><p>This example shows the behaviour of the <a href="structcubos_1_1engine_1_1DistanceConstraint.html" class="m-doc">cubos::<wbr />engine::<wbr />DistanceConstraint</a> relation in multiple physics scenarios.</p><p>The <a href="structcubos_1_1engine_1_1DistanceConstraint.html" class="m-doc">cubos::<wbr />engine::<wbr />DistanceConstraint</a> enforces a distance between two entities, whether fixed or a in range. To specify the fixed type add the relation with the isRigid attribute set to true and specify a fixedDistance value. For the range type set the same attribute to false and specify a minDistance and maxDistance instead. The relation also requires the position of the local anchor points in each entity (localAnchor1 and localAnchor2), set these to {0.0F, 0.0F, 0.0F} for the center of the grid.</p><p>The sample includes four scenarios: A simple Circle scenario where one entity is fixed and another has an initial velocity but is constrained to first one, resulting in an &quot;orbiting&quot; motion. A pendulum scenerio with the same setup as the first but the second entity has a simulated gravity instead of a constant velocity. A double pendulum scenario which adds another entity constrained to the original pendulum. And a PushPull scenario where one constrained entity is pushed by a &quot;free&quot; entity until it hits minimum distance with the fixed entity, being repelled outwards and pushing the &quot;free&quot; entity back.</p><p>To switch between these scenarios press the space-bar.</p>
       </div>
     </div>
   </div>
