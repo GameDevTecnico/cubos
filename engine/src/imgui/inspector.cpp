@@ -682,39 +682,38 @@ ImGuiInspector::State::State()
                     return ImGuiInspector::HookResult::Unhandled;
                 }
 
-                if (!ImGui::CollapsingHeader(name.c_str()))
+                bool modified = false;
+                if (ImGui::CollapsingHeader(name.c_str()))
                 {
-                    return ImGuiInspector::HookResult::Shown;
+                    ImGui::PushID(name.c_str());
+                    ImGui::Indent();
+
+                    modified |= inspector.inspect("scale", readOnly, reflect<glm::dvec3>(), &scale);
+                    modified |= inspector.inspect("rotation", readOnly, reflect<glm::dquat>(), &orientation);
+                    modified |= inspector.inspect("translation", readOnly, reflect<glm::dvec3>(), &translation);
+                    inspector.show("skew", skew);
+                    inspector.show("perspective", perspective);
+                    if (modified)
+                    {
+                        mat = glm::translate(glm::dmat4(1.0F), translation) * glm::toMat4(orientation) *
+                              glm::scale(glm::dmat4(1.0F), scale);
+                        if (type.is<glm::mat4>())
+                        {
+                            *static_cast<glm::mat4*>(value) = static_cast<glm::mat4>(mat);
+                        }
+                        else
+                        {
+                            *static_cast<glm::dmat4*>(value) = mat;
+                        }
+                    }
+
+                    ImGui::Unindent();
+                    ImGui::PopID();
                 }
                 if (ImGui::IsItemHovered())
                 {
                     ImGui::SetTooltip("Matrix of type %s", type.shortName().c_str());
                 }
-                ImGui::PushID(name.c_str());
-                ImGui::Indent();
-
-                bool modified = false;
-                modified |= inspector.inspect("scale", readOnly, reflect<glm::dvec3>(), &scale);
-                modified |= inspector.inspect("rotation", readOnly, reflect<glm::dquat>(), &orientation);
-                modified |= inspector.inspect("translation", readOnly, reflect<glm::dvec3>(), &translation);
-                inspector.show("skew", skew);
-                inspector.show("perspective", perspective);
-                if (modified)
-                {
-                    mat = glm::translate(glm::dmat4(1.0F), translation) * glm::toMat4(orientation) *
-                          glm::scale(glm::dmat4(1.0F), scale);
-                    if (type.is<glm::mat4>())
-                    {
-                        *static_cast<glm::mat4*>(value) = static_cast<glm::mat4>(mat);
-                    }
-                    else
-                    {
-                        *static_cast<glm::dmat4*>(value) = mat;
-                    }
-                }
-
-                ImGui::Unindent();
-                ImGui::PopID();
 
                 return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
             }
