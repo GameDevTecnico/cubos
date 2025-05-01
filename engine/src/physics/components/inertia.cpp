@@ -81,11 +81,10 @@ inline static float cylinderShapeVolume(float height, float radius)
 static float voxelShapeVolume(const VoxelCollisionShape& shape)
 {
     float volume = 0.0F;
-    for (auto& box : shape.getBoxes())
+    for (auto box : shape.getBoxes())
     {
         volume += boxShapeVolume(box.box.halfSize * 2.0F);
     }
-
     return volume;
 }
 

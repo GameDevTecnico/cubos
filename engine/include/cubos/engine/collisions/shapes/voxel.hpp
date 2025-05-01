@@ -89,7 +89,7 @@ namespace cubos::engine
         }
 
         /// @brief Getter for the list of @ref BoxShiftPair of the class.
-        std::vector<BoxShiftPair> getBoxes() const
+        const std::vector<BoxShiftPair>& getBoxes() const
         {
             return this->mBoxes;
         }
