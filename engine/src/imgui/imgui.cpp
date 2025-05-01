@@ -2,6 +2,7 @@
 #include <utility>
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/color_space.hpp>
 #include <imgui.h>
 #include <implot.h>
 
@@ -270,6 +271,18 @@ void main()
     bd->ibSize = 0;
 }
 
+static ImVec4 hsvToImVec4(float h, float s, float v, float a = 1.0F)
+{
+    auto rgb = glm::rgbColor(glm::vec3(h, s, v));
+    return {rgb.r, rgb.g, rgb.b, a};
+}
+
+static ImVec4 hsvToImVec4(int h, int s, int v, int a = 100)
+{
+    return hsvToImVec4(static_cast<float>(h), static_cast<float>(s) / 100.0F, static_cast<float>(v) / 100.0F,
+                       static_cast<float>(a) / 100.0F);
+}
+
 void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale, const Font& font)
 {
     // Initialize ImGui
@@ -277,6 +290,73 @@ void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale, co
     ImGui::CreateContext();
     ImPlot::CreateContext();
     ImGui::StyleColorsDark();
+
+    int hue = 208;
+    auto text = hsvToImVec4(hue, 2, 87);
+    auto primary = hsvToImVec4(hue, 45, 36);
+    auto secondary = hsvToImVec4(hue, 38, 24);
+    auto tertiary = hsvToImVec4(hue, 14, 15);
+    auto background = hsvToImVec4(hue, 10, 13);
+    auto hovered = hsvToImVec4(hue, 45, 45);
+    auto active = hsvToImVec4(hue, 45, 54);
+
+    // Apply our own style, according to the brand guidelines
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.Colors[ImGuiCol_Text] = text;
+    // style.Colors[ImGuiCol_TextDisabled] = ???;
+    style.Colors[ImGuiCol_WindowBg] = tertiary;
+    style.Colors[ImGuiCol_ChildBg] = tertiary;
+    style.Colors[ImGuiCol_PopupBg] = tertiary;
+    // style.Colors[ImGuiCol_Border] = ???;
+    // style.Colors[ImGuiCol_BorderShadow] = ???;
+    style.Colors[ImGuiCol_FrameBg] = hsvToImVec4(hue, 10, 7);
+    style.Colors[ImGuiCol_FrameBgHovered] = hsvToImVec4(hue, 10, 9);
+    style.Colors[ImGuiCol_FrameBgActive] = secondary;
+    style.Colors[ImGuiCol_TitleBg] = secondary;
+    style.Colors[ImGuiCol_TitleBgActive] = primary;
+    style.Colors[ImGuiCol_MenuBarBg] = background;
+    style.Colors[ImGuiCol_ScrollbarBg] = hsvToImVec4(hue, 10, 7);
+    style.Colors[ImGuiCol_ScrollbarGrab] = primary;
+    style.Colors[ImGuiCol_ScrollbarGrabHovered] = hovered;
+    style.Colors[ImGuiCol_ScrollbarGrabActive] = active;
+    style.Colors[ImGuiCol_CheckMark] = active;
+    style.Colors[ImGuiCol_SliderGrab] = primary;
+    style.Colors[ImGuiCol_SliderGrabActive] = active;
+    style.Colors[ImGuiCol_Button] = primary;
+    style.Colors[ImGuiCol_ButtonHovered] = hovered;
+    style.Colors[ImGuiCol_ButtonActive] = active;
+    style.Colors[ImGuiCol_Header] = primary;
+    style.Colors[ImGuiCol_HeaderHovered] = hovered;
+    style.Colors[ImGuiCol_HeaderActive] = active;
+    style.Colors[ImGuiCol_Separator] = background;
+    style.Colors[ImGuiCol_SeparatorHovered] = hovered;
+    style.Colors[ImGuiCol_SeparatorActive] = active;
+    style.Colors[ImGuiCol_ResizeGrip] = primary;
+    style.Colors[ImGuiCol_ResizeGripHovered] = hovered;
+    style.Colors[ImGuiCol_ResizeGripActive] = active;
+    style.Colors[ImGuiCol_Tab] = primary;
+    style.Colors[ImGuiCol_TabHovered] = hovered;
+    style.Colors[ImGuiCol_TabActive] = active;
+    style.Colors[ImGuiCol_TabUnfocused] = primary;
+    style.Colors[ImGuiCol_TabUnfocusedActive] = active;
+    style.Colors[ImGuiCol_DockingPreview] = primary;
+    style.Colors[ImGuiCol_DockingEmptyBg] = background;
+    // style.Colors[ImGuiCol_PlotLines] = ???;
+    // style.Colors[ImGuiCol_PlotLinesHovered] = ???;
+    // style.Colors[ImGuiCol_PlotHistogram] = ???;
+    // style.Colors[ImGuiCol_PlotHistogramHovered] = ???;
+    // style.Colors[ImGuiCol_TableHeaderBg] = ???;
+    // style.Colors[ImGuiCol_TableBorderStrong] = ???;
+    // style.Colors[ImGuiCol_TableBorderLight] = ???;
+    // style.Colors[ImGuiCol_TableRowBg] = ???;
+    // style.Colors[ImGuiCol_TableRowBgAlt] = ???;
+    style.Colors[ImGuiCol_TextSelectedBg] = primary;
+    // style.Colors[ImGuiCol_DragDropTarget] = ???;
+    style.Colors[ImGuiCol_NavHighlight] = active;
+    // style.Colors[ImGuiCol_NavWindowingHighlight] = ???;
+    // style.Colors[ImGuiCol_NavWindowingDimBg] = ???;
+    // style.Colors[ImGuiCol_ModalWindowDimBg] = ???;
+    // style.Colors[ImGuiCol_ModalWindowDimBg] = ???;
 
     ImGuiIO& io = ImGui::GetIO();
     if (io.BackendPlatformUserData != nullptr)
@@ -308,7 +388,6 @@ void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale, co
         if (cursor == nullptr)
         {
             cursor = bd->cursors[ImGuiMouseCursor_Arrow];
-            ;
         }
     }
 
