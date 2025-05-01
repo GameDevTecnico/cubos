@@ -14,6 +14,7 @@
 #include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/traits/vector.hpp>
+#include <cubos/core/reflection/traits/wrapper.hpp>
 
 #include <cubos/engine/imgui/inspector.hpp>
 
@@ -719,5 +720,18 @@ ImGuiInspector::State::State()
             }
 
             return ImGuiInspector::HookResult::Unhandled;
+        });
+
+    // Handle wrapper types.
+    hooks.emplace_back(
+        [](const std::string& name, bool readOnly, ImGuiInspector& inspector, const Type& type, void* value) {
+            if (!type.has<WrapperTrait>())
+            {
+                return ImGuiInspector::HookResult::Unhandled;
+            }
+
+            const auto& wrapper = type.get<WrapperTrait>();
+            bool modified = inspector.inspect(name, readOnly, wrapper.type(), wrapper.value(value));
+            return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
         });
 }
