@@ -77,6 +77,10 @@
             </dt>
             <dd>Represents a capsule or sphere shape.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>
+            </dt>
+            <dd>Represents a camera frustum.</dd>
+            <dt>
               struct <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a>
             </dt>
             <dd>Contains info regarding an intersection between shapes.</dd>
@@ -102,6 +106,18 @@
             </dt>
             <dd>Computes the intersection between two box shapes.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac92c0f1cc8a0b6790e6cb8f4d55ae54e" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>&amp; frustum,
+              const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box,
+              const glm::mat4&amp; localToWorld) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+            </dt>
+            <dd>Computes the intersection between a frustum and a box.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afab429350dd199916c234a2165a44dc5" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>&amp; frustum,
+              const <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">Capsule</a>&amp; capsule,
+              const glm::mat4&amp; localToWorld) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+            </dt>
+            <dd>Computes the intersection between a frustum and a capsule.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a847980982b35c728e17b0f0fd48fb82c" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1PolygonalFeature.html" class="m-doc">PolygonalFeature</a>&amp; polygon,
               int numClipPlanes,
               const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
@@ -120,6 +136,11 @@
               const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
             </dt>
             <dd>Computes if a point is in the area limited by the plane.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a30f83e95a2dc031ea8058b43952836e6" class="m-doc">pointDistanceToPlane</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> float</span>
+            </dt>
+            <dd>Computes the signed distance from thene plane to a point.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a60469250da525272e95b5fa9f87b415c" class="m-doc">getMaxVertexInAxis</a>(</span><span class="m-doc-wrap">int numVertices,
               const glm::vec3 vertices[],
@@ -200,6 +221,74 @@
                   <td></td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac92c0f1cc8a0b6790e6cb8f4d55ae54e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac92c0f1cc8a0b6790e6cb8f4d55ae54e" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>&amp; frustum,
+              const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box,
+              const glm::mat4&amp; localToWorld)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="intersections_8hpp.html">&lt;core/geom/intersections.hpp&gt;</a></div>
+            </h3>
+            <p>Computes the intersection between a frustum and a box.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">frustum</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>box</td>
+                  <td><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a> shape of the entity.</td>
+                </tr>
+                <tr>
+                  <td>localToWorld</td>
+                  <td>Local to world matrix of the entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if there&#x27;s intersection, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afab429350dd199916c234a2165a44dc5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afab429350dd199916c234a2165a44dc5" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>&amp; frustum,
+              const <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">Capsule</a>&amp; capsule,
+              const glm::mat4&amp; localToWorld)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="intersections_8hpp.html">&lt;core/geom/intersections.hpp&gt;</a></div>
+            </h3>
+            <p>Computes the intersection between a frustum and a capsule.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">frustum</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>capsule</td>
+                  <td><a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">Capsule</a> shape of the entity.</td>
+                </tr>
+                <tr>
+                  <td>localToWorld</td>
+                  <td>Local to world matrix of the entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if there&#x27;s intersection, false otherwise.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a847980982b35c728e17b0f0fd48fb82c"><div>
@@ -299,6 +388,35 @@
                 <tr>
                   <th>Returns</th>
                   <td>True is the point is on the plane or closer, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a30f83e95a2dc031ea8058b43952836e6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> float cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a30f83e95a2dc031ea8058b43952836e6" class="m-doc-self">pointDistanceToPlane</a>(</span><span class="m-doc-wrap">const glm::vec3&amp; point,
+              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="geom_2utils_8hpp.html">&lt;core/geom/utils.hpp&gt;</a></div>
+            </h3>
+            <p>Computes the signed distance from thene plane to a point.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">point</td>
+                  <td>The position of the point in world coordinates.</td>
+                </tr>
+                <tr>
+                  <td>plane</td>
+                  <td>The plane to use.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The signed distance.</td>
                 </tr>
               </tfoot>
             </table>
@@ -555,7 +673,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

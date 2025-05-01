@@ -77,6 +77,12 @@
             </dt>
             <dd>Notifies that the given entity has lost a column.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad9e26ea8bed080cd1cddb817c3a483b9" class="m-doc">notifyDestroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commandBuffer,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> column) -&gt; bool</span>
+            </dt>
+            <dd>Notifies was destroyed.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a75ef8bb2d25473713049888ed59b1674" class="m-doc">hookOnAdd</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> column,
               <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt; observer) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1ObserverId.html" class="m-doc">ObserverId</a></span>
             </dt>
@@ -86,6 +92,11 @@
               <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt; observer) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1ObserverId.html" class="m-doc">ObserverId</a></span>
             </dt>
             <dd>Hooks an observer to the removal of a column.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2b7d0f33f5e327b286ffcdff07d10f18" class="m-doc">hookOnDestroy</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> column,
+              <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt; observer) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1ObserverId.html" class="m-doc">ObserverId</a></span>
+            </dt>
+            <dd>Hooks an observer to the entity destruction.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a86399af3ded3dea13cdc2b35f17ec861" class="m-doc">unhook</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ObserverId.html" class="m-doc">ObserverId</a> id)</span>
             </dt>
@@ -160,6 +171,39 @@
               </tfoot>
             </table>
           </div></section>
+          <section class="m-doc-details" id="ad9e26ea8bed080cd1cddb817c3a483b9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Observers::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad9e26ea8bed080cd1cddb817c3a483b9" class="m-doc-self">notifyDestroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commandBuffer,
+              <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> column)</span></span>
+            </h3>
+            <p>Notifies was destroyed.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">commandBuffer</td>
+                  <td>Command buffer to record the any commands emitted by the observer.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+                <tr>
+                  <td>column</td>
+                  <td>Column.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether an observer was triggered.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a75ef8bb2d25473713049888ed59b1674"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1ObserverId.html" class="m-doc">ObserverId</a> cubos::<wbr />core::<wbr />ecs::<wbr />Observers::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a75ef8bb2d25473713049888ed59b1674" class="m-doc-self">hookOnAdd</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> column,
@@ -194,6 +238,34 @@
               <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt; observer)</span></span>
             </h3>
             <p>Hooks an observer to the removal of a column.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">column</td>
+                  <td>Column.</td>
+                </tr>
+                <tr>
+                  <td>observer</td>
+                  <td>Observer system.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Observer identifier.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2b7d0f33f5e327b286ffcdff07d10f18"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1ObserverId.html" class="m-doc">ObserverId</a> cubos::<wbr />core::<wbr />ecs::<wbr />Observers::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b7d0f33f5e327b286ffcdff07d10f18" class="m-doc-self">hookOnDestroy</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> column,
+              <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>&lt;void&gt; observer)</span></span>
+            </h3>
+            <p>Hooks an observer to the entity destruction.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -278,7 +350,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

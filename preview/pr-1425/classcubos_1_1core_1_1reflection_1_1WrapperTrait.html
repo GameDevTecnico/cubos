@@ -70,7 +70,7 @@
             </dt>
             <dd>Constructs.</dd>
             <dt id="ab831678f65a2a3c8bd298f88342650d7">
-              <div class="m-doc-template">template&lt;<a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> F, <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">typename</a> O&gt;</div>
+              <div class="m-doc-template">template&lt;typename F, typename O&gt;</div>
               <span class="m-doc-wrap-bumper"><a href="#ab831678f65a2a3c8bd298f88342650d7" class="m-doc-self">WrapperTrait</a>(</span><span class="m-doc-wrap">F O::* pointer)</span>
             </dt>
             <dd>Constructs.</dd>
@@ -80,20 +80,20 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a30e1df1a3be2e5fa96ceaae82306110f" class="m-doc">type</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a92e55366d60ae0a3d60dbf88dffc82ad" class="m-doc">type</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
             </dt>
             <dd>Gets the type of the single field.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afd70b01e82ce46e68ed04ff78133b7c0" class="m-doc">value</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const -&gt; <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>*</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad11934a9de52bd1a6c1570eb95935ee9" class="m-doc">value</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; void*</span>
             </dt>
             <dd>Gets a pointer to the field on a given instance of the reflected type.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a30e1df1a3be2e5fa96ceaae82306110f"><div>
+          <section class="m-doc-details" id="a92e55366d60ae0a3d60dbf88dffc82ad"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />WrapperTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a30e1df1a3be2e5fa96ceaae82306110f" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />WrapperTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92e55366d60ae0a3d60dbf88dffc82ad" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the type of the single field.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -105,9 +105,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="afd70b01e82ce46e68ed04ff78133b7c0"><div>
+          <section class="m-doc-details" id="ad11934a9de52bd1a6c1570eb95935ee9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* cubos::<wbr />core::<wbr />reflection::<wbr />WrapperTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afd70b01e82ce46e68ed04ff78133b7c0" class="m-doc-self">value</a>(</span><span class="m-doc-wrap"><a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">const</a> <a href="group__core-reflection.html#gaaa0c585b3fb623b554f72b78e7fd3aa3" class="m-doc">void</a>* instance) const</span></span>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />reflection::<wbr />WrapperTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad11934a9de52bd1a6c1570eb95935ee9" class="m-doc-self">value</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
             </h3>
             <p>Gets a pointer to the field on a given instance of the reflected type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -173,7 +173,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

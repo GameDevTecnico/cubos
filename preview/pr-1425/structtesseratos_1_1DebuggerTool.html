@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Audio | Cubos Docs</title>
+  <title>tesseratos::DebuggerTool struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          Audio
+          <span class="m-breadcrumb"><a href="namespacetesseratos.html">tesseratos</a>::<wbr/></span>DebuggerTool <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2src_2tesseratos_2debugger_2plugin_8hpp.html">&lt;tesseratos/debugger/plugin.hpp&gt;</a></div>
         </h1>
-        <p>Using the <a href="group__audio-plugin.html" class="m-doc">Audio</a> plugin.</p>
-<aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/audio">here</a></p></aside><p>This sample shows how the <a href="group__audio-plugin.html" class="m-doc">Audio</a> can be used to load audio samples and interact with them, using all supported file formats.</p><p>Let&#x27;s start by creating a Listener (represented through the camera).</p><pre class="m-code"></pre><p>In order to produce sound, we also need to create an AudioSource.</p><pre class="m-code"></pre><p>How does this source know what to play? You can assign any audio asset, as long as in the supported format, to the AudioSource component.</p><pre class="m-code"></pre><p>We add a system which cycles through 3 assets and allows to play/pause and stop them through user input.</p><p>The way we signal cubos to play, pause and stop an asset is through the use of the <code>AudioPlay</code>, <code>AudioPause</code>, and <code>AudioStop</code> components; just add them and the actions should happen immediatly.</p><pre class="m-code"></pre><p>That way, using our selected inputs, if you press <code>Enter</code>, you will skip to the next asset; <code>Spacebar</code> will play or pause the asset; and pressing <code>Backspace</code> will stop the current audio asset.</p><p>You can play around with the audio samples and listen to each one using the plugin!</p>
+        <p>Tool state.</p>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

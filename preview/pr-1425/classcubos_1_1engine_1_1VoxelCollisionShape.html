@@ -64,6 +64,7 @@
             </li>
           </ul>
         </nav>
+<p>Assumes the <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a> to be centered in the entity space.</p>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -106,12 +107,13 @@
             </dt>
             <dd>Sets the grid.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a49479446641dada25110d67eff927586" class="m-doc">insertBox</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; box,
-              const glm::vec3&amp; shift)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a2b1a493ea9ae4660339f62046c171a9f" class="m-doc">insertBox</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; box,
+              const glm::vec3&amp; shift,
+              uint32_t boxId)</span>
             </dt>
             <dd>Inserts a new <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a> to the list of the class.</dd>
-            <dt id="adc8cbe62d01c46e2125b7a9b2814770e">
-              <span class="m-doc-wrap-bumper">auto <a href="#adc8cbe62d01c46e2125b7a9b2814770e" class="m-doc-self">getBoxes</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;<a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a>&gt;</span>
+            <dt id="a8803f7e4ee57f1c2eb8761afb0d4a78b">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8803f7e4ee57f1c2eb8761afb0d4a78b" class="m-doc-self">getBoxes</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;<a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a>&gt;</span>
             </dt>
             <dd>Getter for the list of <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a> of the class.</dd>
           </dl>
@@ -195,10 +197,11 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a49479446641dada25110d67eff927586"><div>
+          <section class="m-doc-details" id="a2b1a493ea9ae4660339f62046c171a9f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />VoxelCollisionShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a49479446641dada25110d67eff927586" class="m-doc-self">insertBox</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; box,
-              const glm::vec3&amp; shift)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />VoxelCollisionShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b1a493ea9ae4660339f62046c171a9f" class="m-doc-self">insertBox</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a>&amp; box,
+              const glm::vec3&amp; shift,
+              uint32_t boxId)</span></span>
             </h3>
             <p>Inserts a new <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a> to the list of the class.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -213,6 +216,10 @@
                 <tr>
                   <td>shift</td>
                   <td>Shift vector of the box.</td>
+                </tr>
+                <tr>
+                  <td>boxId</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -262,7 +269,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

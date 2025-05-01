@@ -50,6 +50,146 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="inertia_8hpp.html">&lt;engine/physics/components/inertia.hpp&gt;</a></div>
         </h1>
         <p>Component which defines the inertia of a body.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>The tensor of inertia gives us how the mass is distributed in a rigid body, representing resistance to angular acceleration. A higher angular inertia requires more torque for the same acceleration.</p><p>It does not take into account child entities, even when set to update automatically.</p><p>A total angular inertia of zero is a special case, and is interpreted as infinite inertia, meaning the rigid body will not be affected by any torque.</p><p>For bodies that are symmetric in the usual x, y and z axis, the tensor is always diagonal. For a general three-dimensional body, such as any voxel shape, it may not be. However, it is always possible to find 3 mutually orthogonal axis (an x&#x27;, y&#x27;, z&#x27; coordinate system) for which the products of inertia are zero, and the inertia matrix takes a diagonal form. A more thourough explanation can be found here: <a href="https://ocw.mit.edu/courses/16-07-dynamics-fall-2009/dd277ec654440f4c2b5b07d6c286c3fd_MIT16_07F09_Lec26.pdf">https://ocw.mit.edu/courses/16-07-dynamics-fall-2009/dd277ec654440f4c2b5b07d6c286c3fd_<wbr />MIT16_<wbr />07F09_<wbr />Lec26.pdf</a></p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#acb1b795570e4a7efb79615f0456583d5" class="m-doc">setFromTensor</a>(</span><span class="m-doc-wrap">glm::mat3 inertiaTensor)</span>
+            </dt>
+            <dd>Sets the inertia from the given inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab6ad80a66b0b0380428087fe29c8e814" class="m-doc">setWithLocalFrame</a>(</span><span class="m-doc-wrap">glm::vec3 principalInertia,
+              glm::quat principalLocalFrame)</span>
+            </dt>
+            <dd>Sets the inertia from the principal inertia and the principal local frame.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4b1469e79c5c38a212ae83202ca1c6fa" class="m-doc">rotatedInertia</a>(</span><span class="m-doc-wrap">const glm::quat&amp; rotationQuat) const -&gt; glm::mat3</span>
+            </dt>
+            <dd>Computes the inertia tensor with the given rotation. Can be used to transform the local inertia tensor to world space.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af22ffdc01f915ff4fd70728ada323335" class="m-doc">rotatedInverseInertia</a>(</span><span class="m-doc-wrap">const glm::quat&amp; rotationQuat) const -&gt; glm::mat3</span>
+            </dt>
+            <dd>Computes the inverse inertia tensor with the given rotation. Can be used to transform the local inverse inertia tensor to world space.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="af6e7d075279099732f487e3d757d2173">
+              glm::mat3 <a href="#af6e7d075279099732f487e3d757d2173" class="m-doc-self">inertia</a>
+            </dt>
+            <dd>The inertia tensor in local space.</dd>
+            <dt id="aeae8b7c2aeda38ee3c9e47de54dc83ec">
+              glm::mat3 <a href="#aeae8b7c2aeda38ee3c9e47de54dc83ec" class="m-doc-self">inverseInertia</a>
+            </dt>
+            <dd>The inverse inertia tensor in local space.</dd>
+            <dt id="a4ee53da5a32fcc1f1960c22344c2e276">
+              bool <a href="#a4ee53da5a32fcc1f1960c22344c2e276" class="m-doc-self">autoUpdate</a>
+            </dt>
+            <dd>Whether to update the component automatically when the <a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> or the collision shape change.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="acb1b795570e4a7efb79615f0456583d5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Inertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acb1b795570e4a7efb79615f0456583d5" class="m-doc-self">setFromTensor</a>(</span><span class="m-doc-wrap">glm::mat3 inertiaTensor)</span></span>
+            </h3>
+            <p>Sets the inertia from the given inertia tensor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">inertiaTensor</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab6ad80a66b0b0380428087fe29c8e814"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Inertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab6ad80a66b0b0380428087fe29c8e814" class="m-doc-self">setWithLocalFrame</a>(</span><span class="m-doc-wrap">glm::vec3 principalInertia,
+              glm::quat principalLocalFrame)</span></span>
+            </h3>
+            <p>Sets the inertia from the principal inertia and the principal local frame.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">principalInertia</td>
+                  <td>The diagonal of a diagonal inertia tensor.</td>
+                </tr>
+                <tr>
+                  <td>principalLocalFrame</td>
+                  <td>The orientation of the principal inertial axis, for which the inertia tensor is diagonal.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4b1469e79c5c38a212ae83202ca1c6fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 cubos::<wbr />engine::<wbr />Inertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b1469e79c5c38a212ae83202ca1c6fa" class="m-doc-self">rotatedInertia</a>(</span><span class="m-doc-wrap">const glm::quat&amp; rotationQuat) const</span></span>
+            </h3>
+            <p>Computes the inertia tensor with the given rotation. Can be used to transform the local inertia tensor to world space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rotationQuat</td>
+                  <td>Quarternion with the desired rotation.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The inertia tensor rotated.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af22ffdc01f915ff4fd70728ada323335"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 cubos::<wbr />engine::<wbr />Inertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af22ffdc01f915ff4fd70728ada323335" class="m-doc-self">rotatedInverseInertia</a>(</span><span class="m-doc-wrap">const glm::quat&amp; rotationQuat) const</span></span>
+            </h3>
+            <p>Computes the inverse inertia tensor with the given rotation. Can be used to transform the local inverse inertia tensor to world space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rotationQuat</td>
+                  <td>Quarternion with the desired rotation.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The inertia tensor rotated.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>
@@ -94,7 +234,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

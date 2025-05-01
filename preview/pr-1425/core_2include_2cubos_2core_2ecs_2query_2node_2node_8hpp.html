@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::Scene struct | Cubos Docs</title>
+  <title>core/ecs/query/node/node.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,33 +46,39 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Scene <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="scene_8hpp.html">&lt;engine/scene/scene.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_b6daa990b896c2c0c53126427e4d978d.html">ecs</a>/</span><span class="m-breadcrumb"><a href="dir_26a5878ebb5e9988b6ffa6f152301254.html">query</a>/</span><span class="m-breadcrumb"><a href="dir_30a9ec6de7a91921bb72ff839461d3e3.html">node</a>/</span>node.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> equivalent to ECS blueprints - a bundle of entities and their components.</p>
+        <p>Class <a href="classcubos_1_1core_1_1ecs_1_1QueryNode.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />QueryNode</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p><a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets produce a blueprint when loaded which can be used to spawn them. Entity names in the resulting blueprint follow the format &quot;foo&quot;, &quot;import1.bar&quot;, &quot;import1.import2.baz&quot;, etc.</p>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="ad64009a7afd9738b8dd5b3b480f416f8">
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">core::<wbr />ecs::<wbr />Blueprint</a> <a href="#ad64009a7afd9738b8dd5b3b480f416f8" class="m-doc-self">blueprint</a>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
+            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryNode.html" class="m-doc">cubos::core::ecs::QueryNode</a>
             </dt>
-            <dd>Resulting blueprint which contains all the entities of the scene and its imported scenes. If you want to spawn the scene, use this blueprint.</dd>
-            <dt id="a86a5c69ec15669e23d7ccad2d656fa10">
-              std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&gt;&gt; <a href="#a86a5c69ec15669e23d7ccad2d656fa10" class="m-doc-self">imports</a>
-            </dt>
-            <dd>Handles to other scenes that are imported by this scene, mapped by their import names. Imports of imports ar not included in this map.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> filter step, which receives an iterator and advances it until it points to a valid match.</dd>
           </dl>
         </section>
       </div>
@@ -119,7 +125,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
