@@ -4,7 +4,6 @@
 #include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
-#include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/collision_mask.hpp>
@@ -29,6 +28,8 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
+
+#include "../src/collisions/broad_phase/collider_aabb.hpp"
 
 using cubos::core::geom::Box;
 using cubos::core::io::Key;
@@ -67,7 +68,6 @@ void createScenario(Commands& commands, State& state, Options& options)
     if (options.currentScenario == Options::Scenarios::Circle)
     {
         state.a = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -78,7 +78,6 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .entity();
 
         state.b = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -98,7 +97,6 @@ void createScenario(Commands& commands, State& state, Options& options)
     if (options.currentScenario == Options::Scenarios::Pendulum)
     {
         state.a = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -109,7 +107,6 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .entity();
 
         state.b = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -129,7 +126,6 @@ void createScenario(Commands& commands, State& state, Options& options)
     if (options.currentScenario == Options::Scenarios::DoublePendulum)
     {
         state.a = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -140,7 +136,6 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .entity();
 
         state.b = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -151,7 +146,6 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .entity();
 
         state.c = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -178,7 +172,6 @@ void createScenario(Commands& commands, State& state, Options& options)
     if (options.currentScenario == Options::Scenarios::PushPull)
     {
         state.a = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -189,7 +182,6 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .entity();
 
         state.b = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -200,7 +192,6 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .entity();
 
         state.c = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -279,17 +270,17 @@ int main(int argc, char** argv)
 
     cubos.system("render")
         .after(gizmosDrawTag)
-        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const Collider&> query,
+        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const ColliderAABB&> query,
                  Query<const LocalToWorld&, DistanceConstraint&, const LocalToWorld&> query2) {
-            for (auto [localToWorld, collider] : query)
+            for (auto [localToWorld, colliderAABB] : query)
             {
-                auto size = collider.localAABB.box().halfSize * 2.0F;
-                glm::mat4 transform = glm::scale(localToWorld.mat * collider.transform, size);
+                auto size = colliderAABB.localAABB.box().halfSize * 2.0F;
+                glm::mat4 transform = glm::scale(localToWorld.mat, size);
                 gizmos.color({1.0F, 1.0F, 1.0F});
                 gizmos.drawWireBox("local AABB", transform);
 
                 gizmos.color({1.0F, 0.0F, 0.0F});
-                gizmos.drawWireBox("world AABB", collider.worldAABB.min(), collider.worldAABB.max());
+                gizmos.drawWireBox("world AABB", colliderAABB.worldAABB.min(), colliderAABB.worldAABB.max());
             }
             // draw the constraints
             for (auto [localToWorld1, constraint, localToWorld2] : query2)
