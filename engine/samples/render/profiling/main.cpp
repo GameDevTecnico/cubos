@@ -60,7 +60,7 @@ int main(int argc, char** argv)
             environment.skyGradient[0] = {0.1F, 0.2F, 0.4F};
             environment.skyGradient[1] = {0.6F, 0.6F, 0.8F};
             // Spawn base scene
-            commands.spawn(assets.read(SceneAsset)->blueprint());
+            commands.spawn(assets.read(SceneAsset)->blueprint()).named("main");
         });
 
     cubos.system("update chunks")
