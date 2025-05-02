@@ -18,7 +18,7 @@ namespace tesseratos
     /// @brief Adds a resource used to manage the currently loaded project.
 
     /// @brief Tool state.
-    struct ProjectTool
+    struct Project
     {
         CUBOS_REFLECT;
 

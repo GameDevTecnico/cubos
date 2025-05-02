@@ -18,9 +18,9 @@ using cubos::engine::Settings;
 
 using namespace tesseratos;
 
-CUBOS_REFLECT_IMPL(AssetExplorerTool)
+CUBOS_REFLECT_IMPL(AssetExplorer)
 {
-    return cubos::core::ecs::TypeBuilder<AssetExplorerTool>("AssetExplorerTool").withField("isOpen", &AssetExplorerTool::isOpen).build();
+    return cubos::core::ecs::TypeBuilder<AssetExplorer>("tesseratos::AssetExplorer").withField("isOpen", &AssetExplorer::isOpen).build();
 }
 
 namespace
@@ -157,14 +157,14 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
 
-    cubos.resource<AssetExplorerTool>();
+    cubos.resource<AssetExplorer>();
     cubos.resource<AssetExplorerState>();
 
     cubos.system("show Asset Explorer UI")
-        .onlyIf([](AssetExplorerTool& tool) { return tool.isOpen; })
+        .onlyIf([](AssetExplorer& tool) { return tool.isOpen; })
         .tagged(cubos::engine::imguiTag)
         .call([](Assets& assets, cubos::core::ecs::EventWriter<AssetSelectedEvent> events,
-                 AssetExplorerState& state, AssetExplorerTool& tool) {
+                 AssetExplorerState& state, AssetExplorer& tool) {
 
             ImGui::Begin("Asset Explorer", &tool.isOpen);
 

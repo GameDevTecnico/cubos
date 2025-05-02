@@ -27,7 +27,7 @@ namespace tesseratos
     };
 
     /// @brief Tool state.
-    struct AssetExplorerTool
+    struct AssetExplorer
     {
         CUBOS_REFLECT;
 
