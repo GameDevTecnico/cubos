@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::data namespace | Cubos Docs</title>
+  <title>core/data/transparent/string_equal.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,84 +46,39 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>data <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_95549d37735ad5b142799f042eef0d37.html">data</a>/</span><span class="m-breadcrumb"><a href="dir_84ff224d2ef24a753f97cbd44b4415b5.html">transparent</a>/</span>string_equal.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="group__core-data.html" class="m-doc">Data</a> module.</p>
+        <p>Class <a href="classcubos_1_1core_1_1data_1_1StringTransparentEqual.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />StringTransparentEqual</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1data.html" class="m-doc">cubos::core::data</a></dt>
+            <dd><a href="group__core-data.html" class="m-doc">Data</a> module.</dd>
+          </dl>
+        </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" class="m-doc">BinaryDeserializer</a>
-            </dt>
-            <dd>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> class meant to deserialize data written by a <a href="classcubos_1_1core_1_1data_1_1BinarySerializer.html" class="m-doc">BinarySerializer</a>.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>
-            </dt>
-            <dd>Base class for deserializers, which defines the interface for deserializing arbitrary data using its reflection metadata.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" class="m-doc">JSONDeserializer</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> implementation which allows reading data from a JSON object.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>
-            </dt>
-            <dd>Interface for a bridge between the <strong>Cubos</strong> virtual file system and the real world.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" class="m-doc">EmbeddedArchive</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads data embedded in the application. Meant to be used with the <code>quadrados embed</code> tool.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>
-            </dt>
-            <dd>Represents a file in the virtual file system of the engine.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1data_1_1FileStream.html" class="m-doc">FileStream</a>
-            </dt>
-            <dd>Wrapper around an implementation-specific file stream which keeps the file alive and does some sanity checks.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a>
-            </dt>
-            <dd>Singleton which represents the virtual file system of the engine.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1StandardArchive.html" class="m-doc">StandardArchive</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads and writes from/into the OS file system using the standard library.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1BinarySerializer.html" class="m-doc">BinarySerializer</a>
-            </dt>
-            <dd>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class meant to serialize data in a non-readable but fast and compact way.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1DebugSerializer.html" class="m-doc">DebugSerializer</a>
-            </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> implementation which prints the given data to a stream in a human-readable format not meant to be parsed.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html" class="m-doc">JSONSerializer</a>
-            </dt>
-            <dd>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class for serializing to JSON.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>
-            </dt>
-            <dd>Base class for serializers, which defines the interface for serializing arbitrary data using its reflection metadata.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1StringTransparentEqual.html" class="m-doc">StringTransparentEqual</a>
+              class <a href="classcubos_1_1core_1_1data_1_1StringTransparentEqual.html" class="m-doc">cubos::core::data::StringTransparentEqual</a>
             </dt>
             <dd>Redefines equality function for std::string_view and std::string.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1data_1_1StringTransparentHash.html" class="m-doc">StringTransparentHash</a>
-            </dt>
-            <dd>Hash function for std::string and std::string_view, implemented as a class.</dd>
           </dl>
         </section>
       </div>
