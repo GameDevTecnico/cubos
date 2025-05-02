@@ -22,7 +22,6 @@
             "y": 7.0,
             "z": 2.0
         },
-        "cubos::engine::Collider": {},
         "Player": {
             "speed": 5,
             "laneWidth": 9
