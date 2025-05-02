@@ -28,7 +28,7 @@ namespace tesseratos
         /// @param state State of the project manager.
         /// @param assets Asset manager.
         /// @param debugger Debugger.
-        ProjectManager(State& state, cubos::engine::Assets& assets, Debugger& debugger);
+        ProjectManager(State& state, cubos::engine::Assets& assets, DebuggerSession& debugger);
 
         /// @brief Opens a project directory.
         ///
@@ -60,7 +60,7 @@ namespace tesseratos
     private:
         State& mState;
         cubos::engine::Assets& mAssets;
-        Debugger& mDebugger;
+        DebuggerSession& mDebugger;
     };
 
     class ProjectManager::State
@@ -91,7 +91,7 @@ namespace cubos::core::ecs
 
         SystemFetcher<tesseratos::ProjectManager::State&> state;
         SystemFetcher<cubos::engine::Assets&> assets;
-        SystemFetcher<tesseratos::Debugger&> debugger;
+        SystemFetcher<tesseratos::DebuggerSession&> debugger;
 
         SystemFetcher(World& world, const SystemOptions& options)
             : state{world, options}

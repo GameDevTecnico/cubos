@@ -1,5 +1,5 @@
 /// @file
-/// @brief Resource @ref tesseratos::Debugger.
+/// @brief Resource @ref tesseratos::DebuggerSession.
 /// @ingroup tesseratos-debugger-plugin
 
 #pragma once
@@ -10,7 +10,7 @@
 
 namespace tesseratos
 {
-    class Debugger
+    class DebuggerSession
     {
     public:
         CUBOS_REFLECT;

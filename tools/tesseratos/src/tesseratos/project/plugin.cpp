@@ -19,9 +19,9 @@ using namespace cubos::engine;
 
 using namespace tesseratos;
 
-CUBOS_REFLECT_IMPL(ProjectTool)
+CUBOS_REFLECT_IMPL(Project)
 {
-    return cubos::core::ecs::TypeBuilder<ProjectTool>("ProjectTool").withField("isOpen", &ProjectTool::isOpen).build();
+    return cubos::core::ecs::TypeBuilder<Project>("Project").withField("isOpen", &Project::isOpen).build();
 }
 
 void tesseratos::projectPlugin(Cubos& cubos)
@@ -31,13 +31,13 @@ void tesseratos::projectPlugin(Cubos& cubos)
     cubos.depends(assetsPlugin);
     cubos.depends(debuggerPlugin);
 
-    cubos.resource<ProjectTool>();
+    cubos.resource<Project>();
     cubos.resource<ProjectManager::State>();
 
     cubos.system("show Project")
-        .onlyIf([](ProjectTool& tool) { return tool.isOpen; })
+        .onlyIf([](Project& tool) { return tool.isOpen; })
         .tagged(imguiTag)
-        .call([](ProjectManager project, Settings& settings, ProjectTool& tool) {
+        .call([](ProjectManager project, Settings& settings, Project& tool) {
 
             if (!ImGui::Begin("Project", &tool.isOpen))
             {

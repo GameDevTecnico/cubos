@@ -37,8 +37,8 @@ void tesseratos::menuBarPlugin(Cubos& cubos)
 
     cubos.system("setup Menu Bar")
         .tagged(imguiTag)
-        .call([](AssetExplorerTool& assetExplorerTool, DebuggerTool& debuggerTool,ProjectTool& projectTool,
-            ImporterTool& importerTool, SceneEditorTool& sceneEditorTool, VoxelPalleteEditorTool& voxelPalleteEditorTool) {
+        .call([](AssetExplorer& assetExplorer, Debugger& debugger,Project& project,
+            Importer& importer, SceneEditor& sceneEditor, VoxelPalleteEditor& voxelPalleteEditor) {
 
     ImGui::Begin("Tesseratos");
 
@@ -87,12 +87,12 @@ void tesseratos::menuBarPlugin(Cubos& cubos)
             }
             if (ImGui::BeginMenu("View"))
             {
-                ImGui::MenuItem("Asset Explorer", "", &assetExplorerTool.isOpen);
-                ImGui::MenuItem("Debugger", "", &debuggerTool.isOpen);
-                ImGui::MenuItem("Importer", "", &importerTool.isOpen);
-                ImGui::MenuItem("Project", "", &projectTool.isOpen);
-                ImGui::MenuItem("Scene Editor", "", &sceneEditorTool.isOpen);
-                ImGui::MenuItem("Voxel Pallete Editor", "", &voxelPalleteEditorTool.isOpen);
+                ImGui::MenuItem("Asset Explorer", "", &assetExplorer.isOpen);
+                ImGui::MenuItem("Debugger", "", &debugger.isOpen);
+                ImGui::MenuItem("Importer", "", &importer.isOpen);
+                ImGui::MenuItem("Project", "", &project.isOpen);
+                ImGui::MenuItem("Scene Editor", "", &sceneEditor.isOpen);
+                ImGui::MenuItem("Voxel Pallete Editor", "", &voxelPalleteEditor.isOpen);
 
                 ImGui::EndMenu();
             }
