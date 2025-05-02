@@ -109,6 +109,11 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a8055114a6423f22563b54608a5f2d9aa" class="m-doc">build</a>(</span><span class="m-doc-wrap">) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
             </dt>
             <dd>Builds the type.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename F&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6bce50d96d41a890394a6545d30f51ba" class="m-doc">wrap</a>(</span><span class="m-doc-wrap">F T::* pointer) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
+            </dt>
+            <dd>Creates a type with a single field.</dd>
           </dl>
         </section>
         <section>
@@ -238,6 +243,42 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Relation type.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6bce50d96d41a890394a6545d30f51ba"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+                template&lt;typename F&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />TypeBuilder&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6bce50d96d41a890394a6545d30f51ba" class="m-doc-self">wrap</a>(</span><span class="m-doc-wrap">F T::* pointer) &amp;&amp;</span></span>
+            </h3>
+            <p>Creates a type with a single field.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">F</td>
+                  <td>Field type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>pointer</td>
+                  <td>Field pointer.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Type.</td>
                 </tr>
               </tfoot>
             </table>

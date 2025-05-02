@@ -407,6 +407,7 @@
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">TypeRegistry</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores a set of types which can be accessed by name.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1TypeServer.html" class="m-doc">TypeServer</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Used to setup a TypeChannel on top of a stream, from the server side.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1reflection_1_1VectorTrait.html" class="m-doc">VectorTrait</a> <span class="m-doc">Trait for types which represent math vectors using fixed-size contiguous arrays of scalars.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1reflection_1_1WrapperTrait.html" class="m-doc">WrapperTrait</a> <span class="m-doc">Describes the single field of a reflected type.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
@@ -471,12 +472,11 @@
                   <li>struct <a href="structcubos_1_1engine_1_1AudioSource.html" class="m-doc">AudioSource</a> <span class="m-doc">Component which makes an entity emit sound.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1AudioStop.html" class="m-doc">AudioStop</a> <span class="m-doc">Component which triggers the stop of an audio source.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> <span class="m-doc">Component which stores the <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a> state for a render target.</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> <span class="m-doc">Component which adds a box collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> <span class="m-doc">Component which adds a box collision shape to an entity, used with a Collider component.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> <span class="m-doc">Generic component to hold the projection matrix of a specific camera (either perspective or orthogonal).</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> <span class="m-doc">Component which adds a capsule collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> <span class="m-doc">Component which adds a capsule collision shape to an entity, used with a Collider component.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CenterOfMass.html" class="m-doc">CenterOfMass</a> <span class="m-doc">Component which defines the center of mass of a body.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1ChildOf.html" class="m-doc">ChildOf</a> <span class="m-doc">Tree relation which indicates the &#x27;from&#x27; entity is a child of the &#x27;to&#x27; entity.</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> <span class="m-doc">Component which adds a collider to an entity.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">CollidingWith</a> <span class="m-doc">Relation which represents a collision.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CollisionLayers.html" class="m-doc">CollisionLayers</a> <span class="m-doc">Component that contains the collision layers where the collider appears in. Check also <a href="structcubos_1_1engine_1_1CollisionMask.html" class="m-doc">CollisionMask</a>.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1CollisionMask.html" class="m-doc">CollisionMask</a> <span class="m-doc">Component that contains the mask of layers which the collider can collide with. Check also <a href="structcubos_1_1engine_1_1CollisionLayers.html" class="m-doc">CollisionLayers</a>.</span></li>
@@ -609,7 +609,7 @@
                   <li>struct <a href="structcubos_1_1engine_1_1UIVerticalStretch.html" class="m-doc">UIVerticalStretch</a> <span class="m-doc">Component which makes a UI element fit vertically to its parent.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a> <span class="m-doc">Component which holds velocity and forces applied on a particle.</span></li>
                   <li class="m-doc-collapsible collapsed">
-                    <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a> <span class="m-doc">Component which adds a collision shape corresponding to a given voxel grid to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span>
+                    <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a> <span class="m-doc">Component which adds a collision shape corresponding to a given voxel grid to an entity, used with a Collider component.</span>
                     <ul class="m-doc">
                       <li>struct <a href="structcubos_1_1engine_1_1VoxelCollisionShape_1_1BoxShiftPair.html" class="m-doc">BoxShiftPair</a> <span class="m-doc">Struct which holds a sub-box of the voxel collision shape, and its shift from the center of the shape.</span></li>
                     </ul>
