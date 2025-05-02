@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::DataTransparentHash class | Cubos Docs</title>
+  <title>cubos::core::reflection::WrapperTrait class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,106 +46,84 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DataTransparentHash <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="transparent__hash_8hpp.html">&lt;engine/data/transparent_hash.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>WrapperTrait <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="wrapper_8hpp.html">&lt;core/reflection/traits/wrapper.hpp&gt;</a></div>
         </h1>
-        <p>Hash function for std::string and std::string_view, implemented as a class.</p>
+        <p>Describes the single field of a reflected type.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>This allows using std::string_view as a key in unordered_map, while still allowing std::string as a key.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="aac6204d4b76169c8efe1a500982a0073">
+              <span class="m-doc-wrap-bumper"><a href="#aac6204d4b76169c8efe1a500982a0073" class="m-doc-self">WrapperTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1WrapperTrait.html" class="m-doc">WrapperTrait</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt id="ab831678f65a2a3c8bd298f88342650d7">
+              <div class="m-doc-template">template&lt;typename F, typename O&gt;</div>
+              <span class="m-doc-wrap-bumper"><a href="#ab831678f65a2a3c8bd298f88342650d7" class="m-doc-self">WrapperTrait</a>(</span><span class="m-doc-wrap">F O::* pointer)</span>
+            </dt>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae04aee9a33d5a8da6e6ba0b4a8587631" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const char* c) const -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a92e55366d60ae0a3d60dbf88dffc82ad" class="m-doc">type</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
             </dt>
-            <dd>Hash function for const char*.</dd>
+            <dd>Gets the type of the single field.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a305641a14522f0e3aa7d88c8d2f1b494" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">std::string_view sv) const -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad11934a9de52bd1a6c1570eb95935ee9" class="m-doc">value</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; void*</span>
             </dt>
-            <dd>Hash function for std::string_view.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a78ea025ee717202f88bf369e8c73951d" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; s) const -&gt; std::size_t</span>
-            </dt>
-            <dd>Hash function for std::string.</dd>
+            <dd>Gets a pointer to the field on a given instance of the reflected type.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ae04aee9a33d5a8da6e6ba0b4a8587631"><div>
+          <section class="m-doc-details" id="a92e55366d60ae0a3d60dbf88dffc82ad"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />DataTransparentHash::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae04aee9a33d5a8da6e6ba0b4a8587631" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const char* c) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />WrapperTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92e55366d60ae0a3d60dbf88dffc82ad" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-            <p>Hash function for const char*.</p>
+            <p>Gets the type of the single field.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">c</td>
-                  <td>The string to hash.</td>
-                </tr>
-              </tbody>
               <tfoot>
                 <tr>
-                  <th>Returns</th>
-                  <td>The hash value.</td>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a305641a14522f0e3aa7d88c8d2f1b494"><div>
+          <section class="m-doc-details" id="ad11934a9de52bd1a6c1570eb95935ee9"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />DataTransparentHash::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a305641a14522f0e3aa7d88c8d2f1b494" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">std::string_view sv) const</span></span>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />reflection::<wbr />WrapperTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad11934a9de52bd1a6c1570eb95935ee9" class="m-doc-self">value</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
             </h3>
-            <p>Hash function for std::string_view.</p>
+            <p>Gets a pointer to the field on a given instance of the reflected type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">sv</td>
-                  <td>The string view to hash.</td>
+                  <td style="width: 1%">instance</td>
+                  <td>Pointer to the instance.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The hash value.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a78ea025ee717202f88bf369e8c73951d"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />engine::<wbr />DataTransparentHash::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a78ea025ee717202f88bf369e8c73951d" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; s) const</span></span>
-            </h3>
-            <p>Hash function for std::string.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">s</td>
-                  <td>The string to hash.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The hash value.</td>
+                  <td>Pointer to the field on the given instance.</td>
                 </tr>
               </tfoot>
             </table>

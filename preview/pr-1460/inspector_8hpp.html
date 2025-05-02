@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::Collider struct | Cubos Docs</title>
+  <title>engine/imgui/inspector.hpp file | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,51 +46,46 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Collider <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="collider_8hpp.html">&lt;engine/collisions/collider.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_459dda10180a6131eb62bc74e02d0b6e.html">imgui</a>/</span>inspector.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Component which adds a collider to an entity.</p>
+        <p>System argument <a href="classcubos_1_1engine_1_1ImGuiInspector.html" class="m-doc">cubos::<wbr />engine::<wbr />ImGuiInspector</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="a8ce8472f65ba76e8ec3b8597983883ae">
-              glm::mat4 <a href="#a8ce8472f65ba76e8ec3b8597983883ae" class="m-doc-self">transform</a>
-            </dt>
-            <dd>Transform of the collider.</dd>
-            <dt id="a2d3bcc8e442d89dab249819b05bafe61">
-              <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a2d3bcc8e442d89dab249819b05bafe61" class="m-doc-self">localAABB</a>
-            </dt>
-            <dd>Local space AABB of the collider.</dd>
-            <dt id="a5a0506323be1be6fd35cdaee81ffce10">
-              <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a5a0506323be1be6fd35cdaee81ffce10" class="m-doc-self">worldAABB</a>
-            </dt>
-            <dd>World space AABB of the collider.</dd>
-            <dt>
-              float <a href="#af0706098c7b2102f8d36e48c48a2130c" class="m-doc">margin</a>
-            </dt>
-            <dd>Margin of the collider.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>Cubos</strong> libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::core::ecs</a></dt>
+            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
           </dl>
         </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="af0706098c7b2102f8d36e48c48a2130c"><div>
-            <h3>
-              float cubos::<wbr />engine::<wbr />Collider::<wbr /><a href="#af0706098c7b2102f8d36e48c48a2130c" class="m-doc-self">margin</a>
-            </h3>
-            <p>Margin of the collider.</p>
-<p>When the collider shape has sharp edges, a margin is needed. The plugin will set it based on the shape associated with the collider.</p>
-          </div></section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1engine_1_1ImGuiInspector.html" class="m-doc">cubos::engine::ImGuiInspector</a>
+            </dt>
+            <dd>System argument which allows the user to show or edit any reflectable value through ImGui.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1ImGuiInspector_1_1State.html" class="m-doc">cubos::engine::ImGuiInspector::State</a>
+            </dt>
+            <dd>Resource which holds the internal inspector state.</dd>
+          </dl>
         </section>
       </div>
     </div>
