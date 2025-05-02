@@ -15,30 +15,30 @@ using cubos::core::net::TcpStream;
 using cubos::core::reflection::ConstructibleTrait;
 using cubos::core::reflection::Type;
 using cubos::core::reflection::TypeClient;
-using tesseratos::Debugger;
+using tesseratos::DebuggerSession;
 
-CUBOS_REFLECT_IMPL(Debugger)
+CUBOS_REFLECT_IMPL(DebuggerSession)
 {
-    return Type::create("tesseratos::Debugger")
-        .with(ConstructibleTrait::typed<Debugger>().withDefaultConstructor().withMoveConstructor().build());
+    return Type::create("tesseratos::DebuggerSession")
+        .with(ConstructibleTrait::typed<DebuggerSession>().withDefaultConstructor().withMoveConstructor().build());
 }
 
-TypeClient& Debugger::typeClient()
-{
-    return mTypeClient;
-}
-
-const TypeClient& Debugger::typeClient() const
+TypeClient& DebuggerSession::typeClient()
 {
     return mTypeClient;
 }
 
-bool Debugger::isConnected() const
+const TypeClient& DebuggerSession::typeClient() const
+{
+    return mTypeClient;
+}
+
+bool DebuggerSession::isConnected() const
 {
     return mConnection.contains();
 }
 
-bool Debugger::connect(const Address& address, uint16_t port)
+bool DebuggerSession::connect(const Address& address, uint16_t port)
 {
     this->disconnect();
 
@@ -62,7 +62,7 @@ bool Debugger::connect(const Address& address, uint16_t port)
     return false;
 }
 
-void Debugger::disconnect()
+void DebuggerSession::disconnect()
 {
     if (mConnection.contains())
     {
@@ -73,13 +73,13 @@ void Debugger::disconnect()
     }
 }
 
-const TypeClient::Connection& Debugger::connection() const
+const TypeClient::Connection& DebuggerSession::connection() const
 {
     CUBOS_ASSERT(mConnection.contains(), "Debugger is not connected");
     return mConnection.value();
 }
 
-bool Debugger::run()
+bool DebuggerSession::run()
 {
     if (!mConnection.contains())
     {
@@ -97,7 +97,7 @@ bool Debugger::run()
     return true;
 }
 
-bool Debugger::pause()
+bool DebuggerSession::pause()
 {
     if (!mConnection.contains())
     {
@@ -115,7 +115,7 @@ bool Debugger::pause()
     return true;
 }
 
-bool Debugger::update(std::size_t count)
+bool DebuggerSession::update(std::size_t count)
 {
     if (!mConnection.contains())
     {
@@ -134,7 +134,7 @@ bool Debugger::update(std::size_t count)
     return true;
 }
 
-bool Debugger::close()
+bool DebuggerSession::close()
 {
     if (!mConnection.contains())
     {

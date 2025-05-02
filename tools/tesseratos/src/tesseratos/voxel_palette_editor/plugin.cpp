@@ -24,9 +24,9 @@ using cubos::engine::VoxelPalette;
 
 using namespace tesseratos;
 
-CUBOS_REFLECT_IMPL(VoxelPalleteEditorTool)
+CUBOS_REFLECT_IMPL(VoxelPalleteEditor)
 {
-    return cubos::core::ecs::TypeBuilder<VoxelPalleteEditorTool>("VoxelPalleteEditorTool").withField("isOpen", &VoxelPalleteEditorTool::isOpen).build();
+    return cubos::core::ecs::TypeBuilder<VoxelPalleteEditor>("tesseratos::VoxelPalleteEditor").withField("isOpen", &VoxelPalleteEditor::isOpen).build();
 }
 
 namespace
@@ -113,13 +113,13 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
 
     cubos.depends(assetExplorerPlugin);
 
-    cubos.resource<VoxelPalleteEditorTool>();
+    cubos.resource<VoxelPalleteEditor>();
     cubos.resource<SelectedPaletteInfo>();
 
     cubos.system("open Voxel Palette Editor on asset selection")
         .tagged(cubos::engine::imguiTag)
         .call([](EventReader<AssetSelectedEvent> reader, Assets& assets, SelectedPaletteInfo& selectedPalette,
-                 VoxelPalleteEditorTool& tool) {
+                 VoxelPalleteEditor& tool) {
             for (const auto& event : reader)
             {
                 if (assets.type(event.asset).is<VoxelPalette>())
@@ -146,9 +146,9 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
         });
 
     cubos.system("show Voxel Palette Editor UI")
-        .onlyIf([](VoxelPalleteEditorTool& tool) { return tool.isOpen; })
+        .onlyIf([](VoxelPalleteEditor& tool) { return tool.isOpen; })
         .tagged(cubos::engine::imguiTag)
-        .call([](Assets& assets, SelectedPaletteInfo& selectedPalette, RenderPalette& activePalette, VoxelPalleteEditorTool& tool) {
+        .call([](Assets& assets, SelectedPaletteInfo& selectedPalette, RenderPalette& activePalette, VoxelPalleteEditor& tool) {
 
             if (assets.status(selectedPalette.asset) != Assets::Status::Loaded)
             {

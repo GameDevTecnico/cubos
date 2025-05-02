@@ -21,7 +21,7 @@ namespace tesseratos
     /// - @ref Debugger - contains connection information.
 
     /// @brief Tool state.
-    struct DebuggerTool
+    struct Debugger
     {
         CUBOS_REFLECT;
 

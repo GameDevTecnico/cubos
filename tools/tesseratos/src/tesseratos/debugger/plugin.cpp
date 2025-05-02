@@ -12,9 +12,9 @@ using cubos::core::net::Address;
 using namespace cubos::engine;
 using namespace tesseratos;
 
-CUBOS_REFLECT_IMPL(DebuggerTool)
+CUBOS_REFLECT_IMPL(Debugger)
 {
-    return cubos::core::ecs::TypeBuilder<DebuggerTool>("DebuggerTool").withField("isOpen", &DebuggerTool::isOpen).build();
+    return cubos::core::ecs::TypeBuilder<Debugger>("Debugger").withField("isOpen", &Debugger::isOpen).build();
 }
 
 namespace
@@ -34,14 +34,14 @@ void tesseratos::debuggerPlugin(Cubos& cubos)
 {
     cubos.depends(imguiPlugin);
 
-    cubos.resource<DebuggerTool>();
     cubos.resource<Debugger>();
+    cubos.resource<DebuggerSession>();
     cubos.resource<State>();
 
     cubos.system("show Debugger")
-        .onlyIf([](DebuggerTool& tool) { return tool.isOpen; })
+        .onlyIf([](Debugger& tool) { return tool.isOpen; })
         .tagged(imguiTag)
-        .call([](State& state, Debugger& debugger, DebuggerTool& tool) {
+        .call([](State& state, DebuggerSession& debugger, Debugger& tool) {
 
         if (!ImGui::Begin("Debugger", &tool.isOpen))
         {
