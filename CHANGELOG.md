@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for quaternions on the inspector (#1018, **@RiscadoA**).
 - Decomposition of 4x4 matrices into translation, scale and rotation on the inspector (#1179, **@RiscadoA**).
 - Default entities on blueprints, used as roots for scenes (#1398, **@RiscadoA**).
+- Automatically add ColliderAABB when adding a Collision Shape to an entity (#1444, **@fallenatlas**).
 
 ### Changed
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
@@ -35,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
 - Use Roboto font in ImGui, following the Brand Guidelines (#817, **@RiscadoA**).
 - ImGui style colors to match the Brand Guidelines (#817, **@RiscadoA**).
+- Removed transform from Collider (#1429, **@fallenatlas**).
+- Changed Collider component name to ColliderAABB and made it private. (#1428, **@fallenatlas**).
 
 ### Changed
 
