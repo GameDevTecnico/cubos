@@ -5,19 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [v0.7.0] - 2025-05-03
 
 ### Added
 
-- Distance Constraint and sample (#1492, **@joaomanita**).
+- Physics distance constraint (#1492, **@joaomanita**).
 - Entity destruction detection to observers (#1458, **@kuukitenshi**).
-- Added a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
-- Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
+- A menu bar to Tesseratos (#1234, **@jdbaracho**).
+- CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
 - Perform frustum culling for voxel meshes (#1183, **@mkuritsu**).
 - Infinite terrain profiling sample (#1487, **@tomas7770**).
-- Added inertia for voxel shape (**@fallenatlas**).
-- Added a method to Query to count the number of matches (#1451, **@GalaxyCrush**).
-- Added a Menu Bar to Tesseratos (#1234, **@jdbaracho**).
+- Inertia for voxel shape (**@fallenatlas**).
+- A method to Query to count the number of matches (#1451, **@GalaxyCrush**).
 - New ImGui Inspector with custom hook support and better UI (#1179, **@RiscadoA**).
 - Support for MaskTrait and EnumTrait on the inspector (**@RiscadoA**).
 - VectorTrait for providing information about math vector types (**@RiscadoA**).
@@ -27,10 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default entities on blueprints, used as roots for scenes (#1398, **@RiscadoA**).
 - Automatically add ColliderAABB when adding a Collision Shape to an entity (#1444, **@fallenatlas**).
 - Wrapper trait to distinguish between single-field structs and wrapper structs (**SrGesus**, **@RiscadoA**).
-- Bindings subpropject for future lua bindings (#1496, **@mkuritsu**).
-- Added an auto-scroll toggle to Console tool (#1438, **@R-Camacho**)
+- Bindings sub-project for future lua bindings (#1496, **@mkuritsu**).
+- Auto-scroll toggle to Console tool (#1438, **@R-Camacho**).
 
 ### Changed
+
 - Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
 - Made collision layer and mask their own components (#535, **@fallenatlas**).
 - Make RenderPicker optional (#1407, **@tomas7770**).
@@ -40,13 +40,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use Roboto font in ImGui, following the Brand Guidelines (#817, **@RiscadoA**).
 - ImGui style colors to match the Brand Guidelines (#817, **@RiscadoA**).
 - Removed transform from Collider (#1429, **@fallenatlas**).
-- Changed Collider component name to ColliderAABB and made it private. (#1428, **@fallenatlas**).
-
-### Changed
-
+- Collider component name to ColliderAABB and made it private. (#1428, **@fallenatlas**).
 - Blueprint entity naming scheme from dots to # (#1398, **@RiscadoA**).
 - Scene format is now hierarchy based (#1398, **@RiscadoA**).
-- Change RenderVoxelGrid pivot to the center of the grids (#1442, **@kuukitenshi**).
+- RenderVoxelGrid pivot to the center of the grids (#1442, **@kuukitenshi**).
 
 ### Fixed
 
@@ -367,3 +364,4 @@ Although they've moved on, their work is etched into the project's foundations.
 [v0.4.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.4.0
 [v0.5.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.5.0
 [v0.6.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.6.0
+[v0.7.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.7.0
