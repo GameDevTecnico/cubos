@@ -5,9 +5,8 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/collider_aabb.hpp>
+#include <cubos/engine/collisions/collider_bundle.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
-#include <cubos/engine/collisions/collision_layers.hpp>
-#include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/contact_manifold.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
@@ -118,8 +117,7 @@ int main(int argc, char** argv)
     cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
+                      .add(ColliderBundle{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
@@ -129,8 +127,7 @@ int main(int argc, char** argv)
 
         state.b = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
+                      .add(ColliderBundle{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
