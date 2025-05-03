@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/scene/ directory | Cubos Docs</title>
+  <title>DistanceConstraint | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,33 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span>scene<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          DistanceConstraint
         </h1>
-        <p><a href="group__scene-plugin.html" class="m-doc">Scene</a> plugin directory.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#files">Files</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="scene_2bridge_8hpp.html" class="m-doc">bridge.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1SceneBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />SceneBridge</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2scene_2node_8hpp.html" class="m-doc">node.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">cubos::<wbr />engine::<wbr />SceneNode</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2scene_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="scene_8hpp.html" class="m-doc">scene.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">cubos::<wbr />engine::<wbr />Scene</a>.</dd>
-          </dl>
-        </section>
+        <p>Using the <a href="group__physics-solver-plugin.html" class="m-doc">Solver</a> plugin.</p>
+<p><a name="md_distance_constraint_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/distance_constraint">here</a>.</p></aside><p>This example shows the behaviour of the <a href="structcubos_1_1engine_1_1DistanceConstraint.html" class="m-doc">cubos::<wbr />engine::<wbr />DistanceConstraint</a> relation in multiple physics scenarios.</p><p>The <a href="structcubos_1_1engine_1_1DistanceConstraint.html" class="m-doc">cubos::<wbr />engine::<wbr />DistanceConstraint</a> enforces a distance between two entities, whether fixed or a in range. To specify the fixed type add the relation with the isRigid attribute set to true and specify a fixedDistance value. For the range type set the same attribute to false and specify a minDistance and maxDistance instead. The relation also requires the position of the local anchor points in each entity (localAnchor1 and localAnchor2), set these to {0.0F, 0.0F, 0.0F} for the center of the grid.</p><p>The sample includes four scenarios: A simple Circle scenario where one entity is fixed and another has an initial velocity but is constrained to first one, resulting in an &quot;orbiting&quot; motion. A pendulum scenerio with the same setup as the first but the second entity has a simulated gravity instead of a constant velocity. A double pendulum scenario which adds another entity constrained to the original pendulum. And a PushPull scenario where one constrained entity is pushed by a &quot;free&quot; entity until it hits minimum distance with the fixed entity, being repelled outwards and pushing the &quot;free&quot; entity back.</p><p>To switch between these scenarios press the space-bar.</p>
       </div>
     </div>
   </div>

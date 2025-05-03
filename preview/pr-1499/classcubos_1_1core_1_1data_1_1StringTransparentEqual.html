@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::DataInspector class | Cubos Docs</title>
+  <title>cubos::core::data::StringTransparentEqual class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DataInspector <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="data__inspector_8hpp.html">&lt;engine/imgui/data_inspector.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>StringTransparentEqual <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="string__equal_8hpp.html">&lt;core/data/transparent/string_equal.hpp&gt;</a></div>
         </h1>
-        <p>Resource which allows the user to inspect or modify any reflectable value on the UI.</p>
+        <p>Redefines equality function for std::string_view and std::string.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,144 +61,142 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the <a href="examples-engine-imgui.html" class="m-doc">ImGui</a> example for a demonstration of this resource.</p></aside>
+<p>This class is used to allow heterogeneous lookup in unordered maps and sets.</p>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a82f8fa0649983fff7496f2256147b4a2" class="m-doc">show</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
-              const void* value)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab1e378ce05acd8512e54380a89329563" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">std::string_view svhs,
+              std::string_view svvhs) const -&gt; bool</span>
             </dt>
-            <dd>Displays a reflectable value on the UI.</dd>
+            <dd>Compares two string views for equality.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a431062b635f06508cd7e78cde15b9915" class="m-doc">edit</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
-              void* value) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2a61d5a3c9e7714d162ac4dcff7eaa5e" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; shs,
+              std::string_view svhs) const -&gt; bool</span>
             </dt>
-            <dd>Displays a reflectable value on the UI and allows modifying it.</dd>
+            <dd>Compares a string and a string view for equality.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a8b3eab01e985cfa2d7be4be952371c17" class="m-doc">show</a>(</span><span class="m-doc-wrap">const T&amp; value)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab2cf3f5af8ce173f14f0e3bac7b56650" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">std::string_view svhs,
+              const std::string&amp; shs) const -&gt; bool</span>
             </dt>
-            <dd>Displays a reflectable value on the UI.</dd>
+            <dd>Compares a string view and a string for equality.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a56d442c77f1a4115f953605b86a26f8c" class="m-doc">edit</a>(</span><span class="m-doc-wrap">T&amp; value) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4f272555f2e15eaf5637874aa8f87f89" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; shs,
+              const std::string&amp; sshs) const -&gt; bool</span>
             </dt>
-            <dd>Displays a reflectable value on the UI and allows modifying it.</dd>
+            <dd>Compares two strings for equality.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a82f8fa0649983fff7496f2256147b4a2"><div>
+          <section class="m-doc-details" id="ab1e378ce05acd8512e54380a89329563"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a82f8fa0649983fff7496f2256147b4a2" class="m-doc-self">show</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
-              const void* value)</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />StringTransparentEqual::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab1e378ce05acd8512e54380a89329563" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">std::string_view svhs,
+              std::string_view svvhs) const</span></span>
             </h3>
-            <p>Displays a reflectable value on the UI.</p>
+            <p>Compares two string views for equality.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">type</td>
-                  <td>Value type.</td>
+                  <td style="width: 1%">svhs</td>
+                  <td>The first string view.</td>
                 </tr>
                 <tr>
-                  <td>value</td>
-                  <td>Pointer to value.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a431062b635f06508cd7e78cde15b9915"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a431062b635f06508cd7e78cde15b9915" class="m-doc-self">edit</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
-              void* value)</span></span>
-            </h3>
-            <p>Displays a reflectable value on the UI and allows modifying it.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">type</td>
-                  <td>Value type.</td>
-                </tr>
-                <tr>
-                  <td>value</td>
-                  <td>Pointer to value.</td>
+                  <td>svvhs</td>
+                  <td>The second string view.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the object was modified.</td>
+                  <td>True if the string views are equal, false otherwise.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8b3eab01e985cfa2d7be4be952371c17"><div>
+          <section class="m-doc-details" id="a2a61d5a3c9e7714d162ac4dcff7eaa5e"><div>
             <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8b3eab01e985cfa2d7be4be952371c17" class="m-doc-self">show</a>(</span><span class="m-doc-wrap">const T&amp; value)</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />StringTransparentEqual::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2a61d5a3c9e7714d162ac4dcff7eaa5e" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; shs,
+              std::string_view svhs) const</span></span>
             </h3>
-            <p>Displays a reflectable value on the UI.</p>
+            <p>Compares a string and a string view for equality.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Value type.</td>
-                </tr>
-              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>value</td>
-                  <td>Pointer to value.</td>
+                  <td style="width: 1%">shs</td>
+                  <td>The string.</td>
                 </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a56d442c77f1a4115f953605b86a26f8c"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56d442c77f1a4115f953605b86a26f8c" class="m-doc-self">edit</a>(</span><span class="m-doc-wrap">T&amp; value)</span></span>
-            </h3>
-            <p>Displays a reflectable value on the UI and allows modifying it.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
                 <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Value type.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>value</td>
-                  <td>Pointer to value.</td>
+                  <td>svhs</td>
+                  <td>The string view.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the object was modified.</td>
+                  <td>True if the string and string view are equal, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab2cf3f5af8ce173f14f0e3bac7b56650"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />StringTransparentEqual::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab2cf3f5af8ce173f14f0e3bac7b56650" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">std::string_view svhs,
+              const std::string&amp; shs) const</span></span>
+            </h3>
+            <p>Compares a string view and a string for equality.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">svhs</td>
+                  <td>The string view.</td>
+                </tr>
+                <tr>
+                  <td>shs</td>
+                  <td>The string.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the string view and string are equal, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4f272555f2e15eaf5637874aa8f87f89"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />StringTransparentEqual::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f272555f2e15eaf5637874aa8f87f89" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; shs,
+              const std::string&amp; sshs) const</span></span>
+            </h3>
+            <p>Compares two strings for equality.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">shs</td>
+                  <td>The first string.</td>
+                </tr>
+                <tr>
+                  <td>sshs</td>
+                  <td>The second string.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the strings are equal, false otherwise.</td>
                 </tr>
               </tfoot>
             </table>
