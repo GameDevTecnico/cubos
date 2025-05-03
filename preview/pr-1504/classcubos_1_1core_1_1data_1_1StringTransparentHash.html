@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/collisions/collider.hpp file | Cubos Docs</title>
+  <title>cubos::core::data::StringTransparentHash class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,38 +46,110 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_db86702e1371d7558db3699dd3786a14.html">collisions</a>/</span>collider.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>StringTransparentHash <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="string__hash_8hpp.html">&lt;core/data/transparent/string_hash.hpp&gt;</a></div>
         </h1>
-        <p>Component <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">cubos::<wbr />engine::<wbr />Collider</a>.</p>
+        <p>Hash function for std::string and std::string_view, implemented as a class.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
-          <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>Cubos</strong> libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
-            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+<p>This allows using std::string_view as a key in unordered_map, while still allowing std::string as a key.</p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">cubos::engine::Collider</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#a757ec9bafe1bc4bda84470f36e3b1286" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const char* c) const -&gt; std::size_t</span>
             </dt>
-            <dd>Component which adds a collider to an entity.</dd>
+            <dd>Hash function for const char*.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af4d43b6f15a5af42bcc6686e05ee34a1" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">std::string_view sv) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Hash function for std::string_view.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a15137bdd906fee56979012c1c0bf390c" class="m-doc">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; s) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Hash function for std::string.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a757ec9bafe1bc4bda84470f36e3b1286"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />StringTransparentHash::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a757ec9bafe1bc4bda84470f36e3b1286" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const char* c) const</span></span>
+            </h3>
+            <p>Hash function for const char*.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">c</td>
+                  <td>The string to hash.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The hash value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af4d43b6f15a5af42bcc6686e05ee34a1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />StringTransparentHash::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af4d43b6f15a5af42bcc6686e05ee34a1" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">std::string_view sv) const</span></span>
+            </h3>
+            <p>Hash function for std::string_view.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">sv</td>
+                  <td>The string view to hash.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The hash value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a15137bdd906fee56979012c1c0bf390c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />StringTransparentHash::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15137bdd906fee56979012c1c0bf390c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::string&amp; s) const</span></span>
+            </h3>
+            <p>Hash function for std::string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">s</td>
+                  <td>The string to hash.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The hash value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
