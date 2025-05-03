@@ -9,8 +9,10 @@
     "y": 0.5,
     "z": 0.5 
   },
-  "cubos::engine::CollisionLayers": 1,
-  "cubos::engine::CollisionMask": 1,
+  "cubos::engine::ColliderBundle": {
+        "layers": 1,
+        "mask": 1
+  },
   "cubos::engine::Force": {
   },
   "cubos::engine::Torque": {

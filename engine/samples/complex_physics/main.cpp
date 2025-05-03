@@ -2,8 +2,7 @@
 #include <glm/gtx/vector_angle.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
-#include <cubos/engine/collisions/collision_layers.hpp>
-#include <cubos/engine/collisions/collision_mask.hpp>
+#include <cubos/engine/collisions/collider_bundle.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
@@ -115,8 +114,7 @@ int main(int argc, char** argv)
         // Spawn floor collider
         cmds.create()
             .add(BoxCollisionShape{cubos::core::geom::Box{.halfSize = glm::vec3{20.0F, 0.5F, 20.0F}}})
-            .add(CollisionLayers{})
-            .add(CollisionMask{})
+            .add(ColliderBundle{})
             .add(LocalToWorld{})
             .add(Position{{0.0F, 0.0F, 0.0F}})
             .add(Rotation{})
