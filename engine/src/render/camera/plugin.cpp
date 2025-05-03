@@ -1,6 +1,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <cubos/core/memory/opt.hpp>
+#include <cubos/core/reflection/external/glm.hpp>
 
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
@@ -79,26 +80,28 @@ void cubos::engine::cameraPlugin(Cubos& cubos)
         });
 
     cubos.system("update Camera frustum by PerspectiveCamera")
-        .call([](Query<Camera&, const PerspectiveCamera&, const LocalToWorld&> query) {
-            for (auto [camera, perspective, localToWorld] : query)
+        .call([](Query<Camera&, const PerspectiveCamera&, const LocalToWorld&, const DrawsTo&, const RenderTarget&>
+                     query) {
+            for (auto [camera, perspective, localToWorld, drawsTo, target] : query)
             {
                 if (camera.active && !camera.freezeFrustum)
                 {
-                    glm::vec up = localToWorld.up();
+                    glm::vec3 up = localToWorld.up();
                     glm::vec3 front = -localToWorld.forward();
-                    glm::vec3 right = glm::cross(up, front);
+                    glm::vec3 right = glm::normalize(glm::cross(front, up));
                     glm::vec3 position = localToWorld.worldPosition();
 
-                    float aspect = camera.projection[1][1] / camera.projection[0][0];
+                    float aspect = (static_cast<float>(target.size.x) * drawsTo.viewportSize.x) /
+                                   (static_cast<float>(target.size.y) * drawsTo.viewportSize.y);
                     float halfVSide = camera.zFar * tanf(glm::radians(perspective.fovY) * 0.5F);
                     float halfHSide = halfVSide * aspect;
 
                     glm::vec3 nearPoint = position + camera.zNear * front;
                     glm::vec3 farPoint = position + camera.zFar * front;
-                    glm::vec3 rightNorm = glm::normalize(glm::cross(front + right * halfHSide, up));
-                    glm::vec3 leftNorm = glm::normalize(glm::cross(up, front - right * halfHSide));
-                    glm::vec3 topNorm = glm::normalize(glm::cross(right, front + up * halfVSide));
-                    glm::vec3 botNorm = glm::normalize(glm::cross(front - up * halfVSide, right));
+                    glm::vec3 rightNorm = glm::normalize(glm::cross(front + right * halfHSide, -up));
+                    glm::vec3 leftNorm = glm::normalize(glm::cross(front - right * halfHSide, up));
+                    glm::vec3 topNorm = glm::normalize(glm::cross(front + up * halfVSide, right));
+                    glm::vec3 botNorm = glm::normalize(glm::cross(front - up * halfVSide, -right));
 
                     camera.frustum.near = {.normal = front, .d = glm::dot(front, nearPoint)};
                     camera.frustum.far = {.normal = -front, .d = glm::dot(-front, farPoint)};
@@ -117,34 +120,30 @@ void cubos::engine::cameraPlugin(Cubos& cubos)
             {
                 if (camera.active && !camera.freezeFrustum)
                 {
-                    glm::vec up = localToWorld.up();
+                    glm::vec3 up = localToWorld.up();
                     glm::vec3 front = -localToWorld.forward();
-                    glm::vec3 right = glm::cross(up, front);
+                    glm::vec3 right = glm::normalize(glm::cross(front, up));
                     glm::vec3 position = localToWorld.worldPosition();
 
                     float aspect = (static_cast<float>(target.size.x) * drawsTo.viewportSize.x) /
                                    (static_cast<float>(target.size.y) * drawsTo.viewportSize.y);
-                    float leftSize = -ortho.size;
-                    float rightSize = ortho.size;
-                    float bottomSize = -ortho.size;
-                    float topSize = ortho.size;
+                    float horizontal = ortho.size;
+                    float vertical = ortho.size;
                     if (ortho.axis == OrthographicCamera::Axis::Vertical)
                     {
-                        leftSize *= aspect;
-                        rightSize *= aspect;
+                        horizontal *= aspect;
                     }
                     else
                     {
-                        bottomSize /= aspect;
-                        topSize /= aspect;
+                        vertical /= aspect;
                     }
 
                     glm::vec3 nearPoint = position + camera.zNear * front;
                     glm::vec3 farPoint = position + camera.zFar * front;
-                    glm::vec3 rightPoint = rightSize * right;
-                    glm::vec3 leftPoint = leftSize * right;
-                    glm::vec3 topPoint = topSize * up;
-                    glm::vec3 bottomPoint = bottomSize * up;
+                    glm::vec3 rightPoint = position + horizontal * right;
+                    glm::vec3 leftPoint = position + horizontal * -right;
+                    glm::vec3 topPoint = position + vertical * up;
+                    glm::vec3 bottomPoint = position + vertical * -up;
 
                     camera.frustum.near = {.normal = front, .d = glm::dot(front, nearPoint)};
                     camera.frustum.far = {.normal = -front, .d = glm::dot(-front, farPoint)};
