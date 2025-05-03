@@ -1,12 +1,12 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <cubos/core/geom/box.hpp>
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/uuid.hpp>
 #include <cubos/core/thread/pool.hpp>
 #include <cubos/core/thread/task.hpp>
-#include <cubos/core/geom/box.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/render/mesh/mesh.hpp>
@@ -120,7 +120,9 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                 {
                     auto assetRead = assets.read(entry.asset);
                     cubos::core::geom::Box box{.halfSize = glm::vec3(assetRead->size()) * 0.5F};
-                    cmds.add(ent, RenderMesh{.firstBucketId = entry.firstBucketId, .baseOffset = assetRead->size() / 2U, .boundingBox = box});
+                    cmds.add(ent, RenderMesh{.firstBucketId = entry.firstBucketId,
+                                             .baseOffset = -static_cast<glm::vec3>(assetRead->size()) / 2.0F,
+                                             .boundingBox = box});
                     cmds.remove<LoadRenderVoxels>(ent);
                 }
             }
@@ -167,7 +169,9 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                         CUBOS_ASSERT(entry.firstBucketId != RenderMeshPool::BucketId::Invalid);
                         auto assetRead = assets.read(entry.asset);
                         cubos::core::geom::Box box{.halfSize = glm::vec3(assetRead->size()) * 0.5F};
-                        cmds.add(ent, RenderMesh{.firstBucketId = entry.firstBucketId, .baseOffset = assetRead->size() / 2U, .boundingBox = box});
+                        cmds.add(ent, RenderMesh{.firstBucketId = entry.firstBucketId,
+                                                 .baseOffset = -static_cast<glm::vec3>(assetRead->size()) / 2.0F,
+                                                 .boundingBox = box});
                         cmds.remove<LoadRenderVoxels>(ent);
                     }
                 }
@@ -178,8 +182,10 @@ void cubos::engine::renderMeshPlugin(Cubos& cubos)
                     cmds.remove<LoadRenderVoxels>(ent);
                     auto assetRead = assets.read(entry.asset);
                     cubos::core::geom::Box box{.halfSize = glm::vec3(assetRead->size()) * 0.5F};
-                    cmds.add(ent, RenderMesh{.firstBucketId = firstBucketId, .baseOffset = assetRead->size() / 2U, .boundingBox = box});
-                    
+                    cmds.add(ent, RenderMesh{.firstBucketId = firstBucketId,
+                                             .baseOffset = -static_cast<glm::vec3>(assetRead->size()) / 2.0F,
+                                             .boundingBox = box});
+
                     CUBOS_INFO("Finished meshing voxel grid asset {} ({} vertices), allocated new render bucket",
                                grid.asset.getIdString(), vertices.size());
 

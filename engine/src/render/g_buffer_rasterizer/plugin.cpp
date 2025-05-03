@@ -307,11 +307,12 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                     // Iterate over all mesh buckets and issue draw calls.
                     for (auto [meshEnt, meshLocalToWorld, mesh, grid] : meshes)
                     {
-                        PerMesh perMesh{.model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset + (mesh.baseOffset * -1.0F)),
-                            .picker = meshEnt.index,
-                            .padding = {}};
-                            state.perMeshCB->fill(&perMesh, sizeof(perMesh));
-                            auto voxelGrid = assets.read(grid.asset);
+                        PerMesh perMesh{.model = meshLocalToWorld.mat *
+                                                 glm::translate(glm::mat4(1.0F), grid.offset + mesh.baseOffset),
+                                        .picker = meshEnt.index,
+                                        .padding = {}};
+                        state.perMeshCB->fill(&perMesh, sizeof(perMesh));
+                        auto voxelGrid = assets.read(grid.asset);
                         glm::uvec3 size = voxelGrid->size();
                         Box box{.halfSize = size / 2U};
                         if (cubos::core::geom::intersects(camera.frustum, box, meshLocalToWorld.mat))
