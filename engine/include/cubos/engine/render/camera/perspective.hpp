@@ -18,6 +18,6 @@ namespace cubos::engine
         CUBOS_REFLECT;
 
         /// @brief Vertical field of view in degrees.
-        float fovY = 60.0F;
+        float fovY{60.0F};
     };
 } // namespace cubos::engine
