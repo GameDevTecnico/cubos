@@ -107,7 +107,10 @@ void cubos::engine::debugCameraPlugin(Cubos& cubos)
             {
                 if (controller.enabled)
                 {
-                    controller.speed += input.axis("debug-change-speed") * deltaTime.value();
+                    // Speed up exponentially, taking the delta time into account.
+                    float changeSpeed = input.axis("debug-change-speed");
+                    controller.speed *= glm::pow(2.0F, changeSpeed * deltaTime.value() * 4.0F);
+                    controller.speed = glm::clamp(controller.speed, 0.01F, 1000000.0F);
                 }
             }
         });

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Debug camera now accelerates exponentially (#1435, **@RiscadoA**).
+
 ### Fixed
 
 - Correctly order UI and ImGui tags so that ImGui is rendered on top of our UI (**@RiscadoA**).
