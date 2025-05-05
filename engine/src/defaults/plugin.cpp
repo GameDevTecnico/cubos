@@ -52,6 +52,6 @@ void cubos::engine::defaultsPlugin(Cubos& cubos)
     cubos.plugin(imguiPlugin);
 
     cubos.tag(gizmosDrawTag).after(toneMappingTag);
-    cubos.tag(uiDrawTag).after(gizmosDrawTag);
-    cubos.tag(imguiEndTag).after(uiDrawTag);
+    cubos.tag(uiEndTag).after(gizmosDrawTag);
+    cubos.tag(imguiEndTag).after(uiEndTag);
 }
