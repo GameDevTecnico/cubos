@@ -117,13 +117,23 @@ void cubos::engine::debugCameraPlugin(Cubos& cubos)
 
     cubos.system("update Debug Camera")
         .tagged(imguiTag)
-        .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("Debug Camera"); })
-        .call([](State& state, Commands cmds, Query<Entity, Camera&, const DrawsTo&, const RenderTarget&> cameras,
+        .call([](State& state, Toolbox& toolbox, Commands cmds,
+                 Query<Entity, Camera&, const DrawsTo&, const RenderTarget&> cameras,
                  Query<Entity, const RenderTarget&> targets) {
-            ImGui::Begin("Debug Camera");
+            if (toolbox.isOpen("Debug Camera"))
+            {
+                ImGui::Begin("Debug Camera");
 
-            ImGui::Text("Current camera: %s", state.active ? "Debug" : "Game");
-            if (ImGui::Button("Toggle camera"))
+                ImGui::Text("Current camera: %s", state.active ? "Debug" : "Game");
+                if (ImGui::Button("Toggle camera"))
+                {
+                    state.active = !state.active;
+                }
+
+                ImGui::End();
+            }
+
+            if (ImGui::IsKeyPressed(ImGuiKey_F9))
             {
                 state.active = !state.active;
             }
@@ -159,7 +169,5 @@ void cubos::engine::debugCameraPlugin(Cubos& cubos)
                     }
                 }
             }
-
-            ImGui::End();
         });
 }
