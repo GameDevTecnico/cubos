@@ -1,6 +1,7 @@
 #include "plugin.hpp"
 #include <algorithm>
 
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
@@ -11,7 +12,6 @@
 #include <cubos/engine/transform/plugin.hpp>
 
 #include "../interface/plugin.hpp"
-#include "collider_aabb.hpp"
 #include "collision_group.hpp"
 #include "sweep_and_prune.hpp"
 
@@ -26,8 +26,6 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
     cubos.depends(transformPlugin);
     cubos.depends(fixedStepPlugin);
     cubos.depends(interfaceCollisionsPlugin);
-
-    cubos.component<ColliderAABB>();
 
     cubos.relation<PotentiallyCollidingWith>();
 
