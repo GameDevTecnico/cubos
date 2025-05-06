@@ -4,6 +4,7 @@
 #include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp> //maybe put this in the collisions plugin
 #include <cubos/engine/collisions/collision_mask.hpp>
@@ -32,8 +33,6 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
-
-#include "../src/collisions/broad_phase/collider_aabb.hpp"
 
 using cubos::core::geom::Box;
 using cubos::core::io::Key;

@@ -12,9 +12,11 @@
 #include <cubos/core/ecs/system/fetcher.hpp>
 #include <cubos/core/geom/box.hpp>
 
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
+#include <cubos/engine/collisions/shapes/voxel.hpp>
 #include <cubos/engine/prelude.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/position.hpp>
@@ -60,9 +62,12 @@ namespace cubos::engine
         Raycast(
             Query<Entity, const LocalToWorld&, const BoxCollisionShape&, const CollisionLayers&> boxes,
             Query<Entity, const LocalToWorld&, const CapsuleCollisionShape&, const Position&, const CollisionLayers&>
-                capsules)
+                capsules,
+            Query<Entity, const LocalToWorld&, const VoxelCollisionShape&, const ColliderAABB&, const CollisionLayers&>
+                voxels)
             : mBoxes{std::move(boxes)}
-            , mCapsules{std::move(capsules)} {};
+            , mCapsules{std::move(capsules)}
+            , mVoxels{std::move(voxels)} {};
 
         /// @brief Fires a ray and returns the first hit.
         /// @param ray Ray to fire.
@@ -73,6 +78,8 @@ namespace cubos::engine
         Query<Entity, const LocalToWorld&, const BoxCollisionShape&, const CollisionLayers&> mBoxes;
         Query<Entity, const LocalToWorld&, const CapsuleCollisionShape&, const Position&, const CollisionLayers&>
             mCapsules;
+        Query<Entity, const LocalToWorld&, const VoxelCollisionShape&, const ColliderAABB&, const CollisionLayers&>
+            mVoxels;
     };
 } // namespace cubos::engine
 
@@ -90,10 +97,14 @@ namespace cubos::core::ecs
         SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::CapsuleCollisionShape&,
                             const cubos::engine::Position&, const cubos::engine::CollisionLayers&>>
             capsules;
+        SystemFetcher<Query<Entity, const cubos::engine::LocalToWorld&, const cubos::engine::VoxelCollisionShape&,
+                            const cubos::engine::ColliderAABB&, const cubos::engine::CollisionLayers&>>
+            voxels;
 
         SystemFetcher(World& world, const SystemOptions& options)
             : boxes{world, options}
             , capsules{world, options}
+            , voxels{world, options}
         {
         }
 
@@ -101,11 +112,16 @@ namespace cubos::core::ecs
         {
             boxes.analyze(access);
             capsules.analyze(access);
+            voxels.analyze(access);
         }
 
         cubos::engine::Raycast fetch(const SystemContext& ctx)
         {
-            return {boxes.fetch(ctx), capsules.fetch(ctx)};
+            return {
+                boxes.fetch(ctx),
+                capsules.fetch(ctx),
+                voxels.fetch(ctx),
+            };
         }
     };
 } // namespace cubos::core::ecs

@@ -7,9 +7,9 @@
 
 #pragma once
 
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/prelude.hpp>
 
-#include "collider_aabb.hpp"
 #include "potentially_colliding_with.hpp"
 
 namespace cubos::engine
