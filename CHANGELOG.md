@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Voxel collision shapes to debug collider gizmos (**@RiscadoA**).
+
 ### Changed
 
 - Debug camera now accelerates exponentially (#1435, **@RiscadoA**).
