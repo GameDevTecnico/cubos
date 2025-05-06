@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/collisions/ directory | Cubos Docs</title>
+  <title>cubos::engine::ColliderAABB struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,46 +46,48 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span>collisions<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ColliderAABB <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="collider__aabb_8hpp.html">&lt;engine/collisions/collider_aabb.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__collisions-plugin.html" class="m-doc">Collisions</a> plugin directory.</p>
+        <p>Component which adds an collider AABB to an entity.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#subdirs">Directories</a></li>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="subdirs">
-          <h2><a href="#subdirs">Directories</a></h2>
+<p>Added automatically when any collision shape is added to the entity.</p>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>directory <a href="dir_46c6a4a310169812045f09ba6135aa36.html" class="m-doc">shapes</a>/</dt>
-            <dd>Collision shapes components directory.</dd>
+            <dt id="a7c27ca3d4d19e3c1fe438fe0b8b32b38">
+              <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a7c27ca3d4d19e3c1fe438fe0b8b32b38" class="m-doc-self">localAABB</a>
+            </dt>
+            <dd>Local space AABB of the collider.</dd>
+            <dt id="a8fe454d735d083948d3f2388f6cbefce">
+              <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a8fe454d735d083948d3f2388f6cbefce" class="m-doc-self">worldAABB</a>
+            </dt>
+            <dd>World space AABB of the collider.</dd>
+            <dt>
+              float <a href="#ac12393624bfd54dad9387336060926a5" class="m-doc">margin</a>
+            </dt>
+            <dd>Margin of the collider.</dd>
           </dl>
         </section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="collider__aabb_8hpp.html" class="m-doc">collider_aabb.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">cubos::<wbr />engine::<wbr />ColliderAABB</a>.</dd>
-            <dt>file <a href="colliding__with_8hpp.html" class="m-doc">colliding_with.hpp</a></dt>
-            <dd>Relation <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">cubos::<wbr />engine::<wbr />CollidingWith</a>.</dd>
-            <dt>file <a href="collision__layers_8hpp.html" class="m-doc">collision_layers.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1CollisionLayers.html" class="m-doc">cubos::<wbr />engine::<wbr />CollisionLayers</a>.</dd>
-            <dt>file <a href="collision__mask_8hpp.html" class="m-doc">collision_mask.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1CollisionMask.html" class="m-doc">cubos::<wbr />engine::<wbr />CollisionMask</a>.</dd>
-            <dt>file <a href="contact__manifold_8hpp.html" class="m-doc">contact_manifold.hpp</a></dt>
-            <dd>Struct <a href="structcubos_1_1engine_1_1ContactManifold.html" class="m-doc">cubos::<wbr />engine::<wbr />ContactManifold</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2collisions_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="raycast_8hpp.html" class="m-doc">raycast.hpp</a></dt>
-            <dd>System argument <a href="classcubos_1_1engine_1_1Raycast.html" class="m-doc">cubos::<wbr />engine::<wbr />Raycast</a>.</dd>
-          </dl>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="ac12393624bfd54dad9387336060926a5"><div>
+            <h3>
+              float cubos::<wbr />engine::<wbr />ColliderAABB::<wbr /><a href="#ac12393624bfd54dad9387336060926a5" class="m-doc-self">margin</a>
+            </h3>
+            <p>Margin of the collider.</p>
+<p>When the collider shape has sharp edges, a margin is needed. The plugin will set it based on the shape associated with the collider.</p>
+          </div></section>
         </section>
       </div>
     </div>
