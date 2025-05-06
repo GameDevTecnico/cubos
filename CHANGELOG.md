@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Correctly order UI and ImGui tags so that ImGui is rendered on top of our UI (**@RiscadoA**).
+- Begin UI frame after drawing gizmos (**@tomas7770**).
 
 ## [v0.7.0] - 2025-05-03
 
