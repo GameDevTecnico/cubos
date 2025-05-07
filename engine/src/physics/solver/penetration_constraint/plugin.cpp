@@ -92,25 +92,44 @@ static void solvePenetrationConstraint(
     for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraints, ent2, mass2,
                inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
     {
-        glm::vec3 v1 = velocity1.vec;
-        glm::vec3 v2 = velocity2.vec;
+        const Mass* matchedMass1 = &mass1;
+        const Mass* matchedMass2 = &mass2;
+        const Inertia* matchedInertia1 = &inertia1;
+        const Inertia* matchedInertia2 = &inertia2;
+        const Rotation* matchedRotation1 = &rotation1;
+        const Rotation* matchedRotation2 = &rotation2;
+        const AccumulatedCorrection* matchedCorrection1 = &correction1;
+        const AccumulatedCorrection* matchedCorrection2 = &correction2;
+        Velocity* matchedVelocity1 = &velocity1;
+        Velocity* matchedVelocity2 = &velocity2;
+        AngularVelocity* matchedAngVelocity1 = &angVelocity1;
+        AngularVelocity* matchedAngVelocity2 = &angVelocity2;
 
-        glm::vec3 w1 = angVelocity1.vec;
-        glm::vec3 w2 = angVelocity2.vec;
+        if (ent1 != constraints.entity)
+        {
+            std::swap(matchedMass1, matchedMass2);
+            std::swap(matchedInertia1, matchedInertia2);
+            std::swap(matchedRotation1, matchedRotation2);
+            std::swap(matchedCorrection1, matchedCorrection2);
+            std::swap(matchedVelocity1, matchedVelocity2);
+            std::swap(matchedAngVelocity1, matchedAngVelocity2);
+        }
+
+        glm::vec3 v1 = matchedVelocity1->vec;
+        glm::vec3 v2 = matchedVelocity2->vec;
+
+        glm::vec3 w1 = matchedAngVelocity1->vec;
+        glm::vec3 w2 = matchedAngVelocity2->vec;
 
         for (auto& constraint : constraints.penConstraints)
         {
             // Separate bodies
             for (PenetrationConstraintPointData& contactPoint : constraint.points)
             {
-                glm::vec3 r1 = rotation1.quat * contactPoint.localAnchor1;
-                glm::vec3 r2 = rotation2.quat * contactPoint.localAnchor2;
+                glm::vec3 r1 = matchedRotation1->quat * contactPoint.localAnchor1;
+                glm::vec3 r2 = matchedRotation2->quat * contactPoint.localAnchor2;
 
-                glm::vec3 deltaSeparation = correction2.position + r2 - correction1.position - r1;
-                if (ent1 != constraints.entity)
-                {
-                    deltaSeparation *= -1.0F;
-                }
+                glm::vec3 deltaSeparation = matchedCorrection2->position + r2 - matchedCorrection1->position - r1;
 
                 float separation = glm::dot(deltaSeparation, constraint.normal) + contactPoint.initialSeparation;
 
@@ -133,10 +152,6 @@ static void solvePenetrationConstraint(
                 glm::vec3 vr1 = v1 + glm::cross(w1, r1);
                 glm::vec3 vr2 = v2 + glm::cross(w2, r2);
                 glm::vec3 vr = vr2 - vr1;
-                if (ent1 != constraints.entity)
-                {
-                    vr *= -1.0F;
-                }
 
                 float vn = glm::dot(vr, constraint.normal);
 
@@ -150,27 +165,16 @@ static void solvePenetrationConstraint(
                 contactPoint.normalImpulse = newImpulse;
 
                 glm::vec3 p = impulse * constraint.normal;
-                if (ent1 != constraints.entity)
-                {
-                    p *= -1.0F;
-                }
 
-                v1 -= p * mass1.inverseMass;
-                w1 -= inertia1.inverseInertia * glm::cross(r1, p);
-                v2 += p * mass2.inverseMass;
-                w2 += inertia2.inverseInertia * glm::cross(r2, p);
+                v1 -= p * matchedMass1->inverseMass;
+                w1 -= matchedInertia1->inverseInertia * glm::cross(r1, p);
+                v2 += p * matchedMass2->inverseMass;
+                w2 += matchedInertia2->inverseInertia * glm::cross(r2, p);
             }
 
             glm::vec3 tangent1;
             glm::vec3 tangent2;
-            if (ent1 != constraints.entity)
-            {
-                getTangents(v2, v1, constraint.normal, tangent1, tangent2, solverConstants);
-            }
-            else
-            {
-                getTangents(v1, v2, constraint.normal, tangent1, tangent2, solverConstants);
-            }
+            getTangents(v1, v2, constraint.normal, tangent1, tangent2, solverConstants);
 
             // Friction
             for (PenetrationConstraintPointData& contactPoint : constraint.points)
@@ -182,10 +186,6 @@ static void solvePenetrationConstraint(
                 glm::vec3 vr1 = v1 + glm::cross(w1, r1);
                 glm::vec3 vr2 = v2 + glm::cross(w2, r2);
                 glm::vec3 vr = vr2 - vr1;
-                if (ent1 != constraints.entity)
-                {
-                    vr *= -1.0F;
-                }
 
                 float vn1 = glm::dot(vr, tangent1);
                 float vn2 = glm::dot(vr, tangent2);
@@ -205,21 +205,17 @@ static void solvePenetrationConstraint(
 
                 // Apply contact impulse
                 glm::vec3 p = impulse1 * tangent1 + impulse2 * tangent2;
-                if (ent1 != constraints.entity)
-                {
-                    p *= -1.0F;
-                }
 
-                v1 -= p * mass1.inverseMass;
-                w1 -= inertia1.inverseInertia * glm::cross(r1, p);
-                v2 += p * mass2.inverseMass;
-                w2 += inertia2.inverseInertia * glm::cross(r2, p);
+                v1 -= p * matchedMass1->inverseMass;
+                w1 -= matchedInertia1->inverseInertia * glm::cross(r1, p);
+                v2 += p * matchedMass2->inverseMass;
+                w2 += matchedInertia2->inverseInertia * glm::cross(r2, p);
             }
         }
-        velocity1.vec = v1;
-        angVelocity1.vec = w1;
-        velocity2.vec = v2;
-        angVelocity2.vec = w2;
+        matchedVelocity1->vec = v1;
+        matchedAngVelocity1->vec = w1;
+        matchedVelocity2->vec = v2;
+        matchedAngVelocity2->vec = w2;
     }
 }
 
@@ -253,25 +249,41 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
             for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraints, ent2, mass2,
                        inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
             {
-                glm::vec3 v1 = velocity1.vec;
-                glm::vec3 v2 = velocity2.vec;
+                const Mass* matchedMass1 = &mass1;
+                const Mass* matchedMass2 = &mass2;
+                const Inertia* matchedInertia1 = &inertia1;
+                const Inertia* matchedInertia2 = &inertia2;
+                const Rotation* matchedRotation1 = &rotation1;
+                const Rotation* matchedRotation2 = &rotation2;
+                const AccumulatedCorrection* matchedCorrection1 = &correction1;
+                const AccumulatedCorrection* matchedCorrection2 = &correction2;
+                Velocity* matchedVelocity1 = &velocity1;
+                Velocity* matchedVelocity2 = &velocity2;
+                AngularVelocity* matchedAngVelocity1 = &angVelocity1;
+                AngularVelocity* matchedAngVelocity2 = &angVelocity2;
 
-                glm::vec3 w1 = angVelocity1.vec;
-                glm::vec3 w2 = angVelocity2.vec;
+                if (ent1 != constraints.entity)
+                {
+                    std::swap(matchedMass1, matchedMass2);
+                    std::swap(matchedInertia1, matchedInertia2);
+                    std::swap(matchedRotation1, matchedRotation2);
+                    std::swap(matchedCorrection1, matchedCorrection2);
+                    std::swap(matchedVelocity1, matchedVelocity2);
+                    std::swap(matchedAngVelocity1, matchedAngVelocity2);
+                }
+
+                glm::vec3 v1 = matchedVelocity1->vec;
+                glm::vec3 v2 = matchedVelocity2->vec;
+
+                glm::vec3 w1 = matchedAngVelocity1->vec;
+                glm::vec3 w2 = matchedAngVelocity2->vec;
 
                 glm::vec3 tangent1;
                 glm::vec3 tangent2;
 
                 for (auto& constraint : constraints.penConstraints)
                 {
-                    if (ent1 != constraints.entity)
-                    {
-                        getTangents(v2, v1, constraint.normal, tangent1, tangent2, solverConstants);
-                    }
-                    else
-                    {
-                        getTangents(v1, v2, constraint.normal, tangent1, tangent2, solverConstants);
-                    }
+                    getTangents(v1, v2, constraint.normal, tangent1, tangent2, solverConstants);
 
                     for (PenetrationConstraintPointData& contactPoint : constraint.points)
                     {
@@ -281,21 +293,17 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                         glm::vec3 p =
                             solverConstants.warmStartCoefficient * (contactPoint.normalImpulse * constraint.normal) +
                             (contactPoint.frictionImpulse1 * tangent1) + (contactPoint.frictionImpulse2 * tangent2);
-                        if (ent1 != constraints.entity)
-                        {
-                            p *= -1.0F;
-                        }
 
-                        v1 -= p * mass1.inverseMass;
-                        w1 -= inertia1.inverseInertia * glm::cross(r1, p);
-                        v2 += p * mass2.inverseMass;
-                        w2 += inertia2.inverseInertia * glm::cross(r2, p);
+                        v1 -= p * matchedMass1->inverseMass;
+                        w1 -= matchedInertia1->inverseInertia * glm::cross(r1, p);
+                        v2 += p * matchedMass2->inverseMass;
+                        w2 += matchedInertia2->inverseInertia * glm::cross(r2, p);
                     }
 
-                    velocity1.vec = v1;
-                    angVelocity1.vec = w1;
-                    velocity2.vec = v2;
-                    angVelocity2.vec = w2;
+                    matchedVelocity1->vec = v1;
+                    matchedAngVelocity1->vec = w1;
+                    matchedVelocity2->vec = v2;
+                    matchedAngVelocity2->vec = w2;
                 }
             }
         });
@@ -344,10 +352,30 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                         continue;
                     }
 
-                    glm::vec3 v1 = velocity1.vec;
-                    glm::vec3 v2 = velocity2.vec;
-                    glm::vec3 w1 = angVelocity1.vec;
-                    glm::vec3 w2 = angVelocity2.vec;
+                    const Mass* matchedMass1 = &mass1;
+                    const Mass* matchedMass2 = &mass2;
+                    const Inertia* matchedInertia1 = &inertia1;
+                    const Inertia* matchedInertia2 = &inertia2;
+                    const AccumulatedCorrection* matchedCorrection1 = &correction1;
+                    const AccumulatedCorrection* matchedCorrection2 = &correction2;
+                    Velocity* matchedVelocity1 = &velocity1;
+                    Velocity* matchedVelocity2 = &velocity2;
+                    AngularVelocity* matchedAngVelocity1 = &angVelocity1;
+                    AngularVelocity* matchedAngVelocity2 = &angVelocity2;
+
+                    if (ent1 != constraints.entity)
+                    {
+                        std::swap(matchedMass1, matchedMass2);
+                        std::swap(matchedInertia1, matchedInertia2);
+                        std::swap(matchedCorrection1, matchedCorrection2);
+                        std::swap(matchedVelocity1, matchedVelocity2);
+                        std::swap(matchedAngVelocity1, matchedAngVelocity2);
+                    }
+
+                    glm::vec3 v1 = matchedVelocity1->vec;
+                    glm::vec3 v2 = matchedVelocity2->vec;
+                    glm::vec3 w1 = matchedAngVelocity1->vec;
+                    glm::vec3 w2 = matchedAngVelocity2->vec;
 
                     for (auto point : constraint.points)
                     {
@@ -364,10 +392,6 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                         glm::vec3 vr1 = v1 + glm::cross(w1, r1);
                         glm::vec3 vr2 = v2 + glm::cross(w2, r2);
                         glm::vec3 vr = vr2 - vr1;
-                        if (ent1 != constraints.entity)
-                        {
-                            vr *= -1.0F;
-                        }
 
                         float vn = glm::dot(vr, constraint.normal);
 
@@ -381,16 +405,16 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
 
                         // Apply impulse
                         glm::vec3 p = constraint.normal * impulse;
-                        v1 -= p * mass1.inverseMass;
-                        w1 -= inertia1.inverseInertia * glm::cross(r1, p);
-                        v2 += p * mass2.inverseMass;
-                        w2 += inertia2.inverseInertia * glm::cross(r2, p);
+                        v1 -= p * matchedMass1->inverseMass;
+                        w1 -= matchedInertia1->inverseInertia * glm::cross(r1, p);
+                        v2 += p * matchedMass2->inverseMass;
+                        w2 += matchedInertia2->inverseInertia * glm::cross(r2, p);
                     }
 
-                    velocity1.vec = v1;
-                    angVelocity1.vec = w1;
-                    velocity2.vec = v2;
-                    angVelocity2.vec = w2;
+                    matchedVelocity1->vec = v1;
+                    matchedAngVelocity1->vec = w1;
+                    matchedVelocity2->vec = v2;
+                    matchedAngVelocity2->vec = w2;
                 }
             }
         });
@@ -413,35 +437,54 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                        collidingWith, ent2, mass2, inertia2, centerOfMass2, rotation2, velocity2, angVelocity2,
                        material2] : query)
             {
+                const Mass* matchedMass1 = &mass1;
+                const Mass* matchedMass2 = &mass2;
+                const Inertia* matchedInertia1 = &inertia1;
+                const Inertia* matchedInertia2 = &inertia2;
+                const CenterOfMass* matchedCenterOfMass1 = &centerOfMass1;
+                const CenterOfMass* matchedCenterOfMass2 = &centerOfMass2;
+                const Rotation* matchedRotation1 = &rotation1;
+                const Rotation* matchedRotation2 = &rotation2;
+                const Velocity* matchedVelocity1 = &velocity1;
+                const Velocity* matchedVelocity2 = &velocity2;
+                const AngularVelocity* matchedAngVelocity1 = &angVelocity1;
+                const AngularVelocity* matchedAngVelocity2 = &angVelocity2;
+                const PhysicsMaterial* matchedMaterial1 = &material1;
+                const PhysicsMaterial* matchedMaterial2 = &material2;
+
+                if (ent1 != collidingWith.entity)
+                {
+                    std::swap(matchedMass1, matchedMass2);
+                    std::swap(matchedInertia1, matchedInertia2);
+                    std::swap(matchedCenterOfMass1, matchedCenterOfMass2);
+                    std::swap(matchedRotation1, matchedRotation2);
+                    std::swap(matchedVelocity1, matchedVelocity2);
+                    std::swap(matchedAngVelocity1, matchedAngVelocity2);
+                    std::swap(matchedMaterial1, matchedMaterial2);
+                }
+
                 std::vector<PenetrationConstraint> penConstraints;
                 for (const auto& manifold : collidingWith.manifolds)
                 {
                     glm::vec3 tangent1;
                     glm::vec3 tangent2;
-                    if (ent1 != collidingWith.entity)
-                    {
-                        getTangents(velocity2.vec, velocity1.vec, manifold.normal, tangent1, tangent2, solverConstants);
-                    }
-                    else
-                    {
-                        getTangents(velocity1.vec, velocity2.vec, manifold.normal, tangent1, tangent2, solverConstants);
-                    }
+                    getTangents(matchedVelocity1->vec, matchedVelocity2->vec, manifold.normal, tangent1, tangent2,
+                                solverConstants);
 
                     std::vector<PenetrationConstraintPointData> points;
                     for (auto point : manifold.points)
                     {
                         auto pointData = PenetrationConstraintPointData{};
 
-                        /// TODO: when we have warm-start change this
-                        pointData.normalImpulse = 0.0F;
-                        pointData.frictionImpulse1 = 0.0F;
-                        pointData.frictionImpulse2 = 0.0F;
+                        pointData.normalImpulse = point.normalImpulse;
+                        pointData.frictionImpulse1 = point.frictionImpulse1;
+                        pointData.frictionImpulse2 = point.frictionImpulse2;
 
-                        pointData.localAnchor1 = point.localOn1 - centerOfMass1.vec;
-                        pointData.localAnchor2 = point.localOn2 - centerOfMass2.vec;
+                        pointData.localAnchor1 = point.localOn1 - matchedCenterOfMass1->vec;
+                        pointData.localAnchor2 = point.localOn2 - matchedCenterOfMass2->vec;
 
-                        glm::vec3 r1 = rotation1.quat * pointData.localAnchor1;
-                        glm::vec3 r2 = rotation2.quat * pointData.localAnchor2;
+                        glm::vec3 r1 = matchedRotation1->quat * pointData.localAnchor1;
+                        glm::vec3 r2 = matchedRotation2->quat * pointData.localAnchor2;
 
                         pointData.fixedAnchor1 = r1;
                         pointData.fixedAnchor2 = r2;
@@ -449,13 +492,9 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                         pointData.initialSeparation = -point.penetration - glm::dot(r2 - r1, manifold.normal);
 
                         // Relative velocity at contact
-                        glm::vec3 vr1 = velocity1.vec + glm::cross(angVelocity1.vec, r1);
-                        glm::vec3 vr2 = velocity2.vec + glm::cross(angVelocity2.vec, r2);
+                        glm::vec3 vr1 = matchedVelocity1->vec + glm::cross(matchedAngVelocity1->vec, r1);
+                        glm::vec3 vr2 = matchedVelocity2->vec + glm::cross(matchedAngVelocity2->vec, r2);
                         glm::vec3 vr = vr2 - vr1;
-                        if (ent1 != collidingWith.entity)
-                        {
-                            vr *= -1.0F;
-                        }
 
                         pointData.normalSpeed = glm::dot(vr, manifold.normal);
 
@@ -463,8 +502,8 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                         glm::vec3 rn1 = glm::cross(r1, manifold.normal);
                         glm::vec3 rn2 = glm::cross(r2, manifold.normal);
                         float kNormal = mass1.inverseMass + mass2.inverseMass +
-                                        glm::dot(inertia1.inverseInertia * rn1, rn1) +
-                                        glm::dot(inertia2.inverseInertia * rn2, rn2);
+                                        glm::dot(matchedInertia1->inverseInertia * rn1, rn1) +
+                                        glm::dot(matchedInertia2->inverseInertia * rn2, rn2);
                         pointData.normalMass = kNormal > solverConstants.minKNormal ? 1.0F / kNormal : 0.0F;
 
                         // friction mass
@@ -474,10 +513,10 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                         glm::vec3 rt22 = glm::cross(r2, tangent2);
 
                         // Multiply by the inverse inertia early to reuse the values
-                        glm::vec3 i1Rt11 = inertia1.inverseInertia * rt11;
-                        glm::vec3 i2Rt12 = inertia2.inverseInertia * rt12;
-                        glm::vec3 i1Rt21 = inertia1.inverseInertia * rt21;
-                        glm::vec3 i2Rt22 = inertia2.inverseInertia * rt22;
+                        glm::vec3 i1Rt11 = matchedInertia1->inverseInertia * rt11;
+                        glm::vec3 i2Rt12 = matchedInertia2->inverseInertia * rt12;
+                        glm::vec3 i1Rt21 = matchedInertia1->inverseInertia * rt21;
+                        glm::vec3 i2Rt22 = matchedInertia2->inverseInertia * rt22;
 
                         float kFriction1 =
                             mass1.inverseMass + mass2.inverseMass + glm::dot(i1Rt11, rt11) + glm::dot(i2Rt12, rt12);
@@ -520,7 +559,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                             PenetrationConstraints{.entity = collidingWith.entity, .penConstraints = penConstraints});
             }
         });
-    
+
     cubos.system("store impulses and clean penetration constraint pairs")
         .tagged(physicsFinalizePositionTag)
         .call([](Commands cmds, Query<Entity, CollidingWith&, Entity> cQuery,
