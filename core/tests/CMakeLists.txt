@@ -21,6 +21,7 @@ add_executable(
 	reflection/traits/vector.cpp
 	reflection/external/primitives.cpp
 	reflection/external/cstring.cpp
+	reflection/external/carray.cpp
 	reflection/external/string.cpp
 	reflection/external/string_view.cpp
 	reflection/external/uuid.cpp
