@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Correctly order UI and ImGui tags so that ImGui is rendered on top of our UI (**@RiscadoA**).
 - Begin UI frame after drawing gizmos (**@tomas7770**).
 - False negatives when frustum culling (**@RiscadoA**).
+- Added missing IDs to remove buttons on entity inspector (**@RiscadoA**).
 
 ## [v0.7.0] - 2025-05-03
 
