@@ -34,13 +34,21 @@ namespace cubos::core::geom
     CUBOS_CORE_API bool intersects(const Box& box1, const glm::mat4& localToWorld1, const Box& box2,
                                    const glm::mat4& localToWorld2, Intersection& intersect);
 
+    /// @brief Computes the intersection between a frustum and an AABB.
+    /// @param frustum Frustum.
+    /// @param aabb AABB of the entity.
+    /// @return True if there's intersection, false otherwise.
+    CUBOS_CORE_API bool intersects(const Frustum& frustum, const AABB& aabb);
+
     /// @brief Computes the intersection between a frustum and a box.
+    /// @param frustum Frustum.
     /// @param box Box shape of the entity.
     /// @param localToWorld Local to world matrix of the entity.
     /// @return True if there's intersection, false otherwise.
     CUBOS_CORE_API bool intersects(const Frustum& frustum, const Box& box, const glm::mat4& localToWorld);
 
     /// @brief Computes the intersection between a frustum and a capsule.
+    /// @param frustum Frustum.
     /// @param capsule Capsule shape of the entity.
     /// @param localToWorld Local to world matrix of the entity.
     /// @return True if there's intersection, false otherwise.

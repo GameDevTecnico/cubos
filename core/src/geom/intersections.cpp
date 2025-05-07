@@ -151,15 +151,30 @@ bool cubos::core::geom::intersects(const Box& box1, const glm::mat4& localToWorl
     return true;
 }
 
-bool cubos::core::geom::intersects(const Frustum& frustum, const Box& box, const glm::mat4& localToWorld)
+bool cubos::core::geom::intersects(const Frustum& frustum, const AABB& aabb)
 {
     auto planes = {&frustum.top, &frustum.right, &frustum.bottom, &frustum.left, &frustum.near, &frustum.far};
-    glm::vec3 center = localToWorld * glm::vec4{0.0F, 0.0F, 0.0F, 1.0F};
-    return std::ranges::all_of(planes, [box, center](const Plane* plane) {
-        glm::vec3 norm = glm::vec3{std::abs(plane->normal.x), std::abs(plane->normal.y), std::abs(plane->normal.z)};
-        float r = glm::dot(box.halfSize, norm);
-        return -r <= pointDistanceToPlane(center, *plane);
+    return std::ranges::all_of(planes, [&](const Plane* plane) {
+        // Compute the vertex of the AABB that is farthest in the direction of the plane normal.
+        glm::vec3 posVert{
+            plane->normal.x >= 0.0F ? aabb.max().x : aabb.min().x,
+            plane->normal.y >= 0.0F ? aabb.max().y : aabb.min().y,
+            plane->normal.z >= 0.0F ? aabb.max().z : aabb.min().z,
+        };
+
+        // If that vertex is outside the plane, the AABB is completely outside.
+        if (!pointInPlane(posVert, *plane))
+        {
+            return false;
+        }
+
+        return true;
     });
+}
+
+bool cubos::core::geom::intersects(const Frustum& frustum, const Box& box, const glm::mat4& localToWorld)
+{
+    return intersects(frustum, AABB::fromOBB(box, localToWorld));
 }
 
 bool cubos::core::geom::intersects(const Frustum& frustum, const Capsule& capsule, const glm::mat4& localToWorld)

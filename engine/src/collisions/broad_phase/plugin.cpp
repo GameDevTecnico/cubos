@@ -61,35 +61,7 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
         .call([](Query<const LocalToWorld&, ColliderAABB&> query) {
             for (auto [localToWorld, colliderAABB] : query)
             {
-                // Get the 4 points of the collider.
-                glm::vec3 corners[4];
-                colliderAABB.localAABB.box().corners4(corners);
-
-                // Pack the 3 points of the collider into a matrix.
-                auto points = glm::mat4{glm::vec4{corners[0], 1.0F}, glm::vec4{corners[1], 1.0F},
-                                        glm::vec4{corners[2], 1.0F}, glm::vec4{corners[3], 1.0F}};
-
-                // Transforms collider space to world space.
-                auto transform = localToWorld.mat;
-
-                // Only want scale and rotation, extract translation and remove it.
-                auto translation = glm::vec3{transform[3]};
-                transform[3] = glm::vec4{0.0F, 0.0F, 0.0F, 1.0F};
-
-                // Rotate and scale corners.
-                auto rotatedCorners = glm::mat4x3{transform * points};
-
-                // Get the max of the rotated corners.
-                auto max = glm::max(glm::abs(rotatedCorners[0]), glm::abs(rotatedCorners[1]));
-                max = glm::max(max, glm::abs(rotatedCorners[2]));
-                max = glm::max(max, glm::abs(rotatedCorners[3]));
-
-                // Add the collider's margin.
-                max += glm::vec3{colliderAABB.margin};
-
-                // Set the AABB.
-                colliderAABB.worldAABB.min(translation - max);
-                colliderAABB.worldAABB.max(translation + max);
+                colliderAABB.worldAABB = core::geom::AABB::fromOBB(colliderAABB.localAABB.box(), localToWorld.mat);
             };
         });
 
