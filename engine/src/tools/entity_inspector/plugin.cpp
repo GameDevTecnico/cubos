@@ -149,12 +149,14 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                     const Type* removed = nullptr;
                     for (auto [type, value] : world.components(entity))
                     {
+                        ImGui::PushID(type->name().c_str());
                         if (ImGui::Button("X"))
                         {
                             removed = type;
                         }
                         ImGui::SameLine();
                         inspector.edit(type->shortName(), *type, value);
+                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)
@@ -169,14 +171,16 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                     Entity removedEnt{};
                     for (auto [type, value, fromEntity] : world.relationsTo(entity))
                     {
+                        std::string relName = getName(fromEntity) + "#" + type->shortName();
+                        ImGui::PushID(relName.c_str());
                         if (ImGui::Button("X"))
                         {
                             removed = type;
                             removedEnt = fromEntity;
                         }
                         ImGui::SameLine();
-                        std::string relName = getName(fromEntity) + "#" + type->shortName();
                         inspector.edit(relName, *type, value);
+                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)
@@ -190,14 +194,16 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 
                     for (auto [type, value, toEntity] : world.relationsFrom(entity))
                     {
+                        std::string relName = type->shortName() + "#" + getName(toEntity);
+                        ImGui::PushID(relName.c_str());
                         if (ImGui::Button("X"))
                         {
                             removed = type;
                             removedEnt = toEntity;
                         }
                         ImGui::SameLine();
-                        std::string name = type->shortName() + "#" + getName(toEntity);
-                        inspector.edit(name, *type, value);
+                        inspector.edit(relName, *type, value);
+                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)
