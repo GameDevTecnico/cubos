@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Debug camera now accelerates exponentially (#1435, **@RiscadoA**).
 - Debug camera now can be toggled with F9 (**@RiscadoA**).
+- Increased directional shadow range for objects outside the frustum (**@tomas7770**).
 
 ### Fixed
 
