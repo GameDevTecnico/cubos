@@ -13,12 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Raycasting support to the voxel collision shapes (**@RiscadoA**).
 - Reflection support for C arrays (**@RiscadoA**).
 - Reflection for RenderEnvironment (**@RiscadoA**).
+- Configurable directional shadow range for objects outside the frustum (**@tomas7770**).
 
 ### Changed
 
 - Debug camera now accelerates exponentially (#1435, **@RiscadoA**).
 - Debug camera now can be toggled with F9 (**@RiscadoA**).
-- Increased directional shadow range for objects outside the frustum (**@tomas7770**).
 
 ### Fixed
 

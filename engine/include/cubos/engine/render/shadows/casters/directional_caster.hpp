@@ -34,6 +34,10 @@ namespace cubos::engine
         float maxDistance = 0;  ///< Max distance (if 0, uses camera zFar).
         float nearDistance = 0; ///< Near distance of shadow frustum (if 0, uses camera zNear).
 
+        /// @brief Factor by which to increase shadow map frustum depth, to allow objects outside the
+        /// camera to cast shadows.
+        float depthExpansion = 2.0F;
+
         /// @brief Directional shadow map data.
         class ShadowMap;
 
