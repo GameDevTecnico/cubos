@@ -1,0 +1,212 @@
+#include <algorithm>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <ostream>
+#include <random>
+#include <unordered_set>
+#include <vector>
+
+#include <uuid.h>
+
+namespace fs = std::filesystem;
+
+/// Files that follow a JSON forman
+/// TODO: add more extensions
+static std::unordered_set<std::string> jsonFileExtensions{".cubos", ".anim", ".bind"};
+
+/// The input options of the program.
+struct AddOptions
+{
+    // TODO: add comments
+    std::vector<fs::path> assets; ///< The path of the assets to be created.
+    bool verbose = false;         ///< Enables verbose mode.
+    bool help = false;            ///< Prints the help message.
+};
+
+/// State required for the asset creating process.
+struct State
+{
+    const AddOptions& options; ///< The options of the program.
+    std::mt19937& random;      ///< The random number generator used for generating uuids.
+};
+
+/// Prints the help message of the program.
+static void printHelp()
+{
+    std::cerr << "Usage: quadrados add [OPTIONS] <ASSETS>" << std::endl;
+    std::cerr << "Options:" << std::endl;
+    std::cerr << "  -v           Enables verbose mode." << std::endl;
+    std::cerr << "  -h           Prints this help message." << std::endl;
+}
+
+/// Parses the command line arguments.
+/// @param argc The number of arguments.
+/// @param argv The arguments.
+/// @param options The options to fill.
+/// @return True if the arguments were parsed successfully, false otherwise.
+static bool parseArguments(int argc, char** argv, AddOptions& options)
+{
+    std::unordered_set<fs::path> seen; // To avoid duplicates
+
+    for (int i = 0; i < argc; ++i)
+    {
+        if (std::string(argv[i]) == "-v")
+        {
+            options.verbose = true;
+        }
+        else if (std::string(argv[i]) == "-h")
+        {
+            options.help = true;
+            return true;
+        }
+        else
+        {
+            // Avoid duplicates
+            if (seen.emplace(argv[i]).second)
+            {
+                options.assets.emplace_back(argv[i]);
+            }
+        }
+    }
+
+    if (options.assets.empty())
+    {
+        std::cerr << "Missing asset file(s)." << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
+/// Generates a new .meta file.
+/// @param state The state of the creation process
+/// @param asset The path of the asset
+/// @return True if the .meta file was generated successfully, false otherwise.
+static bool generateMeta(State& state, const fs::path& asset)
+{
+    if (state.options.verbose)
+    {
+        std::cerr << "Creating .meta file for: " << asset.string() << std::endl;
+    }
+
+    fs::path metaFilePath = asset;
+    metaFilePath += ".meta";
+    std::ofstream metaFile(metaFilePath);
+    if (!metaFile.is_open())
+    {
+        return false;
+    }
+
+    auto id = uuids::uuid_random_generator(state.random)();
+
+    metaFile << "{" << std::endl;
+    metaFile << R"(    "id": ")" << id << "\"" << std::endl;
+    metaFile << "}" << std::endl;
+
+    if (state.options.verbose)
+    {
+        std::cerr << "Created " << metaFilePath.string() << " with id: " << id << std::endl;
+    }
+
+    metaFile.close();
+    return true;
+}
+
+// TODO: add comments.
+static bool generate(const AddOptions& options)
+{
+
+    // TODO: add verbose logging
+
+    // Initialize the UUID generator.
+    std::random_device rd;
+    auto seedData = std::array<int, std::mt19937::state_size>{};
+    std::ranges::generate(seedData, std::ref(rd));
+    std::seed_seq seq(seedData.begin(), seedData.end());
+    auto random = std::mt19937(seq);
+
+    State state = {.options = options, .random = random};
+
+    // TODO: copy default assets from templates/assets/default.ext
+    //  if no template is found for that extension
+    //  write empty file (or empty json object)
+
+    for (const auto& asset : options.assets)
+    {
+        if (fs::exists(asset))
+        {
+            std::cerr << "Asset file " << asset.string() << " already exists. Continue anyway (y/n)?" << std::endl;
+            std::string ans;
+            std::cin >> ans;
+            if (ans != "y" && ans != "Y")
+            {
+                std::cerr << "Ignoring file " << asset.string() << std::endl;
+                continue;
+            }
+        }
+
+        if (options.verbose)
+        {
+            std::cerr << "Creating asset: " << asset.string() << std::endl;
+
+            // TODO: maybe add something like
+            //  "... from template (located in)"
+            //  if there is a template for this file extension
+        }
+
+        std::ofstream file(asset);
+        if (!file.is_open())
+        {
+            std::cerr << "Failed to create asset: " << asset.string() << '\n';
+            // TODO: maybe delete the created metaFile
+            // Or do the metaFile generation later and remove the asset if that fails
+            continue;
+        }
+
+        // TODO: This will only be useful for files that dont have a template
+        //  but are of json format (if any)
+        if (jsonFileExtensions.contains(asset.extension().string()))
+        {
+            file << "{" << std::endl;
+            file << "    " << std::endl;
+            file << "}" << std::endl;
+        }
+
+        file.close();
+
+        if (!generateMeta(state, asset))
+        {
+            std::cerr << "Failed to create .meta file for: " << asset.string() << std::endl;
+            continue;
+        }
+    }
+
+    return true;
+}
+
+int runAdd(int argc, char** argv)
+{
+    // Parse command line arguments.
+    AddOptions options = {};
+    if (!parseArguments(argc, argv, options))
+    {
+        printHelp();
+        return 1;
+    }
+    if (options.help)
+    {
+        printHelp();
+        return 0;
+    }
+
+    // Generate the new assets.
+    if (!generate(options))
+    {
+        // TODO: change/refactor error message(s)
+        std::cerr << "Failed to add new asset." << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
