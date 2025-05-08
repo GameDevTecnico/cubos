@@ -212,8 +212,8 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                         }
 
                         // Expand space between Z planes, so that objects outside the frustum can cast shadows
-                        minZ -= std::abs(minZ) * 0.5F;
-                        maxZ += std::abs(maxZ) * 0.5F;
+                        minZ -= std::abs(minZ) * 2.0F;
+                        maxZ += std::abs(maxZ) * 2.0F;
                         auto proj = glm::ortho(minX, maxX, minY, maxY, -maxZ, -minZ);
 
                         // Send the PerScene data to the GPU.
