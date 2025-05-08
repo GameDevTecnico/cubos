@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Toggle for matrix decomposition to the inspector (#1521, **@RiscadoA**).
 - Allow gizmos to be drawn for specific cameras (#1402, **@tomas7770**).
 - Named method for attributing a name to a plugin (#1556, **@mcanais**).
+- New quadrados create command to create assets based on templates (#1479, **@R-Camacho**). 
 
 ### Changed
 

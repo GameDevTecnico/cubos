@@ -1,4 +1,4 @@
-#define TEMPLATES_DIR "templates"
+#define TEMPLATES_DIR "templates/projects"
 #define QUADRADOS_DEFAULT_TEMPLATE "simple"
 
 #include <algorithm>
