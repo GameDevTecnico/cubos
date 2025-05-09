@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Debug camera now accelerates exponentially (#1435, **@RiscadoA**).
 - Debug camera now can be toggled with F9 (**@RiscadoA**).
 
+### Removed
+
+- Unused tags on the transform plugin (**@RiscadoA**).
+
 ### Fixed
 
 - Correctly order UI and ImGui tags so that ImGui is rendered on top of our UI (**@RiscadoA**).
