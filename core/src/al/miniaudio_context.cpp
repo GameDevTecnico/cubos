@@ -12,26 +12,30 @@ class MiniaudioBuffer : public impl::Buffer
 {
 public:
     ma_decoder decoder;
+    bool valid = false;
+    void* data;
+    std::size_t dataSize;
 
     MiniaudioBuffer(const void* srcData, size_t dataSize)
+        : dataSize{dataSize}
     {
-        mData = operator new(dataSize);
-        std::memcpy(mData, srcData, dataSize);
+        data = operator new(dataSize);
+        std::memcpy(data, srcData, dataSize);
 
-        if (ma_decoder_init_memory(mData, dataSize, nullptr, &decoder) != MA_SUCCESS)
+        if (ma_decoder_init_memory(data, dataSize, nullptr, &decoder) != MA_SUCCESS)
         {
             CUBOS_ERROR("Failed to initialize Decoder from data");
         }
         else
         {
-            mValid = true;
+            valid = true;
         }
     }
 
     ~MiniaudioBuffer() override
     {
         ma_decoder_uninit(&decoder);
-        operator delete(mData);
+        operator delete(data);
     }
 
     float length() override
@@ -51,12 +55,8 @@ public:
 
     bool isValid() const
     {
-        return mValid;
+        return valid;
     }
-
-private:
-    bool mValid = false;
-    void* mData;
 };
 
 class MiniaudioListener : public impl::Listener
@@ -107,111 +107,209 @@ public:
 
     ~MiniaudioSource() override
     {
-        ma_sound_uninit(&mSound);
+        if (mValid)
+        {
+            ma_decoder_uninit(&mDecoder);
+            ma_sound_uninit(&mSound);
+        }
     }
 
     void setBuffer(Buffer buffer) override
     {
-        ma_sound_uninit(&mSound);
-
-        // Try to dynamically cast the Buffer to a MiniaudioBuffer.
+        if (mValid)
+        {
+            ma_sound_uninit(&mSound);
+        }
         auto miniaudioBuffer = std::static_pointer_cast<MiniaudioBuffer>(buffer);
 
-        if (ma_sound_init_from_data_source(&mEngine, &miniaudioBuffer->decoder, 0, nullptr, &mSound) != MA_SUCCESS)
+        if (ma_decoder_init_memory(miniaudioBuffer->data, miniaudioBuffer->dataSize, nullptr, &mDecoder) != MA_SUCCESS)
         {
+            CUBOS_ERROR("Failed to initialize decoder from buffer");
+            return;
+        }
+
+        if (ma_sound_init_from_data_source(&mEngine, &mDecoder, MA_SOUND_FLAG_NO_SPATIALIZATION | MA_SOUND_FLAG_DECODE,
+                                           nullptr, &mSound) != MA_SUCCESS)
+        {
+            ma_decoder_uninit(&mDecoder);
             CUBOS_ERROR("Failed to initialize sound from buffer");
             return;
         }
+
+        mValid = true;
+
+        ma_sound_set_position(&mSound, mPosition.x, mPosition.y, mPosition.z);
+        ma_sound_set_velocity(&mSound, mVelocity.x, mVelocity.y, mVelocity.z);
+        ma_sound_set_volume(&mSound, mGain);
+        ma_sound_set_pitch(&mSound, mPitch);
+        ma_sound_set_looping(&mSound, static_cast<ma_bool32>(mLooping));
+        if (mListener != nullptr)
+        {
+            ma_sound_set_positioning(&mSound, ma_positioning_relative);
+            ma_sound_set_pinned_listener_index(&mSound, mListener->index());
+        }
+        else
+        {
+            ma_sound_set_positioning(&mSound, ma_positioning_absolute);
+        }
+        ma_sound_set_max_distance(&mSound, mMaxDistance);
+        ma_sound_set_min_distance(&mSound, mMinDistance);
+        ma_sound_set_cone(&mSound, mInnerConeAngle, mOuterConeAngle, mOuterConeGain);
+        ma_sound_set_direction(&mSound, mConeDirection.x, mConeDirection.y, mConeDirection.z);
     }
 
     void setPosition(const glm::vec3& position) override
     {
-        ma_sound_set_position(&mSound, position.x, position.y, position.z);
+        mPosition = position;
+        if (mValid)
+        {
+            ma_sound_set_position(&mSound, position.x, position.y, position.z);
+        }
     }
 
     void setVelocity(const glm::vec3& velocity) override
     {
-        ma_sound_set_velocity(&mSound, velocity.x, velocity.y, velocity.z);
+        mVelocity = velocity;
+        if (mValid)
+        {
+            ma_sound_set_velocity(&mSound, velocity.x, velocity.y, velocity.z);
+        }
     }
 
     void setGain(float gain) override
     {
-        ma_sound_set_volume(&mSound, gain);
+        mGain = gain;
+        if (mValid)
+        {
+            ma_sound_set_volume(&mSound, gain);
+        }
     }
 
     void setPitch(float pitch) override
     {
-        ma_sound_set_pitch(&mSound, pitch);
+        mPitch = pitch;
+        if (mValid)
+        {
+            ma_sound_set_pitch(&mSound, pitch);
+        }
     }
 
     void setLooping(bool looping) override
     {
-        ma_sound_set_looping(&mSound, static_cast<ma_bool32>(looping));
+        mLooping = looping;
+        if (mValid)
+        {
+            ma_sound_set_looping(&mSound, static_cast<ma_bool32>(looping));
+        }
     }
 
     void setRelative(Listener listener) override
     {
         CUBOS_ASSERT(listener != nullptr);
+        mListener = std::static_pointer_cast<MiniaudioListener>(listener);
 
-        // Try to dynamically cast the Listener to a MiniaudioListener.
-        auto miniaudioListener = std::static_pointer_cast<MiniaudioListener>(listener);
-
-        ma_sound_set_pinned_listener_index(&mSound, miniaudioListener->index());
-
-        ma_sound_set_positioning(&mSound, ma_positioning_relative);
+        if (mValid)
+        {
+            ma_sound_set_pinned_listener_index(&mSound, mListener->index());
+            ma_sound_set_positioning(&mSound, ma_positioning_relative);
+        }
     }
 
     void setMaxDistance(float maxDistance) override
     {
-        ma_sound_set_max_distance(&mSound, maxDistance);
+        mMaxDistance = maxDistance;
+        if (mValid)
+        {
+            ma_sound_set_max_distance(&mSound, maxDistance);
+        }
     }
 
     void setMinDistance(float minDistance) override
     {
-        ma_sound_set_min_distance(&mSound, minDistance);
+        mMinDistance = minDistance;
+        if (mValid)
+        {
+            ma_sound_set_min_distance(&mSound, minDistance);
+        }
     }
 
     void setCone(float innerAngle, float outerAngle, float outerGain = 1.0F) override
     {
-        ma_sound_set_cone(&mSound, innerAngle, outerAngle, outerGain);
+        mInnerConeAngle = innerAngle;
+        mOuterConeAngle = outerAngle;
+        mOuterConeGain = outerGain;
+        if (mValid)
+        {
+            ma_sound_set_cone(&mSound, innerAngle, outerAngle, outerGain);
+        }
     }
 
     void setConeDirection(const glm::vec3& direction) override
     {
-        ma_sound_set_direction(&mSound, direction.x, direction.y, direction.z);
+        mConeDirection = direction;
+        if (mValid)
+        {
+            ma_sound_set_direction(&mSound, direction.x, direction.y, direction.z);
+        }
     }
 
     void play() override
     {
-        if (ma_sound_start(&mSound) != MA_SUCCESS)
+        if (mValid)
         {
-            CUBOS_ERROR("Failed to start sound");
-            return;
+            if (ma_sound_start(&mSound) != MA_SUCCESS)
+            {
+                CUBOS_ERROR("Failed to start sound");
+                return;
+            }
         }
     }
 
     void stop() override
     {
-        if (ma_sound_stop(&mSound) != MA_SUCCESS)
+        if (mValid)
         {
-            CUBOS_ERROR("Failed to stop sound");
-            return;
+            if (ma_sound_stop(&mSound) != MA_SUCCESS)
+            {
+                CUBOS_ERROR("Failed to stop sound");
+                return;
+            }
+            ma_sound_seek_to_pcm_frame(&mSound, 0);
         }
-        ma_sound_seek_to_pcm_frame(&mSound, 0);
     }
 
     void pause() override
     {
-        if (ma_sound_stop(&mSound) != MA_SUCCESS)
+        if (mValid)
         {
-            CUBOS_ERROR("Failed to pause sound");
-            return;
+            if (ma_sound_stop(&mSound) != MA_SUCCESS)
+            {
+                CUBOS_ERROR("Failed to pause sound");
+                return;
+            }
         }
     }
 
 private:
+    bool mValid = false;
+    ma_decoder mDecoder;
     ma_sound mSound;
     ma_engine& mEngine;
+
+    glm::vec3 mPosition{0.0F};
+    glm::vec3 mVelocity{0.0F};
+    float mGain{1.0F};
+    float mPitch{1.0F};
+    float mMaxDistance{FLT_MAX};
+    float mMinDistance{1.0F};
+    float mInnerConeAngle{360.0F};
+    float mOuterConeAngle{360.0F};
+    float mOuterConeGain{1.0F};
+    bool mLooping{false};
+    std::shared_ptr<MiniaudioListener> mListener{nullptr};
+    glm::vec3 mConeDirection{0.0F};
+    glm::vec3 mListenerPosition{0.0F};
+    glm::vec3 mListenerVelocity{0.0F};
 };
 
 class MiniaudioDevice : public impl::AudioDevice
