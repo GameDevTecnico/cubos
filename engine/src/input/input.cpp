@@ -296,7 +296,7 @@ bool Input::anyPressed(int player, const Window& window, const std::vector<Input
 {
     GamepadState state;
     auto it = mPlayerGamepads.find(player);
-    if (it != mPlayerGamepads.end())
+    if (it != mPlayerGamepads.end() && mGamepadStates.contains(it->second))
     {
         state = mGamepadStates.at(it->second);
     }
