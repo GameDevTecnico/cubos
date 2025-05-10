@@ -606,8 +606,7 @@ std::shared_lock<std::shared_mutex> Assets::lockRead(const AnyAsset& handle) con
         return std::shared_lock(entry->mutex);
     }
 
-    CUBOS_CRITICAL("Couldn't lock asset for reading");
-    abort();
+    CUBOS_FAIL("Couldn't lock asset for reading");
 }
 
 std::unique_lock<std::shared_mutex> Assets::lockWrite(const AnyAsset& handle) const
@@ -617,8 +616,7 @@ std::unique_lock<std::shared_mutex> Assets::lockWrite(const AnyAsset& handle) co
         return std::unique_lock(entry->mutex);
     }
 
-    CUBOS_CRITICAL("Couldn't lock asset for writing");
-    abort();
+    CUBOS_FAIL("Couldn't lock asset for writing");
 }
 
 std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
