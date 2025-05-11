@@ -398,7 +398,7 @@ void GLFWWindow::modifiers(Modifiers modifiers)
 
 bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const
 {
-#if defined(CUBOS_CORE_GLFW) && !defined(__EMSCRIPTEN__)
+#if defined(CUBOS_CORE_GLFW)
     GLFWgamepadstate glfwState;
     if (glfwGetGamepadState(gamepad, &glfwState) == GLFW_FALSE)
     {
