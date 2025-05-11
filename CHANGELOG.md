@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Debug camera now accelerates exponentially (#1435, **@RiscadoA**).
 - Debug camera now can be toggled with F9 (**@RiscadoA**).
+- Use contrib.glfw3 with Emscripten to support gamepad input on web builds (**@RiscadoA**). 
 
 ### Removed
 

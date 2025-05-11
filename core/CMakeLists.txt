@@ -246,7 +246,8 @@ endif()
 if(CUBOS_CORE_GLFW)
 	if(EMSCRIPTEN)
 		# Emscripten ships its own GLFW
-        target_link_options(cubos-core PUBLIC -sUSE_GLFW=3)
+		# We use the contrib port of GLFW because it supports gamepad input and some other features
+        target_link_options(cubos-core PUBLIC --use-port=contrib.glfw3)
 	else()
 		FetchContent_Declare(
 			glfw
