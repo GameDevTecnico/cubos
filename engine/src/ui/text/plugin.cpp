@@ -110,8 +110,6 @@ void cubos::engine::uiTextPlugin(Cubos& cubos)
                     }
                     auto atlas = assets.read(uiText.fontAtlas);
 
-                    std::size_t vertexCount = uiText.text.size() * 6;
-                    textImpl.vertexCount = vertexCount;
                     float xPos = 0;
                     float yPos = 0;
 
@@ -132,7 +130,7 @@ void cubos::engine::uiTextPlugin(Cubos& cubos)
                     vad.shaderPipeline = state.drawType.pipeline;
 
                     std::vector<float> verts;
-                    verts.reserve(4 * vertexCount);
+                    verts.reserve(4 * 6 * uiText.text.size());
                     /// @todo make add support for Unicode
                     /// @note This repeats a lot of vertices because currently the UI system does not support drawing
                     /// Indexed, something that needs to be worked on
@@ -177,6 +175,7 @@ void cubos::engine::uiTextPlugin(Cubos& cubos)
                     vad.buffers[0] = window->renderDevice().createVertexBuffer(verts.size() * sizeof(float),
                                                                                verts.data(), Usage::Default);
                     textImpl.vertexArray = window->renderDevice().createVertexArray(vad);
+                    textImpl.vertexCount = verts.size() / 4;
 
                     if (optStretch.contains())
                     {

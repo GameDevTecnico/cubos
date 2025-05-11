@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added missing IDs to remove buttons on entity inspector (**@RiscadoA**).
 - Out of bounds access when gamepad input fetch fails (**@RiscadoA**).
 - Make each audio source use its own data source (**@RiscadoA**).
+- Correctly compute number of text glyphs in vertex array (**@RiscadoA**).
 
 ## [v0.7.0] - 2025-05-03
 
