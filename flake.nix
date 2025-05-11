@@ -1,7 +1,8 @@
 # Flake used for development with nix
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs.url = "nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -9,6 +10,7 @@
     inputs.flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import inputs.nixpkgs { inherit system; };
+        pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
 
         sysLibs = with pkgs; [
           libGL
@@ -32,7 +34,7 @@
             cmake
             ccache
             pkg-config
-            emscripten
+            pkgs-unstable.emscripten
             ninja
 
             # = formatting =
@@ -59,7 +61,7 @@
           LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath sysLibs}";
 
           shellHook = ''
-            export EMSCRIPTEN=${pkgs.emscripten}/share/emscripten
+            export EMSCRIPTEN=${pkgs-unstable.emscripten}/share/emscripten
             export EM_CACHE=$(git rev-parse --show-toplevel)/.em_cache
             mkdir -p $EM_CACHE
             cp -r $EMSCRIPTEN/cache/* $EM_CACHE
