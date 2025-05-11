@@ -5,6 +5,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <cubos/core/ecs/table/sparse_relation/id.hpp>
@@ -24,6 +25,10 @@ namespace cubos::core::ecs
             /// @brief Inserts a new table identifier into the index.
             /// @param id Table identifier.
             void insert(SparseRelationTableId id);
+
+            /// @brief Removes a table identifier from the index.
+            /// @param id Table identifier.
+            void erase(SparseRelationTableId id);
 
             /// @brief Returns a reference to a map which maps archetypes to the tables where it is the 'from'
             /// archetype.
@@ -48,11 +53,21 @@ namespace cubos::core::ecs
             }
 
         private:
-            std::unordered_map<ArchetypeId, std::vector<SparseRelationTableId>, ArchetypeIdHash>
+            std::unordered_map<ArchetypeId, std::unordered_set<SparseRelationTableId, SparseRelationTableIdHash>,
+                               ArchetypeIdHash>
                 mSparseRelationTableIdsByFrom;
-            std::unordered_map<ArchetypeId, std::vector<SparseRelationTableId>, ArchetypeIdHash>
+            std::unordered_map<ArchetypeId, std::unordered_set<SparseRelationTableId, SparseRelationTableIdHash>,
+                               ArchetypeIdHash>
                 mSparseRelationTableIdsByTo;
             int mMaxDepth{0};
+        };
+
+        /// @brief Used by queries to track their state of the cache of calls to @ref forEach.
+        struct CacheCursor
+        {
+            std::size_t version{0}; ///< Version of the registry when the cache was created, i.e., how many cleanups
+                                    ///< have been performed.
+            std::size_t tableCounter{0}; ///< How many tables have they seen on the current version.
         };
 
         /// @brief Used to iterate over type indices in the registry.
@@ -109,18 +124,31 @@ namespace cubos::core::ecs
         void erase(DataTypeId type);
 
         /// @brief Calls the given function for each new table.
-        /// @param counter Counter previously returned by this function. Zero should be used for the first call.
+        /// @param cursor Cursor used to track the state of the cache.
         /// @param func Function which receives a table identifier.
-        /// @return Counter to be passed to this function in a future call.
-        std::size_t forEach(std::size_t counter, auto func) const
+        /// @return Whether the cache should be cleaned up.
+        bool forEach(CacheCursor& cursor, auto func) const
         {
-            for (; counter < mIds.size(); ++counter)
+            bool cleanup = cursor.version != mVersion;
+            if (cleanup)
             {
-                func(mIds[counter]);
+                cursor.version = mVersion;
+                cursor.tableCounter = 0;
             }
 
-            return counter;
+            for (; cursor.tableCounter < mIds.size(); ++cursor.tableCounter)
+            {
+                func(cleanup, mIds[cursor.tableCounter]);
+                cleanup = false;
+            }
+
+            return cleanup;
         }
+
+        /// @brief Cleans up the registry, removing all tables which do not hold any entities.
+        /// @warning This invalidates all existing queries - their caches must be updated before they can be used
+        /// again, i.e., they must call @ref forEach again.
+        void cleanUp();
 
         /// @brief Gets an iterator to the start of the type indices of this registry.
         /// @return Iterator.
@@ -137,6 +165,7 @@ namespace cubos::core::ecs
         }
 
     private:
+        std::size_t mVersion{0}; ///< How many cleanups have been performed.
         std::unordered_map<SparseRelationTableId, SparseRelationTable, SparseRelationTableIdHash> mTables;
         std::unordered_map<DataTypeId, TypeIndex, DataTypeIdHash> mTypeIndices;
         std::vector<SparseRelationTableId> mIds;

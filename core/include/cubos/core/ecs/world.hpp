@@ -12,6 +12,7 @@
 #include <cubos/core/ecs/table/tables.hpp>
 #include <cubos/core/ecs/types.hpp>
 #include <cubos/core/memory/any_value.hpp>
+#include <cubos/core/memory/opt.hpp>
 #include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
@@ -57,6 +58,9 @@ namespace cubos::core::ecs
         /// Equivalent to constructing a new world.
         /// Previously returned entity identifiers become invalid, as they might be reused.
         void reset();
+
+        /// @brief Optimizes the ECS world by removing unused tables and possibly other data.
+        void cleanUp();
 
         /// @brief Registers a resource type.
         /// @param type Resource type.
@@ -822,7 +826,7 @@ namespace cubos::core::ecs
         World::Relations& mRelations;
         SparseRelationTableRegistry::Iterator mIterator;
         bool mReverse{false};
-        std::size_t mTableIndex{SIZE_MAX};
+        memory::Opt<std::unordered_set<SparseRelationTableId, SparseRelationTableIdHash>::const_iterator> mTableIt;
         SparseRelationTableId mTableId;
         std::size_t mRow{SIZE_MAX};
         mutable Relation mRelation;
@@ -875,7 +879,7 @@ namespace cubos::core::ecs
         World::ConstRelations& mRelations;
         SparseRelationTableRegistry::Iterator mIterator;
         bool mReverse{false};
-        std::size_t mTableIndex{SIZE_MAX};
+        memory::Opt<std::unordered_set<SparseRelationTableId, SparseRelationTableIdHash>::const_iterator> mTableIt;
         SparseRelationTableId mTableId;
         std::size_t mRow{SIZE_MAX};
         mutable Relation mRelation;
