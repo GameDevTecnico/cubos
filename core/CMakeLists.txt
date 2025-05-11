@@ -292,6 +292,10 @@ if(CUBOS_CORE_MINIAUDIO)
 
 	# Define the CUBOS_CORE_MINIAUDIO to toggle MiniAudio support
 	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_MINIAUDIO)
+
+	if(EMSCRIPTEN)
+		target_link_options(cubos-core PUBLIC -sEXPORTED_RUNTIME_METHODS=HEAPF32)
+	endif()
 endif()
 
 # -------------- Fetch and link core public library dependencies --------------
