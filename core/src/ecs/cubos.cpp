@@ -324,8 +324,12 @@ bool Cubos::update()
         this->install(plugin);
     }
 
+    // Optimize ECS world.
+    mWorld->cleanUp();
+
     // If any plugins were added, recompile the system execution chains, and rerun the startup systems.
-    if (!mState->pluginQueue.toAdd.empty() || !mState->pluginQueue.toRemove.empty() || !mState->pluginQueue.toDestroy.empty())
+    if (!mState->pluginQueue.toAdd.empty() || !mState->pluginQueue.toRemove.empty() ||
+        !mState->pluginQueue.toDestroy.empty())
     {
         // Clear the plugin queue.
         mState->pluginQueue.toRemove.clear();
@@ -906,7 +910,7 @@ auto Cubos::ObserverBuilder::onRemove(const reflection::Type& type, int target) 
 
     mOptions.back().observedTarget = target;
     mRemove = true;
-    mDestroy = false;   
+    mDestroy = false;
     mColumnId = ColumnId::make(mCubos.mWorld->types().id(type));
     return std::move(*this);
 }
@@ -934,7 +938,6 @@ auto Cubos::ObserverBuilder::onDestroy(int target) && -> ObserverBuilder&&
     mDestroy = true;
     return std::move(*this);
 }
-
 
 auto Cubos::ObserverBuilder::entity(int target) && -> ObserverBuilder&&
 {

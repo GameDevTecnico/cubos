@@ -9,6 +9,7 @@
 #include <cubos/core/ecs/query/node/archetype.hpp>
 #include <cubos/core/ecs/query/term.hpp>
 #include <cubos/core/ecs/table/sparse_relation/id.hpp>
+#include <cubos/core/ecs/table/sparse_relation/registry.hpp>
 
 namespace cubos::core::ecs
 {
@@ -54,7 +55,8 @@ namespace cubos::core::ecs
         /// Only kept if the relation is symmetric.
         std::vector<ReverseEntry> mReverseTables;
 
-        /// @brief How many tables have already been seen through @ref SparseRelationTableRegistry::collect.
-        std::size_t mSeenCount{0};
+        /// @brief Used to keep track of many tables have already been seen through @ref
+        /// SparseRelationTableRegistry::forEach.
+        SparseRelationTableRegistry::CacheCursor mCacheCursor{};
     };
 } // namespace cubos::core::ecs

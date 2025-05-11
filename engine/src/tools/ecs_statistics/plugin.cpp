@@ -242,19 +242,21 @@ void cubos::engine::ecsStatisticsPlugin(Cubos& cubos)
                     ImGui::CollapsingHeader("Selected Sparse Relation Type", &continueSelectedSparseRelationType,
                                             ImGuiTreeNodeFlags_DefaultOpen))
                 {
+                    SparseRelationTableRegistry::CacheCursor cacheCursor{};
                     std::vector<SparseRelationTableId> tables{};
                     int activeTableCount = 0;
-                    world.tables().sparseRelation().forEach(0, [&](SparseRelationTableId tableId) {
-                        if (tableId.dataType == state.selectedSparseRelationTypeId)
-                        {
-                            tables.push_back(tableId);
-
-                            if (world.tables().sparseRelation().at(tableId).size() > 0)
+                    world.tables().sparseRelation().forEach(
+                        cacheCursor, [&](bool /*cleanup*/, SparseRelationTableId tableId) {
+                            if (tableId.dataType == state.selectedSparseRelationTypeId)
                             {
-                                ++activeTableCount;
+                                tables.push_back(tableId);
+
+                                if (world.tables().sparseRelation().at(tableId).size() > 0)
+                                {
+                                    ++activeTableCount;
+                                }
                             }
-                        }
-                    });
+                        });
 
                     ImGui::Separator();
                     ImGui::Text("Selected Relation Type: %s",
