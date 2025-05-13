@@ -1,12 +1,8 @@
-#include "tools.hpp"
-
 #include <filesystem>
 #include <fstream>
-#include <unistd.h>
 #include <iostream>
 
-#define MAX_PATH_SIZE 4096
-#define TEMPLATE_PATH "tools"/"tesseratos"/"templates"/"simple"
+#include "tools.hpp"
 
 namespace fs = std::filesystem;
 
@@ -22,35 +18,41 @@ int parseArguments(int argc, char** argv, fs::path& projectPath)
     for (int i = 1; i < argc; i++)
     {
         std::string arg = argv[i];
-        if (arg == "-p" && i + i < argc) projectPath = argv[++i];
-        else if (arg == "-p") return -1;
+        if (arg == "-p" && i + i < argc)
+            projectPath = argv[++i];
+        else if (arg == "-p")
+            return -1;
     }
 
     return 0;
 }
 
-fs::path getExecutablePath()
+fs::path getTemplatePath()
 {
-    char buffer[MAX_PATH_SIZE];
-    ssize_t count = readlink("/proc/self/exe", buffer, MAX_PATH_SIZE);
-    if (count == -1) {
-        throw std::runtime_error("Unable to get binary path");
-    }
-    fs::path executablePath = fs::path(std::string(buffer, count))
-        .parent_path()
-        .parent_path();
 
-    return executablePath;
+    fs::path templatePath;
+
+    std::cerr << QUADRADOS_DEV_TEMPLATE_DIR << std::endl;
+    if (fs::exists(QUADRADOS_DEV_TEMPLATE_DIR))
+    {
+        templatePath = QUADRADOS_DEV_TEMPLATE_DIR;
+    }
+    else
+    {
+        templatePath = QUADRADOS_INSTALL_TEMPLATE_DIR;
+    }
+
+    return templatePath;
 }
 
-int copyTemplateFiles(fs::path source, fs::path destination) {
-    std::cerr << source << std::endl;
-    std::cerr << destination << std::endl;
-
-    try {
+int copyTemplateFiles(fs::path source, fs::path destination)
+{
+    try
+    {
         fs::copy(source, destination, fs::copy_options::recursive);
-
-    } catch (const fs::filesystem_error& e) {
+    }
+    catch (const fs::filesystem_error& e)
+    {
         return -1;
     }
     return 0;
@@ -58,11 +60,15 @@ int copyTemplateFiles(fs::path source, fs::path destination) {
 
 int createProjectDirectory(fs::path dirPath)
 {
-    try {
-        if (!fs::exists(dirPath)) fs::create_directory(dirPath);
-        else return -2;
-
-    } catch (const fs::filesystem_error& e) {
+    try
+    {
+        if (!fs::exists(dirPath))
+            fs::create_directory(dirPath);
+        else
+            return -2;
+    }
+    catch (const fs::filesystem_error& e)
+    {
         return -1;
     }
 
@@ -72,7 +78,8 @@ int createProjectDirectory(fs::path dirPath)
 int runInit(int argc, char** argv)
 {
 
-    if (argc == 0) printHelp();
+    if (argc == 0)
+        printHelp();
     fs::path projectDirectory = argv[0];
     fs::path projectPath = ".";
 
@@ -82,15 +89,22 @@ int runInit(int argc, char** argv)
         return -1;
     }
 
-    fs::path executablePath = getExecutablePath();
-    fs::path templatePath = executablePath/TEMPLATE_PATH;
-    fs::path destinationPath = projectPath/projectDirectory;
+    if (!fs::exists(projectPath) || !fs::is_directory(projectPath))
+    {
+        std::cerr << "Error: specified path does not exist or is not a directory." << std::endl;
+        return -1;
+    }
+
+    fs::path templatePath = getTemplatePath();
+    fs::path destinationPath = projectPath / projectDirectory;
 
     int createRes = createProjectDirectory(destinationPath);
     if (createRes < 0)
     {
-        if (createRes == -1) std::cerr << "Error: unexpected filesystem error" << std::endl;
-        else if (createRes == -2) std::cerr << "Error: directory already exists" << std::endl;
+        if (createRes == -1)
+            std::cerr << "Error: unexpected filesystem error" << std::endl;
+        else if (createRes == -2)
+            std::cerr << "Error: directory already exists" << std::endl;
         return -1;
     }
 

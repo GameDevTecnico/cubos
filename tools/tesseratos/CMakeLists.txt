@@ -57,7 +57,8 @@ endif()
 
 if(TESSERATOS_DISTRIBUTE)
 	install(TARGETS tesseratos RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-	install(DIRECTORY templates/ DESTINATION ${CMAKE_INSTALL_DATADIR}/tesseratos/templates)
 	install(DIRECTORY assets/ DESTINATION ${CMAKE_INSTALL_DATADIR}/tesseratos/assets)
     install(DIRECTORY ${CUBOS_ENGINE_ASSETS_PATH}/ DESTINATION ${CMAKE_INSTALL_DATADIR}/tesseratos/builtin)
 endif()
+
+install(DIRECTORY templates/ DESTINATION ${CMAKE_INSTALL_DATADIR}/tesseratos/templates)
