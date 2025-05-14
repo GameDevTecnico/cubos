@@ -19,9 +19,13 @@ int parseArguments(int argc, char** argv, fs::path& projectPath)
     {
         std::string arg = argv[i];
         if (arg == "-p" && i + i < argc)
+        {
             projectPath = argv[++i];
+        }
         else if (arg == "-p")
+        {
             return -1;
+        }
     }
 
     return 0;
@@ -45,29 +49,32 @@ fs::path getTemplatePath()
     return templatePath;
 }
 
-int copyTemplateFiles(fs::path source, fs::path destination)
+int copyTemplateFiles(const fs::path& source, const fs::path& destination)
 {
     try
     {
         fs::copy(source, destination, fs::copy_options::recursive);
     }
-    catch (const fs::filesystem_error& e)
+    catch (const fs::filesystem_error&)
     {
         return -1;
     }
     return 0;
 }
 
-int createProjectDirectory(fs::path dirPath)
+int createProjectDirectory(const fs::path& dirPath)
 {
     try
     {
         if (!fs::exists(dirPath))
+        {
             fs::create_directory(dirPath);
-        else
+        } else
+        {
             return -2;
+        }
     }
-    catch (const fs::filesystem_error& e)
+    catch (const fs::filesystem_error&)
     {
         return -1;
     }
@@ -79,7 +86,9 @@ int runInit(int argc, char** argv)
 {
 
     if (argc == 0)
+    {
         printHelp();
+    }
     fs::path projectDirectory = argv[0];
     fs::path projectPath = ".";
 
@@ -102,9 +111,13 @@ int runInit(int argc, char** argv)
     if (createRes < 0)
     {
         if (createRes == -1)
+        {
             std::cerr << "Error: unexpected filesystem error" << std::endl;
+        }
         else if (createRes == -2)
+        {
             std::cerr << "Error: directory already exists" << std::endl;
+        }
         return -1;
     }
 
