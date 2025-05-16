@@ -380,7 +380,7 @@ static bool generate(const EmbedOptions& options)
     return true;
 }
 
-int runEmbed(int argc, char** argv)
+int runEmbed(int argc, char** argv, GlobalArgs& /*ga*/)
 {
     // Parse command line arguments.
     EmbedOptions options = {};
