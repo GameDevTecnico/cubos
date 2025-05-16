@@ -18,7 +18,7 @@ int parseArguments(int argc, char** argv, fs::path& projectPath)
     for (int i = 1; i < argc; i++)
     {
         std::string arg = argv[i];
-        if (arg == "-p" && i + i < argc)
+        if (arg == "-p" && i + 1 < argc)
         {
             projectPath = argv[++i];
         }
@@ -31,22 +31,20 @@ int parseArguments(int argc, char** argv, fs::path& projectPath)
     return 0;
 }
 
-fs::path getTemplatePath()
+fs::path getTemplatePath(GlobalArgs& ga)
 {
-
     fs::path templatePath;
-
-    std::cerr << QUADRADOS_DEV_TEMPLATE_DIR << std::endl;
-    if (fs::exists(QUADRADOS_DEV_TEMPLATE_DIR))
+    if (!QUADRADOS_DISTRIBUTE)
     {
-        templatePath = QUADRADOS_DEV_TEMPLATE_DIR;
+
+        templatePath = fs::path(QUADRADOS_DEV_TEMPLATE_DIR);
+        std::cerr << "Template path: " << templatePath << std::endl;
     }
     else
     {
-        templatePath = QUADRADOS_INSTALL_TEMPLATE_DIR;
+        templatePath = fs::path(ga.installDir);
     }
-
-    return templatePath;
+    return templatePath / "templates" / "simple";
 }
 
 int copyTemplateFiles(const fs::path& source, const fs::path& destination)
@@ -55,8 +53,9 @@ int copyTemplateFiles(const fs::path& source, const fs::path& destination)
     {
         fs::copy(source, destination, fs::copy_options::recursive);
     }
-    catch (const fs::filesystem_error&)
+    catch (const fs::filesystem_error& e)
     {
+        std::cerr << e.what() << std::endl;
         return -1;
     }
     return 0;
@@ -69,7 +68,8 @@ int createProjectDirectory(const fs::path& dirPath)
         if (!fs::exists(dirPath))
         {
             fs::create_directory(dirPath);
-        } else
+        }
+        else
         {
             return -2;
         }
@@ -82,7 +82,7 @@ int createProjectDirectory(const fs::path& dirPath)
     return 0;
 }
 
-int runInit(int argc, char** argv)
+int runInit(int argc, char** argv, GlobalArgs& ga)
 {
 
     if (argc == 0)
@@ -104,7 +104,8 @@ int runInit(int argc, char** argv)
         return -1;
     }
 
-    fs::path templatePath = getTemplatePath();
+    fs::path templatePath = getTemplatePath(ga);
+    std::cerr << templatePath << std::endl;
     fs::path destinationPath = projectPath / projectDirectory;
 
     int createRes = createProjectDirectory(destinationPath);

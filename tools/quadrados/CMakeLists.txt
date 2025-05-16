@@ -1,6 +1,10 @@
 # tools/quadrados/CMakeLists.txt
 # Quadrados build configuration
 
+# ------------------------ Declare quadrados options -------------------------
+
+option(QUADRADOS_DISTRIBUTE "Build quadrados for distribution" OFF)
+
 # ----------------------- Define quadrados source files -----------------------
 
 set(QUADRADOS_SOURCE
@@ -17,13 +21,13 @@ add_executable(quadrados ${QUADRADOS_SOURCE})
 target_link_libraries(quadrados cubos::engine)
 cubos_common_target_options(quadrados)
 
+
 # ----------------------- Set template path variables -----------------------
 
-set(QUADRADOS_DEV_TEMPLATE_DIR "${CMAKE_SOURCE_DIR}/tools/tesseratos/templates/simple")
-target_compile_definitions(quadrados PRIVATE QUADRADOS_DEV_TEMPLATE_DIR=\"${QUADRADOS_DEV_TEMPLATE_DIR}\")
+target_compile_definitions(quadrados PRIVATE QUADRADOS_DISTRIBUTE=$<BOOL:${QUADRADOS_DISTRIBUTE}>)
 
-set(QUADRADOS_INSTALL_TEMPLATE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/tesseratos/templates/simple")
-target_compile_definitions(quadrados PRIVATE QUADRADOS_INSTALL_TEMPLATE_DIR=\"${QUADRADOS_INSTALL_TEMPLATE_DIR}\")
+set(QUADRADOS_DEV_TEMPLATE_DIR "${CMAKE_SOURCE_DIR}/tools/tesseratos/")
+target_compile_definitions(quadrados PRIVATE QUADRADOS_DEV_TEMPLATE_DIR=\"${QUADRADOS_DEV_TEMPLATE_DIR}\")
 
 # ------------------------- Install quadrados target --------------------------
 

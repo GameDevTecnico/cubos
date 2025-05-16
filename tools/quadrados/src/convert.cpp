@@ -529,7 +529,7 @@ static bool convert(const ConvertOptions& options)
     return true;
 }
 
-int runConvert(int argc, char** argv)
+int runConvert(int argc, char** argv, GlobalArgs& /*ga*/)
 {
     // Parse command line arguments.
     ConvertOptions options = {};
