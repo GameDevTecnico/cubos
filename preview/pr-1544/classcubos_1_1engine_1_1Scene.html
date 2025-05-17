@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::engine::Scene class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Scene <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="scene_8hpp.html">&lt;engine/scene/scene.hpp&gt;</a></div>
+        </h1>
+        <p><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> which holds a blueprint generated from a scene file.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>A scene represents an entity, its components and relations, and its children entities (i.e, sub-scenes). Optionally, a scene can inherit another scene asset, which means that it inherits all the entities and components.</p><p><a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets produce a blueprint when loaded which can be used to spawn them. Spawned entities are given names based on the names of the entities in the scene file. The root entity is given the name of the scene file. Child entities are given the name of their parent entity followed by a &#x27;#&#x27; and the name of the child entity in the file.</p><p><a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets are loaded from JSON files with the .cubos extension. They follow the format:</p><pre class="m-code"><span class="w"> </span><span class="n">json</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;inherit&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;ba19170e-65a0-47cd-9bd2-b4ea9447fe22&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;game::Player&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">    </span><span class="s">&quot;#camera&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;cubos::engine::PerspectiveCamera&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;fovY&quot;</span><span class="o">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s">&quot;#gun&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;inherit&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;6cb09eea-4156-4a75-b0ae-488aac843e05&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></pre><p>In this example, the scene first inherits the scene with the UUID &quot;ba19170e-65a0-47cd-9bd2-b4ea9447fe22&quot;. Then, it adds a &quot;game::Player&quot; component to the root entity. It also adds (or modifies) a child entity with the name &quot;camera&quot;, adding a component &quot;cubos::engine::PerspectiveCamera&quot;. Finally, it adds a child entity with the name &quot;gun&quot; which inherits the scene with the UUID &quot;6cb09eea-4156-4a75-b0ae-488aac843e05&quot;.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a4da797e8b37509a1514298085ad44a9f">
+              <span class="m-doc-wrap-bumper"><a href="#a4da797e8b37509a1514298085ad44a9f" class="m-doc-self">Scene</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs an empty scene.</dd>
+            <dt id="add44224c1690632f777dae79fb52179a">
+              <span class="m-doc-wrap-bumper"><a href="#add44224c1690632f777dae79fb52179a" class="m-doc-self">Scene</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Move constructs a scene.</dd>
+            <dt id="ab15b23f8839b974e4c0ba7aea2b663f1">
+              <span class="m-doc-wrap-bumper"><a href="#ab15b23f8839b974e4c0ba7aea2b663f1" class="m-doc-self">Scene</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Forbid copy construction.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a3af7beb4a0dd3f42c81d15eaf74b3e38" class="m-doc">operator const core::ecs::Blueprint&amp;</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Overload which casts the scene reference to a reference to its blueprint.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8bfb7916c7e53e8a8faea194ef1a72bc" class="m-doc">loadFromNode</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a> root,
+              const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets) -&gt; bool</span>
+            </dt>
+            <dd>Sets the root node of the scene.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa8d0d6a0d637863ff260f27ba2e140cf" class="m-doc">node</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&amp;</span>
+            </dt>
+            <dd>Gets the root node of the scene.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1e7133fb3e58578f34424a6f1413b643" class="m-doc">blueprint</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">core::<wbr />ecs::<wbr />Blueprint</a>&amp;</span>
+            </dt>
+            <dd>Gets the blueprint generated from the scene node tree.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a3af7beb4a0dd3f42c81d15eaf74b3e38"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />Scene::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3af7beb4a0dd3f42c81d15eaf74b3e38" class="m-doc-self">operator const core::ecs::Blueprint&amp;</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Overload which casts the scene reference to a reference to its blueprint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Blueprint.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8bfb7916c7e53e8a8faea194ef1a72bc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Scene::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bfb7916c7e53e8a8faea194ef1a72bc" class="m-doc-self">loadFromNode</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a> root,
+              const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets)</span></span>
+            </h3>
+            <p>Sets the root node of the scene.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">root</td>
+                  <td>Root node.</td>
+                </tr>
+                <tr>
+                  <td>assets</td>
+                  <td><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> manager used to load sub-scenes.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether all data was successfully deserialized.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa8d0d6a0d637863ff260f27ba2e140cf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&amp; cubos::<wbr />engine::<wbr />Scene::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa8d0d6a0d637863ff260f27ba2e140cf" class="m-doc-self">node</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the root node of the scene.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Root node.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1e7133fb3e58578f34424a6f1413b643"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">core::<wbr />ecs::<wbr />Blueprint</a>&amp; cubos::<wbr />engine::<wbr />Scene::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1e7133fb3e58578f34424a6f1413b643" class="m-doc-self">blueprint</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the blueprint generated from the scene node tree.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Blueprint.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
