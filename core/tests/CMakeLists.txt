@@ -19,6 +19,7 @@ add_executable(
 	reflection/traits/mask.cpp
 	reflection/traits/inherits.cpp
 	reflection/traits/vector.cpp
+	reflection/traits/categorizable.cpp
 	reflection/external/primitives.cpp
 	reflection/external/const.cpp
 	reflection/external/cstring.cpp

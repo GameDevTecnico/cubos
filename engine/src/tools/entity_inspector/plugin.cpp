@@ -146,6 +146,8 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                         ImGui::EndPopup();
                     }
 
+                    //TODO: group components into category
+                    // category is in a reflection trait called categorize (TODO)
                     const Type* removed = nullptr;
                     for (auto [type, value] : world.components(entity))
                     {
