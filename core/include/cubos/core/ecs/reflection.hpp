@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <cubos/core/reflection/traits/categorizable.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/hidden.hpp>
@@ -105,6 +106,21 @@ namespace cubos::core::ecs
         TypeBuilder&& hide() &&
         {
             mType.with(reflection::HiddenTrait(true));
+            return std::move(*this);
+        }
+
+        /// @brief Adds a category to a type.
+        ///
+        /// Useful for grouping related components close to each other, for example,
+        /// in the entity inspector.
+        ///
+        /// @param category Category name.
+        /// @param priority Priority of a type within its category.
+        /// @return Builder.
+        TypeBuilder&& categorize(std::string category, size_t priority) &&
+        {
+            CUBOS_ASSERT(!mType.has<reflection::CategorizableTrait>());
+            mType.with(reflection::CategorizableTrait(std::move(category), priority));
             return std::move(*this);
         }
 
