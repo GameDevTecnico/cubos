@@ -568,6 +568,9 @@ pre, code {
   color: #D9DDDE;
   background-color: #0B0C0D;
 }
+div.m-code, .m-doc-wrap, .m-doc-wrap-bumper {
+  font-family: 'Roboto Mono', monospace, monospace, monospace;
+}
 pre.m-console, code.m-console {
   color: #D9DDDE;
   background-color: #0B0C0D;
