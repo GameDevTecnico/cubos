@@ -12,7 +12,7 @@ include(FetchContent)
 FetchContent_Declare(
   mcss
   GIT_REPOSITORY https://github.com/GameDevTecnico/cubos-m.css.git
-  GIT_TAG b762a4230a9ecd2b675718e943f534e2b6911a40
+  GIT_TAG f7bf37a602030cc7b396a5b8c1da2de1dbab640f
 )
 FetchContent_MakeAvailable(mcss)
 
