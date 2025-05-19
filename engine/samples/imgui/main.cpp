@@ -6,6 +6,7 @@
 #include <glm/gtc/quaternion.hpp>
 #include <imgui.h>
 
+#include <cubos/core/reflection/external/const.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/map.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
@@ -215,6 +216,7 @@ struct State
     unsigned long long unsignedLongLongPrimitive{55555};
     float floatPrimitive{3.14159265359F};
     double doublePrimitive{2.718281828459045235360287471352};
+    const double constDoublePrimitive{1.414213562};
     std::string string{"Hello, ImGui!"};
     MyUnsupported myUnsupported;
     MyEnum myEnum{MyEnum::Foo};
@@ -252,6 +254,7 @@ CUBOS_REFLECT_IMPL(State)
                   .withField("unsignedLongLongPrimitive", &State::unsignedLongLongPrimitive)
                   .withField("floatPrimitive", &State::floatPrimitive)
                   .withField("doublePrimitive", &State::doublePrimitive)
+                  .withField("constDoublePrimitive", &State::constDoublePrimitive)
                   .withField("string", &State::string)
                   .withField("myUnsupported", &State::myUnsupported)
                   .withField("myEnum", &State::myEnum)
