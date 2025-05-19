@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New quadrados create command to create assets based on templates (#1479, **@R-Camacho**). 
 - Profiling timers in render plugins (#1560, **@tomas7770**).
 - Quaternion representation mode switch on the inspector (#1520, **@RiscadoA**).
+- Support for MaskTrait types in JSON (de)serializer (#1507, **@RiscadoA**).
 
 ### Changed
 
