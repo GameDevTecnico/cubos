@@ -163,12 +163,7 @@ bool cubos::core::geom::intersects(const Frustum& frustum, const AABB& aabb)
         };
 
         // If that vertex is outside the plane, the AABB is completely outside.
-        if (!pointInPlane(posVert, *plane))
-        {
-            return false;
-        }
-
-        return true;
+        return pointInPlane(posVert, *plane);
     });
 }
 
