@@ -5,6 +5,7 @@
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/traits/wrapper.hpp>
@@ -16,6 +17,7 @@ using cubos::core::reflection::ArrayTrait;
 using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::MaskTrait;
 using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::StringConversionTrait;
@@ -115,6 +117,17 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
     {
         const auto& trait = type.get<EnumTrait>();
         mJSON = trait.variant(value).name();
+        return true;
+    }
+
+    if (type.has<MaskTrait>())
+    {
+        const auto& trait = type.get<MaskTrait>();
+        mJSON = nlohmann::json::array();
+        for (const auto& bit : trait.view(value))
+        {
+            mJSON.push_back(bit.name());
+        }
         return true;
     }
 
