@@ -81,8 +81,6 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T, std::size_t size), (T[size]))
 
         return type.with(constructibleTrait);
     }
-    else
-    {
-        return type;
-    }
+
+    return type;
 }

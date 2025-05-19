@@ -130,7 +130,7 @@ void cubos::engine::uiTextPlugin(Cubos& cubos)
                     vad.shaderPipeline = state.drawType.pipeline;
 
                     std::vector<float> verts;
-                    verts.reserve(4 * 6 * uiText.text.size());
+                    verts.reserve(static_cast<std::size_t>(4 * 6) * uiText.text.size());
                     /// @todo make add support for Unicode
                     /// @note This repeats a lot of vertices because currently the UI system does not support drawing
                     /// Indexed, something that needs to be worked on

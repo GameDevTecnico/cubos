@@ -6,15 +6,15 @@
 #include "../traits/array.hpp"
 #include "../traits/constructible.hpp"
 
-template <typename T, std::size_t size>
-static void test(const char* name, T (&arr)[size])
+template <typename T, std::size_t Size>
+static void test(const char* name, T (&arr)[Size])
 {
-    CHECK(reflect<T[size]>().name() == name);
-    testArray<T[size], T>(arr, size);
-    testConstructible<T[size]>(&arr);
+    CHECK(reflect<T[Size]>().name() == name);
+    testArray<T[Size], T>(arr, Size);
+    testConstructible<T[Size]>(&arr);
 }
 
-TEST_CASE("reflection::reflect<T[size]>()")
+TEST_CASE("reflection::reflect<T[Size]>()")
 {
     int simple[3] = {5, 4, 1};
     test<int, 3>("int[3]", simple);

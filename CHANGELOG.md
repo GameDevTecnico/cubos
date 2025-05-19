@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Out of bounds access when gamepad input fetch fails (**@RiscadoA**).
 - Make each audio source use its own data source (**@RiscadoA**).
 - Correctly compute number of text glyphs in vertex array (**@RiscadoA**).
-- Corretly match the entity components to the entity in the penetration constraint solving (**@fallenatlas**).
+- Correctly match the entity components to the entity in the penetration constraint solving (**@fallenatlas**).
 - Correctly compute the local collision point for voxel shapes (**@fallenatlas**).
 - Creation of CollidingWith relation between box and voxel shapes when only the AABBs intersect (**@fallenatlas**).
 

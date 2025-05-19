@@ -402,7 +402,7 @@ bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const
     GLFWgamepadstate glfwState;
     if (glfwGetGamepadState(gamepad, &glfwState) == GLFW_FALSE)
     {
-        if (glfwJoystickPresent(gamepad))
+        if (glfwJoystickPresent(gamepad) != 0)
         {
             CUBOS_WARN("Gamepad {} is connected but has no mapping", gamepad);
         }
