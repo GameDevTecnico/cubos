@@ -65,12 +65,16 @@
 <span class="p">{</span>
 <span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">factor</span><span class="p">{</span><span class="mf">1.0F</span><span class="p">};</span>
 <span class="p">};</span></pre><p>We want both of the types to have the same category, <code>Transform</code>, but different priorities:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/traits/categorizable.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/type.hpp&gt;</span>
 
 <span class="c1">// The type builder can be used the same way with the method `categorize`.</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/ecs/reflection.hpp&gt;</span>
+
+<span class="c1">// Since we&#39;re exposing fields of a primitive type (float), its important to</span>
+<span class="c1">// include the header which defines their reflection.</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/external/primitives.hpp&gt;</span>
 
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">ecs</span><span class="o">::</span><span class="n">TypeBuilder</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">CategorizableTrait</span><span class="p">;</span>
