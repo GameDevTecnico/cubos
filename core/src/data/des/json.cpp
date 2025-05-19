@@ -8,6 +8,7 @@
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/traits/wrapper.hpp>
@@ -21,6 +22,7 @@ using cubos::core::reflection::ConstructibleTrait;
 using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::MaskTrait;
 using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
@@ -159,6 +161,33 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
         }
 
         trait.at(mIterator.value()).set(value);
+        return true;
+    }
+
+    if (mIterator->is_array() && type.has<MaskTrait>())
+    {
+        const auto& trait = type.get<MaskTrait>();
+        auto view = trait.view(value);
+
+        for (auto it = mIterator->begin(), end = mIterator->end(); it != end; ++it)
+        {
+            if (!it->is_string())
+            {
+                CUBOS_WARN("Mask type {} cannot be deserialized from a JSON array with non-string elements",
+                           type.name());
+                return false;
+            }
+
+            const auto& name = static_cast<std::string>(*it);
+            if (!trait.contains(name))
+            {
+                CUBOS_WARN("Mask type {} doesn't contain the flag {}", type.name(), name);
+                return false;
+            }
+
+            view.set(trait.at(name));
+        }
+
         return true;
     }
 
