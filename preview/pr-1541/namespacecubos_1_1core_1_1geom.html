@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>cubos::core::geom namespace | Cubos Docs</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -105,6 +105,11 @@
               <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">Intersection</a>&amp; intersect) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
             </dt>
             <dd>Computes the intersection between two box shapes.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5dabb1ad75810dc0589bc86bc590d264" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>&amp; frustum,
+              const <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a>&amp; aabb) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
+            </dt>
+            <dd>Computes the intersection between a frustum and an <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac92c0f1cc8a0b6790e6cb8f4d55ae54e" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>&amp; frustum,
               const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box,
@@ -223,6 +228,35 @@
               </tbody>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a5dabb1ad75810dc0589bc86bc590d264"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5dabb1ad75810dc0589bc86bc590d264" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>&amp; frustum,
+              const <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a>&amp; aabb)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="intersections_8hpp.html">&lt;core/geom/intersections.hpp&gt;</a></div>
+            </h3>
+            <p>Computes the intersection between a frustum and an <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">frustum</td>
+                  <td><a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</td>
+                </tr>
+                <tr>
+                  <td>aabb</td>
+                  <td><a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a> of the entity.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if there&#x27;s intersection, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="ac92c0f1cc8a0b6790e6cb8f4d55ae54e"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool cubos::<wbr />core::<wbr />geom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac92c0f1cc8a0b6790e6cb8f4d55ae54e" class="m-doc-self">intersects</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>&amp; frustum,
@@ -238,7 +272,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">frustum</td>
-                  <td></td>
+                  <td><a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</td>
                 </tr>
                 <tr>
                   <td>box</td>
@@ -272,7 +306,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">frustum</td>
-                  <td></td>
+                  <td><a href="structcubos_1_1core_1_1geom_1_1Frustum.html" class="m-doc">Frustum</a>.</td>
                 </tr>
                 <tr>
                   <td>capsule</td>
