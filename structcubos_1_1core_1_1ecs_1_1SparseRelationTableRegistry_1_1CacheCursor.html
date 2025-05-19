@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/geom/intersections.hpp file | Cubos Docs</title>
+  <title>cubos::core::ecs::SparseRelationTableRegistry::CacheCursor struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,85 +46,42 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_c1deef5baf41393ad8a994c3fd53e62f.html">geom</a>/</span>intersections.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTableRegistry.html">SparseRelationTableRegistry</a>::<wbr/></span>CacheCursor <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="table_2sparse__relation_2registry_8hpp.html">&lt;core/ecs/table/sparse_relation/registry.hpp&gt;</a></div>
         </h1>
-        <p>Class cubos::core::geom::Intersections.</p>
+        <p>Used by queries to track their state of the cache of calls to <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTableRegistry.html#a1df5b236d91b1782967123f0f53e29e2" class="m-doc">forEach</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>Cubos</strong> libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">cubos::core::geom</a></dt>
-            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
+            <dt>
+              std::size_t <a href="#a6f462473b453c1e8e565056e22afabcc" class="m-doc">version</a>
+            </dt>
+            <dd></dd>
+            <dt id="ac37e5969543a38ba49ac3049f4273fbf">
+              std::size_t <a href="#ac37e5969543a38ba49ac3049f4273fbf" class="m-doc-self">tableCounter</a>
+            </dt>
+            <dd>How many tables have they seen on the current version.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1core_1_1geom_1_1Intersection.html" class="m-doc">cubos::core::geom::Intersection</a>
-            </dt>
-            <dd>Contains info regarding an intersection between shapes.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a62e3e68099c3d3b46c13efa26d2944ff" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const Box&amp; box1,
-              const glm::mat4&amp; localToWorld1,
-              const Box&amp; box2,
-              const glm::mat4&amp; localToWorld2,
-              Intersection&amp; intersect) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
-            </dt>
-            <dd>Computes the intersection between two box shapes.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a5dabb1ad75810dc0589bc86bc590d264" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const Frustum&amp; frustum,
-              const AABB&amp; aabb) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
-            </dt>
-            <dd>Computes the intersection between a frustum and an <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#ac92c0f1cc8a0b6790e6cb8f4d55ae54e" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const Frustum&amp; frustum,
-              const Box&amp; box,
-              const glm::mat4&amp; localToWorld) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
-            </dt>
-            <dd>Computes the intersection between a frustum and a box.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#afab429350dd199916c234a2165a44dc5" class="m-doc">intersects</a>(</span><span class="m-doc-wrap">const Frustum&amp; frustum,
-              const Capsule&amp; capsule,
-              const glm::mat4&amp; localToWorld) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
-            </dt>
-            <dd>Computes the intersection between a frustum and a capsule.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a847980982b35c728e17b0f0fd48fb82c" class="m-doc">sutherlandHodgmanClipping</a>(</span><span class="m-doc-wrap">PolygonalFeature&amp; polygon,
-              int numClipPlanes,
-              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>* clipPlanes,
-              bool removeNotClipToPlane) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
-            </dt>
-            <dd>Performs the Sutherland-Hodgman Clipping algorithm.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1core_1_1geom.html#a3aa4069dfc64c9ae974264957c9877b9" class="m-doc">planeEdgeIntersection</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Plane</a>&amp; plane,
-              const glm::vec3&amp; start,
-              const glm::vec3&amp; end,
-              glm::vec3&amp; outPoint) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> bool</span>
-            </dt>
-            <dd>Compute the intersection between a plane and an edge.</dd>
-          </dl>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a6f462473b453c1e8e565056e22afabcc"><div>
+            <h3>
+              std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />SparseRelationTableRegistry::<wbr />CacheCursor::<wbr /><a href="#a6f462473b453c1e8e565056e22afabcc" class="m-doc-self">version</a>
+            </h3>
+<p>Version of the registry when the cache was created, i.e., how many cleanups have been performed.</p>
+          </div></section>
         </section>
       </div>
     </div>
