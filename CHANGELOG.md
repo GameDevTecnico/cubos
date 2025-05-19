@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Named method for attributing a name to a plugin (#1556, **@mcanais**).
 - New quadrados create command to create assets based on templates (#1479, **@R-Camacho**). 
 - Profiling timers in render plugins (#1560, **@tomas7770**).
+- Quaternion representation mode switch on the inspector (#1520, **@RiscadoA**).
 
 ### Changed
 
