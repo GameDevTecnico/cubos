@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>cubos::core::geom::AABB struct | Cubos Docs</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -56,12 +56,23 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a45f564b3ea488e0dc4f32658fa5b32b9" class="m-doc">fromOBB</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box,
+              glm::mat4 transform) -&gt; <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a></span>
+            </dt>
+            <dd>Generates an <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a> from a box and its transform.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -118,6 +129,34 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a45f564b3ea488e0dc4f32658fa5b32b9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a> cubos::<wbr />core::<wbr />geom::<wbr />AABB::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45f564b3ea488e0dc4f32658fa5b32b9" class="m-doc-self">fromOBB</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>&amp; box,
+              glm::mat4 transform)</span></span>
+            </h3>
+            <p>Generates an <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a> from a box and its transform.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">box</td>
+                  <td><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a>.</td>
+                </tr>
+                <tr>
+                  <td>transform</td>
+                  <td>Transform to apply to the box.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a> of the box.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a77a168438a695b705e72171e8a9db28c"><div>
             <h3>
               <span class="m-doc-wrap-bumper">glm::vec3 cubos::<wbr />core::<wbr />geom::<wbr />AABB::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77a168438a695b705e72171e8a9db28c" class="m-doc-self">min</a>(</span><span class="m-doc-wrap">) const</span></span>
