@@ -1,7 +1,10 @@
+#include <filesystem>
 #include <iostream>
 #include <string>
 
 #include "tools.hpp"
+
+namespace fs = std::filesystem;
 
 /// Prints the help message of the program.
 int runHelp(int /*argc*/, char** /*argv*/, GlobalArgs& /*ga*/)
@@ -52,14 +55,20 @@ int parseGlobalArgs(int argc, char** argv, GlobalArgs& ga)
         }
         else if (arg == "-D")
         {
+            std::cerr << "Missing argument for option -D" << std::endl;
             return -1;
         }
         else if (isTool(argv[i]))
         {
             return nParsed;
         }
+        else
+        {
+            std::cerr << "Unknown option " << argv[i] << std::endl;
+            return -1;
+        }
     }
-
+    std::cerr << "Missing tool name" << std::endl;
     return -1;
 }
 

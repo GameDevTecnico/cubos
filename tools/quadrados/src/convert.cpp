@@ -42,7 +42,7 @@ struct QBMatrix
 /// Prints the help message of the program.
 static void printHelp()
 {
-    std::cerr << "Usage: quadrados convert <INPUT> -p <PALETTE-PATH> [OPTIONS]" << std::endl;
+    std::cerr << "Usage: quadrados [GLOBAL OPTIONS] convert <INPUT> -p <PALETTE-PATH> [OPTIONS]" << std::endl;
     std::cerr << "Options:" << std::endl;
     std::cerr << "  -g<N> <PATH> Sets the output path of the grid <N>." << std::endl;
     std::cerr << "  -p <PATH>    Specifies the path of the palette being used." << std::endl;
@@ -52,6 +52,8 @@ static void printHelp()
     std::cerr << "  -h           Prints this help message." << std::endl;
     std::cerr << "  -s <VAL>     Specifies the minimum similarity for two materials to be merged," << std::endl;
     std::cerr << "               from 0.0 to 1.0 (default 1.0)" << std::endl;
+    std::cerr << "Global Options:" << std::endl;
+    std::cerr << "  -D <DIR>     Specifies the base directory for templates/assets." << std::endl;
 }
 
 /// Parses the command line arguments.

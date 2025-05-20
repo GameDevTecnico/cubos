@@ -3,7 +3,7 @@
 #include <string>
 
 struct GlobalArgs {
-    std::string installDir;
+    std::string installDir = QUADRADOS_INSTALL_PATH;
 };
 /// Stores info about a tool.
 struct Tool

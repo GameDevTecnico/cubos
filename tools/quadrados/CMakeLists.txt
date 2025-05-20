@@ -26,8 +26,8 @@ cubos_common_target_options(quadrados)
 
 target_compile_definitions(quadrados PRIVATE QUADRADOS_DISTRIBUTE=$<BOOL:${QUADRADOS_DISTRIBUTE}>)
 
-set(QUADRADOS_DEV_TEMPLATE_DIR "${CMAKE_SOURCE_DIR}/tools/tesseratos/")
-target_compile_definitions(quadrados PRIVATE QUADRADOS_DEV_TEMPLATE_DIR=\"${QUADRADOS_DEV_TEMPLATE_DIR}\")
+set(QUADRADOS_INSTALL_PATH "${CMAKE_SOURCE_DIR}/tools/tesseratos/")
+target_compile_definitions(quadrados PRIVATE QUADRADOS_INSTALL_PATH=\"${QUADRADOS_INSTALL_PATH}\")
 
 # ------------------------- Install quadrados target --------------------------
 
