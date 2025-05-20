@@ -11,8 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hidden trait from hiding components on the inspector (#1526, **@R-Camacho**).
 - Checkbox for showing components that are hidden by default in the entity inspector (#1526, **@R-Camacho**).
+- CategorizableTrait for grouping components into categories (**@R-Camacho**).
 
 ### Changed
+
+- Similar components are now grouped into categories in the entity inspector (#1525, **R-Camacho**).
 
 ### Removed
 
