@@ -21,12 +21,14 @@ struct EmbedOptions
 /// Prints the help message of the program.
 static void printHelp()
 {
-    std::cerr << "Usage: quadrados embed [OPTIONS] <INPUT>" << std::endl;
+    std::cerr << "Usage: quadrados [GLOBAL OPTIONS] embed [OPTIONS] <INPUT>" << std::endl;
     std::cerr << "Options:" << std::endl;
     std::cerr << "  -n <name>    Sets the name of the output data." << std::endl;
     std::cerr << "  -r           Recursively embed all files in the input directory." << std::endl;
     std::cerr << "  -v           Enables verbose mode." << std::endl;
     std::cerr << "  -h           Prints this help message." << std::endl;
+    std::cerr << "Global Options:" << std::endl;
+    std::cerr << "  -D <DIR>     Specifies the base directory for templates/assets." << std::endl;
 }
 
 /// Parses the command line arguments.
