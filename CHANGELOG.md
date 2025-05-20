@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reflection support for C arrays (**@RiscadoA**).
 - Reflection for RenderEnvironment (**@RiscadoA**).
 - Configurable directional shadow range for objects outside the frustum (**@tomas7770**).
+- Quaternion representation mode switch on the inspector (#1520, **@RiscadoA**).
 
 ### Changed
 
