@@ -733,4 +733,112 @@ ImGuiInspector::State::State()
             bool modified = inspector.inspect(name, readOnly, wrapper.type(), wrapper.value(value));
             return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
         });
+
+    // Add custom constructor support.
+    hooks.emplace_back([args = std::vector<AnyValue>{}](const std::string& name, bool readOnly,
+                                                        ImGuiInspector& inspector, const Type& type,
+                                                        void* value) mutable {
+        if (!type.has<ConstructibleTrait>() || readOnly)
+        {
+            return ImGuiInspector::HookResult::Unhandled;
+        }
+
+        const auto& constructible = type.get<ConstructibleTrait>();
+        ImGui::PushID(name.c_str());
+        if (ImGui::BeginPopup("Constructors"))
+        {
+            bool isDone{false};
+            if (constructible.hasDefaultConstruct() && ImGui::Button("Default"))
+            {
+                constructible.destruct(value);
+                constructible.defaultConstruct(value);
+                isDone = true;
+            }
+            for (std::size_t i = 0; i < constructible.customConstructorCount(); ++i)
+            {
+                const auto& constructor = constructible.customConstructor(i);
+
+                ImGui::PushID(static_cast<int>(i));
+                std::string name{};
+                for (std::size_t j = 0; j < constructor.argCount(); ++j)
+                {
+                    if (!constructor.argType(j).has<ConstructibleTrait>() ||
+                        !constructor.argType(j).get<ConstructibleTrait>().hasDefaultConstruct())
+                    {
+                        name.clear();
+                        break; // Skip constructors with non-default-constructible arguments.
+                    }
+
+                    if (j > 0)
+                    {
+                        if (j == constructor.argCount() - 1)
+                        {
+                            name.append(" and ");
+                        }
+                        else
+                        {
+                            name.append(", ");
+                        }
+                    }
+                    name.append(constructor.argName(j));
+                }
+                if (name.empty())
+                {
+                    // Skip constructor if it has no arguments (same as default) or if one of its arguments is not
+                    // default constructible.
+                    continue;
+                }
+                std::string label = "From ";
+                label.append(name);
+                if (ImGui::BeginPopup("Custom Constructor"))
+                {
+                    args.resize(constructor.argCount());
+                    for (std::size_t j = 0; j < constructor.argCount(); ++j)
+                    {
+                        if (!args[j].valid() || args[j].type() != constructor.argType(j))
+                        {
+                            args[j] = AnyValue::defaultConstruct(constructor.argType(j));
+                        }
+                        inspector.edit(constructor.argName(j), args[j].type(), args[j].get());
+                    }
+                    if (ImGui::Button("Done"))
+                    {
+                        std::vector<void*> voidArgs{};
+                        for (std::size_t j = 0; j < constructor.argCount(); ++j)
+                        {
+                            voidArgs.push_back(args[j].get());
+                        }
+                        constructible.destruct(value);
+                        constructible.customConstruct(i, value, voidArgs.data());
+                        ImGui::CloseCurrentPopup();
+                        isDone = true;
+                    }
+                    ImGui::EndPopup();
+                }
+                if (ImGui::Button(label.c_str()))
+                {
+                    args.clear();
+                    ImGui::OpenPopup("Custom Constructor");
+                }
+
+                ImGui::PopID();
+            }
+
+            if (isDone)
+            {
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::EndPopup();
+        }
+
+        if (ImGui::Button("C"))
+        {
+            ImGui::OpenPopup("Constructors");
+        }
+        ImGui::SameLine();
+        ImGui::PopID();
+
+        // Pass control to the next hooks.
+        return ImGuiInspector::HookResult::Unhandled;
+    });
 }
