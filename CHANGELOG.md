@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Named method for attributing a name to a plugin (#1556, **@mcanais**).
 - New quadrados create command to create assets based on templates (#1479, **@R-Camacho**). 
 - Profiling timers in render plugins (#1560, **@tomas7770**).
+- CategorizableTrait for grouping components into categories (**@R-Camacho**).
 
 ### Changed
 
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use contrib.glfw3 with Emscripten to support gamepad input on web builds (**@RiscadoA**).
 - Clean up inactive sparse relation tables every frame, greatly improving FPS on *Roll Racers* (**@RiscadoA**).
 - Remove code duplication on quadrados convert and VoxelModel (#1502, **@Jiali-Qiu**)
+- Similar components are now grouped into categories in the entity inspector (#1525, **R-Camacho**).
 
 ### Removed
 
