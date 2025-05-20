@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reflection support for C arrays (**@RiscadoA**).
 - Reflection for RenderEnvironment (**@RiscadoA**).
 - Configurable directional shadow range for objects outside the frustum (**@tomas7770**).
+- Support for MaskTrait types in JSON (de)serializer (#1507, **@RiscadoA**).
 
 ### Changed
 
