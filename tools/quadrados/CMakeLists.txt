@@ -8,6 +8,7 @@ set(QUADRADOS_SOURCE
     "src/entry.cpp"
     "src/embed.cpp"
     "src/convert.cpp"
+    "src/add.cpp"
 )
 
 # ------------------------ Configure quadrados target -------------------------
