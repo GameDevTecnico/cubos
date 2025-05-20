@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reflection for RenderEnvironment (**@RiscadoA**).
 - Configurable directional shadow range for objects outside the frustum (**@tomas7770**).
 - Reflected custom constructors to the ConstructibleTrait (#1528, **@RiscadoA**).
+- Construct button to the ImGui inspector (**@RiscadoA**).
 
 ### Changed
 

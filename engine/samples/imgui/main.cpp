@@ -50,15 +50,32 @@ CUBOS_REFLECT_IMPL(MyUnsupported)
 struct MyStruct
 {
     CUBOS_REFLECT;
-    int foo{3};
-    float bar{0.14F};
+
+    int integer{};
+    float fract{};
+
+    MyStruct(int integer = 3, float fract = 0.14F)
+        : integer(integer)
+        , fract(fract)
+    {
+    }
+
+    MyStruct(float number)
+    {
+        integer = static_cast<int>(number);
+        fract = number - static_cast<float>(integer);
+    }
 };
 
 CUBOS_REFLECT_IMPL(MyStruct)
 {
     return Type::create("MyStruct")
-        .with(FieldsTrait{}.withField("foo", &MyStruct::foo).withField("bar", &MyStruct::bar))
-        .with(ConstructibleTrait::typed<MyStruct>().withBasicConstructors().build());
+        .with(FieldsTrait{}.withField("integer", &MyStruct::integer).withField("fract", &MyStruct::fract))
+        .with(ConstructibleTrait::typed<MyStruct>()
+                  .withBasicConstructors()
+                  .withCustomConstructor<int, float>({"integer", "fract"})
+                  .withCustomConstructor<float>({"number"})
+                  .build());
 }
 
 enum class MyEnum
