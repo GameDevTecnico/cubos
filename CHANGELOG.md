@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reflection for RenderEnvironment (**@RiscadoA**).
 - Configurable directional shadow range for objects outside the frustum (**@tomas7770**).
 - Barebones lua bindings plugin that can execute standard lua code (#1497, **@mkuritsu**).
+- CategorizableTrait for grouping components into categories (**@R-Camacho**).
 
 ### Changed
 
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Debug camera now can be toggled with F9 (**@RiscadoA**).
 - Use contrib.glfw3 with Emscripten to support gamepad input on web builds (**@RiscadoA**).
 - Clean up inactive sparse relation tables every frame, greatly improving FPS on *Roll Racers* (**@RiscadoA**).
+- Similar components are now grouped into categories in the entity inspector (#1525, **R-Camacho**).
 
 ### Removed
 
