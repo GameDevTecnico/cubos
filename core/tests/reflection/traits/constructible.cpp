@@ -1,6 +1,8 @@
 #include <doctest/doctest.h>
 
+#include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include "../../utils.hpp"
 
@@ -14,6 +16,16 @@ struct SimpleConstructible
 
     SimpleConstructible()
         : value(DEFAULT)
+    {
+    }
+
+    SimpleConstructible(int x)
+        : value(x)
+    {
+    }
+
+    SimpleConstructible(int x, const int& y)
+        : value(x + y)
     {
     }
 };
@@ -107,6 +119,44 @@ TEST_CASE("reflection::ConstructibleTrait")
         CHECK_FALSE(destroyed);
         trait.destruct(ptr);
         CHECK(destroyed);
+
+        operator delete(ptr);
+    }
+
+    SUBCASE("custom constructor works")
+    {
+        auto* ptr = operator new(sizeof(SimpleConstructible));
+
+        auto trait = ConstructibleTrait::typed<SimpleConstructible>()
+                         .withCustomConstructor<int>({"x"})
+                         .withCustomConstructor<int, int>({"x", "y"})
+                         .build();
+        REQUIRE(trait.customConstructorCount() == 2);
+        REQUIRE(trait.customConstructor(0).argCount() == 1);
+        REQUIRE(trait.customConstructor(0).argName(0) == "x");
+        REQUIRE(trait.customConstructor(0).argType(0).is<int>());
+        REQUIRE(trait.customConstructor(1).argCount() == 2);
+        REQUIRE(trait.customConstructor(1).argName(0) == "x");
+        REQUIRE(trait.customConstructor(1).argName(1) == "y");
+        REQUIRE(trait.customConstructor(1).argType(0).is<int>());
+        REQUIRE(trait.customConstructor(1).argType(1).is<int>());
+
+        // Test the first custom constructor.
+        int x = 3;
+        void* args[] = {&x};
+        trait.customConstruct(0, ptr, args);
+        auto* simple = static_cast<SimpleConstructible*>(ptr);
+        CHECK(simple->value == x);
+        trait.destruct(ptr);
+
+        // Test the second custom constructor.
+        int y = 4;
+        int z = 5;
+        void* args2[] = {&y, &z};
+        trait.customConstruct(1, ptr, args2);
+        auto* simple2 = static_cast<SimpleConstructible*>(ptr);
+        CHECK(simple2->value == y + z);
+        trait.destruct(ptr);
 
         operator delete(ptr);
     }

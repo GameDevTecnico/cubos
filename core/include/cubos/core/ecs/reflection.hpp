@@ -55,8 +55,8 @@ namespace cubos::core::ecs
         /// @param name Type name, including namespace.
         TypeBuilder(std::string name)
             : mType(reflection::Type::create(std::move(name)))
+            , mConstructible(reflection::ConstructibleTrait::typed<T>().withBasicConstructors().build())
         {
-            mType.with(reflection::ConstructibleTrait::typed<T>().withBasicConstructors().build());
         }
 
         /// @brief Makes the type symmetric. Only used by relation types.
@@ -83,13 +83,23 @@ namespace cubos::core::ecs
             return std::move(*this);
         }
 
+        /// @brief Adds a custom constructor to the type.
+        /// @tparam Args Constructor argument types.
+        /// @param argNames Constructor argument names.
+        /// @return Builder.
+        template <typename... Args>
+        TypeBuilder&& withConstructor(std::initializer_list<std::string> argNames) &&
+        {
+            mConstructible.addCustomConstructor<T, Args...>(argNames);
+        }
+
         /// @brief Adds a field to the type.
         /// @tparam F Field type.
         /// @param name Field name.
         /// @param pointer Field pointer.
         /// @return Builder.
         template <typename F>
-        TypeBuilder&& withField(std::string name, F T::* pointer) &&
+        TypeBuilder&& withField(std::string name, F T::*pointer) &&
         {
             mFields.addField(std::move(name), pointer);
             return std::move(*this);
@@ -99,8 +109,7 @@ namespace cubos::core::ecs
         /// @return Relation type.
         reflection::Type& build() &&
         {
-            mType.with(std::move(mFields));
-            return mType;
+            return mType.with(memory::move(mConstructible)).with(std::move(mFields));
         }
 
         /// @brief Creates a type with a single field.
@@ -108,15 +117,15 @@ namespace cubos::core::ecs
         /// @param pointer Field pointer.
         /// @return Type.
         template <typename F>
-        reflection::Type& wrap(F T::* pointer) &&
+        reflection::Type& wrap(F T::*pointer) &&
         {
             CUBOS_ASSERT(mFields.size() == 0);
-            mType.with(reflection::WrapperTrait(pointer));
-            return mType;
+            return mType.with(memory::move(mConstructible)).with(reflection::WrapperTrait(pointer));
         }
 
     private:
         reflection::Type& mType;
+        reflection::ConstructibleTrait mConstructible;
         reflection::FieldsTrait mFields;
     };
 } // namespace cubos::core::ecs

@@ -35,4 +35,10 @@ Don't forget to destroy the instance manually when you're done with it:
 
 @snippet reflection/traits/constructible/main.cpp Destroying the instance
 
+The constructible trait always stores the destructor of a type, and may
+optionally contain any of the basic constructors (default, copy and move), or
+even arbitrary custom constructors, which receive arguments of reflectable
+types. For example, below, we're calling the custom constructor we previously
+reflected.
 
+@snippet reflection/traits/constructible/main.cpp Creating a custom instance
