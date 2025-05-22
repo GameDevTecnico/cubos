@@ -84,7 +84,7 @@ int copyTemplateFiles(const fs::path& source, const fs::path& destination)
     {
         fs::copy(source, destination, fs::copy_options::recursive);
     }
-    catch (const fs::filesystem_error& e)
+    catch (const fs::filesystem_error&)
     {
         std::cerr << "Error: unexpected filesystem error" << std::endl;
         return -1;
@@ -121,6 +121,7 @@ int runInit(int argc, char** argv, GlobalArgs& ga)
     if (argc == 0)
     {
         printHelp();
+        return -1;
     }
 
     // parse the list command
