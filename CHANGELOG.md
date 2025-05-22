@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Debug camera now can be toggled with F9 (**@RiscadoA**).
 - Use contrib.glfw3 with Emscripten to support gamepad input on web builds (**@RiscadoA**).
 - Clean up inactive sparse relation tables every frame, greatly improving FPS on *Roll Racers* (**@RiscadoA**).
+- Remove code duplication on quadrados convert and VoxelModel (#1502, **@Jiali-Qiu**)
 
 ### Removed
 
