@@ -13,6 +13,7 @@ using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::Name;
 using cubos::core::ecs::World;
+using cubos::core::memory::AnyValue;
 
 TEST_CASE("ecs::Blueprint")
 {
@@ -23,9 +24,12 @@ TEST_CASE("ecs::Blueprint")
     setupWorld(world);
 
     // Check if entity name validity is correct
+    CHECK(blueprint.validEntityName(""));
     CHECK(blueprint.validEntityName("foo"));
     CHECK(blueprint.validEntityName("foo-bar"));
     CHECK(blueprint.validEntityName("null1"));
+    CHECK(blueprint.validEntityName("foo#bar"));
+    CHECK(blueprint.validEntityName("#baz"));
     CHECK_FALSE(blueprint.validEntityName("Foo"));
     CHECK_FALSE(blueprint.validEntityName("foo bar"));
     CHECK_FALSE(blueprint.validEntityName("foo.bar"));
@@ -34,24 +38,25 @@ TEST_CASE("ecs::Blueprint")
     SUBCASE("create an entity and clear the blueprint immediately")
     {
         // If an entity is created, then the returned identifier must not be null
-        auto foo = blueprint.create("foo");
+        auto foo = blueprint.create("#foo");
         CHECK_FALSE(foo.isNull());
         blueprint.add(foo, IntegerComponent{0});
 
         // Searching for an entity with the same name should return the same identifier
-        CHECK(blueprint.bimap().atRight("foo") == foo);
+        CHECK(blueprint.bimap().atRight("#foo") == foo);
 
         blueprint.clear();
     }
 
     // If the blueprint is empty/has been initialized then searching for an entity should always
     // return a null identifier.
-    CHECK_FALSE(blueprint.bimap().containsRight("foo"));
+    CHECK_FALSE(blueprint.bimap().containsRight("#foo"));
 
-    // Create three entities on the blueprint.
-    auto bar = blueprint.create("bar");
-    auto baz = blueprint.create("baz");
-    auto qux = blueprint.create("qux");
+    // Create four entities on the blueprint.
+    blueprint.create("");
+    auto bar = blueprint.create("#bar");
+    auto baz = blueprint.create("#baz");
+    auto qux = blueprint.create("#qux");
     blueprint.add(baz, IntegerComponent{2});
     blueprint.add(baz, ParentComponent{bar});
 
@@ -66,16 +71,21 @@ TEST_CASE("ecs::Blueprint")
     SUBCASE("spawn the blueprint")
     {
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(blueprint, false);
-        auto spawnedBar = spawned.entity("bar");
-        auto spawnedBaz = spawned.entity("baz");
-        auto spawnedQux = spawned.entity("qux");
+        auto spawned = cmds.spawn(blueprint);
+        auto spawnedRoot = spawned.entity();
+        auto spawnedBar = spawned.entity("#bar");
+        auto spawnedBaz = spawned.entity("#baz");
+        auto spawnedQux = spawned.entity("#qux");
         cmdBuffer.commit();
 
         // Check if the spawned entities have the right components.
+        auto rootComponents = world.components(spawnedRoot);
         auto barComponents = world.components(spawnedBar);
         auto bazComponents = world.components(spawnedBaz);
         auto quxComponents = world.components(spawnedQux);
+
+        // The root entity has no components.
+        CHECK(rootComponents.begin() == rootComponents.end());
 
         // "bar" has no components.
         CHECK(barComponents.begin() == barComponents.end());
@@ -107,29 +117,37 @@ TEST_CASE("ecs::Blueprint")
     {
         // Create another blueprint with one entity.
         Blueprint merged{};
-        auto foo = merged.create("foo");
+        auto foo = merged.create("#foo");
         merged.add(foo, IntegerComponent{1});
         merged.relate(foo, foo, EmptyRelation{});
 
-        // Merge the original blueprint into the new one.
-        merged.merge("sub", blueprint);
+        // Instantiate the original blueprint into the new one.
+        blueprint.instantiate([&](const std::string& name) -> Entity { return merged.create("#sub" + name); },
+                              [&](Entity entity, AnyValue component) { merged.add(entity, std::move(component)); },
+                              [&](Entity fromEntity, Entity toEntity, AnyValue relation) {
+                                  merged.relate(fromEntity, toEntity, std::move(relation));
+                              });
 
         // Then the new blueprint has the correct entities.
-        CHECK(merged.bimap().atRight("foo") == foo);
-        CHECK(merged.bimap().containsRight("sub.bar"));
-        CHECK(merged.bimap().containsRight("sub.baz"));
+        CHECK(merged.bimap().atRight("#foo") == foo);
+        CHECK(merged.bimap().containsRight("#sub"));
+        CHECK(merged.bimap().containsRight("#sub#bar"));
+        CHECK(merged.bimap().containsRight("#sub#baz"));
+        CHECK(merged.bimap().containsRight("#sub#qux"));
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(merged, false);
-        auto spawnedFoo = spawned.entity("foo");
-        auto spawnedBar = spawned.entity("sub.bar");
-        auto spawnedBaz = spawned.entity("sub.baz");
+        auto spawned = cmds.spawn(merged);
+        auto spawnedFoo = spawned.entity("#foo");
+        auto spawnedBar = spawned.entity("#sub#bar");
+        auto spawnedBaz = spawned.entity("#sub#baz");
+        auto spawnedQux = spawned.entity("#sub#qux");
         cmdBuffer.commit();
 
         // Check if the spawned entities have the right components.
         auto fooComponents = world.components(spawnedFoo);
         auto barComponents = world.components(spawnedBar);
         auto bazComponents = world.components(spawnedBaz);
+        auto quxComponents = world.components(spawnedQux);
 
         // "foo" has an IntegerComponent with value = 1.
         REQUIRE(fooComponents.has<IntegerComponent>());
@@ -146,6 +164,9 @@ TEST_CASE("ecs::Blueprint")
         REQUIRE(bazComponents.has<IntegerComponent>());
         CHECK(bazComponents.get<ParentComponent>().id == spawnedBar);
         CHECK(bazComponents.get<IntegerComponent>().value == 2);
+
+        // "qux" has no components.
+        CHECK(quxComponents.begin() == quxComponents.end());
     }
 
     SUBCASE("check if arrays of entities are converted correctly when spawned")
@@ -156,7 +177,7 @@ TEST_CASE("ecs::Blueprint")
         blueprint.add(entity0, EntityArrayComponent{{entity0, entity1}});
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(blueprint, false);
+        auto spawned = cmds.spawn(blueprint);
         auto spawned0 = spawned.entity("0");
         auto spawned1 = spawned.entity("1");
         cmdBuffer.commit();
@@ -175,7 +196,7 @@ TEST_CASE("ecs::Blueprint")
         blueprint.add(entity0, EntityDictionaryComponent{{{'0', entity0}, {'1', entity1}}});
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(blueprint, false);
+        auto spawned = cmds.spawn(blueprint);
         auto spawned0 = spawned.entity("0");
         auto spawned1 = spawned.entity("1");
         cmdBuffer.commit();
@@ -197,7 +218,7 @@ TEST_CASE("ecs::Blueprint")
         blueprint.add(entity1, IntegerComponent{1});
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
-        auto spawned = cmds.spawn(blueprint, true);
+        auto spawned = cmds.spawn(blueprint).named("a");
         auto spawned0 = spawned.entity("0");
         auto spawned1 = spawned.entity("1");
         cmdBuffer.commit();
@@ -208,8 +229,8 @@ TEST_CASE("ecs::Blueprint")
         REQUIRE(components1.has<IntegerComponent>());
         REQUIRE(components0.has<Name>());
         REQUIRE(components1.has<Name>());
-        CHECK(components0.get<Name>().value == "0");
-        CHECK(components1.get<Name>().value == "1");
+        CHECK(components0.get<Name>().value == "a0");
+        CHECK(components1.get<Name>().value == "a1");
         CHECK(components0.get<IntegerComponent>().value == 0);
         CHECK(components1.get<IntegerComponent>().value == 1);
     }

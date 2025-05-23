@@ -1,0 +1,32 @@
+{
+    "#render-target": {
+        "cubos::engine::RenderTargetDefaults": {}
+    },
+    "#camera": {
+        "cubos::engine::PerspectiveCamera": {
+            "fovY": 60.0
+        },
+        "cubos::engine::DrawsTo#render-target": {},
+        "cubos::engine::Position": {
+            "x": 64,
+            "y": 30,
+            "z": 150
+        }
+    },
+    "#sun": {
+        "cubos::engine::DirectionalLight": {
+            "color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "intensity": 1.0
+        },
+        "cubos::engine::Rotation": {
+            "w": -0.5263455,
+            "x": -0.7605053,
+            "y": -0.3802527,
+            "z": 0.0
+        }
+    }
+}

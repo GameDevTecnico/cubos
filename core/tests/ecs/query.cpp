@@ -10,15 +10,9 @@ using namespace cubos::core::memory;
 template <typename... Ts>
 static std::size_t queryCount(World& world)
 {
-    QueryData<Ts...> query{world, {}};
-
-    std::size_t counter = 0;
-    for (const auto match : query.view())
-    {
-        (void)match;
-        counter += 1;
-    }
-    return counter;
+    QueryData<Ts...> queryD{world, {}};
+    Query<Ts...> query{queryD.view()};
+    return query.count();
 }
 
 template <typename... Ts>
@@ -70,4 +64,5 @@ TEST_CASE("ecs::Query")
     CHECK(queryCount<Opt<const IntegerComponent&>, Opt<ParentComponent&>>(world) == 6);
     CHECK(queryCount<Opt<IntegerComponent&>, const ParentComponent&>(world) == 3);
     CHECK(queryCount<IntegerComponent&, Opt<const ParentComponent&>>(world) == 4);
+
 }

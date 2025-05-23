@@ -1,34 +1,29 @@
 {
-    "entities": {
-        "base": {
-            "cubos::engine::RenderVoxelGrid": {
-                "asset": "fe862296-fab7-4bf9-b62e-3cc28448dff1",
-                "offset": {
-                    "x": -4,
-                    "y": 0,
-                    "z": -4
-                }
-            },
-            "cubos::engine::Rotation": {
-                "x": 0,
-                "y": 1,
-                "z": 0,
-                "w": 0
-            },
-            "cubos::engine::BoxCollisionShape": {
-                "x": 3.0,
-                "y": 7.0,
-                "z": 2.0
-            },
-            "cubos::engine::Collider": {},
-            "Obstacle": {
-                "velocity": {
-                    "x": 0,
-                    "y": 0,
-                    "z": -100
-                },
-                "killZ": -10
-            }
+    "cubos::engine::RenderVoxelGrid": {
+        "asset": "fe862296-fab7-4bf9-b62e-3cc28448dff1",
+        "offset": {
+            "x": 0,
+            "y": -0.5,
+            "z": 0
         }
+    },
+    "cubos::engine::Rotation": {
+        "x": 0,
+        "y": 1,
+        "z": 0,
+        "w": 0
+    },
+    "cubos::engine::BoxCollisionShape": {
+        "x": 3.0,
+        "y": 7.0,
+        "z": 2.0
+    },
+    "Obstacle": {
+        "velocity": {
+            "x": 0,
+            "y": 0,
+            "z": -100
+        },
+        "killZ": -10
     }
 }

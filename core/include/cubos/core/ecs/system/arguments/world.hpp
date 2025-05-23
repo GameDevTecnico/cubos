@@ -20,7 +20,7 @@ namespace cubos::core::ecs
         {
         }
 
-        static void analyze(SystemAccess& access)
+        void analyze(SystemAccess& access) const // NOLINT(readability-convert-member-functions-to-static)
         {
             access.usesWorld = true;
         }
@@ -45,7 +45,7 @@ namespace cubos::core::ecs
         {
         }
 
-        static void analyze(SystemAccess& access)
+        void analyze(SystemAccess& access) const // NOLINT(readability-convert-member-functions-to-static)
         {
             access.usesWorld = true;
         }

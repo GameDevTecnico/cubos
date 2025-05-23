@@ -35,7 +35,6 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
                 .add(CollisionLayers{});
 
             cmds.create()
@@ -43,7 +42,6 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{1.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
                 .add(CollisionLayers{});
 
             cmds.create()
@@ -51,7 +49,6 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, 1.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
                 .add(CollisionLayers{});
 
             cmds.create()
@@ -59,7 +56,6 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{-1.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
                 .add(CollisionLayers{});
 
             cmds.create()
@@ -67,7 +63,6 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, -1.0F}})
                 .add(LocalToWorld{})
                 .add(BoxCollisionShape{})
-                .add(Collider{})
                 .add(CollisionLayers{});
         });
 
@@ -104,7 +99,6 @@ TEST_CASE("cubos::engine::Raycast")
                 .add(Position{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{})
                 .add(CapsuleCollisionShape{{1, 1}})
-                .add(Collider{})
                 .add(CollisionLayers{});
         });
 

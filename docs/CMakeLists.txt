@@ -11,8 +11,8 @@ include(FetchContent)
 # Fetch m.css
 FetchContent_Declare(
   mcss
-  GIT_REPOSITORY https://github.com/mosra/m.css
-  GIT_TAG a3853c714a0c00a9d02227fcfbd10918296e79da
+  GIT_REPOSITORY https://github.com/GameDevTecnico/cubos-m.css.git
+  GIT_TAG f7bf37a602030cc7b396a5b8c1da2de1dbab640f
 )
 FetchContent_MakeAvailable(mcss)
 

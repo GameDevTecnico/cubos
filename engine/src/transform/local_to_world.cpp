@@ -7,10 +7,7 @@
 
 CUBOS_REFLECT_IMPL(cubos::engine::LocalToWorld)
 {
-    return core::ecs::TypeBuilder<LocalToWorld>("cubos::engine::LocalToWorld")
-        .ephemeral()
-        .withField("mat", &LocalToWorld::mat)
-        .build();
+    return core::ecs::TypeBuilder<LocalToWorld>("cubos::engine::LocalToWorld").ephemeral().wrap(&LocalToWorld::mat);
 }
 
 glm::mat4 cubos::engine::LocalToWorld::inverse() const

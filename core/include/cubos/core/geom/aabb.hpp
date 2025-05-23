@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <glm/mat4x3.hpp>
+#include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
 
 #include <cubos/core/geom/box.hpp>
@@ -91,6 +93,39 @@ namespace cubos::core::geom
         bool overlaps(const AABB& other) const
         {
             return overlapsX(other) && overlapsY(other) && overlapsZ(other);
+        }
+
+        /// @brief Generates an AABB from a box and its transform.
+        /// @param box Box.
+        /// @param transform Transform to apply to the box.
+        /// @return The AABB of the box.
+        static AABB fromOBB(const Box& box, glm::mat4 transform)
+        {
+            // Get the 4 points of the box.
+            glm::vec3 corners[4];
+            box.corners4(corners);
+
+            // Pack the 4 points of the box into a matrix.
+            auto points = glm::mat4{glm::vec4{corners[0], 1.0F}, glm::vec4{corners[1], 1.0F},
+                                    glm::vec4{corners[2], 1.0F}, glm::vec4{corners[3], 1.0F}};
+
+            // We only want scale and rotation, extract translation and remove it.
+            auto translation = glm::vec3{transform[3]};
+            transform[3] = glm::vec4{0.0F, 0.0F, 0.0F, 1.0F};
+
+            // Rotate and scale corners.
+            auto rotatedCorners = glm::mat4x3{transform * points};
+
+            // Get the max of the rotated corners.
+            auto max = glm::max(glm::abs(rotatedCorners[0]), glm::abs(rotatedCorners[1]));
+            max = glm::max(max, glm::abs(rotatedCorners[2]));
+            max = glm::max(max, glm::abs(rotatedCorners[3]));
+
+            // Set the AABB.
+            AABB aabb{};
+            aabb.min(translation - max);
+            aabb.max(translation + max);
+            return aabb;
         }
     };
 } // namespace cubos::core::geom

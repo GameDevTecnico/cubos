@@ -9,6 +9,11 @@ LINKS_NAVBAR1 = [
 
 FAVICON = '@DOXYGEN_PROJECT_ROOT@/docs/images/Favicon.png'
 
+STYLESHEETS = [
+    'https://fonts.googleapis.com/css2?family=Russo+One&family=Roboto:wght@400&display=swap',
+    '../css/m-dark+documentation.compiled.css'
+]
+
 # Add your own navbar links using the code below.
 # To find the valid link names, you can inspect the URL of a generated documentation site.
 

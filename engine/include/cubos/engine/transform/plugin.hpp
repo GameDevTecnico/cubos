@@ -15,10 +15,6 @@
 #include <cubos/engine/transform/rotation.hpp>
 #include <cubos/engine/transform/scale.hpp>
 
-namespace cubos::core::ecs
-{
-
-}
 namespace cubos::engine
 {
     /// @defgroup transform-plugin Transform
@@ -43,23 +39,9 @@ namespace cubos::engine
     /// ## Relations
     /// - @ref ChildOf - tree like relation which indicates an entity is a child of another.
 
-    /// @brief The @ref LocalToWorld components are added to entities with @ref
-    /// Position, @ref Rotation or @ref Scale components.
-    CUBOS_ENGINE_API extern Tag transformMissingLocalTag;
-
-    /// @brief The @ref Position, @ref Rotation, @ref Scale and possibly @ref LocalToParent
-    /// components are added to entities with @ref LocalToWorld components.
-    CUBOS_ENGINE_API extern Tag transformMissingTag;
-
-    /// @brief The @ref LocalToWorld or @ref LocalToParent components are updated with
-    /// the information from the @ref Position, @ref Rotation and @ref Scale components.
-    CUBOS_ENGINE_API extern Tag transformUpdateRelativeTag;
-
     /// @brief The @ref LocalToWorld components are updated with the information from the @ref
     /// LocalToParent component and the @ref LocalToWorld components of the parent.
     CUBOS_ENGINE_API extern Tag transformUpdateTag;
-
-    CUBOS_ENGINE_API extern Tag transformUpdatePropagateTag;
 
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class

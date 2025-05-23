@@ -1,68 +1,70 @@
 {
-    "entities": {
-        "render-target": {
-            "cubos::engine::RenderTargetDefaults": {}
+    "#render-target": {
+        "cubos::engine::RenderTargetDefaults": {}
+    },
+    "#camera": {
+        "cubos::engine::PerspectiveCamera": {
+            "fovY": 60.0
         },
-        "camera": {
-            "cubos::engine::PerspectiveCamera": 60.0,
-            "cubos::engine::DrawsTo@render-target": {},
-            "cubos::engine::Position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
+        "cubos::engine::DrawsTo#render-target": {},
+        "cubos::engine::Position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        }
+    },
+    "#camera2": {
+        "cubos::engine::PerspectiveCamera": {
+            "fovY": 60.0
+        },
+        "cubos::engine::DrawsTo#render-target": {},
+        "cubos::engine::Position": {
+            "x": 3,
+            "y": 5,
+            "z": 0
+        }
+    },
+    "#camera3": {
+        "cubos::engine::OrthographicCamera": {
+            "size": 10
+        },
+        "cubos::engine::DrawsTo#render-target": {},
+        "cubos::engine::Position": {
+            "x": -3,
+            "y": -5,
+            "z": 0
+        }
+    },
+    "#car": {
+        "cubos::engine::RenderVoxelGrid": {
+            "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c75",
+            "offset": {
+                "x": -7.5,
+                "y": 0.0,
+                "z": -16.0
             }
         },
-        "camera2": {
-            "cubos::engine::PerspectiveCamera": 60.0,
-            "cubos::engine::DrawsTo@render-target": {},
-            "cubos::engine::Position": {
-                "x": 3,
-                "y": 5,
-                "z": 0
-            }
+        "cubos::engine::Position": {
+            "x": -5,
+            "y": -5,
+            "z": -20
         },
-        "camera3": {
-            "cubos::engine::OrthographicCamera": {
-                "size": 10
+        "cubos::engine::Scale": 0.5
+    },
+    "#sun": {
+        "cubos::engine::DirectionalLight": {
+            "color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             },
-            "cubos::engine::DrawsTo@render-target": {},
-            "cubos::engine::Position": {
-                "x": -3,
-                "y": -5,
-                "z": 0
-            }
+            "intensity": 1.0
         },
-        "car": {
-            "cubos::engine::RenderVoxelGrid": {
-                "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c75",
-                "offset": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -16.0
-                }
-            },
-            "cubos::engine::Position": {
-                "x": -5,
-                "y": -5,
-                "z": -20
-            },
-            "cubos::engine::Scale": 0.5
-        },
-        "sun": {
-            "cubos::engine::DirectionalLight": {
-                "color": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "intensity": 1.0
-            },
-            "cubos::engine::Rotation": {
-                "w": 0.8446232,
-                "x": -0.1913417,
-                "y": -0.4619398,
-                "z": 0.1913417
-            }
+        "cubos::engine::Rotation": {
+            "w": 0.8446232,
+            "x": -0.1913417,
+            "y": -0.4619398,
+            "z": 0.1913417
         }
     }
 }

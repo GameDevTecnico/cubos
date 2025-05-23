@@ -38,7 +38,7 @@ static void testDefaultConstructible()
     REQUIRE(constructible.hasDefaultConstruct());
     constructible.defaultConstruct(instance);
 
-    if constexpr (std::equality_comparable<T>)
+    if constexpr (std::equality_comparable<T> && !std::is_array_v<T>)
     {
         CHECK(*reinterpret_cast<T*>(instance) == T{});
     }

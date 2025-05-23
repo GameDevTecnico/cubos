@@ -1,7 +1,9 @@
 #include <imgui.h>
 
+#include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/font/plugin.hpp>
 #include <cubos/engine/imgui/context.hpp>
-#include <cubos/engine/imgui/data_inspector.hpp>
+#include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/target/target.hpp>
@@ -15,6 +17,9 @@ CUBOS_DEFINE_TAG(cubos::engine::imguiBeginTag);
 CUBOS_DEFINE_TAG(cubos::engine::imguiEndTag);
 CUBOS_DEFINE_TAG(cubos::engine::imguiTag);
 
+static const cubos::engine::Asset<cubos::engine::Font> RobotoRegularFontAsset =
+    cubos::engine::AnyAsset{"93cbe82e-9c9b-4c25-aa55-5105c1afd0cc"};
+
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 
@@ -23,8 +28,10 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
     cubos.depends(settingsPlugin);
     cubos.depends(windowPlugin);
     cubos.depends(renderTargetPlugin);
+    cubos.depends(assetsPlugin);
+    cubos.depends(fontPlugin);
 
-    cubos.resource<DataInspector>();
+    cubos.resource<ImGuiInspector::State>();
     cubos.uninitResource<ImGuiContextHolder>();
 
     cubos.startupTag(imguiInitTag).after(windowInitTag);
@@ -35,9 +42,11 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
 
     cubos.startupSystem("initialize ImGui")
         .tagged(imguiInitTag)
-        .call([](Commands cmds, const Window& window, Settings& settings) {
+        .tagged(assetsTag)
+        .call([](Commands cmds, const Window& window, Settings& settings, Assets& assets) {
+            auto font = assets.read(RobotoRegularFontAsset);
             float dpiScale = static_cast<float>(settings.getDouble("imgui.scale", window->contentScale()));
-            imguiInitialize(window, dpiScale);
+            imguiInitialize(window, dpiScale, *font);
 
             cmds.insertResource<ImGuiContextHolder>(ImGuiContextHolder{ImGui::GetCurrentContext()});
         });

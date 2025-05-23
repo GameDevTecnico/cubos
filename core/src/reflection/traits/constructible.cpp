@@ -6,7 +6,7 @@ using namespace cubos::core::reflection;
 
 CUBOS_REFLECT_IMPL(ConstructibleTrait)
 {
-    return Type::create("cubos::core::ecs::ConstructibleTrait");
+    return Type::create("cubos::core::reflection::ConstructibleTrait");
 }
 
 ConstructibleTrait::ConstructibleTrait(std::size_t size, std::size_t alignment, Destructor destructor)

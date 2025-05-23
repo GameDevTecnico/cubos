@@ -1,6 +1,6 @@
 #include "plugin.hpp"
 
-#include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/collision_mask.hpp>
@@ -11,12 +11,12 @@
 
 void cubos::engine::interfaceCollisionsPlugin(Cubos& cubos)
 {
-    cubos.component<Collider>();
     cubos.component<BoxCollisionShape>();
     cubos.component<CapsuleCollisionShape>();
     cubos.component<VoxelCollisionShape>();
     cubos.component<CollisionLayers>();
     cubos.component<CollisionMask>();
+    cubos.component<ColliderAABB>();
 
     cubos.relation<CollidingWith>();
 }

@@ -4,7 +4,7 @@
 #include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
-#include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/collision_mask.hpp>
@@ -117,7 +117,6 @@ int main(int argc, char** argv)
 
     cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
         state.a = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -129,7 +128,6 @@ int main(int argc, char** argv)
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
         state.b = commands.create()
-                      .add(Collider{})
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
@@ -212,16 +210,16 @@ int main(int argc, char** argv)
     cubos.system("render")
         .after(collisionsSampleUpdated)
         .after(gizmosDrawTag)
-        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const Collider&> query) {
-            for (auto [localToWorld, collider] : query)
+        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const ColliderAABB&> query) {
+            for (auto [localToWorld, colliderAABB] : query)
             {
-                auto size = collider.localAABB.box().halfSize * 2.0F;
-                glm::mat4 transform = glm::scale(localToWorld.mat * collider.transform, size);
+                auto size = colliderAABB.localAABB.box().halfSize * 2.0F;
+                glm::mat4 transform = glm::scale(localToWorld.mat, size);
                 gizmos.color({1.0F, 1.0F, 1.0F});
                 gizmos.drawWireBox("local AABB", transform);
 
                 gizmos.color({1.0F, 0.0F, 0.0F});
-                gizmos.drawWireBox("world AABB", collider.worldAABB.min(), collider.worldAABB.max());
+                gizmos.drawWireBox("world AABB", colliderAABB.worldAABB.min(), colliderAABB.worldAABB.max());
             }
         });
 

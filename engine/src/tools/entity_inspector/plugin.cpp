@@ -4,7 +4,7 @@
 #include <cubos/core/ecs/name.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
-#include <cubos/engine/imgui/data_inspector.hpp>
+#include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 #include <cubos/engine/tools/selection/plugin.hpp>
@@ -96,7 +96,7 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 
     cubos.system("show Entity Inspector UI")
         .tagged(imguiTag)
-        .call([](State& state, World& world, Toolbox& toolbox, const Selection& selection, DataInspector& dataInspector,
+        .call([](State& state, World& world, Toolbox& toolbox, const Selection& selection, ImGuiInspector inspector,
                  Query<Entity, Opt<const Name&>> query) {
             if (!toolbox.isOpen("Entity Inspector"))
             {
@@ -149,14 +149,14 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                     const Type* removed = nullptr;
                     for (auto [type, value] : world.components(entity))
                     {
-                        if (ImGui::CollapsingHeader(type->shortName().c_str()))
+                        ImGui::PushID(type->name().c_str());
+                        if (ImGui::Button("X"))
                         {
-                            dataInspector.edit(*type, value);
-                            if (ImGui::Button("Remove Component"))
-                            {
-                                removed = type;
-                            }
+                            removed = type;
                         }
+                        ImGui::SameLine();
+                        inspector.edit(type->shortName(), *type, value);
+                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)
@@ -171,16 +171,16 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                     Entity removedEnt{};
                     for (auto [type, value, fromEntity] : world.relationsTo(entity))
                     {
-                        std::string relName = getName(fromEntity) + "@" + type->shortName();
-                        if (ImGui::CollapsingHeader(relName.c_str()))
+                        std::string relName = getName(fromEntity) + "#" + type->shortName();
+                        ImGui::PushID(relName.c_str());
+                        if (ImGui::Button("X"))
                         {
-                            dataInspector.edit(*type, value);
-                            if (ImGui::Button("Remove Relation"))
-                            {
-                                removed = type;
-                                removedEnt = fromEntity;
-                            }
+                            removed = type;
+                            removedEnt = fromEntity;
                         }
+                        ImGui::SameLine();
+                        inspector.edit(relName, *type, value);
+                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)
@@ -194,16 +194,16 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 
                     for (auto [type, value, toEntity] : world.relationsFrom(entity))
                     {
-                        std::string name = type->shortName() + "@" + getName(toEntity);
-                        if (ImGui::CollapsingHeader(name.c_str()))
+                        std::string relName = type->shortName() + "#" + getName(toEntity);
+                        ImGui::PushID(relName.c_str());
+                        if (ImGui::Button("X"))
                         {
-                            dataInspector.edit(*type, value);
-                            if (ImGui::Button("Remove Relation"))
-                            {
-                                removed = type;
-                                removedEnt = toEntity;
-                            }
+                            removed = type;
+                            removedEnt = toEntity;
                         }
+                        ImGui::SameLine();
+                        inspector.edit(relName, *type, value);
+                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)

@@ -2,6 +2,7 @@
 #include <utility>
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/color_space.hpp>
 #include <imgui.h>
 #include <implot.h>
 
@@ -270,13 +271,96 @@ void main()
     bd->ibSize = 0;
 }
 
-void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale)
+static ImVec4 hsvToImVec4(float h, float s, float v, float a = 1.0F)
+{
+    auto rgb = glm::rgbColor(glm::vec3(h, s, v));
+    return {rgb.r, rgb.g, rgb.b, a};
+}
+
+static ImVec4 hsvToImVec4(int h, int s, int v, int a = 100)
+{
+    return hsvToImVec4(static_cast<float>(h), static_cast<float>(s) / 100.0F, static_cast<float>(v) / 100.0F,
+                       static_cast<float>(a) / 100.0F);
+}
+
+void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale, const Font& font)
 {
     // Initialize ImGui
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImPlot::CreateContext();
     ImGui::StyleColorsDark();
+
+    int sat = 45;
+
+    auto text = hsvToImVec4(192, 2, 87);
+    auto primary = hsvToImVec4(195, 100, 80);
+    auto shade1 = hsvToImVec4(209, sat, 38);
+    auto shade2 = hsvToImVec4(208, sat, 27);
+    auto shade3 = hsvToImVec4(208, sat, 20);
+    auto shade4 = hsvToImVec4(208, sat, 13);
+    auto background = hsvToImVec4(204, 13, 5);
+
+    auto hovered = hsvToImVec4(195, 100, 90);
+    auto active = hsvToImVec4(195, 100, 100);
+
+    // Apply our own style, according to the brand guidelines
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.Colors[ImGuiCol_Text] = text;
+    // style.Colors[ImGuiCol_TextDisabled] = ???;
+    style.Colors[ImGuiCol_WindowBg] = shade4;
+    style.Colors[ImGuiCol_ChildBg] = shade4;
+    style.Colors[ImGuiCol_PopupBg] = shade4;
+    // style.Colors[ImGuiCol_Border] = ???;
+    // style.Colors[ImGuiCol_BorderShadow] = ???;
+    style.Colors[ImGuiCol_FrameBg] = background;
+    style.Colors[ImGuiCol_FrameBgHovered] = shade3;
+    style.Colors[ImGuiCol_FrameBgActive] = shade1;
+    style.Colors[ImGuiCol_TitleBg] = shade2;
+    style.Colors[ImGuiCol_TitleBgActive] = shade1;
+    style.Colors[ImGuiCol_MenuBarBg] = shade3;
+    style.Colors[ImGuiCol_ScrollbarBg] = background;
+    style.Colors[ImGuiCol_ScrollbarGrab] = shade2;
+    style.Colors[ImGuiCol_ScrollbarGrabHovered] = shade1;
+    style.Colors[ImGuiCol_ScrollbarGrabActive] = primary;
+    style.Colors[ImGuiCol_CheckMark] = active;
+    style.Colors[ImGuiCol_SliderGrab] = shade1;
+    style.Colors[ImGuiCol_SliderGrabActive] = primary;
+    style.Colors[ImGuiCol_Button] = shade2;
+    style.Colors[ImGuiCol_ButtonHovered] = shade1;
+    style.Colors[ImGuiCol_ButtonActive] = primary;
+    style.Colors[ImGuiCol_Header] = shade3;
+    style.Colors[ImGuiCol_HeaderHovered] = shade2;
+    style.Colors[ImGuiCol_HeaderActive] = shade1;
+    style.Colors[ImGuiCol_Separator] = shade1;
+    style.Colors[ImGuiCol_SeparatorHovered] = hovered;
+    style.Colors[ImGuiCol_SeparatorActive] = active;
+    style.Colors[ImGuiCol_ResizeGrip] = shade2;
+    style.Colors[ImGuiCol_ResizeGripHovered] = shade1;
+    style.Colors[ImGuiCol_ResizeGripActive] = primary;
+    style.Colors[ImGuiCol_Tab] = shade3;
+    style.Colors[ImGuiCol_TabHovered] = shade1;
+    style.Colors[ImGuiCol_TabActive] = shade2;
+    style.Colors[ImGuiCol_TabUnfocused] = shade3;
+    style.Colors[ImGuiCol_TabUnfocusedActive] = shade2;
+    style.Colors[ImGuiCol_DockingPreview] = primary;
+    style.Colors[ImGuiCol_DockingEmptyBg] = background;
+    // style.Colors[ImGuiCol_PlotLines] = ???;
+    // style.Colors[ImGuiCol_PlotLinesHovered] = ???;
+    // style.Colors[ImGuiCol_PlotHistogram] = ???;
+    // style.Colors[ImGuiCol_PlotHistogramHovered] = ???;
+    // style.Colors[ImGuiCol_TableHeaderBg] = ???;
+    // style.Colors[ImGuiCol_TableBorderStrong] = ???;
+    // style.Colors[ImGuiCol_TableBorderLight] = ???;
+    // style.Colors[ImGuiCol_TableRowBg] = ???;
+    // style.Colors[ImGuiCol_TableRowBgAlt] = ???;
+    style.Colors[ImGuiCol_TextSelectedBg] = primary;
+    // style.Colors[ImGuiCol_DragDropTarget] = ???;
+    style.Colors[ImGuiCol_NavHighlight] = active;
+    // style.Colors[ImGuiCol_NavWindowingHighlight] = ???;
+    // style.Colors[ImGuiCol_NavWindowingDimBg] = ???;
+    // style.Colors[ImGuiCol_ModalWindowDimBg] = ???;
+    // style.Colors[ImGuiCol_ModalWindowDimBg] = ???;
 
     ImGuiIO& io = ImGui::GetIO();
     if (io.BackendPlatformUserData != nullptr)
@@ -308,7 +392,6 @@ void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale)
         if (cursor == nullptr)
         {
             cursor = bd->cursors[ImGuiMouseCursor_Arrow];
-            ;
         }
     }
 
@@ -326,10 +409,12 @@ void cubos::engine::imguiInitialize(const io::Window& window, float dpiScale)
         dpiScale = 1.0F;
     }
     ImGui::GetStyle().ScaleAllSizes(dpiScale);
-    ImFontConfig fontCfg;
+    ImFontConfig fontCfg{};
     // Default font size is 13; scale that
     fontCfg.SizePixels = 13.0F * dpiScale;
-    io.Fonts->AddFontDefault(&fontCfg);
+    fontCfg.FontDataOwnedByAtlas = false;
+    io.Fonts->AddFontFromMemoryTTF(const_cast<void*>(static_cast<const void*>(font.data().data())),
+                                   static_cast<int>(font.data().size()), 0.0F, &fontCfg);
 
     createDeviceObjects();
 

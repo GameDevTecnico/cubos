@@ -34,9 +34,9 @@ void cubos::engine::selectionPlugin(Cubos& cubos)
                     if (target.framebuffer == nullptr)
                     {
                         uint32_t entityId =
-                            picker.read(static_cast<unsigned int>((ImGui::GetMousePos().x / ImGui::GetWindowWidth()) *
+                            picker.read(static_cast<unsigned int>((ImGui::GetMousePos().x / ImGui::GetIO().DisplaySize.x) *
                                                                   static_cast<float>(target.size.x)),
-                                        static_cast<unsigned int>((ImGui::GetMousePos().y / ImGui::GetWindowHeight()) *
+                                        static_cast<unsigned int>((ImGui::GetMousePos().y / ImGui::GetIO().DisplaySize.y) *
                                                                   static_cast<float>(target.size.y)));
 
                         if (entityId == UINT32_MAX)

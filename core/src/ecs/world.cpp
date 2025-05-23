@@ -35,6 +35,11 @@ void World::reset()
     this->registerComponent<Name>();
 }
 
+void World::cleanUp()
+{
+    mTables.sparseRelation().cleanUp();
+}
+
 void World::registerResource(const reflection::Type& type)
 {
     CUBOS_TRACE("Registered resource {}", type.name());
@@ -1064,7 +1069,7 @@ World::Relations::Iterator::Iterator(Relations& relations, bool end)
 
 bool World::Relations::Iterator::operator==(const Iterator& other) const
 {
-    return mIterator == other.mIterator && mReverse == other.mReverse && mTableIndex == other.mTableIndex &&
+    return mIterator == other.mIterator && mReverse == other.mReverse && mTableIt == other.mTableIt &&
            mRow == other.mRow && mRelations.mEntity == other.mRelations.mEntity &&
            mRelations.mFrom == other.mRelations.mFrom;
 }
@@ -1116,14 +1121,14 @@ void World::Relations::Iterator::advance()
 
             const auto& tables = archetypeToTables.at(archetype);
 
-            if (mTableIndex > tables.size())
+            if (!mTableIt.contains())
             {
-                mTableIndex = 0;
+                mTableIt = tables.begin();
             }
 
-            for (; mTableIndex < tables.size(); ++mTableIndex)
+            for (; mTableIt.contains() && *mTableIt != tables.end(); ++*mTableIt)
             {
-                mTableId = tables[mTableIndex];
+                mTableId = **mTableIt;
                 auto& table = registry.at(mTableId);
 
                 if (mRow >= table.size())
@@ -1145,7 +1150,7 @@ void World::Relations::Iterator::advance()
                 mRow = SIZE_MAX;
             }
 
-            mTableIndex = SIZE_MAX;
+            mTableIt = {};
 
             if (isSymmetric)
             {
@@ -1168,7 +1173,7 @@ World::ConstRelations::Iterator::Iterator(ConstRelations& relations, bool end)
 
 bool World::ConstRelations::Iterator::operator==(const Iterator& other) const
 {
-    return mIterator == other.mIterator && mReverse == other.mReverse && mTableIndex == other.mTableIndex &&
+    return mIterator == other.mIterator && mReverse == other.mReverse && mTableIt == other.mTableIt &&
            mRow == other.mRow && mRelations.mEntity == other.mRelations.mEntity &&
            mRelations.mFrom == other.mRelations.mFrom;
 }
@@ -1221,14 +1226,14 @@ void World::ConstRelations::Iterator::advance()
 
             const auto& tables = archetypeToTables.at(archetype);
 
-            if (mTableIndex > tables.size())
+            if (!mTableIt.contains())
             {
-                mTableIndex = 0;
+                mTableIt = tables.begin();
             }
 
-            for (; mTableIndex < tables.size(); ++mTableIndex)
+            for (; mTableIt.contains() && *mTableIt != tables.end(); ++*mTableIt)
             {
-                mTableId = tables[mTableIndex];
+                mTableId = **mTableIt;
                 const auto& table = registry.at(mTableId);
 
                 if (mRow >= table.size())
@@ -1250,7 +1255,7 @@ void World::ConstRelations::Iterator::advance()
                 mRow = SIZE_MAX;
             }
 
-            mTableIndex = SIZE_MAX;
+            mTableIt = {};
 
             if (isSymmetric)
             {

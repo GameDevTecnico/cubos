@@ -156,6 +156,11 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                     float maxDistance = caster.maxDistance == 0 ? camera.zFar : caster.maxDistance;
                     float nearDistance = caster.nearDistance == 0 ? camera.zNear : caster.nearDistance;
                     int numCascades = static_cast<int>(caster.getCurrentSplitDistances().size()) + 1;
+                    if (caster.depthExpansion < 0.0F)
+                    {
+                        CUBOS_WARN("Shadow caster depth expansion must not be negative");
+                        caster.depthExpansion = 0.0F;
+                    }
 
                     for (std::size_t i = 0; i < shadowMap->framebuffers.size(); ++i)
                     {
@@ -212,8 +217,8 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                         }
 
                         // Expand space between Z planes, so that objects outside the frustum can cast shadows
-                        minZ -= std::abs(minZ) * 0.5F;
-                        maxZ += std::abs(maxZ) * 0.5F;
+                        minZ -= std::abs(minZ) * caster.depthExpansion;
+                        maxZ += std::abs(maxZ) * caster.depthExpansion;
                         auto proj = glm::ortho(minX, maxX, minY, maxY, -maxZ, -minZ);
 
                         // Send the PerScene data to the GPU.
@@ -231,7 +236,8 @@ void cubos::engine::cascadedShadowMapsRasterizerPlugin(Cubos& cubos)
                         {
                             // Send the PerMesh data to the GPU.
                             PerMesh perMesh{
-                                .model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset),
+                                .model = meshLocalToWorld.mat *
+                                         glm::translate(glm::mat4(1.0F), grid.offset + mesh.baseOffset),
                             };
                             state.perMeshCB->fill(&perMesh, sizeof(perMesh));
 

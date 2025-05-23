@@ -60,7 +60,10 @@ set(CUBOS_CORE_SOURCE
 	"src/reflection/traits/enum.cpp"
 	"src/reflection/traits/mask.cpp"
 	"src/reflection/traits/inherits.cpp"
+	"src/reflection/traits/vector.cpp"
+	"src/reflection/traits/wrapper.cpp"
 	"src/reflection/external/primitives.cpp"
+	"src/reflection/external/carray.cpp"
 	"src/reflection/external/cstring.cpp"
 	"src/reflection/external/string.cpp"
 	"src/reflection/external/string_view.cpp"
@@ -78,6 +81,8 @@ set(CUBOS_CORE_SOURCE
 	"src/data/des/deserializer.cpp"
 	"src/data/des/json.cpp"
 	"src/data/des/binary.cpp"
+    "src/data/transparent/string_equal.cpp"
+    "src/data/transparent/string_hash.cpp"
 
 	"src/io/window.cpp"
 	"src/io/cursor.cpp"
@@ -241,7 +246,8 @@ endif()
 if(CUBOS_CORE_GLFW)
 	if(EMSCRIPTEN)
 		# Emscripten ships its own GLFW
-        target_link_options(cubos-core PUBLIC -sUSE_GLFW=3)
+		# We use the contrib port of GLFW because it supports gamepad input and some other features
+        target_link_options(cubos-core PUBLIC --use-port=contrib.glfw3)
 	else()
 		FetchContent_Declare(
 			glfw
@@ -286,6 +292,10 @@ if(CUBOS_CORE_MINIAUDIO)
 
 	# Define the CUBOS_CORE_MINIAUDIO to toggle MiniAudio support
 	target_compile_definitions(cubos-core PRIVATE CUBOS_CORE_MINIAUDIO)
+
+	if(EMSCRIPTEN)
+		target_link_options(cubos-core PUBLIC -sEXPORTED_RUNTIME_METHODS=HEAPF32)
+	endif()
 endif()
 
 # -------------- Fetch and link core public library dependencies --------------

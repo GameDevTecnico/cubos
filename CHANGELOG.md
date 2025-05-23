@@ -9,15 +9,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Entity destruction detection to observers (#1458, **@kuukitenshi**).
-- Added CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
-- Perform frustum culling for voxel meshes (#1183, **@mkuritsu**).
+- Pretty Emscripten HTML template with mobile support (**@NunoBaptista57**, **@RiscadoA**).
+- Voxel collision shapes to debug collider gizmos (**@RiscadoA**).
+- Raycasting support to the voxel collision shapes (**@RiscadoA**).
+- Reflection support for C arrays (**@RiscadoA**).
+- Reflection for RenderEnvironment (**@RiscadoA**).
+- Configurable directional shadow range for objects outside the frustum (**@tomas7770**).
+- Barebones lua bindings plugin that can execute standard lua code (#1497, **@mkuritsu**).
 
 ### Changed
 
+- Debug camera now accelerates exponentially (#1435, **@RiscadoA**).
+- Debug camera now can be toggled with F9 (**@RiscadoA**).
+- Use contrib.glfw3 with Emscripten to support gamepad input on web builds (**@RiscadoA**).
+- Clean up inactive sparse relation tables every frame, greatly improving FPS on *Roll Racers* (**@RiscadoA**).
+
+### Removed
+
+- Unused tags on the transform plugin (**@RiscadoA**).
+
+### Fixed
+
+- Correctly order UI and ImGui tags so that ImGui is rendered on top of our UI (**@RiscadoA**).
+- Begin UI frame after drawing gizmos (**@tomas7770**).
+- False negatives when frustum culling (**@RiscadoA**).
+- Added missing IDs to remove buttons on entity inspector (**@RiscadoA**).
+- Out of bounds access when gamepad input fetch fails (**@RiscadoA**).
+- Make each audio source use its own data source (**@RiscadoA**).
+- Correctly compute number of text glyphs in vertex array (**@RiscadoA**).
+- Correctly match the entity components to the entity in the penetration constraint solving (**@fallenatlas**).
+- Correctly compute the local collision point for voxel shapes (**@fallenatlas**).
+- Creation of CollidingWith relation between box and voxel shapes when only the AABBs intersect (**@fallenatlas**).
+
+## [v0.7.0] - 2025-05-03
+
+### Added
+
+- Physics distance constraint (#1492, **@joaomanita**).
+- Entity destruction detection to observers (#1458, **@kuukitenshi**).
+- A menu bar to Tesseratos (#1234, **@jdbaracho**).
+- CollisionGroup component to support internal collision layer overrides (#535, **@fallenatlas**).
+- Perform frustum culling for voxel meshes (#1183, **@mkuritsu**).
+- Infinite terrain profiling sample (#1487, **@tomas7770**).
+- Inertia for voxel shape (**@fallenatlas**).
+- A method to Query to count the number of matches (#1451, **@GalaxyCrush**).
+- New ImGui Inspector with custom hook support and better UI (#1179, **@RiscadoA**).
+- Support for MaskTrait and EnumTrait on the inspector (**@RiscadoA**).
+- VectorTrait for providing information about math vector types (**@RiscadoA**).
+- Support for VectorTrait on the inspector (**@RiscadoA**).
+- Support for quaternions on the inspector (#1018, **@RiscadoA**).
+- Decomposition of 4x4 matrices into translation, scale and rotation on the inspector (#1179, **@RiscadoA**).
+- Default entities on blueprints, used as roots for scenes (#1398, **@RiscadoA**).
+- Automatically add ColliderAABB when adding a Collision Shape to an entity (#1444, **@fallenatlas**).
+- Wrapper trait to distinguish between single-field structs and wrapper structs (**SrGesus**, **@RiscadoA**).
+- Bindings sub-project for future lua bindings (#1496, **@mkuritsu**).
+- Auto-scroll toggle to Console tool (#1438, **@R-Camacho**).
+
+### Changed
+
+- Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
 - Made collision layer and mask their own components (#535, **@fallenatlas**).
 - Make RenderPicker optional (#1407, **@tomas7770**).
 - Allow mouse state to be changed through the input plugin (#1401, **@mcanais**).
+- Move the reflection implementation of each physics component into its own file (**@fallenatlas**).
+- Move Tesseratos' tools' status to their respective plugins and remove them from the Toolbox (#1234, **@jdbaracho**).
+- Use Roboto font in ImGui, following the Brand Guidelines (#817, **@RiscadoA**).
+- ImGui style colors to match the Brand Guidelines (#817, **@RiscadoA**).
+- Removed transform from Collider (#1429, **@fallenatlas**).
+- Collider component name to ColliderAABB and made it private. (#1428, **@fallenatlas**).
+- Blueprint entity naming scheme from dots to # (#1398, **@RiscadoA**).
+- Scene format is now hierarchy based (#1398, **@RiscadoA**).
+- RenderVoxelGrid pivot to the center of the grids (#1442, **@kuukitenshi**).
+
+### Fixed
+
+- Deferred shading missing padding leading to black screen on web builds (#1476, **@RiscadoA**).
+- Crashes when adding shadow casters (#1471, **@GalaxyCrush**).
+- Open settings file in correct mode when saving (**@RiscadoA**).
+- Entity and gizmo selection (#1475, **@RiscadoA**).
+- Use depth texture when rendering gizmos to RenderPicker textures to ensure depth ordered selections (**@RiscadoA**).
 
 ## [v0.6.0] - 2025-02-10
 
@@ -34,6 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Make SSAO optional (#1396, **@tomas7770**).
 - Made the fixed step accumulator a public resource of the fixed step plugin (**@RiscadoA**).
+- Change the name parameter type in input methods like ::pressed, ::axis, etc., to use std::string_view and heterogeneous lookup in unordered_map (#1460, **@kuukitenshi**).
 
 ### Fixed
 
@@ -329,3 +400,4 @@ Although they've moved on, their work is etched into the project's foundations.
 [v0.4.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.4.0
 [v0.5.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.5.0
 [v0.6.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.6.0
+[v0.7.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.7.0

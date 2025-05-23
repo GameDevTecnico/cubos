@@ -35,10 +35,20 @@ void QueryRelatedNode::update(World& world)
     mFromNode.update(world);
     mToNode.update(world);
 
-    auto prevSeenCount = mSeenCount;
+    mCacheCursor = {};
+    mTables.clear();
+    mReverseTables.clear();
 
     // Collect all tables which match any of the target archetypes.
-    mSeenCount = world.tables().sparseRelation().forEach(mSeenCount, [&](SparseRelationTableId id) {
+    bool cacheModified = false;
+    bool cleanupEnd = world.tables().sparseRelation().forEach(mCacheCursor, [&](bool cleanup, SparseRelationTableId id) {
+        if (cleanup)
+        {
+            mTables.clear();
+            mReverseTables.clear();
+            cacheModified = true;
+        }
+
         if (id.dataType != mDataType)
         {
             return;
@@ -86,6 +96,7 @@ void QueryRelatedNode::update(World& world)
             if (id.to == archetype && !normalFound)
             {
                 normalFound = true;
+                cacheModified = true;
                 mTables.emplace_back(id);
 
                 if (reverseFound)
@@ -102,6 +113,7 @@ void QueryRelatedNode::update(World& world)
             if (id.from == archetype && !reverseFound)
             {
                 reverseFound = true;
+                cacheModified = true;
                 mReverseTables.emplace_back(ReverseEntry{.id = id, .isDuplicate = normalFound && normalCandidate});
 
                 if (normalFound)
@@ -112,11 +124,18 @@ void QueryRelatedNode::update(World& world)
         }
     });
 
+    if (cleanupEnd)
+    {
+        mTables.clear();
+        mReverseTables.clear();
+        cacheModified = true;
+    }
+
     CUBOS_ASSERT_IMP(!mIsSymmetric, mReverseTables.empty());
 
-    // If we added new tables to the cache, and a traversal direction was specified, we must sort the cached tables in
-    // the right order.
-    if (prevSeenCount != mSeenCount)
+    // If we modified the cache, and a traversal direction was specified, we must sort the cached tables in the right
+    // order.
+    if (cacheModified)
     {
         if (mTraversal == Traversal::Up)
         {
@@ -262,6 +281,11 @@ bool QueryRelatedNode::next(World& world, TargetMask pins, Iterator& iterator) c
         // While the row is out of bounds, we should advance to the next table.
         while (row >= table->size())
         {
+            if (table->size() == 0)
+            {
+                // The table is empty, let's skip it next time.
+            }
+
             ++tableIndex;
             setTable();
 

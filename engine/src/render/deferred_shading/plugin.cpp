@@ -114,9 +114,10 @@ namespace
         glm::uint numDirectionalLights{0};
         glm::uint numPointLights{0};
         glm::uint numSpotLights{0};
-
         int directionalLightWithShadowsId;
+
         int useSSAO;
+        int padding[3];
     };
 
     struct State
@@ -330,8 +331,8 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                                 }
 
                                 // Expand space between Z planes, so that objects outside the frustum can cast shadows
-                                minZ -= std::abs(minZ) * 0.5F;
-                                maxZ += std::abs(maxZ) * 0.5F;
+                                minZ -= std::abs(minZ) * caster.value().depthExpansion;
+                                maxZ += std::abs(maxZ) * caster.value().depthExpansion;
                                 auto proj = glm::ortho(minX, maxX, minY, maxY, -maxZ, -minZ);
                                 perLight.matrices[i] = proj * view;
                                 perLight.shadowFarSplitDistances[i / 4][i % 4] = far;
@@ -453,6 +454,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                         }
                     }
 
+                    perScene.useSSAO = ssao.contains() ? 1 : 0;
                     state.perSceneCB->fill(&perScene, sizeof(PerScene));
 
                     // Draw the screen quad with the GBuffer textures.
@@ -475,11 +477,6 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     if (ssao.contains())
                     {
                         state.ssaoBP->bind(ssao.value().blurTexture);
-                        perScene.useSSAO = 1;
-                    }
-                    else
-                    {
-                        perScene.useSSAO = 0;
                     }
                     state.spotShadowAtlasBP->bind(spotShadowAtlas.atlas);
                     state.pointShadowAtlasBP->bind(pointShadowAtlas.atlas);

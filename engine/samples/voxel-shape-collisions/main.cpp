@@ -4,8 +4,10 @@
 #include <cubos/core/tel/logging.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
-#include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
+#include <cubos/engine/collisions/collision_layers.hpp> //maybe put this in the collisions plugin
+#include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/contact_manifold.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
@@ -96,26 +98,30 @@ int main()
 
     cubos.startupSystem("create colliders").tagged(assetsTag).call([](State& state, Commands commands, Assets& assets) {
         auto car = assets.read(CarAsset);
-        glm::vec3 offset = glm::vec3(car->size().x, car->size().y, car->size().z) / -2.0F;
         state.a = commands.create()
-                      .add(Collider{})
-                      .add(RenderVoxelGrid{CarAsset, offset})
+                      .add(RenderVoxelGrid{CarAsset})
                       .add(VoxelCollisionShape(CarAsset))
+                      .add(CollisionLayers{})
+                      .add(CollisionMask{})
                       .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, -30.0F}})
+                      .add(Position{glm::vec3{0.0F, -10.0F, -20.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 1.0F}})
                       .entity();
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
         state.b = commands.create()
-                      .add(Collider{})
-                      .add(RenderVoxelGrid{CarAsset, offset})
+                      .add(RenderVoxelGrid{CarAsset})
                       .add(VoxelCollisionShape(CarAsset))
+                      .add(CollisionLayers{})
+                      .add(CollisionMask{})
                       .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, 10.0F}})
+                      .add(Position{glm::vec3{0.0F, 15.0F, 10.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, -1.0F}})
+                      .add(PhysicsBundle{.mass = 500.0F,
+                                         .velocity = {0.0F, 0.0F, -1.0F},
+                                         .material = PhysicsMaterial{.bounciness = 0.0},
+                                         .inertiaTensor = glm::mat3(0.0F)})
                       .entity();
         state.bRotationAxis = glm::sphericalRand(1.0F);
     });
@@ -126,19 +132,19 @@ int main()
             auto [aPos, aRot, aVel] = *query.at(state.a);
             auto [bPos, bRot, bVel] = *query.at(state.b);
 
-            aRot.quat = glm::rotate(aRot.quat, 0.001F, state.aRotationAxis);
-            aVel.vec += glm::vec3{0.0F, 0.0F, 0.01F};
+            // aRot.quat = glm::rotate(aRot.quat, 0.001F, state.aRotationAxis);
+            aVel.vec += glm::vec3{0.0F, 0.01F, 0.00F};
 
-            bRot.quat = glm::rotate(bRot.quat, 0.001F, state.bRotationAxis);
-            bVel.vec -= glm::vec3{0.0F, 0.0F, 0.01F};
+            // bRot.quat = glm::rotate(bRot.quat, 0.001F, state.bRotationAxis);
+            bVel.vec -= glm::vec3{0.0F, 0.01F, 0.0F};
         });
 
     cubos.tag(collisionsSampleUpdated);
 
-    cubos.system("render voxel")
+    cubos.system("render voxel boxes")
         .after(collisionsSampleUpdated)
-        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const Collider&, const VoxelCollisionShape&> query) {
-            for (auto [localToWorld, collider, shape] : query)
+        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const VoxelCollisionShape&> query) {
+            for (auto [localToWorld, shape] : query)
             {
                 for (const auto box : shape.getBoxes())
                 {
@@ -151,24 +157,24 @@ int main()
                     // Combine the matrices (note: order matters)
                     pos = pos * shiftMatrix;
                     auto size = box.box.halfSize * 2.0F;
-                    glm::mat4 transform = glm::scale(pos * collider.transform, size);
+                    glm::mat4 transform = glm::scale(pos, size);
                     gizmos.drawWireBox("subboxes", transform);
                 }
             }
         });
 
-    cubos.system("render")
+    cubos.system("render aabb")
         .after(collisionsSampleUpdated)
-        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const Collider&> query) {
-            for (auto [localToWorld, collider] : query)
+        .call([](Gizmos& gizmos, Query<const LocalToWorld&, const ColliderAABB&> query) {
+            for (auto [localToWorld, colliderAABB] : query)
             {
-                auto size = collider.localAABB.box().halfSize * 2.0F;
-                glm::mat4 transform = glm::scale(localToWorld.mat * collider.transform, size);
+                auto size = colliderAABB.localAABB.box().halfSize * 2.0F;
+                glm::mat4 transform = glm::scale(localToWorld.mat, size);
                 gizmos.color({1.0F, 1.0F, 1.0F});
                 gizmos.drawWireBox("local AABB", transform);
 
                 gizmos.color({1.0F, 0.0F, 0.0F});
-                gizmos.drawWireBox("world AABB", collider.worldAABB.min(), collider.worldAABB.max());
+                gizmos.drawWireBox("world AABB", colliderAABB.worldAABB.min(), colliderAABB.worldAABB.max());
             }
         });
 

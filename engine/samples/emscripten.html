@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Cubos WebGL Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols" />
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    canvas.emscripten {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      border: none;
+    }
+
+    #status-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f4d848;
+      border-top: 3px solid #dc941c;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #progress {
+      width: 100%;
+      height: 4px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      appearance: none;
+    }
+
+    #progress::-webkit-progress-bar {
+      background: #222;
+    }
+
+    #progress::-webkit-progress-value {
+      background: #f4d848;
+    }
+
+    #fullscreen-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 5px;
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    #fullscreen-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    #fullscreen-btn::before {
+      content: "\26F6";
+      /* Compass icon */
+      font-size: clamp(14px, 3vw, 64px);
+    }
+
+    #touch-controls {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    #left-controls,
+    #right-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: auto;
+    }
+
+    #left-controls button,
+    #right-controls button {
+      width: 48px;
+      height: 48px;
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .dpad {
+      display: grid;
+      grid-template-columns: 60px 60px 60px;
+      grid-template-rows: 60px 60px 60px;
+      gap: 3px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dpad button {
+      width: 60px;
+      height: 60px;
+      font-size: 20px;
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .dpad .up {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .dpad .left {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .dpad .right {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    .dpad .down {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .dpad .shoot {
+      grid-column: 2;
+      grid-row: 4;
+    }
+
+
+    .prevent-select {
+      -webkit-user-select: none;
+      /* Safari */
+      -ms-user-select: none;
+      /* IE 10 and IE 11 */
+      user-select: none;
+      /* Standard syntax */
+    }
+  </style>
+</head>
+
+<body>
+  <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+
+  <div id="status-container">
+    <div class="spinner" id="spinner"></div>
+    <div id="status">Loading...</div>
+  </div>
+
+  <button id="fullscreen-btn" onclick="Module.requestFullscreen(false, true)"></button>
+
+  <div id="touch-controls" style="visibility: hidden;">
+    <div id="left-controls" class="prevent-select">
+      <div class="dpad">
+        <button class="left" ontouchstart="simulateKey(65, true)" ontouchend="simulateKey(65, false)"><i
+            class="material-symbols">arrow_left</i></button>
+        <button class="up" ontouchstart="simulateKey(87, true)" ontouchend="simulateKey(87, false)"><i
+            class="material-symbols">arrow_drop_up</i></button>
+        <button class="right" ontouchstart="simulateKey(68, true)" ontouchend="simulateKey(68, false)"><i
+            class="material-symbols">arrow_right</i></button>
+        <button class="down" ontouchstart="simulateKey(83, true)" ontouchend="simulateKey(83, false)"><i
+            class="material-symbols">arrow_drop_down</i></button>
+        <button class="shoot" ontouchstart="simulateKey(32, true)" ontouchend="simulateKey(32, false)"><i
+            class="material-symbols">swords</i></button>
+      </div>
+
+    </div>
+    <div id="right-controls" class="prevent-select">
+      <div class="dpad">
+        <button class="left" ontouchstart="simulateKey(37, true)" ontouchend="simulateKey(37, false)"><i
+            class="material-symbols">arrow_left</i></button>
+        <button class="up" ontouchstart="simulateKey(38, true)" ontouchend="simulateKey(38, false)"><i
+            class="material-symbols">arrow_drop_up</i></button>
+        <button class="right" ontouchstart="simulateKey(39, true)" ontouchend="simulateKey(39, false)"><i
+            class="material-symbols">arrow_right</i></button>
+        <button class="down" ontouchstart="simulateKey(40, true)" ontouchend="simulateKey(40, false)"><i
+            class="material-symbols">arrow_drop_down</i></button>
+        <button class="shoot" ontouchstart="simulateKey(76, true)" ontouchend="simulateKey(76, false)"><i
+            class="material-symbols">swords</i></button>
+      </div>
+    </div>
+  </div>
+
+  <progress value="0" max="100" id="progress" hidden=1></progress>
+
+  <script type='text/javascript'>
+    var statusElement = document.getElementById('status');
+    var progressElement = document.getElementById('progress');
+    var spinnerElement = document.getElementById('spinner');
+    var canvasElement = document.getElementById('canvas');
+    var outputElement = document.getElementById('output');
+    if (outputElement) outputElement.value = ''; // clear browser cache
+
+    // As a default initial behavior, pop up an alert when webgl context is lost. To make your
+    // application robust, you may want to override this behavior before shipping!
+    // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
+    canvasElement.addEventListener("webglcontextlost", (e) => {
+      alert('WebGL context lost. You will need to reload the page.');
+      e.preventDefault();
+    }, false);
+
+    var Module = {
+      print(...args) {
+        // These replacements are necessary if you render to raw HTML
+        //text = text.replace(/&/g, "&amp;");
+        //text = text.replace(/</g, "&lt;");
+        //text = text.replace(/>/g, "&gt;");
+        //text = text.replace('\n', '<br>', 'g');
+        console.log(...args);
+        if (outputElement) {
+          var text = args.join(' ');
+          outputElement.value += text + "\n";
+          outputElement.scrollTop = outputElement.scrollHeight; // focus on bottom
+        }
+      },
+      canvas: canvasElement,
+      setStatus(text) {
+        Module.setStatus.last ??= { time: Date.now(), text: '' };
+        if (text === Module.setStatus.last.text) return;
+        var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+        var now = Date.now();
+        if (m && now - Module.setStatus.last.time < 30) return; // if this is a progress update, skip it if too soon
+        Module.setStatus.last.time = now;
+        Module.setStatus.last.text = text;
+        if (m) {
+          text = m[1];
+          progressElement.value = parseInt(m[2]) * 100;
+          progressElement.max = parseInt(m[4]) * 100;
+          progressElement.hidden = false;
+          spinnerElement.hidden = false;
+        } else {
+          progressElement.value = null;
+          progressElement.max = null;
+          progressElement.hidden = true;
+          if (!text) spinnerElement.hidden = true;
+        }
+        statusElement.innerHTML = text;
+      },
+      totalDependencies: 0,
+      monitorRunDependencies(left) {
+        this.totalDependencies = Math.max(this.totalDependencies, left);
+        Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+      }
+    };
+    Module.setStatus('Downloading...');
+    window.onerror = () => {
+      Module.setStatus('Exception thrown, see JavaScript console');
+      spinnerElement.style.display = 'none';
+      Module.setStatus = (text) => {
+        if (text) console.error('[post-exception status] ' + text);
+      };
+    };
+
+    // Detect if it's a touch device (Android or otherwise)
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      // Detect Android specifically
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      if (isAndroid) {
+        // If it's Android, display the touch controls and hide the fullscreen button
+        document.getElementById('touch-controls').style.visibility = 'visible';
+        document.getElementById('fullscreen-btn').style.visibility = 'hidden';
+      }
+    }
+
+    function simulateKey(keyCode, isDown) {
+      const event = new KeyboardEvent(isDown ? 'keydown' : 'keyup', {
+        keyCode: keyCode,
+        which: keyCode,
+        bubbles: true,
+        cancelable: true
+      });
+      document.dispatchEvent(event);
+    }
+  </script>
+
+  {{{ SCRIPT }}}
+</body>

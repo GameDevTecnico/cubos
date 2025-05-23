@@ -44,9 +44,9 @@ dive into the documentation of each class and function.
 ## What we don't have and where are we going
 
 The engine is still in its early stages of development, and thus we're missing
-a lot of features. For example, we don't have rigid body physics yet, and the editor tools are very bare bones.
-There's no scripting language, thus you will have to write all your game logic in C++.
+a lot of features. For example, our rigid body physics isn't completely stable yet, and the editor tools are very bare bones.
+There's no scripting language (although we're working on it!), thus you will have to write all your game logic in C++.
 
 Making a game with the engine is still very painful. Our goal is to make
-**Cubos** usable for game jams by people who are not on the team. This means a
+**Cubos** usable in game jams by people who are not on the team. This means a
 lot of work, but we're confident we can get there.

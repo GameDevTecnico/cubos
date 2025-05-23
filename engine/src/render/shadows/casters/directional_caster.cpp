@@ -17,6 +17,7 @@ CUBOS_REFLECT_IMPL(cubos::engine::DirectionalShadowCaster)
         .withField("splitDistances", &DirectionalShadowCaster::splitDistances)
         .withField("maxDistance", &DirectionalShadowCaster::maxDistance)
         .withField("nearDistance", &DirectionalShadowCaster::nearDistance)
+        .withField("depthExpansion", &DirectionalShadowCaster::depthExpansion)
         .withField("size", &DirectionalShadowCaster::size)
         .build();
 }

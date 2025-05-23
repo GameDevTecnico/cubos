@@ -75,9 +75,9 @@ layout(std140) uniform PerScene
 
     uint numDirectionalLights;
     uint numPointLights;
-    uint numSpotLights;
-    
+    uint numSpotLights;    
     int directionalLightWithShadowsId; // index of directional light that casts shadows, or -1 if none
+
     int useSSAO;
 };
 

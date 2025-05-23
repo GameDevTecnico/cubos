@@ -307,15 +307,12 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                     // Iterate over all mesh buckets and issue draw calls.
                     for (auto [meshEnt, meshLocalToWorld, mesh, grid] : meshes)
                     {
-                        // Send the PerMesh data to the GPU.
-                        PerMesh perMesh{.model = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset),
-                                        .picker = meshEnt.index,
-                                        .padding = {}};
+                        auto transformWithOffset = meshLocalToWorld.mat * glm::translate(glm::mat4(1.0F), grid.offset);
+                        auto transformForMesh = transformWithOffset * glm::translate(glm::mat4(1.0F), mesh.baseOffset);
+                        PerMesh perMesh{.model = transformForMesh, .picker = meshEnt.index, .padding = {}};
                         state.perMeshCB->fill(&perMesh, sizeof(perMesh));
                         auto voxelGrid = assets.read(grid.asset);
-                        glm::uvec3 size = voxelGrid->size();
-                        Box box{.halfSize = size / 2U};
-                        if (cubos::core::geom::intersects(camera.frustum, box, meshLocalToWorld.mat))
+                        if (cubos::core::geom::intersects(camera.frustum, mesh.boundingBox, transformWithOffset))
                         {
                             // Iterate over the buckets of the mesh (it may be split over many of them).
                             for (auto bucket = mesh.firstBucketId; bucket != RenderMeshPool::BucketId::Invalid;

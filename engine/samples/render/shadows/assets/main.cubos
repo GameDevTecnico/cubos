@@ -1,144 +1,144 @@
 {
-    "entities": {
-        "render-target": {
-            "cubos::engine::RenderTargetDefaults": {}
+    "#render-target": {
+        "cubos::engine::RenderTargetDefaults": {}
+    },
+    "#camera": {
+        "cubos::engine::PerspectiveCamera": {
+            "fovY": 60.0
         },
-        "camera": {
-            "cubos::engine::PerspectiveCamera": 60.0,
-            "cubos::engine::DrawsTo@render-target": {},
-            "cubos::engine::Position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
+        "cubos::engine::DrawsTo#render-target": {},
+        "cubos::engine::Position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        }
+    },
+    "#car": {
+        "cubos::engine::RenderVoxelGrid": {
+            "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c75",
+            "offset": {
+                "x": -0.5,
+                "y": 5.0,
+                "z": 0.0
             }
         },
-        "car": {
-            "cubos::engine::RenderVoxelGrid": {
-                "asset": "059c16e7-a439-44c7-9bdc-6e069dba0c75",
-                "offset": {
-                    "x": -7.5,
-                    "y": 0.0,
-                    "z": -16.0
-                }
-            },
-            "cubos::engine::Position": {
-                "x": -3,
-                "y": -2.5,
-                "z": -14
-            },
-            "cubos::engine::Scale": 0.2,
-            "Spin": {}
+        "cubos::engine::Position": {
+            "x": -3,
+            "y": -2.5,
+            "z": -14
         },
-        "spot1": {
-            "cubos::engine::SpotLight": {
-                "color": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "intensity": 10.0,
-                "range": 20.0,
-                "spotAngle": 90.0,
-                "innerSpotAngle": 45.0
+        "cubos::engine::Scale": 0.2,
+        "Spin": {}
+    },
+    "#spot1": {
+        "cubos::engine::SpotLight": {
+            "color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             },
-            "cubos::engine::Position": {
-                "x": -13.0,
-                "y": -2.0,
-                "z": -18.0
-            },
-            "cubos::engine::Rotation": {
-                "w": 0.7071068,
-                "x": 0.0,
-                "y": 0.7071068,
-                "z": 0.0
-            },
-            "cubos::engine::SpotShadowCaster": {}
+            "intensity": 10.0,
+            "range": 20.0,
+            "spotAngle": 90.0,
+            "innerSpotAngle": 45.0
         },
-        "spot2": {
-            "cubos::engine::SpotLight": {
-                "color": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "intensity": 20.0,
-                "range": 20.0,
-                "spotAngle": 90.0,
-                "innerSpotAngle": 45.0
-            },
-            "cubos::engine::Position": {
-                "x": 10.0,
-                "y": -2.0,
-                "z": -20.0
-            },
-            "cubos::engine::Rotation": {
-                "w": 0.8660254,
-                "x": 0.0,
-                "y": -0.5,
-                "z": 0.0
-            },
-            "cubos::engine::SpotShadowCaster": {}
+        "cubos::engine::Position": {
+            "x": -13.0,
+            "y": -2.0,
+            "z": -18.0
         },
-        "spot3": {
-            "cubos::engine::SpotLight": {
-                "color": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "intensity": 10.0,
-                "range": 20.0,
-                "spotAngle": 90.0,
-                "innerSpotAngle": 45.0
-            },
-            "cubos::engine::Position": {
-                "x": 6.0,
-                "y": -2.0,
-                "z": -10.0
-            },
-            "cubos::engine::Rotation": {
-                "w": 0.258819,
-                "x": 0.0,
-                "y": -0.9659258,
-                "z": 0.0
-            },
-            "cubos::engine::SpotShadowCaster": {}
+        "cubos::engine::Rotation": {
+            "w": 0.7071068,
+            "x": 0.0,
+            "y": 0.7071068,
+            "z": 0.0
         },
-        "point1": {
-            "cubos::engine::PointLight": {
-                "color": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "intensity": 1.0,
-                "range": 50.0
+        "cubos::engine::SpotShadowCaster": {}
+    },
+    "#spot2": {
+        "cubos::engine::SpotLight": {
+            "color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             },
-            "cubos::engine::Position": {
-                "x": 0.0,
-                "y": -2.0,
-                "z": -18.0
-            },
-            "cubos::engine::PointShadowCaster": {}
+            "intensity": 20.0,
+            "range": 20.0,
+            "spotAngle": 90.0,
+            "innerSpotAngle": 45.0
         },
-        "sun": {
-            "cubos::engine::DirectionalLight": {
-                "color": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "intensity": 0.5
+        "cubos::engine::Position": {
+            "x": 10.0,
+            "y": -2.0,
+            "z": -20.0
+        },
+        "cubos::engine::Rotation": {
+            "w": 0.8660254,
+            "x": 0.0,
+            "y": -0.5,
+            "z": 0.0
+        },
+        "cubos::engine::SpotShadowCaster": {}
+    },
+    "#spot3": {
+        "cubos::engine::SpotLight": {
+            "color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             },
-            "cubos::engine::Rotation": {
-                "w": -0.5263455,
-                "x": -0.7605053,
-                "y": -0.3802527,
-                "z": 0.0
+            "intensity": 10.0,
+            "range": 20.0,
+            "spotAngle": 90.0,
+            "innerSpotAngle": 45.0
+        },
+        "cubos::engine::Position": {
+            "x": 6.0,
+            "y": -2.0,
+            "z": -10.0
+        },
+        "cubos::engine::Rotation": {
+            "w": 0.258819,
+            "x": 0.0,
+            "y": -0.9659258,
+            "z": 0.0
+        },
+        "cubos::engine::SpotShadowCaster": {}
+    },
+    "#point1": {
+        "cubos::engine::PointLight": {
+            "color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             },
-            "cubos::engine::DirectionalShadowCaster": {
-                "maxDistance": 100.0
-            }
+            "intensity": 1.0,
+            "range": 50.0
+        },
+        "cubos::engine::Position": {
+            "x": 0.0,
+            "y": -2.0,
+            "z": -18.0
+        },
+        "cubos::engine::PointShadowCaster": {}
+    },
+    "#sun": {
+        "cubos::engine::DirectionalLight": {
+            "color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "intensity": 0.5
+        },
+        "cubos::engine::Rotation": {
+            "w": -0.5263455,
+            "x": -0.7605053,
+            "y": -0.3802527,
+            "z": 0.0
+        },
+        "cubos::engine::DirectionalShadowCaster": {
+            "maxDistance": 100.0
         }
     }
 }

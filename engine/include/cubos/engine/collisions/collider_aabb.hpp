@@ -1,10 +1,8 @@
 /// @file
-/// @brief Component @ref cubos::engine::Collider.
+/// @brief Component @ref cubos::engine::ColliderAABB.
 /// @ingroup collisions-plugin
 
 #pragma once
-
-#include <glm/mat4x4.hpp>
 
 #include <cubos/core/geom/aabb.hpp>
 #include <cubos/core/reflection/reflect.hpp>
@@ -13,13 +11,14 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which adds a collider to an entity.
+    /// @brief Component which adds an collider AABB to an entity.
+    ///
+    /// Added automatically when any collision shape is added to the entity.
+    ///
     /// @ingroup collisions-plugin
-    struct CUBOS_ENGINE_API Collider
+    struct ColliderAABB
     {
         CUBOS_REFLECT;
-
-        glm::mat4 transform{1.0F}; ///< Transform of the collider.
 
         core::geom::AABB localAABB{}; ///< Local space AABB of the collider.
         core::geom::AABB worldAABB{}; ///< World space AABB of the collider.

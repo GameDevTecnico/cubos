@@ -2,6 +2,8 @@
 #include <cubos/core/reflection/external/unordered_map.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/type.hpp>
+#include <cubos/core/data/transparent/string_hash.hpp>
+#include <cubos/core/data/transparent/string_equal.hpp>
 
 #include <cubos/engine/input/bindings.hpp>
 
@@ -14,22 +16,22 @@ CUBOS_REFLECT_IMPL(cubos::engine::InputBindings)
         .with(FieldsTrait{}.withField("actions", &InputBindings::mActions).withField("axes", &InputBindings::mAxes));
 }
 
-const std::unordered_map<std::string, InputAction>& InputBindings::actions() const
+const std::unordered_map<std::string, InputAction, cubos::core::data::StringTransparentHash, cubos::core::data::StringTransparentEqual>& InputBindings::actions() const
 {
     return mActions;
 }
 
-const std::unordered_map<std::string, InputAxis>& InputBindings::axes() const
+const std::unordered_map<std::string, InputAxis, cubos::core::data::StringTransparentHash, cubos::core::data::StringTransparentEqual>& InputBindings::axes() const
 {
     return mAxes;
 }
 
-std::unordered_map<std::string, InputAction>& InputBindings::actions()
+std::unordered_map<std::string, InputAction, cubos::core::data::StringTransparentHash, cubos::core::data::StringTransparentEqual>& InputBindings::actions()
 {
     return mActions;
 }
 
-std::unordered_map<std::string, InputAxis>& InputBindings::axes()
+std::unordered_map<std::string, InputAxis, cubos::core::data::StringTransparentHash, cubos::core::data::StringTransparentEqual>& InputBindings::axes()
 {
     return mAxes;
 }

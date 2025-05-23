@@ -61,13 +61,9 @@ int main(int argc, char** argv)
     /// [Set palette]
 
     /// [Spawn car system]
-    cubos.startupSystem("create a car").tagged(assetsTag).call([](Commands cmds, const Assets& assets) {
-        // Calculate the necessary offset to center the model on (0, 0, 0).
-        auto car = assets.read(CarAsset);
-        glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
-
+    cubos.startupSystem("create a car").tagged(assetsTag).call([](Commands cmds) {
         // Create the car entity
-        cmds.create().add(RenderVoxelGrid{CarAsset, offset}).add(LocalToWorld{});
+        cmds.create().add(RenderVoxelGrid{CarAsset}).add(LocalToWorld{});
     });
     /// [Spawn car system]
 

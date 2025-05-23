@@ -1,4 +1,7 @@
+#include <algorithm>
+
 #include <cubos/core/ecs/table/sparse_relation/registry.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/tel/logging.hpp>
 
 using cubos::core::ecs::SparseRelationTable;
@@ -87,9 +90,55 @@ void SparseRelationTableRegistry::erase(DataTypeId type)
     }
 }
 
+void SparseRelationTableRegistry::cleanUp()
+{
+    std::size_t cleanedUpCount = 0;
+
+    for (auto it = mTables.begin(); it != mTables.end();)
+    {
+        if (it->second.size() == 0)
+        {
+            cleanedUpCount += 1;
+
+            // Remove the table from the id array.
+            std::size_t i = 0;
+            for (; i < mIds.size(); ++i)
+            {
+                if (mIds[i] == it->first)
+                {
+                    std::swap(mIds[i], mIds.back());
+                    mIds.pop_back();
+                    break;
+                }
+            }
+
+            // Remove the table from the type index.
+            mTypeIndices[it->first.dataType].erase(it->first);
+
+            it = mTables.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+
+    if (cleanedUpCount > 0)
+    {
+        mVersion += 1;
+        CUBOS_DEBUG("Cleaned up {} sparse relation tables", cleanedUpCount);
+    }
+}
+
 void SparseRelationTableRegistry::TypeIndex::insert(SparseRelationTableId id)
 {
-    mSparseRelationTableIdsByFrom[id.from].emplace_back(id);
-    mSparseRelationTableIdsByTo[id.to].emplace_back(id);
+    mSparseRelationTableIdsByFrom[id.from].emplace(id);
+    mSparseRelationTableIdsByTo[id.to].emplace(id);
     mMaxDepth = mMaxDepth < id.depth ? id.depth : mMaxDepth;
+}
+
+void SparseRelationTableRegistry::TypeIndex::erase(SparseRelationTableId id)
+{
+    mSparseRelationTableIdsByFrom[id.from].erase(id);
+    mSparseRelationTableIdsByTo[id.to].erase(id);
 }

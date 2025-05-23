@@ -1,8 +1,10 @@
 #include <cubos/engine/transform/plugin.hpp>
 
-CUBOS_DEFINE_TAG(cubos::engine::transformMissingTag);
-CUBOS_DEFINE_TAG(cubos::engine::transformMissingLocalTag);
-CUBOS_DEFINE_TAG(cubos::engine::transformUpdateRelativeTag);
+namespace cubos::engine
+{
+    extern Tag transformUpdatePropagateTag;
+}
+
 CUBOS_DEFINE_TAG(cubos::engine::transformUpdateTag);
 CUBOS_DEFINE_TAG(cubos::engine::transformUpdatePropagateTag);
 

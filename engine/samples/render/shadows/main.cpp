@@ -57,7 +57,7 @@ int main(int argc, char** argv)
             environment.ambient = {0.01F, 0.01F, 0.01F};
             environment.skyGradient[0] = {0.1F, 0.2F, 0.4F};
             environment.skyGradient[1] = {0.6F, 0.6F, 0.8F};
-            commands.spawn(assets.read(SceneAsset)->blueprint);
+            commands.spawn(assets.read(SceneAsset)->blueprint());
         });
 
     cubos.startupSystem("create a voxel grid").tagged(assetsTag).call([](Commands commands, Assets& assets) {
@@ -67,13 +67,13 @@ int main(int argc, char** argv)
         // Spawn entities with the grid.
         // Cube
         commands.create()
-            .add(RenderVoxelGrid{gridAsset, {0.0F, 0.0F, 0.0F}})
+            .add(RenderVoxelGrid{gridAsset, {1.0F, 1.0F, 1.0F}})
             .add(LocalToWorld{})
             .add(Position{{3.0F, -3.0F, -17.0F}})
             .add(Scale{1.5F});
         // Floor
         commands.create()
-            .add(RenderVoxelGrid{gridAsset, {0.0F, 0.0F, 0.0F}})
+            .add(RenderVoxelGrid{gridAsset, {1.0F, 1.0F, 1.0F}})
             .add(LocalToWorld{})
             .add(Position{{-20.0F, -43.0F, -50.0F}})
             .add(Scale{20.0F});

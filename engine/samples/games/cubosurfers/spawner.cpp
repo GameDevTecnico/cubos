@@ -13,7 +13,6 @@ CUBOS_REFLECT_IMPL(Spawner)
 {
     return cubos::core::ecs::TypeBuilder<Spawner>("Spawner")
         .withField("scene", &Spawner::scene)
-        .withField("sceneRoot", &Spawner::sceneRoot)
         .withField("period", &Spawner::period)
         .withField("laneWidth", &Spawner::laneWidth)
         .withField("accumulator", &Spawner::accumulator)
@@ -40,7 +39,7 @@ void spawnerPlugin(Cubos& cubos)
                     int offset = (rand() % 3) - 1;
                     spawnPosition.vec.x += static_cast<float>(offset) * spawner.laneWidth;
 
-                    commands.spawn(assets.read(spawner.scene)->blueprint).add(spawner.sceneRoot, spawnPosition);
+                    commands.spawn(assets.read(spawner.scene)->blueprint()).add(spawnPosition);
                 }
             }
         });

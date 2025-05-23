@@ -2,7 +2,7 @@
 
 #include <cubos/core/ecs/name.hpp>
 
-#include <cubos/engine/imgui/data_inspector.hpp>
+#include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/ecs_statistics/plugin.hpp>
 #include <cubos/engine/tools/selection/plugin.hpp>
@@ -38,7 +38,7 @@ void cubos::engine::ecsStatisticsPlugin(Cubos& cubos)
     cubos.system("show ECS statistics")
         .tagged(imguiTag)
         .onlyIf([](Toolbox& toolbox) { return toolbox.isOpen("ECS Statistics"); })
-        .call([](const World& world, State& state, Selection& selection, DataInspector& inspector) {
+        .call([](const World& world, State& state, Selection& selection, ImGuiInspector inspector) {
             if (world.isAlive(selection.entity))
             {
                 state.selectedArchetype = world.archetype(selection.entity);
@@ -242,19 +242,21 @@ void cubos::engine::ecsStatisticsPlugin(Cubos& cubos)
                     ImGui::CollapsingHeader("Selected Sparse Relation Type", &continueSelectedSparseRelationType,
                                             ImGuiTreeNodeFlags_DefaultOpen))
                 {
+                    SparseRelationTableRegistry::CacheCursor cacheCursor{};
                     std::vector<SparseRelationTableId> tables{};
                     int activeTableCount = 0;
-                    world.tables().sparseRelation().forEach(0, [&](SparseRelationTableId tableId) {
-                        if (tableId.dataType == state.selectedSparseRelationTypeId)
-                        {
-                            tables.push_back(tableId);
-
-                            if (world.tables().sparseRelation().at(tableId).size() > 0)
+                    world.tables().sparseRelation().forEach(
+                        cacheCursor, [&](bool /*cleanup*/, SparseRelationTableId tableId) {
+                            if (tableId.dataType == state.selectedSparseRelationTypeId)
                             {
-                                ++activeTableCount;
+                                tables.push_back(tableId);
+
+                                if (world.tables().sparseRelation().at(tableId).size() > 0)
+                                {
+                                    ++activeTableCount;
+                                }
                             }
-                        }
-                    });
+                        });
 
                     ImGui::Separator();
                     ImGui::Text("Selected Relation Type: %s",
@@ -416,7 +418,8 @@ void cubos::engine::ecsStatisticsPlugin(Cubos& cubos)
 
                     if (world.hasResource(*state.selectedResourceType))
                     {
-                        inspector.show(*state.selectedResourceType, world.resource(*state.selectedResourceType));
+                        inspector.show("Value", *state.selectedResourceType,
+                                       world.resource(*state.selectedResourceType));
                     }
                     else
                     {

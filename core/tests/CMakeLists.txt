@@ -12,13 +12,16 @@ add_executable(
 	reflection/type_client_server.cpp
 	reflection/type_registry.cpp
 	reflection/traits/constructible.cpp
+	reflection/traits/wrapper.cpp
 	reflection/traits/fields.cpp
 	reflection/traits/nullable.cpp
 	reflection/traits/enum.cpp
 	reflection/traits/mask.cpp
 	reflection/traits/inherits.cpp
+	reflection/traits/vector.cpp
 	reflection/external/primitives.cpp
 	reflection/external/cstring.cpp
+	reflection/external/carray.cpp
 	reflection/external/string.cpp
 	reflection/external/string_view.cpp
 	reflection/external/uuid.cpp

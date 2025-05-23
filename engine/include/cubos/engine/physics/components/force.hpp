@@ -39,7 +39,7 @@ namespace cubos::engine
         void addForceOnPoint(glm::vec3 force, glm::vec3 localPoint, glm::vec3 centerOfMass)
         {
             mForce += force;
-            mTorque = glm::cross(localPoint - centerOfMass, force);
+            mTorque += glm::cross(localPoint - centerOfMass, force);
         }
 
         void clear()

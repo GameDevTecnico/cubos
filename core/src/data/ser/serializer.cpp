@@ -17,6 +17,7 @@ bool Serializer::write(const reflection::Type& type, const void* value)
     }
     else if (!this->decompose(type, value))
     {
+
         CUBOS_WARN("Serialization decomposition for type {} failed", type.name());
         return false;
     }

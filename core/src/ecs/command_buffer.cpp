@@ -43,7 +43,7 @@ void CommandBuffer::destroy(Entity entity)
     mCommands.emplace_back([entity](World& world) { world.destroy(entity); });
 }
 
-std::unordered_map<std::string, Entity> CommandBuffer::spawn(const Blueprint& blueprint, bool withName)
+std::unordered_map<std::string, Entity> CommandBuffer::spawn(const Blueprint& blueprint)
 {
     std::unordered_map<std::string, Entity> nameToEntity{};
 
@@ -56,8 +56,7 @@ std::unordered_map<std::string, Entity> CommandBuffer::spawn(const Blueprint& bl
         [&](Entity entity, memory::AnyValue component) { this->add(entity, component.type(), component.get()); },
         [&](Entity fromEntity, Entity toEntity, memory::AnyValue relation) {
             this->relate(fromEntity, toEntity, relation.type(), relation.get());
-        },
-        withName);
+        });
 
     return nameToEntity;
 }

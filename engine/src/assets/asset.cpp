@@ -1,8 +1,9 @@
+#include <cubos/core/ecs/reflection.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
 #include <cubos/core/reflection/external/uuid.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
-#include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/wrapper.hpp>
 #include <cubos/core/reflection/type.hpp>
 #include <cubos/core/tel/logging.hpp>
 
@@ -158,7 +159,7 @@ cubos::core::reflection::Type& AnyAsset::makeType(std::string name)
 
     return Type::create(std::move(name))
         .with(ConstructibleTrait::typed<AnyAsset>().withBasicConstructors().build())
-        .with(FieldsTrait().withField("id", &AnyAsset::pathOrId));
+        .with(WrapperTrait(&AnyAsset::pathOrId));
 }
 
 void AnyAsset::incRef() const

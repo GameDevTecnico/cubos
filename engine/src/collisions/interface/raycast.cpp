@@ -1,13 +1,9 @@
 #include <cubos/engine/collisions/raycast.hpp>
 
-static float intersects(cubos::engine::Raycast::Ray ray, cubos::core::geom::Box box)
+static float intersects(cubos::engine::Raycast::Ray ray, cubos::core::geom::AABB aabb)
 {
-    glm::vec3 corners[2];
-
-    box.diag(corners);
-
-    glm::vec3 max = corners[1];
-    glm::vec3 min = corners[0];
+    glm::vec3 max = aabb.max();
+    glm::vec3 min = aabb.min();
 
     float tMinX = (min.x - ray.origin.x) / ray.direction.x;
     float tMaxX = (max.x - ray.origin.x) / ray.direction.x;
@@ -28,6 +24,13 @@ static float intersects(cubos::engine::Raycast::Ray ray, cubos::core::geom::Box 
     }
 
     return tMin < 0.0F ? tMax : tMin;
+}
+
+static float intersects(cubos::engine::Raycast::Ray ray, cubos::core::geom::Box box)
+{
+    cubos::core::geom::AABB aabb{};
+    box.diag(aabb.diag);
+    return intersects(ray, aabb);
 }
 
 static float intersects(cubos::engine::Raycast::Ray ray, float radius, float top, float bottom)
@@ -140,14 +143,14 @@ cubos::engine::Opt<cubos::engine::Raycast::Hit> cubos::engine::Raycast::fire(Ray
     // normalize the ray
     ray.direction = glm::normalize(ray.direction);
 
-    for (auto [entity, localToWorld, collider, shape, layers] : mBoxes)
+    for (auto [entity, localToWorld, shape, layers] : mBoxes)
     {
         if ((ray.mask & layers.value) == 0U)
         {
             continue;
         }
 
-        auto worldToLocal = glm::inverse(collider.transform) * localToWorld.inverse();
+        auto worldToLocal = localToWorld.inverse();
         Ray localRay = {glm::vec3(worldToLocal * glm::vec4(ray.origin, 1.0F)),
                         glm::normalize(glm::vec3(worldToLocal * glm::vec4(ray.direction, 0.0F)))};
         float scalar = intersects(localRay, shape.box);
@@ -162,14 +165,14 @@ cubos::engine::Opt<cubos::engine::Raycast::Hit> cubos::engine::Raycast::fire(Ray
         }
     }
 
-    for (auto [entity, localToWorld, collider, shape, position, layers] : mCapsules)
+    for (auto [entity, localToWorld, shape, position, layers] : mCapsules)
     {
         if ((ray.mask & layers.value) == 0U)
         {
             continue;
         }
 
-        auto worldToLocal = glm::inverse(collider.transform) * localToWorld.inverse();
+        auto worldToLocal = localToWorld.inverse();
         Ray localRay = {glm::vec3(worldToLocal * glm::vec4(ray.origin, 1.0F)),
                         glm::normalize(glm::vec3(worldToLocal * glm::vec4(ray.direction, 0.0F)))};
         float scalar = intersects(localRay, worldToLocal, shape.capsule, position);
@@ -180,6 +183,41 @@ cubos::engine::Opt<cubos::engine::Raycast::Hit> cubos::engine::Raycast::fire(Ray
             hit.point = glm::vec3(ray.origin + scalar * ray.direction);
             hitMax.replace(hit);
             minScalar = scalar;
+        }
+    }
+
+    for (auto [entity, localToWorld, shape, aabb, layers] : mVoxels)
+    {
+        if ((ray.mask & layers.value) == 0U)
+        {
+            continue;
+        }
+
+        // Test first against the AABB
+        if (intersects(ray, aabb.worldAABB) < 0.0F)
+        {
+            continue;
+        }
+
+        // Check if it hits with any of the boxes.
+        auto worldToLocal = localToWorld.inverse();
+        for (const auto& boxShiftPair : shape.getBoxes())
+        {
+            // Transform the ray into the box's space.
+            Ray localRay = {glm::vec3(worldToLocal * glm::vec4(ray.origin, 1.0F)),
+                            glm::normalize(glm::vec3(worldToLocal * glm::vec4(ray.direction, 0.0F)))};
+            localRay.origin += boxShiftPair.shift;
+
+            // Check if the ray intersects with the box.
+            float scalar = intersects(localRay, boxShiftPair.box);
+            if (scalar <= minScalar && scalar >= 0.0F)
+            {
+                Hit hit;
+                hit.entity = entity;
+                hit.point = glm::vec3(ray.origin + scalar * ray.direction);
+                hitMax.replace(hit);
+                minScalar = scalar;
+            }
         }
     }
 

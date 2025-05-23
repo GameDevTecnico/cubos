@@ -86,9 +86,8 @@ namespace cubos::core::ecs
 
         /// @brief Spawns a blueprint into the world.
         /// @param blueprint Blueprint to spawn.
-        /// @param withName Whether to use the entity names from the blueprint.
         /// @return Blueprint builder.
-        BlueprintBuilder spawn(const Blueprint& blueprint, bool withName = true);
+        BlueprintBuilder spawn(const Blueprint& blueprint);
 
         /// @brief Adds a component to an entity.
         /// @param entity Entity identifier.
@@ -262,6 +261,13 @@ namespace cubos::core::ecs
         /// @return Entity identifier.
         Entity entity(const std::string& name) const;
 
+        /// @brief Gets the root entity of the spawned blueprint, if there's any.
+        ///
+        /// Aborts if the blueprint has no root entity.
+        ///
+        /// @return Entity identifier.
+        Entity entity() const;
+
         /// @brief Adds a component to an entity of the blueprint.
         ///
         /// Aborts if @p name does not match any entity of the blueprint.
@@ -271,6 +277,15 @@ namespace cubos::core::ecs
         /// @param value Component value.
         /// @return Reference to this builder, for chaining.
         BlueprintBuilder& add(const std::string& name, const reflection::Type& type, void* value);
+
+        /// @brief Adds a component to the root entity of the blueprint.
+        ///
+        /// Aborts if the blueprint has no root entity.
+        ///
+        /// @param type Component Type.
+        /// @param value Component value.
+        /// @return Reference to this builder, for chaining.
+        BlueprintBuilder& add(const reflection::Type& type, void* value);
 
         /// @brief Adds a component to an entity of the blueprint.
         ///
@@ -285,6 +300,27 @@ namespace cubos::core::ecs
         {
             return this->add(name, reflection::reflect<T>(), &value);
         }
+
+        /// @brief Adds a component to the root entity of the blueprint.
+        ///
+        /// Aborts if the blueprint has no root entity.
+        ///
+        /// @tparam T Component type.
+        /// @param value Component value.
+        /// @return Reference to this builder, for chaining.
+        template <typename T>
+        BlueprintBuilder& add(T value)
+        {
+            return this->add(reflection::reflect<T>(), &value);
+        }
+
+        /// @brief Adds a @ref Name component to the root entity of the blueprint.
+        ///
+        /// Aborts if the blueprint has no root entity.
+        ///
+        /// @param name Entity name.
+        /// @return Reference to this builder, for chaining.
+        BlueprintBuilder& named(const std::string& name);
 
     private:
         CommandBuffer& mBuffer;

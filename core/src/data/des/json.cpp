@@ -10,6 +10,7 @@
 #include <cubos/core/reflection/traits/fields.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/string_conversion.hpp>
+#include <cubos/core/reflection/traits/wrapper.hpp>
 #include <cubos/core/reflection/type.hpp>
 #include <cubos/core/tel/logging.hpp>
 
@@ -23,6 +24,7 @@ using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
+using cubos::core::reflection::WrapperTrait;
 
 // NOLINTBEGIN(bugprone-macro-parentheses)
 #define AUTO_HOOK(T, fromString)                                                                                       \
@@ -101,6 +103,12 @@ void JSONDeserializer::feed(nlohmann::json json)
 
 bool JSONDeserializer::decompose(const Type& type, void* value)
 {
+    if (type.has<WrapperTrait>())
+    {
+        const auto& wrapper = type.get<WrapperTrait>();
+        return this->read(wrapper.type(), wrapper.value(value));
+    }
+
     if (mIsKey)
     {
         if (!type.has<StringConversionTrait>())
@@ -241,18 +249,6 @@ bool JSONDeserializer::decompose(const Type& type, void* value)
     {
         const auto& trait = type.get<FieldsTrait>();
         auto view = trait.view(value);
-
-        if (trait.size() == 1)
-        {
-            // If there's a single field, read it directly.
-            if (!this->read(trait.begin()->type(), view.begin()->value))
-            {
-                CUBOS_WARN("Couldn't deserialize wrapped field {}", trait.begin()->name());
-                return false;
-            }
-
-            return true;
-        }
 
         if (!mIterator->is_object())
         {

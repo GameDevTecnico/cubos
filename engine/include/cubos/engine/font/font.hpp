@@ -34,6 +34,10 @@ namespace cubos::engine
         /// @brief Returns the handle to this loaded font.
         void* handle() const;
 
+        /// @brief Returns the data bytes of the font.
+        /// @return The data bytes of the font.
+        const std::vector<uint8_t>& data() const;
+
     private:
         void* mHandle{nullptr};
 
