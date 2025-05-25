@@ -107,7 +107,7 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 
     cubos.system("show Entity Inspector UI")
         .tagged(imguiTag)
-        .call([](State& state, World& world, Toolbox& toolbox, const Selection& selection, ImGuiInspector inspector,
+        .call([](State& state, World& world, Toolbox& toolbox, Selection& selection, ImGuiInspector inspector,
                  Query<Entity, Opt<const Name&>> query) {
             if (!toolbox.isOpen("Entity Inspector"))
             {
@@ -230,6 +230,11 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                             removedEnt = fromEntity;
                         }
                         ImGui::SameLine();
+                        if (ImGui::Button("Select"))
+                        {
+                            selection.entity = fromEntity;
+                        }
+                        ImGui::SameLine();
                         inspector.edit(relName, *type, value);
                         ImGui::PopID();
                     }
@@ -251,6 +256,11 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                         {
                             removed = type;
                             removedEnt = toEntity;
+                        }
+                        ImGui::SameLine();
+                        if (ImGui::Button("Select"))
+                        {
+                            selection.entity = toEntity;
                         }
                         ImGui::SameLine();
                         inspector.edit(relName, *type, value);

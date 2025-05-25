@@ -5,5 +5,5 @@ using namespace cubos::core::reflection;
 
 CUBOS_REFLECT_IMPL(WrapperTrait)
 {
-    return Type::create("cubos::core::ecs::WrapperTrait");
+    return Type::create("cubos::core::reflection::WrapperTrait");
 }

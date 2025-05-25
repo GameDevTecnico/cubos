@@ -8,6 +8,7 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/traits/array.hpp>
+#include <cubos/core/reflection/traits/constant.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
@@ -733,4 +734,16 @@ ImGuiInspector::State::State()
             bool modified = inspector.inspect(name, readOnly, wrapper.type(), wrapper.value(value));
             return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
         });
+
+    // Catch constant types.
+    hooks.emplace_back([](const std::string& name, bool, ImGuiInspector& inspector, const Type& type, void* value) {
+        if (!type.has<ConstantTrait>())
+        {
+            return ImGuiInspector::HookResult::Unhandled;
+        }
+
+        const auto& constant = type.get<ConstantTrait>();
+        inspector.show(name, constant.type(), value);
+        return ImGuiInspector::HookResult::Shown;
+    });
 }
