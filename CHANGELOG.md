@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Barebones lua bindings plugin that can execute standard lua code (#1497, **@mkuritsu**).
 - Constant type reflection support with a new Constant trait (#1507, **@RiscadoA**).
 - Constant trait handler to the ImGui inspector (#1507, **@RiscadoA**).
+- CategorizableTrait for grouping components into categories (**@R-Camacho**).
+- Button to select incoming and outgoing relations in the entity inspector (#1524, **@R-Camacho**).
 
 ### Changed
 
@@ -26,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use contrib.glfw3 with Emscripten to support gamepad input on web builds (**@RiscadoA**).
 - Clean up inactive sparse relation tables every frame, greatly improving FPS on *Roll Racers* (**@RiscadoA**).
 - Remove code duplication on quadrados convert and VoxelModel (#1502, **@Jiali-Qiu**)
+- Similar components are now grouped into categories in the entity inspector (#1525, **R-Camacho**).
 
 ### Removed
 

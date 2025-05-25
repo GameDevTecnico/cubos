@@ -1,8 +1,11 @@
+#include <algorithm>
+
 #include <imgui.h>
 
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/name.hpp>
 #include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/reflection/traits/categorizable.hpp>
 
 #include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
@@ -27,6 +30,14 @@ namespace
         CUBOS_ANONYMOUS_REFLECT(State);
 
         const Type* relationType;
+    };
+
+    struct ComponentEntry
+    {
+        const Type* type;
+        void* value;
+        std::string category;
+        size_t priority;
     };
 } // namespace
 
@@ -96,7 +107,7 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 
     cubos.system("show Entity Inspector UI")
         .tagged(imguiTag)
-        .call([](State& state, World& world, Toolbox& toolbox, const Selection& selection, ImGuiInspector inspector,
+        .call([](State& state, World& world, Toolbox& toolbox, Selection& selection, ImGuiInspector inspector,
                  Query<Entity, Opt<const Name&>> query) {
             if (!toolbox.isOpen("Entity Inspector"))
             {
@@ -146,16 +157,56 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                         ImGui::EndPopup();
                     }
 
-                    const Type* removed = nullptr;
-                    for (auto [type, value] : world.components(entity))
+                    // Group components into category
+                    std::vector<ComponentEntry> components;
+                    for (const auto& [type, value] : world.components(entity))
                     {
-                        ImGui::PushID(type->name().c_str());
+                        std::string category = "Misc"; // Default category
+                        size_t priority = 0;           // Default priority
+
+                        if (type->has<core::reflection::CategorizableTrait>())
+                        {
+                            const auto& trait = type->get<core::reflection::CategorizableTrait>();
+                            category = trait.category();
+                            priority = trait.priority();
+                        }
+
+                        components.push_back({type, value, category, priority});
+                    }
+
+                    // Sort components by category first and then by priority.
+                    std::sort(components.begin(), components.end(),
+                              [](const ComponentEntry& a, const ComponentEntry& b) {
+                                  if (a.category != b.category)
+                                  {
+                                      return a.category < b.category;
+                                  }
+
+                                  return a.priority < b.priority;
+                              });
+
+                    // Store current category for separator
+                    std::string currentCategory;
+                    const Type* removed = nullptr;
+                    for (const auto& component : components)
+                    {
+                        ImGui::PushID(component.type->name().c_str());
+                        if (component.category != currentCategory)
+                        {
+                            if (!currentCategory.empty())
+                            {
+                                ImGui::Spacing();
+                            }
+                            ImGui::SeparatorText(component.category.c_str());
+                            currentCategory = component.category;
+                        }
+
                         if (ImGui::Button("X"))
                         {
-                            removed = type;
+                            removed = component.type;
                         }
                         ImGui::SameLine();
-                        inspector.edit(type->shortName(), *type, value);
+                        inspector.edit(component.type->shortName(), *component.type, component.value);
                         ImGui::PopID();
                     }
 
@@ -179,6 +230,11 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                             removedEnt = fromEntity;
                         }
                         ImGui::SameLine();
+                        if (ImGui::Button("Select"))
+                        {
+                            selection.entity = fromEntity;
+                        }
+                        ImGui::SameLine();
                         inspector.edit(relName, *type, value);
                         ImGui::PopID();
                     }
@@ -200,6 +256,11 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                         {
                             removed = type;
                             removedEnt = toEntity;
+                        }
+                        ImGui::SameLine();
+                        if (ImGui::Button("Select"))
+                        {
+                            selection.entity = toEntity;
                         }
                         ImGui::SameLine();
                         inspector.edit(relName, *type, value);
