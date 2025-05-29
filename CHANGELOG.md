@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Correctly compute the local collision point for voxel shapes (**@fallenatlas**).
 - Creation of CollidingWith relation between box and voxel shapes when only the AABBs intersect (**@fallenatlas**).
 - Missing renderDepthPlugin in Gizmos sample (**@tomas7770**).
+- Clear picker depth in Gizmos plugin if not already cleared (**@tomas7770**).
 
 ## [v0.7.0] - 2025-05-03
 
