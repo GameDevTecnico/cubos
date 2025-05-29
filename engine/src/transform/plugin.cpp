@@ -24,6 +24,8 @@ void addComponent(Commands cmds, Query<Entity> query)
 
 void cubos::engine::transformPlugin(Cubos& cubos)
 {
+    cubos.named("cubos::engine::transformPlugin");
+
     cubos.component<Position>();
     cubos.component<Rotation>();
     cubos.component<Scale>();
