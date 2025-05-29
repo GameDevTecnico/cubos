@@ -5,6 +5,8 @@
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/perspective.hpp>
 #include <cubos/engine/render/camera/plugin.hpp>
+#include <cubos/engine/render/depth/depth.hpp>
+#include <cubos/engine/render/depth/plugin.hpp>
 #include <cubos/engine/render/picker/picker.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
 #include <cubos/engine/render/split_screen/plugin.hpp>
@@ -26,6 +28,7 @@ int main(int argc, char** argv)
     cubos.plugin(transformPlugin);
     cubos.plugin(renderTargetPlugin);
     cubos.plugin(renderPickerPlugin);
+    cubos.plugin(renderDepthPlugin);
     cubos.plugin(cameraPlugin);
     cubos.plugin(splitScreenPlugin);
 
@@ -34,8 +37,13 @@ int main(int argc, char** argv)
     /// [Adding plugin]
 
     cubos.startupSystem("setup render target and cameras").call([](Commands cmds) {
-        auto target =
-            cmds.create().add(RenderTarget{}).add(RenderPicker{}).add(GizmosTarget{}).add(SplitScreen{}).entity();
+        auto target = cmds.create()
+                          .add(RenderTarget{})
+                          .add(RenderPicker{})
+                          .add(RenderDepth{})
+                          .add(GizmosTarget{})
+                          .add(SplitScreen{})
+                          .entity();
 
         cmds.create()
             .relatedTo(target, DrawsTo{})
