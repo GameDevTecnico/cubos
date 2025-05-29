@@ -154,6 +154,11 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                 // Draw world and view-space gizmos.
                 for (auto [localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
                 {
+                    if (!camera.active)
+                    {
+                        continue;
+                    }
+
                     // Prepare the viewport and scissor rectangles.
                     rd.setViewport(static_cast<int>(drawsTo.viewportOffset.x * static_cast<float>(target.size.x)),
                                    static_cast<int>(drawsTo.viewportOffset.y * static_cast<float>(target.size.y)),
@@ -209,6 +214,11 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                 // Draw world and view-space gizmos.
                 for (auto [localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
                 {
+                    if (!camera.active)
+                    {
+                        continue;
+                    }
+
                     // Prepare the viewport and scissor rectangles.
                     rd.setViewport(static_cast<int>(drawsTo.viewportOffset.x * static_cast<float>(target.size.x)),
                                    static_cast<int>(drawsTo.viewportOffset.y * static_cast<float>(target.size.y)),
