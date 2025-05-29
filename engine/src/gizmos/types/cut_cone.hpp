@@ -26,9 +26,11 @@ namespace cubos::engine
         /// @param secondBaseRadius Radius of the second base.
         /// @param color Color for the gizmo to be drawn in.
         /// @param lifespan Time the gizmo will remain on screen, in seconds.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         CutConeGizmo(uint32_t id, glm::vec3 firstBaseCenter, float firstBaseRadius, glm::vec3 secondBaseCenter,
-                     float secondBaseRadius, const glm::vec3& color, float lifespan)
-            : Gizmos::Gizmo(id, color, lifespan)
+                     float secondBaseRadius, const glm::vec3& color, float lifespan,
+                     std::vector<core::ecs::Entity> drawCameras)
+            : Gizmos::Gizmo(id, color, lifespan, std::move(drawCameras))
             , mPointA(firstBaseCenter)
             , mRadiusA(firstBaseRadius)
             , mPointB(secondBaseCenter)

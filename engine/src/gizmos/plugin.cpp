@@ -109,7 +109,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
         .tagged(drawToRenderPickerTag)
         .call([](Gizmos& gizmos, GizmosRenderer& gizmosRenderer, const DeltaTime& deltaTime,
                  Query<Entity, RenderTarget&, Opt<RenderPicker&>, RenderDepth&, GizmosTarget&> targets,
-                 Query<const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
+                 Query<Entity, const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = *gizmosRenderer.renderDevice;
             auto orthoVP =
                 glm::translate(glm::mat4(1.0F), glm::vec3(-1.0F, -1.0F, 0.0F)) * glm::ortho(-0.5F, 0.5F, -0.5F, 0.5F);
@@ -152,7 +152,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                 rd.setShaderPipeline(gizmosRenderer.drawPipeline);
 
                 // Draw world and view-space gizmos.
-                for (auto [localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
+                for (auto [cameraEntity, localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
                 {
                     if (!camera.active)
                     {
@@ -176,14 +176,24 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                     rd.setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);
                     for (auto& gizmo : gizmos.worldGizmos)
                     {
-                        gizmo->draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Color, worldVP);
+                        if (gizmo->drawCameras.empty() ||
+                            std::find(gizmo->drawCameras.begin(), gizmo->drawCameras.end(), cameraEntity) !=
+                                gizmo->drawCameras.end())
+                        {
+                            gizmo->draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Color, worldVP);
+                        }
                     }
 
                     // Draw view-space gizmos.
                     rd.setDepthStencilState(gizmosRenderer.noDepthCheckStencilState);
                     for (auto& gizmo : gizmos.viewGizmos)
                     {
-                        gizmo->draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Color, orthoVP);
+                        if (gizmo->drawCameras.empty() ||
+                            std::find(gizmo->drawCameras.begin(), gizmo->drawCameras.end(), cameraEntity) !=
+                                gizmo->drawCameras.end())
+                        {
+                            gizmo->draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Color, orthoVP);
+                        }
                     }
                 }
 
@@ -212,7 +222,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                 auto* idBP = gizmosRenderer.idPipeline->getBindingPoint("gizmo");
 
                 // Draw world and view-space gizmos.
-                for (auto [localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
+                for (auto [cameraEntity, localToWorld, camera, drawsTo] : cameras.pin(1, targetEnt))
                 {
                     if (!camera.active)
                     {
@@ -236,16 +246,26 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                     rd.setDepthStencilState(gizmosRenderer.doDepthCheckStencilState);
                     for (auto& gizmo : gizmos.worldGizmos)
                     {
-                        idBP->setConstant(gizmo->id);
-                        gizmo->draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Id, worldVP);
+                        if (gizmo->drawCameras.empty() ||
+                            std::find(gizmo->drawCameras.begin(), gizmo->drawCameras.end(), cameraEntity) !=
+                                gizmo->drawCameras.end())
+                        {
+                            idBP->setConstant(gizmo->id);
+                            gizmo->draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Id, worldVP);
+                        }
                     }
 
                     // Draw view-space gizmos.
                     rd.setDepthStencilState(gizmosRenderer.noDepthCheckStencilState);
                     for (auto& gizmo : gizmos.viewGizmos)
                     {
-                        idBP->setConstant(gizmo->id);
-                        gizmo->draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Id, orthoVP);
+                        if (gizmo->drawCameras.empty() ||
+                            std::find(gizmo->drawCameras.begin(), gizmo->drawCameras.end(), cameraEntity) !=
+                                gizmo->drawCameras.end())
+                        {
+                            idBP->setConstant(gizmo->id);
+                            gizmo->draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Id, orthoVP);
+                        }
                     }
                 }
 
