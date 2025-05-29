@@ -191,7 +191,7 @@ int main()
                     {
                         glm::vec3 origin = ent1 == collidingWith.entity ? pos1.vec : pos2.vec;
                         gizmos.color({0.0F, 1.0F, 0.0F});
-                        gizmos.drawArrow("arrow", origin, manifold.normal, 0.1F, 0.5F, 0.7F, 0.05F,
+                        gizmos.drawArrow("arrow", origin, manifold.normal, 0.1F, 0.5F, 0.7F, {}, 0.05F,
                                          Gizmos::Space::World);
                     }
 
@@ -202,7 +202,7 @@ int main()
                         {
                             gizmos.color({1.0F, 1.0F, 0.0F});
                             gizmos.drawArrow("line", start.globalOn1, end.globalOn1 - start.globalOn1, 1.0F, 1.2F, 1.0F,
-                                             0.05F, Gizmos::Space::World);
+                                             {}, 0.05F, Gizmos::Space::World);
                             start = end;
                         }
                     }
@@ -213,11 +213,11 @@ int main()
                         {
                             gizmos.color({0.0F, 0.0F, 1.0F});
                             gizmos.drawArrow("point", point.globalOn1, glm::vec3(0.02F, 0.02F, 0.02F), 1.0F, 1.0F, 1.0F,
-                                             0.05F, Gizmos::Space::World);
+                                             {}, 0.05F, Gizmos::Space::World);
 
                             gizmos.color({1.0F, 0.0F, 1.0F});
                             gizmos.drawArrow("point", point.globalOn2, glm::vec3(0.02F, 0.02F, 0.02F), 1.0F, 1.0F, 1.0F,
-                                             0.05F, Gizmos::Space::World);
+                                             {}, 0.05F, Gizmos::Space::World);
                         }
                     }
                 }

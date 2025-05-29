@@ -26,9 +26,10 @@ namespace cubos::engine
         /// @param innerRadius Radius of the of the hole.
         /// @param color Color for the gizmo to be drawn in.
         /// @param lifespan Time the gizmo will remain on screen, in seconds.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         RingGizmo(uint32_t id, glm::vec3 firstBasePosition, glm::vec3 secondBasePosition, float outerRadius,
-                  float innerRadius, const glm::vec3& color, float lifespan)
-            : Gizmos::Gizmo(id, color, lifespan)
+                  float innerRadius, const glm::vec3& color, float lifespan, std::vector<core::ecs::Entity> drawCameras)
+            : Gizmos::Gizmo(id, color, lifespan, std::move(drawCameras))
             , mPointA(firstBasePosition)
             , mPointB(secondBasePosition)
             , mRadiusOuter(outerRadius)

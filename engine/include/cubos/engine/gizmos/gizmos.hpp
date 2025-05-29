@@ -41,29 +41,35 @@ namespace cubos::engine
         /// @param id Identifier of the gizmo.
         /// @param from One of the ends of the line to be drawn.
         /// @param to The other end of the line to be drawn.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
         /// @param space Space to draw the gizmo in.
-        void drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan = 0.0F,
+        void drawLine(const std::string& id, glm::vec3 from, glm::vec3 to,
+                      const std::vector<core::ecs::Entity>& drawCameras = {}, float lifespan = 0.0F,
                       Space space = Space::World);
 
         /// @brief Draws a filled box gizmo.
         /// @param id Identifier of the gizmo.
         /// @param corner One of the corners of the box to be drawn.
         /// @param oppositeCorner The opposite corner of the box to be drawn.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
         /// @param space Space to draw the gizmo in.
-        void drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F,
+        void drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner,
+                     const std::vector<core::ecs::Entity>& drawCameras = {}, float lifespan = 0.0F,
                      Space space = Space::World);
 
         /// @brief Draws a filled box gizmo.
         /// @param id Identifier of the gizmo.
         /// @param transform Transformation matrix to apply to a unit-sized box centered at the origin.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
         /// @param space Space to draw the gizmo in.
-        void drawBox(const std::string& id, const glm::mat4& transform, float lifespan = 0.0F,
+        void drawBox(const std::string& id, const glm::mat4& transform,
+                     const std::vector<core::ecs::Entity>& drawCameras = {}, float lifespan = 0.0F,
                      Space space = Space::World);
 
         /// @brief Draws a cut cone gizmo.
@@ -72,11 +78,13 @@ namespace cubos::engine
         /// @param firstBaseRadius Radius of one of the bases.
         /// @param secondBaseCenter Center of the second base.
         /// @param secondBaseRadius Radius of the second base.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
         /// @param space Space to draw the gizmo in.
         void drawCutCone(const std::string& id, glm::vec3 firstBaseCenter, float firstBaseRadius,
-                         glm::vec3 secondBaseCenter, float secondBaseRadius, float lifespan = 0.0F,
+                         glm::vec3 secondBaseCenter, float secondBaseRadius,
+                         const std::vector<core::ecs::Entity>& drawCameras = {}, float lifespan = 0.0F,
                          Space space = Space::World);
 
         /// @brief Draws a ring gizmo.
@@ -85,11 +93,13 @@ namespace cubos::engine
         /// @param secondBasePosition Center of the second base.
         /// @param outerRadius Radius of one of the ring.
         /// @param innerRadius Radius of the of the hole.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
         /// @param space Space to draw the gizmo in.
         void drawRing(const std::string& id, glm::vec3 firstBasePosition, glm::vec3 secondBasePosition,
-                      float outerRadius, float innerRadius, float lifespan = 0.0F, Space space = Space::World);
+                      float outerRadius, float innerRadius, const std::vector<core::ecs::Entity>& drawCameras = {},
+                      float lifespan = 0.0F, Space space = Space::World);
 
         /// @brief Draws an arrow gizmo.
         /// @param id Identifier of the gizmo.
@@ -98,29 +108,35 @@ namespace cubos::engine
         /// @param girth Radius of the cylinder part of the arrow.
         /// @param width Radius of the base of the cone at the tip of the arrow.
         /// @param ratio Point of the arrow at which the cylinder ends and the cone begins.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
         /// @param space Space to draw the gizmo in.
         void drawArrow(const std::string& id, glm::vec3 origin, glm::vec3 direction, float girth, float width,
-                       float ratio = 0.F, float lifespan = 0.0F, Space space = Space::World);
+                       float ratio = 0.F, const std::vector<core::ecs::Entity>& drawCameras = {}, float lifespan = 0.0F,
+                       Space space = Space::World);
 
         /// @brief Draws a wireframe box gizmo.
         /// @param id Identifier of the gizmo.
         /// @param corner One of the corners of the box to be drawn.
         /// @param oppositeCorner The opposite corner of the box to be drawn.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
         /// @param space Space to draw the gizmo in.
-        void drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F,
+        void drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner,
+                         const std::vector<core::ecs::Entity>& drawCameras = {}, float lifespan = 0.0F,
                          Space space = Space::World);
 
         /// @brief Draws a wireframe box gizmo.
         /// @param id Identifier of the gizmo.
         /// @param transform Transformation matrix to apply to a unit-sized box centered at the origin.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
         /// @param space Space to draw the gizmo in.
-        void drawWireBox(const std::string& id, const glm::mat4& transform, float lifespan = 0.0F,
+        void drawWireBox(const std::string& id, const glm::mat4& transform,
+                         const std::vector<core::ecs::Entity>& drawCameras = {}, float lifespan = 0.0F,
                          Space space = Space::World);
 
         /// @brief Checks whether the left mouse button was pressed over a gizmo.
@@ -162,7 +178,7 @@ namespace cubos::engine
 
             virtual ~Gizmo() = default;
 
-            Gizmo(uint32_t id, glm::vec3 color, float lifespan);
+            Gizmo(uint32_t id, glm::vec3 color, float lifespan, std::vector<core::ecs::Entity> drawCameras);
 
             /// @brief Draws the gizmo to screen.
             /// @param renderer Renderer.
@@ -175,6 +191,9 @@ namespace cubos::engine
             bool decreaseLifespan(float delta);
 
             const uint32_t id; ///< Gizmo identifier.
+
+            std::vector<core::ecs::Entity>
+                drawCameras; ///< List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
 
         protected:
             glm::vec3 mColor; ///< Color of the gizmo.
