@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::core::ecs namespace | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>ecs <span class="m-thin">namespace</span>
+        </h1>
+        <p><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs_1_1impl.html" class="m-doc">impl</a></dt>
+            <dd>Contains functions used internally by the implementation of the ECS.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>
+            </dt>
+            <dd>Collection of entities and their respective components and relations.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>
+            </dt>
+            <dd>Stores commands to execute them later.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DeltaTime.html" class="m-doc">DeltaTime</a>
+            </dt>
+            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ShouldQuit.html" class="m-doc">ShouldQuit</a>
+            </dt>
+            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Arguments.html" class="m-doc">Arguments</a>
+            </dt>
+            <dd>Resource which stores the command-line arguments.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>
+            </dt>
+            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1DynamicPlugin.html" class="m-doc">DynamicPlugin</a>
+            </dt>
+            <dd>Manages the loading and unloading of a plugin from a shared library.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1ArchetypeGraph.html" class="m-doc">ArchetypeGraph</a>
+            </dt>
+            <dd>Stores which column types each archetype holds and the edges which connect them.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>
+            </dt>
+            <dd>Identifies an archetype.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeIdHash.html" class="m-doc">ArchetypeIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1ArchetypeId.html" class="m-doc">ArchetypeId</a>.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>
+            </dt>
+            <dd>Identifies an entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>
+            </dt>
+            <dd>Used to hash <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> objects.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EntityPool.html" class="m-doc">EntityPool</a>
+            </dt>
+            <dd>Manages the creation and destruction of entity identifiers, as well as storing their archetype identifiers.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1Name.html" class="m-doc">Name</a>
+            </dt>
+            <dd>Component which stores the name of an entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ObserverId.html" class="m-doc">ObserverId</a>
+            </dt>
+            <dd>Identifies an observer.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Observers.html" class="m-doc">Observers</a>
+            </dt>
+            <dd>Stores and manages all of the observers associated with a world.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1PluginQueue.html" class="m-doc">PluginQueue</a>
+            </dt>
+            <dd>Stores plugin operations to be executed later.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryData.html" class="m-doc">QueryData</a>
+            </dt>
+            <dd>Holds the data necessary to execute a query.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryFetcher.html" class="m-doc">QueryFetcher</a>
+            </dt>
+            <dd>Type meant to be specialized which implements for each argument type the necessary logic to extract it from the tables.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryFilter.html" class="m-doc">QueryFilter</a>
+            </dt>
+            <dd>Used to find matches for the given query terms. Essentially contains the non-templated part of the query logic.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryArchetypeNode.html" class="m-doc">QueryArchetypeNode</a>
+            </dt>
+            <dd>Node which forces a given target to belong to a set of archetypes.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryNode.html" class="m-doc">QueryNode</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> filter step, which receives an iterator and advances it until it points to a valid match.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryRelatedNode.html" class="m-doc">QueryRelatedNode</a>
+            </dt>
+            <dd>Node which forces two given targets to be related with a given relation.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1QueryTerm.html" class="m-doc">QueryTerm</a>
+            </dt>
+            <dd>Describes a term in a query.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SymmetricTrait.html" class="m-doc">SymmetricTrait</a>
+            </dt>
+            <dd>Trait used to identify symmetric relations.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1TreeTrait.html" class="m-doc">TreeTrait</a>
+            </dt>
+            <dd>Trait used to identify tree relations.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1EphemeralTrait.html" class="m-doc">EphemeralTrait</a>
+            </dt>
+            <dd>Trait used to identify types which are ephemeral and should not be persisted.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1TypeBuilder.html" class="m-doc">TypeBuilder</a>
+            </dt>
+            <dd>Builder for <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a> objects which represent ECS types.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemAccess.html" class="m-doc">SystemAccess</a>
+            </dt>
+            <dd>Describes the types of data a system accesses.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to write ECS commands and execute them at a later time.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">EventPipe</a>
+            </dt>
+            <dd>Resource which stores events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> arguments used to read events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which allows the system to send events of type <code>T</code> to other systems.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Plugins.html" class="m-doc">Plugins</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument used to add or remove <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> plugins at runtime.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a> argument which holds the result of a query over all entities in world which match the given arguments.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemContext.html" class="m-doc">SystemContext</a>
+            </dt>
+            <dd>Context passed by the system caller to the fetchers.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SystemFetcher.html" class="m-doc">SystemFetcher</a>
+            </dt>
+            <dd>Type meant to be specialized which implements for each argument type the necessary logic to extract it from the world.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemOptions.html" class="m-doc">SystemOptions</a>
+            </dt>
+            <dd>Contains extra options for a specific system argument.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Planner.html" class="m-doc">Planner</a>
+            </dt>
+            <dd>Layer on top of <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html" class="m-doc">Schedule</a>, used to build them with added abstractions such as tags.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SystemId.html" class="m-doc">SystemId</a>
+            </dt>
+            <dd>Identifies a system.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ConditionId.html" class="m-doc">ConditionId</a>
+            </dt>
+            <dd>Identifies a condition.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SystemRegistry.html" class="m-doc">SystemRegistry</a>
+            </dt>
+            <dd>Stores known systems and conditions.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Schedule.html" class="m-doc">Schedule</a>
+            </dt>
+            <dd>Stores schedule nodes and the restrictions that must be met for them to run.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1System.html" class="m-doc">System</a>
+            </dt>
+            <dd>Holds a system with a return type <code>T</code>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>
+            </dt>
+            <dd>Represents a tag to be used with the <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a> class.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a>
+            </dt>
+            <dd>Identifies a data column type.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1ColumnIdHash.html" class="m-doc">ColumnIdHash</a>
+            </dt>
+            <dd>Used to hash <a href="structcubos_1_1core_1_1ecs_1_1ColumnId.html" class="m-doc">ColumnId</a> objects.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1DenseTableRegistry.html" class="m-doc">DenseTableRegistry</a>
+            </dt>
+            <dd>Stores the dense tables of a given world.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1DenseTable.html" class="m-doc">DenseTable</a>
+            </dt>
+            <dd>Stores the dense data associated to entities of a given archetype.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableId.html" class="m-doc">SparseRelationTableId</a>
+            </dt>
+            <dd>Identifies a sparse relation table.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableIdHash.html" class="m-doc">SparseRelationTableIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1SparseRelationTableId.html" class="m-doc">SparseRelationTableId</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTableRegistry.html" class="m-doc">SparseRelationTableRegistry</a>
+            </dt>
+            <dd>Stores all of the sparse relation tables.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1SparseRelationTable.html" class="m-doc">SparseRelationTable</a>
+            </dt>
+            <dd>A table which stores relations. Allows for quick insertion, deletion and iteration.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Tables.html" class="m-doc">Tables</a>
+            </dt>
+            <dd>Stores the tables of a given world.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>
+            </dt>
+            <dd>Identifies a data type registered in the world.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1ecs_1_1DataTypeIdHash.html" class="m-doc">DataTypeIdHash</a>
+            </dt>
+            <dd>Hash functor for <a href="structcubos_1_1core_1_1ecs_1_1DataTypeId.html" class="m-doc">DataTypeId</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Types.html" class="m-doc">Types</a>
+            </dt>
+            <dd>Registry of all data types used in an ECS world.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>
+            </dt>
+            <dd>Holds entities, their components and resources.</dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc">Traversal</a> { </span><span class="m-doc-wrap"><a href="#ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23" class="m-doc">Random</a>,
+              <a href="#ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53" class="m-doc">Down</a>,
+              <a href="#ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa" class="m-doc">Up</a> }</span>
+            </dt>
+            <dd>Possible traversal types for tree relation terms.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="group__core-ecs.html#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> = void(*)(<a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;)
+            </dt>
+            <dd>Function pointer type representing a plugin.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ecs.html#ga2c5677b7a03cecd5a9464dad2abf1f12" class="m-doc">convertEntities</a>(</span><span class="m-doc-wrap">const std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">EntityHash</a>&gt;&amp; map,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value) -&gt; <a href="group__core.html#gade101b5ef3b6c77e4593809521c8925e" class="m-doc">CUBOS_<wbr />CORE_<wbr />API</a> void</span>
+            </dt>
+            <dd>Converts entities in a value to their respective new entities. If an entity is not found in the map, it is left unchanged.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="ab7ac3d0b627b68d4303a38fcef673b82"><div>
+            <h3>
+              enum class cubos::<wbr />core::<wbr />ecs::<wbr /><a href="#ab7ac3d0b627b68d4303a38fcef673b82" class="m-doc-self">Traversal</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="term_8hpp.html">&lt;core/ecs/query/term.hpp&gt;</a></div>
+            </h3>
+            <p>Possible traversal types for tree relation terms.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a64663f4646781c9c0110838b905daa23">Random</a></td>
+                  <td>
+                  <p>Default traversal order. No specific ordering is required.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a08a38277b0309070706f6652eeae9a53">Down</a></td>
+                  <td>
+                  <p>Starts in the topmost entity and traverses down the relation.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa" class="m-doc-self" id="ab7ac3d0b627b68d4303a38fcef673b82a258f49887ef8d14ac268c92b02503aaa">Up</a></td>
+                  <td>
+                  <p>Starts in the bottommost entity and traverses up the relation.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
