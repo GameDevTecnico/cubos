@@ -200,6 +200,7 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
                 if (!picker.value().cleared)
                 {
                     rd.clearTargetColor(0, UINT16_MAX, UINT16_MAX, 0, 0);
+                    rd.clearDepth(1.0F);
                     picker.value().cleared = true;
                 }
                 rd.setShaderPipeline(gizmosRenderer.idPipeline);
