@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Barebones lua bindings plugin that can execute standard lua code (#1497, **@mkuritsu**).
 - Constant type reflection support with a new Constant trait (#1507, **@RiscadoA**).
 - Constant trait handler to the ImGui inspector (#1507, **@RiscadoA**).
+- Allow gizmos to be drawn for specific cameras (#1402, **@tomas7770**).
 
 ### Changed
 
@@ -46,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Missing renderDepthPlugin in Gizmos sample (**@tomas7770**).
 - Clear picker depth in Gizmos plugin if not already cleared (**@tomas7770**).
 - Only draw gizmos to active cameras (**@tomas7770**).
+- Transform Gizmos rendered in wrong location when splitting the screen (#1148, **@tomas7770**).
 
 ## [v0.7.0] - 2025-05-03
 

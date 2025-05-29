@@ -83,7 +83,7 @@ int main(int argc, char** argv)
     /// [Start Up System]
     cubos.startupSystem("draw line at startup").after(gizmosInitTag).call([](Gizmos& gizmos) {
         gizmos.color({1, 0, 1});
-        gizmos.drawArrow("arrow", {0.6F, 0.6F, 0.0F}, {-0.1F, -0.1F, 0.0F}, 0.003F, 0.009F, 0.7F, 10.0F,
+        gizmos.drawArrow("arrow", {0.6F, 0.6F, 0.0F}, {-0.1F, -0.1F, 0.0F}, 0.003F, 0.009F, 0.7F, {}, 10.0F,
                          Gizmos::Space::Screen);
     });
     /// [Start Up System]
@@ -92,18 +92,18 @@ int main(int argc, char** argv)
     cubos.system("draw gizmos").call([](Gizmos& gizmos) {
         /// [Lines]
         gizmos.color({1.0F, 1.0F, 1.0F});
-        gizmos.drawLine("separator line", {1.0F, 0.5F, 0.5F}, {0.0F, 0.5F, 0.5F}, 0, Gizmos::Space::Screen);
-        gizmos.drawLine("separator line", {0.5F, 1.0F, 0.5F}, {0.5F, 0.0F, 0.5F}, 0, Gizmos::Space::Screen);
+        gizmos.drawLine("separator line", {1.0F, 0.5F, 0.5F}, {0.0F, 0.5F, 0.5F}, {}, 0, Gizmos::Space::Screen);
+        gizmos.drawLine("separator line", {0.5F, 1.0F, 0.5F}, {0.5F, 0.0F, 0.5F}, {}, 0, Gizmos::Space::Screen);
         /// [Lines]
 
         /// [WireBox]
         gizmos.color({1.0F, 0.5F, 1.0F});
-        gizmos.drawBox("box", {0.4, 0.4, 0}, {0.55, 0.55, 0}, 0, Gizmos::Space::View);
+        gizmos.drawBox("box", {0.4, 0.4, 0}, {0.55, 0.55, 0}, {}, 0, Gizmos::Space::View);
         /// [WireBox]
 
         /// [Box]
         gizmos.color({0.2F, 0.2F, 1.0F});
-        gizmos.drawWireBox("wire box", {-5, -5, -5}, {-7, -7, -7}, 0, Gizmos::Space::World);
+        gizmos.drawWireBox("wire box", {-5, -5, -5}, {-7, -7, -7}, {}, 0, Gizmos::Space::World);
         /// [Box]
 
         ///[Cut Cone]
@@ -120,7 +120,7 @@ int main(int argc, char** argv)
             gizmos.color({0.1F, 0.05F, 0.25F});
         }
 
-        gizmos.drawCutCone("cut cone", {0.7F, 0.7F, 0.7F}, 5.0F, {-3, -3, -3}, 3.0F, 0, Gizmos::Space::World);
+        gizmos.drawCutCone("cut cone", {0.7F, 0.7F, 0.7F}, 5.0F, {-3, -3, -3}, 3.0F, {}, 0, Gizmos::Space::World);
         ///[Cut Cone]
     });
     /// [System]
