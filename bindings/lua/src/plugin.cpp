@@ -1,4 +1,5 @@
 #include <cubos/bindings/lua/plugin.hpp>
+#include <cubos/bindings/lua/tel/logging_lua.hpp>
 #include <lua.hpp>
 
 #include <cubos/core/data/fs/file_system.hpp>
@@ -58,17 +59,45 @@ static void loadScripts(std::string_view path, State& state)
     }
 }
 
+static void addLuaFunction(const char* functionName, int (*func)(lua_State*), lua_State* L)
+{
+    // It is assumed that the last element of 
+    // the lua stack is the cubos table.
+
+    lua_pushcfunction(L, func);
+    lua_setfield(L, -2, functionName);
+}
+
 void cubos::bindings::lua::luaBindingsPlugin(Cubos& cubos)
 {
     cubos.depends(settingsPlugin);
 
     cubos.uninitResource<State>();
 
-    cubos.startupSystem("initialize lua bindings").before(settingsTag).call([](Commands cmds) {
-        lua_State* state = luaL_newstate();
-        luaL_openlibs(state);
-        // TODO: add custom cubos functions here
-        cmds.emplaceResource<State>(state);
+    cubos.startupSystem("initialize lua bindings").before(settingsTag).call([&](Commands cmds) {
+        lua_State* L = luaL_newstate();
+        luaL_openlibs(L);
+
+        // Set up cubos table.
+        lua_newtable(L);
+        lua_pushvalue(L, -1); // Save a copy of the table to be used later on.
+        lua_setglobal(L, "cubos");
+
+        // Save the pointer to the current cubos instance as cubos.instance.
+        lua_pushlightuserdata(L, &cubos);
+        lua_setfield(L, -2, "instance");
+
+        // Add logging functions.
+        addLuaFunction("info", logInfo, L);
+        addLuaFunction("warn", logWarn, L);
+        addLuaFunction("error", logError, L);
+        addLuaFunction("critical", logCritical, L);
+
+        // Remap print to cubos.log
+        lua_pushcfunction(L, info);
+        lua_setglobal(L, "print");
+        
+        cmds.emplaceResource<State>(L);
     });
 
     cubos.startupSystem("load lua scripts").after(settingsTag).call([](Settings& settings, State& state) {

@@ -11,6 +11,7 @@ message("# Building cubos::bindings::lua samples " ${CUBOS_LUA_SAMPLES})
 
 set(LUA_BINDINGS_SOURCE
     "src/plugin.cpp"
+    "src/tel/logging_lua.cpp"
 )
 
 # ------------------------ Configure lua bindings target -------------------------
