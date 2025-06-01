@@ -11,6 +11,7 @@ message("# Building core c api as shared library: " ${BUILD_API_CORE_SHARED})
 
 set(CUBOS_API_CORE_SOURCE
     "src/api.cpp"
+    "src/tel/logging.cpp"
 )
 
 # Create core c api library

@@ -1,5 +1,9 @@
 #include <cubos/bindings/lua/plugin.hpp>
+
 #include <lua.hpp>
+
+#include <cubos/bindings/lua/tel/logging_lua.hpp>
+#include <cubos/bindings/lua/ecs/cubos_lua.hpp>
 
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
@@ -64,11 +68,33 @@ void cubos::bindings::lua::luaBindingsPlugin(Cubos& cubos)
 
     cubos.uninitResource<State>();
 
-    cubos.startupSystem("initialize lua bindings").before(settingsTag).call([](Commands cmds) {
-        lua_State* state = luaL_newstate();
-        luaL_openlibs(state);
-        // TODO: add custom cubos functions here
-        cmds.emplaceResource<State>(state);
+    cubos.startupSystem("initialize lua bindings").before(settingsTag).call([&](Commands cmds) 
+    {
+        lua_State* L = luaL_newstate();
+        luaL_openlibs(L);
+
+        // Create cubos metatable.
+        luaL_newmetatable(L, "cubos");
+        lua_pushvalue(L, -1);
+        lua_setfield(L, -2, "__index");
+
+        // Create cubos instance as a userdata associated with the cubos metatable,
+        // and add it to the lua global environment.
+        Cubos** instance = (Cubos**) lua_newuserdata(L, sizeof(Cubos*));
+        *instance = &cubos;
+        luaL_getmetatable(L, "cubos");
+        lua_setmetatable(L, -2);
+
+        // Save instace in the registry
+        lua_pushvalue(L, -1);
+        lua_setfield(L, LUA_REGISTRYINDEX, "instance");
+
+        lua_setglobal(L, "cubos");
+
+        addLoggingFunctions(L);
+        addCubosFunctions(L);
+
+        cmds.emplaceResource<State>(L);
     });
 
     cubos.startupSystem("load lua scripts").after(settingsTag).call([](Settings& settings, State& state) {
