@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Barebones lua bindings plugin that can execute standard lua code (#1497, **@mkuritsu**).
 - Constant type reflection support with a new Constant trait (#1507, **@RiscadoA**).
 - Constant trait handler to the ImGui inspector (#1507, **@RiscadoA**).
+- Named method for attributing a name to a plugin (#1556, **@mcanais**).
 
 ### Changed
 
