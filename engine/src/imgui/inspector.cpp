@@ -666,61 +666,79 @@ ImGuiInspector::State::State()
     });
 
     // Handle 4x4 GLM matrices.
-    hooks.emplace_back(
-        [](const std::string& name, bool readOnly, ImGuiInspector& inspector, const Type& type, void* value) {
-            if (type.is<glm::mat4>() || type.is<glm::dmat4>())
+    hooks.emplace_back([decompose = false](const std::string& name, bool readOnly, ImGuiInspector& inspector,
+                                           const Type& type, void* value) mutable {
+        if (!type.is<glm::mat4>() && !type.is<glm::dmat4>())
+        {
+            return ImGuiInspector::HookResult::Unhandled;
+        }
+
+        auto mat = type.is<glm::mat4>() ? static_cast<glm::dmat4>(*static_cast<glm::mat4*>(value))
+                                        : *static_cast<glm::dmat4*>(value);
+
+        glm::dvec3 scale;
+        glm::dquat orientation;
+        glm::dvec3 translation;
+        glm::dvec3 skew;
+        glm::dvec4 perspective;
+        bool canDecompose = decompose && glm::decompose(mat, scale, orientation, translation, skew, perspective);
+
+        bool modified = false;
+        bool open = ImGui::CollapsingHeader(name.c_str());
+        if (ImGui::IsItemHovered())
+        {
+            ImGui::SetTooltip("Matrix of type %s", type.shortName().c_str());
+        }
+        if (open)
+        {
+            ImGui::PushID(name.c_str());
+            ImGui::Indent();
+
+            if (canDecompose)
             {
-                auto mat = type.is<glm::mat4>() ? static_cast<glm::dmat4>(*static_cast<glm::mat4*>(value))
-                                                : *static_cast<glm::dmat4*>(value);
-
-                glm::dvec3 scale;
-                glm::dquat orientation;
-                glm::dvec3 translation;
-                glm::dvec3 skew;
-                glm::dvec4 perspective;
-                if (!glm::decompose(mat, scale, orientation, translation, skew, perspective))
+                modified |= inspector.inspect("scale", readOnly, reflect<glm::dvec3>(), &scale);
+                modified |= inspector.inspect("rotation", readOnly, reflect<glm::dquat>(), &orientation);
+                modified |= inspector.inspect("translation", readOnly, reflect<glm::dvec3>(), &translation);
+                inspector.show("skew", skew);
+                inspector.show("perspective", perspective);
+                if (modified)
                 {
-                    return ImGuiInspector::HookResult::Unhandled;
+                    mat = glm::translate(glm::dmat4(1.0F), translation) * glm::toMat4(orientation) *
+                          glm::scale(glm::dmat4(1.0F), scale);
                 }
-
-                bool modified = false;
-                if (ImGui::CollapsingHeader(name.c_str()))
-                {
-                    ImGui::PushID(name.c_str());
-                    ImGui::Indent();
-
-                    modified |= inspector.inspect("scale", readOnly, reflect<glm::dvec3>(), &scale);
-                    modified |= inspector.inspect("rotation", readOnly, reflect<glm::dquat>(), &orientation);
-                    modified |= inspector.inspect("translation", readOnly, reflect<glm::dvec3>(), &translation);
-                    inspector.show("skew", skew);
-                    inspector.show("perspective", perspective);
-                    if (modified)
-                    {
-                        mat = glm::translate(glm::dmat4(1.0F), translation) * glm::toMat4(orientation) *
-                              glm::scale(glm::dmat4(1.0F), scale);
-                        if (type.is<glm::mat4>())
-                        {
-                            *static_cast<glm::mat4*>(value) = static_cast<glm::mat4>(mat);
-                        }
-                        else
-                        {
-                            *static_cast<glm::dmat4*>(value) = mat;
-                        }
-                    }
-
-                    ImGui::Unindent();
-                    ImGui::PopID();
-                }
-                if (ImGui::IsItemHovered())
-                {
-                    ImGui::SetTooltip("Matrix of type %s", type.shortName().c_str());
-                }
-
-                return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
+            }
+            else
+            {
+                modified |= inspector.inspect("a", readOnly, reflect<glm::dvec4>(), &mat[0]);
+                modified |= inspector.inspect("b", readOnly, reflect<glm::dvec4>(), &mat[1]);
+                modified |= inspector.inspect("c", readOnly, reflect<glm::dvec4>(), &mat[2]);
+                modified |= inspector.inspect("d", readOnly, reflect<glm::dvec4>(), &mat[3]);
             }
 
-            return ImGuiInspector::HookResult::Unhandled;
-        });
+            auto justChangedDecompose = ImGui::Checkbox("Decompose into components", &decompose);
+            if (decompose && !canDecompose && !justChangedDecompose)
+            {
+                ImGui::TextColored({1.0F, 0.0F, 0.0F, 1.0F}, "Matrix cannot be decomposed");
+            }
+
+            if (modified)
+            {
+                if (type.is<glm::mat4>())
+                {
+                    *static_cast<glm::mat4*>(value) = static_cast<glm::mat4>(mat);
+                }
+                else
+                {
+                    *static_cast<glm::dmat4*>(value) = mat;
+                }
+            }
+
+            ImGui::Unindent();
+            ImGui::PopID();
+        }
+
+        return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;
+    });
 
     // Handle wrapper types.
     hooks.emplace_back(

@@ -18,6 +18,8 @@
         "y": 7.0,
         "z": 2.0
     },
+    "cubos::engine::CollisionLayers": 1,
+    "cubos::engine::CollisionMask": 1,
     "Obstacle": {
         "velocity": {
             "x": 0,
