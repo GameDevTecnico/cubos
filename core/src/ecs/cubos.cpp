@@ -140,6 +140,18 @@ Cubos& Cubos::plugin(Plugin plugin)
     return *this;
 }
 
+void Cubos::named(std::string name)
+{
+    Plugin plugin = mPluginStack.back();
+
+    if (mInjectedPlugins.contains(plugin))
+    {
+        plugin = mInjectedPlugins.at(plugin);
+    }
+
+    mInstalledPlugins.at(plugin).name = std::move(name);
+}
+
 Cubos& Cubos::depends(Plugin plugin)
 {
     if (mInjectedPlugins.contains(plugin))
