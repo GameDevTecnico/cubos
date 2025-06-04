@@ -86,70 +86,78 @@
             </dt>
             <dd>Sets the color to be used when drawing any subsequent gizmos.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af61cbe2539da6b57bcd6441fe289b668" class="m-doc">drawLine</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void <a href="#a2f59a5139dc74f4054e026fe5e3b52d6" class="m-doc">drawLine</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 from,
               glm::vec3 to,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
             </dt>
             <dd>Draws a line gizmo.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ae7c7a4a3939984ebcb7ea4186f7fd3f1" class="m-doc">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void <a href="#a12611e334e4b3ef88feda833e0f4cb84" class="m-doc">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 corner,
               glm::vec3 oppositeCorner,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
             </dt>
             <dd>Draws a filled box gizmo.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aa027da4dfd3357172cec9f328ad3b4bc" class="m-doc">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void <a href="#a327d902dc50c88eea26fd15158df9c99" class="m-doc">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               const glm::mat4&amp; transform,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
             </dt>
             <dd>Draws a filled box gizmo.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a03a812de0d4c1e9f5948ea710a7f46c7" class="m-doc">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void <a href="#a60d508f3bf553aeb85584ecc5a089800" class="m-doc">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 firstBaseCenter,
               float firstBaseRadius,
               glm::vec3 secondBaseCenter,
               float secondBaseRadius,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
             </dt>
             <dd>Draws a cut cone gizmo.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a281623faeebdf8edf8116dce2ea7fc3c" class="m-doc">drawRing</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void <a href="#aaa57be828dcfb7a29221c502ce79dca5" class="m-doc">drawRing</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 firstBasePosition,
               glm::vec3 secondBasePosition,
               float outerRadius,
               float innerRadius,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
             </dt>
             <dd>Draws a ring gizmo.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a5ef3589cc7ba835a23edaba6205f4724" class="m-doc">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void <a href="#ab3588caf4c7ee9b4879bee0407da5d43" class="m-doc">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 origin,
               glm::vec3 direction,
               float girth,
               float width,
               float ratio = 0.F,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
             </dt>
             <dd>Draws an arrow gizmo.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a2b7a537716c68f405c250c652d9126ae" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void <a href="#af68c9465baf4fb5ab9a5a54d37c78142" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 corner,
               glm::vec3 oppositeCorner,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
             </dt>
             <dd>Draws a wireframe box gizmo.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a2221426ed07cdc1a463afeb966446e64" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void <a href="#ac663b9e4c5fa373f7906ba11cc407a88" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               const glm::mat4&amp; transform,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
             </dt>
@@ -253,11 +261,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af61cbe2539da6b57bcd6441fe289b668"><div>
+          <section class="m-doc-details" id="a2f59a5139dc74f4054e026fe5e3b52d6"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af61cbe2539da6b57bcd6441fe289b668" class="m-doc-self">drawLine</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2f59a5139dc74f4054e026fe5e3b52d6" class="m-doc-self">drawLine</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 from,
               glm::vec3 to,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
             </h3>
@@ -280,6 +289,10 @@
                   <td>The other end of the line to be drawn.</td>
                 </tr>
                 <tr>
+                  <td>drawCameras</td>
+                  <td>List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.</td>
+                </tr>
+                <tr>
                   <td>lifespan</td>
                   <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
                 </tr>
@@ -290,11 +303,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae7c7a4a3939984ebcb7ea4186f7fd3f1"><div>
+          <section class="m-doc-details" id="a12611e334e4b3ef88feda833e0f4cb84"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae7c7a4a3939984ebcb7ea4186f7fd3f1" class="m-doc-self">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a12611e334e4b3ef88feda833e0f4cb84" class="m-doc-self">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 corner,
               glm::vec3 oppositeCorner,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
             </h3>
@@ -317,6 +331,10 @@
                   <td>The opposite corner of the box to be drawn.</td>
                 </tr>
                 <tr>
+                  <td>drawCameras</td>
+                  <td>List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.</td>
+                </tr>
+                <tr>
                   <td>lifespan</td>
                   <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
                 </tr>
@@ -327,10 +345,11 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aa027da4dfd3357172cec9f328ad3b4bc"><div>
+          <section class="m-doc-details" id="a327d902dc50c88eea26fd15158df9c99"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa027da4dfd3357172cec9f328ad3b4bc" class="m-doc-self">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a327d902dc50c88eea26fd15158df9c99" class="m-doc-self">drawBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               const glm::mat4&amp; transform,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
             </h3>
@@ -349,6 +368,10 @@
                   <td>Transformation matrix to apply to a unit-sized box centered at the origin.</td>
                 </tr>
                 <tr>
+                  <td>drawCameras</td>
+                  <td>List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.</td>
+                </tr>
+                <tr>
                   <td>lifespan</td>
                   <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
                 </tr>
@@ -359,13 +382,14 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a03a812de0d4c1e9f5948ea710a7f46c7"><div>
+          <section class="m-doc-details" id="a60d508f3bf553aeb85584ecc5a089800"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a03a812de0d4c1e9f5948ea710a7f46c7" class="m-doc-self">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60d508f3bf553aeb85584ecc5a089800" class="m-doc-self">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 firstBaseCenter,
               float firstBaseRadius,
               glm::vec3 secondBaseCenter,
               float secondBaseRadius,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
             </h3>
@@ -396,6 +420,10 @@
                   <td>Radius of the second base.</td>
                 </tr>
                 <tr>
+                  <td>drawCameras</td>
+                  <td>List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.</td>
+                </tr>
+                <tr>
                   <td>lifespan</td>
                   <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
                 </tr>
@@ -406,13 +434,14 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a281623faeebdf8edf8116dce2ea7fc3c"><div>
+          <section class="m-doc-details" id="aaa57be828dcfb7a29221c502ce79dca5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a281623faeebdf8edf8116dce2ea7fc3c" class="m-doc-self">drawRing</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa57be828dcfb7a29221c502ce79dca5" class="m-doc-self">drawRing</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 firstBasePosition,
               glm::vec3 secondBasePosition,
               float outerRadius,
               float innerRadius,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
             </h3>
@@ -443,6 +472,10 @@
                   <td>Radius of the of the hole.</td>
                 </tr>
                 <tr>
+                  <td>drawCameras</td>
+                  <td>List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.</td>
+                </tr>
+                <tr>
                   <td>lifespan</td>
                   <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
                 </tr>
@@ -453,14 +486,15 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a5ef3589cc7ba835a23edaba6205f4724"><div>
+          <section class="m-doc-details" id="ab3588caf4c7ee9b4879bee0407da5d43"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ef3589cc7ba835a23edaba6205f4724" class="m-doc-self">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3588caf4c7ee9b4879bee0407da5d43" class="m-doc-self">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 origin,
               glm::vec3 direction,
               float girth,
               float width,
               float ratio = 0.F,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
             </h3>
@@ -495,6 +529,10 @@
                   <td>Point of the arrow at which the cylinder ends and the cone begins.</td>
                 </tr>
                 <tr>
+                  <td>drawCameras</td>
+                  <td>List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.</td>
+                </tr>
+                <tr>
                   <td>lifespan</td>
                   <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
                 </tr>
@@ -505,11 +543,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a2b7a537716c68f405c250c652d9126ae"><div>
+          <section class="m-doc-details" id="af68c9465baf4fb5ab9a5a54d37c78142"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b7a537716c68f405c250c652d9126ae" class="m-doc-self">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af68c9465baf4fb5ab9a5a54d37c78142" class="m-doc-self">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 corner,
               glm::vec3 oppositeCorner,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
             </h3>
@@ -532,6 +571,10 @@
                   <td>The opposite corner of the box to be drawn.</td>
                 </tr>
                 <tr>
+                  <td>drawCameras</td>
+                  <td>List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.</td>
+                </tr>
+                <tr>
                   <td>lifespan</td>
                   <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
                 </tr>
@@ -542,10 +585,11 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a2221426ed07cdc1a463afeb966446e64"><div>
+          <section class="m-doc-details" id="ac663b9e4c5fa373f7906ba11cc407a88"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2221426ed07cdc1a463afeb966446e64" class="m-doc-self">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac663b9e4c5fa373f7906ba11cc407a88" class="m-doc-self">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               const glm::mat4&amp; transform,
+              const std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;&amp; drawCameras = {},
               float lifespan = 0.0F,
               <a href="#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
             </h3>
@@ -562,6 +606,10 @@
                 <tr>
                   <td>transform</td>
                   <td>Transformation matrix to apply to a unit-sized box centered at the origin.</td>
+                </tr>
+                <tr>
+                  <td>drawCameras</td>
+                  <td>List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.</td>
                 </tr>
                 <tr>
                   <td>lifespan</td>
