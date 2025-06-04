@@ -116,6 +116,11 @@ namespace cubos::core::ecs
         /// @return Cubos.
         Cubos& depends(Plugin plugin);
 
+        /// @brief Sets the name of the current plugin to the given name.
+        ///
+        /// @param std::string name Plugin name.
+        void named(std::string name);
+
         /// @brief Marks the target plugin so that when it is added, it is replaced by the given plugin.
         ///
         /// Aborts if the target plugin has already been added.
@@ -274,6 +279,9 @@ namespace cubos::core::ecs
 
             /// @brief Observers which were added by this plugin.
             std::vector<ObserverId> observers;
+
+            /// @brief Name of the plugin.
+            std::string name;
         };
 
         /// @brief Stores information regarding a tag.
