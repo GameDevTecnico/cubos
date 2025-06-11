@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/reflection/external/ directory | Cubos Docs</title>
+  <title>cubos::core::reflection::ConstantTrait class | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,46 +46,60 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f4414684a5bb1e1b8e9ba236e8bdb594.html">reflection</a>/</span>external<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>ConstantTrait <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="constant_8hpp.html">&lt;core/reflection/traits/constant.hpp&gt;</a></div>
         </h1>
-        <p>Reflection declarations for external types.</p>
+        <p>Describes a constant version of another type.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="carray_8hpp.html" class="m-doc">carray.hpp</a></dt>
-            <dd>Reflection declaration for C-strings.</dd>
-            <dt>file <a href="const_8hpp.html" class="m-doc">const.hpp</a></dt>
-            <dd>Reflection declaration for <code>const T</code>.</dd>
-            <dt>file <a href="cstring_8hpp.html" class="m-doc">cstring.hpp</a></dt>
-            <dd>Reflection declaration for C-strings.</dd>
-            <dt>file <a href="glm_8hpp.html" class="m-doc">glm.hpp</a></dt>
-            <dd>Reflection declarations for external glm types.</dd>
-            <dt>file <a href="map_8hpp.html" class="m-doc">map.hpp</a></dt>
-            <dd>Reflection declaration for <code>std::map</code>.</dd>
-            <dt>file <a href="primitives_8hpp.html" class="m-doc">primitives.hpp</a></dt>
-            <dd>Reflection declarations for primitive types.</dd>
-            <dt>file <a href="string_8hpp.html" class="m-doc">string.hpp</a></dt>
-            <dd>Reflection declaration for <code>std::string</code>.</dd>
-            <dt>file <a href="string__view_8hpp.html" class="m-doc">string_view.hpp</a></dt>
-            <dd>Reflection declaration for <code>std::string_view</code>.</dd>
-            <dt>file <a href="unordered__map_8hpp.html" class="m-doc">unordered_map.hpp</a></dt>
-            <dd>Reflection declaration for <code>std::unordered_map</code>.</dd>
-            <dt>file <a href="uuid_8hpp.html" class="m-doc">uuid.hpp</a></dt>
-            <dd>Reflection declaration for uuids::uuid.</dd>
-            <dt>file <a href="external_2vector_8hpp.html" class="m-doc">vector.hpp</a></dt>
-            <dd>Reflection declaration for <code>std::vector</code>.</dd>
+            <dt id="aba352031216ba8affb8a72ea6a09d101">
+              <span class="m-doc-wrap-bumper"><a href="#aba352031216ba8affb8a72ea6a09d101" class="m-doc-self">ConstantTrait</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type)</span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt id="a6840acfb12c65a582f457b5ba31288f4">
+              <span class="m-doc-wrap-bumper"><a href="#a6840acfb12c65a582f457b5ba31288f4" class="m-doc-self">ConstantTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1ConstantTrait.html" class="m-doc">ConstantTrait</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
           </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a48b0aa57d973a0f37b79b4c776b04b2e" class="m-doc">type</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
+            </dt>
+            <dd>Gets the inner, non-constant, type.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a48b0aa57d973a0f37b79b4c776b04b2e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ConstantTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a48b0aa57d973a0f37b79b4c776b04b2e" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the inner, non-constant, type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
