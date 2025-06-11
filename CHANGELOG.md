@@ -9,12 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Pretty Emscripten HTML template with mobile support (**@NunoBaptista57**, **@RiscadoA**).
 - Voxel collision shapes to debug collider gizmos (**@RiscadoA**).
 - Raycasting support to the voxel collision shapes (**@RiscadoA**).
 - Reflection support for C arrays (**@RiscadoA**).
 - Reflection for RenderEnvironment (**@RiscadoA**).
 - Configurable directional shadow range for objects outside the frustum (**@tomas7770**).
+
 - Quaternion representation mode switch on the inspector (#1520, **@RiscadoA**).
+======= 
+- Barebones lua bindings plugin that can execute standard lua code (#1497, **@mkuritsu**).
+- Constant type reflection support with a new Constant trait (#1507, **@RiscadoA**).
+- Constant trait handler to the ImGui inspector (#1507, **@RiscadoA**).
+- Toggle for matrix decomposition to the inspector (#1521, **@RiscadoA**).
+- Allow gizmos to be drawn for specific cameras (#1402, **@tomas7770**).
+
 
 ### Changed
 
@@ -22,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Debug camera now can be toggled with F9 (**@RiscadoA**).
 - Use contrib.glfw3 with Emscripten to support gamepad input on web builds (**@RiscadoA**).
 - Clean up inactive sparse relation tables every frame, greatly improving FPS on *Roll Racers* (**@RiscadoA**).
+- Remove code duplication on quadrados convert and VoxelModel (#1502, **@Jiali-Qiu**)
 
 ### Removed
 
@@ -39,6 +49,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Correctly match the entity components to the entity in the penetration constraint solving (**@fallenatlas**).
 - Correctly compute the local collision point for voxel shapes (**@fallenatlas**).
 - Creation of CollidingWith relation between box and voxel shapes when only the AABBs intersect (**@fallenatlas**).
+- Missing renderDepthPlugin in Gizmos sample (**@tomas7770**).
+- Clear picker depth in Gizmos plugin if not already cleared (**@tomas7770**).
+- Only draw gizmos to active cameras (**@tomas7770**).
+- Transform Gizmos rendered in wrong location when splitting the screen (#1148, **@tomas7770**).
 
 ## [v0.7.0] - 2025-05-03
 

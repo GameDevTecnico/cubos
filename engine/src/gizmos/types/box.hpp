@@ -22,9 +22,10 @@ namespace cubos::engine
         /// @param oppositeCorner Point at the opposite corner of the box.
         /// @param color Color for the gizmo to be drawn in.
         /// @param lifespan Time the gizmo will remain on screen, in seconds.
+        /// @param drawCameras List of camera entities the gizmo will be drawn for. If empty, draws to all cameras.
         BoxGizmo(uint32_t id, glm::vec3 corner, glm::vec3 oppositeCorner, glm::mat4 transform, const glm::vec3& color,
-                 float lifespan)
-            : cubos::engine::Gizmos::Gizmo(id, color, lifespan)
+                 float lifespan, std::vector<core::ecs::Entity> drawCameras)
+            : cubos::engine::Gizmos::Gizmo(id, color, lifespan, std::move(drawCameras))
             , mPointA(corner)
             , mPointB(oppositeCorner)
             , mTransform(transform)

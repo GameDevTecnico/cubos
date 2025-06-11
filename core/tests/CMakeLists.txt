@@ -20,6 +20,7 @@ add_executable(
 	reflection/traits/inherits.cpp
 	reflection/traits/vector.cpp
 	reflection/external/primitives.cpp
+	reflection/external/const.cpp
 	reflection/external/cstring.cpp
 	reflection/external/carray.cpp
 	reflection/external/string.cpp
