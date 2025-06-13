@@ -25,6 +25,36 @@ using cubos::engine::ImGuiInspector;
 
 using namespace cubos::core::reflection;
 
+namespace
+{
+    enum class QuaternionMode
+    {
+        Raw,
+        EulerXYZ,
+        AxisAngle,
+    };
+
+    const char* quaternionModeString(QuaternionMode mode)
+    {
+        switch (mode)
+        {
+        case QuaternionMode::Raw:
+            return "Raw";
+        case QuaternionMode::EulerXYZ:
+            return "Euler XYZ";
+        case QuaternionMode::AxisAngle:
+            return "Axis Angle";
+        }
+        CUBOS_UNREACHABLE("Invalid quaternion mode");
+    }
+
+    struct QuaternionInspectorState
+    {
+        QuaternionMode mode = QuaternionMode::EulerXYZ;
+        bool degrees{true};
+    };
+} // namespace
+
 CUBOS_REFLECT_IMPL(ImGuiInspector::State)
 {
     return core::ecs::TypeBuilder<ImGuiInspector::State>("cubos::engine::ImGuiInspector::State").build();
@@ -623,43 +653,139 @@ ImGuiInspector::State::State()
     });
 
     // Handle GLM quaternion types.
-    hooks.emplace_back([](const std::string& name, bool readOnly, ImGuiInspector&, const Type& type, void* value) {
+    hooks.emplace_back([state = QuaternionInspectorState{}](const std::string& name, bool readOnly, ImGuiInspector&,
+                                                            const Type& type, void* value) mutable {
         bool modified = false;
 
+        glm::dquat currentVal;
         if (type.is<glm::quat>())
         {
-            glm::quat& quat = *static_cast<glm::quat*>(value);
-            auto euler = glm::degrees(glm::eulerAngles(quat));
-
-            ImGui::BeginDisabled(readOnly);
-            if (ImGui::InputScalarN(name.c_str(), ImGuiDataType_Float, &euler, 3))
-            {
-                quat = glm::normalize(glm::quat(glm::radians(euler)));
-                modified = true;
-            }
-            ImGui::EndDisabled();
+            currentVal = static_cast<glm::dquat>(*static_cast<glm::quat*>(value));
         }
         else if (type.is<glm::dquat>())
         {
-            glm::dquat& quat = *static_cast<glm::dquat*>(value);
-            auto euler = glm::degrees(glm::eulerAngles(quat));
-
-            ImGui::BeginDisabled(readOnly);
-            if (ImGui::InputScalarN(name.c_str(), ImGuiDataType_Double, &euler, 3))
-            {
-                quat = glm::normalize(glm::quat(glm::radians(euler)));
-                modified = true;
-            }
-            ImGui::EndDisabled();
+            currentVal = *static_cast<glm::dquat*>(value);
         }
         else
         {
             return ImGuiInspector::HookResult::Unhandled;
         }
 
+        ImGui::PushID(name.c_str());
+        ImGui::BeginDisabled(readOnly);
+        switch (state.mode)
+        {
+        case QuaternionMode::Raw:
+            modified |= ImGui::InputScalarN(name.c_str(), ImGuiDataType_Double, &currentVal.x, 4);
+            break;
+        case QuaternionMode::EulerXYZ: {
+            auto euler = glm::eulerAngles(currentVal);
+            if (state.degrees)
+            {
+                euler = glm::degrees(euler);
+            }
+            modified |= ImGui::InputScalarN(name.c_str(), ImGuiDataType_Double, &euler.x, 3);
+            if (modified)
+            {
+                if (state.degrees)
+                {
+                    euler = glm::radians(euler);
+                }
+                currentVal = glm::quat(euler);
+            }
+            break;
+        }
+        case QuaternionMode::AxisAngle: {
+            auto angle = glm::angle(currentVal);
+            auto axis = glm::axis(currentVal);
+            if (state.degrees)
+            {
+                angle = glm::degrees(angle);
+            }
+            glm::dvec4 axisAngle = {axis.x, axis.y, axis.z, angle};
+            modified |= ImGui::InputScalarN(name.c_str(), ImGuiDataType_Double, &axisAngle.x, 4);
+            if (modified)
+            {
+                axis = {axisAngle.x, axisAngle.y, axisAngle.z};
+                angle = state.degrees ? glm::radians(axisAngle.w) : axisAngle.w;
+                if (axis.x == 0.0F && axis.y == 0.0F && axis.z == 0.0F)
+                {
+                    axis = glm::vec3(1.0F, 0.0F, 0.0F);
+                }
+                currentVal = glm::angleAxis(angle, glm::normalize(axis));
+            }
+            break;
+        }
+        }
+        ImGui::EndDisabled();
+
         if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
         {
-            ImGui::SetTooltip("Quaternion of type %s (in XYZ euler angles)", type.shortName().c_str());
+            const char* unit = state.degrees ? "degrees" : "radians";
+
+            switch (state.mode)
+            {
+            case QuaternionMode::Raw:
+                ImGui::SetTooltip("Quaternion of type %s", type.shortName().c_str());
+                break;
+            case QuaternionMode::EulerXYZ:
+                ImGui::SetTooltip("Quaternion of type %s (as XYZ euler angles, in %s)", type.shortName().c_str(), unit);
+                break;
+            case QuaternionMode::AxisAngle:
+                ImGui::SetTooltip("Quaternion of type %s (as an axis and angle, in %s)", type.shortName().c_str(),
+                                  unit);
+            }
+        }
+
+        ImGui::SameLine();
+        if (ImGui::Button("Mode"))
+        {
+            ImGui::OpenPopup("Quaternion mode");
+        }
+        if (ImGui::BeginPopup("Quaternion mode"))
+        {
+            if (ImGui::BeginCombo("Unit", state.degrees ? "Degrees" : "Radians"))
+            {
+                if (ImGui::Selectable("Degrees", state.degrees))
+                {
+                    state.degrees = true;
+                }
+                if (ImGui::Selectable("Radians", !state.degrees))
+                {
+                    state.degrees = false;
+                }
+                ImGui::EndCombo();
+            }
+            if (ImGui::BeginCombo("Mode", quaternionModeString(state.mode)))
+            {
+                if (ImGui::Selectable("Raw", state.mode == QuaternionMode::Raw))
+                {
+                    state.mode = QuaternionMode::Raw;
+                }
+                if (ImGui::Selectable("Euler XYZ", state.mode == QuaternionMode::EulerXYZ))
+                {
+                    state.mode = QuaternionMode::EulerXYZ;
+                }
+                if (ImGui::Selectable("Angle Axis", state.mode == QuaternionMode::AxisAngle))
+                {
+                    state.mode = QuaternionMode::AxisAngle;
+                }
+                ImGui::EndCombo();
+            }
+            ImGui::EndPopup();
+        }
+        ImGui::PopID();
+
+        if (modified)
+        {
+            if (type.is<glm::quat>())
+            {
+                *static_cast<glm::quat*>(value) = static_cast<glm::quat>(currentVal);
+            }
+            else
+            {
+                *static_cast<glm::dquat*>(value) = currentVal;
+            }
         }
 
         return modified ? ImGuiInspector::HookResult::Modified : ImGuiInspector::HookResult::Shown;

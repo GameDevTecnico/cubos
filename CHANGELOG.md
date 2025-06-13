@@ -15,12 +15,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reflection support for C arrays (**@RiscadoA**).
 - Reflection for RenderEnvironment (**@RiscadoA**).
 - Configurable directional shadow range for objects outside the frustum (**@tomas7770**).
+
+- Quaternion representation mode switch on the inspector (#1520, **@RiscadoA**).
+======= 
 - Barebones lua bindings plugin that can execute standard lua code (#1497, **@mkuritsu**).
 - Constant type reflection support with a new Constant trait (#1507, **@RiscadoA**).
 - Constant trait handler to the ImGui inspector (#1507, **@RiscadoA**).
 - Toggle for matrix decomposition to the inspector (#1521, **@RiscadoA**).
 - Allow gizmos to be drawn for specific cameras (#1402, **@tomas7770**).
 - Named method for attributing a name to a plugin (#1556, **@mcanais**).
+
 
 ### Changed
 
