@@ -8,6 +8,8 @@
 #include <cubos/engine/render/bloom/plugin.hpp>
 #include <cubos/engine/render/hdr/hdr.hpp>
 #include <cubos/engine/render/hdr/plugin.hpp>
+#include <cubos/engine/render/profiling/plugin.hpp>
+#include <cubos/engine/render/profiling/profiler.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -43,6 +45,8 @@ namespace
 
         BlendState upscalingBlendState;
 
+        PipelinedTimer timer;
+
         State(RenderDevice& renderDevice, const ShaderPipeline& extractPipeline, const ShaderPipeline& bloomPipeline)
             : extractPipeline(extractPipeline)
             , bloomPipeline(bloomPipeline)
@@ -75,6 +79,8 @@ namespace
                 .color = {.src = BlendFactor::One, .dst = BlendFactor::One},
                 .alpha = {.src = BlendFactor::One},
             });
+
+            timer = renderDevice.createPipelinedTimer();
         }
     };
 } // namespace
@@ -89,8 +95,9 @@ void cubos::engine::bloomPlugin(Cubos& cubos)
     cubos.depends(assetsPlugin);
     cubos.depends(shaderPlugin);
     cubos.depends(hdrPlugin);
+    cubos.depends(renderProfilingPlugin);
 
-    cubos.tag(bloomTag).tagged(drawToHDRTag);
+    cubos.tag(bloomTag).tagged(drawToHDRTag).after(clearRenderProfilerResultsTag);
 
     cubos.uninitResource<State>();
 
@@ -110,8 +117,11 @@ void cubos::engine::bloomPlugin(Cubos& cubos)
 
     cubos.system("apply Bloom to the HDR texture")
         .tagged(bloomTag)
-        .call([](const State& state, const Window& window, Query<HDR&, Bloom&> targets) {
+        .call([](const State& state, const Window& window, RenderProfiler& profiler, Query<HDR&, Bloom&> targets) {
             auto& rd = window->renderDevice();
+
+            if (profiler.profilingEnabled)
+                state.timer->begin();
 
             for (auto [hdr, bloom] : targets)
             {
@@ -270,5 +280,8 @@ void cubos::engine::bloomPlugin(Cubos& cubos)
                 // Swap the front and back HDR textures.
                 std::swap(hdr.frontTexture, hdr.backTexture);
             }
+
+            if (profiler.profilingEnabled)
+                profiler.registerResult("Bloom", state.timer->end());
         });
 }

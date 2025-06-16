@@ -17,6 +17,8 @@
 #include <cubos/engine/render/mesh/pool.hpp>
 #include <cubos/engine/render/picker/picker.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
+#include <cubos/engine/render/profiling/plugin.hpp>
+#include <cubos/engine/render/profiling/profiler.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/voxels/grid.hpp>
 #include <cubos/engine/render/voxels/palette.hpp>
@@ -73,6 +75,8 @@ namespace
         Texture2D paletteTexture;
         Asset<VoxelPalette> paletteAsset{};
 
+        PipelinedTimer timer;
+
         State(RenderDevice& renderDevice, const ShaderPipeline& pipeline, const ShaderPipeline& pipelineWithPicker,
               VertexBuffer vertexBuffer)
             : pipeline(pipeline)
@@ -113,6 +117,8 @@ namespace
                 .usage = Usage::Default,
                 .format = TextureFormat::RGBA32Float,
             });
+
+            timer = renderDevice.createPipelinedTimer();
         }
     };
 } // namespace
@@ -132,11 +138,13 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
     cubos.depends(renderMeshPlugin);
     cubos.depends(renderVoxelsPlugin);
     cubos.depends(cameraPlugin);
+    cubos.depends(renderProfilingPlugin);
 
     cubos.tag(rasterizeToGBufferTag)
         .tagged(drawToGBufferTag)
         .tagged(drawToRenderPickerTag)
-        .tagged(drawToRenderDepthTag);
+        .tagged(drawToRenderDepthTag)
+        .after(clearRenderProfilerResultsTag);
 
     cubos.uninitResource<State>();
 
@@ -166,10 +174,13 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
         .with<Camera>()
         .related<DrawsTo>()
         .call([](State& state, const Window& window, const RenderMeshPool& pool, const RenderPalette& palette,
-                 Assets& assets, Query<const LocalToWorld&, Camera&, const DrawsTo&> cameras,
+                 Assets& assets, RenderProfiler& profiler, Query<const LocalToWorld&, Camera&, const DrawsTo&> cameras,
                  Query<Entity, GBufferRasterizer&, GBuffer&, RenderDepth&, Opt<RenderPicker&>> targets,
                  Query<Entity, const LocalToWorld&, const RenderMesh&, const RenderVoxelGrid&> meshes) {
             auto& rd = window->renderDevice();
+
+            if (profiler.profilingEnabled)
+                state.timer->begin();
 
             // Update the palette's data if necessary (if the asset handle changed or the asset itself was modified).
             if (state.paletteAsset != palette.asset ||
@@ -333,5 +344,8 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
                     std::swap(rasterizer.frontPicker, rasterizer.backPicker);
                 }
             }
+
+            if (profiler.profilingEnabled)
+                profiler.registerResult("G-Buffer Rasterizer", state.timer->end());
         });
 }
