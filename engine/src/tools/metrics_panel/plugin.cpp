@@ -5,6 +5,9 @@
 #include <implot.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/render/profiling/plugin.hpp>
+#include <cubos/engine/render/profiling/profiler.hpp>
+#include <cubos/engine/render/tone_mapping/plugin.hpp>
 #include <cubos/engine/tools/metrics_panel/plugin.hpp>
 #include <cubos/engine/tools/toolbox/plugin.hpp>
 
@@ -30,16 +33,21 @@ void cubos::engine::metricsPanelPlugin(Cubos& cubos)
 {
     cubos.depends(imguiPlugin);
     cubos.depends(toolboxPlugin);
+    cubos.depends(renderProfilingPlugin);
+    cubos.depends(toneMappingPlugin);
 
     cubos.resource<Metrics>();
 
     cubos.system("show Metrics UI")
         .tagged(imguiTag)
-        .call([](Toolbox& toolbox, const DeltaTime& deltaTime, Metrics& metrics) {
+        .after(toneMappingTag)
+        .call([](Toolbox& toolbox, const DeltaTime& deltaTime, Metrics& metrics, RenderProfiler& profiler) {
             if (!toolbox.isOpen("Metrics Panel"))
             {
+                profiler.profilingEnabled = false;
                 return;
             }
+            profiler.profilingEnabled = true;
 
             ImGui::Begin("Metrics Panel");
             // General Metrics
@@ -81,6 +89,12 @@ void cubos::engine::metricsPanelPlugin(Cubos& cubos)
                                    (std::accumulate(metrics.fpsHistory.begin(), metrics.fpsHistory.end(), 0.0F) /
                                     static_cast<float>(metrics.fpsHistory.size())));
                 ImPlot::EndPlot();
+            }
+
+            ImGui::NewLine();
+            for (auto result : profiler.getRegisteredResults())
+            {
+                ImGui::Text("%s: %.2f ms", result.first.c_str(), static_cast<float>(result.second.result) / 1000000.0F);
             }
             ImGui::End();
         });
