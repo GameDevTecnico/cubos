@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 
 #include <cubos/engine/fixed_step/plugin.hpp>
+#include <cubos/engine/interpolation/plugin.hpp>
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
@@ -21,6 +22,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
     cubos.depends(transformPlugin);
     cubos.depends(physicsPlugin);
     cubos.depends(physicsSolverPlugin);
+    cubos.depends(interpolationPlugin);
 
     cubos.tag(physicsApplyImpulsesTag);
     cubos.tag(physicsClearForcesTag).after(physicsFinalizePositionTag).tagged(fixedStepTag);
@@ -95,14 +97,14 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
 
     cubos.system("integrate delta position")
         .tagged(physicsIntegratePositionTag)
-        .call([](Query<AccumulatedCorrection&, Rotation&, const Velocity&, const AngularVelocity&, const Mass&,
+        .call([](Query<AccumulatedCorrection&, const Velocity&, Rotation&, const AngularVelocity&, const Mass&,
                        const Inertia&>
                      query,
                  const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
                  const SolverConstants& solverConstants) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
-            for (auto [correction, rotation, velocity, angVelocity, mass, inertia] : query)
+            for (auto [correction, velocity, rotation, angVelocity, mass, inertia] : query)
             {
                 // Position
                 if (mass.inverseMass <= solverConstants.minInvMass)
@@ -126,15 +128,16 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
 
     cubos.system("finalize position")
         .tagged(physicsFinalizePositionTag)
-        .call([](Query<Position&, AccumulatedCorrection&, const Mass&> query, const SolverConstants& solverConstants) {
-            for (auto [position, correction, mass] : query)
+        .call([](Query<Position&, AccumulatedCorrection&, const Mass&, Interpolated&> query,
+                 const SolverConstants& solverConstants) {
+            for (auto [position, correction, mass, interpolated] : query)
             {
                 if (mass.inverseMass <= solverConstants.minInvMass)
                 {
                     continue;
                 }
 
-                position.vec += correction.position;
+                interpolated.nextPosition += correction.position;
                 correction.position = glm::vec3(0.0F);
             }
         });
