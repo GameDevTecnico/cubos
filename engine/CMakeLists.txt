@@ -239,6 +239,8 @@ set(CUBOS_ENGINE_SOURCE
 	"src/tools/ecs_statistics/plugin.cpp"
 	"src/tools/console/plugin.cpp"
 	"src/tools/plugin.cpp"
+
+	"src/interpolation/plugin.cpp"
 )
 
 # ---------------------- Configure engine library target ----------------------

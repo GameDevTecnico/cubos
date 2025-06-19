@@ -3,11 +3,13 @@
 #include <glm/glm.hpp>
 
 #include <cubos/engine/fixed_step/plugin.hpp>
+#include <cubos/engine/interpolation/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
 #include "../../fixed_substep/plugin.hpp"
+
 
 using namespace cubos::engine;
 
@@ -16,18 +18,19 @@ CUBOS_DEFINE_TAG(cubos::engine::distanceConstraintSolveTag);
 CUBOS_DEFINE_TAG(cubos::engine::distanceConstraintCleanTag);
 
 static void solveDistanceConstraint(
-    Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&,
-          DistanceConstraint&, Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&,
-          AngularVelocity&>
+    Query<Entity, const Mass&, const Inertia&, const Interpolated&, const Rotation&, AccumulatedCorrection&, Velocity&,
+          AngularVelocity&, DistanceConstraint&, Entity, const Mass&, const Inertia&, const Interpolated&,
+          const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&>
         query,
     const SolverConstants& solverConstants, const FixedDeltaTime& dt, const Substeps& substeps, const bool useBias)
 {
     float subDeltaTime = dt.value / (float)substeps.value;
-    for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraint, ent2, mass2,
-               inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
+    for (auto [ent1, mass1, inertia1, interp1, rotation1, correction1, velocity1, angVelocity1, constraint, ent2, mass2,
+               inertia2, interp2, rotation2, correction2, velocity2, angVelocity2] : query)
     {
-        glm::vec3 r1 = rotation1.quat * constraint.localAnchor1;
-        glm::vec3 r2 = rotation2.quat * constraint.localAnchor2;
+
+        glm::vec3 r1 = interp1.nextRotation * constraint.localAnchor1;
+        glm::vec3 r2 = interp2.nextRotation * constraint.localAnchor2;
 
         glm::vec3 ds = correction2.position - correction1.position + r2 - r1;
         glm::vec3 separation = constraint.deltaCenter + ds;
@@ -140,6 +143,7 @@ void cubos::engine::distanceConstraintPlugin(Cubos& cubos)
     cubos.depends(transformPlugin);
     cubos.depends(physicsPlugin);
     cubos.depends(physicsSolverPlugin);
+    cubos.depends(interpolationPlugin);
 
     cubos.relation<DistanceConstraint>();
 
@@ -150,41 +154,44 @@ void cubos::engine::distanceConstraintPlugin(Cubos& cubos)
     cubos.system("solve distance constraints bias")
         .tagged(distanceConstraintSolveTag)
         .tagged(physicsSolveConstraintTag)
-        .call([](Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&,
-                       AngularVelocity&, DistanceConstraint&, Entity, const Mass&, const Inertia&, const Rotation&,
-                       AccumulatedCorrection&, Velocity&, AngularVelocity&>
-                     query,
-                 const SolverConstants& solverConstants, const FixedDeltaTime& dt,
-                 const Substeps& substeps) { solveDistanceConstraint(query, solverConstants, dt, substeps, true); });
+        .call(
+            [](Query<Entity, const Mass&, const Inertia&, const Interpolated&, const Rotation&, AccumulatedCorrection&,
+                     Velocity&, AngularVelocity&, DistanceConstraint&, Entity, const Mass&, const Inertia&,
+                     const Interpolated&, const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&>
+                   query,
+               const SolverConstants& solverConstants, const FixedDeltaTime& dt,
+               const Substeps& substeps) { solveDistanceConstraint(query, solverConstants, dt, substeps, true); });
 
     cubos.system("solve distance constraints no bias")
         .tagged(physicsSolveRelaxConstraintTag)
-        .call([](Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&,
-                       AngularVelocity&, DistanceConstraint&, Entity, const Mass&, const Inertia&, const Rotation&,
-                       AccumulatedCorrection&, Velocity&, AngularVelocity&>
-                     query,
-                 const SolverConstants& solverConstants, const FixedDeltaTime& dt,
-                 const Substeps& substeps) { solveDistanceConstraint(query, solverConstants, dt, substeps, false); });
+        .call(
+            [](Query<Entity, const Mass&, const Inertia&, const Interpolated&, const Rotation&, AccumulatedCorrection&,
+                     Velocity&, AngularVelocity&, DistanceConstraint&, Entity, const Mass&, const Inertia&,
+                     const Interpolated&, const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&>
+                   query,
+               const SolverConstants& solverConstants, const FixedDeltaTime& dt,
+               const Substeps& substeps) { solveDistanceConstraint(query, solverConstants, dt, substeps, false); });
 
     cubos.system("prepare constraints")
         .tagged(physicsPrepareSolveTag)
-        .call([](Query<Entity, const Mass&, const Inertia&, const CenterOfMass&, const LocalToWorld&, const Rotation&,
-                       const Velocity&, const AngularVelocity&, const PhysicsMaterial&, DistanceConstraint&, Entity,
-                       const Mass&, const Inertia&, const CenterOfMass&, const LocalToWorld&, const Rotation&,
-                       const Velocity&, const AngularVelocity&, const PhysicsMaterial&>
+        .call([](Query<Entity, const Mass&, const Inertia&, const CenterOfMass&, const LocalToWorld&,
+                       const Interpolated&, const Rotation&, const Velocity&, const AngularVelocity&,
+                       const PhysicsMaterial&, DistanceConstraint&, Entity, const Mass&, const Inertia&,
+                       const CenterOfMass&, const LocalToWorld&, const Interpolated&, const Rotation&, const Velocity&,
+                       const AngularVelocity&, const PhysicsMaterial&>
                      query,
                  const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
                  const SolverConstants& solverConstants) {
-            for (auto [ent1, mass1, inertia1, centerOfMass1, localToWorld1, rotation1, correction1, velocity1,
-                       angVelocity1, constraint, ent2, mass2, inertia2, centerOfMass2, localToWorld2, rotation2,
-                       correction2, velocity2, angVelocity2] : query)
+            for (auto [ent1, mass1, inertia1, centerOfMass1, localToWorld1, interp1, rotation1, correction1, velocity1,
+                       angVelocity1, constraint, ent2, mass2, inertia2, centerOfMass2, localToWorld2, interp2,
+                       rotation2, correction2, velocity2, angVelocity2] : query)
             {
 
                 float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
                 constraint.deltaCenter = localToWorld2.worldPosition() - localToWorld1.worldPosition();
 
-                glm::vec3 r1 = rotation1.quat * constraint.localAnchor1;
-                glm::vec3 r2 = rotation2.quat * constraint.localAnchor2;
+                glm::vec3 r1 = interp1.nextRotation * constraint.localAnchor1;
+                glm::vec3 r2 = interp2.nextRotation * constraint.localAnchor2;
 
                 glm::vec3 separation = r2 - r1 + constraint.deltaCenter;
                 glm::vec3 axis = glm::normalize(separation);
@@ -220,29 +227,30 @@ void cubos::engine::distanceConstraintPlugin(Cubos& cubos)
         .after(physicsPrepareSolveTag)
         .before(distanceConstraintSolveTag)
         .tagged(fixedSubstepTag)
-        .call([](Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&,
-                       AngularVelocity&, DistanceConstraint&, Entity, const Mass&, const Inertia&, const Rotation&,
-                       AccumulatedCorrection&, Velocity&, AngularVelocity&>
-                     query) {
-            for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraint, ent2, mass2,
-                       inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
-            {
-                glm::vec3 r1 = rotation1.quat * constraint.localAnchor1;
-                glm::vec3 r2 = rotation2.quat * constraint.localAnchor2;
+        .call(
+            [](Query<Entity, const Mass&, const Inertia&, const Interpolated&, const Rotation&, AccumulatedCorrection&,
+                     Velocity&, AngularVelocity&, DistanceConstraint&, Entity, const Mass&, const Inertia&,
+                     const Interpolated&, const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&>
+                   query) {
+                for (auto [ent1, mass1, inertia1, interp1, rotation1, correction1, velocity1, angVelocity1, constraint,
+                           ent2, mass2, inertia2, interp2, rotation2, correction2, velocity2, angVelocity2] : query)
+                {
+                    glm::vec3 r1 = interp1.nextRotation * constraint.localAnchor1;
+                    glm::vec3 r2 = interp2.nextRotation * constraint.localAnchor2;
 
-                glm::vec3 ds = correction2.position - correction1.position + r2 - r1;
-                glm::vec3 separation = constraint.deltaCenter + ds;
+                    glm::vec3 ds = correction2.position - correction1.position + r2 - r1;
+                    glm::vec3 separation = constraint.deltaCenter + ds;
 
-                glm::vec3 axis = glm::normalize(separation);
+                    glm::vec3 axis = glm::normalize(separation);
 
-                float axialImpulse = constraint.impulse + constraint.lowerImpulse - constraint.upperImpulse;
+                    float axialImpulse = constraint.impulse + constraint.lowerImpulse - constraint.upperImpulse;
 
-                glm::vec3 p = axialImpulse * axis;
+                    glm::vec3 p = axialImpulse * axis;
 
-                velocity1.vec -= mass1.inverseMass * p;
-                velocity2.vec += mass2.inverseMass * p;
-                angVelocity1.vec -= inertia1.inverseInertia * glm::cross(r1, p);
-                angVelocity2.vec += inertia2.inverseInertia * glm::cross(r2, p);
-            }
-        });
+                    velocity1.vec -= mass1.inverseMass * p;
+                    velocity2.vec += mass2.inverseMass * p;
+                    angVelocity1.vec -= inertia1.inverseInertia * glm::cross(r1, p);
+                    angVelocity2.vec += inertia2.inverseInertia * glm::cross(r2, p);
+                }
+            });
 }

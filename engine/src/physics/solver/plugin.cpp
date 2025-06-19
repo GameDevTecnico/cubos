@@ -1,6 +1,7 @@
 #include "penetration_constraint/plugin.hpp"
 
 #include <cubos/engine/fixed_step/plugin.hpp>
+#include <cubos/engine/interpolation/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 
@@ -53,6 +54,7 @@ void cubos::engine::physicsSolverPlugin(Cubos& cubos)
 
     cubos.tag(physicsFinalizePositionTag).after(physicsSolveRelaxContactTag).tagged(fixedStepTag);
 
+    cubos.plugin(interpolationPlugin);
     cubos.plugin(physicsIntegrationPlugin);
     cubos.plugin(penetrationConstraintPlugin);
     cubos.plugin(distanceConstraintPlugin);
