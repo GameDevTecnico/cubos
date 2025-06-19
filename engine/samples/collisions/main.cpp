@@ -16,6 +16,7 @@
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/interpolation/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
@@ -124,6 +125,7 @@ int main(int argc, char** argv)
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 1.0F}})
+                      .add(Interpolated{})
                       .entity();
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
@@ -135,6 +137,7 @@ int main(int argc, char** argv)
                       .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, -1.0F}})
+                      .add(Interpolated{})
                       .entity();
         state.bRotationAxis = glm::sphericalRand(1.0F);
     });
