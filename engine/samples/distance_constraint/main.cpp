@@ -15,6 +15,7 @@
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/interpolation/plugin.hpp>
 #include <cubos/engine/physics/constraints/distance_constraint.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
@@ -74,6 +75,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         state.b = commands.create()
@@ -84,6 +86,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {1.0F, 0.0F, 1.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         commands.relate(state.a, state.b,
@@ -103,6 +106,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         state.b = commands.create()
@@ -113,6 +117,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, 5.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         commands.relate(state.a, state.b,
@@ -132,6 +137,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         state.b = commands.create()
@@ -142,6 +148,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, 5.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         state.c = commands.create()
@@ -152,6 +159,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, 10.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         commands.relate(state.a, state.b,
@@ -178,6 +186,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         state.b = commands.create()
@@ -188,6 +197,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, -5.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         state.c = commands.create()
@@ -198,6 +208,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(Position{glm::vec3{0.0F, 0.0F, -15.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 5.0F}})
+                      .add(Interpolated{})
                       .entity();
 
         commands.relate(state.a, state.b,
