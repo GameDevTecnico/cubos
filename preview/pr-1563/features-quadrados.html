@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feature Guide &raquo; Quadrados | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <link rel="prev" href="features-queries.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="features.html">Feature Guide</a> &raquo;</span>
+          Quadrados
+        </h1>
+        <p>How to use the <em>Quadrados</em> CLI tool.</p>
+<p><a name="md_docs_pages_2_features_quadrados"></a></p><aside class="m-note m-info"><h4>Note</h4><p>This guide won&#x27;t be very useful unless you&#x27;re planning on developing a game with <strong>Cubos</strong> and need to convert voxel models into the internal format used by the engine, or embed files into an executable.</p></aside><p><em>Quadrados</em> is the CLI tool used to work with <strong>Cubos</strong> At the moment, it contains the following commands:</p><ul><li><code>quadrados help</code> - shows the help message;</li><li><code>quadrados convert</code> - converts a <code>.qb</code> voxel file into the internal format used by <strong>Cubos</strong>, <code>.grd</code> and <code>.pal</code>.</li><li><code>quadrados embed</code> - utility used to embed files directly into an executable for use with the <code>EmbeddedArchive</code>.</li></ul><section id="autotoc_md27"><h2><a href="#autotoc_md27">Convert</a></h2><p>The need for this tool arose from the fact that <strong>Cubos</strong> works with a single palette of voxel materials, and voxel objects refer to specific materials by their index in this palette. For example, if we had a single voxel red object, the red color wouldn&#x27;t be specified in the voxel object. Instead, this object would specify that its material is <code>1</code>, and the palette would specify that the material <code>1</code> is red.</p><p>The issue is, voxel formats like <code>.qb</code> and <code>.vox</code> are not designed to store only the indices of materials, but the whole material definition, per voxel. This conflicts with the way <strong>Cubos</strong> works, so we need to convert these formats into the internal format used by <strong>Cubos</strong>. This is where <code>quadrados convert</code> comes in. It takes a <code>.qb</code> voxel file and splits it into a palette (<code>.pal</code>), and one or more voxel grids (<code>.grd</code>).</p><section id="autotoc_md28"><h3><a href="#autotoc_md28">Usage</a></h3><p>This guide will be based on four use cases:</p><ol><li>loading a <code>.qb</code> file and creating a new <code>.pal</code>;</li><li>loading a <code>.qb</code> file and updating an existing <code>.pal</code>;</li><li>loading a <code>.qb</code> file and using, without editing, an existing <code>.pal</code>;</li><li>querying the contents of <code>.qb</code> model;</li></ol><section id="autotoc_md29"><h4><a href="#autotoc_md29">Example 1: Creating a new palette</a></h4><p>This use case is most common when importing the first <code>.qb</code> file for a new project. There is no palette file yet, so we need to create one. Lets say the model we want to convert is a <code>car.qb</code>, which contains a single voxel object.</p><pre class="m-code">$<span class="w"> </span>quadrados<span class="w"> </span>convert<span class="w"> </span>car.qb<span class="w"> </span>-p<span class="w"> </span>main.pal<span class="w"> </span>-g<span class="w"> </span>car.grd<span class="w"> </span>-w</pre><p>First, we specify the <code>.qb</code> file to convert. Then, we specify the name of the palette we will be outputting. We also need to specify the output file for the voxel grid. Finally, we pass the <code>-w</code> flag which allows us to write to the palette file (which is necessary since there is none at the moment).</p></section><section id="autotoc_md30"><h4><a href="#autotoc_md30">Example 2: Updating an existing palette</a></h4><p>Lets say we now want to import a <code>street.qb</code> model which contains two voxel grids: the first one is a road and the second one is a tree. Since we already have a palette, we want to add any new materials to it.</p><pre class="m-code">$<span class="w"> </span>quadrados<span class="w"> </span>convert<span class="w"> </span>street.qb<span class="w"> </span>-p<span class="w"> </span>main.pal<span class="w"> </span>-g0<span class="w"> </span>road.grd<span class="w"> </span>-g1<span class="w"> </span>tree.grd<span class="w"> </span>-w</pre><p>Once again, we first specify the <code>.qb</code> file to convert. Then, we specify the name of the palette we will be using, which is the same as the one we created in the previous example. This time, we have two grids in the <code>.qb</code> file, so we need to specify the output files for both. This is done by adding an index in front of <code>-g</code> (e.g. <code>-g0</code> for the first grid, <code>-g1</code> for the second). Finally, we once again pass the <code>-w</code> flag which allows the palette file to be updated.</p></section><section id="autotoc_md31"><h4><a href="#autotoc_md31">Example 3: Using an existing palette</a></h4><p>What if we want to add another car model, but without adding materials to the palette? To do this, we will need to ommit the <code>-w</code> flag. This way, the palette will be read, and the most similar materials found will be used. By default, this will only succeed if the materials match exactly.</p><pre class="m-code">$<span class="w"> </span>quadrados<span class="w"> </span>convert<span class="w"> </span>car2.qb<span class="w"> </span>-p<span class="w"> </span>main.pal<span class="w"> </span>-g<span class="w"> </span>car2.grd</pre><p>If this fails, you may see the error message:</p><pre class="m-code">Failed to convert grid 0 from its palette to the palette chosen.</pre><p>One work around is lowering the threshold for material matching. If you want to allow for slightly different materials to be considered as the same, you can pass the <code>-s &lt;SIMILARITY&gt;</code> option. This value is a number from <code>0</code> to <code>1</code>, where <code>0</code> is completely different and <code>1</code> is completely the same. It represents the minimum similarity between two materials to consider them the same (default is <code>1</code>).</p><p>So, if the materials which aren&#x27;t matching are very similar, you could add, for example, <code>-s 0.9</code> to the previous command. This way, the material chosen from the palette will have a similarity of at least <code>0.9</code> with the material in the original model.</p></section><section id="autotoc_md32"><h4><a href="#autotoc_md32">Example 4: Querying the contents of a model</a></h4><p>You may want to check the contents of a <code>.qb</code> file before converting it. One easy way to do this is to use the <code>-v</code> (verbose) flag. This can be added to any of the previous commands to get extra information about what is going on.</p><p>It can also be used without any other options, in which case the program will just print the contents of the <code>.qb</code> file. For example:</p><pre class="m-code">$<span class="w"> </span>quadrados<span class="w"> </span>convert<span class="w"> </span>car.qb<span class="w"> </span>-v
+Found<span class="w"> </span><span class="m">1</span><span class="w"> </span>QB<span class="w"> </span>matrices.
+Matrix<span class="w"> </span><span class="m">0</span>:
+-<span class="w"> </span>Position:<span class="w"> </span>-7<span class="w"> </span>-5<span class="w"> </span>-16
+-<span class="w"> </span>Grid<span class="w"> </span>size:<span class="w"> </span>15x11x32
+-<span class="w"> </span>Palette<span class="w"> </span>size:<span class="w"> </span><span class="m">10</span></pre><p>This tells us that the <code>car.qb</code> model contains exactly one voxel grid, that its position within the model is <code>(-7, -5, -16)</code>, that its size is <code>15x11x32</code>, and that it uses <code>10</code> different materials.</p></section></section></section><section id="autotoc_md33"><h2><a href="#autotoc_md33">Embed</a></h2><p>The <code>quadrados embed</code> tool is used to embed files directly into an executable for use with the <a href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive</a>. This is useful for example when you want to ship a game with a set of assets, but don&#x27;t want to have to distribute them as separate files. This way, you are able to ship a single executable file.</p><section id="autotoc_md34"><h3><a href="#autotoc_md34">Usage</a></h3><p>This tool takes a file and generates a C++ source file which registers data to be used with <a href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" class="m-doc">cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive</a>, outputting the code to the standard output. This source file can then be compiled and linked with your executable.</p><p>If no name is specified, the name of the file will be used. For example, if you run <code>quadrados embed logo.png &gt; logo.cpp</code>, the name of the registered data will be <code>logo.png</code>.</p><p>The data can then be mounted like this:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/data/fs/file_system.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/data/fs/embedded_archive.hpp&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">cubos</span><span class="o">::</span><span class="nn">core</span><span class="o">::</span><span class="nn">data</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">FileSystem</span><span class="o">::</span><span class="n">mount</span><span class="p">(</span><span class="s">&quot;/logo.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">EmbeddedArchive</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;logo.png&quot;</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// ...</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></pre><p>It&#x27;s also possible to embed a whole directory, in which case you will need to use the <code>-r</code> flag. This will recursively embed all files in the directory.</p><p>Checkout the <code>embedded_archive</code> sample for a complete example.</p></section></section>
+        <div class="m-note m-dim m-thin m-text-center"><a href="features-queries.html" class="m-doc">&laquo; Queries</a> | <a href="features.html" class="m-doc">Feature Guide</a></div>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
