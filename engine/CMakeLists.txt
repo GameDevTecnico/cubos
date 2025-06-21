@@ -113,6 +113,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/physics/solver/distance_constraint/plugin.cpp"
 	"src/physics/fixed_substep/plugin.cpp"
 	"src/physics/fixed_substep/substeps.cpp"
+	"src/physics/solver/interpolation/plugin.cpp"
 	"src/physics/solver/integration/plugin.cpp"
 	"src/physics/components/inertia.cpp"
 	"src/physics/components/accumulated_correction.cpp"
@@ -125,6 +126,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/physics/components/impulse.cpp"
 	"src/physics/components/angular_impulse.cpp"
 	"src/physics/components/physics_material.cpp"
+	"src/physics/components/interpolated.cpp"
 
 	"src/input/plugin.cpp"
 	"src/input/input.cpp"

@@ -7,7 +7,7 @@
 #include "../fixed_substep/plugin.hpp"
 #include "distance_constraint/plugin.hpp"
 #include "integration/plugin.hpp"
-
+#include "interpolation/plugin.hpp"
 
 CUBOS_DEFINE_TAG(cubos::engine::physicsPrepareSolveTag);
 CUBOS_DEFINE_TAG(cubos::engine::physicsIntegrateVelocityTag);
@@ -53,6 +53,7 @@ void cubos::engine::physicsSolverPlugin(Cubos& cubos)
 
     cubos.tag(physicsFinalizePositionTag).after(physicsSolveRelaxContactTag).tagged(fixedStepTag);
 
+    cubos.plugin(interpolationPlugin);
     cubos.plugin(physicsIntegrationPlugin);
     cubos.plugin(penetrationConstraintPlugin);
     cubos.plugin(distanceConstraintPlugin);
