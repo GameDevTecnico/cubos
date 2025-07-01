@@ -1,5 +1,7 @@
 #include "plugin.hpp"
 
+#include <cubos/core/ecs/reflection.hpp>
+
 #include <cubos/engine/defaults/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/selection/plugin.hpp>
@@ -14,8 +16,18 @@
 using namespace cubos::engine;
 using namespace tesseratos;
 
+CUBOS_REFLECT_IMPL(LayoutState)
+{
+    return cubos::core::ecs::TypeBuilder<LayoutState>("tesseratos::LayoutState")
+        .withField("isReady", &LayoutState::isReady)
+        .withField("layout", &LayoutState::layout)
+        .build();
+}
+
 void tesseratos::menuBarPlugin(Cubos& cubos)
 {
+    cubos.resource<LayoutState>();
+
     cubos.depends(imguiPlugin);
 
     cubos.plugin(selectionPlugin);
@@ -31,8 +43,8 @@ void tesseratos::menuBarPlugin(Cubos& cubos)
 
     cubos.system("setup Menu Bar")
         .tagged(imguiTag)
-        .call([](AssetExplorer& assetExplorer, Debugger& debugger, Project& project, Importer& importer,
-                 SceneEditor& sceneEditor, VoxelPalleteEditor& voxelPalleteEditor) {
+        .call([](LayoutState& layout, AssetExplorer& assetExplorer, Debugger& debugger, Project& project,
+                 Importer& importer, SceneEditor& sceneEditor, VoxelPalleteEditor& voxelPalleteEditor) {
             ImGui::Begin("Tesseratos");
 
             if (ImGui::BeginMenuBar())
@@ -85,8 +97,21 @@ void tesseratos::menuBarPlugin(Cubos& cubos)
                     ImGui::MenuItem("Debugger", "", &debugger.isOpen);
                     ImGui::MenuItem("Importer", "", &importer.isOpen);
                     ImGui::MenuItem("Project", "", &project.isOpen);
-                    ImGui::MenuItem("Scene Editor", "", &sceneEditor.isOpen);
-                    ImGui::MenuItem("Voxel Pallete Editor", "", &voxelPalleteEditor.isOpen);
+                    ImGui::MenuItem("Scene Editor", "", &sceneEditor.isOpen, false);
+                    ImGui::MenuItem("Voxel Pallete Editor", "", &voxelPalleteEditor.isOpen, false);
+                    ImGui::Separator();
+
+                    if (ImGui::Button("Layout 1"))
+                    {
+                        layout.isReady = false;
+                        layout.layout = 1;
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("Layout 2"))
+                    {
+                        layout.isReady = false;
+                        layout.layout = 2;
+                    }
 
                     ImGui::EndMenu();
                 }

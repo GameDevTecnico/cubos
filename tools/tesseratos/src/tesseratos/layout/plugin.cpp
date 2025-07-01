@@ -7,22 +7,25 @@
 #include <cubos/engine/defaults/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 
+#include "../menu_bar/plugin.hpp"
+
 using namespace cubos::engine;
 using namespace tesseratos;
 
-CUBOS_REFLECT_IMPL(LayoutState)
-{
-    return cubos::core::ecs::TypeBuilder<LayoutState>("tesseratos::LayoutState")
-        .withField("isReady", &LayoutState::isReady)
-        .withField("layout", &LayoutState::layout)
-        .build();
-}
+// CUBOS_REFLECT_IMPL(LayoutState)
+// {
+//     return cubos::core::ecs::TypeBuilder<LayoutState>("tesseratos::LayoutState")
+//         .withField("isReady", &LayoutState::isReady)
+//         .withField("layout", &LayoutState::layout)
+//         .build();
+// }
 
 void tesseratos::layoutPlugin(Cubos& cubos)
 {
     cubos.depends(imguiPlugin);
+    cubos.depends(menuBarPlugin);
 
-    cubos.resource<LayoutState>();
+    // cubos.resource<LayoutState>();
 
     cubos.system("setup Dockspace").tagged(imguiTag).call([](LayoutState& state) {
         // make DockSpace fullscreen
@@ -57,11 +60,25 @@ void tesseratos::layoutPlugin(Cubos& cubos)
             ImGuiID dockMainId = dockspaceId;
             ImGuiID dockBottom = ImGui::DockBuilderSplitNode(dockMainId, ImGuiDir_Down, 0.25f, nullptr, &dockMainId);
             ImGuiID dockLeft = ImGui::DockBuilderSplitNode(dockMainId, ImGuiDir_Left, 0.25f, nullptr, &dockMainId);
+            ImGuiID dockRight = ImGui::DockBuilderSplitNode(dockMainId, ImGuiDir_Right, 0.25f, nullptr, &dockMainId);
 
             // Dock windows (assumes these windows exist and are created somewhere else)
             // ImGui::DockBuilderDockWindow("Viewport", dockMainId);
-            ImGui::DockBuilderDockWindow("Asset Explorer", dockLeft);
-            ImGui::DockBuilderDockWindow("Project", dockBottom);
+
+            if (state.layout == 1)
+            {
+                ImGui::DockBuilderDockWindow("Asset Explorer", dockLeft);
+                ImGui::DockBuilderDockWindow("Debugger", dockRight);
+                ImGui::DockBuilderDockWindow("Project", dockBottom);
+                ImGui::DockBuilderDockWindow("Importer", dockBottom);
+            }
+            else if (state.layout == 2)
+            {
+                ImGui::DockBuilderDockWindow("Asset Explorer", dockLeft);
+                ImGui::DockBuilderDockWindow("Debugger", dockLeft);
+                ImGui::DockBuilderDockWindow("Project", dockRight);
+                ImGui::DockBuilderDockWindow("Importer", dockRight);
+            }
 
             ImGui::DockBuilderFinish(dockspaceId);
         }
