@@ -15,6 +15,15 @@ namespace tesseratos
     /// @ingroup tesseratos
     /// @brief Adds a menu bar to tesseratos.
 
+    /// @brief Layout state.
+    struct LayoutState
+    {
+        CUBOS_REFLECT;
+
+        bool isReady{false};
+        int layout = 1;
+    };
+
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class
     /// @ingroup tesseratos-menu-bar-plugin
