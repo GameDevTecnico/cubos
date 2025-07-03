@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Only draw gizmos to active cameras (**@tomas7770**).
 - Transform Gizmos rendered in wrong location when splitting the screen (#1148, **@tomas7770**).
 - GL timer result always being 0 (#1486, **@tomas7770**).
+- Metrics being popped in the wrong order (**@tomas7770**).
 
 ## [v0.7.0] - 2025-05-03
 
