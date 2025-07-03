@@ -38,7 +38,7 @@ void Metrics::metric(const std::string& name, const double metric)
 
     if (state().mMetrics[fullName].size() >= state().mMaxEntries)
     {
-        state().mMetrics[fullName].pop_back();
+        state().mMetrics[fullName].pop_front();
     }
 
     state().mMetrics[fullName].push_back(metric);
