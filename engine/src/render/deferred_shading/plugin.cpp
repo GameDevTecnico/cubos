@@ -1,6 +1,7 @@
 #include <cubos/core/geom/utils.hpp>
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/io/window.hpp>
+#include <cubos/core/tel/metrics.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
@@ -17,6 +18,8 @@
 #include <cubos/engine/render/lights/plugin.hpp>
 #include <cubos/engine/render/lights/point.hpp>
 #include <cubos/engine/render/lights/spot.hpp>
+#include <cubos/engine/render/profiling/plugin.hpp>
+#include <cubos/engine/render/profiling/profiler.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/shadows/atlas/plugin.hpp>
 #include <cubos/engine/render/shadows/atlas/point_atlas.hpp>
@@ -141,6 +144,8 @@ namespace
 
         ConstantBuffer perSceneCB;
 
+        cubos::core::gl::PipelinedTimer timer;
+
         State(RenderDevice& renderDevice, const ShaderPipeline& pipeline)
             : pipeline(pipeline)
         {
@@ -169,6 +174,8 @@ namespace
             generateScreenQuad(renderDevice, pipeline, screenQuad);
 
             perSceneCB = renderDevice.createConstantBuffer(sizeof(PerScene), nullptr, Usage::Dynamic);
+
+            timer = renderDevice.createPipelinedTimer();
         }
     };
 } // namespace
@@ -190,6 +197,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
     cubos.depends(shadowCastersPlugin);
     cubos.depends(shadowAtlasPlugin);
     cubos.depends(cascadedShadowMapsPlugin);
+    cubos.depends(renderProfilingPlugin);
 
     cubos.tag(deferredShadingTag)
         .tagged(drawToHDRTag)
@@ -216,6 +224,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
         .tagged(deferredShadingTag)
         .call([](State& state, const Window& window, const RenderEnvironment& environment,
                  const SpotShadowAtlas& spotShadowAtlas, const PointShadowAtlas& pointShadowAtlas,
+                 const RenderProfiler& profiler,
                  Query<const LocalToWorld&, const DirectionalLight&, Opt<const DirectionalShadowCaster&>>
                      directionalLights,
                  Query<const LocalToWorld&, const PointLight&, Opt<const PointShadowCaster&>> pointLights,
@@ -223,6 +232,11 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                  Query<Entity, const HDR&, const GBuffer&, Opt<const SSAO&>, DeferredShading&> targets,
                  Query<Entity, const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = window->renderDevice();
+
+            if (profiler.profilingEnabled)
+            {
+                state.timer->begin();
+            }
 
             for (auto [targetEnt, hdr, gBuffer, ssao, deferredShading] : targets)
             {
@@ -489,6 +503,11 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
                     rd.setVertexArray(state.screenQuad);
                     rd.drawTriangles(0, 6);
                 }
+            }
+
+            if (profiler.profilingEnabled)
+            {
+                CUBOS_METRIC("Deferred Shading", state.timer->end().result);
             }
         });
 }
