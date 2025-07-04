@@ -11,6 +11,7 @@
 #include <cubos/engine/render/lights/plugin.hpp>
 #include <cubos/engine/render/mesh/plugin.hpp>
 #include <cubos/engine/render/picker/plugin.hpp>
+#include <cubos/engine/render/profiling/plugin.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/shadows/atlas/plugin.hpp>
 #include <cubos/engine/render/shadows/atlas_rasterizer/plugin.hpp>
@@ -39,6 +40,7 @@ void cubos::engine::renderDefaultsPlugin(Cubos& cubos)
     cubos.plugin(cameraPlugin);
     cubos.plugin(shaderPlugin);
     cubos.plugin(shadowCastersPlugin);
+    cubos.plugin(renderProfilingPlugin);
 
     cubos.plugin(hdrPlugin);
     cubos.plugin(gBufferPlugin);
