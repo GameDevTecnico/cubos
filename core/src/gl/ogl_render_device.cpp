@@ -1411,17 +1411,17 @@ public:
 
     int result() override
     {
-        int beginTime;
-        int endTime;
-        glGetQueryObjectiv(ids[0], GL_QUERY_RESULT, &beginTime);
-        glGetQueryObjectiv(ids[1], GL_QUERY_RESULT, &endTime);
+        GLint64 beginTime;
+        GLint64 endTime;
+        glGetQueryObjecti64v(ids[0], GL_QUERY_RESULT, &beginTime);
+        glGetQueryObjecti64v(ids[1], GL_QUERY_RESULT, &endTime);
         GLenum glErr = glGetError();
         if (glErr != 0)
         {
             LOG_GL_ERROR(glErr);
             return -1;
         }
-        return endTime - beginTime;
+        return static_cast<int>(endTime - beginTime);
     }
 
     std::shared_ptr<bool> destroyed;

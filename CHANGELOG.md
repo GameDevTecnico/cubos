@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Toggle for matrix decomposition to the inspector (#1521, **@RiscadoA**).
 - Allow gizmos to be drawn for specific cameras (#1402, **@tomas7770**).
 - Named method for attributing a name to a plugin (#1556, **@mcanais**).
+- Profiling timers in render plugins (#1560, **@tomas7770**).
 
 ### Changed
 
@@ -50,6 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clear picker depth in Gizmos plugin if not already cleared (**@tomas7770**).
 - Only draw gizmos to active cameras (**@tomas7770**).
 - Transform Gizmos rendered in wrong location when splitting the screen (#1148, **@tomas7770**).
+- GL timer result always being 0 (#1486, **@tomas7770**).
+- Metrics being popped in the wrong order (**@tomas7770**).
 
 ## [v0.7.0] - 2025-05-03
 
