@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Named method for attributing a name to a plugin (#1556, **@mcanais**).
 - New quadrados create command to create assets based on templates (#1479, **@R-Camacho**). 
 - Profiling timers in render plugins (#1560, **@tomas7770**).
+- Render timers in metrics panel (#1565, **@tomas7770**).
 
 ### Changed
 
