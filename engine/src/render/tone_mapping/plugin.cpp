@@ -146,7 +146,7 @@ void cubos::engine::toneMappingPlugin(Cubos& cubos)
 
             if (profiler.profilingEnabled)
             {
-                CUBOS_METRIC("Tonemapping", state.timer->end().result);
+                CUBOS_METRIC("Graphics::Tonemapping::ns", state.timer->end().result);
             }
         });
 }

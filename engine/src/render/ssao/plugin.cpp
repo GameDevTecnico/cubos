@@ -313,7 +313,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
 
             if (profiler.profilingEnabled)
             {
-                CUBOS_METRIC("SSAO", state.timer->end().result);
+                CUBOS_METRIC("Graphics::SSAO::ns", state.timer->end().result);
             }
         });
 }

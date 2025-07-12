@@ -350,7 +350,7 @@ void cubos::engine::gBufferRasterizerPlugin(Cubos& cubos)
 
             if (profiler.profilingEnabled)
             {
-                CUBOS_METRIC("G-Buffer Rasterizer", state.timer->end().result);
+                CUBOS_METRIC("Graphics::G-Buffer Rasterizer::ns", state.timer->end().result);
             }
         });
 }
