@@ -287,7 +287,7 @@ void cubos::engine::bloomPlugin(Cubos& cubos)
 
             if (profiler.profilingEnabled)
             {
-                CUBOS_METRIC("Bloom", state.timer->end().result);
+                CUBOS_METRIC("Graphics::Bloom", state.timer->end().result);
             }
         });
 }
