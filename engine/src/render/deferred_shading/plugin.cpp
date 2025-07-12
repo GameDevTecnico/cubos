@@ -507,7 +507,7 @@ void cubos::engine::deferredShadingPlugin(Cubos& cubos)
 
             if (profiler.profilingEnabled)
             {
-                CUBOS_METRIC("Deferred Shading", state.timer->end().result);
+                CUBOS_METRIC("Graphics::Deferred Shading::ns", state.timer->end().result);
             }
         });
 }
