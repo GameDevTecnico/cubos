@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::engine::SceneNode class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>SceneNode <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2scene_2node_8hpp.html">&lt;engine/scene/node.hpp&gt;</a></div>
+        </h1>
+        <p>Describes a node in a scene hierarchy.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>A scene node represents an entity, its components and relations, and its children entities. Optionally, a node may inherit data (components, relations and children) from a root scene node of another scene asset.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a1039de4a3ae82e06ccbb9859f392648e">
+              <span class="m-doc-wrap-bumper"><a href="#a1039de4a3ae82e06ccbb9859f392648e" class="m-doc-self">SceneNode</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Empty constructor.</dd>
+            <dt id="a29937af16210ce4b5285ab7d2c16acf7">
+              <span class="m-doc-wrap-bumper"><a href="#a29937af16210ce4b5285ab7d2c16acf7" class="m-doc-self">SceneNode</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Move constructor.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a35abc1769824d59b0ef817a64bfed03c">
+              <span class="m-doc-wrap-bumper">auto <a href="#a35abc1769824d59b0ef817a64bfed03c" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&amp;&amp;) -&gt; <a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&amp; <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Move assignment.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a88bcea31794aef399bc0d67dc0b2d8b0" class="m-doc">inherits</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&gt;</span>
+            </dt>
+            <dd>Gets the scene asset from which this node inherits.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aca63eb21fe754f95e8168be9f9dc6525" class="m-doc">inherits</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&gt; scene)</span>
+            </dt>
+            <dd>Sets the scene asset from which this node inherits.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af28bc3f1f00324f0d7bfeec29ccd29f3" class="m-doc">components</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">core::<wbr />memory::<wbr />TypeMap</a>&lt;nlohmann::json&gt;&amp;</span>
+            </dt>
+            <dd>Returns the components of the entity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7008c9288f1f8c51360eb48804403a3b" class="m-doc">add</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              nlohmann::json data)</span>
+            </dt>
+            <dd>Inserts a component of the given type into the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a82e3ebbfcc16fc9ba4172e65897a1448" class="m-doc">remove</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type)</span>
+            </dt>
+            <dd>Removes the component of the given type from the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9638a8ead6ec5918e7be1041dd9d57a4" class="m-doc">relationsFrom</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">core::<wbr />memory::<wbr />TypeMap</a>&lt;std::unordered_map&lt;std::string, nlohmann::json&gt;&gt;&amp;</span>
+            </dt>
+            <dd>Gets all incoming relations.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2d5be75bde244d46b011d09ecfa64f82" class="m-doc">relationsTo</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">core::<wbr />memory::<wbr />TypeMap</a>&lt;std::unordered_map&lt;std::string, nlohmann::json&gt;&gt;&amp;</span>
+            </dt>
+            <dd>Gets all outgoing relations.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a48c1681dc0dc542cbfa8a9f1aa7cd89f" class="m-doc">relateFrom</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const std::string&amp; entity,
+              nlohmann::json data)</span>
+            </dt>
+            <dd>Inserts a relation of the given type into the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae8bf7591c4166cf3c510d6c1e39eb72b" class="m-doc">relateTo</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const std::string&amp; entity,
+              nlohmann::json data)</span>
+            </dt>
+            <dd>Inserts a relation of the given type into the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#abe33e38fb3e29b19dfce6057691ceda1" class="m-doc">unrelateFrom</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const std::string&amp; entity)</span>
+            </dt>
+            <dd>Removes the relation of the given type from the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af4e34769d4bfa4140a36c8f19e3766da" class="m-doc">unrelateTo</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const std::string&amp; entity)</span>
+            </dt>
+            <dd>Removes the relation of the given type from the node.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a785ecaaaed80c9e7c3f2eedaf030f3cf" class="m-doc">children</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;std::string, std::unique_ptr&lt;<a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&gt;&gt;&amp;</span>
+            </dt>
+            <dd>Gets the map of child nodes.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9e6f3cb4b96755e10fb617cb372c4f11" class="m-doc">create</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; <a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&amp;</span>
+            </dt>
+            <dd>Creates a new child node with the given name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2a3850a1cf5bd4acc42099e23cd5fadd" class="m-doc">destroy</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span>
+            </dt>
+            <dd>Destroys the child node with the given name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae46bab82250e3c91f3dcbaf29a9220dd" class="m-doc">load</a>(</span><span class="m-doc-wrap">const nlohmann::json&amp; json,
+              const <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a>&amp; components,
+              const <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a>&amp; relations) -&gt; bool</span>
+            </dt>
+            <dd>Loads the scene node from a JSON object.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a88bcea31794aef399bc0d67dc0b2d8b0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&gt; cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88bcea31794aef399bc0d67dc0b2d8b0" class="m-doc-self">inherits</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the scene asset from which this node inherits.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> asset.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aca63eb21fe754f95e8168be9f9dc6525"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aca63eb21fe754f95e8168be9f9dc6525" class="m-doc-self">inherits</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&gt; scene)</span></span>
+            </h3>
+            <p>Sets the scene asset from which this node inherits.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">scene</td>
+                  <td><a href="classcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> asset.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af28bc3f1f00324f0d7bfeec29ccd29f3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">core::<wbr />memory::<wbr />TypeMap</a>&lt;nlohmann::json&gt;&amp; cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af28bc3f1f00324f0d7bfeec29ccd29f3" class="m-doc-self">components</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the components of the entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Components.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7008c9288f1f8c51360eb48804403a3b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7008c9288f1f8c51360eb48804403a3b" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              nlohmann::json data)</span></span>
+            </h3>
+            <p>Inserts a component of the given type into the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>Component data.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a82e3ebbfcc16fc9ba4172e65897a1448"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a82e3ebbfcc16fc9ba4172e65897a1448" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type)</span></span>
+            </h3>
+            <p>Removes the component of the given type from the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9638a8ead6ec5918e7be1041dd9d57a4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">core::<wbr />memory::<wbr />TypeMap</a>&lt;std::unordered_map&lt;std::string, nlohmann::json&gt;&gt;&amp; cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9638a8ead6ec5918e7be1041dd9d57a4" class="m-doc-self">relationsFrom</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets all incoming relations.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Incoming relations.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2d5be75bde244d46b011d09ecfa64f82"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">core::<wbr />memory::<wbr />TypeMap</a>&lt;std::unordered_map&lt;std::string, nlohmann::json&gt;&gt;&amp; cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d5be75bde244d46b011d09ecfa64f82" class="m-doc-self">relationsTo</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets all outgoing relations.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Outgoing relations.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a48c1681dc0dc542cbfa8a9f1aa7cd89f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a48c1681dc0dc542cbfa8a9f1aa7cd89f" class="m-doc-self">relateFrom</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const std::string&amp; entity,
+              nlohmann::json data)</span></span>
+            </h3>
+            <p>Inserts a relation of the given type into the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td>Path to entity which the relation originates from.</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>Relation data.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8bf7591c4166cf3c510d6c1e39eb72b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8bf7591c4166cf3c510d6c1e39eb72b" class="m-doc-self">relateTo</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const std::string&amp; entity,
+              nlohmann::json data)</span></span>
+            </h3>
+            <p>Inserts a relation of the given type into the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td>Path to entity which the relation points to.</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>Relation data.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abe33e38fb3e29b19dfce6057691ceda1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abe33e38fb3e29b19dfce6057691ceda1" class="m-doc-self">unrelateFrom</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const std::string&amp; entity)</span></span>
+            </h3>
+            <p>Removes the relation of the given type from the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td>Path to entity which the relation originates from.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af4e34769d4bfa4140a36c8f19e3766da"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af4e34769d4bfa4140a36c8f19e3766da" class="m-doc-self">unrelateTo</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const std::string&amp; entity)</span></span>
+            </h3>
+            <p>Removes the relation of the given type from the node.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Relation type.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td>Path to entity which the relation points to.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a785ecaaaed80c9e7c3f2eedaf030f3cf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const std::unordered_map&lt;std::string, std::unique_ptr&lt;<a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a785ecaaaed80c9e7c3f2eedaf030f3cf" class="m-doc-self">children</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the map of child nodes.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Child nodes.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9e6f3cb4b96755e10fb617cb372c4f11"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1SceneNode.html" class="m-doc">SceneNode</a>&amp; cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9e6f3cb4b96755e10fb617cb372c4f11" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
+            </h3>
+            <p>Creates a new child node with the given name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Name of the child node.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Child node.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If a child node with the given name already exists, it is returned.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2a3850a1cf5bd4acc42099e23cd5fadd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2a3850a1cf5bd4acc42099e23cd5fadd" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
+            </h3>
+            <p>Destroys the child node with the given name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Name of the child node.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae46bab82250e3c91f3dcbaf29a9220dd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />SceneNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae46bab82250e3c91f3dcbaf29a9220dd" class="m-doc-self">load</a>(</span><span class="m-doc-wrap">const nlohmann::json&amp; json,
+              const <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a>&amp; components,
+              const <a href="classcubos_1_1core_1_1reflection_1_1TypeRegistry.html" class="m-doc">core::<wbr />reflection::<wbr />TypeRegistry</a>&amp; relations)</span></span>
+            </h3>
+            <p>Loads the scene node from a JSON object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json</td>
+                  <td>JSON object.</td>
+                </tr>
+                <tr>
+                  <td>components</td>
+                  <td>Component type registry.</td>
+                </tr>
+                <tr>
+                  <td>relations</td>
+                  <td>Relation type registry.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the scene node was successfully loaded.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
