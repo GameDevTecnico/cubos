@@ -223,6 +223,9 @@ set(CUBOS_ENGINE_SOURCE
 	"src/render/shadows/atlas_rasterizer/atlas_rasterizer.cpp"
 	"src/render/shadows/cascaded/plugin.cpp"
 	"src/render/shadows/cascaded_rasterizer/plugin.cpp"
+	"src/render/particles/particle.cpp"
+	"src/render/particles/spawner.cpp"
+	"src/render/particles/plugin.cpp"
 	"src/render/profiling/plugin.cpp"
 	"src/render/profiling/profiler.cpp"
 
