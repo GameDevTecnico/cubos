@@ -63,6 +63,7 @@ set(CUBOS_CORE_SOURCE
 	"src/reflection/traits/vector.cpp"
 	"src/reflection/traits/wrapper.cpp"
 	"src/reflection/traits/constant.cpp"
+	"src/reflection/traits/categorizable.cpp"
 	"src/reflection/external/primitives.cpp"
 	"src/reflection/external/const.cpp"
 	"src/reflection/external/carray.cpp"
