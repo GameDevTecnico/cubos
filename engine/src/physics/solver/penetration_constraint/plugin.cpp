@@ -6,6 +6,7 @@
 #include <cubos/engine/collisions/contact_manifold.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
+#include <cubos/engine/interpolation/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -80,22 +81,24 @@ static float mixValues(float value1, float value2, PhysicsMaterial::MixProperty 
 }
 
 static void solvePenetrationConstraint(
-    Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&,
-          PenetrationConstraints&, Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&,
-          Velocity&, AngularVelocity&>
+    Query<Entity, const Mass&, const Inertia&, const Interpolated&, const Rotation&, AccumulatedCorrection&, Velocity&,
+          AngularVelocity&, PenetrationConstraints&, Entity, const Mass&, const Inertia&, const Interpolated&,
+          const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&>
         query,
     const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps, const SolverConstants& solverConstants,
     const bool useBias)
 {
     float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
 
-    for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraints, ent2, mass2,
-               inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
+    for (auto [ent1, mass1, inertia1, interp1, rotation1, correction1, velocity1, angVelocity1, constraints, ent2,
+               mass2, inertia2, interp2, rotation2, correction2, velocity2, angVelocity2] : query)
     {
         const Mass* matchedMass1 = &mass1;
         const Mass* matchedMass2 = &mass2;
         const Inertia* matchedInertia1 = &inertia1;
         const Inertia* matchedInertia2 = &inertia2;
+        const Interpolated* matchedInterp1 = &interp1;
+        const Interpolated* matchedInterp2 = &interp2;
         const Rotation* matchedRotation1 = &rotation1;
         const Rotation* matchedRotation2 = &rotation2;
         const AccumulatedCorrection* matchedCorrection1 = &correction1;
@@ -113,6 +116,7 @@ static void solvePenetrationConstraint(
             std::swap(matchedCorrection1, matchedCorrection2);
             std::swap(matchedVelocity1, matchedVelocity2);
             std::swap(matchedAngVelocity1, matchedAngVelocity2);
+            std::swap(matchedInterp1, matchedInterp2);
         }
 
         glm::vec3 v1 = matchedVelocity1->vec;
@@ -126,8 +130,9 @@ static void solvePenetrationConstraint(
             // Separate bodies
             for (PenetrationConstraintPointData& contactPoint : constraint.points)
             {
-                glm::vec3 r1 = matchedRotation1->quat * contactPoint.localAnchor1;
-                glm::vec3 r2 = matchedRotation2->quat * contactPoint.localAnchor2;
+
+                glm::vec3 r1 = interp1.nextRotation * contactPoint.localAnchor1;
+                glm::vec3 r2 = interp2.nextRotation * contactPoint.localAnchor2;
 
                 glm::vec3 deltaSeparation = matchedCorrection2->position + r2 - matchedCorrection1->position - r1;
 
@@ -226,6 +231,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
     cubos.depends(collisionsPlugin);
     cubos.depends(physicsPlugin);
     cubos.depends(physicsSolverPlugin);
+    cubos.depends(interpolationPlugin);
 
     cubos.relation<PenetrationConstraints>();
 
@@ -241,20 +247,18 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
         .after(addPenetrationConstraintTag)
         .before(penetrationConstraintSolveTag)
         .tagged(fixedSubstepTag)
-        .call([](Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&,
-                       AngularVelocity&, PenetrationConstraints&, Entity, const Mass&, const Inertia&, const Rotation&,
-                       AccumulatedCorrection&, Velocity&, AngularVelocity&>
+        .call([](Query<Entity, const Mass&, const Inertia&, AccumulatedCorrection&, Velocity&, AngularVelocity&,
+                       PenetrationConstraints&, Entity, const Mass&, const Inertia&, AccumulatedCorrection&, Velocity&,
+                       AngularVelocity&>
                      query,
                  const SolverConstants& solverConstants) {
-            for (auto [ent1, mass1, inertia1, rotation1, correction1, velocity1, angVelocity1, constraints, ent2, mass2,
-                       inertia2, rotation2, correction2, velocity2, angVelocity2] : query)
+            for (auto [ent1, mass1, inertia1, correction1, velocity1, angVelocity1, constraints, ent2, mass2, inertia2,
+                       correction2, velocity2, angVelocity2] : query)
             {
                 const Mass* matchedMass1 = &mass1;
                 const Mass* matchedMass2 = &mass2;
                 const Inertia* matchedInertia1 = &inertia1;
                 const Inertia* matchedInertia2 = &inertia2;
-                const Rotation* matchedRotation1 = &rotation1;
-                const Rotation* matchedRotation2 = &rotation2;
                 const AccumulatedCorrection* matchedCorrection1 = &correction1;
                 const AccumulatedCorrection* matchedCorrection2 = &correction2;
                 Velocity* matchedVelocity1 = &velocity1;
@@ -266,7 +270,6 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 {
                     std::swap(matchedMass1, matchedMass2);
                     std::swap(matchedInertia1, matchedInertia2);
-                    std::swap(matchedRotation1, matchedRotation2);
                     std::swap(matchedCorrection1, matchedCorrection2);
                     std::swap(matchedVelocity1, matchedVelocity2);
                     std::swap(matchedAngVelocity1, matchedAngVelocity2);
@@ -311,26 +314,26 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
     cubos.system("solve contacts bias")
         .tagged(penetrationConstraintSolveTag)
         .tagged(physicsSolveContactTag)
-        .call([](Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&,
-                       AngularVelocity&, PenetrationConstraints&, Entity, const Mass&, const Inertia&, const Rotation&,
-                       AccumulatedCorrection&, Velocity&, AngularVelocity&>
-                     query,
-                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
-                 const SolverConstants& solverConstants) {
-            solvePenetrationConstraint(query, fixedDeltaTime, substeps, solverConstants, true);
-        });
+        .call(
+            [](Query<Entity, const Mass&, const Inertia&, const Interpolated&, const Rotation&, AccumulatedCorrection&,
+                     Velocity&, AngularVelocity&, PenetrationConstraints&, Entity, const Mass&, const Inertia&,
+                     const Interpolated&, const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&>
+                   query,
+               const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps, const SolverConstants& solverConstants) {
+                solvePenetrationConstraint(query, fixedDeltaTime, substeps, solverConstants, true);
+            });
 
     cubos.system("solve contacts no bias")
         .tagged(penetrationConstraintSolveRelaxTag)
         .tagged(physicsSolveRelaxContactTag)
-        .call([](Query<Entity, const Mass&, const Inertia&, const Rotation&, AccumulatedCorrection&, Velocity&,
-                       AngularVelocity&, PenetrationConstraints&, Entity, const Mass&, const Inertia&, const Rotation&,
-                       AccumulatedCorrection&, Velocity&, AngularVelocity&>
-                     query,
-                 const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
-                 const SolverConstants& solverConstants) {
-            solvePenetrationConstraint(query, fixedDeltaTime, substeps, solverConstants, false);
-        });
+        .call(
+            [](Query<Entity, const Mass&, const Inertia&, const Interpolated&, const Rotation&, AccumulatedCorrection&,
+                     Velocity&, AngularVelocity&, PenetrationConstraints&, Entity, const Mass&, const Inertia&,
+                     const Interpolated&, const Rotation&, AccumulatedCorrection&, Velocity&, AngularVelocity&>
+                   query,
+               const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps, const SolverConstants& solverConstants) {
+                solvePenetrationConstraint(query, fixedDeltaTime, substeps, solverConstants, false);
+            });
 
     cubos.system("add restitution")
         .tagged(penetrationConstraintRestitutionTag)
@@ -423,18 +426,18 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
         .tagged(addPenetrationConstraintTag)
         .tagged(physicsPrepareSolveTag)
         .call([](Commands cmds,
-                 Query<Entity, const Mass&, const Inertia&, const CenterOfMass&, const Rotation&, const Velocity&,
-                       const AngularVelocity&, const PhysicsMaterial&, const CollidingWith&, Entity, const Mass&,
-                       const Inertia&, const CenterOfMass&, const Rotation&, const Velocity&, const AngularVelocity&,
-                       const PhysicsMaterial&>
+                 Query<Entity, const Mass&, const Inertia&, const CenterOfMass&, const Interpolated&, const Rotation&,
+                       const Velocity&, const AngularVelocity&, const PhysicsMaterial&, const CollidingWith&, Entity,
+                       const Mass&, const Inertia&, const CenterOfMass&, const Interpolated&, const Rotation&,
+                       const Velocity&, const AngularVelocity&, const PhysicsMaterial&>
                      query,
                  const FixedDeltaTime& fixedDeltaTime, const Substeps& substeps,
                  const SolverConstants& solverConstants) {
             float subDeltaTime = fixedDeltaTime.value / (float)substeps.value;
             float contactHertz = glm::min(solverConstants.minContactHertz, 0.25F * (1.0F / subDeltaTime));
 
-            for (auto [ent1, mass1, inertia1, centerOfMass1, rotation1, velocity1, angVelocity1, material1,
-                       collidingWith, ent2, mass2, inertia2, centerOfMass2, rotation2, velocity2, angVelocity2,
+            for (auto [ent1, mass1, inertia1, centerOfMass1, interp1, rotation1, velocity1, angVelocity1, material1,
+                       collidingWith, ent2, mass2, inertia2, centerOfMass2, interp2, rotation2, velocity2, angVelocity2,
                        material2] : query)
             {
                 const Mass* matchedMass1 = &mass1;
@@ -443,6 +446,8 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                 const Inertia* matchedInertia2 = &inertia2;
                 const CenterOfMass* matchedCenterOfMass1 = &centerOfMass1;
                 const CenterOfMass* matchedCenterOfMass2 = &centerOfMass2;
+                const Interpolated* matchedInterp1 = &interp1;
+                const Interpolated* matchedInterp2 = &interp2;
                 const Rotation* matchedRotation1 = &rotation1;
                 const Rotation* matchedRotation2 = &rotation2;
                 const Velocity* matchedVelocity1 = &velocity1;
@@ -461,6 +466,7 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                     std::swap(matchedVelocity1, matchedVelocity2);
                     std::swap(matchedAngVelocity1, matchedAngVelocity2);
                     std::swap(matchedMaterial1, matchedMaterial2);
+                    std::swap(matchedInterp1, matchedInterp2);
                 }
 
                 std::vector<PenetrationConstraint> penConstraints;
@@ -483,8 +489,8 @@ void cubos::engine::penetrationConstraintPlugin(Cubos& cubos)
                         pointData.localAnchor1 = point.localOn1 - matchedCenterOfMass1->vec;
                         pointData.localAnchor2 = point.localOn2 - matchedCenterOfMass2->vec;
 
-                        glm::vec3 r1 = matchedRotation1->quat * pointData.localAnchor1;
-                        glm::vec3 r2 = matchedRotation2->quat * pointData.localAnchor2;
+                        glm::vec3 r1 = matchedInterp1->nextRotation * pointData.localAnchor1;
+                        glm::vec3 r2 = matchedInterp2->nextRotation * pointData.localAnchor2;
 
                         pointData.fixedAnchor1 = r1;
                         pointData.fixedAnchor2 = r2;
