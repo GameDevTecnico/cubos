@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <cubos/bindings/lua/plugin.hpp>
 #include <lua.hpp>
 
@@ -46,16 +48,58 @@ static void loadScripts(std::string_view path, State& state)
             }
             else if (child->name().ends_with(".lua"))
             {
-                std::string contents;
-                {
-                    auto stream = child->open(cubos::core::data::File::OpenMode::Read);
-                    stream->readUntil(contents, nullptr);
-                }
-                luaL_dostring(state.luaState, contents.c_str());
+                std::string moduleName = std::string{child->path().substr(
+                    ScriptsMountPoint.length() + 1, child->path().length() - 5 - ScriptsMountPoint.length())};
+                std::replace(moduleName.begin(), moduleName.end(), '/', '.');
+                std::string execString = std::string{"require('"} + moduleName + "')";
+                luaL_dostring(state.luaState, execString.c_str());
             }
             child = child->sibling();
         }
     }
+}
+
+static int searchModule(lua_State* state)
+{
+    const char* moduleName = luaL_checkstring(state, 1);
+    std::string module = moduleName;
+    std::replace(module.begin(), module.end(), '.', '/');
+    module = module + ".lua";
+
+    lua_pushstring(state, "scriptsPath");
+    lua_gettable(state, LUA_REGISTRYINDEX);
+    std::string filePath = lua_tostring(state, -1);
+    filePath.push_back('/');
+    filePath.append(module);
+
+    auto script = FileSystem::find(filePath);
+    if (script != nullptr && !script->directory() && script->name().ends_with(".lua"))
+    {
+        std::string contents;
+        {
+            auto stream = script->open(cubos::core::data::File::OpenMode::Read);
+            stream->readUntil(contents, nullptr);
+        }
+        luaL_loadstring(state, contents.c_str());
+        return 1;
+    }
+    CUBOS_ERROR("Lua module {} not found!", moduleName);
+    lua_pushnil(state);
+    return 1;
+}
+
+static void setupCustomLoader(lua_State* state)
+{
+    lua_pushstring(state, "scriptsPath");
+    lua_pushstring(state, ScriptsMountPoint.data());
+    lua_settable(state, LUA_REGISTRYINDEX);
+
+    lua_getglobal(state, "package");
+    lua_newtable(state);
+    lua_pushcfunction(state, searchModule);
+    lua_rawseti(state, -2, 1);
+    lua_setfield(state, -2, "loaders");
+    lua_pop(state, lua_gettop(state));
 }
 
 void cubos::bindings::lua::luaBindingsPlugin(Cubos& cubos)
@@ -67,6 +111,7 @@ void cubos::bindings::lua::luaBindingsPlugin(Cubos& cubos)
     cubos.startupSystem("initialize lua bindings").before(settingsTag).call([](Commands cmds) {
         lua_State* state = luaL_newstate();
         luaL_openlibs(state);
+        setupCustomLoader(state);
         // TODO: add custom cubos functions here
         cmds.emplaceResource<State>(state);
     });
