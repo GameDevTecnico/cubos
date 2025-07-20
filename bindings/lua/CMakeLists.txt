@@ -10,7 +10,9 @@ message("# Building cubos::bindings::lua samples " ${CUBOS_LUA_SAMPLES})
 # ----------------------- Define lua bindings source files -----------------------
 
 set(LUA_BINDINGS_SOURCE
+    "src/cubos.cpp"
     "src/plugin.cpp"
+    "src/systems.cpp"
 )
 
 # ------------------------ Configure lua bindings target -------------------------

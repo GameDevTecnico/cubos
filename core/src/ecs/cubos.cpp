@@ -452,6 +452,11 @@ bool Cubos::shouldQuit() const
     return mWorld->resource<ShouldQuit>().value;
 }
 
+cubos::core::ecs::World& Cubos::world()
+{
+    return *mWorld;
+}
+
 bool Cubos::isRegistered(const reflection::Type& type) const
 {
     return (mTypeToPlugin.contains(type) && this->isKnownPlugin(mTypeToPlugin.at(type), mPluginStack.back())) ||
