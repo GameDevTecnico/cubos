@@ -1,38 +1,22 @@
+#include <cubos/bindings/lua/cubos.hpp>
 #include <cubos/bindings/lua/plugin.hpp>
 #include <lua.hpp>
 
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
+#include <cubos/core/ecs/system/arguments/plugins.hpp>
 
 #include <cubos/engine/settings/plugin.hpp>
 
 using namespace cubos::engine;
 using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
+using cubos::core::ecs::Plugins;
 
 static constexpr std::string_view ScriptsMountPoint = "/scripts/lua";
+static lua_State* sLuaState = nullptr;
 
-namespace
-{
-    struct State
-    {
-        CUBOS_ANONYMOUS_REFLECT(State);
-
-        lua_State* luaState;
-
-        State(lua_State* state)
-            : luaState(state)
-        {
-        }
-
-        ~State()
-        {
-            lua_close(luaState);
-        }
-    };
-} // namespace
-
-static void loadScripts(std::string_view path, State& state)
+static void loadScripts(std::string_view path, lua_State* state)
 {
     auto directory = FileSystem::find(path);
     if (directory != nullptr && directory->directory())
@@ -51,7 +35,7 @@ static void loadScripts(std::string_view path, State& state)
                     auto stream = child->open(cubos::core::data::File::OpenMode::Read);
                     stream->readUntil(contents, nullptr);
                 }
-                luaL_dostring(state.luaState, contents.c_str());
+                luaL_dostring(state, contents.c_str());
             }
             child = child->sibling();
         }
@@ -62,16 +46,17 @@ void cubos::bindings::lua::luaBindingsPlugin(Cubos& cubos)
 {
     cubos.depends(settingsPlugin);
 
-    cubos.uninitResource<State>();
-
-    cubos.startupSystem("initialize lua bindings").before(settingsTag).call([](Commands cmds) {
-        lua_State* state = luaL_newstate();
-        luaL_openlibs(state);
-        // TODO: add custom cubos functions here
-        cmds.emplaceResource<State>(state);
+    cubos.startupSystem("initialize lua bindings").before(settingsTag).call([&cubos] {
+        if (sLuaState != nullptr)
+        {
+            lua_close(sLuaState);
+        }
+        sLuaState = luaL_newstate();
+        luaL_openlibs(sLuaState);
+        injectCubos(sLuaState, &cubos);
     });
 
-    cubos.startupSystem("load lua scripts").after(settingsTag).call([](Settings& settings, State& state) {
+    cubos.startupSystem("load lua scripts").after(settingsTag).call([](Settings& settings, Plugins plugins) {
         std::string scriptsPath = settings.getString("scripts.lua.app.osPath", "");
         if (!scriptsPath.empty())
         {
@@ -85,7 +70,10 @@ void cubos::bindings::lua::luaBindingsPlugin(Cubos& cubos)
                 CUBOS_ERROR("Couldn't mount scripts directory with path {}", scriptsPath);
             }
 
-            loadScripts(ScriptsMountPoint, state);
+            plugins.add([](Cubos& other) {
+                (void)other;
+                loadScripts(ScriptsMountPoint, sLuaState);
+            });
         }
     });
 }
