@@ -1,0 +1,36 @@
+{
+    "content": [
+        {
+            "content": [
+                {
+                    "split": {
+                        "ratio": 0.25,
+                        "direction": "left"
+                    },
+                    "content": [
+                        "Asset Explorer"
+                    ]
+                },
+                {
+                    "split": {
+                        "ratio": 0.25,
+                        "direction": "right"
+                    },
+                    "content": [
+                        "Debugger"
+                    ]
+                }
+            ]
+        },
+        {
+            "split": {
+                "ratio": 0.25,
+                "direction": "down"
+            },
+            "content": [
+                "Project",
+                "Importer"
+            ]
+        }
+    ]
+}
