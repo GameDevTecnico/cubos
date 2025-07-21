@@ -1,6 +1,7 @@
 #include "plugin.hpp"
 
 #include <imgui_internal.h>
+#include <nlohmann/json.hpp>
 
 #include <cubos/core/ecs/reflection.hpp>
 
@@ -8,24 +9,15 @@
 #include <cubos/engine/imgui/plugin.hpp>
 
 #include "../menu_bar/plugin.hpp"
+#include "layout.hpp"
 
 using namespace cubos::engine;
 using namespace tesseratos;
-
-// CUBOS_REFLECT_IMPL(LayoutState)
-// {
-//     return cubos::core::ecs::TypeBuilder<LayoutState>("tesseratos::LayoutState")
-//         .withField("isReady", &LayoutState::isReady)
-//         .withField("layout", &LayoutState::layout)
-//         .build();
-// }
 
 void tesseratos::layoutPlugin(Cubos& cubos)
 {
     cubos.depends(imguiPlugin);
     cubos.depends(menuBarPlugin);
-
-    // cubos.resource<LayoutState>();
 
     cubos.system("setup Dockspace").tagged(imguiTag).call([](LayoutState& state) {
         // make DockSpace fullscreen
@@ -49,6 +41,46 @@ void tesseratos::layoutPlugin(Cubos& cubos)
 
         if (!state.isReady && ImGui::GetFrameCount() > 1)
         {
+
+            auto testLayout = R"(
+                {
+                    "content": [
+                        {
+                            "content": [
+                                {
+                                    "split": {
+                                        "ratio": 0.25,
+                                        "direction": "left"
+                                    },
+                                    "content": [
+                                        "Asset Explorer"
+                                    ]
+                                },
+                                {
+                                    "split": {
+                                        "ratio": 0.25,
+                                        "direction": "right"
+                                    },
+                                    "content": [
+                                        "Debugger"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "split": {
+                                "ratio": 0.25,
+                                "direction": "down"
+                            },
+                            "content": [
+                                "Project",
+                                "Importer"
+                            ]
+                        }
+                    ]
+                }
+            )"_json;
+
             state.isReady = true;
 
             // Remove any existing layout
@@ -56,29 +88,8 @@ void tesseratos::layoutPlugin(Cubos& cubos)
             ImGui::DockBuilderAddNode(dockspaceId, ImGuiDockNodeFlags_DockSpace);
             ImGui::DockBuilderSetNodeSize(dockspaceId, ImGui::GetMainViewport()->Size);
 
-            // Split the dockspace into 3 parts:
-            ImGuiID dockMainId = dockspaceId;
-            ImGuiID dockBottom = ImGui::DockBuilderSplitNode(dockMainId, ImGuiDir_Down, 0.25f, nullptr, &dockMainId);
-            ImGuiID dockLeft = ImGui::DockBuilderSplitNode(dockMainId, ImGuiDir_Left, 0.25f, nullptr, &dockMainId);
-            ImGuiID dockRight = ImGui::DockBuilderSplitNode(dockMainId, ImGuiDir_Right, 0.25f, nullptr, &dockMainId);
-
-            // Dock windows (assumes these windows exist and are created somewhere else)
-            // ImGui::DockBuilderDockWindow("Viewport", dockMainId);
-
-            if (state.layout == 1)
-            {
-                ImGui::DockBuilderDockWindow("Asset Explorer", dockLeft);
-                ImGui::DockBuilderDockWindow("Debugger", dockRight);
-                ImGui::DockBuilderDockWindow("Project", dockBottom);
-                ImGui::DockBuilderDockWindow("Importer", dockBottom);
-            }
-            else if (state.layout == 2)
-            {
-                ImGui::DockBuilderDockWindow("Asset Explorer", dockLeft);
-                ImGui::DockBuilderDockWindow("Debugger", dockLeft);
-                ImGui::DockBuilderDockWindow("Project", dockRight);
-                ImGui::DockBuilderDockWindow("Importer", dockRight);
-            }
+            Layout l1 = Layout::loadFromJson(testLayout);
+            l1.applyToImGui(dockspaceId);
 
             ImGui::DockBuilderFinish(dockspaceId);
         }
