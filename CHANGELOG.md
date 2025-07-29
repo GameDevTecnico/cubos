@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Render timers in metrics panel (#1565, **@tomas7770**).
 - Custom module loader for lua scripts (#1517, **@mkuritsu**).
 - Added possibility of creating basic systems in lua scripts (#1518, **@mkuritsu**)
+- Sane default placement for tools in tesseratos (#1387, **@jdbaracho**).
+- Layout structure with loading and ImGui application (#1387, **@jdbaracho**).
 
 ### Changed
 
