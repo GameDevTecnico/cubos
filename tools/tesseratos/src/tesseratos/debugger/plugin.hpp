@@ -21,11 +21,11 @@ namespace tesseratos
     /// - @ref Debugger - contains connection information.
 
     /// @brief Tool state.
-    struct DebuggerTool
+    struct Debugger
     {
         CUBOS_REFLECT;
 
-        bool isOpen{false};
+        bool isOpen{true};
     };
 
     /// @brief Plugin entry function.

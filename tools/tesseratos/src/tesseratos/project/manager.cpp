@@ -20,7 +20,7 @@ CUBOS_REFLECT_IMPL(tesseratos::ProjectManager::State)
         .with(ConstructibleTrait::typed<State>().withMoveConstructor().build());
 }
 
-tesseratos::ProjectManager::ProjectManager(State& state, cubos::engine::Assets& assets, Debugger& debugger)
+tesseratos::ProjectManager::ProjectManager(State& state, cubos::engine::Assets& assets, DebuggerSession& debugger)
     : mState(state)
     , mAssets(assets)
     , mDebugger(debugger)
