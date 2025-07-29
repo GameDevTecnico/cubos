@@ -21,7 +21,7 @@ namespace tesseratos
         CUBOS_REFLECT;
 
         bool isReady{false};
-        int layout = 1;
+        std::string layout;
     };
 
     /// @brief Plugin entry function.
