@@ -101,17 +101,14 @@ void tesseratos::menuBarPlugin(Cubos& cubos)
                     ImGui::MenuItem("Voxel Pallete Editor", "", &voxelPalleteEditor.isOpen, false);
                     ImGui::Separator();
 
-                    if (ImGui::Button("Layout 1"))
-                    {
-                        layout.isReady = false;
-                        layout.layout = 1;
-                    }
-                    ImGui::SameLine();
-                    if (ImGui::Button("Layout 2"))
-                    {
-                        layout.isReady = false;
-                        layout.layout = 2;
-                    }
+                    // TODO: implement changing layout
+                    // if (ImGui::Button("Layout 1"))
+                    // {
+                    // }
+                    // ImGui::SameLine();
+                    // if (ImGui::Button("Layout 2"))
+                    // {
+                    // }
 
                     ImGui::EndMenu();
                 }

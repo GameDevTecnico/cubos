@@ -9,6 +9,7 @@
 #include <cubos/engine/imgui/plugin.hpp>
 
 #include "../menu_bar/plugin.hpp"
+#include "../layout_bridge/plugin.hpp"
 #include "layout.hpp"
 
 using namespace cubos::engine;
@@ -18,6 +19,8 @@ void tesseratos::layoutPlugin(Cubos& cubos)
 {
     cubos.depends(imguiPlugin);
     cubos.depends(menuBarPlugin);
+
+    cubos.plugin(layoutBridgePlugin);
 
     cubos.system("setup Dockspace").tagged(imguiTag).call([](LayoutState& state) {
         // make DockSpace fullscreen
@@ -41,46 +44,6 @@ void tesseratos::layoutPlugin(Cubos& cubos)
 
         if (!state.isReady && ImGui::GetFrameCount() > 1)
         {
-
-            auto testLayout = R"(
-                {
-                    "content": [
-                        {
-                            "content": [
-                                {
-                                    "split": {
-                                        "ratio": 0.25,
-                                        "direction": "left"
-                                    },
-                                    "content": [
-                                        "Asset Explorer"
-                                    ]
-                                },
-                                {
-                                    "split": {
-                                        "ratio": 0.25,
-                                        "direction": "right"
-                                    },
-                                    "content": [
-                                        "Debugger"
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "split": {
-                                "ratio": 0.25,
-                                "direction": "down"
-                            },
-                            "content": [
-                                "Project",
-                                "Importer"
-                            ]
-                        }
-                    ]
-                }
-            )"_json;
-
             state.isReady = true;
 
             // Remove any existing layout
@@ -88,7 +51,8 @@ void tesseratos::layoutPlugin(Cubos& cubos)
             ImGui::DockBuilderAddNode(dockspaceId, ImGuiDockNodeFlags_DockSpace);
             ImGui::DockBuilderSetNodeSize(dockspaceId, ImGui::GetMainViewport()->Size);
 
-            Layout l1 = Layout::loadFromJson(testLayout);
+            // Load new layout
+            Layout l1 = Layout::loadFromJson(nlohmann::json::parse(state.layout));
             l1.applyToImGui(dockspaceId);
 
             ImGui::DockBuilderFinish(dockspaceId);
