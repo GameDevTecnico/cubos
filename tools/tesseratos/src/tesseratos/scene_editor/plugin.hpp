@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cubos/engine/prelude.hpp>
+#include <cubos/engine/scene/node.hpp>
 
 namespace tesseratos
 {
@@ -24,6 +25,9 @@ namespace tesseratos
         CUBOS_REFLECT;
 
         bool isOpen{false};
+
+        /// @brief Root node of the current scene.
+        cubos::engine::SceneNode sceneRoot;
     };
 
     /// @brief Plugin entry function.

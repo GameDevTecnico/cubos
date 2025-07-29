@@ -25,6 +25,8 @@ namespace cubos::engine
     /// A scene node represents an entity, its components and relations, and its children entities.
     /// Optionally, a node may inherit data (components, relations and children) from a root scene node of another
     /// scene asset.
+    ///
+    /// @ingroup scene-plugin
     class CUBOS_ENGINE_API SceneNode
     {
     public:
