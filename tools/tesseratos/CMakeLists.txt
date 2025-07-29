@@ -12,6 +12,7 @@ set(TESSERATOS_SOURCE
 	"src/tesseratos/menu_bar/plugin.cpp"
 	"src/tesseratos/layout/plugin.cpp"
 	"src/tesseratos/layout/layout.cpp"
+	"src/tesseratos/layout_bridge/plugin.cpp"
 	"src/tesseratos/debugger/plugin.cpp"
 	"src/tesseratos/debugger/debugger.cpp"
 	"src/tesseratos/project/plugin.cpp"
