@@ -43,7 +43,7 @@ void tesseratos::menuBarPlugin(Cubos& cubos)
 
     cubos.system("setup Menu Bar")
         .tagged(imguiTag)
-        .call([](LayoutState& layout, AssetExplorer& assetExplorer, Debugger& debugger, Project& project,
+        .call([](AssetExplorer& assetExplorer, Debugger& debugger, Project& project,
                  Importer& importer, SceneEditor& sceneEditor, VoxelPalleteEditor& voxelPalleteEditor) {
             ImGui::Begin("Tesseratos");
 
