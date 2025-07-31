@@ -3,11 +3,13 @@
 #include <glm/glm.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/collisions/collider_bundle.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/voxel.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
+#include <cubos/engine/physics/rigid_body_bundle.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 
 CUBOS_DEFINE_TAG(cubos::engine::physicsApplyForcesTag);
@@ -78,6 +80,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.component<AccumulatedCorrection>();
     cubos.component<PhysicsMaterial>();
     cubos.component<PhysicsBundle>();
+    cubos.component<RigidBodyBundle>();
 
     cubos.observer("unpack PhysicsBundle's")
         .onAdd<PhysicsBundle>()
@@ -120,6 +123,56 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 cmds.add(ent, angularImpulse);
                 cmds.add(ent, AccumulatedCorrection{});
                 cmds.add(ent, bundle.material);
+            }
+        });
+
+    cubos.observer("unpack RigidBodyBundle's")
+        .onAdd<RigidBodyBundle>()
+        .call([](Commands cmds, Query<Entity, const RigidBodyBundle&> query) {
+            for (auto [ent, bundle] : query)
+            {
+                cmds.remove<RigidBodyBundle>(ent);
+
+                auto force = Force{};
+                force.add(bundle.force);
+
+                auto torque = Torque{};
+                torque.add(bundle.torque);
+
+                auto impulse = Impulse{};
+                impulse.add(bundle.impulse);
+
+                auto angularImpulse = AngularImpulse{};
+                angularImpulse.add(bundle.angularImpulse);
+
+                cmds.add(ent, Mass{.mass = bundle.mass, .inverseMass = 1.0F / bundle.mass});
+                cmds.add(ent, CenterOfMass{.vec = bundle.centerOfMass});
+                if (!bundle.autoInertiaTensor)
+                {
+                    cmds.add(ent, Inertia{.inertia = bundle.inertiaTensor,
+                                          .inverseInertia = glm::inverse(bundle.inertiaTensor),
+                                          .autoUpdate = false});
+                }
+                else
+                {
+                    cmds.add(
+                        ent,
+                        Inertia{.inertia = glm::mat3(0.0F), .inverseInertia = glm::mat3(0.0F), .autoUpdate = true});
+                }
+                cmds.add(ent, Velocity{.vec = bundle.velocity});
+                cmds.add(ent, AngularVelocity{.vec = bundle.angularVelocity});
+                cmds.add(ent, force);
+                cmds.add(ent, torque);
+                cmds.add(ent, impulse);
+                cmds.add(ent, angularImpulse);
+                cmds.add(ent, AccumulatedCorrection{});
+                cmds.add(ent, bundle.material);
+
+                cmds.add(ent, ColliderBundle{.isArea = false,
+                                             .isStatic = false,
+                                             .isActive = bundle.isActive,
+                                             .layers = bundle.layers,
+                                             .mask = bundle.mask});
             }
         });
 

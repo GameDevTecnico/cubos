@@ -128,6 +128,7 @@ set(CUBOS_ENGINE_SOURCE
 	"src/physics/components/impulse.cpp"
 	"src/physics/components/angular_impulse.cpp"
 	"src/physics/components/physics_material.cpp"
+	"src/physics/components/rigid_body_bundle.cpp"
 
 	"src/input/plugin.cpp"
 	"src/input/input.cpp"

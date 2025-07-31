@@ -3,6 +3,7 @@
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
+#include <cubos/engine/physics/rigid_body_bundle.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
@@ -85,7 +86,7 @@ int main(int argc, char** argv)
             // Create the car entity
             cmds.create()
                 .add(RenderVoxelGrid{CarAsset, offset})
-                .add(PhysicsBundle{.mass = 500.0F})
+                .add(RigidBodyBundle{.mass = 500.0F})
                 .add(Position{{0.0F, 0.0F, 0.0F}})
                 .add(LocalToWorld{});
         });

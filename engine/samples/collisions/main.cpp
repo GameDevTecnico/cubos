@@ -16,6 +16,7 @@
 #include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
+#include <cubos/engine/physics/rigid_body_bundle.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
@@ -117,21 +118,19 @@ int main(int argc, char** argv)
     cubos.startupSystem("create colliders").call([](State& state, Commands commands) {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(ColliderBundle{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 1.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 1.0F}})
                       .entity();
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
         state.b = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(ColliderBundle{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, -1.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, -1.0F}})
                       .entity();
         state.bRotationAxis = glm::sphericalRand(1.0F);
     });
