@@ -2,6 +2,8 @@
 
 #include <imgui_internal.h>
 
+#include <utility>
+
 using tesseratos::Layout;
 using tesseratos::LayoutNode;
 
@@ -33,17 +35,17 @@ LayoutNode LayoutNode::loadFromJson(nlohmann::json json)
             split.direction = LayoutNode::direction(el["split"]["direction"]);
             split.content = std::make_unique<LayoutNode>(LayoutNode::loadFromJson(el));
 
-            node.windowSplits.emplace_back(std::move(split));
+            node.mWindowSplits.emplace_back(std::move(split));
         }
         else
         {
             if (el.is_object())
             {
-                node.content = std::make_unique<LayoutNode>(LayoutNode::loadFromJson(el));
+                node.mContent = std::make_unique<LayoutNode>(LayoutNode::loadFromJson(el));
             }
             else if (el.is_string())
             {
-                node.windows.push_back(el);
+                node.mWindows.push_back(el);
             }
             else
             {
@@ -59,16 +61,18 @@ LayoutNode LayoutNode::loadFromJson(nlohmann::json json)
 void LayoutNode::applyToImGui(const ImGuiID root)
 {
     ImGuiID newRoot = root;
-    for (const auto& split : this->windowSplits)
+    for (const auto& split : this->mWindowSplits)
     {
         ImGuiID splitRoot = ImGui::DockBuilderSplitNode(root, split.direction, split.ratio, nullptr, &newRoot);
         split.content->applyToImGui(splitRoot);
     }
 
-    if (this->content)
-        this->content->applyToImGui(newRoot);
+    if (this->mContent)
+    {
+        this->mContent->applyToImGui(newRoot);
+    }
 
-    for (const auto window : this->windows)
+    for (const auto& window : this->mWindows)
     {
         ImGui::DockBuilderDockWindow(window.c_str(), newRoot);
     }
@@ -78,25 +82,21 @@ Layout Layout::loadFromJson(nlohmann::json json)
 {
     Layout newLayout;
 
-    newLayout.content = std::make_unique<LayoutNode>(LayoutNode::loadFromJson(json));
+    newLayout.mContent = std::make_unique<LayoutNode>(LayoutNode::loadFromJson(std::move(json)));
 
     return newLayout;
 }
 
 void Layout::applyToImGui(const ImGuiID root)
 {
-    this->content->applyToImGui(root);
+    this->mContent->applyToImGui(root);
 }
 
 ImGuiDir LayoutNode::direction(const std::string dir)
 {
-    if (dir == "up")
-        return ImGuiDir_Up;
-    if (dir == "down")
-        return ImGuiDir_Down;
-    if (dir == "left")
-        return ImGuiDir_Left;
-    if (dir == "right")
-        return ImGuiDir_Right;
+    if (dir == "up") { return ImGuiDir_Up; }
+    if (dir == "down") { return ImGuiDir_Down; }
+    if (dir == "left") { return ImGuiDir_Left; }
+    if (dir == "right") { return ImGuiDir_Right; }
     return ImGuiDir_None;
 }
