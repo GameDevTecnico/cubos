@@ -52,3 +52,5 @@ endfunction()
 
 # Add samples
 make_sample(DIR "hello_world" ASSETS)
+make_sample(DIR "modules" ASSETS)
+make_sample(DIR "systems" ASSETS)

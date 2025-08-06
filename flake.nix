@@ -21,6 +21,7 @@
           xorg.libXi
           xorg.libXdmcp
           libpulseaudio
+          wayland
         ];
       in
       {
@@ -66,10 +67,6 @@
             mkdir -p $EM_CACHE
             cp -r $EMSCRIPTEN/cache/* $EM_CACHE
             chmod u+rwx -R $EM_CACHE
-
-            if [ -n "$WAYLAND_DISPLAY" ]; then
-              LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$(nix-build '<nixpkgs>' -A wayland --no-out-link)/lib"
-            fi
           '';
         };
 

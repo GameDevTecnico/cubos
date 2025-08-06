@@ -15,6 +15,15 @@ namespace cubos::engine
     /// @defgroup render-profiling-plugin RenderProfiling
     /// @ingroup render-plugins
     /// @brief Adds and manages the @ref RenderProfiler resource.
+    ///
+    /// ## Settings
+    /// - `render.profiling` - whether profiling should be enabled (default: `false`).
+    ///
+    /// ## Resources
+    /// - @ref RenderProfiler - holds settings for render performance profiling.
+    ///
+    /// ## Dependencies
+    /// - @ref settings-plugin
 
     /// @brief Plugin entry function.
     /// @param cubos @b Cubos main class.

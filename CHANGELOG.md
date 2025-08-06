@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for MaskTrait types in JSON (de)serializer (#1507, **@RiscadoA**).
 - Sane default placement for tools in tesseratos (#1387, **@jdbaracho**).
 - Layout structure with loading and ImGui application (#1387, **@jdbaracho**).
+- Render timers in metrics panel (#1565, **@tomas7770**).
+- Custom module loader for lua scripts (#1517, **@mkuritsu**).
+- Added possibility of creating basic systems in lua scripts (#1518, **@mkuritsu**)
 
 ### Changed
 
@@ -58,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Transform Gizmos rendered in wrong location when splitting the screen (#1148, **@tomas7770**).
 - GL timer result always being 0 (#1486, **@tomas7770**).
 - Metrics being popped in the wrong order (**@tomas7770**).
+- Updated doctest version to fix build failures in cmake >= 4.0 (**@mkuritsu**).
 
 ## [v0.7.0] - 2025-05-03
 

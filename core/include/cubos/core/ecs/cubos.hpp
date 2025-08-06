@@ -255,6 +255,10 @@ namespace cubos::core::ecs
         /// @return Whether the application should quit.
         bool shouldQuit() const;
 
+        /// @brief Returns the ECS world used.
+        /// @return The internal ECS world.
+        World& world();
+
     private:
         /// @brief Stores information regarding a plugin.
         struct PluginInfo
