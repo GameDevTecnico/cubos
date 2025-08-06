@@ -25,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Profiling timers in render plugins (#1560, **@tomas7770**).
 - Quaternion representation mode switch on the inspector (#1520, **@RiscadoA**).
 - Support for MaskTrait types in JSON (de)serializer (#1507, **@RiscadoA**).
+- Sane default placement for tools in tesseratos (#1387, **@jdbaracho**).
+- Layout structure with loading and ImGui application (#1387, **@jdbaracho**).
 - Render timers in metrics panel (#1565, **@tomas7770**).
 - Custom module loader for lua scripts (#1517, **@mkuritsu**).
 - Added possibility of creating basic systems in lua scripts (#1518, **@mkuritsu**)

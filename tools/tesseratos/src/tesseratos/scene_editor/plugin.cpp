@@ -36,10 +36,10 @@ using cubos::engine::Selection;
 
 using namespace tesseratos;
 
-CUBOS_REFLECT_IMPL(SceneEditorTool)
+CUBOS_REFLECT_IMPL(SceneEditor)
 {
-    return cubos::core::ecs::TypeBuilder<SceneEditorTool>("SceneEditorTool")
-        .withField("isOpen", &SceneEditorTool::isOpen)
+    return cubos::core::ecs::TypeBuilder<SceneEditor>("tesseratos::SceneEditor")
+        .withField("isOpen", &SceneEditor::isOpen)
         .build();
 }
 
@@ -444,12 +444,12 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
 
     cubos.depends(assetExplorerPlugin);
 
-    cubos.resource<SceneEditorTool>();
+    cubos.resource<SceneEditor>();
     cubos.resource<State>();
 
     // cubos.system("open Scene Editor on asset selection")
     //     .call([](cubos::core::ecs::EventReader<AssetSelectedEvent> reader, Commands commands, const Assets& assets,
-    //              State& state, SceneEditorTool& tool) {
+    //              State& state, SceneEditor& tool) {
     //         for (const auto& event : reader)
     //         {
     //             if (assets.type(event.asset).is<Scene>())
@@ -464,10 +464,10 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
     //     });
 
     // cubos.system("show Scene Editor UI")
-    //     .onlyIf([](SceneEditorTool& tool) { return tool.isOpen; })
+    //     .onlyIf([](SceneEditor& tool) { return tool.isOpen; })
     //     .tagged(cubos::engine::imguiTag)
     //     .call([](const World& world, Assets& assets, Commands cmds, State& state, Selection& selection,
-    //         SceneEditorTool& tool) {
+    //         SceneEditor& tool) {
 
     //         ImGui::Begin("Scene Editor", &tool.isOpen);
     //         if (state.asset == nullptr)
