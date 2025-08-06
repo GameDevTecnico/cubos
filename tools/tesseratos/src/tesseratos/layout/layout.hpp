@@ -23,7 +23,7 @@ namespace tesseratos
         static LayoutNode createFromImGui();
         static LayoutNode loadFromJson(nlohmann::json json);
 
-        void applyToImGui(const ImGuiID root);
+        void applyToImGui(ImGuiID root);
 
     private:
         struct Split
@@ -33,9 +33,9 @@ namespace tesseratos
             std::unique_ptr<LayoutNode> content;
         };
 
-        std::vector<Split> windowSplits;
-        std::unique_ptr<LayoutNode> content;
-        std::vector<std::string> windows;
+        std::vector<Split> mWindowSplits;
+        std::unique_ptr<LayoutNode> mContent;
+        std::vector<std::string> mWindows;
 
         static ImGuiDir direction(std::string dir);
     };
@@ -47,9 +47,9 @@ namespace tesseratos
         static LayoutNode createFromImGui();
         static Layout loadFromJson(nlohmann::json json);
 
-        void applyToImGui(const ImGuiID root);
+        void applyToImGui(ImGuiID root);
 
     private:
-        std::unique_ptr<LayoutNode> content;
+        std::unique_ptr<LayoutNode> mContent;
     };
 } // namespace tesseratos
