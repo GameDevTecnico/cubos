@@ -109,6 +109,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a99ef76466a0571a796d133822102bfa6" class="m-doc">depends</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs.html#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
             </dt>
             <dd>Marks the given plugin as a dependency of the current plugin.</dd>
+            <dt id="ac41a4a1f94a832fb498c11de3928d3a7">
+              <span class="m-doc-wrap-bumper">void <a href="#ac41a4a1f94a832fb498c11de3928d3a7" class="m-doc-self">named</a>(</span><span class="m-doc-wrap">std::string name)</span>
+            </dt>
+            <dd>Sets the name of the current plugin to the given name.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#acf8cb94306635aabd3db4f8b026c7f24" class="m-doc">inject</a>(</span><span class="m-doc-wrap"><a href="group__core-ecs.html#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> target,
               <a href="group__core-ecs.html#ga2238d3875336b07640eb86802393f63f" class="m-doc">Plugin</a> plugin) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Cubos.html" class="m-doc">Cubos</a>&amp;</span>
@@ -203,6 +207,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aceaa275ed71e2823cb1f76d17a7c02d9" class="m-doc">shouldQuit</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Returns whether the application should quit.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a247976e06f2deb1aaf6250def2cc5b1e" class="m-doc">world</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp;</span>
+            </dt>
+            <dd>Returns the ECS world used.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0d5aee528fb661eec93a649ae6553374" class="m-doc">before</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1Tag.html" class="m-doc">Tag</a>&amp; tag) -&gt; <a href="#a5ee6b6cb240148c91f3a151d09f3204b" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
@@ -1011,6 +1019,20 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Whether the application should quit.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a247976e06f2deb1aaf6250def2cc5b1e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Cubos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a247976e06f2deb1aaf6250def2cc5b1e" class="m-doc-self">world</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns the ECS world used.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The internal ECS world.</td>
                 </tr>
               </tfoot>
             </table>

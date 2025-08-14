@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tesseratos &raquo; Asset explorer module | Cubos Docs</title>
+  <title>Engine &raquo; Render &raquo; RenderProfiling module | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,45 +46,60 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__tesseratos.html">Tesseratos</a> &raquo;</span>
-          Asset explorer <span class="m-thin">module</span></h1>
-        <p>Allows importing files such as .qb through a ImGui window.</p>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__render-plugins.html">Render</a> &raquo;</span>
+          RenderProfiling <span class="m-thin">module</span></h1>
+        <p>Adds and manages the <a href="classcubos_1_1engine_1_1RenderProfiler.html" class="m-doc">RenderProfiler</a> resource.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md132">Dependencies</a></li>
+            <li><a href="#autotoc_md101">Settings</a></li>
+            <li><a href="#autotoc_md102">Resources</a></li>
+            <li><a href="#autotoc_md103">Dependencies</a></li>
             <li>
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md132"><h3><a href="#autotoc_md132">Dependencies</a></h3><ul><li><a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></li><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li>tesseratos-toolbox-plugin</li></ul></section>
+<section id="autotoc_md101"><h3><a href="#autotoc_md101">Settings</a></h3><ul><li><code>render.profiling</code> - whether profiling should be enabled (default: <code>false</code>).</li></ul></section><section id="autotoc_md102"><h3><a href="#autotoc_md102">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1RenderProfiler.html" class="m-doc">RenderProfiler</a> - holds settings for render performance profiling.</li></ul></section><section id="autotoc_md103"><h3><a href="#autotoc_md103">Dependencies</a></h3><ul><li><a href="group__settings-plugin.html" class="m-doc">Settings</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="tools_2tesseratos_2src_2tesseratos_2importer_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dt>file <a href="engine_2include_2cubos_2engine_2render_2profiling_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
+            <dt>file <a href="profiler_8hpp.html" class="m-doc">profiler.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1RenderProfiler.html" class="m-doc">cubos::<wbr />engine::<wbr />RenderProfiler</a>.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1engine_1_1RenderProfiler.html" class="m-doc">cubos::engine::RenderProfiler</a>
+            </dt>
+            <dd>Resource which holds settings for render performance profiling.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga25301736a160fa04b3ae90c626f70adc" class="m-doc">importerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#gaf578829a5d2a9451f8a314aa80018792" class="m-doc">renderProfilingPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos) -&gt; <a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga25301736a160fa04b3ae90c626f70adc"><div>
+          <section class="m-doc-details" id="gaf578829a5d2a9451f8a314aa80018792"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga25301736a160fa04b3ae90c626f70adc" class="m-doc-self">importerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2src_2tesseratos_2importer_2plugin_8hpp.html">&lt;tesseratos/importer/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper"><a href="group__engine.html#gafc43a4a343cb1feebca56201481e0562" class="m-doc">CUBOS_<wbr />ENGINE_<wbr />API</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaf578829a5d2a9451f8a314aa80018792" class="m-doc-self">renderProfilingPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2render_2profiling_2plugin_8hpp.html">&lt;engine/render/profiling/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -94,7 +109,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class</td>
+                  <td><strong>Cubos</strong> main class.</td>
                 </tr>
               </tbody>
             </table>
