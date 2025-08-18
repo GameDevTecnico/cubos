@@ -23,7 +23,7 @@ void Inertia::setFromTensor(const glm::mat3 inertiaTensor)
 {
     // TODO: check is is diagonal, if not apply the Jacobi eigenvalue algorithm.
     inertia = inertiaTensor;
-    inverseInertia = glm::inverse(inertia);
+    inverseInertia = (inertia == INFINITE) ? glm::mat3(0.0F) : glm::inverse(inertia);
 }
 
 void Inertia::setWithLocalFrame(const glm::vec3 principalInertia, const glm::quat principalLocalFrame)
@@ -35,7 +35,7 @@ void Inertia::setWithLocalFrame(const glm::vec3 principalInertia, const glm::qua
         glm::mat3(principalLocalFrame) *
         glm::mat3(principalInertia.x, 0.0F, 0.0F, 0.0F, principalInertia.y, 0.0F, 0.0F, 0.0F, principalInertia.z) *
         glm::mat3(glm::inverse(principalLocalFrame));
-    inverseInertia = glm::inverse(inertia);
+    inverseInertia = (inertia == INFINITE) ? glm::mat3(0.0F) : glm::inverse(inertia);
 }
 
 glm::mat3 Inertia::rotatedInertia(const glm::quat& rotationQuat) const

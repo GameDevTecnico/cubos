@@ -35,6 +35,10 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
+        static constexpr glm::mat3 INFINITE =
+            glm::mat3(std::numeric_limits<float>::infinity(), 0.0F, 0.0F, 0.0F, std::numeric_limits<float>::infinity(),
+                      0.0F, 0.0F, 0.0F, std::numeric_limits<float>::infinity());
+
         /// @brief The inertia tensor in local space.
         glm::mat3 inertia;
 
