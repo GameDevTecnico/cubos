@@ -10,6 +10,7 @@
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
+#include <cubos/engine/physics/static_body_bundle.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/perspective.hpp>
@@ -114,21 +115,10 @@ int main(int argc, char** argv)
         // Spawn floor collider
         cmds.create()
             .add(BoxCollisionShape{cubos::core::geom::Box{.halfSize = glm::vec3{20.0F, 0.5F, 20.0F}}})
-            .add(ColliderBundle{})
             .add(LocalToWorld{})
             .add(Position{{0.0F, 0.0F, 0.0F}})
             .add(Rotation{})
-            .add(Velocity{.vec = {0.0F, 0.0F, 0.0F}})
-            .add(AngularVelocity{})
-            .add(Force{})
-            .add(Torque{})
-            .add(Impulse{})
-            .add(AngularImpulse{})
-            .add(Mass{.mass = 1.0F, .inverseMass = 0.0F})
-            .add(CenterOfMass{})
-            .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
-            .add(Inertia{.inertia = glm::mat3(0.0F), .inverseInertia = glm::mat3(0.0F), .autoUpdate = true})
-            .add(PhysicsMaterial{.friction = 0.1F});
+            .add(StaticBodyBundle{.material = PhysicsMaterial{.friction = 0.1F}}); /// TODO: change this and the scenes
 
         auto redCube = assets.read(RedCubeSceneAsset);
         auto whiteCube = assets.read(WhiteCubeSceneAsset);

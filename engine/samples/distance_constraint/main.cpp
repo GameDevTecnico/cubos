@@ -18,6 +18,7 @@
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/rigid_body_bundle.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
+#include <cubos/engine/physics/static_body_bundle.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/perspective.hpp>
@@ -71,7 +72,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
-                      .add(RigidBodyBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(StaticBodyBundle{})
                       .entity();
 
         state.b = commands.create()
@@ -96,7 +97,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
-                      .add(RigidBodyBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(StaticBodyBundle{})
                       .entity();
 
         state.b = commands.create()
@@ -121,7 +122,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
-                      .add(RigidBodyBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(StaticBodyBundle{})
                       .entity();
 
         state.b = commands.create()
@@ -161,7 +162,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
-                      .add(RigidBodyBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(StaticBodyBundle{})
                       .entity();
 
         state.b = commands.create()
