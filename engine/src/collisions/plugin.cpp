@@ -12,7 +12,6 @@
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/collisions/shapes/voxel.hpp>
-#include <cubos/engine/collisions/trigger_area.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
