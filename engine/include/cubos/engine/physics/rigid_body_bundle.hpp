@@ -14,7 +14,7 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which encapsulates the creation all components required for a rigid body.
+    /// @brief Component which encapsulates the creation all physics components required for a rigid body.
     /// A rigid body has all physical properties.
     ///
     /// Adds:
@@ -31,6 +31,7 @@ namespace cubos::engine
     /// - @ref AccumulatedCorrection
     /// - @ref PhysicsMaterial
     ///
+    /// @note A CollisionShape must also be added to the entity.
     /// @ingroup physics-plugin
     struct CUBOS_ENGINE_API RigidBodyBundle
     {

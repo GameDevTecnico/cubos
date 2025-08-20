@@ -14,7 +14,7 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which encapsulates the creation all components required for a static body.
+    /// @brief Component which encapsulates the creation all physics components required for a static body.
     /// A static body has all physical properties but is physically immovable (its mass is infinite).
     ///
     /// May be moved by changing the entity Transform directly, however, this may create abnormal behaviour when
@@ -32,6 +32,7 @@ namespace cubos::engine
     /// - @ref AccumulatedCorrection
     /// - @ref PhysicsMaterial
     ///
+    /// @note A CollisionShape must also be added to the entity.
     /// @ingroup physics-plugin
     struct CUBOS_ENGINE_API StaticBodyBundle
     {
