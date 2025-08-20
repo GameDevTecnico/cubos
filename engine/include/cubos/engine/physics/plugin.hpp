@@ -11,7 +11,6 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/components/angular_impulse.hpp>
 #include <cubos/engine/physics/components/angular_velocity.hpp>
 #include <cubos/engine/physics/components/center_of_mass.hpp>
