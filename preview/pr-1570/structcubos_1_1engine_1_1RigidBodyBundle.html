@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::engine::RigidBodyBundle struct | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>RigidBodyBundle <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="rigid__body__bundle_8hpp.html">&lt;engine/physics/rigid_body_bundle.hpp&gt;</a></div>
+        </h1>
+        <p>Component which encapsulates the creation all physics components required for a rigid body. A rigid body has all physical properties.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>Adds:</p><ul><li><a href="structcubos_1_1engine_1_1ColliderBundle.html" class="m-doc">ColliderBundle</a></li><li><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a></li><li><a href="structcubos_1_1engine_1_1AngularVelocity.html" class="m-doc">AngularVelocity</a></li><li><a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a></li><li><a href="structcubos_1_1engine_1_1Torque.html" class="m-doc">Torque</a></li><li><a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a></li><li><a href="structcubos_1_1engine_1_1AngularImpulse.html" class="m-doc">AngularImpulse</a></li><li><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a></li><li><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a></li><li><a href="structcubos_1_1engine_1_1CenterOfMass.html" class="m-doc">CenterOfMass</a></li><li>AccumulatedCorrection</li><li><a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">PhysicsMaterial</a></li></ul><aside class="m-note m-info"><h4>Note</h4><p>A CollisionShape must also be added to the entity.</p></aside>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a21a87ee6ac2f875fd0c80e23a3309bcb">
+              bool <a href="#a21a87ee6ac2f875fd0c80e23a3309bcb" class="m-doc-self">isActive</a>
+            </dt>
+            <dd>Whether the collider is active.</dd>
+            <dt id="afea084e311a54c412b82c310285fc5f3">
+              uint32_t <a href="#afea084e311a54c412b82c310285fc5f3" class="m-doc-self">layers</a>
+            </dt>
+            <dd>Layers of the collider.</dd>
+            <dt id="afdf03aaa4fcfdefd804ae21be29b4f42">
+              uint32_t <a href="#afdf03aaa4fcfdefd804ae21be29b4f42" class="m-doc-self">mask</a>
+            </dt>
+            <dd>Mask of layers which the collider can collide with.</dd>
+            <dt id="a66c425e4b1885fcfe02fd639b9adffdf">
+              float <a href="#a66c425e4b1885fcfe02fd639b9adffdf" class="m-doc-self">mass</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> of the rigid body.</dd>
+            <dt id="aded2706ce099e5361ac7e123bb2e6d6e">
+              glm::vec3 <a href="#aded2706ce099e5361ac7e123bb2e6d6e" class="m-doc-self">velocity</a>
+            </dt>
+            <dd>Initial velocity of the rigid body.</dd>
+            <dt id="aaab52e30e715b3649f58610e0860e08c">
+              glm::vec3 <a href="#aaab52e30e715b3649f58610e0860e08c" class="m-doc-self">angularVelocity</a>
+            </dt>
+            <dd>Initial angular velocity of the rigid body.</dd>
+            <dt id="a1e2a11aa5fc0346ae3b3005d2933a7f4">
+              glm::vec3 <a href="#a1e2a11aa5fc0346ae3b3005d2933a7f4" class="m-doc-self">force</a>
+            </dt>
+            <dd>Inital force applied on the rigid body.</dd>
+            <dt id="aac9fa679e8a03c49e768d15923e53278">
+              glm::vec3 <a href="#aac9fa679e8a03c49e768d15923e53278" class="m-doc-self">torque</a>
+            </dt>
+            <dd>Initial torque applied on the rigid body.</dd>
+            <dt id="a8cacad0580c7cc68de7a67562e8dd87a">
+              glm::vec3 <a href="#a8cacad0580c7cc68de7a67562e8dd87a" class="m-doc-self">impulse</a>
+            </dt>
+            <dd>Initial impulse applied on the rigid body.</dd>
+            <dt id="ac921301a76a5954d2f1366360c9be88e">
+              glm::vec3 <a href="#ac921301a76a5954d2f1366360c9be88e" class="m-doc-self">angularImpulse</a>
+            </dt>
+            <dd>Initial angular impulse applied on the rigid body.</dd>
+            <dt id="a1656632bfd6dd0855595075ed5c4b758">
+              <a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">PhysicsMaterial</a> <a href="#a1656632bfd6dd0855595075ed5c4b758" class="m-doc-self">material</a>
+            </dt>
+            <dd>Physics material of the rigid body.</dd>
+            <dt id="ac0114fab4df91a1e275c06706f797ff0">
+              glm::vec3 <a href="#ac0114fab4df91a1e275c06706f797ff0" class="m-doc-self">centerOfMass</a>
+            </dt>
+            <dd>The center of mass of the rigid body.</dd>
+            <dt id="a7bc4763d35cf65ac98b641fbde4c9ab4">
+              bool <a href="#a7bc4763d35cf65ac98b641fbde4c9ab4" class="m-doc-self">autoInertiaTensor</a>
+            </dt>
+            <dd>Whether to perform automatic calculation of the inertia tensor according to the rigid body collision shape.</dd>
+            <dt id="a5739a1b88e3df356e7b0748d761560af">
+              glm::mat3 <a href="#a5739a1b88e3df356e7b0748d761560af" class="m-doc-self">inertiaTensor</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> tensor for the rigid body. Not used if &#x27;autoInertiaTensor&#x27; is set to true.</dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
