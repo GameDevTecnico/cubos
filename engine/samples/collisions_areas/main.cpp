@@ -5,6 +5,7 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/collider_bundle.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
@@ -35,8 +36,6 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
-
-#include "../src/collisions/broad_phase/collider_aabb.hpp"
 
 using cubos::core::geom::Box;
 using cubos::core::io::Key;
@@ -117,7 +116,6 @@ int main(int argc, char** argv)
             else
             {
                 auto car = assets.read<VoxelGrid>(CarAsset);
-                glm::vec3 offset = glm::vec3(car->size().x, car->size().y, car->size().z) / -2.0F;
                 state.a = commands.create()
                               .add(VoxelCollisionShape(CarAsset))
                               .add(LocalToWorld{})
@@ -150,7 +148,6 @@ int main(int argc, char** argv)
         .tagged(physicsApplyForcesTag)
         .call([](State& state, const Input& input, Query<Position&, Collider&> query) {
             auto [aPos, aCol] = *query.at(state.a);
-            auto [bPos, bCol] = *query.at(state.b);
 
             if (input.justPressed("reset"))
             {
