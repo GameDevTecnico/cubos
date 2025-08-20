@@ -13,6 +13,8 @@
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/physics/static_body_bundle.hpp>
 
+#include "components/accumulated_correction.hpp"
+
 CUBOS_DEFINE_TAG(cubos::engine::physicsApplyForcesTag);
 
 using namespace cubos::engine;
