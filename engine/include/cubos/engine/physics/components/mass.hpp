@@ -34,7 +34,7 @@ namespace cubos::engine
         void setMass(float m)
         {
             mass = m;
-            inverseMass = (mass == INFINITE) ? 0.0f : 1.0f / mass;
+            inverseMass = (mass == INFINITE) ? 0.0F : 1.0F / mass;
             changed = true;
         }
     };
