@@ -1,6 +1,7 @@
 #include "plugin.hpp"
 #include <algorithm>
 
+#include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/collider_aabb.hpp>
 #include <cubos/engine/collisions/collision_layers.hpp>
 #include <cubos/engine/collisions/collision_mask.hpp>
@@ -12,7 +13,6 @@
 #include <cubos/engine/transform/plugin.hpp>
 
 #include "../interface/plugin.hpp"
-#include "collision_group.hpp"
 #include "sweep_and_prune.hpp"
 
 CUBOS_DEFINE_TAG(cubos::engine::collisionsAABBUpdateTag);
@@ -133,7 +133,8 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
     cubos.system("create PotentiallyCollidingWith relations")
         .tagged(collisionsBroadTag)
         .after(collisionsBroadSweepTag)
-        .call([](Commands cmds, Query<const ColliderAABB&, const CollisionLayers&, const CollisionMask&> query,
+        .call([](Commands cmds,
+                 Query<const ColliderAABB&, const CollisionLayers&, const CollisionMask&, const Collider&> query,
                  const BroadPhaseSweepAndPrune& sweepAndPrune) {
             for (glm::length_t axis = 0; axis < 3; axis++)
             {
@@ -144,7 +145,7 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
                     {
                         continue;
                     }
-                    auto [colliderAABB, layers, mask] = *match;
+                    auto [colliderAABB, layers, mask, collider] = *match;
 
                     for (const auto& other : overlaps)
                     {
@@ -153,8 +154,14 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
                         {
                             continue;
                         }
-                        auto [otherCollider, otherLayers, otherMask] = *otherMatch;
+                        auto [otherColliderAABB, otherLayers, otherMask, otherCollider] = *otherMatch;
 
+                        // Check is shapes are active and if are not static
+                        if ((!collider.isActive || !otherCollider.isActive) ||
+                            (collider.isStatic && otherCollider.isStatic))
+                        {
+                            continue;
+                        }
                         if (((layers.value & otherMask.value) == 0U) && ((otherLayers.value & mask.value) == 0U))
                         {
                             continue;
@@ -163,22 +170,22 @@ void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
                         switch (axis)
                         {
                         case 0: // X
-                            if (colliderAABB.worldAABB.overlapsY(otherCollider.worldAABB) &&
-                                colliderAABB.worldAABB.overlapsZ(otherCollider.worldAABB))
+                            if (colliderAABB.worldAABB.overlapsY(otherColliderAABB.worldAABB) &&
+                                colliderAABB.worldAABB.overlapsZ(otherColliderAABB.worldAABB))
                             {
                                 cmds.relate(entity, other, PotentiallyCollidingWith{});
                             }
                             break;
                         case 1: // Y
-                            if (colliderAABB.worldAABB.overlapsX(otherCollider.worldAABB) &&
-                                colliderAABB.worldAABB.overlapsZ(otherCollider.worldAABB))
+                            if (colliderAABB.worldAABB.overlapsX(otherColliderAABB.worldAABB) &&
+                                colliderAABB.worldAABB.overlapsZ(otherColliderAABB.worldAABB))
                             {
                                 cmds.relate(entity, other, PotentiallyCollidingWith{});
                             }
                             break;
                         case 2: // Z
-                            if (colliderAABB.worldAABB.overlapsX(otherCollider.worldAABB) &&
-                                colliderAABB.worldAABB.overlapsY(otherCollider.worldAABB))
+                            if (colliderAABB.worldAABB.overlapsX(otherColliderAABB.worldAABB) &&
+                                colliderAABB.worldAABB.overlapsY(otherColliderAABB.worldAABB))
                             {
                                 cmds.relate(entity, other, PotentiallyCollidingWith{});
                             }

@@ -21,9 +21,21 @@ namespace cubos::engine
     {
         CUBOS_REFLECT;
 
+        /// @brief Represents infinite mass. A body with infinite mass does not move.
+        static constexpr float INFINITE = std::numeric_limits<float>::infinity();
+
         float mass;
         float inverseMass;
 
         bool changed = true;
+
+        /// @brief Sets the mass
+        /// @param m The mass
+        void setMass(float m)
+        {
+            mass = m;
+            inverseMass = (mass == INFINITE) ? 0.0F : 1.0F / mass;
+            changed = true;
+        }
     };
 } // namespace cubos::engine

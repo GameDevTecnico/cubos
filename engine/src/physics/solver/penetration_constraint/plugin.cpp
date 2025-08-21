@@ -10,6 +10,7 @@
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
+#include "../../components/accumulated_correction.hpp"
 #include "../../fixed_substep/plugin.hpp"
 
 using namespace cubos::engine;

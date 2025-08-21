@@ -3,32 +3,21 @@
 #include <glm/glm.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/collisions/collider_bundle.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/voxel.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
+#include <cubos/engine/physics/rigid_body_bundle.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
+#include <cubos/engine/physics/static_body_bundle.hpp>
+
+#include "components/accumulated_correction.hpp"
 
 CUBOS_DEFINE_TAG(cubos::engine::physicsApplyForcesTag);
 
 using namespace cubos::engine;
-
-CUBOS_REFLECT_IMPL(PhysicsBundle)
-{
-    return cubos::core::ecs::TypeBuilder<PhysicsBundle>("cubos::engine::PhysicsBundle")
-        .withField("mass", &PhysicsBundle::mass)
-        .withField("velocity", &PhysicsBundle::velocity)
-        .withField("angularVelocity", &PhysicsBundle::angularVelocity)
-        .withField("force", &PhysicsBundle::force)
-        .withField("torque", &PhysicsBundle::torque)
-        .withField("impulse", &PhysicsBundle::impulse)
-        .withField("angularImpulse", &PhysicsBundle::angularImpulse)
-        .withField("material", &PhysicsBundle::material)
-        .withField("centerOfMass", &PhysicsBundle::centerOfMass)
-        .withField("inertiaTensor", &PhysicsBundle::inertiaTensor)
-        .build();
-}
 
 CUBOS_REFLECT_IMPL(Damping)
 {
@@ -77,14 +66,15 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     cubos.component<CenterOfMass>();
     cubos.component<AccumulatedCorrection>();
     cubos.component<PhysicsMaterial>();
-    cubos.component<PhysicsBundle>();
+    cubos.component<RigidBodyBundle>();
+    cubos.component<StaticBodyBundle>();
 
-    cubos.observer("unpack PhysicsBundle's")
-        .onAdd<PhysicsBundle>()
-        .call([](Commands cmds, Query<Entity, const PhysicsBundle&> query) {
+    cubos.observer("unpack RigidBodyBundle's")
+        .onAdd<RigidBodyBundle>()
+        .call([](Commands cmds, Query<Entity, const RigidBodyBundle&> query) {
             for (auto [ent, bundle] : query)
             {
-                cmds.remove<PhysicsBundle>(ent);
+                cmds.remove<RigidBodyBundle>(ent);
 
                 auto force = Force{};
                 force.add(bundle.force);
@@ -100,7 +90,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
 
                 cmds.add(ent, Mass{.mass = bundle.mass, .inverseMass = 1.0F / bundle.mass});
                 cmds.add(ent, CenterOfMass{.vec = bundle.centerOfMass});
-                if (bundle.inertiaTensor != glm::mat3(0.0F))
+                if (!bundle.autoInertiaTensor)
                 {
                     cmds.add(ent, Inertia{.inertia = bundle.inertiaTensor,
                                           .inverseInertia = glm::inverse(bundle.inertiaTensor),
@@ -120,6 +110,37 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                 cmds.add(ent, angularImpulse);
                 cmds.add(ent, AccumulatedCorrection{});
                 cmds.add(ent, bundle.material);
+
+                cmds.add(ent, ColliderBundle{.isArea = false,
+                                             .isStatic = false,
+                                             .isActive = bundle.isActive,
+                                             .layers = bundle.layers,
+                                             .mask = bundle.mask});
+            }
+        });
+
+    cubos.observer("unpack StaticBodyBundle's")
+        .onAdd<StaticBodyBundle>()
+        .call([](Commands cmds, Query<Entity, const StaticBodyBundle&> query) {
+            for (auto [ent, bundle] : query)
+            {
+                cmds.remove<StaticBodyBundle>(ent);
+
+                cmds.add(ent, Mass{.mass = Mass::INFINITE, .inverseMass = 0.0F});
+                cmds.add(ent, CenterOfMass{.vec = bundle.centerOfMass});
+                cmds.add(ent,
+                         Inertia{.inertia = Inertia::INFINITE, .inverseInertia = glm::mat3(0.0F), .autoUpdate = false});
+
+                cmds.add(ent, Velocity{});
+                cmds.add(ent, AngularVelocity{});
+                cmds.add(ent, AccumulatedCorrection{});
+                cmds.add(ent, bundle.material);
+
+                cmds.add(ent, ColliderBundle{.isArea = false,
+                                             .isStatic = true,
+                                             .isActive = bundle.isActive,
+                                             .layers = bundle.layers,
+                                             .mask = bundle.mask});
             }
         });
 
@@ -152,7 +173,8 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                     continue;
                 }
 
-                // TODO: change this to adapt to the offset with the collider transform
+                // TODO: change this to adapt to the offset with the transform
+                // We also need this update center of mass for static bodies since they may have a complex shape
                 centerOfMass.vec = glm::vec3(0.0F, 0.0F, 0.0F);
 
                 // Recalculate inertia tensor
@@ -190,7 +212,8 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
                     continue;
                 }
 
-                // TODO: change this to adapt to the offset with the collider transform
+                // TODO: change this to adapt to the offset with the transform
+                // We also need this update for static bodies since they may have a complex shape
                 centerOfMass.vec = glm::vec3(0.0F, 0.0F, 0.0F);
 
                 // Recalculate inertia tensor

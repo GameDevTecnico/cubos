@@ -24,16 +24,22 @@ namespace cubos::engine
     /// @brief Adds collision detection to @b Cubos
     ///
     /// ## Components
-    /// - @ref BoxCollisionShape - holds the box collision shape.
-    /// - @ref CapsuleCollisionShape - holds the capsule collision shape.
-    /// - @ref VoxelCollisionShape - holds the voxel collision shape.
+    /// - @ref BoxCollisionShape - holds a box collision shape for a Collider.
+    /// - @ref CapsuleCollisionShape - holds a capsule collision shape for a Collider.
+    /// - @ref VoxelCollisionShape - holds a voxel collision shape for a Collider.
     /// - @ref ColliderAABB - holds collider AABB data.
     /// - @ref CollisionLayers - holds the collision layers where the collider appears in.
     /// - @ref CollisionMask - holds the mask of layers which the collider can collide with.
+    /// - @ref Collider - identifies an entity as the owner of a Collider and its settings.
     ///
-    /// ## Events
-    /// - @ref CollisionEvent - (TODO) emitted when a collision occurs.
-    /// - @ref TriggerEvent - (TODO) emitted when a trigger is entered or exited.
+    /// ## Bundles
+    /// - @ref ColliderBundle - contains all the necessary components for an entity to have collision detection (A
+    /// CollisionShape must be added separately).
+    ///
+    /// ## Relations
+    /// - @ref IntersectionStart - Relates entities during the frame when two entities start colliding.
+    /// - @ref CollidingWith - Relates entities while they are colliding.
+    /// - @ref IntersectionEnd - Relates entities during the frame when two entities stop colliding.
     ///
     /// ## Dependencies
     /// - @ref transform-plugin

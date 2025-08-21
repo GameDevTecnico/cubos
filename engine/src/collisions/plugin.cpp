@@ -4,6 +4,10 @@
 #include <cubos/core/reflection/external/glm.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/collisions/collider.hpp>
+#include <cubos/engine/collisions/collider_bundle.hpp>
+#include <cubos/engine/collisions/collision_layers.hpp>
+#include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
@@ -193,6 +197,20 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
     cubos.plugin(narrowPhaseCollisionsPlugin);
 
     cubos.tag(collisionsTag).addTo(collisionsBroadTag).addTo(collisionsNarrowTag).addTo(collisionsManifoldTag);
+
+    cubos.observer("unpack ColliderBundle")
+        .onAdd<ColliderBundle>()
+        .call([](Commands cmds, Query<Entity, ColliderBundle&> query) {
+            for (auto [ent, bundle] : query)
+            {
+                cmds.remove<ColliderBundle>(ent);
+
+                cmds.add(ent,
+                         Collider{.isArea = bundle.isArea, .isStatic = bundle.isStatic, .isActive = bundle.isActive});
+                cmds.add(ent, CollisionLayers{.value = bundle.layers});
+                cmds.add(ent, CollisionMask{.value = bundle.mask});
+            }
+        });
 
     auto initializeBoxColliders = [](Commands cmds, Query<Entity, const BoxCollisionShape&> query) {
         for (auto [entity, shape] : query)
