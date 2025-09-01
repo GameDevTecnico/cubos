@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Hidden trait from hiding components on the inspector (#1526, **@R-Camacho**).
+- Checkbox for showing components that are hidden by default in the entity inspector (#1526, **@R-Camacho**).
+
+### Changed
+
+### Removed
+
+### Fixed
+
 ## [v0.8.0] - 2025-08-15
 
 ### Added
