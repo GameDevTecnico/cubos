@@ -10,6 +10,8 @@
 #include <cubos/engine/tools/selection/plugin.hpp>
 #include <cubos/engine/tools/toolbox/plugin.hpp>
 
+#include "cubos/core/reflection/traits/hidden.hpp"
+
 using cubos::core::ecs::Name;
 using cubos::core::ecs::World;
 using cubos::core::memory::AnyValue;
@@ -27,6 +29,7 @@ namespace
         CUBOS_ANONYMOUS_REFLECT(State);
 
         const Type* relationType;
+        bool showHidden = false;
     };
 } // namespace
 
@@ -126,6 +129,8 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                     ImGui::Text("Entity %s selected", getName(entity).c_str());
                     ImGui::SeparatorText("Components");
 
+                    ImGui::Checkbox("Show hidden components", &state.showHidden);
+
                     if (ImGui::Button("Add Component"))
                     {
                         ImGui::OpenPopup("Select Component Type");
@@ -149,6 +154,12 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
                     const Type* removed = nullptr;
                     for (auto [type, value] : world.components(entity))
                     {
+
+                        if (type->has<core::reflection::HiddenTrait>() && !state.showHidden)
+                        {
+                            continue;
+                        }
+
                         ImGui::PushID(type->name().c_str());
                         if (ImGui::Button("X"))
                         {
