@@ -6,6 +6,7 @@
 
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/hidden.hpp>
 #include <cubos/core/reflection/traits/wrapper.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -92,6 +93,18 @@ namespace cubos::core::ecs
         TypeBuilder&& withField(std::string name, F T::* pointer) &&
         {
             mFields.addField(std::move(name), pointer);
+            return std::move(*this);
+        }
+
+        /// @brief Makes a type hidden in the UI by default.
+        ///
+        /// Useful for hiding internal components that can end up occupying
+        /// too much visual space in the entity inspector.
+        ///
+        /// @return Builder.
+        TypeBuilder&& hide() &&
+        {
+            mType.with(reflection::HiddenTrait(true));
             return std::move(*this);
         }
 
