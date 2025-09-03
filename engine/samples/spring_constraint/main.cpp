@@ -15,7 +15,6 @@
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/input/plugin.hpp>
-#include <cubos/engine/physics/constraints/distance_constraint.hpp>
 #include <cubos/engine/physics/constraints/spring_constraint.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
@@ -43,16 +42,13 @@ struct Options
 {
     CUBOS_ANONYMOUS_REFLECT(Options);
 
-    bool fixedDistance = false;
     enum Scenarios
     {
-        Circle,
-        Pendulum,
-        DoublePendulum,
-        PushPull,
-        SpringTest
+        Spring,
+        DoubleSpring,
+        PushPull
     };
-    Scenarios currentScenario = Circle;
+    Scenarios currentScenario = Spring;
 };
 
 struct State
@@ -66,14 +62,15 @@ struct State
 
 void createScenario(Commands& commands, State& state, Options& options)
 {
-    if (options.currentScenario == Options::Scenarios::Circle)
+
+    if (options.currentScenario == Options::Scenarios::Spring)
     {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
                       .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
+                      .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
                       .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
@@ -83,19 +80,19 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
                       .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
+                      .add(Position{glm::vec3{0.0F, -5.0F, 0.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {1.0F, 0.0F, 1.0F}})
+                      .add(PhysicsBundle{.mass = 50.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         commands.relate(state.a, state.b,
-                        DistanceConstraint{.isRigid = false,
-                                           .minDistance = 0.0F,
-                                           .maxDistance = 5.0F,
-                                           .localAnchor1 = {0.0F, 0.0F, 0.0F},
-                                           .localAnchor2 = {0.0F, 0.0F, 0.0F}});
+                        SpringConstraint{.stiffness = 80.0F,
+                                         .damping = 8.0F,
+                                         .restLength = 1.0F,
+                                         .localAnchor1 = {0.0F, 0.0F, 0.0F},
+                                         .localAnchor2 = {0.0F, 0.0F, 0.0F}});
     }
-    if (options.currentScenario == Options::Scenarios::Pendulum)
+    if (options.currentScenario == Options::Scenarios::DoubleSpring)
     {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
@@ -114,36 +111,7 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 5.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
-                      .entity();
-
-        commands.relate(state.a, state.b,
-                        DistanceConstraint{.isRigid = false,
-                                           .minDistance = 0.0F,
-                                           .maxDistance = 5.0F,
-                                           .localAnchor1 = {0.0F, 0.0F, 0.0F},
-                                           .localAnchor2 = {0.0F, 0.0F, 0.0F}});
-    }
-    if (options.currentScenario == Options::Scenarios::DoublePendulum)
-    {
-        state.a = commands.create()
-                      .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
-                      .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
-                      .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
-                      .entity();
-
-        state.b = commands.create()
-                      .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
-                      .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, 5.0F}})
-                      .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(PhysicsBundle{.mass = 50.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         state.c = commands.create()
@@ -153,22 +121,22 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 10.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(PhysicsBundle{.mass = 50.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         commands.relate(state.a, state.b,
-                        DistanceConstraint{.isRigid = false,
-                                           .minDistance = 3.0F,
-                                           .maxDistance = 5.0F,
-                                           .localAnchor1 = {0.0F, 0.0F, 0.0F},
-                                           .localAnchor2 = {0.0F, 0.4F, 0.4F}});
+                        SpringConstraint{.stiffness = 80.0F,
+                                         .damping = 1000.0F,
+                                         .restLength = 1.0F,
+                                         .localAnchor1 = {0.0F, 0.0F, 0.0F},
+                                         .localAnchor2 = {0.0F, 0.0F, 0.0F}});
 
         commands.relate(state.b, state.c,
-                        DistanceConstraint{.isRigid = false,
-                                           .minDistance = 3.0F,
-                                           .maxDistance = 5.0F,
-                                           .localAnchor1 = {0.0F, -0.4F, -0.4F},
-                                           .localAnchor2 = {0.0F, 0.0F, 0.0F}});
+                        SpringConstraint{.stiffness = 80.0F,
+                                         .damping = 8.0F,
+                                         .restLength = 1.0F,
+                                         .localAnchor1 = {0.0F, 0.0F, 0.0F},
+                                         .localAnchor2 = {0.0F, 0.0F, 0.0F}});
     }
     if (options.currentScenario == Options::Scenarios::PushPull)
     {
@@ -187,9 +155,9 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
                       .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, -5.0F}})
+                      .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(PhysicsBundle{.mass = 50.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         state.c = commands.create()
@@ -197,17 +165,23 @@ void createScenario(Commands& commands, State& state, Options& options)
                       .add(CollisionLayers{})
                       .add(CollisionMask{})
                       .add(LocalToWorld{})
-                      .add(Position{glm::vec3{0.0F, 0.0F, -15.0F}})
+                      .add(Position{glm::vec3{0.0F, 0.0F, 5.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 5.0F}})
+                      .add(PhysicsBundle{.mass = 50.0F, .velocity = {0.0F, 0.0F, -1.0F}})
                       .entity();
 
         commands.relate(state.a, state.b,
-                        DistanceConstraint{.isRigid = false,
-                                           .minDistance = 3.0F,
-                                           .maxDistance = 5.0F,
-                                           .localAnchor1 = {0.0F, 0.0F, 0.0F},
-                                           .localAnchor2 = {0.0F, 0.0F, 0.0F}});
+                        SpringConstraint{.stiffness = 80.0F,
+                                         .damping = 0.0F,
+                                         .restLength = 2.0F,
+                                         .localAnchor1 = {0.0F, 0.0F, 0.0F},
+                                         .localAnchor2 = {0.0F, 0.0F, 0.0F}});
+        commands.relate(state.b, state.c,
+                        SpringConstraint{.stiffness = 80.0F,
+                                         .damping = 0.0F,
+                                         .restLength = 3.0F,
+                                         .localAnchor1 = {0.0F, 0.0F, 0.0F},
+                                         .localAnchor2 = {0.0F, 0.0F, 0.0F}});
     }
 }
 
@@ -272,53 +246,44 @@ int main(int argc, char** argv)
     cubos.system("render")
         .after(gizmosDrawTag)
         .call([](Gizmos& gizmos, Query<const LocalToWorld&, const ColliderAABB&> query,
-                 Query<const LocalToWorld&, DistanceConstraint&, const LocalToWorld&> query2) {
+                 Query<const LocalToWorld&, SpringConstraint&, const LocalToWorld&> query2) {
             for (auto [localToWorld, colliderAABB] : query)
             {
                 auto size = colliderAABB.localAABB.box().halfSize * 2.0F;
                 glm::mat4 transform = glm::scale(localToWorld.mat, size);
-                gizmos.color({1.0F, 1.0F, 1.0F});
+                gizmos.color({0.8F, 0.8F, 1.0F});
                 gizmos.drawWireBox("local AABB", transform);
 
-                gizmos.color({1.0F, 0.0F, 0.0F});
+                gizmos.color({0.0F, 1.0F, 0.0F});
                 gizmos.drawWireBox("world AABB", colliderAABB.worldAABB.min(), colliderAABB.worldAABB.max());
             }
             // draw the constraints
             for (auto [localToWorld1, constraint, localToWorld2] : query2)
             {
-                glm::vec3 pointFrom = (localToWorld1.mat * glm::vec4(constraint.localAnchor1, 1.0F));
-                glm::vec3 direction =
-                    glm::normalize(glm::vec3(localToWorld2.mat * glm::vec4(constraint.localAnchor2, 1.0F)) - pointFrom);
+
+                glm::vec3 worldAnchor1 = (localToWorld1.mat * glm::vec4(constraint.localAnchor1, 1.0F));
+                glm::vec3 worldAnchor2 = (localToWorld2.mat * glm::vec4(constraint.localAnchor2, 1.0F));
 
                 gizmos.color({0.0F, 1.0F, 1.0F});
-                gizmos.drawLine("the line between", pointFrom,
-                                constraint.isRigid ? pointFrom + glm::normalize(direction) * constraint.fixedDistance
-                                                   : pointFrom + glm::normalize(direction) * constraint.minDistance);
-                if (!constraint.isRigid)
-                {
-                    gizmos.color({0.0F, 0.0F, 1.0F});
-                    gizmos.drawLine("the line between", pointFrom + glm::normalize(direction) * constraint.minDistance,
-                                    pointFrom + glm::normalize(direction) * constraint.maxDistance);
-                }
+                gizmos.drawLine("spring", worldAnchor1, worldAnchor2);
             }
         });
 
     cubos.system("apply gravity")
         .tagged(physicsApplyForcesTag)
         .call([](State& state, Options& options, Query<Velocity&, Force&, Mass&> query) {
-            if (options.currentScenario == Options::Scenarios::Circle ||
-                options.currentScenario == Options::Scenarios::PushPull)
+            auto [bVel, bFor, bMass] = *query.at(state.b);
+
+            if (options.currentScenario == Options::Scenarios::PushPull)
             {
                 return;
             }
 
-            auto [bVel, bFor, bMass] = *query.at(state.b);
-
             // Apply gravity force
-            glm::vec3 gravitationForce = bMass.mass * glm::vec3(0.0F, -2.0F, 0.0F);
+            glm::vec3 gravitationForce = bMass.mass * glm::vec3(0.0F, -9.8F, 0.0F);
             bFor.add(gravitationForce);
 
-            if (options.currentScenario == Options::Scenarios::DoublePendulum)
+            if (options.currentScenario == Options::Scenarios::DoubleSpring)
             {
                 auto [cVel, cFor, cMass] = *query.at(state.c);
 
@@ -337,20 +302,14 @@ int main(int argc, char** argv)
             }
             switch (options.currentScenario)
             {
-            case Options::Scenarios::Circle:
-                options.currentScenario = Options::Scenarios::Pendulum;
+            case Options::Scenarios::Spring:
+                options.currentScenario = Options::Scenarios::DoubleSpring;
                 break;
-            case Options::Scenarios::Pendulum:
-                options.currentScenario = Options::Scenarios::DoublePendulum;
-                break;
-            case Options::Scenarios::DoublePendulum:
+            case Options::Scenarios::DoubleSpring:
                 options.currentScenario = Options::Scenarios::PushPull;
                 break;
             case Options::Scenarios::PushPull:
-                options.currentScenario = Options::Scenarios::SpringTest;
-                break;
-            case Options::Scenarios::SpringTest:
-                options.currentScenario = Options::Scenarios::Circle;
+                options.currentScenario = Options::Scenarios::Spring;
                 break;
             }
             createScenario(commands, state, options);

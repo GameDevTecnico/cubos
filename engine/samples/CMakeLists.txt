@@ -30,9 +30,10 @@ function(make_sample)
     target_link_libraries(${target} cubos::engine)
     cubos_common_target_options(${target})
 
+
     if(EMSCRIPTEN)
       target_link_options(${target} PRIVATE
-        "SHELL:--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/emscripten.html"
+        "SHELL:--shell-file ${CMAKE_CURREN)T_SOURCE_DIR}/emscripten.html"
       )
     endif()
 
@@ -77,4 +78,5 @@ make_sample(DIR "ui" ASSETS)
 make_sample(DIR "physics" ASSETS)
 make_sample(DIR "complex_physics" ASSETS)
 make_sample(DIR "distance_constraint" ASSETS)
+make_sample(DIR "spring_constraint" ASSETS)
 make_sample(DIR "games/cubosurfers" ASSETS SOURCES "spawner.cpp" "obstacle.cpp" "player.cpp")
