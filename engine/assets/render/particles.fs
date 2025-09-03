@@ -1,34 +1,31 @@
 in float ageFraction;
 in vec3 fragNormal;
 in vec3 fragWorldPos;
-in vec2 texCoord;
 out vec4 FragColor;
 
 uniform vec3 firstColor;
 uniform vec3 secondColor;
-uniform sampler2D particleTexture;
-uniform int hasTexture;
 
 void main() {
-    // Color interpolation between two colors based on ageFraction
+    // Interpolação de cores com base na idade
     vec3 color = mix(firstColor, secondColor, ageFraction);
     
-    if (hasTexture == 1) {
-        vec4 texColor = texture(particleTexture, texCoord);
-        color *= texColor.rgb;
-    }
-    
-    // Simple lighting with fixed direction
+    // Iluminação simples com direção fixa
     vec3 lightDir = normalize(vec3(0.5, 1.0, 0.3));
     vec3 normal = normalize(fragNormal);
     
+    // Luz ambiente
     float ambient = 0.3;
     
+    // Luz difusa
     float diffuse = max(dot(normal, lightDir), 0.0);
     
+    // Combinação final
     float lighting = ambient + diffuse * 0.7;
     
+    // Aplicar iluminação à cor
     vec3 finalColor = color * lighting;
     
+    // Opacidade baseada na idade (não usar alpha blending)
     FragColor = vec4(finalColor, 1.0);
 }

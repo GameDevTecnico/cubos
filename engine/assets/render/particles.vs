@@ -1,8 +1,7 @@
-// Cube attributes
 in vec3 position;
 in vec3 normal;
 
-// Particle attributes
+// Atributos de instância (dados da partícula)
 in vec3 inPosition;
 in vec3 inVelocity;
 in float inLifetime;
@@ -11,7 +10,6 @@ in float inAge;
 out float ageFraction;
 out vec3 fragNormal;
 out vec3 fragWorldPos;
-out vec2 texCoord;
 
 uniform Camera {
     mat4 uViewMatrix;
@@ -19,6 +17,7 @@ uniform Camera {
 };
 
 void main() {
+    // Calcular posição atual da partícula
     vec3 particlePosition = inPosition + inVelocity * inAge;
 
     if (inLifetime > 0.0) {
@@ -27,21 +26,21 @@ void main() {
         ageFraction = 0.0;
     }
 
-    // Scale the particle based on its age
-    float scale = mix(0.1, 0.02, ageFraction);
+    // Escalar baseado na idade (cubos menores conforme envelhecem)
+    //float scale = mix(0.1, 0.02, ageFraction);
+    float scale = 1.0;
 
-    // Apply scale to vertex position
+    // Aplicar escala à posição do vértice
     vec3 scaledPosition = position * scale;
-
-    texCoord = position.xy + 0.5;
-
-    // Final vertex position in world space
+    
+    // Posição final do vértice no mundo
     vec3 worldPosition = particlePosition + scaledPosition;
-
-    // Transform to clip space
+    
+    // Transformar para clip space
     vec4 viewPosition = uViewMatrix * vec4(worldPosition, 1.0);
     gl_Position = uProjectionMatrix * viewPosition;
 
+    // Passar dados para fragment shader
     fragNormal = normal;
     fragWorldPos = worldPosition;
 }

@@ -65,6 +65,7 @@ make_sample(DIR "assets/bridge" ASSETS)
 make_sample(DIR "assets/json" ASSETS)
 make_sample(DIR "assets/saving" ASSETS NO_WEB) # Can't save assets on Emscripten!
 make_sample(DIR "render/main" ASSETS)
+make_sample(DIR "render/particles" ASSETS)
 make_sample(DIR "render/shadows" ASSETS)
 make_sample(DIR "render/profiling" ASSETS)
 make_sample(DIR "imgui" ASSETS)
