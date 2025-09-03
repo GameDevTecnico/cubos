@@ -257,7 +257,6 @@ int main(int argc, char** argv)
                 gizmos.color({0.0F, 1.0F, 0.0F});
                 gizmos.drawWireBox("world AABB", colliderAABB.worldAABB.min(), colliderAABB.worldAABB.max());
             }
-            // draw the constraints
             for (auto [localToWorld1, constraint, localToWorld2] : query2)
             {
 
