@@ -44,11 +44,11 @@ struct Options
 
     enum Scenarios
     {
-        Spring,
+        SimpleSpring,
         DoubleSpring,
         PushPull
     };
-    Scenarios currentScenario = Spring;
+    Scenarios currentScenario = SimpleSpring;
 };
 
 struct State
@@ -63,7 +63,7 @@ struct State
 void createScenario(Commands& commands, State& state, Options& options)
 {
 
-    if (options.currentScenario == Options::Scenarios::Spring)
+    if (options.currentScenario == Options::Scenarios::SimpleSpring)
     {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
@@ -279,7 +279,6 @@ int main(int argc, char** argv)
                 return;
             }
 
-            // Apply gravity force
             glm::vec3 gravitationForce = bMass.mass * glm::vec3(0.0F, -9.8F, 0.0F);
             bFor.add(gravitationForce);
 
@@ -302,14 +301,14 @@ int main(int argc, char** argv)
             }
             switch (options.currentScenario)
             {
-            case Options::Scenarios::Spring:
+            case Options::Scenarios::SimpleSpring:
                 options.currentScenario = Options::Scenarios::DoubleSpring;
                 break;
             case Options::Scenarios::DoubleSpring:
                 options.currentScenario = Options::Scenarios::PushPull;
                 break;
             case Options::Scenarios::PushPull:
-                options.currentScenario = Options::Scenarios::Spring;
+                options.currentScenario = Options::Scenarios::SimpleSpring;
                 break;
             }
             createScenario(commands, state, options);
