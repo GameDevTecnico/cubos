@@ -126,7 +126,7 @@ void createScenario(Commands& commands, State& state, Options& options)
 
         commands.relate(state.a, state.b,
                         SpringConstraint{.stiffness = 80.0F,
-                                         .damping = 1000.0F,
+                                         .damping = 80.0F,
                                          .restLength = 1.0F,
                                          .localAnchor1 = {0.0F, 0.0F, 0.0F},
                                          .localAnchor2 = {0.0F, 0.0F, 0.0F}});

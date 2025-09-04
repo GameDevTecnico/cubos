@@ -33,7 +33,7 @@ function(make_sample)
 
     if(EMSCRIPTEN)
       target_link_options(${target} PRIVATE
-        "SHELL:--shell-file ${CMAKE_CURREN)T_SOURCE_DIR}/emscripten.html"
+        "SHELL:--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/emscripten.html"
       )
     endif()
 
