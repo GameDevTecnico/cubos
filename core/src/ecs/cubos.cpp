@@ -140,6 +140,18 @@ Cubos& Cubos::plugin(Plugin plugin)
     return *this;
 }
 
+void Cubos::named(std::string name)
+{
+    Plugin plugin = mPluginStack.back();
+
+    if (mInjectedPlugins.contains(plugin))
+    {
+        plugin = mInjectedPlugins.at(plugin);
+    }
+
+    mInstalledPlugins.at(plugin).name = std::move(name);
+}
+
 Cubos& Cubos::depends(Plugin plugin)
 {
     if (mInjectedPlugins.contains(plugin))
@@ -438,6 +450,11 @@ bool Cubos::started() const
 bool Cubos::shouldQuit() const
 {
     return mWorld->resource<ShouldQuit>().value;
+}
+
+cubos::core::ecs::World& Cubos::world()
+{
+    return *mWorld;
 }
 
 bool Cubos::isRegistered(const reflection::Type& type) const

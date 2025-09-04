@@ -1,9 +1,12 @@
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/io/window.hpp>
+#include <cubos/core/tel/metrics.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/render/hdr/hdr.hpp>
 #include <cubos/engine/render/hdr/plugin.hpp>
+#include <cubos/engine/render/profiling/plugin.hpp>
+#include <cubos/engine/render/profiling/profiler.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/target/plugin.hpp>
 #include <cubos/engine/render/target/target.hpp>
@@ -48,6 +51,8 @@ namespace
 
         ConstantBuffer fxaaConfigCB;
 
+        cubos::core::gl::PipelinedTimer timer;
+
         State(RenderDevice& renderDevice, const ShaderPipeline& pipeline)
             : pipeline(pipeline)
         {
@@ -62,6 +67,8 @@ namespace
                 "hdrTexture, gamma, exposure, screenSize, fxaaConfig and fxaaEnabled binding points must exist");
             generateScreenQuad(renderDevice, pipeline, screenQuad);
             fxaaConfigCB = renderDevice.createConstantBuffer(sizeof(FxaaConfig), nullptr, Usage::Dynamic);
+
+            timer = renderDevice.createPipelinedTimer();
         }
     };
 } // namespace
@@ -76,6 +83,7 @@ void cubos::engine::toneMappingPlugin(Cubos& cubos)
     cubos.depends(shaderPlugin);
     cubos.depends(renderTargetPlugin);
     cubos.depends(hdrPlugin);
+    cubos.depends(renderProfilingPlugin);
 
     cubos.tag(toneMappingTag).after(drawToHDRTag);
 
@@ -97,9 +105,14 @@ void cubos::engine::toneMappingPlugin(Cubos& cubos)
     cubos.system("apply Tone Mapping to the HDR texture")
         .tagged(drawToRenderTargetTag)
         .tagged(toneMappingTag)
-        .call([](const State& state, const Window& window,
+        .call([](const State& state, const Window& window, const RenderProfiler& profiler,
                  Query<RenderTarget&, const HDR&, const ToneMapping&, Opt<const FXAA&>> query) {
             auto& rd = window->renderDevice();
+
+            if (profiler.profilingEnabled)
+            {
+                state.timer->begin();
+            }
 
             for (auto [target, hdr, toneMapping, fxaa] : query)
             {
@@ -129,6 +142,11 @@ void cubos::engine::toneMappingPlugin(Cubos& cubos)
                 rd.drawTriangles(0, 6);
 
                 target.cleared = true;
+            }
+
+            if (profiler.profilingEnabled)
+            {
+                CUBOS_METRIC("Graphics::Tonemapping::ns", state.timer->end().result);
             }
         });
 }

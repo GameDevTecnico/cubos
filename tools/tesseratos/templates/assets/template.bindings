@@ -1,0 +1,91 @@
+[
+    "actions": {
+        "interact": [
+            {
+                "keys": [
+                    "E"
+                ]
+            },
+            {
+                "gamepadButtons": [
+                    "Y"
+                ]
+            }
+        ],
+        "jump": [
+            {
+                "keys": [
+                    "Space"
+                ]
+            },
+            {
+                "gamepadButtons": [
+                    "Y"
+                ]
+            }
+        ]
+
+    },
+    "axes": {
+        "move-x": {
+            "positive": [
+                {
+                    "keys": [
+                        "S"
+                    ]
+                }, 
+                {
+                    "keys": [
+                        "Down"
+                    ]
+                }
+            ],
+            "negative": [
+                {
+                    "keys": [
+                        "W"
+                    ]
+                },
+                {
+                    "keys": [
+                        "Up"
+                    ]
+                }
+            ],
+            "gamepadAxes": [
+                "LY"
+            ],
+            "deadzone": 0.25
+        },
+        "move-y": {
+            "positive": [
+                {
+                    "keys": [
+                        "D"
+                    ]
+                },
+                {
+                    "keys": [
+                        "Right"
+                    ]
+                }
+            ],
+            "negative": [
+                {
+                    "keys": [
+                        "A"
+                    ]
+                },
+                {
+                    "keys": [
+                        "Left"
+                    ]
+                }
+            ],
+            "gamepadAxes": [
+                "LX"
+            ],
+            "deadzone": 0.25
+        }
+    }
+}

@@ -11,11 +11,13 @@
 #include <cubos/core/reflection/traits/constructible_utils.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 
 using cubos::core::data::JSONSerializer;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::MaskTrait;
 using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
@@ -49,6 +51,29 @@ namespace
 
         uint32_t value;
     };
+
+    enum class Permissions
+    {
+        None = 0,
+        Read = 1,
+        Write = 2,
+        Execute = 4
+    };
+
+    inline Permissions operator~(Permissions p)
+    {
+        return static_cast<Permissions>(~static_cast<int>(p));
+    }
+
+    inline Permissions operator|(Permissions a, Permissions b)
+    {
+        return static_cast<Permissions>(static_cast<int>(a) | static_cast<int>(b));
+    }
+
+    inline Permissions operator&(Permissions a, Permissions b)
+    {
+        return static_cast<Permissions>(static_cast<int>(a) & static_cast<int>(b));
+    }
 } // namespace
 
 CUBOS_REFLECT_IMPL(ExampleStruct)
@@ -73,6 +98,16 @@ CUBOS_REFLECT_IMPL(Nullable)
         .with(NullableTrait{
             [](const void* instance) -> bool { return static_cast<const Nullable*>(instance)->value == UINT32_MAX; },
             [](void* instance) { static_cast<Nullable*>(instance)->value = UINT32_MAX; }});
+}
+
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, Permissions);
+CUBOS_REFLECT_EXTERNAL_IMPL(Permissions)
+{
+    return Type::create("Permissions")
+        .with(MaskTrait{}
+                  .withBit<Permissions::Read>("Read")
+                  .withBit<Permissions::Write>("Write")
+                  .withBit<Permissions::Execute>("Execute"));
 }
 
 TEST_CASE("data::JSONSerializer")
@@ -111,6 +146,15 @@ TEST_CASE("data::JSONSerializer")
     AUTO_TEST(Color, Color::Red, "\"Red\"");
     AUTO_TEST(Color, Color::Green, "\"Green\"");
     AUTO_TEST(Color, Color::Blue, "\"Blue\"");
+
+    // Mask.
+    AUTO_TEST(Permissions, Permissions::None, "[]");
+    AUTO_TEST(Permissions, Permissions::Read, "[\"Read\"]");
+    AUTO_TEST(Permissions, Permissions::Write, "[\"Write\"]");
+    AUTO_TEST(Permissions, Permissions::Execute, "[\"Execute\"]");
+    AUTO_TEST(Permissions, Permissions::Read | Permissions::Write, "[\"Read\",\"Write\"]");
+    AUTO_TEST(Permissions, Permissions::Read | Permissions::Execute, "[\"Read\",\"Execute\"]");
+    AUTO_TEST(Permissions, Permissions::Write | Permissions::Execute, "[\"Write\",\"Execute\"]");
 
     // UUID
     AUTO_TEST(uuids::uuid, *uuids::uuid::from_string("f7063cd4-de44-47b5-b0a9-f0e7a558c9e5"),

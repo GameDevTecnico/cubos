@@ -27,11 +27,11 @@ namespace tesseratos
     };
 
     /// @brief Tool state.
-    struct AssetExplorerTool
+    struct AssetExplorer
     {
         CUBOS_REFLECT;
 
-        bool isOpen{false};
+        bool isOpen{true};
     };
 
     /// @brief Plugin entry function.

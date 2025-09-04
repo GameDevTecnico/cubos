@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [v0.8.0] - 2025-08-15
 
 ### Added
 
@@ -20,6 +20,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Constant trait handler to the ImGui inspector (#1507, **@RiscadoA**).
 - Toggle for matrix decomposition to the inspector (#1521, **@RiscadoA**).
 - Allow gizmos to be drawn for specific cameras (#1402, **@tomas7770**).
+- Named method for attributing a name to a plugin (#1556, **@mcanais**).
+- New quadrados create command to create assets based on templates (#1479, **@R-Camacho**). 
+- Profiling timers in render plugins (#1560, **@tomas7770**).
+- Quaternion representation mode switch on the inspector (#1520, **@RiscadoA**).
+- Support for MaskTrait types in JSON (de)serializer (#1507, **@RiscadoA**).
+- Render timers in metrics panel (#1565, **@tomas7770**).
+- Custom module loader for lua scripts (#1517, **@mkuritsu**).
+- Added possibility of creating basic systems in lua scripts (#1518, **@mkuritsu**)
+- Sane default placement for tools in tesseratos (#1387, **@jdbaracho**).
+- Layout structure with loading and ImGui application (#1387, **@jdbaracho**).
+- Allow generating metas with random UUIDs through Quadrados (#1441, **@Fkatar**)
 
 ### Changed
 
@@ -49,6 +60,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clear picker depth in Gizmos plugin if not already cleared (**@tomas7770**).
 - Only draw gizmos to active cameras (**@tomas7770**).
 - Transform Gizmos rendered in wrong location when splitting the screen (#1148, **@tomas7770**).
+- GL timer result always being 0 (#1486, **@tomas7770**).
+- Metrics being popped in the wrong order (**@tomas7770**).
+- Updated doctest version to fix build failures in cmake >= 4.0 (**@mkuritsu**).
 
 ## [v0.7.0] - 2025-05-03
 
@@ -410,3 +424,4 @@ Although they've moved on, their work is etched into the project's foundations.
 [v0.5.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.5.0
 [v0.6.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.6.0
 [v0.7.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.7.0
+[v0.8.0]: https://github.com/GameDevTecnico/cubos/releases/tag/v0.8.0

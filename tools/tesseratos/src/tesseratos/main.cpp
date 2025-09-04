@@ -8,6 +8,7 @@
 #include <cubos/engine/tools/plugin.hpp>
 #include <cubos/engine/utils/free_camera/plugin.hpp>
 
+#include "layout/plugin.hpp"
 #include "menu_bar/plugin.hpp"
 
 using namespace cubos::engine;
@@ -22,6 +23,7 @@ int main(int argc, char** argv)
     cubos.plugin(cubos::engine::freeCameraPlugin);
 
     cubos.plugin(menuBarPlugin);
+    cubos.plugin(layoutPlugin);
 
     cubos.startupSystem("configure Assets plugin").before(cubos::engine::settingsTag).call([](Settings& settings) {
         settings.setString("assets.app.osPath", APP_ASSETS_PATH);
@@ -41,27 +43,6 @@ int main(int argc, char** argv)
             ImGui::SetCurrentContext(holder.context);
             ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
         });
-
-    cubos.system("setup ImGui dockspace").tagged(imguiTag).call([]() {
-        // make DockSpace fullscreen
-        const ImGuiViewport* viewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(viewport->WorkPos);
-        ImGui::SetNextWindowSize(viewport->WorkSize);
-        ImGui::SetNextWindowViewport(viewport->ID);
-
-        // ImGui window flags, check imgui.h for definition
-        ImGuiWindowFlags windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-        windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
-                       ImGuiWindowFlags_NoMove;
-        windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0F, 0.0F));
-        ImGui::Begin("Tesseratos", nullptr, windowFlags);
-        ImGui::PopStyleVar();
-        ImGuiID dockspaceId = ImGui::GetID("TesseratosRoot");
-        ImGui::DockSpace(dockspaceId, ImVec2(0.0F, 0.0F));
-        ImGui::End();
-    });
 
     cubos.run();
 }

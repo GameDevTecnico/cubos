@@ -31,9 +31,9 @@ namespace memory = cubos::core::memory;
 
 using namespace tesseratos;
 
-CUBOS_REFLECT_IMPL(ImporterTool)
+CUBOS_REFLECT_IMPL(Importer)
 {
-    return cubos::core::ecs::TypeBuilder<ImporterTool>("ImporterTool").withField("isOpen", &ImporterTool::isOpen).build();
+    return cubos::core::ecs::TypeBuilder<Importer>("tesseratos::Importer").withField("isOpen", &Importer::isOpen).build();
 }
 
 namespace
@@ -312,14 +312,14 @@ void tesseratos::importerPlugin(Cubos& cubos)
     cubos.depends(cubos::engine::imguiPlugin);
     cubos.depends(cubos::engine::assetsPlugin);
 
-    cubos.resource<ImporterTool>();
+    cubos.resource<Importer>();
     cubos.resource<ImportState>();
 
     cubos.system("show Importer UI")
-        .onlyIf([](ImporterTool& tool) { return tool.isOpen; })
+        .onlyIf([](Importer& tool) { return tool.isOpen; })
         .tagged(cubos::engine::imguiTag)
         .call([](Assets& assets, cubos::core::ecs::EventReader<AssetSelectedEvent> reader,
-                 ImportState& state, ImporterTool& tool) {
+                 ImportState& state, Importer& tool) {
 
             ImGui::Begin("Importer", &tool.isOpen);
 

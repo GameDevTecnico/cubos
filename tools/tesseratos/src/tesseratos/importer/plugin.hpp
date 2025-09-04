@@ -21,11 +21,11 @@ namespace tesseratos
     /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Tool state.
-    struct ImporterTool
+    struct Importer
     {
         CUBOS_REFLECT;
 
-        bool isOpen{false};
+        bool isOpen{true};
     };
 
     /// @brief Plugin entry function.

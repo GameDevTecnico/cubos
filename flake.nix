@@ -38,6 +38,8 @@
 
           libpulseaudio
 
+          wayland
+
         ];
 
       in

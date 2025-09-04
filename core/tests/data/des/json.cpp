@@ -11,6 +11,7 @@
 #include <cubos/core/reflection/traits/constructible_utils.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/mask.hpp>
 #include <cubos/core/reflection/traits/nullable.hpp>
 #include <cubos/core/reflection/traits/wrapper.hpp>
 #include <cubos/core/tel/logging.hpp>
@@ -21,6 +22,7 @@ using cubos::core::data::JSONDeserializer;
 using cubos::core::reflection::autoConstructibleTrait;
 using cubos::core::reflection::EnumTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::MaskTrait;
 using cubos::core::reflection::NullableTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;
@@ -74,6 +76,29 @@ namespace
 
         uint32_t value;
     };
+
+    enum class Permissions
+    {
+        None = 0,
+        Read = 1,
+        Write = 2,
+        Execute = 4
+    };
+
+    inline Permissions operator~(Permissions p)
+    {
+        return static_cast<Permissions>(~static_cast<int>(p));
+    }
+
+    inline Permissions operator|(Permissions a, Permissions b)
+    {
+        return static_cast<Permissions>(static_cast<int>(a) | static_cast<int>(b));
+    }
+
+    inline Permissions operator&(Permissions a, Permissions b)
+    {
+        return static_cast<Permissions>(static_cast<int>(a) & static_cast<int>(b));
+    }
 } // namespace
 
 CUBOS_REFLECT_IMPL(NonConstructible)
@@ -105,6 +130,16 @@ CUBOS_REFLECT_IMPL(Nullable)
         .with(NullableTrait{
             [](const void* instance) -> bool { return static_cast<const Nullable*>(instance)->value == UINT32_MAX; },
             [](void* instance) { static_cast<Nullable*>(instance)->value = UINT32_MAX; }});
+}
+
+CUBOS_REFLECT_EXTERNAL_DECL(CUBOS_EMPTY, Permissions);
+CUBOS_REFLECT_EXTERNAL_IMPL(Permissions)
+{
+    return Type::create("Permissions")
+        .with(MaskTrait{}
+                  .withBit<Permissions::Read>("Read")
+                  .withBit<Permissions::Write>("Write")
+                  .withBit<Permissions::Execute>("Execute"));
 }
 
 #define AUTO_EXISTING(json, initial, expected)                                                                         \
@@ -157,6 +192,11 @@ TEST_CASE("data::JSONDeserializer")
     AUTO_SUCCESS("Red", Color::Red);
     AUTO_SUCCESS("Green", Color::Green);
     AUTO_SUCCESS("Blue", Color::Blue);
+    AUTO_SUCCESS(Json::array(), Permissions::None);
+    AUTO_SUCCESS(Json::array({"Execute"}), Permissions::Execute);
+    AUTO_SUCCESS(Json::array({"Read", "Execute"}), Permissions::Read | Permissions::Execute);
+    AUTO_SUCCESS(Json::array({"Write", "Execute", "Read", "Read"}),
+                 Permissions::Read | Permissions::Execute | Permissions::Write);
 
     AUTO_FAILURE("true", bool);
     AUTO_FAILURE("-120", int8_t);
@@ -164,6 +204,7 @@ TEST_CASE("data::JSONDeserializer")
     AUTO_FAILURE("?", uuids::uuid);
     AUTO_FAILURE("?", Empty);
     AUTO_FAILURE("White", Color);
+    AUTO_FAILURE(Json::array({"Read", "Write", "Foo"}), Permissions);
 
     AUTO_EXISTING((Json::object({})), (std::map<std::string, bool>{{"true", true}}), (std::map<std::string, bool>{}));
     AUTO_SUCCESS((Json::object({})), (std::map<std::string, bool>{}));

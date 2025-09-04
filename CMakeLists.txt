@@ -2,7 +2,7 @@
 # Cubos project root build configuration
 
 cmake_minimum_required(VERSION 3.25.0)
-project(cubos VERSION 0.7.0)
+project(cubos VERSION 0.8.0)
 
 include(GNUInstallDirs) # Get default install directories
 
@@ -149,7 +149,7 @@ include(FetchContent)
 FetchContent_Declare(
 	doctest
 	GIT_REPOSITORY https://github.com/doctest/doctest
-	GIT_TAG        v2.4.11
+	GIT_TAG        v2.4.12
 	SYSTEM
 	FIND_PACKAGE_ARGS
 )

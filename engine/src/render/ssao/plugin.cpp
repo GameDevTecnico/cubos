@@ -3,6 +3,7 @@
 
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/io/window.hpp>
+#include <cubos/core/tel/metrics.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
@@ -17,6 +18,8 @@
 #include <cubos/engine/render/lights/plugin.hpp>
 #include <cubos/engine/render/lights/point.hpp>
 #include <cubos/engine/render/lights/spot.hpp>
+#include <cubos/engine/render/profiling/plugin.hpp>
+#include <cubos/engine/render/profiling/profiler.hpp>
 #include <cubos/engine/render/shader/plugin.hpp>
 #include <cubos/engine/render/ssao/plugin.hpp>
 #include <cubos/engine/render/ssao/ssao.hpp>
@@ -70,6 +73,8 @@ namespace
 
         std::vector<glm::vec3> kernel{};
 
+        PipelinedTimer timer;
+
         State(RenderDevice& renderDevice, const ShaderPipeline& basePipeline, const ShaderPipeline& blurPipeline)
             : basePipeline(basePipeline)
             , blurPipeline(blurPipeline)
@@ -119,6 +124,8 @@ namespace
             samplerDesc.minFilter = samplerDesc.magFilter = TextureFilter::Nearest;
             samplerDesc.addressU = samplerDesc.addressV = AddressMode::Repeat;
             noiseSampler = renderDevice.createSampler(samplerDesc);
+
+            timer = renderDevice.createPipelinedTimer();
         }
     };
 } // namespace
@@ -135,6 +142,7 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
     cubos.depends(gBufferPlugin);
     cubos.depends(cameraPlugin);
     cubos.depends(transformPlugin);
+    cubos.depends(renderProfilingPlugin);
 
     cubos.tag(drawToSSAOTag).after(drawToGBufferTag);
 
@@ -155,9 +163,15 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
 
     cubos.system("apply SSAO to the GBuffer and output to the SSAO texture")
         .tagged(drawToSSAOTag)
-        .call([](State& state, const Window& window, Query<Entity, const GBuffer&, SSAO&> targets,
+        .call([](State& state, const Window& window, const RenderProfiler& profiler,
+                 Query<Entity, const GBuffer&, SSAO&> targets,
                  Query<const LocalToWorld&, const Camera&, const DrawsTo&> cameras) {
             auto& rd = window->renderDevice();
+
+            if (profiler.profilingEnabled)
+            {
+                state.timer->begin();
+            }
 
             for (auto [targetEnt, gBuffer, ssao] : targets)
             {
@@ -295,6 +309,11 @@ void cubos::engine::ssaoPlugin(Cubos& cubos)
                     rd.setVertexArray(state.blurScreenQuad);
                     rd.drawTriangles(0, 6);
                 }
+            }
+
+            if (profiler.profilingEnabled)
+            {
+                CUBOS_METRIC("Graphics::SSAO::ns", state.timer->end().result);
             }
         });
 }

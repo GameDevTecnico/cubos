@@ -19,7 +19,7 @@ namespace tesseratos
     /// @note The opened scene is identified by the @ref AssetSelectedEvent event.
 
     /// @brief Tool state.
-    struct SceneEditorTool
+    struct SceneEditor
     {
         CUBOS_REFLECT;
 
