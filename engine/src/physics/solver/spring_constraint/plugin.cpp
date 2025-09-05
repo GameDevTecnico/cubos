@@ -37,6 +37,7 @@ static void solveSpringConstraint(Query<Entity, const Mass&, const Inertia&, con
         if (currentLength < 1e-6F)
         {
             continue;
+        
         }
 
         glm::vec3 direction = springVec / currentLength;
