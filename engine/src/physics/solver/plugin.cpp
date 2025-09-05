@@ -7,7 +7,7 @@
 #include "../fixed_substep/plugin.hpp"
 #include "distance_constraint/plugin.hpp"
 #include "integration/plugin.hpp"
-
+#include "spring_constraint/plugin.hpp"
 
 CUBOS_DEFINE_TAG(cubos::engine::physicsPrepareSolveTag);
 CUBOS_DEFINE_TAG(cubos::engine::physicsIntegrateVelocityTag);
@@ -56,4 +56,5 @@ void cubos::engine::physicsSolverPlugin(Cubos& cubos)
     cubos.plugin(physicsIntegrationPlugin);
     cubos.plugin(penetrationConstraintPlugin);
     cubos.plugin(distanceConstraintPlugin);
+    cubos.plugin(springConstraintPlugin);
 }
