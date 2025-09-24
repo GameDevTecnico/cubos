@@ -7,6 +7,7 @@
 
 #include "cubos.hpp"
 #include "systems.hpp"
+#include "logging.hpp"
 
 using cubos::engine::Cubos;
 
@@ -25,6 +26,11 @@ void cubos::bindings::lua::injectCubos(lua_State* state, Cubos* cubos)
     lua_newtable(state);
     pushFunction(state, "startupSystem", startupSystem);
     pushFunction(state, "system", system);
+
+    pushFunction(state, "info", logInfo);
+    pushFunction(state, "warn", logWarn);
+    pushFunction(state, "error", logError);
+
     lua_setglobal(state, "cubos");
 }
 
