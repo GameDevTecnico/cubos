@@ -13,6 +13,7 @@ set(LUA_BINDINGS_SOURCE
     "src/cubos.cpp"
     "src/plugin.cpp"
     "src/systems.cpp"
+    "src/logging.cpp"
 )
 
 # ------------------------ Configure lua bindings target -------------------------
