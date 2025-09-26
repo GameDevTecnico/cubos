@@ -8,6 +8,7 @@
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
 #include <cubos/engine/gizmos/plugin.hpp>
+#include <cubos/engine/interpolation/plugin.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/plugins/gravity.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
@@ -150,6 +151,7 @@ int main(int argc, char** argv)
                 {
                     auto builder = cmds.spawn(red ? redCube->blueprint() : whiteCube->blueprint());
                     builder.add(Position{.vec = nextPosition});
+                    builder.add(Interpolated{});
                     nextPosition.y += 1.0F;
                     red = !red;
                 }
@@ -172,6 +174,7 @@ int main(int argc, char** argv)
                 auto builder = cmds.spawn(cube->blueprint());
                 glm::vec3 position = RandomDirection ? randomPosition() : glm::vec3{0.0F, 3.0F, -7.0F};
                 builder.add(Position{.vec = position});
+                builder.add(Interpolated{});
 
                 // push cube in direction to the center
                 glm::vec3 impulseDirection = calculateDirection(position);

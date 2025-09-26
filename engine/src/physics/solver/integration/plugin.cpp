@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 
 #include <cubos/engine/fixed_step/plugin.hpp>
+#include <cubos/engine/interpolation/plugin.hpp>
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
@@ -21,6 +22,7 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
     cubos.depends(transformPlugin);
     cubos.depends(physicsPlugin);
     cubos.depends(physicsSolverPlugin);
+    cubos.depends(interpolationPlugin);
 
     cubos.tag(physicsApplyImpulsesTag);
     cubos.tag(physicsClearForcesTag).after(physicsFinalizePositionTag).tagged(fixedStepTag);
@@ -126,15 +128,23 @@ void cubos::engine::physicsIntegrationPlugin(Cubos& cubos)
 
     cubos.system("finalize position")
         .tagged(physicsFinalizePositionTag)
-        .call([](Query<Position&, AccumulatedCorrection&, const Mass&> query, const SolverConstants& solverConstants) {
-            for (auto [position, correction, mass] : query)
+        .call([](Query<Position&, AccumulatedCorrection&, const Mass&, Opt<Interpolated&>> query,
+                 const SolverConstants& solverConstants) {
+            for (auto [position, correction, mass, interpolated] : query)
             {
                 if (mass.inverseMass <= solverConstants.minInvMass)
                 {
                     continue;
                 }
 
-                position.vec += correction.position;
+                if (interpolated.contains())
+                {
+                    interpolated.value().nextPosition += correction.position;
+                }
+                else
+                {
+                    position.vec += correction.position;
+                }
                 correction.position = glm::vec3(0.0F);
             }
         });
