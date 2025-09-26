@@ -11,7 +11,6 @@
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
-#include <cubos/engine/physics/components/accumulated_correction.hpp>
 #include <cubos/engine/physics/components/angular_impulse.hpp>
 #include <cubos/engine/physics/components/angular_velocity.hpp>
 #include <cubos/engine/physics/components/center_of_mass.hpp>
@@ -22,7 +21,6 @@
 #include <cubos/engine/physics/components/physics_material.hpp>
 #include <cubos/engine/physics/components/torque.hpp>
 #include <cubos/engine/physics/components/velocity.hpp>
-#include <cubos/engine/physics/physics_bundle.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
 #include <cubos/engine/physics/resources/solver_constants.hpp>
 #include <cubos/engine/prelude.hpp>
@@ -40,8 +38,11 @@ namespace cubos::engine
     /// - @ref Substeps - holds the amount of substeps for the physics update.
     /// - @ref SolverConstants - holds the constants for the solver.
     ///
+    /// ## Bundles
+    /// - @ref RigidBodyBundle - encapsulates the creation all components required for a rigid body.
+    /// - @ref StaticBodyBundle - encapsulates the creation all components required for a static body.
+    ///
     /// ## Components
-    /// - @ref PhysicsBundle - bundle that holds the physics information to give to a new entity.
     /// - @ref Velocity - holds the information for moving an object straight.
     /// - @ref AngularVelocity - holds the angular velocity of an object.
     /// - @ref Force - holds forces applied on a particle.

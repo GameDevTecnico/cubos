@@ -5,9 +5,8 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/collider_aabb.hpp>
+#include <cubos/engine/collisions/collider_bundle.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
-#include <cubos/engine/collisions/collision_layers.hpp>
-#include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
@@ -17,7 +16,9 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/physics/constraints/distance_constraint.hpp>
 #include <cubos/engine/physics/plugin.hpp>
+#include <cubos/engine/physics/rigid_body_bundle.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
+#include <cubos/engine/physics/static_body_bundle.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
 #include <cubos/engine/render/camera/perspective.hpp>
@@ -68,22 +69,18 @@ void createScenario(Commands& commands, State& state, Options& options)
     {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(StaticBodyBundle{})
                       .entity();
 
         state.b = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {1.0F, 0.0F, 1.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {1.0F, 0.0F, 1.0F}})
                       .entity();
 
         commands.relate(state.a, state.b,
@@ -97,22 +94,18 @@ void createScenario(Commands& commands, State& state, Options& options)
     {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(StaticBodyBundle{})
                       .entity();
 
         state.b = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 5.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         commands.relate(state.a, state.b,
@@ -126,32 +119,26 @@ void createScenario(Commands& commands, State& state, Options& options)
     {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(StaticBodyBundle{})
                       .entity();
 
         state.b = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 5.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         state.c = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 10.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         commands.relate(state.a, state.b,
@@ -172,32 +159,26 @@ void createScenario(Commands& commands, State& state, Options& options)
     {
         state.a = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, 0.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 10000000000000000.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(StaticBodyBundle{})
                       .entity();
 
         state.b = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -5.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 0.0F}})
                       .entity();
 
         state.c = commands.create()
                       .add(BoxCollisionShape{})
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 0.0F, -15.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 5.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 5.0F}})
                       .entity();
 
         commands.relate(state.a, state.b,

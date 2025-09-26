@@ -5,9 +5,8 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/collisions/collider_aabb.hpp>
+#include <cubos/engine/collisions/collider_bundle.hpp>
 #include <cubos/engine/collisions/colliding_with.hpp>
-#include <cubos/engine/collisions/collision_layers.hpp> //maybe put this in the collisions plugin
-#include <cubos/engine/collisions/collision_mask.hpp>
 #include <cubos/engine/collisions/contact_manifold.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
@@ -18,6 +17,7 @@
 #include <cubos/engine/gizmos/plugin.hpp>
 #include <cubos/engine/gizmos/target.hpp>
 #include <cubos/engine/physics/plugin.hpp>
+#include <cubos/engine/physics/rigid_body_bundle.hpp>
 #include <cubos/engine/physics/solver/plugin.hpp>
 #include <cubos/engine/render/camera/camera.hpp>
 #include <cubos/engine/render/camera/draws_to.hpp>
@@ -101,27 +101,23 @@ int main()
         state.a = commands.create()
                       .add(RenderVoxelGrid{CarAsset})
                       .add(VoxelCollisionShape(CarAsset))
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, -10.0F, -20.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 1.0F}})
+                      .add(RigidBodyBundle{.mass = 500.0F, .velocity = {0.0F, 0.0F, 1.0F}})
                       .entity();
         state.aRotationAxis = glm::sphericalRand(1.0F);
 
         state.b = commands.create()
                       .add(RenderVoxelGrid{CarAsset})
                       .add(VoxelCollisionShape(CarAsset))
-                      .add(CollisionLayers{})
-                      .add(CollisionMask{})
                       .add(LocalToWorld{})
                       .add(Position{glm::vec3{0.0F, 15.0F, 10.0F}})
                       .add(Rotation{})
-                      .add(PhysicsBundle{.mass = 500.0F,
-                                         .velocity = {0.0F, 0.0F, -1.0F},
-                                         .material = PhysicsMaterial{.bounciness = 0.0},
-                                         .inertiaTensor = glm::mat3(0.0F)})
+                      .add(RigidBodyBundle{.mass = 500.0F,
+                                           .velocity = {0.0F, 0.0F, -1.0F},
+                                           .material = PhysicsMaterial{.bounciness = 0.0},
+                                           .inertiaTensor = glm::mat3(0.0F)})
                       .entity();
         state.bRotationAxis = glm::sphericalRand(1.0F);
     });

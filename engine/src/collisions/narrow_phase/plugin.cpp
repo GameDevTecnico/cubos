@@ -8,7 +8,10 @@
 #include <cubos/core/geom/plane.hpp>
 #include <cubos/core/geom/utils.hpp>
 
+#include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/contact_manifold.hpp>
+#include <cubos/engine/collisions/intersection_end.hpp>
+#include <cubos/engine/collisions/intersection_start.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/voxel.hpp>
 #include <cubos/engine/fixed_step/plugin.hpp>
@@ -164,10 +167,30 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 if (!pQuery.pin(0, entity).pin(1, other).first())
                 {
                     cmds.unrelate<CollidingWith>(entity, other);
+                    cmds.relate(entity, other, IntersectionEnd{});
                 }
             }
         });
 
+    cubos.system("clean onEnteredArea relations")
+        .before(collisionsNarrowTag)
+        .call([](Commands cmds, Query<Entity, IntersectionStart&, Entity> query) {
+            for (auto [entity, intersectionStart, other] : query)
+            {
+                cmds.unrelate<IntersectionStart>(entity, other);
+            }
+        });
+
+    cubos.system("clean onExitedArea relations")
+        .before(collisionsNarrowTag)
+        .call([](Commands cmds, Query<Entity, IntersectionEnd&, Entity> query) {
+            for (auto [entity, intersectionEnd, other] : query)
+            {
+                cmds.unrelate<IntersectionEnd>(entity, other);
+            }
+        });
+
+    /// This system is for collisions between physics bodies since they collide and need collision manifolds.
     /// Our method to calculate contact manifolds (and all supporting functions) is inspired by the tutorial:
     /// https://research.ncl.ac.uk/game/mastersdegree/gametechnologies/previousinformation/physics5collisionmanifolds/2017%20Tutorial%205%20-%20Collision%20Manifolds.pdf
     /// and the code of the course (Framework 2017):
@@ -177,16 +200,16 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
         .tagged(collisionsNarrowTag)
         .after(collisionsBroadTag)
         .call([](Commands cmds,
-                 Query<Entity, const LocalToWorld&, const BoxCollisionShape&, const PotentiallyCollidingWith&, Entity,
-                       const LocalToWorld&, const BoxCollisionShape&>
+                 Query<Entity, const LocalToWorld&, const BoxCollisionShape&, const Collider&,
+                       const PotentiallyCollidingWith&, Entity, const LocalToWorld&, const BoxCollisionShape&,
+                       const Collider&>
                      nQuery,
                  Query<Entity, const LocalToWorld&, const BoxCollisionShape&, CollidingWith&, Entity,
                        const LocalToWorld&, const BoxCollisionShape&>
                      yQuery) {
-            for (auto [ent1, localToWorld1, boxShape1, potentiallyCollidingWith, ent2, localToWorld2, boxShape2] :
-                 nQuery)
+            for (auto [ent1, localToWorld1, boxShape1, collider1, potentiallyCollidingWith, ent2, localToWorld2,
+                       boxShape2, collider2] : nQuery)
             {
-
                 cubos::core::geom::Intersection intersectionInfo{};
 
                 bool intersects = cubos::core::geom::intersects(boxShape1.box, localToWorld1.mat, boxShape2.box,
@@ -207,6 +230,13 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                     {
                         // Remove CollidingWith when it is related by PotentiallyCollidingWith but not intersecting
                         cmds.unrelate<CollidingWith>(ent1, ent2);
+                        cmds.relate(ent1, ent2, IntersectionEnd{});
+                        continue;
+                    }
+
+                    // if either is area do not calculate manifolds
+                    if (collider1.isArea || collider2.isArea)
+                    {
                         continue;
                     }
 
@@ -242,16 +272,21 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                         continue;
                     }
 
-                    auto points = computeContactPoints(matchedShape1, matchedLocalToWorld1, &matchedLocalToWorld1->mat,
-                                                       matchedShape2, matchedLocalToWorld2, &matchedLocalToWorld2->mat,
-                                                       intersectionInfo, ent1);
+                    auto collidingWith = CollidingWith{.entity = ent1, .manifolds = {}};
 
-                    cmds.relate(
-                        ent1, ent2,
-                        CollidingWith{
-                            .entity = ent1,
-                            .manifolds = {ContactManifold{
-                                .normal = intersectionInfo.normal, .points = points, .boxId1 = 1, .boxId2 = 1}}});
+                    // if either is area do not calculate manifolds
+                    if (!collider1.isArea && !collider2.isArea)
+                    {
+                        auto points = computeContactPoints(
+                            matchedShape1, matchedLocalToWorld1, &matchedLocalToWorld1->mat, matchedShape2,
+                            matchedLocalToWorld2, &matchedLocalToWorld2->mat, intersectionInfo, ent1);
+
+                        collidingWith.manifolds.push_back(ContactManifold{
+                            .normal = intersectionInfo.normal, .points = points, .boxId1 = 1, .boxId2 = 1});
+                    }
+
+                    cmds.relate(ent1, ent2, collidingWith);
+                    cmds.relate(ent1, ent2, IntersectionStart{});
                 }
             }
         });
@@ -259,114 +294,127 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
     cubos.system("find colliding voxel-box pairs")
         .tagged(collisionsNarrowTag)
         .after(collisionsBroadTag)
-        .call([](Commands cmds,
-                 Query<Entity, const LocalToWorld&, const BoxCollisionShape&, PotentiallyCollidingWith&, Entity,
-                       const LocalToWorld&, const VoxelCollisionShape&>
-                     nQuery,
-                 Query<Entity, const LocalToWorld&, const BoxCollisionShape&, CollidingWith&, Entity,
-                       const LocalToWorld&, const VoxelCollisionShape&>
-                     yQuery) {
-            for (auto [ent1, localToWorld1, boxShape, potentiallyCollidingWith, ent2, localToWorld2, voxelShape] :
-                 nQuery)
-            {
-                cubos::core::geom::Intersection intersectionInfo{};
-                auto match = yQuery.pin(0, ent1).pin(1, ent2).first();
-                std::vector<ContactManifold> newManifolds;
-                bool anyIntersects = false;
-
-                for (const auto box : voxelShape.getBoxes())
+        .call(
+            [](Commands cmds,
+               Query<Entity, const LocalToWorld&, const BoxCollisionShape&, const Collider&, PotentiallyCollidingWith&,
+                     Entity, const LocalToWorld&, const VoxelCollisionShape&, const Collider&>
+                   nQuery,
+               Query<Entity, const LocalToWorld&, const BoxCollisionShape&, CollidingWith&, Entity, const LocalToWorld&,
+                     const VoxelCollisionShape&>
+                   yQuery) {
+                for (auto [ent1, localToWorld1, boxShape, collider1, potentiallyCollidingWith, ent2, localToWorld2,
+                           voxelShape, collider2] : nQuery)
                 {
-                    // Get the current position from the localToWorld matrix
-                    glm::mat4 shiftedLocalToWorldMat = localToWorld2.mat; // Store the matrix
-                    // Create a translation matrix for the shift
-                    glm::mat4 shiftMatrix = glm::translate(glm::mat4(1.0F), -box.shift);
-                    shiftedLocalToWorldMat = shiftedLocalToWorldMat * shiftMatrix;
+                    cubos::core::geom::Intersection intersectionInfo{};
+                    auto match = yQuery.pin(0, ent1).pin(1, ent2).first();
+                    std::vector<ContactManifold> newManifolds;
+                    bool anyIntersects = false;
 
-                    bool intersects = cubos::core::geom::intersects(boxShape.box, localToWorld1.mat, box.box,
-                                                                    shiftedLocalToWorldMat, intersectionInfo);
-
-                    // If penetration not bigger than 0 continue
-                    if (intersects)
+                    for (const auto box : voxelShape.getBoxes())
                     {
-                        anyIntersects = true;
-                    }
+                        // Get the current position from the localToWorld matrix
+                        glm::mat4 shiftedLocalToWorldMat = localToWorld2.mat; // Store the matrix
+                        // Create a translation matrix for the shift
+                        glm::mat4 shiftMatrix = glm::translate(glm::mat4(1.0F), -box.shift);
+                        shiftedLocalToWorldMat = shiftedLocalToWorldMat * shiftMatrix;
 
-                    // If CollidingWith present in previous frame update it
-                    if (match)
-                    {
-                        auto [ent1, localToWorld1, boxShape, collidingWith, ent2, localToWorld2, voxelShape] = *match;
+                        bool intersects = cubos::core::geom::intersects(boxShape.box, localToWorld1.mat, box.box,
+                                                                        shiftedLocalToWorldMat, intersectionInfo);
 
-                        if (!intersects)
+                        // If penetration not bigger than 0 continue
+                        if (intersects)
                         {
-                            auto it =
-                                std::remove_if(collidingWith.manifolds.begin(), collidingWith.manifolds.end(),
-                                               [&](const auto& manifold) { return manifold.boxId2 == box.boxId; });
+                            anyIntersects = true;
+                        }
 
-                            collidingWith.manifolds.erase(it, collidingWith.manifolds.end());
+                        // if either is area do not calculate manifolds
+                        if (collider1.isArea || collider2.isArea)
+                        {
                             continue;
                         }
 
-                        auto points = computeContactPoints(&boxShape.box, &localToWorld1, &localToWorld1.mat, &box.box,
-                                                           &localToWorld2, &shiftedLocalToWorldMat, intersectionInfo,
-                                                           collidingWith.entity);
-
-                        bool existed = false;
-                        for (auto& manifold : collidingWith.manifolds)
+                        // If CollidingWith present in previous frame update it
+                        if (match)
                         {
-                            if (manifold.boxId2 == box.boxId)
+                            auto [ent1, localToWorld1, boxShape, collidingWith, ent2, localToWorld2, voxelShape] =
+                                *match;
+
+                            if (!intersects)
                             {
-                                manifold.normal = intersectionInfo.normal;
-                                matchContactPoints(points, manifold.points);
-                                manifold.points = points;
-                                existed = true;
-                                break;
+                                auto it =
+                                    std::remove_if(collidingWith.manifolds.begin(), collidingWith.manifolds.end(),
+                                                   [&](const auto& manifold) { return manifold.boxId2 == box.boxId; });
+
+                                collidingWith.manifolds.erase(it, collidingWith.manifolds.end());
+                                continue;
+                            }
+
+                            auto points = computeContactPoints(&boxShape.box, &localToWorld1, &localToWorld1.mat,
+                                                               &box.box, &localToWorld2, &shiftedLocalToWorldMat,
+                                                               intersectionInfo, collidingWith.entity);
+
+                            bool existed = false;
+                            for (auto& manifold : collidingWith.manifolds)
+                            {
+                                if (manifold.boxId2 == box.boxId)
+                                {
+                                    manifold.normal = intersectionInfo.normal;
+                                    matchContactPoints(points, manifold.points);
+                                    manifold.points = points;
+                                    existed = true;
+                                    break;
+                                }
+                            }
+
+                            if (!existed)
+                            {
+                                collidingWith.manifolds.push_back(ContactManifold{.normal = intersectionInfo.normal,
+                                                                                  .points = points,
+                                                                                  .boxId1 = 1,
+                                                                                  .boxId2 = box.boxId});
                             }
                         }
-
-                        if (!existed)
+                        else
                         {
-                            collidingWith.manifolds.push_back(ContactManifold{
+                            if (!intersects)
+                            {
+                                continue;
+                            }
+
+                            auto points =
+                                computeContactPoints(&boxShape.box, &localToWorld1, &localToWorld1.mat, &box.box,
+                                                     &localToWorld2, &shiftedLocalToWorldMat, intersectionInfo, ent1);
+
+                            newManifolds.push_back(ContactManifold{
                                 .normal = intersectionInfo.normal, .points = points, .boxId1 = 1, .boxId2 = box.boxId});
                         }
                     }
-                    else
+                    if (!match && anyIntersects)
                     {
-                        if (!intersects)
-                        {
-                            continue;
-                        }
-
-                        auto points =
-                            computeContactPoints(&boxShape.box, &localToWorld1, &localToWorld1.mat, &box.box,
-                                                 &localToWorld2, &shiftedLocalToWorldMat, intersectionInfo, ent1);
-
-                        newManifolds.push_back(ContactManifold{
-                            .normal = intersectionInfo.normal, .points = points, .boxId1 = 1, .boxId2 = box.boxId});
+                        cmds.relate(ent1, ent2, CollidingWith{.entity = ent1, .manifolds = newManifolds});
+                        cmds.relate(ent1, ent2, IntersectionStart{});
+                    }
+                    else if (match && !anyIntersects)
+                    {
+                        cmds.unrelate<CollidingWith>(ent1, ent2);
+                        cmds.relate(ent1, ent2, IntersectionEnd{});
                     }
                 }
-                if (!match && anyIntersects)
-                {
-                    cmds.relate(ent1, ent2, CollidingWith{.entity = ent1, .manifolds = newManifolds});
-                }
-                else if (match && !anyIntersects)
-                {
-                    cmds.unrelate<CollidingWith>(ent1, ent2);
-                }
-            }
-        });
+            });
 
     cubos.system("find colliding voxel-voxel pairs")
         .tagged(collisionsNarrowTag)
         .after(collisionsBroadTag)
         .call([](Commands cmds,
-                 Query<Entity, const LocalToWorld&, const VoxelCollisionShape&, PotentiallyCollidingWith&, Entity,
-                       const LocalToWorld&, const VoxelCollisionShape&>
+                 Query<Entity, const LocalToWorld&, const VoxelCollisionShape&, const Collider&,
+                       PotentiallyCollidingWith&, Entity, const LocalToWorld&, const VoxelCollisionShape&,
+                       const Collider&>
                      nQuery,
                  Query<Entity, const LocalToWorld&, const VoxelCollisionShape&, CollidingWith&, Entity,
                        const LocalToWorld&, const VoxelCollisionShape&>
                      yQuery) {
-            for (auto [ent1, localToWorld1, voxelShape1, potentiallyCollidingWith, ent2, localToWorld2, voxelShape2] :
-                 nQuery)
+            for (auto [ent1, localToWorld1, voxelShape1, collider1, potentiallyCollidingWith, ent2, localToWorld2,
+                       voxelShape2, collider2] : nQuery)
             {
                 cubos::core::geom::Intersection intersectionInfo{};
 
@@ -394,14 +442,15 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                         bool intersects = cubos::core::geom::intersects(box1.box, shiftedLocalToWorldMat1, box2.box,
                                                                         shiftedLocalToWorldMat2, intersectionInfo);
 
-                        // If penetration not bigger than 0 continue
-                        // if (intersects && intersectionInfo.penetration < 0)
-                        //{
-                        //    continue;
-                        //}
                         if (intersects)
                         {
                             anyIntersects = true;
+                        }
+
+                        // if either is area do not calculate manifolds
+                        if (collider1.isArea || collider2.isArea)
+                        {
+                            continue;
                         }
 
                         // Make sure that shape1 corresponds to the entity refered to in collidingWith
@@ -482,10 +531,12 @@ void cubos::engine::narrowPhaseCollisionsPlugin(Cubos& cubos)
                 if (!match && anyIntersects)
                 {
                     cmds.relate(ent1, ent2, CollidingWith{.entity = ent1, .manifolds = newManifolds});
+                    cmds.relate(ent1, ent2, IntersectionStart{});
                 }
                 else if (match && !anyIntersects)
                 {
                     cmds.unrelate<CollidingWith>(ent1, ent2);
+                    cmds.relate(ent1, ent2, IntersectionEnd{});
                 }
             }
         });
