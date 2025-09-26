@@ -8,6 +8,7 @@
 #include "cubos.hpp"
 #include "systems.hpp"
 #include "logging.hpp"
+#include "depends.hpp"
 
 using cubos::engine::Cubos;
 
@@ -24,14 +25,35 @@ void cubos::bindings::lua::injectCubos(lua_State* state, Cubos* cubos)
     lua_settable(state, LUA_REGISTRYINDEX);
 
     lua_newtable(state);
+
+    // Ecs
     pushFunction(state, "startupSystem", startupSystem);
     pushFunction(state, "system", system);
+    pushFunction(state, "depends", depends);
 
+    // Logging
     pushFunction(state, "info", logInfo);
     pushFunction(state, "warn", logWarn);
     pushFunction(state, "error", logError);
 
     lua_setglobal(state, "cubos");
+
+
+    // Create metatables for types
+    luaL_newmetatable(state, "component");
+    lua_pushstring(state, "Component");
+    lua_setfield(state, -2, "__kind");
+    lua_setfield(state, -1, "__index");
+
+    luaL_newmetatable(state, "resource");
+    lua_pushstring(state, "Resource");
+    lua_setfield(state, -2, "__kind");
+    lua_setfield(state, -1, "__index");
+
+    luaL_newmetatable(state, "relation");
+    lua_pushstring(state, "Relation");
+    lua_setfield(state, -2, "__kind");
+    lua_setfield(state, -1, "__index");
 }
 
 Cubos* cubos::bindings::lua::getCubos(lua_State* state)
