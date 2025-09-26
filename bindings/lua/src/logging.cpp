@@ -2,8 +2,10 @@
 
 #include <string>
 #include <cmath>
+#include <utility>
 
-#include <cubos/engine/prelude.hpp>
+#include <cubos/core/tel/logging.hpp>
+#include <cubos/core/tel/level.hpp>
 
 using namespace cubos::core::tel;
 
@@ -64,42 +66,41 @@ static std::string formatArgs(lua_State *state)
     return str;
 }
 
-static void log(lua_State* state, Level logLevel)
-{
-    std::string formattedArgs = formatArgs(state);
-    Logger::Location location;
-    lua_Debug debugInfo;
-
-    if (lua_getstack(state, 1, &debugInfo))
-    {
-        if (lua_getinfo(state, "nSl", &debugInfo))
-        {
-            location.function = debugInfo.name ? debugInfo.name : "undefined";
-            location.file = debugInfo.short_src;
-            location.line = debugInfo.currentline;
-
-            Logger::write(logLevel, location, formattedArgs);
-        }
-    }
-}
-
 namespace cubos::bindings::lua
 {
+    void logLua(lua_State* state, Level logLevel, std::string message)
+    {
+        Logger::Location location;
+        lua_Debug debugInfo;
+
+        if (lua_getstack(state, 1, &debugInfo))
+        {
+            if (lua_getinfo(state, "nSl", &debugInfo))
+            {
+                location.function = debugInfo.name ? debugInfo.name : "undefined";
+                location.file = debugInfo.short_src;
+                location.line = debugInfo.currentline;
+
+                Logger::write(logLevel, location, std::move(message));
+            }
+        }
+    }
+
     int logInfo(lua_State* state)
     {
-        log(state, Level::Info);
+        logLua(state, Level::Info, formatArgs(state));
         return 0;
     };
 
     int logWarn(lua_State* state)
     {
-        log(state, Level::Warn);
+        logLua(state, Level::Warn, formatArgs(state));
         return 0;
     };
 
     int logError(lua_State* state)
     {
-        log(state, Level::Error);
+        logLua(state, Level::Error, formatArgs(state));
         return 0;
     };
 } // namespace cubos::bindings::lua
