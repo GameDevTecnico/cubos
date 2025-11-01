@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::engine::Inertia struct | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Inertia <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="inertia_8hpp.html">&lt;engine/physics/components/inertia.hpp&gt;</a></div>
+        </h1>
+        <p>Component which defines the inertia of a body.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>The tensor of inertia gives us how the mass is distributed in a rigid body, representing resistance to angular acceleration. A higher angular inertia requires more torque for the same acceleration.</p><p>It does not take into account child entities, even when set to update automatically.</p><p>A total angular inertia of zero is a special case, and is interpreted as infinite inertia, meaning the rigid body will not be affected by any torque.</p><p>For bodies that are symmetric in the usual x, y and z axis, the tensor is always diagonal. For a general three-dimensional body, such as any voxel shape, it may not be. However, it is always possible to find 3 mutually orthogonal axis (an x&#x27;, y&#x27;, z&#x27; coordinate system) for which the products of inertia are zero, and the inertia matrix takes a diagonal form. A more thourough explanation can be found here: <a href="https://ocw.mit.edu/courses/16-07-dynamics-fall-2009/dd277ec654440f4c2b5b07d6c286c3fd_MIT16_07F09_Lec26.pdf">https://ocw.mit.edu/courses/16-07-dynamics-fall-2009/dd277ec654440f4c2b5b07d6c286c3fd_<wbr />MIT16_<wbr />07F09_<wbr />Lec26.pdf</a></p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#acb1b795570e4a7efb79615f0456583d5" class="m-doc">setFromTensor</a>(</span><span class="m-doc-wrap">glm::mat3 inertiaTensor)</span>
+            </dt>
+            <dd>Sets the inertia from the given inertia tensor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab6ad80a66b0b0380428087fe29c8e814" class="m-doc">setWithLocalFrame</a>(</span><span class="m-doc-wrap">glm::vec3 principalInertia,
+              glm::quat principalLocalFrame)</span>
+            </dt>
+            <dd>Sets the inertia from the principal inertia and the principal local frame.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4b1469e79c5c38a212ae83202ca1c6fa" class="m-doc">rotatedInertia</a>(</span><span class="m-doc-wrap">const glm::quat&amp; rotationQuat) const -&gt; glm::mat3</span>
+            </dt>
+            <dd>Computes the inertia tensor with the given rotation. Can be used to transform the local inertia tensor to world space.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af22ffdc01f915ff4fd70728ada323335" class="m-doc">rotatedInverseInertia</a>(</span><span class="m-doc-wrap">const glm::quat&amp; rotationQuat) const -&gt; glm::mat3</span>
+            </dt>
+            <dd>Computes the inverse inertia tensor with the given rotation. Can be used to transform the local inverse inertia tensor to world space.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="af6e7d075279099732f487e3d757d2173">
+              glm::mat3 <a href="#af6e7d075279099732f487e3d757d2173" class="m-doc-self">inertia</a>
+            </dt>
+            <dd>The inertia tensor in local space.</dd>
+            <dt id="aeae8b7c2aeda38ee3c9e47de54dc83ec">
+              glm::mat3 <a href="#aeae8b7c2aeda38ee3c9e47de54dc83ec" class="m-doc-self">inverseInertia</a>
+            </dt>
+            <dd>The inverse inertia tensor in local space.</dd>
+            <dt id="a4ee53da5a32fcc1f1960c22344c2e276">
+              bool <a href="#a4ee53da5a32fcc1f1960c22344c2e276" class="m-doc-self">autoUpdate</a>
+            </dt>
+            <dd>Whether to update the component automatically when the <a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> or the collision shape change.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="acb1b795570e4a7efb79615f0456583d5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Inertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acb1b795570e4a7efb79615f0456583d5" class="m-doc-self">setFromTensor</a>(</span><span class="m-doc-wrap">glm::mat3 inertiaTensor)</span></span>
+            </h3>
+            <p>Sets the inertia from the given inertia tensor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">inertiaTensor</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab6ad80a66b0b0380428087fe29c8e814"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Inertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab6ad80a66b0b0380428087fe29c8e814" class="m-doc-self">setWithLocalFrame</a>(</span><span class="m-doc-wrap">glm::vec3 principalInertia,
+              glm::quat principalLocalFrame)</span></span>
+            </h3>
+            <p>Sets the inertia from the principal inertia and the principal local frame.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">principalInertia</td>
+                  <td>The diagonal of a diagonal inertia tensor.</td>
+                </tr>
+                <tr>
+                  <td>principalLocalFrame</td>
+                  <td>The orientation of the principal inertial axis, for which the inertia tensor is diagonal.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4b1469e79c5c38a212ae83202ca1c6fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 cubos::<wbr />engine::<wbr />Inertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b1469e79c5c38a212ae83202ca1c6fa" class="m-doc-self">rotatedInertia</a>(</span><span class="m-doc-wrap">const glm::quat&amp; rotationQuat) const</span></span>
+            </h3>
+            <p>Computes the inertia tensor with the given rotation. Can be used to transform the local inertia tensor to world space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rotationQuat</td>
+                  <td>Quarternion with the desired rotation.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The inertia tensor rotated.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af22ffdc01f915ff4fd70728ada323335"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">glm::mat3 cubos::<wbr />engine::<wbr />Inertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af22ffdc01f915ff4fd70728ada323335" class="m-doc-self">rotatedInverseInertia</a>(</span><span class="m-doc-wrap">const glm::quat&amp; rotationQuat) const</span></span>
+            </h3>
+            <p>Computes the inverse inertia tensor with the given rotation. Can be used to transform the local inverse inertia tensor to world space.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rotationQuat</td>
+                  <td>Quarternion with the desired rotation.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The inertia tensor rotated.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

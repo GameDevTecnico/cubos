@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::core::ecs::QueryNode class | Cubos Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://cubosengine.org"><img src="Favicon.png" alt="" />Cubos</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>QueryNode <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2ecs_2query_2node_2node_8hpp.html">&lt;core/ecs/query/node/node.hpp&gt;</a></div>
+        </h1>
+        <p><a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a> filter step, which receives an iterator and advances it until it points to a valid match.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryArchetypeNode.html" class="m-doc">QueryArchetypeNode</a> <span class="m-label m-flat m-warning">final</span>
+            </dt>
+            <dd>Node which forces a given target to belong to a set of archetypes.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1QueryRelatedNode.html" class="m-doc">QueryRelatedNode</a> <span class="m-label m-flat m-warning">final</span>
+            </dt>
+            <dd>Node which forces two given targets to be related with a given relation.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="ad35a58b9c09e9292581e9ace95a36515">
+              using <a href="#ad35a58b9c09e9292581e9ace95a36515" class="m-doc-self">TargetMask</a> = unsigned char
+            </dt>
+            <dd>Target mask type.</dd>
+          </dl>
+        </section>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="aca75e4a64e83ab00e7a362e403d8adf7">
+              static int <a href="#aca75e4a64e83ab00e7a362e403d8adf7" class="m-doc-self">MaxTargetCount</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd>Maximum number of targets.</dd>
+            <dt id="ab0cd40e3d1efe439e60ef2029f11bb2a">
+              static int <a href="#ab0cd40e3d1efe439e60ef2029f11bb2a" class="m-doc-self">MaxCursorCount</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd>Maximum number of cursors.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a82ed70e278c8212cdf67946355aba31f">
+              <span class="m-doc-wrap-bumper"><a href="#a82ed70e278c8212cdf67946355aba31f" class="m-doc-self">QueryNode</a>(</span><span class="m-doc-wrap">int cursor)</span>
+            </dt>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a6850a0349e1c0488125570031c994bf7">
+              <span class="m-doc-wrap-bumper">auto <a href="#a6850a0349e1c0488125570031c994bf7" class="m-doc-self">cursor</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
+            </dt>
+            <dd>Gets the cursor index of the node.</dd>
+            <dt id="a26271a8b3b6eaf17c4aa52da5632e7d3">
+              <span class="m-doc-wrap-bumper">auto <a href="#a26271a8b3b6eaf17c4aa52da5632e7d3" class="m-doc-self">pins</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="#ad35a58b9c09e9292581e9ace95a36515" class="m-doc">TargetMask</a></span>
+            </dt>
+            <dd>Gets the mask which indicates which targets the node pins.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a389496e19d01ca2340c81fc8892f9d0b" class="m-doc">estimate</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Returns a rough estimate on how many matches this node produces by itself.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a6e52e4c628d7f56094ee4536cadb416c" class="m-doc">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Updates the node with new data from the given world.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7ed10fd4ce15331429c046db00f231b1" class="m-doc">next</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              <a href="#ad35a58b9c09e9292581e9ace95a36515" class="m-doc">TargetMask</a> pins,
+              <a href="structcubos_1_1core_1_1ecs_1_1QueryNode_1_1Iterator.html" class="m-doc">Iterator</a>&amp; iterator) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Advances the iterator to the next valid match, or checks if the pinned targets are valid.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a74baa296ffacef5c728eebdec3299b33" class="m-doc">pins</a>(</span><span class="m-doc-wrap">int target)</span>
+            </dt>
+            <dd>Indicates that the node pins the given target.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a389496e19d01ca2340c81fc8892f9d0b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />QueryNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a389496e19d01ca2340c81fc8892f9d0b" class="m-doc-self">estimate</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Returns a rough estimate on how many matches this node produces by itself.</p>
+<p>Nodes are sorted by this value to minimize the number of iterations. It makes more sense to first run the node which produces the fewest matches, as it will be the most selective.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6e52e4c628d7f56094ee4536cadb416c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6e52e4c628d7f56094ee4536cadb416c" class="m-doc-self">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Updates the node with new data from the given world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7ed10fd4ce15331429c046db00f231b1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />QueryNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7ed10fd4ce15331429c046db00f231b1" class="m-doc-self">next</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              <a href="#ad35a58b9c09e9292581e9ace95a36515" class="m-doc">TargetMask</a> pins,
+              <a href="structcubos_1_1core_1_1ecs_1_1QueryNode_1_1Iterator.html" class="m-doc">Iterator</a>&amp; iterator) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Advances the iterator to the next valid match, or checks if the pinned targets are valid.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> being queried.</td>
+                </tr>
+                <tr>
+                  <td>pins</td>
+                  <td>Whether each target is pinned.</td>
+                </tr>
+                <tr>
+                  <td>iterator</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1QueryNode_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether a match was found.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Operates in two different modes:</p><ul><li>Iterate: at least one of the node targets is not pinned.</li><li>Validate: all node targets are already pinned.</li></ul><p>When iterating, this function should receive an iterator with the cursor index set to SIZE_MAX, or one previously returned by this function. It will update the iterator&#x27;s cursor index and row to point to the first or next valid match. The relevant target archetypes and cursor rows will be set for any newly pinned targets.</p><p>When validating, the function will only check if the pinned targets match the requirements and return true or false without modifying the iterator. The passed iterator should have the pinned targets&#x27; archetypes and cursor rows set.</p>
+          </div></section>
+          <section class="m-doc-details" id="a74baa296ffacef5c728eebdec3299b33"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />QueryNode::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a74baa296ffacef5c728eebdec3299b33" class="m-doc-self">pins</a>(</span><span class="m-doc-wrap">int target) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Indicates that the node pins the given target.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Target.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Cubos Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
