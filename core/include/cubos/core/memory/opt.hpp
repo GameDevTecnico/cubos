@@ -218,6 +218,8 @@ namespace cubos::core::memory
         {
         }
 
+        Opt<T&>& operator=(const Opt<T&>& other) = default;
+
         bool contains() const
         {
             return mValue != nullptr;

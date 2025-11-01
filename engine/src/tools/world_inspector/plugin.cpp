@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <iostream>
 #include <sstream>
 #include <string>
 
@@ -161,6 +160,65 @@ static void showHierarchy(Entity entity, Query<Entity, Opt<const Name&>, const C
     ImGui::PopStyleColor();
 }
 
+static void sortAlphabetical(std::vector<std::pair<Entity, Opt<const Name&>>>& entities)
+{
+    std::sort(entities.begin(), entities.end(), [](auto& a, auto& b) {
+        std::string nameA = a.second.contains() ? a.second->value : std::to_string(a.first.index);
+        std::string nameB = b.second.contains() ? b.second->value : std::to_string(b.first.index);
+        return nameA < nameB;
+    });
+}
+
+static void sortReverseAlphabetical(std::vector<std::pair<Entity, Opt<const Name&>>>& entities)
+{
+    std::sort(entities.begin(), entities.end(), [](auto& a, auto& b) {
+        std::string nameA = a.second.contains() ? a.second->value : std::to_string(a.first.index);
+        std::string nameB = b.second.contains() ? b.second->value : std::to_string(b.first.index);
+        return nameA > nameB; 
+    });
+}
+
+static void sortByEntityIdAscending(std::vector<std::pair<Entity, Opt<const Name&>>>& entities)
+{
+    std::sort(entities.begin(), entities.end(),
+              [](const auto& a, const auto& b) { return a.first.index < b.first.index; });
+}
+
+static void sortByEntityIdDescending(std::vector<std::pair<Entity, Opt<const Name&>>>& entities)
+{
+    std::sort(entities.begin(), entities.end(),
+              [](const auto& a, const auto& b) { return a.first.index > b.first.index; });
+}
+
+
+static void sortEntities(std::vector<std::pair<Entity, Opt<const Name&>>>& entities, int sortMode)
+{
+    switch (sortMode)
+    {
+    case 0: // A-Z
+        sortAlphabetical(entities);
+        break;
+
+    case 1: // Z-A
+        sortReverseAlphabetical(entities);
+        break;
+
+    case 2: // ID (Asc.)
+        sortByEntityIdAscending(entities);
+        break;
+
+    case 3: // ID (Des.)
+        sortByEntityIdDescending(entities);
+        break;
+    
+
+    default:
+        // Default to alphabetical
+        sortAlphabetical(entities);
+        break;
+    }
+}
+
 void cubos::engine::worldInspectorPlugin(Cubos& cubos)
 {
     cubos.depends(imguiPlugin);
@@ -180,12 +238,24 @@ void cubos::engine::worldInspectorPlugin(Cubos& cubos)
             ImGui::Begin("World Inspector");
 
             if (!ImGui::IsWindowCollapsed())
-            {
-                std::string searchQuery{};
+            {   
+                // Spacing
                 float windowWidth = ImGui::GetContentRegionAvail().x;
+                float searchWidth = windowWidth * 0.58F;
+                float comboWidth = windowWidth * 0.40F;
+                
+                // Widget variables
+                std::string searchQuery{};
                 static char searchBuffer[512];
-                ImGui::PushItemWidth(windowWidth);
+                const char* sortModes[] = {"Name (Asc.)", "Name (Des.)", "ID (Asc.)", "ID (Des.)"};
+                static int currentsortMode = 0;
+
+                ImGui::PushItemWidth(searchWidth);
                 ImGui::InputText("##searchQuery", searchBuffer, sizeof(searchBuffer));
+                ImGui::PopItemWidth();
+                ImGui::SameLine();
+                ImGui::PushItemWidth(comboWidth);
+                ImGui::Combo("sortItems", &currentsortMode, sortModes, IM_ARRAYSIZE(sortModes));
                 ImGui::PopItemWidth();
                 ImGui::Spacing();
                 ImGui::Separator();
@@ -198,13 +268,23 @@ void cubos::engine::worldInspectorPlugin(Cubos& cubos)
                 }
                 else
                 {
+                    std::vector<std::pair<Entity, Opt<const Name&>>> entities;
                     for (auto [entity, name] : all)
                     {
                         if (!query.pin(0, entity).empty())
                         {
                             continue; // Skip all entities with parents
                         }
+                        
+                        entities.emplace_back(entity, name);
+                    }
 
+                    // Sort the entities
+                    sortEntities(entities, currentsortMode);
+
+                    // Display sorted entities
+                    for (const auto& [entity, name] : entities)
+                    {
                         showHierarchy(entity, query, name, selection);
                     }
                 }
