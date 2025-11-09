@@ -12,3 +12,4 @@
 - @subpage examples-core-reflection-traits-mask - @copybrief examples-core-reflection-traits-mask
 - @subpage examples-core-reflection-traits-nullable - @copybrief examples-core-reflection-traits-nullable
 - @subpage examples-core-reflection-traits-inherits - @copybrief examples-core-reflection-traits-inherits
+- @subpage examples-core-reflection-traits-categorizable - @copybrief examples-core-reflection-traits-categorizable

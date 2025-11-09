@@ -1,16 +1,18 @@
+#include <algorithm>
+
 #include <imgui.h>
 
 #include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/name.hpp>
 #include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/reflection/traits/categorizable.hpp>
+#include <cubos/core/reflection/traits/hidden.hpp>
 
 #include <cubos/engine/imgui/inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 #include <cubos/engine/tools/selection/plugin.hpp>
 #include <cubos/engine/tools/toolbox/plugin.hpp>
-
-#include "cubos/core/reflection/traits/hidden.hpp"
 
 using cubos::core::ecs::Name;
 using cubos::core::ecs::World;
@@ -22,6 +24,11 @@ using cubos::engine::Entity;
 using cubos::engine::Opt;
 using cubos::engine::Query;
 
+// TODO: maybe only show the "Misc" category or not show it at all.
+// ("Misc" is where non-categorized components fall into).
+// TODO: Also show entity identifiers along with their name (See #1523).
+// TODO: Make the "Select" button more clear - maybe be able to select the target entity by clicking it.
+
 namespace
 {
     struct State
@@ -31,6 +38,26 @@ namespace
         const Type* relationType;
         bool showHidden = false;
     };
+
+    struct Component
+    {
+        CUBOS_ANONYMOUS_REFLECT(Component);
+
+        const Type* type;
+        void* value;
+        size_t priority;
+    };
+
+    struct Relation
+    {
+        CUBOS_ANONYMOUS_REFLECT(Relation);
+
+        const Type* type;
+        void* value;
+        size_t priority;
+        Entity related;
+    };
+
 } // namespace
 
 static void addRelationButton(State& state, World& world, Entity entity, bool incoming,
@@ -46,7 +73,7 @@ static void addRelationButton(State& state, World& world, Entity entity, bool in
     bool openPopup = false;
     if (ImGui::BeginPopup(("Select Relation Type" + suffix).c_str()))
     {
-        for (auto [type, name] : world.types().relations())
+        for (const auto& [type, name] : world.types().relations())
         {
             if (ImGui::Button(name.c_str()))
             {
@@ -89,6 +116,95 @@ static void addRelationButton(State& state, World& world, Entity entity, bool in
     }
 }
 
+static inline void addItems(State& state, World& world, Entity& entity,
+                            std::unordered_map<std::string, std::vector<Component>>& components,
+                            std::unordered_map<std::string, std::vector<Relation>>& incomingRelations,
+                            std::unordered_map<std::string, std::vector<Relation>>& outgoingRelations)
+{
+    // Add components.
+    for (const auto& [type, value] : world.components(entity))
+    {
+        if (type->has<cubos::core::reflection::HiddenTrait>() && !state.showHidden)
+        {
+            continue;
+        }
+
+        std::string category = "Misc"; // Default category
+        size_t priority = 0;           // Default priority
+
+        if (type->has<cubos::core::reflection::CategorizableTrait>())
+        {
+            const auto& trait = type->get<cubos::core::reflection::CategorizableTrait>();
+            category = trait.category();
+            priority = trait.priority();
+        }
+
+        components[category].emplace_back(type, value, priority);
+    }
+
+    // Add incoming relations.
+    for (const auto& [type, value, fromEntity] : world.relationsFrom(entity))
+    {
+        if (type->has<cubos::core::reflection::HiddenTrait>() && !state.showHidden)
+        {
+            continue;
+        }
+
+        std::string category = "Misc "; // One extra space so when collapsing one it does not collapse all.
+        size_t priority = 0;
+
+        if (type->has<cubos::core::reflection::CategorizableTrait>())
+        {
+            const auto& trait = type->get<cubos::core::reflection::CategorizableTrait>();
+            category = trait.category();
+            priority = trait.priority();
+        }
+
+        incomingRelations[category].emplace_back(type, value, priority, fromEntity);
+    }
+
+    // Add outgoing relations.
+    for (const auto& [type, value, toEntity] : world.relationsTo(entity))
+    {
+        if (type->has<cubos::core::reflection::HiddenTrait>() && !state.showHidden)
+        {
+            continue;
+        }
+
+        std::string category = "Misc  ";
+        size_t priority = 0;
+
+        if (type->has<cubos::core::reflection::CategorizableTrait>())
+        {
+            const auto& trait = type->get<cubos::core::reflection::CategorizableTrait>();
+            category = trait.category();
+            priority = trait.priority();
+        }
+
+        outgoingRelations[category].emplace_back(type, value, priority, toEntity);
+    }
+}
+
+static inline void sortItems(std::unordered_map<std::string, std::vector<Component>>& components,
+                             std::unordered_map<std::string, std::vector<Relation>>& incomingRelations,
+                             std::unordered_map<std::string, std::vector<Relation>>& outgoingRelations)
+{
+    for (auto& [category, categorized] : components)
+    {
+        std::ranges::sort(categorized, [](const Component& a, const Component& b) { return a.priority < b.priority; });
+    }
+
+    for (auto& [category, categorized] : incomingRelations)
+    {
+        std::ranges::sort(categorized, [](const Relation& a, const Relation& b) { return a.priority < b.priority; });
+    }
+
+    for (auto& [category, categorized] : outgoingRelations)
+    {
+        std::ranges::sort(categorized, [](const Relation& a, const Relation& b) { return a.priority < b.priority; });
+    }
+}
+
 void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 {
     cubos.depends(imguiPlugin);
@@ -99,7 +215,7 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 
     cubos.system("show Entity Inspector UI")
         .tagged(imguiTag)
-        .call([](State& state, World& world, Toolbox& toolbox, const Selection& selection, ImGuiInspector inspector,
+        .call([](State& state, World& world, Toolbox& toolbox, Selection& selection, ImGuiInspector inspector,
                  Query<Entity, Opt<const Name&>> query) {
             if (!toolbox.isOpen("Entity Inspector"))
             {
@@ -131,43 +247,38 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 
                     ImGui::Checkbox("Show hidden components", &state.showHidden);
 
-                    if (ImGui::Button("Add Component"))
-                    {
-                        ImGui::OpenPopup("Select Component Type");
-                    }
+                    // Group components and relations by category.
+                    std::unordered_map<std::string, std::vector<Component>> components;
+                    std::unordered_map<std::string, std::vector<Relation>> incomingRelations;
+                    std::unordered_map<std::string, std::vector<Relation>> outgoingRelations;
 
-                    if (ImGui::BeginPopup("Select Component Type"))
-                    {
-                        for (auto [type, name] : world.types().components())
-                        {
-                            if (ImGui::Button(name.c_str()))
-                            {
-                                auto value = AnyValue::defaultConstruct(*type);
-                                world.components(entity).add(value.type(), value.get());
-                                ImGui::CloseCurrentPopup();
-                            }
-                        }
+                    addItems(state, world, entity, components, incomingRelations, outgoingRelations);
+                    sortItems(components, incomingRelations, outgoingRelations);
 
-                        ImGui::EndPopup();
-                    }
+                    // Have the tree nodes open by default
+                    ImGuiTreeNodeFlags treeNodeFlag = ImGuiTreeNodeFlags_DefaultOpen;
 
                     const Type* removed = nullptr;
-                    for (auto [type, value] : world.components(entity))
+
+                    for (const auto& [category, categorized] : components)
                     {
-
-                        if (type->has<core::reflection::HiddenTrait>() && !state.showHidden)
+                        if (ImGui::TreeNodeEx(category.c_str(), treeNodeFlag))
                         {
-                            continue;
-                        }
+                            for (const auto& component : categorized)
+                            {
+                                ImGui::PushID(component.type->name().c_str());
 
-                        ImGui::PushID(type->name().c_str());
-                        if (ImGui::Button("X"))
-                        {
-                            removed = type;
+                                if (ImGui::Button("X"))
+                                {
+                                    removed = component.type;
+                                }
+
+                                ImGui::SameLine();
+                                inspector.edit(component.type->shortName(), *component.type, component.value);
+                                ImGui::PopID();
+                            }
+                            ImGui::TreePop();
                         }
-                        ImGui::SameLine();
-                        inspector.edit(type->shortName(), *type, value);
-                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)
@@ -178,43 +289,73 @@ void cubos::engine::entityInspectorPlugin(Cubos& cubos)
 
                     ImGui::SeparatorText("Incoming Relations");
                     addRelationButton(state, world, entity, true, query);
-
                     Entity removedEnt{};
-                    for (auto [type, value, fromEntity] : world.relationsTo(entity))
+
+                    for (const auto& [category, categorized] : incomingRelations)
                     {
-                        std::string relName = getName(fromEntity) + "#" + type->shortName();
-                        ImGui::PushID(relName.c_str());
-                        if (ImGui::Button("X"))
+                        if (ImGui::TreeNodeEx(category.c_str(), treeNodeFlag))
                         {
-                            removed = type;
-                            removedEnt = fromEntity;
+                            for (const auto& incoming : categorized)
+                            {
+                                std::string relName = getName(incoming.related) + "#" + incoming.type->shortName();
+
+                                ImGui::PushID(relName.c_str());
+
+                                if (ImGui::Button("X"))
+                                {
+                                    removed = incoming.type;
+                                    removedEnt = incoming.related;
+                                }
+
+                                ImGui::SameLine();
+                                if (ImGui::Button("Select"))
+                                {
+                                    selection.entity = incoming.related;
+                                }
+                                ImGui::SameLine();
+                                inspector.edit(relName, *incoming.type, incoming.value);
+                                ImGui::PopID();
+                            }
+                            ImGui::TreePop();
                         }
-                        ImGui::SameLine();
-                        inspector.edit(relName, *type, value);
-                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)
                     {
-                        world.unrelate(removedEnt, entity, *removed);
+                        world.unrelate(entity, removedEnt, *removed);
                         removed = nullptr;
                     }
 
                     ImGui::SeparatorText("Outgoing Relations");
                     addRelationButton(state, world, entity, false, query);
 
-                    for (auto [type, value, toEntity] : world.relationsFrom(entity))
+                    for (const auto& [category, categorized] : outgoingRelations)
                     {
-                        std::string relName = type->shortName() + "#" + getName(toEntity);
-                        ImGui::PushID(relName.c_str());
-                        if (ImGui::Button("X"))
+                        if (ImGui::TreeNodeEx(category.c_str(), treeNodeFlag))
                         {
-                            removed = type;
-                            removedEnt = toEntity;
+                            for (const auto& outgoing : categorized)
+                            {
+                                std::string relName = outgoing.type->shortName() + "#" + getName(outgoing.related);
+
+                                ImGui::PushID(relName.c_str());
+
+                                if (ImGui::Button("X"))
+                                {
+                                    removed = outgoing.type;
+                                    removedEnt = outgoing.related;
+                                }
+
+                                ImGui::SameLine();
+                                if (ImGui::Button("Select"))
+                                {
+                                    selection.entity = outgoing.related;
+                                }
+                                ImGui::SameLine();
+                                inspector.edit(relName, *outgoing.type, outgoing.value);
+                                ImGui::PopID();
+                            }
+                            ImGui::TreePop();
                         }
-                        ImGui::SameLine();
-                        inspector.edit(relName, *type, value);
-                        ImGui::PopID();
                     }
 
                     if (removed != nullptr)
