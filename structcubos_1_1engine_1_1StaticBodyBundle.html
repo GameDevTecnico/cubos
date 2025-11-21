@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tesseratos &raquo; Debugger module | Cubos Docs</title>
+  <title>cubos::engine::StaticBodyBundle struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,63 +46,46 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__tesseratos.html">Tesseratos</a> &raquo;</span>
-          Debugger <span class="m-thin">module</span></h1>
-        <p>Adds a resource used to manage a connection to a Cubos debugger.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>StaticBodyBundle <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="static__body__bundle_8hpp.html">&lt;engine/physics/static_body_bundle.hpp&gt;</a></div>
+        </h1>
+        <p>Component which encapsulates the creation all physics components required for a static body. A static body has all physical properties but is physically immovable (its mass is infinite).</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md133">Resources</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<section id="autotoc_md133"><h3><a href="#autotoc_md133">Resources</a></h3><ul><li><a href="structtesseratos_1_1Debugger.html" class="m-doc">Debugger</a> - contains connection information.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+<p>May be moved by changing the entity Transform directly, however, this may create abnormal behaviour when interacting with Rigid Bodies.</p><p>Check also <a href="structcubos_1_1engine_1_1RigidBodyBundle.html" class="m-doc">RigidBodyBundle</a></p><p>Adds:</p><ul><li><a href="structcubos_1_1engine_1_1ColliderBundle.html" class="m-doc">ColliderBundle</a></li><li><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a></li><li><a href="structcubos_1_1engine_1_1AngularVelocity.html" class="m-doc">AngularVelocity</a></li><li><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a></li><li><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a></li><li><a href="structcubos_1_1engine_1_1CenterOfMass.html" class="m-doc">CenterOfMass</a></li><li>AccumulatedCorrection</li><li><a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">PhysicsMaterial</a></li></ul><aside class="m-note m-info"><h4>Note</h4><p>A CollisionShape must also be added to the entity.</p></aside>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="debugger_8hpp.html" class="m-doc">debugger.hpp</a></dt>
-            <dd>Resource <a href="classtesseratos_1_1DebuggerSession.html" class="m-doc">tesseratos::<wbr />DebuggerSession</a>.</dd>
-            <dt>file <a href="tools_2tesseratos_2src_2tesseratos_2debugger_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="manager_8hpp.html" class="m-doc">manager.hpp</a></dt>
-            <dd>System argument <a href="classtesseratos_1_1ProjectManager.html" class="m-doc">tesseratos::<wbr />ProjectManager</a>.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga069304072b13638261683862c31120fc" class="m-doc">debuggerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span>
+            <dt id="a9039a770f21d81cd1e46aa19ba060a58">
+              bool <a href="#a9039a770f21d81cd1e46aa19ba060a58" class="m-doc-self">isActive</a>
             </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Whether the collider is active.</dd>
+            <dt id="af86870a22898e3e7f46930d1443c3937">
+              uint32_t <a href="#af86870a22898e3e7f46930d1443c3937" class="m-doc-self">layers</a>
+            </dt>
+            <dd>Layers of the collider.</dd>
+            <dt id="a21976726bf70feec5dfd90c5c8c0ec94">
+              uint32_t <a href="#a21976726bf70feec5dfd90c5c8c0ec94" class="m-doc-self">mask</a>
+            </dt>
+            <dd>Mask of layers which the collider can collide with.</dd>
+            <dt id="a4c908266fe10f68275d1a4235befb7aa">
+              <a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">PhysicsMaterial</a> <a href="#a4c908266fe10f68275d1a4235befb7aa" class="m-doc-self">material</a>
+            </dt>
+            <dd>Physics material of the rigid body.</dd>
+            <dt id="ab16895d97b509bada9b1bd555deca289">
+              glm::vec3 <a href="#ab16895d97b509bada9b1bd555deca289" class="m-doc-self">centerOfMass</a>
+            </dt>
+            <dd>The center of mass of the rigid body.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga069304072b13638261683862c31120fc"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga069304072b13638261683862c31120fc" class="m-doc-self">debuggerPlugin</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1engine.html#afa0b202a1b9f7ddf7c42db16c8dbb7ba" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="tools_2tesseratos_2src_2tesseratos_2debugger_2plugin_8hpp.html">&lt;tesseratos/debugger/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>Cubos</strong> main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

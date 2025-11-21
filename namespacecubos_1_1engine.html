@@ -125,9 +125,17 @@
             </dt>
             <dd>Component which triggers the stop of an audio source.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a>
+            </dt>
+            <dd>Component that identifies an entity as the owner of a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a>. Works with a CollisionShape (added separately).</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>
             </dt>
             <dd>Component which adds an collider AABB to an entity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1ColliderBundle.html" class="m-doc">ColliderBundle</a>
+            </dt>
+            <dd>Bundle that packs the components for a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> entity.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1CollidingWith.html" class="m-doc">CollidingWith</a>
             </dt>
@@ -153,21 +161,29 @@
             </dt>
             <dd>Represents a contact interface between two bodies.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1IntersectionEnd.html" class="m-doc">IntersectionEnd</a>
+            </dt>
+            <dd>Relation which identifies the frame when two entities stop colliding.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1IntersectionStart.html" class="m-doc">IntersectionStart</a>
+            </dt>
+            <dd>Relation which identifies the frame when two entities start colliding.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1Raycast.html" class="m-doc">Raycast</a>
             </dt>
             <dd>System argument which allows performing raycast queries among all entities with colliders.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a>
             </dt>
-            <dd>Component which adds a box collision shape to an entity, used with a Collider component.</dd>
+            <dd>Component which adds a box collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a>
             </dt>
-            <dd>Component which adds a capsule collision shape to an entity, used with a Collider component.</dd>
+            <dd>Component which adds a capsule collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1VoxelCollisionShape.html" class="m-doc">VoxelCollisionShape</a>
             </dt>
-            <dd>Component which adds a collision shape corresponding to a given voxel grid to an entity, used with a Collider component.</dd>
+            <dd>Component which adds a collision shape corresponding to a given voxel grid to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1FixedAccumulatedTime.html" class="m-doc">FixedAccumulatedTime</a>
             </dt>
@@ -245,10 +261,6 @@
             </dt>
             <dd>Resource which stores the input bindings for multiple players.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a>
-            </dt>
-            <dd>Component which holds the corrections accumulated from the constraints solving.</dd>
-            <dt>
               struct <a href="structcubos_1_1engine_1_1AngularImpulse.html" class="m-doc">AngularImpulse</a>
             </dt>
             <dd>Component which holds angular impulses applied on a body.</dd>
@@ -293,10 +305,6 @@
             </dt>
             <dd>Relation that holds the information for a distance constraint between two physics bodies.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1PhysicsBundle.html" class="m-doc">PhysicsBundle</a>
-            </dt>
-            <dd>Component which encapsulates the creation all components required for physics.</dd>
-            <dt>
               struct <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a>
             </dt>
             <dd>Resource which holds the damping value for integration.</dd>
@@ -308,6 +316,14 @@
               struct <a href="structcubos_1_1engine_1_1SolverConstants.html" class="m-doc">SolverConstants</a>
             </dt>
             <dd>Resource which allows configuration over constants in the solver plugin.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1RigidBodyBundle.html" class="m-doc">RigidBodyBundle</a>
+            </dt>
+            <dd>Component which encapsulates the creation all physics components required for a rigid body. A rigid body has all physical properties.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1StaticBodyBundle.html" class="m-doc">StaticBodyBundle</a>
+            </dt>
+            <dd>Component which encapsulates the creation all physics components required for a static body. A static body has all physical properties but is physically immovable (its mass is infinite).</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1Bloom.html" class="m-doc">Bloom</a>
             </dt>

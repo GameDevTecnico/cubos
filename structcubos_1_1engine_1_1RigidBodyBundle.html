@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::BoxCollisionShape struct | Cubos Docs</title>
+  <title>cubos::engine::RigidBodyBundle struct | Cubos Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Roboto:wght@400&amp;display=swap" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="Favicon.png" type="image/png" />
@@ -46,10 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>BoxCollisionShape <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2collisions_2shapes_2box_8hpp.html">&lt;engine/collisions/shapes/box.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>RigidBodyBundle <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="rigid__body__bundle_8hpp.html">&lt;engine/physics/rigid_body_bundle.hpp&gt;</a></div>
         </h1>
-        <p>Component which adds a box collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</p>
+        <p>Component which encapsulates the creation all physics components required for a rigid body. A rigid body has all physical properties.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,13 +61,66 @@
             </li>
           </ul>
         </nav>
+<p>Adds:</p><ul><li><a href="structcubos_1_1engine_1_1ColliderBundle.html" class="m-doc">ColliderBundle</a></li><li><a href="structcubos_1_1engine_1_1Velocity.html" class="m-doc">Velocity</a></li><li><a href="structcubos_1_1engine_1_1AngularVelocity.html" class="m-doc">AngularVelocity</a></li><li><a href="structcubos_1_1engine_1_1Force.html" class="m-doc">Force</a></li><li><a href="structcubos_1_1engine_1_1Torque.html" class="m-doc">Torque</a></li><li><a href="structcubos_1_1engine_1_1Impulse.html" class="m-doc">Impulse</a></li><li><a href="structcubos_1_1engine_1_1AngularImpulse.html" class="m-doc">AngularImpulse</a></li><li><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a></li><li><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a></li><li><a href="structcubos_1_1engine_1_1CenterOfMass.html" class="m-doc">CenterOfMass</a></li><li>AccumulatedCorrection</li><li><a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">PhysicsMaterial</a></li></ul><aside class="m-note m-info"><h4>Note</h4><p>A CollisionShape must also be added to the entity.</p></aside>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a3315efc07d576dcf8c0d10d096cabff7">
-              <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a> <a href="#a3315efc07d576dcf8c0d10d096cabff7" class="m-doc-self">box</a>
+            <dt id="a21a87ee6ac2f875fd0c80e23a3309bcb">
+              bool <a href="#a21a87ee6ac2f875fd0c80e23a3309bcb" class="m-doc-self">isActive</a>
             </dt>
-            <dd>Box shape.</dd>
+            <dd>Whether the collider is active.</dd>
+            <dt id="afea084e311a54c412b82c310285fc5f3">
+              uint32_t <a href="#afea084e311a54c412b82c310285fc5f3" class="m-doc-self">layers</a>
+            </dt>
+            <dd>Layers of the collider.</dd>
+            <dt id="afdf03aaa4fcfdefd804ae21be29b4f42">
+              uint32_t <a href="#afdf03aaa4fcfdefd804ae21be29b4f42" class="m-doc-self">mask</a>
+            </dt>
+            <dd>Mask of layers which the collider can collide with.</dd>
+            <dt id="a66c425e4b1885fcfe02fd639b9adffdf">
+              float <a href="#a66c425e4b1885fcfe02fd639b9adffdf" class="m-doc-self">mass</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1Mass.html" class="m-doc">Mass</a> of the rigid body.</dd>
+            <dt id="aded2706ce099e5361ac7e123bb2e6d6e">
+              glm::vec3 <a href="#aded2706ce099e5361ac7e123bb2e6d6e" class="m-doc-self">velocity</a>
+            </dt>
+            <dd>Initial velocity of the rigid body.</dd>
+            <dt id="aaab52e30e715b3649f58610e0860e08c">
+              glm::vec3 <a href="#aaab52e30e715b3649f58610e0860e08c" class="m-doc-self">angularVelocity</a>
+            </dt>
+            <dd>Initial angular velocity of the rigid body.</dd>
+            <dt id="a1e2a11aa5fc0346ae3b3005d2933a7f4">
+              glm::vec3 <a href="#a1e2a11aa5fc0346ae3b3005d2933a7f4" class="m-doc-self">force</a>
+            </dt>
+            <dd>Inital force applied on the rigid body.</dd>
+            <dt id="aac9fa679e8a03c49e768d15923e53278">
+              glm::vec3 <a href="#aac9fa679e8a03c49e768d15923e53278" class="m-doc-self">torque</a>
+            </dt>
+            <dd>Initial torque applied on the rigid body.</dd>
+            <dt id="a8cacad0580c7cc68de7a67562e8dd87a">
+              glm::vec3 <a href="#a8cacad0580c7cc68de7a67562e8dd87a" class="m-doc-self">impulse</a>
+            </dt>
+            <dd>Initial impulse applied on the rigid body.</dd>
+            <dt id="ac921301a76a5954d2f1366360c9be88e">
+              glm::vec3 <a href="#ac921301a76a5954d2f1366360c9be88e" class="m-doc-self">angularImpulse</a>
+            </dt>
+            <dd>Initial angular impulse applied on the rigid body.</dd>
+            <dt id="a1656632bfd6dd0855595075ed5c4b758">
+              <a href="structcubos_1_1engine_1_1PhysicsMaterial.html" class="m-doc">PhysicsMaterial</a> <a href="#a1656632bfd6dd0855595075ed5c4b758" class="m-doc-self">material</a>
+            </dt>
+            <dd>Physics material of the rigid body.</dd>
+            <dt id="ac0114fab4df91a1e275c06706f797ff0">
+              glm::vec3 <a href="#ac0114fab4df91a1e275c06706f797ff0" class="m-doc-self">centerOfMass</a>
+            </dt>
+            <dd>The center of mass of the rigid body.</dd>
+            <dt id="a7bc4763d35cf65ac98b641fbde4c9ab4">
+              bool <a href="#a7bc4763d35cf65ac98b641fbde4c9ab4" class="m-doc-self">autoInertiaTensor</a>
+            </dt>
+            <dd>Whether to perform automatic calculation of the inertia tensor according to the rigid body collision shape.</dd>
+            <dt id="a5739a1b88e3df356e7b0748d761560af">
+              glm::mat3 <a href="#a5739a1b88e3df356e7b0748d761560af" class="m-doc-self">inertiaTensor</a>
+            </dt>
+            <dd><a href="structcubos_1_1engine_1_1Inertia.html" class="m-doc">Inertia</a> tensor for the rigid body. Not used if &#x27;autoInertiaTensor&#x27; is set to true.</dd>
           </dl>
         </section>
       </div>
