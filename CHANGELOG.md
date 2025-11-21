@@ -11,8 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hidden trait from hiding components on the inspector (#1526, **@R-Camacho**).
 - Checkbox for showing components that are hidden by default in the entity inspector (#1526, **@R-Camacho**).
+- Collider component (#1426, **@fallenatlas**).
+- ColliderBundle that can add area behavior to the entity (#1426, **@fallenatlas**).
+- Collider start and end intersection events (#1426, **@fallenatlas**).
+- RigidBodyBundle and StaticBodyBundle which replace RigidBodyBundle (#1426, **@fallenatlas**).
+- Methods to change mass and Infinite mass constant on Inertia and Mass components (#1426, **@fallenatlas**).
 
 ### Changed
+
+- Made AccumulatedCorrection component private (#1426, **@fallenatlas**).
 
 ### Removed
 
