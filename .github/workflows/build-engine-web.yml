@@ -45,7 +45,7 @@ jobs:
           ccache-
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCUBOS_CORE_SAMPLES=ON  -DCUBOS_ENGINE_SAMPLES=ON -DCMAKE_TOOLCHAIN_FILE=${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
+      run: cmake -B ${{github.workspace}}/build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_FLAGS="-Wno-c2y-extensions" -DCUBOS_CORE_SAMPLES=ON  -DCUBOS_ENGINE_SAMPLES=ON -DCMAKE_TOOLCHAIN_FILE=${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
       shell: bash
 
     - name: CCache Prolog
