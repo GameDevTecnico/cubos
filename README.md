@@ -1,3 +1,7 @@
+> **⚠️ Archived** — This project is no longer actively maintained.
+> The Cubos engine has been sunset as of 2026.
+> For historical reference, see the maintained website fork at [cubos.riscadoa.com](https://cubos.riscadoa.com).
+
 # **Cubos** Engine
 
 <p align="center">
