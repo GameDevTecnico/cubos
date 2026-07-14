@@ -62,7 +62,7 @@
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Dump the file&#39;s contents into a string.</span>
 <span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">contents</span><span class="p">;</span>
-<span class="w">        </span><span class="n">stream</span><span class="p">.</span><span class="n">readUntil</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">stream</span><span class="p">.</span><span class="n">readUntil</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// Store the asset&#39;s data.</span>
 <span class="w">        </span><span class="n">assets</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">contents</span><span class="p">));</span>
