@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sane default placement for tools in tesseratos (#1387, **@jdbaracho**).
 - Layout structure with loading and ImGui application (#1387, **@jdbaracho**).
 - Allow generating metas with random UUIDs through Quadrados (#1441, **@Fkatar**)
+- Allow initializing new projects through quadrados (#1480 **@PedroSimoes24**)
 
 ### Changed
 
