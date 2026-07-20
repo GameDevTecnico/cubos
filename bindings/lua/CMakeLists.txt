@@ -14,6 +14,7 @@ set(LUA_BINDINGS_SOURCE
     "src/plugin.cpp"
     "src/systems.cpp"
     "src/logging.cpp"
+    "src/depends.cpp"
 )
 
 # ------------------------ Configure lua bindings target -------------------------

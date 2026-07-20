@@ -181,6 +181,14 @@ Cubos& Cubos::inject(Plugin target, Plugin plugin)
 Cubos& Cubos::uninitResource(const reflection::Type& type)
 {
     CUBOS_ASSERT(!mTypeToPlugin.contains(type), "Resource {} was already registered", type.name());
+
+    Plugin plugin = mPluginStack.back();
+    if (mInjectedPlugins.contains(plugin))
+    {
+        plugin = mInjectedPlugins.at(plugin);
+    }
+
+    mInstalledPlugins.at(plugin).types.push_back(&type);
     mTypeToPlugin.insert(type, mPluginStack.back());
     mWorld->registerResource(type);
     return *this;
@@ -196,6 +204,14 @@ Cubos& Cubos::resource(memory::AnyValue value)
 Cubos& Cubos::component(const reflection::Type& type)
 {
     CUBOS_ASSERT(!mTypeToPlugin.contains(type), "Component {} was already registered", type.name());
+
+    Plugin plugin = mPluginStack.back();
+    if (mInjectedPlugins.contains(plugin))
+    {
+        plugin = mInjectedPlugins.at(plugin);
+    }
+
+    mInstalledPlugins.at(plugin).types.push_back(&type);
     mTypeToPlugin.insert(type, mPluginStack.back());
     mWorld->registerComponent(type);
     return *this;
@@ -204,6 +220,14 @@ Cubos& Cubos::component(const reflection::Type& type)
 Cubos& Cubos::relation(const reflection::Type& type)
 {
     CUBOS_ASSERT(!mTypeToPlugin.contains(type), "Relation {} was already registered", type.name());
+
+    Plugin plugin = mPluginStack.back();
+    if (mInjectedPlugins.contains(plugin))
+    {
+        plugin = mInjectedPlugins.at(plugin);
+    }
+
+    mInstalledPlugins.at(plugin).types.push_back(&type);
     mTypeToPlugin.insert(type, mPluginStack.back());
     mWorld->registerRelation(type);
     return *this;
@@ -452,9 +476,14 @@ bool Cubos::shouldQuit() const
     return mWorld->resource<ShouldQuit>().value;
 }
 
-cubos::core::ecs::World& Cubos::world()
+cubos::core::ecs::World* Cubos::world()
 {
-    return *mWorld;
+    return mWorld;
+}
+
+std::unordered_map<cubos::core::ecs::Plugin, cubos::core::ecs::PluginInfo> Cubos::installedPlugins()
+{
+    return mInstalledPlugins;
 }
 
 bool Cubos::isRegistered(const reflection::Type& type) const

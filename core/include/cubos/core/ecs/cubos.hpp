@@ -17,6 +17,7 @@
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/memory/opt.hpp>
 #include <cubos/core/reflection/type_server.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 namespace cubos::core::ecs
 {
@@ -63,6 +64,37 @@ namespace cubos::core::ecs
         CUBOS_REFLECT;
 
         std::vector<std::string> value; ///< Command-line arguments.
+    };
+
+    /// @brief Stores information regarding a plugin.
+    struct PluginInfo
+    {
+        /// @brief How many plugins depend on this plugin.
+        int dependentCount{0};
+
+        /// @brief Plugins which this plugin depends on.
+        std::unordered_set<Plugin> dependencies;
+
+        /// @brief Plugins which were added by this plugin.
+        std::unordered_set<Plugin> subPlugins;
+
+        /// @brief Systems which were added by this plugin.
+        std::vector<SystemId> systems;
+
+        /// @brief Conditions which were added by this plugin.
+        std::vector<ConditionId> conditions;
+
+        /// @brief Main tags which were added by this plugin.
+        std::vector<Planner::TagId> tags;
+
+        /// @brief Observers which were added by this plugin.
+        std::vector<ObserverId> observers;
+
+        /// @brief Types which were added by this plugin.
+        std::vector<const cubos::core::reflection::Type*> types;
+
+        /// @brief Name of the plugin.
+        std::string name;
     };
 
     /// @brief Represents the engine itself, and exposes the interface with which the game
@@ -257,37 +289,13 @@ namespace cubos::core::ecs
 
         /// @brief Returns the ECS world used.
         /// @return The internal ECS world.
-        World& world();
+        World* world();
+
+        /// Returns installed plugins.
+        /// @return Installed plugins.
+        std::unordered_map<Plugin, PluginInfo> installedPlugins();
 
     private:
-        /// @brief Stores information regarding a plugin.
-        struct PluginInfo
-        {
-            /// @brief How many plugins depend on this plugin.
-            int dependentCount{0};
-
-            /// @brief Plugins which this plugin depends on.
-            std::unordered_set<Plugin> dependencies;
-
-            /// @brief Plugins which were added by this plugin.
-            std::unordered_set<Plugin> subPlugins;
-
-            /// @brief Systems which were added by this plugin.
-            std::vector<SystemId> systems;
-
-            /// @brief Conditions which were added by this plugin.
-            std::vector<ConditionId> conditions;
-
-            /// @brief Main tags which were added by this plugin.
-            std::vector<Planner::TagId> tags;
-
-            /// @brief Observers which were added by this plugin.
-            std::vector<ObserverId> observers;
-
-            /// @brief Name of the plugin.
-            std::string name;
-        };
-
         /// @brief Stores information regarding a tag.
         struct TagInfo
         {

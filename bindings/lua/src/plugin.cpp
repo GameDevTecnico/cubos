@@ -132,7 +132,7 @@ void cubos::bindings::lua::luaBindingsPlugin(Cubos& cubos)
             }
             (void)plugins;
             plugins.add([](Cubos& other) {
-                auto& state = other.world().resource<State>();
+                auto& state = other.world()->resource<State>();
                 loadScripts(ScriptsMountPoint, state.luaState);
             });
         }
